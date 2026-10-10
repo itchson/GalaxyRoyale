@@ -1,8 +1,8 @@
 {
-  "id": "appgdep_6aca81adfe508191b7c76ff174aa1408",
+  "id": "appgdep_6aca8f00ba1481918fbfa8b104b32612",
   "project_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93",
   "title": "Galaxy Royale",
-  "version_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93~appgver_82b4c532724881918ee32b42af2a79f8",
+  "version_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93~appgver_23801ef1e79881918e101b3c181eb530",
   "type": "publish",
   "status": "succeeded",
   "url": "https://galaxy-royale-itchson.itchson.chatgpt.site",
@@ -11,15 +11,15 @@
   "provider_deployment_id": "site---6aca50f5b1bc81918526a6ee969aac93",
   "failure_message": null,
   "env_set_revision": 0,
-  "updated_at": "2026-10-10T18:19:44.146996+00:00",
-  "commit_sha": "65194683a28b00397ed3f29df989149b8d93412e",
-  "cacheVersion": "galaxy-5a206c9f1e2acf40",
-  "browserAccess": "Actual unauthenticated browser reached Sign in required after final deployment. Owner-authenticated remote game execution remains unmeasured. Current packaged gameplay was tested locally on both backends.",
-  "archiveContent": "Game-only dist with eighteen cached assets and normalized .openai/hosting.json; local Studio, project state, QA harness and contract probe excluded.",
-  "validation": "122 Rust tests,66 shell tests,8 actual-WASM contracts pass. Strict native/WebGPU/WebGL2 Clippy pass. Fifteen actual-projectile CPU boss defeats and2,400 packed extraction frames pass with declared fixtures. Representative current WebGPU/WebGL2 captures verify fixed UI and bounded world zoom. Full natural campaign balance, all-content browser choreography and physical phone/soak remain pending.",
+  "updated_at": "2026-10-10T19:16:34.309748+00:00",
+  "commit_sha": "4ac160d6278ac0e728761189e8cf6f2fa54197d1",
+  "cacheVersion": "galaxy-f37b303ee2258928",
+  "browserAccess": "Actual unauthenticated browser reached Sign in required after final deployment. Owner-authenticated remote execution remains unmeasured. Current normal packaged gameplay was observed locally on both backends.",
+  "archiveContent": "Game-only dist with eighteen cached assets and normalized hosting config. Studio, production state, QA harness and checkpoint probe excluded.",
+  "validation": "186 native checks across unchanged engine37/core75 and final web74;66 shell tests;8 actual-WASM save scenarios; strict native/WebGPU/WebGL2 Clippy; final normal build pass. Independent layout/occupied-quad/packaging/evidence review and representative final dual-renderer diagnostic captures pass. Real wheel upper clamp and PWA Apply at Haven pass. Physical devices, natural full campaign, current offline/recovery and owner-authenticated remote execution remain pending.",
   "backendHashes": {
-    "webgpu": "485f6ae7c29d58cd8208b8c747b5df9ac28ff23b49766df6d24f41b3f8358422",
-    "webgl2": "9aa8c639292a13b9c2c2b104b757d9195187764abf8df19e148b3bc8aa046566"
+    "webgpu": "f2cf269dd8ae35dbddf62f630d51b44d452f96fbac14175ba95bbb077e8575f8",
+    "webgl2": "93a7daa913c8cc3ebc4b1c59de5d5d4bff374ddacc83fd2dfbd6af3bb5e2374c"
   },
   "previousDeployments": [
     {
@@ -35,6 +35,20 @@
       "commit_sha": "bab9d0fafb3b01c2dbd91b0df4486fb60f262461",
       "status": "succeeded",
       "updated_at": "2026-10-10T17:25:14.183481+00:00"
+    },
+    {
+      "id": "appgdep_6aca81adfe508191b7c76ff174aa1408",
+      "version_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93~appgver_82b4c532724881918ee32b42af2a79f8",
+      "commit_sha": "65194683a28b00397ed3f29df989149b8d93412e",
+      "status": "succeeded",
+      "updated_at": "2026-10-10T18:19:44.146996+00:00",
+      "cacheVersion": "galaxy-5a206c9f1e2acf40"
     }
+  ],
+  "evidence": [
+    "artifacts/hud-riveter-browser-validation.json",
+    "artifacts/hud-riveter-packaging-review.md",
+    "artifacts/hud-riveter-evidence-review.md",
+    "artifacts/boss-overlay-engine-review.md"
   ]
 }

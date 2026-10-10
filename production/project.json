@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 176,
+  "revision": 186,
   "name": "Galaxy Royale",
   "phase": "Foundation → playable vertical slice",
-  "updatedAt": "2026-10-10T19:15:06.761Z",
+  "updatedAt": "2026-10-10T19:18:07.960Z",
   "tasks": [
     {
       "id": "studio",
@@ -610,10 +610,10 @@
       "id": "balance",
       "title": "Slice combat and progression tuning",
       "department": "Gameplay",
-      "status": "ready",
-      "owner": "",
+      "status": "active",
+      "owner": "Gameplay specialist / Independent QA",
       "priority": "normal",
-      "description": "Independent 45-case Scout CPU study retained. Legal unspent XP floors defeated nine of fifteen with exact aim and no deliberate dodge; all Coils and Bastion generation five need human review. One unfired path reached the belt at 7.23 seconds and combat at 14.63 seconds after three rock contacts. Category affordability can lag XP. These identify playtest questions; they do not establish approved tuning. Fresh natural expeditions, first Coil and first dock purchase need actual player sessions.",
+      "description": "Active read-only Scout progression audit: actual level1..12 stats/rank gates, deterministic movement/braking and purchase/craft/save invariants. No tuning change or human balance acceptance is implied. The existing45-case native combat study remains historical; fresh natural expeditions and named-phone playtests remain pending.",
       "dependencies": [
         "boss-qa",
         "asteroids"
@@ -636,9 +636,9 @@
         }
       ],
       "blocker": "",
-      "revision": 3,
+      "revision": 4,
       "createdAt": "2026-10-10T14:29:27.000Z",
-      "updatedAt": "2026-10-10T18:21:10.387Z"
+      "updatedAt": "2026-10-10T19:18:07.854Z"
     },
     {
       "id": "accessibility",
@@ -718,7 +718,7 @@
       "status": "review",
       "owner": "Producer",
       "priority": "normal",
-      "description": "Owner-private HTTPS preview published from source 65194683a28b00397ed3f29df989149b8d93412e. All fifteen ordinary bosses, bounded zoom and gradual Scout drive are included. Actual specialist reviews, native/dual-WASM checks and representative local browser captures are retained. The remote endpoint requires owner login; remote execution after login remains unmeasured. Full campaign/boss play, balance, audio listening, physical phone and sustained performance acceptance remain pending.",
+      "description": "Owner-private HTTPS preview published from source 4ac160d6278ac0e728761189e8cf6f2fa54197d1. Includes adaptive boss pixel HUD, Iron Belt Riveter, all fifteen family bosses, bounded world zoom and gradual Scout drive. Actual specialist reviews, native/dual-WASM checks and representative final local browser captures are retained. Remote owner-authenticated gameplay remains unmeasured; the endpoint requires login. Full natural campaign, combat/audio balance, current offline/recovery and physical phone/soak acceptance remain pending.",
       "dependencies": [
         "studio",
         "boss-qa",
@@ -738,25 +738,25 @@
       ],
       "evidence": [
         {
-          "label": "Exact succeeded private deployment",
+          "label": "Exact successful private deployment",
           "kind": "note",
           "path": "artifacts/private-release.json"
         },
         {
-          "label": "Current browser evidence and explicit limits",
+          "label": "Current packaged-game browser evidence and limits",
           "kind": "note",
-          "path": "artifacts/boss-browser-validation.json"
+          "path": "artifacts/hud-riveter-browser-validation.json"
         },
         {
-          "label": "Independent final integration review",
+          "label": "Independent final acceptance scope review",
           "kind": "note",
-          "path": "artifacts/boss-final-release-review.md"
+          "path": "artifacts/hud-riveter-evidence-review.md"
         }
       ],
       "blocker": "",
-      "revision": 4,
+      "revision": 5,
       "createdAt": "2026-10-10T14:29:27.000Z",
-      "updatedAt": "2026-10-10T18:21:10.402Z"
+      "updatedAt": "2026-10-10T19:18:07.821Z"
     },
     {
       "id": "deep-bosses",
@@ -2086,10 +2086,10 @@
     {
       "id": "task-e8684a94",
       "title": "Radiation biome enemy: deterministic controller and pixel concept",
-      "description": "Gameplay specialist is authoring an isolated portable controller and original occupied-cell concept under work/radiation-enemy. Root will integrate it in a later content session after review. It is not part of the current HUD/Riveter release. Scope includes readable phases, stable birth identity, world-space sanctuary rules, normal bounded rewards/caps and a concrete integration contract.",
+      "description": "Isolated Isotope Mote controller and original712-cell concept are frozen under work/radiation-enemy; no production integration. Twelve native tests and native/WASM Clippy pass; engine independently repeated twelve native tests and actual cell/transform/shot bounds. Host contract must preserve ordinary root caps, same-tick pending shot reservations, sanctuary rules and single reward path. Production integration, browser/human/physical acceptance remain pending. Palette defines15opaque tones; actual occupied art uses11.",
       "department": "Gameplay / Art",
       "owner": "/root/gameplay_design",
-      "status": "active",
+      "status": "review",
       "priority": "normal",
       "dependencies": [
         "gameplay",
@@ -2098,11 +2098,11 @@
       "acceptanceCriteria": [
         {
           "text": "Concrete native controller, original cell concept and meaningful deterministic phase/safety tests",
-          "met": false
+          "met": true
         },
         {
           "text": "Reviewed integration contract preserving standard progression, sanctuary and cap behavior",
-          "met": false
+          "met": true
         },
         {
           "text": "Production integration and actual browser presentation evidence",
@@ -2111,15 +2111,20 @@
       ],
       "evidence": [
         {
-          "label": "Current biome scope and first implemented enemy contract",
+          "label": "Actual isolated controller/art/test integration contract",
           "kind": "note",
-          "path": "artifacts/riveter-handoff.md"
+          "path": "artifacts/radiation-enemy-prototype.md"
+        },
+        {
+          "label": "Independent native/controller/occupied-cell review",
+          "kind": "note",
+          "path": "artifacts/radiation-enemy-engine-review.md"
         }
       ],
       "blocker": "",
-      "revision": 1,
+      "revision": 2,
       "createdAt": "2026-10-10T18:51:54.723Z",
-      "updatedAt": "2026-10-10T18:51:54.723Z"
+      "updatedAt": "2026-10-10T19:18:07.834Z"
     }
   ],
   "reviews": [
@@ -2449,6 +2454,22 @@
         "task-426419e2",
         "task-8db643cb",
         "pwa"
+      ]
+    },
+    {
+      "id": "review-ebda5268",
+      "title": "Radiation enemy / actual frozen prototype and independent cell review",
+      "body": "Gameplay authored the isolated Isotope Mote controller,40×40 original hull and host contract. Engine independently reran twelve native tests and inspected428disjoint emitter cells, actual damaged-cell geometry and conservative hull radius. The40-second fixed-tick replay produced five charges and60 bounded shot commands, maximum six per tick and732 extracted quads. Engine requested same-tick projectile reservations and distinguished15defined palette colors from11used occupied colors. No production enemy, player damage/reward, browser or physical acceptance is claimed.",
+      "author": "Producer",
+      "source": "Succeeded exact-source private deployment and actual specialist handoffs",
+      "createdAt": "2026-10-10T19:18:07.867Z",
+      "participants": [
+        "Gameplay specialist",
+        "Engine specialist",
+        "Producer / Integrator"
+      ],
+      "taskIds": [
+        "task-e8684a94"
       ]
     }
   ],
@@ -2798,6 +2819,102 @@
       ],
       "url": "https://galaxy-royale-itchson.itchson.chatgpt.site/",
       "knownIssues": "Large boss heads can start charging offscreen or be partly covered by the fixed top-center HUD. Representative captures do not establish full silhouette/core acceptance. First Coil, early currency versus XP pacing and full natural progression require player playtesting. Physical phone and sustained performance are pending."
+    },
+    {
+      "id": "build-90da144c",
+      "title": "Adaptive pixel boss HUD and Iron Belt Riveter / private release",
+      "body": "Normal WebGPU and WebGL2 gameplay package published successfully from the exact pushed source. Includes adaptive fixed-scale RoyaleMono health/phase rows, safe-area/control reservations, minimal telemetry, repaired small-area painter parity and the first actual biome enemy with original destructible barrel cells. Eleven final local browser captures, actual wheel upper clamp and PWA update evidence are retained. The remote endpoint correctly requires owner login; game execution after that login remains unmeasured.",
+      "author": "Producer",
+      "source": "Succeeded exact-source private deployment and actual specialist handoffs",
+      "createdAt": "2026-10-10T19:18:07.798Z",
+      "revision": "4ac160d6278ac0e728761189e8cf6f2fa54197d1",
+      "evidence": [
+        {
+          "label": "Final normal build and exact published source",
+          "kind": "note",
+          "path": "artifacts/hud-riveter-build-final.log"
+        },
+        {
+          "label": "Final browser captures and source/backend fingerprints",
+          "kind": "note",
+          "path": "artifacts/hud-riveter-browser-validation.json"
+        },
+        {
+          "label": "Independent package review / exact18asset cache",
+          "kind": "note",
+          "path": "artifacts/hud-riveter-packaging-review.md"
+        },
+        {
+          "label": "Independent evidence and ledger review",
+          "kind": "note",
+          "path": "artifacts/hud-riveter-evidence-review.md"
+        },
+        {
+          "label": "Successful private deployment and historical versions",
+          "kind": "note",
+          "path": "artifacts/private-release.json"
+        }
+      ],
+      "checks": [
+        {
+          "name": "Native engine37/core75 and final web74: 186 checks",
+          "result": "pass"
+        },
+        {
+          "name": "66 shell/store/input/console checks",
+          "result": "pass"
+        },
+        {
+          "name": "Eight actual-WASM save scenarios / both serializer backends",
+          "result": "pass"
+        },
+        {
+          "name": "Strict native and both shipping WASM Clippy",
+          "result": "pass"
+        },
+        {
+          "name": "Final normal dual-WASM/TypeScript/game/Studio build",
+          "result": "pass"
+        },
+        {
+          "name": "Independent occupied-quad layout and small-area repair review",
+          "result": "pass"
+        },
+        {
+          "name": "Representative current local WebGPU/WebGL2 browser and compact touch layout",
+          "result": "pass"
+        },
+        {
+          "name": "Actual repeated wheel maximum clamp and Apply update at Haven",
+          "result": "pass"
+        },
+        {
+          "name": "Exact18asset game-only cache and shipping QA-probe exclusion",
+          "result": "pass"
+        },
+        {
+          "name": "Exact-source private deployment",
+          "result": "pass"
+        },
+        {
+          "name": "Owner-authenticated remote gameplay execution",
+          "result": "not_run"
+        },
+        {
+          "name": "Current-build offline/device-loss execution",
+          "result": "not_run"
+        },
+        {
+          "name": "Full natural campaign and human combat balance",
+          "result": "not_run"
+        },
+        {
+          "name": "Named phones/Safari/physical multi-touch/30-minute soak",
+          "result": "not_run"
+        }
+      ],
+      "url": "https://galaxy-royale-itchson.itchson.chatgpt.site/",
+      "knownIssues": "Physical/full-natural/remote execution gates remain pending. Arbitrarily overconstrained safe areas can have no valid boss panel; fixed hull/touch elements do not avoid every world actor. Far f32 world projection has practical precision limits. The next Radiation enemy is an isolated reviewed prototype, excluded from the release."
     }
   ],
   "feedback": [],
@@ -4561,6 +4678,106 @@
       "author": "Producer",
       "source": "Independent final artifact and ledger readback",
       "createdAt": "2026-10-10T19:15:06.761Z"
+    },
+    {
+      "id": "55a3eca4-7d61-4ad6-83c3-9329b1d290f8",
+      "revision": 177,
+      "kind": "build",
+      "itemId": "build-90da144c",
+      "title": "Adaptive pixel boss HUD and Iron Belt Riveter / private release",
+      "author": "Producer",
+      "source": "Succeeded exact-source private deployment and actual specialist handoffs",
+      "createdAt": "2026-10-10T19:18:07.798Z"
+    },
+    {
+      "id": "c07cb0ac-e1a6-42e2-8c6c-70ae120e2024",
+      "revision": 178,
+      "kind": "task.update",
+      "itemId": "slice-review",
+      "title": "Integrated slice review and release evidence",
+      "author": "Producer",
+      "source": "Succeeded exact-source private deployment and actual specialist handoffs",
+      "createdAt": "2026-10-10T19:18:07.821Z"
+    },
+    {
+      "id": "7759cd99-6e13-404d-936a-b9f6de035fd4",
+      "revision": 179,
+      "kind": "task.update",
+      "itemId": "task-e8684a94",
+      "title": "Radiation biome enemy: deterministic controller and pixel concept",
+      "author": "Producer",
+      "source": "Succeeded exact-source private deployment and actual specialist handoffs",
+      "createdAt": "2026-10-10T19:18:07.834Z"
+    },
+    {
+      "id": "29c1e339-a91f-480f-9c31-1dea732e4046",
+      "revision": 180,
+      "kind": "task.update",
+      "itemId": "balance",
+      "title": "Slice combat and progression tuning",
+      "author": "Producer",
+      "source": "Succeeded exact-source private deployment and actual specialist handoffs",
+      "createdAt": "2026-10-10T19:18:07.854Z"
+    },
+    {
+      "id": "e33c9b27-0afc-4911-b1e1-c43269b60f97",
+      "revision": 181,
+      "kind": "review",
+      "itemId": "review-ebda5268",
+      "title": "Radiation enemy / actual frozen prototype and independent cell review",
+      "author": "Producer",
+      "source": "Succeeded exact-source private deployment and actual specialist handoffs",
+      "createdAt": "2026-10-10T19:18:07.867Z"
+    },
+    {
+      "id": "6b9cb051-1b7e-41fa-be5c-c025f18929bf",
+      "revision": 182,
+      "kind": "run",
+      "itemId": "run-0675f8c3",
+      "title": "Engine specialist · completed",
+      "author": "Producer",
+      "source": "Succeeded exact-source private deployment and actual specialist handoffs",
+      "createdAt": "2026-10-10T19:18:07.883Z"
+    },
+    {
+      "id": "f2113cd8-785c-4bd5-8695-6b5df945a6eb",
+      "revision": 183,
+      "kind": "run",
+      "itemId": "run-6be87ace",
+      "title": "Gameplay specialist · completed",
+      "author": "Producer",
+      "source": "Succeeded exact-source private deployment and actual specialist handoffs",
+      "createdAt": "2026-10-10T19:18:07.898Z"
+    },
+    {
+      "id": "4d62c76a-2b0c-4376-8e45-8e404dca3c83",
+      "revision": 184,
+      "kind": "run",
+      "itemId": "run-98bfb9a1",
+      "title": "Gameplay specialist · running",
+      "author": "Producer",
+      "source": "Succeeded exact-source private deployment and actual specialist handoffs",
+      "createdAt": "2026-10-10T19:18:07.911Z"
+    },
+    {
+      "id": "4eef7479-737b-455a-a6cb-81963def3e7f",
+      "revision": 185,
+      "kind": "run",
+      "itemId": "run-27394063",
+      "title": "Production / QA specialist · running",
+      "author": "Producer",
+      "source": "Succeeded exact-source private deployment and actual specialist handoffs",
+      "createdAt": "2026-10-10T19:18:07.945Z"
+    },
+    {
+      "id": "6ed00ac7-43e9-4a08-a4da-44254039621e",
+      "revision": 186,
+      "kind": "run",
+      "itemId": "run-d0c4290e",
+      "title": "Producer / Integrator · completed",
+      "author": "Producer",
+      "source": "Succeeded exact-source private deployment and actual specialist handoffs",
+      "createdAt": "2026-10-10T19:18:07.960Z"
     }
   ],
   "runRecords": [
@@ -5871,6 +6088,125 @@
       "author": "Producer",
       "source": "Independent final artifact and ledger readback",
       "createdAt": "2026-10-10T19:15:06.761Z"
+    },
+    {
+      "id": "run-0675f8c3",
+      "title": "Engine specialist · completed",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Engine specialist",
+      "state": "completed",
+      "observedAt": "2026-10-10T19:18:07.875Z",
+      "taskIds": [
+        "task-e8684a94"
+      ],
+      "summary": "Completed read-only isolated Radiation prototype review, twelve actual native tests and cell/transform/cap proof. Production integration remains pending.",
+      "evidence": [
+        {
+          "label": "Actual independent prototype review",
+          "kind": "note",
+          "path": "artifacts/radiation-enemy-engine-review.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Succeeded exact-source private deployment and actual specialist handoffs",
+      "createdAt": "2026-10-10T19:18:07.883Z"
+    },
+    {
+      "id": "run-6be87ace",
+      "title": "Gameplay specialist · completed",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Gameplay specialist",
+      "state": "completed",
+      "observedAt": "2026-10-10T19:18:07.894Z",
+      "taskIds": [
+        "task-e8684a94"
+      ],
+      "summary": "Completed frozen Radiation controller/concept and twelve-test evidence with explicit host integration limits.",
+      "evidence": [
+        {
+          "label": "Actual isolated prototype handoff",
+          "kind": "note",
+          "path": "artifacts/radiation-enemy-prototype.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Succeeded exact-source private deployment and actual specialist handoffs",
+      "createdAt": "2026-10-10T19:18:07.898Z"
+    },
+    {
+      "id": "run-98bfb9a1",
+      "title": "Gameplay specialist · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Gameplay specialist",
+      "state": "running",
+      "observedAt": "2026-10-10T19:18:07.910Z",
+      "taskIds": [
+        "balance"
+      ],
+      "summary": "Root assigned actual Scout XP/stat curve audit and a work-only deterministic Game tick movement probe. Audit is in progress; no human playtest result or runtime tuning change.",
+      "evidence": [
+        {
+          "label": "Assigned read-only curve source and previous biome handoff",
+          "kind": "note",
+          "path": "artifacts/riveter-handoff.md",
+          "details": "Actual assignment acknowledged; isolated work/scout-progression-audit is being prepared."
+        }
+      ],
+      "author": "Producer",
+      "source": "Succeeded exact-source private deployment and actual specialist handoffs",
+      "createdAt": "2026-10-10T19:18:07.911Z"
+    },
+    {
+      "id": "run-27394063",
+      "title": "Production / QA specialist · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "Production / QA specialist",
+      "state": "running",
+      "observedAt": "2026-10-10T19:18:07.928Z",
+      "taskIds": [
+        "balance"
+      ],
+      "summary": "Root assigned independent XP curve, rank gates, dock purchase and ship switching/save QA review, coordinating with gameplay audit. No production edits or invented human scores.",
+      "evidence": [
+        {
+          "label": "Actual accepted final release review preceding the new assignment",
+          "kind": "note",
+          "path": "artifacts/hud-riveter-evidence-review.md",
+          "details": "Independent Scout boundary audit is currently in progress."
+        }
+      ],
+      "author": "Producer",
+      "source": "Succeeded exact-source private deployment and actual specialist handoffs",
+      "createdAt": "2026-10-10T19:18:07.945Z"
+    },
+    {
+      "id": "run-d0c4290e",
+      "title": "Producer / Integrator · completed",
+      "agentId": "/root",
+      "agentLabel": "Producer / Integrator",
+      "state": "completed",
+      "observedAt": "2026-10-10T19:18:07.951Z",
+      "taskIds": [
+        "task-426419e2",
+        "task-8db643cb",
+        "slice-review"
+      ],
+      "summary": "Completed this integration, final package validation and exact-source private publication. Dashboard reflects actual accepted work and remaining full-play/physical/remote gates. Broader project goal remains active; specialists continue the bounded progression audit.",
+      "evidence": [
+        {
+          "label": "Actual succeeded private release",
+          "kind": "note",
+          "path": "artifacts/private-release.json"
+        },
+        {
+          "label": "Final representative browser proof and limits",
+          "kind": "note",
+          "path": "artifacts/hud-riveter-browser-validation.json"
+        }
+      ],
+      "author": "Producer",
+      "source": "Succeeded exact-source private deployment and actual specialist handoffs",
+      "createdAt": "2026-10-10T19:18:07.960Z"
     }
   ]
 }
