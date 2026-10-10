@@ -116,6 +116,11 @@ impl Ui<'_> {
     }
 
     fn text(&mut self, x: f32, y: f32, text: &str, size: f32, color: u32) {
+        self.text_bounded(x, y, text, size, color, f32::INFINITY);
+    }
+
+    fn text_bounded(&mut self, x: f32, y: f32, text: &str, size: f32, color: u32, width: f32) {
+        let columns = ((width + size) / (RoyaleMono::ADVANCE * size)).floor() as usize;
         let group = Transform {
             position: self.origin,
             ..Transform::default()
@@ -129,7 +134,7 @@ impl Ui<'_> {
             }
             .affine(),
         );
-        for (index, character) in text.chars().enumerate() {
+        for (index, character) in text.chars().take(columns.min(256)).enumerate() {
             let body = RoyaleMono::body(character);
             if body.occupied_count() != 0 {
                 self.frame.push_body_affine_colored(
@@ -142,6 +147,10 @@ impl Ui<'_> {
     }
 
     fn icon(&mut self, x: f32, y: f32, category: usize) {
+        self.icon_scaled(x, y, category, 2.0);
+    }
+
+    fn icon_scaled(&mut self, x: f32, y: f32, category: usize, size: f32) {
         let rows = match category {
             0 => [4, 14, 31, 4, 4],   // weapon/star
             1 => [31, 17, 17, 10, 4], // shield
@@ -151,9 +160,9 @@ impl Ui<'_> {
             for column in 0..5 {
                 if bits & (1 << (4 - column)) != 0 {
                     self.dot(
-                        x + column as f32 * 2.0,
-                        y + row as f32 * 2.0,
-                        2.0,
+                        x + column as f32 * size,
+                        y + row as f32 * size,
+                        size,
                         [RED, CYAN, MINT][category],
                     );
                 }
@@ -197,8 +206,109 @@ impl Ui<'_> {
     }
 }
 
+/// One stack-only source of truth for painted telemetry and boss exclusions.
+/// All rectangles are local to the already-inset logical UI viewport.
+#[derive(Clone, Copy, Debug)]
+pub(crate) struct FlightLayout {
+    pub biome: Option<[f32; 4]>,
+    pub currency: Option<[f32; 4]>,
+    pub radar: Option<[f32; 4]>,
+    pub meter: Option<[f32; 4]>,
+    pub compact_header: bool,
+    pub meter_style: MeterStyle,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub(crate) enum MeterStyle {
+    Full,
+    Compact,
+    Micro,
+}
+
+pub(crate) fn touch_hit_rects(viewport: [f32; 2]) -> [[f32; 4]; 2] {
+    [
+        [
+            14.0,
+            viewport[1] - 92.0,
+            (viewport[0] - 98.0).clamp(0.0, 84.0),
+            84.0,
+        ],
+        [viewport[0] - 84.0, viewport[1] - 86.0, 72.0, 72.0],
+    ]
+}
+
+pub(crate) fn flight_layout(
+    hud: &Hud,
+    viewport: [f32; 2],
+    minimal: bool,
+    touch: bool,
+) -> Option<FlightLayout> {
+    let [width, height] = viewport;
+    if !width.is_finite() || !height.is_finite() || width < 180.0 || height < 140.0 {
+        return None;
+    }
+    let minimal = minimal || width < 220.0;
+    let compact_header = width < 392.0;
+    let mut layout = FlightLayout {
+        biome: None,
+        currency: None,
+        radar: None,
+        meter: None,
+        compact_header,
+        meter_style: MeterStyle::Full,
+    };
+    if !minimal {
+        if !compact_header {
+            layout.biome = Some([12.0, 12.0, 160.0, 28.0]);
+            layout.currency = Some([width - 214.0, 12.0, 142.0, 24.0]);
+        } else if width >= 300.0 {
+            layout.biome = Some([12.0, 12.0, 100.0, 20.0]);
+            layout.currency = Some([118.0, 12.0, 110.0, 20.0]);
+        } else if !touch || height >= 160.0 {
+            layout.biome = Some([12.0, 12.0, (width - 96.0).clamp(80.0, 160.0), 20.0]);
+        }
+    }
+    if !hud.dock || ratio(hud.hull, hud.max_hull) < 1.0 {
+        if touch && width < 290.0 {
+            // Above the actual hitpads, rather than shrinking below readable
+            // bars or painting beneath input regions. The status line is optional.
+            layout.meter = Some([12.0, height - 112.0, (width - 24.0).min(176.0), 16.0]);
+            layout.meter_style = MeterStyle::Micro;
+        } else {
+            let meter_width = if touch {
+                (width - 190.0).min(176.0)
+            } else {
+                176.0
+            };
+            let centered = (width * 0.5 - meter_width * 0.5).floor();
+            let x = if touch {
+                centered.clamp(102.0, width - 88.0 - meter_width)
+            } else {
+                centered
+            };
+            layout.meter = Some([x, height - 48.0, meter_width, 36.0]);
+            layout.meter_style = if meter_width < 176.0 {
+                MeterStyle::Compact
+            } else {
+                MeterStyle::Full
+            };
+        }
+    }
+    let position = Vec2::from_array(hud.position);
+    if !minimal
+        && !compact_header
+        && height >= 240.0
+        && position.is_finite()
+        && position.length_squared() > 240.0 * 240.0
+    {
+        layout.radar = Some([width - 60.0, height - 144.0, 48.0, 48.0]);
+    }
+    Some(layout)
+}
+
 /// Visual touch controls. The DOM handles pointer capture and hit testing.
-/// Centers: joystick [56,h-50], fire [w-48,h-50], both radius 28.
+/// Centers follow the shared hit rectangles; normally [56,h-50] / [w-48,h-50].
+/// Joystick width contracts to82..83 at safe widths180..181; radius remains28.
 pub fn draw_controls(
     frame: &mut FrameBuilder,
     camera: [f32; 2],
@@ -220,7 +330,11 @@ pub fn draw_controls(
         .filter(|v| v.is_finite() && v.abs().max_element() <= 4.0)
         .unwrap_or(Vec2::ZERO)
         .clamp_length_max(1.0);
-    let center = Vec2::new(56.0, viewport.y - 50.0);
+    let [joystick_hit, fire_hit] = touch_hit_rects(viewport.to_array());
+    let center = Vec2::new(
+        joystick_hit[0] + joystick_hit[2] * 0.5,
+        joystick_hit[1] + joystick_hit[3] * 0.5,
+    );
     let active = stick.length_squared() > 0.0064;
     ui.pad(center, 28, if active { CYAN } else { EDGE }, INK);
     for offset in [-18.0, 18.0] {
@@ -236,7 +350,10 @@ pub fn draw_controls(
         4.0,
         if active { WHITE } else { CYAN },
     );
-    let fire_center = Vec2::new(viewport.x - 48.0, viewport.y - 50.0);
+    let fire_center = Vec2::new(
+        fire_hit[0] + fire_hit[2] * 0.5,
+        fire_hit[1] + fire_hit[3] * 0.5,
+    );
     ui.pad(
         fire_center,
         28,
@@ -291,6 +408,23 @@ pub fn draw_ui_with_boss_panel(
     boss_panel: Option<[f32; 4]>,
     minimal: bool,
 ) {
+    draw_ui_with_boss_panel_and_touch(
+        frame, hud, camera, viewport, mode, boss_panel, minimal, false,
+    );
+}
+
+/// Touch-aware variant; the original public wrapper keeps desktop behavior.
+#[allow(clippy::too_many_arguments)]
+pub fn draw_ui_with_boss_panel_and_touch(
+    frame: &mut FrameBuilder,
+    hud: &Hud,
+    camera: [f32; 2],
+    viewport: [f32; 2],
+    mode: u8,
+    boss_panel: Option<[f32; 4]>,
+    minimal: bool,
+    touch: bool,
+) {
     let camera = Vec2::from_array(camera);
     let viewport = Vec2::from_array(viewport);
     if mode == 0
@@ -328,17 +462,33 @@ pub fn draw_ui_with_boss_panel(
     if mode != 1 {
         return;
     }
-    // Small safe areas retain the essential meters and compact boss row.
-    let minimal = minimal || viewport.x < 220.0;
-    if !minimal {
-        ui.panel(12.0, 12.0, 160.0, 28.0);
-        ui.text(20.0, 18.0, hud.biome.name, 1.0, CYAN);
+    let Some(layout) = flight_layout(hud, viewport.to_array(), minimal, touch) else {
+        return;
+    };
+    if let Some([x, y, w, h]) = layout.biome {
+        ui.panel(x, y, w, h);
+        let padding = if layout.compact_header { 5.0 } else { 8.0 };
+        ui.text_bounded(
+            x + padding,
+            y + if layout.compact_header { 3.0 } else { 6.0 },
+            hud.biome.name,
+            1.0,
+            CYAN,
+            w - padding * 2.0,
+        );
         let status = if hud.safe {
             "SAFE".into()
         } else {
             format!("THREAT {:02}", hud.danger)
         };
-        ui.text(20.0, 29.0, &status, 1.0, if hud.safe { MINT } else { GOLD });
+        ui.text_bounded(
+            x + padding,
+            y + if layout.compact_header { 11.0 } else { 17.0 },
+            &status,
+            1.0,
+            if hud.safe { MINT } else { GOLD },
+            w - padding * 2.0,
+        );
     }
     if let (Some(boss), Some([x, y, width, height])) = (&hud.boss, boss_panel)
         && [x, y, width, height].iter().all(|v| v.is_finite())
@@ -396,78 +546,143 @@ pub fn draw_ui_with_boss_panel(
         );
     }
 
-    if !minimal {
-        let currency_x = viewport.x - 214.0;
-        ui.panel(currency_x, 12.0, 142.0, 24.0);
+    if let Some([currency_x, y, width, height]) = layout.currency {
+        ui.panel(currency_x, y, width, height);
         for category in 0..3 {
-            let x = currency_x + 8.0 + category as f32 * 43.0;
-            ui.icon(x, 19.0, category);
-            ui.text(
-                x + 14.0,
-                20.0,
+            let step = if layout.compact_header { 32.0 } else { 43.0 };
+            let x = currency_x + 8.0 + category as f32 * step;
+            if layout.compact_header {
+                ui.icon_scaled(x, y + 7.0, category, 1.0);
+            } else {
+                ui.icon(x, y + 7.0, category);
+            }
+            ui.text_bounded(
+                x + if layout.compact_header { 8.0 } else { 14.0 },
+                y + if layout.compact_header { 6.0 } else { 8.0 },
                 &compact(hud.currency[category]),
                 1.0,
                 [RED, CYAN, MINT][category],
+                if layout.compact_header { 24.0 } else { 26.0 },
             );
         }
     }
 
-    if !hud.dock || ratio(hud.hull, hud.max_hull) < 1.0 {
-        let meter_x = (viewport.x * 0.5 - 88.0).floor();
-        let meter_y = viewport.y - 36.0;
-        let status = format!(
-            "LV {} / CARGO {}/{}",
-            compact(hud.ship_level),
-            compact(hud.cargo_materials),
-            compact(hud.cargo_capacity)
-        );
-        let status_width = status.chars().count() as f32 * RoyaleMono::ADVANCE - 1.0;
-        // Share the hull panel's opaque backing so bright actors cannot erase
-        // the level/cargo line; its existing screen footprint stays unchanged.
-        ui.panel(meter_x, meter_y - 12.0, 176.0, 36.0);
-        ui.text(
-            (viewport.x - status_width) * 0.5,
-            meter_y - 7.0,
-            &status,
-            1.0,
-            DIM,
-        );
-        ui.text(meter_x + 7.0, meter_y + 5.0, "HULL", 1.0, DIM);
-        ui.bar(
-            meter_x + 37.0,
-            meter_y + 6.0,
-            99.0,
-            hud.hull,
-            hud.max_hull,
-            if ratio(hud.hull, hud.max_hull) < 0.3 {
-                RED
+    if let Some([meter_x, y, width, height]) = layout.meter {
+        ui.panel(meter_x, y, width, height);
+        if layout.meter_style == MeterStyle::Micro {
+            for (row, label, value, maximum, color) in [
+                (
+                    0.0,
+                    "H",
+                    hud.hull,
+                    hud.max_hull,
+                    if ratio(hud.hull, hud.max_hull) < 0.3 {
+                        RED
+                    } else {
+                        MINT
+                    },
+                ),
+                (7.0, "S", hud.shield, hud.max_shield, CYAN),
+            ] {
+                ui.text(meter_x + 5.0, y + 1.0 + row, label, 1.0, DIM);
+                ui.bar(
+                    meter_x + 16.0,
+                    y + 3.0 + row,
+                    width - 48.0,
+                    value,
+                    maximum,
+                    color,
+                );
+                ui.text_bounded(
+                    meter_x + width - 29.0,
+                    y + 1.0 + row,
+                    &format!("{}%", (ratio(value, maximum) * 100.0).ceil() as u32),
+                    1.0,
+                    WHITE,
+                    24.0,
+                );
+            }
+        } else {
+            let full = layout.meter_style == MeterStyle::Full;
+            let status = if full {
+                format!(
+                    "LV {} / CARGO {}/{}",
+                    compact(hud.ship_level),
+                    compact(hud.cargo_materials),
+                    compact(hud.cargo_capacity)
+                )
             } else {
-                MINT
-            },
-        );
-        ui.text(
-            meter_x + 143.0,
-            meter_y + 5.0,
-            &format!("{}%", (ratio(hud.hull, hud.max_hull) * 100.0).ceil() as u32),
-            1.0,
-            WHITE,
-        );
-        ui.text(meter_x + 7.0, meter_y + 15.0, "SHLD", 1.0, DIM);
-        ui.bar(
-            meter_x + 37.0,
-            meter_y + 16.0,
-            99.0,
-            hud.shield,
-            hud.max_shield,
-            CYAN,
-        );
+                format!(
+                    "L{} C{}/{}",
+                    compact(hud.ship_level),
+                    compact(hud.cargo_materials),
+                    compact(hud.cargo_capacity)
+                )
+            };
+            let status_width =
+                (status.chars().count() as f32 * RoyaleMono::ADVANCE - 1.0).min(width - 14.0);
+            ui.text_bounded(
+                if full {
+                    (viewport.x - status_width) * 0.5
+                } else {
+                    meter_x + (width - status_width) * 0.5
+                },
+                y + 5.0,
+                &status,
+                1.0,
+                DIM,
+                width - 14.0,
+            );
+            ui.text(
+                meter_x + 7.0,
+                y + 17.0,
+                if full { "HULL" } else { "H" },
+                1.0,
+                DIM,
+            );
+            ui.bar(
+                meter_x + if full { 37.0 } else { 18.0 },
+                y + 18.0,
+                if full { 99.0 } else { width - 54.0 },
+                hud.hull,
+                hud.max_hull,
+                if ratio(hud.hull, hud.max_hull) < 0.3 {
+                    RED
+                } else {
+                    MINT
+                },
+            );
+            ui.text_bounded(
+                meter_x + width - 33.0,
+                y + 17.0,
+                &format!("{}%", (ratio(hud.hull, hud.max_hull) * 100.0).ceil() as u32),
+                1.0,
+                WHITE,
+                24.0,
+            );
+            ui.text(
+                meter_x + 7.0,
+                y + 27.0,
+                if full { "SHLD" } else { "S" },
+                1.0,
+                DIM,
+            );
+            ui.bar(
+                meter_x + if full { 37.0 } else { 18.0 },
+                y + 28.0,
+                if full { 99.0 } else { width - 54.0 },
+                hud.shield,
+                hud.max_shield,
+                CYAN,
+            );
+        }
     }
 
     let position = Vec2::from_array(hud.position);
-    if minimal || !position.is_finite() || position.length_squared() <= 240.0 * 240.0 {
+    let Some([x, y, _, _]) = layout.radar else {
         return;
-    }
-    let radar = Vec2::new(viewport.x - 60.0, viewport.y - 144.0);
+    };
+    let radar = Vec2::new(x, y);
     ui.panel(radar.x, radar.y, 48.0, 48.0);
     ui.text(radar.x + 8.0, radar.y + 6.0, "HOME", 1.0, DIM);
     let center = radar + Vec2::new(24.0, 29.0);
@@ -586,6 +801,283 @@ pub(crate) fn glyph(character: char) -> [u8; 7] {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    fn intersects(a: [f32; 4], b: [f32; 4]) -> bool {
+        a[0] < b[0] + b[2] && a[0] + a[2] > b[0] && a[1] < b[1] + b[3] && a[1] + a[3] > b[1]
+    }
+
+    #[test]
+    fn minimum_touch_hitboxes_are_disjoint_and_share_the_painted_centers() {
+        for (width, joystick_width, center_x) in [
+            (180.0, 82.0, 55.0),
+            (181.0, 83.0, 55.5),
+            (182.0, 84.0, 56.0),
+        ] {
+            for height in [140.0, 180.0] {
+                let viewport = [width, height];
+                let [joystick, fire] = touch_hit_rects(viewport);
+                assert_eq!(joystick, [14.0, height - 92.0, joystick_width, 84.0]);
+                assert_eq!(fire, [width - 84.0, height - 86.0, 72.0, 72.0]);
+                assert!(
+                    !intersects(joystick, fire),
+                    "input ownership must not overlap"
+                );
+                assert_eq!(joystick[0] + joystick[2], fire[0]);
+                for stick in [
+                    None,
+                    Some([0.5, 0.0]),
+                    Some([1.0, -1.0]),
+                    Some([f32::NAN, 0.0]),
+                ] {
+                    let camera = Vec2::new(17.25, -33.5);
+                    let origin = camera - Vec2::from_array(viewport) * 0.5;
+                    let mut frame = FrameBuilder::new();
+                    draw_controls(&mut frame, camera.to_array(), viewport, stick, true);
+                    let normalized = stick
+                        .map(Vec2::from_array)
+                        .filter(|value| value.is_finite())
+                        .unwrap_or(Vec2::ZERO)
+                        .clamp_length_max(1.0);
+                    let expected_knob =
+                        Vec2::new(center_x, height - 50.0) + (normalized * 18.0).round();
+                    let mut knob_seen = false;
+                    let mut fire_glyph_cells = 0usize;
+                    for batch in &frame.frame().batches {
+                        for pixel in batch.pixels.iter().filter(|pixel| pixel.color >> 24 != 0) {
+                            let transform = batch.transforms[pixel.transform as usize];
+                            let center = transform.point(Vec2::from_array(pixel.local)) - origin;
+                            if transform.a[2] == 4.0 && transform.b[1] == 4.0 {
+                                assert_eq!(center, expected_knob);
+                                knob_seen = true;
+                            }
+                            if pixel.color == WHITE
+                                && transform.a[2] == 1.0
+                                && transform.b[1] == 1.0
+                            {
+                                assert!(center.x >= fire[0] && center.x <= fire[0] + fire[2]);
+                                assert!(center.y >= fire[1] && center.y <= fire[1] + fire[3]);
+                                fire_glyph_cells += 1;
+                            }
+                            for corner in [
+                                Vec2::new(-0.5, -0.5),
+                                Vec2::new(0.5, -0.5),
+                                Vec2::new(-0.5, 0.5),
+                                Vec2::new(0.5, 0.5),
+                            ] {
+                                let point = transform.point(Vec2::from_array(pixel.local) + corner)
+                                    - origin;
+                                assert!(
+                                    point.x >= 0.0
+                                        && point.x <= width
+                                        && point.y >= 0.0
+                                        && point.y <= height
+                                );
+                                assert!([joystick, fire].iter().any(|rect| point.x >= rect[0]
+                                    && point.x <= rect[0] + rect[2]
+                                    && point.y >= rect[1]
+                                    && point.y <= rect[1] + rect[3]));
+                            }
+                        }
+                    }
+                    assert!(knob_seen);
+                    assert_eq!(
+                        fire_glyph_cells,
+                        "FIRE"
+                            .chars()
+                            .map(|c| RoyaleMono::body(c).occupied_count())
+                            .sum::<usize>()
+                    );
+                }
+            }
+        }
+    }
+
+    #[test]
+    fn normal_touch_hit_rect_centers_retain_the_original_control_coordinates() {
+        for width in [182.0, 200.0, 220.0, 320.0, 533.0, 720.0] {
+            for height in [140.0, 180.0, 300.0] {
+                let [joystick, fire] = touch_hit_rects([width, height]);
+                assert_eq!(joystick[2], 84.0);
+                assert_eq!(
+                    Vec2::new(
+                        joystick[0] + joystick[2] * 0.5,
+                        joystick[1] + joystick[3] * 0.5
+                    ),
+                    Vec2::new(56.0, height - 50.0),
+                );
+                assert_eq!(
+                    Vec2::new(fire[0] + fire[2] * 0.5, fire[1] + fire[3] * 0.5),
+                    Vec2::new(width - 48.0, height - 50.0),
+                );
+                assert!(!intersects(joystick, fire));
+            }
+        }
+    }
+
+    #[test]
+    fn shared_flight_layout_preserves_normal_rects_and_keeps_touch_telemetry_clear() {
+        let mut hud = game_core::Game::new(game_core::Profile::default()).hud();
+        hud.dock = false;
+        hud.position = [1600.0, 0.0];
+        let normal = flight_layout(&hud, [533.0, 300.0], false, true).unwrap();
+        assert_eq!(normal.biome, Some([12.0, 12.0, 160.0, 28.0]));
+        assert_eq!(normal.currency, Some([319.0, 12.0, 142.0, 24.0]));
+        assert_eq!(normal.radar, Some([473.0, 156.0, 48.0, 48.0]));
+        assert_eq!(normal.meter, Some([178.0, 252.0, 176.0, 36.0]));
+        assert_eq!(normal.meter_style, MeterStyle::Full);
+        let narrow = flight_layout(&hud, [320.0, 180.0], false, true).unwrap();
+        assert_eq!(narrow.meter, Some([102.0, 132.0, 130.0, 36.0]));
+        assert_eq!(narrow.meter_style, MeterStyle::Compact);
+        assert!(narrow.radar.is_none());
+        let tiny = flight_layout(&hud, [180.0, 140.0], false, true).unwrap();
+        assert_eq!(tiny.meter, Some([12.0, 28.0, 156.0, 16.0]));
+        assert_eq!(tiny.meter_style, MeterStyle::Micro);
+        assert!(tiny.biome.is_none() && tiny.currency.is_none() && tiny.radar.is_none());
+    }
+
+    #[test]
+    fn actual_hud_and_control_corners_fit_narrow_fractional_viewports_and_shared_rects() {
+        let mut hud = game_core::Game::new(game_core::Profile::default()).hud();
+        hud.dock = false;
+        hud.position = [1600.0, 0.0];
+        hud.ship_level = u32::MAX;
+        hud.currency = [999_999, u32::MAX, 1_000];
+        hud.cargo_materials = u32::MAX;
+        hud.cargo_capacity = u32::MAX;
+        hud.danger = u32::MAX;
+        for width in [
+            180.0, 200.0, 220.0, 239.75, 280.0, 289.75, 290.0, 300.0, 320.0, 365.75, 366.0, 391.75,
+            392.0, 400.0, 533.0, 720.0,
+        ] {
+            for height in [140.0, 159.0, 160.0, 180.0, 240.0, 300.0] {
+                for touch in [false, true] {
+                    for minimal in [false, true] {
+                        let viewport = [width, height];
+                        let layout = flight_layout(&hud, viewport, minimal, touch).unwrap();
+                        let rects: Vec<_> =
+                            [layout.biome, layout.currency, layout.radar, layout.meter]
+                                .into_iter()
+                                .flatten()
+                                .collect();
+                        for (index, a) in rects.iter().enumerate() {
+                            assert!(
+                                a[0] >= 0.0
+                                    && a[1] >= 0.0
+                                    && a[0] + a[2] <= width
+                                    && a[1] + a[3] <= height
+                            );
+                            assert!(
+                                rects[index + 1..].iter().all(|b| !intersects(*a, *b)),
+                                "native panels overlap at{viewport:?}"
+                            );
+                            if touch {
+                                assert!(
+                                    touch_hit_rects(viewport)
+                                        .iter()
+                                        .all(|b| !intersects(*a, *b)),
+                                    "telemetry beneath hitpad at{viewport:?}: {a:?}"
+                                );
+                            }
+                        }
+                        let camera = Vec2::new(999_000.25, -998_000.5);
+                        let origin = camera - Vec2::from_array(viewport) * 0.5;
+                        let mut frame = FrameBuilder::new();
+                        draw_ui_with_boss_panel_and_touch(
+                            &mut frame,
+                            &hud,
+                            camera.to_array(),
+                            viewport,
+                            1,
+                            None,
+                            minimal,
+                            touch,
+                        );
+                        assert!(frame.frame().pixel_count > 0);
+                        for b in &frame.frame().batches {
+                            for p in b.pixels.iter().filter(|p| p.color >> 24 != 0) {
+                                let t = b.transforms[p.transform as usize];
+                                for offset in [
+                                    Vec2::new(-0.5, -0.5),
+                                    Vec2::new(0.5, -0.5),
+                                    Vec2::new(-0.5, 0.5),
+                                    Vec2::new(0.5, 0.5),
+                                ] {
+                                    let point =
+                                        t.point(Vec2::from_array(p.local) + offset) - origin;
+                                    assert!(
+                                        point.x >= -0.125
+                                            && point.y >= -0.125
+                                            && point.x <= width + 0.125
+                                            && point.y <= height + 0.125,
+                                        "actual HUD corner outside{viewport:?}: {point:?}"
+                                    );
+                                    assert!(
+                                        rects.iter().any(|r| point.x >= r[0] - 0.125
+                                            && point.x <= r[0] + r[2] + 0.125
+                                            && point.y >= r[1] - 0.125
+                                            && point.y <= r[1] + r[3] + 0.125),
+                                        "paint/reservation divergence{viewport:?}: {point:?}"
+                                    );
+                                }
+                            }
+                        }
+                        if touch {
+                            frame.clear();
+                            draw_controls(
+                                &mut frame,
+                                camera.to_array(),
+                                viewport,
+                                Some([1.0, -1.0]),
+                                true,
+                            );
+                            for b in &frame.frame().batches {
+                                for p in &b.pixels {
+                                    for offset in [Vec2::new(-0.5, -0.5), Vec2::new(0.5, 0.5)] {
+                                        let point = b.transforms[p.transform as usize]
+                                            .point(Vec2::from_array(p.local) + offset)
+                                            - origin;
+                                        assert!(
+                                            point.x >= -0.125
+                                                && point.y >= -0.125
+                                                && point.x <= width + 0.125
+                                                && point.y <= height + 0.125
+                                        );
+                                        assert!(touch_hit_rects(viewport).iter().any(|r| point.x
+                                            >= r[0] - 0.125
+                                            && point.x <= r[0] + r[2] + 0.125
+                                            && point.y >= r[1] - 0.125
+                                            && point.y <= r[1] + r[3] + 0.125));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    #[test]
+    fn extreme_biome_currency_and_cargo_glyphs_stay_in_their_small_panels() {
+        let mut hud = game_core::Game::new(game_core::Profile::default()).hud();
+        hud.dock = false;
+        hud.ship_level = u32::MAX;
+        hud.cargo_materials = u32::MAX;
+        hud.cargo_capacity = u32::MAX;
+        for viewport in [[300.0, 180.0], [320.0, 180.0], [220.0, 140.0]] {
+            let mut frame = FrameBuilder::new();
+            draw_ui_with_boss_panel_and_touch(
+                &mut frame, &hud, [0.0; 2], viewport, 1, None, false, true,
+            );
+            let layout = flight_layout(&hud, viewport, false, true).unwrap();
+            let count = frame.frame().pixel_count;
+            assert!(count > 100, "essential bars retain occupied glyph objects");
+            assert!(layout.meter.is_some());
+        }
+        assert!(flight_layout(&hud, [179.0, 140.0], false, true).is_none());
+        assert!(flight_layout(&hud, [180.0, 139.0], false, true).is_none());
+        assert!(flight_layout(&hud, [f32::NAN, 140.0], false, true).is_none());
+    }
 
     #[test]
     fn royale_mono_reuses_body_and_composes_letter_spacing() {

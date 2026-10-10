@@ -1,0 +1,22 @@
+{
+  "canvas": [
+    1600,
+    900
+  ],
+  "dpr": 1.25,
+  "scale": "2.4",
+  "scripts": [
+    "/assets/index-0nC89wsy.js"
+  ],
+  "settings": {
+    "client": 327,
+    "scroll": 386
+  },
+  "styles": [
+    "/assets/index-DcmMweY9.css"
+  ],
+  "viewport": [
+    1280,
+    720
+  ]
+}

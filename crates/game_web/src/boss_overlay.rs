@@ -1,5 +1,9 @@
 //! Presentation-only adapter between the renderer's projection and pixel HUD.
-use crate::{boss_layout, ui_scene::UiScene};
+use crate::{
+    boss_layout,
+    pixel_ui::{flight_layout, touch_hit_rects},
+    ui_scene::UiScene,
+};
 use boss_layout::{FrameInput, LayoutController, Outcome, Point, Rect, Screen, WorldDisc};
 use engine_core::{CameraView, Vec2};
 use game_core::{Hud, RenderFocus};
@@ -143,25 +147,23 @@ impl Reserved {
             input.viewport[0] - left - right,
             input.viewport[1] - top - bottom,
         ];
-        if !minimal {
-            reserved.add([left + 12.0, top + 12.0, 160.0, 28.0]);
-            reserved.add([left + width - 214.0, top + 12.0, 142.0, 24.0]);
-            if Vec2::from_array(input.hud.position).length_squared() > 240.0 * 240.0 {
-                reserved.add([left + width - 60.0, top + height - 144.0, 48.0, 48.0]);
+        if let Some(layout) = flight_layout(input.hud, [width, height], minimal, input.touch) {
+            for mut rect in [layout.biome, layout.currency, layout.radar, layout.meter]
+                .into_iter()
+                .flatten()
+            {
+                rect[0] += left;
+                rect[1] += top;
+                reserved.add(rect);
             }
-        }
-        if !input.hud.dock || input.hud.hull < input.hud.max_hull {
-            reserved.add([
-                left + (width * 0.5 - 88.0).floor(),
-                top + height - 48.0,
-                176.0,
-                36.0,
-            ]);
         }
         if input.touch {
             // Actual DOM hit regions, including safe-area offsets.
-            reserved.add([left + 14.0, top + height - 92.0, 84.0, 84.0]);
-            reserved.add([left + width - 84.0, top + height - 86.0, 72.0, 72.0]);
+            for mut rect in touch_hit_rects([width, height]) {
+                rect[0] += left;
+                rect[1] += top;
+                reserved.add(rect);
+            }
         }
         reserved.scene(input.scene);
         reserved
@@ -198,7 +200,20 @@ impl Reserved {
                     return;
                 }
                 nodes += 1;
-                if !matches!(node.kind.as_str(), "button" | "text") {
+                if !matches!(
+                    node.kind.as_str(),
+                    "button"
+                        | "text"
+                        | "nav-tab"
+                        | "primary-button"
+                        | "exit-button"
+                        | "offense-button"
+                        | "defense-button"
+                        | "passive-button"
+                        | "offense-text"
+                        | "defense-text"
+                        | "passive-text"
+                ) {
                     continue;
                 }
                 let mut rect = node.rect;
@@ -267,6 +282,198 @@ mod tests {
         reserved.scene(&scene);
         assert_eq!(reserved.len, 1);
         assert_eq!(reserved.rects[0], Rect::new(60.0, 65.0, 60.0, 20.0));
+    }
+
+    #[test]
+    fn semantic_action_and_category_kinds_reserve_the_same_clipped_rects() {
+        for kind in [
+            "button",
+            "text",
+            "nav-tab",
+            "primary-button",
+            "exit-button",
+            "offense-button",
+            "defense-button",
+            "passive-button",
+            "offense-text",
+            "defense-text",
+            "passive-text",
+        ] {
+            let scene = UiScene {
+                groups: vec![UiGroup {
+                    position: [10.0, 20.0],
+                    nodes: vec![UiNode {
+                        kind: kind.into(),
+                        rect: [30.0, 40.0, 80.0, 40.0],
+                        clip: Some([50.0, 45.0, 100.0, 20.0]),
+                        ..Default::default()
+                    }],
+                }],
+            };
+            let mut reserved = Reserved::default();
+            reserved.scene(&scene);
+            assert_eq!(reserved.len, 1, "semantic exclusion missing: {kind}");
+            assert_eq!(reserved.rects[0], Rect::new(60.0, 65.0, 60.0, 20.0));
+        }
+    }
+
+    #[test]
+    fn inset_reservations_cover_actual_touch_aware_pixels_and_allocated_boss_corners() {
+        let mut game = game_core::Game::new(game_core::Profile::default());
+        game.diagnostic("boss-bastion-5");
+        let hud = game.hud();
+        let camera = Vec2::from_array(game.render_camera(0.5));
+        for (viewport, insets) in [
+            ([240.0, 180.0], [0.0, 20.0, 0.0, 20.0]),
+            ([350.0, 200.0], [7.0, 19.0, 13.0, 11.0]),
+            ([400.0, 240.0], [4.0, 23.0, 7.0, 11.0]),
+        ] {
+            for minimal in [false, true] {
+                let mut focus = game.render_focus(0.5);
+                focus.player = camera;
+                focus.player_radius = 20.0;
+                focus.boss.as_mut().unwrap().core = camera - Vec2::Y * 70.0;
+                let scene = UiScene::default();
+                let input = OverlayInput {
+                    hud: &hud,
+                    focus,
+                    camera: camera.to_array(),
+                    viewport,
+                    insets,
+                    zoom: 1.6,
+                    now_ms: 0,
+                    scene: &scene,
+                    touch: true,
+                };
+                let [top, right, bottom, left] = insets;
+                let safe = [viewport[0] - left - right, viewport[1] - top - bottom];
+                // Encounter reset deliberately restores auto allocation; seed
+                // it explicitly so the test exercises both reservation modes.
+                let mut overlay = BossOverlay {
+                    minimal,
+                    encounter: focus.boss.map(|b| b.encounter),
+                    ..Default::default()
+                };
+                let panel = overlay
+                    .update(&input)
+                    .expect("declared clear compact geometry retains boss");
+                let reserved = Reserved::from_input(&input, overlay.minimal());
+                let full_panel = Rect::new(
+                    (panel[0] + left).into(),
+                    (panel[1] + top).into(),
+                    panel[2].into(),
+                    panel[3].into(),
+                );
+                assert!(
+                    reserved.rects[..reserved.len]
+                        .iter()
+                        .all(|r| !full_panel.intersects(r.expanded(boss_layout::WIDGET_CLEARANCE)))
+                );
+                let mut frame = engine_core::FrameBuilder::new();
+                let ui_camera = [
+                    camera.x + (left - right) * 0.5,
+                    camera.y + (top - bottom) * 0.5,
+                ];
+                crate::pixel_ui::draw_ui_with_boss_panel_and_touch(
+                    &mut frame,
+                    &hud,
+                    ui_camera,
+                    safe,
+                    1,
+                    Some(panel),
+                    overlay.minimal(),
+                    true,
+                );
+                crate::pixel_ui::draw_controls(&mut frame, ui_camera, safe, None, false);
+                let layout = flight_layout(&hud, safe, overlay.minimal(), true).unwrap();
+                let mut covered: Vec<_> =
+                    [layout.biome, layout.currency, layout.radar, layout.meter]
+                        .into_iter()
+                        .flatten()
+                        .map(|r| {
+                            Rect::new(
+                                (r[0] + left).into(),
+                                (r[1] + top).into(),
+                                r[2].into(),
+                                r[3].into(),
+                            )
+                        })
+                        .collect();
+                covered.extend(touch_hit_rects(safe).map(|r| {
+                    Rect::new(
+                        (r[0] + left).into(),
+                        (r[1] + top).into(),
+                        r[2].into(),
+                        r[3].into(),
+                    )
+                }));
+                covered.push(full_panel);
+                for batch in &frame.frame().batches {
+                    for pixel in batch.pixels.iter().filter(|p| p.color >> 24 != 0) {
+                        for corner in [
+                            Vec2::new(-0.5, -0.5),
+                            Vec2::new(0.5, -0.5),
+                            Vec2::new(-0.5, 0.5),
+                            Vec2::new(0.5, 0.5),
+                        ] {
+                            let p = batch.transforms[pixel.transform as usize]
+                                .point(Vec2::from_array(pixel.local) + corner)
+                                - camera
+                                + Vec2::from_array(viewport) * 0.5;
+                            assert!(
+                                p.x >= left - 0.001
+                                    && p.x <= viewport[0] - right + 0.001
+                                    && p.y >= top - 0.001
+                                    && p.y <= viewport[1] - bottom + 0.001
+                            );
+                            let p = Point::new(p.x.into(), p.y.into());
+                            assert!(
+                                covered
+                                    .iter()
+                                    .any(|r| r.expanded(0.001).distance_to(p) == 0.0),
+                                "paint beyond shared exclusion: {p:?}"
+                            );
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    #[test]
+    fn genuinely_overconstrained_small_touch_view_never_places_over_essential_controls() {
+        let mut game = game_core::Game::new(game_core::Profile::default());
+        game.diagnostic("boss-bastion-5");
+        let hud = game.hud();
+        let camera = Vec2::from_array(game.render_camera(0.5));
+        let mut focus = game.render_focus(0.5);
+        focus.player = camera;
+        focus.player_radius = 20.0;
+        focus.boss.as_mut().unwrap().core = camera - Vec2::Y * 70.0;
+        let scene = UiScene::default();
+        let input = OverlayInput {
+            hud: &hud,
+            focus,
+            camera: camera.to_array(),
+            viewport: [180.0, 140.0],
+            insets: [0.0; 4],
+            zoom: 1.6,
+            now_ms: 0,
+            scene: &scene,
+            touch: true,
+        };
+        let mut overlay = BossOverlay::default();
+        assert!(
+            overlay.update(&input).is_none(),
+            "no unsafe100x40 rectangle in the actual fixed-pad geometry"
+        );
+        assert!(overlay.minimal());
+        assert!(
+            flight_layout(&hud, input.viewport, true, true)
+                .unwrap()
+                .meter
+                .is_some()
+        );
     }
 
     #[test]
@@ -400,7 +607,7 @@ mod tests {
             .expect("200px safe area retains compact row");
         assert!(overlay.minimal());
         let mut frame = engine_core::FrameBuilder::new();
-        crate::pixel_ui::draw_ui_with_boss_panel(
+        crate::pixel_ui::draw_ui_with_boss_panel_and_touch(
             &mut frame,
             &hud,
             [0.0; 2],
@@ -408,6 +615,7 @@ mod tests {
             1,
             Some(panel),
             overlay.minimal(),
+            true,
         );
         let hud_count = frame.frame().pixel_count;
         assert!(
@@ -473,8 +681,8 @@ mod tests {
         let panel = overlay
             .update(&input)
             .expect("compact boss health must survive expanded quick menu");
-        assert!(overlay.minimal());
-        let essential = Reserved::from_input(&input, true);
+        let retained_minimal = overlay.minimal();
+        let essential = Reserved::from_input(&input, retained_minimal);
         let panel = Rect::new(
             panel[0].into(),
             panel[1].into(),
@@ -489,9 +697,10 @@ mod tests {
         input.now_ms = 16;
         input.focus.boss.as_mut().unwrap().core += Vec2::X;
         assert!(overlay.update(&input).is_some());
-        assert!(
+        assert_eq!(
             overlay.minimal(),
-            "telemetry must not flicker as the core moves"
+            retained_minimal,
+            "the shared compact geometry must not flicker optional telemetry as the core moves"
         );
         input.focus.boss = None;
         assert!(overlay.update(&input).is_none());

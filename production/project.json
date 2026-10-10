@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 313,
+  "revision": 334,
   "name": "Galaxy Royale",
   "phase": "Foundation → playable vertical slice",
-  "updatedAt": "2026-10-10T21:56:47.100Z",
+  "updatedAt": "2026-10-10T22:34:04.927Z",
   "tasks": [
     {
       "id": "studio",
@@ -3074,6 +3074,183 @@
       "revision": 1,
       "createdAt": "2026-10-10T21:46:28.948Z",
       "updatedAt": "2026-10-10T21:46:28.948Z"
+    },
+    {
+      "id": "task-93af6b6f",
+      "title": "Near-black space with seeded cosmic pixel scenery",
+      "description": "Replace blue-heavy fixed clouds with bounded original cached galaxy, nebula and supernova pixel groups and spatially seeded star density/color. ReducedMotion freezes cosmetic animation; shared region/Scar budgets stay unchanged. Root integrates near-black renderer clear and bounded subtle biome material grading.",
+      "department": "Art / Engine",
+      "owner": "Gameplay / Art specialist",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [
+        "engine"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Native deterministic/budget/frozen-motion tests and actual both-renderer scenery evidence",
+          "met": true
+        },
+        {
+          "text": "Current normal dual-WASM build and owner-private publication identities are accurately recorded; phones remain Pending",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Final normal build and bounded checks",
+          "kind": "note",
+          "path": "artifacts/cosmic-ui-validation.md"
+        },
+        {
+          "label": "Current responsive browser observations",
+          "kind": "note",
+          "path": "artifacts/cosmic-ui-responsive-browser-review.md"
+        },
+        {
+          "label": "Independent source/package review",
+          "kind": "note",
+          "path": "artifacts/cosmic-ui-local-package-review.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-10T22:07:12.545Z",
+      "updatedAt": "2026-10-10T22:34:04.829Z"
+    },
+    {
+      "id": "task-efc26bbf",
+      "title": "Six clear responsive command pages and scroll containment",
+      "description": "Upgrades, Hangar, Campaign, Journal, Settings and Save are persistent accessible tabs. Save controls leave the footer; main action and title remain available. Actual logical viewport drives short/narrow layout, independently clipped content panes.",
+      "department": "UX / Production",
+      "owner": "Producer / Production QA",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [
+        "engine"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Actual tab navigation, logical aspect-ratio bounds, scroll/controls and current package review",
+          "met": true
+        },
+        {
+          "text": "Current normal dual-WASM build and owner-private publication identities are accurately recorded; phones remain Pending",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Final normal build and bounded checks",
+          "kind": "note",
+          "path": "artifacts/cosmic-ui-validation.md"
+        },
+        {
+          "label": "Current responsive browser observations",
+          "kind": "note",
+          "path": "artifacts/cosmic-ui-responsive-browser-review.md"
+        },
+        {
+          "label": "Independent source/package review",
+          "kind": "note",
+          "path": "artifacts/cosmic-ui-local-package-review.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-10T22:07:12.580Z",
+      "updatedAt": "2026-10-10T22:34:04.849Z"
+    },
+    {
+      "id": "task-f090d98d",
+      "title": "Semantic pixel action colors and readable settings controls",
+      "description": "Native Rust pixel quads draw persistent selected tabs independently of hover, primary/category/exit accents and readable disabled labels. Slider/toggle glyphs reserve control gutters. Browser bridge intersects root and scroll clips on both axes.",
+      "department": "Engine / UI",
+      "owner": "Engine specialist / Producer",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [
+        "engine"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Actual scene bridge and native quad/glyph/material bounds tests plus visual checks",
+          "met": true
+        },
+        {
+          "text": "Current normal dual-WASM build and owner-private publication identities are accurately recorded; phones remain Pending",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Final normal build and bounded checks",
+          "kind": "note",
+          "path": "artifacts/cosmic-ui-validation.md"
+        },
+        {
+          "label": "Current responsive browser observations",
+          "kind": "note",
+          "path": "artifacts/cosmic-ui-responsive-browser-review.md"
+        },
+        {
+          "label": "Independent source/package review",
+          "kind": "note",
+          "path": "artifacts/cosmic-ui-local-package-review.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-10T22:07:12.611Z",
+      "updatedAt": "2026-10-10T22:34:04.872Z"
+    },
+    {
+      "id": "task-6664d4ee",
+      "title": "Responsive native HUD shares boss reservation geometry",
+      "description": "Shared responsive native HUD geometry implementation transferred to Engine specialist after the installed local worker was interrupted without source edits/tests. Root integrates browser touch call and independently checks final source. Geometry/extraction/reservation and browser acceptance are still pending.",
+      "department": "Engine / HUD",
+      "owner": "Engine specialist / Producer",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [
+        "engine"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Actual viewport/inset/touch extraction and reservation tests plus independent integration review",
+          "met": true
+        },
+        {
+          "text": "Current normal dual-WASM build and owner-private publication identities are accurately recorded; phones remain Pending",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual worker observation and ownership transfer",
+          "kind": "note",
+          "path": "work/responsive-hud-worker-observation.md"
+        },
+        {
+          "label": "Final normal build and bounded checks",
+          "kind": "note",
+          "path": "artifacts/cosmic-ui-validation.md"
+        },
+        {
+          "label": "Current responsive browser observations",
+          "kind": "note",
+          "path": "artifacts/cosmic-ui-responsive-browser-review.md"
+        },
+        {
+          "label": "Independent source/package review",
+          "kind": "note",
+          "path": "artifacts/cosmic-ui-local-package-review.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 3,
+      "createdAt": "2026-10-10T22:07:12.642Z",
+      "updatedAt": "2026-10-10T22:34:04.905Z"
     }
   ],
   "reviews": [
@@ -3689,6 +3866,43 @@
         "task-90acc365",
         "task-b0a59d63",
         "slice-review"
+      ]
+    },
+    {
+      "id": "review-c683373f",
+      "title": "Independent cosmic affine, shader and gameplay preservation review",
+      "body": "Actual review validates 225792 near/far motif corners, 127-slot pooled splitting, 180 outbound firing ticks parity and Naga 288-byte uniform offsets. Twelve core and four shader checks pass; no blocking source defect found. Physical phones, GPU performance, soak and pending HUD integration are excluded. Frozen source review: work/cosmic-ui-engine-review/REVIEW.md.",
+      "author": "Producer",
+      "source": "Observed source freezes, actual checks and interrupted local-worker handoff",
+      "createdAt": "2026-10-10T22:16:21.082Z",
+      "participants": [
+        "Engine specialist / independent reviewer",
+        "Gameplay specialist / original cosmic author",
+        "Producer / integration"
+      ],
+      "taskIds": [
+        "task-93af6b6f",
+        "task-f090d98d"
+      ]
+    },
+    {
+      "id": "review-54b1120e",
+      "title": "Cosmic/UI final asynchronous design and validation contributions",
+      "body": "Actual contributions recorded in artifacts/cosmic-ui-validation.md, cosmic-ui-final-source-review.md, cosmic-ui-responsive-browser-review.md and cosmic-ui-local-package-review.md.282 Rust/89 shell checks and strict native/both-WASM checks pass. Both normal renderer paths observed; desktop responsive dimensions and keyboard navigation checked. Native HUD uses shared boss/input geometry. Physical devices/soak, human balance/audio, full recovery matrix and authenticated remote gameplay remain pending. This is an asynchronous review record, not a fabricated meeting.",
+      "author": "Producer",
+      "source": "Actual final cosmic/UI checks, specialist reviews and exact private release",
+      "createdAt": "2026-10-10T22:34:04.920Z",
+      "participants": [
+        "Producer / integration",
+        "Engine specialist / native HUD and independent source review",
+        "Gameplay specialist / cosmic author and independent package review",
+        "Production specialist / responsive browser QA"
+      ],
+      "taskIds": [
+        "task-93af6b6f",
+        "task-efc26bbf",
+        "task-f090d98d",
+        "task-6664d4ee"
       ]
     }
   ],
@@ -4526,6 +4740,50 @@
       ],
       "url": "https://galaxy-royale-itchson.itchson.chatgpt.site/",
       "knownIssues": "Reviewed legal interior Mote candidates are integrated. Eight actual movement cases pass: four ordinary maxzoom cases emit while moving; narrow320x180moving remains suppressed and all8recover afterrelease. Broad natural/narrow/human readability remains Review. Integrated charge/pulse SFX with actual desktop DSP evidence; human listening and phone audio acceptance remain pending."
+    },
+    {
+      "id": "build-abe6afe7",
+      "title": "Dark-space responsive-menu candidate",
+      "body": "Normal dual-WASM/game/PWA/Studio build and current scoped browser/source/package checks completed. Runtime commit/archive/publication follow as separate exact evidence.",
+      "author": "Producer",
+      "source": "Actual final cosmic/UI checks, specialist reviews and exact private release",
+      "createdAt": "2026-10-10T22:34:04.927Z",
+      "revision": "Frozen candidate / galaxy-95d0a4d39116971e",
+      "evidence": [
+        {
+          "label": "Actual check scope",
+          "kind": "note",
+          "path": "artifacts/cosmic-ui-validation.md"
+        },
+        {
+          "label": "Responsive browser QA",
+          "kind": "note",
+          "path": "artifacts/cosmic-ui-responsive-browser-review.md"
+        }
+      ],
+      "checks": [
+        {
+          "name": "282 Rust and89 shell checks",
+          "result": "pass"
+        },
+        {
+          "name": "Strict TypeScript/native/both-WASM Clippy and normal dual build",
+          "result": "pass"
+        },
+        {
+          "name": "Current normal both-renderer local smoke and responsive desktop QA",
+          "result": "pass"
+        },
+        {
+          "name": "Physical-phone and30-minute soak",
+          "result": "not_run"
+        },
+        {
+          "name": "Authenticated remote execution and full context/PWA recovery matrix",
+          "result": "not_run"
+        }
+      ],
+      "knownIssues": "Physical phones/soak, human moving-combat readability/audio, full recovery matrix pending. Genuine180x140 touch boss panel may have no safe placement and fails closed."
     }
   ],
   "feedback": [],
@@ -7659,6 +7917,216 @@
       "author": "Producer",
       "source": "Exact reviewed8b19runtime/archive privately published successfully; current metadata only",
       "createdAt": "2026-10-10T21:56:47.100Z"
+    },
+    {
+      "id": "045927a2-a5bd-4f4e-8690-bfa08d11586e",
+      "revision": 314,
+      "kind": "task.create",
+      "itemId": "task-93af6b6f",
+      "title": "Near-black space with seeded cosmic pixel scenery",
+      "author": "Producer",
+      "source": "Actual cosmic backdrop and responsive menu implementation session",
+      "createdAt": "2026-10-10T22:07:12.545Z"
+    },
+    {
+      "id": "c012f6c5-f521-4d69-a284-46e504d88071",
+      "revision": 315,
+      "kind": "task.create",
+      "itemId": "task-efc26bbf",
+      "title": "Six clear responsive command pages and scroll containment",
+      "author": "Producer",
+      "source": "Actual cosmic backdrop and responsive menu implementation session",
+      "createdAt": "2026-10-10T22:07:12.580Z"
+    },
+    {
+      "id": "2d84aa41-68ad-41fe-b503-4f4a1f8a4e96",
+      "revision": 316,
+      "kind": "task.create",
+      "itemId": "task-f090d98d",
+      "title": "Semantic pixel action colors and readable settings controls",
+      "author": "Producer",
+      "source": "Actual cosmic backdrop and responsive menu implementation session",
+      "createdAt": "2026-10-10T22:07:12.611Z"
+    },
+    {
+      "id": "1e1b328e-9045-46ac-aa0c-a2ca3af6244e",
+      "revision": 317,
+      "kind": "task.create",
+      "itemId": "task-6664d4ee",
+      "title": "Responsive native HUD shares boss reservation geometry",
+      "author": "Producer",
+      "source": "Actual cosmic backdrop and responsive menu implementation session",
+      "createdAt": "2026-10-10T22:07:12.642Z"
+    },
+    {
+      "id": "fe009d55-a16d-4ff8-bda3-abf68fc2bd0c",
+      "revision": 318,
+      "kind": "run",
+      "itemId": "run-e3059c08",
+      "title": "Producer / Integrator · running",
+      "author": "Producer",
+      "source": "Actual cosmic backdrop and responsive menu implementation session",
+      "createdAt": "2026-10-10T22:07:18.769Z"
+    },
+    {
+      "id": "bde0b183-d03c-4058-a6d4-099226c14047",
+      "revision": 319,
+      "kind": "run",
+      "itemId": "run-f403df51",
+      "title": "Gameplay / Art specialist · running",
+      "author": "Producer",
+      "source": "Actual cosmic backdrop and responsive menu implementation session",
+      "createdAt": "2026-10-10T22:07:18.778Z"
+    },
+    {
+      "id": "0fc1562f-5810-4c4c-af70-c343c1a0fa63",
+      "revision": 320,
+      "kind": "run",
+      "itemId": "run-781fe9d6",
+      "title": "Production / Responsive QA · running",
+      "author": "Producer",
+      "source": "Actual cosmic backdrop and responsive menu implementation session",
+      "createdAt": "2026-10-10T22:07:18.799Z"
+    },
+    {
+      "id": "6eb86e38-4d3c-4815-9a84-3c07102ecd6e",
+      "revision": 321,
+      "kind": "run",
+      "itemId": "run-4d5df0d3",
+      "title": "Engine / Pixel UI specialist · running",
+      "author": "Producer",
+      "source": "Actual cosmic backdrop and responsive menu implementation session",
+      "createdAt": "2026-10-10T22:07:18.814Z"
+    },
+    {
+      "id": "c3cb32c6-ae85-4890-b9de-4f306d944aa8",
+      "revision": 322,
+      "kind": "run",
+      "itemId": "run-d63d12f1",
+      "title": "Spark / qwen3.8-flash-next local worker · running",
+      "author": "Producer",
+      "source": "Actual cosmic backdrop and responsive menu implementation session",
+      "createdAt": "2026-10-10T22:07:18.829Z"
+    },
+    {
+      "id": "682b9bd7-51c2-4550-8fe1-67ec034b5bb7",
+      "revision": 323,
+      "kind": "task.update",
+      "itemId": "task-6664d4ee",
+      "title": "Responsive native HUD shares boss reservation geometry",
+      "author": "Producer",
+      "source": "Observed source freezes, actual checks and interrupted local-worker handoff",
+      "createdAt": "2026-10-10T22:16:05.957Z"
+    },
+    {
+      "id": "c0793a08-7e7f-471f-90b2-565ee5e32648",
+      "revision": 324,
+      "kind": "run",
+      "itemId": "run-ec3968d5",
+      "title": "Spark / qwen3.8-flash-next local worker · interrupted",
+      "author": "Producer",
+      "source": "Observed source freezes, actual checks and interrupted local-worker handoff",
+      "createdAt": "2026-10-10T22:16:05.973Z"
+    },
+    {
+      "id": "5e54c866-f0df-4658-bc1d-0e0ddf91f641",
+      "revision": 325,
+      "kind": "run",
+      "itemId": "run-f864e1f5",
+      "title": "Engine / Pixel UI specialist · running",
+      "author": "Producer",
+      "source": "Observed source freezes, actual checks and interrupted local-worker handoff",
+      "createdAt": "2026-10-10T22:16:05.987Z"
+    },
+    {
+      "id": "b7d5f985-6f41-40a9-95fd-fe4fc775dfe0",
+      "revision": 326,
+      "kind": "run",
+      "itemId": "run-bc040060",
+      "title": "Production / Responsive QA · running",
+      "author": "Producer",
+      "source": "Observed source freezes, actual checks and interrupted local-worker handoff",
+      "createdAt": "2026-10-10T22:16:05.998Z"
+    },
+    {
+      "id": "45d8f566-0cd0-4a63-8f9c-d88e37e5f8ad",
+      "revision": 327,
+      "kind": "run",
+      "itemId": "run-7b28e1c1",
+      "title": "Gameplay / Art specialist · running",
+      "author": "Producer",
+      "source": "Observed source freezes, actual checks and interrupted local-worker handoff",
+      "createdAt": "2026-10-10T22:16:06.017Z"
+    },
+    {
+      "id": "40e12bee-d384-4c96-8564-7e38051c5d76",
+      "revision": 328,
+      "kind": "review",
+      "itemId": "review-c683373f",
+      "title": "Independent cosmic affine, shader and gameplay preservation review",
+      "author": "Producer",
+      "source": "Observed source freezes, actual checks and interrupted local-worker handoff",
+      "createdAt": "2026-10-10T22:16:21.082Z"
+    },
+    {
+      "id": "c7fa4968-1e5d-4715-93db-879f2fa01977",
+      "revision": 329,
+      "kind": "task.update",
+      "itemId": "task-93af6b6f",
+      "title": "Near-black space with seeded cosmic pixel scenery",
+      "author": "Producer",
+      "source": "Actual final cosmic/UI checks, specialist reviews and exact private release",
+      "createdAt": "2026-10-10T22:34:04.829Z"
+    },
+    {
+      "id": "a33004af-65cf-4336-8567-405dc3b49fc1",
+      "revision": 330,
+      "kind": "task.update",
+      "itemId": "task-efc26bbf",
+      "title": "Six clear responsive command pages and scroll containment",
+      "author": "Producer",
+      "source": "Actual final cosmic/UI checks, specialist reviews and exact private release",
+      "createdAt": "2026-10-10T22:34:04.849Z"
+    },
+    {
+      "id": "6dda5fd9-b83b-475f-92a4-62e199a23f85",
+      "revision": 331,
+      "kind": "task.update",
+      "itemId": "task-f090d98d",
+      "title": "Semantic pixel action colors and readable settings controls",
+      "author": "Producer",
+      "source": "Actual final cosmic/UI checks, specialist reviews and exact private release",
+      "createdAt": "2026-10-10T22:34:04.872Z"
+    },
+    {
+      "id": "ba9760bd-b5ba-4e3d-a3a5-6d4340b2a442",
+      "revision": 332,
+      "kind": "task.update",
+      "itemId": "task-6664d4ee",
+      "title": "Responsive native HUD shares boss reservation geometry",
+      "author": "Producer",
+      "source": "Actual final cosmic/UI checks, specialist reviews and exact private release",
+      "createdAt": "2026-10-10T22:34:04.905Z"
+    },
+    {
+      "id": "fc596a46-9639-4944-ad6e-e56d518c93ef",
+      "revision": 333,
+      "kind": "review",
+      "itemId": "review-54b1120e",
+      "title": "Cosmic/UI final asynchronous design and validation contributions",
+      "author": "Producer",
+      "source": "Actual final cosmic/UI checks, specialist reviews and exact private release",
+      "createdAt": "2026-10-10T22:34:04.920Z"
+    },
+    {
+      "id": "8ba92c2f-4f53-421f-95c8-d267b0644f32",
+      "revision": 334,
+      "kind": "build",
+      "itemId": "build-abe6afe7",
+      "title": "Dark-space responsive-menu candidate",
+      "author": "Producer",
+      "source": "Actual final cosmic/UI checks, specialist reviews and exact private release",
+      "createdAt": "2026-10-10T22:34:04.927Z"
     }
   ],
   "runRecords": [
@@ -10441,6 +10909,209 @@
       "author": "Producer",
       "source": "Exact reviewed8b19runtime/archive privately published successfully; current metadata only",
       "createdAt": "2026-10-10T21:56:47.100Z"
+    },
+    {
+      "id": "run-e3059c08",
+      "title": "Producer / Integrator · running",
+      "agentId": "/root",
+      "agentLabel": "Producer / Integrator",
+      "state": "running",
+      "observedAt": "2026-10-10T22:07:18.754Z",
+      "taskIds": [
+        "task-93af6b6f",
+        "task-efc26bbf",
+        "task-f090d98d",
+        "task-6664d4ee"
+      ],
+      "summary": "Owns renderer near-black clear, biome shader uniform grading, menu DOM/navigation and semantic bridge. Focused three lighting/six bridge checks and strict TS pass; final integration/build/browser evidence pending.",
+      "evidence": [
+        {
+          "label": "Recorded real assignments and observed handoffs",
+          "kind": "note",
+          "path": "work/record-cosmic-ui-session.mjs"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual cosmic backdrop and responsive menu implementation session",
+      "createdAt": "2026-10-10T22:07:18.769Z"
+    },
+    {
+      "id": "run-f403df51",
+      "title": "Gameplay / Art specialist · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Gameplay / Art specialist",
+      "state": "running",
+      "observedAt": "2026-10-10T22:07:18.775Z",
+      "taskIds": [
+        "task-93af6b6f"
+      ],
+      "summary": "Owns new production cosmic_background and scoped lib background integration. Nine focused native checks and strict core Clippy recorded in actual handoff; full regression/preview evidence in progress.",
+      "evidence": [
+        {
+          "label": "Recorded real assignments and observed handoffs",
+          "kind": "note",
+          "path": "work/record-cosmic-ui-session.mjs"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual cosmic backdrop and responsive menu implementation session",
+      "createdAt": "2026-10-10T22:07:18.778Z"
+    },
+    {
+      "id": "run-781fe9d6",
+      "title": "Production / Responsive QA · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "Production / Responsive QA",
+      "state": "running",
+      "observedAt": "2026-10-10T22:07:18.786Z",
+      "taskIds": [
+        "task-efc26bbf"
+      ],
+      "summary": "Frozen prior cursor-chord4200 capture complete and owned preview stopped. Owns four CSS files for six clipped scroll panes, short/narrow layouts, safe margins and settings rows. Actual responsive browser capture follows build.",
+      "evidence": [
+        {
+          "label": "Recorded real assignments and observed handoffs",
+          "kind": "note",
+          "path": "work/record-cosmic-ui-session.mjs"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual cosmic backdrop and responsive menu implementation session",
+      "createdAt": "2026-10-10T22:07:18.799Z"
+    },
+    {
+      "id": "run-4d5df0d3",
+      "title": "Engine / Pixel UI specialist · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Engine / Pixel UI specialist",
+      "state": "running",
+      "observedAt": "2026-10-10T22:07:18.807Z",
+      "taskIds": [
+        "task-f090d98d"
+      ],
+      "summary": "Owns ui_scene.rs semantic button colors/selected tabs/settings text gutters and actual extraction tests. Root owns bridge matching. Native tests in progress.",
+      "evidence": [
+        {
+          "label": "Recorded real assignments and observed handoffs",
+          "kind": "note",
+          "path": "work/record-cosmic-ui-session.mjs"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual cosmic backdrop and responsive menu implementation session",
+      "createdAt": "2026-10-10T22:07:18.814Z"
+    },
+    {
+      "id": "run-d63d12f1",
+      "title": "Spark / qwen3.8-flash-next local worker · running",
+      "agentId": "spark-hud-worker",
+      "agentLabel": "Spark / qwen3.8-flash-next local worker",
+      "state": "running",
+      "observedAt": "2026-10-10T22:07:18.819Z",
+      "taskIds": [
+        "task-6664d4ee"
+      ],
+      "summary": "Installed worker running explicit UTF-8 task with medium effort, danger-full-access/never inherited permissions. Owns only pixel_ui.rs/boss_overlay.rs and focused tests; final returned work and independent root review pending.",
+      "evidence": [
+        {
+          "label": "Recorded real assignments and observed handoffs",
+          "kind": "note",
+          "path": "work/record-cosmic-ui-session.mjs"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual cosmic backdrop and responsive menu implementation session",
+      "createdAt": "2026-10-10T22:07:18.829Z"
+    },
+    {
+      "id": "run-ec3968d5",
+      "title": "Spark / qwen3.8-flash-next local worker · interrupted",
+      "agentId": "spark-hud-worker",
+      "agentLabel": "Spark / qwen3.8-flash-next local worker",
+      "state": "interrupted",
+      "observedAt": "2026-10-10T22:16:05.964Z",
+      "taskIds": [
+        "task-6664d4ee"
+      ],
+      "summary": "Owned worker stopped after prolonged initial reads/inference; exit1 and no edits/test/final result. No unavailable-model or completed-code claim.",
+      "evidence": [
+        {
+          "label": "Actual observed cleanup",
+          "kind": "note",
+          "path": "work/responsive-hud-worker-observation.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Observed source freezes, actual checks and interrupted local-worker handoff",
+      "createdAt": "2026-10-10T22:16:05.973Z"
+    },
+    {
+      "id": "run-f864e1f5",
+      "title": "Engine / Pixel UI specialist · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Engine / Pixel UI specialist",
+      "state": "running",
+      "observedAt": "2026-10-10T22:16:05.983Z",
+      "taskIds": [
+        "task-f090d98d",
+        "task-93af6b6f",
+        "task-6664d4ee"
+      ],
+      "summary": "Frozen semantic UI and independent cosmic/uniform review pass. Now owns actual pixel_ui.rs/boss_overlay.rs responsive HUD geometry implementation; no dist writes.",
+      "evidence": [
+        {
+          "label": "Actual frozen handoff / assignment",
+          "kind": "note",
+          "path": "work/cosmic-ui-engine-review/REVIEW.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Observed source freezes, actual checks and interrupted local-worker handoff",
+      "createdAt": "2026-10-10T22:16:05.987Z"
+    },
+    {
+      "id": "run-bc040060",
+      "title": "Production / Responsive QA · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "Production / Responsive QA",
+      "state": "running",
+      "observedAt": "2026-10-10T22:16:05.994Z",
+      "taskIds": [
+        "task-efc26bbf"
+      ],
+      "summary": "Four CSS sources frozen. Running actual owned4201 responsive keyboard/Save/settings/layout capture against current normal package; native HUD pending.",
+      "evidence": [
+        {
+          "label": "Actual frozen handoff / assignment",
+          "kind": "note",
+          "path": "work/record-cosmic-ui-session.mjs"
+        }
+      ],
+      "author": "Producer",
+      "source": "Observed source freezes, actual checks and interrupted local-worker handoff",
+      "createdAt": "2026-10-10T22:16:05.998Z"
+    },
+    {
+      "id": "run-7b28e1c1",
+      "title": "Gameplay / Art specialist · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Gameplay / Art specialist",
+      "state": "running",
+      "observedAt": "2026-10-10T22:16:06.008Z",
+      "taskIds": [
+        "task-93af6b6f"
+      ],
+      "summary": "Frozen source and real140core checks pass. Now profiling cold/warm actual public Game render in isolated native work harness; no GPU/phone/soak claim.",
+      "evidence": [
+        {
+          "label": "Actual frozen handoff / assignment",
+          "kind": "note",
+          "path": "work/cosmic-background-proof/README.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Observed source freezes, actual checks and interrupted local-worker handoff",
+      "createdAt": "2026-10-10T22:16:06.017Z"
     }
   ]
 }

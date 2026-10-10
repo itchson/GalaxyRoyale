@@ -8,6 +8,7 @@ mod pixel_assets;
 mod radiation_enemies;
 pub use campaign::RunSummary;
 mod campaign_runtime;
+mod cosmic_background;
 #[cfg(test)]
 mod cursor_aim_tests;
 #[cfg(test)]
@@ -438,8 +439,6 @@ pub struct Game {
     chunks: HashMap<(i32, i32), Vec<Entity>>,
     wake: Vec<(Vec2, f32)>,
     dock_body: PixelBody,
-    nebula: PixelBody,
-    nebula_wisp: PixelBody,
     viewport: Vec2,
     stress_mode: bool,
     nearby_sites: Vec<regions::Site>,
@@ -539,8 +538,6 @@ impl Game {
             chunks: HashMap::new(),
             wake: Vec::new(),
             dock_body: dock_body(),
-            nebula: nebula_body(),
-            nebula_wisp: nebula_wisp_body(),
             viewport: Vec2::new(800.0, 360.0),
             stress_mode: false,
             nearby_sites,
@@ -3175,138 +3172,17 @@ impl Game {
     }
 
     fn render_background(&self, frame: &mut FrameBuilder, camera: Vec2) {
-        // Parallax coordinates are world positions. The renderer subtracts camera once.
-        // Haven's two distant clouds are visual landmarks, with a quiet gap around the dock.
-        for (index, (origin, angle, violet)) in [
-            (Vec2::new(-230.0, -125.0), -0.25, false),
-            (Vec2::new(290.0, 170.0), 0.35, true),
-        ]
-        .into_iter()
-        .enumerate()
-        {
-            if self.reduced_cosmetics && index % 2 == 1 {
-                continue;
-            }
-            let transform = Transform {
-                position: origin + camera * 0.88,
-                rotation: angle,
-                scale: Vec2::new(5.5, 3.3),
-            };
-            if self.visible(transform.position, 240.0) {
-                frame.push_body_colored(&self.nebula, transform, |cell, color| {
-                    nebula_cell_color(cell, color, self.cosmetic_time(), violet)
-                });
-            }
-            let wisp = Transform {
-                position: origin + Vec2::new(28.0, -16.0) + camera * 0.8,
-                rotation: angle + 0.12,
-                scale: Vec2::new(3.0, 1.8),
-            };
-            if self.visible(wisp.position, 140.0) {
-                frame.push_body_colored(&self.nebula_wisp, wisp, |cell, color| {
-                    nebula_cell_color(cell, color, self.cosmetic_time(), !violet)
-                });
-            }
-        }
-        for (layer, factor) in [0.12, 0.20, 0.35, 0.7].iter().enumerate() {
-            let sample = camera * *factor;
-            let tile = 640.0;
-            let minimum = (sample - self.viewport * 0.5) / tile;
-            let maximum = (sample + self.viewport * 0.5) / tile;
-            for y in minimum.y.floor() as i32 - 1..=maximum.y.floor() as i32 + 1 {
-                for x in minimum.x.floor() as i32 - 1..=maximum.x.floor() as i32 + 1 {
-                    if layer == 0 {
-                        let hash = hash3(self.profile.seed ^ 0xbeef, x, y, 0);
-                        let origin = Vec2::new(
-                            x as f32 * tile + unit(hash) * tile,
-                            y as f32 * tile + unit(mix(hash)) * tile,
-                        );
-                        let parent = Transform {
-                            position: origin + camera * (1.0 - *factor),
-                            rotation: unit(mix(hash ^ 12)) * 1.1 - 0.55,
-                            scale: Vec2::new(
-                                3.5 + unit(mix(hash ^ 47)) * 2.0,
-                                2.2 + unit(mix(hash ^ 83)),
-                            ),
-                        };
-                        if hash & 1 == 0
-                            && (!self.reduced_cosmetics || mix(hash ^ 541) & 1 == 0)
-                            && self.visible(parent.position, 160.0)
-                        {
-                            let violet = hash & 1 == 0;
-                            frame.push_body_colored(&self.nebula, parent, |cell, color| {
-                                nebula_cell_color(cell, color, self.cosmetic_time(), violet)
-                            });
-                        }
-                    }
-                    if layer == 1 {
-                        // This layer streams in its own parallax coordinates at every world distance.
-                        let hash = hash3(self.profile.seed ^ 0xc105, x, y, 0);
-                        let wisp = Transform {
-                            position: Vec2::new(
-                                x as f32 * tile + unit(hash) * tile,
-                                y as f32 * tile + unit(mix(hash)) * tile,
-                            ) + camera * (1.0 - *factor),
-                            rotation: unit(mix(hash ^ 53)) * 1.2 - 0.6,
-                            scale: Vec2::new(
-                                2.5 + unit(mix(hash ^ 99)),
-                                1.5 + unit(mix(hash ^ 101)) * 0.6,
-                            ),
-                        };
-                        if (!self.reduced_cosmetics || mix(hash ^ 541) & 1 == 0)
-                            && self.visible(wisp.position, 140.0)
-                        {
-                            frame.push_body_colored(&self.nebula_wisp, wisp, |cell, color| {
-                                nebula_cell_color(cell, color, self.cosmetic_time(), hash & 1 != 0)
-                            });
-                        }
-                    }
-                    for i in 0..22 {
-                        if self.reduced_cosmetics && i % 2 == 1 {
-                            continue;
-                        }
-                        let hash =
-                            hash3(self.profile.seed.wrapping_add(layer as u32 * 1237), x, y, i);
-                        let position = Vec2::new(
-                            x as f32 * tile + unit(hash) * tile,
-                            y as f32 * tile + unit(mix(hash)) * tile,
-                        ) + camera * (1.0 - *factor);
-                        if !self.visible(position, 4.0) {
-                            continue;
-                        }
-                        let twinkle = 0.75
-                            + 0.25
-                                * (self.cosmetic_time() * (0.3 + unit(mix(hash ^ 92)))
-                                    + unit(hash) * TAU)
-                                    .sin();
-                        let color = if layer == 0 {
-                            rgba(65, 88, 132, (twinkle * 130.0) as u8)
-                        } else if hash & 3 == 0 {
-                            rgba(188, 164, 236, (twinkle * 205.0) as u8)
-                        } else {
-                            rgba(
-                                138 + layer as u8 * 30,
-                                178 + layer as u8 * 20,
-                                228,
-                                (twinkle * 230.0) as u8,
-                            )
-                        };
-                        let size = if layer == 3 && hash.is_multiple_of(11) {
-                            1.8
-                        } else {
-                            0.7 + layer as f32 * 0.3
-                        };
-                        frame.push_pixel(position, size, color);
-                        if layer == 3 && hash.is_multiple_of(11) {
-                            frame.push_pixel(position + Vec2::X * 2.0, 0.7, with_alpha(color, 85));
-                            frame.push_pixel(position - Vec2::X * 2.0, 0.7, with_alpha(color, 85));
-                            frame.push_pixel(position + Vec2::Y * 2.0, 0.7, with_alpha(color, 85));
-                            frame.push_pixel(position - Vec2::Y * 2.0, 0.7, with_alpha(color, 85));
-                        }
-                    }
-                }
-            }
-        }
+        cosmic_background::render(
+            frame,
+            cosmic_background::SceneInput {
+                seed: self.profile.seed,
+                camera,
+                viewport: self.viewport,
+                time: self.cosmetic_time(),
+                reduced: self.reduced_cosmetics,
+                reduced_motion: self.reduced_motion,
+            },
+        );
     }
 
     /// Explicit deterministic QA scenes. This never awards inventory or upgrades.
@@ -3592,21 +3468,6 @@ fn pulse_color(color: u32, brightness: f32) -> u32 {
     )
 }
 
-fn nebula_cell_color(cell: Vec2, color: u32, time: f32, violet: bool) -> u32 {
-    let [red, green, blue, alpha] = color.to_le_bytes();
-    let shimmer = (time * 0.22 + cell.x * 0.12 - cell.y * 0.19).sin() * 3.0;
-    let alpha = (alpha as f32 + shimmer).clamp(0.0, 112.0) as u8;
-    if violet {
-        rgba(
-            blue,
-            red.saturating_add(12),
-            green.saturating_add(24),
-            alpha,
-        )
-    } else {
-        rgba(red, green, blue, alpha)
-    }
-}
 fn actor_transform(motion: Motion, actor: Actor) -> Transform {
     Transform {
         position: motion.position,
@@ -3687,60 +3548,6 @@ fn segment_scale(boss: bool) -> f32 {
 fn dock_body() -> PixelBody {
     pixel_assets::body("dock")
 }
-fn nebula_body() -> PixelBody {
-    PixelBody::from_ascii(
-        &[
-            "                  a aa               ",
-            "               aabbbbaa              ",
-            "       a    aabbbbbccbbaa             ",
-            "     aabb aaabbbbccccccbba a          ",
-            "    aabbbbbbccccddccccbbbbaa          ",
-            "   aabbbbcccddd    cccbbbbbbbaa       ",
-            " aabbbbcccddd        cccbbbba aa      ",
-            "aabbbcccddd            cccbbbbbaa    ",
-            " abbbccdd      a          cccbbbaa   ",
-            "  abbccdd     abbba        ccbbbbaa  ",
-            "  abbbcc     abcccba      cccbbbbaa  ",
-            "   abbbccc    abba      cccbbbbbbaa  ",
-            "    aabbbcccc        ccccbbbbbbaa   ",
-            "      aabbbbccccccccccbbbbbbbaa     ",
-            "       aaabbbbbbbbbbbbbbbbaa a      ",
-            "          aabbbbbbbbba aa           ",
-            "           aaaa aa a                ",
-        ],
-        &[
-            ('a', rgba(28, 48, 83, 36)),
-            ('b', rgba(34, 86, 118, 54)),
-            ('c', rgba(40, 134, 154, 69)),
-            ('d', rgba(65, 176, 178, 86)),
-        ],
-    )
-}
-
-fn nebula_wisp_body() -> PixelBody {
-    PixelBody::from_ascii(
-        &[
-            "             a     a            ",
-            "          aabbba abba           ",
-            "      a aabbbccccbbaa           ",
-            "    aabbbbcc    cccbbaa         ",
-            "  aabbbcc         cccbbbaa      ",
-            " abbcc               ccbbbbaa   ",
-            "  abcc    a           cccbbbbaa ",
-            "   abccc              cccbbba  ",
-            "     abbbcccc    cccccbbbbaa    ",
-            "      aabbbbbccccbbbbbbaa      ",
-            "         aaaabbbbba a          ",
-            "              aa               ",
-        ],
-        &[
-            ('a', rgba(38, 53, 87, 24)),
-            ('b', rgba(43, 127, 165, 49)),
-            ('c', rgba(82, 186, 198, 76)),
-        ],
-    )
-}
-
 #[cfg(test)]
 mod tests {
     use super::*;

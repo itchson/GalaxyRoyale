@@ -207,7 +207,7 @@ impl Galaxy {
             } else {
                 None
             };
-            pixel_ui::draw_ui_with_boss_panel(
+            pixel_ui::draw_ui_with_boss_panel_and_touch(
                 &mut self.ui_frame,
                 &hud,
                 ui_camera,
@@ -215,6 +215,7 @@ impl Galaxy {
                 self.ui_mode,
                 boss_panel,
                 self.boss_overlay.minimal(),
+                self.touch_ui,
             );
         }
         if self.touch_ui && self.ui_mode == 1 {
@@ -242,6 +243,7 @@ impl Galaxy {
             render_camera,
             self.camera_zoom.value(),
             &self.game.light_sources(alpha),
+            hud.biome.kind,
         )?;
         let render_ms = now() - render_start;
         let profile = if self.game.profile().revision != self.last_revision {

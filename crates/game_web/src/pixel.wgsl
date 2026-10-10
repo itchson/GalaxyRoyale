@@ -1,7 +1,7 @@
 struct Affine { a:vec4<f32>, b:vec4<f32> }
 struct TransformTable { values:array<Affine,128> }
 struct Light { position_radius:vec4<f32>, color:vec4<f32> }
-struct Globals { camera:vec4<f32>, lights:array<Light,8> }
+struct Globals { camera:vec4<f32>, ambient:vec4<f32>, lights:array<Light,8> }
 @group(0) @binding(0) var<uniform> globals:Globals;
 @group(0) @binding(1) var<uniform> transforms:TransformTable;
 struct VertexOut {
@@ -26,6 +26,7 @@ struct VertexOut {
   let response=input.material.x;
   var color=input.color.rgb*(1.0-0.12*response+0.3*input.material.y);
   if(response>0.0) {
+    color=color*mix(vec3<f32>(1.0),globals.ambient.xyz,clamp(globals.ambient.w*response,0.0,1.0));
     for(var i=0u;i<8u;i=i+1u) {
       let light=globals.lights[i];
       let delta=input.cell-light.position_radius.xy;

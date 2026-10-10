@@ -1,0 +1,13 @@
+
+> galaxy-royale@0.1.0 build:web
+> vite build --config apps/game/vite.config.ts
+
+vite v7.3.7 building client environment for production...
+transforming...
+✓ 16 modules transformed.
+rendering chunks...
+computing gzip size...
+../../dist/index.html                 10.46 kB │ gzip:  2.88 kB
+../../dist/assets/index-Dc9NuNwZ.css  22.49 kB │ gzip:  4.54 kB
+../../dist/assets/index-DTpfWGVy.js   83.53 kB │ gzip: 28.13 kB
+✓ built in 224ms

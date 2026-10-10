@@ -9,6 +9,7 @@ interface Node {
   font: number;
   value: number;
   active: boolean;
+  selected: boolean;
   disabled: boolean;
   clip: number[] | null;
 }
@@ -46,7 +47,13 @@ export class PixelUiBridge {
           subtree: true,
           characterData: true,
           attributes: true,
-          attributeFilter: ["hidden", "class", "disabled"],
+          attributeFilter: [
+            "hidden",
+            "class",
+            "disabled",
+            "data-active",
+            "aria-selected",
+          ],
         });
     document.addEventListener("pointerover", (event) => {
       this.hover = (event.target as Element)?.closest("button,label,select");
@@ -70,6 +77,24 @@ export class PixelUiBridge {
     const scale = this.scale();
     if (!Number.isFinite(scale) || scale <= 0) return;
     const groups: { position: number[]; nodes: Node[] }[] = [];
+    const buttonKind = (element: HTMLElement): string => {
+      if (element.closest(".menu-tabs")) return "nav-tab";
+      if (element.classList.contains("primary-button")) return "primary-button";
+      if (["return-title", "death-title", "quick-title"].includes(element.id))
+        return "exit-button";
+      const action = element.dataset.pixelAction;
+      return ["offense-button", "defense-button", "passive-button"].includes(
+        action ?? "",
+      )
+        ? action!
+        : "button";
+    };
+    const textKind = (element: HTMLElement): string => {
+      const category = element.closest(".upgrade-category");
+      for (const name of ["offense", "defense", "passive"])
+        if (category?.classList.contains(name)) return `${name}-text`;
+      return "text";
+    };
     const visible = (element: HTMLElement) =>
       !element.closest("[hidden]") &&
       getComputedStyle(element).display !== "none" &&
@@ -91,8 +116,6 @@ export class PixelUiBridge {
         if (element.id === "toast" && !element.classList.contains("visible"))
           return;
         const box = element.getBoundingClientRect();
-        // The scroll area clips semantic elements before they reach the engine.
-        if (box.bottom < bounds.top || box.top > bounds.bottom) return;
         const font = Math.max(
           1,
           Math.min(
@@ -101,9 +124,29 @@ export class PixelUiBridge {
           ),
         );
         const scroll = element.closest<HTMLElement>(
-          "#upgrade-content,#quest-content,#settings-content,#hangar-content,#campaign-content,#console-output,#dialogue-text",
+          ".menu-tabs,#upgrade-content,#quest-content,#settings-content,#archive-content,#hangar-content,#campaign-content,#console-output,#dialogue-text,#run-summary",
         );
-        const clip = scroll ? scroll.getBoundingClientRect() : bounds;
+        const scrollBounds = scroll ? scroll.getBoundingClientRect() : bounds;
+        // Intersect both axes: scrolling never lets engine cells cross a panel.
+        const clipX = Math.max(bounds.x, scrollBounds.x);
+        const clipY = Math.max(bounds.y, scrollBounds.y);
+        const clipRight = Math.min(
+          bounds.x + bounds.width,
+          scrollBounds.x + scrollBounds.width,
+        );
+        const clipBottom = Math.min(
+          bounds.y + bounds.height,
+          scrollBounds.y + scrollBounds.height,
+        );
+        if (
+          clipRight <= clipX ||
+          clipBottom <= clipY ||
+          box.x + box.width <= clipX ||
+          box.x >= clipRight ||
+          box.y + box.height <= clipY ||
+          box.y >= clipBottom
+        )
+          return;
         // CSS layout quantizes to subpixels. Preserve the measured center while
         // recovering only the authored campaign icon size within 1/64 UI unit.
         const authored =
@@ -126,17 +169,19 @@ export class PixelUiBridge {
           font,
           value,
           clip: [
-            (clip.x - bounds.x) / scale,
-            (clip.y - bounds.y) / scale,
-            clip.width / scale,
-            clip.height / scale,
+            (clipX - bounds.x) / scale,
+            (clipY - bounds.y) / scale,
+            (clipRight - clipX) / scale,
+            (clipBottom - clipY) / scale,
           ],
           active:
             kind === "campaign-patch"
               ? element.dataset.active === "true"
               : element === this.hover ||
-                element.contains(document.activeElement) ||
-                element.dataset.active === "true",
+                element.contains(document.activeElement),
+          selected:
+            element.dataset.active === "true" ||
+            element.getAttribute("aria-selected") === "true",
           disabled: element instanceof HTMLButtonElement && element.disabled,
         });
       };
@@ -175,7 +220,7 @@ export class PixelUiBridge {
       for (const child of root.querySelectorAll<HTMLElement>(selectors))
         add(
           child,
-          child.tagName === "BUTTON" ? "button" : "text",
+          child.tagName === "BUTTON" ? buttonKind(child) : textKind(child),
           child.id === "pause-button"
             ? document.body.classList.contains("touch-ui")
               ? root.querySelector<HTMLElement>("#quick-menu")?.hidden
@@ -192,7 +237,7 @@ export class PixelUiBridge {
         for (const button of root.querySelectorAll<HTMLButtonElement>(
           "button,.import-label",
         ))
-          add(button, "button", button.textContent ?? "");
+          add(button, buttonKind(button), button.textContent ?? "");
         for (const label of root.querySelectorAll<HTMLLabelElement>(
           ".settings label",
         )) {

@@ -23,8 +23,18 @@ function pixelScene({
   value = "50",
   icon = null,
   scale = 1,
+  buttons = [],
+  scrollBounds = null,
+  rootBounds = null,
 } = {}) {
-  const bounds = { x: 0, y: 0, top: 0, bottom: 200, width: 300, height: 200 };
+  const bounds = rootBounds ?? {
+    x: 0,
+    y: 0,
+    top: 0,
+    bottom: 200,
+    width: 300,
+    height: 200,
+  };
   class Element {
     id = "";
     dataset = {};
@@ -33,8 +43,18 @@ function pixelScene({
     getBoundingClientRect() {
       return this.bounds ?? bounds;
     }
-    closest() {
+    closest(selector) {
+      if (selector === ".menu-tabs" && this.nav) return root;
+      if (
+        selector.includes("#archive-content") &&
+        this.inScroll &&
+        scrollBounds
+      )
+        return { getBoundingClientRect: () => scrollBounds };
       return null;
+    }
+    getAttribute(name) {
+      return this.attributes?.[name] ?? null;
     }
     contains() {
       return !!this.focusedChild;
@@ -49,11 +69,20 @@ function pixelScene({
     max = max;
     value = value;
   }
+  class Button extends Element {}
   const input = new Input();
   const label = new Element();
   label.childNodes = [{ textContent: "Flight zoom" }];
   label.querySelector = () => input;
   const root = new Element();
+  const buttonElements = buttons.map((props) => {
+    const button = new Button();
+    Object.assign(button, props);
+    button.classList = {
+      contains: (name) => props.classes?.includes(name) ?? false,
+    };
+    return button;
+  });
   const art = new Element();
   if (icon) {
     art.dataset = {
@@ -75,7 +104,9 @@ function pixelScene({
       ? [label]
       : selector === "[data-pixel-kind]" && icon
         ? [art]
-        : [];
+        : selector === "button,.import-label"
+          ? buttonElements
+          : [];
   const document = {
     getElementById: () => null,
     addEventListener() {},
@@ -92,7 +123,7 @@ function pixelScene({
     Element,
     HTMLElement: Element,
     HTMLInputElement: Input,
-    HTMLButtonElement: class extends Element {},
+    HTMLButtonElement: Button,
     getComputedStyle: () => ({ display: "block", fontSize: "8px" }),
     performance: { now: () => 0 },
     MutationObserver: class {
@@ -185,4 +216,67 @@ test("volume and default HTML range bounds produce finite clamped pixel position
   assert.equal(sliderScene({ min: "0.6", max: "1.6", value: "10" }).value, 1);
   assert.equal(sliderScene({ min: "1", max: "1", value: "1" }).value, 0);
   assert.equal(sliderScene({ min: "oops", max: "2", value: "1" }).value, 0);
+});
+
+test("semantic actions carry persistent selection independently of focus and category colors", () => {
+  const actions = [
+    { nav: true, dataset: { active: "true" }, textContent: "SAVE" },
+    { nav: true, focusedChild: true, textContent: "SETTINGS" },
+    { classes: ["primary-button"], textContent: "RETURN TO FLIGHT" },
+    { id: "return-title", textContent: "TITLE SCREEN" },
+    ...["offense", "defense", "passive"].map((category) => ({
+      dataset: { pixelAction: `${category}-button` },
+      disabled: true,
+      textContent: "UPGRADE",
+    })),
+  ];
+  const nodes = pixelScene({ buttons: actions }).groups[0].nodes.filter(
+    (n) => n.kind.includes("button") || n.kind === "nav-tab",
+  );
+  assert.deepEqual(
+    Array.from(nodes, (n) => n.kind),
+    [
+      "nav-tab",
+      "nav-tab",
+      "primary-button",
+      "exit-button",
+      "offense-button",
+      "defense-button",
+      "passive-button",
+    ],
+  );
+  assert.equal(nodes[0].selected, true);
+  assert.equal(nodes[0].active, false);
+  assert.equal(nodes[1].selected, false);
+  assert.equal(nodes[1].active, true);
+  assert.ok(nodes.slice(4).every((n) => n.disabled));
+});
+
+test("scroll clipping intersects panel on both axes and rejects wholly obscured actions", () => {
+  const rootBounds = { x: 40, y: 20, width: 200, height: 180 };
+  const scrollBounds = { x: 10, y: 60, width: 260, height: 100 };
+  const nodes = pixelScene({
+    rootBounds,
+    scrollBounds,
+    buttons: [
+      {
+        inScroll: true,
+        bounds: { x: 35, y: 80, width: 60, height: 24 },
+        textContent: "RESTORE",
+      },
+      {
+        inScroll: true,
+        bounds: { x: 280, y: 80, width: 40, height: 24 },
+        textContent: "OUTSIDE",
+      },
+      {
+        inScroll: true,
+        bounds: { x: 80, y: 30, width: 40, height: 24 },
+        textContent: "ABOVE",
+      },
+    ],
+  }).groups[0].nodes.filter((n) => n.kind === "button");
+  assert.equal(nodes.length, 1);
+  assert.equal(nodes[0].text, "RESTORE");
+  assert.deepEqual(Array.from(nodes[0].clip), [0, 40, 200, 100]);
 });

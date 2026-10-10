@@ -386,6 +386,7 @@ impl Renderer {
         camera: [f32; 2],
         zoom: f32,
         lights: &[game_core::LightSource],
+        biome: u8,
     ) -> Result<(), JsValue> {
         if self.lost.load(Ordering::Relaxed) {
             return Err(js("GPU device lost"));
@@ -463,10 +464,11 @@ impl Renderer {
         self.queue.write_buffer(
             &self.globals,
             0,
-            bytemuck::cast_slice(&crate::lighting::uniforms(
+            bytemuck::cast_slice(&crate::lighting::uniforms_with_ambient(
                 view.world_extent().to_array(),
                 camera,
                 lights,
+                crate::lighting::ambient_for_biome(biome),
             )),
         );
         self.queue.write_buffer(
@@ -514,9 +516,9 @@ impl Renderer {
                 resolve_target: None,
                 ops: wgpu::Operations {
                     load: wgpu::LoadOp::Clear(wgpu::Color {
-                        r: 0.00064,
-                        g: 0.00143,
-                        b: 0.0104,
+                        r: 0.0001,
+                        g: 0.00011,
+                        b: 0.00014,
                         a: 1.0,
                     }),
                     store: wgpu::StoreOp::Store,

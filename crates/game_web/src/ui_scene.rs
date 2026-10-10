@@ -10,6 +10,42 @@ const CYAN: u32 = 0xff_f4e887;
 const DIM: u32 = 0xff_a48563;
 const GOLD: u32 = 0xff_85d4ff;
 
+const fn rgb(r: u8, g: u8, b: u8) -> u32 {
+    u32::from_le_bytes([r, g, b, 255])
+}
+const BUTTON_TEXT: u32 = rgb(224, 236, 241);
+const BUTTON_DISABLED_TEXT: u32 = rgb(139, 155, 166);
+
+/// Semantic action colors are independent of transient hover and tab selection.
+fn button_accent(kind: &str) -> u32 {
+    match kind {
+        "primary-button" => rgb(106, 237, 193),
+        "exit-button" => rgb(220, 125, 130),
+        "offense-button" | "offense-text" => rgb(255, 147, 119),
+        "defense-button" | "defense-text" => rgb(92, 191, 255),
+        "passive-button" | "passive-text" => rgb(159, 225, 138),
+        _ => rgb(88, 222, 239),
+    }
+}
+fn button_tone(color: u32, strength: f32) -> u32 {
+    let [r, g, b, _] = color.to_le_bytes();
+    rgb(
+        (7.0 + r as f32 * strength).min(255.0) as u8,
+        (12.0 + g as f32 * strength).min(255.0) as u8,
+        (18.0 + b as f32 * strength).min(255.0) as u8,
+    )
+}
+fn intersection(a: [f32; 4], b: [f32; 4]) -> [f32; 4] {
+    let left = a[0].max(b[0]);
+    let top = a[1].max(b[1]);
+    [
+        left,
+        top,
+        ((a[0] + a[2]).min(b[0] + b[2]) - left).max(0.0),
+        ((a[1] + a[3]).min(b[1] + b[3]) - top).max(0.0),
+    ]
+}
+
 #[derive(Debug, Default, Deserialize)]
 #[serde(default)]
 pub struct UiScene {
@@ -30,6 +66,8 @@ pub struct UiNode {
     pub font: f32,
     pub value: f32,
     pub active: bool,
+    /// Persistent navigation state; hover/focus remains `active`.
+    pub selected: bool,
     pub disabled: bool,
     pub clip: Option<[f32; 4]>,
 }
@@ -403,7 +441,15 @@ impl Painter<'_> {
             1.0 / (1.0 / fit).ceil()
         };
         let local = Transform {
-            position: Vec2::new(rect[0] + rect[2] * 0.5, rect[1] + rect[3] * 0.5 + y_offset),
+            position: Vec2::new(
+                rect[0] + rect[2] * 0.5,
+                rect[1]
+                    + rect[3] * 0.5
+                    + y_offset.clamp(
+                        -(rect[3] - art.body.height as f32 * scale).max(0.0) * 0.5,
+                        (rect[3] - art.body.height as f32 * scale).max(0.0) * 0.5,
+                    ),
+            ),
             rotation,
             scale: Vec2::splat(scale),
         };
@@ -659,6 +705,109 @@ impl Painter<'_> {
             }
         }
     }
+    fn button_label(&mut self, node: &UiNode, font: f32, color: u32) {
+        let r = node.rect;
+        let padding_x = if r[2] < 40.0 { 2.0 } else { 6.0 };
+        let width = (r[2] - padding_x * 2.0).max(0.0);
+        let height = (r[3] - if node.kind == "nav-tab" { 5.0 } else { 4.0 }).max(0.0);
+        if width < RoyaleMono::WIDTH || height < RoyaleMono::HEIGHT {
+            return;
+        }
+        let mut label: String = node
+            .text
+            .chars()
+            .take(TEXT_CHARS)
+            .map(|c| if c.is_whitespace() { ' ' } else { c })
+            .collect();
+        let characters = label.chars().count();
+        let units = (characters as f32 * RoyaleMono::ADVANCE - 1.0).max(RoyaleMono::WIDTH);
+        let font = font
+            .min((width / units).floor().max(1.0))
+            .min((height / RoyaleMono::HEIGHT).floor().max(1.0));
+        let columns = ((width + font) / (RoyaleMono::ADVANCE * font)).floor() as usize;
+        if characters > columns {
+            let visible = if columns >= 4 { columns - 3 } else { columns };
+            if let Some((byte, _)) = label.char_indices().nth(visible) {
+                label.truncate(byte);
+            }
+            if columns >= 4 {
+                label.push_str("...");
+            }
+        }
+        let content = [r[0] + padding_x, r[1] + 2.0, width, height];
+        let previous_clip = self.clip;
+        self.clip = Some(previous_clip.map_or(content, |clip| intersection(content, clip)));
+        self.text(content, &label, font, color, true);
+        self.clip = previous_clip;
+    }
+    fn settings_label(&mut self, rect: [f32; 4], text: &str, font: f32, color: u32) {
+        if rect[2] < RoyaleMono::WIDTH || rect[3] < RoyaleMono::HEIGHT {
+            return;
+        }
+        let previous_clip = self.clip;
+        self.clip = Some(previous_clip.map_or(rect, |clip| intersection(rect, clip)));
+        self.text(rect, text, font, color, false);
+        self.clip = previous_clip;
+    }
+    fn semantic_button(&mut self, node: &UiNode, font: f32) {
+        let r = node.rect;
+        let accent = button_accent(&node.kind);
+        let selected = node.kind == "nav-tab" && node.selected;
+        let active = node.active && !node.disabled;
+        let fill = if node.disabled {
+            rgb(10, 16, 22)
+        } else {
+            button_tone(
+                accent,
+                if selected {
+                    0.20
+                } else if active {
+                    0.14
+                } else {
+                    0.07
+                },
+            )
+        };
+        let rail = if node.disabled {
+            rgb(51, 64, 74)
+        } else if selected || active {
+            accent
+        } else {
+            button_tone(accent, 0.40)
+        };
+        if r[2] < 3.0 || r[3] < 3.0 {
+            self.rect(r, fill);
+            return;
+        }
+        // Stepped corners, continuous rails and one quiet inner bevel.
+        self.rect([r[0] + 1.0, r[1], r[2] - 2.0, r[3]], fill);
+        self.rect([r[0], r[1] + 1.0, r[2], r[3] - 2.0], fill);
+        self.rect([r[0] + 1.0, r[1], r[2] - 2.0, 1.0], rail);
+        self.rect([r[0] + 1.0, r[1] + r[3] - 1.0, r[2] - 2.0, 1.0], rail);
+        self.rect([r[0], r[1] + 1.0, 1.0, r[3] - 2.0], rail);
+        self.rect([r[0] + r[2] - 1.0, r[1] + 1.0, 1.0, r[3] - 2.0], rail);
+        if selected && r[2] >= 10.0 && r[3] >= 10.0 {
+            self.rect(
+                [r[0] + 3.0, r[1] + r[3] - 3.0, r[2] - 6.0, 2.0],
+                if node.disabled {
+                    BUTTON_DISABLED_TEXT
+                } else {
+                    accent
+                },
+            );
+        }
+        self.button_label(
+            node,
+            font,
+            if node.disabled {
+                BUTTON_DISABLED_TEXT
+            } else if selected {
+                accent
+            } else {
+                BUTTON_TEXT
+            },
+        );
+    }
     fn node(&mut self, node: &UiNode, time: f32, reduced: bool) {
         let r = node.rect;
         let font = if node.font.is_finite() {
@@ -675,6 +824,17 @@ impl Painter<'_> {
         };
         match node.kind.as_str() {
             "text" => self.text(r, &node.text, font, color, false),
+            "offense-text" | "defense-text" | "passive-text" => self.text(
+                r,
+                &node.text,
+                font,
+                if node.disabled {
+                    BUTTON_DISABLED_TEXT
+                } else {
+                    button_accent(&node.kind)
+                },
+                false,
+            ),
             "panel" => self.frame("panel", r, node.active, node.disabled),
             "console-panel" => self.console_panel(r),
             "portrait" => self.portrait(node, time, reduced),
@@ -710,32 +870,10 @@ impl Painter<'_> {
             }
             "button" => {
                 self.frame("button", r, node.active, node.disabled);
-                let width = (r[2] - 12.0).max(5.0);
-                let height = (r[3] - 6.0).max(7.0);
-                let characters = node.text.chars().take(256).count();
-                let units = (characters as f32 * 6.0 - 1.0).max(5.0);
-                let font = font
-                    .min((width / units).floor().max(1.0))
-                    .min((height / 7.0).floor().max(1.0));
-                let label: String = node
-                    .text
-                    .chars()
-                    .take(((width + font) / (6.0 * font)).floor().max(1.0) as usize)
-                    .collect();
-                let label_height = height.max(7.0 * font);
-                self.text(
-                    [
-                        r[0] + 6.0,
-                        r[1] + (r[3] - label_height) * 0.5,
-                        width,
-                        label_height,
-                    ],
-                    &label,
-                    font,
-                    color,
-                    true,
-                );
+                self.button_label(node, font, color);
             }
+            "nav-tab" | "primary-button" | "exit-button" | "offense-button" | "defense-button"
+            | "passive-button" => self.semantic_button(node, font),
             "logo" => {
                 let width = ASSETS
                     .sprites
@@ -760,20 +898,22 @@ impl Painter<'_> {
                 self.artwork("seal", r, rotation, 0.0, shimmer, node.disabled);
             }
             "slider" => {
+                if r[2] < 8.0 || r[3] < 7.0 {
+                    return;
+                }
                 let value = if node.value.is_finite() {
                     node.value.clamp(0.0, 1.0)
                 } else {
                     0.0
                 };
-                if r[3] >= 20.0 {
-                    self.text(
-                        [r[0], r[1], r[2], 8.0 * font],
-                        &node.text,
-                        font,
-                        color,
-                        false,
-                    );
-                }
+                // The bottom strip belongs to the slider; a right gutter also
+                // leaves room for semantic value/readout content in the shell.
+                self.settings_label(
+                    [r[0], r[1], (r[2] - 28.0).max(0.0), (r[3] - 12.0).max(0.0)],
+                    &node.text,
+                    font,
+                    color,
+                );
                 let track = [r[0] + 4.0, r[1] + r[3] - 7.0, (r[2] - 8.0).max(0.0), 3.0];
                 self.rect(track, 0xff_51402c);
                 self.rect(
@@ -786,12 +926,17 @@ impl Painter<'_> {
                 );
             }
             "toggle" => {
-                let size = r[3].min(12.0).floor();
-                self.rect([r[0], r[1], size, size], DIM);
+                let size = r[2].min(r[3]).min(12.0).floor();
+                if size < 1.0 {
+                    return;
+                }
+                let x = r[0] + r[2] - size;
+                let y = r[1] + (r[3] - size) * 0.5;
+                self.rect([x, y, size, size], DIM);
                 self.rect(
                     [
-                        r[0] + 1.0,
-                        r[1] + 1.0,
+                        x + 1.0,
+                        y + 1.0,
                         (size - 2.0).max(0.0),
                         (size - 2.0).max(0.0),
                     ],
@@ -800,20 +945,19 @@ impl Painter<'_> {
                 if node.value > 0.5 {
                     self.rect(
                         [
-                            r[0] + 3.0,
-                            r[1] + 3.0,
+                            x + 3.0,
+                            y + 3.0,
                             (size - 6.0).max(0.0),
                             (size - 6.0).max(0.0),
                         ],
                         if node.disabled { DIM } else { CYAN },
                     );
                 }
-                self.text(
-                    [r[0] + size + 7.0, r[1], (r[2] - size - 7.0).max(0.0), r[3]],
+                self.settings_label(
+                    [r[0], r[1], (r[2] - size - 8.0).max(0.0), r[3]],
                     &node.text,
                     font,
                     color,
-                    false,
                 );
             }
             "rank" => {
@@ -1403,3 +1547,7 @@ mod tests {
 #[cfg(test)]
 #[path = "ui_wrap_tests.rs"]
 mod wrapping_tests;
+
+#[cfg(test)]
+#[path = "ui_button_tests.rs"]
+mod semantic_button_tests;
