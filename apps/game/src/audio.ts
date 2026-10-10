@@ -286,6 +286,17 @@ export class AudioEngine {
       this.noiseBurst(voice, now, duration, cutoff, gain, type);
     };
     switch (event.kind) {
+      case "mote-charge":
+        // Original short rising chirp; cancellation leaves no sustained tone.
+        tone(330, 660, 0.09, "square", 0.045);
+        tone(990, 1320, 0.075, "triangle", 0.055, 0.025);
+        break;
+      case "mote-pulse":
+        // One dry discharge for the actual actor pulse, through the shared bus.
+        tone(720, 180, 0.07, "square", 0.06);
+        tone(92, 52, 0.095, "triangle", 0.07);
+        noise(0.055, 1750, 0.035, "bandpass");
+        break;
       case "shot":
         tone(960, 220, 0.075, "square", 0.065);
         tone(190, 100, 0.045, "triangle", 0.08);

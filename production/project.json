@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 257,
+  "revision": 281,
   "name": "Galaxy Royale",
   "phase": "Foundation → playable vertical slice",
-  "updatedAt": "2026-10-10T20:37:01.708Z",
+  "updatedAt": "2026-10-10T21:09:40.335Z",
   "tasks": [
     {
       "id": "studio",
@@ -2564,9 +2564,9 @@
     {
       "id": "task-4a0debda",
       "title": "Authored Radiation Mote charge and pulse audio",
-      "description": "Original procedural Mote charge/pulse SFX and GameEvent candidate remain frozen only in work/mote-audio-candidate. Independent QA pinned inputs and reran6nativeevent+7actualAudioEngineAPItests; author also passed16existingMote,strictnative/TS. Once-per-phase charge and actualactorBullet-producingpulse retain dispatch/timing/reservations. Accepted for bounded future integration;128eventqueue/16voice stealing and gain semantics documented. Current5739067 game/package is unchanged; rootintegration,browserDSP/listening/mute/recovery and phones pending.",
+      "description": "Mote charge and pulse events and their original procedural sounds are integrated. Six Game regressions and six recorded-API AudioEngine checks pass within the 242 Rust and 79 shell tests. A separate page using the unchanged production AudioEngine recorded six real browser DSP scenarios: charge, pulse, music mix, master mute, suspend/resume and a 100-cue burst bounded to 16 voices. Disposal closed the native context and cleared voices and graph nodes. These were explicitly declared cues. Human listening, combat readability and phone audio validation remain pending, so this task stays in Review.",
       "department": "Gameplay / Audio",
-      "owner": "Gameplay specialist / Independent QA",
+      "owner": "Producer / actual specialist reviews",
       "status": "review",
       "priority": "normal",
       "dependencies": [
@@ -2598,20 +2598,60 @@
           "label": "Independent frozen actualevent/AudioEngineQA",
           "kind": "note",
           "path": "artifacts/mote-audio-candidate-qa-review.md"
+        },
+        {
+          "label": "Frozen exact audio/Scar composition and parity",
+          "kind": "note",
+          "path": "work/next-slice-integration-proof/README.md"
+        },
+        {
+          "label": "Current production native tests",
+          "kind": "note",
+          "path": "artifacts/scar-audio-rust-tests.log"
+        },
+        {
+          "label": "Current normal dual-WASM package",
+          "kind": "note",
+          "path": "artifacts/scar-audio-normal-build.log"
+        },
+        {
+          "label": "Actual normal browser observations and declared fixture scope",
+          "kind": "note",
+          "path": "artifacts/scar-audio-browser-validation.md"
+        },
+        {
+          "label": "Actual browser voice cap and cleanup observation",
+          "kind": "note",
+          "path": "artifacts/mote-audio-cap-browser.txt"
+        },
+        {
+          "label": "Actual browser native AudioEngine dispose observation",
+          "kind": "note",
+          "path": "artifacts/mote-audio-dispose-browser.txt"
+        },
+        {
+          "label": "Six actual native browser DSP captures and independent decoding review",
+          "kind": "note",
+          "path": "artifacts/mote-browser-dsp-review.md"
+        },
+        {
+          "label": "Pinned measured output and raw capture identities",
+          "kind": "note",
+          "path": "artifacts/mote-browser-dsp-evidence.json"
         }
       ],
       "blocker": "",
-      "revision": 3,
+      "revision": 8,
       "createdAt": "2026-10-10T20:18:30.712Z",
-      "updatedAt": "2026-10-10T20:26:44.368Z"
+      "updatedAt": "2026-10-10T21:09:40.266Z"
     },
     {
       "id": "task-59dfc802",
       "title": "Radial Wastes distant pixel planet and gaseous layers",
-      "description": "Original Isotope Scar packed-cell candidate is independently accepted for bounded future integration. Author six tests, Engine eleven baseline/candidate-linked checks plus162 far/reflected/zoom packets, and QA four public-API boundary tests plus twelve byte-identical extracted frames pass. Full4,854/reduced1,411 occupied quads, shared-budget atomic admission, deterministic cosmetic drift/shimmer and Reduced Motion are preserved. Current published5739067 source is unchanged. Root production integration, natural seeded visibility/priority and actual both-renderer threat contrast/performance remain pending.",
+      "description": "Isotope Scar is integrated into the seeded Radial Wastes background using the existing parallax and shared pixel budgets. Native extraction tests and independent reviews pass. Normal WebGPU and WebGL2 captures show the detailed planet with the ship in front; mouse-wheel zoom reaches 0.60 and 1.60 while the UI stays fixed. Reduced visual settings were checked at a separate seeded location. The bounded asset and presentation criteria are complete. Moving combat contrast, human polish, physical phones and soak testing remain pending. These captures use a declared seed and diagnostic travel.",
       "department": "Art / Engine",
-      "owner": "Gameplay / Engine / Independent QA",
-      "status": "review",
+      "owner": "Producer / actual specialist reviews",
+      "status": "complete",
       "priority": "normal",
       "dependencies": [
         "engine",
@@ -2624,7 +2664,7 @@
         },
         {
           "text": "Independent review, production integration and actual zoom/bothrenderer presentation",
-          "met": false
+          "met": true
         }
       ],
       "evidence": [
@@ -2652,20 +2692,45 @@
           "label": "Independent actual packet/budget QA",
           "kind": "note",
           "path": "artifacts/isotope-scar-qa-review.md"
+        },
+        {
+          "label": "Independent pinned source/art contract review",
+          "kind": "note",
+          "path": "work/next-slice-art-review/REVIEW.md"
+        },
+        {
+          "label": "Durable actual seeded region regression tests",
+          "kind": "note",
+          "path": "work/next-slice-integration-proof/durable-region-tests.rs"
+        },
+        {
+          "label": "Current production native tests",
+          "kind": "note",
+          "path": "artifacts/scar-audio-rust-tests.log"
+        },
+        {
+          "label": "Actual normal browser observations and declared fixture scope",
+          "kind": "note",
+          "path": "artifacts/scar-audio-browser-validation.md"
+        },
+        {
+          "label": "Current normal package review",
+          "kind": "note",
+          "path": "artifacts/scar-audio-package-review.md"
         }
       ],
       "blocker": "",
-      "revision": 3,
+      "revision": 6,
       "createdAt": "2026-10-10T20:21:08.517Z",
-      "updatedAt": "2026-10-10T20:37:01.665Z"
+      "updatedAt": "2026-10-10T21:08:50.043Z"
     },
     {
       "id": "task-403cf3c4",
       "title": "Original pixel arena patches and Royale victory emblem",
-      "description": "Gameplay/art specialist is actively authoring distinct tiny emblems for the eight actual champion themes and a Royale victory emblem, owned work/champion-patch-art only. Packed indexed occupied-cell UI objects should remain readable at small scales, use discreet earned shimmer with Reduced Motion and reuse existing pixel UI groups/font/layers. Production, saves and physics remain unchanged; independent review and actual browser integration are pending.",
+      "description": "Nine original champion and Royale emblems now render through the native UI pixel extractor. Independent composition tests pass within the existing 60,000-quad budget. Browser captures and 59 measured icon boxes confirm the authored 24/32-unit sizes, representative scroll clipping and a narrow one-column roster. The ninth gold emblem is visibly intact in WebGL2. Earned state and victory were supplied by declared presentation saves; these captures do not claim naturally earned campaign progress. Human animation judgment, the complete gallery and phone validation remain pending.",
       "department": "Art / Pixel UI",
-      "owner": "/root/gameplay_design",
-      "status": "active",
+      "owner": "Producer / actual specialist reviews",
+      "status": "complete",
       "priority": "normal",
       "dependencies": [
         "engine"
@@ -2673,11 +2738,11 @@
       "acceptanceCriteria": [
         {
           "text": "Original packed emblem atlas, provenance/contact sheet and meaningful actual-engine extraction evidence",
-          "met": false
+          "met": true
         },
         {
           "text": "Independent review, production integration and responsive both-renderer UI presentation",
-          "met": false
+          "met": true
         }
       ],
       "evidence": [
@@ -2685,12 +2750,86 @@
           "label": "Observed native specialist assignment",
           "kind": "note",
           "details": "Native Gameplay agent is Running with the champion-patch-art task after freezing Isotope Scar; root owns production integration."
+        },
+        {
+          "label": "Original packed art, source and candidate extraction",
+          "kind": "note",
+          "path": "work/champion-patch-art/README.md"
+        },
+        {
+          "label": "Independent exact candidate review",
+          "kind": "note",
+          "path": "work/champion-patch-engine-review/REVIEW.md"
+        },
+        {
+          "label": "Actual current shell regressions",
+          "kind": "note",
+          "path": "artifacts/scar-audio-shell-tests.log"
+        },
+        {
+          "label": "Actual normal browser observations and declared fixture scope",
+          "kind": "note",
+          "path": "artifacts/scar-audio-browser-validation.md"
+        },
+        {
+          "label": "Independent pinned production extraction review",
+          "kind": "note",
+          "path": "artifacts/champion-patch-production-review.md"
+        },
+        {
+          "label": "Independent captured browser fit/clipping review",
+          "kind": "note",
+          "path": "artifacts/champion-patch-browser-review.md"
         }
       ],
       "blocker": "",
-      "revision": 1,
+      "revision": 4,
       "createdAt": "2026-10-10T20:30:46.651Z",
-      "updatedAt": "2026-10-10T20:30:46.651Z"
+      "updatedAt": "2026-10-10T21:08:50.076Z"
+    },
+    {
+      "id": "task-6c38f853",
+      "title": "QA world-coordinate warp with retained-run bookkeeping",
+      "description": "The console WARP command accepts finite bounded world coordinates when the existing QA flag is present. It uses Haven bookkeeping, including banking collected cargo, recording a run and forfeiting an active duel; the visible response states this. Four actual Game tests cover invalid input, once-only banking and isolated quest reward suppression. Normal browser travel and return to Haven are verified. The bounded diagnostic task is complete.",
+      "department": "Engine / QA",
+      "owner": "Producer / Independent QA",
+      "status": "complete",
+      "priority": "normal",
+      "dependencies": [
+        "engine",
+        "task-168fe92e"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Finite bounded coordinates, invalid-input invariance, once-only existing run banking and isolated quest reward guard have actual native evidence",
+          "met": true
+        },
+        {
+          "text": "Actual normal browser console warp and dock reset are verified without inventing reward or natural-play acceptance",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual source integration and four Game regression scope",
+          "kind": "note",
+          "path": "artifacts/scar-audio-integration-validation.md"
+        },
+        {
+          "label": "Actual242Rust results",
+          "kind": "note",
+          "path": "artifacts/scar-audio-rust-tests.log"
+        },
+        {
+          "label": "Actual normal browser observations and declared fixture scope",
+          "kind": "note",
+          "path": "artifacts/scar-audio-browser-validation.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 3,
+      "createdAt": "2026-10-10T20:55:40.331Z",
+      "updatedAt": "2026-10-10T21:08:50.102Z"
     }
   ],
   "reviews": [
@@ -3193,6 +3332,46 @@
       ],
       "taskIds": [
         "task-59dfc802"
+      ]
+    },
+    {
+      "id": "review-40cd6472",
+      "title": "Actual asynchronous integration discussion: pixel scenery, arena emblems and Mote sound",
+      "body": "Specialists froze independent original Scar and9emblem assets and Mote sound/event patches. Engine accepted shared-budget affine extraction and identified strict24logical fit as a bridge edge. Production composed the exact sound/Scar code against immutable5739067 snapshots, verified30focused native tests,7audioAPItests and1800baseline-parity ticks, then supplied three durable no-observer region regressions. Gameplay independently accepted the source contract and corrected a nonblocking zoom1.6 budget caption: actual5612->758, not5200->346. Root integrated exact candidates, nine-index UI selection and narrow center-preserving bridge normalization, with242Rust/79shell/nativeClippy/normaldualWASM evidence. QA identified WARP reset bookkeeping and quest claim scope; root explicitly states banking/forfeit and guards isolated site claims, with four actualGame tests. Real browser, listening, natural encounters, phones and current private publication are still separate gates.",
+      "author": "Producer",
+      "source": "Actual frozen specialist reviews and production integration checks",
+      "createdAt": "2026-10-10T20:55:40.350Z",
+      "participants": [
+        "Gameplay / Art specialist",
+        "Engine specialist",
+        "Production specialist / Independent QA",
+        "Producer / Integrator"
+      ],
+      "taskIds": [
+        "task-4a0debda",
+        "task-59dfc802",
+        "task-403cf3c4",
+        "task-6c38f853"
+      ]
+    },
+    {
+      "id": "review-69a9396b",
+      "title": "Actual browser review: pixel scenery, authored emblems and native audio output",
+      "body": "Producer exercised the normal current86ea dualrenderer package with explicit strictly valid presentation imports and supported WARP/SCENEDOCK controls. Engine inspected actual DOM and six captures, accepted59boxes within authored24/32tolerance, partialscrollclipping and visible9th goldGLemblem; exact candidate/native reviews remain separately frozen. Production verified72inputs/18assets unchanged and corrected evidence labels: intermediate0.99 is not0.60bound, requested853 viewport actually854, fractional positioning atscale1 differs from fractionalboxdimensions atscale2.4, deepGPUstandingsimage is not visible9themblem. ActualminGL0.60/maxGPU1.60UI533x300 andcheckedReducedsettings are recorded. Producer ran6separate nativeAudioEngine recordings anddisposedtheactualgraph; audio specialist is pinning realDSPmeasurement scope. Bounded Scar/emblem/WARP criteria meet their scope; human listening, moving/crowded contrast, complete natural campaign, phones/soak and authenticatedremoteplay remain Pending. Original user4173profile untouched; temporary4186profile restored and QA tabs/viewport cleaned.",
+      "author": "Producer",
+      "source": "Actual normal browser captures and independent specialist review",
+      "createdAt": "2026-10-10T21:08:24.391Z",
+      "participants": [
+        "Producer / browser operator",
+        "Engine specialist / captured UI reviewer",
+        "Production specialist / independent evidence reviewer",
+        "Gameplay / Art / Audio specialist"
+      ],
+      "taskIds": [
+        "task-59dfc802",
+        "task-403cf3c4",
+        "task-6c38f853",
+        "task-4a0debda"
       ]
     }
   ],
@@ -6372,6 +6551,246 @@
       "author": "Producer",
       "source": "Actual independently accepted frozen background candidate and observed next specialist assignments",
       "createdAt": "2026-10-10T20:37:01.708Z"
+    },
+    {
+      "id": "94dfa6f0-4e94-452c-9475-502e346b33ac",
+      "revision": 258,
+      "kind": "task.update",
+      "itemId": "task-4a0debda",
+      "title": "Authored Radiation Mote charge and pulse audio",
+      "author": "Producer",
+      "source": "Actual frozen specialist reviews and production integration checks",
+      "createdAt": "2026-10-10T20:54:39.741Z"
+    },
+    {
+      "id": "f8f240ca-e893-4715-ba1b-56db434a097b",
+      "revision": 259,
+      "kind": "task.update",
+      "itemId": "task-4a0debda",
+      "title": "Authored Radiation Mote charge and pulse audio",
+      "author": "Producer",
+      "source": "Actual frozen specialist reviews and production integration checks",
+      "createdAt": "2026-10-10T20:55:40.256Z"
+    },
+    {
+      "id": "876db35e-6f17-4a7d-89c4-8d76631f0c2d",
+      "revision": 260,
+      "kind": "task.update",
+      "itemId": "task-59dfc802",
+      "title": "Radial Wastes distant pixel planet and gaseous layers",
+      "author": "Producer",
+      "source": "Actual frozen specialist reviews and production integration checks",
+      "createdAt": "2026-10-10T20:55:40.289Z"
+    },
+    {
+      "id": "cbbfc172-e4c2-4285-b507-277839853270",
+      "revision": 261,
+      "kind": "task.update",
+      "itemId": "task-403cf3c4",
+      "title": "Original pixel arena patches and Royale victory emblem",
+      "author": "Producer",
+      "source": "Actual frozen specialist reviews and production integration checks",
+      "createdAt": "2026-10-10T20:55:40.315Z"
+    },
+    {
+      "id": "06e61df7-918f-4c13-b37c-cee222077047",
+      "revision": 262,
+      "kind": "task.create",
+      "itemId": "task-6c38f853",
+      "title": "QA world-coordinate warp with retained-run bookkeeping",
+      "author": "Producer",
+      "source": "Actual frozen specialist reviews and production integration checks",
+      "createdAt": "2026-10-10T20:55:40.331Z"
+    },
+    {
+      "id": "42c37d51-885b-4fa9-a66f-5daf1e1cf077",
+      "revision": 263,
+      "kind": "review",
+      "itemId": "review-40cd6472",
+      "title": "Actual asynchronous integration discussion: pixel scenery, arena emblems and Mote sound",
+      "author": "Producer",
+      "source": "Actual frozen specialist reviews and production integration checks",
+      "createdAt": "2026-10-10T20:55:40.350Z"
+    },
+    {
+      "id": "3ab44546-04cb-4578-9585-8d5b6d91d67a",
+      "revision": 264,
+      "kind": "run",
+      "itemId": "run-dd7b9fb2",
+      "title": "Producer / Integrator · running",
+      "author": "Producer",
+      "source": "Actual frozen specialist reviews and production integration checks",
+      "createdAt": "2026-10-10T20:55:40.362Z"
+    },
+    {
+      "id": "ccb02d4f-6ba8-499e-933b-8b0ebc4c33f9",
+      "revision": 265,
+      "kind": "run",
+      "itemId": "run-e97e5f81",
+      "title": "Engine specialist · running",
+      "author": "Producer",
+      "source": "Actual frozen specialist reviews and production integration checks",
+      "createdAt": "2026-10-10T20:55:40.378Z"
+    },
+    {
+      "id": "5821a82f-5730-4c47-9d14-883590e66a1e",
+      "revision": 266,
+      "kind": "run",
+      "itemId": "run-76b318fa",
+      "title": "Production / Independent QA · running",
+      "author": "Producer",
+      "source": "Actual frozen specialist reviews and production integration checks",
+      "createdAt": "2026-10-10T20:55:40.394Z"
+    },
+    {
+      "id": "b867c21d-3d1e-4030-9866-dcb5f9fe50ba",
+      "revision": 267,
+      "kind": "run",
+      "itemId": "run-d5d1d67f",
+      "title": "Gameplay / Art / Audio specialist · running",
+      "author": "Producer",
+      "source": "Actual frozen specialist reviews and production integration checks",
+      "createdAt": "2026-10-10T20:55:40.410Z"
+    },
+    {
+      "id": "1d2e2d90-041a-4fbc-a09d-e89ff8516973",
+      "revision": 268,
+      "kind": "task.update",
+      "itemId": "task-59dfc802",
+      "title": "Radial Wastes distant pixel planet and gaseous layers",
+      "author": "Producer",
+      "source": "Actual normal browser captures and independent specialist review",
+      "createdAt": "2026-10-10T21:08:24.278Z"
+    },
+    {
+      "id": "caebf04d-f56b-44a5-bf4d-9c615e9cb946",
+      "revision": 269,
+      "kind": "task.update",
+      "itemId": "task-403cf3c4",
+      "title": "Original pixel arena patches and Royale victory emblem",
+      "author": "Producer",
+      "source": "Actual normal browser captures and independent specialist review",
+      "createdAt": "2026-10-10T21:08:24.310Z"
+    },
+    {
+      "id": "1652a977-bdad-4b6b-895d-6093bf61586f",
+      "revision": 270,
+      "kind": "task.update",
+      "itemId": "task-6c38f853",
+      "title": "QA world-coordinate warp with retained-run bookkeeping",
+      "author": "Producer",
+      "source": "Actual normal browser captures and independent specialist review",
+      "createdAt": "2026-10-10T21:08:24.342Z"
+    },
+    {
+      "id": "20cb771c-98c8-4b67-a179-279372a5ca73",
+      "revision": 271,
+      "kind": "task.update",
+      "itemId": "task-4a0debda",
+      "title": "Authored Radiation Mote charge and pulse audio",
+      "author": "Producer",
+      "source": "Actual normal browser captures and independent specialist review",
+      "createdAt": "2026-10-10T21:08:24.375Z"
+    },
+    {
+      "id": "fe47d6bb-1c70-4e33-9e38-cf910d9c84cb",
+      "revision": 272,
+      "kind": "review",
+      "itemId": "review-69a9396b",
+      "title": "Actual browser review: pixel scenery, authored emblems and native audio output",
+      "author": "Producer",
+      "source": "Actual normal browser captures and independent specialist review",
+      "createdAt": "2026-10-10T21:08:24.391Z"
+    },
+    {
+      "id": "ef65395f-119e-4475-a653-30ce03726aff",
+      "revision": 273,
+      "kind": "task.update",
+      "itemId": "task-59dfc802",
+      "title": "Radial Wastes distant pixel planet and gaseous layers",
+      "author": "Producer",
+      "source": "Clarified human-readable acceptance scope",
+      "createdAt": "2026-10-10T21:08:50.043Z"
+    },
+    {
+      "id": "e1613a3b-62a7-4fe0-ae63-7a3e45fd61b7",
+      "revision": 274,
+      "kind": "task.update",
+      "itemId": "task-403cf3c4",
+      "title": "Original pixel arena patches and Royale victory emblem",
+      "author": "Producer",
+      "source": "Clarified human-readable acceptance scope",
+      "createdAt": "2026-10-10T21:08:50.076Z"
+    },
+    {
+      "id": "f8fedd9b-b35d-4643-a152-dd5c099db2a7",
+      "revision": 275,
+      "kind": "task.update",
+      "itemId": "task-6c38f853",
+      "title": "QA world-coordinate warp with retained-run bookkeeping",
+      "author": "Producer",
+      "source": "Clarified human-readable acceptance scope",
+      "createdAt": "2026-10-10T21:08:50.102Z"
+    },
+    {
+      "id": "7b364d17-e5d0-4713-bed5-7cb52d0db1fb",
+      "revision": 276,
+      "kind": "task.update",
+      "itemId": "task-4a0debda",
+      "title": "Authored Radiation Mote charge and pulse audio",
+      "author": "Producer",
+      "source": "Clarified human-readable acceptance scope",
+      "createdAt": "2026-10-10T21:08:50.133Z"
+    },
+    {
+      "id": "1244512b-b1a8-443a-b7c5-bf88f87b3181",
+      "revision": 277,
+      "kind": "task.update",
+      "itemId": "task-4a0debda",
+      "title": "Authored Radiation Mote charge and pulse audio",
+      "author": "Producer",
+      "source": "Actual release preparation and specialist handoffs",
+      "createdAt": "2026-10-10T21:09:40.266Z"
+    },
+    {
+      "id": "996d57a1-07f7-49d5-b135-8b752bd17514",
+      "revision": 278,
+      "kind": "run",
+      "itemId": "run-9112448e",
+      "title": "Producer / Integrator · running",
+      "author": "Producer",
+      "source": "Actual release preparation and specialist handoffs",
+      "createdAt": "2026-10-10T21:09:40.289Z"
+    },
+    {
+      "id": "590defc1-4619-4e4b-abe8-4f9a8f66dfd2",
+      "revision": 279,
+      "kind": "run",
+      "itemId": "run-ae3ccca3",
+      "title": "Engine specialist · running",
+      "author": "Producer",
+      "source": "Actual release preparation and specialist handoffs",
+      "createdAt": "2026-10-10T21:09:40.304Z"
+    },
+    {
+      "id": "b7d99609-6b15-4cf0-96eb-20d7c7631649",
+      "revision": 280,
+      "kind": "run",
+      "itemId": "run-d30d237c",
+      "title": "Production / Independent QA · running",
+      "author": "Producer",
+      "source": "Actual release preparation and specialist handoffs",
+      "createdAt": "2026-10-10T21:09:40.320Z"
+    },
+    {
+      "id": "c607b119-c4bc-473f-8f98-0861b1061a51",
+      "revision": 281,
+      "kind": "run",
+      "itemId": "run-3a5e1474",
+      "title": "Gameplay / Art / Audio specialist · running",
+      "author": "Producer",
+      "source": "Actual release preparation and specialist handoffs",
+      "createdAt": "2026-10-10T21:09:40.335Z"
     }
   ],
   "runRecords": [
@@ -8706,6 +9125,185 @@
       "author": "Producer",
       "source": "Actual independently accepted frozen background candidate and observed next specialist assignments",
       "createdAt": "2026-10-10T20:37:01.708Z"
+    },
+    {
+      "id": "run-dd7b9fb2",
+      "title": "Producer / Integrator · running",
+      "agentId": "/root",
+      "agentLabel": "Producer / Integrator",
+      "state": "running",
+      "observedAt": "2026-10-10T20:55:40.355Z",
+      "taskIds": [
+        "slice-review",
+        "task-6c38f853"
+      ],
+      "summary": "Integrated reviewed audio/Scar/emblems and warp fixes; current normal cachegalaxy-86ea0d1b0d17f148 built. Preparing actual normal browser and release evidence.",
+      "evidence": [
+        {
+          "label": "Current normal build",
+          "kind": "note",
+          "path": "artifacts/scar-audio-normal-build.log"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual frozen specialist reviews and production integration checks",
+      "createdAt": "2026-10-10T20:55:40.362Z"
+    },
+    {
+      "id": "run-e97e5f81",
+      "title": "Engine specialist · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Engine specialist",
+      "state": "running",
+      "observedAt": "2026-10-10T20:55:40.355Z",
+      "taskIds": [
+        "task-403cf3c4"
+      ],
+      "summary": "Running separately pinned read-only production UI/bridge composition review after exact candidate acceptance.",
+      "evidence": [
+        {
+          "label": "Immutable candidate review",
+          "kind": "note",
+          "path": "work/champion-patch-engine-review/REVIEW.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual frozen specialist reviews and production integration checks",
+      "createdAt": "2026-10-10T20:55:40.378Z"
+    },
+    {
+      "id": "run-76b318fa",
+      "title": "Production / Independent QA · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "Production / Independent QA",
+      "state": "running",
+      "observedAt": "2026-10-10T20:55:40.355Z",
+      "taskIds": [
+        "slice-review",
+        "task-6c38f853"
+      ],
+      "summary": "Running read-only current source/package/warp acceptance audit after exact immutable audio/Scar proof.",
+      "evidence": [
+        {
+          "label": "Immutable composition handoff",
+          "kind": "note",
+          "path": "work/next-slice-integration-proof/README.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual frozen specialist reviews and production integration checks",
+      "createdAt": "2026-10-10T20:55:40.394Z"
+    },
+    {
+      "id": "run-d5d1d67f",
+      "title": "Gameplay / Art / Audio specialist · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Gameplay / Art / Audio specialist",
+      "state": "running",
+      "observedAt": "2026-10-10T20:55:40.355Z",
+      "taskIds": [
+        "task-4a0debda",
+        "task-59dfc802"
+      ],
+      "summary": "Running a separate owned real-browser DSP/recording probe using unchanged hash-pinned AudioEngine; actual source review completed; no production writes.",
+      "evidence": [
+        {
+          "label": "Actual immutable source review",
+          "kind": "note",
+          "path": "work/next-slice-art-review/REVIEW.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual frozen specialist reviews and production integration checks",
+      "createdAt": "2026-10-10T20:55:40.410Z"
+    },
+    {
+      "id": "run-9112448e",
+      "title": "Producer / Integrator · running",
+      "agentId": "/root",
+      "agentLabel": "Producer / Integrator",
+      "state": "running",
+      "observedAt": "2026-10-10T21:09:40.273Z",
+      "taskIds": [
+        "slice-review"
+      ],
+      "summary": "Current source passes 242 Rust and 79 shell tests, normal dual-WASM build and bounded browser visual/DSP checks. Preparing exact source commit and existing private preview publication.",
+      "evidence": [
+        {
+          "label": "Current observed browser scope",
+          "kind": "note",
+          "path": "artifacts/scar-audio-browser-validation.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual release preparation and specialist handoffs",
+      "createdAt": "2026-10-10T21:09:40.289Z"
+    },
+    {
+      "id": "run-ae3ccca3",
+      "title": "Engine specialist · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Engine specialist",
+      "state": "running",
+      "observedAt": "2026-10-10T21:09:40.273Z",
+      "taskIds": [
+        "engine"
+      ],
+      "summary": "Emblem native and captured-browser reviews are frozen. Running a separate bounded actual-library CPU extraction benchmark; no browser/phone timing claim.",
+      "evidence": [
+        {
+          "label": "Actual browser observation review",
+          "kind": "note",
+          "path": "artifacts/champion-patch-browser-review.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual release preparation and specialist handoffs",
+      "createdAt": "2026-10-10T21:09:40.304Z"
+    },
+    {
+      "id": "run-d30d237c",
+      "title": "Production / Independent QA · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "Production / Independent QA",
+      "state": "running",
+      "observedAt": "2026-10-10T21:09:40.273Z",
+      "taskIds": [
+        "slice-review"
+      ],
+      "summary": "Reviewing current source, package, browser/DSP records and ledger before exact private publication. Earlier frozen package evidence remains intact.",
+      "evidence": [
+        {
+          "label": "Pinned current package review",
+          "kind": "note",
+          "path": "artifacts/scar-audio-package-review.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual release preparation and specialist handoffs",
+      "createdAt": "2026-10-10T21:09:40.320Z"
+    },
+    {
+      "id": "run-3a5e1474",
+      "title": "Gameplay / Art / Audio specialist · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Gameplay / Art / Audio specialist",
+      "state": "running",
+      "observedAt": "2026-10-10T21:09:40.273Z",
+      "taskIds": [
+        "task-4a0debda"
+      ],
+      "summary": "Six real browser audio recordings are pinned and independently decoded. Preparing a separate static scenery capture review; human listening remains pending.",
+      "evidence": [
+        {
+          "label": "Actual measured audio review",
+          "kind": "note",
+          "path": "artifacts/mote-browser-dsp-review.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual release preparation and specialist handoffs",
+      "createdAt": "2026-10-10T21:09:40.335Z"
     }
   ]
 }

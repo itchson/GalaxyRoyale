@@ -1,0 +1,143 @@
+{
+  "schema": 1,
+  "scope": "Unchanged real AudioEngine local browser probe plus six actual declared native captures.",
+  "owned": {
+    "README.md": {
+      "sha256": "a19d5d3ad3b3b5758acbbef74bc61fb5b3f1c230d3e9eadbfdab82198c219865",
+      "bytes": 7723
+    },
+    "REPORT.md": {
+      "sha256": "25f7054cf34c019e0074d26aeb8bd8e92b178957bbc9a5d4d1e2c44472a56a3b",
+      "bytes": 6429
+    },
+    "build.mjs": {
+      "sha256": "7889c7a0c86c57f15ca1edff515646650283101290c7b4dae216b3a75dd7160f",
+      "bytes": 2454
+    },
+    "server.mjs": {
+      "sha256": "d90c5da51d9dc0fd4718f98b7ffb8de4b3f032ad60b9da20449b4cb440ab1b6e",
+      "bytes": 4805
+    },
+    "http-preflight.mjs": {
+      "sha256": "c0b4d93ad9b4390adf4d9f88d0c5f3241e7e8024e58c19d0b3fbcc91f58ca51d",
+      "bytes": 2409
+    },
+    "http-preflight-results.json": {
+      "sha256": "60c301a27c5d99ab4a572a63c03252169886b3dc33e42c96118685fd84934e2c",
+      "bytes": 1746
+    },
+    "inspect-captures.py": {
+      "sha256": "03582a165b9f8796380b1bebdc5763094cb948a40f6529bad8ba34f023d1222a",
+      "bytes": 7617
+    },
+    "capture-inspection.json": {
+      "sha256": "a6e41e97958f230acb486e19e41624904bba3a4ffec73d0446c87d2cd046239e",
+      "bytes": 14450
+    },
+    "freeze.py": {
+      "sha256": "30b01a8e281715b5fc168041225829292eb40af5ecfe13d69bdf6d23ff6a16be",
+      "bytes": 2239
+    },
+    "source/audio.ts": {
+      "sha256": "d74adf461c889a12ea1b36ad5888fc35121a79710a20bee8b53aaa70b67c94e8",
+      "bytes": 17285
+    },
+    "source/probe.ts": {
+      "sha256": "2e6003d52c84c8800d2cadddc274a344aa23e9a256800408f8f61592b4af07e4",
+      "bytes": 20772
+    },
+    "public/audio.js": {
+      "sha256": "b6ad9a8f86900b4f3ae20ba3ac69814d9022ba93a4861c53e4fbff79af80e0de",
+      "bytes": 16525
+    },
+    "public/index.html": {
+      "sha256": "01c23cda40ca061d3901493bfe9759b5f02abef56d98c1d0f3b62483801ee7f7",
+      "bytes": 2680
+    },
+    "public/probe.js": {
+      "sha256": "a2fc99c92e96dfd30d1c2732823d093bda6c94284e16e93c43a40f8c2a75b4e0",
+      "bytes": 20174
+    },
+    "public/source-pin.json": {
+      "sha256": "f13e89099ab27fa3893488e4aa23670e6273d519f8eff4339af7f271ef9068d6",
+      "bytes": 624
+    },
+    "public/style.css": {
+      "sha256": "eb5fe44a485400de8a04de0149e0853f295bbeb5bd60c858a11de263a5e04258",
+      "bytes": 1376
+    },
+    "captures/qa-1791666237851-3790f738.json": {
+      "sha256": "fc80eddb6aaf71f536b642c76211632af18627b7c0b74e83de91a0e9013bc11c",
+      "bytes": 18563
+    },
+    "captures/qa-1791666237851-3790f738.webm": {
+      "sha256": "41feeaa37ae90344c2cfe39038bc7ec68f8b7d436790c46cd9c913ebae2e5d36",
+      "bytes": 14761
+    },
+    "captures/qa-1791666254186-d54a9f5a.json": {
+      "sha256": "58a1cb44347770fe8a3ee798051631ca7075512b47f169c1a2887cd3f79533e6",
+      "bytes": 17486
+    },
+    "captures/qa-1791666254186-d54a9f5a.webm": {
+      "sha256": "477b2984c1835b616e6b24777241b2e295bdd6a3cdd29be5429a6604a02e2ea4",
+      "bytes": 9680
+    },
+    "captures/qa-1791666267611-4088de80.json": {
+      "sha256": "a66204c4aab22d262172d0c05a7cfe7955f7d8d89d7257391f069eb3845b96b0",
+      "bytes": 49252
+    },
+    "captures/qa-1791666267611-4088de80.webm": {
+      "sha256": "a7d8c55ae2c7729202a11bae747e27f62ac22ef296ed90021963e54d9f562ade",
+      "bytes": 97065
+    },
+    "captures/qa-1791666285020-bc901c07.json": {
+      "sha256": "3cb581d478df600930699e11a4ad4ef38bbbf4a68ed4222c803f23bd784d71e9",
+      "bytes": 38567
+    },
+    "captures/qa-1791666285020-bc901c07.webm": {
+      "sha256": "a6d65a6b452fe5fd743e1ef6efb0b7dfe047a5819b0bcca2d1001870b5babc5a",
+      "bytes": 55126
+    },
+    "captures/qa-1791666322936-22112ad0.json": {
+      "sha256": "87a9c55818fc1c3f7f4c681f9318715a6e87b2e43b1c3dad3b482d6928a9382d",
+      "bytes": 30267
+    },
+    "captures/qa-1791666322936-22112ad0.webm": {
+      "sha256": "003b86489f1e9be78c8f1aaa29c0ca3e059c4bfa75f523b4ab37ed0f354ab547",
+      "bytes": 46689
+    },
+    "captures/qa-1791666369546-3dbbb477.json": {
+      "sha256": "2a340ef9e8f57ad0861ee34419d777fd629e9051b0fa05e757b165e1ee0b7121",
+      "bytes": 43750
+    },
+    "captures/qa-1791666369546-3dbbb477.webm": {
+      "sha256": "14fd649349fc5eafd322ac9842bbb14ea7a57ef88dca1770e83f7ae3ba5248ba",
+      "bytes": 27162
+    }
+  },
+  "external": {
+    "apps/game/src/audio.ts": {
+      "sha256": "d74adf461c889a12ea1b36ad5888fc35121a79710a20bee8b53aaa70b67c94e8",
+      "bytes": 17285
+    },
+    "node_modules/typescript/package.json": {
+      "sha256": "822ef7ca6452205657b6288b066481ecf508bfbf43455d715cf7d3ec457561e6",
+      "bytes": 3620
+    },
+    "node_modules/typescript/lib/typescript.js": {
+      "sha256": "3ae902c92cc44dace175c0e69e13a4b0899f6983c6121d76b9ab8dd5795e7675",
+      "bytes": 9112572
+    },
+    "artifacts/mote-audio-dispose-browser.txt": {
+      "sha256": "9b393a49d9db24a4e481ef66d2d75c4ef484870373d7b4d3f804f9ffc7223bbb",
+      "bytes": 2962
+    }
+  },
+  "excluded_dynamic": [
+    "server.log",
+    "server-error.log",
+    "service.pid",
+    "frozen-hashes.json"
+  ],
+  "listening_or_physical_device_acceptance": false
+}

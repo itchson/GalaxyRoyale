@@ -210,7 +210,7 @@ const debugConsole = new DebugConsole({
   run: async (command) => {
     const [verb, ...args] = command.trim().toLowerCase().split(/\s+/);
     if (verb === "help")
-      return "HELP / STATS / PROFILE / RENDERER / RECOVER\nSCENE dock|belt|combat|site|biome-riveter|biome-mote|boss-dart[-1..5]|boss-bastion[-1..5]|boss-coil[-1..5]|champion-0..7|tournament|stress|die (QA mode)\nCLEAR / Up, Down: history / Backtick or Escape: close";
+      return "HELP / STATS / PROFILE / RENDERER / RECOVER\nSCENE dock|belt|combat|site|biome-riveter|biome-mote|boss-dart[-1..5]|boss-bastion[-1..5]|boss-coil[-1..5]|champion-0..7|tournament|stress|die (QA mode)\nWARP x y (QA mode, world coordinates within +/-1000000)\nCLEAR / Up, Down: history / Backtick or Escape: close";
     if (verb === "stats") {
       const panel = Array.from(galaxy.boss_ui_bounds(), value => value.toFixed(0));
       return `${backend.toUpperCase()} / ${fps} FPS / p95 ${percentile(frameTimes, 0.95).toFixed(2)} ms\n${lastPixels} quads / ${hud.entities} entities / ${hud.particles} particles\nPOSITION ${hud.position.map((v) => v.toFixed(1)).join(", ")}\n${hud.biome.name} / ${hud.zone} / danger ${hud.danger}\nHULL ${hud.hull.toFixed(0)}/${hud.max_hull.toFixed(0)} / SHIELD ${hud.shield.toFixed(0)}\nZOOM ${galaxy.zoom().toFixed(2)} / WORLD ${Array.from(galaxy.world_viewport(), v => v.toFixed(0)).join(" x ")} / UI ${galaxy.viewport().join(" x ")}\nSHIP LV ${hud.ship_level} / XP ${hud.ship_xp} / CARGO ${hud.cargo_materials}/${hud.cargo_capacity}\nLAST BOSS UI ${panel.length ? panel.join(" / ") : "NONE"}`;
@@ -225,6 +225,24 @@ const debugConsole = new DebugConsole({
       return (await recover("console recovery request"))
         ? "Graphics restored; expedition retained."
         : "Recovery unavailable or failed; see graphics status.";
+    if (verb === "warp") {
+      if (!diagnosticMode) return "WARP requires ?qa=1.";
+      const position = args.map(Number);
+      if (
+        position.length !== 2 ||
+        position.some(
+          (value) => !Number.isFinite(value) || Math.abs(value) > 1_000_000,
+        )
+      )
+        return "Usage: WARP x y / finite world coordinates within +/-1000000.";
+      galaxy.diagnostic(`warp ${position.join(" ")}`);
+      hud = galaxy.hud();
+      scenario = "warp";
+      destination = null;
+      previousDock = true;
+      paintHud();
+      return `WARP ${position.join(", ")} / QA combat and site rewards disabled. Run banked; active duel forfeited.`;
+    }
     if (verb === "scene") {
       if (!diagnosticMode)
         return "Validation scenes require ?qa=1. No progression is awarded by scene setup.";

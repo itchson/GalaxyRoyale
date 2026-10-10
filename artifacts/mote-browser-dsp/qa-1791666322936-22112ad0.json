@@ -1,0 +1,1217 @@
+{
+  "schema": 1,
+  "id": "qa-1791666322936-22112ad0",
+  "scenario": "recovery",
+  "declared_cues_only": true,
+  "source": {
+    "original": "apps/game/src/audio.ts",
+    "original_sha256": "d74adf461c889a12ea1b36ad5888fc35121a79710a20bee8b53aaa70b67c94e8",
+    "copied_sha256": "d74adf461c889a12ea1b36ad5888fc35121a79710a20bee8b53aaa70b67c94e8",
+    "compiled_audio_sha256": "b6ad9a8f86900b4f3ae20ba3ac69814d9022ba93a4861c53e4fbff79af80e0de",
+    "compiled_probe_sha256": "a2fc99c92e96dfd30d1c2732823d093bda6c94284e16e93c43a40f8c2a75b4e0",
+    "typescript_version": "5.9.3",
+    "compiler": "installed TypeScript; ES2022 modules, strict, DOM; unchanged AudioEngine",
+    "branch": "existing final DynamicsCompressorNode -> analyser and MediaStreamDestination"
+  },
+  "captured_utc": "2026-10-10T21:05:26.644Z",
+  "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+  "secure_context": true,
+  "context_sample_rate": 48000,
+  "context_base_latency": 0.01,
+  "mime": "audio/webm;codecs=opus",
+  "native_recorded_bytes": 46689,
+  "observed_wall_ms": 3707.800000011921,
+  "cancelled": false,
+  "failure": null,
+  "peak_window_method": "native float time-domain analyser after existing compressor; 2048 samples, ~30 Hz; sampled peak, not guaranteed true peak",
+  "suspended_windows": 24,
+  "max_effects_voices": 1,
+  "effects_cap_preserved": true,
+  "max_music_voices": 5,
+  "observed_engine_contexts": 1,
+  "stages": {
+    "baseline": {
+      "windows": 29,
+      "peak": 0.08127245306968689,
+      "window_rms": 0.011287180617676942
+    },
+    "resumed": {
+      "windows": 56,
+      "peak": 0.12482957541942596,
+      "window_rms": 0.009772180010546114
+    }
+  },
+  "actions": [
+    {
+      "wall_ms": 0,
+      "context_s": 85.712,
+      "state": "running",
+      "stage": "baseline",
+      "action": "stage baseline",
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 350.59999999403954,
+      "context_s": 86.06133333333334,
+      "state": "running",
+      "stage": "baseline",
+      "action": "declared mote-charge",
+      "sfx_voices": 1,
+      "music_voices": 2
+    },
+    {
+      "wall_ms": 1001.2000000178814,
+      "context_s": 86.712,
+      "state": "suspended",
+      "stage": "suspend-requested",
+      "action": "stage suspend-requested",
+      "sfx_voices": 0,
+      "music_voices": 0
+    },
+    {
+      "wall_ms": 1258.9000000059605,
+      "context_s": 86.712,
+      "state": "suspended",
+      "stage": "suspended",
+      "action": "stage suspended",
+      "sfx_voices": 0,
+      "music_voices": 0
+    },
+    {
+      "wall_ms": 1258.9000000059605,
+      "context_s": 86.712,
+      "state": "suspended",
+      "stage": "suspended",
+      "action": "declared mote-pulse",
+      "sfx_voices": 0,
+      "music_voices": 0
+    },
+    {
+      "wall_ms": 1817.5999999940395,
+      "context_s": 86.72,
+      "state": "running",
+      "stage": "resumed",
+      "action": "stage resumed",
+      "sfx_voices": 0,
+      "music_voices": 1
+    },
+    {
+      "wall_ms": 1817.5999999940395,
+      "context_s": 86.72,
+      "state": "running",
+      "stage": "resumed",
+      "action": "actual resume resolved",
+      "sfx_voices": 0,
+      "music_voices": 1
+    },
+    {
+      "wall_ms": 2213.0999999940395,
+      "context_s": 87.12,
+      "state": "running",
+      "stage": "resumed",
+      "action": "declared mote-pulse",
+      "sfx_voices": 1,
+      "music_voices": 2
+    }
+  ],
+  "samples": [
+    {
+      "wall_ms": 35.099999994039536,
+      "context_s": 85.752,
+      "state": "running",
+      "stage": "baseline",
+      "peak": 0.0015025496250018477,
+      "rms": 0.0005325398013287098,
+      "sfx_voices": 0,
+      "music_voices": 5
+    },
+    {
+      "wall_ms": 68.30000001192093,
+      "context_s": 85.78133333333334,
+      "state": "running",
+      "stage": "baseline",
+      "peak": 0.08127245306968689,
+      "rms": 0.024435346395777085,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 102.59999999403954,
+      "context_s": 85.82133333333333,
+      "state": "running",
+      "stage": "baseline",
+      "peak": 0.05389748886227608,
+      "rms": 0.014925730106022344,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 136.90000000596046,
+      "context_s": 85.85066666666667,
+      "state": "running",
+      "stage": "baseline",
+      "peak": 0.028029652312397957,
+      "rms": 0.008493393717968927,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 170.7000000178814,
+      "context_s": 85.88,
+      "state": "running",
+      "stage": "baseline",
+      "peak": 0.025174889713525772,
+      "rms": 0.009423415550753282,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 204.30000001192093,
+      "context_s": 85.92,
+      "state": "running",
+      "stage": "baseline",
+      "peak": 0.03380342945456505,
+      "rms": 0.012103787541893642,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 238.80000001192093,
+      "context_s": 85.952,
+      "state": "running",
+      "stage": "baseline",
+      "peak": 0.03380342945456505,
+      "rms": 0.011240661578386654,
+      "sfx_voices": 0,
+      "music_voices": 2
+    },
+    {
+      "wall_ms": 273.59999999403954,
+      "context_s": 85.992,
+      "state": "running",
+      "stage": "baseline",
+      "peak": 0.029639866203069687,
+      "rms": 0.01017694921958814,
+      "sfx_voices": 0,
+      "music_voices": 2
+    },
+    {
+      "wall_ms": 307.2000000178814,
+      "context_s": 86.02133333333333,
+      "state": "running",
+      "stage": "baseline",
+      "peak": 0.02462051995098591,
+      "rms": 0.009148911961852411,
+      "sfx_voices": 0,
+      "music_voices": 2
+    },
+    {
+      "wall_ms": 341.5,
+      "context_s": 86.05066666666667,
+      "state": "running",
+      "stage": "baseline",
+      "peak": 0.01822868548333645,
+      "rms": 0.008604150316899411,
+      "sfx_voices": 0,
+      "music_voices": 2
+    },
+    {
+      "wall_ms": 374.7000000178814,
+      "context_s": 86.09066666666666,
+      "state": "running",
+      "stage": "baseline",
+      "peak": 0.053272999823093414,
+      "rms": 0.018443985772356862,
+      "sfx_voices": 1,
+      "music_voices": 2
+    },
+    {
+      "wall_ms": 408,
+      "context_s": 86.12,
+      "state": "running",
+      "stage": "baseline",
+      "peak": 0.06062362343072891,
+      "rms": 0.018885691379003734,
+      "sfx_voices": 1,
+      "music_voices": 2
+    },
+    {
+      "wall_ms": 442.30000001192093,
+      "context_s": 86.16,
+      "state": "running",
+      "stage": "baseline",
+      "peak": 0.01881972700357437,
+      "rms": 0.006853424250820414,
+      "sfx_voices": 1,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 476.90000000596046,
+      "context_s": 86.192,
+      "state": "running",
+      "stage": "baseline",
+      "peak": 0.04720447212457657,
+      "rms": 0.014742167037060716,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 510.59999999403954,
+      "context_s": 86.22133333333333,
+      "state": "running",
+      "stage": "baseline",
+      "peak": 0.03577810153365135,
+      "rms": 0.010569440662619011,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 545.4000000059605,
+      "context_s": 86.26133333333334,
+      "state": "running",
+      "stage": "baseline",
+      "peak": 0.012849097140133381,
+      "rms": 0.004819287178104311,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 579.4000000059605,
+      "context_s": 86.29066666666667,
+      "state": "running",
+      "stage": "baseline",
+      "peak": 0.011568697169423103,
+      "rms": 0.003937279408007849,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 612.7000000178814,
+      "context_s": 86.33066666666667,
+      "state": "running",
+      "stage": "baseline",
+      "peak": 0.08103588223457336,
+      "rms": 0.025863661947489368,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 646.5,
+      "context_s": 86.36,
+      "state": "running",
+      "stage": "baseline",
+      "peak": 0.04594937711954117,
+      "rms": 0.01063930407663421,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 680.9000000059605,
+      "context_s": 86.392,
+      "state": "running",
+      "stage": "baseline",
+      "peak": 0.014221539720892906,
+      "rms": 0.0042421421776668924,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 714.2000000178814,
+      "context_s": 86.432,
+      "state": "running",
+      "stage": "baseline",
+      "peak": 0.007344002835452557,
+      "rms": 0.00272862568752001,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 748.9000000059605,
+      "context_s": 86.46133333333333,
+      "state": "running",
+      "stage": "baseline",
+      "peak": 0.015077395364642143,
+      "rms": 0.0048352823734114855,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 782.3000000119209,
+      "context_s": 86.50133333333333,
+      "state": "running",
+      "stage": "baseline",
+      "peak": 0.00864699948579073,
+      "rms": 0.0033990959963593123,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 817.5999999940395,
+      "context_s": 86.53066666666666,
+      "state": "running",
+      "stage": "baseline",
+      "peak": 0.007385296747088432,
+      "rms": 0.0023137382431904384,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 850.2000000178814,
+      "context_s": 86.56,
+      "state": "running",
+      "stage": "baseline",
+      "peak": 0.005415036808699369,
+      "rms": 0.0019706363596050072,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 884.2000000178814,
+      "context_s": 86.6,
+      "state": "running",
+      "stage": "baseline",
+      "peak": 0.031501904129981995,
+      "rms": 0.013023772711239185,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 919.9000000059605,
+      "context_s": 86.632,
+      "state": "running",
+      "stage": "baseline",
+      "peak": 0.017802515998482704,
+      "rms": 0.006360163753519319,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 952.2000000178814,
+      "context_s": 86.672,
+      "state": "running",
+      "stage": "baseline",
+      "peak": 0.005047226324677467,
+      "rms": 0.001931071324436488,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 987,
+      "context_s": 86.70133333333334,
+      "state": "running",
+      "stage": "baseline",
+      "peak": 0.004183987621217966,
+      "rms": 0.0014974169541754393,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 1020.7000000178814,
+      "context_s": 86.712,
+      "state": "suspended",
+      "stage": "suspend-requested",
+      "peak": null,
+      "rms": null,
+      "sfx_voices": 0,
+      "music_voices": 0
+    },
+    {
+      "wall_ms": 1054.800000011921,
+      "context_s": 86.712,
+      "state": "suspended",
+      "stage": "suspend-requested",
+      "peak": null,
+      "rms": null,
+      "sfx_voices": 0,
+      "music_voices": 0
+    },
+    {
+      "wall_ms": 1088,
+      "context_s": 86.712,
+      "state": "suspended",
+      "stage": "suspend-requested",
+      "peak": null,
+      "rms": null,
+      "sfx_voices": 0,
+      "music_voices": 0
+    },
+    {
+      "wall_ms": 1122.5999999940395,
+      "context_s": 86.712,
+      "state": "suspended",
+      "stage": "suspend-requested",
+      "peak": null,
+      "rms": null,
+      "sfx_voices": 0,
+      "music_voices": 0
+    },
+    {
+      "wall_ms": 1157.4000000059605,
+      "context_s": 86.712,
+      "state": "suspended",
+      "stage": "suspend-requested",
+      "peak": null,
+      "rms": null,
+      "sfx_voices": 0,
+      "music_voices": 0
+    },
+    {
+      "wall_ms": 1190.800000011921,
+      "context_s": 86.712,
+      "state": "suspended",
+      "stage": "suspend-requested",
+      "peak": null,
+      "rms": null,
+      "sfx_voices": 0,
+      "music_voices": 0
+    },
+    {
+      "wall_ms": 1224.5999999940395,
+      "context_s": 86.712,
+      "state": "suspended",
+      "stage": "suspend-requested",
+      "peak": null,
+      "rms": null,
+      "sfx_voices": 0,
+      "music_voices": 0
+    },
+    {
+      "wall_ms": 1258.800000011921,
+      "context_s": 86.712,
+      "state": "suspended",
+      "stage": "suspend-requested",
+      "peak": null,
+      "rms": null,
+      "sfx_voices": 0,
+      "music_voices": 0
+    },
+    {
+      "wall_ms": 1292.5,
+      "context_s": 86.712,
+      "state": "suspended",
+      "stage": "suspended",
+      "peak": null,
+      "rms": null,
+      "sfx_voices": 0,
+      "music_voices": 0
+    },
+    {
+      "wall_ms": 1326.7000000178814,
+      "context_s": 86.712,
+      "state": "suspended",
+      "stage": "suspended",
+      "peak": null,
+      "rms": null,
+      "sfx_voices": 0,
+      "music_voices": 0
+    },
+    {
+      "wall_ms": 1360.5,
+      "context_s": 86.712,
+      "state": "suspended",
+      "stage": "suspended",
+      "peak": null,
+      "rms": null,
+      "sfx_voices": 0,
+      "music_voices": 0
+    },
+    {
+      "wall_ms": 1395.4000000059605,
+      "context_s": 86.712,
+      "state": "suspended",
+      "stage": "suspended",
+      "peak": null,
+      "rms": null,
+      "sfx_voices": 0,
+      "music_voices": 0
+    },
+    {
+      "wall_ms": 1428.5999999940395,
+      "context_s": 86.712,
+      "state": "suspended",
+      "stage": "suspended",
+      "peak": null,
+      "rms": null,
+      "sfx_voices": 0,
+      "music_voices": 0
+    },
+    {
+      "wall_ms": 1463.300000011921,
+      "context_s": 86.712,
+      "state": "suspended",
+      "stage": "suspended",
+      "peak": null,
+      "rms": null,
+      "sfx_voices": 0,
+      "music_voices": 0
+    },
+    {
+      "wall_ms": 1496.300000011921,
+      "context_s": 86.712,
+      "state": "suspended",
+      "stage": "suspended",
+      "peak": null,
+      "rms": null,
+      "sfx_voices": 0,
+      "music_voices": 0
+    },
+    {
+      "wall_ms": 1530.5,
+      "context_s": 86.712,
+      "state": "suspended",
+      "stage": "suspended",
+      "peak": null,
+      "rms": null,
+      "sfx_voices": 0,
+      "music_voices": 0
+    },
+    {
+      "wall_ms": 1564.7000000178814,
+      "context_s": 86.712,
+      "state": "suspended",
+      "stage": "suspended",
+      "peak": null,
+      "rms": null,
+      "sfx_voices": 0,
+      "music_voices": 0
+    },
+    {
+      "wall_ms": 1598.9000000059605,
+      "context_s": 86.712,
+      "state": "suspended",
+      "stage": "suspended",
+      "peak": null,
+      "rms": null,
+      "sfx_voices": 0,
+      "music_voices": 0
+    },
+    {
+      "wall_ms": 1632.800000011921,
+      "context_s": 86.712,
+      "state": "suspended",
+      "stage": "suspended",
+      "peak": null,
+      "rms": null,
+      "sfx_voices": 0,
+      "music_voices": 0
+    },
+    {
+      "wall_ms": 1667.300000011921,
+      "context_s": 86.712,
+      "state": "suspended",
+      "stage": "suspended",
+      "peak": null,
+      "rms": null,
+      "sfx_voices": 0,
+      "music_voices": 0
+    },
+    {
+      "wall_ms": 1700.5,
+      "context_s": 86.712,
+      "state": "suspended",
+      "stage": "suspended",
+      "peak": null,
+      "rms": null,
+      "sfx_voices": 0,
+      "music_voices": 0
+    },
+    {
+      "wall_ms": 1735.300000011921,
+      "context_s": 86.712,
+      "state": "suspended",
+      "stage": "suspended",
+      "peak": null,
+      "rms": null,
+      "sfx_voices": 0,
+      "music_voices": 0
+    },
+    {
+      "wall_ms": 1768.2000000178814,
+      "context_s": 86.712,
+      "state": "suspended",
+      "stage": "suspended",
+      "peak": null,
+      "rms": null,
+      "sfx_voices": 0,
+      "music_voices": 0
+    },
+    {
+      "wall_ms": 1802.0999999940395,
+      "context_s": 86.712,
+      "state": "suspended",
+      "stage": "suspended",
+      "peak": null,
+      "rms": null,
+      "sfx_voices": 0,
+      "music_voices": 0
+    },
+    {
+      "wall_ms": 1836.9000000059605,
+      "context_s": 86.74133333333333,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.010366655886173248,
+      "rms": 0.003231421408571664,
+      "sfx_voices": 0,
+      "music_voices": 1
+    },
+    {
+      "wall_ms": 1871.0999999940395,
+      "context_s": 86.77066666666667,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.020117321982979774,
+      "rms": 0.0011831833738043087,
+      "sfx_voices": 0,
+      "music_voices": 1
+    },
+    {
+      "wall_ms": 1905.5,
+      "context_s": 86.81066666666666,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.0028858536388725042,
+      "rms": 0.0005422503184181785,
+      "sfx_voices": 0,
+      "music_voices": 1
+    },
+    {
+      "wall_ms": 1938.5999999940395,
+      "context_s": 86.84,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.0015841093845665455,
+      "rms": 0.00041365760640727823,
+      "sfx_voices": 0,
+      "music_voices": 0
+    },
+    {
+      "wall_ms": 1972.7000000178814,
+      "context_s": 86.88,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.0018538233125582337,
+      "rms": 0.0006537515864449574,
+      "sfx_voices": 0,
+      "music_voices": 1
+    },
+    {
+      "wall_ms": 2006.5,
+      "context_s": 86.912,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.0011500008404254913,
+      "rms": 0.00041443247116275644,
+      "sfx_voices": 0,
+      "music_voices": 1
+    },
+    {
+      "wall_ms": 2040.5999999940395,
+      "context_s": 86.94133333333333,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.0008770744898356497,
+      "rms": 0.00033923212450678473,
+      "sfx_voices": 0,
+      "music_voices": 1
+    },
+    {
+      "wall_ms": 2075.0999999940395,
+      "context_s": 86.98133333333334,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.0034539136104285717,
+      "rms": 0.0011238784210772371,
+      "sfx_voices": 0,
+      "music_voices": 1
+    },
+    {
+      "wall_ms": 2109,
+      "context_s": 87.01066666666667,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.0034539136104285717,
+      "rms": 0.00155867418035444,
+      "sfx_voices": 0,
+      "music_voices": 2
+    },
+    {
+      "wall_ms": 2142.800000011921,
+      "context_s": 87.05066666666667,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.03456084057688713,
+      "rms": 0.012022597873169217,
+      "sfx_voices": 0,
+      "music_voices": 2
+    },
+    {
+      "wall_ms": 2177.9000000059605,
+      "context_s": 87.08,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.02961704321205616,
+      "rms": 0.011431849228614496,
+      "sfx_voices": 0,
+      "music_voices": 2
+    },
+    {
+      "wall_ms": 2212.800000011921,
+      "context_s": 87.12,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.007286863401532173,
+      "rms": 0.002591164941927131,
+      "sfx_voices": 0,
+      "music_voices": 2
+    },
+    {
+      "wall_ms": 2245.4000000059605,
+      "context_s": 87.152,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.12482957541942596,
+      "rms": 0.027709692381905505,
+      "sfx_voices": 1,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 2279,
+      "context_s": 87.18133333333333,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.07743342220783234,
+      "rms": 0.021447269105615487,
+      "sfx_voices": 1,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 2312.2000000178814,
+      "context_s": 87.22133333333333,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.048626579344272614,
+      "rms": 0.013770455590197307,
+      "sfx_voices": 1,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 2348.5999999940395,
+      "context_s": 87.25066666666666,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.012542910873889923,
+      "rms": 0.0036121337733717837,
+      "sfx_voices": 0,
+      "music_voices": 2
+    },
+    {
+      "wall_ms": 2380.5,
+      "context_s": 87.28,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.0049330671317875385,
+      "rms": 0.001314746760515164,
+      "sfx_voices": 0,
+      "music_voices": 2
+    },
+    {
+      "wall_ms": 2414.7000000178814,
+      "context_s": 87.32,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.010000486858189106,
+      "rms": 0.0036913175662797487,
+      "sfx_voices": 0,
+      "music_voices": 2
+    },
+    {
+      "wall_ms": 2449.300000011921,
+      "context_s": 87.352,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.0074585857801139355,
+      "rms": 0.0033912604480575335,
+      "sfx_voices": 0,
+      "music_voices": 2
+    },
+    {
+      "wall_ms": 2482.2000000178814,
+      "context_s": 87.392,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.0024177951272577047,
+      "rms": 0.001124161275814453,
+      "sfx_voices": 0,
+      "music_voices": 2
+    },
+    {
+      "wall_ms": 2517.800000011921,
+      "context_s": 87.42133333333334,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.0015641923528164625,
+      "rms": 0.0005590064604588312,
+      "sfx_voices": 0,
+      "music_voices": 2
+    },
+    {
+      "wall_ms": 2550.5999999940395,
+      "context_s": 87.45066666666666,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.0042501818388700485,
+      "rms": 0.0014027861413651549,
+      "sfx_voices": 0,
+      "music_voices": 2
+    },
+    {
+      "wall_ms": 2584.2000000178814,
+      "context_s": 87.49066666666667,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.002458574017509818,
+      "rms": 0.0009466008659392065,
+      "sfx_voices": 0,
+      "music_voices": 2
+    },
+    {
+      "wall_ms": 2618.0999999940395,
+      "context_s": 87.52,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.0009320997633039951,
+      "rms": 0.0003077897654876862,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 2653.5,
+      "context_s": 87.56,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.00032980256946757436,
+      "rms": 0.00009588852843148752,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 2686.0999999940395,
+      "context_s": 87.592,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.0328800342977047,
+      "rms": 0.013193843285816532,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 2720.9000000059605,
+      "context_s": 87.62133333333334,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.02661578729748726,
+      "rms": 0.00906277317607375,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 2755.0999999940395,
+      "context_s": 87.66133333333333,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.0041742450557649136,
+      "rms": 0.0017451550171275225,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 2788.9000000059605,
+      "context_s": 87.69066666666667,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.0013969362480565906,
+      "rms": 0.0005343487662230099,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 2823.0999999940395,
+      "context_s": 87.73066666666666,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.07358598709106445,
+      "rms": 0.026491007628715604,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 2857.5999999940395,
+      "context_s": 87.76,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.04373188316822052,
+      "rms": 0.014048948785334112,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 2890.9000000059605,
+      "context_s": 87.792,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.021852465346455574,
+      "rms": 0.007488456754916411,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 2924.0999999940395,
+      "context_s": 87.832,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.028772946447134018,
+      "rms": 0.012021322427852001,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 2958.4000000059605,
+      "context_s": 87.86133333333333,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.028772946447134018,
+      "rms": 0.012307050126025773,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 2992.9000000059605,
+      "context_s": 87.90133333333333,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.023311126977205276,
+      "rms": 0.011070844726687661,
+      "sfx_voices": 0,
+      "music_voices": 2
+    },
+    {
+      "wall_ms": 3026.5,
+      "context_s": 87.93066666666667,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.028197286650538445,
+      "rms": 0.010243491484195004,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 3061.0999999940395,
+      "context_s": 87.96,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.028197286650538445,
+      "rms": 0.009590964540815894,
+      "sfx_voices": 0,
+      "music_voices": 2
+    },
+    {
+      "wall_ms": 3094.0999999940395,
+      "context_s": 88,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.023462368175387383,
+      "rms": 0.008545990296741562,
+      "sfx_voices": 0,
+      "music_voices": 2
+    },
+    {
+      "wall_ms": 3129.5,
+      "context_s": 88.032,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.021622484549880028,
+      "rms": 0.006675849479297292,
+      "sfx_voices": 0,
+      "music_voices": 2
+    },
+    {
+      "wall_ms": 3162.4000000059605,
+      "context_s": 88.072,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.014963703230023384,
+      "rms": 0.006893717849708302,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 3196.7000000178814,
+      "context_s": 88.10133333333333,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.014602811075747013,
+      "rms": 0.005825943522354354,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 3230.800000011921,
+      "context_s": 88.13066666666667,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.04354298487305641,
+      "rms": 0.01370665100646381,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 3265.2000000178814,
+      "context_s": 88.17066666666666,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.023288559168577194,
+      "rms": 0.008359816300555172,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 3298.9000000059605,
+      "context_s": 88.2,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.01655149646103382,
+      "rms": 0.005994178138813145,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 3332.7000000178814,
+      "context_s": 88.24,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.07588701695203781,
+      "rms": 0.010913806646195545,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 3367.0999999940395,
+      "context_s": 88.272,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.07588701695203781,
+      "rms": 0.026501385682565052,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 3400.800000011921,
+      "context_s": 88.30133333333333,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.02852683514356613,
+      "rms": 0.010437793328010276,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 3434.4000000059605,
+      "context_s": 88.34133333333334,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.01525798812508583,
+      "rms": 0.004118347596951291,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 3468.5999999940395,
+      "context_s": 88.37066666666666,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.009641974233090878,
+      "rms": 0.0035559249770653572,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 3502.9000000059605,
+      "context_s": 88.41066666666667,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.008040696382522583,
+      "rms": 0.0030421689169918757,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 3537.7000000178814,
+      "context_s": 88.44,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.006697865668684244,
+      "rms": 0.0028689951257116985,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 3570.7000000178814,
+      "context_s": 88.472,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.008104787208139896,
+      "rms": 0.002529457116467467,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 3604.5999999940395,
+      "context_s": 88.512,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.03718316927552223,
+      "rms": 0.008735595806665037,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 3640,
+      "context_s": 88.54133333333333,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.03718316927552223,
+      "rms": 0.013272763671158363,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 3673.300000011921,
+      "context_s": 88.58133333333333,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.015637695789337158,
+      "rms": 0.00467807715152888,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 3706.300000011921,
+      "context_s": 88.61066666666666,
+      "state": "running",
+      "stage": "resumed",
+      "peak": 0.005750846117734909,
+      "rms": 0.00244886406196203,
+      "sfx_voices": 0,
+      "music_voices": 4
+    }
+  ],
+  "branch_cleanup": {
+    "analyser_disconnect_succeeded": true,
+    "recorder_disconnect_succeeded": true,
+    "errors": [],
+    "recorded_tracks_ended": true
+  },
+  "listening_or_physical_device_acceptance": false
+}

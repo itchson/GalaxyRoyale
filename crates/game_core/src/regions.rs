@@ -571,6 +571,22 @@ pub fn background_with_density(
                         }
                     }
                 } else if layer == 1 && h.is_multiple_of(3) && scene.visible(position, 135.0) {
+                    if biome.kind == 4 {
+                        // Origin has not encoded parallax; helper encodes it once.
+                        let input = crate::isotope_scar::SceneInput {
+                            origin,
+                            camera: scene.camera,
+                            viewport: scene.half * 2.0,
+                            time, // Game already forwards its frozen cosmetic_time().
+                            rotation: unit(mix(h ^ 93)) * 0.6,
+                            scale: Vec2::splat(0.64 + unit(mix(h ^ 37)) * 0.08),
+                            reduced,
+                            reduced_motion: false,
+                        };
+                        let _scar_stats =
+                            crate::isotope_scar::extract(scene.frame, &input, &mut scene.remaining);
+                        continue; // Replace the old planet/rings, even on budget rejection.
+                    }
                     let kind = (mix(h ^ 12) % 3) as usize;
                     let transform = Transform {
                         position,
@@ -608,6 +624,10 @@ pub fn background_with_density(
         }
     }
 }
+
+#[cfg(test)]
+#[path = "isotope_region_tests.rs"]
+mod isotope_tests;
 
 #[cfg(test)]
 mod tests {

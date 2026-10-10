@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "scope": "independent inspection of supplied actual foreground screenshots and DOM geometry; static QA fixture; no owned browser operation/GPU readback/phone or progression acceptance",
+  "candidate_review_sha256": "ae80d5a7fabc1b91a2e8d4d29c60455e9710de293e335051e28b8e2a33ad0942",
+  "candidate_evidence_sha256": "ad2fd3f2b07c82fcf0a570ab328af591b92b41f07b02b094c7d296339164b11a",
+  "production_review_sha256": "60acb13e236cda93cd1faa98ee6359991e0dd9b6803affacafaa8aa9f3fb57fa",
+  "production_evidence_sha256": "442479c6139e17e0b381b3b38a270978b55b90e6a156f66a7039b022d976051d",
+  "inspected_jpegs": 6,
+  "actual_metadata_records": 7,
+  "actual_measured_icon_boxes": 59,
+  "maximum_measured_logical_extent_error": 1.2715657575768091e-06,
+  "predicted_partial_scroll_visible_centers": [
+    0,
+    0,
+    219,
+    202,
+    177,
+    248,
+    0,
+    0
+  ],
+  "sha256": {
+    "work/champion-patch-engine-review/BROWSER_ADDENDUM.md": "c9fdf56560d40c728314cef5a95ada0101f8eff57d8aed6b4798f124ec142b67",
+    "work/champion-patch-engine-review/BROWSER_CHECKS.md": "4e921ba403f32175d7d0466af5497423c134c1b56626968f795880e6ef499753",
+    "work/champion-patch-engine-review/browser-dom-analysis.py": "5579e841c8f4a8e5a680b3c9887685cf6ccf7b6befe4a09d826981fb7a150824",
+    "work/champion-patch-engine-review/browser-dom-analysis.json": "3498f94eededd576631caa9543fbd8b72ee873d47e55a7596ee49fcdd4896ed0",
+    "work/champion-patch-engine-review/freeze-browser-addendum.py": "19e5900fe952fabb7fbf8bee92d047f4fc1211c4d1196b5c3aa3b8ff11f285e3",
+    "work/scar-browser-fixtures.mjs": "a059ad6099ca049d217664cccac00e06c2a9eb46e8c7beb60cfcb1ae5cdd2a42",
+    "artifacts/champion-emblems-webgpu-dom.json": "0168350b5fbc0f7836dc6144e34733fb72657c9a47120655db26c6472159fafa",
+    "artifacts/champion-emblems-webgpu-scroll-dom.json": "12988bb41eef4b44e7974e4b3f17b4c426d0dd8bcd30daa36f33ab0a0bebe293",
+    "artifacts/champion-emblems-fractional-webgpu-dom.json": "aa126c5b26fed471c235c2625c7c40140450f5a96c1ed0a726c43158a05a47d1",
+    "artifacts/champion-emblems-fractional-webgpu-scrolled-dom.json": "9ce51b945656f2bb2a5c99fe5d316c63d2cf376f09bf342ccc425e9d4fae6e2b",
+    "artifacts/champion-emblems-narrow-webgpu-dom.json": "49846c1f1df5d0c25bbf7325cb898147ea8fc082ffde03c1300354136f0fc8e1",
+    "artifacts/champion-ships-webgpu-dom.json": "ab0a6b8ab82cac4716a781c6621326b6e863ba28922d049c66ceb4934a1afaca",
+    "artifacts/champion-royale-webgl2-dom.json": "b6a3e6ed7bfd64188e5be404a3491525913b0697021af6ad2d3e8bb195bd8836",
+    "artifacts/champion-emblems-webgpu.jpg": "e813f5623161b93208e5de0ff4968852d394c10ab6ec5f721eaecc3fc030fb1f",
+    "artifacts/champion-emblems-webgpu-scrolled.jpg": "2793ccb33e1629a75ea773498b5ea9b75c9b93ed38492a46cc755d58166e42dd",
+    "artifacts/champion-emblems-fractional-webgpu.jpg": "e6692b17723193bef0ba78598402bb53d07ecf0b2fafca8945d95524e013dfdb",
+    "artifacts/champion-emblems-fractional-webgpu-scrolled.jpg": "af6e794fa9160835254ea7e3e8efcd45ffd8d8c121a2c51d0c6545734631efe2",
+    "artifacts/champion-emblems-narrow-webgpu.jpg": "e0dc08a24481b7fa5c23f565e7f74c81997f71a39a7566b97dd568c403939c7e",
+    "artifacts/champion-royale-webgl2.jpg": "74d252f9cd7163e6dab74da18be76bb16c7a1427068af34efd2cc0221266e6ef"
+  }
+}

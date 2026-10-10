@@ -3,12 +3,15 @@ mod biome_enemies;
 mod boss_assets;
 pub mod bosses;
 pub mod campaign;
+mod isotope_scar;
 mod pixel_assets;
 mod radiation_enemies;
 pub use campaign::RunSummary;
 mod campaign_runtime;
 #[cfg(test)]
 mod diagnostic_death_tests;
+#[cfg(test)]
+mod diagnostic_warp_tests;
 #[cfg(test)]
 mod weapon_cadence_tests;
 use bosses::BossEncounter;
@@ -872,6 +875,9 @@ impl Game {
 
     /// Accept an offered mission or claim its once-only reward at the source.
     pub fn interact_site(&mut self) -> Result<(), String> {
+        if self.boss_qa_scene {
+            return Err("Site rewards are disabled in isolated QA scenes.".into());
+        }
         self.update_exploration();
         let site = self
             .current_site()
@@ -3269,6 +3275,25 @@ impl Game {
 
     /// Explicit deterministic QA scenes. This never awards inventory or upgrades.
     pub fn diagnostic(&mut self, command: &str) {
+        if let Some(destination) = command.strip_prefix("warp ") {
+            let mut coordinates = destination.split_whitespace();
+            let x = coordinates
+                .next()
+                .and_then(|value| value.parse::<f32>().ok());
+            let y = coordinates
+                .next()
+                .and_then(|value| value.parse::<f32>().ok());
+            if let (Some(x), Some(y), None) = (x, y, coordinates.next()) {
+                let position = Vec2::new(x, y);
+                if position.is_finite() && position.abs().max_element() <= WORLD_LIMIT {
+                    self.reset_to_dock();
+                    self.boss_qa_scene = true;
+                    self.move_player(position);
+                    self.update_chunks(position);
+                }
+            }
+            return;
+        }
         if self.mote_diagnostic(command) {
             return;
         }

@@ -1,0 +1,225 @@
+{
+  "canvas": [
+    {
+      "height": 900,
+      "rect": {
+        "height": 720,
+        "width": 1280,
+        "x": 0,
+        "y": 0
+      },
+      "width": 1600
+    },
+    {
+      "height": 112,
+      "rect": {
+        "height": 112,
+        "width": 112,
+        "x": 30,
+        "y": 581
+      },
+      "width": 112
+    }
+  ],
+  "dpr": 1.25,
+  "icons": [
+    {
+      "active": "true",
+      "css": {
+        "height": "57.6px",
+        "opacity": "1",
+        "width": "57.6px"
+      },
+      "kind": "campaign-patch",
+      "logical": [
+        24.000000953674316,
+        24.000000953674316
+      ],
+      "rect": {
+        "height": 57.60000228881836,
+        "width": 57.60000228881836,
+        "x": 81.5999984741211,
+        "y": 345.1000061035156
+      },
+      "value": "0"
+    },
+    {
+      "active": "false",
+      "css": {
+        "height": "57.6px",
+        "opacity": "1",
+        "width": "57.6px"
+      },
+      "kind": "campaign-patch",
+      "logical": [
+        24.000000953674316,
+        24.000000953674316
+      ],
+      "rect": {
+        "height": 57.60000228881836,
+        "width": 57.60000228881836,
+        "x": 661.2000122070312,
+        "y": 345.1000061035156
+      },
+      "value": "1"
+    },
+    {
+      "active": "true",
+      "css": {
+        "height": "57.6px",
+        "opacity": "1",
+        "width": "57.6px"
+      },
+      "kind": "campaign-patch",
+      "logical": [
+        24.000000953674316,
+        24.000000953674316
+      ],
+      "rect": {
+        "height": 57.60000228881836,
+        "width": 57.60000228881836,
+        "x": 81.5999984741211,
+        "y": 589.9000244140625
+      },
+      "value": "2"
+    },
+    {
+      "active": "false",
+      "css": {
+        "height": "57.6px",
+        "opacity": "1",
+        "width": "57.6px"
+      },
+      "kind": "campaign-patch",
+      "logical": [
+        24.000000953674316,
+        24.000000953674316
+      ],
+      "rect": {
+        "height": 57.60000228881836,
+        "width": 57.60000228881836,
+        "x": 661.2000122070312,
+        "y": 589.9000244140625
+      },
+      "value": "3"
+    },
+    {
+      "active": "true",
+      "css": {
+        "height": "57.6px",
+        "opacity": "1",
+        "width": "57.6px"
+      },
+      "kind": "campaign-patch",
+      "logical": [
+        24.000000953674316,
+        24.000000953674316
+      ],
+      "rect": {
+        "height": 57.60000228881836,
+        "width": 57.60000228881836,
+        "x": 81.5999984741211,
+        "y": 834.7000122070312
+      },
+      "value": "4"
+    },
+    {
+      "active": "false",
+      "css": {
+        "height": "57.6px",
+        "opacity": "1",
+        "width": "57.6px"
+      },
+      "kind": "campaign-patch",
+      "logical": [
+        24.000000953674316,
+        24.000000953674316
+      ],
+      "rect": {
+        "height": 57.60000228881836,
+        "width": 57.60000228881836,
+        "x": 661.2000122070312,
+        "y": 834.7000122070312
+      },
+      "value": "5"
+    },
+    {
+      "active": "true",
+      "css": {
+        "height": "57.6px",
+        "opacity": "1",
+        "width": "57.6px"
+      },
+      "kind": "campaign-patch",
+      "logical": [
+        24.000000953674316,
+        24.000000953674316
+      ],
+      "rect": {
+        "height": 57.60000228881836,
+        "width": 57.60000228881836,
+        "x": 81.5999984741211,
+        "y": 1079.5
+      },
+      "value": "6"
+    },
+    {
+      "active": "false",
+      "css": {
+        "height": "57.6px",
+        "opacity": "1",
+        "width": "57.6px"
+      },
+      "kind": "campaign-patch",
+      "logical": [
+        24.000000953674316,
+        24.000000953674316
+      ],
+      "rect": {
+        "height": 57.60000228881836,
+        "width": 57.60000228881836,
+        "x": 661.2000122070312,
+        "y": 1079.5
+      },
+      "value": "7"
+    }
+  ],
+  "menu": {
+    "height": 672,
+    "width": 1232,
+    "x": 24,
+    "y": 24
+  },
+  "pixelReady": true,
+  "scale": 2.4,
+  "scroll": [
+    {
+      "clientHeight": 0,
+      "id": "hangar-content",
+      "rect": {
+        "height": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "scrollHeight": 0,
+      "scrollTop": 0
+    },
+    {
+      "clientHeight": 275,
+      "id": "campaign-content",
+      "rect": {
+        "height": 275.45001220703125,
+        "width": 1145.5999755859375,
+        "x": 67.20000457763672,
+        "y": 276.95001220703125
+      },
+      "scrollHeight": 1208,
+      "scrollTop": 0
+    }
+  ],
+  "viewport": [
+    1280,
+    720
+  ]
+}

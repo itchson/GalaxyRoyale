@@ -1,0 +1,32 @@
+- generic "Galaxy Royale game universe"
+- status
+- dialog "GALAXY ROYALE // CONSOLE":
+  - heading "GALAXY ROYALE // CONSOLE" [level=2]
+  - paragraph: "HELP / STATS / SCENE <NAME> / CLEAR / ` CLOSE"
+  - log "Console output":
+    - paragraph: "> warp -28879.919921875 -6955.796875"
+    - paragraph: WARP -28879.919921875, -6955.796875 / QA combat and site rewards disabled. Run banked; active duel forfeited.
+    - paragraph: "> stats"
+    - paragraph: WEBGPU / 240 FPS / p95 4.30 ms
+    - paragraph: 9787 quads / 28 entities / 0 particles
+    - paragraph: POSITION -28879.9, -6955.8
+    - paragraph: Radial Wastes / Outer reach · Tier 18 / danger 18
+    - paragraph: HULL 100/100 / SHIELD 0
+    - paragraph: ZOOM 1.60 / WORLD 333 x 188 / UI 533 x 300
+    - paragraph: SHIP LV 3 / XP 60 / CARGO 0/16
+    - paragraph: LAST BOSS UI NONE
+    - paragraph: "> scene dock"
+    - paragraph: SCENE DOCK / ready. Close console to simulate.
+    - paragraph: "> warp -3024.44775390625 -690.4987182617188"
+    - paragraph: WARP -3024.44775390625, -690.4987182617188 / QA combat and site rewards disabled. Run banked; active duel forfeited.
+    - paragraph: "> stats"
+    - paragraph: WEBGPU / 240 FPS / p95 4.30 ms
+    - paragraph: 3876 quads / 28 entities / 0 particles
+    - paragraph: POSITION -3024.4, -690.5
+    - paragraph: Radial Wastes / Outer reach · Tier 2 / danger 2
+    - paragraph: HULL 100/100 / SHIELD 0
+    - paragraph: ZOOM 1.60 / WORLD 333 x 188 / UI 533 x 300
+    - paragraph: SHIP LV 3 / XP 60 / CARGO 0/16
+    - paragraph: LAST BOSS UI NONE
+  - textbox "Console command" [active]:
+    - /placeholder: ENTER COMMAND

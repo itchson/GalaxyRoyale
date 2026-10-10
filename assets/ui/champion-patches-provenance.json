@@ -1,0 +1,94 @@
+{
+  "method": "original authored polygon/stroke/symbol cell masks and themes; no AI/imported imagery",
+  "runtime": "cached local occupied cells; inspection PNG never loaded",
+  "size": [
+    24,
+    24
+  ],
+  "defined_opaque_colors": 32,
+  "used_opaque_colors": 31,
+  "emblems": [
+    {
+      "index": 0,
+      "champion": "Lyra Voss",
+      "ship": "Dawnneedle",
+      "ability": "Stutter dash / needle burst",
+      "silhouette": "dash-needle",
+      "occupied": 165,
+      "shimmer_cells": 15
+    },
+    {
+      "index": 1,
+      "champion": "Korr-9",
+      "ship": "Bulwark",
+      "ability": "Rotating broadside",
+      "silhouette": "broadside-shield",
+      "occupied": 321,
+      "shimmer_cells": 16
+    },
+    {
+      "index": 2,
+      "champion": "Sable Myrr",
+      "ship": "Nightrail",
+      "ability": "Serpent spiral / guided missiles",
+      "silhouette": "forked-serpent",
+      "occupied": 275,
+      "shimmer_cells": 17
+    },
+    {
+      "index": 3,
+      "champion": "Xil of Aurora",
+      "ship": "Prism",
+      "ability": "Offset fork volleys",
+      "silhouette": "split-crystal",
+      "occupied": 219,
+      "shimmer_cells": 17
+    },
+    {
+      "index": 4,
+      "champion": "Maera Quill",
+      "ship": "Windrunner",
+      "ability": "Charge / damaging ion wake",
+      "silhouette": "swept-wing-wake",
+      "occupied": 225,
+      "shimmer_cells": 16
+    },
+    {
+      "index": 5,
+      "champion": "Orun Vale",
+      "ship": "Ironwake",
+      "ability": "Telegraphed ram / impact nova",
+      "silhouette": "ram-anvil",
+      "occupied": 323,
+      "shimmer_cells": 17
+    },
+    {
+      "index": 6,
+      "champion": "Vexa Null",
+      "ship": "Voidcoil",
+      "ability": "Circling helix / piercing seekers",
+      "silhouette": "void-helix",
+      "occupied": 326,
+      "shimmer_cells": 23
+    },
+    {
+      "index": 7,
+      "champion": "Atlas-0",
+      "ship": "Sunspear",
+      "ability": "Sniper burst / piercing spear",
+      "silhouette": "solar-spear",
+      "occupied": 202,
+      "shimmer_cells": 24
+    },
+    {
+      "index": 8,
+      "champion": "Galaxy Royale",
+      "ship": "Royale Sovereign",
+      "ability": "League victory / Sovereign reward",
+      "silhouette": "crown-star-laurel",
+      "occupied": 303,
+      "shimmer_cells": 18
+    }
+  ],
+  "atlas_sha256": "c818c0531347876c1b7c72f460e4045bb4056faa8d2492614787032c46f84b1b"
+}

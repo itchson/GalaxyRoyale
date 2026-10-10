@@ -89,6 +89,7 @@ export function paintCampaign(target: HTMLElement, hud: CampaignHud, actions: Ca
   target.append(roster);
   const league = document.createElement("section");
   league.className = "campaign-league";
+  if (hud.tournament_won) league.append(icon("campaign-patch", 8, true));
   league.append(text("h3", "GALAXY ROYALE"));
   if (!hud.tournament_unlocked) {
     league.append(text("p", "Collect all eight patches to reveal the tournament gate in your universe."));

@@ -8,7 +8,9 @@ use engine_core::FrameBuilder;
 #[path = "mote_controller.rs"]
 mod controller;
 pub(super) use controller::WARNING_REACH;
-use controller::{BIOME_KIND, BODY_SCALE, Birth, Controller, FAMILY, Input, Pose, Sanctuary};
+use controller::{
+    BIOME_KIND, BODY_SCALE, Birth, Controller, FAMILY, Input, Phase, Pose, Sanctuary,
+};
 
 #[derive(Clone, Copy)]
 pub(super) struct Mote {
@@ -100,7 +102,8 @@ impl Game {
         let cache_grid = self.site_grid;
         let mut slots = (if self.stress_mode { 300 } else { MAX_BULLETS })
             .saturating_sub(self.world.query::<&Bullet>().iter().count());
-        let mut shots = Vec::new();
+        let mut pulses = Vec::new();
+        let mut cues = Vec::new();
         let mut remove = Vec::new();
         for (entity, (motion, actor, brain, body, mote)) in self.world.query_mut::<(
             Entity,
@@ -142,6 +145,7 @@ impl Game {
                 player_refuge: refuge,
                 bullet_slots: slots,
             };
+            let previous_phase = mote.controller.phase();
             match mote.controller.step(&input, body) {
                 Ok(output) => {
                     motion.position = output.pose.position;
@@ -150,18 +154,40 @@ impl Game {
                     if output.retire {
                         remove.push(entity);
                     }
-                    for shot in output.shots() {
-                        // Reservation subtracts earlier entities' commands in this
-                        // tick. Shared spawn_bullet remains the final hard cap.
-                        slots = slots.saturating_sub(1);
-                        shots.push(shot);
+                    if !output.retire
+                        && previous_phase != Phase::Charge
+                        && mote.controller.phase() == Phase::Charge
+                    {
+                        cues.push(output.pose.position);
+                    }
+                    let count = output.shots().count();
+                    // Preserve command order and shared reservations; one audio
+                    // event belongs to this actor's actual pulse, not each ray.
+                    slots = slots.saturating_sub(count);
+                    if count > 0 {
+                        pulses.push((output.pose.position, output.shots));
                     }
                 }
                 Err(_) => remove.push(entity), // Never leave an invalid frozen enemy.
             }
         }
-        for shot in shots {
-            self.spawn_bullet(shot.position, shot.velocity, shot.damage, false, 1);
+        for position in cues {
+            self.event("mote-charge", position, 0.65);
+        }
+        for (position, shots) in pulses {
+            let before = self.world.query::<&Bullet>().iter().count();
+            for shot in shots.into_iter().flatten() {
+                self.spawn_bullet(shot.position, shot.velocity, shot.damage, false, 1);
+            }
+            let spawned = self
+                .world
+                .query::<&Bullet>()
+                .iter()
+                .count()
+                .saturating_sub(before);
+            if spawned > 0 {
+                self.event("mote-pulse", position, spawned as f32 / 6.0);
+            }
         }
         for entity in remove {
             self.remove_enemy(entity, false);
@@ -246,3 +272,7 @@ impl Game {
 #[cfg(test)]
 #[path = "radiation_enemy_tests.rs"]
 mod tests;
+
+#[cfg(test)]
+#[path = "radiation_audio_tests.rs"]
+mod audio_event_tests;

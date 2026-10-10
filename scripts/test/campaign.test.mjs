@@ -57,6 +57,10 @@ function fixture() {
   return {
     paint: (hud) => exports.paintCampaign(target, hud, actions),
     calls,
+    patches: () =>
+      nodes(target).filter(
+        (node) => node.dataset.pixelKind === "campaign-patch",
+      ),
     text: () =>
       nodes(target)
         .map((node) => node.textContent)
@@ -67,6 +71,24 @@ function fixture() {
       ),
   };
 }
+
+test("the ninth Royale emblem appears only for authoritative tournament victory", () => {
+  for (const won of [false, true]) {
+    const f = fixture();
+    const hud = completedSeason(won);
+    hud.champions[3].patch = false;
+    const before = structuredClone(hud);
+    f.paint(hud);
+    const patches = f.patches();
+    assert.equal(patches.length, won ? 9 : 8);
+    assert.equal(patches[3].dataset.active, "false");
+    assert.equal(patches[0].dataset.active, "true");
+    const victory = patches.find((node) => node.dataset.pixelValue === "8");
+    assert.equal(!!victory, won);
+    if (victory) assert.equal(victory.dataset.active, "true");
+    assert.deepEqual(hud, before);
+  }
+});
 
 function completedSeason(won) {
   return {

@@ -1,0 +1,36 @@
+{
+  "method": "original authored crater/fault/fragment/plume geometry and palette; no AI/model/imported textures",
+  "runtime": "packed palette indices expanded once into occupied PixelBodies; preview PNG never loaded",
+  "defined_opaque_colors": 20,
+  "used_opaque_colors": 19,
+  "used_indices": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+  ],
+  "occupied_cells": {
+    "scar_surface": 4265,
+    "scar_surface_low": 1084,
+    "scar_ion_back": 262,
+    "scar_ion_front": 188,
+    "scar_fragment": 139
+  },
+  "atlas_sha256": "5c3d293f47d62d4639207aea9d71c577f6c913cdeb5f9ecad76117febfec73ce",
+  "animation": "cosmetic only: slow ion drift and restrained mineral-color shimmer; reduced motion freezes it"
+}

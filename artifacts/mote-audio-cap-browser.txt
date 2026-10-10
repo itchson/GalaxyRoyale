@@ -1,0 +1,65 @@
+- main:
+  - heading "Mote browser audio probe" [level=1]
+  - paragraph: Local QA only. Declared AudioEngine cues; no game shots or rewards. Native Web Audio and MediaRecorder, with no microphone.
+  - paragraph: Actual AudioEngine source SHA256 d74adf461c889a12ea1b36ad5888fc35121a79710a20bee8b53aaa70b67c94e8; installed TypeScript 5.9.3; final compressor output branch.
+  - status: Capture saved. Native effects voices max 16/16. Browser DSP measurements are recorded; no hearing/device claim.
+  - region "Engine controls":
+    - button "Unlock audio"
+    - button "Play charge cue"
+    - button "Play pulse cue"
+    - button "Suspend engine"
+    - button "Resume engine"
+    - button "Dispose engine"
+    - text: Master
+    - slider "Master": "0.75"
+    - status: "0.75"
+    - text: Music
+    - slider "Music": "0"
+    - status: "0.00"
+    - text: Effects
+    - slider "Effects": "0.75"
+    - status: "0.75"
+    - checkbox "Master mute"
+    - text: Master mute
+  - region "Declared recording scenarios":
+    - heading "Capture actual browser output" [level=2]
+    - paragraph: Each capture warms the graph for 0.8 s, then records a bounded scenario. Controls lock during recording; Stop saves a clearly cancelled capture.
+    - button "Record charge only"
+    - button "Record pulse only"
+    - button "Record music + effects"
+    - button "Record mute check"
+    - button "Record suspend / resume"
+    - button "Record 100-cue voice-cap burst"
+    - button "Stop and save cancelled capture" [disabled]
+  - region "Measured output":
+    - heading "Measured result" [level=2]
+    - paragraph: cap / post-burst-cleanup / running | peak 0.00000 | RMS 0.00000 | effects voices 0/16
+    - paragraph: "Actual 27162 bytes saved: C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\work\\mote-browser-audio-probe\\captures\\qa-1791666369546-3dbbb477.webm. Declared scenario complete; listening not asserted."
+    - link "Download actual recorded audio":
+      - /url: blob:http://127.0.0.1:4188/c0e1a9bc-ddc2-4a77-bcb6-cf1266e17d4d
+    - link "Download measured report":
+      - /url: blob:http://127.0.0.1:4188/c834f8f1-be2e-4e76-84dc-84e772835542
+    - table:
+      - rowgroup:
+        - row "Stage Running windows Peak Window RMS":
+          - columnheader "Stage"
+          - columnheader "Running windows"
+          - columnheader "Peak"
+          - columnheader "Window RMS"
+      - rowgroup:
+        - row "baseline 10 0.000449 0.000057":
+          - cell "baseline"
+          - cell "10"
+          - cell "0.000449"
+          - cell "0.000057"
+        - row "declared-100-cue-burst 15 0.757215 0.051595":
+          - cell "declared-100-cue-burst"
+          - cell "15"
+          - cell "0.757215"
+          - cell "0.051595"
+        - row "post-burst-cleanup 43 0.000006 0.000000":
+          - cell "post-burst-cleanup"
+          - cell "43"
+          - cell "0.000006"
+          - cell "0.000000"
+    - generic "Declared actions and exact report"

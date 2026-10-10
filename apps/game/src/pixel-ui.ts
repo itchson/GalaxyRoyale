@@ -104,13 +104,23 @@ export class PixelUiBridge {
           "#upgrade-content,#quest-content,#settings-content,#hangar-content,#campaign-content,#console-output,#dialogue-text",
         );
         const clip = scroll ? scroll.getBoundingClientRect() : bounds;
+        // CSS layout quantizes to subpixels. Preserve the measured center while
+        // recovering only the authored campaign icon size within 1/64 UI unit.
+        const authored =
+          kind === "campaign-patch" ? 24 : kind === "campaign-ship" ? 32 : 0;
+        const measuredWidth = box.width / scale,
+          measuredHeight = box.height / scale;
+        const extent = (size: number) =>
+          authored && Math.abs(size - authored) <= 1 / 64 ? authored : size;
+        const width = extent(measuredWidth),
+          height = extent(measuredHeight);
         nodes.push({
           kind,
           rect: [
-            (box.x - bounds.x) / scale,
-            (box.y - bounds.y) / scale,
-            box.width / scale,
-            box.height / scale,
+            (box.x - bounds.x) / scale + (measuredWidth - width) / 2,
+            (box.y - bounds.y) / scale + (measuredHeight - height) / 2,
+            width,
+            height,
           ],
           text: text.replace(/\s+/g, " ").trim().slice(0, 256),
           font,
@@ -122,9 +132,11 @@ export class PixelUiBridge {
             clip.height / scale,
           ],
           active:
-            element === this.hover ||
-            element.contains(document.activeElement) ||
-            element.dataset.active === "true",
+            kind === "campaign-patch"
+              ? element.dataset.active === "true"
+              : element === this.hover ||
+                element.contains(document.activeElement) ||
+                element.dataset.active === "true",
           disabled: element instanceof HTMLButtonElement && element.disabled,
         });
       };
@@ -139,7 +151,12 @@ export class PixelUiBridge {
           add(portrait, "portrait", "", Number(portrait.dataset.portrait ?? 0));
       }
       for (const art of root.querySelectorAll<HTMLElement>("[data-pixel-kind]"))
-        add(art, art.dataset.pixelKind ?? "", "", Number(art.dataset.pixelValue ?? 0));
+        add(
+          art,
+          art.dataset.pixelKind ?? "",
+          "",
+          Number(art.dataset.pixelValue ?? 0),
+        );
       if (root.classList.contains("console-card")) {
         const input = root.querySelector<HTMLInputElement>("#console-input");
         if (input) add(input, "input", input.value);
@@ -160,7 +177,11 @@ export class PixelUiBridge {
           child,
           child.tagName === "BUTTON" ? "button" : "text",
           child.id === "pause-button"
-            ? document.body.classList.contains("touch-ui") ? root.querySelector<HTMLElement>("#quick-menu")?.hidden ? "+" : "X" : "II"
+            ? document.body.classList.contains("touch-ui")
+              ? root.querySelector<HTMLElement>("#quick-menu")?.hidden
+                ? "+"
+                : "X"
+              : "II"
             : child.id === "fullscreen"
               ? "[]"
               : child.id === "destination-marker"
@@ -181,7 +202,10 @@ export class PixelUiBridge {
             const min = input!.min === "" ? 0 : Number(input!.min);
             const max = input!.max === "" ? 100 : Number(input!.max);
             const value = Number(input!.value);
-            return Number.isFinite(min) && Number.isFinite(max) && Number.isFinite(value) && max > min
+            return Number.isFinite(min) &&
+              Number.isFinite(max) &&
+              Number.isFinite(value) &&
+              max > min
               ? Math.max(0, Math.min(1, (value - min) / (max - min)))
               : 0;
           };
@@ -190,11 +214,7 @@ export class PixelUiBridge {
               label,
               input.type === "range" ? "slider" : "toggle",
               text,
-              input.type === "range"
-                ? rangeProgress()
-                : input.checked
-                  ? 1
-                  : 0,
+              input.type === "range" ? rangeProgress() : input.checked ? 1 : 0,
             );
         }
         for (const rank of root.querySelectorAll<HTMLElement>(".rank-dots"))

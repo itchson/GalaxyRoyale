@@ -299,6 +299,7 @@ const CAMPAIGN_SHIPS: [&str; 10] = [
     "campaign_ship_8",
     "campaign_ship_9",
 ];
+#[cfg(test)]
 const CAMPAIGN_PATCHES: [&str; 8] = [
     "campaign_patch_0",
     "campaign_patch_1",
@@ -466,12 +467,26 @@ impl Painter<'_> {
         self.remaining -= count;
         self.work_remaining -= count;
     }
-    fn campaign(&mut self, node: &UiNode, ship: bool) {
-        let names: &[&str] = if ship {
-            &CAMPAIGN_SHIPS
-        } else {
-            &CAMPAIGN_PATCHES
-        };
+    fn campaign(&mut self, node: &UiNode, ship: bool, time: f32, reduced_motion: bool) {
+        if !ship {
+            crate::champion_patches::extract(
+                self.frame,
+                &crate::champion_patches::PatchInput {
+                    index: selection(node.value, crate::champion_patches::COUNT),
+                    rect: node.rect,
+                    parent: self.parent,
+                    clip: self.clip,
+                    earned: node.active,
+                    disabled: node.disabled,
+                    time,
+                    reduced_motion,
+                },
+                &mut self.remaining,
+                &mut self.work_remaining,
+            );
+            return;
+        }
+        let names: &[&str] = &CAMPAIGN_SHIPS;
         let body = &CAMPAIGN_ASSETS.sprites[names[selection(node.value, names.len())]].body;
         let count = body.occupied_count();
         let r = node.rect;
@@ -663,8 +678,8 @@ impl Painter<'_> {
             "panel" => self.frame("panel", r, node.active, node.disabled),
             "console-panel" => self.console_panel(r),
             "portrait" => self.portrait(node, time, reduced),
-            "campaign-patch" => self.campaign(node, false),
-            "campaign-ship" => self.campaign(node, true),
+            "campaign-patch" => self.campaign(node, false, time, reduced),
+            "campaign-ship" => self.campaign(node, true, time, reduced),
             "input" => {
                 self.frame("button", r, node.active, node.disabled);
                 let height = (r[3] - 6.0).max(RoyaleMono::HEIGHT);

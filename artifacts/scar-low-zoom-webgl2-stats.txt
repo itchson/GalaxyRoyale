@@ -1,0 +1,37 @@
+- generic "Galaxy Royale game universe"
+- status
+- dialog "GALAXY ROYALE // CONSOLE":
+  - heading "GALAXY ROYALE // CONSOLE" [level=2]
+  - paragraph: "HELP / STATS / SCENE <NAME> / CLEAR / ` CLOSE"
+  - log "Console output":
+    - paragraph: "> warp -28879.919921875 -6955.796875"
+    - paragraph: WARP -28879.919921875, -6955.796875 / QA combat and site rewards disabled. Run banked; active duel forfeited.
+    - paragraph: "> stats"
+    - paragraph: WEBGL2 / 235 FPS / p95 4.30 ms
+    - paragraph: 4896 quads / 28 entities / 0 particles
+    - paragraph: POSITION -28879.9, -6955.8
+    - paragraph: Radial Wastes / Outer reach · Tier 18 / danger 18
+    - paragraph: HULL 100/100 / SHIELD 0
+    - paragraph: ZOOM 1.60 / WORLD 333 x 188 / UI 533 x 300
+    - paragraph: SHIP LV 3 / XP 60 / CARGO 0/16
+    - paragraph: LAST BOSS UI NONE
+    - paragraph: "> stats"
+    - paragraph: WEBGL2 / 240 FPS / p95 4.30 ms
+    - paragraph: 7648 quads / 28 entities / 0 particles
+    - paragraph: POSITION -28879.9, -6955.8
+    - paragraph: Radial Wastes / Outer reach · Tier 18 / danger 18
+    - paragraph: HULL 100/100 / SHIELD 0
+    - paragraph: ZOOM 1.57 / WORLD 340 x 192 / UI 533 x 300
+    - paragraph: SHIP LV 3 / XP 60 / CARGO 0/16
+    - paragraph: LAST BOSS UI NONE
+    - paragraph: "> stats"
+    - paragraph: WEBGL2 / 240 FPS / p95 4.30 ms
+    - paragraph: 8091 quads / 28 entities / 0 particles
+    - paragraph: POSITION -28879.9, -6955.8
+    - paragraph: Radial Wastes / Outer reach · Tier 18 / danger 18
+    - paragraph: HULL 100/100 / SHIELD 0
+    - paragraph: ZOOM 0.99 / WORLD 538 x 303 / UI 533 x 300
+    - paragraph: SHIP LV 3 / XP 60 / CARGO 0/16
+    - paragraph: LAST BOSS UI NONE
+  - textbox "Console command" [active]:
+    - /placeholder: ENTER COMMAND

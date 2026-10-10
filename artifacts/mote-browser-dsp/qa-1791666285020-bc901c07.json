@@ -1,0 +1,1554 @@
+{
+  "schema": 1,
+  "id": "qa-1791666285020-bc901c07",
+  "scenario": "mute",
+  "declared_cues_only": true,
+  "source": {
+    "original": "apps/game/src/audio.ts",
+    "original_sha256": "d74adf461c889a12ea1b36ad5888fc35121a79710a20bee8b53aaa70b67c94e8",
+    "copied_sha256": "d74adf461c889a12ea1b36ad5888fc35121a79710a20bee8b53aaa70b67c94e8",
+    "compiled_audio_sha256": "b6ad9a8f86900b4f3ae20ba3ac69814d9022ba93a4861c53e4fbff79af80e0de",
+    "compiled_probe_sha256": "a2fc99c92e96dfd30d1c2732823d093bda6c94284e16e93c43a40f8c2a75b4e0",
+    "typescript_version": "5.9.3",
+    "compiler": "installed TypeScript; ES2022 modules, strict, DOM; unchanged AudioEngine",
+    "branch": "existing final DynamicsCompressorNode -> analyser and MediaStreamDestination"
+  },
+  "captured_utc": "2026-10-10T21:04:49.737Z",
+  "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+  "secure_context": true,
+  "context_sample_rate": 48000,
+  "context_base_latency": 0.01,
+  "mime": "audio/webm;codecs=opus",
+  "native_recorded_bytes": 55126,
+  "observed_wall_ms": 4716.9000000059605,
+  "cancelled": false,
+  "failure": null,
+  "peak_window_method": "native float time-domain analyser after existing compressor; 2048 samples, ~30 Hz; sampled peak, not guaranteed true peak",
+  "suspended_windows": 0,
+  "max_effects_voices": 1,
+  "effects_cap_preserved": true,
+  "max_music_voices": 5,
+  "observed_engine_contexts": 1,
+  "stages": {
+    "baseline": {
+      "windows": 10,
+      "peak": 0.03200230002403259,
+      "window_rms": 0.005214759816391897
+    },
+    "audible-before-mute": {
+      "windows": 25,
+      "peak": 0.12559637427330017,
+      "window_rms": 0.010232035957553457
+    },
+    "mute-settle": {
+      "windows": 8,
+      "peak": 0.002949608489871025,
+      "window_rms": 0.0005064178274832795
+    },
+    "master-muted": {
+      "windows": 39,
+      "peak": 5.396540245783399e-7,
+      "window_rms": 2.5972141104553073e-8
+    },
+    "unmute-settle": {
+      "windows": 8,
+      "peak": 0.03353383392095566,
+      "window_rms": 0.005275690604757521
+    },
+    "unmuted": {
+      "windows": 48,
+      "peak": 0.12466651946306229,
+      "window_rms": 0.010717728387528182
+    }
+  },
+  "actions": [
+    {
+      "wall_ms": 0.20000001788139343,
+      "context_s": 47.8,
+      "state": "running",
+      "stage": "baseline",
+      "action": "stage baseline",
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 366,
+      "context_s": 48.16,
+      "state": "running",
+      "stage": "audible-before-mute",
+      "action": "stage audible-before-mute",
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 366.2000000178814,
+      "context_s": 48.16,
+      "state": "running",
+      "stage": "audible-before-mute",
+      "action": "declared mote-pulse",
+      "sfx_voices": 1,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 1217.4000000059605,
+      "context_s": 49.010666666666665,
+      "state": "running",
+      "stage": "mute-settle",
+      "action": "stage mute-settle",
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 1466.2000000178814,
+      "context_s": 49.26133333333333,
+      "state": "running",
+      "stage": "master-muted",
+      "action": "stage master-muted",
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 1667.4000000059605,
+      "context_s": 49.464,
+      "state": "running",
+      "stage": "master-muted",
+      "action": "declared mote-charge",
+      "sfx_voices": 1,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 2116.300000011921,
+      "context_s": 49.912,
+      "state": "running",
+      "stage": "master-muted",
+      "action": "declared mote-pulse",
+      "sfx_voices": 1,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 2816.5,
+      "context_s": 50.61066666666667,
+      "state": "running",
+      "stage": "unmute-settle",
+      "action": "stage unmute-settle",
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 3066.2000000178814,
+      "context_s": 50.861333333333334,
+      "state": "running",
+      "stage": "unmuted",
+      "action": "stage unmuted",
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 3066.300000011921,
+      "context_s": 50.861333333333334,
+      "state": "running",
+      "stage": "unmuted",
+      "action": "declared mote-charge",
+      "sfx_voices": 1,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 3516.5,
+      "context_s": 51.312,
+      "state": "running",
+      "stage": "unmuted",
+      "action": "declared mote-pulse",
+      "sfx_voices": 1,
+      "music_voices": 5
+    }
+  ],
+  "samples": [
+    {
+      "wall_ms": 35.30000001192093,
+      "context_s": 47.832,
+      "state": "running",
+      "stage": "baseline",
+      "peak": 0.011880997568368912,
+      "rms": 0.0037457382153989966,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 69.2000000178814,
+      "context_s": 47.872,
+      "state": "running",
+      "stage": "baseline",
+      "peak": 0.010008207522332668,
+      "rms": 0.0035987298277870296,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 103.30000001192093,
+      "context_s": 47.90133333333333,
+      "state": "running",
+      "stage": "baseline",
+      "peak": 0.009583406150341034,
+      "rms": 0.00325576420727691,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 137.7000000178814,
+      "context_s": 47.94133333333333,
+      "state": "running",
+      "stage": "baseline",
+      "peak": 0.006728408392518759,
+      "rms": 0.0028859181754288038,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 171.60000002384186,
+      "context_s": 47.970666666666666,
+      "state": "running",
+      "stage": "baseline",
+      "peak": 0.007038680370897055,
+      "rms": 0.002689109382867295,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 204.90000000596046,
+      "context_s": 48,
+      "state": "running",
+      "stage": "baseline",
+      "peak": 0.02152821235358715,
+      "rms": 0.0037621904572857174,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 238.5,
+      "context_s": 48.04,
+      "state": "running",
+      "stage": "baseline",
+      "peak": 0.03200230002403259,
+      "rms": 0.012961457339258502,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 273.40000000596046,
+      "context_s": 48.072,
+      "state": "running",
+      "stage": "baseline",
+      "peak": 0.010715392418205738,
+      "rms": 0.0042039717198558025,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 306.5,
+      "context_s": 48.101333333333336,
+      "state": "running",
+      "stage": "baseline",
+      "peak": 0.006605515256524086,
+      "rms": 0.0022277917034090595,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 342,
+      "context_s": 48.141333333333336,
+      "state": "running",
+      "stage": "baseline",
+      "peak": 0.01705370470881462,
+      "rms": 0.003742468065827127,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 376.10000002384186,
+      "context_s": 48.17066666666667,
+      "state": "running",
+      "stage": "audible-before-mute",
+      "peak": 0.12559637427330017,
+      "rms": 0.018567103781967846,
+      "sfx_voices": 1,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 409.7000000178814,
+      "context_s": 48.21066666666667,
+      "state": "running",
+      "stage": "audible-before-mute",
+      "peak": 0.12559637427330017,
+      "rms": 0.026968569710032565,
+      "sfx_voices": 1,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 443.30000001192093,
+      "context_s": 48.24,
+      "state": "running",
+      "stage": "audible-before-mute",
+      "peak": 0.01112842932343483,
+      "rms": 0.0029916729868694047,
+      "sfx_voices": 1,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 476.90000000596046,
+      "context_s": 48.272,
+      "state": "running",
+      "stage": "audible-before-mute",
+      "peak": 0.07318979501724243,
+      "rms": 0.014637447245697375,
+      "sfx_voices": 1,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 510.80000001192093,
+      "context_s": 48.312,
+      "state": "running",
+      "stage": "audible-before-mute",
+      "peak": 0.07318979501724243,
+      "rms": 0.018863690259942487,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 544.8000000119209,
+      "context_s": 48.34133333333333,
+      "state": "running",
+      "stage": "audible-before-mute",
+      "peak": 0.022900210693478584,
+      "rms": 0.006075040634360453,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 578.5,
+      "context_s": 48.38133333333333,
+      "state": "running",
+      "stage": "audible-before-mute",
+      "peak": 0.005816171877086163,
+      "rms": 0.0016252931520006624,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 614.1000000238419,
+      "context_s": 48.410666666666664,
+      "state": "running",
+      "stage": "audible-before-mute",
+      "peak": 0.013110386207699776,
+      "rms": 0.003337940634726388,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 646.7000000178814,
+      "context_s": 48.44,
+      "state": "running",
+      "stage": "audible-before-mute",
+      "peak": 0.013110386207699776,
+      "rms": 0.004643239707528456,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 680.3000000119209,
+      "context_s": 48.48,
+      "state": "running",
+      "stage": "audible-before-mute",
+      "peak": 0.004769244696944952,
+      "rms": 0.0017912085883319176,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 714.5,
+      "context_s": 48.512,
+      "state": "running",
+      "stage": "audible-before-mute",
+      "peak": 0.002729311352595687,
+      "rms": 0.0009405227670042539,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 749.1000000238419,
+      "context_s": 48.552,
+      "state": "running",
+      "stage": "audible-before-mute",
+      "peak": 0.002316243015229702,
+      "rms": 0.0008076786029894071,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 782.8000000119209,
+      "context_s": 48.58133333333333,
+      "state": "running",
+      "stage": "audible-before-mute",
+      "peak": 0.002316243015229702,
+      "rms": 0.0008043777737397639,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 817.3000000119209,
+      "context_s": 48.61066666666667,
+      "state": "running",
+      "stage": "audible-before-mute",
+      "peak": 0.001437153434380889,
+      "rms": 0.0005225762410903095,
+      "sfx_voices": 0,
+      "music_voices": 2
+    },
+    {
+      "wall_ms": 850.8000000119209,
+      "context_s": 48.650666666666666,
+      "state": "running",
+      "stage": "audible-before-mute",
+      "peak": 0.0011909108143299818,
+      "rms": 0.00043772335957651456,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 884.5,
+      "context_s": 48.68,
+      "state": "running",
+      "stage": "audible-before-mute",
+      "peak": 0.043907731771469116,
+      "rms": 0.010547523029603935,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 918.9000000059605,
+      "context_s": 48.72,
+      "state": "running",
+      "stage": "audible-before-mute",
+      "peak": 0.02747468091547489,
+      "rms": 0.010043716633491094,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 953.6000000238419,
+      "context_s": 48.752,
+      "state": "running",
+      "stage": "audible-before-mute",
+      "peak": 0.008099276572465897,
+      "rms": 0.002969404208893726,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 986.2000000178814,
+      "context_s": 48.781333333333336,
+      "state": "running",
+      "stage": "audible-before-mute",
+      "peak": 0.002759169787168503,
+      "rms": 0.0010464677858506445,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 1020.9000000059605,
+      "context_s": 48.821333333333335,
+      "state": "running",
+      "stage": "audible-before-mute",
+      "peak": 0.07754293829202652,
+      "rms": 0.01810067798191923,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 1054.6000000238419,
+      "context_s": 48.85066666666667,
+      "state": "running",
+      "stage": "audible-before-mute",
+      "peak": 0.0595807321369648,
+      "rms": 0.01746222084718381,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 1088.7000000178814,
+      "context_s": 48.89066666666667,
+      "state": "running",
+      "stage": "audible-before-mute",
+      "peak": 0.013381130993366241,
+      "rms": 0.0032353497123576687,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 1122.9000000059605,
+      "context_s": 48.92,
+      "state": "running",
+      "stage": "audible-before-mute",
+      "peak": 0.004279294051229954,
+      "rms": 0.0012311042596864698,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 1157.1000000238419,
+      "context_s": 48.952,
+      "state": "running",
+      "stage": "audible-before-mute",
+      "peak": 0.009919017553329468,
+      "rms": 0.0034784409227842697,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 1192.1000000238419,
+      "context_s": 48.992,
+      "state": "running",
+      "stage": "audible-before-mute",
+      "peak": 0.006844031158834696,
+      "rms": 0.0030801843999261305,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 1224.7000000178814,
+      "context_s": 49.02133333333333,
+      "state": "running",
+      "stage": "mute-settle",
+      "peak": 0.002949608489871025,
+      "rms": 0.0013879079652010901,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 1260,
+      "context_s": 49.06133333333333,
+      "state": "running",
+      "stage": "mute-settle",
+      "peak": 0.0010227622697129846,
+      "rms": 0.00031123187763754123,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 1293,
+      "context_s": 49.090666666666664,
+      "state": "running",
+      "stage": "mute-settle",
+      "peak": 0.0004847449017688632,
+      "rms": 0.0001450392765411788,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 1327.1000000238419,
+      "context_s": 49.12,
+      "state": "running",
+      "stage": "mute-settle",
+      "peak": 0.0003323863202240318,
+      "rms": 0.00008621408746827398,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 1361.300000011921,
+      "context_s": 49.16,
+      "state": "running",
+      "stage": "mute-settle",
+      "peak": 0.000013414075510809198,
+      "rms": 0.000003929777624510096,
+      "sfx_voices": 0,
+      "music_voices": 2
+    },
+    {
+      "wall_ms": 1394.4000000059605,
+      "context_s": 49.192,
+      "state": "running",
+      "stage": "mute-settle",
+      "peak": 0.000001894818296932499,
+      "rms": 4.6905715650165643e-7,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 1429.2000000178814,
+      "context_s": 49.232,
+      "state": "running",
+      "stage": "mute-settle",
+      "peak": 0.00001494808111601742,
+      "rms": 0.000005466092044083387,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 1462.7000000178814,
+      "context_s": 49.26133333333333,
+      "state": "running",
+      "stage": "mute-settle",
+      "peak": 0.000006040854259481421,
+      "rms": 0.0000018773571992504148,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 1497.300000011921,
+      "context_s": 49.29066666666667,
+      "state": "running",
+      "stage": "master-muted",
+      "peak": 5.396540245783399e-7,
+      "rms": 1.621959692120547e-7,
+      "sfx_voices": 0,
+      "music_voices": 5
+    },
+    {
+      "wall_ms": 1531.1000000238419,
+      "context_s": 49.330666666666666,
+      "state": "running",
+      "stage": "master-muted",
+      "peak": 0,
+      "rms": 0,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 1564.800000011921,
+      "context_s": 49.36,
+      "state": "running",
+      "stage": "master-muted",
+      "peak": 0,
+      "rms": 0,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 1598.800000011921,
+      "context_s": 49.4,
+      "state": "running",
+      "stage": "master-muted",
+      "peak": 0,
+      "rms": 0,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 1632.5,
+      "context_s": 49.432,
+      "state": "running",
+      "stage": "master-muted",
+      "peak": 0,
+      "rms": 0,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 1667,
+      "context_s": 49.461333333333336,
+      "state": "running",
+      "stage": "master-muted",
+      "peak": 0,
+      "rms": 0,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 1700.5,
+      "context_s": 49.501333333333335,
+      "state": "running",
+      "stage": "master-muted",
+      "peak": 0,
+      "rms": 0,
+      "sfx_voices": 1,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 1734.6000000238419,
+      "context_s": 49.53066666666667,
+      "state": "running",
+      "stage": "master-muted",
+      "peak": 0,
+      "rms": 0,
+      "sfx_voices": 1,
+      "music_voices": 2
+    },
+    {
+      "wall_ms": 1768.2000000178814,
+      "context_s": 49.57066666666667,
+      "state": "running",
+      "stage": "master-muted",
+      "peak": 0,
+      "rms": 0,
+      "sfx_voices": 1,
+      "music_voices": 2
+    },
+    {
+      "wall_ms": 1802.9000000059605,
+      "context_s": 49.6,
+      "state": "running",
+      "stage": "master-muted",
+      "peak": 0,
+      "rms": 0,
+      "sfx_voices": 0,
+      "music_voices": 2
+    },
+    {
+      "wall_ms": 1838,
+      "context_s": 49.64,
+      "state": "running",
+      "stage": "master-muted",
+      "peak": 0,
+      "rms": 0,
+      "sfx_voices": 0,
+      "music_voices": 2
+    },
+    {
+      "wall_ms": 1870.800000011921,
+      "context_s": 49.672,
+      "state": "running",
+      "stage": "master-muted",
+      "peak": 0,
+      "rms": 0,
+      "sfx_voices": 0,
+      "music_voices": 2
+    },
+    {
+      "wall_ms": 1904.300000011921,
+      "context_s": 49.70133333333333,
+      "state": "running",
+      "stage": "master-muted",
+      "peak": 0,
+      "rms": 0,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 1938.4000000059605,
+      "context_s": 49.74133333333333,
+      "state": "running",
+      "stage": "master-muted",
+      "peak": 0,
+      "rms": 0,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 1973.6000000238419,
+      "context_s": 49.77066666666666,
+      "state": "running",
+      "stage": "master-muted",
+      "peak": 0,
+      "rms": 0,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 2007.1000000238419,
+      "context_s": 49.8,
+      "state": "running",
+      "stage": "master-muted",
+      "peak": 0,
+      "rms": 0,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 2040.9000000059605,
+      "context_s": 49.84,
+      "state": "running",
+      "stage": "master-muted",
+      "peak": 0,
+      "rms": 0,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 2074.9000000059605,
+      "context_s": 49.872,
+      "state": "running",
+      "stage": "master-muted",
+      "peak": 0,
+      "rms": 0,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 2109.600000023842,
+      "context_s": 49.912,
+      "state": "running",
+      "stage": "master-muted",
+      "peak": 0,
+      "rms": 0,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 2142.300000011921,
+      "context_s": 49.94133333333333,
+      "state": "running",
+      "stage": "master-muted",
+      "peak": 0,
+      "rms": 0,
+      "sfx_voices": 1,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 2176.300000011921,
+      "context_s": 49.970666666666666,
+      "state": "running",
+      "stage": "master-muted",
+      "peak": 0,
+      "rms": 0,
+      "sfx_voices": 1,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 2210.300000011921,
+      "context_s": 50.010666666666665,
+      "state": "running",
+      "stage": "master-muted",
+      "peak": 0,
+      "rms": 0,
+      "sfx_voices": 1,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 2245.300000011921,
+      "context_s": 50.04,
+      "state": "running",
+      "stage": "master-muted",
+      "peak": 0,
+      "rms": 0,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 2280,
+      "context_s": 50.08,
+      "state": "running",
+      "stage": "master-muted",
+      "peak": 0,
+      "rms": 0,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 2312.4000000059605,
+      "context_s": 50.112,
+      "state": "running",
+      "stage": "master-muted",
+      "peak": 0,
+      "rms": 0,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 2346.5,
+      "context_s": 50.141333333333336,
+      "state": "running",
+      "stage": "master-muted",
+      "peak": 0,
+      "rms": 0,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 2381.5,
+      "context_s": 50.181333333333335,
+      "state": "running",
+      "stage": "master-muted",
+      "peak": 0,
+      "rms": 0,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 2414.800000011921,
+      "context_s": 50.21066666666667,
+      "state": "running",
+      "stage": "master-muted",
+      "peak": 0,
+      "rms": 0,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 2448.800000011921,
+      "context_s": 50.25066666666667,
+      "state": "running",
+      "stage": "master-muted",
+      "peak": 0,
+      "rms": 0,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 2483.600000023842,
+      "context_s": 50.28,
+      "state": "running",
+      "stage": "master-muted",
+      "peak": 0,
+      "rms": 0,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 2516.2000000178814,
+      "context_s": 50.312,
+      "state": "running",
+      "stage": "master-muted",
+      "peak": 0,
+      "rms": 0,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 2551.100000023842,
+      "context_s": 50.352,
+      "state": "running",
+      "stage": "master-muted",
+      "peak": 0,
+      "rms": 0,
+      "sfx_voices": 0,
+      "music_voices": 2
+    },
+    {
+      "wall_ms": 2584.9000000059605,
+      "context_s": 50.38133333333333,
+      "state": "running",
+      "stage": "master-muted",
+      "peak": 0,
+      "rms": 0,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 2618.800000011921,
+      "context_s": 50.42133333333334,
+      "state": "running",
+      "stage": "master-muted",
+      "peak": 0,
+      "rms": 0,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 2652.9000000059605,
+      "context_s": 50.45066666666666,
+      "state": "running",
+      "stage": "master-muted",
+      "peak": 0,
+      "rms": 0,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 2687.4000000059605,
+      "context_s": 50.48533333333334,
+      "state": "running",
+      "stage": "master-muted",
+      "peak": 0,
+      "rms": 0,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 2722,
+      "context_s": 50.52,
+      "state": "running",
+      "stage": "master-muted",
+      "peak": 0,
+      "rms": 0,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 2755.5,
+      "context_s": 50.552,
+      "state": "running",
+      "stage": "master-muted",
+      "peak": 0,
+      "rms": 0,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 2788.300000011921,
+      "context_s": 50.592,
+      "state": "running",
+      "stage": "master-muted",
+      "peak": 0,
+      "rms": 0,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 2822.9000000059605,
+      "context_s": 50.62133333333333,
+      "state": "running",
+      "stage": "unmute-settle",
+      "peak": 0.00013361767923925072,
+      "rms": 0.000022963966390077188,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 2856.2000000178814,
+      "context_s": 50.650666666666666,
+      "state": "running",
+      "stage": "unmute-settle",
+      "peak": 0.0009563966887071729,
+      "rms": 0.0002760925469555935,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 2891,
+      "context_s": 50.690666666666665,
+      "state": "running",
+      "stage": "unmute-settle",
+      "peak": 0.00910571776330471,
+      "rms": 0.0030312893030636483,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 2924.9000000059605,
+      "context_s": 50.72,
+      "state": "running",
+      "stage": "unmute-settle",
+      "peak": 0.00910571776330471,
+      "rms": 0.004096785906113046,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 2958.800000011921,
+      "context_s": 50.76,
+      "state": "running",
+      "stage": "unmute-settle",
+      "peak": 0.003732024459168315,
+      "rms": 0.0015053881728438,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 2993.800000011921,
+      "context_s": 50.792,
+      "state": "running",
+      "stage": "unmute-settle",
+      "peak": 0.002200869144871831,
+      "rms": 0.0007548420416492815,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 3026.300000011921,
+      "context_s": 50.821333333333335,
+      "state": "running",
+      "stage": "unmute-settle",
+      "peak": 0.03353383392095566,
+      "rms": 0.009250421309933723,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 3061.100000023842,
+      "context_s": 50.861333333333334,
+      "state": "running",
+      "stage": "unmute-settle",
+      "peak": 0.02924511954188347,
+      "rms": 0.010402302261967188,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 3094.7000000178814,
+      "context_s": 50.89066666666667,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.04850836843252182,
+      "rms": 0.01719494460140522,
+      "sfx_voices": 1,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 3128.600000023842,
+      "context_s": 50.93066666666667,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.06047554686665535,
+      "rms": 0.014068921102516117,
+      "sfx_voices": 1,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 3162.4000000059605,
+      "context_s": 50.96,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.08458711951971054,
+      "rms": 0.021663292335071478,
+      "sfx_voices": 1,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 3196.7000000178814,
+      "context_s": 50.992,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.06510106474161148,
+      "rms": 0.01807912641213383,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 3231.7000000178814,
+      "context_s": 51.032,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.013129656203091145,
+      "rms": 0.003743680642992152,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 3264.4000000059605,
+      "context_s": 51.06133333333333,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.00412360206246376,
+      "rms": 0.0013546515204374602,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 3298.2000000178814,
+      "context_s": 51.101333333333336,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.003798392368480563,
+      "rms": 0.0008145467809972605,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 3333.4000000059605,
+      "context_s": 51.13066666666667,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.002158327726647258,
+      "rms": 0.0005459319703705498,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 3367.100000023842,
+      "context_s": 51.16,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.0007792467949911952,
+      "rms": 0.0002802980594263891,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 3401.100000023842,
+      "context_s": 51.2,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.0004901342908851802,
+      "rms": 0.0001738745638714999,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 3434.600000023842,
+      "context_s": 51.232,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.012058443389832973,
+      "rms": 0.00413383904182826,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 3468.600000023842,
+      "context_s": 51.272,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.007759353145956993,
+      "rms": 0.0030084353392503707,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 3503.2000000178814,
+      "context_s": 51.30133333333333,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.002990246517583728,
+      "rms": 0.001284170929431053,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 3536.2000000178814,
+      "context_s": 51.330666666666666,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.12466651946306229,
+      "rms": 0.02525215221358597,
+      "sfx_voices": 1,
+      "music_voices": 5
+    },
+    {
+      "wall_ms": 3570.4000000059605,
+      "context_s": 51.370666666666665,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.05104788392782211,
+      "rms": 0.019349704300789587,
+      "sfx_voices": 1,
+      "music_voices": 5
+    },
+    {
+      "wall_ms": 3604.5,
+      "context_s": 51.4,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.020749326795339584,
+      "rms": 0.009205847503815288,
+      "sfx_voices": 1,
+      "music_voices": 5
+    },
+    {
+      "wall_ms": 3638.2000000178814,
+      "context_s": 51.44,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.005184797570109367,
+      "rms": 0.0018982120134817117,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 3672.4000000059605,
+      "context_s": 51.472,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.0012446409091353416,
+      "rms": 0.0004966156091644093,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 3706.9000000059605,
+      "context_s": 51.501333333333335,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.08837687224149704,
+      "rms": 0.026059219307332876,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 3740.800000011921,
+      "context_s": 51.541333333333334,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.04314080998301506,
+      "rms": 0.010757756139967507,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 3774.5,
+      "context_s": 51.57066666666667,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.018423929810523987,
+      "rms": 0.0076506453394385165,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 3809.600000023842,
+      "context_s": 51.61066666666667,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.027970299124717712,
+      "rms": 0.01172772500375833,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 3842.600000023842,
+      "context_s": 51.64,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.031981535255908966,
+      "rms": 0.0116867605518434,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 3876.4000000059605,
+      "context_s": 51.672,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.025264272466301918,
+      "rms": 0.00991853148743498,
+      "sfx_voices": 0,
+      "music_voices": 2
+    },
+    {
+      "wall_ms": 3910.800000011921,
+      "context_s": 51.712,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.032342661172151566,
+      "rms": 0.010209645515798354,
+      "sfx_voices": 0,
+      "music_voices": 2
+    },
+    {
+      "wall_ms": 3944.9000000059605,
+      "context_s": 51.74133333333333,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.023245517164468765,
+      "rms": 0.008887164662243707,
+      "sfx_voices": 0,
+      "music_voices": 2
+    },
+    {
+      "wall_ms": 3979.600000023842,
+      "context_s": 51.781333333333336,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.019037345424294472,
+      "rms": 0.00819139442109914,
+      "sfx_voices": 0,
+      "music_voices": 2
+    },
+    {
+      "wall_ms": 4014.5,
+      "context_s": 51.81066666666667,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.019037345424294472,
+      "rms": 0.007544345498820685,
+      "sfx_voices": 0,
+      "music_voices": 2
+    },
+    {
+      "wall_ms": 4046.2000000178814,
+      "context_s": 51.84,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.02194962650537491,
+      "rms": 0.006961516127143622,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 4080.7000000178814,
+      "context_s": 51.88,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.018302910029888153,
+      "rms": 0.00597409596476994,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 4114.4000000059605,
+      "context_s": 51.912,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.04262252151966095,
+      "rms": 0.0163369853737098,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 4149.700000017881,
+      "context_s": 51.952,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.021760407835245132,
+      "rms": 0.0072172020803098515,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 4183.300000011921,
+      "context_s": 51.98133333333333,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.01298158336430788,
+      "rms": 0.004779040522212202,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 4216.9000000059605,
+      "context_s": 52.010666666666665,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.011164926923811436,
+      "rms": 0.0039012128895386513,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 4250.5,
+      "context_s": 52.050666666666665,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.08441765606403351,
+      "rms": 0.026320736296081032,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 4285.200000017881,
+      "context_s": 52.08,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.02853291667997837,
+      "rms": 0.00796026489242862,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 4318.100000023842,
+      "context_s": 52.12,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.010969647206366062,
+      "rms": 0.0035165712647110734,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 4353.200000017881,
+      "context_s": 52.152,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.011049719527363777,
+      "rms": 0.0028259778147783007,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 4386.800000011921,
+      "context_s": 52.181333333333335,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.017091915011405945,
+      "rms": 0.004817191600900356,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 4420.300000011921,
+      "context_s": 52.221333333333334,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.008126742206513882,
+      "rms": 0.0029403503401272814,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 4454.9000000059605,
+      "context_s": 52.25066666666667,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.005408957600593567,
+      "rms": 0.002245760690246672,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 4488.4000000059605,
+      "context_s": 52.29066666666667,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.03106975369155407,
+      "rms": 0.008701158512617307,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 4523.5,
+      "context_s": 52.32,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.03106975369155407,
+      "rms": 0.013036648854075633,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 4557,
+      "context_s": 52.352,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.012354611419141293,
+      "rms": 0.004998897407623758,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 4591.600000023842,
+      "context_s": 52.392,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.004996204283088446,
+      "rms": 0.001726486056289204,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 4624.700000017881,
+      "context_s": 52.42133333333334,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.00955749861896038,
+      "rms": 0.002064722184372766,
+      "sfx_voices": 0,
+      "music_voices": 4
+    },
+    {
+      "wall_ms": 4658.300000011921,
+      "context_s": 52.461333333333336,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.010974247008562088,
+      "rms": 0.00334782632271971,
+      "sfx_voices": 0,
+      "music_voices": 3
+    },
+    {
+      "wall_ms": 4693.5,
+      "context_s": 52.49066666666667,
+      "state": "running",
+      "stage": "unmuted",
+      "peak": 0.0038647125475108624,
+      "rms": 0.0013533705365720349,
+      "sfx_voices": 0,
+      "music_voices": 2
+    }
+  ],
+  "branch_cleanup": {
+    "analyser_disconnect_succeeded": true,
+    "recorder_disconnect_succeeded": true,
+    "errors": [],
+    "recorded_tracks_ended": true
+  },
+  "listening_or_physical_device_acceptance": false
+}
