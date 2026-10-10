@@ -1,0 +1,2097 @@
+{
+  "centered_stick": [
+    {
+      "coast_distance": 18.37710189819336,
+      "expected_speed": 100.0,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 1,
+      "observed_peak_speed": 100.00006866455078,
+      "position_after_stop": [
+        71.39591217041016,
+        -3.758122682571411
+      ],
+      "rank": 0,
+      "release": "held centered stick",
+      "release_speed": 100.00006866455078,
+      "release_to_speed_below_0_1": 0.38333335518836975,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 23.45087432861328,
+      "expected_speed": 127.5,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 12,
+      "observed_peak_speed": 127.49999237060547,
+      "position_after_stop": [
+        91.04986572265625,
+        -4.791598320007324
+      ],
+      "rank": 0,
+      "release": "held centered stick",
+      "release_speed": 127.49999237060547,
+      "release_to_speed_below_0_1": 0.40000003576278687,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 28.141067504882812,
+      "expected_speed": 153.00001525878906,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 12,
+      "observed_peak_speed": 153.0001678466797,
+      "position_after_stop": [
+        109.25984191894531,
+        -5.749929904937744
+      ],
+      "rank": 5,
+      "release": "held centered stick",
+      "release_speed": 153.0001678466797,
+      "release_to_speed_below_0_1": 0.40000003576278687,
+      "time_to_95_percent_speed": 0.4166666865348816
+    }
+  ],
+  "click_courses": [
+    {
+      "final_position": [
+        38.737510681152344,
+        0.0
+      ],
+      "level": 1,
+      "max_x": 38.737510681152344,
+      "observed_peak_speed": 99.66670227050781,
+      "rank": 0,
+      "settled_seconds": 0.7833333611488342,
+      "target": [
+        40.0,
+        0
+      ],
+      "target_error": 1.2624893188476562
+    },
+    {
+      "final_position": [
+        118.73751068115234,
+        0.0
+      ],
+      "level": 1,
+      "max_x": 118.73751068115234,
+      "observed_peak_speed": 100.00006866455078,
+      "rank": 0,
+      "settled_seconds": 1.5833333730697632,
+      "target": [
+        120.0,
+        0
+      ],
+      "target_error": 1.2624893188476562
+    },
+    {
+      "final_position": [
+        198.73753356933594,
+        0.0
+      ],
+      "level": 1,
+      "max_x": 198.73753356933594,
+      "observed_peak_speed": 100.00029754638672,
+      "rank": 0,
+      "settled_seconds": 2.383333444595337,
+      "target": [
+        200.0,
+        0
+      ],
+      "target_error": 1.2624664306640625
+    },
+    {
+      "final_position": [
+        38.85604476928711,
+        0.0
+      ],
+      "level": 12,
+      "max_x": 38.85604476928711,
+      "observed_peak_speed": 111.23507690429688,
+      "rank": 0,
+      "settled_seconds": 0.6833333969116211,
+      "target": [
+        40.0,
+        0
+      ],
+      "target_error": 1.1439552307128906
+    },
+    {
+      "final_position": [
+        118.88159942626953,
+        0.0
+      ],
+      "level": 12,
+      "max_x": 118.88159942626953,
+      "observed_peak_speed": 127.50010681152344,
+      "rank": 0,
+      "settled_seconds": 1.3166667222976685,
+      "target": [
+        120.0,
+        0
+      ],
+      "target_error": 1.1184005737304688
+    },
+    {
+      "final_position": [
+        198.939453125,
+        0.0
+      ],
+      "level": 12,
+      "max_x": 198.939453125,
+      "observed_peak_speed": 127.50010681152344,
+      "rank": 0,
+      "settled_seconds": 1.9500000476837158,
+      "target": [
+        200.0,
+        0
+      ],
+      "target_error": 1.060546875
+    },
+    {
+      "final_position": [
+        38.90876007080078,
+        0.0
+      ],
+      "level": 12,
+      "max_x": 38.90876007080078,
+      "observed_peak_speed": 123.28639221191406,
+      "rank": 5,
+      "settled_seconds": 0.6333333849906921,
+      "target": [
+        40.0,
+        0
+      ],
+      "target_error": 1.0912399291992188
+    },
+    {
+      "final_position": [
+        119.12443542480469,
+        0.0
+      ],
+      "level": 12,
+      "max_x": 119.12443542480469,
+      "observed_peak_speed": 153.0001678466797,
+      "rank": 5,
+      "settled_seconds": 1.1666667461395264,
+      "target": [
+        120.0,
+        0
+      ],
+      "target_error": 0.8755645751953125
+    },
+    {
+      "final_position": [
+        199.0496368408203,
+        0.0
+      ],
+      "level": 12,
+      "max_x": 199.0496368408203,
+      "observed_peak_speed": 153.0001678466797,
+      "rank": 5,
+      "settled_seconds": 1.683333396911621,
+      "target": [
+        200.0,
+        0
+      ],
+      "target_error": 0.9503631591796875
+    }
+  ],
+  "drive": [
+    {
+      "coast_distance": 15.845996856689453,
+      "expected_speed": 100.0,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 1,
+      "observed_peak_speed": 100.00006866455078,
+      "position_after_stop": [
+        68.86480712890625,
+        -3.758122682571411
+      ],
+      "rank": 0,
+      "release": "actual pointer release / None",
+      "release_speed": 100.00006866455078,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 16.47985076904297,
+      "expected_speed": 104.0,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 1,
+      "observed_peak_speed": 104.00000762939453,
+      "position_after_stop": [
+        71.61941528320312,
+        -3.9084484577178955
+      ],
+      "rank": 1,
+      "release": "actual pointer release / None",
+      "release_speed": 104.00000762939453,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 17.113697052001953,
+      "expected_speed": 108.00000762939453,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 1,
+      "observed_peak_speed": 107.99994659423828,
+      "position_after_stop": [
+        74.37401580810547,
+        -4.0587663650512695
+      ],
+      "rank": 2,
+      "release": "actual pointer release / None",
+      "release_speed": 107.99994659423828,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 17.747539520263672,
+      "expected_speed": 112.0,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 1,
+      "observed_peak_speed": 111.99988555908203,
+      "position_after_stop": [
+        77.12860107421875,
+        -4.209091663360596
+      ],
+      "rank": 3,
+      "release": "actual pointer release / None",
+      "release_speed": 111.99988555908203,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 18.381370544433594,
+      "expected_speed": 116.0,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 1,
+      "observed_peak_speed": 116.00005340576172,
+      "position_after_stop": [
+        79.88319396972656,
+        -4.359415531158447
+      ],
+      "rank": 4,
+      "release": "actual pointer release / None",
+      "release_speed": 116.00005340576172,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 19.015220642089844,
+      "expected_speed": 120.00000762939453,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 1,
+      "observed_peak_speed": 119.99999237060547,
+      "position_after_stop": [
+        82.63780212402344,
+        -4.509741306304932
+      ],
+      "rank": 5,
+      "release": "actual pointer release / None",
+      "release_speed": 119.99999237060547,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 16.24216079711914,
+      "expected_speed": 102.5,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 2,
+      "observed_peak_speed": 102.49991607666016,
+      "position_after_stop": [
+        70.5864486694336,
+        -3.852076768875122
+      ],
+      "rank": 0,
+      "release": "actual pointer release / None",
+      "release_speed": 102.49991607666016,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 16.891876220703125,
+      "expected_speed": 106.5999984741211,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 2,
+      "observed_peak_speed": 106.5998764038086,
+      "position_after_stop": [
+        73.40992736816406,
+        -4.006153106689453
+      ],
+      "rank": 1,
+      "release": "actual pointer release / None",
+      "release_speed": 106.5998764038086,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 17.54153060913086,
+      "expected_speed": 110.69999694824219,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 2,
+      "observed_peak_speed": 110.70006561279297,
+      "position_after_stop": [
+        76.23336029052734,
+        -4.160235404968262
+      ],
+      "rank": 2,
+      "release": "actual pointer release / None",
+      "release_speed": 110.70006561279297,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 18.191211700439453,
+      "expected_speed": 114.80000305175781,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 2,
+      "observed_peak_speed": 114.8000259399414,
+      "position_after_stop": [
+        79.05681610107422,
+        -4.3143181800842285
+      ],
+      "rank": 3,
+      "release": "actual pointer release / None",
+      "release_speed": 114.8000259399414,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 18.84090805053711,
+      "expected_speed": 118.89998626708984,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 2,
+      "observed_peak_speed": 118.89998626708984,
+      "position_after_stop": [
+        81.8802719116211,
+        -4.4684014320373535
+      ],
+      "rank": 4,
+      "release": "actual pointer release / None",
+      "release_speed": 118.89998626708984,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 19.49059295654297,
+      "expected_speed": 123.0,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 2,
+      "observed_peak_speed": 123.00017547607422,
+      "position_after_stop": [
+        84.70374298095703,
+        -4.622483730316162
+      ],
+      "rank": 5,
+      "release": "actual pointer release / None",
+      "release_speed": 123.00017547607422,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 16.638294219970703,
+      "expected_speed": 104.99999237060547,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 3,
+      "observed_peak_speed": 104.99999237060547,
+      "position_after_stop": [
+        72.30804443359375,
+        -3.9460294246673584
+      ],
+      "rank": 0,
+      "release": "actual pointer release / None",
+      "release_speed": 104.99999237060547,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 17.30384063720703,
+      "expected_speed": 109.19998931884766,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 3,
+      "observed_peak_speed": 109.1999740600586,
+      "position_after_stop": [
+        75.20038604736328,
+        -4.1038641929626465
+      ],
+      "rank": 1,
+      "release": "actual pointer release / None",
+      "release_speed": 109.1999740600586,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 17.969383239746094,
+      "expected_speed": 113.39999389648438,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 3,
+      "observed_peak_speed": 113.39995574951172,
+      "position_after_stop": [
+        78.09272003173828,
+        -4.261704444885254
+      ],
+      "rank": 2,
+      "release": "actual pointer release / None",
+      "release_speed": 113.39995574951172,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 18.634918212890625,
+      "expected_speed": 117.5999984741211,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 3,
+      "observed_peak_speed": 117.59993743896484,
+      "position_after_stop": [
+        80.98503875732422,
+        -4.4195451736450195
+      ],
+      "rank": 3,
+      "release": "actual pointer release / None",
+      "release_speed": 117.59993743896484,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 19.300437927246094,
+      "expected_speed": 121.79999542236328,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 3,
+      "observed_peak_speed": 121.8001480102539,
+      "position_after_stop": [
+        83.87734985351562,
+        -4.577385902404785
+      ],
+      "rank": 4,
+      "release": "actual pointer release / None",
+      "release_speed": 121.8001480102539,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 19.965965270996094,
+      "expected_speed": 126.0,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 3,
+      "observed_peak_speed": 125.9999008178711,
+      "position_after_stop": [
+        86.76966857910156,
+        -4.735227108001709
+      ],
+      "rank": 5,
+      "release": "actual pointer release / None",
+      "release_speed": 125.9999008178711,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 17.03445816040039,
+      "expected_speed": 107.50000762939453,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 4,
+      "observed_peak_speed": 107.50006866455078,
+      "position_after_stop": [
+        74.0296859741211,
+        -4.039975643157959
+      ],
+      "rank": 0,
+      "release": "actual pointer release / None",
+      "release_speed": 107.50006866455078,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 17.715850830078125,
+      "expected_speed": 111.80000305175781,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 4,
+      "observed_peak_speed": 111.8000717163086,
+      "position_after_stop": [
+        76.99089050292969,
+        -4.20157527923584
+      ],
+      "rank": 1,
+      "release": "actual pointer release / None",
+      "release_speed": 111.8000717163086,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 18.397220611572266,
+      "expected_speed": 116.10001373291016,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 4,
+      "observed_peak_speed": 116.1000747680664,
+      "position_after_stop": [
+        79.95206451416016,
+        -4.363175392150879
+      ],
+      "rank": 2,
+      "release": "actual pointer release / None",
+      "release_speed": 116.1000747680664,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 19.07860565185547,
+      "expected_speed": 120.40000915527344,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 4,
+      "observed_peak_speed": 120.39984893798828,
+      "position_after_stop": [
+        82.91324615478516,
+        -4.524772644042969
+      ],
+      "rank": 3,
+      "release": "actual pointer release / None",
+      "release_speed": 120.39984893798828,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 19.759979248046875,
+      "expected_speed": 124.69999694824219,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 4,
+      "observed_peak_speed": 124.6998519897461,
+      "position_after_stop": [
+        85.87443542480469,
+        -4.686371803283691
+      ],
+      "rank": 4,
+      "release": "actual pointer release / None",
+      "release_speed": 124.6998519897461,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 20.44134521484375,
+      "expected_speed": 129.00001525878906,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 4,
+      "observed_peak_speed": 129.00009155273438,
+      "position_after_stop": [
+        88.83561706542969,
+        -4.847971439361572
+      ],
+      "rank": 5,
+      "release": "actual pointer release / None",
+      "release_speed": 129.00009155273438,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 17.430606842041016,
+      "expected_speed": 110.0,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 5,
+      "observed_peak_speed": 109.99991607666016,
+      "position_after_stop": [
+        75.75129699707031,
+        -4.133928298950195
+      ],
+      "rank": 0,
+      "release": "actual pointer release / None",
+      "release_speed": 109.99991607666016,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 18.12783432006836,
+      "expected_speed": 114.39999389648438,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 5,
+      "observed_peak_speed": 114.39994049072266,
+      "position_after_stop": [
+        78.78135681152344,
+        -4.299286365509033
+      ],
+      "rank": 1,
+      "release": "actual pointer release / None",
+      "release_speed": 114.39994049072266,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 18.82508087158203,
+      "expected_speed": 118.80001068115234,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 5,
+      "observed_peak_speed": 118.79996490478516,
+      "position_after_stop": [
+        81.81143188476562,
+        -4.4646430015563965
+      ],
+      "rank": 2,
+      "release": "actual pointer release / None",
+      "release_speed": 118.79996490478516,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 19.52227783203125,
+      "expected_speed": 123.19999694824219,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 5,
+      "observed_peak_speed": 123.19998931884766,
+      "position_after_stop": [
+        84.8414535522461,
+        -4.630000591278076
+      ],
+      "rank": 3,
+      "release": "actual pointer release / None",
+      "release_speed": 123.19976043701172,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 20.219497680664062,
+      "expected_speed": 127.60000610351562,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 5,
+      "observed_peak_speed": 127.60001373291016,
+      "position_after_stop": [
+        87.87149047851562,
+        -4.795356750488281
+      ],
+      "rank": 4,
+      "release": "actual pointer release / None",
+      "release_speed": 127.59978485107422,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 20.916732788085938,
+      "expected_speed": 132.0,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 5,
+      "observed_peak_speed": 131.99981689453125,
+      "position_after_stop": [
+        90.90155029296875,
+        -4.960714817047119
+      ],
+      "rank": 5,
+      "release": "actual pointer release / None",
+      "release_speed": 131.99981689453125,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 17.82675552368164,
+      "expected_speed": 112.5,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 6,
+      "observed_peak_speed": 112.49999237060547,
+      "position_after_stop": [
+        77.4729232788086,
+        -4.227881908416748
+      ],
+      "rank": 0,
+      "release": "actual pointer release / None",
+      "release_speed": 112.49999237060547,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 18.539833068847656,
+      "expected_speed": 116.99999237060547,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 6,
+      "observed_peak_speed": 117.00003814697266,
+      "position_after_stop": [
+        80.57184600830078,
+        -4.396996021270752
+      ],
+      "rank": 1,
+      "release": "actual pointer release / None",
+      "release_speed": 117.00003814697266,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 19.252914428710938,
+      "expected_speed": 121.5,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 6,
+      "observed_peak_speed": 121.50008392333984,
+      "position_after_stop": [
+        83.67076110839844,
+        -4.566112518310547
+      ],
+      "rank": 2,
+      "release": "actual pointer release / None",
+      "release_speed": 121.50008392333984,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 19.965965270996094,
+      "expected_speed": 126.0,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 6,
+      "observed_peak_speed": 125.9999008178711,
+      "position_after_stop": [
+        86.76966857910156,
+        -4.735227108001709
+      ],
+      "rank": 3,
+      "release": "actual pointer release / None",
+      "release_speed": 125.9999008178711,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 20.679039001464844,
+      "expected_speed": 130.5,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 6,
+      "observed_peak_speed": 130.4999542236328,
+      "position_after_stop": [
+        89.86858367919922,
+        -4.904342174530029
+      ],
+      "rank": 4,
+      "release": "actual pointer release / None",
+      "release_speed": 130.49972534179688,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 21.392112731933594,
+      "expected_speed": 135.0,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 6,
+      "observed_peak_speed": 135.0,
+      "position_after_stop": [
+        92.96751403808594,
+        -5.07345724105835
+      ],
+      "rank": 5,
+      "release": "actual pointer release / None",
+      "release_speed": 135.0,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 18.222888946533203,
+      "expected_speed": 115.0,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 7,
+      "observed_peak_speed": 115.00006866455078,
+      "position_after_stop": [
+        79.19452667236328,
+        -4.321834087371826
+      ],
+      "rank": 0,
+      "release": "actual pointer release / None",
+      "release_speed": 115.00006866455078,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 18.951847076416016,
+      "expected_speed": 119.5999984741211,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 7,
+      "observed_peak_speed": 119.59990692138672,
+      "position_after_stop": [
+        82.36234283447266,
+        -4.49470853805542
+      ],
+      "rank": 1,
+      "release": "actual pointer release / None",
+      "release_speed": 119.59990692138672,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 19.680747985839844,
+      "expected_speed": 124.19999694824219,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 7,
+      "observed_peak_speed": 124.1999740600586,
+      "position_after_stop": [
+        85.53011322021484,
+        -4.667581081390381
+      ],
+      "rank": 2,
+      "release": "actual pointer release / None",
+      "release_speed": 124.1999740600586,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 20.40966796875,
+      "expected_speed": 128.8000030517578,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 7,
+      "observed_peak_speed": 128.800048828125,
+      "position_after_stop": [
+        88.6978988647461,
+        -4.840454578399658
+      ],
+      "rank": 3,
+      "release": "actual pointer release / None",
+      "release_speed": 128.800048828125,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 21.138565063476562,
+      "expected_speed": 133.39999389648438,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 7,
+      "observed_peak_speed": 133.40011596679688,
+      "position_after_stop": [
+        91.86566162109375,
+        -5.013327598571777
+      ],
+      "rank": 4,
+      "release": "actual pointer release / None",
+      "release_speed": 133.40011596679688,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 21.86748504638672,
+      "expected_speed": 138.0,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 7,
+      "observed_peak_speed": 138.00018310546875,
+      "position_after_stop": [
+        95.033447265625,
+        -5.186210632324219
+      ],
+      "rank": 5,
+      "release": "actual pointer release / None",
+      "release_speed": 138.00018310546875,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 18.619068145751953,
+      "expected_speed": 117.49999237060547,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 8,
+      "observed_peak_speed": 117.49991607666016,
+      "position_after_stop": [
+        80.91616821289062,
+        -4.415787696838379
+      ],
+      "rank": 0,
+      "release": "actual pointer release / None",
+      "release_speed": 117.49991607666016,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 19.363807678222656,
+      "expected_speed": 122.19998931884766,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 8,
+      "observed_peak_speed": 122.20000457763672,
+      "position_after_stop": [
+        84.15280151367188,
+        -4.5924177169799805
+      ],
+      "rank": 1,
+      "release": "actual pointer release / None",
+      "release_speed": 122.20000457763672,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 20.10858154296875,
+      "expected_speed": 126.90000915527344,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 8,
+      "observed_peak_speed": 126.89986419677734,
+      "position_after_stop": [
+        87.38944244384766,
+        -4.769050598144531
+      ],
+      "rank": 2,
+      "release": "actual pointer release / None",
+      "release_speed": 126.89986419677734,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 20.85334014892578,
+      "expected_speed": 131.60000610351562,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 8,
+      "observed_peak_speed": 131.59996032714844,
+      "position_after_stop": [
+        90.62609100341797,
+        -4.945682048797607
+      ],
+      "rank": 3,
+      "release": "actual pointer release / None",
+      "release_speed": 131.5997314453125,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 21.598098754882812,
+      "expected_speed": 136.29998779296875,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 8,
+      "observed_peak_speed": 136.300048828125,
+      "position_after_stop": [
+        93.86273956298828,
+        -5.122313022613525
+      ],
+      "rank": 4,
+      "release": "actual pointer release / None",
+      "release_speed": 136.300048828125,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 22.342880249023438,
+      "expected_speed": 141.0,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 8,
+      "observed_peak_speed": 140.99990844726562,
+      "position_after_stop": [
+        97.09940338134766,
+        -5.298954010009766
+      ],
+      "rank": 5,
+      "release": "actual pointer release / None",
+      "release_speed": 140.99990844726562,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 19.015220642089844,
+      "expected_speed": 120.00000762939453,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 9,
+      "observed_peak_speed": 119.99999237060547,
+      "position_after_stop": [
+        82.63780212402344,
+        -4.509741306304932
+      ],
+      "rank": 0,
+      "release": "actual pointer release / None",
+      "release_speed": 119.99999237060547,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 19.77581787109375,
+      "expected_speed": 124.80000305175781,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 9,
+      "observed_peak_speed": 124.80010223388672,
+      "position_after_stop": [
+        85.94329071044922,
+        -4.690131187438965
+      ],
+      "rank": 1,
+      "release": "actual pointer release / None",
+      "release_speed": 124.80010223388672,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 20.53643798828125,
+      "expected_speed": 129.60000610351562,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 9,
+      "observed_peak_speed": 129.59999084472656,
+      "position_after_stop": [
+        89.24881744384766,
+        -4.870519638061523
+      ],
+      "rank": 2,
+      "release": "actual pointer release / None",
+      "release_speed": 129.59976196289062,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 21.297027587890625,
+      "expected_speed": 134.40000915527344,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 9,
+      "observed_peak_speed": 134.4001007080078,
+      "position_after_stop": [
+        92.55431365966797,
+        -5.050909996032715
+      ],
+      "rank": 3,
+      "release": "actual pointer release / None",
+      "release_speed": 134.39987182617188,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 22.057662963867188,
+      "expected_speed": 139.1999969482422,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 9,
+      "observed_peak_speed": 139.19998168945312,
+      "position_after_stop": [
+        95.85985565185547,
+        -5.2313079833984375
+      ],
+      "rank": 4,
+      "release": "actual pointer release / None",
+      "release_speed": 139.19998168945312,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 22.818260192871094,
+      "expected_speed": 144.0,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 9,
+      "observed_peak_speed": 144.00009155273438,
+      "position_after_stop": [
+        99.16535949707031,
+        -5.411698818206787
+      ],
+      "rank": 5,
+      "release": "actual pointer release / None",
+      "release_speed": 144.00009155273438,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 19.41136932373047,
+      "expected_speed": 122.5,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 10,
+      "observed_peak_speed": 122.49983978271484,
+      "position_after_stop": [
+        84.3593978881836,
+        -4.603693008422852
+      ],
+      "rank": 0,
+      "release": "actual pointer release / None",
+      "release_speed": 122.49983978271484,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 20.18780517578125,
+      "expected_speed": 127.39999389648438,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 10,
+      "observed_peak_speed": 127.39997100830078,
+      "position_after_stop": [
+        87.7337646484375,
+        -4.787840366363525
+      ],
+      "rank": 1,
+      "release": "actual pointer release / None",
+      "release_speed": 127.39974212646484,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 20.964271545410156,
+      "expected_speed": 132.3000030517578,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 10,
+      "observed_peak_speed": 132.30010986328125,
+      "position_after_stop": [
+        91.10816955566406,
+        -4.971988677978516
+      ],
+      "rank": 2,
+      "release": "actual pointer release / None",
+      "release_speed": 132.30010986328125,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 21.74072265625,
+      "expected_speed": 137.1999969482422,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 10,
+      "observed_peak_speed": 137.20001220703125,
+      "position_after_stop": [
+        94.48252868652344,
+        -5.15614652633667
+      ],
+      "rank": 3,
+      "release": "actual pointer release / None",
+      "release_speed": 137.20001220703125,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 22.517173767089844,
+      "expected_speed": 142.10000610351562,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 10,
+      "observed_peak_speed": 142.09991455078125,
+      "position_after_stop": [
+        97.85690307617188,
+        -5.3402934074401855
+      ],
+      "rank": 4,
+      "release": "actual pointer release / None",
+      "release_speed": 142.09991455078125,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 23.293617248535156,
+      "expected_speed": 147.0,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 10,
+      "observed_peak_speed": 146.9998016357422,
+      "position_after_stop": [
+        101.23126220703125,
+        -5.524442195892334
+      ],
+      "rank": 5,
+      "release": "actual pointer release / None",
+      "release_speed": 146.9998016357422,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 19.807525634765625,
+      "expected_speed": 125.0,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 11,
+      "observed_peak_speed": 125.0001449584961,
+      "position_after_stop": [
+        86.08104705810547,
+        -4.6976470947265625
+      ],
+      "rank": 0,
+      "release": "actual pointer release / None",
+      "release_speed": 125.0001449584961,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 20.599822998046875,
+      "expected_speed": 130.0,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 11,
+      "observed_peak_speed": 130.0000762939453,
+      "position_after_stop": [
+        89.5242691040039,
+        -4.885553359985352
+      ],
+      "rank": 1,
+      "release": "actual pointer release / None",
+      "release_speed": 129.99984741210938,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 21.392112731933594,
+      "expected_speed": 135.0,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 11,
+      "observed_peak_speed": 135.0,
+      "position_after_stop": [
+        92.96751403808594,
+        -5.07345724105835
+      ],
+      "rank": 2,
+      "release": "actual pointer release / None",
+      "release_speed": 135.0,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 22.184425354003906,
+      "expected_speed": 140.0,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 11,
+      "observed_peak_speed": 140.00015258789062,
+      "position_after_stop": [
+        96.4107666015625,
+        -5.261373519897461
+      ],
+      "rank": 3,
+      "release": "actual pointer release / None",
+      "release_speed": 140.00015258789062,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 22.976715087890625,
+      "expected_speed": 145.0,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 11,
+      "observed_peak_speed": 144.99984741210938,
+      "position_after_stop": [
+        99.85398864746094,
+        -5.449278831481934
+      ],
+      "rank": 4,
+      "release": "actual pointer release / None",
+      "release_speed": 144.99984741210938,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 23.769020080566406,
+      "expected_speed": 150.0,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 11,
+      "observed_peak_speed": 149.99998474121094,
+      "position_after_stop": [
+        103.2972412109375,
+        -5.637185096740723
+      ],
+      "rank": 5,
+      "release": "actual pointer release / None",
+      "release_speed": 149.99998474121094,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 20.20367431640625,
+      "expected_speed": 127.5,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 12,
+      "observed_peak_speed": 127.49999237060547,
+      "position_after_stop": [
+        87.80266571044922,
+        -4.791598320007324
+      ],
+      "rank": 0,
+      "release": "actual pointer release / None",
+      "release_speed": 127.49999237060547,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 21.011795043945312,
+      "expected_speed": 132.59999084472656,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 12,
+      "observed_peak_speed": 132.59994506835938,
+      "position_after_stop": [
+        91.31473541259766,
+        -4.983262538909912
+      ],
+      "rank": 1,
+      "release": "actual pointer release / None",
+      "release_speed": 132.59994506835938,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 21.819976806640625,
+      "expected_speed": 137.6999969482422,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 12,
+      "observed_peak_speed": 137.7001190185547,
+      "position_after_stop": [
+        94.8268814086914,
+        -5.1749372482299805
+      ],
+      "rank": 2,
+      "release": "actual pointer release / None",
+      "release_speed": 137.69989013671875,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 22.62812042236328,
+      "expected_speed": 142.8000030517578,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 12,
+      "observed_peak_speed": 142.80006408691406,
+      "position_after_stop": [
+        98.33897399902344,
+        -5.36660099029541
+      ],
+      "rank": 3,
+      "release": "actual pointer release / None",
+      "release_speed": 142.79983520507812,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 23.436264038085938,
+      "expected_speed": 147.89999389648438,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 12,
+      "observed_peak_speed": 147.89976501464844,
+      "position_after_stop": [
+        101.85107421875,
+        -5.558264255523682
+      ],
+      "rank": 4,
+      "release": "actual pointer release / None",
+      "release_speed": 147.89976501464844,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    },
+    {
+      "coast_distance": 24.244407653808594,
+      "expected_speed": 153.00001525878906,
+      "fixture": "all six basic ranks equal; no signatures/relics; inherited rank above cap is explicitly granted",
+      "level": 12,
+      "observed_peak_speed": 153.0001678466797,
+      "position_after_stop": [
+        105.3631820678711,
+        -5.749929904937744
+      ],
+      "rank": 5,
+      "release": "actual pointer release / None",
+      "release_speed": 153.0001678466797,
+      "release_to_speed_below_0_1": 0.3333333432674408,
+      "time_to_95_percent_speed": 0.4166666865348816
+    }
+  ],
+  "fixed_step_seconds": 0.01666666753590107,
+  "levels": [
+    {
+      "level": 1,
+      "next_xp": 20,
+      "rank_cap": 1,
+      "xp": 0
+    },
+    {
+      "level": 2,
+      "next_xp": 60,
+      "rank_cap": 1,
+      "xp": 20
+    },
+    {
+      "level": 3,
+      "next_xp": 120,
+      "rank_cap": 2,
+      "xp": 60
+    },
+    {
+      "level": 4,
+      "next_xp": 200,
+      "rank_cap": 2,
+      "xp": 120
+    },
+    {
+      "level": 5,
+      "next_xp": 300,
+      "rank_cap": 3,
+      "xp": 200
+    },
+    {
+      "level": 6,
+      "next_xp": 420,
+      "rank_cap": 3,
+      "xp": 300
+    },
+    {
+      "level": 7,
+      "next_xp": 560,
+      "rank_cap": 3,
+      "xp": 420
+    },
+    {
+      "level": 8,
+      "next_xp": 720,
+      "rank_cap": 4,
+      "xp": 560
+    },
+    {
+      "level": 9,
+      "next_xp": 900,
+      "rank_cap": 4,
+      "xp": 720
+    },
+    {
+      "level": 10,
+      "next_xp": 1100,
+      "rank_cap": 4,
+      "xp": 900
+    },
+    {
+      "level": 11,
+      "next_xp": 1320,
+      "rank_cap": 4,
+      "xp": 1100
+    },
+    {
+      "level": 12,
+      "next_xp": 1560,
+      "rank_cap": 5,
+      "xp": 1320
+    }
+  ],
+  "natural_launches": [
+    {
+      "belt_seconds": 7.233333587646484,
+      "combat_seconds": 14.633334159851074,
+      "currency": [
+        0,
+        0,
+        0
+      ],
+      "death": false,
+      "final_level": 1,
+      "final_xp": 0,
+      "fire": false,
+      "first_collected_point_seconds": null,
+      "first_hull_loss": 9.950000762939453,
+      "first_xp_seconds": null,
+      "fixture": "fresh actual natural launch; fixed unskilled straight input; 533x300 world viewport",
+      "hit_ticks": 9,
+      "hull_at_first_combat": 76.0,
+      "kills": [
+        0,
+        0,
+        0
+      ],
+      "last_run": null,
+      "minimum_nonreset_hull": 26.799999237060547,
+      "position": [
+        2857.982177734375,
+        29.588668823242188
+      ],
+      "seconds": 30.000001907348633,
+      "seed": 1196576601,
+      "stick": [
+        1.0,
+        0.0
+      ]
+    },
+    {
+      "belt_seconds": 7.233333587646484,
+      "combat_seconds": 14.2333345413208,
+      "currency": [
+        0,
+        1,
+        0
+      ],
+      "death": false,
+      "final_level": 1,
+      "final_xp": 8,
+      "fire": true,
+      "first_collected_point_seconds": 14.100000381469727,
+      "first_hull_loss": 19.80000114440918,
+      "first_xp_seconds": 5.9166669845581055,
+      "fixture": "fresh actual natural launch; fixed unskilled straight input; 533x300 world viewport",
+      "hit_ticks": 1,
+      "hull_at_first_combat": 100.0,
+      "kills": [
+        0,
+        0,
+        0
+      ],
+      "last_run": null,
+      "minimum_nonreset_hull": 92.0,
+      "position": [
+        2975.774169921875,
+        -0.48733019828796387
+      ],
+      "seconds": 30.000001907348633,
+      "seed": 1196576601,
+      "stick": [
+        1.0,
+        0.0
+      ]
+    },
+    {
+      "belt_seconds": 7.4166669845581055,
+      "combat_seconds": 14.416666984558105,
+      "currency": [
+        0,
+        0,
+        0
+      ],
+      "death": false,
+      "final_level": 1,
+      "final_xp": 0,
+      "fire": false,
+      "first_collected_point_seconds": null,
+      "first_hull_loss": 6.716667175292969,
+      "first_xp_seconds": null,
+      "fixture": "fresh actual natural launch; fixed unskilled straight input; 533x300 world viewport",
+      "hit_ticks": 3,
+      "hull_at_first_combat": 92.0,
+      "kills": [
+        0,
+        0,
+        0
+      ],
+      "last_run": null,
+      "minimum_nonreset_hull": 75.0,
+      "position": [
+        2900.447998046875,
+        -27.280336380004883
+      ],
+      "seconds": 30.000001907348633,
+      "seed": 1,
+      "stick": [
+        1.0,
+        0.0
+      ]
+    },
+    {
+      "belt_seconds": 7.233333587646484,
+      "combat_seconds": 14.2333345413208,
+      "currency": [
+        0,
+        1,
+        0
+      ],
+      "death": false,
+      "final_level": 1,
+      "final_xp": 6,
+      "fire": true,
+      "first_collected_point_seconds": 23.983335494995117,
+      "first_hull_loss": 9.533333778381348,
+      "first_xp_seconds": 5.833333492279053,
+      "fixture": "fresh actual natural launch; fixed unskilled straight input; 533x300 world viewport",
+      "hit_ticks": 1,
+      "hull_at_first_combat": 92.0,
+      "kills": [
+        0,
+        0,
+        0
+      ],
+      "last_run": null,
+      "minimum_nonreset_hull": 92.0,
+      "position": [
+        2977.134765625,
+        -0.2109319120645523
+      ],
+      "seconds": 30.000001907348633,
+      "seed": 1,
+      "stick": [
+        1.0,
+        0.0
+      ]
+    },
+    {
+      "belt_seconds": 7.233333587646484,
+      "combat_seconds": 14.466667175292969,
+      "currency": [
+        0,
+        0,
+        0
+      ],
+      "death": false,
+      "final_level": 1,
+      "final_xp": 0,
+      "fire": false,
+      "first_collected_point_seconds": null,
+      "first_hull_loss": 13.200000762939453,
+      "first_xp_seconds": null,
+      "fixture": "fresh actual natural launch; fixed unskilled straight input; 533x300 world viewport",
+      "hit_ticks": 7,
+      "hull_at_first_combat": 84.0,
+      "kills": [
+        0,
+        0,
+        0
+      ],
+      "last_run": null,
+      "minimum_nonreset_hull": 41.0,
+      "position": [
+        2839.937744140625,
+        22.104820251464844
+      ],
+      "seconds": 30.000001907348633,
+      "seed": 17,
+      "stick": [
+        1.0,
+        0.0
+      ]
+    },
+    {
+      "belt_seconds": 7.233333587646484,
+      "combat_seconds": 14.2333345413208,
+      "currency": [
+        1,
+        0,
+        1
+      ],
+      "death": false,
+      "final_level": 1,
+      "final_xp": 13,
+      "fire": true,
+      "first_collected_point_seconds": 13.266667366027832,
+      "first_hull_loss": null,
+      "first_xp_seconds": 11.633334159851074,
+      "fixture": "fresh actual natural launch; fixed unskilled straight input; 533x300 world viewport",
+      "hit_ticks": 0,
+      "hull_at_first_combat": 100.0,
+      "kills": [
+        0,
+        1,
+        0
+      ],
+      "last_run": null,
+      "minimum_nonreset_hull": 100.0,
+      "position": [
+        2978.044189453125,
+        -3.7585394382476807
+      ],
+      "seconds": 30.000001907348633,
+      "seed": 17,
+      "stick": [
+        1.0,
+        0.0
+      ]
+    }
+  ],
+  "primary_cadence": [
+    {
+      "authored_shots_per_second": 5.0,
+      "ending_hull": 175.0,
+      "fire_rate_rank": 0,
+      "fixture": "isolated boss-dart diagnostic; inherited R5 armor/shield/regen; rightward micro-thrust fire; unchanged XP",
+      "interval_ticks": [
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13,
+        13
+      ],
+      "shot_count_over_5_seconds": 24,
+      "shot_ticks": [
+        1,
+        14,
+        27,
+        40,
+        53,
+        66,
+        79,
+        92,
+        105,
+        118,
+        131,
+        144,
+        157,
+        170,
+        183,
+        196,
+        209,
+        222,
+        235,
+        248,
+        261,
+        274,
+        287,
+        300
+      ],
+      "steady_observed_shots_per_second": 4.615384615384615
+    },
+    {
+      "authored_shots_per_second": 5.5,
+      "ending_hull": 175.0,
+      "fire_rate_rank": 1,
+      "fixture": "isolated boss-dart diagnostic; inherited R5 armor/shield/regen; rightward micro-thrust fire; unchanged XP",
+      "interval_ticks": [
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11
+      ],
+      "shot_count_over_5_seconds": 28,
+      "shot_ticks": [
+        1,
+        12,
+        23,
+        34,
+        45,
+        56,
+        67,
+        78,
+        89,
+        100,
+        111,
+        122,
+        133,
+        144,
+        155,
+        166,
+        177,
+        188,
+        199,
+        210,
+        221,
+        232,
+        243,
+        254,
+        265,
+        276,
+        287,
+        298
+      ],
+      "steady_observed_shots_per_second": 5.454545454545454
+    },
+    {
+      "authored_shots_per_second": 6.0,
+      "ending_hull": 175.0,
+      "fire_rate_rank": 2,
+      "fixture": "isolated boss-dart diagnostic; inherited R5 armor/shield/regen; rightward micro-thrust fire; unchanged XP",
+      "interval_ticks": [
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11,
+        11
+      ],
+      "shot_count_over_5_seconds": 28,
+      "shot_ticks": [
+        1,
+        12,
+        23,
+        34,
+        45,
+        56,
+        67,
+        78,
+        89,
+        100,
+        111,
+        122,
+        133,
+        144,
+        155,
+        166,
+        177,
+        188,
+        199,
+        210,
+        221,
+        232,
+        243,
+        254,
+        265,
+        276,
+        287,
+        298
+      ],
+      "steady_observed_shots_per_second": 5.454545454545454
+    },
+    {
+      "authored_shots_per_second": 6.5,
+      "ending_hull": 175.0,
+      "fire_rate_rank": 3,
+      "fixture": "isolated boss-dart diagnostic; inherited R5 armor/shield/regen; rightward micro-thrust fire; unchanged XP",
+      "interval_ticks": [
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10,
+        10
+      ],
+      "shot_count_over_5_seconds": 30,
+      "shot_ticks": [
+        1,
+        11,
+        21,
+        31,
+        41,
+        51,
+        61,
+        71,
+        81,
+        91,
+        101,
+        111,
+        121,
+        131,
+        141,
+        151,
+        161,
+        171,
+        181,
+        191,
+        201,
+        211,
+        221,
+        231,
+        241,
+        251,
+        261,
+        271,
+        281,
+        291
+      ],
+      "steady_observed_shots_per_second": 6.0
+    },
+    {
+      "authored_shots_per_second": 7.0,
+      "ending_hull": 175.0,
+      "fire_rate_rank": 4,
+      "fixture": "isolated boss-dart diagnostic; inherited R5 armor/shield/regen; rightward micro-thrust fire; unchanged XP",
+      "interval_ticks": [
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9
+      ],
+      "shot_count_over_5_seconds": 34,
+      "shot_ticks": [
+        1,
+        10,
+        19,
+        28,
+        37,
+        46,
+        55,
+        64,
+        73,
+        82,
+        91,
+        100,
+        109,
+        118,
+        127,
+        136,
+        145,
+        154,
+        163,
+        172,
+        181,
+        190,
+        199,
+        208,
+        217,
+        226,
+        235,
+        244,
+        253,
+        262,
+        271,
+        280,
+        289,
+        298
+      ],
+      "steady_observed_shots_per_second": 6.666666666666667
+    },
+    {
+      "authored_shots_per_second": 7.5,
+      "ending_hull": 175.0,
+      "fire_rate_rank": 5,
+      "fixture": "isolated boss-dart diagnostic; inherited R5 armor/shield/regen; rightward micro-thrust fire; unchanged XP",
+      "interval_ticks": [
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9,
+        9
+      ],
+      "shot_count_over_5_seconds": 34,
+      "shot_ticks": [
+        1,
+        10,
+        19,
+        28,
+        37,
+        46,
+        55,
+        64,
+        73,
+        82,
+        91,
+        100,
+        109,
+        118,
+        127,
+        136,
+        145,
+        154,
+        163,
+        172,
+        181,
+        190,
+        199,
+        208,
+        217,
+        226,
+        235,
+        244,
+        253,
+        262,
+        271,
+        280,
+        289,
+        298
+      ],
+      "steady_observed_shots_per_second": 6.666666666666667
+    }
+  ],
+  "reversals": [
+    {
+      "additional_forward_distance": 25.637676239013672,
+      "first_negative_x_velocity": 0.46666669845581055,
+      "level": 1,
+      "maximum_lateral_travel": 16.26244354248047,
+      "rank": 0,
+      "reverse_95_percent": 0.8500000238418579
+    },
+    {
+      "additional_forward_distance": 32.68803405761719,
+      "first_negative_x_velocity": 0.46666669845581055,
+      "level": 12,
+      "maximum_lateral_travel": 20.734619140625,
+      "rank": 0,
+      "reverse_95_percent": 0.8500000238418579
+    },
+    {
+      "additional_forward_distance": 39.22563934326172,
+      "first_negative_x_velocity": 0.46666669845581055,
+      "level": 12,
+      "maximum_lateral_travel": 24.881547927856445,
+      "rank": 5,
+      "reverse_95_percent": 0.8500000238418579
+    }
+  ],
+  "scope": "current compiled production public Game::tick; declared work-only fixtures; native CPU simulation, no browser/human/phone acceptance",
+  "source_head": "9c290ae8fa7baa1a993a867a5e0d0178e0a8bde1"
+}

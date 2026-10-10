@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 186,
+  "revision": 189,
   "name": "Galaxy Royale",
   "phase": "Foundation → playable vertical slice",
-  "updatedAt": "2026-10-10T19:18:07.960Z",
+  "updatedAt": "2026-10-10T19:21:14.535Z",
   "tasks": [
     {
       "id": "studio",
@@ -2125,6 +2125,82 @@
       "revision": 2,
       "createdAt": "2026-10-10T18:51:54.723Z",
       "updatedAt": "2026-10-10T19:18:07.834Z"
+    },
+    {
+      "id": "task-6c761ea8",
+      "title": "Fixed-tick weapon cadence: make every fire-rate rank meaningful",
+      "description": "A post-release actual Game tick probe found rank plateaus: ranks 0–5 fire every 13/11/11/10/9/9 fixed ticks because each shot resets the cooldown and discards overshoot. Two paid ranks produce no steady cadence increase. Gameplay is preparing an isolated residual-carry correction; independent QA owns release/idle/sanctuary/retry/signature boundary review. Root owns production integration and a new validated build. Current published HUD/Riveter bytes remain frozen.",
+      "department": "Gameplay",
+      "owner": "Producer / Gameplay specialist / Independent QA",
+      "status": "active",
+      "priority": "high",
+      "dependencies": [
+        "gameplay"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Actual fixed-tick primary shot cadence rises at every purchased rank and matches authored long-run rates",
+          "met": false
+        },
+        {
+          "text": "No catch-up burst debt after idle, sanctuary or death; short release preserves remaining cooldown and Echo counters",
+          "met": false
+        },
+        {
+          "text": "Reviewed production integration, meaningful native regressions and updated normal two-backend build",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual Game tick rate and movement probes against the frozen release core",
+          "kind": "note",
+          "path": "artifacts/scout-progression-audit.json"
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-10T19:21:14.491Z",
+      "updatedAt": "2026-10-10T19:21:14.491Z"
+    },
+    {
+      "id": "task-696d7d24",
+      "title": "Maximum ship level: truthful XP progress caption",
+      "description": "Actual compiled HUD at 99,000 XP reports level 100 and next XP 101,000, while the level function caps at 100 and the shell calls this the next level. Correct the read-only HUD/caption without mutating stored XP or caps. Independent native and serialized save probes confirm the display issue; no XP-loss or purchase exploit was found.",
+      "department": "Gameplay / UI",
+      "owner": "Producer",
+      "status": "ready",
+      "priority": "normal",
+      "dependencies": [
+        "gameplay",
+        "save"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Level 100 clearly displays maximum level instead of an unreachable next-level threshold",
+          "met": false
+        },
+        {
+          "text": "Existing per-ship XP, ranks, currency and save contracts remain valid",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Independent actual compiled boundary and transaction probes",
+          "kind": "note",
+          "path": "artifacts/scout-progression-qa-native.json"
+        },
+        {
+          "label": "Actual Rust snapshots through strict browser schema and IndexedDB",
+          "kind": "note",
+          "path": "artifacts/scout-progression-qa-save.json"
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-10T19:21:14.509Z",
+      "updatedAt": "2026-10-10T19:21:14.509Z"
     }
   ],
   "reviews": [
@@ -2470,6 +2546,24 @@
       ],
       "taskIds": [
         "task-e8684a94"
+      ]
+    },
+    {
+      "id": "review-295fae3e",
+      "title": "Post-release Scout progression audit: measured cadence plateau and XP cap caption",
+      "body": "Gameplay measured actual Game ticks rather than assuming authored fire-rate floats equal gameplay. Steady rank-zero through rank-five primary intervals were 13, 11, 11, 10, 9 and 9 ticks at 60 Hz, making two purchased ranks ineffective. Root inspected the cooldown decrement/reset source and assigned a bounded residual-carry correction with independent idle/safe/retry/signature review. Seventy-two declared movement/braking cases passed; these are fixture measurements, not natural play scores. Independent QA exercised 88 actual compiled progression assertions and 25 actual-Rust-snapshot schema/IndexedDB assertions, confirming rank costs/gates, switching and save invariants. It found a display-only level-100 next-XP caption error. These findings were discovered after the frozen HUD/Riveter publication and do not invalidate its bounded renderer/package proof.",
+      "author": "Producer",
+      "source": "Actual post-release progression probes and next bounded correction assignments",
+      "createdAt": "2026-10-10T19:21:14.535Z",
+      "participants": [
+        "Gameplay specialist",
+        "Production specialist / Independent QA",
+        "Producer / Integrator"
+      ],
+      "taskIds": [
+        "balance",
+        null,
+        null
       ]
     }
   ],
@@ -4778,6 +4872,36 @@
       "author": "Producer",
       "source": "Succeeded exact-source private deployment and actual specialist handoffs",
       "createdAt": "2026-10-10T19:18:07.960Z"
+    },
+    {
+      "id": "906338de-8265-42e1-8952-5977b79eaa33",
+      "revision": 187,
+      "kind": "task.create",
+      "itemId": "task-6c761ea8",
+      "title": "Fixed-tick weapon cadence: make every fire-rate rank meaningful",
+      "author": "Producer",
+      "source": "Actual post-release progression probes and next bounded correction assignments",
+      "createdAt": "2026-10-10T19:21:14.491Z"
+    },
+    {
+      "id": "18dedc4b-ac52-4155-96ff-ad330346c7b8",
+      "revision": 188,
+      "kind": "task.create",
+      "itemId": "task-696d7d24",
+      "title": "Maximum ship level: truthful XP progress caption",
+      "author": "Producer",
+      "source": "Actual post-release progression probes and next bounded correction assignments",
+      "createdAt": "2026-10-10T19:21:14.509Z"
+    },
+    {
+      "id": "82a3ffbf-432d-44de-b2a2-cc1b0870f21f",
+      "revision": 189,
+      "kind": "review",
+      "itemId": "review-295fae3e",
+      "title": "Post-release Scout progression audit: measured cadence plateau and XP cap caption",
+      "author": "Producer",
+      "source": "Actual post-release progression probes and next bounded correction assignments",
+      "createdAt": "2026-10-10T19:21:14.535Z"
     }
   ],
   "runRecords": [

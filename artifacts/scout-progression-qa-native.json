@@ -1,0 +1,650 @@
+{
+  "assertions": 88,
+  "confirmed_display_issue": {
+    "level": 100,
+    "level_at_advertised_next": 100,
+    "next_xp": 101000,
+    "xp": 99000
+  },
+  "levels": [
+    {
+      "level": 1,
+      "next_xp": 20,
+      "rank_cap": 1,
+      "xp_floor": 0
+    },
+    {
+      "level": 2,
+      "next_xp": 60,
+      "rank_cap": 1,
+      "xp_floor": 20
+    },
+    {
+      "level": 3,
+      "next_xp": 120,
+      "rank_cap": 2,
+      "xp_floor": 60
+    },
+    {
+      "level": 4,
+      "next_xp": 200,
+      "rank_cap": 2,
+      "xp_floor": 120
+    },
+    {
+      "level": 5,
+      "next_xp": 300,
+      "rank_cap": 3,
+      "xp_floor": 200
+    },
+    {
+      "level": 6,
+      "next_xp": 420,
+      "rank_cap": 3,
+      "xp_floor": 300
+    },
+    {
+      "level": 7,
+      "next_xp": 560,
+      "rank_cap": 3,
+      "xp_floor": 420
+    },
+    {
+      "level": 8,
+      "next_xp": 720,
+      "rank_cap": 4,
+      "xp_floor": 560
+    },
+    {
+      "level": 9,
+      "next_xp": 900,
+      "rank_cap": 4,
+      "xp_floor": 720
+    },
+    {
+      "level": 10,
+      "next_xp": 1100,
+      "rank_cap": 4,
+      "xp_floor": 900
+    },
+    {
+      "level": 11,
+      "next_xp": 1320,
+      "rank_cap": 4,
+      "xp_floor": 1100
+    },
+    {
+      "level": 12,
+      "next_xp": 1560,
+      "rank_cap": 5,
+      "xp_floor": 1320
+    }
+  ],
+  "profiles": {
+    "crafted": {
+      "boss_generations": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "boss_kills": [
+        0,
+        0,
+        0
+      ],
+      "campaign": {
+        "blueprints": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "cargo_materials": 0,
+        "crafted": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "credits_seen": false,
+        "last_run": null,
+        "patches": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "royale_results": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selected_ship": 0,
+        "ship_xp": [
+          1320,
+          0,
+          20,
+          60,
+          120,
+          200,
+          420,
+          560,
+          900,
+          0
+        ],
+        "stored_materials": 0,
+        "tournament_attempt": 0,
+        "victory_claimed": false
+      },
+      "currency": [
+        0,
+        20,
+        30
+      ],
+      "discoveries": [],
+      "kills": [
+        0,
+        0,
+        0
+      ],
+      "pending": [
+        false,
+        false,
+        false
+      ],
+      "pity": [
+        0,
+        0,
+        0
+      ],
+      "quests": [],
+      "ranks": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "relics": [],
+      "revision": 1,
+      "schema_version": 3,
+      "seed": 1196576601,
+      "unlocked": [
+        true,
+        true,
+        true
+      ]
+    },
+    "returned": {
+      "boss_generations": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "boss_kills": [
+        0,
+        0,
+        0
+      ],
+      "campaign": {
+        "blueprints": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "cargo_materials": 0,
+        "crafted": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "credits_seen": false,
+        "last_run": null,
+        "patches": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "royale_results": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selected_ship": 0,
+        "ship_xp": [
+          1320,
+          0,
+          20,
+          60,
+          120,
+          200,
+          420,
+          560,
+          900,
+          0
+        ],
+        "stored_materials": 0,
+        "tournament_attempt": 0,
+        "victory_claimed": false
+      },
+      "currency": [
+        0,
+        20,
+        30
+      ],
+      "discoveries": [],
+      "kills": [
+        0,
+        0,
+        0
+      ],
+      "pending": [
+        false,
+        false,
+        false
+      ],
+      "pity": [
+        0,
+        0,
+        0
+      ],
+      "quests": [],
+      "ranks": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "relics": [],
+      "revision": 3,
+      "schema_version": 3,
+      "seed": 1196576601,
+      "unlocked": [
+        true,
+        true,
+        true
+      ]
+    },
+    "sovereign": {
+      "boss_generations": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "boss_kills": [
+        0,
+        0,
+        0
+      ],
+      "campaign": {
+        "blueprints": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "cargo_materials": 0,
+        "crafted": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "credits_seen": false,
+        "last_run": null,
+        "patches": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "royale_results": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "selected_ship": 9,
+        "ship_xp": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          1320
+        ],
+        "stored_materials": 0,
+        "tournament_attempt": 0,
+        "victory_claimed": true
+      },
+      "currency": [
+        0,
+        0,
+        0
+      ],
+      "discoveries": [],
+      "kills": [
+        0,
+        0,
+        0
+      ],
+      "pending": [
+        false,
+        false,
+        false
+      ],
+      "pity": [
+        0,
+        0,
+        0
+      ],
+      "quests": [],
+      "ranks": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "relics": [],
+      "revision": 2,
+      "schema_version": 3,
+      "seed": 1196576601,
+      "unlocked": [
+        false,
+        false,
+        false
+      ]
+    },
+    "switched": {
+      "boss_generations": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "boss_kills": [
+        0,
+        0,
+        0
+      ],
+      "campaign": {
+        "blueprints": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "cargo_materials": 0,
+        "crafted": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "credits_seen": false,
+        "last_run": null,
+        "patches": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "royale_results": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selected_ship": 1,
+        "ship_xp": [
+          1320,
+          0,
+          20,
+          60,
+          120,
+          200,
+          420,
+          560,
+          900,
+          0
+        ],
+        "stored_materials": 0,
+        "tournament_attempt": 0,
+        "victory_claimed": false
+      },
+      "currency": [
+        0,
+        20,
+        30
+      ],
+      "discoveries": [],
+      "kills": [
+        0,
+        0,
+        0
+      ],
+      "pending": [
+        false,
+        false,
+        false
+      ],
+      "pity": [
+        0,
+        0,
+        0
+      ],
+      "quests": [],
+      "ranks": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        5
+      ],
+      "relics": [],
+      "revision": 2,
+      "schema_version": 3,
+      "seed": 1196576601,
+      "unlocked": [
+        true,
+        true,
+        true
+      ]
+    }
+  },
+  "purchases": [
+    {
+      "below_level_and_currency_rejections_atomic": true,
+      "cost": 10,
+      "rank": 1,
+      "xp_floor": 0
+    },
+    {
+      "below_level_and_currency_rejections_atomic": true,
+      "cost": 10,
+      "rank": 2,
+      "xp_floor": 60
+    },
+    {
+      "below_level_and_currency_rejections_atomic": true,
+      "cost": 10,
+      "rank": 3,
+      "xp_floor": 200
+    },
+    {
+      "below_level_and_currency_rejections_atomic": true,
+      "cost": 10,
+      "rank": 4,
+      "xp_floor": 560
+    },
+    {
+      "below_level_and_currency_rejections_atomic": true,
+      "cost": 10,
+      "rank": 5,
+      "xp_floor": 1320
+    }
+  ],
+  "scope": "Actual compiled native Game API progression boundary checks; no human/phone/browser/GPU play acceptance"
+}

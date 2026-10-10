@@ -1,0 +1,11 @@
+{
+  "recordedAt": "2026-10-10T19:19:41.193Z",
+  "assertions": 25,
+  "scope": "Actual native Game snapshots through strict browser profile validation and fake-indexeddb SaveStore transactions; no browser/device storage lifecycle claim",
+  "cases": [
+    "crafted/switch/return snapshots persist full independent XP/ranks/costs",
+    "same-revision XP/currency rewrite ignored",
+    "malformed XP and unowned selected ships rejected before import",
+    "valid winning Sovereign checkpoint imports and reloads exactly"
+  ]
+}
