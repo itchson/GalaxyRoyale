@@ -1,0 +1,288 @@
+- complementary:
+  - link "Galaxy Royale mission board":
+    - /url: "#"
+    - text: GALAXY
+    - text: ROYALE
+    - generic: MISSION CONTROL
+  - generic: WORKSPACE
+  - navigation "Production views":
+    - button "▦ Mission board":
+      - generic: ▦
+      - text: Mission board
+    - button "◇ Review room":
+      - generic: ◇
+      - text: Review room
+    - button "⌁ Decisions":
+      - generic: ⌁
+      - text: Decisions
+    - button "▣ Build archive":
+      - generic: ▣
+      - text: Build archive
+    - button "≋ Activity log":
+      - generic: ≋
+      - text: Activity log
+    - button "↗ Feedback queue":
+      - generic: ↗
+      - text: Feedback queue
+  - text: BUILDING WITH INTENT
+  - paragraph:
+    - text: A pixel universe.
+    - text: A clear record of the work.
+  - text: ◉ Local & private
+  - link "Open game workspace ↗":
+    - /url: http://127.0.0.1:4173
+    - text: Open game workspace
+    - generic: ↗
+  - generic: Development preview; availability depends on the game server.
+- banner:
+  - generic: Galaxy Royale/Build archive
+  - generic: Local API connected
+- main:
+  - text: MISSION CONTROL / BUILDS
+  - heading "Build archive" [level=1]
+  - paragraph: Playable outputs and recorded validation. Physical devices and emulation stay distinct.
+  - article:
+    - generic: 11 Oct, 05:44 am · Producer
+    - heading "Progression cadence, capped XP and dock click / private release" [level=2]
+    - paragraph: Published the exact accepted source be3ae02adcf514d2f3a6e9687115a3c7da344d2d to the existing owner-private site. Normal Game::tick cadence now benefits every rank; maximum-level caption and centered prompt click corrections are included. Studio reference validation is local-only service code and excluded from game assets. The release includes no work-only radiation/death candidates. Collected progression/save format remains unchanged.
+    - text: "Source revision:"
+    - code: be3ae02adcf514d2f3a6e9687115a3c7da344d2d
+    - generic: pass
+    - generic: Integrated Rust gameplay/engine/web regressions193
+    - generic: pass
+    - generic: Shell/IndexedDB/controller/studio tests70
+    - generic: pass
+    - generic: Strict native/WebGPU/WebGL2 Clippy + normal locked dual-WASM/TS build
+    - generic: pass
+    - generic: Independent actual cadence/cooldown/Echo and exact18asset packaging
+    - generic: pass
+    - generic: Actual normal WebGPU/WebGL2 dock click and capped-level UI
+    - generic: pass
+    - generic: Exact pushed-source owner-private deployment
+    - generic: not run
+    - generic: Physical phones,human balance,natural full campaign,current offline/recovery
+    - generic: Not measured by this correction iteration; remain pending.
+    - generic: not run
+    - generic: Owner-authenticated remote gameplay
+    - generic: Deployment succeeded; unauthenticated browser sees access gate.
+    - strong: Known issues
+    - paragraph: Physical gates and full natural playthrough remain pending. Forced diagnostic death with eligible healing is a separate unshipped candidate. Radiation integration remains work-only.
+    - link "Confirmed owner-private release identity and limits ↗":
+      - /url: /artifacts?path=artifacts%2Fprivate-release.json
+    - link "Actual193Rust/70shell and normal browser corrections ↗":
+      - /url: /artifacts?path=artifacts%2Fprogression-integration-validation.md
+    - link "Independent exact18asset package/export/source review ↗":
+      - /url: /artifacts?path=artifacts%2Fprogression-packaging-review.md
+    - link "Actual native cadence and signature boundaries ↗":
+      - /url: /artifacts?path=artifacts%2Fweapon-cadence-qa-results.json
+    - link "Actual WebGPU maximum-level menu ↗":
+      - /url: /artifacts?path=artifacts%2Fmax-level-caption-webgpu-final.jpg
+    - link "Actual WebGL2 maximum-level menu ↗":
+      - /url: /artifacts?path=artifacts%2Fmax-level-caption-webgl2-final.jpg
+    - generic: Confirmed exact pushed-source private release and actual local validation
+  - article:
+    - generic: 11 Oct, 05:18 am · Producer
+    - heading "Adaptive pixel boss HUD and Iron Belt Riveter / private release" [level=2]
+    - paragraph: Normal WebGPU and WebGL2 gameplay package published successfully from the exact pushed source. Includes adaptive fixed-scale RoyaleMono health/phase rows, safe-area/control reservations, minimal telemetry, repaired small-area painter parity and the first actual biome enemy with original destructible barrel cells. Eleven final local browser captures, actual wheel upper clamp and PWA update evidence are retained. The remote endpoint correctly requires owner login; game execution after that login remains unmeasured.
+    - text: "Source revision:"
+    - code: 4ac160d6278ac0e728761189e8cf6f2fa54197d1
+    - link "Open playable build ↗":
+      - /url: https://galaxy-royale-itchson.itchson.chatgpt.site/
+    - generic: pass
+    - generic: "Native engine37/core75 and final web74: 186 checks"
+    - generic: pass
+    - generic: 66 shell/store/input/console checks
+    - generic: pass
+    - generic: Eight actual-WASM save scenarios / both serializer backends
+    - generic: pass
+    - generic: Strict native and both shipping WASM Clippy
+    - generic: pass
+    - generic: Final normal dual-WASM/TypeScript/game/Studio build
+    - generic: pass
+    - generic: Independent occupied-quad layout and small-area repair review
+    - generic: pass
+    - generic: Representative current local WebGPU/WebGL2 browser and compact touch layout
+    - generic: pass
+    - generic: Actual repeated wheel maximum clamp and Apply update at Haven
+    - generic: pass
+    - generic: Exact18asset game-only cache and shipping QA-probe exclusion
+    - generic: pass
+    - generic: Exact-source private deployment
+    - generic: not run
+    - generic: Owner-authenticated remote gameplay execution
+    - generic: not run
+    - generic: Current-build offline/device-loss execution
+    - generic: not run
+    - generic: Full natural campaign and human combat balance
+    - generic: not run
+    - generic: Named phones/Safari/physical multi-touch/30-minute soak
+    - strong: Known issues
+    - paragraph: Physical/full-natural/remote execution gates remain pending. Arbitrarily overconstrained safe areas can have no valid boss panel; fixed hull/touch elements do not avoid every world actor. Far f32 world projection has practical precision limits. The next Radiation enemy is an isolated reviewed prototype, excluded from the release.
+    - link "Final normal build and exact published source ↗":
+      - /url: /artifacts?path=artifacts%2Fhud-riveter-build-final.log
+    - link "Final browser captures and source/backend fingerprints ↗":
+      - /url: /artifacts?path=artifacts%2Fhud-riveter-browser-validation.json
+    - link "Independent package review / exact18asset cache ↗":
+      - /url: /artifacts?path=artifacts%2Fhud-riveter-packaging-review.md
+    - link "Independent evidence and ledger review ↗":
+      - /url: /artifacts?path=artifacts%2Fhud-riveter-evidence-review.md
+    - link "Successful private deployment and historical versions ↗":
+      - /url: /artifacts?path=artifacts%2Fprivate-release.json
+    - generic: Succeeded exact-source private deployment and actual specialist handoffs
+  - article:
+    - generic: 11 Oct, 04:21 am · Producer
+    - heading "Fifteen bosses, pixel UI refinement and bounded zoom / private preview" [level=2]
+    - paragraph: Normal release build, reviewed exact source and game-only archive deployed successfully. Both Rust/WASM renderer variants are included with the current eighteen-asset PWA cache. Owner-private access was preserved; the unauthenticated endpoint requires login. Local packaged gameplay and backend captures were observed; remote gameplay after login remains unmeasured.
+    - text: "Source revision:"
+    - code: 65194683a28b00397ed3f29df989149b8d93412e
+    - link "Open playable build ↗":
+      - /url: https://galaxy-royale-itchson.itchson.chatgpt.site/
+    - generic: pass
+    - generic: Rust workspace:37 engine +63 gameplay +22 web/UI
+    - generic: pass
+    - generic: 66 shell/controller/storage/UI checks
+    - generic: pass
+    - generic: Eight actual-WASM serialization/IndexedDB contracts
+    - generic: pass
+    - generic: Strict native/WebGPU/WebGL2 Clippy and normal release build
+    - generic: pass
+    - generic: Fifteen actual-projectile CPU boss fights and natural queued loss/retry
+    - generic: pass
+    - generic: 2,400 packed extraction frames, finite transforms and hole preservation
+    - generic: pass
+    - generic: Representative current WebGPU/WebGL2 presentation and fixed UI at bounded zoom
+    - generic: pass
+    - generic: Current local PWA update and game-only shipping audit
+    - generic: pass
+    - generic: Exact-source private deployment and login protection
+    - generic: not run
+    - generic: Full natural progression, all-fifteen browser choreography and human balance
+    - generic: not run
+    - generic: Physical phones, Safari, audio listening and30-minute GPU/thermal soak
+    - generic: not run
+    - generic: Owner-authenticated remote gameplay
+    - strong: Known issues
+    - paragraph: Large boss heads can start charging offscreen or be partly covered by the fixed top-center HUD. Representative captures do not establish full silhouette/core acceptance. First Coil, early currency versus XP pacing and full natural progression require player playtesting. Physical phone and sustained performance are pending.
+    - link "Succeeded exact-source release metadata ↗":
+      - /url: /artifacts?path=artifacts%2Fprivate-release.json
+    - link "Real-projectile native combat proof ↗":
+      - /url: /artifacts?path=artifacts%2Fboss-live-combat.json
+    - link "Actual local browser records and capture hashes ↗":
+      - /url: /artifacts?path=artifacts%2Fboss-browser-validation.json
+    - link "Independent shipping and source audit ↗":
+      - /url: /artifacts?path=artifacts%2Fboss-final-release-review.md
+    - generic: Succeeded exact-source owner-private deployment and actual local/browser evidence
+  - article:
+    - generic: 11 Oct, 03:26 am · Producer
+    - heading "Corrected private release / real WASM save contract" [level=2]
+    - paragraph: Sourcebab9d0fafb3b01c2dbd91b0df4486fb60f262461 was committed, pushed, verified and packaged from the corrected dual-WASM/PWA build. Owner-private deployment succeeded. Optional run history now serializes as explicit null; actual fresh browser challenge/save/reload succeeds. Published execution after owner login remains unmeasured.
+    - text: "Source revision:"
+    - code: bab9d0fafb3b01c2dbd91b0df4486fb60f262461
+    - link "Open playable build ↗":
+      - /url: https://galaxy-royale-itchson.itchson.chatgpt.site/
+    - generic: pass
+    - generic: Rust103 and shell58 tests
+    - generic: pass
+    - generic: Four actual dual-backend WASM checkpoint/save/reload cases
+    - generic: pass
+    - generic: Fresh WebGL2 browser challenge and reload at Haven
+    - generic: pass
+    - generic: TypeScript and both normal release WASM packages;18asset PWA
+    - generic: pass
+    - generic: Exact pushed source and owner-private deployment succeeded
+    - generic: not run
+    - generic: Published gameplay after owner login
+    - generic: not run
+    - generic: Full campaign combat/balance and physical phone/Safari/audio/30minute soak
+    - strong: Known issues
+    - paragraph: Full campaign playthrough, physical devices and local neural dialogue/voice provider remain pending. Mission Control stays localhost-only.
+    - link "Corrected deployment identity and previous version ↗":
+      - /url: /artifacts?path=artifacts%2Fprivate-release.json
+    - link "Actual browser scope ↗":
+      - /url: /artifacts?path=artifacts%2Fbrowser-validation.json
+    - link "WASM checkpoint output ↗":
+      - /url: /artifacts?path=artifacts%2Fwasm-contract-tests.log
+    - generic: Exact corrected source push and terminal owner-private deployment result
+  - article:
+    - generic: 11 Oct, 03:04 am · Producer
+    - heading "Private HTTPS release / campaign and zoom foundation" [level=2]
+    - paragraph: Exact source b68335d745053b0d40dd33a39140ff574798dd67 pushed and packaged with the Windows-native adapter using the official static validator. Owner-private deployment succeeded. Unauthenticated browser correctly requests OpenAI login; local packaged WebGL2 launch and zoom are verified. Mission Control remains localhost-only.
+    - text: "Source revision:"
+    - code: b68335d745053b0d40dd33a39140ff574798dd67
+    - link "Open playable build ↗":
+      - /url: https://galaxy-royale-itchson.itchson.chatgpt.site/
+    - generic: pass
+    - generic: Pushed source and game-only archive
+    - generic: pass
+    - generic: Owner-private deployment succeeded
+    - generic: pass
+    - generic: Published owner authentication required
+    - generic: not run
+    - generic: Published game execution after login
+    - generic: not run
+    - generic: Physical-device and complete campaign acceptance
+    - strong: Known issues
+    - paragraph: Remote app execution needs owner login. Full champion combat/balance, physical phones/Safari/audio/soak and neural provider assets remain pending.
+    - link "Deployment identity and status ↗":
+      - /url: /artifacts?path=artifacts%2Fprivate-release.json
+    - link "Actual desktop/native coverage ↗":
+      - /url: /artifacts?path=artifacts%2Fbrowser-validation.json
+    - generic: Actual final source checks and published release
+  - article:
+    - generic: 11 Oct, 03:00 am · Producer
+    - heading "Campaign, death reports, ship progression and world zoom" [level=2]
+    - paragraph: Complete dual-WASM/PWA build passed. Rust103 and shell58 tests passed. Actual desktop zoom/UI/death captures supplement native rules. Physical devices, full campaign combat playthrough and neural providers remain pending.
+    - text: "Source revision:"
+    - code: working tree after6b5f9350ce8ac80ead3159c538b309824351b21f; packaged cachegalaxy-1e6e2f73db7ff1f0
+    - generic: pass
+    - generic: Rust103 tests
+    - generic: pass
+    - generic: Browser shell58 tests
+    - generic: pass
+    - generic: Dual WASM release, TypeScript, Vite and18asset game-only PWA
+    - generic: pass
+    - generic: Desktop wheel0.6/1.6, fixed UI and WebGL2 zoom
+    - generic: not run
+    - generic: Physical phone60FPS/30minute soak/Safari/audio
+    - generic: not run
+    - generic: Full campaign combat playthrough
+    - generic: not run
+    - generic: Local neural dialogue/voice service
+    - strong: Known issues
+    - paragraph: Physical mobile acceptance, full campaign combat/balance review, neural voice assets and future multiplayer remain pending.
+    - link "Tested source review ↗":
+      - /url: /artifacts?path=artifacts%2Fintegration-review.md
+    - link "Browser captures and coverage limits ↗":
+      - /url: /artifacts?path=artifacts%2Fbrowser-validation.json
+    - generic: Actual final integration checks
+  - article:
+    - generic: 11 Oct, 01:07 am · Production specialist
+    - heading "Mission Control dashboard foundation" [level=2]
+    - paragraph: Local dashboard production bundle generated successfully. The board, task detail, filtering, real run observations and full history were inspected in Chrome. This record covers the independent production interface; game acceptance is recorded separately by Producer.
+    - text: "Source revision:"
+    - code: Current uncommitted studio working tree, observed 2026-10-10
+    - generic: pass
+    - generic: Studio API and persistence tests
+    - generic: 9 tests passed, including stale-edit rejection, evidence validation, record persistence and append-only run observations.
+    - generic: pass
+    - generic: Strict studio TypeScript check
+    - generic: pass
+    - generic: Vite dashboard production bundle
+    - generic: pass
+    - generic: Real Chrome board and run history inspection
+    - generic: Observed current API records, expanded sources, linked save task editor and all seven run observations.
+    - generic: not run
+    - generic: Physical phone game acceptance
+    - generic: Outside dashboard scope; no physical phone is available to this QA agent.
+    - strong: Known issues
+    - paragraph: Game browser offline install, balance and physical phone performance remain separate acceptance work. Running agent observations are last-recorded states and do not assert current presence.
+    - link "Studio tests ↗":
+      - /url: /artifacts?path=work%2Fstudio-tests.log
+    - link "Dashboard production build ↗":
+      - /url: /artifacts?path=work%2Fstudio-build.log
+    - link "Strict studio type check ↗":
+      - /url: /artifacts?path=work%2Fstudio-typecheck.log
+    - generic: Actual Mission Control implementation, strict TypeScript check, Vite production build and Node tests in the current Codex session
+- contentinfo:
+  - generic: Snapshot r216 · last recorded 11 Oct, 05:45 am AEST
+  - generic: Recorded work · no inferred agent presence

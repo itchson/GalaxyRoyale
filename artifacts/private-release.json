@@ -1,8 +1,8 @@
 {
-  "id": "appgdep_6aca8f00ba1481918fbfa8b104b32612",
+  "id": "appgdep_6aca953d4ce481919f5815053e6d7685",
   "project_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93",
   "title": "Galaxy Royale",
-  "version_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93~appgver_23801ef1e79881918e101b3c181eb530",
+  "version_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93~appgver_e5cc1f8ba5f48191a11ebc66462a72d1",
   "type": "publish",
   "status": "succeeded",
   "url": "https://galaxy-royale-itchson.itchson.chatgpt.site",
@@ -11,15 +11,15 @@
   "provider_deployment_id": "site---6aca50f5b1bc81918526a6ee969aac93",
   "failure_message": null,
   "env_set_revision": 0,
-  "updated_at": "2026-10-10T19:16:34.309748+00:00",
-  "commit_sha": "4ac160d6278ac0e728761189e8cf6f2fa54197d1",
-  "cacheVersion": "galaxy-f37b303ee2258928",
-  "browserAccess": "Actual unauthenticated browser reached Sign in required after final deployment. Owner-authenticated remote execution remains unmeasured. Current normal packaged gameplay was observed locally on both backends.",
-  "archiveContent": "Game-only dist with eighteen cached assets and normalized hosting config. Studio, production state, QA harness and checkpoint probe excluded.",
-  "validation": "186 native checks across unchanged engine37/core75 and final web74;66 shell tests;8 actual-WASM save scenarios; strict native/WebGPU/WebGL2 Clippy; final normal build pass. Independent layout/occupied-quad/packaging/evidence review and representative final dual-renderer diagnostic captures pass. Real wheel upper clamp and PWA Apply at Haven pass. Physical devices, natural full campaign, current offline/recovery and owner-authenticated remote execution remain pending.",
+  "updated_at": "2026-10-10T19:43:11.245673+00:00",
+  "commit_sha": "be3ae02adcf514d2f3a6e9687115a3c7da344d2d",
+  "cacheVersion": "galaxy-79774fbb09d2dfb9",
+  "browserAccess": "Normal packaged localhost game observed on both renderers. Existing owner-private deployment succeeded; actual unauthenticated browser reaches Sign in required. Owner-authenticated remote execution remains unmeasured.",
+  "archiveContent": "Game-only dist plus normalized hosting metadata. Eighteen cached game assets; studio, production data, work candidates and QA checkpoint export excluded.",
+  "validation": "193 integrated Rust tests,70shell tests,strict native/WebGPU/WebGL2 Clippy,normal dual-WASM/TS/game/studio build and final frontend/PWA rebuild pass. Independent actual core cadence/release/Echo and final cache/export/source correspondence reviews pass. Actual normal browser dock clicks and maxlevel caption pass on both renderers; belowcap99 threshold passes on WebGL2. Physical devices,human balance,natural full campaign,current offline/recovery and authenticated remote execution pending.",
   "backendHashes": {
-    "webgpu": "f2cf269dd8ae35dbddf62f630d51b44d452f96fbac14175ba95bbb077e8575f8",
-    "webgl2": "93a7daa913c8cc3ebc4b1c59de5d5d4bff374ddacc83fd2dfbd6af3bb5e2374c"
+    "webgpu": "a9305ad24848e7bc0aea9fcdbd18a4eddc07e338e5830b4ad72917fba175a291",
+    "webgl2": "430e9b9ae5c7d50e27d88892bb6d147ec8f75424bcb09ec05c98852b5630bbc2"
   },
   "previousDeployments": [
     {
@@ -43,23 +43,42 @@
       "status": "succeeded",
       "updated_at": "2026-10-10T18:19:44.146996+00:00",
       "cacheVersion": "galaxy-5a206c9f1e2acf40"
+    },
+    {
+      "id": "appgdep_6aca8f00ba1481918fbfa8b104b32612",
+      "version_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93~appgver_23801ef1e79881918e101b3c181eb530",
+      "commit_sha": "4ac160d6278ac0e728761189e8cf6f2fa54197d1",
+      "status": "succeeded",
+      "updated_at": "2026-10-10T19:16:34.309748+00:00",
+      "cacheVersion": "galaxy-f37b303ee2258928"
     }
   ],
   "evidence": [
-    "artifacts/hud-riveter-browser-validation.json",
-    "artifacts/hud-riveter-packaging-review.md",
-    "artifacts/hud-riveter-evidence-review.md",
-    "artifacts/boss-overlay-engine-review.md"
+    "artifacts/progression-integration-validation.md",
+    "artifacts/progression-packaging-review.md",
+    "artifacts/weapon-cadence-qa-review.md",
+    "artifacts/review-reference-validation.md"
   ],
-  "newlyDiscoveredProgressionIssues": {
+  "resolvedProgressionIssues": {
     "observedAt": "2026-10-10T19:22:26.667Z",
     "cadenceTask": "task-6c761ea8",
     "capCaptionTask": "task-696d7d24",
-    "description": "Post-release actual audit found two paid fire-rate ranks have identical steady fixed-tick cadence and level 100 advertises an unreachable next level. Corrections are active/ready; neither fix is included in the frozen published source.",
+    "description": "Every fixed-tick fire-rate rank now rises at authored long-run cadence; level100 displaysMAXLEVEL. Both fixes integrated, reviewed and published.",
     "evidence": [
       "artifacts/scout-progression-audit.json",
       "artifacts/scout-progression-qa-native.json",
       "artifacts/scout-progression-qa-save.json"
-    ]
-  }
+    ],
+    "resolvedInSource": "be3ae02adcf514d2f3a6e9687115a3c7da344d2d"
+  },
+  "knownFollowups": [
+    {
+      "taskId": "task-0851af86",
+      "description": "Forced QA die with already eligible regen/Sovereign healing is a separate work-only candidate; natural lethal semantics require independent review."
+    },
+    {
+      "taskId": "task-e8684a94",
+      "description": "Radiation Mote actual production candidate remains in work-only development; strict camera-aware admission is required at high zoom."
+    }
+  ]
 }

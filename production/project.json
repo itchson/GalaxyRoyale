@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 207,
+  "revision": 216,
   "name": "Galaxy Royale",
   "phase": "Foundation → playable vertical slice",
-  "updatedAt": "2026-10-10T19:40:44.499Z",
+  "updatedAt": "2026-10-10T19:45:34.034Z",
   "tasks": [
     {
       "id": "studio",
@@ -105,7 +105,7 @@
       "status": "complete",
       "owner": "Gameplay specialist",
       "priority": "high",
-      "description": "Fixed 60 Hz ECS gameplay includes dock/belt/combat, three ordinary families with fifteen boss controllers, persistent queues, loot/upgrades/XP/cargo, eight champion trials and the solo league. Seventy-five native core tests now include interpolated presentation focus and ten Iron Belt Riveter regressions. The dated fifteen-projectile boss sweep and prepared generation-five checkpoint loss/retry remain separate proofs. Full natural campaign play, human balance and phone acceptance remain pending.",
+      "description": "Fixed60Hz ECS gameplay includes dock/belt/combat, three ordinary families with fifteen boss controllers, persistent queues, loot/upgrades/XP/cargo, eight champion trials and the solo league. Current82 native core tests include ten Iron Belt Riveter and seven actual weapon-cadence regressions. Interpolated presentation focus and authored fixed-tick rates are integrated. Dated fifteen-boss projectile sweep is separate; full natural campaign,human tuning and phones remain pending.",
       "dependencies": [
         "engine"
       ],
@@ -141,9 +141,9 @@
         }
       ],
       "blocker": "",
-      "revision": 6,
+      "revision": 7,
       "createdAt": "2026-10-10T14:29:27.000Z",
-      "updatedAt": "2026-10-10T19:15:06.714Z"
+      "updatedAt": "2026-10-10T19:45:33.930Z"
     },
     {
       "id": "web-shell",
@@ -301,7 +301,7 @@
       "status": "complete",
       "owner": "Producer / Production specialist QA",
       "priority": "normal",
-      "description": "Final local game-only cache galaxy-f37b303ee2258928 contains eighteen assets; independent recomputed hashes, normal shipping exports and public/dist backend files match. Studio, production state and QA contract probes are excluded. Actual current pending-update, Apply at Haven, retained settings and checkpoint-to-title flow passed. Historical desktop offline proof remains dated; current-build offline/recovery and physical Safari/PWA lifecycle remain pending.",
+      "description": "Current game-only cache galaxy-79774fbb09d2dfb9 contains eighteen assets; independent recomputed hashes, normal shipping exports and public/dist backend files match. Studio,work/QAcontract and production state are excluded. The prior HUD/Riveter update-at-Haven execution remains dated evidence. Current correction-build update/offline/recovery and physical Safari/PWA lifecycle were not rerun; those broader acceptance gates remain pending.",
       "dependencies": [
         "web-shell",
         "save"
@@ -334,9 +334,9 @@
         }
       ],
       "blocker": "",
-      "revision": 7,
+      "revision": 8,
       "createdAt": "2026-10-10T14:29:27.000Z",
-      "updatedAt": "2026-10-10T19:12:42.884Z"
+      "updatedAt": "2026-10-10T19:45:33.970Z"
     },
     {
       "id": "asteroids",
@@ -610,10 +610,10 @@
       "id": "balance",
       "title": "Slice combat and progression tuning",
       "department": "Gameplay",
-      "status": "active",
+      "status": "review",
       "owner": "Gameplay specialist / Independent QA",
       "priority": "normal",
-      "description": "Active read-only Scout progression audit: actual level1..12 stats/rank gates, deterministic movement/braking and purchase/craft/save invariants. No tuning change or human balance acceptance is implied. The existing45-case native combat study remains historical; fresh natural expeditions and named-phone playtests remain pending.",
+      "description": "Read-only Scout audit and independent progression boundary review are completed: actual level1..12 stats/rank gates,movement/braking,native purchases/crafting/saves and six disclosed30s natural straight-input runs recorded. Measured cadence plateaus were corrected separately in be3ae02. Human first-purchase time, affordability,touch braking/aiming and combat balance remain pending; no current tuning change is claimed.",
       "dependencies": [
         "boss-qa",
         "asteroids"
@@ -636,9 +636,9 @@
         }
       ],
       "blocker": "",
-      "revision": 4,
+      "revision": 5,
       "createdAt": "2026-10-10T14:29:27.000Z",
-      "updatedAt": "2026-10-10T19:18:07.854Z"
+      "updatedAt": "2026-10-10T19:45:34.002Z"
     },
     {
       "id": "accessibility",
@@ -718,7 +718,7 @@
       "status": "review",
       "owner": "Producer",
       "priority": "normal",
-      "description": "Owner-private HTTPS preview published from source 4ac160d6278ac0e728761189e8cf6f2fa54197d1. Includes adaptive boss pixel HUD, Iron Belt Riveter, all fifteen family bosses, bounded world zoom and gradual Scout drive. Actual specialist reviews, native/dual-WASM checks and representative final local browser captures are retained. Remote owner-authenticated gameplay remains unmeasured; the endpoint requires login. Full natural campaign, combat/audio balance, current offline/recovery and physical phone/soak acceptance remain pending.",
+      "description": "Current private release be3ae02adcf514d2f3a6e9687115a3c7da344d2d / cache79774fbb09d2dfb9 includes reviewed cadence/cappedXP/dockclick corrections. Local normal bothrenderer browser and integrated193Rust/70shell tests pass; package/fixtures/privacy scope independently reviewed. Full natural campaign, human tuning, current offline/recovery, authenticated remote execution and named physical phones remain pending.",
       "dependencies": [
         "studio",
         "boss-qa",
@@ -751,12 +751,42 @@
           "label": "Independent final acceptance scope review",
           "kind": "note",
           "path": "artifacts/hud-riveter-evidence-review.md"
+        },
+        {
+          "label": "Confirmed owner-private release identity and limits",
+          "kind": "note",
+          "path": "artifacts/private-release.json"
+        },
+        {
+          "label": "Actual193Rust/70shell and normal browser corrections",
+          "kind": "note",
+          "path": "artifacts/progression-integration-validation.md"
+        },
+        {
+          "label": "Independent exact18asset package/export/source review",
+          "kind": "note",
+          "path": "artifacts/progression-packaging-review.md"
+        },
+        {
+          "label": "Actual native cadence and signature boundaries",
+          "kind": "note",
+          "path": "artifacts/weapon-cadence-qa-results.json"
+        },
+        {
+          "label": "Actual WebGPU maximum-level menu",
+          "kind": "note",
+          "path": "artifacts/max-level-caption-webgpu-final.jpg"
+        },
+        {
+          "label": "Actual WebGL2 maximum-level menu",
+          "kind": "note",
+          "path": "artifacts/max-level-caption-webgl2-final.jpg"
         }
       ],
       "blocker": "",
-      "revision": 5,
+      "revision": 6,
       "createdAt": "2026-10-10T14:29:27.000Z",
-      "updatedAt": "2026-10-10T19:18:07.821Z"
+      "updatedAt": "2026-10-10T19:44:11.252Z"
     },
     {
       "id": "deep-bosses",
@@ -2086,10 +2116,10 @@
     {
       "id": "task-e8684a94",
       "title": "Radiation biome enemy: deterministic controller and pixel concept",
-      "description": "Isolated Isotope Mote controller and original712-cell concept are frozen under work/radiation-enemy; no production integration. Twelve native tests and native/WASM Clippy pass; engine independently repeated twelve native tests and actual cell/transform/shot bounds. Host contract must preserve ordinary root caps, same-tick pending shot reservations, sanctuary rules and single reward path. Production integration, browser/human/physical acceptance remain pending. Palette defines15opaque tones; actual occupied art uses11.",
+      "description": "Original Isotope Mote prototype and twelve native tests remain preserved. An actual production Game/ECS candidate is now active under work/radiation-production-candidate only, using the reviewed strict camera-aware approach-and-hold policy. The frozen180-unit standoff conflicts with full-warning admission at maxzoom; production candidate must resolve that geometry, live occupied emitters,shared projectile caps,sanctuary/reward/cleanup parity. No production integration,browser/human/physical acceptance yet.",
       "department": "Gameplay / Art",
       "owner": "/root/gameplay_design",
-      "status": "review",
+      "status": "active",
       "priority": "normal",
       "dependencies": [
         "gameplay",
@@ -2122,14 +2152,14 @@
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 3,
       "createdAt": "2026-10-10T18:51:54.723Z",
-      "updatedAt": "2026-10-10T19:18:07.834Z"
+      "updatedAt": "2026-10-10T19:45:34.034Z"
     },
     {
       "id": "task-6c761ea8",
       "title": "Fixed-tick weapon cadence: make every fire-rate rank meaningful",
-      "description": "A post-release actual Game tick probe found rank plateaus: ranks 0–5 fire every 13/11/11/10/9/9 fixed ticks because each shot resets the cooldown and discards overshoot. Two paid ranks produce no steady cadence increase. Gameplay is preparing an isolated residual-carry correction; independent QA owns release/idle/sanctuary/retry/signature boundary review. Root owns production integration and a new validated build. Current published HUD/Riveter bytes remain frozen. Reviewed correction is now integrated and the normal two-backend package is accepted locally. A new private publication is the producer’s next step; physical/human gates remain separately pending.",
+      "description": "Reviewed fixed-tick residual carry is integrated and published in be3ae02. Actual Game ranks0..5 produce150/165/180/195/210/225 primary shots in30s; seven production regressions plus independent release/sanctuary/retry/crafted/Sovereign/Echo checks pass. Current normal two-backend build and exact owner-private publication pass. Human weapon feel, affordability and physical input remain separate pending acceptance.",
       "department": "Gameplay",
       "owner": "Producer / Gameplay specialist / Independent QA",
       "status": "complete",
@@ -2174,14 +2204,14 @@
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 3,
       "createdAt": "2026-10-10T19:21:14.491Z",
-      "updatedAt": "2026-10-10T19:40:44.322Z"
+      "updatedAt": "2026-10-10T19:45:33.875Z"
     },
     {
       "id": "task-696d7d24",
       "title": "Maximum ship level: truthful XP progress caption",
-      "description": "Actual compiled HUD at 99,000 XP reports level 100 and next XP 101,000, while the level function caps at 100 and the shell calls this the next level. Correct the read-only HUD/caption without mutating stored XP or caps. Independent native and serialized save probes confirm the display issue; no XP-loss or purchase exploit was found. Reviewed correction is now integrated and the normal two-backend package is accepted locally. A new private publication is the producer’s next step; physical/human gates remain separately pending.",
+      "description": "Published presentation-only correction in be3ae02: level100 displaysMAXLEVEL and retains its numeric XP. Actual normal WebGPU/WebGL2 import/reload fixtures show100/99000/MAXLEVEL; WebGL2 level99/97020 retainsNEXTLEVEL99000. Numeric HUD/save fields, ranks and currency are unchanged; strict storage/schema and integrated shell tests pass. These are disclosed fixtures, not earned campaign play.",
       "department": "Gameplay / UI",
       "owner": "Producer",
       "status": "complete",
@@ -2228,9 +2258,9 @@
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 3,
       "createdAt": "2026-10-10T19:21:14.509Z",
-      "updatedAt": "2026-10-10T19:40:44.352Z"
+      "updatedAt": "2026-10-10T19:45:33.909Z"
     },
     {
       "id": "task-80134b58",
@@ -3217,6 +3247,84 @@
       ],
       "url": "https://galaxy-royale-itchson.itchson.chatgpt.site/",
       "knownIssues": "Physical/full-natural/remote execution gates remain pending. Arbitrarily overconstrained safe areas can have no valid boss panel; fixed hull/touch elements do not avoid every world actor. Far f32 world projection has practical precision limits. The next Radiation enemy is an isolated reviewed prototype, excluded from the release."
+    },
+    {
+      "id": "build-1248f551",
+      "title": "Progression cadence, capped XP and dock click / private release",
+      "body": "Published the exact accepted source be3ae02adcf514d2f3a6e9687115a3c7da344d2d to the existing owner-private site. Normal Game::tick cadence now benefits every rank; maximum-level caption and centered prompt click corrections are included. Studio reference validation is local-only service code and excluded from game assets. The release includes no work-only radiation/death candidates. Collected progression/save format remains unchanged.",
+      "author": "Producer",
+      "source": "Confirmed exact pushed-source private release and actual local validation",
+      "createdAt": "2026-10-10T19:44:11.222Z",
+      "revision": "be3ae02adcf514d2f3a6e9687115a3c7da344d2d",
+      "evidence": [
+        {
+          "label": "Confirmed owner-private release identity and limits",
+          "kind": "note",
+          "path": "artifacts/private-release.json"
+        },
+        {
+          "label": "Actual193Rust/70shell and normal browser corrections",
+          "kind": "note",
+          "path": "artifacts/progression-integration-validation.md"
+        },
+        {
+          "label": "Independent exact18asset package/export/source review",
+          "kind": "note",
+          "path": "artifacts/progression-packaging-review.md"
+        },
+        {
+          "label": "Actual native cadence and signature boundaries",
+          "kind": "note",
+          "path": "artifacts/weapon-cadence-qa-results.json"
+        },
+        {
+          "label": "Actual WebGPU maximum-level menu",
+          "kind": "note",
+          "path": "artifacts/max-level-caption-webgpu-final.jpg"
+        },
+        {
+          "label": "Actual WebGL2 maximum-level menu",
+          "kind": "note",
+          "path": "artifacts/max-level-caption-webgl2-final.jpg"
+        }
+      ],
+      "checks": [
+        {
+          "name": "Integrated Rust gameplay/engine/web regressions193",
+          "result": "pass"
+        },
+        {
+          "name": "Shell/IndexedDB/controller/studio tests70",
+          "result": "pass"
+        },
+        {
+          "name": "Strict native/WebGPU/WebGL2 Clippy + normal locked dual-WASM/TS build",
+          "result": "pass"
+        },
+        {
+          "name": "Independent actual cadence/cooldown/Echo and exact18asset packaging",
+          "result": "pass"
+        },
+        {
+          "name": "Actual normal WebGPU/WebGL2 dock click and capped-level UI",
+          "result": "pass"
+        },
+        {
+          "name": "Exact pushed-source owner-private deployment",
+          "result": "pass"
+        },
+        {
+          "name": "Physical phones,human balance,natural full campaign,current offline/recovery",
+          "result": "not_run",
+          "details": "Not measured by this correction iteration; remain pending."
+        },
+        {
+          "name": "Owner-authenticated remote gameplay",
+          "result": "not_run",
+          "details": "Deployment succeeded; unauthenticated browser sees access gate."
+        }
+      ],
+      "knownIssues": "Physical gates and full natural playthrough remain pending. Forced diagnostic death with eligible healing is a separate unshipped candidate. Radiation integration remains work-only."
     }
   ],
   "feedback": [],
@@ -5290,6 +5398,96 @@
       "author": "Producer",
       "source": "Actual reviewed Rust integration, final local package and browser checks",
       "createdAt": "2026-10-10T19:40:44.499Z"
+    },
+    {
+      "id": "cd4ba900-f1e0-412e-bd50-32a219abdb97",
+      "revision": 208,
+      "kind": "build",
+      "itemId": "build-1248f551",
+      "title": "Progression cadence, capped XP and dock click / private release",
+      "author": "Producer",
+      "source": "Confirmed exact pushed-source private release and actual local validation",
+      "createdAt": "2026-10-10T19:44:11.222Z"
+    },
+    {
+      "id": "080557fd-6b4e-496d-8756-070a4d2b92d4",
+      "revision": 209,
+      "kind": "task.update",
+      "itemId": "slice-review",
+      "title": "Integrated slice review and release evidence",
+      "author": "Producer",
+      "source": "Confirmed exact pushed-source private release and actual local validation",
+      "createdAt": "2026-10-10T19:44:11.252Z"
+    },
+    {
+      "id": "d2064b3d-ae22-406e-a37f-b8177754acf1",
+      "revision": 210,
+      "kind": "run",
+      "itemId": "run-15542769",
+      "title": "Producer / Integrator · completed",
+      "author": "Producer",
+      "source": "Confirmed exact pushed-source private release and actual local validation",
+      "createdAt": "2026-10-10T19:44:11.281Z"
+    },
+    {
+      "id": "e244dd14-2258-4688-9535-0bde30dfb934",
+      "revision": 211,
+      "kind": "task.update",
+      "itemId": "task-6c761ea8",
+      "title": "Fixed-tick weapon cadence: make every fire-rate rank meaningful",
+      "author": "Producer",
+      "source": "Current published correction scope; preserve actual historical evidence",
+      "createdAt": "2026-10-10T19:45:33.875Z"
+    },
+    {
+      "id": "40ed7e54-e389-4d5b-8cc0-ea6dec3fef94",
+      "revision": 212,
+      "kind": "task.update",
+      "itemId": "task-696d7d24",
+      "title": "Maximum ship level: truthful XP progress caption",
+      "author": "Producer",
+      "source": "Current published correction scope; preserve actual historical evidence",
+      "createdAt": "2026-10-10T19:45:33.909Z"
+    },
+    {
+      "id": "dd3772b8-13d2-43ee-b051-d686f2c7e246",
+      "revision": 213,
+      "kind": "task.update",
+      "itemId": "gameplay",
+      "title": "Combat, radial zones and progression",
+      "author": "Producer",
+      "source": "Current published correction scope; preserve actual historical evidence",
+      "createdAt": "2026-10-10T19:45:33.930Z"
+    },
+    {
+      "id": "b9831dee-4b68-48bc-826c-b90533f167ac",
+      "revision": 214,
+      "kind": "task.update",
+      "itemId": "pwa",
+      "title": "Offline PWA packaging",
+      "author": "Producer",
+      "source": "Current published correction scope; preserve actual historical evidence",
+      "createdAt": "2026-10-10T19:45:33.970Z"
+    },
+    {
+      "id": "a9ba60d2-5b92-4ba7-b668-29b6b8918f95",
+      "revision": 215,
+      "kind": "task.update",
+      "itemId": "balance",
+      "title": "Slice combat and progression tuning",
+      "author": "Producer",
+      "source": "Current published correction scope; preserve actual historical evidence",
+      "createdAt": "2026-10-10T19:45:34.002Z"
+    },
+    {
+      "id": "87f58ce2-1f10-4501-a3b4-4b7460ab51db",
+      "revision": 216,
+      "kind": "task.update",
+      "itemId": "task-e8684a94",
+      "title": "Radiation biome enemy: deterministic controller and pixel concept",
+      "author": "Producer",
+      "source": "Current published correction scope; preserve actual historical evidence",
+      "createdAt": "2026-10-10T19:45:34.034Z"
     }
   ],
   "runRecords": [
@@ -6965,6 +7163,56 @@
       "author": "Producer",
       "source": "Actual reviewed Rust integration, final local package and browser checks",
       "createdAt": "2026-10-10T19:40:44.499Z"
+    },
+    {
+      "id": "run-15542769",
+      "title": "Producer / Integrator · completed",
+      "agentId": "/root",
+      "agentLabel": "Producer / Integrator",
+      "state": "completed",
+      "observedAt": "2026-10-10T19:44:11.262Z",
+      "taskIds": [
+        "task-6c761ea8",
+        "task-696d7d24",
+        "task-b27a43c9",
+        "slice-review"
+      ],
+      "summary": "Reviewed current correction iteration, normal build, local bothrenderer browser checks and exact-source owner-private publication completed. Broader project remains active; physical/natural gates pending and specialists have separate actual follow-up assignments.",
+      "evidence": [
+        {
+          "label": "Confirmed owner-private release identity and limits",
+          "kind": "note",
+          "path": "artifacts/private-release.json"
+        },
+        {
+          "label": "Actual193Rust/70shell and normal browser corrections",
+          "kind": "note",
+          "path": "artifacts/progression-integration-validation.md"
+        },
+        {
+          "label": "Independent exact18asset package/export/source review",
+          "kind": "note",
+          "path": "artifacts/progression-packaging-review.md"
+        },
+        {
+          "label": "Actual native cadence and signature boundaries",
+          "kind": "note",
+          "path": "artifacts/weapon-cadence-qa-results.json"
+        },
+        {
+          "label": "Actual WebGPU maximum-level menu",
+          "kind": "note",
+          "path": "artifacts/max-level-caption-webgpu-final.jpg"
+        },
+        {
+          "label": "Actual WebGL2 maximum-level menu",
+          "kind": "note",
+          "path": "artifacts/max-level-caption-webgl2-final.jpg"
+        }
+      ],
+      "author": "Producer",
+      "source": "Confirmed exact pushed-source private release and actual local validation",
+      "createdAt": "2026-10-10T19:44:11.281Z"
     }
   ]
 }
