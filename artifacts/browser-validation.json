@@ -1,0 +1,71 @@
+{
+  "capturedAt": "2026-10-10T16:17:00Z",
+  "environment": "Windows 11 development workstation; Codex in-app Chromium browser",
+  "physicalDeviceValidation": "pending",
+  "checks": [
+    {
+      "check": "WebGPU startup and live stress",
+      "result": "pass",
+      "evidence": "browser-stress-webgpu.json",
+      "limit": "Short desktop capture; not 30-minute soak"
+    },
+    {
+      "check": "Forced WebGL2 startup, pixel UI, Coil encounter",
+      "result": "pass",
+      "sizes": [
+        "844x390",
+        "720x360"
+      ],
+      "limit": "Desktop viewport simulation; no physical multitouch/Safari claim"
+    },
+    {
+      "check": "Rejected WebGPU initializer automatically loads WebGL2",
+      "result": "pass",
+      "evidence": "fallback-proof.jpg"
+    },
+    {
+      "check": "Live device.destroy recovers same expedition",
+      "result": "pass",
+      "evidence": "recovery-proof.jpg",
+      "details": "Outer position, damaged hull and active boss retained; successful recovered WebGPU backend"
+    },
+    {
+      "check": "Backtick console toggle/history/draft/real command output",
+      "result": "pass",
+      "evidence": "pixel-console.jpg",
+      "details": "Opaque black top drawer; simulation pauses, ESC/backtick close; native UI tests and six lifecycle regressions supplement inspection"
+    },
+    {
+      "check": "Settings persist across reload",
+      "result": "pass",
+      "details": "Reduced motion and cosmic density checked, reloaded, both remained checked; reset after validation. Footer action names fit at844x390."
+    },
+    {
+      "check": "Dialogue portrait and real event action",
+      "result": "pass",
+      "evidence": "pixel-dialogue.jpg",
+      "details": "Bottom panel, CONTACT/E, ACCEPT EVENT invokes Rust quest mutation; resumes after close"
+    },
+    {
+      "check": "Accepted quest persists through offline reload",
+      "result": "pass",
+      "evidence": "quest-reload-proof.jpg",
+      "details": "Fresh isolated4180 origin:1discovery, canonical -1:0 BOUNTY 0/10; restarted at Haven. Reward claim verified by native tests, not this browser playthrough."
+    },
+    {
+      "check": "Packaged game offline reload",
+      "result": "pass",
+      "evidence": "pwa-offline-proof.jpg",
+      "details": "Loaded Vite production preview on4180; stopped owned session64854; shell HTTP confirmed unreachable; browser reload initialized cached WebGPU WASM and launched flight."
+    },
+    {
+      "check": "PWA update activation",
+      "result": "pass",
+      "scope": "Generated service-worker automated tests only; real install/update phone lifecycle pending"
+    },
+    {
+      "check": "Pixel6a/iPhone12, Safari, physical simultaneous touches/audio,30-minute soak",
+      "result": "pending"
+    }
+  ]
+}

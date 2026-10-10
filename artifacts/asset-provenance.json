@@ -1,0 +1,203 @@
+{
+  "version": 1,
+  "source": {
+    "path": "artifacts/concepts/galaxy-royale-sprite-atlas.png",
+    "sha256": "c446e560c63dd6e85cf437ee3c0dade7ca1f9a798f7be0c05e86eb03d981c83b",
+    "width": 1774,
+    "height": 887,
+    "mode": "RGBA"
+  },
+  "generation": {
+    "tool": "image_gen.imagegen",
+    "model": null,
+    "model_note": "The specific image model identifier was not exposed in the provided session artifact metadata.",
+    "session_date": "2026-10-11"
+  },
+  "conversion": {
+    "script": "scripts/convert-atlas.py",
+    "pillow_version": "12.3.0",
+    "layout": "4 columns, 2 rows; row boundary y=410",
+    "alpha_threshold": 128,
+    "component_connectivity": 8,
+    "component_policy": "Largest component per crop; equal sizes prefer earliest source pixel",
+    "fit": "Tight alpha bounding box, aspect-preserving rounded size, nearest-neighbor sampling, centered in output frame",
+    "palette": "One median-cut palette: index 0 transparent, 63 opaque RGB colors; no dithering",
+    "rgba_encoding": "u32 little-endian RGBA: red in lowest byte; opaque alpha=255",
+    "frames": {
+      "player": {
+        "source_crop": [
+          0,
+          0,
+          443,
+          410
+        ],
+        "alpha_mask_occupied": 49150,
+        "components": 1,
+        "retained_source_pixels": 49150,
+        "removed_component_pixels": 0,
+        "tight_bbox_in_crop": [
+          63,
+          49,
+          382,
+          395
+        ],
+        "output_width": 48,
+        "output_height": 48,
+        "occupied_output_cells": 931
+      },
+      "dart": {
+        "source_crop": [
+          443,
+          0,
+          887,
+          410
+        ],
+        "alpha_mask_occupied": 37427,
+        "components": 1,
+        "retained_source_pixels": 37427,
+        "removed_component_pixels": 0,
+        "tight_bbox_in_crop": [
+          89,
+          72,
+          357,
+          367
+        ],
+        "output_width": 32,
+        "output_height": 32,
+        "occupied_output_cells": 426
+      },
+      "bastion": {
+        "source_crop": [
+          887,
+          0,
+          1330,
+          410
+        ],
+        "alpha_mask_occupied": 72844,
+        "components": 1,
+        "retained_source_pixels": 72844,
+        "removed_component_pixels": 0,
+        "tight_bbox_in_crop": [
+          45,
+          50,
+          398,
+          379
+        ],
+        "output_width": 40,
+        "output_height": 40,
+        "occupied_output_cells": 938
+      },
+      "coil_head": {
+        "source_crop": [
+          1330,
+          0,
+          1774,
+          410
+        ],
+        "alpha_mask_occupied": 62965,
+        "components": 1,
+        "retained_source_pixels": 62965,
+        "removed_component_pixels": 0,
+        "tight_bbox_in_crop": [
+          82,
+          46,
+          363,
+          382
+        ],
+        "output_width": 32,
+        "output_height": 32,
+        "occupied_output_cells": 584
+      },
+      "coil_segment": {
+        "source_crop": [
+          0,
+          410,
+          443,
+          887
+        ],
+        "alpha_mask_occupied": 53323,
+        "components": 1,
+        "retained_source_pixels": 53323,
+        "removed_component_pixels": 0,
+        "tight_bbox_in_crop": [
+          122,
+          47,
+          322,
+          443
+        ],
+        "output_width": 16,
+        "output_height": 16,
+        "occupied_output_cells": 87
+      },
+      "asteroid": {
+        "source_crop": [
+          443,
+          410,
+          887,
+          887
+        ],
+        "alpha_mask_occupied": 80261,
+        "components": 1,
+        "retained_source_pixels": 80261,
+        "removed_component_pixels": 0,
+        "tight_bbox_in_crop": [
+          53,
+          69,
+          385,
+          415
+        ],
+        "output_width": 40,
+        "output_height": 40,
+        "occupied_output_cells": 1067
+      },
+      "dock": {
+        "source_crop": [
+          887,
+          410,
+          1330,
+          887
+        ],
+        "alpha_mask_occupied": 64442,
+        "components": 1,
+        "retained_source_pixels": 64442,
+        "removed_component_pixels": 0,
+        "tight_bbox_in_crop": [
+          9,
+          15,
+          434,
+          443
+        ],
+        "output_width": 64,
+        "output_height": 64,
+        "occupied_output_cells": 1454
+      },
+      "dart_boss": {
+        "source_crop": [
+          1330,
+          410,
+          1774,
+          887
+        ],
+        "alpha_mask_occupied": 91179,
+        "components": 1,
+        "retained_source_pixels": 91179,
+        "removed_component_pixels": 0,
+        "tight_bbox_in_crop": [
+          8,
+          14,
+          438,
+          442
+        ],
+        "output_width": 64,
+        "output_height": 64,
+        "occupied_output_cells": 2045
+      }
+    }
+  },
+  "outputs": {
+    "atlas": "assets/pixels/atlas.json",
+    "atlas_sha256": "1bc8a66f0e0c5d6bb5d9f6a3349032d10d854cb023cd70971e590d61c900051f",
+    "preview": "artifacts/pixel-atlas-preview.png",
+    "preview_sha256": "26da87bd35b0ed8b367705aeba9d69299e14c9763f3b2ef2ba189bf2f4b94f24"
+  }
+}

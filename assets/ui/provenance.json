@@ -1,0 +1,119 @@
+{
+  "version": 1,
+  "source": {
+    "path": "artifacts/concepts/galaxy-royale-ui-atlas.png",
+    "sha256": "25354f32137e682fd9468d9a53d667866d1c5abf46901dac067be5d25382a668",
+    "width": 1774,
+    "height": 887,
+    "mode": "RGBA"
+  },
+  "generation": {
+    "tool": "image_gen.imagegen",
+    "model": null,
+    "model_note": "Specific image model metadata was not exposed with the provided session artifact.",
+    "session_date": "2026-10-11"
+  },
+  "conversion": {
+    "script": "scripts/convert-ui-atlas.py",
+    "shared_palette_script": "scripts/convert-atlas.py",
+    "pillow_version": "12.3.0",
+    "alpha_threshold": 128,
+    "fit": "Tight hard-alpha bbox, aspect-preserving nearest resample, centered in target frame",
+    "palette": "Index0 transparent; 63 opaque median-cut RGB colors; no dithering",
+    "encoding": "u32 little-endian RGBA; row-major palette indices",
+    "frames": {
+      "logo": {
+        "source_crop": [
+          32,
+          80,
+          924,
+          472
+        ],
+        "tight_bbox_in_crop": [
+          17,
+          18,
+          868,
+          370
+        ],
+        "source_occupied_cells": 178065,
+        "component_policy": "Keep all components; no connected-component filtering",
+        "output_width": 256,
+        "output_height": 104,
+        "occupied_output_cells": 15528
+      },
+      "panel": {
+        "source_crop": [
+          928,
+          80,
+          1760,
+          472
+        ],
+        "tight_bbox_in_crop": [
+          15,
+          21,
+          817,
+          364
+        ],
+        "source_occupied_cells": 242659,
+        "component_policy": "Keep all components; no connected-component filtering",
+        "output_width": 96,
+        "output_height": 48,
+        "occupied_output_cells": 3475
+      },
+      "button": {
+        "source_crop": [
+          32,
+          590,
+          1030,
+          796
+        ],
+        "tight_bbox_in_crop": [
+          24,
+          19,
+          974,
+          186
+        ],
+        "source_occupied_cells": 139024,
+        "component_policy": "Keep all components; no connected-component filtering",
+        "output_width": 96,
+        "output_height": 20,
+        "occupied_output_cells": 1417
+      },
+      "seal": {
+        "source_crop": [
+          1152,
+          480,
+          1555,
+          860
+        ],
+        "tight_bbox_in_crop": [
+          20,
+          18,
+          376,
+          354
+        ],
+        "source_occupied_cells": 64075,
+        "component_policy": "Keep all components; no connected-component filtering",
+        "output_width": 40,
+        "output_height": 40,
+        "occupied_output_cells": 804
+      }
+    }
+  },
+  "outputs": {
+    "atlas": "assets/ui/atlas.json",
+    "atlas_sha256": "d2424ecad386331ad97b4328258b2dbd1d0251a8de28de6bba98042e2a54f088",
+    "preview": "assets/ui/atlas-preview.png",
+    "preview_sha256": "1c2617a92354c6c7eb68cee7b71eb08b66c0b28098a69f87739e831b68784f67"
+  },
+  "supporting_assets": [
+    {
+      "name": "Tiny5",
+      "path": "apps/game/public/fonts/Tiny5.ttf",
+      "sha256": "eb4206abc0c73e9fe4fe93c034ea270578859c40a7e740c6207322413c5c4c91",
+      "supplied_license_path": "apps/game/public/fonts/OFL.txt",
+      "supplied_license_sha256": "690fda321d0ebce403249c8d61dadddcee09dc8813424cc5a8f982efcff9a9a3",
+      "license_note": "The font and its supplied SIL Open Font License 1.1 text are retained locally."
+    }
+  ]
+}

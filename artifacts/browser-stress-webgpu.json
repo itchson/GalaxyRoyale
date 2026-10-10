@@ -1,0 +1,43 @@
+{
+  "capturedAt": "2026-10-10T15:59:07.978Z",
+  "scope": "Windows development-workstation IAB; short desktop sample; not physical-phone acceptance",
+  "backend": "webgpu",
+  "scenario": "stress",
+  "time": 49.816078186035156,
+  "paused": false,
+  "position": [
+    752.3349609375,
+    2435.085205078125
+  ],
+  "durationSeconds": 36.2714,
+  "samples": 3600,
+  "quads": 84973,
+  "quadsRange": [
+    83996,
+    131546
+  ],
+  "entities": 714,
+  "particles": 2000,
+  "frameMs": {
+    "p50": 4.19999999999709,
+    "p95": 4.30000000000291,
+    "p99": 4.30000000000291
+  },
+  "simulationMs": {
+    "p50": 0,
+    "p95": 0.6000000089406967
+  },
+  "renderMs": {
+    "p50": 1.1000000089406967,
+    "p95": 1.5
+  },
+  "viewport": [
+    1280,
+    720
+  ],
+  "memory": {
+    "usedJSHeapSize": 19910614,
+    "totalJSHeapSize": 44942670,
+    "jsHeapSizeLimit": 4395630592
+  }
+}

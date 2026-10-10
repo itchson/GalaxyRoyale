@@ -1,0 +1,2508 @@
+{
+  "schemaVersion": 1,
+  "revision": 59,
+  "name": "Galaxy Royale",
+  "phase": "Foundation → playable vertical slice",
+  "updatedAt": "2026-10-10T16:20:09.219Z",
+  "tasks": [
+    {
+      "id": "studio",
+      "title": "Mission Control: real production board",
+      "department": "Production",
+      "status": "complete",
+      "owner": "Production specialist",
+      "priority": "high",
+      "description": "Implement and validate the agreed vertical-slice behavior. Completion requires real acceptance evidence.",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Persistent local API and task edits",
+          "met": true
+        },
+        {
+          "text": "Recorded reviews, decisions, builds and feedback",
+          "met": true
+        },
+        {
+          "text": "Conflict, persistence and evidence validation tests pass",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Studio API and persistence: 9 passed",
+          "kind": "test",
+          "path": "work/studio-tests.log",
+          "details": "Validates stale edits, serialized backups, completion evidence, artifacts, feedback resolution, dependencies, recorded runs and record persistence."
+        },
+        {
+          "label": "Studio production build",
+          "kind": "build",
+          "path": "work/studio-build.log"
+        },
+        {
+          "label": "Strict TypeScript check",
+          "kind": "test",
+          "path": "work/studio-typecheck.log"
+        },
+        {
+          "label": "Current board browser inspection",
+          "kind": "image",
+          "path": "work/studio-board-current.png"
+        },
+        {
+          "label": "Actual run history browser inspection",
+          "kind": "image",
+          "path": "work/studio-runs.png",
+          "details": "Verified compact states, observation sources/evidence, linked save task detail and all seven history observations in Chrome."
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-10T14:29:27.000Z",
+      "updatedAt": "2026-10-10T15:08:05.042Z"
+    },
+    {
+      "id": "engine",
+      "title": "Pixel quad engine and hierarchy",
+      "department": "Engine",
+      "status": "complete",
+      "owner": "Engine specialist",
+      "priority": "high",
+      "description": "Implemented packed cell bodies, affine hierarchy, grouped destruction/animation, reusable bounded batches and material packing.26 engine checks pass, including the opt-in circular topology primitive. The solo game does not use circular wrapping.",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Pixel bodies support per-cell damage and grouped transforms",
+          "met": true
+        },
+        {
+          "text": "Batched render contract and fixed limits verified",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "85 native checks:26 engine,41 gameplay,18 web",
+          "kind": "test",
+          "path": "artifacts/rust-tests.log",
+          "details": "All native checks pass; appended native and WASM strict Clippy finish successfully."
+        },
+        {
+          "label": "Native extraction/budget proof",
+          "kind": "artifact",
+          "path": "artifacts/native-performance.jsonl",
+          "details": "CPU-native measurements are separate from browser/phone acceptance."
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-10T14:29:27.000Z",
+      "updatedAt": "2026-10-10T16:20:08.668Z"
+    },
+    {
+      "id": "gameplay",
+      "title": "Combat, radial zones and progression",
+      "department": "Gameplay",
+      "status": "complete",
+      "owner": "Gameplay specialist",
+      "priority": "high",
+      "description": "Core slice implementation complete: three enemy families and first-generation bosses, six basic upgrades/three signature abilities, dock/loot/death retention, radial danger, streamed regions and protected events.41 gameplay checks pass. Full encounter play review and balancing remain separate Review/backlog tasks; deeper bosses are future content.",
+      "dependencies": [
+        "engine"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Three enemy families and one boss generation per family",
+          "met": true
+        },
+        {
+          "text": "Six upgrades and three unlockable signature abilities",
+          "met": true
+        },
+        {
+          "text": "Dock, loot, death and retained local progression work",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "85 native checks:26 engine,41 gameplay,18 web",
+          "kind": "test",
+          "path": "artifacts/rust-tests.log",
+          "details": "All native checks pass; appended native and WASM strict Clippy finish successfully."
+        },
+        {
+          "label": "37 shell/store/worker/control/console checks",
+          "kind": "test",
+          "path": "artifacts/browser-shell-tests.log",
+          "details": "Includes six drawer lifecycle regressions, simultaneous independent pointer channels,13 storage checks and four generated-worker checks."
+        },
+        {
+          "label": "Actual desktop browser validation and limits",
+          "kind": "artifact",
+          "path": "artifacts/browser-validation.json",
+          "details": "Producer recorded desktop/WebGPU/WebGL2/fallback/device-recovery, console, settings reload, accepted quest persistence and packaged offline reload. Physical devices and reward claim playthrough remain pending."
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-10T14:29:27.000Z",
+      "updatedAt": "2026-10-10T16:20:08.697Z"
+    },
+    {
+      "id": "web-shell",
+      "title": "WASM renderer, controls and web shell",
+      "department": "Platform",
+      "status": "complete",
+      "owner": "Producer",
+      "priority": "high",
+      "description": "Playable WASM renderer and browser controls implemented and accepted for desktop/viewport layout and automated simultaneous pointer channels. Real WebGPU/WebGL2 startup, initializer fallback and live device-loss recovery pass. Landscape joystick, shoot button and camera follow are implemented; physical multitouch, Safari and named-phone performance remain the separate mobile/controls/performance acceptance tasks.",
+      "dependencies": [
+        "engine",
+        "gameplay"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Playable WASM build",
+          "met": true
+        },
+        {
+          "text": "Desktop click travel and right-click shooting",
+          "met": true
+        },
+        {
+          "text": "Landscape joystick, shoot button and camera follow",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Latest full release build and17 game assets",
+          "kind": "build",
+          "path": "artifacts/release-build.log",
+          "details": "Both WASM backends, TypeScript, game/dashboard Vite builds and PWA generation pass."
+        },
+        {
+          "label": "Actual desktop browser validation and limits",
+          "kind": "artifact",
+          "path": "artifacts/browser-validation.json",
+          "details": "Producer recorded desktop/WebGPU/WebGL2/fallback/device-recovery, console, settings reload, accepted quest persistence and packaged offline reload. Physical devices and reward claim playthrough remain pending."
+        },
+        {
+          "label": "37 shell/store/worker/control/console checks",
+          "kind": "test",
+          "path": "artifacts/browser-shell-tests.log",
+          "details": "Includes six drawer lifecycle regressions, simultaneous independent pointer channels,13 storage checks and four generated-worker checks."
+        },
+        {
+          "label": "Actual WebGPU desktop stress",
+          "kind": "artifact",
+          "path": "artifacts/browser-stress-webgpu.json",
+          "details": "83,996–131,546 quads,2,000 particles; p95 frame4.3ms during a short desktop sample. No phone/soak inference."
+        },
+        {
+          "label": "Automatic initializer fallback",
+          "kind": "image",
+          "path": "artifacts/fallback-proof.jpg",
+          "details": "Rejected WebGPU initializer loaded WebGL2."
+        },
+        {
+          "label": "Actual device-loss recovery",
+          "kind": "image",
+          "path": "artifacts/recovery-proof.jpg",
+          "details": "Live device.destroy recovered WebGPU while retaining outer position, damaged hull and active boss."
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-10T14:29:27.000Z",
+      "updatedAt": "2026-10-10T16:20:08.729Z"
+    },
+    {
+      "id": "audio",
+      "title": "Retro synthesis and adaptive sequencer",
+      "department": "Audio",
+      "status": "review",
+      "owner": "Gameplay specialist / Producer listening",
+      "priority": "normal",
+      "description": "Authored procedural score and cues implemented, compiled and integrated. Subjective listening/level balance, gesture/interruption lifecycle and physical device audio acceptance remain Review.",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Gesture-unlocked audio and master/music/SFX settings",
+          "met": false
+        },
+        {
+          "text": "Authored gameplay cues and hub/combat/boss music",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Latest full release build and17 game assets",
+          "kind": "build",
+          "path": "artifacts/release-build.log",
+          "details": "Both WASM backends, TypeScript, game/dashboard Vite builds and PWA generation pass."
+        },
+        {
+          "label": "Authored adaptive Web Audio implementation",
+          "kind": "note",
+          "details": "Authored score, retro synthesis cues, spatial/danger modulation and master/music/SFX buses are implemented in apps/game/src/audio.ts. No generated track accepted. Listening, interruption and physical-device acceptance remain pending."
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-10T14:29:27.000Z",
+      "updatedAt": "2026-10-10T16:20:09.013Z"
+    },
+    {
+      "id": "save",
+      "title": "Versioned local progression and settings",
+      "department": "Platform",
+      "status": "complete",
+      "owner": "Producer / Production specialist QA",
+      "priority": "normal",
+      "description": "Schema2 local progression/settings implementation accepted through automated current/previous snapshot migration, corruption recovery, serialized import and cross-session conflict checks, plus real settings/event reload. Old revisions cannot replay currency. Browser reward completion/claim playthrough remains separate;13 storage checks pass.",
+      "dependencies": [
+        "web-shell"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Persistent upgrades and unlocks survive reload",
+          "met": true
+        },
+        {
+          "text": "Malformed or unsupported saves have visible recovery",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Save and PWA QA: 12 passing checks",
+          "kind": "test",
+          "path": "work/save-pwa-tests.log",
+          "details": "8 SaveStore tests cover validation, currency snapshots, reload, previous snapshot corruption recovery, import ordering, unavailable storage, competing sessions and write failure. 4 additional generated-worker tests passed. Integrated UI acceptance remains with Producer."
+        },
+        {
+          "label": "Schema2 save migration: 13 passed",
+          "kind": "test",
+          "path": "work/storage-v2-tests.log",
+          "details": "V1 current/previous/import migration preserves currency, ranks and revision; v2 discoveries/quests/relics persist with validation; equal revisions cannot replay currency; legacy/new motion and density settings round-trip. Review33bae304 records actual claimed-versus-ready reward semantics."
+        },
+        {
+          "label": "37 shell/store/worker/control/console checks",
+          "kind": "test",
+          "path": "artifacts/browser-shell-tests.log",
+          "details": "Includes six drawer lifecycle regressions, simultaneous independent pointer channels,13 storage checks and four generated-worker checks."
+        },
+        {
+          "label": "Actual desktop browser validation and limits",
+          "kind": "artifact",
+          "path": "artifacts/browser-validation.json",
+          "details": "Producer recorded desktop/WebGPU/WebGL2/fallback/device-recovery, console, settings reload, accepted quest persistence and packaged offline reload. Physical devices and reward claim playthrough remain pending."
+        },
+        {
+          "label": "Accepted event retained after offline reload",
+          "kind": "image",
+          "path": "artifacts/quest-reload-proof.jpg",
+          "details": "Fresh preview origin retained1 discovery and canonical -1:0 bounty0/10 after offline reload; native tests cover one-time reward claims."
+        }
+      ],
+      "blocker": "",
+      "revision": 4,
+      "createdAt": "2026-10-10T14:29:27.000Z",
+      "updatedAt": "2026-10-10T16:20:08.760Z"
+    },
+    {
+      "id": "pwa",
+      "title": "Offline PWA packaging",
+      "department": "Platform",
+      "status": "complete",
+      "owner": "Producer / Production specialist QA",
+      "priority": "normal",
+      "description": "Game-only service-worker scope and actual packaged offline browser reload/launch accepted.17 game assets cached by the latest build. Update activation is covered by generated-worker automated tests; physical phone installation, activation and lifecycle remain in mobile acceptance.",
+      "dependencies": [
+        "web-shell",
+        "save"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Game-only service worker scope",
+          "met": true
+        },
+        {
+          "text": "Offline reload after initial load",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Generated PWA behavior: 4 passing checks",
+          "kind": "test",
+          "path": "work/save-pwa-tests.log",
+          "details": "Deterministic generation and path/content cache versions, cached offline game navigation and WASM, network-first navigation, excluded requests, explicit dock activation and scoped cache cleanup passed in a worker event simulation. Real browser install/offline reload and physical phones are not claimed."
+        },
+        {
+          "label": "Latest full release build and17 game assets",
+          "kind": "build",
+          "path": "artifacts/release-build.log",
+          "details": "Both WASM backends, TypeScript, game/dashboard Vite builds and PWA generation pass."
+        },
+        {
+          "label": "37 shell/store/worker/control/console checks",
+          "kind": "test",
+          "path": "artifacts/browser-shell-tests.log",
+          "details": "Includes six drawer lifecycle regressions, simultaneous independent pointer channels,13 storage checks and four generated-worker checks."
+        },
+        {
+          "label": "Actual desktop browser validation and limits",
+          "kind": "artifact",
+          "path": "artifacts/browser-validation.json",
+          "details": "Producer recorded desktop/WebGPU/WebGL2/fallback/device-recovery, console, settings reload, accepted quest persistence and packaged offline reload. Physical devices and reward claim playthrough remain pending."
+        },
+        {
+          "label": "Real packaged offline reload and launch",
+          "kind": "image",
+          "path": "artifacts/pwa-offline-proof.jpg",
+          "details": "Loaded production preview on127.0.0.1:4180, stopped owned server, confirmed HTTP unreachable, then browser reload initialized cached WASM and launched flight. Real install/update phone lifecycle remains pending."
+        }
+      ],
+      "blocker": "",
+      "revision": 3,
+      "createdAt": "2026-10-10T14:29:27.000Z",
+      "updatedAt": "2026-10-10T16:20:08.778Z"
+    },
+    {
+      "id": "asteroids",
+      "title": "Asteroid damage, impact and loot validation",
+      "department": "QA",
+      "status": "review",
+      "owner": "Producer / Gameplay QA",
+      "priority": "normal",
+      "description": "Per-cell damage, momentum exchange/separation and exactly-once pickup progression pass native/store checks. Full visible asteroid impact/destruction/loot play acceptance remains Review.",
+      "dependencies": [
+        "engine",
+        "gameplay",
+        "web-shell"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Visible pixel destruction and responsive impacts",
+          "met": false
+        },
+        {
+          "text": "Loot recorded in persistent progression",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "85 native checks:26 engine,41 gameplay,18 web",
+          "kind": "test",
+          "path": "artifacts/rust-tests.log",
+          "details": "All native checks pass; appended native and WASM strict Clippy finish successfully."
+        },
+        {
+          "label": "37 shell/store/worker/control/console checks",
+          "kind": "test",
+          "path": "artifacts/browser-shell-tests.log",
+          "details": "Includes six drawer lifecycle regressions, simultaneous independent pointer channels,13 storage checks and four generated-worker checks."
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-10T14:29:27.000Z",
+      "updatedAt": "2026-10-10T16:20:09.062Z"
+    },
+    {
+      "id": "controls-qa",
+      "title": "Controller and input interruption tests",
+      "department": "QA",
+      "status": "review",
+      "owner": "Producer / Physical QA",
+      "priority": "normal",
+      "description": "Automated pointer cancellation/blur/independent simultaneous joystick and fire plus desktop destination mapping pass. Desktop viewport layout reviewed. Actual simultaneous physical touches, Safari and named-phone interruption behavior remain unmeasured.",
+      "dependencies": [
+        "web-shell"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Pointer cancellation clears joystick/fire",
+          "met": true
+        },
+        {
+          "text": "Mobile multitouch and desktop destination movement reviewed",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "37 shell/store/worker/control/console checks",
+          "kind": "test",
+          "path": "artifacts/browser-shell-tests.log",
+          "details": "Includes six drawer lifecycle regressions, simultaneous independent pointer channels,13 storage checks and four generated-worker checks."
+        },
+        {
+          "label": "Actual desktop browser validation and limits",
+          "kind": "artifact",
+          "path": "artifacts/browser-validation.json",
+          "details": "Producer recorded desktop/WebGPU/WebGL2/fallback/device-recovery, console, settings reload, accepted quest persistence and packaged offline reload. Physical devices and reward claim playthrough remain pending."
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-10T14:29:27.000Z",
+      "updatedAt": "2026-10-10T16:20:08.901Z"
+    },
+    {
+      "id": "boss-qa",
+      "title": "Three boss encounters and unlock review",
+      "department": "QA",
+      "status": "review",
+      "owner": "Producer / Gameplay review",
+      "priority": "normal",
+      "description": "Three first-generation boss implementations, queue/pity/reload semantics and diagnostic scenes pass native checks; active desktop boss state survived real renderer recovery and a Coil scene rendered with WebGL2. Full play review of all encounters and ability reward pacing remains pending.",
+      "dependencies": [
+        "gameplay",
+        "web-shell"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Each first-generation boss encounter is reachable",
+          "met": false
+        },
+        {
+          "text": "Signature ability drops, unlocks and upgrades verified",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "85 native checks:26 engine,41 gameplay,18 web",
+          "kind": "test",
+          "path": "artifacts/rust-tests.log",
+          "details": "All native checks pass; appended native and WASM strict Clippy finish successfully."
+        },
+        {
+          "label": "Actual desktop browser validation and limits",
+          "kind": "artifact",
+          "path": "artifacts/browser-validation.json",
+          "details": "Producer recorded desktop/WebGPU/WebGL2/fallback/device-recovery, console, settings reload, accepted quest persistence and packaged offline reload. Physical devices and reward claim playthrough remain pending."
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-10T14:29:27.000Z",
+      "updatedAt": "2026-10-10T16:20:08.934Z"
+    },
+    {
+      "id": "art-direction",
+      "title": "Neo-retro cosmic visual polish",
+      "department": "Visual",
+      "status": "review",
+      "owner": "Production specialist / Gameplay specialist",
+      "priority": "normal",
+      "description": "Generated editable sprite/UI cells, distinct family silhouettes, parallax/background bodies, RoyaleMono, material lighting and interface presentation have source/native/desktop evidence. Continued visual polish and full encounter/hazard readability review remain pending.",
+      "dependencies": [
+        "web-shell"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Distinct silhouettes, parallax stars and nebulae",
+          "met": true
+        },
+        {
+          "text": "Effects support enemy and hazard readability",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "UI atlas conversion checks",
+          "kind": "test",
+          "path": "work/ui-atlas-tests.log",
+          "details": "Exact dimensions, 64 shared colors, alpha0/255, bounded row-major indices, source silhouettes, disconnected components, centered fit, reproducible output and Tiny5/OFL hashes passed."
+        },
+        {
+          "label": "Converted interface pixel preview",
+          "kind": "image",
+          "path": "work/ui-atlas-preview.png",
+          "details": "Four generated UI assets contain 21,224 occupied cells; logo retains separated letters, star and ornaments."
+        },
+        {
+          "label": "UI atlas engine data",
+          "kind": "artifact",
+          "path": "work/ui-atlas.json"
+        },
+        {
+          "label": "UI source and conversion provenance",
+          "kind": "artifact",
+          "path": "work/ui-provenance.json",
+          "details": "Sprite/UI direction is documented in docs/ART_DIRECTION.md. Integrated effects/background readability and web-shell dependency acceptance remain with Producer."
+        },
+        {
+          "label": "Actual desktop browser validation and limits",
+          "kind": "artifact",
+          "path": "artifacts/browser-validation.json",
+          "details": "Producer recorded desktop/WebGPU/WebGL2/fallback/device-recovery, console, settings reload, accepted quest persistence and packaged offline reload. Physical devices and reward claim playthrough remain pending."
+        },
+        {
+          "label": "Rendered generated player/UI and background",
+          "kind": "image",
+          "path": "artifacts/game-combat.jpg",
+          "details": "Actual desktop presentation; further effect/hazard readability polish remains Review."
+        },
+        {
+          "label": "Pixel dialogue presentation",
+          "kind": "image",
+          "path": "artifacts/pixel-dialogue.jpg",
+          "details": "Latest bottom portrait/modal presentation; no physical layout acceptance."
+        }
+      ],
+      "blocker": "",
+      "revision": 3,
+      "createdAt": "2026-10-10T14:29:27.000Z",
+      "updatedAt": "2026-10-10T16:20:08.966Z"
+    },
+    {
+      "id": "performance",
+      "title": "Performance captures and quality limits",
+      "department": "QA",
+      "status": "review",
+      "owner": "Producer / Performance QA",
+      "priority": "normal",
+      "description": "Measured native and short desktop browser budgets recorded. Named-phone60FPS, thermal behavior, memory/audio/device lifecycle and sustained30-minute mobile soak remain pending.",
+      "dependencies": [
+        "web-shell"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Measured frame time and pixel/entity budgets",
+          "met": true
+        },
+        {
+          "text": "Sustained phone testing recorded separately from emulation",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Measured desktop stress frame/pixel budgets",
+          "kind": "artifact",
+          "path": "artifacts/browser-stress-webgpu.json",
+          "details": "Short desktop sample:83,996–131,546 quads,2,000 particles, p95 frame4.3ms. Not a sustained mobile soak."
+        },
+        {
+          "label": "Native extraction measurements",
+          "kind": "artifact",
+          "path": "artifacts/native-performance.jsonl",
+          "details": "CPU-native benchmark separate from browser results."
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-10T14:29:27.000Z",
+      "updatedAt": "2026-10-10T16:20:08.984Z"
+    },
+    {
+      "id": "mobile",
+      "title": "Physical midrange-phone acceptance",
+      "department": "QA",
+      "status": "backlog",
+      "owner": "",
+      "priority": "normal",
+      "description": "Implement and validate the agreed vertical-slice behavior. Completion requires real acceptance evidence.",
+      "dependencies": [
+        "controls-qa",
+        "performance"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Named iOS/Android hardware and browser evidence",
+          "met": false
+        },
+        {
+          "text": "Target 60 FPS tested during representative sustained combat",
+          "met": false
+        }
+      ],
+      "evidence": [],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-10T14:29:27.000Z",
+      "updatedAt": "2026-10-10T14:29:27.000Z"
+    },
+    {
+      "id": "balance",
+      "title": "Slice combat and progression tuning",
+      "department": "Gameplay",
+      "status": "backlog",
+      "owner": "",
+      "priority": "normal",
+      "description": "Implement and validate the agreed vertical-slice behavior. Completion requires real acceptance evidence.",
+      "dependencies": [
+        "boss-qa",
+        "asteroids"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Radial difficulty and rewards form a coherent run",
+          "met": false
+        },
+        {
+          "text": "Upgrade costs and boss thresholds reviewed in play",
+          "met": false
+        }
+      ],
+      "evidence": [],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-10T14:29:27.000Z",
+      "updatedAt": "2026-10-10T14:29:27.000Z"
+    },
+    {
+      "id": "accessibility",
+      "title": "Readability, motion and audio settings",
+      "department": "Platform",
+      "status": "review",
+      "owner": "Producer / Accessibility QA",
+      "priority": "normal",
+      "description": "Independent volume controls, shake, reduced motion and cosmetic density are implemented; native/reload checks pass and desktop footer layout fits. Full critical HUD/readability and physical touch target/device acceptance remains Review.",
+      "dependencies": [
+        "web-shell"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Reduced shake and independent volume controls",
+          "met": true
+        },
+        {
+          "text": "Readable touch targets and critical HUD information",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual desktop browser validation and limits",
+          "kind": "artifact",
+          "path": "artifacts/browser-validation.json",
+          "details": "Producer recorded desktop/WebGPU/WebGL2/fallback/device-recovery, console, settings reload, accepted quest persistence and packaged offline reload. Physical devices and reward claim playthrough remain pending."
+        },
+        {
+          "label": "85 native checks:26 engine,41 gameplay,18 web",
+          "kind": "test",
+          "path": "artifacts/rust-tests.log",
+          "details": "All native checks pass; appended native and WASM strict Clippy finish successfully."
+        },
+        {
+          "label": "37 shell/store/worker/control/console checks",
+          "kind": "test",
+          "path": "artifacts/browser-shell-tests.log",
+          "details": "Includes six drawer lifecycle regressions, simultaneous independent pointer channels,13 storage checks and four generated-worker checks."
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-10T14:29:27.000Z",
+      "updatedAt": "2026-10-10T16:20:09.091Z"
+    },
+    {
+      "id": "audio-ai",
+      "title": "Optional offline music candidate experiment",
+      "department": "Audio",
+      "status": "backlog",
+      "owner": "",
+      "priority": "normal",
+      "description": "Optional offline asset experiment on the RTX 5090; no model inference in the shipped game.",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Up to three short ACE-Step XL candidates with provenance",
+          "met": false
+        },
+        {
+          "text": "Document acceptance or rejection; game remains independent",
+          "met": false
+        }
+      ],
+      "evidence": [],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-10T14:29:27.000Z",
+      "updatedAt": "2026-10-10T14:29:27.000Z"
+    },
+    {
+      "id": "slice-review",
+      "title": "Integrated slice review and release evidence",
+      "department": "Production",
+      "status": "review",
+      "owner": "Producer",
+      "priority": "normal",
+      "description": "Playable local build, actual specialist review and known boundaries recorded. Final private preview/release packaging is in progress; full boss play review, balance and audio listening dependencies remain pending. No full release/phone acceptance claimed.",
+      "dependencies": [
+        "studio",
+        "boss-qa",
+        "balance",
+        "pwa",
+        "audio"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Playable build and recorded known issues",
+          "met": true
+        },
+        {
+          "text": "Real specialist review with linked validation evidence",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Latest full release build and17 game assets",
+          "kind": "build",
+          "path": "artifacts/release-build.log",
+          "details": "Both WASM backends, TypeScript, game/dashboard Vite builds and PWA generation pass."
+        },
+        {
+          "label": "Actual desktop browser validation and limits",
+          "kind": "artifact",
+          "path": "artifacts/browser-validation.json",
+          "details": "Producer recorded desktop/WebGPU/WebGL2/fallback/device-recovery, console, settings reload, accepted quest persistence and packaged offline reload. Physical devices and reward claim playthrough remain pending."
+        },
+        {
+          "label": "Actual specialist asynchronous review",
+          "kind": "artifact",
+          "path": "artifacts/integration-review.md",
+          "details": "Implementation exchanges and known boundaries recorded; not a fabricated meeting."
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-10T14:29:27.000Z",
+      "updatedAt": "2026-10-10T16:20:09.044Z"
+    },
+    {
+      "id": "deep-bosses",
+      "title": "Future five-generation boss content",
+      "department": "Gameplay",
+      "status": "backlog",
+      "owner": "",
+      "priority": "normal",
+      "description": "Later milestone, outside the initial slice.",
+      "dependencies": [
+        "slice-review"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Fifteen distinct boss encounters across three families",
+          "met": false
+        },
+        {
+          "text": "Deferred content designed after slice framework review",
+          "met": false
+        }
+      ],
+      "evidence": [],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-10T14:29:27.000Z",
+      "updatedAt": "2026-10-10T14:29:27.000Z"
+    },
+    {
+      "id": "task-0cdf6811",
+      "title": "Generated pixel UI, animated title and settings",
+      "description": "Generated UI/title/settings source implementation and desktop/automated acceptance complete. Occupied palette-indexed cells and authored RoyaleMono glyph bodies render through grouped transforms; native animation/reduced-motion/UI geometry checks pass. Semantic mouse/touch/keyboard controls are implemented; settings persistence was verified in automated tests and real desktop reload. Physical device usability remains separate.",
+      "department": "Art / Engine",
+      "owner": "Engine specialist + Producer",
+      "status": "complete",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Generated assets render as occupied cells through grouped transforms",
+          "met": true
+        },
+        {
+          "text": "Title and settings animations support reduced motion",
+          "met": true
+        },
+        {
+          "text": "Mouse, touch and keyboard settings persist and work",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "85 native checks:26 engine,41 gameplay,18 web",
+          "kind": "test",
+          "path": "artifacts/rust-tests.log",
+          "details": "All native checks pass; appended native and WASM strict Clippy finish successfully."
+        },
+        {
+          "label": "37 shell/store/worker/control/console checks",
+          "kind": "test",
+          "path": "artifacts/browser-shell-tests.log",
+          "details": "Includes six drawer lifecycle regressions, simultaneous independent pointer channels,13 storage checks and four generated-worker checks."
+        },
+        {
+          "label": "Actual desktop browser validation and limits",
+          "kind": "artifact",
+          "path": "artifacts/browser-validation.json",
+          "details": "Producer recorded desktop/WebGPU/WebGL2/fallback/device-recovery, console, settings reload, accepted quest persistence and packaged offline reload. Physical devices and reward claim playthrough remain pending."
+        },
+        {
+          "label": "Pixel title and landscape layout",
+          "kind": "image",
+          "path": "artifacts/pixel-title-landscape.jpg",
+          "details": "Desktop viewport inspection; no physical touch claim."
+        },
+        {
+          "label": "Settings rendered through pixel groups",
+          "kind": "image",
+          "path": "artifacts/pixel-settings.jpg",
+          "details": "Actual reload preserved reduced motion and density; footer actions fit844x390 according to Producer browser validation."
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-10T15:31:55.125Z",
+      "updatedAt": "2026-10-10T16:20:08.807Z"
+    },
+    {
+      "id": "task-60e6273d",
+      "title": "Seeded biomes, protected discoveries and sidequests",
+      "description": "Seeded region/biome grid, protected site radii, courier/family bounty events, persistent discoveries/relics and bounded rich background bodies implemented. Native determinism/sanctuary and single-claim reward tests pass. Actual browser accept event and offline reload retained the quest. Additional biome enemy content/hazards and complete reward-action play review remain separate.",
+      "department": "Gameplay",
+      "owner": "Gameplay specialist",
+      "status": "complete",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Seeded region grid and local safe radii are deterministic",
+          "met": true
+        },
+        {
+          "text": "Courier and family bounty rewards claim once and survive reload",
+          "met": true
+        },
+        {
+          "text": "Planets, nebulae, comets and distant pulses use bounded quads",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "85 native checks:26 engine,41 gameplay,18 web",
+          "kind": "test",
+          "path": "artifacts/rust-tests.log",
+          "details": "All native checks pass; appended native and WASM strict Clippy finish successfully."
+        },
+        {
+          "label": "Actual desktop browser validation and limits",
+          "kind": "artifact",
+          "path": "artifacts/browser-validation.json",
+          "details": "Producer recorded desktop/WebGPU/WebGL2/fallback/device-recovery, console, settings reload, accepted quest persistence and packaged offline reload. Physical devices and reward claim playthrough remain pending."
+        },
+        {
+          "label": "Accepted bounty retained across offline reload",
+          "kind": "image",
+          "path": "artifacts/quest-reload-proof.jpg",
+          "details": "Canonical site/event progress retained after real browser acceptance and reload. Completed reward claim verified by native tests, not the browser playthrough."
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-10T15:31:55.137Z",
+      "updatedAt": "2026-10-10T16:20:08.838Z"
+    },
+    {
+      "id": "task-05dd95cd",
+      "title": "Invite friends for co-op expeditions",
+      "description": "Future multiplayer milestone requested by user; no multiplayer acceptance claimed in solo slice.",
+      "department": "Networking",
+      "owner": "Unassigned",
+      "status": "backlog",
+      "priority": "normal",
+      "dependencies": [
+        "task-7e8e0a50"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Define authoritative world ownership and invite lifecycle",
+          "met": false
+        },
+        {
+          "text": "Synchronize destruction, missions and progression without duplicate rewards",
+          "met": false
+        },
+        {
+          "text": "Validate reconnect and compatible save versions",
+          "met": false
+        }
+      ],
+      "evidence": [],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-10T15:31:55.153Z",
+      "updatedAt": "2026-10-10T16:00:27.004Z"
+    },
+    {
+      "id": "task-7e8e0a50",
+      "title": "Authoritative multiplayer world and session foundation",
+      "description": "Future prerequisite for invite co-op and battle royale. Define trusted simulation/world ownership, seeded sessions, invitation lifecycle, synchronization of pixel destruction and mission rewards, reconnect, anti-duplication and compatible profile versions. No current network implementation or server acceptance is implied.",
+      "department": "Networking",
+      "owner": "Unassigned",
+      "status": "backlog",
+      "priority": "high",
+      "dependencies": [
+        "slice-review"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Document authority, session identity, invite/reconnect lifecycle and compatible save boundaries",
+          "met": false
+        },
+        {
+          "text": "Synchronize movement, destruction, missions and single-claim rewards under server validation",
+          "met": false
+        },
+        {
+          "text": "Record real multi-client, reconnect and stale/replayed-message tests",
+          "met": false
+        }
+      ],
+      "evidence": [],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-10T16:00:26.992Z",
+      "updatedAt": "2026-10-10T16:00:26.992Z"
+    },
+    {
+      "id": "task-acf182ad",
+      "title": "Player-owned docks: radius upgrades and arenas",
+      "description": "Accepted future direction: player-owned docks with upgradeable protection radii and arena encounters. Costs, bounds, arena entry/exit and reward rules remain design work. Implement coherent protection/spawn/interactions/visuals, persistent ownership and upgrade migration; multiplayer ownership is authority-validated. Current Haven radius remains the implemented solo behavior.",
+      "department": "Gameplay",
+      "owner": "Unassigned",
+      "status": "backlog",
+      "priority": "normal",
+      "dependencies": [
+        "slice-review",
+        "task-60e6273d"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Approve ownership, protection radius limits/costs and arena entry, exit and reward rules",
+          "met": false
+        },
+        {
+          "text": "Verify protection, spawn exclusion, interactions and visual radius agree at upgraded boundaries",
+          "met": false
+        },
+        {
+          "text": "Verify reload/migration, ownership and single-claim arena rewards with recorded play evidence",
+          "met": false
+        }
+      ],
+      "evidence": [],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-10T16:00:27.020Z",
+      "updatedAt": "2026-10-10T16:00:27.020Z"
+    },
+    {
+      "id": "task-2439af52",
+      "title": "Battle royale: compact circular seeded world and antipodal edges",
+      "description": "Accepted separate future multiplayer mode. Create a compact seeded circular universe with equally spaced zones. Boundary crossing transfers to the antipodal edge while preserving ship heading and speed and rebasing camera/interpolation. Validate overshoot, repeated crossings, click destinations, attached effects/projectiles and authoritative multi-client consistency. No current solo-world topology is changed by this backlog entry. Partial foundation now exists: portable opt-in CircularTopology passed native boundary/overshoot/oblique/repeated crossing and shared motion/heading/camera/destination rebase tests. It is unused by solo gameplay. Seeded multiplayer zones, effects/projectile integration, authority and the actual arena mode remain backlog.",
+      "department": "Multiplayer",
+      "owner": "Unassigned",
+      "status": "backlog",
+      "priority": "normal",
+      "dependencies": [
+        "task-7e8e0a50",
+        "task-05dd95cd"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Approve compact circular dimensions and deterministic equally spaced zone layout",
+          "met": false
+        },
+        {
+          "text": "Deterministic edge tests preserve heading/speed and resolve overshoot/repeated crossings",
+          "met": false
+        },
+        {
+          "text": "Camera rebase avoids a cross-universe sweep; targets/effects and multi-client state remain consistent",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "85 native checks:26 engine,41 gameplay,18 web",
+          "kind": "test",
+          "path": "artifacts/rust-tests.log",
+          "details": "All native checks pass; appended native and WASM strict Clippy finish successfully."
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-10T16:00:27.051Z",
+      "updatedAt": "2026-10-10T16:20:09.110Z"
+    },
+    {
+      "id": "task-e665335c",
+      "title": "Battle royale: arena sieges and last-player-standing match loop",
+      "description": "Future arena siege match mode in the separate circular universe. Last remaining player wins. Player counts, siege damage, safe-radius restrictions, elimination/respawn rules, match length and matchmaking need design and balance. Keep match state/rewards isolated from solo progression; authoritative elimination and end conditions must survive reconnect and contested simultaneous outcomes.",
+      "department": "Multiplayer",
+      "owner": "Unassigned",
+      "status": "backlog",
+      "priority": "normal",
+      "dependencies": [
+        "task-7e8e0a50",
+        "task-05dd95cd",
+        "task-acf182ad",
+        "task-2439af52"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Approve siege objectives, elimination/respawn, protection interaction and player-count rules",
+          "met": false
+        },
+        {
+          "text": "Authoritative match ends once for the last surviving player with defined simultaneous-elimination handling",
+          "met": false
+        },
+        {
+          "text": "Record real multiplayer match, reconnect and reward-isolation acceptance evidence",
+          "met": false
+        }
+      ],
+      "evidence": [],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-10T16:00:27.082Z",
+      "updatedAt": "2026-10-10T16:00:27.082Z"
+    },
+    {
+      "id": "task-168fe92e",
+      "title": "Developer console: bounded semantic controls",
+      "description": "Completed assigned component scope: DebugConsole callbacks, ready-gated backtick toggle, Escape, trimmed max256 Enter, 32-entry history/draft, 80-line textContent output, serial async commands, local CLEAR, modal pointer capture, scaled safe-area styling and integration docs. Producer owns backend command whitelist, game pause and pixel UI integration; those remain separate browser acceptance. Latest steering implemented: top opaque black drawer with interior safe-area padding, thin bottom edge and180ms transform slide. Keyboard capture/pause persist through closing; reversal avoids callback churn; body/OS reduced motion closes immediately. Six deterministic fake-DOM/clock regression tests pass. Visible pixel drawer/browser acceptance remains separate.",
+      "department": "Web controls",
+      "owner": "Production specialist",
+      "status": "complete",
+      "priority": "normal",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Export requested callback-based console with bounded command history and output",
+          "met": true
+        },
+        {
+          "text": "Pass TypeScript and targeted actual-module keyboard/log behavior checks",
+          "met": true
+        },
+        {
+          "text": "Document semantic pixel bridge, pause ownership and QA-only scene boundaries",
+          "met": true
+        },
+        {
+          "text": "Top drawer lifecycle preserves pause/input through close, reversal and disposal; reduced motion settles immediately",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Console component source hashes and actual checks",
+          "kind": "test",
+          "path": "work/console-component-evidence.json"
+        },
+        {
+          "label": "Top drawer actual source hashes and checks",
+          "kind": "test",
+          "path": "work/console-drawer-evidence.json"
+        },
+        {
+          "label": "Six deterministic console regression tests passed",
+          "kind": "test",
+          "path": "work/console-drawer-tests.log"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-10T16:00:27.129Z",
+      "updatedAt": "2026-10-10T16:08:58.652Z"
+    },
+    {
+      "id": "task-00ee2401",
+      "title": "Console and compact HUD: integrated browser acceptance",
+      "description": "Producer recorded desktop browser acceptance of the top black console, actual commands/history/draft, pause/close behavior, compact HUD and material lighting. Initializer fallback/device recovery also pass; launch/recovery/modal race guards received Gameplay specialist review. Physical devices are not included in this completion scope.",
+      "department": "QA",
+      "owner": "Producer",
+      "status": "complete",
+      "priority": "normal",
+      "dependencies": [
+        "web-shell",
+        "task-168fe92e"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Record visible browser console input, history, scrolling and command output acceptance",
+          "met": true
+        },
+        {
+          "text": "Verify prior pause state, readiness/recovery, no leaked movement and QA-only scene access",
+          "met": true
+        },
+        {
+          "text": "Review compact HUD and material lighting in representative desktop and touch-layout scenes",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Component-only checks; browser acceptance pending",
+          "kind": "note",
+          "details": "Semantic console TypeScript and targeted fake-DOM checks passed. Browser rendering and integrated pause/command behavior are not marked accepted."
+        },
+        {
+          "label": "Actual desktop browser validation and limits",
+          "kind": "artifact",
+          "path": "artifacts/browser-validation.json",
+          "details": "Producer recorded desktop/WebGPU/WebGL2/fallback/device-recovery, console, settings reload, accepted quest persistence and packaged offline reload. Physical devices and reward claim playthrough remain pending."
+        },
+        {
+          "label": "Actual top black console",
+          "kind": "image",
+          "path": "artifacts/pixel-console.jpg",
+          "details": "Opaque top drawer and real command output inspected; six lifecycle tests supplement actual browser toggle/history/draft acceptance."
+        },
+        {
+          "label": "85 native checks:26 engine,41 gameplay,18 web",
+          "kind": "test",
+          "path": "artifacts/rust-tests.log",
+          "details": "All native checks pass; appended native and WASM strict Clippy finish successfully."
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-10T16:00:27.160Z",
+      "updatedAt": "2026-10-10T16:20:08.870Z"
+    },
+    {
+      "id": "task-35a00493",
+      "title": "Contextual sanctuary dialogue and pixel portraits",
+      "description": "Implemented bottom contextual conversation panel with authored pixel portraits, actual sanctuary descriptions, semantic action/focus controls and pause restoration. Native portrait geometry/blink/reduced-motion checks and TypeScript pass. Actual CONTACT/E and ACCEPT EVENT mutated the Rust quest; offline reload retained canonical -1:0 bounty0/10. Complete quest/reward playthrough is a separate pending review, not claimed here.",
+      "department": "Interface",
+      "owner": "Producer / Engine specialist",
+      "status": "complete",
+      "priority": "normal",
+      "dependencies": [
+        "web-shell",
+        "task-60e6273d",
+        "save"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Bottom contextual panel renders authored portrait and actual sanctuary description",
+          "met": true
+        },
+        {
+          "text": "Native portrait/UI geometry, reduced-motion and TypeScript checks pass",
+          "met": true
+        },
+        {
+          "text": "Real browser accept action invokes Rust mutation and accepted quest persists across offline reload",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "85 native checks:26 engine,41 gameplay,18 web",
+          "kind": "test",
+          "path": "artifacts/rust-tests.log",
+          "details": "All native checks pass; appended native and WASM strict Clippy finish successfully."
+        },
+        {
+          "label": "37 shell/store/worker/control/console checks",
+          "kind": "test",
+          "path": "artifacts/browser-shell-tests.log",
+          "details": "Includes six drawer lifecycle regressions, simultaneous independent pointer channels,13 storage checks and four generated-worker checks."
+        },
+        {
+          "label": "Actual desktop browser validation and limits",
+          "kind": "artifact",
+          "path": "artifacts/browser-validation.json",
+          "details": "Producer recorded desktop/WebGPU/WebGL2/fallback/device-recovery, console, settings reload, accepted quest persistence and packaged offline reload. Physical devices and reward claim playthrough remain pending."
+        },
+        {
+          "label": "Latest bottom portrait conversation",
+          "kind": "image",
+          "path": "artifacts/pixel-dialogue.jpg"
+        },
+        {
+          "label": "Accepted quest retained after offline reload",
+          "kind": "image",
+          "path": "artifacts/quest-reload-proof.jpg"
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-10T16:20:09.124Z",
+      "updatedAt": "2026-10-10T16:20:09.124Z"
+    },
+    {
+      "id": "task-d60fcaaa",
+      "title": "Sanctuary quest completion and reward-claim play review",
+      "description": "Actual browser event acceptance and retained quest reload already pass. Finish a courier/bounty and claim its reward through the dialogue in an actual browser playthrough, verify journal/currency/relic/hull and that replay/reload cannot claim twice. Native single-claim tests pass; no completed browser reward claimed yet.",
+      "department": "QA",
+      "owner": "Producer / Gameplay review",
+      "status": "review",
+      "priority": "normal",
+      "dependencies": [
+        "task-35a00493",
+        "task-60e6273d",
+        "save"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Native courier/bounty single-claim, death and reload tests pass",
+          "met": true
+        },
+        {
+          "text": "Actual browser completed-event reward action, journal/currency/relic/hull and replay/reload are verified",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "85 native checks:26 engine,41 gameplay,18 web",
+          "kind": "test",
+          "path": "artifacts/rust-tests.log",
+          "details": "All native checks pass; appended native and WASM strict Clippy finish successfully."
+        },
+        {
+          "label": "Actual desktop browser validation and limits",
+          "kind": "artifact",
+          "path": "artifacts/browser-validation.json",
+          "details": "Producer recorded desktop/WebGPU/WebGL2/fallback/device-recovery, console, settings reload, accepted quest persistence and packaged offline reload. Physical devices and reward claim playthrough remain pending."
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-10T16:20:09.141Z",
+      "updatedAt": "2026-10-10T16:20:09.141Z"
+    }
+  ],
+  "reviews": [
+    {
+      "id": "review-foundation",
+      "title": "Foundation architecture · asynchronous planning review",
+      "body": "Producer brief: Rust engine_core/game_core/game_web with wgpu + hecs, a TypeScript shell for audio, saves and PWA; a local-private production interface; three enemy families and one boss generation each for the initial slice.\n\nProduction reviewer response: Keep the production dashboard independent of the game. Task Active is a work state, not proof an agent is currently running. Use revision checks, recorded acceptance evidence and real participant contributions. Scope the game's service worker away from the dashboard and API.\n\nOutcome: producer assigned the dashboard/API implementation and parallel engine, gameplay and web-shell work. No implementation checks or playable builds were reported in this planning discussion.",
+      "participants": [
+        "Producer",
+        "Production specialist"
+      ],
+      "taskIds": [
+        "studio",
+        "engine",
+        "gameplay",
+        "web-shell"
+      ],
+      "author": "Production specialist",
+      "source": "Actual producer–production specialist messages and review response in the current Codex session, 11 October 2026 Brisbane time.",
+      "createdAt": "2026-10-10T14:29:27.000Z"
+    },
+    {
+      "id": "review-3b0643d5",
+      "title": "Save persistence and dock-safe PWA update review",
+      "body": "Production specialist reproduced five save failure groups before making corrections: profile normalization without revision changes, exposed mutable recovery snapshots, import ordering and stale-session overwrites, unavailable storage reporting import success, and competing open sessions replacing newer progression. storage.ts now validates nonzero seeds and signature ranks, clones snapshots, serializes imports with saves, rejects unpersistable imports, freezes the replaced session until reload, and compares persisted state before committing a normal save. Producer changed PWA generation to hash sorted paths and contents, wait for ACTIVATE_AT_DOCK, and activate after a saved dock interaction. QA ran 8 fake-indexeddb SaveStore tests and 4 tests against the actual generated service worker in an isolated VM: all 12 passed. The tests cover real IndexedDB API transactions through fake-indexeddb and simulated worker events; browser install, real offline reload, and physical phone performance remain for integrated acceptance. Root is handling browser checks and final task acceptance.",
+      "author": "Production specialist / QA",
+      "source": "Actual asynchronous Producer and Production specialist exchange in the current Codex session; Node test output work/save-pwa-tests.log",
+      "createdAt": "2026-10-10T15:01:45.789Z",
+      "participants": [
+        "Producer",
+        "Production specialist / QA"
+      ],
+      "taskIds": [
+        "save",
+        "pwa"
+      ]
+    },
+    {
+      "id": "review-33bae304",
+      "title": "Schema 2 migration and claimed-reward semantics",
+      "body": "Producer requested schema 2 discoveries, quests and relics with bounded grid identifiers, plus reduced motion/cosmetic settings. Production specialist implemented canonical v1-to-v2 normalization, preserving revision, seed, currency, ranks and existing progression, migrating current/previous snapshots and legacy imports, validating bounded unique lists and quest fields, and comparing normalized state for cross-session save conflicts. Thirteen fake-indexeddb/settings tests passed; evidence is work/storage-v2-tests.log. Gameplay specialist confirmed the runtime contract and clarified that completed means reward claimed, while progress at target means ready. Runtime separately checks IDs against seeded sites and may increment revision when courier cargo is delivered at Haven on reload. Claiming grants three category currency and one unique relic; repeating a claim errors. Storage format migration itself changes no reward or revision. Integrated browser acceptance remains with Producer. This record summarizes an actual asynchronous exchange, not a scheduled meeting.",
+      "author": "Production specialist",
+      "source": "Actual Producer assignment, Production specialist implementation/test evidence, and Gameplay specialist schema/reward clarification in the current asynchronous Codex exchange",
+      "createdAt": "2026-10-10T15:40:37.640Z",
+      "participants": [
+        "Producer",
+        "Production specialist",
+        "Gameplay specialist"
+      ],
+      "taskIds": [
+        "save",
+        "gameplay"
+      ]
+    },
+    {
+      "id": "review-e82ec156",
+      "title": "Generated atlas silhouettes and interface cell conversion",
+      "body": "Producer supplied the real transparent sprite and UI atlas artifacts, specified crop boundaries and bounded frame sizes, and required preservation of all logo components. Production specialist converted the sheets into individual indexed cell data with hard alpha, shared 64-entry palettes and nearest sampling. UI assets contain 15,528 logo cells, 3,475 panel cells, 1,417 button cells and 804 seal cells. Data and visual checks passed for exact dimensions, bounded row-major indices, sampled silhouettes, alpha128, disconnected component preservation, centered aspect fit and byte-identical atlas/preview/provenance reruns; work/ui-atlas-tests.log contains evidence. Local Tiny5 and supplied OFL file hashes are retained in UI provenance. Gameplay specialist reported prior sprite integration with exact occupancy, including 1,067-cell asteroid variants, and requested a read-only orientation/silhouette review. Production specialist verified north-facing art aligns through heading plus FRAC_PI_2, intentional dock/crater gaps and narrow linked Coil modules; no crucial art blocker was found. The UI JSON contract was handed to Engine specialist, while UI state/layout integration and browser checks remain active under Producer. This is a record of actual asynchronous contributions.",
+      "author": "Production specialist",
+      "source": "Actual Producer generated-art/crop requirements, Production specialist conversion and visual/data checks, and Gameplay specialist integration/review exchange in this Codex session",
+      "createdAt": "2026-10-10T15:40:37.717Z",
+      "participants": [
+        "Producer",
+        "Production specialist",
+        "Gameplay specialist"
+      ],
+      "taskIds": [
+        "art-direction",
+        "engine",
+        "gameplay"
+      ]
+    },
+    {
+      "id": "review-579ee66f",
+      "title": "Console component handoff; integrated acceptance remains pending",
+      "body": "Producer requested a callback-driven semantic console and retained ownership of game pause, the backend command whitelist and pixel UI integration. Production specialist implemented only debug-console.ts/.css and DEBUG_CONSOLE.md, then reported full TypeScript success and actual-module fake-DOM assertions for readiness, capture, history/draft, log bounds, literal text, async serialization and close/disposal. Read-only source inspection now shows the Producer has connected callbacks and console observation, but no visible browser acceptance is claimed by this review. The component task is Complete; the integrated console/HUD task remains Review with unmet criteria. This is an actual asynchronous handoff, not an invented live meeting.",
+      "author": "Production specialist",
+      "source": "Actual asynchronous Producer/Production specialist console request, implementation handoff and source inspection in the current session",
+      "createdAt": "2026-10-10T16:00:27.176Z",
+      "participants": [
+        "Producer",
+        "Production specialist"
+      ],
+      "taskIds": [
+        "task-168fe92e",
+        "task-00ee2401"
+      ]
+    },
+    {
+      "id": "review-248d6107",
+      "title": "Actual integrated source/desktop validation and remaining acceptance",
+      "body": "This records actual asynchronous specialist implementation/review and Producer browser QA. Native tests pass26 engine/41 gameplay/18 web; shell tests37 pass, including six drawer regressions; native/WASM strict Clippy and the latest full build pass with17 game assets. Producer verified WebGPU/WebGL2, fallback, live device-loss recovery retaining expedition state, actual console command/history/draft and settings reload. Bottom portrait dialogue ACCEPT EVENT invoked Rust and its canonical bounty survived offline reload. Packaged offline reload and flight passed with the preview server stopped. Gameplay reviewed launch/recovery/modal race guards and the failed-recovery latch. Desktop stress recorded83,996–131,546 quads,2,000 particles,p95 frame4.3ms during a short sample. Physical phones/Safari/multitouch/audio/PWA lifecycle and30-minute mobile soak are pending, alongside full boss play, complete browser reward claim, audio listening and release packaging. The circular topology primitive is tested/opt-in/unused by solo; future multiplayer arena modes remain backlog. No invented live meeting or physical/reward pass is implied.",
+      "author": "Production specialist",
+      "source": "Actual Producer final validation handoffs, artifacts/browser-validation.json and inspected native/shell/build artifacts in the current session. Desktop and automated scope only; no physical-device or completed reward-playthrough claim.",
+      "createdAt": "2026-10-10T16:20:09.157Z",
+      "participants": [
+        "Producer",
+        "Engine specialist",
+        "Gameplay specialist",
+        "Production specialist"
+      ],
+      "taskIds": [
+        "engine",
+        "gameplay",
+        "web-shell",
+        "save",
+        "pwa",
+        "task-0cdf6811",
+        "task-60e6273d",
+        "task-00ee2401",
+        "task-35a00493",
+        "task-d60fcaaa"
+      ]
+    }
+  ],
+  "decisions": [
+    {
+      "id": "decision-slice",
+      "title": "Solo PWA slice + local-private dashboard",
+      "body": "Producer relayed the user's selected direction: solo local progression, PWA distribution, neo-retro cosmic visuals, target 60 FPS on midrange phones, and a playable slice developed alongside the production interface. The first slice includes three enemy families, one boss generation each, six upgrades and three signature abilities; all five boss generations per family remain later work.",
+      "status": "accepted",
+      "author": "Producer",
+      "source": "User selections relayed in the producer's actual implementation brief in this Codex session.",
+      "createdAt": "2026-10-10T14:29:27.000Z"
+    },
+    {
+      "id": "decision-04f0f0a3",
+      "title": "UI is drawn by the pixel engine; world discoveries remain deterministic",
+      "body": "Generated UI is thresholded, nearest-resampled and palette indexed into real occupied cells. Semantic DOM retains accessibility and pointer capture while Rust renders UI groups after world layers. Settings include reduced motion and reduced cosmetic density. Seeded jittered region grids add sanctuary events, courier deliveries and family bounties; schema 2 migrates old progression. Invite-based co-op is a future milestone.",
+      "author": "Producer",
+      "source": "Current user steering and actual active specialist assignments",
+      "createdAt": "2026-10-10T15:32:09.229Z",
+      "status": "accepted"
+    },
+    {
+      "id": "decision-bac9ee79",
+      "title": "Accepted future dock ownership and separate circular battle royale",
+      "body": "The Producer relayed the user-approved future direction: owned docks gain protection-radius upgrades and arenas; a separate multiplayer battle royale uses a compact seeded circular universe with equally spaced zones, arena sieges and a last-player-standing outcome. Crossing its outer edge places the ship at the antipodal edge, preserves heading and speed, and rebases the camera. This records direction only. Costs, radius bounds, zone contents, player counts, siege/elimination rules, match length and networking remain future design/implementation. Invite co-op and authoritative sessions remain backlog prerequisites. Current playable delivery remains a solo PWA slice. See docs/ROADMAP.md and the linked backlog tasks.",
+      "author": "Production specialist",
+      "source": "Producer authorized bounded bookkeeping in the current agent session; future gameplay direction relayed from user feedback. No gameplay implementation or browser acceptance inferred.",
+      "createdAt": "2026-10-10T16:00:27.098Z",
+      "status": "accepted"
+    }
+  ],
+  "builds": [
+    {
+      "id": "build-0e36dd99",
+      "title": "Mission Control dashboard foundation",
+      "body": "Local dashboard production bundle generated successfully. The board, task detail, filtering, real run observations and full history were inspected in Chrome. This record covers the independent production interface; game acceptance is recorded separately by Producer.",
+      "author": "Production specialist",
+      "source": "Actual Mission Control implementation, strict TypeScript check, Vite production build and Node tests in the current Codex session",
+      "createdAt": "2026-10-10T15:07:30.095Z",
+      "revision": "Current uncommitted studio working tree, observed 2026-10-10",
+      "evidence": [
+        {
+          "label": "Studio tests",
+          "kind": "test",
+          "path": "work/studio-tests.log"
+        },
+        {
+          "label": "Dashboard production build",
+          "kind": "build",
+          "path": "work/studio-build.log"
+        },
+        {
+          "label": "Strict studio type check",
+          "kind": "test",
+          "path": "work/studio-typecheck.log"
+        }
+      ],
+      "checks": [
+        {
+          "name": "Studio API and persistence tests",
+          "result": "pass",
+          "details": "9 tests passed, including stale-edit rejection, evidence validation, record persistence and append-only run observations."
+        },
+        {
+          "name": "Strict studio TypeScript check",
+          "result": "pass"
+        },
+        {
+          "name": "Vite dashboard production bundle",
+          "result": "pass"
+        },
+        {
+          "name": "Real Chrome board and run history inspection",
+          "result": "pass",
+          "details": "Observed current API records, expanded sources, linked save task editor and all seven run observations."
+        },
+        {
+          "name": "Physical phone game acceptance",
+          "result": "not_run",
+          "details": "Outside dashboard scope; no physical phone is available to this QA agent."
+        }
+      ],
+      "knownIssues": "Game browser offline install, balance and physical phone performance remain separate acceptance work. Running agent observations are last-recorded states and do not assert current presence."
+    }
+  ],
+  "feedback": [],
+  "activity": [
+    {
+      "id": "activity-kickoff",
+      "revision": 1,
+      "kind": "project.initialized",
+      "itemId": "galaxy-royale",
+      "title": "Implementation assignments recorded",
+      "author": "Production specialist",
+      "source": "Actual producer assignments in the current Codex session. These are task states; no live-agent presence is inferred.",
+      "createdAt": "2026-10-10T14:29:27.000Z"
+    },
+    {
+      "id": "4c3c19e6-e8e3-4e9f-adb7-f945b3e8b3f8",
+      "revision": 2,
+      "kind": "review",
+      "itemId": "review-3b0643d5",
+      "title": "Save persistence and dock-safe PWA update review",
+      "author": "Production specialist / QA",
+      "source": "Actual asynchronous Producer and Production specialist exchange in the current Codex session; Node test output work/save-pwa-tests.log",
+      "createdAt": "2026-10-10T15:01:45.789Z"
+    },
+    {
+      "id": "2da17c34-fd97-47a6-855a-c70b6b2b9d93",
+      "revision": 3,
+      "kind": "task.update",
+      "itemId": "save",
+      "title": "Versioned local progression and settings",
+      "author": "Production specialist / QA",
+      "source": "Actual SaveStore implementation fixes and node --test scripts/test/storage.test.mjs scripts/test/pwa.test.mjs",
+      "createdAt": "2026-10-10T15:01:46.292Z"
+    },
+    {
+      "id": "bdb83ada-90e6-4e70-bb35-9aeec2c282ea",
+      "revision": 4,
+      "kind": "task.update",
+      "itemId": "pwa",
+      "title": "Offline PWA packaging",
+      "author": "Production specialist / QA",
+      "source": "Actual emitted-worker QA following Producer PWA packaging fixes in the current Codex session",
+      "createdAt": "2026-10-10T15:01:46.789Z"
+    },
+    {
+      "id": "c980b8d7-1e61-49c5-a824-15cfaf8621e9",
+      "revision": 5,
+      "kind": "run",
+      "itemId": "run-5598d185",
+      "title": "Engine specialist · completed",
+      "author": "Production specialist",
+      "source": "Actual engine_research final response observed in collaboration list, current Codex session",
+      "createdAt": "2026-10-10T15:05:03.976Z"
+    },
+    {
+      "id": "dee9f1db-2c86-44b9-b45d-5bba2a7e0ee3",
+      "revision": 6,
+      "kind": "run",
+      "itemId": "run-61640de0",
+      "title": "Gameplay specialist · completed",
+      "author": "Production specialist",
+      "source": "Producer explicitly reported gameplay specialist audio completion in the current asynchronous exchange",
+      "createdAt": "2026-10-10T15:05:04.056Z"
+    },
+    {
+      "id": "ac1a7ec5-70b0-4747-8a40-38acd14da04d",
+      "revision": 7,
+      "kind": "run",
+      "itemId": "run-9ab747fb",
+      "title": "Gameplay specialist · running",
+      "author": "Production specialist",
+      "source": "Actual Producer scope update and running collaboration state in current Codex session",
+      "createdAt": "2026-10-10T15:05:04.130Z"
+    },
+    {
+      "id": "2c39e219-4c80-46e7-868b-7bfad410ee06",
+      "revision": 8,
+      "kind": "run",
+      "itemId": "run-b2ff062f",
+      "title": "Production specialist · completed",
+      "author": "Production specialist",
+      "source": "Actual Production specialist implementation, earlier browser inspection, and recorded test/build artifacts in this session",
+      "createdAt": "2026-10-10T15:05:04.201Z"
+    },
+    {
+      "id": "83810f5d-60e1-49a0-9d5e-f8ea7d1eee68",
+      "revision": 9,
+      "kind": "run",
+      "itemId": "run-0904d863",
+      "title": "Production specialist · completed",
+      "author": "Production specialist",
+      "source": "Actual save/PWA implementation and test run; review-3b0643d5 records the asynchronous findings",
+      "createdAt": "2026-10-10T15:05:04.274Z"
+    },
+    {
+      "id": "291e028d-4996-42d5-8103-12a1d8d98d99",
+      "revision": 10,
+      "kind": "run",
+      "itemId": "run-9809a4e8",
+      "title": "Spark audio worker · interrupted",
+      "author": "Production specialist",
+      "source": "Actual Producer report of interrupted local worker and partial output in the current Codex session",
+      "createdAt": "2026-10-10T15:05:04.357Z"
+    },
+    {
+      "id": "4c6ef414-376a-48c3-bdaa-38075f7cb041",
+      "revision": 11,
+      "kind": "run",
+      "itemId": "run-c9536f97",
+      "title": "Producer · running",
+      "author": "Production specialist",
+      "source": "Actual Producer integration/browser QA status update in the current Codex session",
+      "createdAt": "2026-10-10T15:05:04.430Z"
+    },
+    {
+      "id": "4c699de1-4196-48bf-8b68-daf9273fc1bd",
+      "revision": 12,
+      "kind": "build",
+      "itemId": "build-0e36dd99",
+      "title": "Mission Control dashboard foundation",
+      "author": "Production specialist",
+      "source": "Actual Mission Control implementation, strict TypeScript check, Vite production build and Node tests in the current Codex session",
+      "createdAt": "2026-10-10T15:07:30.095Z"
+    },
+    {
+      "id": "fbe26764-058f-4627-9fce-c559469e1009",
+      "revision": 13,
+      "kind": "task.update",
+      "itemId": "studio",
+      "title": "Mission Control: real production board",
+      "author": "Production specialist",
+      "source": "Actual implementation and verified 9-test persistence/API suite, strict TypeScript check, Vite production build, and real Chrome inspection",
+      "createdAt": "2026-10-10T15:08:05.042Z"
+    },
+    {
+      "id": "2672ba3a-15e9-4531-8938-b572aca3344d",
+      "revision": 14,
+      "kind": "run",
+      "itemId": "run-158205e1",
+      "title": "Production specialist · completed",
+      "author": "Production specialist",
+      "source": "Actual recorded-run implementation, 9 passing studio tests, strict TypeScript/Vite checks and real Chrome run-history inspection",
+      "createdAt": "2026-10-10T15:08:05.126Z"
+    },
+    {
+      "id": "01ec3b0d-5c21-43db-916f-9332bd8d9b4a",
+      "revision": 15,
+      "kind": "task.create",
+      "itemId": "task-0cdf6811",
+      "title": "Generated pixel UI, animated title and settings",
+      "author": "Producer",
+      "source": "Current user steering and actual active specialist assignments",
+      "createdAt": "2026-10-10T15:31:55.125Z"
+    },
+    {
+      "id": "7c834bcd-2097-472a-b0a6-866a44220520",
+      "revision": 16,
+      "kind": "task.create",
+      "itemId": "task-60e6273d",
+      "title": "Seeded biomes, protected discoveries and sidequests",
+      "author": "Producer",
+      "source": "Current user steering and actual active specialist assignments",
+      "createdAt": "2026-10-10T15:31:55.137Z"
+    },
+    {
+      "id": "d92816c0-2b62-42e7-9bcf-880d62eeb4b1",
+      "revision": 17,
+      "kind": "task.create",
+      "itemId": "task-05dd95cd",
+      "title": "Invite friends for co-op expeditions",
+      "author": "Producer",
+      "source": "Current user steering and actual active specialist assignments",
+      "createdAt": "2026-10-10T15:31:55.153Z"
+    },
+    {
+      "id": "bf733728-b9e1-417e-ba1c-642fbf1e0182",
+      "revision": 18,
+      "kind": "decision",
+      "itemId": "decision-04f0f0a3",
+      "title": "UI is drawn by the pixel engine; world discoveries remain deterministic",
+      "author": "Producer",
+      "source": "Current user steering and actual active specialist assignments",
+      "createdAt": "2026-10-10T15:32:09.229Z"
+    },
+    {
+      "id": "eda13270-8b46-494e-b222-8294fb688290",
+      "revision": 19,
+      "kind": "review",
+      "itemId": "review-33bae304",
+      "title": "Schema 2 migration and claimed-reward semantics",
+      "author": "Production specialist",
+      "source": "Actual Producer assignment, Production specialist implementation/test evidence, and Gameplay specialist schema/reward clarification in the current asynchronous Codex exchange",
+      "createdAt": "2026-10-10T15:40:37.640Z"
+    },
+    {
+      "id": "295b4038-d9dc-48db-80b6-9e4d9beba019",
+      "revision": 20,
+      "kind": "review",
+      "itemId": "review-e82ec156",
+      "title": "Generated atlas silhouettes and interface cell conversion",
+      "author": "Production specialist",
+      "source": "Actual Producer generated-art/crop requirements, Production specialist conversion and visual/data checks, and Gameplay specialist integration/review exchange in this Codex session",
+      "createdAt": "2026-10-10T15:40:37.717Z"
+    },
+    {
+      "id": "95c7c50f-edf4-4c55-a63f-a3090f8f1dae",
+      "revision": 21,
+      "kind": "task.update",
+      "itemId": "art-direction",
+      "title": "Neo-retro cosmic visual polish",
+      "author": "Production specialist",
+      "source": "Actual generated sprite/UI atlas conversion, read-only silhouette review, documented direction and deterministic conversion tests",
+      "createdAt": "2026-10-10T15:41:20.178Z"
+    },
+    {
+      "id": "ea377da3-2463-4d89-ba66-8c113660b5e6",
+      "revision": 22,
+      "kind": "task.update",
+      "itemId": "save",
+      "title": "Versioned local progression and settings",
+      "author": "Production specialist",
+      "source": "Actual schema2 implementation and 13 passing fake-indexeddb/settings tests; runtime semantics confirmed by Gameplay specialist",
+      "createdAt": "2026-10-10T15:41:20.268Z"
+    },
+    {
+      "id": "d48a4eff-e8e8-43a5-8dc3-590bafe3278a",
+      "revision": 23,
+      "kind": "run",
+      "itemId": "run-cca5c596",
+      "title": "Production specialist · completed",
+      "author": "Production specialist",
+      "source": "Actual schema2 and generated UI atlas implementation/checks, docs update and Producer/Gameplay specialist asynchronous review in the current session",
+      "createdAt": "2026-10-10T15:41:20.950Z"
+    },
+    {
+      "id": "7f016691-7765-4b3e-81c7-292b8adf990d",
+      "revision": 24,
+      "kind": "task.create",
+      "itemId": "task-7e8e0a50",
+      "title": "Authoritative multiplayer world and session foundation",
+      "author": "Production specialist",
+      "source": "Producer authorized bounded bookkeeping in the current agent session; future gameplay direction relayed from user feedback. No gameplay implementation or browser acceptance inferred.",
+      "createdAt": "2026-10-10T16:00:26.992Z"
+    },
+    {
+      "id": "dae57af2-d075-4d06-8401-d64b38d5fce6",
+      "revision": 25,
+      "kind": "task.update",
+      "itemId": "task-05dd95cd",
+      "title": "Invite friends for co-op expeditions",
+      "author": "Production specialist",
+      "source": "Producer authorized bounded bookkeeping in the current agent session; future gameplay direction relayed from user feedback. No gameplay implementation or browser acceptance inferred.",
+      "createdAt": "2026-10-10T16:00:27.004Z"
+    },
+    {
+      "id": "e9f28f15-2d66-49db-8023-381cf40138a8",
+      "revision": 26,
+      "kind": "task.create",
+      "itemId": "task-acf182ad",
+      "title": "Player-owned docks: radius upgrades and arenas",
+      "author": "Production specialist",
+      "source": "Producer authorized bounded bookkeeping in the current agent session; future gameplay direction relayed from user feedback. No gameplay implementation or browser acceptance inferred.",
+      "createdAt": "2026-10-10T16:00:27.020Z"
+    },
+    {
+      "id": "f54e5197-a90a-4b26-9461-7bdc00b20055",
+      "revision": 27,
+      "kind": "task.create",
+      "itemId": "task-2439af52",
+      "title": "Battle royale: compact circular seeded world and antipodal edges",
+      "author": "Production specialist",
+      "source": "Producer authorized bounded bookkeeping in the current agent session; future gameplay direction relayed from user feedback. No gameplay implementation or browser acceptance inferred.",
+      "createdAt": "2026-10-10T16:00:27.051Z"
+    },
+    {
+      "id": "2edf95ee-529d-4434-a073-224f94c83373",
+      "revision": 28,
+      "kind": "task.create",
+      "itemId": "task-e665335c",
+      "title": "Battle royale: arena sieges and last-player-standing match loop",
+      "author": "Production specialist",
+      "source": "Producer authorized bounded bookkeeping in the current agent session; future gameplay direction relayed from user feedback. No gameplay implementation or browser acceptance inferred.",
+      "createdAt": "2026-10-10T16:00:27.082Z"
+    },
+    {
+      "id": "439b65b5-78e3-49d9-a83d-b8e42e951f9f",
+      "revision": 29,
+      "kind": "decision",
+      "itemId": "decision-bac9ee79",
+      "title": "Accepted future dock ownership and separate circular battle royale",
+      "author": "Production specialist",
+      "source": "Producer authorized bounded bookkeeping in the current agent session; future gameplay direction relayed from user feedback. No gameplay implementation or browser acceptance inferred.",
+      "createdAt": "2026-10-10T16:00:27.098Z"
+    },
+    {
+      "id": "1c6c6e13-4eca-4599-b1da-80fd9dd76a97",
+      "revision": 30,
+      "kind": "task.create",
+      "itemId": "task-168fe92e",
+      "title": "Developer console: bounded semantic controls",
+      "author": "Production specialist",
+      "source": "Producer authorized bounded bookkeeping in the current agent session; future gameplay direction relayed from user feedback. No gameplay implementation or browser acceptance inferred.",
+      "createdAt": "2026-10-10T16:00:27.129Z"
+    },
+    {
+      "id": "d578dcb4-f8c7-4cd7-9050-23e9e0d73790",
+      "revision": 31,
+      "kind": "task.create",
+      "itemId": "task-00ee2401",
+      "title": "Console and compact HUD: integrated browser acceptance",
+      "author": "Production specialist",
+      "source": "Producer authorized bounded bookkeeping in the current agent session; future gameplay direction relayed from user feedback. No gameplay implementation or browser acceptance inferred.",
+      "createdAt": "2026-10-10T16:00:27.160Z"
+    },
+    {
+      "id": "5c3981ee-8bf7-4f42-ad1a-0a2f6861018e",
+      "revision": 32,
+      "kind": "review",
+      "itemId": "review-579ee66f",
+      "title": "Console component handoff; integrated acceptance remains pending",
+      "author": "Production specialist",
+      "source": "Actual asynchronous Producer/Production specialist console request, implementation handoff and source inspection in the current session",
+      "createdAt": "2026-10-10T16:00:27.176Z"
+    },
+    {
+      "id": "ab64a81e-12a7-43ba-9b47-da99d3c0e6c7",
+      "revision": 33,
+      "kind": "run",
+      "itemId": "run-a4bfe747",
+      "title": "Production specialist · completed",
+      "author": "Production specialist",
+      "source": "Actual completed assigned console implementation and bounded production/documentation bookkeeping in the current agent session",
+      "createdAt": "2026-10-10T16:00:27.191Z"
+    },
+    {
+      "id": "c53bfd0c-7ba8-4757-85c6-fc01a6c66c83",
+      "revision": 34,
+      "kind": "task.update",
+      "itemId": "task-168fe92e",
+      "title": "Developer console: bounded semantic controls",
+      "author": "Production specialist",
+      "source": "Actual Producer steering for a top black sliding drawer, actual bounded implementation/tests and asynchronous bridge transition contract in the current session",
+      "createdAt": "2026-10-10T16:08:58.652Z"
+    },
+    {
+      "id": "6a6cd959-75e6-4e80-81b8-5c895f9a1533",
+      "revision": 35,
+      "kind": "run",
+      "itemId": "run-72165806",
+      "title": "Production specialist · completed",
+      "author": "Production specialist",
+      "source": "Actual Producer steering for a top black sliding drawer, actual bounded implementation/tests and asynchronous bridge transition contract in the current session",
+      "createdAt": "2026-10-10T16:08:58.659Z"
+    },
+    {
+      "id": "abe3f3ac-eaf0-483a-8e72-c5d8f33a55e8",
+      "revision": 36,
+      "kind": "task.update",
+      "itemId": "engine",
+      "title": "Pixel quad engine and hierarchy",
+      "author": "Production specialist",
+      "source": "Actual Producer final validation handoffs, artifacts/browser-validation.json and inspected native/shell/build artifacts in the current session. Desktop and automated scope only; no physical-device or completed reward-playthrough claim.",
+      "createdAt": "2026-10-10T16:20:08.668Z"
+    },
+    {
+      "id": "e97a8bc1-8453-4f73-83f2-eb78bd0a24c7",
+      "revision": 37,
+      "kind": "task.update",
+      "itemId": "gameplay",
+      "title": "Combat, radial zones and progression",
+      "author": "Production specialist",
+      "source": "Actual Producer final validation handoffs, artifacts/browser-validation.json and inspected native/shell/build artifacts in the current session. Desktop and automated scope only; no physical-device or completed reward-playthrough claim.",
+      "createdAt": "2026-10-10T16:20:08.697Z"
+    },
+    {
+      "id": "4f9d65a2-95b5-4546-999a-a2d07b9a5cbe",
+      "revision": 38,
+      "kind": "task.update",
+      "itemId": "web-shell",
+      "title": "WASM renderer, controls and web shell",
+      "author": "Production specialist",
+      "source": "Actual Producer final validation handoffs, artifacts/browser-validation.json and inspected native/shell/build artifacts in the current session. Desktop and automated scope only; no physical-device or completed reward-playthrough claim.",
+      "createdAt": "2026-10-10T16:20:08.729Z"
+    },
+    {
+      "id": "7dbb146d-f92a-4433-975e-fc32e4549ab6",
+      "revision": 39,
+      "kind": "task.update",
+      "itemId": "save",
+      "title": "Versioned local progression and settings",
+      "author": "Production specialist",
+      "source": "Actual Producer final validation handoffs, artifacts/browser-validation.json and inspected native/shell/build artifacts in the current session. Desktop and automated scope only; no physical-device or completed reward-playthrough claim.",
+      "createdAt": "2026-10-10T16:20:08.760Z"
+    },
+    {
+      "id": "99405f3d-7334-471f-a9c5-9e54bd61b0a4",
+      "revision": 40,
+      "kind": "task.update",
+      "itemId": "pwa",
+      "title": "Offline PWA packaging",
+      "author": "Production specialist",
+      "source": "Actual Producer final validation handoffs, artifacts/browser-validation.json and inspected native/shell/build artifacts in the current session. Desktop and automated scope only; no physical-device or completed reward-playthrough claim.",
+      "createdAt": "2026-10-10T16:20:08.778Z"
+    },
+    {
+      "id": "47dc1c77-433e-4b7d-9366-88281b6898a4",
+      "revision": 41,
+      "kind": "task.update",
+      "itemId": "task-0cdf6811",
+      "title": "Generated pixel UI, animated title and settings",
+      "author": "Production specialist",
+      "source": "Actual Producer final validation handoffs, artifacts/browser-validation.json and inspected native/shell/build artifacts in the current session. Desktop and automated scope only; no physical-device or completed reward-playthrough claim.",
+      "createdAt": "2026-10-10T16:20:08.807Z"
+    },
+    {
+      "id": "bf8428b1-3673-4552-948e-ed3e1092fa23",
+      "revision": 42,
+      "kind": "task.update",
+      "itemId": "task-60e6273d",
+      "title": "Seeded biomes, protected discoveries and sidequests",
+      "author": "Production specialist",
+      "source": "Actual Producer final validation handoffs, artifacts/browser-validation.json and inspected native/shell/build artifacts in the current session. Desktop and automated scope only; no physical-device or completed reward-playthrough claim.",
+      "createdAt": "2026-10-10T16:20:08.838Z"
+    },
+    {
+      "id": "a6e8e7b3-16d1-4f33-ad99-a92e6e45a47a",
+      "revision": 43,
+      "kind": "task.update",
+      "itemId": "task-00ee2401",
+      "title": "Console and compact HUD: integrated browser acceptance",
+      "author": "Production specialist",
+      "source": "Actual Producer final validation handoffs, artifacts/browser-validation.json and inspected native/shell/build artifacts in the current session. Desktop and automated scope only; no physical-device or completed reward-playthrough claim.",
+      "createdAt": "2026-10-10T16:20:08.870Z"
+    },
+    {
+      "id": "776031b9-c918-4c42-8808-accbf28e883f",
+      "revision": 44,
+      "kind": "task.update",
+      "itemId": "controls-qa",
+      "title": "Controller and input interruption tests",
+      "author": "Production specialist",
+      "source": "Actual Producer final validation handoffs, artifacts/browser-validation.json and inspected native/shell/build artifacts in the current session. Desktop and automated scope only; no physical-device or completed reward-playthrough claim.",
+      "createdAt": "2026-10-10T16:20:08.901Z"
+    },
+    {
+      "id": "655cc41d-71eb-4b01-868c-991635a0e411",
+      "revision": 45,
+      "kind": "task.update",
+      "itemId": "boss-qa",
+      "title": "Three boss encounters and unlock review",
+      "author": "Production specialist",
+      "source": "Actual Producer final validation handoffs, artifacts/browser-validation.json and inspected native/shell/build artifacts in the current session. Desktop and automated scope only; no physical-device or completed reward-playthrough claim.",
+      "createdAt": "2026-10-10T16:20:08.934Z"
+    },
+    {
+      "id": "a022ea90-a490-42e4-ae14-42f87261114d",
+      "revision": 46,
+      "kind": "task.update",
+      "itemId": "art-direction",
+      "title": "Neo-retro cosmic visual polish",
+      "author": "Production specialist",
+      "source": "Actual Producer final validation handoffs, artifacts/browser-validation.json and inspected native/shell/build artifacts in the current session. Desktop and automated scope only; no physical-device or completed reward-playthrough claim.",
+      "createdAt": "2026-10-10T16:20:08.966Z"
+    },
+    {
+      "id": "51554b29-4504-47bf-a9f0-275ebcdc3fa5",
+      "revision": 47,
+      "kind": "task.update",
+      "itemId": "performance",
+      "title": "Performance captures and quality limits",
+      "author": "Production specialist",
+      "source": "Actual Producer final validation handoffs, artifacts/browser-validation.json and inspected native/shell/build artifacts in the current session. Desktop and automated scope only; no physical-device or completed reward-playthrough claim.",
+      "createdAt": "2026-10-10T16:20:08.984Z"
+    },
+    {
+      "id": "e2d04cc3-cddc-449e-8b2a-089301c052f9",
+      "revision": 48,
+      "kind": "task.update",
+      "itemId": "audio",
+      "title": "Retro synthesis and adaptive sequencer",
+      "author": "Production specialist",
+      "source": "Actual Producer final validation handoffs, artifacts/browser-validation.json and inspected native/shell/build artifacts in the current session. Desktop and automated scope only; no physical-device or completed reward-playthrough claim.",
+      "createdAt": "2026-10-10T16:20:09.013Z"
+    },
+    {
+      "id": "e93a262e-d341-413e-807c-1c6cb97e7a21",
+      "revision": 49,
+      "kind": "task.update",
+      "itemId": "slice-review",
+      "title": "Integrated slice review and release evidence",
+      "author": "Production specialist",
+      "source": "Actual Producer final validation handoffs, artifacts/browser-validation.json and inspected native/shell/build artifacts in the current session. Desktop and automated scope only; no physical-device or completed reward-playthrough claim.",
+      "createdAt": "2026-10-10T16:20:09.044Z"
+    },
+    {
+      "id": "a6be3aa2-3b1f-49c9-8e24-d9d587864786",
+      "revision": 50,
+      "kind": "task.update",
+      "itemId": "asteroids",
+      "title": "Asteroid damage, impact and loot validation",
+      "author": "Production specialist",
+      "source": "Actual Producer final validation handoffs, artifacts/browser-validation.json and inspected native/shell/build artifacts in the current session. Desktop and automated scope only; no physical-device or completed reward-playthrough claim.",
+      "createdAt": "2026-10-10T16:20:09.062Z"
+    },
+    {
+      "id": "fe807db8-0bdb-4935-8a94-c38a11a9a559",
+      "revision": 51,
+      "kind": "task.update",
+      "itemId": "accessibility",
+      "title": "Readability, motion and audio settings",
+      "author": "Production specialist",
+      "source": "Actual Producer final validation handoffs, artifacts/browser-validation.json and inspected native/shell/build artifacts in the current session. Desktop and automated scope only; no physical-device or completed reward-playthrough claim.",
+      "createdAt": "2026-10-10T16:20:09.091Z"
+    },
+    {
+      "id": "58e205a2-b973-41c1-8f51-5bdeef8e8865",
+      "revision": 52,
+      "kind": "task.update",
+      "itemId": "task-2439af52",
+      "title": "Battle royale: compact circular seeded world and antipodal edges",
+      "author": "Production specialist",
+      "source": "Actual Producer final validation handoffs, artifacts/browser-validation.json and inspected native/shell/build artifacts in the current session. Desktop and automated scope only; no physical-device or completed reward-playthrough claim.",
+      "createdAt": "2026-10-10T16:20:09.110Z"
+    },
+    {
+      "id": "5c1e3af5-aa02-45ba-a7ae-cd1ae88bebf1",
+      "revision": 53,
+      "kind": "task.create",
+      "itemId": "task-35a00493",
+      "title": "Contextual sanctuary dialogue and pixel portraits",
+      "author": "Production specialist",
+      "source": "Actual Producer final validation handoffs, artifacts/browser-validation.json and inspected native/shell/build artifacts in the current session. Desktop and automated scope only; no physical-device or completed reward-playthrough claim.",
+      "createdAt": "2026-10-10T16:20:09.124Z"
+    },
+    {
+      "id": "5c9e3e90-c0ad-499a-8c5f-06511ab7fd20",
+      "revision": 54,
+      "kind": "task.create",
+      "itemId": "task-d60fcaaa",
+      "title": "Sanctuary quest completion and reward-claim play review",
+      "author": "Production specialist",
+      "source": "Actual Producer final validation handoffs, artifacts/browser-validation.json and inspected native/shell/build artifacts in the current session. Desktop and automated scope only; no physical-device or completed reward-playthrough claim.",
+      "createdAt": "2026-10-10T16:20:09.141Z"
+    },
+    {
+      "id": "998b4261-ff42-4194-91de-4b9a6512020e",
+      "revision": 55,
+      "kind": "review",
+      "itemId": "review-248d6107",
+      "title": "Actual integrated source/desktop validation and remaining acceptance",
+      "author": "Production specialist",
+      "source": "Actual Producer final validation handoffs, artifacts/browser-validation.json and inspected native/shell/build artifacts in the current session. Desktop and automated scope only; no physical-device or completed reward-playthrough claim.",
+      "createdAt": "2026-10-10T16:20:09.157Z"
+    },
+    {
+      "id": "88aebbcf-ebb3-41e4-a24f-ee64d4e46a1f",
+      "revision": 56,
+      "kind": "run",
+      "itemId": "run-ea59cb4a",
+      "title": "Engine specialist · completed",
+      "author": "Production specialist",
+      "source": "Actual Producer final validation handoffs, artifacts/browser-validation.json and inspected native/shell/build artifacts in the current session. Desktop and automated scope only; no physical-device or completed reward-playthrough claim.",
+      "createdAt": "2026-10-10T16:20:09.172Z"
+    },
+    {
+      "id": "d0a35d83-90fe-4ec1-a928-f0224cd6367c",
+      "revision": 57,
+      "kind": "run",
+      "itemId": "run-7ec0ae7b",
+      "title": "Gameplay specialist · completed",
+      "author": "Production specialist",
+      "source": "Actual Producer final validation handoffs, artifacts/browser-validation.json and inspected native/shell/build artifacts in the current session. Desktop and automated scope only; no physical-device or completed reward-playthrough claim.",
+      "createdAt": "2026-10-10T16:20:09.187Z"
+    },
+    {
+      "id": "d75c5ee8-f5fd-4104-9e0c-83a7dd59ef08",
+      "revision": 58,
+      "kind": "run",
+      "itemId": "run-831570e5",
+      "title": "Producer · running",
+      "author": "Production specialist",
+      "source": "Actual Producer final validation handoffs, artifacts/browser-validation.json and inspected native/shell/build artifacts in the current session. Desktop and automated scope only; no physical-device or completed reward-playthrough claim.",
+      "createdAt": "2026-10-10T16:20:09.203Z"
+    },
+    {
+      "id": "1e70561a-d198-41cc-adde-f97747631b45",
+      "revision": 59,
+      "kind": "run",
+      "itemId": "run-43353ede",
+      "title": "Production specialist · completed",
+      "author": "Production specialist",
+      "source": "Actual Producer final validation handoffs, artifacts/browser-validation.json and inspected native/shell/build artifacts in the current session. Desktop and automated scope only; no physical-device or completed reward-playthrough claim.",
+      "createdAt": "2026-10-10T16:20:09.219Z"
+    }
+  ],
+  "runRecords": [
+    {
+      "id": "run-5598d185",
+      "title": "Engine specialist · completed",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Engine specialist",
+      "state": "completed",
+      "observedAt": "2026-10-10T15:05:03.838Z",
+      "taskIds": [
+        "engine"
+      ],
+      "summary": "Engine core, affine hierarchy, per-cell animation, swept collisions, localized damage and CPU extraction QA completed. Specialist reported 42 passing Rust tests and clean Clippy, formatting and WASM checks; physical phone frame rate remains unverified.",
+      "evidence": [
+        {
+          "label": "Specialist completion report",
+          "kind": "note",
+          "details": "Actual final report: 81,840-quad CPU extraction median 0.163 ms, p99 0.211 ms; actual stress simulation/extraction median 0.432 ms, p99 0.892 ms. These are CPU benchmarks, not browser or phone FPS."
+        }
+      ],
+      "author": "Production specialist",
+      "source": "Actual engine_research final response observed in collaboration list, current Codex session",
+      "createdAt": "2026-10-10T15:05:03.976Z"
+    },
+    {
+      "id": "run-61640de0",
+      "title": "Gameplay specialist · completed",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Gameplay specialist",
+      "state": "completed",
+      "observedAt": "2026-10-10T15:05:03.838Z",
+      "taskIds": [
+        "audio"
+      ],
+      "summary": "Authored procedural audio scope completed after gameplay core implementation. Integrated audio listening and device QA remain with Producer.",
+      "evidence": [
+        {
+          "label": "Actual Producer handoff",
+          "kind": "note",
+          "details": "Producer reported: gameplay has completed audio and is running background polish now."
+        }
+      ],
+      "author": "Production specialist",
+      "source": "Producer explicitly reported gameplay specialist audio completion in the current asynchronous exchange",
+      "createdAt": "2026-10-10T15:05:04.056Z"
+    },
+    {
+      "id": "run-9ab747fb",
+      "title": "Gameplay specialist · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Gameplay specialist",
+      "state": "running",
+      "observedAt": "2026-10-10T15:05:03.838Z",
+      "taskIds": [
+        "gameplay",
+        "art-direction"
+      ],
+      "summary": "Background visual polish is the current assigned scope after gameplay core and audio work. This is the last reported observation, not live presence.",
+      "evidence": [
+        {
+          "label": "Actual assignment observation",
+          "kind": "note",
+          "details": "Producer reported current background polish scope; collaboration state was running at observation."
+        }
+      ],
+      "author": "Production specialist",
+      "source": "Actual Producer scope update and running collaboration state in current Codex session",
+      "createdAt": "2026-10-10T15:05:04.130Z"
+    },
+    {
+      "id": "run-b2ff062f",
+      "title": "Production specialist · completed",
+      "agentId": "/root/production_research",
+      "agentLabel": "Production specialist",
+      "state": "completed",
+      "observedAt": "2026-10-10T15:05:03.838Z",
+      "taskIds": [
+        "studio"
+      ],
+      "summary": "Local Mission Control foundation implemented: editable board, real review and decision records, build evidence, activity, feedback, serialized persistence, stale-edit rejection and safe artifact reads. Browser board, filtering and task editor were inspected; subsequent run history extension is being verified separately.",
+      "evidence": [
+        {
+          "label": "Studio persistence and API tests",
+          "kind": "test",
+          "path": "work/studio-tests.log",
+          "details": "8 passing tests in current suite, including three new recorded-run tests."
+        },
+        {
+          "label": "Dashboard production build",
+          "kind": "build",
+          "path": "work/studio-build.log"
+        },
+        {
+          "label": "Inspected foundation board",
+          "kind": "image",
+          "path": "work/studio-board.png"
+        }
+      ],
+      "author": "Production specialist",
+      "source": "Actual Production specialist implementation, earlier browser inspection, and recorded test/build artifacts in this session",
+      "createdAt": "2026-10-10T15:05:04.201Z"
+    },
+    {
+      "id": "run-0904d863",
+      "title": "Production specialist · completed",
+      "agentId": "/root/production_research",
+      "agentLabel": "Production specialist",
+      "state": "completed",
+      "observedAt": "2026-10-10T15:05:03.838Z",
+      "taskIds": [
+        "save",
+        "pwa"
+      ],
+      "summary": "Independent SaveStore fixes and generated PWA QA completed: 12 passing tests. Save and PWA tasks moved to Review with evidence; integrated acceptance remains with Producer.",
+      "evidence": [
+        {
+          "label": "Save and generated-worker test output",
+          "kind": "test",
+          "path": "work/save-pwa-tests.log",
+          "details": "8 fake-indexeddb tests and 4 actual generated-worker VM tests passed. Physical devices and browser offline install are not covered by these tests."
+        }
+      ],
+      "author": "Production specialist",
+      "source": "Actual save/PWA implementation and test run; review-3b0643d5 records the asynchronous findings",
+      "createdAt": "2026-10-10T15:05:04.274Z"
+    },
+    {
+      "id": "run-9809a4e8",
+      "title": "Spark audio worker · interrupted",
+      "agentId": "spark/audio-worker",
+      "agentLabel": "Spark audio worker",
+      "state": "interrupted",
+      "observedAt": "2026-10-10T15:05:03.838Z",
+      "taskIds": [
+        "audio"
+      ],
+      "summary": "Local audio worker produced an incomplete partial source before an OS error 206 interrupted the scope. Gameplay specialist subsequently completed authored audio; this local worker attempt is not recorded as a successful completion.",
+      "evidence": [
+        {
+          "label": "Producer interruption report",
+          "kind": "note",
+          "details": "Producer reported OS error 206 and partial incomplete source. No passing build or completed local audio deliverable is attributed to this attempt."
+        }
+      ],
+      "author": "Production specialist",
+      "source": "Actual Producer report of interrupted local worker and partial output in the current Codex session",
+      "createdAt": "2026-10-10T15:05:04.357Z"
+    },
+    {
+      "id": "run-c9536f97",
+      "title": "Producer · running",
+      "agentId": "/root",
+      "agentLabel": "Producer",
+      "state": "running",
+      "observedAt": "2026-10-10T15:05:03.838Z",
+      "taskIds": [
+        "web-shell",
+        "controls-qa",
+        "slice-review"
+      ],
+      "summary": "Integrating and verifying the playable slice in a real browser. Producer reported successful WebGPU initialization and rendered combat scene, plus 24 passing Node tests; release and physical phone acceptance are still in progress.",
+      "evidence": [
+        {
+          "label": "Producer validation report",
+          "kind": "note",
+          "details": "Producer explicitly reported browser WebGPU initialization, combat rendering and 24 passing tests. This observation records the reported evidence without claiming final release acceptance."
+        }
+      ],
+      "author": "Production specialist",
+      "source": "Actual Producer integration/browser QA status update in the current Codex session",
+      "createdAt": "2026-10-10T15:05:04.430Z"
+    },
+    {
+      "id": "run-158205e1",
+      "title": "Production specialist · completed",
+      "agentId": "/root/production_research",
+      "agentLabel": "Production specialist",
+      "state": "completed",
+      "observedAt": "2026-10-10T15:08:05.060Z",
+      "taskIds": [
+        "studio"
+      ],
+      "summary": "Recorded-run extension completed and verified: append-only API and CLI, validated observations, compact per-agent summary and full history with sources and evidence. Mission Control foundation met all acceptance criteria and was marked Completed through the API. Save/PWA QA remains independently recorded; game release acceptance is still with Producer.",
+      "evidence": [
+        {
+          "label": "9 passing studio tests",
+          "kind": "test",
+          "path": "work/studio-tests.log"
+        },
+        {
+          "label": "Run history browser evidence",
+          "kind": "image",
+          "path": "work/studio-runs.png"
+        },
+        {
+          "label": "Board browser evidence",
+          "kind": "image",
+          "path": "work/studio-board-current.png"
+        }
+      ],
+      "author": "Production specialist",
+      "source": "Actual recorded-run implementation, 9 passing studio tests, strict TypeScript/Vite checks and real Chrome run-history inspection",
+      "createdAt": "2026-10-10T15:08:05.126Z"
+    },
+    {
+      "id": "run-cca5c596",
+      "title": "Production specialist · completed",
+      "agentId": "/root/production_research",
+      "agentLabel": "Production specialist",
+      "state": "completed",
+      "observedAt": "2026-10-10T15:41:20.819Z",
+      "taskIds": [
+        "save",
+        "art-direction"
+      ],
+      "summary": "Assigned schema2 migration and UI atlas pipeline scopes completed: 13 storage/settings checks passed; UI format, exact silhouettes, hard alpha, component preservation and deterministic output verified. Generated art direction/provenance documented and actual reviews recorded. Save/art-direction tasks remain Review for Producer browser/dependency acceptance; engine UI work is not marked complete by this scope.",
+      "evidence": [
+        {
+          "label": "Schema2 migration tests",
+          "kind": "test",
+          "path": "work/storage-v2-tests.log"
+        },
+        {
+          "label": "UI atlas tests",
+          "kind": "test",
+          "path": "work/ui-atlas-tests.log"
+        },
+        {
+          "label": "UI pixel preview",
+          "kind": "image",
+          "path": "work/ui-atlas-preview.png"
+        }
+      ],
+      "author": "Production specialist",
+      "source": "Actual schema2 and generated UI atlas implementation/checks, docs update and Producer/Gameplay specialist asynchronous review in the current session",
+      "createdAt": "2026-10-10T15:41:20.950Z"
+    },
+    {
+      "id": "run-a4bfe747",
+      "title": "Production specialist · completed",
+      "agentId": "/root/production_research",
+      "agentLabel": "Production specialist",
+      "state": "completed",
+      "observedAt": "2026-10-10T16:00:27.179Z",
+      "taskIds": [
+        "task-168fe92e",
+        "task-00ee2401",
+        "task-7e8e0a50",
+        "task-acf182ad",
+        "task-2439af52",
+        "task-e665335c"
+      ],
+      "summary": "Assigned console component and documentation/bookkeeping scopes completed. TypeScript and targeted fake-DOM checks passed; completion evidence and actual asynchronous handoff recorded. README/roadmap document the compact HUD, backtick console, QA toolbar/metrics flags, RoyaleMono and bounded material lighting. Future owned docks/circular battle royale are backlog with an accepted direction decision and co-op/authority prerequisites. Integrated browser, renderer acceptance, physical phones and soak remain pending.",
+      "evidence": [
+        {
+          "label": "Actual console component checks and source hashes",
+          "kind": "test",
+          "path": "work/console-component-evidence.json"
+        },
+        {
+          "label": "README and future roadmap updated",
+          "kind": "note",
+          "details": "README.md and docs/ROADMAP.md distinguish current source behavior, accepted future direction, and pending browser/physical device checks."
+        }
+      ],
+      "author": "Production specialist",
+      "source": "Actual completed assigned console implementation and bounded production/documentation bookkeeping in the current agent session",
+      "createdAt": "2026-10-10T16:00:27.191Z"
+    },
+    {
+      "id": "run-72165806",
+      "title": "Production specialist · completed",
+      "agentId": "/root/production_research",
+      "agentLabel": "Production specialist",
+      "state": "completed",
+      "observedAt": "2026-10-10T16:08:58.658Z",
+      "taskIds": [
+        "task-168fe92e",
+        "task-00ee2401"
+      ],
+      "summary": "Completed assigned top black console drawer component update, transition-event documentation and six regression tests; TypeScript passed. Root retains pixel panel/continuous bridge integration and visible browser acceptance. opened/capture/pause remain active until actual close, with reversible180ms transform and reduced-motion handling.",
+      "evidence": [
+        {
+          "label": "Actual drawer tests",
+          "kind": "test",
+          "path": "work/console-drawer-tests.log"
+        },
+        {
+          "label": "Hashes, source scope and transition contract",
+          "kind": "test",
+          "path": "work/console-drawer-evidence.json"
+        }
+      ],
+      "author": "Production specialist",
+      "source": "Actual Producer steering for a top black sliding drawer, actual bounded implementation/tests and asynchronous bridge transition contract in the current session",
+      "createdAt": "2026-10-10T16:08:58.659Z"
+    },
+    {
+      "id": "run-ea59cb4a",
+      "title": "Engine specialist · completed",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Engine specialist",
+      "state": "completed",
+      "observedAt": "2026-10-10T16:20:09.161Z",
+      "taskIds": [
+        "engine",
+        "task-0cdf6811",
+        "task-35a00493"
+      ],
+      "summary": "Producer reports assigned engine/pixel UI/material/topology/portrait work completed and integrated.26 engine and18 web native checks pass; desktop UI/rendering accepted. Future arena modes are not implemented; CircularTopology is opt-in and unused by solo.",
+      "evidence": [
+        {
+          "label": "85 native checks:26 engine,41 gameplay,18 web",
+          "kind": "test",
+          "path": "artifacts/rust-tests.log",
+          "details": "All native checks pass; appended native and WASM strict Clippy finish successfully."
+        },
+        {
+          "label": "Actual desktop browser validation and limits",
+          "kind": "artifact",
+          "path": "artifacts/browser-validation.json",
+          "details": "Producer recorded desktop/WebGPU/WebGL2/fallback/device-recovery, console, settings reload, accepted quest persistence and packaged offline reload. Physical devices and reward claim playthrough remain pending."
+        }
+      ],
+      "author": "Production specialist",
+      "source": "Actual Producer final validation handoffs, artifacts/browser-validation.json and inspected native/shell/build artifacts in the current session. Desktop and automated scope only; no physical-device or completed reward-playthrough claim.",
+      "createdAt": "2026-10-10T16:20:09.172Z"
+    },
+    {
+      "id": "run-7ec0ae7b",
+      "title": "Gameplay specialist · completed",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Gameplay specialist",
+      "state": "completed",
+      "observedAt": "2026-10-10T16:20:09.176Z",
+      "taskIds": [
+        "gameplay",
+        "task-60e6273d"
+      ],
+      "summary": "Assigned core/regions/events/lighting gameplay implementation and modal/recovery review completed.41 gameplay native checks pass. Full boss play, balance, browser reward claim and audio listening remain separate pending reviews.",
+      "evidence": [
+        {
+          "label": "85 native checks:26 engine,41 gameplay,18 web",
+          "kind": "test",
+          "path": "artifacts/rust-tests.log",
+          "details": "All native checks pass; appended native and WASM strict Clippy finish successfully."
+        },
+        {
+          "label": "Actual desktop browser validation and limits",
+          "kind": "artifact",
+          "path": "artifacts/browser-validation.json",
+          "details": "Producer recorded desktop/WebGPU/WebGL2/fallback/device-recovery, console, settings reload, accepted quest persistence and packaged offline reload. Physical devices and reward claim playthrough remain pending."
+        }
+      ],
+      "author": "Production specialist",
+      "source": "Actual Producer final validation handoffs, artifacts/browser-validation.json and inspected native/shell/build artifacts in the current session. Desktop and automated scope only; no physical-device or completed reward-playthrough claim.",
+      "createdAt": "2026-10-10T16:20:09.187Z"
+    },
+    {
+      "id": "run-831570e5",
+      "title": "Producer · running",
+      "agentId": "/root",
+      "agentLabel": "Producer",
+      "state": "running",
+      "observedAt": "2026-10-10T16:20:09.193Z",
+      "taskIds": [
+        "slice-review",
+        "boss-qa",
+        "audio",
+        "task-d60fcaaa"
+      ],
+      "summary": "Latest observed state: Producer is finishing private preview/release packaging after actual fallback, recovery, packaged offline reload and dialogue/event reload acceptance. Full release acceptance and physical device/soak/audio/boss/reward play reviews remain pending.",
+      "evidence": [
+        {
+          "label": "Latest full release build and17 game assets",
+          "kind": "build",
+          "path": "artifacts/release-build.log",
+          "details": "Both WASM backends, TypeScript, game/dashboard Vite builds and PWA generation pass."
+        },
+        {
+          "label": "Actual desktop browser validation and limits",
+          "kind": "artifact",
+          "path": "artifacts/browser-validation.json",
+          "details": "Producer recorded desktop/WebGPU/WebGL2/fallback/device-recovery, console, settings reload, accepted quest persistence and packaged offline reload. Physical devices and reward claim playthrough remain pending."
+        }
+      ],
+      "author": "Production specialist",
+      "source": "Actual Producer final validation handoffs, artifacts/browser-validation.json and inspected native/shell/build artifacts in the current session. Desktop and automated scope only; no physical-device or completed reward-playthrough claim.",
+      "createdAt": "2026-10-10T16:20:09.203Z"
+    },
+    {
+      "id": "run-43353ede",
+      "title": "Production specialist · completed",
+      "agentId": "/root/production_research",
+      "agentLabel": "Production specialist",
+      "state": "completed",
+      "observedAt": "2026-10-10T16:20:09.207Z",
+      "taskIds": [
+        "studio",
+        "save",
+        "pwa",
+        "task-168fe92e",
+        "task-00ee2401"
+      ],
+      "summary": "Assigned validation bookkeeping and README/roadmap update complete through the API. Source/native/shell/desktop/PWA passes recorded with explicit physical/boss/audio/reward/release limits. No runtime source changed during final packaging.",
+      "evidence": [
+        {
+          "label": "Actual validation scope, metrics and artifact hashes",
+          "kind": "artifact",
+          "path": "work/validation-update.json"
+        },
+        {
+          "label": "Actual desktop browser validation and limits",
+          "kind": "artifact",
+          "path": "artifacts/browser-validation.json",
+          "details": "Producer recorded desktop/WebGPU/WebGL2/fallback/device-recovery, console, settings reload, accepted quest persistence and packaged offline reload. Physical devices and reward claim playthrough remain pending."
+        }
+      ],
+      "author": "Production specialist",
+      "source": "Actual Producer final validation handoffs, artifacts/browser-validation.json and inspected native/shell/build artifacts in the current session. Desktop and automated scope only; no physical-device or completed reward-playthrough claim.",
+      "createdAt": "2026-10-10T16:20:09.219Z"
+    }
+  ]
+}

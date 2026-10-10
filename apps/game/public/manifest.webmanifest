@@ -1,0 +1,32 @@
+{
+  "id": "/",
+  "name": "Galaxy Royale",
+  "short_name": "Galaxy Royale",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "landscape",
+  "background_color": "#090d20",
+  "theme_color": "#090d20",
+  "description": "A neo-retro pixel galaxy to explore, destroy, and survive.",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

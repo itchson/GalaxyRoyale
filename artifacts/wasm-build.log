@@ -1,0 +1,6 @@
+   Compiling engine_core v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\engine_core)
+   Compiling game_core v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\game_core)
+   Compiling game_web v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\game_web)
+    Finished `release` profile [optimized] target(s) in 3.44s
+   Compiling game_web v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\game_web)
+    Finished `release` profile [optimized] target(s) in 1.17s

@@ -1,0 +1,116 @@
+#debug-console.console-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0;
+  overflow: hidden;
+  pointer-events: auto;
+  background: transparent;
+}
+
+#debug-console[hidden] {
+  display: none;
+}
+
+.console-card {
+  display: flex;
+  flex-direction: column;
+  gap: calc(4px * var(--ui-scale, 2));
+  width: 100%;
+  max-width: calc(640px * var(--ui-scale, 2));
+  height: calc(180px * var(--ui-scale, 2));
+  max-height: 100%;
+  min-height: 0;
+  padding: max(calc(12px * var(--ui-scale, 2)), env(safe-area-inset-top))
+    max(calc(14px * var(--ui-scale, 2)), env(safe-area-inset-right))
+    calc(10px * var(--ui-scale, 2))
+    max(calc(14px * var(--ui-scale, 2)), env(safe-area-inset-left));
+  border: 0;
+  border-bottom: calc(1px * var(--ui-scale, 2)) solid #385058;
+  background: #000;
+  color: #d8f3ff;
+  font-size: calc(9px * var(--ui-scale, 2));
+  line-height: 1.25;
+  transform: translateY(-100%);
+  transition: transform 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  pointer-events: auto;
+}
+
+.console-visible .console-card {
+  transform: translateY(0);
+}
+
+body.reduced-motion .console-card {
+  transition-duration: 0ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .console-card {
+    transition-duration: 0ms;
+  }
+}
+
+.console-card h2,
+.console-card p {
+  margin: 0;
+  font-size: inherit;
+  font-weight: normal;
+}
+
+.console-card h2 {
+  flex: 0 0 auto;
+  color: #73efff;
+}
+
+.console-card .console-instructions {
+  flex: 0 0 auto;
+  color: #8296b8;
+  overflow-wrap: anywhere;
+}
+
+#console-output {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: #5db7cd #000;
+  padding-block: calc(2px * var(--ui-scale, 2));
+}
+
+#console-output p {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  min-height: 1.25em;
+}
+
+#console-input {
+  flex: 0 0 auto;
+  width: 100%;
+  min-width: 0;
+  min-height: calc(15px * var(--ui-scale, 2));
+  padding: calc(2px * var(--ui-scale, 2)) calc(3px * var(--ui-scale, 2));
+  border: calc(1px * var(--ui-scale, 2)) solid #5db7cd;
+  border-radius: 0;
+  outline-offset: 0;
+  background: #000;
+  color: #73efff;
+  caret-color: #ffd783;
+  font: inherit;
+  line-height: inherit;
+}
+
+#console-input::placeholder {
+  color: #8296b8;
+}
+
+body.pixel-ready #debug-console {
+  background: transparent;
+}
+
+body.pixel-ready .console-card {
+  opacity: 0;
+}

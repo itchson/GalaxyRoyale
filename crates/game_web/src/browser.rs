@@ -1,0 +1,224 @@
+//! WASM browser adapter for Galaxy Royale's portable Rust simulation.
+use crate::{pixel_ui, renderer, ui_scene};
+
+use engine_core::FrameBuilder;
+use game_core::{Game, GameEvent, Hud, InputFrame, Profile};
+use serde::Serialize;
+use wasm_bindgen::prelude::*;
+use web_sys::HtmlCanvasElement;
+
+#[wasm_bindgen]
+pub struct Galaxy {
+    game: Game,
+    renderer: renderer::Renderer,
+    frame: FrameBuilder,
+    ui_mode: u8,
+    ui_scene: ui_scene::UiScene,
+    ui_time: f32,
+    reduced_motion: bool,
+    ui_insets: [f32; 4],
+    touch_ui: bool,
+    ui_joystick: Option<[f32; 2]>,
+    ui_fire: bool,
+    accumulator: f32,
+    pending_destination: Option<[f32; 2]>,
+    last_revision: u64,
+    paused: bool,
+    shake: bool,
+}
+#[derive(Serialize)]
+struct FrameResponse {
+    hud: Hud,
+    events: Vec<GameEvent>,
+    profile: Option<Profile>,
+    pixels: usize,
+    simulation_ms: f64,
+    render_ms: f64,
+}
+fn js(error: impl std::fmt::Display) -> JsValue {
+    JsValue::from_str(&error.to_string())
+}
+fn now() -> f64 {
+    web_sys::window()
+        .and_then(|w| w.performance())
+        .map(|p| p.now())
+        .unwrap_or(0.0)
+}
+#[wasm_bindgen]
+impl Galaxy {
+    pub async fn create(canvas: HtmlCanvasElement, profile: JsValue) -> Result<Galaxy, JsValue> {
+        let profile = if profile.is_null() || profile.is_undefined() {
+            Profile::default()
+        } else {
+            serde_wasm_bindgen::from_value::<Profile>(profile).map_err(js)?
+        };
+        let revision = profile.revision;
+        let renderer = renderer::Renderer::new(canvas).await?;
+        let mut game = Game::new(profile);
+        let viewport = renderer.viewport();
+        game.set_viewport(viewport[0], viewport[1]);
+        Ok(Self {
+            game,
+            renderer,
+            frame: FrameBuilder::new(),
+            ui_mode: 2,
+            ui_scene: ui_scene::UiScene::default(),
+            ui_time: 0.0,
+            reduced_motion: false,
+            ui_insets: [0.0; 4],
+            touch_ui: false,
+            ui_joystick: None,
+            ui_fire: false,
+            accumulator: 0.0,
+            pending_destination: None,
+            last_revision: revision,
+            paused: false,
+            shake: true,
+        })
+    }
+    pub fn step(&mut self, milliseconds: f64, input: JsValue) -> Result<JsValue, JsValue> {
+        self.ui_time += (milliseconds as f32 / 1000.0).clamp(0.0, 0.1);
+        let mut input: InputFrame = serde_wasm_bindgen::from_value(input).map_err(js)?;
+        self.ui_joystick = input.joystick;
+        self.ui_fire = input.fire;
+        if let Some(destination) = input.destination {
+            self.pending_destination = Some(destination);
+        }
+        let start = now();
+        if !self.paused {
+            self.accumulator += (milliseconds as f32 / 1000.0).clamp(0.0, 0.1);
+            let mut steps = 0;
+            while self.accumulator >= 1.0 / 60.0 && steps < 5 {
+                input.destination = self.pending_destination.take();
+                self.game.tick(&input, 1.0 / 60.0);
+                self.accumulator -= 1.0 / 60.0;
+                steps += 1;
+            }
+            if steps == 5 {
+                self.accumulator = self.accumulator.min(1.0 / 60.0);
+            }
+        }
+        let simulation_ms = now() - start;
+        let mut hud = self.game.hud();
+        let render_start = now();
+        let alpha = self.accumulator * 60.0;
+        self.game.render_into(alpha, &mut self.frame);
+        hud.camera = self.game.render_camera(alpha);
+        let amount = if self.shake { hud.shake } else { 0.0 };
+        let render_camera = [
+            hud.camera[0] + (hud.time * 83.0).sin() * amount,
+            hud.camera[1] + (hud.time * 71.0).cos() * amount,
+        ];
+        let [top, right, bottom, left] = self.ui_insets;
+        let viewport = self.renderer.viewport();
+        let ui_viewport = [viewport[0] - left - right, viewport[1] - top - bottom];
+        let ui_camera = [
+            render_camera[0] + (left - right) * 0.5,
+            render_camera[1] + (top - bottom) * 0.5,
+        ];
+        if self.ui_mode == 1 || self.ui_scene.groups.is_empty() {
+            pixel_ui::draw_ui(&mut self.frame, &hud, ui_camera, ui_viewport, self.ui_mode);
+        }
+        if self.touch_ui && self.ui_mode == 1 {
+            pixel_ui::draw_controls(
+                &mut self.frame,
+                ui_camera,
+                ui_viewport,
+                self.ui_joystick,
+                self.ui_fire,
+            );
+        }
+        ui_scene::draw(
+            &mut self.frame,
+            &self.ui_scene,
+            render_camera,
+            self.renderer.viewport(),
+            self.ui_time,
+            self.reduced_motion,
+        );
+        let frame = self.frame.frame();
+        self.renderer
+            .draw(frame, render_camera, &self.game.light_sources(alpha))?;
+        let render_ms = now() - render_start;
+        let profile = if self.game.profile().revision != self.last_revision {
+            self.last_revision = self.game.profile().revision;
+            Some(self.game.profile().clone())
+        } else {
+            None
+        };
+        serde_wasm_bindgen::to_value(&FrameResponse {
+            hud,
+            events: self.game.take_events(),
+            profile,
+            pixels: frame.pixel_count,
+            simulation_ms,
+            render_ms,
+        })
+        .map_err(js)
+    }
+    pub fn hud(&self) -> Result<JsValue, JsValue> {
+        serde_wasm_bindgen::to_value(&self.game.hud()).map_err(js)
+    }
+    pub fn profile(&self) -> Result<JsValue, JsValue> {
+        serde_wasm_bindgen::to_value(self.game.profile()).map_err(js)
+    }
+    pub fn purchase(&mut self, id: &str) -> Result<(), JsValue> {
+        self.game.purchase(id).map_err(js)
+    }
+    pub fn resize(&mut self, width: u32, height: u32) {
+        self.renderer.resize(width, height);
+        let viewport = self.renderer.viewport();
+        self.game.set_viewport(viewport[0], viewport[1]);
+    }
+    pub fn viewport(&self) -> Vec<f32> {
+        self.renderer.viewport().to_vec()
+    }
+    pub fn set_paused(&mut self, value: bool) {
+        self.paused = value;
+        self.accumulator = 0.0;
+        self.pending_destination = None;
+        self.game.set_paused(value);
+    }
+    pub fn set_shake(&mut self, value: bool) {
+        self.shake = value;
+    }
+    pub fn set_ui_mode(&mut self, mode: u8) {
+        self.ui_mode = mode.min(3);
+    }
+    pub fn set_ui_scene(&mut self, scene: JsValue) -> Result<(), JsValue> {
+        self.ui_scene = serde_wasm_bindgen::from_value(scene).map_err(js)?;
+        Ok(())
+    }
+    pub fn set_reduced_motion(&mut self, value: bool) {
+        self.reduced_motion = value;
+    }
+    pub fn set_ui_insets(&mut self, top: f32, right: f32, bottom: f32, left: f32) {
+        self.ui_insets = [top, right, bottom, left].map(|v| {
+            if v.is_finite() {
+                v.clamp(0.0, 100.0)
+            } else {
+                0.0
+            }
+        });
+    }
+    pub fn set_cosmetic_density(&mut self, value: bool) {
+        self.game.set_cosmetic_density(value);
+    }
+    pub fn interact_site(&mut self) -> Result<(), JsValue> {
+        self.game.interact_site().map_err(js)
+    }
+    pub fn set_touch_ui(&mut self, value: bool) {
+        self.touch_ui = value;
+    }
+    pub fn diagnostic(&mut self, command: &str) {
+        self.game.diagnostic(command);
+    }
+    pub fn lose_device(&self) {
+        self.renderer.lose_device();
+    }
+    pub async fn recover(&mut self) -> Result<(), JsValue> {
+        let canvas = self.renderer.canvas.clone();
+        self.renderer = renderer::Renderer::new(canvas).await?;
+        Ok(())
+    }
+}

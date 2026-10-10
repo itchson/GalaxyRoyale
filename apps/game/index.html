@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no"
+    />
+    <meta name="theme-color" content="#090d20" />
+    <meta
+      name="description"
+      content="Explore a living pixel galaxy. Break asteroids, survive the swarm, evolve your ship, and return home."
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/icon-192.png" />
+    <title>Galaxy Royale</title>
+  </head>
+  <body>
+    <canvas id="universe" aria-label="Galaxy Royale game universe"></canvas>
+    <div id="game-ui">
+      <header class="flight-header">
+        <div class="sector">
+          <span class="brand-icon">✦</span>
+          <div>
+            <b>GALAXY <span>ROYALE</span></b
+            ><small id="sector">HAVEN / PROTECTED SPACE</small>
+          </div>
+        </div>
+        <div class="header-right">
+          <div class="cargo" aria-label="Collected upgrade points">
+            <span class="offense">◆ <b id="currency-0">0</b></span
+            ><span class="defense">⬡ <b id="currency-1">0</b></span
+            ><span class="passive">✦ <b id="currency-2">0</b></span>
+          </div>
+          <button id="pause-button" class="icon-button" aria-label="Pause">
+            Ⅱ</button
+          ><button id="fullscreen" class="icon-button" aria-label="Fullscreen">
+            ⛶
+          </button>
+        </div>
+      </header>
+      <div id="boss-hud" hidden>
+        <small>HOSTILE SIGNATURE DETECTED</small><b id="boss-name"></b>
+        <div class="boss-track"><i id="boss-health"></i></div>
+      </div>
+      <div class="nav-module">
+        <canvas
+          id="radar"
+          width="112"
+          height="112"
+          aria-label="Dock bearing radar"
+        ></canvas>
+        <div>
+          <small id="distance">0 m FROM HAVEN</small
+          ><b id="danger">SANCTUARY</b>
+        </div>
+      </div>
+      <div class="ship-module">
+        <div class="hull-label">
+          <span>HULL INTEGRITY</span><b id="hull-number">100 / 100</b>
+        </div>
+        <div class="hull-track"><i id="hull-fill"></i></div>
+        <div class="shield-track"><i id="shield-fill"></i></div>
+      </div>
+      <button id="dock-button" class="dock-prompt" hidden>
+        <span>⌘</span> DOCK / EVOLVE SHIP <small>E</small>
+      </button>
+      <button id="site-button" class="dock-prompt" hidden>
+        DISCOVERY / INTERACT [E]
+      </button>
+      <div id="destination-marker" hidden><i></i></div>
+      <div id="joystick" aria-label="Movement joystick">
+        <div class="joystick-ring"></div>
+        <div id="joystick-stick"></div>
+      </div>
+      <button id="fire-button" aria-label="Hold to fire">
+        <span>⌖</span><small>FIRE</small>
+      </button>
+      <div id="toast" role="status"></div>
+      <div id="performance" hidden></div>
+    </div>
+    <section id="launch-screen" class="screen-overlay">
+      <div class="launch-card">
+        <div class="eyebrow"><i></i> AN ENDLESS PIXEL FRONTIER</div>
+        <h1>GALAXY<br /><span>ROYALE</span></h1>
+        <div class="title-crest" aria-hidden="true"></div>
+        <p>
+          Leave the sanctuary. Break the belt.<br />Become the brightest thing
+          in the void.
+        </p>
+        <button id="launch" class="primary-button">
+          LAUNCH EXPEDITION <span>↗</span>
+        </button>
+        <button id="launch-settings" class="text-button">SETTINGS</button>
+        <div class="control-guide desktop-guide">
+          <span><b>LEFT CLICK</b> Set course</span
+          ><span><b>RIGHT HOLD</b> Fire</span><span><b>ESC</b> Pause</span>
+        </div>
+        <div class="control-guide touch-guide">
+          <span><b>LEFT STICK</b> Thrust & steer</span
+          ><span><b>RIGHT HOLD</b> Fire</span>
+        </div>
+        <div class="build-line">
+          <span>PLAYABLE SLICE / 01</span
+          ><span id="load-status">INITIALIZING PIXEL ENGINE</span>
+        </div>
+      </div>
+    </section>
+    <section id="menu-screen" class="screen-overlay" hidden>
+      <div class="menu-card">
+        <div class="eyebrow">HAVEN COMMAND</div>
+        <h2 id="menu-title">Flight paused</h2>
+        <p id="menu-description">Your next expedition awaits.</p>
+        <nav class="menu-tabs" aria-label="Command pages">
+          <button id="tab-upgrades">UPGRADES</button>
+          <button id="tab-settings">SETTINGS</button>
+          <button id="tab-journal">JOURNAL</button>
+        </nav>
+        <div id="upgrade-content"></div>
+        <div id="quest-content" hidden></div>
+        <button id="apply-update" class="text-button" hidden>
+          Apply update at Haven
+        </button>
+        <div id="settings-content" class="settings" hidden>
+          <label
+            >Master volume<input
+              id="master-volume"
+              type="range"
+              min="0"
+              max="1"
+              step="0.01" /></label
+          ><label
+            >Music<input
+              id="music-volume"
+              type="range"
+              min="0"
+              max="1"
+              step="0.01" /></label
+          ><label
+            >Effects<input
+              id="sfx-volume"
+              type="range"
+              min="0"
+              max="1"
+              step="0.01" /></label
+          ><label class="toggle-setting"
+            >Camera shake<input id="shake-setting" type="checkbox"
+          /></label>
+          <label class="toggle-setting"
+            >Reduced motion<input id="motion-setting" type="checkbox"
+          /></label>
+          <label class="toggle-setting"
+            >Reduced cosmic detail<input id="density-setting" type="checkbox"
+          /></label>
+        </div>
+        <div class="menu-actions">
+          <button id="resume" class="primary-button">
+            RETURN TO FLIGHT <span>↗</span></button
+          ><button id="export-save" class="text-button">Export save</button
+          ><button id="menu-fullscreen" class="text-button">Fullscreen</button
+          ><label id="import-label" class="text-button import-label"
+            >Import save<input
+              id="import-save"
+              type="file"
+              accept="application/json,.json"
+              hidden
+          /></label>
+        </div>
+        <small id="save-status">Progress stays on this device.</small>
+      </div>
+    </section>
+    <div id="rotate-screen">
+      <span>⤵</span>
+      <h2>A galaxy needs a wider view.</h2>
+      <p>Rotate your device to landscape to fly.</p>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

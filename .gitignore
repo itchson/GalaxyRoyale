@@ -1,0 +1,14 @@
+node_modules/
+target/
+dist/
+apps/*/dist/
+apps/game/public/wasm/
+work/
+.sites-local/
+.openai/local/
+*.log
+!artifacts/*.log
+__pycache__/
+production/project.backup.json
+production/project.json.backup
+
