@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 189,
+  "revision": 192,
   "name": "Galaxy Royale",
   "phase": "Foundation → playable vertical slice",
-  "updatedAt": "2026-10-10T19:21:14.535Z",
+  "updatedAt": "2026-10-10T19:22:26.659Z",
   "tasks": [
     {
       "id": "studio",
@@ -2565,6 +2565,24 @@
         null,
         null
       ]
+    },
+    {
+      "id": "review-0afcea12",
+      "title": "Progression audit reference correction and actual next assignments",
+      "body": "The prior review-295fae3e recorded actual audit findings but its two task references were null because the producer script read the task creation response incorrectly. This append-only correction links the existing cadence and maximum-level tasks; no duplicate task is created and the prior history is preserved. Actual measured cadence plateaus and the level-100 caption boundary remain valid. Gameplay prepares an isolated residual-carry candidate, QA independently checks timer/gate/save boundaries, and root integrates the reviewed change. A bounded ProjectStore reference-validation fix is also assigned to the engine specialist so future malformed reviews reject atomically.",
+      "author": "Producer",
+      "source": "Corrected actual progression assignment references",
+      "createdAt": "2026-10-10T19:22:26.624Z",
+      "participants": [
+        "Producer / Integrator",
+        "Gameplay specialist",
+        "Production specialist / Independent QA"
+      ],
+      "taskIds": [
+        "balance",
+        "task-6c761ea8",
+        "task-696d7d24"
+      ]
     }
   ],
   "decisions": [
@@ -4902,6 +4920,36 @@
       "author": "Producer",
       "source": "Actual post-release progression probes and next bounded correction assignments",
       "createdAt": "2026-10-10T19:21:14.535Z"
+    },
+    {
+      "id": "8eec6298-9987-4c18-ac93-634913583372",
+      "revision": 190,
+      "kind": "review",
+      "itemId": "review-0afcea12",
+      "title": "Progression audit reference correction and actual next assignments",
+      "author": "Producer",
+      "source": "Corrected actual progression assignment references",
+      "createdAt": "2026-10-10T19:22:26.624Z"
+    },
+    {
+      "id": "e299965d-1acb-49c3-834b-5222e5425bd5",
+      "revision": 191,
+      "kind": "run",
+      "itemId": "run-f103097b",
+      "title": "Gameplay specialist · running",
+      "author": "Producer",
+      "source": "Corrected actual progression assignment references",
+      "createdAt": "2026-10-10T19:22:26.632Z"
+    },
+    {
+      "id": "835332fe-c4b7-4207-9cb8-7c24012be271",
+      "revision": 192,
+      "kind": "run",
+      "itemId": "run-78629dc4",
+      "title": "Production / QA specialist · running",
+      "author": "Producer",
+      "source": "Corrected actual progression assignment references",
+      "createdAt": "2026-10-10T19:22:26.659Z"
     }
   ],
   "runRecords": [
@@ -6331,6 +6379,62 @@
       "author": "Producer",
       "source": "Succeeded exact-source private deployment and actual specialist handoffs",
       "createdAt": "2026-10-10T19:18:07.960Z"
+    },
+    {
+      "id": "run-f103097b",
+      "title": "Gameplay specialist · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Gameplay specialist",
+      "state": "running",
+      "observedAt": "2026-10-10T19:22:26.630Z",
+      "taskIds": [
+        "balance",
+        "task-6c761ea8"
+      ],
+      "summary": "Completing actual Scout audit and preparing or independently reviewing isolated fixed-tick cadence correction; no production change or human balance approval yet.",
+      "evidence": [
+        {
+          "label": "Actual release-core cadence and movement measurements",
+          "kind": "note",
+          "path": "artifacts/scout-progression-audit.json"
+        },
+        {
+          "label": "Independent compiled progression boundaries",
+          "kind": "note",
+          "path": "artifacts/scout-progression-qa-native.json"
+        }
+      ],
+      "author": "Producer",
+      "source": "Corrected actual progression assignment references",
+      "createdAt": "2026-10-10T19:22:26.632Z"
+    },
+    {
+      "id": "run-78629dc4",
+      "title": "Production / QA specialist · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "Production / QA specialist",
+      "state": "running",
+      "observedAt": "2026-10-10T19:22:26.644Z",
+      "taskIds": [
+        "balance",
+        "task-6c761ea8"
+      ],
+      "summary": "Completing actual Scout audit and preparing or independently reviewing isolated fixed-tick cadence correction; no production change or human balance approval yet.",
+      "evidence": [
+        {
+          "label": "Actual release-core cadence and movement measurements",
+          "kind": "note",
+          "path": "artifacts/scout-progression-audit.json"
+        },
+        {
+          "label": "Independent compiled progression boundaries",
+          "kind": "note",
+          "path": "artifacts/scout-progression-qa-native.json"
+        }
+      ],
+      "author": "Producer",
+      "source": "Corrected actual progression assignment references",
+      "createdAt": "2026-10-10T19:22:26.659Z"
     }
   ]
 }

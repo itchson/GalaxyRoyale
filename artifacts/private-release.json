@@ -50,5 +50,16 @@
     "artifacts/hud-riveter-packaging-review.md",
     "artifacts/hud-riveter-evidence-review.md",
     "artifacts/boss-overlay-engine-review.md"
-  ]
+  ],
+  "newlyDiscoveredProgressionIssues": {
+    "observedAt": "2026-10-10T19:22:26.667Z",
+    "cadenceTask": "task-6c761ea8",
+    "capCaptionTask": "task-696d7d24",
+    "description": "Post-release actual audit found two paid fire-rate ranks have identical steady fixed-tick cadence and level 100 advertises an unreachable next level. Corrections are active/ready; neither fix is included in the frozen published source.",
+    "evidence": [
+      "artifacts/scout-progression-audit.json",
+      "artifacts/scout-progression-qa-native.json",
+      "artifacts/scout-progression-qa-save.json"
+    ]
+  }
 }
