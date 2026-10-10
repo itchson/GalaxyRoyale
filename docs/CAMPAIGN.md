@@ -27,7 +27,7 @@ Finishing first grants Royale Sovereign and the credits trigger once. Its victor
 
 ## XP, cargo and run history
 
-Each ship has separate XP. Ordinary enemies grant 5 XP, regular bosses 25, asteroids 2, champion trials 40 and winning league duels 30. Level 1 begins at zero XP; reaching level `L` costs cumulative `10 × (L - 1) × L` XP. Upgrade ranks require ship levels 1, 3, 5, 8 and 12. Six ordinary hardware ranks remain global and continue applying when switching ships; new purchases require the selected ship's level. The strength of the three acquired signature abilities is capped by that ship's current rank cap.
+Each ship has separate XP. Ordinary enemies grant 5 XP, regular bosses grant 25/35/45/55/65 by generation, asteroids 2, champion trials 40 and winning league duels 30. Level 1 begins at zero XP; reaching level `L` costs cumulative `10 × (L - 1) × L` XP. Upgrade ranks require ship levels 1, 3, 5, 8 and 12. Six ordinary hardware ranks remain global and continue applying when switching ships; new purchases require the selected ship's level. The strength of the three acquired signature abilities is capped by that ship's current rank cap.
 
 The Scout begins at 100 world units/second with 260 units/second² acceleration. Ship XP adds 2.5% speed and acceleration per level after level 1, capped at level 12, independently of the purchased 4%-per-rank drive upgrade. Crafted ships start from 180 speed and 400 acceleration before their family bonuses. Sovereign retains its intrinsic high-performance drive (248.4 speed) without another XP multiplier.
 

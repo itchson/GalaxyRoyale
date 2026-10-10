@@ -1,8 +1,8 @@
 {
-  "id": "appgdep_6aca74e7cdd081919a5fc47d40f3d1c5",
+  "id": "appgdep_6aca81adfe508191b7c76ff174aa1408",
   "project_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93",
   "title": "Galaxy Royale",
-  "version_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93~appgver_81d6fda4d89881919884f643e81ce87e",
+  "version_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93~appgver_82b4c532724881918ee32b42af2a79f8",
   "type": "publish",
   "status": "succeeded",
   "url": "https://galaxy-royale-itchson.itchson.chatgpt.site",
@@ -11,11 +11,16 @@
   "provider_deployment_id": "site---6aca50f5b1bc81918526a6ee969aac93",
   "failure_message": null,
   "env_set_revision": 0,
-  "updated_at": "2026-10-10T17:25:14.183481+00:00",
-  "commit_sha": "bab9d0fafb3b01c2dbd91b0df4486fb60f262461",
-  "cacheVersion": "galaxy-9566662a96bfc281",
-  "browserAccess": "Owner login required; unauthenticated in-app browser reached OpenAI login. Published app execution was checked locally in the same packaged WebGL2 build, not behind the remote login.",
-  "archiveContent": "Only game dist including18 cached assets and normalized .openai/hosting.json; local studio excluded.",
+  "updated_at": "2026-10-10T18:19:44.146996+00:00",
+  "commit_sha": "65194683a28b00397ed3f29df989149b8d93412e",
+  "cacheVersion": "galaxy-5a206c9f1e2acf40",
+  "browserAccess": "Actual unauthenticated browser reached Sign in required after final deployment. Owner-authenticated remote game execution remains unmeasured. Current packaged gameplay was tested locally on both backends.",
+  "archiveContent": "Game-only dist with eighteen cached assets and normalized .openai/hosting.json; local Studio, project state, QA harness and contract probe excluded.",
+  "validation": "122 Rust tests,66 shell tests,8 actual-WASM contracts pass. Strict native/WebGPU/WebGL2 Clippy pass. Fifteen actual-projectile CPU boss defeats and2,400 packed extraction frames pass with declared fixtures. Representative current WebGPU/WebGL2 captures verify fixed UI and bounded world zoom. Full natural campaign balance, all-content browser choreography and physical phone/soak remain pending.",
+  "backendHashes": {
+    "webgpu": "485f6ae7c29d58cd8208b8c747b5df9ac28ff23b49766df6d24f41b3f8358422",
+    "webgl2": "9aa8c639292a13b9c2c2b104b757d9195187764abf8df19e148b3bc8aa046566"
+  },
   "previousDeployments": [
     {
       "id": "appgdep_6aca6faae1948191a481c6701ebb4d61",
@@ -23,7 +28,13 @@
       "commit_sha": "b68335d745053b0d40dd33a39140ff574798dd67",
       "status": "succeeded",
       "updated_at": "2026-10-10T17:02:55.639276+00:00"
+    },
+    {
+      "id": "appgdep_6aca74e7cdd081919a5fc47d40f3d1c5",
+      "version_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93~appgver_81d6fda4d89881919884f643e81ce87e",
+      "commit_sha": "bab9d0fafb3b01c2dbd91b0df4486fb60f262461",
+      "status": "succeeded",
+      "updated_at": "2026-10-10T17:25:14.183481+00:00"
     }
-  ],
-  "validation": "Corrected fresh-profile checkpoint verified in local packaged WebGL2; four real dual-WASM contract checks pass. Remote execution after owner sign-in remains unmeasured."
+  ]
 }

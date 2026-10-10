@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 131,
+  "revision": 150,
   "name": "Galaxy Royale",
   "phase": "Foundation → playable vertical slice",
-  "updatedAt": "2026-10-10T18:18:18.137Z",
+  "updatedAt": "2026-10-10T18:24:05.374Z",
   "tasks": [
     {
       "id": "studio",
@@ -69,7 +69,7 @@
       "status": "complete",
       "owner": "Engine specialist",
       "priority": "high",
-      "description": "Portable engine supports packed occupied cells, composed transforms, parallax/materials, pixel particles and bounded reusable batches.37engine checks include nested rigid boss rigs, damaged-cell/holes and authored atlas proofs. Largest uncropped Coil5 uses13,233quads/45transforms;2,400packed CPU extraction frames checked up to129,345quads. These are CPU correctness probes; physical sustained GPU performance remains pending.",
+      "description": "Portable engine supports packed occupied cells, composed transforms, parallax/materials, pixel particles and bounded reusable batches. Thirty-seven engine checks include nested rigid boss rigs, damaged cells/holes and authored atlas proofs. Largest uncropped Coil uses 13,233 quads and 45 transforms; 2,400 packed CPU extraction frames checked up to 129,345 quads. Physical sustained GPU performance remains pending.",
       "dependencies": [],
       "acceptanceCriteria": [
         {
@@ -94,9 +94,9 @@
         }
       ],
       "blocker": "",
-      "revision": 4,
+      "revision": 5,
       "createdAt": "2026-10-10T14:29:27.000Z",
-      "updatedAt": "2026-10-10T18:18:17.889Z"
+      "updatedAt": "2026-10-10T18:21:10.326Z"
     },
     {
       "id": "gameplay",
@@ -105,7 +105,7 @@
       "status": "complete",
       "owner": "Gameplay specialist",
       "priority": "high",
-      "description": "Fixed60Hz ECS gameplay: dock/belt/combat, three ordinary families with15bosscontrollers, persistent queues, loot/upgrades/XP/cargo, eight champion trials and solo league.63nativegameplay checks.15actual-projectile diagnosticbossdefeats and naturalG5loss/retry are independently reproduced. Full campaign/human balance/phone acceptance remains separate.",
+      "description": "Fixed 60 Hz ECS gameplay includes dock/belt/combat, three ordinary families with fifteen boss controllers, persistent queues, loot/upgrades/XP/cargo, eight champion trials and the solo league. Sixty-three native gameplay checks pass. Fifteen real-projectile diagnostic defeats and a naturally queued generation-five loss/retry are independently reproduced. Full campaign play, human balance and phone acceptance remain separate.",
       "dependencies": [
         "engine"
       ],
@@ -141,9 +141,9 @@
         }
       ],
       "blocker": "",
-      "revision": 4,
+      "revision": 5,
       "createdAt": "2026-10-10T14:29:27.000Z",
-      "updatedAt": "2026-10-10T18:18:17.916Z"
+      "updatedAt": "2026-10-10T18:21:10.341Z"
     },
     {
       "id": "web-shell",
@@ -258,7 +258,7 @@
       "status": "complete",
       "owner": "Producer / Production specialist QA",
       "priority": "normal",
-      "description": "Versioned IndexedDB current/previous snapshots preserve currency/ranks/XP/cargo/campaign/settings and canonical3x5bosscounters.22storage tests include6adversarialgeneration cases;8actualWASMcheckpoint scenarios pass explicitnull,legacy/canonicalnormalized counters and SaveStore reload across bothbackends. Broader physical browser storage lifecycle remains pending.",
+      "description": "Versioned IndexedDB current/previous snapshots preserve currency, ranks, XP, cargo, campaign, settings and canonical boss counters. Twenty-two storage tests include six adversarial generation cases. Eight real-WASM checkpoint scenarios pass explicit null fields, normalized legacy/canonical counters and SaveStore reload across both backends. Physical browser storage lifecycle remains pending.",
       "dependencies": [
         "web-shell"
       ],
@@ -285,9 +285,9 @@
         }
       ],
       "blocker": "",
-      "revision": 6,
+      "revision": 7,
       "createdAt": "2026-10-10T14:29:27.000Z",
-      "updatedAt": "2026-10-10T18:18:17.949Z"
+      "updatedAt": "2026-10-10T18:21:10.357Z"
     },
     {
       "id": "pwa",
@@ -296,7 +296,7 @@
       "status": "complete",
       "owner": "Producer / Production specialist QA",
       "priority": "normal",
-      "description": "Compiled game-only cache galaxy-5a206c9f1e2acf40 contains18assets; independent sorted-path/content hash, shippingexports and public/dist backend hashes match. No Studio/state/QAcontractprobe is packaged. Actual local pending-update/Apply-at-Haven/checkpoint-title flow passed for this build. Physical Safari/PWA/background/offline lifecycle acceptance remains pending.",
+      "description": "Compiled game-only cache galaxy-5a206c9f1e2acf40 contains eighteen assets; independently recomputed content hashes, shipping exports and public/dist backend hashes match. Studio, project state and QA contract probes are excluded. Actual local pending-update, Apply at Haven and checkpoint-to-title flow passed. Physical Safari/PWA/background/offline lifecycle acceptance remains pending.",
       "dependencies": [
         "web-shell",
         "save"
@@ -324,9 +324,9 @@
         }
       ],
       "blocker": "",
-      "revision": 5,
+      "revision": 6,
       "createdAt": "2026-10-10T14:29:27.000Z",
-      "updatedAt": "2026-10-10T18:18:17.982Z"
+      "updatedAt": "2026-10-10T18:21:10.372Z"
     },
     {
       "id": "asteroids",
@@ -603,7 +603,7 @@
       "status": "ready",
       "owner": "",
       "priority": "normal",
-      "description": "Independent45-case Scout CPU study retained. Legal unspent XP floors defeated9/15with exact aim/no deliberate dodge; allCoils andBastion5 need human input review. A single unfired path reachedbelt7.23s/combat14.63safter3rockcontacts. Category affordability can lagXP. These measurements identify playtest questions, not approved tuning. Fresh natural expeditions/firstCoil/firstdockpurchase need actual player sessions.",
+      "description": "Independent 45-case Scout CPU study retained. Legal unspent XP floors defeated nine of fifteen with exact aim and no deliberate dodge; all Coils and Bastion generation five need human review. One unfired path reached the belt at 7.23 seconds and combat at 14.63 seconds after three rock contacts. Category affordability can lag XP. These identify playtest questions; they do not establish approved tuning. Fresh natural expeditions, first Coil and first dock purchase need actual player sessions.",
       "dependencies": [
         "boss-qa",
         "asteroids"
@@ -626,9 +626,9 @@
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 3,
       "createdAt": "2026-10-10T14:29:27.000Z",
-      "updatedAt": "2026-10-10T18:18:18.028Z"
+      "updatedAt": "2026-10-10T18:21:10.387Z"
     },
     {
       "id": "accessibility",
@@ -708,7 +708,7 @@
       "status": "review",
       "owner": "Producer",
       "priority": "normal",
-      "description": "Corrected owner-private HTTPS preview published from sourcebab9d0fafb3b01c2dbd91b0df4486fb60f262461. Actual specialist reviews and desktop/native boundaries are recorded. Full campaign/boss play review, balance, audio listening and physical phone acceptance remain pending dependencies; no full release acceptance claimed.",
+      "description": "Owner-private HTTPS preview published from source 65194683a28b00397ed3f29df989149b8d93412e. All fifteen ordinary bosses, bounded zoom and gradual Scout drive are included. Actual specialist reviews, native/dual-WASM checks and representative local browser captures are retained. The remote endpoint requires owner login; remote execution after login remains unmeasured. Full campaign/boss play, balance, audio listening, physical phone and sustained performance acceptance remain pending.",
       "dependencies": [
         "studio",
         "boss-qa",
@@ -728,28 +728,25 @@
       ],
       "evidence": [
         {
-          "label": "Latest full release build and17 game assets",
-          "kind": "build",
-          "path": "artifacts/release-build.log",
-          "details": "Both WASM backends, TypeScript, game/dashboard Vite builds and PWA generation pass."
+          "label": "Exact succeeded private deployment",
+          "kind": "note",
+          "path": "artifacts/private-release.json"
         },
         {
-          "label": "Actual desktop browser validation and limits",
-          "kind": "artifact",
-          "path": "artifacts/browser-validation.json",
-          "details": "Producer recorded desktop/WebGPU/WebGL2/fallback/device-recovery, console, settings reload, accepted quest persistence and packaged offline reload. Physical devices and reward claim playthrough remain pending."
+          "label": "Current browser evidence and explicit limits",
+          "kind": "note",
+          "path": "artifacts/boss-browser-validation.json"
         },
         {
-          "label": "Actual specialist asynchronous review",
-          "kind": "artifact",
-          "path": "artifacts/integration-review.md",
-          "details": "Implementation exchanges and known boundaries recorded; not a fabricated meeting."
+          "label": "Independent final integration review",
+          "kind": "note",
+          "path": "artifacts/boss-final-release-review.md"
         }
       ],
       "blocker": "",
-      "revision": 3,
+      "revision": 4,
       "createdAt": "2026-10-10T14:29:27.000Z",
-      "updatedAt": "2026-10-10T17:27:00.970Z"
+      "updatedAt": "2026-10-10T18:21:10.402Z"
     },
     {
       "id": "deep-bosses",
@@ -758,7 +755,7 @@
       "status": "review",
       "owner": "/root/gameplay_design",
       "priority": "normal",
-      "description": "All fifteen authored Dart/Bastion/Coil encounters and five-generation queues are implemented. Twenty-four base kills reserve G1; two predecessor defeats promote; highest queued tier takes priority; unfinished credit survives retreat/death/reload. Distinct phase controllers, destructible role rigs and evolving signatures pass native checks and15 actual-projectile diagnostic fights. Representative current WebGPU/WebGL2 presentation reviewed. Full natural campaign progression, all-content browser choreography and human balance remain pending.",
+      "description": "All fifteen authored Dart, Bastion and Coil encounters and five-generation queues are implemented. Twenty-four base kills reserve generation one; two predecessor defeats promote; highest queued tier takes priority; unfinished credit survives retreat, death and reload. Distinct phases, destructible role rigs and evolving signatures pass native checks and fifteen actual-projectile diagnostic fights. Representative current WebGPU/WebGL2 presentation is reviewed. Full natural campaign progression, all-content browser choreography and human balance remain pending.",
       "dependencies": [
         "gameplay"
       ],
@@ -768,7 +765,7 @@
           "met": true
         },
         {
-          "text": "24 base kills queuegeneration1; two previous-tier defeats promote; surplus and retreat/death/reload preserve credits",
+          "text": "24 base kills queue generation one; two previous-tier defeats promote; surplus and retreat/death/reload preserve credits",
           "met": true
         },
         {
@@ -803,9 +800,9 @@
         }
       ],
       "blocker": "",
-      "revision": 3,
+      "revision": 4,
       "createdAt": "2026-10-10T14:29:27.000Z",
-      "updatedAt": "2026-10-10T18:18:17.737Z"
+      "updatedAt": "2026-10-10T18:21:10.260Z"
     },
     {
       "id": "task-0cdf6811",
@@ -1846,7 +1843,7 @@
     {
       "id": "task-cdf65b48",
       "title": "Fifteen boss pixel silhouettes and collision-aligned phase art",
-      "description": "Fifteen authored64–96-cell boss heads, five Coil segment templates and nested rigid role rigs are integrated. Damaged occupancy is emitted once and projectile holes persist. Uncropped Coil5 is13,233quads/45transforms. Authored source and actual preview/proofs retained; this boss artwork is not claimed as AI-generated. Independent engine and browser detail reviews passed within their stated scope.",
+      "description": "Fifteen authored boss heads, five Coil segment templates and nested rigid role rigs are integrated. Damaged occupancy is emitted once and projectile holes persist. Uncropped Coil generation five is 13,233 quads and 45 transforms. Original authored source and actual preview/proofs are retained; boss artwork is distinct from generated UI art. Independent engine and representative browser reviews passed within their stated scope.",
       "department": "Art / Engine",
       "owner": "/root/engine_research",
       "status": "complete",
@@ -1880,14 +1877,14 @@
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 3,
       "createdAt": "2026-10-10T17:30:59.017Z",
-      "updatedAt": "2026-10-10T18:18:17.806Z"
+      "updatedAt": "2026-10-10T18:21:10.268Z"
     },
     {
       "id": "task-27850da6",
       "title": "Five-generation save migration and compact boss UI integration",
-      "description": "Canonical3x5 defeats normalize legacy aggregates without lost credit and persist through strict TypeScript/IndexedDB. Eight real-WASM checkpoint scenarios pass across both backends. Compact generation/phase HUD and backed hull/XP/cargo caption render in pixel quads; Settings has normalized slider thumbs and all9labels/5actions at720x360. Both current backends reviewed at max zoom with fixed UI projections. Complete refers to this integration scope, not all-content human/device acceptance.",
+      "description": "Canonical three-by-five defeats normalize legacy aggregates without lost credit and persist through strict TypeScript/IndexedDB. Eight real-WASM checkpoint scenarios pass across both backends. Compact generation/phase HUD and backed hull, XP and cargo captions render in pixel quads. Settings uses normalized slider thumbs, with all nine labels and five actions visible at 720×360. Both current backends were reviewed at maximum zoom with fixed UI projections. Completion refers to this integration scope; full human and device acceptance remains separate.",
       "department": "Platform / Interface",
       "owner": "/root",
       "status": "complete",
@@ -1921,14 +1918,14 @@
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 3,
       "createdAt": "2026-10-10T17:30:59.036Z",
-      "updatedAt": "2026-10-10T18:18:17.826Z"
+      "updatedAt": "2026-10-10T18:21:10.295Z"
     },
     {
       "id": "task-3b49be6a",
       "title": "Independent adversarial five-generation progression review",
-      "description": "Independent adversarial storage, queue/retry, source/provenance and packaging review completed with real contributions. A durable locked CPU harness uses actual projectiles to defeat15/15diagnostic bosses and exercise a natural queuedG5loss/retry; it declares max-level/rankSovereign aiming and does not establish Scout balance. Current browser captures and pending physical/full-play requirements are recorded honestly.",
+      "description": "Independent adversarial storage, queue/retry, source/provenance and packaging review completed with actual contributions. A durable locked CPU harness defeats all fifteen diagnostic bosses with projectiles and exercises a naturally queued generation-five loss/retry. It declares its maximum-loadout Sovereign aiming fixture and does not establish Scout balance. Current browser captures and pending physical/full-play requirements are recorded.",
       "department": "QA",
       "owner": "/root/production_research",
       "status": "complete",
@@ -1972,9 +1969,51 @@
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 3,
       "createdAt": "2026-10-10T17:30:59.048Z",
-      "updatedAt": "2026-10-10T18:18:17.868Z"
+      "updatedAt": "2026-10-10T18:21:10.311Z"
+    },
+    {
+      "id": "task-426419e2",
+      "title": "Adaptive boss HUD placement: prototype and integration",
+      "description": "Current captures show large boss heads partly behind the fixed top-center panel. Engine is building a standalone pure-Rust three-anchor prototype under work/ only, with core/player exclusions, safe-area reservations and retained-anchor hysteresis. Root owns subsequent production integration and current-build browser acceptance. No adaptive placement is shipped in the current release.",
+      "department": "Interface",
+      "owner": "/root/engine_research",
+      "status": "active",
+      "priority": "high",
+      "dependencies": [
+        "engine"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Bounded deterministic standalone layout and meaningful zoom/viewport/hysteresis tests",
+          "met": false
+        },
+        {
+          "text": "Integrated actual pixel UI avoids visible cores/player and preserves minimal fixed-scale controls",
+          "met": false
+        },
+        {
+          "text": "Representative desktop and small landscape browser acceptance on both renderers",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Observed issue and concrete proposed anchors",
+          "kind": "note",
+          "path": "artifacts/next-boss-readability.md"
+        },
+        {
+          "label": "Actual current captures and limits",
+          "kind": "note",
+          "path": "artifacts/boss-browser-validation.json"
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-10T18:22:51.855Z",
+      "updatedAt": "2026-10-10T18:22:51.855Z"
     }
   ],
   "reviews": [
@@ -2199,6 +2238,42 @@
         "task-cdf65b48",
         "task-27850da6",
         "task-3b49be6a"
+      ]
+    },
+    {
+      "id": "review-68e6ccae",
+      "title": "Next readability and natural Scout playtest / actual specialist handoffs",
+      "body": "Engine reviewed actual top-panel occlusion and proposed reusing the same panel at three reserved anchors with projected-core/player exclusions and hysteresis. Root assigned a bounded isolated prototype, with no production changes or claimed new browser acceptance. Gameplay finished a 15–20-minute itinerary for first flight, natural earning/return, declared Coil G1 trials and death/banking, using the existing 45-case observations only. QA is writing a physical worksheet that explicitly distinguishes the 3,600-sample capture cap, modal-paused console, elapsed capture duration and optional JS heap from actual GPU/memory/thermal acceptance. No physical measurement or approved balance change is implied. Actual notes: artifacts/next-boss-readability.md and artifacts/next-scout-playtest.md.",
+      "author": "Producer",
+      "source": "Actual follow-up specialist handoffs and bounded active assignments after publication",
+      "createdAt": "2026-10-10T18:22:51.868Z",
+      "participants": [
+        "Producer / Integrator",
+        "Engine specialist",
+        "Gameplay specialist",
+        "Production / QA specialist"
+      ],
+      "taskIds": [
+        "task-426419e2",
+        "balance",
+        "mobile"
+      ]
+    },
+    {
+      "id": "review-23b29c49",
+      "title": "Physical worksheet complete; measurements remain pending",
+      "body": "Production/QA completed artifacts/next-device-playtest.md with actual capture controls and their limits, landscape multitouch, lifecycle, PWA updates, save conflicts, renderer recovery, audio and30-minute performance protocols. Every unrun manual check is Pending; named devices and actual measurements are required. The review also corrected a stale regular-bossXP description in CAMPAIGN documentation to25/35/45/55/65. Published game runtime remains source65194683a28b00397ed3f29df989149b8d93412e; this is post-publication documentation/ledger work.",
+      "author": "Producer",
+      "source": "Actual completed worksheet and independently dispatched prototype review",
+      "createdAt": "2026-10-10T18:24:05.360Z",
+      "participants": [
+        "Producer / Integrator",
+        "Production / QA specialist"
+      ],
+      "taskIds": [
+        "mobile",
+        "performance",
+        "balance"
       ]
     }
   ],
@@ -2456,6 +2531,89 @@
       ],
       "url": "https://galaxy-royale-itchson.itchson.chatgpt.site/",
       "knownIssues": "Full campaign playthrough, physical devices and local neural dialogue/voice provider remain pending. Mission Control stays localhost-only."
+    },
+    {
+      "id": "build-d6260500",
+      "title": "Fifteen bosses, pixel UI refinement and bounded zoom / private preview",
+      "body": "Normal release build, reviewed exact source and game-only archive deployed successfully. Both Rust/WASM renderer variants are included with the current eighteen-asset PWA cache. Owner-private access was preserved; the unauthenticated endpoint requires login. Local packaged gameplay and backend captures were observed; remote gameplay after login remains unmeasured.",
+      "author": "Producer",
+      "source": "Succeeded exact-source owner-private deployment and actual local/browser evidence",
+      "createdAt": "2026-10-10T18:21:10.417Z",
+      "revision": "65194683a28b00397ed3f29df989149b8d93412e",
+      "evidence": [
+        {
+          "label": "Succeeded exact-source release metadata",
+          "kind": "note",
+          "path": "artifacts/private-release.json"
+        },
+        {
+          "label": "Real-projectile native combat proof",
+          "kind": "note",
+          "path": "artifacts/boss-live-combat.json"
+        },
+        {
+          "label": "Actual local browser records and capture hashes",
+          "kind": "note",
+          "path": "artifacts/boss-browser-validation.json"
+        },
+        {
+          "label": "Independent shipping and source audit",
+          "kind": "note",
+          "path": "artifacts/boss-final-release-review.md"
+        }
+      ],
+      "checks": [
+        {
+          "name": "Rust workspace:37 engine +63 gameplay +22 web/UI",
+          "result": "pass"
+        },
+        {
+          "name": "66 shell/controller/storage/UI checks",
+          "result": "pass"
+        },
+        {
+          "name": "Eight actual-WASM serialization/IndexedDB contracts",
+          "result": "pass"
+        },
+        {
+          "name": "Strict native/WebGPU/WebGL2 Clippy and normal release build",
+          "result": "pass"
+        },
+        {
+          "name": "Fifteen actual-projectile CPU boss fights and natural queued loss/retry",
+          "result": "pass"
+        },
+        {
+          "name": "2,400 packed extraction frames, finite transforms and hole preservation",
+          "result": "pass"
+        },
+        {
+          "name": "Representative current WebGPU/WebGL2 presentation and fixed UI at bounded zoom",
+          "result": "pass"
+        },
+        {
+          "name": "Current local PWA update and game-only shipping audit",
+          "result": "pass"
+        },
+        {
+          "name": "Exact-source private deployment and login protection",
+          "result": "pass"
+        },
+        {
+          "name": "Full natural progression, all-fifteen browser choreography and human balance",
+          "result": "not_run"
+        },
+        {
+          "name": "Physical phones, Safari, audio listening and30-minute GPU/thermal soak",
+          "result": "not_run"
+        },
+        {
+          "name": "Owner-authenticated remote gameplay",
+          "result": "not_run"
+        }
+      ],
+      "url": "https://galaxy-royale-itchson.itchson.chatgpt.site/",
+      "knownIssues": "Large boss heads can start charging offscreen or be partly covered by the fixed top-center HUD. Representative captures do not establish full silhouette/core acceptance. First Coil, early currency versus XP pacing and full natural progression require player playtesting. Physical phone and sustained performance are pending."
     }
   ],
   "feedback": [],
@@ -3769,6 +3927,196 @@
       "author": "Producer",
       "source": "Actual frozen-source integration, independent specialist reviews and browser captures",
       "createdAt": "2026-10-10T18:18:18.137Z"
+    },
+    {
+      "id": "8624827d-2e4f-4c90-8fc5-91558d40be2e",
+      "revision": 132,
+      "kind": "task.update",
+      "itemId": "deep-bosses",
+      "title": "Fifteen authored family bosses and five-generation promotion",
+      "author": "Producer",
+      "source": "Succeeded exact-source owner-private deployment and actual local/browser evidence",
+      "createdAt": "2026-10-10T18:21:10.260Z"
+    },
+    {
+      "id": "f3d6193b-56c4-4f19-acf9-59ca63431fda",
+      "revision": 133,
+      "kind": "task.update",
+      "itemId": "task-cdf65b48",
+      "title": "Fifteen boss pixel silhouettes and collision-aligned phase art",
+      "author": "Producer",
+      "source": "Succeeded exact-source owner-private deployment and actual local/browser evidence",
+      "createdAt": "2026-10-10T18:21:10.268Z"
+    },
+    {
+      "id": "c30840a1-a24b-482b-aed9-336495c7ffcc",
+      "revision": 134,
+      "kind": "task.update",
+      "itemId": "task-27850da6",
+      "title": "Five-generation save migration and compact boss UI integration",
+      "author": "Producer",
+      "source": "Succeeded exact-source owner-private deployment and actual local/browser evidence",
+      "createdAt": "2026-10-10T18:21:10.295Z"
+    },
+    {
+      "id": "0502f95c-ca89-42d0-b922-09cfb6f6f6ff",
+      "revision": 135,
+      "kind": "task.update",
+      "itemId": "task-3b49be6a",
+      "title": "Independent adversarial five-generation progression review",
+      "author": "Producer",
+      "source": "Succeeded exact-source owner-private deployment and actual local/browser evidence",
+      "createdAt": "2026-10-10T18:21:10.311Z"
+    },
+    {
+      "id": "e3e5b95a-1885-4fb6-8573-0ebd3988f123",
+      "revision": 136,
+      "kind": "task.update",
+      "itemId": "engine",
+      "title": "Pixel quad engine and hierarchy",
+      "author": "Producer",
+      "source": "Succeeded exact-source owner-private deployment and actual local/browser evidence",
+      "createdAt": "2026-10-10T18:21:10.326Z"
+    },
+    {
+      "id": "524e822b-aee0-4008-8b07-dbf4808edf50",
+      "revision": 137,
+      "kind": "task.update",
+      "itemId": "gameplay",
+      "title": "Combat, radial zones and progression",
+      "author": "Producer",
+      "source": "Succeeded exact-source owner-private deployment and actual local/browser evidence",
+      "createdAt": "2026-10-10T18:21:10.341Z"
+    },
+    {
+      "id": "d6d6c8e1-0e98-493c-830a-d6fd2958c18c",
+      "revision": 138,
+      "kind": "task.update",
+      "itemId": "save",
+      "title": "Versioned local progression and settings",
+      "author": "Producer",
+      "source": "Succeeded exact-source owner-private deployment and actual local/browser evidence",
+      "createdAt": "2026-10-10T18:21:10.357Z"
+    },
+    {
+      "id": "16ade4ab-b9bf-4f5d-8de7-b1074a61fe57",
+      "revision": 139,
+      "kind": "task.update",
+      "itemId": "pwa",
+      "title": "Offline PWA packaging",
+      "author": "Producer",
+      "source": "Succeeded exact-source owner-private deployment and actual local/browser evidence",
+      "createdAt": "2026-10-10T18:21:10.372Z"
+    },
+    {
+      "id": "9bab7a3b-f365-420e-ba19-d41abad43ee2",
+      "revision": 140,
+      "kind": "task.update",
+      "itemId": "balance",
+      "title": "Slice combat and progression tuning",
+      "author": "Producer",
+      "source": "Succeeded exact-source owner-private deployment and actual local/browser evidence",
+      "createdAt": "2026-10-10T18:21:10.387Z"
+    },
+    {
+      "id": "29b27895-e547-4ea7-b3d9-f5777ce62adb",
+      "revision": 141,
+      "kind": "task.update",
+      "itemId": "slice-review",
+      "title": "Integrated slice review and release evidence",
+      "author": "Producer",
+      "source": "Succeeded exact-source owner-private deployment and actual local/browser evidence",
+      "createdAt": "2026-10-10T18:21:10.402Z"
+    },
+    {
+      "id": "1115da25-1af8-4a98-85c0-1cb7479c924d",
+      "revision": 142,
+      "kind": "build",
+      "itemId": "build-d6260500",
+      "title": "Fifteen bosses, pixel UI refinement and bounded zoom / private preview",
+      "author": "Producer",
+      "source": "Succeeded exact-source owner-private deployment and actual local/browser evidence",
+      "createdAt": "2026-10-10T18:21:10.417Z"
+    },
+    {
+      "id": "b0e19917-4226-4d73-b51c-8a4ba7501c5e",
+      "revision": 143,
+      "kind": "task.create",
+      "itemId": "task-426419e2",
+      "title": "Adaptive boss HUD placement: prototype and integration",
+      "author": "Producer",
+      "source": "Actual follow-up specialist handoffs and bounded active assignments after publication",
+      "createdAt": "2026-10-10T18:22:51.855Z"
+    },
+    {
+      "id": "51b5d90a-4672-4a3b-b7a3-2b050bac4b48",
+      "revision": 144,
+      "kind": "review",
+      "itemId": "review-68e6ccae",
+      "title": "Next readability and natural Scout playtest / actual specialist handoffs",
+      "author": "Producer",
+      "source": "Actual follow-up specialist handoffs and bounded active assignments after publication",
+      "createdAt": "2026-10-10T18:22:51.868Z"
+    },
+    {
+      "id": "e4155424-36e2-42c6-ab33-57780e8830a9",
+      "revision": 145,
+      "kind": "run",
+      "itemId": "run-4ffa37da",
+      "title": "Engine specialist · running",
+      "author": "Producer",
+      "source": "Actual follow-up specialist handoffs and bounded active assignments after publication",
+      "createdAt": "2026-10-10T18:22:51.881Z"
+    },
+    {
+      "id": "23d32331-14ab-4e7f-8cc8-e6e72629c3f8",
+      "revision": 146,
+      "kind": "run",
+      "itemId": "run-e1c43158",
+      "title": "Gameplay specialist · completed",
+      "author": "Producer",
+      "source": "Actual follow-up specialist handoffs and bounded active assignments after publication",
+      "createdAt": "2026-10-10T18:22:51.896Z"
+    },
+    {
+      "id": "a511f0bc-19bc-4584-86fd-9304789ea8a9",
+      "revision": 147,
+      "kind": "run",
+      "itemId": "run-6f97c073",
+      "title": "Production / QA specialist · running",
+      "author": "Producer",
+      "source": "Actual follow-up specialist handoffs and bounded active assignments after publication",
+      "createdAt": "2026-10-10T18:22:51.913Z"
+    },
+    {
+      "id": "37d63a31-7403-4dd4-8a4c-f4b492be24c9",
+      "revision": 148,
+      "kind": "run",
+      "itemId": "run-f8546305",
+      "title": "Producer / Integrator · completed",
+      "author": "Producer",
+      "source": "Actual follow-up specialist handoffs and bounded active assignments after publication",
+      "createdAt": "2026-10-10T18:22:51.929Z"
+    },
+    {
+      "id": "5e8fe106-6d62-4f0e-b436-da6fab4eae73",
+      "revision": 149,
+      "kind": "review",
+      "itemId": "review-23b29c49",
+      "title": "Physical worksheet complete; measurements remain pending",
+      "author": "Producer",
+      "source": "Actual completed worksheet and independently dispatched prototype review",
+      "createdAt": "2026-10-10T18:24:05.360Z"
+    },
+    {
+      "id": "38f39b7c-e313-4673-bb07-a417760fe341",
+      "revision": 150,
+      "kind": "run",
+      "itemId": "run-c98296d3",
+      "title": "Production / QA specialist · running",
+      "author": "Producer",
+      "source": "Actual completed worksheet and independently dispatched prototype review",
+      "createdAt": "2026-10-10T18:24:05.374Z"
     }
   ],
   "runRecords": [
@@ -4689,6 +5037,134 @@
       "author": "Producer",
       "source": "Actual frozen-source integration, independent specialist reviews and browser captures",
       "createdAt": "2026-10-10T18:18:18.137Z"
+    },
+    {
+      "id": "run-4ffa37da",
+      "title": "Engine specialist · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Engine specialist",
+      "state": "running",
+      "observedAt": "2026-10-10T18:22:51.874Z",
+      "taskIds": [
+        "task-426419e2"
+      ],
+      "summary": "Actual isolated pure-Rust three-anchor boss HUD prototype assignment is active. All production code remains at the published release; prototype test/integration acceptance is pending.",
+      "evidence": [
+        {
+          "label": "Reviewed scope and observed problem",
+          "kind": "note",
+          "path": "artifacts/next-boss-readability.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual follow-up specialist handoffs and bounded active assignments after publication",
+      "createdAt": "2026-10-10T18:22:51.881Z"
+    },
+    {
+      "id": "run-e1c43158",
+      "title": "Gameplay specialist · completed",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Gameplay specialist",
+      "state": "completed",
+      "observedAt": "2026-10-10T18:22:51.892Z",
+      "taskIds": [
+        "deep-bosses",
+        "balance"
+      ],
+      "summary": "Completed boss implementation, frozen-source review and bounded natural Scout playtest itinerary. No balance changes or new human/device acceptance; these are completed specialist scopes while linked play-review tasks remain open.",
+      "evidence": [
+        {
+          "label": "Actual final review",
+          "kind": "note",
+          "path": "artifacts/boss-gameplay-final-review.md"
+        },
+        {
+          "label": "Finished next-playtest itinerary",
+          "kind": "note",
+          "path": "artifacts/next-scout-playtest.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual follow-up specialist handoffs and bounded active assignments after publication",
+      "createdAt": "2026-10-10T18:22:51.896Z"
+    },
+    {
+      "id": "run-6f97c073",
+      "title": "Production / QA specialist · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "Production / QA specialist",
+      "state": "running",
+      "observedAt": "2026-10-10T18:22:51.904Z",
+      "taskIds": [
+        "mobile",
+        "performance"
+      ],
+      "summary": "Writing the assigned physical-device acceptance worksheet using actual capture limitations. No physical phone is connected or measured; not a completed physical test.",
+      "evidence": [
+        {
+          "label": "Source-backed current validation limits",
+          "kind": "note",
+          "path": "artifacts/boss-final-release-review.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual follow-up specialist handoffs and bounded active assignments after publication",
+      "createdAt": "2026-10-10T18:22:51.913Z"
+    },
+    {
+      "id": "run-f8546305",
+      "title": "Producer / Integrator · completed",
+      "agentId": "/root",
+      "agentLabel": "Producer / Integrator",
+      "state": "completed",
+      "observedAt": "2026-10-10T18:22:51.922Z",
+      "taskIds": [
+        "slice-review",
+        "task-27850da6"
+      ],
+      "summary": "This publication/integration scope completed: exact source65194683a28b00397ed3f29df989149b8d93412e deployed owner-private, actual local backend/zoom/compact-settings checks recorded. The ongoing project and full-play/device tasks remain active or in review.",
+      "evidence": [
+        {
+          "label": "Succeeded private release",
+          "kind": "note",
+          "path": "artifacts/private-release.json"
+        },
+        {
+          "label": "Actual final browser checks",
+          "kind": "note",
+          "path": "artifacts/boss-browser-validation.json"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual follow-up specialist handoffs and bounded active assignments after publication",
+      "createdAt": "2026-10-10T18:22:51.929Z"
+    },
+    {
+      "id": "run-c98296d3",
+      "title": "Production / QA specialist · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "Production / QA specialist",
+      "state": "running",
+      "observedAt": "2026-10-10T18:24:05.367Z",
+      "taskIds": [
+        "task-426419e2"
+      ],
+      "summary": "Physical/manual worksheet scope completed without claiming measurements. Now independently reviewing the active isolated Engine HUD-layout prototype, exclusions and hysteresis; no production or browser acceptance claimed.",
+      "evidence": [
+        {
+          "label": "Finished device protocol: all manual checks pending",
+          "kind": "note",
+          "path": "artifacts/next-device-playtest.md"
+        },
+        {
+          "label": "Prototype proposal and known issue",
+          "kind": "note",
+          "path": "artifacts/next-boss-readability.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual completed worksheet and independently dispatched prototype review",
+      "createdAt": "2026-10-10T18:24:05.374Z"
     }
   ]
 }
