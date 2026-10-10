@@ -1,8 +1,8 @@
 {
-  "id": "appgdep_6acab425f5088191b0bd6731be42608f",
+  "id": "appgdep_6acabdfbc664819182d39ad546e0de71",
   "project_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93",
   "title": "Galaxy Royale",
-  "version_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93~appgver_bf15ceb112a0819182e5142643b36fd8",
+  "version_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93~appgver_0d66277314748191bf66d824c4574322",
   "type": "publish",
   "status": "succeeded",
   "url": "https://galaxy-royale-itchson.itchson.chatgpt.site",
@@ -11,15 +11,15 @@
   "provider_deployment_id": "site---6aca50f5b1bc81918526a6ee969aac93",
   "failure_message": null,
   "env_set_revision": 0,
-  "updated_at": "2026-10-10T21:55:07.664154+00:00",
-  "commit_sha": "8b19c6cfdb599e7bc0e310e1960ac096ea1bc7a5",
-  "cacheVersion": "galaxy-37e3441c8c48302c",
-  "browserAccess": "Exact-source owner-private publication succeeded through the private operation. Actual current normal game was observed on localhost both renderers. Authenticated remote game execution remains unmeasured; prior access-gate captures are historical, not a new current browser visit.",
-  "archiveContent": "Exactly20files:18cached normal game assets,sw.js and normalized dist/.openai/hosting.json. No Studio/API/work/production/source/QA fixture exports or credentials.",
-  "validation": "252 Rust checks (37 engine,131 gameplay,84 web),87 shell checks, strict TypeScript/native/both-WASM Clippy and normal dual-WASM/game/Studio build pass. Independent engine review reran six actual source tests and three owned Game tick/projectile checks. Independent package review matched78source inputs and the20file archive to runtime8b19c6c and cache37e3441c8c48302c. Actual normal localhost WebGPU/WebGL2 right-held cursor turning and primary shots, plus one Haven-update/reload path, are captured in a declared isolated QAfixture. Reviewed bounded pixel-font wrapping and interior Mote targeting are integrated. Broader narrow moving combat, human listening/balancing, natural campaign, named physicalphones/soak, complete recovery/offline matrix and authenticated remote game execution remain pending.",
+  "updated_at": "2026-10-10T22:37:01.886731+00:00",
+  "commit_sha": "c5fc5221a89ba0e312b9f07282b219e3c10716d3",
+  "cacheVersion": "galaxy-95d0a4d39116971e",
+  "browserAccess": "Exact owner-private publication succeeded. Current normal binaries were observed on isolated localhost WebGPU and WebGL2; authenticated remote execution is unmeasured. Opening the private preview in Codex was queued, not proof of remote game execution.",
+  "archiveContent": "Exactly20 regular files:18 cached normal game assets,sw.js and normalized dist/.openai/hosting.json.80 committed source inputs verified independently; no Studio/API/production/work/source/QA-contract payload or credentials.",
+  "validation": "282 Rust/89 shell checks, strict TypeScript/native/both-WASM Clippy, normal dual build pass. Both normal desktop renderer paths observed; final tiny/portrait responsive geometry and navigation reviewed.80 source pins and20 archive files independently verified. Physical phones/soak, human balance/audio, full recovery matrix and authenticated remote gameplay remain pending.",
   "backendHashes": {
-    "webgpu": "390bd749212822b51c641186e4dceb8aa6770c56622c2ae114ce8fb9986519ef",
-    "webgl2": "883d989c8b7912e81366fb656ec747cbed723226e952a7db3f6303bc168fb2f7"
+    "webgpu": "26ed131d32196d1fc9a3e58117dab927bb14a3f4d5803e1c78be991490f85cc9",
+    "webgl2": "0a90caddf5fb124c8dc7657992eb0d68aef24f31e1ecb0790a705211bf1e1367"
   },
   "previousDeployments": [
     {
@@ -75,6 +75,14 @@
       "status": "succeeded",
       "updated_at": "2026-10-10T21:12:40.630408+00:00",
       "cacheVersion": "galaxy-86ea0d1b0d17f148"
+    },
+    {
+      "id": "appgdep_6acab425f5088191b0bd6731be42608f",
+      "version_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93~appgver_bf15ceb112a0819182e5142643b36fd8",
+      "commit_sha": "8b19c6cfdb599e7bc0e310e1960ac096ea1bc7a5",
+      "status": "succeeded",
+      "updated_at": "2026-10-10T21:55:07.664154+00:00",
+      "cacheVersion": "galaxy-37e3441c8c48302c"
     }
   ],
   "evidence": [
@@ -99,7 +107,15 @@
     "artifacts/death-integration-validation.md",
     "artifacts/hangar-browser-validation.md",
     "artifacts/mote-deployment-qa-review.md",
-    "artifacts/mote-deployment-qa-evidence.json"
+    "artifacts/mote-deployment-qa-evidence.json",
+    "artifacts/cosmic-ui-validation.md",
+    "artifacts/cosmic-ui-browser-validation.md",
+    "artifacts/cosmic-ui-responsive-browser-review.md",
+    "artifacts/cosmic-ui-final-source-review.md",
+    "artifacts/cosmic-ui-local-package-review.md",
+    "artifacts/cosmic-ui-committed-archive-review.md",
+    "artifacts/cosmic-ui-private-deployment.json",
+    "artifacts/cosmic-ui-source-workflow.json"
   ],
   "resolvedProgressionIssues": {
     "observedAt": "2026-10-10T19:22:26.667Z",
@@ -162,5 +178,6 @@
     "taskId": "task-90acc365",
     "integratedInSource": "8b19c6cfdb599e7bc0e310e1960ac096ea1bc7a5",
     "description": "Bounded256character/257span pixel-text wrapper preserves exact legacy Unicode/newline/truncation behavior, with durable oracle tests and independent native packet/allocator review."
-  }
+  },
+  "archiveSha256": "6e46e6806a5acfadd81b2e61b6fdfa0590a2134027865e074727d2989b12642d"
 }

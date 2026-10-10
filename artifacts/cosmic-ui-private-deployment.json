@@ -1,0 +1,23 @@
+{
+  "id": "appgdep_6acabdfbc664819182d39ad546e0de71",
+  "project_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93",
+  "title": "Galaxy Royale",
+  "version_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93~appgver_0d66277314748191bf66d824c4574322",
+  "type": "publish",
+  "status": "succeeded",
+  "url": "https://galaxy-royale-itchson.itchson.chatgpt.site",
+  "has_mcp": false,
+  "screenshot_asset_pointer": null,
+  "provider_deployment_id": "site---6aca50f5b1bc81918526a6ee969aac93",
+  "failure_message": null,
+  "env_set_revision": 0,
+  "updated_at": "2026-10-10T22:37:01.886731+00:00",
+  "commit_sha": "c5fc5221a89ba0e312b9f07282b219e3c10716d3",
+  "cacheVersion": "galaxy-95d0a4d39116971e",
+  "archiveSha256": "6e46e6806a5acfadd81b2e61b6fdfa0590a2134027865e074727d2989b12642d",
+  "backendHashes": {
+    "webgpu": "26ed131d32196d1fc9a3e58117dab927bb14a3f4d5803e1c78be991490f85cc9",
+    "webgl2": "0a90caddf5fb124c8dc7657992eb0d68aef24f31e1ecb0790a705211bf1e1367"
+  },
+  "validation": "282 Rust/89 shell checks, strict TypeScript/native/both-WASM Clippy, normal dual build pass. Both normal desktop renderer paths observed; final tiny/portrait responsive geometry and navigation reviewed.80 source pins and20 archive files independently verified. Physical phones/soak, human balance/audio, full recovery matrix and authenticated remote gameplay remain pending."
+}

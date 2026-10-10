@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 334,
+  "revision": 344,
   "name": "Galaxy Royale",
   "phase": "Foundation → playable vertical slice",
-  "updatedAt": "2026-10-10T22:34:04.927Z",
+  "updatedAt": "2026-10-10T22:38:21.397Z",
   "tasks": [
     {
       "id": "studio",
@@ -3081,7 +3081,7 @@
       "description": "Replace blue-heavy fixed clouds with bounded original cached galaxy, nebula and supernova pixel groups and spatially seeded star density/color. ReducedMotion freezes cosmetic animation; shared region/Scar budgets stay unchanged. Root integrates near-black renderer clear and bounded subtle biome material grading.",
       "department": "Art / Engine",
       "owner": "Gameplay / Art specialist",
-      "status": "review",
+      "status": "complete",
       "priority": "high",
       "dependencies": [
         "engine"
@@ -3093,7 +3093,7 @@
         },
         {
           "text": "Current normal dual-WASM build and owner-private publication identities are accurately recorded; phones remain Pending",
-          "met": false
+          "met": true
         }
       ],
       "evidence": [
@@ -3111,12 +3111,22 @@
           "label": "Independent source/package review",
           "kind": "note",
           "path": "artifacts/cosmic-ui-local-package-review.md"
+        },
+        {
+          "label": "Exact committed20file archive review",
+          "kind": "note",
+          "path": "artifacts/cosmic-ui-committed-archive-review.md"
+        },
+        {
+          "label": "Verified owner-private deployment",
+          "kind": "note",
+          "path": "artifacts/cosmic-ui-private-deployment.json"
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 3,
       "createdAt": "2026-10-10T22:07:12.545Z",
-      "updatedAt": "2026-10-10T22:34:04.829Z"
+      "updatedAt": "2026-10-10T22:37:22.296Z"
     },
     {
       "id": "task-efc26bbf",
@@ -3124,7 +3134,7 @@
       "description": "Upgrades, Hangar, Campaign, Journal, Settings and Save are persistent accessible tabs. Save controls leave the footer; main action and title remain available. Actual logical viewport drives short/narrow layout, independently clipped content panes.",
       "department": "UX / Production",
       "owner": "Producer / Production QA",
-      "status": "review",
+      "status": "complete",
       "priority": "high",
       "dependencies": [
         "engine"
@@ -3136,7 +3146,7 @@
         },
         {
           "text": "Current normal dual-WASM build and owner-private publication identities are accurately recorded; phones remain Pending",
-          "met": false
+          "met": true
         }
       ],
       "evidence": [
@@ -3154,12 +3164,22 @@
           "label": "Independent source/package review",
           "kind": "note",
           "path": "artifacts/cosmic-ui-local-package-review.md"
+        },
+        {
+          "label": "Exact committed20file archive review",
+          "kind": "note",
+          "path": "artifacts/cosmic-ui-committed-archive-review.md"
+        },
+        {
+          "label": "Verified owner-private deployment",
+          "kind": "note",
+          "path": "artifacts/cosmic-ui-private-deployment.json"
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 3,
       "createdAt": "2026-10-10T22:07:12.580Z",
-      "updatedAt": "2026-10-10T22:34:04.849Z"
+      "updatedAt": "2026-10-10T22:37:22.323Z"
     },
     {
       "id": "task-f090d98d",
@@ -3167,7 +3187,7 @@
       "description": "Native Rust pixel quads draw persistent selected tabs independently of hover, primary/category/exit accents and readable disabled labels. Slider/toggle glyphs reserve control gutters. Browser bridge intersects root and scroll clips on both axes.",
       "department": "Engine / UI",
       "owner": "Engine specialist / Producer",
-      "status": "review",
+      "status": "complete",
       "priority": "high",
       "dependencies": [
         "engine"
@@ -3179,7 +3199,7 @@
         },
         {
           "text": "Current normal dual-WASM build and owner-private publication identities are accurately recorded; phones remain Pending",
-          "met": false
+          "met": true
         }
       ],
       "evidence": [
@@ -3197,12 +3217,22 @@
           "label": "Independent source/package review",
           "kind": "note",
           "path": "artifacts/cosmic-ui-local-package-review.md"
+        },
+        {
+          "label": "Exact committed20file archive review",
+          "kind": "note",
+          "path": "artifacts/cosmic-ui-committed-archive-review.md"
+        },
+        {
+          "label": "Verified owner-private deployment",
+          "kind": "note",
+          "path": "artifacts/cosmic-ui-private-deployment.json"
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 3,
       "createdAt": "2026-10-10T22:07:12.611Z",
-      "updatedAt": "2026-10-10T22:34:04.872Z"
+      "updatedAt": "2026-10-10T22:37:22.363Z"
     },
     {
       "id": "task-6664d4ee",
@@ -3210,7 +3240,7 @@
       "description": "Shared responsive native HUD geometry implementation transferred to Engine specialist after the installed local worker was interrupted without source edits/tests. Root integrates browser touch call and independently checks final source. Geometry/extraction/reservation and browser acceptance are still pending.",
       "department": "Engine / HUD",
       "owner": "Engine specialist / Producer",
-      "status": "review",
+      "status": "complete",
       "priority": "high",
       "dependencies": [
         "engine"
@@ -3222,7 +3252,7 @@
         },
         {
           "text": "Current normal dual-WASM build and owner-private publication identities are accurately recorded; phones remain Pending",
-          "met": false
+          "met": true
         }
       ],
       "evidence": [
@@ -3245,12 +3275,22 @@
           "label": "Independent source/package review",
           "kind": "note",
           "path": "artifacts/cosmic-ui-local-package-review.md"
+        },
+        {
+          "label": "Exact committed20file archive review",
+          "kind": "note",
+          "path": "artifacts/cosmic-ui-committed-archive-review.md"
+        },
+        {
+          "label": "Verified owner-private deployment",
+          "kind": "note",
+          "path": "artifacts/cosmic-ui-private-deployment.json"
         }
       ],
       "blocker": "",
-      "revision": 3,
+      "revision": 4,
       "createdAt": "2026-10-10T22:07:12.642Z",
-      "updatedAt": "2026-10-10T22:34:04.905Z"
+      "updatedAt": "2026-10-10T22:37:22.394Z"
     }
   ],
   "reviews": [
@@ -3968,6 +4008,15 @@
       "author": "Producer",
       "source": "Actual frozen cursor-aim specialist reviews and observed normal browser checks",
       "createdAt": "2026-10-10T21:52:41.342Z",
+      "status": "accepted"
+    },
+    {
+      "id": "decision-ed7708ce",
+      "title": "Bounded cosmic/UI release accepted; physical performance remains pending",
+      "body": "Accept current black-space seeded pixel scenery and six-page responsive pixel menus based on actual source, native tests, both normal browser renderers, desktop geometry and exact committed private artifact. Do not promote this evidence to physical-phone/GPU-soak or authenticated remote gameplay acceptance.",
+      "author": "Producer",
+      "source": "Actual final cosmic/UI checks, specialist reviews and exact private release",
+      "createdAt": "2026-10-10T22:37:22.426Z",
       "status": "accepted"
     }
   ],
@@ -4784,6 +4833,47 @@
         }
       ],
       "knownIssues": "Physical phones/soak, human moving-combat readability/audio, full recovery matrix pending. Genuine180x140 touch boss panel may have no safe placement and fails closed."
+    },
+    {
+      "id": "build-be840dd3",
+      "title": "Dark-space responsive pixel menus private release",
+      "body": "Exact source/20file game-only archive independently reviewed and published owner-private. Browser execution was measured locally against this normal package; remote authenticated execution is pending.",
+      "author": "Producer",
+      "source": "Actual final cosmic/UI checks, specialist reviews and exact private release",
+      "createdAt": "2026-10-10T22:37:22.410Z",
+      "revision": "c5fc5221a89ba0e312b9f07282b219e3c10716d3",
+      "evidence": [
+        {
+          "label": "Committed archive review",
+          "kind": "note",
+          "path": "artifacts/cosmic-ui-committed-archive-review.md"
+        },
+        {
+          "label": "Private deployment response",
+          "kind": "note",
+          "path": "artifacts/cosmic-ui-private-deployment.json"
+        }
+      ],
+      "checks": [
+        {
+          "name": "Exact commit/archive/game-only payload",
+          "result": "pass"
+        },
+        {
+          "name": "Normal dual renderer initialization and scoped responsive local QA",
+          "result": "pass"
+        },
+        {
+          "name": "Owner-private deployment",
+          "result": "pass"
+        },
+        {
+          "name": "Physical phones/soak and authenticated remote gameplay",
+          "result": "not_run"
+        }
+      ],
+      "url": "https://galaxy-royale-itchson.itchson.chatgpt.site/",
+      "knownIssues": "Broader production slice remains Review. Phones/soak, natural campaign/human audio and full recovery matrix remain pending."
     }
   ],
   "feedback": [],
@@ -8127,6 +8217,106 @@
       "author": "Producer",
       "source": "Actual final cosmic/UI checks, specialist reviews and exact private release",
       "createdAt": "2026-10-10T22:34:04.927Z"
+    },
+    {
+      "id": "1af7687d-4611-488f-a685-186e01c1fc53",
+      "revision": 335,
+      "kind": "task.update",
+      "itemId": "task-93af6b6f",
+      "title": "Near-black space with seeded cosmic pixel scenery",
+      "author": "Producer",
+      "source": "Actual final cosmic/UI checks, specialist reviews and exact private release",
+      "createdAt": "2026-10-10T22:37:22.296Z"
+    },
+    {
+      "id": "147173f4-c57d-4959-ab73-92b162941544",
+      "revision": 336,
+      "kind": "task.update",
+      "itemId": "task-efc26bbf",
+      "title": "Six clear responsive command pages and scroll containment",
+      "author": "Producer",
+      "source": "Actual final cosmic/UI checks, specialist reviews and exact private release",
+      "createdAt": "2026-10-10T22:37:22.323Z"
+    },
+    {
+      "id": "fc763762-5161-4a1d-ab45-528745cce4ab",
+      "revision": 337,
+      "kind": "task.update",
+      "itemId": "task-f090d98d",
+      "title": "Semantic pixel action colors and readable settings controls",
+      "author": "Producer",
+      "source": "Actual final cosmic/UI checks, specialist reviews and exact private release",
+      "createdAt": "2026-10-10T22:37:22.363Z"
+    },
+    {
+      "id": "8acae5ed-f7c2-4e70-a103-4eccf850b2c2",
+      "revision": 338,
+      "kind": "task.update",
+      "itemId": "task-6664d4ee",
+      "title": "Responsive native HUD shares boss reservation geometry",
+      "author": "Producer",
+      "source": "Actual final cosmic/UI checks, specialist reviews and exact private release",
+      "createdAt": "2026-10-10T22:37:22.394Z"
+    },
+    {
+      "id": "77da2a51-8cc2-47cc-b4f3-7d5c473baf59",
+      "revision": 339,
+      "kind": "build",
+      "itemId": "build-be840dd3",
+      "title": "Dark-space responsive pixel menus private release",
+      "author": "Producer",
+      "source": "Actual final cosmic/UI checks, specialist reviews and exact private release",
+      "createdAt": "2026-10-10T22:37:22.410Z"
+    },
+    {
+      "id": "10dff890-3578-4de6-8934-d33b43927fa6",
+      "revision": 340,
+      "kind": "decision",
+      "itemId": "decision-ed7708ce",
+      "title": "Bounded cosmic/UI release accepted; physical performance remains pending",
+      "author": "Producer",
+      "source": "Actual final cosmic/UI checks, specialist reviews and exact private release",
+      "createdAt": "2026-10-10T22:37:22.426Z"
+    },
+    {
+      "id": "b7233bd6-03dc-402d-8f84-fa57818a8c04",
+      "revision": 341,
+      "kind": "run",
+      "itemId": "run-afb3b442",
+      "title": "Producer / Integrator · completed",
+      "author": "Producer",
+      "source": "Actual native specialist follow-up dispatch and exact publication response",
+      "createdAt": "2026-10-10T22:38:21.356Z"
+    },
+    {
+      "id": "f515c7a0-6cc6-41bb-9370-c97a231e5ff5",
+      "revision": 342,
+      "kind": "run",
+      "itemId": "run-cb248317",
+      "title": "Engine / Pixel UI specialist · running",
+      "author": "Producer",
+      "source": "Actual native specialist follow-up dispatch and exact publication response",
+      "createdAt": "2026-10-10T22:38:21.369Z"
+    },
+    {
+      "id": "0a113fe0-7ff6-4862-9455-20ac6a502871",
+      "revision": 343,
+      "kind": "run",
+      "itemId": "run-fbb7819d",
+      "title": "Production / Responsive QA · running",
+      "author": "Producer",
+      "source": "Actual native specialist follow-up dispatch and exact publication response",
+      "createdAt": "2026-10-10T22:38:21.382Z"
+    },
+    {
+      "id": "422e7a00-b0df-48b2-b4f3-f24ba463dd5d",
+      "revision": 344,
+      "kind": "run",
+      "itemId": "run-29a6d055",
+      "title": "Gameplay / Art specialist · running",
+      "author": "Producer",
+      "source": "Actual native specialist follow-up dispatch and exact publication response",
+      "createdAt": "2026-10-10T22:38:21.397Z"
     }
   ],
   "runRecords": [
@@ -11112,6 +11302,101 @@
       "author": "Producer",
       "source": "Observed source freezes, actual checks and interrupted local-worker handoff",
       "createdAt": "2026-10-10T22:16:06.017Z"
+    },
+    {
+      "id": "run-afb3b442",
+      "title": "Producer / Integrator · completed",
+      "agentId": "/root",
+      "agentLabel": "Producer / Integrator",
+      "state": "completed",
+      "observedAt": "2026-10-10T22:38:21.332Z",
+      "taskIds": [
+        "task-93af6b6f",
+        "task-efc26bbf",
+        "task-f090d98d",
+        "task-6664d4ee"
+      ],
+      "summary": "Current bounded cosmic/menu/HUD work is reviewed and exact private deployment succeeded. Broader development goal remains active; source/runtime c5fc522/cache95d0 recorded and devices/soak pending.",
+      "evidence": [
+        {
+          "label": "Actual source of observation / written handoff",
+          "kind": "note",
+          "path": "artifacts/cosmic-ui-private-deployment.json"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual native specialist follow-up dispatch and exact publication response",
+      "createdAt": "2026-10-10T22:38:21.356Z"
+    },
+    {
+      "id": "run-cb248317",
+      "title": "Engine / Pixel UI specialist · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Engine / Pixel UI specialist",
+      "state": "running",
+      "observedAt": "2026-10-10T22:38:21.364Z",
+      "taskIds": [
+        "slice-review",
+        "performance"
+      ],
+      "summary": "Actual follow-up dispatched after final source review: work-only inspection/proposal for automatic WebGPU initialization failure and context recovery acceptance gaps. No production/dist changes, GPU/phone pass or completed proposal claimed.",
+      "evidence": [
+        {
+          "label": "Actual source of observation / written handoff",
+          "kind": "note",
+          "path": "work/record-cosmic-ui-next-runs.mjs"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual native specialist follow-up dispatch and exact publication response",
+      "createdAt": "2026-10-10T22:38:21.369Z"
+    },
+    {
+      "id": "run-fbb7819d",
+      "title": "Production / Responsive QA · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "Production / Responsive QA",
+      "state": "running",
+      "observedAt": "2026-10-10T22:38:21.375Z",
+      "taskIds": [
+        "mobile",
+        "controls-qa",
+        "performance"
+      ],
+      "summary": "Actual follow-up dispatched after final responsive QA: prepare work-only reproducible physical-device test sheet/current evidence mapping. Pixel6a/iPhone12 hardware measurements remain unperformed; mobile task stays Backlog.",
+      "evidence": [
+        {
+          "label": "Actual source of observation / written handoff",
+          "kind": "note",
+          "path": "work/record-cosmic-ui-next-runs.mjs"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual native specialist follow-up dispatch and exact publication response",
+      "createdAt": "2026-10-10T22:38:21.382Z"
+    },
+    {
+      "id": "run-29a6d055",
+      "title": "Gameplay / Art specialist · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Gameplay / Art specialist",
+      "state": "running",
+      "observedAt": "2026-10-10T22:38:21.392Z",
+      "taskIds": [
+        "art-direction",
+        "performance"
+      ],
+      "summary": "Actual follow-up dispatched after exact archive pass: work-only reduced-cosmetic planet/landmark LOD proposal with actual source-derived quad costs. No production/dist mutation or further visual release claim.",
+      "evidence": [
+        {
+          "label": "Actual source of observation / written handoff",
+          "kind": "note",
+          "path": "work/record-cosmic-ui-next-runs.mjs"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual native specialist follow-up dispatch and exact publication response",
+      "createdAt": "2026-10-10T22:38:21.397Z"
     }
   ]
 }
