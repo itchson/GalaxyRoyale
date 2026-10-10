@@ -1,0 +1,78 @@
+{
+  "recorded_utc": "2026-10-10T21:11:29.889Z",
+  "scope": "Immutable captured desktop browser and read-only ledger checkpoint before current archive/private acceptance",
+  "source_commit": "60590ddcde0c8c66139bc6c1bea47bbd45e0a717",
+  "cache": "galaxy-86ea0d1b0d17f148",
+  "owned": {
+    "browser-evidence-review.md": {
+      "sha256": "b3d19c66eafebd364eada97c29d53499897958ed6cd653476212fc7e29fe213c",
+      "bytes": 5789
+    },
+    "acceptance-checklist.md": {
+      "sha256": "f966aae7c47fa5a79d7a666f19b9a642232eb83ceb1989c980034f94543f0818",
+      "bytes": 8834
+    },
+    "board-followup.json": {
+      "sha256": "a28f97c68f18fb0ea3425af12f00e84b5ff69bb40e05d214c8e3352695704011",
+      "bytes": 400929
+    },
+    "board-browser-checkpoint.json": {
+      "sha256": "6bffcd6075fa5aabdc9d9206a6cc6ac65c63d13d1069b4dc4622f03540f307e2",
+      "bytes": 407905
+    },
+    "board-browser-final.json": {
+      "sha256": "4fb344b39ed77e6f0e303db735bca2521a184a00596750e4571f6f2e6060b5d8",
+      "bytes": 413426
+    }
+  },
+  "external": {
+    "artifacts/scar-audio-integration-validation.md": {
+      "sha256": "50620d1122909c1667ef29728ca40ed72015559c946f8e4ba5c7381695f136fa",
+      "bytes": 3099
+    },
+    "artifacts/scar-audio-browser-validation.md": {
+      "sha256": "191383b68a66b1679238bc45b9575eb7bcab9dfcb1b6ec663dd0d5c03673cf81",
+      "bytes": 6317
+    },
+    "artifacts/mote-browser-dsp-review.md": {
+      "sha256": "25f7054cf34c019e0074d26aeb8bd8e92b178957bbc9a5d4d1e2c44472a56a3b",
+      "bytes": 6429
+    },
+    "artifacts/mote-browser-dsp-evidence.json": {
+      "sha256": "a6e41e97958f230acb486e19e41624904bba3a4ffec73d0446c87d2cd046239e",
+      "bytes": 14450
+    },
+    "artifacts/mote-browser-dsp-hashes.json": {
+      "sha256": "b3db7fdd711d13ca813faea886445ab9778ac2e655a469c120f3f4bc3a451c63",
+      "bytes": 5214
+    },
+    "artifacts/mote-audio-dispose-browser.txt": {
+      "sha256": "9b393a49d9db24a4e481ef66d2d75c4ef484870373d7b4d3f804f9ffc7223bbb",
+      "bytes": 2962
+    },
+    "artifacts/scar-min-zoom-webgl2-stats.txt": {
+      "sha256": "a8450156dba01fc59884898372b292c38c316d115394beb29ff3bfc9fe0e87be",
+      "bytes": 2188
+    },
+    "artifacts/scar-max-zoom-webgpu-stats.txt": {
+      "sha256": "cfd9d2e0becbc4005dc65efc2e7ebb801986e41c6626ba4d2e35ceeb848ca16b",
+      "bytes": 907
+    },
+    "artifacts/champion-royale-webgl2-dom.json": {
+      "sha256": "b6a3e6ed7bfd64188e5be404a3491525913b0697021af6ad2d3e8bb195bd8836",
+      "bytes": 1961
+    },
+    "artifacts/champion-royale-webgl2.jpg": {
+      "sha256": "74d252f9cd7163e6dab74da18be76bb16c7a1427068af34efd2cc0221266e6ef",
+      "bytes": 94516
+    },
+    "work/champion-patch-engine-review/BROWSER_ADDENDUM.md": {
+      "sha256": "c9fdf56560d40c728314cef5a95ada0101f8eff57d8aed6b4798f124ec142b67",
+      "bytes": 5895
+    },
+    "work/next-slice-art-review/BROWSER-ADDENDUM.md": {
+      "sha256": "59aaa64bd56393d865c117d1bfcec13bf8cbf08518c6dfd7a03fa5c3d496c496",
+      "bytes": 5142
+    }
+  }
+}

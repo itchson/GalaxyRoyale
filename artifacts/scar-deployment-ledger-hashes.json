@@ -1,0 +1,55 @@
+{
+  "recorded_utc": "2026-10-10T21:17:22.375Z",
+  "source_commit": "60590ddcde0c8c66139bc6c1bea47bbd45e0a717",
+  "cache": "galaxy-86ea0d1b0d17f148",
+  "project_revision": 286,
+  "scope": "Final local result/ledger/captured-gate consistency; no authenticated remote execution",
+  "owned": {
+    "deployment-ledger-review.md": {
+      "sha256": "0c6456eca58fce796f3b7c425d76d2138d11ce32013c58e817fd3751b7f1320f",
+      "bytes": 4018
+    },
+    "deployment-ledger-evidence.json": {
+      "sha256": "abd0527d0c22e4e7d5284cc7d8a63a1ed7b4221e66f2c7f4db744a22ddfffb35",
+      "bytes": 6833
+    },
+    "deployment-ledger-check.mjs": {
+      "sha256": "bc72b16f99c43303d00599d7f1e4ee5eab1e7a89c14bf580c044c66be1d8ca89",
+      "bytes": 5213
+    },
+    "board-deployment-final.json": {
+      "sha256": "5df8c340e0f4fc6f1da22d219a85141fc16a91da822aa30f132c1c42e827689d",
+      "bytes": 421124
+    },
+    "board-deployment-286.json": {
+      "sha256": "4cfbd4e534be38b39ad85d2b6db576d1bb915613ff7a2608417b180ec54d0254",
+      "bytes": 422211
+    }
+  },
+  "external": {
+    "artifacts/private-release.json": {
+      "sha256": "c45ff5e757fc93a065c71893d6467a9ab2ddc62ae49ad53d90cd596cfad9a54b",
+      "bytes": 7854
+    },
+    "artifacts/scar-private-deployment.json": {
+      "sha256": "210bbfdcf719b620d27c0a46e4511d827cf02281eaf1424287f68760ed7c737d",
+      "bytes": 584
+    },
+    "artifacts/scar-private-access.jpg": {
+      "sha256": "e6a960065b7e3edf7549d59def9dee797c812b4ec47872afdcf66d4b4fa8dde6",
+      "bytes": 98762
+    },
+    "artifacts/scar-post-push-package-review.md": {
+      "sha256": "0a8c846e9f54944b8de09e28681bf9ea1ffeeeaa004d9e27fae2889b37d247a0",
+      "bytes": 3840
+    },
+    "artifacts/scar-post-push-package-evidence.json": {
+      "sha256": "aafb6addd8a57c8e254585b35a8cd7e2b22be97a32e2352f35e54a6e3ae6ab11",
+      "bytes": 26449
+    },
+    "artifacts/scar-post-push-package-hashes.json": {
+      "sha256": "ed34f52033454cde36175f4c76da36a92f66a99e4fe7b79934bd45fd7f698269",
+      "bytes": 963
+    }
+  }
+}

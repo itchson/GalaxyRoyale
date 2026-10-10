@@ -1,0 +1,25 @@
+# Actual scenery screenshot addendum
+
+No blocking static-art integration issue found in the inspected settled captures. Isotope Scar appears as the authored broken purple planet with crater masses, lime fault seams, separate fragment and restrained trailing wisps. The foreground ship remains distinct in the settled max-zoom WebGPU/WebGL2 views. Moving crowded Mote warning contrast, animation judgment and physical-mobile readability remain Pending.
+
+This is a new screenshot assessment. The original source-only `REVIEW.md` and its pins remain unchanged. `browser-pins.json` pins this addendum, the exact inspected JPEGs/stat records and root's observation account; these are representative frames from the actual normal package, not regenerated art or candidate extraction previews. I viewed the images directly and read the recorded stats. Root operated the browser; this reviewer did not repeat those interactions.
+
+## Actual fixture and renderer scope
+
+Root's account identifies the game-only package at `http://127.0.0.1:4186/`, cache `galaxy-86ea0d1b0d17f148`, on Windows through the Codex in-app browser. The seed-17 profile was deliberately imported through visible settings; console WARP selected an admitted Radial Wastes location. It is diagnostic presentation evidence with disclosed reward isolation, not a naturally traversed expedition. Root's actual stats show world 333×188 at zoom 1.60 and world 888×500 at zoom 0.60, with the UI remaining 533×300.
+
+The settled `scar-max-zoom-webgpu.jpg` and `scar-max-zoom-webgl2-current.jpg` show the same recognizable planet structure, seam path, detached right fragment and thin edge wisps. Cyan/ivory ship edges, gold cockpit and bright exhaust are clearly identifiable over the purple surface. The background's lime mineral texture remains subordinate to the ship in these particular frames. Neither frame includes an active Mote escape wedge or crowded projectile field, so this does not settle the shared-lime warning concern identified in the source review.
+
+`scar-min-zoom-webgl2.jpg` shows the distant motif remaining recognizable as a small fractured planet; the ship is visible at this lower zoom. Fine individual mineral/crater cells collapse into broader texture at this scale, as expected from the native subpixel budget. The inspected `scar-min-zoom-webgpu.jpg` shows the background but no visible central ship. It therefore supports distant-art appearance only and must not be cited as foreground contrast proof. Root's account notes that captures made before the next interpolated ship frame can omit that initial frame; the settled paired max views supply the foreground evidence. These frames are not simultaneous pixel-parity captures: other asteroids and star positions differ.
+
+`scar-reduced-static-webgpu.jpg` uses a separate admitted location with both Reduced cosmic detail and Reduced motion read back as checked by root. It retains the planet silhouette, brighter broad fault masses and detached fragment, with reduced fine texture. The associated actual stats report 3,876 combined game/UI quads; the full max-view record reports 9,787. These are scene totals at different locations, not a direct subtraction measuring the helper's isolated 4,854/1,411-cell budgets. Native extraction tests separately establish those exact budgets.
+
+Existing neighboring ring planets remain visible in these views. They belong to surrounding region scenery; Scar itself is the irregular fractured body and has no repeated generic ring frame. The stills support depth separation and distinct shape. They cannot independently establish parallax velocity, the slow mineral/plume animation, Reduced Motion freeze over time, clipping during rapid camera shifts or consistent appearance on all GPUs. JPEG sampling also prevents an exact per-cell/color acceptance.
+
+## Integration and remaining evidence
+
+Native source/packet evidence still establishes seeded placement, one parallax encoding, shared region budget, persistent local-cell transforms, Reduced Motion's zero cosmetic time and unlit background material. Actual browser images now add representative WebGPU/WebGL2 appearance at both zoom clamps and one reduced-settings view. Root's sampled FPS/p95 console values are retained as diagnostics; they are not sustained mobile performance or soak acceptance.
+
+The independent real-browser audio probe is separately frozen under `work/mote-browser-audio-probe/REPORT.md`: six declared native DSP captures, mute/recovery/resource/cleanup observations and decoded original Opus files. It does not claim hearing or natural Game combat. The earlier actual-native phase-entry/real-pulse event proofs remain the evidence for audio event semantics.
+
+Next human check should cross the visible planet with a charging Mote and several shots at both zoom clamps, include a moving-camera warning abort/re-entry, and compare full versus reduced scenery. Inspect actual safe-wedge comprehension and notification audibility; neither can be assigned an invented score from these stills or analyser windows. No production tuning or source change follows from this bounded static review.

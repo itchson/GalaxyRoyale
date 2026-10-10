@@ -1,0 +1,29 @@
+{
+  "recorded_utc": "2026-10-10T21:14:09.410Z",
+  "source_commit": "60590ddcde0c8c66139bc6c1bea47bbd45e0a717",
+  "cache": "galaxy-86ea0d1b0d17f148",
+  "owned": {
+    "post-push-package-review.md": {
+      "sha256": "0a8c846e9f54944b8de09e28681bf9ea1ffeeeaa004d9e27fae2889b37d247a0",
+      "bytes": 3840
+    },
+    "post-push-package-evidence.json": {
+      "sha256": "aafb6addd8a57c8e254585b35a8cd7e2b22be97a32e2352f35e54a6e3ae6ab11",
+      "bytes": 26449
+    },
+    "post-push-package-check.py": {
+      "sha256": "3f11d5231e9238e4fdf792bcb5d8875f2b82371c954e4016f94cd6d504aa4bee",
+      "bytes": 5911
+    }
+  },
+  "external": {
+    "artifacts/scar-private-deployment.json": {
+      "sha256": "210bbfdcf719b620d27c0a46e4511d827cf02281eaf1424287f68760ed7c737d",
+      "bytes": 584
+    },
+    "work/galaxy-scar-audio-release-20261011.tar.gz": {
+      "sha256": "04e7211c43046f06816e1360b6a5722dd67de1a91e046a1b83a74565b77dad17",
+      "bytes": 2128701
+    }
+  }
+}

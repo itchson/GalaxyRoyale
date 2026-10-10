@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 281,
+  "revision": 291,
   "name": "Galaxy Royale",
   "phase": "Foundation → playable vertical slice",
-  "updatedAt": "2026-10-10T21:09:40.335Z",
+  "updatedAt": "2026-10-10T21:18:06.093Z",
   "tasks": [
     {
       "id": "studio",
@@ -728,7 +728,7 @@
       "status": "review",
       "owner": "Producer",
       "priority": "normal",
-      "description": "Current exact-source private release573906769122140e2e54021bdaf037ad6f887673 /cacheeaac3b23e213e59b includes reviewed shared death/report fixes and original live Radiation Mote.217Rust/70shell/strictnativeandbothWASMchecks/normalbuild pass. Currentnormal bothrenderer Mote/wheel/layout/save/update plus separatelyscoped death/craft flows and independent source/package/evidence reviews pass. Natural fullcampaign,moving/crowded telegraphs,human balance,listening,completeoffline/recovery,authenticated remote execution and named physicalphones remain pending.",
+      "description": "Current private preview is source 60590dd and cache galaxy-86ea0d1b0d17f148. The 242 Rust and 79 shell checks, normal dual renderer build, bounded desktop visual/DSP observations and exact source/archive publication have actual linked evidence. Human listening, moving combat readability, natural campaign, named phones/soak and authenticated remote game execution remain pending. This broader slice review stays open.",
       "dependencies": [
         "studio",
         "boss-qa",
@@ -811,12 +811,42 @@
           "label": "Independent final evidence and completion-scope review",
           "kind": "note",
           "path": "artifacts/mote-final-evidence-review.md"
+        },
+        {
+          "label": "Exact successful private release identity and remaining gates",
+          "kind": "note",
+          "path": "artifacts/private-release.json"
+        },
+        {
+          "label": "Actual bounded normal browser observations",
+          "kind": "note",
+          "path": "artifacts/scar-audio-browser-validation.md"
+        },
+        {
+          "label": "Independent source and normal package acceptance",
+          "kind": "note",
+          "path": "artifacts/scar-audio-package-review.md"
+        },
+        {
+          "label": "Independent final evidence and ledger review",
+          "kind": "note",
+          "path": "artifacts/scar-audio-final-evidence-review.md"
+        },
+        {
+          "label": "Six real browser DSP captures and decoding",
+          "kind": "note",
+          "path": "artifacts/mote-browser-dsp-review.md"
+        },
+        {
+          "label": "Independent exact committed source and 20-file game archive verification",
+          "kind": "note",
+          "path": "artifacts/scar-post-push-package-review.md"
         }
       ],
       "blocker": "",
-      "revision": 7,
+      "revision": 9,
       "createdAt": "2026-10-10T14:29:27.000Z",
-      "updatedAt": "2026-10-10T20:26:44.296Z"
+      "updatedAt": "2026-10-10T21:15:16.583Z"
     },
     {
       "id": "deep-bosses",
@@ -2521,7 +2551,7 @@
     {
       "id": "task-b0a59d63",
       "title": "Mote moving-player warning admission and encounter pacing",
-      "description": "Independent exact original moving-camera replay and8-case reversal→stop matrix are frozen. Zero60Hzshots are warning-admission interruptions; all cases resume firing after stopping. A work-only interiorcorner ring improves original34cue/0emission to128/2 while retaining all16actualcoreguardtests; narrowestview remains unchanged. The accepted private5739067 package remains frozen. Future normalbrowser/humanA/B is pending; no tuning patch is integrated.",
+      "description": "The exact original moving-camera replay and eight reversal/stop cases remain frozen as historical evidence. Interrupted warning admission suppressed shots at 60 Hz; all recorded cases resumed firing after stopping. A separate work-only interior-corner candidate improved the original replay from 34 cues / 0 pulses to 128 cues / 2 pulses while retaining all 16 core guard tests. The historical 5739067 baseline is preserved; the current private release is 60590dd. This tuning candidate is not integrated. Normal browser and human A/B review remain pending.",
       "department": "Engine / Gameplay",
       "owner": "Engine specialist / Producer",
       "status": "review",
@@ -2557,9 +2587,9 @@
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 3,
       "createdAt": "2026-10-10T20:18:30.691Z",
-      "updatedAt": "2026-10-10T20:26:44.339Z"
+      "updatedAt": "2026-10-10T21:16:06.833Z"
     },
     {
       "id": "task-4a0debda",
@@ -3373,6 +3403,41 @@
         "task-6c38f853",
         "task-4a0debda"
       ]
+    },
+    {
+      "id": "review-d4fee7f9",
+      "title": "Published source 60590dd: accepted bounded desktop slice and remaining gates",
+      "body": "The exact current source was committed and pushed, then the existing owner-private Site published the game-only archive successfully. Independent package review records both normal WASM backends and the 18-asset cache. Actual desktop captures, measured icon geometry and native AudioEngine recordings are preserved with their fixture and measurement limits. The unauthenticated remote page still requires owner login. Bounded scenery, emblem and diagnostic tasks are complete; human audio/combat judgment, natural full campaign, physical devices, soak and authenticated remote execution remain separate pending work. Parallel work continues on actual native pixel extraction benchmarks and a source-pinned combat readability comparison.",
+      "author": "Producer",
+      "source": "Exact 60590dd source pushed and game-only archive published privately; authoritative status succeeded",
+      "createdAt": "2026-10-10T21:14:21.924Z",
+      "participants": [
+        "Producer / Integrator",
+        "Engine specialist",
+        "Gameplay / Art / Audio specialist",
+        "Production / Independent QA"
+      ],
+      "taskIds": [
+        "slice-review",
+        "task-59dfc802",
+        "task-403cf3c4",
+        "task-4a0debda"
+      ]
+    },
+    {
+      "id": "review-849748b8",
+      "title": "Independent release consistency accepted for 60590dd",
+      "body": "The specialist separately verified all 72 committed build inputs, the 20-file game archive, both parsed normal WASM binaries and the exact 18-asset cache. Final revision-286 review matched source 60590dd, the successful private deployment identity, current build record and captured login gate. No blocking discrepancy remained. The three bounded scenery/emblem/diagnostic tasks have completed dependencies. Audio listening, moving combat readability, physical devices, full natural campaign, authenticated remote execution and broader slice acceptance stay open.",
+      "author": "Producer",
+      "source": "Actual final release review and next bounded assignments",
+      "createdAt": "2026-10-10T21:18:06.032Z",
+      "participants": [
+        "Production / Independent QA",
+        "Producer / Integrator"
+      ],
+      "taskIds": [
+        "slice-review"
+      ]
     }
   ],
   "decisions": [
@@ -3978,6 +4043,98 @@
       ],
       "url": "https://galaxy-royale-itchson.itchson.chatgpt.site/",
       "knownIssues": "Current package retains strict camera-aware Mote warning admission. Continuous maxzoom reversals can suppress pulses; firing recovers after stopping in native fixtures. Independent work-only tuning/audio/background candidates are separate from this release. Named phones/30-minute soak, actual full natural champion/tournament/credits play, human tuning,listening and authenticated remote execution remain Pending."
+    },
+    {
+      "id": "build-2298ef01",
+      "title": "Detailed pixel scenery, champion emblems and Mote sound / 60590dd",
+      "body": "242 Rust tests (37 engine, 125 gameplay, 80 web), 79 shell tests, strict TypeScript/native/both-WASM Clippy and normal dual-WASM/game/Studio build pass. Both normal desktop renderers show the new scenery. Actual wheel zoom reaches 0.60 and 1.60 with fixed UI dimensions. Bounded emblem sizing, scroll clipping, narrow roster, declared victory presentation and QA travel are recorded. Six declared unchanged-AudioEngine browser recordings establish actual DSP/mute/suspend-resume/16-voice cleanup; independent decoding and native disposal pass. Exact source/archive and successful owner-private publication are recorded. Human listening, moving combat readability, full natural campaign, physical phones/soak, complete offline/recovery matrix and authenticated remote gameplay remain pending.",
+      "author": "Producer",
+      "source": "Exact 60590dd source pushed and game-only archive published privately; authoritative status succeeded",
+      "createdAt": "2026-10-10T21:14:21.880Z",
+      "revision": "60590ddcde0c8c66139bc6c1bea47bbd45e0a717",
+      "evidence": [
+        {
+          "label": "Exact successful private release identity and remaining gates",
+          "kind": "note",
+          "path": "artifacts/private-release.json"
+        },
+        {
+          "label": "Actual bounded normal browser observations",
+          "kind": "note",
+          "path": "artifacts/scar-audio-browser-validation.md"
+        },
+        {
+          "label": "Independent source and normal package acceptance",
+          "kind": "note",
+          "path": "artifacts/scar-audio-package-review.md"
+        },
+        {
+          "label": "Independent final evidence and ledger review",
+          "kind": "note",
+          "path": "artifacts/scar-audio-final-evidence-review.md"
+        },
+        {
+          "label": "Six real browser DSP captures and decoding",
+          "kind": "note",
+          "path": "artifacts/mote-browser-dsp-review.md"
+        }
+      ],
+      "checks": [
+        {
+          "name": "242 Rust tests",
+          "result": "pass"
+        },
+        {
+          "name": "79 shell tests and strict TypeScript",
+          "result": "pass"
+        },
+        {
+          "name": "Native and both WASM Clippy",
+          "result": "pass"
+        },
+        {
+          "name": "Normal dual-WASM game and Studio build; 18 cached game assets",
+          "result": "pass"
+        },
+        {
+          "name": "Representative both-renderer scenery, wheel bounds and fixed UI",
+          "result": "pass"
+        },
+        {
+          "name": "Authored icon sizing, representative scroll/narrow fit and declared victory emblem",
+          "result": "pass"
+        },
+        {
+          "name": "Six declared native browser audio captures, mute/recovery/cap/cleanup",
+          "result": "pass"
+        },
+        {
+          "name": "Exact-source private publication and protected access gate",
+          "result": "pass"
+        },
+        {
+          "name": "Physical phones / 60 FPS / 30-minute soak",
+          "result": "not_run"
+        },
+        {
+          "name": "Human listening and moving combat readability",
+          "result": "not_run"
+        },
+        {
+          "name": "Full natural champion/tournament/credits campaign",
+          "result": "not_run"
+        },
+        {
+          "name": "Authenticated current remote game execution",
+          "result": "not_run"
+        },
+        {
+          "name": "Complete current offline and graphics recovery matrix",
+          "result": "not_run"
+        }
+      ],
+      "url": "https://galaxy-royale-itchson.itchson.chatgpt.site/",
+      "knownIssues": "Work-only moving-camera warning admission candidate; current strict admission can suppress Mote pulses during continuous maximum-zoom reversals. Native firing recovers after stopping. Browser and human A/B remain pending. Integrated charge/pulse SFX with actual desktop DSP evidence; human listening and phone audio acceptance remain pending."
     }
   ],
   "feedback": [],
@@ -6791,6 +6948,106 @@
       "author": "Producer",
       "source": "Actual release preparation and specialist handoffs",
       "createdAt": "2026-10-10T21:09:40.335Z"
+    },
+    {
+      "id": "bc4c5d93-805f-4803-af7c-da199fff7c7c",
+      "revision": 282,
+      "kind": "build",
+      "itemId": "build-2298ef01",
+      "title": "Detailed pixel scenery, champion emblems and Mote sound / 60590dd",
+      "author": "Producer",
+      "source": "Exact 60590dd source pushed and game-only archive published privately; authoritative status succeeded",
+      "createdAt": "2026-10-10T21:14:21.880Z"
+    },
+    {
+      "id": "1b150212-fc98-4e8b-9881-8855eff15f7a",
+      "revision": 283,
+      "kind": "task.update",
+      "itemId": "slice-review",
+      "title": "Integrated slice review and release evidence",
+      "author": "Producer",
+      "source": "Exact 60590dd source pushed and game-only archive published privately; authoritative status succeeded",
+      "createdAt": "2026-10-10T21:14:21.911Z"
+    },
+    {
+      "id": "846b0a14-0df6-4410-bc3d-d40874cbe2e6",
+      "revision": 284,
+      "kind": "review",
+      "itemId": "review-d4fee7f9",
+      "title": "Published source 60590dd: accepted bounded desktop slice and remaining gates",
+      "author": "Producer",
+      "source": "Exact 60590dd source pushed and game-only archive published privately; authoritative status succeeded",
+      "createdAt": "2026-10-10T21:14:21.924Z"
+    },
+    {
+      "id": "0f1c4d52-f102-41cc-8ba8-b3d44fe7ea11",
+      "revision": 285,
+      "kind": "task.update",
+      "itemId": "slice-review",
+      "title": "Integrated slice review and release evidence",
+      "author": "Producer",
+      "source": "Independent post-push package evidence attached to current release",
+      "createdAt": "2026-10-10T21:15:16.583Z"
+    },
+    {
+      "id": "34751e29-3a72-4b5c-9f9c-65fc29b3a7a8",
+      "revision": 286,
+      "kind": "task.update",
+      "itemId": "task-b0a59d63",
+      "title": "Mote moving-player warning admission and encounter pacing",
+      "author": "Producer",
+      "source": "Clarified historical baseline versus current publication identity",
+      "createdAt": "2026-10-10T21:16:06.833Z"
+    },
+    {
+      "id": "a6c99890-6ec2-4a41-95bd-363ffde14cf4",
+      "revision": 287,
+      "kind": "review",
+      "itemId": "review-849748b8",
+      "title": "Independent release consistency accepted for 60590dd",
+      "author": "Producer",
+      "source": "Actual final release review and next bounded assignments",
+      "createdAt": "2026-10-10T21:18:06.032Z"
+    },
+    {
+      "id": "57b628a3-75e7-4c66-8502-80b29ce1d4a9",
+      "revision": 288,
+      "kind": "run",
+      "itemId": "run-2371c3fc",
+      "title": "Producer / Integrator · running",
+      "author": "Producer",
+      "source": "Actual final release review and next bounded assignments",
+      "createdAt": "2026-10-10T21:18:06.045Z"
+    },
+    {
+      "id": "adde8930-43b4-450e-919b-189293965ab0",
+      "revision": 289,
+      "kind": "run",
+      "itemId": "run-191e46db",
+      "title": "Engine specialist · running",
+      "author": "Producer",
+      "source": "Actual final release review and next bounded assignments",
+      "createdAt": "2026-10-10T21:18:06.056Z"
+    },
+    {
+      "id": "42423b1c-21af-429f-a4ae-3de6de919cb5",
+      "revision": 290,
+      "kind": "run",
+      "itemId": "run-a379c8fa",
+      "title": "Gameplay / Art / Audio specialist · running",
+      "author": "Producer",
+      "source": "Actual final release review and next bounded assignments",
+      "createdAt": "2026-10-10T21:18:06.078Z"
+    },
+    {
+      "id": "dedae9d3-2962-475a-bf6d-1e987bc8e67d",
+      "revision": 291,
+      "kind": "run",
+      "itemId": "run-eecda7db",
+      "title": "Production / Independent QA · running",
+      "author": "Producer",
+      "source": "Actual final release review and next bounded assignments",
+      "createdAt": "2026-10-10T21:18:06.093Z"
     }
   ],
   "runRecords": [
@@ -9304,6 +9561,94 @@
       "author": "Producer",
       "source": "Actual release preparation and specialist handoffs",
       "createdAt": "2026-10-10T21:09:40.335Z"
+    },
+    {
+      "id": "run-2371c3fc",
+      "title": "Producer / Integrator · running",
+      "agentId": "/root",
+      "agentLabel": "Producer / Integrator",
+      "state": "running",
+      "observedAt": "2026-10-10T21:18:06.041Z",
+      "taskIds": [
+        "slice-review"
+      ],
+      "summary": "Exact 60590dd private release is published and independently checked. Recording final metadata while broader slice acceptance remains open.",
+      "evidence": [
+        {
+          "label": "Current private release",
+          "kind": "note",
+          "path": "artifacts/private-release.json"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual final release review and next bounded assignments",
+      "createdAt": "2026-10-10T21:18:06.045Z"
+    },
+    {
+      "id": "run-191e46db",
+      "title": "Engine specialist · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Engine specialist",
+      "state": "running",
+      "observedAt": "2026-10-10T21:18:06.041Z",
+      "taskIds": [
+        "engine"
+      ],
+      "summary": "Actual optimized native extraction benchmark is frozen. Investigating a separate work-only candidate for bounded UI text allocation reuse.",
+      "evidence": [
+        {
+          "label": "Frozen CPU-only benchmark scope",
+          "kind": "note",
+          "path": "work/pixel-extraction-benchmark/REVIEW.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual final release review and next bounded assignments",
+      "createdAt": "2026-10-10T21:18:06.056Z"
+    },
+    {
+      "id": "run-a379c8fa",
+      "title": "Gameplay / Art / Audio specialist · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Gameplay / Art / Audio specialist",
+      "state": "running",
+      "observedAt": "2026-10-10T21:18:06.041Z",
+      "taskIds": [
+        "task-b0a59d63"
+      ],
+      "summary": "Running a source-pinned background-only palette/contact-sheet comparison against unchanged real Mote warnings and pulses; moving/human readability is not yet accepted.",
+      "evidence": [
+        {
+          "label": "Preserved current static appearance review",
+          "kind": "note",
+          "path": "artifacts/scar-art-browser-review.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual final release review and next bounded assignments",
+      "createdAt": "2026-10-10T21:18:06.078Z"
+    },
+    {
+      "id": "run-eecda7db",
+      "title": "Production / Independent QA · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "Production / Independent QA",
+      "state": "running",
+      "observedAt": "2026-10-10T21:18:06.041Z",
+      "taskIds": [
+        "slice-review"
+      ],
+      "summary": "Current deployment review is frozen. Starting a separate normal-build desktop stress capture through supported visible console controls; phones and 30-minute soak remain pending.",
+      "evidence": [
+        {
+          "label": "Independent accepted current release consistency",
+          "kind": "note",
+          "path": "artifacts/scar-deployment-ledger-review.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual final release review and next bounded assignments",
+      "createdAt": "2026-10-10T21:18:06.093Z"
     }
   ]
 }

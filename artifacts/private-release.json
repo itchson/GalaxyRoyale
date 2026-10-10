@@ -1,8 +1,8 @@
 {
-  "id": "appgdep_6aca9ee9cf70819193ea3635d83f048c",
+  "id": "appgdep_6acaaa34168881919323748e007acfb4",
   "project_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93",
   "title": "Galaxy Royale",
-  "version_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93~appgver_389e0f18dba08191ab2301dc2263fb9e",
+  "version_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93~appgver_ce2846970d1c8191ba31296cc8dc042e",
   "type": "publish",
   "status": "succeeded",
   "url": "https://galaxy-royale-itchson.itchson.chatgpt.site",
@@ -11,15 +11,15 @@
   "provider_deployment_id": "site---6aca50f5b1bc81918526a6ee969aac93",
   "failure_message": null,
   "env_set_revision": 0,
-  "updated_at": "2026-10-10T20:24:28.432211+00:00",
-  "commit_sha": "573906769122140e2e54021bdaf037ad6f887673",
-  "cacheVersion": "galaxy-eaac3b23e213e59b",
-  "browserAccess": "Exact owner-private publication succeeded. Actual unauthenticated browser reload shows Log in to access; owner-authenticated remote gameplay remains unmeasured. Current normal packaged localhost game observed on both renderers.",
-  "archiveContent": "Exactly20 files:18accepted cached game assets,sw.js and normalized dist/.openai/hosting.json. Source/studio/work/project/QA-contract/credentials excluded.",
-  "validation": "217 integrated Rust tests,70shell tests,strict TypeScript/native/WebGPU/WebGL2 Clippy and normal dual-WASM/game/studio build pass. Actual normal bothrenderer Mote body/rays/wheel0.6–1.6 and fixed UI, WebGPU smalllandscape, strict exported progression and Haven update flow pass within declared fixture scope. Separately recorded normal death/report/Retry and actual retained combat rewards, dock craft/selection/exact purchase/reload pass. Independent candidate, composition, package, final ledger and game-only archive reviews pass. Full moving/crowded warning readability,human balance,listening,physical phones,complete natural campaign,current full offline/recovery and owner-authenticated remote gameplay remain pending.",
+  "updated_at": "2026-10-10T21:12:40.630408+00:00",
+  "commit_sha": "60590ddcde0c8c66139bc6c1bea47bbd45e0a717",
+  "cacheVersion": "galaxy-86ea0d1b0d17f148",
+  "browserAccess": "Exact owner-private publication succeeded. An actual unauthenticated reload shows Log in to access. Authenticated remote game execution remains unmeasured. The current normal packaged localhost game was observed on both renderers.",
+  "archiveContent": "Exactly 20 files: 18 accepted cached game assets, sw.js and normalized dist/.openai/hosting.json. Source, Studio, work, project ledger, QA contract and credentials are excluded.",
+  "validation": "242 Rust tests (37 engine, 125 gameplay, 80 web), 79 shell tests, strict TypeScript/native/both-WASM Clippy and normal dual-WASM/game/Studio build pass. Both normal desktop renderers show the new scenery. Actual wheel zoom reaches 0.60 and 1.60 with fixed UI dimensions. Bounded emblem sizing, scroll clipping, narrow roster, declared victory presentation and QA travel are recorded. Six declared unchanged-AudioEngine browser recordings establish actual DSP/mute/suspend-resume/16-voice cleanup; independent decoding and native disposal pass. Exact source/archive and successful owner-private publication are recorded. Human listening, moving combat readability, full natural campaign, physical phones/soak, complete offline/recovery matrix and authenticated remote gameplay remain pending.",
   "backendHashes": {
-    "webgpu": "f4ed153e57f5252ccb761fcb8823f218a843017dd0fb7b4f47a14bd49c4eb0b4",
-    "webgl2": "7ccfc8f16db8e5509897ad7e9812fd63d35e6a45f9148491e8c24b35b7f4c490"
+    "webgpu": "08ea410749efe985d0ca85b927252ff4bf9cf35d23614180a32c21a08c88813b",
+    "webgl2": "82711ff7ba488c749bb4c4ed757ac19e3e929ddcb0dd589cc1702fd84c779cef"
   },
   "previousDeployments": [
     {
@@ -59,9 +59,26 @@
       "status": "succeeded",
       "updated_at": "2026-10-10T19:43:11.245673+00:00",
       "cacheVersion": "galaxy-79774fbb09d2dfb9"
+    },
+    {
+      "id": "appgdep_6aca9ee9cf70819193ea3635d83f048c",
+      "version_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93~appgver_389e0f18dba08191ab2301dc2263fb9e",
+      "commit_sha": "573906769122140e2e54021bdaf037ad6f887673",
+      "status": "succeeded",
+      "updated_at": "2026-10-10T20:24:28.432211+00:00",
+      "cacheVersion": "galaxy-eaac3b23e213e59b"
     }
   ],
   "evidence": [
+    "artifacts/scar-audio-integration-validation.md",
+    "artifacts/scar-audio-browser-validation.md",
+    "artifacts/scar-audio-package-review.md",
+    "artifacts/scar-audio-final-evidence-review.md",
+    "artifacts/champion-patch-browser-review.md",
+    "artifacts/mote-browser-dsp-review.md",
+    "artifacts/scar-art-browser-review.md",
+    "artifacts/scar-private-deployment.json",
+    "artifacts/scar-private-access.jpg",
     "artifacts/mote-browser-validation.md",
     "artifacts/mote-packaging-review.md",
     "artifacts/mote-final-evidence-review.md",
@@ -85,15 +102,11 @@
   "knownFollowups": [
     {
       "taskId": "task-b0a59d63",
-      "description": "Work-only moving-camera admission experiment, next browser/human A/B remains pending."
+      "description": "Work-only moving-camera warning admission candidate; current strict admission can suppress Mote pulses during continuous maximum-zoom reversals. Native firing recovers after stopping. Browser and human A/B remain pending."
     },
     {
       "taskId": "task-4a0debda",
-      "description": "Independently reviewed work-only charge/pulse SFX/event candidate; production/listening/mobile acceptance pending."
-    },
-    {
-      "taskId": "task-59dfc802",
-      "description": "Active original detailed Isotope Scar distant planet/wisp asset and actual-engine budget review, work-only."
+      "description": "Integrated charge/pulse SFX with actual desktop DSP evidence; human listening and phone audio acceptance remain pending."
     }
   ],
   "resolvedDeathIssue": {
@@ -107,8 +120,23 @@
     "description": "Original live712cell ordinary Radial Wastes variant with destructible emitters, staged attacks and normal reward/cap/sanctuary paths. Actual bounded bothrenderer presentation is recorded separately."
   },
   "archive": {
-    "path": "work/galaxy-mote-release-20261011.tar.gz",
-    "bytes": 2091331,
-    "sha256": "9cd2c1f4d82a4f44c9455a7cd3e21695e172ef04b47fb2f43e91accccd105a35"
+    "path": "work/galaxy-scar-audio-release-20261011.tar.gz",
+    "bytes": 2128701,
+    "sha256": "04e7211c43046f06816e1360b6a5722dd67de1a91e046a1b83a74565b77dad17"
+  },
+  "moteAudio": {
+    "taskId": "task-4a0debda",
+    "integratedInSource": "60590ddcde0c8c66139bc6c1bea47bbd45e0a717",
+    "description": "Real charge entry and accepted pulse events with original procedural SFX; declared native browser recordings are separate from natural combat listening."
+  },
+  "isotopeScar": {
+    "taskId": "task-59dfc802",
+    "integratedInSource": "60590ddcde0c8c66139bc6c1bea47bbd45e0a717",
+    "description": "Detailed original seeded distant planet with nested ion and fragment layers, existing parallax and shared cosmetic budgets."
+  },
+  "championEmblems": {
+    "taskId": "task-403cf3c4",
+    "integratedInSource": "60590ddcde0c8c66139bc6c1bea47bbd45e0a717",
+    "description": "Nine original occupied-cell UI emblems driven by actual earned/victory state; native extraction and representative browser fit/clipping reviewed."
   }
 }

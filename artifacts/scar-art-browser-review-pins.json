@@ -1,0 +1,62 @@
+{
+  "schema": 1,
+  "scope": "Static real normal-package screenshots; not moving warning, listening, physical mobile or soak acceptance.",
+  "files": {
+    "work/next-slice-art-review/BROWSER-ADDENDUM.md": {
+      "sha256": "59aaa64bd56393d865c117d1bfcec13bf8cbf08518c6dfd7a03fa5c3d496c496",
+      "bytes": 5142
+    },
+    "work/next-slice-art-review/REVIEW.md": {
+      "sha256": "615e270c214d536f0f77cded0693e7569b722355a6c07d7061b2c4055fa2d636",
+      "bytes": 6107
+    },
+    "work/next-slice-art-review/source-pins.json": {
+      "sha256": "d8c05a08c68fd5eb3485acee15bc93eec172018d24662a20d43275a9247a346a",
+      "bytes": 3103
+    },
+    "artifacts/scar-max-zoom-webgpu.jpg": {
+      "sha256": "98ddff556908f0fcec6b3c9a3ed5513e8a14ee423dd16cd158966bfb4d107929",
+      "bytes": 53128
+    },
+    "artifacts/scar-max-zoom-webgl2-current.jpg": {
+      "sha256": "38e31437bcd7c487d18bf1361a97f750ce963c101484cecf4cd07b6baca92b27",
+      "bytes": 47163
+    },
+    "artifacts/scar-min-zoom-webgpu.jpg": {
+      "sha256": "34ac2ffe3b8488b5622349c3f1dbd22ec07931dab57bb4ac5753d42e9e71843f",
+      "bytes": 40163
+    },
+    "artifacts/scar-min-zoom-webgl2.jpg": {
+      "sha256": "6f6959e9b440f5436eac3b5135a7ec572f995d5310a28ddeb27488f52aa2e35c",
+      "bytes": 36334
+    },
+    "artifacts/scar-reduced-static-webgpu.jpg": {
+      "sha256": "864a722fe2455f411b782f5c9483f1845f6668095d5d1ea411491b431f4718e8",
+      "bytes": 47210
+    },
+    "artifacts/scar-max-zoom-webgpu-stats.txt": {
+      "sha256": "cfd9d2e0becbc4005dc65efc2e7ebb801986e41c6626ba4d2e35ceeb848ca16b",
+      "bytes": 907
+    },
+    "artifacts/scar-min-zoom-webgl2-stats.txt": {
+      "sha256": "a8450156dba01fc59884898372b292c38c316d115394beb29ff3bfc9fe0e87be",
+      "bytes": 2188
+    },
+    "artifacts/scar-reduced-static-webgpu-stats.txt": {
+      "sha256": "f8f88219c1fedd1ef55507390107a90bb81ec270a78f33712ecbc6eee3187dba",
+      "bytes": 1623
+    },
+    "artifacts/scar-audio-browser-validation.md": {
+      "sha256": "191383b68a66b1679238bc45b9575eb7bcab9dfcb1b6ec663dd0d5c03673cf81",
+      "bytes": 6317
+    },
+    "work/mote-browser-audio-probe/REPORT.md": {
+      "sha256": "25f7054cf34c019e0074d26aeb8bd8e92b178957bbc9a5d4d1e2c44472a56a3b",
+      "bytes": 6429
+    },
+    "work/mote-browser-audio-probe/frozen-hashes.json": {
+      "sha256": "b3db7fdd711d13ca813faea886445ab9778ac2e655a469c120f3f4bc3a451c63",
+      "bytes": 5214
+    }
+  }
+}

@@ -1,0 +1,176 @@
+{
+  "recorded_utc": "2026-10-10T21:16:43.121Z",
+  "scope": "Read-only local committed-source/archive/result/ledger/captured-gate consistency; no credentials/auth/browser/publication actions",
+  "source_commit": "60590ddcde0c8c66139bc6c1bea47bbd45e0a717",
+  "cache": "galaxy-86ea0d1b0d17f148",
+  "project_revision": 286,
+  "current_build": {
+    "id": "build-2298ef01",
+    "title": "Detailed pixel scenery, champion emblems and Mote sound / 60590dd",
+    "body": "242 Rust tests (37 engine, 125 gameplay, 80 web), 79 shell tests, strict TypeScript/native/both-WASM Clippy and normal dual-WASM/game/Studio build pass. Both normal desktop renderers show the new scenery. Actual wheel zoom reaches 0.60 and 1.60 with fixed UI dimensions. Bounded emblem sizing, scroll clipping, narrow roster, declared victory presentation and QA travel are recorded. Six declared unchanged-AudioEngine browser recordings establish actual DSP/mute/suspend-resume/16-voice cleanup; independent decoding and native disposal pass. Exact source/archive and successful owner-private publication are recorded. Human listening, moving combat readability, full natural campaign, physical phones/soak, complete offline/recovery matrix and authenticated remote gameplay remain pending.",
+    "author": "Producer",
+    "source": "Exact 60590dd source pushed and game-only archive published privately; authoritative status succeeded",
+    "createdAt": "2026-10-10T21:14:21.88Z",
+    "revision": "60590ddcde0c8c66139bc6c1bea47bbd45e0a717",
+    "evidence": [
+      {
+        "label": "Exact successful private release identity and remaining gates",
+        "kind": "note",
+        "path": "artifacts/private-release.json"
+      },
+      {
+        "label": "Actual bounded normal browser observations",
+        "kind": "note",
+        "path": "artifacts/scar-audio-browser-validation.md"
+      },
+      {
+        "label": "Independent source and normal package acceptance",
+        "kind": "note",
+        "path": "artifacts/scar-audio-package-review.md"
+      },
+      {
+        "label": "Independent final evidence and ledger review",
+        "kind": "note",
+        "path": "artifacts/scar-audio-final-evidence-review.md"
+      },
+      {
+        "label": "Six real browser DSP captures and decoding",
+        "kind": "note",
+        "path": "artifacts/mote-browser-dsp-review.md"
+      }
+    ],
+    "checks": [
+      {
+        "name": "242 Rust tests",
+        "result": "pass"
+      },
+      {
+        "name": "79 shell tests and strict TypeScript",
+        "result": "pass"
+      },
+      {
+        "name": "Native and both WASM Clippy",
+        "result": "pass"
+      },
+      {
+        "name": "Normal dual-WASM game and Studio build; 18 cached game assets",
+        "result": "pass"
+      },
+      {
+        "name": "Representative both-renderer scenery, wheel bounds and fixed UI",
+        "result": "pass"
+      },
+      {
+        "name": "Authored icon sizing, representative scroll/narrow fit and declared victory emblem",
+        "result": "pass"
+      },
+      {
+        "name": "Six declared native browser audio captures, mute/recovery/cap/cleanup",
+        "result": "pass"
+      },
+      {
+        "name": "Exact-source private publication and protected access gate",
+        "result": "pass"
+      },
+      {
+        "name": "Physical phones / 60 FPS / 30-minute soak",
+        "result": "not_run"
+      },
+      {
+        "name": "Human listening and moving combat readability",
+        "result": "not_run"
+      },
+      {
+        "name": "Full natural champion/tournament/credits campaign",
+        "result": "not_run"
+      },
+      {
+        "name": "Authenticated current remote game execution",
+        "result": "not_run"
+      },
+      {
+        "name": "Complete current offline and graphics recovery matrix",
+        "result": "not_run"
+      }
+    ],
+    "url": "https://galaxy-royale-itchson.itchson.chatgpt.site/",
+    "knownIssues": "Work-only moving-camera warning admission candidate; current strict admission can suppress Mote pulses during continuous maximum-zoom reversals. Native firing recovers after stopping. Browser and human A/B remain pending. Integrated charge/pulse SFX with actual desktop DSP evidence; human listening and phone audio acceptance remain pending."
+  },
+  "authoritative_result": {
+    "id": "appgdep_6acaaa34168881919323748e007acfb4",
+    "version_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93~appgver_ce2846970d1c8191ba31296cc8dc042e",
+    "status": "succeeded",
+    "updated_at": "2026-10-10T21:12:40.630408+00:00"
+  },
+  "archive_sha256": "04e7211c43046f06816e1360b6a5722dd67de1a91e046a1b83a74565b77dad17",
+  "inputs": {
+    "artifacts/private-release.json": "c45ff5e757fc93a065c71893d6467a9ab2ddc62ae49ad53d90cd596cfad9a54b",
+    "artifacts/scar-private-deployment.json": "210bbfdcf719b620d27c0a46e4511d827cf02281eaf1424287f68760ed7c737d",
+    "artifacts/scar-private-access.jpg": "e6a960065b7e3edf7549d59def9dee797c812b4ec47872afdcf66d4b4fa8dde6",
+    "work/scar-audio-release-qa/board-deployment-286.json": "4cfbd4e534be38b39ad85d2b6db576d1bb915613ff7a2608417b180ec54d0254",
+    "work/scar-audio-release-qa/post-push-package-evidence.json": "aafb6addd8a57c8e254585b35a8cd7e2b22be97a32e2352f35e54a6e3ae6ab11"
+  },
+  "bounded_completed_tasks": [
+    {
+      "id": "task-59dfc802",
+      "status": "complete",
+      "dependencies": [
+        "engine",
+        "task-e8684a94"
+      ]
+    },
+    {
+      "id": "task-403cf3c4",
+      "status": "complete",
+      "dependencies": [
+        "engine"
+      ]
+    },
+    {
+      "id": "task-6c38f853",
+      "status": "complete",
+      "dependencies": [
+        "engine",
+        "task-168fe92e"
+      ]
+    }
+  ],
+  "broader_open_tasks": [
+    {
+      "id": "audio",
+      "status": "review"
+    },
+    {
+      "id": "task-4a0debda",
+      "status": "review"
+    },
+    {
+      "id": "task-b0a59d63",
+      "status": "review"
+    },
+    {
+      "id": "slice-review",
+      "status": "review"
+    },
+    {
+      "id": "performance",
+      "status": "review"
+    },
+    {
+      "id": "mobile",
+      "status": "backlog"
+    }
+  ],
+  "known_followups": [
+    {
+      "taskId": "task-b0a59d63",
+      "description": "Work-only moving-camera warning admission candidate; current strict admission can suppress Mote pulses during continuous maximum-zoom reversals. Native firing recovers after stopping. Browser and human A/B remain pending."
+    },
+    {
+      "taskId": "task-4a0debda",
+      "description": "Integrated charge/pulse SFX with actual desktop DSP evidence; human listening and phone audio acceptance remain pending."
+    }
+  ],
+  "private_gate": "Actual producer screenshot visibly says Log in to access; no authenticated game execution claimed",
+  "historical_release": "5739067/eaac retained as previous deployment, not current source/cache"
+}
