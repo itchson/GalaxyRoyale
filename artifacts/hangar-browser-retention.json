@@ -1,0 +1,51 @@
+{
+  "scope": "Actual normal WebGPU visible dock crafting/selection and WebGL2 ownership/selected-XP reload. Imported blueprint was declared, not won in this browser check. Native earned-blueprint/once-only tests are separate.",
+  "exactCost": {
+    "points": 10,
+    "materials": 6
+  },
+  "initial": {
+    "currency": [
+      10,
+      0,
+      0
+    ],
+    "stock": 6,
+    "revision": 3
+  },
+  "actual": {
+    "currency": [
+      0,
+      0,
+      0
+    ],
+    "stock": 0,
+    "revision": 5,
+    "crafted": [
+      true,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    "selected_ship": 1,
+    "ship_xp": [
+      60,
+      20,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "exactWholeProfileEquality": true,
+  "exactReloadEquality": true,
+  "unrelatedProgressionUnchanged": true
+}

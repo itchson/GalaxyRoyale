@@ -1,0 +1,38 @@
+{
+  "scope": "Actual normal WebGL2 runtime after declared R5 checkpoint import and visible SCENE combat. No firing input; authored automatic abilities made real shared-path kills. Not a naturally reached human campaign.",
+  "initial": {
+    "currency": [
+      7,
+      8,
+      9
+    ],
+    "xp": 1320,
+    "stock": 11
+  },
+  "actual": {
+    "currency": [
+      8,
+      8,
+      9
+    ],
+    "xp": 1350,
+    "stock": 11,
+    "revision": 17,
+    "last_run": {
+      "time": 8.400043487548828,
+      "distance_peak": 1600.6602783203125,
+      "enemies": 6,
+      "asteroids": 0,
+      "champions": 0,
+      "points_gained": [
+        1,
+        0,
+        0
+      ],
+      "xp_gained": 30,
+      "materials_gained": 0
+    }
+  },
+  "validProfiles": true,
+  "exactReloadEquality": true
+}

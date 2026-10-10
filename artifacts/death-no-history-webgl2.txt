@@ -1,0 +1,10 @@
+- generic "Galaxy Royale game universe"
+- status
+- generic: EXPEDITION ENDED
+- heading "SHIP LOST" [level=2]
+- paragraph: Your collected points and materials are safe at Haven.
+- generic "Expedition report":
+  - paragraph: NO EXPEDITION RECORDED
+  - paragraph: DOCK STASH 11 MATERIALS / SHIP LEVEL 12
+- button "RETRY EXPEDITION" [active]
+- button "RETURN TO TITLE"

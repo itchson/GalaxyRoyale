@@ -1,0 +1,26 @@
+- generic "Galaxy Royale game universe"
+- status
+- dialog "GALAXY ROYALE // CONSOLE":
+  - heading "GALAXY ROYALE // CONSOLE" [level=2]
+  - paragraph: "HELP / STATS / SCENE <NAME> / CLEAR / ` CLOSE"
+  - log "Console output":
+    - paragraph: "> scene combat"
+    - paragraph: SCENE COMBAT / ready. Close console to simulate.
+    - paragraph: "> stats"
+    - paragraph: WEBGL2 / 240 FPS / p95 4.30 ms
+    - paragraph: 5744 quads / 80 entities / 65 particles
+    - paragraph: POSITION 0.0, 0.0
+    - paragraph: Haven Expanse / Dock protected / danger 0
+    - paragraph: HULL 100/100 / SHIELD 0
+    - paragraph: ZOOM 1.00 / WORLD 533 x 300 / UI 533 x 300
+    - paragraph: SHIP LV 12 / XP 1350 / CARGO 0/16
+    - paragraph: LAST BOSS UI NONE
+    - paragraph: "> profile"
+    - paragraph: SCHEMA 3 / revision 17 / seed 1196576601
+    - paragraph: CURRENCY 8 / 8 / 9
+    - paragraph: BOSS GENERATIONS 0,0,0,0,0 / 0,0,0,0,0 / 0,0,0,0,0
+    - paragraph: DISCOVERIES 0 / quests 0 / relics 0
+    - paragraph: PATCHES 8/8 / ship 0 / Royale PENDING
+    - paragraph: Progress stays on this device.
+  - textbox "Console command" [active]:
+    - /placeholder: ENTER COMMAND

@@ -1,0 +1,14 @@
+- generic "Galaxy Royale game universe"
+- status
+- generic: EXPEDITION ENDED
+- heading "SHIP LOST" [level=2]
+- paragraph: Your collected points and materials are safe at Haven.
+- generic "Expedition report":
+  - paragraph: LAST RECORDED EXPEDITION
+  - paragraph: 8 SECONDS / 1601 M FURTHEST FROM HAVEN
+  - paragraph: 6 ENEMIES / 0 ASTEROIDS / 0 CHAMPIONS
+  - paragraph: BANKED POINTS / 1 / 0 / 0
+  - paragraph: 30 SHIP XP / 0 MATERIALS COLLECTED
+  - paragraph: DOCK STASH 11 MATERIALS / SHIP LEVEL 12
+- button "RETRY EXPEDITION" [active]
+- button "RETURN TO TITLE"

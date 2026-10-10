@@ -7,6 +7,8 @@ mod pixel_assets;
 pub use campaign::RunSummary;
 mod campaign_runtime;
 #[cfg(test)]
+mod diagnostic_death_tests;
+#[cfg(test)]
 mod weapon_cadence_tests;
 use bosses::BossEncounter;
 use campaign_runtime::{ArenaEncounter, ChampionFighter};
@@ -941,6 +943,11 @@ impl Game {
         if self.paused || !dt.is_finite() || dt <= 0.0 {
             return;
         }
+        // A forced QA death must resolve before regeneration, dock repair or
+        // an automatic ship-signature heal can restore an already dead hull.
+        if self.respawn_if_dead() {
+            return;
+        }
         let dt = dt.min(1.0 / 20.0);
         self.time += dt;
         for light in &mut self.transient_lights {
@@ -1018,6 +1025,12 @@ impl Game {
             self.maintain_stress();
         }
         self.camera += (self.position() - self.camera) * (1.0 - (-5.0 * dt).exp());
+        self.respawn_if_dead();
+    }
+
+    /// Preserve the same event, checkpoint and repair path for both an already
+    /// dead tick-entry hull and ordinary lethal collisions later in the tick.
+    fn respawn_if_dead(&mut self) -> bool {
         let dead = self
             .world
             .get::<&Actor>(self.player)
@@ -1030,6 +1043,7 @@ impl Game {
             self.reset_to_dock();
             self.shake = 3.0;
         }
+        dead
     }
 
     fn control(&mut self, input: &InputFrame, dt: f32) {

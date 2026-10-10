@@ -1,0 +1,167 @@
+{
+  "recorded_at": "2026-10-10T19:47:07.329Z",
+  "scope": "Future isolated diagnostic-death candidate: actual native public-Game tests. Root owns production integration/publication; no browser/device acceptance.",
+  "frozen_candidate_inputs": {
+    "production_base": "0a574a35c9d23f955fff05246da2cf4bf9a8065f5db58c63c365124f982337e6",
+    "read_only_inputs": {
+      "crates/game_core/src/biome_enemies.rs": "43b3736cb8da31872a62ac90f0f2b54e78f54ca7ee2f07ef622a45a7241e5cc8",
+      "crates/game_core/src/boss_assets.rs": "6f243e4211c7a40e0feaf35140b8b0300df65d061e2657d6490b90a6ef334699",
+      "crates/game_core/src/bosses.rs": "d98e4f74ff7e1a225a5ca9d6178164853ca65057fadf5d872706ab89523f2ebc",
+      "crates/game_core/src/campaign.rs": "ce3701246d366042841cca3a61ce1c83ea15bbfcd312a05fe5d6d7f991d0b5bc",
+      "crates/game_core/src/campaign_runtime.rs": "beaa27a19af8c62a23df0b6d6f820e924af51ed40f1d1e78a5cac25f8d7a4e58",
+      "crates/game_core/src/lib.rs": "0a574a35c9d23f955fff05246da2cf4bf9a8065f5db58c63c365124f982337e6",
+      "crates/game_core/src/pixel_assets.rs": "2b3a013aedb791af8161e61e0bf85b045d2ebdad5eaaa7e2f648d9451bff00ec",
+      "crates/game_core/src/regions.rs": "6d76c0f42e49c1a1adfd55d144e27536829c83e08976a80d0b0517ed8c977c1f",
+      "crates/game_core/src/weapon_cadence_tests.rs": "f26fa8fd4e08412b91dcafc15bd5379eda67d4492c636094a7b562c0093c1150",
+      "crates/engine_core/src/camera.rs": "b08164aa6c9a7e8364ee90e7205e70b702d2013c1861254da33610cb81fdf759",
+      "crates/engine_core/src/frame.rs": "4d8b1a965e1e98168dc62db3bf2f3aaf707b6b7be4d9d0b56225a73d0630ebc6",
+      "crates/engine_core/src/lib.rs": "eb84c4af2c35898ea6337503c2b169105ae5830f91c71ac7b441e7c114c6035a",
+      "crates/engine_core/src/pixel_rig.rs": "e18ed9ca3ac3a459c9c611a7083494d07d7aa9ed624453df623b9c64730b6582",
+      "crates/engine_core/src/pixels.rs": "3e9f228b54442f66a48a26d0a932b694b6cc22386846d28b7adda0e409f95b5c",
+      "crates/engine_core/src/topology.rs": "72b22bedd285bf61d6e2a74a6ce5d8eddc7f593004e268949574e949fa528bbc",
+      "crates/engine_core/src/transform.rs": "f511ceb89ac4445ce9749d1ed4086e672693357a1e6cf4f4f944dd8fe7220c74",
+      "assets/pixels/atlas.json": "1bc8a66f0e0c5d6bb5d9f6a3349032d10d854cb023cd70971e590d61c900051f",
+      "assets/pixels/boss-atlas.json": "0a946b13cef528578c6863b73fae0b9c2c1fd5ecdb6232bd8b37626875b9e3a3",
+      "assets/pixels/boss-budgets.json": "3c5c4ad9f8b67c06447d42f80a8496b8d2f8493d193e3d61fb8981b5ee10c3e5",
+      "assets/pixels/boss-native-proof.json": "316c96c78eba9ca83eb8a5fd40f3d08fec98f525cf7de38784c61effde03bf25",
+      "assets/pixels/riveter-atlas.json": "6bbf5a1333b486d54a7fb7f3600d89220dd774e1e80e9a699ad4edf75231247d",
+      "assets/pixels/riveter-provenance.json": "0b048ecb713eb995918d39a13e4552c6f0809e855bd7e609035f06021e011e12",
+      "Cargo.toml": "50b077a3fd8e0c8a42456948d6232ae86b2a1bbaa63652ee04da7848c776a3e3",
+      "Cargo.lock": "df228d9f83ef57321dcb768b79d948e9aa24456c0952e971fc8d6fcd7e806bdd",
+      "crates/game_core/Cargo.toml": "8997ce52e4c8a2384b2bfe5ef8d7778b6be42df8e1157b6c17300f931af16350"
+    },
+    "candidate": "df502b969f767842c12fbe330cf2db9db6bcae8455f8a6c5761cd64e781c5321",
+    "baseline": "a0ea446e5a650386a038f8532dbb1204b8b5023a9a31b500aa78f2dd40b73c05"
+  },
+  "current_read_only_inputs": {
+    "crates/game_core/src/biome_enemies.rs": {
+      "sha256": "43b3736cb8da31872a62ac90f0f2b54e78f54ca7ee2f07ef622a45a7241e5cc8",
+      "matches_frozen_input": true
+    },
+    "crates/game_core/src/boss_assets.rs": {
+      "sha256": "6f243e4211c7a40e0feaf35140b8b0300df65d061e2657d6490b90a6ef334699",
+      "matches_frozen_input": true
+    },
+    "crates/game_core/src/bosses.rs": {
+      "sha256": "d98e4f74ff7e1a225a5ca9d6178164853ca65057fadf5d872706ab89523f2ebc",
+      "matches_frozen_input": true
+    },
+    "crates/game_core/src/campaign.rs": {
+      "sha256": "ce3701246d366042841cca3a61ce1c83ea15bbfcd312a05fe5d6d7f991d0b5bc",
+      "matches_frozen_input": true
+    },
+    "crates/game_core/src/campaign_runtime.rs": {
+      "sha256": "beaa27a19af8c62a23df0b6d6f820e924af51ed40f1d1e78a5cac25f8d7a4e58",
+      "matches_frozen_input": true
+    },
+    "crates/game_core/src/lib.rs": {
+      "sha256": "0a574a35c9d23f955fff05246da2cf4bf9a8065f5db58c63c365124f982337e6",
+      "matches_frozen_input": true
+    },
+    "crates/game_core/src/pixel_assets.rs": {
+      "sha256": "2b3a013aedb791af8161e61e0bf85b045d2ebdad5eaaa7e2f648d9451bff00ec",
+      "matches_frozen_input": true
+    },
+    "crates/game_core/src/regions.rs": {
+      "sha256": "6d76c0f42e49c1a1adfd55d144e27536829c83e08976a80d0b0517ed8c977c1f",
+      "matches_frozen_input": true
+    },
+    "crates/game_core/src/weapon_cadence_tests.rs": {
+      "sha256": "f26fa8fd4e08412b91dcafc15bd5379eda67d4492c636094a7b562c0093c1150",
+      "matches_frozen_input": true
+    },
+    "crates/engine_core/src/camera.rs": {
+      "sha256": "b08164aa6c9a7e8364ee90e7205e70b702d2013c1861254da33610cb81fdf759",
+      "matches_frozen_input": true
+    },
+    "crates/engine_core/src/frame.rs": {
+      "sha256": "4d8b1a965e1e98168dc62db3bf2f3aaf707b6b7be4d9d0b56225a73d0630ebc6",
+      "matches_frozen_input": true
+    },
+    "crates/engine_core/src/lib.rs": {
+      "sha256": "eb84c4af2c35898ea6337503c2b169105ae5830f91c71ac7b441e7c114c6035a",
+      "matches_frozen_input": true
+    },
+    "crates/engine_core/src/pixel_rig.rs": {
+      "sha256": "e18ed9ca3ac3a459c9c611a7083494d07d7aa9ed624453df623b9c64730b6582",
+      "matches_frozen_input": true
+    },
+    "crates/engine_core/src/pixels.rs": {
+      "sha256": "3e9f228b54442f66a48a26d0a932b694b6cc22386846d28b7adda0e409f95b5c",
+      "matches_frozen_input": true
+    },
+    "crates/engine_core/src/topology.rs": {
+      "sha256": "72b22bedd285bf61d6e2a74a6ce5d8eddc7f593004e268949574e949fa528bbc",
+      "matches_frozen_input": true
+    },
+    "crates/engine_core/src/transform.rs": {
+      "sha256": "f511ceb89ac4445ce9749d1ed4086e672693357a1e6cf4f4f944dd8fe7220c74",
+      "matches_frozen_input": true
+    },
+    "assets/pixels/atlas.json": {
+      "sha256": "1bc8a66f0e0c5d6bb5d9f6a3349032d10d854cb023cd70971e590d61c900051f",
+      "matches_frozen_input": true
+    },
+    "assets/pixels/boss-atlas.json": {
+      "sha256": "0a946b13cef528578c6863b73fae0b9c2c1fd5ecdb6232bd8b37626875b9e3a3",
+      "matches_frozen_input": true
+    },
+    "assets/pixels/boss-budgets.json": {
+      "sha256": "3c5c4ad9f8b67c06447d42f80a8496b8d2f8493d193e3d61fb8981b5ee10c3e5",
+      "matches_frozen_input": true
+    },
+    "assets/pixels/boss-native-proof.json": {
+      "sha256": "316c96c78eba9ca83eb8a5fd40f3d08fec98f525cf7de38784c61effde03bf25",
+      "matches_frozen_input": true
+    },
+    "assets/pixels/riveter-atlas.json": {
+      "sha256": "6bbf5a1333b486d54a7fb7f3600d89220dd774e1e80e9a699ad4edf75231247d",
+      "matches_frozen_input": true
+    },
+    "assets/pixels/riveter-provenance.json": {
+      "sha256": "0b048ecb713eb995918d39a13e4552c6f0809e855bd7e609035f06021e011e12",
+      "matches_frozen_input": true
+    },
+    "Cargo.toml": {
+      "sha256": "50b077a3fd8e0c8a42456948d6232ae86b2a1bbaa63652ee04da7848c776a3e3",
+      "matches_frozen_input": true
+    },
+    "Cargo.lock": {
+      "sha256": "df228d9f83ef57321dcb768b79d948e9aa24456c0952e971fc8d6fcd7e806bdd",
+      "matches_frozen_input": true
+    },
+    "crates/game_core/Cargo.toml": {
+      "sha256": "8997ce52e4c8a2384b2bfe5ef8d7778b6be42df8e1157b6c17300f931af16350",
+      "matches_frozen_input": true
+    }
+  },
+  "sha256": {
+    "work/diagnostic-death-fix/candidate-lib.rs": "df502b969f767842c12fbe330cf2db9db6bcae8455f8a6c5761cd64e781c5321",
+    "work/diagnostic-death-fix/libgame_core_diagnostic_candidate.rlib": "635b0d0564ff9003d918509137fb43a73892898f9d654960aaa335a2970cf7ee",
+    "work/diagnostic-death-fix/baseline-lib.rs": "a0ea446e5a650386a038f8532dbb1204b8b5023a9a31b500aa78f2dd40b73c05",
+    "work/diagnostic-death-fix/libgame_core_diagnostic_baseline.rlib": "344a48363b7951918df2438b3bbae1c9e1f01055ed18483035872bd98da796de",
+    "work/diagnostic-death-fix/prepare.py": "38bfd8ccb82d600905301ed42caf79cda869103fe31f9783f8a8b31baade93cd",
+    "work/diagnostic-death-fix/integration.patch": "84731b826e6b52321027a2f3194204c560393e8ec33e345a2ac2da849c63190d",
+    "work/diagnostic-death-qa/main.rs": "1d8104473e09f296c915b1c349e4625b7790de6174eb255e51138b676e43c809",
+    "work/diagnostic-death-qa/death-proof.exe": "1e3b1530aaa2c6d80e2bd87174f90516adb9e320d1debd646b93a378cebb57ec",
+    "work/diagnostic-death-qa/baseline-proof.exe": "ad273db072fbfbca8c8f28bb3cc45f52c54950ca130f273c0a227a3eafb0ea4c",
+    "work/diagnostic-death-qa/baseline-failure.log": "9934befce77295486cbf022c89d1287eb1409b537e5700b06c546aa228f251fb",
+    "work/diagnostic-death-qa/execution.log": "12bf7097436b502a8fd0a371b259bc32b81e300c83750b8f2aed45329fb42ec9",
+    "work/diagnostic-death-qa/results.json": "4f4e1eb7d0cd77f02b38e25e669439fc6e847ff70836f5fa54232b20bca8d24e",
+    "target/debug/deps/libgame_core-684f3d0a8e530f28.rlib": "28d2393c45e2caafe3fd860d465c76a647c35279bf03d321e10d887617605059",
+    "assets/ui/campaign-atlas.json": "27c99be6b55e0e17a7d5149e566aedfa269fb266234ca24b44fa34c103524738",
+    "target/debug/deps/libengine_core-c6e44304da45d14c.rlib": "824a4777aa0599625808653ad1a4bb5e9fdba44861046f404dc39e8edefd4a01",
+    "target/debug/deps/libserde_json-b89616ee5c7ce7b6.rlib": "ac6d753893d07f240a833b695ee248ce596adf1ea0ca10f303900b132af0b9cb"
+  },
+  "observed_prior_release": {
+    "updated_at": "2026-10-10T19:43:11.245673+00:00",
+    "source_commit": "be3ae02adcf514d2f3a6e9687115a3c7da344d2d",
+    "cache": "galaxy-79774fbb09d2dfb9",
+    "scope": "Historical local publication metadata only; no current authenticated remote execution by this reviewer."
+  },
+  "review": {
+    "path": "work/diagnostic-death-qa/review.md",
+    "sha256": "cf35502bf386894b70151b11034c9b7c6d94aff32a1105107aefc70d002661bf",
+    "frozen_at": "2026-10-10T19:48:58.796Z"
+  }
+}

@@ -1138,6 +1138,11 @@ function showDeath(): void {
   const target = element("run-summary");
   target.replaceChildren();
   const summary = hud.last_run;
+  const report = document.createElement("p");
+  report.textContent = summary
+    ? "LAST RECORDED EXPEDITION"
+    : "NO EXPEDITION RECORDED";
+  target.append(report);
   if (summary) for (const line of [
     `${Math.round(summary.time)} SECONDS / ${Math.round(summary.distance_peak)} M FURTHEST FROM HAVEN`,
     `${summary.enemies} ENEMIES / ${summary.asteroids} ASTEROIDS / ${summary.champions} CHAMPIONS`,

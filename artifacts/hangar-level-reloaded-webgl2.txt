@@ -1,0 +1,58 @@
+- generic "Galaxy Royale game universe"
+- status
+- generic: HAVEN COMMAND
+- heading "EVOLVE YOUR SHIP" [level=2]
+- paragraph: Each rank costs 10 matching points and requires its ship level.
+- navigation "Command pages":
+  - button "UPGRADES" [active]
+  - button "HANGAR"
+  - button "CAMPAIGN"
+  - button "SETTINGS"
+  - button "JOURNAL"
+- paragraph: SHIP LEVEL 2 / 20 XP / NEXT LEVEL 60 XP. Rank cap 1/5.
+- generic: OFFENSIVE
+- generic: 0 PTS
+- article:
+  - heading "Pulse Caliber" [level=3]
+  - paragraph: +12% primary damage per rank
+  - button "UPGRADE / 10 PTS" [disabled]
+- article:
+  - heading "Rapid Cycling" [level=3]
+  - paragraph: +10% primary fire rate per rank
+  - button "UPGRADE / 10 PTS" [disabled]
+- article:
+  - heading "Pulse Echo / E1" [level=3]
+  - paragraph: "Every 8 shots releases a piercing fan; ranks improve its damage. Evolution 1: Piercing fan"
+  - button "BOSS SIGNATURE REQUIRED" [disabled]
+- generic: DEFENSIVE
+- generic: 0 PTS
+- article:
+  - heading "Reinforced Hull" [level=3]
+  - paragraph: +15 maximum hull per rank
+  - button "UPGRADE / 10 PTS" [disabled]
+- article:
+  - heading "Aegis Capacitors" [level=3]
+  - paragraph: 20 shield at rank 1, then +10; recharges after 4s
+  - button "UPGRADE / 10 PTS" [disabled]
+- article:
+  - heading "Repulsor Nova / E1" [level=3]
+  - paragraph: "Damage triggers a repulsive blast; ranks reduce its cooldown. Evolution 1: 70-unit nova"
+  - button "BOSS SIGNATURE REQUIRED" [disabled]
+- generic: PASSIVE
+- generic: 0 PTS
+- article:
+  - heading "Repair Nanites" [level=3]
+  - paragraph: +0.4 hull/s per rank after 5s without damage
+  - button "UPGRADE / 10 PTS" [disabled]
+- article:
+  - heading "Ion Thrusters" [level=3]
+  - paragraph: +4% speed and acceleration per rank
+  - button "UPGRADE / 10 PTS" [disabled]
+- article:
+  - heading "Ion Wake / E1" [level=3]
+  - paragraph: "Fast flight leaves a damaging wake; ranks improve its damage. Evolution 1: Two-second trail"
+  - button "BOSS SIGNATURE REQUIRED" [disabled]
+- button "RETURN TO FLIGHT ↗":
+  - text: RETURN TO FLIGHT
+  - generic: ↗
+- generic: Progress stays on this device.

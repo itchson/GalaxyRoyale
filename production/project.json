@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 216,
+  "revision": 222,
   "name": "Galaxy Royale",
   "phase": "Foundation → playable vertical slice",
-  "updatedAt": "2026-10-10T19:45:34.034Z",
+  "updatedAt": "2026-10-10T19:52:55.698Z",
   "tasks": [
     {
       "id": "studio",
@@ -2354,7 +2354,7 @@
     {
       "id": "task-0851af86",
       "title": "QA forced death: prevent eligible regeneration from reviving the fixture",
-      "description": "Independent cadence fixtures exposed that diagnostic(die) sets zero hull without resetting since_damage; already eligible R5 regeneration can heal it before death processing. Engine is preparing an isolated actual-core candidate; QA owns singledeath/report/retainedprogression/retry and naturallethal boundary review. No production fix yet.",
+      "description": "Reviewed runtime helper is now integrated locally: already-dead hull resolves once after valid/unpaused guards, before healing/firing; natural lethal collisions retain their original end-of-tick ordering. Eight durable actual Game::tick regressions and independent public-API probes preserve earned progression, banking, stable report and retry. Integrated201 Rust tests/native Clippy and a normal dual-WASM/web/studio build pass. Browser death/report/retry and truthful no-new-run QA presentation are next. Published be3ae02 remains unchanged until a later exact-source release.",
       "department": "Engine / QA",
       "owner": "Engine specialist / Independent QA / Producer",
       "status": "active",
@@ -2364,15 +2364,15 @@
       ],
       "acceptanceCriteria": [
         {
-          "text": "Actual forced death works with already eligible R5 regeneration and emits one death/run report.",
-          "met": false
+          "text": "Forced zero hull with eligible R5 regeneration or Sovereign healing emits one death; finishes a current run once without inventing an unplayed run.",
+          "met": true
         },
         {
-          "text": "Natural lethal damage, retained progression and Haven/retry semantics remain correct.",
-          "met": false
+          "text": "Natural lethal damage, retained progression, banking and Haven/retry semantics remain correct in actual native simulation.",
+          "met": true
         },
         {
-          "text": "Reviewed production integration and meaningful native regressions.",
+          "text": "Reviewed production integration, meaningful native regressions and actual browser death/report/retry.",
           "met": false
         }
       ],
@@ -2381,12 +2381,42 @@
           "label": "Actual independent finding and disclosed prior fixture limitation",
           "kind": "note",
           "path": "artifacts/weapon-cadence-qa-review.md"
+        },
+        {
+          "label": "Frozen actual-core candidate and negative controls",
+          "kind": "note",
+          "path": "artifacts/diagnostic-death-handoff.md"
+        },
+        {
+          "label": "Independent public-Game candidate review",
+          "kind": "note",
+          "path": "artifacts/diagnostic-death-qa-review.md"
+        },
+        {
+          "label": "Independent actual native measurements",
+          "kind": "note",
+          "path": "artifacts/diagnostic-death-qa-results.json"
+        },
+        {
+          "label": "Integrated201 Rust regressions",
+          "kind": "note",
+          "path": "artifacts/death-integration-rust-tests.log"
+        },
+        {
+          "label": "Integrated strict native Clippy",
+          "kind": "note",
+          "path": "artifacts/death-integration-clippy.log"
+        },
+        {
+          "label": "Normal dual-WASM and web/studio build",
+          "kind": "note",
+          "path": "artifacts/death-integration-build.log"
         }
       ],
       "blocker": "",
-      "revision": 1,
+      "revision": 2,
       "createdAt": "2026-10-10T19:40:44.436Z",
-      "updatedAt": "2026-10-10T19:40:44.436Z"
+      "updatedAt": "2026-10-10T19:52:55.620Z"
     }
   ],
   "reviews": [
@@ -2802,6 +2832,22 @@
         "task-6c761ea8",
         "task-696d7d24",
         "task-b27a43c9"
+      ]
+    },
+    {
+      "id": "review-a010a73f",
+      "title": "Shared death/reset path: accepted native production integration",
+      "body": "Actual asynchronous discussion: Engine demonstrated eligible R5 revival and a timer-only negative control still revived by Sovereign primary8. Independent QA accepted the shared early/final helper against public Game fixtures and a real449-tick lethal collision. Producer reviewed and integrated only runtime patch plus8durable tests;201integrated Rust tests and strict native Clippy pass. The normal dual-backend package builds. Prior-report QA-only presentation remains under read-only review; no invented rewards/time/report/schema. Browser checks and later publication remain pending; current private release staysbe3ae02.",
+      "author": "Producer",
+      "source": "Reviewed shared death helper integration and actual native/build evidence",
+      "createdAt": "2026-10-10T19:52:55.630Z",
+      "participants": [
+        "Engine specialist",
+        "Production specialist / Independent QA",
+        "Producer / Integrator"
+      ],
+      "taskIds": [
+        "task-0851af86"
       ]
     }
   ],
@@ -5488,6 +5534,66 @@
       "author": "Producer",
       "source": "Current published correction scope; preserve actual historical evidence",
       "createdAt": "2026-10-10T19:45:34.034Z"
+    },
+    {
+      "id": "1239667c-59eb-4b81-9b50-c8475742cb56",
+      "revision": 217,
+      "kind": "task.update",
+      "itemId": "task-0851af86",
+      "title": "QA forced death: prevent eligible regeneration from reviving the fixture",
+      "author": "Producer",
+      "source": "Reviewed shared death helper integration and actual native/build evidence",
+      "createdAt": "2026-10-10T19:52:55.620Z"
+    },
+    {
+      "id": "a554d7bb-5475-4691-bef7-26006a3a4339",
+      "revision": 218,
+      "kind": "review",
+      "itemId": "review-a010a73f",
+      "title": "Shared death/reset path: accepted native production integration",
+      "author": "Producer",
+      "source": "Reviewed shared death helper integration and actual native/build evidence",
+      "createdAt": "2026-10-10T19:52:55.630Z"
+    },
+    {
+      "id": "88136a6a-dbf2-4d3e-9c01-5a888f078ab9",
+      "revision": 219,
+      "kind": "run",
+      "itemId": "run-405d45ca",
+      "title": "Producer / Integrator · running",
+      "author": "Producer",
+      "source": "Reviewed shared death helper integration and actual native/build evidence",
+      "createdAt": "2026-10-10T19:52:55.656Z"
+    },
+    {
+      "id": "fd6ea63d-ecfb-44a7-8e52-dc42bfb8e185",
+      "revision": 220,
+      "kind": "run",
+      "itemId": "run-21569c08",
+      "title": "Engine specialist · running",
+      "author": "Producer",
+      "source": "Reviewed shared death helper integration and actual native/build evidence",
+      "createdAt": "2026-10-10T19:52:55.672Z"
+    },
+    {
+      "id": "521c99e5-ce88-4a4c-a4fc-76f7eeabda86",
+      "revision": 221,
+      "kind": "run",
+      "itemId": "run-ef48b1ad",
+      "title": "Gameplay specialist · running",
+      "author": "Producer",
+      "source": "Reviewed shared death helper integration and actual native/build evidence",
+      "createdAt": "2026-10-10T19:52:55.688Z"
+    },
+    {
+      "id": "4cca74ce-94cc-4417-b6c7-e45e4691c78b",
+      "revision": 222,
+      "kind": "run",
+      "itemId": "run-8b4cb3f1",
+      "title": "Production specialist / Independent QA · running",
+      "author": "Producer",
+      "source": "Reviewed shared death helper integration and actual native/build evidence",
+      "createdAt": "2026-10-10T19:52:55.698Z"
     }
   ],
   "runRecords": [
@@ -7213,6 +7319,194 @@
       "author": "Producer",
       "source": "Confirmed exact pushed-source private release and actual local validation",
       "createdAt": "2026-10-10T19:44:11.281Z"
+    },
+    {
+      "id": "run-405d45ca",
+      "title": "Producer / Integrator · running",
+      "agentId": "/root",
+      "agentLabel": "Producer / Integrator",
+      "state": "running",
+      "observedAt": "2026-10-10T19:52:55.640Z",
+      "taskIds": [
+        "task-0851af86"
+      ],
+      "summary": "Integrated reviewed shared helper and8durable regressions;201Rust/native Clippy/normal dual-WASM build pass. Preparing actual browser death/report/retry; current release remains unchanged.",
+      "evidence": [
+        {
+          "label": "Frozen actual-core candidate and negative controls",
+          "kind": "note",
+          "path": "artifacts/diagnostic-death-handoff.md"
+        },
+        {
+          "label": "Independent public-Game candidate review",
+          "kind": "note",
+          "path": "artifacts/diagnostic-death-qa-review.md"
+        },
+        {
+          "label": "Independent actual native measurements",
+          "kind": "note",
+          "path": "artifacts/diagnostic-death-qa-results.json"
+        },
+        {
+          "label": "Integrated201 Rust regressions",
+          "kind": "note",
+          "path": "artifacts/death-integration-rust-tests.log"
+        },
+        {
+          "label": "Integrated strict native Clippy",
+          "kind": "note",
+          "path": "artifacts/death-integration-clippy.log"
+        },
+        {
+          "label": "Normal dual-WASM and web/studio build",
+          "kind": "note",
+          "path": "artifacts/death-integration-build.log"
+        }
+      ],
+      "author": "Producer",
+      "source": "Reviewed shared death helper integration and actual native/build evidence",
+      "createdAt": "2026-10-10T19:52:55.656Z"
+    },
+    {
+      "id": "run-21569c08",
+      "title": "Engine specialist · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Engine specialist",
+      "state": "running",
+      "observedAt": "2026-10-10T19:52:55.666Z",
+      "taskIds": [
+        "task-e8684a94"
+      ],
+      "summary": "Running independent actual-core Radiation review against Gameplay frozen candidate; inspecting live cell/transforms/caps and post-follow camera telegraph clearance.",
+      "evidence": [
+        {
+          "label": "Frozen actual-core candidate and negative controls",
+          "kind": "note",
+          "path": "artifacts/diagnostic-death-handoff.md"
+        },
+        {
+          "label": "Independent public-Game candidate review",
+          "kind": "note",
+          "path": "artifacts/diagnostic-death-qa-review.md"
+        },
+        {
+          "label": "Independent actual native measurements",
+          "kind": "note",
+          "path": "artifacts/diagnostic-death-qa-results.json"
+        },
+        {
+          "label": "Integrated201 Rust regressions",
+          "kind": "note",
+          "path": "artifacts/death-integration-rust-tests.log"
+        },
+        {
+          "label": "Integrated strict native Clippy",
+          "kind": "note",
+          "path": "artifacts/death-integration-clippy.log"
+        },
+        {
+          "label": "Normal dual-WASM and web/studio build",
+          "kind": "note",
+          "path": "artifacts/death-integration-build.log"
+        }
+      ],
+      "author": "Producer",
+      "source": "Reviewed shared death helper integration and actual native/build evidence",
+      "createdAt": "2026-10-10T19:52:55.672Z"
+    },
+    {
+      "id": "run-ef48b1ad",
+      "title": "Gameplay specialist · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Gameplay specialist",
+      "state": "running",
+      "observedAt": "2026-10-10T19:52:55.681Z",
+      "taskIds": [
+        "task-e8684a94"
+      ],
+      "summary": "Running work-only actual-core Radiation integration with focused live destruction/rewards/spawn/sanctuary/maxzoom probes; not yet shipped.",
+      "evidence": [
+        {
+          "label": "Frozen actual-core candidate and negative controls",
+          "kind": "note",
+          "path": "artifacts/diagnostic-death-handoff.md"
+        },
+        {
+          "label": "Independent public-Game candidate review",
+          "kind": "note",
+          "path": "artifacts/diagnostic-death-qa-review.md"
+        },
+        {
+          "label": "Independent actual native measurements",
+          "kind": "note",
+          "path": "artifacts/diagnostic-death-qa-results.json"
+        },
+        {
+          "label": "Integrated201 Rust regressions",
+          "kind": "note",
+          "path": "artifacts/death-integration-rust-tests.log"
+        },
+        {
+          "label": "Integrated strict native Clippy",
+          "kind": "note",
+          "path": "artifacts/death-integration-clippy.log"
+        },
+        {
+          "label": "Normal dual-WASM and web/studio build",
+          "kind": "note",
+          "path": "artifacts/death-integration-build.log"
+        }
+      ],
+      "author": "Producer",
+      "source": "Reviewed shared death helper integration and actual native/build evidence",
+      "createdAt": "2026-10-10T19:52:55.688Z"
+    },
+    {
+      "id": "run-8b4cb3f1",
+      "title": "Production specialist / Independent QA · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "Production specialist / Independent QA",
+      "state": "running",
+      "observedAt": "2026-10-10T19:52:55.697Z",
+      "taskIds": [
+        "task-0851af86"
+      ],
+      "summary": "Running bounded death-report presentation review after frozen simulation acceptance; may independently QA actual-core Radiation when frozen.",
+      "evidence": [
+        {
+          "label": "Frozen actual-core candidate and negative controls",
+          "kind": "note",
+          "path": "artifacts/diagnostic-death-handoff.md"
+        },
+        {
+          "label": "Independent public-Game candidate review",
+          "kind": "note",
+          "path": "artifacts/diagnostic-death-qa-review.md"
+        },
+        {
+          "label": "Independent actual native measurements",
+          "kind": "note",
+          "path": "artifacts/diagnostic-death-qa-results.json"
+        },
+        {
+          "label": "Integrated201 Rust regressions",
+          "kind": "note",
+          "path": "artifacts/death-integration-rust-tests.log"
+        },
+        {
+          "label": "Integrated strict native Clippy",
+          "kind": "note",
+          "path": "artifacts/death-integration-clippy.log"
+        },
+        {
+          "label": "Normal dual-WASM and web/studio build",
+          "kind": "note",
+          "path": "artifacts/death-integration-build.log"
+        }
+      ],
+      "author": "Producer",
+      "source": "Reviewed shared death helper integration and actual native/build evidence",
+      "createdAt": "2026-10-10T19:52:55.698Z"
     }
   ]
 }

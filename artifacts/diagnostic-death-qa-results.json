@@ -1,0 +1,171 @@
+{
+  "atomic_unstarted_run": "retains previous summary; invents no new flight time or rewards",
+  "forced": [
+    {
+      "death_events": 1,
+      "eligible_regeneration_rank": 5,
+      "haven_hold_ticks": 60,
+      "postmortem_shots": 0,
+      "pre_death_hull": 175.0,
+      "retained_profile_exact": true,
+      "retry_real_shots": 1,
+      "scene": "Haven",
+      "summary": {
+        "asteroids": 0,
+        "champions": 0,
+        "distance_peak": 2000.0,
+        "enemies": 3,
+        "materials_gained": 2,
+        "points_gained": [
+          1,
+          0,
+          0
+        ],
+        "time": 12.0,
+        "xp_gained": 15
+      }
+    },
+    {
+      "death_events": 1,
+      "eligible_regeneration_rank": 5,
+      "haven_hold_ticks": 60,
+      "postmortem_shots": 0,
+      "pre_death_hull": 175.0,
+      "retained_profile_exact": true,
+      "retry_real_shots": 1,
+      "scene": "boss-dart-1",
+      "summary": {
+        "asteroids": 0,
+        "champions": 0,
+        "distance_peak": 2000.0,
+        "enemies": 3,
+        "materials_gained": 2,
+        "points_gained": [
+          1,
+          0,
+          0
+        ],
+        "time": 12.0,
+        "xp_gained": 15
+      }
+    },
+    {
+      "death_events": 1,
+      "eligible_regeneration_rank": 5,
+      "haven_hold_ticks": 60,
+      "postmortem_shots": 0,
+      "pre_death_hull": 175.0,
+      "retained_profile_exact": true,
+      "retry_real_shots": 1,
+      "scene": "boss-bastion-5",
+      "summary": {
+        "asteroids": 0,
+        "champions": 0,
+        "distance_peak": 2000.0,
+        "enemies": 3,
+        "materials_gained": 2,
+        "points_gained": [
+          1,
+          0,
+          0
+        ],
+        "time": 12.0,
+        "xp_gained": 15
+      }
+    },
+    {
+      "death_events": 1,
+      "eligible_regeneration_rank": 5,
+      "haven_hold_ticks": 60,
+      "postmortem_shots": 0,
+      "pre_death_hull": 175.0,
+      "retained_profile_exact": true,
+      "retry_real_shots": 1,
+      "scene": "boss-coil-5",
+      "summary": {
+        "asteroids": 0,
+        "champions": 0,
+        "distance_peak": 2000.0,
+        "enemies": 3,
+        "materials_gained": 2,
+        "points_gained": [
+          1,
+          0,
+          0
+        ],
+        "time": 12.0,
+        "xp_gained": 15
+      }
+    },
+    {
+      "death_events": 1,
+      "eligible_regeneration_rank": 5,
+      "haven_hold_ticks": 60,
+      "postmortem_shots": 0,
+      "pre_death_hull": 175.0,
+      "retained_profile_exact": false,
+      "retry_real_shots": 1,
+      "scene": "site",
+      "summary": {
+        "asteroids": 0,
+        "champions": 0,
+        "distance_peak": 2136.438720703125,
+        "enemies": 0,
+        "materials_gained": 0,
+        "points_gained": [
+          0,
+          0,
+          0
+        ],
+        "time": 0.05000000447034836,
+        "xp_gained": 0
+      }
+    }
+  ],
+  "natural_collision": {
+    "actual_seconds": 7.483333587646484,
+    "death_events": 1,
+    "death_tick": 449,
+    "hit_events": 12,
+    "reload_exact_no_death_event": true,
+    "retained_currency": [
+      7,
+      8,
+      9
+    ],
+    "retained_ship_xp": [
+      60,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "retained_stored_materials": 9,
+    "summary": {
+      "asteroids": 0,
+      "champions": 0,
+      "distance_peak": 1600.7542724609375,
+      "enemies": 0,
+      "materials_gained": 0,
+      "points_gained": [
+        0,
+        0,
+        0
+      ],
+      "time": 7.483376502990723,
+      "xp_gained": 0
+    }
+  },
+  "paused_invalid_dt": "no death until valid unpaused tick",
+  "scope": "Independent native actual public Game candidate; no production/browser/GPU/phone/human acceptance",
+  "sovereign_repair_boundary": {
+    "actual_primaries_before_death": 7,
+    "death_events": 1,
+    "postmortem_primaries": 0
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "schema_version": 3,
+  "revision": 17,
+  "seed": 1196576601,
+  "currency": [
+    8,
+    8,
+    9
+  ],
+  "ranks": [
+    5,
+    5,
+    0,
+    0,
+    5,
+    5,
+    5,
+    5,
+    5
+  ],
+  "unlocked": [
+    true,
+    true,
+    true
+  ],
+  "kills": [
+    3,
+    0,
+    3
+  ],
+  "boss_kills": [
+    0,
+    0,
+    0
+  ],
+  "boss_generations": [
+    [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  ],
+  "pity": [
+    0,
+    0,
+    0
+  ],
+  "pending": [
+    false,
+    false,
+    false
+  ],
+  "discoveries": [],
+  "quests": [],
+  "relics": [],
+  "campaign": {
+    "patches": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "blueprints": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "crafted": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "selected_ship": 0,
+    "royale_results": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "tournament_attempt": 0,
+    "victory_claimed": false,
+    "credits_seen": false,
+    "ship_xp": [
+      1350,
+      0,
+      20,
+      60,
+      120,
+      200,
+      420,
+      560,
+      900,
+      0
+    ],
+    "cargo_materials": 0,
+    "stored_materials": 11,
+    "last_run": {
+      "time": 8.400043487548828,
+      "distance_peak": 1600.6602783203125,
+      "enemies": 6,
+      "asteroids": 0,
+      "champions": 0,
+      "points_gained": [
+        1,
+        0,
+        0
+      ],
+      "xp_gained": 30,
+      "materials_gained": 0
+    }
+  }
+}

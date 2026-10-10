@@ -1,0 +1,56 @@
+- generic "Galaxy Royale game universe"
+- status
+- generic: HAVEN COMMAND
+- heading "SHIP HANGAR" [level=2]
+- paragraph: Craft blueprints and choose your next ship.
+- navigation "Command pages":
+  - button "UPGRADES"
+  - button "HANGAR" [active]
+  - button "CAMPAIGN"
+  - button "SETTINGS"
+  - button "JOURNAL"
+- paragraph: DOCK STASH 5 MATERIALS / craft for 10 matching points + 6 materials.
+- article:
+  - heading "Haven Scout" [level=3]
+  - paragraph: Standard pulse drive
+  - button "ACTIVE SHIP" [disabled]
+- article:
+  - heading "Dawnneedle" [level=3]
+  - paragraph: Needle burst every 4 shots
+  - button "CRAFT / 10 OFF + 6 MAT" [disabled]
+- article:
+  - heading "Bulwark" [level=3]
+  - paragraph: Broadside every 6 shots; +20 hull / -8% speed
+  - button "EARN BLUEPRINT" [disabled]
+- article:
+  - heading "Nightrail" [level=3]
+  - paragraph: Guided missile every 5 shots
+  - button "EARN BLUEPRINT" [disabled]
+- article:
+  - heading "Prism" [level=3]
+  - paragraph: Fork volley every 3 shots
+  - button "EARN BLUEPRINT" [disabled]
+- article:
+  - heading "Windrunner" [level=3]
+  - paragraph: Automatic fast-flight wake; +10% speed
+  - button "EARN BLUEPRINT" [disabled]
+- article:
+  - heading "Ironwake" [level=3]
+  - paragraph: Damage-triggered nova every 7.5 seconds; +10 hull
+  - button "EARN BLUEPRINT" [disabled]
+- article:
+  - heading "Voidcoil" [level=3]
+  - paragraph: Piercing seeker every 4 shots
+  - button "EARN BLUEPRINT" [disabled]
+- article:
+  - heading "Sunspear" [level=3]
+  - paragraph: Piercing spear every 6 shots
+  - button "EARN BLUEPRINT" [disabled]
+- article:
+  - heading "Royale Sovereign" [level=3]
+  - paragraph: Intrinsic rank5 offense/defense/passives; prism nova +4 repair; enhanced hull/shield/drive
+  - button "WIN ROYALE" [disabled]
+- button "RETURN TO FLIGHT ↗":
+  - text: RETURN TO FLIGHT
+  - generic: ↗
+- generic: Progress stays on this device.
