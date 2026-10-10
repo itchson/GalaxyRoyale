@@ -627,40 +627,45 @@ fn moving_player_and_accepted_dt_keep_post_follow_warning_and_pulses_in_view() {
     let mut profile = Profile::default();
     profile.ranks[3] = 5;
     profile.ranks[4] = 5;
-    profile.campaign.ship_xp[0] = 1320;
-    let mut total_emissions = 0;
-    for dt in [DT, 0.05] {
-        let (mut game, e) = setup(
-            Game::new(profile.clone()),
-            Vec2::new(533.0 / 1.6, 300.0 / 1.6),
-            -Vec2::Y * 100.0,
-        );
+    for (ui, levelled, dt) in [Vec2::new(533.0, 300.0), Vec2::new(320.0, 180.0)]
+        .into_iter()
+        .flat_map(|ui| [false, true].map(|levelled| (ui, levelled)))
+        .flat_map(|(ui, levelled)| [DT, 0.05].map(|dt| (ui, levelled, dt)))
+    {
+        profile.campaign.ship_xp[0] = if levelled { 1320 } else { 0 };
+        let (mut game, e) = setup(Game::new(profile.clone()), ui / 1.6, -Vec2::Y * 100.0);
         to_charge(&mut game, e);
         let mut cues = 0;
         let mut emitted = 0;
-        for step in 0..((8.0 / dt) as usize) {
+        let mut recovered = 0;
+        for step in 0..((20.0 / dt) as usize) {
+            let seconds = step as f32 * dt;
             let before: std::collections::HashSet<_> = hostile(&game).into_iter().collect();
-            let direction = if (step as f32 * dt) % 2.0 < 1.0 {
+            let direction = if seconds % 2.0 < 1.0 {
                 Vec2::X
             } else {
                 -Vec2::X
             };
             game.tick(
                 &InputFrame {
-                    joystick: Some(direction.to_array()),
+                    joystick: (seconds < 8.0).then_some(direction.to_array()),
                     ..Default::default()
                 },
                 dt,
             );
             assert!(
                 game.world.contains(e),
-                "declared eight-second moving fixture lost enemy"
+                "declared reversal/release fixture lost enemy"
             );
             let phase = phase(&game, e);
             let new = hostile(&game).into_iter().any(|b| !before.contains(&b));
             if matches!(phase, Phase::Charge | Phase::Attack) || new {
-                cues += 1;
-                emitted += new as usize;
+                if seconds < 8.0 {
+                    cues += 1;
+                    emitted += new as usize;
+                } else {
+                    recovered += new as usize;
+                }
                 let m = *game.world.get::<&Motion>(e).unwrap();
                 let a = *game.world.get::<&Actor>(e).unwrap();
                 for alpha in [0.0, 0.5, 1.0] {
@@ -679,21 +684,20 @@ fn moving_player_and_accepted_dt_keep_post_follow_warning_and_pulses_in_view() {
             }
             assert!(!game.take_events().iter().any(|event| event.kind == "death"));
         }
-        assert!(
-            cues > 0,
-            "fixture must actually enter a warning, not just remain nonfiring"
-        );
-        // Movement can intentionally interrupt charge. The stationary fixture
-        // separately proves a subsequent readable shot at every zoom extent.
+        if ui.x == 533.0 {
+            assert!(cues > 0);
+            assert!(
+                emitted > 0,
+                "ordinary maximum-zoom movement needs actual dispatch at each step size and ship level"
+            );
+        }
+        // A narrow view can intentionally interrupt every moving warning.
+        // Stopping must permit a fresh readable attack in every declared case.
+        assert!(recovered > 0, "no real pulse after releasing movement");
         eprintln!(
-            "moving-camera dt{dt}: {cues} visible charge/attack ticks, {emitted} real emitting ticks"
+            "moving-camera UI{ui:?}/levelled{levelled}/dt{dt}: {cues} visible moving ticks, {emitted} moving emissions, {recovered} recovered emissions"
         );
-        total_emissions += emitted;
     }
-    assert!(
-        total_emissions > 0,
-        "moving-camera check must include actual pulse dispatch, not just aborted warnings"
-    );
 }
 
 fn generated_shot_for_hit(game: &mut Game, e: Entity) -> Entity {

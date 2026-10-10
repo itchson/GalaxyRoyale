@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 291,
+  "revision": 304,
   "name": "Galaxy Royale",
   "phase": "Foundation → playable vertical slice",
-  "updatedAt": "2026-10-10T21:18:06.093Z",
+  "updatedAt": "2026-10-10T21:52:41.355Z",
   "tasks": [
     {
       "id": "studio",
@@ -2551,7 +2551,7 @@
     {
       "id": "task-b0a59d63",
       "title": "Mote moving-player warning admission and encounter pacing",
-      "description": "The exact original moving-camera replay and eight reversal/stop cases remain frozen as historical evidence. Interrupted warning admission suppressed shots at 60 Hz; all recorded cases resumed firing after stopping. A separate work-only interior-corner candidate improved the original replay from 34 cues / 0 pulses to 128 cues / 2 pulses while retaining all 16 core guard tests. The historical 5739067 baseline is preserved; the current private release is 60590dd. This tuning candidate is not integrated. Normal browser and human A/B review remain pending.",
+      "description": "Reviewed interior0.7corner candidates are integrated while preferred/outer candidates and all camera/player/sanctuary clearance/cancellation gates remain. Eight durable actual Game movement cases pass at fresh/levelled speeds and accepted dt1/60/.05. Ordinary533x300UI maxzoom emits during allfour moving cases; narrow320x180 moving remains suppressed, all8recover afterrelease. Broad natural moving readability/narrow/human/phone pacing stays Pending. Current final aim build also contains this bounded improvement.",
       "department": "Engine / Gameplay",
       "owner": "Engine specialist / Producer",
       "status": "review",
@@ -2584,12 +2584,22 @@
           "label": "Exact replay and reversal-stop results",
           "kind": "note",
           "path": "artifacts/mote-moving-admission-results.json"
+        },
+        {
+          "label": "Independent exact candidate engine review",
+          "kind": "note",
+          "path": "work/mote-current-engine-review/REVIEW.md"
+        },
+        {
+          "label": "Eight actual movement cases in complete native suite",
+          "kind": "note",
+          "path": "artifacts/cursor-aim-rust-tests.log"
         }
       ],
       "blocker": "",
-      "revision": 3,
+      "revision": 4,
       "createdAt": "2026-10-10T20:18:30.691Z",
-      "updatedAt": "2026-10-10T21:16:06.833Z"
+      "updatedAt": "2026-10-10T21:46:28.974Z"
     },
     {
       "id": "task-4a0debda",
@@ -2860,6 +2870,170 @@
       "revision": 3,
       "createdAt": "2026-10-10T20:55:40.331Z",
       "updatedAt": "2026-10-10T21:08:50.102Z"
+    },
+    {
+      "id": "task-aaf6d58e",
+      "title": "Desktop right-button cursor aim with independent flight course",
+      "description": "Right-held cursor is projected from the latest presented unshaken camera/world viewport every sample and supplied as transient aim to the Rust controller. Aim turns once per tick at existing720deg/sec, preserves course/braking and decouples aim-active keyboard thrust. Primary shots leave the actual nose with existing quarter ship-velocity inheritance. Mobile fire remains heading-based. Six actual Game regressions,15shell input tests,252Rust/87shell and strictTypeScript pass; current dual-WASM final build and independent release review are running. Final normal cache galaxy-37e3441c8c48302c is independently accepted; engine independently reran six actual source checks plus three owned tick/projectile checks. Actual isolated both-renderer right-button shots and one Haven-update activation are captured. Exact runtime commit/archive and private publication follow; wider phone/human acceptance remains separate.",
+      "department": "Engine / Input",
+      "owner": "Producer / Engine / Production QA",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [
+        "engine"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Actual fixed-tick heading/projectiles/course/arrival/stick/invalid input/sanctuary/pause/legacy behavior and shell camera/zoom/chord/cancel/mobile checks pass",
+          "met": true
+        },
+        {
+          "text": "Current normal dual-WASM package, independent source/archive review and bounded actual browser smoke are recorded accurately",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual complete native suite",
+          "kind": "note",
+          "path": "artifacts/cursor-aim-rust-tests.log"
+        },
+        {
+          "label": "Actual shell suite",
+          "kind": "note",
+          "path": "artifacts/cursor-aim-shell-tests.log"
+        },
+        {
+          "label": "Final input handoff",
+          "kind": "note",
+          "path": "work/zoom-tuning-release-review/INPUT_AIM_FINAL_ADDENDUM.md"
+        },
+        {
+          "label": "Actual fixed-tick and browser validation scope",
+          "kind": "note",
+          "path": "artifacts/cursor-aim-validation.md"
+        },
+        {
+          "label": "Independent native controller and bridge review",
+          "kind": "note",
+          "path": "artifacts/cursor-aim-engine-review.md"
+        },
+        {
+          "label": "Independent final local package review",
+          "kind": "note",
+          "path": "artifacts/cursor-aim-local-package-review.md"
+        },
+        {
+          "label": "Final actual WebGPU cursor-facing shots",
+          "kind": "note",
+          "path": "artifacts/cursor-aim-right-webgpu-final.jpg"
+        },
+        {
+          "label": "Final actual WebGL2 cursor-facing shots",
+          "kind": "note",
+          "path": "artifacts/cursor-aim-right-webgl2-final.jpg"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-10T21:46:28.902Z",
+      "updatedAt": "2026-10-10T21:52:21.848Z"
+    },
+    {
+      "id": "task-90acc365",
+      "title": "Bounded pixel-font wrapping without dynamic line allocation",
+      "description": "Reviewed fixed256-character/257span wrapper is integrated in pixel UI. Exact legacy newline/Unicode/truncation behavior has four durable oracle checks including98,040exhaustive whitespace and2100Unicode cases; actual native packet parity/allocator review is pinned. Measurements concern native allocations, not WASM stack highwater or phone performance. Current full suite passes; final package review is running. Final normal cache galaxy-37e3441c8c48302c is independently accepted; engine independently reran six actual source checks plus three owned tick/projectile checks. Actual isolated both-renderer right-button shots and one Haven-update activation are captured. Exact runtime commit/archive and private publication follow; wider phone/human acceptance remains separate.",
+      "department": "Engine / UI",
+      "owner": "Producer / Engine / Production QA",
+      "status": "review",
+      "priority": "normal",
+      "dependencies": [
+        "engine"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Exact legacy text behavior, bounds and actual production source/extraction review pass",
+          "met": true
+        },
+        {
+          "text": "Final normal dual-renderer build/package evidence and preserved bounded browser pixel text are recorded",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Independent production wrapper review",
+          "kind": "note",
+          "path": "work/ui-text-production-review/REVIEW.md"
+        },
+        {
+          "label": "Actual native suite",
+          "kind": "note",
+          "path": "artifacts/cursor-aim-rust-tests.log"
+        },
+        {
+          "label": "Actual fixed-tick and browser validation scope",
+          "kind": "note",
+          "path": "artifacts/cursor-aim-validation.md"
+        },
+        {
+          "label": "Independent native controller and bridge review",
+          "kind": "note",
+          "path": "artifacts/cursor-aim-engine-review.md"
+        },
+        {
+          "label": "Independent final local package review",
+          "kind": "note",
+          "path": "artifacts/cursor-aim-local-package-review.md"
+        },
+        {
+          "label": "Final actual WebGPU cursor-facing shots",
+          "kind": "note",
+          "path": "artifacts/cursor-aim-right-webgpu-final.jpg"
+        },
+        {
+          "label": "Final actual WebGL2 cursor-facing shots",
+          "kind": "note",
+          "path": "artifacts/cursor-aim-right-webgl2-final.jpg"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-10T21:46:28.932Z",
+      "updatedAt": "2026-10-10T21:52:21.869Z"
+    },
+    {
+      "id": "task-08d59c38",
+      "title": "Original Vesper distant comet pixel group and seeded admission design",
+      "description": "Work-only original64x48faceted nucleus and cached ion/dust/coma/grain PixelBodies are frozen. Full3632quads/5transforms,reduced846/4. Five native checks and strictClippy, actual packet/software views and ReducedMotion byte parity are pinned. Specialist is designing deterministic rare0.22field admission against existingScar/planets/shared budgets; no production integration or GPU/natural-placement claim.",
+      "department": "Art / Engine",
+      "owner": "Gameplay / Art specialist",
+      "status": "review",
+      "priority": "normal",
+      "dependencies": [
+        "engine"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Original local-cell art with actual engine helper/affine/budget/frozen-motion evidence",
+          "met": true
+        },
+        {
+          "text": "Independent review, deterministic seeded production integration and actual renderer presentation",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Frozen original comet handoff",
+          "kind": "note",
+          "path": "work/pixel-comet-art/README.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-10T21:46:28.948Z",
+      "updatedAt": "2026-10-10T21:46:28.948Z"
     }
   ],
   "reviews": [
@@ -3438,6 +3612,25 @@
       "taskIds": [
         "slice-review"
       ]
+    },
+    {
+      "id": "review-9d9b8253",
+      "title": "Actual asynchronous review: cursor facing, retained course and final pixel UI package",
+      "body": "Production implemented retained client cursor and per-sample unshaken projection with actual15input checks, then independently recomputed final18asset cache, parsed48/44normalWASMexports and pinned78inputs. It caught an incorrect mobile Aim+fire caption; producer restored Fire weapons, documented the contract and regenerated only gameweb/PWA. Production also corrected its own historical equality-guard rationale: input.enabled=canRun is a recovery transition, not everyRAF; no performance benefit was claimed. Engine independently compiled actual root six tests and three owned Game regressions for heading wrap, replacement-course arrival and moving swept primary shot/quarter-velocity; all9pass. Producer ran full252Rust/87shell/strictTS/native+bothWASMClippy and normaldualbuild, then observed actual right-facing ship/primary bullets on both normalIABrenderers in isolated QAfixture. Waitingbuild→Havenapply→reloadtitle→finalbothrendererfixture is real; physicalphones/performance/naturalcampaign are not inferred. Prior exact wrapper/Mote native reviews remain frozen. Palette/warning/Vesper prototypes remain work-only. Exact commit/archive/publication are next.",
+      "author": "Producer",
+      "source": "Actual frozen cursor-aim specialist reviews and observed normal browser checks",
+      "createdAt": "2026-10-10T21:52:21.879Z",
+      "participants": [
+        "Producer / Integrator / browser operator",
+        "Production specialist / input implementation / final package reviewer",
+        "Engine specialist / independent actual native and bridge reviewer"
+      ],
+      "taskIds": [
+        "task-aaf6d58e",
+        "task-90acc365",
+        "task-b0a59d63",
+        "slice-review"
+      ]
     }
   ],
   "decisions": [
@@ -3493,6 +3686,15 @@
       "author": "Producer",
       "source": "Actual Rust integration, independent reviews and visible packaged-game browser checks",
       "createdAt": "2026-10-10T19:12:42.903Z",
+      "status": "accepted"
+    },
+    {
+      "id": "decision-744ae95c",
+      "title": "Right-button aim uses smooth ship facing and preserves flight navigation",
+      "body": "User requested left click rotate/move and right click rotate/shoot. Active desktop world aim overrides only facing through one existing720deg/sec turn per fixed tick; left-course velocity/braking remain. Aim-active keyboard direction and residual velocity are decoupled from facing. Primary shots use actual nose plus existing quarter-velocity, including before turn completion. Cursor mapping uses latest presented unshaken camera/zoom every sample; aim is transient, mobile remains heading-fire, and no profile schema or new WASM export is introduced.",
+      "author": "Producer",
+      "source": "Actual frozen cursor-aim specialist reviews and observed normal browser checks",
+      "createdAt": "2026-10-10T21:52:41.342Z",
       "status": "accepted"
     }
   ],
@@ -4135,6 +4337,74 @@
       ],
       "url": "https://galaxy-royale-itchson.itchson.chatgpt.site/",
       "knownIssues": "Work-only moving-camera warning admission candidate; current strict admission can suppress Mote pulses during continuous maximum-zoom reversals. Native firing recovers after stopping. Browser and human A/B remain pending. Integrated charge/pulse SFX with actual desktop DSP evidence; human listening and phone audio acceptance remain pending."
+    },
+    {
+      "id": "build-ec2e4cbe",
+      "title": "Cursor aim / final local dual-renderer package",
+      "body": "Final normal cache galaxy-37e3441c8c48302c; exact source commit/private archive follow. Actual bounded native, shell, package and both-renderer browser observations are linked.",
+      "author": "Producer",
+      "source": "Actual frozen cursor-aim specialist reviews and observed normal browser checks",
+      "createdAt": "2026-10-10T21:52:41.355Z",
+      "revision": "uncommitted reviewed source",
+      "evidence": [
+        {
+          "label": "Actual fixed-tick and browser validation scope",
+          "kind": "note",
+          "path": "artifacts/cursor-aim-validation.md"
+        },
+        {
+          "label": "Independent native controller and bridge review",
+          "kind": "note",
+          "path": "artifacts/cursor-aim-engine-review.md"
+        },
+        {
+          "label": "Independent final local package review",
+          "kind": "note",
+          "path": "artifacts/cursor-aim-local-package-review.md"
+        },
+        {
+          "label": "Final actual WebGPU cursor-facing shots",
+          "kind": "note",
+          "path": "artifacts/cursor-aim-right-webgpu-final.jpg"
+        },
+        {
+          "label": "Final actual WebGL2 cursor-facing shots",
+          "kind": "note",
+          "path": "artifacts/cursor-aim-right-webgl2-final.jpg"
+        }
+      ],
+      "checks": [
+        {
+          "name": "252 Rust and87shell checks",
+          "result": "pass"
+        },
+        {
+          "name": "StrictTypeScript/native+bothWASMClippy",
+          "result": "pass"
+        },
+        {
+          "name": "NormaldualWASM/game/Studio build; final mobilecaption web/PWA correction",
+          "result": "pass"
+        },
+        {
+          "name": "Independent actual native and normal package review",
+          "result": "pass"
+        },
+        {
+          "name": "Actual both-renderer right-button aim/fire and one Haven update",
+          "result": "pass"
+        },
+        {
+          "name": "Exact runtime commit/archive/private publication",
+          "result": "not_run"
+        },
+        {
+          "name": "Physicalphones/30minute soak/fullnaturalcampaign",
+          "result": "not_run"
+        }
+      ],
+      "url": "http://127.0.0.1:4191/?qa=1&renderer=webgpu",
+      "knownIssues": "Broader Mote narrow moving readability, human judgment, physicaldevices/soak and authenticated remote gameplay remain pending."
     }
   ],
   "feedback": [],
@@ -7048,6 +7318,136 @@
       "author": "Producer",
       "source": "Actual final release review and next bounded assignments",
       "createdAt": "2026-10-10T21:18:06.093Z"
+    },
+    {
+      "id": "84ff87a3-90f3-4828-a359-608cca4283ea",
+      "revision": 292,
+      "kind": "task.create",
+      "itemId": "task-aaf6d58e",
+      "title": "Desktop right-button cursor aim with independent flight course",
+      "author": "Producer",
+      "source": "Actual cursor-aim implementation and frozen specialist handoffs",
+      "createdAt": "2026-10-10T21:46:28.902Z"
+    },
+    {
+      "id": "9e7da90e-b2a5-491a-9975-b54a5f5e5534",
+      "revision": 293,
+      "kind": "task.create",
+      "itemId": "task-90acc365",
+      "title": "Bounded pixel-font wrapping without dynamic line allocation",
+      "author": "Producer",
+      "source": "Actual cursor-aim implementation and frozen specialist handoffs",
+      "createdAt": "2026-10-10T21:46:28.932Z"
+    },
+    {
+      "id": "16c92d38-6013-4369-b726-0f7d54633718",
+      "revision": 294,
+      "kind": "task.create",
+      "itemId": "task-08d59c38",
+      "title": "Original Vesper distant comet pixel group and seeded admission design",
+      "author": "Producer",
+      "source": "Actual cursor-aim implementation and frozen specialist handoffs",
+      "createdAt": "2026-10-10T21:46:28.948Z"
+    },
+    {
+      "id": "615de253-22e3-4cdd-ad97-48acddc7f8f2",
+      "revision": 295,
+      "kind": "task.update",
+      "itemId": "task-b0a59d63",
+      "title": "Mote moving-player warning admission and encounter pacing",
+      "author": "Producer",
+      "source": "Actual cursor-aim implementation and frozen specialist handoffs",
+      "createdAt": "2026-10-10T21:46:28.974Z"
+    },
+    {
+      "id": "67f9b8f0-17f2-4b64-886c-781f0bc66740",
+      "revision": 296,
+      "kind": "run",
+      "itemId": "run-dd0db4da",
+      "title": "Producer / Integrator · running",
+      "author": "Producer",
+      "source": "Actual cursor-aim implementation and frozen specialist handoffs",
+      "createdAt": "2026-10-10T21:46:28.986Z"
+    },
+    {
+      "id": "2beae430-f7ba-4956-b2fc-a98aff042686",
+      "revision": 297,
+      "kind": "run",
+      "itemId": "run-dccbbbd0",
+      "title": "Engine specialist · running",
+      "author": "Producer",
+      "source": "Actual cursor-aim implementation and frozen specialist handoffs",
+      "createdAt": "2026-10-10T21:46:29.005Z"
+    },
+    {
+      "id": "22761252-bf27-4f80-8d65-5040dc9dab1c",
+      "revision": 298,
+      "kind": "run",
+      "itemId": "run-f277b7c6",
+      "title": "Production / Independent QA · running",
+      "author": "Producer",
+      "source": "Actual cursor-aim implementation and frozen specialist handoffs",
+      "createdAt": "2026-10-10T21:46:29.021Z"
+    },
+    {
+      "id": "75209787-e54a-4ea4-9eff-e8d84c31c458",
+      "revision": 299,
+      "kind": "run",
+      "itemId": "run-2dfd11df",
+      "title": "Gameplay / Art specialist · running",
+      "author": "Producer",
+      "source": "Actual cursor-aim implementation and frozen specialist handoffs",
+      "createdAt": "2026-10-10T21:46:29.037Z"
+    },
+    {
+      "id": "fbe275fa-e905-4544-a604-37f5823edbe5",
+      "revision": 300,
+      "kind": "task.update",
+      "itemId": "task-aaf6d58e",
+      "title": "Desktop right-button cursor aim with independent flight course",
+      "author": "Producer",
+      "source": "Actual frozen cursor-aim specialist reviews and observed normal browser checks",
+      "createdAt": "2026-10-10T21:52:21.848Z"
+    },
+    {
+      "id": "ceea0313-d31a-4ba4-a69c-f56e93a7d0da",
+      "revision": 301,
+      "kind": "task.update",
+      "itemId": "task-90acc365",
+      "title": "Bounded pixel-font wrapping without dynamic line allocation",
+      "author": "Producer",
+      "source": "Actual frozen cursor-aim specialist reviews and observed normal browser checks",
+      "createdAt": "2026-10-10T21:52:21.869Z"
+    },
+    {
+      "id": "6025f28c-9e09-4222-a9fb-eab0d85eeeb8",
+      "revision": 302,
+      "kind": "review",
+      "itemId": "review-9d9b8253",
+      "title": "Actual asynchronous review: cursor facing, retained course and final pixel UI package",
+      "author": "Producer",
+      "source": "Actual frozen cursor-aim specialist reviews and observed normal browser checks",
+      "createdAt": "2026-10-10T21:52:21.879Z"
+    },
+    {
+      "id": "3bc3b047-4cf2-4d96-995c-baff90ee621e",
+      "revision": 303,
+      "kind": "decision",
+      "itemId": "decision-744ae95c",
+      "title": "Right-button aim uses smooth ship facing and preserves flight navigation",
+      "author": "Producer",
+      "source": "Actual frozen cursor-aim specialist reviews and observed normal browser checks",
+      "createdAt": "2026-10-10T21:52:41.342Z"
+    },
+    {
+      "id": "eea88002-33b7-4921-9ea6-ae6fb35e3d03",
+      "revision": 304,
+      "kind": "build",
+      "itemId": "build-ec2e4cbe",
+      "title": "Cursor aim / final local dual-renderer package",
+      "author": "Producer",
+      "source": "Actual frozen cursor-aim specialist reviews and observed normal browser checks",
+      "createdAt": "2026-10-10T21:52:41.355Z"
     }
   ],
   "runRecords": [
@@ -9649,6 +10049,99 @@
       "author": "Producer",
       "source": "Actual final release review and next bounded assignments",
       "createdAt": "2026-10-10T21:18:06.093Z"
+    },
+    {
+      "id": "run-dd0db4da",
+      "title": "Producer / Integrator · running",
+      "agentId": "/root",
+      "agentLabel": "Producer / Integrator",
+      "state": "running",
+      "observedAt": "2026-10-10T21:46:28.984Z",
+      "taskIds": [
+        "task-aaf6d58e",
+        "task-90acc365",
+        "task-b0a59d63",
+        "slice-review"
+      ],
+      "summary": "Integrated transient native aim and six actual-tick regressions; full252Rust/87shell/TS pass. Normal dual-WASM build underway; owns final browser/release/ledger integration.",
+      "evidence": [
+        {
+          "label": "Actual native checks",
+          "kind": "note",
+          "path": "artifacts/cursor-aim-rust-tests.log"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual cursor-aim implementation and frozen specialist handoffs",
+      "createdAt": "2026-10-10T21:46:28.986Z"
+    },
+    {
+      "id": "run-dccbbbd0",
+      "title": "Engine specialist · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Engine specialist",
+      "state": "running",
+      "observedAt": "2026-10-10T21:46:28.984Z",
+      "taskIds": [
+        "task-aaf6d58e",
+        "task-90acc365"
+      ],
+      "summary": "Running independent actual native/bridge cursor arbitration review after frozen baseline recommendation; prior wrapper/Mote source reviews remain immutable.",
+      "evidence": [
+        {
+          "label": "Baseline arbitration recommendation",
+          "kind": "note",
+          "path": "work/cursor-aim-engine-review/BASELINE_RECOMMENDATION.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual cursor-aim implementation and frozen specialist handoffs",
+      "createdAt": "2026-10-10T21:46:29.005Z"
+    },
+    {
+      "id": "run-f277b7c6",
+      "title": "Production / Independent QA · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "Production / Independent QA",
+      "state": "running",
+      "observedAt": "2026-10-10T21:46:28.984Z",
+      "taskIds": [
+        "task-aaf6d58e",
+        "slice-review"
+      ],
+      "summary": "Finalinput.ts owned implementation and15shellchecks are frozen; now independently reviewing final source and replacing-package identities without editing production.",
+      "evidence": [
+        {
+          "label": "Final input handoff",
+          "kind": "note",
+          "path": "work/zoom-tuning-release-review/INPUT_AIM_FINAL_ADDENDUM.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual cursor-aim implementation and frozen specialist handoffs",
+      "createdAt": "2026-10-10T21:46:29.021Z"
+    },
+    {
+      "id": "run-2dfd11df",
+      "title": "Gameplay / Art specialist · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Gameplay / Art specialist",
+      "state": "running",
+      "observedAt": "2026-10-10T21:46:28.984Z",
+      "taskIds": [
+        "task-08d59c38"
+      ],
+      "summary": "Original work-onlyVesper art is frozen; running separate deterministic rare-field admission design against actual0.22parallax and shared budgets; no production changes.",
+      "evidence": [
+        {
+          "label": "Actual comet art/tests handoff",
+          "kind": "note",
+          "path": "work/pixel-comet-art/README.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual cursor-aim implementation and frozen specialist handoffs",
+      "createdAt": "2026-10-10T21:46:29.037Z"
     }
   ]
 }

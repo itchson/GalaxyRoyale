@@ -433,6 +433,9 @@ fn choose_target(from: Vec2, input: &Input<'_>, orbit_sign: f32) -> Option<Vec2>
         Vec2::new(-half.x * orbit_sign, half.y),
     ];
     std::iter::once(preferred)
+        // Legal interior candidates leave headroom for camera follow. Keep
+        // outer corners available when player/path clearance rejects them.
+        .chain(corners.map(|corner| center + corner * 0.7))
         .chain(corners.map(|corner| center + corner))
         .enumerate()
         .filter(|(_, target)| legal_target(*target, from, input))

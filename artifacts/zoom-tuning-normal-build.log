@@ -1,0 +1,28 @@
+
+> galaxy-royale@0.1.0 build
+> node scripts/build.mjs
+
+   Compiling game_core v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\game_core)
+   Compiling game_web v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\game_web)
+    Finished `release` profile [optimized] target(s) in 5.77s
+   Compiling game_web v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\game_web)
+    Finished `release` profile [optimized] target(s) in 1.87s
+vite v7.3.7 building client environment for production...
+transforming...
+✓ 16 modules transformed.
+rendering chunks...
+computing gzip size...
+../../dist/index.html                  8.29 kB │ gzip:  2.52 kB
+../../dist/assets/index-bpgry9H8.css  27.24 kB │ gzip:  6.02 kB
+../../dist/assets/index-oP-g76g6.js   81.54 kB │ gzip: 27.38 kB
+✓ built in 265ms
+PWA: 18 game assets cached under galaxy-dd480c6594d85d10
+vite v7.3.7 building client environment for production...
+transforming...
+✓ 4 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                  0.42 kB │ gzip: 0.30 kB
+dist/assets/index-CJO5m6Xn.css  20.31 kB │ gzip: 5.68 kB
+dist/assets/index-Bo4PpsBY.js   20.49 kB │ gzip: 7.33 kB
+✓ built in 72ms

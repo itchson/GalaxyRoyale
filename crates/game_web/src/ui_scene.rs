@@ -621,7 +621,7 @@ impl Painter<'_> {
         };
         for (row, line) in lines.iter().take(rows).enumerate() {
             let left = if centered {
-                rect[0] + (rect[2] - (line.chars().count() as f32 * 6.0 - 1.0) * font) * 0.5
+                rect[0] + (rect[2] - (line.len() as f32 * 6.0 - 1.0) * font) * 0.5
             } else {
                 rect[0]
             };
@@ -916,31 +916,109 @@ fn brighten(color: u32) -> u32 {
         a,
     ])
 }
-fn wrap(text: &str, columns: usize) -> Vec<String> {
-    let text: String = text.chars().take(256).collect();
-    let mut lines = Vec::new();
-    for paragraph in text.split('\n') {
-        let mut line = String::new();
-        for word in paragraph.split_whitespace() {
-            let chars: Vec<_> = word.chars().collect();
-            if !line.is_empty() && line.chars().count() + 1 + chars.len() > columns {
-                lines.push(std::mem::take(&mut line));
-            }
-            for chunk in chars.chunks(columns) {
-                if !line.is_empty() {
-                    line.push(' ');
-                }
-                line.extend(chunk);
-                if line.chars().count() >= columns {
-                    lines.push(std::mem::take(&mut line));
-                }
-            }
-        }
-        if !line.is_empty() || paragraph.is_empty() {
-            lines.push(line);
+// Private bounded layout; public UI nodes and cached glyph objects are unchanged.
+const TEXT_CHARS: usize = 256;
+const TEXT_LINES: usize = TEXT_CHARS + 1;
+
+#[derive(Clone, Copy, Default)]
+struct LineSpan {
+    start: u16,
+    end: u16,
+}
+struct WrappedLines {
+    chars: [char; TEXT_CHARS],
+    spans: [LineSpan; TEXT_LINES],
+    used: usize,
+    lines: usize,
+}
+struct WrappedLine<'a>(&'a [char]);
+impl WrappedLine<'_> {
+    fn len(&self) -> usize {
+        self.0.len()
+    }
+    fn chars(&self) -> impl Iterator<Item = char> + '_ {
+        self.0.iter().copied()
+    }
+}
+impl WrappedLines {
+    fn new() -> Self {
+        Self {
+            chars: ['\0'; TEXT_CHARS],
+            spans: [LineSpan::default(); TEXT_LINES],
+            used: 0,
+            lines: 0,
         }
     }
-    lines
+    fn len(&self) -> usize {
+        self.lines
+    }
+    fn iter(&self) -> impl Iterator<Item = WrappedLine<'_>> {
+        self.spans[..self.lines]
+            .iter()
+            .map(|span| WrappedLine(&self.chars[span.start as usize..span.end as usize]))
+    }
+    fn append(&mut self, chars: &[char]) {
+        self.chars[self.used..self.used + chars.len()].copy_from_slice(chars);
+        self.used += chars.len();
+    }
+    fn line(&mut self, start: usize) {
+        self.spans[self.lines] = LineSpan {
+            start: start as u16,
+            end: self.used as u16,
+        };
+        self.lines += 1;
+    }
+}
+
+fn wrap(text: &str, columns: usize) -> WrappedLines {
+    // Painter::text returns before calling us when columns is zero.
+    assert!(columns > 0);
+    let mut input = ['\0'; TEXT_CHARS];
+    let mut length = 0;
+    for character in text.chars().take(TEXT_CHARS) {
+        input[length] = character;
+        length += 1;
+    }
+    let mut output = WrappedLines::new();
+    let mut paragraph_start = 0;
+    for paragraph_end in 0..=length {
+        if paragraph_end < length && input[paragraph_end] != '\n' {
+            continue;
+        }
+        let mut cursor = paragraph_start;
+        let mut line_start = output.used;
+        while cursor < paragraph_end {
+            if input[cursor].is_whitespace() {
+                cursor += 1;
+                continue;
+            }
+            let word_start = cursor;
+            while cursor < paragraph_end && !input[cursor].is_whitespace() {
+                cursor += 1;
+            }
+            if output.used > line_start
+                && output.used - line_start + 1 + cursor - word_start > columns
+            {
+                output.line(line_start);
+                line_start = output.used;
+            }
+            for chunk in input[word_start..cursor].chunks(columns) {
+                if output.used > line_start {
+                    output.append(&[' ']);
+                }
+                output.append(chunk);
+                if output.used - line_start >= columns {
+                    output.line(line_start);
+                    line_start = output.used;
+                }
+            }
+        }
+        if output.used > line_start || paragraph_start == paragraph_end {
+            output.line(line_start);
+        }
+        paragraph_start = paragraph_end + 1;
+    }
+    output
 }
 
 #[cfg(test)]
@@ -1321,3 +1399,7 @@ mod tests {
         }));
     }
 }
+
+#[cfg(test)]
+#[path = "ui_wrap_tests.rs"]
+mod wrapping_tests;

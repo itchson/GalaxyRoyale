@@ -1,0 +1,22 @@
+Browser tab: 22, Title: "Galaxy Royale", URL: "http://127.0.0.1:4191/?qa=1&renderer=webgpu".
+0 AXWebArea Galaxy Royale, URL: 127.0.0.1:4191/?qa=1&renderer=webgpu
+	1 image Description: Galaxy Royale game universe, ID: universe
+	2 container GALAXY ROYALE // CONSOLE, ID: debug-console
+		3 heading GALAXY ROYALE // CONSOLE, Value: 2, ID: console-title
+			4 text GALAXY ROYALE // CONSOLE
+		5 text HELP / STATS / SCENE <NAME> / CLEAR / ` CLOSE
+		6 container Description: Console output, ID: console-output
+			7 text > SCENE biome-mote
+			8 text SCENE BIOME-MOTE / ready. Close console to simulate.
+			9 text > STATS
+			10 text WEBGPU / 240 FPS / p95 4.30 ms
+			11 text 4783 quads / 13 entities / 16 particles
+			12 text POSITION 2153.7, 2082.7
+			13 text Radial Wastes / Outer reach · Tier 1 / danger 1
+			14 text HULL 91/100 / SHIELD 0
+			15 text ZOOM 1.60 / WORLD 333 x 188 / UI 533 x 300
+			16 text SHIP LV 1 / XP 0 / CARGO 0/16
+			17 text LAST BOSS UI NONE
+		18 text field (settable) Description: Console command, ID: console-input
+
+The focused UI element is 18 text field (settable) Description: Console command, ID: console-input

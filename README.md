@@ -22,7 +22,7 @@ Use `pnpm build` for the complete release build, including both WASM backends, T
 
 ## Fly
 
-Desktop: left click sets a persistent destination; hold left to update it. Hold right to fire. Scroll the mouse wheel to smoothly zoom from 0.6× to 1.6×; aiming uses the current unshaken world projection, while pixel UI stays at screen size. WASD/arrows are available too; Space does not fire. Escape opens settings. Fire inside Haven opens dock services; E also opens services or interacts with a nearby character.
+Desktop: left click sets a persistent destination; hold left to update it. Hold right to turn toward the cursor and fire; cursor aim follows the current unshaken world projection as the camera and zoom move. Aiming preserves the left-click course and arrival braking. Turning remains smooth at 720°/second, and shots leave the current nose with the existing quarter-velocity inheritance. Scroll the mouse wheel to smoothly zoom from 0.6× to 1.6×, while pixel UI stays at screen size. WASD/arrows are available too; Space does not fire. Escape opens settings. Fire inside Haven opens dock services; E also opens services or interacts with a nearby character.
 
 Mobile: rotate to landscape. The left joystick steers and applies proportional thrust; the right button fires independently. Release the stick to coast with a short throttle fade. Fullscreen and separate music/effects volume controls are available.
 

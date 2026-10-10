@@ -1,0 +1,31 @@
+{
+  "scope": "Independent actual Game six retained plus three owned tick checks; browser/input source review; no production mutation/browser/phone execution",
+  "root_tests_passed": 6,
+  "independent_tests_passed": 3,
+  "owned_files": {
+    "actual-lib-with-owned-tests.rs": "d912a21dcd40214d90fbb4235e20a5f4a29f885c96b1c91b1e7799e5b575f4e5",
+    "additional-tests.exe": "7fc06ab8d5820999059e50841130935e836719d9ac82ec419fcc4d87fd6c725e",
+    "additional-tests.log": "a9011103987fa4510e3188403ca5efe78fa66f1343f4a4c3f63cf6067c454cf9",
+    "additional-tests.rs": "c025522ba00ab70e4dcb267374c6e56c694481aee584a28d9f0cddb9d91882d7",
+    "baseline-excerpts.rs": "69d2f717e8a7cf20deaf111a2d32ec8e84aae32f49ea11670c6446de2bf3028e",
+    "baseline-fingerprints.json": "26c9994e60ea76e73a08aef695aa3f181ff86e38bca3970fcb1db7801f7e74fd",
+    "BASELINE_RECOMMENDATION.md": "3b49906c470dd45e4eff44f5fd7415b56463bce9a294ca35a56412c047846133",
+    "build-additional.ps1": "a561423314a530a2040c93b9fca3bed13de496ed56e8cecf67c324e3aea1c478",
+    "build-native.ps1": "10782b648d4691067ca9645164de7d3c4ff4ba0bd466dd9d6337a08cf298948f",
+    "freeze.py": "5baa411bfc558e82f5920dfb75af05fde81c7259dd5ee3b32217d06ae197fc65",
+    "implementation-fingerprints.json": "e2498935b62696f73acfc3209e38ca7cf11bc97cba22e2eb35223117a64e24f1",
+    "IMPLEMENTATION_REVIEW.md": "3059e16a8e352b16fc7a5efc2663f7cb032ff7b1a64b1860daf9bb406a840c53",
+    "native-tests.exe": "4dbe17d2df7b68c375b22c9f3cc58c1eac8a4c4657bfd5269585033e0528a9ab",
+    "native-tests.log": "23751179472cb19c4b38204ab4e037c88cb479ff5547b13213064cf08a825284",
+    "pin-baseline.py": "3cc40d930b565455dd107ff106e68233e10e751a9f3e0a040953916e2467b36d",
+    "pin-implementation.py": "0dd97b08c91badef30be986c4968c2d093f8824241a038f83500b773a0cf08a9",
+    "prepare-additional.py": "b6138c264ee18bcb22b8e0122ed7a79bb255ac3b0b02e8ae0305bfb76acf9349"
+  },
+  "external_review_evidence": {
+    "scripts/test/input.test.mjs": "3fbfb710d70fce7fe81a18aefc2f7d3d2acc8143604e2fca2ddba43254763ab1",
+    "work/zoom-tuning-release-review/input-aim-final-hashes.json": "5e635ca83724c3d22922da1f3085583a0b6d5737a8fd1eee1a8d91556d3fdd6b",
+    "work/zoom-tuning-release-review/input-aim-final-tests.log": "43579577cfa460af10fb53f344bc30ea32f3442ea13625b21b4212bc8a4c2763",
+    "work/cursor-aim-release-review/LOCAL_REVIEW.md": "7123588ed775d8d3652facdb1226b9b8b4c75bd5167410e25a4d14b5a1dc50f5",
+    "work/cursor-aim-release-review/INPUT_ADDENDUM_ERRATUM.md": "b9bb489da61d9b1c4a41350e2ef4049a4b4acd18c90ecfdd1e5a862a4bd22d26"
+  }
+}

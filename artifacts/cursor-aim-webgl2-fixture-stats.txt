@@ -1,0 +1,21 @@
+> WARP 450 0
+
+WARP 450, 0 / QA combat and site rewards disabled. Run banked; active duel forfeited.
+
+> STATS
+
+WEBGL2 / 0 FPS / p95 4.30 ms
+
+5751 quads / 57 entities / 0 particles
+
+POSITION 450.0, 0.0
+
+Haven Expanse / Quiet drift / danger 0
+
+HULL 100/100 / SHIELD 0
+
+ZOOM 1.00 / WORLD 533 x 300 / UI 533 x 300
+
+SHIP LV 1 / XP 0 / CARGO 0/16
+
+LAST BOSS UI NONE

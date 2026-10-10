@@ -9,6 +9,8 @@ mod radiation_enemies;
 pub use campaign::RunSummary;
 mod campaign_runtime;
 #[cfg(test)]
+mod cursor_aim_tests;
+#[cfg(test)]
 mod diagnostic_death_tests;
 #[cfg(test)]
 mod diagnostic_warp_tests;
@@ -99,6 +101,8 @@ pub struct QuestProgress {
 pub struct InputFrame {
     pub joystick: Option<[f32; 2]>,
     pub destination: Option<[f32; 2]>,
+    /// Transient unshaken world cursor while desktop right-fire is held.
+    pub aim: Option<[f32; 2]>,
     pub fire: bool,
 }
 
@@ -1064,6 +1068,16 @@ impl Game {
             self.destination = Some(Vec2::from_array(point));
         }
         let mut motion = *self.world.get::<&Motion>(self.player).unwrap();
+        let aim = input
+            .aim
+            .filter(|point| {
+                input.fire
+                    && point
+                        .iter()
+                        .all(|v| v.is_finite() && v.abs() <= WORLD_LIMIT)
+            })
+            .map(|point| Vec2::from_array(point) - motion.position)
+            .filter(|delta| delta.length_squared() > 16.0);
         let mut desired = Vec2::ZERO;
         let joystick = input
             .joystick
@@ -1074,10 +1088,21 @@ impl Game {
             self.destination = None;
             let power = ((stick.length() - 0.08) / 0.92).clamp(0.0, 1.0);
             self.throttle += (power - self.throttle) * (1.0 - (-20.0 * dt).exp());
-            if power > 0.0 {
+            if power > 0.0 && aim.is_none() {
                 motion.heading = turn_toward(motion.heading, stick.y.atan2(stick.x), 4.0 * PI * dt);
             }
-            desired = forward(motion.heading) * stats.speed * self.throttle;
+            let direction = if aim.is_some() {
+                // Desktop steering and cursor facing are independent while
+                // aiming. Mobile heading-fire retains the original controller.
+                if power > 0.0 {
+                    stick.normalize_or_zero()
+                } else {
+                    motion.velocity.normalize_or_zero()
+                }
+            } else {
+                forward(motion.heading)
+            };
+            desired = direction * stats.speed * self.throttle;
         } else if let Some(target) = self.destination {
             let delta = target - motion.position;
             let distance = delta.length();
@@ -1085,7 +1110,10 @@ impl Game {
                 self.destination = None;
                 self.throttle = 0.0;
             } else if distance > 0.01 {
-                motion.heading = turn_toward(motion.heading, delta.y.atan2(delta.x), 4.0 * PI * dt);
+                if aim.is_none() {
+                    motion.heading =
+                        turn_toward(motion.heading, delta.y.atan2(delta.x), 4.0 * PI * dt);
+                }
                 let speed = (2.0 * stats.acceleration * (distance - 2.0).max(0.0))
                     .sqrt()
                     .min(stats.speed);
@@ -1094,7 +1122,15 @@ impl Game {
             }
         } else {
             self.throttle = (self.throttle - dt / 0.15).max(0.0);
-            desired = forward(motion.heading) * stats.speed * self.throttle;
+            let direction = if aim.is_some() {
+                motion.velocity.normalize_or_zero()
+            } else {
+                forward(motion.heading)
+            };
+            desired = direction * stats.speed * self.throttle;
+        }
+        if let Some(delta) = aim {
+            motion.heading = turn_toward(motion.heading, delta.y.atan2(delta.x), 4.0 * PI * dt);
         }
         motion.velocity += (desired - motion.velocity).clamp_length_max(stats.acceleration * dt);
         motion.velocity = motion.velocity.clamp_length_max(stats.speed);
@@ -3881,6 +3917,7 @@ mod tests {
                 fire: true,
                 joystick: Some([1.0, 0.0]),
                 destination: None,
+                aim: None,
             },
             1.0 / 60.0,
         );

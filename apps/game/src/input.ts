@@ -1,6 +1,7 @@
 export interface InputFrame {
   joystick: [number, number] | null;
   destination: [number, number] | null;
+  aim: [number, number] | null;
   fire: boolean;
 }
 export class FlightInput {
@@ -8,10 +9,19 @@ export class FlightInput {
   private firePointer: number | null = null;
   private joystick: [number, number] | null = null;
   private destination: [number, number] | null = null;
+  private aimCursor: [number, number] | null = null;
   private mouseFire = false;
   private mouseMove = false;
   private keys = new Set<string>();
-  enabled = false;
+  private active = false;
+  get enabled(): boolean {
+    return this.active;
+  }
+  set enabled(value: boolean) {
+    if (this.active === value) return;
+    this.active = value;
+    if (!value) this.reset();
+  }
   camera: [number, number] = [0, 0];
   viewport: [number, number] = [800, 360];
   constructor(
@@ -30,23 +40,23 @@ export class FlightInput {
         this.mouseMove = true;
         this.target(e);
       }
-      this.mouseFire = (e.buttons & 2) !== 0;
-      if (e.button === 2 && this.mouseFire) this.onFireStart();
+      this.mouseButtons(e, true);
     });
     canvas.addEventListener("pointermove", (e) => {
       if (!this.enabled || e.pointerType === "touch") return;
-      this.mouseFire = (e.buttons & 2) !== 0;
       this.mouseMove = (e.buttons & 1) !== 0;
       if (this.mouseMove) this.target(e);
+      this.mouseButtons(e, true);
     });
     canvas.addEventListener("pointerup", (e) => {
-      this.mouseFire = (e.buttons & 2) !== 0;
-      this.mouseMove = (e.buttons & 1) !== 0;
+      if (!this.enabled || e.pointerType === "touch") return;
+      this.mouseButtons(e, false);
     });
     canvas.addEventListener("pointercancel", () => this.reset());
     canvas.addEventListener("lostpointercapture", () => {
       this.mouseFire = false;
       this.mouseMove = false;
+      this.aimCursor = null;
     });
     stickArea.addEventListener("pointerdown", (e) => {
       if (!this.enabled || this.movePointer !== null) return;
@@ -108,14 +118,45 @@ export class FlightInput {
     );
     window.addEventListener("blur", () => this.reset());
   }
-  private target(e: PointerEvent): void {
+  private mouseButtons(e: PointerEvent, notifyStart: boolean): void {
+    const wasFiring = this.mouseFire;
+    this.mouseFire = (e.buttons & 2) !== 0;
+    this.mouseMove = (e.buttons & 1) !== 0;
+    this.aimCursor = this.mouseFire ? [e.clientX, e.clientY] : null;
+    // Establish all held state before a Haven callback can disable/reset it.
+    if (notifyStart && this.mouseFire && !wasFiring) this.onFireStart();
+  }
+  private worldPoint(x: number, y: number): [number, number] | null {
     const r = this.canvas.getBoundingClientRect();
-    this.destination = [
+    if (
+      ![
+        x,
+        y,
+        r.left,
+        r.top,
+        r.width,
+        r.height,
+        ...this.camera,
+        ...this.viewport,
+      ].every(Number.isFinite) ||
+      r.width <= 0 ||
+      r.height <= 0 ||
+      this.viewport[0] <= 0 ||
+      this.viewport[1] <= 0
+    )
+      return null;
+    const world: [number, number] = [
       this.camera[0] +
-        ((e.clientX - r.left - r.width / 2) * this.viewport[0]) / r.width,
+        ((x - r.left - r.width / 2) * this.viewport[0]) / r.width,
       this.camera[1] +
-        ((e.clientY - r.top - r.height / 2) * this.viewport[1]) / r.height,
+        ((y - r.top - r.height / 2) * this.viewport[1]) / r.height,
     ];
+    return world.every(Number.isFinite) ? world : null;
+  }
+  private target(e: PointerEvent): void {
+    const world = this.worldPoint(e.clientX, e.clientY);
+    if (!world) return;
+    this.destination = world;
     this.onDestination(this.destination);
   }
   /** Same one-shot course command used by a mouse click, exposed for navigation. */
@@ -139,7 +180,7 @@ export class FlightInput {
   }
   sample(): InputFrame {
     if (!this.enabled)
-      return { joystick: null, destination: null, fire: false };
+      return { joystick: null, destination: null, aim: null, fire: false };
     let joystick = this.joystick;
     const x =
       Number(this.keys.has("d") || this.keys.has("arrowright")) -
@@ -154,6 +195,12 @@ export class FlightInput {
     const frame: InputFrame = {
       joystick,
       destination: this.destination,
+      // A stationary screen cursor still tracks the rendered world as camera
+      // follow and eased zoom change the unshaken input projection.
+      aim:
+        this.mouseFire && this.aimCursor
+          ? this.worldPoint(...this.aimCursor)
+          : null,
       fire: this.mouseFire || this.firePointer !== null,
     };
     this.destination = null;
@@ -162,6 +209,7 @@ export class FlightInput {
   reset(): void {
     this.joystick = null;
     this.destination = null;
+    this.aimCursor = null;
     this.movePointer = null;
     this.firePointer = null;
     this.mouseFire = false;
