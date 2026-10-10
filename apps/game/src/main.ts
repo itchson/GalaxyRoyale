@@ -612,7 +612,10 @@ function paintUpgrades(dock: boolean): void {
   target.replaceChildren();
   if (!dock) return;
   const level = document.createElement("p");
-  level.textContent = `SHIP LEVEL ${hud.ship_level} / ${hud.ship_xp} XP / next level ${hud.ship_next_xp} XP. Rank cap ${hud.rank_cap}/5.`;
+  const progress = hud.ship_level >= 100
+    ? "MAX LEVEL"
+    : `NEXT LEVEL ${hud.ship_next_xp} XP`;
+  level.textContent = `SHIP LEVEL ${hud.ship_level} / ${hud.ship_xp} XP / ${progress}. Rank cap ${hud.rank_cap}/5.`;
   target.append(level);
   const columns = document.createElement("div");
   columns.className = "upgrade-columns";

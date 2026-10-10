@@ -1,0 +1,12 @@
+{
+  "observedAt": "2026-10-10T19:28:40.014Z",
+  "status": 400,
+  "error": "Review task IDs must be an array of at most 40 unique existing task IDs.",
+  "revisionBefore": 192,
+  "revisionAfter": 192,
+  "memoryUnchanged": true,
+  "diskUnchanged": true,
+  "backupUnchanged": true,
+  "historicalMalformedReviewRetained": true,
+  "testScope": "Actual restarted localhost API only; invalid review was not persisted."
+}

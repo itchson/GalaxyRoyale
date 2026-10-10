@@ -1,18 +1,18 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtemp, mkdir, writeFile, readFile, rm } from 'node:fs/promises';
+import { mkdtemp, mkdir, writeFile, readFile, readdir, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, dirname, resolve, basename } from 'node:path';
 import { ProjectStore, artifactPath } from '../store.mjs';
 import { makeServer } from '../server.mjs';
 
 const initial = () => ({schemaVersion:1,revision:1,updatedAt:new Date().toISOString(),tasks:[{id:'one',title:'Validate controller',description:'Meaningful fixture',department:'QA',owner:'Tester',status:'active',priority:'normal',dependencies:[],acceptanceCriteria:[{text:'Input cancellation clears thrust',met:false}],evidence:[],blocker:'',revision:1}],reviews:[],decisions:[],builds:[],feedback:[],activity:[]});
-async function fixture(t) {
+async function fixture(t, project = initial()) {
   const root=await mkdtemp(join(tmpdir(),'galaxy-studio-'));
   assert.equal(resolve(dirname(root)), resolve(tmpdir()));
   assert.ok(basename(root).startsWith('galaxy-studio-'));
   await mkdir(join(root,'work'));await writeFile(join(root,'work','result.log'),'controller cancellation validated\n');
-  const file=join(root,'project.json');await writeFile(file,JSON.stringify(initial()));
+  const file=join(root,'project.json');await writeFile(file,JSON.stringify(project));
   const store=await new ProjectStore(file,root).load();
   t.after(()=>rm(root,{recursive:true,force:true}));
   return {root,file,store};
@@ -116,4 +116,62 @@ test('review, decision and build records retain their source and explicit check 
   await assert.rejects(store.mutate('build',{...context,record:{title:'Unsupported check',body:'Fixture only.',revision:'fixture',checks:[{name:'Controller',result:'probably_pass'}]}}),/explicitly/);
   await store.mutate('build',{...context,record:{title:'Fixture validation',body:'Record the checks that actually ran in this isolated fixture.',revision:'fixture',checks:[{name:'Controller fixture',result:'pass'},{name:'Phone acceptance',result:'not_run',details:'No physical device is present.'}],evidence:[{label:'Fixture output',path:'work/result.log'}],knownIssues:'Physical phone acceptance remains untested.'}});
   const restarted=await new ProjectStore(file,root).load();assert.equal(restarted.project.reviews[0].source,context.source);assert.deepEqual(restarted.project.reviews[0].participants,['QA','Producer']);assert.equal(restarted.project.decisions[0].status,'accepted');assert.equal(restarted.project.builds[0].checks[1].result,'not_run');assert.equal(restarted.project.builds[0].evidence[0].path,'work/result.log');
+});
+
+const reviewRecord = overrides => ({author:'QA',source:'Isolated review-reference regression',record:{title:'Controller design exchange',body:'Record the reviewed behavior and its task references.',participants:['QA','Producer'],...overrides}});
+
+test('reviews preserve omitted and empty task references and existing append-only history',async t=>{
+  const project=initial();
+  const historic={id:'review-historic',title:'Historical exchange',body:'Original recorded exchange.',participants:['Producer'],taskIds:['one',null,null],author:'Producer',source:'Historical fixture',createdAt:'2026-01-01T00:00:00.000Z'};
+  project.reviews.push(historic);
+  const {store,file,root}=await fixture(t,project);
+  const omitted=await store.mutate('review',reviewRecord());
+  const empty=await store.mutate('review',reviewRecord({taskIds:[]}));
+  const task=await store.mutate('task.create',{author:'QA',source:'Isolated fixture',task:{title:'Review follow-up'}});
+  const ids=[task.item.id,'one'];
+  const referenced=await store.mutate('review',reviewRecord({taskIds:ids}));
+  assert.deepEqual(omitted.item.taskIds,[]);assert.deepEqual(empty.item.taskIds,[]);assert.deepEqual(referenced.item.taskIds,ids);
+  ids.push('missing');
+  assert.deepEqual(store.snapshot().reviews.at(-1).taskIds,[task.item.id,'one'],'accepted references do not alias caller input');
+  assert.deepEqual(store.snapshot().reviews[0],historic,'new validation does not repair or delete historical records');
+  const restarted=await new ProjectStore(file,root).load();
+  assert.deepEqual(restarted.snapshot(),store.snapshot());assert.equal(restarted.project.reviews.length,4);
+});
+
+test('malformed review references reject atomically without revision, activity, backup or disk mutation',async t=>{
+  const {store,file,root}=await fixture(t);
+  await store.mutate('review',reviewRecord({taskIds:['one']}));
+  const before=store.snapshot();const disk=await readFile(file,'utf8');const backup=await readFile(`${file}.backup`,'utf8');const files=(await readdir(root)).sort();
+  const notifications=[];store.listeners.add(revision=>notifications.push(revision));
+  for(const taskIds of [null,'one',{},false,0,['missing'],['one','missing'],['one','one'],['one',null,null],[undefined],['one',1],['one',{id:'one'}],new Array(1)]) {
+    await assert.rejects(store.mutate('review',reviewRecord({taskIds})),error=>error.status===400 && /Review task IDs/.test(error.message));
+    assert.deepEqual(store.snapshot(),before);assert.equal(await readFile(file,'utf8'),disk);assert.equal(await readFile(`${file}.backup`,'utf8'),backup);assert.deepEqual((await readdir(root)).sort(),files);assert.deepEqual(notifications,[]);
+  }
+  const accepted=await store.mutate('review',reviewRecord({taskIds:['one']}));
+  assert.equal(accepted.revision,before.revision+1);assert.deepEqual(notifications,[accepted.revision]);assert.equal(store.snapshot().reviews.length,before.reviews.length+1,'rejected operations do not poison the write queue');
+});
+
+test('review reference limit accepts forty unique existing tasks and rejects forty-one',async t=>{
+  const project=initial();
+  project.tasks.push(...Array.from({length:40},(_,index)=>({...structuredClone(project.tasks[0]),id:`fixture-${index}`,title:`Review task ${index}`})));
+  const {store,file}=await fixture(t,project);const all=store.snapshot().tasks.map(task=>task.id);const disk=await readFile(file,'utf8');
+  assert.equal(new Set(all).size,41);
+  await assert.rejects(store.mutate('review',reviewRecord({taskIds:all})),error=>error.status===400 && /40/.test(error.message));
+  assert.equal(store.snapshot().revision,1);assert.equal(await readFile(file,'utf8'),disk);
+  const forty=all.slice(0,40).reverse();const accepted=await store.mutate('review',reviewRecord({taskIds:forty}));
+  assert.deepEqual(accepted.item.taskIds,forty);assert.equal(accepted.revision,2);
+});
+
+test('HTTP reviews reject null task IDs from a misread creation response and accept item.id references',async t=>{
+  const {store,file}=await fixture(t);const server=makeServer(store);
+  await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));t.after(()=>new Promise(resolve=>server.close(resolve)));
+  const base=`http://127.0.0.1:${server.address().port}`;
+  const post=(path,payload)=>fetch(base+path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+  const creation=await post('/api/tasks',{author:'QA',source:'Isolated HTTP fixture',task:{title:'Review follow-up'}});
+  assert.equal(creation.status,201);const created=await creation.json();assert.equal(typeof created.item.id,'string');assert.equal(created.id,undefined);
+  const before=store.snapshot();const disk=await readFile(file,'utf8');
+  const invalid=await post('/api/reviews',reviewRecord({taskIds:['one',created.id,created.id]}));
+  assert.equal(invalid.status,400);assert.match((await invalid.json()).error,/Review task IDs/);assert.deepEqual(store.snapshot(),before);assert.equal(await readFile(file,'utf8'),disk);
+  const accepted=await post('/api/reviews',reviewRecord({taskIds:['one',created.item.id]}));
+  assert.equal(accepted.status,201);assert.deepEqual((await accepted.json()).item.taskIds,['one',created.item.id]);
 });

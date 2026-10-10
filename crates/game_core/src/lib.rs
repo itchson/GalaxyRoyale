@@ -6,6 +6,8 @@ pub mod campaign;
 mod pixel_assets;
 pub use campaign::RunSummary;
 mod campaign_runtime;
+#[cfg(test)]
+mod weapon_cadence_tests;
 use bosses::BossEncounter;
 use campaign_runtime::{ArenaEncounter, ChampionFighter};
 pub mod regions;
@@ -948,7 +950,14 @@ impl Game {
         self.shake = (self.shake - dt * 6.0).max(0.0);
         self.since_damage += dt;
         self.invulnerability = (self.invulnerability - dt).max(0.0);
-        self.fire_timer -= dt;
+        // Ready weapons do not accumulate idle/sanctuary burst debt.
+        if self.fire_timer > 0.0 {
+            self.fire_timer -= dt;
+            // Normalize sub-microsecond f32 noise at an exact tick boundary.
+            if self.fire_timer.abs() <= 0.000_001 {
+                self.fire_timer = 0.0;
+            }
+        }
         self.repulsor_timer -= dt;
         self.boss_timer -= dt;
         for (_, motion) in self.world.query_mut::<(Entity, &mut Motion)>() {
@@ -984,6 +993,8 @@ impl Game {
         }
         if input.fire && !safe && self.fire_timer <= 0.0 {
             self.fire(stats);
+        } else if !input.fire || safe {
+            self.fire_timer = self.fire_timer.max(0.0);
         }
         self.update_chunks(position);
         self.update_campaign(dt);
@@ -1113,7 +1124,9 @@ impl Game {
             true,
             1,
         );
-        self.fire_timer = 1.0 / stats.fire_rate;
+        // Carry active-fire overshoot into the next period instead of rounding
+        // every purchased cadence down to a fixed whole number of ticks.
+        self.fire_timer += 1.0 / stats.fire_rate;
         self.shot_count += 1;
         self.ship_signature(motion, stats);
         self.event("shot", motion.position, 0.6);

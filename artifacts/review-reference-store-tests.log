@@ -1,0 +1,21 @@
+✔ serialized writes reject stale revisions without losing accepted state; restart and backup preserve documents (18.2099ms)
+✔ completion needs actual criteria and evidence, including existing artifacts (5.2598ms)
+✔ artifact allowlist rejects traversal, secrets, missing files and directory requests (3.4786ms)
+✔ HTTP API returns stale-edit 409 and blocks foreign origins and non-JSON mutations (94.9539ms)
+✔ dependency cycles are rejected and feedback is queued until explicitly acknowledged or resolved (10.8132ms)
+✔ run records persist as append-only observations without inferring task completion or agent presence (7.2892ms)
+✔ run observations validate state, identity, timestamp, task references and artifact evidence (4.5059ms)
+✔ HTTP run endpoint appends observations and rejects edit attempts (19.8938ms)
+✔ review, decision and build records retain their source and explicit check coverage after restart (8.7342ms)
+✔ reviews preserve omitted and empty task references and existing append-only history (7.5994ms)
+✔ malformed review references reject atomically without revision, activity, backup or disk mutation (13.4738ms)
+✔ review reference limit accepts forty unique existing tasks and rejects forty-one (4.9293ms)
+✔ HTTP reviews reject null task IDs from a misread creation response and accept item.id references (31.3304ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 353.5045

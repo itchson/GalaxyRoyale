@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 192,
+  "revision": 207,
   "name": "Galaxy Royale",
   "phase": "Foundation → playable vertical slice",
-  "updatedAt": "2026-10-10T19:22:26.659Z",
+  "updatedAt": "2026-10-10T19:40:44.499Z",
   "tasks": [
     {
       "id": "studio",
@@ -2129,10 +2129,10 @@
     {
       "id": "task-6c761ea8",
       "title": "Fixed-tick weapon cadence: make every fire-rate rank meaningful",
-      "description": "A post-release actual Game tick probe found rank plateaus: ranks 0–5 fire every 13/11/11/10/9/9 fixed ticks because each shot resets the cooldown and discards overshoot. Two paid ranks produce no steady cadence increase. Gameplay is preparing an isolated residual-carry correction; independent QA owns release/idle/sanctuary/retry/signature boundary review. Root owns production integration and a new validated build. Current published HUD/Riveter bytes remain frozen.",
+      "description": "A post-release actual Game tick probe found rank plateaus: ranks 0–5 fire every 13/11/11/10/9/9 fixed ticks because each shot resets the cooldown and discards overshoot. Two paid ranks produce no steady cadence increase. Gameplay is preparing an isolated residual-carry correction; independent QA owns release/idle/sanctuary/retry/signature boundary review. Root owns production integration and a new validated build. Current published HUD/Riveter bytes remain frozen. Reviewed correction is now integrated and the normal two-backend package is accepted locally. A new private publication is the producer’s next step; physical/human gates remain separately pending.",
       "department": "Gameplay",
       "owner": "Producer / Gameplay specialist / Independent QA",
-      "status": "active",
+      "status": "complete",
       "priority": "high",
       "dependencies": [
         "gameplay"
@@ -2140,15 +2140,15 @@
       "acceptanceCriteria": [
         {
           "text": "Actual fixed-tick primary shot cadence rises at every purchased rank and matches authored long-run rates",
-          "met": false
+          "met": true
         },
         {
           "text": "No catch-up burst debt after idle, sanctuary or death; short release preserves remaining cooldown and Echo counters",
-          "met": false
+          "met": true
         },
         {
           "text": "Reviewed production integration, meaningful native regressions and updated normal two-backend build",
-          "met": false
+          "met": true
         }
       ],
       "evidence": [
@@ -2156,20 +2156,35 @@
           "label": "Actual Game tick rate and movement probes against the frozen release core",
           "kind": "note",
           "path": "artifacts/scout-progression-audit.json"
+        },
+        {
+          "label": "Actual integrated scope, tests and browser captures",
+          "kind": "note",
+          "path": "artifacts/progression-integration-validation.md"
+        },
+        {
+          "label": "Independent actual Game cadence/release/Echo measurements",
+          "kind": "note",
+          "path": "artifacts/weapon-cadence-qa-results.json"
+        },
+        {
+          "label": "Independent final normal package review",
+          "kind": "note",
+          "path": "artifacts/progression-packaging-review.md"
         }
       ],
       "blocker": "",
-      "revision": 1,
+      "revision": 2,
       "createdAt": "2026-10-10T19:21:14.491Z",
-      "updatedAt": "2026-10-10T19:21:14.491Z"
+      "updatedAt": "2026-10-10T19:40:44.322Z"
     },
     {
       "id": "task-696d7d24",
       "title": "Maximum ship level: truthful XP progress caption",
-      "description": "Actual compiled HUD at 99,000 XP reports level 100 and next XP 101,000, while the level function caps at 100 and the shell calls this the next level. Correct the read-only HUD/caption without mutating stored XP or caps. Independent native and serialized save probes confirm the display issue; no XP-loss or purchase exploit was found.",
+      "description": "Actual compiled HUD at 99,000 XP reports level 100 and next XP 101,000, while the level function caps at 100 and the shell calls this the next level. Correct the read-only HUD/caption without mutating stored XP or caps. Independent native and serialized save probes confirm the display issue; no XP-loss or purchase exploit was found. Reviewed correction is now integrated and the normal two-backend package is accepted locally. A new private publication is the producer’s next step; physical/human gates remain separately pending.",
       "department": "Gameplay / UI",
       "owner": "Producer",
-      "status": "ready",
+      "status": "complete",
       "priority": "normal",
       "dependencies": [
         "gameplay",
@@ -2178,11 +2193,11 @@
       "acceptanceCriteria": [
         {
           "text": "Level 100 clearly displays maximum level instead of an unreachable next-level threshold",
-          "met": false
+          "met": true
         },
         {
           "text": "Existing per-ship XP, ranks, currency and save contracts remain valid",
-          "met": false
+          "met": true
         }
       ],
       "evidence": [
@@ -2195,12 +2210,153 @@
           "label": "Actual Rust snapshots through strict browser schema and IndexedDB",
           "kind": "note",
           "path": "artifacts/scout-progression-qa-save.json"
+        },
+        {
+          "label": "Actual integrated scope, tests and browser captures",
+          "kind": "note",
+          "path": "artifacts/progression-integration-validation.md"
+        },
+        {
+          "label": "Independent actual Game cadence/release/Echo measurements",
+          "kind": "note",
+          "path": "artifacts/weapon-cadence-qa-results.json"
+        },
+        {
+          "label": "Independent final normal package review",
+          "kind": "note",
+          "path": "artifacts/progression-packaging-review.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-10T19:21:14.509Z",
+      "updatedAt": "2026-10-10T19:40:44.352Z"
+    },
+    {
+      "id": "task-80134b58",
+      "title": "Studio reviews: reject malformed task references atomically",
+      "description": "Close the review-reference validation hole found in review-295fae3e. Preserve append-only history and support empty design-discussion references.",
+      "department": "Engine / Production",
+      "owner": "Engine specialist / Producer",
+      "status": "complete",
+      "priority": "normal",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Invalid supplied references reject before any revision, memory or persistence change; empty references and historical records remain supported.",
+          "met": true
+        },
+        {
+          "text": "Actual store/HTTP regressions pass and the restarted live API preserves its snapshot while rejecting the incident input.",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Reviewed validation scope and live restart",
+          "kind": "note",
+          "path": "artifacts/review-reference-validation.md"
+        },
+        {
+          "label": "13 actual store and HTTP tests",
+          "kind": "note",
+          "path": "artifacts/review-reference-store-tests.log"
+        },
+        {
+          "label": "Live malformed POST rejects without writes",
+          "kind": "note",
+          "path": "artifacts/review-reference-live-rejection.json"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-10T19:29:26.109Z",
+      "updatedAt": "2026-10-10T19:29:26.141Z"
+    },
+    {
+      "id": "task-b27a43c9",
+      "title": "Centered dock prompts: retain their pressed-state hitbox",
+      "description": "Global button:active discarded the prompt centering transform. The scoped active transform now composes centering plus the small pressed offset. Actual dock clicks open services on both normal packaged renderers; physical touch and a fresh site-button replay remain outside this bounded correction.",
+      "department": "Engine / UI",
+      "owner": "Producer / Engine review / Independent QA",
+      "status": "complete",
+      "priority": "normal",
+      "dependencies": [
+        "web-shell"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "The shared centered dock/site active style preserves centering, with independent source review.",
+          "met": true
+        },
+        {
+          "text": "Actual normal WebGPU and WebGL2 dock clicks open services after repair.",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Source hitbox review",
+          "kind": "note",
+          "path": "artifacts/dock-hitbox-review.md"
+        },
+        {
+          "label": "Actual integrated scope, tests and browser captures",
+          "kind": "note",
+          "path": "artifacts/progression-integration-validation.md"
+        },
+        {
+          "label": "Independent actual Game cadence/release/Echo measurements",
+          "kind": "note",
+          "path": "artifacts/weapon-cadence-qa-results.json"
+        },
+        {
+          "label": "Independent final normal package review",
+          "kind": "note",
+          "path": "artifacts/progression-packaging-review.md"
         }
       ],
       "blocker": "",
       "revision": 1,
-      "createdAt": "2026-10-10T19:21:14.509Z",
-      "updatedAt": "2026-10-10T19:21:14.509Z"
+      "createdAt": "2026-10-10T19:40:44.393Z",
+      "updatedAt": "2026-10-10T19:40:44.393Z"
+    },
+    {
+      "id": "task-0851af86",
+      "title": "QA forced death: prevent eligible regeneration from reviving the fixture",
+      "description": "Independent cadence fixtures exposed that diagnostic(die) sets zero hull without resetting since_damage; already eligible R5 regeneration can heal it before death processing. Engine is preparing an isolated actual-core candidate; QA owns singledeath/report/retainedprogression/retry and naturallethal boundary review. No production fix yet.",
+      "department": "Engine / QA",
+      "owner": "Engine specialist / Independent QA / Producer",
+      "status": "active",
+      "priority": "normal",
+      "dependencies": [
+        "gameplay"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Actual forced death works with already eligible R5 regeneration and emits one death/run report.",
+          "met": false
+        },
+        {
+          "text": "Natural lethal damage, retained progression and Haven/retry semantics remain correct.",
+          "met": false
+        },
+        {
+          "text": "Reviewed production integration and meaningful native regressions.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual independent finding and disclosed prior fixture limitation",
+          "kind": "note",
+          "path": "artifacts/weapon-cadence-qa-review.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-10T19:40:44.436Z",
+      "updatedAt": "2026-10-10T19:40:44.436Z"
     }
   ],
   "reviews": [
@@ -2582,6 +2738,40 @@
         "balance",
         "task-6c761ea8",
         "task-696d7d24"
+      ]
+    },
+    {
+      "id": "review-761d2103",
+      "title": "Review references: specialist implementation and producer acceptance",
+      "body": "The engine specialist implemented the frozen store-only change and four meaningful regressions. Producer inspected both diffs, reran 13/13 tests and restarted the authoritative service: full revision-192 snapshot was unchanged. Actual malformed POST returned 400 with memory/disk/backup unchanged. The original append-only malformed record is retained. This accepts the bounded local-service fix, not a game deployment.",
+      "author": "Producer",
+      "source": "Actual reviewed store tests and restarted live API validation",
+      "createdAt": "2026-10-10T19:29:26.126Z",
+      "participants": [
+        "Engine specialist",
+        "Producer / Integrator"
+      ],
+      "taskIds": [
+        "task-80134b58"
+      ]
+    },
+    {
+      "id": "review-cf942363",
+      "title": "Cadence, XP caption and centered dock click: integration acceptance",
+      "body": "Actual asynchronous handoffs accepted: Gameplay froze the three-hunk timer correction and seven real-Game tests. Independent QA measured every rank over30s, eight crafted ships, Sovereign, idle/sanctuary/retry/cooldown and E1/E5 actual Echo entities. Producer integrated the exact runtime changes and reran193 native/70shell tests, strict native/two-WASM Clippy and a normal dual-backend build. Final web/PWA rebuild includes the scoped centered-prompt active transform independently reviewed by Engine and QA. Actual normal packaged browser clicks now open dock services on both renderers; maxlevel100 caption and belowcap99 threshold were observed through disclosed save-import fixtures. Cache79774fbb09d2dfb9/18assets and fixture/studio exclusion independently pass. Private publication is next. Physical devices, natural campaign, current offline/recovery and human balance remain unmeasured.",
+      "author": "Producer",
+      "source": "Actual reviewed Rust integration, final local package and browser checks",
+      "createdAt": "2026-10-10T19:40:44.420Z",
+      "participants": [
+        "Gameplay specialist",
+        "Engine specialist",
+        "Production specialist / Independent QA",
+        "Producer / Integrator"
+      ],
+      "taskIds": [
+        "task-6c761ea8",
+        "task-696d7d24",
+        "task-b27a43c9"
       ]
     }
   ],
@@ -4950,6 +5140,156 @@
       "author": "Producer",
       "source": "Corrected actual progression assignment references",
       "createdAt": "2026-10-10T19:22:26.659Z"
+    },
+    {
+      "id": "5681d8d4-22ac-4d27-a59f-34ab80dfd695",
+      "revision": 193,
+      "kind": "task.create",
+      "itemId": "task-80134b58",
+      "title": "Studio reviews: reject malformed task references atomically",
+      "author": "Producer",
+      "source": "Actual reviewed store tests and restarted live API validation",
+      "createdAt": "2026-10-10T19:29:26.109Z"
+    },
+    {
+      "id": "be2dd13c-fa0d-485d-b5f2-e4fa4af428d6",
+      "revision": 194,
+      "kind": "review",
+      "itemId": "review-761d2103",
+      "title": "Review references: specialist implementation and producer acceptance",
+      "author": "Producer",
+      "source": "Actual reviewed store tests and restarted live API validation",
+      "createdAt": "2026-10-10T19:29:26.126Z"
+    },
+    {
+      "id": "c0b0f314-7e66-44e4-946b-922b149f50b4",
+      "revision": 195,
+      "kind": "task.update",
+      "itemId": "task-80134b58",
+      "title": "Studio reviews: reject malformed task references atomically",
+      "author": "Producer",
+      "source": "Actual reviewed store tests and restarted live API validation",
+      "createdAt": "2026-10-10T19:29:26.141Z"
+    },
+    {
+      "id": "03911899-d53c-4b1b-b861-a9b99abaad8e",
+      "revision": 196,
+      "kind": "run",
+      "itemId": "run-702966fd",
+      "title": "Engine specialist · completed",
+      "author": "Producer",
+      "source": "Actual reviewed store tests and restarted live API validation",
+      "createdAt": "2026-10-10T19:29:26.157Z"
+    },
+    {
+      "id": "e6bb461f-6611-444b-848f-2683a51b8fff",
+      "revision": 197,
+      "kind": "run",
+      "itemId": "run-ab08a763",
+      "title": "Engine specialist · running",
+      "author": "Producer",
+      "source": "Actual reviewed store tests and restarted live API validation",
+      "createdAt": "2026-10-10T19:29:26.173Z"
+    },
+    {
+      "id": "608d1580-8dad-4590-b713-c40c455ed36c",
+      "revision": 198,
+      "kind": "run",
+      "itemId": "run-b8a404f7",
+      "title": "Producer / Integrator · running",
+      "author": "Producer",
+      "source": "Actual reviewed store tests and restarted live API validation",
+      "createdAt": "2026-10-10T19:29:26.189Z"
+    },
+    {
+      "id": "a2df4671-fa8c-47ec-a7c8-49598f094a4a",
+      "revision": 199,
+      "kind": "task.update",
+      "itemId": "task-6c761ea8",
+      "title": "Fixed-tick weapon cadence: make every fire-rate rank meaningful",
+      "author": "Producer",
+      "source": "Actual reviewed Rust integration, final local package and browser checks",
+      "createdAt": "2026-10-10T19:40:44.322Z"
+    },
+    {
+      "id": "ce6b4e65-0984-4a96-92fd-a69214700320",
+      "revision": 200,
+      "kind": "task.update",
+      "itemId": "task-696d7d24",
+      "title": "Maximum ship level: truthful XP progress caption",
+      "author": "Producer",
+      "source": "Actual reviewed Rust integration, final local package and browser checks",
+      "createdAt": "2026-10-10T19:40:44.352Z"
+    },
+    {
+      "id": "cb322bd2-47de-46b6-881d-ff35fb1d9e6a",
+      "revision": 201,
+      "kind": "task.create",
+      "itemId": "task-b27a43c9",
+      "title": "Centered dock prompts: retain their pressed-state hitbox",
+      "author": "Producer",
+      "source": "Actual reviewed Rust integration, final local package and browser checks",
+      "createdAt": "2026-10-10T19:40:44.393Z"
+    },
+    {
+      "id": "2f0bbb39-4b92-4d01-b00f-262b675bdb56",
+      "revision": 202,
+      "kind": "review",
+      "itemId": "review-cf942363",
+      "title": "Cadence, XP caption and centered dock click: integration acceptance",
+      "author": "Producer",
+      "source": "Actual reviewed Rust integration, final local package and browser checks",
+      "createdAt": "2026-10-10T19:40:44.420Z"
+    },
+    {
+      "id": "0810cd9d-3c97-4c7e-9f3d-3dfcaf4d5412",
+      "revision": 203,
+      "kind": "task.create",
+      "itemId": "task-0851af86",
+      "title": "QA forced death: prevent eligible regeneration from reviving the fixture",
+      "author": "Producer",
+      "source": "Actual reviewed Rust integration, final local package and browser checks",
+      "createdAt": "2026-10-10T19:40:44.436Z"
+    },
+    {
+      "id": "f4f570b1-316d-4b78-ace7-7accf8e1af2b",
+      "revision": 204,
+      "kind": "run",
+      "itemId": "run-5a3ef5dd",
+      "title": "Gameplay specialist · running",
+      "author": "Producer",
+      "source": "Actual reviewed Rust integration, final local package and browser checks",
+      "createdAt": "2026-10-10T19:40:44.452Z"
+    },
+    {
+      "id": "5706b3d4-34af-43ae-a66b-6747a299ca89",
+      "revision": 205,
+      "kind": "run",
+      "itemId": "run-61321207",
+      "title": "Engine specialist · running",
+      "author": "Producer",
+      "source": "Actual reviewed Rust integration, final local package and browser checks",
+      "createdAt": "2026-10-10T19:40:44.468Z"
+    },
+    {
+      "id": "a6731bba-d597-4425-ab45-604c283073c1",
+      "revision": 206,
+      "kind": "run",
+      "itemId": "run-5992e3fc",
+      "title": "Production specialist / Independent QA · running",
+      "author": "Producer",
+      "source": "Actual reviewed Rust integration, final local package and browser checks",
+      "createdAt": "2026-10-10T19:40:44.483Z"
+    },
+    {
+      "id": "51ead65b-3a30-4824-9b91-26091a31cf2a",
+      "revision": 207,
+      "kind": "run",
+      "itemId": "run-5389e71a",
+      "title": "Producer / Integrator · running",
+      "author": "Producer",
+      "source": "Actual reviewed Rust integration, final local package and browser checks",
+      "createdAt": "2026-10-10T19:40:44.499Z"
     }
   ],
   "runRecords": [
@@ -6435,6 +6775,196 @@
       "author": "Producer",
       "source": "Corrected actual progression assignment references",
       "createdAt": "2026-10-10T19:22:26.659Z"
+    },
+    {
+      "id": "run-702966fd",
+      "title": "Engine specialist · completed",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Engine specialist",
+      "state": "completed",
+      "observedAt": "2026-10-10T19:29:26.147Z",
+      "taskIds": [
+        "task-80134b58"
+      ],
+      "summary": "Frozen dashboard-reference fix completed; producer independently reviewed and verified the live restarted service.",
+      "evidence": [
+        {
+          "label": "Reviewed validation scope and live restart",
+          "kind": "note",
+          "path": "artifacts/review-reference-validation.md"
+        },
+        {
+          "label": "13 actual store and HTTP tests",
+          "kind": "note",
+          "path": "artifacts/review-reference-store-tests.log"
+        },
+        {
+          "label": "Live malformed POST rejects without writes",
+          "kind": "note",
+          "path": "artifacts/review-reference-live-rejection.json"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual reviewed store tests and restarted live API validation",
+      "createdAt": "2026-10-10T19:29:26.157Z"
+    },
+    {
+      "id": "run-ab08a763",
+      "title": "Engine specialist · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Engine specialist",
+      "state": "running",
+      "observedAt": "2026-10-10T19:29:26.164Z",
+      "taskIds": [
+        "task-e8684a94"
+      ],
+      "summary": "Assigned independent production-integration seam review for the actual radiation-enemy prototype; no production integration yet.",
+      "evidence": [
+        {
+          "label": "Frozen radiation prototype",
+          "kind": "note",
+          "path": "artifacts/radiation-enemy-prototype.md"
+        },
+        {
+          "label": "Prior actual engine review",
+          "kind": "note",
+          "path": "artifacts/radiation-enemy-engine-review.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual reviewed store tests and restarted live API validation",
+      "createdAt": "2026-10-10T19:29:26.173Z"
+    },
+    {
+      "id": "run-b8a404f7",
+      "title": "Producer / Integrator · running",
+      "agentId": "/root",
+      "agentLabel": "Producer / Integrator",
+      "state": "running",
+      "observedAt": "2026-10-10T19:29:26.180Z",
+      "taskIds": [
+        "task-6c761ea8",
+        "task-696d7d24"
+      ],
+      "summary": "Integrating reviewed cadence correction and truthful maximum-level caption. Caption source changed; cadence candidate and independent review are still active.",
+      "evidence": [
+        {
+          "label": "Actual source progression audit",
+          "kind": "note",
+          "path": "artifacts/scout-progression-audit.json"
+        },
+        {
+          "label": "Independent XP and purchase boundary observations",
+          "kind": "note",
+          "path": "artifacts/scout-progression-qa-native.json"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual reviewed store tests and restarted live API validation",
+      "createdAt": "2026-10-10T19:29:26.189Z"
+    },
+    {
+      "id": "run-5a3ef5dd",
+      "title": "Gameplay specialist · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Gameplay specialist",
+      "state": "running",
+      "observedAt": "2026-10-10T19:40:44.442Z",
+      "taskIds": [
+        "task-e8684a94"
+      ],
+      "summary": "Frozen cadence handoff integrated; assigned work-only radiation production candidate using actual ECS/destruction/rewards plus camera-aware telegraph admission. Not shipped content yet.",
+      "evidence": [
+        {
+          "label": "Actual frozen cadence handoff",
+          "kind": "note",
+          "path": "artifacts/weapon-cadence-handoff.md"
+        },
+        {
+          "label": "Reviewed radiation integration requirements",
+          "kind": "note",
+          "path": "artifacts/radiation-integration-plan.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual reviewed Rust integration, final local package and browser checks",
+      "createdAt": "2026-10-10T19:40:44.452Z"
+    },
+    {
+      "id": "run-61321207",
+      "title": "Engine specialist · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Engine specialist",
+      "state": "running",
+      "observedAt": "2026-10-10T19:40:44.458Z",
+      "taskIds": [
+        "task-0851af86"
+      ],
+      "summary": "Assigned isolated QA diagnostic-death correction or independent actual-core boundary review. Current production cadence package intentionally preserves the disclosed helper limitation.",
+      "evidence": [
+        {
+          "label": "Actual independent diagnostic finding",
+          "kind": "note",
+          "path": "artifacts/weapon-cadence-qa-review.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual reviewed Rust integration, final local package and browser checks",
+      "createdAt": "2026-10-10T19:40:44.468Z"
+    },
+    {
+      "id": "run-5992e3fc",
+      "title": "Production specialist / Independent QA · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "Production specialist / Independent QA",
+      "state": "running",
+      "observedAt": "2026-10-10T19:40:44.474Z",
+      "taskIds": [
+        "task-0851af86"
+      ],
+      "summary": "Assigned isolated QA diagnostic-death correction or independent actual-core boundary review. Current production cadence package intentionally preserves the disclosed helper limitation.",
+      "evidence": [
+        {
+          "label": "Actual independent diagnostic finding",
+          "kind": "note",
+          "path": "artifacts/weapon-cadence-qa-review.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual reviewed Rust integration, final local package and browser checks",
+      "createdAt": "2026-10-10T19:40:44.483Z"
+    },
+    {
+      "id": "run-5389e71a",
+      "title": "Producer / Integrator · running",
+      "agentId": "/root",
+      "agentLabel": "Producer / Integrator",
+      "state": "running",
+      "observedAt": "2026-10-10T19:40:44.489Z",
+      "taskIds": [
+        "slice-review"
+      ],
+      "summary": "Final normal local package accepted; preparing exact pushed-source owner-private publication. No authenticated remote gameplay or phone acceptance claim.",
+      "evidence": [
+        {
+          "label": "Actual integrated scope, tests and browser captures",
+          "kind": "note",
+          "path": "artifacts/progression-integration-validation.md"
+        },
+        {
+          "label": "Independent actual Game cadence/release/Echo measurements",
+          "kind": "note",
+          "path": "artifacts/weapon-cadence-qa-results.json"
+        },
+        {
+          "label": "Independent final normal package review",
+          "kind": "note",
+          "path": "artifacts/progression-packaging-review.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual reviewed Rust integration, final local package and browser checks",
+      "createdAt": "2026-10-10T19:40:44.499Z"
     }
   ]
 }

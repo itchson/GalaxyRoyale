@@ -117,7 +117,12 @@ export class ProjectStore {
       const input = payload.record;
       requireValue(input && typeof input === 'object', 'Expected a record.');
       item = { id: `${kind}-${randomUUID().slice(0, 8)}`, title: cleanString(input.title, 'Record title', 300), body: cleanString(input.body, 'Record body', 20000), author, source, createdAt: now };
-      if (kind === 'review') { requireValue(Array.isArray(input.participants) && input.participants.every(p => typeof p === 'string'), 'Review participants are required.'); item.participants = input.participants; item.taskIds = input.taskIds || []; }
+      if (kind === 'review') {
+        requireValue(Array.isArray(input.participants) && input.participants.every(p => typeof p === 'string'), 'Review participants are required.');
+        const taskIds = input.taskIds === undefined ? [] : input.taskIds;
+        requireValue(Array.isArray(taskIds) && taskIds.length <= 40 && new Set(taskIds).size === taskIds.length && Array.from(taskIds).every(id => typeof id === 'string' && next.tasks.some(t => t.id === id)), 'Review task IDs must be an array of at most 40 unique existing task IDs.');
+        item.participants = input.participants; item.taskIds = [...taskIds];
+      }
       if (kind === 'decision') { requireValue(['proposed','accepted','rejected','superseded'].includes(input.status), 'Invalid decision status.'); item.status = input.status; }
       if (kind === 'build') {
         item.revision = cleanString(input.revision, 'Build source revision', 200); item.evidence = validateEvidence(input.evidence || []);
