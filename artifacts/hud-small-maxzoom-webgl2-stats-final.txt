@@ -1,0 +1,61 @@
+Browser tab: 16, Title: "Galaxy Royale", URL: "http://127.0.0.1:4184/?qa=1&renderer=webgl2".
+0 AXWebArea Galaxy Royale, URL: 127.0.0.1:4184/?qa=1&renderer=webgl2
+	1 image Description: Galaxy Royale game universe, ID: universe
+	2 container GALAXY ROYALE // CONSOLE, ID: debug-console
+		3 heading GALAXY ROYALE // CONSOLE, Value: 2, ID: console-title
+			4 text GALAXY ROYALE // CONSOLE
+		5 text HELP / STATS / SCENE <NAME> / CLEAR / ` CLOSE
+		6 container Description: Console output, ID: console-output
+			7 text > scene boss-bastion-5
+			8 text SCENE BOSS-BASTION-5 / ready. Close console to simulate.
+			9 text > scene boss-bastion-5
+			10 text SCENE BOSS-BASTION-5 / ready. Close console to simulate.
+			11 text > stats
+			12 text WEBGL2 / 240 FPS / p95 4.30 ms
+			13 text 11183 quads / 45 entities / 14 particles
+			14 text POSITION 1801.5, -126.3
+			15 text Radial Wastes / Outer reach · Tier 1 / danger 1
+			16 text HULL 100/100 / SHIELD 0
+			17 text ZOOM 0.60 / WORLD 888 x 500 / UI 533 x 300
+			18 text SHIP LV 1 / XP 0 / CARGO 0/16
+			19 text LAST BOSS UI 301 / 68 / 220 / 40
+			20 text > scene boss-coil-5
+			21 text SCENE BOSS-COIL-5 / ready. Close console to simulate.
+			22 text > scene boss-dart-5
+			23 text SCENE BOSS-DART-5 / ready. Close console to simulate.
+			24 text > scene biome-riveter
+			25 text SCENE BIOME-RIVETER / ready. Close console to simulate.
+			26 text > scene home
+			27 text SCENE HOME / ready. Close console to simulate.
+			28 text > stats
+			29 text WEBGL2 / 240 FPS / p95 4.30 ms
+			30 text 12278 quads / 57 entities / 0 particles
+			31 text POSITION 0.0, 0.0
+			32 text Haven Expanse / Dock protected / danger 0
+			33 text HULL 100/100 / SHIELD 0
+			34 text ZOOM 0.76 / WORLD 944 x 472 / UI 720 x 360
+			35 text SHIP LV 1 / XP 0 / CARGO 0/16
+			36 text LAST BOSS UI NONE
+			37 text > stats
+			38 text WEBGL2 / 240 FPS / p95 4.30 ms
+			39 text 6026 quads / 57 entities / 0 particles
+			40 text POSITION 0.0, 0.0
+			41 text Haven Expanse / Dock protected / danger 0
+			42 text HULL 100/100 / SHIELD 0
+			43 text ZOOM 1.60 / WORLD 450 x 225 / UI 720 x 360
+			44 text SHIP LV 1 / XP 0 / CARGO 0/16
+			45 text LAST BOSS UI NONE
+			46 text > scene boss-bastion-5
+			47 text SCENE BOSS-BASTION-5 / ready. Close console to simulate.
+			49 text > stats
+			50 text WEBGL2 / 239 FPS / p95 4.30 ms
+			51 text 10673 quads / 73 entities / 62 particles
+			52 text POSITION 1814.1, -182.7
+			53 text Radial Wastes / Outer reach · Tier 1 / danger 1
+			54 text HULL 68/100 / SHIELD 0
+			55 text ZOOM 1.60 / WORLD 450 x 225 / UI 720 x 360
+			56 text SHIP LV 1 / XP 0 / CARGO 0/16
+			57 text LAST BOSS UI 488 / 68 / 220 / 40
+		48 text field (settable) Description: Console command, ID: console-input
+
+The focused UI element is 48 text field (settable) Description: Console command, ID: console-input

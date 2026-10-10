@@ -1,5 +1,8 @@
 //! WASM browser adapter for Galaxy Royale's portable Rust simulation.
-use crate::{pixel_ui, renderer, ui_scene};
+use crate::{
+    boss_overlay::{BossOverlay, OverlayInput},
+    pixel_ui, renderer, ui_scene,
+};
 
 use engine_core::{CameraZoom, FrameBuilder, Vec2};
 use game_core::{Game, GameEvent, Hud, InputFrame, Profile};
@@ -17,6 +20,9 @@ pub struct Galaxy {
     ui_mode: u8,
     ui_scene: ui_scene::UiScene,
     ui_time: f32,
+    presentation_time: f64,
+    boss_overlay: BossOverlay,
+    last_boss_panel: Option<[f32; 4]>,
     reduced_motion: bool,
     ui_insets: [f32; 4],
     touch_ui: bool,
@@ -115,6 +121,9 @@ impl Galaxy {
             ui_mode: 2,
             ui_scene: ui_scene::UiScene::default(),
             ui_time: 0.0,
+            presentation_time: 0.0,
+            boss_overlay: BossOverlay::default(),
+            last_boss_panel: None,
             reduced_motion: false,
             ui_insets: [0.0; 4],
             touch_ui: false,
@@ -134,6 +143,7 @@ impl Galaxy {
             0.0
         };
         self.ui_time += delta;
+        self.presentation_time += f64::from(delta);
         self.camera_zoom.advance(delta);
         self.update_world_viewport();
         let mut input: InputFrame = serde_wasm_bindgen::from_value(input).map_err(js)?;
@@ -180,12 +190,31 @@ impl Galaxy {
             render_camera[1] + (top - bottom) * 0.5,
         ];
         if self.ui_mode == 1 || self.ui_scene.groups.is_empty() {
-            pixel_ui::draw_ui(
+            let boss_panel = if self.ui_mode == 1 {
+                let panel = self.boss_overlay.update(&OverlayInput {
+                    hud: &hud,
+                    focus: self.game.render_focus(alpha),
+                    camera: render_camera,
+                    viewport,
+                    insets: self.ui_insets,
+                    zoom: self.camera_zoom.value(),
+                    now_ms: (self.presentation_time * 1000.0) as u64,
+                    scene: &self.ui_scene,
+                    touch: self.touch_ui,
+                });
+                self.last_boss_panel = panel.map(|[x, y, w, h]| [x + left, y + top, w, h]);
+                panel
+            } else {
+                None
+            };
+            pixel_ui::draw_ui_with_boss_panel(
                 &mut self.ui_frame,
                 &hud,
                 ui_camera,
                 ui_viewport,
                 self.ui_mode,
+                boss_panel,
+                self.boss_overlay.minimal(),
             );
         }
         if self.touch_ui && self.ui_mode == 1 {
@@ -240,6 +269,7 @@ impl Galaxy {
         self.game.purchase(id).map_err(js)
     }
     pub fn resize(&mut self, width: u32, height: u32) {
+        self.boss_overlay.reset();
         self.renderer.resize(width, height);
         self.update_world_viewport();
     }
@@ -267,6 +297,9 @@ impl Galaxy {
             .to_vec()
     }
     pub fn set_paused(&mut self, value: bool) {
+        if self.paused != value {
+            self.boss_overlay.reset();
+        }
         self.paused = value;
         self.accumulator = 0.0;
         self.pending_destination = None;
@@ -277,6 +310,16 @@ impl Galaxy {
     }
     pub fn set_ui_mode(&mut self, mode: u8) {
         self.ui_mode = mode.min(3);
+        if self.ui_mode != 1 {
+            self.boss_overlay.reset();
+        }
+    }
+    /// Last visible flight panel, in full logical-screen coordinates. The
+    /// paused console can inspect it without advancing or changing combat.
+    pub fn boss_ui_bounds(&self) -> Vec<f32> {
+        self.last_boss_panel
+            .map(|bounds| bounds.to_vec())
+            .unwrap_or_default()
     }
     pub fn set_ui_scene(&mut self, scene: JsValue) -> Result<(), JsValue> {
         self.ui_scene = serde_wasm_bindgen::from_value(scene).map_err(js)?;
@@ -321,18 +364,23 @@ impl Galaxy {
         self.game.acknowledge_credits();
     }
     pub fn return_to_home(&mut self) {
+        self.boss_overlay.reset();
+        self.last_boss_panel = None;
         self.game.reset_to_dock();
     }
     pub fn set_touch_ui(&mut self, value: bool) {
         self.touch_ui = value;
     }
     pub fn diagnostic(&mut self, command: &str) {
+        self.boss_overlay.reset();
+        self.last_boss_panel = None;
         self.game.diagnostic(command);
     }
     pub fn lose_device(&self) {
         self.renderer.lose_device();
     }
     pub async fn recover(&mut self) -> Result<(), JsValue> {
+        self.boss_overlay.reset();
         let canvas = self.renderer.canvas.clone();
         let (width, height) = (canvas.width(), canvas.height());
         self.renderer = renderer::Renderer::new(canvas).await?;

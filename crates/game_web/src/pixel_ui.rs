@@ -208,7 +208,7 @@ pub fn draw_controls(
 ) {
     let camera = Vec2::from_array(camera);
     let viewport = Vec2::from_array(viewport);
-    if !camera.is_finite() || !viewport.is_finite() || viewport.x < 220.0 || viewport.y < 140.0 {
+    if !camera.is_finite() || !viewport.is_finite() || viewport.x < 180.0 || viewport.y < 140.0 {
         return;
     }
     let mut ui = Ui {
@@ -269,12 +269,34 @@ pub fn draw_ui(
     viewport: [f32; 2],
     mode: u8,
 ) {
+    draw_ui_with_boss_panel(
+        frame,
+        hud,
+        camera,
+        viewport,
+        mode,
+        Some([(viewport[0] * 0.5 - 110.0).floor(), 44.0, 220.0, 40.0]),
+        false,
+    );
+}
+
+/// The browser supplies a presentation-only, screen-space boss placement.
+/// A compact panel retains its health meter and phase using the same font cells.
+pub fn draw_ui_with_boss_panel(
+    frame: &mut FrameBuilder,
+    hud: &Hud,
+    camera: [f32; 2],
+    viewport: [f32; 2],
+    mode: u8,
+    boss_panel: Option<[f32; 4]>,
+    minimal: bool,
+) {
     let camera = Vec2::from_array(camera);
     let viewport = Vec2::from_array(viewport);
     if mode == 0
         || !camera.is_finite()
         || !viewport.is_finite()
-        || viewport.x < 220.0
+        || viewport.x < if mode == 1 { 180.0 } else { 220.0 }
         || viewport.y < 140.0
     {
         return;
@@ -306,50 +328,88 @@ pub fn draw_ui(
     if mode != 1 {
         return;
     }
-    ui.panel(12.0, 12.0, 160.0, 28.0);
-    ui.text(20.0, 18.0, hud.biome.name, 1.0, CYAN);
-    let status = if hud.safe {
-        "SAFE".into()
-    } else {
-        format!("THREAT {:02}", hud.danger)
-    };
-    ui.text(20.0, 29.0, &status, 1.0, if hud.safe { MINT } else { GOLD });
-    if let Some(boss) = &hud.boss {
-        let x = (viewport.x * 0.5 - 110.0).floor();
-        let name = if boss.generation > 0 {
+    // Small safe areas retain the essential meters and compact boss row.
+    let minimal = minimal || viewport.x < 220.0;
+    if !minimal {
+        ui.panel(12.0, 12.0, 160.0, 28.0);
+        ui.text(20.0, 18.0, hud.biome.name, 1.0, CYAN);
+        let status = if hud.safe {
+            "SAFE".into()
+        } else {
+            format!("THREAT {:02}", hud.danger)
+        };
+        ui.text(20.0, 29.0, &status, 1.0, if hud.safe { MINT } else { GOLD });
+    }
+    if let (Some(boss), Some([x, y, width, height])) = (&hud.boss, boss_panel)
+        && [x, y, width, height].iter().all(|v| v.is_finite())
+        && width >= 100.0
+        && height == 40.0
+        && x >= 0.0
+        && y >= 0.0
+        && x + width <= viewport.x
+        && y + height <= viewport.y
+    {
+        let limit = ((width - 14.0) / RoyaleMono::ADVANCE).floor() as usize;
+        let name = if width < 140.0 && boss.generation > 0 {
+            format!(
+                "G{} / {}",
+                boss.generation,
+                ["DART", "BASTION", "COIL"][boss.family.min(2)]
+            )
+        } else if boss.generation > 0 {
             format!("G{} / {}", boss.generation, boss.name)
         } else {
             boss.name.clone()
         };
+        let label = boss_phase_label(&boss.phase, width);
         let phase = if boss.telegraph {
-            format!("WARNING / {}", boss.phase)
+            format!(
+                "{} / {}",
+                if width < 168.0 { "WARN" } else { "WARNING" },
+                label
+            )
         } else {
-            boss.phase.clone()
+            label.into()
         };
-        ui.panel(x, 44.0, 220.0, 40.0);
-        ui.text(x + 7.0, 49.0, &bounded_label(&name), 1.0, MAGENTA);
+        ui.panel(x, y, width, height);
         ui.text(
             x + 7.0,
-            61.0,
-            &bounded_label(&phase),
+            y + 5.0,
+            &name.chars().take(limit).collect::<String>(),
+            1.0,
+            MAGENTA,
+        );
+        ui.text(
+            x + 7.0,
+            y + 17.0,
+            &phase.chars().take(limit).collect::<String>(),
             1.0,
             if boss.telegraph { GOLD } else { DIM },
         );
-        ui.bar(x + 7.0, 75.0, 206.0, boss.health, boss.max_health, RED);
+        ui.bar(
+            x + 7.0,
+            y + 31.0,
+            width - 14.0,
+            boss.health,
+            boss.max_health,
+            RED,
+        );
     }
 
-    let currency_x = viewport.x - 214.0;
-    ui.panel(currency_x, 12.0, 142.0, 24.0);
-    for category in 0..3 {
-        let x = currency_x + 8.0 + category as f32 * 43.0;
-        ui.icon(x, 19.0, category);
-        ui.text(
-            x + 14.0,
-            20.0,
-            &compact(hud.currency[category]),
-            1.0,
-            [RED, CYAN, MINT][category],
-        );
+    if !minimal {
+        let currency_x = viewport.x - 214.0;
+        ui.panel(currency_x, 12.0, 142.0, 24.0);
+        for category in 0..3 {
+            let x = currency_x + 8.0 + category as f32 * 43.0;
+            ui.icon(x, 19.0, category);
+            ui.text(
+                x + 14.0,
+                20.0,
+                &compact(hud.currency[category]),
+                1.0,
+                [RED, CYAN, MINT][category],
+            );
+        }
     }
 
     if !hud.dock || ratio(hud.hull, hud.max_hull) < 1.0 {
@@ -404,7 +464,7 @@ pub fn draw_ui(
     }
 
     let position = Vec2::from_array(hud.position);
-    if !position.is_finite() || position.length_squared() <= 240.0 * 240.0 {
+    if minimal || !position.is_finite() || position.length_squared() <= 240.0 * 240.0 {
         return;
     }
     let radar = Vec2::new(viewport.x - 60.0, viewport.y - 144.0);
@@ -429,15 +489,25 @@ pub fn draw_ui(
     }
 }
 
+fn boss_phase_label(phase: &str, width: f32) -> &str {
+    if width >= 168.0 {
+        return phase;
+    }
+    match phase {
+        "Attack charging" => "CHARGE",
+        "Siege broadside" => "BROADSIDE",
+        "Serpent pursuit" => "PURSUIT",
+        "Sidewinder rush" => "COIL RUSH",
+        _ => phase,
+    }
+}
+
 fn ratio(value: f32, maximum: f32) -> f32 {
     if !value.is_finite() || !maximum.is_finite() || maximum <= 0.0 {
         0.0
     } else {
         (value / maximum).clamp(0.0, 1.0)
     }
-}
-fn bounded_label(text: &str) -> String {
-    text.chars().take(34).collect()
 }
 fn compact(value: u32) -> String {
     if value >= 1_000_000_000 {
@@ -699,6 +769,161 @@ mod tests {
                 "actual warning glyph cells must be visible"
             );
         }
+    }
+
+    #[test]
+    fn compact_boss_panels_keep_real_phase_glyphs_health_and_inset_padding() {
+        let mut hud = game_core::Game::new(game_core::Profile::default()).hud();
+        hud.boss = Some(game_core::BossHud {
+            name: "Bastion Oblivion".into(),
+            health: 50.0,
+            max_health: 100.0,
+            family: 1,
+            generation: 5,
+            phase: "Core exposed".into(),
+            telegraph: false,
+            position: [0.0; 2],
+            core_position: [0.0; 2],
+        });
+        for width in [100.0, 140.0, 168.0, 220.0] {
+            let mut frame = FrameBuilder::new();
+            draw_ui_with_boss_panel(
+                &mut frame,
+                &hud,
+                [0.0; 2],
+                [400.0, 240.0],
+                1,
+                Some([12.0, 68.0, width, 40.0]),
+                false,
+            );
+            let mut phase_cells = 0;
+            let mut health_cells = 0;
+            for batch in &frame.frame().batches {
+                for pixel in &batch.pixels {
+                    let t = batch.transforms[pixel.transform as usize];
+                    let p = t.point(Vec2::from_array(pixel.local)) + Vec2::new(200.0, 120.0);
+                    if (68.0..108.0).contains(&p.y) {
+                        assert!((12.0..12.0 + width).contains(&p.x));
+                        let glyph = t.a[2] == 1.0 && t.b[1] == 1.0;
+                        if pixel.color == MAGENTA || (pixel.color == DIM && glyph) {
+                            assert!(p.x >= 19.0 && p.x < 12.0 + width - 7.0);
+                        }
+                        if pixel.color == DIM && glyph && (85.0..92.0).contains(&p.y) {
+                            phase_cells += 1;
+                        }
+                        if pixel.color == RED && (99.0..103.0).contains(&p.y) {
+                            health_cells += 1;
+                        }
+                    }
+                }
+            }
+            let expected_phase_cells: usize = "CORE EXPOSED"
+                .chars()
+                .map(|c| RoyaleMono::body(c).occupied_count())
+                .sum();
+            assert_eq!(
+                phase_cells, expected_phase_cells,
+                "phase must be complete, including at 100px"
+            );
+            assert!(
+                health_cells > 0,
+                "compact panel retains the actual health fill"
+            );
+        }
+    }
+
+    #[test]
+    fn every_authored_attack_has_a_complete_compact_label() {
+        for phase in [
+            "Radial weave",
+            "Locked dash",
+            "Scissor pass",
+            "Gap spiral",
+            "Royal cross",
+            "Aimed fan",
+            "Siege broadside",
+            "Pincer gates",
+            "Quadrant wall",
+            "Rotating rails",
+            "Serpent pursuit",
+            "Sidewinder rush",
+            "Ouroboros loop",
+            "Tail barrage",
+            "Vortex lunge",
+            "Core exposed",
+        ] {
+            let compact = boss_phase_label(phase, 100.0);
+            assert!(
+                compact.chars().count() <= 14,
+                "incomplete compact cue: {phase}"
+            );
+            assert_eq!(boss_phase_label(phase, 220.0), phase);
+        }
+        assert_eq!(
+            format!("WARN / {}", boss_phase_label("Attack charging", 100.0)),
+            "WARN / CHARGE"
+        );
+    }
+
+    #[test]
+    fn invalid_boss_placement_cannot_emit_stray_boss_pixels() {
+        let mut game = game_core::Game::new(game_core::Profile::default());
+        game.diagnostic("boss-coil-5");
+        let hud = game.hud();
+        let mut baseline = FrameBuilder::new();
+        draw_ui_with_boss_panel(
+            &mut baseline,
+            &hud,
+            [0.0; 2],
+            [400.0, 240.0],
+            1,
+            None,
+            false,
+        );
+        for rect in [
+            [-1.0, 60.0, 220.0, 40.0],
+            [300.0, 60.0, 220.0, 40.0],
+            [12.0, 60.0, 99.0, 40.0],
+            [12.0, 60.0, 220.0, 41.0],
+            [f32::NAN, 60.0, 220.0, 40.0],
+        ] {
+            let mut frame = FrameBuilder::new();
+            draw_ui_with_boss_panel(
+                &mut frame,
+                &hud,
+                [0.0; 2],
+                [400.0, 240.0],
+                1,
+                Some(rect),
+                false,
+            );
+            assert_eq!(frame.frame().pixel_count, baseline.frame().pixel_count);
+        }
+    }
+
+    #[test]
+    fn minimal_flight_hides_only_optional_telemetry_and_keeps_hull() {
+        let mut hud = game_core::Game::new(game_core::Profile::default()).hud();
+        hud.dock = false;
+        hud.position = [1800.0, 0.0];
+        let mut frame = FrameBuilder::new();
+        draw_ui_with_boss_panel(&mut frame, &hud, [0.0; 2], [400.0, 240.0], 1, None, true);
+        let mut hull = 0;
+        for batch in &frame.frame().batches {
+            for pixel in &batch.pixels {
+                let p = batch.transforms[pixel.transform as usize]
+                    .point(Vec2::from_array(pixel.local))
+                    + Vec2::new(200.0, 120.0);
+                assert!(
+                    p.y >= 192.0,
+                    "biome/currency/compass quads must be absent in minimal mode"
+                );
+                if pixel.color == MINT {
+                    hull += 1;
+                }
+            }
+        }
+        assert!(hull > 0, "minimal mode retains real hull fill");
     }
 
     #[test]

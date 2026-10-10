@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 150,
+  "revision": 176,
   "name": "Galaxy Royale",
   "phase": "Foundation → playable vertical slice",
-  "updatedAt": "2026-10-10T18:24:05.374Z",
+  "updatedAt": "2026-10-10T19:15:06.761Z",
   "tasks": [
     {
       "id": "studio",
@@ -105,7 +105,7 @@
       "status": "complete",
       "owner": "Gameplay specialist",
       "priority": "high",
-      "description": "Fixed 60 Hz ECS gameplay includes dock/belt/combat, three ordinary families with fifteen boss controllers, persistent queues, loot/upgrades/XP/cargo, eight champion trials and the solo league. Sixty-three native gameplay checks pass. Fifteen real-projectile diagnostic defeats and a naturally queued generation-five loss/retry are independently reproduced. Full campaign play, human balance and phone acceptance remain separate.",
+      "description": "Fixed 60 Hz ECS gameplay includes dock/belt/combat, three ordinary families with fifteen boss controllers, persistent queues, loot/upgrades/XP/cargo, eight champion trials and the solo league. Seventy-five native core tests now include interpolated presentation focus and ten Iron Belt Riveter regressions. The dated fifteen-projectile boss sweep and prepared generation-five checkpoint loss/retry remain separate proofs. Full natural campaign play, human balance and phone acceptance remain pending.",
       "dependencies": [
         "engine"
       ],
@@ -141,9 +141,9 @@
         }
       ],
       "blocker": "",
-      "revision": 5,
+      "revision": 6,
       "createdAt": "2026-10-10T14:29:27.000Z",
-      "updatedAt": "2026-10-10T18:21:10.341Z"
+      "updatedAt": "2026-10-10T19:15:06.714Z"
     },
     {
       "id": "web-shell",
@@ -173,10 +173,10 @@
       ],
       "evidence": [
         {
-          "label": "Latest full release build and17 game assets",
+          "label": "Final HUD/Riveter normal release build and 18 game assets",
           "kind": "build",
-          "path": "artifacts/release-build.log",
-          "details": "Both WASM backends, TypeScript, game/dashboard Vite builds and PWA generation pass."
+          "path": "artifacts/hud-riveter-build-final.log",
+          "details": "Normal WebGPU/WebGL2 WASM, TypeScript and separate game/Studio Vite build pass."
         },
         {
           "label": "Actual desktop browser validation and limits",
@@ -207,12 +207,17 @@
           "kind": "image",
           "path": "artifacts/recovery-proof.jpg",
           "details": "Live device.destroy recovered WebGPU while retaining outer position, damaged hull and active boss."
+        },
+        {
+          "label": "Current adaptive pixel UI and biome enemy browser observation",
+          "kind": "note",
+          "path": "artifacts/hud-riveter-browser-validation.json"
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 3,
       "createdAt": "2026-10-10T14:29:27.000Z",
-      "updatedAt": "2026-10-10T16:20:08.729Z"
+      "updatedAt": "2026-10-10T19:12:42.870Z"
     },
     {
       "id": "audio",
@@ -296,7 +301,7 @@
       "status": "complete",
       "owner": "Producer / Production specialist QA",
       "priority": "normal",
-      "description": "Compiled game-only cache galaxy-5a206c9f1e2acf40 contains eighteen assets; independently recomputed content hashes, shipping exports and public/dist backend hashes match. Studio, project state and QA contract probes are excluded. Actual local pending-update, Apply at Haven and checkpoint-to-title flow passed. Physical Safari/PWA/background/offline lifecycle acceptance remains pending.",
+      "description": "Final local game-only cache galaxy-f37b303ee2258928 contains eighteen assets; independent recomputed hashes, normal shipping exports and public/dist backend files match. Studio, production state and QA contract probes are excluded. Actual current pending-update, Apply at Haven, retained settings and checkpoint-to-title flow passed. Historical desktop offline proof remains dated; current-build offline/recovery and physical Safari/PWA lifecycle remain pending.",
       "dependencies": [
         "web-shell",
         "save"
@@ -313,20 +318,25 @@
       ],
       "evidence": [
         {
-          "label": "Independent compiled-package scan",
+          "label": "Final independent local packaging, exact18asset cache and QA exclusion",
           "kind": "note",
-          "path": "artifacts/boss-shipping-export-review.json"
+          "path": "artifacts/hud-riveter-packaging-review.md"
         },
         {
-          "label": "Local browserupdate evidence and limits",
+          "label": "Actual current PWA update through Haven and limits",
           "kind": "note",
-          "path": "artifacts/boss-browser-validation.json"
+          "path": "artifacts/hud-riveter-browser-validation.json"
+        },
+        {
+          "label": "Historical desktop offline behavior",
+          "kind": "note",
+          "path": "artifacts/browser-validation.json"
         }
       ],
       "blocker": "",
-      "revision": 6,
+      "revision": 7,
       "createdAt": "2026-10-10T14:29:27.000Z",
-      "updatedAt": "2026-10-10T18:21:10.372Z"
+      "updatedAt": "2026-10-10T19:12:42.884Z"
     },
     {
       "id": "asteroids",
@@ -1976,10 +1986,10 @@
     {
       "id": "task-426419e2",
       "title": "Adaptive boss HUD placement: prototype and integration",
-      "description": "Current captures show large boss heads partly behind the fixed top-center panel. Engine is building a standalone pure-Rust three-anchor prototype under work/ only, with core/player exclusions, safe-area reservations and retained-anchor hysteresis. Root owns subsequent production integration and current-build browser acceptance. No adaptive placement is shipped in the current release.",
+      "description": "Integrated fixed-scale Rust pixel boss health/phase placement uses actual interpolated shaken f32 projection, safe areas and real control/text reservations. Compact rows and encounter-latched minimal telemetry preserve health and touch visuals. Forty-two standalone layout tests, six actual adapter tests, independent occupied-quad projection review and representative final WebGPU/WebGL2 desktop/small-landscape captures pass. A found 200px safe-area allocation/painter mismatch is repaired and regressed. Overconstrained/far-f32, all-content human and physical-phone limits remain explicit.",
       "department": "Interface",
-      "owner": "/root/engine_research",
-      "status": "active",
+      "owner": "Producer / Engine specialist / Independent QA",
+      "status": "complete",
       "priority": "high",
       "dependencies": [
         "engine"
@@ -1987,33 +1997,129 @@
       "acceptanceCriteria": [
         {
           "text": "Bounded deterministic standalone layout and meaningful zoom/viewport/hysteresis tests",
-          "met": false
+          "met": true
         },
         {
           "text": "Integrated actual pixel UI avoids visible cores/player and preserves minimal fixed-scale controls",
-          "met": false
+          "met": true
         },
         {
           "text": "Representative desktop and small landscape browser acceptance on both renderers",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Independent bounded layout/cache tests and timing limits",
+          "kind": "note",
+          "path": "artifacts/boss-hud-layout-qa.md"
+        },
+        {
+          "label": "Independent actual native pixel projection and small-area repair review",
+          "kind": "note",
+          "path": "artifacts/boss-overlay-engine-review.md"
+        },
+        {
+          "label": "Current normal-package browser captures, fingerprints and explicit limits",
+          "kind": "note",
+          "path": "artifacts/hud-riveter-browser-validation.json"
+        },
+        {
+          "label": "Final native web suite: 74 tests",
+          "kind": "note",
+          "path": "artifacts/hud-riveter-web-tests-final.log"
+        }
+      ],
+      "blocker": "",
+      "revision": 3,
+      "createdAt": "2026-10-10T18:22:51.855Z",
+      "updatedAt": "2026-10-10T19:12:42.830Z"
+    },
+    {
+      "id": "task-8db643cb",
+      "title": "Iron Belt Riveter: first biome-specific pixel enemy",
+      "description": "First production biome-specific enemy integrated in the Iron Belt: original 40×40 Riveter with surviving cell muzzles, locked triple burst and destructible barrels. Birth-biome identity, shared limits/sanctuary/ordinary progression remain integrated. Ten meaningful native regressions plus the 75-test core suite and representative actual normal-package WebGPU/WebGL2 captures pass. This completion is scoped to implementation/presentation; natural distant-biome human tuning and the broader roster remain separate.",
+      "department": "Gameplay / Art",
+      "owner": "/root/gameplay_design",
+      "status": "complete",
+      "priority": "high",
+      "dependencies": [
+        "gameplay",
+        "engine"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Original occupied-cell hull, surviving muzzle checks and distinct readable attack phases",
+          "met": true
+        },
+        {
+          "text": "Standard swept-cell damage, bounded spawning, sanctuary cleanup and once-only existing rewards",
+          "met": true
+        },
+        {
+          "text": "Meaningful native tests and representative actual browser observation on both renderers",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Authored assets and actual native gameplay handoff",
+          "kind": "note",
+          "path": "artifacts/riveter-handoff.md"
+        },
+        {
+          "label": "Full core regressions and native engine/web checks before narrow HUD repair",
+          "kind": "note",
+          "path": "artifacts/hud-riveter-rust-tests.log"
+        },
+        {
+          "label": "Representative actual two-backend Riveter scenes and scope limits",
+          "kind": "note",
+          "path": "artifacts/hud-riveter-browser-validation.json"
+        }
+      ],
+      "blocker": "",
+      "revision": 4,
+      "createdAt": "2026-10-10T18:38:33.965Z",
+      "updatedAt": "2026-10-10T19:15:06.699Z"
+    },
+    {
+      "id": "task-e8684a94",
+      "title": "Radiation biome enemy: deterministic controller and pixel concept",
+      "description": "Gameplay specialist is authoring an isolated portable controller and original occupied-cell concept under work/radiation-enemy. Root will integrate it in a later content session after review. It is not part of the current HUD/Riveter release. Scope includes readable phases, stable birth identity, world-space sanctuary rules, normal bounded rewards/caps and a concrete integration contract.",
+      "department": "Gameplay / Art",
+      "owner": "/root/gameplay_design",
+      "status": "active",
+      "priority": "normal",
+      "dependencies": [
+        "gameplay",
+        "engine"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Concrete native controller, original cell concept and meaningful deterministic phase/safety tests",
+          "met": false
+        },
+        {
+          "text": "Reviewed integration contract preserving standard progression, sanctuary and cap behavior",
+          "met": false
+        },
+        {
+          "text": "Production integration and actual browser presentation evidence",
           "met": false
         }
       ],
       "evidence": [
         {
-          "label": "Observed issue and concrete proposed anchors",
+          "label": "Current biome scope and first implemented enemy contract",
           "kind": "note",
-          "path": "artifacts/next-boss-readability.md"
-        },
-        {
-          "label": "Actual current captures and limits",
-          "kind": "note",
-          "path": "artifacts/boss-browser-validation.json"
+          "path": "artifacts/riveter-handoff.md"
         }
       ],
       "blocker": "",
       "revision": 1,
-      "createdAt": "2026-10-10T18:22:51.855Z",
-      "updatedAt": "2026-10-10T18:22:51.855Z"
+      "createdAt": "2026-10-10T18:51:54.723Z",
+      "updatedAt": "2026-10-10T18:51:54.723Z"
     }
   ],
   "reviews": [
@@ -2275,6 +2381,75 @@
         "performance",
         "balance"
       ]
+    },
+    {
+      "id": "review-497066ca",
+      "title": "Adaptive HUD and first biome enemy / actual asynchronous discussion",
+      "body": "Root checked that the current panel problem is placement, not lost boss pixel geometry. Layout must use the actual eased zoom, interpolated core/player position and shaken presentation camera while click targeting remains unshaken. Independent QA confirmed that a centered player in a 320 by 180 logical viewport invalidates all three original anchors; compact panels and a bounded clear-space search are now assigned. Root also caught the valid f32 1.6 endpoint promoted to f64. Gameplay found existing biome variety only changes family mixes and scenery, then accepted a bounded first Iron Belt variant with actual occupied cells, distinct attack phases and standard progression. These are actual messages and code inspections, not a simulated meeting. Neither new feature is published or browser-accepted yet.",
+      "author": "Producer",
+      "source": "Actual active specialist assignments and integration observations",
+      "createdAt": "2026-10-10T18:38:33.980Z",
+      "participants": [
+        "Producer / Integrator",
+        "Engine specialist",
+        "Gameplay specialist",
+        "Production / QA specialist"
+      ],
+      "taskIds": [
+        "task-426419e2",
+        "task-8db643cb"
+      ]
+    },
+    {
+      "id": "review-f6c7cae4",
+      "title": "Riveter implementation and root integration / actual source review",
+      "body": "Gameplay froze the authored 40 by 40 Riveter and isolated controller after ten targeted native regressions and the 75-test integrated core suite. Root reviewed muzzle selection and requested an explicit symmetric-hole tie case; it now returns a real occupied cell center. Root applied shared spawn/update/render/diagnostic hooks and changed variant selection to the actual spawn biome. Gameplay independently read root focus/projection/lifecycle code and found no new simulation/save mutation or transform mismatch. Production boss_layout source was still awaiting the engine cache revision at review time; no browser or device acceptance is implied. Exact evidence and boundaries are in the attached handoffs.",
+      "author": "Producer",
+      "source": "Actual gameplay implementation and read-only integration handoff",
+      "createdAt": "2026-10-10T18:51:08.554Z",
+      "participants": [
+        "Producer / Integrator",
+        "Gameplay specialist"
+      ],
+      "taskIds": [
+        "task-8db643cb",
+        "task-426419e2"
+      ]
+    },
+    {
+      "id": "review-a37f4b87",
+      "title": "Adaptive HUD / Riveter integration: actual asynchronous engine, gameplay and QA reviews",
+      "body": "Engine authored and QA independently exercised the frozen42-test bounded layout/cache prototype. Root integrated actual interpolated projection, safe areas, semantic reservations and compact pixel text. Engine reviewed actual extracted quads and found a valid200px safe-area allocation emitting zero native HUD. Root lowered flight/touch guards and added a direct regression; engine independently verified1,011HUDquads and266touchquads. Gameplay authored Riveter and ten meaningful standard-projectile/progression tests; root requested actual surviving front-cell tie selection and spawn-location biome identity. Final root browser captures use both normal renderers, actual wheel input, a100px touch-layout row and the PWA update flow. QA independently verified exact18asset packaging and QA-probe exclusion. Meetings are asynchronous source discussions, not simulated attendance. CPU/diagnostic presentation proof does not complete natural human/physical/remote acceptance.",
+      "author": "Producer",
+      "source": "Actual Rust integration, independent reviews and visible packaged-game browser checks",
+      "createdAt": "2026-10-10T19:12:42.894Z",
+      "participants": [
+        "Producer / Integrator",
+        "Engine specialist",
+        "Gameplay specialist",
+        "Production specialist / Independent QA"
+      ],
+      "taskIds": [
+        "task-426419e2",
+        "task-8db643cb"
+      ]
+    },
+    {
+      "id": "review-76b8b982",
+      "title": "Final HUD/Riveter package and evidence readback",
+      "body": "Independent QA accepted the final local normal package: exact eighteen game assets under galaxy-f37b303ee2258928, both compiled normal WASM modules, matching public/dist files and excluded QA/Studio data. QA reread all eleven final browser captures and verified JPEG signatures, capture hashes, source/backend attribution, actual WebGL2 telemetry and the 100×40 touch-layout row. All 203 ledger evidence paths exist at revision171. Historical offline/recovery and earlier fixed-HUD proofs remain dated; no full natural campaign, physical phone, current-build offline/device-loss or owner-authenticated remote execution is inferred. Detailed final source and scope reviews are retained in artifacts.",
+      "author": "Producer",
+      "source": "Independent final artifact and ledger readback",
+      "createdAt": "2026-10-10T19:15:06.730Z",
+      "participants": [
+        "Producer / Integrator",
+        "Production specialist / Independent QA"
+      ],
+      "taskIds": [
+        "task-426419e2",
+        "task-8db643cb",
+        "pwa"
+      ]
     }
   ],
   "decisions": [
@@ -2321,6 +2496,15 @@
       "author": "Producer",
       "source": "Actual frozen-source integration, independent specialist reviews and browser captures",
       "createdAt": "2026-10-10T18:18:18.059Z",
+      "status": "accepted"
+    },
+    {
+      "id": "decision-86355e38",
+      "title": "Keep compact boss information clear before optional telemetry",
+      "body": "Use the actual projected occupied-cell reactor/player and fixed semantic control bounds for pixel HUD placement. On valid no-fit, omit biome/currency/home telemetry for the whole encounter and retain compact health/phase, hull and visible touch controls. Never force a panel over protected targets. Bound reservations/search/cache lifetimes; record true no-fit and practical f32 precision limits. Allocation and flight/touch painter share180x140safe-area minimum.",
+      "author": "Producer",
+      "source": "Actual Rust integration, independent reviews and visible packaged-game browser checks",
+      "createdAt": "2026-10-10T19:12:42.903Z",
       "status": "accepted"
     }
   ],
@@ -4117,6 +4301,266 @@
       "author": "Producer",
       "source": "Actual completed worksheet and independently dispatched prototype review",
       "createdAt": "2026-10-10T18:24:05.374Z"
+    },
+    {
+      "id": "ad504a8e-6118-463a-a0de-5a744d1272d9",
+      "revision": 151,
+      "kind": "task.update",
+      "itemId": "task-426419e2",
+      "title": "Adaptive boss HUD placement: prototype and integration",
+      "author": "Producer",
+      "source": "Actual active specialist assignments and integration observations",
+      "createdAt": "2026-10-10T18:38:33.950Z"
+    },
+    {
+      "id": "464f05f5-20d8-49b8-a269-81033dedead8",
+      "revision": 152,
+      "kind": "task.create",
+      "itemId": "task-8db643cb",
+      "title": "Iron Belt Riveter: first biome-specific pixel enemy",
+      "author": "Producer",
+      "source": "Actual active specialist assignments and integration observations",
+      "createdAt": "2026-10-10T18:38:33.965Z"
+    },
+    {
+      "id": "b823611f-12ec-4b57-80e3-1ae650b70655",
+      "revision": 153,
+      "kind": "review",
+      "itemId": "review-497066ca",
+      "title": "Adaptive HUD and first biome enemy / actual asynchronous discussion",
+      "author": "Producer",
+      "source": "Actual active specialist assignments and integration observations",
+      "createdAt": "2026-10-10T18:38:33.980Z"
+    },
+    {
+      "id": "8ba07cca-6c88-454a-9a69-af7c2c891eb9",
+      "revision": 154,
+      "kind": "run",
+      "itemId": "run-2e639f57",
+      "title": "Producer / Integrator · running",
+      "author": "Producer",
+      "source": "Actual active specialist assignments and integration observations",
+      "createdAt": "2026-10-10T18:38:33.997Z"
+    },
+    {
+      "id": "e9d1050b-6ba3-4c8a-a0e1-c9398abf2c8a",
+      "revision": 155,
+      "kind": "run",
+      "itemId": "run-f30ed785",
+      "title": "Engine specialist · running",
+      "author": "Producer",
+      "source": "Actual active specialist assignments and integration observations",
+      "createdAt": "2026-10-10T18:38:34.012Z"
+    },
+    {
+      "id": "7ab16a18-20a1-494f-a202-a27ec84e8710",
+      "revision": 156,
+      "kind": "run",
+      "itemId": "run-b7f17b3f",
+      "title": "Production / QA specialist · running",
+      "author": "Producer",
+      "source": "Actual active specialist assignments and integration observations",
+      "createdAt": "2026-10-10T18:38:34.028Z"
+    },
+    {
+      "id": "8f8dcc50-2913-43e6-9171-c97472726960",
+      "revision": 157,
+      "kind": "run",
+      "itemId": "run-ef8888e5",
+      "title": "Gameplay specialist · running",
+      "author": "Producer",
+      "source": "Actual active specialist assignments and integration observations",
+      "createdAt": "2026-10-10T18:38:34.043Z"
+    },
+    {
+      "id": "5f4e0e8c-44d3-4ff1-b909-f5cc9e3acaf7",
+      "revision": 158,
+      "kind": "run",
+      "itemId": "run-dced1d5c",
+      "title": "Spark local read-only UI auditor · failed",
+      "author": "Producer",
+      "source": "Actual worker process exit and inspected output",
+      "createdAt": "2026-10-10T18:49:25.221Z"
+    },
+    {
+      "id": "c74cc9a8-70b2-48ab-aabd-b4032fc24c1f",
+      "revision": 159,
+      "kind": "task.update",
+      "itemId": "task-8db643cb",
+      "title": "Iron Belt Riveter: first biome-specific pixel enemy",
+      "author": "Producer",
+      "source": "Actual gameplay implementation and read-only integration handoff",
+      "createdAt": "2026-10-10T18:51:08.523Z"
+    },
+    {
+      "id": "e7f03eda-9068-4993-aeb4-fec95b7eead1",
+      "revision": 160,
+      "kind": "review",
+      "itemId": "review-f6c7cae4",
+      "title": "Riveter implementation and root integration / actual source review",
+      "author": "Producer",
+      "source": "Actual gameplay implementation and read-only integration handoff",
+      "createdAt": "2026-10-10T18:51:08.554Z"
+    },
+    {
+      "id": "0a26f393-9877-4bed-bc94-f96172b155c5",
+      "revision": 161,
+      "kind": "run",
+      "itemId": "run-16de499a",
+      "title": "Gameplay specialist · completed",
+      "author": "Producer",
+      "source": "Actual gameplay implementation and read-only integration handoff",
+      "createdAt": "2026-10-10T18:51:08.586Z"
+    },
+    {
+      "id": "946467d8-2a02-4ab6-9393-f8e377e809a9",
+      "revision": 162,
+      "kind": "task.create",
+      "itemId": "task-e8684a94",
+      "title": "Radiation biome enemy: deterministic controller and pixel concept",
+      "author": "Producer",
+      "source": "Actual next-content isolated specialist assignment",
+      "createdAt": "2026-10-10T18:51:54.723Z"
+    },
+    {
+      "id": "65acfbae-2721-48bb-9f00-7b1938993d58",
+      "revision": 163,
+      "kind": "run",
+      "itemId": "run-e39bd5c0",
+      "title": "Gameplay specialist · running",
+      "author": "Producer",
+      "source": "Actual next-content isolated specialist assignment",
+      "createdAt": "2026-10-10T18:51:54.740Z"
+    },
+    {
+      "id": "59735b6d-15e4-4794-a99e-cb0c45b47db0",
+      "revision": 164,
+      "kind": "task.update",
+      "itemId": "task-426419e2",
+      "title": "Adaptive boss HUD placement: prototype and integration",
+      "author": "Producer",
+      "source": "Actual Rust integration, independent reviews and visible packaged-game browser checks",
+      "createdAt": "2026-10-10T19:12:42.830Z"
+    },
+    {
+      "id": "c84ccccf-bb88-4e6a-82c0-6d2afe5a80fc",
+      "revision": 165,
+      "kind": "task.update",
+      "itemId": "task-8db643cb",
+      "title": "Iron Belt Riveter: first biome-specific pixel enemy",
+      "author": "Producer",
+      "source": "Actual Rust integration, independent reviews and visible packaged-game browser checks",
+      "createdAt": "2026-10-10T19:12:42.845Z"
+    },
+    {
+      "id": "77951fc6-c5e9-4fdb-8689-f678ea5bfd53",
+      "revision": 166,
+      "kind": "task.update",
+      "itemId": "web-shell",
+      "title": "WASM renderer, controls and web shell",
+      "author": "Producer",
+      "source": "Actual Rust integration, independent reviews and visible packaged-game browser checks",
+      "createdAt": "2026-10-10T19:12:42.870Z"
+    },
+    {
+      "id": "e3ff4acf-3941-47ab-af7c-2bc4d11f134a",
+      "revision": 167,
+      "kind": "task.update",
+      "itemId": "pwa",
+      "title": "Offline PWA packaging",
+      "author": "Producer",
+      "source": "Actual Rust integration, independent reviews and visible packaged-game browser checks",
+      "createdAt": "2026-10-10T19:12:42.884Z"
+    },
+    {
+      "id": "b4786c7f-03da-4a39-b9de-b78205d0357a",
+      "revision": 168,
+      "kind": "review",
+      "itemId": "review-a37f4b87",
+      "title": "Adaptive HUD / Riveter integration: actual asynchronous engine, gameplay and QA reviews",
+      "author": "Producer",
+      "source": "Actual Rust integration, independent reviews and visible packaged-game browser checks",
+      "createdAt": "2026-10-10T19:12:42.894Z"
+    },
+    {
+      "id": "0f68c6a0-62f4-44d4-9d4c-abd11f682c27",
+      "revision": 169,
+      "kind": "decision",
+      "itemId": "decision-86355e38",
+      "title": "Keep compact boss information clear before optional telemetry",
+      "author": "Producer",
+      "source": "Actual Rust integration, independent reviews and visible packaged-game browser checks",
+      "createdAt": "2026-10-10T19:12:42.903Z"
+    },
+    {
+      "id": "7862873b-a003-4aa7-8dcf-adf8de6d542c",
+      "revision": 170,
+      "kind": "run",
+      "itemId": "run-da43da63",
+      "title": "Engine specialist · completed",
+      "author": "Producer",
+      "source": "Actual Rust integration, independent reviews and visible packaged-game browser checks",
+      "createdAt": "2026-10-10T19:12:42.911Z"
+    },
+    {
+      "id": "055f8a45-0fed-4fc7-92b5-db204dd8bcff",
+      "revision": 171,
+      "kind": "run",
+      "itemId": "run-cef05d3a",
+      "title": "Engine specialist · running",
+      "author": "Producer",
+      "source": "Actual Rust integration, independent reviews and visible packaged-game browser checks",
+      "createdAt": "2026-10-10T19:12:42.932Z"
+    },
+    {
+      "id": "b02b65d8-8eb6-49cc-bd93-2c8c18445510",
+      "revision": 172,
+      "kind": "task.update",
+      "itemId": "task-8db643cb",
+      "title": "Iron Belt Riveter: first biome-specific pixel enemy",
+      "author": "Producer",
+      "source": "Independent final artifact and ledger readback",
+      "createdAt": "2026-10-10T19:15:06.699Z"
+    },
+    {
+      "id": "00cd5634-d428-4bc4-91ae-092ec5753ee3",
+      "revision": 173,
+      "kind": "task.update",
+      "itemId": "gameplay",
+      "title": "Combat, radial zones and progression",
+      "author": "Producer",
+      "source": "Independent final artifact and ledger readback",
+      "createdAt": "2026-10-10T19:15:06.714Z"
+    },
+    {
+      "id": "e3cc5e8e-1b4a-4f94-8140-a7f8946a5db8",
+      "revision": 174,
+      "kind": "review",
+      "itemId": "review-76b8b982",
+      "title": "Final HUD/Riveter package and evidence readback",
+      "author": "Producer",
+      "source": "Independent final artifact and ledger readback",
+      "createdAt": "2026-10-10T19:15:06.730Z"
+    },
+    {
+      "id": "77153228-8b78-43ae-ba51-4b1a04dcc299",
+      "revision": 175,
+      "kind": "run",
+      "itemId": "run-45bedada",
+      "title": "Production / QA specialist · completed",
+      "author": "Producer",
+      "source": "Independent final artifact and ledger readback",
+      "createdAt": "2026-10-10T19:15:06.745Z"
+    },
+    {
+      "id": "18e5ff47-89c6-47d6-9da4-ccd4b1a8ece0",
+      "revision": 176,
+      "kind": "run",
+      "itemId": "run-241ebd1e",
+      "title": "Producer / Integrator · running",
+      "author": "Producer",
+      "source": "Independent final artifact and ledger readback",
+      "createdAt": "2026-10-10T19:15:06.761Z"
     }
   ],
   "runRecords": [
@@ -5165,6 +5609,268 @@
       "author": "Producer",
       "source": "Actual completed worksheet and independently dispatched prototype review",
       "createdAt": "2026-10-10T18:24:05.374Z"
+    },
+    {
+      "id": "run-2e639f57",
+      "title": "Producer / Integrator · running",
+      "agentId": "/root",
+      "agentLabel": "Producer / Integrator",
+      "state": "running",
+      "observedAt": "2026-10-10T18:38:33.988Z",
+      "taskIds": [
+        "task-426419e2",
+        "task-8db643cb"
+      ],
+      "summary": "Integrating exact presentation focus, compact pixel labels and shared-source browser placement; preparing the Riveter integration contract.",
+      "evidence": [
+        {
+          "label": "Current source baseline and prior browser limits",
+          "kind": "note",
+          "path": "artifacts/boss-browser-validation.json"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual active specialist assignments and integration observations",
+      "createdAt": "2026-10-10T18:38:33.997Z"
+    },
+    {
+      "id": "run-f30ed785",
+      "title": "Engine specialist · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Engine specialist",
+      "state": "running",
+      "observedAt": "2026-10-10T18:38:34.001Z",
+      "taskIds": [
+        "task-426419e2"
+      ],
+      "summary": "Extending the tested isolated layout with compact fallback and bounded integer search; production integration is not yet accepted.",
+      "evidence": [
+        {
+          "label": "Isolated native prototype",
+          "kind": "note",
+          "path": "work/boss-hud-layout/src/lib.rs"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual active specialist assignments and integration observations",
+      "createdAt": "2026-10-10T18:38:34.012Z"
+    },
+    {
+      "id": "run-b7f17b3f",
+      "title": "Production / QA specialist · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "Production / QA specialist",
+      "state": "running",
+      "observedAt": "2026-10-10T18:38:34.017Z",
+      "taskIds": [
+        "task-426419e2"
+      ],
+      "summary": "Independently reviewing native geometry and demanding explicit compact fallback, exact interpolation, bounded search and browser evidence.",
+      "evidence": [
+        {
+          "label": "Current review boundary",
+          "kind": "note",
+          "path": "artifacts/next-boss-readability.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual active specialist assignments and integration observations",
+      "createdAt": "2026-10-10T18:38:34.028Z"
+    },
+    {
+      "id": "run-ef8888e5",
+      "title": "Gameplay specialist · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Gameplay specialist",
+      "state": "running",
+      "observedAt": "2026-10-10T18:38:34.032Z",
+      "taskIds": [
+        "task-8db643cb"
+      ],
+      "summary": "Authoring original Iron Belt Riveter pixels and the isolated Rust controller, with standard progression and safety tests.",
+      "evidence": [
+        {
+          "label": "Actual biome code review",
+          "kind": "note",
+          "path": "work/biome-gameplay-review.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual active specialist assignments and integration observations",
+      "createdAt": "2026-10-10T18:38:34.043Z"
+    },
+    {
+      "id": "run-dced1d5c",
+      "title": "Spark local read-only UI auditor · failed",
+      "agentId": "spark/qwen3.8-flash-next",
+      "agentLabel": "Spark local read-only UI auditor",
+      "state": "failed",
+      "observedAt": "2026-10-10T18:49:25.126Z",
+      "taskIds": [
+        "task-27850da6"
+      ],
+      "summary": "The process ended with exit code zero but returned only a progress sentence, not a completed audit. No usable findings or acceptance report were delivered; no Spark contribution is counted toward release validation. Production source was not edited.",
+      "evidence": [
+        {
+          "label": "Inspected actual worker outcome and acceptance boundary",
+          "kind": "note",
+          "path": "artifacts/pixel-ui-worker-status.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual worker process exit and inspected output",
+      "createdAt": "2026-10-10T18:49:25.221Z"
+    },
+    {
+      "id": "run-16de499a",
+      "title": "Gameplay specialist · completed",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Gameplay specialist",
+      "state": "completed",
+      "observedAt": "2026-10-10T18:51:08.569Z",
+      "taskIds": [
+        "task-8db643cb"
+      ],
+      "summary": "Completed and froze the isolated Riveter controller and authored atlas, ten native regressions and source-backed root integration review. Browser presentation and human balance remain review gates; this run completion does not complete the whole biome roster.",
+      "evidence": [
+        {
+          "label": "Actual frozen implementation handoff",
+          "kind": "note",
+          "path": "artifacts/riveter-handoff.md"
+        },
+        {
+          "label": "Actual read-only integration review",
+          "kind": "note",
+          "path": "artifacts/riveter-root-integration-review.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual gameplay implementation and read-only integration handoff",
+      "createdAt": "2026-10-10T18:51:08.586Z"
+    },
+    {
+      "id": "run-e39bd5c0",
+      "title": "Gameplay specialist · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Gameplay specialist",
+      "state": "running",
+      "observedAt": "2026-10-10T18:51:54.734Z",
+      "taskIds": [
+        "task-e8684a94"
+      ],
+      "summary": "Actual isolated next-content assignment started. Owns work/radiation-enemy only; current production source remains frozen. No radiation gameplay is shipped or accepted yet.",
+      "evidence": [
+        {
+          "label": "Existing content and integration boundary",
+          "kind": "note",
+          "path": "artifacts/riveter-handoff.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual next-content isolated specialist assignment",
+      "createdAt": "2026-10-10T18:51:54.740Z"
+    },
+    {
+      "id": "run-da43da63",
+      "title": "Engine specialist · completed",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Engine specialist",
+      "state": "completed",
+      "observedAt": "2026-10-10T19:12:42.909Z",
+      "taskIds": [
+        "task-426419e2"
+      ],
+      "summary": "Completed bounded layout and independent production projection/painter review, including actual reproduced200pxguard defect and verified repair. Native evidence/fingerprints recorded; no physical-phone acceptance.",
+      "evidence": [
+        {
+          "label": "Actual final engine review and repair evidence",
+          "kind": "note",
+          "path": "artifacts/boss-overlay-engine-review.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual Rust integration, independent reviews and visible packaged-game browser checks",
+      "createdAt": "2026-10-10T19:12:42.911Z"
+    },
+    {
+      "id": "run-cef05d3a",
+      "title": "Engine specialist · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Engine specialist",
+      "state": "running",
+      "observedAt": "2026-10-10T19:12:42.920Z",
+      "taskIds": [
+        "task-e8684a94"
+      ],
+      "summary": "Root assigned independent isolated Isotope Mote controller/occupied-cell transform review; coordinating directly with gameplay specialist. No production integration or ship/save changes authorized in this isolated task.",
+      "evidence": [
+        {
+          "label": "Actual assigned isolated prototype",
+          "kind": "note",
+          "path": "work/radiation-enemy/README.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual Rust integration, independent reviews and visible packaged-game browser checks",
+      "createdAt": "2026-10-10T19:12:42.932Z"
+    },
+    {
+      "id": "run-45bedada",
+      "title": "Production / QA specialist · completed",
+      "agentId": "/root/production_research",
+      "agentLabel": "Production / QA specialist",
+      "state": "completed",
+      "observedAt": "2026-10-10T19:15:06.739Z",
+      "taskIds": [
+        "task-426419e2",
+        "task-8db643cb",
+        "pwa"
+      ],
+      "summary": "Completed independent final package and artifact/ledger evidence review. Exact asset hashes, eleven diagnostic captures and 203 real evidence paths checked; old attribution labels corrected. Private publication remains the integrator action and physical/full-play gates remain pending.",
+      "evidence": [
+        {
+          "label": "Final independent local package fingerprints and exclusions",
+          "kind": "note",
+          "path": "artifacts/hud-riveter-packaging-review.md"
+        },
+        {
+          "label": "Final independent evidence scope and ledger readback",
+          "kind": "note",
+          "path": "artifacts/hud-riveter-evidence-review.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Independent final artifact and ledger readback",
+      "createdAt": "2026-10-10T19:15:06.745Z"
+    },
+    {
+      "id": "run-241ebd1e",
+      "title": "Producer / Integrator · running",
+      "agentId": "/root",
+      "agentLabel": "Producer / Integrator",
+      "state": "running",
+      "observedAt": "2026-10-10T19:15:06.758Z",
+      "taskIds": [
+        "task-426419e2",
+        "task-8db643cb",
+        "slice-review"
+      ],
+      "summary": "Integrated and validated adaptive HUD and Riveter, fixed the independent 200px painter defect, captured both normal renderers and real PWA/wheel behavior. Preparing exact-source game-only archive for the existing private HTTPS preview.",
+      "evidence": [
+        {
+          "label": "Actual final browser evidence and limits",
+          "kind": "note",
+          "path": "artifacts/hud-riveter-browser-validation.json"
+        },
+        {
+          "label": "Final normal dual-WASM build",
+          "kind": "note",
+          "path": "artifacts/hud-riveter-build-final.log"
+        }
+      ],
+      "author": "Producer",
+      "source": "Independent final artifact and ledger readback",
+      "createdAt": "2026-10-10T19:15:06.761Z"
     }
   ]
 }

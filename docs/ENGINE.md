@@ -24,6 +24,8 @@ Fixed 60 Hz simulation interpolates extraction, caps catch-up, smooths the camer
 
 Cached 96×96 planets use small relative transforms, craters, veins, storms and rings. Fine gas wisps curl/fade analytically by seed/time. Regional cosmetic budgets are 6,000 cells full or 3,000 reduced. Star layers have independent parallax; density does not change gameplay limits.
 
+Iron Belt ordinary spawns can include the Riveter, an authored occupied-cell Bastion variant with a locked triple burst and destructible firing barrels. Its controller shares normal projectile, safety, loot and XP paths. See [BIOME_ENEMIES.md](BIOME_ENEMIES.md) for actual behavior and unmeasured tuning limits.
+
 Global simulation remains f32, bounded to ±1,000,000 per axis; adjacent floats there are 0.0625 units apart. CPU camera subtraction improves extraction precision but is not a floating-origin simulation. CircularTopology is opt-in and does not wrap solo play. Its seam/interpolation/camera constraints are documented in [UNIVERSE_TOPOLOGY.md](UNIVERSE_TOPOLOGY.md).
 
 ## Measurement

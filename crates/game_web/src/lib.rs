@@ -1,4 +1,6 @@
 //! Portable pixel HUD with a WASM-only browser runtime adapter.
+pub mod boss_layout;
+pub mod boss_overlay;
 #[cfg(target_arch = "wasm32")]
 mod browser;
 pub mod lighting;

@@ -109,6 +109,7 @@ interface GalaxyRuntime {
   acknowledge_credits(): void;
   return_to_home(): void;
   diagnostic(command: string): void;
+  boss_ui_bounds(): Float32Array;
   recover(): Promise<void>;
   lose_device(): void;
   free(): void;
@@ -209,9 +210,11 @@ const debugConsole = new DebugConsole({
   run: async (command) => {
     const [verb, ...args] = command.trim().toLowerCase().split(/\s+/);
     if (verb === "help")
-      return "HELP / STATS / PROFILE / RENDERER / RECOVER\nSCENE dock|belt|combat|site|boss-dart[-1..5]|boss-bastion[-1..5]|boss-coil[-1..5]|champion-0..7|tournament|stress|die (QA mode)\nCLEAR / Up, Down: history / Backtick or Escape: close";
-    if (verb === "stats")
-      return `${backend.toUpperCase()} / ${fps} FPS / p95 ${percentile(frameTimes, 0.95).toFixed(2)} ms\n${lastPixels} quads / ${hud.entities} entities / ${hud.particles} particles\nPOSITION ${hud.position.map((v) => v.toFixed(1)).join(", ")}\n${hud.biome.name} / ${hud.zone} / danger ${hud.danger}\nHULL ${hud.hull.toFixed(0)}/${hud.max_hull.toFixed(0)} / SHIELD ${hud.shield.toFixed(0)}\nZOOM ${galaxy.zoom().toFixed(2)} / WORLD ${Array.from(galaxy.world_viewport(), v => v.toFixed(0)).join(" x ")} / UI ${galaxy.viewport().join(" x ")}\nSHIP LV ${hud.ship_level} / XP ${hud.ship_xp} / CARGO ${hud.cargo_materials}/${hud.cargo_capacity}`;
+      return "HELP / STATS / PROFILE / RENDERER / RECOVER\nSCENE dock|belt|combat|site|biome-riveter|boss-dart[-1..5]|boss-bastion[-1..5]|boss-coil[-1..5]|champion-0..7|tournament|stress|die (QA mode)\nCLEAR / Up, Down: history / Backtick or Escape: close";
+    if (verb === "stats") {
+      const panel = Array.from(galaxy.boss_ui_bounds(), value => value.toFixed(0));
+      return `${backend.toUpperCase()} / ${fps} FPS / p95 ${percentile(frameTimes, 0.95).toFixed(2)} ms\n${lastPixels} quads / ${hud.entities} entities / ${hud.particles} particles\nPOSITION ${hud.position.map((v) => v.toFixed(1)).join(", ")}\n${hud.biome.name} / ${hud.zone} / danger ${hud.danger}\nHULL ${hud.hull.toFixed(0)}/${hud.max_hull.toFixed(0)} / SHIELD ${hud.shield.toFixed(0)}\nZOOM ${galaxy.zoom().toFixed(2)} / WORLD ${Array.from(galaxy.world_viewport(), v => v.toFixed(0)).join(" x ")} / UI ${galaxy.viewport().join(" x ")}\nSHIP LV ${hud.ship_level} / XP ${hud.ship_xp} / CARGO ${hud.cargo_materials}/${hud.cargo_capacity}\nLAST BOSS UI ${panel.length ? panel.join(" / ") : "NONE"}`;
+    }
     if (verb === "profile") {
       const p = galaxy.profile();
       return `SCHEMA ${p.schema_version} / revision ${p.revision} / seed ${p.seed}\nCURRENCY ${p.currency.join(" / ")}\nBOSS GENERATIONS ${p.boss_generations?.map(row => row.join(",")).join(" / ") ?? "legacy"}\nDISCOVERIES ${p.discoveries.length} / quests ${p.quests.length} / relics ${p.relics.length}\nPATCHES ${p.campaign.patches.filter(Boolean).length}/8 / ship ${p.campaign.selected_ship} / Royale ${p.campaign.victory_claimed ? "WON" : "PENDING"}\n${store.message}`;
@@ -233,6 +236,7 @@ const debugConsole = new DebugConsole({
           "belt",
           "combat",
           "site",
+          "biome-riveter",
           "boss-dart",
           "boss-bastion",
           "boss-coil",
@@ -827,7 +831,6 @@ function frame(time: number): void {
       if (event.kind === "death") {
         showDeath();
       }
-      if (event.kind === "boss") toast("BOSS SIGNATURE / incoming");
       if (event.kind === "champion-win") toast("ARENA PATCH + BLUEPRINT ACQUIRED");
       if (event.kind === "tournament-win") toast("ROYALE DUEL WON / standings updated");
       if (event.kind === "tournament-loss") toast("ROYALE DUEL LOST / standings updated");

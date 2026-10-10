@@ -1,0 +1,228 @@
+{
+  "recordedAt": "2026-10-10T19:12:42.779Z",
+  "cacheVersion": "galaxy-f37b303ee2258928",
+  "origin": "http://127.0.0.1:4184/",
+  "package": "Normal shipping dual-WASM build; PWA update applied through Apply update at Haven after the final guard repair.",
+  "method": "Visible IAB browser actions through launch, backtick console scene setup, real W input, settings and wheel events. Console pauses combat between captures; no hidden-state mutation.",
+  "profile": "Fresh disposable preview origin, unupgraded Haven Scout level one; diagnostic scenes suppress progression rewards. Reduced Motion enabled, preserving actual attack state.",
+  "captures": [
+    {
+      "path": "artifacts/hud-dart-minzoom-webgpu-final.jpg",
+      "sha256": "b08c14dd8d57cb6fa942ca9cb3b22d237d534ebe2f1afe831a14f1caa863ab5b",
+      "backend": "webgpu",
+      "cssViewport": [
+        1280,
+        720
+      ],
+      "logicalViewport": [
+        533,
+        300
+      ],
+      "zoom": 0.6,
+      "observation": "Dart G5 exposed reactor, player, separate full boss row"
+    },
+    {
+      "path": "artifacts/hud-bastion-small-webgpu-final.jpg",
+      "sha256": "98bc4c2ac25c8d1c0327864a15e4fd20efeee1b0ee02635fa490ad8489ed0b20",
+      "backend": "webgpu",
+      "cssViewport": [
+        720,
+        360
+      ],
+      "logicalViewport": [
+        720,
+        360
+      ],
+      "zoom": 0.6,
+      "observation": "Bastion G5 exposed reactor and fixed screen-space health/phase"
+    },
+    {
+      "path": "artifacts/hud-coil-webgpu-final.jpg",
+      "sha256": "4d0761846975bb08ddcd57ffdbb4a450d7ae582010dc1b807f2fdde23379756b",
+      "backend": "webgpu",
+      "cssViewport": [
+        720,
+        360
+      ],
+      "logicalViewport": [
+        720,
+        360
+      ],
+      "zoom": 0.6,
+      "observation": "Coil G5 head/reactor clear of adaptive row; outward tail extends offscreen"
+    },
+    {
+      "path": "artifacts/riveter-webgpu-final.jpg",
+      "sha256": "f15d6c87c9680662780fdaec30f8e4d1f34ae1ba464a572a0e411624ca2be7d3",
+      "backend": "webgpu",
+      "cssViewport": [
+        1280,
+        720
+      ],
+      "logicalViewport": [
+        533,
+        300
+      ],
+      "zoom": 0.6,
+      "observation": "Riveter rendered in actual Iron Belt diagnostic; still only"
+    },
+    {
+      "path": "artifacts/hud-bastion-core-webgl2-final.jpg",
+      "sha256": "bffd5dab47cec40a792b095ce8d4ab5b238eabc08967ec002cd1084070848d70",
+      "backend": "webgl2",
+      "cssViewport": [
+        1280,
+        720
+      ],
+      "logicalViewport": [
+        533,
+        300
+      ],
+      "zoom": 0.6,
+      "observation": "Bastion G5 rotating rails, full visible head and closed reactor"
+    },
+    {
+      "path": "artifacts/hud-dart-webgl2-final.jpg",
+      "sha256": "78fa7fbb88e38b29969bed972df6a925f35e9b272558195149a64723728a507e",
+      "backend": "webgl2",
+      "cssViewport": [
+        1280,
+        720
+      ],
+      "logicalViewport": [
+        533,
+        300
+      ],
+      "zoom": 0.6,
+      "observation": "Dart G5 royal cross, reactor/player separated from boss row"
+    },
+    {
+      "path": "artifacts/hud-coil-webgl2-final.jpg",
+      "sha256": "e4b457f39ecc46c998c4f3f67185bbb6b3b17d046901b533a813fa31eef81e24",
+      "backend": "webgl2",
+      "cssViewport": [
+        1280,
+        720
+      ],
+      "logicalViewport": [
+        533,
+        300
+      ],
+      "zoom": 0.6,
+      "observation": "Coil G5 vortex lunge, visible head/reactor; tail partly offscreen"
+    },
+    {
+      "path": "artifacts/riveter-webgl2-final.jpg",
+      "sha256": "7bf4c3005a583443e8bb8c5943517000b3e3d947e2624064c6b0a2d91437e21d",
+      "backend": "webgl2",
+      "cssViewport": [
+        1280,
+        720
+      ],
+      "logicalViewport": [
+        533,
+        300
+      ],
+      "zoom": 0.6,
+      "observation": "Iron Belt Riveter and visible hostile rounds; ordinary harm/rewards tested natively"
+    },
+    {
+      "path": "artifacts/hud-bastion-small-maxzoom-webgl2-final.jpg",
+      "sha256": "e00afbe8e3aa02e5a84ce1214400e41be84d655c23c5ae675de14801807d14e1",
+      "backend": "webgl2",
+      "cssViewport": [
+        720,
+        360
+      ],
+      "logicalViewport": [
+        720,
+        360
+      ],
+      "zoom": 1.6,
+      "observation": "Bastion G5 visible reactor, upper silhouette cropped at high zoom; boss row remains separate"
+    },
+    {
+      "path": "artifacts/hud-touch-320-webgl2-final.jpg",
+      "sha256": "800d0a684343fea3e1114ac46aa9b993e583fde436362d56f2042dad2b4e9f30",
+      "backend": "webgl2",
+      "cssViewport": [
+        320,
+        180
+      ],
+      "logicalViewport": [
+        320,
+        180
+      ],
+      "zoom": 1.6,
+      "observation": "100 by 40 compact phase/health row, visible joystick/fire; boss partly offscreen; desktop touch UI emulation"
+    },
+    {
+      "path": "artifacts/zoom-upper-home-webgl2-final.jpg",
+      "sha256": "91b0841c25fb098b92b49f6dd296de5b15b76a56edcec7f5a360167c3a03e31a",
+      "backend": "webgl2",
+      "cssViewport": [
+        720,
+        360
+      ],
+      "logicalViewport": [
+        720,
+        360
+      ],
+      "zoom": 1.6,
+      "observation": "Actual repeated wheel input clamped at maximum; dock world scale changes and UI stays fixed"
+    }
+  ],
+  "telemetry": [
+    "artifacts/hud-webgl2-stats-final.txt",
+    "artifacts/hud-small-maxzoom-webgl2-stats-final.txt",
+    "artifacts/hud-touch-320-webgl2-stats-final.txt",
+    "artifacts/zoom-upper-webgl2-final.txt"
+  ],
+  "sourceFingerprints": [
+    {
+      "path": "crates/game_web/src/boss_layout.rs",
+      "sha256": "97ae0496ec27b89510b46ad21785a377d2ca6ae0d88d1fe95dcbc30a1758e353"
+    },
+    {
+      "path": "crates/game_web/src/boss_overlay.rs",
+      "sha256": "fd9ff6b24cf69d3c43144571815d071c251485b002cba8bcad27bced8b02810f"
+    },
+    {
+      "path": "crates/game_web/src/browser.rs",
+      "sha256": "2be9f952d91a3994688076f0c0a57fc468c254bd05073a6f14469156045143c5"
+    },
+    {
+      "path": "crates/game_web/src/pixel_ui.rs",
+      "sha256": "c66a24bf4c105df8fc5121c8c4ab8a797a19bd3eb51d5dfc067f2df68a7dd94a"
+    },
+    {
+      "path": "crates/game_core/src/biome_enemies.rs",
+      "sha256": "43b3736cb8da31872a62ac90f0f2b54e78f54ca7ee2f07ef622a45a7241e5cc8"
+    },
+    {
+      "path": "apps/game/src/main.ts",
+      "sha256": "e0d8ee22777862a08558c4b034b20f24af98fa1ae25c3afc9e37df837c1c0cc7"
+    }
+  ],
+  "backendHashes": {
+    "webgpu": "f2cf269dd8ae35dbddf62f630d51b44d452f96fbac14175ba95bbb077e8575f8",
+    "webgl2": "93a7daa913c8cc3ebc4b1c59de5d5d4bff374ddacc83fd2dfbd6af3bb5e2374c"
+  },
+  "pwaUpdate": "Actual pending new build notification, Apply update at Haven, reload to title, retained zoom0.6 and Reduced Motion setting, normal game relaunched.",
+  "wheel": "Actual repeated upward wheel events: zoom1.60 / world450x225 / fixedUI720x360. Minimum0.60 observed through real settings and telemetry. Prior release separately observed downward wheel clamp.",
+  "native": "37 engine +75 game-core +74 game-web native tests pass (186 total). Original workspace log has185 before one small-safe-area regression; final web log has74. 66 shell tests and8 WASM save scenarios pass. Strict native/WebGPU/WebGL2 Clippy and normal build pass.",
+  "limits": [
+    "Diagnostic captures do not prove natural far-biome spawning/rewards or a human all-fifteen/full campaign playthrough.",
+    "Riveter locked muzzle destruction, damage and once-only rewards use meaningful native regressions; browser captures establish presentation only.",
+    "320x180 desktop touch UI emulation does not prove real simultaneous touch, phone readability or thermal performance.",
+    "Completely overconstrained safe areas may have no safe panel; fixed hull/touch elements can cover a world actor.",
+    "High-refresh desktop scalar telemetry is a short observation; no sustained performance, GPU timestamp or phone inference.",
+    "Final owner-authenticated private remote execution, current-build device-loss/offline execution, physical Safari/PWA and thirty-minute named-phone soak remain pending."
+  ],
+  "historicalLimitedCaptures": [
+    "artifacts/hud-bastion-webgpu.jpg",
+    "artifacts/hud-bastion-minzoom-webgpu.jpg",
+    "artifacts/hud-coil-minzoom-webgpu.jpg",
+    "artifacts/hud-bastion-webgl2-final.jpg"
+  ]
+}

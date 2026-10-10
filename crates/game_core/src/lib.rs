@@ -1,4 +1,5 @@
 //! Galaxy Royale's deterministic, fixed-step gameplay simulation.
+mod biome_enemies;
 mod boss_assets;
 pub mod bosses;
 pub mod campaign;
@@ -152,6 +153,23 @@ pub struct BossHud {
     pub telegraph: bool,
     pub position: [f32; 2],
     pub core_position: [f32; 2],
+}
+
+/// Presentation-only target geometry, matching the interpolated actor cells.
+/// This does not replace tick-state HUD, collision or saved progression.
+#[derive(Clone, Copy, Debug)]
+pub struct RenderFocus {
+    pub player: Vec2,
+    pub player_radius: f32,
+    pub boss: Option<BossFocus>,
+}
+#[derive(Clone, Copy, Debug)]
+pub struct BossFocus {
+    pub encounter: u64,
+    pub center: Vec2,
+    pub core: Vec2,
+    pub core_radius: f32,
+    pub phase_epoch: u64,
 }
 
 #[derive(Clone, Debug, Serialize)]
@@ -686,6 +704,55 @@ impl Game {
             .to_array()
     }
 
+    /// Uses the same position/shortest-heading interpolation as render_into.
+    /// Pixel HUD placement therefore clears the visible reactor even between
+    /// simulation ticks, during camera easing, zoom and presentation shake.
+    pub fn render_focus(&self, alpha: f32) -> RenderFocus {
+        let alpha = if alpha.is_finite() {
+            alpha.clamp(0.0, 1.0)
+        } else {
+            0.0
+        };
+        let interpolated = |entity| {
+            let motion = *self.world.get::<&Motion>(entity).ok()?;
+            let actor = *self.world.get::<&Actor>(entity).ok()?;
+            let mut visible = motion;
+            visible.position = motion.previous.lerp(motion.position, alpha);
+            visible.heading = interpolate_heading(motion.previous_heading, motion.heading, alpha);
+            Some((visible, actor))
+        };
+        let (player, actor) = interpolated(self.player).expect("player remains allocated");
+        let entity = self.arena.map(|arena| arena.opponent).or(self.active_boss);
+        let boss = entity.and_then(|entity| {
+            let (motion, actor) = interpolated(entity)?;
+            let mut focus = BossFocus {
+                encounter: entity.to_bits().get(),
+                center: motion.position,
+                core: motion.position,
+                core_radius: 0.0,
+                phase_epoch: 0,
+            };
+            if let Ok(boss) = self.world.get::<&BossEncounter>(entity) {
+                let family = self.world.get::<&Brain>(entity).ok()?.family;
+                let art = boss_assets::art(family, boss.generation);
+                focus.core = actor_transform(motion, actor).point(art.core_position);
+                focus.core_radius = art.core_radius * actor.scale;
+                focus.phase_epoch = (boss.cycle as u64) * 3
+                    + match boss.phase {
+                        bosses::Phase::Tell => 0,
+                        bosses::Phase::Attack => 1,
+                        bosses::Phase::Recover => 2,
+                    };
+            }
+            Some(focus)
+        });
+        RenderFocus {
+            player: player.position,
+            player_radius: actor.radius,
+            boss,
+        }
+    }
+
     fn changed(&mut self) {
         self.profile.revision = self.profile.revision.saturating_add(1);
     }
@@ -922,6 +989,7 @@ impl Game {
         self.update_campaign(dt);
         self.update_spawns(position, dt);
         self.update_bosses(position, dt);
+        self.update_biome_enemies(position, dt);
         self.update_enemies(position, dt);
         self.update_homing(dt);
         self.update_segments(dt);
@@ -1225,11 +1293,13 @@ impl Game {
                     * (1.0 + 0.14 * tier.saturating_sub(1) as f32)
                     * (1.0 + (self.expedition / 1800.0).min(0.5))))
             .max(0.3);
-            let weights = regions::at(self.profile.seed, position).spawn_weights;
+            let biome = regions::at(self.profile.seed, position);
+            let weights = biome.spawn_weights;
             let family = weighted_family(weights, self.random());
             let distance = self.viewport.length() * 0.5 + 60.0 + self.random() * 100.0;
             if let Some(spawn) = self.spawn_location(position, distance) {
-                self.spawn_enemy(family, false, spawn, tier);
+                let entity = self.spawn_enemy(family, false, spawn, tier);
+                self.maybe_riveter(entity, regions::at(self.profile.seed, spawn));
             }
         }
         if self.active_boss.is_none()
@@ -1345,7 +1415,7 @@ impl Game {
         let pursuit_range = self.viewport.length().max(1050.0);
         let mut shots = Vec::new();
         let mut remove = Vec::new();
-        for (entity, (motion, actor, brain, champion, boss)) in self.world.query_mut::<(
+        for (entity, (motion, actor, brain, champion, boss, riveter)) in self.world.query_mut::<(
             Entity,
             (
                 &mut Motion,
@@ -1353,9 +1423,10 @@ impl Game {
                 &mut Brain,
                 Option<&ChampionFighter>,
                 Option<&BossEncounter>,
+                Option<&biome_enemies::Riveter>,
             ),
         )>() {
-            if champion.is_some() || boss.is_some() {
+            if champion.is_some() || boss.is_some() || riveter.is_some() {
                 continue;
             }
             brain.age += dt;
@@ -2792,11 +2863,17 @@ impl Game {
                 );
             }
         }
-        for (_, (motion, actor, body, boss)) in self
+        for (_, (motion, actor, body, boss, riveter)) in self
             .world
             .query::<(
                 Entity,
-                (&Motion, &Actor, &PixelBody, Option<&BossEncounter>),
+                (
+                    &Motion,
+                    &Actor,
+                    &PixelBody,
+                    Option<&BossEncounter>,
+                    Option<&biome_enemies::Riveter>,
+                ),
             )>()
             .iter()
         {
@@ -2818,6 +2895,10 @@ impl Game {
                 && let Kind::Boss(family) = actor.kind
             {
                 self.draw_boss(frame, body, m, *actor, *boss, family);
+                continue;
+            }
+            if let Some(riveter) = riveter {
+                self.draw_riveter(frame, body, m, *actor, *riveter);
                 continue;
             }
             frame.push_body_colored_material(
@@ -3145,6 +3226,9 @@ impl Game {
 
     /// Explicit deterministic QA scenes. This never awards inventory or upgrades.
     pub fn diagnostic(&mut self, command: &str) {
+        if self.biome_enemy_diagnostic(command) {
+            return;
+        }
         if self.boss_diagnostic(command) {
             return;
         }
@@ -4324,6 +4408,65 @@ mod tests {
     fn heading_interpolation_takes_shortest_path_across_pi() {
         let heading = interpolate_heading(170.0_f32.to_radians(), -170.0_f32.to_radians(), 0.5);
         assert!(forward(heading).distance(Vec2::NEG_X) < 0.001);
+    }
+
+    #[test]
+    fn render_focus_tracks_all_authored_reactors_between_ticks_without_mutation() {
+        for family in ["dart", "bastion", "coil"] {
+            for generation in 1..=5 {
+                let mut game = Game::new(Profile::default());
+                game.diagnostic(&format!("boss-{family}-{generation}"));
+                let entity = game.active_boss.unwrap();
+                let actor = *game.world.get::<&Actor>(entity).unwrap();
+                let art_family = game.world.get::<&Brain>(entity).unwrap().family;
+                let art = boss_assets::art(art_family, generation);
+                let center = game.world.get::<&Motion>(entity).unwrap().position;
+                {
+                    let mut motion = game.world.get::<&mut Motion>(entity).unwrap();
+                    motion.previous = center - Vec2::new(12.0, 8.0);
+                    motion.previous_heading = 170.0_f32.to_radians();
+                    motion.heading = -170.0_f32.to_radians();
+                }
+                let before = serde_json::to_value(game.profile()).unwrap();
+                let tick_core = Vec2::from_array(game.hud().boss.unwrap().core_position);
+                let mut pose = *game.world.get::<&Motion>(entity).unwrap();
+                pose.position = center - Vec2::new(6.0, 4.0);
+                pose.heading = PI;
+                let expected = actor_transform(pose, actor).point(art.core_position);
+                let focused = game.render_focus(0.5).boss.unwrap();
+                assert!(focused.center.distance(pose.position) < 0.001);
+                assert!(focused.core.distance(expected) < 0.001);
+                assert!(focused.core.distance(tick_core) > 1.0);
+                assert!((focused.core_radius - art.core_radius * actor.scale).abs() < 0.001);
+                assert!(focused.core_radius > 0.0);
+                assert_eq!(before, serde_json::to_value(game.profile()).unwrap());
+                assert!(
+                    game.render_focus(1.0)
+                        .boss
+                        .unwrap()
+                        .core
+                        .distance(tick_core)
+                        < 0.001
+                );
+            }
+        }
+    }
+
+    #[test]
+    fn render_focus_handles_arena_cleanup_and_invalid_alpha() {
+        let mut game = Game::new(Profile::default());
+        assert!(game.render_focus(f32::NAN).boss.is_none());
+        game.diagnostic("champion-0");
+        let first = game.render_focus(f32::NAN);
+        let last = game.render_focus(100.0);
+        let champion = last.boss.unwrap();
+        assert_eq!(champion.core, champion.center);
+        assert!(champion.core.is_finite() && first.player.is_finite());
+        assert!(last.player_radius > 0.0);
+        assert_eq!(champion.encounter, first.boss.unwrap().encounter);
+        game.reset_to_dock();
+        assert!(game.render_focus(0.5).boss.is_none());
+        assert!(game.render_focus(0.5).player.length() < 1.0);
     }
 
     #[test]

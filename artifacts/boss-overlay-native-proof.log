@@ -1,0 +1,26 @@
+Final focused repair verification: 2026-10-10 19:06 UTC
+Compile exitcode0; native proof exitcode0
+
+No-fit fixture: viewport[320.0, 180.0] zoom0.6 insets[11.2, 20.8, 9.3, 35.4] cameraVec2(1800.0, 0.0) minimaltrue
+No-fit fixture: viewport[320.0, 180.0] zoom0.6 insets[11.2, 20.8, 9.3, 35.4] cameraVec2(990000.25, -980000.5) minimaltrue
+Native production adapter/quad proof: 30 placed cases, 2 conservative no-fit cases, 13030 actual boss quads, maximum allocated-edge deviation 0.062500px
+Includes actual CameraView, emitted quad corners/materials, fractional asymmetric insets, zoom0.6/1.6, 20-world player and camera at990000.25/-980000.5.
+Small-safe-view parity fixture: full240x180/safe200x180, allocatedSome([16.0, 12.0, 168.0, 40.0]), emitted1011 native HUD pixels
+Small-safe-view touch proof: 266 actual control quads remain unlit and inside their DOM hit regions.
+Unsupported-safe-view parity fixture: safe160x180, allocatorNone/native HUD0.
+No game combat, browser, GPU or physical device was exercised.
+
+Dedicated production regression:
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.08s
+     Running unittests src\lib.rs (target\debug\deps\game_web-9ea70f65f4ad26fd.exe)
+
+running 1 test
+test boss_overlay::tests::narrow_safe_area_emits_the_allocated_compact_panel_and_touch_controls ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 42 filtered out; finished in 0.06s
+
+     Running tests\boss_layout.rs (target\debug\deps\boss_layout-427b75710e1283f7.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 31 filtered out; finished in 0.00s

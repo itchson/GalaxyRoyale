@@ -1,5 +1,7 @@
 # Ordinary boss generations
 
+The flight health/phase panel now adapts around actual projected reactors, the player and fixed controls. Compact rows retain the custom pixel font and health meter. See [adaptive boss interface](BOSS_HUD.md) for small-view behavior, tested bounds and acceptance limits.
+
 The three enemy families each have five ordinary bosses. Every encounter has a charge phase with reactor and HUD cues, its own movement/weapon phase, and a recovery window. Charge lasts approximately 1–1.5 seconds and locks the predicted aim during its final quarter. Attack lengths vary between 0.75 and 3.2 seconds; recovery lasts 1.38–1.9 seconds. Low hull shortens firing intervals by 15% while keeping the charge window intact. Natural spawns can begin charging before their bodies enter the viewport; first-charge readability remains a playtest requirement.
 
 | Generation | Dart | Bastion | Coil |

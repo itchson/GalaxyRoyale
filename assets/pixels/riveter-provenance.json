@@ -1,0 +1,13 @@
+{
+  "source": "riveter-source.py",
+  "method": "original authored cell geometry and surface palette; no AI-generated image",
+  "runtime": "riveter-atlas.json indexed cells; preview PNG is not loaded by the game",
+  "width": 40,
+  "height": 40,
+  "occupied_cells": 856,
+  "opaque_palette_colors": 15,
+  "muzzle_cells": [
+    100,
+    100
+  ]
+}

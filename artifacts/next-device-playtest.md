@@ -9,7 +9,7 @@ Copy this block for each device, browser, backend and test session. Use the fina
 | Field | Actual value to record |
 | --- | --- |
 | Session ID / tester / UTC start and finish | Pending |
-| Published URL and actual loaded build/cache | Pending; current reviewed build is `galaxy-5a206c9f1e2acf40` |
+| Published URL and actual loaded build/cache | Pending; copy the current release/cache from `artifacts/private-release.json` and verify the actual loaded build |
 | Source/release reference | Pending; attach the release record, not only a screenshot |
 | Physical model / OS version / browser version | Pending |
 | Browser tab or installed PWA | Pending |
