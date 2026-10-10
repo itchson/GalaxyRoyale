@@ -4,6 +4,8 @@ Mission Control is the authoritative task/status record. This document preserves
 
 ## Owned docks and arenas
 
+The solo champion campaign is now implemented: eight seeded NPC arenas, distinct pixel hulls and attacks, single-claim patches/blueprints, Haven crafting/switching, and a nine-entrant round robin. The eight player duels run live; the other 28 pairings are explicitly simulated. An actual first-place result grants the Sovereign and credits once; completed losses permit another season. Per-ship XP, level-gated purchases, bounded material cargo, death reports, and 0.6–1.6× world zoom are implemented. Native and component tests cover their rules; a complete eight-champion browser playthrough, balance review and physical-device validation remain pending. See CAMPAIGN.md and NARRATIVE.md. Optional local text/voice providers are injection contracts with safe authored fallback; no neural dialogue or voice service is shipped or claimed as running.
+
 Future player-owned docks will support upgrades to their protection radius and arena encounters. Protection must use the same radius for enemy spawning, combat interaction, visuals and player eligibility. Upgrade costs, radius bounds, arena entry/exit rules and rewards still need design approval and play testing. Persistent ownership and upgrades need migration and single-claim reward checks. Multiplayer dock ownership must be enforced by the authoritative session rather than accepted from a client save.
 
 ## Co-op and network authority

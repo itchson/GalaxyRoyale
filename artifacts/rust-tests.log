@@ -1,107 +1,126 @@
+   Compiling game_core v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\game_core)
    Compiling game_web v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\game_web)
-    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.67s
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 3.26s
      Running unittests src\lib.rs (target\debug\deps\engine_core-8a72aad1c16af2fd.exe)
 
-running 26 tests
-test frame::tests::exact_affine_hierarchy_survives_gpu_extraction ... ok
-test pixels::tests::exact_edges_corners_and_zero_length_hits_are_consistent ... ok
-test pixels::tests::transformed_hit_matches_world_contact_with_shear ... ok
-test frame::tests::material_packing_preserves_geometry_and_sanitizes_nonfinite_fields ... ok
+running 30 tests
+test camera::tests::zoom_is_bounded_retargetable_and_finishes_in_150ms ... ok
 test frame::tests::body_batches_split_at_128_and_remap_indices ... ok
+test frame::tests::per_cell_animation_preserves_damage_and_base_palette ... ok
+test camera::tests::zoom_projection_keeps_light_distance_in_world_units ... ok
+test camera::tests::world_projection_and_input_round_trip_use_current_extent ... ok
+test pixels::tests::ascii_centering_ragged_rows_colors_and_occupancy_are_independent ... ok
+test frame::tests::exact_affine_hierarchy_survives_gpu_extraction ... ok
+test camera::tests::separate_ui_projection_preserves_glyph_positions_sizes_and_materials ... ok
+test frame::tests::gpu_layouts_have_the_fixed_byte_contract ... ok
+test pixels::tests::transformed_hit_matches_world_contact_with_shear ... ok
+test frame::tests::particles_rebind_after_body_batch_split ... ok
+test pixels::tests::damage_fragments_conserve_surviving_cells_and_separate_diagonal_cells ... ok
+test topology::tests::shared_rebase_preserves_motion_heading_camera_and_destination ... ok
+test transform::tests::singular_transform_has_explicit_inverse_failure ... ok
+test pixels::tests::empty_nonfinite_and_singular_inputs_do_not_hit_or_damage ... ok
+test pixels::tests::localized_damage_preserves_holes_and_returns_exact_debris ... ok
+test frame::tests::material_packing_preserves_geometry_and_sanitizes_nonfinite_fields ... ok
+test pixels::tests::swept_projectiles_hit_first_cell_and_pass_through_holes ... ok
+test frame::tests::borrowed_frames_reuse_pixel_and_transform_allocations ... ok
+test frame::tests::particle_sizes_share_transforms_without_changing_world_positions ... ok
+test topology::tests::invalid_and_tangent_steps_fail_explicitly_without_dropping_overshoot ... ok
 test frame::tests::clear_removes_previous_frame_and_ignores_invalid_geometry ... ok
 test topology::tests::multiple_crossings_preserve_all_travel_and_diagonal_antipodes ... ok
-test frame::tests::particle_sizes_share_transforms_without_changing_world_positions ... ok
-test frame::tests::per_cell_animation_preserves_damage_and_base_palette ... ok
 test transform::tests::transform_round_trip_rotation_nonuniform_scale_and_reflection ... ok
-test pixels::tests::empty_nonfinite_and_singular_inputs_do_not_hit_or_damage ... ok
-test pixels::tests::ascii_centering_ragged_rows_colors_and_occupancy_are_independent ... ok
-test pixels::tests::localized_damage_preserves_holes_and_returns_exact_debris ... ok
-test pixels::tests::swept_projectiles_hit_first_cell_and_pass_through_holes ... ok
-test frame::tests::gpu_layouts_have_the_fixed_byte_contract ... ok
-test frame::tests::borrowed_frames_reuse_pixel_and_transform_allocations ... ok
-test topology::tests::boundary_is_closed_and_outward_overshoot_continues_inward ... ok
-test topology::tests::shared_rebase_preserves_motion_heading_camera_and_destination ... ok
-test frame::tests::particles_rebind_after_body_batch_split ... ok
-test transform::tests::affine_preserves_shear_over_three_hierarchy_levels ... ok
-test transform::tests::singular_transform_has_explicit_inverse_failure ... ok
-test pixels::tests::damage_fragments_conserve_surviving_cells_and_separate_diagonal_cells ... ok
 test transform::tests::uniform_trs_hierarchy_matches_sequential_points ... ok
-test topology::tests::invalid_and_tangent_steps_fail_explicitly_without_dropping_overshoot ... ok
+test pixels::tests::exact_edges_corners_and_zero_length_hits_are_consistent ... ok
+test topology::tests::boundary_is_closed_and_outward_overshoot_continues_inward ... ok
+test transform::tests::affine_preserves_shear_over_three_hierarchy_levels ... ok
 test topology::tests::swept_result_matches_subdivided_motion_for_oblique_crossings ... ok
 test pixels::tests::grid_traversal_matches_independent_per_cell_slab_reference ... ok
 
-test result: ok. 26 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+test result: ok. 30 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
 
      Running unittests src\lib.rs (target\debug\deps\game_core-b7dbc88b6e59577a.exe)
 
-running 41 tests
+running 52 tests
+test campaign::tests::round_robin_is_complete_seeded_and_player_results_are_real ... ok
 test regions::tests::discovery_ids_safe_radii_and_overlap_queries_are_stable ... ok
 test regions::tests::nearest_regions_are_stable_and_hub_is_forced_haven ... ok
 test tests::heading_interpolation_takes_shortest_path_across_pi ... ok
 test regions::tests::gas_cells_persist_animate_and_respect_full_and_reduced_limits ... ok
+test campaign::tests::seeded_grid_arenas_and_authored_outlines_are_unique ... ok
 test regions::tests::rich_cached_planets_and_split_rings_keep_fine_geometry ... ok
 test pixel_assets::tests::dock_center_is_open_and_damage_never_changes_the_pristine_template ... ok
-test tests::pixel_hits_remove_cells_and_empty_objects_die ... ok
-test pixel_assets::tests::generated_assets_keep_exact_occupancy_dimensions_and_hard_palette ... ok
-test tests::pause_freezes_combat_clock ... ok
-test tests::dock_repair_restores_generated_ship_cells_after_real_damage ... ok
-test tests::asteroid_contacts_exchange_momentum_and_separate ... ok
-test tests::purchases_use_correct_currency_and_require_dock ... ok
-test tests::signature_abilities_emit_their_own_real_world_light_colors ... ok
 test tests::external_destinations_reject_nonfinite_and_out_of_world_values ... ok
-test tests::invalid_joystick_releases_thrust_without_poisoning_motion ... ok
-test tests::reload_keeps_surplus_kill_credit_behind_queued_boss ... ok
+test pixel_assets::tests::generated_assets_keep_exact_occupancy_dimensions_and_hard_palette ... ok
 test tests::collected_pickup_credits_exactly_once ... ok
+test campaign_runtime::tests::cargo_capacity_banking_crafting_and_ship_selection_are_atomic ... ok
+test tests::purchases_use_correct_currency_and_require_dock ... ok
+test tests::pause_freezes_combat_clock ... ok
+test tests::asteroid_contacts_exchange_momentum_and_separate ... ok
+test tests::pixel_hits_remove_cells_and_empty_objects_die ... ok
+test campaign_runtime::tests::invalid_campaign_rewards_and_archives_cannot_own_ships ... ok
+test tests::dock_repair_restores_generated_ship_cells_after_real_damage ... ok
+test campaign_runtime::tests::sovereign_has_intrinsic_maximum_upgrades_without_changing_global_progress ... ok
+test tests::invalid_joystick_releases_thrust_without_poisoning_motion ... ok
 test tests::projectile_orders_real_cells_instead_of_broadphase_centers ... ok
-test pixel_assets::tests::asteroid_variants_preserve_facets_occupancy_and_determinism ... ok
+test tests::reload_keeps_surplus_kill_credit_behind_queued_boss ... ok
 test tests::fourth_boss_guarantees_signature ... ok
-test tests::swept_projectile_hits_through_an_entire_body_in_one_tick ... ok
+test pixel_assets::tests::asteroid_variants_preserve_facets_occupancy_and_determinism ... ok
+test tests::signature_abilities_emit_their_own_real_world_light_colors ... ok
+test campaign_runtime::tests::champion_reward_is_actual_once_only_and_survives_reload ... ok
+test campaign_runtime::tests::real_kills_level_selected_ship_and_gate_global_hardware_purchases ... ok
 test tests::generated_actor_scales_match_world_footprints_and_collision_bounds ... ok
-test tests::twenty_four_family_kills_queue_one_boss ... ok
 test tests::bounty_counts_only_accepted_family_and_boss_as_one_across_reload ... ok
+test tests::swept_projectile_hits_through_an_entire_body_in_one_tick ... ok
+test campaign_runtime::tests::trial_uses_real_pixel_collisions_enables_only_own_sanctuary_and_contains_combat ... ok
 test tests::continuous_thrust_and_impulses_keep_player_inside_practical_extent ... ok
-test tests::sanctuary_guards_hold_after_long_ticks_and_beyond_local_cache ... ok
+test tests::twenty_four_family_kills_queue_one_boss ... ok
 test tests::legacy_progress_migrates_and_archives_sanitize_with_bounded_relic_bonus ... ok
-test tests::site_sanctuary_blocks_combat_without_granting_haven_services ... ok
 test tests::courier_survives_reload_and_death_then_claims_once_at_source ... ok
-test tests::wider_viewport_extracts_newly_visible_objects ... ok
 test tests::death_retains_progress_and_retries_boss ... ok
+test tests::sanctuary_guards_hold_after_long_ticks_and_beyond_local_cache ... ok
+test campaign_runtime::tests::death_retains_banked_points_xp_materials_and_preserves_summary_without_reload_popup ... ok
+test campaign_runtime::tests::round_robin_records_loss_retries_and_awards_sovereign_and_credits_once ... ok
+test tests::site_sanctuary_blocks_combat_without_granting_haven_services ... ok
+test tests::wider_viewport_extracts_newly_visible_objects ... ok
 test tests::lighting_is_bounded_deterministic_and_matches_projectile_interpolation ... ok
 test tests::safe_zone_blocks_damage_and_weapons ... ok
 test regions::tests::background_is_deterministic_bounded_and_has_valid_tables ... ok
 test tests::regional_spawn_mix_uses_biome_weights_and_avoids_sanctuaries ... ok
-test tests::joystick_rotates_scales_and_releases ... ok
 test tests::navigation_arrives_without_orbiting ... ok
-test tests::diagnostics_do_not_grant_inventory_or_basic_upgrades ... ok
 test tests::streaming_is_deterministic_and_bounded ... ok
+test tests::joystick_rotates_scales_and_releases ... ok
+test tests::diagnostics_do_not_grant_inventory_or_basic_upgrades ... ok
 test tests::stress_scene_exercises_requested_real_workload_and_cleans_up ... ok
 test tests::reduced_density_keeps_all_ship_cells_and_simulation_state ... ok
+test campaign_runtime::tests::all_eight_fighters_have_distinct_live_motion_and_weapon_patterns ... ok
 
-test result: ok. 41 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+test result: ok. 52 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.09s
 
      Running unittests src\lib.rs (target\debug\deps\game_web-9ea70f65f4ad26fd.exe)
 
-running 18 tests
+running 21 tests
 test lighting::tests::invalid_lights_are_ignored_and_unused_slots_are_dark ... ok
-test lighting::tests::uniform_layout_is_bounded_and_lights_follow_camera ... ok
-test ui_scene::tests::console_panel_is_exact_opaque_black_with_only_a_rail_and_pins ... ok
 test ui_scene::tests::rails_keep_original_corners_and_one_centered_ornament ... ok
-test ui_scene::tests::text_letters_have_individual_composed_object_transforms ... ok
+test ui_scene::tests::console_panel_is_exact_opaque_black_with_only_a_rail_and_pins ... ok
+test lighting::tests::uniform_layout_is_bounded_and_lights_follow_camera ... ok
 test pixel_ui::tests::royale_mono_reuses_body_and_composes_letter_spacing ... ok
 test ui_scene::tests::composed_group_translation_keeps_text_screen_fixed ... ok
+test ui_scene::tests::text_letters_have_individual_composed_object_transforms ... ok
 test pixel_ui::tests::touch_knob_moves_proportionally_and_invalid_input_returns_to_center ... ok
-test ui_scene::tests::active_portrait_blinks_without_changing_geometry_and_freezes_when_reduced ... ok
-test ui_scene::tests::cached_portraits_fit_integer_cells_and_preserve_group_camera_transform ... ok
 test pixel_ui::tests::hidden_mode_and_invalid_viewport_emit_no_overlay ... ok
+test pixel_ui::tests::flight_level_and_cargo_line_stays_between_touch_pads ... ok
 test pixel_ui::tests::overlay_stays_fixed_when_world_camera_moves ... ok
+test ui_scene::tests::active_portrait_blinks_without_changing_geometry_and_freezes_when_reduced ... ok
 test pixel_ui::tests::full_dock_hides_meters_and_home_compass_until_needed ... ok
+test ui_scene::tests::authored_campaign_ship_and_patch_outlines_are_distinct_occupied_objects ... ok
+test ui_scene::tests::campaign_quads_fit_integer_scale_and_keep_unlit_material ... ok
 test ui_scene::tests::short_button_rects_shrink_labels_without_hiding_them ... ok
-test ui_scene::tests::reduced_motion_freezes_generated_art_and_normal_motion_changes_it ... ok
 test ui_scene::tests::console_input_cursor_blinks_and_reduced_motion_keeps_it_static ... ok
+test ui_scene::tests::reduced_motion_freezes_generated_art_and_normal_motion_changes_it ... ok
+test ui_scene::tests::cached_portraits_fit_integer_cells_and_preserve_group_camera_transform ... ok
 test ui_scene::tests::scroll_clip_keeps_visible_cells_inside_group_relative_bounds ... ok
 test ui_scene::tests::malformed_geometry_and_large_scenes_stay_bounded ... ok
 
-test result: ok. 18 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+test result: ok. 21 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
 
    Doc-tests engine_core
 
@@ -120,9 +139,4 @@ test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; fini
 running 0 tests
 
 test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
-
-    Checking game_web v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\game_web)
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.35s
-    Checking game_web v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\game_web)
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.34s
 

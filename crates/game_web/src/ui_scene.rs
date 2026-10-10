@@ -154,8 +154,25 @@ struct CommsPortrait {
     pupil: u32,
     skin: u32,
 }
-static PORTRAITS: LazyLock<[CommsPortrait; 3]> = LazyLock::new(|| {
+static PORTRAITS: LazyLock<[CommsPortrait; 8]> = LazyLock::new(|| {
     std::array::from_fn(|style| {
+        if style >= 3 {
+            let names = [
+                "campaign_portrait_3",
+                "campaign_portrait_4",
+                "campaign_portrait_5",
+                "campaign_portrait_6",
+                "campaign_portrait_7",
+            ];
+            let body = CAMPAIGN_ASSETS.sprites[names[style - 3]].body.clone();
+            let eye_x = if style == 3 { 9 } else { 8 };
+            return CommsPortrait {
+                eyes: body.color_at(eye_x, 11).expect("authored portrait eye"),
+                pupil: u32::from_le_bytes([12, 25, 43, 255]),
+                skin: body.color_at(12, 16).expect("authored portrait face"),
+                body,
+            };
+        }
         let (skin, shade, highlight, helmet, eyes, accent) = match style {
             1 => (
                 [128, 184, 190],
@@ -217,9 +234,8 @@ static PORTRAITS: LazyLock<[CommsPortrait; 3]> = LazyLock::new(|| {
         }
     })
 });
-static ASSETS: LazyLock<Assets> = LazyLock::new(|| {
-    let atlas: Atlas = serde_json::from_str(include_str!("../../../assets/ui/atlas.json"))
-        .expect("compiled UI atlas must be valid JSON");
+fn load_assets(source: &str) -> Assets {
+    let atlas: Atlas = serde_json::from_str(source).expect("compiled UI atlas must be valid JSON");
     assert_eq!(atlas.version, 1);
     assert_eq!(atlas.palette.len(), 64);
     assert_eq!(atlas.palette[0], 0);
@@ -264,7 +280,40 @@ static ASSETS: LazyLock<Assets> = LazyLock::new(|| {
         palette: atlas.palette,
         sprites,
     }
-});
+}
+static ASSETS: LazyLock<Assets> =
+    LazyLock::new(|| load_assets(include_str!("../../../assets/ui/atlas.json")));
+static CAMPAIGN_ASSETS: LazyLock<Assets> =
+    LazyLock::new(|| load_assets(include_str!("../../../assets/ui/campaign-atlas.json")));
+const CAMPAIGN_SHIPS: [&str; 10] = [
+    "campaign_ship_0",
+    "campaign_ship_1",
+    "campaign_ship_2",
+    "campaign_ship_3",
+    "campaign_ship_4",
+    "campaign_ship_5",
+    "campaign_ship_6",
+    "campaign_ship_7",
+    "campaign_ship_8",
+    "campaign_ship_9",
+];
+const CAMPAIGN_PATCHES: [&str; 8] = [
+    "campaign_patch_0",
+    "campaign_patch_1",
+    "campaign_patch_2",
+    "campaign_patch_3",
+    "campaign_patch_4",
+    "campaign_patch_5",
+    "campaign_patch_6",
+    "campaign_patch_7",
+];
+fn selection(value: f32, count: usize) -> usize {
+    if value.is_finite() {
+        value.floor().clamp(0.0, (count - 1) as f32) as usize
+    } else {
+        0
+    }
+}
 
 struct Painter<'a> {
     frame: &'a mut FrameBuilder,
@@ -376,11 +425,7 @@ impl Painter<'_> {
         self.remaining -= art.body.occupied_count();
     }
     fn portrait(&mut self, node: &UiNode, time: f32, reduced: bool) {
-        let style = if node.value.is_finite() {
-            node.value.floor().clamp(0.0, 2.0) as usize
-        } else {
-            0
-        };
+        let style = selection(node.value, PORTRAITS.len());
         let art = &PORTRAITS[style];
         let body = &art.body;
         let count = body.occupied_count();
@@ -411,6 +456,48 @@ impl Painter<'_> {
                     muted(color)
                 } else if blink && cell.y == -4.5 && (color == art.eyes || color == art.pupil) {
                     art.skin
+                } else {
+                    color
+                }
+            },
+        );
+        self.remaining -= count;
+        self.work_remaining -= count;
+    }
+    fn campaign(&mut self, node: &UiNode, ship: bool) {
+        let names: &[&str] = if ship {
+            &CAMPAIGN_SHIPS
+        } else {
+            &CAMPAIGN_PATCHES
+        };
+        let body = &CAMPAIGN_ASSETS.sprites[names[selection(node.value, names.len())]].body;
+        let count = body.occupied_count();
+        let r = node.rect;
+        let scale = (r[2] / body.width as f32)
+            .min(r[3] / body.height as f32)
+            .floor();
+        if scale < 1.0 || count > self.remaining || count > self.work_remaining {
+            return;
+        }
+        let local = Transform {
+            position: Vec2::new(r[0] + r[2] * 0.5, r[1] + r[3] * 0.5),
+            scale: Vec2::splat(scale),
+            ..Transform::default()
+        };
+        let clip = self.clip;
+        self.frame.push_body_affine_colored(
+            body,
+            self.parent.compose(local.affine()),
+            |cell, color| {
+                let p = local.point(cell);
+                if clip.is_some_and(|r| {
+                    p.x < r[0] || p.x >= r[0] + r[2] || p.y < r[1] || p.y >= r[1] + r[3]
+                }) {
+                    0
+                } else if node.disabled {
+                    muted(color)
+                } else if node.active {
+                    brighten(color)
                 } else {
                     color
                 }
@@ -574,6 +661,8 @@ impl Painter<'_> {
             "panel" => self.frame("panel", r, node.active, node.disabled),
             "console-panel" => self.console_panel(r),
             "portrait" => self.portrait(node, time, reduced),
+            "campaign-patch" => self.campaign(node, false),
+            "campaign-ship" => self.campaign(node, true),
             "input" => {
                 self.frame("button", r, node.active, node.disabled);
                 let height = (r[3] - 6.0).max(RoyaleMono::HEIGHT);
@@ -841,6 +930,66 @@ fn wrap(text: &str, columns: usize) -> Vec<String> {
 mod tests {
     use super::*;
     #[test]
+    fn authored_campaign_ship_and_patch_outlines_are_distinct_occupied_objects() {
+        use std::collections::HashSet;
+        let occupied = |body: &PixelBody| {
+            (0..body.height)
+                .flat_map(|y| (0..body.width).map(move |x| body.is_occupied(x, y)))
+                .collect::<Vec<_>>()
+        };
+        for (names, dimensions) in [
+            (&CAMPAIGN_SHIPS[..], (32, 32)),
+            (&CAMPAIGN_PATCHES[..], (24, 24)),
+        ] {
+            let mut silhouettes = HashSet::new();
+            for name in names {
+                let body = &CAMPAIGN_ASSETS.sprites[*name].body;
+                assert_eq!((body.width, body.height), dimensions);
+                assert!(body.occupied_count() > 100);
+                assert!(body.occupied_count() < body.width * body.height);
+                assert!(
+                    silhouettes.insert(occupied(body)),
+                    "duplicate silhouette: {name}"
+                );
+            }
+        }
+        let new_heads: HashSet<_> = PORTRAITS
+            .iter()
+            .skip(3)
+            .map(|art| occupied(&art.body))
+            .collect();
+        assert_eq!(new_heads.len(), 5, "new comms silhouettes must differ");
+        assert_eq!(selection(f32::NAN, 10), 0);
+        assert_eq!(selection(8.9, 10), 8);
+        assert_eq!(selection(100.0, 10), 9);
+    }
+
+    #[test]
+    fn campaign_quads_fit_integer_scale_and_keep_unlit_material() {
+        for kind in ["campaign-ship", "campaign-patch", "portrait"] {
+            for value in 0..8 {
+                let mut scene = scene(kind);
+                let node = &mut scene.groups[0].nodes[0];
+                node.rect = [5.0, 9.0, 60.0, 70.0];
+                node.value = value as f32;
+                let mut frame = FrameBuilder::new();
+                draw(&mut frame, &scene, [0.0; 2], [640.0, 360.0], 0.0, true);
+                assert!(frame.frame().pixel_count > 100);
+                let batch = &frame.frame().batches[0];
+                assert_eq!(batch.transforms.len(), 1);
+                let t = batch.transforms[0];
+                assert_eq!(t.b[2..], [0.0, 0.0]);
+                assert_eq!(t.a[2].fract(), 0.0);
+                assert_eq!(t.a[2], t.b[1]);
+                for pixel in &batch.pixels {
+                    let p = t.point(Vec2::from_array(pixel.local)) + Vec2::new(320.0, 180.0)
+                        - Vec2::new(100.0, 50.0);
+                    assert!(p.x >= 5.0 && p.x < 65.0 && p.y >= 9.0 && p.y < 79.0);
+                }
+            }
+        }
+    }
+    #[test]
     fn console_panel_is_exact_opaque_black_with_only_a_rail_and_pins() {
         let mut scene = scene("console-panel");
         scene.groups[0].nodes[0].rect = [0.0, 0.0, 300.0, 100.0];
@@ -1078,7 +1227,14 @@ mod tests {
 
     #[test]
     fn scroll_clip_keeps_visible_cells_inside_group_relative_bounds() {
-        for kind in ["text", "logo", "panel", "portrait"] {
+        for kind in [
+            "text",
+            "logo",
+            "panel",
+            "portrait",
+            "campaign-patch",
+            "campaign-ship",
+        ] {
             let mut scene = scene(kind);
             let clip = [140.0, 40.0, 32.0, 16.0];
             scene.groups[0].nodes[0].clip = Some(clip);

@@ -68,6 +68,14 @@
   display: flex;
   flex: 0 0 auto;
   gap: calc(8px * var(--ui-scale, 1));
+  flex-wrap: wrap;
+}
+
+#dialogue-previous, #dialogue-next, #dialogue-close {
+  min-width: calc(50px * var(--ui-scale, 1));
+}
+#dialogue-replay {
+  min-width: calc(90px * var(--ui-scale, 1));
 }
 
 .dialogue-actions button {

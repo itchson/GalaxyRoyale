@@ -1,10 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { IDBFactory } from 'fake-indexeddb';
-import { SaveStore, SaveConflict, validProfile, normalizeProfile, defaultSettings, normalizeSettings, loadSettings, saveSettings } from '../../apps/game/src/storage.ts';
+import { SaveStore, SaveConflict, validProfile, normalizeProfile, emptyCampaign, defaultSettings, normalizeSettings, loadSettings, saveSettings } from '../../apps/game/src/storage.ts';
 
-const profile = (revision = 0, currency = [0, 0, 0]) => ({schema_version:2,revision,seed:0x47524f59,currency,ranks:Array(9).fill(0),unlocked:[false,false,false],kills:[0,0,0],boss_kills:[0,0,0],pity:[0,0,0],pending:[false,false,false],discoveries:[],quests:[],relics:[]});
-const legacyProfile = (revision = 0, currency = [0, 0, 0]) => { const {discoveries,quests,relics,...legacy}=profile(revision,currency);return {...legacy,schema_version:1}; };
+const profile = (revision = 0, currency = [0, 0, 0]) => ({schema_version:3,revision,seed:0x47524f59,currency,ranks:Array(9).fill(0),unlocked:[false,false,false],kills:[0,0,0],boss_kills:[0,0,0],pity:[0,0,0],pending:[false,false,false],discoveries:[],quests:[],relics:[],campaign:emptyCampaign()});
+const previousProfile = (revision = 0, currency = [0,0,0]) => { const {campaign,...older}=profile(revision,currency);return {...older,schema_version:2}; };
+const legacyProfile = (revision = 0, currency = [0, 0, 0]) => { const {discoveries,quests,relics,campaign,...legacy}=profile(revision,currency);return {...legacy,schema_version:1}; };
 const quest = (site_id='-2:3', overrides={}) => ({site_id,event:'bounty',family:1,target:3,progress:1,completed:false,...overrides});
 const request = r => new Promise((resolve,reject)=>{r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);});
 const committed = tx => new Promise((resolve,reject)=>{tx.oncomplete=resolve;tx.onabort=()=>reject(tx.error);});
@@ -26,7 +27,7 @@ test('profile boundary rejects malformed arrays, impossible signature ranks and 
   assert.equal(validProfile(profile()),true);
   const unlocked=profile(10,[10,20,30]);unlocked.unlocked=[true,true,true];unlocked.ranks=[1,2,3,4,5,1,1,2,3];assert.equal(validProfile(unlocked),true);
   for(const mutation of [
-    p=>p.schema_version=3,p=>p.revision=NaN,p=>p.revision=Number.MAX_SAFE_INTEGER+1,p=>p.seed=0,
+    p=>p.schema_version=4,p=>p.revision=NaN,p=>p.revision=Number.MAX_SAFE_INTEGER+1,p=>p.seed=0,
     p=>p.currency=[-1,0,0],p=>p.currency=[0,0],p=>p.currency=[0,0,2**32],p=>p.currency=Array(3),
     p=>p.ranks[0]=6,p=>p.ranks[6]=1,p=>p.unlocked[0]=true,p=>p.unlocked=Array(3),p=>p.pending=[false,false,1]
   ]){const p=profile();mutation(p);assert.equal(validProfile(p),false,JSON.stringify(p));}
@@ -84,11 +85,11 @@ test('failed database writes leave the accepted snapshot intact and report the f
   assert.equal((await snapshots())[0].revision,1);assert.deepEqual((await snapshots())[0].currency,[10,0,0]);
 });
 
-test('v1 current and previous snapshots migrate to v2 without changing progression or awarding currency',async t=>{
+test('v1 current and previous snapshots migrate to v3 without changing progression or awarding currency',async t=>{
   await fixture(t);const current=legacyProfile(11,[99,17,4]);current.ranks[0]=3;current.ranks[6]=2;current.unlocked[0]=true;current.kills=[100,2,3];current.pending[2]=true;
   const previous=legacyProfile(10,[89,17,4]);const before=structuredClone(current);await corrupt(current,previous);
   const migrated=new SaveStore();t.after(()=>migrated.db?.close());const loaded=await migrated.open();
-  assert.equal(loaded.schema_version,2);assert.equal(loaded.revision,11);assert.deepEqual(loaded.currency,[99,17,4]);assert.deepEqual(loaded.ranks,current.ranks);assert.deepEqual(loaded.unlocked,current.unlocked);assert.deepEqual(loaded.pending,current.pending);assert.deepEqual(current,before,'migration does not mutate caller input');
+  assert.equal(loaded.schema_version,3);assert.equal(loaded.revision,11);assert.deepEqual(loaded.currency,[99,17,4]);assert.deepEqual(loaded.ranks,current.ranks);assert.deepEqual(loaded.unlocked,current.unlocked);assert.deepEqual(loaded.pending,current.pending);assert.deepEqual(current,before,'migration does not mutate caller input');
   assert.deepEqual(loaded.discoveries,[]);assert.deepEqual(loaded.quests,[]);assert.deepEqual(loaded.relics,[]);assert.match(migrated.message,/upgraded/);
   const [persisted,backup]=await snapshots();assert.deepEqual(persisted,normalizeProfile(current));assert.deepEqual(backup,normalizeProfile(previous));
   await migrated.save({...loaded,currency:[9999,17,4]});assert.deepEqual((await snapshots())[0].currency,[99,17,4],'same revision never adds a migration reward');
@@ -96,12 +97,12 @@ test('v1 current and previous snapshots migrate to v2 without changing progressi
   const reopened=new SaveStore();t.after(()=>reopened.db?.close());const progress=await reopened.open();await reopened.save({...progress,currency:[119,17,4]});assert.deepEqual((await snapshots())[0].currency,[109,17,4],'completed quest snapshot cannot replay currency at equal revision');
 });
 
-test('legacy recovery and legacy import both retain revision, ranks and currency in v2 snapshots',async t=>{
+test('legacy recovery and legacy import both retain revision, ranks and currency in v3 snapshots',async t=>{
   const store=await fixture(t);await store.save(profile(5,[50,0,0]));const legacy=legacyProfile(4,[40,1,2]);legacy.ranks[4]=2;
   await corrupt({schema_version:99},legacy);const recovery=new SaveStore();t.after(()=>recovery.db?.close());const recovered=await recovery.open();assert.deepEqual(recovered,normalizeProfile(legacy));assert.match(recovery.message,/Recovered/);
   await recovery.save({...recovered,revision:5,currency:[41,1,2]});
   const imported=legacyProfile(2,[12,13,14]);imported.ranks[1]=4;await recovery.replace(imported);imported.currency[0]=900;
-  const [current,previous]=await snapshots();assert.equal(current.schema_version,2);assert.equal(current.revision,2);assert.equal(current.ranks[1],4);assert.deepEqual(current.currency,[12,13,14]);assert.deepEqual(current.quests,[]);assert.equal(previous.revision,5);
+  const [current,previous]=await snapshots();assert.equal(current.schema_version,3);assert.equal(current.revision,2);assert.equal(current.ranks[1],4);assert.deepEqual(current.currency,[12,13,14]);assert.deepEqual(current.quests,[]);assert.equal(previous.revision,5);
 });
 
 test('discoveries, quests and relics persist exactly across reload without replaying completion rewards',async t=>{
@@ -123,8 +124,52 @@ test('v2 rejects malformed, oversized and duplicate site collections and quest b
 
 test('settings migrate old values and round-trip motion and cosmetic density with safe validation',t=>{
   const original=globalThis.localStorage;let stored=JSON.stringify({master:0.2,music:0.3,sfx:0.4,shake:false});globalThis.localStorage={getItem:()=>stored,setItem:(_key,value)=>stored=value};t.after(()=>globalThis.localStorage=original);
-  assert.deepEqual(loadSettings(),{master:0.2,music:0.3,sfx:0.4,shake:false,reduced_motion:false,cosmetic_density:'full'});
+  assert.deepEqual(loadSettings(),{master:0.2,music:0.3,sfx:0.4,shake:false,reduced_motion:false,cosmetic_density:'full',dialogue_voice:false,voice_volume:0.7,zoom:1});
   const reduced={...defaultSettings,reduced_motion:true,cosmetic_density:'reduced'};saveSettings(reduced);assert.deepEqual(loadSettings(),reduced);
   assert.deepEqual(normalizeSettings({master:10,music:-1,sfx:'loud',shake:'no',reduced_motion:1,cosmetic_density:'ultra'}),{...defaultSettings,master:1,music:0});
   stored='{malformed';assert.deepEqual(loadSettings(),defaultSettings);stored='null';assert.deepEqual(loadSettings(),defaultSettings);
+  assert.equal(normalizeSettings({zoom:100}).zoom,1.6); assert.equal(normalizeSettings({zoom:-1}).zoom,0.6);assert.equal(normalizeSettings({zoom:NaN}).zoom,1);
+  assert.equal(normalizeSettings({voice_volume:4}).voice_volume,1); assert.equal(normalizeSettings({voice_volume:-3}).voice_volume,0);
+});
+
+test('v2 expedition progression migrates to a blank campaign with no new reward or XP', async t => {
+  await fixture(t);
+  const older = previousProfile(19, [40,12,7]);
+  older.discoveries=['-2:3']; older.quests=[quest('-2:3',{progress:3,completed:true})]; older.relics=['-2:3'];
+  await corrupt(older, previousProfile(18,[37,12,7]));
+  const migrated = new SaveStore(); t.after(()=>migrated.db?.close());
+  const loaded = await migrated.open();
+  assert.equal(loaded.schema_version,3); assert.equal(loaded.revision,19);
+  assert.deepEqual(loaded.currency,older.currency); assert.deepEqual(loaded.quests,older.quests);
+  assert.deepEqual(loaded.campaign,emptyCampaign());
+  assert.deepEqual((await snapshots())[0],loaded); assert.equal((await snapshots())[1].schema_version,3);
+});
+
+test('campaign boundary rejects fabricated ownership, malformed league, cargo and run summaries', () => {
+  for (const mutation of [
+    c=>delete c.ship_xp, c=>c.ship_xp=Array(10), c=>c.ship_xp[1]=-1,
+    c=>c.patches=Array(8), c=>c.patches[0]=true, c=>c.blueprints[0]=true,
+    c=>c.crafted[0]=true, c=>c.selected_ship=1, c=>c.selected_ship=9,
+    c=>c.royale_results=[1,0,0,0,0,0,0,0], c=>c.royale_results=Array(8),
+    c=>c.tournament_attempt=-1, c=>c.victory_claimed=true, c=>c.credits_seen=true,
+    c=>c.cargo_materials=17,c=>c.cargo_materials=-1,c=>c.stored_materials=2**32,
+    c=>c.last_run={},c=>c.last_run={time:NaN,distance_peak:1,enemies:0,asteroids:0,champions:0,points_gained:[0,0,0],xp_gained:0,materials_gained:0},
+  ]) { const candidate=profile(); mutation(candidate.campaign); assert.equal(validProfile(candidate),false); }
+  const candidate=profile(); candidate.campaign.patches[0]=true; candidate.campaign.blueprints[0]=true; candidate.campaign.crafted[0]=true; candidate.campaign.selected_ship=1;
+  assert.equal(validProfile(candidate),true);
+});
+
+test('ship, campaign and run snapshots survive reload without replaying rewards or material costs', async t => {
+  const store=await fixture(t); const candidate=profile(20,[30,40,50]);
+  candidate.campaign.patches.fill(true); candidate.campaign.blueprints.fill(true); candidate.campaign.crafted[2]=true;
+  candidate.campaign.selected_ship=3; candidate.campaign.royale_results.fill(1); candidate.campaign.victory_claimed=true;
+  candidate.campaign.ship_xp[3]=125; candidate.campaign.ship_xp[9]=2000; candidate.campaign.stored_materials=12;
+  candidate.campaign.last_run={time:120,distance_peak:6500,enemies:8,asteroids:4,champions:1,points_gained:[2,3,4],xp_gained:40,materials_gained:6};
+  const saving=store.save(candidate); candidate.campaign.stored_materials=999; await saving;
+  const reopened=new SaveStore(); t.after(()=>reopened.db?.close()); const loaded=await reopened.open();
+  assert.equal(loaded.campaign.stored_materials,12); assert.equal(loaded.campaign.selected_ship,3); assert.equal(loaded.campaign.victory_claimed,true);
+  await reopened.save({...loaded,currency:[3000,4000,5000],campaign:{...loaded.campaign,stored_materials:12000}});
+  assert.deepEqual((await snapshots())[0].currency,[30,40,50]); assert.equal((await snapshots())[0].campaign.stored_materials,12);
+  await reopened.save({...loaded,revision:21,campaign:{...loaded.campaign,credits_seen:true,selected_ship:9}});
+  assert.equal((await snapshots())[0].campaign.selected_ship,9); assert.equal((await snapshots())[1].campaign.selected_ship,3);
 });

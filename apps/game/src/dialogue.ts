@@ -6,6 +6,11 @@ export interface DialogueContent {
   portrait?: number;
   actionLabel?: string;
   onAction?: () => void | Promise<void>;
+  onNext?: () => void;
+  onPrevious?: () => void;
+  onReplay?: () => void;
+  page?: number;
+  pageCount?: number;
 }
 
 export interface DialogueOptions {
@@ -21,8 +26,14 @@ export class DialoguePanel {
   private readonly text = document.createElement("p");
   private readonly action = document.createElement("button");
   private readonly closeButton = document.createElement("button");
+  private readonly previous = document.createElement("button");
+  private readonly next = document.createElement("button");
+  private readonly replay = document.createElement("button");
   private previousFocus: HTMLElement | null = null;
   private onAction: DialogueContent["onAction"];
+  private onNext: DialogueContent["onNext"];
+  private onPrevious: DialogueContent["onPrevious"];
+  private onReplay: DialogueContent["onReplay"];
   private isOpen = false;
   private busy = false;
   private disposed = false;
@@ -54,13 +65,24 @@ export class DialoguePanel {
     this.closeButton.id = "dialogue-close";
     this.closeButton.type = "button";
     this.closeButton.textContent = "CLOSE";
-    actions.append(this.action, this.closeButton);
+    this.previous.id = "dialogue-previous";
+    this.previous.type = "button";
+    this.previous.textContent = "BACK";
+    this.next.id = "dialogue-next";
+    this.next.type = "button";
+    this.replay.id = "dialogue-replay";
+    this.replay.type = "button";
+    this.replay.textContent = "REPLAY VOICE";
+    actions.append(this.previous, this.next, this.action, this.replay, this.closeButton);
     content.append(this.speaker, this.text, actions);
     card.append(this.portrait, content);
     this.screen.append(card);
     document.body.append(this.screen);
     this.action.addEventListener("click", this.act);
     this.closeButton.addEventListener("click", this.close);
+    this.next.addEventListener("click", () => this.onNext?.());
+    this.previous.addEventListener("click", () => this.onPrevious?.());
+    this.replay.addEventListener("click", () => this.onReplay?.());
     window.addEventListener("keydown", this.onKeyDown, true);
     window.addEventListener("keyup", this.onKeyUp, true);
     for (const name of ["pointerdown", "pointermove", "pointerup", "click"])
@@ -86,6 +108,13 @@ export class DialoguePanel {
         : 0,
     );
     this.onAction = content.onAction;
+    this.onNext = content.onNext;
+    this.onPrevious = content.onPrevious;
+    this.onReplay = content.onReplay;
+    this.next.hidden = !content.onNext;
+    this.previous.hidden = !content.onPrevious;
+    this.replay.hidden = !content.onReplay;
+    this.next.textContent = `NEXT ${Math.max(1, (content.page ?? 0) + 1)}/${Math.max(1, content.pageCount ?? 1)}`;
     this.action.textContent = (content.actionLabel ?? "ACCEPT")
       .trim()
       .slice(0, 40);
@@ -102,7 +131,7 @@ export class DialoguePanel {
     }
     if (!this.isOpen || this.disposed) return;
     // Refreshes and actions cannot accidentally move focus back into flight.
-    (this.action.hidden ? this.closeButton : this.action).focus({
+    (this.next.hidden ? this.action.hidden ? this.closeButton : this.action : this.next).focus({
       preventScroll: true,
     });
   }
@@ -113,6 +142,9 @@ export class DialoguePanel {
     this.isOpen = false;
     this.busy = false;
     this.onAction = undefined;
+    this.onNext = undefined;
+    this.onPrevious = undefined;
+    this.onReplay = undefined;
     this.screen.hidden = true;
     this.screen.removeAttribute("aria-busy");
     const previousFocus = this.previousFocus;
@@ -163,10 +195,8 @@ export class DialoguePanel {
       if (!event.isComposing) this.close();
     } else if (event.key === "Tab") {
       event.preventDefault();
-      const available =
-        this.action.hidden || this.action.disabled
-          ? [this.closeButton]
-          : [this.action, this.closeButton];
+      const available = [this.previous, this.next, this.action, this.replay, this.closeButton]
+        .filter(button => !button.hidden && !button.disabled);
       const index = available.indexOf(
         document.activeElement as HTMLButtonElement,
       );

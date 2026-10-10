@@ -38,6 +38,8 @@ The complete interface asset set contains 21,224 occupied cells. Engine renderin
 
 The local Tiny5 font and its supplied SIL Open Font License 1.1 are retained at `apps/game/public/fonts/Tiny5.ttf` and `OFL.txt`. UI provenance records both file hashes. Generated source provenance records the session tool, actual source hashes and conversion settings; the specific image model identifier was not exposed in the artifact metadata.
 
+RoyaleMono is original 5×7 cell artwork defined in `crates/game_web/src/pixel_ui.rs`. The semantic browser font `apps/game/public/fonts/RoyaleMono.ttf` is generated from those exact masks by `scripts/build-ui-font.py` using fontTools (build tooling only). It uses the same six-cell advance and uppercase masks, so DOM wrapping and Rust quad glyph placement agree. The shipped visual letters remain individually transformed occupied pixel objects. Campaign hulls, insignia and additional portraits are original authored cells; see `assets/ui/CAMPAIGN.md` for their reproducible source and atlas contract.
+
 ## Verification and production evidence
 
 Conversion checks verify exact dimensions, row-major indices, hard alpha, common palettes, crop boundaries, sampled silhouettes and byte-identical reruns. The UI check additionally verifies that disconnected components survive. Evidence is recorded in `work/ui-atlas-tests.log`; source and output hashes are in `artifacts/asset-provenance.json` and `assets/ui/provenance.json`. Script help contains reproducible Python/Pillow commands.

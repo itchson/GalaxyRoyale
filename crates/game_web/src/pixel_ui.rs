@@ -338,6 +338,20 @@ pub fn draw_ui(
     if !hud.dock || ratio(hud.hull, hud.max_hull) < 1.0 {
         let meter_x = (viewport.x * 0.5 - 88.0).floor();
         let meter_y = viewport.y - 36.0;
+        let status = format!(
+            "LV {} / CARGO {}/{}",
+            compact(hud.ship_level),
+            compact(hud.cargo_materials),
+            compact(hud.cargo_capacity)
+        );
+        let status_width = status.chars().count() as f32 * RoyaleMono::ADVANCE - 1.0;
+        ui.text(
+            (viewport.x - status_width) * 0.5,
+            meter_y - 10.0,
+            &status,
+            1.0,
+            DIM,
+        );
         ui.panel(meter_x, meter_y, 176.0, 24.0);
         ui.text(meter_x + 7.0, meter_y + 5.0, "HULL", 1.0, DIM);
         ui.bar(
@@ -585,6 +599,30 @@ mod tests {
         assert!(positions(&hud)
             .iter()
             .any(|p| p.x > 580.0 && p.y > 216.0 && p.y < 264.0));
+    }
+
+    #[test]
+    fn flight_level_and_cargo_line_stays_between_touch_pads() {
+        let mut hud = game_core::Game::new(game_core::Profile::default()).hud();
+        hud.dock = false;
+        hud.ship_level = u32::MAX;
+        hud.cargo_materials = u32::MAX;
+        hud.cargo_capacity = u32::MAX;
+        let mut frame = FrameBuilder::new();
+        draw_ui(&mut frame, &hud, [0.0; 2], [640.0, 360.0], 1);
+        let mut status_cells = 0;
+        for batch in &frame.frame().batches {
+            for pixel in &batch.pixels {
+                let p = batch.transforms[pixel.transform as usize]
+                    .point(Vec2::from_array(pixel.local))
+                    + Vec2::new(320.0, 180.0);
+                if p.y > 310.0 && p.y < 324.0 {
+                    assert!(p.x > 232.0 && p.x < 408.0);
+                    status_cells += 1;
+                }
+            }
+        }
+        assert!(status_cells > 100);
     }
 
     #[test]

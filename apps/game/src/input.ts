@@ -20,6 +20,7 @@ export class FlightInput {
     private stick: HTMLElement,
     private fireButton: HTMLButtonElement,
     private onDestination: (world: [number, number]) => void,
+    private onFireStart: () => void = () => {},
   ) {
     canvas.addEventListener("contextmenu", (e) => e.preventDefault());
     canvas.addEventListener("pointerdown", (e) => {
@@ -30,6 +31,7 @@ export class FlightInput {
         this.target(e);
       }
       this.mouseFire = (e.buttons & 2) !== 0;
+      if (e.button === 2 && this.mouseFire) this.onFireStart();
     });
     canvas.addEventListener("pointermove", (e) => {
       if (!this.enabled || e.pointerType === "touch") return;
@@ -72,6 +74,7 @@ export class FlightInput {
       this.firePointer = e.pointerId;
       fireButton.setPointerCapture(e.pointerId);
       fireButton.classList.add("firing");
+      this.onFireStart();
     });
     const releaseFire = (e: PointerEvent) => {
       if (e.pointerId === this.firePointer) {
@@ -113,6 +116,12 @@ export class FlightInput {
       this.camera[1] +
         ((e.clientY - r.top - r.height / 2) * this.viewport[1]) / r.height,
     ];
+    this.onDestination(this.destination);
+  }
+  /** Same one-shot course command used by a mouse click, exposed for navigation. */
+  setCourse(world: [number, number]): void {
+    if (!this.enabled || !world.every(Number.isFinite)) return;
+    this.destination = [...world];
     this.onDestination(this.destination);
   }
   private moveStick(e: PointerEvent): void {

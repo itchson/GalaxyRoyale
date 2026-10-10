@@ -4,6 +4,8 @@ import { AudioEngine } from "./audio";
 import { PixelUiBridge } from "./pixel-ui";
 import { DebugConsole } from "./debug-console";
 import { DialoguePanel } from "./dialogue";
+import { paintCampaign, paintHangar, paintCredits, type CampaignHud, type CampaignActions } from "./campaign";
+import { NarrativeDirector, type NarrativeContext } from "./narrative";
 import {
   SaveStore,
   SaveConflict,
@@ -21,6 +23,7 @@ interface Upgrade {
   max_rank: number;
   description: string;
   unlocked: boolean;
+  required_level: number;
 }
 interface Hud {
   position: [number, number];
@@ -54,6 +57,15 @@ interface Hud {
   quest_log: Profile["quests"];
   discoveries: number;
   relics: number;
+  campaign: CampaignHud;
+  ship_level: number;
+  ship_xp: number;
+  ship_next_xp: number;
+  rank_cap: number;
+  cargo_materials: number;
+  cargo_capacity: number;
+  stored_materials: number;
+  last_run: { time: number; distance_peak: number; enemies: number; asteroids: number; champions: number; points_gained: number[]; xp_gained: number; materials_gained: number } | null;
 }
 interface Cue {
   kind: string;
@@ -76,6 +88,9 @@ interface GalaxyRuntime {
   purchase(id: string): void;
   resize(width: number, height: number): void;
   viewport(): Float32Array;
+  world_viewport(): Float32Array;
+  set_zoom(value: number): void;
+  zoom(): number;
   set_paused(value: boolean): void;
   set_shake(value: boolean): void;
   set_ui_mode(mode: number): void;
@@ -85,6 +100,12 @@ interface GalaxyRuntime {
   set_ui_insets(top: number, right: number, bottom: number, left: number): void;
   set_cosmetic_density(value: boolean): void;
   interact_site(): void;
+  start_champion(index: number): void;
+  start_tournament(): void;
+  craft_ship(index: number): void;
+  switch_ship(id: number): void;
+  acknowledge_credits(): void;
+  return_to_home(): void;
   diagnostic(command: string): void;
   recover(): Promise<void>;
   lose_device(): void;
@@ -98,11 +119,13 @@ const audio = new AudioEngine();
 const settings = loadSettings();
 document.body.classList.toggle("reduced-motion", settings.reduced_motion);
 audio.setLevels(settings.master, settings.music, settings.sfx);
+const narrative = new NarrativeDirector({ voiceEnabled: settings.dialogue_voice, voiceVolume: settings.master * settings.voice_volume });
 const launch = element<HTMLButtonElement>("launch");
 launch.disabled = true;
 const loadStatus = element("load-status");
 const menu = element("menu-screen");
 const launchScreen = element("launch-screen");
+const deathScreen = element("death-screen");
 const params = new URLSearchParams(location.search);
 let waitingUpdate: ServiceWorker | null = null;
 let applyingUpdate = false;
@@ -117,7 +140,11 @@ let pixelUi: PixelUiBridge;
 let consoleWasRunning = false;
 let dialogueWasRunning = false;
 let beforeLaunchMenu = false;
-let menuTab: "upgrades" | "settings" | "journal" = "upgrades";
+type MenuTab = "upgrades" | "settings" | "journal" | "campaign" | "hangar" | "credits";
+let menuTab: MenuTab = "upgrades";
+let creditsPresented = false;
+let transitionEpoch = 0;
+let preparingEncounter: number | null = null;
 let hud: Hud;
 let launched = false;
 let paused = true;
@@ -148,6 +175,7 @@ const debugConsole = new DebugConsole({
   ready: () => Boolean(galaxy),
   onOpen: () => {
     dialoguePanel.close();
+    element("quick-menu").hidden = true;
     consoleWasRunning = launched && !paused;
     paused = true;
     input.enabled = false;
@@ -161,6 +189,7 @@ const debugConsole = new DebugConsole({
   onClose: () => {
     if (
       consoleWasRunning &&
+      launched && menu.hidden && deathScreen.hidden && preparingEncounter === null &&
       !dialoguePanel.opened &&
       !recovering &&
       !graphicsFailed &&
@@ -178,12 +207,12 @@ const debugConsole = new DebugConsole({
   run: async (command) => {
     const [verb, ...args] = command.trim().toLowerCase().split(/\s+/);
     if (verb === "help")
-      return "HELP / STATS / PROFILE / RENDERER / RECOVER\nSCENE dock|belt|combat|site|boss-dart|boss-bastion|boss-coil|stress|die (QA mode)\nCLEAR / Up, Down: history / Backtick or Escape: close";
+      return "HELP / STATS / PROFILE / RENDERER / RECOVER\nSCENE dock|belt|combat|site|boss-dart|boss-bastion|boss-coil|champion-0..7|tournament|stress|die (QA mode)\nCLEAR / Up, Down: history / Backtick or Escape: close";
     if (verb === "stats")
-      return `${backend.toUpperCase()} / ${fps} FPS / p95 ${percentile(frameTimes, 0.95).toFixed(2)} ms\n${lastPixels} quads / ${hud.entities} entities / ${hud.particles} particles\nPOSITION ${hud.position.map((v) => v.toFixed(1)).join(", ")}\n${hud.biome.name} / ${hud.zone} / danger ${hud.danger}\nHULL ${hud.hull.toFixed(0)}/${hud.max_hull.toFixed(0)} / SHIELD ${hud.shield.toFixed(0)}`;
+      return `${backend.toUpperCase()} / ${fps} FPS / p95 ${percentile(frameTimes, 0.95).toFixed(2)} ms\n${lastPixels} quads / ${hud.entities} entities / ${hud.particles} particles\nPOSITION ${hud.position.map((v) => v.toFixed(1)).join(", ")}\n${hud.biome.name} / ${hud.zone} / danger ${hud.danger}\nHULL ${hud.hull.toFixed(0)}/${hud.max_hull.toFixed(0)} / SHIELD ${hud.shield.toFixed(0)}\nZOOM ${galaxy.zoom().toFixed(2)} / WORLD ${Array.from(galaxy.world_viewport(), v => v.toFixed(0)).join(" x ")} / UI ${galaxy.viewport().join(" x ")}\nSHIP LV ${hud.ship_level} / XP ${hud.ship_xp} / CARGO ${hud.cargo_materials}/${hud.cargo_capacity}`;
     if (verb === "profile") {
       const p = galaxy.profile();
-      return `SCHEMA ${p.schema_version} / revision ${p.revision} / seed ${p.seed}\nCURRENCY ${p.currency.join(" / ")}\nDISCOVERIES ${p.discoveries.length} / quests ${p.quests.length} / relics ${p.relics.length}\n${store.message}`;
+      return `SCHEMA ${p.schema_version} / revision ${p.revision} / seed ${p.seed}\nCURRENCY ${p.currency.join(" / ")}\nDISCOVERIES ${p.discoveries.length} / quests ${p.quests.length} / relics ${p.relics.length}\nPATCHES ${p.campaign.patches.filter(Boolean).length}/8 / ship ${p.campaign.selected_ship} / Royale ${p.campaign.victory_claimed ? "WON" : "PENDING"}\n${store.message}`;
     }
     if (verb === "renderer")
       return `${backend.toUpperCase()} / ${galaxy.viewport().join(" x ")} logical pixels / eight bounded lights`;
@@ -207,6 +236,8 @@ const debugConsole = new DebugConsole({
           "boss-coil",
           "stress",
           "die",
+          ...Array.from({length: 8}, (_, i) => `champion-${i}`),
+          "tournament",
         ].includes(name)
       )
         return "Unknown scene. Type HELP for supported names.";
@@ -229,6 +260,7 @@ const debugConsole = new DebugConsole({
 });
 const dialoguePanel = new DialoguePanel({
   onOpen: () => {
+    element("quick-menu").hidden = true;
     dialogueWasRunning = launched && !paused;
     paused = true;
     input.enabled = false;
@@ -240,8 +272,10 @@ const dialoguePanel = new DialoguePanel({
     pixelUi?.invalidate();
   },
   onClose: () => {
+    narrative.close();
     if (
       dialogueWasRunning &&
+      launched && menu.hidden && deathScreen.hidden && preparingEncounter === null &&
       !debugConsole.opened &&
       !recovering &&
       !graphicsFailed &&
@@ -259,9 +293,9 @@ const dialoguePanel = new DialoguePanel({
 });
 function restoreUi(): void {
   galaxy.set_ui_mode(
-    launched ? (menu.hidden ? 1 : 3) : beforeLaunchMenu ? 3 : 2,
+    !deathScreen.hidden ? 0 : launched ? (menu.hidden ? 1 : 3) : beforeLaunchMenu ? 3 : 2,
   );
-  document.body.classList.toggle("engine-flight", launched && menu.hidden);
+  document.body.classList.toggle("engine-flight", launched && menu.hidden && deathScreen.hidden);
 }
 const percentile = (values: number[], p: number): number => {
   const sorted = [...values].sort((a, b) => a - b);
@@ -296,13 +330,15 @@ function resize(): void {
   );
   if (input) {
     const v = galaxy.viewport();
-    input.viewport = [v[0], v[1]];
+    const world = galaxy.world_viewport();
+    input.viewport = [world[0], world[1]];
     document.documentElement.style.setProperty(
       "--ui-scale",
       String(innerHeight / v[1]),
     );
     const safe = getComputedStyle(safeAreaProbe);
     const uiScale = innerHeight / v[1];
+    document.body.classList.toggle("narrow-ui", v[0] < 430);
     galaxy.set_ui_insets(
       ...([
         safe.paddingTop,
@@ -328,6 +364,7 @@ function resize(): void {
 }
 function pause(dock: boolean): void {
   if (!galaxy || !launched) return;
+  transitionEpoch++;
   paused = true;
   input.enabled = false;
   input.reset();
@@ -336,6 +373,8 @@ function pause(dock: boolean): void {
   document.body.classList.remove("engine-flight");
   audio.suspend();
   destination = null;
+  element("quick-menu").hidden = true;
+  deathScreen.hidden = true;
   menu.hidden = false;
   element("menu-title").textContent = dock
     ? "Evolve your ship"
@@ -352,16 +391,107 @@ function pause(dock: boolean): void {
   beforeLaunchMenu = false;
   selectMenuTab(dock ? "upgrades" : "settings");
 }
-function selectMenuTab(tab: "upgrades" | "settings" | "journal"): void {
+const campaignActions: CampaignActions = {
+  navigate: (position) => { void navigate(position); },
+  challenge: (index) => { void beginChampion(index).catch(error => toast(String(error))); },
+  tournament: () => { void beginTournament().catch(error => toast(String(error))); },
+  craft: (index) => {
+    try {
+      galaxy.craft_ship(index);
+      hud = galaxy.hud();
+      save(galaxy.profile());
+      paintHangar(element("hangar-content"), hud.campaign, hud.dock, hud.currency, campaignActions, hud.stored_materials);
+      paintHud();
+      toast("SHIP CRAFTED / select it at Haven");
+    } catch (error) { toast(String(error)); }
+  },
+  select: (id) => {
+    try {
+      galaxy.switch_ship(id);
+      hud = galaxy.hud();
+      save(galaxy.profile());
+      paintHangar(element("hangar-content"), hud.campaign, hud.dock, hud.currency, campaignActions, hud.stored_materials);
+      paintUpgrades(true);
+      paintHud();
+      toast("SHIP SELECTED");
+    } catch (error) { toast(String(error)); }
+  },
+  credits: openCredits,
+};
+async function navigate(position: [number, number]): Promise<void> {
+  await resume();
+  if (paused) return;
+  input.setCourse(position);
+  toast("COURSE SET / fly or steer to your destination");
+}
+async function beginEncounter(start: () => void): Promise<void> {
+  const epoch = ++transitionEpoch;
+  preparingEncounter = epoch;
+  try {
+    start();
+    hud = galaxy.hud();
+    await store.save(galaxy.profile());
+    await store.flush();
+    if (epoch !== transitionEpoch || !launched || !deathScreen.hidden) return;
+    menu.hidden = true;
+    preparingEncounter = null;
+    dialoguePanel.close();
+    input.reset();
+    destination = null;
+    previousDock = hud.dock;
+    paintHud();
+    await resume();
+  } finally {
+    if (preparingEncounter === epoch) preparingEncounter = null;
+  }
+}
+function beginChampion(index: number): Promise<void> {
+  return beginEncounter(() => galaxy.start_champion(index));
+}
+function beginTournament(): Promise<void> {
+  return beginEncounter(() => galaxy.start_tournament());
+}
+function openCredits(): void {
+  dialoguePanel.close();
+  pause(false);
+  element("menu-title").textContent = "GALAXY ROYALE WON";
+  element("menu-description").textContent = "Your Sovereign ship is ready. Thank you for flying.";
+  selectMenuTab("credits");
+}
+function finishCredits(): void {
+  galaxy.acknowledge_credits();
+  save(galaxy.profile());
+  hud = galaxy.hud();
+  element("menu-title").textContent = "HANGAR";
+  element("menu-description").textContent = hud.dock ? "Your collection awaits." : "Return to Haven to select your Sovereign.";
+  selectMenuTab("hangar");
+}
+function selectMenuTab(tab: MenuTab): void {
   menuTab = tab;
+  const headings: Record<MenuTab, [string, string]> = {
+    upgrades: [hud.dock ? "EVOLVE YOUR SHIP" : "SHIP UPGRADES", "Each rank costs 10 matching points and requires its ship level."],
+    hangar: ["SHIP HANGAR", hud.dock ? "Craft blueprints and choose your next ship." : "Return to Haven to craft or switch ships."],
+    campaign: ["ARENA CHAMPIONS", "Eight patches reveal the Galaxy Royale tournament."],
+    settings: ["SETTINGS", "Tune your flight. Settings stay on this device."],
+    journal: ["EXPEDITION JOURNAL", "Discover sanctuaries and return to claim their rewards."],
+    credits: ["GALAXY ROYALE WON", "Your Sovereign ship is ready. Thank you for flying."],
+  };
+  element("menu-title").textContent = headings[tab][0];
+  element("menu-description").textContent = headings[tab][1];
   element("export-save").hidden = tab !== "settings";
   element("import-label").hidden = tab !== "settings";
   element("menu-fullscreen").hidden = tab !== "settings";
+  element("return-title").hidden = tab !== "settings" || beforeLaunchMenu;
   element("upgrade-content").hidden = tab !== "upgrades";
   element("settings-content").hidden = tab !== "settings";
   element("quest-content").hidden = tab !== "journal";
-  for (const page of ["upgrades", "settings", "journal"])
+  element("hangar-content").hidden = tab !== "hangar";
+  element("campaign-content").hidden = tab !== "campaign" && tab !== "credits";
+  for (const page of ["upgrades", "settings", "journal", "hangar", "campaign"])
     element(`tab-${page}`).dataset.active = String(page === tab);
+  if (tab === "campaign") paintCampaign(element("campaign-content"), hud.campaign, campaignActions);
+  if (tab === "hangar") paintHangar(element("hangar-content"), hud.campaign, hud.dock, hud.currency, campaignActions, hud.stored_materials);
+  if (tab === "credits") paintCredits(element("campaign-content"), { ...campaignActions, credits: finishCredits });
   if (tab === "journal") {
     const target = element("quest-content");
     target.replaceChildren();
@@ -403,6 +533,11 @@ function openLaunchSettings(): void {
   selectMenuTab("settings");
 }
 async function resume(): Promise<void> {
+  if (menuTab === "credits" && hud?.campaign.credits_pending) {
+    galaxy.acknowledge_credits();
+    save(galaxy.profile());
+    hud = galaxy.hud();
+  }
   if (beforeLaunchMenu) {
     beforeLaunchMenu = false;
     menu.hidden = true;
@@ -414,6 +549,7 @@ async function resume(): Promise<void> {
   }
   if (
     !galaxy ||
+    preparingEncounter !== null ||
     recovering ||
     graphicsFailed ||
     debugConsole.opened ||
@@ -423,6 +559,7 @@ async function resume(): Promise<void> {
   )
     return;
   menu.hidden = true;
+  deathScreen.hidden = true;
   launchScreen.hidden = true;
   launched = true;
   paused = false;
@@ -449,6 +586,9 @@ function paintUpgrades(dock: boolean): void {
   const target = element("upgrade-content");
   target.replaceChildren();
   if (!dock) return;
+  const level = document.createElement("p");
+  level.textContent = `SHIP LEVEL ${hud.ship_level} / ${hud.ship_xp} XP / next level ${hud.ship_next_xp} XP. Rank cap ${hud.rank_cap}/5.`;
+  target.append(level);
   const columns = document.createElement("div");
   columns.className = "upgrade-columns";
   ["OFFENSIVE", "DEFENSIVE", "PASSIVE"].forEach((name, category) => {
@@ -475,11 +615,14 @@ function paintUpgrades(dock: boolean): void {
       buy.disabled =
         !upgrade.unlocked ||
         upgrade.rank >= upgrade.max_rank ||
-        hud.currency[category] < 10;
+        hud.currency[category] < 10 ||
+        hud.ship_level < upgrade.required_level;
       buy.textContent = !upgrade.unlocked
         ? "BOSS SIGNATURE REQUIRED"
         : upgrade.rank >= upgrade.max_rank
           ? "FULLY EVOLVED"
+          : hud.ship_level < upgrade.required_level
+            ? `SHIP LEVEL ${upgrade.required_level} REQUIRED`
           : "UPGRADE / 10 PTS";
       buy.addEventListener("click", async () => {
         try {
@@ -521,8 +664,14 @@ function paintHud(): void {
       : `THREAT LEVEL ${hud.danger}`;
   element("dock-button").hidden = !hud.dock || paused || !launched;
   const siteButton = element<HTMLButtonElement>("site-button");
-  siteButton.hidden = !hud.site || paused || !launched;
-  if (hud.site) {
+  const arena = hud.campaign.arena;
+  const gate = hud.campaign.tournament_unlocked && hud.campaign.tournament_nearby;
+  siteButton.hidden = (!hud.site && !arena && !gate) || paused || !launched || !!hud.campaign.encounter;
+  if (arena || gate) {
+    siteButton.textContent = arena ? `${arena.name} / CHAMPION [E]` : "GALAXY ROYALE / ENTER [E]";
+    siteButton.disabled = false;
+    siteButton.title = arena ? "Contact this arena champion." : "Enter the round robin tournament.";
+  } else if (hud.site) {
     siteButton.textContent = `${hud.site.name} / CONTACT [E]`;
     siteButton.disabled = false;
     siteButton.title = hud.site.description;
@@ -640,23 +789,35 @@ function frame(time: number): void {
   lastTime = time;
   try {
     pixelUi?.sync();
-    const result = galaxy.step(dt, input.sample());
+    const controls = input.sample();
+    if (launched && !paused && hud.dock && controls.fire) {
+      pause(true);
+      return;
+    }
+    const result = galaxy.step(dt, controls);
     hud = result.hud;
     input.camera = hud.camera;
+    const worldViewport = galaxy.world_viewport();
+    input.viewport = [worldViewport[0], worldViewport[1]];
     if (result.profile) save(result.profile);
     for (const event of result.events) {
       audio.play(event);
       if (event.kind === "death") {
-        toast("SHIP LOST / collected points retained");
-        destination = null;
+        showDeath();
       }
       if (event.kind === "boss") toast("BOSS SIGNATURE / incoming");
+      if (event.kind === "champion-win") toast("ARENA PATCH + BLUEPRINT ACQUIRED");
+      if (event.kind === "tournament-win") toast("ROYALE DUEL WON / standings updated");
+      if (event.kind === "tournament-loss") toast("ROYALE DUEL LOST / standings updated");
       if (event.kind === "pickup" && event.intensity >= 2)
         toast("NEW SIGNATURE ABILITY / evolve at Haven");
     }
     audio.setDanger(hud.danger, hud.safe);
-    if (launched && !paused && !previousDock && hud.dock) pause(true);
     previousDock = hud.dock;
+    if (launched && deathScreen.hidden && preparingEncounter === null && hud.campaign.credits_pending && !creditsPresented && !debugConsole.opened && !dialoguePanel.opened) {
+      creditsPresented = true;
+      openCredits();
+    }
     if (time - lastHudPaint > 80) {
       paintHud();
       lastHudPaint = time;
@@ -776,12 +937,17 @@ async function init(): Promise<void> {
     (world) => {
       destination = world;
     },
+    () => {
+      if (launched && !paused && hud?.dock) pause(true);
+    },
   );
+  canvas.addEventListener("wheel", onFlightWheel, {passive:false});
   galaxy.set_paused(true);
   galaxy.set_shake(settings.shake);
   galaxy.set_reduced_motion(settings.reduced_motion);
   galaxy.set_cosmetic_density(settings.cosmetic_density === "reduced");
   galaxy.set_touch_ui(touchUi);
+  galaxy.set_zoom(settings.zoom);
   resize();
   pixelUi = new PixelUiBridge(galaxy, () => innerHeight / galaxy.viewport()[1]);
   document.body.classList.add("pixel-ready");
@@ -909,26 +1075,135 @@ launch.addEventListener("click", async () => {
 });
 element("resume").addEventListener("click", () => void resume());
 element("launch-settings").addEventListener("click", openLaunchSettings);
-for (const tab of ["upgrades", "settings", "journal"] as const)
+for (const tab of ["upgrades", "settings", "journal", "hangar", "campaign"] as const)
   element(`tab-${tab}`).addEventListener("click", () => selectMenuTab(tab));
-element("pause-button").addEventListener("click", () =>
-  paused ? void resume() : pause(false),
-);
+element("pause-button").addEventListener("click", () => {
+  if (touchUi && !paused) {
+    const quick = element("quick-menu");
+    quick.hidden = !quick.hidden;
+    element("pause-button").setAttribute("aria-expanded", String(!quick.hidden));
+    pixelUi.invalidate();
+  } else if (paused) void resume();
+  else pause(false);
+});
+element("quick-settings").addEventListener("click", () => pause(false));
+element("quick-title").addEventListener("click", returnToTitle);
+element("return-title").addEventListener("click", returnToTitle);
+element("death-title").addEventListener("click", returnToTitle);
+element("retry").addEventListener("click", () => void resume());
+function showDeath(): void {
+  transitionEpoch++;
+  consoleWasRunning = dialogueWasRunning = false;
+  paused = true;
+  input.enabled = false;
+  input.reset();
+  destination = null;
+  galaxy.set_paused(true);
+  galaxy.set_ui_mode(0);
+  menu.hidden = true;
+  launchScreen.hidden = true;
+  deathScreen.hidden = false;
+  element("quick-menu").hidden = true;
+  document.body.classList.remove("engine-flight");
+  audio.suspend();
+  narrative.close();
+  const target = element("run-summary");
+  target.replaceChildren();
+  const summary = hud.last_run;
+  if (summary) for (const line of [
+    `${Math.round(summary.time)} SECONDS / ${Math.round(summary.distance_peak)} M FURTHEST FROM HAVEN`,
+    `${summary.enemies} ENEMIES / ${summary.asteroids} ASTEROIDS / ${summary.champions} CHAMPIONS`,
+    `BANKED POINTS / ${summary.points_gained.join(" / ")}`,
+    `${summary.xp_gained} SHIP XP / ${summary.materials_gained} MATERIALS COLLECTED`,
+  ]) {
+    const row = document.createElement("p");
+    row.textContent = line;
+    target.append(row);
+  }
+  const bank = document.createElement("p");
+  bank.textContent = `DOCK STASH ${hud.stored_materials} MATERIALS / SHIP LEVEL ${hud.ship_level}`;
+  target.append(bank);
+  save(galaxy.profile());
+  pixelUi.invalidate();
+  element("retry").focus();
+}
+function returnToTitle(): void {
+  if (!galaxy) return;
+  transitionEpoch++;
+  preparingEncounter = null;
+  consoleWasRunning = dialogueWasRunning = false;
+  // Returning ends an active encounter through the same Rust retreat rules.
+  galaxy.return_to_home();
+  hud = galaxy.hud();
+  save(galaxy.profile());
+  narrative.close();
+  dialoguePanel.close();
+  debugConsole.close();
+  launched = false;
+  paused = true;
+  beforeLaunchMenu = false;
+  menu.hidden = true;
+  deathScreen.hidden = true;
+  launchScreen.hidden = false;
+  element("quick-menu").hidden = true;
+  destination = null;
+  input.enabled = false;
+  input.reset();
+  galaxy.set_paused(true);
+  galaxy.set_ui_mode(2);
+  document.body.classList.remove("engine-flight");
+  audio.suspend();
+  pixelUi.invalidate();
+  launch.focus();
+}
 element("dock-button").addEventListener("click", () => pause(true));
 function interactSite(): void {
-  if (!hud.site || paused || debugConsole.opened) return;
+  if (paused || debugConsole.opened || hud.campaign.encounter) return;
+  if (hud.campaign.arena) {
+    const arena = hud.campaign.arena;
+    const champion = hud.campaign.champions[arena.index];
+    if (!champion) return;
+    showConversation({ id: champion.id, speaker: champion.name, personality: champion.index,
+      description: `${champion.species} arena champion. I fly the ${champion.ship}. ${champion.ability}`,
+      status: champion.patch ? "completed" : "available",
+      facts: [champion.patch ? "You earned my patch and blueprint. Craft my ship at Haven." : "Win this duel to earn my arena patch and ship blueprint.", "The trial boundary is marked. Retreat or ship loss ends your attempt."] },
+      arena.can_challenge ? "CHALLENGE" : undefined, arena.can_challenge ? () => beginChampion(arena.index) : undefined);
+    return;
+  }
+  if (hud.campaign.tournament_unlocked && hud.campaign.tournament_nearby) {
+    showConversation({ id: "galaxy-royale", speaker: "ROYALE MARSHAL", personality: 1,
+      description: "Welcome to Galaxy Royale. Rival champions from eight universes await. Every entrant meets every other entrant once.",
+      status: hud.campaign.tournament_won ? "completed" : "available",
+      facts: ["Win duels for three points. Finish first to unlock the Sovereign ship and complete the campaign.", "NPC versus NPC results are seeded simulations. Your eight matches are real duels."] },
+      hud.campaign.tournament_won ? "END CREDITS" : hud.campaign.tournament_complete ? "NEW SEASON" : "ENTER DUEL", hud.campaign.tournament_won ? openCredits : beginTournament);
+    return;
+  }
+  if (!hud.site) return;
   const site = hud.site;
-  dialoguePanel.show({
-    speaker: site.name,
-    text: site.description,
-    portrait: [...site.id].reduce((sum, c) => sum + c.charCodeAt(0), 0) % 3,
-    actionLabel: site.can_interact
+  showConversation({id: site.id, speaker: site.name, description: site.description,
+    personality: [...site.id].reduce((sum, c) => sum + c.charCodeAt(0), 0) % 3,
+    status: site.status as NarrativeContext["status"]}, site.can_interact
       ? site.status === "ready"
         ? "CLAIM RELIC"
         : "ACCEPT EVENT"
-      : undefined,
-    onAction: site.can_interact ? commitSite : undefined,
-  });
+      : undefined, site.can_interact ? commitSite : undefined);
+}
+function showConversation(context: NarrativeContext, label?: string, action?: () => void | Promise<void>): void {
+  const pages = narrative.open(context);
+  const draw = (): void => {
+    const page = narrative.current();
+    if (!page) return;
+    const index = pages.findIndex(candidate => candidate.id === page.id);
+    dialoguePanel.show({speaker: page.speaker, text: page.text, portrait: page.portrait,
+      page: index, pageCount: pages.length,
+      actionLabel: label, onAction: index === pages.length - 1 ? action : undefined,
+      onPrevious: index > 0 ? () => { narrative.previous(); draw(); } : undefined,
+      onNext: index < pages.length - 1 ? () => { narrative.next(); draw(); } : undefined,
+      onReplay: settings.dialogue_voice ? () => { void narrative.replay().then(() => {
+        if (["unavailable", "error"].includes(narrative.voiceStatus)) toast("Voice unavailable; dialogue remains readable.");
+      }); } : undefined});
+  };
+  draw();
 }
 function commitSite(): void {
   try {
@@ -968,6 +1243,15 @@ function toggleFullscreen(): void {
 element("fullscreen").addEventListener("click", toggleFullscreen);
 element("menu-fullscreen").addEventListener("click", toggleFullscreen);
 window.addEventListener("keydown", (event) => {
+  if (!deathScreen.hidden) {
+    if (event.key === "Tab") {
+      event.preventDefault();
+      const retry = element("retry");
+      const title = element("death-title");
+      (document.activeElement === retry ? title : retry).focus();
+    }
+    return;
+  }
   if (!launched) {
     if (event.key === "Escape" && beforeLaunchMenu) void resume();
     return;
@@ -978,7 +1262,7 @@ window.addEventListener("keydown", (event) => {
     else pause(false);
   }
   if (event.key.toLowerCase() === "e" && hud?.dock && !paused) pause(true);
-  else if (event.key.toLowerCase() === "e" && hud?.site && !paused)
+  else if (event.key.toLowerCase() === "e" && (hud?.site || hud?.campaign.arena || hud?.campaign.tournament_nearby) && !paused)
     interactSite();
 });
 window.addEventListener("resize", resize);
@@ -987,6 +1271,7 @@ document.addEventListener("visibilitychange", () => {
     if (launched && !paused) pause(false);
     input?.reset();
     audio.suspend();
+    narrative.pause();
     save(galaxy.profile());
   }
 });
@@ -996,6 +1281,7 @@ for (const key of ["master", "music", "sfx"] as const) {
   slider.addEventListener("input", () => {
     settings[key] = Number(slider.value);
     audio.setLevels(settings.master, settings.music, settings.sfx);
+    narrative.setVoiceVolume(settings.master * settings.voice_volume);
     saveSettings(settings);
   });
 }
@@ -1021,6 +1307,37 @@ density.addEventListener("change", () => {
   galaxy?.set_cosmetic_density(density.checked);
   saveSettings(settings);
 });
+const voice = element<HTMLInputElement>("voice-setting");
+voice.checked = settings.dialogue_voice;
+voice.addEventListener("change", () => {
+  settings.dialogue_voice = voice.checked;
+  narrative.setVoiceEnabled(voice.checked);
+  saveSettings(settings);
+});
+const voiceVolume = element<HTMLInputElement>("voice-volume");
+voiceVolume.value = String(settings.voice_volume);
+voiceVolume.addEventListener("input", () => {
+  settings.voice_volume = Number(voiceVolume.value);
+  narrative.setVoiceVolume(settings.master * settings.voice_volume);
+  saveSettings(settings);
+});
+const zoomLevel = element<HTMLInputElement>("zoom-level");
+zoomLevel.value = String(settings.zoom);
+function setZoom(value: number): void {
+  if (!Number.isFinite(value)) return;
+  settings.zoom = Math.max(0.6, Math.min(1.6, value));
+  galaxy?.set_zoom(settings.zoom);
+  zoomLevel.value = String(settings.zoom);
+  saveSettings(settings);
+}
+zoomLevel.addEventListener("input", () => setZoom(Number(zoomLevel.value)));
+function onFlightWheel(event: WheelEvent): void {
+  if (!launched || paused || debugConsole.opened || dialoguePanel.opened) return;
+  event.preventDefault();
+  const factor = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? innerHeight : 1;
+  const delta = Math.max(-240, Math.min(240, event.deltaY * factor));
+  setZoom(settings.zoom * Math.exp(-delta * 0.001));
+}
 element("export-save").addEventListener("click", () => {
   const url = URL.createObjectURL(
     new Blob([JSON.stringify(galaxy.profile(), null, 2)], {

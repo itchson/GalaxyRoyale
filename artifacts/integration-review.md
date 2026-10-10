@@ -11,6 +11,15 @@ Participants: producer/integrator, engine specialist, gameplay specialist, produ
 
 Known boundaries: disconnected asteroid islands do not become independent rigid fragments yet. The initial content is three generation-one bosses; twelve deeper bosses remain planned. Simulation positions are finite f32 values in a bounded practical world. Optional offline AI music experiments have not run. Desktop and native measurements cannot establish mobile performance.
 
+Latest actual campaign/zoom integration review:
+
+- Gameplay specialist authored eight champion trials and nine-entrant standings, per-ship XP, level gates, material storage and retained run summaries. Producer integrated Hangar/Campaign/credits pages, paged bottom dialogue, explicit optional voice replay and the death report. Original champion hulls, patches and portraits share the same occupied-cell atlas in simulation and UI.
+- Production specialist found that completed losing seasons were presented as victories. Producer and gameplay specialist added an authoritative tournament_won field and corrected retry/credits gating. Three UI regressions cover losing seasons, encounter/location restrictions and actual wins. A second review found pending credits could replace a simultaneous death report; producer added the death-modal guard.
+- Producer guarded delayed encounter-save transitions with an epoch and prevented console/dialogue closure from resuming through title, death or pending encounters. Voice replay reports unavailable/error states after completion and uses its own volume setting.
+- Engine specialist added a finite 0.6–1.6 zoom controller with 150 ms easing and separate world/UI projections in both backends. Four native regressions cover retargeting, input round trips, fixed UI transforms and unchanged light units. Producer wired wheel input, persisted settings and destination projection to the actual current world extent.
+- Scout baseline is now 100 speed / 260 acceleration, plus 2.5% per ship level through level12 and purchased drive ranks. Current native suites total 103 tests; current browser-shell suites total 58 after campaign regressions. Full campaign browser combat playthrough and physical-device acceptance remain pending.
+- A read-only Spark campaign review was launched with the parent's danger-full-access/never permissions. Its output stopped after partial source-reading commentary; no completed review was delivered or accepted. Native specialists and the producer performed the accepted reviews described above.
+
 Evidence: rust-tests.log, browser-shell-tests.log, engine/game proof artifacts, and browser captures added after their actual completion. No task is marked complete solely from this document.
 
 Additional actual review and integration:

@@ -1,5 +1,5 @@
 //! Portable instanced pixel quads. No compute or storage buffers are required.
-use engine_core::{GpuTransform, PixelInstance, RenderFrame};
+use engine_core::{CameraView, GpuTransform, PixelInstance, RenderFrame, Vec2};
 use std::sync::{
     Arc,
     atomic::{AtomicBool, Ordering},
@@ -14,6 +14,7 @@ struct Draw {
     bytes: u64,
     count: u32,
     table: u32,
+    ui: bool,
 }
 pub struct Renderer {
     pub canvas: HtmlCanvasElement,
@@ -24,10 +25,12 @@ pub struct Renderer {
     pipeline: wgpu::RenderPipeline,
     present_pipeline: wgpu::RenderPipeline,
     globals: wgpu::Buffer,
+    ui_globals: wgpu::Buffer,
     transforms: wgpu::Buffer,
     instances: wgpu::Buffer,
     geometry_layout: wgpu::BindGroupLayout,
     geometry_bind: wgpu::BindGroup,
+    ui_geometry_bind: wgpu::BindGroup,
     present_layout: wgpu::BindGroupLayout,
     present_bind: wgpu::BindGroup,
     sampler: wgpu::Sampler,
@@ -199,7 +202,13 @@ impl Renderer {
             "camera and bounded pixel lighting",
             (crate::lighting::UNIFORM_FLOATS * 4) as u64,
         );
+        let ui_globals = uniform(
+            &device,
+            "fixed logical pixel UI projection",
+            (crate::lighting::UNIFORM_FLOATS * 4) as u64,
+        );
         let transforms = uniform(&device, "object transform tables", TRANSFORM_BYTES * 32);
+        let ui_geometry_bind = geometry_bind(&device, &geometry_layout, &ui_globals, &transforms);
         let geometry_bind = geometry_bind(&device, &geometry_layout, &globals, &transforms);
         let shader = device.create_shader_module(wgpu::ShaderModuleDescriptor {
             label: Some("pixel quad shader"),
@@ -323,10 +332,12 @@ impl Renderer {
             pipeline,
             present_pipeline,
             globals,
+            ui_globals,
             transforms,
             instances,
             geometry_layout,
             geometry_bind,
+            ui_geometry_bind,
             present_layout,
             present_bind,
             sampler,
@@ -371,45 +382,58 @@ impl Renderer {
     pub fn draw(
         &mut self,
         frame: &RenderFrame,
+        overlay: &RenderFrame,
         camera: [f32; 2],
+        zoom: f32,
         lights: &[game_core::LightSource],
     ) -> Result<(), JsValue> {
         if self.lost.load(Ordering::Relaxed) {
             return Err(js("GPU device lost"));
         }
-        if frame.pixel_count > PIXEL_LIMIT {
+        if frame.pixel_count.saturating_add(overlay.pixel_count) > PIXEL_LIMIT {
             return Err(js("Pixel scene exceeded its explicit resource limit"));
         }
+        let view = CameraView::new(
+            Vec2::from_array(camera),
+            Vec2::from_array(self.viewport()),
+            zoom,
+        )
+        .ok_or_else(|| js("Invalid camera projection"))?;
         self.pixel_scratch.clear();
         self.transform_scratch.clear();
         self.draws.clear();
-        for batch in &frame.batches {
-            if batch.pixels.is_empty() {
-                continue;
+        // World and overlay retain separate pooled extractions, but share the
+        // same GPU buffers and ordered render pass. Their uniform projections
+        // differ; no inverse-zoom mutation of glyph or control transforms occurs.
+        for (frame, ui) in [(frame, false), (overlay, true)] {
+            for batch in &frame.batches {
+                if batch.pixels.is_empty() {
+                    continue;
+                }
+                let offset = (self.pixel_scratch.len() * 16) as u64;
+                self.pixel_scratch.extend_from_slice(&batch.pixels);
+                let table = self.transform_scratch.len() / 128;
+                self.transform_scratch.extend(
+                    batch
+                        .transforms
+                        .iter()
+                        .map(|transform| view.relative_transform(*transform)),
+                );
+                self.transform_scratch.resize(
+                    (table + 1) * 128,
+                    GpuTransform {
+                        a: [0.0; 4],
+                        b: [0.0; 4],
+                    },
+                );
+                self.draws.push(Draw {
+                    offset,
+                    bytes: (batch.pixels.len() * 16) as u64,
+                    count: batch.pixels.len() as u32,
+                    table: table as u32,
+                    ui,
+                });
             }
-            let offset = (self.pixel_scratch.len() * 16) as u64;
-            self.pixel_scratch.extend_from_slice(&batch.pixels);
-            let table = self.transform_scratch.len() / 128;
-            self.transform_scratch
-                .extend(batch.transforms.iter().map(|transform| {
-                    let mut relative = *transform;
-                    relative.a[0] -= camera[0];
-                    relative.a[1] -= camera[1];
-                    relative
-                }));
-            self.transform_scratch.resize(
-                (table + 1) * 128,
-                GpuTransform {
-                    a: [0.0; 4],
-                    b: [0.0; 4],
-                },
-            );
-            self.draws.push(Draw {
-                offset,
-                bytes: (batch.pixels.len() * 16) as u64,
-                count: batch.pixels.len() as u32,
-                table: table as u32,
-            });
         }
         if self.pixel_scratch.len() > self.instance_capacity {
             self.instance_capacity = self.pixel_scratch.len().next_power_of_two();
@@ -429,11 +453,26 @@ impl Renderer {
                 &self.globals,
                 &self.transforms,
             );
+            self.ui_geometry_bind = geometry_bind(
+                &self.device,
+                &self.geometry_layout,
+                &self.ui_globals,
+                &self.transforms,
+            );
         }
         self.queue.write_buffer(
             &self.globals,
             0,
-            bytemuck::cast_slice(&crate::lighting::uniforms(self.viewport(), camera, lights)),
+            bytemuck::cast_slice(&crate::lighting::uniforms(
+                view.world_extent().to_array(),
+                camera,
+                lights,
+            )),
+        );
+        self.queue.write_buffer(
+            &self.ui_globals,
+            0,
+            bytemuck::cast_slice(&crate::lighting::uniforms(self.viewport(), camera, &[])),
         );
         if !self.pixel_scratch.is_empty() {
             self.queue.write_buffer(
@@ -495,7 +534,11 @@ impl Renderer {
             for draw in &self.draws {
                 pass.set_bind_group(
                     0,
-                    &self.geometry_bind,
+                    if draw.ui {
+                        &self.ui_geometry_bind
+                    } else {
+                        &self.geometry_bind
+                    },
                     &[draw.table * TRANSFORM_BYTES as u32],
                 );
                 pass.set_vertex_buffer(

@@ -66,6 +66,47 @@
     {
       "check": "Pixel6a/iPhone12, Safari, physical simultaneous touches/audio,30-minute soak",
       "result": "pending"
+    },
+    {
+      "check": "Mouse-wheel world zoom reaches both limits; fixed pixel UI",
+      "result": "pass",
+      "evidence": "zoom-console.jpg",
+      "details": "Actual desktop wheel input: WebGPU zoom1.60 world528x244/UI844x390; zoom0.60 world1407x650/UI844x390. Native regressions separately verify click-coordinate round trips, retargeting and light units."
+    },
+    {
+      "check": "Packaged WebGL2 zoom projection",
+      "result": "pass",
+      "evidence": "zoom-webgl2.jpg",
+      "details": "Actual production preview4181: zoom1.60/world333x188/UI533x300. Screen UI retains its logical dimensions."
+    },
+    {
+      "check": "Hangar/settings responsive landscape layout",
+      "result": "pass",
+      "evidence": "settings-720.jpg",
+      "details": "Hangar visually inspected at844x390; settings at720x360 has540x300 panel within viewport, bounded scrolling content, readable five tabs and footer. Desktop emulation only."
+    },
+    {
+      "check": "Champion diagnostic death and Retry lifecycle",
+      "result": "pass",
+      "evidence": "champion-death-report.jpg",
+      "details": "Real champion-0 diagnostic attacked idle player, produced15s/2800m run report with0earned reward. Retry returned to Haven flight without upgrade popup. Diagnostic does not grant progression."
+    },
+    {
+      "check": "Home right-pointer press interception",
+      "result": "pass",
+      "scope": "Input regression only",
+      "details": "Immediate onFireStart regression covers a press between samples. In-app browser intercepts right click for its element inspector; latest browser right-fire acceptance remains pending in an ordinary browser."
+    },
+    {
+      "check": "Eight champion victories, crafting and complete league browser playthrough",
+      "result": "pending",
+      "details": "Authoritative native rules and component views tested; full end-to-end combat/balance playthrough has not been completed."
+    },
+    {
+      "check": "Local neural dialogue/voice inference",
+      "result": "pending",
+      "details": "Optional injected bridge contract and authored fallback implemented. No actual neural provider or generated voice assets shipped."
     }
-  ]
+  ],
+  "updatedAt": "2026-10-10T17:00:51.384Z"
 }

@@ -41,6 +41,10 @@
           </button>
         </div>
       </header>
+      <nav id="quick-menu" hidden aria-label="Flight menu">
+        <button id="quick-settings">SETTINGS</button>
+        <button id="quick-title">TITLE SCREEN</button>
+      </nav>
       <div id="boss-hud" hidden>
         <small>HOSTILE SIGNATURE DETECTED</small><b id="boss-name"></b>
         <div class="boss-track"><i id="boss-health"></i></div>
@@ -115,11 +119,15 @@
         <p id="menu-description">Your next expedition awaits.</p>
         <nav class="menu-tabs" aria-label="Command pages">
           <button id="tab-upgrades">UPGRADES</button>
+          <button id="tab-hangar">HANGAR</button>
+          <button id="tab-campaign">CAMPAIGN</button>
           <button id="tab-settings">SETTINGS</button>
           <button id="tab-journal">JOURNAL</button>
         </nav>
         <div id="upgrade-content"></div>
         <div id="quest-content" hidden></div>
+        <div id="hangar-content" hidden></div>
+        <div id="campaign-content" hidden></div>
         <button id="apply-update" class="text-button" hidden>
           Apply update at Haven
         </button>
@@ -154,12 +162,18 @@
           <label class="toggle-setting"
             >Reduced cosmic detail<input id="density-setting" type="checkbox"
           /></label>
+          <label class="toggle-setting"
+            >Dialogue voice<input id="voice-setting" type="checkbox"
+          /></label>
+          <label>Voice volume<input id="voice-volume" type="range" min="0" max="1" step="0.01" /></label>
+          <label>Flight zoom<input id="zoom-level" type="range" min="0.6" max="1.6" step="0.05" /></label>
         </div>
         <div class="menu-actions">
           <button id="resume" class="primary-button">
             RETURN TO FLIGHT <span>↗</span></button
           ><button id="export-save" class="text-button">Export save</button
           ><button id="menu-fullscreen" class="text-button">Fullscreen</button
+          ><button id="return-title" class="text-button">Title screen</button
           ><label id="import-label" class="text-button import-label"
             >Import save<input
               id="import-save"
@@ -169,6 +183,18 @@
           /></label>
         </div>
         <small id="save-status">Progress stays on this device.</small>
+      </div>
+    </section>
+    <section id="death-screen" class="screen-overlay" hidden>
+      <div class="death-card">
+        <div class="eyebrow">EXPEDITION ENDED</div>
+        <h2>SHIP LOST</h2>
+        <p>Your collected points and materials are safe at Haven.</p>
+        <div id="run-summary" aria-label="Expedition report"></div>
+        <div class="death-actions">
+          <button id="retry" class="primary-button">RETRY EXPEDITION</button>
+          <button id="death-title" class="text-button">RETURN TO TITLE</button>
+        </div>
       </div>
     </section>
     <div id="rotate-screen">

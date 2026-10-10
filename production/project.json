@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 59,
+  "revision": 78,
   "name": "Galaxy Royale",
   "phase": "Foundation → playable vertical slice",
-  "updatedAt": "2026-10-10T16:20:09.219Z",
+  "updatedAt": "2026-10-10T17:00:51.459Z",
   "tasks": [
     {
       "id": "studio",
@@ -1292,6 +1292,423 @@
       "revision": 1,
       "createdAt": "2026-10-10T16:20:09.141Z",
       "updatedAt": "2026-10-10T16:20:09.141Z"
+    },
+    {
+      "id": "task-629ac41a",
+      "title": "Authored narrative director and optional voice boundary",
+      "description": "Implemented synchronous state-grounded pages, eight authored greeting styles, opt-in explicit replay and injected text/TTS providers. Canonical briefing/state/facts remain authored; inference has no game authority. docs/NARRATIVE.md contains exact API, local discovery and primary-source research. Integration/listening acceptance is separate.",
+      "department": "Narrative",
+      "owner": "Production specialist",
+      "status": "complete",
+      "priority": "normal",
+      "dependencies": [
+        "task-35a00493"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Authored pages remain usable without any local service and each text page is bounded to 256 ASCII characters.",
+          "met": true
+        },
+        {
+          "text": "Optional generation is bounded, plain text only, cancellable and cannot replace canonical gameplay facts or apply stale responses.",
+          "met": true
+        },
+        {
+          "text": "Replay defaults off, supports page cancellation/pause/resume/volume, and releases audio resources.",
+          "met": true
+        },
+        {
+          "text": "Tests cover boundaries, stale requests, opt-in replay and browser-adapter cleanup; TypeScript passes.",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Narrative module automated verification",
+          "kind": "test",
+          "path": "work/narrative-tests.log",
+          "details": "11 real Node tests pass. Added invalid synthesis fallback and provider request isolation; a provider cannot alter the displayed text that platform fallback replays. Cancellation, timeouts and browser adapter cleanup pass. No neural synthesis/listening acceptance inferred."
+        },
+        {
+          "label": "Workspace TypeScript check",
+          "kind": "test",
+          "path": "work/narrative-typecheck.log",
+          "details": "Full strict TypeScript check exited 0 after the module was added."
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-10T16:40:43.531Z",
+      "updatedAt": "2026-10-10T16:42:28.384Z"
+    },
+    {
+      "id": "task-0f6ce1db",
+      "title": "Original NPC voice clips and optional local inference acceptance",
+      "description": "Future experiment: use the cached Qwen3-TTS VoiceDesign/Base pair to design eight original voices and review short clips with stable references, provenance and pronunciation. No model download, inference service, generated neural speech or listening acceptance delivered here. Runtime local synthesis remains optional; authored pages and platform replay work independently. Phone localhost is not the workstation. Never expose the Codex model router as a game API.",
+      "department": "Audio / Narrative",
+      "owner": "Production / Audio",
+      "status": "backlog",
+      "priority": "normal",
+      "dependencies": [
+        "task-629ac41a"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Verify a compatible isolated local runtime using the existing model cache; record package/model licenses and reference provenance.",
+          "met": false
+        },
+        {
+          "text": "Generate and listen to reviewed short clips for eight original NPC characters with stable character mapping.",
+          "met": false
+        },
+        {
+          "text": "Measure latency, memory and offline replay; choose prerecorded portable clips or explicit desktop-only bridge based on evidence.",
+          "met": false
+        },
+        {
+          "text": "Test cancellation, page replay and failure fallback on a real browser and physical phone without making inference mandatory.",
+          "met": false
+        }
+      ],
+      "evidence": [],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-10T16:40:43.542Z",
+      "updatedAt": "2026-10-10T16:40:43.542Z"
+    },
+    {
+      "id": "task-52a708c0",
+      "title": "Eight solo champion arena trials and distinct ship signatures",
+      "description": "Actual Rust campaign code defines eight named champions, seeded arena locations, distinct silhouettes/signatures, duel initiation/range checks and one-time patch/blueprint rewards. Browser integration and independent full trial acceptance remain pending. This extends the solo campaign; authoritative multiplayer remains separate backlog.",
+      "department": "Gameplay",
+      "owner": "Gameplay / Producer",
+      "status": "review",
+      "priority": "normal",
+      "dependencies": [
+        "gameplay"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Native tests verify eight unique arenas, signatures, trial boundaries and one-time patch/blueprint rewards.",
+          "met": false
+        },
+        {
+          "text": "Browser play confirms challenge, victory, retreat, death/retry and persistence for each champion.",
+          "met": false
+        },
+        {
+          "text": "Balance/readability acceptance covers all eight encounters rather than only QA scene setup.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual source inspection",
+          "kind": "note",
+          "details": "Read campaign.rs and campaign_runtime.rs: CHAMPIONS[8], arena rules and finish_arena reward ownership are present; this note is not a test pass."
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-10T16:40:43.557Z",
+      "updatedAt": "2026-10-10T16:40:43.557Z"
+    },
+    {
+      "id": "task-57a3ed52",
+      "title": "Champion blueprints, dock crafting and ship selection",
+      "description": "Actual Rust and browser code exposes champion blueprints, eight craftable ships, selected ship persistence and dock-only actions. Latest user steering adds bounded carried materials and dock stash; material costs/gates must be validated against the final implementation. No browser crafting/selection acceptance claimed.",
+      "department": "Gameplay / UI",
+      "owner": "Gameplay / Producer",
+      "status": "review",
+      "priority": "normal",
+      "dependencies": [
+        "task-52a708c0",
+        "save"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Final crafting checks a valid earned blueprint, dock location, material/category costs and single purchase.",
+          "met": false
+        },
+        {
+          "text": "Owned selected ships retain their signature and progression after reload without duplicating rewards.",
+          "met": false
+        },
+        {
+          "text": "Browser hangar can craft/select with clear lock and insufficient-resource feedback.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual integration under review",
+          "kind": "note",
+          "details": "Read campaignActions craft/select and Rust craft_ship/switch_ship; final material-stash changes and acceptance are pending."
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-10T16:40:43.573Z",
+      "updatedAt": "2026-10-10T16:40:43.573Z"
+    },
+    {
+      "id": "task-0a386265",
+      "title": "Solo Galaxy Royale round robin and standings",
+      "description": "Actual campaign code defines a nine-entrant solo round robin: eight real player duels and 28 explicitly labeled seeded NPC simulations. Three points per win, deterministic tie-break and winner-owned Sovereign progression are implemented for review. A multiplayer last-player-standing mode is still separate future work.",
+      "department": "Gameplay",
+      "owner": "Gameplay / Producer",
+      "status": "review",
+      "priority": "normal",
+      "dependencies": [
+        "task-52a708c0"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Native tests prove deterministic standings, complete pair schedule, tie-break behavior and idempotent victory grant.",
+          "met": false
+        },
+        {
+          "text": "Browser play verifies all eight matches, losses/forfeits, completion, retry and persisted standings.",
+          "met": false
+        },
+        {
+          "text": "UI labels simulated NPC results accurately and gated tournament entry requires all eight patches.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual schedule source review",
+          "kind": "note",
+          "details": "Read campaign::table: 36 pairings, 28 NPC simulations and eight player entries whose results are retained. No full browser tournament playthrough claimed."
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-10T16:40:43.580Z",
+      "updatedAt": "2026-10-10T16:40:43.580Z"
+    },
+    {
+      "id": "task-83929b1c",
+      "title": "Campaign victory credits and continued hangar play",
+      "description": "Browser and Rust code exposes credits_pending/acknowledge_credits plus victory presentation and return to hangar. Review end-to-end completion, safe close/resume/title transitions and reload ownership once tournament evidence is available.",
+      "department": "UI / Narrative",
+      "owner": "Producer",
+      "status": "review",
+      "priority": "normal",
+      "dependencies": [
+        "task-0a386265"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Actual campaign first-place victory opens readable credits and grants Sovereign exactly once.",
+          "met": false
+        },
+        {
+          "text": "Acknowledging/closing credits and reloading retains ownership and prevents repeated unsolicited presentation.",
+          "met": false
+        },
+        {
+          "text": "Player can return to hangar/flight/title without background simulation or stale async transitions.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual implementation source inspection",
+          "kind": "note",
+          "details": "Read main.ts openCredits/finishCredits/frame credits guard and Rust acknowledge_credits. Campaign completion acceptance is pending."
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-10T16:40:43.588Z",
+      "updatedAt": "2026-10-10T16:40:43.588Z"
+    },
+    {
+      "id": "task-5771502c",
+      "title": "Dialogue pages and voice replay: integrated browser acceptance",
+      "description": "Producer is integrating NarrativeDirector with DialoguePanel NEXT/BACK/REPLAY and a default-off voice preference. Module tests pass; actual browser page focus/actions, speech availability, listening and interruption acceptance remain pending.",
+      "department": "UI / Audio",
+      "owner": "Producer",
+      "status": "review",
+      "priority": "normal",
+      "dependencies": [
+        "task-629ac41a"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Pages, contextual portraits and final-page action remain readable and reachable at desktop and narrow landscape layouts.",
+          "met": false
+        },
+        {
+          "text": "Voice preference stays off by default, Replay is explicit and unavailable speech never blocks readable dialogue.",
+          "met": false
+        },
+        {
+          "text": "Close/navigation/hide pause or cancel actual audio and stale provider callbacks cannot replace a new conversation.",
+          "met": false
+        },
+        {
+          "text": "Independent voice volume and per-page replay usability are accepted or the shared SFX-volume limitation is recorded.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Narrative module automated verification",
+          "kind": "test",
+          "path": "work/narrative-tests.log",
+          "details": "10 real Node tests pass: bounded state-derived pages, validation, local flavor isolation, stale/cancel/timeout handling, explicit replay and browser adapter cleanup. Mock providers do not demonstrate neural voice quality."
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-10T16:40:43.604Z",
+      "updatedAt": "2026-10-10T16:40:43.604Z"
+    },
+    {
+      "id": "task-aaf77ab5",
+      "title": "Death report, Retry/title and safe menu transitions",
+      "description": "Latest user steering requires actual run-summary death report, Retry or title choices, dock-fire menu entry and mobile collapsed action icons. Current main.ts implements death summary and title/home transition plus quick menu, but independent integration acceptance and async transition race fixes remain pending.",
+      "department": "UI / Controls",
+      "owner": "Producer",
+      "status": "review",
+      "priority": "normal",
+      "dependencies": [
+        "web-shell",
+        "controls-qa"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Death report displays the real run result; Retry resumes at Haven and title stops simulation/input/audio.",
+          "met": false
+        },
+        {
+          "text": "Dock fire opens the dock menu without firing, and desktop pause/resume remains consistent.",
+          "met": false
+        },
+        {
+          "text": "Mobile collapsed icons open reachable settings/title actions and never leak pointer input into flight.",
+          "met": false
+        },
+        {
+          "text": "Late encounter saves and delayed drawer closure cannot resume flight after title/death/pause transitions.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Read-only transition findings",
+          "kind": "note",
+          "details": "Production specialist reported beginEncounter save/flush stale continuation and console onClose stale resume flags to Producer. Fixes and regression tests have not yet been independently verified."
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-10T16:40:43.620Z",
+      "updatedAt": "2026-10-10T16:40:43.620Z"
+    },
+    {
+      "id": "task-e2cec34f",
+      "title": "Autosave, ship XP/rank gates and bounded dock material stash",
+      "description": "Latest user steering adds autosave, per-ship XP and level-gated upgrade ranks, bounded carried materials and a persistent Haven stash. Current storage/main fields are present while Rust/UI integration is in progress. Existing profile migration evidence does not automatically validate these new campaign fields.",
+      "department": "Gameplay / Persistence",
+      "owner": "Gameplay / Producer",
+      "status": "review",
+      "priority": "normal",
+      "dependencies": [
+        "save",
+        "task-57a3ed52"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Progress/autosave survives reload with per-ship XP/level/rank gates intact and no duplicated rewards.",
+          "met": false
+        },
+        {
+          "text": "Cargo cannot exceed its capacity; docking deposits materials into the persistent stash exactly once.",
+          "met": false
+        },
+        {
+          "text": "Death/title/retreat cargo outcomes match the authored rule and summary reports real earned XP/materials.",
+          "met": false
+        },
+        {
+          "text": "Crafting and upgrades enforce final level/resource gates consistently in Rust and browser feedback.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual implementation scope",
+          "kind": "note",
+          "details": "Read storage campaign ship_xp[10], cargo_materials <=16, stored_materials and main HUD/report fields. New native and persistence acceptance is pending."
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-10T16:40:43.635Z",
+      "updatedAt": "2026-10-10T16:40:43.635Z"
+    },
+    {
+      "id": "task-933d3130",
+      "title": "Bounded world zoom and gradual Scout drive progression",
+      "description": "Mouse wheel and settings control 0.6–1.6 eased world zoom with fixed screen pixel UI. Scout starts100/260; selected ship XP and drive ranks improve it.",
+      "department": "Engine / Gameplay",
+      "owner": "/root",
+      "status": "complete",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Finite clamped zoom, reversible150ms easing, current world input mapping and fixed UI projection",
+          "met": true
+        },
+        {
+          "text": "Both backend builds and native projection regressions pass",
+          "met": true
+        },
+        {
+          "text": "Desktop browser wheel input reaches0.6 and1.6; UI remains same extent",
+          "met": true
+        },
+        {
+          "text": "Scout starts100speed/260accel and per-ship XP/drive progression is tested",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "103 Rust tests",
+          "kind": "note",
+          "path": "artifacts/rust-tests.log"
+        },
+        {
+          "label": "58 shell tests",
+          "kind": "note",
+          "path": "artifacts/browser-shell-tests.log"
+        },
+        {
+          "label": "Actual browser scope and measurements",
+          "kind": "note",
+          "path": "artifacts/browser-validation.json"
+        },
+        {
+          "label": "WebGPU zoom console",
+          "kind": "note",
+          "path": "artifacts/zoom-console.jpg"
+        },
+        {
+          "label": "Packaged WebGL2 zoom",
+          "kind": "note",
+          "path": "artifacts/zoom-webgl2.jpg"
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-10T17:00:51.439Z",
+      "updatedAt": "2026-10-10T17:00:51.439Z"
     }
   ],
   "reviews": [
@@ -1405,6 +1822,61 @@
         "task-35a00493",
         "task-d60fcaaa"
       ]
+    },
+    {
+      "id": "review-9c87eb17",
+      "title": "Actual narrative handoff and read-only transition review",
+      "body": "Actual asynchronous exchange: Producer requested synchronous state-grounded pages with max256 text, injected optional bridge and explicit default-off Replay. Production implemented the agreed NarrativeDirector API, documented cached Qwen3-TTS models and official sources, and ran 10 module tests plus full TypeScript successfully. Read-only main.ts review found beginEncounter can continue after save/flush despite a later title transition, and delayed console onClose can reuse an old resume flag; these were sent to Producer for integration fixes. No invented live meeting, neural speech test, campaign completion or physical-device result is recorded.",
+      "author": "Production specialist",
+      "source": "Producer task handoffs and actual specialist implementation/read-only review in this Codex session; no physical-device, neural inference or full campaign playthrough acceptance inferred.",
+      "createdAt": "2026-10-10T16:40:43.666Z",
+      "participants": [
+        "Production specialist",
+        "Producer"
+      ],
+      "taskIds": [
+        "task-629ac41a",
+        "task-5771502c",
+        "task-aaf77ab5",
+        "task-52a708c0",
+        "task-0a386265"
+      ]
+    },
+    {
+      "id": "review-9a04b939",
+      "title": "Narrative provider isolation and current transition source recheck",
+      "body": "Actual follow-up: Production reported stale beginEncounter save/flush continuation and delayed drawer-close resume flags. Producer added transitionEpoch/preparingEncounter checks and clears resume flags on title/death; specialist inspected those changes and found the reported source paths guarded. Runtime regression acceptance remains pending. Production also noted Replay resolves with voiceStatus unavailable/error rather than rejecting, so the shell must use that status for user feedback; current master*SFX shared voice level needs either separate volume acceptance or a recorded limitation. A new provider-isolation test passes with the other ten narrative tests, and current full TypeScript passes. No local neural voice or physical phone acceptance was performed.",
+      "author": "Production specialist",
+      "source": "Actual module test rerun and asynchronous read-only review after Producer applied transition guards in this Codex session.",
+      "createdAt": "2026-10-10T16:42:28.394Z",
+      "participants": [
+        "Production specialist",
+        "Producer"
+      ],
+      "taskIds": [
+        "task-629ac41a",
+        "task-5771502c",
+        "task-aaf77ab5"
+      ]
+    },
+    {
+      "id": "review-649076d0",
+      "title": "Final campaign, death/dock, persistence and zoom integration review",
+      "body": "Actual asynchronous review found season-complete was incorrectly treated as season-won in the campaign view/dialogue, falsely announcing Sovereign and blocking losing-season retries. Producer added authoritative tournament_won to the HUD and corrected both paths. Production added 3 real-module fake-DOM regression tests: completed loss permits NEW SEASON without credits/unlock claims; location/active encounter gates persist; only a win exposes credits. All 3 pass. Review also found automatic credits could replace the death report after a same-frame final-duel victory/death; Producer added deathScreen.hidden and preparation guards, inspected in the final source.\n\nRead-only checks confirm returning to Haven banks cargo/finishes history without automatically opening a home menu; explicit short mouse/touch fire requests open services and reset weapon state. Crafting checks valid blueprint/dock/ownership plus both 10 category points and 6 stored materials before subtracting either. Ship XP/cargo/stash/campaign snapshot fields are validated and persisted with prior snapshots/revision conflict checks. Zoom target is bounded 0.6..1.6; current world viewport, rather than UI viewport or target zoom, maps mouse destinations; UI uses its independent viewport. Separate voice volume and unavailable/error replay feedback are now present.\n\nFocused campaign/storage/input tests pass 26/26: work/final-integration-component-tests.log. Standalone campaign evidence: work/campaign-ui-tests.log. This review supplies source and automated component evidence only. Browser campaign/death/zoom acceptance, physical multitouch/phone performance, complete tournament playthrough and neural/listening acceptance remain pending their own actual evidence; no task completion inferred.",
+      "author": "Production specialist",
+      "source": "Actual bounded read-only source review and requested campaign UI regression tests in this Codex session; Producer applied all source corrections.",
+      "createdAt": "2026-10-10T16:57:54.832Z",
+      "participants": [
+        "Production specialist",
+        "Producer"
+      ],
+      "taskIds": [
+        "task-0a386265",
+        "task-83929b1c",
+        "task-aaf77ab5",
+        "task-e2cec34f",
+        "task-57a3ed52"
+      ]
     }
   ],
   "decisions": [
@@ -1433,6 +1905,15 @@
       "author": "Production specialist",
       "source": "Producer authorized bounded bookkeeping in the current agent session; future gameplay direction relayed from user feedback. No gameplay implementation or browser acceptance inferred.",
       "createdAt": "2026-10-10T16:00:27.098Z",
+      "status": "accepted"
+    },
+    {
+      "id": "decision-ebcb41fe",
+      "title": "Solo champion campaign, optional narrative voice and expedition usability",
+      "body": "Producer relayed current user steering: eight champion NPC arenas with distinct ships/abilities, earned patches/blueprints and dock crafting; a gated solo round-robin Galaxy Royale tournament and end credits; state-grounded NPC dialogue with optional replayable local voice. New feedback adds run-summary death Retry/title, fire-to-menu at the hub, collapsed mobile menu icons, autosave, per-ship XP/upgrade level gates, bounded carried materials and dock stash. Actual solo campaign implementation is under review. Neural voice generation/service integration and physical-phone acceptance remain separate work. NPC-versus-NPC tournament rows are seeded simulation; authoritative co-op and multiplayer battle royale remain future backlog. Narrative inference only supplies flavor/audio and cannot mutate gameplay.",
+      "author": "Production specialist",
+      "source": "Producer task handoffs and actual specialist implementation/read-only review in this Codex session; no physical-device, neural inference or full campaign playthrough acceptance inferred.",
+      "createdAt": "2026-10-10T16:40:43.652Z",
       "status": "accepted"
     }
   ],
@@ -1488,6 +1969,58 @@
         }
       ],
       "knownIssues": "Game browser offline install, balance and physical phone performance remain separate acceptance work. Running agent observations are last-recorded states and do not assert current presence."
+    },
+    {
+      "id": "build-82f416c8",
+      "title": "Campaign, death reports, ship progression and world zoom",
+      "body": "Complete dual-WASM/PWA build passed. Rust103 and shell58 tests passed. Actual desktop zoom/UI/death captures supplement native rules. Physical devices, full campaign combat playthrough and neural providers remain pending.",
+      "author": "Producer",
+      "source": "Actual final integration checks",
+      "createdAt": "2026-10-10T17:00:51.459Z",
+      "revision": "working tree after6b5f9350ce8ac80ead3159c538b309824351b21f; packaged cachegalaxy-1e6e2f73db7ff1f0",
+      "evidence": [
+        {
+          "label": "Tested source review",
+          "kind": "note",
+          "path": "artifacts/integration-review.md"
+        },
+        {
+          "label": "Browser captures and coverage limits",
+          "kind": "note",
+          "path": "artifacts/browser-validation.json"
+        }
+      ],
+      "checks": [
+        {
+          "name": "Rust103 tests",
+          "result": "pass"
+        },
+        {
+          "name": "Browser shell58 tests",
+          "result": "pass"
+        },
+        {
+          "name": "Dual WASM release, TypeScript, Vite and18asset game-only PWA",
+          "result": "pass"
+        },
+        {
+          "name": "Desktop wheel0.6/1.6, fixed UI and WebGL2 zoom",
+          "result": "pass"
+        },
+        {
+          "name": "Physical phone60FPS/30minute soak/Safari/audio",
+          "result": "not_run"
+        },
+        {
+          "name": "Full campaign combat playthrough",
+          "result": "not_run"
+        },
+        {
+          "name": "Local neural dialogue/voice service",
+          "result": "not_run"
+        }
+      ],
+      "knownIssues": "Physical mobile acceptance, full campaign combat/balance review, neural voice assets and future multiplayer remain pending."
     }
   ],
   "feedback": [],
@@ -2081,6 +2614,196 @@
       "author": "Production specialist",
       "source": "Actual Producer final validation handoffs, artifacts/browser-validation.json and inspected native/shell/build artifacts in the current session. Desktop and automated scope only; no physical-device or completed reward-playthrough claim.",
       "createdAt": "2026-10-10T16:20:09.219Z"
+    },
+    {
+      "id": "fd413156-3cca-4c83-813c-b4b7b5b0d220",
+      "revision": 60,
+      "kind": "task.create",
+      "itemId": "task-629ac41a",
+      "title": "Authored narrative director and optional voice boundary",
+      "author": "Production specialist",
+      "source": "Producer task handoffs and actual specialist implementation/read-only review in this Codex session; no physical-device, neural inference or full campaign playthrough acceptance inferred.",
+      "createdAt": "2026-10-10T16:40:43.531Z"
+    },
+    {
+      "id": "68f2d2d6-c1e6-4e0c-b37b-f5ade9d7675a",
+      "revision": 61,
+      "kind": "task.create",
+      "itemId": "task-0f6ce1db",
+      "title": "Original NPC voice clips and optional local inference acceptance",
+      "author": "Production specialist",
+      "source": "Producer task handoffs and actual specialist implementation/read-only review in this Codex session; no physical-device, neural inference or full campaign playthrough acceptance inferred.",
+      "createdAt": "2026-10-10T16:40:43.542Z"
+    },
+    {
+      "id": "44cae49e-c0af-4092-82e0-8f05efb7c622",
+      "revision": 62,
+      "kind": "task.create",
+      "itemId": "task-52a708c0",
+      "title": "Eight solo champion arena trials and distinct ship signatures",
+      "author": "Production specialist",
+      "source": "Producer task handoffs and actual specialist implementation/read-only review in this Codex session; no physical-device, neural inference or full campaign playthrough acceptance inferred.",
+      "createdAt": "2026-10-10T16:40:43.557Z"
+    },
+    {
+      "id": "f0463b52-464a-4582-a786-438e23cf9314",
+      "revision": 63,
+      "kind": "task.create",
+      "itemId": "task-57a3ed52",
+      "title": "Champion blueprints, dock crafting and ship selection",
+      "author": "Production specialist",
+      "source": "Producer task handoffs and actual specialist implementation/read-only review in this Codex session; no physical-device, neural inference or full campaign playthrough acceptance inferred.",
+      "createdAt": "2026-10-10T16:40:43.573Z"
+    },
+    {
+      "id": "78b44904-15cf-48f2-bce6-e7e2dce76d26",
+      "revision": 64,
+      "kind": "task.create",
+      "itemId": "task-0a386265",
+      "title": "Solo Galaxy Royale round robin and standings",
+      "author": "Production specialist",
+      "source": "Producer task handoffs and actual specialist implementation/read-only review in this Codex session; no physical-device, neural inference or full campaign playthrough acceptance inferred.",
+      "createdAt": "2026-10-10T16:40:43.580Z"
+    },
+    {
+      "id": "71650fb3-d061-41a5-bd97-62451082b526",
+      "revision": 65,
+      "kind": "task.create",
+      "itemId": "task-83929b1c",
+      "title": "Campaign victory credits and continued hangar play",
+      "author": "Production specialist",
+      "source": "Producer task handoffs and actual specialist implementation/read-only review in this Codex session; no physical-device, neural inference or full campaign playthrough acceptance inferred.",
+      "createdAt": "2026-10-10T16:40:43.588Z"
+    },
+    {
+      "id": "73c2042a-21cc-4a9e-9f7c-fc9eb8c155dc",
+      "revision": 66,
+      "kind": "task.create",
+      "itemId": "task-5771502c",
+      "title": "Dialogue pages and voice replay: integrated browser acceptance",
+      "author": "Production specialist",
+      "source": "Producer task handoffs and actual specialist implementation/read-only review in this Codex session; no physical-device, neural inference or full campaign playthrough acceptance inferred.",
+      "createdAt": "2026-10-10T16:40:43.604Z"
+    },
+    {
+      "id": "0eed7e21-204c-433b-b067-d81f236f21b0",
+      "revision": 67,
+      "kind": "task.create",
+      "itemId": "task-aaf77ab5",
+      "title": "Death report, Retry/title and safe menu transitions",
+      "author": "Production specialist",
+      "source": "Producer task handoffs and actual specialist implementation/read-only review in this Codex session; no physical-device, neural inference or full campaign playthrough acceptance inferred.",
+      "createdAt": "2026-10-10T16:40:43.620Z"
+    },
+    {
+      "id": "1cecdbff-d0d0-42c8-b727-4682ffe90dc2",
+      "revision": 68,
+      "kind": "task.create",
+      "itemId": "task-e2cec34f",
+      "title": "Autosave, ship XP/rank gates and bounded dock material stash",
+      "author": "Production specialist",
+      "source": "Producer task handoffs and actual specialist implementation/read-only review in this Codex session; no physical-device, neural inference or full campaign playthrough acceptance inferred.",
+      "createdAt": "2026-10-10T16:40:43.635Z"
+    },
+    {
+      "id": "73774df4-f12b-4c44-b3a9-1c761015314b",
+      "revision": 69,
+      "kind": "decision",
+      "itemId": "decision-ebcb41fe",
+      "title": "Solo champion campaign, optional narrative voice and expedition usability",
+      "author": "Production specialist",
+      "source": "Producer task handoffs and actual specialist implementation/read-only review in this Codex session; no physical-device, neural inference or full campaign playthrough acceptance inferred.",
+      "createdAt": "2026-10-10T16:40:43.652Z"
+    },
+    {
+      "id": "9ee34fa0-0a5a-4246-9bf6-8198ec48dd99",
+      "revision": 70,
+      "kind": "review",
+      "itemId": "review-9c87eb17",
+      "title": "Actual narrative handoff and read-only transition review",
+      "author": "Production specialist",
+      "source": "Producer task handoffs and actual specialist implementation/read-only review in this Codex session; no physical-device, neural inference or full campaign playthrough acceptance inferred.",
+      "createdAt": "2026-10-10T16:40:43.666Z"
+    },
+    {
+      "id": "6d298c18-b986-4606-a7ff-c4d7b12535c3",
+      "revision": 71,
+      "kind": "run",
+      "itemId": "run-9fc2a409",
+      "title": "Production specialist · completed",
+      "author": "Production specialist",
+      "source": "Producer task handoffs and actual specialist implementation/read-only review in this Codex session; no physical-device, neural inference or full campaign playthrough acceptance inferred.",
+      "createdAt": "2026-10-10T16:40:43.682Z"
+    },
+    {
+      "id": "89e8b998-14eb-469d-a180-0ea0b6045dcb",
+      "revision": 72,
+      "kind": "run",
+      "itemId": "run-0b1264f3",
+      "title": "Producer · running",
+      "author": "Production specialist",
+      "source": "Producer task handoffs and actual specialist implementation/read-only review in this Codex session; no physical-device, neural inference or full campaign playthrough acceptance inferred.",
+      "createdAt": "2026-10-10T16:40:43.697Z"
+    },
+    {
+      "id": "a4de4784-84f9-4d73-a4cf-2e7a6c9eb6a5",
+      "revision": 73,
+      "kind": "task.update",
+      "itemId": "task-629ac41a",
+      "title": "Authored narrative director and optional voice boundary",
+      "author": "Production specialist",
+      "source": "Actual module test rerun and asynchronous read-only review after Producer applied transition guards in this Codex session.",
+      "createdAt": "2026-10-10T16:42:28.384Z"
+    },
+    {
+      "id": "d17e0dbc-401d-43b5-857d-2a98fd757fe1",
+      "revision": 74,
+      "kind": "review",
+      "itemId": "review-9a04b939",
+      "title": "Narrative provider isolation and current transition source recheck",
+      "author": "Production specialist",
+      "source": "Actual module test rerun and asynchronous read-only review after Producer applied transition guards in this Codex session.",
+      "createdAt": "2026-10-10T16:42:28.394Z"
+    },
+    {
+      "id": "a102ee94-3cec-4f84-bd20-027a3f9d7449",
+      "revision": 75,
+      "kind": "run",
+      "itemId": "run-421abcd8",
+      "title": "Production specialist · completed",
+      "author": "Production specialist",
+      "source": "Actual module test rerun and asynchronous read-only review after Producer applied transition guards in this Codex session.",
+      "createdAt": "2026-10-10T16:42:28.410Z"
+    },
+    {
+      "id": "efd1bbd3-acde-4542-9507-417d60a4921c",
+      "revision": 76,
+      "kind": "review",
+      "itemId": "review-649076d0",
+      "title": "Final campaign, death/dock, persistence and zoom integration review",
+      "author": "Production specialist",
+      "source": "Actual bounded read-only source review and requested campaign UI regression tests in this Codex session; Producer applied all source corrections.",
+      "createdAt": "2026-10-10T16:57:54.832Z"
+    },
+    {
+      "id": "8a06bc7a-dd24-42e0-b555-3738479d17dd",
+      "revision": 77,
+      "kind": "task.create",
+      "itemId": "task-933d3130",
+      "title": "Bounded world zoom and gradual Scout drive progression",
+      "author": "Producer",
+      "source": "Actual engine handoff and desktop browser validation",
+      "createdAt": "2026-10-10T17:00:51.439Z"
+    },
+    {
+      "id": "feb8d6b7-b118-4740-9827-1e2e5d38fa65",
+      "revision": 78,
+      "kind": "build",
+      "itemId": "build-82f416c8",
+      "title": "Campaign, death reports, ship progression and world zoom",
+      "author": "Producer",
+      "source": "Actual final integration checks",
+      "createdAt": "2026-10-10T17:00:51.459Z"
     }
   ],
   "runRecords": [
@@ -2503,6 +3226,91 @@
       "author": "Production specialist",
       "source": "Actual Producer final validation handoffs, artifacts/browser-validation.json and inspected native/shell/build artifacts in the current session. Desktop and automated scope only; no physical-device or completed reward-playthrough claim.",
       "createdAt": "2026-10-10T16:20:09.219Z"
+    },
+    {
+      "id": "run-9fc2a409",
+      "title": "Production specialist · completed",
+      "agentId": "/root/production_research",
+      "agentLabel": "Production specialist",
+      "state": "completed",
+      "observedAt": "2026-10-10T16:40:43.670Z",
+      "taskIds": [
+        "task-629ac41a"
+      ],
+      "summary": "Completed authored narrative/optional voice module, 10 tests and official-source feasibility docs. Added truthful campaign and usability review/backlog records; reported current main.ts races read-only. Browser/listening integration is pending.",
+      "evidence": [
+        {
+          "label": "Narrative module automated verification",
+          "kind": "test",
+          "path": "work/narrative-tests.log",
+          "details": "10 real Node tests pass: bounded state-derived pages, validation, local flavor isolation, stale/cancel/timeout handling, explicit replay and browser adapter cleanup. Mock providers do not demonstrate neural voice quality."
+        },
+        {
+          "label": "Workspace TypeScript check",
+          "kind": "test",
+          "path": "work/narrative-typecheck.log",
+          "details": "Full strict TypeScript check exited 0 after the module was added."
+        }
+      ],
+      "author": "Production specialist",
+      "source": "Producer task handoffs and actual specialist implementation/read-only review in this Codex session; no physical-device, neural inference or full campaign playthrough acceptance inferred.",
+      "createdAt": "2026-10-10T16:40:43.682Z"
+    },
+    {
+      "id": "run-0b1264f3",
+      "title": "Producer · running",
+      "agentId": "/root",
+      "agentLabel": "Producer",
+      "state": "running",
+      "observedAt": "2026-10-10T16:40:43.685Z",
+      "taskIds": [
+        "task-5771502c",
+        "task-aaf77ab5",
+        "task-e2cec34f",
+        "task-52a708c0",
+        "task-0a386265",
+        "task-83929b1c"
+      ],
+      "summary": "Actual current parent task integrates champion campaign, browser dialogue replay, death/menu controls and per-ship progression while specialists own Rust/UI work. No complete campaign release acceptance inferred.",
+      "evidence": [
+        {
+          "label": "Actual task assignment",
+          "kind": "note",
+          "details": "Producer sent current integration ownership and user steering in this agent session; main.ts currently contains these ongoing integration paths."
+        }
+      ],
+      "author": "Production specialist",
+      "source": "Producer task handoffs and actual specialist implementation/read-only review in this Codex session; no physical-device, neural inference or full campaign playthrough acceptance inferred.",
+      "createdAt": "2026-10-10T16:40:43.697Z"
+    },
+    {
+      "id": "run-421abcd8",
+      "title": "Production specialist · completed",
+      "agentId": "/root/production_research",
+      "agentLabel": "Production specialist",
+      "state": "completed",
+      "observedAt": "2026-10-10T16:42:28.399Z",
+      "taskIds": [
+        "task-629ac41a"
+      ],
+      "summary": "Final narrative module handoff: 11 tests and refreshed workspace TypeScript pass. Bounded provider input isolation added; read-only title/death/campaign transition findings were relayed and source guards rechecked. Browser listening and runtime transition acceptance remain Producer tasks.",
+      "evidence": [
+        {
+          "label": "Narrative module automated verification",
+          "kind": "test",
+          "path": "work/narrative-tests.log",
+          "details": "11 real Node tests pass. Added invalid synthesis fallback and provider request isolation; a provider cannot alter the displayed text that platform fallback replays. Cancellation, timeouts and browser adapter cleanup pass. No neural synthesis/listening acceptance inferred."
+        },
+        {
+          "label": "Workspace TypeScript check",
+          "kind": "test",
+          "path": "work/narrative-typecheck.log",
+          "details": "Full strict TypeScript check exited 0 after the module was added."
+        }
+      ],
+      "author": "Production specialist",
+      "source": "Actual module test rerun and asynchronous read-only review after Producer applied transition guards in this Codex session.",
+      "createdAt": "2026-10-10T16:42:28.410Z"
     }
   ]
 }

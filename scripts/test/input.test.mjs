@@ -58,3 +58,21 @@ test('right mouse fires and Space is not a weapon shortcut',()=>{
   pointer(canvas,'pointerdown',{pointerType:'mouse',button:2,buttons:2});assert.equal(input.sample().fire,true);
   pointer(canvas,'pointerup',{pointerType:'mouse',button:2,buttons:0});assert.equal(input.sample().fire,false);
 });
+test('campaign navigation submits a real course once and respects interrupted controls',()=>{
+  const {input,selected}=setup(); const course=[4200,-8000];
+  input.setCourse(course); course[0]=0;
+  assert.deepEqual(input.sample().destination,[4200,-8000]); assert.deepEqual(selected(),[4200,-8000]);
+  assert.equal(input.sample().destination,null);
+  input.setCourse([NaN,1]); assert.equal(input.sample().destination,null);
+  input.enabled=false; input.setCourse([1,2]); input.enabled=true;
+  assert.equal(input.sample().destination,null);
+  input.setCourse([1,2]); input.reset(); assert.equal(input.sample().destination,null);
+});
+test('Haven can intercept even a short weapon press from mouse or touch without a lingering shot',()=>{
+  globalThis.window=new EventTarget(); const canvas=new Surface(),area=new Surface(),stick=new Surface(),fire=new Surface();
+  let intents=0;let input;
+  input=new FlightInput(canvas,area,stick,fire,()=>{},()=>{intents++;input.enabled=false;input.reset();});
+  input.enabled=true;pointer(canvas,'pointerdown',{pointerType:'mouse',button:2,buttons:2});
+  assert.equal(intents,1);assert.equal(input.sample().fire,false);
+  input.enabled=true;pointer(fire,'pointerdown',{pointerId:2});assert.equal(intents,2);assert.equal(input.sample().fire,false);
+});

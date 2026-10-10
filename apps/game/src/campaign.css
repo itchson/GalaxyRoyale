@@ -1,0 +1,49 @@
+.menu-tabs button { min-width: 0; flex: 1 1 0; padding: calc(4px * var(--ui-scale)); }
+.menu-card, .dialogue-card, .console-card, .death-card { font-family: "RoyaleMono", monospace; }
+.narrow-ui .menu-tabs { flex-wrap: wrap; }
+.narrow-ui .menu-tabs button { flex:1 1 calc(74px * var(--ui-scale)); }
+.narrow-ui .campaign-roster, .narrow-ui .hangar-roster { grid-template-columns:1fr; }
+#hangar-content, #campaign-content {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+.menu-card > #hangar-content, .menu-card > #campaign-content { flex: 1 1 auto; }
+.campaign-roster, .hangar-roster { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: calc(10px * var(--ui-scale)); }
+.campaign-card { display: flex; gap: calc(8px * var(--ui-scale)); padding: calc(6px * var(--ui-scale)); min-width: 0; }
+.campaign-card > div:last-child { flex: 1 1 auto; min-width: 0; }
+.campaign-card h3, .campaign-league h3, .ending-credits h3 { font-size: calc(10px * var(--ui-scale)); margin: 0 0 calc(4px * var(--ui-scale)); font-weight: normal; }
+.campaign-card p { font-size: calc(8px * var(--ui-scale)); line-height: 1.25; overflow-wrap: anywhere; }
+.campaign-controls { display: flex; gap: calc(4px * var(--ui-scale)); flex-wrap: wrap; }
+.campaign-card button, .campaign-league button, .ending-credits button { min-width: 0; min-height: calc(20px * var(--ui-scale)); font-size: calc(8px * var(--ui-scale)); padding: calc(4px * var(--ui-scale)); }
+.campaign-icon { flex: 0 0 auto; background: #122237; }
+.campaign-patch { width: calc(24px * var(--ui-scale)); height: calc(24px * var(--ui-scale)); }
+.campaign-ship { width: calc(32px * var(--ui-scale)); height: calc(32px * var(--ui-scale)); }
+.campaign-league { margin-top: calc(14px * var(--ui-scale)); padding-bottom: calc(8px * var(--ui-scale)); }
+.standings { margin: calc(8px * var(--ui-scale)) 0; }
+.standings p { margin-bottom: calc(3px * var(--ui-scale)); font-size: calc(8px * var(--ui-scale)); }
+.ending-credits { text-align: center; padding: calc(12px * var(--ui-scale)); }
+.ending-credits .campaign-icon { margin: 0 auto calc(8px * var(--ui-scale)); }
+.ending-credits p { line-height: 1.6; }
+.ending-credits { animation: ending-arrival 600ms steps(8,end) both; }
+@keyframes ending-arrival { from { transform: translateY(calc(8px * var(--ui-scale))); } to { transform: translateY(0); } }
+body.reduced-motion .ending-credits { animation: none; }
+@media(max-width:740px) { .campaign-roster, .hangar-roster { grid-template-columns: 1fr; } }
+.death-card {
+  width: min(calc(450px * var(--ui-scale)), 100%);
+  max-height: 100%;
+  overflow-y: auto;
+  padding: calc(20px * var(--ui-scale));
+  border: calc(1px * var(--ui-scale)) solid #af6881;
+  background: #080d1c;
+}
+.death-card .eyebrow { font-size: calc(8px * var(--ui-scale)); color: #ffa3bd; }
+.death-card h2 { font-size: calc(22px * var(--ui-scale)); margin: calc(8px * var(--ui-scale)) 0; }
+.death-card p { font-size: calc(9px * var(--ui-scale)); line-height: 1.5; margin: calc(6px * var(--ui-scale)) 0; }
+.death-actions { display:flex; gap: calc(12px * var(--ui-scale)); margin-top: calc(16px * var(--ui-scale)); flex-wrap: wrap; }
+.death-actions button { font-size: calc(9px * var(--ui-scale)); min-height: calc(28px * var(--ui-scale)); padding: calc(6px * var(--ui-scale)); }
+#quick-menu { position:fixed; top:calc(52px * var(--ui-scale)); right:calc(14px * var(--ui-scale)); display:flex; flex-direction:column; gap:calc(6px * var(--ui-scale)); pointer-events:auto; }
+#quick-menu[hidden] { display:none; }
+#quick-menu button { min-height:calc(25px * var(--ui-scale)); font-size:calc(9px * var(--ui-scale)); padding:calc(6px * var(--ui-scale)); }
+body.pixel-ready .death-card, body.pixel-ready #quick-menu button { opacity:0; }

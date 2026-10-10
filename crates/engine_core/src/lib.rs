@@ -1,11 +1,13 @@
 //! Portable pixel geometry, transforms and batched render extraction.
 //! No browser or graphics-device state lives in this crate.
 
+mod camera;
 mod frame;
 mod pixels;
 mod topology;
 mod transform;
 
+pub use camera::{CAMERA_ZOOM_SECONDS, CameraView, CameraZoom, MAX_CAMERA_ZOOM, MIN_CAMERA_ZOOM};
 pub use frame::{
     FrameBuilder, GpuTransform, PixelInstance, PixelMaterial, RenderBatch, RenderFrame,
 };

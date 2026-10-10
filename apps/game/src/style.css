@@ -3,6 +3,11 @@
   src: url("/fonts/Tiny5.ttf") format("truetype");
   font-display: swap;
 }
+@font-face {
+  font-family: "RoyaleMono";
+  src: url("/fonts/RoyaleMono.ttf") format("truetype");
+  font-display: swap;
+}
 :root {
   font-family: "Tiny5", monospace;
   color: #f1f7ff;
@@ -1045,6 +1050,7 @@ body:not(.engine-flight) #toast {
   font-size: calc(8px * var(--ui-scale));
 }
 .menu-card h2 {
+  font-family: inherit;
   font-size: calc(18px * var(--ui-scale));
   margin: 0 0 calc(5px * var(--ui-scale));
 }
@@ -1070,7 +1076,7 @@ body:not(.engine-flight) #toast {
   overflow-y: auto;
   scrollbar-width: thin;
 }
-.menu-card > :not(#upgrade-content):not(#quest-content):not(#settings-content) {
+.menu-card > :not(#upgrade-content):not(#quest-content):not(#settings-content):not(#hangar-content):not(#campaign-content) {
   flex: 0 0 auto;
 }
 .upgrade-card {

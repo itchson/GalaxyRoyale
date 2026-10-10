@@ -38,6 +38,7 @@ export class PixelUiBridge {
       "game-ui",
       "debug-console",
       "dialogue-screen",
+      "death-screen",
     ])
       if (document.getElementById(id))
         this.observer.observe(document.getElementById(id)!, {
@@ -74,7 +75,7 @@ export class PixelUiBridge {
       getComputedStyle(element).display !== "none" &&
       element.getBoundingClientRect().width > 0;
     for (const root of document.querySelectorAll<HTMLElement>(
-      ".launch-card,.menu-card,.console-card,.dialogue-card,#game-ui",
+      ".launch-card,.menu-card,.console-card,.dialogue-card,.death-card,#game-ui",
     )) {
       if (!visible(root)) continue;
       const bounds = root.getBoundingClientRect();
@@ -100,7 +101,7 @@ export class PixelUiBridge {
           ),
         );
         const scroll = element.closest<HTMLElement>(
-          "#upgrade-content,#quest-content,#settings-content,#console-output,#dialogue-text",
+          "#upgrade-content,#quest-content,#settings-content,#hangar-content,#campaign-content,#console-output,#dialogue-text",
         );
         const clip = scroll ? scroll.getBoundingClientRect() : bounds;
         nodes.push({
@@ -137,6 +138,8 @@ export class PixelUiBridge {
         if (portrait)
           add(portrait, "portrait", "", Number(portrait.dataset.portrait ?? 0));
       }
+      for (const art of root.querySelectorAll<HTMLElement>("[data-pixel-kind]"))
+        add(art, art.dataset.pixelKind ?? "", "", Number(art.dataset.pixelValue ?? 0));
       if (root.classList.contains("console-card")) {
         const input = root.querySelector<HTMLInputElement>("#console-input");
         if (input) add(input, "input", input.value);
@@ -149,7 +152,7 @@ export class PixelUiBridge {
       const selectors =
         root.id === "game-ui"
           ? document.body.classList.contains("engine-flight")
-            ? "#dock-button,#site-button,#pause-button,#fullscreen,#toast,#destination-marker"
+            ? "#dock-button,#site-button,#pause-button,#fullscreen,#quick-settings,#quick-title,#toast,#destination-marker"
             : "#toast"
           : "h2,h3,p,small,.eyebrow,.build-line span,.control-guide span,.upgrade-category span,.upgrade-category b,#quest-content li";
       for (const child of root.querySelectorAll<HTMLElement>(selectors))
@@ -157,7 +160,7 @@ export class PixelUiBridge {
           child,
           child.tagName === "BUTTON" ? "button" : "text",
           child.id === "pause-button"
-            ? "II"
+            ? document.body.classList.contains("touch-ui") ? root.querySelector<HTMLElement>("#quick-menu")?.hidden ? "+" : "X" : "II"
             : child.id === "fullscreen"
               ? "[]"
               : child.id === "destination-marker"

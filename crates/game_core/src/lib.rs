@@ -1,5 +1,9 @@
 //! Galaxy Royale's deterministic, fixed-step gameplay simulation.
+pub mod campaign;
 mod pixel_assets;
+pub use campaign::RunSummary;
+mod campaign_runtime;
+use campaign_runtime::{ArenaEncounter, ChampionFighter};
 pub mod regions;
 use engine_core::{FrameBuilder, PixelBody, PixelMaterial, RenderFrame, Transform, Vec2};
 use hecs::{Entity, World};
@@ -16,7 +20,6 @@ const MAX_PARTICLES: usize = 1100;
 const MAX_ENEMIES: usize = 48;
 const MAX_BULLETS: usize = 180;
 const COST: u32 = 10;
-const PLAYER_SCALE: f32 = 0.7;
 const DOCK_SCALE: f32 = 1.5;
 const MAX_ARCHIVE: usize = 256;
 const ACTOR_MATERIAL: PixelMaterial = PixelMaterial {
@@ -42,12 +45,13 @@ pub struct Profile {
     pub discoveries: Vec<String>,
     pub quests: Vec<QuestProgress>,
     pub relics: Vec<String>,
+    pub campaign: campaign::CampaignProgress,
 }
 
 impl Default for Profile {
     fn default() -> Self {
         Self {
-            schema_version: 2,
+            schema_version: 3,
             revision: 0,
             seed: 0x4752_4f59,
             currency: [0; 3],
@@ -60,6 +64,7 @@ impl Default for Profile {
             discoveries: Vec::new(),
             quests: Vec::new(),
             relics: Vec::new(),
+            campaign: campaign::CampaignProgress::default(),
         }
     }
 }
@@ -109,6 +114,15 @@ pub struct Hud {
     pub quest_log: Vec<QuestProgress>,
     pub discoveries: usize,
     pub relics: usize,
+    pub campaign: campaign::CampaignHud,
+    pub last_run: Option<RunSummary>,
+    pub ship_level: u32,
+    pub ship_xp: u32,
+    pub ship_next_xp: u32,
+    pub rank_cap: u8,
+    pub cargo_materials: u32,
+    pub cargo_capacity: u32,
+    pub stored_materials: u32,
 }
 
 #[derive(Clone, Debug, Serialize)]
@@ -137,6 +151,7 @@ pub struct UpgradeHud {
     pub max_rank: u8,
     pub description: String,
     pub unlocked: bool,
+    pub required_level: u32,
 }
 
 #[derive(Clone, Debug, Serialize)]
@@ -245,19 +260,57 @@ struct Stats {
 }
 impl Stats {
     fn from_profile(p: &Profile) -> Self {
-        Self {
-            hull: 100.0 + 15.0 * p.ranks[2] as f32 + p.relics.len().min(20) as f32,
-            shield: if p.ranks[3] == 0 {
+        let scout = p.campaign.selected_ship == 0;
+        let drive_level =
+            campaign::level(p.campaign.ship_xp[p.campaign.selected_ship as usize]).min(12);
+        let experience_drive = if p.campaign.selected_ship == 9 {
+            1.0
+        } else {
+            1.0 + 0.025 * drive_level.saturating_sub(1) as f32
+        };
+        let ranks = if p.campaign.selected_ship == 9 {
+            [5; 9]
+        } else {
+            p.ranks
+        };
+        let mut stats = Self {
+            hull: 100.0 + 15.0 * ranks[2] as f32 + p.relics.len().min(20) as f32,
+            shield: if ranks[3] == 0 {
                 0.0
             } else {
-                20.0 + 10.0 * (p.ranks[3] - 1) as f32
+                20.0 + 10.0 * (ranks[3] - 1) as f32
             },
-            speed: 180.0 * (1.0 + 0.04 * p.ranks[5] as f32),
-            acceleration: 400.0 * (1.0 + 0.04 * p.ranks[5] as f32),
-            damage: 12.0 * (1.0 + 0.12 * p.ranks[0] as f32),
-            fire_rate: 5.0 * (1.0 + 0.10 * p.ranks[1] as f32),
-            regeneration: 0.4 * p.ranks[4] as f32,
+            speed: if scout { 100.0 } else { 180.0 }
+                * experience_drive
+                * (1.0 + 0.04 * ranks[5] as f32),
+            acceleration: if scout { 260.0 } else { 400.0 }
+                * experience_drive
+                * (1.0 + 0.04 * ranks[5] as f32),
+            damage: 12.0 * (1.0 + 0.12 * ranks[0] as f32),
+            fire_rate: 5.0 * (1.0 + 0.10 * ranks[1] as f32),
+            regeneration: 0.4 * ranks[4] as f32,
+        };
+        match p.campaign.selected_ship {
+            2 => {
+                stats.hull += 20.0;
+                stats.speed *= 0.92;
+            }
+            5 => {
+                stats.speed *= 1.1;
+                stats.acceleration *= 1.15;
+            }
+            6 => stats.hull += 10.0,
+            9 => {
+                stats.hull += 65.0;
+                stats.shield += 40.0;
+                stats.speed *= 1.15;
+                stats.damage *= 1.25;
+                stats.fire_rate *= 1.2;
+                stats.regeneration += 1.0;
+            }
+            _ => {}
         }
+        stats
     }
 }
 
@@ -347,12 +400,14 @@ pub struct Game {
     site_grid: [i32; 2],
     reduced_cosmetics: bool,
     transient_lights: Vec<TransientLight>,
+    arena: Option<ArenaEncounter>,
+    run: Option<RunSummary>,
 }
 
 impl Game {
     pub fn new(mut profile: Profile) -> Self {
-        let migrated = profile.schema_version != 2;
-        profile.schema_version = 2;
+        let migrated = profile.schema_version != 3;
+        profile.schema_version = 3;
         for rank in &mut profile.ranks {
             *rank = (*rank).min(5);
         }
@@ -366,20 +421,33 @@ impl Game {
         if profile.seed == 0 {
             profile.seed = 0x4752_4f59;
         }
-        if sanitize_archive(&mut profile) || migrated {
+        let archive_changed = sanitize_archive(&mut profile);
+        let mut campaign_changed = profile.campaign.sanitize();
+        if profile.campaign.victory_claimed
+            && campaign::table(profile.seed, &profile.campaign).0[0].entrant != 8
+        {
+            profile.campaign.victory_claimed = false;
+            profile.campaign.credits_seen = false;
+            if profile.campaign.selected_ship == 9 {
+                profile.campaign.selected_ship = 0;
+            }
+            campaign_changed = true;
+        }
+        if archive_changed || campaign_changed || migrated {
             profile.revision = profile.revision.saturating_add(1);
         }
         let stats = Stats::from_profile(&profile);
         let mut world = World::new();
-        let ship = ship_body();
+        let ship = campaign::player_body(profile.campaign.selected_ship);
+        let player_scale = campaign::player_scale(profile.campaign.selected_ship);
         let player = world.spawn((
             Motion::new(Vec2::ZERO, Vec2::ZERO, -FRAC_PI_2),
             Actor {
                 kind: Kind::Player,
                 health: stats.hull,
                 max_health: stats.hull,
-                radius: pixel_assets::radius(&ship, PLAYER_SCALE),
-                scale: PLAYER_SCALE,
+                radius: pixel_assets::radius(&ship, player_scale),
+                scale: player_scale,
                 damage: 0.0,
             },
             ship,
@@ -430,10 +498,13 @@ impl Game {
             site_grid: [0, 0],
             reduced_cosmetics: false,
             transient_lights: Vec::with_capacity(32),
+            arena: None,
+            run: None,
         };
         // Expeditions reload at Haven. Retained courier cargo is delivered here,
         // including after death; the reward still requires returning to its source.
         game.update_exploration();
+        game.bank_cargo();
         game
     }
 
@@ -639,12 +710,15 @@ impl Game {
             return Some((Vec2::ZERO, SAFE_RADIUS));
         }
         if let Some(site) = self.nearby_sites.iter().find(|site| {
-            Vec2::from_array(site.position).distance_squared(position) <= site.radius * site.radius
+            !self.arena_disables(site)
+                && Vec2::from_array(site.position).distance_squared(position)
+                    <= site.radius * site.radius
         }) {
             return Some((Vec2::from_array(site.position), site.radius));
         }
         if self.outside_site_cache(position) {
             return regions::protected(self.profile.seed, position)
+                .filter(|site| !self.arena_disables(site))
                 .map(|site| (Vec2::from_array(site.position), site.radius));
         }
         None
@@ -790,6 +864,7 @@ impl Game {
         self.update_exploration();
         let safe = self.safe();
         let haven = position.length_squared() <= SAFE_RADIUS * SAFE_RADIUS;
+        self.track_run(dt);
         if safe {
             if haven && !self.was_safe {
                 self.enter_dock();
@@ -812,12 +887,15 @@ impl Game {
             self.fire(stats);
         }
         self.update_chunks(position);
+        self.update_campaign(dt);
         self.update_spawns(position, dt);
         self.update_enemies(position, dt);
+        self.update_homing(dt);
         self.update_segments(dt);
         self.integrate(dt);
         self.enforce_actor_sanctuaries();
         self.confine_player();
+        self.confine_arena();
         self.update_exploration();
         self.resolve_collisions(dt);
         self.confine_player();
@@ -936,6 +1014,7 @@ impl Game {
         );
         self.fire_timer = 1.0 / stats.fire_rate;
         self.shot_count += 1;
+        self.ship_signature(motion, stats);
         self.event("shot", motion.position, 0.6);
         self.particle(
             motion.position + dir * 21.0,
@@ -944,7 +1023,9 @@ impl Game {
             rgba(255, 249, 191, 255),
             3.5,
         );
-        if self.profile.unlocked[0] && self.shot_count.is_multiple_of(8) {
+        if (self.profile.unlocked[0] || self.profile.campaign.selected_ship == 9)
+            && self.shot_count.is_multiple_of(8)
+        {
             self.transient_light(
                 motion.position + dir * 19.0,
                 95.0,
@@ -952,8 +1033,8 @@ impl Game {
                 1.1,
                 0.25,
             );
-            let damage =
-                stats.damage * (0.5 + 0.1 * self.profile.ranks[6].saturating_sub(1) as f32);
+            let damage = stats.damage
+                * (0.5 + 0.1 * campaign::signature_rank(&self.profile, 6).saturating_sub(1) as f32);
             for angle in [-0.16, 0.0, 0.16] {
                 let d = forward(motion.heading + angle);
                 self.spawn_bullet(motion.position + dir * 19.0, d * 460.0, damage, true, 2);
@@ -1025,6 +1106,10 @@ impl Game {
                     );
                     let radius = p.length();
                     if radius < SAFE_RADIUS + 100.0
+                        || self
+                            .arena
+                            .as_ref()
+                            .is_some_and(|arena| p.distance(arena.center) < arena.radius + 70.0)
                         || regions::protected(self.profile.seed, p).is_some()
                     {
                         continue;
@@ -1067,7 +1152,10 @@ impl Game {
     }
 
     fn update_spawns(&mut self, position: Vec2, dt: f32) {
-        if position.length() < COMBAT_RADIUS || self.safe_zone_at(position).is_some() {
+        if self.arena.is_some()
+            || position.length() < COMBAT_RADIUS
+            || self.safe_zone_at(position).is_some()
+        {
             return;
         }
         let tier = danger(position);
@@ -1186,10 +1274,13 @@ impl Game {
         let pursuit_range = self.viewport.length().max(1050.0);
         let mut shots = Vec::new();
         let mut remove = Vec::new();
-        for (entity, (motion, actor, brain)) in self
-            .world
-            .query_mut::<(Entity, (&mut Motion, &Actor, &mut Brain))>()
-        {
+        for (entity, (motion, actor, brain, champion)) in self.world.query_mut::<(
+            Entity,
+            (&mut Motion, &Actor, &mut Brain, Option<&ChampionFighter>),
+        )>() {
+            if champion.is_some() {
+                continue;
+            }
             brain.age += dt;
             brain.shot_timer -= dt;
             let delta = player - motion.position;
@@ -1343,11 +1434,17 @@ impl Game {
             let distant_sites = self
                 .outside_site_cache(motion.position)
                 .then(|| regions::sites_near(self.profile.seed, motion.position));
-            push_out_of_sanctuaries(
-                &mut motion.position,
-                8.23 * segment_scale(*boss),
-                distant_sites.as_deref().unwrap_or(&self.nearby_sites),
-            );
+            if !self
+                .arena
+                .as_ref()
+                .is_some_and(|arena| arena.opponent == owner)
+            {
+                push_out_of_sanctuaries(
+                    &mut motion.position,
+                    8.23 * segment_scale(*boss),
+                    distant_sites.as_deref().unwrap_or(&self.nearby_sites),
+                );
+            }
             motion.velocity = (motion.position - motion.previous) / dt;
             positions.insert((owner, index), motion.position);
             if let Ok(mut m) = self.world.get::<&mut Motion>(entity) {
@@ -1362,7 +1459,13 @@ impl Game {
     fn enforce_actor_sanctuaries(&mut self) {
         let seed = self.profile.seed;
         let grid = self.site_grid;
-        for (_, (motion, actor)) in self.world.query_mut::<(Entity, (&mut Motion, &Actor))>() {
+        for (_, (motion, actor, champion)) in self
+            .world
+            .query_mut::<(Entity, (&mut Motion, &Actor, Option<&ChampionFighter>))>()
+        {
+            if champion.is_some() {
+                continue;
+            }
             if !matches!(actor.kind, Kind::Enemy(_) | Kind::Boss(_)) {
                 continue;
             }
@@ -1428,10 +1531,10 @@ impl Game {
                 continue;
             }
             if segment_circle(motion.previous, motion.position, Vec2::ZERO, SAFE_RADIUS).is_some()
-                || self
-                    .nearby_sites
-                    .iter()
-                    .any(|site| site.intersects_segment(motion.previous, motion.position))
+                || self.nearby_sites.iter().any(|site| {
+                    !self.arena_disables(site)
+                        && site.intersects_segment(motion.previous, motion.position)
+                })
                 || ((self.outside_site_cache(motion.previous)
                     || self.outside_site_cache(motion.position))
                     && regions::segment_protected(
@@ -1756,7 +1859,12 @@ impl Game {
             let removed = self
                 .world
                 .get::<&mut PixelBody>(self.player)
-                .map(|mut b| b.damage(hit, 2.5 / PLAYER_SCALE))
+                .map(|mut b| {
+                    b.damage(
+                        hit,
+                        2.5 / campaign::player_scale(self.profile.campaign.selected_ship),
+                    )
+                })
                 .unwrap_or_default();
             let motion = *self.world.get::<&Motion>(self.player).unwrap();
             let actor = *self.world.get::<&Actor>(self.player).unwrap();
@@ -1777,9 +1885,15 @@ impl Game {
         }
         self.shake = self.shake.max(2.0 + damage * 0.04);
         self.event("hit", position, 0.9);
-        if self.profile.unlocked[1] && self.repulsor_timer <= 0.0 {
+        if (self.profile.unlocked[1] || matches!(self.profile.campaign.selected_ship, 6 | 9))
+            && self.repulsor_timer <= 0.0
+        {
             self.transient_light(position, 165.0, [0.16, 0.65, 1.0], 1.5, 0.45);
-            self.repulsor_timer = 18.0 - 2.0 * self.profile.ranks[7].saturating_sub(1) as f32;
+            self.repulsor_timer = if self.profile.campaign.selected_ship == 6 {
+                7.5
+            } else {
+                18.0 - 2.0 * campaign::signature_rank(&self.profile, 7).saturating_sub(1) as f32
+            };
             let targets: Vec<_> = self
                 .world
                 .query::<(Entity, (&Motion, &Actor))>()
@@ -1811,6 +1925,18 @@ impl Game {
         if !self.world.contains(entity) {
             return;
         }
+        if self
+            .arena
+            .as_ref()
+            .is_some_and(|arena| arena.opponent == entity)
+        {
+            self.remove_enemy(entity, true);
+            self.burst(position, 80, rgba(255, 213, 121, 255), 100.0);
+            self.event("explosion", position, 1.0);
+            self.finish_arena(true, true);
+            return;
+        }
+        self.record_kill(kind);
         if let Kind::Enemy(family) | Kind::Boss(family) = kind {
             for quest in &mut self.profile.quests {
                 if quest.event == "bounty" && quest.family == family && !quest.completed {
@@ -1820,12 +1946,17 @@ impl Game {
         }
         match kind {
             Kind::Asteroid => {
+                self.award_xp(2);
+                if self.random() < 0.25 {
+                    self.spawn_loot(position, 3, 1);
+                }
                 if self.random() < 0.25 {
                     let category = (self.random() * 3.0) as usize;
                     self.spawn_loot(position, category, 1);
                 }
             }
             Kind::Enemy(family) => {
+                self.award_xp(5);
                 self.profile.kills[family] = self.profile.kills[family].saturating_add(1);
                 self.kill_credit[family] = self.kill_credit[family].saturating_add(1);
                 if self.kill_credit[family] >= 24 && !self.profile.pending[family] {
@@ -1839,6 +1970,7 @@ impl Game {
                 self.changed();
             }
             Kind::Boss(family) => {
+                self.award_xp(25);
                 self.profile.boss_kills[family] = self.profile.boss_kills[family].saturating_add(1);
                 self.profile.pending[family] = false;
                 self.profile.pity[family] = self.profile.pity[family].saturating_add(1);
@@ -1956,10 +2088,30 @@ impl Game {
             }
         }
         for (entity, category, amount, position) in collect {
-            if self.world.despawn(entity).is_ok() {
-                self.profile.currency[category] =
-                    self.profile.currency[category].saturating_add(amount);
+            if category == 3 {
+                let available = 16u32.saturating_sub(self.profile.campaign.cargo_materials);
+                let gained = amount.min(available);
+                if gained == 0 {
+                    continue;
+                }
+                if let Ok(mut loot) = self.world.get::<&mut Loot>(entity) {
+                    loot.amount -= gained;
+                }
+                self.profile.campaign.cargo_materials += gained;
+                if self.position().length() > SAFE_RADIUS {
+                    let run = self.run.get_or_insert_with(RunSummary::default);
+                    run.materials_gained = run.materials_gained.saturating_add(gained);
+                }
+                if gained == amount {
+                    let _ = self.world.despawn(entity);
+                }
                 self.changed();
+                self.event("pickup", position, 0.7);
+                self.burst(position, 8, currency_color(3), 28.0);
+                continue;
+            }
+            if self.world.despawn(entity).is_ok() {
+                self.credit_points(category, amount);
                 self.event("pickup", position, category as f32 / 2.0);
                 self.burst(position, 8, currency_color(category), 28.0);
             }
@@ -1974,7 +2126,9 @@ impl Game {
             *life -= dt;
         }
         self.wake.retain(|(_, life)| *life > 0.0);
-        if !self.profile.unlocked[2] || self.safe() {
+        if (!self.profile.unlocked[2] && !matches!(self.profile.campaign.selected_ship, 5 | 9))
+            || self.safe()
+        {
             return;
         }
         self.wake_timer -= dt;
@@ -1996,7 +2150,9 @@ impl Game {
             self.wake
                 .push((position - forward(motion.heading) * 14.0, 2.0));
         }
-        let damage = 6.0 * (1.0 + 0.25 * self.profile.ranks[8].saturating_sub(1) as f32) * dt;
+        let damage = 6.0
+            * (1.0 + 0.25 * campaign::signature_rank(&self.profile, 8).saturating_sub(1) as f32)
+            * dt;
         let targets: Vec<_> = self
             .world
             .query::<(Entity, (&Motion, &Actor))>()
@@ -2080,12 +2236,20 @@ impl Game {
     }
 
     fn enter_dock(&mut self) {
+        self.bank_cargo();
+        self.finish_run();
         let stats = Stats::from_profile(&self.profile);
         if let Ok(mut actor) = self.world.get::<&mut Actor>(self.player) {
             actor.health = stats.hull;
             actor.max_health = stats.hull;
         }
-        let _ = self.world.insert_one(self.player, ship_body());
+        let body = campaign::player_body(self.profile.campaign.selected_ship);
+        let scale = campaign::player_scale(self.profile.campaign.selected_ship);
+        if let Ok(mut actor) = self.world.get::<&mut Actor>(self.player) {
+            actor.scale = scale;
+            actor.radius = pixel_assets::radius(&body, scale);
+        }
+        let _ = self.world.insert_one(self.player, body);
         self.shield = stats.shield;
         self.event("dock", self.position(), 0.7);
         let enemies: Vec<_> = self
@@ -2109,6 +2273,7 @@ impl Game {
     }
 
     pub fn reset_to_dock(&mut self) {
+        self.finish_arena(false, false);
         self.transient_lights.clear();
         self.stress_mode = false;
         let stress: Vec<_> = self
@@ -2155,7 +2320,7 @@ impl Game {
     }
 
     pub fn purchase(&mut self, id: &str) -> Result<(), String> {
-        if self.position().length() > DOCK_RADIUS {
+        if self.position().length() > SAFE_RADIUS {
             return Err("Return to the dock to install upgrades.".into());
         }
         let Some(index) = UPGRADES.iter().position(|u| u.0 == id) else {
@@ -2166,6 +2331,13 @@ impl Game {
         }
         if self.profile.ranks[index] >= 5 {
             return Err("This upgrade is already at maximum rank.".into());
+        }
+        let level = self.ship_level();
+        if level < campaign::required_level(self.profile.ranks[index] + 1) {
+            return Err(format!(
+                "Reach ship level {} before installing this rank.",
+                campaign::required_level(self.profile.ranks[index] + 1)
+            ));
         }
         let category = UPGRADES[index].2;
         if self.profile.currency[category] < COST {
@@ -2192,7 +2364,9 @@ impl Game {
         let stats = Stats::from_profile(&self.profile);
         let tier = danger(motion.position);
         let site = self.current_site().map(|site| self.site_hud(site));
-        let zone = if site.is_some() {
+        let zone = if self.arena.is_some() {
+            "Champion arena / combat enabled".into()
+        } else if site.is_some() {
             "Site sanctuary".into()
         } else if distance <= SAFE_RADIUS {
             "Dock protected".into()
@@ -2203,17 +2377,28 @@ impl Game {
         } else {
             format!("Outer reach · Tier {tier}")
         };
-        let boss = self.active_boss.and_then(|entity| {
-            self.world.get::<&Actor>(entity).ok().map(|a| BossHud {
-                name: boss_name(match a.kind {
-                    Kind::Boss(f) => f,
-                    _ => 0,
+        let boss = if let Some(arena) = self.arena {
+            self.world
+                .get::<&Actor>(arena.opponent)
+                .ok()
+                .map(|a| BossHud {
+                    name: campaign::CHAMPIONS[arena.index].name.into(),
+                    health: a.health.max(0.0),
+                    max_health: a.max_health,
                 })
-                .into(),
-                health: a.health.max(0.0),
-                max_health: a.max_health,
+        } else {
+            self.active_boss.and_then(|entity| {
+                self.world.get::<&Actor>(entity).ok().map(|a| BossHud {
+                    name: boss_name(match a.kind {
+                        Kind::Boss(f) => f,
+                        _ => 0,
+                    })
+                    .into(),
+                    health: a.health.max(0.0),
+                    max_health: a.max_health,
+                })
             })
-        });
+        };
         Hud {
             position: motion.position.to_array(),
             camera: self.camera.to_array(),
@@ -2225,7 +2410,7 @@ impl Game {
             zone,
             danger: tier,
             safe: self.safe(),
-            dock: distance <= DOCK_RADIUS,
+            dock: distance <= SAFE_RADIUS,
             currency: self.profile.currency,
             kills: self.profile.kills,
             boss,
@@ -2236,10 +2421,19 @@ impl Game {
                     id: (*id).into(),
                     name: (*name).into(),
                     category: *category,
-                    rank: self.profile.ranks[i],
+                    rank: if self.profile.campaign.selected_ship == 9 {
+                        5
+                    } else {
+                        self.profile.ranks[i]
+                    },
                     max_rank: 5,
                     description: (*description).into(),
-                    unlocked: i < 6 || self.profile.unlocked[i - 6],
+                    unlocked: self.profile.campaign.selected_ship == 9
+                        || i < 6
+                        || self.profile.unlocked[i - 6],
+                    required_level: campaign::required_level(
+                        self.profile.ranks[i].saturating_add(1),
+                    ),
                 })
                 .collect(),
             time: self.time,
@@ -2251,6 +2445,15 @@ impl Game {
             quest_log: self.profile.quests.clone(),
             discoveries: self.profile.discoveries.len(),
             relics: self.profile.relics.len(),
+            campaign: self.campaign_hud(),
+            last_run: self.profile.campaign.last_run.clone(),
+            ship_level: self.ship_level(),
+            ship_xp: self.profile.campaign.ship_xp[self.profile.campaign.selected_ship as usize],
+            ship_next_xp: campaign::next_xp(self.ship_level()),
+            rank_cap: campaign::rank_cap(self.ship_level()),
+            cargo_materials: self.profile.campaign.cargo_materials,
+            cargo_capacity: 16,
+            stored_materials: self.profile.campaign.stored_materials,
         }
     }
 
@@ -2328,6 +2531,7 @@ impl Game {
             self.reduced_cosmetics,
         );
         self.render_sites(frame, lights);
+        self.render_campaign(frame);
         // The generated station includes its four arms and its open docking bay.
         let station = Transform {
             position: Vec2::ZERO,
@@ -2706,6 +2910,9 @@ impl Game {
 
     /// Explicit deterministic QA scenes. This never awards inventory or upgrades.
     pub fn diagnostic(&mut self, command: &str) {
+        if self.campaign_diagnostic(command) {
+            return;
+        }
         match command {
             "dock" | "home" => self.reset_to_dock(),
             "site" => {
@@ -2996,6 +3203,7 @@ fn currency_color(category: usize) -> u32 {
         rgba(255, 170, 97, 255),
         rgba(115, 184, 255, 255),
         rgba(131, 242, 184, 255),
+        rgba(255, 222, 148, 255),
     ][category]
 }
 fn mix(mut x: u32) -> u32 {
@@ -3037,9 +3245,6 @@ fn segment_circle(a: Vec2, b: Vec2, center: Vec2, radius: f32) -> Option<f32> {
     }
 }
 
-fn ship_body() -> PixelBody {
-    pixel_assets::body("player")
-}
 fn asteroid_body(seed: u32) -> PixelBody {
     pixel_assets::asteroid(seed)
 }
@@ -3134,8 +3339,20 @@ mod tests {
             1.0,
         );
         let m = *g.world.get::<&Motion>(g.player).unwrap();
-        assert!(m.velocity.x > 160.0);
+        assert!(m.velocity.x > Stats::from_profile(&g.profile).speed * 0.9);
         assert!(m.heading.abs() < 0.03);
+        let mut half = Game::new(Profile::default());
+        advance(
+            &mut half,
+            &InputFrame {
+                joystick: Some([0.5, 0.0]),
+                ..Default::default()
+            },
+            1.0,
+        );
+        let half_velocity = half.world.get::<&Motion>(half.player).unwrap().velocity.x;
+        // Half travel gives ~46% thrust after the controller's center dead zone.
+        assert!((0.44..0.48).contains(&(half_velocity / m.velocity.x)));
         advance(&mut g, &InputFrame::default(), 1.0);
         let m = *g.world.get::<&Motion>(g.player).unwrap();
         assert!(m.velocity.length() < 1.0);
@@ -3642,7 +3859,7 @@ mod tests {
         )
         .unwrap();
         let g = Game::new(old);
-        assert_eq!(g.profile.schema_version, 2);
+        assert_eq!(g.profile.schema_version, 3);
         assert_eq!(g.profile.revision, 10);
         assert_eq!(g.profile.currency, [7, 8, 9]);
         assert_eq!(g.profile.ranks[2], 3);
