@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 78,
+  "revision": 93,
   "name": "Galaxy Royale",
   "phase": "Foundation → playable vertical slice",
-  "updatedAt": "2026-10-10T17:00:51.459Z",
+  "updatedAt": "2026-10-10T17:23:59.027Z",
   "tasks": [
     {
       "id": "studio",
@@ -1390,7 +1390,7 @@
       "acceptanceCriteria": [
         {
           "text": "Native tests verify eight unique arenas, signatures, trial boundaries and one-time patch/blueprint rewards.",
-          "met": false
+          "met": true
         },
         {
           "text": "Browser play confirms challenge, victory, retreat, death/retry and persistence for each champion.",
@@ -1406,12 +1406,27 @@
           "label": "Actual source inspection",
           "kind": "note",
           "details": "Read campaign.rs and campaign_runtime.rs: CHAMPIONS[8], arena rules and finish_arena reward ownership are present; this note is not a test pass."
+        },
+        {
+          "label": "Current tests and real browser scope",
+          "kind": "note",
+          "path": "artifacts/browser-validation.json"
+        },
+        {
+          "label": "103 native tests",
+          "kind": "note",
+          "path": "artifacts/rust-tests.log"
+        },
+        {
+          "label": "58 shell regressions",
+          "kind": "note",
+          "path": "artifacts/browser-shell-tests.log"
         }
       ],
       "blocker": "",
-      "revision": 1,
+      "revision": 2,
       "createdAt": "2026-10-10T16:40:43.557Z",
-      "updatedAt": "2026-10-10T16:40:43.557Z"
+      "updatedAt": "2026-10-10T17:04:43.276Z"
     },
     {
       "id": "task-57a3ed52",
@@ -1428,11 +1443,11 @@
       "acceptanceCriteria": [
         {
           "text": "Final crafting checks a valid earned blueprint, dock location, material/category costs and single purchase.",
-          "met": false
+          "met": true
         },
         {
           "text": "Owned selected ships retain their signature and progression after reload without duplicating rewards.",
-          "met": false
+          "met": true
         },
         {
           "text": "Browser hangar can craft/select with clear lock and insufficient-resource feedback.",
@@ -1444,12 +1459,27 @@
           "label": "Actual integration under review",
           "kind": "note",
           "details": "Read campaignActions craft/select and Rust craft_ship/switch_ship; final material-stash changes and acceptance are pending."
+        },
+        {
+          "label": "Current tests and real browser scope",
+          "kind": "note",
+          "path": "artifacts/browser-validation.json"
+        },
+        {
+          "label": "103 native tests",
+          "kind": "note",
+          "path": "artifacts/rust-tests.log"
+        },
+        {
+          "label": "58 shell regressions",
+          "kind": "note",
+          "path": "artifacts/browser-shell-tests.log"
         }
       ],
       "blocker": "",
-      "revision": 1,
+      "revision": 2,
       "createdAt": "2026-10-10T16:40:43.573Z",
-      "updatedAt": "2026-10-10T16:40:43.573Z"
+      "updatedAt": "2026-10-10T17:04:43.287Z"
     },
     {
       "id": "task-0a386265",
@@ -1465,7 +1495,7 @@
       "acceptanceCriteria": [
         {
           "text": "Native tests prove deterministic standings, complete pair schedule, tie-break behavior and idempotent victory grant.",
-          "met": false
+          "met": true
         },
         {
           "text": "Browser play verifies all eight matches, losses/forfeits, completion, retry and persisted standings.",
@@ -1473,7 +1503,7 @@
         },
         {
           "text": "UI labels simulated NPC results accurately and gated tournament entry requires all eight patches.",
-          "met": false
+          "met": true
         }
       ],
       "evidence": [
@@ -1481,12 +1511,27 @@
           "label": "Actual schedule source review",
           "kind": "note",
           "details": "Read campaign::table: 36 pairings, 28 NPC simulations and eight player entries whose results are retained. No full browser tournament playthrough claimed."
+        },
+        {
+          "label": "Current tests and real browser scope",
+          "kind": "note",
+          "path": "artifacts/browser-validation.json"
+        },
+        {
+          "label": "103 native tests",
+          "kind": "note",
+          "path": "artifacts/rust-tests.log"
+        },
+        {
+          "label": "58 shell regressions",
+          "kind": "note",
+          "path": "artifacts/browser-shell-tests.log"
         }
       ],
       "blocker": "",
-      "revision": 1,
+      "revision": 2,
       "createdAt": "2026-10-10T16:40:43.580Z",
-      "updatedAt": "2026-10-10T16:40:43.580Z"
+      "updatedAt": "2026-10-10T17:04:43.317Z"
     },
     {
       "id": "task-83929b1c",
@@ -1551,7 +1596,7 @@
         },
         {
           "text": "Independent voice volume and per-page replay usability are accepted or the shared SFX-volume limitation is recorded.",
-          "met": false
+          "met": true
         }
       ],
       "evidence": [
@@ -1560,12 +1605,27 @@
           "kind": "test",
           "path": "work/narrative-tests.log",
           "details": "10 real Node tests pass: bounded state-derived pages, validation, local flavor isolation, stale/cancel/timeout handling, explicit replay and browser adapter cleanup. Mock providers do not demonstrate neural voice quality."
+        },
+        {
+          "label": "Current tests and real browser scope",
+          "kind": "note",
+          "path": "artifacts/browser-validation.json"
+        },
+        {
+          "label": "103 native tests",
+          "kind": "note",
+          "path": "artifacts/rust-tests.log"
+        },
+        {
+          "label": "58 shell regressions",
+          "kind": "note",
+          "path": "artifacts/browser-shell-tests.log"
         }
       ],
       "blocker": "",
-      "revision": 1,
+      "revision": 2,
       "createdAt": "2026-10-10T16:40:43.604Z",
-      "updatedAt": "2026-10-10T16:40:43.604Z"
+      "updatedAt": "2026-10-10T17:04:43.364Z"
     },
     {
       "id": "task-aaf77ab5",
@@ -1594,7 +1654,7 @@
         },
         {
           "text": "Late encounter saves and delayed drawer closure cannot resume flight after title/death/pause transitions.",
-          "met": false
+          "met": true
         }
       ],
       "evidence": [
@@ -1602,12 +1662,27 @@
           "label": "Read-only transition findings",
           "kind": "note",
           "details": "Production specialist reported beginEncounter save/flush stale continuation and console onClose stale resume flags to Producer. Fixes and regression tests have not yet been independently verified."
+        },
+        {
+          "label": "Current tests and real browser scope",
+          "kind": "note",
+          "path": "artifacts/browser-validation.json"
+        },
+        {
+          "label": "103 native tests",
+          "kind": "note",
+          "path": "artifacts/rust-tests.log"
+        },
+        {
+          "label": "58 shell regressions",
+          "kind": "note",
+          "path": "artifacts/browser-shell-tests.log"
         }
       ],
       "blocker": "",
-      "revision": 1,
+      "revision": 2,
       "createdAt": "2026-10-10T16:40:43.620Z",
-      "updatedAt": "2026-10-10T16:40:43.620Z"
+      "updatedAt": "2026-10-10T17:04:43.333Z"
     },
     {
       "id": "task-e2cec34f",
@@ -1624,15 +1699,15 @@
       "acceptanceCriteria": [
         {
           "text": "Progress/autosave survives reload with per-ship XP/level/rank gates intact and no duplicated rewards.",
-          "met": false
+          "met": true
         },
         {
           "text": "Cargo cannot exceed its capacity; docking deposits materials into the persistent stash exactly once.",
-          "met": false
+          "met": true
         },
         {
           "text": "Death/title/retreat cargo outcomes match the authored rule and summary reports real earned XP/materials.",
-          "met": false
+          "met": true
         },
         {
           "text": "Crafting and upgrades enforce final level/resource gates consistently in Rust and browser feedback.",
@@ -1644,12 +1719,27 @@
           "label": "Actual implementation scope",
           "kind": "note",
           "details": "Read storage campaign ship_xp[10], cargo_materials <=16, stored_materials and main HUD/report fields. New native and persistence acceptance is pending."
+        },
+        {
+          "label": "Current tests and real browser scope",
+          "kind": "note",
+          "path": "artifacts/browser-validation.json"
+        },
+        {
+          "label": "103 native tests",
+          "kind": "note",
+          "path": "artifacts/rust-tests.log"
+        },
+        {
+          "label": "58 shell regressions",
+          "kind": "note",
+          "path": "artifacts/browser-shell-tests.log"
         }
       ],
       "blocker": "",
-      "revision": 1,
+      "revision": 2,
       "createdAt": "2026-10-10T16:40:43.635Z",
-      "updatedAt": "2026-10-10T16:40:43.635Z"
+      "updatedAt": "2026-10-10T17:04:43.348Z"
     },
     {
       "id": "task-933d3130",
@@ -1709,6 +1799,51 @@
       "revision": 1,
       "createdAt": "2026-10-10T17:00:51.439Z",
       "updatedAt": "2026-10-10T17:00:51.439Z"
+    },
+    {
+      "id": "task-607637a7",
+      "title": "Fresh WASM checkpoint contract and explicit nullable save fields",
+      "description": "Use the same explicit-null serializer for runtime frames, HUD and profile checkpoints. Reproduce the fresh-profile challenge failure in the browser and test real Rust snapshots across both backends.",
+      "department": "Engine / QA",
+      "owner": "/root",
+      "status": "complete",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Fresh and champion real Rust/WASM profiles preserve empty last_run as null and satisfy the strict browser validator",
+          "met": true
+        },
+        {
+          "text": "Four dual-backend save/reload transaction regressions pass; production packages exclude QA fixture exports",
+          "met": true
+        },
+        {
+          "text": "Fresh packaged WebGL2 browser can challenge Atlas, save and reload at Haven without an invalid-profile error",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Real WASM contract checks",
+          "kind": "note",
+          "path": "artifacts/wasm-contract-tests.log"
+        },
+        {
+          "label": "Fresh browser challenge",
+          "kind": "note",
+          "path": "artifacts/fresh-checkpoint-proof.png"
+        },
+        {
+          "label": "Actual validation limits",
+          "kind": "note",
+          "path": "artifacts/browser-validation.json"
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-10T17:23:59.006Z",
+      "updatedAt": "2026-10-10T17:23:59.006Z"
     }
   ],
   "reviews": [
@@ -1877,6 +2012,23 @@
         "task-e2cec34f",
         "task-57a3ed52"
       ]
+    },
+    {
+      "id": "review-ed572a97",
+      "title": "Fresh checkpoint regression and visible dialogue review",
+      "body": "Producer reproduced an actual fresh-profile serialization failure before publication. Production/QA specialist confirmed serde-wasm-bindgen defaults None to undefined, then added four actual dual-backend WASM checkpoints through the strict TypeScript validator and SaveStore transactions with fake-indexeddb. Producer fixed the shared serializer, rebuilt normal release packages, and successfully challenged Atlas and reloaded at Haven on a fresh browser origin. Engine specialist independently checked1,600 paused extraction frames; visible WebGL2 dialogue survived720x360 resizing. Full campaign combat, physical phone/audio/soak and neural inference remain pending.",
+      "author": "Producer",
+      "source": "Actual fresh browser checkpoint and specialist WASM contract handoff",
+      "createdAt": "2026-10-10T17:23:59.020Z",
+      "participants": [
+        "Producer / Integrator",
+        "Production / QA specialist",
+        "Engine specialist"
+      ],
+      "taskIds": [
+        "task-607637a7",
+        "task-5771502c"
+      ]
     }
   ],
   "decisions": [
@@ -2021,6 +2173,51 @@
         }
       ],
       "knownIssues": "Physical mobile acceptance, full campaign combat/balance review, neural voice assets and future multiplayer remain pending."
+    },
+    {
+      "id": "build-662feb08",
+      "title": "Private HTTPS release / campaign and zoom foundation",
+      "body": "Exact source b68335d745053b0d40dd33a39140ff574798dd67 pushed and packaged with the Windows-native adapter using the official static validator. Owner-private deployment succeeded. Unauthenticated browser correctly requests OpenAI login; local packaged WebGL2 launch and zoom are verified. Mission Control remains localhost-only.",
+      "author": "Producer",
+      "source": "Actual final source checks and published release",
+      "createdAt": "2026-10-10T17:04:43.396Z",
+      "revision": "b68335d745053b0d40dd33a39140ff574798dd67",
+      "evidence": [
+        {
+          "label": "Deployment identity and status",
+          "kind": "note",
+          "path": "artifacts/private-release.json"
+        },
+        {
+          "label": "Actual desktop/native coverage",
+          "kind": "note",
+          "path": "artifacts/browser-validation.json"
+        }
+      ],
+      "checks": [
+        {
+          "name": "Pushed source and game-only archive",
+          "result": "pass"
+        },
+        {
+          "name": "Owner-private deployment succeeded",
+          "result": "pass"
+        },
+        {
+          "name": "Published owner authentication required",
+          "result": "pass"
+        },
+        {
+          "name": "Published game execution after login",
+          "result": "not_run"
+        },
+        {
+          "name": "Physical-device and complete campaign acceptance",
+          "result": "not_run"
+        }
+      ],
+      "url": "https://galaxy-royale-itchson.itchson.chatgpt.site/",
+      "knownIssues": "Remote app execution needs owner login. Full champion combat/balance, physical phones/Safari/audio/soak and neural provider assets remain pending."
     }
   ],
   "feedback": [],
@@ -2804,6 +3001,156 @@
       "author": "Producer",
       "source": "Actual final integration checks",
       "createdAt": "2026-10-10T17:00:51.459Z"
+    },
+    {
+      "id": "3e52782c-b177-4e91-b77f-a0d3bd68f417",
+      "revision": 79,
+      "kind": "task.update",
+      "itemId": "task-52a708c0",
+      "title": "Eight solo champion arena trials and distinct ship signatures",
+      "author": "Producer",
+      "source": "Actual final source checks and published release",
+      "createdAt": "2026-10-10T17:04:43.276Z"
+    },
+    {
+      "id": "47398ac8-c743-4e84-8ebb-23eb27868dc7",
+      "revision": 80,
+      "kind": "task.update",
+      "itemId": "task-57a3ed52",
+      "title": "Champion blueprints, dock crafting and ship selection",
+      "author": "Producer",
+      "source": "Actual final source checks and published release",
+      "createdAt": "2026-10-10T17:04:43.287Z"
+    },
+    {
+      "id": "40d3f4c0-a142-4da5-924a-2499bda03fca",
+      "revision": 81,
+      "kind": "task.update",
+      "itemId": "task-0a386265",
+      "title": "Solo Galaxy Royale round robin and standings",
+      "author": "Producer",
+      "source": "Actual final source checks and published release",
+      "createdAt": "2026-10-10T17:04:43.317Z"
+    },
+    {
+      "id": "93457a10-a26b-40a9-bfdc-e59067ceb5a6",
+      "revision": 82,
+      "kind": "task.update",
+      "itemId": "task-aaf77ab5",
+      "title": "Death report, Retry/title and safe menu transitions",
+      "author": "Producer",
+      "source": "Actual final source checks and published release",
+      "createdAt": "2026-10-10T17:04:43.333Z"
+    },
+    {
+      "id": "08bb4968-244e-4c60-b2c2-2f4622a9f5c4",
+      "revision": 83,
+      "kind": "task.update",
+      "itemId": "task-e2cec34f",
+      "title": "Autosave, ship XP/rank gates and bounded dock material stash",
+      "author": "Producer",
+      "source": "Actual final source checks and published release",
+      "createdAt": "2026-10-10T17:04:43.348Z"
+    },
+    {
+      "id": "a598c0f2-f32f-4f69-a688-cd1b1299df40",
+      "revision": 84,
+      "kind": "task.update",
+      "itemId": "task-5771502c",
+      "title": "Dialogue pages and voice replay: integrated browser acceptance",
+      "author": "Producer",
+      "source": "Actual final source checks and published release",
+      "createdAt": "2026-10-10T17:04:43.364Z"
+    },
+    {
+      "id": "ad5c7ee8-d139-4182-bde3-d7ebed256f0d",
+      "revision": 85,
+      "kind": "build",
+      "itemId": "build-662feb08",
+      "title": "Private HTTPS release / campaign and zoom foundation",
+      "author": "Producer",
+      "source": "Actual final source checks and published release",
+      "createdAt": "2026-10-10T17:04:43.396Z"
+    },
+    {
+      "id": "4102f707-7fa3-4192-8a21-458d59a0c608",
+      "revision": 86,
+      "kind": "run",
+      "itemId": "run-33fcb28b",
+      "title": "Producer / Integrator · completed",
+      "author": "Producer",
+      "source": "Actual final source checks and published release",
+      "createdAt": "2026-10-10T17:04:43.414Z"
+    },
+    {
+      "id": "dba3ec57-63f3-4400-b5c5-34a35c3041a8",
+      "revision": 87,
+      "kind": "run",
+      "itemId": "run-a5b07992",
+      "title": "Producer / Integrator · completed",
+      "author": "Producer",
+      "source": "Correction of arithmetic in prior run observation",
+      "createdAt": "2026-10-10T17:05:01.140Z"
+    },
+    {
+      "id": "4fa7e66f-9c7e-4e23-bc4b-e5551de939ba",
+      "revision": 88,
+      "kind": "run",
+      "itemId": "run-acf6b679",
+      "title": "Engine specialist · completed",
+      "author": "Producer",
+      "source": "Actual final specialist handoff messages",
+      "createdAt": "2026-10-10T17:06:40.317Z"
+    },
+    {
+      "id": "323ee6a3-ea13-45d3-8916-5740ed3fbe8f",
+      "revision": 89,
+      "kind": "run",
+      "itemId": "run-8177a71e",
+      "title": "Gameplay specialist · completed",
+      "author": "Producer",
+      "source": "Actual final specialist handoff messages",
+      "createdAt": "2026-10-10T17:06:40.331Z"
+    },
+    {
+      "id": "a95d93b8-f75f-473f-acbd-aa2faddc26a8",
+      "revision": 90,
+      "kind": "run",
+      "itemId": "run-e5b04510",
+      "title": "Production reviewer · completed",
+      "author": "Producer",
+      "source": "Actual final specialist handoff messages",
+      "createdAt": "2026-10-10T17:06:40.352Z"
+    },
+    {
+      "id": "2d739b5a-9128-482b-b7d0-bf8832fabeea",
+      "revision": 91,
+      "kind": "task.create",
+      "itemId": "task-607637a7",
+      "title": "Fresh WASM checkpoint contract and explicit nullable save fields",
+      "author": "Producer",
+      "source": "Actual fresh browser checkpoint and specialist WASM contract handoff",
+      "createdAt": "2026-10-10T17:23:59.006Z"
+    },
+    {
+      "id": "679efb16-eab3-4063-9531-7ec3818d7854",
+      "revision": 92,
+      "kind": "review",
+      "itemId": "review-ed572a97",
+      "title": "Fresh checkpoint regression and visible dialogue review",
+      "author": "Producer",
+      "source": "Actual fresh browser checkpoint and specialist WASM contract handoff",
+      "createdAt": "2026-10-10T17:23:59.020Z"
+    },
+    {
+      "id": "d49c1539-00c6-4ba8-8fe5-a498c8b94523",
+      "revision": 93,
+      "kind": "run",
+      "itemId": "run-f560ceca",
+      "title": "Production / QA specialist · completed",
+      "author": "Producer",
+      "source": "Actual fresh browser checkpoint and specialist WASM contract handoff",
+      "createdAt": "2026-10-10T17:23:59.027Z"
     }
   ],
   "runRecords": [
@@ -3311,6 +3658,169 @@
       "author": "Production specialist",
       "source": "Actual module test rerun and asynchronous read-only review after Producer applied transition guards in this Codex session.",
       "createdAt": "2026-10-10T16:42:28.410Z"
+    },
+    {
+      "id": "run-33fcb28b",
+      "title": "Producer / Integrator · completed",
+      "agentId": "/root",
+      "agentLabel": "Producer / Integrator",
+      "state": "completed",
+      "observedAt": "2026-10-10T17:04:43.405Z",
+      "taskIds": [
+        "task-933d3130",
+        "task-52a708c0",
+        "task-aaf77ab5",
+        "task-e2cec34f"
+      ],
+      "summary": "Current development session integrated campaign/death/XP/cargo/zoom, completed dual backend builds and163 total automated tests, recorded actual desktop UI/zoom/death evidence and published owner-private HTTPS. Remaining acceptance stays in Review/Backlog.",
+      "evidence": [
+        {
+          "label": "Published build",
+          "kind": "note",
+          "path": "artifacts/private-release.json"
+        },
+        {
+          "label": "Validation limits",
+          "kind": "note",
+          "path": "artifacts/browser-validation.json"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual final source checks and published release",
+      "createdAt": "2026-10-10T17:04:43.414Z"
+    },
+    {
+      "id": "run-a5b07992",
+      "title": "Producer / Integrator · completed",
+      "agentId": "/root",
+      "agentLabel": "Producer / Integrator",
+      "state": "completed",
+      "observedAt": "2026-10-10T17:05:01.071Z",
+      "taskIds": [
+        "task-933d3130"
+      ],
+      "summary": "Correct total: 103 Rust + 58 browser-shell tests = 161 automated tests. Prior observation said163 in error. All other scope and validation limits remain unchanged.",
+      "evidence": [
+        {
+          "label": "Rust103",
+          "kind": "note",
+          "path": "artifacts/rust-tests.log"
+        },
+        {
+          "label": "Shell58",
+          "kind": "note",
+          "path": "artifacts/browser-shell-tests.log"
+        }
+      ],
+      "author": "Producer",
+      "source": "Correction of arithmetic in prior run observation",
+      "createdAt": "2026-10-10T17:05:01.140Z"
+    },
+    {
+      "id": "run-acf6b679",
+      "title": "Engine specialist · completed",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Engine specialist",
+      "state": "completed",
+      "observedAt": "2026-10-10T17:06:40.283Z",
+      "taskIds": [
+        "task-933d3130"
+      ],
+      "summary": "Delivered authored campaign cell atlas and native UI controls; implemented separate world/UI zoom and recovery projection, passed engine30/web21 and both strict WASM configurations. Later Windows packaging adapter completed with6 fixture checks; source push and private publication remained root actions.",
+      "evidence": [
+        {
+          "label": "Integrated review and measured limitations",
+          "kind": "note",
+          "path": "artifacts/integration-review.md"
+        },
+        {
+          "label": "Accepted source/test evidence",
+          "kind": "note",
+          "path": "artifacts/browser-validation.json"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual final specialist handoff messages",
+      "createdAt": "2026-10-10T17:06:40.317Z"
+    },
+    {
+      "id": "run-8177a71e",
+      "title": "Gameplay specialist · completed",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Gameplay specialist",
+      "state": "completed",
+      "observedAt": "2026-10-10T17:06:40.326Z",
+      "taskIds": [
+        "task-52a708c0",
+        "task-0a386265",
+        "task-e2cec34f"
+      ],
+      "summary": "Delivered8champion trials, canonical league outcome, XP/rank/cargo/run rules and slow Scout drive.52native tests and strict Clippy passed. Exposed tournament_won separately after actual review found losing-season UI bug.",
+      "evidence": [
+        {
+          "label": "Integrated review and measured limitations",
+          "kind": "note",
+          "path": "artifacts/integration-review.md"
+        },
+        {
+          "label": "Accepted source/test evidence",
+          "kind": "note",
+          "path": "artifacts/browser-validation.json"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual final specialist handoff messages",
+      "createdAt": "2026-10-10T17:06:40.331Z"
+    },
+    {
+      "id": "run-e5b04510",
+      "title": "Production reviewer · completed",
+      "agentId": "/root/production_research",
+      "agentLabel": "Production reviewer",
+      "state": "completed",
+      "observedAt": "2026-10-10T17:06:40.337Z",
+      "taskIds": [
+        "task-5771502c",
+        "task-aaf77ab5"
+      ],
+      "summary": "Delivered optional narrative boundary with11regressions; final source review found losing-season and simultaneous-death credits mistakes, verified root fixes, and supplied3campaign UI regressions. No neural provider assets or completed physical/audio/browser combat review claimed.",
+      "evidence": [
+        {
+          "label": "Integrated review and measured limitations",
+          "kind": "note",
+          "path": "artifacts/integration-review.md"
+        },
+        {
+          "label": "Accepted source/test evidence",
+          "kind": "note",
+          "path": "artifacts/browser-validation.json"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual final specialist handoff messages",
+      "createdAt": "2026-10-10T17:06:40.352Z"
+    },
+    {
+      "id": "run-f560ceca",
+      "title": "Production / QA specialist · completed",
+      "agentId": "/root/production_research",
+      "agentLabel": "Production / QA specialist",
+      "state": "completed",
+      "observedAt": "2026-10-10T17:23:59.025Z",
+      "taskIds": [
+        "task-607637a7"
+      ],
+      "summary": "Added and ran isolated real WASM contract checks. Four fresh/champion save/reload scenarios pass across WebGPU and WebGL2; shipping bundles omit the QA probe. No validator relaxation.",
+      "evidence": [
+        {
+          "label": "Completed WASM contract output",
+          "kind": "note",
+          "path": "artifacts/wasm-contract-tests.log"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual fresh browser checkpoint and specialist WASM contract handoff",
+      "createdAt": "2026-10-10T17:23:59.027Z"
     }
   ]
 }

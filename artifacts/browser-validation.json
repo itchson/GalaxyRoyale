@@ -106,7 +106,32 @@
       "check": "Local neural dialogue/voice inference",
       "result": "pending",
       "details": "Optional injected bridge contract and authored fallback implemented. No actual neural provider or generated voice assets shipped."
+    },
+    {
+      "check": "Authored Atlas portrait and five-page challenge dialogue",
+      "result": "pass",
+      "evidence": "dialogue-720.png",
+      "details": "Visible production WebGL2 tab, 720x360 desktop viewport. All five pages and final Challenge action remain readable; native authored portrait and panel remain present through resizing."
+    },
+    {
+      "check": "Repeated paused pixel extraction retains portrait and panel",
+      "result": "pass",
+      "evidence": "render-reuse-proof.json",
+      "scope": "Native engine extraction only",
+      "details": "1,600 paused renders at both zoom limits across five dialogue pages; reused buffers preserve finite transforms, palette/material state and stable opaque pixel geometry. An invisible in-app tab lost its GPU surface; a visible tab did not reproduce this. No physical-device claim."
+    },
+    {
+      "check": "Fresh campaign checkpoint after real challenge and reload",
+      "result": "pass",
+      "evidence": "fresh-checkpoint-proof.png",
+      "details": "Fresh origin4181 first exposed Invalid profile snapshot for Rust None→undefined. Corrected dual-WASM build uses explicit null. Fresh origin4182 challenged Atlas through the fifth dialogue page, persisted without error, entered the actual encounter, then reloaded and launched at Haven100/100 with no popup or console error."
+    },
+    {
+      "check": "Actual WASM optional-value and save boundary regression",
+      "result": "pass",
+      "evidence": "wasm-contract-tests.log",
+      "details": "pnpm test:wasm-contract: four real fresh/champion Rust snapshots across WebGPU/WebGL2 pass strict TypeScript validation, preserve last_run:null in JSON, and survive SaveStore save/reload using fake-indexeddb transaction emulation. Both production JS/WASM packages exclude the QA fixture export."
     }
   ],
-  "updatedAt": "2026-10-10T17:00:51.384Z"
+  "updatedAt": "2026-10-10T17:23:58.979Z"
 }

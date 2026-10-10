@@ -58,6 +58,7 @@ See `docs/CONTRACTS.md`, `docs/ART_DIRECTION.md`, `docs/ENGINE.md`, `docs/DEBUG_
 cargo test --workspace --locked
 cargo clippy -p engine_core -p game_core --all-targets -- -D warnings
 pnpm test
+pnpm test:wasm-contract
 pnpm typecheck
 pnpm build
 ```
@@ -65,6 +66,8 @@ pnpm build
 Add `?qa=1` to enable explicit test scenes and the read-only `window.galaxyQA.report()` capture. The scene toolbar and performance overlay are hidden by default: add `&toolbar=1` or `&metrics=1` to show them. In QA mode, the backtick console also accepts `SCENE dock|belt|combat|site|boss-dart|boss-bastion|boss-coil|champion-0..7|tournament|stress|die`; close it to resume a running session. `?renderer=webgl2` forces fallback; `?qa=1&fail-webgpu=1` rejects the first initializer and tests automatic fallback. `?qa=1&scene=stress` exercises at least 80,000 visible quads, 160 enemy heads, 300 projectiles, and 2,000 particles. `?qa=1&touch=1` exposes mobile controls for desktop layout checks; this does not validate physical touch hardware. Diagnostics do not award free progression.
 
 Desktop packaged-game offline reload and launch were verified after stopping the local preview server: the title, WASM runtime and flight loaded from the service-worker cache. Phone-specific installation, updates and lifecycle acceptance remain pending.
+
+The WASM contract check builds isolated QA packages under `work/` and validates actual Rust fresh/champion snapshots through the TypeScript schema and IndexedDB transactions for both backends. Optional Rust values serialize as explicit `null`; a fresh ship's empty run history must remain a valid save. QA fixture exports are excluded from the shipped bundles.
 
 ## Validation boundaries and next content
 

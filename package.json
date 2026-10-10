@@ -13,6 +13,7 @@
     "build:wasm": "node scripts/build-wasm.mjs",
     "typecheck": "tsc --noEmit",
     "test": "node --experimental-transform-types --test apps/studio/test/*.test.mjs scripts/test/*.test.mjs",
+    "test:wasm-contract": "node --experimental-transform-types scripts/test-wasm-contract.mjs",
     "studio": "node scripts/studio-cli.mjs",
     "format": "prettier --write apps/game/src apps/game/index.html scripts"
   },

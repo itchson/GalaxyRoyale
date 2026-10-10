@@ -40,6 +40,25 @@ struct FrameResponse {
 fn js(error: impl std::fmt::Display) -> JsValue {
     JsValue::from_str(&error.to_string())
 }
+// The browser save and HUD contracts use explicit null for optional values.
+// serde_wasm_bindgen::to_value defaults to undefined for Rust Option::None.
+fn to_js(value: &impl Serialize) -> Result<JsValue, JsValue> {
+    value
+        .serialize(&serde_wasm_bindgen::Serializer::new().serialize_missing_as_null(true))
+        .map_err(js)
+}
+/// Headless contract proof compiled only into QA bundles, never the game release.
+#[cfg(feature = "qa-contract")]
+#[wasm_bindgen]
+pub fn checkpoint_contract(stage: &str) -> Result<JsValue, JsValue> {
+    let mut game = Game::new(Profile::default());
+    match stage {
+        "fresh" => {}
+        "champion" => game.diagnostic("champion-0"),
+        _ => return Err(js("Unknown checkpoint contract stage")),
+    }
+    to_js(game.profile())
+}
 fn now() -> f64 {
     web_sys::window()
         .and_then(|w| w.performance())
@@ -170,7 +189,7 @@ impl Galaxy {
         } else {
             None
         };
-        serde_wasm_bindgen::to_value(&FrameResponse {
+        to_js(&FrameResponse {
             hud,
             events: self.game.take_events(),
             profile,
@@ -178,13 +197,12 @@ impl Galaxy {
             simulation_ms,
             render_ms,
         })
-        .map_err(js)
     }
     pub fn hud(&self) -> Result<JsValue, JsValue> {
-        serde_wasm_bindgen::to_value(&self.game.hud()).map_err(js)
+        to_js(&self.game.hud())
     }
     pub fn profile(&self) -> Result<JsValue, JsValue> {
-        serde_wasm_bindgen::to_value(self.game.profile()).map_err(js)
+        to_js(self.game.profile())
     }
     pub fn purchase(&mut self, id: &str) -> Result<(), JsValue> {
         self.game.purchase(id).map_err(js)

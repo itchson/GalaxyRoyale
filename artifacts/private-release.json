@@ -1,0 +1,18 @@
+{
+  "commit_sha": "b68335d745053b0d40dd33a39140ff574798dd67",
+  "id": "appgdep_6aca6faae1948191a481c6701ebb4d61",
+  "project_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93",
+  "title": "Galaxy Royale",
+  "version_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93~appgver_59fb1ad950e48191af8a1db503129a62",
+  "type": "publish",
+  "status": "succeeded",
+  "url": "https://galaxy-royale-itchson.itchson.chatgpt.site",
+  "has_mcp": false,
+  "screenshot_asset_pointer": null,
+  "provider_deployment_id": "site---6aca50f5b1bc81918526a6ee969aac93",
+  "failure_message": null,
+  "env_set_revision": 0,
+  "updated_at": "2026-10-10T17:02:55.639276+00:00",
+  "browserAccess": "Owner login required; unauthenticated in-app browser reached OpenAI login. Published app execution was checked locally in the same packaged WebGL2 build, not behind the remote login.",
+  "archiveContent": "Only game dist including18 cached assets and normalized .openai/hosting.json; local studio excluded."
+}

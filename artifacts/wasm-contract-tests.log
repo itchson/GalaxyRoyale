@@ -1,0 +1,97 @@
+(node:52928) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+Building isolated webgpu WASM checkpoint contract.
+   Compiling proc-macro2 v1.0.107
+   Compiling unicode-ident v1.0.26
+   Compiling quote v1.0.47
+   Compiling wasm-bindgen-shared v0.2.129
+   Compiling rustversion v1.0.23
+   Compiling bumpalo v3.20.3
+   Compiling serde_core v1.0.229
+   Compiling foldhash v0.2.0
+   Compiling futures-core v0.3.34
+   Compiling slab v0.4.12
+   Compiling once_cell v1.21.4
+   Compiling futures-task v0.3.34
+   Compiling cfg-if v1.0.5
+   Compiling pin-project-lite v0.2.17
+   Compiling thiserror v2.0.21
+   Compiling serde v1.0.229
+   Compiling zmij v1.0.23
+   Compiling equivalent v1.0.2
+   Compiling cfg_aliases v0.2.2
+   Compiling serde_json v1.0.151
+   Compiling rustc-hash v1.1.0
+   Compiling bitflags v2.13.2
+   Compiling memchr v2.8.3
+   Compiling log v0.4.34
+   Compiling raw-window-handle v0.6.2
+   Compiling static_assertions v1.1.0
+   Compiling itoa v1.0.18
+   Compiling spin v0.12.3
+   Compiling litrs v1.0.0
+   Compiling arrayvec v0.7.8
+   Compiling profiling v1.0.18
+   Compiling wgpu v30.0.1
+   Compiling hashbrown v0.17.1
+   Compiling futures-util v0.3.34
+   Compiling document-features v0.2.12
+   Compiling indexmap v2.14.2
+   Compiling hecs v0.11.2
+   Compiling wasm-bindgen v0.2.129
+   Compiling syn v3.0.7
+   Compiling glam v0.30.10
+   Compiling wasm-bindgen-macro-support v0.2.129
+   Compiling bytemuck_derive v1.12.1
+   Compiling serde_derive v1.0.229
+   Compiling thiserror-impl v2.0.21
+   Compiling bytemuck v1.25.2
+   Compiling naga-types v30.0.1
+   Compiling wasm-bindgen-macro v0.2.129
+   Compiling engine_core v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\engine_core)
+   Compiling game_core v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\game_core)
+   Compiling js-sys v0.3.106
+   Compiling web-sys v0.3.106
+   Compiling wasm-bindgen-futures v0.4.79
+   Compiling serde-wasm-bindgen v0.6.5
+   Compiling wgpu-types v30.0.1
+   Compiling game_web v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\game_web)
+    Finished `release` profile [optimized] target(s) in 42.46s
+PASS webgpu: fresh + champion checkpoints validate and persist; release excludes QA probe.
+Building isolated webgl2 WASM checkpoint contract.
+   Compiling once_cell v1.21.4
+   Compiling libm v0.2.16
+   Compiling autocfg v1.5.1
+   Compiling zerocopy v0.8.62
+   Compiling version_check v0.9.5
+   Compiling parking_lot_core v0.9.12
+   Compiling unicode-width v0.2.2
+   Compiling bit-vec v0.9.1
+   Compiling smallvec v1.16.3
+   Compiling naga v30.0.1
+   Compiling scopeguard v1.2.0
+   Compiling wgpu-hal v30.0.1
+   Compiling wgpu-core v30.0.1
+   Compiling wgpu v30.0.1
+   Compiling syn v2.0.119
+   Compiling lock_api v0.4.14
+   Compiling wasm-bindgen v0.2.129
+   Compiling codespan-reporting v0.13.1
+   Compiling slotmap v1.1.1
+   Compiling bit-set v0.10.0
+   Compiling num-traits v0.2.19
+   Compiling js-sys v0.3.106
+   Compiling zerocopy-derive v0.8.62
+   Compiling parking_lot v0.12.5
+   Compiling half v2.7.1
+   Compiling web-sys v0.3.106
+   Compiling wasm-bindgen-futures v0.4.79
+   Compiling serde-wasm-bindgen v0.6.5
+   Compiling wgpu-types v30.0.1
+   Compiling glow v0.17.0
+   Compiling wgpu-naga-bridge v30.0.1
+   Compiling wgpu-core-deps-wasm v30.0.1
+   Compiling game_web v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\game_web)
+    Finished `release` profile [optimized] target(s) in 38.56s
+PASS webgl2: fresh + champion checkpoints validate and persist; release excludes QA probe.
+PASS: four real WASM checkpoint/save/reload scenarios across two backends; no browser or GPU mocks.

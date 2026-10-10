@@ -20,6 +20,12 @@ Latest actual campaign/zoom integration review:
 - Scout baseline is now 100 speed / 260 acceleration, plus 2.5% per ship level through level12 and purchased drive ranks. Current native suites total 103 tests; current browser-shell suites total 58 after campaign regressions. Full campaign browser combat playthrough and physical-device acceptance remain pending.
 - A read-only Spark campaign review was launched with the parent's danger-full-access/never permissions. Its output stopped after partial source-reading commentary; no completed review was delivered or accepted. Native specialists and the producer performed the accepted reviews described above.
 
+Final real-browser challenge review:
+
+- Visible packaged WebGL2 dialogue retained its panel, portrait, world objects and all five pages after a 720×360 resize. A prior hidden in-app tab's disappearing surface was not reproduced in a visible tab; engine specialist independently checked 1,600 repeated paused frames, pooled table packing, animated portrait and both zoom limits without a renderer defect. Evidence: work/render-reuse-proof.json.
+- Pressing the actual final-page CHALLENGE on a fresh save exposed `Invalid profile snapshot`. Installed serde-wasm-bindgen defaults `Option::None` to JS `undefined`, while the explicit campaign save schema requires `last_run:null`. Producer added one canonical null serializer for actual frame/HUD/profile outputs; the validator remains strict.
+- On a fresh4182 origin with the corrected packaged WebGL2 build, the same five-page Atlas conversation successfully saved and launched the real Atlas encounter. The production specialist added an isolated real WASM-to-TypeScript/IndexedDB contract check using a QA-only fixture feature, with no GPU mock and no fixture in shipped bundles. Native/component acceptance does not replace the outstanding full campaign playthrough.
+
 Evidence: rust-tests.log, browser-shell-tests.log, engine/game proof artifacts, and browser captures added after their actual completion. No task is marked complete solely from this document.
 
 Additional actual review and integration:

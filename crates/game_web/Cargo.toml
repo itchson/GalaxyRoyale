@@ -11,6 +11,7 @@ crate-type = ["cdylib", "rlib"]
 default = ["webgpu"]
 webgpu = ["wgpu/webgpu"]
 webgl = ["wgpu/webgl"]
+qa-contract = []
 
 [dependencies]
 engine_core = { path = "../engine_core" }

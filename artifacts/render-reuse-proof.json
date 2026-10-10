@@ -1,0 +1,32 @@
+{
+  "checks": [
+    "real generated world and dialogue body extraction",
+    "page 1-5 text updates",
+    "portrait blink keeps geometry and opacity",
+    "repeated FrameBuilder clear and pooled batches",
+    "world/UI pixel counts preserved",
+    "128-transform table padding and slot ranges",
+    "finite camera-relative cell positions",
+    "UI material remains unlit"
+  ],
+  "paused": true,
+  "scenarios": [
+    {
+      "dialogue_pages": 5,
+      "frames": 800,
+      "quads_max": 18906,
+      "quads_min": 18899,
+      "zoom": 0.6000000238418579
+    },
+    {
+      "dialogue_pages": 5,
+      "frames": 800,
+      "quads_max": 13513,
+      "quads_min": 13506,
+      "zoom": 1.600000023841858
+    }
+  ],
+  "scope": "native extraction and exact CPU packing only; GPU presentation verified separately in the visible IAB tab",
+  "status": "passed",
+  "total_frames": 1600
+}
