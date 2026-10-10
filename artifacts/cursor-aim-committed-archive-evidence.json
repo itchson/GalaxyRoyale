@@ -1,0 +1,593 @@
+{
+  "recorded_utc": "2026-10-10T21:53:55.385586+00:00",
+  "scope": "Independent local committed-source/normal archive correspondence only; no deployment, authenticated browser, phone or listening acceptance",
+  "source_commit": "8b19c6cfdb599e7bc0e310e1960ac096ea1bc7a5",
+  "observed_head": "8b19c6cfdb599e7bc0e310e1960ac096ea1bc7a5",
+  "cache": "galaxy-37e3441c8c48302c",
+  "computed_cache": "galaxy-37e3441c8c48302c",
+  "source_count": 78,
+  "source_representations": [
+    {
+      "path": "Cargo.lock",
+      "accepted_build_input_sha256": "df228d9f83ef57321dcb768b79d948e9aa24456c0952e971fc8d6fcd7e806bdd",
+      "commit_blob_sha256": "df228d9f83ef57321dcb768b79d948e9aa24456c0952e971fc8d6fcd7e806bdd",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "Cargo.toml",
+      "accepted_build_input_sha256": "50b077a3fd8e0c8a42456948d6232ae86b2a1bbaa63652ee04da7848c776a3e3",
+      "commit_blob_sha256": "50b077a3fd8e0c8a42456948d6232ae86b2a1bbaa63652ee04da7848c776a3e3",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "README.md",
+      "accepted_build_input_sha256": "6e2985685c53f0424bf7e778aa7cace2f44cedb3180b5b6faadd5f427ed55389",
+      "commit_blob_sha256": "6e2985685c53f0424bf7e778aa7cace2f44cedb3180b5b6faadd5f427ed55389",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "apps/game/index.html",
+      "accepted_build_input_sha256": "d7918be48bb1bdbe531aa5231e12a6eb9ac301280e1ea1c96eb961c9ad30c332",
+      "commit_blob_sha256": "d7918be48bb1bdbe531aa5231e12a6eb9ac301280e1ea1c96eb961c9ad30c332",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "apps/game/public/fonts/OFL.txt",
+      "accepted_build_input_sha256": "690fda321d0ebce403249c8d61dadddcee09dc8813424cc5a8f982efcff9a9a3",
+      "commit_blob_sha256": "690fda321d0ebce403249c8d61dadddcee09dc8813424cc5a8f982efcff9a9a3",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "apps/game/public/fonts/RoyaleMono.ttf",
+      "accepted_build_input_sha256": "920710a69692bddc4edee8841ce221bceed9a1860af451d7d35f7519fddc466e",
+      "commit_blob_sha256": "920710a69692bddc4edee8841ce221bceed9a1860af451d7d35f7519fddc466e",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "apps/game/public/fonts/Tiny5.ttf",
+      "accepted_build_input_sha256": "eb4206abc0c73e9fe4fe93c034ea270578859c40a7e740c6207322413c5c4c91",
+      "commit_blob_sha256": "eb4206abc0c73e9fe4fe93c034ea270578859c40a7e740c6207322413c5c4c91",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "apps/game/public/icon-192.png",
+      "accepted_build_input_sha256": "f26b1bd9660be38bb35d08099ea056a5a22a4645f9e2f8ee399821a54d435b43",
+      "commit_blob_sha256": "f26b1bd9660be38bb35d08099ea056a5a22a4645f9e2f8ee399821a54d435b43",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "apps/game/public/icon-512.png",
+      "accepted_build_input_sha256": "d5eb97ed733784221989eb4ebf01fc57bab2d5d858ae8aa78bb0b028ee89e863",
+      "commit_blob_sha256": "d5eb97ed733784221989eb4ebf01fc57bab2d5d858ae8aa78bb0b028ee89e863",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "apps/game/public/icon.svg",
+      "accepted_build_input_sha256": "119c958934c7326508f45d53e543512008247bbf585d5d8ef7c89819194d2b0d",
+      "commit_blob_sha256": "119c958934c7326508f45d53e543512008247bbf585d5d8ef7c89819194d2b0d",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "apps/game/public/manifest.webmanifest",
+      "accepted_build_input_sha256": "2eb7555a102641e6f3040d3c79e68ddb11578c6c01327e29ed6e1fb3a688940f",
+      "commit_blob_sha256": "2eb7555a102641e6f3040d3c79e68ddb11578c6c01327e29ed6e1fb3a688940f",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "apps/game/src/audio.ts",
+      "accepted_build_input_sha256": "d74adf461c889a12ea1b36ad5888fc35121a79710a20bee8b53aaa70b67c94e8",
+      "commit_blob_sha256": "42bdc634e138689a280747fa68845960156e7f5c7f65ae01cc2ac3e3e833e233",
+      "comparison": "CRLF/LF representation only"
+    },
+    {
+      "path": "apps/game/src/campaign.css",
+      "accepted_build_input_sha256": "3cd7db9f11140017bf4a9482bbe86dcdfcfe21209092c9d32842efe93df9a4a7",
+      "commit_blob_sha256": "3cd7db9f11140017bf4a9482bbe86dcdfcfe21209092c9d32842efe93df9a4a7",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "apps/game/src/campaign.ts",
+      "accepted_build_input_sha256": "ffd8cb2dda128de4197265c9e3b351e743f4a8723b241ec9dbc4053dfb7e3ea9",
+      "commit_blob_sha256": "ffd8cb2dda128de4197265c9e3b351e743f4a8723b241ec9dbc4053dfb7e3ea9",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "apps/game/src/debug-console.css",
+      "accepted_build_input_sha256": "45181fad6a9ebe51d9f2ac731708d4df192ab2052e584601c14d1f63bca62ec6",
+      "commit_blob_sha256": "45181fad6a9ebe51d9f2ac731708d4df192ab2052e584601c14d1f63bca62ec6",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "apps/game/src/debug-console.ts",
+      "accepted_build_input_sha256": "a25fa0293e3526221315a49641df115aae74876984673a006e229120bbdf041e",
+      "commit_blob_sha256": "a25fa0293e3526221315a49641df115aae74876984673a006e229120bbdf041e",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "apps/game/src/dialogue.css",
+      "accepted_build_input_sha256": "fb590c04d06f85c372c6f302a1a7f6b6ab7fc92658d3c33617cf9cbfe6922f3a",
+      "commit_blob_sha256": "fb590c04d06f85c372c6f302a1a7f6b6ab7fc92658d3c33617cf9cbfe6922f3a",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "apps/game/src/dialogue.ts",
+      "accepted_build_input_sha256": "078560c02304863339bbb37d7f80cf8e0b8ed7a0cf53012582daf899c5aa74e1",
+      "commit_blob_sha256": "078560c02304863339bbb37d7f80cf8e0b8ed7a0cf53012582daf899c5aa74e1",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "apps/game/src/input.ts",
+      "accepted_build_input_sha256": "f87bcf312e904c9011b73798c407bc8daa77fbc5c3ac34186be60587e5028eb4",
+      "commit_blob_sha256": "f87bcf312e904c9011b73798c407bc8daa77fbc5c3ac34186be60587e5028eb4",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "apps/game/src/main.ts",
+      "accepted_build_input_sha256": "1fb17982f1766c81d5671c221c5759c197b6663aa52f60429c8cb233cbf6c7e9",
+      "commit_blob_sha256": "1fb17982f1766c81d5671c221c5759c197b6663aa52f60429c8cb233cbf6c7e9",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "apps/game/src/narrative.ts",
+      "accepted_build_input_sha256": "d047579bc3ff47e875794cc1214da4a352700753d51293e1337288358e75fe4d",
+      "commit_blob_sha256": "d047579bc3ff47e875794cc1214da4a352700753d51293e1337288358e75fe4d",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "apps/game/src/pixel-ui.ts",
+      "accepted_build_input_sha256": "4c0e19ec4d317a5586ccb2b3224dd4248328ae4437d85fa9e5b74ba1f87fbc56",
+      "commit_blob_sha256": "4c0e19ec4d317a5586ccb2b3224dd4248328ae4437d85fa9e5b74ba1f87fbc56",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "apps/game/src/storage.ts",
+      "accepted_build_input_sha256": "2340133e825315fa445469e640ab75e47c3d1bdb34fa332b1c52e68459f463b6",
+      "commit_blob_sha256": "2340133e825315fa445469e640ab75e47c3d1bdb34fa332b1c52e68459f463b6",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "apps/game/src/style.css",
+      "accepted_build_input_sha256": "c459520b8b65d179b193c1fe4961166a57a7083e0aff88c2df6333733bc6741c",
+      "commit_blob_sha256": "c459520b8b65d179b193c1fe4961166a57a7083e0aff88c2df6333733bc6741c",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "apps/game/src/vite-env.d.ts",
+      "accepted_build_input_sha256": "65996936fbb042915f7b74a200fcdde7e410f32a669b1ab9597cfaa4b0faddb5",
+      "commit_blob_sha256": "65996936fbb042915f7b74a200fcdde7e410f32a669b1ab9597cfaa4b0faddb5",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "apps/game/vite.config.ts",
+      "accepted_build_input_sha256": "a70ebdad007a8d8def37eb5fb83a85c2869be3edb69fcd51cbd104bc9d9bc698",
+      "commit_blob_sha256": "a70ebdad007a8d8def37eb5fb83a85c2869be3edb69fcd51cbd104bc9d9bc698",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "assets/pixels/atlas.json",
+      "accepted_build_input_sha256": "1bc8a66f0e0c5d6bb5d9f6a3349032d10d854cb023cd70971e590d61c900051f",
+      "commit_blob_sha256": "67635f779449feac9d1b24ce1aa264aadb10d7bf70cd54aa5542de44f855876f",
+      "comparison": "CRLF/LF representation only"
+    },
+    {
+      "path": "assets/pixels/boss-atlas.json",
+      "accepted_build_input_sha256": "0a946b13cef528578c6863b73fae0b9c2c1fd5ecdb6232bd8b37626875b9e3a3",
+      "commit_blob_sha256": "68b83e1d83a94993074f06bcb3ffc23a61d9542474fcbac42a11150114e3c850",
+      "comparison": "CRLF/LF representation only"
+    },
+    {
+      "path": "assets/pixels/isotope-scar-atlas.json",
+      "accepted_build_input_sha256": "5c3d293f47d62d4639207aea9d71c577f6c913cdeb5f9ecad76117febfec73ce",
+      "commit_blob_sha256": "dc30b12a2d61f1f6209d36d35b4717e9332fe7b34adbe5f47779a2d214fc4e80",
+      "comparison": "CRLF/LF representation only"
+    },
+    {
+      "path": "assets/pixels/mote-atlas.json",
+      "accepted_build_input_sha256": "004c24eefeccbe25d836dd8ad1ff00346f86879492c2bff3fe828721dc838714",
+      "commit_blob_sha256": "fee68d81defca47f8bb7a4d6c177f7f70bb00d40b8df38d568e82eabf837381a",
+      "comparison": "CRLF/LF representation only"
+    },
+    {
+      "path": "assets/pixels/riveter-atlas.json",
+      "accepted_build_input_sha256": "6bbf5a1333b486d54a7fb7f3600d89220dd774e1e80e9a699ad4edf75231247d",
+      "commit_blob_sha256": "6a312b6e0d957e6bb95dfefe5d44563d9c53125a84f5b00586aedc561ee742ae",
+      "comparison": "CRLF/LF representation only"
+    },
+    {
+      "path": "assets/ui/atlas.json",
+      "accepted_build_input_sha256": "d2424ecad386331ad97b4328258b2dbd1d0251a8de28de6bba98042e2a54f088",
+      "commit_blob_sha256": "e06db7d94ccd1f12a4c0928e7a7c30c7725af2a81de958c5de0c2934598e7e75",
+      "comparison": "CRLF/LF representation only"
+    },
+    {
+      "path": "assets/ui/campaign-atlas.json",
+      "accepted_build_input_sha256": "27c99be6b55e0e17a7d5149e566aedfa269fb266234ca24b44fa34c103524738",
+      "commit_blob_sha256": "a7950c45e92c18d5305e6ecb3c1f66ee308cab9489473a73b4b4352a852c8aa0",
+      "comparison": "CRLF/LF representation only"
+    },
+    {
+      "path": "assets/ui/champion-patches-atlas.json",
+      "accepted_build_input_sha256": "c818c0531347876c1b7c72f460e4045bb4056faa8d2492614787032c46f84b1b",
+      "commit_blob_sha256": "9916ba83ccec6d7df7b7061d8aef54a02f408666c993e33dc5a5872d8835580b",
+      "comparison": "CRLF/LF representation only"
+    },
+    {
+      "path": "crates/engine_core/Cargo.toml",
+      "accepted_build_input_sha256": "0c7948f6d4cc4f43132f9c8c7c7f5d295b8003d00b15836a295bfe07e9c892bd",
+      "commit_blob_sha256": "0c7948f6d4cc4f43132f9c8c7c7f5d295b8003d00b15836a295bfe07e9c892bd",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/engine_core/src/camera.rs",
+      "accepted_build_input_sha256": "b08164aa6c9a7e8364ee90e7205e70b702d2013c1861254da33610cb81fdf759",
+      "commit_blob_sha256": "b08164aa6c9a7e8364ee90e7205e70b702d2013c1861254da33610cb81fdf759",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/engine_core/src/frame.rs",
+      "accepted_build_input_sha256": "4d8b1a965e1e98168dc62db3bf2f3aaf707b6b7be4d9d0b56225a73d0630ebc6",
+      "commit_blob_sha256": "4d8b1a965e1e98168dc62db3bf2f3aaf707b6b7be4d9d0b56225a73d0630ebc6",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/engine_core/src/lib.rs",
+      "accepted_build_input_sha256": "eb84c4af2c35898ea6337503c2b169105ae5830f91c71ac7b441e7c114c6035a",
+      "commit_blob_sha256": "eb84c4af2c35898ea6337503c2b169105ae5830f91c71ac7b441e7c114c6035a",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/engine_core/src/pixel_rig.rs",
+      "accepted_build_input_sha256": "e18ed9ca3ac3a459c9c611a7083494d07d7aa9ed624453df623b9c64730b6582",
+      "commit_blob_sha256": "e18ed9ca3ac3a459c9c611a7083494d07d7aa9ed624453df623b9c64730b6582",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/engine_core/src/pixels.rs",
+      "accepted_build_input_sha256": "3e9f228b54442f66a48a26d0a932b694b6cc22386846d28b7adda0e409f95b5c",
+      "commit_blob_sha256": "3e9f228b54442f66a48a26d0a932b694b6cc22386846d28b7adda0e409f95b5c",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/engine_core/src/topology.rs",
+      "accepted_build_input_sha256": "72b22bedd285bf61d6e2a74a6ce5d8eddc7f593004e268949574e949fa528bbc",
+      "commit_blob_sha256": "72b22bedd285bf61d6e2a74a6ce5d8eddc7f593004e268949574e949fa528bbc",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/engine_core/src/transform.rs",
+      "accepted_build_input_sha256": "f511ceb89ac4445ce9749d1ed4086e672693357a1e6cf4f4f944dd8fe7220c74",
+      "commit_blob_sha256": "f511ceb89ac4445ce9749d1ed4086e672693357a1e6cf4f4f944dd8fe7220c74",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_core/Cargo.toml",
+      "accepted_build_input_sha256": "8997ce52e4c8a2384b2bfe5ef8d7778b6be42df8e1157b6c17300f931af16350",
+      "commit_blob_sha256": "8997ce52e4c8a2384b2bfe5ef8d7778b6be42df8e1157b6c17300f931af16350",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_core/src/biome_enemies.rs",
+      "accepted_build_input_sha256": "43b3736cb8da31872a62ac90f0f2b54e78f54ca7ee2f07ef622a45a7241e5cc8",
+      "commit_blob_sha256": "43b3736cb8da31872a62ac90f0f2b54e78f54ca7ee2f07ef622a45a7241e5cc8",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_core/src/boss_assets.rs",
+      "accepted_build_input_sha256": "6f243e4211c7a40e0feaf35140b8b0300df65d061e2657d6490b90a6ef334699",
+      "commit_blob_sha256": "6f243e4211c7a40e0feaf35140b8b0300df65d061e2657d6490b90a6ef334699",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_core/src/bosses.rs",
+      "accepted_build_input_sha256": "d98e4f74ff7e1a225a5ca9d6178164853ca65057fadf5d872706ab89523f2ebc",
+      "commit_blob_sha256": "d98e4f74ff7e1a225a5ca9d6178164853ca65057fadf5d872706ab89523f2ebc",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_core/src/campaign.rs",
+      "accepted_build_input_sha256": "ce3701246d366042841cca3a61ce1c83ea15bbfcd312a05fe5d6d7f991d0b5bc",
+      "commit_blob_sha256": "ce3701246d366042841cca3a61ce1c83ea15bbfcd312a05fe5d6d7f991d0b5bc",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_core/src/campaign_runtime.rs",
+      "accepted_build_input_sha256": "beaa27a19af8c62a23df0b6d6f820e924af51ed40f1d1e78a5cac25f8d7a4e58",
+      "commit_blob_sha256": "beaa27a19af8c62a23df0b6d6f820e924af51ed40f1d1e78a5cac25f8d7a4e58",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_core/src/cursor_aim_tests.rs",
+      "accepted_build_input_sha256": "4abfc3c200c8500a22b334d2d9839386b6f8764bcc0a8c39034d83a1577cdf29",
+      "commit_blob_sha256": "4abfc3c200c8500a22b334d2d9839386b6f8764bcc0a8c39034d83a1577cdf29",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_core/src/isotope_scar.rs",
+      "accepted_build_input_sha256": "1129a660f47d75219654ebb9bc89e4c5e201e89d5a5ccbd4407cd56b5e720018",
+      "commit_blob_sha256": "1129a660f47d75219654ebb9bc89e4c5e201e89d5a5ccbd4407cd56b5e720018",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_core/src/lib.rs",
+      "accepted_build_input_sha256": "cc561987f84f908a9dfcd1fbe612fc1de2db5dc6f7b6cb50508a4e6fae81961d",
+      "commit_blob_sha256": "cc561987f84f908a9dfcd1fbe612fc1de2db5dc6f7b6cb50508a4e6fae81961d",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_core/src/mote_art.rs",
+      "accepted_build_input_sha256": "229916ac25331a0dc59add3a8c8a49274d2f4a3e01520ffa14a17d8b8965806f",
+      "commit_blob_sha256": "229916ac25331a0dc59add3a8c8a49274d2f4a3e01520ffa14a17d8b8965806f",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_core/src/mote_controller.rs",
+      "accepted_build_input_sha256": "1f8127aeb40d02402a11a17cc6a1e90485ea5314b364847349975d538341e881",
+      "commit_blob_sha256": "1f8127aeb40d02402a11a17cc6a1e90485ea5314b364847349975d538341e881",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_core/src/pixel_assets.rs",
+      "accepted_build_input_sha256": "2b3a013aedb791af8161e61e0bf85b045d2ebdad5eaaa7e2f648d9451bff00ec",
+      "commit_blob_sha256": "2b3a013aedb791af8161e61e0bf85b045d2ebdad5eaaa7e2f648d9451bff00ec",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_core/src/radiation_enemies.rs",
+      "accepted_build_input_sha256": "3ba40361fe25d37049a1d30029c218f7b7e3de5307ac631ef36fcbe5bfaf10c2",
+      "commit_blob_sha256": "23b6a40391cc6e3b81dba1ce773cd633233595e30b697405c3305b644079472a",
+      "comparison": "CRLF/LF representation only"
+    },
+    {
+      "path": "crates/game_core/src/radiation_enemy_tests.rs",
+      "accepted_build_input_sha256": "4a2bb6ed2968955c82bd5b63e656f39ff075b0857cc33867dc8a5454d9e72dce",
+      "commit_blob_sha256": "4a2bb6ed2968955c82bd5b63e656f39ff075b0857cc33867dc8a5454d9e72dce",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_core/src/regions.rs",
+      "accepted_build_input_sha256": "421c2b54f024a4d09f7ea57fa0df274a432836166d817646453e6680039d42a7",
+      "commit_blob_sha256": "421c2b54f024a4d09f7ea57fa0df274a432836166d817646453e6680039d42a7",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_web/Cargo.toml",
+      "accepted_build_input_sha256": "2ae9524c8e67d4d504a973cff6de954e942c524df5508eb522e2324f210f9c1a",
+      "commit_blob_sha256": "2ae9524c8e67d4d504a973cff6de954e942c524df5508eb522e2324f210f9c1a",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_web/src/boss_layout.rs",
+      "accepted_build_input_sha256": "97ae0496ec27b89510b46ad21785a377d2ca6ae0d88d1fe95dcbc30a1758e353",
+      "commit_blob_sha256": "97ae0496ec27b89510b46ad21785a377d2ca6ae0d88d1fe95dcbc30a1758e353",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_web/src/boss_overlay.rs",
+      "accepted_build_input_sha256": "fd9ff6b24cf69d3c43144571815d071c251485b002cba8bcad27bced8b02810f",
+      "commit_blob_sha256": "fd9ff6b24cf69d3c43144571815d071c251485b002cba8bcad27bced8b02810f",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_web/src/browser.rs",
+      "accepted_build_input_sha256": "2be9f952d91a3994688076f0c0a57fc468c254bd05073a6f14469156045143c5",
+      "commit_blob_sha256": "2be9f952d91a3994688076f0c0a57fc468c254bd05073a6f14469156045143c5",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_web/src/champion_patches.rs",
+      "accepted_build_input_sha256": "70dca6fb509cc20053bde53b319cf36d3a3e4027f78a7b7354ad1e9ca85907e9",
+      "commit_blob_sha256": "70dca6fb509cc20053bde53b319cf36d3a3e4027f78a7b7354ad1e9ca85907e9",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_web/src/lib.rs",
+      "accepted_build_input_sha256": "f569aba6fe067dc5a1d028629895a2eceb8df84bc5072be30bb8715bc0805007",
+      "commit_blob_sha256": "f569aba6fe067dc5a1d028629895a2eceb8df84bc5072be30bb8715bc0805007",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_web/src/lighting.rs",
+      "accepted_build_input_sha256": "293adfe330f2fd58773cb47932c3dad5a3f2d31269169ca4ab4721cafc7c6888",
+      "commit_blob_sha256": "293adfe330f2fd58773cb47932c3dad5a3f2d31269169ca4ab4721cafc7c6888",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_web/src/pixel.wgsl",
+      "accepted_build_input_sha256": "459356f8e1934c990d53eb6f902a6d119661cd4546b891c59ffbf6705678227a",
+      "commit_blob_sha256": "459356f8e1934c990d53eb6f902a6d119661cd4546b891c59ffbf6705678227a",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_web/src/pixel_ui.rs",
+      "accepted_build_input_sha256": "c66a24bf4c105df8fc5121c8c4ab8a797a19bd3eb51d5dfc067f2df68a7dd94a",
+      "commit_blob_sha256": "c66a24bf4c105df8fc5121c8c4ab8a797a19bd3eb51d5dfc067f2df68a7dd94a",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_web/src/present.wgsl",
+      "accepted_build_input_sha256": "c5f2b55c1b5d76159f4473ed6f8e7e656166bd7f471fb949661fdc1650757507",
+      "commit_blob_sha256": "c5f2b55c1b5d76159f4473ed6f8e7e656166bd7f471fb949661fdc1650757507",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_web/src/renderer.rs",
+      "accepted_build_input_sha256": "fc65e332b215945a48b4bf510ac0f3449606629e79adc2044593072b4e49eaaa",
+      "commit_blob_sha256": "fc65e332b215945a48b4bf510ac0f3449606629e79adc2044593072b4e49eaaa",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_web/src/ui_scene.rs",
+      "accepted_build_input_sha256": "b3c2bf33a837e344b78a2acd120e051f54624ae37f62ebd937af49d115389dc4",
+      "commit_blob_sha256": "b3c2bf33a837e344b78a2acd120e051f54624ae37f62ebd937af49d115389dc4",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_web/src/ui_wrap_tests.rs",
+      "accepted_build_input_sha256": "fd49eb586b709c1c248a77722feb0053aa45ce829994f265bed6a8b397252860",
+      "commit_blob_sha256": "fd49eb586b709c1c248a77722feb0053aa45ce829994f265bed6a8b397252860",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "docs/CONTRACTS.md",
+      "accepted_build_input_sha256": "3971db92288a9e6dcee752fe69bd20e0e11431404e8c507a3634ca8b67f5b866",
+      "commit_blob_sha256": "afd73d016ca966dcfa64bb25a9ab4f4a905ce82776ff342eb677c5988fe04dcc",
+      "comparison": "CRLF/LF representation only"
+    },
+    {
+      "path": "package.json",
+      "accepted_build_input_sha256": "048d1c56e2cc6ce5beb44975893b87d38376892778dde34be7aea83710301b1b",
+      "commit_blob_sha256": "e173b23577801ecbaada590a6acaa0b53a672ef049951f75bdafdc830da0eb6e",
+      "comparison": "CRLF/LF representation only"
+    },
+    {
+      "path": "pnpm-lock.yaml",
+      "accepted_build_input_sha256": "6383d7a7deaf07367d08c79447c4faab012da63436cf23df3a1cbb82b4f183d1",
+      "commit_blob_sha256": "6383d7a7deaf07367d08c79447c4faab012da63436cf23df3a1cbb82b4f183d1",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "scripts/build-wasm.mjs",
+      "accepted_build_input_sha256": "decc2c498fafdc38167b9e5a106a1b9c51de9392cf4d76394a5a24a7cb14959b",
+      "commit_blob_sha256": "decc2c498fafdc38167b9e5a106a1b9c51de9392cf4d76394a5a24a7cb14959b",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "scripts/build.mjs",
+      "accepted_build_input_sha256": "893eefb7bb9b7034c29817d30d82ffcd28352cd16ec16829c2d7700498066ff4",
+      "commit_blob_sha256": "893eefb7bb9b7034c29817d30d82ffcd28352cd16ec16829c2d7700498066ff4",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "scripts/pwa.mjs",
+      "accepted_build_input_sha256": "dfab5c87696dfb7bb8b5badc376af3d868f6cb7357c2fda0eba5d7e93d6a28b9",
+      "commit_blob_sha256": "dfab5c87696dfb7bb8b5badc376af3d868f6cb7357c2fda0eba5d7e93d6a28b9",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "scripts/test/input.test.mjs",
+      "accepted_build_input_sha256": "3fbfb710d70fce7fe81a18aefc2f7d3d2acc8143604e2fca2ddba43254763ab1",
+      "commit_blob_sha256": "3fbfb710d70fce7fe81a18aefc2f7d3d2acc8143604e2fca2ddba43254763ab1",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "tsconfig.json",
+      "accepted_build_input_sha256": "c0de18e3ddab8718ca79686d1d204a4b6e0daecb3e28cadab874abc678f768db",
+      "commit_blob_sha256": "c0de18e3ddab8718ca79686d1d204a4b6e0daecb3e28cadab874abc678f768db",
+      "comparison": "exact bytes"
+    }
+  ],
+  "archive": {
+    "path": "work/galaxy-cursor-aim-release-20261011.tar.gz",
+    "bytes": 2128867,
+    "sha256": "939b92dcf6953e947fea69e8900ff0b398be110b3a72f909bf32569fc3262937",
+    "files": {
+      "dist/icon-192.png": {
+        "bytes": 2619,
+        "sha256": "f26b1bd9660be38bb35d08099ea056a5a22a4645f9e2f8ee399821a54d435b43"
+      },
+      "dist/icon-512.png": {
+        "bytes": 11848,
+        "sha256": "d5eb97ed733784221989eb4ebf01fc57bab2d5d858ae8aa78bb0b028ee89e863"
+      },
+      "dist/icon.svg": {
+        "bytes": 319,
+        "sha256": "119c958934c7326508f45d53e543512008247bbf585d5d8ef7c89819194d2b0d"
+      },
+      "dist/index.html": {
+        "bytes": 8300,
+        "sha256": "5c9ba5a709b92961d98a0850893e43b91c41b995b3f296046fcd0e00ffc416f4"
+      },
+      "dist/manifest.webmanifest": {
+        "bytes": 679,
+        "sha256": "2eb7555a102641e6f3040d3c79e68ddb11578c6c01327e29ed6e1fb3a688940f"
+      },
+      "dist/sw.js": {
+        "bytes": 1343,
+        "sha256": "3039b5f4824e3d7da76ac7e901fbb61b116134523c99cc2f53b48d1b4e78ce33"
+      },
+      "dist/wasm/webgpu/galaxy.d.ts": {
+        "bytes": 7320,
+        "sha256": "c1a6f93bb491d2b5565d37d46e80a3fd9ee74eb9785f8c0b49d13c7d49b331fb"
+      },
+      "dist/wasm/webgpu/galaxy.js": {
+        "bytes": 77645,
+        "sha256": "9ef8bf9f2605cf9ffe59574a6a2d2dcedff403efc7a6a3c3c272c4221c75f5dd"
+      },
+      "dist/wasm/webgpu/galaxy_bg.wasm": {
+        "bytes": 2243181,
+        "sha256": "390bd749212822b51c641186e4dceb8aa6770c56622c2ae114ce8fb9986519ef"
+      },
+      "dist/wasm/webgpu/galaxy_bg.wasm.d.ts": {
+        "bytes": 4630,
+        "sha256": "f2b9f908eb1a4692d43f4fe9c510f24a115c8057d28e037b5898956dbe74b8b9"
+      },
+      "dist/wasm/webgl2/galaxy.d.ts": {
+        "bytes": 6054,
+        "sha256": "dcff0b67f31bf5f46ddc07ab386e5654c6654f5d14e585dcbe003680bc1db032"
+      },
+      "dist/wasm/webgl2/galaxy.js": {
+        "bytes": 80969,
+        "sha256": "cbc409dbaf4ad72993cff956e8c87e954a88695fdd50776487e8f41772fdd965"
+      },
+      "dist/wasm/webgl2/galaxy_bg.wasm": {
+        "bytes": 5871068,
+        "sha256": "883d989c8b7912e81366fb656ec747cbed723226e952a7db3f6303bc168fb2f7"
+      },
+      "dist/wasm/webgl2/galaxy_bg.wasm.d.ts": {
+        "bytes": 3364,
+        "sha256": "05ccf14d3ec3170f91aa338e7c23ba95e68d1b3f05cd79b5ee0ec1e878df0926"
+      },
+      "dist/fonts/OFL.txt": {
+        "bytes": 4389,
+        "sha256": "690fda321d0ebce403249c8d61dadddcee09dc8813424cc5a8f982efcff9a9a3"
+      },
+      "dist/fonts/RoyaleMono.ttf": {
+        "bytes": 15456,
+        "sha256": "920710a69692bddc4edee8841ce221bceed9a1860af451d7d35f7519fddc466e"
+      },
+      "dist/fonts/Tiny5.ttf": {
+        "bytes": 130784,
+        "sha256": "eb4206abc0c73e9fe4fe93c034ea270578859c40a7e740c6207322413c5c4c91"
+      },
+      "dist/assets/index-bpgry9H8.css": {
+        "bytes": 27238,
+        "sha256": "ecfa65f0d9dd9a0d0f2373699c1607e40f65199c69ba16a8e7ff2f12be80f5c7"
+      },
+      "dist/assets/index-DvXDUx0y.js": {
+        "bytes": 82184,
+        "sha256": "1b4087fa9a0f916bae6debea8ebf423167ad15ff29b905bd6ffa7d80fda69369"
+      },
+      "dist/.openai/hosting.json": {
+        "bytes": 106,
+        "sha256": "2cad46d1fe08032037cdd5cfdcc4c85f2d9db109331bcfeb7c3296fd488eda6d"
+      }
+    }
+  },
+  "cached_game_assets": 18,
+  "served_game_files": 19,
+  "hosting": {
+    "static_directory": "dist",
+    "keys": [
+      "project_id",
+      "static"
+    ],
+    "sha256": "2cad46d1fe08032037cdd5cfdcc4c85f2d9db109331bcfeb7c3296fd488eda6d"
+  },
+  "modules": [
+    {
+      "backend": "webgpu",
+      "sha256": "390bd749212822b51c641186e4dceb8aa6770c56622c2ae114ce8fb9986519ef",
+      "actual_parse": true,
+      "export_count": 48,
+      "checkpoint_contract": false
+    },
+    {
+      "backend": "webgl2",
+      "sha256": "883d989c8b7912e81366fb656ec747cbed723226e952a7db3f6303bc168fb2f7",
+      "actual_parse": true,
+      "export_count": 44,
+      "checkpoint_contract": false
+    }
+  ],
+  "owner_authenticated_remote_gameplay": "not measured"
+}

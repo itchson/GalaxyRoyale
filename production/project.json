@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 304,
+  "revision": 313,
   "name": "Galaxy Royale",
   "phase": "Foundation → playable vertical slice",
-  "updatedAt": "2026-10-10T21:52:41.355Z",
+  "updatedAt": "2026-10-10T21:56:47.100Z",
   "tasks": [
     {
       "id": "studio",
@@ -728,7 +728,7 @@
       "status": "review",
       "owner": "Producer",
       "priority": "normal",
-      "description": "Current private preview is source 60590dd and cache galaxy-86ea0d1b0d17f148. The 242 Rust and 79 shell checks, normal dual renderer build, bounded desktop visual/DSP observations and exact source/archive publication have actual linked evidence. Human listening, moving combat readability, natural campaign, named phones/soak and authenticated remote game execution remain pending. This broader slice review stays open.",
+      "description": "Current private preview source8b19c6c/cache37e3441c8c48302c integrates desktop cursor aim, bounded pixel-font wrapping and legal interior Mote approach tuning. 252 Rust checks (37 engine,131 gameplay,84 web),87 shell checks, strict TypeScript/native/both-WASM Clippy and normal dual-WASM/game/Studio build pass. Independent engine review reran six actual source tests and three owned Game tick/projectile checks. Independent package review matched78source inputs and the20file archive to runtime8b19c6c and cache37e3441c8c48302c. Actual normal localhost WebGPU/WebGL2 right-held cursor turning and primary shots, plus one Haven-update/reload path, are captured in a declared isolated QAfixture. Reviewed bounded pixel-font wrapping and interior Mote targeting are integrated. Broader narrow moving combat, human listening/balancing, natural campaign, named physicalphones/soak, complete recovery/offline matrix and authenticated remote game execution remain pending.",
       "dependencies": [
         "studio",
         "boss-qa",
@@ -841,12 +841,22 @@
           "label": "Independent exact committed source and 20-file game archive verification",
           "kind": "note",
           "path": "artifacts/scar-post-push-package-review.md"
+        },
+        {
+          "label": "Exact reviewed runtime commit and archive",
+          "kind": "note",
+          "path": "artifacts/cursor-aim-committed-archive-review.md"
+        },
+        {
+          "label": "Current normal browser claim review",
+          "kind": "note",
+          "path": "artifacts/cursor-aim-browser-review.md"
         }
       ],
       "blocker": "",
-      "revision": 9,
+      "revision": 10,
       "createdAt": "2026-10-10T14:29:27.000Z",
-      "updatedAt": "2026-10-10T21:15:16.583Z"
+      "updatedAt": "2026-10-10T21:56:46.991Z"
     },
     {
       "id": "deep-bosses",
@@ -2874,10 +2884,10 @@
     {
       "id": "task-aaf6d58e",
       "title": "Desktop right-button cursor aim with independent flight course",
-      "description": "Right-held cursor is projected from the latest presented unshaken camera/world viewport every sample and supplied as transient aim to the Rust controller. Aim turns once per tick at existing720deg/sec, preserves course/braking and decouples aim-active keyboard thrust. Primary shots leave the actual nose with existing quarter ship-velocity inheritance. Mobile fire remains heading-based. Six actual Game regressions,15shell input tests,252Rust/87shell and strictTypeScript pass; current dual-WASM final build and independent release review are running. Final normal cache galaxy-37e3441c8c48302c is independently accepted; engine independently reran six actual source checks plus three owned tick/projectile checks. Actual isolated both-renderer right-button shots and one Haven-update activation are captured. Exact runtime commit/archive and private publication follow; wider phone/human acceptance remains separate.",
+      "description": "Right-held cursor is projected from the latest presented unshaken camera/world viewport every sample and supplied as transient aim to the Rust controller. Aim turns once per tick at existing720deg/sec, preserves course/braking and decouples aim-active keyboard thrust. Primary shots leave the actual nose with existing quarter ship-velocity inheritance. Mobile fire remains heading-based. Six actual Game regressions,15shell input tests,252Rust/87shell and strictTypeScript pass; current dual-WASM final build and independent release review are running. Final normal cache galaxy-37e3441c8c48302c is independently accepted; engine independently reran six actual source checks plus three owned tick/projectile checks. Actual isolated both-renderer right-button shots and one Haven-update activation are captured. Exact runtime commit/archive and private publication follow; wider phone/human acceptance remains separate. Exact reviewed runtime8b19c6c/archive is now privately published successfully. This bounded task is Complete; broader physical and natural-play gates remain separate.",
       "department": "Engine / Input",
       "owner": "Producer / Engine / Production QA",
-      "status": "review",
+      "status": "complete",
       "priority": "high",
       "dependencies": [
         "engine"
@@ -2889,7 +2899,7 @@
         },
         {
           "text": "Current normal dual-WASM package, independent source/archive review and bounded actual browser smoke are recorded accurately",
-          "met": false
+          "met": true
         }
       ],
       "evidence": [
@@ -2932,20 +2942,35 @@
           "label": "Final actual WebGL2 cursor-facing shots",
           "kind": "note",
           "path": "artifacts/cursor-aim-right-webgl2-final.jpg"
+        },
+        {
+          "label": "Exact current private release identity and remaining gates",
+          "kind": "note",
+          "path": "artifacts/private-release.json"
+        },
+        {
+          "label": "Exact reviewed runtime commit and archive",
+          "kind": "note",
+          "path": "artifacts/cursor-aim-committed-archive-review.md"
+        },
+        {
+          "label": "Current normal browser claim review",
+          "kind": "note",
+          "path": "artifacts/cursor-aim-browser-review.md"
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 3,
       "createdAt": "2026-10-10T21:46:28.902Z",
-      "updatedAt": "2026-10-10T21:52:21.848Z"
+      "updatedAt": "2026-10-10T21:56:46.935Z"
     },
     {
       "id": "task-90acc365",
       "title": "Bounded pixel-font wrapping without dynamic line allocation",
-      "description": "Reviewed fixed256-character/257span wrapper is integrated in pixel UI. Exact legacy newline/Unicode/truncation behavior has four durable oracle checks including98,040exhaustive whitespace and2100Unicode cases; actual native packet parity/allocator review is pinned. Measurements concern native allocations, not WASM stack highwater or phone performance. Current full suite passes; final package review is running. Final normal cache galaxy-37e3441c8c48302c is independently accepted; engine independently reran six actual source checks plus three owned tick/projectile checks. Actual isolated both-renderer right-button shots and one Haven-update activation are captured. Exact runtime commit/archive and private publication follow; wider phone/human acceptance remains separate.",
+      "description": "Reviewed fixed256-character/257span wrapper is integrated in pixel UI. Exact legacy newline/Unicode/truncation behavior has four durable oracle checks including98,040exhaustive whitespace and2100Unicode cases; actual native packet parity/allocator review is pinned. Measurements concern native allocations, not WASM stack highwater or phone performance. Current full suite passes; final package review is running. Final normal cache galaxy-37e3441c8c48302c is independently accepted; engine independently reran six actual source checks plus three owned tick/projectile checks. Actual isolated both-renderer right-button shots and one Haven-update activation are captured. Exact runtime commit/archive and private publication follow; wider phone/human acceptance remains separate. Exact reviewed runtime8b19c6c/archive is now privately published successfully. This bounded task is Complete; broader physical and natural-play gates remain separate.",
       "department": "Engine / UI",
       "owner": "Producer / Engine / Production QA",
-      "status": "review",
+      "status": "complete",
       "priority": "normal",
       "dependencies": [
         "engine"
@@ -2957,7 +2982,7 @@
         },
         {
           "text": "Final normal dual-renderer build/package evidence and preserved bounded browser pixel text are recorded",
-          "met": false
+          "met": true
         }
       ],
       "evidence": [
@@ -2995,12 +3020,27 @@
           "label": "Final actual WebGL2 cursor-facing shots",
           "kind": "note",
           "path": "artifacts/cursor-aim-right-webgl2-final.jpg"
+        },
+        {
+          "label": "Exact current private release identity and remaining gates",
+          "kind": "note",
+          "path": "artifacts/private-release.json"
+        },
+        {
+          "label": "Exact reviewed runtime commit and archive",
+          "kind": "note",
+          "path": "artifacts/cursor-aim-committed-archive-review.md"
+        },
+        {
+          "label": "Current normal browser claim review",
+          "kind": "note",
+          "path": "artifacts/cursor-aim-browser-review.md"
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 3,
       "createdAt": "2026-10-10T21:46:28.932Z",
-      "updatedAt": "2026-10-10T21:52:21.869Z"
+      "updatedAt": "2026-10-10T21:56:46.965Z"
     },
     {
       "id": "task-08d59c38",
@@ -3624,6 +3664,25 @@
         "Producer / Integrator / browser operator",
         "Production specialist / input implementation / final package reviewer",
         "Engine specialist / independent actual native and bridge reviewer"
+      ],
+      "taskIds": [
+        "task-aaf6d58e",
+        "task-90acc365",
+        "task-b0a59d63",
+        "slice-review"
+      ]
+    },
+    {
+      "id": "review-bedaab64",
+      "title": "Final exact-source publication: desktop cursor aim accepted within measured scope",
+      "body": "Source8b19c6c was committed/pushed by officialSitesworkflow; independentQA verified78inputs and20file archived normal package against exact finalcache37e3441c8c48302c before privatepublication. Native private operation returned succeeded with the existing ownerprivateURL. Current bounded cursor-aim and wrapper tasks are Complete with linked evidence; fullslice and broadnarrowMote review remain open. Actual browser shots/update path remain declared local fixtures; no current authenticated remote gameplay/phone/human performance is claimed. Further actual desktop joint-input checks and original Vesper seeded-admission/art review continue separately.",
+      "author": "Producer",
+      "source": "Exact reviewed8b19runtime/archive privately published successfully; current metadata only",
+      "createdAt": "2026-10-10T21:56:47.037Z",
+      "participants": [
+        "Producer / Integrator",
+        "Production specialist / source/archive and captured-browser reviewer",
+        "Engine specialist / actual native and bridge reviewer"
       ],
       "taskIds": [
         "task-aaf6d58e",
@@ -4405,6 +4464,68 @@
       ],
       "url": "http://127.0.0.1:4191/?qa=1&renderer=webgpu",
       "knownIssues": "Broader Mote narrow moving readability, human judgment, physicaldevices/soak and authenticated remote gameplay remain pending."
+    },
+    {
+      "id": "build-d5d5b461",
+      "title": "Cursor aim and bounded pixel UI / published8b19c6c",
+      "body": "252 Rust checks (37 engine,131 gameplay,84 web),87 shell checks, strict TypeScript/native/both-WASM Clippy and normal dual-WASM/game/Studio build pass. Independent engine review reran six actual source tests and three owned Game tick/projectile checks. Independent package review matched78source inputs and the20file archive to runtime8b19c6c and cache37e3441c8c48302c. Actual normal localhost WebGPU/WebGL2 right-held cursor turning and primary shots, plus one Haven-update/reload path, are captured in a declared isolated QAfixture. Reviewed bounded pixel-font wrapping and interior Mote targeting are integrated. Broader narrow moving combat, human listening/balancing, natural campaign, named physicalphones/soak, complete recovery/offline matrix and authenticated remote game execution remain pending.",
+      "author": "Producer",
+      "source": "Exact reviewed8b19runtime/archive privately published successfully; current metadata only",
+      "createdAt": "2026-10-10T21:56:47.022Z",
+      "revision": "8b19c6cfdb599e7bc0e310e1960ac096ea1bc7a5",
+      "evidence": [
+        {
+          "label": "Exact current private release identity and remaining gates",
+          "kind": "note",
+          "path": "artifacts/private-release.json"
+        },
+        {
+          "label": "Exact reviewed runtime commit and archive",
+          "kind": "note",
+          "path": "artifacts/cursor-aim-committed-archive-review.md"
+        },
+        {
+          "label": "Current normal browser claim review",
+          "kind": "note",
+          "path": "artifacts/cursor-aim-browser-review.md"
+        }
+      ],
+      "checks": [
+        {
+          "name": "252 Rust/87shell/strictTS/native+bothWASMClippy",
+          "result": "pass"
+        },
+        {
+          "name": "NormaldualWASM/game/Studio build and final18assetPWA",
+          "result": "pass"
+        },
+        {
+          "name": "Independent native/source/binary/archive review",
+          "result": "pass"
+        },
+        {
+          "name": "Actualbothrenderer rightaim/primaryshots and one Havenupdate",
+          "result": "pass"
+        },
+        {
+          "name": "Exact20file archive and successful ownerprivatepublication",
+          "result": "pass"
+        },
+        {
+          "name": "Physicalphones/60FPS/30minute soak",
+          "result": "not_run"
+        },
+        {
+          "name": "Broad natural campaign/human listening/narrow combat",
+          "result": "not_run"
+        },
+        {
+          "name": "Authenticated remote play/full offline/context recovery matrix",
+          "result": "not_run"
+        }
+      ],
+      "url": "https://galaxy-royale-itchson.itchson.chatgpt.site/",
+      "knownIssues": "Reviewed legal interior Mote candidates are integrated. Eight actual movement cases pass: four ordinary maxzoom cases emit while moving; narrow320x180moving remains suppressed and all8recover afterrelease. Broad natural/narrow/human readability remains Review. Integrated charge/pulse SFX with actual desktop DSP evidence; human listening and phone audio acceptance remain pending."
     }
   ],
   "feedback": [],
@@ -7448,6 +7569,96 @@
       "author": "Producer",
       "source": "Actual frozen cursor-aim specialist reviews and observed normal browser checks",
       "createdAt": "2026-10-10T21:52:41.355Z"
+    },
+    {
+      "id": "5b5d97e4-55ec-4d6b-8748-3100ef6e21f2",
+      "revision": 305,
+      "kind": "task.update",
+      "itemId": "task-aaf6d58e",
+      "title": "Desktop right-button cursor aim with independent flight course",
+      "author": "Producer",
+      "source": "Exact reviewed8b19runtime/archive privately published successfully; current metadata only",
+      "createdAt": "2026-10-10T21:56:46.935Z"
+    },
+    {
+      "id": "3e2be506-a12f-4946-858c-9c03f72a3ae5",
+      "revision": 306,
+      "kind": "task.update",
+      "itemId": "task-90acc365",
+      "title": "Bounded pixel-font wrapping without dynamic line allocation",
+      "author": "Producer",
+      "source": "Exact reviewed8b19runtime/archive privately published successfully; current metadata only",
+      "createdAt": "2026-10-10T21:56:46.965Z"
+    },
+    {
+      "id": "15ca0f3f-a2b8-4a29-abff-405ae1fd49be",
+      "revision": 307,
+      "kind": "task.update",
+      "itemId": "slice-review",
+      "title": "Integrated slice review and release evidence",
+      "author": "Producer",
+      "source": "Exact reviewed8b19runtime/archive privately published successfully; current metadata only",
+      "createdAt": "2026-10-10T21:56:46.991Z"
+    },
+    {
+      "id": "e37d9fcd-3c60-42d2-b1b9-21ad8fb83f92",
+      "revision": 308,
+      "kind": "build",
+      "itemId": "build-d5d5b461",
+      "title": "Cursor aim and bounded pixel UI / published8b19c6c",
+      "author": "Producer",
+      "source": "Exact reviewed8b19runtime/archive privately published successfully; current metadata only",
+      "createdAt": "2026-10-10T21:56:47.022Z"
+    },
+    {
+      "id": "8fc11382-5350-4f1b-ab2e-2a7d06b0d342",
+      "revision": 309,
+      "kind": "review",
+      "itemId": "review-bedaab64",
+      "title": "Final exact-source publication: desktop cursor aim accepted within measured scope",
+      "author": "Producer",
+      "source": "Exact reviewed8b19runtime/archive privately published successfully; current metadata only",
+      "createdAt": "2026-10-10T21:56:47.037Z"
+    },
+    {
+      "id": "0dffcbe1-9787-4d21-89ec-e463e61630e3",
+      "revision": 310,
+      "kind": "run",
+      "itemId": "run-83ef64a6",
+      "title": "Producer / Integrator · running",
+      "author": "Producer",
+      "source": "Exact reviewed8b19runtime/archive privately published successfully; current metadata only",
+      "createdAt": "2026-10-10T21:56:47.053Z"
+    },
+    {
+      "id": "a79fca0f-65de-4b73-92c0-a4197ce597e5",
+      "revision": 311,
+      "kind": "run",
+      "itemId": "run-b895fdb7",
+      "title": "Production / Independent QA · running",
+      "author": "Producer",
+      "source": "Exact reviewed8b19runtime/archive privately published successfully; current metadata only",
+      "createdAt": "2026-10-10T21:56:47.068Z"
+    },
+    {
+      "id": "fcea82ab-d642-4693-92d9-2b3c2e509b76",
+      "revision": 312,
+      "kind": "run",
+      "itemId": "run-2e5da944",
+      "title": "Engine specialist · running",
+      "author": "Producer",
+      "source": "Exact reviewed8b19runtime/archive privately published successfully; current metadata only",
+      "createdAt": "2026-10-10T21:56:47.084Z"
+    },
+    {
+      "id": "eb26294f-b28a-4792-be48-af00a8249b0b",
+      "revision": 313,
+      "kind": "run",
+      "itemId": "run-19f62dfe",
+      "title": "Gameplay / Art specialist · running",
+      "author": "Producer",
+      "source": "Exact reviewed8b19runtime/archive privately published successfully; current metadata only",
+      "createdAt": "2026-10-10T21:56:47.100Z"
     }
   ],
   "runRecords": [
@@ -10142,6 +10353,94 @@
       "author": "Producer",
       "source": "Actual cursor-aim implementation and frozen specialist handoffs",
       "createdAt": "2026-10-10T21:46:29.037Z"
+    },
+    {
+      "id": "run-83ef64a6",
+      "title": "Producer / Integrator · running",
+      "agentId": "/root",
+      "agentLabel": "Producer / Integrator",
+      "state": "running",
+      "observedAt": "2026-10-10T21:56:47.042Z",
+      "taskIds": [
+        "slice-review"
+      ],
+      "summary": "Published exact8b19cursor-aim/boundedUI runtime privately; finalmetadata recorded. Goal continues with independent desktopinteraction QA and Vesper design/helper reviews.",
+      "evidence": [
+        {
+          "label": "Current private identity",
+          "kind": "note",
+          "path": "artifacts/cursor-aim-private-deployment.json"
+        }
+      ],
+      "author": "Producer",
+      "source": "Exact reviewed8b19runtime/archive privately published successfully; current metadata only",
+      "createdAt": "2026-10-10T21:56:47.053Z"
+    },
+    {
+      "id": "run-b895fdb7",
+      "title": "Production / Independent QA · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "Production / Independent QA",
+      "state": "running",
+      "observedAt": "2026-10-10T21:56:47.042Z",
+      "taskIds": [
+        "slice-review"
+      ],
+      "summary": "Finalsource/archive/browser review frozen. Running a separate owned4200normal-browser jointcourse/rightaim/keyboard-strafe observation; no production edits.",
+      "evidence": [
+        {
+          "label": "Frozen exact archive review",
+          "kind": "note",
+          "path": "artifacts/cursor-aim-committed-archive-review.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Exact reviewed8b19runtime/archive privately published successfully; current metadata only",
+      "createdAt": "2026-10-10T21:56:47.068Z"
+    },
+    {
+      "id": "run-2e5da944",
+      "title": "Engine specialist · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Engine specialist",
+      "state": "running",
+      "observedAt": "2026-10-10T21:56:47.042Z",
+      "taskIds": [
+        "task-08d59c38"
+      ],
+      "summary": "Nativeaim review is frozen, nine actualsource/Gamechecks pass. Running independent frozenVesper helper/packet/budget/affine and seeded-admission design review; no integration.",
+      "evidence": [
+        {
+          "label": "Frozen originalart",
+          "kind": "note",
+          "path": "work/pixel-comet-art/README.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Exact reviewed8b19runtime/archive privately published successfully; current metadata only",
+      "createdAt": "2026-10-10T21:56:47.084Z"
+    },
+    {
+      "id": "run-19f62dfe",
+      "title": "Gameplay / Art specialist · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Gameplay / Art specialist",
+      "state": "running",
+      "observedAt": "2026-10-10T21:56:47.042Z",
+      "taskIds": [
+        "task-08d59c38"
+      ],
+      "summary": "OriginalVesper art remains work-only; freezing tested deterministicrareselection/Scarcompatibility design and actual524288field distribution, with view-boundary policy caveats.",
+      "evidence": [
+        {
+          "label": "Frozen cometart",
+          "kind": "note",
+          "path": "work/pixel-comet-art/README.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Exact reviewed8b19runtime/archive privately published successfully; current metadata only",
+      "createdAt": "2026-10-10T21:56:47.100Z"
     }
   ]
 }

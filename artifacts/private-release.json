@@ -1,8 +1,8 @@
 {
-  "id": "appgdep_6acaaa34168881919323748e007acfb4",
+  "id": "appgdep_6acab425f5088191b0bd6731be42608f",
   "project_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93",
   "title": "Galaxy Royale",
-  "version_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93~appgver_ce2846970d1c8191ba31296cc8dc042e",
+  "version_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93~appgver_bf15ceb112a0819182e5142643b36fd8",
   "type": "publish",
   "status": "succeeded",
   "url": "https://galaxy-royale-itchson.itchson.chatgpt.site",
@@ -11,15 +11,15 @@
   "provider_deployment_id": "site---6aca50f5b1bc81918526a6ee969aac93",
   "failure_message": null,
   "env_set_revision": 0,
-  "updated_at": "2026-10-10T21:12:40.630408+00:00",
-  "commit_sha": "60590ddcde0c8c66139bc6c1bea47bbd45e0a717",
-  "cacheVersion": "galaxy-86ea0d1b0d17f148",
-  "browserAccess": "Exact owner-private publication succeeded. An actual unauthenticated reload shows Log in to access. Authenticated remote game execution remains unmeasured. The current normal packaged localhost game was observed on both renderers.",
-  "archiveContent": "Exactly 20 files: 18 accepted cached game assets, sw.js and normalized dist/.openai/hosting.json. Source, Studio, work, project ledger, QA contract and credentials are excluded.",
-  "validation": "242 Rust tests (37 engine, 125 gameplay, 80 web), 79 shell tests, strict TypeScript/native/both-WASM Clippy and normal dual-WASM/game/Studio build pass. Both normal desktop renderers show the new scenery. Actual wheel zoom reaches 0.60 and 1.60 with fixed UI dimensions. Bounded emblem sizing, scroll clipping, narrow roster, declared victory presentation and QA travel are recorded. Six declared unchanged-AudioEngine browser recordings establish actual DSP/mute/suspend-resume/16-voice cleanup; independent decoding and native disposal pass. Exact source/archive and successful owner-private publication are recorded. Human listening, moving combat readability, full natural campaign, physical phones/soak, complete offline/recovery matrix and authenticated remote gameplay remain pending.",
+  "updated_at": "2026-10-10T21:55:07.664154+00:00",
+  "commit_sha": "8b19c6cfdb599e7bc0e310e1960ac096ea1bc7a5",
+  "cacheVersion": "galaxy-37e3441c8c48302c",
+  "browserAccess": "Exact-source owner-private publication succeeded through the private operation. Actual current normal game was observed on localhost both renderers. Authenticated remote game execution remains unmeasured; prior access-gate captures are historical, not a new current browser visit.",
+  "archiveContent": "Exactly20files:18cached normal game assets,sw.js and normalized dist/.openai/hosting.json. No Studio/API/work/production/source/QA fixture exports or credentials.",
+  "validation": "252 Rust checks (37 engine,131 gameplay,84 web),87 shell checks, strict TypeScript/native/both-WASM Clippy and normal dual-WASM/game/Studio build pass. Independent engine review reran six actual source tests and three owned Game tick/projectile checks. Independent package review matched78source inputs and the20file archive to runtime8b19c6c and cache37e3441c8c48302c. Actual normal localhost WebGPU/WebGL2 right-held cursor turning and primary shots, plus one Haven-update/reload path, are captured in a declared isolated QAfixture. Reviewed bounded pixel-font wrapping and interior Mote targeting are integrated. Broader narrow moving combat, human listening/balancing, natural campaign, named physicalphones/soak, complete recovery/offline matrix and authenticated remote game execution remain pending.",
   "backendHashes": {
-    "webgpu": "08ea410749efe985d0ca85b927252ff4bf9cf35d23614180a32c21a08c88813b",
-    "webgl2": "82711ff7ba488c749bb4c4ed757ac19e3e929ddcb0dd589cc1702fd84c779cef"
+    "webgpu": "390bd749212822b51c641186e4dceb8aa6770c56622c2ae114ce8fb9986519ef",
+    "webgl2": "883d989c8b7912e81366fb656ec747cbed723226e952a7db3f6303bc168fb2f7"
   },
   "previousDeployments": [
     {
@@ -67,9 +67,23 @@
       "status": "succeeded",
       "updated_at": "2026-10-10T20:24:28.432211+00:00",
       "cacheVersion": "galaxy-eaac3b23e213e59b"
+    },
+    {
+      "id": "appgdep_6acaaa34168881919323748e007acfb4",
+      "version_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93~appgver_ce2846970d1c8191ba31296cc8dc042e",
+      "commit_sha": "60590ddcde0c8c66139bc6c1bea47bbd45e0a717",
+      "status": "succeeded",
+      "updated_at": "2026-10-10T21:12:40.630408+00:00",
+      "cacheVersion": "galaxy-86ea0d1b0d17f148"
     }
   ],
   "evidence": [
+    "artifacts/cursor-aim-validation.md",
+    "artifacts/cursor-aim-engine-review.md",
+    "artifacts/cursor-aim-local-package-review.md",
+    "artifacts/cursor-aim-browser-review.md",
+    "artifacts/cursor-aim-committed-archive-review.md",
+    "artifacts/cursor-aim-private-deployment.json",
     "artifacts/scar-audio-integration-validation.md",
     "artifacts/scar-audio-browser-validation.md",
     "artifacts/scar-audio-package-review.md",
@@ -102,7 +116,7 @@
   "knownFollowups": [
     {
       "taskId": "task-b0a59d63",
-      "description": "Work-only moving-camera warning admission candidate; current strict admission can suppress Mote pulses during continuous maximum-zoom reversals. Native firing recovers after stopping. Browser and human A/B remain pending."
+      "description": "Reviewed legal interior Mote candidates are integrated. Eight actual movement cases pass: four ordinary maxzoom cases emit while moving; narrow320x180moving remains suppressed and all8recover afterrelease. Broad natural/narrow/human readability remains Review."
     },
     {
       "taskId": "task-4a0debda",
@@ -120,9 +134,9 @@
     "description": "Original live712cell ordinary Radial Wastes variant with destructible emitters, staged attacks and normal reward/cap/sanctuary paths. Actual bounded bothrenderer presentation is recorded separately."
   },
   "archive": {
-    "path": "work/galaxy-scar-audio-release-20261011.tar.gz",
-    "bytes": 2128701,
-    "sha256": "04e7211c43046f06816e1360b6a5722dd67de1a91e046a1b83a74565b77dad17"
+    "path": "work/galaxy-cursor-aim-release-20261011.tar.gz",
+    "bytes": 2128867,
+    "sha256": "939b92dcf6953e947fea69e8900ff0b398be110b3a72f909bf32569fc3262937"
   },
   "moteAudio": {
     "taskId": "task-4a0debda",
@@ -138,5 +152,15 @@
     "taskId": "task-403cf3c4",
     "integratedInSource": "60590ddcde0c8c66139bc6c1bea47bbd45e0a717",
     "description": "Nine original occupied-cell UI emblems driven by actual earned/victory state; native extraction and representative browser fit/clipping reviewed."
+  },
+  "cursorAim": {
+    "taskId": "task-aaf6d58e",
+    "integratedInSource": "8b19c6cfdb599e7bc0e310e1960ac096ea1bc7a5",
+    "description": "Transient right-held cursor overrides smooth720deg/sec facing while flightcourse/braking remain. Primary shots use actualnose plus quartervelocity, including during turns; mobile keeps headingfire."
+  },
+  "pixelFontWrapper": {
+    "taskId": "task-90acc365",
+    "integratedInSource": "8b19c6cfdb599e7bc0e310e1960ac096ea1bc7a5",
+    "description": "Bounded256character/257span pixel-text wrapper preserves exact legacy Unicode/newline/truncation behavior, with durable oracle tests and independent native packet/allocator review."
   }
 }

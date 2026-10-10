@@ -1,0 +1,22 @@
+{
+  "id": "appgdep_6acab425f5088191b0bd6731be42608f",
+  "project_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93",
+  "title": "Galaxy Royale",
+  "version_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93~appgver_bf15ceb112a0819182e5142643b36fd8",
+  "type": "publish",
+  "status": "succeeded",
+  "url": "https://galaxy-royale-itchson.itchson.chatgpt.site",
+  "has_mcp": false,
+  "screenshot_asset_pointer": null,
+  "provider_deployment_id": "site---6aca50f5b1bc81918526a6ee969aac93",
+  "failure_message": null,
+  "env_set_revision": 0,
+  "updated_at": "2026-10-10T21:55:07.664154+00:00",
+  "commit_sha": "8b19c6cfdb599e7bc0e310e1960ac096ea1bc7a5",
+  "cacheVersion": "galaxy-37e3441c8c48302c",
+  "archive": {
+    "path": "work/galaxy-cursor-aim-release-20261011.tar.gz",
+    "bytes": 2128867,
+    "sha256": "939b92dcf6953e947fea69e8900ff0b398be110b3a72f909bf32569fc3262937"
+  }
+}

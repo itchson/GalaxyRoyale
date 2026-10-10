@@ -1,0 +1,61 @@
+{
+  "recorded_utc": "2026-10-10T21:53:37.7729773Z",
+  "scope": "Independent source/document and visual inspection of producer captures, not replayed browser interaction",
+  "actually_viewed": [
+    "cursor-aim-right-webgpu-final.jpg",
+    "cursor-aim-right-webgl2-final.jpg",
+    "cursor-aim-update-at-haven.jpg"
+  ],
+  "artifact_pins": {
+    "artifacts\\cursor-aim-validation.md": {
+      "sha256": "b962784313e0cb9954ee75e96050ece833a6684f3c753de0eb83022f1a775a56",
+      "bytes": 4740
+    },
+    "artifacts\\cursor-aim-right-webgpu.jpg": {
+      "sha256": "cc57851a9ffb70bf1b10b9ead4930aa84b868b75b370b99caf89e1e45f683195",
+      "bytes": 47326
+    },
+    "artifacts\\cursor-aim-right-webgl2.jpg": {
+      "sha256": "27c175fdabccaccc2baf4c673e7707a1b7e1ad4f1eca0f5319c170c7e64fd5ba",
+      "bytes": 42759
+    },
+    "artifacts\\cursor-aim-right-webgpu-final.jpg": {
+      "sha256": "e9282463a68f6844aa9f20cf1ed350afb5221a66aa2f09b7beef7520c28e970b",
+      "bytes": 42730
+    },
+    "artifacts\\cursor-aim-right-webgl2-final.jpg": {
+      "sha256": "8606154c8ffe58de288d8744913a0696ce53b9c4448e9ce4a3170812818a2f2d",
+      "bytes": 42738
+    },
+    "artifacts\\cursor-aim-update-at-haven.jpg": {
+      "sha256": "5a5bd0c8268a6015b061e99277f83b9af27a7cb5fbbb3f425823a82950682e91",
+      "bytes": 104929
+    },
+    "artifacts\\cursor-aim-webgl2-fixture-stats.txt": {
+      "sha256": "87a9277a20293b59d7bc35235d7f5fe80a37336daee1d926b2d3d80f2232d2e4",
+      "bytes": 358
+    },
+    "artifacts\\zoom-tuning-unaccepted-flight-after-scroll-webgpu.jpg": {
+      "sha256": "3010c4b56d2a5ffb7ae504b63b392c23c0605a82236c1a6165c7877b235ba9c5",
+      "bytes": 58390
+    },
+    "artifacts\\zoom-tuning-unaccepted-flight-narrow-webgpu.jpg": {
+      "sha256": "3615ba600d152469638f2a13281c63425925c2000c530f81b18c6990157be9e2",
+      "bytes": 2377
+    },
+    "artifacts\\zoom-tuning-unaccepted-viewport-menu-webgpu.jpg": {
+      "sha256": "725f74ce5f3a1042bf4ae16003119aa89efd1c8af4a6aea015893889f354fcd1",
+      "bytes": 4170
+    }
+  },
+  "acceptance": "No overclaim; exact command wording correction verified resolved",
+  "pending": [
+    "exact committed source/archive",
+    "physical phones",
+    "sustained soak",
+    "human moving/crowded readability",
+    "listening",
+    "natural full campaign",
+    "owner-authenticated remote gameplay"
+  ]
+}
