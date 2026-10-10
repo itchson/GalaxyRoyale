@@ -65,6 +65,10 @@ export class PixelUiBridge {
     });
     for (const name of ["input", "change", "focusin", "focusout", "scroll"])
       document.addEventListener(name, () => this.invalidate(), true);
+    // The native input owns editing; its selection can change without an input event.
+    document.addEventListener("selectionchange", () => {
+      if (document.activeElement?.id === "console-input") this.invalidate();
+    });
     window.addEventListener("resize", () => this.invalidate());
     document.fonts.ready.then(() => this.invalidate());
   }
@@ -78,8 +82,12 @@ export class PixelUiBridge {
     if (!Number.isFinite(scale) || scale <= 0) return;
     const groups: { position: number[]; nodes: Node[] }[] = [];
     const buttonKind = (element: HTMLElement): string => {
+      if (element.id === "menu-close") return "close-icon";
+      if (element.id === "save-indicator") return "save-icon";
+      if (element.classList.contains("dock-facility")) return "facility-label";
       if (element.closest(".menu-tabs")) return "nav-tab";
       if (element.classList.contains("primary-button")) return "primary-button";
+      if (element.classList.contains("restart-button")) return "restart-button";
       if (["return-title", "death-title", "quick-title"].includes(element.id))
         return "exit-button";
       const action = element.dataset.pixelAction;
@@ -124,7 +132,7 @@ export class PixelUiBridge {
           ),
         );
         const scroll = element.closest<HTMLElement>(
-          ".menu-tabs,#upgrade-content,#quest-content,#settings-content,#archive-content,#hangar-content,#campaign-content,#console-output,#dialogue-text,#run-summary",
+          ".menu-tabs,#pause-content,#upgrade-content,#quest-content,#settings-content,#archive-content,#hangar-content,#campaign-content,#console-output,#dialogue-text,#run-summary",
         );
         const scrollBounds = scroll ? scroll.getBoundingClientRect() : bounds;
         // Intersect both axes: scrolling never lets engine cells cross a panel.
@@ -165,7 +173,10 @@ export class PixelUiBridge {
             width,
             height,
           ],
-          text: text.replace(/\s+/g, " ").trim().slice(0, 256),
+          text:
+            kind === "input"
+              ? Array.from(text).slice(0, 256).join("")
+              : text.replace(/\s+/g, " ").trim().slice(0, 256),
           font,
           value,
           clip: [
@@ -204,7 +215,15 @@ export class PixelUiBridge {
         );
       if (root.classList.contains("console-card")) {
         const input = root.querySelector<HTMLInputElement>("#console-input");
-        if (input) add(input, "input", input.value);
+        if (input)
+          add(
+            input,
+            "input",
+            input.value,
+            Array.from(
+              input.value.slice(0, input.selectionStart ?? input.value.length),
+            ).length,
+          );
       }
       if (root.classList.contains("launch-card")) {
         add(root.querySelector<HTMLElement>("h1")!, "logo");
@@ -214,7 +233,7 @@ export class PixelUiBridge {
       const selectors =
         root.id === "game-ui"
           ? document.body.classList.contains("engine-flight")
-            ? "#dock-button,#site-button,#pause-button,#fullscreen,#quick-settings,#quick-title,#toast,#destination-marker"
+            ? ".dock-facility,#save-indicator,#site-button,#pause-button,#fullscreen,#quick-settings,#quick-title,#toast,#destination-marker"
             : "#toast"
           : "h2,h3,p,small,.eyebrow,.build-line span,.control-guide span,.upgrade-category span,.upgrade-category b,#quest-content li";
       for (const child of root.querySelectorAll<HTMLElement>(selectors))
@@ -231,13 +250,24 @@ export class PixelUiBridge {
               ? "[]"
               : child.id === "destination-marker"
                 ? "+"
-                : child.innerText,
+                : child.id === "save-indicator"
+                  ? ""
+                  : child.innerText,
+          child.id === "save-indicator"
+            ? Number(child.dataset.pixelValue ?? 0)
+            : 0,
         );
       if (root.id !== "game-ui") {
         for (const button of root.querySelectorAll<HTMLButtonElement>(
           "button,.import-label",
         ))
-          add(button, buttonKind(button), button.textContent ?? "");
+          add(
+            button,
+            buttonKind(button),
+            button.id === "settings-backup"
+              ? "SAVE / BACKUP"
+              : (button.textContent ?? ""),
+          );
         for (const label of root.querySelectorAll<HTMLLabelElement>(
           ".settings label",
         )) {

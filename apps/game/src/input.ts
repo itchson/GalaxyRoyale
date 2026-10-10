@@ -12,6 +12,7 @@ export class FlightInput {
   private aimCursor: [number, number] | null = null;
   private mouseFire = false;
   private mouseMove = false;
+  private consumedLeftPointer: number | null = null;
   private keys = new Set<string>();
   private active = false;
   get enabled(): boolean {
@@ -31,9 +32,28 @@ export class FlightInput {
     private fireButton: HTMLButtonElement,
     private onDestination: (world: [number, number]) => void,
     private onFireStart: () => void = () => {},
+    private onInteract: (world: [number, number]) => boolean = () => false,
   ) {
     canvas.addEventListener("contextmenu", (e) => e.preventDefault());
     canvas.addEventListener("pointerdown", (e) => {
+      if (!this.enabled) return;
+      if (
+        e.pointerType === "touch" ||
+        (e.button === 0 && !this.mouseMove && this.consumedLeftPointer === null)
+      ) {
+        const world = this.worldPoint(e.clientX, e.clientY);
+        if (world && this.onInteract(world)) {
+          e.preventDefault();
+          // A menu callback can synchronously disable/reset input. Do not
+          // restore held state after it; otherwise block this whole left press.
+          if (this.enabled && e.pointerType !== "touch") {
+            this.consumedLeftPointer = e.pointerId;
+            this.mouseMove = false;
+            this.destination = null;
+          }
+          return;
+        }
+      }
       if (!this.enabled || e.pointerType === "touch") return;
       canvas.setPointerCapture(e.pointerId);
       if (e.button === 0) {
@@ -44,20 +64,35 @@ export class FlightInput {
     });
     canvas.addEventListener("pointermove", (e) => {
       if (!this.enabled || e.pointerType === "touch") return;
-      this.mouseMove = (e.buttons & 1) !== 0;
+      this.mouseMove =
+        (e.buttons & 1) !== 0 && e.pointerId !== this.consumedLeftPointer;
       if (this.mouseMove) this.target(e);
       this.mouseButtons(e, true);
+      if ((e.buttons & 1) === 0) this.consumedLeftPointer = null;
     });
     canvas.addEventListener("pointerup", (e) => {
       if (!this.enabled || e.pointerType === "touch") return;
       this.mouseButtons(e, false);
+      if ((e.buttons & 1) === 0) this.consumedLeftPointer = null;
     });
     canvas.addEventListener("pointercancel", () => this.reset());
     canvas.addEventListener("lostpointercapture", () => {
       this.mouseFire = false;
       this.mouseMove = false;
+      this.consumedLeftPointer = null;
       this.aimCursor = null;
     });
+    const releaseConsumed = (e: PointerEvent) => {
+      if (
+        e.pointerId === this.consumedLeftPointer &&
+        (e.type === "pointercancel" || (e.buttons & 1) === 0)
+      )
+        this.consumedLeftPointer = null;
+    };
+    // Consumed facility presses deliberately have no capture, so their release
+    // can occur outside the canvas before another initial press is made.
+    window.addEventListener("pointerup", releaseConsumed);
+    window.addEventListener("pointercancel", releaseConsumed);
     stickArea.addEventListener("pointerdown", (e) => {
       if (!this.enabled || this.movePointer !== null) return;
       e.preventDefault();
@@ -121,7 +156,8 @@ export class FlightInput {
   private mouseButtons(e: PointerEvent, notifyStart: boolean): void {
     const wasFiring = this.mouseFire;
     this.mouseFire = (e.buttons & 2) !== 0;
-    this.mouseMove = (e.buttons & 1) !== 0;
+    this.mouseMove =
+      (e.buttons & 1) !== 0 && e.pointerId !== this.consumedLeftPointer;
     this.aimCursor = this.mouseFire ? [e.clientX, e.clientY] : null;
     // Establish all held state before a Haven callback can disable/reset it.
     if (notifyStart && this.mouseFire && !wasFiring) this.onFireStart();
@@ -214,6 +250,7 @@ export class FlightInput {
     this.firePointer = null;
     this.mouseFire = false;
     this.mouseMove = false;
+    this.consumedLeftPointer = null;
     this.keys.clear();
     this.stick.style.transform = "";
     this.fireButton.classList.remove("firing");

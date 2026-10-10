@@ -3,6 +3,7 @@ mod biome_enemies;
 mod boss_assets;
 pub mod bosses;
 pub mod campaign;
+mod dock_facilities;
 mod isotope_scar;
 mod pixel_assets;
 mod radiation_enemies;
@@ -558,6 +559,12 @@ impl Game {
 
     pub fn profile(&self) -> &Profile {
         &self.profile
+    }
+    /// Initial pointer presses may open a Haven service without issuing a course.
+    /// IDs: 0 upgrades, 1 hangar, 2 journal, 3 campaign.
+    pub fn dock_facility_at(&self, world: [f32; 2]) -> Option<u8> {
+        let player = self.world.get::<&Motion>(self.player).ok()?.position;
+        dock_facilities::at(player, Vec2::from_array(world), SAFE_RADIUS)
     }
     pub fn take_events(&mut self) -> Vec<GameEvent> {
         std::mem::take(&mut self.events)
@@ -2922,6 +2929,12 @@ impl Game {
                 color,
             );
         }
+        dock_facilities::render(
+            frame,
+            Vec2::from_array(self.render_camera(alpha)),
+            self.viewport,
+            self.cosmetic_time(),
+        );
         for (position, life) in &self.wake {
             if !self.visible(*position, 12.0) {
                 continue;

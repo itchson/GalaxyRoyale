@@ -21,6 +21,7 @@ fn button_accent(kind: &str) -> u32 {
     match kind {
         "primary-button" => rgb(106, 237, 193),
         "exit-button" => rgb(220, 125, 130),
+        "restart-button" => rgb(255, 215, 131),
         "offense-button" | "offense-text" => rgb(255, 147, 119),
         "defense-button" | "defense-text" => rgb(92, 191, 255),
         "passive-button" | "passive-text" => rgb(159, 225, 138),
@@ -150,6 +151,61 @@ impl FrameGeometry {
     }
 }
 static CELL: LazyLock<PixelBody> = LazyLock::new(|| PixelBody::from_ascii(&["#"], &[('#', WHITE)]));
+// Compact original control symbols are cached occupied objects, never text.
+static CLOSE_ICON: LazyLock<PixelBody> = LazyLock::new(|| {
+    PixelBody::from_ascii(
+        &[
+            "##.....##",
+            ".##...##.",
+            "..##.##..",
+            "...###...",
+            "....#....",
+            "...###...",
+            "..##.##..",
+            ".##...##.",
+            "##.....##",
+        ],
+        &[('#', WHITE)],
+    )
+});
+static SAVE_ICONS: LazyLock<[PixelBody; 3]> = LazyLock::new(|| {
+    [
+        [
+            "#######..",
+            "#+++#.##.",
+            "#+++#..##",
+            "#+++#...#",
+            "#########",
+            "#.....#.#",
+            "#.#..#..#",
+            "#..##...#",
+            "#########",
+        ],
+        [
+            "#######..",
+            "#+++#.##.",
+            "#+++#..##",
+            "#+++#...#",
+            "#########",
+            "#.......#",
+            "#.#.#.#.#",
+            "#.......#",
+            "#########",
+        ],
+        [
+            "#######..",
+            "#+++#.##.",
+            "#+++#..##",
+            "#+++#...#",
+            "#########",
+            "#.#...#.#",
+            "#..#.#..#",
+            "#...#...#",
+            "#########",
+        ],
+    ]
+    .map(|rows| PixelBody::from_ascii(&rows, &[('#', WHITE), ('+', DIM)]))
+});
 // Original comms portrait, authored here as object-local cells. The dark suit,
 // helmet, brows, headset and face remain readable at its native 24×32 size.
 const PORTRAIT_MASK: [&str; 32] = [
@@ -365,6 +421,64 @@ struct Painter<'a> {
     work_remaining: usize,
 }
 impl Painter<'_> {
+    fn control_icon(&mut self, node: &UiNode) {
+        let (body, accent) = if node.kind == "close-icon" {
+            (&*CLOSE_ICON, WHITE)
+        } else {
+            let state = selection(node.value, SAVE_ICONS.len());
+            (
+                &SAVE_ICONS[state],
+                [rgb(106, 237, 193), rgb(88, 222, 239), rgb(220, 125, 130)][state],
+            )
+        };
+        let count = body.occupied_count();
+        if count > self.remaining || count > self.work_remaining {
+            return;
+        }
+        let r = node.rect;
+        let fit = (r[2] / body.width as f32).min(r[3] / body.height as f32);
+        if !fit.is_finite() || fit <= 0.0 {
+            return;
+        }
+        let scale = if fit >= 1.0 {
+            fit.floor()
+        } else {
+            1.0 / (1.0 / fit).ceil()
+        };
+        let local = Transform {
+            position: Vec2::new(r[0] + r[2] * 0.5, r[1] + r[3] * 0.5),
+            scale: Vec2::splat(scale),
+            ..Transform::default()
+        };
+        let clip = self.clip;
+        self.frame.push_body_affine_colored(
+            body,
+            self.parent.compose(local.affine()),
+            |cell, shade| {
+                let p = local.point(cell);
+                let half = scale * 0.5;
+                // Keep entire visible icon cells inside a scrolling clip.
+                if clip.is_some_and(|c| {
+                    p.x - half < c[0]
+                        || p.x + half > c[0] + c[2]
+                        || p.y - half < c[1]
+                        || p.y + half > c[1] + c[3]
+                }) {
+                    0
+                } else if node.disabled {
+                    BUTTON_DISABLED_TEXT
+                } else if shade == DIM {
+                    button_tone(accent, 0.52)
+                } else if node.active {
+                    brighten(accent)
+                } else {
+                    accent
+                }
+            },
+        );
+        self.remaining -= count;
+        self.work_remaining -= count;
+    }
     fn pixel(&mut self, position: Vec2, size: f32, color: u32) {
         if self.remaining == 0 || self.work_remaining == 0 {
             return;
@@ -840,40 +954,83 @@ impl Painter<'_> {
             "portrait" => self.portrait(node, time, reduced),
             "campaign-patch" => self.campaign(node, false, time, reduced),
             "campaign-ship" => self.campaign(node, true, time, reduced),
-            "input" => {
-                self.frame("button", r, node.active, node.disabled);
-                let height = (r[3] - 6.0).max(RoyaleMono::HEIGHT);
-                let width = (r[2] - 12.0).max(RoyaleMono::WIDTH);
-                let font = font.min((height / RoyaleMono::HEIGHT).floor().max(1.0));
-                let columns = ((width + font) / (RoyaleMono::ADVANCE * font)).floor() as usize;
-                let chars: Vec<_> = node.text.chars().take(256).collect();
-                let begin = chars.len().saturating_sub(columns.saturating_sub(3));
-                let value: String = chars[begin..].iter().collect();
-                let cursor =
-                    if node.active && (reduced || (time * 2.0).floor().rem_euclid(2.0) == 0.0) {
-                        '|'
-                    } else {
-                        ' '
-                    };
+            "close-icon" | "save-icon" => self.control_icon(node),
+            "facility-label" => {
+                let label = [r[0] + r[2] * 0.5 - 50.0, r[1] + r[3] + 2.0, 100.0, 10.0];
+                let previous_clip = self.clip;
+                self.clip = Some(previous_clip.map_or(label, |clip| intersection(label, clip)));
                 self.text(
-                    [
-                        r[0] + 6.0,
-                        r[1] + (r[3] - RoyaleMono::HEIGHT * font) * 0.5,
-                        width,
-                        RoyaleMono::HEIGHT * font,
-                    ],
-                    &format!("> {value}{cursor}"),
-                    font,
-                    color,
-                    false,
+                    label,
+                    &node.text,
+                    1.0,
+                    if node.disabled {
+                        BUTTON_DISABLED_TEXT
+                    } else if node.active {
+                        CYAN
+                    } else {
+                        rgb(98, 143, 156)
+                    },
+                    true,
                 );
+                self.clip = previous_clip;
+            }
+            "input" => {
+                // A console command line belongs to the black console surface.
+                // It has no button frame; the DOM input still owns all editing.
+                let previous_clip = self.clip;
+                self.clip = Some(previous_clip.map_or(r, |clip| intersection(r, clip)));
+                self.rect(r, rgb(0, 0, 0));
+                self.rect([r[0], r[1], r[2], 1.0], rgb(38, 55, 63));
+                let height = (r[3] - 6.0).max(RoyaleMono::HEIGHT);
+                let font = font.min((height / RoyaleMono::HEIGHT).floor().max(1.0));
+                let advance = RoyaleMono::ADVANCE * font;
+                let columns = ((r[2] + font) / advance).floor() as usize;
+                let chars: Vec<_> = node.text.chars().take(256).collect();
+                let caret = if node.value.is_finite() {
+                    (node.value.max(0.0) as usize).min(chars.len())
+                } else {
+                    chars.len()
+                };
+                // Leave room for the prompt and caret; scroll toward the edited
+                // position rather than always displaying the end of the command.
+                let capacity = columns.saturating_sub(3);
+                let begin = caret.saturating_sub(capacity);
+                let end = chars.len().min(begin + capacity);
+                let y = r[1] + (r[3] - RoyaleMono::HEIGHT * font) * 0.5;
+                for (column, character) in ['>', ' '].iter().chain(&chars[begin..end]).enumerate() {
+                    let mut encoded = [0; 4];
+                    self.text(
+                        [
+                            r[0] + column as f32 * advance,
+                            y,
+                            RoyaleMono::WIDTH * font,
+                            RoyaleMono::HEIGHT * font,
+                        ],
+                        character.encode_utf8(&mut encoded),
+                        font,
+                        color,
+                        false,
+                    );
+                }
+                if node.active && (reduced || (time * 2.0).floor().rem_euclid(2.0) == 0.0) {
+                    self.rect(
+                        [
+                            r[0] + (2 + caret - begin) as f32 * advance,
+                            y,
+                            font,
+                            RoyaleMono::HEIGHT * font,
+                        ],
+                        GOLD,
+                    );
+                }
+                self.clip = previous_clip;
             }
             "button" => {
                 self.frame("button", r, node.active, node.disabled);
                 self.button_label(node, font, color);
             }
             "nav-tab" | "primary-button" | "exit-button" | "offense-button" | "defense-button"
-            | "passive-button" => self.semantic_button(node, font),
+            | "passive-button" | "restart-button" => self.semantic_button(node, font),
             "logo" => {
                 let width = ASSETS
                     .sprites
@@ -1364,6 +1521,7 @@ mod tests {
             let node = &mut scene.groups[0].nodes[0];
             node.rect = [0.0, 0.0, 160.0, 20.0];
             node.text = "HELP".into();
+            node.value = 4.0;
             node.font = 1.0;
             node.active = true;
             let mut frame = FrameBuilder::new();
@@ -1372,7 +1530,7 @@ mod tests {
         };
         assert_eq!(
             extract(0.0, false).pixel_count - extract(0.75, false).pixel_count,
-            7
+            1
         );
         assert_eq!(
             extract(0.0, true).batches[0].pixels,
@@ -1381,6 +1539,50 @@ mod tests {
         for character in ['|', '_', '?', '=', '#', ',', '\''] {
             assert!(RoyaleMono::body(character).occupied_count() > 0);
         }
+    }
+    #[test]
+    fn console_input_is_black_and_caret_tracks_middle_and_scrolled_tail() {
+        let extract = |text: &str, caret: f32| {
+            let mut scene = scene("input");
+            let node = &mut scene.groups[0].nodes[0];
+            node.rect = [5.0, 9.0, 60.0, 20.0];
+            node.text = text.into();
+            node.value = caret;
+            node.font = 1.0;
+            node.active = true;
+            let mut frame = FrameBuilder::new();
+            draw(&mut frame, &scene, [0.0; 2], [640.0, 360.0], 0.0, true);
+            frame.finish()
+        };
+        for (text, caret, expected) in [("HELP", 1.0, 23.0), ("0123456789ABCDEF", 16.0, 59.0)] {
+            let frame = extract(text, caret);
+            let batch = &frame.batches[0];
+            assert_eq!(batch.pixels[0].color, rgb(0, 0, 0));
+            let background = batch.transforms[batch.pixels[0].transform as usize];
+            assert_eq!((background.a[2], background.b[1]), (60.0, 20.0));
+            let cursor = batch.pixels.iter().find(|p| p.color == GOLD).unwrap();
+            let transform = batch.transforms[cursor.transform as usize];
+            assert_eq!((transform.a[2], transform.b[1]), (1.0, 7.0));
+            let center = transform.point(Vec2::from_array(cursor.local)) + Vec2::new(320.0, 180.0)
+                - Vec2::new(100.0, 50.0);
+            assert_eq!(center.x - 0.5, expected);
+            for pixel in &batch.pixels {
+                let transform = batch.transforms[pixel.transform as usize];
+                let center = transform.point(Vec2::from_array(pixel.local))
+                    + Vec2::new(320.0, 180.0)
+                    - Vec2::new(100.0, 50.0);
+                assert!(center.x >= 5.0 && center.x <= 65.0 && center.y >= 9.0 && center.y <= 29.0);
+            }
+        }
+        // Spaces occupy real columns rather than being collapsed by paragraph wrapping.
+        let spaced = extract("  A", 0.0);
+        let batch = &spaced.batches[0];
+        let glyph = batch
+            .transforms
+            .iter()
+            .find(|t| t.a[2] == 1.0 && t.b[1] == 1.0 && t.a[0] > -200.0)
+            .unwrap();
+        assert_eq!(glyph.a[0] - RoyaleMono::WIDTH * 0.5 + 320.0 - 100.0, 29.0);
     }
     fn scene(kind: &str) -> UiScene {
         UiScene {
@@ -1551,3 +1753,7 @@ mod wrapping_tests;
 #[cfg(test)]
 #[path = "ui_button_tests.rs"]
 mod semantic_button_tests;
+
+#[cfg(test)]
+#[path = "ui_icon_tests.rs"]
+mod icon_tests;

@@ -282,6 +282,9 @@ export class SaveStore {
   private latest?: Profile;
   private imported = false;
   message = "Progress stays on this device.";
+  get persistent(): boolean {
+    return Boolean(this.db);
+  }
   async open(): Promise<Profile | null> {
     this.db?.close();
     this.db = undefined;

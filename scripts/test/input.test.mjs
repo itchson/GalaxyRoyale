@@ -6,7 +6,10 @@ class Surface extends EventTarget {
   style = {};
   classList = { add() {}, remove() {} };
   rect = { left: 0, top: 0, width: 100, height: 100 };
-  setPointerCapture() {}
+  captures = [];
+  setPointerCapture(id) {
+    this.captures.push(id);
+  }
   getBoundingClientRect() {
     return this.rect;
   }
@@ -436,4 +439,179 @@ test("pressing right during a captured left drag triggers Haven interception exa
     aim: null,
     fire: false,
   });
+});
+
+function interactionSetup(onInteract, onFireStart = () => {}) {
+  globalThis.window = new EventTarget();
+  const canvas = new Surface(),
+    area = new Surface(),
+    stick = new Surface(),
+    fire = new Surface();
+  const courses = [];
+  const input = new FlightInput(
+    canvas,
+    area,
+    stick,
+    fire,
+    (point) => courses.push(point),
+    onFireStart,
+    onInteract,
+  );
+  input.enabled = true;
+  input.camera = [100, 200];
+  input.viewport = [800, 360];
+  return { input, canvas, area, fire, courses };
+}
+
+test("initial left facility press consumes the world point before movement capture and blocks its drag", () => {
+  const interactions = [];
+  const { input, canvas, courses } = interactionSetup((point) => {
+    interactions.push(point);
+    return true;
+  });
+  pointer(canvas, "pointerdown", {
+    pointerType: "mouse",
+    clientX: 75,
+    clientY: 25,
+  });
+  assert.deepEqual(interactions, [[300, 110]]);
+  assert.deepEqual(canvas.captures, []);
+  assert.equal(input.sample().destination, null);
+  pointer(canvas, "pointermove", {
+    pointerType: "mouse",
+    clientX: 90,
+    buttons: 1,
+  });
+  assert.equal(input.sample().destination, null);
+  assert.deepEqual(courses, []);
+  pointer(canvas, "pointerup", { pointerType: "mouse", buttons: 0 });
+  pointer(canvas, "pointerdown", { pointerType: "mouse", clientX: 25 });
+  assert.equal(interactions.length, 2);
+});
+
+test("declined facility press navigates normally and held left dragging never invokes interaction", () => {
+  const interactions = [];
+  const { input, canvas, courses } = interactionSetup((point) => {
+    interactions.push(point);
+    return false;
+  });
+  pointer(canvas, "pointerdown", {
+    pointerType: "mouse",
+    clientX: 75,
+    clientY: 25,
+  });
+  assert.deepEqual(canvas.captures, [1]);
+  assert.deepEqual(input.sample().destination, [300, 110]);
+  pointer(canvas, "pointermove", {
+    pointerType: "mouse",
+    clientX: 90,
+    buttons: 1,
+  });
+  assert.deepEqual(input.sample().destination, [420, 200]);
+  assert.equal(interactions.length, 1);
+  assert.equal(courses.length, 2);
+});
+
+test("canvas touch facility taps consume while empty-space touches preserve joystick controls", () => {
+  const interactions = [];
+  const { input, canvas, area, courses } = interactionSetup((point) => {
+    interactions.push(point);
+    return point[0] === 300;
+  });
+  pointer(canvas, "pointerdown", { clientX: 75, clientY: 25 });
+  pointer(canvas, "pointerup", { buttons: 0 });
+  pointer(canvas, "pointerdown", { clientX: 25, clientY: 50 });
+  pointer(canvas, "pointermove", { clientX: 0 });
+  assert.deepEqual(interactions, [
+    [300, 110],
+    [-100, 200],
+  ]);
+  assert.deepEqual(canvas.captures, []);
+  assert.deepEqual(courses, []);
+  assert.equal(input.sample().destination, null);
+  pointer(area, "pointerdown", { pointerId: 3, clientX: 84 });
+  assert.deepEqual(input.sample().joystick, [1, 0]);
+  assert.equal(interactions.length, 2);
+});
+
+test("right aim and mobile fire do not invoke facilities and retain optional fire-start compatibility", () => {
+  let interactions = 0,
+    starts = 0;
+  const { input, canvas, fire } = interactionSetup(
+    () => {
+      interactions++;
+      return true;
+    },
+    () => starts++,
+  );
+  pointer(canvas, "pointerdown", {
+    pointerType: "mouse",
+    button: 2,
+    buttons: 2,
+    clientX: 75,
+  });
+  assert.deepEqual(input.sample().aim, [300, 200]);
+  assert.equal(input.sample().fire, true);
+  pointer(canvas, "pointerup", { pointerType: "mouse", button: 2, buttons: 0 });
+  pointer(fire, "pointerdown", { pointerId: 7 });
+  assert.equal(input.sample().fire, true);
+  assert.equal(interactions, 0);
+  assert.equal(starts, 2);
+});
+
+test("facility callback disabling input cannot restore a course or consumed held gesture", () => {
+  let input;
+  const controls = interactionSetup(() => {
+    input.enabled = false;
+    return true;
+  });
+  input = controls.input;
+  pointer(controls.canvas, "pointerdown", {
+    pointerType: "mouse",
+    clientX: 75,
+  });
+  assert.deepEqual(controls.canvas.captures, []);
+  assert.deepEqual(input.sample(), {
+    joystick: null,
+    destination: null,
+    aim: null,
+    fire: false,
+  });
+  pointer(controls.canvas, "pointermove", { pointerType: "mouse", buttons: 1 });
+  input.enabled = true;
+  assert.deepEqual(input.sample(), {
+    joystick: null,
+    destination: null,
+    aim: null,
+    fire: false,
+  });
+});
+
+test("invalid or disabled projection never invokes a facility callback", () => {
+  let interactions = 0;
+  const { input, canvas } = interactionSetup(() => {
+    interactions++;
+    return true;
+  });
+  canvas.rect.width = 0;
+  pointer(canvas, "pointerdown", { pointerType: "mouse" });
+  pointer(canvas, "pointerdown", { pointerType: "touch" });
+  canvas.rect.width = 100;
+  input.enabled = false;
+  pointer(canvas, "pointerdown", { pointerType: "mouse" });
+  assert.equal(interactions, 0);
+});
+
+test("release outside an uncaptured facility press admits the next initial click", () => {
+  let interactions = 0;
+  const { input, canvas } = interactionSetup(() => {
+    interactions++;
+    return true;
+  });
+  pointer(canvas, "pointerdown", { pointerType: "mouse", clientX: 75 });
+  pointer(window, "pointerup", { pointerType: "mouse", buttons: 0 });
+  pointer(canvas, "pointerdown", { pointerType: "mouse", clientX: 75 });
+  assert.equal(interactions, 2);
+  assert.equal(input.sample().destination, null);
+  assert.deepEqual(canvas.captures, []);
 });

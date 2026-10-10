@@ -1,0 +1,90 @@
+{
+  "recordedAt": "2026-10-10T22:36:24.281605Z",
+  "lastPrivateMetadataObserved": {
+    "cache": "galaxy-37e3441c8c48302c",
+    "deploymentId": "appgdep_6acab425f5088191b0bd6731be42608f",
+    "commit": "8b19c6cfdb599e7bc0e310e1960ac096ea1bc7a5",
+    "status": "succeeded",
+    "appliesToTarget": false
+  },
+  "hashes": [
+    {
+      "path": "apps/game/src/main.ts",
+      "sha256": "556a8c53ae4117dfe7195dfab55a8e9ac468efa3a66ba6bd806cb7f7a50658e5"
+    },
+    {
+      "path": "apps/game/src/input.ts",
+      "sha256": "f87bcf312e904c9011b73798c407bc8daa77fbc5c3ac34186be60587e5028eb4"
+    },
+    {
+      "path": "apps/game/src/style.css",
+      "sha256": "bde3cfca8deb788f412bdbce64d83d6c36368d121e41b0779a9f3b767cc2da89"
+    },
+    {
+      "path": "apps/game/src/campaign.css",
+      "sha256": "b38fbdb64a002538a32cd9108a1a6c749d8948ffac1a7620eac9dd47904ef5e8"
+    },
+    {
+      "path": "apps/game/src/dialogue.css",
+      "sha256": "bd6dda7161f42692dea9a00c8267989529a08d94038ce4c2b8d6670322542226"
+    },
+    {
+      "path": "apps/game/src/debug-console.css",
+      "sha256": "1fea7736632ed25d5dae1a33c43c91e21e0c7dc2b7d6bf60d2fdb916de36c053"
+    },
+    {
+      "path": "scripts/pwa.mjs",
+      "sha256": "dfab5c87696dfb7bb8b5badc376af3d868f6cb7357c2fda0eba5d7e93d6a28b9"
+    },
+    {
+      "path": "dist/index.html",
+      "sha256": "c36ea178add0b1caaabd3618c8006dca60f2ee8e5c0697b3408e336093564dd1"
+    },
+    {
+      "path": "dist/sw.js",
+      "sha256": "d500c6ce0f7298bb5be319b358963c514c61b0e7fc58d9bd5e14e5251087dfad"
+    },
+    {
+      "path": "dist/assets/index-0nC89wsy.js",
+      "sha256": "428ffb404fe739c58d115fde9a1d1a66948c51da1dcbbd2898554a8881e008c8"
+    },
+    {
+      "path": "dist/assets/index-DcmMweY9.css",
+      "sha256": "9444febb95ab52bf752870f2e8c16092b1193c6f66dfe1a0308b2f9e5c8f02b1"
+    },
+    {
+      "path": "dist/wasm/webgpu/galaxy_bg.wasm",
+      "sha256": "26ed131d32196d1fc9a3e58117dab927bb14a3f4d5803e1c78be991490f85cc9"
+    },
+    {
+      "path": "dist/wasm/webgl2/galaxy_bg.wasm",
+      "sha256": "0a90caddf5fb124c8dc7657992eb0d68aef24f31e1ecb0790a705211bf1e1367"
+    }
+  ],
+  "physicalObservationsMade": false,
+  "target": {
+    "runtimeCommit": "c5fc5221a89ba0e312b9f07282b219e3c10716d3",
+    "cache": "galaxy-95d0a4d39116971e",
+    "status": "Exact owner-private published normal package; authenticated remote gameplay and physical execution remain unmeasured",
+    "deploymentId": "appgdep_6acabdfbc664819182d39ad546e0de71",
+    "script": "/assets/index-0nC89wsy.js",
+    "style": "/assets/index-DcmMweY9.css",
+    "cachedGameAssets": 18
+  },
+  "currentPublishedAuthority": {
+    "observedAt": "2026-10-10T22:40:09.5147385Z",
+    "cache": "galaxy-95d0a4d39116971e",
+    "deploymentId": "appgdep_6acabdfbc664819182d39ad546e0de71",
+    "rawDeployment": "artifacts/cosmic-ui-private-deployment.json",
+    "commit": "c5fc5221a89ba0e312b9f07282b219e3c10716d3",
+    "updatedUtc": "2026-11-09T22:37:01.0000000Z",
+    "sourceVsMetadataBoundary": "Runtime commit is deployed source, not a future metadata-only evidence commit",
+    "authenticatedRemoteExecution": "Pending",
+    "status": "succeeded",
+    "rawDeploymentSha256": "75cd41dae8f22d373d0d6206d1e5807dd0c6013e85e749b4c5ef9fc3a08d62f3",
+    "releaseMetadata": "artifacts/private-release.json",
+    "origin": "https://galaxy-royale-itchson.itchson.chatgpt.site",
+    "physicalDeviceExecution": "Not run",
+    "versionId": "appgprj_6aca50f5b1bc81918526a6ee969aac93~appgver_0d66277314748191bf66d824c4574322"
+  }
+}

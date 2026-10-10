@@ -2,6 +2,11 @@ import "./style.css";
 import { FlightInput } from "./input";
 import { AudioEngine } from "./audio";
 import { PixelUiBridge } from "./pixel-ui";
+import {
+  bindWebglLifecycle,
+  createWebglLossProbe,
+  type WebglLifecycle,
+} from "./webgl-lifecycle";
 import { DebugConsole } from "./debug-console";
 import { DialoguePanel } from "./dialogue";
 import {
@@ -106,6 +111,9 @@ interface Step {
   simulation_ms: number;
   render_ms: number;
 }
+interface RendererRecovery {
+  free(): void;
+}
 interface GalaxyRuntime {
   step(milliseconds: number, input: unknown): Step;
   hud(): Hud;
@@ -131,9 +139,10 @@ interface GalaxyRuntime {
   switch_ship(id: number): void;
   acknowledge_credits(): void;
   return_to_home(): void;
+  dock_facility_at(x: number, y: number): number;
   diagnostic(command: string): void;
   boss_ui_bounds(): Float32Array;
-  recover(): Promise<void>;
+  install_recovery(renderer: RendererRecovery): void;
   lose_device(): void;
   free(): void;
 }
@@ -164,21 +173,31 @@ const touchUi =
   (diagnosticMode && params.has("touch"));
 document.body.classList.toggle("touch-ui", touchUi);
 let galaxy: GalaxyRuntime;
+let prepareRecovery: (canvas: HTMLCanvasElement) => Promise<RendererRecovery>;
 let input: FlightInput;
 let pixelUi: PixelUiBridge;
 let consoleWasRunning = false;
 let dialogueWasRunning = false;
 let beforeLaunchMenu = false;
-const menuPages = [
-  "upgrades",
-  "hangar",
-  "campaign",
-  "journal",
-  "settings",
-  "archive",
-] as const;
-type MenuTab = (typeof menuPages)[number] | "credits";
+type MenuTab =
+  | "pause"
+  | "upgrades"
+  | "hangar"
+  | "campaign"
+  | "journal"
+  | "settings"
+  | "archive"
+  | "credits";
 let menuTab: MenuTab = "upgrades";
+const facilityPages = ["upgrades", "hangar", "journal", "campaign"] as const;
+const facilityPositions = [
+  [-120, -80],
+  [120, -80],
+  [-120, 95],
+  [120, 95],
+] as const;
+let pendingSaves = 0;
+let saveFailed = false;
 let creditsPresented = false;
 let transitionEpoch = 0;
 let preparingEncounter: number | null = null;
@@ -187,6 +206,8 @@ let launched = false;
 let paused = true;
 let recovering = false;
 let graphicsFailed = false;
+let webglLifecycle: WebglLifecycle | null = null;
+let recoverAfterContextRestore = false;
 let lastTime = 0;
 let previousDock = true;
 let destination: [number, number] | null = null;
@@ -362,6 +383,18 @@ const dialoguePanel = new DialoguePanel({
   },
 });
 function restoreUi(): void {
+  if (
+    graphicsFailed &&
+    launched &&
+    menu.hidden &&
+    deathScreen.hidden &&
+    preparingEncounter === null &&
+    !debugConsole.opened &&
+    !dialoguePanel.opened
+  ) {
+    pause(false);
+    return;
+  }
   galaxy.set_ui_mode(
     !deathScreen.hidden
       ? 0
@@ -396,13 +429,50 @@ function toast(message: string): void {
     3500,
   );
 }
+function paintSaveStatus(): void {
+  const state = saveFailed || !store.persistent ? 2 : pendingSaves > 0 ? 1 : 0;
+  const indicator = element("save-indicator");
+  indicator.dataset.pixelValue = String(state);
+  indicator.title =
+    state === 1
+      ? "Saving progression…"
+      : state === 2
+        ? store.message
+        : "Progress saved automatically on this device.";
+  indicator.setAttribute(
+    "aria-label",
+    `${state === 1 ? "Saving" : state === 2 ? "Save needs attention" : "Progress saved"}. Open save and backup`,
+  );
+  element("save-status").textContent = indicator.title;
+  pixelUi?.invalidate();
+}
+async function persist(profile: Profile): Promise<void> {
+  pendingSaves++;
+  paintSaveStatus();
+  try {
+    await store.save(profile);
+    saveFailed = false;
+  } catch (error) {
+    saveFailed = true;
+    throw error;
+  } finally {
+    pendingSaves--;
+    paintSaveStatus();
+  }
+}
 function save(profile: Profile): void {
-  void store.save(profile).catch((error) => {
+  void persist(profile).catch((error) => {
     if (error instanceof SaveConflict && !paused) pause(false);
     toast(store.message);
   });
 }
 function resize(): void {
+  // Window events can arrive while a replacement device is being prepared.
+  // Configure only a live renderer; successful recovery applies the latest size.
+  if (recovering || graphicsFailed || webglLifecycle?.lost) return;
+  resizeGraphics();
+}
+function resizeGraphics(): void {
   if (!galaxy) return;
   const ratio = Math.min(devicePixelRatio || 1, 3);
   galaxy.resize(
@@ -471,7 +541,27 @@ function pause(dock: boolean): void {
   element("save-status").textContent = store.message;
   save(galaxy.profile());
   beforeLaunchMenu = false;
-  selectMenuTab(dock ? "upgrades" : "settings");
+  selectMenuTab(dock ? "upgrades" : "pause");
+}
+function openMenu(page: MenuTab): void {
+  if (!galaxy) return;
+  if (launched) pause(false);
+  else {
+    beforeLaunchMenu = true;
+    launchScreen.hidden = true;
+    menu.hidden = false;
+    hud = galaxy.hud();
+    galaxy.set_ui_mode(3);
+  }
+  selectMenuTab(page);
+  element("menu-close").focus();
+}
+function interactDock(world: [number, number]): boolean {
+  if (!launched || paused || !hud.dock) return false;
+  const index = galaxy.dock_facility_at(...world);
+  if (index < 0 || index >= facilityPages.length) return false;
+  openMenu(facilityPages[index]);
+  return true;
 }
 const campaignActions: CampaignActions = {
   navigate: (position) => {
@@ -536,7 +626,7 @@ async function beginEncounter(start: () => void): Promise<void> {
   try {
     start();
     hud = galaxy.hud();
-    await store.save(galaxy.profile());
+    await persist(galaxy.profile());
     await store.flush();
     if (epoch !== transitionEpoch || !launched || !deathScreen.hidden) return;
     menu.hidden = true;
@@ -578,6 +668,7 @@ function finishCredits(): void {
 function selectMenuTab(tab: MenuTab): void {
   menuTab = tab;
   const headings: Record<MenuTab, [string, string]> = {
+    pause: ["FLIGHT PAUSED", "Your collected progress is saved automatically."],
     upgrades: [
       hud.dock ? "EVOLVE YOUR SHIP" : "SHIP UPGRADES",
       "Each rank costs 10 matching points and requires its ship level.",
@@ -608,23 +699,15 @@ function selectMenuTab(tab: MenuTab): void {
   };
   element("menu-title").textContent = headings[tab][0];
   element("menu-description").textContent = headings[tab][1];
-  element("return-title").hidden = beforeLaunchMenu;
+  element("pause-content").hidden = tab !== "pause";
   element("upgrade-content").hidden = tab !== "upgrades";
   element("settings-content").hidden = tab !== "settings";
   element("archive-content").hidden = tab !== "archive";
   element("quest-content").hidden = tab !== "journal";
   element("hangar-content").hidden = tab !== "hangar";
   element("campaign-content").hidden = tab !== "campaign" && tab !== "credits";
-  for (const page of menuPages) {
-    const button = element(`tab-${page}`);
-    const selected = page === tab;
-    button.dataset.active = String(selected);
-    button.setAttribute("aria-selected", String(selected));
-    button.tabIndex =
-      selected || (tab === "credits" && page === "campaign") ? 0 : -1;
-    if (selected)
-      button.scrollIntoView({ block: "nearest", inline: "nearest" });
-  }
+  menu.classList.toggle("pause-menu", tab === "pause");
+  menu.setAttribute("aria-labelledby", "menu-title");
   if (tab === "upgrades") paintUpgrades(hud.dock);
   if (tab === "campaign")
     paintCampaign(element("campaign-content"), hud.campaign, campaignActions);
@@ -689,17 +772,7 @@ function selectMenuTab(tab: MenuTab): void {
   pixelUi?.invalidate();
 }
 function openLaunchSettings(): void {
-  if (!galaxy) return;
-  beforeLaunchMenu = true;
-  launchScreen.hidden = true;
-  menu.hidden = false;
-  galaxy.set_ui_mode(3);
-  element("menu-title").textContent = "SETTINGS";
-  element("menu-description").textContent =
-    "Tune your expedition. Settings stay on this device.";
-  element("resume").textContent = "RETURN TO TITLE";
-  hud = galaxy.hud();
-  selectMenuTab("settings");
+  openMenu("settings");
 }
 async function resume(): Promise<void> {
   if (menuTab === "credits" && hud?.campaign.credits_pending) {
@@ -711,7 +784,6 @@ async function resume(): Promise<void> {
     beforeLaunchMenu = false;
     menu.hidden = true;
     launchScreen.hidden = false;
-    element("resume").textContent = "RETURN TO FLIGHT";
     galaxy.set_ui_mode(2);
     pixelUi?.invalidate();
     return;
@@ -721,6 +793,7 @@ async function resume(): Promise<void> {
     preparingEncounter !== null ||
     recovering ||
     graphicsFailed ||
+    webglLifecycle?.lost ||
     debugConsole.opened ||
     dialoguePanel.opened ||
     document.hidden ||
@@ -740,6 +813,9 @@ async function resume(): Promise<void> {
   await audio.resume();
   if (
     paused ||
+    recovering ||
+    graphicsFailed ||
+    webglLifecycle?.lost ||
     debugConsole.opened ||
     dialoguePanel.opened ||
     document.hidden
@@ -838,7 +914,7 @@ function paintHud(): void {
     : hud.danger === 0
       ? "ASTEROID FRONTIER"
       : `THREAT LEVEL ${hud.danger}`;
-  element("dock-button").hidden = !hud.dock || paused || !launched;
+  element("dock-button").hidden = true;
   const siteButton = element<HTMLButtonElement>("site-button");
   const arena = hud.campaign.arena;
   const gate =
@@ -908,6 +984,35 @@ function paintHud(): void {
     radar.stroke();
   }
 }
+function paintFacilities(): void {
+  const viewport = galaxy.world_viewport();
+  const bounds = canvas.getBoundingClientRect();
+  for (const [index, position] of facilityPositions.entries()) {
+    const node = element(`facility-${index}`);
+    const x =
+      bounds.left +
+      bounds.width * (0.5 + (position[0] - hud.camera[0]) / viewport[0]);
+    const y =
+      bounds.top +
+      bounds.height * (0.5 + (position[1] - hud.camera[1]) / viewport[1]);
+    const size = Math.max(44, (48 * bounds.width) / viewport[0]);
+    node.hidden =
+      !launched ||
+      paused ||
+      !hud.dock ||
+      x < bounds.left + size / 2 ||
+      x > bounds.right - size / 2 ||
+      y < bounds.top + size / 2 ||
+      y > bounds.bottom - size / 2;
+    if (!node.hidden) {
+      node.style.left = `${x}px`;
+      node.style.top = `${y}px`;
+      node.style.width = `${size}px`;
+      node.style.height = `${size}px`;
+    }
+  }
+  pixelUi?.invalidate();
+}
 function paintDestination(): void {
   const marker = element("destination-marker");
   if (destination) pixelUi?.invalidate();
@@ -934,59 +1039,120 @@ function paintDestination(): void {
   marker.style.left = `${x}px`;
   marker.style.top = `${y}px`;
 }
-async function recover(error: unknown): Promise<boolean> {
-  if (recovering) return false;
-  recovering = true;
+function onWebglLost(): void {
   input.reset();
   input.enabled = false;
   galaxy.set_paused(true);
+  audio.suspend();
+  lastTime = 0;
+  document.body.classList.remove("pixel-ready");
+  toast("Graphics context lost. Waiting for browser restoration.");
+}
+function onWebglRestored(): void {
+  if (recovering) recoverAfterContextRestore = true;
+  else {
+    recoverAfterContextRestore = false;
+    void recover("WebGL context restored");
+  }
+}
+async function recover(_trigger: unknown): Promise<boolean> {
+  if (!galaxy || recovering || webglLifecycle?.lost) return false;
+  const wasRunning = launched && !paused;
+  recovering = true;
+  document.body.classList.remove("pixel-ready");
+  input.reset();
+  input.enabled = false;
+  galaxy.set_paused(true);
+  audio.suspend();
   toast("Reconnecting the graphics engine…");
   try {
-    await galaxy.recover();
+    // Preparation owns its new GPU resources, without borrowing the live Game.
+    // UI, visibility and save handlers remain safe while this promise is pending.
+    const renderer = await prepareRecovery(canvas);
+    if (webglLifecycle?.lost || recoverAfterContextRestore) {
+      renderer.free();
+      return false;
+    }
+    galaxy.install_recovery(renderer);
     graphicsFailed = false;
     document.body.classList.add("pixel-ready");
-    resize();
+    resizeGraphics();
     const canRun =
+      wasRunning &&
+      launched &&
       !paused &&
+      menu.hidden &&
+      deathScreen.hidden &&
+      preparingEncounter === null &&
       !debugConsole.opened &&
       !dialoguePanel.opened &&
-      !document.hidden;
+      !document.hidden &&
+      !matchMedia("(pointer:coarse) and (orientation:portrait)").matches;
     paused = !canRun;
     galaxy.set_paused(paused);
     input.enabled = canRun;
+    if (canRun) void audio.resume();
+    else if (
+      launched &&
+      menu.hidden &&
+      deathScreen.hidden &&
+      preparingEncounter === null &&
+      !debugConsole.opened &&
+      !dialoguePanel.opened &&
+      !document.hidden
+    )
+      pause(false);
     toast("Graphics restored. Your expedition is intact.");
     return true;
-  } catch {
+  } catch (recoveryError) {
+    if (webglLifecycle?.lost || recoverAfterContextRestore) return false;
     graphicsFailed = true;
     document.body.classList.remove("pixel-ready");
-    pause(false);
+    paused = true;
+    if (
+      launched &&
+      menu.hidden &&
+      deathScreen.hidden &&
+      preparingEncounter === null &&
+      !debugConsole.opened &&
+      !dialoguePanel.opened
+    )
+      pause(false);
     toast(
-      `Graphics recovery failed: ${String(error)}. Reload to return safely to Haven.`,
+      `Graphics recovery failed: ${String(recoveryError)}. Reload to return safely to Haven.`,
     );
     return false;
   } finally {
     recovering = false;
     lastTime = 0;
+    if (recoverAfterContextRestore && !webglLifecycle?.lost) {
+      recoverAfterContextRestore = false;
+      void recover("WebGL restored during preparation");
+    }
   }
 }
 function frame(time: number): void {
   requestAnimationFrame(frame);
-  if (!galaxy || document.hidden || recovering || graphicsFailed) return;
+  if (
+    !galaxy ||
+    document.hidden ||
+    recovering ||
+    graphicsFailed ||
+    webglLifecycle?.lost
+  )
+    return;
   const rawDt = lastTime ? time - lastTime : 0;
   const dt = Math.min(100, rawDt);
   lastTime = time;
   try {
     pixelUi?.sync();
     const controls = input.sample();
-    if (launched && !paused && hud.dock && controls.fire) {
-      pause(true);
-      return;
-    }
     const result = galaxy.step(dt, controls);
     hud = result.hud;
     input.camera = hud.camera;
     const worldViewport = galaxy.world_viewport();
     input.viewport = [worldViewport[0], worldViewport[1]];
+    paintFacilities();
     if (result.profile) save(result.profile);
     for (const event of result.events) {
       audio.play(event);
@@ -1113,6 +1279,7 @@ async function init(): Promise<void> {
       );
       await module.default();
       galaxy = await module.Galaxy.create(canvas, profile);
+      prepareRecovery = (target) => module.prepare_renderer_recovery(target);
       backend = candidate;
       break;
     } catch (error) {
@@ -1135,11 +1302,16 @@ async function init(): Promise<void> {
     (world) => {
       destination = world;
     },
-    () => {
-      if (launched && !paused && hud?.dock) pause(true);
-    },
+    undefined,
+    interactDock,
   );
   canvas.addEventListener("wheel", onFlightWheel, { passive: false });
+  if (backend === "webgl2") {
+    webglLifecycle = bindWebglLifecycle(canvas, {
+      lost: onWebglLost,
+      restored: onWebglRestored,
+    });
+  }
   galaxy.set_paused(true);
   galaxy.set_shake(settings.shake);
   galaxy.set_reduced_motion(settings.reduced_motion);
@@ -1154,6 +1326,8 @@ async function init(): Promise<void> {
   loadStatus.textContent = "SYSTEMS ONLINE / READY TO FLY";
   launch.disabled = false;
   element("save-status").textContent = store.message;
+  paintSaveStatus();
+  save(galaxy.profile());
   if (diagnosticMode) {
     element("performance").hidden = !params.has("metrics");
     const scene = params.get("scene");
@@ -1203,6 +1377,22 @@ async function init(): Promise<void> {
     loseButton.textContent = "Lose GPU";
     loseButton.addEventListener("click", () => galaxy.lose_device());
     controls.append(loseButton);
+    if (webglLifecycle) {
+      const probe = createWebglLossProbe(canvas, webglLifecycle);
+      if (probe) {
+        for (const [label, request] of [
+          ["Lose WebGL context", () => probe.requestLoss()],
+          ["Restore WebGL context", () => probe.requestRestore()],
+        ] as const) {
+          const button = document.createElement("button");
+          button.textContent = label;
+          button.addEventListener("click", () =>
+            toast(`${label}: ${request()}`),
+          );
+          controls.append(button);
+        }
+      }
+    }
     document.body.append(controls);
     (window as unknown as { galaxyQA: unknown }).galaxyQA = {
       hud: () => galaxy.hud(),
@@ -1273,25 +1463,27 @@ launch.addEventListener("click", async () => {
 });
 element("resume").addEventListener("click", () => void resume());
 element("launch-settings").addEventListener("click", openLaunchSettings);
-for (const [index, tab] of menuPages.entries()) {
-  const button = element(`tab-${tab}`);
-  button.addEventListener("click", () => selectMenuTab(tab));
-  button.addEventListener("keydown", (event) => {
-    const key = event.key;
-    const target =
-      key === "ArrowRight"
-        ? (index + 1) % menuPages.length
-        : key === "ArrowLeft"
-          ? (index + menuPages.length - 1) % menuPages.length
-          : key === "Home"
-            ? 0
-            : key === "End"
-              ? menuPages.length - 1
-              : -1;
-    if (target < 0) return;
-    event.preventDefault();
-    selectMenuTab(menuPages[target]);
-    element(`tab-${menuPages[target]}`).focus();
+element("menu-close").addEventListener("click", () => void resume());
+element("pause-settings").addEventListener("click", () => openMenu("settings"));
+element("settings-backup").addEventListener("click", () => openMenu("archive"));
+element("save-indicator").addEventListener("click", () => openMenu("archive"));
+element("restart-flight").addEventListener("click", () => {
+  void beginEncounter(() => galaxy.return_to_home()).catch((error) =>
+    toast(String(error)),
+  );
+});
+for (const [index, page] of facilityPages.entries()) {
+  element(`facility-${index}`).addEventListener("click", () => {
+    if (
+      launched &&
+      !paused &&
+      hud.dock &&
+      galaxy.dock_facility_at(
+        facilityPositions[index][0],
+        facilityPositions[index][1],
+      ) === index
+    )
+      openMenu(page);
   });
 }
 element("pause-button").addEventListener("click", () => {
@@ -1306,7 +1498,7 @@ element("pause-button").addEventListener("click", () => {
   } else if (paused) void resume();
   else pause(false);
 });
-element("quick-settings").addEventListener("click", () => pause(false));
+element("quick-settings").addEventListener("click", () => openMenu("settings"));
 element("quick-title").addEventListener("click", returnToTitle);
 element("return-title").addEventListener("click", returnToTitle);
 element("death-title").addEventListener("click", returnToTitle);
@@ -1514,7 +1706,7 @@ element("site-button").addEventListener("click", interactSite);
 element("apply-update").addEventListener("click", async () => {
   if (!waitingUpdate || !galaxy.hud().dock) return;
   try {
-    await store.save(galaxy.profile());
+    await persist(galaxy.profile());
     await store.flush();
     applyingUpdate = true;
     waitingUpdate.postMessage("ACTIVATE_AT_DOCK");
@@ -1538,6 +1730,28 @@ window.addEventListener("keydown", (event) => {
       const retry = element("retry");
       const title = element("death-title");
       (document.activeElement === retry ? title : retry).focus();
+    }
+    return;
+  }
+  if (!menu.hidden && event.key === "Tab") {
+    const controls = Array.from(
+      menu.querySelectorAll<HTMLElement>("button,input,select,a[href]"),
+    ).filter(
+      (node) =>
+        !node.closest("[hidden]") &&
+        !(node instanceof HTMLButtonElement && node.disabled),
+    );
+    if (controls.length) {
+      event.preventDefault();
+      const current = controls.indexOf(document.activeElement as HTMLElement);
+      const next =
+        current < 0
+          ? event.shiftKey
+            ? controls.length - 1
+            : 0
+          : (current + (event.shiftKey ? -1 : 1) + controls.length) %
+            controls.length;
+      controls[next].focus();
     }
     return;
   }

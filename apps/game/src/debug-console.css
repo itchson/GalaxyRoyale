@@ -75,10 +75,11 @@ body.reduced-motion .console-card {
   width: 100%;
   min-width: 0;
   min-height: var(--ui-hit);
-  padding: calc(4px * var(--ui-scale, 1));
-  border: 1px solid #5db7cd;
+  padding: calc(4px * var(--ui-scale, 1)) 0;
+  border: 0;
+  border-top: 1px solid #26373f;
   border-radius: 0;
-  outline-offset: 0;
+  outline: none;
   background: #000;
   color: #73efff;
   caret-color: #ffd783;

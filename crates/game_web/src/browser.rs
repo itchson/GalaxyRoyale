@@ -34,6 +34,35 @@ pub struct Galaxy {
     paused: bool,
     shake: bool,
 }
+/// A prepared renderer owns no reference or borrow of the live Galaxy.
+/// The shell pauses presentation while this resource is built, then consumes
+/// it synchronously on the same canvas through `install_recovery`.
+#[wasm_bindgen]
+pub struct RendererRecovery {
+    renderer: renderer::Renderer,
+}
+/// Prepare independently of the live game so reads, saves and modal state
+/// changes do not encounter an exclusive wasm-bindgen borrow across an await.
+#[wasm_bindgen]
+pub async fn prepare_renderer_recovery(
+    canvas: HtmlCanvasElement,
+) -> Result<RendererRecovery, JsValue> {
+    // A native loss takes effect before its queued DOM event. Avoid entering
+    // glow's VERSION query while that existing WebGL context is genuinely lost.
+    #[cfg(feature = "webgl")]
+    {
+        let context = canvas
+            .get_context("webgl2")?
+            .ok_or_else(|| js("WebGL2 context is unavailable for recovery"))?
+            .dyn_into::<web_sys::WebGl2RenderingContext>()?;
+        if context.is_context_lost() {
+            return Err(js("WebGL2 context is lost; wait for its restored event"));
+        }
+    }
+    Ok(RendererRecovery {
+        renderer: renderer::Renderer::new(canvas).await?,
+    })
+}
 #[derive(Serialize)]
 struct FrameResponse {
     hud: Hud,
@@ -270,6 +299,11 @@ impl Galaxy {
     pub fn purchase(&mut self, id: &str) -> Result<(), JsValue> {
         self.game.purchase(id).map_err(js)
     }
+    /// Query the real Haven facility hit area without moving or advancing play.
+    /// 0 upgrades, 1 hangar, 2 journal, 3 campaign; -1 is no available facility.
+    pub fn dock_facility_at(&self, x: f32, y: f32) -> i32 {
+        self.game.dock_facility_at([x, y]).map_or(-1, i32::from)
+    }
     pub fn resize(&mut self, width: u32, height: u32) {
         self.boss_overlay.reset();
         self.renderer.resize(width, height);
@@ -381,12 +415,20 @@ impl Galaxy {
     pub fn lose_device(&self) {
         self.renderer.lose_device();
     }
-    pub async fn recover(&mut self) -> Result<(), JsValue> {
-        self.boss_overlay.reset();
-        let canvas = self.renderer.canvas.clone();
-        let (width, height) = (canvas.width(), canvas.height());
-        self.renderer = renderer::Renderer::new(canvas).await?;
+    /// Install a one-use candidate without suspending a borrow of this Game.
+    /// Failed preparation leaves the live renderer and simulation untouched.
+    pub fn install_recovery(&mut self, candidate: RendererRecovery) -> Result<(), JsValue> {
+        if self.renderer.canvas != candidate.renderer.canvas {
+            return Err(js("Graphics recovery belongs to a different canvas"));
+        }
+        let (width, height) = (
+            candidate.renderer.canvas.width(),
+            candidate.renderer.canvas.height(),
+        );
+        self.renderer = candidate.renderer;
         self.renderer.resize(width, height);
+        self.boss_overlay.reset();
+        self.last_boss_panel = None;
         self.update_world_viewport();
         Ok(())
     }

@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 344,
+  "revision": 364,
   "name": "Galaxy Royale",
   "phase": "Foundation → playable vertical slice",
-  "updatedAt": "2026-10-10T22:38:21.397Z",
+  "updatedAt": "2026-10-10T23:21:35.506Z",
   "tasks": [
     {
       "id": "studio",
@@ -3291,6 +3291,231 @@
       "revision": 4,
       "createdAt": "2026-10-10T22:07:12.642Z",
       "updatedAt": "2026-10-10T22:37:22.394Z"
+    },
+    {
+      "id": "task-2c33a7b8",
+      "title": "Haven facilities and dedicated pixel menus",
+      "description": "Replace cross-menu tabs with four clickable authored dock facilities, independently focused menus with close icons, Escape pause actions, restart at Haven and truthful automatic-save indicator.",
+      "department": "gameplay",
+      "owner": "Producer / Gameplay / Engine / Responsive QA",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Production implementation and appropriate regression checks reviewed",
+          "met": true
+        },
+        {
+          "text": "Normal package and scoped actual browser flow verified",
+          "met": true
+        },
+        {
+          "text": "Exact game-only private artifact published",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Root validation",
+          "kind": "note",
+          "path": "artifacts/dock-console-validation.md"
+        },
+        {
+          "label": "Final independent package review",
+          "kind": "note",
+          "path": "artifacts/dock-recovery-final-package-review.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-10T22:54:37.631Z",
+      "updatedAt": "2026-10-10T23:21:35.181Z"
+    },
+    {
+      "id": "task-2ab5ed21",
+      "title": "Two-phase renderer and real WebGL lifecycle",
+      "description": "Keep live Game independent of awaited renderer creation; gate lost contexts and rebuild only after actual restoration, preserve modal intent and expose fallback menus during recovery.",
+      "department": "engine",
+      "owner": "Producer / Engine / Responsive QA",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Production implementation and appropriate regression checks reviewed",
+          "met": true
+        },
+        {
+          "text": "Normal package and scoped actual browser flow verified",
+          "met": true
+        },
+        {
+          "text": "Exact game-only private artifact published",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Root validation",
+          "kind": "note",
+          "path": "artifacts/dock-console-validation.md"
+        },
+        {
+          "label": "Final independent package review",
+          "kind": "note",
+          "path": "artifacts/dock-recovery-final-package-review.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-10T22:54:37.721Z",
+      "updatedAt": "2026-10-10T23:21:35.226Z"
+    },
+    {
+      "id": "task-d6a4013a",
+      "title": "Complete reduced-detail planet groups",
+      "description": "Retain original planet and ring silhouettes at reduced detail using bounded cached cells and atomic group admission.",
+      "department": "art",
+      "owner": "Gameplay / Producer",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Production implementation and appropriate regression checks reviewed",
+          "met": true
+        },
+        {
+          "text": "Normal package and scoped actual browser flow verified",
+          "met": true
+        },
+        {
+          "text": "Exact game-only private artifact published",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Root validation",
+          "kind": "note",
+          "path": "artifacts/dock-console-validation.md"
+        },
+        {
+          "label": "Final independent package review",
+          "kind": "note",
+          "path": "artifacts/dock-recovery-final-package-review.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-10T22:54:37.782Z",
+      "updatedAt": "2026-10-10T23:21:35.256Z"
+    },
+    {
+      "id": "task-8d55901c",
+      "title": "Ship-owned progression and expedition cargo risk",
+      "description": "Keep XP per ship, bank cargo only on physical home arrival, lose unbanked crafting materials on death/abandonment, preserve dock points/stash and migrate old saves without duplicate assets.",
+      "department": "gameplay",
+      "owner": "Gameplay / Producer",
+      "status": "active",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Authoritative gameplay and save migration proven without lost or duplicated assets",
+          "met": false
+        },
+        {
+          "text": "Actual crafting/equip/death/return flows verified in normal browsers",
+          "met": false
+        },
+        {
+          "text": "Exact reviewed private game package published",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual new user request and team decisions",
+          "kind": "note",
+          "path": "work/record-dock-console-review.mjs"
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-10T23:21:35.302Z",
+      "updatedAt": "2026-10-10T23:21:35.302Z"
+    },
+    {
+      "id": "task-2138420d",
+      "title": "Crafted compatible three-slot ship loadouts",
+      "description": "Three automatic ability slots per ship, real starter recipes, compatible owned ability inventory, material and ship-level gated upgrades, dedicated readable craft/equip menus. Six hardware modules remain ship-local.",
+      "department": "gameplay",
+      "owner": "Engine / Gameplay / Producer / Production",
+      "status": "active",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Authoritative gameplay and save migration proven without lost or duplicated assets",
+          "met": false
+        },
+        {
+          "text": "Actual crafting/equip/death/return flows verified in normal browsers",
+          "met": false
+        },
+        {
+          "text": "Exact reviewed private game package published",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual new user request and team decisions",
+          "kind": "note",
+          "path": "work/record-dock-console-review.mjs"
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-10T23:21:35.350Z",
+      "updatedAt": "2026-10-10T23:21:35.350Z"
+    },
+    {
+      "id": "task-96a89aa2",
+      "title": "Seeded tutorial belt rocks and basic crafting drops",
+      "description": "Belt-birth provenance limits drops to basic points and tier-one crafting materials, never XP. Actual deterministic asteroid geometry variants and practical tutorial guidance.",
+      "department": "art",
+      "owner": "Gameplay / Producer",
+      "status": "active",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Authoritative gameplay and save migration proven without lost or duplicated assets",
+          "met": false
+        },
+        {
+          "text": "Actual crafting/equip/death/return flows verified in normal browsers",
+          "met": false
+        },
+        {
+          "text": "Exact reviewed private game package published",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual new user request and team decisions",
+          "kind": "note",
+          "path": "work/record-dock-console-review.mjs"
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-10T23:21:35.380Z",
+      "updatedAt": "2026-10-10T23:21:35.380Z"
     }
   ],
   "reviews": [
@@ -3944,6 +4169,25 @@
         "task-f090d98d",
         "task-6664d4ee"
       ]
+    },
+    {
+      "id": "review-0151cdf4",
+      "title": "Asynchronous dock, console and recovery review — ac19daf73e83b006",
+      "body": "Actual asynchronous contributions: Gameplay authored finite dock hit queries and complete reduced planet/ring/nova groups, then independently pinned the final normal package. Engine removed the live mutable Game borrow from awaited recovery, authored pixel close/save controls, bound real WebGL events and reviewed installed wgpu/glow cleanup before adding the native context-is-lost guard. Production found a concrete320×180 pause clip defect; root added pause-content clipping and Production made short layouts one column. Final specialist browser review passes44px controls, dedicated facilities, tiny clipping and console Home/End. Root made the command row flat black and selection-aware, executed302 native/134 shell tests and strict TS/native/both-WASM checks, and observed normal local WebGPU and WebGL reconstruction with console preserved. Physical phones, soak, listening, natural campaign and authenticated remote gameplay remain pending. See durable artifact reports; these are real separate discussions, not a fabricated live meeting.",
+      "author": "Producer",
+      "source": "Actual source, test logs, specialist handoffs and browser observations",
+      "createdAt": "2026-10-10T23:21:35.412Z",
+      "participants": [
+        "Producer / root",
+        "Gameplay specialist",
+        "Engine specialist",
+        "Production / responsive QA specialist"
+      ],
+      "taskIds": [
+        "task-2c33a7b8",
+        "task-2ab5ed21",
+        "task-d6a4013a"
+      ]
     }
   ],
   "decisions": [
@@ -4017,6 +4261,15 @@
       "author": "Producer",
       "source": "Actual final cosmic/UI checks, specialist reviews and exact private release",
       "createdAt": "2026-10-10T22:37:22.426Z",
+      "status": "accepted"
+    },
+    {
+      "id": "decision-6334dd12",
+      "title": "Ship inventory, physical dock banking and three automatic ability slots",
+      "body": "Latest user correction supersedes the prior belt no-material default. Belt-born rocks may yield basic points and tier-one crafting materials, never XP. XP belongs only to each ship, with new ships starting at level one. Physical Haven return banks crafting cargo; death/restart/Title/reload abandonment discard carried materials while stored points/stash remain. Legacy schema-three assets migrate once preserving the older retained-cargo contract. Each ship has one offensive, defensive and passive automatic ability slot; shared crafted inventory is filtered by explicit compatibility and effective rank by that ship level. Hardware stats are separately ship-local. New Sovereign award starts with no invented XP while retaining its specified strong reward stats/abilities; legacy recorded XP remains. This is an agreed implementation contract, not a claim that the new gameplay has shipped.",
+      "author": "Producer",
+      "source": "Actual source, test logs, specialist handoffs and browser observations",
+      "createdAt": "2026-10-10T23:21:35.444Z",
       "status": "accepted"
     }
   ],
@@ -4874,6 +5127,54 @@
       ],
       "url": "https://galaxy-royale-itchson.itchson.chatgpt.site/",
       "knownIssues": "Broader production slice remains Review. Phones/soak, natural campaign/human audio and full recovery matrix remain pending."
+    },
+    {
+      "id": "build-87c19030",
+      "title": "Normal dock/console candidate ac19daf73e83b006",
+      "body": "Normal dual renderer and game-only PWA build, current console input and dedicated dock UI. Package independently pinned87+7 inputs and parsed actual backend exports. Private deployment is the next gate.",
+      "author": "Producer",
+      "source": "Actual source, test logs, specialist handoffs and browser observations",
+      "createdAt": "2026-10-10T23:21:35.426Z",
+      "revision": "galaxy-ac19daf73e83b006 (frozen candidate; runtime commit pending)",
+      "evidence": [
+        {
+          "label": "Root validation",
+          "kind": "note",
+          "path": "artifacts/dock-console-validation.md"
+        },
+        {
+          "label": "Package inspection",
+          "kind": "note",
+          "path": "artifacts/dock-recovery-final-package-review.md"
+        }
+      ],
+      "checks": [
+        {
+          "name": "302 Rust tests",
+          "result": "pass"
+        },
+        {
+          "name": "134 shell and Studio tests",
+          "result": "pass"
+        },
+        {
+          "name": "Strict TypeScript/native/both-WASM Clippy and normal dual build",
+          "result": "pass"
+        },
+        {
+          "name": "Scoped actual desktop console/recovery/responsive checks",
+          "result": "pass"
+        },
+        {
+          "name": "Physical Android/iPhone and30-minute soak",
+          "result": "not_run"
+        },
+        {
+          "name": "Authenticated private remote gameplay and full recovery timing matrix",
+          "result": "not_run"
+        }
+      ],
+      "knownIssues": "Pending physical-device/soak/audible/balance and full recovery matrix. New cargo/crafting request is work-only and not part of this candidate."
     }
   ],
   "feedback": [],
@@ -8317,6 +8618,206 @@
       "author": "Producer",
       "source": "Actual native specialist follow-up dispatch and exact publication response",
       "createdAt": "2026-10-10T22:38:21.397Z"
+    },
+    {
+      "id": "e90816ee-41d3-4096-b888-1368493aa1fc",
+      "revision": 345,
+      "kind": "task.create",
+      "itemId": "task-2c33a7b8",
+      "title": "Haven facilities and dedicated pixel menus",
+      "author": "Producer",
+      "source": "Actual user UX request and dispatched bounded specialist implementation",
+      "createdAt": "2026-10-10T22:54:37.631Z"
+    },
+    {
+      "id": "68822aa1-0202-49d7-ae77-99e55cbe1bd5",
+      "revision": 346,
+      "kind": "task.create",
+      "itemId": "task-2ab5ed21",
+      "title": "Two-phase renderer and real WebGL lifecycle",
+      "author": "Producer",
+      "source": "Actual user UX request and dispatched bounded specialist implementation",
+      "createdAt": "2026-10-10T22:54:37.721Z"
+    },
+    {
+      "id": "def7880c-09dd-4fad-8b6e-57f97e81afef",
+      "revision": 347,
+      "kind": "task.create",
+      "itemId": "task-d6a4013a",
+      "title": "Complete reduced-detail planet groups",
+      "author": "Producer",
+      "source": "Actual user UX request and dispatched bounded specialist implementation",
+      "createdAt": "2026-10-10T22:54:37.782Z"
+    },
+    {
+      "id": "b1b491f0-bcd7-4cdd-a327-13d8c5aa88bf",
+      "revision": 348,
+      "kind": "run",
+      "itemId": "run-88bcc9cb",
+      "title": "Producer / integration · running",
+      "author": "Producer",
+      "source": "Actual active specialist assignments",
+      "createdAt": "2026-10-10T22:54:37.829Z"
+    },
+    {
+      "id": "e8b8fa76-326a-4073-8d80-16f0f14bcdf5",
+      "revision": 349,
+      "kind": "run",
+      "itemId": "run-e783f5a1",
+      "title": "Gameplay / authored dock facilities · running",
+      "author": "Producer",
+      "source": "Actual active specialist assignments",
+      "createdAt": "2026-10-10T22:54:37.844Z"
+    },
+    {
+      "id": "2c6d1d2c-feca-40d2-b561-ea0c7ea0d6b4",
+      "revision": 350,
+      "kind": "run",
+      "itemId": "run-ebd56fa1",
+      "title": "Engine / pixel icons and lifecycle · running",
+      "author": "Producer",
+      "source": "Actual active specialist assignments",
+      "createdAt": "2026-10-10T22:54:37.858Z"
+    },
+    {
+      "id": "1eadf0b4-80ad-4917-a85b-ecf02a20bd5c",
+      "revision": 351,
+      "kind": "run",
+      "itemId": "run-68083992",
+      "title": "Production / responsive menus · running",
+      "author": "Producer",
+      "source": "Actual active specialist assignments",
+      "createdAt": "2026-10-10T22:54:37.873Z"
+    },
+    {
+      "id": "bed32e45-307b-4975-bcbd-3244c2a10a24",
+      "revision": 352,
+      "kind": "task.update",
+      "itemId": "task-2c33a7b8",
+      "title": "Haven facilities and dedicated pixel menus",
+      "author": "Producer",
+      "source": "Final normal candidate evidence; exact publication remains pending",
+      "createdAt": "2026-10-10T23:21:35.181Z"
+    },
+    {
+      "id": "5344a981-0efe-45b9-b8b5-ca867312a567",
+      "revision": 353,
+      "kind": "task.update",
+      "itemId": "task-2ab5ed21",
+      "title": "Two-phase renderer and real WebGL lifecycle",
+      "author": "Producer",
+      "source": "Final normal candidate evidence; exact publication remains pending",
+      "createdAt": "2026-10-10T23:21:35.226Z"
+    },
+    {
+      "id": "aaade9e8-7797-4f79-83e6-70cba5a1a497",
+      "revision": 354,
+      "kind": "task.update",
+      "itemId": "task-d6a4013a",
+      "title": "Complete reduced-detail planet groups",
+      "author": "Producer",
+      "source": "Final normal candidate evidence; exact publication remains pending",
+      "createdAt": "2026-10-10T23:21:35.256Z"
+    },
+    {
+      "id": "5bb1bfa3-0746-48d0-87e2-084f247d8e1b",
+      "revision": 355,
+      "kind": "task.create",
+      "itemId": "task-8d55901c",
+      "title": "Ship-owned progression and expedition cargo risk",
+      "author": "Producer",
+      "source": "Actual source, test logs, specialist handoffs and browser observations",
+      "createdAt": "2026-10-10T23:21:35.302Z"
+    },
+    {
+      "id": "1cf45ad6-fe01-412e-a81a-5276c190c930",
+      "revision": 356,
+      "kind": "task.create",
+      "itemId": "task-2138420d",
+      "title": "Crafted compatible three-slot ship loadouts",
+      "author": "Producer",
+      "source": "Actual source, test logs, specialist handoffs and browser observations",
+      "createdAt": "2026-10-10T23:21:35.350Z"
+    },
+    {
+      "id": "e465da31-a8dc-4a8f-be67-521149e09cda",
+      "revision": 357,
+      "kind": "task.create",
+      "itemId": "task-96a89aa2",
+      "title": "Seeded tutorial belt rocks and basic crafting drops",
+      "author": "Producer",
+      "source": "Actual source, test logs, specialist handoffs and browser observations",
+      "createdAt": "2026-10-10T23:21:35.380Z"
+    },
+    {
+      "id": "5315796c-6526-4efa-b9e8-ee91ec4120d6",
+      "revision": 358,
+      "kind": "review",
+      "itemId": "review-0151cdf4",
+      "title": "Asynchronous dock, console and recovery review — ac19daf73e83b006",
+      "author": "Producer",
+      "source": "Actual source, test logs, specialist handoffs and browser observations",
+      "createdAt": "2026-10-10T23:21:35.412Z"
+    },
+    {
+      "id": "228ffa85-06f6-4e6e-a697-242df4b9f6e1",
+      "revision": 359,
+      "kind": "build",
+      "itemId": "build-87c19030",
+      "title": "Normal dock/console candidate ac19daf73e83b006",
+      "author": "Producer",
+      "source": "Actual source, test logs, specialist handoffs and browser observations",
+      "createdAt": "2026-10-10T23:21:35.426Z"
+    },
+    {
+      "id": "609368ce-566c-4b2b-b918-93e4900d4451",
+      "revision": 360,
+      "kind": "decision",
+      "itemId": "decision-6334dd12",
+      "title": "Ship inventory, physical dock banking and three automatic ability slots",
+      "author": "Producer",
+      "source": "Actual source, test logs, specialist handoffs and browser observations",
+      "createdAt": "2026-10-10T23:21:35.444Z"
+    },
+    {
+      "id": "0a22df7c-bceb-411c-a86b-80794b41c623",
+      "revision": 361,
+      "kind": "run",
+      "itemId": "run-aa8684e3",
+      "title": "Producer / integration · running",
+      "author": "Producer",
+      "source": "Actual source, test logs, specialist handoffs and browser observations",
+      "createdAt": "2026-10-10T23:21:35.458Z"
+    },
+    {
+      "id": "d9375274-b44e-4385-9b26-838f2f5cbcff",
+      "revision": 362,
+      "kind": "run",
+      "itemId": "run-27538119",
+      "title": "Gameplay / progression · running",
+      "author": "Producer",
+      "source": "Actual source, test logs, specialist handoffs and browser observations",
+      "createdAt": "2026-10-10T23:21:35.474Z"
+    },
+    {
+      "id": "fccd25be-5eac-4f44-9b98-1234472c443b",
+      "revision": 363,
+      "kind": "run",
+      "itemId": "run-1996c573",
+      "title": "Engine / ability catalog · running",
+      "author": "Producer",
+      "source": "Actual source, test logs, specialist handoffs and browser observations",
+      "createdAt": "2026-10-10T23:21:35.490Z"
+    },
+    {
+      "id": "d725a244-84f5-456e-b0a2-79e95f920d26",
+      "revision": 364,
+      "kind": "run",
+      "itemId": "run-9f2517d2",
+      "title": "Production / crafting menus · running",
+      "author": "Producer",
+      "source": "Actual source, test logs, specialist handoffs and browser observations",
+      "createdAt": "2026-10-10T23:21:35.506Z"
     }
   ],
   "runRecords": [
@@ -11397,6 +11898,194 @@
       "author": "Producer",
       "source": "Actual native specialist follow-up dispatch and exact publication response",
       "createdAt": "2026-10-10T22:38:21.397Z"
+    },
+    {
+      "id": "run-88bcc9cb",
+      "title": "Producer / integration · running",
+      "agentId": "/root",
+      "agentLabel": "Producer / integration",
+      "state": "running",
+      "observedAt": "2026-10-10T22:54:37.814Z",
+      "taskIds": [
+        "task-2c33a7b8",
+        "task-2ab5ed21",
+        "task-d6a4013a"
+      ],
+      "summary": "Integrating actual new dock UX request and frozen LOD/recovery implementation; browser/private package validation follows.",
+      "evidence": [
+        {
+          "label": "Written assignment observation",
+          "kind": "note",
+          "path": "work/record-dock-recovery-start.mjs"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual active specialist assignments",
+      "createdAt": "2026-10-10T22:54:37.829Z"
+    },
+    {
+      "id": "run-e783f5a1",
+      "title": "Gameplay / authored dock facilities · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Gameplay / authored dock facilities",
+      "state": "running",
+      "observedAt": "2026-10-10T22:54:37.835Z",
+      "taskIds": [
+        "task-2c33a7b8",
+        "task-d6a4013a"
+      ],
+      "summary": "Actual assignment: Rust world facilities, authoritative finite hit testing and initial-click input consumption. Prior LOD implementation frozen with148 native core tests.",
+      "evidence": [
+        {
+          "label": "Written assignment observation",
+          "kind": "note",
+          "path": "work/record-dock-recovery-start.mjs"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual active specialist assignments",
+      "createdAt": "2026-10-10T22:54:37.844Z"
+    },
+    {
+      "id": "run-ebd56fa1",
+      "title": "Engine / pixel icons and lifecycle · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Engine / pixel icons and lifecycle",
+      "state": "running",
+      "observedAt": "2026-10-10T22:54:37.849Z",
+      "taskIds": [
+        "task-2c33a7b8",
+        "task-2ab5ed21"
+      ],
+      "summary": "Actual assignment: WASM facility bridge and bounded close/save/label quad icons. Frozen detached renderer recovery and native WebGL lifecycle helpers passed focused checks; browser restoration pending.",
+      "evidence": [
+        {
+          "label": "Written assignment observation",
+          "kind": "note",
+          "path": "work/record-dock-recovery-start.mjs"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual active specialist assignments",
+      "createdAt": "2026-10-10T22:54:37.858Z"
+    },
+    {
+      "id": "run-68083992",
+      "title": "Production / responsive menus · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "Production / responsive menus",
+      "state": "running",
+      "observedAt": "2026-10-10T22:54:37.863Z",
+      "taskIds": [
+        "task-2c33a7b8",
+        "task-2ab5ed21"
+      ],
+      "summary": "Actual assignment: dedicated semantic menu layout, no tab strip, close icon and pause actions. Prior independent source review frozen; integration/browser checks pending.",
+      "evidence": [
+        {
+          "label": "Written assignment observation",
+          "kind": "note",
+          "path": "work/record-dock-recovery-start.mjs"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual active specialist assignments",
+      "createdAt": "2026-10-10T22:54:37.873Z"
+    },
+    {
+      "id": "run-aa8684e3",
+      "title": "Producer / integration · running",
+      "agentId": "/root",
+      "agentLabel": "Producer / integration",
+      "state": "running",
+      "observedAt": "2026-10-10T23:21:35.450Z",
+      "taskIds": [
+        "task-2c33a7b8",
+        "task-2ab5ed21",
+        "task-d6a4013a",
+        "task-8d55901c",
+        "task-2138420d",
+        "task-96a89aa2"
+      ],
+      "summary": "Final normal console/dock package under publication review; owns save validation/migration, browser integration and private artifact.",
+      "evidence": [
+        {
+          "label": "Actual assignment and decisions",
+          "kind": "note",
+          "path": "work/record-dock-console-review.mjs"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual source, test logs, specialist handoffs and browser observations",
+      "createdAt": "2026-10-10T23:21:35.458Z"
+    },
+    {
+      "id": "run-27538119",
+      "title": "Gameplay / progression · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Gameplay / progression",
+      "state": "running",
+      "observedAt": "2026-10-10T23:21:35.465Z",
+      "taskIds": [
+        "task-8d55901c",
+        "task-96a89aa2",
+        "task-2138420d"
+      ],
+      "summary": "Final package review frozen; exact archive gate pending. Actual next source-read/work-copy assignment is ship-local progression, physical cargo banking/risk, belt-origin materials and transactions.",
+      "evidence": [
+        {
+          "label": "Actual assignment and decisions",
+          "kind": "note",
+          "path": "work/record-dock-console-review.mjs"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual source, test logs, specialist handoffs and browser observations",
+      "createdAt": "2026-10-10T23:21:35.474Z"
+    },
+    {
+      "id": "run-1996c573",
+      "title": "Engine / ability catalog · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Engine / ability catalog",
+      "state": "running",
+      "observedAt": "2026-10-10T23:21:35.481Z",
+      "taskIds": [
+        "task-2138420d"
+      ],
+      "summary": "Work-only soft-particle experiment parked with measured quantization limitation. Actual current assignment: explicit ability compatibility/catalog and review all real effect paths against equipped rank.",
+      "evidence": [
+        {
+          "label": "Actual assignment and decisions",
+          "kind": "note",
+          "path": "work/record-dock-console-review.mjs"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual source, test logs, specialist handoffs and browser observations",
+      "createdAt": "2026-10-10T23:21:35.490Z"
+    },
+    {
+      "id": "run-9f2517d2",
+      "title": "Production / crafting menus · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "Production / crafting menus",
+      "state": "running",
+      "observedAt": "2026-10-10T23:21:35.496Z",
+      "taskIds": [
+        "task-2138420d"
+      ],
+      "summary": "Final responsive QA frozen and owned resources cleaned up. Actual next assignment: dedicated three-slot craft/equip UI proposal, pending authoritative HUD/API and current publication freeze.",
+      "evidence": [
+        {
+          "label": "Actual assignment and decisions",
+          "kind": "note",
+          "path": "work/record-dock-console-review.mjs"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual source, test logs, specialist handoffs and browser observations",
+      "createdAt": "2026-10-10T23:21:35.506Z"
     }
   ]
 }

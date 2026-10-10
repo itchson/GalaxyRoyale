@@ -26,6 +26,8 @@ function pixelScene({
   buttons = [],
   scrollBounds = null,
   rootBounds = null,
+  consoleCommand = null,
+  scrollId = "archive-content",
 } = {}) {
   const bounds = rootBounds ?? {
     x: 0,
@@ -45,19 +47,15 @@ function pixelScene({
     }
     closest(selector) {
       if (selector === ".menu-tabs" && this.nav) return root;
-      if (
-        selector.includes("#archive-content") &&
-        this.inScroll &&
-        scrollBounds
-      )
+      if (selector.includes(`#${scrollId}`) && this.inScroll && scrollBounds)
         return { getBoundingClientRect: () => scrollBounds };
       return null;
     }
     getAttribute(name) {
       return this.attributes?.[name] ?? null;
     }
-    contains() {
-      return !!this.focusedChild;
+    contains(element) {
+      return element === this || !!this.focusedChild;
     }
     querySelectorAll() {
       return [];
@@ -75,6 +73,15 @@ function pixelScene({
   label.childNodes = [{ textContent: "Flight zoom" }];
   label.querySelector = () => input;
   const root = new Element();
+  const events = new Map();
+  if (consoleCommand) {
+    root.classList = { contains: (name) => name === "console-card" };
+    input.id = "console-input";
+    input.type = "text";
+    input.value = consoleCommand.text;
+    input.selectionStart = consoleCommand.selection;
+    root.querySelector = () => input;
+  }
   const buttonElements = buttons.map((props) => {
     const button = new Button();
     Object.assign(button, props);
@@ -109,10 +116,12 @@ function pixelScene({
           : [];
   const document = {
     getElementById: () => null,
-    addEventListener() {},
+    addEventListener(name, callback) {
+      events.set(name, callback);
+    },
     fonts: { ready: Promise.resolve() },
     querySelectorAll: () => [root],
-    activeElement: null,
+    activeElement: consoleCommand ? input : null,
     body: { classList: { contains: () => false } },
   };
   const exports = {};
@@ -136,6 +145,11 @@ function pixelScene({
     () => scale,
   );
   bridge.sync();
+  if (consoleCommand?.moveSelection !== undefined) {
+    input.selectionStart = consoleCommand.moveSelection;
+    events.get("selectionchange")();
+    bridge.sync();
+  }
   return scene;
 }
 function sliderScene(options) {
@@ -279,4 +293,38 @@ test("scroll clipping intersects panel on both axes and rejects wholly obscured 
   assert.equal(nodes.length, 1);
   assert.equal(nodes[0].text, "RESTORE");
   assert.deepEqual(Array.from(nodes[0].clip), [0, 40, 200, 100]);
+});
+
+test("console command preserves spaces and sends the actual codepoint caret, including selection-only edits", () => {
+  for (const [text, selection, expected] of [
+    ["  WARP  12 34 ", 9, 9],
+    ["A🚀 B", 3, 2],
+    ["HELP", null, 4],
+  ]) {
+    const node = pixelScene({
+      consoleCommand: { text, selection },
+    }).groups[0].nodes.find((n) => n.kind === "input");
+    assert.equal(node.text, text);
+    assert.equal(node.value, expected);
+    assert.equal(node.active, true);
+  }
+  const node = pixelScene({
+    consoleCommand: { text: "HELP", selection: 4, moveSelection: 1 },
+  }).groups[0].nodes.find((n) => n.kind === "input");
+  assert.equal(node.value, 1);
+});
+
+test("pause actions inherit their own scroll viewport rather than bleeding into the footer", () => {
+  const node = pixelScene({
+    scrollId: "pause-content",
+    scrollBounds: { x: 0, y: 60, width: 300, height: 60 },
+    buttons: [
+      {
+        inScroll: true,
+        bounds: { x: 0, y: 100, width: 300, height: 44 },
+        textContent: "RESTART",
+      },
+    ],
+  }).groups[0].nodes.find((n) => n.kind === "button");
+  assert.deepEqual(Array.from(node.clip), [0, 60, 300, 60]);
 });

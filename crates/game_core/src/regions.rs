@@ -242,6 +242,44 @@ static RINGS: LazyLock<[PixelBody; 2]> = LazyLock::new(|| {
         })
     })
 });
+// The same authored surface at half resolution, generated once on first use.
+// Doubled extraction scale retains its centered nominal world dimensions.
+static LOW_PLANETS: LazyLock<[PixelBody; 4]> =
+    LazyLock::new(|| std::array::from_fn(|i| half_body(&PLANETS[i])));
+static LOW_RINGS: LazyLock<[PixelBody; 2]> =
+    LazyLock::new(|| std::array::from_fn(|i| half_body(&RINGS[i])));
+
+fn half_body(body: &PixelBody) -> PixelBody {
+    assert!(body.width.is_multiple_of(2) && body.height.is_multiple_of(2));
+    let rows: Vec<String> = (0..body.height / 2)
+        .map(|y| {
+            (0..body.width / 2)
+                .map(|x| {
+                    let samples: [Option<u32>; 4] =
+                        std::array::from_fn(|i| body.color_at(x * 2 + (i & 1), y * 2 + (i >> 1)));
+                    // Existing majority shade; first row-major sample wins ties.
+                    // Any occupied source cell keeps its 2x2 block occupied.
+                    let mut selected = None;
+                    let mut most = 0;
+                    for shade in samples.into_iter().flatten() {
+                        let count = samples.iter().filter(|&&s| s == Some(shade)).count();
+                        if count > most {
+                            most = count;
+                            selected = Some(shade);
+                        }
+                    }
+                    selected.map_or(' ', |shade| char::from_u32('a' as u32 + shade).unwrap())
+                })
+                .collect()
+        })
+        .collect();
+    PixelBody::from_ascii(
+        &rows.iter().map(String::as_str).collect::<Vec<_>>(),
+        &std::array::from_fn::<_, 8, _>(|i| {
+            (char::from_u32('a' as u32 + i as u32).unwrap(), i as u32)
+        }),
+    )
+}
 static NEBULA: LazyLock<PixelBody> = LazyLock::new(|| {
     template(32, 20, |x, y| {
         let wave = (x * 0.29).sin() * 3.0;
@@ -410,6 +448,64 @@ impl Scenery<'_> {
         });
         self.remaining -= body.occupied_count();
     }
+    fn planet_group(
+        &mut self,
+        kind: usize,
+        mut transform: Transform,
+        palette: [u32; 4],
+        reduced: bool,
+    ) -> usize {
+        let planets = if reduced { &*LOW_PLANETS } else { &*PLANETS };
+        let rings = (kind == 1).then(|| if reduced { &*LOW_RINGS } else { &*RINGS });
+        let required = planets[kind].occupied_count()
+            + rings.map_or(0, |rings| rings.iter().map(PixelBody::occupied_count).sum());
+        if required > self.remaining {
+            return 0;
+        }
+        if reduced {
+            transform.scale *= 2.0;
+        }
+        if let Some(rings) = rings {
+            self.body(&rings[0], transform, palette, 150);
+        }
+        self.body(&planets[kind], transform, palette, 190);
+        if let Some(rings) = rings {
+            self.body(&rings[1], transform, palette, 190);
+        }
+        required
+    }
+    fn nova_group(&mut self, position: Vec2, pulse: f32, reduced: bool) -> usize {
+        let body = if reduced {
+            &LOW_PLANETS[3]
+        } else {
+            &PLANETS[3]
+        };
+        let size = 0.8 + pulse * 0.7;
+        let sparks: [Option<Vec2>; 24] = std::array::from_fn(|i| {
+            let angle = i as f32 * TAU / 24.0;
+            let direction = Vec2::new(angle.cos(), angle.sin());
+            let p = position + direction * (15.0 + pulse * 19.0);
+            self.visible(p, size).then_some(p)
+        });
+        let required = body.occupied_count() + sparks.iter().flatten().count();
+        if required > self.remaining {
+            return 0;
+        }
+        self.body(
+            body,
+            Transform {
+                position,
+                scale: Vec2::splat((0.32 + pulse * 0.2) * if reduced { 2.0 } else { 1.0 }),
+                ..Transform::default()
+            },
+            PALETTES[4],
+            (90.0 + pulse * 100.0) as u8,
+        );
+        for p in sparks.into_iter().flatten() {
+            self.pixel(p, size, 0x80_8fcaff);
+        }
+        required
+    }
     fn pixel(&mut self, p: Vec2, size: f32, color: u32) {
         if self.remaining > 0 && self.visible(p, size) {
             self.frame.push_pixel(p, size, color);
@@ -549,26 +645,7 @@ pub fn background_with_density(
                         } else {
                             0.0
                         };
-                        let palette = PALETTES[4];
-                        scene.body(
-                            &PLANETS[3],
-                            Transform {
-                                position,
-                                scale: Vec2::splat(0.32 + pulse * 0.2),
-                                ..Transform::default()
-                            },
-                            palette,
-                            (90.0 + pulse * 100.0) as u8,
-                        );
-                        for i in 0..24 {
-                            let angle = i as f32 * TAU / 24.0;
-                            let direction = Vec2::new(angle.cos(), angle.sin());
-                            scene.pixel(
-                                position + direction * (15.0 + pulse * 19.0),
-                                0.8 + pulse * 0.7,
-                                0x80_8fcaff,
-                            );
-                        }
+                        scene.nova_group(position, pulse, reduced);
                     }
                 } else if layer == 1 && h.is_multiple_of(3) && scene.visible(position, 135.0) {
                     if biome.kind == 4 {
@@ -597,13 +674,7 @@ pub fn background_with_density(
                         },
                         scale: Vec2::splat(0.32 + unit(mix(h ^ 37)) * 0.4),
                     };
-                    if kind == 1 {
-                        scene.body(&RINGS[0], transform, biome.palette, 150);
-                    }
-                    scene.body(&PLANETS[kind], transform, biome.palette, 190);
-                    if kind == 1 {
-                        scene.body(&RINGS[1], transform, biome.palette, 190);
-                    }
+                    scene.planet_group(kind, transform, biome.palette, reduced);
                 } else if layer == 2 {
                     let phase = (time + unit(mix(h ^ 303)) * 80.0).rem_euclid(80.0);
                     if phase < 18.0 {
@@ -628,6 +699,10 @@ pub fn background_with_density(
 #[cfg(test)]
 #[path = "isotope_region_tests.rs"]
 mod isotope_tests;
+
+#[cfg(test)]
+#[path = "regions_lod_tests.rs"]
+mod lod_tests;
 
 #[cfg(test)]
 mod tests {
