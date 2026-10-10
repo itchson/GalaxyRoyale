@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 364,
+  "revision": 368,
   "name": "Galaxy Royale",
   "phase": "Foundation → playable vertical slice",
-  "updatedAt": "2026-10-10T23:21:35.506Z",
+  "updatedAt": "2026-10-10T23:26:32.725Z",
   "tasks": [
     {
       "id": "studio",
@@ -3298,7 +3298,7 @@
       "description": "Replace cross-menu tabs with four clickable authored dock facilities, independently focused menus with close icons, Escape pause actions, restart at Haven and truthful automatic-save indicator.",
       "department": "gameplay",
       "owner": "Producer / Gameplay / Engine / Responsive QA",
-      "status": "review",
+      "status": "complete",
       "priority": "high",
       "dependencies": [],
       "acceptanceCriteria": [
@@ -3312,7 +3312,7 @@
         },
         {
           "text": "Exact game-only private artifact published",
-          "met": false
+          "met": true
         }
       ],
       "evidence": [
@@ -3325,12 +3325,27 @@
           "label": "Final independent package review",
           "kind": "note",
           "path": "artifacts/dock-recovery-final-package-review.md"
+        },
+        {
+          "label": "Exact archive review",
+          "kind": "note",
+          "path": "artifacts/dock-recovery-final-archive-review.md"
+        },
+        {
+          "label": "Private deployment",
+          "kind": "note",
+          "path": "artifacts/dock-console-deployment.json"
+        },
+        {
+          "label": "Private game",
+          "kind": "note",
+          "url": "https://galaxy-royale-itchson.itchson.chatgpt.site/"
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 3,
       "createdAt": "2026-10-10T22:54:37.631Z",
-      "updatedAt": "2026-10-10T23:21:35.181Z"
+      "updatedAt": "2026-10-10T23:26:32.636Z"
     },
     {
       "id": "task-2ab5ed21",
@@ -3338,7 +3353,7 @@
       "description": "Keep live Game independent of awaited renderer creation; gate lost contexts and rebuild only after actual restoration, preserve modal intent and expose fallback menus during recovery.",
       "department": "engine",
       "owner": "Producer / Engine / Responsive QA",
-      "status": "review",
+      "status": "complete",
       "priority": "high",
       "dependencies": [],
       "acceptanceCriteria": [
@@ -3352,7 +3367,7 @@
         },
         {
           "text": "Exact game-only private artifact published",
-          "met": false
+          "met": true
         }
       ],
       "evidence": [
@@ -3365,12 +3380,27 @@
           "label": "Final independent package review",
           "kind": "note",
           "path": "artifacts/dock-recovery-final-package-review.md"
+        },
+        {
+          "label": "Exact archive review",
+          "kind": "note",
+          "path": "artifacts/dock-recovery-final-archive-review.md"
+        },
+        {
+          "label": "Private deployment",
+          "kind": "note",
+          "path": "artifacts/dock-console-deployment.json"
+        },
+        {
+          "label": "Private game",
+          "kind": "note",
+          "url": "https://galaxy-royale-itchson.itchson.chatgpt.site/"
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 3,
       "createdAt": "2026-10-10T22:54:37.721Z",
-      "updatedAt": "2026-10-10T23:21:35.226Z"
+      "updatedAt": "2026-10-10T23:26:32.662Z"
     },
     {
       "id": "task-d6a4013a",
@@ -3378,7 +3408,7 @@
       "description": "Retain original planet and ring silhouettes at reduced detail using bounded cached cells and atomic group admission.",
       "department": "art",
       "owner": "Gameplay / Producer",
-      "status": "review",
+      "status": "complete",
       "priority": "high",
       "dependencies": [],
       "acceptanceCriteria": [
@@ -3392,7 +3422,7 @@
         },
         {
           "text": "Exact game-only private artifact published",
-          "met": false
+          "met": true
         }
       ],
       "evidence": [
@@ -3405,12 +3435,27 @@
           "label": "Final independent package review",
           "kind": "note",
           "path": "artifacts/dock-recovery-final-package-review.md"
+        },
+        {
+          "label": "Exact archive review",
+          "kind": "note",
+          "path": "artifacts/dock-recovery-final-archive-review.md"
+        },
+        {
+          "label": "Private deployment",
+          "kind": "note",
+          "path": "artifacts/dock-console-deployment.json"
+        },
+        {
+          "label": "Private game",
+          "kind": "note",
+          "url": "https://galaxy-royale-itchson.itchson.chatgpt.site/"
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 3,
       "createdAt": "2026-10-10T22:54:37.782Z",
-      "updatedAt": "2026-10-10T23:21:35.256Z"
+      "updatedAt": "2026-10-10T23:26:32.696Z"
     },
     {
       "id": "task-8d55901c",
@@ -5175,6 +5220,56 @@
         }
       ],
       "knownIssues": "Pending physical-device/soak/audible/balance and full recovery matrix. New cargo/crafting request is work-only and not part of this candidate."
+    },
+    {
+      "id": "build-d1b0ae7f",
+      "title": "Published Haven/console release ac19daf73e83b006",
+      "body": "Exact owner-private game-only archive published. Current console/dock/recovery/LOD bounded tasks complete; new ship cargo/crafting work active. Published source matches302Rust/134shell final logs and94 committed input review.",
+      "author": "Producer",
+      "source": "Successful native private publication and independent committed/archive review",
+      "createdAt": "2026-10-10T23:26:32.725Z",
+      "revision": "991153c187b0eb3920829dc3ff94ea04f99ee864",
+      "evidence": [
+        {
+          "label": "Publication",
+          "kind": "note",
+          "path": "artifacts/dock-console-deployment.json"
+        },
+        {
+          "label": "Exact archive review",
+          "kind": "note",
+          "path": "artifacts/dock-recovery-final-archive-review.md"
+        },
+        {
+          "label": "Responsive review",
+          "kind": "note",
+          "path": "artifacts/dock-console-responsive-review.md"
+        }
+      ],
+      "checks": [
+        {
+          "name": "Exact20filearchive/sourcepins/privatepublication",
+          "result": "pass"
+        },
+        {
+          "name": "Normal dual build/302Rust/134shell/strictchecks",
+          "result": "pass"
+        },
+        {
+          "name": "Scoped local desktop renderer/console/responsive",
+          "result": "pass"
+        },
+        {
+          "name": "Physicalphones/30minute soak/audible/fullrecoverymatrix",
+          "result": "not_run"
+        },
+        {
+          "name": "Authenticatedremote natural campaign",
+          "result": "not_run"
+        }
+      ],
+      "url": "https://galaxy-royale-itchson.itchson.chatgpt.site/",
+      "knownIssues": "Physical-device and other unmeasured gates remain pending. New cargo/shiploadout features are not in this published artifact."
     }
   ],
   "feedback": [],
@@ -8818,6 +8913,46 @@
       "author": "Producer",
       "source": "Actual source, test logs, specialist handoffs and browser observations",
       "createdAt": "2026-10-10T23:21:35.506Z"
+    },
+    {
+      "id": "39bc147a-e0ee-49b8-bcbc-45116325210f",
+      "revision": 365,
+      "kind": "task.update",
+      "itemId": "task-2c33a7b8",
+      "title": "Haven facilities and dedicated pixel menus",
+      "author": "Producer",
+      "source": "Exact committed game-only private artifact succeeded",
+      "createdAt": "2026-10-10T23:26:32.636Z"
+    },
+    {
+      "id": "75469d29-eff8-48e9-903f-1c22578154eb",
+      "revision": 366,
+      "kind": "task.update",
+      "itemId": "task-2ab5ed21",
+      "title": "Two-phase renderer and real WebGL lifecycle",
+      "author": "Producer",
+      "source": "Exact committed game-only private artifact succeeded",
+      "createdAt": "2026-10-10T23:26:32.662Z"
+    },
+    {
+      "id": "4912b1ae-a4dd-4a27-b7be-d801c8c496a4",
+      "revision": 367,
+      "kind": "task.update",
+      "itemId": "task-d6a4013a",
+      "title": "Complete reduced-detail planet groups",
+      "author": "Producer",
+      "source": "Exact committed game-only private artifact succeeded",
+      "createdAt": "2026-10-10T23:26:32.696Z"
+    },
+    {
+      "id": "1c6c667e-4603-4e57-b075-73336f0cacdc",
+      "revision": 368,
+      "kind": "build",
+      "itemId": "build-d1b0ae7f",
+      "title": "Published Haven/console release ac19daf73e83b006",
+      "author": "Producer",
+      "source": "Successful native private publication and independent committed/archive review",
+      "createdAt": "2026-10-10T23:26:32.725Z"
     }
   ],
   "runRecords": [

@@ -1,8 +1,8 @@
 {
-  "id": "appgdep_6acabdfbc664819182d39ad546e0de71",
+  "id": "appgdep_6acac92a31688191b10ebe86a800987c",
   "project_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93",
   "title": "Galaxy Royale",
-  "version_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93~appgver_0d66277314748191bf66d824c4574322",
+  "version_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93~appgver_2d03819338448191a141a33ca57eeb0d",
   "type": "publish",
   "status": "succeeded",
   "url": "https://galaxy-royale-itchson.itchson.chatgpt.site",
@@ -11,15 +11,15 @@
   "provider_deployment_id": "site---6aca50f5b1bc81918526a6ee969aac93",
   "failure_message": null,
   "env_set_revision": 0,
-  "updated_at": "2026-10-10T22:37:01.886731+00:00",
-  "commit_sha": "c5fc5221a89ba0e312b9f07282b219e3c10716d3",
-  "cacheVersion": "galaxy-95d0a4d39116971e",
-  "browserAccess": "Exact owner-private publication succeeded. Current normal binaries were observed on isolated localhost WebGPU and WebGL2; authenticated remote execution is unmeasured. Opening the private preview in Codex was queued, not proof of remote game execution.",
-  "archiveContent": "Exactly20 regular files:18 cached normal game assets,sw.js and normalized dist/.openai/hosting.json.80 committed source inputs verified independently; no Studio/API/production/work/source/QA-contract payload or credentials.",
-  "validation": "282 Rust/89 shell checks, strict TypeScript/native/both-WASM Clippy, normal dual build pass. Both normal desktop renderer paths observed; final tiny/portrait responsive geometry and navigation reviewed.80 source pins and20 archive files independently verified. Physical phones/soak, human balance/audio, full recovery matrix and authenticated remote gameplay remain pending.",
+  "updated_at": "2026-10-10T23:24:45.437700+00:00",
+  "commit_sha": "991153c187b0eb3920829dc3ff94ea04f99ee864",
+  "cacheVersion": "galaxy-ac19daf73e83b006",
+  "browserAccess": "Exact owner-private publication succeeded. Final normal WebGPU and WebGL2 console/reconstruction were observed locally, with scoped responsive Chrome WebGL checks. Authenticated remote execution remains unmeasured.",
+  "archiveContent": "Exactly20 game-only files:18 cached normal assets,sw.js and normalized dist/.openai/hosting.json.94 committed inputs independently matched,77exactbyte and17LF/CRLF representations. ArchiveSHA499f0979bdf351a32365786ca883a5e2b64b76c8a888d5d57f27a619071ed065.",
+  "validation": "302Rust/134shell, strict TypeScript/native/both-WASMClippy and normal dual build pass. Scoped actual native recovery and320x180/720x360/portrait UI/console checks pass; exact94 sourcepins/20filearchive reviewed. Phones/soak, fulltimingmatrix, audiblehumanreview/naturalcampaign and authenticatedremote gameplay pending. New cargo/ability request is a later active milestone, not claimed in this artifact.",
   "backendHashes": {
-    "webgpu": "26ed131d32196d1fc9a3e58117dab927bb14a3f4d5803e1c78be991490f85cc9",
-    "webgl2": "0a90caddf5fb124c8dc7657992eb0d68aef24f31e1ecb0790a705211bf1e1367"
+    "webgpu": "ccce86e239d72b86aac6a7dac5c0daa1b8b5968b6b4da502c02cca009e4b8246",
+    "webgl2": "ae10fa80c88bc5bdc2b9a597e1163ef9b7298b085c0423b2db45e86dcae0485e"
   },
   "previousDeployments": [
     {
@@ -83,101 +83,14 @@
       "status": "succeeded",
       "updated_at": "2026-10-10T21:55:07.664154+00:00",
       "cacheVersion": "galaxy-37e3441c8c48302c"
-    }
-  ],
-  "evidence": [
-    "artifacts/cursor-aim-validation.md",
-    "artifacts/cursor-aim-engine-review.md",
-    "artifacts/cursor-aim-local-package-review.md",
-    "artifacts/cursor-aim-browser-review.md",
-    "artifacts/cursor-aim-committed-archive-review.md",
-    "artifacts/cursor-aim-private-deployment.json",
-    "artifacts/scar-audio-integration-validation.md",
-    "artifacts/scar-audio-browser-validation.md",
-    "artifacts/scar-audio-package-review.md",
-    "artifacts/scar-audio-final-evidence-review.md",
-    "artifacts/champion-patch-browser-review.md",
-    "artifacts/mote-browser-dsp-review.md",
-    "artifacts/scar-art-browser-review.md",
-    "artifacts/scar-private-deployment.json",
-    "artifacts/scar-private-access.jpg",
-    "artifacts/mote-browser-validation.md",
-    "artifacts/mote-packaging-review.md",
-    "artifacts/mote-final-evidence-review.md",
-    "artifacts/death-integration-validation.md",
-    "artifacts/hangar-browser-validation.md",
-    "artifacts/mote-deployment-qa-review.md",
-    "artifacts/mote-deployment-qa-evidence.json",
-    "artifacts/cosmic-ui-validation.md",
-    "artifacts/cosmic-ui-browser-validation.md",
-    "artifacts/cosmic-ui-responsive-browser-review.md",
-    "artifacts/cosmic-ui-final-source-review.md",
-    "artifacts/cosmic-ui-local-package-review.md",
-    "artifacts/cosmic-ui-committed-archive-review.md",
-    "artifacts/cosmic-ui-private-deployment.json",
-    "artifacts/cosmic-ui-source-workflow.json"
-  ],
-  "resolvedProgressionIssues": {
-    "observedAt": "2026-10-10T19:22:26.667Z",
-    "cadenceTask": "task-6c761ea8",
-    "capCaptionTask": "task-696d7d24",
-    "description": "Every fixed-tick fire-rate rank now rises at authored long-run cadence; level100 displaysMAXLEVEL. Both fixes integrated, reviewed and published.",
-    "evidence": [
-      "artifacts/scout-progression-audit.json",
-      "artifacts/scout-progression-qa-native.json",
-      "artifacts/scout-progression-qa-save.json"
-    ],
-    "resolvedInSource": "be3ae02adcf514d2f3a6e9687115a3c7da344d2d"
-  },
-  "knownFollowups": [
-    {
-      "taskId": "task-b0a59d63",
-      "description": "Reviewed legal interior Mote candidates are integrated. Eight actual movement cases pass: four ordinary maxzoom cases emit while moving; narrow320x180moving remains suppressed and all8recover afterrelease. Broad natural/narrow/human readability remains Review."
     },
     {
-      "taskId": "task-4a0debda",
-      "description": "Integrated charge/pulse SFX with actual desktop DSP evidence; human listening and phone audio acceptance remain pending."
+      "id": "appgdep_6acabdfbc664819182d39ad546e0de71",
+      "version_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93~appgver_0d66277314748191bf66d824c4574322",
+      "commit_sha": "c5fc5221a89ba0e312b9f07282b219e3c10716d3",
+      "status": "succeeded",
+      "updated_at": "2026-10-10T22:37:01.886731+00:00",
+      "cacheVersion": "galaxy-95d0a4d39116971e"
     }
-  ],
-  "resolvedDeathIssue": {
-    "taskId": "task-0851af86",
-    "resolvedInSource": "573906769122140e2e54021bdaf037ad6f887673",
-    "description": "Shared early/final death helper prevents already-zero hull revival while preserving natural lethal ordering, earned checkpoint and truthful prior-run history."
-  },
-  "radiationMote": {
-    "taskId": "task-e8684a94",
-    "integratedInSource": "573906769122140e2e54021bdaf037ad6f887673",
-    "description": "Original live712cell ordinary Radial Wastes variant with destructible emitters, staged attacks and normal reward/cap/sanctuary paths. Actual bounded bothrenderer presentation is recorded separately."
-  },
-  "archive": {
-    "path": "work/galaxy-cursor-aim-release-20261011.tar.gz",
-    "bytes": 2128867,
-    "sha256": "939b92dcf6953e947fea69e8900ff0b398be110b3a72f909bf32569fc3262937"
-  },
-  "moteAudio": {
-    "taskId": "task-4a0debda",
-    "integratedInSource": "60590ddcde0c8c66139bc6c1bea47bbd45e0a717",
-    "description": "Real charge entry and accepted pulse events with original procedural SFX; declared native browser recordings are separate from natural combat listening."
-  },
-  "isotopeScar": {
-    "taskId": "task-59dfc802",
-    "integratedInSource": "60590ddcde0c8c66139bc6c1bea47bbd45e0a717",
-    "description": "Detailed original seeded distant planet with nested ion and fragment layers, existing parallax and shared cosmetic budgets."
-  },
-  "championEmblems": {
-    "taskId": "task-403cf3c4",
-    "integratedInSource": "60590ddcde0c8c66139bc6c1bea47bbd45e0a717",
-    "description": "Nine original occupied-cell UI emblems driven by actual earned/victory state; native extraction and representative browser fit/clipping reviewed."
-  },
-  "cursorAim": {
-    "taskId": "task-aaf6d58e",
-    "integratedInSource": "8b19c6cfdb599e7bc0e310e1960ac096ea1bc7a5",
-    "description": "Transient right-held cursor overrides smooth720deg/sec facing while flightcourse/braking remain. Primary shots use actualnose plus quartervelocity, including during turns; mobile keeps headingfire."
-  },
-  "pixelFontWrapper": {
-    "taskId": "task-90acc365",
-    "integratedInSource": "8b19c6cfdb599e7bc0e310e1960ac096ea1bc7a5",
-    "description": "Bounded256character/257span pixel-text wrapper preserves exact legacy Unicode/newline/truncation behavior, with durable oracle tests and independent native packet/allocator review."
-  },
-  "archiveSha256": "6e46e6806a5acfadd81b2e61b6fdfa0590a2134027865e074727d2989b12642d"
+  ]
 }
