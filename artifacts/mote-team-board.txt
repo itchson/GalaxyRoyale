@@ -1,0 +1,527 @@
+- complementary:
+  - link "Galaxy Royale mission board":
+    - /url: "#"
+    - text: GALAXY
+    - text: ROYALE
+    - generic: MISSION CONTROL
+  - generic: WORKSPACE
+  - navigation "Production views":
+    - button "▦ Mission board":
+      - generic: ▦
+      - text: Mission board
+    - button "◇ Review room":
+      - generic: ◇
+      - text: Review room
+    - button "⌁ Decisions":
+      - generic: ⌁
+      - text: Decisions
+    - button "▣ Build archive":
+      - generic: ▣
+      - text: Build archive
+    - button "≋ Activity log":
+      - generic: ≋
+      - text: Activity log
+    - button "↗ Feedback queue":
+      - generic: ↗
+      - text: Feedback queue
+  - text: BUILDING WITH INTENT
+  - paragraph:
+    - text: A pixel universe.
+    - text: A clear record of the work.
+  - text: ◉ Local & private
+  - link "Open game workspace ↗":
+    - /url: http://127.0.0.1:4173
+    - text: Open game workspace
+    - generic: ↗
+  - generic: Development preview; availability depends on the game server.
+- banner:
+  - generic: Galaxy Royale/Mission board
+  - generic: Local API connected
+- main:
+  - generic: ✦ FOUNDATION / VERTICAL SLICE
+  - heading "A universe in the making." [level=1]
+  - paragraph: One playable slice. Every task, decision and result accounted for.
+  - generic: RUST + WASM
+  - generic: SOLO PWA
+  - generic: NEO-RETRO COSMIC
+  - generic: ◆
+  - generic: ✦
+  - generic: ·
+  - generic: +
+  - generic: IN ACTION
+  - strong:
+    - text: "1"
+    - generic: assigned tasks
+  - generic: AWAITING REVIEW
+  - strong:
+    - text: "21"
+    - generic: ready for assessment
+  - generic: ACCEPTED WORK
+  - strong:
+    - text: "25"
+    - generic: criteria + evidence
+  - generic: RECORDED BUILDS
+  - strong:
+    - text: "8"
+    - generic: see validation coverage
+  - group "Recorded agent runs":
+    - generic "Last recorded agent states Explicit observations with their source. A completed scope does not complete its linked tasks; these records do not indicate current presence. Gameplay / Art specialist running Production specialist / Independent QA running Engine specialist running Producer / Integrator running Spark local read-only UI auditor failed Spark audio worker interrupted Expand observations ↓":
+      - heading "Last recorded agent states" [level=2]
+      - paragraph: Explicit observations with their source. A completed scope does not complete its linked tasks; these records do not indicate current presence.
+      - text: Gameplay / Art specialist
+      - generic: running
+      - text: Production specialist / Independent QA
+      - generic: running
+      - text: Engine specialist
+      - generic: running
+      - text: Producer / Integrator
+      - generic: running
+      - text: Spark local read-only UI auditor
+      - generic: failed
+      - text: Spark audio worker
+      - generic: interrupted
+      - generic: Expand observations ↓
+  - heading "Mission board 55" [level=2]
+  - paragraph: Work states reflect recorded updates, not live agent presence.
+  - button "+ New task"
+  - generic: ⌕
+  - searchbox "Search tasks"
+  - combobox "Filter department":
+    - option "All departments" [selected]
+    - option "Production"
+    - option "Engine"
+    - option "Gameplay"
+    - option "Platform"
+    - option "Audio"
+    - option "QA"
+    - option "Visual"
+    - option "Art / Engine"
+    - option "Networking"
+    - option "Multiplayer"
+    - option "Web controls"
+    - option "Interface"
+    - option "Narrative"
+    - option "Audio / Narrative"
+    - option "Gameplay / UI"
+    - option "UI / Narrative"
+    - option "UI / Audio"
+    - option "UI / Controls"
+    - option "Gameplay / Persistence"
+    - option "Engine / Gameplay"
+    - option "Engine / QA"
+    - option "Platform / Interface"
+    - option "Gameplay / Art"
+    - option "Engine / Production"
+    - option "Engine / UI"
+    - option "Gameplay / Audio"
+    - option "Art / Pixel UI"
+  - combobox "Filter status":
+    - option "All states" [selected]
+    - option "Backlog"
+    - option "To do"
+    - option "In action"
+    - option "Review"
+    - option "Completed"
+    - option "Blocked"
+  - heading "Backlog" [level=3]
+  - generic: "8"
+  - button "QA mobile Physical midrange-phone acceptance Implement and validate the agreed vertical-slice behavior. Completion requires real acceptance evidence. Unassigned 0/2 checks":
+    - generic: QA
+    - generic: mobile
+    - generic: Physical midrange-phone acceptance
+    - generic: Implement and validate the agreed vertical-slice behavior. Completion requires real acceptance evidence.
+    - generic: Unassigned
+    - generic: 0/2 checks
+  - button "Audio audio-ai Optional offline music candidate experiment Optional offline asset experiment on the RTX 5090; no model inference in the shipped game. Unassigned 0/2 checks":
+    - generic: Audio
+    - generic: audio-ai
+    - generic: Optional offline music candidate experiment
+    - generic: Optional offline asset experiment on the RTX 5090; no model inference in the shipped game.
+    - generic: Unassigned
+    - generic: 0/2 checks
+  - button "Networking task-05dd95cd Invite friends for co-op expeditions Future multiplayer milestone requested by user; no multiplayer acceptance claimed in solo slice. Unassigned 0/3 checks":
+    - generic: Networking
+    - generic: task-05dd95cd
+    - generic: Invite friends for co-op expeditions
+    - generic: Future multiplayer milestone requested by user; no multiplayer acceptance claimed in solo slice.
+    - generic: Unassigned
+    - generic: 0/3 checks
+  - button "Networking task-7e8e0a50 Authoritative multiplayer world and session foundation Future prerequisite for invite co-op and battle royale. Define trusted simulation/world ownership, seeded sessions, invitation lifecycle, synchronization of pixel destruction and mission rewards, reconnect, anti-duplication and compatible profile versions. No current network implementation or server acceptance is implied. Unassigned 0/3 checks":
+    - generic: Networking
+    - generic: task-7e8e0a50
+    - generic: Authoritative multiplayer world and session foundation
+    - generic: Future prerequisite for invite co-op and battle royale. Define trusted simulation/world ownership, seeded sessions, invitation lifecycle, synchronization of pixel destruction and mission rewards, reconnect, anti-duplication and compatible profile versions. No current network implementation or server acceptance is implied.
+    - generic: Unassigned
+    - generic: 0/3 checks
+  - 'button "Gameplay task-acf182ad Player-owned docks: radius upgrades and arenas Accepted future direction: player-owned docks with upgradeable protection radii and arena encounters. Costs, bounds, arena entry/exit and reward rules remain design work. Implement coherent protection/spawn/interactions/visuals, persistent ownership and upgrade migration; multiplayer ownership is authority-validated. Current Haven radius remains the implemented solo behavior. Unassigned 0/3 checks"':
+    - generic: Gameplay
+    - generic: task-acf182ad
+    - generic: "Player-owned docks: radius upgrades and arenas"
+    - generic: "Accepted future direction: player-owned docks with upgradeable protection radii and arena encounters. Costs, bounds, arena entry/exit and reward rules remain design work. Implement coherent protection/spawn/interactions/visuals, persistent ownership and upgrade migration; multiplayer ownership is authority-validated. Current Haven radius remains the implemented solo behavior."
+    - generic: Unassigned
+    - generic: 0/3 checks
+  - 'button "Multiplayer task-2439af52 Battle royale: compact circular seeded world and antipodal edges Accepted separate future multiplayer mode. Create a compact seeded circular universe with equally spaced zones. Boundary crossing transfers to the antipodal edge while preserving ship heading and speed and rebasing camera/interpolation. Validate overshoot, repeated crossings, click destinations, attached effects/projectiles and authoritative multi-client consistency. No current solo-world topology is changed by this backlog entry. Partial foundation now exists: portable opt-in CircularTopology passed native boundary/overshoot/oblique/repeated crossing and shared motion/heading/camera/destination rebase tests. It is unused by solo gameplay. Seeded multiplayer zones, effects/projectile integration, authority and the actual arena mode remain backlog. Unassigned 0/3 checks"':
+    - generic: Multiplayer
+    - generic: task-2439af52
+    - generic: "Battle royale: compact circular seeded world and antipodal edges"
+    - generic: "Accepted separate future multiplayer mode. Create a compact seeded circular universe with equally spaced zones. Boundary crossing transfers to the antipodal edge while preserving ship heading and speed and rebasing camera/interpolation. Validate overshoot, repeated crossings, click destinations, attached effects/projectiles and authoritative multi-client consistency. No current solo-world topology is changed by this backlog entry. Partial foundation now exists: portable opt-in CircularTopology passed native boundary/overshoot/oblique/repeated crossing and shared motion/heading/camera/destination rebase tests. It is unused by solo gameplay. Seeded multiplayer zones, effects/projectile integration, authority and the actual arena mode remain backlog."
+    - generic: Unassigned
+    - generic: 0/3 checks
+  - 'button "Multiplayer task-e665335c Battle royale: arena sieges and last-player-standing match loop Future arena siege match mode in the separate circular universe. Last remaining player wins. Player counts, siege damage, safe-radius restrictions, elimination/respawn rules, match length and matchmaking need design and balance. Keep match state/rewards isolated from solo progression; authoritative elimination and end conditions must survive reconnect and contested simultaneous outcomes. Unassigned 0/3 checks"':
+    - generic: Multiplayer
+    - generic: task-e665335c
+    - generic: "Battle royale: arena sieges and last-player-standing match loop"
+    - generic: Future arena siege match mode in the separate circular universe. Last remaining player wins. Player counts, siege damage, safe-radius restrictions, elimination/respawn rules, match length and matchmaking need design and balance. Keep match state/rewards isolated from solo progression; authoritative elimination and end conditions must survive reconnect and contested simultaneous outcomes.
+    - generic: Unassigned
+    - generic: 0/3 checks
+  - 'button "Audio / Narrative task-0f6ce1db Original NPC voice clips and optional local inference acceptance Future experiment: use the cached Qwen3-TTS VoiceDesign/Base pair to design eight original voices and review short clips with stable references, provenance and pronunciation. No model download, inference service, generated neural speech or listening acceptance delivered here. Runtime local synthesis remains optional; authored pages and platform replay work independently. Phone localhost is not the workstation. Never expose the Codex model router as a game API. Production / Audio 0/4 checks"':
+    - generic: Audio / Narrative
+    - generic: task-0f6ce1db
+    - generic: Original NPC voice clips and optional local inference acceptance
+    - generic: "Future experiment: use the cached Qwen3-TTS VoiceDesign/Base pair to design eight original voices and review short clips with stable references, provenance and pronunciation. No model download, inference service, generated neural speech or listening acceptance delivered here. Runtime local synthesis remains optional; authored pages and platform replay work independently. Phone localhost is not the workstation. Never expose the Codex model router as a game API."
+    - generic: Production / Audio
+    - generic: 0/4 checks
+  - heading "To do" [level=3]
+  - generic: "0"
+  - generic: No recorded tasks
+  - heading "In action" [level=3]
+  - generic: "1"
+  - button "Art / Pixel UI task-403cf3c4 Original pixel arena patches and Royale victory emblem Gameplay/art specialist is actively authoring distinct tiny emblems for the eight actual champion themes and a Royale victory emblem, owned work/champion-patch-art only. Packed indexed occupied-cell UI objects should remain readable at small scales, use discreet earned shimmer with Reduced Motion and reuse existing pixel UI groups/font/layers. Production, saves and physics remain unchanged; independent review and actual browser integration are pending. /root/gameplay_design 0/2 checks":
+    - generic: Art / Pixel UI
+    - generic: task-403cf3c4
+    - generic: Original pixel arena patches and Royale victory emblem
+    - generic: Gameplay/art specialist is actively authoring distinct tiny emblems for the eight actual champion themes and a Royale victory emblem, owned work/champion-patch-art only. Packed indexed occupied-cell UI objects should remain readable at small scales, use discreet earned shimmer with Reduced Motion and reuse existing pixel UI groups/font/layers. Production, saves and physics remain unchanged; independent review and actual browser integration are pending.
+    - generic: /root/gameplay_design
+    - generic: 0/2 checks
+  - heading "Review" [level=3]
+  - generic: "21"
+  - button "Audio audio Retro synthesis and adaptive sequencer Authored procedural score and cues implemented, compiled and integrated. Subjective listening/level balance, gesture/interruption lifecycle and physical device audio acceptance remain Review. Gameplay specialist / Producer listening 0/2 checks":
+    - generic: Audio
+    - generic: audio
+    - generic: Retro synthesis and adaptive sequencer
+    - generic: Authored procedural score and cues implemented, compiled and integrated. Subjective listening/level balance, gesture/interruption lifecycle and physical device audio acceptance remain Review.
+    - generic: Gameplay specialist / Producer listening
+    - generic: 0/2 checks
+  - button "QA asteroids Asteroid damage, impact and loot validation Per-cell damage, momentum exchange/separation and exactly-once pickup progression pass native/store checks. Full visible asteroid impact/destruction/loot play acceptance remains Review. Producer / Gameplay QA 1/2 checks":
+    - generic: QA
+    - generic: asteroids
+    - generic: Asteroid damage, impact and loot validation
+    - generic: Per-cell damage, momentum exchange/separation and exactly-once pickup progression pass native/store checks. Full visible asteroid impact/destruction/loot play acceptance remains Review.
+    - generic: Producer / Gameplay QA
+    - generic: 1/2 checks
+  - button "QA controls-qa Controller and input interruption tests Automated pointer cancellation/blur/independent simultaneous joystick and fire plus desktop destination mapping pass. Desktop viewport layout reviewed. Actual simultaneous physical touches, Safari and named-phone interruption behavior remain unmeasured. Producer / Physical QA 1/2 checks":
+    - generic: QA
+    - generic: controls-qa
+    - generic: Controller and input interruption tests
+    - generic: Automated pointer cancellation/blur/independent simultaneous joystick and fire plus desktop destination mapping pass. Desktop viewport layout reviewed. Actual simultaneous physical touches, Safari and named-phone interruption behavior remain unmeasured.
+    - generic: Producer / Physical QA
+    - generic: 1/2 checks
+  - 'button "QA boss-qa Fifteen boss encounters: full browser and unlock play review Native fifteen-encounter combat/phase/retry and real-WASM save checks pass. Representative WebGPU/WebGL2 deep-boss captures show correct generation/phase/HUD. Full natural promotion tree, readable first offscreen charge, signature acquisition/balance, all fifteen browser attacks and phone controls remain pending. Do not substitute reward-isolated max-loadout diagnostics for a natural run. Producer / Gameplay review 0/2 checks"':
+    - generic: QA
+    - generic: boss-qa
+    - generic: "Fifteen boss encounters: full browser and unlock play review"
+    - generic: Native fifteen-encounter combat/phase/retry and real-WASM save checks pass. Representative WebGPU/WebGL2 deep-boss captures show correct generation/phase/HUD. Full natural promotion tree, readable first offscreen charge, signature acquisition/balance, all fifteen browser attacks and phone controls remain pending. Do not substitute reward-isolated max-loadout diagnostics for a natural run.
+    - generic: Producer / Gameplay review
+    - generic: 0/2 checks
+  - button "Visual art-direction Neo-retro cosmic visual polish Generated editable sprite/UI cells, distinct family silhouettes, parallax/background bodies, RoyaleMono, material lighting and interface presentation have source/native/desktop evidence. Continued visual polish and full encounter/hazard readability review remain pending. Production specialist / Gameplay specialist 1/2 checks":
+    - generic: Visual
+    - generic: art-direction
+    - generic: Neo-retro cosmic visual polish
+    - generic: Generated editable sprite/UI cells, distinct family silhouettes, parallax/background bodies, RoyaleMono, material lighting and interface presentation have source/native/desktop evidence. Continued visual polish and full encounter/hazard readability review remain pending.
+    - generic: Production specialist / Gameplay specialist
+    - generic: 1/2 checks
+  - button "QA performance Performance captures and quality limits Measured native and short desktop browser budgets recorded. Named-phone60FPS, thermal behavior, memory/audio/device lifecycle and sustained30-minute mobile soak remain pending. Producer / Performance QA 1/2 checks":
+    - generic: QA
+    - generic: performance
+    - generic: Performance captures and quality limits
+    - generic: Measured native and short desktop browser budgets recorded. Named-phone60FPS, thermal behavior, memory/audio/device lifecycle and sustained30-minute mobile soak remain pending.
+    - generic: Producer / Performance QA
+    - generic: 1/2 checks
+  - 'button "Gameplay balance Slice combat and progression tuning Read-only Scout audit and independent progression boundary review are completed: actual level1..12 stats/rank gates,movement/braking,native purchases/crafting/saves and six disclosed30s natural straight-input runs recorded. Measured cadence plateaus were corrected separately in be3ae02. Human first-purchase time, affordability,touch braking/aiming and combat balance remain pending; no current tuning change is claimed. Gameplay specialist / Independent QA 0/2 checks"':
+    - generic: Gameplay
+    - generic: balance
+    - generic: Slice combat and progression tuning
+    - generic: "Read-only Scout audit and independent progression boundary review are completed: actual level1..12 stats/rank gates,movement/braking,native purchases/crafting/saves and six disclosed30s natural straight-input runs recorded. Measured cadence plateaus were corrected separately in be3ae02. Human first-purchase time, affordability,touch braking/aiming and combat balance remain pending; no current tuning change is claimed."
+    - generic: Gameplay specialist / Independent QA
+    - generic: 0/2 checks
+  - button "Platform accessibility Readability, motion and audio settings Independent volume controls, shake, reduced motion and cosmetic density are implemented; native/reload checks pass and desktop footer layout fits. Full critical HUD/readability and physical touch target/device acceptance remains Review. Producer / Accessibility QA 1/2 checks":
+    - generic: Platform
+    - generic: accessibility
+    - generic: Readability, motion and audio settings
+    - generic: Independent volume controls, shake, reduced motion and cosmetic density are implemented; native/reload checks pass and desktop footer layout fits. Full critical HUD/readability and physical touch target/device acceptance remains Review.
+    - generic: Producer / Accessibility QA
+    - generic: 1/2 checks
+  - button "Production slice-review Integrated slice review and release evidence Current exact-source private release573906769122140e2e54021bdaf037ad6f887673 /cacheeaac3b23e213e59b includes reviewed shared death/report fixes and original live Radiation Mote.217Rust/70shell/strictnativeandbothWASMchecks/normalbuild pass. Currentnormal bothrenderer Mote/wheel/layout/save/update plus separatelyscoped death/craft flows and independent source/package/evidence reviews pass. Natural fullcampaign,moving/crowded telegraphs,human balance,listening,completeoffline/recovery,authenticated remote execution and named physicalphones remain pending. Producer 2/2 checks":
+    - generic: Production
+    - generic: slice-review
+    - generic: Integrated slice review and release evidence
+    - generic: Current exact-source private release573906769122140e2e54021bdaf037ad6f887673 /cacheeaac3b23e213e59b includes reviewed shared death/report fixes and original live Radiation Mote.217Rust/70shell/strictnativeandbothWASMchecks/normalbuild pass. Currentnormal bothrenderer Mote/wheel/layout/save/update plus separatelyscoped death/craft flows and independent source/package/evidence reviews pass. Natural fullcampaign,moving/crowded telegraphs,human balance,listening,completeoffline/recovery,authenticated remote execution and named physicalphones remain pending.
+    - generic: Producer
+    - generic: 2/2 checks
+  - button "Gameplay deep-bosses Fifteen authored family bosses and five-generation promotion All fifteen authored Dart, Bastion and Coil encounters and five-generation queues are implemented. Twenty-four base kills reserve generation one; two predecessor defeats promote; highest queued tier takes priority; unfinished credit survives retreat, death and reload. Distinct phases, destructible role rigs and evolving signatures pass native checks and fifteen actual-projectile diagnostic fights. Representative current WebGPU/WebGL2 presentation is reviewed. Full natural campaign progression, all-content browser choreography and human balance remain pending. /root/gameplay_design 3/4 checks":
+    - generic: Gameplay
+    - generic: deep-bosses
+    - generic: Fifteen authored family bosses and five-generation promotion
+    - generic: All fifteen authored Dart, Bastion and Coil encounters and five-generation queues are implemented. Twenty-four base kills reserve generation one; two predecessor defeats promote; highest queued tier takes priority; unfinished credit survives retreat, death and reload. Distinct phases, destructible role rigs and evolving signatures pass native checks and fifteen actual-projectile diagnostic fights. Representative current WebGPU/WebGL2 presentation is reviewed. Full natural campaign progression, all-content browser choreography and human balance remain pending.
+    - generic: /root/gameplay_design
+    - generic: 3/4 checks
+  - button "QA task-d60fcaaa Sanctuary quest completion and reward-claim play review Actual browser event acceptance and retained quest reload already pass. Finish a courier/bounty and claim its reward through the dialogue in an actual browser playthrough, verify journal/currency/relic/hull and that replay/reload cannot claim twice. Native single-claim tests pass; no completed browser reward claimed yet. Producer / Gameplay review 1/2 checks":
+    - generic: QA
+    - generic: task-d60fcaaa
+    - generic: Sanctuary quest completion and reward-claim play review
+    - generic: Actual browser event acceptance and retained quest reload already pass. Finish a courier/bounty and claim its reward through the dialogue in an actual browser playthrough, verify journal/currency/relic/hull and that replay/reload cannot claim twice. Native single-claim tests pass; no completed browser reward claimed yet.
+    - generic: Producer / Gameplay review
+    - generic: 1/2 checks
+  - button "Gameplay task-52a708c0 Eight solo champion arena trials and distinct ship signatures Eight seeded solo champion trials have distinct hulls/signatures and single-claim patch/blueprint rewards. Native rules pass; a fresh packaged browser opened the five-page Atlas dialogue, saved a challenge, entered the real encounter and reloaded at Haven. All eight victories and combat/balance review remain pending. Gameplay / Producer 1/3 checks":
+    - generic: Gameplay
+    - generic: task-52a708c0
+    - generic: Eight solo champion arena trials and distinct ship signatures
+    - generic: Eight seeded solo champion trials have distinct hulls/signatures and single-claim patch/blueprint rewards. Native rules pass; a fresh packaged browser opened the five-page Atlas dialogue, saved a challenge, entered the real encounter and reloaded at Haven. All eight victories and combat/balance review remain pending.
+    - generic: Gameplay / Producer
+    - generic: 1/3 checks
+  - button "Gameplay / UI task-57a3ed52 Champion blueprints, dock crafting and ship selection All three bounded crafting/selection criteria are evidenced. Actual visible WebGL2 insufficient-material lock and WebGPU exact10points+6materials purchase pass; ownership/selection/independent per-ship XP survive WebGL2 reload with exact strict whole-profile equality. Blueprint and starting resources are declared imported fixtures; earned-blueprint/once-only logic has separate native evidence. This task remains Review because its eight-champion acceptance dependency remains Review; no natural8champion victory or browser ship-ability combat is asserted. Gameplay / Producer 3/3 checks":
+    - generic: Gameplay / UI
+    - generic: task-57a3ed52
+    - generic: Champion blueprints, dock crafting and ship selection
+    - generic: All three bounded crafting/selection criteria are evidenced. Actual visible WebGL2 insufficient-material lock and WebGPU exact10points+6materials purchase pass; ownership/selection/independent per-ship XP survive WebGL2 reload with exact strict whole-profile equality. Blueprint and starting resources are declared imported fixtures; earned-blueprint/once-only logic has separate native evidence. This task remains Review because its eight-champion acceptance dependency remains Review; no natural8champion victory or browser ship-ability combat is asserted.
+    - generic: Gameplay / Producer
+    - generic: 3/3 checks
+  - 'button "Gameplay task-0a386265 Solo Galaxy Royale round robin and standings Actual campaign code defines a nine-entrant solo round robin: eight real player duels and 28 explicitly labeled seeded NPC simulations. Three points per win, deterministic tie-break and winner-owned Sovereign progression are implemented for review. A multiplayer last-player-standing mode is still separate future work. Gameplay / Producer 2/3 checks"':
+    - generic: Gameplay
+    - generic: task-0a386265
+    - generic: Solo Galaxy Royale round robin and standings
+    - generic: "Actual campaign code defines a nine-entrant solo round robin: eight real player duels and 28 explicitly labeled seeded NPC simulations. Three points per win, deterministic tie-break and winner-owned Sovereign progression are implemented for review. A multiplayer last-player-standing mode is still separate future work."
+    - generic: Gameplay / Producer
+    - generic: 2/3 checks
+  - button "UI / Narrative task-83929b1c Campaign victory credits and continued hangar play Browser and Rust code exposes credits_pending/acknowledge_credits plus victory presentation and return to hangar. Review end-to-end completion, safe close/resume/title transitions and reload ownership once tournament evidence is available. Producer 0/3 checks":
+    - generic: UI / Narrative
+    - generic: task-83929b1c
+    - generic: Campaign victory credits and continued hangar play
+    - generic: Browser and Rust code exposes credits_pending/acknowledge_credits plus victory presentation and return to hangar. Review end-to-end completion, safe close/resume/title transitions and reload ownership once tournament evidence is available.
+    - generic: Producer
+    - generic: 0/3 checks
+  - 'button "UI / Audio task-5771502c Dialogue pages and voice replay: integrated browser acceptance Authored pixel portraits and five-page dialogue are integrated. Visible packaged WebGL2 pages and Challenge action fit720x360 and normal desktop views; a fresh challenge checkpoint works. Independent voice volume is tested. Replay/listening, provider availability and physical interruptions remain pending. Producer 1/4 checks"':
+    - generic: UI / Audio
+    - generic: task-5771502c
+    - generic: "Dialogue pages and voice replay: integrated browser acceptance"
+    - generic: Authored pixel portraits and five-page dialogue are integrated. Visible packaged WebGL2 pages and Challenge action fit720x360 and normal desktop views; a fresh challenge checkpoint works. Independent voice volume is tested. Replay/listening, provider availability and physical interruptions remain pending.
+    - generic: Producer
+    - generic: 1/4 checks
+  - button "UI / Controls task-aaf77ab5 Death report, Retry/title and safe menu transitions Death report, Retry/title, immediate dock-fire entry and mobile collapsed icons are implemented. Actual champion diagnostic death and Retry returned to Haven without an upgrade popup. Async stale-modal guards pass regressions. Complete banking/Title and physical/ordinary-browser fire acceptance remain pending. Producer 1/4 checks":
+    - generic: UI / Controls
+    - generic: task-aaf77ab5
+    - generic: Death report, Retry/title and safe menu transitions
+    - generic: Death report, Retry/title, immediate dock-fire entry and mobile collapsed icons are implemented. Actual champion diagnostic death and Retry returned to Haven without an upgrade popup. Async stale-modal guards pass regressions. Complete banking/Title and physical/ordinary-browser fire acceptance remain pending.
+    - generic: Producer
+    - generic: 1/4 checks
+  - button "Gameplay / Persistence task-e2cec34f Autosave, ship XP/rank gates and bounded dock material stash Autosave, per-ship XP/rank gates, bounded16-slot carried materials and Haven stash are integrated. Native rank/cost/banking and strict schema3 migration tests pass, along with real WASM fresh checkpoint save/reload. Full browser crafting/upgrades and reward acceptance remain pending. Gameplay / Producer 3/4 checks":
+    - generic: Gameplay / Persistence
+    - generic: task-e2cec34f
+    - generic: Autosave, ship XP/rank gates and bounded dock material stash
+    - generic: Autosave, per-ship XP/rank gates, bounded16-slot carried materials and Haven stash are integrated. Native rank/cost/banking and strict schema3 migration tests pass, along with real WASM fresh checkpoint save/reload. Full browser crafting/upgrades and reward acceptance remain pending.
+    - generic: Gameplay / Producer
+    - generic: 3/4 checks
+  - button "Engine / Gameplay task-b0a59d63 Mote moving-player warning admission and encounter pacing Independent exact original moving-camera replay and8-case reversal→stop matrix are frozen. Zero60Hzshots are warning-admission interruptions; all cases resume firing after stopping. A work-only interiorcorner ring improves original34cue/0emission to128/2 while retaining all16actualcoreguardtests; narrowestview remains unchanged. The accepted private5739067 package remains frozen. Future normalbrowser/humanA/B is pending; no tuning patch is integrated. Engine specialist / Producer 1/2 checks":
+    - generic: Engine / Gameplay
+    - generic: task-b0a59d63
+    - generic: Mote moving-player warning admission and encounter pacing
+    - generic: Independent exact original moving-camera replay and8-case reversal→stop matrix are frozen. Zero60Hzshots are warning-admission interruptions; all cases resume firing after stopping. A work-only interiorcorner ring improves original34cue/0emission to128/2 while retaining all16actualcoreguardtests; narrowestview remains unchanged. The accepted private5739067 package remains frozen. Future normalbrowser/humanA/B is pending; no tuning patch is integrated.
+    - generic: Engine specialist / Producer
+    - generic: 1/2 checks
+  - button "Gameplay / Audio task-4a0debda Authored Radiation Mote charge and pulse audio Original procedural Mote charge/pulse SFX and GameEvent candidate remain frozen only in work/mote-audio-candidate. Independent QA pinned inputs and reran6nativeevent+7actualAudioEngineAPItests; author also passed16existingMote,strictnative/TS. Once-per-phase charge and actualactorBullet-producingpulse retain dispatch/timing/reservations. Accepted for bounded future integration;128eventqueue/16voice stealing and gain semantics documented. Current5739067 game/package is unchanged; rootintegration,browserDSP/listening/mute/recovery and phones pending. Gameplay specialist / Independent QA 1/2 checks":
+    - generic: Gameplay / Audio
+    - generic: task-4a0debda
+    - generic: Authored Radiation Mote charge and pulse audio
+    - generic: Original procedural Mote charge/pulse SFX and GameEvent candidate remain frozen only in work/mote-audio-candidate. Independent QA pinned inputs and reran6nativeevent+7actualAudioEngineAPItests; author also passed16existingMote,strictnative/TS. Once-per-phase charge and actualactorBullet-producingpulse retain dispatch/timing/reservations. Accepted for bounded future integration;128eventqueue/16voice stealing and gain semantics documented. Current5739067 game/package is unchanged; rootintegration,browserDSP/listening/mute/recovery and phones pending.
+    - generic: Gameplay specialist / Independent QA
+    - generic: 1/2 checks
+  - button "Art / Engine task-59dfc802 Radial Wastes distant pixel planet and gaseous layers Original Isotope Scar candidate is frozen only in work/radiation-background-art. Author reports4,854 full and1,411 reduced actual occupied quads, nested affine objects, whole-group budget preflight, deterministic drift/shimmer and Reduced Motion handling. Six native tests, strict Clippy and extracted zoom previews passed in the owned candidate. Engine and QA are independently reviewing the exact freeze now. No production integration, browser visual acceptance or radiation hazard is asserted. Gameplay / Engine / Independent QA 0/2 checks":
+    - generic: Art / Engine
+    - generic: task-59dfc802
+    - generic: Radial Wastes distant pixel planet and gaseous layers
+    - generic: Original Isotope Scar candidate is frozen only in work/radiation-background-art. Author reports4,854 full and1,411 reduced actual occupied quads, nested affine objects, whole-group budget preflight, deterministic drift/shimmer and Reduced Motion handling. Six native tests, strict Clippy and extracted zoom previews passed in the owned candidate. Engine and QA are independently reviewing the exact freeze now. No production integration, browser visual acceptance or radiation hazard is asserted.
+    - generic: Gameplay / Engine / Independent QA
+    - generic: 0/2 checks
+  - heading "Completed" [level=3]
+  - generic: "25"
+  - 'button "Production studio Mission Control: real production board Implement and validate the agreed vertical-slice behavior. Completion requires real acceptance evidence. Production specialist 3/3 checks"':
+    - generic: Production
+    - generic: studio
+    - generic: "Mission Control: real production board"
+    - generic: Implement and validate the agreed vertical-slice behavior. Completion requires real acceptance evidence.
+    - generic: Production specialist
+    - generic: 3/3 checks
+  - button "Engine engine Pixel quad engine and hierarchy Portable engine supports packed occupied cells, composed transforms, parallax/materials, pixel particles and bounded reusable batches. Thirty-seven engine checks include nested rigid boss rigs, damaged cells/holes and authored atlas proofs. Largest uncropped Coil uses 13,233 quads and 45 transforms; 2,400 packed CPU extraction frames checked up to 129,345 quads. Physical sustained GPU performance remains pending. Engine specialist 2/2 checks":
+    - generic: Engine
+    - generic: engine
+    - generic: Pixel quad engine and hierarchy
+    - generic: Portable engine supports packed occupied cells, composed transforms, parallax/materials, pixel particles and bounded reusable batches. Thirty-seven engine checks include nested rigid boss rigs, damaged cells/holes and authored atlas proofs. Largest uncropped Coil uses 13,233 quads and 45 transforms; 2,400 packed CPU extraction frames checked up to 129,345 quads. Physical sustained GPU performance remains pending.
+    - generic: Engine specialist
+    - generic: 2/2 checks
+  - button "Gameplay gameplay Combat, radial zones and progression Fixed60Hz ECS gameplay includes dock/belt/combat, three ordinary families with fifteen boss controllers, persistent queues, loot/upgrades/XP/cargo, eight champion trials and the solo league. Current106 native game-core tests include ten Iron Belt Riveter, seven weapon-cadence, eight shared death and sixteen Radiation Mote regressions;217 total integrated Rust tests pass. Interpolated presentation and authored fixed-tick rates are integrated. Dated fifteen-boss projectile sweep is separate; full natural campaign, human tuning and phones remain pending. Gameplay specialist 3/3 checks":
+    - generic: Gameplay
+    - generic: gameplay
+    - generic: Combat, radial zones and progression
+    - generic: Fixed60Hz ECS gameplay includes dock/belt/combat, three ordinary families with fifteen boss controllers, persistent queues, loot/upgrades/XP/cargo, eight champion trials and the solo league. Current106 native game-core tests include ten Iron Belt Riveter, seven weapon-cadence, eight shared death and sixteen Radiation Mote regressions;217 total integrated Rust tests pass. Interpolated presentation and authored fixed-tick rates are integrated. Dated fifteen-boss projectile sweep is separate; full natural campaign, human tuning and phones remain pending.
+    - generic: Gameplay specialist
+    - generic: 3/3 checks
+  - button "Platform web-shell WASM renderer, controls and web shell Playable WASM renderer and browser controls implemented and accepted for desktop/viewport layout and automated simultaneous pointer channels. Real WebGPU/WebGL2 startup, initializer fallback and live device-loss recovery pass. Landscape joystick, shoot button and camera follow are implemented; physical multitouch, Safari and named-phone performance remain the separate mobile/controls/performance acceptance tasks. Producer 3/3 checks":
+    - generic: Platform
+    - generic: web-shell
+    - generic: WASM renderer, controls and web shell
+    - generic: Playable WASM renderer and browser controls implemented and accepted for desktop/viewport layout and automated simultaneous pointer channels. Real WebGPU/WebGL2 startup, initializer fallback and live device-loss recovery pass. Landscape joystick, shoot button and camera follow are implemented; physical multitouch, Safari and named-phone performance remain the separate mobile/controls/performance acceptance tasks.
+    - generic: Producer
+    - generic: 3/3 checks
+  - button "Platform save Versioned local progression and settings Versioned IndexedDB current/previous snapshots preserve currency, ranks, XP, cargo, campaign, settings and canonical boss counters. Twenty-two storage tests include six adversarial generation cases. Eight real-WASM checkpoint scenarios pass explicit null fields, normalized legacy/canonical counters and SaveStore reload across both backends. Physical browser storage lifecycle remains pending. Producer / Production specialist QA 2/2 checks":
+    - generic: Platform
+    - generic: save
+    - generic: Versioned local progression and settings
+    - generic: Versioned IndexedDB current/previous snapshots preserve currency, ranks, XP, cargo, campaign, settings and canonical boss counters. Twenty-two storage tests include six adversarial generation cases. Eight real-WASM checkpoint scenarios pass explicit null fields, normalized legacy/canonical counters and SaveStore reload across both backends. Physical browser storage lifecycle remains pending.
+    - generic: Producer / Production specialist QA
+    - generic: 2/2 checks
+  - button "Platform pwa Offline PWA packaging Current game-only cache galaxy-eaac3b23e213e59b contains eighteen assets. Independent hashes, normal shipping exports and public/dist files match; source, Studio, work, QA contracts and production state are excluded. The current packaged localhost build was activated through the waiting notice and Apply update at Haven, retaining the declared ship progression. Complete current offline/GPU recovery and physical Safari/PWA lifecycle remain pending. Producer / Production specialist QA 2/2 checks":
+    - generic: Platform
+    - generic: pwa
+    - generic: Offline PWA packaging
+    - generic: Current game-only cache galaxy-eaac3b23e213e59b contains eighteen assets. Independent hashes, normal shipping exports and public/dist files match; source, Studio, work, QA contracts and production state are excluded. The current packaged localhost build was activated through the waiting notice and Apply update at Haven, retaining the declared ship progression. Complete current offline/GPU recovery and physical Safari/PWA lifecycle remain pending.
+    - generic: Producer / Production specialist QA
+    - generic: 2/2 checks
+  - button "Art / Engine task-0cdf6811 Generated pixel UI, animated title and settings Generated UI/title/settings source implementation and desktop/automated acceptance complete. Occupied palette-indexed cells and authored RoyaleMono glyph bodies render through grouped transforms; native animation/reduced-motion/UI geometry checks pass. Semantic mouse/touch/keyboard controls are implemented; settings persistence was verified in automated tests and real desktop reload. Physical device usability remains separate. Engine specialist + Producer 3/3 checks":
+    - generic: Art / Engine
+    - generic: task-0cdf6811
+    - generic: Generated pixel UI, animated title and settings
+    - generic: Generated UI/title/settings source implementation and desktop/automated acceptance complete. Occupied palette-indexed cells and authored RoyaleMono glyph bodies render through grouped transforms; native animation/reduced-motion/UI geometry checks pass. Semantic mouse/touch/keyboard controls are implemented; settings persistence was verified in automated tests and real desktop reload. Physical device usability remains separate.
+    - generic: Engine specialist + Producer
+    - generic: 3/3 checks
+  - button "Gameplay task-60e6273d Seeded biomes, protected discoveries and sidequests Seeded region/biome grid, protected site radii, courier/family bounty events, persistent discoveries/relics and bounded rich background bodies implemented. Native determinism/sanctuary and single-claim reward tests pass. Actual browser accept event and offline reload retained the quest. Additional biome enemy content/hazards and complete reward-action play review remain separate. Gameplay specialist 3/3 checks":
+    - generic: Gameplay
+    - generic: task-60e6273d
+    - generic: Seeded biomes, protected discoveries and sidequests
+    - generic: Seeded region/biome grid, protected site radii, courier/family bounty events, persistent discoveries/relics and bounded rich background bodies implemented. Native determinism/sanctuary and single-claim reward tests pass. Actual browser accept event and offline reload retained the quest. Additional biome enemy content/hazards and complete reward-action play review remain separate.
+    - generic: Gameplay specialist
+    - generic: 3/3 checks
+  - 'button "Web controls task-168fe92e Developer console: bounded semantic controls Completed assigned component scope: DebugConsole callbacks, ready-gated backtick toggle, Escape, trimmed max256 Enter, 32-entry history/draft, 80-line textContent output, serial async commands, local CLEAR, modal pointer capture, scaled safe-area styling and integration docs. Producer owns backend command whitelist, game pause and pixel UI integration; those remain separate browser acceptance. Latest steering implemented: top opaque black drawer with interior safe-area padding, thin bottom edge and180ms transform slide. Keyboard capture/pause persist through closing; reversal avoids callback churn; body/OS reduced motion closes immediately. Six deterministic fake-DOM/clock regression tests pass. Visible pixel drawer/browser acceptance remains separate. Production specialist 4/4 checks"':
+    - generic: Web controls
+    - generic: task-168fe92e
+    - generic: "Developer console: bounded semantic controls"
+    - generic: "Completed assigned component scope: DebugConsole callbacks, ready-gated backtick toggle, Escape, trimmed max256 Enter, 32-entry history/draft, 80-line textContent output, serial async commands, local CLEAR, modal pointer capture, scaled safe-area styling and integration docs. Producer owns backend command whitelist, game pause and pixel UI integration; those remain separate browser acceptance. Latest steering implemented: top opaque black drawer with interior safe-area padding, thin bottom edge and180ms transform slide. Keyboard capture/pause persist through closing; reversal avoids callback churn; body/OS reduced motion closes immediately. Six deterministic fake-DOM/clock regression tests pass. Visible pixel drawer/browser acceptance remains separate."
+    - generic: Production specialist
+    - generic: 4/4 checks
+  - 'button "QA task-00ee2401 Console and compact HUD: integrated browser acceptance Producer recorded desktop browser acceptance of the top black console, actual commands/history/draft, pause/close behavior, compact HUD and material lighting. Initializer fallback/device recovery also pass; launch/recovery/modal race guards received Gameplay specialist review. Physical devices are not included in this completion scope. Producer 3/3 checks"':
+    - generic: QA
+    - generic: task-00ee2401
+    - generic: "Console and compact HUD: integrated browser acceptance"
+    - generic: Producer recorded desktop browser acceptance of the top black console, actual commands/history/draft, pause/close behavior, compact HUD and material lighting. Initializer fallback/device recovery also pass; launch/recovery/modal race guards received Gameplay specialist review. Physical devices are not included in this completion scope.
+    - generic: Producer
+    - generic: 3/3 checks
+  - button "Interface task-35a00493 Contextual sanctuary dialogue and pixel portraits Implemented bottom contextual conversation panel with authored pixel portraits, actual sanctuary descriptions, semantic action/focus controls and pause restoration. Native portrait geometry/blink/reduced-motion checks and TypeScript pass. Actual CONTACT/E and ACCEPT EVENT mutated the Rust quest; offline reload retained canonical -1:0 bounty0/10. Complete quest/reward playthrough is a separate pending review, not claimed here. Producer / Engine specialist 3/3 checks":
+    - generic: Interface
+    - generic: task-35a00493
+    - generic: Contextual sanctuary dialogue and pixel portraits
+    - generic: Implemented bottom contextual conversation panel with authored pixel portraits, actual sanctuary descriptions, semantic action/focus controls and pause restoration. Native portrait geometry/blink/reduced-motion checks and TypeScript pass. Actual CONTACT/E and ACCEPT EVENT mutated the Rust quest; offline reload retained canonical -1:0 bounty0/10. Complete quest/reward playthrough is a separate pending review, not claimed here.
+    - generic: Producer / Engine specialist
+    - generic: 3/3 checks
+  - button "Narrative task-629ac41a Authored narrative director and optional voice boundary Implemented synchronous state-grounded pages, eight authored greeting styles, opt-in explicit replay and injected text/TTS providers. Canonical briefing/state/facts remain authored; inference has no game authority. docs/NARRATIVE.md contains exact API, local discovery and primary-source research. Integration/listening acceptance is separate. Production specialist 4/4 checks":
+    - generic: Narrative
+    - generic: task-629ac41a
+    - generic: Authored narrative director and optional voice boundary
+    - generic: Implemented synchronous state-grounded pages, eight authored greeting styles, opt-in explicit replay and injected text/TTS providers. Canonical briefing/state/facts remain authored; inference has no game authority. docs/NARRATIVE.md contains exact API, local discovery and primary-source research. Integration/listening acceptance is separate.
+    - generic: Production specialist
+    - generic: 4/4 checks
+  - button "Engine / Gameplay task-933d3130 Bounded world zoom and gradual Scout drive progression Mouse wheel and settings control 0.6–1.6 eased world zoom with fixed screen pixel UI. Scout starts100/260; selected ship XP and drive ranks improve it. /root 4/4 checks":
+    - generic: Engine / Gameplay
+    - generic: task-933d3130
+    - generic: Bounded world zoom and gradual Scout drive progression
+    - generic: Mouse wheel and settings control 0.6–1.6 eased world zoom with fixed screen pixel UI. Scout starts100/260; selected ship XP and drive ranks improve it.
+    - generic: /root
+    - generic: 4/4 checks
+  - button "Engine / QA task-607637a7 Fresh WASM checkpoint contract and explicit nullable save fields Use the same explicit-null serializer for runtime frames, HUD and profile checkpoints. Reproduce the fresh-profile challenge failure in the browser and test real Rust snapshots across both backends. /root 3/3 checks":
+    - generic: Engine / QA
+    - generic: task-607637a7
+    - generic: Fresh WASM checkpoint contract and explicit nullable save fields
+    - generic: Use the same explicit-null serializer for runtime frames, HUD and profile checkpoints. Reproduce the fresh-profile challenge failure in the browser and test real Rust snapshots across both backends.
+    - generic: /root
+    - generic: 3/3 checks
+  - button "Art / Engine task-cdf65b48 Fifteen boss pixel silhouettes and collision-aligned phase art Fifteen authored boss heads, five Coil segment templates and nested rigid role rigs are integrated. Damaged occupancy is emitted once and projectile holes persist. Uncropped Coil generation five is 13,233 quads and 45 transforms. Original authored source and actual preview/proofs are retained; boss artwork is distinct from generated UI art. Independent engine and representative browser reviews passed within their stated scope. /root/engine_research 2/2 checks":
+    - generic: Art / Engine
+    - generic: task-cdf65b48
+    - generic: Fifteen boss pixel silhouettes and collision-aligned phase art
+    - generic: Fifteen authored boss heads, five Coil segment templates and nested rigid role rigs are integrated. Damaged occupancy is emitted once and projectile holes persist. Uncropped Coil generation five is 13,233 quads and 45 transforms. Original authored source and actual preview/proofs are retained; boss artwork is distinct from generated UI art. Independent engine and representative browser reviews passed within their stated scope.
+    - generic: /root/engine_research
+    - generic: 2/2 checks
+  - button "Platform / Interface task-27850da6 Five-generation save migration and compact boss UI integration Canonical three-by-five defeats normalize legacy aggregates without lost credit and persist through strict TypeScript/IndexedDB. Eight real-WASM checkpoint scenarios pass across both backends. Compact generation/phase HUD and backed hull, XP and cargo captions render in pixel quads. Settings uses normalized slider thumbs, with all nine labels and five actions visible at 720×360. Both current backends were reviewed at maximum zoom with fixed UI projections. Completion refers to this integration scope; full human and device acceptance remains separate. /root 2/2 checks":
+    - generic: Platform / Interface
+    - generic: task-27850da6
+    - generic: Five-generation save migration and compact boss UI integration
+    - generic: Canonical three-by-five defeats normalize legacy aggregates without lost credit and persist through strict TypeScript/IndexedDB. Eight real-WASM checkpoint scenarios pass across both backends. Compact generation/phase HUD and backed hull, XP and cargo captions render in pixel quads. Settings uses normalized slider thumbs, with all nine labels and five actions visible at 720×360. Both current backends were reviewed at maximum zoom with fixed UI projections. Completion refers to this integration scope; full human and device acceptance remains separate.
+    - generic: /root
+    - generic: 2/2 checks
+  - button "QA task-3b49be6a Independent adversarial five-generation progression review Independent adversarial storage, queue/retry, source/provenance and packaging review completed with actual contributions. A durable locked CPU harness defeats all fifteen diagnostic bosses with projectiles and exercises a naturally queued generation-five loss/retry. It declares its maximum-loadout Sovereign aiming fixture and does not establish Scout balance. Current browser captures and pending physical/full-play requirements are recorded. /root/production_research 2/2 checks":
+    - generic: QA
+    - generic: task-3b49be6a
+    - generic: Independent adversarial five-generation progression review
+    - generic: Independent adversarial storage, queue/retry, source/provenance and packaging review completed with actual contributions. A durable locked CPU harness defeats all fifteen diagnostic bosses with projectiles and exercises a naturally queued generation-five loss/retry. It declares its maximum-loadout Sovereign aiming fixture and does not establish Scout balance. Current browser captures and pending physical/full-play requirements are recorded.
+    - generic: /root/production_research
+    - generic: 2/2 checks
+  - 'button "Interface task-426419e2 Adaptive boss HUD placement: prototype and integration Integrated fixed-scale Rust pixel boss health/phase placement uses actual interpolated shaken f32 projection, safe areas and real control/text reservations. Compact rows and encounter-latched minimal telemetry preserve health and touch visuals. Forty-two standalone layout tests, six actual adapter tests, independent occupied-quad projection review and representative final WebGPU/WebGL2 desktop/small-landscape captures pass. A found 200px safe-area allocation/painter mismatch is repaired and regressed. Overconstrained/far-f32, all-content human and physical-phone limits remain explicit. Producer / Engine specialist / Independent QA 3/3 checks"':
+    - generic: Interface
+    - generic: task-426419e2
+    - generic: "Adaptive boss HUD placement: prototype and integration"
+    - generic: Integrated fixed-scale Rust pixel boss health/phase placement uses actual interpolated shaken f32 projection, safe areas and real control/text reservations. Compact rows and encounter-latched minimal telemetry preserve health and touch visuals. Forty-two standalone layout tests, six actual adapter tests, independent occupied-quad projection review and representative final WebGPU/WebGL2 desktop/small-landscape captures pass. A found 200px safe-area allocation/painter mismatch is repaired and regressed. Overconstrained/far-f32, all-content human and physical-phone limits remain explicit.
+    - generic: Producer / Engine specialist / Independent QA
+    - generic: 3/3 checks
+  - 'button "Gameplay / Art task-8db643cb Iron Belt Riveter: first biome-specific pixel enemy First production biome-specific enemy integrated in the Iron Belt: original 40×40 Riveter with surviving cell muzzles, locked triple burst and destructible barrels. Birth-biome identity, shared limits/sanctuary/ordinary progression remain integrated. Ten meaningful native regressions plus the 75-test core suite and representative actual normal-package WebGPU/WebGL2 captures pass. This completion is scoped to implementation/presentation; natural distant-biome human tuning and the broader roster remain separate. /root/gameplay_design 3/3 checks"':
+    - generic: Gameplay / Art
+    - generic: task-8db643cb
+    - generic: "Iron Belt Riveter: first biome-specific pixel enemy"
+    - generic: "First production biome-specific enemy integrated in the Iron Belt: original 40×40 Riveter with surviving cell muzzles, locked triple burst and destructible barrels. Birth-biome identity, shared limits/sanctuary/ordinary progression remain integrated. Ten meaningful native regressions plus the 75-test core suite and representative actual normal-package WebGPU/WebGL2 captures pass. This completion is scoped to implementation/presentation; natural distant-biome human tuning and the broader roster remain separate."
+    - generic: /root/gameplay_design
+    - generic: 3/3 checks
+  - button:
+    - generic: Gameplay / Art
+    - generic: task-e8684a94
+    - generic: "Radiation biome enemy: deterministic controller and pixel concept"
+    - generic: Bounded Radiation Mote production integration is accepted. Original40×40/712occupied-cell art, deterministic ordinary Radial Wastes Dart variant, live destructible emitters and shared projectile/reward paths are integrated. Independent reviews found and repaired shortened pulse timing and stress eligibility before acceptance. Sixteen durable actual-core regressions plus Engine/QA probes pass;217integratedRust/70shell/strictClippy/normaldualWASMbuild pass. Root observed body/rays, real wheel bounds and fixed UI on both normal renderers, smalllandscape and strict exported save. Full moving/crowded cue readability and human tuning remain separate active follow-up; physical devices, complete natural campaign and authenticated remote execution remain pending. No radiation hazard or new Mote audio is asserted.
+    - generic: /root/gameplay_design
+    - generic: 3/3 checks
+  - 'button "Gameplay task-6c761ea8 Fixed-tick weapon cadence: make every fire-rate rank meaningful Reviewed fixed-tick residual carry is integrated and published in be3ae02. Actual Game ranks0..5 produce150/165/180/195/210/225 primary shots in30s; seven production regressions plus independent release/sanctuary/retry/crafted/Sovereign/Echo checks pass. Current normal two-backend build and exact owner-private publication pass. Human weapon feel, affordability and physical input remain separate pending acceptance. Producer / Gameplay specialist / Independent QA 3/3 checks"':
+    - generic: Gameplay
+    - generic: task-6c761ea8
+    - generic: "Fixed-tick weapon cadence: make every fire-rate rank meaningful"
+    - generic: Reviewed fixed-tick residual carry is integrated and published in be3ae02. Actual Game ranks0..5 produce150/165/180/195/210/225 primary shots in30s; seven production regressions plus independent release/sanctuary/retry/crafted/Sovereign/Echo checks pass. Current normal two-backend build and exact owner-private publication pass. Human weapon feel, affordability and physical input remain separate pending acceptance.
+    - generic: Producer / Gameplay specialist / Independent QA
+    - generic: 3/3 checks
+  - 'button "Gameplay / UI task-696d7d24 Maximum ship level: truthful XP progress caption Published presentation-only correction in be3ae02: level100 displaysMAXLEVEL and retains its numeric XP. Actual normal WebGPU/WebGL2 import/reload fixtures show100/99000/MAXLEVEL; WebGL2 level99/97020 retainsNEXTLEVEL99000. Numeric HUD/save fields, ranks and currency are unchanged; strict storage/schema and integrated shell tests pass. These are disclosed fixtures, not earned campaign play. Producer 2/2 checks"':
+    - generic: Gameplay / UI
+    - generic: task-696d7d24
+    - generic: "Maximum ship level: truthful XP progress caption"
+    - generic: "Published presentation-only correction in be3ae02: level100 displaysMAXLEVEL and retains its numeric XP. Actual normal WebGPU/WebGL2 import/reload fixtures show100/99000/MAXLEVEL; WebGL2 level99/97020 retainsNEXTLEVEL99000. Numeric HUD/save fields, ranks and currency are unchanged; strict storage/schema and integrated shell tests pass. These are disclosed fixtures, not earned campaign play."
+    - generic: Producer
+    - generic: 2/2 checks
+  - 'button "Engine / Production task-80134b58 Studio reviews: reject malformed task references atomically Close the review-reference validation hole found in review-295fae3e. Preserve append-only history and support empty design-discussion references. Engine specialist / Producer 2/2 checks"':
+    - generic: Engine / Production
+    - generic: task-80134b58
+    - generic: "Studio reviews: reject malformed task references atomically"
+    - generic: Close the review-reference validation hole found in review-295fae3e. Preserve append-only history and support empty design-discussion references.
+    - generic: Engine specialist / Producer
+    - generic: 2/2 checks
+  - 'button "Engine / UI task-b27a43c9 Centered dock prompts: retain their pressed-state hitbox Global button:active discarded the prompt centering transform. The scoped active transform now composes centering plus the small pressed offset. Actual dock clicks open services on both normal packaged renderers; physical touch and a fresh site-button replay remain outside this bounded correction. Producer / Engine review / Independent QA 2/2 checks"':
+    - generic: Engine / UI
+    - generic: task-b27a43c9
+    - generic: "Centered dock prompts: retain their pressed-state hitbox"
+    - generic: Global button:active discarded the prompt centering transform. The scoped active transform now composes centering plus the small pressed offset. Actual dock clicks open services on both normal packaged renderers; physical touch and a fresh site-button replay remain outside this bounded correction.
+    - generic: Producer / Engine review / Independent QA
+    - generic: 2/2 checks
+  - 'button "Engine / QA task-0851af86 QA forced death: prevent eligible regeneration from reviving the fixture Reviewed shared early/final death helper is integrated with eight durable actual Game tests. Forced already-zero hull cannot be revived by R5 or Sovereign healing; natural lethal ordering, banking and prior report are preserved. Actual normal WebGPU/WebGL2 forced death/report/Retry, null/history captions, WebGL2 real lethal combat and exact earned checkpoint reload pass. Small640×360 report fits. The combat setup/imported progression is declared; this is bounded regression acceptance, not a full natural campaign. The current combined package also passes217Rust/70shell/strict native and both WASM checks. Engine specialist / Independent QA / Producer 3/3 checks"':
+    - generic: Engine / QA
+    - generic: task-0851af86
+    - generic: "QA forced death: prevent eligible regeneration from reviving the fixture"
+    - generic: Reviewed shared early/final death helper is integrated with eight durable actual Game tests. Forced already-zero hull cannot be revived by R5 or Sovereign healing; natural lethal ordering, banking and prior report are preserved. Actual normal WebGPU/WebGL2 forced death/report/Retry, null/history captions, WebGL2 real lethal combat and exact earned checkpoint reload pass. Small640×360 report fits. The combat setup/imported progression is declared; this is bounded regression acceptance, not a full natural campaign. The current combined package also passes217Rust/70shell/strict native and both WASM checks.
+    - generic: Engine specialist / Independent QA / Producer
+    - generic: 3/3 checks
+  - heading "Blocked" [level=3]
+  - generic: "0"
+  - generic: No recorded tasks
+- contentinfo:
+  - generic: Snapshot r253 · last recorded 11 Oct, 06:31 am AEST
+  - generic: Recorded work · no inferred agent presence

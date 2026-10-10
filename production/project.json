@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 239,
+  "revision": 253,
   "name": "Galaxy Royale",
   "phase": "Foundation → playable vertical slice",
-  "updatedAt": "2026-10-10T20:21:46.946Z",
+  "updatedAt": "2026-10-10T20:31:46.284Z",
   "tasks": [
     {
       "id": "studio",
@@ -301,7 +301,7 @@
       "status": "complete",
       "owner": "Producer / Production specialist QA",
       "priority": "normal",
-      "description": "Current game-only cache galaxy-79774fbb09d2dfb9 contains eighteen assets; independent recomputed hashes, normal shipping exports and public/dist backend files match. Studio,work/QAcontract and production state are excluded. The prior HUD/Riveter update-at-Haven execution remains dated evidence. Current correction-build update/offline/recovery and physical Safari/PWA lifecycle were not rerun; those broader acceptance gates remain pending.",
+      "description": "Current game-only cache galaxy-eaac3b23e213e59b contains eighteen assets. Independent hashes, normal shipping exports and public/dist files match; source, Studio, work, QA contracts and production state are excluded. The current packaged localhost build was activated through the waiting notice and Apply update at Haven, retaining the declared ship progression. Complete current offline/GPU recovery and physical Safari/PWA lifecycle remain pending.",
       "dependencies": [
         "web-shell",
         "save"
@@ -331,12 +331,22 @@
           "label": "Historical desktop offline behavior",
           "kind": "note",
           "path": "artifacts/browser-validation.json"
+        },
+        {
+          "label": "Current exact game-only package review",
+          "kind": "note",
+          "path": "artifacts/mote-packaging-review.md"
+        },
+        {
+          "label": "Actual current Haven update flow and scope",
+          "kind": "note",
+          "path": "artifacts/mote-browser-validation.md"
         }
       ],
       "blocker": "",
-      "revision": 8,
+      "revision": 9,
       "createdAt": "2026-10-10T14:29:27.000Z",
-      "updatedAt": "2026-10-10T19:45:33.970Z"
+      "updatedAt": "2026-10-10T20:31:46.284Z"
     },
     {
       "id": "asteroids",
@@ -718,7 +728,7 @@
       "status": "review",
       "owner": "Producer",
       "priority": "normal",
-      "description": "Current private release be3ae02adcf514d2f3a6e9687115a3c7da344d2d / cache79774fbb09d2dfb9 includes reviewed cadence/cappedXP/dockclick corrections. Local normal bothrenderer browser and integrated193Rust/70shell tests pass; package/fixtures/privacy scope independently reviewed. Full natural campaign, human tuning, current offline/recovery, authenticated remote execution and named physical phones remain pending.",
+      "description": "Current exact-source private release573906769122140e2e54021bdaf037ad6f887673 /cacheeaac3b23e213e59b includes reviewed shared death/report fixes and original live Radiation Mote.217Rust/70shell/strictnativeandbothWASMchecks/normalbuild pass. Currentnormal bothrenderer Mote/wheel/layout/save/update plus separatelyscoped death/craft flows and independent source/package/evidence reviews pass. Natural fullcampaign,moving/crowded telegraphs,human balance,listening,completeoffline/recovery,authenticated remote execution and named physicalphones remain pending.",
       "dependencies": [
         "studio",
         "boss-qa",
@@ -781,12 +791,32 @@
           "label": "Actual WebGL2 maximum-level menu",
           "kind": "note",
           "path": "artifacts/max-level-caption-webgl2-final.jpg"
+        },
+        {
+          "label": "Exact successful private source/deployment identity and pending gates",
+          "kind": "note",
+          "path": "artifacts/private-release.json"
+        },
+        {
+          "label": "Current normal-browser bounded evidence",
+          "kind": "note",
+          "path": "artifacts/mote-browser-validation.md"
+        },
+        {
+          "label": "Independent exact package acceptance",
+          "kind": "note",
+          "path": "artifacts/mote-packaging-review.md"
+        },
+        {
+          "label": "Independent final evidence and completion-scope review",
+          "kind": "note",
+          "path": "artifacts/mote-final-evidence-review.md"
         }
       ],
       "blocker": "",
-      "revision": 6,
+      "revision": 7,
       "createdAt": "2026-10-10T14:29:27.000Z",
-      "updatedAt": "2026-10-10T19:44:11.252Z"
+      "updatedAt": "2026-10-10T20:26:44.296Z"
     },
     {
       "id": "deep-bosses",
@@ -2491,10 +2521,10 @@
     {
       "id": "task-b0a59d63",
       "title": "Mote moving-player warning admission and encounter pacing",
-      "description": "Engine specialist is investigating accepted V2 camera-aware admission without changing production. Stationary supported extents fire, but the declared8-second full-joystick reversal at maxzoom yields zero emitting ticks at60Hz. Establish whether interrupted charges are fair, then review the smallest evidence-backed tuning experiment. Actual warning/HUD/touch/crowded-impact presentation and human evasion remain pending.",
+      "description": "Independent exact original moving-camera replay and8-case reversal→stop matrix are frozen. Zero60Hzshots are warning-admission interruptions; all cases resume firing after stopping. A work-only interiorcorner ring improves original34cue/0emission to128/2 while retaining all16actualcoreguardtests; narrowestview remains unchanged. The accepted private5739067 package remains frozen. Future normalbrowser/humanA/B is pending; no tuning patch is integrated.",
       "department": "Engine / Gameplay",
-      "owner": "/root/engine_research",
-      "status": "active",
+      "owner": "Engine specialist / Producer",
+      "status": "review",
       "priority": "normal",
       "dependencies": [
         "task-e8684a94"
@@ -2502,7 +2532,7 @@
       "acceptanceCriteria": [
         {
           "text": "Independent actual-core moving-camera analysis and bounded reproducible experiment if warranted",
-          "met": false
+          "met": true
         },
         {
           "text": "Reviewed production tuning with actual normal browser warning and moving-player acceptance",
@@ -2514,17 +2544,27 @@
           "label": "Current admission limitation and honest browser scope",
           "kind": "note",
           "path": "artifacts/mote-browser-validation.md"
+        },
+        {
+          "label": "Independent actual-core admission classification and experiment",
+          "kind": "note",
+          "path": "artifacts/mote-moving-admission-review.md"
+        },
+        {
+          "label": "Exact replay and reversal-stop results",
+          "kind": "note",
+          "path": "artifacts/mote-moving-admission-results.json"
         }
       ],
       "blocker": "",
-      "revision": 1,
+      "revision": 2,
       "createdAt": "2026-10-10T20:18:30.691Z",
-      "updatedAt": "2026-10-10T20:18:30.691Z"
+      "updatedAt": "2026-10-10T20:26:44.339Z"
     },
     {
       "id": "task-4a0debda",
       "title": "Authored Radiation Mote charge and pulse audio",
-      "description": "Original procedural Mote SFX and actual GameEvent candidate are frozen only in work/mote-audio-candidate. Gameplay reports6actualevent,16existingMote,7actualAudioEngineAPI tests and strictnative/TS checks passing; independent review is next. Charge entry fires once; pulse event requires at least one actual shared Bullet creation. Current published/release candidate remains unchanged. Root integration, browser DSP/listening/mute/recovery and physical phones remain pending.",
+      "description": "Original procedural Mote charge/pulse SFX and GameEvent candidate remain frozen only in work/mote-audio-candidate. Independent QA pinned inputs and reran6nativeevent+7actualAudioEngineAPItests; author also passed16existingMote,strictnative/TS. Once-per-phase charge and actualactorBullet-producingpulse retain dispatch/timing/reservations. Accepted for bounded future integration;128eventqueue/16voice stealing and gain semantics documented. Current5739067 game/package is unchanged; rootintegration,browserDSP/listening/mute/recovery and phones pending.",
       "department": "Gameplay / Audio",
       "owner": "Gameplay specialist / Independent QA",
       "status": "review",
@@ -2536,7 +2576,7 @@
       "acceptanceCriteria": [
         {
           "text": "Concrete bounded SFX/event patch with meaningful actual event/cap tests and independent review",
-          "met": false
+          "met": true
         },
         {
           "text": "Production integration, normal package and actual listening/mute/recovery validation",
@@ -2553,20 +2593,25 @@
           "label": "Frozen actual event/SFX handoff and scope",
           "kind": "note",
           "path": "work/mote-audio-candidate/HANDOFF.md"
+        },
+        {
+          "label": "Independent frozen actualevent/AudioEngineQA",
+          "kind": "note",
+          "path": "artifacts/mote-audio-candidate-qa-review.md"
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 3,
       "createdAt": "2026-10-10T20:18:30.712Z",
-      "updatedAt": "2026-10-10T20:21:08.491Z"
+      "updatedAt": "2026-10-10T20:26:44.368Z"
     },
     {
       "id": "task-59dfc802",
       "title": "Radial Wastes distant pixel planet and gaseous layers",
-      "description": "Gameplay/art specialist is authoring original Isotope Scar far background under work/radiation-background-art only: detailed fractured crescent, purple faults/lime seams, sparse ion wisps and restrained deterministic cosmetic animation. Packed indexed occupied-cell fields and affine layer/groups must retain tiny-scale silhouette and bounded6,000/3,000 region cosmetic budgets. Current game source/package is frozen; production and human visual acceptance remain pending.",
+      "description": "Original Isotope Scar candidate is frozen only in work/radiation-background-art. Author reports4,854 full and1,411 reduced actual occupied quads, nested affine objects, whole-group budget preflight, deterministic drift/shimmer and Reduced Motion handling. Six native tests, strict Clippy and extracted zoom previews passed in the owned candidate. Engine and QA are independently reviewing the exact freeze now. No production integration, browser visual acceptance or radiation hazard is asserted.",
       "department": "Art / Engine",
-      "owner": "/root/gameplay_design",
-      "status": "active",
+      "owner": "Gameplay / Engine / Independent QA",
+      "status": "review",
       "priority": "normal",
       "dependencies": [
         "engine",
@@ -2587,12 +2632,55 @@
           "label": "Actual specialist design assignment",
           "kind": "note",
           "details": "Native Gameplay agent is running the Isotope Scar task in its owned work/radiation-background-art directory; communicated four cached PixelBodies/affine group/cosmetic animation and reduced variant plan."
+        },
+        {
+          "label": "Frozen original asset and exact engine integration contract",
+          "kind": "note",
+          "path": "work/radiation-background-art/README.md"
+        },
+        {
+          "label": "Actual extracted candidate zoom preview",
+          "kind": "note",
+          "path": "work/radiation-background-art/extracted-zoom-preview.png"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-10T20:21:08.517Z",
+      "updatedAt": "2026-10-10T20:30:46.628Z"
+    },
+    {
+      "id": "task-403cf3c4",
+      "title": "Original pixel arena patches and Royale victory emblem",
+      "description": "Gameplay/art specialist is actively authoring distinct tiny emblems for the eight actual champion themes and a Royale victory emblem, owned work/champion-patch-art only. Packed indexed occupied-cell UI objects should remain readable at small scales, use discreet earned shimmer with Reduced Motion and reuse existing pixel UI groups/font/layers. Production, saves and physics remain unchanged; independent review and actual browser integration are pending.",
+      "department": "Art / Pixel UI",
+      "owner": "/root/gameplay_design",
+      "status": "active",
+      "priority": "normal",
+      "dependencies": [
+        "engine"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Original packed emblem atlas, provenance/contact sheet and meaningful actual-engine extraction evidence",
+          "met": false
+        },
+        {
+          "text": "Independent review, production integration and responsive both-renderer UI presentation",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Observed native specialist assignment",
+          "kind": "note",
+          "details": "Native Gameplay agent is Running with the champion-patch-art task after freezing Isotope Scar; root owns production integration."
         }
       ],
       "blocker": "",
       "revision": 1,
-      "createdAt": "2026-10-10T20:21:08.517Z",
-      "updatedAt": "2026-10-10T20:21:08.517Z"
+      "createdAt": "2026-10-10T20:30:46.651Z",
+      "updatedAt": "2026-10-10T20:30:46.651Z"
     }
   ],
   "reviews": [
@@ -3063,6 +3151,21 @@
         "task-e8684a94",
         "task-0851af86",
         "task-57a3ed52"
+      ]
+    },
+    {
+      "id": "review-8eae4d52",
+      "title": "Exact private release archive, source and metadata accepted",
+      "body": "Independent QA accepted the exact20-file archive:18 cached game assets, worker and normalized hosting metadata. All68 build inputs correspond to deployed source573906769122140e2e54021bdaf037ad6f887673;61 are exact bytes and seven differ only by documented Windows CRLF/LF normalization. Raw succeeded deployment, release metadata, backend hashes/cache and revision246 build/slice agree. Actual browser login capture establishes the unauthenticated gate only. Phone, full natural campaign, moving encounter, listening, offline/recovery and authenticated remote gates remain pending. Future evidence-only Git commits are distinct from this deployed source.",
+      "author": "Producer",
+      "source": "Actual final independent deployment acceptance and observed live specialist assignment transitions",
+      "createdAt": "2026-10-10T20:30:46.569Z",
+      "participants": [
+        "Production specialist / Independent QA",
+        "Producer / Integrator"
+      ],
+      "taskIds": [
+        "slice-review"
       ]
     }
   ],
@@ -3586,6 +3689,89 @@
         }
       ],
       "knownIssues": "Physical gates and full natural playthrough remain pending. Forced diagnostic death with eligible healing is a separate unshipped candidate. Radiation integration remains work-only."
+    },
+    {
+      "id": "build-9f5ae189",
+      "title": "Radiation Mote, death and retained hangar flows /5739067",
+      "body": "217 integrated Rust tests,70shell tests,strict TypeScript/native/WebGPU/WebGL2 Clippy and normal dual-WASM/game/studio build pass. Actual normal bothrenderer Mote body/rays/wheel0.6–1.6 and fixed UI, WebGPU smalllandscape, strict exported progression and Haven update flow pass within declared fixture scope. Separately recorded normal death/report/Retry and actual retained combat rewards, dock craft/selection/exact purchase/reload pass. Independent candidate, composition, package, final ledger and game-only archive reviews pass. Full moving/crowded warning readability,human balance,listening,physical phones,complete natural campaign,current full offline/recovery and owner-authenticated remote gameplay remain pending.",
+      "author": "Producer",
+      "source": "Exact5739067 source pushed, game-only archive packaged and confirmed owner-private deployment succeeded",
+      "createdAt": "2026-10-10T20:26:44.256Z",
+      "revision": "573906769122140e2e54021bdaf037ad6f887673",
+      "evidence": [
+        {
+          "label": "Exact successful private source/deployment identity and pending gates",
+          "kind": "note",
+          "path": "artifacts/private-release.json"
+        },
+        {
+          "label": "Current normal-browser bounded evidence",
+          "kind": "note",
+          "path": "artifacts/mote-browser-validation.md"
+        },
+        {
+          "label": "Independent exact package acceptance",
+          "kind": "note",
+          "path": "artifacts/mote-packaging-review.md"
+        },
+        {
+          "label": "Independent final evidence and completion-scope review",
+          "kind": "note",
+          "path": "artifacts/mote-final-evidence-review.md"
+        }
+      ],
+      "checks": [
+        {
+          "name": "217 integrated Rust tests",
+          "result": "pass"
+        },
+        {
+          "name": "70shell tests + strict TypeScript",
+          "result": "pass"
+        },
+        {
+          "name": "Strict native and both WASM Clippy",
+          "result": "pass"
+        },
+        {
+          "name": "Normal dual-WASM/game/studio build; exact18cached assets",
+          "result": "pass"
+        },
+        {
+          "name": "Bounded actual normal bothrenderer Mote/wheel/layout and strict retained save",
+          "result": "pass"
+        },
+        {
+          "name": "Actual scoped death/report/Retry and craft/select/reload",
+          "result": "pass"
+        },
+        {
+          "name": "Exact-source owner-private publication",
+          "result": "pass"
+        },
+        {
+          "name": "Physical phones/60FPS/30-minute soak",
+          "result": "not_run"
+        },
+        {
+          "name": "Full moving/crowded warning and human tuning",
+          "result": "not_run"
+        },
+        {
+          "name": "Complete natural champion/tournament/credits campaign",
+          "result": "not_run"
+        },
+        {
+          "name": "Owner-authenticated current remote gameplay",
+          "result": "not_run"
+        },
+        {
+          "name": "Current complete offline/GPU recovery and new Mote listening",
+          "result": "not_run"
+        }
+      ],
+      "url": "https://galaxy-royale-itchson.itchson.chatgpt.site/",
+      "knownIssues": "Current package retains strict camera-aware Mote warning admission. Continuous maxzoom reversals can suppress pulses; firing recovers after stopping in native fixtures. Independent work-only tuning/audio/background candidates are separate from this release. Named phones/30-minute soak, actual full natural champion/tournament/credits play, human tuning,listening and authenticated remote execution remain Pending."
     }
   ],
   "feedback": [],
@@ -5979,6 +6165,146 @@
       "author": "Producer",
       "source": "Actual completed independent final evidence review and observed transition to frozen audio QA",
       "createdAt": "2026-10-10T20:21:46.946Z"
+    },
+    {
+      "id": "7c3a182e-2d23-46c4-9fbf-bf7ea972ce24",
+      "revision": 240,
+      "kind": "build",
+      "itemId": "build-9f5ae189",
+      "title": "Radiation Mote, death and retained hangar flows /5739067",
+      "author": "Producer",
+      "source": "Exact5739067 source pushed, game-only archive packaged and confirmed owner-private deployment succeeded",
+      "createdAt": "2026-10-10T20:26:44.256Z"
+    },
+    {
+      "id": "ee19104d-169c-4bc0-9066-4b6de86b1901",
+      "revision": 241,
+      "kind": "task.update",
+      "itemId": "slice-review",
+      "title": "Integrated slice review and release evidence",
+      "author": "Producer",
+      "source": "Exact5739067 source pushed, game-only archive packaged and confirmed owner-private deployment succeeded",
+      "createdAt": "2026-10-10T20:26:44.296Z"
+    },
+    {
+      "id": "8360e20f-5aec-4a54-9c3c-327ac5833c64",
+      "revision": 242,
+      "kind": "task.update",
+      "itemId": "task-b0a59d63",
+      "title": "Mote moving-player warning admission and encounter pacing",
+      "author": "Producer",
+      "source": "Exact5739067 source pushed, game-only archive packaged and confirmed owner-private deployment succeeded",
+      "createdAt": "2026-10-10T20:26:44.339Z"
+    },
+    {
+      "id": "cb25e5a1-9beb-4f47-a7c8-12a69bd26861",
+      "revision": 243,
+      "kind": "task.update",
+      "itemId": "task-4a0debda",
+      "title": "Authored Radiation Mote charge and pulse audio",
+      "author": "Producer",
+      "source": "Exact5739067 source pushed, game-only archive packaged and confirmed owner-private deployment succeeded",
+      "createdAt": "2026-10-10T20:26:44.368Z"
+    },
+    {
+      "id": "fbac0078-78a6-48bd-9f15-0e1f72f84f5c",
+      "revision": 244,
+      "kind": "run",
+      "itemId": "run-2ffc12e2",
+      "title": "Producer / Integrator · running",
+      "author": "Producer",
+      "source": "Exact5739067 source pushed, game-only archive packaged and confirmed owner-private deployment succeeded",
+      "createdAt": "2026-10-10T20:26:44.386Z"
+    },
+    {
+      "id": "3890a5e4-26a5-4389-a85b-9ed9d01bfc4d",
+      "revision": 245,
+      "kind": "run",
+      "itemId": "run-90cce4e3",
+      "title": "Engine specialist · running",
+      "author": "Producer",
+      "source": "Exact5739067 source pushed, game-only archive packaged and confirmed owner-private deployment succeeded",
+      "createdAt": "2026-10-10T20:26:44.406Z"
+    },
+    {
+      "id": "92ccef23-b367-408f-b3fd-2d64a8c27532",
+      "revision": 246,
+      "kind": "run",
+      "itemId": "run-907cba00",
+      "title": "Production specialist / Independent QA · running",
+      "author": "Producer",
+      "source": "Exact5739067 source pushed, game-only archive packaged and confirmed owner-private deployment succeeded",
+      "createdAt": "2026-10-10T20:26:44.427Z"
+    },
+    {
+      "id": "565d3350-71b7-4d4f-b707-302a25b8f5d4",
+      "revision": 247,
+      "kind": "review",
+      "itemId": "review-8eae4d52",
+      "title": "Exact private release archive, source and metadata accepted",
+      "author": "Producer",
+      "source": "Actual final independent deployment acceptance and observed live specialist assignment transitions",
+      "createdAt": "2026-10-10T20:30:46.569Z"
+    },
+    {
+      "id": "76729d90-e1c3-46fa-a0f0-9c8a1e8ccdb4",
+      "revision": 248,
+      "kind": "task.update",
+      "itemId": "task-59dfc802",
+      "title": "Radial Wastes distant pixel planet and gaseous layers",
+      "author": "Producer",
+      "source": "Actual final independent deployment acceptance and observed live specialist assignment transitions",
+      "createdAt": "2026-10-10T20:30:46.628Z"
+    },
+    {
+      "id": "6dac695a-a7a2-4b2f-afd2-5ed764fe4ed1",
+      "revision": 249,
+      "kind": "task.create",
+      "itemId": "task-403cf3c4",
+      "title": "Original pixel arena patches and Royale victory emblem",
+      "author": "Producer",
+      "source": "Actual final independent deployment acceptance and observed live specialist assignment transitions",
+      "createdAt": "2026-10-10T20:30:46.651Z"
+    },
+    {
+      "id": "1ec05f4a-a2de-49d7-b314-0263b0845aa2",
+      "revision": 250,
+      "kind": "run",
+      "itemId": "run-28a9fcf0",
+      "title": "Engine specialist · running",
+      "author": "Producer",
+      "source": "Actual final independent deployment acceptance and observed live specialist assignment transitions",
+      "createdAt": "2026-10-10T20:30:46.671Z"
+    },
+    {
+      "id": "d8d43d0d-4df5-4dcd-95ea-f8ee4fd5d494",
+      "revision": 251,
+      "kind": "run",
+      "itemId": "run-5c614cbf",
+      "title": "Production specialist / Independent QA · running",
+      "author": "Producer",
+      "source": "Actual final independent deployment acceptance and observed live specialist assignment transitions",
+      "createdAt": "2026-10-10T20:30:46.701Z"
+    },
+    {
+      "id": "8a0a4ced-bea5-49a2-82d1-93ecd1d5348f",
+      "revision": 252,
+      "kind": "run",
+      "itemId": "run-513a1b00",
+      "title": "Gameplay / Art specialist · running",
+      "author": "Producer",
+      "source": "Actual final independent deployment acceptance and observed live specialist assignment transitions",
+      "createdAt": "2026-10-10T20:30:46.791Z"
+    },
+    {
+      "id": "dfaee865-97fb-42c3-b1d3-43419010219d",
+      "revision": 253,
+      "kind": "task.update",
+      "itemId": "pwa",
+      "title": "Offline PWA packaging",
+      "author": "Producer",
+      "source": "Final visible board inspection corrected a stale current-cache label",
+      "createdAt": "2026-10-10T20:31:46.284Z"
     }
   ],
   "runRecords": [
@@ -8091,6 +8417,173 @@
       "author": "Producer",
       "source": "Actual completed independent final evidence review and observed transition to frozen audio QA",
       "createdAt": "2026-10-10T20:21:46.946Z"
+    },
+    {
+      "id": "run-2ffc12e2",
+      "title": "Producer / Integrator · running",
+      "agentId": "/root",
+      "agentLabel": "Producer / Integrator",
+      "state": "running",
+      "observedAt": "2026-10-10T20:26:44.376Z",
+      "taskIds": [
+        "slice-review"
+      ],
+      "summary": "Exact5739067 owner-private publication succeeded; recording metadata/build, completing release cleanup and preparing next reviewed audio/tuning integration.",
+      "evidence": [
+        {
+          "label": "Exact successful private source/deployment identity and pending gates",
+          "kind": "note",
+          "path": "artifacts/private-release.json"
+        },
+        {
+          "label": "Current normal-browser bounded evidence",
+          "kind": "note",
+          "path": "artifacts/mote-browser-validation.md"
+        },
+        {
+          "label": "Independent exact package acceptance",
+          "kind": "note",
+          "path": "artifacts/mote-packaging-review.md"
+        },
+        {
+          "label": "Independent final evidence and completion-scope review",
+          "kind": "note",
+          "path": "artifacts/mote-final-evidence-review.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Exact5739067 source pushed, game-only archive packaged and confirmed owner-private deployment succeeded",
+      "createdAt": "2026-10-10T20:26:44.386Z"
+    },
+    {
+      "id": "run-90cce4e3",
+      "title": "Engine specialist · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Engine specialist",
+      "state": "running",
+      "observedAt": "2026-10-10T20:26:44.403Z",
+      "taskIds": [
+        "task-59dfc802"
+      ],
+      "summary": "Moving-admission review completed and frozen; now actively reviewing actual-engine large-coordinate affine extraction/cosmetic budgets for Gameplay distant IsotopeScar candidate. No production edits.",
+      "evidence": [
+        {
+          "label": "Completed native moving-admission proof",
+          "kind": "note",
+          "path": "artifacts/mote-moving-admission-review.md"
+        },
+        {
+          "label": "Actual current owned assignment",
+          "kind": "note",
+          "details": "Running work/radiation-background-engine-review; communicated actual packet-cell accounting and camera-relative body constraints to Gameplay."
+        }
+      ],
+      "author": "Producer",
+      "source": "Exact5739067 source pushed, game-only archive packaged and confirmed owner-private deployment succeeded",
+      "createdAt": "2026-10-10T20:26:44.406Z"
+    },
+    {
+      "id": "run-907cba00",
+      "title": "Production specialist / Independent QA · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "Production specialist / Independent QA",
+      "state": "running",
+      "observedAt": "2026-10-10T20:26:44.422Z",
+      "taskIds": [
+        "slice-review"
+      ],
+      "summary": "Audio independent review completed; now actively checking exactcurrent private archive/source/deployment/dashboard record in work/mote-deployment-qa. No browser/auth/publish/API edits.",
+      "evidence": [
+        {
+          "label": "Completed immutable audio QA",
+          "kind": "note",
+          "path": "artifacts/mote-audio-candidate-qa-review.md"
+        },
+        {
+          "label": "Actual current archive check",
+          "kind": "note",
+          "details": "Independent reviewer reported exact20archivefiles/18cachedgameassets and68sourceinputcorrespondence to5739067; final metadata audit is active."
+        }
+      ],
+      "author": "Producer",
+      "source": "Exact5739067 source pushed, game-only archive packaged and confirmed owner-private deployment succeeded",
+      "createdAt": "2026-10-10T20:26:44.427Z"
+    },
+    {
+      "id": "run-28a9fcf0",
+      "title": "Engine specialist · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Engine specialist",
+      "state": "running",
+      "observedAt": "2026-10-10T20:30:46.661Z",
+      "taskIds": [
+        "task-59dfc802"
+      ],
+      "summary": "Running focused actual-engine large-coordinate/group/transform/budget review of frozen Isotope Scar. Original Mote moving experiment is completed and preserved, current release unchanged.",
+      "evidence": [
+        {
+          "label": "Exact candidate under review",
+          "kind": "note",
+          "path": "work/radiation-background-art/README.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual final independent deployment acceptance and observed live specialist assignment transitions",
+      "createdAt": "2026-10-10T20:30:46.671Z"
+    },
+    {
+      "id": "run-5c614cbf",
+      "title": "Production specialist / Independent QA · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "Production specialist / Independent QA",
+      "state": "running",
+      "observedAt": "2026-10-10T20:30:46.681Z",
+      "taskIds": [
+        "task-59dfc802"
+      ],
+      "summary": "Deployment QA completed and accepted. Now running independent frozen Isotope Scar atlas/budget/provenance/reduced-mode review under work/radiation-background-qa; no production edits.",
+      "evidence": [
+        {
+          "label": "Completed exact deployment review",
+          "kind": "note",
+          "path": "artifacts/mote-deployment-qa-review.md"
+        },
+        {
+          "label": "Actual current frozen candidate",
+          "kind": "note",
+          "path": "work/radiation-background-art/README.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual final independent deployment acceptance and observed live specialist assignment transitions",
+      "createdAt": "2026-10-10T20:30:46.701Z"
+    },
+    {
+      "id": "run-513a1b00",
+      "title": "Gameplay / Art specialist · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Gameplay / Art specialist",
+      "state": "running",
+      "observedAt": "2026-10-10T20:30:46.761Z",
+      "taskIds": [
+        "task-403cf3c4"
+      ],
+      "summary": "Isotope Scar frozen for independent reviews. Now running original packed pixel emblems for eight champion arena patches and Royale victory, work-only.",
+      "evidence": [
+        {
+          "label": "Completed candidate handoff",
+          "kind": "note",
+          "path": "work/radiation-background-art/README.md"
+        },
+        {
+          "label": "Observed actual current assignment",
+          "kind": "note",
+          "details": "All three native specialists observed Running through collaboration inventory after their explicit follow-up assignments."
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual final independent deployment acceptance and observed live specialist assignment transitions",
+      "createdAt": "2026-10-10T20:30:46.791Z"
     }
   ]
 }

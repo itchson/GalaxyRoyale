@@ -1,0 +1,12 @@
+- main:
+  - link "ChatGPT":
+    - /url: https://chatgpt.com/
+    - img "ChatGPT"
+  - heading "Log in to access" [level=1]
+  - link "Continue with ChatGPT":
+    - /url: https://galaxy-royale-itchson.itchson.chatgpt.site/signin-with-chatgpt?return_to=%2F
+    - text: Continue with ChatGPT
+  - text: This site uses ChatGPT to securely log you in. You can review OpenAI’s
+  - link "Privacy Policy":
+    - /url: https://openai.com/policies/privacy-policy
+  - text: .

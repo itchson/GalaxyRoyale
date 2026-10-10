@@ -1,0 +1,790 @@
+{
+  "recordedUtc": "2026-10-10T20:27:34.328649+00:00",
+  "scope": "Local archive/source/metadata/API only; no credentials/browser/auth/publish/API edits.",
+  "releaseSource": "573906769122140e2e54021bdaf037ad6f887673",
+  "observedLocalHead": "573906769122140e2e54021bdaf037ad6f887673",
+  "metadataCommitMayDiffer": true,
+  "cache": "galaxy-eaac3b23e213e59b",
+  "archive": {
+    "path": "work/galaxy-mote-release-20261011.tar.gz",
+    "sha256": "9cd2c1f4d82a4f44c9455a7cd3e21695e172ef04b47fb2f43e91accccd105a35",
+    "bytes": 2091331,
+    "files": {
+      "dist/icon-192.png": {
+        "bytes": 2619,
+        "sha256": "f26b1bd9660be38bb35d08099ea056a5a22a4645f9e2f8ee399821a54d435b43"
+      },
+      "dist/icon-512.png": {
+        "bytes": 11848,
+        "sha256": "d5eb97ed733784221989eb4ebf01fc57bab2d5d858ae8aa78bb0b028ee89e863"
+      },
+      "dist/icon.svg": {
+        "bytes": 319,
+        "sha256": "119c958934c7326508f45d53e543512008247bbf585d5d8ef7c89819194d2b0d"
+      },
+      "dist/index.html": {
+        "bytes": 8286,
+        "sha256": "5e511b3e0bfd8782b038f9d119f9be9e961f8170c2d044dbda80354407bd6231"
+      },
+      "dist/manifest.webmanifest": {
+        "bytes": 679,
+        "sha256": "2eb7555a102641e6f3040d3c79e68ddb11578c6c01327e29ed6e1fb3a688940f"
+      },
+      "dist/sw.js": {
+        "bytes": 1343,
+        "sha256": "9e26935b8d7303334a66fb082a190ed07265106fe477fef1980ecd3392125d1f"
+      },
+      "dist/wasm/webgpu/galaxy.d.ts": {
+        "bytes": 7320,
+        "sha256": "c1a6f93bb491d2b5565d37d46e80a3fd9ee74eb9785f8c0b49d13c7d49b331fb"
+      },
+      "dist/wasm/webgpu/galaxy.js": {
+        "bytes": 77645,
+        "sha256": "c1f0fe72291fc2713b9165de3dffdc470355386b6f31caa7756db14447711187"
+      },
+      "dist/wasm/webgpu/galaxy_bg.wasm": {
+        "bytes": 2118609,
+        "sha256": "f4ed153e57f5252ccb761fcb8823f218a843017dd0fb7b4f47a14bd49c4eb0b4"
+      },
+      "dist/wasm/webgpu/galaxy_bg.wasm.d.ts": {
+        "bytes": 4630,
+        "sha256": "f2b9f908eb1a4692d43f4fe9c510f24a115c8057d28e037b5898956dbe74b8b9"
+      },
+      "dist/wasm/webgl2/galaxy.d.ts": {
+        "bytes": 6054,
+        "sha256": "dcff0b67f31bf5f46ddc07ab386e5654c6654f5d14e585dcbe003680bc1db032"
+      },
+      "dist/wasm/webgl2/galaxy.js": {
+        "bytes": 80969,
+        "sha256": "327185a19e7a9a959f377c77a5d99eb159c20295a55e5ed4845df6612380d123"
+      },
+      "dist/wasm/webgl2/galaxy_bg.wasm": {
+        "bytes": 5765562,
+        "sha256": "7ccfc8f16db8e5509897ad7e9812fd63d35e6a45f9148491e8c24b35b7f4c490"
+      },
+      "dist/wasm/webgl2/galaxy_bg.wasm.d.ts": {
+        "bytes": 3364,
+        "sha256": "05ccf14d3ec3170f91aa338e7c23ba95e68d1b3f05cd79b5ee0ec1e878df0926"
+      },
+      "dist/fonts/OFL.txt": {
+        "bytes": 4389,
+        "sha256": "690fda321d0ebce403249c8d61dadddcee09dc8813424cc5a8f982efcff9a9a3"
+      },
+      "dist/fonts/RoyaleMono.ttf": {
+        "bytes": 15456,
+        "sha256": "920710a69692bddc4edee8841ce221bceed9a1860af451d7d35f7519fddc466e"
+      },
+      "dist/fonts/Tiny5.ttf": {
+        "bytes": 130784,
+        "sha256": "eb4206abc0c73e9fe4fe93c034ea270578859c40a7e740c6207322413c5c4c91"
+      },
+      "dist/assets/index-bpgry9H8.css": {
+        "bytes": 27238,
+        "sha256": "ecfa65f0d9dd9a0d0f2373699c1607e40f65199c69ba16a8e7ff2f12be80f5c7"
+      },
+      "dist/assets/index-DFoABeEK.js": {
+        "bytes": 80665,
+        "sha256": "ab8e4948a70ce951fb2dba941c2f99fece5649ca5a928e0faf0a72da455cd31b"
+      },
+      "dist/.openai/hosting.json": {
+        "bytes": 106,
+        "sha256": "2cad46d1fe08032037cdd5cfdcc4c85f2d9db109331bcfeb7c3296fd488eda6d"
+      }
+    }
+  },
+  "sourceInputCount": 68,
+  "sourceInputPaths": [
+    "Cargo.lock",
+    "Cargo.toml",
+    "apps/game/index.html",
+    "apps/game/public/fonts/OFL.txt",
+    "apps/game/public/fonts/RoyaleMono.ttf",
+    "apps/game/public/fonts/Tiny5.ttf",
+    "apps/game/public/icon-192.png",
+    "apps/game/public/icon-512.png",
+    "apps/game/public/icon.svg",
+    "apps/game/public/manifest.webmanifest",
+    "apps/game/src/audio.ts",
+    "apps/game/src/campaign.css",
+    "apps/game/src/campaign.ts",
+    "apps/game/src/debug-console.css",
+    "apps/game/src/debug-console.ts",
+    "apps/game/src/dialogue.css",
+    "apps/game/src/dialogue.ts",
+    "apps/game/src/input.ts",
+    "apps/game/src/main.ts",
+    "apps/game/src/narrative.ts",
+    "apps/game/src/pixel-ui.ts",
+    "apps/game/src/storage.ts",
+    "apps/game/src/style.css",
+    "apps/game/src/vite-env.d.ts",
+    "apps/game/vite.config.ts",
+    "assets/pixels/atlas.json",
+    "assets/pixels/boss-atlas.json",
+    "assets/pixels/mote-atlas.json",
+    "assets/pixels/riveter-atlas.json",
+    "assets/ui/atlas.json",
+    "assets/ui/campaign-atlas.json",
+    "crates/engine_core/Cargo.toml",
+    "crates/engine_core/src/camera.rs",
+    "crates/engine_core/src/frame.rs",
+    "crates/engine_core/src/lib.rs",
+    "crates/engine_core/src/pixel_rig.rs",
+    "crates/engine_core/src/pixels.rs",
+    "crates/engine_core/src/topology.rs",
+    "crates/engine_core/src/transform.rs",
+    "crates/game_core/Cargo.toml",
+    "crates/game_core/src/biome_enemies.rs",
+    "crates/game_core/src/boss_assets.rs",
+    "crates/game_core/src/bosses.rs",
+    "crates/game_core/src/campaign.rs",
+    "crates/game_core/src/campaign_runtime.rs",
+    "crates/game_core/src/lib.rs",
+    "crates/game_core/src/mote_art.rs",
+    "crates/game_core/src/mote_controller.rs",
+    "crates/game_core/src/pixel_assets.rs",
+    "crates/game_core/src/radiation_enemies.rs",
+    "crates/game_core/src/regions.rs",
+    "crates/game_web/Cargo.toml",
+    "crates/game_web/src/boss_layout.rs",
+    "crates/game_web/src/boss_overlay.rs",
+    "crates/game_web/src/browser.rs",
+    "crates/game_web/src/lib.rs",
+    "crates/game_web/src/lighting.rs",
+    "crates/game_web/src/pixel.wgsl",
+    "crates/game_web/src/pixel_ui.rs",
+    "crates/game_web/src/present.wgsl",
+    "crates/game_web/src/renderer.rs",
+    "crates/game_web/src/ui_scene.rs",
+    "package.json",
+    "pnpm-lock.yaml",
+    "scripts/build-wasm.mjs",
+    "scripts/build.mjs",
+    "scripts/pwa.mjs",
+    "tsconfig.json"
+  ],
+  "sourceRepresentations": [
+    {
+      "path": "Cargo.lock",
+      "commitBlobSha256": "df228d9f83ef57321dcb768b79d948e9aa24456c0952e971fc8d6fcd7e806bdd",
+      "acceptedLocalSha256": "df228d9f83ef57321dcb768b79d948e9aa24456c0952e971fc8d6fcd7e806bdd",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "Cargo.toml",
+      "commitBlobSha256": "50b077a3fd8e0c8a42456948d6232ae86b2a1bbaa63652ee04da7848c776a3e3",
+      "acceptedLocalSha256": "50b077a3fd8e0c8a42456948d6232ae86b2a1bbaa63652ee04da7848c776a3e3",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "apps/game/index.html",
+      "commitBlobSha256": "e5dc112541670ca98dd298d1ddd5a5804d9f620c93159703635f6db647a97f9b",
+      "acceptedLocalSha256": "e5dc112541670ca98dd298d1ddd5a5804d9f620c93159703635f6db647a97f9b",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "apps/game/public/fonts/OFL.txt",
+      "commitBlobSha256": "690fda321d0ebce403249c8d61dadddcee09dc8813424cc5a8f982efcff9a9a3",
+      "acceptedLocalSha256": "690fda321d0ebce403249c8d61dadddcee09dc8813424cc5a8f982efcff9a9a3",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "apps/game/public/fonts/RoyaleMono.ttf",
+      "commitBlobSha256": "920710a69692bddc4edee8841ce221bceed9a1860af451d7d35f7519fddc466e",
+      "acceptedLocalSha256": "920710a69692bddc4edee8841ce221bceed9a1860af451d7d35f7519fddc466e",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "apps/game/public/fonts/Tiny5.ttf",
+      "commitBlobSha256": "eb4206abc0c73e9fe4fe93c034ea270578859c40a7e740c6207322413c5c4c91",
+      "acceptedLocalSha256": "eb4206abc0c73e9fe4fe93c034ea270578859c40a7e740c6207322413c5c4c91",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "apps/game/public/icon-192.png",
+      "commitBlobSha256": "f26b1bd9660be38bb35d08099ea056a5a22a4645f9e2f8ee399821a54d435b43",
+      "acceptedLocalSha256": "f26b1bd9660be38bb35d08099ea056a5a22a4645f9e2f8ee399821a54d435b43",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "apps/game/public/icon-512.png",
+      "commitBlobSha256": "d5eb97ed733784221989eb4ebf01fc57bab2d5d858ae8aa78bb0b028ee89e863",
+      "acceptedLocalSha256": "d5eb97ed733784221989eb4ebf01fc57bab2d5d858ae8aa78bb0b028ee89e863",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "apps/game/public/icon.svg",
+      "commitBlobSha256": "119c958934c7326508f45d53e543512008247bbf585d5d8ef7c89819194d2b0d",
+      "acceptedLocalSha256": "119c958934c7326508f45d53e543512008247bbf585d5d8ef7c89819194d2b0d",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "apps/game/public/manifest.webmanifest",
+      "commitBlobSha256": "2eb7555a102641e6f3040d3c79e68ddb11578c6c01327e29ed6e1fb3a688940f",
+      "acceptedLocalSha256": "2eb7555a102641e6f3040d3c79e68ddb11578c6c01327e29ed6e1fb3a688940f",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "apps/game/src/audio.ts",
+      "commitBlobSha256": "74b5c98e957d0638f09fc06ac1b54b14b1ef637d44438b50e94ccd0f77241ddc",
+      "acceptedLocalSha256": "74b5c98e957d0638f09fc06ac1b54b14b1ef637d44438b50e94ccd0f77241ddc",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "apps/game/src/campaign.css",
+      "commitBlobSha256": "3cd7db9f11140017bf4a9482bbe86dcdfcfe21209092c9d32842efe93df9a4a7",
+      "acceptedLocalSha256": "3cd7db9f11140017bf4a9482bbe86dcdfcfe21209092c9d32842efe93df9a4a7",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "apps/game/src/campaign.ts",
+      "commitBlobSha256": "c787a4dbaa540c8c69bd9ce46b35a242d80f198030bb647370b045ee95ce5c46",
+      "acceptedLocalSha256": "c787a4dbaa540c8c69bd9ce46b35a242d80f198030bb647370b045ee95ce5c46",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "apps/game/src/debug-console.css",
+      "commitBlobSha256": "45181fad6a9ebe51d9f2ac731708d4df192ab2052e584601c14d1f63bca62ec6",
+      "acceptedLocalSha256": "45181fad6a9ebe51d9f2ac731708d4df192ab2052e584601c14d1f63bca62ec6",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "apps/game/src/debug-console.ts",
+      "commitBlobSha256": "a25fa0293e3526221315a49641df115aae74876984673a006e229120bbdf041e",
+      "acceptedLocalSha256": "a25fa0293e3526221315a49641df115aae74876984673a006e229120bbdf041e",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "apps/game/src/dialogue.css",
+      "commitBlobSha256": "fb590c04d06f85c372c6f302a1a7f6b6ab7fc92658d3c33617cf9cbfe6922f3a",
+      "acceptedLocalSha256": "fb590c04d06f85c372c6f302a1a7f6b6ab7fc92658d3c33617cf9cbfe6922f3a",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "apps/game/src/dialogue.ts",
+      "commitBlobSha256": "078560c02304863339bbb37d7f80cf8e0b8ed7a0cf53012582daf899c5aa74e1",
+      "acceptedLocalSha256": "078560c02304863339bbb37d7f80cf8e0b8ed7a0cf53012582daf899c5aa74e1",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "apps/game/src/input.ts",
+      "commitBlobSha256": "85ba91369ad506cbc60d5b314f7fb3f9370d1a15b71f7fb1e886575793011159",
+      "acceptedLocalSha256": "85ba91369ad506cbc60d5b314f7fb3f9370d1a15b71f7fb1e886575793011159",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "apps/game/src/main.ts",
+      "commitBlobSha256": "386fbd1520ab3a9d32c14703cb9aded7d7008b9451102f503ebfb21dd84169c1",
+      "acceptedLocalSha256": "386fbd1520ab3a9d32c14703cb9aded7d7008b9451102f503ebfb21dd84169c1",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "apps/game/src/narrative.ts",
+      "commitBlobSha256": "d047579bc3ff47e875794cc1214da4a352700753d51293e1337288358e75fe4d",
+      "acceptedLocalSha256": "d047579bc3ff47e875794cc1214da4a352700753d51293e1337288358e75fe4d",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "apps/game/src/pixel-ui.ts",
+      "commitBlobSha256": "b62ef0f6e0ba55be1b506cfd03dae3cc4af10be1bff5c5b43bb3583c92ded3c3",
+      "acceptedLocalSha256": "b62ef0f6e0ba55be1b506cfd03dae3cc4af10be1bff5c5b43bb3583c92ded3c3",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "apps/game/src/storage.ts",
+      "commitBlobSha256": "2340133e825315fa445469e640ab75e47c3d1bdb34fa332b1c52e68459f463b6",
+      "acceptedLocalSha256": "2340133e825315fa445469e640ab75e47c3d1bdb34fa332b1c52e68459f463b6",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "apps/game/src/style.css",
+      "commitBlobSha256": "c459520b8b65d179b193c1fe4961166a57a7083e0aff88c2df6333733bc6741c",
+      "acceptedLocalSha256": "c459520b8b65d179b193c1fe4961166a57a7083e0aff88c2df6333733bc6741c",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "apps/game/src/vite-env.d.ts",
+      "commitBlobSha256": "65996936fbb042915f7b74a200fcdde7e410f32a669b1ab9597cfaa4b0faddb5",
+      "acceptedLocalSha256": "65996936fbb042915f7b74a200fcdde7e410f32a669b1ab9597cfaa4b0faddb5",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "apps/game/vite.config.ts",
+      "commitBlobSha256": "a70ebdad007a8d8def37eb5fb83a85c2869be3edb69fcd51cbd104bc9d9bc698",
+      "acceptedLocalSha256": "a70ebdad007a8d8def37eb5fb83a85c2869be3edb69fcd51cbd104bc9d9bc698",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "assets/pixels/atlas.json",
+      "commitBlobSha256": "67635f779449feac9d1b24ce1aa264aadb10d7bf70cd54aa5542de44f855876f",
+      "acceptedLocalSha256": "1bc8a66f0e0c5d6bb5d9f6a3349032d10d854cb023cd70971e590d61c900051f",
+      "comparison": "CRLF/LF only"
+    },
+    {
+      "path": "assets/pixels/boss-atlas.json",
+      "commitBlobSha256": "68b83e1d83a94993074f06bcb3ffc23a61d9542474fcbac42a11150114e3c850",
+      "acceptedLocalSha256": "0a946b13cef528578c6863b73fae0b9c2c1fd5ecdb6232bd8b37626875b9e3a3",
+      "comparison": "CRLF/LF only"
+    },
+    {
+      "path": "assets/pixels/mote-atlas.json",
+      "commitBlobSha256": "fee68d81defca47f8bb7a4d6c177f7f70bb00d40b8df38d568e82eabf837381a",
+      "acceptedLocalSha256": "004c24eefeccbe25d836dd8ad1ff00346f86879492c2bff3fe828721dc838714",
+      "comparison": "CRLF/LF only"
+    },
+    {
+      "path": "assets/pixels/riveter-atlas.json",
+      "commitBlobSha256": "6a312b6e0d957e6bb95dfefe5d44563d9c53125a84f5b00586aedc561ee742ae",
+      "acceptedLocalSha256": "6bbf5a1333b486d54a7fb7f3600d89220dd774e1e80e9a699ad4edf75231247d",
+      "comparison": "CRLF/LF only"
+    },
+    {
+      "path": "assets/ui/atlas.json",
+      "commitBlobSha256": "e06db7d94ccd1f12a4c0928e7a7c30c7725af2a81de958c5de0c2934598e7e75",
+      "acceptedLocalSha256": "d2424ecad386331ad97b4328258b2dbd1d0251a8de28de6bba98042e2a54f088",
+      "comparison": "CRLF/LF only"
+    },
+    {
+      "path": "assets/ui/campaign-atlas.json",
+      "commitBlobSha256": "a7950c45e92c18d5305e6ecb3c1f66ee308cab9489473a73b4b4352a852c8aa0",
+      "acceptedLocalSha256": "27c99be6b55e0e17a7d5149e566aedfa269fb266234ca24b44fa34c103524738",
+      "comparison": "CRLF/LF only"
+    },
+    {
+      "path": "crates/engine_core/Cargo.toml",
+      "commitBlobSha256": "0c7948f6d4cc4f43132f9c8c7c7f5d295b8003d00b15836a295bfe07e9c892bd",
+      "acceptedLocalSha256": "0c7948f6d4cc4f43132f9c8c7c7f5d295b8003d00b15836a295bfe07e9c892bd",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/engine_core/src/camera.rs",
+      "commitBlobSha256": "b08164aa6c9a7e8364ee90e7205e70b702d2013c1861254da33610cb81fdf759",
+      "acceptedLocalSha256": "b08164aa6c9a7e8364ee90e7205e70b702d2013c1861254da33610cb81fdf759",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/engine_core/src/frame.rs",
+      "commitBlobSha256": "4d8b1a965e1e98168dc62db3bf2f3aaf707b6b7be4d9d0b56225a73d0630ebc6",
+      "acceptedLocalSha256": "4d8b1a965e1e98168dc62db3bf2f3aaf707b6b7be4d9d0b56225a73d0630ebc6",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/engine_core/src/lib.rs",
+      "commitBlobSha256": "eb84c4af2c35898ea6337503c2b169105ae5830f91c71ac7b441e7c114c6035a",
+      "acceptedLocalSha256": "eb84c4af2c35898ea6337503c2b169105ae5830f91c71ac7b441e7c114c6035a",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/engine_core/src/pixel_rig.rs",
+      "commitBlobSha256": "e18ed9ca3ac3a459c9c611a7083494d07d7aa9ed624453df623b9c64730b6582",
+      "acceptedLocalSha256": "e18ed9ca3ac3a459c9c611a7083494d07d7aa9ed624453df623b9c64730b6582",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/engine_core/src/pixels.rs",
+      "commitBlobSha256": "3e9f228b54442f66a48a26d0a932b694b6cc22386846d28b7adda0e409f95b5c",
+      "acceptedLocalSha256": "3e9f228b54442f66a48a26d0a932b694b6cc22386846d28b7adda0e409f95b5c",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/engine_core/src/topology.rs",
+      "commitBlobSha256": "72b22bedd285bf61d6e2a74a6ce5d8eddc7f593004e268949574e949fa528bbc",
+      "acceptedLocalSha256": "72b22bedd285bf61d6e2a74a6ce5d8eddc7f593004e268949574e949fa528bbc",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/engine_core/src/transform.rs",
+      "commitBlobSha256": "f511ceb89ac4445ce9749d1ed4086e672693357a1e6cf4f4f944dd8fe7220c74",
+      "acceptedLocalSha256": "f511ceb89ac4445ce9749d1ed4086e672693357a1e6cf4f4f944dd8fe7220c74",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_core/Cargo.toml",
+      "commitBlobSha256": "8997ce52e4c8a2384b2bfe5ef8d7778b6be42df8e1157b6c17300f931af16350",
+      "acceptedLocalSha256": "8997ce52e4c8a2384b2bfe5ef8d7778b6be42df8e1157b6c17300f931af16350",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_core/src/biome_enemies.rs",
+      "commitBlobSha256": "43b3736cb8da31872a62ac90f0f2b54e78f54ca7ee2f07ef622a45a7241e5cc8",
+      "acceptedLocalSha256": "43b3736cb8da31872a62ac90f0f2b54e78f54ca7ee2f07ef622a45a7241e5cc8",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_core/src/boss_assets.rs",
+      "commitBlobSha256": "6f243e4211c7a40e0feaf35140b8b0300df65d061e2657d6490b90a6ef334699",
+      "acceptedLocalSha256": "6f243e4211c7a40e0feaf35140b8b0300df65d061e2657d6490b90a6ef334699",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_core/src/bosses.rs",
+      "commitBlobSha256": "d98e4f74ff7e1a225a5ca9d6178164853ca65057fadf5d872706ab89523f2ebc",
+      "acceptedLocalSha256": "d98e4f74ff7e1a225a5ca9d6178164853ca65057fadf5d872706ab89523f2ebc",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_core/src/campaign.rs",
+      "commitBlobSha256": "ce3701246d366042841cca3a61ce1c83ea15bbfcd312a05fe5d6d7f991d0b5bc",
+      "acceptedLocalSha256": "ce3701246d366042841cca3a61ce1c83ea15bbfcd312a05fe5d6d7f991d0b5bc",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_core/src/campaign_runtime.rs",
+      "commitBlobSha256": "beaa27a19af8c62a23df0b6d6f820e924af51ed40f1d1e78a5cac25f8d7a4e58",
+      "acceptedLocalSha256": "beaa27a19af8c62a23df0b6d6f820e924af51ed40f1d1e78a5cac25f8d7a4e58",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_core/src/lib.rs",
+      "commitBlobSha256": "ec2b3c897d4b5dc1ec70891d383f19a008fc0425a5dedd691c298cb41ddd3cea",
+      "acceptedLocalSha256": "ec2b3c897d4b5dc1ec70891d383f19a008fc0425a5dedd691c298cb41ddd3cea",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_core/src/mote_art.rs",
+      "commitBlobSha256": "229916ac25331a0dc59add3a8c8a49274d2f4a3e01520ffa14a17d8b8965806f",
+      "acceptedLocalSha256": "229916ac25331a0dc59add3a8c8a49274d2f4a3e01520ffa14a17d8b8965806f",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_core/src/mote_controller.rs",
+      "commitBlobSha256": "53134b719dd2fb361cc5feb7fbbc020a3b446458605f4096b175d55e64fe8109",
+      "acceptedLocalSha256": "53134b719dd2fb361cc5feb7fbbc020a3b446458605f4096b175d55e64fe8109",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_core/src/pixel_assets.rs",
+      "commitBlobSha256": "2b3a013aedb791af8161e61e0bf85b045d2ebdad5eaaa7e2f648d9451bff00ec",
+      "acceptedLocalSha256": "2b3a013aedb791af8161e61e0bf85b045d2ebdad5eaaa7e2f648d9451bff00ec",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_core/src/radiation_enemies.rs",
+      "commitBlobSha256": "7991f3fd929230c8b6b424a746440251d18ddff589c2a3a996744ccd91168b6e",
+      "acceptedLocalSha256": "7991f3fd929230c8b6b424a746440251d18ddff589c2a3a996744ccd91168b6e",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_core/src/regions.rs",
+      "commitBlobSha256": "6d76c0f42e49c1a1adfd55d144e27536829c83e08976a80d0b0517ed8c977c1f",
+      "acceptedLocalSha256": "6d76c0f42e49c1a1adfd55d144e27536829c83e08976a80d0b0517ed8c977c1f",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_web/Cargo.toml",
+      "commitBlobSha256": "2ae9524c8e67d4d504a973cff6de954e942c524df5508eb522e2324f210f9c1a",
+      "acceptedLocalSha256": "2ae9524c8e67d4d504a973cff6de954e942c524df5508eb522e2324f210f9c1a",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_web/src/boss_layout.rs",
+      "commitBlobSha256": "97ae0496ec27b89510b46ad21785a377d2ca6ae0d88d1fe95dcbc30a1758e353",
+      "acceptedLocalSha256": "97ae0496ec27b89510b46ad21785a377d2ca6ae0d88d1fe95dcbc30a1758e353",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_web/src/boss_overlay.rs",
+      "commitBlobSha256": "fd9ff6b24cf69d3c43144571815d071c251485b002cba8bcad27bced8b02810f",
+      "acceptedLocalSha256": "fd9ff6b24cf69d3c43144571815d071c251485b002cba8bcad27bced8b02810f",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_web/src/browser.rs",
+      "commitBlobSha256": "2be9f952d91a3994688076f0c0a57fc468c254bd05073a6f14469156045143c5",
+      "acceptedLocalSha256": "2be9f952d91a3994688076f0c0a57fc468c254bd05073a6f14469156045143c5",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_web/src/lib.rs",
+      "commitBlobSha256": "4af8379d692454381cd7021fdca4624f4c6262362d828cbc0f60d091d4936327",
+      "acceptedLocalSha256": "4af8379d692454381cd7021fdca4624f4c6262362d828cbc0f60d091d4936327",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_web/src/lighting.rs",
+      "commitBlobSha256": "293adfe330f2fd58773cb47932c3dad5a3f2d31269169ca4ab4721cafc7c6888",
+      "acceptedLocalSha256": "293adfe330f2fd58773cb47932c3dad5a3f2d31269169ca4ab4721cafc7c6888",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_web/src/pixel.wgsl",
+      "commitBlobSha256": "459356f8e1934c990d53eb6f902a6d119661cd4546b891c59ffbf6705678227a",
+      "acceptedLocalSha256": "459356f8e1934c990d53eb6f902a6d119661cd4546b891c59ffbf6705678227a",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_web/src/pixel_ui.rs",
+      "commitBlobSha256": "c66a24bf4c105df8fc5121c8c4ab8a797a19bd3eb51d5dfc067f2df68a7dd94a",
+      "acceptedLocalSha256": "c66a24bf4c105df8fc5121c8c4ab8a797a19bd3eb51d5dfc067f2df68a7dd94a",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_web/src/present.wgsl",
+      "commitBlobSha256": "c5f2b55c1b5d76159f4473ed6f8e7e656166bd7f471fb949661fdc1650757507",
+      "acceptedLocalSha256": "c5f2b55c1b5d76159f4473ed6f8e7e656166bd7f471fb949661fdc1650757507",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_web/src/renderer.rs",
+      "commitBlobSha256": "fc65e332b215945a48b4bf510ac0f3449606629e79adc2044593072b4e49eaaa",
+      "acceptedLocalSha256": "fc65e332b215945a48b4bf510ac0f3449606629e79adc2044593072b4e49eaaa",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "crates/game_web/src/ui_scene.rs",
+      "commitBlobSha256": "a047f812093bcaa4106d3bd09d145882e4c527153a3be268ae4e4d277d3f41d0",
+      "acceptedLocalSha256": "a047f812093bcaa4106d3bd09d145882e4c527153a3be268ae4e4d277d3f41d0",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "package.json",
+      "commitBlobSha256": "e173b23577801ecbaada590a6acaa0b53a672ef049951f75bdafdc830da0eb6e",
+      "acceptedLocalSha256": "048d1c56e2cc6ce5beb44975893b87d38376892778dde34be7aea83710301b1b",
+      "comparison": "CRLF/LF only"
+    },
+    {
+      "path": "pnpm-lock.yaml",
+      "commitBlobSha256": "6383d7a7deaf07367d08c79447c4faab012da63436cf23df3a1cbb82b4f183d1",
+      "acceptedLocalSha256": "6383d7a7deaf07367d08c79447c4faab012da63436cf23df3a1cbb82b4f183d1",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "scripts/build-wasm.mjs",
+      "commitBlobSha256": "decc2c498fafdc38167b9e5a106a1b9c51de9392cf4d76394a5a24a7cb14959b",
+      "acceptedLocalSha256": "decc2c498fafdc38167b9e5a106a1b9c51de9392cf4d76394a5a24a7cb14959b",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "scripts/build.mjs",
+      "commitBlobSha256": "893eefb7bb9b7034c29817d30d82ffcd28352cd16ec16829c2d7700498066ff4",
+      "acceptedLocalSha256": "893eefb7bb9b7034c29817d30d82ffcd28352cd16ec16829c2d7700498066ff4",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "scripts/pwa.mjs",
+      "commitBlobSha256": "dfab5c87696dfb7bb8b5badc376af3d868f6cb7357c2fda0eba5d7e93d6a28b9",
+      "acceptedLocalSha256": "dfab5c87696dfb7bb8b5badc376af3d868f6cb7357c2fda0eba5d7e93d6a28b9",
+      "comparison": "exact bytes"
+    },
+    {
+      "path": "tsconfig.json",
+      "commitBlobSha256": "c0de18e3ddab8718ca79686d1d204a4b6e0daecb3e28cadab874abc678f768db",
+      "acceptedLocalSha256": "c0de18e3ddab8718ca79686d1d204a4b6e0daecb3e28cadab874abc678f768db",
+      "comparison": "exact bytes"
+    }
+  ],
+  "hosting": {
+    "staticDirectory": "dist",
+    "keys": [
+      "project_id",
+      "static"
+    ]
+  },
+  "releaseMetadataSha256": "81c2bc00985b33d82eb48e3fbfba24f475a86f9d89b2b7f6fba4d244d0e439a5",
+  "rawDeploymentResultSha256": "57aa993f8c5b42281c912e05c528641304f6b64a50d221de4decbc0438d76500",
+  "rawDeploymentResultMatches": true,
+  "privateAccessGateTextSha256": "9699de7ab3754c4c3325d0a1126d7dba0ddede85718a639d3467b44cdc5511d4",
+  "releaseStatus": "succeeded",
+  "releaseUpdatedAt": "2026-10-10T20:24:28.432211+00:00",
+  "backendHashes": {
+    "webgpu": "f4ed153e57f5252ccb761fcb8823f218a843017dd0fb7b4f47a14bd49c4eb0b4",
+    "webgl2": "7ccfc8f16db8e5509897ad7e9812fd63d35e6a45f9148491e8c24b35b7f4c490"
+  },
+  "browserAccess": "Exact owner-private publication succeeded. Actual unauthenticated browser reload shows Log in to access; owner-authenticated remote gameplay remains unmeasured. Current normal packaged localhost game observed on both renderers.",
+  "knownFollowups": [
+    {
+      "taskId": "task-b0a59d63",
+      "description": "Work-only moving-camera admission experiment, next browser/human A/B remains pending."
+    },
+    {
+      "taskId": "task-4a0debda",
+      "description": "Independently reviewed work-only charge/pulse SFX/event candidate; production/listening/mobile acceptance pending."
+    },
+    {
+      "taskId": "task-59dfc802",
+      "description": "Active original detailed Isotope Scar distant planet/wisp asset and actual-engine budget review, work-only."
+    }
+  ],
+  "projectRevision": 246,
+  "recordedBuild": {
+    "id": "build-9f5ae189",
+    "title": "Radiation Mote, death and retained hangar flows /5739067",
+    "body": "217 integrated Rust tests,70shell tests,strict TypeScript/native/WebGPU/WebGL2 Clippy and normal dual-WASM/game/studio build pass. Actual normal bothrenderer Mote body/rays/wheel0.6\u20131.6 and fixed UI, WebGPU smalllandscape, strict exported progression and Haven update flow pass within declared fixture scope. Separately recorded normal death/report/Retry and actual retained combat rewards, dock craft/selection/exact purchase/reload pass. Independent candidate, composition, package, final ledger and game-only archive reviews pass. Full moving/crowded warning readability,human balance,listening,physical phones,complete natural campaign,current full offline/recovery and owner-authenticated remote gameplay remain pending.",
+    "author": "Producer",
+    "source": "Exact5739067 source pushed, game-only archive packaged and confirmed owner-private deployment succeeded",
+    "createdAt": "2026-10-10T20:26:44.256Z",
+    "revision": "573906769122140e2e54021bdaf037ad6f887673",
+    "evidence": [
+      {
+        "label": "Exact successful private source/deployment identity and pending gates",
+        "kind": "note",
+        "path": "artifacts/private-release.json"
+      },
+      {
+        "label": "Current normal-browser bounded evidence",
+        "kind": "note",
+        "path": "artifacts/mote-browser-validation.md"
+      },
+      {
+        "label": "Independent exact package acceptance",
+        "kind": "note",
+        "path": "artifacts/mote-packaging-review.md"
+      },
+      {
+        "label": "Independent final evidence and completion-scope review",
+        "kind": "note",
+        "path": "artifacts/mote-final-evidence-review.md"
+      }
+    ],
+    "checks": [
+      {
+        "name": "217 integrated Rust tests",
+        "result": "pass"
+      },
+      {
+        "name": "70shell tests + strict TypeScript",
+        "result": "pass"
+      },
+      {
+        "name": "Strict native and both WASM Clippy",
+        "result": "pass"
+      },
+      {
+        "name": "Normal dual-WASM/game/studio build; exact18cached assets",
+        "result": "pass"
+      },
+      {
+        "name": "Bounded actual normal bothrenderer Mote/wheel/layout and strict retained save",
+        "result": "pass"
+      },
+      {
+        "name": "Actual scoped death/report/Retry and craft/select/reload",
+        "result": "pass"
+      },
+      {
+        "name": "Exact-source owner-private publication",
+        "result": "pass"
+      },
+      {
+        "name": "Physical phones/60FPS/30-minute soak",
+        "result": "not_run"
+      },
+      {
+        "name": "Full moving/crowded warning and human tuning",
+        "result": "not_run"
+      },
+      {
+        "name": "Complete natural champion/tournament/credits campaign",
+        "result": "not_run"
+      },
+      {
+        "name": "Owner-authenticated current remote gameplay",
+        "result": "not_run"
+      },
+      {
+        "name": "Current complete offline/GPU recovery and new Mote listening",
+        "result": "not_run"
+      }
+    ],
+    "url": "https://galaxy-royale-itchson.itchson.chatgpt.site/",
+    "knownIssues": "Current package retains strict camera-aware Mote warning admission. Continuous maxzoom reversals can suppress pulses; firing recovers after stopping in native fixtures. Independent work-only tuning/audio/background candidates are separate from this release. Named phones/30-minute soak, actual full natural champion/tournament/credits play, human tuning,listening and authenticated remote execution remain Pending."
+  },
+  "sliceTask": {
+    "id": "slice-review",
+    "title": "Integrated slice review and release evidence",
+    "department": "Production",
+    "status": "review",
+    "owner": "Producer",
+    "priority": "normal",
+    "description": "Current exact-source private release573906769122140e2e54021bdaf037ad6f887673 /cacheeaac3b23e213e59b includes reviewed shared death/report fixes and original live Radiation Mote.217Rust/70shell/strictnativeandbothWASMchecks/normalbuild pass. Currentnormal bothrenderer Mote/wheel/layout/save/update plus separatelyscoped death/craft flows and independent source/package/evidence reviews pass. Natural fullcampaign,moving/crowded telegraphs,human balance,listening,completeoffline/recovery,authenticated remote execution and named physicalphones remain pending.",
+    "dependencies": [
+      "studio",
+      "boss-qa",
+      "balance",
+      "pwa",
+      "audio"
+    ],
+    "acceptanceCriteria": [
+      {
+        "text": "Playable build and recorded known issues",
+        "met": true
+      },
+      {
+        "text": "Real specialist review with linked validation evidence",
+        "met": true
+      }
+    ],
+    "evidence": [
+      {
+        "label": "Exact successful private deployment",
+        "kind": "note",
+        "path": "artifacts/private-release.json"
+      },
+      {
+        "label": "Current packaged-game browser evidence and limits",
+        "kind": "note",
+        "path": "artifacts/hud-riveter-browser-validation.json"
+      },
+      {
+        "label": "Independent final acceptance scope review",
+        "kind": "note",
+        "path": "artifacts/hud-riveter-evidence-review.md"
+      },
+      {
+        "label": "Confirmed owner-private release identity and limits",
+        "kind": "note",
+        "path": "artifacts/private-release.json"
+      },
+      {
+        "label": "Actual193Rust/70shell and normal browser corrections",
+        "kind": "note",
+        "path": "artifacts/progression-integration-validation.md"
+      },
+      {
+        "label": "Independent exact18asset package/export/source review",
+        "kind": "note",
+        "path": "artifacts/progression-packaging-review.md"
+      },
+      {
+        "label": "Actual native cadence and signature boundaries",
+        "kind": "note",
+        "path": "artifacts/weapon-cadence-qa-results.json"
+      },
+      {
+        "label": "Actual WebGPU maximum-level menu",
+        "kind": "note",
+        "path": "artifacts/max-level-caption-webgpu-final.jpg"
+      },
+      {
+        "label": "Actual WebGL2 maximum-level menu",
+        "kind": "note",
+        "path": "artifacts/max-level-caption-webgl2-final.jpg"
+      },
+      {
+        "label": "Exact successful private source/deployment identity and pending gates",
+        "kind": "note",
+        "path": "artifacts/private-release.json"
+      },
+      {
+        "label": "Current normal-browser bounded evidence",
+        "kind": "note",
+        "path": "artifacts/mote-browser-validation.md"
+      },
+      {
+        "label": "Independent exact package acceptance",
+        "kind": "note",
+        "path": "artifacts/mote-packaging-review.md"
+      },
+      {
+        "label": "Independent final evidence and completion-scope review",
+        "kind": "note",
+        "path": "artifacts/mote-final-evidence-review.md"
+      }
+    ],
+    "blocker": "",
+    "revision": 7,
+    "createdAt": "2026-10-10T14:29:27.000Z",
+    "updatedAt": "2026-10-10T20:26:44.296Z"
+  },
+  "remoteExecution": "not independently measured"
+}

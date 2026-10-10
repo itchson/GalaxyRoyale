@@ -1,8 +1,8 @@
 {
-  "id": "appgdep_6aca953d4ce481919f5815053e6d7685",
+  "id": "appgdep_6aca9ee9cf70819193ea3635d83f048c",
   "project_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93",
   "title": "Galaxy Royale",
-  "version_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93~appgver_e5cc1f8ba5f48191a11ebc66462a72d1",
+  "version_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93~appgver_389e0f18dba08191ab2301dc2263fb9e",
   "type": "publish",
   "status": "succeeded",
   "url": "https://galaxy-royale-itchson.itchson.chatgpt.site",
@@ -11,15 +11,15 @@
   "provider_deployment_id": "site---6aca50f5b1bc81918526a6ee969aac93",
   "failure_message": null,
   "env_set_revision": 0,
-  "updated_at": "2026-10-10T19:43:11.245673+00:00",
-  "commit_sha": "be3ae02adcf514d2f3a6e9687115a3c7da344d2d",
-  "cacheVersion": "galaxy-79774fbb09d2dfb9",
-  "browserAccess": "Normal packaged localhost game observed on both renderers. Existing owner-private deployment succeeded; actual unauthenticated browser reaches Sign in required. Owner-authenticated remote execution remains unmeasured.",
-  "archiveContent": "Game-only dist plus normalized hosting metadata. Eighteen cached game assets; studio, production data, work candidates and QA checkpoint export excluded.",
-  "validation": "193 integrated Rust tests,70shell tests,strict native/WebGPU/WebGL2 Clippy,normal dual-WASM/TS/game/studio build and final frontend/PWA rebuild pass. Independent actual core cadence/release/Echo and final cache/export/source correspondence reviews pass. Actual normal browser dock clicks and maxlevel caption pass on both renderers; belowcap99 threshold passes on WebGL2. Physical devices,human balance,natural full campaign,current offline/recovery and authenticated remote execution pending.",
+  "updated_at": "2026-10-10T20:24:28.432211+00:00",
+  "commit_sha": "573906769122140e2e54021bdaf037ad6f887673",
+  "cacheVersion": "galaxy-eaac3b23e213e59b",
+  "browserAccess": "Exact owner-private publication succeeded. Actual unauthenticated browser reload shows Log in to access; owner-authenticated remote gameplay remains unmeasured. Current normal packaged localhost game observed on both renderers.",
+  "archiveContent": "Exactly20 files:18accepted cached game assets,sw.js and normalized dist/.openai/hosting.json. Source/studio/work/project/QA-contract/credentials excluded.",
+  "validation": "217 integrated Rust tests,70shell tests,strict TypeScript/native/WebGPU/WebGL2 Clippy and normal dual-WASM/game/studio build pass. Actual normal bothrenderer Mote body/rays/wheel0.6–1.6 and fixed UI, WebGPU smalllandscape, strict exported progression and Haven update flow pass within declared fixture scope. Separately recorded normal death/report/Retry and actual retained combat rewards, dock craft/selection/exact purchase/reload pass. Independent candidate, composition, package, final ledger and game-only archive reviews pass. Full moving/crowded warning readability,human balance,listening,physical phones,complete natural campaign,current full offline/recovery and owner-authenticated remote gameplay remain pending.",
   "backendHashes": {
-    "webgpu": "a9305ad24848e7bc0aea9fcdbd18a4eddc07e338e5830b4ad72917fba175a291",
-    "webgl2": "430e9b9ae5c7d50e27d88892bb6d147ec8f75424bcb09ec05c98852b5630bbc2"
+    "webgpu": "f4ed153e57f5252ccb761fcb8823f218a843017dd0fb7b4f47a14bd49c4eb0b4",
+    "webgl2": "7ccfc8f16db8e5509897ad7e9812fd63d35e6a45f9148491e8c24b35b7f4c490"
   },
   "previousDeployments": [
     {
@@ -51,13 +51,24 @@
       "status": "succeeded",
       "updated_at": "2026-10-10T19:16:34.309748+00:00",
       "cacheVersion": "galaxy-f37b303ee2258928"
+    },
+    {
+      "id": "appgdep_6aca953d4ce481919f5815053e6d7685",
+      "version_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93~appgver_e5cc1f8ba5f48191a11ebc66462a72d1",
+      "commit_sha": "be3ae02adcf514d2f3a6e9687115a3c7da344d2d",
+      "status": "succeeded",
+      "updated_at": "2026-10-10T19:43:11.245673+00:00",
+      "cacheVersion": "galaxy-79774fbb09d2dfb9"
     }
   ],
   "evidence": [
-    "artifacts/progression-integration-validation.md",
-    "artifacts/progression-packaging-review.md",
-    "artifacts/weapon-cadence-qa-review.md",
-    "artifacts/review-reference-validation.md"
+    "artifacts/mote-browser-validation.md",
+    "artifacts/mote-packaging-review.md",
+    "artifacts/mote-final-evidence-review.md",
+    "artifacts/death-integration-validation.md",
+    "artifacts/hangar-browser-validation.md",
+    "artifacts/mote-deployment-qa-review.md",
+    "artifacts/mote-deployment-qa-evidence.json"
   ],
   "resolvedProgressionIssues": {
     "observedAt": "2026-10-10T19:22:26.667Z",
@@ -73,12 +84,31 @@
   },
   "knownFollowups": [
     {
-      "taskId": "task-0851af86",
-      "description": "Forced QA die with already eligible regen/Sovereign healing is a separate work-only candidate; natural lethal semantics require independent review."
+      "taskId": "task-b0a59d63",
+      "description": "Work-only moving-camera admission experiment, next browser/human A/B remains pending."
     },
     {
-      "taskId": "task-e8684a94",
-      "description": "Radiation Mote actual production candidate remains in work-only development; strict camera-aware admission is required at high zoom."
+      "taskId": "task-4a0debda",
+      "description": "Independently reviewed work-only charge/pulse SFX/event candidate; production/listening/mobile acceptance pending."
+    },
+    {
+      "taskId": "task-59dfc802",
+      "description": "Active original detailed Isotope Scar distant planet/wisp asset and actual-engine budget review, work-only."
     }
-  ]
+  ],
+  "resolvedDeathIssue": {
+    "taskId": "task-0851af86",
+    "resolvedInSource": "573906769122140e2e54021bdaf037ad6f887673",
+    "description": "Shared early/final death helper prevents already-zero hull revival while preserving natural lethal ordering, earned checkpoint and truthful prior-run history."
+  },
+  "radiationMote": {
+    "taskId": "task-e8684a94",
+    "integratedInSource": "573906769122140e2e54021bdaf037ad6f887673",
+    "description": "Original live712cell ordinary Radial Wastes variant with destructible emitters, staged attacks and normal reward/cap/sanctuary paths. Actual bounded bothrenderer presentation is recorded separately."
+  },
+  "archive": {
+    "path": "work/galaxy-mote-release-20261011.tar.gz",
+    "bytes": 2091331,
+    "sha256": "9cd2c1f4d82a4f44c9455a7cd3e21695e172ef04b47fb2f43e91accccd105a35"
+  }
 }
