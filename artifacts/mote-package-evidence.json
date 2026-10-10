@@ -1,0 +1,928 @@
+{
+  "recorded_utc": "2026-10-10T20:16:34.058Z",
+  "status": "local normal package accepted",
+  "cache": "galaxy-eaac3b23e213e59b",
+  "computed_cache": "galaxy-eaac3b23e213e59b",
+  "asset_count": 18,
+  "packaged_files": [
+    {
+      "path": "/assets/index-DFoABeEK.js",
+      "bytes": 80665,
+      "sha256": "ab8e4948a70ce951fb2dba941c2f99fece5649ca5a928e0faf0a72da455cd31b",
+      "modified_utc": "2026-10-10T20:09:22.919Z"
+    },
+    {
+      "path": "/assets/index-bpgry9H8.css",
+      "bytes": 27238,
+      "sha256": "ecfa65f0d9dd9a0d0f2373699c1607e40f65199c69ba16a8e7ff2f12be80f5c7",
+      "modified_utc": "2026-10-10T20:09:22.919Z"
+    },
+    {
+      "path": "/fonts/OFL.txt",
+      "bytes": 4389,
+      "sha256": "690fda321d0ebce403249c8d61dadddcee09dc8813424cc5a8f982efcff9a9a3",
+      "modified_utc": "2026-10-10T15:08:08.199Z"
+    },
+    {
+      "path": "/fonts/RoyaleMono.ttf",
+      "bytes": 15456,
+      "sha256": "920710a69692bddc4edee8841ce221bceed9a1860af451d7d35f7519fddc466e",
+      "modified_utc": "2026-10-10T16:45:03.879Z"
+    },
+    {
+      "path": "/fonts/Tiny5.ttf",
+      "bytes": 130784,
+      "sha256": "eb4206abc0c73e9fe4fe93c034ea270578859c40a7e740c6207322413c5c4c91",
+      "modified_utc": "2026-10-10T15:08:07.969Z"
+    },
+    {
+      "path": "/icon-192.png",
+      "bytes": 2619,
+      "sha256": "f26b1bd9660be38bb35d08099ea056a5a22a4645f9e2f8ee399821a54d435b43",
+      "modified_utc": "2026-10-10T14:52:16.736Z"
+    },
+    {
+      "path": "/icon-512.png",
+      "bytes": 11848,
+      "sha256": "d5eb97ed733784221989eb4ebf01fc57bab2d5d858ae8aa78bb0b028ee89e863",
+      "modified_utc": "2026-10-10T14:52:16.739Z"
+    },
+    {
+      "path": "/icon.svg",
+      "bytes": 319,
+      "sha256": "119c958934c7326508f45d53e543512008247bbf585d5d8ef7c89819194d2b0d",
+      "modified_utc": "2026-10-10T14:34:21.170Z"
+    },
+    {
+      "path": "/index.html",
+      "bytes": 8286,
+      "sha256": "5e511b3e0bfd8782b038f9d119f9be9e961f8170c2d044dbda80354407bd6231",
+      "modified_utc": "2026-10-10T20:09:22.919Z"
+    },
+    {
+      "path": "/manifest.webmanifest",
+      "bytes": 679,
+      "sha256": "2eb7555a102641e6f3040d3c79e68ddb11578c6c01327e29ed6e1fb3a688940f",
+      "modified_utc": "2026-10-10T14:54:38.618Z"
+    },
+    {
+      "path": "/wasm/webgl2/galaxy.d.ts",
+      "bytes": 6054,
+      "sha256": "dcff0b67f31bf5f46ddc07ab386e5654c6654f5d14e585dcbe003680bc1db032",
+      "modified_utc": "2026-10-10T20:09:21.470Z"
+    },
+    {
+      "path": "/wasm/webgl2/galaxy.js",
+      "bytes": 80969,
+      "sha256": "327185a19e7a9a959f377c77a5d99eb159c20295a55e5ed4845df6612380d123",
+      "modified_utc": "2026-10-10T20:09:21.470Z"
+    },
+    {
+      "path": "/wasm/webgl2/galaxy_bg.wasm",
+      "bytes": 5765562,
+      "sha256": "7ccfc8f16db8e5509897ad7e9812fd63d35e6a45f9148491e8c24b35b7f4c490",
+      "modified_utc": "2026-10-10T20:09:21.470Z"
+    },
+    {
+      "path": "/wasm/webgl2/galaxy_bg.wasm.d.ts",
+      "bytes": 3364,
+      "sha256": "05ccf14d3ec3170f91aa338e7c23ba95e68d1b3f05cd79b5ee0ec1e878df0926",
+      "modified_utc": "2026-10-10T20:09:21.471Z"
+    },
+    {
+      "path": "/wasm/webgpu/galaxy.d.ts",
+      "bytes": 7320,
+      "sha256": "c1a6f93bb491d2b5565d37d46e80a3fd9ee74eb9785f8c0b49d13c7d49b331fb",
+      "modified_utc": "2026-10-10T20:09:19.086Z"
+    },
+    {
+      "path": "/wasm/webgpu/galaxy.js",
+      "bytes": 77645,
+      "sha256": "c1f0fe72291fc2713b9165de3dffdc470355386b6f31caa7756db14447711187",
+      "modified_utc": "2026-10-10T20:09:19.086Z"
+    },
+    {
+      "path": "/wasm/webgpu/galaxy_bg.wasm",
+      "bytes": 2118609,
+      "sha256": "f4ed153e57f5252ccb761fcb8823f218a843017dd0fb7b4f47a14bd49c4eb0b4",
+      "modified_utc": "2026-10-10T20:09:19.086Z"
+    },
+    {
+      "path": "/wasm/webgpu/galaxy_bg.wasm.d.ts",
+      "bytes": 4630,
+      "sha256": "f2b9f908eb1a4692d43f4fe9c510f24a115c8057d28e037b5898956dbe74b8b9",
+      "modified_utc": "2026-10-10T20:09:19.086Z"
+    }
+  ],
+  "backend_files": [
+    {
+      "backend": "webgpu",
+      "name": "galaxy.js",
+      "bytes": 77645,
+      "sha256": "c1f0fe72291fc2713b9165de3dffdc470355386b6f31caa7756db14447711187",
+      "public_modified_utc": "2026-10-10T20:09:19.086Z"
+    },
+    {
+      "backend": "webgpu",
+      "name": "galaxy.d.ts",
+      "bytes": 7320,
+      "sha256": "c1a6f93bb491d2b5565d37d46e80a3fd9ee74eb9785f8c0b49d13c7d49b331fb",
+      "public_modified_utc": "2026-10-10T20:09:19.086Z"
+    },
+    {
+      "backend": "webgpu",
+      "name": "galaxy_bg.wasm",
+      "bytes": 2118609,
+      "sha256": "f4ed153e57f5252ccb761fcb8823f218a843017dd0fb7b4f47a14bd49c4eb0b4",
+      "public_modified_utc": "2026-10-10T20:09:19.086Z"
+    },
+    {
+      "backend": "webgpu",
+      "name": "galaxy_bg.wasm.d.ts",
+      "bytes": 4630,
+      "sha256": "f2b9f908eb1a4692d43f4fe9c510f24a115c8057d28e037b5898956dbe74b8b9",
+      "public_modified_utc": "2026-10-10T20:09:19.086Z"
+    },
+    {
+      "backend": "webgl2",
+      "name": "galaxy.js",
+      "bytes": 80969,
+      "sha256": "327185a19e7a9a959f377c77a5d99eb159c20295a55e5ed4845df6612380d123",
+      "public_modified_utc": "2026-10-10T20:09:21.470Z"
+    },
+    {
+      "backend": "webgl2",
+      "name": "galaxy.d.ts",
+      "bytes": 6054,
+      "sha256": "dcff0b67f31bf5f46ddc07ab386e5654c6654f5d14e585dcbe003680bc1db032",
+      "public_modified_utc": "2026-10-10T20:09:21.470Z"
+    },
+    {
+      "backend": "webgl2",
+      "name": "galaxy_bg.wasm",
+      "bytes": 5765562,
+      "sha256": "7ccfc8f16db8e5509897ad7e9812fd63d35e6a45f9148491e8c24b35b7f4c490",
+      "public_modified_utc": "2026-10-10T20:09:21.470Z"
+    },
+    {
+      "backend": "webgl2",
+      "name": "galaxy_bg.wasm.d.ts",
+      "bytes": 3364,
+      "sha256": "05ccf14d3ec3170f91aa338e7c23ba95e68d1b3f05cd79b5ee0ec1e878df0926",
+      "public_modified_utc": "2026-10-10T20:09:21.471Z"
+    }
+  ],
+  "modules": [
+    {
+      "backend": "webgpu",
+      "parsed": true,
+      "export_count": 48,
+      "exports": [
+        {
+          "name": "memory",
+          "kind": "memory"
+        },
+        {
+          "name": "__wbg_galaxy_free",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_acknowledge_credits",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_boss_ui_bounds",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_craft_ship",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_create",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_diagnostic",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_hud",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_interact_site",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_lose_device",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_profile",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_purchase",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_recover",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_resize",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_return_to_home",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_set_cosmetic_density",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_set_paused",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_set_reduced_motion",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_set_shake",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_set_touch_ui",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_set_ui_insets",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_set_ui_mode",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_set_ui_scene",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_set_zoom",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_start_champion",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_start_tournament",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_step",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_switch_ship",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_viewport",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_world_viewport",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_zoom",
+          "kind": "function"
+        },
+        {
+          "name": "__abort_handler",
+          "kind": "global"
+        },
+        {
+          "name": "__instance_terminated",
+          "kind": "global"
+        },
+        {
+          "name": "wasm_bindgen_7a7f63635015ae7b___convert__closures_____invoke___js_sys_e3b98ffc68c32b9c___Function_fn_wasm_bindgen_7a7f63635015ae7b___JsValue_____wasm_bindgen_7a7f63635015ae7b___sys__Undefined___js_sys_e3b98ffc68c32b9c___Function_fn_wasm_bindgen_7a7f63635015ae7b___JsValue_____wasm_bindgen_7a7f63635015ae7b___sys__Undefined_______true_",
+          "kind": "function"
+        },
+        {
+          "name": "wasm_bindgen_7a7f63635015ae7b___convert__closures_____invoke___wasm_bindgen_7a7f63635015ae7b___JsValue__core_7d5f0a2ba6a62c33___result__Result_____wasm_bindgen_7a7f63635015ae7b___JsError___true_",
+          "kind": "function"
+        },
+        {
+          "name": "wasm_bindgen_7a7f63635015ae7b___convert__closures_____invoke___wasm_bindgen_7a7f63635015ae7b___sys__JsNullable_wgpu_fb1990366c356aed___backend__webgpu__webgpu_sys__gen_GpuError__GpuError___core_7d5f0a2ba6a62c33___result__Result_____wasm_bindgen_7a7f63635015ae7b___JsError___true_",
+          "kind": "function"
+        },
+        {
+          "name": "wasm_bindgen_7a7f63635015ae7b___convert__closures_____invoke___wasm_bindgen_7a7f63635015ae7b___sys__JsNullable_wgpu_fb1990366c356aed___backend__webgpu__webgpu_sys__gen_GpuError__GpuError___core_7d5f0a2ba6a62c33___result__Result_____wasm_bindgen_7a7f63635015ae7b___JsError___true__33",
+          "kind": "function"
+        },
+        {
+          "name": "wasm_bindgen_7a7f63635015ae7b___convert__closures_____invoke___wasm_bindgen_7a7f63635015ae7b___sys__JsNullable_wgpu_fb1990366c356aed___backend__webgpu__webgpu_sys__gen_GpuError__GpuError___core_7d5f0a2ba6a62c33___result__Result_____wasm_bindgen_7a7f63635015ae7b___JsError___true__34",
+          "kind": "function"
+        },
+        {
+          "name": "wasm_bindgen_7a7f63635015ae7b___convert__closures_____invoke___wgpu_fb1990366c356aed___backend__webgpu__webgpu_sys__gen_GpuDeviceLostInfo__GpuDeviceLostInfo______true_",
+          "kind": "function"
+        },
+        {
+          "name": "__wbindgen_malloc",
+          "kind": "function"
+        },
+        {
+          "name": "__wbindgen_realloc",
+          "kind": "function"
+        },
+        {
+          "name": "__wbindgen_exn_store",
+          "kind": "function"
+        },
+        {
+          "name": "__externref_table_alloc",
+          "kind": "function"
+        },
+        {
+          "name": "__wbindgen_externrefs",
+          "kind": "table"
+        },
+        {
+          "name": "__wbindgen_destroy_closure",
+          "kind": "function"
+        },
+        {
+          "name": "__wbindgen_free",
+          "kind": "function"
+        },
+        {
+          "name": "__externref_table_dealloc",
+          "kind": "function"
+        },
+        {
+          "name": "__wbindgen_start",
+          "kind": "function"
+        }
+      ]
+    },
+    {
+      "backend": "webgl2",
+      "parsed": true,
+      "export_count": 44,
+      "exports": [
+        {
+          "name": "memory",
+          "kind": "memory"
+        },
+        {
+          "name": "__wbg_galaxy_free",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_acknowledge_credits",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_boss_ui_bounds",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_craft_ship",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_create",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_diagnostic",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_hud",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_interact_site",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_lose_device",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_profile",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_purchase",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_recover",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_resize",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_return_to_home",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_set_cosmetic_density",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_set_paused",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_set_reduced_motion",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_set_shake",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_set_touch_ui",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_set_ui_insets",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_set_ui_mode",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_set_ui_scene",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_set_zoom",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_start_champion",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_start_tournament",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_step",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_switch_ship",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_viewport",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_world_viewport",
+          "kind": "function"
+        },
+        {
+          "name": "galaxy_zoom",
+          "kind": "function"
+        },
+        {
+          "name": "__abort_handler",
+          "kind": "global"
+        },
+        {
+          "name": "__instance_terminated",
+          "kind": "global"
+        },
+        {
+          "name": "wasm_bindgen_4143ef402bed8095___convert__closures_____invoke___js_sys_62a3e09ef0f4f65d___Function_fn_wasm_bindgen_4143ef402bed8095___JsValue_____wasm_bindgen_4143ef402bed8095___sys__Undefined___js_sys_62a3e09ef0f4f65d___Function_fn_wasm_bindgen_4143ef402bed8095___JsValue_____wasm_bindgen_4143ef402bed8095___sys__Undefined_______true_",
+          "kind": "function"
+        },
+        {
+          "name": "wasm_bindgen_4143ef402bed8095___convert__closures_____invoke___wasm_bindgen_4143ef402bed8095___JsValue__core_7d5f0a2ba6a62c33___result__Result_____wasm_bindgen_4143ef402bed8095___JsError___true_",
+          "kind": "function"
+        },
+        {
+          "name": "__wbindgen_malloc",
+          "kind": "function"
+        },
+        {
+          "name": "__wbindgen_realloc",
+          "kind": "function"
+        },
+        {
+          "name": "__wbindgen_exn_store",
+          "kind": "function"
+        },
+        {
+          "name": "__externref_table_alloc",
+          "kind": "function"
+        },
+        {
+          "name": "__wbindgen_externrefs",
+          "kind": "table"
+        },
+        {
+          "name": "__wbindgen_destroy_closure",
+          "kind": "function"
+        },
+        {
+          "name": "__wbindgen_free",
+          "kind": "function"
+        },
+        {
+          "name": "__externref_table_dealloc",
+          "kind": "function"
+        },
+        {
+          "name": "__wbindgen_start",
+          "kind": "function"
+        }
+      ]
+    }
+  ],
+  "game_only_cache": true,
+  "normal_fixture_excluded": true,
+  "public_dist_identical": true,
+  "hosting_static_directory": "dist",
+  "build_log": {
+    "path": "artifacts/mote-normal-build.log",
+    "sha256": "ac84d8744561ad6fafdda86acb3b02cb57209c4eea61f678c8366b89010b00aa"
+  },
+  "rust_dependency_count": 34,
+  "inventoried_build_inputs": 68,
+  "build_input_sha256": "ef319b04076fabf4c5bef9c7e833e3125311962682159261a83951a98278f2e9",
+  "source_files": [
+    {
+      "path": "Cargo.lock",
+      "sha256": "df228d9f83ef57321dcb768b79d948e9aa24456c0952e971fc8d6fcd7e806bdd",
+      "modified_utc": "2026-10-10T17:42:14.097Z"
+    },
+    {
+      "path": "Cargo.toml",
+      "sha256": "50b077a3fd8e0c8a42456948d6232ae86b2a1bbaa63652ee04da7848c776a3e3",
+      "modified_utc": "2026-10-10T14:28:41.718Z"
+    },
+    {
+      "path": "apps/game/index.html",
+      "sha256": "e5dc112541670ca98dd298d1ddd5a5804d9f620c93159703635f6db647a97f9b",
+      "modified_utc": "2026-10-10T17:32:50.621Z"
+    },
+    {
+      "path": "apps/game/public/fonts/OFL.txt",
+      "sha256": "690fda321d0ebce403249c8d61dadddcee09dc8813424cc5a8f982efcff9a9a3",
+      "modified_utc": "2026-10-10T15:08:08.199Z"
+    },
+    {
+      "path": "apps/game/public/fonts/RoyaleMono.ttf",
+      "sha256": "920710a69692bddc4edee8841ce221bceed9a1860af451d7d35f7519fddc466e",
+      "modified_utc": "2026-10-10T16:45:03.879Z"
+    },
+    {
+      "path": "apps/game/public/fonts/Tiny5.ttf",
+      "sha256": "eb4206abc0c73e9fe4fe93c034ea270578859c40a7e740c6207322413c5c4c91",
+      "modified_utc": "2026-10-10T15:08:07.969Z"
+    },
+    {
+      "path": "apps/game/public/icon-192.png",
+      "sha256": "f26b1bd9660be38bb35d08099ea056a5a22a4645f9e2f8ee399821a54d435b43",
+      "modified_utc": "2026-10-10T14:52:16.736Z"
+    },
+    {
+      "path": "apps/game/public/icon-512.png",
+      "sha256": "d5eb97ed733784221989eb4ebf01fc57bab2d5d858ae8aa78bb0b028ee89e863",
+      "modified_utc": "2026-10-10T14:52:16.739Z"
+    },
+    {
+      "path": "apps/game/public/icon.svg",
+      "sha256": "119c958934c7326508f45d53e543512008247bbf585d5d8ef7c89819194d2b0d",
+      "modified_utc": "2026-10-10T14:34:21.170Z"
+    },
+    {
+      "path": "apps/game/public/manifest.webmanifest",
+      "sha256": "2eb7555a102641e6f3040d3c79e68ddb11578c6c01327e29ed6e1fb3a688940f",
+      "modified_utc": "2026-10-10T14:54:38.618Z"
+    },
+    {
+      "path": "apps/game/src/audio.ts",
+      "sha256": "74b5c98e957d0638f09fc06ac1b54b14b1ef637d44438b50e94ccd0f77241ddc",
+      "modified_utc": "2026-10-10T15:01:33.437Z"
+    },
+    {
+      "path": "apps/game/src/campaign.css",
+      "sha256": "3cd7db9f11140017bf4a9482bbe86dcdfcfe21209092c9d32842efe93df9a4a7",
+      "modified_utc": "2026-10-10T16:45:02.138Z"
+    },
+    {
+      "path": "apps/game/src/campaign.ts",
+      "sha256": "c787a4dbaa540c8c69bd9ce46b35a242d80f198030bb647370b045ee95ce5c46",
+      "modified_utc": "2026-10-10T16:54:36.690Z"
+    },
+    {
+      "path": "apps/game/src/debug-console.css",
+      "sha256": "45181fad6a9ebe51d9f2ac731708d4df192ab2052e584601c14d1f63bca62ec6",
+      "modified_utc": "2026-10-10T16:04:59.986Z"
+    },
+    {
+      "path": "apps/game/src/debug-console.ts",
+      "sha256": "a25fa0293e3526221315a49641df115aae74876984673a006e229120bbdf041e",
+      "modified_utc": "2026-10-10T16:08:19.766Z"
+    },
+    {
+      "path": "apps/game/src/dialogue.css",
+      "sha256": "fb590c04d06f85c372c6f302a1a7f6b6ab7fc92658d3c33617cf9cbfe6922f3a",
+      "modified_utc": "2026-10-10T16:27:41.024Z"
+    },
+    {
+      "path": "apps/game/src/dialogue.ts",
+      "sha256": "078560c02304863339bbb37d7f80cf8e0b8ed7a0cf53012582daf899c5aa74e1",
+      "modified_utc": "2026-10-10T16:27:41.023Z"
+    },
+    {
+      "path": "apps/game/src/input.ts",
+      "sha256": "85ba91369ad506cbc60d5b314f7fb3f9370d1a15b71f7fb1e886575793011159",
+      "modified_utc": "2026-10-10T16:48:21.101Z"
+    },
+    {
+      "path": "apps/game/src/main.ts",
+      "sha256": "386fbd1520ab3a9d32c14703cb9aded7d7008b9451102f503ebfb21dd84169c1",
+      "modified_utc": "2026-10-10T20:08:25.850Z"
+    },
+    {
+      "path": "apps/game/src/narrative.ts",
+      "sha256": "d047579bc3ff47e875794cc1214da4a352700753d51293e1337288358e75fe4d",
+      "modified_utc": "2026-10-10T16:41:59.731Z"
+    },
+    {
+      "path": "apps/game/src/pixel-ui.ts",
+      "sha256": "b62ef0f6e0ba55be1b506cfd03dae3cc4af10be1bff5c5b43bb3583c92ded3c3",
+      "modified_utc": "2026-10-10T17:41:52.731Z"
+    },
+    {
+      "path": "apps/game/src/storage.ts",
+      "sha256": "2340133e825315fa445469e640ab75e47c3d1bdb34fa332b1c52e68459f463b6",
+      "modified_utc": "2026-10-10T17:31:16.308Z"
+    },
+    {
+      "path": "apps/game/src/style.css",
+      "sha256": "c459520b8b65d179b193c1fe4961166a57a7083e0aff88c2df6333733bc6741c",
+      "modified_utc": "2026-10-10T19:36:29.017Z"
+    },
+    {
+      "path": "apps/game/src/vite-env.d.ts",
+      "sha256": "65996936fbb042915f7b74a200fcdde7e410f32a669b1ab9597cfaa4b0faddb5",
+      "modified_utc": "2026-10-10T14:38:20.647Z"
+    },
+    {
+      "path": "apps/game/vite.config.ts",
+      "sha256": "a70ebdad007a8d8def37eb5fb83a85c2869be3edb69fcd51cbd104bc9d9bc698",
+      "modified_utc": "2026-10-10T14:31:08.363Z"
+    },
+    {
+      "path": "assets/pixels/atlas.json",
+      "sha256": "1bc8a66f0e0c5d6bb5d9f6a3349032d10d854cb023cd70971e590d61c900051f",
+      "modified_utc": "2026-10-10T15:13:42.630Z"
+    },
+    {
+      "path": "assets/pixels/boss-atlas.json",
+      "sha256": "0a946b13cef528578c6863b73fae0b9c2c1fd5ecdb6232bd8b37626875b9e3a3",
+      "modified_utc": "2026-10-10T17:44:56.974Z"
+    },
+    {
+      "path": "assets/pixels/mote-atlas.json",
+      "sha256": "004c24eefeccbe25d836dd8ad1ff00346f86879492c2bff3fe828721dc838714",
+      "modified_utc": "2026-10-10T18:55:23.797Z"
+    },
+    {
+      "path": "assets/pixels/riveter-atlas.json",
+      "sha256": "6bbf5a1333b486d54a7fb7f3600d89220dd774e1e80e9a699ad4edf75231247d",
+      "modified_utc": "2026-10-10T18:34:11.051Z"
+    },
+    {
+      "path": "assets/ui/atlas.json",
+      "sha256": "d2424ecad386331ad97b4328258b2dbd1d0251a8de28de6bba98042e2a54f088",
+      "modified_utc": "2026-10-10T15:40:37.017Z"
+    },
+    {
+      "path": "assets/ui/campaign-atlas.json",
+      "sha256": "27c99be6b55e0e17a7d5149e566aedfa269fb266234ca24b44fa34c103524738",
+      "modified_utc": "2026-10-10T16:44:34.227Z"
+    },
+    {
+      "path": "crates/engine_core/Cargo.toml",
+      "sha256": "0c7948f6d4cc4f43132f9c8c7c7f5d295b8003d00b15836a295bfe07e9c892bd",
+      "modified_utc": "2026-10-10T17:41:14.698Z"
+    },
+    {
+      "path": "crates/engine_core/src/camera.rs",
+      "sha256": "b08164aa6c9a7e8364ee90e7205e70b702d2013c1861254da33610cb81fdf759",
+      "modified_utc": "2026-10-10T16:51:15.559Z"
+    },
+    {
+      "path": "crates/engine_core/src/frame.rs",
+      "sha256": "4d8b1a965e1e98168dc62db3bf2f3aaf707b6b7be4d9d0b56225a73d0630ebc6",
+      "modified_utc": "2026-10-10T17:43:13.645Z"
+    },
+    {
+      "path": "crates/engine_core/src/lib.rs",
+      "sha256": "eb84c4af2c35898ea6337503c2b169105ae5830f91c71ac7b441e7c114c6035a",
+      "modified_utc": "2026-10-10T18:55:08.931Z"
+    },
+    {
+      "path": "crates/engine_core/src/pixel_rig.rs",
+      "sha256": "e18ed9ca3ac3a459c9c611a7083494d07d7aa9ed624453df623b9c64730b6582",
+      "modified_utc": "2026-10-10T17:43:45.950Z"
+    },
+    {
+      "path": "crates/engine_core/src/pixels.rs",
+      "sha256": "3e9f228b54442f66a48a26d0a932b694b6cc22386846d28b7adda0e409f95b5c",
+      "modified_utc": "2026-10-10T17:43:13.649Z"
+    },
+    {
+      "path": "crates/engine_core/src/topology.rs",
+      "sha256": "72b22bedd285bf61d6e2a74a6ce5d8eddc7f593004e268949574e949fa528bbc",
+      "modified_utc": "2026-10-10T16:01:20.344Z"
+    },
+    {
+      "path": "crates/engine_core/src/transform.rs",
+      "sha256": "f511ceb89ac4445ce9749d1ed4086e672693357a1e6cf4f4f944dd8fe7220c74",
+      "modified_utc": "2026-10-10T14:37:22.484Z"
+    },
+    {
+      "path": "crates/game_core/Cargo.toml",
+      "sha256": "8997ce52e4c8a2384b2bfe5ef8d7778b6be42df8e1157b6c17300f931af16350",
+      "modified_utc": "2026-10-10T14:38:30.371Z"
+    },
+    {
+      "path": "crates/game_core/src/biome_enemies.rs",
+      "sha256": "43b3736cb8da31872a62ac90f0f2b54e78f54ca7ee2f07ef622a45a7241e5cc8",
+      "modified_utc": "2026-10-10T18:44:35.509Z"
+    },
+    {
+      "path": "crates/game_core/src/boss_assets.rs",
+      "sha256": "6f243e4211c7a40e0feaf35140b8b0300df65d061e2657d6490b90a6ef334699",
+      "modified_utc": "2026-10-10T17:50:05.882Z"
+    },
+    {
+      "path": "crates/game_core/src/bosses.rs",
+      "sha256": "d98e4f74ff7e1a225a5ca9d6178164853ca65057fadf5d872706ab89523f2ebc",
+      "modified_utc": "2026-10-10T17:58:25.140Z"
+    },
+    {
+      "path": "crates/game_core/src/campaign.rs",
+      "sha256": "ce3701246d366042841cca3a61ce1c83ea15bbfcd312a05fe5d6d7f991d0b5bc",
+      "modified_utc": "2026-10-10T16:54:24.218Z"
+    },
+    {
+      "path": "crates/game_core/src/campaign_runtime.rs",
+      "sha256": "beaa27a19af8c62a23df0b6d6f820e924af51ed40f1d1e78a5cac25f8d7a4e58",
+      "modified_utc": "2026-10-10T17:50:05.820Z"
+    },
+    {
+      "path": "crates/game_core/src/lib.rs",
+      "sha256": "ec2b3c897d4b5dc1ec70891d383f19a008fc0425a5dedd691c298cb41ddd3cea",
+      "modified_utc": "2026-10-10T20:08:26.488Z"
+    },
+    {
+      "path": "crates/game_core/src/mote_art.rs",
+      "sha256": "229916ac25331a0dc59add3a8c8a49274d2f4a3e01520ffa14a17d8b8965806f",
+      "modified_utc": "2026-10-10T20:08:25.459Z"
+    },
+    {
+      "path": "crates/game_core/src/mote_controller.rs",
+      "sha256": "53134b719dd2fb361cc5feb7fbbc020a3b446458605f4096b175d55e64fe8109",
+      "modified_utc": "2026-10-10T20:08:25.461Z"
+    },
+    {
+      "path": "crates/game_core/src/pixel_assets.rs",
+      "sha256": "2b3a013aedb791af8161e61e0bf85b045d2ebdad5eaaa7e2f648d9451bff00ec",
+      "modified_utc": "2026-10-10T15:21:22.460Z"
+    },
+    {
+      "path": "crates/game_core/src/radiation_enemies.rs",
+      "sha256": "7991f3fd929230c8b6b424a746440251d18ddff589c2a3a996744ccd91168b6e",
+      "modified_utc": "2026-10-10T20:08:25.461Z"
+    },
+    {
+      "path": "crates/game_core/src/regions.rs",
+      "sha256": "6d76c0f42e49c1a1adfd55d144e27536829c83e08976a80d0b0517ed8c977c1f",
+      "modified_utc": "2026-10-10T15:57:41.498Z"
+    },
+    {
+      "path": "crates/game_web/Cargo.toml",
+      "sha256": "2ae9524c8e67d4d504a973cff6de954e942c524df5508eb522e2324f210f9c1a",
+      "modified_utc": "2026-10-10T17:16:03.489Z"
+    },
+    {
+      "path": "crates/game_web/src/boss_layout.rs",
+      "sha256": "97ae0496ec27b89510b46ad21785a377d2ca6ae0d88d1fe95dcbc30a1758e353",
+      "modified_utc": "2026-10-10T18:53:05.351Z"
+    },
+    {
+      "path": "crates/game_web/src/boss_overlay.rs",
+      "sha256": "fd9ff6b24cf69d3c43144571815d071c251485b002cba8bcad27bced8b02810f",
+      "modified_utc": "2026-10-10T19:05:09.299Z"
+    },
+    {
+      "path": "crates/game_web/src/browser.rs",
+      "sha256": "2be9f952d91a3994688076f0c0a57fc468c254bd05073a6f14469156045143c5",
+      "modified_utc": "2026-10-10T18:55:09.229Z"
+    },
+    {
+      "path": "crates/game_web/src/lib.rs",
+      "sha256": "4af8379d692454381cd7021fdca4624f4c6262362d828cbc0f60d091d4936327",
+      "modified_utc": "2026-10-10T18:55:09.230Z"
+    },
+    {
+      "path": "crates/game_web/src/lighting.rs",
+      "sha256": "293adfe330f2fd58773cb47932c3dad5a3f2d31269169ca4ab4721cafc7c6888",
+      "modified_utc": "2026-10-10T15:47:24.487Z"
+    },
+    {
+      "path": "crates/game_web/src/pixel.wgsl",
+      "sha256": "459356f8e1934c990d53eb6f902a6d119661cd4546b891c59ffbf6705678227a",
+      "modified_utc": "2026-10-10T15:47:23.919Z"
+    },
+    {
+      "path": "crates/game_web/src/pixel_ui.rs",
+      "sha256": "c66a24bf4c105df8fc5121c8c4ab8a797a19bd3eb51d5dfc067f2df68a7dd94a",
+      "modified_utc": "2026-10-10T19:04:51.779Z"
+    },
+    {
+      "path": "crates/game_web/src/present.wgsl",
+      "sha256": "c5f2b55c1b5d76159f4473ed6f8e7e656166bd7f471fb949661fdc1650757507",
+      "modified_utc": "2026-10-10T14:46:27.927Z"
+    },
+    {
+      "path": "crates/game_web/src/renderer.rs",
+      "sha256": "fc65e332b215945a48b4bf510ac0f3449606629e79adc2044593072b4e49eaaa",
+      "modified_utc": "2026-10-10T16:52:18.114Z"
+    },
+    {
+      "path": "crates/game_web/src/ui_scene.rs",
+      "sha256": "a047f812093bcaa4106d3bd09d145882e4c527153a3be268ae4e4d277d3f41d0",
+      "modified_utc": "2026-10-10T17:37:08.630Z"
+    },
+    {
+      "path": "package.json",
+      "sha256": "048d1c56e2cc6ce5beb44975893b87d38376892778dde34be7aea83710301b1b",
+      "modified_utc": "2026-10-10T17:17:53.708Z"
+    },
+    {
+      "path": "pnpm-lock.yaml",
+      "sha256": "6383d7a7deaf07367d08c79447c4faab012da63436cf23df3a1cbb82b4f183d1",
+      "modified_utc": "2026-10-10T14:56:51.480Z"
+    },
+    {
+      "path": "scripts/build-wasm.mjs",
+      "sha256": "decc2c498fafdc38167b9e5a106a1b9c51de9392cf4d76394a5a24a7cb14959b",
+      "modified_utc": "2026-10-10T14:54:38.600Z"
+    },
+    {
+      "path": "scripts/build.mjs",
+      "sha256": "893eefb7bb9b7034c29817d30d82ffcd28352cd16ec16829c2d7700498066ff4",
+      "modified_utc": "2026-10-10T14:54:38.605Z"
+    },
+    {
+      "path": "scripts/pwa.mjs",
+      "sha256": "dfab5c87696dfb7bb8b5badc376af3d868f6cb7357c2fda0eba5d7e93d6a28b9",
+      "modified_utc": "2026-10-10T14:54:38.610Z"
+    },
+    {
+      "path": "tsconfig.json",
+      "sha256": "c0de18e3ddab8718ca79686d1d204a4b6e0daecb3e28cadab874abc678f768db",
+      "modified_utc": "2026-10-10T14:28:41.722Z"
+    }
+  ],
+  "stale_rust_inputs": [],
+  "stale_build_inputs": [],
+  "schema_unchanged": true,
+  "mote_atlas_sha256": "004c24eefeccbe25d836dd8ad1ff00346f86879492c2bff3fe828721dc838714",
+  "composition": {
+    "entire_core_composes_accepted_candidates": true,
+    "shared_death_helper_unchanged": true,
+    "persisted_rust_profile_fields_unchanged": true,
+    "production_mote_modules_match": {
+      "radiation_enemies.rs": true,
+      "mote_controller.rs": true,
+      "mote_art.rs": true
+    },
+    "comparison": "Formatting/comments, work-only absolute module paths and production cfg(test) diagnostic module are ignored, with string/character/raw-literal contents preserved; only expected atlas include path and private radiation module declaration order are adapted."
+  },
+  "scope": "Read-only normal package parse/hash/source inspection. No broad tests, game/GPU execution, browser/device/publication/authenticated remote execution."
+}

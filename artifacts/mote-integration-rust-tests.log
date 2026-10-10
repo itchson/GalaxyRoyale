@@ -1,0 +1,268 @@
+   Compiling game_core v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\game_core)
+   Compiling game_web v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\game_web)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 5.04s
+     Running unittests src\lib.rs (target\debug\deps\engine_core-30e993099589926a.exe)
+
+running 34 tests
+test camera::tests::zoom_projection_keeps_light_distance_in_world_units ... ok
+test camera::tests::zoom_is_bounded_retargetable_and_finishes_in_150ms ... ok
+test camera::tests::world_projection_and_input_round_trip_use_current_extent ... ok
+test camera::tests::separate_ui_projection_preserves_glyph_positions_sizes_and_materials ... ok
+test frame::tests::gpu_layouts_have_the_fixed_byte_contract ... ok
+test frame::tests::clear_removes_previous_frame_and_ignores_invalid_geometry ... ok
+test frame::tests::particle_sizes_share_transforms_without_changing_world_positions ... ok
+test frame::tests::particles_rebind_after_body_batch_split ... ok
+test frame::tests::per_cell_animation_preserves_damage_and_base_palette ... ok
+test pixels::tests::transformed_hit_matches_world_contact_with_shear ... ok
+test frame::tests::body_batches_split_at_128_and_remap_indices ... ok
+test topology::tests::boundary_is_closed_and_outward_overshoot_continues_inward ... ok
+test frame::tests::borrowed_frames_reuse_pixel_and_transform_allocations ... ok
+test topology::tests::multiple_crossings_preserve_all_travel_and_diagonal_antipodes ... ok
+test frame::tests::exact_affine_hierarchy_survives_gpu_extraction ... ok
+test frame::tests::material_packing_preserves_geometry_and_sanitizes_nonfinite_fields ... ok
+test pixel_rig::tests::phase_animation_changes_core_emission_without_changing_geometry_or_occupancy ... ok
+test pixels::tests::ascii_centering_ragged_rows_colors_and_occupancy_are_independent ... ok
+test pixels::tests::empty_nonfinite_and_singular_inputs_do_not_hit_or_damage ... ok
+test pixels::tests::exact_edges_corners_and_zero_length_hits_are_consistent ... ok
+test pixels::tests::localized_damage_preserves_holes_and_returns_exact_debris ... ok
+test pixels::tests::swept_projectiles_hit_first_cell_and_pass_through_holes ... ok
+test topology::tests::invalid_and_tangent_steps_fail_explicitly_without_dropping_overshoot ... ok
+test pixel_rig::tests::invalid_rig_layouts_and_mismatched_bodies_fail_closed ... ok
+test topology::tests::shared_rebase_preserves_motion_heading_camera_and_destination ... ok
+test transform::tests::affine_preserves_shear_over_three_hierarchy_levels ... ok
+test transform::tests::singular_transform_has_explicit_inverse_failure ... ok
+test pixels::tests::damage_fragments_conserve_surviving_cells_and_separate_diagonal_cells ... ok
+test transform::tests::transform_round_trip_rotation_nonuniform_scale_and_reflection ... ok
+test transform::tests::uniform_trs_hierarchy_matches_sequential_points ... ok
+test pixel_rig::tests::damaged_rig_emits_survivors_once_with_exact_nested_world_positions ... ok
+test topology::tests::swept_result_matches_subdivided_motion_for_oblique_crossings ... ok
+test pixels::tests::grid_traversal_matches_independent_per_cell_slab_reference ... ok
+test pixel_rig::tests::minimum_and_maximum_dimensions_preserve_holes_with_sixteen_nested_parts ... ok
+
+test result: ok. 34 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests\boss_assets.rs (target\debug\deps\boss_assets-1b049d4690054c14.exe)
+
+running 3 tests
+test deepest_coil_assembly_has_measured_bounded_quad_and_transform_cost ... ok
+test fifteen_heads_have_distinct_normalized_silhouettes_and_occupied_local_cores ... ok
+test all_asset_rigs_preserve_damage_holes_under_nested_nonuniform_sheared_groups ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.11s
+
+     Running unittests src\lib.rs (target\debug\deps\game_core-b7dbc88b6e59577a.exe)
+
+running 106 tests
+test campaign::tests::round_robin_is_complete_seeded_and_player_results_are_real ... ok
+test biome_enemies::tests::warning_waits_on_screen_and_the_final_quarter_second_locks_three_rounds ... ok
+test campaign::tests::seeded_grid_arenas_and_authored_outlines_are_unique ... ok
+test biome_enemies::tests::authored_cells_and_muzzle_origins_match_the_live_damage_mask ... ok
+test campaign_runtime::tests::invalid_campaign_rewards_and_archives_cannot_own_ships ... ok
+test campaign_runtime::tests::cargo_capacity_banking_crafting_and_ship_selection_are_atomic ... ok
+test bosses::tests::legacy_and_adversarial_generation_counts_sanitize_without_inventing_base_kills ... ok
+test bosses::tests::sovereign_intrinsic_evolution_preserves_global_ranks_and_changes_real_echo_behavior ... ok
+test campaign_runtime::tests::sovereign_has_intrinsic_maximum_upgrades_without_changing_global_progress ... ok
+test campaign_runtime::tests::death_retains_banked_points_xp_materials_and_preserves_summary_without_reload_popup ... ok
+test pixel_assets::tests::dock_center_is_open_and_damage_never_changes_the_pristine_template ... ok
+test diagnostic_death_tests::atomic_unplayed_diagnostic_departure_keeps_the_previous_report_and_haven_death_is_safe ... ok
+test pixel_assets::tests::asteroid_variants_preserve_facets_occupancy_and_determinism ... ok
+test campaign_runtime::tests::real_kills_level_selected_ship_and_gate_global_hardware_purchases ... ok
+test pixel_assets::tests::generated_assets_keep_exact_occupancy_dimensions_and_hard_palette ... ok
+test biome_enemies::tests::damaged_render_keeps_holes_and_live_charge_under_reduced_motion ... ok
+test biome_enemies::tests::explicit_iron_belt_diagnostic_does_not_grant_progress_after_real_defeat ... ok
+test biome_enemies::tests::integrated_camera_gate_and_range_retreat_preserve_family_progression ... ok
+test biome_enemies::tests::actual_pixel_projectile_defeat_counts_once_as_one_ordinary_bastion ... ok
+test radiation_enemies::tests::actual_player_projectiles_grant_once_only_dart_xp_queue_and_bounty_credit ... ok
+test bosses::tests::nova_reflection_and_connected_wake_are_bounded_and_respect_sanctuaries ... ok
+test radiation_enemies::tests::invalid_actor_input_retires_without_rewards_instead_of_freezing ... ok
+test radiation_enemies::tests::actual_emitted_sweep_hurts_hull_and_erases_ship_cells_through_shared_collision ... ok
+test radiation_enemies::tests::actual_mote_sweep_triggers_owned_nova_and_reflects_other_real_pulse_projectiles ... ok
+test biome_enemies::tests::installed_controller_emits_real_locked_projectiles_and_no_generic_extra_shot ... ok
+test biome_enemies::tests::destroyed_barrels_and_the_shared_bullet_cap_prevent_phantom_fire ... ok
+test radiation_enemies::tests::stress_mode_excludes_an_actual_eligible_birth_without_consuming_it ... ok
+test diagnostic_death_tests::natural_lethal_occupied_cell_collision_keeps_the_existing_end_of_tick_path ... ok
+test biome_enemies::tests::haven_and_remote_sanctuaries_reset_bursts_and_keep_real_shots_out ... ok
+test regions::tests::discovery_ids_safe_radii_and_overlap_queries_are_stable ... ok
+test regions::tests::gas_cells_persist_animate_and_respect_full_and_reduced_limits ... ok
+test regions::tests::nearest_regions_are_stable_and_hub_is_forced_haven ... ok
+test radiation_enemies::tests::normal_game_tick_spawn_hook_installs_only_actual_radial_darts ... ok
+test tests::asteroid_contacts_exchange_momentum_and_separate ... ok
+test radiation_enemies::tests::diagnostic_real_defeat_and_sanctuary_retreat_do_not_grant_any_progression ... ok
+test tests::collected_pickup_credits_exactly_once ... ok
+test radiation_enemies::tests::sanctuary_body_and_all_lifetime_bullet_sweeps_use_shared_world_guards ... ok
+test tests::courier_survives_reload_and_death_then_claims_once_at_source ... ok
+test radiation_enemies::tests::actual_pulse_origin_is_a_live_emitter_cell_and_erased_pylons_disable_owned_rays ... ok
+test regions::tests::rich_cached_planets_and_split_rings_keep_fine_geometry ... ok
+test tests::dock_repair_restores_generated_ship_cells_after_real_damage ... ok
+test tests::external_destinations_reject_nonfinite_and_out_of_world_values ... ok
+test tests::continuous_thrust_and_impulses_keep_player_inside_practical_extent ... ok
+test radiation_enemies::tests::zoom_and_camera_loss_abort_live_warning_and_do_not_replay_attack_debt ... ok
+test tests::heading_interpolation_takes_shortest_path_across_pi ... ok
+test diagnostic_death_tests::forced_normal_run_death_retains_earned_progress_and_finishes_report_once ... ok
+test tests::invalid_joystick_releases_thrust_without_poisoning_motion ... ok
+test diagnostic_death_tests::natural_nonlethal_shield_and_hull_damage_wait_then_regenerate_unchanged ... ok
+test tests::legacy_progress_migrates_and_archives_sanitize_with_bounded_relic_bonus ... ok
+test radiation_enemies::tests::actual_projectile_emissions_preserve_minimum_charge_and_pulse_spacing_at_supported_steps ... ok
+test tests::pause_freezes_combat_clock ... ok
+test tests::pixel_hits_remove_cells_and_empty_objects_die ... ok
+test radiation_enemies::tests::moving_player_and_accepted_dt_keep_post_follow_warning_and_pulses_in_view ... ok
+test tests::projectile_orders_real_cells_instead_of_broadphase_centers ... ok
+test tests::purchases_use_correct_currency_and_require_dock ... ok
+test tests::lighting_is_bounded_deterministic_and_matches_projectile_interpolation ... ok
+test tests::reload_keeps_surplus_kill_credit_behind_queued_boss ... ok
+test radiation_enemies::tests::shared_cap_reserves_commands_across_two_entities_and_saturated_pulses_are_not_replayed ... ok
+test regions::tests::background_is_deterministic_bounded_and_has_valid_tables ... ok
+test tests::safe_zone_blocks_damage_and_weapons ... ok
+test tests::regional_spawn_mix_uses_biome_weights_and_avoids_sanctuaries ... ok
+test tests::signature_abilities_emit_their_own_real_world_light_colors ... ok
+test tests::navigation_arrives_without_orbiting ... ok
+test tests::site_sanctuary_blocks_combat_without_granting_haven_services ... ok
+test tests::joystick_rotates_scales_and_releases ... ok
+test tests::swept_projectile_hits_through_an_entire_body_in_one_tick ... ok
+test tests::twenty_four_family_kills_queue_one_boss ... ok
+test tests::wider_viewport_extracts_newly_visible_objects ... ok
+test tests::render_focus_handles_arena_cleanup_and_invalid_alpha ... ok
+test tests::sanctuary_guards_hold_after_long_ticks_and_beyond_local_cache ... ok
+test tests::death_retains_progress_and_retries_boss ... ok
+test campaign_runtime::tests::trial_uses_real_pixel_collisions_enables_only_own_sanctuary_and_contains_combat ... ok
+test radiation_enemies::tests::birth_uses_actual_spawn_grid_without_rng_or_reward_mutation ... ok
+test biome_enemies::tests::birth_selection_is_seeded_bounded_and_does_not_migrate_at_borders ... ok
+test campaign_runtime::tests::champion_reward_is_actual_once_only_and_survives_reload ... ok
+test tests::bounty_counts_only_accepted_family_and_boss_as_one_across_reload ... ok
+test bosses::tests::old_vertical_coil_layout_causes_real_contact_before_the_natural_spawn_telegraph ... ok
+test tests::fourth_boss_guarantees_signature ... ok
+test tests::generated_actor_scales_match_world_footprints_and_collision_bounds ... ok
+test bosses::tests::highest_queue_retries_across_retreat_death_reload_and_consumes_exactly_once ... ok
+test diagnostic_death_tests::forced_death_precedes_a_ready_sovereign_eighth_primary_heal ... ok
+test campaign_runtime::tests::round_robin_records_loss_retries_and_awards_sovereign_and_credits_once ... ok
+test bosses::tests::reduced_motion_freezes_reactor_shimmer_but_preserves_live_phase_cues ... ok
+test radiation_enemies::tests::real_ticks_admit_full_warning_and_real_projectiles_at_all_supported_zoom_extents ... ok
+test bosses::tests::coil_segment_rig_extraction_preserves_actual_damage_and_exact_world_radii ... ok
+test tests::streaming_is_deterministic_and_bounded ... ok
+test tests::reduced_density_keeps_all_ship_cells_and_simulation_state ... ok
+test bosses::tests::complete_binary_promotion_tree_uses_384_base_kills_and_31_real_boss_defeats ... ok
+test tests::diagnostics_do_not_grant_inventory_or_basic_upgrades ... ok
+test tests::stress_scene_exercises_requested_real_workload_and_cleans_up ... ok
+test diagnostic_death_tests::diagnostic_scene_death_is_reward_isolated_and_an_explicit_retry_starts_once ... ok
+test diagnostic_death_tests::pause_invalid_time_and_duplicate_commands_defer_one_death_until_a_valid_tick ... ok
+test bosses::tests::localized_core_phase_modifies_real_damage_and_rigs_keep_destroyed_holes ... ok
+test tests::render_focus_tracks_all_authored_reactors_between_ticks_without_mutation ... ok
+test diagnostic_death_tests::forced_death_cannot_be_undone_by_already_eligible_regeneration ... ok
+test campaign_runtime::tests::all_eight_fighters_have_distinct_live_motion_and_weapon_patterns ... ok
+test radiation_enemies::tests::reused_render_extracts_live_cells_materials_and_bounded_cues_without_game_mutation ... ok
+test weapon_cadence_tests::accepted_variable_steps_and_invalid_time_never_create_two_primaries ... ok
+test weapon_cadence_tests::diagnostic_death_haven_hold_and_fresh_retry_do_not_bank_a_burst ... ok
+test bosses::tests::streamed_coil_chains_face_inward_and_cannot_contact_the_player_on_the_first_tick ... ok
+test weapon_cadence_tests::short_release_and_pause_keep_a_positive_remaining_cooldown ... ok
+test weapon_cadence_tests::held_fire_in_haven_then_retry_has_no_sanctuary_debt ... ok
+test weapon_cadence_tests::automatic_echo_tracks_actual_primaries_after_cadence_idle_and_pause ... ok
+test bosses::tests::fifteen_diagnostic_fights_have_distinct_live_patterns_and_no_incidental_rewards ... ok
+test weapon_cadence_tests::long_idle_has_immediate_ready_shot_then_a_full_new_period ... ok
+test weapon_cadence_tests::all_six_actual_steady_cadences_are_authored_and_strictly_increasing ... ok
+
+test result: ok. 106 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.77s
+
+     Running unittests src\lib.rs (target\debug\deps\game_web-9ea70f65f4ad26fd.exe)
+
+running 43 tests
+test boss_layout::search_tests::cached_rescue_never_suppresses_newly_clear_primary_promotion ... ok
+test boss_layout::search_tests::rounded_disc_tangency_continues_search_to_next_integer ... ok
+test boss_overlay::tests::reservations_are_bounded_and_overflow_fails_closed ... ok
+test boss_layout::search_tests::exact_no_fit_cache_invalidates_on_every_geometry_input_change ... ok
+test lighting::tests::invalid_lights_are_ignored_and_unused_slots_are_dark ... ok
+test boss_layout::search_tests::unsafe_cached_preference_refreshes_while_current_remains_safe ... ok
+test boss_overlay::tests::semantic_buttons_reserve_actual_clipped_group_bounds ... ok
+test boss_overlay::tests::visible_toast_and_destination_text_reserve_their_rendered_bounds ... ok
+test boss_layout::search_tests::phase_change_and_clock_rewind_refresh_compact_preference ... ok
+test lighting::tests::uniform_layout_is_bounded_and_lights_follow_camera ... ok
+test boss_layout::search_tests::opening_each_geometry_class_escapes_cached_no_fit_immediately ... ok
+test pixel_ui::tests::every_authored_attack_has_a_complete_compact_label ... ok
+test ui_scene::tests::console_panel_is_exact_opaque_black_with_only_a_rail_and_pins ... ok
+test boss_layout::search_tests::retained_rescue_reuses_only_a_freshly_clear_preference_for_350_ms ... ok
+test boss_layout::search_tests::moving_search_challenger_does_not_inherit_previous_rectangle_hold ... ok
+test boss_layout::search_tests::overestimated_interval_keeps_integer_boundary_accepted_by_hypot ... ok
+test boss_layout::search_tests::moved_core_or_new_widget_that_blocks_retained_rescue_invalidates_immediately ... ok
+test ui_scene::tests::rails_keep_original_corners_and_one_centered_ornament ... ok
+test pixel_ui::tests::royale_mono_reuses_body_and_composes_letter_spacing ... ok
+test pixel_ui::tests::touch_knob_moves_proportionally_and_invalid_input_returns_to_center ... ok
+test ui_scene::tests::composed_group_translation_keeps_text_screen_fixed ... ok
+test ui_scene::tests::text_letters_have_individual_composed_object_transforms ... ok
+test pixel_ui::tests::minimal_flight_hides_only_optional_telemetry_and_keeps_hull ... ok
+test pixel_ui::tests::flight_level_and_cargo_line_stays_between_touch_pads ... ok
+test pixel_ui::tests::overlay_stays_fixed_when_world_camera_moves ... ok
+test pixel_ui::tests::hidden_mode_and_invalid_viewport_emit_no_overlay ... ok
+test pixel_ui::tests::full_dock_hides_meters_and_home_compass_until_needed ... ok
+test pixel_ui::tests::generation_and_warning_fit_the_boss_panel_at_landscape_extents ... ok
+test pixel_ui::tests::compact_boss_panels_keep_real_phase_glyphs_health_and_inset_padding ... ok
+test ui_scene::tests::active_portrait_blinks_without_changing_geometry_and_freezes_when_reduced ... ok
+test ui_scene::tests::authored_campaign_ship_and_patch_outlines_are_distinct_occupied_objects ... ok
+test ui_scene::tests::campaign_quads_fit_integer_scale_and_keep_unlit_material ... ok
+test ui_scene::tests::short_button_rects_shrink_labels_without_hiding_them ... ok
+test ui_scene::tests::reduced_motion_freezes_generated_art_and_normal_motion_changes_it ... ok
+test ui_scene::tests::console_input_cursor_blinks_and_reduced_motion_keeps_it_static ... ok
+test ui_scene::tests::scroll_clip_keeps_visible_cells_inside_group_relative_bounds ... ok
+test ui_scene::tests::cached_portraits_fit_integer_cells_and_preserve_group_camera_transform ... ok
+test ui_scene::tests::malformed_geometry_and_large_scenes_stay_bounded ... ok
+test boss_layout::search_tests::forbidden_interval_search_matches_direct_integer_origin_oracle ... ok
+test boss_overlay::tests::narrow_safe_area_emits_the_allocated_compact_panel_and_touch_controls ... ok
+test boss_overlay::tests::small_touch_boss_keeps_critical_widgets_and_restores_telemetry_after_encounter ... ok
+test pixel_ui::tests::invalid_boss_placement_cannot_emit_stray_boss_pixels ... ok
+test boss_overlay::tests::actual_projection_and_native_widgets_clear_core_and_player_across_zoom ... ok
+
+test result: ok. 43 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.14s
+
+     Running tests\boss_layout.rs (target\debug\deps\boss_layout-427b75710e1283f7.exe)
+
+running 31 tests
+test clock_rewind_and_interrupted_challenge_restart_the_hold ... ok
+test invalid_inputs_fail_closed_and_preserve_retained_state ... ok
+test known_hud_and_touch_geometry_leave_a_clear_constant_size_panel ... ok
+test exact_core_tangency_is_not_accepted_as_clearance ... ok
+test exact_corner_tangency_and_widget_clearance_are_excluded ... ok
+test oversized_projection_overflow_is_invalid_not_false_safe ... ok
+test partial_visibility_is_protected_and_fully_offscreen_core_is_ignored ... ok
+test phase_change_can_promote_a_meaningfully_better_safe_anchor ... ok
+test safe_area_fractional_insets_snap_inward_to_real_pixels ... ok
+test core_and_player_block_separate_top_anchors_then_lower_is_used ... ok
+test north_core_clears_center_hud_without_scaling_panel ... ok
+test lower_fallback_returns_to_an_upper_anchor_after_hold ... ok
+test current_largest_core_has_real_radius_plus_clearance ... ok
+test northern_diagnostic_projection_matches_actual_zoom_limits ... ok
+test oversize_core_and_tiny_viewport_have_no_forced_unsafe_placement ... ok
+test widgets_are_hard_exclusions_and_all_blocked_fails_closed ... ok
+test invalid_frame_preserves_pending_state_so_caller_must_reset_on_gaps ... ok
+test real_f32_zoom_endpoints_promote_without_invalidating_layout ... ok
+test compact_fallback_clears_actual_player_and_native_mobile_widget_fixtures ... ok
+test large_world_translation_and_camera_shake_use_same_projection ... ok
+test safe_challenger_requires_continuous_350_ms ... ok
+test unsafe_retained_anchor_moves_immediately_without_waiting ... ok
+test tiny_viewport_and_expanded_quick_menu_need_explicit_no_fit_fallback ... ok
+test unsupported_screen_extent_is_invalid_instead_of_claiming_no_fit ... ok
+test widget_gap_boundary_is_exactly_four_logical_pixels ... ok
+test improvement_threshold_is_24_pixels_and_interruption_restarts_hold ... ok
+test compact_rescue_returns_to_primary_only_after_safe_hold ... ok
+test any_clear_candidate_is_reported_instead_of_silently_hiding_the_panel ... ok
+test small_center_jitter_never_promotes_another_safe_anchor ... ok
+test deterministic_replay_covers_moving_core_widgets_and_phase_changes ... ok
+test viewport_zoom_and_core_position_sweep_never_covers_visible_targets ... ok
+
+test result: ok. 31 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.19s
+
+   Doc-tests engine_core
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests game_core
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests game_web
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

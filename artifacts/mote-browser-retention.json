@@ -1,0 +1,26 @@
+{
+  "scope": "Actual exported normal-browser checkpoint after declared Mote scenes and Haven return. Prior visible craft/selection fixture is declared; no browser Mote kill or naturally earned blueprint is asserted.",
+  "strictProfileValid": true,
+  "wholeProfileEqualAfterKnownScoutSelection": true,
+  "currency": [
+    0,
+    0,
+    0
+  ],
+  "shipXp": [
+    60,
+    20,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "revision": 6,
+  "selectedShip": 0,
+  "storedMaterials": 0,
+  "lastRun": null
+}

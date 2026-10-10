@@ -1,0 +1,37 @@
+- generic "Galaxy Royale game universe"
+- status
+- generic: HAVEN COMMAND
+- heading "SETTINGS" [level=2]
+- paragraph: Tune your flight. Settings stay on this device.
+- navigation "Command pages":
+  - button "UPGRADES"
+  - button "HANGAR"
+  - button "CAMPAIGN"
+  - button "SETTINGS"
+  - button "JOURNAL"
+- text: Master volume
+- slider "Master volume": "0.65"
+- text: Music
+- slider "Music": "0.45"
+- text: Effects
+- slider "Effects": "0.75"
+- text: Camera shake
+- checkbox "Camera shake" [checked]
+- text: Reduced motion
+- checkbox "Reduced motion"
+- text: Reduced cosmic detail
+- checkbox "Reduced cosmic detail"
+- text: Dialogue voice
+- checkbox "Dialogue voice"
+- text: Voice volume
+- slider "Voice volume": "0.7"
+- text: Flight zoom
+- slider "Flight zoom": "1.6"
+- button "RETURN TO FLIGHT ↗":
+  - text: RETURN TO FLIGHT
+  - generic: ↗
+- button "Export save" [active]
+- button "Fullscreen"
+- button "Title screen"
+- generic: Import save
+- generic: Progress stays on this device.

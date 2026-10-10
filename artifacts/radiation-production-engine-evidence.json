@@ -1,0 +1,47 @@
+{
+  "captured_utc": "2026-10-10T20:07:51.072884+00:00",
+  "scope": "work-only native review; no production, WASM, browser, phone or human balance acceptance",
+  "candidate_version": 2,
+  "review_repair": 1,
+  "freeze_sha256": "8b2a1180863dfe9106576c5617a6fff4d2daaea898c98a774e7be8b854b260ed",
+  "toolchain": "rustc 1.97.0 (2d8144b78 2026-07-07)\nbinary: rustc\ncommit-hash: 2d8144b7880597b6e6d3dfd63a9a9efae3f533d3\ncommit-date: 2026-07-07\nhost: x86_64-pc-windows-msvc\nrelease: 1.97.0\nLLVM version: 22.1.6",
+  "owned_sha256": {
+    "art-probes.rs": "ba9ede1f6c32a191706b1999d52d283e0583999b7449140823925f04f95a3cef",
+    "prepare-probe.py": "33fc21603365b291c0185a5046e928a96b51816dd60dd43c687c809ebe3f20cb",
+    "build.ps1": "f2ab470934031d89e72ac2da92d4390a9216df4e8a5204ebf9d0f949059736c7",
+    "review-lib.rs": "0b0f433a60841600994351f6240567d4e46722738545fa28defb69c02d5a7a1e",
+    "runtime-copy.rs": "97d5872246b0d0e540703d20e6e72fd327bb1352c805177fb7da7476b87aab21",
+    "controller-copy.rs": "628fd764fa3ebc0674d117a7f2f07739196db476388ee3d61cef3e0c402c110d",
+    "engine-probes.exe": "22cd83f518f5b81ff573c21a409825608d6d02a5f52413caa5a8c8719e4af7bc",
+    "build-v2.log": "0f880df87e1e699337e011e57b2440b17242184ff413082372f784bc6edf6716",
+    "engine-proof-v2.log": "a77fbe3950728ae2d390be8c44f44a0fd8ef3aaea1bcaf1a800ad4b4c7327cf3",
+    "frozen-core-tests-v2.log": "0a14bd2ef5ceefc8ebcf489c5a28489e2f3ed56de63b5d63e47cdf1bc75f6003",
+    "fingerprints.json": "779fb3c0f44461f2e5e8b2aa948845b167d712e446f4fe35073d99039b96e2b1",
+    "REVIEW.md": "0234b2edb231e7fdcb8501f4dce8067d430cf9de37e0458bff3bf89b9331db55"
+  },
+  "linked_rlib_sha256": {
+    "engine_core-c6e44304da45d14c": "824a4777aa0599625808653ad1a4bb5e9fdba44861046f404dc39e8edefd4a01",
+    "hecs-07c4db6798a2045c": "14405311a695d50d646eb1fb4b7256a9fd81427a20c23044979435a23ad3c74a",
+    "glam-ea88bca6794ea652": "efa92622839e79ce3f6942063239c064021f52bb84a623314c22158ea5295785",
+    "serde-87e9527ea0c869bc": "9437d7a9d133aa5acbda8d389eefb0107bda512f4909ddb430ea97786bb4772a",
+    "serde_json-b89616ee5c7ce7b6": "ac6d753893d07f240a833b695ee248ce596adf1ea0ca10f303900b132af0b9cb"
+  },
+  "art_budget": {
+    "dimensions": [
+      40,
+      40
+    ],
+    "occupied_cells": 712,
+    "used_opaque_palette_colors": 11,
+    "emitter_cells": [
+      142,
+      143,
+      143
+    ],
+    "maximum_warning_cells_per_mote": 20,
+    "maximum_cells_per_intact_charging_mote": 732,
+    "hypothetical_48_mote_cell_total": 35136
+  },
+  "independent_tests_passed": 4,
+  "frozen_actual_core_tests_passed": 16
+}

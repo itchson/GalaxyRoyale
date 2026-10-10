@@ -1,0 +1,601 @@
+{
+  "recordedUtc": "2026-10-10T20:20:50.833Z",
+  "scope": "Read-only evidence/API/file review; no browser execution or broad tests. Saved records are bounded, contemporaneous observations.",
+  "cache": "galaxy-eaac3b23e213e59b",
+  "projectRevision": 233,
+  "projectUpdatedAt": "2026-10-10T20:20:29.739Z",
+  "completeDependencyOrCriteriaViolations": [],
+  "missingTaskEvidencePaths": [],
+  "strictProfileValid": true,
+  "wholeProfileEqualAfterKnownScoutSelection": true,
+  "currentPackagedAssetHashesEqual": true,
+  "currentInventoriedSourceHashesEqual": true,
+  "tasks": [
+    {
+      "id": "task-52a708c0",
+      "title": "Eight solo champion arena trials and distinct ship signatures",
+      "description": "Eight seeded solo champion trials have distinct hulls/signatures and single-claim patch/blueprint rewards. Native rules pass; a fresh packaged browser opened the five-page Atlas dialogue, saved a challenge, entered the real encounter and reloaded at Haven. All eight victories and combat/balance review remain pending.",
+      "department": "Gameplay",
+      "owner": "Gameplay / Producer",
+      "status": "review",
+      "priority": "normal",
+      "dependencies": [
+        "gameplay"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Native tests verify eight unique arenas, signatures, trial boundaries and one-time patch/blueprint rewards.",
+          "met": true
+        },
+        {
+          "text": "Browser play confirms challenge, victory, retreat, death/retry and persistence for each champion.",
+          "met": false
+        },
+        {
+          "text": "Balance/readability acceptance covers all eight encounters rather than only QA scene setup.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual source inspection",
+          "kind": "note",
+          "details": "Read campaign.rs and campaign_runtime.rs: CHAMPIONS[8], arena rules and finish_arena reward ownership are present; this note is not a test pass."
+        },
+        {
+          "label": "Current tests and real browser scope",
+          "kind": "note",
+          "path": "artifacts/browser-validation.json"
+        },
+        {
+          "label": "103 native tests",
+          "kind": "note",
+          "path": "artifacts/rust-tests.log"
+        },
+        {
+          "label": "58 shell regressions",
+          "kind": "note",
+          "path": "artifacts/browser-shell-tests.log"
+        }
+      ],
+      "blocker": "",
+      "revision": 3,
+      "createdAt": "2026-10-10T16:40:43.557Z",
+      "updatedAt": "2026-10-10T17:27:00.988Z"
+    },
+    {
+      "id": "task-57a3ed52",
+      "title": "Champion blueprints, dock crafting and ship selection",
+      "description": "All three bounded crafting/selection criteria are evidenced. Actual visible WebGL2 insufficient-material lock and WebGPU exact10points+6materials purchase pass; ownership/selection/independent per-ship XP survive WebGL2 reload with exact strict whole-profile equality. Blueprint and starting resources are declared imported fixtures; earned-blueprint/once-only logic has separate native evidence. This task remains Review because its eight-champion acceptance dependency remains Review; no natural8champion victory or browser ship-ability combat is asserted.",
+      "department": "Gameplay / UI",
+      "owner": "Gameplay / Producer",
+      "status": "review",
+      "priority": "normal",
+      "dependencies": [
+        "task-52a708c0",
+        "save"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Final crafting checks a valid earned blueprint, dock location, material/category costs and single purchase.",
+          "met": true
+        },
+        {
+          "text": "Owned selected ships retain their signature and progression after reload without duplicating rewards.",
+          "met": true
+        },
+        {
+          "text": "Browser hangar can craft/select with clear lock and insufficient-resource feedback.",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual integration under review",
+          "kind": "note",
+          "details": "Read campaignActions craft/select and Rust craft_ship/switch_ship; final material-stash changes and acceptance are pending."
+        },
+        {
+          "label": "Current tests and real browser scope",
+          "kind": "note",
+          "path": "artifacts/browser-validation.json"
+        },
+        {
+          "label": "103 native tests",
+          "kind": "note",
+          "path": "artifacts/rust-tests.log"
+        },
+        {
+          "label": "58 shell regressions",
+          "kind": "note",
+          "path": "artifacts/browser-shell-tests.log"
+        },
+        {
+          "label": "Actual normal visible hangar flow and declared fixture scope",
+          "kind": "note",
+          "path": "artifacts/hangar-browser-validation.md"
+        },
+        {
+          "label": "Exact purchase and renderer reload checkpoint",
+          "kind": "note",
+          "path": "artifacts/hangar-browser-retention.json"
+        },
+        {
+          "label": "Actual crafted and selected ship",
+          "kind": "note",
+          "path": "artifacts/hangar-crafted-selected-webgpu.jpg"
+        }
+      ],
+      "blocker": "",
+      "revision": 4,
+      "createdAt": "2026-10-10T16:40:43.573Z",
+      "updatedAt": "2026-10-10T20:18:30.650Z"
+    },
+    {
+      "id": "task-aaf77ab5",
+      "title": "Death report, Retry/title and safe menu transitions",
+      "description": "Death report, Retry/title, immediate dock-fire entry and mobile collapsed icons are implemented. Actual champion diagnostic death and Retry returned to Haven without an upgrade popup. Async stale-modal guards pass regressions. Complete banking/Title and physical/ordinary-browser fire acceptance remain pending.",
+      "department": "UI / Controls",
+      "owner": "Producer",
+      "status": "review",
+      "priority": "normal",
+      "dependencies": [
+        "web-shell",
+        "controls-qa"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Death report displays the real run result; Retry resumes at Haven and title stops simulation/input/audio.",
+          "met": false
+        },
+        {
+          "text": "Dock fire opens the dock menu without firing, and desktop pause/resume remains consistent.",
+          "met": false
+        },
+        {
+          "text": "Mobile collapsed icons open reachable settings/title actions and never leak pointer input into flight.",
+          "met": false
+        },
+        {
+          "text": "Late encounter saves and delayed drawer closure cannot resume flight after title/death/pause transitions.",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Read-only transition findings",
+          "kind": "note",
+          "details": "Production specialist reported beginEncounter save/flush stale continuation and console onClose stale resume flags to Producer. Fixes and regression tests have not yet been independently verified."
+        },
+        {
+          "label": "Current tests and real browser scope",
+          "kind": "note",
+          "path": "artifacts/browser-validation.json"
+        },
+        {
+          "label": "103 native tests",
+          "kind": "note",
+          "path": "artifacts/rust-tests.log"
+        },
+        {
+          "label": "58 shell regressions",
+          "kind": "note",
+          "path": "artifacts/browser-shell-tests.log"
+        }
+      ],
+      "blocker": "",
+      "revision": 3,
+      "createdAt": "2026-10-10T16:40:43.620Z",
+      "updatedAt": "2026-10-10T17:27:01.096Z"
+    },
+    {
+      "id": "task-e8684a94",
+      "title": "Radiation biome enemy: deterministic controller and pixel concept",
+      "description": "Bounded Radiation Mote production integration is accepted. Original40×40/712occupied-cell art, deterministic ordinary Radial Wastes Dart variant, live destructible emitters and shared projectile/reward paths are integrated. Independent reviews found and repaired shortened pulse timing and stress eligibility before acceptance. Sixteen durable actual-core regressions plus Engine/QA probes pass;217integratedRust/70shell/strictClippy/normaldualWASMbuild pass. Root observed body/rays, real wheel bounds and fixed UI on both normal renderers, smalllandscape and strict exported save. Full moving/crowded cue readability and human tuning remain separate active follow-up; physical devices, complete natural campaign and authenticated remote execution remain pending. No radiation hazard or new Mote audio is asserted.",
+      "department": "Gameplay / Art",
+      "owner": "/root/gameplay_design",
+      "status": "complete",
+      "priority": "normal",
+      "dependencies": [
+        "gameplay",
+        "engine"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Concrete native controller, original cell concept and meaningful deterministic phase/safety tests",
+          "met": true
+        },
+        {
+          "text": "Reviewed integration contract preserving standard progression, sanctuary and cap behavior",
+          "met": true
+        },
+        {
+          "text": "Production integration and actual browser presentation evidence",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual isolated controller/art/test integration contract",
+          "kind": "note",
+          "path": "artifacts/radiation-enemy-prototype.md"
+        },
+        {
+          "label": "Independent native/controller/occupied-cell review",
+          "kind": "note",
+          "path": "artifacts/radiation-enemy-engine-review.md"
+        },
+        {
+          "label": "Current integrated normal-browser evidence and pending gates",
+          "kind": "note",
+          "path": "artifacts/mote-browser-validation.md"
+        },
+        {
+          "label": "Actual217Rust production regressions",
+          "kind": "note",
+          "path": "artifacts/mote-integration-rust-tests.log"
+        },
+        {
+          "label": "Independent source composition review",
+          "kind": "note",
+          "path": "artifacts/mote-composition-review.md"
+        },
+        {
+          "label": "Independent exact18asset normal-package review",
+          "kind": "note",
+          "path": "artifacts/mote-packaging-review.md"
+        },
+        {
+          "label": "Actual normal dual-WASM/game/studio build",
+          "kind": "note",
+          "path": "artifacts/mote-normal-build.log"
+        },
+        {
+          "label": "Actual WebGL2 high-zoom body and rays",
+          "kind": "note",
+          "path": "artifacts/mote-max-zoom-webgl2.jpg"
+        },
+        {
+          "label": "Actual WebGPU small-landscape presentation",
+          "kind": "note",
+          "path": "artifacts/mote-small-landscape-webgpu.jpg"
+        },
+        {
+          "label": "Actual exported strict profile retains declared progression",
+          "kind": "note",
+          "path": "artifacts/mote-browser-retention.json"
+        }
+      ],
+      "blocker": "",
+      "revision": 4,
+      "createdAt": "2026-10-10T18:51:54.723Z",
+      "updatedAt": "2026-10-10T20:18:30.681Z"
+    },
+    {
+      "id": "task-0851af86",
+      "title": "QA forced death: prevent eligible regeneration from reviving the fixture",
+      "description": "Reviewed shared early/final death helper is integrated with eight durable actual Game tests. Forced already-zero hull cannot be revived by R5 or Sovereign healing; natural lethal ordering, banking and prior report are preserved. Actual normal WebGPU/WebGL2 forced death/report/Retry, null/history captions, WebGL2 real lethal combat and exact earned checkpoint reload pass. Small640×360 report fits. The combat setup/imported progression is declared; this is bounded regression acceptance, not a full natural campaign. The current combined package also passes217Rust/70shell/strict native and both WASM checks.",
+      "department": "Engine / QA",
+      "owner": "Engine specialist / Independent QA / Producer",
+      "status": "complete",
+      "priority": "normal",
+      "dependencies": [
+        "gameplay"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Forced zero hull with eligible R5 regeneration or Sovereign healing emits one death; finishes a current run once without inventing an unplayed run.",
+          "met": true
+        },
+        {
+          "text": "Natural lethal damage, retained progression, banking and Haven/retry semantics remain correct in actual native simulation.",
+          "met": true
+        },
+        {
+          "text": "Reviewed production integration, meaningful native regressions and actual browser death/report/retry.",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual independent finding and disclosed prior fixture limitation",
+          "kind": "note",
+          "path": "artifacts/weapon-cadence-qa-review.md"
+        },
+        {
+          "label": "Frozen actual-core candidate and negative controls",
+          "kind": "note",
+          "path": "artifacts/diagnostic-death-handoff.md"
+        },
+        {
+          "label": "Independent public-Game candidate review",
+          "kind": "note",
+          "path": "artifacts/diagnostic-death-qa-review.md"
+        },
+        {
+          "label": "Independent actual native measurements",
+          "kind": "note",
+          "path": "artifacts/diagnostic-death-qa-results.json"
+        },
+        {
+          "label": "Integrated201 Rust regressions",
+          "kind": "note",
+          "path": "artifacts/death-integration-rust-tests.log"
+        },
+        {
+          "label": "Integrated strict native Clippy",
+          "kind": "note",
+          "path": "artifacts/death-integration-clippy.log"
+        },
+        {
+          "label": "Normal dual-WASM and web/studio build",
+          "kind": "note",
+          "path": "artifacts/death-integration-build.log"
+        },
+        {
+          "label": "Actual normal death/report/retry and truthful history",
+          "kind": "note",
+          "path": "artifacts/death-integration-validation.md"
+        },
+        {
+          "label": "Actual earned run checkpoint retained exactly across reload",
+          "kind": "note",
+          "path": "artifacts/death-natural-browser-retention.json"
+        },
+        {
+          "label": "Small-landscape death report",
+          "kind": "note",
+          "path": "artifacts/death-small-landscape-webgl2.jpg"
+        }
+      ],
+      "blocker": "",
+      "revision": 3,
+      "createdAt": "2026-10-10T19:40:44.436Z",
+      "updatedAt": "2026-10-10T20:18:30.622Z"
+    },
+    {
+      "id": "task-b0a59d63",
+      "title": "Mote moving-player warning admission and encounter pacing",
+      "description": "Engine specialist is investigating accepted V2 camera-aware admission without changing production. Stationary supported extents fire, but the declared8-second full-joystick reversal at maxzoom yields zero emitting ticks at60Hz. Establish whether interrupted charges are fair, then review the smallest evidence-backed tuning experiment. Actual warning/HUD/touch/crowded-impact presentation and human evasion remain pending.",
+      "department": "Engine / Gameplay",
+      "owner": "/root/engine_research",
+      "status": "active",
+      "priority": "normal",
+      "dependencies": [
+        "task-e8684a94"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Independent actual-core moving-camera analysis and bounded reproducible experiment if warranted",
+          "met": false
+        },
+        {
+          "text": "Reviewed production tuning with actual normal browser warning and moving-player acceptance",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Current admission limitation and honest browser scope",
+          "kind": "note",
+          "path": "artifacts/mote-browser-validation.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-10T20:18:30.691Z",
+      "updatedAt": "2026-10-10T20:18:30.691Z"
+    },
+    {
+      "id": "task-4a0debda",
+      "title": "Authored Radiation Mote charge and pulse audio",
+      "description": "Gameplay specialist owns a separate work-only authored WebAudio/GameEvent candidate. Short once-per-phase charge and once-per-actually-emitted-actor pulse cues must retain simulation timing, shared projectile caps, bounded16voice effects bus, mute/settings and playback recovery. Root will integrate only after independent review; current accepted package has no new Mote sound events.",
+      "department": "Gameplay / Audio",
+      "owner": "/root/gameplay_design",
+      "status": "active",
+      "priority": "normal",
+      "dependencies": [
+        "task-e8684a94",
+        "audio"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Concrete bounded SFX/event patch with meaningful actual event/cap tests and independent review",
+          "met": false
+        },
+        {
+          "text": "Production integration, normal package and actual listening/mute/recovery validation",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Accepted current game package and separate-audio scope",
+          "kind": "note",
+          "path": "artifacts/mote-browser-validation.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-10T20:18:30.712Z",
+      "updatedAt": "2026-10-10T20:18:30.712Z"
+    }
+  ],
+  "lastRecordedRuns": [
+    {
+      "id": "run-2e243433",
+      "title": "Producer / Integrator · running",
+      "agentId": "/root",
+      "agentLabel": "Producer / Integrator",
+      "state": "running",
+      "observedAt": "2026-10-10T20:18:30.737Z",
+      "taskIds": [
+        "slice-review"
+      ],
+      "summary": "Running final integrated evidence/API/source preparation and private publication after actual normal browser checks; package frozen under galaxy-eaac3b23e213e59b.",
+      "evidence": [
+        {
+          "label": "Current integrated normal-browser evidence and pending gates",
+          "kind": "note",
+          "path": "artifacts/mote-browser-validation.md"
+        },
+        {
+          "label": "Actual217Rust production regressions",
+          "kind": "note",
+          "path": "artifacts/mote-integration-rust-tests.log"
+        },
+        {
+          "label": "Independent source composition review",
+          "kind": "note",
+          "path": "artifacts/mote-composition-review.md"
+        },
+        {
+          "label": "Independent exact18asset normal-package review",
+          "kind": "note",
+          "path": "artifacts/mote-packaging-review.md"
+        },
+        {
+          "label": "Actual normal dual-WASM/game/studio build",
+          "kind": "note",
+          "path": "artifacts/mote-normal-build.log"
+        },
+        {
+          "label": "Actual WebGL2 high-zoom body and rays",
+          "kind": "note",
+          "path": "artifacts/mote-max-zoom-webgl2.jpg"
+        },
+        {
+          "label": "Actual WebGPU small-landscape presentation",
+          "kind": "note",
+          "path": "artifacts/mote-small-landscape-webgpu.jpg"
+        },
+        {
+          "label": "Actual exported strict profile retains declared progression",
+          "kind": "note",
+          "path": "artifacts/mote-browser-retention.json"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual integrated native/build and normal-browser evidence with independent specialist review",
+      "createdAt": "2026-10-10T20:18:30.745Z"
+    },
+    {
+      "id": "run-d1e970ef",
+      "title": "Engine specialist · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Engine specialist",
+      "state": "running",
+      "observedAt": "2026-10-10T20:18:30.737Z",
+      "taskIds": [
+        "task-b0a59d63"
+      ],
+      "summary": "Running work-only moving-player/highzoom admission investigation after frozen composition acceptance; no production edits.",
+      "evidence": [
+        {
+          "label": "Completed immutable composition review",
+          "kind": "note",
+          "path": "work/mote-integration-review/REVIEW.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual integrated native/build and normal-browser evidence with independent specialist review",
+      "createdAt": "2026-10-10T20:18:30.761Z"
+    },
+    {
+      "id": "run-9d710264",
+      "title": "Gameplay / Audio specialist · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Gameplay / Audio specialist",
+      "state": "running",
+      "observedAt": "2026-10-10T20:18:30.737Z",
+      "taskIds": [
+        "task-4a0debda"
+      ],
+      "summary": "Running separate work-only Mote charge/pulse event and original procedural SFX candidate; no current package change.",
+      "evidence": [
+        {
+          "label": "Actual bounded assignment",
+          "kind": "note",
+          "details": "Observed native agent running work/mote-audio-candidate; once-per-phase charge and once-per-created-actor-pulse event contract communicated directly."
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual integrated native/build and normal-browser evidence with independent specialist review",
+      "createdAt": "2026-10-10T20:18:30.774Z"
+    },
+    {
+      "id": "run-aac13c47",
+      "title": "Production specialist / Independent QA · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "Production specialist / Independent QA",
+      "state": "running",
+      "observedAt": "2026-10-10T20:18:30.737Z",
+      "taskIds": [
+        "slice-review"
+      ],
+      "summary": "Running read-only final integration/browser/API evidence audit after completed package acceptance. Next separate audio review is queued.",
+      "evidence": [
+        {
+          "label": "Completed immutable package acceptance",
+          "kind": "note",
+          "path": "work/mote-release-qa/REVIEW.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual integrated native/build and normal-browser evidence with independent specialist review",
+      "createdAt": "2026-10-10T20:18:30.782Z"
+    }
+  ],
+  "files": {
+    "artifacts/mote-browser-validation.md": {
+      "sha256": "853f6de1fcbcbe1d2fc2d64309658f21328d3c2fe0adaeb76b5624124c6ed386",
+      "bytes": 5058,
+      "modifiedUtc": "2026-10-10T20:17:36.880Z"
+    },
+    "artifacts/mote-browser-retention.json": {
+      "sha256": "4a738c0546c3e9fd81df7eef77200581e61107bd50af4b1b492660843f4cfa42",
+      "bytes": 514,
+      "modifiedUtc": "2026-10-10T20:17:37.343Z"
+    },
+    "artifacts/mote-browser-profile.json": {
+      "sha256": "363ec7f9494e0a6208fd89ead0c443e217354f7451b00f3e2dc7e600db4e7023",
+      "bytes": 1463,
+      "modifiedUtc": "2026-10-10T20:16:26.192Z"
+    },
+    "artifacts/mote-package-evidence.json": {
+      "sha256": "975d448b2d002b28c3df1c26ab4372cd4d5103b1d61a2ec66a9f54c2538579e2",
+      "bytes": 30706,
+      "modifiedUtc": "2026-10-10T20:16:34.059Z"
+    },
+    "artifacts/mote-packaging-review.md": {
+      "sha256": "914a2159f9c0d1a3814711bc1385e35c649dc0f276413c5d3abb1b3455060e01",
+      "bytes": 9221,
+      "modifiedUtc": "2026-10-10T20:16:34.106Z"
+    },
+    "artifacts/mote-composition-review.md": {
+      "sha256": "e023c6317a9278577841a6aa73ca8739595e6ad1dcf0bd7d4573cbc853170fe9",
+      "bytes": 5823,
+      "modifiedUtc": "2026-10-10T20:10:15.763Z"
+    },
+    "artifacts/death-integration-validation.md": {
+      "sha256": "1c8675ec15edff8b657e03b4bae69e897756f84b20eee4e322fab5e479601f46",
+      "bytes": 3564,
+      "modifiedUtc": "2026-10-10T20:05:28.917Z"
+    },
+    "artifacts/hangar-browser-validation.md": {
+      "sha256": "44236118c264b43f48fd95c4be903160dd3cf252c212cb56d2fb2a9e696cdb0f",
+      "bytes": 2235,
+      "modifiedUtc": "2026-10-10T20:05:28.917Z"
+    },
+    "artifacts/mote-max-zoom-webgl2.jpg": {
+      "sha256": "b5c31e3619ca9f41fcd3de2df7a779cfe1cbbf3a5a7d943aa5efb5c57d325e44",
+      "bytes": 46924,
+      "modifiedUtc": "2026-10-10T20:14:14.469Z"
+    },
+    "artifacts/mote-small-landscape-webgpu.jpg": {
+      "sha256": "8ee1c15e1b30678dc1d7adfbe1268474ea33ffb18d36c9d3684b51001468575f",
+      "bytes": 18297,
+      "modifiedUtc": "2026-10-10T20:15:42.883Z"
+    }
+  }
+}

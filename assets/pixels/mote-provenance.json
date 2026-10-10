@@ -1,0 +1,16 @@
+{
+  "method": "original authored geometry and palette; no AI image/model",
+  "runtime": "indexed cells only; preview is not loaded",
+  "size": [
+    40,
+    40
+  ],
+  "occupied": 712,
+  "defined_opaque_palette_colors": 15,
+  "used_opaque_cell_colors": 11,
+  "emitter_cells": [
+    142,
+    143,
+    143
+  ]
+}

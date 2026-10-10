@@ -4,6 +4,7 @@ mod boss_assets;
 pub mod bosses;
 pub mod campaign;
 mod pixel_assets;
+mod radiation_enemies;
 pub use campaign::RunSummary;
 mod campaign_runtime;
 #[cfg(test)]
@@ -1008,6 +1009,7 @@ impl Game {
         self.update_spawns(position, dt);
         self.update_bosses(position, dt);
         self.update_biome_enemies(position, dt);
+        self.update_motes(position, dt);
         self.update_enemies(position, dt);
         self.update_homing(dt);
         self.update_segments(dt);
@@ -1327,6 +1329,7 @@ impl Game {
             if let Some(spawn) = self.spawn_location(position, distance) {
                 let entity = self.spawn_enemy(family, false, spawn, tier);
                 self.maybe_riveter(entity, regions::at(self.profile.seed, spawn));
+                self.maybe_mote(entity, regions::at(self.profile.seed, spawn));
             }
         }
         if self.active_boss.is_none()
@@ -1442,18 +1445,21 @@ impl Game {
         let pursuit_range = self.viewport.length().max(1050.0);
         let mut shots = Vec::new();
         let mut remove = Vec::new();
-        for (entity, (motion, actor, brain, champion, boss, riveter)) in self.world.query_mut::<(
-            Entity,
-            (
-                &mut Motion,
-                &Actor,
-                &mut Brain,
-                Option<&ChampionFighter>,
-                Option<&BossEncounter>,
-                Option<&biome_enemies::Riveter>,
-            ),
-        )>() {
-            if champion.is_some() || boss.is_some() || riveter.is_some() {
+        for (entity, (motion, actor, brain, champion, boss, riveter, mote)) in
+            self.world.query_mut::<(
+                Entity,
+                (
+                    &mut Motion,
+                    &Actor,
+                    &mut Brain,
+                    Option<&ChampionFighter>,
+                    Option<&BossEncounter>,
+                    Option<&biome_enemies::Riveter>,
+                    Option<&radiation_enemies::Mote>,
+                ),
+            )>()
+        {
+            if champion.is_some() || boss.is_some() || riveter.is_some() || mote.is_some() {
                 continue;
             }
             brain.age += dt;
@@ -2890,7 +2896,7 @@ impl Game {
                 );
             }
         }
-        for (_, (motion, actor, body, boss, riveter)) in self
+        for (_, (motion, actor, body, boss, riveter, mote)) in self
             .world
             .query::<(
                 Entity,
@@ -2900,6 +2906,7 @@ impl Game {
                     &PixelBody,
                     Option<&BossEncounter>,
                     Option<&biome_enemies::Riveter>,
+                    Option<&radiation_enemies::Mote>,
                 ),
             )>()
             .iter()
@@ -2907,7 +2914,12 @@ impl Game {
             let mut m = *motion;
             m.position = motion.previous.lerp(motion.position, alpha);
             m.heading = interpolate_heading(motion.previous_heading, motion.heading, alpha);
-            if !self.visible(m.position, actor.radius + 10.0) {
+            let cue_extent = if mote.is_some() {
+                radiation_enemies::WARNING_REACH + 2.0
+            } else {
+                10.0
+            };
+            if !self.visible(m.position, actor.radius + cue_extent) {
                 continue;
             }
             if actor.kind == Kind::Player
@@ -2922,6 +2934,10 @@ impl Game {
                 && let Kind::Boss(family) = actor.kind
             {
                 self.draw_boss(frame, body, m, *actor, *boss, family);
+                continue;
+            }
+            if let Some(mote) = mote {
+                self.draw_mote(frame, body, m, *actor, *mote);
                 continue;
             }
             if let Some(riveter) = riveter {
@@ -3253,6 +3269,9 @@ impl Game {
 
     /// Explicit deterministic QA scenes. This never awards inventory or upgrades.
     pub fn diagnostic(&mut self, command: &str) {
+        if self.mote_diagnostic(command) {
+            return;
+        }
         if self.biome_enemy_diagnostic(command) {
             return;
         }

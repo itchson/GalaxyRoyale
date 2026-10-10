@@ -1,0 +1,43 @@
+{
+  "captured_utc": "2026-10-10T20:10:20.558834+00:00",
+  "scope": "read-only production composition review; not independent WASM/browser/phone acceptance",
+  "production_sha256": {
+    "crates/game_core/src/lib.rs": "ec2b3c897d4b5dc1ec70891d383f19a008fc0425a5dedd691c298cb41ddd3cea",
+    "crates/game_core/src/radiation_enemies.rs": "7991f3fd929230c8b6b424a746440251d18ddff589c2a3a996744ccd91168b6e",
+    "crates/game_core/src/mote_controller.rs": "53134b719dd2fb361cc5feb7fbbc020a3b446458605f4096b175d55e64fe8109",
+    "crates/game_core/src/mote_art.rs": "229916ac25331a0dc59add3a8c8a49274d2f4a3e01520ffa14a17d8b8965806f",
+    "crates/game_core/src/radiation_enemy_tests.rs": "6109e51eee678f16950414935a284f1a7a7cb1237708b0a94b80455b18fb4201",
+    "assets/pixels/mote-atlas.json": "004c24eefeccbe25d836dd8ad1ff00346f86879492c2bff3fe828721dc838714",
+    "assets/pixels/mote-source.py": "acec75b83af1f304db1c99637977f21ac4263f9c6dd63163662f540a117f66a6",
+    "assets/pixels/mote-provenance.json": "c540cb0b68877a9709f87227f33dbe846e00dcd11a5a46007de2a94ef0a25b59",
+    "assets/pixels/mote-preview.png": "0f153e8b90bcf52a7a407f6dc04ccae8f199e41d76e46bbfc061afc03dae8b99",
+    "apps/game/src/main.ts": "386fbd1520ab3a9d32c14703cb9aded7d7008b9451102f503ebfb21dd84169c1",
+    "Cargo.lock": "df228d9f83ef57321dcb768b79d948e9aa24456c0952e971fc8d6fcd7e806bdd",
+    "crates/game_core/src/diagnostic_death_tests.rs": "5b3c83bd42ba81905b7de90803eb94a31538190348b9500d9ac70eb3ed4a74ca"
+  },
+  "accepted_candidate_freeze_sha256": "8b2a1180863dfe9106576c5617a6fff4d2daaea898c98a774e7be8b854b260ed",
+  "accepted_candidate_production_base": "0a574a35c9d23f955fff05246da2cf4bf9a8065f5db58c63c365124f982337e6",
+  "unchanged_linked_module_sha256": {
+    "crates/game_core/src/biome_enemies.rs": "43b3736cb8da31872a62ac90f0f2b54e78f54ca7ee2f07ef622a45a7241e5cc8",
+    "crates/game_core/src/boss_assets.rs": "6f243e4211c7a40e0feaf35140b8b0300df65d061e2657d6490b90a6ef334699",
+    "crates/game_core/src/bosses.rs": "d98e4f74ff7e1a225a5ca9d6178164853ca65057fadf5d872706ab89523f2ebc",
+    "crates/game_core/src/campaign.rs": "ce3701246d366042841cca3a61ce1c83ea15bbfcd312a05fe5d6d7f991d0b5bc",
+    "crates/game_core/src/campaign_runtime.rs": "beaa27a19af8c62a23df0b6d6f820e924af51ed40f1d1e78a5cac25f8d7a4e58",
+    "crates/game_core/src/pixel_assets.rs": "2b3a013aedb791af8161e61e0bf85b045d2ebdad5eaaa7e2f648d9451bff00ec",
+    "crates/game_core/src/regions.rs": "6d76c0f42e49c1a1adfd55d144e27536829c83e08976a80d0b0517ed8c977c1f",
+    "crates/game_core/src/weapon_cadence_tests.rs": "f26fa8fd4e08412b91dcafc15bd5379eda67d4492c636094a7b562c0093c1150"
+  },
+  "inspected_root_test_log": {
+    "path": "artifacts/mote-integration-rust-tests.log",
+    "sha256": "6d78ddc344817640c06b3231e09578b6ba5fafefe596836de34ecb0b94c882cf",
+    "execution_owner": "root",
+    "inspected_pass_count": 217
+  },
+  "diff_sha256": {
+    "candidate-lib.rs.diff": "016fec476b80d209e61ca81ef9ccd01099ede3308aa757eb2e594c67bd9e5138",
+    "radiation_enemies.rs.diff": "bfdd8b53e0e5d5b063b709b0ea1340406b9af5a9b545639fc5cc0c45b8e1d941",
+    "mote_controller.rs.diff": "d1de29ed1baaadc08ae53e2a459f1c75e961e62b75526da3f53c8ed8b3334964",
+    "mote_art.rs.diff": "6f04f0ffd281c67733c6408c3abb82a345547d45fb656c0448760c993a2a3b39",
+    "radiation_enemy_tests.rs.diff": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "production_base": "0a574a35c9d23f955fff05246da2cf4bf9a8065f5db58c63c365124f982337e6",
+  "candidate_version": 2,
+  "review_repair": 1,
+  "pre_repair_timing_snapshot": "v2-timing/frozen-hashes.json; timing remains unchanged, added explicit stress exclusion",
+  "previous_version": "v1/frozen-hashes.json; original sources/library/executable/evidence preserved",
+  "baseline_note": "Pre shared early-death helper. Root changes to lib.rs are intentionally not rebased into this candidate.",
+  "candidate_files": {
+    "candidate-lib.rs": "f65a4a4ea80126325ff88343a65f45a011dd368cb9d656b02a72b35ce2151164",
+    "radiation_enemies.rs": "38150fa390c4e9ebee7bc88f56bab9c0b61663cf77597aef81479d860620f44f",
+    "mote_controller.rs": "c443549dedf4d2bf71316533b7e04a9d8ed6e59fff5193acd9f659c5acd0b130",
+    "mote_art.rs": "a50f8c634a6a27dcc942c0c462ad13a804f7b0113c2de0d1a3578b929eae4b6f",
+    "radiation_enemy_tests.rs": "6109e51eee678f16950414935a284f1a7a7cb1237708b0a94b80455b18fb4201",
+    "assets/mote-atlas.json": "004c24eefeccbe25d836dd8ad1ff00346f86879492c2bff3fe828721dc838714",
+    "assets/mote-provenance.json": "c540cb0b68877a9709f87227f33dbe846e00dcd11a5a46007de2a94ef0a25b59",
+    "assets/mote-source.py": "acec75b83af1f304db1c99637977f21ac4263f9c6dd63163662f540a117f66a6",
+    "integration.patch": "5ee0770b3c11b8c5b0ae9c82e5cc83db84989642f154cccf5de0f49a630b1beb",
+    "libgame_core_mote_candidate.rlib": "a46a1821641aaa1c68deb7eeb4805838129abf717bce2a863d3c04dadb6bdcdd",
+    "mote-tests.exe": "2cffdeb638726852897e7748813c035bbf21db4233490151a5dabed71be49939",
+    "native-proof.log": "c036b7d06a787d34dc7e7f3b31c1812ddcb05aaabe95b4a9ed9e213a74b76fc5",
+    "viewport-proof.json": "1cfde21a6321595c7275cf25994623454595c01c09ca34c46ea1248ae907c7c4",
+    "timing-proof.json": "3feda316cc4098c37675040bf5078e88f355be835d750df0c648df993f5beca1"
+  },
+  "linked_inputs": {
+    "crates/game_core/src/biome_enemies.rs": "43b3736cb8da31872a62ac90f0f2b54e78f54ca7ee2f07ef622a45a7241e5cc8",
+    "crates/game_core/src/boss_assets.rs": "6f243e4211c7a40e0feaf35140b8b0300df65d061e2657d6490b90a6ef334699",
+    "crates/game_core/src/bosses.rs": "d98e4f74ff7e1a225a5ca9d6178164853ca65057fadf5d872706ab89523f2ebc",
+    "crates/game_core/src/campaign.rs": "ce3701246d366042841cca3a61ce1c83ea15bbfcd312a05fe5d6d7f991d0b5bc",
+    "crates/game_core/src/campaign_runtime.rs": "beaa27a19af8c62a23df0b6d6f820e924af51ed40f1d1e78a5cac25f8d7a4e58",
+    "crates/game_core/src/lib.rs": "0a574a35c9d23f955fff05246da2cf4bf9a8065f5db58c63c365124f982337e6",
+    "crates/game_core/src/pixel_assets.rs": "2b3a013aedb791af8161e61e0bf85b045d2ebdad5eaaa7e2f648d9451bff00ec",
+    "crates/game_core/src/regions.rs": "6d76c0f42e49c1a1adfd55d144e27536829c83e08976a80d0b0517ed8c977c1f",
+    "crates/game_core/src/weapon_cadence_tests.rs": "f26fa8fd4e08412b91dcafc15bd5379eda67d4492c636094a7b562c0093c1150"
+  }
+}

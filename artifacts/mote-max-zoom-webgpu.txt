@@ -1,0 +1,28 @@
+- generic "Galaxy Royale game universe"
+- status
+- dialog "GALAXY ROYALE // CONSOLE":
+  - heading "GALAXY ROYALE // CONSOLE" [level=2]
+  - paragraph: "HELP / STATS / SCENE <NAME> / CLEAR / ` CLOSE"
+  - log "Console output":
+    - paragraph: "> scene biome-mote"
+    - paragraph: SCENE BIOME-MOTE / ready. Close console to simulate.
+    - paragraph: "> stats"
+    - paragraph: WEBGPU / 0 FPS / p95 0.00 ms
+    - paragraph: 11732 quads / 7 entities / 0 particles
+    - paragraph: POSITION 2100.0, 2100.0
+    - paragraph: Radial Wastes / Outer reach · Tier 1 / danger 1
+    - paragraph: HULL 100/100 / SHIELD 0
+    - paragraph: ZOOM 0.60 / WORLD 888 x 500 / UI 533 x 300
+    - paragraph: SHIP LV 3 / XP 60 / CARGO 0/16
+    - paragraph: LAST BOSS UI NONE
+    - paragraph: "> stats"
+    - paragraph: WEBGPU / 240 FPS / p95 4.30 ms
+    - paragraph: 4852 quads / 19 entities / 0 particles
+    - paragraph: POSITION 2100.0, 2100.0
+    - paragraph: Radial Wastes / Outer reach · Tier 1 / danger 1
+    - paragraph: HULL 100/100 / SHIELD 0
+    - paragraph: ZOOM 1.60 / WORLD 333 x 188 / UI 533 x 300
+    - paragraph: SHIP LV 3 / XP 60 / CARGO 0/16
+    - paragraph: LAST BOSS UI NONE
+  - textbox "Console command" [active]:
+    - /placeholder: ENTER COMMAND

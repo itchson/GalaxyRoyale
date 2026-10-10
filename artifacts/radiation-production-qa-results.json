@@ -1,0 +1,115 @@
+{
+  "recorded_utc": "2026-10-10T20:06:51.776Z",
+  "scope": "Reviewer-owned actual-core native candidate tests and current TS SaveStore with fake IndexedDB; no merged production/browser/device execution",
+  "status": "accepted final frozen review repair for bounded integration",
+  "actual_core_tests": {
+    "passed": 8,
+    "failed": 0,
+    "existing_filtered": 98
+  },
+  "candidate_freeze_sha256": "8b2a1180863dfe9106576c5617a6fff4d2daaea898c98a774e7be8b854b260ed",
+  "baseline_core_sha256": "0a574a35c9d23f955fff05246da2cf4bf9a8065f5db58c63c365124f982337e6",
+  "baseline_note": "Pre shared early-death helper. Root changes to lib.rs are intentionally not rebased into this candidate.",
+  "cadence": {
+    "charge_setup_tick": 44,
+    "last_old_ray_expired_tick": 327,
+    "next_charge_tick": 361,
+    "pulses": [
+      {
+        "absolute_gap_angles": [
+          160.00001525878906,
+          79.99999237060547,
+          160.00001525878906,
+          80,
+          119.99999237060547,
+          120.00001525878906
+        ],
+        "rays": 6,
+        "tick_from_charge": 66
+      },
+      {
+        "absolute_gap_angles": [
+          160.00001525878906,
+          160.00001525878906,
+          119.99999237060547,
+          80,
+          79.99999237060547,
+          120.00001525878906
+        ],
+        "rays": 6,
+        "tick_from_charge": 87
+      }
+    ],
+    "recovery_tick": 96
+  },
+  "actual_ordinary_reward_observations": [
+    {
+      "actual_projectile_kill_tick": 21,
+      "bounty_progress": 1,
+      "defeat": 1,
+      "kills": [
+        23,
+        0,
+        0
+      ],
+      "pending": [
+        false,
+        false,
+        false
+      ],
+      "xp": 1325
+    },
+    {
+      "actual_projectile_kill_tick": 24,
+      "bounty_progress": 2,
+      "defeat": 2,
+      "kills": [
+        24,
+        0,
+        0
+      ],
+      "pending": [
+        true,
+        false,
+        false
+      ],
+      "xp": 1330
+    }
+  ],
+  "actual_save_boundary": {
+    "scope": "Actual isolated Rust ordinary-Mote reward checkpoint through current TypeScript SaveStore; fake IndexedDB, no browser/device execution",
+    "validProfile": true,
+    "normalizedExactly": true,
+    "exactPersistedReload": true,
+    "equalRevisionDuplicateIgnored": true,
+    "retained": {
+      "revision": 8,
+      "kills": [
+        24,
+        0,
+        0
+      ],
+      "xp": 1330,
+      "pending": [
+        true,
+        false,
+        false
+      ],
+      "currency": [
+        7,
+        8,
+        9
+      ],
+      "bountyProgress": 2
+    }
+  },
+  "repaired_negative_evidence": [
+    "V1 first/second pulses at charge67/87, 20 rather than21 ticks apart",
+    "V1 actual low-count stress-mode spawn installed a Mote at tick1/family0"
+  ],
+  "limits": [
+    "merged early-death helper not included",
+    "normal native/WASM build and visible GPU acceptance root-owned",
+    "natural human progression and physical-phone input/lifecycle/readability/FPS/soak pending"
+  ]
+}
