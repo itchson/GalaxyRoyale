@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 253,
+  "revision": 257,
   "name": "Galaxy Royale",
   "phase": "Foundation → playable vertical slice",
-  "updatedAt": "2026-10-10T20:31:46.284Z",
+  "updatedAt": "2026-10-10T20:37:01.708Z",
   "tasks": [
     {
       "id": "studio",
@@ -2608,7 +2608,7 @@
     {
       "id": "task-59dfc802",
       "title": "Radial Wastes distant pixel planet and gaseous layers",
-      "description": "Original Isotope Scar candidate is frozen only in work/radiation-background-art. Author reports4,854 full and1,411 reduced actual occupied quads, nested affine objects, whole-group budget preflight, deterministic drift/shimmer and Reduced Motion handling. Six native tests, strict Clippy and extracted zoom previews passed in the owned candidate. Engine and QA are independently reviewing the exact freeze now. No production integration, browser visual acceptance or radiation hazard is asserted.",
+      "description": "Original Isotope Scar packed-cell candidate is independently accepted for bounded future integration. Author six tests, Engine eleven baseline/candidate-linked checks plus162 far/reflected/zoom packets, and QA four public-API boundary tests plus twelve byte-identical extracted frames pass. Full4,854/reduced1,411 occupied quads, shared-budget atomic admission, deterministic cosmetic drift/shimmer and Reduced Motion are preserved. Current published5739067 source is unchanged. Root production integration, natural seeded visibility/priority and actual both-renderer threat contrast/performance remain pending.",
       "department": "Art / Engine",
       "owner": "Gameplay / Engine / Independent QA",
       "status": "review",
@@ -2620,7 +2620,7 @@
       "acceptanceCriteria": [
         {
           "text": "Original engine-compatible detailed cell art, provenance/preview and actual transform/budget extraction evidence",
-          "met": false
+          "met": true
         },
         {
           "text": "Independent review, production integration and actual zoom/bothrenderer presentation",
@@ -2642,12 +2642,22 @@
           "label": "Actual extracted candidate zoom preview",
           "kind": "note",
           "path": "work/radiation-background-art/extracted-zoom-preview.png"
+        },
+        {
+          "label": "Independent actual-engine frozen background review",
+          "kind": "note",
+          "path": "artifacts/isotope-scar-engine-review.md"
+        },
+        {
+          "label": "Independent actual packet/budget QA",
+          "kind": "note",
+          "path": "artifacts/isotope-scar-qa-review.md"
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 3,
       "createdAt": "2026-10-10T20:21:08.517Z",
-      "updatedAt": "2026-10-10T20:30:46.628Z"
+      "updatedAt": "2026-10-10T20:37:01.665Z"
     },
     {
       "id": "task-403cf3c4",
@@ -3166,6 +3176,23 @@
       ],
       "taskIds": [
         "slice-review"
+      ]
+    },
+    {
+      "id": "review-41c20db5",
+      "title": "Detailed distant Isotope Scar candidate: independent reviews accepted",
+      "body": "Actual asynchronous collaboration clarified that region6,000/3,000 budgets include earlier scenery and gas800/400 reserves, while affine extraction counts every occupied cell. Gameplay authored the original frozen4,854/1,411 motif and atomic group preflight. Engine verified tiny local spacing through162 real far/reflected/zoom packets and eleven native checks; QA independently exercised four shared-budget/batch/reduced-motion public tests and reran twelve exact extraction frames. Candidate is accepted for bounded integration only. Natural seeded visibility/earlier-layer omission, GPU contrast/performance and phones remain pending. Current private5739067 package is unchanged.",
+      "author": "Producer",
+      "source": "Actual independently accepted frozen background candidate and observed next specialist assignments",
+      "createdAt": "2026-10-10T20:37:01.680Z",
+      "participants": [
+        "Gameplay / Art specialist",
+        "Engine specialist",
+        "Production specialist / Independent QA",
+        "Producer / Integrator"
+      ],
+      "taskIds": [
+        "task-59dfc802"
       ]
     }
   ],
@@ -6305,6 +6332,46 @@
       "author": "Producer",
       "source": "Final visible board inspection corrected a stale current-cache label",
       "createdAt": "2026-10-10T20:31:46.284Z"
+    },
+    {
+      "id": "e857b6f4-1304-4123-bcc8-15e2d7adb2fe",
+      "revision": 254,
+      "kind": "task.update",
+      "itemId": "task-59dfc802",
+      "title": "Radial Wastes distant pixel planet and gaseous layers",
+      "author": "Producer",
+      "source": "Actual independently accepted frozen background candidate and observed next specialist assignments",
+      "createdAt": "2026-10-10T20:37:01.665Z"
+    },
+    {
+      "id": "68b4db44-cd7b-4ca6-95b2-df63eedb074c",
+      "revision": 255,
+      "kind": "review",
+      "itemId": "review-41c20db5",
+      "title": "Detailed distant Isotope Scar candidate: independent reviews accepted",
+      "author": "Producer",
+      "source": "Actual independently accepted frozen background candidate and observed next specialist assignments",
+      "createdAt": "2026-10-10T20:37:01.680Z"
+    },
+    {
+      "id": "568d0b3b-b62d-43a4-9619-172727d8832a",
+      "revision": 256,
+      "kind": "run",
+      "itemId": "run-4f4018b0",
+      "title": "Engine specialist · running",
+      "author": "Producer",
+      "source": "Actual independently accepted frozen background candidate and observed next specialist assignments",
+      "createdAt": "2026-10-10T20:37:01.692Z"
+    },
+    {
+      "id": "894b1570-c64b-414d-8f08-4688f2e38fa3",
+      "revision": 257,
+      "kind": "run",
+      "itemId": "run-894da4fc",
+      "title": "Production specialist / Independent QA · running",
+      "author": "Producer",
+      "source": "Actual independently accepted frozen background candidate and observed next specialist assignments",
+      "createdAt": "2026-10-10T20:37:01.708Z"
     }
   ],
   "runRecords": [
@@ -8584,6 +8651,61 @@
       "author": "Producer",
       "source": "Actual final independent deployment acceptance and observed live specialist assignment transitions",
       "createdAt": "2026-10-10T20:30:46.791Z"
+    },
+    {
+      "id": "run-4f4018b0",
+      "title": "Engine specialist · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Engine specialist",
+      "state": "running",
+      "observedAt": "2026-10-10T20:37:01.687Z",
+      "taskIds": [
+        "task-403cf3c4"
+      ],
+      "summary": "Isotope Scar independent engine review completed. Now running current pixel-UI active-state/24cell/clipping/budget constraints and probes for the ongoing champion emblem candidate, work-only.",
+      "evidence": [
+        {
+          "label": "Completed frozen background engine review",
+          "kind": "note",
+          "path": "artifacts/isotope-scar-engine-review.md"
+        },
+        {
+          "label": "Actual new assignment",
+          "kind": "note",
+          "details": "Explicit owned follow-up work/champion-patch-engine-review; native agent running after acceptance."
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual independently accepted frozen background candidate and observed next specialist assignments",
+      "createdAt": "2026-10-10T20:37:01.692Z"
+    },
+    {
+      "id": "run-894da4fc",
+      "title": "Production specialist / Independent QA · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "Production specialist / Independent QA",
+      "state": "running",
+      "observedAt": "2026-10-10T20:37:01.699Z",
+      "taskIds": [
+        "task-4a0debda",
+        "task-59dfc802"
+      ],
+      "summary": "Frozen background QA completed. Now running work-only next-slice composition proof of separately reviewed audio and background, with current source pinned and production untouched.",
+      "evidence": [
+        {
+          "label": "Completed frozen background QA",
+          "kind": "note",
+          "path": "artifacts/isotope-scar-qa-review.md"
+        },
+        {
+          "label": "Actual new assignment",
+          "kind": "note",
+          "details": "Explicit owned work/next-slice-integration-proof follow-up; main producer retains production integration/final GPU review."
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual independently accepted frozen background candidate and observed next specialist assignments",
+      "createdAt": "2026-10-10T20:37:01.708Z"
     }
   ]
 }

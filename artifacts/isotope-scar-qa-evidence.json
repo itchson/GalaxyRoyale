@@ -1,0 +1,41 @@
+{
+  "recordedUtc": "2026-10-10T20:32:36.778476+00:00",
+  "scope": "Independent4 public-API native tests and12 actual FrameBuilder packets; no GPU/browser/device/human test.",
+  "manifestSha256": "ffe62aa60b1b7b698dd73b117f7ecec127ebdf55a21f984275dac901b0da6a34",
+  "candidateSourceSha256": "2ddba8e85b64b7aee8194482796952356d320e8bdc915871b218e4ab89965f22",
+  "actualPacketsSha256": "1a93d335adb147fbf4f277a0bdac27adc6c18a05ee511c0162f0ca1f673294ec",
+  "nativeTestExecutableSha256": "423eeec083d73c369898034ba93b66b714ce182a7255801a0255bfe12bf01039",
+  "publicTestsSourceSha256": "f5dada444b46a88923c942e629459e661d3bb4c1f7ee9c7ab05eea0205ca3ab9",
+  "executedPeerProofSha256": "13c8193ca790cda89b638d721c94a3ab2394b65fdcce3cfb4d4011c8317de676",
+  "atlasSha256": "5c3d293f47d62d4639207aea9d71c577f6c913cdeb5f9ecad76117febfec73ce",
+  "palette": {
+    "entries": 64,
+    "transparentIndex": 0,
+    "definedOpaqueColors": 20,
+    "usedOpaqueColors": 19
+  },
+  "occupiedCounts": {
+    "scar_surface": 4265,
+    "scar_surface_low": 1084,
+    "scar_ion_back": 262,
+    "scar_ion_front": 188,
+    "scar_fragment": 139
+  },
+  "full": {
+    "quads": 4854,
+    "transforms": 4,
+    "regionBudget": 6000,
+    "maximumGas": 800,
+    "remaining": 346
+  },
+  "reduced": {
+    "quads": 1411,
+    "transforms": 3,
+    "regionBudget": 3000,
+    "maximumGas": 400,
+    "remaining": 1189
+  },
+  "actualFrameCount": 12,
+  "packetsByteIdentical": true,
+  "productionEdits": false
+}
