@@ -1,0 +1,56 @@
+{
+  "recorded_at": "2026-10-10T18:04:55.805Z",
+  "scope": "Actual final compact-settings CSS rebuild; read-only package/cache/JavaScript/binary export audit",
+  "passed": true,
+  "studio_or_production_state_in_dist": false,
+  "pwa": {
+    "cache": "galaxy-5a206c9f1e2acf40",
+    "assets": 18,
+    "content_hash_matches": true,
+    "asset_list_exactly_matches_dist": true,
+    "sw_sha256": "568e5857c22f2b6f61eac27601a65a026663f7239c8e364f352030c85dc0eb07",
+    "modified": "2026-10-10T18:04:16.623Z"
+  },
+  "records": [
+    {
+      "folder": "apps/game/public/wasm",
+      "backend": "webgpu",
+      "modified": "2026-10-10T18:04:11.255Z",
+      "bytes": 1957695,
+      "sha256": "485f6ae7c29d58cd8208b8c747b5df9ac28ff23b49766df6d24f41b3f8358422",
+      "qa_probe_js": false,
+      "qa_probe_wasm": false,
+      "unchanged_from_native_verified_build": true
+    },
+    {
+      "folder": "apps/game/public/wasm",
+      "backend": "webgl2",
+      "modified": "2026-10-10T18:04:14.868Z",
+      "bytes": 5607835,
+      "sha256": "9aa8c639292a13b9c2c2b104b757d9195187764abf8df19e148b3bc8aa046566",
+      "qa_probe_js": false,
+      "qa_probe_wasm": false,
+      "unchanged_from_native_verified_build": true
+    },
+    {
+      "folder": "dist/wasm",
+      "backend": "webgpu",
+      "modified": "2026-10-10T18:04:11.255Z",
+      "bytes": 1957695,
+      "sha256": "485f6ae7c29d58cd8208b8c747b5df9ac28ff23b49766df6d24f41b3f8358422",
+      "qa_probe_js": false,
+      "qa_probe_wasm": false,
+      "unchanged_from_native_verified_build": true
+    },
+    {
+      "folder": "dist/wasm",
+      "backend": "webgl2",
+      "modified": "2026-10-10T18:04:14.868Z",
+      "bytes": 5607835,
+      "sha256": "9aa8c639292a13b9c2c2b104b757d9195187764abf8df19e148b3bc8aa046566",
+      "qa_probe_js": false,
+      "qa_probe_wasm": false,
+      "unchanged_from_native_verified_build": true
+    }
+  ]
+}

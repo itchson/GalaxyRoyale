@@ -24,6 +24,7 @@ interface Upgrade {
   description: string;
   unlocked: boolean;
   required_level: number;
+  evolution: number;
 }
 interface Hud {
   position: [number, number];
@@ -39,7 +40,8 @@ interface Hud {
   dock: boolean;
   currency: number[];
   kills: number[];
-  boss: { name: string; health: number; max_health: number } | null;
+  boss: { name: string; health: number; max_health: number; family: number; generation: number; phase: string; telegraph: boolean } | null;
+  boss_progress: { family: number; defeats: number[]; queued: number[] }[];
   upgrades: Upgrade[];
   time: number;
   shake: number;
@@ -207,12 +209,12 @@ const debugConsole = new DebugConsole({
   run: async (command) => {
     const [verb, ...args] = command.trim().toLowerCase().split(/\s+/);
     if (verb === "help")
-      return "HELP / STATS / PROFILE / RENDERER / RECOVER\nSCENE dock|belt|combat|site|boss-dart|boss-bastion|boss-coil|champion-0..7|tournament|stress|die (QA mode)\nCLEAR / Up, Down: history / Backtick or Escape: close";
+      return "HELP / STATS / PROFILE / RENDERER / RECOVER\nSCENE dock|belt|combat|site|boss-dart[-1..5]|boss-bastion[-1..5]|boss-coil[-1..5]|champion-0..7|tournament|stress|die (QA mode)\nCLEAR / Up, Down: history / Backtick or Escape: close";
     if (verb === "stats")
       return `${backend.toUpperCase()} / ${fps} FPS / p95 ${percentile(frameTimes, 0.95).toFixed(2)} ms\n${lastPixels} quads / ${hud.entities} entities / ${hud.particles} particles\nPOSITION ${hud.position.map((v) => v.toFixed(1)).join(", ")}\n${hud.biome.name} / ${hud.zone} / danger ${hud.danger}\nHULL ${hud.hull.toFixed(0)}/${hud.max_hull.toFixed(0)} / SHIELD ${hud.shield.toFixed(0)}\nZOOM ${galaxy.zoom().toFixed(2)} / WORLD ${Array.from(galaxy.world_viewport(), v => v.toFixed(0)).join(" x ")} / UI ${galaxy.viewport().join(" x ")}\nSHIP LV ${hud.ship_level} / XP ${hud.ship_xp} / CARGO ${hud.cargo_materials}/${hud.cargo_capacity}`;
     if (verb === "profile") {
       const p = galaxy.profile();
-      return `SCHEMA ${p.schema_version} / revision ${p.revision} / seed ${p.seed}\nCURRENCY ${p.currency.join(" / ")}\nDISCOVERIES ${p.discoveries.length} / quests ${p.quests.length} / relics ${p.relics.length}\nPATCHES ${p.campaign.patches.filter(Boolean).length}/8 / ship ${p.campaign.selected_ship} / Royale ${p.campaign.victory_claimed ? "WON" : "PENDING"}\n${store.message}`;
+      return `SCHEMA ${p.schema_version} / revision ${p.revision} / seed ${p.seed}\nCURRENCY ${p.currency.join(" / ")}\nBOSS GENERATIONS ${p.boss_generations?.map(row => row.join(",")).join(" / ") ?? "legacy"}\nDISCOVERIES ${p.discoveries.length} / quests ${p.quests.length} / relics ${p.relics.length}\nPATCHES ${p.campaign.patches.filter(Boolean).length}/8 / ship ${p.campaign.selected_ship} / Royale ${p.campaign.victory_claimed ? "WON" : "PENDING"}\n${store.message}`;
     }
     if (verb === "renderer")
       return `${backend.toUpperCase()} / ${galaxy.viewport().join(" x ")} logical pixels / eight bounded lights`;
@@ -234,6 +236,8 @@ const debugConsole = new DebugConsole({
           "boss-dart",
           "boss-bastion",
           "boss-coil",
+          ...["dart", "bastion", "coil"].flatMap(family =>
+            [1, 2, 3, 4, 5].map(generation => `boss-${family}-${generation}`)),
           "stress",
           "die",
           ...Array.from({length: 8}, (_, i) => `champion-${i}`),
@@ -511,6 +515,23 @@ function selectMenuTab(tab: MenuTab): void {
       target.append(hint);
     }
     target.append(list);
+    const bossHeading = document.createElement("h3");
+    bossHeading.textContent = "HOSTILE EVOLUTION";
+    const bossHint = document.createElement("p");
+    bossHint.textContent = "24 family kills summon the first boss. Two defeated bosses summon their next generation. Unfinished queues survive retreat and ship loss.";
+    target.append(bossHeading, bossHint);
+    for (const family of hud.boss_progress ?? []) {
+      const familyHeading = document.createElement("h3");
+      familyHeading.textContent = ["DART", "BASTION", "COIL"][family.family] ?? "HOSTILE";
+      const generations = document.createElement("ul");
+      for (let generation = 0; generation < 5; generation++) {
+        const item = document.createElement("li");
+        const queued = family.queued[generation] ?? 0;
+        item.textContent = `G${generation + 1} / ${family.defeats[generation] ?? 0} defeated${queued > 0 ? ` / ${queued} queued` : ""}`;
+        generations.append(item);
+      }
+      target.append(familyHeading, generations);
+    }
   }
   if (tab === "upgrades" && !hud.dock) {
     const hint = document.createElement("p");
@@ -601,7 +622,7 @@ function paintUpgrades(dock: boolean): void {
       const card = document.createElement("article");
       card.className = "upgrade-card";
       const heading = document.createElement("h3");
-      heading.textContent = upgrade.name;
+      heading.textContent = `${upgrade.name}${upgrade.evolution > 0 ? ` / E${upgrade.evolution}` : ""}`;
       const description = document.createElement("p");
       description.textContent = upgrade.description;
       const ranks = document.createElement("div");
@@ -678,7 +699,8 @@ function paintHud(): void {
   }
   element("boss-hud").hidden = !hud.boss;
   if (hud.boss) {
-    element("boss-name").textContent = hud.boss.name;
+    element("boss-name").textContent = `${hud.boss.generation > 0 ? `G${hud.boss.generation} / ` : ""}${hud.boss.name}`;
+    element("boss-phase").textContent = `${hud.boss.telegraph ? "WARNING / " : ""}${hud.boss.phase || "HOSTILE SIGNATURE"}`;
     element("boss-health").style.width = safePercent(
       hud.boss.health,
       hud.boss.max_health,

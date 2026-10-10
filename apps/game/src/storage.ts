@@ -6,6 +6,8 @@ interface ProfileBase {
   unlocked: boolean[];
   kills: number[];
   boss_kills: number[];
+  /** Absent in earlier schema3 checkpoints; aggregate defeats then belong to generation1. */
+  boss_generations?: number[][];
   pity: number[];
   pending: boolean[];
 }
@@ -78,6 +80,7 @@ interface ExplorationProfile extends ProfileBase {
 }
 export interface Profile extends ExplorationProfile {
   schema_version: 3;
+  boss_generations: number[][];
   campaign: CampaignProgress;
 }
 export interface PreviousProfile extends ExplorationProfile {
@@ -109,6 +112,27 @@ export const defaultSettings: Settings = {
   voice_volume: 0.7,
   zoom: 1,
 };
+function normalizedBossGenerations(p: Record<string, unknown>): number[][] | null {
+  const totals = p.boss_kills as number[];
+  if (!Object.hasOwn(p, "boss_generations"))
+    return totals.map(total => [total, 0, 0, 0, 0]);
+  const input = p.boss_generations;
+  if (!Array.isArray(input) || input.length !== 3) return null;
+  const result: number[][] = [];
+  for (let family = 0; family < 3; family++) {
+    const row: unknown = input[family];
+    if (!Array.isArray(row) || row.length !== 5 ||
+      !Array.from(row).every(v => typeof v === "number" && Number.isInteger(v) && v >= 0 && v <= 0xffffffff)) return null;
+    const defeats = [...row] as number[];
+    if (defeats.reduce((sum, value) => sum + value, 0) === 0 && totals[family]! > 0)
+      defeats[0] = totals[family]!;
+    if (Math.min(0xffffffff, defeats.reduce((sum, value) => sum + value, 0)) !== totals[family]) return null;
+    for (let generation = 1; generation < 5; generation++)
+      if (defeats[generation]! > Math.floor(defeats[generation - 1]! / 2)) return null;
+    result.push(defeats);
+  }
+  return result;
+}
 export function validProfile(value: unknown): value is SupportedProfile {
   if (!value || typeof value !== "object") return false;
   const p = value as Record<string, unknown>;
@@ -136,6 +160,7 @@ export function validProfile(value: unknown): value is SupportedProfile {
     bools("pending")
   ))
     return false;
+  if (!normalizedBossGenerations(p)) return false;
   const ranks = p.ranks as number[];
   if (
     !(p.unlocked as boolean[]).every((unlocked, i) =>
@@ -217,6 +242,7 @@ export function normalizeProfile(value: unknown): Profile | null {
     unlocked: [...value.unlocked],
     kills: [...value.kills],
     boss_kills: [...value.boss_kills],
+    boss_generations: normalizedBossGenerations(value as unknown as Record<string, unknown>)!,
     pity: [...value.pity],
     pending: [...value.pending],
     discoveries: value.schema_version >= 2 ? [...(value as ExplorationProfile).discoveries] : [],
@@ -282,14 +308,16 @@ export class SaveStore {
       const normalizedCurrent = normalizeProfile(current);
       const normalizedPrevious = normalizeProfile(previous);
       loaded = normalizedCurrent ?? normalizedPrevious;
-      if (normalizedCurrent && current.schema_version !== 3)
+      const currentMigrated = normalizedCurrent && JSON.stringify(current) !== JSON.stringify(normalizedCurrent);
+      const previousMigrated = normalizedPrevious && JSON.stringify(previous) !== JSON.stringify(normalizedPrevious);
+      if (currentMigrated)
         store.put(normalizedCurrent, "current");
-      if (normalizedPrevious && previous.schema_version !== 3)
+      if (previousMigrated)
         store.put(normalizedPrevious, "previous");
       await done;
       if (normalizedCurrent) {
         this.latest = structuredClone(normalizedCurrent);
-        if (current.schema_version !== 3)
+        if (currentMigrated)
           this.message = "Save format upgraded. Your progression is unchanged.";
         return normalizedCurrent;
       }

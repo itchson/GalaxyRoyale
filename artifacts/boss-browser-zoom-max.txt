@@ -1,0 +1,50 @@
+Browser tab: 13, Title: "Galaxy Royale", URL: "http://127.0.0.1:4183/?qa=1".
+1 AXWebArea Galaxy Royale, URL: 127.0.0.1:4183/?qa=1
+	2 image Description: Galaxy Royale game universe, ID: universe
+	3 text BOSS SIGNATURE / incoming
+	4 container GALAXY ROYALE // CONSOLE, ID: debug-console
+		5 heading GALAXY ROYALE // CONSOLE, Value: 2, ID: console-title
+			6 text GALAXY ROYALE // CONSOLE
+		7 text HELP / STATS / SCENE <NAME> / CLEAR / ` CLOSE
+		8 container Description: Console output, ID: console-output
+			9 text > SCENE boss-coil-5
+			10 text SCENE BOSS-COIL-5 / ready. Close console to simulate.
+			11 text > SCENE boss-dart-5
+			12 text SCENE BOSS-DART-5 / ready. Close console to simulate.
+			13 text > SCENE dock
+			14 text SCENE DOCK / ready. Close console to simulate.
+			15 text > STATS
+			16 text WEBGPU / 240 FPS / p95 4.30 ms
+			17 text 12278 quads / 60 entities / 23 particles
+			18 text POSITION 0.0, 0.0
+			19 text Haven Expanse / Dock protected / danger 0
+			20 text HULL 100/100 / SHIELD 0
+			21 text ZOOM 0.76 / WORLD 944 x 472 / UI 720 x 360
+			22 text SHIP LV 1 / XP 0 / CARGO 0/16
+			23 text > STATS
+			24 text WEBGPU / 240 FPS / p95 4.30 ms
+			25 text 13345 quads / 60 entities / 0 particles
+			26 text POSITION 0.0, 0.0
+			27 text Haven Expanse / Dock protected / danger 0
+			28 text HULL 100/100 / SHIELD 0
+			29 text ZOOM 0.76 / WORLD 944 x 472 / UI 720 x 360
+			30 text SHIP LV 1 / XP 0 / CARGO 0/16
+			32 text > STATS
+			33 text WEBGPU / 239 FPS / p95 4.30 ms
+			34 text 4994 quads / 60 entities / 0 particles
+			35 text POSITION 0.0, 0.0
+			36 text Haven Expanse / Dock protected / danger 0
+			37 text HULL 100/100 / SHIELD 0
+			38 text ZOOM 1.60 / WORLD 450 x 225 / UI 720 x 360
+			39 text SHIP LV 1 / XP 0 / CARGO 0/16
+			40 text > STATS
+			41 text WEBGPU / 239 FPS / p95 4.30 ms
+			42 text 4994 quads / 60 entities / 0 particles
+			43 text POSITION 0.0, 0.0
+			44 text Haven Expanse / Dock protected / danger 0
+			45 text HULL 100/100 / SHIELD 0
+			46 text ZOOM 1.60 / WORLD 450 x 225 / UI 720 x 360
+			47 text SHIP LV 1 / XP 0 / CARGO 0/16
+		31 text field (settable) Description: Console command, ID: console-input
+
+The focused UI element is 31 text field (settable) Description: Console command, ID: console-input

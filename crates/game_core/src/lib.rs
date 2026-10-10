@@ -1,8 +1,11 @@
 //! Galaxy Royale's deterministic, fixed-step gameplay simulation.
+mod boss_assets;
+pub mod bosses;
 pub mod campaign;
 mod pixel_assets;
 pub use campaign::RunSummary;
 mod campaign_runtime;
+use bosses::BossEncounter;
 use campaign_runtime::{ArenaEncounter, ChampionFighter};
 pub mod regions;
 use engine_core::{FrameBuilder, PixelBody, PixelMaterial, RenderFrame, Transform, Vec2};
@@ -40,6 +43,7 @@ pub struct Profile {
     pub unlocked: [bool; 3],
     pub kills: [u32; 3],
     pub boss_kills: [u32; 3],
+    pub boss_generations: [[u32; 5]; 3],
     pub pity: [u8; 3],
     pub pending: [bool; 3],
     pub discoveries: Vec<String>,
@@ -59,6 +63,7 @@ impl Default for Profile {
             unlocked: [false; 3],
             kills: [0; 3],
             boss_kills: [0; 3],
+            boss_generations: [[0; 5]; 3],
             pity: [0; 3],
             pending: [false; 3],
             discoveries: Vec::new(),
@@ -104,6 +109,7 @@ pub struct Hud {
     pub currency: [u32; 3],
     pub kills: [u32; 3],
     pub boss: Option<BossHud>,
+    pub boss_progress: Vec<bosses::FamilyBossHud>,
     pub upgrades: Vec<UpgradeHud>,
     pub time: f32,
     pub shake: f32,
@@ -140,6 +146,12 @@ pub struct BossHud {
     pub name: String,
     pub health: f32,
     pub max_health: f32,
+    pub family: usize,
+    pub generation: u8,
+    pub phase: String,
+    pub telegraph: bool,
+    pub position: [f32; 2],
+    pub core_position: [f32; 2],
 }
 
 #[derive(Clone, Debug, Serialize)]
@@ -152,6 +164,7 @@ pub struct UpgradeHud {
     pub description: String,
     pub unlocked: bool,
     pub required_level: u32,
+    pub evolution: u8,
 }
 
 #[derive(Clone, Debug, Serialize)]
@@ -224,6 +237,9 @@ struct Segment {
     owner: Entity,
     index: u8,
     health: f32,
+    scale: f32,
+    radius: f32,
+    spacing: f32,
 }
 #[derive(Clone, Copy)]
 struct Bullet {
@@ -399,9 +415,11 @@ pub struct Game {
     nearby_sites: Vec<regions::Site>,
     site_grid: [i32; 2],
     reduced_cosmetics: bool,
+    reduced_motion: bool,
     transient_lights: Vec<TransientLight>,
     arena: Option<ArenaEncounter>,
     run: Option<RunSummary>,
+    boss_qa_scene: bool,
 }
 
 impl Game {
@@ -422,6 +440,7 @@ impl Game {
             profile.seed = 0x4752_4f59;
         }
         let archive_changed = sanitize_archive(&mut profile);
+        let bosses_changed = bosses::sanitize_progress(&mut profile);
         let mut campaign_changed = profile.campaign.sanitize();
         if profile.campaign.victory_claimed
             && campaign::table(profile.seed, &profile.campaign).0[0].entrant != 8
@@ -433,7 +452,7 @@ impl Game {
             }
             campaign_changed = true;
         }
-        if archive_changed || campaign_changed || migrated {
+        if archive_changed || campaign_changed || bosses_changed || migrated {
             profile.revision = profile.revision.saturating_add(1);
         }
         let stats = Stats::from_profile(&profile);
@@ -455,7 +474,7 @@ impl Game {
         let rng = profile.seed;
         let kill_credit = std::array::from_fn(|i| {
             profile.kills[i]
-                .saturating_sub(profile.boss_kills[i].saturating_mul(24))
+                .saturating_sub(profile.boss_generations[i][0].saturating_mul(24))
                 .saturating_sub(if profile.pending[i] { 24 } else { 0 })
         });
         let nearby_sites = regions::sites_near(profile.seed, Vec2::ZERO);
@@ -497,9 +516,11 @@ impl Game {
             nearby_sites,
             site_grid: [0, 0],
             reduced_cosmetics: false,
+            reduced_motion: false,
             transient_lights: Vec::with_capacity(32),
             arena: None,
             run: None,
+            boss_qa_scene: false,
         };
         // Expeditions reload at Haven. Retained courier cargo is delivered here,
         // including after death; the reward still requires returning to its source.
@@ -521,6 +542,12 @@ impl Game {
     /// Reduces visual extraction only; simulation, actor masks and loot are unchanged.
     pub fn set_cosmetic_density(&mut self, reduced: bool) {
         self.reduced_cosmetics = reduced;
+    }
+    pub fn set_reduced_motion(&mut self, reduced: bool) {
+        self.reduced_motion = reduced;
+    }
+    fn cosmetic_time(&self) -> f32 {
+        if self.reduced_motion { 0.0 } else { self.time }
     }
 
     /// The renderer uses the same world-space interpolation as actor extraction.
@@ -602,7 +629,7 @@ impl Game {
                 position: position.to_array(),
                 radius: 120.0,
                 color: [0.2, 0.85, 0.92],
-                intensity: 0.48 + (self.time * 1.2).sin() * 0.08,
+                intensity: 0.48 + (self.cosmetic_time() * 1.2).sin() * 0.08,
             });
         }
         sources.truncate(8);
@@ -745,6 +772,9 @@ impl Game {
     }
 
     fn update_exploration(&mut self) {
+        if self.boss_qa_scene {
+            return;
+        }
         self.refresh_sites();
         let mut changed = false;
         if let Some(id) = self.current_site().map(|site| site.id.clone())
@@ -864,7 +894,9 @@ impl Game {
         self.update_exploration();
         let safe = self.safe();
         let haven = position.length_squared() <= SAFE_RADIUS * SAFE_RADIUS;
-        self.track_run(dt);
+        if !self.diagnostic_boss_active() {
+            self.track_run(dt);
+        }
         if safe {
             if haven && !self.was_safe {
                 self.enter_dock();
@@ -889,6 +921,7 @@ impl Game {
         self.update_chunks(position);
         self.update_campaign(dt);
         self.update_spawns(position, dt);
+        self.update_bosses(position, dt);
         self.update_enemies(position, dt);
         self.update_homing(dt);
         self.update_segments(dt);
@@ -1023,8 +1056,11 @@ impl Game {
             rgba(255, 249, 191, 255),
             3.5,
         );
+        let echo_evolution = bosses::evolution(&self.profile, 0);
         if (self.profile.unlocked[0] || self.profile.campaign.selected_ship == 9)
-            && self.shot_count.is_multiple_of(8)
+            && self
+                .shot_count
+                .is_multiple_of(if echo_evolution >= 5 { 6 } else { 8 })
         {
             self.transient_light(
                 motion.position + dir * 19.0,
@@ -1035,9 +1071,22 @@ impl Game {
             );
             let damage = stats.damage
                 * (0.5 + 0.1 * campaign::signature_rank(&self.profile, 6).saturating_sub(1) as f32);
-            for angle in [-0.16, 0.0, 0.16] {
+            let angles: &[f32] = if echo_evolution >= 3 {
+                &[-0.32, -0.16, 0.0, 0.16, 0.32, PI - 0.18, PI + 0.18]
+            } else if echo_evolution >= 2 {
+                &[-0.32, -0.16, 0.0, 0.16, 0.32]
+            } else {
+                &[-0.16, 0.0, 0.16]
+            };
+            for angle in angles {
                 let d = forward(motion.heading + angle);
-                self.spawn_bullet(motion.position + dir * 19.0, d * 460.0, damage, true, 2);
+                self.spawn_bullet(
+                    motion.position + dir * 19.0,
+                    d * 460.0,
+                    damage,
+                    true,
+                    if echo_evolution >= 4 { 3 } else { 2 },
+                );
             }
             self.burst(
                 motion.position + dir * 19.0,
@@ -1153,6 +1202,7 @@ impl Game {
 
     fn update_spawns(&mut self, position: Vec2, dt: f32) {
         if self.arena.is_some()
+            || self.diagnostic_boss_active()
             || position.length() < COMBAT_RADIUS
             || self.safe_zone_at(position).is_some()
         {
@@ -1184,10 +1234,13 @@ impl Game {
         }
         if self.active_boss.is_none()
             && self.boss_timer <= 0.0
-            && let Some(family) = self.profile.pending.iter().position(|pending| *pending)
+            && let Some((family, generation)) = self.next_boss()
             && let Some(spawn) = self.spawn_location(position, self.viewport.length() * 0.5 + 45.0)
         {
             let entity = self.spawn_enemy(family, true, spawn, tier);
+            if generation > 1 {
+                self.configure_boss(entity, family, generation, false, tier);
+            }
             self.active_boss = Some(entity);
             self.boss_timer = 10.0;
             self.event("boss", position, 1.0);
@@ -1212,6 +1265,12 @@ impl Game {
     }
 
     fn spawn_enemy(&mut self, family: usize, boss: bool, position: Vec2, tier: u32) -> Entity {
+        let chain_direction = initial_chain_direction(position, self.position());
+        let heading = if family == 2 {
+            (-chain_direction).y.atan2((-chain_direction).x)
+        } else {
+            0.0
+        };
         let health_base = [30.0, 48.0, 60.0][family];
         let health = health_base
             * (1.0 + tier.saturating_sub(1) as f32 * 0.2)
@@ -1224,7 +1283,7 @@ impl Game {
         let body = enemy_body(family, boss);
         let phase = self.random() * TAU;
         let entity = self.world.spawn((
-            Motion::new(position, Vec2::ZERO, 0.0),
+            Motion::new(position, Vec2::ZERO, heading),
             Actor {
                 kind: if boss {
                     Kind::Boss(family)
@@ -1252,17 +1311,29 @@ impl Game {
             for index in 1..=count {
                 let distance = if boss { 36.0 } else { 21.0 }
                     + (index - 1) as f32 * if boss { 22.0 } else { 13.0 };
-                let p = position + Vec2::new(0.0, distance);
+                let p = position + chain_direction * distance;
                 self.world.spawn((
-                    Motion::new(p, Vec2::ZERO, 0.0),
+                    Motion::new(p, Vec2::ZERO, heading),
                     Segment {
                         owner: entity,
                         index,
                         health: if boss { 42.0 } else { 15.0 },
+                        scale: segment_scale(boss),
+                        radius: 8.23 * segment_scale(boss),
+                        spacing: if index == 1 {
+                            if boss { 36.0 } else { 21.0 }
+                        } else if boss {
+                            22.0
+                        } else {
+                            13.0
+                        },
                     },
                     coil_segment_body(boss),
                 ));
             }
+        }
+        if boss {
+            self.configure_boss(entity, family, 1, false, tier);
         }
         entity
     }
@@ -1274,11 +1345,17 @@ impl Game {
         let pursuit_range = self.viewport.length().max(1050.0);
         let mut shots = Vec::new();
         let mut remove = Vec::new();
-        for (entity, (motion, actor, brain, champion)) in self.world.query_mut::<(
+        for (entity, (motion, actor, brain, champion, boss)) in self.world.query_mut::<(
             Entity,
-            (&mut Motion, &Actor, &mut Brain, Option<&ChampionFighter>),
+            (
+                &mut Motion,
+                &Actor,
+                &mut Brain,
+                Option<&ChampionFighter>,
+                Option<&BossEncounter>,
+            ),
         )>() {
-            if champion.is_some() {
+            if champion.is_some() || boss.is_some() {
                 continue;
             }
             brain.age += dt;
@@ -1399,13 +1476,13 @@ impl Game {
             .world
             .query::<(Entity, (&Motion, &Segment))>()
             .iter()
-            .map(|(e, (m, s))| (e, s.owner, s.index, *m))
+            .map(|(e, (m, s))| (e, s.owner, s.index, *m, s.spacing, s.radius))
             .collect();
-        segments.sort_by_key(|(_, _, index, _)| *index);
+        segments.sort_by_key(|(_, _, index, _, _, _)| *index);
         let mut positions: HashMap<(Entity, u8), Vec2> = HashMap::new();
         let mut remove = Vec::new();
-        for (entity, owner, index, mut motion) in segments {
-            let Some((head, boss)) = heads.get(&owner) else {
+        for (entity, owner, index, mut motion, spacing, radius) in segments {
+            let Some((head, _boss)) = heads.get(&owner) else {
                 remove.push(entity);
                 continue;
             };
@@ -1416,13 +1493,6 @@ impl Game {
                     .get(&(owner, index - 1))
                     .copied()
                     .unwrap_or(head.position)
-            };
-            let spacing = if index == 1 {
-                if *boss { 36.0 } else { 21.0 }
-            } else if *boss {
-                22.0
-            } else {
-                13.0
             };
             let delta = parent - motion.position;
             if delta.length() > spacing {
@@ -1441,7 +1511,7 @@ impl Game {
             {
                 push_out_of_sanctuaries(
                     &mut motion.position,
-                    8.23 * segment_scale(*boss),
+                    radius,
                     distant_sites.as_deref().unwrap_or(&self.nearby_sites),
                 );
             }
@@ -1518,7 +1588,7 @@ impl Game {
             .world
             .query::<(Entity, (&Motion, &Segment))>()
             .iter()
-            .map(|(e, (m, s))| (e, *m, s.owner))
+            .map(|(e, (m, s))| (e, *m, s.owner, s.scale, s.radius))
             .collect();
         let bullets: Vec<_> = self
             .world
@@ -1528,6 +1598,16 @@ impl Game {
             .collect();
         for (entity, motion, mut bullet) in bullets {
             if !self.world.contains(entity) {
+                continue;
+            }
+            // A nova may reflect a later entry in this snapshot. Its new sweep
+            // starts next tick; do not process the old incoming sweep as hostile.
+            if self
+                .world
+                .get::<&Bullet>(entity)
+                .ok()
+                .is_some_and(|current| current.player != bullet.player)
+            {
                 continue;
             }
             if segment_circle(motion.previous, motion.position, Vec2::ZERO, SAFE_RADIUS).is_some()
@@ -1577,27 +1657,17 @@ impl Game {
                 }
             }
             if bullet.player {
-                for (target, m, owner) in &segments {
+                for (target, m, _owner, scale, radius) in &segments {
                     if bullet.previous_hit == Some(*target) {
                         continue;
                     }
-                    let scale = self
-                        .world
-                        .get::<&Brain>(*owner)
-                        .map(|b| segment_scale(b.boss))
-                        .unwrap_or(1.0);
-                    if segment_circle(
-                        motion.previous,
-                        motion.position,
-                        m.position,
-                        8.23 * scale + 2.0,
-                    )
-                    .is_some()
+                    if segment_circle(motion.previous, motion.position, m.position, radius + 2.0)
+                        .is_some()
                     {
                         let transform = Transform {
                             position: m.position,
                             rotation: m.heading + FRAC_PI_2,
-                            scale: Vec2::splat(scale),
+                            scale: Vec2::splat(*scale),
                         };
                         let hit = self.world.get::<&PixelBody>(*target).ok().and_then(|body| {
                             body.hit_segment(
@@ -1669,7 +1739,7 @@ impl Game {
                 self.hurt_player(a.damage, None);
             }
         }
-        for (entity, m, owner) in segments {
+        for (entity, m, owner, _scale, segment_radius) in segments {
             if !self.world.contains(entity) {
                 continue;
             }
@@ -1678,7 +1748,7 @@ impl Game {
                 .get::<&Brain>(owner)
                 .map(|b| b.boss)
                 .unwrap_or(false);
-            let radius = 8.23 * segment_scale(boss) + player_radius;
+            let radius = segment_radius + player_radius;
             if (player - m.position).length_squared() < radius * radius {
                 self.hurt_player(if boss { 13.0 } else { 7.0 }, None);
             }
@@ -1725,6 +1795,7 @@ impl Game {
     }
 
     fn damage_actor(&mut self, entity: Entity, damage: f32, local: Vec2, impulse: Vec2) {
+        let damage = damage * self.boss_damage_multiplier(entity, local);
         let Some((motion, actor)) = self
             .world
             .get::<&Motion>(entity)
@@ -1783,9 +1854,11 @@ impl Game {
             .map(|m| m.position)
             .unwrap_or(Vec2::ZERO);
         let owner = self.world.get::<&Segment>(entity).map(|s| s.owner).ok();
-        let boss = owner
-            .and_then(|e| self.world.get::<&Brain>(e).ok().map(|b| b.boss))
-            .unwrap_or(false);
+        let scale = self
+            .world
+            .get::<&Segment>(entity)
+            .map(|s| s.scale)
+            .unwrap_or(1.0);
         let contact = self
             .world
             .get::<&Motion>(entity)
@@ -1793,14 +1866,14 @@ impl Game {
                 Transform {
                     position: motion.position,
                     rotation: motion.heading + FRAC_PI_2,
-                    scale: Vec2::splat(segment_scale(boss)),
+                    scale: Vec2::splat(scale),
                 }
                 .point(local)
             })
             .unwrap_or(position);
         self.event("hit", contact, 0.25);
         if let Ok(mut body) = self.world.get::<&mut PixelBody>(entity) {
-            body.damage(local, 2.0 / segment_scale(boss));
+            body.damage(local, 2.0 / scale);
         }
         let empty = self
             .world
@@ -1819,9 +1892,11 @@ impl Game {
         }
         // Breaking armor also weakens the head; the family kill is credited once.
         if let Some(owner) = owner {
+            let head_damage =
+                damage * 0.6 * self.boss_damage_multiplier(owner, Vec2::splat(1000.0));
             let kind = self.world.get::<&Actor>(owner).map(|a| a.kind).ok();
             let dead = if let Ok(mut actor) = self.world.get::<&mut Actor>(owner) {
-                actor.health -= damage * 0.6;
+                actor.health -= head_damage;
                 actor.health <= 0.0
             } else {
                 false
@@ -1888,18 +1963,56 @@ impl Game {
         if (self.profile.unlocked[1] || matches!(self.profile.campaign.selected_ship, 6 | 9))
             && self.repulsor_timer <= 0.0
         {
+            let evolution = bosses::evolution(&self.profile, 1);
+            let reach = if evolution >= 4 {
+                120.0
+            } else if evolution >= 2 {
+                90.0
+            } else {
+                70.0
+            };
             self.transient_light(position, 165.0, [0.16, 0.65, 1.0], 1.5, 0.45);
             self.repulsor_timer = if self.profile.campaign.selected_ship == 6 {
                 7.5
             } else {
                 18.0 - 2.0 * campaign::signature_rank(&self.profile, 7).saturating_sub(1) as f32
             };
+            if evolution >= 4 {
+                self.repulsor_timer *= 0.85;
+            }
+            if evolution >= 3 {
+                let mut reflected = 0;
+                let mut cleared = Vec::new();
+                for (entity, (motion, bullet)) in self
+                    .world
+                    .query_mut::<(Entity, (&mut Motion, &mut Bullet))>()
+                {
+                    if !bullet.player && motion.position.distance(position) < reach {
+                        if evolution >= 5 && reflected < 16 {
+                            bullet.player = true;
+                            bullet.remaining_hits = 2;
+                            bullet.previous_hit = None;
+                            bullet.life = 1.5;
+                            motion.velocity = -motion.velocity;
+                            motion.heading = motion.velocity.y.atan2(motion.velocity.x);
+                            reflected += 1;
+                        } else {
+                            cleared.push(entity);
+                        }
+                    }
+                }
+                for entity in cleared {
+                    let _ = self.world.despawn(entity);
+                }
+            }
             let targets: Vec<_> = self
                 .world
                 .query::<(Entity, (&Motion, &Actor))>()
                 .iter()
                 .filter(|(_, (m, a))| {
-                    a.kind != Kind::Player && (m.position - position).length() < 70.0
+                    a.kind != Kind::Player
+                        && (m.position - position).length() < reach
+                        && self.safe_zone_at(m.position).is_none()
                 })
                 .map(|(e, (m, _))| (e, *m))
                 .collect();
@@ -1923,6 +2036,14 @@ impl Game {
 
     fn kill_actor(&mut self, entity: Entity, kind: Kind, position: Vec2) {
         if !self.world.contains(entity) {
+            return;
+        }
+        let ordinary = self.world.get::<&BossEncounter>(entity).ok().map(|b| *b);
+        if self.boss_qa_scene || ordinary.is_some_and(|b| b.diagnostic) {
+            self.burst(position, 80, rgba(255, 180, 128, 255), 100.0);
+            self.event("explosion", position, 1.0);
+            self.shake = self.shake.max(5.0);
+            self.remove_enemy(entity, true);
             return;
         }
         if self
@@ -1970,9 +2091,15 @@ impl Game {
                 self.changed();
             }
             Kind::Boss(family) => {
-                self.award_xp(25);
+                let generation = ordinary.map_or(1, |b| b.generation);
+                self.award_xp(25 + 10 * generation.saturating_sub(1) as u32);
+                self.profile.boss_generations[family][generation as usize - 1] =
+                    self.profile.boss_generations[family][generation as usize - 1]
+                        .saturating_add(1);
                 self.profile.boss_kills[family] = self.profile.boss_kills[family].saturating_add(1);
-                self.profile.pending[family] = false;
+                if generation == 1 {
+                    self.profile.pending[family] = false;
+                }
                 self.profile.pity[family] = self.profile.pity[family].saturating_add(1);
                 if !self.profile.unlocked[family]
                     && (self.profile.pity[family] >= 4 || self.random() < 0.25)
@@ -1988,11 +2115,13 @@ impl Game {
                         1,
                     );
                 }
-                if self.kill_credit[family] >= 24 {
+                if self.kill_credit[family] >= 24 && !self.profile.pending[family] {
                     self.kill_credit[family] -= 24;
                     self.profile.pending[family] = true;
                 }
-                self.active_boss = None;
+                if self.active_boss == Some(entity) {
+                    self.active_boss = None;
+                }
                 self.boss_timer = 8.0;
                 self.changed();
             }
@@ -2015,10 +2144,15 @@ impl Game {
     }
 
     fn remove_enemy(&mut self, entity: Entity, killed: bool) {
+        let diagnostic = self
+            .world
+            .get::<&BossEncounter>(entity)
+            .ok()
+            .is_some_and(|b| b.diagnostic);
         if self.active_boss == Some(entity) {
             self.active_boss = None;
             self.boss_timer = 6.0;
-            if !killed {
+            if !killed && !diagnostic {
                 self.changed();
             }
         }
@@ -2122,6 +2256,15 @@ impl Game {
     }
 
     fn update_wake(&mut self, position: Vec2, dt: f32) {
+        let evolution = bosses::evolution(&self.profile, 2);
+        let duration = if evolution >= 4 {
+            3.4
+        } else if evolution >= 2 {
+            2.6
+        } else {
+            2.0
+        };
+        let reach = if evolution >= 3 { 28.0 } else { 20.0 };
         for (_, life) in &mut self.wake {
             *life -= dt;
         }
@@ -2136,7 +2279,7 @@ impl Game {
         if motion.velocity.length() > Stats::from_profile(&self.profile).speed * 0.5
             && self.wake_timer <= 0.0
         {
-            self.wake_timer = 0.2;
+            self.wake_timer = if evolution >= 4 { 0.15 } else { 0.2 };
             self.transient_light(
                 position - forward(motion.heading) * 14.0,
                 48.0,
@@ -2144,11 +2287,19 @@ impl Game {
                 0.7,
                 0.3,
             );
-            if self.wake.len() >= 12 {
+            if self.wake.len()
+                >= if evolution >= 4 {
+                    24
+                } else if evolution >= 2 {
+                    16
+                } else {
+                    12
+                }
+            {
                 self.wake.remove(0);
             }
             self.wake
-                .push((position - forward(motion.heading) * 14.0, 2.0));
+                .push((position - forward(motion.heading) * 14.0, duration));
         }
         let damage = 6.0
             * (1.0 + 0.25 * campaign::signature_rank(&self.profile, 8).saturating_sub(1) as f32)
@@ -2159,16 +2310,34 @@ impl Game {
             .iter()
             .filter(|(_, (m, a))| {
                 matches!(a.kind, Kind::Enemy(_) | Kind::Boss(_))
-                    && self
+                    && self.safe_zone_at(m.position).is_none()
+                    && (self
                         .wake
                         .iter()
-                        .any(|(p, _)| (m.position - *p).length() < 20.0 + a.radius)
+                        .any(|(p, _)| (m.position - *p).length() < reach + a.radius)
+                        || (evolution >= 5
+                            && self.wake.windows(2).any(|pair| {
+                                pair[0].0.distance_squared(pair[1].0) <= 160.0 * 160.0
+                                    && segment_circle(pair[0].0, pair[1].0, Vec2::ZERO, SAFE_RADIUS)
+                                        .is_none()
+                                    && self.nearby_sites.iter().all(|site| {
+                                        self.arena_disables(site)
+                                            || !site.intersects_segment(pair[0].0, pair[1].0)
+                                    })
+                                    && segment_circle(
+                                        pair[0].0,
+                                        pair[1].0,
+                                        m.position,
+                                        reach + a.radius,
+                                    )
+                                    .is_some()
+                            })))
             })
             .map(|(e, (m, a))| (e, a.kind, m.position))
             .collect();
         for (entity, kind, p) in targets {
             let dead = if let Ok(mut a) = self.world.get::<&mut Actor>(entity) {
-                a.health -= damage;
+                a.health -= damage * self.boss_damage_multiplier(entity, Vec2::splat(1000.0));
                 a.health <= 0.0
             } else {
                 false
@@ -2273,6 +2442,7 @@ impl Game {
     }
 
     pub fn reset_to_dock(&mut self) {
+        self.boss_qa_scene = false;
         self.finish_arena(false, false);
         self.transient_lights.clear();
         self.stress_mode = false;
@@ -2385,17 +2555,42 @@ impl Game {
                     name: campaign::CHAMPIONS[arena.index].name.into(),
                     health: a.health.max(0.0),
                     max_health: a.max_health,
+                    family: campaign::CHAMPIONS[arena.index].family,
+                    generation: 0,
+                    phase: "Arena duel".into(),
+                    telegraph: false,
+                    position: self
+                        .world
+                        .get::<&Motion>(arena.opponent)
+                        .unwrap()
+                        .position
+                        .to_array(),
+                    core_position: self
+                        .world
+                        .get::<&Motion>(arena.opponent)
+                        .unwrap()
+                        .position
+                        .to_array(),
                 })
         } else {
             self.active_boss.and_then(|entity| {
-                self.world.get::<&Actor>(entity).ok().map(|a| BossHud {
-                    name: boss_name(match a.kind {
-                        Kind::Boss(f) => f,
-                        _ => 0,
+                self.world.get::<&Actor>(entity).ok().and_then(|a| {
+                    let boss = *self.world.get::<&BossEncounter>(entity).ok()?;
+                    let family = self.world.get::<&Brain>(entity).ok()?.family;
+                    let motion = *self.world.get::<&Motion>(entity).ok()?;
+                    Some(BossHud {
+                        name: bosses::name(family, boss.generation).into(),
+                        health: a.health.max(0.0),
+                        max_health: a.max_health,
+                        family,
+                        generation: boss.generation,
+                        phase: boss.label(family).into(),
+                        telegraph: boss.phase == bosses::Phase::Tell,
+                        position: motion.position.to_array(),
+                        core_position: actor_transform(motion, *a)
+                            .point(boss_assets::art(family, boss.generation).core_position)
+                            .to_array(),
                     })
-                    .into(),
-                    health: a.health.max(0.0),
-                    max_health: a.max_health,
                 })
             })
         };
@@ -2414,6 +2609,13 @@ impl Game {
             currency: self.profile.currency,
             kills: self.profile.kills,
             boss,
+            boss_progress: (0..3)
+                .map(|family| bosses::FamilyBossHud {
+                    family,
+                    defeats: self.profile.boss_generations[family],
+                    queued: bosses::queues(&self.profile, family),
+                })
+                .collect(),
             upgrades: UPGRADES
                 .iter()
                 .enumerate()
@@ -2427,13 +2629,26 @@ impl Game {
                         self.profile.ranks[i]
                     },
                     max_rank: 5,
-                    description: (*description).into(),
+                    description: if i >= 6 {
+                        format!(
+                            "{description}. Evolution {}: {}",
+                            bosses::evolution(&self.profile, i - 6),
+                            bosses::evolution_description(&self.profile, i - 6)
+                        )
+                    } else {
+                        (*description).into()
+                    },
                     unlocked: self.profile.campaign.selected_ship == 9
                         || i < 6
                         || self.profile.unlocked[i - 6],
                     required_level: campaign::required_level(
                         self.profile.ranks[i].saturating_add(1),
                     ),
+                    evolution: if i < 6 {
+                        0
+                    } else {
+                        bosses::evolution(&self.profile, i - 6)
+                    },
                 })
                 .collect(),
             time: self.time,
@@ -2527,7 +2742,7 @@ impl Game {
             self.profile.seed,
             Vec2::from_array(self.render_camera(alpha)),
             self.viewport,
-            self.time,
+            self.cosmetic_time(),
             self.reduced_cosmetics,
         );
         self.render_sites(frame, lights);
@@ -2543,7 +2758,7 @@ impl Game {
                 &self.dock_body,
                 station,
                 ACTOR_MATERIAL,
-                |cell, color| animate_station_cell(cell, color, self.time, lights),
+                |cell, color| animate_station_cell(cell, color, self.cosmetic_time(), lights),
             );
         }
         for i in 0..96 {
@@ -2551,7 +2766,7 @@ impl Game {
                 break;
             }
             let angle = i as f32 * TAU / 96.0;
-            let pulse = (self.time * 1.8 + i as f32 * 0.18).sin() * 0.5 + 0.5;
+            let pulse = (self.cosmetic_time() * 1.8 + i as f32 * 0.18).sin() * 0.5 + 0.5;
             let color = rgba(
                 45,
                 110 + (pulse * 30.0) as u8,
@@ -2569,7 +2784,7 @@ impl Game {
                 continue;
             }
             for n in 0..5 {
-                let offset = forward(n as f32 * TAU / 5.0 + self.time) * 6.0;
+                let offset = forward(n as f32 * TAU / 5.0 + self.cosmetic_time()) * 6.0;
                 frame.push_pixel(
                     *position + offset,
                     2.0,
@@ -2577,9 +2792,12 @@ impl Game {
                 );
             }
         }
-        for (_, (motion, actor, body)) in self
+        for (_, (motion, actor, body, boss)) in self
             .world
-            .query::<(Entity, (&Motion, &Actor, &PixelBody))>()
+            .query::<(
+                Entity,
+                (&Motion, &Actor, &PixelBody, Option<&BossEncounter>),
+            )>()
             .iter()
         {
             let mut m = *motion;
@@ -2590,20 +2808,27 @@ impl Game {
             }
             if actor.kind == Kind::Player
                 && self.invulnerability > 0.0
+                && !self.reduced_motion
                 && !self.stress_mode
-                && ((self.time * 18.0).floor() as u32).is_multiple_of(2)
+                && ((self.cosmetic_time() * 18.0).floor() as u32).is_multiple_of(2)
             {
+                continue;
+            }
+            if let Some(boss) = boss
+                && let Kind::Boss(family) = actor.kind
+            {
+                self.draw_boss(frame, body, m, *actor, *boss, family);
                 continue;
             }
             frame.push_body_colored_material(
                 body,
                 actor_transform(m, *actor),
                 ACTOR_MATERIAL,
-                |cell, color| animate_actor_cell(cell, color, self.time, lights),
+                |cell, color| animate_actor_cell(cell, color, self.cosmetic_time(), lights),
             );
             if actor.kind == Kind::Player {
                 let d = forward(m.heading);
-                let glow = (self.time * 24.0).sin() * 0.5 + 0.5;
+                let glow = (self.cosmetic_time() * 24.0).sin() * 0.5 + 0.5;
                 if self.throttle > 0.03 {
                     for i in 0..3 {
                         frame.push_pixel(
@@ -2620,7 +2845,7 @@ impl Game {
                 }
                 if self.shield > 0.0 {
                     for i in 0..24 {
-                        let angle = i as f32 * TAU / 24.0 + self.time * 0.3;
+                        let angle = i as f32 * TAU / 24.0 + self.cosmetic_time() * 0.3;
                         frame.push_pixel(
                             m.position + forward(angle) * (actor.radius + 3.0),
                             1.0,
@@ -2638,22 +2863,25 @@ impl Game {
             if !self.visible(motion.position, 25.0) {
                 continue;
             }
-            let scale = self
-                .world
-                .get::<&Brain>(segment.owner)
-                .map(|b| segment_scale(b.boss))
-                .unwrap_or(1.0);
-            frame.push_body_colored_material(
-                body,
-                Transform {
-                    position: motion.previous.lerp(motion.position, alpha),
-                    rotation: interpolate_heading(motion.previous_heading, motion.heading, alpha)
-                        + FRAC_PI_2,
-                    scale: Vec2::splat(scale),
-                },
-                ACTOR_MATERIAL,
-                |cell, color| animate_actor_cell(cell, color, self.time, lights),
-            );
+            let scale = segment.scale;
+            let transform = Transform {
+                position: motion.previous.lerp(motion.position, alpha),
+                rotation: interpolate_heading(motion.previous_heading, motion.heading, alpha)
+                    + FRAC_PI_2,
+                scale: Vec2::splat(scale),
+            };
+            if let Ok(boss) = self.world.get::<&BossEncounter>(segment.owner) {
+                boss_assets::segment_art(boss.generation).rig.draw(
+                    frame,
+                    body,
+                    transform,
+                    boss.rig_state(self.cosmetic_time(), 2),
+                );
+                continue;
+            }
+            frame.push_body_colored_material(body, transform, ACTOR_MATERIAL, |cell, color| {
+                animate_actor_cell(cell, color, self.cosmetic_time(), lights)
+            });
         }
         for (_, (motion, bullet)) in self.world.query::<(Entity, (&Motion, &Bullet))>().iter() {
             let p = motion.previous.lerp(motion.position, alpha);
@@ -2676,7 +2904,10 @@ impl Game {
         }
         for (_, (motion, loot)) in self.world.query::<(Entity, (&Motion, &Loot))>().iter() {
             let p = motion.previous.lerp(motion.position, alpha)
-                + Vec2::new(0.0, (self.time * 3.0 + motion.position.x).sin() * 2.0);
+                + Vec2::new(
+                    0.0,
+                    (self.cosmetic_time() * 3.0 + motion.position.x).sin() * 2.0,
+                );
             if !self.visible(p, 6.0) {
                 continue;
             }
@@ -2701,7 +2932,7 @@ impl Game {
             && self.visible(target, 8.0)
         {
             for i in 0..4 {
-                let direction = forward(i as f32 * FRAC_PI_2 + self.time * 0.8);
+                let direction = forward(i as f32 * FRAC_PI_2 + self.cosmetic_time() * 0.8);
                 frame.push_pixel(target + direction * 6.0, 1.2, rgba(160, 230, 255, 130));
             }
         }
@@ -2739,9 +2970,12 @@ impl Game {
                 ACTOR_MATERIAL,
                 |cell, color| {
                     if color == lights[0] {
-                        pulse_color(signal, 1.0 + (self.time * 2.0 + cell.y * 0.15).sin() * 0.12)
+                        pulse_color(
+                            signal,
+                            1.0 + (self.cosmetic_time() * 2.0 + cell.y * 0.15).sin() * 0.12,
+                        )
                     } else {
-                        animate_station_cell(cell, color, self.time, lights)
+                        animate_station_cell(cell, color, self.cosmetic_time(), lights)
                     }
                 },
             );
@@ -2757,13 +2991,13 @@ impl Game {
             // objects; each keeps its own pixel transform relative to the site.
             let parent = Transform {
                 position,
-                rotation: self.time * 0.12,
+                rotation: self.cosmetic_time() * 0.12,
                 scale: Vec2::ONE,
             };
             for index in 0..4 {
                 let child = Transform {
                     position: forward(index as f32 * FRAC_PI_2) * 55.0,
-                    rotation: -self.time * 0.12,
+                    rotation: -self.cosmetic_time() * 0.12,
                     scale: Vec2::ONE,
                 };
                 let transform = parent.compose(child);
@@ -2794,7 +3028,7 @@ impl Game {
             };
             if self.visible(transform.position, 240.0) {
                 frame.push_body_colored(&self.nebula, transform, |cell, color| {
-                    nebula_cell_color(cell, color, self.time, violet)
+                    nebula_cell_color(cell, color, self.cosmetic_time(), violet)
                 });
             }
             let wisp = Transform {
@@ -2804,7 +3038,7 @@ impl Game {
             };
             if self.visible(wisp.position, 140.0) {
                 frame.push_body_colored(&self.nebula_wisp, wisp, |cell, color| {
-                    nebula_cell_color(cell, color, self.time, !violet)
+                    nebula_cell_color(cell, color, self.cosmetic_time(), !violet)
                 });
             }
         }
@@ -2835,7 +3069,7 @@ impl Game {
                         {
                             let violet = hash & 1 == 0;
                             frame.push_body_colored(&self.nebula, parent, |cell, color| {
-                                nebula_cell_color(cell, color, self.time, violet)
+                                nebula_cell_color(cell, color, self.cosmetic_time(), violet)
                             });
                         }
                     }
@@ -2857,7 +3091,7 @@ impl Game {
                             && self.visible(wisp.position, 140.0)
                         {
                             frame.push_body_colored(&self.nebula_wisp, wisp, |cell, color| {
-                                nebula_cell_color(cell, color, self.time, hash & 1 != 0)
+                                nebula_cell_color(cell, color, self.cosmetic_time(), hash & 1 != 0)
                             });
                         }
                     }
@@ -2876,7 +3110,8 @@ impl Game {
                         }
                         let twinkle = 0.75
                             + 0.25
-                                * (self.time * (0.3 + unit(mix(hash ^ 92))) + unit(hash) * TAU)
+                                * (self.cosmetic_time() * (0.3 + unit(mix(hash ^ 92)))
+                                    + unit(hash) * TAU)
                                     .sin();
                         let color = if layer == 0 {
                             rgba(65, 88, 132, (twinkle * 130.0) as u8)
@@ -2910,6 +3145,9 @@ impl Game {
 
     /// Explicit deterministic QA scenes. This never awards inventory or upgrades.
     pub fn diagnostic(&mut self, command: &str) {
+        if self.boss_diagnostic(command) {
+            return;
+        }
         if self.campaign_diagnostic(command) {
             return;
         }
@@ -2959,21 +3197,6 @@ impl Game {
                         );
                     }
                 }
-            }
-            "boss-dart" | "boss-bastion" | "boss-coil" => {
-                self.reset_to_dock();
-                self.move_player(Vec2::new(1800.0, 0.0));
-                let family = match command {
-                    "boss-dart" => 0,
-                    "boss-bastion" => 1,
-                    _ => 2,
-                };
-                self.profile.pending[family] = true;
-                self.changed();
-                let entity =
-                    self.spawn_enemy(family, true, self.position() + Vec2::new(0.0, -180.0), 1);
-                self.active_boss = Some(entity);
-                self.event("boss", self.position(), 1.0);
             }
             "stress" => {
                 self.reset_to_dock();
@@ -3033,6 +3256,17 @@ impl Game {
 fn region_grid(position: Vec2) -> [i32; 2] {
     let grid = (position / regions::REGION_SIZE).floor();
     [grid.x as i32, grid.y as i32]
+}
+
+/// Newly streamed chains trail away from the player, rather than crossing the
+/// camera center before the head has entered its telegraphed attack cycle.
+fn initial_chain_direction(head: Vec2, player: Vec2) -> Vec2 {
+    let direction = (head - player).normalize_or_zero();
+    if direction.length_squared() > 0.0 {
+        direction
+    } else {
+        Vec2::Y
+    }
 }
 
 fn family_name(family: usize) -> &'static str {
@@ -3188,9 +3422,6 @@ fn actor_transform(motion: Motion, actor: Actor) -> Transform {
         rotation: motion.heading + FRAC_PI_2,
         scale: Vec2::splat(actor.scale),
     }
-}
-fn boss_name(family: usize) -> &'static str {
-    ["Dart Matriarch", "Bastion Prime", "Coil Sovereign"][family]
 }
 fn rgba(r: u8, g: u8, b: u8, a: u8) -> u32 {
     u32::from_le_bytes([r, g, b, a])

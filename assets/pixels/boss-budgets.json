@@ -1,0 +1,141 @@
+{
+  "provenance": "Original authored cells from boss-source.py; no generated-image provenance implied.",
+  "source_dimensions": "64-unit individually authored design canvases, sampled at each native generation size",
+  "sprites": [
+    {
+      "sprite": "boss_dart_1",
+      "size": 64,
+      "cells": 1760,
+      "parts": 7,
+      "core_cells": 81
+    },
+    {
+      "sprite": "boss_dart_2",
+      "size": 72,
+      "cells": 2318,
+      "parts": 7,
+      "core_cells": 113
+    },
+    {
+      "sprite": "boss_dart_3",
+      "size": 80,
+      "cells": 3251,
+      "parts": 7,
+      "core_cells": 113
+    },
+    {
+      "sprite": "boss_dart_4",
+      "size": 88,
+      "cells": 3779,
+      "parts": 7,
+      "core_cells": 149
+    },
+    {
+      "sprite": "boss_dart_5",
+      "size": 96,
+      "cells": 5563,
+      "parts": 7,
+      "core_cells": 197
+    },
+    {
+      "sprite": "boss_bastion_1",
+      "size": 64,
+      "cells": 2664,
+      "parts": 7,
+      "core_cells": 81
+    },
+    {
+      "sprite": "boss_bastion_2",
+      "size": 72,
+      "cells": 3247,
+      "parts": 7,
+      "core_cells": 113
+    },
+    {
+      "sprite": "boss_bastion_3",
+      "size": 80,
+      "cells": 4561,
+      "parts": 7,
+      "core_cells": 113
+    },
+    {
+      "sprite": "boss_bastion_4",
+      "size": 88,
+      "cells": 5224,
+      "parts": 7,
+      "core_cells": 149
+    },
+    {
+      "sprite": "boss_bastion_5",
+      "size": 96,
+      "cells": 6161,
+      "parts": 7,
+      "core_cells": 197
+    },
+    {
+      "sprite": "boss_coil_1",
+      "size": 64,
+      "cells": 1990,
+      "parts": 7,
+      "core_cells": 81
+    },
+    {
+      "sprite": "boss_coil_2",
+      "size": 72,
+      "cells": 2755,
+      "parts": 7,
+      "core_cells": 113
+    },
+    {
+      "sprite": "boss_coil_3",
+      "size": 80,
+      "cells": 2886,
+      "parts": 7,
+      "core_cells": 112
+    },
+    {
+      "sprite": "boss_coil_4",
+      "size": 88,
+      "cells": 3949,
+      "parts": 7,
+      "core_cells": 149
+    },
+    {
+      "sprite": "boss_coil_5",
+      "size": 96,
+      "cells": 5633,
+      "parts": 7,
+      "core_cells": 197
+    },
+    {
+      "sprite": "boss_coil_1_segment",
+      "size": 16,
+      "cells": 84,
+      "parts": 2
+    },
+    {
+      "sprite": "boss_coil_2_segment",
+      "size": 18,
+      "cells": 168,
+      "parts": 2
+    },
+    {
+      "sprite": "boss_coil_3_segment",
+      "size": 20,
+      "cells": 152,
+      "parts": 2
+    },
+    {
+      "sprite": "boss_coil_4_segment",
+      "size": 22,
+      "cells": 312,
+      "parts": 2
+    },
+    {
+      "sprite": "boss_coil_5_segment",
+      "size": 24,
+      "cells": 400,
+      "parts": 2
+    }
+  ]
+}

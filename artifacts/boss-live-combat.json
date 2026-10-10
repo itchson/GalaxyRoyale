@@ -1,0 +1,8699 @@
+{
+  "base_world_viewport": [
+    640,
+    320
+  ],
+  "cases": [
+    {
+      "actual_defeat": true,
+      "command": "boss-dart-1",
+      "complete": true,
+      "events": {
+        "explosion": 1,
+        "hit": 20,
+        "shot": 15
+      },
+      "full_profile_isolated": true,
+      "initial_hull": 270,
+      "minimum_observed_hull": 6.959999084472656,
+      "missing_boss_observations": 1,
+      "phases": [
+        "Attack charging",
+        "Core exposed",
+        "Radial weave"
+      ],
+      "player_died": false,
+      "profile_after": {
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "campaign": {
+          "blueprints": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "cargo_materials": 0,
+          "crafted": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "credits_seen": true,
+          "last_run": null,
+          "patches": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "royale_results": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "selected_ship": 9,
+          "ship_xp": [
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320
+          ],
+          "stored_materials": 0,
+          "tournament_attempt": 0,
+          "victory_claimed": true
+        },
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "discoveries": [],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "revision": 0,
+        "schema_version": 3,
+        "seed": 1196576601,
+        "unlocked": [
+          true,
+          true,
+          true
+        ]
+      },
+      "profile_before": {
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "campaign": {
+          "blueprints": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "cargo_materials": 0,
+          "crafted": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "credits_seen": true,
+          "last_run": null,
+          "patches": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "royale_results": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "selected_ship": 9,
+          "ship_xp": [
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320
+          ],
+          "stored_materials": 0,
+          "tournament_attempt": 0,
+          "victory_claimed": true
+        },
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "discoveries": [],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "revision": 0,
+        "schema_version": 3,
+        "seed": 1196576601,
+        "unlocked": [
+          true,
+          true,
+          true
+        ]
+      },
+      "quad_ranges_by_world_zoom_extent": {
+        "0.6": [
+          3351,
+          4904
+        ],
+        "1.6": [
+          1084,
+          1595
+        ]
+      },
+      "reward_after": {
+        "blueprints": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "cargo_materials": 0,
+        "crafted": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "patches": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "royale_results": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "ship_xp": [
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320
+        ],
+        "stored_materials": 0,
+        "unlocked": [
+          true,
+          true,
+          true
+        ],
+        "victory_claimed": true
+      },
+      "reward_before": {
+        "blueprints": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "cargo_materials": 0,
+        "crafted": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "patches": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "royale_results": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "ship_xp": [
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320
+        ],
+        "stored_materials": 0,
+        "unlocked": [
+          true,
+          true,
+          true
+        ],
+        "victory_claimed": true
+      },
+      "reward_isolated": true,
+      "sanctuary_safe": true,
+      "simulation_seconds": 7.733333587646484,
+      "telegraph_steps": 118
+    },
+    {
+      "actual_defeat": true,
+      "command": "boss-dart-2",
+      "complete": true,
+      "events": {
+        "explosion": 1,
+        "hit": 25,
+        "shield": 3,
+        "shot": 15
+      },
+      "full_profile_isolated": true,
+      "initial_hull": 351,
+      "minimum_observed_hull": 9.739421844482422,
+      "missing_boss_observations": 1,
+      "phases": [
+        "Attack charging",
+        "Core exposed",
+        "Locked dash"
+      ],
+      "player_died": false,
+      "profile_after": {
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "campaign": {
+          "blueprints": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "cargo_materials": 0,
+          "crafted": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "credits_seen": true,
+          "last_run": null,
+          "patches": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "royale_results": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "selected_ship": 9,
+          "ship_xp": [
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320
+          ],
+          "stored_materials": 0,
+          "tournament_attempt": 0,
+          "victory_claimed": true
+        },
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "discoveries": [],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "revision": 0,
+        "schema_version": 3,
+        "seed": 1196576601,
+        "unlocked": [
+          true,
+          true,
+          true
+        ]
+      },
+      "profile_before": {
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "campaign": {
+          "blueprints": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "cargo_materials": 0,
+          "crafted": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "credits_seen": true,
+          "last_run": null,
+          "patches": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "royale_results": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "selected_ship": 9,
+          "ship_xp": [
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320
+          ],
+          "stored_materials": 0,
+          "tournament_attempt": 0,
+          "victory_claimed": true
+        },
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "discoveries": [],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "revision": 0,
+        "schema_version": 3,
+        "seed": 1196576601,
+        "unlocked": [
+          true,
+          true,
+          true
+        ]
+      },
+      "quad_ranges_by_world_zoom_extent": {
+        "0.6": [
+          3335,
+          5436
+        ],
+        "1.6": [
+          1084,
+          3904
+        ]
+      },
+      "reward_after": {
+        "blueprints": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "cargo_materials": 0,
+        "crafted": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "patches": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "royale_results": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "ship_xp": [
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320
+        ],
+        "stored_materials": 0,
+        "unlocked": [
+          true,
+          true,
+          true
+        ],
+        "victory_claimed": true
+      },
+      "reward_before": {
+        "blueprints": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "cargo_materials": 0,
+        "crafted": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "patches": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "royale_results": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "ship_xp": [
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320
+        ],
+        "stored_materials": 0,
+        "unlocked": [
+          true,
+          true,
+          true
+        ],
+        "victory_claimed": true
+      },
+      "reward_isolated": true,
+      "sanctuary_safe": true,
+      "simulation_seconds": 7.683333873748779,
+      "telegraph_steps": 189
+    },
+    {
+      "actual_defeat": true,
+      "command": "boss-dart-3",
+      "complete": true,
+      "events": {
+        "explosion": 1,
+        "hit": 30,
+        "shot": 43
+      },
+      "full_profile_isolated": true,
+      "initial_hull": 445.5,
+      "minimum_observed_hull": 3.0600147247314453,
+      "missing_boss_observations": 1,
+      "phases": [
+        "Attack charging",
+        "Core exposed",
+        "Scissor pass"
+      ],
+      "player_died": false,
+      "profile_after": {
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "campaign": {
+          "blueprints": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "cargo_materials": 0,
+          "crafted": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "credits_seen": true,
+          "last_run": null,
+          "patches": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "royale_results": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "selected_ship": 9,
+          "ship_xp": [
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320
+          ],
+          "stored_materials": 0,
+          "tournament_attempt": 0,
+          "victory_claimed": true
+        },
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "discoveries": [],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "revision": 0,
+        "schema_version": 3,
+        "seed": 1196576601,
+        "unlocked": [
+          true,
+          true,
+          true
+        ]
+      },
+      "profile_before": {
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "campaign": {
+          "blueprints": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "cargo_materials": 0,
+          "crafted": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "credits_seen": true,
+          "last_run": null,
+          "patches": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "royale_results": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "selected_ship": 9,
+          "ship_xp": [
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320
+          ],
+          "stored_materials": 0,
+          "tournament_attempt": 0,
+          "victory_claimed": true
+        },
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "discoveries": [],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "revision": 0,
+        "schema_version": 3,
+        "seed": 1196576601,
+        "unlocked": [
+          true,
+          true,
+          true
+        ]
+      },
+      "quad_ranges_by_world_zoom_extent": {
+        "0.6": [
+          3172,
+          6462
+        ],
+        "1.6": [
+          1084,
+          1917
+        ]
+      },
+      "reward_after": {
+        "blueprints": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "cargo_materials": 0,
+        "crafted": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "patches": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "royale_results": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "ship_xp": [
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320
+        ],
+        "stored_materials": 0,
+        "unlocked": [
+          true,
+          true,
+          true
+        ],
+        "victory_claimed": true
+      },
+      "reward_before": {
+        "blueprints": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "cargo_materials": 0,
+        "crafted": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "patches": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "royale_results": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "ship_xp": [
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320
+        ],
+        "stored_materials": 0,
+        "unlocked": [
+          true,
+          true,
+          true
+        ],
+        "victory_claimed": true
+      },
+      "reward_isolated": true,
+      "sanctuary_safe": true,
+      "simulation_seconds": 10.916666984558105,
+      "telegraph_steps": 207
+    },
+    {
+      "actual_defeat": true,
+      "command": "boss-dart-4",
+      "complete": true,
+      "events": {
+        "explosion": 1,
+        "hit": 35,
+        "shield": 2,
+        "shot": 50
+      },
+      "full_profile_isolated": true,
+      "initial_hull": 540,
+      "minimum_observed_hull": 4.079859733581543,
+      "missing_boss_observations": 1,
+      "phases": [
+        "Attack charging",
+        "Core exposed",
+        "Gap spiral"
+      ],
+      "player_died": false,
+      "profile_after": {
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "campaign": {
+          "blueprints": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "cargo_materials": 0,
+          "crafted": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "credits_seen": true,
+          "last_run": null,
+          "patches": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "royale_results": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "selected_ship": 9,
+          "ship_xp": [
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320
+          ],
+          "stored_materials": 0,
+          "tournament_attempt": 0,
+          "victory_claimed": true
+        },
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "discoveries": [],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "revision": 0,
+        "schema_version": 3,
+        "seed": 1196576601,
+        "unlocked": [
+          true,
+          true,
+          true
+        ]
+      },
+      "profile_before": {
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "campaign": {
+          "blueprints": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "cargo_materials": 0,
+          "crafted": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "credits_seen": true,
+          "last_run": null,
+          "patches": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "royale_results": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "selected_ship": 9,
+          "ship_xp": [
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320
+          ],
+          "stored_materials": 0,
+          "tournament_attempt": 0,
+          "victory_claimed": true
+        },
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "discoveries": [],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "revision": 0,
+        "schema_version": 3,
+        "seed": 1196576601,
+        "unlocked": [
+          true,
+          true,
+          true
+        ]
+      },
+      "quad_ranges_by_world_zoom_extent": {
+        "0.6": [
+          3211,
+          6985
+        ],
+        "1.6": [
+          1084,
+          5354
+        ]
+      },
+      "reward_after": {
+        "blueprints": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "cargo_materials": 0,
+        "crafted": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "patches": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "royale_results": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "ship_xp": [
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320
+        ],
+        "stored_materials": 0,
+        "unlocked": [
+          true,
+          true,
+          true
+        ],
+        "victory_claimed": true
+      },
+      "reward_before": {
+        "blueprints": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "cargo_materials": 0,
+        "crafted": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "patches": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "royale_results": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "ship_xp": [
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320
+        ],
+        "stored_materials": 0,
+        "unlocked": [
+          true,
+          true,
+          true
+        ],
+        "victory_claimed": true
+      },
+      "reward_isolated": true,
+      "sanctuary_safe": true,
+      "simulation_seconds": 11.766667366027832,
+      "telegraph_steps": 170
+    },
+    {
+      "actual_defeat": true,
+      "command": "boss-dart-5",
+      "complete": true,
+      "events": {
+        "explosion": 1,
+        "hit": 42,
+        "shield": 4,
+        "shot": 29
+      },
+      "full_profile_isolated": true,
+      "initial_hull": 648,
+      "minimum_observed_hull": 5.919940948486328,
+      "missing_boss_observations": 1,
+      "phases": [
+        "Attack charging",
+        "Core exposed",
+        "Royal cross"
+      ],
+      "player_died": false,
+      "profile_after": {
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "campaign": {
+          "blueprints": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "cargo_materials": 0,
+          "crafted": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "credits_seen": true,
+          "last_run": null,
+          "patches": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "royale_results": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "selected_ship": 9,
+          "ship_xp": [
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320
+          ],
+          "stored_materials": 0,
+          "tournament_attempt": 0,
+          "victory_claimed": true
+        },
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "discoveries": [],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "revision": 0,
+        "schema_version": 3,
+        "seed": 1196576601,
+        "unlocked": [
+          true,
+          true,
+          true
+        ]
+      },
+      "profile_before": {
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "campaign": {
+          "blueprints": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "cargo_materials": 0,
+          "crafted": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "credits_seen": true,
+          "last_run": null,
+          "patches": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "royale_results": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "selected_ship": 9,
+          "ship_xp": [
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320
+          ],
+          "stored_materials": 0,
+          "tournament_attempt": 0,
+          "victory_claimed": true
+        },
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "discoveries": [],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "revision": 0,
+        "schema_version": 3,
+        "seed": 1196576601,
+        "unlocked": [
+          true,
+          true,
+          true
+        ]
+      },
+      "quad_ranges_by_world_zoom_extent": {
+        "0.6": [
+          3306,
+          8718
+        ],
+        "1.6": [
+          1084,
+          7154
+        ]
+      },
+      "reward_after": {
+        "blueprints": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "cargo_materials": 0,
+        "crafted": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "patches": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "royale_results": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "ship_xp": [
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320
+        ],
+        "stored_materials": 0,
+        "unlocked": [
+          true,
+          true,
+          true
+        ],
+        "victory_claimed": true
+      },
+      "reward_before": {
+        "blueprints": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "cargo_materials": 0,
+        "crafted": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "patches": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "royale_results": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "ship_xp": [
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320
+        ],
+        "stored_materials": 0,
+        "unlocked": [
+          true,
+          true,
+          true
+        ],
+        "victory_claimed": true
+      },
+      "reward_isolated": true,
+      "sanctuary_safe": true,
+      "simulation_seconds": 9.383334159851074,
+      "telegraph_steps": 157
+    },
+    {
+      "actual_defeat": true,
+      "command": "boss-bastion-1",
+      "complete": true,
+      "events": {
+        "explosion": 1,
+        "hit": 33,
+        "shield": 6,
+        "shot": 26
+      },
+      "full_profile_isolated": true,
+      "initial_hull": 432,
+      "minimum_observed_hull": 4.679851531982422,
+      "missing_boss_observations": 1,
+      "phases": [
+        "Aimed fan",
+        "Attack charging",
+        "Core exposed"
+      ],
+      "player_died": false,
+      "profile_after": {
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "campaign": {
+          "blueprints": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "cargo_materials": 0,
+          "crafted": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "credits_seen": true,
+          "last_run": null,
+          "patches": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "royale_results": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "selected_ship": 9,
+          "ship_xp": [
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320
+          ],
+          "stored_materials": 0,
+          "tournament_attempt": 0,
+          "victory_claimed": true
+        },
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "discoveries": [],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "revision": 0,
+        "schema_version": 3,
+        "seed": 1196576601,
+        "unlocked": [
+          true,
+          true,
+          true
+        ]
+      },
+      "profile_before": {
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "campaign": {
+          "blueprints": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "cargo_materials": 0,
+          "crafted": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "credits_seen": true,
+          "last_run": null,
+          "patches": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "royale_results": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "selected_ship": 9,
+          "ship_xp": [
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320
+          ],
+          "stored_materials": 0,
+          "tournament_attempt": 0,
+          "victory_claimed": true
+        },
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "discoveries": [],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "revision": 0,
+        "schema_version": 3,
+        "seed": 1196576601,
+        "unlocked": [
+          true,
+          true,
+          true
+        ]
+      },
+      "quad_ranges_by_world_zoom_extent": {
+        "0.6": [
+          3352,
+          5841
+        ],
+        "1.6": [
+          1084,
+          4176
+        ]
+      },
+      "reward_after": {
+        "blueprints": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "cargo_materials": 0,
+        "crafted": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "patches": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "royale_results": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "ship_xp": [
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320
+        ],
+        "stored_materials": 0,
+        "unlocked": [
+          true,
+          true,
+          true
+        ],
+        "victory_claimed": true
+      },
+      "reward_before": {
+        "blueprints": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "cargo_materials": 0,
+        "crafted": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "patches": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "royale_results": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "ship_xp": [
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320
+        ],
+        "stored_materials": 0,
+        "unlocked": [
+          true,
+          true,
+          true
+        ],
+        "victory_claimed": true
+      },
+      "reward_isolated": true,
+      "sanctuary_safe": true,
+      "simulation_seconds": 8.950000762939453,
+      "telegraph_steps": 142
+    },
+    {
+      "actual_defeat": true,
+      "command": "boss-bastion-2",
+      "complete": true,
+      "events": {
+        "explosion": 1,
+        "hit": 35,
+        "shot": 32
+      },
+      "full_profile_isolated": true,
+      "initial_hull": 561.5999755859375,
+      "minimum_observed_hull": 19.07978057861328,
+      "missing_boss_observations": 1,
+      "phases": [
+        "Attack charging",
+        "Core exposed",
+        "Siege broadside"
+      ],
+      "player_died": false,
+      "profile_after": {
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "campaign": {
+          "blueprints": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "cargo_materials": 0,
+          "crafted": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "credits_seen": true,
+          "last_run": null,
+          "patches": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "royale_results": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "selected_ship": 9,
+          "ship_xp": [
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320
+          ],
+          "stored_materials": 0,
+          "tournament_attempt": 0,
+          "victory_claimed": true
+        },
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "discoveries": [],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "revision": 0,
+        "schema_version": 3,
+        "seed": 1196576601,
+        "unlocked": [
+          true,
+          true,
+          true
+        ]
+      },
+      "profile_before": {
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "campaign": {
+          "blueprints": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "cargo_materials": 0,
+          "crafted": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "credits_seen": true,
+          "last_run": null,
+          "patches": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "royale_results": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "selected_ship": 9,
+          "ship_xp": [
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320
+          ],
+          "stored_materials": 0,
+          "tournament_attempt": 0,
+          "victory_claimed": true
+        },
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "discoveries": [],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "revision": 0,
+        "schema_version": 3,
+        "seed": 1196576601,
+        "unlocked": [
+          true,
+          true,
+          true
+        ]
+      },
+      "quad_ranges_by_world_zoom_extent": {
+        "0.6": [
+          3190,
+          6418
+        ],
+        "1.6": [
+          1084,
+          1605
+        ]
+      },
+      "reward_after": {
+        "blueprints": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "cargo_materials": 0,
+        "crafted": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "patches": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "royale_results": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "ship_xp": [
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320
+        ],
+        "stored_materials": 0,
+        "unlocked": [
+          true,
+          true,
+          true
+        ],
+        "victory_claimed": true
+      },
+      "reward_before": {
+        "blueprints": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "cargo_materials": 0,
+        "crafted": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "patches": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "royale_results": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "ship_xp": [
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320
+        ],
+        "stored_materials": 0,
+        "unlocked": [
+          true,
+          true,
+          true
+        ],
+        "victory_claimed": true
+      },
+      "reward_isolated": true,
+      "sanctuary_safe": true,
+      "simulation_seconds": 9.733333587646484,
+      "telegraph_steps": 151
+    },
+    {
+      "actual_defeat": true,
+      "command": "boss-bastion-3",
+      "complete": true,
+      "events": {
+        "explosion": 2,
+        "hit": 55,
+        "shield": 2,
+        "shot": 48
+      },
+      "full_profile_isolated": true,
+      "initial_hull": 712.7999877929688,
+      "minimum_observed_hull": 3.119670867919922,
+      "missing_boss_observations": 1,
+      "phases": [
+        "Attack charging",
+        "Core exposed",
+        "Pincer gates"
+      ],
+      "player_died": false,
+      "profile_after": {
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "campaign": {
+          "blueprints": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "cargo_materials": 0,
+          "crafted": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "credits_seen": true,
+          "last_run": null,
+          "patches": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "royale_results": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "selected_ship": 9,
+          "ship_xp": [
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320
+          ],
+          "stored_materials": 0,
+          "tournament_attempt": 0,
+          "victory_claimed": true
+        },
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "discoveries": [],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "revision": 0,
+        "schema_version": 3,
+        "seed": 1196576601,
+        "unlocked": [
+          true,
+          true,
+          true
+        ]
+      },
+      "profile_before": {
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "campaign": {
+          "blueprints": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "cargo_materials": 0,
+          "crafted": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "credits_seen": true,
+          "last_run": null,
+          "patches": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "royale_results": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "selected_ship": 9,
+          "ship_xp": [
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320
+          ],
+          "stored_materials": 0,
+          "tournament_attempt": 0,
+          "victory_claimed": true
+        },
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "discoveries": [],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "revision": 0,
+        "schema_version": 3,
+        "seed": 1196576601,
+        "unlocked": [
+          true,
+          true,
+          true
+        ]
+      },
+      "quad_ranges_by_world_zoom_extent": {
+        "0.6": [
+          3116,
+          7727
+        ],
+        "1.6": [
+          1084,
+          2279
+        ]
+      },
+      "reward_after": {
+        "blueprints": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "cargo_materials": 0,
+        "crafted": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "patches": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "royale_results": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "ship_xp": [
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320
+        ],
+        "stored_materials": 0,
+        "unlocked": [
+          true,
+          true,
+          true
+        ],
+        "victory_claimed": true
+      },
+      "reward_before": {
+        "blueprints": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "cargo_materials": 0,
+        "crafted": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "patches": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "royale_results": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "ship_xp": [
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320
+        ],
+        "stored_materials": 0,
+        "unlocked": [
+          true,
+          true,
+          true
+        ],
+        "victory_claimed": true
+      },
+      "reward_isolated": true,
+      "sanctuary_safe": true,
+      "simulation_seconds": 11.550000190734863,
+      "telegraph_steps": 162
+    },
+    {
+      "actual_defeat": true,
+      "command": "boss-bastion-4",
+      "complete": true,
+      "events": {
+        "explosion": 2,
+        "hit": 62,
+        "shot": 50
+      },
+      "full_profile_isolated": true,
+      "initial_hull": 864,
+      "minimum_observed_hull": 23.51963996887207,
+      "missing_boss_observations": 1,
+      "phases": [
+        "Attack charging",
+        "Core exposed",
+        "Quadrant wall"
+      ],
+      "player_died": false,
+      "profile_after": {
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "campaign": {
+          "blueprints": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "cargo_materials": 0,
+          "crafted": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "credits_seen": true,
+          "last_run": null,
+          "patches": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "royale_results": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "selected_ship": 9,
+          "ship_xp": [
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320
+          ],
+          "stored_materials": 0,
+          "tournament_attempt": 0,
+          "victory_claimed": true
+        },
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "discoveries": [],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "revision": 0,
+        "schema_version": 3,
+        "seed": 1196576601,
+        "unlocked": [
+          true,
+          true,
+          true
+        ]
+      },
+      "profile_before": {
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "campaign": {
+          "blueprints": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "cargo_materials": 0,
+          "crafted": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "credits_seen": true,
+          "last_run": null,
+          "patches": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "royale_results": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "selected_ship": 9,
+          "ship_xp": [
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320
+          ],
+          "stored_materials": 0,
+          "tournament_attempt": 0,
+          "victory_claimed": true
+        },
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "discoveries": [],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "revision": 0,
+        "schema_version": 3,
+        "seed": 1196576601,
+        "unlocked": [
+          true,
+          true,
+          true
+        ]
+      },
+      "quad_ranges_by_world_zoom_extent": {
+        "0.6": [
+          3185,
+          8424
+        ],
+        "1.6": [
+          1084,
+          1629
+        ]
+      },
+      "reward_after": {
+        "blueprints": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "cargo_materials": 0,
+        "crafted": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "patches": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "royale_results": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "ship_xp": [
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320
+        ],
+        "stored_materials": 0,
+        "unlocked": [
+          true,
+          true,
+          true
+        ],
+        "victory_claimed": true
+      },
+      "reward_before": {
+        "blueprints": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "cargo_materials": 0,
+        "crafted": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "patches": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "royale_results": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "ship_xp": [
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320
+        ],
+        "stored_materials": 0,
+        "unlocked": [
+          true,
+          true,
+          true
+        ],
+        "victory_claimed": true
+      },
+      "reward_isolated": true,
+      "sanctuary_safe": true,
+      "simulation_seconds": 11.733333587646484,
+      "telegraph_steps": 171
+    },
+    {
+      "actual_defeat": true,
+      "command": "boss-bastion-5",
+      "complete": true,
+      "events": {
+        "explosion": 2,
+        "hit": 71,
+        "shield": 3,
+        "shot": 55
+      },
+      "full_profile_isolated": true,
+      "initial_hull": 1036.800048828125,
+      "minimum_observed_hull": 9.519702911376953,
+      "missing_boss_observations": 1,
+      "phases": [
+        "Attack charging",
+        "Core exposed",
+        "Rotating rails"
+      ],
+      "player_died": false,
+      "profile_after": {
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "campaign": {
+          "blueprints": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "cargo_materials": 0,
+          "crafted": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "credits_seen": true,
+          "last_run": null,
+          "patches": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "royale_results": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "selected_ship": 9,
+          "ship_xp": [
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320
+          ],
+          "stored_materials": 0,
+          "tournament_attempt": 0,
+          "victory_claimed": true
+        },
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "discoveries": [],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "revision": 0,
+        "schema_version": 3,
+        "seed": 1196576601,
+        "unlocked": [
+          true,
+          true,
+          true
+        ]
+      },
+      "profile_before": {
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "campaign": {
+          "blueprints": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "cargo_materials": 0,
+          "crafted": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "credits_seen": true,
+          "last_run": null,
+          "patches": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "royale_results": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "selected_ship": 9,
+          "ship_xp": [
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320
+          ],
+          "stored_materials": 0,
+          "tournament_attempt": 0,
+          "victory_claimed": true
+        },
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "discoveries": [],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "revision": 0,
+        "schema_version": 3,
+        "seed": 1196576601,
+        "unlocked": [
+          true,
+          true,
+          true
+        ]
+      },
+      "quad_ranges_by_world_zoom_extent": {
+        "0.6": [
+          3169,
+          9309
+        ],
+        "1.6": [
+          1084,
+          1923
+        ]
+      },
+      "reward_after": {
+        "blueprints": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "cargo_materials": 0,
+        "crafted": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "patches": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "royale_results": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "ship_xp": [
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320
+        ],
+        "stored_materials": 0,
+        "unlocked": [
+          true,
+          true,
+          true
+        ],
+        "victory_claimed": true
+      },
+      "reward_before": {
+        "blueprints": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "cargo_materials": 0,
+        "crafted": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "patches": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "royale_results": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "ship_xp": [
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320
+        ],
+        "stored_materials": 0,
+        "unlocked": [
+          true,
+          true,
+          true
+        ],
+        "victory_claimed": true
+      },
+      "reward_isolated": true,
+      "sanctuary_safe": true,
+      "simulation_seconds": 12.350000381469727,
+      "telegraph_steps": 213
+    },
+    {
+      "actual_defeat": true,
+      "command": "boss-coil-1",
+      "complete": true,
+      "events": {
+        "explosion": 1,
+        "hit": 49,
+        "shield": 5,
+        "shot": 19
+      },
+      "full_profile_isolated": true,
+      "initial_hull": 540,
+      "minimum_observed_hull": 24.39983367919922,
+      "missing_boss_observations": 1,
+      "phases": [
+        "Attack charging",
+        "Core exposed",
+        "Serpent pursuit"
+      ],
+      "player_died": false,
+      "profile_after": {
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "campaign": {
+          "blueprints": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "cargo_materials": 0,
+          "crafted": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "credits_seen": true,
+          "last_run": null,
+          "patches": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "royale_results": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "selected_ship": 9,
+          "ship_xp": [
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320
+          ],
+          "stored_materials": 0,
+          "tournament_attempt": 0,
+          "victory_claimed": true
+        },
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "discoveries": [],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "revision": 0,
+        "schema_version": 3,
+        "seed": 1196576601,
+        "unlocked": [
+          true,
+          true,
+          true
+        ]
+      },
+      "profile_before": {
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "campaign": {
+          "blueprints": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "cargo_materials": 0,
+          "crafted": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "credits_seen": true,
+          "last_run": null,
+          "patches": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "royale_results": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "selected_ship": 9,
+          "ship_xp": [
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320
+          ],
+          "stored_materials": 0,
+          "tournament_attempt": 0,
+          "victory_claimed": true
+        },
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "discoveries": [],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "revision": 0,
+        "schema_version": 3,
+        "seed": 1196576601,
+        "unlocked": [
+          true,
+          true,
+          true
+        ]
+      },
+      "quad_ranges_by_world_zoom_extent": {
+        "0.6": [
+          3414,
+          5999
+        ],
+        "1.6": [
+          1084,
+          3743
+        ]
+      },
+      "reward_after": {
+        "blueprints": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "cargo_materials": 0,
+        "crafted": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "patches": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "royale_results": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "ship_xp": [
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320
+        ],
+        "stored_materials": 0,
+        "unlocked": [
+          true,
+          true,
+          true
+        ],
+        "victory_claimed": true
+      },
+      "reward_before": {
+        "blueprints": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "cargo_materials": 0,
+        "crafted": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "patches": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "royale_results": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "ship_xp": [
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320
+        ],
+        "stored_materials": 0,
+        "unlocked": [
+          true,
+          true,
+          true
+        ],
+        "victory_claimed": true
+      },
+      "reward_isolated": true,
+      "sanctuary_safe": true,
+      "simulation_seconds": 8.116666793823242,
+      "telegraph_steps": 130
+    },
+    {
+      "actual_defeat": true,
+      "command": "boss-coil-2",
+      "complete": true,
+      "events": {
+        "explosion": 1,
+        "hit": 57,
+        "shield": 3,
+        "shot": 22
+      },
+      "full_profile_isolated": true,
+      "initial_hull": 702,
+      "minimum_observed_hull": 2.4866809844970703,
+      "missing_boss_observations": 1,
+      "phases": [
+        "Attack charging",
+        "Core exposed",
+        "Sidewinder rush"
+      ],
+      "player_died": false,
+      "profile_after": {
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "campaign": {
+          "blueprints": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "cargo_materials": 0,
+          "crafted": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "credits_seen": true,
+          "last_run": null,
+          "patches": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "royale_results": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "selected_ship": 9,
+          "ship_xp": [
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320
+          ],
+          "stored_materials": 0,
+          "tournament_attempt": 0,
+          "victory_claimed": true
+        },
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "discoveries": [],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "revision": 0,
+        "schema_version": 3,
+        "seed": 1196576601,
+        "unlocked": [
+          true,
+          true,
+          true
+        ]
+      },
+      "profile_before": {
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "campaign": {
+          "blueprints": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "cargo_materials": 0,
+          "crafted": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "credits_seen": true,
+          "last_run": null,
+          "patches": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "royale_results": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "selected_ship": 9,
+          "ship_xp": [
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320
+          ],
+          "stored_materials": 0,
+          "tournament_attempt": 0,
+          "victory_claimed": true
+        },
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "discoveries": [],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "revision": 0,
+        "schema_version": 3,
+        "seed": 1196576601,
+        "unlocked": [
+          true,
+          true,
+          true
+        ]
+      },
+      "quad_ranges_by_world_zoom_extent": {
+        "0.6": [
+          3356,
+          7946
+        ],
+        "1.6": [
+          1084,
+          5699
+        ]
+      },
+      "reward_after": {
+        "blueprints": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "cargo_materials": 0,
+        "crafted": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "patches": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "royale_results": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "ship_xp": [
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320
+        ],
+        "stored_materials": 0,
+        "unlocked": [
+          true,
+          true,
+          true
+        ],
+        "victory_claimed": true
+      },
+      "reward_before": {
+        "blueprints": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "cargo_materials": 0,
+        "crafted": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "patches": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "royale_results": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "ship_xp": [
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320
+        ],
+        "stored_materials": 0,
+        "unlocked": [
+          true,
+          true,
+          true
+        ],
+        "victory_claimed": true
+      },
+      "reward_isolated": true,
+      "sanctuary_safe": true,
+      "simulation_seconds": 8.516667366027832,
+      "telegraph_steps": 149
+    },
+    {
+      "actual_defeat": true,
+      "command": "boss-coil-3",
+      "complete": true,
+      "events": {
+        "explosion": 1,
+        "hit": 94,
+        "shield": 8,
+        "shot": 52
+      },
+      "full_profile_isolated": true,
+      "initial_hull": 891,
+      "minimum_observed_hull": 5.556121826171875,
+      "missing_boss_observations": 1,
+      "phases": [
+        "Attack charging",
+        "Core exposed",
+        "Ouroboros loop"
+      ],
+      "player_died": false,
+      "profile_after": {
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "campaign": {
+          "blueprints": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "cargo_materials": 0,
+          "crafted": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "credits_seen": true,
+          "last_run": null,
+          "patches": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "royale_results": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "selected_ship": 9,
+          "ship_xp": [
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320
+          ],
+          "stored_materials": 0,
+          "tournament_attempt": 0,
+          "victory_claimed": true
+        },
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "discoveries": [],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "revision": 0,
+        "schema_version": 3,
+        "seed": 1196576601,
+        "unlocked": [
+          true,
+          true,
+          true
+        ]
+      },
+      "profile_before": {
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "campaign": {
+          "blueprints": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "cargo_materials": 0,
+          "crafted": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "credits_seen": true,
+          "last_run": null,
+          "patches": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "royale_results": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "selected_ship": 9,
+          "ship_xp": [
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320
+          ],
+          "stored_materials": 0,
+          "tournament_attempt": 0,
+          "victory_claimed": true
+        },
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "discoveries": [],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "revision": 0,
+        "schema_version": 3,
+        "seed": 1196576601,
+        "unlocked": [
+          true,
+          true,
+          true
+        ]
+      },
+      "quad_ranges_by_world_zoom_extent": {
+        "0.6": [
+          3332,
+          8184
+        ],
+        "1.6": [
+          1084,
+          5045
+        ]
+      },
+      "reward_after": {
+        "blueprints": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "cargo_materials": 0,
+        "crafted": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "patches": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "royale_results": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "ship_xp": [
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320
+        ],
+        "stored_materials": 0,
+        "unlocked": [
+          true,
+          true,
+          true
+        ],
+        "victory_claimed": true
+      },
+      "reward_before": {
+        "blueprints": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "cargo_materials": 0,
+        "crafted": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "patches": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "royale_results": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "ship_xp": [
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320
+        ],
+        "stored_materials": 0,
+        "unlocked": [
+          true,
+          true,
+          true
+        ],
+        "victory_claimed": true
+      },
+      "reward_isolated": true,
+      "sanctuary_safe": true,
+      "simulation_seconds": 12.016667366027832,
+      "telegraph_steps": 150
+    },
+    {
+      "actual_defeat": true,
+      "command": "boss-coil-4",
+      "complete": true,
+      "events": {
+        "explosion": 1,
+        "hit": 101,
+        "shield": 7,
+        "shot": 47
+      },
+      "full_profile_isolated": true,
+      "initial_hull": 1080,
+      "minimum_observed_hull": 10.342927932739258,
+      "missing_boss_observations": 1,
+      "phases": [
+        "Attack charging",
+        "Core exposed",
+        "Tail barrage"
+      ],
+      "player_died": false,
+      "profile_after": {
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "campaign": {
+          "blueprints": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "cargo_materials": 0,
+          "crafted": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "credits_seen": true,
+          "last_run": null,
+          "patches": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "royale_results": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "selected_ship": 9,
+          "ship_xp": [
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320
+          ],
+          "stored_materials": 0,
+          "tournament_attempt": 0,
+          "victory_claimed": true
+        },
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "discoveries": [],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "revision": 0,
+        "schema_version": 3,
+        "seed": 1196576601,
+        "unlocked": [
+          true,
+          true,
+          true
+        ]
+      },
+      "profile_before": {
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "campaign": {
+          "blueprints": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "cargo_materials": 0,
+          "crafted": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "credits_seen": true,
+          "last_run": null,
+          "patches": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "royale_results": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "selected_ship": 9,
+          "ship_xp": [
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320
+          ],
+          "stored_materials": 0,
+          "tournament_attempt": 0,
+          "victory_claimed": true
+        },
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "discoveries": [],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "revision": 0,
+        "schema_version": 3,
+        "seed": 1196576601,
+        "unlocked": [
+          true,
+          true,
+          true
+        ]
+      },
+      "quad_ranges_by_world_zoom_extent": {
+        "0.6": [
+          3317,
+          10808
+        ],
+        "1.6": [
+          1084,
+          8239
+        ]
+      },
+      "reward_after": {
+        "blueprints": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "cargo_materials": 0,
+        "crafted": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "patches": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "royale_results": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "ship_xp": [
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320
+        ],
+        "stored_materials": 0,
+        "unlocked": [
+          true,
+          true,
+          true
+        ],
+        "victory_claimed": true
+      },
+      "reward_before": {
+        "blueprints": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "cargo_materials": 0,
+        "crafted": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "patches": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "royale_results": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "ship_xp": [
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320
+        ],
+        "stored_materials": 0,
+        "unlocked": [
+          true,
+          true,
+          true
+        ],
+        "victory_claimed": true
+      },
+      "reward_isolated": true,
+      "sanctuary_safe": true,
+      "simulation_seconds": 11.416666984558105,
+      "telegraph_steps": 173
+    },
+    {
+      "actual_defeat": true,
+      "command": "boss-coil-5",
+      "complete": true,
+      "events": {
+        "explosion": 1,
+        "hit": 121,
+        "shield": 4,
+        "shot": 43
+      },
+      "full_profile_isolated": true,
+      "initial_hull": 1296,
+      "minimum_observed_hull": 17.548847198486328,
+      "missing_boss_observations": 1,
+      "phases": [
+        "Attack charging",
+        "Core exposed",
+        "Vortex lunge"
+      ],
+      "player_died": false,
+      "profile_after": {
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "campaign": {
+          "blueprints": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "cargo_materials": 0,
+          "crafted": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "credits_seen": true,
+          "last_run": null,
+          "patches": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "royale_results": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "selected_ship": 9,
+          "ship_xp": [
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320
+          ],
+          "stored_materials": 0,
+          "tournament_attempt": 0,
+          "victory_claimed": true
+        },
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "discoveries": [],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "revision": 0,
+        "schema_version": 3,
+        "seed": 1196576601,
+        "unlocked": [
+          true,
+          true,
+          true
+        ]
+      },
+      "profile_before": {
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "campaign": {
+          "blueprints": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "cargo_materials": 0,
+          "crafted": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "credits_seen": true,
+          "last_run": null,
+          "patches": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "royale_results": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "selected_ship": 9,
+          "ship_xp": [
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320,
+            1320
+          ],
+          "stored_materials": 0,
+          "tournament_attempt": 0,
+          "victory_claimed": true
+        },
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "discoveries": [],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "revision": 0,
+        "schema_version": 3,
+        "seed": 1196576601,
+        "unlocked": [
+          true,
+          true,
+          true
+        ]
+      },
+      "quad_ranges_by_world_zoom_extent": {
+        "0.6": [
+          3541,
+          15926
+        ],
+        "1.6": [
+          1084,
+          10345
+        ]
+      },
+      "reward_after": {
+        "blueprints": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "cargo_materials": 0,
+        "crafted": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "patches": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "royale_results": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "ship_xp": [
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320
+        ],
+        "stored_materials": 0,
+        "unlocked": [
+          true,
+          true,
+          true
+        ],
+        "victory_claimed": true
+      },
+      "reward_before": {
+        "blueprints": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "boss_generations": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "boss_kills": [
+          0,
+          0,
+          0
+        ],
+        "cargo_materials": 0,
+        "crafted": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "currency": [
+          13,
+          17,
+          19
+        ],
+        "kills": [
+          0,
+          0,
+          0
+        ],
+        "patches": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "pending": [
+          false,
+          false,
+          false
+        ],
+        "pity": [
+          0,
+          0,
+          0
+        ],
+        "quests": [],
+        "ranks": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "relics": [],
+        "royale_results": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "ship_xp": [
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320,
+          1320
+        ],
+        "stored_materials": 0,
+        "unlocked": [
+          true,
+          true,
+          true
+        ],
+        "victory_claimed": true
+      },
+      "reward_isolated": true,
+      "sanctuary_safe": true,
+      "simulation_seconds": 10.983333587646484,
+      "telegraph_steps": 169
+    }
+  ],
+  "combat_budget_seconds": 120.00000762939453,
+  "fixed_step_seconds": 0.01666666753590107,
+  "fixture": "Declared Royale Sovereign, all hardware/signatures rank5, level12 XP; starting currency13/17/19, no ordinary boss defeats",
+  "input": "Read-only actual BossHud position/core_position; joystick0.081 aiming or0.35 pursuit beyond420units; actual held fire; no damage/kill/grant helpers",
+  "observation_seconds": 6.000000476837158,
+  "passed": 15,
+  "physical_device": "none",
+  "queue_retry_probe": {
+    "actual_hostile_death": true,
+    "aggregate": 30,
+    "death_seconds": 7.000000476837158,
+    "family": "bastion",
+    "generation": 5,
+    "generation_five_queue": 1,
+    "ordinary_kills": 408,
+    "passed": true,
+    "profile_after_actual_loss": {
+      "boss_generations": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          16,
+          8,
+          4,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "boss_kills": [
+        0,
+        30,
+        0
+      ],
+      "campaign": {
+        "blueprints": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "cargo_materials": 0,
+        "crafted": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "credits_seen": false,
+        "last_run": {
+          "asteroids": 0,
+          "champions": 0,
+          "distance_peak": 1470.9344482421875,
+          "enemies": 0,
+          "materials_gained": 0,
+          "points_gained": [
+            0,
+            0,
+            0
+          ],
+          "time": 19.083213806152344,
+          "xp_gained": 0
+        },
+        "patches": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "royale_results": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selected_ship": 0,
+        "ship_xp": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "stored_materials": 0,
+        "tournament_attempt": 0,
+        "victory_claimed": false
+      },
+      "currency": [
+        0,
+        0,
+        0
+      ],
+      "discoveries": [],
+      "kills": [
+        0,
+        408,
+        0
+      ],
+      "pending": [
+        false,
+        true,
+        false
+      ],
+      "pity": [
+        0,
+        0,
+        0
+      ],
+      "quests": [],
+      "ranks": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "relics": [],
+      "revision": 4,
+      "schema_version": 3,
+      "seed": 1196576601,
+      "unlocked": [
+        false,
+        false,
+        false
+      ]
+    },
+    "profile_after_retreat": {
+      "boss_generations": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          16,
+          8,
+          4,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "boss_kills": [
+        0,
+        30,
+        0
+      ],
+      "campaign": {
+        "blueprints": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "cargo_materials": 0,
+        "crafted": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "credits_seen": false,
+        "last_run": {
+          "asteroids": 0,
+          "champions": 0,
+          "distance_peak": 1400.10693359375,
+          "enemies": 0,
+          "materials_gained": 0,
+          "points_gained": [
+            0,
+            0,
+            0
+          ],
+          "time": 12.083320617675781,
+          "xp_gained": 0
+        },
+        "patches": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "royale_results": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selected_ship": 0,
+        "ship_xp": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "stored_materials": 0,
+        "tournament_attempt": 0,
+        "victory_claimed": false
+      },
+      "currency": [
+        0,
+        0,
+        0
+      ],
+      "discoveries": [],
+      "kills": [
+        0,
+        408,
+        0
+      ],
+      "pending": [
+        false,
+        true,
+        false
+      ],
+      "pity": [
+        0,
+        0,
+        0
+      ],
+      "quests": [],
+      "ranks": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "relics": [],
+      "revision": 2,
+      "schema_version": 3,
+      "seed": 1196576601,
+      "unlocked": [
+        false,
+        false,
+        false
+      ]
+    },
+    "profile_before": {
+      "boss_generations": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          16,
+          8,
+          4,
+          2,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "boss_kills": [
+        0,
+        30,
+        0
+      ],
+      "campaign": {
+        "blueprints": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "cargo_materials": 0,
+        "crafted": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "credits_seen": false,
+        "last_run": null,
+        "patches": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "royale_results": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "selected_ship": 0,
+        "ship_xp": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "stored_materials": 0,
+        "tournament_attempt": 0,
+        "victory_claimed": false
+      },
+      "currency": [
+        0,
+        0,
+        0
+      ],
+      "discoveries": [],
+      "kills": [
+        0,
+        408,
+        0
+      ],
+      "pending": [
+        false,
+        true,
+        false
+      ],
+      "pity": [
+        0,
+        0,
+        0
+      ],
+      "quests": [],
+      "ranks": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "relics": [],
+      "revision": 0,
+      "schema_version": 3,
+      "seed": 1196576601,
+      "unlocked": [
+        false,
+        false,
+        false
+      ]
+    },
+    "reserved_generation_one": true,
+    "retry_hud": {
+      "core_position": [
+        1127.563720703125,
+        -298.13092041015625
+      ],
+      "family": 1,
+      "generation": 5,
+      "health": 1036.800048828125,
+      "max_health": 1036.800048828125,
+      "name": "Bastion Oblivion",
+      "phase": "Attack charging",
+      "position": [
+        1130.977294921875,
+        -298.26861572265625
+      ],
+      "telegraph": true
+    },
+    "source_defeats": [
+      16,
+      8,
+      4,
+      2,
+      0
+    ]
+  },
+  "render_zoom_extents": [
+    0.6,
+    1.6
+  ],
+  "scope": "actual CPU gameplay/render extraction; no GPU/browser/device validation",
+  "total": 15,
+  "wall_seconds": 0.953358,
+  "recorded_at": "2026-10-10T18:01:43.291Z",
+  "production_dependency_versions_match": true,
+  "compilation": "cargo run --release --locked --manifest-path scripts/qa/boss-live/Cargo.toml --target-dir work/boss-live/target -- work/boss-live-combat.json",
+  "source_sha256": {
+    "crates/game_core/src/lib.rs": "2904e06a284934f6d2cc82500ec97b80d613554f5066ad3e98d08253297222f0",
+    "crates/game_core/src/bosses.rs": "d98e4f74ff7e1a225a5ca9d6178164853ca65057fadf5d872706ab89523f2ebc",
+    "crates/game_core/src/boss_assets.rs": "6f243e4211c7a40e0feaf35140b8b0300df65d061e2657d6490b90a6ef334699",
+    "crates/game_core/src/campaign_runtime.rs": "beaa27a19af8c62a23df0b6d6f820e924af51ed40f1d1e78a5cac25f8d7a4e58",
+    "crates/engine_core/src/pixel_rig.rs": "e18ed9ca3ac3a459c9c611a7083494d07d7aa9ed624453df623b9c64730b6582",
+    "crates/engine_core/src/frame.rs": "4d8b1a965e1e98168dc62db3bf2f3aaf707b6b7be4d9d0b56225a73d0630ebc6",
+    "assets/pixels/boss-atlas.json": "0a946b13cef528578c6863b73fae0b9c2c1fd5ecdb6232bd8b37626875b9e3a3",
+    "Cargo.lock": "df228d9f83ef57321dcb768b79d948e9aa24456c0952e971fc8d6fcd7e806bdd",
+    "scripts/qa/boss-live/Cargo.toml": "3b6b6ca6b3012635f118cdc429ca9da22628c1a6d130469c949f4bcac4f7f202",
+    "scripts/qa/boss-live/Cargo.lock": "760e75416a801d29251209f83f02c4dae77f6b05b35dcc6119a2375ae2d47c46",
+    "scripts/qa/boss-live/src/main.rs": "b83480f51e9a5c27b3496493553b39772b853cae121db18c54e905882cced1c8"
+  }
+}

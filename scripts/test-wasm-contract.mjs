@@ -13,6 +13,18 @@ const backends = [
   ["webgpu", "webgpu"],
   ["webgl", "webgl2"],
 ];
+const stages = {
+  fresh: {currency:[0,0,0],boss_kills:[0,0,0],boss_generations:Array.from({length:3},()=>Array(5).fill(0))},
+  champion: {currency:[0,0,0],boss_kills:[0,0,0],boss_generations:Array.from({length:3},()=>Array(5).fill(0))},
+  generations: {
+    currency:[3,4,5],kills:[470,158,660],boss_kills:[34,10,48],
+    boss_generations:[[18,9,4,2,1],[6,3,1,0,0],[26,13,6,2,1]],pending:[true,false,true],
+  },
+  "legacy-bosses": {
+    currency:[7,8,9],kills:[120,60,220],boss_kills:[4,2,8],
+    boss_generations:[[4,0,0,0,0],[2,0,0,0,0],[8,0,0,0,0]],pending:[true,false,true],
+  },
+};
 mkdirSync(output, { recursive: true });
 
 function run(command, args) {
@@ -24,6 +36,7 @@ function run(command, args) {
 
 async function checkpoint(module, stage, backend) {
   const profile = module.checkpoint_contract(stage);
+  const expected = stages[stage];
   assert.equal(profile.schema_version, 3);
   assert.equal(Object.hasOwn(profile.campaign, "last_run"), true);
   assert.equal(
@@ -43,11 +56,10 @@ async function checkpoint(module, stage, backend) {
     "exported JSON must retain the optional field rather than omit undefined",
   );
   assert.deepEqual(jsonCopy, profile);
-  assert.deepEqual(
-    profile.currency,
-    [0, 0, 0],
-    "QA setup must not award category points",
-  );
+  for (const [field,value] of Object.entries(expected))
+    assert.deepEqual(profile[field],value,`${backend}/${stage}: real Rust normalization must preserve ${field}`);
+  if(stage === "legacy-bosses")
+    assert.ok(profile.revision >= 9,"runtime migration may bump revision but must not lose the existing checkpoint");
   assert.ok(
     profile.campaign.patches.every((patch) => patch === false),
     "QA setup must not award champion ownership",
@@ -120,8 +132,7 @@ try {
         "function",
         "QA build must expose the real shared-serializer contract probe",
       );
-      await checkpoint(module, "fresh", backend);
-      await checkpoint(module, "champion", backend);
+      for(const stage of Object.keys(stages)) await checkpoint(module,stage,backend);
 
       const production = resolve(
         root,
@@ -153,7 +164,7 @@ try {
         "QA fixture must never appear in the production WASM exports",
       );
       console.log(
-        `PASS ${backend}: fresh + champion checkpoints validate and persist; release excludes QA probe.`,
+        `PASS ${backend}: fresh, champion, generations and legacy-bosses checkpoints validate and persist; release excludes QA probe.`,
       );
     }
   } finally {
@@ -161,7 +172,7 @@ try {
     else globalThis.indexedDB = indexedDbBefore;
   }
   console.log(
-    "PASS: four real WASM checkpoint/save/reload scenarios across two backends; no browser or GPU mocks.",
+    "PASS: eight real WASM checkpoint/save/reload scenarios across two backends; no browser or GPU mocks.",
   );
 } catch (error) {
   console.error(error);

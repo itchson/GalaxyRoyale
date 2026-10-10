@@ -47,5 +47,5 @@ Native stress measured 91,776–125,759 cells, 2,000 particles and 699–708 ECS
 
 Physical Pixel 6a/iPhone 12-class 60 FPS testing, Safari, device audio/PWA lifecycle and 30-minute soak remain pending. Record named hardware/backend, resolution, visible counts, frame percentiles, stalls and total-memory trends. Reduce cosmetics before changing gameplay limits.
 
-Both renderer bundles share gameplay; browser verification must exercise initialization fallback and recovery. The current content has three families and their first bosses. Twelve more bosses, networking/arenas and balancing remain backlog. Build records distinguish automated tests, desktop browser checks and unmeasured acceptance.
+Both renderer bundles share gameplay; browser verification must exercise initialization fallback and recovery. The current content has three families with five authored boss generations each. Nested armor/core/emitter rigs extract surviving occupied cells without restoring damaged holes. The fifteen-boss native combat sweep and eight real WASM snapshot scenarios are recorded in [QA_BOSSES.md](QA_BOSSES.md); these do not establish human balance or phone performance. Networking/owned arenas and balancing remain backlog. Build records distinguish automated tests, desktop browser checks and unmeasured acceptance.
 

@@ -1,0 +1,59 @@
+{
+  "recorded_at": "2026-10-10T18:07:43.453Z",
+  "reviewer": "production/QA specialist",
+  "scope": "Independent visual inspection of actual producer browser captures; no source mutation or physical-device testing",
+  "package_audit": "work/boss-shipping-export-review.json",
+  "audited_cache": "galaxy-5a206c9f1e2acf40",
+  "captures": [
+    {
+      "path": "artifacts/boss-settings-720-zoom-default.jpg",
+      "modified": "2026-10-10T18:05:51.054Z",
+      "width": 720,
+      "height": 360,
+      "sha256": "67c8828af07606961e96f1957b5591bd12ce65b67b8657afbd5bdde661c37d19",
+      "encoding": "JPEG"
+    },
+    {
+      "path": "artifacts/boss-coil-g5-zoom-min.jpg",
+      "modified": "2026-10-10T18:06:10.218Z",
+      "width": 720,
+      "height": 360,
+      "sha256": "77382dd36f40ba4c7e6b53edea68627243db9365e7e7a889becab2e1185b2ebb",
+      "encoding": "JPEG"
+    }
+  ],
+  "settings": {
+    "visual_pass": true,
+    "findings": [
+      "All nine settings controls are visible with readable labels.",
+      "Five footer actions occupy one row inside the panel with no visible label clipping.",
+      "The default flight-zoom thumb is approximately40% across the range."
+    ],
+    "producer_reported_dom": {
+      "source": "Actual producer session message, not independently remeasured by this reviewer",
+      "client_height": 100,
+      "scroll_height": 104,
+      "scroll_top": 0,
+      "remaining_overflow": "Four pixels of bottom padding"
+    },
+    "limit": "A720x360 desktop browser capture does not prove physical touch or every landscape size."
+  },
+  "coil_g5": {
+    "visible_scene_pass": true,
+    "findings": [
+      "Boss name/generation/phase and player HUD are readable.",
+      "Scout shows100% hull and no visible tail crossing the player."
+    ],
+    "limits": [
+      "Boss head is partly behind the fixed HUD.",
+      "Tail extends outside the captured viewport.",
+      "A still capture does not prove all segment silhouettes, charge-to-attack timing, actual combat or human balance."
+    ]
+  },
+  "pending": [
+    "Natural full progression/playthrough",
+    "All-fifteen browser choreography",
+    "Other family/max-zoom/WebGL2 current-build captures",
+    "Physical phone multi-touch/PWA lifecycle and sustained performance"
+  ]
+}

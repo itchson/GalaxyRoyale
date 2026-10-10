@@ -3,9 +3,10 @@ import assert from 'node:assert/strict';
 import { IDBFactory } from 'fake-indexeddb';
 import { SaveStore, SaveConflict, validProfile, normalizeProfile, emptyCampaign, defaultSettings, normalizeSettings, loadSettings, saveSettings } from '../../apps/game/src/storage.ts';
 
-const profile = (revision = 0, currency = [0, 0, 0]) => ({schema_version:3,revision,seed:0x47524f59,currency,ranks:Array(9).fill(0),unlocked:[false,false,false],kills:[0,0,0],boss_kills:[0,0,0],pity:[0,0,0],pending:[false,false,false],discoveries:[],quests:[],relics:[],campaign:emptyCampaign()});
-const previousProfile = (revision = 0, currency = [0,0,0]) => { const {campaign,...older}=profile(revision,currency);return {...older,schema_version:2}; };
-const legacyProfile = (revision = 0, currency = [0, 0, 0]) => { const {discoveries,quests,relics,campaign,...legacy}=profile(revision,currency);return {...legacy,schema_version:1}; };
+const emptyGenerations = () => Array.from({length:3},()=>Array(5).fill(0));
+const profile = (revision = 0, currency = [0, 0, 0]) => ({schema_version:3,revision,seed:0x47524f59,currency,ranks:Array(9).fill(0),unlocked:[false,false,false],kills:[0,0,0],boss_kills:[0,0,0],boss_generations:emptyGenerations(),pity:[0,0,0],pending:[false,false,false],discoveries:[],quests:[],relics:[],campaign:emptyCampaign()});
+const previousProfile = (revision = 0, currency = [0,0,0]) => { const {campaign,boss_generations,...older}=profile(revision,currency);return {...older,schema_version:2}; };
+const legacyProfile = (revision = 0, currency = [0, 0, 0]) => { const {discoveries,quests,relics,campaign,boss_generations,...legacy}=profile(revision,currency);return {...legacy,schema_version:1}; };
 const quest = (site_id='-2:3', overrides={}) => ({site_id,event:'bounty',family:1,target:3,progress:1,completed:false,...overrides});
 const request = r => new Promise((resolve,reject)=>{r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error);});
 const committed = tx => new Promise((resolve,reject)=>{tx.oncomplete=resolve;tx.onabort=()=>reject(tx.error);});
@@ -172,4 +173,82 @@ test('ship, campaign and run snapshots survive reload without replaying rewards 
   assert.deepEqual((await snapshots())[0].currency,[30,40,50]); assert.equal((await snapshots())[0].campaign.stored_materials,12);
   await reopened.save({...loaded,revision:21,campaign:{...loaded.campaign,credits_seen:true,selected_ship:9}});
   assert.equal((await snapshots())[0].campaign.selected_ship,9); assert.equal((await snapshots())[1].campaign.selected_ship,3);
+});
+
+test('old boss aggregates migrate into generation one for every supported save format without rewards', () => {
+  for (const make of [legacyProfile, previousProfile, profile]) {
+    for (const supplied of ['missing', 'zero']) {
+      const old=make(73,[11,22,33]); old.boss_kills=[7,4,2]; old.kills=[240,96,48]; old.pending=[true,false,true];
+      if(supplied==='missing') delete old.boss_generations; else old.boss_generations=emptyGenerations();
+      const before=structuredClone(old); assert.equal(validProfile(old),true);
+      const migrated=normalizeProfile(old);
+      assert.deepEqual(migrated.boss_generations,[[7,0,0,0,0],[4,0,0,0,0],[2,0,0,0,0]]);
+      for(const key of ['revision','currency','ranks','unlocked','kills','boss_kills','pending','pity'])
+        assert.deepEqual(migrated[key],before[key],`${make.name}/${supplied}/${key} must retain progression`);
+      assert.deepEqual(old,before,'migration must not rewrite its caller-owned input');
+      assert.deepEqual(normalizeProfile(migrated),migrated,'normalization must be idempotent');
+    }
+  }
+  const mixed=profile(); mixed.boss_kills=[15,3,0]; mixed.boss_generations=[[8,4,2,1,0],[0,0,0,0,0],[0,0,0,0,0]];
+  assert.deepEqual(normalizeProfile(mixed).boss_generations,[[8,4,2,1,0],[3,0,0,0,0],[0,0,0,0,0]],'each legacy family migrates independently');
+});
+
+test('generation boundary rejects malformed or impossible promoted counters and accepts saturated aggregates', () => {
+  const valid=profile(); valid.boss_generations=[[16,8,4,2,1],[6,3,1,0,0],[0,0,0,0,0]]; valid.boss_kills=[31,10,0];
+  assert.equal(validProfile(valid),true);
+  for(const mutation of [
+    p=>p.boss_generations=null,p=>p.boss_generations=undefined,p=>p.boss_generations=[],p=>p.boss_generations=Array(3),
+    p=>p.boss_generations[0]=Array(5),p=>p.boss_generations[0]=[16,8,4,2],p=>p.boss_generations[0].push(0),
+    p=>p.boss_generations[0][0]=-1,p=>p.boss_generations[0][0]=0.5,p=>p.boss_generations[0][0]=NaN,
+    p=>p.boss_generations[0][0]=Infinity,p=>p.boss_generations[0][0]=2**32,p=>p.boss_generations[0][0]='16',
+    p=>p.boss_kills[0]=30,
+    p=>{p.boss_generations[0]=[1,1,0,0,0];p.boss_kills[0]=2;},
+    p=>{p.boss_generations[0]=[8,4,3,0,0];p.boss_kills[0]=15;},
+    p=>{p.boss_generations[0]=[8,4,2,2,0];p.boss_kills[0]=16;},
+    p=>{p.boss_generations[0]=[8,4,2,1,1];p.boss_kills[0]=16;},
+    p=>{p.boss_generations[2]=[1,0,0,0,0];},
+  ]) { const candidate=structuredClone(valid); mutation(candidate); assert.equal(validProfile(candidate),false); assert.equal(normalizeProfile(candidate),null); }
+  const saturated=profile(); saturated.boss_generations[0]=[0xffffffff,0x7fffffff,0x3fffffff,0x1fffffff,0x0fffffff]; saturated.boss_kills[0]=0xffffffff;
+  assert.equal(validProfile(saturated),true,'aggregate uses the same u32 saturation as Rust counters');
+});
+
+test('same-schema legacy current and backup persist canonical generation matrices atomically with unchanged revisions', async t => {
+  await fixture(t); const old=profile(19,[90,12,7]); delete old.boss_generations; old.boss_kills=[7,4,2]; old.kills=[240,96,48]; old.pending=[true,false,true];
+  const backup=profile(18,[87,12,7]); backup.boss_kills=[6,4,2];
+  await corrupt(old,backup); const store=new SaveStore();t.after(()=>store.db?.close());const loaded=await store.open();
+  assert.deepEqual(loaded,normalizeProfile(old));
+  const [current,previous]=await snapshots(); assert.deepEqual(current,normalizeProfile(old)); assert.deepEqual(previous,normalizeProfile(backup));
+  assert.equal(current.revision,19);assert.equal(previous.revision,18);
+  await store.save({...loaded,currency:[9000,12,7]}); assert.deepEqual((await snapshots())[0],current,'same revision cannot turn migration into a reward');
+});
+
+test('generation counters, surplus base kills and pending reservations survive reload without duplicate advancement', async t => {
+  const store=await fixture(t); const fought=profile(100,[30,40,50]);
+  fought.boss_generations=[[16,8,4,2,0],[4,1,0,0,0],[0,0,0,0,0]]; fought.boss_kills=[30,5,0]; fought.kills=[453,120,23]; fought.pending=[true,true,false];
+  const expected=structuredClone(fought);const saving=store.save(fought);fought.boss_generations[0][0]=999;await saving;
+  const reopened=new SaveStore();t.after(()=>reopened.db?.close());const loaded=await reopened.open();assert.deepEqual(loaded,expected);
+  loaded.boss_generations[0][0]=999;
+  const equal=structuredClone(expected);equal.boss_generations[0]=[29,1,0,0,0];equal.currency=[3000,4000,5000];
+  await reopened.save(equal);assert.deepEqual((await snapshots())[0],expected,'equal revision cannot replay a boss award or replace its promotion state');
+  const next=structuredClone(expected);next.revision=101;next.boss_generations[0][4]=1;next.boss_kills[0]=31;
+  await reopened.save(next);assert.deepEqual((await snapshots())[0],next);assert.deepEqual((await snapshots())[1],expected);
+});
+
+test('another session cannot overwrite a newer boss defeat with stale counters even at a newer proposed revision', async t => {
+  const first=await fixture(t);const baseline=profile(50,[8,9,10]);baseline.boss_generations[0]=[8,4,2,1,0];baseline.boss_kills[0]=15;baseline.pending[0]=true;
+  await first.save(baseline);const second=new SaveStore();t.after(()=>second.db?.close());await second.open();
+  const won=structuredClone(baseline);won.revision=51;won.boss_generations[0][0]=9;won.boss_kills[0]=16;won.pending[0]=false;won.currency[0]=9;await first.save(won);
+  const stale=structuredClone(baseline);stale.revision=52;stale.currency[0]=999;
+  await assert.rejects(second.save(stale),error=>error instanceof SaveConflict);
+  assert.deepEqual((await snapshots())[0],won);assert.deepEqual((await snapshots())[1],baseline);
+});
+
+test('impossible generation current recovers its prior legacy snapshot and invalid imports cannot replace it', async t => {
+  const store=await fixture(t);const legacy=profile(9,[9,10,11]);delete legacy.boss_generations;legacy.boss_kills[1]=4;legacy.kills[1]=121;legacy.pending[1]=true;
+  const invalid=profile(10,[10,10,11]);invalid.boss_generations[1]=[4,3,0,0,0];invalid.boss_kills[1]=7;
+  await corrupt(invalid,legacy);const recovered=new SaveStore();t.after(()=>recovered.db?.close());assert.deepEqual(await recovered.open(),normalizeProfile(legacy));assert.match(recovered.message,/Recovered/);
+  const before=await snapshots();await assert.rejects(recovered.replace(invalid),/supported/);assert.deepEqual(await snapshots(),before);
+  const imported=profile(3,[1,2,3]);imported.seed=42;imported.boss_generations[2]=[8,4,2,1,0];imported.boss_kills[2]=15;
+  await recovered.replace(imported);imported.boss_generations[2][0]=999;assert.equal((await snapshots())[0].boss_generations[2][0],8);
+  await store.flush();
 });

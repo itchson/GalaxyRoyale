@@ -232,6 +232,7 @@ impl Game {
         let center = Vec2::from_array(site.position);
         let champion = &CHAMPIONS[index];
         let opponent = self.spawn_enemy(champion.family, true, center + Vec2::new(115.0, 0.0), 1);
+        let _ = self.world.remove_one::<BossEncounter>(opponent);
         let body = campaign::body(index);
         if let Ok(mut actor) = self.world.get::<&mut Actor>(opponent) {
             actor.health = champion.health * if tournament { 1.15 } else { 1.0 };
@@ -770,7 +771,7 @@ impl Game {
             let color = rgba(c.color[0], c.color[1], c.color[2], 210);
             for n in 0..8 {
                 frame.push_pixel(
-                    position + forward(n as f32 * TAU / 8.0 + self.time * 0.15) * 25.0,
+                    position + forward(n as f32 * TAU / 8.0 + self.cosmetic_time() * 0.15) * 25.0,
                     1.4,
                     color,
                 );

@@ -51,11 +51,39 @@ fn to_js(value: &impl Serialize) -> Result<JsValue, JsValue> {
 #[cfg(feature = "qa-contract")]
 #[wasm_bindgen]
 pub fn checkpoint_contract(stage: &str) -> Result<JsValue, JsValue> {
-    let mut game = Game::new(Profile::default());
+    let mut profile = Profile::default();
     match stage {
-        "fresh" => {}
-        "champion" => game.diagnostic("champion-0"),
+        "fresh" | "champion" => {}
+        "generations" => {
+            // Valid saved credit with both higher-tier queues and reserved base credit.
+            let mut value = serde_json::to_value(&profile).map_err(js)?;
+            value["boss_generations"] =
+                serde_json::json!([[18, 9, 4, 2, 1], [6, 3, 1, 0, 0], [26, 13, 6, 2, 1]]);
+            value["boss_kills"] = serde_json::json!([34, 10, 48]);
+            value["kills"] = serde_json::json!([470, 158, 660]);
+            value["pending"] = serde_json::json!([true, false, true]);
+            value["currency"] = serde_json::json!([3, 4, 5]);
+            value["revision"] = serde_json::json!(9);
+            profile = serde_json::from_value(value).map_err(js)?;
+        }
+        "legacy-bosses" => {
+            let mut value = serde_json::to_value(&profile).map_err(js)?;
+            value
+                .as_object_mut()
+                .ok_or_else(|| js("Invalid profile fixture"))?
+                .remove("boss_generations");
+            value["boss_kills"] = serde_json::json!([4, 2, 8]);
+            value["kills"] = serde_json::json!([120, 60, 220]);
+            value["pending"] = serde_json::json!([true, false, true]);
+            value["currency"] = serde_json::json!([7, 8, 9]);
+            value["revision"] = serde_json::json!(9);
+            profile = serde_json::from_value(value).map_err(js)?;
+        }
         _ => return Err(js("Unknown checkpoint contract stage")),
+    }
+    let mut game = Game::new(profile);
+    if stage == "champion" {
+        game.diagnostic("champion-0");
     }
     to_js(game.profile())
 }
@@ -135,7 +163,11 @@ impl Galaxy {
         self.game.render_into(alpha, &mut self.frame);
         self.ui_frame.clear();
         hud.camera = self.game.render_camera(alpha);
-        let amount = if self.shake { hud.shake } else { 0.0 };
+        let amount = if self.shake && !self.reduced_motion {
+            hud.shake
+        } else {
+            0.0
+        };
         let render_camera = [
             hud.camera[0] + (hud.time * 83.0).sin() * amount,
             hud.camera[1] + (hud.time * 71.0).cos() * amount,
@@ -252,6 +284,7 @@ impl Galaxy {
     }
     pub fn set_reduced_motion(&mut self, value: bool) {
         self.reduced_motion = value;
+        self.game.set_reduced_motion(value);
         if value {
             self.camera_zoom.snap();
             self.update_world_viewport();

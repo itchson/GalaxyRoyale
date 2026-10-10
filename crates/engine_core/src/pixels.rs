@@ -61,9 +61,15 @@ impl PixelBody {
     }
 
     pub fn cells(&self) -> impl Iterator<Item = (Vec2, u32)> + '_ {
+        self.cells_indexed()
+            .map(|(_, position, color)| (position, color))
+    }
+
+    /// Stable row-major indices allow role masks to partition surviving cells.
+    pub fn cells_indexed(&self) -> impl Iterator<Item = (usize, Vec2, u32)> + '_ {
         (0..self.colors.len())
             .filter(|&index| self.occupied_index(index))
-            .map(|index| (self.center(index), self.colors[index]))
+            .map(|index| (index, self.center(index), self.colors[index]))
     }
 
     /// Earliest segment contact with an occupied unit square. Uses clipped grid
@@ -339,9 +345,10 @@ mod tests {
             b.hit_segment(Vec2::new(0.5, 0.5), Vec2::new(0.5, 0.5)),
             None
         );
-        assert!(b
-            .hit_segment(Vec2::new(-0.5, -0.5), Vec2::new(-0.5, -0.5))
-            .is_some());
+        assert!(
+            b.hit_segment(Vec2::new(-0.5, -0.5), Vec2::new(-0.5, -0.5))
+                .is_some()
+        );
     }
 
     #[test]

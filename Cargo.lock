@@ -115,6 +115,7 @@ dependencies = [
  "bytemuck",
  "glam",
  "serde",
+ "serde_json",
 ]
 
 [[package]]

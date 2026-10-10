@@ -1,0 +1,21 @@
+   Compiling game_core v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\game_core)
+   Compiling boss_live_qa v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\scripts\qa\boss-live)
+    Finished `release` profile [optimized] target(s) in 5.83s
+     Running `work/boss-live/target\release\boss_live_qa.exe work/boss-live-combat.json`
+boss-dart-1: actual projectile combat defeat after 7.73s; phases {"Attack charging", "Core exposed", "Radial weave"}; telegraph 118 steps; rewards unchanged; sanctuary true
+boss-dart-2: actual projectile combat defeat after 7.68s; phases {"Attack charging", "Core exposed", "Locked dash"}; telegraph 189 steps; rewards unchanged; sanctuary true
+boss-dart-3: actual projectile combat defeat after 10.92s; phases {"Attack charging", "Core exposed", "Scissor pass"}; telegraph 207 steps; rewards unchanged; sanctuary true
+boss-dart-4: actual projectile combat defeat after 11.77s; phases {"Attack charging", "Core exposed", "Gap spiral"}; telegraph 170 steps; rewards unchanged; sanctuary true
+boss-dart-5: actual projectile combat defeat after 9.38s; phases {"Attack charging", "Core exposed", "Royal cross"}; telegraph 157 steps; rewards unchanged; sanctuary true
+boss-bastion-1: actual projectile combat defeat after 8.95s; phases {"Aimed fan", "Attack charging", "Core exposed"}; telegraph 142 steps; rewards unchanged; sanctuary true
+boss-bastion-2: actual projectile combat defeat after 9.73s; phases {"Attack charging", "Core exposed", "Siege broadside"}; telegraph 151 steps; rewards unchanged; sanctuary true
+boss-bastion-3: actual projectile combat defeat after 11.55s; phases {"Attack charging", "Core exposed", "Pincer gates"}; telegraph 162 steps; rewards unchanged; sanctuary true
+boss-bastion-4: actual projectile combat defeat after 11.73s; phases {"Attack charging", "Core exposed", "Quadrant wall"}; telegraph 171 steps; rewards unchanged; sanctuary true
+boss-bastion-5: actual projectile combat defeat after 12.35s; phases {"Attack charging", "Core exposed", "Rotating rails"}; telegraph 213 steps; rewards unchanged; sanctuary true
+boss-coil-1: actual projectile combat defeat after 8.12s; phases {"Attack charging", "Core exposed", "Serpent pursuit"}; telegraph 130 steps; rewards unchanged; sanctuary true
+boss-coil-2: actual projectile combat defeat after 8.52s; phases {"Attack charging", "Core exposed", "Sidewinder rush"}; telegraph 149 steps; rewards unchanged; sanctuary true
+boss-coil-3: actual projectile combat defeat after 12.02s; phases {"Attack charging", "Core exposed", "Ouroboros loop"}; telegraph 150 steps; rewards unchanged; sanctuary true
+boss-coil-4: actual projectile combat defeat after 11.42s; phases {"Attack charging", "Core exposed", "Tail barrage"}; telegraph 173 steps; rewards unchanged; sanctuary true
+boss-coil-5: actual projectile combat defeat after 10.98s; phases {"Attack charging", "Core exposed", "Vortex lunge"}; telegraph 169 steps; rewards unchanged; sanctuary true
+Native queue proof: G5 spawn -> retreat -> reload -> actual hostile death at 7.00s -> G5 retry; counters unchanged.
+Actual native diagnostic-combat results: 15/15 completed with unchanged rewards; report work/boss-live-combat.json

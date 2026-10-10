@@ -177,13 +177,21 @@ export class PixelUiBridge {
         )) {
           const input = label.querySelector<HTMLInputElement>("input");
           const text = label.childNodes[0]?.textContent ?? "";
+          const rangeProgress = () => {
+            const min = input!.min === "" ? 0 : Number(input!.min);
+            const max = input!.max === "" ? 100 : Number(input!.max);
+            const value = Number(input!.value);
+            return Number.isFinite(min) && Number.isFinite(max) && Number.isFinite(value) && max > min
+              ? Math.max(0, Math.min(1, (value - min) / (max - min)))
+              : 0;
+          };
           if (input)
             add(
               label,
               input.type === "range" ? "slider" : "toggle",
               text,
               input.type === "range"
-                ? Number(input.value)
+                ? rangeProgress()
                 : input.checked
                   ? 1
                   : 0,

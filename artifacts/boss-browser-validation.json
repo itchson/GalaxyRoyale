@@ -1,0 +1,91 @@
+{
+  "recordedAt": "2026-10-10T18:17:01.194Z",
+  "cacheVersion": "galaxy-5a206c9f1e2acf40",
+  "procedure": "Actual in-app browser controls, settings range keys, backtick console and held WASD; no hidden game-state mutation.",
+  "captures": [
+    {
+      "path": "artifacts/boss-settings-720-zoom-default.jpg",
+      "mimeType": "image/jpeg",
+      "sha256": "67c8828af07606961e96f1957b5591bd12ce65b67b8657afbd5bdde661c37d19"
+    },
+    {
+      "path": "artifacts/boss-settings-720-zoom-max.jpg",
+      "mimeType": "image/jpeg",
+      "sha256": "a7766f11ac7d4bbbeb916505f67216dec5308afc27b05d7a91f8a6298cf31db7"
+    },
+    {
+      "path": "artifacts/boss-coil-g5-zoom-min.jpg",
+      "mimeType": "image/jpeg",
+      "sha256": "77382dd36f40ba4c7e6b53edea68627243db9365e7e7a889becab2e1185b2ebb"
+    },
+    {
+      "path": "artifacts/boss-dart-g5-zoom-min.jpg",
+      "mimeType": "image/jpeg",
+      "sha256": "4bc0f1500e2aa512d125774ce688662c9c2d5e5b3ac994069a0d6d34a715f801"
+    },
+    {
+      "path": "artifacts/boss-bastion-g5-zoom-max.jpg",
+      "mimeType": "image/jpeg",
+      "sha256": "281af57f833eef8ef96f658f9b78dc64139e390cccab8b0bce5f8c319afb022a"
+    },
+    {
+      "path": "artifacts/boss-bastion-g5-webgl2.jpg",
+      "mimeType": "image/jpeg",
+      "sha256": "5e842c1ac3987d02ec4f4ec2db05fbec569793e205f809d29e26b4f2b451ecc0"
+    }
+  ],
+  "checks": [
+    {
+      "name": "Final compact settings",
+      "result": "pass",
+      "observed": "720x360: all nine settings visible, five footer actions in one row. Zoom default1 thumb40%, maximum1.6 endpoint. Four pixels of lower padding overflow remain; labels/actions visible."
+    },
+    {
+      "name": "Wheel minimum and increment",
+      "result": "pass",
+      "observed": "Actual canvas wheel reached0.6 and increased to0.76. Minimum telemetry WORLD888x500 / UI533x300 was recorded before the final boss art/spawn update; zoom implementation unchanged."
+    },
+    {
+      "name": "Final maximum zoom projection",
+      "result": "pass",
+      "observed": "Actual Settings rangeEnd selected1.6; settled WebGPU telemetry WORLD450x225 / UI720x360. The maximum was set through the real slider; repeated wheel endpoint input was not accepted as evidence."
+    },
+    {
+      "name": "Final deep-boss backend presentation",
+      "result": "pass",
+      "observed": "WebGPU Coil5/Dart5 at0.6 and Bastion5 at1.6; WebGL2 Bastion5 at1.6, WORLD333x188 / UI533x300,1280x720 backing. Actual phase and hull changes observed. Readable fixed HUD and crisp occupied-cell geometry."
+    },
+    {
+      "name": "Final PWA update",
+      "result": "pass",
+      "observed": "Pending local release applied at Haven via actual Apply update action; checkpoint restored at title. Repeated after compact-settings build. Packaging independently confirms18 game assets."
+    },
+    {
+      "name": "All fifteen browser choreography, full silhouettes/cores and natural progression balance",
+      "result": "not_run",
+      "observed": "Representative stills crop large bosses and the top-center boss HUD overlaps some geometry. Native fifteen-fight sweep and uncropped rig proof are separate evidence."
+    },
+    {
+      "name": "Current live-boss device loss/recovery and forced initialization failure",
+      "result": "not_run",
+      "observed": "Earlier renderer recovery checks do not substitute for this new content."
+    },
+    {
+      "name": "Physical phone, Safari, thermal30-minute soak and mobile audio",
+      "result": "not_run",
+      "observed": "No physical device measurement. Short desktop239-240FPS/p954.3ms is not GPU timing or mobile performance acceptance."
+    }
+  ],
+  "automated": {
+    "rust": 122,
+    "shell": 66,
+    "actualWasmContracts": 8,
+    "nativeRealProjectileBossDefeats": 15,
+    "packedExtractionFrames": 2400
+  },
+  "baselineDefectCaptures": [
+    "artifacts/boss-coil-g5-webgpu.jpg",
+    "artifacts/boss-settings-720-before-layout-fix.jpg"
+  ],
+  "limitations": "Diagnostic scenes isolate all rewards. Native combat uses declared level12/rank5 Sovereign and read-only weak-point aiming; it does not establish human Scout balance. Remote gameplay after owner login remains unmeasured."
+}

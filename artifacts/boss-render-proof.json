@@ -1,0 +1,493 @@
+{
+  "frames": 2400,
+  "full_coil5": {
+    "object_transforms": 45,
+    "quads": 13233
+  },
+  "max_instance_capacity": 131072,
+  "max_table_capacity": 32,
+  "scenarios": [
+    {
+      "geometry_hash": "d1047da56f2c655c",
+      "quads": 129345,
+      "repeated_frames": 40,
+      "scene": "stress",
+      "tables": 20,
+      "zoom": 0.6000000238418579
+    },
+    {
+      "geometry_hash": "4af37805ca2ac3d6",
+      "quads": 93811,
+      "repeated_frames": 40,
+      "scene": "stress",
+      "tables": 19,
+      "zoom": 1.600000023841858
+    },
+    {
+      "geometry_hash": "8254dccf5f0d69ec",
+      "quads": 5914,
+      "repeated_frames": 40,
+      "scene": "boss-dart-1",
+      "tables": 3,
+      "zoom": 0.6000000238418579
+    },
+    {
+      "geometry_hash": "77c4a9d7c0cd72b0",
+      "quads": 2641,
+      "repeated_frames": 40,
+      "scene": "boss-dart-1",
+      "tables": 3,
+      "zoom": 1.600000023841858
+    },
+    {
+      "geometry_hash": "acd0014b22a8940d",
+      "quads": 129345,
+      "repeated_frames": 40,
+      "scene": "stress",
+      "tables": 20,
+      "zoom": 0.6000000238418579
+    },
+    {
+      "geometry_hash": "c22ed6b00f08932e",
+      "quads": 127894,
+      "repeated_frames": 40,
+      "scene": "stress",
+      "tables": 20,
+      "zoom": 1.600000023841858
+    },
+    {
+      "geometry_hash": "c5891820c61b1fb6",
+      "quads": 6451,
+      "repeated_frames": 40,
+      "scene": "boss-dart-2",
+      "tables": 3,
+      "zoom": 0.6000000238418579
+    },
+    {
+      "geometry_hash": "fde8c094ef7fb275",
+      "quads": 2621,
+      "repeated_frames": 40,
+      "scene": "boss-dart-2",
+      "tables": 3,
+      "zoom": 1.600000023841858
+    },
+    {
+      "geometry_hash": "b398630ad3e11eee",
+      "quads": 129345,
+      "repeated_frames": 40,
+      "scene": "stress",
+      "tables": 20,
+      "zoom": 0.6000000238418579
+    },
+    {
+      "geometry_hash": "6e494e587559d3f8",
+      "quads": 127885,
+      "repeated_frames": 40,
+      "scene": "stress",
+      "tables": 20,
+      "zoom": 1.600000023841858
+    },
+    {
+      "geometry_hash": "bc39cd9b9af2152a",
+      "quads": 7369,
+      "repeated_frames": 40,
+      "scene": "boss-dart-3",
+      "tables": 3,
+      "zoom": 0.6000000238418579
+    },
+    {
+      "geometry_hash": "9e9a87f4e4b96d73",
+      "quads": 2607,
+      "repeated_frames": 40,
+      "scene": "boss-dart-3",
+      "tables": 3,
+      "zoom": 1.600000023841858
+    },
+    {
+      "geometry_hash": "e918ecab809f87a2",
+      "quads": 129345,
+      "repeated_frames": 40,
+      "scene": "stress",
+      "tables": 20,
+      "zoom": 0.6000000238418579
+    },
+    {
+      "geometry_hash": "980e72bf95c12cb6",
+      "quads": 127882,
+      "repeated_frames": 40,
+      "scene": "stress",
+      "tables": 20,
+      "zoom": 1.600000023841858
+    },
+    {
+      "geometry_hash": "c5a035e2f8e54575",
+      "quads": 7898,
+      "repeated_frames": 40,
+      "scene": "boss-dart-4",
+      "tables": 3,
+      "zoom": 0.6000000238418579
+    },
+    {
+      "geometry_hash": "56b2aa1ce5eafab9",
+      "quads": 2609,
+      "repeated_frames": 40,
+      "scene": "boss-dart-4",
+      "tables": 3,
+      "zoom": 1.600000023841858
+    },
+    {
+      "geometry_hash": "290f9349b1b993d3",
+      "quads": 129345,
+      "repeated_frames": 40,
+      "scene": "stress",
+      "tables": 20,
+      "zoom": 0.6000000238418579
+    },
+    {
+      "geometry_hash": "4cb276066ec98bf6",
+      "quads": 127903,
+      "repeated_frames": 40,
+      "scene": "stress",
+      "tables": 20,
+      "zoom": 1.600000023841858
+    },
+    {
+      "geometry_hash": "4e288b353bf52e8e",
+      "quads": 9729,
+      "repeated_frames": 40,
+      "scene": "boss-dart-5",
+      "tables": 3,
+      "zoom": 0.6000000238418579
+    },
+    {
+      "geometry_hash": "d04f72a88a17fcf9",
+      "quads": 2657,
+      "repeated_frames": 40,
+      "scene": "boss-dart-5",
+      "tables": 3,
+      "zoom": 1.600000023841858
+    },
+    {
+      "geometry_hash": "2af3fd91b9b84da2",
+      "quads": 129345,
+      "repeated_frames": 40,
+      "scene": "stress",
+      "tables": 20,
+      "zoom": 0.6000000238418579
+    },
+    {
+      "geometry_hash": "e2e1fd0d948c9c61",
+      "quads": 127885,
+      "repeated_frames": 40,
+      "scene": "stress",
+      "tables": 20,
+      "zoom": 1.600000023841858
+    },
+    {
+      "geometry_hash": "7db1681bbe73afac",
+      "quads": 6799,
+      "repeated_frames": 40,
+      "scene": "boss-bastion-1",
+      "tables": 3,
+      "zoom": 0.6000000238418579
+    },
+    {
+      "geometry_hash": "e4ef3d74682ff8d2",
+      "quads": 2622,
+      "repeated_frames": 40,
+      "scene": "boss-bastion-1",
+      "tables": 3,
+      "zoom": 1.600000023841858
+    },
+    {
+      "geometry_hash": "ea49002cc2879248",
+      "quads": 129345,
+      "repeated_frames": 40,
+      "scene": "stress",
+      "tables": 20,
+      "zoom": 0.6000000238418579
+    },
+    {
+      "geometry_hash": "fe792578e58af1ea",
+      "quads": 127894,
+      "repeated_frames": 40,
+      "scene": "stress",
+      "tables": 20,
+      "zoom": 1.600000023841858
+    },
+    {
+      "geometry_hash": "16d5ab5a2de03b40",
+      "quads": 7423,
+      "repeated_frames": 40,
+      "scene": "boss-bastion-2",
+      "tables": 3,
+      "zoom": 0.6000000238418579
+    },
+    {
+      "geometry_hash": "080e0e56ff87906c",
+      "quads": 2664,
+      "repeated_frames": 40,
+      "scene": "boss-bastion-2",
+      "tables": 3,
+      "zoom": 1.600000023841858
+    },
+    {
+      "geometry_hash": "c886c583fdb0fafb",
+      "quads": 129345,
+      "repeated_frames": 40,
+      "scene": "stress",
+      "tables": 20,
+      "zoom": 0.6000000238418579
+    },
+    {
+      "geometry_hash": "9aff63c28e026083",
+      "quads": 127891,
+      "repeated_frames": 40,
+      "scene": "stress",
+      "tables": 20,
+      "zoom": 1.600000023841858
+    },
+    {
+      "geometry_hash": "419a89e96e13c89d",
+      "quads": 8785,
+      "repeated_frames": 40,
+      "scene": "boss-bastion-3",
+      "tables": 3,
+      "zoom": 0.6000000238418579
+    },
+    {
+      "geometry_hash": "1acabf6a6b978494",
+      "quads": 2713,
+      "repeated_frames": 40,
+      "scene": "boss-bastion-3",
+      "tables": 3,
+      "zoom": 1.600000023841858
+    },
+    {
+      "geometry_hash": "044966a33937b201",
+      "quads": 129345,
+      "repeated_frames": 40,
+      "scene": "stress",
+      "tables": 20,
+      "zoom": 0.6000000238418579
+    },
+    {
+      "geometry_hash": "9cc2667cae224f78",
+      "quads": 127885,
+      "repeated_frames": 40,
+      "scene": "stress",
+      "tables": 20,
+      "zoom": 1.600000023841858
+    },
+    {
+      "geometry_hash": "cb4f0a1e33e6834b",
+      "quads": 9380,
+      "repeated_frames": 40,
+      "scene": "boss-bastion-4",
+      "tables": 3,
+      "zoom": 0.6000000238418579
+    },
+    {
+      "geometry_hash": "23caace9e6a9b3eb",
+      "quads": 2646,
+      "repeated_frames": 40,
+      "scene": "boss-bastion-4",
+      "tables": 3,
+      "zoom": 1.600000023841858
+    },
+    {
+      "geometry_hash": "f5e64bf80d935004",
+      "quads": 129345,
+      "repeated_frames": 40,
+      "scene": "stress",
+      "tables": 20,
+      "zoom": 0.6000000238418579
+    },
+    {
+      "geometry_hash": "3efad14d2a80f638",
+      "quads": 127876,
+      "repeated_frames": 40,
+      "scene": "stress",
+      "tables": 20,
+      "zoom": 1.600000023841858
+    },
+    {
+      "geometry_hash": "4eafe87d80821fb9",
+      "quads": 10333,
+      "repeated_frames": 40,
+      "scene": "boss-bastion-5",
+      "tables": 3,
+      "zoom": 0.6000000238418579
+    },
+    {
+      "geometry_hash": "7753ff5622a53eff",
+      "quads": 2664,
+      "repeated_frames": 40,
+      "scene": "boss-bastion-5",
+      "tables": 3,
+      "zoom": 1.600000023841858
+    },
+    {
+      "geometry_hash": "24bf1c2b2a1e953b",
+      "quads": 129345,
+      "repeated_frames": 40,
+      "scene": "stress",
+      "tables": 20,
+      "zoom": 0.6000000238418579
+    },
+    {
+      "geometry_hash": "b7ec6514142a4f82",
+      "quads": 127891,
+      "repeated_frames": 40,
+      "scene": "stress",
+      "tables": 20,
+      "zoom": 1.600000023841858
+    },
+    {
+      "geometry_hash": "a49ad4ad65fd1665",
+      "quads": 6642,
+      "repeated_frames": 40,
+      "scene": "boss-coil-1",
+      "tables": 3,
+      "zoom": 0.6000000238418579
+    },
+    {
+      "geometry_hash": "c5756e80dbc365c5",
+      "quads": 2629,
+      "repeated_frames": 40,
+      "scene": "boss-coil-1",
+      "tables": 3,
+      "zoom": 1.600000023841858
+    },
+    {
+      "geometry_hash": "8a73a56e46823213",
+      "quads": 129345,
+      "repeated_frames": 40,
+      "scene": "stress",
+      "tables": 20,
+      "zoom": 0.6000000238418579
+    },
+    {
+      "geometry_hash": "e40bc6cc0cd55d78",
+      "quads": 127870,
+      "repeated_frames": 40,
+      "scene": "stress",
+      "tables": 20,
+      "zoom": 1.600000023841858
+    },
+    {
+      "geometry_hash": "dd7686579b82b1bf",
+      "quads": 7596,
+      "repeated_frames": 40,
+      "scene": "boss-coil-2",
+      "tables": 3,
+      "zoom": 0.6000000238418579
+    },
+    {
+      "geometry_hash": "6f8502f6d0af3296",
+      "quads": 2650,
+      "repeated_frames": 40,
+      "scene": "boss-coil-2",
+      "tables": 3,
+      "zoom": 1.600000023841858
+    },
+    {
+      "geometry_hash": "92cd440dabba5cce",
+      "quads": 129345,
+      "repeated_frames": 40,
+      "scene": "stress",
+      "tables": 20,
+      "zoom": 0.6000000238418579
+    },
+    {
+      "geometry_hash": "585fef22df515abc",
+      "quads": 127897,
+      "repeated_frames": 40,
+      "scene": "stress",
+      "tables": 20,
+      "zoom": 1.600000023841858
+    },
+    {
+      "geometry_hash": "29120e66e87d3b0d",
+      "quads": 7501,
+      "repeated_frames": 40,
+      "scene": "boss-coil-3",
+      "tables": 3,
+      "zoom": 0.6000000238418579
+    },
+    {
+      "geometry_hash": "43c392b15af5f506",
+      "quads": 2640,
+      "repeated_frames": 40,
+      "scene": "boss-coil-3",
+      "tables": 3,
+      "zoom": 1.600000023841858
+    },
+    {
+      "geometry_hash": "45eb361db5ac90f8",
+      "quads": 129345,
+      "repeated_frames": 40,
+      "scene": "stress",
+      "tables": 20,
+      "zoom": 0.6000000238418579
+    },
+    {
+      "geometry_hash": "67c87b65c07a28d8",
+      "quads": 127891,
+      "repeated_frames": 40,
+      "scene": "stress",
+      "tables": 20,
+      "zoom": 1.600000023841858
+    },
+    {
+      "geometry_hash": "0a8475fdce901335",
+      "quads": 8715,
+      "repeated_frames": 40,
+      "scene": "boss-coil-4",
+      "tables": 3,
+      "zoom": 0.6000000238418579
+    },
+    {
+      "geometry_hash": "1e60878d96096873",
+      "quads": 2623,
+      "repeated_frames": 40,
+      "scene": "boss-coil-4",
+      "tables": 3,
+      "zoom": 1.600000023841858
+    },
+    {
+      "geometry_hash": "19d0867082813b22",
+      "quads": 129345,
+      "repeated_frames": 40,
+      "scene": "stress",
+      "tables": 20,
+      "zoom": 0.6000000238418579
+    },
+    {
+      "geometry_hash": "abec7dbd40e1b4c7",
+      "quads": 127873,
+      "repeated_frames": 40,
+      "scene": "stress",
+      "tables": 20,
+      "zoom": 1.600000023841858
+    },
+    {
+      "geometry_hash": "ef1427ea58ba471e",
+      "quads": 10207,
+      "repeated_frames": 40,
+      "scene": "boss-coil-5",
+      "tables": 3,
+      "zoom": 0.6000000238418579
+    },
+    {
+      "geometry_hash": "d01cb962d3840ca8",
+      "quads": 2655,
+      "repeated_frames": 40,
+      "scene": "boss-coil-5",
+      "tables": 3,
+      "zoom": 1.600000023841858
+    }
+  ],
+  "scope": "public Game extraction plus exact renderer CPU packing; excludes GPU/browser/device acceptance",
+  "status": "passed"
+}

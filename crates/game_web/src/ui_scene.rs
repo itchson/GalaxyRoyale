@@ -253,10 +253,12 @@ fn load_assets(source: &str) -> Assets {
         .map(|(name, sprite)| {
             assert!((1..=512).contains(&sprite.width) && (1..=512).contains(&sprite.height));
             assert_eq!(sprite.indices.len(), sprite.width * sprite.height);
-            assert!(sprite
-                .indices
-                .iter()
-                .all(|&i| (i as usize) < atlas.palette.len()));
+            assert!(
+                sprite
+                    .indices
+                    .iter()
+                    .all(|&i| (i as usize) < atlas.palette.len())
+            );
             let rows: Vec<String> = sprite
                 .indices
                 .chunks_exact(sprite.width)
@@ -1183,9 +1185,11 @@ mod tests {
                 assert!(aw.distance(bw) < 0.001);
             }
         }
-        assert!(wrap("ONE TWO THREE LONGWORD", 5)
-            .iter()
-            .all(|line| line.len() <= 5));
+        assert!(
+            wrap("ONE TWO THREE LONGWORD", 5)
+                .iter()
+                .all(|line| line.len() <= 5)
+        );
     }
     #[test]
     fn reduced_motion_freezes_generated_art_and_normal_motion_changes_it() {

@@ -316,9 +316,26 @@ pub fn draw_ui(
     ui.text(20.0, 29.0, &status, 1.0, if hud.safe { MINT } else { GOLD });
     if let Some(boss) = &hud.boss {
         let x = (viewport.x * 0.5 - 110.0).floor();
-        ui.panel(x, 44.0, 220.0, 24.0);
-        ui.text(x + 7.0, 49.0, &boss.name, 1.0, MAGENTA);
-        ui.bar(x + 7.0, 59.0, 206.0, boss.health, boss.max_health, RED);
+        let name = if boss.generation > 0 {
+            format!("G{} / {}", boss.generation, boss.name)
+        } else {
+            boss.name.clone()
+        };
+        let phase = if boss.telegraph {
+            format!("WARNING / {}", boss.phase)
+        } else {
+            boss.phase.clone()
+        };
+        ui.panel(x, 44.0, 220.0, 40.0);
+        ui.text(x + 7.0, 49.0, &bounded_label(&name), 1.0, MAGENTA);
+        ui.text(
+            x + 7.0,
+            61.0,
+            &bounded_label(&phase),
+            1.0,
+            if boss.telegraph { GOLD } else { DIM },
+        );
+        ui.bar(x + 7.0, 75.0, 206.0, boss.health, boss.max_health, RED);
     }
 
     let currency_x = viewport.x - 214.0;
@@ -345,14 +362,16 @@ pub fn draw_ui(
             compact(hud.cargo_capacity)
         );
         let status_width = status.chars().count() as f32 * RoyaleMono::ADVANCE - 1.0;
+        // Share the hull panel's opaque backing so bright actors cannot erase
+        // the level/cargo line; its existing screen footprint stays unchanged.
+        ui.panel(meter_x, meter_y - 12.0, 176.0, 36.0);
         ui.text(
             (viewport.x - status_width) * 0.5,
-            meter_y - 10.0,
+            meter_y - 7.0,
             &status,
             1.0,
             DIM,
         );
-        ui.panel(meter_x, meter_y, 176.0, 24.0);
         ui.text(meter_x + 7.0, meter_y + 5.0, "HULL", 1.0, DIM);
         ui.bar(
             meter_x + 37.0,
@@ -416,6 +435,9 @@ fn ratio(value: f32, maximum: f32) -> f32 {
     } else {
         (value / maximum).clamp(0.0, 1.0)
     }
+}
+fn bounded_label(text: &str) -> String {
+    text.chars().take(34).collect()
 }
 fn compact(value: u32) -> String {
     if value >= 1_000_000_000 {
@@ -551,10 +573,12 @@ mod tests {
         let moving = positions(Vec2::new(1700.25, -900.5));
         assert!(stationary.len() > 100);
         assert_eq!(stationary.len(), moving.len());
-        assert!(stationary
-            .iter()
-            .zip(moving)
-            .all(|(a, b)| a.distance(b) < 0.001));
+        assert!(
+            stationary
+                .iter()
+                .zip(moving)
+                .all(|(a, b)| a.distance(b) < 0.001)
+        );
     }
 
     #[test]
@@ -591,14 +615,18 @@ mod tests {
         };
         assert!(positions(&hud).iter().all(|p| p.y < 100.0));
         hud.hull *= 0.5;
-        assert!(positions(&hud)
-            .iter()
-            .any(|p| p.y > 320.0 && p.x > 232.0 && p.x < 408.0));
+        assert!(
+            positions(&hud)
+                .iter()
+                .any(|p| p.y > 320.0 && p.x > 232.0 && p.x < 408.0)
+        );
         hud.dock = false;
         hud.position = [1200.0, 0.0];
-        assert!(positions(&hud)
-            .iter()
-            .any(|p| p.x > 580.0 && p.y > 216.0 && p.y < 264.0));
+        assert!(
+            positions(&hud)
+                .iter()
+                .any(|p| p.x > 580.0 && p.y > 216.0 && p.y < 264.0)
+        );
     }
 
     #[test]
@@ -611,18 +639,66 @@ mod tests {
         let mut frame = FrameBuilder::new();
         draw_ui(&mut frame, &hud, [0.0; 2], [640.0, 360.0], 1);
         let mut status_cells = 0;
+        let mut status_backing = false;
         for batch in &frame.frame().batches {
             for pixel in &batch.pixels {
-                let p = batch.transforms[pixel.transform as usize]
-                    .point(Vec2::from_array(pixel.local))
-                    + Vec2::new(320.0, 180.0);
-                if p.y > 310.0 && p.y < 324.0 {
+                let transform = batch.transforms[pixel.transform as usize];
+                let p = transform.point(Vec2::from_array(pixel.local)) + Vec2::new(320.0, 180.0);
+                if pixel.color == INK && transform.a[2] >= 170.0 && transform.b[1] >= 36.0 {
+                    status_backing = p.y - transform.b[1] * 0.5 <= 312.0;
+                }
+                if pixel.color == DIM && p.y > 310.0 && p.y < 324.0 {
                     assert!(p.x > 232.0 && p.x < 408.0);
                     status_cells += 1;
                 }
             }
         }
         assert!(status_cells > 100);
+        assert!(
+            status_backing,
+            "busy actors must remain behind the status caption"
+        );
+    }
+
+    #[test]
+    fn generation_and_warning_fit_the_boss_panel_at_landscape_extents() {
+        let mut hud = game_core::Game::new(game_core::Profile::default()).hud();
+        hud.boss = Some(game_core::BossHud {
+            name: "A DELIBERATELY LONG BOSS TITLE TO TEST CLIPPING".into(),
+            health: 90.0,
+            max_health: 100.0,
+            family: 2,
+            generation: 5,
+            phase: "TELEGRAPH THAT MUST FIT ITS PANEL".into(),
+            telegraph: true,
+            position: [0.0; 2],
+            core_position: [0.0; 2],
+        });
+        for viewport in [[533.0, 300.0], [720.0, 360.0], [844.0, 390.0]] {
+            let camera = Vec2::new(1250.0, -345.0);
+            let origin = camera - Vec2::from_array(viewport) * 0.5;
+            let panel_x = (viewport[0] * 0.5 - 110.0).floor();
+            let mut frame = FrameBuilder::new();
+            draw_ui(&mut frame, &hud, camera.to_array(), viewport, 1);
+            let mut warning_cells = 0;
+            for batch in &frame.frame().batches {
+                for pixel in &batch.pixels {
+                    let position = batch.transforms[pixel.transform as usize]
+                        .point(Vec2::from_array(pixel.local))
+                        - origin;
+                    if position.y >= 44.0 && position.y < 84.0 {
+                        assert!(position.x >= panel_x && position.x < panel_x + 220.0);
+                        if position.y >= 61.0 && pixel.color == GOLD {
+                            warning_cells += 1;
+                        }
+                    }
+                }
+            }
+            assert!(
+                warning_cells > 30,
+                "actual warning glyph cells must be visible"
+            );
+        }
     }
 
     #[test]

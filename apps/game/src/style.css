@@ -1143,6 +1143,24 @@ body:not(.engine-flight) #toast {
   flex: 0 0 calc(80px * var(--ui-scale, 2));
   min-width: calc(80px * var(--ui-scale, 2));
 }
+@media (orientation: landscape) and (max-height: 470px) {
+  .settings {
+    gap: calc(8px * var(--ui-scale));
+  }
+  .menu-actions {
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) repeat(4, minmax(0, 1fr));
+    gap: calc(6px * var(--ui-scale));
+  }
+  .menu-actions .primary-button,
+  .menu-actions #export-save,
+  .menu-actions #menu-fullscreen,
+  .menu-actions #return-title,
+  .menu-actions #import-label {
+    min-width: 0;
+    min-height: max(44px, calc(24px * var(--ui-scale)));
+  }
+}
 #quest-content li {
   font-size: calc(9px * var(--ui-scale));
   line-height: 1.8;

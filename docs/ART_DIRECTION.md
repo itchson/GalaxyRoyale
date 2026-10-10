@@ -45,3 +45,22 @@ RoyaleMono is original 5×7 cell artwork defined in `crates/game_web/src/pixel_u
 Conversion checks verify exact dimensions, row-major indices, hard alpha, common palettes, crop boundaries, sampled silhouettes and byte-identical reruns. The UI check additionally verifies that disconnected components survive. Evidence is recorded in `work/ui-atlas-tests.log`; source and output hashes are in `artifacts/asset-provenance.json` and `assets/ui/provenance.json`. Script help contains reproducible Python/Pillow commands.
 
 Physical phone performance and final visual acceptance remain separate checks. Audio uses an authored chip/synth score and synthesized cues; optional offline music generation is a later asset experiment.
+
+## Fifteen ordinary bosses
+
+`assets/pixels/boss-source.py` authors fifteen distinct 64-unit hull designs and five Coil modules. It writes `boss-atlas.json`, measured `boss-budgets.json`, and the optional Pillow contact sheet `boss-preview.png`. These are original authored cells rather than image-model output. Each head has its own silhouette, armor panel layout, actual transparent openings and occupied reactor; later tiers add forked wings, citadel bays or annular/gill shapes. Native sizes are 64, 72, 80, 88 and 96 cells. The common 64-entry hard-alpha palette retains magenta Dart, amber Bastion and jade Coil recognition, with layered metal shading, rails, vents and firing hardware.
+
+| Family | Generation 1 | Generation 2 | Generation 3 | Generation 4 | Generation 5 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Dart head | 1,760 | 2,318 | 3,251 | 3,779 | 5,563 |
+| Bastion head | 2,664 | 3,247 | 4,561 | 5,224 | 6,161 |
+| Coil head | 1,990 | 2,755 | 2,886 | 3,949 | 5,633 |
+| Coil module | 84 | 168 | 152 | 312 | 400 |
+
+`boss_atlas.rigs` provides a row-major per-cell part index, an earlier-parent translation hierarchy, and an occupied local core position/radius. The shared engine `PixelRig` partitions the current damaged body into seven nested hull/armor/collar/lens/emitter objects. It derives each part's local cells from surviving occupancy and composes their exact affine placements into the actor hierarchy, including shear. No pristine child template restores removed cells. Parts remain rigid with the collision hull; color and emission animate. Independently moving collision limbs would require a separate hitbox assembly change.
+
+The actual design review with gameplay agreed on telegraph, attack and recovery phases: charge brightens the emitter objects and recovery opens a brighter pulsing reactor. The rig supports flashing surviving cells, while current boss hits use debris, hit events and presentation shake. The gameplay module owns localized recovery-core bonus damage, generation thresholds, movement and projectile mechanics. Maximum engine material emission is 0.6 for the core and 0.5 for emitters. Source colors and occupancy remain unchanged. Reduced motion freezes cosmetic presentation time while preserving charging and open-core phase cues.
+
+The deepest Coil composition is 5,633 head cells plus nineteen 400-cell modules: 13,233 quads and 45 transforms, fitting one 128-transform batch before other scene objects. This is a per-boss budget; total gameplay cost also includes other enemies, bullets, particles, background, lights and UI. Whole-atlas native tests verify normalized silhouette differences, every role's occupied cells, local core bounds, damage holes, exact positions under nested nonuniform shear, dimensions 1 and 128, and the 16-part engine ceiling.
+
+Reproduce the art with `python assets/pixels/boss-source.py` and proofs with `cargo test -p engine_core` and `cargo run --release -p engine_core --example boss_rig_proof`. The measured development-workstation report is `assets/pixels/boss-native-proof.json`: 500 warmed samples per scene. The deepest Coil's native CPU extraction measured about 0.205 ms median and 0.209 ms p95 in that run. Those figures exclude simulation, GPU work, browser/WASM overhead and physical phones. The contact sheet has been visually reviewed as development evidence; integrated browser and device acceptance remain separate.

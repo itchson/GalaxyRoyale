@@ -1,9 +1,8 @@
 {
-  "commit_sha": "b68335d745053b0d40dd33a39140ff574798dd67",
-  "id": "appgdep_6aca6faae1948191a481c6701ebb4d61",
+  "id": "appgdep_6aca74e7cdd081919a5fc47d40f3d1c5",
   "project_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93",
   "title": "Galaxy Royale",
-  "version_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93~appgver_59fb1ad950e48191af8a1db503129a62",
+  "version_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93~appgver_81d6fda4d89881919884f643e81ce87e",
   "type": "publish",
   "status": "succeeded",
   "url": "https://galaxy-royale-itchson.itchson.chatgpt.site",
@@ -12,7 +11,19 @@
   "provider_deployment_id": "site---6aca50f5b1bc81918526a6ee969aac93",
   "failure_message": null,
   "env_set_revision": 0,
-  "updated_at": "2026-10-10T17:02:55.639276+00:00",
+  "updated_at": "2026-10-10T17:25:14.183481+00:00",
+  "commit_sha": "bab9d0fafb3b01c2dbd91b0df4486fb60f262461",
+  "cacheVersion": "galaxy-9566662a96bfc281",
   "browserAccess": "Owner login required; unauthenticated in-app browser reached OpenAI login. Published app execution was checked locally in the same packaged WebGL2 build, not behind the remote login.",
-  "archiveContent": "Only game dist including18 cached assets and normalized .openai/hosting.json; local studio excluded."
+  "archiveContent": "Only game dist including18 cached assets and normalized .openai/hosting.json; local studio excluded.",
+  "previousDeployments": [
+    {
+      "id": "appgdep_6aca6faae1948191a481c6701ebb4d61",
+      "version_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93~appgver_59fb1ad950e48191af8a1db503129a62",
+      "commit_sha": "b68335d745053b0d40dd33a39140ff574798dd67",
+      "status": "succeeded",
+      "updated_at": "2026-10-10T17:02:55.639276+00:00"
+    }
+  ],
+  "validation": "Corrected fresh-profile checkpoint verified in local packaged WebGL2; four real dual-WASM contract checks pass. Remote execution after owner sign-in remains unmeasured."
 }

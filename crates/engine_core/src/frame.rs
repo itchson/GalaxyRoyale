@@ -224,6 +224,47 @@ impl FrameBuilder {
         self.frame.pixel_count += 1;
     }
 
+    /// Extracts a streamed occupied subobject without allocating a PixelBody or
+    /// cloning a pristine template. Empty subobjects consume no transform slot.
+    pub fn push_cells_affine_material(
+        &mut self,
+        transform: AffineTransform,
+        material: PixelMaterial,
+        cells: impl IntoIterator<Item = (Vec2, u32)>,
+    ) -> usize {
+        if !transform.position.is_finite()
+            || !transform.basis_x.is_finite()
+            || !transform.basis_y.is_finite()
+        {
+            return 0;
+        }
+        let mut cells = cells.into_iter().filter(|(local, _)| local.is_finite());
+        let Some(first) = cells.next() else {
+            return 0;
+        };
+        let slot = self.add_transform(GpuTransform::from(transform).with_material(material));
+        let batch = self
+            .frame
+            .batches
+            .last_mut()
+            .expect("transform creates batch");
+        let previous = batch.pixels.len();
+        batch
+            .pixels
+            .extend(
+                std::iter::once(first)
+                    .chain(cells)
+                    .map(|(local, color)| PixelInstance {
+                        local: local.to_array(),
+                        color,
+                        transform: slot,
+                    }),
+            );
+        let count = batch.pixels.len() - previous;
+        self.frame.pixel_count += count;
+        count
+    }
+
     pub fn finish(self) -> RenderFrame {
         self.frame
     }
@@ -361,10 +402,12 @@ mod tests {
             [128, 128, 1]
         );
         for batch in &frame.batches {
-            assert!(batch
-                .pixels
-                .iter()
-                .all(|pixel| (pixel.transform as usize) < batch.transforms.len()));
+            assert!(
+                batch
+                    .pixels
+                    .iter()
+                    .all(|pixel| (pixel.transform as usize) < batch.transforms.len())
+            );
         }
         assert_eq!(frame.batches[1].pixels[0].transform, 0);
         assert_eq!(frame.batches[2].transforms[0].a[0], 256.0);
@@ -506,17 +549,21 @@ mod tests {
             first.batches[0].pixels[0].color,
             first.batches[0].pixels[1].color
         );
-        assert!(first.batches[0]
-            .pixels
-            .iter()
-            .all(|pixel| pixel.local[0] != 0.0));
+        assert!(
+            first.batches[0]
+                .pixels
+                .iter()
+                .all(|pixel| pixel.local[0] != 0.0)
+        );
         assert!(body.cells().all(|(_, color)| color == 0xff_abcdef));
         builder.clear();
         builder.push_body_colored(&body, Transform::default(), |_, color| color ^ 0x0000_ff00);
         assert_eq!(builder.frame().pixel_count, 2);
-        assert!(builder.frame().batches[0]
-            .pixels
-            .iter()
-            .all(|pixel| pixel.color == 0xff_ab32ef));
+        assert!(
+            builder.frame().batches[0]
+                .pixels
+                .iter()
+                .all(|pixel| pixel.color == 0xff_ab32ef)
+        );
     }
 }

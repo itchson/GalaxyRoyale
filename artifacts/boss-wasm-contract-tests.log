@@ -1,0 +1,14 @@
+$ node --experimental-transform-types scripts/test-wasm-contract.mjs
+(node:17960) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+Building isolated webgpu WASM checkpoint contract.
+   Compiling engine_core v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\engine_core)
+   Compiling game_core v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\game_core)
+   Compiling game_web v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\game_web)
+    Finished `release` profile [optimized] target(s) in 4.83s
+PASS webgpu: fresh, champion, generations and legacy-bosses checkpoints validate and persist; release excludes QA probe.
+Building isolated webgl2 WASM checkpoint contract.
+   Compiling game_web v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\game_web)
+    Finished `release` profile [optimized] target(s) in 1.83s
+PASS webgl2: fresh, champion, generations and legacy-bosses checkpoints validate and persist; release excludes QA probe.
+PASS: eight real WASM checkpoint/save/reload scenarios across two backends; no browser or GPU mocks.

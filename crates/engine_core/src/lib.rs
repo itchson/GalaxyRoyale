@@ -4,6 +4,7 @@
 mod camera;
 mod frame;
 mod pixels;
+mod pixel_rig;
 mod topology;
 mod transform;
 
@@ -13,5 +14,6 @@ pub use frame::{
 };
 pub use glam::Vec2;
 pub use pixels::PixelBody;
+pub use pixel_rig::{PixelRig, PixelRigError, PixelRigPart, PixelRigRole, PixelRigState, MAX_PIXEL_RIG_PARTS};
 pub use topology::{CircularTopology, CircularWrap, CircularWrapError, MAX_CIRCULAR_CROSSINGS};
 pub use transform::{AffineTransform, Transform};
