@@ -1,0 +1,3 @@
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.02s
+     Running `scripts\asset-native-preview\target\debug\asset-native-preview.exe assets/pipeline/pan-coop-dock/native256/pack.json pan256-lamps assets/pipeline/pan-coop-dock/native256/native-extraction.json`
+Extracted 3 actual native frames

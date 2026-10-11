@@ -1,0 +1,10 @@
+   Compiling game_web v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\game_web)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 3.25s
+     Running unittests src\lib.rs (target\debug\deps\game_web-9ea70f65f4ad26fd.exe)
+
+running 2 tests
+test ui_scene::tests::meishi_panel_preflights_both_shared_quotas_without_partial_emission ... ok
+test ui_scene::tests::meishi_panel_has_distinct_trim_and_whole_clipped_relative_geometry ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 210 filtered out; finished in 0.00s
+

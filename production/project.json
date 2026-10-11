@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 676,
+  "revision": 720,
   "name": "Galaxy Royale",
   "phase": "Playable solo slice → content and validation",
-  "updatedAt": "2026-10-11T10:18:38.804Z",
+  "updatedAt": "2026-10-11T12:23:22.368Z",
   "tasks": [
     {
       "id": "studio",
@@ -1039,10 +1039,10 @@
     {
       "id": "task-05dd95cd",
       "title": "Invite friends for co-op expeditions",
-      "description": "Future multiplayer milestone requested by user; no multiplayer acceptance claimed in solo slice.",
+      "description": "Accepted eight participants including host. Central dock Invite/Join with encrypted hex invitation; guests use host seed and dock. Host quits/joins elsewhere ends session and guests return to their own local worlds. Gameplay specialist is implementing signaling/admission tests in an isolated branch. Shared authoritative Rust entities, actual WebRTC peers, progression ownership and cross-network recovery remain pending.",
       "department": "Networking",
       "owner": "Unassigned",
-      "status": "backlog",
+      "status": "active",
       "priority": "normal",
       "dependencies": [
         "task-7e8e0a50"
@@ -1063,9 +1063,9 @@
       ],
       "evidence": [],
       "blocker": "",
-      "revision": 2,
+      "revision": 3,
       "createdAt": "2026-10-10T15:31:55.153Z",
-      "updatedAt": "2026-10-10T16:00:27.004Z"
+      "updatedAt": "2026-10-11T11:18:51.352Z"
     },
     {
       "id": "task-7e8e0a50",
@@ -4964,7 +4964,7 @@
     {
       "id": "task-55bd21c0",
       "title": "One canonical testing-branch game preview",
-      "description": "Close verified older project game servers, use one strict-port current codex/testing preview and keep Studio separate. Temporary QA servers stop when finished.",
+      "description": "OS-held game lease spans dev/preview/worktrees; supervisors clean owned children. Existing listener ownership was verified before replacement. Final normal build runs one game preview4173 and lease4172 in the same process; Studio4174/4175 remains separate. Temporary QA client closed, active user run preserved. Source/package receipt required on codex/testing; stale builds and foreign listeners fail visibly.",
       "department": "Web/QA",
       "owner": "/root",
       "status": "complete",
@@ -5000,12 +5000,22 @@
           "label": "Live local preview receipt (refreshes on canonical startup)",
           "kind": "note",
           "path": "work/game-preview.json"
+        },
+        {
+          "label": "Frozen tested build and runtime limits",
+          "kind": "note",
+          "path": "artifacts/meishi-20261011/README.md"
+        },
+        {
+          "label": "Current canonical preview identity",
+          "kind": "note",
+          "path": "work/game-preview.json"
         }
       ],
       "blocker": "",
-      "revision": 3,
+      "revision": 5,
       "createdAt": "2026-10-11T02:54:12.335Z",
-      "updatedAt": "2026-10-11T04:10:25.092Z"
+      "updatedAt": "2026-10-11T12:23:22.275Z"
     },
     {
       "id": "task-2aff015a",
@@ -6196,24 +6206,24 @@
     {
       "id": "task-09d2d171",
       "title": "Quiet contextual pixel UI and compact RAICHO status",
-      "description": "User requests smaller, simpler native-pixel text, correctly spaced interactive icons and restrained motion inspired by primary Overwatch/Halo research. Root owns shell typography, settings and menu hierarchy. Gameplay owns compact live status and explicit detail disclosure. Engine independently checks native text scaling/layout and implements any justified fractional typography fix. Art independently reviews hierarchy and contextual motion. No blanket readability or physical-device acceptance.",
+      "description": "Compact contextual native-pixel UI implemented and checked in WebGL2 and WebGPU at1280x720/848x390. Full Details button and real expansion work; Settings labels are complete and Session controls remain keyboard-reachable through compact scrolling. Historical failed captures retained separately. Native/component regressions and primary design references are recorded. Broader human/device readability remains outside these bounded desktop checks.",
       "department": "UI/UX",
       "owner": "/root",
-      "status": "active",
+      "status": "complete",
       "priority": "high",
       "dependencies": [],
       "acceptanceCriteria": [
         {
           "text": "Primary-source design references and original Galaxy Royale hierarchy are documented; repeated headings and optional technical information are reduced.",
-          "met": false
+          "met": true
         },
         {
           "text": "Stable status nodes expose correct hull,shield,slots,cargo and authoritative affinity; explicit details keep focus/scroll and update live.",
-          "met": false
+          "met": true
         },
         {
           "text": "Native pixel glyphs and interactive regions fit measured layout; desktop and compact both-renderer captures and appropriate regression checks are recorded.",
-          "met": false
+          "met": true
         }
       ],
       "evidence": [
@@ -6221,34 +6231,39 @@
           "label": "Actual assignment",
           "kind": "note",
           "details": "User requests smaller, simpler native-pixel text, correctly spaced interactive icons and restrained motion inspired by primary Overwatch/Halo research. Root owns shell typography, settings and menu hierarchy. Gameplay owns compact live status and explicit detail disclosure. Engine independently checks native text scaling/layout and implements any justified fractional typography fix. Art independently reviews hierarchy and contextual motion. No blanket readability or physical-device acceptance."
+        },
+        {
+          "label": "Actual source, browser and lifecycle evidence",
+          "kind": "note",
+          "path": "artifacts/runtime-studio-20261011/README.md"
         }
       ],
       "blocker": "",
-      "revision": 1,
+      "revision": 2,
       "createdAt": "2026-10-11T10:08:15.250Z",
-      "updatedAt": "2026-10-11T10:08:15.250Z"
+      "updatedAt": "2026-10-11T11:31:36.813Z"
     },
     {
       "id": "task-57db0993",
       "title": "Corporation starter abilities: drive, three-chunk guard and fifth-shot lens",
-      "description": "Latest user clarification: PAN green/passive speed boost; HUGO blue/defense starts with a three-chunk shield ability; RENKO red/offense adds a stronger extra projectile every fifth shot. Resolve current HUGO five-chunk exception and existing eighth-shot cadence with explicit actual mechanic tests, preserve licensed identity and save grants.",
+      "description": "Canonical starters implemented: PAN passive Flux Drive speed; HUGO Guard Coil30HP/three10HP chunks and later earned recharge; RENKO stronger extra projectile each fifth admitted primary shot. Real projectile/cap/safety/save regressions and integrated native suite pass. Isolated PAN browser license preserves correct zero shield/passive slot on reload; earlier actual HUGO30shield capture retained.",
       "department": "Gameplay",
       "owner": "/root/gameplay_design",
-      "status": "active",
+      "status": "complete",
       "priority": "high",
       "dependencies": [],
       "acceptanceCriteria": [
         {
           "text": "PAN starter improves speed only in the compatible equipped passive slot; role/color data stays canonical.",
-          "met": false
+          "met": true
         },
         {
           "text": "HUGO starter shield ability starts with exactly three10HP chunks; later capacity/recharge upgrades are earned.",
-          "met": false
+          "met": true
         },
         {
           "text": "RENKO starter produces the extra higher-damage projectile on each fifth actual primary shot, with save/slot and safety regressions.",
-          "met": false
+          "met": true
         }
       ],
       "evidence": [
@@ -6256,12 +6271,216 @@
           "label": "Actual assignment",
           "kind": "note",
           "details": "Latest user clarification: PAN green/passive speed boost; HUGO blue/defense starts with a three-chunk shield ability; RENKO red/offense adds a stronger extra projectile every fifth shot. Resolve current HUGO five-chunk exception and existing eighth-shot cadence with explicit actual mechanic tests, preserve licensed identity and save grants."
+        },
+        {
+          "label": "Actual source, browser and lifecycle evidence",
+          "kind": "note",
+          "path": "artifacts/runtime-studio-20261011/README.md"
         }
       ],
       "blocker": "",
-      "revision": 1,
+      "revision": 2,
       "createdAt": "2026-10-11T10:08:15.285Z",
-      "updatedAt": "2026-10-11T10:08:15.285Z"
+      "updatedAt": "2026-10-11T11:31:36.837Z"
+    },
+    {
+      "id": "task-dbe93a67",
+      "title": "Seeded node radii and reserved zone clearance",
+      "description": "Typed deterministic seed-resolved radii, bounded envelope placement, home corridor clearance and all nine required arena nodes implemented. Actual consumers use canonical radii. Independent source review plus seeded geometry, discovery, arena/safety/physics regressions and combined native suite are recorded. Natural world/arena balance remains a separate play-review gate.",
+      "department": "Engine/World/Art",
+      "owner": "/root/gameplay_design",
+      "status": "complete",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Canonical seed-resolved IDs, spawn positions and type-specific radius ranges preserve all mandatory campaign encounters and saved references.",
+          "met": true
+        },
+        {
+          "text": "Complete protected radii and optional belt envelopes have proven separation, home-corridor and world-edge clearance across adjacent/diagonal cells and varied seeds.",
+          "met": true
+        },
+        {
+          "text": "Actual mission, campaign, safety and physics consumers use the canonical radius; full relevant regression and source review evidence is recorded.",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual assignment",
+          "kind": "note",
+          "details": "Latest user request: mission sites, eight champion arenas and Galaxy Royale nodes have deterministic type-specific radius ranges and nonoverlapping zones with free room for their belts/surroundings. Gameplay implements in isolated branch; Engine independently reviews geometry and safety/campaign integration. Root integrates and verifies. Descriptors resolve from seed before discovery; active world materialization stays bounded."
+        },
+        {
+          "label": "Actual source, browser and lifecycle evidence",
+          "kind": "note",
+          "path": "artifacts/runtime-studio-20261011/README.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-11T10:32:29.556Z",
+      "updatedAt": "2026-10-11T11:31:36.850Z"
+    },
+    {
+      "id": "task-cf5259a9",
+      "title": "Detailed RAICHO source art becomes damage-masked runtime pixel quads",
+      "description": "Reviewed96-cell fine RAICHO overlays are integrated over live48-cell damage bodies. All three corporation extraction/count/tint/damage tests and independent source review pass. Actual PAN hull screenshots confirm both renderers at1x/1.6x. Retained alpha, hierarchy and atomic per-object budgets verified in native tests. This completes bounded runtime integration; all-hull moving GPU damage/zoom, cold-cache cost, human art and physical performance remain explicit separate gates.",
+      "department": "Engine/World/Art",
+      "owner": "/root/production_research",
+      "status": "complete",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Strict cached source parsing and source palette/mask constraints are tested; authorship/provenance remain accurate.",
+          "met": true
+        },
+        {
+          "text": "Fine detail follows relative transforms, live damage occupancy, material/tint animation and atomic bounded packet admission without filling destroyed cells.",
+          "met": true
+        },
+        {
+          "text": "Both actual renderer captures and source review are recorded; remaining human art/performance gates are explicit.",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual assignment",
+          "kind": "note",
+          "details": "Reviewed original96-cell source pack is already imported and technically tested. Art now implements cached sparse fine overlays over retained live48-cell collision bodies; Root owns shared draw integration. Engine independently checks atomic budgets, transforms and damage holes. High-detail source does not yet constitute runtime or human style acceptance."
+        },
+        {
+          "label": "Actual source, browser and lifecycle evidence",
+          "kind": "note",
+          "path": "artifacts/runtime-studio-20261011/README.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-11T10:32:29.584Z",
+      "updatedAt": "2026-10-11T11:31:36.862Z"
+    },
+    {
+      "id": "task-6f886f1f",
+      "title": "Detailed generated PAN dock with bounded native quadrant animation",
+      "description": "Integrated offline256 candidate92fb9f6/bc910fa:28,549cells16transforms,three lamp-only states and compressed decoded-hash proof. Art native checks, Gameplay exact packet review and root conversion verification pass. Production game dock replacement, interaction geometry, GPU visual/human approval and measured runtime cost remain pending.",
+      "department": "Art/Engine",
+      "owner": "/root/production_research",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Source provenance, conversion losses, palette and complete silhouette are explicit and reproducible.",
+          "met": true
+        },
+        {
+          "text": "Higher-detail256 candidate retains relative transforms and lamp-only states in actual bounded PixelRig extraction.",
+          "met": true
+        },
+        {
+          "text": "Both game renderer integration, interaction geometry, human art review and measured cost are recorded before shipping replacement.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Native128 candidate and visual comparison",
+          "kind": "note",
+          "path": "artifacts/runtime-studio-20261011/README.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-11T11:32:06.321Z",
+      "updatedAt": "2026-10-11T11:54:33.837Z"
+    },
+    {
+      "id": "task-613742d2",
+      "title": "MEISHI CARD and distinct cargo, hull and ability collections",
+      "description": "Implemented standalone read-only MEISHI with animated native portrait, active RAICHO/XP/loadout, eight patch slots and retained corporate points. Close only; separate live RAICHO menu via Escape/status retains collections. Discovery-first hull/ability views and carried/banked mission cargo use Rust authority. Root desktop both-backend checks and actual PWA update preserve observed progression. Physical/human/performance acceptance remains tracked separately; component recipes remain backlog.",
+      "department": "Gameplay/UI",
+      "owner": "/root",
+      "status": "complete",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Card reads authoritative identity, current RAICHO, eight patch slots and three retained point balances with native pixel assets.",
+          "met": true
+        },
+        {
+          "text": "Materials and mission cargo are separate from discovery-first hull and ability collections; real crafting/equip/upgrade rules remain authoritative.",
+          "met": true
+        },
+        {
+          "text": "Both renderer browser layouts, live-menu behavior and unchanged save progression have actual recorded evidence.",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual card implementation and focused tests",
+          "kind": "note",
+          "details": "Source1a6bf7c integrated74469d0; specialist11 focused tests; root71 combined UI tests and3 cargo subset/banking/mission tests pass. Browser acceptance pending."
+        },
+        {
+          "label": "Final desktop acceptance and limits",
+          "kind": "note",
+          "path": "artifacts/meishi-20261011/README.md"
+        },
+        {
+          "label": "Standalone MEISHI on WebGPU",
+          "kind": "screenshot",
+          "path": "artifacts/meishi-20261011/standalone-webgpu-1280.png"
+        },
+        {
+          "label": "Compact standalone MEISHI on WebGL2",
+          "kind": "screenshot",
+          "path": "artifacts/meishi-20261011/standalone-webgl2-848.png"
+        },
+        {
+          "label": "Exact tested source/package receipt",
+          "kind": "note",
+          "path": "artifacts/meishi-20261011/standalone-tested-build.json"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-11T11:45:51.937Z",
+      "updatedAt": "2026-10-11T12:23:22.238Z"
+    },
+    {
+      "id": "task-1cba1e46",
+      "title": "Crafted components for advanced ability upgrade recipes",
+      "description": "User direction: some higher-level ability upgrades consume crafted components plus matching corporation points. Current recipes consume raw tier or named training materials; do not call these crafted items. Define finite component inventory/recipes, explicit discovery/level gates, atomic spending, Rust-authoritative HUD/actions and versioned previous-save migration before implementation.",
+      "department": "Gameplay",
+      "owner": "/root/gameplay_design",
+      "status": "backlog",
+      "priority": "normal",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Actual crafted components have distinct owned counts and documented recipes.",
+          "met": false
+        },
+        {
+          "text": "Upgrade consumes matching points and component atomically with level/compatibility guards.",
+          "met": false
+        },
+        {
+          "text": "Save round trips, migration, failed spending and repeat actions preserve all balances.",
+          "met": false
+        }
+      ],
+      "evidence": [],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-11T11:46:13.155Z",
+      "updatedAt": "2026-10-11T11:46:13.155Z"
     }
   ],
   "reviews": [
@@ -7474,6 +7693,171 @@
           "path": "artifacts/fine-cosmic-affinity-20261011/README.md"
         }
       ]
+    },
+    {
+      "id": "review-3062f1d1",
+      "title": "Independent review caught and fixed Vite reservation restart failure",
+      "body": "Engine reviewed Root5aa920a and reproduced two defects using installed Vite: replacement creation conflicted with the old lease; closing a never-listened server leaked it. Root3d52739 uses a process-scoped reference handoff and explicit close cleanup. Engine executed five permanent real Vite tests (d4ca915, integrated99424d9), plus four lease/supervisor tests. All pass with ephemeral listeners closed. Same-process programmatic sharing is documented; CLI processes remain mutually exclusive.",
+      "author": "/root",
+      "source": "Actual integrated UI/node/hull and runtime review evidence, 2026-10-11",
+      "createdAt": "2026-10-11T11:31:36.889Z",
+      "participants": [
+        "/root",
+        "/root/engine_research"
+      ],
+      "taskIds": [
+        "task-55bd21c0"
+      ],
+      "evidence": [
+        {
+          "label": "Frozen independent review",
+          "kind": "note",
+          "path": "artifacts/runtime-studio-20261011/reviews/game-runtime-lease-independent-review/REVIEW.md"
+        }
+      ]
+    },
+    {
+      "id": "review-719dabd2",
+      "title": "Canonical node placement and actual fine-hull extraction survived integration",
+      "body": "Engine inspected exact integrated7744277 source and original author pins. No blocking source defect: mandatory nodes and envelope geometry retained; actual Game uses live damage occupancy, interpolated transforms, tint and atomic fallback. Root logs631 native passes/one ignored export and strict native/both-WASM Clippy are explicitly retained Root runs, not a reviewer rerun. Root subsequently captured actual PAN rendering and corrected UI on both backends.",
+      "author": "/root",
+      "source": "Actual integrated UI/node/hull and runtime review evidence, 2026-10-11",
+      "createdAt": "2026-10-11T11:31:36.903Z",
+      "participants": [
+        "/root",
+        "/root/engine_research",
+        "/root/gameplay_design",
+        "/root/production_research"
+      ],
+      "taskIds": [
+        "task-dbe93a67",
+        "task-cf5259a9"
+      ],
+      "evidence": [
+        {
+          "label": "Exact source review",
+          "kind": "note",
+          "path": "artifacts/runtime-studio-20261011/reviews/node-raicho-root-integration-review/REVIEW.md"
+        },
+        {
+          "label": "Actual source, browser and lifecycle evidence",
+          "kind": "note",
+          "path": "artifacts/runtime-studio-20261011/README.md"
+        }
+      ]
+    },
+    {
+      "id": "review-038a9259",
+      "title": "Eight-member signaling admitted and expired under real HTTP tests",
+      "body": "Gameplay authored2fe20c6 and Engine independently reran20 focused tests from exact source; root combined suite also passes. Authenticated encrypted invitations, host+seven admission, quotas, long polling, expiry and host termination reviewed with temporary port0 listeners closed. This is signaling only: actual WebRTC/shared Rust peer simulation and network deployment remain pending. Independent authority review corrects Spark claims: Bullet.player is boolean; Segment.owner belongs to Coil; host snapshots do not require guest lockstep.",
+      "author": "/root",
+      "source": "Frozen specialist reviews and integrated source, 2026-10-11",
+      "createdAt": "2026-10-11T11:54:33.708Z",
+      "participants": [
+        "/root",
+        "/root/gameplay_design",
+        "/root/engine_research"
+      ],
+      "taskIds": [
+        "task-05dd95cd"
+      ],
+      "evidence": [
+        {
+          "label": "Independent signaling review",
+          "kind": "note",
+          "path": "artifacts/runtime-studio-20261011/reviews/coop-signalling-independent-review/REVIEW.md"
+        },
+        {
+          "label": "Rust authority seam review",
+          "kind": "note",
+          "path": "artifacts/runtime-studio-20261011/reviews/coop-authority-next-slice/REVIEW.md"
+        }
+      ]
+    },
+    {
+      "id": "review-eb38acfa",
+      "title": "Detailed dock retains all cells in bounded native quadrant transforms",
+      "body": "Art92fb9f6:256 candidate28,549 cells,16 transforms,64 colors,three lamp-only states. Gameplay independently checks85,647 cells and342,588 corners from exact archived native packets. Root11Python tests and107input verification pass; Art5native tests and strictClippy recorded separately. Exact decoded35,638,621 proof bytes compressed to2,758,393 gzip bytes. This is offline/native candidate evidence, not shipping replacement, live GPU art approval or performance acceptance.",
+      "author": "/root",
+      "source": "Frozen specialist reviews and integrated source, 2026-10-11",
+      "createdAt": "2026-10-11T11:54:33.737Z",
+      "participants": [
+        "/root",
+        "/root/production_research",
+        "/root/gameplay_design"
+      ],
+      "taskIds": [
+        "task-6f886f1f"
+      ],
+      "evidence": [
+        {
+          "label": "Native packet review",
+          "kind": "note",
+          "path": "artifacts/meishi-20261011/reviews/pan-coop-dock-review/REVIEW.md"
+        }
+      ]
+    },
+    {
+      "id": "review-95d5db3f",
+      "title": "MEISHI integration review corrected persistent selection feedback",
+      "body": "Engine implemented card1a6bf7c with11focused UI adapter checks. Independent root7d33ee4 read-only integration review found collection buttons lost persistent highlight after focus moved away; root bridges aria-pressed through native nav-tab. Same correction covers collection filters while category actions retain color. Root410shell tests/1existing skip and631native tests/1existing ignored export pass. Stable card nodes, separate cargo subset accounting, one visible profile, live simulation with menu input suppressed, and no duplicate wallet are retained. Combined native composition and browser visuals are separate gates.",
+      "author": "/root",
+      "source": "Frozen specialist reviews and integrated source, 2026-10-11",
+      "createdAt": "2026-10-11T11:54:33.762Z",
+      "participants": [
+        "/root",
+        "/root/engine_research",
+        "/root/gameplay_design"
+      ],
+      "taskIds": [
+        "task-613742d2"
+      ],
+      "evidence": [
+        {
+          "label": "Actual source review with corrected finding",
+          "kind": "note",
+          "path": "artifacts/meishi-20261011/reviews/meishi-integration-review/REVIEW.md"
+        }
+      ]
+    },
+    {
+      "id": "review-88f6bd53",
+      "title": "Standalone MEISHI accepted on desktop; collections remain separate",
+      "body": "User correction removes all card navigation, Settings and save footer. Root implements one native card group and restores Escape/status to live RAICHO menu. Engine authored 14-quad frame and identified keyboard-scroll access; root fixed and browser verified it. Gameplay independently reviewed remaining inventory routes and three scroll adapters. Art updated four canon/wiki documents. Root IAB inspected WebGPU and WebGL2 at1280x720 and848x390; eight slots visible, only Close button. At640x280 Tab/End reaches scrolling card. Real PWA update at Haven and renderer reload preserve pilot identity, LV1 XP6, points[0,0,1] and FluxR1. OWNED filter retains visible focus; Blueprint hull filter hides unknowns. No browser warnings/errors in inspected log snapshots. Physical phones, cross-browser coverage, human art/audio approval and performance soak remain pending.",
+      "author": "/root",
+      "source": "Actual final standalone-card review and IAB browser checks, source69db89c",
+      "createdAt": "2026-10-11T12:23:22.138Z",
+      "participants": [
+        "/root",
+        "/root/engine_research",
+        "/root/gameplay_design",
+        "/root/production_research"
+      ],
+      "taskIds": [
+        "task-613742d2"
+      ],
+      "evidence": [
+        {
+          "label": "Final desktop acceptance and limits",
+          "kind": "note",
+          "path": "artifacts/meishi-20261011/README.md"
+        },
+        {
+          "label": "Standalone MEISHI on WebGPU",
+          "kind": "screenshot",
+          "path": "artifacts/meishi-20261011/standalone-webgpu-1280.png"
+        },
+        {
+          "label": "Compact standalone MEISHI on WebGL2",
+          "kind": "screenshot",
+          "path": "artifacts/meishi-20261011/standalone-webgl2-848.png"
+        },
+        {
+          "label": "Exact tested source/package receipt",
+          "kind": "note",
+          "path": "artifacts/meishi-20261011/standalone-tested-build.json"
+        }
+      ]
     }
   ],
   "decisions": [
@@ -7673,6 +8057,33 @@
       "author": "/root",
       "source": "Actual user steering and specialist assignments, 2026-10-11",
       "createdAt": "2026-10-11T10:09:13.525Z",
+      "status": "accepted"
+    },
+    {
+      "id": "decision-40c67e73",
+      "title": "Eight-player host-owned co-op and one persistent test runtime",
+      "body": "User direction: up to eight players including host; central dock Invite/Join; encrypted hexadecimal invite; shared host world/dock; host departure returns guests to their own local saves. Signaling is infrastructure, not playable co-op. Only Root starts the persistent game preview, specialists close ephemeral test listeners, and temporary browser clients are cleaned up. Existing single-player progression stays authoritative until a tested migration exists.",
+      "author": "/root",
+      "source": "Actual runtime audit and resumed bounded studio assignments, 2026-10-11",
+      "createdAt": "2026-10-11T11:18:51.392Z",
+      "status": "accepted"
+    },
+    {
+      "id": "decision-9a321378",
+      "title": "MEISHI is the identity and point ledger; inventories remain distinct",
+      "body": "MEISHI CARD replaces the player-facing license. It shows the selected native animated KIKAI portrait, current RAICHO and eight arena patches. Existing retained currency remains RENKO offensive, HUGO defensive, PAN passive. Material/mission cargo, hull collection and ability collection have separate views. Unknown identities remain hidden. Reuse Rust HUD/save authority and native pixel scene; no second inventory or renderer. Crafted components are a separate truthful backlog until actual recipes and persistence exist.",
+      "author": "/root",
+      "source": "Actual MEISHI integration and lean implementation work, 2026-10-11",
+      "createdAt": "2026-10-11T11:46:13.174Z",
+      "status": "accepted"
+    },
+    {
+      "id": "decision-d83f9379",
+      "title": "MEISHI is a standalone card, not collection navigation",
+      "body": "User explicitly requires no Cargo/Hulls/Abilities/Stats buttons, links or tabs on MEISHI. Card contains animated identity, current RAICHO, retained corporate points and eight patch slots, plus a close control. Escape/status icon open the live RAICHO menu; collections and MEISHI remain reachable there. One existing native UI group owns card-relative transforms; no second save or renderer.",
+      "author": "/root",
+      "source": "User correction and actual standalone-card implementation 2bab5b1",
+      "createdAt": "2026-10-11T12:15:47.736Z",
       "status": "accepted"
     }
   ],
@@ -9364,6 +9775,73 @@
       ],
       "url": "http://127.0.0.1:4173/?qa=1",
       "knownIssues": "New compact UI and clarified starter mechanics are active separate tasks. Human art/readability and physical acceptance remain pending."
+    },
+    {
+      "id": "build-15a73a4d",
+      "title": "Standalone MEISHI and lean collection integration",
+      "body": "Normal both-backend Rust/WASM, Vite, PWA and Studio build. No new dependency, save schema or renderer. Stable card nodes reuse authoritative HUD and existing portrait/asset pipeline. Hidden Forge rebuild and double menu painting removed. Card panel is bounded14quads; offline art proof losslessly compressed. No FPS speedup asserted.",
+      "author": "/root",
+      "source": "Actual final standalone-card review and IAB browser checks, source69db89c",
+      "createdAt": "2026-10-11T12:23:22.164Z",
+      "revision": "69db89ccf5895390807383fcdd37c3413ba2dc68",
+      "evidence": [
+        {
+          "label": "Final desktop acceptance and limits",
+          "kind": "note",
+          "path": "artifacts/meishi-20261011/README.md"
+        },
+        {
+          "label": "Standalone MEISHI on WebGPU",
+          "kind": "screenshot",
+          "path": "artifacts/meishi-20261011/standalone-webgpu-1280.png"
+        },
+        {
+          "label": "Compact standalone MEISHI on WebGL2",
+          "kind": "screenshot",
+          "path": "artifacts/meishi-20261011/standalone-webgl2-848.png"
+        },
+        {
+          "label": "Exact tested source/package receipt",
+          "kind": "note",
+          "path": "artifacts/meishi-20261011/standalone-tested-build.json"
+        }
+      ],
+      "checks": [
+        {
+          "name": "414 shell tests / one existing Windows symlink skip",
+          "result": "pass"
+        },
+        {
+          "name": "TypeScript",
+          "result": "pass"
+        },
+        {
+          "name": "212 game_web native library tests",
+          "result": "pass"
+        },
+        {
+          "name": "Strict workspace/all-target Clippy",
+          "result": "pass"
+        },
+        {
+          "name": "Both WASM backends / web / PWA / Studio normal build",
+          "result": "pass"
+        },
+        {
+          "name": "WebGPU + WebGL2 desktop card / keyboard / real update retention",
+          "result": "pass"
+        },
+        {
+          "name": "Physical phones and 30-minute performance soak",
+          "result": "not_run"
+        },
+        {
+          "name": "Playable remote eight-player co-op",
+          "result": "not_run"
+        }
+      ],
+      "url": "http://127.0.0.1:4173/?qa=1",
+      "knownIssues": "Advanced crafted-component recipes are backlog task-1cba1e46. PAN256 dock remains offline candidate. Physical/human/performance validation remains pending. Existing active user run was preserved; update can be applied at Haven through Settings."
     }
   ],
   "feedback": [],
@@ -16127,6 +16605,446 @@
       "author": "/root",
       "source": "Actual frozen65ecaf2 build, reviewed source packets and browser baseline",
       "createdAt": "2026-10-11T10:18:38.804Z"
+    },
+    {
+      "id": "692ab883-590f-4f7f-9001-123b9d8147dd",
+      "revision": 677,
+      "kind": "task.create",
+      "itemId": "task-dbe93a67",
+      "title": "Seeded node radii and reserved zone clearance",
+      "author": "/root",
+      "source": "Actual latest seeded-node and runtime-art assignments, 2026-10-11",
+      "createdAt": "2026-10-11T10:32:29.556Z"
+    },
+    {
+      "id": "5061369b-806b-4856-a504-0ec2453a2613",
+      "revision": 678,
+      "kind": "task.create",
+      "itemId": "task-cf5259a9",
+      "title": "Detailed RAICHO source art becomes damage-masked runtime pixel quads",
+      "author": "/root",
+      "source": "Actual latest seeded-node and runtime-art assignments, 2026-10-11",
+      "createdAt": "2026-10-11T10:32:29.584Z"
+    },
+    {
+      "id": "865480cf-aacb-448e-9a85-d425e11d1ffd",
+      "revision": 679,
+      "kind": "run",
+      "itemId": "run-f8198254",
+      "title": "World/gameplay specialist · running",
+      "author": "/root",
+      "source": "Actual latest seeded-node and runtime-art assignments, 2026-10-11",
+      "createdAt": "2026-10-11T10:32:29.612Z"
+    },
+    {
+      "id": "2f743551-647f-4924-a4d2-6e890130ed78",
+      "revision": 680,
+      "kind": "run",
+      "itemId": "run-ee74b295",
+      "title": "Independent engine reviewer · running",
+      "author": "/root",
+      "source": "Actual latest seeded-node and runtime-art assignments, 2026-10-11",
+      "createdAt": "2026-10-11T10:32:29.626Z"
+    },
+    {
+      "id": "ff114dfd-2895-4380-a5e2-82fb13136963",
+      "revision": 681,
+      "kind": "run",
+      "itemId": "run-156269a9",
+      "title": "Runtime pixel-art specialist · running",
+      "author": "/root",
+      "source": "Actual latest seeded-node and runtime-art assignments, 2026-10-11",
+      "createdAt": "2026-10-11T10:32:29.660Z"
+    },
+    {
+      "id": "357ccbb3-62f7-4857-8ba6-60d25b0dd2be",
+      "revision": 682,
+      "kind": "task.update",
+      "itemId": "task-05dd95cd",
+      "title": "Invite friends for co-op expeditions",
+      "author": "/root",
+      "source": "Actual runtime audit and resumed bounded studio assignments, 2026-10-11",
+      "createdAt": "2026-10-11T11:18:51.352Z"
+    },
+    {
+      "id": "9fc82110-a0af-48b2-8737-ec1a584d0fd8",
+      "revision": 683,
+      "kind": "task.update",
+      "itemId": "task-55bd21c0",
+      "title": "One canonical testing-branch game preview",
+      "author": "/root",
+      "source": "Actual runtime audit and resumed bounded studio assignments, 2026-10-11",
+      "createdAt": "2026-10-11T11:18:51.370Z"
+    },
+    {
+      "id": "33ed6cd4-6fec-4c2f-8474-a81de5ab3310",
+      "revision": 684,
+      "kind": "decision",
+      "itemId": "decision-40c67e73",
+      "title": "Eight-player host-owned co-op and one persistent test runtime",
+      "author": "/root",
+      "source": "Actual runtime audit and resumed bounded studio assignments, 2026-10-11",
+      "createdAt": "2026-10-11T11:18:51.392Z"
+    },
+    {
+      "id": "36b23e07-7882-4d09-bdb6-5a2c49205393",
+      "revision": 685,
+      "kind": "run",
+      "itemId": "run-a64c1ce7",
+      "title": "Co-op signaling specialist · running",
+      "author": "/root",
+      "source": "Actual runtime audit and resumed bounded studio assignments, 2026-10-11",
+      "createdAt": "2026-10-11T11:18:51.408Z"
+    },
+    {
+      "id": "898b0414-f652-41f5-ae4e-ada7003c78a8",
+      "revision": 686,
+      "kind": "run",
+      "itemId": "run-618349bf",
+      "title": "Pixel asset specialist · running",
+      "author": "/root",
+      "source": "Actual runtime audit and resumed bounded studio assignments, 2026-10-11",
+      "createdAt": "2026-10-11T11:18:51.425Z"
+    },
+    {
+      "id": "d88bbaa7-1938-42c8-9c8c-d5ad8217313f",
+      "revision": 687,
+      "kind": "run",
+      "itemId": "run-b66d839f",
+      "title": "Independent engine reviewer · running",
+      "author": "/root",
+      "source": "Actual runtime audit and resumed bounded studio assignments, 2026-10-11",
+      "createdAt": "2026-10-11T11:18:51.438Z"
+    },
+    {
+      "id": "4c7e6742-0f2d-4414-b2c6-de175aeab211",
+      "revision": 688,
+      "kind": "run",
+      "itemId": "run-24bbf957",
+      "title": "Bounded local Spark auditor · running",
+      "author": "/root",
+      "source": "Actual runtime audit and resumed bounded studio assignments, 2026-10-11",
+      "createdAt": "2026-10-11T11:18:51.454Z"
+    },
+    {
+      "id": "66376239-4ef8-4ac8-acf9-8c6b1f311e37",
+      "revision": 689,
+      "kind": "task.update",
+      "itemId": "task-09d2d171",
+      "title": "Quiet contextual pixel UI and compact RAICHO status",
+      "author": "/root",
+      "source": "Actual integrated UI/node/hull and runtime review evidence, 2026-10-11",
+      "createdAt": "2026-10-11T11:31:36.813Z"
+    },
+    {
+      "id": "c6483db3-6b96-4154-a95b-800a538be683",
+      "revision": 690,
+      "kind": "task.update",
+      "itemId": "task-57db0993",
+      "title": "Corporation starter abilities: drive, three-chunk guard and fifth-shot lens",
+      "author": "/root",
+      "source": "Actual integrated UI/node/hull and runtime review evidence, 2026-10-11",
+      "createdAt": "2026-10-11T11:31:36.837Z"
+    },
+    {
+      "id": "d728b44d-566b-40e2-94b7-a70371ce05ed",
+      "revision": 691,
+      "kind": "task.update",
+      "itemId": "task-dbe93a67",
+      "title": "Seeded node radii and reserved zone clearance",
+      "author": "/root",
+      "source": "Actual integrated UI/node/hull and runtime review evidence, 2026-10-11",
+      "createdAt": "2026-10-11T11:31:36.850Z"
+    },
+    {
+      "id": "28b64f5f-b88c-4cde-a092-b14100aaddef",
+      "revision": 692,
+      "kind": "task.update",
+      "itemId": "task-cf5259a9",
+      "title": "Detailed RAICHO source art becomes damage-masked runtime pixel quads",
+      "author": "/root",
+      "source": "Actual integrated UI/node/hull and runtime review evidence, 2026-10-11",
+      "createdAt": "2026-10-11T11:31:36.862Z"
+    },
+    {
+      "id": "73283c6f-61a5-4505-a9a3-70c43dc1d5df",
+      "revision": 693,
+      "kind": "review",
+      "itemId": "review-3062f1d1",
+      "title": "Independent review caught and fixed Vite reservation restart failure",
+      "author": "/root",
+      "source": "Actual integrated UI/node/hull and runtime review evidence, 2026-10-11",
+      "createdAt": "2026-10-11T11:31:36.889Z"
+    },
+    {
+      "id": "b448d2e3-9087-483e-adae-256a8260a35e",
+      "revision": 694,
+      "kind": "review",
+      "itemId": "review-719dabd2",
+      "title": "Canonical node placement and actual fine-hull extraction survived integration",
+      "author": "/root",
+      "source": "Actual integrated UI/node/hull and runtime review evidence, 2026-10-11",
+      "createdAt": "2026-10-11T11:31:36.903Z"
+    },
+    {
+      "id": "40cc64ce-8755-4e20-ac5b-27c09e914c73",
+      "revision": 695,
+      "kind": "task.create",
+      "itemId": "task-6f886f1f",
+      "title": "Detailed generated PAN dock with bounded native quadrant animation",
+      "author": "/root",
+      "source": "Actual integrated UI/node/hull and runtime review evidence, 2026-10-11",
+      "createdAt": "2026-10-11T11:32:06.321Z"
+    },
+    {
+      "id": "c2d3c2af-6bb4-4605-825e-cc2dc7405398",
+      "revision": 696,
+      "kind": "run",
+      "itemId": "run-0748a92f",
+      "title": "Pixel asset specialist · running",
+      "author": "/root",
+      "source": "Actual integrated UI/node/hull and runtime review evidence, 2026-10-11",
+      "createdAt": "2026-10-11T11:32:06.339Z"
+    },
+    {
+      "id": "ce63dd3f-3546-4310-995c-947d598a5aba",
+      "revision": 697,
+      "kind": "run",
+      "itemId": "run-84027490",
+      "title": "Bounded local Spark auditor · completed",
+      "author": "/root",
+      "source": "Actual integrated UI/node/hull and runtime review evidence, 2026-10-11",
+      "createdAt": "2026-10-11T11:32:06.353Z"
+    },
+    {
+      "id": "4d80e42a-8a48-4045-b6d7-73cc1b87f29d",
+      "revision": 698,
+      "kind": "task.create",
+      "itemId": "task-613742d2",
+      "title": "MEISHI CARD and distinct cargo, hull and ability collections",
+      "author": "/root",
+      "source": "Actual MEISHI integration and lean implementation work, 2026-10-11",
+      "createdAt": "2026-10-11T11:45:51.937Z"
+    },
+    {
+      "id": "30d46e7c-2685-4a8d-8165-d0f80439826c",
+      "revision": 699,
+      "kind": "task.create",
+      "itemId": "task-1cba1e46",
+      "title": "Crafted components for advanced ability upgrade recipes",
+      "author": "/root",
+      "source": "Actual MEISHI integration and lean implementation work, 2026-10-11",
+      "createdAt": "2026-10-11T11:46:13.155Z"
+    },
+    {
+      "id": "1aab0dde-5470-4647-b1da-0068585c564d",
+      "revision": 700,
+      "kind": "decision",
+      "itemId": "decision-9a321378",
+      "title": "MEISHI is the identity and point ledger; inventories remain distinct",
+      "author": "/root",
+      "source": "Actual MEISHI integration and lean implementation work, 2026-10-11",
+      "createdAt": "2026-10-11T11:46:13.174Z"
+    },
+    {
+      "id": "828f1a15-da2e-4bfa-9302-b92dcc0aa662",
+      "revision": 701,
+      "kind": "run",
+      "itemId": "run-f358dccc",
+      "title": "Card implementation and integration reviewer · running",
+      "author": "/root",
+      "source": "Actual MEISHI integration and lean implementation work, 2026-10-11",
+      "createdAt": "2026-10-11T11:46:13.192Z"
+    },
+    {
+      "id": "293292d4-0f5f-482c-8d82-877a4bef7139",
+      "revision": 702,
+      "kind": "run",
+      "itemId": "run-45173202",
+      "title": "Collection interface specialist · running",
+      "author": "/root",
+      "source": "Actual MEISHI integration and lean implementation work, 2026-10-11",
+      "createdAt": "2026-10-11T11:46:13.210Z"
+    },
+    {
+      "id": "dda7e8ac-dbae-46ea-a16a-65aac0eea483",
+      "revision": 703,
+      "kind": "run",
+      "itemId": "run-08848acc",
+      "title": "Pixel art and canon specialist · running",
+      "author": "/root",
+      "source": "Actual MEISHI integration and lean implementation work, 2026-10-11",
+      "createdAt": "2026-10-11T11:46:13.239Z"
+    },
+    {
+      "id": "ef09a999-cab0-4b93-b3d1-a230c10196b0",
+      "revision": 704,
+      "kind": "review",
+      "itemId": "review-038a9259",
+      "title": "Eight-member signaling admitted and expired under real HTTP tests",
+      "author": "/root",
+      "source": "Frozen specialist reviews and integrated source, 2026-10-11",
+      "createdAt": "2026-10-11T11:54:33.708Z"
+    },
+    {
+      "id": "5fa6407b-b76f-423d-ab5c-0d6b1b961362",
+      "revision": 705,
+      "kind": "review",
+      "itemId": "review-eb38acfa",
+      "title": "Detailed dock retains all cells in bounded native quadrant transforms",
+      "author": "/root",
+      "source": "Frozen specialist reviews and integrated source, 2026-10-11",
+      "createdAt": "2026-10-11T11:54:33.737Z"
+    },
+    {
+      "id": "613471e9-3279-4276-810b-af92e5a1c2d7",
+      "revision": 706,
+      "kind": "review",
+      "itemId": "review-95d5db3f",
+      "title": "MEISHI integration review corrected persistent selection feedback",
+      "author": "/root",
+      "source": "Frozen specialist reviews and integrated source, 2026-10-11",
+      "createdAt": "2026-10-11T11:54:33.762Z"
+    },
+    {
+      "id": "5f03ddb9-d7b4-46cf-8b27-91a58cac6e78",
+      "revision": 707,
+      "kind": "task.update",
+      "itemId": "task-6f886f1f",
+      "title": "Detailed generated PAN dock with bounded native quadrant animation",
+      "author": "/root",
+      "source": "Frozen specialist reviews and integrated source, 2026-10-11",
+      "createdAt": "2026-10-11T11:54:33.837Z"
+    },
+    {
+      "id": "a4002bdf-2266-47ab-8552-4ba307bc7a61",
+      "revision": 708,
+      "kind": "run",
+      "itemId": "run-eb4ba503",
+      "title": "Pixel art and canon specialist · completed",
+      "author": "/root",
+      "source": "Frozen specialist reviews and integrated source, 2026-10-11",
+      "createdAt": "2026-10-11T11:54:33.867Z"
+    },
+    {
+      "id": "d93faba1-0d94-49a5-a64f-474beb40c53a",
+      "revision": 709,
+      "kind": "run",
+      "itemId": "run-176c8982",
+      "title": "Collection interface specialist · completed",
+      "author": "/root",
+      "source": "Frozen specialist reviews and integrated source, 2026-10-11",
+      "createdAt": "2026-10-11T11:54:33.892Z"
+    },
+    {
+      "id": "3eb11f5a-82c9-43fe-822d-61d613e32e26",
+      "revision": 710,
+      "kind": "decision",
+      "itemId": "decision-d83f9379",
+      "title": "MEISHI is a standalone card, not collection navigation",
+      "author": "/root",
+      "source": "User correction and actual standalone-card implementation 2bab5b1",
+      "createdAt": "2026-10-11T12:15:47.736Z"
+    },
+    {
+      "id": "719d229c-c744-462e-ac54-430ab4348298",
+      "revision": 711,
+      "kind": "run",
+      "itemId": "run-8ca0fe91",
+      "title": "engine_research · running",
+      "author": "/root",
+      "source": "User correction and actual standalone-card implementation 2bab5b1",
+      "createdAt": "2026-10-11T12:15:55.143Z"
+    },
+    {
+      "id": "bedced83-cba0-4b81-87c3-9ca6bc12bc6e",
+      "revision": 712,
+      "kind": "run",
+      "itemId": "run-d5804134",
+      "title": "gameplay_design · running",
+      "author": "/root",
+      "source": "User correction and actual standalone-card implementation 2bab5b1",
+      "createdAt": "2026-10-11T12:15:55.187Z"
+    },
+    {
+      "id": "db53aa18-e052-4632-82ef-1739cf8cdbdd",
+      "revision": 713,
+      "kind": "run",
+      "itemId": "run-c0d341ed",
+      "title": "production_research · running",
+      "author": "/root",
+      "source": "User correction and actual standalone-card implementation 2bab5b1",
+      "createdAt": "2026-10-11T12:15:55.218Z"
+    },
+    {
+      "id": "21a1ddc2-9dfb-4e17-a37a-f56522fbc1e6",
+      "revision": 714,
+      "kind": "review",
+      "itemId": "review-88f6bd53",
+      "title": "Standalone MEISHI accepted on desktop; collections remain separate",
+      "author": "/root",
+      "source": "Actual final standalone-card review and IAB browser checks, source69db89c",
+      "createdAt": "2026-10-11T12:23:22.138Z"
+    },
+    {
+      "id": "50925190-f14e-4dde-9094-d02b62b4e886",
+      "revision": 715,
+      "kind": "build",
+      "itemId": "build-15a73a4d",
+      "title": "Standalone MEISHI and lean collection integration",
+      "author": "/root",
+      "source": "Actual final standalone-card review and IAB browser checks, source69db89c",
+      "createdAt": "2026-10-11T12:23:22.164Z"
+    },
+    {
+      "id": "6573b3b9-c6a4-432f-823c-ce07291c5ceb",
+      "revision": 716,
+      "kind": "task.update",
+      "itemId": "task-613742d2",
+      "title": "MEISHI CARD and distinct cargo, hull and ability collections",
+      "author": "/root",
+      "source": "Actual final standalone-card review and IAB browser checks, source69db89c",
+      "createdAt": "2026-10-11T12:23:22.238Z"
+    },
+    {
+      "id": "c246d791-fbf8-4447-83d1-97f386bf4011",
+      "revision": 717,
+      "kind": "task.update",
+      "itemId": "task-55bd21c0",
+      "title": "One canonical testing-branch game preview",
+      "author": "/root",
+      "source": "Actual final standalone-card review and IAB browser checks, source69db89c",
+      "createdAt": "2026-10-11T12:23:22.275Z"
+    },
+    {
+      "id": "8d3ce608-93b8-44a1-ba10-8666a9baa2a5",
+      "revision": 718,
+      "kind": "run",
+      "itemId": "run-ebfb21d5",
+      "title": "Native card and integration review · completed",
+      "author": "/root",
+      "source": "Actual final standalone-card review and IAB browser checks, source69db89c",
+      "createdAt": "2026-10-11T12:23:22.302Z"
+    },
+    {
+      "id": "27f0b96f-7c91-4fae-970d-752bb32d4850",
+      "revision": 719,
+      "kind": "run",
+      "itemId": "run-5b3ec903",
+      "title": "Collection route and scroll review · completed",
+      "author": "/root",
+      "source": "Actual final standalone-card review and IAB browser checks, source69db89c",
+      "createdAt": "2026-10-11T12:23:22.337Z"
+    },
+    {
+      "id": "28e86786-eb15-46df-89ef-8494f3f53f8a",
+      "revision": 720,
+      "kind": "run",
+      "itemId": "run-c082a7de",
+      "title": "Canon/wiki specialist · completed",
+      "author": "/root",
+      "source": "Actual final standalone-card review and IAB browser checks, source69db89c",
+      "createdAt": "2026-10-11T12:23:22.368Z"
     }
   ],
   "runRecords": [
@@ -21982,6 +22900,451 @@
       "author": "/root",
       "source": "Actual user steering and specialist assignments, 2026-10-11",
       "createdAt": "2026-10-11T10:09:13.656Z"
+    },
+    {
+      "id": "run-f8198254",
+      "title": "World/gameplay specialist · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "World/gameplay specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T10:32:29.595Z",
+      "taskIds": [
+        "task-dbe93a67"
+      ],
+      "summary": "Actually assigned seeded radius policies, deterministic reserved-envelope placement and canonical campaign/safety regressions.",
+      "evidence": [
+        {
+          "label": "Actual current assignment",
+          "kind": "note",
+          "details": "Actually assigned seeded radius policies, deterministic reserved-envelope placement and canonical campaign/safety regressions."
+        }
+      ],
+      "author": "/root",
+      "source": "Actual latest seeded-node and runtime-art assignments, 2026-10-11",
+      "createdAt": "2026-10-11T10:32:29.612Z"
+    },
+    {
+      "id": "run-ee74b295",
+      "title": "Independent engine reviewer · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Independent engine reviewer",
+      "state": "running",
+      "observedAt": "2026-10-11T10:32:29.621Z",
+      "taskIds": [
+        "task-dbe93a67",
+        "task-cf5259a9"
+      ],
+      "summary": "Completed19-chunk capacity boundary commit; now reviewing node geometry and runtime overlay packet budgets.",
+      "evidence": [
+        {
+          "label": "Actual current assignment",
+          "kind": "note",
+          "details": "Completed19-chunk capacity boundary commit; now reviewing node geometry and runtime overlay packet budgets."
+        }
+      ],
+      "author": "/root",
+      "source": "Actual latest seeded-node and runtime-art assignments, 2026-10-11",
+      "createdAt": "2026-10-11T10:32:29.626Z"
+    },
+    {
+      "id": "run-156269a9",
+      "title": "Runtime pixel-art specialist · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "Runtime pixel-art specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T10:32:29.639Z",
+      "taskIds": [
+        "task-cf5259a9"
+      ],
+      "summary": "Frozen exact corporation starter wiki; now implementing cached sparse96-cell RAICHO overlay helper and regressions.",
+      "evidence": [
+        {
+          "label": "Actual current assignment",
+          "kind": "note",
+          "details": "Frozen exact corporation starter wiki; now implementing cached sparse96-cell RAICHO overlay helper and regressions."
+        }
+      ],
+      "author": "/root",
+      "source": "Actual latest seeded-node and runtime-art assignments, 2026-10-11",
+      "createdAt": "2026-10-11T10:32:29.660Z"
+    },
+    {
+      "id": "run-a64c1ce7",
+      "title": "Co-op signaling specialist · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Co-op signaling specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T11:18:51.400Z",
+      "taskIds": [
+        "task-05dd95cd"
+      ],
+      "summary": "Resumed preserved codex/coop-signalling work. Implementing actual host+7, encrypted invite, expiry/auth/quota/host-end tests with port0 listeners closed after each test. No persistent signaling server.",
+      "evidence": [
+        {
+          "label": "Actual assignment and scope",
+          "kind": "note",
+          "details": "Resumed preserved codex/coop-signalling work. Implementing actual host+7, encrypted invite, expiry/auth/quota/host-end tests with port0 listeners closed after each test. No persistent signaling server."
+        }
+      ],
+      "author": "/root",
+      "source": "Actual runtime audit and resumed bounded studio assignments, 2026-10-11",
+      "createdAt": "2026-10-11T11:18:51.408Z"
+    },
+    {
+      "id": "run-618349bf",
+      "title": "Pixel asset specialist · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "Pixel asset specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T11:18:51.418Z",
+      "taskIds": [
+        "task-cf5259a9"
+      ],
+      "summary": "Resumed preserved PAN dock candidate: native128 hard-alpha conversion, four material groups and three authored lamp states. Candidate review only; production dock unchanged.",
+      "evidence": [
+        {
+          "label": "Actual assignment and scope",
+          "kind": "note",
+          "details": "Resumed preserved PAN dock candidate: native128 hard-alpha conversion, four material groups and three authored lamp states. Candidate review only; production dock unchanged."
+        }
+      ],
+      "author": "/root",
+      "source": "Actual runtime audit and resumed bounded studio assignments, 2026-10-11",
+      "createdAt": "2026-10-11T11:18:51.425Z"
+    },
+    {
+      "id": "run-b66d839f",
+      "title": "Independent engine reviewer · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Independent engine reviewer",
+      "state": "running",
+      "observedAt": "2026-10-11T11:18:51.432Z",
+      "taskIds": [
+        "task-dbe93a67",
+        "task-cf5259a9",
+        "task-55bd21c0"
+      ],
+      "summary": "Completed exact source review of integrated node/fine-hull changes; now reviewing root runtime lease and shutdown changes. No extra game builds or listeners.",
+      "evidence": [
+        {
+          "label": "Actual assignment and scope",
+          "kind": "note",
+          "details": "Completed exact source review of integrated node/fine-hull changes; now reviewing root runtime lease and shutdown changes. No extra game builds or listeners."
+        }
+      ],
+      "author": "/root",
+      "source": "Actual runtime audit and resumed bounded studio assignments, 2026-10-11",
+      "createdAt": "2026-10-11T11:18:51.438Z"
+    },
+    {
+      "id": "run-24bbf957",
+      "title": "Bounded local Spark auditor · running",
+      "agentId": "/root/spark_coop_audit",
+      "agentLabel": "Bounded local Spark auditor",
+      "state": "running",
+      "observedAt": "2026-10-11T11:18:51.447Z",
+      "taskIds": [
+        "task-05dd95cd"
+      ],
+      "summary": "Previous audit produced no frozen result and is no longer running. New explicit permission-matched read-only task inspects only two Rust files for authority seams. Result not yet accepted.",
+      "evidence": [
+        {
+          "label": "Actual assignment and scope",
+          "kind": "note",
+          "details": "Previous audit produced no frozen result and is no longer running. New explicit permission-matched read-only task inspects only two Rust files for authority seams. Result not yet accepted."
+        }
+      ],
+      "author": "/root",
+      "source": "Actual runtime audit and resumed bounded studio assignments, 2026-10-11",
+      "createdAt": "2026-10-11T11:18:51.454Z"
+    },
+    {
+      "id": "run-0748a92f",
+      "title": "Pixel asset specialist · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "Pixel asset specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T11:32:06.330Z",
+      "taskIds": [
+        "task-6f886f1f"
+      ],
+      "summary": "Actual128 candidate integrated as source proof; now authoring higher-detail256 quadrant candidate and native checks. No persistent server.",
+      "evidence": [
+        {
+          "label": "Actual source, browser and lifecycle evidence",
+          "kind": "note",
+          "path": "artifacts/runtime-studio-20261011/README.md"
+        }
+      ],
+      "author": "/root",
+      "source": "Actual integrated UI/node/hull and runtime review evidence, 2026-10-11",
+      "createdAt": "2026-10-11T11:32:06.339Z"
+    },
+    {
+      "id": "run-84027490",
+      "title": "Bounded local Spark auditor · completed",
+      "agentId": "/root/spark_coop_audit",
+      "agentLabel": "Bounded local Spark auditor",
+      "state": "completed",
+      "observedAt": "2026-10-11T11:32:06.349Z",
+      "taskIds": [
+        "task-05dd95cd"
+      ],
+      "summary": "Actual bounded two-file source audit returned. Root found inaccurate projectile-owner and lockstep claims; Gameplay is independently correcting them. Output is retained as inspected partial research, not an accepted implementation or clean review.",
+      "evidence": [
+        {
+          "label": "Raw audit with explicit corrections in evidence README",
+          "kind": "note",
+          "path": "artifacts/runtime-studio-20261011/coop-seams-bounded-review.md"
+        }
+      ],
+      "author": "/root",
+      "source": "Actual integrated UI/node/hull and runtime review evidence, 2026-10-11",
+      "createdAt": "2026-10-11T11:32:06.353Z"
+    },
+    {
+      "id": "run-f358dccc",
+      "title": "Card implementation and integration reviewer · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Card implementation and integration reviewer",
+      "state": "running",
+      "observedAt": "2026-10-11T11:46:13.185Z",
+      "taskIds": [
+        "task-613742d2"
+      ],
+      "summary": "Card source implemented with11 focused checks; now independently reviewing root routing/clipping/cargo changes.",
+      "evidence": [
+        {
+          "label": "Current actual assignment",
+          "kind": "note",
+          "details": "Card source implemented with11 focused checks; now independently reviewing root routing/clipping/cargo changes."
+        }
+      ],
+      "author": "/root",
+      "source": "Actual MEISHI integration and lean implementation work, 2026-10-11",
+      "createdAt": "2026-10-11T11:46:13.192Z"
+    },
+    {
+      "id": "run-45173202",
+      "title": "Collection interface specialist · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Collection interface specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T11:46:13.206Z",
+      "taskIds": [
+        "task-613742d2"
+      ],
+      "summary": "Finished exact-source256 dock packet review; implementing filters for actual discovered hulls and abilities.",
+      "evidence": [
+        {
+          "label": "Current actual assignment",
+          "kind": "note",
+          "details": "Finished exact-source256 dock packet review; implementing filters for actual discovered hulls and abilities."
+        }
+      ],
+      "author": "/root",
+      "source": "Actual MEISHI integration and lean implementation work, 2026-10-11",
+      "createdAt": "2026-10-11T11:46:13.210Z"
+    },
+    {
+      "id": "run-08848acc",
+      "title": "Pixel art and canon specialist · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "Pixel art and canon specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T11:46:13.221Z",
+      "taskIds": [
+        "task-613742d2"
+      ],
+      "summary": "Finished detailed256 native dock candidate and lossless compressed proof; now updating MEISHI canon and wiki.",
+      "evidence": [
+        {
+          "label": "Current actual assignment",
+          "kind": "note",
+          "details": "Finished detailed256 native dock candidate and lossless compressed proof; now updating MEISHI canon and wiki."
+        }
+      ],
+      "author": "/root",
+      "source": "Actual MEISHI integration and lean implementation work, 2026-10-11",
+      "createdAt": "2026-10-11T11:46:13.239Z"
+    },
+    {
+      "id": "run-eb4ba503",
+      "title": "Pixel art and canon specialist · completed",
+      "agentId": "/root/production_research",
+      "agentLabel": "Pixel art and canon specialist",
+      "state": "completed",
+      "observedAt": "2026-10-11T11:54:33.848Z",
+      "taskIds": [
+        "task-613742d2",
+        "task-6f886f1f"
+      ],
+      "summary": "Completed256candidate92fb9f6 and four-documentMEISHI canon1bb6efa; sourcechecks/evidence frozen.",
+      "evidence": [
+        {
+          "label": "Frozen assignment results",
+          "kind": "note",
+          "details": "Completed256candidate92fb9f6 and four-documentMEISHI canon1bb6efa; sourcechecks/evidence frozen."
+        }
+      ],
+      "author": "/root",
+      "source": "Frozen specialist reviews and integrated source, 2026-10-11",
+      "createdAt": "2026-10-11T11:54:33.867Z"
+    },
+    {
+      "id": "run-176c8982",
+      "title": "Collection interface specialist · completed",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Collection interface specialist",
+      "state": "completed",
+      "observedAt": "2026-10-11T11:54:33.881Z",
+      "taskIds": [
+        "task-613742d2",
+        "task-6f886f1f"
+      ],
+      "summary": "Completed37cdd564 discovery-first filters and exactcostlabels;33focused/404authorfulltests1skip. Actual native256independentreview frozen.",
+      "evidence": [
+        {
+          "label": "Frozen assignment results",
+          "kind": "note",
+          "details": "Completed37cdd564 discovery-first filters and exactcostlabels;33focused/404authorfulltests1skip. Actual native256independentreview frozen."
+        }
+      ],
+      "author": "/root",
+      "source": "Frozen specialist reviews and integrated source, 2026-10-11",
+      "createdAt": "2026-10-11T11:54:33.892Z"
+    },
+    {
+      "id": "run-8ca0fe91",
+      "title": "engine_research · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "engine_research",
+      "state": "running",
+      "observedAt": "2026-10-11T12:15:55.115Z",
+      "taskIds": [
+        "task-613742d2"
+      ],
+      "summary": "Implementing native meishi-panel in existing painter and reviewing card group/focus.",
+      "evidence": [
+        {
+          "label": "Current actual assignment",
+          "kind": "note",
+          "details": "Implementing native meishi-panel in existing painter and reviewing card group/focus."
+        }
+      ],
+      "author": "/root",
+      "source": "User correction and actual standalone-card implementation 2bab5b1",
+      "createdAt": "2026-10-11T12:15:55.143Z"
+    },
+    {
+      "id": "run-d5804134",
+      "title": "gameplay_design · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "gameplay_design",
+      "state": "running",
+      "observedAt": "2026-10-11T12:15:55.155Z",
+      "taskIds": [
+        "task-613742d2"
+      ],
+      "summary": "Read-only separate-menu route and scroll-preservation review.",
+      "evidence": [
+        {
+          "label": "Current actual assignment",
+          "kind": "note",
+          "details": "Read-only separate-menu route and scroll-preservation review."
+        }
+      ],
+      "author": "/root",
+      "source": "User correction and actual standalone-card implementation 2bab5b1",
+      "createdAt": "2026-10-11T12:15:55.187Z"
+    },
+    {
+      "id": "run-c0d341ed",
+      "title": "production_research · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "production_research",
+      "state": "running",
+      "observedAt": "2026-10-11T12:15:55.202Z",
+      "taskIds": [
+        "task-613742d2"
+      ],
+      "summary": "Updating four canon/wiki documents for standalone card and live RAICHO menu.",
+      "evidence": [
+        {
+          "label": "Current actual assignment",
+          "kind": "note",
+          "details": "Updating four canon/wiki documents for standalone card and live RAICHO menu."
+        }
+      ],
+      "author": "/root",
+      "source": "User correction and actual standalone-card implementation 2bab5b1",
+      "createdAt": "2026-10-11T12:15:55.218Z"
+    },
+    {
+      "id": "run-ebfb21d5",
+      "title": "Native card and integration review · completed",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Native card and integration review",
+      "state": "completed",
+      "observedAt": "2026-10-11T12:23:22.293Z",
+      "taskIds": [
+        "task-613742d2"
+      ],
+      "summary": "Completed native frame e77298c and independent69db89c source review; keyboard-scroll finding resolved. Two focused native tests pass; root212 library tests pass.",
+      "evidence": [
+        {
+          "label": "Actual assignment handoff",
+          "kind": "note",
+          "path": "artifacts/meishi-20261011/reviews/meishi-standalone-review/REVIEW.md"
+        }
+      ],
+      "author": "/root",
+      "source": "Actual final standalone-card review and IAB browser checks, source69db89c",
+      "createdAt": "2026-10-11T12:23:22.302Z"
+    },
+    {
+      "id": "run-5b3ec903",
+      "title": "Collection route and scroll review · completed",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Collection route and scroll review",
+      "state": "completed",
+      "observedAt": "2026-10-11T12:23:22.318Z",
+      "taskIds": [
+        "task-613742d2"
+      ],
+      "summary": "Completed separate-route review at69db89c, three actual scroll-adapter probes; no scoped source blocker.",
+      "evidence": [
+        {
+          "label": "Actual assignment handoff",
+          "kind": "note",
+          "path": "artifacts/meishi-20261011/reviews/meishi-route-review/REVIEW.md"
+        }
+      ],
+      "author": "/root",
+      "source": "Actual final standalone-card review and IAB browser checks, source69db89c",
+      "createdAt": "2026-10-11T12:23:22.337Z"
+    },
+    {
+      "id": "run-c082a7de",
+      "title": "Canon/wiki specialist · completed",
+      "agentId": "/root/production_research",
+      "agentLabel": "Canon/wiki specialist",
+      "state": "completed",
+      "observedAt": "2026-10-11T12:23:22.354Z",
+      "taskIds": [
+        "task-613742d2"
+      ],
+      "summary": "Completed four-file standalone-card separation7f1e487; seven wiki tests and catalog/source checks pass.",
+      "evidence": [
+        {
+          "label": "Actual assignment handoff",
+          "kind": "note",
+          "path": "artifacts/meishi-20261011/reviews/meishi-card-separation/HANDOFF.md"
+        }
+      ],
+      "author": "/root",
+      "source": "Actual final standalone-card review and IAB browser checks, source69db89c",
+      "createdAt": "2026-10-11T12:23:22.368Z"
     }
   ],
   "phaseDescription": "Desktop-first Rust/WASM solo game and local Studio are implemented. Reviewed occupied-cell art, reproducible conversion, responsive native settings/icons and minimap, strict GitHub integration gates and source-backed Dev Bible are integrated. Natural campaign balance, human listening, owner-private update lifecycle and physical phones remain separate pending gates."

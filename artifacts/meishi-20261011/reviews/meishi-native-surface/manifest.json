@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "commit": "e77298c51daebc8180c391aa352b1fd14b9af587",
+  "entries": [
+    {
+      "path": "crates/game_web/src/ui_scene.rs",
+      "sha256": "777c837dd6edd6bf30fc4dca3006a34fe22de2b8da99f400111d49b77d2c592b",
+      "size": 94897,
+      "git_blob_sha256": "777c837dd6edd6bf30fc4dca3006a34fe22de2b8da99f400111d49b77d2c592b",
+      "lf_equivalent": true
+    },
+    {
+      "path": "work/meishi-native-surface/HANDOFF.md",
+      "sha256": "dfec9bb35be70538d4fbf1ec827eb41e433475d2dc96809d7d7c1da3d10da2b7",
+      "size": 1640
+    },
+    {
+      "path": "work/meishi-native-surface/native-tests.log",
+      "sha256": "f3a8e460ae82386dc422d587b13e595c344af1647dd0cf19d8e1195e0e3271aa",
+      "size": 797
+    }
+  ]
+}

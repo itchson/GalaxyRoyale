@@ -1,0 +1,4 @@
+   Compiling pan-coop-dock-tiled-proof v0.1.0 (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\scripts\qa\pan-coop-dock\native256)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.43s
+     Running `scripts\qa\pan-coop-dock\native256\target\debug\pan-coop-dock-tiled-proof.exe assets/pipeline/pan-coop-dock/native256`
+Actual4rigs:3states and3CameraView zooms;28549cells/16transforms perframe

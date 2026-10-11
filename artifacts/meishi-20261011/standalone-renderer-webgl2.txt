@@ -1,0 +1,13 @@
+Browser tab: 6, Title: "Galaxy Royale", URL: "http://meishi-review.localhost:4173/?qa=1&renderer=webgl2".
+1 AXWebArea Galaxy Royale, URL: meishi-review.localhost:4173/?qa=1&renderer=webgl2
+	2 image Description: Galaxy Royale game universe, ID: universe
+	3 container GALAXY ROYALE // CONSOLE, ID: debug-console
+		4 heading GALAXY ROYALE // CONSOLE, Value: 2, ID: console-title
+			5 text GALAXY ROYALE // CONSOLE
+		6 text HELP / STATS / SCENE <NAME> / CLEAR / ` CLOSE
+		7 container Description: Console output, ID: console-output
+			8 text > renderer
+			9 text WEBGL2 / 640 x 360 logical pixels / eight bounded lights
+		10 text field (settable) Description: Console command, ID: console-input
+
+The focused UI element is 10 text field (settable) Description: Console command, ID: console-input

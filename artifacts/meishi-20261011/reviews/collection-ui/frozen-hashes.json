@@ -1,0 +1,157 @@
+{
+  "format": 1,
+  "commit": "37cdd564b55476b242f65660518d72af159e9c7b",
+  "parent": "bc910fabaed6695c502f50ff3f86945817584156",
+  "tracked_status": "",
+  "inputs": [
+    {
+      "path": "apps/game/src/campaign.css",
+      "committed_bytes": 4111,
+      "committed_sha256": "f7eca31f4e95b2d64f6d2539fe2f0c88ffe796fa022b5b0274d82bc7059b156f",
+      "executed_working_bytes": 4111,
+      "executed_working_sha256": "f7eca31f4e95b2d64f6d2539fe2f0c88ffe796fa022b5b0274d82bc7059b156f"
+    },
+    {
+      "path": "apps/game/src/campaign.ts",
+      "committed_bytes": 9313,
+      "committed_sha256": "fdb9ebf0a1c27bd3aa1c81f43c4cbd0ce8ef3b4fed5a073833dafec774b0fb45",
+      "executed_working_bytes": 9313,
+      "executed_working_sha256": "fdb9ebf0a1c27bd3aa1c81f43c4cbd0ce8ef3b4fed5a073833dafec774b0fb45"
+    },
+    {
+      "path": "apps/game/src/loadout.css",
+      "committed_bytes": 4044,
+      "committed_sha256": "f56d16881f58bf46be1876df461842089e50e70cdcaa95bf8bffa5ba4134457a",
+      "executed_working_bytes": 4044,
+      "executed_working_sha256": "f56d16881f58bf46be1876df461842089e50e70cdcaa95bf8bffa5ba4134457a"
+    },
+    {
+      "path": "apps/game/src/loadout.ts",
+      "committed_bytes": 20866,
+      "committed_sha256": "42e6f3ada02c6114d24c6fb6829636971a7aaf866cb17585a7ad8bbdea633c1d",
+      "executed_working_bytes": 20866,
+      "executed_working_sha256": "42e6f3ada02c6114d24c6fb6829636971a7aaf866cb17585a7ad8bbdea633c1d"
+    },
+    {
+      "path": "scripts/test/campaign.test.mjs",
+      "committed_bytes": 7931,
+      "committed_sha256": "41a14d1244b1d2d257330fe7c22965f141532a94cb8d507f1786c8e2547d1db3",
+      "executed_working_bytes": 7931,
+      "executed_working_sha256": "41a14d1244b1d2d257330fe7c22965f141532a94cb8d507f1786c8e2547d1db3"
+    },
+    {
+      "path": "scripts/test/forge-integration.test.mjs",
+      "committed_bytes": 16270,
+      "committed_sha256": "b4a1a113161b205739bba703404569dfca88ce2329bca70a380c184907b29794",
+      "executed_working_bytes": 16270,
+      "executed_working_sha256": "b4a1a113161b205739bba703404569dfca88ce2329bca70a380c184907b29794"
+    },
+    {
+      "path": "scripts/test/loadout.test.mjs",
+      "committed_bytes": 22537,
+      "committed_sha256": "4bda76f0541c4cc33dfab16c2ff06570e93ed896b87b03f1f43b82aedcb87b85",
+      "executed_working_bytes": 22537,
+      "executed_working_sha256": "4bda76f0541c4cc33dfab16c2ff06570e93ed896b87b03f1f43b82aedcb87b85"
+    },
+    {
+      "path": "apps/game/src/main.ts",
+      "committed_bytes": 78953,
+      "committed_sha256": "e61a4a21ad9df5e2d59f1d4bc0ae547b8be42024e834f86c1eb7418fb29d579c",
+      "executed_working_bytes": 81329,
+      "executed_working_sha256": "f008bbcd6d4dd719290eebb6c4afb83738bc91404f77ac697b41402b2fce6d13"
+    },
+    {
+      "path": "apps/game/src/pixel-ui.ts",
+      "committed_bytes": 18601,
+      "committed_sha256": "42243d4735427de719369828a5204c9f35c3091ff0e6cd6cf999c5e256fc8277",
+      "executed_working_bytes": 19101,
+      "executed_working_sha256": "e4c8fd65875115107ad7d753c2d990bc9ecbe5bd07cf592ecea1d6195e7ff17e"
+    },
+    {
+      "path": "crates/game_core/src/ship_progression.rs",
+      "committed_bytes": 24196,
+      "committed_sha256": "257ce372b5ceba84dcc7dd4211a0fb995031057e8f9f00effffd1435ccb45f2a",
+      "executed_working_bytes": 24196,
+      "executed_working_sha256": "257ce372b5ceba84dcc7dd4211a0fb995031057e8f9f00effffd1435ccb45f2a"
+    },
+    {
+      "path": "crates/game_core/src/abilities.rs",
+      "committed_bytes": 14884,
+      "committed_sha256": "394d8dcd566d4bbcf2a9d2dea7320512248dfc16b83fa3ee98d767849ba47509",
+      "executed_working_bytes": 15353,
+      "executed_working_sha256": "8f023ca505874d83f5764800ec09dd5cb5913e09fd74be0ab6423a7bd6eb6f4c"
+    },
+    {
+      "path": "crates/game_core/src/campaign.rs",
+      "committed_bytes": 21828,
+      "committed_sha256": "faff4f8e2fdcd4ee134981a241c0baa7cd842c3a4a865a8bb3587018e85499e6",
+      "executed_working_bytes": 21828,
+      "executed_working_sha256": "faff4f8e2fdcd4ee134981a241c0baa7cd842c3a4a865a8bb3587018e85499e6"
+    },
+    {
+      "path": "package.json",
+      "committed_bytes": 1085,
+      "committed_sha256": "0af9a72075f5b4ccfde64e49747136de9aa354e38a223b2bef90e0bb92d72a4b",
+      "executed_working_bytes": 1113,
+      "executed_working_sha256": "d04f8b6033d1ed21cfdf8afa2ef2315d8e4b5279bd8068508ce25b303d90d902"
+    },
+    {
+      "path": "pnpm-lock.yaml",
+      "committed_bytes": 21972,
+      "committed_sha256": "6383d7a7deaf07367d08c79447c4faab012da63436cf23df3a1cbb82b4f183d1",
+      "executed_working_bytes": 22682,
+      "executed_working_sha256": "aab28ac69c754ea40aaf58749f6a97f1983f70307053ac5fcf70b5495e8fa2ed"
+    },
+    {
+      "path": "tsconfig.json",
+      "committed_bytes": 291,
+      "committed_sha256": "c0de18e3ddab8718ca79686d1d204a4b6e0daecb3e28cadab874abc678f768db",
+      "executed_working_bytes": 298,
+      "executed_working_sha256": "fd047473fcc1dde40dcba9d9eeec5a1fa669293a8f06e18ac34bd4c537bdd143"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "HANDOFF.md",
+      "bytes": 5426,
+      "sha256": "dfec9daeeafa1781d4e71b192d85b8b0100df172881129bfd4eb3f83fc83495a"
+    },
+    {
+      "path": "first-focused-fail.log",
+      "bytes": 18689,
+      "sha256": "78473b27ac26fd8667b25e0ac2e35601238332d4642284c858909971724002fc"
+    },
+    {
+      "path": "new-filter-fixture-fail.log",
+      "bytes": 4596,
+      "sha256": "7e2f1121b8367d987fbf778856e2cf8b64f50351da57d5f0210ebf82d550a279"
+    },
+    {
+      "path": "focused-tests.log",
+      "bytes": 3430,
+      "sha256": "cddc847ee8f4bfcdf4d5d78ff9ac21353b2f045ff6c045c184fccb0887a4c74a"
+    },
+    {
+      "path": "full-shell-tests.log",
+      "bytes": 43950,
+      "sha256": "4fb40d2ee8c8b55d98cac9e352cfa99b62aa97cc3fdbc427fb21ec69803fecd3"
+    },
+    {
+      "path": "typecheck.log",
+      "bytes": 16,
+      "sha256": "5a3973f79ed9becd5f23c4feff467513814de7ea381d75a4d2e339aa8b8edca9"
+    },
+    {
+      "path": "freeze.mjs",
+      "bytes": 2386,
+      "sha256": "0e2abfeb5eb74ebbb2263ccf4f24a7bbc302b0bde979e6ad356a9a7878f766c3"
+    }
+  ],
+  "tests": {
+    "focused": 33,
+    "full_pass": 404,
+    "full_skip": 1,
+    "typecheck": "pass"
+  },
+  "limits": "Actual TS/shell functions with fake adapters, not Rust transaction, browser/native UI, GPU/phone or gameplay acceptance."
+}

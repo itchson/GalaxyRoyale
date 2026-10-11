@@ -1,0 +1,19 @@
+✔ card uses authoritative native profile and exactly eight anonymous empty patch slots (2.3089ms)
+✔ unchanged refresh preserves nodes, scroll, focus and writes nothing (0.9324ms)
+✔ patches are indexed rather than list ordered and only earned identities reach DOM (0.8884ms)
+✔ an unearned champion name is never read even when source includes private metadata (1.4986ms)
+✔ losing an earned flag clears visible art and its former name in the same stable slot (0.9435ms)
+✔ all eight earned flags use existing campaign-patch routes without a ninth slot (0.8069ms)
+✔ corporate balances follow offense/defense/passive ledger order regardless of pilot manufacturer (1.1271ms)
+✔ selected RAICHO and effective equipped ranks refresh without inherited-rank or XP fabrication (0.9308ms)
+✔ legacy and malformed identity do not relabel another portrait; invalid selected hull paints no art (0.9086ms)
+✔ nonfinite HUD numbers are displayed as unavailable, not positive progression (0.9154ms)
+✔ view source stays read-only and responsive CSS retains native logical patch/ship dimensions (0.3633ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 225.0767

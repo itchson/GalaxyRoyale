@@ -1,0 +1,353 @@
+✖ the ninth Royale emblem appears only for authoritative tournament victory (2.3584ms)
+✖ competitor identity and independent sponsor appear only after discovery without mutating rewards (1.1034ms)
+✖ campaign exposes only genuinely discovered champions and their catalog details (0.9823ms)
+✖ a completed losing season offers a new season without victory or credits claims (0.65ms)
+✖ a losing-season retry remains gated by location and an active encounter (0.7056ms)
+✖ only an authoritative winning season exposes credits and Sovereign victory text (0.75ms)
+✔ Forge forwards exact craft/upgrade/equip/empty/hardware arguments, refreshes HUD, then saves the actual snapshot (11.7185ms)
+✔ backend rejection has no HUD fetch, snapshot save, audio cue or invented success (1.0644ms)
+✖ real Forge category survives successful repaint while a fresh open resets to overview (2.5277ms)
+✔ mutation success is not a committed-save claim while deferred persistence fails (1.6644ms)
+✔ Hangar page and construction/selection bindings pass full per-hull XP metadata (2.5515ms)
+✔ rejected ship construction or switching cannot save or report success (2.6772ms)
+✔ an unavailable audio context cannot reject a successful mutation/save flow (1.4029ms)
+✔ first-upgrade recipe shows the actual named banked subset and calls the ordinary native upgrade action (7.3407ms)
+✔ Forge separates three automatic slots and six ship hardware actions (1.3909ms)
+✔ category editor has contextual Back and explicit craft versus equip (3.1717ms)
+✔ availability is authoritative even when visible balances look sufficient or insufficient (1.0418ms)
+✔ owned rank cap and replacement retain inventory and send exact category (1.097ms)
+✖ actual HUD repaint preserves category, while ship change/reset returns overview (1.3954ms)
+✖ busy mutation and outside-dock clearing cannot dispatch; loss uses real tier disclosure (0.736ms)
+✔ Hangar shows each hull's XP, construction recipe and exact selection callback (0.9032ms)
+✔ all game-provided names and errors are plain text, including malicious markup (0.7746ms)
+✔ victory-only hull has no fake construction recipe and retains real LV1 reward XP (0.7396ms)
+✔ legacy stored hardware rank and active ship cap are shown separately without inventing power (0.8612ms)
+✖ Forge prioritizes all three slot controls while retaining cargo guidance and loss details (0.8647ms)
+✔ Forge excludes an undiscovered ability rather than showing its locked name (0.6704ms)
+ℹ tests 26
+ℹ suites 0
+ℹ pass 16
+ℹ fail 10
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 410.8236
+
+✖ failing tests:
+
+test at scripts\test\campaign.test.mjs:75:1
+✖ the ninth Royale emblem appears only for authoritative tournament victory (2.3584ms)
+  TypeError: Cannot set properties of undefined (setting 'className')
+      at Object.paintCampaign (evalmachine.<anonymous>:50:44)
+      at Object.paint (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/campaign.test.mjs:58:29)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/campaign.test.mjs:81:7)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.start (node:internal/test_runner/test:1191:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17)
+
+test at scripts\test\campaign.test.mjs:92:1
+✖ competitor identity and independent sponsor appear only after discovery without mutating rewards (1.1034ms)
+  TypeError: Cannot set properties of undefined (setting 'className')
+      at Object.paintCampaign (evalmachine.<anonymous>:50:44)
+      at Object.paint (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/campaign.test.mjs:58:29)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/campaign.test.mjs:121:5)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3)
+
+test at scripts\test\campaign.test.mjs:179:1
+✖ campaign exposes only genuinely discovered champions and their catalog details (0.9823ms)
+  TypeError: Cannot set properties of undefined (setting 'className')
+      at Object.paintCampaign (evalmachine.<anonymous>:50:44)
+      at Object.paint (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/campaign.test.mjs:58:29)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/campaign.test.mjs:193:5)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\campaign.test.mjs:200:1
+✖ a completed losing season offers a new season without victory or credits claims (0.65ms)
+  TypeError: Cannot set properties of undefined (setting 'className')
+      at Object.paintCampaign (evalmachine.<anonymous>:50:44)
+      at Object.paint (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/campaign.test.mjs:58:29)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/campaign.test.mjs:204:5)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\campaign.test.mjs:221:1
+✖ a losing-season retry remains gated by location and an active encounter (0.7056ms)
+  TypeError: Cannot set properties of undefined (setting 'className')
+      at Object.paintCampaign (evalmachine.<anonymous>:50:44)
+      at Object.paint (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/campaign.test.mjs:58:29)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/campaign.test.mjs:227:7)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\campaign.test.mjs:236:1
+✖ only an authoritative winning season exposes credits and Sovereign victory text (0.75ms)
+  TypeError: Cannot set properties of undefined (setting 'className')
+      at Object.paintCampaign (evalmachine.<anonymous>:50:44)
+      at Object.paint (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/campaign.test.mjs:58:29)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/campaign.test.mjs:238:5)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\forge-integration.test.mjs:434:1
+✖ real Forge category survives successful repaint while a fresh open resets to overview (2.5277ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /OFFENSIVE \/ 0 PTS/. Input:
+  
+  '\n' +
+    '\n' +
+    '\n' +
+    'BACK TO LOADOUT\n' +
+    'ABILITY COLLECTION\n' +
+    '\n' +
+    'HAVEN SCOUT\n' +
+    'RAICHO LV 3 / 60 XP / NEXT 120 XP / RANK CAP 2/5\n' +
+    "Craft to own. Equip swaps this RAICHO's slot; replaced abilities stay owned.\n" +
+    '\n' +
+    'ALL SLOTS\n' +
+    'OFFENSIVE\n' +
+    'DEFENSIVE\n' +
+    'PASSIVE\n' +
+    '\n' +
+    'ALL\n' +
+    'OWNED\n' +
+    'BLUEPRINT\n' +
+    'COMPATIBLE\n' +
+    '3 FOUND / 0 OWNED\n' +
+    '\n' +
+    '\n' +
+    'PULSE LENS\n' +
+    'Authored automatic effect.\n' +
+    'BLUEPRINT / NOT CRAFTED\n' +
+    'OFFENSIVE / COMPATIBLE WITH ACTIVE HULL\n' +
+    'REQUIRES RAICHO LV 1\n' +
+    '\n' +
+    'OFFENSIVE MEISHI 3 / HAVE 0\n' +
+    'T1 MATERIALS 2 / BANKED 10\n' +
+    '\n' +
+    'CRAFT'
+  
+      at TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/forge-integration.test.mjs:454:10)
+      at async Test.run (node:internal/test_runner/test:1332:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: "\n\n\nBACK TO LOADOUT\nABILITY COLLECTION\n\nHAVEN SCOUT\nRAICHO LV 3 / 60 XP / NEXT 120 XP / RANK CAP 2/5\nCraft to own. Equip swaps this RAICHO's slot; replaced abilities stay owned.\n\nALL SLOTS\nOFFENSIVE\nDEFENSIVE\nPASSIVE\n\nALL\nOWNED\nBLUEPRINT\nCOMPATIBLE\n3 FOUND / 0 OWNED\n\n\nPULSE LENS\nAuthored automatic effect.\nBLUEPRINT / NOT CRAFTED\nOFFENSIVE / COMPATIBLE WITH ACTIVE HULL\nREQUIRES RAICHO LV 1\n\nOFFENSIVE MEISHI 3 / HAVE 0\nT1 MATERIALS 2 / BANKED 10\n\nCRAFT",
+    expected: /OFFENSIVE \/ 0 PTS/,
+    operator: 'match',
+    diff: 'simple'
+  }
+
+test at scripts\test\loadout.test.mjs:324:1
+✖ actual HUD repaint preserves category, while ship change/reset returns overview (1.3954ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /PASSIVE \/ 50 PTS/. Input:
+  
+  '\n' +
+    '\n' +
+    '\n' +
+    'BACK TO LOADOUT\n' +
+    'ABILITY COLLECTION\n' +
+    '\n' +
+    'HAVEN SCOUT\n' +
+    'RAICHO LV 3 / 60 XP / NEXT 120 XP / RANK CAP 2/5\n' +
+    "Craft to own. Equip swaps this RAICHO's slot; replaced abilities stay owned.\n" +
+    '\n' +
+    'ALL SLOTS\n' +
+    'OFFENSIVE\n' +
+    'DEFENSIVE\n' +
+    'PASSIVE\n' +
+    '\n' +
+    'ALL\n' +
+    'OWNED\n' +
+    'BLUEPRINT\n' +
+    'COMPATIBLE\n' +
+    '3 FOUND / 0 OWNED\n' +
+    '\n' +
+    '\n' +
+    'ABILITY 2\n' +
+    'Actual authored effect.\n' +
+    'BLUEPRINT / NOT CRAFTED\n' +
+    'PASSIVE / COMPATIBLE WITH ACTIVE HULL\n' +
+    'REQUIRES RAICHO LV 1\n' +
+    '\n' +
+    'PASSIVE MEISHI 3 / HAVE 50\n' +
+    'T1 MATERIALS 2 / BANKED 10\n' +
+    '\n' +
+    'CRAFT'
+  
+      at TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/loadout.test.mjs:335:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: "\n\n\nBACK TO LOADOUT\nABILITY COLLECTION\n\nHAVEN SCOUT\nRAICHO LV 3 / 60 XP / NEXT 120 XP / RANK CAP 2/5\nCraft to own. Equip swaps this RAICHO's slot; replaced abilities stay owned.\n\nALL SLOTS\nOFFENSIVE\nDEFENSIVE\nPASSIVE\n\nALL\nOWNED\nBLUEPRINT\nCOMPATIBLE\n3 FOUND / 0 OWNED\n\n\nABILITY 2\nActual authored effect.\nBLUEPRINT / NOT CRAFTED\nPASSIVE / COMPATIBLE WITH ACTIVE HULL\nREQUIRES RAICHO LV 1\n\nPASSIVE MEISHI 3 / HAVE 50\nT1 MATERIALS 2 / BANKED 10\n\nCRAFT",
+    expected: /PASSIVE \/ 50 PTS/,
+    operator: 'match',
+    diff: 'simple'
+  }
+
+test at scripts\test\loadout.test.mjs:347:1
+✖ busy mutation and outside-dock clearing cannot dispatch; loss uses real tier disclosure (0.736ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /MATERIALS LOST \/ RELOAD \/ T1 1 \/ T2 0 \/ T3 2/. Input:
+  
+  '\n' +
+    '\n' +
+    '\n' +
+    'HAVEN SCOUT\n' +
+    'RAICHO LV 3 / 60 XP / NEXT 120 XP / RANK CAP 2/5\n' +
+    'AUTOMATIC ABILITY SLOTS\n' +
+    '\n' +
+    '\n' +
+    '\n' +
+    '\n' +
+    'OFFENSIVE / 3 MEISHI\n' +
+    'ABILITY 0\n' +
+    'RANK 1\n' +
+    'MANAGE\n' +
+    '\n' +
+    '\n' +
+    '\n' +
+    'DEFENSIVE / 4 MEISHI\n' +
+    'EMPTY SLOT\n' +
+    'MANAGE\n' +
+    '\n' +
+    '\n' +
+    '\n' +
+    'PASSIVE / 5 MEISHI\n' +
+    'EMPTY SLOT\n' +
+    'MANAGE\n' +
+    'BROWSE ABILITIES\n' +
+    'Return to Haven to craft, upgrade or equip.\n' +
+    'RAICHO MODULES\n' +
+    'Six RAICHO hardware upgrades. No ability slot required.\n' +
+    '\n' +
+    '\n' +
+    '\n' +
+    'OFFENSIVE / 3 MEISHI\n' +
+    'HARDWARE 0\n' +
+    'Ship-owned stat.\n' +
+    'RANK 0 / MAX 5\n' +
+    'REQUIRES RAICHO LV 1\n' +
+    '\n' +
+    'OFFENSIVE MEISHI 10 / HAVE 3\n' +
+    'T1 MATERIALS 1 / BANKED 10\n' +
+    'Insufficient category points.\n' +
+    'UPGRADE\n' +
+    '\n' +
+    '\n' +
+    'OFFENSIVE / 3 MEISHI\n' +
+    'HARDWARE 1\n' +
+    'Ship-owned stat.\n' +
+    'RANK 0 / MAX 5\n' +
+    'REQUIRES RAICHO LV 1\n' +
+    '\n' +
+    'OFFENSIVE MEISHI 10 / HAVE 3\n' +
+    'T1 MATERIALS 1 / BANKED 10\n' +
+    'Insufficient category points.\n' +
+    'UPGRADE\n' +
+    '\n' +
+    '\n' +
+    'DEFENSIVE / 4 MEISHI\n' +
+    'HARDWARE 2\n' +
+    'Ship-owned stat.\n' +
+    'RANK 0 / MAX 5\n' +
+    'REQUIRES RAICHO LV 1\n' +
+    '\n' +
+    'DEFENSIVE MEISHI 10 / HAVE 4\n' +
+    'T1 MATERIALS 1 / BANKED 10\n' +
+    'Insufficient category points.\n' +
+    'UPGRADE\n' +
+    '\n' +
+    '\n' +
+    'DEFENSIVE / 4 MEISHI\n' +
+    'HARDWARE 3\n' +
+    'Ship-owned stat.\n' +
+    'RANK 0 / MAX 5\n' +
+    'REQUIRES RAICHO LV 1\n' +
+    '\n' +
+    'DEFENSIVE MEISHI 10 / HAVE 4\n' +
+    'T1 MATERIALS 1 / BANKED 10\n' +
+    'Insufficient category points.\n' +
+    'UPGRADE\n' +
+    '\n' +
+    '\n' +
+    'PASSIVE / 5 MEISHI\n' +
+    'HARDWARE 4\n' +
+    'Ship-owned stat.\n' +
+    'RANK 0 / MAX 5\n' +
+    'REQUIRES RAICHO LV 1\n' +
+    '\n' +
+    'PASSIVE MEISHI 10 / HAVE 5\n' +
+    'T1 MATERIALS 1 / BANKED 10\n' +
+    'Insufficient category points.\n' +
+    'UPGRADE\n' +
+    '\n' +
+    '\n' +
+    'PASSIVE / 5 MEISHI\n' +
+    'HARDWARE 5\n' +
+    'Ship-owned stat.\n' +
+    'RANK 0 / MAX 5\n' +
+    'REQUIRES RAICHO LV 1\n' +
+    '\n' +
+    'PASSIVE MEISHI 10 / HAVE 5\n' +
+    'T1 MATERIALS 1 / BANKED 10\n' +
+    'Insufficient category points.\n' +
+    'UPGRADE'
+  
+      at TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/loadout.test.mjs:355:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: '\n\n\nHAVEN SCOUT\nRAICHO LV 3 / 60 XP / NEXT 120 XP / RANK CAP 2/5\nAUTOMATIC ABILITY SLOTS\n\n\n\n\nOFFENSIVE / 3 MEISHI\nABILITY 0\nRANK 1\nMANAGE\n\n\n\nDEFENSIVE / 4 MEISHI\nEMPTY SLOT\nMANAGE\n\n\n\nPASSIVE / 5 MEISHI\nEMPTY SLOT\nMANAGE\nBROWSE ABILITIES\nReturn to Haven to craft, upgrade or equip.\nRAICHO MODULES\nSix RAICHO hardware upgrades. No ability slot required.\n\n\n\nOFFENSIVE / 3 MEISHI\nHARDWARE 0\nShip-owned stat.\nRANK 0 / MAX 5\nREQUIRES RAICHO LV 1\n\nOFFENSIVE MEISHI 10 / HAVE 3\nT1 MATERIALS 1 / BANKED 10\nInsufficient category points.\nUPGRADE\n\n\nOFFENSIVE / 3 MEISHI\nHARDWARE 1\nShip-owned stat.\nRANK 0 / MAX 5\nREQUIRES RAICHO LV 1\n\nOFFENSIVE MEISHI 10 / HAVE 3\nT1 MATERIALS 1 / BANKED 10\nInsufficient category points.\nUPGRADE\n\n\nDEFENSIVE / 4 MEISHI\nHARDWARE 2\nShip-owned stat.\nRANK 0 / MAX 5\nREQUIRES RAICHO LV 1\n\nDEFENSIVE MEISHI 10 / HAVE 4\nT1 MATERIALS 1 / BANKED 10\nInsufficient category points.\nUPGRADE\n\n\nDEFENSIVE / 4 MEISHI\nHARDWARE 3\nShip-owned stat.\nRANK 0 / MAX 5\nREQUIRES RAICHO LV 1\n\nDEFENSIVE MEISHI 10 / HAVE 4\nT1 MATERIALS 1 / BANKED 10\nInsufficient category points.\nUPGRADE\n\n\nPASSIVE / 5 MEISHI\nHARDWARE 4\nShip-owned stat.\nRANK 0 / MAX 5\nREQUIRES RAICHO LV 1\n\nPASSIVE MEISHI 10 / HAVE 5\nT1 MATERIALS 1 / BANKED 10\nInsufficient category points.\nUPGRADE\n\n\nPASSIVE / 5 MEISHI\nHARDWARE 5\nShip-owned stat.\nRANK 0 / MAX 5\nREQUIRES RAICHO LV 1\n\nPASSIVE MEISHI 10 / HAVE 5\nT1 MATERIALS 1 / BANKED 10\nInsufficient category points.\nUPGRADE',
+    expected: /MATERIALS LOST \/ RELOAD \/ T1 1 \/ T2 0 \/ T3 2/,
+    operator: 'match',
+    diff: 'simple'
+  }
+
+test at scripts\test\loadout.test.mjs:438:1
+✖ Forge prioritizes all three slot controls while retaining cargo guidance and loss details (0.8647ms)
+  AssertionError [ERR_ASSERTION]: false == true
+      at TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/loadout.test.mjs:448:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no"
+    />
+    <meta name="theme-color" content="#090d20" />
+    <meta
+      name="description"
+      content="Explore a living pixel galaxy. Break asteroids, survive the swarm, evolve your RAICHO, and return home."
+    />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/icon-192.png" />
+    <title>Galaxy Royale</title>
+  </head>
+  <body>
+    <canvas id="universe" aria-label="Galaxy Royale game universe"></canvas>
+    <div id="game-ui">
+      <header class="flight-header">
+        <div class="header-actions">
+          <button
+            id="save-indicator"
+            class="icon-button save-indicator"
+            aria-label="Save & backup"
+            title="Progress autosaves on this device. Open Save & backup."
+          >
+            <span aria-hidden="true">S</span>
+          </button>
+          <nav class="flight-toolbar" aria-label="Flight pages">
+            <button
+              id="pause-button"
+              class="icon-button"
+              data-pixel-icon="status-icon"
+              aria-label="MEISHI CARD"
+              title="MEISHI CARD / Escape"
+            >
+              ≡
+            </button>
+            <button
+              id="map-button"
+              class="icon-button"
+              data-pixel-icon="map-icon"
+              aria-label="Universe map"
+              title="Universe map"
+            >
+              MAP
+            </button>
+            <button
+              id="flight-settings"
+              class="icon-button"
+              data-pixel-icon="settings-icon"
+              aria-label="Settings"
+              title="Settings"
+            >
+              SET
+            </button>
+          </nav>
+          <button
+            id="fullscreen"
+            class="icon-button"
+            data-pixel-icon="fullscreen-icon"
+            aria-label="Fullscreen"
+          >
+            ⛶
+          </button>
+        </div>
+      </header>
+      <p id="toolbar-hint" hidden aria-hidden="true"></p>
+      <nav id="quick-menu" hidden aria-label="Flight menu">
+        <button id="quick-settings">SETTINGS</button>
+        <button id="quick-title">TITLE SCREEN</button>
+      </nav>
+      <div id="boss-hud" hidden>
+        <small id="boss-phase">HOSTILE SIGNATURE DETECTED</small
+        ><b id="boss-name"></b>
+        <div class="boss-track"><i id="boss-health"></i></div>
+      </div>
+      <section class="flight-telemetry" aria-label="Flight telemetry">
+        <small id="sector">HAVEN / PROTECTED SPACE</small>
+        <div class="cargo" aria-label="Collected upgrade points">
+          <span class="offense">Offense <b id="currency-0">0</b></span>
+          <span class="defense">Defense <b id="currency-1">0</b></span>
+          <span class="passive">Passive <b id="currency-2">0</b></span>
+        </div>
+        <div class="nav-module">
+          <canvas
+            id="radar"
+            width="112"
+            height="112"
+            aria-label="Dock bearing radar"
+            aria-hidden="true"
+          ></canvas>
+          <div>
+            <small id="distance">0 m FROM HAVEN</small
+            ><b id="danger">SANCTUARY</b>
+          </div>
+        </div>
+        <div class="ship-module">
+          <div class="hull-label">
+            <span>HULL INTEGRITY</span><b id="hull-number">100 / 100</b>
+          </div>
+          <div class="hull-track"><i id="hull-fill"></i></div>
+          <div class="shield-track"><i id="shield-fill"></i></div>
+        </div>
+      </section>
+      <div id="flight-status-strip" aria-label="Flight status">
+        <button
+          id="dock-button"
+          class="dock-prompt"
+          data-pixel-kind="status-text"
+          aria-label="Open RAICHO upgrades"
+          hidden
+        >
+          FORGE / RAICHO UPGRADES [E]
+        </button>
+        <button
+          id="site-button"
+          class="dock-prompt"
+          data-pixel-kind="status-text"
+          hidden
+        >
+          DISCOVERY / INTERACT [E]
+        </button>
+        <div id="toast" data-pixel-kind="warning-text" role="status"></div>
+      </div>
+      <button
+        id="facility-0"
+        class="dock-facility"
+        aria-label="RAICHO upgrades"
+        hidden
+      >
+        <span aria-hidden="true">FORGE</span>
+      </button>
+      <button
+        id="facility-1"
+        class="dock-facility"
+        aria-label="RAICHO hangar"
+        hidden
+      >
+        <span aria-hidden="true">HANGAR</span>
+      </button>
+      <button
+        id="facility-2"
+        class="dock-facility"
+        aria-label="Expedition journal"
+        hidden
+      >
+        <span aria-hidden="true">JOURNAL</span>
+      </button>
+      <button
+        id="facility-3"
+        class="dock-facility"
+        aria-label="Arena campaign"
+        hidden
+      >
+        <span aria-hidden="true">ARENAS</span>
+      </button>
+      <div id="destination-marker" hidden><i></i></div>
+      <div id="joystick" aria-label="Movement joystick">
+        <div class="joystick-ring"></div>
+        <div id="joystick-stick"></div>
+      </div>
+      <button id="fire-button" aria-label="Hold to fire">
+        <span>⌖</span><small>FIRE</small>
+      </button>
+      <div id="performance" hidden></div>
+    </div>
+    <section id="launch-screen" class="screen-overlay">
+      <div class="launch-card">
+        <div class="eyebrow"><i></i> AN ENDLESS PIXEL FRONTIER</div>
+        <h1>GALAXY<br /><span>ROYALE</span></h1>
+        <div class="title-crest" aria-hidden="true"></div>
+        <p>
+          Leave the sanctuary. Break the belt.<br />Become the brightest thing
+          in the void.
+        </p>
+        <button id="launch" class="primary-button">
+          LAUNCH EXPEDITION <span>↗</span>
+        </button>
+        <nav class="title-actions" aria-label="Title actions">
+          <button id="launch-settings" class="text-button">SETTINGS</button>
+          <button
+            id="quit-game"
+            class="text-button exit-button"
+            data-pixel-icon="quit-icon"
+            aria-label="Quit game"
+            title="Quit game"
+          >
+            QUIT
+          </button>
+        </nav>
+        <div class="control-guide desktop-guide">
+          <span><b>LEFT CLICK</b> Set course / use a dock facility</span
+          ><span><b>RIGHT HOLD</b> Aim + fire</span
+          ><span><b>ESC</b> Live RAICHO status</span>
+        </div>
+        <div class="control-guide touch-guide">
+          <span><b>LEFT STICK</b> Thrust & steer</span
+          ><span><b>RIGHT HOLD</b> Fire weapons</span>
+          <span><b>TAP FACILITY</b> Open dock service</span>
+        </div>
+        <div class="build-line">
+          <span>PLAYABLE SLICE / 01</span
+          ><span id="load-status">INITIALIZING PIXEL ENGINE</span>
+        </div>
+      </div>
+    </section>
+    <section
+      id="menu-screen"
+      class="screen-overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="menu-title"
+      aria-describedby="menu-description"
+      hidden
+    >
+      <div class="menu-card">
+        <button
+          id="menu-close"
+          class="icon-button menu-close"
+          aria-label="Close menu"
+        >
+          <span aria-hidden="true">X</span>
+        </button>
+        <h2 id="menu-title">RAICHO status</h2>
+        <p id="menu-description">
+          The universe continues while you inspect your RAICHO.
+        </p>
+        <nav
+          id="collection-navigation"
+          aria-label="Personal collections"
+          hidden
+        >
+          <button
+            id="collection-meishi"
+            class="text-button"
+            aria-pressed="false"
+          >
+            MEISHI
+          </button>
+          <button
+            id="collection-cargo"
+            class="text-button"
+            aria-pressed="false"
+          >
+            CARGO
+          </button>
+          <button
+            id="collection-hangar"
+            class="text-button"
+            aria-pressed="false"
+          >
+            HULLS
+          </button>
+          <button
+            id="collection-upgrades"
+            class="text-button"
+            aria-pressed="false"
+          >
+            ABILITIES
+          </button>
+          <button
+            id="collection-pause"
+            class="text-button"
+            aria-pressed="false"
+          >
+            STATS
+          </button>
+        </nav>
+        <div id="meishi-content" class="menu-page" hidden></div>
+        <div id="cargo-content" class="menu-page" hidden></div>
+        <div id="pause-content" class="menu-page pause-page" hidden>
+          <nav class="flight-menu-actions" aria-label="Flight actions">
+            <button
+              id="resume"
+              class="flight-menu-action primary-button"
+              data-pixel-icon="resume-icon"
+              aria-label="Continue flight"
+              title="Continue flight"
+            >
+              GO
+            </button>
+            <button
+              id="restart-flight"
+              class="flight-menu-action text-button restart-button"
+              data-pixel-icon="restart-icon"
+              aria-label="Restart flight"
+              title="Restart flight / carried materials are lost"
+            >
+              RST
+            </button>
+            <button
+              id="pause-settings"
+              class="flight-menu-action text-button"
+              data-pixel-icon="settings-icon"
+              aria-label="Settings"
+              title="Settings"
+            >
+              SET
+            </button>
+            <button
+              id="return-title"
+              class="flight-menu-action text-button exit-button"
+              data-pixel-icon="title-icon"
+              aria-label="Return to title"
+              title="Return to title / carried materials are lost"
+            >
+              TITLE
+            </button>
+          </nav>
+          <section
+            id="flight-status"
+            class="flight-status"
+            aria-label="Live RAICHO status"
+          ></section>
+        </div>
+        <div id="upgrade-content" class="menu-page"></div>
+        <div id="quest-content" class="menu-page" hidden></div>
+        <div id="map-content" class="menu-page" hidden></div>
+        <div id="hangar-content" class="menu-page" hidden></div>
+        <div id="campaign-content" class="menu-page" hidden></div>
+        <div id="settings-content" class="settings menu-page" hidden>
+          <section
+            class="settings-group settings-audio"
+            aria-labelledby="settings-audio-heading"
+          >
+            <h3 id="settings-audio-heading">Audio</h3>
+            <div class="settings-controls">
+              <label
+                ><span class="setting-name">Master</span
+                ><input
+                  id="master-volume"
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.01"
+              /></label>
+              <label
+                ><span class="setting-name">Music</span
+                ><input
+                  id="music-volume"
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.01"
+              /></label>
+              <label
+                ><span class="setting-name">Effects</span
+                ><input
+                  id="sfx-volume"
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.01"
+              /></label>
+              <label class="toggle-setting"
+                ><span class="setting-name">Dialogue</span
+                ><input id="voice-setting" type="checkbox"
+              /></label>
+              <label
+                ><span class="setting-name">Voice</span
+                ><input
+                  id="voice-volume"
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.01"
+              /></label>
+            </div>
+          </section>
+          <section
+            class="settings-group settings-display"
+            aria-labelledby="settings-display-heading"
+          >
+            <h3 id="settings-display-heading">Display</h3>
+            <div class="settings-controls">
+              <label
+                ><span class="setting-name">Zoom</span
+                ><input
+                  id="zoom-level"
+                  type="range"
+                  min="0.6"
+                  max="1.6"
+                  step="0.05"
+              /></label>
+              <label class="toggle-setting"
+                ><span class="setting-name">Camera shake</span
+                ><input id="shake-setting" type="checkbox"
+              /></label>
+              <label class="toggle-setting"
+                ><span class="setting-name">Reduced motion</span
+                ><input id="motion-setting" type="checkbox"
+              /></label>
+              <label class="toggle-setting"
+                ><span class="setting-name">Lower cosmic detail</span
+                ><input id="density-setting" type="checkbox"
+              /></label>
+              <button id="menu-fullscreen" class="text-button">
+                Fullscreen
+              </button>
+            </div>
+          </section>
+          <section
+            class="settings-group settings-session"
+            aria-labelledby="settings-session-heading"
+          >
+            <h3 id="settings-session-heading">Session</h3>
+            <div class="settings-session-actions">
+              <button id="settings-backup" class="text-button icon-action">
+                <span aria-hidden="true">S</span> SAVE &amp; BACKUP
+              </button>
+              <button
+                id="settings-title"
+                class="icon-button settings-title"
+                data-pixel-icon="title-icon"
+                aria-label="Return to title"
+                title="Return to title / carried materials are lost"
+              >
+                TITLE
+              </button>
+            </div>
+          </section>
+        </div>
+        <div id="archive-content" class="menu-page" hidden>
+          <div class="save-card">
+            <h3>AUTOMATIC SAVES</h3>
+            <p>
+              RAICHO XP, collected points, owned equipment and dock storage save
+              on this device. Carried crafting materials bank only when you
+              physically return to Haven. Death, restart, return to title or
+              reload discards carried materials.
+            </p>
+            <h3>BACKUP YOUR PROGRESSION</h3>
+            <p>
+              Export a backup to keep a copy or move your progression to another
+              device. Restoring a backup replaces this device's saved
+              progression.
+            </p>
+            <div class="save-actions">
+              <button id="export-save" class="text-button">
+                EXPORT BACKUP
+              </button>
+              <button id="import-label" class="text-button import-label">
+                RESTORE BACKUP
+              </button>
+              <input
+                id="import-save"
+                type="file"
+                accept="application/json,.json"
+                hidden
+              />
+            </div>
+          </div>
+        </div>
+        <div class="menu-actions">
+          <button id="apply-update" class="text-button" hidden>
+            Apply update at Haven
+          </button>
+          <small id="save-status" role="status">Saves on this device.</small>
+        </div>
+      </div>
+    </section>
+    <section id="death-screen" class="screen-overlay" hidden>
+      <div class="death-card">
+        <div class="eyebrow">EXPEDITION ENDED</div>
+        <h2>RAICHO LOST</h2>
+        <p>
+          RAICHO XP, points and dock storage are retained. Carried crafting
+          materials are lost with your RAICHO.
+        </p>
+        <div id="run-summary" aria-label="Expedition report"></div>
+        <div class="death-actions">
+          <button id="retry" class="primary-button">RETRY EXPEDITION</button>
+          <button id="death-title" class="text-button">RETURN TO TITLE</button>
+        </div>
+      </div>
+    </section>
+    <div id="rotate-screen">
+      <span>⤵</span>
+      <h2>A galaxy needs a wider view.</h2>
+      <p>Rotate your device to landscape to fly.</p>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

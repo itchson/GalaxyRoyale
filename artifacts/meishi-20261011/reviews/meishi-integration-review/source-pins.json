@@ -1,0 +1,91 @@
+{
+  "root_head": "7d33ee4d24f85cdb5388b505e183f7aa9a8883aa",
+  "domain": "actual working-tree raw bytes; not claimed committed or build inputs",
+  "inputs": [
+    {
+      "path": "apps/game/src/main.ts",
+      "bytes": 80146,
+      "sha256": "b9284b8d638e91df6e3a5b60e03481361ba5bad76ca99845685d460ba599a180"
+    },
+    {
+      "path": "apps/game/src/pixel-ui.ts",
+      "bytes": 18732,
+      "sha256": "c9b1351cc2faef5d937beacb6b9e1fb00de37647f3e7a99bbec2b65833f9650c"
+    },
+    {
+      "path": "apps/game/index.html",
+      "bytes": 16689,
+      "sha256": "78f0bda050081d016c36d9a93cf886b5ad1720e978c5ad60047488d393ad2c91"
+    },
+    {
+      "path": "apps/game/src/cargo.ts",
+      "bytes": 3546,
+      "sha256": "e36f172ecccf8052ca7ef8ba7ba73fd916bafff1e434856c15910ec3b083e048"
+    },
+    {
+      "path": "apps/game/src/cargo.css",
+      "bytes": 554,
+      "sha256": "bacb85d417e1e0c3a34bf0de18418499a142d115956997041f490c658e20b2d6"
+    },
+    {
+      "path": "apps/game/src/style.css",
+      "bytes": 26043,
+      "sha256": "d2dd0e9062f623cf01e93cd1b52bbdd5a19e5ff276624cc3c2f121a475b1a8e9"
+    },
+    {
+      "path": "apps/game/src/meishi.ts",
+      "bytes": 8895,
+      "sha256": "bae4fe9ad80fbe638342e2150dd7e1abe65b9e0c299d31c78ac55ba575d7bf6d"
+    },
+    {
+      "path": "apps/game/src/meishi.css",
+      "bytes": 3072,
+      "sha256": "dffc08cf1c314d2fac1721fac55357946925e77ae5c893e83a9724b0291ce98d"
+    },
+    {
+      "path": "apps/game/src/flight-menu.ts",
+      "bytes": 10073,
+      "sha256": "626cf84867e9e50194fab29280f62ed1cf0af556fc42220b66815c477b190369"
+    },
+    {
+      "path": "apps/game/src/kikai-portrait.ts",
+      "bytes": 1319,
+      "sha256": "a2c1d7f69623871a7db5a529e3600724d8478492411abffe848b338f5f823071"
+    },
+    {
+      "path": "apps/game/src/campaign.ts",
+      "bytes": 8963,
+      "sha256": "0ce3bb27a56a34ef385db5c5a66f0e6a619573310874639a75e57708d701f807"
+    },
+    {
+      "path": "apps/game/src/loadout.ts",
+      "bytes": 16683,
+      "sha256": "6595eec15bbfd796404f8477860b21f35672fc83437df91583c32cde82d0c312"
+    },
+    {
+      "path": "crates/game_web/src/ui_scene.rs",
+      "bytes": 89086,
+      "sha256": "36d20de4165c9c69ed0aaa465367b2794c7e79af1aab784d478587c77ab49861"
+    },
+    {
+      "path": "crates/game_web/src/kikai_art.rs",
+      "bytes": 36953,
+      "sha256": "0d0d7fe7e7ae2b453b28a9b48fb301b66f3ee1272e66ab33a0898c3f7e83cbb0"
+    },
+    {
+      "path": "crates/game_core/src/campaign_runtime.rs",
+      "bytes": 53725,
+      "sha256": "901f3dedf5afa052a9e278ee0a8bee87862e0469d36694bfe33e7fd43189ea74"
+    },
+    {
+      "path": "crates/game_core/src/ship_progression.rs",
+      "bytes": 24849,
+      "sha256": "02abf186a105b8bbbb6b180c7edad4d65c28a716e5a3fc692eb6601dbea0707d"
+    },
+    {
+      "path": "crates/game_core/src/lib.rs",
+      "bytes": 195961,
+      "sha256": "94e68fd488248c7b33eca873398d6bfb55652e7e56ddaf0c685616d8fcda848a"
+    }
+  ]
+}

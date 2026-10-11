@@ -1,0 +1,29 @@
+#cargo-content {
+  font-size: var(--ui-text);
+  line-height: 1.4;
+}
+#cargo-content p {
+  margin: 0;
+}
+.cargo-risk {
+  color: var(--amber);
+}
+.cargo-ledger {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: min(12px, calc(6px * var(--ui-scale, 1)));
+  align-items: center;
+}
+.cargo-ledger > :nth-child(3n + 2),
+.cargo-ledger > :nth-child(3n) {
+  text-align: right;
+}
+.cargo-ledger h3,
+.cargo-missions h3 {
+  font-size: var(--ui-caption);
+  font-weight: normal;
+}
+.cargo-ledger p,
+.cargo-missions p {
+  overflow-wrap: anywhere;
+}

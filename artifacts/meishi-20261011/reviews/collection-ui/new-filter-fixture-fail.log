@@ -1,0 +1,70 @@
+✔ the ninth Royale emblem appears only for authoritative tournament victory (3.8173ms)
+✔ competitor identity and independent sponsor appear only after discovery without mutating rewards (1.2986ms)
+✔ campaign exposes only genuinely discovered champions and their catalog details (0.9067ms)
+✔ a completed losing season offers a new season without victory or credits claims (1.0821ms)
+✔ a losing-season retry remains gated by location and an active encounter (1.2497ms)
+✔ only an authoritative winning season exposes credits and Sovereign victory text (0.7819ms)
+✔ discovered arena copy distinguishes a found hull, an earned blueprint and an owned craft (0.9291ms)
+✔ Forge forwards exact craft/upgrade/equip/empty/hardware arguments, refreshes HUD, then saves the actual snapshot (8.6391ms)
+✔ backend rejection has no HUD fetch, snapshot save, audio cue or invented success (1.0609ms)
+✔ real Forge category survives successful repaint while a fresh open resets to overview (2.2199ms)
+✔ mutation success is not a committed-save claim while deferred persistence fails (1.3427ms)
+✔ Hangar page and construction/selection bindings pass full per-hull XP metadata (1.7485ms)
+✔ rejected ship construction or switching cannot save or report success (1.8058ms)
+✔ an unavailable audio context cannot reject a successful mutation/save flow (1.4069ms)
+✔ first-upgrade recipe shows the actual named banked subset and calls the ordinary native upgrade action (4.5574ms)
+✔ Forge separates three automatic slots and six ship hardware actions (2.6951ms)
+✔ category editor has contextual Back and explicit craft versus equip (1.1287ms)
+✔ availability is authoritative even when visible balances look sufficient or insufficient (1.0553ms)
+✔ owned rank cap and replacement retain inventory and send exact category (1.3278ms)
+✔ actual HUD repaint preserves category, while ship change/reset returns overview (1.3409ms)
+✔ busy mutation and outside-dock clearing cannot dispatch; cargo stays in its separate page (0.9861ms)
+✔ Hangar shows each hull's XP, construction recipe and exact selection callback (0.9033ms)
+✔ all game-provided names and errors are plain text, including malicious markup (0.911ms)
+✔ victory-only hull has no fake construction recipe and retains real LV1 reward XP (0.9145ms)
+✔ legacy stored hardware rank and active ship cap are shown separately without inventing power (0.6741ms)
+✔ Forge prioritizes slots and collection access without repeating cargo inventory (0.8544ms)
+✔ Forge excludes an undiscovered ability rather than showing its locked name (0.6956ms)
+✖ ability filters run after discovery and distinguish ownership from blueprint and compatibility (2.0845ms)
+✔ ability filters preserve focus and scroll across real HUD replacements without stealing outside focus (1.3521ms)
+✔ successful crafting exposes Equip and retains action focus without automatically equipping (1.572ms)
+✔ hull filters keep found, owned and earned blueprint states distinct and preserve real recipe gates (2.8528ms)
+✔ hull filter state persists through checkpoint repaint and does not retain a second inventory (1.56ms)
+✔ collection costs and level requirements remain supplied by the HUD, including named recipes (1.2494ms)
+ℹ tests 33
+ℹ suites 0
+ℹ pass 32
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 427.9701
+
+✖ failing tests:
+
+test at scripts\test\loadout.test.mjs:468:1
+✖ ability filters run after discovery and distinguish ownership from blueprint and compatibility (2.0845ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    [
+      'ability-0',
+  +   'ability-1',
+      'ability-2',
+  -   'ability-1'
+    ]
+  
+      at TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/loadout.test.mjs:505:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ 'ability-0', 'ability-1', 'ability-2' ],
+    expected: [ 'ability-0', 'ability-2', 'ability-1' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

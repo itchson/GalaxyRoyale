@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "commit": "63070b1b95156fedeb683d0ad867781748f990b9",
+  "parent": "7d33ee4d24f85cdb5388b505e183f7aa9a8883aa",
+  "source": [
+    {
+      "path": "crates/game_web/src/ui_kikai_integration_tests.rs",
+      "working_sha256": "b34c9761bee7c35d04a32996780371e49a6419bf2feabf53385ffe3608432d26",
+      "git_blob_sha256": "b34c9761bee7c35d04a32996780371e49a6419bf2feabf53385ffe3608432d26",
+      "working_size": 39979,
+      "git_size": 39979,
+      "lf_equivalent": true
+    },
+    {
+      "path": "crates/game_web/src/ui_scene.rs",
+      "working_sha256": "fc6bc5e5a4c0da198dc8383fd3f8bc467650452fdafd255c0d4367ea518fda4a",
+      "git_blob_sha256": "fc6bc5e5a4c0da198dc8383fd3f8bc467650452fdafd255c0d4367ea518fda4a",
+      "working_size": 86663,
+      "git_size": 86663,
+      "lf_equivalent": true
+    },
+    {
+      "path": "crates/game_web/src/kikai_art.rs",
+      "working_sha256": "e3c2b7e1331e506de6e76ab6d0839ca8bf14db47e8e192ee6c8113d5c44bbc3a",
+      "git_blob_sha256": "e3c2b7e1331e506de6e76ab6d0839ca8bf14db47e8e192ee6c8113d5c44bbc3a",
+      "working_size": 35916,
+      "git_size": 35916,
+      "lf_equivalent": true
+    },
+    {
+      "path": "crates/game_core/src/identity.rs",
+      "working_sha256": "f1f07a1d8368f4d0c4a975eaa3692fa93357cb251283b3baabb079f74d5f73ce",
+      "git_blob_sha256": "f6d6eb5220d0809113348d992a155e9e8662a503ac3ebc5e5f8ad9b9053b4afd",
+      "working_size": 28253,
+      "git_size": 27487,
+      "lf_equivalent": true
+    },
+    {
+      "path": "crates/engine_core/src/frame.rs",
+      "working_sha256": "c4f521e031f8eb514236d142f0eb79b994a33edc030be534d1faf353097c3380",
+      "git_blob_sha256": "2afd79bb523dc0a57533ddaf1067ce2dd204823cb87f72e3ee7fc976a81969fc",
+      "working_size": 26160,
+      "git_size": 25415,
+      "lf_equivalent": true
+    },
+    {
+      "path": "assets/ui/kikai/detail/atlas.json",
+      "working_sha256": "31fa6a1b04d83f3d5fad377562e73c6ad35530b028626a1136c5b56afd9ea661",
+      "git_blob_sha256": "31fa6a1b04d83f3d5fad377562e73c6ad35530b028626a1136c5b56afd9ea661",
+      "working_size": 3247005,
+      "git_size": 3247005,
+      "lf_equivalent": true
+    },
+    {
+      "path": "assets/ui/champion-patches-atlas.json",
+      "working_sha256": "c818c0531347876c1b7c72f460e4045bb4056faa8d2492614787032c46f84b1b",
+      "git_blob_sha256": "9916ba83ccec6d7df7b7061d8aef54a02f408666c993e33dc5a5872d8835580b",
+      "working_size": 13548,
+      "git_size": 13547,
+      "lf_equivalent": true
+    }
+  ],
+  "evidence": [
+    {
+      "path": "HANDOFF.md",
+      "sha256": "c7f4435ba747bfd1528101293f2df6c3966c0dada5919f58c2a7d776bb017a21",
+      "size": 1936
+    },
+    {
+      "path": "native-test.log",
+      "sha256": "859c836ed2e52a1da63096a47dd01f01c12dfb50778439d501160c5fb4c34eca",
+      "size": 1611
+    },
+    {
+      "path": "before-settings-test.log",
+      "sha256": "cde384dc88858d1dd4db0d1238743933800247dd9fe8c870f2ba79ab5587293c",
+      "size": 1611
+    },
+    {
+      "path": "first-compile-error.log",
+      "sha256": "51716cc3718b72303b4a5bbfcc956262beb5caf484ad80557fd857c6cf3aab42",
+      "size": 1883
+    }
+  ]
+}

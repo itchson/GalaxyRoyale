@@ -1,0 +1,138 @@
+.meishi-card {
+  min-width: 0;
+  max-width: 100%;
+  padding: min(12px, calc(6px * var(--ui-scale, 1)));
+  border-top: 1px solid #52717d;
+  border-bottom: 1px solid #263d50;
+  background: #080f18;
+}
+.meishi-heading {
+  display: flex;
+  align-items: center;
+  gap: min(18px, calc(8px * var(--ui-scale, 1)));
+}
+.meishi-identity,
+.meishi-ship-summary,
+.meishi-equipped {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.meishi-portrait {
+  flex: 0 0 auto;
+  width: 96px;
+  height: 128px;
+}
+.meishi-card h3 {
+  font-size: var(--ui-text);
+  font-weight: normal;
+  line-height: 1.5;
+  color: var(--cyan);
+  margin: 0;
+}
+.meishi-card p {
+  font-size: var(--ui-caption);
+  line-height: 1.5;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.meishi-card .meishi-designation {
+  font-size: var(--ui-text);
+  color: #edf4f5;
+  margin-top: 6px;
+}
+.meishi-card .meishi-manufacturer {
+  margin-top: 6px;
+  color: var(--muted);
+}
+.meishi-raicho {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 8px 12px;
+  margin-top: 12px;
+  padding-top: 8px;
+  border-top: 1px solid #263d50;
+}
+.meishi-ship-icon {
+  width: calc(32px * var(--ui-scale, 1));
+  height: calc(32px * var(--ui-scale, 1));
+}
+.meishi-equipped {
+  grid-column: 1 / -1;
+}
+.meishi-card .upgrade-category {
+  display: block;
+  margin: 0;
+}
+.meishi-card .upgrade-category p {
+  color: inherit;
+}
+.meishi-balances {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 8px;
+  border-top: 1px solid #263d50;
+}
+.meishi-patches {
+  margin-top: 12px;
+  padding-top: 8px;
+  border-top: 1px solid #263d50;
+}
+.meishi-patch-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(min(100%, calc(24px * var(--ui-scale, 1) + 8px)), 1fr)
+  );
+  gap: 8px 4px;
+  list-style: none;
+  padding: 0;
+  margin: 8px 0 0;
+}
+.meishi-patch-slot {
+  min-width: 0;
+  text-align: center;
+}
+.meishi-patch-icon,
+.meishi-card .meishi-patch-empty {
+  width: calc(24px * var(--ui-scale, 1));
+  height: calc(24px * var(--ui-scale, 1));
+  margin: 0 auto 4px;
+}
+.meishi-card .meishi-patch-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+}
+.meishi-card .meishi-patch-caption {
+  font-size: var(--ui-caption);
+}
+/* Preserve hidden native art and placeholder semantics despite flex rules. */
+.meishi-card [hidden] {
+  display: none;
+}
+/* Native quads paint the card's art/text; CSS remains the accessible fallback. */
+body.pixel-ready .meishi-card {
+  background: transparent;
+  border-color: transparent;
+}
+@media (max-width: 900px) {
+  .meishi-patch-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+@media (max-width: 480px) {
+  .meishi-portrait {
+    width: 72px;
+    height: 96px;
+  }
+  .meishi-balances {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .meishi-patch-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

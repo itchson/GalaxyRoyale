@@ -1,0 +1,150 @@
+{
+  "root_commit": "69db89ccf5895390807383fcdd37c3413ba2dc68",
+  "initial_route_commit": "e6be2e847bedd1e477e4f3576b7e6bf654f7492b",
+  "route_runtime_commit": "2bab5b1e3b8a14d813f4827ff5623d09d1af7427",
+  "native_surface_commit": "293f41c",
+  "keyboard_scroll_commit": "69db89ccf5895390807383fcdd37c3413ba2dc68",
+  "scope": "Read-only source route review and three actual painter fake-DOM scroll probes; no browser/native execution",
+  "final_scroll_source_changes_from_executed_snapshot": "Prettier wraps previousScroll assignment only; no token changes",
+  "inputs": [
+    {
+      "file": "apps/game/index.html",
+      "committed_sha256": "754e397fb7596904b014d0b3189793e2fcad4e9d8e75b068f4cb144ecd160e3a",
+      "committed_bytes": 16848,
+      "observed_working_sha256": "754e397fb7596904b014d0b3189793e2fcad4e9d8e75b068f4cb144ecd160e3a",
+      "observed_working_bytes": 16848,
+      "working_equal_after_crlf_normalization": true
+    },
+    {
+      "file": "apps/game/src/main.ts",
+      "committed_sha256": "3d5e09edea39cb5f39ab4e6fd5748655913821766b07bd292ee65f4f49bd75cc",
+      "committed_bytes": 80781,
+      "observed_working_sha256": "3d5e09edea39cb5f39ab4e6fd5748655913821766b07bd292ee65f4f49bd75cc",
+      "observed_working_bytes": 80781,
+      "working_equal_after_crlf_normalization": true
+    },
+    {
+      "file": "apps/game/src/style.css",
+      "committed_sha256": "702872f7d275ae811496cc19ad78be2f839c4b2e4ec5708337501bae2c9aebc8",
+      "committed_bytes": 25936,
+      "observed_working_sha256": "702872f7d275ae811496cc19ad78be2f839c4b2e4ec5708337501bae2c9aebc8",
+      "observed_working_bytes": 25936,
+      "working_equal_after_crlf_normalization": true
+    },
+    {
+      "file": "apps/game/src/meishi.ts",
+      "committed_sha256": "0f55e13f0821d413bc46628e368e110c5a79e335251c3d85fb6fc38d94d17ae7",
+      "committed_bytes": 8717,
+      "observed_working_sha256": "0f55e13f0821d413bc46628e368e110c5a79e335251c3d85fb6fc38d94d17ae7",
+      "observed_working_bytes": 8717,
+      "working_equal_after_crlf_normalization": true
+    },
+    {
+      "file": "apps/game/src/meishi.css",
+      "committed_sha256": "9eac5b5c0b14f11c9c668f375f772aa1fac0c2f2c6d7df9b9fc5626b20d0e7e8",
+      "committed_bytes": 3353,
+      "observed_working_sha256": "9eac5b5c0b14f11c9c668f375f772aa1fac0c2f2c6d7df9b9fc5626b20d0e7e8",
+      "observed_working_bytes": 3353,
+      "working_equal_after_crlf_normalization": true
+    },
+    {
+      "file": "apps/game/src/pixel-ui.ts",
+      "committed_sha256": "13c69832d68cddaaa4484409518f927abb2f97c52c9169b7889e75ebd4d52685",
+      "committed_bytes": 18991,
+      "observed_working_sha256": "13c69832d68cddaaa4484409518f927abb2f97c52c9169b7889e75ebd4d52685",
+      "observed_working_bytes": 18991,
+      "working_equal_after_crlf_normalization": true
+    },
+    {
+      "file": "apps/game/src/loadout.ts",
+      "committed_sha256": "f4011e1072d8d8656acea2c96c41c26b4f059b2c2731a7a9d853bc150e0c637d",
+      "committed_bytes": 21077,
+      "observed_working_sha256": "f4011e1072d8d8656acea2c96c41c26b4f059b2c2731a7a9d853bc150e0c637d",
+      "observed_working_bytes": 21077,
+      "working_equal_after_crlf_normalization": true
+    },
+    {
+      "file": "apps/game/src/loadout.css",
+      "committed_sha256": "f56d16881f58bf46be1876df461842089e50e70cdcaa95bf8bffa5ba4134457a",
+      "committed_bytes": 4044,
+      "observed_working_sha256": "4a3efa192a802445bdf92376114dbd59db30041e89af0d8e1fbdd1060b9e6315",
+      "observed_working_bytes": 4226,
+      "working_equal_after_crlf_normalization": true
+    },
+    {
+      "file": "apps/game/src/campaign.ts",
+      "committed_sha256": "fdb9ebf0a1c27bd3aa1c81f43c4cbd0ce8ef3b4fed5a073833dafec774b0fb45",
+      "committed_bytes": 9313,
+      "observed_working_sha256": "9ab300a1a39888c0cd8faff99ec73ffb1d26f66ec8cd0e0fa1c6f412fe6cf548",
+      "observed_working_bytes": 9619,
+      "working_equal_after_crlf_normalization": true
+    },
+    {
+      "file": "scripts/test/meishi.test.mjs",
+      "committed_sha256": "8cf1576a2417d93fbfd07ed99310687f38cfc7cbf2c8cf65ed3389cc70b43f28",
+      "committed_bytes": 11681,
+      "observed_working_sha256": "8cf1576a2417d93fbfd07ed99310687f38cfc7cbf2c8cf65ed3389cc70b43f28",
+      "observed_working_bytes": 11681,
+      "working_equal_after_crlf_normalization": true
+    },
+    {
+      "file": "scripts/test/loadout.test.mjs",
+      "committed_sha256": "c8e5cfa56c135bbb79698803765f077225c0f668c1a7b5e18877e4c6dcdb2f44",
+      "committed_bytes": 23361,
+      "observed_working_sha256": "c8e5cfa56c135bbb79698803765f077225c0f668c1a7b5e18877e4c6dcdb2f44",
+      "observed_working_bytes": 23361,
+      "working_equal_after_crlf_normalization": true
+    },
+    {
+      "file": "scripts/test/flight-menu.test.mjs",
+      "committed_sha256": "9f3a90103f3b553112972aa15e777b08e74a75eed85daf647847e76864292634",
+      "committed_bytes": 18118,
+      "observed_working_sha256": "9f3a90103f3b553112972aa15e777b08e74a75eed85daf647847e76864292634",
+      "observed_working_bytes": 18118,
+      "working_equal_after_crlf_normalization": true
+    },
+    {
+      "file": "scripts/test/pixel-ui.test.mjs",
+      "committed_sha256": "68379d602c2cb002cea72aa157dd76ae22c1441a2fa285b7b8a67d1e9440d97d",
+      "committed_bytes": 22796,
+      "observed_working_sha256": "68379d602c2cb002cea72aa157dd76ae22c1441a2fa285b7b8a67d1e9440d97d",
+      "observed_working_bytes": 22796,
+      "working_equal_after_crlf_normalization": true
+    },
+    {
+      "file": "scripts/test/dock-menu.test.mjs",
+      "committed_sha256": "29cee93d442d621066d3c4fe6495970f4fa77c4c262ddfb9a55519eff797084a",
+      "committed_bytes": 29643,
+      "observed_working_sha256": "29cee93d442d621066d3c4fe6495970f4fa77c4c262ddfb9a55519eff797084a",
+      "observed_working_bytes": 29643,
+      "working_equal_after_crlf_normalization": true
+    }
+  ],
+  "evidence": [
+    {
+      "file": "REVIEW.md",
+      "sha256": "8e00daf2283372ffa748ffbe79a5489ec72708e7e299d6f6cf8786a5ac58d730",
+      "bytes": 5155
+    },
+    {
+      "file": "scroll-probe-prepare.mjs",
+      "sha256": "b3ae2889fc92f4bf73cf67b666c651044afeb0461232587493165a6c704f3c9d",
+      "bytes": 3203
+    },
+    {
+      "file": "scroll-probe.mjs",
+      "sha256": "0ebf2a6cbb77332372a533bdd6107e4ca7957264427a248aeb43d8221e9de134",
+      "bytes": 6981
+    },
+    {
+      "file": "scroll-probe.log",
+      "sha256": "933bd453ded90f634119a2a9ec8aec5013d1a65a3be6137ac40f6312b8d42003",
+      "bytes": 338
+    },
+    {
+      "file": "inputs/apps/game/src/loadout.ts",
+      "sha256": "eabed32a0eba64b95c85e517ff6c731f2e29eb7ed5f7c90b28c86718e4e24ad1",
+      "bytes": 21071
+    }
+  ]
+}

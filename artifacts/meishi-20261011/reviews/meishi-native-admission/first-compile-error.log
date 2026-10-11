@@ -1,0 +1,37 @@
+   Compiling game_core v0.1.0 (C:\Users\mitch\.codex\worktrees\galaxy-hud-navigation\galaxy-royale\crates\game_core)
+   Compiling game_web v0.1.0 (C:\Users\mitch\.codex\worktrees\galaxy-hud-navigation\galaxy-royale\crates\game_web)
+error[E0277]: the trait bound `ui_scene::UiNode: Clone` is not satisfied
+    --> crates\game_web\src\ui_kikai_integration_tests.rs:1024:18
+     |
+1024 |                 .cloned()
+     |                  ^^^^^^ the trait `Clone` is not implemented for `ui_scene::UiNode`
+     |
+note: required by a bound in `cloned`
+    --> /rustc/2d8144b7880597b6e6d3dfd63a9a9efae3f533d3/library\core\src\iter\traits\iterator.rs:3559:4
+help: consider annotating `ui_scene::UiNode` with `#[derive(Clone)]`
+    -->  crates\game_web\src\ui_scene.rs:201:1
+     |
+ 201 + #[derive(Clone)]
+ 202 | pub struct UiNode {
+     |
+
+error[E0599]: `Cloned<std::slice::Iter<'_, ui_scene::UiNode>>` is not an iterator
+    --> crates\game_web\src\ui_kikai_integration_tests.rs:1025:18
+     |
+1022 |               let parts: Vec<_> = nodes
+     |  _________________________________-
+1023 | |                 .iter()
+1024 | |                 .cloned()
+1025 | |                 .map(|node| extract(vec![node], [0.0; 2], 0.0, true))
+     | |                 -^^^ `Cloned<std::slice::Iter<'_, ui_scene::UiNode>>` is not an iterator
+     | |_________________|
+     |
+     |
+     = note: the following trait bounds were not satisfied:
+             `Cloned<std::slice::Iter<'_, ui_scene::UiNode>>: Iterator`
+             which is required by `&mut Cloned<std::slice::Iter<'_, ui_scene::UiNode>>: Iterator`
+
+Some errors have detailed explanations: E0277, E0599.
+For more information about an error, try `rustc --explain E0277`.
+error: could not compile `game_web` (lib test) due to 2 previous errors
+warning: build failed, waiting for other jobs to finish...

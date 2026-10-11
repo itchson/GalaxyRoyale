@@ -1,0 +1,13 @@
+   Compiling pan-coop-dock-tiled-proof v0.1.0 (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\scripts\qa\pan-coop-dock\native256)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.48s
+     Running unittests src\main.rs (scripts\qa\pan-coop-dock\native256\target\debug\deps\pan_coop_dock_tiled_proof-637651cd8878236a.exe)
+
+running 5 tests
+test tests::all_sixteen_transforms_cross_table_without_truncation ... ok
+test tests::whole_group_preflight_and_damage_never_recreate_missing_cells ... ok
+test tests::tiled_rigs_emit_every_fine_cell_once_at_half_scale ... ok
+test tests::actual_nested_reflected_shear_corners_and_zoom_remain_finite_continuous ... ok
+test tests::three_states_keep_geometry_and_only_lamp_colors_change ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.80s
+
