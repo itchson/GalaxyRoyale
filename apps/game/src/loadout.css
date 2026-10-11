@@ -76,11 +76,6 @@
   height: calc(16px * var(--ui-scale, 1));
   flex: 0 0 auto;
 }
-.forge-view .upgrade-category {
-  display: flex;
-  align-items: center;
-  gap: calc(5px * var(--ui-scale, 1));
-}
 .collection-heading h3 {
   min-width: 0;
   overflow-wrap: anywhere;
@@ -101,8 +96,14 @@
   background: #10181d;
 }
 .loadout-slot .upgrade-category {
-  display: block;
   margin: 0 0 calc(3px * var(--ui-scale, 1));
+}
+.forge-view .upgrade-category {
+  display: grid;
+  grid-template-columns: calc(16px * var(--ui-scale, 1)) minmax(0, 1fr);
+  align-items: center;
+  justify-content: start;
+  gap: calc(5px * var(--ui-scale, 1));
 }
 .forge-view .upgrade-category p {
   color: inherit;
