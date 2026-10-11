@@ -714,6 +714,16 @@ impl Game {
                     }
                     .into(),
                     species: if discovered { c.species } else { "" }.into(),
+                    identity: discovered.then(|| c.identity.hud()),
+                    sponsor: discovered.then_some(c.sponsor),
+                    display_model: if discovered { c.ship } else { "" }.into(),
+                    legacy_model: if discovered { c.legacy_model } else { "" }.into(),
+                    legacy_species: if discovered { c.legacy_species } else { "" }.into(),
+                    introduction: if discovered {
+                        c.introduction()
+                    } else {
+                        String::new()
+                    },
                     ship: if discovered { c.ship } else { "" }.into(),
                     ability: if discovered { c.ability } else { "" }.into(),
                     silhouette: if discovered { c.silhouette } else { "" }.into(),
@@ -841,7 +851,12 @@ impl Game {
         for ship in &mut ships {
             self.ship_hud_details(ship);
         }
-        let (standings, matches) = table(self.profile.seed, p);
+        let (mut standings, matches) = table(self.profile.seed, p);
+        for standing in &mut standings {
+            if standing.entrant < champions.len() && !champions[standing.entrant].discovered {
+                standing.name = "Unknown champion".into();
+            }
+        }
         let tournament_position = tournament_site(self.profile.seed).position;
         CampaignHud {
             champions,
@@ -952,6 +967,10 @@ impl Game {
         }
     }
 }
+
+#[cfg(test)]
+#[path = "champion_roster_tests.rs"]
+mod roster_tests;
 
 #[cfg(test)]
 mod tests {

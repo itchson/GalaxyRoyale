@@ -1,4 +1,5 @@
 //! Eight real champion trials and a nine-entrant solo round-robin league.
+use crate::identity::{Corporation, KikaiKind};
 use crate::{PixelBody, pixel_assets, regions};
 use serde::{Deserialize, Serialize};
 use std::sync::LazyLock;
@@ -175,6 +176,12 @@ pub struct ChampionHud {
     pub id: String,
     pub name: String,
     pub species: String,
+    pub identity: Option<ChampionIdentity>,
+    pub sponsor: Option<Corporation>,
+    pub display_model: String,
+    pub legacy_model: String,
+    pub legacy_species: String,
+    pub introduction: String,
     pub ship: String,
     pub ability: String,
     pub silhouette: String,
@@ -260,7 +267,11 @@ pub struct CampaignHud {
 pub struct Champion {
     pub name: &'static str,
     pub species: &'static str,
+    pub legacy_species: &'static str,
+    pub identity: RosterIdentity,
+    pub sponsor: Corporation,
     pub ship: &'static str,
+    pub legacy_model: &'static str,
     pub ability: &'static str,
     pub silhouette: &'static str,
     pub family: usize,
@@ -269,11 +280,83 @@ pub struct Champion {
     pub color: [u8; 3],
     pub health: f32,
 }
+
+/// Authored sporting identity, not a player registration or saved progression.
+/// NPC identifiers may be short, as with APR-1337; no random-license claim.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct RosterIdentity {
+    pub kind: KikaiKind,
+    pub corporation: Corporation,
+    pub sub_corporation: Corporation,
+    pub hex_id: &'static str,
+}
+
+#[derive(Clone, Debug, Serialize, PartialEq, Eq)]
+pub struct ChampionIdentity {
+    pub kind: KikaiKind,
+    pub corporation: Corporation,
+    pub sub_corporation: Corporation,
+    pub hex_id: String,
+    pub designation: String,
+    pub short_designation: String,
+}
+
+impl RosterIdentity {
+    pub fn hud(self) -> ChampionIdentity {
+        let hex = self.hex_id.to_ascii_uppercase();
+        ChampionIdentity {
+            kind: self.kind,
+            corporation: self.corporation,
+            sub_corporation: self.sub_corporation,
+            hex_id: self.hex_id.into(),
+            designation: format!(
+                "{}-{}-{}-{hex}",
+                self.kind.name(),
+                self.corporation.name(),
+                self.sub_corporation.name()
+            ),
+            short_designation: format!(
+                "{}{}{}#{hex}",
+                self.kind.callsign_prefix(),
+                &self.corporation.name()[..1],
+                &self.sub_corporation.name()[..1]
+            ),
+        }
+    }
+}
+
+impl Champion {
+    /// Alias, manufacturer identity, sponsor and unlockable equipment stay
+    /// separate facts. Only discovered HUD entries expose this introduction.
+    pub fn introduction(&self) -> String {
+        format!(
+            "I'm {}, competing as {}. My main manufacturer is {}; my sub-manufacturer is {}. {} sponsors my arena. I fly the {} RAICHO, also known as {}. {}.",
+            self.identity.hud().short_designation,
+            self.name,
+            self.identity.corporation.name(),
+            self.identity.sub_corporation.name(),
+            self.sponsor.name(),
+            self.ship,
+            self.legacy_model,
+            self.ability
+        )
+    }
+}
+
 pub const CHAMPIONS: [Champion; 8] = [
     Champion {
         name: "Lyra Voss",
-        species: "Human",
-        ship: "Dawnneedle",
+        species: "KIKAI",
+        legacy_species: "Human",
+        identity: RosterIdentity {
+            kind: KikaiKind::Dora,
+            corporation: Corporation::Pan,
+            sub_corporation: Corporation::Pan,
+            hex_id: "f344fee",
+        },
+        sponsor: Corporation::Pan,
+        ship: "AKATSUKI",
+        legacy_model: "Dawnneedle",
         ability: "Stutter dash / needle burst",
         silhouette: "needle",
         family: 0,
@@ -284,8 +367,17 @@ pub const CHAMPIONS: [Champion; 8] = [
     },
     Champion {
         name: "Korr-9",
-        species: "Automaton",
-        ship: "Bulwark",
+        species: "KIKAI",
+        legacy_species: "Automaton",
+        identity: RosterIdentity {
+            kind: KikaiKind::Doro,
+            corporation: Corporation::Renko,
+            sub_corporation: Corporation::Pan,
+            hex_id: "2323",
+        },
+        sponsor: Corporation::Pan,
+        ship: "TATE",
+        legacy_model: "Bulwark",
         ability: "Rotating broadside",
         silhouette: "shoulder-armor",
         family: 1,
@@ -296,8 +388,17 @@ pub const CHAMPIONS: [Champion; 8] = [
     },
     Champion {
         name: "Sable Myrr",
-        species: "Vesper",
-        ship: "Nightrail",
+        species: "KIKAI",
+        legacy_species: "Vesper",
+        identity: RosterIdentity {
+            kind: KikaiKind::Talo,
+            corporation: Corporation::Hugo,
+            sub_corporation: Corporation::Renko,
+            hex_id: "a91ce204",
+        },
+        sponsor: Corporation::Renko,
+        ship: "YORUMICHI",
+        legacy_model: "Nightrail",
         ability: "Serpent spiral / guided missiles",
         silhouette: "forked-serpent",
         family: 2,
@@ -308,8 +409,17 @@ pub const CHAMPIONS: [Champion; 8] = [
     },
     Champion {
         name: "Xil of Aurora",
-        species: "Crystalline",
-        ship: "Prism",
+        species: "KIKAI",
+        legacy_species: "Crystalline",
+        identity: RosterIdentity {
+            kind: KikaiKind::Talo,
+            corporation: Corporation::Pan,
+            sub_corporation: Corporation::Hugo,
+            hex_id: "c7e5503b",
+        },
+        sponsor: Corporation::Hugo,
+        ship: "KESSHO",
+        legacy_model: "Prism",
         ability: "Offset fork volleys",
         silhouette: "split-wings",
         family: 0,
@@ -320,8 +430,17 @@ pub const CHAMPIONS: [Champion; 8] = [
     },
     Champion {
         name: "Maera Quill",
-        species: "Human",
-        ship: "Windrunner",
+        species: "KIKAI",
+        legacy_species: "Human",
+        identity: RosterIdentity {
+            kind: KikaiKind::Dora,
+            corporation: Corporation::Pan,
+            sub_corporation: Corporation::Hugo,
+            hex_id: "1a2b44d0",
+        },
+        sponsor: Corporation::Pan,
+        ship: "KAZEHAYA",
+        legacy_model: "Windrunner",
         ability: "Charge / damaging ion wake",
         silhouette: "swept-wings",
         family: 0,
@@ -332,8 +451,17 @@ pub const CHAMPIONS: [Champion; 8] = [
     },
     Champion {
         name: "Orun Vale",
-        species: "Golem",
-        ship: "Ironwake",
+        species: "KIKAI",
+        legacy_species: "Golem",
+        identity: RosterIdentity {
+            kind: KikaiKind::Doro,
+            corporation: Corporation::Hugo,
+            sub_corporation: Corporation::Hugo,
+            hex_id: "90bde511",
+        },
+        sponsor: Corporation::Renko,
+        ship: "KUROGANE",
+        legacy_model: "Ironwake",
         ability: "Telegraphed ram / impact nova",
         silhouette: "ram-prow",
         family: 1,
@@ -344,8 +472,17 @@ pub const CHAMPIONS: [Champion; 8] = [
     },
     Champion {
         name: "Vexa Null",
-        species: "Voidborn",
-        ship: "Voidcoil",
+        species: "KIKAI",
+        legacy_species: "Voidborn",
+        identity: RosterIdentity {
+            kind: KikaiKind::Dora,
+            corporation: Corporation::Renko,
+            sub_corporation: Corporation::Renko,
+            hex_id: "e0a66f42",
+        },
+        sponsor: Corporation::Hugo,
+        ship: "UZUSHIO",
+        legacy_model: "Voidcoil",
         ability: "Circling helix / piercing seekers",
         silhouette: "ring-fins",
         family: 2,
@@ -356,8 +493,17 @@ pub const CHAMPIONS: [Champion; 8] = [
     },
     Champion {
         name: "Atlas-0",
-        species: "Ancient automaton",
-        ship: "Sunspear",
+        species: "KIKAI",
+        legacy_species: "Ancient automaton",
+        identity: RosterIdentity {
+            kind: KikaiKind::Doro,
+            corporation: Corporation::Hugo,
+            sub_corporation: Corporation::Pan,
+            hex_id: "7fa70c09",
+        },
+        sponsor: Corporation::Hugo,
+        ship: "HINOHOKO",
+        legacy_model: "Sunspear",
         ability: "Sniper burst / piercing spear",
         silhouette: "spear-prow",
         family: 1,
