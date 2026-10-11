@@ -28,5 +28,6 @@
       "bytes": 70,
       "sha256": "cf1f7c9c061825dea01b16ebdf57e2a4bfff5101799b15922487fdf083022def"
     }
-  ]
+  ],
+  "pin_convention": "SHA256 and byte lengths are exact committed/native UTF-8 LF bytes. Tests normalize only Windows checkout CRLF to LF before pin verification; JSON values and numeric serialization remain unchanged."
 }

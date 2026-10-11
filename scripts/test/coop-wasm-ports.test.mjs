@@ -21,7 +21,12 @@ const session = capture.snapshot.session;
 const self = capture.snapshot.participants[1];
 const ok = JSON.stringify({ v: 1, ok: true, value: null });
 
-test("tracked real publication DTOs retain original native export hashes and validate wire", () => {
+// Native export and committed Git bytes use LF. A Windows text checkout may
+// supply CRLF; this changes no JSON value or native numeric data.
+const canonicalFixtureBytes = (raw) =>
+  Buffer.from(raw.toString("utf8").replace(/\r\n/g, "\n"));
+
+test("tracked real publication DTOs retain canonical native export hashes and validate wire", () => {
   const provenance = JSON.parse(
     readFileSync(
       new URL("./fixtures/co-op-publication/provenance.json", import.meta.url),
@@ -29,11 +34,16 @@ test("tracked real publication DTOs retain original native export hashes and val
   );
   assert.equal(provenance.commit, "91a18ab00c51efb6638404baaab6b389d58923b1");
   for (const pin of provenance.files) {
-    const raw = readFileSync(
+    const checkedOut = readFileSync(
       new URL(`./fixtures/co-op-publication/${pin.file}`, import.meta.url),
     );
+    const raw = canonicalFixtureBytes(checkedOut);
     assert.equal(raw.length, pin.bytes);
     assert.equal(createHash("sha256").update(raw).digest("hex"), pin.sha256);
+    const windowsText = Buffer.from(
+      raw.toString("utf8").replace(/\n/g, "\r\n"),
+    );
+    assert.deepEqual(canonicalFixtureBytes(windowsText), raw);
   }
   publication(capture);
   validatePayload("body", entities);
