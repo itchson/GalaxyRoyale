@@ -112,6 +112,8 @@ pub(super) struct Pilot {
     pub throttle: f32,
     pub destination: Option<Vec2>,
     pub fire_timer: f32,
+    pub pulse_lens_rank: u8,
+    pub primary_phase: u8,
     pub input: InputFrame,
     pub last_sequence: Option<u32>,
     pub input_tick: u32,
@@ -306,6 +308,8 @@ fn pilot(
         throttle: 0.0,
         destination: None,
         fire_timer: 0.0,
+        pulse_lens_rank: ship_progression::equipped_rank(profile, 0),
+        primary_phase: 0,
         input: InputFrame::default(),
         last_sequence: None,
         input_tick: 0,
@@ -651,7 +655,8 @@ impl Game {
                 p.fire_timer = p.fire_timer.max(0.0);
             }
         }
-        for (_, motion, stats, owner) in fires.into_iter().flatten() {
+        let mut bonuses = [None; MAX_PARTICIPANTS];
+        for (entity, motion, stats, owner) in fires.into_iter().flatten() {
             let direction = forward(motion.heading);
             if let Some(shot) = self.spawn_bullet_entity(
                 motion.position + direction * 19.0,
@@ -661,7 +666,29 @@ impl Game {
                 1,
             ) {
                 self.world.insert_one(shot, owner).unwrap();
+                let mut pilot = self.world.get::<&mut Pilot>(entity).unwrap();
+                // Only admitted primaries count. This bounded phase is local to
+                // the membership, never a saved or remotely supplied counter.
+                pilot.primary_phase = (pilot.primary_phase + 1) % 5;
+                if pilot.pulse_lens_rank > 0 && pilot.primary_phase == 0 {
+                    bonuses[pilot.admission.slot as usize] = Some((motion, stats, owner));
+                }
+                drop(pilot);
                 self.event("shot", motion.position, 0.6);
+            }
+        }
+        // All queued primaries retain priority over bonus bolts at the shared
+        // cap. A refused fifth bonus is consumed, never replayed on shot six.
+        for (motion, stats, owner) in bonuses.into_iter().flatten() {
+            let direction = forward(motion.heading);
+            if let Some(shot) = self.spawn_bullet_entity(
+                motion.position + direction * 21.0,
+                direction * 500.0 + motion.velocity * 0.25,
+                stats.damage * 1.5,
+                true,
+                1,
+            ) {
+                self.world.insert_one(shot, owner).unwrap();
             }
         }
         self.refresh_sites();
@@ -1127,3 +1154,7 @@ impl Game {
         })
     }
 }
+
+#[cfg(test)]
+#[path = "co_op_starter_tests.rs"]
+mod starter_tests;
