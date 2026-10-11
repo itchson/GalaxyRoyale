@@ -1799,6 +1799,37 @@ impl Painter<'_> {
     }
 }
 
+// MEISHI sockets and their later emblems share a group. Remember failed sockets
+// without altering ordinary campaign scenes or introducing a new node payload.
+fn paired_meishi_node(
+    painter: &mut Painter<'_>,
+    node: &UiNode,
+    time: f32,
+    reduced: bool,
+    failed_sockets: &mut u8,
+) {
+    if node.kind == "campaign-patch" {
+        let slot = selection(node.value, crate::champion_patches::COUNT);
+        if slot < 8 && *failed_sockets & (1 << slot) != 0 {
+            return;
+        }
+    }
+    let previous = painter.remaining;
+    painter.node(node, time, reduced);
+    if node.kind == "meishi-socket"
+        && node.value.is_finite()
+        && node.value.fract() == 0.0
+        && (0.0..24.0).contains(&node.value)
+    {
+        let bit = 1 << (node.value as usize % 8);
+        if painter.remaining == previous {
+            *failed_sockets |= bit;
+        } else {
+            *failed_sockets &= !bit;
+        }
+    }
+}
+
 /// Adds at most 60k cells for 512 nodes. All transforms compose with each group.
 pub fn draw(
     frame: &mut FrameBuilder,
@@ -1834,6 +1865,7 @@ pub fn draw(
             ..Transform::default()
         }
         .affine();
+        let mut failed_sockets = 0;
         for node in &group.nodes {
             if nodes == 512 || painter.remaining == 0 || painter.work_remaining == 0 {
                 return;
@@ -1857,7 +1889,13 @@ pub fn draw(
             {
                 continue;
             }
-            painter.node(node, time, reduced_motion);
+            paired_meishi_node(
+                &mut painter,
+                node,
+                time,
+                reduced_motion,
+                &mut failed_sockets,
+            );
         }
     }
 }
@@ -2181,6 +2219,53 @@ mod tests {
                 assert_eq!(a.transforms, b.transforms);
             }
         }
+    }
+
+    #[test]
+    fn meishi_short_quota_suppresses_paired_earned_patch_without_affecting_campaign() {
+        let socket = UiNode {
+            value: 0.0,
+            selected: true,
+            ..scene("meishi-socket").groups[0].nodes.remove(0)
+        };
+        let patch = UiNode {
+            value: 0.0,
+            active: true,
+            ..scene("campaign-patch").groups[0].nodes.remove(0)
+        };
+        for (pixels, work, expected) in [(200, 120000, 0), (60000, 200, 0), (550, 550, 550)] {
+            let mut frame = FrameBuilder::new();
+            let mut painter = Painter {
+                frame: &mut frame,
+                parent: AffineTransform::default(),
+                remaining: pixels,
+                viewport: Vec2::new(640.0, 360.0),
+                clip: None,
+                work_remaining: work,
+            };
+            let mut failed = 0;
+            paired_meishi_node(&mut painter, &socket, 0.0, true, &mut failed);
+            paired_meishi_node(&mut painter, &patch, 0.0, true, &mut failed);
+            assert_eq!(painter.frame.frame().pixel_count, expected);
+            assert_eq!(
+                (painter.remaining, painter.work_remaining),
+                (pixels - expected, work - expected)
+            );
+            if expected == 0 {
+                assert_eq!(failed, 1);
+            }
+        }
+        let mut frame = FrameBuilder::new();
+        let mut painter = Painter {
+            frame: &mut frame,
+            parent: AffineTransform::default(),
+            remaining: 200,
+            viewport: Vec2::new(640.0, 360.0),
+            clip: None,
+            work_remaining: 200,
+        };
+        paired_meishi_node(&mut painter, &patch, 0.0, true, &mut 0);
+        assert_eq!(painter.frame.frame().pixel_count, 165);
     }
 
     #[test]
