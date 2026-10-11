@@ -1,7 +1,9 @@
 @group(0) @binding(0) var scene:texture_2d<f32>;
 @group(0) @binding(1) var nearest_sampler:sampler;
 @group(0) @binding(2) var ui_scene:texture_2d<f32>;
-// Full backing resolution and the old integer-nearest UI presentation extent.
+// Full backing resolution and the integer-scale logical UI presentation extent.
+// UI attachment texels already match that physical extent; nearest samples do
+// not discard high-detail local cells or smooth hard fonts and controls.
 @group(0) @binding(3) var<uniform> presentation:vec4<f32>;
 const MANUAL_SRGB:bool=MANUAL_SRGB_VALUE;
 struct VertexOut { @builtin(position) position:vec4<f32>, @location(0) uv:vec2<f32> }

@@ -272,7 +272,7 @@ impl Renderer {
             wgpu::TextureFormat::Rgba8UnormSrgb,
             "full-resolution world quads",
         );
-        let ui_pipeline = make_pipeline(wgpu::TextureFormat::Rgba8Unorm, "logical UI quads");
+        let ui_pipeline = make_pipeline(wgpu::TextureFormat::Rgba8Unorm, "physical UI quads");
         let present_layout = device.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
             label: Some("presentation texture layout"),
             entries: &[
@@ -370,8 +370,11 @@ impl Renderer {
             [config.width, config.height],
             wgpu::TextureFormat::Rgba8UnormSrgb,
         );
-        let (ui_target, ui_target_view) =
-            render_target(&device, logical, wgpu::TextureFormat::Rgba8Unorm);
+        let (ui_target, ui_target_view) = render_target(
+            &device,
+            raster_layout.ui_raster(),
+            wgpu::TextureFormat::Rgba8Unorm,
+        );
         let present_globals = uniform(&device, "world and logical UI presentation extents", 16);
         let present_bind = present_bind(
             &device,
@@ -438,8 +441,11 @@ impl Renderer {
             [width, height],
             wgpu::TextureFormat::Rgba8UnormSrgb,
         );
-        (self.ui_target, self.ui_target_view) =
-            render_target(&self.device, self.logical, wgpu::TextureFormat::Rgba8Unorm);
+        (self.ui_target, self.ui_target_view) = render_target(
+            &self.device,
+            raster_layout.ui_raster(),
+            wgpu::TextureFormat::Rgba8Unorm,
+        );
         self.present_bind = present_bind(
             &self.device,
             &self.present_layout,
@@ -475,8 +481,9 @@ impl Renderer {
         self.draws.clear();
         // World and overlay retain separate pooled extractions, but share the
         // same GPU buffers, but separate attachments and ordered render passes.
-        // World raster uses the full backing resolution; UI remains nearest
-        // logical pixels, without inverse-zoom mutation of control transforms.
+        // UI stays in logical coordinates but rasterizes its small cells at the
+        // physical presentation extent. Nearest composition adds no blur, and
+        // control transforms do not depend on world zoom.
         for (frame, ui) in [(frame, false), (overlay, true)] {
             for batch in &frame.batches {
                 if batch.pixels.is_empty() {
@@ -546,7 +553,15 @@ impl Renderer {
         self.queue.write_buffer(
             &self.ui_globals,
             0,
-            bytemuck::cast_slice(&crate::lighting::uniforms(self.viewport(), camera, &[])),
+            bytemuck::cast_slice(&crate::lighting::uniforms_with_raster(
+                self.viewport(),
+                camera,
+                &[],
+                [1.0, 1.0, 1.0, 0.0],
+                crate::lighting::RasterLayout::new([self.config.width, self.config.height])
+                    .ui_raster()
+                    .map(|size| size as f32),
+            )),
         );
         self.queue.write_buffer(
             &self.present_globals,
@@ -614,7 +629,7 @@ impl Renderer {
             })];
             let mut pass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
                 label: Some(if ui {
-                    "logical pixel UI"
+                    "physical pixel UI with logical projection"
                 } else {
                     "full-resolution pixel world"
                 }),
@@ -657,7 +672,7 @@ impl Renderer {
                 },
             })];
             let mut pass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
-                label: Some("full-resolution world and nearest UI composition"),
+                label: Some("full-resolution world and physical nearest UI composition"),
                 color_attachments: &attachments,
                 depth_stencil_attachment: None,
                 timestamp_writes: None,

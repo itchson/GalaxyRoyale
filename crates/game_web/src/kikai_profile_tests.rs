@@ -108,7 +108,7 @@ fn three_types_have_cached_distinct_authored_masks_and_disjoint_constant_state_l
                     let layers = portrait_layers(kind, expression, blink, mouth);
                     let mut positions = HashSet::new();
                     for (i, layer) in layers.iter().enumerate() {
-                        assert_eq!((layer.body.width, layer.body.height), (96, 128));
+                        assert_eq!([layer.body.width, layer.body.height], PORTRAIT_SIZE);
                         assert_eq!(cells(&layer.body), cells(&baseline[i].body));
                         for (p, color) in layer.body.cells() {
                             assert!(
@@ -205,7 +205,10 @@ fn fractional_fit_keeps_every_cell_and_profile_dora_is_exact_guide_when_pan_renk
             let (actual, stats) = extract(DoraInput { rect, ..input() }, appearance);
             assert_eq!(stats.quads, baseline.quads);
             assert_eq!(stats.visible_cells, stats.quads);
-            assert_eq!(stats.scale, (rect[2] / 96.0).min(rect[3] / 128.0));
+            assert_eq!(
+                stats.scale,
+                (rect[2] / PORTRAIT_SIZE[0] as f32).min(rect[3] / PORTRAIT_SIZE[1] as f32)
+            );
             assert!(
                 actual
                     .frame()

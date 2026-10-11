@@ -4,8 +4,8 @@ pub const MAX_LIGHTS: usize = 8;
 pub const RASTER_OFFSET: usize = 8 + MAX_LIGHTS * 8;
 pub const UNIFORM_FLOATS: usize = RASTER_OFFSET + 4;
 
-/// Attachment sizes share one resize calculation. Only the UI keeps the old
-/// integer pixel scale; world geometry rasterizes at the full backing size.
+/// Logical UI coordinates keep their integer display scale. Both attachments
+/// retain the physical samples available to their presentation rectangles.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct RasterLayout {
     pub world: [u32; 2],
@@ -26,12 +26,23 @@ impl RasterLayout {
     }
 
     pub fn presentation(self) -> [f32; 4] {
+        let ui_raster = self.ui_raster();
         [
             self.world[0] as f32,
             self.world[1] as f32,
-            (self.logical[0] * self.ui_scale).min(self.world[0]) as f32,
-            (self.logical[1] * self.ui_scale).min(self.world[1]) as f32,
+            ui_raster[0] as f32,
+            ui_raster[1] as f32,
         ]
+    }
+
+    /// One UI texture texel per presented backing pixel. This preserves small
+    /// authored cells without changing logical font, layout or input units.
+    pub fn ui_raster(self) -> [u32; 2] {
+        std::array::from_fn(|axis| {
+            self.logical[axis]
+                .saturating_mul(self.ui_scale)
+                .min(self.world[axis])
+        })
     }
 }
 
@@ -65,7 +76,8 @@ pub fn uniforms_with_ambient(
 }
 
 /// World projection remains in logical/world units; raster is the actual
-/// attachment resolution. The UI supplies its unchanged logical texture size.
+/// attachment resolution. UI projection stays logical while its raster supplies
+/// the physical presentation rectangle.
 /// Trailing raster data keeps the camera, ambient and light offsets unchanged.
 pub fn uniforms_with_raster(
     viewport: [f32; 2],
@@ -215,5 +227,75 @@ mod tests {
             RasterLayout::new([1600, 900]),
             RasterLayout::new([1600, 900])
         );
+    }
+
+    #[test]
+    fn physical_ui_texels_present_one_to_one_including_odd_canvas_edges() {
+        for backing in [
+            [1280, 720],
+            [1281, 721],
+            [1600, 900],
+            [853, 480],
+            [320, 180],
+        ] {
+            let layout = RasterLayout::new(backing);
+            let raster = layout.ui_raster();
+            let presentation = layout.presentation();
+            assert_eq!(raster.map(|v| v as f32), [presentation[2], presentation[3]]);
+            for axis in 0..2 {
+                assert!(raster[axis] <= backing[axis]);
+                let offset = ((backing[axis] - raster[axis]) as f32 * 0.5).floor();
+                for texel in 0..raster[axis] {
+                    // Matches present.wgsl's physical fragment position/extent.
+                    let fragment = offset + texel as f32 + 0.5;
+                    let uv = (fragment - offset) / presentation[axis + 2];
+                    let sampled = (uv * raster[axis] as f32).floor() as u32;
+                    assert_eq!(sampled, texel);
+                }
+                // Logical font/control cells keep the prior physical width.
+                let unit = raster[axis] as f32 / layout.logical[axis] as f32;
+                assert_eq!(unit, layout.ui_scale as f32);
+            }
+            let normal = uniforms(layout.logical.map(|v| v as f32), [0.0; 2], &[]);
+            let detailed = uniforms_with_raster(
+                layout.logical.map(|v| v as f32),
+                [0.0; 2],
+                &[],
+                [1.0, 1.0, 1.0, 0.0],
+                raster.map(|v| v as f32),
+            );
+            assert_eq!(&normal[..RASTER_OFFSET], &detailed[..RASTER_OFFSET]);
+            assert_eq!(
+                &detailed[RASTER_OFFSET..RASTER_OFFSET + 2],
+                &raster.map(|v| v as f32)
+            );
+        }
+    }
+
+    #[test]
+    fn half_logical_portrait_cells_retain_distinct_available_physical_samples() {
+        let layout = RasterLayout::new([1280, 720]);
+        assert_eq!(layout.logical, [640, 360]);
+        let raster = layout.ui_raster();
+        for (axis, authored) in [192, 256].into_iter().enumerate() {
+            // A 192x256 body fits a 96x128 logical box continuously at 0.5.
+            let centers = (0..authored)
+                .map(|cell| (cell as f32 + 0.5) * 0.5)
+                .collect::<Vec<_>>();
+            let old = centers
+                .iter()
+                .map(|p| p.floor() as u32)
+                .collect::<std::collections::HashSet<_>>();
+            let physical = centers
+                .iter()
+                .map(|p| (p * raster[axis] as f32 / layout.logical[axis] as f32).floor() as u32)
+                .collect::<std::collections::HashSet<_>>();
+            assert_eq!(old.len(), authored / 2);
+            assert_eq!(physical.len(), authored);
+        }
+        // At scale 1 a smaller display still has finite samples; geometry is
+        // never enlarged or softened to claim that every subpixel is visible.
+        let small = RasterLayout::new([320, 180]);
+        assert_eq!(small.ui_raster(), small.logical);
     }
 }

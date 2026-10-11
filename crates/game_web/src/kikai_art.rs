@@ -6,9 +6,9 @@ use std::{collections::HashMap, sync::LazyLock};
 
 pub const PORTRAIT_ID: usize = 8;
 pub const PROFILE_PORTRAIT_ID: usize = 9;
-pub const PORTRAIT_SIZE: [usize; 2] = [96, 128];
+pub const PORTRAIT_SIZE: [usize; 2] = [192, 256];
 pub const ICON_SIZE: usize = 32;
-pub const MAX_PORTRAIT_QUADS: usize = 12_288;
+pub const MAX_PORTRAIT_QUADS: usize = 49_152;
 pub const ICON_SHELL: u32 = u32::from_le_bytes([217, 234, 246, 255]);
 pub const ICON_EDGE: u32 = u32::from_le_bytes([255, 255, 255, 255]);
 pub const ICON_BEVEL: u32 = u32::from_le_bytes([95, 117, 126, 255]);
@@ -31,14 +31,6 @@ impl DoraExpression {
             "concerned" => Self::Concerned,
             "pleased" => Self::Pleased,
             _ => Self::Neutral,
-        }
-    }
-    fn eye_name(self) -> &'static str {
-        match self {
-            Self::Neutral => "dora_eyes_neutral",
-            Self::Focused => "dora_eyes_focused",
-            Self::Concerned => "dora_eyes_concerned",
-            Self::Pleased => "dora_eyes_pleased",
         }
     }
 }
@@ -137,7 +129,8 @@ fn load_layers(atlas: Atlas, body_name: &str) -> HashMap<String, Layer> {
     assert!((2..=64).contains(&atlas.palette.len()));
     assert_eq!(atlas.palette[0], 0);
     assert!(atlas.palette[1..].iter().all(|color| color >> 24 == 255));
-    assert_eq!(atlas.portrait_roles.source_size, PORTRAIT_SIZE);
+    let source_size = atlas.portrait_roles.source_size;
+    assert!(matches!(source_size, [96, 128] | [192, 256]));
     assert_eq!(atlas.portrait_roles.default_main, "PAN");
     assert_eq!(atlas.portrait_roles.default_sub, "RENKO");
     let key = |i: usize| char::from_u32(0xe000 + i as u32).unwrap();
@@ -155,7 +148,7 @@ fn load_layers(atlas: Atlas, body_name: &str) -> HashMap<String, Layer> {
             let expected = if name.starts_with("icon_") {
                 [ICON_SIZE; 2]
             } else {
-                PORTRAIT_SIZE
+                source_size
             };
             assert_eq!([sprite.width, sprite.height], expected);
             assert_eq!(sprite.indices.len(), sprite.width * sprite.height);
@@ -178,7 +171,17 @@ fn load_layers(atlas: Atlas, body_name: &str) -> HashMap<String, Layer> {
                 &rows.iter().map(String::as_str).collect::<Vec<_>>(),
                 &palette,
             );
-            let mut hair = vec![false; sprite.indices.len()].into_boxed_slice();
+            // Only the body owns recolorable roles. Face layers and icons do
+            // not retain three unused full-resolution mask allocations.
+            let mut hair = vec![
+                false;
+                if name == body_name {
+                    sprite.indices.len()
+                } else {
+                    0
+                }
+            ]
+            .into_boxed_slice();
             let mut horns = hair.clone();
             let mut signal = hair.clone();
             if name == body_name {
@@ -194,6 +197,7 @@ fn load_layers(atlas: Atlas, body_name: &str) -> HashMap<String, Layer> {
                 }
             }
             assert!(hair.iter().zip(horns.iter()).all(|(&a, &b)| !(a && b)));
+            assert!(signal.iter().zip(horns.iter()).all(|(&a, &b)| !a || b));
             (
                 name,
                 Layer {
@@ -207,11 +211,12 @@ fn load_layers(atlas: Atlas, body_name: &str) -> HashMap<String, Layer> {
         .collect()
 }
 static ART: LazyLock<HashMap<String, Layer>> = LazyLock::new(|| {
-    load_layers(
+    let mut atlas: Atlas =
         serde_json::from_str(include_str!("../../../assets/ui/kikai/atlas.json"))
-            .expect("validated Kikai cell pack"),
-        "dora_body",
-    )
+            .expect("validated Kikai icon pack");
+    // Historical96 portraits are not a runtime fallback for licensed types.
+    atlas.sprites.retain(|name, _| name.starts_with("icon_"));
+    load_layers(atlas, "dora_body")
 });
 
 #[derive(Deserialize)]
@@ -219,17 +224,19 @@ struct ProfileAtlas {
     version: u32,
     profiles: HashMap<String, Atlas>,
 }
-static PROFILE_ART: LazyLock<[HashMap<String, Layer>; 2]> = LazyLock::new(|| {
+static DETAIL_ART: LazyLock<[HashMap<String, Layer>; 3]> = LazyLock::new(|| {
     let mut atlas: ProfileAtlas =
-        serde_json::from_str(include_str!("../../../assets/ui/kikai/profiles/atlas.json"))
-            .expect("validated DORO/TALO cell packs");
+        serde_json::from_str(include_str!("../../../assets/ui/kikai/detail/atlas.json"))
+            .expect("validated high-detail licensed portraits");
     assert_eq!(atlas.version, 1);
-    assert_eq!(atlas.profiles.len(), 2);
-    ["doro", "talo"].map(|kind| {
+    assert_eq!(atlas.profiles.len(), 3);
+    ["dora", "doro", "talo"].map(|kind| {
         let layers = load_layers(
             atlas.profiles.remove(kind).expect("authored profile type"),
             "body",
         );
+        assert_eq!(layers["body"].body.width, PORTRAIT_SIZE[0]);
+        assert_eq!(layers["body"].body.height, PORTRAIT_SIZE[1]);
         assert_eq!(layers.len(), 10);
         for name in [
             "body",
@@ -395,21 +402,11 @@ fn portrait_layers(
     blink: bool,
     mouth_frame: u8,
 ) -> [&'static Layer; 3] {
-    if kind == PortraitKind::Dora {
-        let eye = if blink {
-            "dora_eyes_blink"
-        } else {
-            expression.eye_name()
-        };
-        let mouth = match mouth_frame {
-            1 => "dora_mouth_small",
-            2 => "dora_mouth_open",
-            _ if expression == DoraExpression::Pleased => "dora_mouth_smile",
-            _ => "dora_mouth_rest",
-        };
-        return [&ART["dora_body"], &ART[eye], &ART[mouth]];
-    }
-    let art = &PROFILE_ART[usize::from(kind == PortraitKind::Talo)];
+    let art = &DETAIL_ART[match kind {
+        PortraitKind::Dora => 0,
+        PortraitKind::Doro => 1,
+        PortraitKind::Talo => 2,
+    }];
     let eye = if blink {
         "eyes_blink"
     } else {
@@ -471,7 +468,8 @@ fn append_portrait(
         return stats;
     }
     let r = input.rect;
-    let scale = (r[2] / PORTRAIT_SIZE[0] as f32).min(r[3] / PORTRAIT_SIZE[1] as f32);
+    let size = [layers[0].body.width as f32, layers[0].body.height as f32];
+    let scale = (r[2] / size[0]).min(r[3] / size[1]);
     let local = Transform {
         position: Vec2::new(r[0] + r[2] * 0.5, r[1] + r[3] * 0.5),
         scale: Vec2::splat(scale),
@@ -487,10 +485,10 @@ fn append_portrait(
                 }
                 stats.visible_cells += 1;
                 let index = local_index(&layer.body, cell);
-                if layer.hair[index] {
+                if layer.hair.get(index).copied().unwrap_or(false) {
                     color = corporate_color(color, appearance.main);
                 }
-                if layer.horns[index] {
+                if layer.horns.get(index).copied().unwrap_or(false) {
                     color = horn_color(color, appearance.sub);
                 }
                 let [r, g, b, _] = color.to_le_bytes();
@@ -498,7 +496,7 @@ fn append_portrait(
                     let gray = ((r as u16 + g as u16 + b as u16) / 4) as u8;
                     return u32::from_le_bytes([gray, gray, gray, 255]);
                 }
-                if moving && layer.signal[index] {
+                if moving && layer.signal.get(index).copied().unwrap_or(false) {
                     let lift = ((time * 1.4 + cell.y * 0.16).sin() + 1.0) * 3.0;
                     let lift = lift as u8;
                     color = u32::from_le_bytes([
@@ -605,18 +603,19 @@ mod tests {
     }
     #[test]
     fn real_cached_layers_have_disjoint_regions_and_fine_detail_below_group_budget() {
-        assert_eq!(ART.len(), 20);
-        let body = &ART["dora_body"];
-        assert_eq!((body.body.width, body.body.height), (96, 128));
-        assert!(body.body.occupied_count() > 7000);
+        assert_eq!(ART.len(), 10);
+        let art = &DETAIL_ART[0];
+        let body = &art["body"];
+        assert_eq!([body.body.width, body.body.height], PORTRAIT_SIZE);
+        assert!(body.body.occupied_count() > 20_000);
         assert!(body.hair.iter().filter(|&&b| b).count() > 1000);
         assert!(body.horns.iter().filter(|&&b| b).count() > 100);
         for eye in ["neutral", "focused", "concerned", "pleased", "blink"] {
             for mouth in ["rest", "small", "open", "smile"] {
                 let layers = [
                     &body.body,
-                    &ART[&format!("dora_eyes_{eye}")].body,
-                    &ART[&format!("dora_mouth_{mouth}")].body,
+                    &art[&format!("eyes_{eye}")].body,
+                    &art[&format!("mouth_{mouth}")].body,
                 ];
                 let mut positions = std::collections::HashSet::new();
                 for layer in layers {
@@ -643,12 +642,20 @@ mod tests {
             let (_, s) = draw(i, CorporateAppearance::default());
             assert_eq!(s.visible_cells, s.quads);
             assert_eq!(s.transforms, 3);
-            assert_eq!(s.scale, (size[0] / 96.0).min(size[1] / 128.0));
+            assert_eq!(
+                s.scale,
+                (size[0] / PORTRAIT_SIZE[0] as f32).min(size[1] / PORTRAIT_SIZE[1] as f32)
+            );
             assert_eq!(*expected.get_or_insert(s.quads), s.quads);
         }
     }
     #[test]
-    fn tiny_fit_keeps_all_8656_opaque_cells_but_real_clip_still_masks_partial_cells() {
+    fn tiny_fit_keeps_every_authored_cell_but_real_clip_still_masks_partial_cells() {
+        let count = portrait_layers(PortraitKind::Dora, DoraExpression::Neutral, false, 0)
+            .iter()
+            .map(|layer| layer.body.occupied_count())
+            .sum::<usize>();
+        assert!(count > 20_000 && count <= MAX_PORTRAIT_QUADS);
         for origin in [[0.0, 0.0], [7.0, 9.0], [-7.3, -9.7]] {
             let i = DoraInput {
                 rect: [origin[0], origin[1], 4.8, 6.4],
@@ -657,14 +664,14 @@ mod tests {
             let mut frame = FrameBuilder::new();
             let (mut pixels, mut work) = (60_000, 120_000);
             let stats = append_dora(&mut frame, &i, &mut pixels, &mut work);
-            assert_eq!(stats.quads, 8656);
-            assert_eq!(stats.visible_cells, 8656);
+            assert_eq!(stats.quads, count);
+            assert_eq!(stats.visible_cells, count);
             assert_eq!(
                 colors(&frame).iter().filter(|&&c| c >> 24 != 0).count(),
-                8656
+                count
             );
-            assert_eq!(stats.scale, 0.05);
-            assert_eq!((pixels, work), (60_000 - 8656, 120_000 - 8656));
+            assert_eq!(stats.scale, 0.025);
+            assert_eq!((pixels, work), (60_000 - count, 120_000 - count));
 
             let clip = [origin[0], origin[1], 2.4, 6.4];
             let (clipped, clipped_stats) = draw(
@@ -677,8 +684,8 @@ mod tests {
                     sub: Corporation::Renko,
                 },
             );
-            assert_eq!(clipped_stats.quads, 8656);
-            assert!(clipped_stats.visible_cells > 0 && clipped_stats.visible_cells < 8656);
+            assert_eq!(clipped_stats.quads, count);
+            assert!(clipped_stats.visible_cells > 0 && clipped_stats.visible_cells < count);
             for batch in &clipped.frame().batches {
                 for pixel in &batch.pixels {
                     if pixel.color >> 24 == 0 {
@@ -825,7 +832,7 @@ mod tests {
     fn main_hair_and_sub_horns_recolor_only_explicit_disjoint_roles() {
         let (reference, _) = draw(input(), CorporateAppearance::default());
         let original = colors(&reference);
-        let body = &ART["dora_body"];
+        let body = &DETAIL_ART[0]["body"];
         for appearance in [
             CorporateAppearance {
                 main: Corporation::Renko,
@@ -951,7 +958,7 @@ mod tests {
         assert!(f.frame().batches.len() > 1);
         let local = Transform {
             position: Vec2::new(31.0, 41.0),
-            scale: Vec2::splat(0.5),
+            scale: Vec2::splat(0.25),
             ..Transform::default()
         };
         for b in &f.frame().batches {
@@ -961,7 +968,7 @@ mod tests {
         }
         let last = f.frame().batches.last().unwrap();
         let gpu = last.transforms.last().unwrap();
-        for point in [Vec2::new(-47.5, -63.5), Vec2::new(47.5, 63.5)] {
+        for point in [Vec2::new(-95.5, -127.5), Vec2::new(95.5, 127.5)] {
             assert!((gpu.point(point) - i.parent.point(local.point(point))).length() < 0.0001);
         }
     }

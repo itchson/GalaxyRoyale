@@ -6,7 +6,31 @@ use game_core::identity::{Corporation, starter_body};
 
 const VIEW: [f32; 2] = [640.0, 360.0];
 const GROUP: [f32; 2] = [20.25, 10.5];
-const PORTRAIT_CELLS: usize = 8656;
+fn portrait_cells() -> usize {
+    portrait_cells_for(0)
+}
+fn portrait_cells_for(kind: usize) -> usize {
+    static COUNT: std::sync::OnceLock<[usize; 3]> = std::sync::OnceLock::new();
+    COUNT.get_or_init(|| {
+        // Independent raw authored-mask oracle; not a draw/count mirror.
+        let atlas: serde_json::Value =
+            serde_json::from_str(include_str!("../../../assets/ui/kikai/detail/atlas.json"))
+                .unwrap();
+        ["dora", "doro", "talo"].map(|kind| {
+            ["body", "eyes_neutral", "mouth_rest"]
+                .into_iter()
+                .map(|name| {
+                    atlas["profiles"][kind]["sprites"][name]["indices"]
+                        .as_array()
+                        .unwrap()
+                        .iter()
+                        .filter(|index| index.as_u64().unwrap() != 0)
+                        .count()
+                })
+                .sum()
+        })
+    })[kind]
+}
 
 fn licensed_portrait(kind: u8, main: u8, sub: u8) -> UiNode {
     UiNode {
@@ -285,14 +309,14 @@ fn portrait_id8_defaults_deserialize_and_route_to_actual_three_layers() {
     let expected = dora_oracle(&n, 0.0, true);
     let actual = extract(vec![n], [0.0; 2], 0.0, true);
     same(&actual, &expected);
-    assert_eq!(actual.pixel_count, PORTRAIT_CELLS);
+    assert_eq!(actual.pixel_count, portrait_cells());
     assert_eq!(actual.batches[0].transforms.len(), 3);
     for t in &actual.batches[0].transforms {
-        assert_eq!((t.a[2], t.b[1]), (0.5, 0.5));
+        assert_eq!((t.a[2], t.b[1]), (0.25, 0.25));
     }
     assert_eq!(
         assert_rect(&actual, [7.0, 9.0, 48.0, 64.0], [0.0; 2], 0.0001),
-        PORTRAIT_CELLS
+        portrait_cells()
     );
     for value in 0..8 {
         let old = extract(
@@ -301,7 +325,7 @@ fn portrait_id8_defaults_deserialize_and_route_to_actual_three_layers() {
             0.0,
             true,
         );
-        assert!(old.pixel_count > 0 && old.pixel_count < PORTRAIT_CELLS);
+        assert!(old.pixel_count > 0 && old.pixel_count < portrait_cells());
         assert_eq!(old.batches[0].transforms.len(), 1);
     }
 }
@@ -315,7 +339,7 @@ fn portrait_expression_fields_select_four_real_poses_without_changing_occupancy(
         let expected = dora_oracle(&n, 0.0, true);
         let actual = extract(vec![n], [0.0; 2], 0.0, true);
         same(&actual, &expected);
-        assert_eq!(actual.pixel_count, PORTRAIT_CELLS);
+        assert_eq!(actual.pixel_count, portrait_cells());
         assert!(poses.insert(colors(&actual)));
     }
     let mut saturated = node("portrait", 8.0, [7.0, 9.0, 48.0, 64.0]);
@@ -395,19 +419,19 @@ fn portrait_fractional_fit_has_no_floor_and_partial_scroll_keeps_whole_cells() {
     for size in [[48.0, 64.0], [21.25, 28.5], [4.8, 6.4], [96.0, 128.0]] {
         let rect = [31.25, 23.5, size[0], size[1]];
         let full = extract(vec![node("portrait", 8.0, rect)], [0.0; 2], 0.0, true);
-        assert_eq!(full.pixel_count, PORTRAIT_CELLS);
-        let scale = (size[0] / 96.0).min(size[1] / 128.0);
+        assert_eq!(full.pixel_count, portrait_cells());
+        let scale = (size[0] / 192.0).min(size[1] / 256.0);
         for t in &full.batches[0].transforms {
             assert!((t.a[2] - scale).abs() < 0.000001);
         }
         let visible = assert_rect(&full, rect, [0.0; 2], 0.0001);
         if size[0] >= 20.0 {
-            assert_eq!(visible, PORTRAIT_CELLS, "size {size:?}");
+            assert_eq!(visible, portrait_cells(), "size {size:?}");
         } else {
             // Strict all-corner f32 containment may suppress a boundary row at
             // this sub-five-logical-pixel stress size; no geometry is expanded
             // to compensate. All authored cells remain submitted and charged.
-            assert!(visible * 100 >= PORTRAIT_CELLS * 98);
+            assert!(visible * 100 >= portrait_cells() * 98);
         }
     }
     let clip = [23.125, 28.75, 18.5, 21.125];
@@ -417,9 +441,10 @@ fn portrait_fractional_fit_has_no_floor_and_partial_scroll_keeps_whole_cells() {
     let actual = extract(vec![n], [0.0; 2], 0.0, true);
     same(&actual, &expected);
     let visible = assert_rect(&actual, clip, [0.0; 2], 0.0001);
-    assert!(visible > 0 && visible < PORTRAIT_CELLS);
+    assert!(visible > 0 && visible < portrait_cells());
     assert_eq!(
-        actual.pixel_count, PORTRAIT_CELLS,
+        actual.pixel_count,
+        portrait_cells(),
         "alpha-zero clipped cells still consume budgets"
     );
 }
@@ -427,7 +452,7 @@ fn portrait_fractional_fit_has_no_floor_and_partial_scroll_keeps_whole_cells() {
 #[test]
 fn dora_and_licensed_ship_reject_insufficient_submitted_or_work_budget_atomically() {
     for (kind, value, count) in [
-        ("portrait", 8.0, PORTRAIT_CELLS),
+        ("portrait", 8.0, portrait_cells()),
         ("licensed-ship", 0.0, 662),
         ("licensed-ship", 1.0, 688),
         ("licensed-ship", 2.0, 1040),
@@ -531,7 +556,7 @@ fn portrait_and_ship_child_affines_survive_reflection_shear_and_nonuniform_paren
         basis_y: Vec2::new(0.5, 1.25),
     };
     for (kind, value, body_size, count, parts) in [
-        ("portrait", 8.0, [96.0, 128.0], PORTRAIT_CELLS, 3),
+        ("portrait", 8.0, [192.0, 256.0], portrait_cells(), 3),
         ("licensed-ship", 1.0, [48.0, 48.0], 688, 1),
     ] {
         let rect = [7.25, 13.5, 21.25, 28.5];
@@ -573,7 +598,7 @@ fn portrait_and_ship_child_affines_survive_reflection_shear_and_nonuniform_paren
 #[test]
 fn far_camera_group_translation_stays_local_with_declared_f32_tolerance() {
     for (kind, value, count) in [
-        ("portrait", 8.0, PORTRAIT_CELLS),
+        ("portrait", 8.0, portrait_cells()),
         ("licensed-ship", 2.0, 1040),
     ] {
         for camera in [[0.0; 2], [999_000.0, -999_000.0]] {
@@ -598,9 +623,7 @@ fn scene_cap_and_transform_batch_boundary_keep_whole_portrait_objects_and_valid_
             },
         );
     }
-    let mut nodes = (0..7)
-        .map(|_| node("portrait", 8.0, [7.0, 9.0, 48.0, 64.0]))
-        .collect::<Vec<_>>();
+    let mut nodes = Vec::new();
     for value in 0..3 {
         nodes.push(node("licensed-ship", value as f32, [7.0, 9.0, 32.0, 32.0]));
     }
@@ -618,6 +641,10 @@ fn scene_cap_and_transform_batch_boundary_keep_whole_portrait_objects_and_valid_
     ] {
         nodes.push(node(kind, 0.0, [7.0, 9.0, 32.0, 32.0]));
     }
+    // Controls are real objects admitted first in this cap stress fixture.
+    // Remaining portraits must be admitted whole or rejected without partial
+    // eyes/mouths, even across the128-transform table boundary.
+    nodes.extend((0..7).map(|_| node("portrait", 8.0, [7.0, 9.0, 48.0, 64.0])));
     draw(
         &mut builder,
         &UiScene {
@@ -632,9 +659,13 @@ fn scene_cap_and_transform_batch_boundary_keep_whole_portrait_objects_and_valid_
         true,
     );
     let frame = builder.finish();
+    let controls = 662 + 688 + 1040 + 4363;
+    let admitted = (MAX_UI_PIXELS - controls) / portrait_cells();
+    assert!((1..=2).contains(&admitted));
+    assert!(admitted * portrait_cells() + controls <= MAX_UI_PIXELS);
     assert_eq!(
         frame.pixel_count - 127,
-        6 * PORTRAIT_CELLS + 662 + 688 + 1040 + 4363
+        admitted * portrait_cells() + controls
     );
     assert!(frame.pixel_count - 127 <= MAX_UI_PIXELS);
     assert_eq!(frame.batches.len(), 2);
@@ -644,7 +675,7 @@ fn scene_cap_and_transform_batch_boundary_keep_whole_portrait_objects_and_valid_
             .iter()
             .map(|b| b.transforms.len())
             .sum::<usize>(),
-        127 + 6 * 3 + 3 + 10
+        127 + admitted * 3 + 3 + 10
     );
     for b in &frame.batches {
         assert!(
@@ -652,6 +683,141 @@ fn scene_cap_and_transform_batch_boundary_keep_whole_portrait_objects_and_valid_
                 .iter()
                 .all(|p| (p.transform as usize) < b.transforms.len())
         );
+    }
+}
+
+#[test]
+fn high_detail_profiles_and_real_dense_menu_controls_fit_the_shared_scene_cap() {
+    fn controls() -> Vec<UiNode> {
+        let mut controls = vec![node("panel", 0.0, [8.0, 8.0, 604.0, 326.0])];
+        for (i, text) in [
+            "LICENSED FLIGHT SYSTEMS",
+            "CORPORATION STARTER / EQUIPPED R1",
+            "PHYSICAL HAVEN BANKING REQUIRED",
+            "EVERY RAICHO EARNS ITS OWN XP",
+            "MATERIALS SHARE ACTUAL CARGO SPACE",
+        ]
+        .into_iter()
+        .enumerate()
+        {
+            controls.push(UiNode {
+                text: text.into(),
+                font: 1.0,
+                ..node("text", 0.0, [182.0, 28.0 + i as f32 * 23.0, 410.0, 14.0])
+            });
+        }
+        controls.push(node("licensed-ship", 0.0, [182.0, 164.0, 64.0, 64.0]));
+        for (i, kind) in [
+            "status-icon",
+            "map-icon",
+            "settings-icon",
+            "save-icon",
+            "close-icon",
+            "resume-icon",
+            "restart-icon",
+            "title-icon",
+            "quit-icon",
+            "fullscreen-icon",
+        ]
+        .into_iter()
+        .enumerate()
+        {
+            controls.push(node(kind, 0.0, [24.0 + i as f32 * 56.0, 254.0, 32.0, 32.0]));
+        }
+        for (i, (kind, text)) in [
+            ("primary-button", "FORGE"),
+            ("button", "HANGAR"),
+            ("offense-button", "MISSION"),
+            ("defense-button", "SAVE"),
+            ("passive-button", "SETTINGS"),
+            ("exit-button", "RETURN"),
+        ]
+        .into_iter()
+        .enumerate()
+        {
+            controls.push(UiNode {
+                text: text.into(),
+                font: 1.0,
+                ..node(kind, 0.0, [24.0 + i as f32 * 96.0, 298.0, 88.0, 22.0])
+            });
+        }
+        controls
+    }
+    let interface = extract(controls(), [0.0; 2], 0.0, true);
+    assert!(
+        interface.pixel_count > 5000,
+        "fixture must contain real dense native controls"
+    );
+    for kind in 0..3 {
+        let mut nodes = controls();
+        let mut portrait = licensed_portrait(kind as u8, 0, 1);
+        portrait.rect = [24.0, 52.0, 120.0, 160.0];
+        nodes.push(portrait);
+        let expected = portrait_cells_for(kind);
+        assert!(expected > 20_000 && expected <= crate::kikai_art::MAX_PORTRAIT_QUADS);
+        let actual = extract(nodes, [0.0; 2], 0.0, true);
+        assert_eq!(actual.pixel_count, interface.pixel_count + expected);
+        assert!(actual.pixel_count <= MAX_UI_PIXELS);
+        // Last three objects are the entire high-detail body, eyes and mouth.
+        let last = actual.batches.last().unwrap();
+        let first_portrait = last.transforms.len() - 3;
+        let visible = last
+            .pixels
+            .iter()
+            .filter(|p| p.transform as usize >= first_portrait && p.color >> 24 != 0)
+            .count();
+        assert_eq!(
+            visible, expected,
+            "no high-detail cells hidden by budget/fit"
+        );
+        assert!(actual.batches.iter().all(|b| {
+            b.pixels
+                .iter()
+                .all(|p| (p.transform as usize) < b.transforms.len())
+        }));
+        println!(
+            "{kind}: portrait{expected} + menu{} = {} quads",
+            interface.pixel_count, actual.pixel_count
+        );
+    }
+}
+
+#[test]
+fn two_detail_portraits_share_the_original_cap_without_partial_layers() {
+    // Exercise the real scene admission order, not a larger private quota.
+    // Some two-portrait combinations genuinely cannot fit the60k interface cap.
+    for first in 0..3 {
+        for second in 0..3 {
+            let first_node = licensed_portrait(first as u8, 0, 1);
+            let first_frame = extract(vec![first_node], [0.0; 2], 0.0, true);
+            let actual = extract(
+                vec![
+                    licensed_portrait(first as u8, 0, 1),
+                    licensed_portrait(second as u8, 0, 1),
+                ],
+                [0.0; 2],
+                0.0,
+                true,
+            );
+            let first_count = portrait_cells_for(first);
+            let second_count = portrait_cells_for(second);
+            let fits = first_count + second_count <= MAX_UI_PIXELS;
+            if fits {
+                assert_eq!(actual.pixel_count, first_count + second_count);
+                assert_eq!(actual.batches[0].transforms.len(), 6);
+                assert!(actual.batches[0].pixels.iter().all(|p| p.color >> 24 != 0));
+            } else {
+                same(&first_frame, &actual);
+                assert_eq!(actual.batches[0].transforms.len(), 3);
+            }
+            assert!(actual.pixel_count <= MAX_UI_PIXELS);
+            println!(
+                "pair{first}/{second}: requested{}, admitted{}, complete portraits{}",
+                first_count + second_count,
+                actual.pixel_count,
+                if fits { 2 } else { 1 }
+            );
+        }
     }
 }
 
