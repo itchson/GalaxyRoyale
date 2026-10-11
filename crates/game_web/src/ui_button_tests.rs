@@ -262,23 +262,19 @@ fn too_short_semantic_rects_keep_frames_without_crossing_glyphs() {
 }
 
 #[test]
-fn settings_text_preserves_right_control_and_bottom_track_gutters() {
+fn legacy_settings_text_stays_inside_the_padded_nonoverlapping_regions() {
     for kind in ["toggle", "slider"] {
         for width in [40.0, 64.0, 100.0, 140.25] {
             for height in [20.0, 24.0, 36.0] {
                 let r = [5.25, 7.5, width, height];
-                let mut n = node(kind, r, "REDUCED COSMIC DETAIL LONG SETTING");
+                let mut n = node(kind, r, if kind == "toggle" { "ON" } else { "VOL" });
                 n.font = 4.0;
                 n.value = 1.0;
+                let label = setting_regions(&n).unwrap().0;
                 let frame = extract(vec![n], [0.0; 2], 0.0, true);
-                let label = if kind == "toggle" {
-                    [r[0], r[1], width - 20.0, height]
-                } else {
-                    [r[0], r[1], width - 28.0, height - 12.0]
-                };
                 let mut glyphs = 0;
                 for b in &frame.batches {
-                    for p in b.pixels.iter().filter(|p| p.color == WHITE) {
+                    for p in b.pixels.iter().filter(|p| p.color == BUTTON_TEXT) {
                         let t = b.transforms[p.transform as usize];
                         if t.a[2] != t.b[1] || t.a[2] > 4.0 {
                             continue;

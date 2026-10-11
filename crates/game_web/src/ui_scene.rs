@@ -19,57 +19,10 @@ const ICON_EDGE: u32 = rgb(255, 255, 255);
 const ICON_RECESS: u32 = rgb(42, 56, 65);
 const ICON_BEVEL: u32 = rgb(95, 117, 126);
 
-/// Fine cells author chamfers, raised light-facing edges and recessed panel
-/// grooves inside the old footprint. This runs once, never in the painter.
-fn detailed_icon(rows: &[&str]) -> PixelBody {
-    let source: Vec<Vec<char>> = rows.iter().map(|r| r.chars().collect()).collect();
-    let width = source.iter().map(Vec::len).max().unwrap_or(0);
-    let occupied = |x: isize, y: isize| {
-        x >= 0
-            && y >= 0
-            && source
-                .get(y as usize)
-                .and_then(|r| r.get(x as usize))
-                .is_some_and(|c| *c == '#' || *c == '+')
-    };
-    let mut detail = Vec::with_capacity(rows.len() * 2);
-    for y in 0..rows.len() * 2 {
-        let mut row = String::with_capacity(width * 2);
-        for x in 0..width * 2 {
-            let sx = (x / 2) as isize;
-            let sy = (y / 2) as isize;
-            if !occupied(sx, sy) {
-                row.push('.');
-                continue;
-            }
-            let left = !occupied(sx - 1, sy);
-            let right = !occupied(sx + 1, sy);
-            let top = !occupied(sx, sy - 1);
-            let bottom = !occupied(sx, sy + 1);
-            // A one-cell chamfer is actual silhouette geometry; inset hairline
-            // joins and bevels are opaque and cannot turn controls translucent.
-            let chamfer = (left && top && x % 2 == 0 && y % 2 == 0)
-                || (right && bottom && x % 2 == 1 && y % 2 == 1);
-            let shade = if chamfer {
-                '.'
-            } else if (left && x % 2 == 0) || (top && y % 2 == 0) {
-                'h'
-            } else if (right && x % 2 == 1) || (bottom && y % 2 == 1) {
-                's'
-            } else if source[sy as usize][sx as usize] == '+' {
-                'd'
-            } else if x % 8 == 3 && y % 2 == 1 {
-                'v'
-            } else {
-                '#'
-            };
-            row.push(shade);
-        }
-        detail.push(row);
-    }
-    let rows: Vec<_> = detail.iter().map(String::as_str).collect();
+/// Direct authored cells: no bitmap textures or coarse-icon enlargement.
+fn authored_icon(rows: &[&str]) -> PixelBody {
     PixelBody::from_ascii(
-        &rows,
+        rows,
         &[
             ('#', WHITE),
             ('h', ICON_EDGE),
@@ -111,6 +64,84 @@ fn intersection(a: [f32; 4], b: [f32; 4]) -> [f32; 4] {
     ]
 }
 
+fn contained_region(region: [f32; 4], bounds: [f32; 4]) -> Option<[f32; 4]> {
+    // CSS BCR arithmetic may differ by a subpixel. Recover only that small
+    // measurement roundoff and intersect before emitting any native geometry.
+    const ROUNDING: f32 = 1.0 / 64.0;
+    (region.iter().all(|v| v.is_finite() && v.abs() <= 8192.0)
+        && region[2] > 0.0
+        && region[3] > 0.0
+        && region[0] >= bounds[0] - ROUNDING
+        && region[1] >= bounds[1] - ROUNDING
+        && region[0] + region[2] <= bounds[0] + bounds[2] + ROUNDING
+        && region[1] + region[3] <= bounds[1] + bounds[3] + ROUNDING)
+        .then(|| intersection(region, bounds))
+}
+
+fn setting_regions(node: &UiNode) -> Option<([f32; 4], [f32; 4])> {
+    let r = node.rect;
+    let (label, control) = if node.kind == "slider" {
+        let pad = if r[3] >= 35.0 { 6.0 } else { 2.0 };
+        let gap = (r[3] * 0.1).min(6.0);
+        let height = (r[3] - pad * 2.0 - gap - RoyaleMono::HEIGHT).min(11.0);
+        (
+            [
+                r[0] + pad,
+                r[1] + pad,
+                r[2] - pad * 2.0,
+                r[3] - pad * 2.0 - gap - height,
+            ],
+            [
+                r[0] + pad,
+                r[1] + r[3] - pad - height,
+                r[2] - pad * 2.0,
+                height,
+            ],
+        )
+    } else {
+        let pad = 6.0_f32.min(r[3] * 0.15);
+        let size = 12.0_f32.min(r[2] - pad * 2.0).min(r[3] - pad * 2.0);
+        (
+            [
+                r[0] + pad,
+                r[1] + pad,
+                r[2] - size - pad * 2.0 - 4.0,
+                r[3] - pad * 2.0,
+            ],
+            [
+                r[0] + r[2] - pad - size,
+                r[1] + (r[3] - size) * 0.5,
+                size,
+                size,
+            ],
+        )
+    };
+    let label = contained_region(node.label_rect.unwrap_or(label), r)?;
+    let control = contained_region(node.control_rect.unwrap_or(control), r)?;
+    let overlap = intersection(label, control);
+    if overlap[2] > 0.0 && overlap[3] > 0.0 {
+        return None;
+    }
+    Some((label, control))
+}
+
+fn settings_font(rect: [f32; 4], text: &str, requested: f32) -> f32 {
+    let requested = if requested.is_finite() {
+        requested.round().clamp(1.0, 4.0) as u32
+    } else {
+        1
+    };
+    for size in (1..=requested).rev() {
+        let font = size as f32;
+        let columns = ((rect[2] + font) / (RoyaleMono::ADVANCE * font)).floor() as usize;
+        let rows = ((rect[3] + font) / (8.0 * font)).floor() as usize;
+        if columns > 0 && rows > 0 && wrap(text, columns).len() <= rows {
+            return font;
+        }
+    }
+    1.0
+}
+
 #[derive(Debug, Default, Deserialize)]
 #[serde(default)]
 pub struct UiScene {
@@ -135,6 +166,10 @@ pub struct UiNode {
     pub selected: bool,
     pub disabled: bool,
     pub clip: Option<[f32; 4]>,
+    /// Actual semantic label/input bounds, in the same group-local units as rect.
+    /// Older clients may omit either region or explicitly send null.
+    pub label_rect: Option<[f32; 4]>,
+    pub control_rect: Option<[f32; 4]>,
 }
 
 #[derive(Deserialize)]
@@ -215,148 +250,302 @@ impl FrameGeometry {
     }
 }
 static CELL: LazyLock<PixelBody> = LazyLock::new(|| PixelBody::from_ascii(&["#"], &[('#', WHITE)]));
-// Compact original control symbols are cached occupied objects, never text.
+// Original 24-cell controls: final-resolution silhouettes, insets and metal details.
 static CLOSE_ICON: LazyLock<PixelBody> = LazyLock::new(|| {
-    detailed_icon(&[
-        "##.....##",
-        ".##...##.",
-        "..##.##..",
-        "...###...",
-        "....#....",
-        "...###...",
-        "..##.##..",
-        ".##...##.",
-        "##.....##",
+    authored_icon(&[
+        "........................",
+        "........................",
+        "...h...............h....",
+        "..h#h.............h#h...",
+        "..h##h...........h###h..",
+        ".h####h.........h#####h.",
+        "..h###dhh.....hh#####s..",
+        "...h###d#h...h##d###s...",
+        "....h#####h.h##d###s....",
+        ".....h#####h######s.....",
+        "......h##########s......",
+        ".......h##hhh###s.......",
+        "........h#hhh##s........",
+        ".......h########h.......",
+        "......h##########h......",
+        ".....h#####s######h.....",
+        "....h#####s.h######h....",
+        "...h###d#s...h##d###h...",
+        "..h###d#s.....hs#d###h..",
+        ".h#####s........h#####h.",
+        "..h###s..........h###s..",
+        "...h#s............h#s...",
+        "....h..............h....",
+        "........................",
     ])
 });
 static SAVE_ICONS: LazyLock<[PixelBody; 3]> = LazyLock::new(|| {
     [
-        [
-            "#######..",
-            "#+++#.##.",
-            "#+++#..##",
-            "#+++#...#",
-            "#########",
-            "#.....#.#",
-            "#.#..#..#",
-            "#..##...#",
-            "#########",
-        ],
-        [
-            "#######..",
-            "#+++#.##.",
-            "#+++#..##",
-            "#+++#...#",
-            "#########",
-            "#.......#",
-            "#.#.#.#.#",
-            "#.......#",
-            "#########",
-        ],
-        [
-            "#######..",
-            "#+++#.##.",
-            "#+++#..##",
-            "#+++#...#",
-            "#########",
-            "#.#...#.#",
-            "#..#.#..#",
-            "#...#...#",
-            "#########",
-        ],
+        authored_icon(&[
+            "........................",
+            "........................",
+            "...hhhhhhhhhhhhhhh......",
+            "..h###vvvvvvvvvv##h.....",
+            ".h#h##vvvvvvvhhv###h....",
+            ".h####vvvvvvvhhv####h...",
+            ".h####vvvvvvvhhv#####h..",
+            ".h####vvvvvvvhhv#####s..",
+            ".h####vvvvvvvvvv#####s..",
+            ".h###################s..",
+            ".h###################s..",
+            ".h###################s..",
+            ".h###ddddddddddddd###s..",
+            ".h###vvvvvvvvvvhhv###s..",
+            ".h###vvvvvvvvvhhvv###s..",
+            ".h###vvhhvvvvhhvvv###s..",
+            ".h###vvvhhvvhhvvvv###s..",
+            ".h###vvvvhhhhvvvvv###s..",
+            ".h###vvvvvhhvvvvvv###s..",
+            ".h###vvvvvvvvvvvvv###s..",
+            ".h#################s#s..",
+            "..h#################s...",
+            "...hssssssssssssssss....",
+            "........................",
+        ]),
+        authored_icon(&[
+            "........................",
+            "........................",
+            "...hhhhhhhhhhhhhhh......",
+            "..h###vvvvvvvvvv##h.....",
+            ".h#h##vvvvvvvhhv###h....",
+            ".h####vvvvvvvhhv####h...",
+            ".h####vvvvvvvhhv#####h..",
+            ".h####vvvvvvvhhv#####s..",
+            ".h####vvvvvvvvvv#####s..",
+            ".h###################s..",
+            ".h###################s..",
+            ".h###################s..",
+            ".h###ddddddddddddd###s..",
+            ".h###vvvvvvvvvvvvv###s..",
+            ".h###vvvvvvvvvvvvv###s..",
+            ".h###vvvvvvvvvvvvv###s..",
+            ".h###vvhhvvhhvvhhv###s..",
+            ".h###vvhhvvhhvvhhv###s..",
+            ".h###vvvvvvvvvvvvv###s..",
+            ".h###vvvvvvvvvvvvv###s..",
+            ".h#################s#s..",
+            "..h#################s...",
+            "...hssssssssssssssss....",
+            "........................",
+        ]),
+        authored_icon(&[
+            "........................",
+            "........................",
+            "...hhhhhhhhhhhhhhh......",
+            "..h###vvvvvvvvvv##h.....",
+            ".h#h##vvvvvvvhhv###h....",
+            ".h####vvvvvvvhhv####h...",
+            ".h####vvvvvvvhhv#####h..",
+            ".h####vvvvvvvhhv#####s..",
+            ".h####vvvvvvvvvv#####s..",
+            ".h###################s..",
+            ".h###################s..",
+            ".h###################s..",
+            ".h###ddddddddddddd###s..",
+            ".h###vvvvvvvvvvvvv###s..",
+            ".h###vvhhvvhhvvvvv###s..",
+            ".h###vvvhhhhvvvvvv###s..",
+            ".h###vvvvhhvvvvvvv###s..",
+            ".h###vvvhhhhvvvvvv###s..",
+            ".h###vvhhvvhhvvvvv###s..",
+            ".h###vvvvvvvvvvvvv###s..",
+            ".h#################s#s..",
+            "..h#################s...",
+            "...hssssssssssssssss....",
+            "........................",
+        ]),
     ]
-    .map(|rows| detailed_icon(&rows))
 });
-// Authored gear, play, return arrow, home, power and menu silhouettes share the same
-// object-local control path as close/save. Each is a cached detailed 20×20 body.
 static MENU_ICONS: LazyLock<[PixelBody; 7]> = LazyLock::new(|| {
     [
-        [
-            "....##....",
-            ".##.##.##.",
-            ".########.",
-            "..##..##..",
-            "###....###",
-            "###....###",
-            "..##..##..",
-            ".########.",
-            ".##.##.##.",
-            "....##....",
-        ],
-        [
-            "..#.......",
-            "..##......",
-            "..###.....",
-            "..####....",
-            "..#####...",
-            "..#####...",
-            "..####....",
-            "..###.....",
-            "..##......",
-            "..#.......",
-        ],
-        [
-            "...####...",
-            ".##....##.",
-            "##......##",
-            "#.......##",
-            "#.....####",
-            "#......##.",
-            "#.........",
-            "##......#.",
-            ".##....##.",
-            "...####...",
-        ],
-        [
-            "....##....",
-            "...####...",
-            "..##++##..",
-            ".##++++##.",
-            "##++++++##",
-            "..######..",
-            "..##..##..",
-            "..##..##..",
-            "..##..##..",
-            "..######..",
-        ],
-        [
-            "....##....",
-            "....##....",
-            ".##.##.##.",
-            "##..##..##",
-            "#...##...#",
-            "#........#",
-            "#........#",
-            "##......##",
-            ".##....##.",
-            "...####...",
-        ],
-        [
-            "..........",
-            ".########.",
-            ".########.",
-            "..........",
-            ".########.",
-            ".########.",
-            "..........",
-            ".########.",
-            ".########.",
-            "..........",
-        ],
-        [
-            ".###..###.",
-            "##.####.##",
-            "#++#..#++#",
-            "#++#..#++#",
-            "#++####++#",
-            "#++#++#++#",
-            "#++#++#++#",
-            "#++#..#++#",
-            "##.#..#.##",
-            ".###..###.",
-        ],
+        authored_icon(&[
+            "........................",
+            ".........hhhhhh.........",
+            ".........h####s.........",
+            "........h######h........",
+            "....hhhh########hhhh....",
+            "....h###v##########s....",
+            "....h#####ssss#####s....",
+            "....h###sd....hs###s....",
+            "...h###s........hv##h...",
+            ".hh####s........d####hh.",
+            ".h####s..........h####s.",
+            ".h####s..........h####s.",
+            ".h####s..........h####s.",
+            ".h####s..........h####s.",
+            ".hs####d........h####ss.",
+            "...h###s........h###s...",
+            "....h#v#hh....dh###s....",
+            "....h#####hhhh#####s....",
+            "....h##########v###s....",
+            "....hsss########ssss....",
+            "........h######s........",
+            ".........h####s.........",
+            ".........hsssss.........",
+            "........................",
+        ]),
+        authored_icon(&[
+            "........................",
+            "........................",
+            ".....h..................",
+            ".....hhh................",
+            ".....h##hh..............",
+            ".....h####h.............",
+            ".....h#####hh...........",
+            ".....h##h####hh.........",
+            ".....h##hhh####hh.......",
+            ".....h#vhhhhh####h......",
+            ".....h#vhhhhhhh###hh....",
+            ".....h#vhhhhhhhhh###hh..",
+            ".....h#v#######dd###ss..",
+            ".....h#vddddddd###ss....",
+            ".....h#vdddddd###s......",
+            ".....h##dddd###ss.......",
+            ".....h##ddd##ss.........",
+            ".....h##d##ss...........",
+            ".....h####s.............",
+            ".....h##ss..............",
+            ".....hss................",
+            ".....h..................",
+            "........................",
+            "........................",
+        ]),
+        authored_icon(&[
+            "........................",
+            "........................",
+            ".............hh.........",
+            "...h.........h#hh.......",
+            "...hhhhhhhhhhss##hh.....",
+            "...h#######s...hs##h....",
+            "...h######s......h#s....",
+            "...h#####s........h#h...",
+            "....h###s.........h#s...",
+            "....h##s...........h#h..",
+            "..hh##s............d#s..",
+            "..h##s.............h#s..",
+            "..h#s..............h#s..",
+            "..h#s..............h#s..",
+            "..h#s..............h#s..",
+            "...h#h............h#s...",
+            "...h#d............d#s...",
+            "....h#h..........h#s....",
+            "....h##hh......hh##s....",
+            ".....hs##hhhdhh##ss.....",
+            ".......hs######ss.......",
+            ".........hsssss.........",
+            "........................",
+            "........................",
+        ]),
+        authored_icon(&[
+            "........................",
+            "........................",
+            "........................",
+            "..........hhhh..........",
+            ".........h####h.........",
+            "........h######h........",
+            ".......h########h.......",
+            "......h#####s####h......",
+            "......h####s.h###s......",
+            ".....h####hhhhh###h.....",
+            "....h####shhhh.h###h....",
+            "...h####s..dd...h###h...",
+            "..hs###s.........h###h..",
+            "....h###hh....hhh#s#s...",
+            ".....h###s....h##s.h....",
+            "......hvvs....hvvs......",
+            "......hvvs....hvvs......",
+            "......hvvs....hvvs......",
+            "......h##s....h##s......",
+            "......h##s....h##s......",
+            ".....h####hhhh####h.....",
+            ".....hsssssssssssss.....",
+            "........................",
+            "........................",
+        ]),
+        authored_icon(&[
+            "........................",
+            "........................",
+            "..........hhhh..........",
+            "..........h##s..........",
+            ".......h..hh#s..h.......",
+            ".....hhs..hhds..hhh.....",
+            "....h##s..hhds..h##h....",
+            "....h##s..hhds..h##s....",
+            "...h##s...hhds...h##h...",
+            "...h#s....hhds....h#s...",
+            "..h#s.....h##s.....h#h..",
+            "..h#s.....h##s.....h#s..",
+            "..h#s.....hsss.....h#s..",
+            "..h#d..............hds..",
+            "..h#s..............h#s..",
+            "..h#s..............h#s..",
+            "...h#h............h#s...",
+            "...h##h..........h##s...",
+            "....h#dh........h##s....",
+            "....h###h......h###s....",
+            ".....hs##hhhhhh#dss.....",
+            ".......hs######ss.......",
+            ".........hsssss.........",
+            "........................",
+        ]),
+        authored_icon(&[
+            "........................",
+            "........................",
+            "........................",
+            "....hhhhhhhhhhhhhhhh....",
+            "...h################h...",
+            "..h#h################h..",
+            "..h##dddddddddddddd##s..",
+            "..h##vvvvvvvvvvvvvv##s..",
+            "..h##vvvvvvvvvvvvvv##s..",
+            "..h##vvvvhvvvvvvvvv##s..",
+            "..h##vvvvvvvvvvhvvv##s..",
+            "..h##vvvhvvvvvhvvvv##s..",
+            "..h##hhhvvvvhhvvhhh##s..",
+            "..h##vvvvvhvvvvvvvv##s..",
+            "..h##vvvvvvvvvvvvvv##s..",
+            "..h##vvvvvvhvvvvvvv##s..",
+            "..h##v###vdddv###vv##s..",
+            "..h##vvvvvvvvvvvvvv##s..",
+            "..h################d#s..",
+            "...h################s...",
+            "....hsssssssssssssss....",
+            "........................",
+            "........................",
+            "........................",
+        ]),
+        authored_icon(&[
+            "........................",
+            "........................",
+            "........h............h..",
+            "......hh#hh........hhs..",
+            "....hh##v##hhh...hh##s..",
+            "..hh####v#####hhh#h##s..",
+            "..h#####v######v##h##s..",
+            "..h#####v######v#hhh#s..",
+            "..h#d###v######v#hhh#s..",
+            "..h##dd#v######vhhvhhs..",
+            "..h#####vd####dv#hhh#s..",
+            "..h#####v#d##d#v#hhh#s..",
+            "..h#####v##dd##v##h##s..",
+            "..h#####v######v##h##s..",
+            "..h#####v######v#####s..",
+            "..h##h##v######v#####s..",
+            "..h#hhh#v######v#####s..",
+            "..h#####v######v#####s..",
+            "..h####svs#####v####ss..",
+            "..h##ss...hss##v##ss....",
+            "..hss........hs#ss......",
+            "..h............h........",
+            "........................",
+            "........................",
+        ]),
     ]
-    .map(|rows| detailed_icon(&rows))
 });
 fn menu_icon(kind: &str) -> Option<(&'static PixelBody, u32)> {
     let (index, accent) = match kind {
@@ -1341,9 +1530,118 @@ impl Painter<'_> {
         if rect[2] < RoyaleMono::WIDTH || rect[3] < RoyaleMono::HEIGHT {
             return;
         }
+        // DOM text can wrap differently from the native bitmap font. Select the
+        // largest complete RoyaleMono layout inside the measured label box.
+        // Do not reserve an invented right gutter or truncate a setting name.
+        let font = settings_font(rect, text, font);
         let previous_clip = self.clip;
         self.clip = Some(previous_clip.map_or(rect, |clip| intersection(rect, clip)));
         self.text(rect, text, font, color, false);
+        self.clip = previous_clip;
+    }
+    fn setting(&mut self, node: &UiNode, font: f32) {
+        let Some((label, control)) = setting_regions(node) else {
+            return;
+        };
+        let r = node.rect;
+        let previous_clip = self.clip;
+        self.clip = Some(previous_clip.map_or(r, |clip| intersection(r, clip)));
+        let accent = if node.disabled {
+            BUTTON_DISABLED_TEXT
+        } else {
+            CYAN
+        };
+        let border = if node.active && !node.disabled {
+            button_tone(CYAN, 0.65)
+        } else {
+            rgb(41, 59, 68)
+        };
+        // One quiet card outline. The label and interactive strip are both
+        // independently measured and retain their own padding inside it.
+        self.rect(r, rgb(10, 18, 24));
+        self.rect([r[0], r[1], r[2], 0.5], border);
+        self.rect([r[0], r[1] + r[3] - 0.5, r[2], 0.5], border);
+        self.rect([r[0], r[1], 0.5, r[3]], border);
+        self.rect([r[0] + r[2] - 0.5, r[1], 0.5, r[3]], border);
+        self.settings_label(
+            label,
+            &node.text,
+            font,
+            if node.disabled {
+                BUTTON_DISABLED_TEXT
+            } else {
+                BUTTON_TEXT
+            },
+        );
+        // Native painted controls never extend beyond the actual input BCR.
+        self.clip = Some(previous_clip.map_or(control, |clip| intersection(control, clip)));
+        if node.kind == "slider" {
+            let value = if node.value.is_finite() {
+                node.value.clamp(0.0, 1.0)
+            } else {
+                0.0
+            };
+            let thumb_w = control[2].min(6.0);
+            let thumb_h = control[3].min(10.0);
+            let track = [
+                control[0] + thumb_w * 0.5,
+                control[1] + control[3] * 0.5 - 1.0,
+                (control[2] - thumb_w).max(0.0),
+                control[3].min(2.0),
+            ];
+            self.rect(track, rgb(36, 58, 69));
+            self.rect(
+                [track[0], track[1], track[2] * value, track[3]],
+                button_tone(accent, 0.65),
+            );
+            let thumb = [
+                control[0] + (control[2] - thumb_w) * value,
+                control[1] + (control[3] - thumb_h) * 0.5,
+                thumb_w,
+                thumb_h,
+            ];
+            self.rect(thumb, accent);
+            if thumb_w >= 3.0 && thumb_h >= 4.0 {
+                self.rect(
+                    [thumb[0] + 1.0, thumb[1] + 1.0, thumb_w - 2.0, 1.0],
+                    BUTTON_TEXT,
+                );
+                self.rect(
+                    [thumb[0] + thumb_w * 0.5, thumb[1] + 3.0, 0.5, thumb_h - 4.0],
+                    button_tone(accent, 0.30),
+                );
+            }
+        } else {
+            let size = control[2].min(control[3]);
+            let x = control[0] + (control[2] - size) * 0.5;
+            let y = control[1] + (control[3] - size) * 0.5;
+            let edge = size.min(1.0);
+            self.rect([x, y, size, size], border);
+            self.rect(
+                [
+                    x + edge,
+                    y + edge,
+                    (size - edge * 2.0).max(0.0),
+                    (size - edge * 2.0).max(0.0),
+                ],
+                rgb(8, 15, 20),
+            );
+            if node.value > 0.5 && size >= 5.0 {
+                // A stepped check has open space around it; no solid square
+                // obscures the checkbox state or its actual semantic hitbox.
+                let unit = size / 9.0;
+                for (cx, cy) in [
+                    (2.0, 4.0),
+                    (3.0, 5.0),
+                    (4.0, 6.0),
+                    (5.0, 5.0),
+                    (6.0, 4.0),
+                    (7.0, 3.0),
+                ] {
+                    self.rect([x + cx * unit, y + cy * unit, unit, unit], accent);
+                }
+            }
+        }
         self.clip = previous_clip;
     }
     fn semantic_button(&mut self, node: &UiNode, font: f32) {
@@ -1588,69 +1886,7 @@ impl Painter<'_> {
                 let shimmer = (!reduced).then_some((time * 15.0).rem_euclid(60.0) - 30.0);
                 self.artwork("seal", r, rotation, 0.0, shimmer, node.disabled);
             }
-            "slider" => {
-                if r[2] < 8.0 || r[3] < 7.0 {
-                    return;
-                }
-                let value = if node.value.is_finite() {
-                    node.value.clamp(0.0, 1.0)
-                } else {
-                    0.0
-                };
-                // The bottom strip belongs to the slider; a right gutter also
-                // leaves room for semantic value/readout content in the shell.
-                self.settings_label(
-                    [r[0], r[1], (r[2] - 28.0).max(0.0), (r[3] - 12.0).max(0.0)],
-                    &node.text,
-                    font,
-                    color,
-                );
-                let track = [r[0] + 4.0, r[1] + r[3] - 7.0, (r[2] - 8.0).max(0.0), 3.0];
-                self.rect(track, 0xff_51402c);
-                self.rect(
-                    [track[0], track[1], track[2] * value, 3.0],
-                    if node.disabled { DIM } else { CYAN },
-                );
-                self.rect(
-                    [track[0] + track[2] * value - 3.0, track[1] - 2.0, 6.0, 7.0],
-                    color,
-                );
-            }
-            "toggle" => {
-                let size = r[2].min(r[3]).min(12.0).floor();
-                if size < 1.0 {
-                    return;
-                }
-                let x = r[0] + r[2] - size;
-                let y = r[1] + (r[3] - size) * 0.5;
-                self.rect([x, y, size, size], DIM);
-                self.rect(
-                    [
-                        x + 1.0,
-                        y + 1.0,
-                        (size - 2.0).max(0.0),
-                        (size - 2.0).max(0.0),
-                    ],
-                    0xff_26140d,
-                );
-                if node.value > 0.5 {
-                    self.rect(
-                        [
-                            x + 3.0,
-                            y + 3.0,
-                            (size - 6.0).max(0.0),
-                            (size - 6.0).max(0.0),
-                        ],
-                        if node.disabled { DIM } else { CYAN },
-                    );
-                }
-                self.settings_label(
-                    [r[0], r[1], (r[2] - size - 8.0).max(0.0), r[3]],
-                    &node.text,
-                    font,
-                    color,
-                );
-            }
+            "slider" | "toggle" => self.setting(node, font),
             "rank" => {
                 for i in 0..5 {
                     let x = r[0] + i as f32 * 10.0;
@@ -2299,3 +2535,7 @@ mod map_tests;
 #[cfg(test)]
 #[path = "ui_facility_label_tests.rs"]
 mod facility_label_tests;
+
+#[cfg(test)]
+#[path = "ui_settings_tests.rs"]
+mod settings_tests;
