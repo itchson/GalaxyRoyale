@@ -1972,3 +1972,7 @@ mod detail_tests;
 #[cfg(test)]
 #[path = "deep_nebula_tests.rs"]
 mod deep_nebula_tests;
+
+#[cfg(test)]
+#[path = "cosmic_perf_tests.rs"]
+mod perf_tests;
