@@ -115,7 +115,7 @@
       "title": "Lyra Voss",
       "category": "champions",
       "status": "implemented",
-      "summary": "Human champion piloting Dawnneedle.",
+      "summary": "Existing Human-labeled encounter piloting Dawnneedle.",
       "tags": [
         "champions",
         "implemented"
@@ -126,7 +126,7 @@
           "value": "Dawnneedle"
         },
         {
-          "label": "Species",
+          "label": "Historical encounter label",
           "value": "Human"
         },
         {
@@ -156,6 +156,12 @@
           "paragraphs": [
             "A first production trial victory awards this champion patch, its ship and ability blueprints, three construction-category points and 40 selected-ship XP. Discovering a blueprint does not craft or equip it. Diagnostic scenes suppress those rewards.",
             "Champion cells are authored occupied sprites. Ship, portrait and patch indices follow this stable eight-character order. The construction currency differs from the equipped ability category where explicitly defined by the ability catalog."
+          ]
+        },
+        {
+          "title": "KIKAI canon review",
+          "paragraphs": [
+            "This encounter’s existing source label is retained for implementation traceability. Biological life cannot survive in the accepted KIKAI setting; technological lineage, droid identity and independent corporation sponsorship still require authored roster review. Stable arena, patch, ship and reward IDs remain in use."
           ]
         }
       ],
@@ -215,7 +221,7 @@
       "title": "Korr-9",
       "category": "champions",
       "status": "implemented",
-      "summary": "Automaton champion piloting Bulwark.",
+      "summary": "Existing Automaton-labeled encounter piloting Bulwark.",
       "tags": [
         "champions",
         "implemented"
@@ -226,7 +232,7 @@
           "value": "Bulwark"
         },
         {
-          "label": "Species",
+          "label": "Historical encounter label",
           "value": "Automaton"
         },
         {
@@ -256,6 +262,12 @@
           "paragraphs": [
             "A first production trial victory awards this champion patch, its ship and ability blueprints, three construction-category points and 40 selected-ship XP. Discovering a blueprint does not craft or equip it. Diagnostic scenes suppress those rewards.",
             "Champion cells are authored occupied sprites. Ship, portrait and patch indices follow this stable eight-character order. The construction currency differs from the equipped ability category where explicitly defined by the ability catalog."
+          ]
+        },
+        {
+          "title": "KIKAI canon review",
+          "paragraphs": [
+            "This encounter’s existing source label is retained for implementation traceability. Biological life cannot survive in the accepted KIKAI setting; technological lineage, droid identity and independent corporation sponsorship still require authored roster review. Stable arena, patch, ship and reward IDs remain in use."
           ]
         }
       ],
@@ -315,7 +327,7 @@
       "title": "Sable Myrr",
       "category": "champions",
       "status": "implemented",
-      "summary": "Vesper champion piloting Nightrail.",
+      "summary": "Existing Vesper-labeled encounter piloting Nightrail.",
       "tags": [
         "champions",
         "implemented"
@@ -326,7 +338,7 @@
           "value": "Nightrail"
         },
         {
-          "label": "Species",
+          "label": "Historical encounter label",
           "value": "Vesper"
         },
         {
@@ -356,6 +368,12 @@
           "paragraphs": [
             "A first production trial victory awards this champion patch, its ship and ability blueprints, three construction-category points and 40 selected-ship XP. Discovering a blueprint does not craft or equip it. Diagnostic scenes suppress those rewards.",
             "Champion cells are authored occupied sprites. Ship, portrait and patch indices follow this stable eight-character order. The construction currency differs from the equipped ability category where explicitly defined by the ability catalog."
+          ]
+        },
+        {
+          "title": "KIKAI canon review",
+          "paragraphs": [
+            "This encounter’s existing source label is retained for implementation traceability. Biological life cannot survive in the accepted KIKAI setting; technological lineage, droid identity and independent corporation sponsorship still require authored roster review. Stable arena, patch, ship and reward IDs remain in use."
           ]
         }
       ],
@@ -415,7 +433,7 @@
       "title": "Xil of Aurora",
       "category": "champions",
       "status": "implemented",
-      "summary": "Crystalline champion piloting Prism.",
+      "summary": "Existing Crystalline-labeled encounter piloting Prism.",
       "tags": [
         "champions",
         "implemented"
@@ -426,7 +444,7 @@
           "value": "Prism"
         },
         {
-          "label": "Species",
+          "label": "Historical encounter label",
           "value": "Crystalline"
         },
         {
@@ -456,6 +474,12 @@
           "paragraphs": [
             "A first production trial victory awards this champion patch, its ship and ability blueprints, three construction-category points and 40 selected-ship XP. Discovering a blueprint does not craft or equip it. Diagnostic scenes suppress those rewards.",
             "Champion cells are authored occupied sprites. Ship, portrait and patch indices follow this stable eight-character order. The construction currency differs from the equipped ability category where explicitly defined by the ability catalog."
+          ]
+        },
+        {
+          "title": "KIKAI canon review",
+          "paragraphs": [
+            "This encounter’s existing source label is retained for implementation traceability. Biological life cannot survive in the accepted KIKAI setting; technological lineage, droid identity and independent corporation sponsorship still require authored roster review. Stable arena, patch, ship and reward IDs remain in use."
           ]
         }
       ],
@@ -515,7 +539,7 @@
       "title": "Maera Quill",
       "category": "champions",
       "status": "implemented",
-      "summary": "Human champion piloting Windrunner.",
+      "summary": "Existing Human-labeled encounter piloting Windrunner.",
       "tags": [
         "champions",
         "implemented"
@@ -526,7 +550,7 @@
           "value": "Windrunner"
         },
         {
-          "label": "Species",
+          "label": "Historical encounter label",
           "value": "Human"
         },
         {
@@ -556,6 +580,12 @@
           "paragraphs": [
             "A first production trial victory awards this champion patch, its ship and ability blueprints, three construction-category points and 40 selected-ship XP. Discovering a blueprint does not craft or equip it. Diagnostic scenes suppress those rewards.",
             "Champion cells are authored occupied sprites. Ship, portrait and patch indices follow this stable eight-character order. The construction currency differs from the equipped ability category where explicitly defined by the ability catalog."
+          ]
+        },
+        {
+          "title": "KIKAI canon review",
+          "paragraphs": [
+            "This encounter’s existing source label is retained for implementation traceability. Biological life cannot survive in the accepted KIKAI setting; technological lineage, droid identity and independent corporation sponsorship still require authored roster review. Stable arena, patch, ship and reward IDs remain in use."
           ]
         }
       ],
@@ -615,7 +645,7 @@
       "title": "Orun Vale",
       "category": "champions",
       "status": "implemented",
-      "summary": "Golem champion piloting Ironwake.",
+      "summary": "Existing Golem-labeled encounter piloting Ironwake.",
       "tags": [
         "champions",
         "implemented"
@@ -626,7 +656,7 @@
           "value": "Ironwake"
         },
         {
-          "label": "Species",
+          "label": "Historical encounter label",
           "value": "Golem"
         },
         {
@@ -656,6 +686,12 @@
           "paragraphs": [
             "A first production trial victory awards this champion patch, its ship and ability blueprints, three construction-category points and 40 selected-ship XP. Discovering a blueprint does not craft or equip it. Diagnostic scenes suppress those rewards.",
             "Champion cells are authored occupied sprites. Ship, portrait and patch indices follow this stable eight-character order. The construction currency differs from the equipped ability category where explicitly defined by the ability catalog."
+          ]
+        },
+        {
+          "title": "KIKAI canon review",
+          "paragraphs": [
+            "This encounter’s existing source label is retained for implementation traceability. Biological life cannot survive in the accepted KIKAI setting; technological lineage, droid identity and independent corporation sponsorship still require authored roster review. Stable arena, patch, ship and reward IDs remain in use."
           ]
         }
       ],
@@ -715,7 +751,7 @@
       "title": "Vexa Null",
       "category": "champions",
       "status": "implemented",
-      "summary": "Voidborn champion piloting Voidcoil.",
+      "summary": "Existing Voidborn-labeled encounter piloting Voidcoil.",
       "tags": [
         "champions",
         "implemented"
@@ -726,7 +762,7 @@
           "value": "Voidcoil"
         },
         {
-          "label": "Species",
+          "label": "Historical encounter label",
           "value": "Voidborn"
         },
         {
@@ -756,6 +792,12 @@
           "paragraphs": [
             "A first production trial victory awards this champion patch, its ship and ability blueprints, three construction-category points and 40 selected-ship XP. Discovering a blueprint does not craft or equip it. Diagnostic scenes suppress those rewards.",
             "Champion cells are authored occupied sprites. Ship, portrait and patch indices follow this stable eight-character order. The construction currency differs from the equipped ability category where explicitly defined by the ability catalog."
+          ]
+        },
+        {
+          "title": "KIKAI canon review",
+          "paragraphs": [
+            "This encounter’s existing source label is retained for implementation traceability. Biological life cannot survive in the accepted KIKAI setting; technological lineage, droid identity and independent corporation sponsorship still require authored roster review. Stable arena, patch, ship and reward IDs remain in use."
           ]
         }
       ],
@@ -815,7 +857,7 @@
       "title": "Atlas-0",
       "category": "champions",
       "status": "implemented",
-      "summary": "Ancient automaton champion piloting Sunspear.",
+      "summary": "Existing Ancient automaton-labeled encounter piloting Sunspear.",
       "tags": [
         "champions",
         "implemented"
@@ -826,7 +868,7 @@
           "value": "Sunspear"
         },
         {
-          "label": "Species",
+          "label": "Historical encounter label",
           "value": "Ancient automaton"
         },
         {
@@ -856,6 +898,12 @@
           "paragraphs": [
             "A first production trial victory awards this champion patch, its ship and ability blueprints, three construction-category points and 40 selected-ship XP. Discovering a blueprint does not craft or equip it. Diagnostic scenes suppress those rewards.",
             "Champion cells are authored occupied sprites. Ship, portrait and patch indices follow this stable eight-character order. The construction currency differs from the equipped ability category where explicitly defined by the ability catalog."
+          ]
+        },
+        {
+          "title": "KIKAI canon review",
+          "paragraphs": [
+            "This encounter’s existing source label is retained for implementation traceability. Biological life cannot survive in the accepted KIKAI setting; technological lineage, droid identity and independent corporation sponsorship still require authored roster review. Stable arena, patch, ship and reward IDs remain in use."
           ]
         }
       ],
@@ -2029,6 +2077,14 @@
             "The NPC result simulation is disclosed. These are solo seeded standings, not online multiplayer or eight autonomous rivals sharing a persistent world. Incomplete active fights are transient and reload as unplayed at Haven; completed results persist.",
             "All eight champion patches unlock the league. A first-place final result awards the trophy, Sovereign, royal inventory and authored credits once. Retries increment the attempt record. Post-victory exhibitions are not implemented."
           ]
+        },
+        {
+          "title": "Sport, sponsors and authored roster candidates",
+          "paragraphs": [
+            "Galaxy Royale is the universe's biggest and most popular sport. PAN Dynamics, RENKO Cybernetics and HUGO CORP can sponsor arenas and competitors. Sponsor identity is independent of a competitor's main and sub-manufacturers; it does not change hair, horns, license or loadout.",
+            "The user's PAN representative candidate is APP#F344FEE: male DORO-PAN-PAN, in a PAN-sponsored arena. ORP#2323 is a female DORA-RENKO-PAN candidate who may also carry PAN sponsorship. These candidates are documented designs; they have not replaced the eight existing encounters or their stable reward IDs.",
+            "The current roster retains historical Human, Automaton and alien labels from its implementation. Reconciliation with the new KIKAI setting, where biological life cannot survive, is an explicit roster-authoring task. Existing labels do not establish surviving biological humans."
+          ]
         }
       ],
       "references": [
@@ -2045,6 +2101,11 @@
         {
           "path": "docs/CAMPAIGN.md",
           "label": "CAMPAIGN.md",
+          "role": "documentation"
+        },
+        {
+          "path": "docs/KIKAI_LORE.md",
+          "label": "Accepted sporting and sponsorship canon",
           "role": "documentation"
         }
       ],
@@ -2841,7 +2902,7 @@
       "title": "Kikai licenses and manufacturers",
       "category": "champions",
       "status": "implemented",
-      "summary": "A persistent droid license chooses type, main corporation and independent crystal-horn manufacturer.",
+      "summary": "Technological descendants of humans carry life forward through persistent droid licenses and independent manufacturers.",
       "tags": [
         "kikai",
         "kikai"
@@ -2871,7 +2932,8 @@
             "The browser issues eight cryptographically random bytes as sixteen hexadecimal digits. Main corporation selects its distinct level-one starter hull and one equipped rank-one ability. PAN Pathfinder carries the passive slot; RENKO Lancer the offensive slot; HUGO Bulwark the defensive slot.",
             "Main corporation themes hair, the starter hull, its jet and home accents. The independent sub-manufacturer colors horns. Existing anonymous profiles retain their original Scout, progress and loadouts; migration does not issue a license or duplicate a starter item.",
             "Type-specific player portrait silhouettes are a separate authored-art task; the current detailed guide is DORA. Recolored guide art is not presented as a male or neutral character.",
-            "Appearance follows droid type: feminine DORA with long hair, masculine DORO with short spiky hair, neutral TALO with a crew cut. Callsigns use O/A/T then main and sub-manufacturer initials; the confirmed guide is ORP#1337, RENKO main with PAN horns."
+            "Appearance follows droid type: feminine DORA with long hair, masculine DORO with short spiky hair, neutral TALO with a crew cut. Callsigns use O/A/T then main and sub-manufacturer initials; the confirmed guide is OPR#1337, PAN main with RENKO horns.",
+            "KIKAI are technological life descended from humans in a future where biological life can no longer survive. They have friendships, dreams and hobbies. The setting treats them as people."
           ]
         }
       ],
@@ -2938,10 +3000,10 @@
     },
     {
       "id": "dora",
-      "title": "ORP#1337 / DORA-RENKO-PAN-1337",
+      "title": "OPR#1337 / DORA-PAN-RENKO-1337",
       "category": "champions",
       "status": "implemented",
-      "summary": "RENKO's red-haired Kikai guide wears PAN green crystal horns and introduces real flight and crafting.",
+      "summary": "The player's friend is a PAN explorer with green hair, RENKO red crystal horns and a K-pop performance hobby.",
       "tags": [
         "dora",
         "kikai"
@@ -2949,7 +3011,7 @@
       "facts": [
         {
           "label": "Guide",
-          "value": "DORA-RENKO-PAN-1337; ORP#1337"
+          "value": "DORA-PAN-RENKO-1337; OPR#1337"
         },
         {
           "label": "Native portrait",
@@ -2968,7 +3030,8 @@
         {
           "title": "Canon and behavior",
           "paragraphs": [
-            "DORA's golden eyes, red hair, green crystal horns, pale armor and mechanical neck preserve the accepted character reference. The guide has a fixed RENKO/PAN appearance; player hair and horn palette masks are independent.",
+            "OPR#1337 has golden eyes, long green PAN hair, red RENKO crystal horns, pale armor and a mechanical neck. This matches the accepted character reference. Her fixed PAN/RENKO appearance is independent of the player's hair and horn palette masks.",
+            "She is a friendly explorer with dreams of her own and performs as a K-pop star as her hobby. She helps the player adjust to their new universe. The introductory mission uses authored dialogue; performances, songs and voice production remain separate work.",
             "The runtime paints occupied cell objects with group transforms and fractional fitting. The reference conversion declares crop, alpha threshold, nearest resampling and palette reduction; it is not described as lossless. Native software images verify extracted packets, while integrated browser and physical-device acceptance have separate scopes.",
             "No generated speech or local model is claimed. The native portrait API includes an explicitly driven speaking mask; DORA voice assets and inference integration remain future work. Cosmetic animation freezes under Reduced Motion."
           ]
@@ -3010,11 +3073,11 @@
           "caption": "Actual approved generated reference. Runtime conversion is declared and authored animation patches are separate."
         },
         {
-          "path": "artifacts/kikai/native-contact-sheet.png",
-          "label": "Actual native DORA layers and controls",
+          "path": "artifacts/kikai-opr/native-contact-sheet.png",
+          "label": "Current native OPR layers and controls",
           "kind": "runtime-art",
           "provenance": "docs/KIKAI_ART.md",
-          "caption": "Software rendering of actual FrameBuilder packets: expressions, blink, speech masks, independent recolor roles and ten32-cell icons. This is native extraction evidence, not a GPU screenshot."
+          "caption": "Latest green PAN hair/red RENKO horns in actual FrameBuilder packets: expressions, blink, speech masks, independent long-hair recolor previews and ten32-cell icons. This is native extraction evidence, not a GPU screenshot."
         }
       ],
       "data": {
@@ -3027,7 +3090,7 @@
     },
     {
       "id": "flight-training",
-      "title": "DORA's first flight mission",
+      "title": "OPR#1337's first flight mission",
       "category": "missions",
       "status": "implemented",
       "summary": "Ordered persistent stages require actual departure, belt destruction, material pickup, home banking and crafting/equipping.",

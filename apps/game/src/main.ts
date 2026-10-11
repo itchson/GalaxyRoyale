@@ -446,7 +446,7 @@ function showDoraGuide(): void {
   let index = 0;
   const draw = (): void => {
     dialoguePanel.show({
-      speaker: "ORP#1337 / DORA",
+      speaker: "OPR#1337 / DORA",
       text: pages[index].text,
       portrait: 8,
       expression: Math.max(0, pages[index].expression),
