@@ -54,7 +54,7 @@ const reasons: Record<string, string> = {
   session_ended: "The session ended.",
   session_expired: "The session expired.",
   host_ended: "The host ended the session.",
-  restore_failed: "Solo restoration failed. Return to title.",
+  restore_failed: "Solo restoration failed.",
   replica_unavailable: "The shared-world view is unavailable.",
 };
 
@@ -178,6 +178,8 @@ function render(view: View): boolean {
   const idle = valid && (state.phase === "idle" || state.phase === "ended");
   const active = valid && !idle;
   const restoreFailed = state.reason === "restore_failed";
+  const recovering = valid && restoreFailed;
+  const exitAvailable = active || recovering;
   const busy = view.pending !== null || !valid || restoreFailed;
   const copyable =
     valid &&
@@ -201,7 +203,11 @@ function render(view: View): boolean {
   text(view.heading, valid ? phases[state.phase][0] : "SESSION UNAVAILABLE");
   text(
     view.status,
-    valid ? phases[state.phase][1] : "Close the panel and try again.",
+    recovering
+      ? "Retry restoration before returning to solo play."
+      : valid
+        ? phases[state.phase][1]
+        : "Close the panel and try again.",
   );
   text(view.members, valid ? `${state.members} / 8 PILOTS` : "");
   text(
@@ -215,16 +221,18 @@ function render(view: View): boolean {
   hidden(view.noteNode, !view.note);
   hidden(view.start, !idle);
   hidden(view.invitation, invite === null);
-  hidden(view.ending, !active);
-  hidden(view.end, state.role !== "host");
+  hidden(view.ending, !exitAvailable);
+  hidden(view.end, !active || recovering || state.role !== "host");
   text(
     view.leave,
-    state.phase === "creating" ||
-      state.phase === "joining" ||
-      state.phase === "admitting" ||
-      state.phase === "loading"
-      ? "CANCEL"
-      : "LEAVE SESSION",
+    recovering
+      ? "RETRY RESTORE"
+      : state.phase === "creating" ||
+          state.phase === "joining" ||
+          state.phase === "admitting" ||
+          state.phase === "loading"
+        ? "CANCEL"
+        : "LEAVE SESSION",
   );
   disabled(view.create, busy || !view.canStart || !idle);
   disabled(view.input, busy || !view.canStart || !idle);
@@ -233,13 +241,13 @@ function render(view: View): boolean {
     busy || !view.canStart || !idle || joinCode(view.input.value) === null,
   );
   disabled(view.copy, busy || invite === null);
-  disabled(view.leave, view.pending === "exit" || !active);
+  disabled(view.leave, view.pending === "exit" || !exitAvailable);
   disabled(
     view.end,
     view.pending === "exit" || !active || state.role !== "host",
   );
   const availability = restoreFailed
-    ? "Co-op actions are unavailable."
+    ? "Solo play stays blocked until restoration succeeds."
     : idle && !view.canStart
       ? "Return to Haven to invite or join."
       : "Solo progress is restored on exit. Shared rewards are not enabled yet.";

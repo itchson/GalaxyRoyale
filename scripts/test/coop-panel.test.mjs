@@ -566,13 +566,56 @@ test("malformed capability getter remains hidden with no unsafe fallback", () =>
 test("failed solo restoration keeps the actual reason and prevents another start", () => {
   const f = fixture();
   f.paint(idle({ phase: "ended", reason: "restore_failed" }));
-  assert.match(
-    visibleText(f.target),
-    /Solo restoration failed\. Return to title/,
-  );
+  assert.match(visibleText(f.target), /Solo restoration failed/);
+  assert.match(visibleText(f.target), /Solo play stays blocked/);
   assert.doesNotMatch(visibleText(f.target), /Solo progress is restored/);
   assert.equal(f.node("coop-create").disabled, true);
   assert.equal(f.node("coop-join-input").disabled, true);
   f.node("coop-create").click();
+  assert.equal(f.calls.length, 0);
+});
+
+test("failed restoration exposes one explicit retry without claiming restored solo state", async () => {
+  const f = fixture();
+  const waiting = deferred();
+  f.actions.leave = () => {
+    f.calls.push(["leave"]);
+    return waiting.promise;
+  };
+  const failed = idle({
+    phase: "ended",
+    role: "host",
+    reason: "restore_failed",
+  });
+  f.paint(failed);
+  const retry = f.node("coop-leave");
+  assert.equal(retry.textContent, "RETRY RESTORE");
+  assert.equal(retry.disabled, false);
+  assert.match(visibleText(f.target), /RETRY RESTORE/);
+  assert.doesNotMatch(
+    visibleText(f.target),
+    /start another session|END SESSION/,
+  );
+  assert.equal(f.node("coop-end").hidden, true);
+  retry.click();
+  retry.click();
+  assert.equal(f.calls.filter(([name]) => name === "leave").length, 1);
+  assert.equal(retry.disabled, true);
+  waiting.resolve();
+  await settle();
+  // Only a controller update can report actual successful restoration.
+  assert.match(visibleText(f.target), /Solo restoration failed/);
+  assert.equal(f.node("coop-create").disabled, true);
+  assert.equal(retry.disabled, false);
+  f.paint(idle({ phase: "ended", reason: "local_left" }));
+  assert.equal(f.node("coop-create").disabled, false);
+  assert.doesNotMatch(visibleText(f.target), /RETRY RESTORE/);
+});
+
+test("invalid state cannot expose recovery or invoke an exit callback", () => {
+  const f = fixture();
+  f.paint(idle({ phase: "ended", reason: "restore_failed", members: 9 }));
+  assert.equal(f.node("coop-leave").disabled, true);
+  f.node("coop-leave").click();
   assert.equal(f.calls.length, 0);
 });
