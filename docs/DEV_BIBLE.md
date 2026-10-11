@@ -2,7 +2,7 @@
 
 The DevBible is the versioned, source-backed reference for the game. Open **DevBible** in the private local Mission Control sidebar. It supports text search, category/status filters and links such as `#wiki/champion-0`.
 
-The original catalog contained 33 entries; the current catalog also records KIKAI manufacturers, APR-1337 and the real first-flight mission. KIKAI are technological descendants of humans. The guide's friendship, exploration and K-pop hobby, Galaxy Royale's sporting role and independent corporation sponsorship are accepted lore; new sponsor roster candidates remain explicitly authored future content. The original coverage includes: the eight named champions, ten-hull fleet identity, seventeen automatic abilities, six biomes, canonical seed nodes, Haven and remote belts, courier/bounty missions, ship XP/material rules, ordinary families and fifteen bosses, Riveter, Radiation Mote, pixel-engine/art contracts, verification boundaries and future modes.
+The original catalog contained 33 entries; the current catalog also records KIKAI manufacturers, APR-1337 and the real first-flight mission. KIKAI are technological descendants of humans. The guide's friendship, exploration and K-pop hobby, Galaxy Royale's sporting role and independent corporation sponsorship are accepted lore. The current eight champions have authored KIKAI identities; additional roster content remains planned. Coverage includes ten-hull fleet identity, seventeen automatic abilities, six biomes, canonical seed nodes, Haven and remote belts, courier/bounty missions, per-RAICHO XP/material rules, ordinary families and fifteen bosses, Riveter, Radiation Mote, pixel-engine/art contracts, verification boundaries and future modes.
 
 ## Meaning of status
 
@@ -12,7 +12,11 @@ The original catalog contained 33 entries; the current catalog also records KIKA
 
 Player-facing prose uses **missions**. Existing save and Rust fields named `quests` remain unchanged. Do not infer a migration from the terminology change.
 
-The lore lexicon uses **KIKAI** for the technological species, **KESSHO** for crystals and **RAICHO** for flight craft. Current starter display models are **PAN HIKARI**, **RENKO HIBANA** and **HUGO MAMORI**. `#wiki/lore-lexicon` links the source readings, naming policy and stable save identifiers. Native schema6 counted training and independent type/main/sub license portraits are integrated; their source, browser and natural-play verification remain separate.
+The lore lexicon uses **KIKAI** for the technological species, **KESSHO** for crystals and **RAICHO** for flight craft. Current starter display models are **PAN HIKARI**, **RENKO HIBANA** and **HUGO MAMORI**. `#wiki/lore-lexicon` links the source readings, naming policy and stable save identifiers. Native schema6 counted training and independent type/main/sub profile portraits are integrated; their source, browser and natural-play verification remain separate.
+
+The active identity display is **MEISHI CARD**: the selected animated native profile, current RAICHO with its own XP and equipped slots, retained corporate points, and exactly eight arena patch slots. RENKO is offensive, HUGO defensive and PAN passive; the card does not change those mechanics or issue another identity. Cargo inventory separates material stock from mission packets. Hull collection distinguishes discovery from crafted ownership; ability collection distinguishes discovered, owned and equipped state. New card/collection presentation remains **verification pending** until actual normal-build browser evidence is recorded.
+
+Current crafting spends raw material tiers, with named T1 stock used by the explicit training recipe. Named stock is a subset of T1, not a second copy. A separate crafted-component inventory and component recipes are planned. Playable co-op is also pending; the PAN co-op dock concept and native conversion candidates are not shipping assets or gameplay acceptance. Internal/save names containing `license` remain stable, and software asset-license records retain their legal/provenance meaning.
 
 ## Sources and images
 

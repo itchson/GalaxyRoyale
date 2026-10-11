@@ -13,9 +13,12 @@ The [Stadium design presentation](https://media.gdcvault.com/gdc2026/Slides/Hwan
 ## Original hierarchy
 
 - Flight: small authored navigation icons, top-right map and right-aligned telemetry. Hover/focus reveals the facility or action context. Critical hull/shield state stays near the RAICHO.
-- RAICHO overview: compact license portrait and callsign; level/XP; hull/shield; one ability per category; carried cargo and retained points. Technical output and dock inventory are available through an explicit button without rebuilding focused controls on each simulation tick.
+- MEISHI CARD: the selected animated native profile and callsign, current RAICHO with its own level/XP and equipped slots, retained corporate points, and exactly eight arena patch slots. Unknown or unearned content is not fabricated. Card repaint updates changed values without rebuilding focused nodes.
+- RAICHO overview: current hull/shield, one ability per category and carried-cargo risk; optional technical details remain explicit. Cargo inventory, hull collection and ability collection are dedicated views rather than one repeated status dump. Materials and mission packets remain separate, as do discovered, owned and equipped items.
 - Settings: one heading per group, concise names, measured controls and quiet row separators. Hover/focus changes appearance without moving targets. Touch controls retain at least 44 CSS pixels of interaction area. Desktop inspection panels have physical width caps independent of world zoom.
-- License creation: type, main manufacturer/hair, and sub-manufacturer/crystal horns remain separate. The live portrait conveys appearance; the short starter summary names the RAICHO and its ability rather than repeating every appearance token.
+- KIKAI creation: type, main manufacturer/hair, and sub-manufacturer/crystal horns remain separate. The live portrait conveys appearance and is reused on the MEISHI CARD; the short starter summary names the RAICHO and its ability rather than repeating every appearance token. Existing source/save identifiers containing `license` are unchanged.
+
+RENKO offensive, HUGO defensive and PAN passive balances and slots retain that order across the card and collections. A revealed recipe, a crafted item and an equipped item need distinct concise labels. Today's crafting uses raw tiers and the named-material training recipe; component crafting is planned and must not appear as owned cargo or an enabled recipe. Save state is reported independently from the identity card.
 
 ## Typography and motion
 
@@ -27,4 +30,4 @@ Existing authored 64-cell control masks retain neutral metal and category accent
 
 ## Verification boundaries
 
-Source tests must verify truthful state, one-slot order, disclosure persistence, missing-affinity clearing, keyboard controls and native glyph containment. Actual settled browser captures must verify compact and larger layouts with both GPU backends. Human readability, physical-device controls and sustained performance remain separate gates. Evidence records the tested source/build identity and distinguishes source art from runtime art.
+Source tests must verify truthful state, one-slot order, exactly eight patch slots, disclosure persistence, missing-affinity clearing, keyboard controls and native glyph containment. Actual settled browser captures must verify compact and larger layouts with both GPU backends. Current MEISHI CARD and collection presentation is verification pending until those captures identify the tested normal build. Human readability, physical-device controls and sustained performance remain separate gates. Evidence records the tested source/build identity and distinguishes source art, candidate conversion and shipping runtime art. A co-op dock contact sheet does not establish playable co-op.

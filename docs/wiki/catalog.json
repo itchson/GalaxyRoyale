@@ -1785,11 +1785,11 @@
       "id": "ships",
       "title": "RAICHO / flight craft",
       "category": "ships",
-      "status": "implemented",
+      "status": "verification-pending",
       "summary": "Ten stable RAICHO IDs separate crafted champion hulls from the tournament reward.",
       "tags": [
         "ships",
-        "implemented"
+        "verification-pending"
       ],
       "facts": [
         {
@@ -1830,6 +1830,13 @@
             "HUGO MAMORI equips Guard Coil in the defensive slot. Rank one supplies 30 shield HP in three 10-HP chunks and enables the active HUGO 10% incoming damage reduction. It has no automatic recharge at rank one. Guard Coil effective rank two supplies 38 HP and unlocks recharge after four seconds without damage.",
             "The corporation affinity requires a valid compatible item in its matching slot. Unequipping the factory item removes that item’s effects; an empty matching slot also disables its affinity. Sub-manufacturer and arena sponsor do not supply these bonuses. XP, recipes, existing inventory and saved identity remain separate from the stat derivation."
           ]
+        },
+        {
+          "title": "Hull collection: discovery and ownership",
+          "paragraphs": [
+            "Hull discovery or a blueprint reveals a model; it does not craft or select that hull. Crafted and rewarded ownership is retained separately. The active RAICHO keeps its own XP, hardware and equipped abilities when another hull is selected.",
+            "The MEISHI CARD reports the current RAICHO; the dedicated hull collection presents revealed models, real recipes and crafted ownership. New collection filtering, navigation and browser layout remain verification pending. Internal numeric hull IDs and historical display aliases are unchanged."
+          ]
         }
       ],
       "references": [
@@ -1857,6 +1864,11 @@
           "path": "docs/CAMPAIGN.md",
           "label": "CAMPAIGN.md",
           "role": "documentation"
+        },
+        {
+          "path": "apps/game/src/loadout.ts",
+          "label": "Hull collection recipes and per-RAICHO ownership/XP view",
+          "role": "implementation"
         }
       ],
       "related": [
@@ -1883,11 +1895,11 @@
       "id": "abilities",
       "title": "Automatic ability catalog",
       "category": "ships",
-      "status": "implemented",
+      "status": "verification-pending",
       "summary": "Seventeen stable inventory entries feed exactly three equipped categories.",
       "tags": [
         "ships",
-        "implemented"
+        "verification-pending"
       ],
       "facts": [
         {
@@ -1924,6 +1936,13 @@
             "Catalog: 0 Pulse Lens [Offense]: Primary shots deal +10% damage per effective rank; every fifth fired shot adds a bolt dealing 150% of primary damage.; 1 Guard Coil [Defense]: Grants 30 shield at rank 1, then +8 per effective rank; rank 2 unlocks recharge after 4s without damage.; 2 Flux Drive [Passive]: Adds +4% speed and acceleration per effective rank.; 3 Pulse Echo [Offense]: Periodically fires an additional piercing fan; rank increases its damage.; 4 Repulsor [Defense]: Taking damage releases a repulsor nova; rank shortens its cooldown.; 5 Ion Wake [Passive]: Fast flight leaves a damaging ion trail; rank increases its damage.; 6 Needle Burst [Offense]: Every fourth primary shot releases a narrow two-shot needle burst.; 7 Broadside [Offense]: Every sixth primary shot fires a pair of side-facing projectiles.; 8 Guided Missile [Offense]: Every fifth primary shot launches a guided missile.; 9 Fork Volley [Offense]: Every third primary shot releases a split-wing fork volley.; 10 Windrunner Wake [Passive]: Fast flight leaves the champion's damaging ion trail.; 11 Impact Nova [Defense]: Taking damage releases a nova with the champion's short cooldown.; 12 Piercing Seeker [Offense]: Every fourth primary shot launches a guided piercing seeker.; 13 Sniper Spear [Offense]: Every sixth primary shot fires a fast projectile that pierces multiple targets.; 14 Royal Prism [Offense]: Sovereign reward: an eight-shot prism burst and fully evolved Pulse Echo.; 15 Royal Aegis [Defense]: Sovereign reward: every eighth primary repairs 4 hull; damage triggers a fully evolved nova.; 16 Royal Wake [Passive]: Sovereign reward: fast flight leaves the fully evolved rank-five ion trail.",
             "Pulse Lens counts actual admitted primary shots. Every fifth attempts one extra bolt at 150% of current primary damage, moving at 500 world units/s plus 25% of the RAICHO velocity. A full projectile cap refuses the primary without advancing its shot count; a refused fifth-shot bolt is dropped rather than replayed later. Pulse Echo remains a separate boss ability with its own piercing fan cadence."
           ]
+        },
+        {
+          "title": "Ability collection and recipe scope",
+          "paragraphs": [
+            "A discovered blueprint, a shared owned rank and an equipped slot are distinct states. Craft acquires inventory; explicit Equip changes only a compatible category on the active RAICHO and retains displaced ownership. Effective ranks still derive from that RAICHO level and authored exceptions.",
+            "The dedicated ability collection presents discovered, owned and equipped state with authoritative reasons and recipes. Its current filter/route/layout browser acceptance remains verification pending. There is no separate crafted-component inventory today: ordinary recipes consume raw tiers and points, while the explicit first training upgrade consumes the matching ten named T1 units."
+          ]
         }
       ],
       "references": [
@@ -1946,6 +1965,11 @@
           "path": "docs/CAMPAIGN.md",
           "label": "CAMPAIGN.md",
           "role": "documentation"
+        },
+        {
+          "path": "apps/game/src/loadout.ts",
+          "label": "Discovered/owned/equipped ability view and native recipes",
+          "role": "implementation"
         }
       ],
       "related": [
@@ -2223,13 +2247,13 @@
     },
     {
       "id": "cargo",
-      "title": "Cargo, bank & death rules",
+      "title": "Cargo inventory: materials and mission items",
       "category": "missions",
-      "status": "implemented",
-      "summary": "Crafting materials must survive the return trip; points and RAICHO XP are retained immediately.",
+      "status": "verification-pending",
+      "summary": "Carried and banked materials are distinct from retained mission packets; named T1 labels never double-count stock.",
       "tags": [
         "missions",
-        "implemented"
+        "verification-pending"
       ],
       "facts": [
         {
@@ -2250,15 +2274,23 @@
         },
         {
           "label": "Profile",
-          "value": "Schema 4"
+          "value": "Schema 6; five-tier stock with named T1 subsets"
         }
       ],
       "sections": [
         {
           "title": "Behavior and scope",
           "paragraphs": [
-            "Five-tier cargo and stored arrays are authoritative. A fresh schema-4 reload clears carried materials rather than teleporting abandoned cargo into a bank. Previously retained v3 scalar material state is grandfathered into the T1 stash once. Normal save normalization must preserve current cargo until the actual lifecycle event.",
+            "Five-tier cargo and stored arrays are authoritative. Schema 4 introduced material abandonment on reload, retained in the current schema 6, rather than teleporting abandoned cargo into a bank. Legacy v3 scalar material state is grandfathered into T1 stash once. Normal save normalization preserves current cargo until the actual lifecycle event.",
             "Points, earned RAICHO XP, crafted inventory, loadouts and completed progression remain retained on death. Last recorded expedition is a historical report: an unplayed forced diagnostic death may leave the previous report rather than invent a new run."
+          ]
+        },
+        {
+          "title": "Dedicated material and mission cargo",
+          "paragraphs": [
+            "Phase Silicate, Iron Filament and Coolant KESSHO are named subsets of the existing T1 cargo/stash. Show those labels plus remaining other T1 stock rather than adding the labels to the tier total. Capacity remains sixteen material units across five tiers; physical home arrival banks the carried stock.",
+            "Courier packets are mission state and use no material slots. They are retained separately; visiting Haven records the delivery, and reporting to the same source beacon claims its reward. The cargo view distinguishes that state from at-risk crafting materials.",
+            "Current inventory/collection browser presentation remains verification pending. Crafted component stock and component-to-item recipes are planned. Today only raw tiers and the explicit named-material training recipe are consumed; no component count or additional capacity is invented."
           ]
         }
       ],
@@ -2282,6 +2314,11 @@
           "path": "docs/CAMPAIGN.md",
           "label": "CAMPAIGN.md",
           "role": "documentation"
+        },
+        {
+          "path": "crates/game_core/src/training.rs",
+          "label": "Named T1 subset accounting, spending and physical banking",
+          "role": "implementation"
         }
       ],
       "related": [
@@ -2339,8 +2376,8 @@
           "title": "Sport, sponsors and authored roster candidates",
           "paragraphs": [
             "Galaxy Royale is the universe's biggest and most popular sport. PAN Dynamics, RENKO Cybernetics and HUGO CORP can sponsor arenas and competitors. Sponsor identity is independent of a competitor's main and sub-manufacturers; it does not change hair, horns, license or loadout.",
-            "The user's PAN representative candidate is APP#F344FEE: female DORA-PAN-PAN, in a PAN-sponsored arena. ORP#2323 is a male DORO-RENKO-PAN candidate who may also carry PAN sponsorship. These candidates are documented designs; they have not replaced the eight existing encounters or their stable reward IDs.",
-            "The current roster retains historical Human, Automaton and alien labels from its implementation. Reconciliation with the new KIKAI setting, where biological life cannot survive, is an explicit roster-authoring task. Existing labels do not establish surviving biological humans."
+            "The fixed roster includes APP#F344FEE: female DORA-PAN-PAN in a PAN-sponsored arena, and ORP#2323: male DORO-RENKO-PAN with independent PAN sponsorship. Authored identities retain the existing eight encounter and reward indices; their historical aliases remain documented separately.",
+            "The current eight encounters have authored KIKAI identities and independent sponsors. Their old Human, Automaton and alien labels are historical aliases, not surviving biological species. Stable encounter, patch and blueprint indices retain their progression meaning; new roster expansion remains separately planned."
           ]
         }
       ],
@@ -3129,6 +3166,13 @@
             "The current game is solo with local saves. A topology helper does not implement authoritative multiplayer, owned arena combat or a battle-royale ruleset. Future arena ownership upgrades, networking and competitive player zones require their own simulation, server and acceptance work.",
             "Authored dialogue remains usable without model inference. Optional text/voice design is documented, not evidence that a local model service or shipped neural character audio exists. Vesper comet art/selection experiments are work-only and are not assumed present in the production universe."
           ]
+        },
+        {
+          "title": "Crafted components and co-op boundaries",
+          "paragraphs": [
+            "A distinct crafted-component inventory and recipes that assemble those components into items are planned. Current crafting uses raw tier materials and the named T1 training recipe; MEISHI CARD and collection wording do not add inventory or save fields.",
+            "Playable co-op remains pending. The generated PAN co-op dock reference and converted native128/native256 candidates are reviewed source/native art proofs, not a shipping dock replacement or acceptance of a shared playable universe."
+          ]
         }
       ],
       "references": [
@@ -3156,13 +3200,14 @@
     },
     {
       "id": "kikai",
-      "title": "Kikai licenses and manufacturers",
+      "title": "KIKAI / MEISHI CARD and manufacturers",
       "category": "champions",
-      "status": "implemented",
-      "summary": "Technological descendants of humans carry life forward through persistent droid licenses and independent manufacturers.",
+      "status": "verification-pending",
+      "summary": "The MEISHI CARD shows the selected KIKAI profile, current RAICHO and exactly eight arena patch slots; collection presentation awaits normal-build verification.",
       "tags": [
         "kikai",
-        "license",
+        "meishi-card",
+        "identity",
         "portrait"
       ],
       "facts": [
@@ -3179,12 +3224,16 @@
           "value": "Colors crystal horns independently of hair and home theme"
         },
         {
-          "label": "License",
+          "label": "MEISHI designation",
           "value": "A female / O male / T neutral, then main + sub initials; player #HASH, guide APR-1337"
         },
         {
           "label": "Portrait grid",
           "value": "192 × 256 source cells; three native object layers per portrait"
+        },
+        {
+          "label": "Arena patch slots",
+          "value": "Exactly 8; earned patches only"
         }
       ],
       "sections": [
@@ -3194,7 +3243,7 @@
             "The browser issues eight cryptographically random bytes as sixteen hexadecimal digits. Main corporation selects its distinct level-one starter hull and one equipped rank-one ability. PAN HIKARI carries the passive slot; RENKO HIBANA the offensive slot; HUGO MAMORI the defensive slot.",
             "Starter effects come from the equipped item and the active hull manufacturer. PAN Flux Drive combines its rank-one +4% drive modifier with an equipped passive-slot +10% PAN affinity. RENKO Pulse Lens adds primary damage and its fifth-shot bolt; HUGO Guard Coil supplies the factory hull’s three shield chunks, with recharge earned through a real upgrade. Empty or invalid matching slots disable the manufacturer affinity; secondary horns and sponsorship grant no combat effect.",
             "Main corporation themes hair, the starter hull, its RAICHO and home accents. The independent sub-manufacturer colors horns. Existing anonymous profiles retain their original Scout, progress and loadouts; migration does not issue a license or duplicate a starter item.",
-            "Distinct DORA/DORO/TALO profile bodies are implemented with independent main-hair and sub-manufacturer KESSHO crystal palettes. The creator updates all27 combinations in real time and reuses the chosen profile on the issued license. Current integrated browser acceptance is recorded separately.",
+            "Distinct DORA/DORO/TALO profile bodies have independent main-hair and sub-manufacturer KESSHO crystal palettes. The creator selects among all 27 combinations and the MEISHI CARD reuses that actual selected native profile (ID 9); APR-1337 remains the separate guide portrait (ID 8). Current card and collection browser acceptance is verification pending.",
             "Appearance follows droid type: feminine DORA with long hair, masculine DORO with short spiky hair and flat angular chest armor, neutral TALO with a crew cut and flat torso. DORO and TALO do not inherit breast forms or cup-shaped seams. Callsigns use A/O/T then main and sub-manufacturer initials; the guide is APR-1337, PAN main with RENKO horns.",
             "KIKAI are technological life descended from humans in a future where biological life can no longer survive. They have friendships, dreams and hobbies. The setting treats them as people."
           ]
@@ -3205,6 +3254,14 @@
             "All three runtime portraits are freshly authored at 192 × 256 cells from the full-resolution references, with separately animated body, eyes and mouth. The source conversion is declared lossy; the authored PNG-to-cell import is exact. The corrected DORO and TALO references use flat mechanical torso plates.",
             "UI art rasterizes at its physical canvas presentation resolution while layout, fonts and input retain logical coordinates. Each whole portrait is admitted within the existing 60,000-quad UI budget. Smaller display rectangles still have a finite number of physical samples; no minimum cell size or coarse fallback is introduced. Browser evidence and performance measurements have separate scopes.",
             "This refinement covers the three KIKAI portrait types and the common UI raster path. Broader RAICHO, environment, enemy and facility artwork remains a separately tracked art pass."
+          ]
+        },
+        {
+          "title": "MEISHI CARD and compatibility",
+          "paragraphs": [
+            "The card reads the authoritative identity, current RAICHO, its own level/XP, hull/shield, three effective equipped slots and retained RENKO offensive, HUGO defensive and PAN passive points. Eight fixed patch positions correspond to the stable champion order. Empty positions do not expose an unknown opponent or invent a reward.",
+            "MEISHI CARD is the active display name. Existing license/factory_license/kikai_license source names, saved hash and progression remain stable; the card is not a second save or a duplicate starter grant. Historical evidence and software asset-license/provenance records retain their original meanings.",
+            "Materials and mission cargo, hull discovery and crafted ownership, and ability discovery/ownership/equipment have separate collection views. Current route/filter/layout validation is pending normal-build browser evidence; existing native and historical portrait evidence keeps its original scope."
           ]
         }
       ],
@@ -3232,6 +3289,16 @@
         {
           "path": "docs/KIKAI_PROFILE_ART.md",
           "label": "Distinct profile conversion and animation provenance",
+          "role": "implementation"
+        },
+        {
+          "path": "apps/game/src/meishi.ts",
+          "label": "Authoritative card painter and exactly eight patch slots",
+          "role": "implementation"
+        },
+        {
+          "path": "crates/game_web/src/ui_scene.rs",
+          "label": "Native profile and patch extraction",
           "role": "implementation"
         }
       ],
