@@ -19,6 +19,32 @@ async function fixture(t, project = initial()) {
 }
 const update = patch => ({id:'one',expectedRevision:1,author:'QA',source:'Automated fixture',patch});
 
+test('review attachments retain independent evidence after restart without aliasing caller data',async t=>{
+  const {root,file,store}=await fixture(t);
+  const evidence=[{label:'Actual fixture output',path:'work/result.log'},{label:'Review candidate',url:'https://github.com/itchson/GalaxyRoyale/pull/6'}];
+  const accepted=await store.mutate('review',{author:'QA',source:'Independent evidence contract fixture',record:{title:'Pinned review',body:'Actual isolated fixture, not a gameplay result.',participants:['QA'],taskIds:['one'],evidence}});
+  evidence[0].path='work/missing.log';evidence.push({label:'Later mutation',details:'Not submitted.'});
+  assert.equal(accepted.item.evidence.length,2);
+  assert.equal(accepted.item.evidence[0].path,'work/result.log');
+  const restarted=await new ProjectStore(file,root).load();
+  assert.deepEqual(restarted.snapshot().reviews[0].evidence,accepted.item.evidence);
+});
+
+test('invalid review attachments reject atomically and do not poison a later valid append',async t=>{
+  const {root,file,store}=await fixture(t);
+  const input=evidence=>({author:'QA',source:'Actual isolated attachment rejection',record:{title:'Review fixture',body:'Validate evidence before writing.',participants:['QA'],taskIds:['one'],evidence}});
+  const before=await readFile(file,'utf8');const snapshot=store.snapshot();const notices=[];store.listeners.add(r=>notices.push(r));
+  for(const evidence of [null,[{label:'Missing artifact',path:'work/missing.log'}],[{label:'Traversal',path:'work/../.env'}],[{label:'Unsafe URL',url:'javascript:alert(1)'}]]){
+    await assert.rejects(store.mutate('review',input(evidence)));
+    assert.equal(await readFile(file,'utf8'),before);
+    assert.deepEqual(store.snapshot(),snapshot);
+    assert.deepEqual(notices,[]);
+    assert.equal((await readdir(root)).includes('project.json.backup'),false);
+  }
+  const accepted=await store.mutate('review',input([{label:'Verified result',path:'work/result.log'}]));
+  assert.deepEqual(notices,[accepted.revision]);assert.equal(store.snapshot().reviews.length,1);
+});
+
 test('serialized writes reject stale revisions without losing accepted state; restart and backup preserve documents',async t=>{
   const {file,root,store}=await fixture(t);
   const results=await Promise.allSettled([store.mutate('task.update',update({title:'Reviewed controller'})),store.mutate('task.update',update({title:'Stale change'}))]);
