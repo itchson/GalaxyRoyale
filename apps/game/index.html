@@ -35,8 +35,8 @@
               id="pause-button"
               class="icon-button"
               data-pixel-icon="status-icon"
-              aria-label="MEISHI CARD"
-              title="MEISHI CARD / Escape"
+              aria-label="RAICHO menu"
+              title="RAICHO menu / Escape"
             >
               ≡
             </button>
@@ -196,7 +196,7 @@
         <div class="control-guide desktop-guide">
           <span><b>LEFT CLICK</b> Set course / use a dock facility</span
           ><span><b>RIGHT HOLD</b> Aim + fire</span
-          ><span><b>ESC</b> MEISHI CARD</span>
+          ><span><b>ESC</b> RAICHO MENU</span>
         </div>
         <div class="control-guide touch-guide">
           <span><b>LEFT STICK</b> Thrust & steer</span
@@ -218,17 +218,7 @@
       aria-describedby="menu-description"
       hidden
     >
-      <div class="menu-card">
-        <button
-          id="meishi-settings"
-          class="icon-button meishi-settings"
-          data-pixel-icon="settings-icon"
-          aria-label="Settings"
-          title="Settings"
-          hidden
-        >
-          SET
-        </button>
+      <div id="menu-surface" class="menu-card">
         <button
           id="menu-close"
           class="icon-button menu-close"
@@ -466,7 +456,7 @@
             </div>
           </div>
         </div>
-        <div class="menu-actions">
+        <div id="menu-footer" class="menu-actions">
           <button id="apply-update" class="text-button" hidden>
             Apply update at Haven
           </button>

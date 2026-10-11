@@ -12,6 +12,7 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto auto;
   gap: min(12px, calc(6px * var(--ui-scale, 1)));
+  column-gap: 18px;
   align-items: center;
 }
 .cargo-ledger > :nth-child(3n + 2),

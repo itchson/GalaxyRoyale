@@ -296,15 +296,6 @@ body:not(.pixel-ready) #universe {
 .menu-close:hover:not(:disabled) {
   color: #f1f7ff;
 }
-.meishi-settings {
-  position: absolute;
-  top: var(--ui-pad);
-  right: calc(var(--ui-pad) + var(--ui-hit) + 8px);
-}
-.menu-card:has(#meishi-content:not([hidden])) > h2,
-.menu-card:has(#meishi-content:not([hidden])) > #menu-description {
-  width: calc(100% - 2 * var(--ui-hit) - 16px);
-}
 .menu-card p {
   font-size: var(--ui-text);
   color: #a2b0c9;
@@ -382,7 +373,6 @@ body:not(.pixel-ready) #universe {
   font-size: var(--ui-caption);
   padding-inline: min(10px, calc(5px * var(--ui-scale, 1)));
 }
-.menu-card:has(#meishi-content:not([hidden])),
 .menu-card:has(#cargo-content:not([hidden])) {
   width: min(760px, 100%);
   height: min(650px, 100%);

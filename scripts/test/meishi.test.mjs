@@ -361,7 +361,7 @@ test("view source stays read-only and responsive CSS retains native logical patc
   );
   assert.match(css, /width: calc\(24px \* var\(--ui-scale, 1\)\)/);
   assert.match(css, /width: calc\(32px \* var\(--ui-scale, 1\)\)/);
-  assert.match(css, /@media \(max-width: 900px\)/);
+  assert.match(css, /@media \(max-width: 600px\)/);
   assert.match(css, /@media \(max-width: 480px\)/);
   assert.match(css, /\.meishi-card \[hidden\]\s*\{\s*display: none;/);
   assert.doesNotMatch(css, /overflow:\s*hidden|height:\s*100vh|animation:/);

@@ -395,16 +395,16 @@ function fixture() {
   };
 }
 
-test("Escape opens a live MEISHI menu, cancels controls and course, and toggles closed", async () => {
+test("Escape opens the live RAICHO menu, cancels controls and course, and toggles closed", async () => {
   const f = fixture(),
     c = f.context;
   f.press("Escape");
   assert.equal(c.paused, false);
   assert.equal(c.input.enabled, false);
   assert.equal(c.menu.hidden, false);
-  assert.deepEqual(f.visiblePages(), ["meishi-content"]);
+  assert.deepEqual(f.visiblePages(), ["pause-content"]);
   assert.ok(f.calls.includes("cancel-course"));
-  assert.ok(f.calls.includes("paint-meishi"));
+  assert.equal(f.calls.includes("paint-meishi"), false);
   assert.equal(
     f.calls.some((call) => Array.isArray(call) && call[0] === "paint-upgrades"),
     false,
@@ -531,6 +531,8 @@ test("facility overlay handlers validate the authoritative hit before opening", 
 
 test("closing a dedicated flight page resumes; closing title settings returns to title", async () => {
   for (const page of [
+    "meishi",
+    "cargo",
     "upgrades",
     "hangar",
     "journal",
@@ -944,4 +946,39 @@ test("map navigation sets a real course after resume even when optional audio is
         call[2] === 1000,
     ),
   );
+});
+
+test("MEISHI is a standalone live card; returning to collections restores menu chrome", () => {
+  const f = fixture(),
+    c = f.context;
+  c.openMenu("meishi");
+  assert.deepEqual(f.visiblePages(), ["meishi-content"]);
+  assert.equal(
+    f.element("menu-surface").classList.contains("meishi-surface"),
+    true,
+  );
+  for (const id of [
+    "collection-navigation",
+    "menu-title",
+    "menu-description",
+    "menu-footer",
+  ])
+    assert.equal(f.element(id).hidden, true, id);
+  assert.equal(
+    f.element("menu-close").attributes.get("aria-label"),
+    "Close MEISHI card",
+  );
+  assert.equal(c.menu.attributes.get("aria-labelledby"), "meishi-card-title");
+  assert.equal(c.paused, false);
+  assert.equal(c.input.enabled, false);
+  assert.doesNotMatch(html, /meishi-settings/);
+  c.selectMenuTab("cargo");
+  assert.deepEqual(f.visiblePages(), ["cargo-content"]);
+  for (const id of ["collection-navigation", "menu-title", "menu-footer"])
+    assert.equal(f.element(id).hidden, false, id);
+  assert.equal(
+    f.element("menu-surface").classList.contains("meishi-surface"),
+    false,
+  );
+  assert.equal(c.menu.attributes.get("aria-labelledby"), "menu-title");
 });

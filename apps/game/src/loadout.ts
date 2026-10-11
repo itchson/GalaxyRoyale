@@ -289,10 +289,12 @@ export function paintForge(
     nextFocus: string,
     collection = category !== null,
   ) => {
+    const previousScroll =
+      view.collection === collection ? target.scrollTop : 0;
     view.category = category;
     view.collection = collection;
     paintForge(target, hud, actions);
-    restore(target, nextFocus, 0);
+    restore(target, nextFocus, previousScroll);
   };
   if (view.collection) {
     const editorHeading = section("loadout-editor-heading");
@@ -337,7 +339,7 @@ export function paintForge(
         (value, focus) => {
           view.filter = value;
           paintForge(target, hud, actions);
-          restore(target, focus, 0);
+          restore(target, focus, target.scrollTop);
         },
       ),
     );
@@ -601,7 +603,7 @@ export function paintShipHangar(
       (value, focus) => {
         view.filter = value;
         paintShipHangar(target, hud, actions);
-        restore(target, focus, 0);
+        restore(target, focus, target.scrollTop);
       },
     ),
   );

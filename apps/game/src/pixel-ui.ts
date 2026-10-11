@@ -382,7 +382,13 @@ export class PixelUiBridge {
       if (root.id !== "game-ui")
         add(
           root,
-          root.classList.contains("console-card") ? "console-panel" : "panel",
+          root.classList.contains("console-card")
+            ? "console-panel"
+            : root.classList.contains("meishi-surface")
+              ? "meishi-panel"
+              : "panel",
+          "",
+          Number(root.dataset.pixelValue ?? 0),
         );
       if (root.classList.contains("dialogue-card")) {
         const portrait = root.querySelector<HTMLElement>(".dialogue-portrait");

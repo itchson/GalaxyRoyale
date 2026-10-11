@@ -1,12 +1,26 @@
+/* One native UiGroup owns this card surface and its local art/text transforms. */
+.menu-card.meishi-surface {
+  width: min(740px, 100%);
+  height: auto;
+  max-height: 100%;
+  padding: 24px;
+  gap: 0;
+}
+.meishi-surface #meishi-content {
+  flex: 0 1 auto;
+  padding: 0;
+}
+.meishi-surface .menu-close {
+  top: 6px;
+  right: 6px;
+}
 .meishi-card {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
   min-width: 0;
   max-width: 100%;
-  padding: min(12px, calc(6px * var(--ui-scale, 1)));
-  border-top: 1px solid #52717d;
-  border-bottom: 1px solid #263d50;
+  padding: 12px 0 0;
   background: #080f18;
 }
 .meishi-heading {
@@ -53,6 +67,7 @@
   align-items: center;
   gap: 8px 12px;
   margin-top: 0;
+  padding-right: 22px;
 }
 .meishi-ship-icon {
   width: calc(32px * var(--ui-scale, 1));
@@ -85,10 +100,7 @@
 }
 .meishi-patch-grid {
   display: grid;
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(min(100%, calc(24px * var(--ui-scale, 1) + 8px)), 1fr)
-  );
+  grid-template-columns: repeat(8, minmax(0, 1fr));
   gap: 8px 4px;
   list-style: none;
   padding: 0;
@@ -122,7 +134,7 @@ body.pixel-ready .meishi-card {
   background: transparent;
   border-color: transparent;
 }
-@media (max-width: 900px) {
+@media (max-width: 600px) {
   .meishi-patch-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }

@@ -36,6 +36,7 @@ function pixelScene({
   leaveHover = false,
   settingGeometry = null,
   paragraph = null,
+  meishi = false,
 } = {}) {
   const bounds = rootBounds ?? {
     x: 0,
@@ -126,6 +127,10 @@ function pixelScene({
         : null;
   }
   if (flight) root.id = "game-ui";
+  if (meishi) {
+    root.classList = { contains: (name) => name === "meishi-surface" };
+    root.dataset.pixelValue = "2";
+  }
   const events = new Map();
   if (consoleCommand) {
     root.classList = { contains: (name) => name === "console-card" };
@@ -716,4 +721,22 @@ test("dialogue scrolling clamps invalid/overshoot metrics and leaves other parag
     },
   }).groups[0].nodes.find((node) => node.kind === "text");
   assert.deepEqual(Array.from(other.rect), [10, 30, 200, 40]);
+});
+
+test("standalone MEISHI surface is one locally transformed native group", () => {
+  const scene = pixelScene({
+    meishi: true,
+    scale: 2,
+    rootBounds: { x: 40, y: 60, width: 740, height: 420 },
+  });
+  assert.equal(scene.groups.length, 1);
+  assert.deepEqual(Array.from(scene.groups[0].position), [20, 30]);
+  const panel = scene.groups[0].nodes[0];
+  assert.equal(panel.kind, "meishi-panel");
+  assert.deepEqual(Array.from(panel.rect), [0, 0, 370, 210]);
+  assert.equal(panel.value, 2);
+  assert.equal(
+    scene.groups[0].nodes.some((n) => n.kind === "panel"),
+    false,
+  );
 });

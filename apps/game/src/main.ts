@@ -761,7 +761,7 @@ function syncFlightStatusLayout(): void {
 }
 function pause(
   dock: boolean,
-  page: MenuTab = dock ? "upgrades" : "meishi",
+  page: MenuTab = dock ? "upgrades" : "pause",
 ): void {
   if (!galaxy || !launched) return;
   transitionEpoch++;
@@ -985,11 +985,21 @@ function selectMenuTab(tab: MenuTab): void {
   element("menu-description").hidden = !headings[tab][1];
   element("pause-content").hidden = tab !== "pause";
   element("meishi-content").hidden = tab !== "meishi";
-  element("meishi-settings").hidden = tab !== "meishi";
+  const card = tab === "meishi";
+  element("menu-surface").classList.toggle("meishi-surface", card);
+  element("menu-surface").dataset.pixelValue = String(
+    ["pan", "renko", "hugo"].indexOf(hud.identity?.corporation ?? "pan"),
+  );
+  element("menu-title").hidden = card;
+  element("menu-description").hidden = card || !headings[tab][1];
+  element("menu-footer").hidden = card;
+  element("menu-close").setAttribute(
+    "aria-label",
+    card ? "Close MEISHI card" : "Close menu",
+  );
   element("cargo-content").hidden = tab !== "cargo";
   element("collection-navigation").hidden = ![
     "pause",
-    "meishi",
     "cargo",
     "hangar",
     "upgrades",
@@ -1014,7 +1024,11 @@ function selectMenuTab(tab: MenuTab): void {
   element("hangar-content").hidden = tab !== "hangar";
   element("campaign-content").hidden = tab !== "campaign" && tab !== "credits";
   menu.classList.toggle("pause-menu", tab === "pause");
-  menu.setAttribute("aria-labelledby", "menu-title");
+  menu.setAttribute(
+    "aria-labelledby",
+    card ? "meishi-card-title" : "menu-title",
+  );
+  menu.setAttribute("aria-describedby", card ? "" : "menu-description");
   if (tab === "pause") paintFlightMenu(element("flight-status"), hud);
   if (tab === "meishi") paintMeishiCard(element("meishi-content"), hud);
   if (tab === "cargo") paintCargo(element("cargo-content"), hud);
@@ -1870,9 +1884,6 @@ element("resume").addEventListener("click", () => void resume());
 element("launch-settings").addEventListener("click", openLaunchSettings);
 element("menu-close").addEventListener("click", () => void resume());
 element("pause-settings").addEventListener("click", () => openMenu("settings"));
-element("meishi-settings").addEventListener("click", () =>
-  openMenu("settings"),
-);
 for (const page of [
   "meishi",
   "cargo",
@@ -1897,7 +1908,7 @@ function showToolbarHint(button: HTMLButtonElement | null): void {
     return;
   }
   const labels: Record<string, string> = {
-    "pause-button": "MEISHI CARD / ESC",
+    "pause-button": "RAICHO MENU / ESC",
     "map-button": "UNIVERSE MAP",
     "flight-settings": "SETTINGS",
     "save-indicator": "AUTOSAVE / BACKUP",

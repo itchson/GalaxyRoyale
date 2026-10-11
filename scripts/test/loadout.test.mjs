@@ -677,3 +677,22 @@ test("collection costs and level requirements remain supplied by the HUD, includ
   assert.match(allText(f.target), /T3 MATERIALS 4 \/ BANKED 0/);
   assert.equal(f.find("craft-ability-1").disabled, true);
 });
+
+test("in-place collection filters and categories retain the visible scroll position", () => {
+  const f = fixture(),
+    h = hud();
+  f.exports.paintForge(f.target, h, f.actions);
+  f.find("browse-abilities").events.click();
+  f.target.scrollTop = 123;
+  f.find("ability-filter-owned").events.click();
+  assert.equal(f.target.scrollTop, 123);
+  assert.equal(f.document.activeElement, f.find("ability-filter-owned"));
+  f.find("ability-category-2").events.click();
+  assert.equal(f.target.scrollTop, 123);
+  assert.equal(f.document.activeElement, f.find("ability-category-2"));
+  f.exports.paintShipHangar(f.target, h, { craft() {}, select() {} });
+  f.target.scrollTop = 63;
+  f.find("hull-filter-owned").events.click();
+  assert.equal(f.target.scrollTop, 63);
+  assert.equal(f.document.activeElement, f.find("hull-filter-owned"));
+});

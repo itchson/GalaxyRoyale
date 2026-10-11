@@ -65,11 +65,9 @@ function createView(target: HTMLElement): CardView {
   const identity = element("div", "meishi-identity");
   const designation = element("p", "meishi-designation");
   const manufacturer = element("p", "meishi-manufacturer");
-  identity.append(
-    element("h3", "meishi-title", "MEISHI CARD"),
-    designation,
-    manufacturer,
-  );
+  const title = element("h3", "meishi-title", "MEISHI CARD");
+  title.id = "meishi-card-title";
+  identity.append(title, designation, manufacturer);
   heading.append(portrait, identity);
 
   const raicho = element("section", "meishi-raicho");
