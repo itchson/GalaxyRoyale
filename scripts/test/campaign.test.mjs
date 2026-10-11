@@ -246,3 +246,18 @@ test("only an authoritative winning season exposes credits and Sovereign victory
   credits.click();
   assert.deepEqual(f.calls, [{ name: "credits", value: undefined }]);
 });
+
+test("discovered arena copy distinguishes a found hull, an earned blueprint and an owned craft", () => {
+  const f = fixture(),
+    hud = completedSeason(false);
+  hud.champions[0].crafted = true;
+  hud.champions[1].blueprint = false;
+  hud.champions[1].discovered = true;
+  const before = structuredClone(hud);
+  f.paint(hud);
+  assert.match(f.text(), /HULL OWNED \/ SELECT IN HULL COLLECTION/);
+  assert.match(f.text(), /HULL BLUEPRINT \/ CRAFT IN HULL COLLECTION/);
+  assert.match(f.text(), /ARENA FOUND \/ DEFEAT TO EARN HULL BLUEPRINT/);
+  assert.deepEqual(hud, before);
+  assert.deepEqual(f.calls, []);
+});

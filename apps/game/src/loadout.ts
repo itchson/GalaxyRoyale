@@ -107,8 +107,13 @@ const colors = ["offense", "defense", "passive"];
 interface ForgeView {
   category: number | null;
   ship: number;
+  collection: boolean;
+  filter: AbilityFilter;
 }
+type HullFilter = "all" | "owned" | "blueprint";
+type AbilityFilter = HullFilter | "compatible";
 const views = new WeakMap<HTMLElement, ForgeView>();
+const hullViews = new WeakMap<HTMLElement, { filter: HullFilter }>();
 
 function text(tag: "h3" | "p", value: string, className = ""): HTMLElement {
   const node = document.createElement(tag);
@@ -142,9 +147,6 @@ function button(
 function progress(level: number, xp: number, nextXp: number): string {
   return `RAICHO LV ${level} / ${xp} XP / ${level >= 100 ? "MAX LEVEL" : `NEXT ${nextXp} XP`}`;
 }
-function tiers(values: number[]): string {
-  return values.map((value, index) => `T${index + 1} ${value}`).join(" / ");
-}
 function rank(
   ability: Pick<EquippedAbilityHud, "rank" | "effective_rank">,
 ): string {
@@ -154,8 +156,26 @@ function rank(
 }
 function categoryHeading(category: number, points: number): HTMLElement {
   const heading = section(`upgrade-category ${colors[category]}`);
-  heading.append(text("p", `${categories[category]} / ${points} PTS`));
+  heading.append(text("p", `${categories[category]} / ${points} MEISHI`));
   return heading;
+}
+function filters<T extends string>(
+  name: string,
+  choices: readonly T[],
+  selected: T,
+  change: (value: T, focus: string) => void,
+): HTMLElement {
+  const row = section("collection-filters");
+  row.setAttribute("role", "group");
+  row.setAttribute("aria-label", `${name} filters`);
+  for (const value of choices) {
+    const key = `${name}-filter-${value}`;
+    const control = button(value.toUpperCase(), key, () => change(value, key));
+    control.dataset.selected = String(selected === value);
+    control.setAttribute("aria-pressed", String(selected === value));
+    row.append(control);
+  }
+  return row;
 }
 function recipe(
   category: number,
@@ -183,7 +203,7 @@ function recipe(
   box.append(
     text(
       "p",
-      `${categories[category]} POINTS ${pointCost} / HAVE ${hud.currency[category] ?? 0}`,
+      `${categories[category]} MEISHI ${pointCost} / HAVE ${hud.currency[category] ?? 0}`,
     ),
   );
   box.append(
@@ -194,45 +214,6 @@ function recipe(
   );
   return box;
 }
-function materialNotes(hud: ShipHangarHud): HTMLElement {
-  const box = section("loadout-material-notes");
-  box.append(
-    text(
-      "p",
-      "CARGO: Bank by arriving at Haven. Lost on death, restart, title or reload.",
-      "loadout-note",
-    ),
-  );
-  if (hud.material_cargo.some((value) => value > 0))
-    box.append(
-      text(
-        "p",
-        `CARRIED / ${tiers(hud.material_cargo)} / NOT BANKED`,
-        "loadout-loss",
-      ),
-    );
-  if (hud.material_loss.some((value) => value > 0))
-    box.append(
-      text(
-        "p",
-        `MATERIALS LOST${hud.material_loss_reason ? ` / ${hud.material_loss_reason.toUpperCase()}` : ""} / ${tiers(hud.material_loss)}`,
-        "loadout-loss",
-      ),
-    );
-  if (!hud.dock)
-    box.append(
-      text("p", "Return to Haven to craft, upgrade or equip.", "loadout-note"),
-    );
-  return box;
-}
-function materials(hud: ShipHangarHud): HTMLElement {
-  const box = section("loadout-summary");
-  box.append(
-    text("p", `DOCK STASH / ${tiers(hud.material_stash)}`),
-    materialNotes(hud),
-  );
-  return box;
-}
 function restore(
   target: HTMLElement,
   focusKey: string | undefined,
@@ -240,9 +221,19 @@ function restore(
 ): void {
   target.scrollTop = scroll;
   if (focusKey) {
-    const match = Array.from(
+    const controls = Array.from(
       target.querySelectorAll<HTMLButtonElement>("button[data-loadout-action]"),
-    ).find((node) => node.dataset.loadoutAction === focusKey && !node.disabled);
+    ).filter((node) => !node.disabled);
+    const replacement = focusKey.startsWith("craft-")
+      ? focusKey.replace(/^craft-/, "equip-")
+      : focusKey.startsWith("empty-")
+        ? focusKey.replace(/^empty-/, "ability-category-")
+        : undefined;
+    const match =
+      controls.find((node) => node.dataset.loadoutAction === focusKey) ??
+      controls.find((node) => node.dataset.loadoutAction === replacement) ??
+      controls.find((node) => node.dataset.selected === "true") ??
+      controls[0];
     match?.focus({ preventScroll: true });
   }
 }
@@ -259,10 +250,15 @@ export function paintForge(
   actions: ForgeActions,
 ): void {
   const current = views.get(target);
-  const view =
+  const view: ForgeView =
     current?.ship === hud.campaign.selected_ship
       ? current
-      : { category: null, ship: hud.campaign.selected_ship };
+      : {
+          category: null,
+          ship: hud.campaign.selected_ship,
+          collection: false,
+          filter: "all",
+        };
   views.set(target, view);
   const active = document.activeElement;
   const focusKey =
@@ -283,22 +279,26 @@ export function paintForge(
       `${progress(hud.ship_level, hud.ship_xp, hud.ship_next_xp)} / RANK CAP ${hud.rank_cap}/5`,
     ),
   );
-  const navigate = (category: number | null, nextFocus: string) => {
+  const navigate = (
+    category: number | null,
+    nextFocus: string,
+    collection = category !== null,
+  ) => {
     view.category = category;
+    view.collection = collection;
     paintForge(target, hud, actions);
     restore(target, nextFocus, 0);
   };
-  if (view.category !== null) {
-    const category = view.category;
+  if (view.collection) {
     const editorHeading = section("loadout-editor-heading");
     const back = button("BACK TO LOADOUT", "back", () =>
-      navigate(null, `manage-${category}`),
+      navigate(
+        null,
+        view.category === null ? "browse-abilities" : `manage-${view.category}`,
+      ),
     );
     back.classList.add("loadout-back");
-    editorHeading.append(
-      back,
-      categoryHeading(category, hud.currency[category] ?? 0),
-    );
+    editorHeading.append(back, text("h3", "ABILITY COLLECTION"));
     root.append(editorHeading, shipSummary);
     root.append(
       text(
@@ -307,15 +307,52 @@ export function paintForge(
         "loadout-note",
       ),
     );
-    const equipped = hud.loadout[category];
-    if (equipped)
+    const categoryControls = section("collection-filters");
+    categoryControls.setAttribute("role", "group");
+    categoryControls.setAttribute("aria-label", "Ability categories");
+    for (const category of [null, 0, 1, 2]) {
+      const key = `ability-category-${category ?? "all"}`;
+      const control = button(
+        category === null ? "ALL SLOTS" : categories[category],
+        key,
+        () => navigate(category, key, true),
+        false,
+        category ?? undefined,
+      );
+      control.dataset.selected = String(view.category === category);
+      control.setAttribute("aria-pressed", String(view.category === category));
+      categoryControls.append(control);
+    }
+    root.append(
+      categoryControls,
+      filters(
+        "ability",
+        ["all", "owned", "blueprint", "compatible"] as const,
+        view.filter,
+        (value, focus) => {
+          view.filter = value;
+          paintForge(target, hud, actions);
+          restore(target, focus, 0);
+        },
+      ),
+    );
+    const known = hud.abilities.filter((item) => item.blueprint || item.owned);
+    root.append(
+      text(
+        "p",
+        `${known.length} FOUND / ${known.filter((item) => item.owned).length} OWNED`,
+        "collection-summary",
+      ),
+    );
+    const slot = view.category;
+    if (slot !== null && hud.loadout[slot])
       root.append(
         button(
           "EMPTY SLOT",
-          `empty-${category}`,
-          () => actions.equipAbility(category, null),
+          `empty-${slot}`,
+          () => actions.equipAbility(slot, null),
           !hud.dock || actions.busy,
-          category,
+          slot,
         ),
       );
     const list = section("ability-list");
@@ -329,19 +366,45 @@ export function paintForge(
             : ability.owned
               ? 3
               : 4;
-    for (const ability of hud.abilities
+    const visible = known
       .filter(
-        (item) => item.category === category && (item.blueprint || item.owned),
+        (item) =>
+          (view.category === null || item.category === view.category) &&
+          (view.filter === "all" ||
+            (view.filter === "owned" && item.owned) ||
+            (view.filter === "blueprint" && item.blueprint && !item.owned) ||
+            (view.filter === "compatible" && item.compatible)),
       )
-      .sort((a, b) => order(a) - order(b) || a.index - b.index)) {
+      .sort((a, b) => order(a) - order(b) || a.index - b.index);
+    for (const ability of visible) {
+      const category = ability.category;
+      const equipped = hud.loadout[category];
       const card = section("ability-card");
       card.dataset.equipped = String(ability.equipped);
+      card.dataset.abilityId = ability.id;
       card.append(text("h3", ability.name), text("p", ability.description));
       if (ability.owned)
         card.append(
           text(
             "p",
             `${rank(ability)}${ability.equipped ? " / EQUIPPED" : " / OWNED"}`,
+          ),
+        );
+      else
+        card.append(text("p", "BLUEPRINT / NOT CRAFTED", "collection-state"));
+      card.append(
+        text(
+          "p",
+          `${categories[category]} / ${ability.compatible ? "COMPATIBLE" : "INCOMPATIBLE"} WITH ACTIVE HULL`,
+          "loadout-note",
+        ),
+      );
+      if (ability.rank < ability.max_rank)
+        card.append(
+          text(
+            "p",
+            `REQUIRES RAICHO LV ${ability.required_level}`,
+            "loadout-note",
           ),
         );
       const controls = section("loadout-actions");
@@ -407,13 +470,13 @@ export function paintForge(
       card.append(controls);
       list.append(card);
     }
+    if (!visible.length)
+      list.append(
+        text("p", "No found abilities match these filters.", "loadout-note"),
+      );
     root.append(list);
   } else {
-    root.append(
-      shipSummary,
-      text("p", `DOCK STASH / ${tiers(hud.material_stash)}`),
-      text("h3", "AUTOMATIC ABILITY SLOTS"),
-    );
+    root.append(shipSummary, text("h3", "AUTOMATIC ABILITY SLOTS"));
     const slots = section("loadout-slots");
     for (let category = 0; category < 3; category++) {
       const row = section("loadout-slot");
@@ -434,7 +497,21 @@ export function paintForge(
       );
       slots.append(row);
     }
-    root.append(slots, materialNotes(hud), text("h3", "RAICHO MODULES"));
+    root.append(
+      slots,
+      button("BROWSE ABILITIES", "browse-abilities", () =>
+        navigate(null, "back", true),
+      ),
+    );
+    if (!hud.dock)
+      root.append(
+        text(
+          "p",
+          "Return to Haven to craft, upgrade or equip.",
+          "loadout-note",
+        ),
+      );
+    root.append(text("h3", "RAICHO MODULES"));
     root.append(
       text(
         "p",
@@ -455,6 +532,11 @@ export function paintForge(
       );
       if (item.rank < item.max_rank)
         card.append(
+          text(
+            "p",
+            `REQUIRES RAICHO LV ${item.required_level}`,
+            "loadout-note",
+          ),
           recipe(
             item.category,
             item.point_cost,
@@ -488,6 +570,10 @@ export function paintShipHangar(
   hud: ShipHangarHud,
   actions: ShipHangarActions,
 ): void {
+  const view: { filter: HullFilter } = hullViews.get(target) ?? {
+    filter: "all",
+  };
+  hullViews.set(target, view);
   const active = document.activeElement;
   const focusKey =
     active instanceof HTMLElement && target.contains(active)
@@ -496,7 +582,24 @@ export function paintShipHangar(
   const scroll = target.scrollTop;
   target.replaceChildren();
   const root = section("ship-hangar-view");
-  root.append(materials(hud));
+  root.append(
+    text("h3", "HULL COLLECTION"),
+    text(
+      "p",
+      `${hud.campaign.ships.length} FOUND / ${hud.campaign.ships.filter((ship) => ship.owned).length} OWNED`,
+      "collection-summary",
+    ),
+    filters(
+      "hull",
+      ["all", "owned", "blueprint"] as const,
+      view.filter,
+      (value, focus) => {
+        view.filter = value;
+        paintShipHangar(target, hud, actions);
+        restore(target, focus, 0);
+      },
+    ),
+  );
   root.append(
     text(
       "p",
@@ -505,9 +608,17 @@ export function paintShipHangar(
     ),
   );
   const roster = section("ship-hangar-roster");
-  for (const ship of hud.campaign.ships) {
+  // The core supplies only genuinely found hulls; there is no local full catalog.
+  const visible = hud.campaign.ships.filter(
+    (ship) =>
+      view.filter === "all" ||
+      (view.filter === "owned" && ship.owned) ||
+      (view.filter === "blueprint" && !ship.owned && ship.craftable),
+  );
+  for (const ship of visible) {
     const card = section("ship-hangar-card");
     card.dataset.selected = String(ship.selected);
+    card.dataset.shipId = String(ship.id);
     const icon = section("campaign-icon campaign-ship");
     const licensed = ship.id === 0 && hud.identity;
     icon.dataset.pixelKind = licensed ? "licensed-ship" : "campaign-ship";
@@ -522,6 +633,19 @@ export function paintShipHangar(
     icon.setAttribute("aria-hidden", "true");
     const content = section("loadout-card-content");
     content.append(text("h3", ship.name), text("p", ship.ability));
+    content.append(
+      text(
+        "p",
+        ship.selected
+          ? "ACTIVE / OWNED"
+          : ship.owned
+            ? "OWNED"
+            : ship.craftable
+              ? "BLUEPRINT / NOT CRAFTED"
+              : "FOUND / BLUEPRINT REQUIRED",
+        "collection-state",
+      ),
+    );
     if (ship.owned) {
       content.append(text("p", progress(ship.level, ship.xp, ship.next_xp)));
       if (ship.select_reason && !ship.selected)
@@ -560,6 +684,10 @@ export function paintShipHangar(
     card.append(icon, content);
     roster.append(card);
   }
+  if (!visible.length)
+    roster.append(
+      text("p", "No found hulls match this filter.", "loadout-note"),
+    );
   root.append(roster);
   target.append(root);
   restore(target, focusKey, scroll);

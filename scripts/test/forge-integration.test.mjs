@@ -457,7 +457,10 @@ test("real Forge category survives successful repaint while a fresh open resets 
     f.calls.filter((item) => item[0] === "reset-forge").length,
     resets,
   );
-  assert.match(contents(f.element("upgrade-content")), /OFFENSIVE \/ 0 PTS/);
+  assert.match(
+    contents(f.element("upgrade-content")),
+    /OFFENSIVE MEISHI 3 \/ HAVE 0/,
+  );
   f.c.openMenu("upgrades");
   assert.equal(f.action("back"), undefined);
   assert.ok(f.action("manage-0"));

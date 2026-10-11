@@ -109,7 +109,7 @@ export function paintCampaign(
   target.append(
     text(
       "p",
-      `${collected}/8 ARENA PATCHES / defeat champions to earn their ship blueprints.`,
+      `${collected}/8 ARENA PATCHES / defeat champions to earn hull blueprints.`,
     ),
   );
   const roster = document.createElement("div");
@@ -121,7 +121,7 @@ export function paintCampaign(
     roster.append(
       text(
         "p",
-        "Explore the universe to discover arena champions. Their ships and abilities appear when found.",
+        "Explore to discover arena champions and their RAICHO. Unfound rewards stay hidden.",
       ),
     );
   for (const champion of knownChampions) {
@@ -138,6 +138,16 @@ export function paintCampaign(
         ),
       );
     content.append(text("p", `${champion.ship} / ${champion.ability}`));
+    const collectionState = text(
+      "p",
+      champion.crafted
+        ? "HULL OWNED / SELECT IN HULL COLLECTION"
+        : champion.blueprint
+          ? "HULL BLUEPRINT / CRAFT IN HULL COLLECTION"
+          : "ARENA FOUND / DEFEAT TO EARN HULL BLUEPRINT",
+    );
+    collectionState.className = "campaign-collection-state";
+    content.append(collectionState);
     content.append(
       text(
         "p",

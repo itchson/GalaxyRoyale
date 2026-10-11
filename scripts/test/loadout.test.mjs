@@ -332,7 +332,7 @@ test("actual HUD repaint preserves category, while ship change/reset returns ove
   f.exports.paintForge(f.target, updated, f.actions);
   assert.ok(f.find("back"));
   assert.equal(f.target.scrollTop, 77);
-  assert.match(allText(f.target), /PASSIVE \/ 50 PTS/);
+  assert.match(allText(f.target), /PASSIVE MEISHI 3 \/ HAVE 50/);
   updated.campaign.selected_ship = 1;
   updated.ship_level = 1;
   updated.ship_xp = 0;
@@ -344,7 +344,7 @@ test("actual HUD repaint preserves category, while ship change/reset returns ove
   f.exports.paintForge(f.target, updated, f.actions);
   assert.equal(f.find("back"), undefined);
 });
-test("busy mutation and outside-dock clearing cannot dispatch; loss uses real tier disclosure", () => {
+test("busy mutation and outside-dock clearing cannot dispatch; cargo stays in its separate page", () => {
   const f = fixture();
   const h = hud();
   h.dock = false;
@@ -352,10 +352,8 @@ test("busy mutation and outside-dock clearing cannot dispatch; loss uses real ti
   h.material_loss_reason = "reload";
   h.loadout[0] = ability(0, 0, { owned: true, rank: 1, effective_rank: 1 });
   f.exports.paintForge(f.target, h, { ...f.actions, busy: true });
-  assert.match(
-    allText(f.target),
-    /MATERIALS LOST \/ RELOAD \/ T1 1 \/ T2 0 \/ T3 2/,
-  );
+  assert.match(allText(f.target), /Return to Haven to craft, upgrade or equip/);
+  assert.doesNotMatch(allText(f.target), /MATERIALS LOST|CARRIED|DOCK STASH/);
   f.find("manage-0").events.click();
   assert.equal(f.find("empty-0").disabled, true);
   assert.equal(f.find("craft-ability-0").disabled, true);
@@ -435,31 +433,25 @@ test("legacy stored hardware rank and active ship cap are shown separately witho
   assert.equal(h.upgrades[0].effective_rank, 1);
 });
 
-test("Forge prioritizes all three slot controls while retaining cargo guidance and loss details", () => {
+test("Forge prioritizes slots and collection access without repeating cargo inventory", () => {
   const f = fixture();
   const h = hud();
   h.material_loss = [2, 0, 3, 0, 0];
   h.material_loss_reason = "reload";
   f.exports.paintForge(f.target, h, f.actions);
   const nodes = flatten(f.target);
-  const guidance = nodes.findIndex((node) =>
-    node.textContent.startsWith("CARGO:"),
-  );
-  assert.ok(guidance > 0);
+  const browse = nodes.indexOf(f.find("browse-abilities"));
+  assert.ok(browse > 0);
   for (const category of [0, 1, 2]) {
     const control = f.find(`manage-${category}`);
-    assert.ok(nodes.indexOf(control) < guidance);
+    assert.ok(nodes.indexOf(control) < browse);
     assert.equal(control.disabled, false);
   }
-  assert.match(
+  assert.doesNotMatch(
     allText(f.target),
-    /Bank by arriving at Haven\. Lost on death, restart, title or reload/,
+    /CARGO:|MATERIALS LOST|DOCK STASH|CARRIED/,
   );
-  assert.match(
-    allText(f.target),
-    /MATERIALS LOST \/ RELOAD \/ T1 2 \/ T2 0 \/ T3 3/,
-  );
-  assert.match(allText(f.target), /DOCK STASH \/ T1 10 \/ T2 2/);
+  assert.match(allText(f.target), /T1 MATERIALS 1 \/ BANKED 10/);
 });
 
 test("Forge excludes an undiscovered ability rather than showing its locked name", () => {
@@ -471,4 +463,217 @@ test("Forge excludes an undiscovered ability rather than showing its locked name
   f.exports.paintForge(f.target, h, f.actions);
   f.find("manage-0").events.click();
   assert.ok(!allText(f.target).includes("UNDISCOVERED SECRET"));
+});
+
+test("ability filters run after discovery and distinguish ownership from blueprint and compatibility", () => {
+  const f = fixture(),
+    h = hud();
+  h.abilities[0] = ability(0, 0, {
+    owned: true,
+    rank: 3,
+    effective_rank: 1,
+    equipped: true,
+  });
+  h.abilities[1] = ability(1, 1, {
+    blueprint: false,
+    owned: true,
+    rank: 1,
+    can_craft: false,
+    compatible: false,
+    equip_reason: "Incompatible hull.",
+  });
+  h.abilities.push(
+    ability(8, 0, {
+      blueprint: false,
+      owned: false,
+      name: "UNFOUND SECRET",
+      compatible: true,
+    }),
+  );
+  h.loadout[0] = h.abilities[0];
+  const original = copy(h);
+  const ids = () =>
+    flatten(f.target)
+      .filter((node) => node.dataset.abilityId)
+      .map((node) => node.dataset.abilityId);
+  f.exports.paintForge(f.target, h, f.actions);
+  f.find("browse-abilities").events.click();
+  assert.match(allText(f.target), /ABILITY COLLECTION/);
+  assert.match(allText(f.target), /3 FOUND \/ 2 OWNED/);
+  assert.match(allText(f.target), /BLUEPRINT \/ NOT CRAFTED/);
+  assert.match(allText(f.target), /OWNED RANK 3 \/ ACTIVE RANK 1/);
+  assert.match(allText(f.target), /DEFENSIVE \/ INCOMPATIBLE WITH ACTIVE HULL/);
+  assert.deepEqual(ids(), ["ability-0", "ability-2", "ability-1"]);
+  f.find("ability-filter-owned").events.click();
+  assert.deepEqual(ids(), ["ability-0", "ability-1"]);
+  assert.equal(
+    f.find("ability-filter-owned").attributes["aria-pressed"],
+    "true",
+  );
+  f.find("ability-filter-blueprint").events.click();
+  assert.deepEqual(ids(), ["ability-2"]);
+  f.find("ability-filter-compatible").events.click();
+  assert.deepEqual(ids(), ["ability-0", "ability-2"]);
+  f.find("ability-category-1").events.click();
+  assert.deepEqual(ids(), []);
+  assert.match(allText(f.target), /No found abilities match these filters/);
+  assert.doesNotMatch(allText(f.target), /UNFOUND SECRET/);
+  assert.deepEqual(h, original);
+  assert.deepEqual(f.calls, []);
+});
+
+test("ability filters preserve focus and scroll across real HUD replacements without stealing outside focus", () => {
+  const f = fixture(),
+    h = hud();
+  h.abilities[0] = ability(0, 0, { owned: true, rank: 1 });
+  f.exports.paintForge(f.target, h, f.actions);
+  f.find("manage-0").events.click();
+  f.find("ability-filter-owned").events.click();
+  f.target.scrollTop = 87;
+  f.find("ability-filter-owned").focus();
+  const changed = copy(h);
+  changed.abilities[0].rank = 2;
+  f.exports.paintForge(f.target, changed, f.actions);
+  assert.equal(f.target.scrollTop, 87);
+  assert.equal(f.document.activeElement, f.find("ability-filter-owned"));
+  assert.equal(f.find("ability-category-0").attributes["aria-pressed"], "true");
+  assert.match(allText(f.target), /OWNED RANK 2/);
+  const outside = {};
+  f.document.activeElement = outside;
+  f.exports.paintForge(f.target, changed, f.actions);
+  assert.equal(f.document.activeElement, outside);
+  f.find("back").events.click();
+  assert.equal(f.document.activeElement, f.find("manage-0"));
+});
+
+test("successful crafting exposes Equip and retains action focus without automatically equipping", () => {
+  const f = fixture(),
+    h = hud();
+  f.exports.paintForge(f.target, h, f.actions);
+  f.find("manage-0").events.click();
+  f.find("craft-ability-0").focus();
+  f.find("craft-ability-0").events.click();
+  assert.deepEqual(f.calls, [["craft", "ability-0"]]);
+  const changed = copy(h);
+  Object.assign(changed.abilities[0], {
+    owned: true,
+    rank: 1,
+    effective_rank: 1,
+    can_equip: true,
+    can_craft: false,
+    equip_reason: "",
+  });
+  f.target.scrollTop = 44;
+  f.exports.paintForge(f.target, changed, f.actions);
+  assert.equal(f.target.scrollTop, 44);
+  assert.equal(f.find("craft-ability-0"), undefined);
+  assert.equal(f.document.activeElement, f.find("equip-ability-0"));
+  assert.equal(changed.loadout[0], null);
+  assert.deepEqual(f.calls, [["craft", "ability-0"]]);
+});
+
+test("hull filters keep found, owned and earned blueprint states distinct and preserve real recipe gates", () => {
+  const f = fixture(),
+    h = hud(),
+    calls = [];
+  const blueprint = {
+    ...ship(2),
+    name: "FOUND BLUEPRINT",
+    owned: false,
+    craftable: true,
+    can_craft: false,
+    craft_reason: "Need 6 banked T1 materials.",
+  };
+  const found = {
+    ...ship(3),
+    name: "FOUND ARENA HULL",
+    owned: false,
+    craftable: false,
+    can_craft: false,
+    craft_reason: "Defeat its champion first.",
+  };
+  h.campaign.ships.push(blueprint, found);
+  h.material_cargo = [9, 0, 0, 0, 0];
+  h.material_stash = [2, 0, 0, 0, 0];
+  const original = copy(h);
+  const actions = {
+    craft: (id) => calls.push(["craft", id]),
+    select: (id) => calls.push(["select", id]),
+  };
+  const ids = () =>
+    flatten(f.target)
+      .filter((node) => node.dataset.shipId)
+      .map((node) => node.dataset.shipId);
+  f.exports.paintShipHangar(f.target, h, actions);
+  assert.match(allText(f.target), /HULL COLLECTION/);
+  assert.match(allText(f.target), /4 FOUND \/ 2 OWNED/);
+  assert.match(allText(f.target), /FOUND \/ BLUEPRINT REQUIRED/);
+  assert.match(allText(f.target), /OFFENSIVE MEISHI 10 \/ HAVE 3/);
+  assert.match(allText(f.target), /T1 MATERIALS 6 \/ BANKED 2/);
+  assert.doesNotMatch(
+    allText(f.target),
+    /CARGO:|CARRIED|DOCK STASH|MATERIALS LOST/,
+  );
+  f.find("hull-filter-owned").events.click();
+  assert.deepEqual(ids(), ["0", "1"]);
+  f.find("hull-filter-blueprint").events.click();
+  assert.deepEqual(ids(), ["2"]);
+  assert.match(allText(f.target), /BLUEPRINT \/ NOT CRAFTED/);
+  assert.equal(f.find("craft-ship-2").disabled, true);
+  f.find("craft-ship-2").events.click();
+  assert.deepEqual(calls, []);
+  const changed = copy(h);
+  changed.campaign.ships[2].can_craft = true;
+  f.exports.paintShipHangar(f.target, changed, actions);
+  f.find("craft-ship-2").events.click();
+  assert.deepEqual(calls, [["craft", 1]]);
+  assert.deepEqual(h, original);
+});
+
+test("hull filter state persists through checkpoint repaint and does not retain a second inventory", () => {
+  const f = fixture(),
+    h = hud();
+  const actions = { craft() {}, select() {} };
+  f.exports.paintShipHangar(f.target, h, actions);
+  f.find("hull-filter-blueprint").events.click();
+  assert.match(allText(f.target), /No found hulls match this filter/);
+  f.find("hull-filter-blueprint").focus();
+  f.target.scrollTop = 63;
+  const changed = copy(h);
+  changed.campaign.ships.push({
+    ...ship(4),
+    owned: false,
+    name: "NEWLY FOUND",
+    craftable: true,
+  });
+  f.exports.paintShipHangar(f.target, changed, actions);
+  assert.equal(f.target.scrollTop, 63);
+  assert.equal(f.document.activeElement, f.find("hull-filter-blueprint"));
+  assert.match(allText(f.target), /NEWLY FOUND/);
+  assert.equal(
+    f.find("hull-filter-blueprint").attributes["aria-pressed"],
+    "true",
+  );
+  changed.campaign.ships.pop();
+  f.exports.paintShipHangar(f.target, changed, actions);
+  assert.doesNotMatch(allText(f.target), /NEWLY FOUND/);
+});
+
+test("collection costs and level requirements remain supplied by the HUD, including named recipes", () => {
+  const f = fixture(),
+    h = hud();
+  Object.assign(h.abilities[1], {
+    point_cost: 17,
+    material_cost: 4,
+    material_tier: 3,
+    required_level: 10,
+    can_craft: false,
+    craft_reason: "Reach RAICHO level 10.",
+  });
+  f.exports.paintForge(f.target, h, f.actions);
+  f.find("manage-1").events.click();
+  assert.match(allText(f.target), /REQUIRES RAICHO LV 10/);
+  assert.match(allText(f.target), /DEFENSIVE MEISHI 17 \/ HAVE 4/);
+  assert.match(allText(f.target), /T3 MATERIALS 4 \/ BANKED 0/);
+  assert.equal(f.find("craft-ability-1").disabled, true);
 });

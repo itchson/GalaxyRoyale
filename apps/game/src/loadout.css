@@ -28,7 +28,6 @@
   background: #0a1423;
 }
 .loadout-summary,
-.loadout-material-notes,
 .loadout-ship-summary,
 .loadout-card-content,
 .ability-list,
@@ -47,6 +46,23 @@
   align-items: center;
   gap: calc(5px * var(--ui-scale, 1));
   min-width: 0;
+}
+.collection-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(3px * var(--ui-scale, 1));
+  min-width: 0;
+}
+.collection-filters button {
+  flex: 1 1 calc(72px * var(--ui-scale, 1));
+}
+.collection-filters button[data-selected="true"] {
+  border-color: var(--cyan);
+  color: var(--cyan);
+}
+.collection-summary,
+.collection-state {
+  color: #b9cadd;
 }
 .loadout-slots {
   display: grid;
@@ -124,10 +140,6 @@
 .ship-hangar-view p.loadout-reason,
 .ship-hangar-view p.loadout-note {
   color: #a2b0c9;
-}
-.forge-view p.loadout-loss,
-.ship-hangar-view p.loadout-loss {
-  color: var(--amber);
 }
 .ship-hangar-roster {
   display: grid;
