@@ -102,6 +102,11 @@ export class DialoguePanel {
     return this.isOpen;
   }
 
+  /** Changes whenever displayed content is replaced or the panel is closed. */
+  get presentationToken(): number {
+    return this.revision;
+  }
+
   show(content: DialogueContent): void {
     if (this.disposed) return;
     this.revision++;

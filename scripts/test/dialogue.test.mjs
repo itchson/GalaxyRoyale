@@ -43,3 +43,14 @@ test('a late asynchronous action cannot duplicate a reward or overwrite a newer 
   assert.equal(f.element('dialogue-text').textContent,'New page.');assert.equal(f.element('dialogue-action').hidden,true);
   f.panel.close();f.panel.close();assert.equal(f.closed(),1);f.panel.dispose();assert.equal(f.panel.opened,false);
 });
+
+test('presentation tokens change on refresh and close, without changing on reads',()=>{
+  const f=fixture();const before=f.panel.presentationToken;
+  f.panel.show({speaker:'CONTACT',text:'Page one.'});
+  const first=f.panel.presentationToken;
+  assert.ok(first>before);assert.equal(f.panel.presentationToken,first);
+  f.panel.show({speaker:'CONTACT',text:'Page two.'});
+  const second=f.panel.presentationToken;assert.ok(second>first);
+  f.panel.close();const closed=f.panel.presentationToken;assert.ok(closed>second);
+  f.panel.close();assert.equal(f.panel.presentationToken,closed);
+});

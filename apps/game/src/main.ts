@@ -387,7 +387,16 @@ const droidCreation = new DroidCreation({
   onClose: () => {
     pixelUi?.invalidate();
     if (!needsDroidCreation) {
-      void resume().then(() => showDoraGuide());
+      void resume().then(() => {
+        if (!launched) {
+          launchScreen.hidden = false;
+          galaxy.set_ui_mode(2);
+          pixelUi?.invalidate();
+          launch.focus();
+          return;
+        }
+        showDoraGuide();
+      });
     } else {
       launchScreen.hidden = false;
       galaxy.set_ui_mode(2);
@@ -461,11 +470,17 @@ function showDoraGuide(): void {
       onAction:
         index === pages.length - 1
           ? async () => {
+              const presentation = dialoguePanel.presentationToken;
               if (hud.onboarding?.stage === 0) {
                 galaxy.acknowledge_license();
                 hud = galaxy.hud();
                 await persist(galaxy.profile());
               }
+              if (
+                !dialoguePanel.opened ||
+                dialoguePanel.presentationToken !== presentation
+              )
+                return;
               dialoguePanel.close();
               toast(hud.onboarding?.description ?? "Your expedition is ready.");
             }
