@@ -3,12 +3,15 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { once } from "node:events";
 import { makeCoopServer } from "../../../apps/coop/server.mjs";
-import { root, stagePath, sha, moduleNames, pageNames } from "./prepare.mjs";
+import {
+  root,
+  stagePath,
+  sha,
+  moduleNames,
+  preparedNames,
+  fileLimit,
+} from "./prepare.mjs";
 
-const names = new Set([
-  ...pageNames,
-  ...moduleNames.map((n) => `modules/${n}.js`),
-]);
 const checkNames = new Set([
   "real-channel-ready",
   "admission-pending",
@@ -82,6 +85,113 @@ export function validateReport(o) {
   }
   return o;
 }
+export const wasmCheckNames = new Set([
+  "two-native-games",
+  "independent-save-origins",
+  "distinct-local-profiles",
+  "real-channel-ready",
+  "native-admission",
+  "native-complete-commit",
+  "movement-fire-observed",
+  "host-end-restored",
+  "guest-leave-restored",
+  "new-session",
+  "saves-unchanged",
+  "dispose-clean",
+  "operation-failed",
+]);
+export function validateWasmReport(o) {
+  const exact = (v, keys) =>
+    v &&
+    typeof v === "object" &&
+    !Array.isArray(v) &&
+    Object.keys(v).sort().join() === [...keys].sort().join();
+  const count = (v) => Number.isInteger(v) && v >= 0 && v <= 1_000_000;
+  const flag = (v) => v === null || typeof v === "boolean";
+  const hash = (v) =>
+    v === null || (typeof v === "string" && /^[a-f0-9]{64}$/.test(v));
+  const counters = [
+    "created",
+    "closed",
+    "requests",
+    "timers",
+    "frames",
+    "ticks",
+    "captures",
+    "entity_pages",
+    "body_pages",
+    "commits",
+    "body_changes",
+    "same_count_changes",
+    "unchanged_bodies",
+    "projectiles",
+    "transport_ready",
+    "admitted",
+  ];
+  const flags = [
+    "profile_equal",
+    "persisted_equal",
+    "persistent",
+    "progression_false",
+    "movement_observed",
+  ];
+  const hashes = ["profile_sha", "baseline_sha", "persisted_sha"];
+  if (
+    !exact(o, [
+      "version",
+      "run_id",
+      "backend",
+      "checks",
+      "clients",
+      "session_distinct",
+    ]) ||
+    o.version !== 2 ||
+    !/^[a-f0-9]{16}$/.test(o.run_id) ||
+    !["webgpu", "webgl2"].includes(o.backend) ||
+    !flag(o.session_distinct) ||
+    !Array.isArray(o.checks) ||
+    o.checks.length > 64 ||
+    !Array.isArray(o.clients) ||
+    o.clients.length !== 2
+  )
+    throw new Error("Invalid sanitized WASM report.");
+  for (const c of o.checks)
+    if (
+      !exact(c, ["name", "passed"]) ||
+      !wasmCheckNames.has(c.name) ||
+      typeof c.passed !== "boolean"
+    )
+      throw new Error("Invalid WASM check.");
+  for (let i = 0; i < 2; i++) {
+    const c = o.clients[i];
+    if (
+      !exact(c, ["role", "phase", "mode", ...counters, ...flags, ...hashes]) ||
+      c.role !== ["host", "guest"][i] ||
+      ![
+        "uninitialized",
+        "idle",
+        "creating",
+        "joining",
+        "hosting",
+        "admitting",
+        "loading",
+        "connected",
+        "ended",
+        "failed",
+        "disposed",
+      ].includes(c.phase) ||
+      !["solo", "host", "guest", "blocked"].includes(c.mode) ||
+      counters.some((k) => !count(c[k])) ||
+      c.closed > c.created ||
+      c.admitted > 7 ||
+      c.transport_ready > 7 ||
+      flags.some((k) => !flag(c[k])) ||
+      hashes.some((k) => !hash(c[k]))
+    )
+      throw new Error("Invalid WASM client observations.");
+  }
+  return o;
+}
 async function body(req) {
   let size = 0;
   const chunks = [];
@@ -108,12 +218,14 @@ export async function start({
     throw new Error("Invalid bounded QA listener options.");
   const stage = stagePath(value),
     origin = `http://localhost:${port}`,
-    service = `http://127.0.0.1:${port}`;
+    service = `http://127.0.0.1:${port}`,
+    guestOrigin = `http://guest.localhost:${port}`;
   const manifest = JSON.parse(
     await fs.readFile(path.join(stage, "manifest.json"), "utf8"),
   );
+  const names = new Set(preparedNames(manifest)),
+    wasm = manifest.version === 2;
   if (
-    manifest.version !== 1 ||
     manifest.typescript !== "5.9.3" ||
     Object.keys(manifest.files).length !== names.size ||
     Object.keys(manifest.files).some((n) => !names.has(n))
@@ -133,24 +245,25 @@ export async function start({
   for (const name of names) {
     const absolute = path.join(stage, name),
       stat = await fs.lstat(absolute);
-    if (!stat.isFile() || stat.isSymbolicLink() || stat.size > 100_000)
+    if (!stat.isFile() || stat.isSymbolicLink() || stat.size > fileLimit(name))
       throw new Error("Invalid prepared file.");
     const value = await fs.readFile(absolute);
     if (sha(value) !== manifest.files[name])
       throw new Error("Prepared file digest mismatch.");
     bytes.set(name, value);
   }
-  const server = makeCoopServer({ allowedOrigins: [origin] });
+  const origins = wasm ? [origin, guestOrigin] : [origin];
+  const server = makeCoopServer({ allowedOrigins: origins });
   const [signaling] = server.listeners("request");
   server.removeListener("request", signaling);
   server.on("request", async (req, res) => {
     try {
       const url = new URL(req.url, service);
       if (
-        ![new URL(origin).host, new URL(service).host].includes(
-          req.headers.host,
-        ) ||
-        ![origin, service].includes(url.origin)
+        ![...origins, service]
+          .map((v) => new URL(v).host)
+          .includes(req.headers.host) ||
+        ![...origins, service].includes(url.origin)
       )
         throw new Error("Invalid QA host.");
       if (url.pathname.startsWith("/v1/")) return signaling(req, res);
@@ -158,7 +271,9 @@ export async function start({
       res.setHeader("X-Content-Type-Options", "nosniff");
       res.setHeader(
         "Content-Security-Policy",
-        `default-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' ${service}; media-src 'none'; object-src 'none'; frame-ancestors 'none'`,
+        wasm
+          ? `default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; connect-src 'self' ${service}; frame-src ${origin} ${guestOrigin}; media-src 'none'; object-src 'none'; frame-ancestors ${origin}`
+          : `default-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' ${service}; media-src 'none'; object-src 'none'; frame-ancestors 'none'`,
       );
       if (
         req.method === "GET" &&
@@ -168,11 +283,23 @@ export async function start({
         res.setHeader("Content-Type", "application/json");
         return res.end(
           JSON.stringify({
-            modules: moduleNames.length,
+            modules: wasm ? 6 : moduleNames.length,
             service,
             page_origin: origin,
             inputs: manifest.inputs,
             scope: manifest.scope,
+            ...(wasm
+              ? {
+                  mode: "wasm",
+                  guest_origin: guestOrigin,
+                  builds: manifest.builds,
+                  artifacts: manifest.artifacts,
+                  client_role:
+                    req.headers.host === new URL(guestOrigin).host
+                      ? "guest"
+                      : "host",
+                }
+              : {}),
           }),
         );
       }
@@ -186,13 +313,19 @@ export async function start({
           req.headers["content-type"] !== "application/json"
         )
           throw new Error("Invalid QA origin/content.");
-        const report = validateReport(await body(req));
+        const report = (wasm ? validateWasmReport : validateReport)(
+          await body(req),
+        );
         const captured = {
           ...report,
           source_inputs: manifest.inputs,
           captured_at: new Date().toISOString(),
-          scope:
-            "actual same-page browser RTC loopback; declared framing admission; no Game authority/NAT",
+          scope: wasm
+            ? "Root-driven browser observations from real two-Galaxy WASM/controller/RTC on independent QA origins; v1 factory guest/no shared progression; no NAT/performance acceptance"
+            : "actual same-page browser RTC loopback; declared framing admission; no Game authority/NAT",
+          ...(wasm
+            ? { builds: manifest.builds, artifacts: manifest.artifacts }
+            : {}),
         };
         const encoded = JSON.stringify(captured, null, 2) + "\n",
           hash = sha(encoded);
@@ -206,7 +339,12 @@ export async function start({
         res.setHeader("Content-Type", "application/json");
         return res.end(JSON.stringify({ captured: true, sha256: hash }));
       }
-      const name = url.pathname === "/" ? "review.html" : url.pathname.slice(1);
+      const name =
+        url.pathname === "/"
+          ? wasm
+            ? "wasm-review.html"
+            : "review.html"
+          : url.pathname.slice(1);
       if (req.method !== "GET" || url.search || !names.has(name)) {
         res.writeHead(404);
         return res.end("Not found");
@@ -215,7 +353,9 @@ export async function start({
         "Content-Type",
         name.endsWith(".html")
           ? "text/html; charset=utf-8"
-          : "text/javascript; charset=utf-8",
+          : name.endsWith(".wasm")
+            ? "application/wasm"
+            : "text/javascript; charset=utf-8",
       );
       res.end(bytes.get(name));
     } catch {

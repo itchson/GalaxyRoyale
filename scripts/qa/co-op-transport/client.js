@@ -1,0 +1,428 @@
+import { CoopController } from "/modules/controller.js";
+import { CoopTransport } from "/modules/transport.js";
+import { createGalaxyCoopPorts } from "/modules/wasm-ports.js";
+import { SaveStore, normalizeProfile } from "/modules/storage.js";
+
+const config = await (await fetch("/qa/config", { cache: "no-store" })).json();
+const role = config.client_role;
+const status = document.getElementById("status");
+const canvas = document.getElementById("canvas");
+let galaxy, controller, transport, store, backend, run, baseline, timer;
+let phase = "uninitialized",
+  mode = "solo",
+  controls = { fire: false },
+  pumping = false,
+  stopped = false;
+let lastTime = performance.now(),
+  loopDeadline = 0,
+  firstPosition = null;
+let lastRows = new Map(),
+  stagedRows = new Map();
+const counters = {
+  created: 0,
+  closed: 0,
+  frames: 0,
+  ticks: 0,
+  captures: 0,
+  entity_pages: 0,
+  body_pages: 0,
+  commits: 0,
+  body_changes: 0,
+  same_count_changes: 0,
+  unchanged_bodies: 0,
+  projectiles: 0,
+};
+let profileSha = null,
+  persistedSha = null,
+  profileEqual = null,
+  persistedEqual = null,
+  persistent = null,
+  progressionFalse = null,
+  movementObserved = null;
+const canonical = (v) =>
+  Array.isArray(v)
+    ? v.map(canonical)
+    : v && typeof v === "object"
+      ? Object.fromEntries(
+          Object.keys(v)
+            .sort()
+            .map((k) => [k, canonical(v[k])]),
+        )
+      : v;
+async function digest(profile) {
+  const valid = normalizeProfile(profile);
+  if (!valid) throw new Error("profile_invalid");
+  const bytes = await crypto.subtle.digest(
+    "SHA-256",
+    new TextEncoder().encode(JSON.stringify(canonical(valid))),
+  );
+  return [...new Uint8Array(bytes)]
+    .map((n) => n.toString(16).padStart(2, "0"))
+    .join("");
+}
+function observations() {
+  const state = controller?.state(),
+    d = transport?.diagnostics();
+  return {
+    role,
+    phase:
+      phase === "disposed" || phase === "failed"
+        ? phase
+        : (state?.phase ?? phase),
+    mode: controller?.frameMode() ?? mode,
+    ...counters,
+    requests: d?.pendingRequests ?? 0,
+    timers: d?.timers ?? 0,
+    transport_ready: state?.transport_ready ?? 0,
+    admitted: state?.admitted ?? 0,
+    profile_equal: profileEqual,
+    persisted_equal: persistedEqual,
+    persistent,
+    progression_false: progressionFalse,
+    movement_observed: movementObserved,
+    profile_sha: profileSha,
+    baseline_sha: baseline ?? null,
+    persisted_sha: persistedSha,
+  };
+}
+function update() {
+  const s = observations();
+  status.textContent = `${role.toUpperCase()} · ${s.phase} · mode ${s.mode} · native frames ${s.frames} · complete commits ${s.commits}`;
+}
+function observeHeader(header) {
+  if (!header?.snapshot) return;
+  const s = header.snapshot;
+  counters.ticks = Math.max(counters.ticks, s.tick);
+  counters.projectiles = Math.max(counters.projectiles, s.projectiles.length);
+  progressionFalse = s.progression === false;
+  const p = s.participants.find((p) => p.slot === (role === "host" ? 0 : 1));
+  if (p) {
+    firstPosition ??= p.position;
+    movementObserved =
+      Math.hypot(
+        p.position[0] - firstPosition[0],
+        p.position[1] - firstPosition[1],
+      ) > 10 || movementObserved === true;
+  }
+}
+function observeRows(rows) {
+  for (const row of rows)
+    stagedRows.set(row.id, {
+      signature: row.body_signature,
+      occupied: row.occupied,
+    });
+}
+function observeCommit() {
+  for (const [id, row] of stagedRows) {
+    const old = lastRows.get(id);
+    if (old?.signature === row.signature) counters.unchanged_bodies++;
+    else if (old) {
+      counters.body_changes++;
+      if (old.occupied === row.occupied) counters.same_count_changes++;
+    }
+  }
+  lastRows = stagedRows;
+  stagedRows = new Map();
+}
+function peerFactory(configuration) {
+  const pc = new RTCPeerConnection(configuration);
+  counters.created++;
+  const close = pc.close.bind(pc);
+  let closed = false;
+  pc.close = () => {
+    if (!closed) {
+      closed = true;
+      counters.closed++;
+    }
+    close();
+  };
+  return pc;
+}
+function resetControls() {
+  controls = {
+    fire: false,
+    joystick: null,
+    destination: null,
+    thrust: null,
+    aim: null,
+  };
+  controller?.cancelInput();
+  galaxy?.cancel_course();
+}
+function step(milliseconds) {
+  if (!galaxy || stopped) return;
+  const before = controller?.frameMode() ?? "solo";
+  controller?.beforeStep(milliseconds / 1000, controls);
+  const after = controller?.frameMode() ?? "solo";
+  if (after !== before) resetControls();
+  // Solo Game is deliberately paused throughout QA; only actual host tick_co_op runs.
+  galaxy.set_paused(after !== "host");
+  const elapsed = after !== before ? 0 : milliseconds;
+  galaxy.step(elapsed, controls);
+  controller?.afterStep(elapsed / 1000);
+  counters.frames++;
+  update();
+}
+function schedule() {
+  clearTimeout(timer);
+  if (stopped || performance.now() > loopDeadline) return;
+  timer = setTimeout(() => {
+    try {
+      const now = performance.now(),
+        dt = Math.min(50, Math.max(0, now - lastTime));
+      lastTime = now;
+      if (!pumping) step(dt);
+      schedule();
+    } catch {
+      phase = "failed";
+      stopped = true;
+      update();
+    }
+  }, 16);
+}
+async function initialize(selectedBackend, runId) {
+  if (
+    galaxy ||
+    !["webgpu", "webgl2"].includes(selectedBackend) ||
+    !/^[a-f0-9]{16}$/.test(runId)
+  )
+    throw new Error("initialize_invalid");
+  backend = selectedBackend;
+  run = runId;
+  store = new SaveStore();
+  const loaded = await store.open();
+  persistent = store.persistent;
+  const module = await import(config.builds[backend]);
+  await module.default({
+    module_or_path: config.builds[backend].replace(
+      /galaxy\.js$/,
+      "galaxy_bg.wasm",
+    ),
+  });
+  galaxy = await module.Galaxy.create(canvas, loaded);
+  if (!loaded) {
+    const hash = [...crypto.getRandomValues(new Uint8Array(8))]
+      .map((n) => n.toString(16).padStart(2, "0"))
+      .join("");
+    galaxy.register_droid(
+      role === "host" ? "dora" : "doro",
+      role === "host" ? "pan" : "hugo",
+      role === "host" ? "renko" : "pan",
+      hash,
+    );
+  }
+  galaxy.resize(640, 360);
+  galaxy.set_ui_mode(1);
+  galaxy.set_shake(false);
+  galaxy.set_paused(true);
+  const observed = {
+    co_op_batch(request) {
+      const response = galaxy.co_op_batch(request),
+        ops = JSON.parse(request).operations,
+        results = JSON.parse(response).results;
+      for (let i = 0; i < ops.length; i++)
+        if (results[i]?.ok) {
+          const value = results[i].value;
+          if (ops[i].op === "acquire") {
+            counters.captures++;
+            observeHeader(value);
+            stagedRows = new Map();
+          }
+          if (ops[i].op === "entity_page") {
+            counters.entity_pages++;
+            observeRows(value.entities);
+          }
+          if (ops[i].op === "body_page") counters.body_pages++;
+        }
+      return response;
+    },
+    co_op_replica(request) {
+      const op = JSON.parse(request),
+        response = galaxy.co_op_replica(request),
+        result = JSON.parse(response);
+      if (result.ok) {
+        if (op.op === "replica_stage") {
+          observeHeader(op.header);
+          stagedRows = new Map();
+        }
+        if (op.op === "replica_entities") {
+          counters.entity_pages++;
+          observeRows(op.page.entities);
+        }
+        if (op.op === "replica_body") counters.body_pages++;
+        if (op.op === "replica_commit") {
+          counters.commits++;
+          observeCommit();
+        }
+      }
+      return response;
+    },
+  };
+  const ports = createGalaxyCoopPorts(observed);
+  controller = new CoopController({
+    service: config.service,
+    native: ports.native,
+    replica: ports.replica,
+    availability: ports.availability,
+    localSpec: () => {
+      const p = galaxy.profile();
+      return { local_seed: p.seed, identity: p.identity ?? null };
+    },
+    transportFactory: (options) => {
+      transport = new CoopTransport({
+        ...options,
+        createPeerConnection: peerFactory,
+      });
+      return transport;
+    },
+    onChange: () => {
+      const next = controller?.frameMode() ?? "solo";
+      if (next !== mode) {
+        mode = next;
+        resetControls();
+        lastTime = performance.now();
+      }
+      update();
+    },
+  });
+  await store.save(galaxy.profile());
+  await store.flush();
+  baseline = profileSha = await digest(galaxy.profile());
+  persistedSha = await digest(await store.open());
+  profileEqual = true;
+  persistedEqual = baseline === persistedSha;
+  phase = "idle";
+  loopDeadline = performance.now() + 180_000;
+  lastTime = performance.now();
+  stopped = false;
+  schedule();
+  update();
+}
+async function verify() {
+  if (!galaxy) throw new Error("not_initialized");
+  profileSha = await digest(galaxy.profile());
+  // Read the real origin's IndexedDB through SaveStore. No session snapshot is saved.
+  const persisted = await store.open();
+  persistent = store.persistent;
+  persistedSha = persisted ? await digest(persisted) : null;
+  profileEqual = profileSha === baseline;
+  persistedEqual = persistedSha === baseline;
+  return observations();
+}
+async function command(name, args) {
+  if (name === "initialize") {
+    await initialize(args.backend, args.run_id);
+    return observations();
+  }
+  if (name === "state") return observations();
+  if (name === "dispose" && !galaxy) {
+    stopped = true;
+    clearTimeout(timer);
+    phase = "disposed";
+    return observations();
+  }
+  if (!controller || !galaxy) throw new Error("not_initialized");
+  if (name === "create") {
+    await controller.create();
+    return {
+      invite: controller.invite(),
+      session: transport.diagnostics().session?.id,
+    };
+  }
+  if (name === "join") {
+    await controller.join(args.invite);
+    return observations();
+  }
+  if (name === "verify") return verify();
+  if (name === "drive") {
+    if (
+      controller.frameMode() === "solo" ||
+      controller.frameMode() === "blocked"
+    )
+      throw new Error("not_admitted");
+    pumping = true;
+    try {
+      for (let i = 0; i < 360; i++) {
+        if (!controller.blocksSolo() || controller.frameMode() === "blocked")
+          break;
+        const h = galaxy.hud(),
+          origin = h.camera;
+        controls = {
+          thrust: [origin[0] + 1600, origin[1]],
+          aim: [origin[0] + 1900, origin[1]],
+          fire: true,
+        };
+        step(1000 / 60);
+        await new Promise((r) => setTimeout(r, 16));
+      }
+    } finally {
+      pumping = false;
+      resetControls();
+      lastTime = performance.now();
+    }
+    return observations();
+  }
+  if (name === "end") await controller.end();
+  else if (name === "leave") await controller.leave();
+  else if (name === "dispose") {
+    await controller.dispose();
+    if (controller.blocksSolo()) throw new Error("restore_failed");
+    await verify();
+    stopped = true;
+    clearTimeout(timer);
+    galaxy.free();
+    galaxy = null;
+    phase = "disposed";
+    update();
+    return observations();
+  } else throw new Error("command_invalid");
+  resetControls();
+  return verify();
+}
+let commandPending = false;
+addEventListener("message", async (event) => {
+  if (
+    event.source !== parent ||
+    event.origin !== config.page_origin ||
+    event.data?.type !== "native-qa-command" ||
+    !Number.isInteger(event.data.id) ||
+    event.data.id < 1 ||
+    event.data.id > 1_000_000
+  )
+    return;
+  const { id, name, args = {} } = event.data;
+  if (commandPending) return;
+  commandPending = true;
+  try {
+    const value = await command(name, args);
+    parent.postMessage(
+      { type: "native-qa-reply", id, ok: true, value },
+      config.page_origin,
+    );
+  } catch {
+    if (name === "initialize") {
+      await controller?.dispose().catch(() => {});
+      galaxy?.free();
+      galaxy = null;
+      stopped = true;
+      clearTimeout(timer);
+    }
+    phase = "failed";
+    update();
+    parent.postMessage(
+      { type: "native-qa-reply", id, ok: false, error: "native_action_failed" },
+      config.page_origin,
+    );
+  } finally {
+    commandPending = false;
+  }
+});
+addEventListener("pagehide", () => {
+  stopped = true;
+  clearTimeout(timer);
+  void controller?.dispose();
+});
+parent.postMessage(
+  { type: "native-qa-client-ready", role },
+  config.page_origin,
+);
