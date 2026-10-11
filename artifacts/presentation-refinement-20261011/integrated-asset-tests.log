@@ -1,0 +1,31 @@
+test_affine_typos_and_nonstring_parents_are_rejected (__main__.PackTests.test_affine_typos_and_nonstring_parents_are_rejected) ... ok
+test_all_components_are_retained_by_default (__main__.PackTests.test_all_components_are_retained_by_default) ... ok
+test_animated_png_cannot_silently_lose_frames (__main__.PackTests.test_animated_png_cannot_silently_lose_frames) ... ok
+test_animation_references_durations_and_frame_budgets (__main__.PackTests.test_animation_references_durations_and_frame_budgets) ... ok
+test_bool_version_overflowing_float_and_animation_cap_are_rejected (__main__.PackTests.test_bool_version_overflowing_float_and_animation_cap_are_rejected) ... ok
+test_crop_never_silently_pads_or_fits (__main__.PackTests.test_crop_never_silently_pads_or_fits) ... ok
+test_duplicate_unused_palette_indices_roundtrip_exactly (__main__.PackTests.test_duplicate_unused_palette_indices_roundtrip_exactly) ... ok
+test_exact_native_cells_and_shared_palette_roundtrip (__main__.PackTests.test_exact_native_cells_and_shared_palette_roundtrip) ... ok
+test_existing_runtime_atlases_keep_all_indices_dimensions_and_palette (__main__.PackTests.test_existing_runtime_atlases_keep_all_indices_dimensions_and_palette) ... ok
+test_grid_requires_uniform_explicit_blocks (__main__.PackTests.test_grid_requires_uniform_explicit_blocks) ... ok
+test_input_png_palette_mismatch_is_rejected (__main__.PackTests.test_input_png_palette_mismatch_is_rejected) ... ok
+test_intentional_holes_are_distinct_from_born_solid (__main__.PackTests.test_intentional_holes_are_distinct_from_born_solid) ... ok
+test_invalid_indices_palette_alpha_and_nonfinite_json (__main__.PackTests.test_invalid_indices_palette_alpha_and_nonfinite_json) ... ok
+test_invalid_parents_and_composed_extent_are_rejected (__main__.PackTests.test_invalid_parents_and_composed_extent_are_rejected) ... ok
+test_nested_policy_typos_and_malformed_metadata_fail_cleanly (__main__.PackTests.test_nested_policy_typos_and_malformed_metadata_fail_cleanly) ... ok
+test_nonbinary_alpha_requires_explicit_loss_policy (__main__.PackTests.test_nonbinary_alpha_requires_explicit_loss_policy) ... ok
+test_palette_quantization_is_explicit_and_loss_is_counted (__main__.PackTests.test_palette_quantization_is_explicit_and_loss_is_counted) ... ok
+test_resize_has_explicit_before_after_evidence (__main__.PackTests.test_resize_has_explicit_before_after_evidence) ... ok
+test_reused_instances_charge_every_occupied_cell (__main__.PackTests.test_reused_instances_charge_every_occupied_cell) ... ok
+test_scattered_cells_use_bounded_component_scan (__main__.PackTests.test_scattered_cells_use_bounded_component_scan) ... ok
+test_solid_flood_uses_all_boundary_components (__main__.PackTests.test_solid_flood_uses_all_boundary_components) ... ok
+test_source_work_charges_every_decoded_image_before_loading (__main__.PackTests.test_source_work_charges_every_decoded_image_before_loading) ... ok
+test_stale_metrics_and_content_fingerprints_reject_modified_packs (__main__.PackTests.test_stale_metrics_and_content_fingerprints_reject_modified_packs) ... ok
+test_transforms_compose_shear_reflection_and_all_cell_corners (__main__.PackTests.test_transforms_compose_shear_reflection_and_all_cell_corners) ... ok
+test_unknown_policies_do_not_silently_fall_back (__main__.PackTests.test_unknown_policies_do_not_silently_fall_back) ... ok
+test_unpack_refuses_to_overwrite_existing_source_directory (__main__.PackTests.test_unpack_refuses_to_overwrite_existing_source_directory) ... ok
+
+----------------------------------------------------------------------
+Ran 26 tests in 0.458s
+
+OK

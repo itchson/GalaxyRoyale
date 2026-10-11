@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 493,
+  "revision": 495,
   "name": "Galaxy Royale",
-  "phase": "Foundation → playable vertical slice",
-  "updatedAt": "2026-10-11T03:04:45.651Z",
+  "phase": "Playable solo slice → content and validation",
+  "updatedAt": "2026-10-11T03:17:58.325Z",
   "tasks": [
     {
       "id": "studio",
@@ -5661,6 +5661,22 @@
         "task-06e080d9",
         "slice-review",
         "task-cf125df1"
+      ]
+    },
+    {
+      "id": "review-47f2e83e",
+      "title": "Dev Bible peer findings repaired and source checks accepted",
+      "body": "The independent Gameplay review found missing courier return-to-source claim prose and search selection lost during snapshot rerenders. Engine ca65fe922e9ff2608f3a584acb51eb7516281542 fixes both. Gameplay independently reran ten focused repair tests and strict TypeScript, pinning five committed inputs. Root integrated and ran 284 passing shell/service checks plus one Windows file-link skip. Browser search/SSE and gallery/phase observation are still underway; no physical-device acceptance is claimed.",
+      "author": "Producer",
+      "source": "Actual independent Gameplay review, Engine repair and Root integration",
+      "createdAt": "2026-10-11T03:17:39.696Z",
+      "participants": [
+        "/root/engine_research",
+        "/root/gameplay_design",
+        "/root"
+      ],
+      "taskIds": [
+        "task-4945ccc3"
       ]
     }
   ],
@@ -11792,6 +11808,26 @@
       "author": "Producer",
       "source": "Deduplicate current audit evidence and retain one explicit pending human/device audio gate",
       "createdAt": "2026-10-11T03:04:45.651Z"
+    },
+    {
+      "id": "9b02e248-61d0-4694-98aa-f488334a3314",
+      "revision": 494,
+      "kind": "review",
+      "itemId": "review-47f2e83e",
+      "title": "Dev Bible peer findings repaired and source checks accepted",
+      "author": "Producer",
+      "source": "Actual independent Gameplay review, Engine repair and Root integration",
+      "createdAt": "2026-10-11T03:17:39.696Z"
+    },
+    {
+      "id": "56b0edbd-f383-4591-8264-04dab7e21d41",
+      "revision": 495,
+      "kind": "project.update",
+      "itemId": "project",
+      "title": "Project phase: Playable solo slice → content and validation",
+      "author": "Producer",
+      "source": "Actual source review, session requirements reconciliation and current integration evidence",
+      "createdAt": "2026-10-11T03:17:58.325Z"
     }
   ],
   "runRecords": [
@@ -16187,5 +16223,6 @@
       "source": "Actual bounded local worker timeout",
       "createdAt": "2026-10-11T03:02:54.502Z"
     }
-  ]
+  ],
+  "phaseDescription": "Desktop-first Rust/WASM solo game and local Studio are implemented. Reviewed occupied-cell art, reproducible conversion, dual renderer builds and source-backed Dev Bible are integrating. Natural campaign balance, human listening, hosted update lifecycle and physical phones remain separate pending gates."
 }

@@ -1,0 +1,76 @@
+{
+  "audio": {
+    "area": "belt",
+    "biome": 0,
+    "boss": false,
+    "champion": null,
+    "combat": 0,
+    "context": "running",
+    "deathTail": false,
+    "disposed": false,
+    "enabled": true,
+    "engine": 4.259544275184605e-117,
+    "engineDuck": 1,
+    "engines": 2,
+    "hostiles": 0,
+    "hull": 0.7599999904632568,
+    "lowHull": 0,
+    "scheduledThemes": [
+      14
+    ],
+    "speed": 0,
+    "targetCombat": 0,
+    "themes": [
+      {
+        "index": 14,
+        "name": "Expanse / Scouting signal",
+        "weight": 0.9999999999999932
+      }
+    ],
+    "throttle": 0,
+    "voices": {
+      "continuous": 0,
+      "music": 2,
+      "sfx": 0
+    }
+  },
+  "backend": "webgl2",
+  "durationSeconds": 161.59869999999998,
+  "entities": 107,
+  "frameMs": {
+    "p50": 4.2000000000116415,
+    "p95": 4.300000000046566,
+    "p99": 8.400000000023283
+  },
+  "memory": {
+    "jsHeapSizeLimit": 4395630592,
+    "totalJSHeapSize": 68956678,
+    "usedJSHeapSize": 14063778
+  },
+  "particles": 0,
+  "paused": false,
+  "position": [
+    947.1151733398438,
+    -0.07910511642694473
+  ],
+  "quads": 2408,
+  "quadsRange": [
+    2404,
+    9847
+  ],
+  "renderMs": {
+    "p50": 0.4000000059604645,
+    "p95": 0.5999999940395355
+  },
+  "samples": 3600,
+  "scenario": "belt",
+  "simulationMs": {
+    "p50": 0,
+    "p95": 0.5
+  },
+  "time": 363.3220825195313,
+  "viewport": [
+    1280,
+    720
+  ]
+}
