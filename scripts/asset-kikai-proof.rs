@@ -27,7 +27,7 @@ fn main() {
     let mut scenes = Vec::new();
     for (scene_index, (name, expression, speaking, time, reduced, main, sub)) in [
         (
-            "OPR_neutral",
+            "APR_neutral",
             DoraExpression::Neutral,
             false,
             0.0,
@@ -36,7 +36,7 @@ fn main() {
             Corporation::Renko,
         ),
         (
-            "OPR_focused",
+            "APR_focused",
             DoraExpression::Focused,
             false,
             0.0,
@@ -45,7 +45,7 @@ fn main() {
             Corporation::Renko,
         ),
         (
-            "OPR_concerned",
+            "APR_concerned",
             DoraExpression::Concerned,
             false,
             0.0,
@@ -54,7 +54,7 @@ fn main() {
             Corporation::Renko,
         ),
         (
-            "OPR_pleased",
+            "APR_pleased",
             DoraExpression::Pleased,
             false,
             0.0,
@@ -63,7 +63,7 @@ fn main() {
             Corporation::Renko,
         ),
         (
-            "OPR_blink",
+            "APR_blink",
             DoraExpression::Neutral,
             false,
             4.4,
@@ -72,7 +72,7 @@ fn main() {
             Corporation::Renko,
         ),
         (
-            "OPR_speech_open",
+            "APR_speech_open",
             DoraExpression::Neutral,
             true,
             0.34,
@@ -170,7 +170,7 @@ fn main() {
         );
         icons.push(json!({"name":kind,"width":32,"height":32,"quads":body.occupied_count(),"cells":packets(&frame)}));
     }
-    let output = json!({"scope":"Actual native OPR#1337 PAN-hair/RENKO-crystal cached PixelBody/FrameBuilder extraction; posed state, flat software review only",
+    let output = json!({"scope":"Actual native APR-1337 PAN-hair/RENKO-crystal cached PixelBody/FrameBuilder extraction; posed state, flat software review only",
         "portraits":scenes,"icons":icons});
     let path = std::env::args().nth(1).expect("OutputJSONpath");
     std::fs::write(path, serde_json::to_string(&output).unwrap()).unwrap();

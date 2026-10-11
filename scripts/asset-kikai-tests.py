@@ -74,7 +74,7 @@ class KikaiTests(unittest.TestCase):
         data=json.loads((ROOT/'assets/narrative/dora-initial-mission.json').read_text(encoding='utf-8'))
         self.assertEqual([s['stage'] for s in data['stages']],list(range(7)))
         self.assertEqual(data['character']['full_name'],'DORA-PAN-RENKO-1337')
-        self.assertEqual(data['character']['speaker'],'OPR#1337')
+        self.assertEqual(data['character']['speaker'],'APR-1337')
         self.assertEqual(data['character']['main_corporation'],'PAN')
         self.assertEqual(data['character']['sub_corporation'],'RENKO')
         seen=set()

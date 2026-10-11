@@ -256,7 +256,7 @@ fn horn_color(base: u32, corporation: Corporation) -> u32 {
     u32::from_le_bytes([r, g, b, a])
 }
 
-/// OPR#1337 has PAN green hair and RENKO red crystals, independent of preview defaults.
+/// APR-1337 has PAN green hair and RENKO red crystals, independent of preview defaults.
 pub fn append_dora(
     frame: &mut FrameBuilder,
     input: &DoraInput,
