@@ -1,0 +1,353 @@
+[
+  {
+    "data": {
+      "pixelKind": "portrait",
+      "pixelValue": "9",
+      "portraitExpression": "0",
+      "portraitKind": "0",
+      "portraitMain": "0",
+      "portraitSpeaking": "false",
+      "portraitSub": "0"
+    },
+    "label": "DORA profile: GREEN hair, GREEN crystals",
+    "text": "DORA-PAN-PAN\n\nLICENSE / PENDING"
+  },
+  {
+    "data": {
+      "pixelKind": "portrait",
+      "pixelValue": "9",
+      "portraitExpression": "0",
+      "portraitKind": "0",
+      "portraitMain": "0",
+      "portraitSpeaking": "false",
+      "portraitSub": "1"
+    },
+    "label": "DORA profile: GREEN hair, RED crystals",
+    "text": "DORA-PAN-RENKO\n\nLICENSE / PENDING"
+  },
+  {
+    "data": {
+      "pixelKind": "portrait",
+      "pixelValue": "9",
+      "portraitExpression": "0",
+      "portraitKind": "0",
+      "portraitMain": "0",
+      "portraitSpeaking": "false",
+      "portraitSub": "2"
+    },
+    "label": "DORA profile: GREEN hair, BLUE crystals",
+    "text": "DORA-PAN-HUGO\n\nLICENSE / PENDING"
+  },
+  {
+    "data": {
+      "pixelKind": "portrait",
+      "pixelValue": "9",
+      "portraitExpression": "0",
+      "portraitKind": "0",
+      "portraitMain": "1",
+      "portraitSpeaking": "false",
+      "portraitSub": "0"
+    },
+    "label": "DORA profile: RED hair, GREEN crystals",
+    "text": "DORA-RENKO-PAN\n\nLICENSE / PENDING"
+  },
+  {
+    "data": {
+      "pixelKind": "portrait",
+      "pixelValue": "9",
+      "portraitExpression": "0",
+      "portraitKind": "0",
+      "portraitMain": "1",
+      "portraitSpeaking": "false",
+      "portraitSub": "1"
+    },
+    "label": "DORA profile: RED hair, RED crystals",
+    "text": "DORA-RENKO-RENKO\n\nLICENSE / PENDING"
+  },
+  {
+    "data": {
+      "pixelKind": "portrait",
+      "pixelValue": "9",
+      "portraitExpression": "0",
+      "portraitKind": "0",
+      "portraitMain": "1",
+      "portraitSpeaking": "false",
+      "portraitSub": "2"
+    },
+    "label": "DORA profile: RED hair, BLUE crystals",
+    "text": "DORA-RENKO-HUGO\n\nLICENSE / PENDING"
+  },
+  {
+    "data": {
+      "pixelKind": "portrait",
+      "pixelValue": "9",
+      "portraitExpression": "0",
+      "portraitKind": "0",
+      "portraitMain": "2",
+      "portraitSpeaking": "false",
+      "portraitSub": "0"
+    },
+    "label": "DORA profile: BLUE hair, GREEN crystals",
+    "text": "DORA-HUGO-PAN\n\nLICENSE / PENDING"
+  },
+  {
+    "data": {
+      "pixelKind": "portrait",
+      "pixelValue": "9",
+      "portraitExpression": "0",
+      "portraitKind": "0",
+      "portraitMain": "2",
+      "portraitSpeaking": "false",
+      "portraitSub": "1"
+    },
+    "label": "DORA profile: BLUE hair, RED crystals",
+    "text": "DORA-HUGO-RENKO\n\nLICENSE / PENDING"
+  },
+  {
+    "data": {
+      "pixelKind": "portrait",
+      "pixelValue": "9",
+      "portraitExpression": "0",
+      "portraitKind": "0",
+      "portraitMain": "2",
+      "portraitSpeaking": "false",
+      "portraitSub": "2"
+    },
+    "label": "DORA profile: BLUE hair, BLUE crystals",
+    "text": "DORA-HUGO-HUGO\n\nLICENSE / PENDING"
+  },
+  {
+    "data": {
+      "pixelKind": "portrait",
+      "pixelValue": "9",
+      "portraitExpression": "0",
+      "portraitKind": "1",
+      "portraitMain": "0",
+      "portraitSpeaking": "false",
+      "portraitSub": "0"
+    },
+    "label": "DORO profile: GREEN hair, GREEN crystals",
+    "text": "DORO-PAN-PAN\n\nLICENSE / PENDING"
+  },
+  {
+    "data": {
+      "pixelKind": "portrait",
+      "pixelValue": "9",
+      "portraitExpression": "0",
+      "portraitKind": "1",
+      "portraitMain": "0",
+      "portraitSpeaking": "false",
+      "portraitSub": "1"
+    },
+    "label": "DORO profile: GREEN hair, RED crystals",
+    "text": "DORO-PAN-RENKO\n\nLICENSE / PENDING"
+  },
+  {
+    "data": {
+      "pixelKind": "portrait",
+      "pixelValue": "9",
+      "portraitExpression": "0",
+      "portraitKind": "1",
+      "portraitMain": "0",
+      "portraitSpeaking": "false",
+      "portraitSub": "2"
+    },
+    "label": "DORO profile: GREEN hair, BLUE crystals",
+    "text": "DORO-PAN-HUGO\n\nLICENSE / PENDING"
+  },
+  {
+    "data": {
+      "pixelKind": "portrait",
+      "pixelValue": "9",
+      "portraitExpression": "0",
+      "portraitKind": "1",
+      "portraitMain": "1",
+      "portraitSpeaking": "false",
+      "portraitSub": "0"
+    },
+    "label": "DORO profile: RED hair, GREEN crystals",
+    "text": "DORO-RENKO-PAN\n\nLICENSE / PENDING"
+  },
+  {
+    "data": {
+      "pixelKind": "portrait",
+      "pixelValue": "9",
+      "portraitExpression": "0",
+      "portraitKind": "1",
+      "portraitMain": "1",
+      "portraitSpeaking": "false",
+      "portraitSub": "1"
+    },
+    "label": "DORO profile: RED hair, RED crystals",
+    "text": "DORO-RENKO-RENKO\n\nLICENSE / PENDING"
+  },
+  {
+    "data": {
+      "pixelKind": "portrait",
+      "pixelValue": "9",
+      "portraitExpression": "0",
+      "portraitKind": "1",
+      "portraitMain": "1",
+      "portraitSpeaking": "false",
+      "portraitSub": "2"
+    },
+    "label": "DORO profile: RED hair, BLUE crystals",
+    "text": "DORO-RENKO-HUGO\n\nLICENSE / PENDING"
+  },
+  {
+    "data": {
+      "pixelKind": "portrait",
+      "pixelValue": "9",
+      "portraitExpression": "0",
+      "portraitKind": "1",
+      "portraitMain": "2",
+      "portraitSpeaking": "false",
+      "portraitSub": "0"
+    },
+    "label": "DORO profile: BLUE hair, GREEN crystals",
+    "text": "DORO-HUGO-PAN\n\nLICENSE / PENDING"
+  },
+  {
+    "data": {
+      "pixelKind": "portrait",
+      "pixelValue": "9",
+      "portraitExpression": "0",
+      "portraitKind": "1",
+      "portraitMain": "2",
+      "portraitSpeaking": "false",
+      "portraitSub": "1"
+    },
+    "label": "DORO profile: BLUE hair, RED crystals",
+    "text": "DORO-HUGO-RENKO\n\nLICENSE / PENDING"
+  },
+  {
+    "data": {
+      "pixelKind": "portrait",
+      "pixelValue": "9",
+      "portraitExpression": "0",
+      "portraitKind": "1",
+      "portraitMain": "2",
+      "portraitSpeaking": "false",
+      "portraitSub": "2"
+    },
+    "label": "DORO profile: BLUE hair, BLUE crystals",
+    "text": "DORO-HUGO-HUGO\n\nLICENSE / PENDING"
+  },
+  {
+    "data": {
+      "pixelKind": "portrait",
+      "pixelValue": "9",
+      "portraitExpression": "0",
+      "portraitKind": "2",
+      "portraitMain": "0",
+      "portraitSpeaking": "false",
+      "portraitSub": "0"
+    },
+    "label": "TALO profile: GREEN hair, GREEN crystals",
+    "text": "TALO-PAN-PAN\n\nLICENSE / PENDING"
+  },
+  {
+    "data": {
+      "pixelKind": "portrait",
+      "pixelValue": "9",
+      "portraitExpression": "0",
+      "portraitKind": "2",
+      "portraitMain": "0",
+      "portraitSpeaking": "false",
+      "portraitSub": "1"
+    },
+    "label": "TALO profile: GREEN hair, RED crystals",
+    "text": "TALO-PAN-RENKO\n\nLICENSE / PENDING"
+  },
+  {
+    "data": {
+      "pixelKind": "portrait",
+      "pixelValue": "9",
+      "portraitExpression": "0",
+      "portraitKind": "2",
+      "portraitMain": "0",
+      "portraitSpeaking": "false",
+      "portraitSub": "2"
+    },
+    "label": "TALO profile: GREEN hair, BLUE crystals",
+    "text": "TALO-PAN-HUGO\n\nLICENSE / PENDING"
+  },
+  {
+    "data": {
+      "pixelKind": "portrait",
+      "pixelValue": "9",
+      "portraitExpression": "0",
+      "portraitKind": "2",
+      "portraitMain": "1",
+      "portraitSpeaking": "false",
+      "portraitSub": "0"
+    },
+    "label": "TALO profile: RED hair, GREEN crystals",
+    "text": "TALO-RENKO-PAN\n\nLICENSE / PENDING"
+  },
+  {
+    "data": {
+      "pixelKind": "portrait",
+      "pixelValue": "9",
+      "portraitExpression": "0",
+      "portraitKind": "2",
+      "portraitMain": "1",
+      "portraitSpeaking": "false",
+      "portraitSub": "1"
+    },
+    "label": "TALO profile: RED hair, RED crystals",
+    "text": "TALO-RENKO-RENKO\n\nLICENSE / PENDING"
+  },
+  {
+    "data": {
+      "pixelKind": "portrait",
+      "pixelValue": "9",
+      "portraitExpression": "0",
+      "portraitKind": "2",
+      "portraitMain": "1",
+      "portraitSpeaking": "false",
+      "portraitSub": "2"
+    },
+    "label": "TALO profile: RED hair, BLUE crystals",
+    "text": "TALO-RENKO-HUGO\n\nLICENSE / PENDING"
+  },
+  {
+    "data": {
+      "pixelKind": "portrait",
+      "pixelValue": "9",
+      "portraitExpression": "0",
+      "portraitKind": "2",
+      "portraitMain": "2",
+      "portraitSpeaking": "false",
+      "portraitSub": "0"
+    },
+    "label": "TALO profile: BLUE hair, GREEN crystals",
+    "text": "TALO-HUGO-PAN\n\nLICENSE / PENDING"
+  },
+  {
+    "data": {
+      "pixelKind": "portrait",
+      "pixelValue": "9",
+      "portraitExpression": "0",
+      "portraitKind": "2",
+      "portraitMain": "2",
+      "portraitSpeaking": "false",
+      "portraitSub": "1"
+    },
+    "label": "TALO profile: BLUE hair, RED crystals",
+    "text": "TALO-HUGO-RENKO\n\nLICENSE / PENDING"
+  },
+  {
+    "data": {
+      "pixelKind": "portrait",
+      "pixelValue": "9",
+      "portraitExpression": "0",
+      "portraitKind": "2",
+      "portraitMain": "2",
+      "portraitSpeaking": "false",
+      "portraitSub": "2"
+    },
+    "label": "TALO profile: BLUE hair, BLUE crystals",
+    "text": "TALO-HUGO-HUGO\n\nLICENSE / PENDING"
+  }
+]

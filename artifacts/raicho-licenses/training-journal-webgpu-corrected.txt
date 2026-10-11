@@ -1,0 +1,38 @@
+- generic "Galaxy Royale game universe"
+- status
+- dialog "EXPEDITION JOURNAL":
+  - button "Close menu" [active]: X
+  - generic: HAVEN COMMAND
+  - heading "EXPEDITION JOURNAL" [level=2]
+  - paragraph: Discover sanctuaries and return to claim their rewards.
+  - paragraph: 0 discoveries / 0 relics. Each relic adds 1 hull, up to 20.
+  - heading "MISSIONS" [level=3]
+  - heading "APR-1337 / Collect 10 matching materials" [level=3]
+  - paragraph: "Collected 0/10 Coolant KESSHO. Assigned source: Ice asteroid. Collect matching tier 1 drops after the asteroid mission. Materials share cargo space and are lost on death or abandonment."
+  - button "CONTACT APR-1337"
+  - paragraph: Seek sanctuary beacons beyond Haven. Accept a delivery or bounty mission, then return for a unique relic.
+  - list
+  - heading "HOSTILE EVOLUTION" [level=3]
+  - paragraph: 24 family kills summon the first boss. Two defeated bosses summon their next generation. Unfinished queues survive retreat and RAICHO loss.
+  - heading "DART" [level=3]
+  - list:
+    - listitem: G1 / 0 defeated
+    - listitem: G2 / 0 defeated
+    - listitem: G3 / 0 defeated
+    - listitem: G4 / 0 defeated
+    - listitem: G5 / 0 defeated
+  - heading "BASTION" [level=3]
+  - list:
+    - listitem: G1 / 0 defeated
+    - listitem: G2 / 0 defeated
+    - listitem: G3 / 0 defeated
+    - listitem: G4 / 0 defeated
+    - listitem: G5 / 0 defeated
+  - heading "COIL" [level=3]
+  - list:
+    - listitem: G1 / 0 defeated
+    - listitem: G2 / 0 defeated
+    - listitem: G3 / 0 defeated
+    - listitem: G4 / 0 defeated
+    - listitem: G5 / 0 defeated
+  - status "Progress saved automatically on this device.": Saved on this device.

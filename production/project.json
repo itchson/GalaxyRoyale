@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 599,
+  "revision": 613,
   "name": "Galaxy Royale",
   "phase": "Playable solo slice → content and validation",
-  "updatedAt": "2026-10-11T06:15:30.344Z",
+  "updatedAt": "2026-10-11T06:40:30.155Z",
   "tasks": [
     {
       "id": "studio",
@@ -5153,10 +5153,10 @@
     {
       "id": "task-221245db",
       "title": "DORA native portrait and guided initial mission",
-      "description": "Latest user steering: Kikai lore and character onboarding; bounded implementation with real evidence. Full campaign balance and physical testing remain separate gates. Integrated source and native/CPU checks are recorded; current renderer/browser, natural play and human/device validation remain separately scoped.",
+      "description": "Latest user steering: Kikai lore and character onboarding; bounded implementation with real evidence. Full campaign balance and physical testing remain separate gates. Integrated source and native/CPU checks are recorded; current renderer/browser, natural play and human/device validation remain separately scoped. Current scoped browser/native evidence is pinned in EVIDENCE_SCOPE.md; natural pacing, human style acceptance and physical devices remain separately recorded.",
       "department": "art/audio",
       "owner": "/root/production_research",
-      "status": "review",
+      "status": "complete",
       "priority": "high",
       "dependencies": [],
       "acceptanceCriteria": [
@@ -5166,7 +5166,7 @@
         },
         {
           "text": "New training: destroy10 asteroids of anytype, then collect10 specific asteroid materials, bank them and upgrade the main corporation equipped starter once. Counters and actions are authoritative and saved.",
-          "met": false
+          "met": true
         },
         {
           "text": "Generated reference and native conversion/animation provenance are documented and visually reviewed.",
@@ -5178,12 +5178,27 @@
           "label": "Actual integration review",
           "kind": "review",
           "path": "artifacts/opr-integration/review.md"
+        },
+        {
+          "label": "Exact capture revisions and acceptance limits",
+          "kind": "artifact",
+          "path": "artifacts/raicho-licenses/EVIDENCE_SCOPE.md"
+        },
+        {
+          "label": "Actual APR mission text and native portrait",
+          "kind": "artifact",
+          "path": "artifacts/raicho-licenses/apr-training-webgpu-corrected.jpg"
+        },
+        {
+          "label": "Independent real-Game HUD review",
+          "kind": "artifact",
+          "path": "work/training-hud-copy-review/REVIEW.md"
         }
       ],
       "blocker": "",
-      "revision": 3,
+      "revision": 4,
       "createdAt": "2026-10-11T04:40:15.498Z",
-      "updatedAt": "2026-10-11T05:51:22.828Z"
+      "updatedAt": "2026-10-11T06:40:29.987Z"
     },
     {
       "id": "task-44c5f7a0",
@@ -5462,31 +5477,52 @@
     {
       "id": "task-7a4df889",
       "title": "Native player portraits for long, spiky and crew-cut Kikai hair",
-      "description": "Distinct generated DORO short-spiky and TALO crew-cut references are converted into96×128 native pixel packs. Engine implements independent type/hair/crystal transforms. All27 combinations, clipping, budgets and actual browser preview remain acceptance gates.",
+      "description": "Distinct generated DORO short-spiky and TALO crew-cut references are converted into96×128 native pixel packs. Engine implements independent type/hair/crystal transforms. All27 combinations, clipping, budgets and actual browser preview remain acceptance gates. Current scoped browser/native evidence is pinned in EVIDENCE_SCOPE.md; natural pacing, human style acceptance and physical devices remain separately recorded.",
       "department": "art/audio",
       "owner": "/root/production_research",
-      "status": "active",
+      "status": "review",
       "priority": "high",
       "dependencies": [],
       "acceptanceCriteria": [
         {
           "text": "DORA long hair, DORO short spiky hair, TALO crew cut; consistent approved high-detail pixel style.",
-          "met": false
+          "met": true
         },
         {
           "text": "Main manufacturer hair color and independent sub-manufacturer crystal-horn color.",
-          "met": false
+          "met": true
         },
         {
           "text": "Original type-appropriate portrait layers with animation, fractional transforms and actual conversion/extraction evidence.",
-          "met": false
+          "met": true
         }
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "label": "Exact capture revisions and acceptance limits",
+          "kind": "artifact",
+          "path": "artifacts/raicho-licenses/EVIDENCE_SCOPE.md"
+        },
+        {
+          "label": "Actual distinct DORO WebGPU portrait",
+          "kind": "artifact",
+          "path": "artifacts/raicho-licenses/doro-hugo-pan-webgpu-1280.jpg"
+        },
+        {
+          "label": "Actual distinct TALO WebGPU portrait",
+          "kind": "artifact",
+          "path": "artifacts/raicho-licenses/talo-renko-hugo-webgpu-1280.jpg"
+        },
+        {
+          "label": "Real profile-cell checks",
+          "kind": "artifact",
+          "path": "work/live-license-profiles-assets.log"
+        }
+      ],
       "blocker": "",
-      "revision": 2,
+      "revision": 3,
       "createdAt": "2026-10-11T05:07:01.583Z",
-      "updatedAt": "2026-10-11T05:51:22.802Z"
+      "updatedAt": "2026-10-11T06:40:29.942Z"
     },
     {
       "id": "task-716d9437",
@@ -5526,10 +5562,10 @@
     {
       "id": "task-0cf909b6",
       "title": "Live procedural droid license portrait",
-      "description": "Creator labels only DORA/DORO/TALO. Native profile portrait reflects selected type/main/sub in real time and is reused on the issued license. Preserve APR guide and player progression.",
+      "description": "Creator labels only DORA/DORO/TALO. Native profile portrait reflects selected type/main/sub in real time and is reused on the issued license. Preserve APR guide and player progression. Current scoped browser/native evidence is pinned in EVIDENCE_SCOPE.md; natural pacing, human style acceptance and physical devices remain separately recorded.",
       "department": "engine/UX",
       "owner": "/root",
-      "status": "review",
+      "status": "complete",
       "priority": "high",
       "dependencies": [],
       "acceptanceCriteria": [
@@ -5543,11 +5579,11 @@
         },
         {
           "text": "Desktop and compact layouts contain portrait, controls and scrolling text without overlapping actions; actual renderer screenshots.",
-          "met": false
+          "met": true
         },
         {
           "text": "Issue/save/reload retains the exact identity and single starter grant.",
-          "met": false
+          "met": true
         }
       ],
       "evidence": [
@@ -5570,17 +5606,37 @@
           "label": "Actual profile asset11 checks",
           "kind": "artifact",
           "path": "work/live-license-profiles-assets.log"
+        },
+        {
+          "label": "Exact capture revisions and acceptance limits",
+          "kind": "artifact",
+          "path": "artifacts/raicho-licenses/EVIDENCE_SCOPE.md"
+        },
+        {
+          "label": "Actual 27 live appearance selections",
+          "kind": "artifact",
+          "path": "artifacts/raicho-licenses/creator-27-combinations.json"
+        },
+        {
+          "label": "Corrected 320x180 creator",
+          "kind": "artifact",
+          "path": "artifacts/raicho-licenses/creator-webgl2-320-final.jpg"
+        },
+        {
+          "label": "Current issued-license reload",
+          "kind": "artifact",
+          "path": "artifacts/raicho-licenses/issued-license-webgl2-reload-current.jpg"
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 3,
       "createdAt": "2026-10-11T05:51:22.847Z",
-      "updatedAt": "2026-10-11T06:15:30.224Z"
+      "updatedAt": "2026-10-11T06:40:29.918Z"
     },
     {
       "id": "task-63265693",
       "title": "APR first asteroid and starter-upgrade training missions",
-      "description": "Replace one-rock/additional-ability tutorial with10 any-type asteroid kills followed by10 named materials from specified asteroid varieties. Corporation selects passive/offensive/defensive factory starter. Firstupgrade is rank1→2, available at ship level1. Materials bank on physical return and carried materials are lost on death. Diagnostic scenes never complete missions.",
+      "description": "Replace one-rock/additional-ability tutorial with10 any-type asteroid kills followed by10 named materials from specified asteroid varieties. Corporation selects passive/offensive/defensive factory starter. Firstupgrade is rank1→2, available at ship level1. Materials bank on physical return and carried materials are lost on death. Diagnostic scenes never complete missions. Current scoped browser/native evidence is pinned in EVIDENCE_SCOPE.md; natural pacing, human style acceptance and physical devices remain separately recorded.",
       "department": "gameplay",
       "owner": "/root/gameplay_design",
       "status": "review",
@@ -5632,20 +5688,50 @@
           "label": "Actual profile asset11 checks",
           "kind": "artifact",
           "path": "work/live-license-profiles-assets.log"
+        },
+        {
+          "label": "Actual missing native counter text in Journal",
+          "kind": "artifact",
+          "path": "artifacts/raicho-licenses/training-journal-webgpu-1280.txt"
+        },
+        {
+          "label": "Exact capture revisions and acceptance limits",
+          "kind": "artifact",
+          "path": "artifacts/raicho-licenses/EVIDENCE_SCOPE.md"
+        },
+        {
+          "label": "Independent sixteen-test native HUD review",
+          "kind": "artifact",
+          "path": "work/training-hud-copy-review/REVIEW.md"
+        },
+        {
+          "label": "Current real native532 execution",
+          "kind": "artifact",
+          "path": "work/training-hud-root-workspace.log"
+        },
+        {
+          "label": "Corrected actual Journal and assigned source",
+          "kind": "artifact",
+          "path": "artifacts/raicho-licenses/training-journal-webgpu-corrected.txt"
+        },
+        {
+          "label": "Actual schema6 tutorial and reloaded backend",
+          "kind": "artifact",
+          "path": "artifacts/raicho-licenses/training-profile-webgl2-reloaded.txt"
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 4,
       "createdAt": "2026-10-11T05:51:22.873Z",
-      "updatedAt": "2026-10-11T06:15:30.249Z"
+      "updatedAt": "2026-10-11T06:40:29.956Z"
     },
     {
       "id": "task-cf5d37d9",
       "title": "KIKAI / KESSHO / RAICHO lore lexicon and starter models",
-      "description": "Japanese-inspired ASCII game labels and display models PAN HIKARI, RENKO HIBANA, HUGO MAMORI. Preserve save IDs, per-hull XP and the separate champion Bulwark. Current runtime and DevBible wording are integrated.",
+      "description": "Japanese-inspired ASCII game labels and display models PAN HIKARI, RENKO HIBANA, HUGO MAMORI. Preserve save IDs, per-hull XP and the separate champion Bulwark. Current runtime and DevBible wording are integrated. Current scoped browser/native evidence is pinned in EVIDENCE_SCOPE.md; natural pacing, human style acceptance and physical devices remain separately recorded.",
       "department": "Lore / UX",
       "owner": "/root",
-      "status": "review",
+      "status": "complete",
       "priority": "normal",
       "dependencies": [],
       "acceptanceCriteria": [
@@ -5659,20 +5745,30 @@
         },
         {
           "text": "Actual latest browser menus/Wiki show readable updated names.",
-          "met": false
+          "met": true
         }
       ],
       "evidence": [
         {
-          "label": "Seven real lore consistency tests",
+          "label": "Exact capture revisions and acceptance limits",
           "kind": "artifact",
-          "path": "work/lore-wiki-focus.log"
+          "path": "artifacts/raicho-licenses/EVIDENCE_SCOPE.md"
+        },
+        {
+          "label": "Actual visible DevBible lexicon",
+          "kind": "artifact",
+          "path": "artifacts/raicho-licenses/dev-bible-lexicon-1280.jpg"
+        },
+        {
+          "label": "Seven actual lexicon tests",
+          "kind": "artifact",
+          "path": "work/lore-lexicon-tests.log"
         }
       ],
       "blocker": "",
-      "revision": 1,
+      "revision": 2,
       "createdAt": "2026-10-11T06:15:30.281Z",
-      "updatedAt": "2026-10-11T06:15:30.281Z"
+      "updatedAt": "2026-10-11T06:40:30.017Z"
     }
   ],
   "reviews": [
@@ -6637,6 +6733,66 @@
           "label": "Art/TS independent repaired findings",
           "kind": "artifact",
           "path": "work/live-license-integration-review/REVIEW.md"
+        }
+      ]
+    },
+    {
+      "id": "review-504bd4af",
+      "title": "Live Journal found static training text despite saved counters",
+      "body": "Actual latest WebGPU browser: issued DORO-HUGO-PAN-14EC65F892A470E1, retained exact license on reload with only Guard CoilR1; held-left normal flight exited Haven to541units, then physically returned to73units. Journal stage2 displayed the correct mission but its description omitted0/10 and material/asteroid details. Root mock guide fixture supplied a counter-bearing description and did not cover real native onboarding_hud output. Criterion is reopened; Gameplay owns a bounded identity.rs/native-HUD description correction and native regression. Earlier transaction, migration and real-event tests remain scoped valid. No earned ten-kill/material progression is claimed.",
+      "author": "/root",
+      "source": "Actual WebGPU Journal observation on31496be, not a mocked counter payload",
+      "createdAt": "2026-10-11T06:27:55.673Z",
+      "participants": [
+        "/root",
+        "/root/gameplay_design"
+      ],
+      "taskIds": [
+        "task-63265693"
+      ],
+      "evidence": [
+        {
+          "label": "Actual pre-fix Journal",
+          "kind": "artifact",
+          "path": "artifacts/raicho-licenses/training-journal-webgpu-1280.txt"
+        }
+      ]
+    },
+    {
+      "id": "review-c5db75ad",
+      "title": "Corrected native tutorial descriptions and actual RAICHO/license integration",
+      "body": "Actual asynchronous contribution review. Gameplay froze the two-file HUD-only correction62f82d1; Engine independently ran16 real native training tests and pinned the exact source without a blocker. Root integrated the patch, passed532 native tests,344 shell passes/1 skip, TS and native/dual-WASM Clippy, rebuilt both normal renderers and applied the official PWA update at Haven. Actual Journal and APR text now show0/10 Coolant KESSHO and Ice asteroid. The same issued DORO/HUGO/PAN license, HUGO MAMORI and single Guard CoilR1 survived the observed reload; PROFILE state and explicit WebGL2 identification are captured. The observed saved10/10 asteroid state is not claimed as a fully watched earned tutorial or pacing measurement. Actual 27 creator selections, compact header correction, three independently modeled silhouettes and DevBible lexicon were inspected. Earlier short-height overlap and static-Journal findings are retained as negative evidence. Portrait/function and lexicon tasks are complete within their stated scope; material-run/pacing, art style feedback, audio comfort and physical tests remain Review. Spark audit was interrupted without a returned report and receives no review credit.",
+      "author": "/root",
+      "source": "Frozen specialist reviews, actual dual-renderer browser observations and current local checks, 2026-10-11",
+      "createdAt": "2026-10-11T06:40:30.032Z",
+      "participants": [
+        "/root",
+        "/root/gameplay_design",
+        "/root/engine_research",
+        "/root/production_research"
+      ],
+      "taskIds": [
+        "task-0cf909b6",
+        "task-7a4df889",
+        "task-63265693",
+        "task-221245db",
+        "task-cf5d37d9"
+      ],
+      "evidence": [
+        {
+          "label": "Exact capture revisions and acceptance limits",
+          "kind": "artifact",
+          "path": "artifacts/raicho-licenses/EVIDENCE_SCOPE.md"
+        },
+        {
+          "label": "Exact independent HUD correction review",
+          "kind": "artifact",
+          "path": "work/training-hud-copy-review/REVIEW.md"
+        },
+        {
+          "label": "Corrected actual tutorial",
+          "kind": "artifact",
+          "path": "artifacts/raicho-licenses/training-journal-webgpu-corrected.txt"
         }
       ]
     }
@@ -8065,6 +8221,73 @@
       ],
       "url": "https://galaxy-royale-itchson.itchson.chatgpt.site/",
       "knownIssues": "New authorized private IAB tab failed on initial navigation with net::ERR_FAILED. Closing its generated error document was rejected by Browser Use URL policy. No further access, security changes, alternate browser or policy bypass attempted. Private-host reload/update remains pending. Sites error-only worker logs for the last10 minutes returned no events."
+    },
+    {
+      "id": "build-8bed8a17",
+      "title": "RAICHO licenses and counted-training current local testing build",
+      "body": "Normal dual-renderer game/PWA rebuilt from the pinned testing branch. Runtime source and package hashes, individual capture revisions and negative findings are in the scoped browser evidence. Local progress and schema6 observed through public game controls; private hosted release and remote CI not included.",
+      "author": "/root",
+      "source": "Frozen specialist reviews, actual dual-renderer browser observations and current local checks, 2026-10-11",
+      "createdAt": "2026-10-11T06:40:30.155Z",
+      "revision": "edbe0f28fec793ce03ffec839c9f1c6bbe560ab6",
+      "evidence": [
+        {
+          "label": "Exact capture revisions and acceptance limits",
+          "kind": "artifact",
+          "path": "artifacts/raicho-licenses/EVIDENCE_SCOPE.md"
+        },
+        {
+          "label": "Normal build",
+          "kind": "artifact",
+          "path": "work/training-hud-preview-build.log"
+        },
+        {
+          "label": "Actual532 tests",
+          "kind": "artifact",
+          "path": "work/training-hud-root-workspace.log"
+        },
+        {
+          "label": "Actual corrected shell result",
+          "kind": "artifact",
+          "path": "work/training-hud-root-shell-corrected.log"
+        }
+      ],
+      "checks": [
+        {
+          "name": "Native workspace532 tests",
+          "result": "pass"
+        },
+        {
+          "name": "Shell344 pass /1 declared skip",
+          "result": "pass"
+        },
+        {
+          "name": "TypeScript and native/WebGPU/WebGL2 strict warnings",
+          "result": "pass"
+        },
+        {
+          "name": "Actual live portrait choices, issued license, PWA update and both backends",
+          "result": "pass"
+        },
+        {
+          "name": "Actual Journal/APR named material count and explicit WebGL2 reload",
+          "result": "pass"
+        },
+        {
+          "name": "Complete naturally earned training and loot pacing",
+          "result": "not_run"
+        },
+        {
+          "name": "Physical phones and30-minute performance soak",
+          "result": "not_run"
+        },
+        {
+          "name": "Private hosted release of this revision",
+          "result": "not_run"
+        }
+      ],
+      "url": "http://127.0.0.1:4173/?qa=1&renderer=webgpu",
+      "knownIssues": "Human audio/style acceptance, full natural material/upgrade run, campaign balance and physical-device/performance validation remain open. Spark audit returned no report. Captures are revision-scoped, not universal layout proof."
     }
   ],
   "feedback": [],
@@ -14058,6 +14281,146 @@
       "author": "/root",
       "source": "Actual integrated source checks and asynchronous specialist handoffs, 2026-10-11",
       "createdAt": "2026-10-11T06:15:30.344Z"
+    },
+    {
+      "id": "fa1d37e0-0059-4dd0-8d88-ff2e17275b06",
+      "revision": 600,
+      "kind": "task.update",
+      "itemId": "task-63265693",
+      "title": "APR first asteroid and starter-upgrade training missions",
+      "author": "/root",
+      "source": "Actual WebGPU Journal observation on31496be, not a mocked counter payload",
+      "createdAt": "2026-10-11T06:27:55.657Z"
+    },
+    {
+      "id": "d20501db-7702-4c6d-a7ee-7553ef06645d",
+      "revision": 601,
+      "kind": "review",
+      "itemId": "review-504bd4af",
+      "title": "Live Journal found static training text despite saved counters",
+      "author": "/root",
+      "source": "Actual WebGPU Journal observation on31496be, not a mocked counter payload",
+      "createdAt": "2026-10-11T06:27:55.673Z"
+    },
+    {
+      "id": "5b1b8aa4-a15a-4ac3-a13c-9b43a81cdfcf",
+      "revision": 602,
+      "kind": "run",
+      "itemId": "run-c6d80f46",
+      "title": "Gameplay specialist · running",
+      "author": "/root",
+      "source": "Actual WebGPU Journal observation on31496be, not a mocked counter payload",
+      "createdAt": "2026-10-11T06:27:55.698Z"
+    },
+    {
+      "id": "7a759416-8b7e-45eb-8398-e773331e554f",
+      "revision": 603,
+      "kind": "task.update",
+      "itemId": "task-0cf909b6",
+      "title": "Live procedural droid license portrait",
+      "author": "/root",
+      "source": "Frozen specialist reviews, actual dual-renderer browser observations and current local checks, 2026-10-11",
+      "createdAt": "2026-10-11T06:40:29.918Z"
+    },
+    {
+      "id": "1f675b44-1acf-4903-935d-c8e89ff76636",
+      "revision": 604,
+      "kind": "task.update",
+      "itemId": "task-7a4df889",
+      "title": "Native player portraits for long, spiky and crew-cut Kikai hair",
+      "author": "/root",
+      "source": "Frozen specialist reviews, actual dual-renderer browser observations and current local checks, 2026-10-11",
+      "createdAt": "2026-10-11T06:40:29.942Z"
+    },
+    {
+      "id": "60a7f175-1c67-405f-9376-aada0a5e6a6c",
+      "revision": 605,
+      "kind": "task.update",
+      "itemId": "task-63265693",
+      "title": "APR first asteroid and starter-upgrade training missions",
+      "author": "/root",
+      "source": "Frozen specialist reviews, actual dual-renderer browser observations and current local checks, 2026-10-11",
+      "createdAt": "2026-10-11T06:40:29.956Z"
+    },
+    {
+      "id": "dfdd72ff-0eaf-4878-a297-8b1e6e30a9d5",
+      "revision": 606,
+      "kind": "task.update",
+      "itemId": "task-221245db",
+      "title": "DORA native portrait and guided initial mission",
+      "author": "/root",
+      "source": "Frozen specialist reviews, actual dual-renderer browser observations and current local checks, 2026-10-11",
+      "createdAt": "2026-10-11T06:40:29.987Z"
+    },
+    {
+      "id": "fd6b6f18-5a5b-4a3d-8d44-b38c04b4aec2",
+      "revision": 607,
+      "kind": "task.update",
+      "itemId": "task-cf5d37d9",
+      "title": "KIKAI / KESSHO / RAICHO lore lexicon and starter models",
+      "author": "/root",
+      "source": "Frozen specialist reviews, actual dual-renderer browser observations and current local checks, 2026-10-11",
+      "createdAt": "2026-10-11T06:40:30.017Z"
+    },
+    {
+      "id": "3a5baffb-055f-4374-989e-ecab0dad9e46",
+      "revision": 608,
+      "kind": "review",
+      "itemId": "review-c5db75ad",
+      "title": "Corrected native tutorial descriptions and actual RAICHO/license integration",
+      "author": "/root",
+      "source": "Frozen specialist reviews, actual dual-renderer browser observations and current local checks, 2026-10-11",
+      "createdAt": "2026-10-11T06:40:30.032Z"
+    },
+    {
+      "id": "c5d6e62a-cf2e-48b8-a276-1e1890873fd0",
+      "revision": 609,
+      "kind": "run",
+      "itemId": "run-af8da375",
+      "title": "Gameplay specialist · completed",
+      "author": "/root",
+      "source": "Frozen specialist reviews, actual dual-renderer browser observations and current local checks, 2026-10-11",
+      "createdAt": "2026-10-11T06:40:30.065Z"
+    },
+    {
+      "id": "8e3c7cae-acd3-40b7-9b54-97dc27fe342a",
+      "revision": 610,
+      "kind": "run",
+      "itemId": "run-39aa92e8",
+      "title": "Engine and QA specialist · completed",
+      "author": "/root",
+      "source": "Frozen specialist reviews, actual dual-renderer browser observations and current local checks, 2026-10-11",
+      "createdAt": "2026-10-11T06:40:30.084Z"
+    },
+    {
+      "id": "4552b8b8-e0d9-4c7d-8df2-c035010bfd66",
+      "revision": 611,
+      "kind": "run",
+      "itemId": "run-8bd3b5ef",
+      "title": "Spark save audit · interrupted",
+      "author": "/root",
+      "source": "Frozen specialist reviews, actual dual-renderer browser observations and current local checks, 2026-10-11",
+      "createdAt": "2026-10-11T06:40:30.109Z"
+    },
+    {
+      "id": "9fa8eb0c-58db-4603-9afd-021447d4c211",
+      "revision": 612,
+      "kind": "run",
+      "itemId": "run-60bda288",
+      "title": "Integration producer · completed",
+      "author": "/root",
+      "source": "Frozen specialist reviews, actual dual-renderer browser observations and current local checks, 2026-10-11",
+      "createdAt": "2026-10-11T06:40:30.139Z"
+    },
+    {
+      "id": "f5c58e98-3cd5-466b-a69c-9afdd4d6e066",
+      "revision": 613,
+      "kind": "build",
+      "itemId": "build-8bed8a17",
+      "title": "RAICHO licenses and counted-training current local testing build",
+      "author": "/root",
+      "source": "Frozen specialist reviews, actual dual-renderer browser observations and current local checks, 2026-10-11",
+      "createdAt": "2026-10-11T06:40:30.155Z"
     }
   ],
   "runRecords": [
@@ -19080,6 +19443,124 @@
       "author": "/root",
       "source": "Actual integrated source checks and asynchronous specialist handoffs, 2026-10-11",
       "createdAt": "2026-10-11T06:15:30.344Z"
+    },
+    {
+      "id": "run-c6d80f46",
+      "title": "Gameplay specialist · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Gameplay specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T06:27:55.686Z",
+      "taskIds": [
+        "task-63265693"
+      ],
+      "summary": "Bounded follow-up correcting actual native mission descriptions and real HUD tests after Root browser found missing counters. Transaction/XP/schema unchanged.",
+      "evidence": [
+        {
+          "label": "Actual new assignment",
+          "kind": "note",
+          "details": "Root live Journal observation and direct follow-up to Gameplay; no fabricated running state."
+        }
+      ],
+      "author": "/root",
+      "source": "Actual WebGPU Journal observation on31496be, not a mocked counter payload",
+      "createdAt": "2026-10-11T06:27:55.698Z"
+    },
+    {
+      "id": "run-af8da375",
+      "title": "Gameplay specialist · completed",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Gameplay specialist",
+      "state": "completed",
+      "observedAt": "2026-10-11T06:40:30.045Z",
+      "taskIds": [
+        "task-0cf909b6",
+        "task-63265693",
+        "task-cf5d37d9"
+      ],
+      "summary": "Exact bounded native HUD-copy correction62f82d1 handed off;16 focused tests and source-only limits recorded.",
+      "evidence": [
+        {
+          "label": "Actual scoped contribution",
+          "kind": "artifact",
+          "path": "work/training-hud-copy/HANDOFF.md"
+        }
+      ],
+      "author": "/root",
+      "source": "Frozen specialist reviews, actual dual-renderer browser observations and current local checks, 2026-10-11",
+      "createdAt": "2026-10-11T06:40:30.065Z"
+    },
+    {
+      "id": "run-39aa92e8",
+      "title": "Engine and QA specialist · completed",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Engine and QA specialist",
+      "state": "completed",
+      "observedAt": "2026-10-11T06:40:30.073Z",
+      "taskIds": [
+        "task-0cf909b6",
+        "task-63265693",
+        "task-cf5d37d9"
+      ],
+      "summary": "Independent exact-candidate HUD review and16 actual native tests completed, no blocker; no browser/performance claim.",
+      "evidence": [
+        {
+          "label": "Actual scoped contribution",
+          "kind": "artifact",
+          "path": "work/training-hud-copy-review/REVIEW.md"
+        }
+      ],
+      "author": "/root",
+      "source": "Frozen specialist reviews, actual dual-renderer browser observations and current local checks, 2026-10-11",
+      "createdAt": "2026-10-11T06:40:30.084Z"
+    },
+    {
+      "id": "run-8bd3b5ef",
+      "title": "Spark save audit · interrupted",
+      "agentId": "spark/kikai-storage-review",
+      "agentLabel": "Spark save audit",
+      "state": "interrupted",
+      "observedAt": "2026-10-11T06:40:30.091Z",
+      "taskIds": [
+        "task-0cf909b6",
+        "task-63265693",
+        "task-cf5d37d9"
+      ],
+      "summary": "Read-only worker attempted under exact parent permissions. Prolonged source inspection returned no final report. Root stopped only verified owned PIDs49232,8892,11956; no accepted finding or test credit.",
+      "evidence": [
+        {
+          "label": "Actual scoped contribution",
+          "kind": "artifact",
+          "path": "work/training-save-audit-task.txt"
+        }
+      ],
+      "author": "/root",
+      "source": "Frozen specialist reviews, actual dual-renderer browser observations and current local checks, 2026-10-11",
+      "createdAt": "2026-10-11T06:40:30.109Z"
+    },
+    {
+      "id": "run-60bda288",
+      "title": "Integration producer · completed",
+      "agentId": "/root",
+      "agentLabel": "Integration producer",
+      "state": "completed",
+      "observedAt": "2026-10-11T06:40:30.120Z",
+      "taskIds": [
+        "task-0cf909b6",
+        "task-63265693",
+        "task-cf5d37d9"
+      ],
+      "summary": "Scoped current source/browser integration contribution completed. Three native specialists contributed in parallel; actual capture revisions and open acceptance limits recorded. Repository publication and remote CI are separate operations.",
+      "evidence": [
+        {
+          "label": "Actual scoped contribution",
+          "kind": "artifact",
+          "path": "artifacts/raicho-licenses/EVIDENCE_SCOPE.md"
+        }
+      ],
+      "author": "/root",
+      "source": "Frozen specialist reviews, actual dual-renderer browser observations and current local checks, 2026-10-11",
+      "createdAt": "2026-10-11T06:40:30.139Z"
     }
   ],
   "phaseDescription": "Desktop-first Rust/WASM solo game and local Studio are implemented. Reviewed occupied-cell art, reproducible conversion, responsive native settings/icons and minimap, strict GitHub integration gates and source-backed Dev Bible are integrated. Natural campaign balance, human listening, owner-private update lifecycle and physical phones remain separate pending gates."

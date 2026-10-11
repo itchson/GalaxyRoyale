@@ -1,0 +1,33 @@
+0 discoveries / 0 relics. Each relic adds 1 hull, up to 20.
+
+MISSIONS
+APR-1337 / Destroy 10 asteroids
+
+Destroy ten real asteroids of any variety. Haven's tutorial belt awards no ship XP; outer asteroids retain their normal rewards.
+
+CONTACT APR-1337
+
+Seek sanctuary beacons beyond Haven. Accept a delivery or bounty mission, then return for a unique relic.
+
+HOSTILE EVOLUTION
+
+24 family kills summon the first boss. Two defeated bosses summon their next generation. Unfinished queues survive retreat and RAICHO loss.
+
+DART
+G1 / 0 defeated
+G2 / 0 defeated
+G3 / 0 defeated
+G4 / 0 defeated
+G5 / 0 defeated
+BASTION
+G1 / 0 defeated
+G2 / 0 defeated
+G3 / 0 defeated
+G4 / 0 defeated
+G5 / 0 defeated
+COIL
+G1 / 0 defeated
+G2 / 0 defeated
+G3 / 0 defeated
+G4 / 0 defeated
+G5 / 0 defeated
