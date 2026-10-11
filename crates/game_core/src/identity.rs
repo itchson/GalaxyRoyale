@@ -19,6 +19,14 @@ impl KikaiKind {
             Self::Talo => "TALO",
         }
     }
+    /// Display-only callsign prefix; persisted kind and full designation stay intact.
+    pub fn callsign_prefix(self) -> char {
+        match self {
+            Self::Dora => 'O',
+            Self::Doro => 'A',
+            Self::Talo => 'T',
+        }
+    }
     pub fn gender(self) -> &'static str {
         match self {
             Self::Dora => "Female",
@@ -225,7 +233,7 @@ pub fn hud(profile: &Profile) -> Option<IdentityHud> {
     );
     let short_designation = format!(
         "{}{}{}#{}",
-        &identity.kind.name()[..1],
+        identity.kind.callsign_prefix(),
         &corp.name()[..1],
         &identity.sub_corporation.name()[..1],
         identity.hex_id.to_ascii_uppercase()

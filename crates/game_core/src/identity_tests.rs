@@ -18,7 +18,8 @@ fn advance(game: &mut Game, input: &InputFrame, count: usize) {
 
 #[test]
 fn creation_validates_all_27_identities_and_grants_exactly_one_main_starter() {
-    for kind in ["dora", "doro", "talo"] {
+    let mut callsigns = std::collections::HashSet::new();
+    for (kind, prefix) in [("dora", 'O'), ("doro", 'A'), ("talo", 'T')] {
         for corp in ["pan", "renko", "hugo"] {
             for sub in ["pan", "renko", "hugo"] {
                 let p = create_profile(kind, corp, sub, "0123456789ABCDEF").unwrap();
@@ -60,11 +61,12 @@ fn creation_validates_all_27_identities_and_grants_exactly_one_main_starter() {
                     h.short_designation,
                     format!(
                         "{}{}{}#0123456789ABCDEF",
-                        kind[..1].to_uppercase(),
+                        prefix,
                         corp[..1].to_uppercase(),
                         sub[..1].to_uppercase()
                     )
                 );
+                assert!(callsigns.insert(h.short_designation));
                 assert_eq!(
                     p.seed,
                     create_profile(kind, corp, sub, "0123456789abcdef")
@@ -74,6 +76,7 @@ fn creation_validates_all_27_identities_and_grants_exactly_one_main_starter() {
             }
         }
     }
+    assert_eq!(callsigns.len(), 27);
     for invalid in [
         "",
         "1234",
@@ -86,6 +89,50 @@ fn creation_validates_all_27_identities_and_grants_exactly_one_main_starter() {
     assert!(create_profile("unknown", "pan", "renko", "0123456789abcdef").is_err());
     assert!(create_profile("dora", "ranko", "renko", "0123456789abcdef").is_err());
     assert!(create_profile("dora", "pan", "other", "0123456789abcdef").is_err());
+}
+
+#[test]
+fn derived_callsigns_preserve_all_saved_identity_and_progression_on_hud_and_reload() {
+    for (kind, prefix) in [("dora", 'O'), ("doro", 'A'), ("talo", 'T')] {
+        for corp in ["pan", "renko", "hugo"] {
+            for sub in ["pan", "renko", "hugo"] {
+                let mut p = create_profile(kind, corp, sub, "AbCdEf0123456789").unwrap();
+                p.currency = [7, 8, 9];
+                p.campaign.ship_xp[0] = 200;
+                p.campaign.stored_materials = [3, 2, 1, 0, 0];
+                let before = serde_json::to_value(&p).unwrap();
+                let game = Game::new(p);
+                assert_eq!(snapshot(&game), before);
+                let h = game.hud().identity.unwrap();
+                assert_eq!(
+                    h.short_designation,
+                    format!(
+                        "{}{}{}#ABCDEF0123456789",
+                        prefix,
+                        corp[..1].to_uppercase(),
+                        sub[..1].to_uppercase()
+                    )
+                );
+                assert_eq!(
+                    h.designation,
+                    format!(
+                        "{}-{}-{}-ABCDEF0123456789",
+                        kind.to_uppercase(),
+                        corp.to_uppercase(),
+                        sub.to_uppercase()
+                    )
+                );
+                assert_eq!(h.hex_id, "abcdef0123456789");
+                let reloaded = Game::new(serde_json::from_value(snapshot(&game)).unwrap());
+                assert_eq!(snapshot(&reloaded), before);
+                assert_eq!(
+                    reloaded.hud().identity.unwrap().short_designation,
+                    h.short_designation
+                );
+                assert_eq!(snapshot(&game), before);
+            }
+        }
+    }
 }
 
 #[test]
