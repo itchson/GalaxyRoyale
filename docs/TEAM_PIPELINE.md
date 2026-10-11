@@ -1,6 +1,6 @@
 # Development and integration
 
-GitHub repository: https://github.com/itchson/GalaxyRoyale. `main` is the integration branch. The existing project history is retained. The game remains a Rust/WASM desktop-first solo game; Mission Control remains private and local.
+GitHub repository: https://github.com/itchson/GalaxyRoyale. `main` is the integration branch and `codex/testing` holds the latest integrated candidate. The existing project history is retained. The game remains a Rust/WASM desktop-first solo game. Mission Control's service is bound to localhost; its tracked project ledger and source evidence are available in this public repository.
 
 ## Assignments and isolation
 
@@ -14,7 +14,7 @@ For the presentation work already running when GitHub was connected, specialists
 2. Open and attach a pull request with exact Mission Control IDs and evidence. Dependencies may use stacked branches; rebase or merge the integrated dependency before final review.
 3. Another actual agent reviews the candidate. Record its contribution, findings and resolutions; agents share one authorized GitHub identity, so internal review is not falsely represented as approval from another GitHub account.
 4. GitHub Actions executes native and shell checks on Linux and Windows, plus the dual WebGPU/WebGL2 package, serialized WASM/IndexedDB save checks and WASM warning checks. Passing CI does not establish browser visuals, audio comfort, human balance or phone performance.
-5. The producer reviews the combined source, resolves conflicts in the integration branch and runs checks appropriate to the result. Merge only a reviewed head with passing required checks. Preserve its exact SHA and link the PR/build in Mission Control.
+5. The producer reviews the combined source, resolves conflicts in `codex/testing` and runs checks appropriate to the result. Merge only a reviewed head with passing required checks. Preserve its exact SHA and link the PR/build in Mission Control. Keep one project game-preview server; stop superseded project previews before starting another and serve the latest recorded candidate. Temporary QA tools have their own recorded lifetime and are stopped after their checks.
 6. Publish the exact checked source and archive through the existing private Sites workflow. GitHub build artifacts are candidates, not automatic deployments. Keep the shipped game independent of Studio.
 
 The producer is the current integrator. Integration/review assignments rotate to a free specialist for independent scrutiny; a second imaginary always-running agent or fabricated meeting is not recorded.
