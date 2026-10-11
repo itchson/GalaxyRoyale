@@ -1,0 +1,3 @@
+Browser tab: 7, Title: "Galaxy Royale", URL: "http://meishi-collector.localhost:4173/?qa=1&renderer=webgl2".
+There has been no change in the accessibility tree.
+The focused UI element is 5 button Description: Close MEISHI card, ID: menu-close

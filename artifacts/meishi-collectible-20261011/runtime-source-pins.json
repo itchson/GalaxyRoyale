@@ -1,0 +1,29 @@
+{
+  "head": "bdecb3d126246c3aeb3b5c2f53085527bf9de32c",
+  "files": [
+    {
+      "path": "apps/game/src/meishi.ts",
+      "sha256": "315ecb2b9b1b25e055c248222a3d4ab87fad873e2f60cb61a937d4e144487edf"
+    },
+    {
+      "path": "apps/game/src/meishi.css",
+      "sha256": "f78daa2df55422f2371420541fb1f5598a115af3c53a83eefbafd451f0824963"
+    },
+    {
+      "path": "apps/game/src/pixel-ui.ts",
+      "sha256": "679f9863273a7afff941f2f41898a15dbfaecf71283090cc44f77509e9bbbb5f"
+    },
+    {
+      "path": "crates/game_web/src/meishi_art.rs",
+      "sha256": "c61bd07a6dd7da9ad6fc1d7e27f4b0d455737d97f64faf623fee9695b91ec72c"
+    },
+    {
+      "path": "crates/game_web/src/ui_scene.rs",
+      "sha256": "0815e71bb5a0bc9d9c65ae69591373291d812507b9ba28e120d9fc5fea3fb0e8"
+    },
+    {
+      "path": "crates/game_web/src/champion_patches.rs",
+      "sha256": "b139249a335a784c99bbc44f79cb46c0e273ceacecbbcfadd862af067303f55b"
+    }
+  ]
+}

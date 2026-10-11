@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 720,
+  "revision": 731,
   "name": "Galaxy Royale",
   "phase": "Playable solo slice → content and validation",
-  "updatedAt": "2026-10-11T12:23:22.368Z",
+  "updatedAt": "2026-10-11T13:06:55.231Z",
   "tasks": [
     {
       "id": "studio",
@@ -6481,6 +6481,71 @@
       "revision": 1,
       "createdAt": "2026-10-11T11:46:13.155Z",
       "updatedAt": "2026-10-11T11:46:13.155Z"
+    },
+    {
+      "id": "task-d6b739e3",
+      "title": "Collectible MEISHI art and eight recessed patch sockets",
+      "description": "Implemented collectible MEISHI native pixel card with main-manufacturer colors, separately animated existing portrait, current RAICHO/abilities/retained balances and eight designed earned-only sockets. Close remains the only action. Continuous patch scaling and bounded component admission preserve meaningful art. Root browser acceptance and independent source review attached; physical-device/soak and all-eight-earned browser progression remain explicitly untested.",
+      "department": "Art/UI/Engine",
+      "owner": "/root",
+      "status": "complete",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Detailed corporation-specific native frame, portrait surround, seal and eight designed sockets with actual earned emblems.",
+          "met": true
+        },
+        {
+          "text": "Readable portrait/landscape layouts retain read-only card semantics and main/sub manufacturer independence.",
+          "met": true
+        },
+        {
+          "text": "Both backends and native quota/continuous-scaling/hidden-patch checks have actual evidence.",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Generated art direction saved with prompt/provenance",
+          "kind": "note",
+          "details": "artifacts/concepts/meishi-collectible-20261011; builtinimagegen; generatedmicrotextandvaluesnotcanon."
+        },
+        {
+          "label": "Collectible card acceptance and explicit validation limits",
+          "kind": "artifact",
+          "path": "artifacts/meishi-collectible-20261011/README.md"
+        },
+        {
+          "label": "Actual PAN card in WebGPU",
+          "kind": "artifact",
+          "path": "artifacts/meishi-collectible-20261011/pan-webgpu-1280.png"
+        },
+        {
+          "label": "Actual PAN card in WebGL2",
+          "kind": "artifact",
+          "path": "artifacts/meishi-collectible-20261011/pan-webgl2-1280.png"
+        },
+        {
+          "label": "Independent source review",
+          "kind": "artifact",
+          "path": "artifacts/meishi-collectible-20261011/independent-review.md"
+        },
+        {
+          "label": "Final Close-clearance review",
+          "kind": "artifact",
+          "path": "artifacts/meishi-collectible-20261011/close-clearance-review.md"
+        },
+        {
+          "label": "Normal tested build receipt",
+          "kind": "artifact",
+          "path": "artifacts/meishi-collectible-20261011/tested-build.json"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-11T12:41:11.160Z",
+      "updatedAt": "2026-10-11T13:05:02.957Z"
     }
   ],
   "reviews": [
@@ -7856,6 +7921,56 @@
           "label": "Exact tested source/package receipt",
           "kind": "note",
           "path": "artifacts/meishi-20261011/standalone-tested-build.json"
+        }
+      ]
+    },
+    {
+      "id": "review-b2ccd6ef",
+      "title": "Collectible MEISHI: native art, earned-only sockets and responsive review",
+      "body": "Actual asynchronous contributions: Engine implemented cached corporate fittings, continuous earned-patch fit and paired quota suppression. QA independently ran 33 focused adapter tests and reviewed exact source. Production reviewed visual reference/canon and documented scoped validation. Spark read-only layout audit raised Close clearance; Root reproduced the scrolled text target intersection and reserved a seven-pixel clearance strip. Root ran 216 native renderer tests, 416 shell tests (one existing skip), strict Clippy and TypeScript, built both backends and inspected actual PAN/HUGO/RENKO cards. Final PAN responsive captures and backend diagnostics are attached. No all-eight-earned browser playthrough, physical phone or soak claim.",
+      "author": "/root",
+      "source": "Actual collectible-card implementation, independent review and browser verification",
+      "createdAt": "2026-10-11T13:05:02.814Z",
+      "participants": [
+        "/root",
+        "/root/engine_research",
+        "/root/gameplay_design",
+        "/root/production_research",
+        "spark/qwen3.8-flash-next (bounded read-only worker)"
+      ],
+      "taskIds": [
+        "task-d6b739e3"
+      ],
+      "evidence": [
+        {
+          "label": "Collectible card acceptance and explicit validation limits",
+          "kind": "artifact",
+          "path": "artifacts/meishi-collectible-20261011/README.md"
+        },
+        {
+          "label": "Actual PAN card in WebGPU",
+          "kind": "artifact",
+          "path": "artifacts/meishi-collectible-20261011/pan-webgpu-1280.png"
+        },
+        {
+          "label": "Actual PAN card in WebGL2",
+          "kind": "artifact",
+          "path": "artifacts/meishi-collectible-20261011/pan-webgl2-1280.png"
+        },
+        {
+          "label": "Independent source review",
+          "kind": "artifact",
+          "path": "artifacts/meishi-collectible-20261011/independent-review.md"
+        },
+        {
+          "label": "Final Close-clearance review",
+          "kind": "artifact",
+          "path": "artifacts/meishi-collectible-20261011/close-clearance-review.md"
+        },
+        {
+          "label": "Normal tested build receipt",
+          "kind": "artifact",
+          "path": "artifacts/meishi-collectible-20261011/tested-build.json"
         }
       ]
     }
@@ -9842,6 +9957,79 @@
       ],
       "url": "http://127.0.0.1:4173/?qa=1",
       "knownIssues": "Advanced crafted-component recipes are backlog task-1cba1e46. PAN256 dock remains offline candidate. Physical/human/performance validation remains pending. Existing active user run was preserved; update can be applied at Haven through Settings."
+    },
+    {
+      "id": "build-fec8238c",
+      "title": "Collectible MEISHI card — both browser renderers verified",
+      "body": "Corporate native card art, exactly eight earned-only sockets, animated existing portrait and a read-only Close-only layout. Normal production package bdecb3d tested through the public UI, including actual PWA update and saved QA identity continuation. Responsive screenshots and renderer diagnostics retained. Native all-earned fixture worst 45,367/60,000; no quota raise.",
+      "author": "/root",
+      "source": "Actual collectible-card implementation, independent review and browser verification",
+      "createdAt": "2026-10-11T13:05:02.834Z",
+      "revision": "bdecb3d126246c3aeb3b5c2f53085527bf9de32c",
+      "evidence": [
+        {
+          "label": "Collectible card acceptance and explicit validation limits",
+          "kind": "artifact",
+          "path": "artifacts/meishi-collectible-20261011/README.md"
+        },
+        {
+          "label": "Actual PAN card in WebGPU",
+          "kind": "artifact",
+          "path": "artifacts/meishi-collectible-20261011/pan-webgpu-1280.png"
+        },
+        {
+          "label": "Actual PAN card in WebGL2",
+          "kind": "artifact",
+          "path": "artifacts/meishi-collectible-20261011/pan-webgl2-1280.png"
+        },
+        {
+          "label": "Independent source review",
+          "kind": "artifact",
+          "path": "artifacts/meishi-collectible-20261011/independent-review.md"
+        },
+        {
+          "label": "Final Close-clearance review",
+          "kind": "artifact",
+          "path": "artifacts/meishi-collectible-20261011/close-clearance-review.md"
+        },
+        {
+          "label": "Normal tested build receipt",
+          "kind": "artifact",
+          "path": "artifacts/meishi-collectible-20261011/tested-build.json"
+        }
+      ],
+      "checks": [
+        {
+          "name": "216 native renderer tests",
+          "result": "pass"
+        },
+        {
+          "name": "416 shell tests; one existing Windows symlink skip",
+          "result": "pass"
+        },
+        {
+          "name": "TypeScript and strict native Clippy",
+          "result": "pass"
+        },
+        {
+          "name": "Normal WebGPU/WebGL2 build and actual browser cards",
+          "result": "pass"
+        },
+        {
+          "name": "Responsive card, Close clearance and keyboard scroll",
+          "result": "pass"
+        },
+        {
+          "name": "Physical phone testing / 30-minute soak",
+          "result": "not_run"
+        },
+        {
+          "name": "All-eight-earned browser progression",
+          "result": "not_run"
+        }
+      ],
+      "url": "http://127.0.0.1:4173/?qa=1&renderer=webgpu",
+      "knownIssues": "Representative native all-earned composition is measured; browser profiles have zero earned patches. Physical devices, sustained performance and subjective player readability approval remain pending."
     }
   ],
   "feedback": [],
@@ -17045,6 +17233,116 @@
       "author": "/root",
       "source": "Actual final standalone-card review and IAB browser checks, source69db89c",
       "createdAt": "2026-10-11T12:23:22.368Z"
+    },
+    {
+      "id": "8bd0bd1b-cca9-42da-9329-0b438d485946",
+      "revision": 721,
+      "kind": "task.create",
+      "itemId": "task-d6b739e3",
+      "title": "Collectible MEISHI art and eight recessed patch sockets",
+      "author": "/root",
+      "source": "User collectible-card request and actual active art implementation",
+      "createdAt": "2026-10-11T12:41:11.160Z"
+    },
+    {
+      "id": "57b5079b-bbd2-46cb-a656-f7101721b64f",
+      "revision": 722,
+      "kind": "run",
+      "itemId": "run-171e8533",
+      "title": "Native collectible art · running",
+      "author": "/root",
+      "source": "User collectible-card request and actual active art implementation",
+      "createdAt": "2026-10-11T12:41:11.183Z"
+    },
+    {
+      "id": "5588ed4e-a361-432e-8181-6f72cabe177d",
+      "revision": 723,
+      "kind": "run",
+      "itemId": "run-4320c249",
+      "title": "Collectible QA · running",
+      "author": "/root",
+      "source": "User collectible-card request and actual active art implementation",
+      "createdAt": "2026-10-11T12:41:11.204Z"
+    },
+    {
+      "id": "fa6c63db-c022-409f-bd31-4224db289fb2",
+      "revision": 724,
+      "kind": "run",
+      "itemId": "run-a1f20bc7",
+      "title": "Art canon and production docs · running",
+      "author": "/root",
+      "source": "User collectible-card request and actual active art implementation",
+      "createdAt": "2026-10-11T12:41:11.229Z"
+    },
+    {
+      "id": "c6c6b0a0-fc77-409f-9c25-34b2419a4797",
+      "revision": 725,
+      "kind": "review",
+      "itemId": "review-b2ccd6ef",
+      "title": "Collectible MEISHI: native art, earned-only sockets and responsive review",
+      "author": "/root",
+      "source": "Actual collectible-card implementation, independent review and browser verification",
+      "createdAt": "2026-10-11T13:05:02.814Z"
+    },
+    {
+      "id": "ed80790f-4ed2-430a-811b-853ff29b2137",
+      "revision": 726,
+      "kind": "build",
+      "itemId": "build-fec8238c",
+      "title": "Collectible MEISHI card — both browser renderers verified",
+      "author": "/root",
+      "source": "Actual collectible-card implementation, independent review and browser verification",
+      "createdAt": "2026-10-11T13:05:02.834Z"
+    },
+    {
+      "id": "e09522f6-b8ac-4d9e-92a7-f37679149f59",
+      "revision": 727,
+      "kind": "run",
+      "itemId": "run-bc23093e",
+      "title": "Native collectible art · completed",
+      "author": "/root",
+      "source": "Actual collectible-card implementation, independent review and browser verification",
+      "createdAt": "2026-10-11T13:05:02.871Z"
+    },
+    {
+      "id": "d0df9711-b97d-4fb6-924b-ee3e9fda64dc",
+      "revision": 728,
+      "kind": "run",
+      "itemId": "run-30d82a86",
+      "title": "Collectible QA · completed",
+      "author": "/root",
+      "source": "Actual collectible-card implementation, independent review and browser verification",
+      "createdAt": "2026-10-11T13:05:02.886Z"
+    },
+    {
+      "id": "04080104-ab7e-4667-b847-99d130797730",
+      "revision": 729,
+      "kind": "run",
+      "itemId": "run-5f04868b",
+      "title": "Spark layout audit · completed",
+      "author": "/root",
+      "source": "Actual collectible-card implementation, independent review and browser verification",
+      "createdAt": "2026-10-11T13:05:02.905Z"
+    },
+    {
+      "id": "a94d9a2b-2b98-4c56-8235-8e860140957f",
+      "revision": 730,
+      "kind": "task.update",
+      "itemId": "task-d6b739e3",
+      "title": "Collectible MEISHI art and eight recessed patch sockets",
+      "author": "/root",
+      "source": "Actual collectible-card implementation, independent review and browser verification",
+      "createdAt": "2026-10-11T13:05:02.957Z"
+    },
+    {
+      "id": "f5eddc74-b8d8-4920-bc98-f618ea29d280",
+      "revision": 731,
+      "kind": "run",
+      "itemId": "run-a06cb4b8",
+      "title": "Art canon and production docs · completed",
+      "author": "/root",
+      "source": "Actual completed bounded production documentation follow-up",
+      "createdAt": "2026-10-11T13:06:55.231Z"
     }
   ],
   "runRecords": [
@@ -23345,6 +23643,160 @@
       "author": "/root",
       "source": "Actual final standalone-card review and IAB browser checks, source69db89c",
       "createdAt": "2026-10-11T12:23:22.368Z"
+    },
+    {
+      "id": "run-171e8533",
+      "title": "Native collectible art · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Native collectible art",
+      "state": "running",
+      "observedAt": "2026-10-11T12:41:11.172Z",
+      "taskIds": [
+        "task-d6b739e3"
+      ],
+      "summary": "Authoring cachedframe/seal/socketart; testsboundedpacketandcontinuouspatchfit.",
+      "evidence": [
+        {
+          "label": "Current actual assignment",
+          "kind": "note",
+          "details": "Authoring cachedframe/seal/socketart; testsboundedpacketandcontinuouspatchfit."
+        }
+      ],
+      "author": "/root",
+      "source": "User collectible-card request and actual active art implementation",
+      "createdAt": "2026-10-11T12:41:11.183Z"
+    },
+    {
+      "id": "run-4320c249",
+      "title": "Collectible QA · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Collectible QA",
+      "state": "running",
+      "observedAt": "2026-10-11T12:41:11.194Z",
+      "taskIds": [
+        "task-d6b739e3"
+      ],
+      "summary": "Independent33adaptertestspass; found22.5logicalpatchminimumfitissue; reviewingEnginefix.",
+      "evidence": [
+        {
+          "label": "Current actual assignment",
+          "kind": "note",
+          "details": "Independent33adaptertestspass; found22.5logicalpatchminimumfitissue; reviewingEnginefix."
+        }
+      ],
+      "author": "/root",
+      "source": "User collectible-card request and actual active art implementation",
+      "createdAt": "2026-10-11T12:41:11.204Z"
+    },
+    {
+      "id": "run-a1f20bc7",
+      "title": "Art canon and production docs · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "Art canon and production docs",
+      "state": "running",
+      "observedAt": "2026-10-11T12:41:11.222Z",
+      "taskIds": [
+        "task-d6b739e3"
+      ],
+      "summary": "Reviewedactualgeneratedreference; draftingboundedcanon/implementationdocs;7wiki tests pass.",
+      "evidence": [
+        {
+          "label": "Current actual assignment",
+          "kind": "note",
+          "details": "Reviewedactualgeneratedreference; draftingboundedcanon/implementationdocs;7wiki tests pass."
+        }
+      ],
+      "author": "/root",
+      "source": "User collectible-card request and actual active art implementation",
+      "createdAt": "2026-10-11T12:41:11.229Z"
+    },
+    {
+      "id": "run-bc23093e",
+      "title": "Native collectible art · completed",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Native collectible art",
+      "state": "completed",
+      "observedAt": "2026-10-11T13:05:02.861Z",
+      "taskIds": [
+        "task-d6b739e3"
+      ],
+      "summary": "Frozen 79006424; cached corporate art, continuous scaling, quota pairing, focused native tests and Clippy completed.",
+      "evidence": [
+        {
+          "label": "Native collectible art evidence",
+          "kind": "artifact",
+          "path": "artifacts/meishi-collectible-20261011/engine-handoff.md"
+        }
+      ],
+      "author": "/root",
+      "source": "Actual collectible-card implementation, independent review and browser verification",
+      "createdAt": "2026-10-11T13:05:02.871Z"
+    },
+    {
+      "id": "run-30d82a86",
+      "title": "Collectible QA · completed",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Collectible QA",
+      "state": "completed",
+      "observedAt": "2026-10-11T13:05:02.880Z",
+      "taskIds": [
+        "task-d6b739e3"
+      ],
+      "summary": "Independent 33 focused tests and exact native source review; Close-clearance follow-up found no scoped blocker.",
+      "evidence": [
+        {
+          "label": "Collectible QA evidence",
+          "kind": "artifact",
+          "path": "artifacts/meishi-collectible-20261011/independent-review.md"
+        }
+      ],
+      "author": "/root",
+      "source": "Actual collectible-card implementation, independent review and browser verification",
+      "createdAt": "2026-10-11T13:05:02.886Z"
+    },
+    {
+      "id": "run-5f04868b",
+      "title": "Spark layout audit · completed",
+      "agentId": "/root/spark_layout",
+      "agentLabel": "Spark layout audit",
+      "state": "completed",
+      "observedAt": "2026-10-11T13:05:02.896Z",
+      "taskIds": [
+        "task-d6b739e3"
+      ],
+      "summary": "Installed Spark worker completed read-only layout review. Root verified the scrolling concern and fixed Close clearance; no server or source mutation by Spark.",
+      "evidence": [
+        {
+          "label": "Spark layout audit evidence",
+          "kind": "artifact",
+          "path": "artifacts/meishi-collectible-20261011/spark-layout-review.md"
+        }
+      ],
+      "author": "/root",
+      "source": "Actual collectible-card implementation, independent review and browser verification",
+      "createdAt": "2026-10-11T13:05:02.905Z"
+    },
+    {
+      "id": "run-a06cb4b8",
+      "title": "Art canon and production docs · completed",
+      "agentId": "/root/production_research",
+      "agentLabel": "Art canon and production docs",
+      "state": "completed",
+      "observedAt": "2026-10-11T13:06:55.206Z",
+      "taskIds": [
+        "task-d6b739e3"
+      ],
+      "summary": "Implemented card design and evidence boundaries documented in 7e8e69c, integrated as476ccbb. Seven wiki tests pass; production reviewer did not run browser/native tests.",
+      "evidence": [
+        {
+          "label": "Actual production documentation handoff",
+          "kind": "artifact",
+          "path": "artifacts/meishi-collectible-20261011/production-handoff.md"
+        }
+      ],
+      "author": "/root",
+      "source": "Actual completed bounded production documentation follow-up",
+      "createdAt": "2026-10-11T13:06:55.231Z"
     }
   ],
   "phaseDescription": "Desktop-first Rust/WASM solo game and local Studio are implemented. Reviewed occupied-cell art, reproducible conversion, responsive native settings/icons and minimap, strict GitHub integration gates and source-backed Dev Bible are integrated. Natural campaign balance, human listening, owner-private update lifecycle and physical phones remain separate pending gates."
