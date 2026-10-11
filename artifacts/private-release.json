@@ -1,8 +1,8 @@
 {
-  "id": "appgdep_6acaeebe4b9c8191a99a3896f032bd54",
+  "id": "appgdep_6acb0caec09081918899dbed63351c23",
   "project_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93",
   "title": "Galaxy Royale",
-  "version_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93~appgver_9679795b02a881919c56afe615e4358b",
+  "version_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93~appgver_f2cd8254c1c08191a1f638a851a26d18",
   "type": "publish",
   "status": "succeeded",
   "url": "https://galaxy-royale-itchson.itchson.chatgpt.site",
@@ -11,15 +11,15 @@
   "provider_deployment_id": "site---6aca50f5b1bc81918526a6ee969aac93",
   "failure_message": null,
   "env_set_revision": 0,
-  "updated_at": "2026-10-11T02:05:08.604983+00:00",
-  "commit_sha": "3bf0c02b5e9fc0011c0ce6921bfaf0fbe664c65d",
-  "cacheVersion": "galaxy-cc8da99d023ae67a",
-  "browserAccess": "Exact owner-private publication succeeded. Actual private IAB loaded final JS/CSS, initialized WebGPU and launched normal Haven with existing points 6/5/1. Apply update then failed with ERR_FAILED; a fresh authorized tab also failed. Further observation/navigation/cleanup was refused by browser URL policy on its generated error document. Hosted update and reload remain unresolved; normal local WebGPU/WebGL2 and retained-profile Apply passed. No policy bypass or profile reset performed.",
-  "archiveContent": "Exactly 21 game-only files: 19 cached normal payloads, sw.js and normalized dist/.openai/hosting.json. 142 committed inputs independently matched, 127 byte-exact / 15 LF-CRLF text representations; nine generated WASM inputs excluded from Git and compared directly. Archive SHA baed5574e8bf4151b2d3f9b9dfea724fd92827e5b7e6a46d06ad293df4bb9cd9.",
-  "validation": "406 native / 239 shell passes with one explicit Windows file-symlink capability skip; strict TypeScript/native/both-WASM Clippy, normal dual build and 18 isolated actual WASM serializer/SaveStore fixture cases pass. Actual staged a9c3 adaptive resource/menu checks, corrected c707 prolonged real GL loss and final cc8 native label/footer/responsive Apply checks are separately scoped. Rendered DSP/human listening, natural crafting/physical-return banking, timed inputs, physical phones and 30-minute soak pending. Hosted private update/reload failed in IAB and remains an explicit follow-up.",
+  "updated_at": "2026-10-11T04:12:50.927293+00:00",
+  "commit_sha": "3e0de708f856d430cd845358a1c190d29363009d",
+  "browserAccess": "New authorized private IAB tab failed on initial navigation with net::ERR_FAILED. Closing its generated error document was rejected by Browser Use URL policy. No further access, security changes, alternate browser or policy bypass attempted. Private-host reload/update remains pending. Sites error-only worker logs for the last10 minutes returned no events.",
+  "cacheVersion": "galaxy-c40f91a071fafe05",
+  "archiveContent": "Exactly21 game-only files:20 byte-identical normal build files plus normalized dist/.openai/hosting.json. No Studio/source/work/isolated QA exports. Archive SHA256 d6b1e0bd5b57026b2dd737d4163dff649139bc8fd137884b5c1b0c82160879e8",
+  "validation": "Reviewed runtime code passed433 native tests;292 shell passes with one explicit Windows capability skip; strict Clippy/TypeScript and both normal WASM builds. Clean GitHub run38110408367 passed Windows/Linux native, shell and actual asset conversion/extraction plus dual-renderer package/strict WASM/18 Rust SaveStore cases. Root inspected actual settings and facility/minimap UI in both renderers at wide/compact/narrow desktop sizes. Physical phones/touch, human listening, natural full campaign and private-host browser lifecycle remain pending.",
   "backendHashes": {
-    "webgpu": "3c47eae459be4db04e65eda321a1b3cfebbb20dcaa44002291852222254e2c5a",
-    "webgl2": "46109afebf38148945721d7340e90ecc55a0645e5d13d59e966b770877a157f0"
+    "webgpu": "9f47ffb30d037e7801b258c3f5b9f5c057f7e7082da4869010a254b4e4580838",
+    "webgl2": "3d43134e3eba6c1b575c724fbe255a0232edccd4807061d865d64522adc943db"
   },
   "previousDeployments": [
     {
@@ -99,6 +99,14 @@
       "status": "succeeded",
       "updated_at": "2026-10-10T23:24:45.437700+00:00",
       "cacheVersion": "galaxy-ac19daf73e83b006"
+    },
+    {
+      "id": "appgdep_6acaeebe4b9c8191a99a3896f032bd54",
+      "version_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93~appgver_9679795b02a881919c56afe615e4358b",
+      "commit_sha": "3bf0c02b5e9fc0011c0ce6921bfaf0fbe664c65d",
+      "status": "succeeded",
+      "updated_at": "2026-10-11T02:05:08.604983+00:00",
+      "browserAccess": "Exact owner-private publication succeeded. Actual private IAB loaded final JS/CSS, initialized WebGPU and launched normal Haven with existing points 6/5/1. Apply update then failed with ERR_FAILED; a fresh authorized tab also failed. Further observation/navigation/cleanup was refused by browser URL policy on its generated error document. Hosted update and reload remain unresolved; normal local WebGPU/WebGL2 and retained-profile Apply passed. No policy bypass or profile reset performed."
     }
   ]
 }

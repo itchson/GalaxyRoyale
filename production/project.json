@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 541,
+  "revision": 544,
   "name": "Galaxy Royale",
   "phase": "Playable solo slice → content and validation",
-  "updatedAt": "2026-10-11T04:10:25.170Z",
+  "updatedAt": "2026-10-11T04:14:54.139Z",
   "tasks": [
     {
       "id": "studio",
@@ -4586,12 +4586,17 @@
           "label": "Actual private startup and unresolved hosted Apply/reload",
           "kind": "note",
           "path": "artifacts/adaptive-presentation-20261011/private-browser-observation.md"
+        },
+        {
+          "label": "New exact private publication; browser lifecycle still failed",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/current-private-release.json"
         }
       ],
-      "blocker": "",
-      "revision": 1,
+      "blocker": "New owner-private publication succeeded, but direct IAB initial navigation still ERR_FAILED; generated error-document policy prevents observation/cleanup. Actual Site error-only worker logs returned no events. Hosted reload/update is not accepted.",
+      "revision": 2,
       "createdAt": "2026-10-11T02:09:26.559Z",
-      "updatedAt": "2026-10-11T02:09:26.559Z"
+      "updatedAt": "2026-10-11T04:14:54.083Z"
     },
     {
       "id": "task-d4893127",
@@ -7314,6 +7319,47 @@
       ],
       "url": "https://github.com/itchson/GalaxyRoyale/actions/runs/38110408367",
       "knownIssues": "Physical phones and touch, sustained human listening, naturally earned campaign/material progression and owner-private hosted update lifecycle remain explicit separate gates."
+    },
+    {
+      "id": "build-734839a7",
+      "title": "Verified pixel UI owner-private package published; hosted browser gate pending",
+      "body": "Exact pushed source3e0de708f856d430cd845358a1c190d29363009d with runtime source hash76785526e166f2fb5dc0cdd0f1dc5ba135c80487f6186ba8a2cfe5fb589ed98f and normal package has been published without changing its owner-only audience. A fresh authorized IAB visit failed before game initialization; no hosted rendering/update pass claimed. Local dual-backend acceptance remains valid.",
+      "author": "Producer",
+      "source": "Actual exact-source owner-private deployment and direct IAB load failure",
+      "createdAt": "2026-10-11T04:14:54.108Z",
+      "revision": "3e0de708f856d430cd845358a1c190d29363009d",
+      "evidence": [
+        {
+          "label": "Actual Site publication result and browser limitation",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/current-private-release.json"
+        },
+        {
+          "label": "Game-only byte audit",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/current-site-package-audit.json"
+        }
+      ],
+      "checks": [
+        {
+          "name": "Exact-source game-only archive byte audit",
+          "result": "pass"
+        },
+        {
+          "name": "Owner-private deployment",
+          "result": "pass"
+        },
+        {
+          "name": "Hosted initial IAB load",
+          "result": "fail"
+        },
+        {
+          "name": "Hosted PWA update/reload",
+          "result": "not_run"
+        }
+      ],
+      "url": "https://galaxy-royale-itchson.itchson.chatgpt.site/",
+      "knownIssues": "New authorized private IAB tab failed on initial navigation with net::ERR_FAILED. Closing its generated error document was rejected by Browser Use URL policy. No further access, security changes, alternate browser or policy bypass attempted. Private-host reload/update remains pending. Sites error-only worker logs for the last10 minutes returned no events."
     }
   ],
   "feedback": [],
@@ -12727,6 +12773,36 @@
       "author": "Producer",
       "source": "Actual PR7 exact-head clean CI, merged integration, verified main protection and canonical preview ownership",
       "createdAt": "2026-10-11T04:10:25.170Z"
+    },
+    {
+      "id": "975dc4e2-c775-48e3-874e-150ad414c249",
+      "revision": 542,
+      "kind": "task.update",
+      "itemId": "task-01f28dc1",
+      "title": "Investigate owner-private hosted PWA reload in the in-app browser",
+      "author": "Producer",
+      "source": "Actual exact-source owner-private deployment and direct IAB load failure",
+      "createdAt": "2026-10-11T04:14:54.083Z"
+    },
+    {
+      "id": "38a8bb8f-6519-4aa8-b1f9-2127365404e0",
+      "revision": 543,
+      "kind": "build",
+      "itemId": "build-734839a7",
+      "title": "Verified pixel UI owner-private package published; hosted browser gate pending",
+      "author": "Producer",
+      "source": "Actual exact-source owner-private deployment and direct IAB load failure",
+      "createdAt": "2026-10-11T04:14:54.108Z"
+    },
+    {
+      "id": "e7934cdb-b4f5-4428-b055-5f207b0b43a9",
+      "revision": 544,
+      "kind": "run",
+      "itemId": "run-bbae38d9",
+      "title": "/root · completed",
+      "author": "Producer",
+      "source": "Actual exact-source owner-private deployment and direct IAB load failure",
+      "createdAt": "2026-10-11T04:14:54.139Z"
     }
   ],
   "runRecords": [
@@ -17378,6 +17454,35 @@
       "author": "Producer",
       "source": "Actual Art specialist final handoff of bounded Spark inspection without verdict",
       "createdAt": "2026-10-11T04:06:36.394Z"
+    },
+    {
+      "id": "run-bbae38d9",
+      "title": "/root · completed",
+      "agentId": "/root",
+      "agentLabel": "/root",
+      "state": "completed",
+      "observedAt": "2026-10-11T04:14:54.118Z",
+      "taskIds": [
+        "task-cf125df1",
+        "task-55bd21c0",
+        "task-5ac4cfd3"
+      ],
+      "summary": "Current source/UI integration and private package publication scope finished. Both desktop UI backends accepted; actual strict CI/main gates recorded; canonical local preview present. Hosted IAB lifecycle failed and remains task-01f28dc1. Completed scope does not claim physical/human/full natural campaign acceptance or unattended agents.",
+      "evidence": [
+        {
+          "label": "Actual integrated UI acceptance",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/CURRENT_UI_ACCEPTANCE.md"
+        },
+        {
+          "label": "Exact publication and pending browser gate",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/current-private-release.json"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual exact-source owner-private deployment and direct IAB load failure",
+      "createdAt": "2026-10-11T04:14:54.139Z"
     }
   ],
   "phaseDescription": "Desktop-first Rust/WASM solo game and local Studio are implemented. Reviewed occupied-cell art, reproducible conversion, responsive native settings/icons and minimap, strict GitHub integration gates and source-backed Dev Bible are integrated. Natural campaign balance, human listening, owner-private update lifecycle and physical phones remain separate pending gates."

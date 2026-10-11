@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "head": "3e0de708f856d430cd845358a1c190d29363009d",
+  "sourceHash": "76785526e166f2fb5dc0cdd0f1dc5ba135c80487f6186ba8a2cfe5fb589ed98f",
+  "packageHash": "eaef5a3a6956797b41b1e33ae439cf2b1324697af8f2e0e1500468a83ffd52ce",
+  "cache": "galaxy-c40f91a071fafe05",
+  "normalFiles": 20,
+  "archiveFiles": 21,
+  "projectId": "appgprj_6aca50f5b1bc81918526a6ee969aac93",
+  "staticRoot": "dist",
+  "pins": [
+    {
+      "path": "dist/assets/index-B4Gecn0g.js",
+      "bytes": 123942,
+      "sha256": "41982e830baba8615109e007165b1f21291c661d5c0ae16f8b2e67c0a298ca22"
+    },
+    {
+      "path": "dist/assets/index-vhhVQYc0.css",
+      "bytes": 33781,
+      "sha256": "d64947c084a0d38546f4369e59d89436a96cdb73fab9b2f449f44c974170a273"
+    },
+    {
+      "path": "dist/fonts/OFL.txt",
+      "bytes": 4389,
+      "sha256": "690fda321d0ebce403249c8d61dadddcee09dc8813424cc5a8f982efcff9a9a3"
+    },
+    {
+      "path": "dist/fonts/RoyaleMono.ttf",
+      "bytes": 15456,
+      "sha256": "920710a69692bddc4edee8841ce221bceed9a1860af451d7d35f7519fddc466e"
+    },
+    {
+      "path": "dist/fonts/Tiny5.ttf",
+      "bytes": 130784,
+      "sha256": "eb4206abc0c73e9fe4fe93c034ea270578859c40a7e740c6207322413c5c4c91"
+    },
+    {
+      "path": "dist/icon-192.png",
+      "bytes": 2619,
+      "sha256": "f26b1bd9660be38bb35d08099ea056a5a22a4645f9e2f8ee399821a54d435b43"
+    },
+    {
+      "path": "dist/icon-512.png",
+      "bytes": 11848,
+      "sha256": "d5eb97ed733784221989eb4ebf01fc57bab2d5d858ae8aa78bb0b028ee89e863"
+    },
+    {
+      "path": "dist/icon.svg",
+      "bytes": 319,
+      "sha256": "119c958934c7326508f45d53e543512008247bbf585d5d8ef7c89819194d2b0d"
+    },
+    {
+      "path": "dist/index.html",
+      "bytes": 16031,
+      "sha256": "4053b8b7abeec48711d9b88928d17ee05d297b886ec9250a846cd65ea3e1de90"
+    },
+    {
+      "path": "dist/manifest.webmanifest",
+      "bytes": 679,
+      "sha256": "2eb7555a102641e6f3040d3c79e68ddb11578c6c01327e29ed6e1fb3a688940f"
+    },
+    {
+      "path": "dist/sw.js",
+      "bytes": 1963,
+      "sha256": "2160c1212d51d716702f94fedb9b49b11f657be7cac05af9fcd8f2ee367e9e13"
+    },
+    {
+      "path": "dist/wasm/builds.json",
+      "bytes": 247,
+      "sha256": "483285e52fe1133affbd5d6164bff85c37800f28908f98a7abd7e9adc8a58d26"
+    },
+    {
+      "path": "dist/wasm/webgl2-3d43134e3eba6c1b575c724fbe255a0232edccd4807061d865d64522adc943db/galaxy.d.ts",
+      "bytes": 9255,
+      "sha256": "52e4bc9b9c5c201ce06f6fd6c96fee118247084b23c5dfec88d1e68f12199501"
+    },
+    {
+      "path": "dist/wasm/webgl2-3d43134e3eba6c1b575c724fbe255a0232edccd4807061d865d64522adc943db/galaxy.js",
+      "bytes": 87847,
+      "sha256": "d8605503e1a79b869b09cfc6434585a014a4b5a91a6a06cf81e85a9aa3b1fa66"
+    },
+    {
+      "path": "dist/wasm/webgl2-3d43134e3eba6c1b575c724fbe255a0232edccd4807061d865d64522adc943db/galaxy_bg.wasm",
+      "bytes": 6280422,
+      "sha256": "5353a4caf49eb8ff9108a255fd7b96db6bd315d33706285c9babe0b8e67af8a8"
+    },
+    {
+      "path": "dist/wasm/webgl2-3d43134e3eba6c1b575c724fbe255a0232edccd4807061d865d64522adc943db/galaxy_bg.wasm.d.ts",
+      "bytes": 4259,
+      "sha256": "76a69fa1c3946faa02142dc8cf9b7d4b2286df25e928d661e058752f222bf246"
+    },
+    {
+      "path": "dist/wasm/webgpu-9f47ffb30d037e7801b258c3f5b9f5c057f7e7082da4869010a254b4e4580838/galaxy.d.ts",
+      "bytes": 10521,
+      "sha256": "bbf6ff72dac9abd88b82bc5ee00ba6639dcec18c32767149a6175e70b5d356f8"
+    },
+    {
+      "path": "dist/wasm/webgpu-9f47ffb30d037e7801b258c3f5b9f5c057f7e7082da4869010a254b4e4580838/galaxy.js",
+      "bytes": 84073,
+      "sha256": "b001a1563bcb069c90590cadb3e24003d65cf30fbae0941a62a1000a33f78ebd"
+    },
+    {
+      "path": "dist/wasm/webgpu-9f47ffb30d037e7801b258c3f5b9f5c057f7e7082da4869010a254b4e4580838/galaxy_bg.wasm",
+      "bytes": 2648472,
+      "sha256": "f648977e408167a60190a928e97efff7d7c87cd6c75964d83eb225b0215c541c"
+    },
+    {
+      "path": "dist/wasm/webgpu-9f47ffb30d037e7801b258c3f5b9f5c057f7e7082da4869010a254b4e4580838/galaxy_bg.wasm.d.ts",
+      "bytes": 5525,
+      "sha256": "1c02184b725af7d7d4a6e1833079cf2044c162c2e7d7d940a72a1352e3509840"
+    }
+  ],
+  "scope": "Only byte-identical normal game assets and hosting metadata; no Studio, work, source or isolated QA exports."
+}

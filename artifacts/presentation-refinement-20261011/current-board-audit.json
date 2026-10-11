@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "observedAt": "2026-10-11T04:10:25.231Z",
-  "revision": 541,
+  "observedAt": "2026-10-11T04:14:54.176Z",
+  "revision": 544,
   "total": 94,
   "counts": {
     "complete": 52,
@@ -30,7 +30,8 @@
           "text": "Sustained human listening and physical-device audio lifecycle acceptance are measured",
           "met": false
         }
-      ]
+      ],
+      "blocker": ""
     },
     {
       "id": "asteroids",
@@ -50,7 +51,8 @@
           "text": "Loot recorded in persistent progression",
           "met": true
         }
-      ]
+      ],
+      "blocker": ""
     },
     {
       "id": "controls-qa",
@@ -68,7 +70,8 @@
           "text": "Mobile multitouch and desktop destination movement reviewed",
           "met": false
         }
-      ]
+      ],
+      "blocker": ""
     },
     {
       "id": "boss-qa",
@@ -87,7 +90,8 @@
           "text": "Signature ability drops, unlocks and upgrades verified",
           "met": false
         }
-      ]
+      ],
+      "blocker": ""
     },
     {
       "id": "art-direction",
@@ -105,7 +109,8 @@
           "text": "Effects support enemy and hazard readability",
           "met": false
         }
-      ]
+      ],
+      "blocker": ""
     },
     {
       "id": "performance",
@@ -123,7 +128,8 @@
           "text": "Sustained phone testing recorded separately from emulation",
           "met": false
         }
-      ]
+      ],
+      "blocker": ""
     },
     {
       "id": "mobile",
@@ -142,7 +148,8 @@
           "text": "Target 60 FPS tested during representative sustained combat",
           "met": false
         }
-      ]
+      ],
+      "blocker": ""
     },
     {
       "id": "balance",
@@ -161,7 +168,8 @@
           "text": "Upgrade costs and boss thresholds reviewed in play",
           "met": false
         }
-      ]
+      ],
+      "blocker": ""
     },
     {
       "id": "accessibility",
@@ -179,7 +187,8 @@
           "text": "Readable touch targets and critical HUD information",
           "met": false
         }
-      ]
+      ],
+      "blocker": ""
     },
     {
       "id": "audio-ai",
@@ -195,7 +204,8 @@
           "text": "Document acceptance or rejection; game remains independent",
           "met": false
         }
-      ]
+      ],
+      "blocker": ""
     },
     {
       "id": "slice-review",
@@ -217,7 +227,8 @@
           "text": "Real specialist review with linked validation evidence",
           "met": true
         }
-      ]
+      ],
+      "blocker": ""
     },
     {
       "id": "deep-bosses",
@@ -243,7 +254,8 @@
           "text": "Full browser choreography and natural-progression human play review for all fifteen encounters",
           "met": false
         }
-      ]
+      ],
+      "blocker": ""
     },
     {
       "id": "task-05dd95cd",
@@ -265,7 +277,8 @@
           "text": "Validate reconnect and compatible save versions",
           "met": false
         }
-      ]
+      ],
+      "blocker": ""
     },
     {
       "id": "task-7e8e0a50",
@@ -287,7 +300,8 @@
           "text": "Record real multi-client, reconnect and stale/replayed-message tests",
           "met": false
         }
-      ]
+      ],
+      "blocker": ""
     },
     {
       "id": "task-acf182ad",
@@ -310,7 +324,8 @@
           "text": "Verify reload/migration, ownership and single-claim arena rewards with recorded play evidence",
           "met": false
         }
-      ]
+      ],
+      "blocker": ""
     },
     {
       "id": "task-2439af52",
@@ -333,7 +348,8 @@
           "text": "Camera rebase avoids a cross-universe sweep; targets/effects and multi-client state remain consistent",
           "met": false
         }
-      ]
+      ],
+      "blocker": ""
     },
     {
       "id": "task-e665335c",
@@ -358,7 +374,8 @@
           "text": "Record real multiplayer match, reconnect and reward-isolation acceptance evidence",
           "met": false
         }
-      ]
+      ],
+      "blocker": ""
     },
     {
       "id": "task-d60fcaaa",
@@ -378,7 +395,8 @@
           "text": "Actual browser completed-event reward action, journal/currency/relic/hull and replay/reload are verified",
           "met": false
         }
-      ]
+      ],
+      "blocker": ""
     },
     {
       "id": "task-0f6ce1db",
@@ -404,7 +422,8 @@
           "text": "Test cancellation, page replay and failure fallback on a real browser and physical phone without making inference mandatory.",
           "met": false
         }
-      ]
+      ],
+      "blocker": ""
     },
     {
       "id": "task-52a708c0",
@@ -426,7 +445,8 @@
           "text": "Balance/readability acceptance covers all eight encounters rather than only QA scene setup.",
           "met": false
         }
-      ]
+      ],
+      "blocker": ""
     },
     {
       "id": "task-57a3ed52",
@@ -449,7 +469,8 @@
           "text": "Browser hangar can craft/select with clear lock and insufficient-resource feedback.",
           "met": true
         }
-      ]
+      ],
+      "blocker": ""
     },
     {
       "id": "task-0a386265",
@@ -471,7 +492,8 @@
           "text": "UI labels simulated NPC results accurately and gated tournament entry requires all eight patches.",
           "met": true
         }
-      ]
+      ],
+      "blocker": ""
     },
     {
       "id": "task-83929b1c",
@@ -493,7 +515,8 @@
           "text": "Player can return to hangar/flight/title without background simulation or stale async transitions.",
           "met": false
         }
-      ]
+      ],
+      "blocker": ""
     },
     {
       "id": "task-5771502c",
@@ -519,7 +542,8 @@
           "text": "Independent voice volume and per-page replay usability are accepted or the shared SFX-volume limitation is recorded.",
           "met": true
         }
-      ]
+      ],
+      "blocker": ""
     },
     {
       "id": "task-aaf77ab5",
@@ -546,7 +570,8 @@
           "text": "Late encounter saves and delayed drawer closure cannot resume flight after title/death/pause transitions.",
           "met": true
         }
-      ]
+      ],
+      "blocker": ""
     },
     {
       "id": "task-e2cec34f",
@@ -573,7 +598,8 @@
           "text": "Crafting and upgrades enforce final level/resource gates consistently in Rust and browser feedback.",
           "met": false
         }
-      ]
+      ],
+      "blocker": ""
     },
     {
       "id": "task-b0a59d63",
@@ -591,7 +617,8 @@
           "text": "Reviewed production tuning with actual normal browser warning and moving-player acceptance",
           "met": false
         }
-      ]
+      ],
+      "blocker": ""
     },
     {
       "id": "task-4a0debda",
@@ -610,7 +637,8 @@
           "text": "Production integration, normal package and actual listening/mute/recovery validation",
           "met": false
         }
-      ]
+      ],
+      "blocker": ""
     },
     {
       "id": "task-08d59c38",
@@ -628,7 +656,8 @@
           "text": "Independent review, deterministic seeded production integration and actual renderer presentation",
           "met": false
         }
-      ]
+      ],
+      "blocker": ""
     },
     {
       "id": "task-8d55901c",
@@ -648,7 +677,8 @@
           "text": "Exact reviewed private game package published",
           "met": true
         }
-      ]
+      ],
+      "blocker": ""
     },
     {
       "id": "task-2138420d",
@@ -668,7 +698,8 @@
           "text": "Exact reviewed private game package published",
           "met": true
         }
-      ]
+      ],
+      "blocker": ""
     },
     {
       "id": "task-96a89aa2",
@@ -688,7 +719,8 @@
           "text": "Exact reviewed private game package published",
           "met": true
         }
-      ]
+      ],
+      "blocker": ""
     },
     {
       "id": "task-40611e41",
@@ -708,7 +740,8 @@
           "text": "Exact independently reviewed private package published",
           "met": true
         }
-      ]
+      ],
+      "blocker": ""
     },
     {
       "id": "task-a6a2a3e6",
@@ -728,7 +761,8 @@
           "text": "Exact independently reviewed private package published",
           "met": true
         }
-      ]
+      ],
+      "blocker": ""
     },
     {
       "id": "task-970f203c",
@@ -748,7 +782,8 @@
           "text": "Exact reviewed private build published with validation boundaries",
           "met": true
         }
-      ]
+      ],
+      "blocker": ""
     },
     {
       "id": "task-0b1b0efa",
@@ -768,7 +803,8 @@
           "text": "Exact reviewed source and private deployment recorded",
           "met": true
         }
-      ]
+      ],
+      "blocker": ""
     },
     {
       "id": "task-3b9f6350",
@@ -788,7 +824,8 @@
           "text": "Exact reviewed source and private deployment recorded",
           "met": true
         }
-      ]
+      ],
+      "blocker": ""
     },
     {
       "id": "task-73510faf",
@@ -808,7 +845,8 @@
           "text": "Exact reviewed source and private deployment recorded",
           "met": true
         }
-      ]
+      ],
+      "blocker": ""
     },
     {
       "id": "task-388e1f9b",
@@ -828,7 +866,8 @@
           "text": "Exact reviewed source and private deployment recorded",
           "met": true
         }
-      ]
+      ],
+      "blocker": ""
     },
     {
       "id": "task-5d42b89b",
@@ -848,7 +887,8 @@
           "text": "Exact reviewed source and private deployment recorded",
           "met": true
         }
-      ]
+      ],
+      "blocker": ""
     },
     {
       "id": "task-f341486f",
@@ -864,7 +904,8 @@
           "text": "Human listening accepts warning audibility, continuous engine balance and music/effects buses in sustained normal play.",
           "met": false
         }
-      ]
+      ],
+      "blocker": ""
     },
     {
       "id": "task-01f28dc1",
@@ -880,7 +921,8 @@
           "text": "Actual owner-private normal reload/Apply completes, renders coherent final assets and preserves recorded progression.",
           "met": false
         }
-      ]
+      ],
+      "blocker": "New owner-private publication succeeded, but direct IAB initial navigation still ERR_FAILED; generated error-document policy prevents observation/cleanup. Actual Site error-only worker logs returned no events. Hosted reload/update is not accepted."
     }
   ],
   "boundary": "Completion is scoped to recorded criteria. Physical mobile, human listening, natural complete campaign and future multiplayer/BR remain pending; no all-game perfection claim."
