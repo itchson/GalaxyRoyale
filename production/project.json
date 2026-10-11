@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 871,
+  "revision": 876,
   "name": "Galaxy Royale",
   "phase": "Playable solo slice → content and validation",
-  "updatedAt": "2026-10-11T20:38:54.314Z",
+  "updatedAt": "2026-10-11T20:42:21.233Z",
   "tasks": [
     {
       "id": "studio",
@@ -7288,6 +7288,60 @@
       "revision": 2,
       "createdAt": "2026-10-11T20:15:54.584Z",
       "updatedAt": "2026-10-11T20:38:54.191Z"
+    },
+    {
+      "id": "task-6bf3a525",
+      "title": "Measure bounded native cosmic cache and extraction costs",
+      "description": "Sequential isolated native timing/cell/transform evidence for current cached gas artwork. No GPU/phone FPS claim or speculative runtime rewrite.",
+      "department": "Engine",
+      "owner": "/root/engine_research",
+      "status": "active",
+      "priority": "normal",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Actual source-pinned timings/counters and methodology limitations, including cold versus warm scope.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual dispatched bounded next assignments",
+          "kind": "artifact",
+          "path": "artifacts/native-space-next-20261012/assignments.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-11T20:42:21.109Z",
+      "updatedAt": "2026-10-11T20:42:21.109Z"
+    },
+    {
+      "id": "task-44d50df4",
+      "title": "Prepare seeded moving-comet browser continuity capture",
+      "description": "Derive camera, native observable clock and real80-second boundary plan; actual Root capture remains pending. No artificial application time mutation.",
+      "department": "Art",
+      "owner": "/root/production_research",
+      "status": "active",
+      "priority": "normal",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Source-pinned executable camera/timing plan with honest visibility/reduced-motion limits.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual dispatched bounded next assignments",
+          "kind": "artifact",
+          "path": "artifacts/native-space-next-20261012/assignments.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-11T20:42:21.134Z",
+      "updatedAt": "2026-10-11T20:42:21.134Z"
     }
   ],
   "reviews": [
@@ -20820,6 +20874,56 @@
       "author": "Root",
       "source": "Actual final source, execution logs and independent fixed-frame review",
       "createdAt": "2026-10-11T20:38:54.314Z"
+    },
+    {
+      "id": "42443cca-e690-42d3-88d1-450d253f26c2",
+      "revision": 872,
+      "kind": "task.create",
+      "itemId": "task-6bf3a525",
+      "title": "Measure bounded native cosmic cache and extraction costs",
+      "author": "Root",
+      "source": "Actual next specialist dispatch after final visual evidence",
+      "createdAt": "2026-10-11T20:42:21.109Z"
+    },
+    {
+      "id": "76e8169c-ae23-44bc-9199-fe1bdc08cdc0",
+      "revision": 873,
+      "kind": "task.create",
+      "itemId": "task-44d50df4",
+      "title": "Prepare seeded moving-comet browser continuity capture",
+      "author": "Root",
+      "source": "Actual next specialist dispatch after final visual evidence",
+      "createdAt": "2026-10-11T20:42:21.134Z"
+    },
+    {
+      "id": "7cbe9f80-4070-485d-a717-41263eb5fd98",
+      "revision": 874,
+      "kind": "run",
+      "itemId": "run-31b4070d",
+      "title": "Native efficiency specialist · running",
+      "author": "Root",
+      "source": "Actual next specialist dispatch after final visual evidence",
+      "createdAt": "2026-10-11T20:42:21.154Z"
+    },
+    {
+      "id": "6cc42e65-b5a2-4bb2-b274-07bd1405089a",
+      "revision": 875,
+      "kind": "run",
+      "itemId": "run-6373ca71",
+      "title": "Deep-space motion QA specialist · running",
+      "author": "Root",
+      "source": "Actual next specialist dispatch after final visual evidence",
+      "createdAt": "2026-10-11T20:42:21.183Z"
+    },
+    {
+      "id": "701d14fb-6452-486c-bf9a-10984086118b",
+      "revision": 876,
+      "kind": "run",
+      "itemId": "run-0e466ab2",
+      "title": "Owned-loadout QA specialist · running",
+      "author": "Root",
+      "source": "Actual next specialist dispatch after final visual evidence",
+      "createdAt": "2026-10-11T20:42:21.233Z"
     }
   ],
   "runRecords": [
@@ -28861,6 +28965,72 @@
       "author": "Root",
       "source": "Actual final source, execution logs and independent fixed-frame review",
       "createdAt": "2026-10-11T20:38:54.314Z"
+    },
+    {
+      "id": "run-31b4070d",
+      "title": "Native efficiency specialist · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Native efficiency specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T20:42:21.145Z",
+      "taskIds": [
+        "task-6bf3a525"
+      ],
+      "summary": "Dispatched bounded sequential native cache/extraction measurements; no results yet.",
+      "evidence": [
+        {
+          "label": "Actual dispatched bounded next assignments",
+          "kind": "artifact",
+          "path": "artifacts/native-space-next-20261012/assignments.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual next specialist dispatch after final visual evidence",
+      "createdAt": "2026-10-11T20:42:21.154Z"
+    },
+    {
+      "id": "run-6373ca71",
+      "title": "Deep-space motion QA specialist · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "Deep-space motion QA specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T20:42:21.176Z",
+      "taskIds": [
+        "task-44d50df4"
+      ],
+      "summary": "Dispatched source-pinned seeded moving-comet capture plan; no actual playback run yet.",
+      "evidence": [
+        {
+          "label": "Actual dispatched bounded next assignments",
+          "kind": "artifact",
+          "path": "artifacts/native-space-next-20261012/assignments.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual next specialist dispatch after final visual evidence",
+      "createdAt": "2026-10-11T20:42:21.183Z"
+    },
+    {
+      "id": "run-0e466ab2",
+      "title": "Owned-loadout QA specialist · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Owned-loadout QA specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T20:42:21.201Z",
+      "taskIds": [
+        "task-05dd95cd"
+      ],
+      "summary": "Dispatched fresh immutable owned stage after final evidence-only HEAD/stamp; no listener or RTC pass.",
+      "evidence": [
+        {
+          "label": "Actual dispatched bounded next assignments",
+          "kind": "artifact",
+          "path": "artifacts/native-space-next-20261012/assignments.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual next specialist dispatch after final visual evidence",
+      "createdAt": "2026-10-11T20:42:21.233Z"
     }
   ],
   "phaseDescription": "Desktop-first Rust/WASM solo game and local Studio are implemented. Reviewed occupied-cell art, reproducible conversion, responsive native settings/icons and minimap, strict GitHub integration gates and source-backed Dev Bible are integrated. Natural campaign balance, human listening, owner-private update lifecycle and physical phones remain separate pending gates."
