@@ -2,6 +2,11 @@ import { CoopController } from "/modules/controller.js";
 import { CoopTransport } from "/modules/transport.js";
 import * as wasmPorts from "/modules/wasm-ports.js";
 import { SaveStore, normalizeProfile } from "/modules/storage.js";
+import {
+  FifthShotObservation,
+  fifthReasons,
+  starterSelection,
+} from "/fifth-shot.js";
 
 const config = await (await fetch("/qa/config", { cache: "no-store" })).json();
 const role = config.client_role;
@@ -20,6 +25,12 @@ let phase = "uninitialized",
 let lastTime = performance.now(),
   loopDeadline = 0,
   firstPosition = null;
+let scenario = "default",
+  fifth = null,
+  captureHold = false,
+  heldCapture = 0,
+  latestHeader = null,
+  latestCommittedHeader = null;
 let lastRows = new Map(),
   stagedRows = new Map(),
   observedSession = null,
@@ -132,6 +143,7 @@ function observations() {
           owned_sha: ownedSha,
         }
       : {}),
+    ...(scenario === "renko-fifth" ? { fifth_shot: fifth.report() } : {}),
   };
 }
 function update() {
@@ -141,6 +153,7 @@ function update() {
 function observeHeader(header) {
   if (!header?.snapshot) return;
   const s = header.snapshot;
+  latestHeader = header;
   if (observedSession !== s.session) {
     observedSession = s.session;
     lastRows = new Map();
@@ -181,6 +194,7 @@ function observeRows(rows) {
     });
 }
 function observeCommit() {
+  latestCommittedHeader = latestHeader;
   if (config.profile_mode === "owned" && role === "guest")
     ownedView = stagedOwnedView;
   for (const [id, row] of stagedRows) {
@@ -226,13 +240,20 @@ function step(milliseconds) {
   const after = controller?.frameMode() ?? "solo";
   if (after !== before) resetControls();
   // Solo Game is deliberately paused throughout QA; only actual host tick_co_op runs.
-  const pause = after !== "host";
+  const pause = after !== "host" || captureHold;
   if (pause !== appliedPause) {
     galaxy.set_paused(pause);
     appliedPause = pause;
   }
   const elapsed = after !== before ? 0 : milliseconds;
-  galaxy.step(elapsed, controls);
+  const frame = galaxy.step(elapsed, controls);
+  if (fifth?.state === "firing" && fifth.events(frame?.events)) {
+    heldCapture = counters.captures;
+    captureHold = true;
+    controls = { fire: false };
+    galaxy.set_paused(true);
+    appliedPause = true;
+  }
   controller?.afterStep(elapsed / 1000);
   counters.frames++;
   update();
@@ -289,7 +310,11 @@ async function initStep(stage, action, lateCleanup = () => {}) {
     clearTimeout(timeout);
   }
 }
-async function initialize(selectedBackend, runId) {
+async function initialize(
+  selectedBackend,
+  runId,
+  selectedScenario = "default",
+) {
   if (
     galaxy ||
     !["webgpu", "webgl2"].includes(selectedBackend) ||
@@ -300,8 +325,25 @@ async function initialize(selectedBackend, runId) {
   run = runId;
   failureCode = null;
   initDeadline = performance.now() + 45_000;
+  scenario = selectedScenario;
+  fifth = scenario === "renko-fifth" ? new FifthShotObservation(role) : null;
   store = new SaveStore();
   const loaded = await initStep("open_store", () => store.open());
+  const starter = await initStep("starter_selection", () => {
+    try {
+      return starterSelection(
+        selectedScenario,
+        role,
+        loaded,
+        config.profile_mode === "owned",
+      );
+    } catch (error) {
+      failureCode = fifthReasons.has(error.message)
+        ? error.message
+        : "scenario_unavailable";
+      throw error;
+    }
+  });
   persistent = store.persistent;
   const module = await initStep(
     "import_module",
@@ -330,12 +372,7 @@ async function initialize(selectedBackend, runId) {
       .map((n) => n.toString(16).padStart(2, "0"))
       .join("");
     await initStep("register_license", () =>
-      galaxy.register_droid(
-        role === "host" ? "dora" : "doro",
-        role === "host" ? "pan" : "hugo",
-        role === "host" ? "renko" : "pan",
-        hash,
-      ),
+      galaxy.register_droid(...starter, hash),
     );
   }
   await initStep("configure_view", () => {
@@ -350,6 +387,18 @@ async function initialize(selectedBackend, runId) {
       ownedLoadout = wasmPorts.readOwnedLoadout(galaxy);
       ownedSha = await digestValue(ownedLoadout);
       ownedExport = true;
+      if (scenario === "renko-fifth") {
+        const expected = role === "host" ? [0, 0] : [1, 1];
+        if (
+          ownedLoadout.selected_ship !== 0 ||
+          ownedLoadout.slots.filter(Boolean).length !== 1 ||
+          ownedLoadout.slots[expected[0]]?.index !== expected[1] ||
+          ownedLoadout.slots[expected[0]]?.rank !== 1
+        ) {
+          failureCode = "starter_mismatch";
+          throw new Error("starter_mismatch");
+        }
+      }
     });
   const observed = {
     co_op_batch(request) {
@@ -414,6 +463,7 @@ async function initialize(selectedBackend, runId) {
       const next = controller?.frameMode() ?? "solo";
       if (next !== mode) {
         mode = next;
+        captureHold = false;
         resetControls();
         lastTime = performance.now();
       }
@@ -432,7 +482,8 @@ async function initialize(selectedBackend, runId) {
   persistedEqual = baseline === persistedSha;
   phase = "idle";
   initStage = "ready";
-  loopDeadline = performance.now() + 180_000;
+  loopDeadline =
+    performance.now() + (scenario === "renko-fifth" ? 600_000 : 180_000);
   lastTime = performance.now();
   stopped = false;
   schedule();
@@ -449,9 +500,107 @@ async function verify() {
   persistedEqual = persistedSha === baseline;
   return observations();
 }
+async function waitFifth(predicate) {
+  const deadline = performance.now() + 30_000;
+  while (!predicate()) {
+    if (
+      stopped ||
+      controller.frameMode() === "blocked" ||
+      controller.frameMode() === "solo"
+    )
+      fifth.fail("fifth_native_context");
+    if (performance.now() > deadline) fifth.fail("fifth_timeout");
+    await new Promise((r) => setTimeout(r, 25));
+  }
+}
+async function fifthCommand(name, args) {
+  if (scenario !== "renko-fifth" || !fifth)
+    throw new Error("scenario_unavailable");
+  if (name === "fifth-depart" && role === "host") {
+    if (fifth.state !== "idle" && fifth.state !== "complete")
+      fifth.fail("fifth_sequence");
+    fifth.state = "departing";
+    pumping = true;
+    captureHold = false;
+    try {
+      let departed = false;
+      for (let i = 0; i < 480; i++) {
+        const origin = galaxy.hud().camera;
+        controls = {
+          thrust: [origin[0] + 1600, origin[1]],
+          aim: [origin[0] + 1900, origin[1]],
+          fire: false,
+        };
+        step(1000 / 60);
+        const p = latestHeader?.snapshot.participants.find((p) => p.slot === 0);
+        if (p && Math.hypot(...p.position) > 330) {
+          departed = true;
+          break;
+        }
+        await new Promise((r) => setTimeout(r, 16));
+      }
+      if (!departed) fifth.fail("fifth_timeout");
+    } finally {
+      pumping = false;
+      resetControls();
+      captureHold = true;
+      galaxy.set_paused(true);
+      appliedPause = true;
+      lastTime = performance.now();
+    }
+    const before = counters.captures;
+    await waitFifth(() => counters.captures > before);
+    fifth.start(latestHeader.snapshot);
+  } else if (name === "fifth-next" && role === "host") {
+    fifth.fire(args.ordinal);
+    captureHold = false;
+    pumping = true;
+    try {
+      for (let i = 0; i < 180 && fifth.state === "firing"; i++) {
+        const p = latestHeader.snapshot.participants.find((p) => p.slot === 0);
+        controls = { aim: [p.position[0] + 1900, p.position[1]], fire: true };
+        step(1000 / 60);
+        await new Promise((r) => setTimeout(r, 16));
+      }
+      if (fifth.state !== "holding") fifth.fail("fifth_timeout");
+    } finally {
+      pumping = false;
+      resetControls();
+      captureHold = true;
+      galaxy.set_paused(true);
+      appliedPause = true;
+      lastTime = performance.now();
+    }
+    await waitFifth(() => counters.captures > heldCapture);
+    fifth.accept(latestHeader.snapshot, args.ordinal);
+  } else if (["fifth-arm", "fifth-accept"].includes(name) && role === "guest") {
+    if (
+      ![args.tick, args.revision].every(
+        (n) => Number.isInteger(n) && n >= 0 && n <= 0xffff_ffff,
+      )
+    )
+      fifth.fail("fifth_sequence");
+    await waitFifth(
+      () =>
+        latestCommittedHeader?.snapshot.session ===
+          transport.diagnostics().session?.id &&
+        latestCommittedHeader.snapshot.tick === args.tick &&
+        latestCommittedHeader.snapshot.revision === args.revision,
+    );
+    if (name === "fifth-arm") fifth.start(latestCommittedHeader.snapshot);
+    else fifth.accept(latestCommittedHeader.snapshot, args.ordinal);
+  } else fifth.fail("fifth_sequence");
+  return {
+    state: observations(),
+    held: {
+      tick: latestHeader.snapshot.tick,
+      revision: latestHeader.snapshot.revision,
+    },
+  };
+}
 async function command(name, args) {
   if (name === "initialize") {
-    await initialize(args.backend, args.run_id);
+    await initialize(args.backend, args.run_id, args.scenario);
     return observations();
   }
   if (name === "state") return observations();
@@ -462,6 +611,7 @@ async function command(name, args) {
     return observations();
   }
   if (!controller || !galaxy) throw new Error("not_initialized");
+  if (name.startsWith("fifth-")) return fifthCommand(name, args);
   if (name === "create") {
     await controller.create();
     return {
@@ -475,6 +625,7 @@ async function command(name, args) {
   }
   if (name === "verify") return verify();
   if (name === "drive") {
+    if (scenario !== "default") throw new Error("scenario_unavailable");
     if (
       controller.frameMode() === "solo" ||
       controller.frameMode() === "blocked"
@@ -539,7 +690,7 @@ addEventListener("message", async (event) => {
       { type: "native-qa-reply", id, ok: true, value },
       config.page_origin,
     );
-  } catch {
+  } catch (error) {
     if (name === "initialize") {
       await controller?.dispose().catch(() => {});
       try {
@@ -552,7 +703,18 @@ addEventListener("message", async (event) => {
     failureCode ??=
       name === "initialize"
         ? `initialization_${initStage}_failed`
-        : "native_action_failed";
+        : fifthReasons.has(error.message)
+          ? error.message
+          : "native_action_failed";
+    if (fifth && name.startsWith("fifth-")) {
+      try {
+        fifth.fail(failureCode);
+      } catch {}
+      captureHold = true;
+      resetControls();
+      galaxy?.set_paused(true);
+      appliedPause = true;
+    }
     phase = "failed";
     update();
     parent.postMessage(

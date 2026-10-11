@@ -20,6 +20,10 @@ import {
   ownedSources,
 } from "../qa/co-op-transport/prepare.mjs";
 import { start, validateWasmReport } from "../qa/co-op-transport/server.mjs";
+import {
+  FifthShotObservation,
+  starterSelection,
+} from "../qa/co-op-transport/fifth-shot.js";
 
 function client(role) {
   return {
@@ -133,6 +137,10 @@ test("Actual initialization pauses fresh Galaxy before guarded license registrat
         builds: { webgpu: "/wasm/actual/galaxy.js" },
         service: "bounded",
       },
+      scenario: "default",
+      fifth: null,
+      FifthShotObservation,
+      starterSelection,
       performance: { now: () => 100 },
       setTimeout,
       clearTimeout,
@@ -270,6 +278,8 @@ test("Actual client frame code calls Galaxy.step only, pauses solo/guest, and re
   const calls = [];
   const context = vm.createContext({
     stopped: false,
+    captureHold: false,
+    fifth: null,
     appliedPause: null,
     controls: { fire: true, thrust: [100, 0] },
     counters: { frames: 0 },
@@ -933,7 +943,7 @@ for (const owned of [false, true])
           : {}),
       });
       assert.equal(manifest.version, owned ? 3 : 2);
-      assert.equal(Object.keys(manifest.files).length, 18);
+      assert.equal(Object.keys(manifest.files).length, 19);
       assert.equal(manifest.artifacts.length, 8);
       for (const name of ["controller", "wasm-ports"]) {
         const js = await fs.readFile(

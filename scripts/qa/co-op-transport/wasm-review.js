@@ -12,6 +12,7 @@ let nextId = 1,
   initialized = false,
   disposed = false,
   backend = "webgpu",
+  scenario = "default",
   firstSession = null,
   sessionDistinct = null;
 const pending = new Map(),
@@ -21,6 +22,7 @@ const failureCodes = new Set([
   ...[
     "none",
     "open_store",
+    "starter_selection",
     "import_module",
     "compile_wasm",
     "create_galaxy",
@@ -36,6 +38,18 @@ const failureCodes = new Set([
   "initialization_timeout",
   "native_frame_failed",
   "native_action_failed",
+  "fresh_save_required",
+  "scenario_unavailable",
+  "starter_mismatch",
+  "fifth_sequence",
+  "fifth_ambiguous_events",
+  "fifth_queue_full",
+  "fifth_native_context",
+  "fifth_shot_not_retained",
+  "fifth_wrong_pattern",
+  "fifth_mismatch",
+  "fifth_timeout",
+  "fifth_not_ready",
 ]);
 const actionFailureCodes = new Set([
   ...failureCodes,
@@ -83,7 +97,7 @@ function noteDriveVisibility() {
   } catch {
     driveVisibilityLost = true;
     $("status").textContent =
-      "Drive pending: visibility changed. Wait for commands, then leave/dispose; this drive will not pass.";
+      "Native observation pending: visibility changed. Wait for commands, then leave/dispose; this action will not pass.";
   }
 }
 function guardDriveVisibility() {
@@ -164,6 +178,7 @@ function paint() {
         "Actual two native Games/RTC on independent QA origins; no Internet/performance acceptance",
       backend,
       profile_mode: config.profile_mode ?? "factory",
+      scenario,
       checks,
       clients: [state.host, state.guest],
       session_distinct: sessionDistinct,
@@ -175,6 +190,7 @@ function paint() {
     "initialize",
     "connect",
     "drive",
+    "fifth",
     "end",
     "rejoin",
     "leave",
@@ -184,9 +200,18 @@ function paint() {
     $(id).disabled = busy || disposed;
   $("initialize").disabled ||= initialized;
   $("backend").disabled = busy || initialized;
+  $("scenario").disabled = busy || initialized;
+  $("scenario").querySelector('[value="renko-fifth"]').disabled =
+    !config.scenarios?.includes("renko-fifth");
   for (const id of ["connect", "drive", "end", "rejoin", "leave", "verify"])
     $(id).disabled ||= !initialized;
   $("drive").disabled ||= state.guest?.phase !== "connected";
+  $("drive").disabled ||= scenario !== "default";
+  $("fifth").disabled ||=
+    !initialized ||
+    scenario !== "renko-fifth" ||
+    state.guest?.phase !== "connected" ||
+    state.host?.fifth_shot?.state === "complete";
 }
 async function capture() {
   if (!state.host || !state.guest) return;
@@ -194,7 +219,13 @@ async function capture() {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      version: config.profile_mode === "owned" ? 3 : 2,
+      version:
+        scenario === "renko-fifth"
+          ? 4
+          : config.profile_mode === "owned"
+            ? 3
+            : 2,
+      ...(scenario === "renko-fifth" ? { scenario } : {}),
       ...(config.profile_mode === "owned" ? { profile_mode: "owned" } : {}),
       run_id: run,
       backend,
@@ -287,9 +318,12 @@ $("initialize").onclick = () =>
       await new Promise((r) => setTimeout(r, 30));
     }
     backend = $("backend").value;
+    scenario = $("scenario").value;
+    if (scenario !== "default" && !config.scenarios?.includes(scenario))
+      throw new Error("scenario_unavailable");
     [state.host, state.guest] = await Promise.all([
-      send("host", "initialize", { backend, run_id: run }),
-      send("guest", "initialize", { backend, run_id: run }),
+      send("host", "initialize", { backend, run_id: run, scenario }),
+      send("guest", "initialize", { backend, run_id: run, scenario }),
     ]);
     initialized = true;
     check(
@@ -339,6 +373,40 @@ async function drive() {
   }
 }
 $("drive").onclick = () => action("Native drive/fire", drive);
+async function fifthShot() {
+  requireVisibleClients();
+  driveVisibilityLost = false;
+  driveActive = true;
+  try {
+    const baseline = await send("host", "fifth-depart");
+    state.host = baseline.state;
+    const armed = await send("guest", "fifth-arm", baseline.held);
+    state.guest = armed.state;
+    guardDriveVisibility();
+    for (let ordinal = 1; ordinal <= 10; ordinal++) {
+      guardDriveVisibility();
+      const held = await send("host", "fifth-next", { ordinal });
+      state.host = held.state;
+      const committed = await send("guest", "fifth-accept", {
+        ordinal,
+        ...held.held,
+      });
+      state.guest = committed.state;
+      guardDriveVisibility();
+      paint();
+    }
+    await verify();
+    guardDriveVisibility();
+    check(
+      "native-fifth-shot",
+      state.host.fifth_shot.state === "complete" &&
+        state.guest.fifth_shot.state === "complete",
+    );
+  } finally {
+    driveActive = false;
+  }
+}
+$("fifth").onclick = () => action("RENKO native fifth-shot", fifthShot);
 $("end").onclick = () =>
   action("Host end", async () => {
     await send("host", "end");

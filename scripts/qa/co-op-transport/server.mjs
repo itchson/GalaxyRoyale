@@ -3,6 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { once } from "node:events";
 import { makeCoopServer } from "../../../apps/coop/server.mjs";
+import { fifthReasons, validateFifthReport } from "./fifth-shot.js";
 import {
   root,
   stagePath,
@@ -103,10 +104,12 @@ export const wasmCheckNames = new Set([
   "saves-unchanged",
   "dispose-clean",
   "operation-failed",
+  "native-fifth-shot",
 ]);
 export const initializationStages = [
   "none",
   "open_store",
+  "starter_selection",
   "import_module",
   "compile_wasm",
   "create_galaxy",
@@ -124,6 +127,7 @@ export const clientFailureCodes = new Set([
   "initialization_timeout",
   "native_frame_failed",
   "native_action_failed",
+  ...fifthReasons,
 ]);
 export function validateWasmReport(o) {
   const exact = (v, keys) =>
@@ -161,7 +165,8 @@ export function validateWasmReport(o) {
     "movement_observed",
   ];
   const hashes = ["profile_sha", "baseline_sha", "persisted_sha"];
-  const owned = o?.version === 3;
+  const fifth = o?.version === 4;
+  const owned = o?.version === 3 || fifth;
   if (
     !exact(o, [
       "version",
@@ -171,8 +176,10 @@ export function validateWasmReport(o) {
       "clients",
       "session_distinct",
       ...(owned ? ["profile_mode"] : []),
+      ...(fifth ? ["scenario"] : []),
     ]) ||
-    ![2, 3].includes(o.version) ||
+    ![2, 3, 4].includes(o.version) ||
+    (fifth && o.scenario !== "renko-fifth") ||
     (owned && o.profile_mode !== "owned") ||
     !/^[a-f0-9]{16}$/.test(o.run_id) ||
     !["webgpu", "webgl2"].includes(o.backend) ||
@@ -202,6 +209,7 @@ export function validateWasmReport(o) {
         ...counters,
         ...flags,
         ...hashes,
+        ...(fifth ? ["fifth_shot"] : []),
         ...(owned
           ? [
               "owned_export",
@@ -249,7 +257,22 @@ export function validateWasmReport(o) {
               c.owned_slots > 3))))
     )
       throw new Error("Invalid WASM client observations.");
+    if (fifth) validateFifthReport(c.fifth_shot, c.role);
   }
+  if (
+    o.checks.some(
+      (c) =>
+        c.name === "native-fifth-shot" &&
+        (!fifth ||
+          (c.passed &&
+            o.clients.some(
+              (client) => client.fifth_shot.state !== "complete",
+            ))),
+    )
+  )
+    throw new Error(
+      "Fifth-shot check requires both complete native observations.",
+    );
   return o;
 }
 async function body(req) {
@@ -377,6 +400,14 @@ export async function start({
                       ? "guest"
                       : "host",
                   profile_mode: manifest.profile_mode ?? "factory",
+                  ...(manifest.fifth_shot === true
+                    ? {
+                        scenarios:
+                          manifest.version === 3
+                            ? ["default", "renko-fifth"]
+                            : ["default"],
+                      }
+                    : {}),
                   ...(manifest.version === 3
                     ? {
                         source_commit: manifest.source_commit,
@@ -401,7 +432,15 @@ export async function start({
         const report = (wasm ? validateWasmReport : validateReport)(
           await body(req),
         );
-        if (wasm && report.version !== manifest.version)
+        if (
+          wasm &&
+          report.version !== manifest.version &&
+          !(
+            manifest.version === 3 &&
+            manifest.fifth_shot === true &&
+            report.version === 4
+          )
+        )
           throw new Error("Report mode does not match prepared provenance.");
         const captured = {
           ...report,

@@ -112,6 +112,7 @@ export function preparedNames(manifest) {
     throw new Error("Invalid prepared mode.");
   const names = [
     ...wasmPageNames,
+    ...(manifest.fifth_shot === true ? ["fifth-shot.js"] : []),
     ...wasmModuleNames.map((n) => `modules/${n}.js`),
     "modules/storage.js",
   ];
@@ -204,7 +205,7 @@ export async function prepare(
     );
     files[relative] = sha(output);
   }
-  for (const name of dist ? wasmPageNames : pageNames) {
+  for (const name of dist ? [...wasmPageNames, "fifth-shot.js"] : pageNames) {
     const bytes = await fs.readFile(path.join(directory, name));
     await fs.writeFile(path.join(stage, name), bytes);
     inputs[`scripts/qa/co-op-transport/${name}`] = sha(bytes);
@@ -293,7 +294,13 @@ export async function prepare(
         }
       : {}),
     ...(dist
-      ? { mode: "wasm", builds, artifacts, dist: path.resolve(dist) }
+      ? {
+          mode: "wasm",
+          fifth_shot: true,
+          builds,
+          artifacts,
+          dist: path.resolve(dist),
+        }
       : {}),
     typescript: ts.version,
     scope: ownedLoadout

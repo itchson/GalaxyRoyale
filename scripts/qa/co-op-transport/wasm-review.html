@@ -56,10 +56,22 @@
       <option value="webgl2">WebGL2</option>
     </select></label
   >
+  <label
+    >Scenario
+    <select id="scenario">
+      <option value="default">
+        PAN host / HUGO guest (existing saves retained)
+      </option>
+      <option value="renko-fifth">
+        Fresh RENKO fifth-shot (empty owned QA stores only)
+      </option>
+    </select></label
+  >
   <div>
     <button id="initialize">1. Initialize two native Games</button
     ><button id="connect" disabled>2. Create + join</button
     ><button id="drive" disabled>3. Drive + fire 360 native steps</button
+    ><button id="fifth" disabled>RENKO: depart + verify ten primaries</button
     ><button id="end" disabled>4. Host end + verify saves</button
     ><button id="rejoin" disabled>5. New session + join</button
     ><button id="leave" disabled>Guest leave + verify saves</button
@@ -97,6 +109,12 @@ No run yet.</pre>
     loadout; the report identifies the mode. No claim of real-time 60 FPS, every
     ability's behavior or human gameplay acceptance. Capabilities/SDP/ICE remain
     private in memory.
+  </p>
+  <p>
+    The optional RENKO case requires a fresh unused QA port and refuses existing
+    saves. Only the host fires. Native shot events count admitted primaries;
+    native simulation pauses after each one while the real guest commits its
+    complete frame. Missing/ambiguous shots are inconclusive, not a pass.
   </p>
   <script type="module" src="/wasm-review.js"></script>
 </html>
