@@ -1,0 +1,2418 @@
+{
+  "schemaVersion": 1,
+  "title": "Galaxy Royale DevBible",
+  "description": "Source-backed characters, mechanics, universe rules and runtime art. Implementation status is distinct from verification.",
+  "categories": [
+    {
+      "id": "overview",
+      "label": "Project & verification"
+    },
+    {
+      "id": "champions",
+      "label": "Characters & champions"
+    },
+    {
+      "id": "ships",
+      "label": "Ships & equipment"
+    },
+    {
+      "id": "enemies",
+      "label": "Enemies & bosses"
+    },
+    {
+      "id": "universe",
+      "label": "Universe & biomes"
+    },
+    {
+      "id": "missions",
+      "label": "Missions & progression"
+    },
+    {
+      "id": "technology",
+      "label": "Engine & art"
+    }
+  ],
+  "entries": [
+    {
+      "id": "galaxy-royale",
+      "title": "Galaxy Royale",
+      "category": "overview",
+      "status": "implemented",
+      "summary": "A solo Rust/WASM space shooter with local saves, destructible occupied pixels, procedural regions and an eight-champion campaign.",
+      "tags": ["overview", "implemented"],
+      "facts": [
+        {
+          "label": "Runtime",
+          "value": "Rust simulation; WebGPU with WebGL2 fallback"
+        },
+        {
+          "label": "Save",
+          "value": "Profile schema 4; per-ship XP and loadouts"
+        },
+        {
+          "label": "Production",
+          "value": "Private local Studio; factual append-only reviews and run observations"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Behavior and scope",
+          "paragraphs": [
+            "The game is implemented. Natural starting-Scout balance, long sessions, audible comfort and named physical-phone performance have separate verification gates. Passing native tests or viewing a contact sheet does not complete those gates.",
+            "This DevBible is a source-backed reference, not a live agent monitor. Production records remain in Mission Control. Catalog data is versioned in the repository; changes require implementation review."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "path": "docs/CAMPAIGN.md",
+          "label": "CAMPAIGN.md",
+          "role": "documentation"
+        },
+        {
+          "path": "docs/ENGINE.md",
+          "label": "ENGINE.md",
+          "role": "documentation"
+        },
+        {
+          "path": "docs/TEAM_PIPELINE.md",
+          "label": "TEAM_PIPELINE.md",
+          "role": "documentation"
+        },
+        {
+          "path": "docs/DEV_BIBLE.md",
+          "label": "DEV_BIBLE.md",
+          "role": "reference contract"
+        },
+        {
+          "path": "docs/wiki/README.md",
+          "label": "Catalog maintenance",
+          "role": "maintenance"
+        }
+      ],
+      "related": ["validation", "world-seed", "ships", "league", "future"],
+      "media": []
+    },
+    {
+      "id": "champion-0",
+      "title": "Lyra Voss",
+      "category": "champions",
+      "status": "implemented",
+      "summary": "Human champion piloting Dawnneedle.",
+      "tags": ["champions", "implemented"],
+      "facts": [
+        {
+          "label": "Ship",
+          "value": "Dawnneedle"
+        },
+        {
+          "label": "Species",
+          "value": "Human"
+        },
+        {
+          "label": "Combat signature",
+          "value": "Stutter dash / needle burst"
+        },
+        {
+          "label": "Hull family",
+          "value": "Dart"
+        },
+        {
+          "label": "Canonical grid",
+          "value": "-1:-1"
+        },
+        {
+          "label": "Base encounter hull",
+          "value": "260.0"
+        },
+        {
+          "label": "Ship construction currency",
+          "value": "Offense"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Behavior and scope",
+          "paragraphs": [
+            "A first production trial victory awards this champion patch, its ship and ability blueprints, three construction-category points and 40 selected-ship XP. Discovering a blueprint does not craft or equip it. Diagnostic scenes suppress those rewards.",
+            "Champion cells are authored occupied sprites. Ship, portrait and patch indices follow this stable eight-character order. The construction currency differs from the equipped ability category where explicitly defined by the ability catalog."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "path": "crates/game_core/src/campaign.rs",
+          "label": "campaign.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "crates/game_core/src/campaign_runtime.rs",
+          "label": "campaign_runtime.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "docs/CAMPAIGN.md",
+          "label": "CAMPAIGN.md",
+          "role": "documentation"
+        }
+      ],
+      "related": ["ships", "league", "abilities"],
+      "media": [
+        {
+          "path": "assets/ui/campaign-preview.png",
+          "label": "Champion fleet contact sheet",
+          "kind": "runtime-art",
+          "provenance": "assets/ui/CAMPAIGN.md",
+          "caption": "Authored ship silhouettes and UI portraits. A development contact sheet, not a gameplay screenshot."
+        }
+      ],
+      "data": {
+        "index": 0,
+        "species": "Human",
+        "ship": "Dawnneedle",
+        "ability": "Stutter dash / needle burst",
+        "silhouette": "needle",
+        "family": 0,
+        "constructionCategory": 0,
+        "grid": [-1, -1],
+        "color": [255, 195, 88],
+        "baseHull": 260.0
+      }
+    },
+    {
+      "id": "champion-1",
+      "title": "Korr-9",
+      "category": "champions",
+      "status": "implemented",
+      "summary": "Automaton champion piloting Bulwark.",
+      "tags": ["champions", "implemented"],
+      "facts": [
+        {
+          "label": "Ship",
+          "value": "Bulwark"
+        },
+        {
+          "label": "Species",
+          "value": "Automaton"
+        },
+        {
+          "label": "Combat signature",
+          "value": "Rotating broadside"
+        },
+        {
+          "label": "Hull family",
+          "value": "Bastion"
+        },
+        {
+          "label": "Canonical grid",
+          "value": "0:-1"
+        },
+        {
+          "label": "Base encounter hull",
+          "value": "390.0"
+        },
+        {
+          "label": "Ship construction currency",
+          "value": "Defense"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Behavior and scope",
+          "paragraphs": [
+            "A first production trial victory awards this champion patch, its ship and ability blueprints, three construction-category points and 40 selected-ship XP. Discovering a blueprint does not craft or equip it. Diagnostic scenes suppress those rewards.",
+            "Champion cells are authored occupied sprites. Ship, portrait and patch indices follow this stable eight-character order. The construction currency differs from the equipped ability category where explicitly defined by the ability catalog."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "path": "crates/game_core/src/campaign.rs",
+          "label": "campaign.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "crates/game_core/src/campaign_runtime.rs",
+          "label": "campaign_runtime.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "docs/CAMPAIGN.md",
+          "label": "CAMPAIGN.md",
+          "role": "documentation"
+        }
+      ],
+      "related": ["ships", "league", "abilities"],
+      "media": [
+        {
+          "path": "assets/ui/campaign-preview.png",
+          "label": "Champion fleet contact sheet",
+          "kind": "runtime-art",
+          "provenance": "assets/ui/CAMPAIGN.md",
+          "caption": "Authored ship silhouettes and UI portraits. A development contact sheet, not a gameplay screenshot."
+        }
+      ],
+      "data": {
+        "index": 1,
+        "species": "Automaton",
+        "ship": "Bulwark",
+        "ability": "Rotating broadside",
+        "silhouette": "shoulder-armor",
+        "family": 1,
+        "constructionCategory": 1,
+        "grid": [0, -1],
+        "color": [255, 104, 102],
+        "baseHull": 390.0
+      }
+    },
+    {
+      "id": "champion-2",
+      "title": "Sable Myrr",
+      "category": "champions",
+      "status": "implemented",
+      "summary": "Vesper champion piloting Nightrail.",
+      "tags": ["champions", "implemented"],
+      "facts": [
+        {
+          "label": "Ship",
+          "value": "Nightrail"
+        },
+        {
+          "label": "Species",
+          "value": "Vesper"
+        },
+        {
+          "label": "Combat signature",
+          "value": "Serpent spiral / guided missiles"
+        },
+        {
+          "label": "Hull family",
+          "value": "Coil"
+        },
+        {
+          "label": "Canonical grid",
+          "value": "1:-1"
+        },
+        {
+          "label": "Base encounter hull",
+          "value": "350.0"
+        },
+        {
+          "label": "Ship construction currency",
+          "value": "Passive"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Behavior and scope",
+          "paragraphs": [
+            "A first production trial victory awards this champion patch, its ship and ability blueprints, three construction-category points and 40 selected-ship XP. Discovering a blueprint does not craft or equip it. Diagnostic scenes suppress those rewards.",
+            "Champion cells are authored occupied sprites. Ship, portrait and patch indices follow this stable eight-character order. The construction currency differs from the equipped ability category where explicitly defined by the ability catalog."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "path": "crates/game_core/src/campaign.rs",
+          "label": "campaign.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "crates/game_core/src/campaign_runtime.rs",
+          "label": "campaign_runtime.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "docs/CAMPAIGN.md",
+          "label": "CAMPAIGN.md",
+          "role": "documentation"
+        }
+      ],
+      "related": ["ships", "league", "abilities"],
+      "media": [
+        {
+          "path": "assets/ui/campaign-preview.png",
+          "label": "Champion fleet contact sheet",
+          "kind": "runtime-art",
+          "provenance": "assets/ui/CAMPAIGN.md",
+          "caption": "Authored ship silhouettes and UI portraits. A development contact sheet, not a gameplay screenshot."
+        }
+      ],
+      "data": {
+        "index": 2,
+        "species": "Vesper",
+        "ship": "Nightrail",
+        "ability": "Serpent spiral / guided missiles",
+        "silhouette": "forked-serpent",
+        "family": 2,
+        "constructionCategory": 2,
+        "grid": [1, -1],
+        "color": [188, 123, 255],
+        "baseHull": 350.0
+      }
+    },
+    {
+      "id": "champion-3",
+      "title": "Xil of Aurora",
+      "category": "champions",
+      "status": "implemented",
+      "summary": "Crystalline champion piloting Prism.",
+      "tags": ["champions", "implemented"],
+      "facts": [
+        {
+          "label": "Ship",
+          "value": "Prism"
+        },
+        {
+          "label": "Species",
+          "value": "Crystalline"
+        },
+        {
+          "label": "Combat signature",
+          "value": "Offset fork volleys"
+        },
+        {
+          "label": "Hull family",
+          "value": "Dart"
+        },
+        {
+          "label": "Canonical grid",
+          "value": "1:0"
+        },
+        {
+          "label": "Base encounter hull",
+          "value": "300.0"
+        },
+        {
+          "label": "Ship construction currency",
+          "value": "Offense"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Behavior and scope",
+          "paragraphs": [
+            "A first production trial victory awards this champion patch, its ship and ability blueprints, three construction-category points and 40 selected-ship XP. Discovering a blueprint does not craft or equip it. Diagnostic scenes suppress those rewards.",
+            "Champion cells are authored occupied sprites. Ship, portrait and patch indices follow this stable eight-character order. The construction currency differs from the equipped ability category where explicitly defined by the ability catalog."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "path": "crates/game_core/src/campaign.rs",
+          "label": "campaign.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "crates/game_core/src/campaign_runtime.rs",
+          "label": "campaign_runtime.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "docs/CAMPAIGN.md",
+          "label": "CAMPAIGN.md",
+          "role": "documentation"
+        }
+      ],
+      "related": ["ships", "league", "abilities"],
+      "media": [
+        {
+          "path": "assets/ui/campaign-preview.png",
+          "label": "Champion fleet contact sheet",
+          "kind": "runtime-art",
+          "provenance": "assets/ui/CAMPAIGN.md",
+          "caption": "Authored ship silhouettes and UI portraits. A development contact sheet, not a gameplay screenshot."
+        }
+      ],
+      "data": {
+        "index": 3,
+        "species": "Crystalline",
+        "ship": "Prism",
+        "ability": "Offset fork volleys",
+        "silhouette": "split-wings",
+        "family": 0,
+        "constructionCategory": 0,
+        "grid": [1, 0],
+        "color": [104, 230, 255],
+        "baseHull": 300.0
+      }
+    },
+    {
+      "id": "champion-4",
+      "title": "Maera Quill",
+      "category": "champions",
+      "status": "implemented",
+      "summary": "Human champion piloting Windrunner.",
+      "tags": ["champions", "implemented"],
+      "facts": [
+        {
+          "label": "Ship",
+          "value": "Windrunner"
+        },
+        {
+          "label": "Species",
+          "value": "Human"
+        },
+        {
+          "label": "Combat signature",
+          "value": "Charge / damaging ion wake"
+        },
+        {
+          "label": "Hull family",
+          "value": "Dart"
+        },
+        {
+          "label": "Canonical grid",
+          "value": "1:1"
+        },
+        {
+          "label": "Base encounter hull",
+          "value": "290.0"
+        },
+        {
+          "label": "Ship construction currency",
+          "value": "Passive"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Behavior and scope",
+          "paragraphs": [
+            "A first production trial victory awards this champion patch, its ship and ability blueprints, three construction-category points and 40 selected-ship XP. Discovering a blueprint does not craft or equip it. Diagnostic scenes suppress those rewards.",
+            "Champion cells are authored occupied sprites. Ship, portrait and patch indices follow this stable eight-character order. The construction currency differs from the equipped ability category where explicitly defined by the ability catalog."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "path": "crates/game_core/src/campaign.rs",
+          "label": "campaign.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "crates/game_core/src/campaign_runtime.rs",
+          "label": "campaign_runtime.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "docs/CAMPAIGN.md",
+          "label": "CAMPAIGN.md",
+          "role": "documentation"
+        }
+      ],
+      "related": ["ships", "league", "abilities"],
+      "media": [
+        {
+          "path": "assets/ui/campaign-preview.png",
+          "label": "Champion fleet contact sheet",
+          "kind": "runtime-art",
+          "provenance": "assets/ui/CAMPAIGN.md",
+          "caption": "Authored ship silhouettes and UI portraits. A development contact sheet, not a gameplay screenshot."
+        }
+      ],
+      "data": {
+        "index": 4,
+        "species": "Human",
+        "ship": "Windrunner",
+        "ability": "Charge / damaging ion wake",
+        "silhouette": "swept-wings",
+        "family": 0,
+        "constructionCategory": 2,
+        "grid": [1, 1],
+        "color": [113, 244, 153],
+        "baseHull": 290.0
+      }
+    },
+    {
+      "id": "champion-5",
+      "title": "Orun Vale",
+      "category": "champions",
+      "status": "implemented",
+      "summary": "Golem champion piloting Ironwake.",
+      "tags": ["champions", "implemented"],
+      "facts": [
+        {
+          "label": "Ship",
+          "value": "Ironwake"
+        },
+        {
+          "label": "Species",
+          "value": "Golem"
+        },
+        {
+          "label": "Combat signature",
+          "value": "Telegraphed ram / impact nova"
+        },
+        {
+          "label": "Hull family",
+          "value": "Bastion"
+        },
+        {
+          "label": "Canonical grid",
+          "value": "0:1"
+        },
+        {
+          "label": "Base encounter hull",
+          "value": "440.0"
+        },
+        {
+          "label": "Ship construction currency",
+          "value": "Defense"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Behavior and scope",
+          "paragraphs": [
+            "A first production trial victory awards this champion patch, its ship and ability blueprints, three construction-category points and 40 selected-ship XP. Discovering a blueprint does not craft or equip it. Diagnostic scenes suppress those rewards.",
+            "Champion cells are authored occupied sprites. Ship, portrait and patch indices follow this stable eight-character order. The construction currency differs from the equipped ability category where explicitly defined by the ability catalog."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "path": "crates/game_core/src/campaign.rs",
+          "label": "campaign.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "crates/game_core/src/campaign_runtime.rs",
+          "label": "campaign_runtime.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "docs/CAMPAIGN.md",
+          "label": "CAMPAIGN.md",
+          "role": "documentation"
+        }
+      ],
+      "related": ["ships", "league", "abilities"],
+      "media": [
+        {
+          "path": "assets/ui/campaign-preview.png",
+          "label": "Champion fleet contact sheet",
+          "kind": "runtime-art",
+          "provenance": "assets/ui/CAMPAIGN.md",
+          "caption": "Authored ship silhouettes and UI portraits. A development contact sheet, not a gameplay screenshot."
+        }
+      ],
+      "data": {
+        "index": 5,
+        "species": "Golem",
+        "ship": "Ironwake",
+        "ability": "Telegraphed ram / impact nova",
+        "silhouette": "ram-prow",
+        "family": 1,
+        "constructionCategory": 1,
+        "grid": [0, 1],
+        "color": [255, 157, 88],
+        "baseHull": 440.0
+      }
+    },
+    {
+      "id": "champion-6",
+      "title": "Vexa Null",
+      "category": "champions",
+      "status": "implemented",
+      "summary": "Voidborn champion piloting Voidcoil.",
+      "tags": ["champions", "implemented"],
+      "facts": [
+        {
+          "label": "Ship",
+          "value": "Voidcoil"
+        },
+        {
+          "label": "Species",
+          "value": "Voidborn"
+        },
+        {
+          "label": "Combat signature",
+          "value": "Circling helix / piercing seekers"
+        },
+        {
+          "label": "Hull family",
+          "value": "Coil"
+        },
+        {
+          "label": "Canonical grid",
+          "value": "-1:1"
+        },
+        {
+          "label": "Base encounter hull",
+          "value": "370.0"
+        },
+        {
+          "label": "Ship construction currency",
+          "value": "Passive"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Behavior and scope",
+          "paragraphs": [
+            "A first production trial victory awards this champion patch, its ship and ability blueprints, three construction-category points and 40 selected-ship XP. Discovering a blueprint does not craft or equip it. Diagnostic scenes suppress those rewards.",
+            "Champion cells are authored occupied sprites. Ship, portrait and patch indices follow this stable eight-character order. The construction currency differs from the equipped ability category where explicitly defined by the ability catalog."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "path": "crates/game_core/src/campaign.rs",
+          "label": "campaign.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "crates/game_core/src/campaign_runtime.rs",
+          "label": "campaign_runtime.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "docs/CAMPAIGN.md",
+          "label": "CAMPAIGN.md",
+          "role": "documentation"
+        }
+      ],
+      "related": ["ships", "league", "abilities"],
+      "media": [
+        {
+          "path": "assets/ui/campaign-preview.png",
+          "label": "Champion fleet contact sheet",
+          "kind": "runtime-art",
+          "provenance": "assets/ui/CAMPAIGN.md",
+          "caption": "Authored ship silhouettes and UI portraits. A development contact sheet, not a gameplay screenshot."
+        }
+      ],
+      "data": {
+        "index": 6,
+        "species": "Voidborn",
+        "ship": "Voidcoil",
+        "ability": "Circling helix / piercing seekers",
+        "silhouette": "ring-fins",
+        "family": 2,
+        "constructionCategory": 2,
+        "grid": [-1, 1],
+        "color": [239, 116, 228],
+        "baseHull": 370.0
+      }
+    },
+    {
+      "id": "champion-7",
+      "title": "Atlas-0",
+      "category": "champions",
+      "status": "implemented",
+      "summary": "Ancient automaton champion piloting Sunspear.",
+      "tags": ["champions", "implemented"],
+      "facts": [
+        {
+          "label": "Ship",
+          "value": "Sunspear"
+        },
+        {
+          "label": "Species",
+          "value": "Ancient automaton"
+        },
+        {
+          "label": "Combat signature",
+          "value": "Sniper burst / piercing spear"
+        },
+        {
+          "label": "Hull family",
+          "value": "Bastion"
+        },
+        {
+          "label": "Canonical grid",
+          "value": "-1:0"
+        },
+        {
+          "label": "Base encounter hull",
+          "value": "340.0"
+        },
+        {
+          "label": "Ship construction currency",
+          "value": "Offense"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Behavior and scope",
+          "paragraphs": [
+            "A first production trial victory awards this champion patch, its ship and ability blueprints, three construction-category points and 40 selected-ship XP. Discovering a blueprint does not craft or equip it. Diagnostic scenes suppress those rewards.",
+            "Champion cells are authored occupied sprites. Ship, portrait and patch indices follow this stable eight-character order. The construction currency differs from the equipped ability category where explicitly defined by the ability catalog."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "path": "crates/game_core/src/campaign.rs",
+          "label": "campaign.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "crates/game_core/src/campaign_runtime.rs",
+          "label": "campaign_runtime.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "docs/CAMPAIGN.md",
+          "label": "CAMPAIGN.md",
+          "role": "documentation"
+        }
+      ],
+      "related": ["ships", "league", "abilities"],
+      "media": [
+        {
+          "path": "assets/ui/campaign-preview.png",
+          "label": "Champion fleet contact sheet",
+          "kind": "runtime-art",
+          "provenance": "assets/ui/CAMPAIGN.md",
+          "caption": "Authored ship silhouettes and UI portraits. A development contact sheet, not a gameplay screenshot."
+        }
+      ],
+      "data": {
+        "index": 7,
+        "species": "Ancient automaton",
+        "ship": "Sunspear",
+        "ability": "Sniper burst / piercing spear",
+        "silhouette": "spear-prow",
+        "family": 1,
+        "constructionCategory": 0,
+        "grid": [-1, 0],
+        "color": [255, 233, 158],
+        "baseHull": 340.0
+      }
+    },
+    {
+      "id": "biome-0",
+      "title": "Haven Expanse",
+      "category": "universe",
+      "status": "implemented",
+      "summary": "Seeded biome 0 with its own palette, scenery and ordinary family mixture.",
+      "tags": ["universe", "implemented"],
+      "facts": [
+        {
+          "label": "Kind",
+          "value": "0"
+        },
+        {
+          "label": "Relative Dart / Bastion / Coil weights",
+          "value": "4 / 3 / 3"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Behavior and scope",
+          "paragraphs": [
+            "The nearest jittered 4,200-unit tile chooses a stable biome. Haven is forced inside 1,400 units of the universe origin; the biome name alone does not imply sanctuary protection. The base three-family mixture remains the ordinary roster here.",
+            "Scenery is cosmetic. Isotope Scar and other distant motifs do not apply radiation damage. A fuller biome roster and radiation hazards remain future work."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "path": "crates/game_core/src/regions.rs",
+          "label": "regions.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "crates/game_core/src/cosmic_background.rs",
+          "label": "cosmic_background.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "docs/BIOME_ENEMIES.md",
+          "label": "BIOME_ENEMIES.md",
+          "role": "documentation"
+        }
+      ],
+      "related": ["world-seed", "sanctuaries"],
+      "media": [],
+      "data": {
+        "kind": 0,
+        "spawnWeights": [4, 3, 3]
+      }
+    },
+    {
+      "id": "biome-1",
+      "title": "Amethyst Drift",
+      "category": "universe",
+      "status": "implemented",
+      "summary": "Seeded biome 1 with its own palette, scenery and ordinary family mixture.",
+      "tags": ["universe", "implemented"],
+      "facts": [
+        {
+          "label": "Kind",
+          "value": "1"
+        },
+        {
+          "label": "Relative Dart / Bastion / Coil weights",
+          "value": "2 / 3 / 6"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Behavior and scope",
+          "paragraphs": [
+            "The nearest jittered 4,200-unit tile chooses a stable biome. Haven is forced inside 1,400 units of the universe origin; the biome name alone does not imply sanctuary protection. The base three-family mixture remains the ordinary roster here.",
+            "Scenery is cosmetic. Isotope Scar and other distant motifs do not apply radiation damage. A fuller biome roster and radiation hazards remain future work."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "path": "crates/game_core/src/regions.rs",
+          "label": "regions.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "crates/game_core/src/cosmic_background.rs",
+          "label": "cosmic_background.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "docs/BIOME_ENEMIES.md",
+          "label": "BIOME_ENEMIES.md",
+          "role": "documentation"
+        }
+      ],
+      "related": ["world-seed", "sanctuaries"],
+      "media": [],
+      "data": {
+        "kind": 1,
+        "spawnWeights": [2, 3, 6]
+      }
+    },
+    {
+      "id": "biome-2",
+      "title": "Aurora Reach",
+      "category": "universe",
+      "status": "implemented",
+      "summary": "Seeded biome 2 with its own palette, scenery and ordinary family mixture.",
+      "tags": ["universe", "implemented"],
+      "facts": [
+        {
+          "label": "Kind",
+          "value": "2"
+        },
+        {
+          "label": "Relative Dart / Bastion / Coil weights",
+          "value": "5 / 2 / 4"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Behavior and scope",
+          "paragraphs": [
+            "The nearest jittered 4,200-unit tile chooses a stable biome. Haven is forced inside 1,400 units of the universe origin; the biome name alone does not imply sanctuary protection. The base three-family mixture remains the ordinary roster here.",
+            "Scenery is cosmetic. Isotope Scar and other distant motifs do not apply radiation damage. A fuller biome roster and radiation hazards remain future work."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "path": "crates/game_core/src/regions.rs",
+          "label": "regions.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "crates/game_core/src/cosmic_background.rs",
+          "label": "cosmic_background.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "docs/BIOME_ENEMIES.md",
+          "label": "BIOME_ENEMIES.md",
+          "role": "documentation"
+        }
+      ],
+      "related": ["world-seed", "sanctuaries"],
+      "media": [],
+      "data": {
+        "kind": 2,
+        "spawnWeights": [5, 2, 4]
+      }
+    },
+    {
+      "id": "biome-3",
+      "title": "Iron Belt",
+      "category": "universe",
+      "status": "implemented",
+      "summary": "Seeded biome 3 with its own palette, scenery and ordinary family mixture.",
+      "tags": ["universe", "implemented"],
+      "facts": [
+        {
+          "label": "Kind",
+          "value": "3"
+        },
+        {
+          "label": "Relative Dart / Bastion / Coil weights",
+          "value": "2 / 7 / 2"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Behavior and scope",
+          "paragraphs": [
+            "The nearest jittered 4,200-unit tile chooses a stable biome. Haven is forced inside 1,400 units of the universe origin; the biome name alone does not imply sanctuary protection. Ordinary Bastions born here can become Riveters.",
+            "Scenery is cosmetic. Isotope Scar and other distant motifs do not apply radiation damage. A fuller biome roster and radiation hazards remain future work."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "path": "crates/game_core/src/regions.rs",
+          "label": "regions.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "crates/game_core/src/cosmic_background.rs",
+          "label": "cosmic_background.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "docs/BIOME_ENEMIES.md",
+          "label": "BIOME_ENEMIES.md",
+          "role": "documentation"
+        }
+      ],
+      "related": ["world-seed", "sanctuaries"],
+      "media": [],
+      "data": {
+        "kind": 3,
+        "spawnWeights": [2, 7, 2]
+      }
+    },
+    {
+      "id": "biome-4",
+      "title": "Radial Wastes",
+      "category": "universe",
+      "status": "implemented",
+      "summary": "Seeded biome 4 with its own palette, scenery and ordinary family mixture.",
+      "tags": ["universe", "implemented"],
+      "facts": [
+        {
+          "label": "Kind",
+          "value": "4"
+        },
+        {
+          "label": "Relative Dart / Bastion / Coil weights",
+          "value": "7 / 3 / 2"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Behavior and scope",
+          "paragraphs": [
+            "The nearest jittered 4,200-unit tile chooses a stable biome. Haven is forced inside 1,400 units of the universe origin; the biome name alone does not imply sanctuary protection. Ordinary Darts born here can become Radiation Motes.",
+            "Scenery is cosmetic. Isotope Scar and other distant motifs do not apply radiation damage. A fuller biome roster and radiation hazards remain future work."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "path": "crates/game_core/src/regions.rs",
+          "label": "regions.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "crates/game_core/src/cosmic_background.rs",
+          "label": "cosmic_background.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "docs/BIOME_ENEMIES.md",
+          "label": "BIOME_ENEMIES.md",
+          "role": "documentation"
+        }
+      ],
+      "related": ["world-seed", "sanctuaries"],
+      "media": [],
+      "data": {
+        "kind": 4,
+        "spawnWeights": [7, 3, 2]
+      }
+    },
+    {
+      "id": "biome-5",
+      "title": "Cryo Rift",
+      "category": "universe",
+      "status": "implemented",
+      "summary": "Seeded biome 5 with its own palette, scenery and ordinary family mixture.",
+      "tags": ["universe", "implemented"],
+      "facts": [
+        {
+          "label": "Kind",
+          "value": "5"
+        },
+        {
+          "label": "Relative Dart / Bastion / Coil weights",
+          "value": "3 / 3 / 6"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Behavior and scope",
+          "paragraphs": [
+            "The nearest jittered 4,200-unit tile chooses a stable biome. Haven is forced inside 1,400 units of the universe origin; the biome name alone does not imply sanctuary protection. The base three-family mixture remains the ordinary roster here.",
+            "Scenery is cosmetic. Isotope Scar and other distant motifs do not apply radiation damage. A fuller biome roster and radiation hazards remain future work."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "path": "crates/game_core/src/regions.rs",
+          "label": "regions.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "crates/game_core/src/cosmic_background.rs",
+          "label": "cosmic_background.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "docs/BIOME_ENEMIES.md",
+          "label": "BIOME_ENEMIES.md",
+          "role": "documentation"
+        }
+      ],
+      "related": ["world-seed", "sanctuaries"],
+      "media": [],
+      "data": {
+        "kind": 5,
+        "spawnWeights": [3, 3, 6]
+      }
+    },
+    {
+      "id": "world-seed",
+      "title": "Seeded universe & discovery nodes",
+      "category": "universe",
+      "status": "implemented",
+      "summary": "A deterministic nearest-jittered-tile network with canonical discovery-site identities.",
+      "tags": ["universe", "implemented"],
+      "facts": [
+        {
+          "label": "Region size",
+          "value": "4200 world units"
+        },
+        {
+          "label": "Practical coordinates",
+          "value": "Finite positions bounded to ±1,000,000"
+        },
+        {
+          "label": "Site IDs",
+          "value": "Canonical gx:gy strings"
+        },
+        {
+          "label": "Nearby queries",
+          "value": "3 × 3 adjacent grid tiles"
+        },
+        {
+          "label": "Site sanctuary radius",
+          "value": "160–230 world units"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Behavior and scope",
+          "paragraphs": [
+            "The u32 seed, signed grid coordinates and fixed hash salts generate tile centers, biomes and site metadata. Tile centers jitter within 0.28–0.72 of each tile. Sites near Haven and outside the practical world boundary are rejected. This is bounded deterministic generation, not an infinitely precise universe.",
+            "Discovery records refer to canonical seeded sites. The map shows known sites and actual circles, without inventing polygon biome boundaries. Courier and bounty mission identity derives from the site."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "path": "crates/game_core/src/regions.rs",
+          "label": "regions.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "crates/game_core/src/universe_map.rs",
+          "label": "universe_map.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "docs/CONTRACTS.md",
+          "label": "CONTRACTS.md",
+          "role": "documentation"
+        }
+      ],
+      "related": ["missions", "sanctuaries", "biome-0"],
+      "media": [],
+      "data": {
+        "regionSize": 4200,
+        "hubBiomeRadius": 1400,
+        "worldLimit": 1000000
+      }
+    },
+    {
+      "id": "sanctuaries",
+      "title": "Haven, remote sanctuaries & belts",
+      "category": "universe",
+      "status": "implemented",
+      "summary": "Haven is the repair, banking and construction hub; remote safe sites have seeded missions and orbital belts.",
+      "tags": ["universe", "implemented"],
+      "facts": [
+        {
+          "label": "Haven safety",
+          "value": "240 world units from origin"
+        },
+        {
+          "label": "Remote belt inner radius",
+          "value": "Site radius + 240"
+        },
+        {
+          "label": "Remote belt outer radius",
+          "value": "Site radius + 520"
+        },
+        {
+          "label": "Material tiers",
+          "value": "1–5"
+        },
+        {
+          "label": "Recommended belt levels",
+          "value": "1 / 3 / 5 / 10 / 12"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Behavior and scope",
+          "paragraphs": [
+            "Sanctuary protection suppresses hostile spawning, incoming damage and firing. Shared projectile sweeps reject protected crossings. Asteroids use canonical circle queries while moving; these are physical exclusions, not a cosmetic shield reward.",
+            "Only physical home arrival banks carried crafting materials. Remote sanctuaries do not become a Forge or a cargo bank. Haven facilities are Forge, Hangar, Journal and Arenas. Each real facility has a semantic world hitbox while the ship remains within Haven."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "path": "crates/game_core/src/regions.rs",
+          "label": "regions.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "crates/game_core/src/asteroid_zones.rs",
+          "label": "asteroid_zones.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "crates/game_core/src/dock_facilities.rs",
+          "label": "dock_facilities.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "crates/game_core/src/lib.rs",
+          "label": "lib.rs",
+          "role": "implementation"
+        }
+      ],
+      "related": ["cargo", "missions"],
+      "media": [],
+      "data": {
+        "havenSafeRadius": 240,
+        "beltOffsets": [240, 520],
+        "beltRecommendedLevels": [1, 3, 5, 10, 12]
+      }
+    },
+    {
+      "id": "missions",
+      "title": "Courier & bounty missions",
+      "category": "missions",
+      "status": "implemented",
+      "summary": "Two seeded site mission types use real accepted progress and once-only claims.",
+      "tags": ["missions", "implemented"],
+      "facts": [
+        {
+          "label": "Courier",
+          "value": "Collect the relay packet, visit Haven, then return to the source beacon to claim"
+        },
+        {
+          "label": "Bounty",
+          "value": "Defeat the requested family; return to the originating site"
+        },
+        {
+          "label": "Persistence",
+          "value": "Canonical discovered-site IDs and accepted mission state"
+        },
+        {
+          "label": "Serialized naming",
+          "value": "quests / quest_log retained for save compatibility"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Behavior and scope",
+          "paragraphs": [
+            "Player-facing language uses missions. Existing Rust/JSON fields named quests remain unchanged; the DevBible does not silently rename the save protocol. Courier packets are mission state, distinct from unbanked crafting cargo.",
+            "A courier mission collects a relay packet at its source beacon. Visiting Haven marks the delivery complete; claiming the once-only reward still requires returning to that same source beacon.",
+            "A bounty requires the site-defined family and 8–12 kills. Bosses count as one family kill. Progress can be earned away from the source site; the navigation target leads to the known source for the claim, not to a fabricated enemy location. Claims are checked in the Rust simulation."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "path": "crates/game_core/src/lib.rs",
+          "label": "lib.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "crates/game_core/src/regions.rs",
+          "label": "regions.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "docs/DIALOGUE.md",
+          "label": "DIALOGUE.md",
+          "role": "documentation"
+        }
+      ],
+      "related": ["world-seed", "cargo"],
+      "media": [],
+      "data": {
+        "events": ["courier", "bounty"],
+        "targetKills": [8, 12]
+      }
+    },
+    {
+      "id": "ships",
+      "title": "Fleet & hull identity",
+      "category": "ships",
+      "status": "implemented",
+      "summary": "Ten stable ship IDs separate crafted champion hulls from the tournament reward.",
+      "tags": ["ships", "implemented"],
+      "facts": [
+        {
+          "label": "ID 0",
+          "value": "Haven Scout"
+        },
+        {
+          "label": "IDs 1–8",
+          "value": "Champion ships in the eight-character order"
+        },
+        {
+          "label": "ID 9",
+          "value": "Royale Sovereign"
+        },
+        {
+          "label": "Crafted chassis art",
+          "value": "32 × 32 occupied-cell bodies"
+        },
+        {
+          "label": "Starter ship art",
+          "value": "Existing generated base body retained"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Behavior and scope",
+          "paragraphs": [
+            "Each ship owns XP, six hardware ranks and one equipped automatic ability in each offense/defense/passive category. Shared crafted inventory does not silently grant effects to other ships. Stronger owned ranks are capped by the selected normal ship level.",
+            "Freshly crafted hulls and the new Sovereign award start at XP 0 / LV 1. Sovereign has an explicit enhanced chassis and three rank-five royal bundles while equipped; its reward exception does not fabricate XP or overwrite the ordinary boss counters."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "path": "crates/game_core/src/campaign.rs",
+          "label": "campaign.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "crates/game_core/src/abilities.rs",
+          "label": "abilities.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "crates/game_core/src/ship_progression.rs",
+          "label": "ship_progression.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "docs/CAMPAIGN.md",
+          "label": "CAMPAIGN.md",
+          "role": "documentation"
+        }
+      ],
+      "related": ["abilities", "ship-levels", "league"],
+      "media": [
+        {
+          "path": "assets/ui/campaign-preview.png",
+          "label": "Fleet silhouettes",
+          "kind": "runtime-art",
+          "provenance": "assets/ui/CAMPAIGN.md",
+          "caption": "Original authored fleet contact sheet. Runtime loads cells from campaign-atlas.json, not this PNG."
+        }
+      ],
+      "data": {
+        "shipCount": 10,
+        "scoutId": 0,
+        "royalId": 9
+      }
+    },
+    {
+      "id": "abilities",
+      "title": "Automatic ability catalog",
+      "category": "ships",
+      "status": "implemented",
+      "summary": "Seventeen stable inventory entries feed exactly three equipped categories.",
+      "tags": ["ships", "implemented"],
+      "facts": [
+        {
+          "label": "Catalog size",
+          "value": "17 stable ability IDs"
+        },
+        {
+          "label": "Starters 0–2",
+          "value": "Pulse Lens / Guard Coil / Flux Drive"
+        },
+        {
+          "label": "Boss signatures 3–5",
+          "value": "Pulse Echo / Repulsor / Ion Wake"
+        },
+        {
+          "label": "Champion signatures 6–13",
+          "value": "Eight actual signature mechanics"
+        },
+        {
+          "label": "Royal bundles 14–16",
+          "value": "Royal Prism / Royal Aegis / Royal Wake"
+        },
+        {
+          "label": "Normal rank cap",
+          "value": "Owned rank capped by selected ship level"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Behavior and scope",
+          "paragraphs": [
+            "Starter and boss abilities fit every owned hull. Champion abilities fit matching family hulls; Scout is family 0 and Sovereign is a wildcard for normal abilities. Royal bundles fit ship 9 only. Crafting acquires inventory without auto-equipping it.",
+            "Starter recipes cost three matching points plus two T1 materials. Signature/champion recipes cost ten matching points plus two T1. Shared ability upgrades cost ten matching points plus two materials of the next rank tier. Royal bundles are reward-only, not Forge recipes.",
+            "Catalog: 0 Pulse Lens [Offense]: Primary shots deal +10% damage per effective rank.; 1 Guard Coil [Defense]: Adds 20 shield at rank 1, then +8 per effective rank; uses normal shield recharge.; 2 Flux Drive [Passive]: Adds +4% speed and acceleration per effective rank.; 3 Pulse Echo [Offense]: Periodically fires an additional piercing fan; rank increases its damage.; 4 Repulsor [Defense]: Taking damage releases a repulsor nova; rank shortens its cooldown.; 5 Ion Wake [Passive]: Fast flight leaves a damaging ion trail; rank increases its damage.; 6 Needle Burst [Offense]: Every fourth primary shot releases a narrow two-shot needle burst.; 7 Broadside [Offense]: Every sixth primary shot fires a pair of side-facing projectiles.; 8 Guided Missile [Offense]: Every fifth primary shot launches a guided missile.; 9 Fork Volley [Offense]: Every third primary shot releases a split-wing fork volley.; 10 Windrunner Wake [Passive]: Fast flight leaves the champion's damaging ion trail.; 11 Impact Nova [Defense]: Taking damage releases a nova with the champion's short cooldown.; 12 Piercing Seeker [Offense]: Every fourth primary shot launches a guided piercing seeker.; 13 Sniper Spear [Offense]: Every sixth primary shot fires a fast projectile that pierces multiple targets.; 14 Royal Prism [Offense]: Sovereign reward: an eight-shot prism burst and fully evolved Pulse Echo.; 15 Royal Aegis [Defense]: Sovereign reward: every eighth primary repairs 4 hull; damage triggers a fully evolved nova.; 16 Royal Wake [Passive]: Sovereign reward: fast flight leaves the fully evolved rank-five ion trail."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "path": "crates/game_core/src/abilities.rs",
+          "label": "abilities.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "crates/game_core/src/ship_progression.rs",
+          "label": "ship_progression.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "docs/CAMPAIGN.md",
+          "label": "CAMPAIGN.md",
+          "role": "documentation"
+        }
+      ],
+      "related": ["ship-levels", "cargo", "bosses"],
+      "media": [],
+      "data": {
+        "count": 17,
+        "abilities": [
+          {
+            "index": 0,
+            "key": "pulse-lens",
+            "name": "Pulse Lens",
+            "category": 0,
+            "blueprint": "Starter",
+            "effect": "PulseLens",
+            "description": "Primary shots deal +10% damage per effective rank."
+          },
+          {
+            "index": 1,
+            "key": "guard-coil",
+            "name": "Guard Coil",
+            "category": 1,
+            "blueprint": "Starter",
+            "effect": "GuardCoil",
+            "description": "Adds 20 shield at rank 1, then +8 per effective rank; uses normal shield recharge."
+          },
+          {
+            "index": 2,
+            "key": "flux-drive",
+            "name": "Flux Drive",
+            "category": 2,
+            "blueprint": "Starter",
+            "effect": "FluxDrive",
+            "description": "Adds +4% speed and acceleration per effective rank."
+          },
+          {
+            "index": 3,
+            "key": "pulse-echo",
+            "name": "Pulse Echo",
+            "category": 0,
+            "blueprint": "BossFamily(0)",
+            "effect": "PulseEcho",
+            "description": "Periodically fires an additional piercing fan; rank increases its damage."
+          },
+          {
+            "index": 4,
+            "key": "repulsor",
+            "name": "Repulsor",
+            "category": 1,
+            "blueprint": "BossFamily(1)",
+            "effect": "Repulsor",
+            "description": "Taking damage releases a repulsor nova; rank shortens its cooldown."
+          },
+          {
+            "index": 5,
+            "key": "ion-wake",
+            "name": "Ion Wake",
+            "category": 2,
+            "blueprint": "BossFamily(2)",
+            "effect": "IonWake",
+            "description": "Fast flight leaves a damaging ion trail; rank increases its damage."
+          },
+          {
+            "index": 6,
+            "key": "needle-burst",
+            "name": "Needle Burst",
+            "category": 0,
+            "blueprint": "Champion(0)",
+            "effect": "NeedleBurst",
+            "description": "Every fourth primary shot releases a narrow two-shot needle burst."
+          },
+          {
+            "index": 7,
+            "key": "broadside",
+            "name": "Broadside",
+            "category": 0,
+            "blueprint": "Champion(1)",
+            "effect": "Broadside",
+            "description": "Every sixth primary shot fires a pair of side-facing projectiles."
+          },
+          {
+            "index": 8,
+            "key": "guided-missile",
+            "name": "Guided Missile",
+            "category": 0,
+            "blueprint": "Champion(2)",
+            "effect": "GuidedMissile",
+            "description": "Every fifth primary shot launches a guided missile."
+          },
+          {
+            "index": 9,
+            "key": "fork-volley",
+            "name": "Fork Volley",
+            "category": 0,
+            "blueprint": "Champion(3)",
+            "effect": "ForkVolley",
+            "description": "Every third primary shot releases a split-wing fork volley."
+          },
+          {
+            "index": 10,
+            "key": "windrunner-wake",
+            "name": "Windrunner Wake",
+            "category": 2,
+            "blueprint": "Champion(4)",
+            "effect": "WindrunnerWake",
+            "description": "Fast flight leaves the champion's damaging ion trail."
+          },
+          {
+            "index": 11,
+            "key": "impact-nova",
+            "name": "Impact Nova",
+            "category": 1,
+            "blueprint": "Champion(5)",
+            "effect": "ImpactNova",
+            "description": "Taking damage releases a nova with the champion's short cooldown."
+          },
+          {
+            "index": 12,
+            "key": "piercing-seeker",
+            "name": "Piercing Seeker",
+            "category": 0,
+            "blueprint": "Champion(6)",
+            "effect": "PiercingSeeker",
+            "description": "Every fourth primary shot launches a guided piercing seeker."
+          },
+          {
+            "index": 13,
+            "key": "sniper-spear",
+            "name": "Sniper Spear",
+            "category": 0,
+            "blueprint": "Champion(7)",
+            "effect": "SniperSpear",
+            "description": "Every sixth primary shot fires a fast projectile that pierces multiple targets."
+          },
+          {
+            "index": 14,
+            "key": "royal-prism",
+            "name": "Royal Prism",
+            "category": 0,
+            "blueprint": "RoyalVictory",
+            "effect": "RoyalPrism",
+            "description": "Sovereign reward: an eight-shot prism burst and fully evolved Pulse Echo."
+          },
+          {
+            "index": 15,
+            "key": "royal-aegis",
+            "name": "Royal Aegis",
+            "category": 1,
+            "blueprint": "RoyalVictory",
+            "effect": "RoyalAegis",
+            "description": "Sovereign reward: every eighth primary repairs 4 hull; damage triggers a fully evolved nova."
+          },
+          {
+            "index": 16,
+            "key": "royal-wake",
+            "name": "Royal Wake",
+            "category": 2,
+            "blueprint": "RoyalVictory",
+            "effect": "RoyalWake",
+            "description": "Sovereign reward: fast flight leaves the fully evolved rank-five ion trail."
+          }
+        ]
+      }
+    },
+    {
+      "id": "ship-levels",
+      "title": "Ship XP, hardware & rank gates",
+      "category": "missions",
+      "status": "implemented",
+      "summary": "Experience belongs to the active ship; hardware and equipped powers use its real level cap.",
+      "tags": ["missions", "implemented"],
+      "facts": [
+        {
+          "label": "Maximum ship level",
+          "value": "100"
+        },
+        {
+          "label": "Cumulative XP threshold",
+          "value": "10 × (level − 1) × level"
+        },
+        {
+          "label": "Rank gates",
+          "value": "LV 1 / 3 / 5 / 8 / 12"
+        },
+        {
+          "label": "Hardware",
+          "value": "Damage, fire rate, hull, shield, regeneration, drive"
+        },
+        {
+          "label": "Ordinary kill XP",
+          "value": "5"
+        },
+        {
+          "label": "Boss XP",
+          "value": "25 / 35 / 45 / 55 / 65"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Behavior and scope",
+          "paragraphs": [
+            "Normal hardware effective rank is min(stored rank, level rank cap). Stored ownership is preserved when switching to a low-level hull. Six hardware ranks are ship-local. Primary fire always works; automatic signature effects require compatible crafted and equipped slots.",
+            "Non-belt asteroids can award two XP; belt asteroids award no XP. Champion victory gives 40 selected-ship XP and a league match victory gives 30. Experience movement bonus grows by 2.5% per level through level 12; drive and chassis modifiers are separate."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "path": "crates/game_core/src/campaign.rs",
+          "label": "campaign.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "crates/game_core/src/lib.rs",
+          "label": "lib.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "crates/game_core/src/ship_progression.rs",
+          "label": "ship_progression.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "docs/CAMPAIGN.md",
+          "label": "CAMPAIGN.md",
+          "role": "documentation"
+        }
+      ],
+      "related": ["cargo", "abilities"],
+      "media": [],
+      "data": {
+        "maxLevel": 100,
+        "rankGates": [1, 3, 5, 8, 12],
+        "ordinaryXp": 5,
+        "bossXp": [25, 35, 45, 55, 65]
+      }
+    },
+    {
+      "id": "cargo",
+      "title": "Cargo, bank & death rules",
+      "category": "missions",
+      "status": "implemented",
+      "summary": "Crafting materials must survive the return trip; points and ship XP are retained immediately.",
+      "tags": ["missions", "implemented"],
+      "facts": [
+        {
+          "label": "Cargo capacity",
+          "value": "16 total materials across five tiers"
+        },
+        {
+          "label": "Banking",
+          "value": "Physical home arrival"
+        },
+        {
+          "label": "Loss",
+          "value": "Death, restart, Title abandonment and reload discard unbanked materials"
+        },
+        {
+          "label": "Migration",
+          "value": "Legacy v3 cargo maps once into T1 stash"
+        },
+        {
+          "label": "Profile",
+          "value": "Schema 4"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Behavior and scope",
+          "paragraphs": [
+            "Five-tier cargo and stored arrays are authoritative. A fresh schema-4 reload clears carried materials rather than teleporting abandoned cargo into a bank. Previously retained v3 scalar material state is grandfathered into the T1 stash once. Normal save normalization must preserve current cargo until the actual lifecycle event.",
+            "Points, earned ship XP, crafted inventory, loadouts and completed progression remain retained on death. Last recorded expedition is a historical report: an unplayed forced diagnostic death may leave the previous report rather than invent a new run."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "path": "crates/game_core/src/ship_progression.rs",
+          "label": "ship_progression.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "crates/game_core/src/campaign.rs",
+          "label": "campaign.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "apps/game/src/storage.ts",
+          "label": "storage.ts",
+          "role": "implementation"
+        },
+        {
+          "path": "docs/CAMPAIGN.md",
+          "label": "CAMPAIGN.md",
+          "role": "documentation"
+        }
+      ],
+      "related": ["ship-levels", "sanctuaries"],
+      "media": [],
+      "data": {
+        "schemaVersion": 4,
+        "materialTiers": 5,
+        "cargoCapacity": 16
+      }
+    },
+    {
+      "id": "league",
+      "title": "Champion trials & Galaxy Royale league",
+      "category": "champions",
+      "status": "implemented",
+      "summary": "Eight real champion duels unlock a nine-entrant solo round-robin tournament.",
+      "tags": ["champions", "implemented"],
+      "facts": [
+        {
+          "label": "Entrants",
+          "value": "8 champions + player"
+        },
+        {
+          "label": "Matches",
+          "value": "36 total: 8 player duels + 28 seeded NPC results"
+        },
+        {
+          "label": "Win points",
+          "value": "3"
+        },
+        {
+          "label": "League location",
+          "value": "Canonical site grid 0:2"
+        },
+        {
+          "label": "Reward",
+          "value": "Once-only Royale Sovereign + royal bundles"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Behavior and scope",
+          "paragraphs": [
+            "The NPC result simulation is disclosed. These are solo seeded standings, not online multiplayer or eight autonomous rivals sharing a persistent world. Incomplete active fights are transient and reload as unplayed at Haven; completed results persist.",
+            "All eight champion patches unlock the league. A first-place final result awards the trophy, Sovereign, royal inventory and authored credits once. Retries increment the attempt record. Post-victory exhibitions are not implemented."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "path": "crates/game_core/src/campaign.rs",
+          "label": "campaign.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "crates/game_core/src/campaign_runtime.rs",
+          "label": "campaign_runtime.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "docs/CAMPAIGN.md",
+          "label": "CAMPAIGN.md",
+          "role": "documentation"
+        }
+      ],
+      "related": [
+        "ships",
+        "champion-0",
+        "champion-1",
+        "champion-2",
+        "champion-3",
+        "champion-4",
+        "champion-5",
+        "champion-6",
+        "champion-7"
+      ],
+      "media": [],
+      "data": {
+        "entrants": 9,
+        "totalMatches": 36,
+        "playerMatches": 8,
+        "npcMatches": 28,
+        "winPoints": 3
+      }
+    },
+    {
+      "id": "enemy-0",
+      "title": "Dart",
+      "category": "enemies",
+      "status": "implemented",
+      "summary": "Fast pursuing needle hulls.",
+      "tags": ["enemies", "implemented"],
+      "facts": [
+        {
+          "label": "Family",
+          "value": "0"
+        },
+        {
+          "label": "Ordinary XP",
+          "value": "5"
+        },
+        {
+          "label": "First boss credit",
+          "value": "24 family kills"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Behavior and scope",
+          "paragraphs": [
+            "Base-family defeat counters feed the ordinary boss promotion tree. Spawn density and health/contact damage increase with distance. Destructible occupied cells supply projectile collision; contact uses conservative object radii."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "path": "crates/game_core/src/lib.rs",
+          "label": "lib.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "crates/game_core/src/bosses.rs",
+          "label": "bosses.rs",
+          "role": "implementation"
+        }
+      ],
+      "related": ["bosses"],
+      "media": []
+    },
+    {
+      "id": "enemy-1",
+      "title": "Bastion",
+      "category": "enemies",
+      "status": "implemented",
+      "summary": "Armored pursuing hulls with ranged pressure.",
+      "tags": ["enemies", "implemented"],
+      "facts": [
+        {
+          "label": "Family",
+          "value": "1"
+        },
+        {
+          "label": "Ordinary XP",
+          "value": "5"
+        },
+        {
+          "label": "First boss credit",
+          "value": "24 family kills"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Behavior and scope",
+          "paragraphs": [
+            "Base-family defeat counters feed the ordinary boss promotion tree. Spawn density and health/contact damage increase with distance. Destructible occupied cells supply projectile collision; contact uses conservative object radii."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "path": "crates/game_core/src/lib.rs",
+          "label": "lib.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "crates/game_core/src/bosses.rs",
+          "label": "bosses.rs",
+          "role": "implementation"
+        }
+      ],
+      "related": ["bosses"],
+      "media": []
+    },
+    {
+      "id": "enemy-2",
+      "title": "Coil",
+      "category": "enemies",
+      "status": "implemented",
+      "summary": "Connected segmented serpent hulls.",
+      "tags": ["enemies", "implemented"],
+      "facts": [
+        {
+          "label": "Family",
+          "value": "2"
+        },
+        {
+          "label": "Ordinary XP",
+          "value": "5"
+        },
+        {
+          "label": "First boss credit",
+          "value": "24 family kills"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Behavior and scope",
+          "paragraphs": [
+            "Base-family defeat counters feed the ordinary boss promotion tree. Spawn density and health/contact damage increase with distance. Destructible occupied cells supply projectile collision; contact uses conservative object radii.",
+            "Coil segments have their own damaged body cells and transforms. Their geometry is connected by occupied bind anchors; draw interpolation re-solves those joints. This is distinct from independently animated armor hitboxes on rigid boss heads."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "path": "crates/game_core/src/lib.rs",
+          "label": "lib.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "crates/game_core/src/bosses.rs",
+          "label": "bosses.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "crates/game_core/src/segmented.rs",
+          "label": "segmented.rs",
+          "role": "implementation"
+        }
+      ],
+      "related": ["bosses"],
+      "media": []
+    },
+    {
+      "id": "bosses",
+      "title": "Fifteen ordinary bosses",
+      "category": "enemies",
+      "status": "implemented",
+      "summary": "Three base families promote through five distinct generations with charge, attack and recovery phases.",
+      "tags": ["enemies", "implemented"],
+      "facts": [
+        {
+          "label": "Dart generations",
+          "value": "Matriarch / Harrier / Reaver / Tempest / Imperatrix"
+        },
+        {
+          "label": "Bastion generations",
+          "value": "Prime / Sentinel / Gatekeeper / Citadel / Oblivion"
+        },
+        {
+          "label": "Coil generations",
+          "value": "Sovereign / Sidewinder / Ouroboros / Leviathan / Worldeater"
+        },
+        {
+          "label": "Promotion",
+          "value": "Two defeats of a generation queue one next-generation fight"
+        },
+        {
+          "label": "Concurrent ordinary bosses",
+          "value": "One globally"
+        },
+        {
+          "label": "Coil segment counts",
+          "value": "11 / 13 / 15 / 17 / 19"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Behavior and scope",
+          "paragraphs": [
+            "A first generation requires 24 base-family defeats. Higher queued generations take priority without consuming reserved first-generation credit. A complete one-family tree needs 384 base kills for 16/8/4/2/1 boss defeats. Sanctuary retreat, outrunning, death and reload preserve unfinished queue credit.",
+            "Closed armor takes 55% damage in charge/attack. Recovery returns ordinary damage and an authored local exposed-core hit deals 165%. Role rigs partition the current damaged body and never restore removed cells. Visual phases use actual core and material cues. Independently moving boss armor hitboxes are not implemented."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "path": "crates/game_core/src/bosses.rs",
+          "label": "bosses.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "crates/game_core/src/boss_assets.rs",
+          "label": "boss_assets.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "crates/engine_core/src/pixel_rig.rs",
+          "label": "rig.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "docs/BOSSES.md",
+          "label": "BOSSES.md",
+          "role": "documentation"
+        }
+      ],
+      "related": ["abilities", "enemy-0", "enemy-1", "enemy-2"],
+      "media": [
+        {
+          "path": "assets/pixels/boss-preview.png",
+          "label": "All fifteen boss silhouettes",
+          "kind": "runtime-art",
+          "provenance": "docs/ART_DIRECTION.md",
+          "caption": "Authored boss contact sheet with transparent bays and role geometry. Art development evidence, not browser or phone acceptance."
+        }
+      ],
+      "data": {
+        "names": [
+          ["Matriarch", "Harrier", "Reaver", "Tempest", "Imperatrix"],
+          ["Prime", "Sentinel", "Gatekeeper", "Citadel", "Oblivion"],
+          ["Sovereign", "Sidewinder", "Ouroboros", "Leviathan", "Worldeater"]
+        ],
+        "generations": 5,
+        "baseCredit": 24,
+        "promotionCredit": 2,
+        "coilSegments": [11, 13, 15, 17, 19]
+      }
+    },
+    {
+      "id": "riveter",
+      "title": "Iron Belt Riveter",
+      "category": "enemies",
+      "status": "implemented",
+      "summary": "A birth-biome Bastion variant with two destructible barrels and a locked triple burst.",
+      "tags": ["enemies", "implemented"],
+      "facts": [
+        {
+          "label": "Eligibility",
+          "value": "One-third of eligible ordinary Bastions born in Iron Belt"
+        },
+        {
+          "label": "Hull",
+          "value": "40 × 40; 856 occupied cells"
+        },
+        {
+          "label": "Charge",
+          "value": "0.9 s; final 0.25 s aim lock"
+        },
+        {
+          "label": "Shot pattern",
+          "value": "Three normal hostile rounds"
+        },
+        {
+          "label": "Reward family",
+          "value": "Bastion"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Behavior and scope",
+          "paragraphs": [
+            "Muzzle origin always comes from a surviving barrel cell. Destroying one barrel leaves the other; destroying both stops fire. Birth grid and variant identity remain entity-fixed when crossing a biome boundary.",
+            "It uses the shared swept-cell damage, projectile cap, sanctuary and once-only reward paths. Actual natural distant-biome balance, human dodge/readability and physical-phone performance remain separate gates."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "path": "crates/game_core/src/biome_enemies.rs",
+          "label": "biome_enemies.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "docs/BIOME_ENEMIES.md",
+          "label": "BIOME_ENEMIES.md",
+          "role": "documentation"
+        },
+        {
+          "path": "assets/pixels/riveter-provenance.json",
+          "label": "riveter-provenance.json",
+          "role": "asset provenance"
+        }
+      ],
+      "related": ["biome-3", "enemy-1"],
+      "media": [
+        {
+          "path": "assets/pixels/riveter-preview.png",
+          "label": "Riveter cell artwork",
+          "kind": "runtime-art",
+          "provenance": "assets/pixels/riveter-provenance.json",
+          "caption": "Original authored occupied-cell hull/barrel preview; no imported texture."
+        }
+      ],
+      "data": {
+        "sprite": "riveter",
+        "occupied": 856
+      }
+    },
+    {
+      "id": "radiation-mote",
+      "title": "Radiation Mote",
+      "category": "enemies",
+      "status": "implemented",
+      "summary": "A Radial Wastes Dart variant whose surviving pylons emit two six-shot pulses around an escape gap.",
+      "tags": ["enemies", "implemented"],
+      "facts": [
+        {
+          "label": "Eligibility",
+          "value": "One-quarter of eligible ordinary Darts born in Radial Wastes"
+        },
+        {
+          "label": "Hull",
+          "value": "40 × 40; 712 occupied cells"
+        },
+        {
+          "label": "Charge",
+          "value": "At least 1.1 s; final 0.35 s aim lock"
+        },
+        {
+          "label": "Pulse spacing",
+          "value": "At least 0.35 s"
+        },
+        {
+          "label": "Recovery",
+          "value": "4.4 s"
+        },
+        {
+          "label": "Reward family",
+          "value": "Dart"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Behavior and scope",
+          "paragraphs": [
+            "The host chooses a readable in-view firing position and checks full warning clearance against current and predicted camera bounds, with presentation shake allowance. Losing admission aborts the warning/attack. Destroyed emitter sectors do not substitute pristine muzzle cells.",
+            "Warning rays leave a real escape gap. Actual spawned projectiles use the shared damage, caps, sanctuary and reward path. Stationary native admission evidence and work-only camera studies are not a guarantee of attack cadence while the player reverses continuously. Human tuning and phones remain pending."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "path": "crates/game_core/src/radiation_enemies.rs",
+          "label": "radiation_enemies.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "crates/game_core/src/mote_controller.rs",
+          "label": "mote_controller.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "crates/game_core/src/mote_art.rs",
+          "label": "mote_art.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "assets/pixels/mote-provenance.json",
+          "label": "mote-provenance.json",
+          "role": "asset provenance"
+        }
+      ],
+      "related": ["biome-4", "enemy-0"],
+      "media": [
+        {
+          "path": "assets/pixels/mote-preview.png",
+          "label": "Mote pylon artwork",
+          "kind": "runtime-art",
+          "provenance": "assets/pixels/mote-provenance.json",
+          "caption": "Original authored body and live emitter mask preview, not a combat capture."
+        }
+      ],
+      "data": {
+        "sprite": "mote",
+        "occupied": 712
+      }
+    },
+    {
+      "id": "pixel-engine",
+      "title": "Occupied-cell pixel engine",
+      "category": "technology",
+      "status": "implemented",
+      "summary": "The renderer expands local occupied cells into batched quads with parent-relative affine transforms.",
+      "tags": ["technology", "implemented"],
+      "facts": [
+        {
+          "label": "Pixel instance",
+          "value": "16 bytes"
+        },
+        {
+          "label": "GPU affine transform",
+          "value": "32 bytes"
+        },
+        {
+          "label": "Batch transform slots",
+          "value": "128"
+        },
+        {
+          "label": "World render",
+          "value": "Full backing resolution"
+        },
+        {
+          "label": "UI render",
+          "value": "Stable logical overlay coordinates"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Behavior and scope",
+          "paragraphs": [
+            "PixelBody owns packed palette indices and real holes. Swept projectile hits query surviving occupancy through the inverse transform. PixelRig partitions the current body by role and retains destruction across rendering. Exact affine composition supports reflected, rotated and nonuniform parent transforms.",
+            "Hard pixel geometry has no forced minimum-size quad. Soft particle materials use coverage-aware raster expansion with area compensation; this cannot create detail beyond physical screen resolution. UI is composed separately so world zoom does not enlarge its fonts or hitboxes."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "path": "crates/engine_core/src/frame.rs",
+          "label": "frame.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "crates/engine_core/src/pixels.rs",
+          "label": "pixel.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "crates/engine_core/src/pixel_rig.rs",
+          "label": "rig.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "crates/game_web/src/renderer.rs",
+          "label": "renderer.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "docs/ENGINE.md",
+          "label": "ENGINE.md",
+          "role": "documentation"
+        }
+      ],
+      "related": ["cosmic-art", "validation"],
+      "media": [],
+      "data": {
+        "instanceBytes": 16,
+        "transformBytes": 32,
+        "transformSlots": 128
+      }
+    },
+    {
+      "id": "cosmic-art",
+      "title": "Cosmic scenery & art provenance",
+      "category": "technology",
+      "status": "implemented",
+      "summary": "Layered local-cell stars, nebulas, planets and Isotope Scar use bounded cosmetic extraction.",
+      "tags": ["technology", "implemented"],
+      "facts": [
+        {
+          "label": "Regional cap",
+          "value": "6000 normal / 3000 reduced submitted quads"
+        },
+        {
+          "label": "Custom cosmic cap",
+          "value": "8000 normal / 4000 reduced"
+        },
+        {
+          "label": "Reduced Motion",
+          "value": "Freezes cosmetic geometry and palette motion"
+        },
+        {
+          "label": "Isotope Scar",
+          "value": "Purple bitten limb with lime fault seams; cosmetic only"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Behavior and scope",
+          "paragraphs": [
+            "Art contact sheets are inspection images. Runtime body atlases are palette-index arrays expanded to occupied PixelBodies; preview PNGs are not game textures. Original campaign, boss, Riveter, Mote and Scar cell art have source/provenance records. The base and title/UI atlas includes generated concept material converted to palette cells; its provenance remains distinct from authored cell geometry.",
+            "Gas and fire use fractional local quads under parent layers; explicit engine/impact/projectile light sources remain bounded. Distant physical scales stay independent. The full-resolution world path improves available raster detail, but tiny projected cells still depend on zoom, backing resolution and actual hardware."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "path": "crates/game_core/src/cosmic_background.rs",
+          "label": "cosmic_background.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "crates/game_core/src/regions.rs",
+          "label": "regions.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "docs/ART_DIRECTION.md",
+          "label": "ART_DIRECTION.md",
+          "role": "documentation"
+        },
+        {
+          "path": "assets/ui/provenance.json",
+          "label": "provenance.json",
+          "role": "asset provenance"
+        },
+        {
+          "path": "assets/pixels/isotope-scar-provenance.json",
+          "label": "isotope-scar-provenance.json",
+          "role": "asset provenance"
+        }
+      ],
+      "related": ["pixel-engine", "validation"],
+      "media": [
+        {
+          "path": "assets/ui/atlas-preview.png",
+          "label": "Converted UI atlas contact sheet",
+          "kind": "converted-concept",
+          "provenance": "assets/ui/provenance.json",
+          "caption": "Generated source components converted to runtime palette cells. An atlas preview, not a gameplay screenshot."
+        }
+      ]
+    },
+    {
+      "id": "validation",
+      "title": "Verification boundaries",
+      "category": "overview",
+      "status": "verification-pending",
+      "summary": "Implementation, source tests, browser observation and physical-device acceptance are recorded separately.",
+      "tags": ["overview", "verification-pending"],
+      "facts": [
+        {
+          "label": "Native / shell",
+          "value": "Executed test logs are linked from production records"
+        },
+        {
+          "label": "Browser visuals",
+          "value": "Exact build/backend/viewport captures required"
+        },
+        {
+          "label": "Phones",
+          "value": "Pixel 6a / iPhone 12-class target; acceptance pending"
+        },
+        {
+          "label": "Long sessions",
+          "value": "30-minute soak and natural progression remain separate"
+        },
+        {
+          "label": "Audio",
+          "value": "Real DSP capture and human listening are distinct"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Behavior and scope",
+          "paragraphs": [
+            "This catalog records implemented behavior from source; it does not declare every mechanic balanced or every device tested. Static contact sheets, software packet previews and native CPU timings are not GPU screenshots or mobile FPS evidence.",
+            "Mission Control build checks explicitly use pass, fail or not_run. Run observations are append-only actual exchanges, not a claim of an always-running agent daemon. Current build/commit evidence belongs to those records rather than a hardcoded DevBible release number."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "path": "docs/TEAM_PIPELINE.md",
+          "label": "TEAM_PIPELINE.md",
+          "role": "documentation"
+        },
+        {
+          "path": "docs/ROADMAP.md",
+          "label": "ROADMAP.md",
+          "role": "documentation"
+        },
+        {
+          "path": "apps/studio/README.md",
+          "label": "README.md",
+          "role": "implementation"
+        }
+      ],
+      "related": ["galaxy-royale", "future"],
+      "media": []
+    },
+    {
+      "id": "future",
+      "title": "Future modes & content",
+      "category": "overview",
+      "status": "planned",
+      "summary": "Owned arenas, co-op, battle royale and optional neural dialogue remain explicit future scope.",
+      "tags": ["overview", "planned"],
+      "facts": [
+        {
+          "label": "Multiplayer",
+          "value": "No network runtime implemented"
+        },
+        {
+          "label": "Circular topology",
+          "value": "Portable opt-in antipodal-wrap primitive only"
+        },
+        {
+          "label": "Battle royale",
+          "value": "Future smaller circular competitive universe"
+        },
+        {
+          "label": "Neural narrative",
+          "value": "Optional bounded presentation adapter; no delivered local inference service"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Behavior and scope",
+          "paragraphs": [
+            "The current game is solo with local saves. A topology helper does not implement authoritative multiplayer, owned arena combat or a battle-royale ruleset. Future arena ownership upgrades, networking and competitive player zones require their own simulation, server and acceptance work.",
+            "Authored dialogue remains usable without model inference. Optional text/voice design is documented, not evidence that a local model service or shipped neural character audio exists. Vesper comet art/selection experiments are work-only and are not assumed present in the production universe."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "path": "docs/UNIVERSE_TOPOLOGY.md",
+          "label": "UNIVERSE_TOPOLOGY.md",
+          "role": "documentation"
+        },
+        {
+          "path": "docs/NARRATIVE.md",
+          "label": "NARRATIVE.md",
+          "role": "documentation"
+        },
+        {
+          "path": "docs/ROADMAP.md",
+          "label": "ROADMAP.md",
+          "role": "documentation"
+        }
+      ],
+      "related": ["league", "world-seed"],
+      "media": []
+    }
+  ]
+}
