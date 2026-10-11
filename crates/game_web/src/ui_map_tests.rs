@@ -87,9 +87,9 @@ fn same(a: &RenderFrame, b: &RenderFrame) {
 #[test]
 fn map_icon_and_six_biome_objects_are_cached_distinct_unlit_masks() {
     let (body, _) = menu_icon("map-icon").unwrap();
-    assert_eq!((body.width, body.height), (20, 20));
+    assert_eq!((body.width, body.height), (24, 24));
     assert!(std::ptr::eq(body, menu_icon("map-icon").unwrap().0));
-    assert!(body.is_occupied(1, 8) && !body.is_occupied(0, 0));
+    assert!(body.is_occupied(2, 8) && !body.is_occupied(0, 0));
     let mut masks = std::collections::HashSet::new();
     for (kind, body) in MAP_SITES.iter().enumerate() {
         assert!(

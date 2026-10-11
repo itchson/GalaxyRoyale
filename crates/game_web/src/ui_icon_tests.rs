@@ -68,15 +68,15 @@ fn original_control_icons_are_distinct_cached_objects_with_state_colors() {
         .enumerate()
     {
         let body = &SAVE_ICONS[state];
-        assert_eq!((body.width, body.height), (18, 18));
+        assert_eq!((body.width, body.height), (24, 24));
         assert!(
             signatures.insert(
-                (0..18)
-                    .flat_map(|y| (0..18).map(move |x| body.is_occupied(x, y)))
+                (0..24)
+                    .flat_map(|y| (0..24).map(move |x| body.color_at(x, y)))
                     .collect::<Vec<_>>()
             )
         );
-        let mut node = icon("save-icon", state as f32, [2.0, 3.0, 18.0, 18.0]);
+        let mut node = icon("save-icon", state as f32, [2.0, 3.0, 24.0, 24.0]);
         node.text = "THIS TEXT MUST NOT DRAW".into();
         let frame = extract(node, [0.0; 2], 0.0, false);
         assert_eq!(frame.pixel_count, body.occupied_count());
@@ -102,15 +102,15 @@ fn menu_symbols_are_seven_distinct_detailed_cached_unlit_objects_without_text_pl
     for kind in MENU_KINDS {
         let (body, accent) = menu_icon(kind).unwrap();
         assert!(std::ptr::eq(body, menu_icon(kind).unwrap().0));
-        assert_eq!((body.width, body.height), (20, 20));
+        assert_eq!((body.width, body.height), (24, 24));
         assert!(
             signatures.insert(
-                (0..20)
-                    .flat_map(|y| (0..20).map(move |x| body.is_occupied(x, y)))
+                (0..24)
+                    .flat_map(|y| (0..24).map(move |x| body.is_occupied(x, y)))
                     .collect::<Vec<_>>()
             )
         );
-        let mut node = icon(kind, 1234.0, [7.0, 13.0, 20.0, 20.0]);
+        let mut node = icon(kind, 1234.0, [7.0, 13.0, 24.0, 24.0]);
         node.text = "IGNORED ACCESSIBLE CAPTION".into();
         let frame = extract(node, [0.0; 2], 0.0, false);
         assert_eq!(frame.pixel_count, body.occupied_count());
@@ -121,7 +121,7 @@ fn menu_symbols_are_seven_distinct_detailed_cached_unlit_objects_without_text_pl
         same(
             &frame,
             &extract(
-                icon(kind, f32::NAN, [7.0, 13.0, 20.0, 20.0]),
+                icon(kind, f32::NAN, [7.0, 13.0, 24.0, 24.0]),
                 [0.0; 2],
                 999.0,
                 true,
@@ -138,34 +138,32 @@ fn menu_symbols_are_seven_distinct_detailed_cached_unlit_objects_without_text_pl
 
 #[test]
 fn semantic_icon_routes_keep_their_authored_readable_shapes() {
+    // Structural affordances: central gear aperture, play point, return arrow,
+    // open home door, broken power ring, telemetry glass and folded map seams.
     let landmarks = [
-        ("settings-icon", [(4, 0), (0, 4)], [(4, 4), (0, 0)]),
-        ("resume-icon", [(2, 0), (6, 4)], [(7, 4), (0, 4)]),
-        ("restart-icon", [(6, 4), (9, 4)], [(9, 5), (5, 6)]),
-        ("title-icon", [(4, 0), (3, 7)], [(4, 7), (0, 0)]),
-        ("quit-icon", [(4, 0), (4, 4)], [(4, 5), (0, 0)]),
+        ("settings-icon", [(11, 1), (1, 11)], [(11, 11), (0, 0)]),
+        ("resume-icon", [(5, 2), (21, 11)], [(22, 11), (0, 4)]),
+        ("restart-icon", [(3, 3), (12, 21)], [(11, 11), (0, 0)]),
+        ("title-icon", [(11, 3), (6, 17)], [(11, 17), (0, 0)]),
+        ("quit-icon", [(11, 2), (11, 12)], [(11, 15), (0, 0)]),
+        ("status-icon", [(2, 10), (18, 12)], [(0, 10), (11, 22)]),
+        ("map-icon", [(2, 5), (21, 2)], [(1, 5), (10, 22)]),
     ];
     for (kind, filled, empty) in landmarks {
         let body = menu_icon(kind).unwrap().0;
         for (x, y) in filled {
-            assert!(
-                body.is_occupied(x * 2 + 1, y * 2),
-                "{kind} landmark {x},{y}"
-            );
+            assert!(body.is_occupied(x, y), "{kind} landmark {x},{y}");
         }
         for (x, y) in empty {
-            assert!(
-                !body.is_occupied(x * 2, y * 2),
-                "{kind} open region {x},{y}"
-            );
+            assert!(!body.is_occupied(x, y), "{kind} open region {x},{y}");
         }
-    }
-    let status = menu_icon("status-icon").unwrap().0;
-    for y in [3, 9, 15] {
-        assert!(status.is_occupied(4, y) && status.is_occupied(15, y));
-    }
-    for y in [0, 6, 12, 19] {
-        assert!(!status.is_occupied(10, y));
+        assert!(
+            body.cells()
+                .map(|(_, color)| color)
+                .collect::<std::collections::HashSet<_>>()
+                .len()
+                >= 4
+        );
     }
 }
 
@@ -199,7 +197,7 @@ fn menu_icons_fit_44_physical_pixel_hitboxes_at_fractional_and_tiny_logical_scal
 
 #[test]
 fn menu_icon_clip_hover_disabled_and_atomic_budgets_use_the_existing_control_contract() {
-    let clip = [5.0, 2.0, 10.0, 14.0];
+    let clip = [7.0, 6.0, 8.0, 10.0];
     for kind in MENU_KINDS {
         let (body, accent) = menu_icon(kind).unwrap();
         let mut node = icon(kind, 0.0, [0.0, 0.0, 20.0, 20.0]);
@@ -239,7 +237,11 @@ fn menu_icon_clip_hover_disabled_and_atomic_budgets_use_the_existing_control_con
                 }
             }
         }
-        assert!(visible > 0 && visible < body.occupied_count());
+        assert!(
+            visible > 0 && visible < body.occupied_count(),
+            "{kind}: {visible}/{}",
+            body.occupied_count()
+        );
         for work_limited in [false, true] {
             let count = body.occupied_count();
             let mut builder = FrameBuilder::new();
@@ -374,9 +376,9 @@ fn icon_composes_a_reflected_sheared_parent_without_absolute_cell_expansion() {
         basis_x: Vec2::new(-2.0, 0.25),
         basis_y: Vec2::new(0.5, 1.25),
     };
-    let node = icon("close-icon", 0.0, [7.0, 13.0, 18.0, 18.0]);
+    let node = icon("close-icon", 0.0, [7.0, 13.0, 24.0, 24.0]);
     let local = Transform {
-        position: Vec2::new(16.0, 22.0),
+        position: Vec2::new(19.0, 25.0),
         scale: Vec2::splat(1.0),
         ..Transform::default()
     }

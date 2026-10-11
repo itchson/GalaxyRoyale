@@ -276,68 +276,106 @@
         <div id="hangar-content" class="menu-page" hidden></div>
         <div id="campaign-content" class="menu-page" hidden></div>
         <div id="settings-content" class="settings menu-page" hidden>
-          <label
-            >Master volume<input
-              id="master-volume"
-              type="range"
-              min="0"
-              max="1"
-              step="0.01" /></label
-          ><label
-            >Music<input
-              id="music-volume"
-              type="range"
-              min="0"
-              max="1"
-              step="0.01" /></label
-          ><label
-            >Effects<input
-              id="sfx-volume"
-              type="range"
-              min="0"
-              max="1"
-              step="0.01" /></label
-          ><label class="toggle-setting"
-            >Camera shake<input id="shake-setting" type="checkbox"
-          /></label>
-          <label class="toggle-setting"
-            >Reduced motion<input id="motion-setting" type="checkbox"
-          /></label>
-          <label class="toggle-setting"
-            >Reduced cosmic detail<input id="density-setting" type="checkbox"
-          /></label>
-          <label class="toggle-setting"
-            >Dialogue voice<input id="voice-setting" type="checkbox"
-          /></label>
-          <label
-            >Voice volume<input
-              id="voice-volume"
-              type="range"
-              min="0"
-              max="1"
-              step="0.01"
-          /></label>
-          <label
-            >Flight zoom<input
-              id="zoom-level"
-              type="range"
-              min="0.6"
-              max="1.6"
-              step="0.05"
-          /></label>
-          <button id="menu-fullscreen" class="text-button">Fullscreen</button>
-          <button id="settings-backup" class="text-button icon-action">
-            <span aria-hidden="true">S</span> SAVE &amp; BACKUP
-          </button>
-          <button
-            id="settings-title"
-            class="icon-button settings-title"
-            data-pixel-icon="title-icon"
-            aria-label="Return to title"
-            title="Return to title / carried materials are lost"
+          <section
+            class="settings-group settings-audio"
+            aria-labelledby="settings-audio-heading"
           >
-            TITLE
-          </button>
+            <h3 id="settings-audio-heading">Audio</h3>
+            <div class="settings-controls">
+              <label
+                ><span class="setting-name">Master volume</span
+                ><input
+                  id="master-volume"
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.01"
+              /></label>
+              <label
+                ><span class="setting-name">Music</span
+                ><input
+                  id="music-volume"
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.01"
+              /></label>
+              <label
+                ><span class="setting-name">Effects</span
+                ><input
+                  id="sfx-volume"
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.01"
+              /></label>
+              <label class="toggle-setting"
+                ><span class="setting-name">Dialogue voice</span
+                ><input id="voice-setting" type="checkbox"
+              /></label>
+              <label
+                ><span class="setting-name">Voice volume</span
+                ><input
+                  id="voice-volume"
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.01"
+              /></label>
+            </div>
+          </section>
+          <section
+            class="settings-group settings-display"
+            aria-labelledby="settings-display-heading"
+          >
+            <h3 id="settings-display-heading">Display &amp; motion</h3>
+            <div class="settings-controls">
+              <label
+                ><span class="setting-name">Flight zoom</span
+                ><input
+                  id="zoom-level"
+                  type="range"
+                  min="0.6"
+                  max="1.6"
+                  step="0.05"
+              /></label>
+              <label class="toggle-setting"
+                ><span class="setting-name">Camera shake</span
+                ><input id="shake-setting" type="checkbox"
+              /></label>
+              <label class="toggle-setting"
+                ><span class="setting-name">Reduced motion</span
+                ><input id="motion-setting" type="checkbox"
+              /></label>
+              <label class="toggle-setting"
+                ><span class="setting-name">Reduced cosmic detail</span
+                ><input id="density-setting" type="checkbox"
+              /></label>
+              <button id="menu-fullscreen" class="text-button">
+                Fullscreen
+              </button>
+            </div>
+          </section>
+          <section
+            class="settings-group settings-session"
+            aria-labelledby="settings-session-heading"
+          >
+            <h3 id="settings-session-heading">Session</h3>
+            <div class="settings-session-actions">
+              <button id="settings-backup" class="text-button icon-action">
+                <span aria-hidden="true">S</span> SAVE &amp; BACKUP
+              </button>
+              <button
+                id="settings-title"
+                class="icon-button settings-title"
+                data-pixel-icon="title-icon"
+                aria-label="Return to title"
+                title="Return to title / carried materials are lost"
+              >
+                TITLE
+              </button>
+            </div>
+          </section>
         </div>
         <div id="archive-content" class="menu-page" hidden>
           <div class="save-card">
