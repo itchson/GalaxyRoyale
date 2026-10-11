@@ -1,5 +1,7 @@
 //! Generated artwork and semantic DOM layout rendered as actual engine cells.
 use crate::pixel_ui::RoyaleMono;
+#[path = "component_art.rs"]
+mod component_art;
 #[path = "meishi_art.rs"]
 mod meishi_art;
 use engine_core::{AffineTransform, FrameBuilder, PixelBody, Transform, Vec2};
