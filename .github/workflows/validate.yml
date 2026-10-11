@@ -61,6 +61,11 @@ jobs:
         run: python scripts/asset-flight-icons-tests.py
       - name: Detailed shooting-star palette and occupied cells
         run: python scripts/asset-shooting-star-tests.py
+      - name: Generated PAN dock conversion contracts and frozen native packets
+        run: |
+          python scripts/qa/pan-coop-dock/test_conversion.py
+          python scripts/qa/pan-coop-dock/verify.py
+          cargo test --locked --manifest-path scripts/qa/pan-coop-dock/native/Cargo.toml
       - name: Actual native PixelBody, group and animation extraction
         run: cargo test --locked --manifest-path scripts/asset-native-preview/Cargo.toml
       - name: Extract and audit the accepted dock conversion
