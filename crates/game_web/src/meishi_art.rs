@@ -6,6 +6,7 @@ const fn rgb(r: u8, g: u8, b: u8) -> u32 {
     u32::from_le_bytes([r, g, b, 255])
 }
 const BLACK: u32 = rgb(4, 8, 11);
+const DECK: u32 = rgb(8, 29, 18);
 const GRAPHITE: u32 = rgb(23, 32, 38);
 const STEEL: u32 = rgb(76, 90, 96);
 const PLATINUM: u32 = rgb(162, 175, 176);
@@ -194,6 +195,9 @@ struct Part {
 }
 
 fn shade(original: u32, corporation: usize, earned: bool, phase: f32) -> u32 {
+    if original == DECK {
+        return [rgb(8, 29, 18), rgb(34, 12, 19), rgb(10, 22, 39)][corporation];
+    }
     let accent = [
         [111.0, 201.0, 137.0],
         [227.0, 123.0, 117.0],
@@ -280,7 +284,7 @@ pub(super) fn append(
     match input.kind {
         "meishi-panel" | "meishi-portrait-frame" => {
             let panel = input.kind == "meishi-panel";
-            let corner = if panel { 12.0_f32 } else { 6.0_f32 }.min(r[2].min(r[3]) * 0.25);
+            let corner = if panel { 18.0_f32 } else { 6.0_f32 }.min(r[2].min(r[3]) * 0.25);
             let thickness = corner / 12.0;
             if panel {
                 // Quiet opaque deck, clipped external corners, never a dense texture grid.
@@ -288,13 +292,13 @@ pub(super) fn append(
                     &ART.unit,
                     [r[0] + corner * 0.25, r[1], r[2] - corner * 0.5, r[3]],
                     [1.0; 2],
-                    Some(BLACK),
+                    Some(DECK),
                 );
                 add(
                     &ART.unit,
                     [r[0], r[1] + corner * 0.25, r[2], r[3] - corner * 0.5],
                     [1.0; 2],
-                    Some(BLACK),
+                    Some(DECK),
                 );
             }
             for rect in [
@@ -324,6 +328,34 @@ pub(super) fn append(
                 ],
             ] {
                 add(&ART.unit, rect, [1.0; 2], Some(PLATINUM));
+            }
+            if panel {
+                // Broad enamel rails make the manufacturer's color readable
+                // across the card; the platinum shell and fine foil stay neutral.
+                for (offset, color) in [(3.0, ENAMEL_DARK), (5.0, ENAMEL)] {
+                    for rect in [
+                        [
+                            r[0] + thickness * offset,
+                            r[1] + corner,
+                            thickness,
+                            r[3] - corner * 2.0,
+                        ],
+                        [
+                            r[0] + r[2] - thickness * (offset + 1.0),
+                            r[1] + corner,
+                            thickness,
+                            r[3] - corner * 2.0,
+                        ],
+                        [
+                            r[0] + corner,
+                            r[1] + r[3] - thickness * (offset + 1.0),
+                            r[2] - corner * 2.0,
+                            thickness,
+                        ],
+                    ] {
+                        add(&ART.unit, rect, [1.0; 2], Some(color));
+                    }
+                }
             }
             for (i, (x, y, flip)) in [
                 (r[0], r[1], [1.0, 1.0]),

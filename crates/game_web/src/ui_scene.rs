@@ -2160,6 +2160,18 @@ mod tests {
             }
             assert_ne!(palettes[0], palettes[1]);
             assert_ne!(palettes[1], palettes[2]);
+            if kind == "meishi-panel" {
+                for (colors, deck) in
+                    palettes
+                        .iter()
+                        .zip([rgb(8, 29, 18), rgb(34, 12, 19), rgb(10, 22, 39)])
+                {
+                    assert!(
+                        colors.contains(&deck),
+                        "opaque deck must carry the main corporation theme"
+                    );
+                }
+            }
             if kind != "meishi-seal" {
                 for colors in palettes {
                     assert!(colors.contains(&rgb(162, 175, 176)));
@@ -2393,7 +2405,7 @@ mod tests {
                 }
                 assert_eq!(isolated_counts[2], [34594, 28524, 24262][kind as usize]);
                 assert_eq!(isolated_counts[4], [662, 688, 1040][corp as usize]);
-                assert_eq!(isolated_counts[0], 1027);
+                assert_eq!(isolated_counts[0], 1033);
                 assert_eq!(isolated_counts[1], 631);
                 for (slot, count) in [165, 321, 275, 219, 225, 323, 326, 202]
                     .into_iter()
