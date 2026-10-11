@@ -1,0 +1,233 @@
+{
+  "schema": 1,
+  "palette": {
+    "mode": "provided",
+    "max_colors": 32,
+    "colors": [
+      0,
+      4280096011,
+      4281411097,
+      4282990128,
+      4285160776,
+      4287793005,
+      4290294683,
+      4292206544,
+      4292539380,
+      4282593294,
+      4285750300,
+      4288514864,
+      4291215197,
+      4292535991,
+      4281490565,
+      4284724704,
+      4288406775,
+      4282010397,
+      4283595565,
+      4285514073,
+      4288080792,
+      4281016662,
+      4282135957,
+      4283454686,
+      4286553849,
+      4283972635,
+      4287718956,
+      4292650066,
+      4294236319,
+      4289766757,
+      4292597669,
+      4292735974
+    ]
+  },
+  "budgets": {
+    "sprite_cells": 4000,
+    "group_cells": 4000,
+    "group_transforms": 4
+  },
+  "defaults": {
+    "alpha": {
+      "mode": "exact"
+    },
+    "components": {
+      "mode": "all"
+    },
+    "resize": {
+      "mode": "none"
+    }
+  },
+  "sprites": [
+    {
+      "name": "pan_hikari",
+      "source": "source/pan_hikari.png",
+      "topology": "solid"
+    },
+    {
+      "name": "pan_hikari_fine",
+      "source": "source/pan_hikari_fine.png",
+      "topology": "holes-allowed"
+    },
+    {
+      "name": "renko_hibana",
+      "source": "source/renko_hibana.png",
+      "topology": "holes-allowed"
+    },
+    {
+      "name": "renko_hibana_fine",
+      "source": "source/renko_hibana_fine.png",
+      "topology": "holes-allowed"
+    },
+    {
+      "name": "hugo_mamori",
+      "source": "source/hugo_mamori.png",
+      "topology": "solid"
+    },
+    {
+      "name": "hugo_mamori_fine",
+      "source": "source/hugo_mamori_fine.png",
+      "topology": "holes-allowed"
+    }
+  ],
+  "groups": [
+    {
+      "name": "pan_hikari_view",
+      "parts": [
+        {
+          "name": "surface",
+          "sprite": "pan_hikari",
+          "transform": {
+            "position": [
+              0,
+              0
+            ],
+            "basis_x": [
+              0.5,
+              0
+            ],
+            "basis_y": [
+              0,
+              0.5
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "pan_hikari_fine_view",
+      "parts": [
+        {
+          "name": "surface",
+          "sprite": "pan_hikari_fine",
+          "transform": {
+            "position": [
+              0,
+              0
+            ],
+            "basis_x": [
+              0.5,
+              0
+            ],
+            "basis_y": [
+              0,
+              0.5
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "renko_hibana_view",
+      "parts": [
+        {
+          "name": "surface",
+          "sprite": "renko_hibana",
+          "transform": {
+            "position": [
+              0,
+              0
+            ],
+            "basis_x": [
+              0.5,
+              0
+            ],
+            "basis_y": [
+              0,
+              0.5
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "renko_hibana_fine_view",
+      "parts": [
+        {
+          "name": "surface",
+          "sprite": "renko_hibana_fine",
+          "transform": {
+            "position": [
+              0,
+              0
+            ],
+            "basis_x": [
+              0.5,
+              0
+            ],
+            "basis_y": [
+              0,
+              0.5
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "hugo_mamori_view",
+      "parts": [
+        {
+          "name": "surface",
+          "sprite": "hugo_mamori",
+          "transform": {
+            "position": [
+              0,
+              0
+            ],
+            "basis_x": [
+              0.5,
+              0
+            ],
+            "basis_y": [
+              0,
+              0.5
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "hugo_mamori_fine_view",
+      "parts": [
+        {
+          "name": "surface",
+          "sprite": "hugo_mamori_fine",
+          "transform": {
+            "position": [
+              0,
+              0
+            ],
+            "basis_x": [
+              0.5,
+              0
+            ],
+            "basis_y": [
+              0,
+              0.5
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "provenance": {
+    "source_type": "original96-cell-python-authoring",
+    "loss": "none; exact authored PNG import"
+  }
+}
