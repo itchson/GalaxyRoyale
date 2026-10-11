@@ -999,6 +999,7 @@ mod tests {
         let arena = g.arena.unwrap();
         assert!(!g.safe());
         g.invulnerability = 0.0;
+        g.shield = 0.0; // Declared depleted shield; this probe verifies hull damage in an arena.
         let health = g.hud().hull;
         g.hurt_player(10.0, None);
         assert_eq!(g.hud().hull, health - 10.0);
@@ -1289,7 +1290,7 @@ mod tests {
         assert_eq!(g.ship_level(), 1);
         let stats = Stats::from_profile(&g.profile);
         assert!((stats.hull - 240.0).abs() < 0.001);
-        assert!((stats.shield - 100.0).abs() < 0.001);
+        assert!((stats.shield - 120.0).abs() < 0.001);
         assert!((stats.damage - 24.0).abs() < 0.001);
         assert!(g.hud().upgrades.iter().all(|u| u.rank == 5 && u.unlocked));
         assert_eq!(campaign::signature_rank(&g.profile, 6), 5);

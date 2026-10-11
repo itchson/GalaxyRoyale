@@ -115,7 +115,7 @@ pub const ABILITIES: [AbilityDef; COUNT] = [
         1,
         Blueprint::Starter,
         Effect::GuardCoil,
-        "Adds 20 shield at rank 1, then +8 per effective rank; uses normal shield recharge.",
+        "Adds 20 shield at rank 1, then +8 per effective rank; rank 2 unlocks recharge after 4s without damage.",
     ),
     def(
         "flux-drive",

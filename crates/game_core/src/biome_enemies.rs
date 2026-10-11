@@ -598,6 +598,7 @@ mod tests {
     #[test]
     fn installed_controller_emits_real_locked_projectiles_and_no_generic_extra_shot() {
         let (mut game, entity) = fixture();
+        game.shield = 0.0; // Declared depleted shield isolates real round-to-hull collisions.
         let player = game.position();
         let mut seen = HashSet::new();
         let mut directions = Vec::new();

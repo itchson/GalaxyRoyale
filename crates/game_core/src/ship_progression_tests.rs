@@ -76,7 +76,7 @@ fn three_real_starters_craft_then_equip_with_exact_atomic_banked_costs() {
     }
     let stats = Stats::from_profile(g.profile());
     assert!((stats.damage - base.damage * 1.1).abs() < 0.001);
-    assert_eq!(stats.shield, 20.0);
+    assert_eq!(stats.shield, 50.0);
     assert!((stats.speed - base.speed * 1.04).abs() < 0.001);
     assert!((stats.acceleration - base.acceleration * 1.04).abs() < 0.001);
     for category in 0..3 {
@@ -310,7 +310,7 @@ fn legacy_owned_hardware_is_level_capped_then_real_ship_kills_activate_it_withou
     );
     let first = Stats::from_profile(g.profile());
     assert_eq!(first.hull, 115.0);
-    assert_eq!(first.shield, 20.0);
+    assert_eq!(first.shield, 40.0);
     assert!((first.damage - 13.44).abs() < 0.001);
     assert_eq!(first.fire_rate, 5.5);
     assert_eq!(first.regeneration, 0.4);
@@ -365,7 +365,7 @@ fn legacy_owned_hardware_is_level_capped_then_real_ship_kills_activate_it_withou
     assert_eq!(g.profile.campaign.stored_materials, stash);
     let second = Stats::from_profile(g.profile());
     assert_eq!(second.hull, 130.0);
-    assert_eq!(second.shield, 30.0);
+    assert_eq!(second.shield, 50.0);
     assert!((second.damage - 14.88).abs() < 0.001);
     assert_eq!(second.fire_rate, 6.0);
     assert_eq!(second.regeneration, 0.8);

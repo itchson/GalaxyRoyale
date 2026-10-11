@@ -52,6 +52,7 @@ fn neutral_live_ticks_move_enemies_accept_real_hits_and_resolve_death_once() {
     let mut game = Game::new(Profile::default());
     game.move_player(Vec2::new(1600.0, 0.0));
     game.invulnerability = 0.0;
+    game.shield = 0.0; // Declared depleted shield preserves this real hull/holes probe.
     game.profile.campaign.cargo_materials = [1, 2, 0, 0, 0];
     game.profile.currency = [7, 8, 9];
     let enemy = game.spawn_enemy(0, false, game.position() + Vec2::X * 160.0, 1);
@@ -146,15 +147,19 @@ fn live_ship_stats_match_effective_level_caps_actual_velocity_and_primary_projec
         near(hud.ship_stats.hull_regen, 0.4 * cap);
         near(
             hud.ship_stats.shield_regen,
-            (20.0 + 10.0 * (cap - 1.0)) * 0.15,
+            3.0 * (1.0 + 0.2 * (cap - 1.0))
+                * (1.0 + 0.03 * campaign::level(xp).min(12).saturating_sub(1) as f32),
         );
         let serialized = serde_json::to_value(&hud.ship_stats).unwrap();
-        assert_eq!(serialized.as_object().unwrap().len(), 7);
+        assert_eq!(serialized.as_object().unwrap().len(), 8);
+        assert_eq!(serialized["shield_recharge_unlocked"], true);
         assert!(
             serialized
                 .as_object()
                 .unwrap()
-                .values()
+                .iter()
+                .filter(|(key, _)| key.as_str() != "shield_recharge_unlocked")
+                .map(|(_, value)| value)
                 .all(|v| v.as_f64().is_some_and(f64::is_finite))
         );
         game.tick(

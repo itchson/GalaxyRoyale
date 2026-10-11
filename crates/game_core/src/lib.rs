@@ -33,6 +33,7 @@ pub mod identity;
 mod live_overlay_tests;
 #[cfg(test)]
 mod particle_tests;
+mod shield_progression;
 mod ship_progression;
 #[cfg(test)]
 mod ship_progression_tests;
@@ -197,6 +198,7 @@ pub struct ShipStatsHud {
     pub fire_rate: f32,
     pub hull_regen: f32,
     pub shield_regen: f32,
+    pub shield_recharge_unlocked: bool,
 }
 
 #[derive(Clone, Debug, Serialize)]
@@ -427,6 +429,7 @@ struct StressObject;
 struct Stats {
     hull: f32,
     shield: f32,
+    shield_regeneration: f32,
     speed: f32,
     acceleration: f32,
     damage: f32,
@@ -446,11 +449,8 @@ impl Stats {
         let ranks = ship_progression::hardware_ranks(p);
         let mut stats = Self {
             hull: 100.0 + 15.0 * ranks[2] as f32 + p.relics.len().min(20) as f32,
-            shield: if ranks[3] == 0 {
-                0.0
-            } else {
-                20.0 + 10.0 * (ranks[3] - 1) as f32
-            },
+            shield: shield_progression::capacity(p),
+            shield_regeneration: shield_progression::recharge_rate(p),
             speed: if scout { 100.0 } else { 180.0 }
                 * experience_drive
                 * (1.0 + 0.04 * ranks[5] as f32),
@@ -473,7 +473,6 @@ impl Stats {
             6 => stats.hull += 10.0,
             9 => {
                 stats.hull += 65.0;
-                stats.shield += 40.0;
                 stats.speed *= 1.15;
                 stats.damage *= 1.25;
                 stats.fire_rate *= 1.2;
@@ -482,13 +481,11 @@ impl Stats {
             _ => {}
         }
         stats.damage *= 1.0 + 0.1 * ship_progression::equipped_rank(p, 0) as f32;
-        let guard = ship_progression::equipped_rank(p, 1);
-        if guard > 0 {
-            stats.shield += 20.0 + 8.0 * guard.saturating_sub(1) as f32;
-        }
         let flux = 1.0 + 0.04 * ship_progression::equipped_rank(p, 2) as f32;
-        stats.speed *= flux;
-        stats.acceleration *= flux;
+        let drive = flux * shield_progression::drive_multiplier(p);
+        stats.speed *= drive;
+        stats.acceleration *= drive;
+        stats.damage *= shield_progression::weapon_multiplier(p);
         stats
     }
 }
@@ -506,7 +503,7 @@ const UPGRADES: [(&str, &str, usize, &str); 9] = [
         "shield",
         "Aegis Capacitors",
         1,
-        "20 shield at rank 1, then +10; recharges after 4s",
+        "+10 shield per rank; rank 1 unlocks recharge after 4s; rank and RAICHO level improve its rate",
     ),
     (
         "regeneration",
@@ -1222,7 +1219,7 @@ impl Game {
             actor.health = (actor.health + stats.regeneration * dt).min(stats.hull);
         }
         if self.since_damage >= 4.0 {
-            self.shield = (self.shield + stats.shield * 0.15 * dt).min(stats.shield);
+            self.shield = (self.shield + stats.shield_regeneration * dt).min(stats.shield);
         }
         if input.fire && !safe && self.fire_timer <= 0.0 {
             self.fire(stats);
@@ -2272,6 +2269,7 @@ impl Game {
         let position = self.position();
         self.invulnerability = 0.45;
         self.since_damage = 0.0;
+        let damage = damage * shield_progression::incoming_damage_multiplier(&self.profile);
         let absorbed = self.shield.min(damage);
         self.shield -= absorbed;
         let hull_damage = damage - absorbed;
@@ -3335,7 +3333,8 @@ impl Game {
                 primary_damage: stats.damage,
                 fire_rate: stats.fire_rate,
                 hull_regen: stats.regeneration,
-                shield_regen: stats.shield * 0.15,
+                shield_regen: stats.shield_regeneration,
+                shield_recharge_unlocked: stats.shield_regeneration > 0.0,
             },
             audio: self.audio_hud(),
             navigation: self.navigation_hud(),
@@ -5043,6 +5042,7 @@ mod tests {
     fn dock_repair_restores_generated_ship_cells_after_real_damage() {
         let mut g = Game::new(Profile::default());
         g.move_player(Vec2::new(1800.0, 0.0));
+        g.shield = 0.0; // Declared depleted shield; this probe verifies body-cell repair.
         g.hurt_player(20.0, Some(Vec2::ZERO));
         assert!(
             g.world

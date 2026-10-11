@@ -119,7 +119,10 @@ mod tests {
     #[test]
     fn actual_damage_draws_every_surviving_player_cell_and_never_blinks_the_ship_away() {
         let mut game = Game::new(Profile::default());
-        game.diagnostic("damage");
+        game.diagnostic("warp 900 0");
+        game.invulnerability = 0.0;
+        game.shield = 0.0; // Declared depleted shield isolates real hull/pixel damage.
+        game.hurt_player(32.0, Some(engine_core::Vec2::new(-3.0, 2.0)));
         assert_eq!(game.hud().hull, game.hud().max_hull - 32.0);
         let occupied = game
             .world

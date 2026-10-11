@@ -148,11 +148,11 @@ fn actual_starter_stats_and_secondary_manufacturer_have_no_hidden_grants() {
     let a = Stats::from_profile(pan.profile());
     let b = Stats::from_profile(renko.profile());
     let c = Stats::from_profile(hugo.profile());
-    assert!((a.speed - 104.0).abs() < 0.001);
-    assert!((a.acceleration - 270.4).abs() < 0.001);
-    assert!((b.damage - 13.2).abs() < 0.001);
+    assert!((a.speed - 114.4).abs() < 0.001);
+    assert!((a.acceleration - 297.44).abs() < 0.001);
+    assert!((b.damage - 14.52).abs() < 0.001);
     assert_eq!(b.speed, 100.0);
-    assert_eq!(c.shield, 20.0);
+    assert_eq!(c.shield, 50.0);
     assert_eq!(c.damage, 12.0);
     for sub in ["pan", "renko", "hugo"] {
         let p = create_profile("doro", "pan", sub, "0123456789abcdef").unwrap();

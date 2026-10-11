@@ -748,6 +748,7 @@ fn put_live_ship_cell_in_shot_path(game: &mut Game, b: Entity) {
 #[test]
 fn actual_emitted_sweep_hurts_hull_and_erases_ship_cells_through_shared_collision() {
     let (mut game, e) = fixture(Vec2::new(640.0, 360.0), -Vec2::Y * 100.0);
+    game.shield = 0.0; // Declared depleted shield isolates the emitted shot's real hull/holes path.
     let b = generated_shot_for_hit(&mut game, e);
     let damage = game.world.get::<&Bullet>(b).unwrap().damage;
     let hull = game.hud().hull;
