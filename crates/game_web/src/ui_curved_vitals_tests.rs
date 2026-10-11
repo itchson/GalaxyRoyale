@@ -49,6 +49,7 @@ fn tracks_are_two_symmetric_occupied_arcs_with_continuous_fractional_fill() {
             trail: [1.0; 2],
         },
         [MINT, CYAN],
+        110.0,
     );
     assert_eq!(f.frame().pixel_count, 308);
     let mut points = Vec::new();
@@ -83,6 +84,7 @@ fn tracks_are_two_symmetric_occupied_arcs_with_continuous_fractional_fill() {
                 trail: [health; 2],
             },
             [MINT, CYAN],
+            110.0,
         );
         f.frame()
             .batches
@@ -125,6 +127,7 @@ fn grouped_tracks_preserve_all_corners_under_fractional_nested_affine_and_budget
                 trail: [1.0; 2],
             },
             [MINT, CYAN],
+            110.0,
         );
         assert!(f.frame().pixel_count >= 154 && f.frame().pixel_count <= 314);
         assert!(
@@ -173,6 +176,7 @@ fn actual_animation_preserves_damage_hold_healing_and_reduced_motion_in_curve_pa
             [0.0, 0.0, 44.0, 12.0],
             presentation,
             [MINT, CYAN],
+            110.0,
         );
         frame
             .frame()
@@ -241,6 +245,7 @@ fn below_ship_placement_uses_actual_radius_zoom_and_keeps_right_footer_unchanged
                         trail: [1.0; 2],
                     },
                     [MINT, CYAN],
+                    110.0,
                 );
                 for (_, p) in corners(&f) {
                     assert!(

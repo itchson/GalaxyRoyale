@@ -282,6 +282,7 @@ pub struct VitalsPresentation {
 #[derive(Default)]
 pub struct VitalsAnimation {
     ship: Option<u8>,
+    capacity: [f32; 2],
     last: [f32; 2],
     fill: [f32; 2],
     trail: [f32; 2],
@@ -296,11 +297,20 @@ impl VitalsAnimation {
             ratio(hud.hull, hud.max_hull),
             ratio(hud.shield, hud.max_shield),
         ];
+        let capacity = [hud.max_hull, hud.max_shield].map(|value| {
+            if value.is_finite() {
+                value.max(0.0)
+            } else {
+                0.0
+            }
+        });
         let fresh = self.ship != Some(hud.campaign.selected_ship)
+            || self.capacity != capacity
             || hud.hull <= 0.0
             || (hud.dock && actual[0] == 1.0 && (hud.max_shield <= 0.0 || actual[1] == 1.0));
         if fresh || reduced {
             self.ship = Some(hud.campaign.selected_ship);
+            self.capacity = capacity;
             self.last = actual;
             self.fill = actual;
             self.trail = actual;
@@ -1071,7 +1081,7 @@ pub(crate) fn draw_flight_status_animated(
             ..Transform::default()
         }
         .affine();
-        append_curved_vitals(ui.frame, parent, rect, presentation, colors);
+        append_curved_vitals(ui.frame, parent, rect, presentation, colors, hud.max_shield);
     }
     draw_boss(&mut ui, hud, Vec2::from_array(layout.viewport), boss_panel);
 }
@@ -1079,18 +1089,23 @@ pub(crate) fn draw_flight_status_animated(
 /// Fixed UI envelope, independent of zoom; the shared layout reserves all cells.
 const VITALS_SIZE: [f32; 2] = [44.0, 12.0];
 const VITALS_CLEARANCE: f32 = 5.0;
-const VITAL_ARC_Y: [f32; 11] = [0.0, 1.0, 2.0, 3.0, 4.0, 4.0, 4.0, 3.0, 2.0, 1.0, 0.0];
+const SHIELD_CHUNK_CAPACITY: f32 = 10.0;
+// Current valid profiles top out at 172 HP. Eighteen marks bound extraction work.
+const SHIELD_MAX_CHUNKS: usize = 18;
+const HULL_VITAL_MARKS: usize = 11;
 static VITAL_SEGMENT: LazyLock<PixelBody> =
     LazyLock::new(|| PixelBody::from_ascii(&[".#.", "###", "###"], &[('#', WHITE)]));
 
-/// Two stepped arcs made from cached occupied local objects. Fractional health
-/// clips each occupied quad continuously; it never rounds health or cell size.
+/// The hull keeps 11 marks. Shield marks each represent 10 capacity points,
+/// with the last capacity/charge slice kept fractional. Marks above 11 compress
+/// their whole horizontal field together, retaining gaps in the same envelope.
 fn append_curved_vitals(
     frame: &mut FrameBuilder,
     parent: AffineTransform,
     rect: [f32; 4],
     presentation: VitalsPresentation,
     colors: [u32; 2],
+    max_shield: f32,
 ) {
     if rect.iter().any(|v| !v.is_finite()) || rect[2] <= 0.0 || rect[3] <= 0.0 {
         return;
@@ -1122,17 +1137,46 @@ fn append_curved_vitals(
             },
         )
     };
+    let shield_units = if max_shield.is_finite() && max_shield > 0.0 {
+        (max_shield / SHIELD_CHUNK_CAPACITY).min(SHIELD_MAX_CHUNKS as f32)
+    } else {
+        0.0
+    };
     for (row, &color) in colors.iter().enumerate() {
+        let units = if row == 0 {
+            HULL_VITAL_MARKS as f32
+        } else {
+            shield_units
+        };
+        let count = units.ceil() as usize;
+        if count == 0 {
+            continue;
+        }
+        let horizontal_scale = (HULL_VITAL_MARKS as f32 / count as f32).min(1.0);
+        let span = (count as f32 * 4.0 - 1.0) * horizontal_scale;
         let track = group.compose(
             Transform {
-                position: Vec2::new(0.5, row as f32 * 5.0),
+                position: Vec2::new((VITALS_SIZE[0] - span) * 0.5, row as f32 * 5.0),
+                scale: Vec2::new(horizontal_scale, 1.0),
                 ..Transform::default()
             }
             .affine(),
         );
         let fill = fraction(presentation.fill[row]);
         let trail = fraction(presentation.trail[row]).max(fill);
-        for (index, &y) in VITAL_ARC_Y.iter().enumerate() {
+        for index in 0..count {
+            let y = if row == 0 {
+                index.min(count - 1 - index).min(4) as f32
+            } else {
+                // Follow the existing hull curve at this physical horizontal
+                // slot. A shorter independent arc would overlap its middle.
+                let x =
+                    (VITALS_SIZE[0] - span) * 0.5 + (index as f32 * 4.0 + 1.5) * horizontal_scale;
+                let hull_slot = (x - 2.0) / 4.0;
+                hull_slot
+                    .min(HULL_VITAL_MARKS as f32 - 1.0 - hull_slot)
+                    .clamp(0.0, 4.0)
+            };
             let segment = track.compose(
                 Transform {
                     position: Vec2::new(index as f32 * 4.0 + 1.5, y + 1.5),
@@ -1140,15 +1184,12 @@ fn append_curved_vitals(
                 }
                 .affine(),
             );
-            frame.push_body_affine_colored(&VITAL_SEGMENT, segment, |cell, _| {
-                shade(cell, 0x90_34261e)
-            });
-            let part = |value: f32| {
-                (value * VITAL_ARC_Y.len() as f32 - index as f32).clamp(0.0, 1.0) * 3.0
-            };
+            let capacity = (units - index as f32).clamp(0.0, 1.0);
+            let part = |value: f32| (value * units - index as f32).clamp(0.0, capacity) * 3.0;
             let fill_end = part(fill);
             let trail_end = part(trail);
             for (start, end, color) in [
+                (0.0, capacity * 3.0, 0x90_34261e),
                 (
                     fill_end,
                     trail_end,
@@ -2687,3 +2728,7 @@ mod minimap_tests;
 #[cfg(test)]
 #[path = "ui_curved_vitals_tests.rs"]
 mod curved_vitals_tests;
+
+#[cfg(test)]
+#[path = "ui_shield_capacity_tests.rs"]
+mod shield_capacity_tests;
