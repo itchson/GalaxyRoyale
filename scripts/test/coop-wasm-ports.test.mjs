@@ -281,6 +281,48 @@ test("actual native legacy and evolved Echo value exports replay without invente
   }
 });
 
+test("actual native legacy and evolved Nova exports replay with stored rank and no synthetic history", () => {
+  const root = new URL("./fixtures/co-op-nova-loadout/", import.meta.url);
+  const provenance = JSON.parse(readFileSync(new URL("provenance.json", root)));
+  assert.equal(
+    provenance.nativeSourceCommit,
+    "f31873bfe3e181c57bc4ef0bdf157b14f291de11",
+  );
+  assert.equal(provenance.fixtureSetup.evolved.naturallyEarned, false);
+  for (const pin of provenance.files) {
+    const raw = canonicalFixtureBytes(readFileSync(new URL(pin.file, root)));
+    assert.equal(raw.length, pin.bytes);
+    assert.equal(createHash("sha256").update(raw).digest("hex"), pin.sha256);
+    const value = JSON.parse(raw);
+    // Actual native value bytes; only the boundary-test envelope is supplied.
+    const extracted = readOwnedLoadout({
+      co_op_batch: () =>
+        JSON.stringify({ v: 1, results: [{ ok: true, value }] }),
+    });
+    assert.deepEqual(extracted, value);
+    validatePayload("join", {
+      local_seed: 123,
+      identity: null,
+      owned_loadout: extracted,
+    });
+    const updated = structuredClone(capture);
+    updated.snapshot.participants[1].owned_loadout = {
+      ...extracted,
+      selected_ship: updated.snapshot.participants[1].selected_ship,
+    };
+    publication(updated);
+    assert.equal(Object.hasOwn(extracted, "boss_generations"), false);
+    if (pin.file === "evolved.json") {
+      assert.equal(extracted.nova_evolution, 5);
+      assert.deepEqual(extracted.slots[1], { index: 4, rank: 5 });
+      assert.equal(extracted.ship_xp, 0);
+    } else {
+      assert.equal(Object.hasOwn(extracted, "nova_evolution"), false);
+      assert.equal(Object.keys(extracted).length, 10);
+    }
+  }
+});
+
 test("tracked real publication DTOs retain canonical native export hashes and validate wire", () => {
   const provenance = JSON.parse(
     readFileSync(

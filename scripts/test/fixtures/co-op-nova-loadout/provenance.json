@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "nativeSourceCommit": "f31873bfe3e181c57bc4ef0bdf157b14f291de11",
+  "rootExecutionCommit": "06df1c267e2074e162953a048d367da67fb437bb",
+  "nativeFunction": "Game::co_op_owned_loadout",
+  "nativeTest": "co_op::nova_tests::native_export_preserves_legacy_bytes_and_validates_effect_only_nova_metadata",
+  "command": "cargo test --locked -p game_core co_op::nova_tests -- --nocapture",
+  "scope": "Actual native serialized values agreed in separate Root and specialist executions. Node replay supplies only the boundary envelope; no WASM/RTC execution.",
+  "fixtureSetup": {
+    "legacy": "Profile::default()",
+    "evolved": {
+      "droidType": "talo",
+      "corporation": "hugo",
+      "selectedHull": 0,
+      "selectedHullXp": 0,
+      "storedAbilityRank": 5,
+      "nativeEffectiveAbilityRank": 1,
+      "equippedDefense": 4,
+      "hardware": [
+        0,
+        5,
+        0,
+        0,
+        0,
+        0
+      ],
+      "familyOneDefeats": [
+        16,
+        8,
+        4,
+        2,
+        1
+      ],
+      "naturallyEarned": false
+    }
+  },
+  "files": [
+    {
+      "file": "legacy.json",
+      "bytes": 184,
+      "sha256": "da5b43e9f803abd1cc5bd190f24fa84649225b2c225c74ec9327be86a7bde87f"
+    },
+    {
+      "file": "evolved.json",
+      "bytes": 219,
+      "sha256": "41b9caf535e0fbb0ec013fe1e32a8e3be3cc93b4bb8690bd5e8717767142380e"
+    }
+  ]
+}
