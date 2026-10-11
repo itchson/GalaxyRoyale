@@ -23,6 +23,8 @@ pub struct Pilot {
     #[serde(deserialize_with = "strict_identity")]
     pub identity: Option<crate::identity::KikaiIdentity>,
     pub selected_ship: u8,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub owned_loadout: Option<crate::co_op::OwnedLoadout>,
     pub position: [f32; 2],
     pub previous: [f32; 2],
     pub velocity: [f32; 2],
@@ -414,7 +416,7 @@ impl Scene {
         self.append_visible(frame, view.alpha, Some(view));
         Ok(())
     }
-    /// Factory-session HUD, composed from authoritative pilot/body metadata.
+    /// Session HUD, composed from authoritative pilot/body/build metadata.
     /// Clears every local progression/catalog/action field, without writing the
     /// provided solo HUD or any Profile. Host equipment metadata is not inferred.
     pub fn guest_hud(
@@ -430,7 +432,7 @@ impl Scene {
         if peer != self.peer {
             return Err("unknown_pilot");
         }
-        if pilot.slot == 0 || pilot.selected_ship != 0 {
+        if pilot.slot == 0 {
             return Err("unsupported_host_hud");
         }
         let factory = &self.factory;
@@ -438,7 +440,11 @@ impl Scene {
         if factory.identity != pilot.identity || factory.seed != pilot.local_seed {
             return Err("unknown_pilot");
         }
-        let stats = crate::Stats::from_profile(factory);
+        let stats = crate::co_op_loadout::stats(factory, pilot.owned_loadout.as_ref());
+        let ship = pilot.selected_ship;
+        let xp = factory.campaign.ship_xp[ship as usize];
+        let level = crate::campaign::level(xp);
+        let rank_cap = crate::campaign::rank_cap(level);
         let position = Vec2::from_array(pilot.position);
         let site = crate::regions::sites_near(self.world_seed(), position)
             .into_iter()
@@ -488,16 +494,20 @@ impl Scene {
         hud.campaign.arena = None;
         hud.campaign.encounter = None;
         hud.campaign.ships = vec![crate::campaign::ShipHud {
-            id: 0,
-            name: factory
-                .identity
-                .as_ref()
-                .map_or("Scout", |id| id.corporation.starter_name())
-                .into(),
+            id: ship,
+            name: match ship {
+                0 => factory
+                    .identity
+                    .as_ref()
+                    .map_or("Scout", |id| id.corporation.starter_name()),
+                1..=8 => crate::campaign::CHAMPIONS[ship as usize - 1].ship,
+                _ => "Royale Sovereign",
+            }
+            .into(),
             owned: true,
             selected: true,
-            level: 1,
-            rank_cap: 1,
+            level,
+            rank_cap,
             ..Default::default()
         }];
         hud.campaign.tournament_unlocked = false;
@@ -508,13 +518,13 @@ impl Scene {
         hud.campaign.standings.clear();
         hud.campaign.matches.clear();
         hud.campaign.credits_pending = false;
-        hud.campaign.selected_ship = 0;
+        hud.campaign.selected_ship = ship;
         hud.campaign.tournament_attempt = 0;
         hud.last_run = None;
-        hud.ship_level = 1;
-        hud.ship_xp = 0;
-        hud.ship_next_xp = crate::campaign::next_xp(1);
-        hud.rank_cap = 1;
+        hud.ship_level = level;
+        hud.ship_xp = xp;
+        hud.ship_next_xp = crate::campaign::next_xp(level);
+        hud.rank_cap = rank_cap;
         hud.cargo_materials = 0;
         hud.cargo_capacity = 16;
         hud.stored_materials = 0;
@@ -526,7 +536,7 @@ impl Scene {
         hud.material_loss_reason.clear();
         hud.abilities.clear();
         hud.components.clear();
-        hud.loadout = factory.campaign.loadouts[0].slots.map(|slot| {
+        hud.loadout = factory.campaign.loadouts[ship as usize].slots.map(|slot| {
             slot.and_then(|id| {
                 let def = crate::abilities::get(id)?;
                 Some(crate::ship_progression::EquippedAbilityHud {
@@ -794,6 +804,20 @@ impl Replica {
         let mut ids = BTreeSet::new();
         let mut slots = BTreeSet::new();
         for p in &snapshot.participants {
+            if self
+                .scene
+                .as_ref()
+                .and_then(|old| old.local_pilot(p.id))
+                .is_some_and(|old| {
+                    old.epoch == p.epoch
+                        && (old.local_seed != p.local_seed
+                            || old.identity != p.identity
+                            || old.selected_ship != p.selected_ship
+                            || old.owned_loadout != p.owned_loadout)
+                })
+            {
+                return Err("invalid_pilot");
+            }
             if !ids.insert(p.id)
                 || !slots.insert(p.slot)
                 || p.slot >= 8
@@ -811,9 +835,19 @@ impl Replica {
                 || !finite(p.max_shield, 0.0, 100_000.0)
                 || !finite(p.shield, 0.0, p.max_shield)
                 || !finite(p.throttle, 0.0, 1.0)
-                || (p.slot != 0 && p.selected_ship != 0)
+                || (p.slot != 0 && p.owned_loadout.is_none() && p.selected_ship != 0)
+                || p.owned_loadout
+                    .as_ref()
+                    .is_some_and(|owned| owned.selected_ship != p.selected_ship)
             {
                 return Err("invalid_pilot");
+            }
+            if p.slot != 0 || p.owned_loadout.is_some() {
+                let profile = pilot_profile(p)?;
+                let stats = crate::co_op_loadout::stats(&profile, p.owned_loadout.as_ref());
+                if p.slot != 0 && (p.max_hull != stats.hull || p.max_shield != stats.shield) {
+                    return Err("pilot_mismatch");
+                }
             }
         }
         if !snapshot
@@ -1018,15 +1052,22 @@ impl Replica {
             .iter()
             .find(|p| p.id == self.peer)
             .unwrap();
-        let factory = crate::co_op::guest_profile(&crate::co_op::ParticipantSpec {
-            id: local.id,
-            local_seed: local.local_seed,
-            identity: local.identity.clone(),
-        })
-        .map_err(|_| "invalid_pilot")?;
+        let factory = pilot_profile(local)?;
         if local.slot != 0 {
-            let stats = crate::Stats::from_profile(&factory);
+            let stats = crate::co_op_loadout::stats(&factory, local.owned_loadout.as_ref());
             if local.max_hull != stats.hull || local.max_shield != stats.shield {
+                return Err("pilot_mismatch");
+            }
+            let original = crate::identity::player_body(&factory);
+            let row = p
+                .rows
+                .iter()
+                .find(|row| row.participant == Some(local.id))
+                .unwrap();
+            if row.width != original.width
+                || row.height != original.height
+                || row.scale != crate::campaign::player_scale(local.selected_ship)
+            {
                 return Err("pilot_mismatch");
             }
         }
@@ -1144,6 +1185,19 @@ impl Replica {
         });
         Ok(())
     }
+}
+
+fn pilot_profile(pilot: &Pilot) -> Result<crate::Profile> {
+    let spec = crate::co_op::ParticipantSpec {
+        id: pilot.id,
+        local_seed: pilot.local_seed,
+        identity: pilot.identity.clone(),
+    };
+    match &pilot.owned_loadout {
+        Some(owned) => owned.profile(&spec),
+        None => crate::co_op::guest_profile(&spec),
+    }
+    .map_err(|_| "invalid_pilot")
 }
 
 fn strict_identity<'de, D: serde::Deserializer<'de>>(

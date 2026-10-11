@@ -1,6 +1,7 @@
 //! First host-authority slice in the real Game ECS. Transport and shared rewards
 //! are intentionally outside this module. A session restores the exact solo Game.
 use super::*;
+pub use crate::co_op_loadout::{OwnedAbility, OwnedLoadout};
 use serde::{Deserializer, Serializer, de::Error as _};
 
 pub const PROTOCOL: &str = "galaxy-coop-1";
@@ -53,6 +54,7 @@ pub enum Error {
     InvalidId,
     InvalidProtocol,
     InvalidIdentity,
+    InvalidLoadout,
     InvalidSeed,
     NotAtDock,
     ActiveSession,
@@ -75,8 +77,8 @@ pub enum Error {
     StalePublication,
 }
 
-/// No currency, ranks, XP, inventory or remote Profile can be supplied here.
-/// Guests temporarily use a factory loadout; owned guest RAICHO support is pending.
+/// Legacy v1 callers supply no combat inventory and retain factory admission.
+/// The separate owned-loadout method never accepts a complete remote Profile.
 #[derive(Clone, Debug, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct ParticipantSpec {
@@ -101,6 +103,7 @@ pub(super) struct Pilot {
     pub spec: ParticipantSpec,
     pub stats: Stats,
     pub selected_ship: u8,
+    pub owned_loadout: Option<OwnedLoadout>,
     pub original_body: PixelBody,
     pub shield: f32,
     pub since_damage: f32,
@@ -134,6 +137,8 @@ pub struct ParticipantState {
     pub local_seed: u32,
     pub identity: Option<identity::KikaiIdentity>,
     pub selected_ship: u8,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub owned_loadout: Option<OwnedLoadout>,
     pub position: [f32; 2],
     pub previous: [f32; 2],
     pub velocity: [f32; 2],
@@ -280,13 +285,19 @@ pub(super) fn guest_profile(spec: &ParticipantSpec) -> Result<Profile, Error> {
     profile.seed = spec.local_seed;
     Ok(profile)
 }
-fn pilot(admission: Admission, spec: ParticipantSpec, profile: &Profile) -> Pilot {
-    let stats = Stats::from_profile(profile);
+fn pilot(
+    admission: Admission,
+    spec: ParticipantSpec,
+    profile: &Profile,
+    owned_loadout: Option<OwnedLoadout>,
+) -> Pilot {
+    let stats = crate::co_op_loadout::stats(profile, owned_loadout.as_ref());
     Pilot {
         admission,
         spec,
         stats,
         selected_ship: profile.campaign.selected_ship,
+        owned_loadout,
         original_body: identity::player_body(profile),
         shield: stats.shield,
         since_damage: 10.0,
@@ -353,7 +364,7 @@ impl Game {
         active.reduced_cosmetics = self.reduced_cosmetics;
         active
             .world
-            .insert_one(active.player, pilot(admission, spec, &profile))
+            .insert_one(active.player, pilot(admission, spec, &profile, None))
             .unwrap();
         *active.world.get::<&mut Motion>(active.player).unwrap() =
             Motion::new(slot_position(0), Vec2::ZERO, -FRAC_PI_2);
@@ -376,10 +387,32 @@ impl Game {
     pub fn join_co_op(
         &mut self,
         expected_session: ParticipantId,
-        mut spec: ParticipantSpec,
+        spec: ParticipantSpec,
     ) -> Result<Admission, Error> {
         self.check_co_op_session(expected_session)?;
         let profile = guest_profile(&spec)?;
+        self.admit_co_op(spec, profile, None)
+    }
+
+    /// Offline owned-build declaration; ownership cannot be proven by a host.
+    /// Neither this temporary build nor shared kills are written to any save.
+    pub fn join_co_op_owned(
+        &mut self,
+        expected_session: ParticipantId,
+        spec: ParticipantSpec,
+        owned_loadout: OwnedLoadout,
+    ) -> Result<Admission, Error> {
+        self.check_co_op_session(expected_session)?;
+        let profile = owned_loadout.profile(&spec)?;
+        self.admit_co_op(spec, profile, Some(owned_loadout))
+    }
+
+    fn admit_co_op(
+        &mut self,
+        mut spec: ParticipantSpec,
+        profile: Profile,
+        owned_loadout: Option<OwnedLoadout>,
+    ) -> Result<Admission, Error> {
         spec.identity = profile.identity.clone();
         let session = self.co_op.as_ref().ok_or(Error::NoSession)?;
         if spec.id == session.host {
@@ -401,8 +434,8 @@ impl Game {
             slot,
             epoch,
         };
-        let p = pilot(admission, spec, &profile);
-        let scale = campaign::player_scale(0);
+        let p = pilot(admission, spec, &profile, owned_loadout);
+        let scale = campaign::player_scale(p.selected_ship);
         let body = p.original_body.clone();
         self.world.spawn((
             Motion::new(slot_position(slot), Vec2::ZERO, -FRAC_PI_2),
@@ -929,6 +962,7 @@ impl Game {
                 local_seed: p.spec.local_seed,
                 identity: p.spec.identity.clone(),
                 selected_ship: p.selected_ship,
+                owned_loadout: p.owned_loadout.clone(),
                 position: m.position.to_array(),
                 previous: m.previous.to_array(),
                 velocity: m.velocity.to_array(),

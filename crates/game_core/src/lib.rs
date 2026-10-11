@@ -12,6 +12,7 @@ pub mod bosses;
 pub mod campaign;
 pub mod co_op;
 mod co_op_control;
+mod co_op_loadout;
 pub mod co_op_publish;
 pub mod co_op_replica;
 #[cfg(test)]
