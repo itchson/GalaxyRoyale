@@ -252,6 +252,24 @@ export class PixelUiBridge {
           box.y >= clipBottom
         )
           return;
+        if (kind === "text" && element.id === "dialogue-text") {
+          // The paragraph is its own scroll viewport. Keep its original BCR as
+          // the clip, while native glyphs move through the full content area.
+          const height = Math.max(
+            box.height,
+            Number.isFinite(element.clientHeight) ? element.clientHeight : 0,
+            Number.isFinite(element.scrollHeight) ? element.scrollHeight : 0,
+          );
+          const scroll = Number.isFinite(element.scrollTop)
+            ? Math.max(0, Math.min(element.scrollTop, height - box.height))
+            : 0;
+          box = {
+            x: box.x,
+            y: box.y - scroll,
+            width: box.width,
+            height,
+          } as DOMRect;
+        }
         // CSS layout quantizes to subpixels. Preserve the measured center while
         // recovering only the authored campaign icon size within 1/64 UI unit.
         const authored =

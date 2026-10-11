@@ -14,8 +14,8 @@
   align-items: flex-start;
   gap: calc(10px * var(--ui-scale, 1));
   width: min(calc(680px * var(--ui-scale, 1)), 100%);
-  height: min(calc(156px * var(--ui-scale, 1)), 75dvh);
-  max-height: 100%;
+  height: auto;
+  max-height: min(calc(320px * var(--ui-scale, 1)), 75dvh, 100%);
   min-height: 0;
   padding: var(--ui-pad);
   border: 1px solid #5db7cd;
@@ -49,7 +49,7 @@
   overflow-wrap: anywhere;
 }
 .dialogue-content p {
-  flex: 1 1 0;
+  flex: 1 1 auto;
   min-height: 0;
   margin: 0;
   font-size: var(--ui-text);

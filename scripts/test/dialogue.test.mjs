@@ -54,3 +54,14 @@ test('presentation tokens change on refresh and close, without changing on reads
   f.panel.close();const closed=f.panel.presentationToken;assert.ok(closed>second);
   f.panel.close();assert.equal(f.panel.presentationToken,closed);
 });
+
+test('overflowing dialogue text joins keyboard focus while actions remain available',()=>{
+  const f=fixture();f.panel.show({speaker:'OPR',text:'A complete long briefing.',onNext:()=>{}});
+  const text=f.element('dialogue-text');text.scrollHeight=120;text.clientHeight=40;
+  assert.equal(text.tabIndex,0);
+  f.key('Tab');assert.equal(f.document.activeElement,f.element('dialogue-close'));
+  f.key('Tab');assert.equal(f.document.activeElement,text);
+  f.key('Tab');assert.equal(f.document.activeElement,f.element('dialogue-next'));
+  text.scrollTop=65;f.panel.show({speaker:'OPR',text:'The next page.',onNext:()=>{}});
+  assert.equal(text.scrollTop,0);
+});

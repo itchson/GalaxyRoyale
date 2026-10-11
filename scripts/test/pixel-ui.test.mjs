@@ -32,6 +32,7 @@ function pixelScene({
   hover = null,
   leaveHover = false,
   settingGeometry = null,
+  paragraph = null,
 } = {}) {
   const bounds = rootBounds ?? {
     x: 0,
@@ -92,6 +93,21 @@ function pixelScene({
         : null
       : input;
   const root = new Element();
+  const text = new Element();
+  if (paragraph) {
+    text.id = paragraph.id ?? "dialogue-text";
+    text.tagName = "P";
+    text.innerText = paragraph.text ?? "A complete briefing to scroll.";
+    text.bounds = paragraph.bounds;
+    text.clientHeight = paragraph.clientHeight ?? paragraph.bounds.height;
+    text.scrollHeight = paragraph.scrollHeight;
+    text.scrollTop = paragraph.scrollTop ?? 0;
+    text.parentElement = root;
+    text.closest = (selector) =>
+      selector.includes("#dialogue-text") && text.id === "dialogue-text"
+        ? text
+        : null;
+  }
   if (flight) root.id = "game-ui";
   const events = new Map();
   if (consoleCommand) {
@@ -135,7 +151,9 @@ function pixelScene({
           ? buttonElements
           : flight && selector.includes(".dock-facility")
             ? buttonElements
-            : [];
+            : paragraph && selector.startsWith("h2,h3,p,")
+              ? [text]
+              : [];
   const document = {
     getElementById: () => null,
     addEventListener(name, callback) {
@@ -164,8 +182,14 @@ function pixelScene({
     },
   });
   let scene;
+  const snapshots = [];
   const bridge = new exports.PixelUiBridge(
-    { set_ui_scene: (value) => (scene = value) },
+    {
+      set_ui_scene: (value) => {
+        scene = value;
+        snapshots.push(value);
+      },
+    },
     () => scale,
   );
   bridge.sync();
@@ -182,6 +206,12 @@ function pixelScene({
     events.get("selectionchange")();
     bridge.sync();
   }
+  for (const scroll of paragraph?.scrollTo ?? []) {
+    text.scrollTop = scroll;
+    events.get("scroll")();
+    bridge.sync();
+  }
+  if (paragraph?.scrollTo) return snapshots;
   return scene;
 }
 function sliderScene(options) {
@@ -403,4 +433,85 @@ test("facility pixel labels require hover or deliberate focus while controls kee
   }).find((n) => n.kind === "facility-label");
   assert.equal(focused.active, true);
   assert.deepEqual(Array.from(hovered.rect), Array.from(focused.rect));
+});
+
+test("dialogue self-scroll moves full text through a fixed clip without touching actions", () => {
+  for (const scale of [1, 1.375, 2.4]) {
+    const frames = pixelScene({
+      scale,
+      rootBounds: { x: 20, y: 20, width: 300, height: 200 },
+      paragraph: {
+        bounds: { x: 30, y: 60, width: 250, height: 40 },
+        scrollHeight: 120,
+        scrollTo: [40, 80],
+      },
+      buttons: [
+        {
+          bounds: { x: 30, y: 110, width: 250, height: 44 },
+          innerText: "NEXT",
+        },
+      ],
+    });
+    assert.equal(
+      frames.length,
+      3,
+      "actual captured scroll events invalidate the bridge",
+    );
+    for (const [index, frame] of frames.entries()) {
+      const nodes = frame.groups[0].nodes;
+      const text = nodes.find((node) => node.kind === "text");
+      const action = nodes.find((node) => node.kind === "button");
+      assert.deepEqual(Array.from(text.rect), [
+        10 / scale,
+        (40 - index * 40) / scale,
+        250 / scale,
+        120 / scale,
+      ]);
+      assert.deepEqual(Array.from(text.clip), [
+        10 / scale,
+        40 / scale,
+        250 / scale,
+        40 / scale,
+      ]);
+      assert.deepEqual(Array.from(action.rect), [
+        10 / scale,
+        90 / scale,
+        250 / scale,
+        44 / scale,
+      ]);
+      assert.ok(text.clip[1] + text.clip[3] < action.rect[1]);
+      assert.equal(text.text, "A complete briefing to scroll.");
+      assert.equal(
+        text.font,
+        1,
+        "scroll preserves native font/width/wrapping inputs",
+      );
+    }
+  }
+});
+
+test("dialogue scrolling clamps invalid/overshoot metrics and leaves other paragraphs untouched", () => {
+  const bounds = { x: 10, y: 30, width: 200, height: 40 };
+  for (const [scrollHeight, scrollTop, y, height] of [
+    [120, -10, 30, 120],
+    [120, 999, -50, 120],
+    [120, NaN, 30, 120],
+    [Infinity, 10, 30, 40],
+    [-1, 10, 30, 40],
+  ]) {
+    const node = pixelScene({
+      paragraph: { bounds, scrollHeight, scrollTop },
+    }).groups[0].nodes.find((node) => node.kind === "text");
+    assert.deepEqual(Array.from(node.rect), [10, y, 200, height]);
+    assert.deepEqual(Array.from(node.clip), [10, 30, 200, 40]);
+  }
+  const other = pixelScene({
+    paragraph: {
+      id: "menu-description",
+      bounds,
+      scrollHeight: 120,
+      scrollTop: 40,
+    },
+  }).groups[0].nodes.find((node) => node.kind === "text");
+  assert.deepEqual(Array.from(other.rect), [10, 30, 200, 40]);
 });

@@ -60,6 +60,7 @@ export class DialoguePanel {
     this.speaker.id = "dialogue-title";
     this.text.id = "dialogue-text";
     this.text.setAttribute("aria-live", "polite");
+    this.text.tabIndex = 0;
     const actions = document.createElement("div");
     actions.className = "dialogue-actions";
     this.action.id = "dialogue-action";
@@ -114,6 +115,7 @@ export class DialoguePanel {
     this.screen.removeAttribute("aria-busy");
     this.speaker.textContent = content.speaker.trim().slice(0, 64);
     this.text.textContent = content.text.trim().slice(0, 256);
+    this.text.scrollTop = 0;
     const portrait = content.portrait ?? 0;
     this.portrait.dataset.portrait = String(
       Number.isFinite(portrait)
@@ -222,16 +224,18 @@ export class DialoguePanel {
       if (!event.isComposing) this.close();
     } else if (event.key === "Tab") {
       event.preventDefault();
-      const available = [
+      const buttons = [
         this.previous,
         this.next,
         this.action,
         this.replay,
         this.closeButton,
       ].filter((button) => !button.hidden && !button.disabled);
-      const index = available.indexOf(
-        document.activeElement as HTMLButtonElement,
-      );
+      const available: HTMLElement[] =
+        this.text.scrollHeight > this.text.clientHeight
+          ? [this.text, ...buttons]
+          : buttons;
+      const index = available.indexOf(document.activeElement as HTMLElement);
       const next =
         index < 0
           ? event.shiftKey
