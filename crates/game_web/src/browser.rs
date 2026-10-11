@@ -385,6 +385,17 @@ impl Galaxy {
             shake: true,
         })
     }
+    /// Local host controller only; authenticated peer mapping lives in the shell.
+    pub fn co_op_batch(&mut self, request: &str) -> String {
+        let before = self.game.co_op_session();
+        let output = crate::co_op_bridge::dispatch(&mut self.game, request);
+        if before != self.game.co_op_session() {
+            self.accumulator = 0.0;
+            self.pending_destination = None;
+            self.vitals_animation.reset();
+        }
+        output
+    }
     pub fn step(&mut self, milliseconds: f64, input: JsValue) -> Result<JsValue, JsValue> {
         let delta = if milliseconds.is_finite() {
             (milliseconds as f32 / 1000.0).clamp(0.0, 0.1)
@@ -407,7 +418,11 @@ impl Galaxy {
             let mut steps = 0;
             while self.accumulator >= 1.0 / 60.0 && steps < 5 {
                 input.destination = self.pending_destination.take();
-                self.game.tick(&input, 1.0 / 60.0);
+                if let Some(session) = self.game.co_op_session() {
+                    self.game.tick_co_op(session).map_err(|error| js(format!("{error:?}")))?;
+                } else {
+                    self.game.tick(&input, 1.0 / 60.0);
+                }
                 self.accumulator -= 1.0 / 60.0;
                 steps += 1;
             }

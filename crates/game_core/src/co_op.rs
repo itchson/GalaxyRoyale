@@ -70,6 +70,9 @@ pub enum Error {
     StaleSnapshot,
     InvalidEntity,
     InvalidOffset,
+    PublicationBound,
+    NoPublication,
+    StalePublication,
 }
 
 /// No currency, ranks, XP, inventory or remote Profile can be supplied here.
@@ -192,6 +195,7 @@ pub struct EntityState {
     pub width: usize,
     pub height: usize,
     pub occupied: usize,
+    pub body_signature: String,
 }
 #[derive(Clone, Debug, Serialize)]
 pub struct EntityPage {
@@ -343,6 +347,7 @@ impl Game {
         // Game::new's reload migration may discard flight cargo. This session
         // neither reloads nor commits a save: retain exactly the original profile.
         active.profile = profile.clone();
+        active.publication_generation = self.publication_generation;
         active.viewport = self.viewport;
         active.reduced_motion = self.reduced_motion;
         active.reduced_cosmetics = self.reduced_cosmetics;
@@ -415,6 +420,7 @@ impl Game {
         let session = self.co_op.as_mut().unwrap();
         session.next_epoch = next;
         session.revision = revision;
+        self.publication = None;
         Ok(admission)
     }
 
@@ -511,6 +517,7 @@ impl Game {
         }
         let _ = self.world.despawn(entity);
         self.co_op.as_mut().unwrap().revision = revision;
+        self.publication = None;
         Ok(())
     }
     /// Restores the original world, profile, controls, effects and RNG exactly.
@@ -519,7 +526,7 @@ impl Game {
         self.restore_co_op();
         Ok(())
     }
-    fn check_co_op_session(&self, expected: ParticipantId) -> Result<(), Error> {
+    pub(super) fn check_co_op_session(&self, expected: ParticipantId) -> Result<(), Error> {
         let session = self.co_op.as_ref().ok_or(Error::NoSession)?;
         if session.id != expected {
             return Err(Error::StaleSession);
@@ -530,7 +537,9 @@ impl Game {
         let Some(session) = self.co_op.take() else {
             return false;
         };
+        let generation = self.publication_generation;
         *self = *session.solo;
+        self.publication_generation = generation;
         true
     }
 
@@ -963,17 +972,10 @@ impl Game {
             dropped_notices: session.dropped_notices,
         })
     }
-    pub fn co_op_entity_page(
-        &self,
-        expected_session: ParticipantId,
-        revision: u32,
-        offset: usize,
-    ) -> Result<EntityPage, Error> {
-        self.check_co_op_session(expected_session)?;
-        let session = self.co_op.as_ref().ok_or(Error::NoSession)?;
-        if session.revision != revision {
-            return Err(Error::StaleSnapshot);
-        }
+    pub fn co_op_session(&self) -> Option<ParticipantId> {
+        self.co_op.as_ref().map(|session| session.id)
+    }
+    pub(super) fn co_op_entity_rows(&self) -> Vec<EntityState> {
         let mut rows: Vec<_> = self
             .world
             .query::<(
@@ -1003,9 +1005,24 @@ impl Game {
                 width: body.width,
                 height: body.height,
                 occupied: body.occupied_count(),
+                body_signature: co_op_publish::body_signature(body),
             })
             .collect();
         rows.sort_by(|a, b| a.id.cmp(&b.id));
+        rows
+    }
+    pub fn co_op_entity_page(
+        &self,
+        expected_session: ParticipantId,
+        revision: u32,
+        offset: usize,
+    ) -> Result<EntityPage, Error> {
+        self.check_co_op_session(expected_session)?;
+        let session = self.co_op.as_ref().ok_or(Error::NoSession)?;
+        if session.revision != revision {
+            return Err(Error::StaleSnapshot);
+        }
+        let rows = self.co_op_entity_rows();
         if offset > rows.len() {
             return Err(Error::InvalidOffset);
         }

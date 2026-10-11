@@ -11,6 +11,7 @@ mod boss_assets;
 pub mod bosses;
 pub mod campaign;
 pub mod co_op;
+pub mod co_op_publish;
 mod co_op_control;
 #[cfg(test)]
 mod co_op_tests;
@@ -557,6 +558,8 @@ const UPGRADES: [(&str, &str, usize, &str); 9] = [
 pub struct Game {
     world: World,
     co_op: Option<co_op::Session>,
+    publication: Option<co_op_publish::Publication>,
+    publication_generation: u32,
     player: Entity,
     profile: Profile,
     camera: Vec2,
@@ -681,6 +684,8 @@ impl Game {
         let mut game = Self {
             world,
             co_op: None,
+            publication: None,
+            publication_generation: 0,
             player,
             profile,
             camera: Vec2::ZERO,

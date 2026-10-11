@@ -4,6 +4,7 @@ pub mod boss_overlay;
 #[cfg(target_arch = "wasm32")]
 mod browser;
 mod champion_patches;
+pub mod co_op_bridge;
 pub mod dock_art;
 pub mod flight_icons;
 pub mod kikai_art;
