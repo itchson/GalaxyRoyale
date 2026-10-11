@@ -10,184 +10,192 @@ pub(super) const CENTERS: [[f32; 2]; 4] = [
 ];
 const HIT_RADIUS: f32 = 24.0;
 const ACCENTS: [[u8; 3]; 4] = [
-    [240, 126, 112], // Upgrade fabricator: coral tools and reactor.
-    [100, 204, 224], // Hangar: cyan gantry and parked shuttle.
-    [133, 204, 144], // Journal: green archive stack and terminal.
-    [224, 185, 104], // Campaign: gold observatory and pennant.
+    [240, 126, 112], // Forge: coral fabrication well and four work clamps.
+    [100, 204, 224], // Hangar: cyan roof rails and an overhead shuttle bay.
+    [133, 204, 144], // Journal: green radial archive pods and survey glass.
+    [224, 185, 104], // Campaign: gold arena ring and score-control decks.
 ];
-const PAD: &[&str] = &[
-    "        ppp        ",
-    "      ppppppp      ",
-    "    ppqqqqqqqpp    ",
-    "  ppqqqqqqqqqqqpp  ",
-    "ppqqqqqqqqqqqqqqqpp",
-    "  ppqqqqqqqqqqqpp  ",
-    "    ppqqqqqqqpp    ",
-    "      ppppppp      ",
-    "        ppp        ",
-];
-const UPGRADE: &[&str] = &[
-    "          t          ",
-    "         aaa         ",
-    "        awwwa        ",
-    "        awlwa        ",
-    "       sawwwas       ",
-    "     ssaaaaaaass     ",
-    "    sbbsaasasbbs     ",
-    "    sbbsaasasbbs     ",
-    "    sbbsswssbbs      ",
-    "    sbbaaabaabbs     ",
-    "   ssbbbaaaabbbss    ",
-    "   saaaaaaaaaaas     ",
-    "   swssbbbbbssws     ",
-    "   swssblllbssws     ",
-    "   saasbbbbbsaas     ",
-    "   ssaaaaaaaasss     ",
-    "  ssssbbbbbsssss     ",
-    "  saasbbbbbsaas      ",
-    "  ssssbbbbbsssss     ",
-    "   sssssssssss       ",
-];
-const HANGAR: &[&str] = &[
-    "   aaaaaaaaaaaaaaaaa   ",
-    "  aswwwwwwwwwwwwwwwsa  ",
-    "  asssssssssssssssssa  ",
-    "  asbbbs       sbbbsa  ",
-    "  asbbbs   w   sbbbsa  ",
-    "  asbbbs  waw  sbbbsa  ",
-    "  asbbbs  waw  sbbbsa  ",
-    "  asbbbs wwaww sbbbsa  ",
-    "  asbbs wwlaww sb bsa  ",
-    "  asbbswwwwwwwsb bsa   ",
-    "  asbbs  as a  sbbbsa  ",
-    "  asbbs  tl t  sbbbsa  ",
-    "  assbs  bbb   sbbbsa  ",
-    "  aasbs        sbbsaa  ",
-    "  ssasbbbbbbbbbsasss   ",
-    "   ssaaaaaaaaaaass    ",
-    "     sssssssssss     ",
-];
-const JOURNAL: &[&str] = &[
-    "       aaaaaaa       ",
-    "      aswwwwwsa      ",
-    "      aswlllwsa      ",
-    "      aswwwwwsa      ",
-    "      asssssssa      ",
-    "   aaaaabbbaaaaaa    ",
-    "   aswwwwwwwwwwsa    ",
-    "   aswllbblllwwsa    ",
-    "   aswwwwwwwwwwsa    ",
-    "   assssssssssssa    ",
-    "    asbbbbbbbbsa     ",
-    "  aaaswwwwwwwwsaaa   ",
-    "  aswwllbbllbbwwsa   ",
-    "  aswwwwwwwwwwwwsa   ",
-    "  assssssssssssssa   ",
-    "   saasbbbbbsaas     ",
-    "   ssssbbbbbssss     ",
-    "    sssssssssss      ",
-];
-const CAMPAIGN: &[&str] = &[
-    "            aaa        ",
-    "            awaa       ",
-    "            awwwa      ",
-    "            aaaa       ",
-    "            s          ",
-    "      aa    s    aa    ",
-    "     awwa   s   awwa   ",
-    "    awwssaassasswwa    ",
-    "     asbsaallassbsa    ",
-    "      sbbawwwabbss     ",
-    "      sbbaawaa bb s    ",
-    "      sbbaa aabb s     ",
-    "     ssbbbaaabbbss     ",
-    "    sasbbbbbbbbbsa     ",
-    "   saaassbbbbbssaaa    ",
-    "   swssaabbbb aassw    ",
-    "   saassaaaaaaassa     ",
-    "    sssssssssssss      ",
-    "     sssssssssss       ",
-];
+// All structures use the same overhead plane and fine world cells.
+// There are no facade rows, cast tower shadows or compressed diamond bases.
+const ART_SIDE: usize = 44;
+const CELL_SCALE: f32 = 0.55;
 struct Art {
-    pad: PixelBody,
+    pads: [PixelBody; 4],
     buildings: [PixelBody; 4],
 }
-/// Fine object-local metalwork: chamfered corners, recessed vents, staggered
-/// fasteners and two-tone screens. The half-sized cells retain the world bounds.
-fn detail_building(rows: &[&str]) -> PixelBody {
-    let source: Vec<Vec<char>> = rows.iter().map(|r| r.chars().collect()).collect();
-    let width = source.iter().map(Vec::len).max().unwrap_or(0);
-    let sample = |x: isize, y: isize| {
-        if x < 0 || y < 0 {
-            return ' ';
-        }
-        source
-            .get(y as usize)
-            .and_then(|r| r.get(x as usize))
-            .copied()
-            .unwrap_or(' ')
-    };
-    let mut detail = Vec::with_capacity(rows.len() * 2);
-    for y in 0..rows.len() * 2 {
-        let mut row = String::with_capacity(width * 2);
-        for x in 0..width * 2 {
-            let sx = (x / 2) as isize;
-            let sy = (y / 2) as isize;
-            let original = sample(sx, sy);
-            if original == ' ' {
-                row.push(' ');
-                continue;
-            }
-            let left = sample(sx - 1, sy) == ' ';
-            let right = sample(sx + 1, sy) == ' ';
-            let top = sample(sx, sy - 1) == ' ';
-            let bottom = sample(sx, sy + 1) == ' ';
-            let shade = if (left && top && x % 2 == 0 && y % 2 == 0)
-                || (right && bottom && x % 2 == 1 && y % 2 == 1)
-            {
-                ' '
-            } else if (left && x % 2 == 0) || (top && y % 2 == 0) {
-                'h'
-            } else if (right && x % 2 == 1) || (bottom && y % 2 == 1) {
-                'd'
-            } else if original == 'b' && y % 6 == 3 {
-                'v'
-            } else if original == 'b' && x % 8 == 2 && y % 6 == 1 {
-                'r'
-            } else if original == 'l' && y % 2 == 0 {
-                'e'
-            } else if original == 'a' && x % 6 == 3 {
-                'd'
+fn octagon(p: Vec2, half: f32, diagonal: f32) -> bool {
+    let a = p.abs();
+    a.max_element() <= half && a.x + a.y <= diagonal
+}
+fn roof_mask(id: usize, p: Vec2) -> bool {
+    let a = p.abs();
+    match id {
+        // Four work clamps surround an octagonal fabrication deck.
+        0 => octagon(p, 17.5, 30.0) || (a.x <= 20.5 && a.y <= 4.5) || (a.y <= 20.5 && a.x <= 4.5),
+        // An open bay and a parked overhead shuttle, with its apron to the south.
+        1 => {
+            let roof = octagon(p, 20.5, 34.0) && a.y <= 16.5;
+            let aperture = a.x < 7.5 && a.y < 11.5;
+            let shuttle_width = if p.y < -3.5 {
+                (p.y + 10.5) * 0.55 + 0.5
+            } else if p.y < 4.5 {
+                5.5
+            } else if p.y < 7.5 {
+                2.5
             } else {
-                original
+                4.5
             };
-            row.push(shade);
+            let shuttle = (-9.5..=9.5).contains(&p.y) && a.x <= shuttle_width;
+            (roof && !aperture) || shuttle || (a.x <= 10.5 && (16.5..=20.5).contains(&p.y))
         }
-        detail.push(row);
+        // Four radial archive pods surrounding a glass survey terminal.
+        2 => (a.x <= 7.5 && a.y <= 20.5) || (a.y <= 7.5 && a.x <= 20.5) || a.x + a.y <= 23.0,
+        // A circular arena aperture and four flat score-control decks.
+        _ => {
+            (8.0..=18.5).contains(&p.length())
+                || (a.x <= 20.5 && a.x >= 16.5 && a.y <= 5.5)
+                || (a.y <= 20.5 && a.y >= 16.5 && a.x <= 5.5)
+        }
     }
-    let borrowed: Vec<_> = detail.iter().map(String::as_str).collect();
-    PixelBody::from_ascii(
-        &borrowed,
-        &[
-            ('s', 0),
-            ('b', 1),
-            ('a', 2),
-            ('w', 3),
-            ('l', 4),
-            ('t', 5),
-            ('p', 6),
-            ('q', 7),
-            ('h', 8),
-            ('d', 9),
-            ('v', 10),
-            ('r', 11),
-            ('e', 12),
-        ],
-    )
+}
+fn roof_shade(id: usize, p: Vec2) -> u32 {
+    let a = p.abs();
+    let r = p.length();
+    let ix = (p.x + 21.5) as usize;
+    let iy = (p.y + 21.5) as usize;
+    let edge = [Vec2::X, -Vec2::X, Vec2::Y, -Vec2::Y]
+        .iter()
+        .any(|offset| !roof_mask(id, p + *offset));
+    if edge {
+        return if p.x + p.y < 0.0 { 8 } else { 9 };
+    }
+    // Flush fasteners and recessed horizontal vents are roof details, not facades.
+    if (a.x - 13.5).abs() < 0.1 && (a.y - 3.5).abs() < 0.1 {
+        return 11;
+    }
+    if (12.5..=16.5).contains(&a.x) && a.y <= 2.5 {
+        return if iy.is_multiple_of(2) { 10 } else { 0 };
+    }
+    match id {
+        0 => {
+            if r < 4.8 {
+                4
+            } else if r < 7.0 {
+                0
+            } else if r < 8.5 {
+                3
+            } else if a.min_element() < 1.0 {
+                5
+            } else if a.max_element() > 17.5 {
+                2
+            } else if (9.5..=15.5).contains(&a.x) && (7.5..=12.5).contains(&a.y) {
+                if ix.is_multiple_of(3) { 10 } else { 1 }
+            } else if (a.x - a.y).abs() < 0.6 {
+                9
+            } else {
+                1
+            }
+        }
+        1 => {
+            if a.x < 6.0 && a.y < 10.0 {
+                if a.x < 1.0 && (-4.5..=-0.5).contains(&p.y) {
+                    4
+                } else if p.y >= 7.5 {
+                    5
+                } else if a.x < 1.0 {
+                    3
+                } else {
+                    1
+                }
+            } else if p.y >= 16.5 {
+                if (a.x - (p.y - 15.5)).abs() < 0.6 {
+                    3
+                } else {
+                    0
+                }
+            } else if (a.x - 8.5).abs() < 0.6 {
+                5
+            } else if (a.y - 13.5).abs() < 0.6 {
+                3
+            } else if a.x > 9.5 && ix.is_multiple_of(6) {
+                9
+            } else if a.x > 9.5 && (iy % 6 == 1 || iy % 6 == 2) {
+                10
+            } else {
+                2
+            }
+        }
+        2 => {
+            if r < 4.0 {
+                4
+            } else if r < 5.7 {
+                0
+            } else if a.min_element() < 1.0 {
+                5
+            } else if a.max_element() >= 8.5 {
+                let along = if a.x > a.y { ix } else { iy };
+                if along.is_multiple_of(4) {
+                    9
+                } else if a.min_element() <= 4.5 {
+                    3
+                } else {
+                    1
+                }
+            } else if (a.x - a.y).abs() < 0.6 {
+                11
+            } else {
+                2
+            }
+        }
+        _ => {
+            if (12.0..=13.8).contains(&r) {
+                5
+            } else if r <= 9.7 {
+                3
+            } else if a.max_element() >= 17.5 && a.min_element() <= 3.5 {
+                4
+            } else if (a.x - a.y).abs() < 0.6 {
+                9
+            } else if r >= 16.0 {
+                2
+            } else {
+                1
+            }
+        }
+    }
+}
+fn cell_body(mut shade: impl FnMut(Vec2) -> Option<u32>) -> PixelBody {
+    let rows: Vec<String> = (0..ART_SIDE)
+        .map(|y| {
+            (0..ART_SIDE)
+                .map(|x| {
+                    shade(Vec2::new(x as f32 - 21.5, y as f32 - 21.5))
+                        .map_or(' ', |s| char::from_u32(0xe000 + s).unwrap())
+                })
+                .collect()
+        })
+        .collect();
+    let borrowed: Vec<_> = rows.iter().map(String::as_str).collect();
+    let palette: Vec<_> = (0..=12)
+        .map(|s| (char::from_u32(0xe000 + s).unwrap(), s))
+        .collect();
+    PixelBody::from_ascii(&borrowed, &palette)
 }
 static ART: LazyLock<Art> = LazyLock::new(|| Art {
-    pad: detail_building(PAD),
-    buildings: [UPGRADE, HANGAR, JOURNAL, CAMPAIGN].map(detail_building),
+    // Flush service rails follow the individual roof/courtyard silhouettes.
+    pads: std::array::from_fn(|id| {
+        cell_body(|p| {
+            let outer = [Vec2::X, -Vec2::X, Vec2::Y, -Vec2::Y]
+                .iter()
+                .any(|offset| roof_mask(id, p + *offset) || roof_mask(id, p + *offset * 2.0));
+            if outer && !roof_mask(id, p) {
+                Some(if p.x + p.y < 0.0 { 6 } else { 7 })
+            } else {
+                None
+            }
+        })
+    }),
+    buildings: std::array::from_fn(|id| cell_body(|p| roof_mask(id, p).then(|| roof_shade(id, p)))),
 });
 
 pub(super) fn at(player: Vec2, point: Vec2, home_radius: f32) -> Option<u8> {
@@ -207,18 +215,29 @@ pub(super) fn at(player: Vec2, point: Vec2, home_radius: f32) -> Option<u8> {
         .map(|id| id as u8)
 }
 
-fn color(id: usize, shade: u32, time: f32) -> u32 {
+fn color(id: usize, cell: Vec2, shade: u32, time: f32) -> u32 {
     let accent = ACCENTS[id];
-    let pulse = 0.94 + (time * 0.8 + id as f32 * 1.4).sin() * 0.06;
+    // Signal waves are object-local: conveyor traces, shuttle beacons and score
+    // arcs change their lit cells while all roof/deck geometry remains stationary.
+    let pulse = if shade == 4 || shade == 5 || shade == 12 {
+        let phase = if id == 3 {
+            cell.y.atan2(cell.x) * 2.0
+        } else {
+            cell.x * 0.22 + cell.y * 0.15
+        };
+        0.80 + (time * 1.8 - phase + id as f32 * 1.4).sin() * 0.20
+    } else {
+        1.0
+    };
     let (rgb, alpha) = match shade {
-        0 => ([24, 28, 34], 255),
-        1 => ([49, 58, 65], 255),
+        0 => ([12, 20, 29], 255),
+        1 => ([41, 57, 67], 255),
         2 => (accent.map(|c| (c as f32 * 0.67) as u8), 255),
         3 => (accent.map(|c| (c as f32 * 0.92) as u8), 255),
         4 | 5 => (accent.map(|c| (c as f32 * pulse) as u8), 255),
-        6 => ([41, 47, 52], 125),
-        7 => ([27, 33, 38], 110),
-        8 => ([160, 183, 183], 255),
+        6 => ([56, 76, 87], 255),
+        7 => ([25, 37, 47], 255),
+        8 => ([129, 156, 162], 255),
         9 => ([17, 27, 35], 255),
         10 => ([31, 43, 52], 255),
         11 => ([190, 173, 137], 255),
@@ -243,30 +262,30 @@ pub(super) fn render(frame: &mut FrameBuilder, camera: Vec2, viewport: Vec2, tim
             continue;
         }
         frame.push_body_colored_material(
-            &ART.pad,
+            &ART.pads[id],
             Transform {
-                position: center + Vec2::new(0.0, 8.0),
-                scale: Vec2::new(0.75, 0.5),
+                position: center,
+                scale: Vec2::splat(CELL_SCALE),
                 ..Transform::default()
             },
             PixelMaterial {
                 light_response: 0.35,
                 emission: 0.0,
             },
-            |_, shade| color(id, shade, time),
+            |cell, shade| color(id, cell, shade, time),
         );
         frame.push_body_colored_material(
             &ART.buildings[id],
             Transform {
-                position: center + Vec2::new(0.0, -3.0),
-                scale: Vec2::splat(0.55),
+                position: center,
+                scale: Vec2::splat(CELL_SCALE),
                 ..Transform::default()
             },
             PixelMaterial {
                 light_response: 0.75,
                 emission: 0.0,
             },
-            |_, shade| color(id, shade, time),
+            |cell, shade| color(id, cell, shade, time),
         );
     }
 }
@@ -324,7 +343,7 @@ mod tests {
                     Vec2::splat(0.5),
                     Vec2::new(-0.5, 0.5),
                 ] {
-                    assert!(((p + corner) * 0.55 + Vec2::new(0.0, -3.0)).length() < HIT_RADIUS);
+                    assert!(((p + corner) * CELL_SCALE).length() < HIT_RADIUS);
                 }
             }
             for other in ART.buildings.iter().skip(id + 1) {
@@ -334,17 +353,69 @@ mod tests {
                 );
             }
         }
-        for (p, _) in ART.pad.cells() {
+        for (p, _) in ART.pads.iter().flat_map(PixelBody::cells) {
             for corner in [
                 Vec2::splat(-0.5),
                 Vec2::new(0.5, -0.5),
                 Vec2::splat(0.5),
                 Vec2::new(-0.5, 0.5),
             ] {
-                assert!(
-                    ((p + corner) * Vec2::new(0.75, 0.5) + Vec2::new(0.0, 8.0)).length()
-                        < HIT_RADIUS
+                assert!(((p + corner) * CELL_SCALE).length() < HIT_RADIUS);
+            }
+        }
+    }
+    #[test]
+    fn overhead_roofs_have_planar_cardinal_silhouettes_without_facade_offsets() {
+        let mut silhouettes = std::collections::HashSet::new();
+        for id in 0..4 {
+            let combined: Vec<_> = (0..ART_SIDE)
+                .flat_map(|y| {
+                    (0..ART_SIDE).map(move |x| {
+                        ART.pads[id].is_occupied(x, y) || ART.buildings[id].is_occupied(x, y)
+                    })
+                })
+                .collect();
+            assert!(
+                silhouettes.insert(combined),
+                "service rails must preserve four distinct overhead silhouettes"
+            );
+        }
+        for id in [0, 2, 3] {
+            let body = &ART.buildings[id];
+            for y in 0..ART_SIDE {
+                for x in 0..ART_SIDE {
+                    assert_eq!(
+                        body.is_occupied(x, y),
+                        body.is_occupied(ART_SIDE - 1 - y, x)
+                    );
+                }
+            }
+        }
+        let hangar = &ART.buildings[1];
+        for y in 0..ART_SIDE {
+            for x in 0..ART_SIDE {
+                assert_eq!(
+                    hangar.is_occupied(x, y),
+                    hangar.is_occupied(ART_SIDE - 1 - x, y)
                 );
+            }
+        }
+        let mut builder = FrameBuilder::new();
+        render(&mut builder, Vec2::ZERO, Vec2::new(533.0, 300.0), 0.0);
+        let frame = builder.finish();
+        let transforms: Vec<_> = frame
+            .batches
+            .iter()
+            .flat_map(|batch| batch.transforms.iter())
+            .collect();
+        assert_eq!(transforms.len(), 8);
+        for (id, pair) in transforms.chunks_exact(2).enumerate() {
+            for transform in pair {
+                assert_eq!(
+                    transform.a,
+                    [CENTERS[id][0], CENTERS[id][1], CELL_SCALE, 0.0]
+                );
+                assert_eq!(transform.b[..2], [0.0, CELL_SCALE]);
             }
         }
     }
@@ -363,7 +434,10 @@ mod tests {
         );
         assert_eq!(
             a.pixel_count,
-            ART.pad.occupied_count() * 4
+            ART.pads
+                .iter()
+                .map(PixelBody::occupied_count)
+                .sum::<usize>()
                 + ART
                     .buildings
                     .iter()
