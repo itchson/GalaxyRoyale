@@ -1,0 +1,2 @@
+# Native byte fixtures use a canonical single LF on every checkout.
+*.json text eol=lf
