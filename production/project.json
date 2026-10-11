@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 844,
+  "revision": 854,
   "name": "Galaxy Royale",
   "phase": "Playable solo slice → content and validation",
-  "updatedAt": "2026-10-11T19:13:35.113Z",
+  "updatedAt": "2026-10-11T19:53:11.585Z",
   "tasks": [
     {
       "id": "studio",
@@ -7089,6 +7089,113 @@
       "revision": 2,
       "createdAt": "2026-10-11T18:44:52.945Z",
       "updatedAt": "2026-10-11T19:11:59.230Z"
+    },
+    {
+      "id": "task-c547ebbe",
+      "title": "Refine native flight icon material to the league sports identity",
+      "description": "Authored graphite/platinum planes, vent cuts and restrained gold fittings for existing64cell detailed control objects. Preserve silhouettes, exact occupancy, accent/emitter and ABI.",
+      "department": "Art",
+      "owner": "/root/production_research",
+      "status": "complete",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Actual generator and tests retain all occupancy/silhouette/animation contracts.",
+          "met": true
+        },
+        {
+          "text": "Authoring and native normal browser captures reviewed at wide and narrow toolbar sizes.",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual assignments",
+          "kind": "artifact",
+          "path": "work/league-coop-next/assignments.txt"
+        },
+        {
+          "label": "Authored material contracts",
+          "kind": "artifact",
+          "path": "artifacts/league-coop-native-20261012/icon-handoff.md"
+        },
+        {
+          "label": "Actual authoring tests",
+          "kind": "artifact",
+          "path": "artifacts/league-coop-native-20261012/icon-tests.log"
+        },
+        {
+          "label": "Actual native icon contracts",
+          "kind": "artifact",
+          "path": "artifacts/league-coop-native-20261012/native-icons.log"
+        },
+        {
+          "label": "Wide actual flight toolbar",
+          "kind": "artifact",
+          "path": "artifacts/league-coop-native-20261012/toolbar-webgl2-1280-final.jpg"
+        },
+        {
+          "label": "Narrow actual flight toolbar",
+          "kind": "artifact",
+          "path": "artifacts/league-coop-native-20261012/toolbar-webgl2-848.jpg"
+        },
+        {
+          "label": "Independent retained-frame review",
+          "kind": "artifact",
+          "path": "artifacts/league-coop-native-20261012/visual-final-review.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-11T19:16:59.167Z",
+      "updatedAt": "2026-10-11T19:53:11.418Z"
+    },
+    {
+      "id": "task-fd94df14",
+      "title": "Replace artificial planet-ring shadow with native curved material shading",
+      "description": "Cached curved cast-shadow approximation retaining occupied cells, layer order, transforms and budgets. Actual native before/after oracle and final WebGPU/WebGL2 fixed-camera captures.",
+      "department": "Art",
+      "owner": "/root/production_research",
+      "status": "complete",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Native geometry and non-ring materials remain unchanged; regression and independent ray oracle pass.",
+          "met": true
+        },
+        {
+          "text": "Actual final WebGPU and WebGL2 captures independently reviewed with reproducible seed/camera.",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Source and native evidence",
+          "kind": "artifact",
+          "path": "artifacts/league-coop-native-20261012/ring-handoff.md"
+        },
+        {
+          "label": "Final actual WebGPU",
+          "kind": "artifact",
+          "path": "artifacts/league-coop-native-20261012/planet-webgpu-final.jpg"
+        },
+        {
+          "label": "Final actual WebGL2",
+          "kind": "artifact",
+          "path": "artifacts/league-coop-native-20261012/planet-webgl2-final.jpg"
+        },
+        {
+          "label": "Independent frame review",
+          "kind": "artifact",
+          "path": "artifacts/league-coop-native-20261012/visual-final-review.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-11T19:53:11.446Z",
+      "updatedAt": "2026-10-11T19:53:11.446Z"
     }
   ],
   "reviews": [
@@ -8938,6 +9045,58 @@
           "label": "README.md",
           "kind": "artifact",
           "path": "artifacts/space-coop-refinement-20261012/README.md"
+        }
+      ]
+    },
+    {
+      "id": "review-d414fe44",
+      "title": "Actual asynchronous native, art and QA discussion",
+      "body": "Actual written handoffs and peer inspection: native Pulse Lens fifth-shot ownership/cap/lifecycle semantics; HUGO/PAN solo parity; detailed icon occupancy contracts; old rectangular planetary-ring shadow and curved material correction. Root found narrow card disclosure overflow and corrected its measured reservation. Retained factory and owned browser evidence are separately pinned. Owned WebGPU off-screen Drive failed; visible retry passed, without establishing timer causation. Later helper now refuses off-screen/hidden drive evidence. QA-warped dock invitation failed; fresh unwarped invitation succeeded. Native diagnostic-world rejection is a supported explanation, not a captured native error. Engine and Art identified ordinary Pulse Echo evolution metadata as a next separate co-op gap. This records actual asynchronous contributions, not a fabricated meeting.",
+      "author": "Root",
+      "source": "Actual source-pinned specialist handoffs and browser observations",
+      "createdAt": "2026-10-11T19:53:11.485Z",
+      "participants": [
+        "Root",
+        "/root/engine_research",
+        "/root/gameplay_design",
+        "/root/production_research"
+      ],
+      "taskIds": [
+        "task-c547ebbe",
+        "task-fd94df14",
+        "task-05dd95cd",
+        "task-7e8e0a50"
+      ],
+      "evidence": [
+        {
+          "label": "Native fifth-shot handoff",
+          "kind": "artifact",
+          "path": "artifacts/league-coop-native-20261012/pulse-handoff.md"
+        },
+        {
+          "label": "Native passive/defensive parity",
+          "kind": "artifact",
+          "path": "artifacts/league-coop-native-20261012/passive-handoff.md"
+        },
+        {
+          "label": "Owned browser review",
+          "kind": "artifact",
+          "path": "artifacts/league-coop-native-20261012/owned-webgpu-review.md"
+        },
+        {
+          "label": "Next ability source review",
+          "kind": "artifact",
+          "path": "artifacts/league-coop-native-20261012/echo-plan.md"
+        },
+        {
+          "label": "Current native visual review",
+          "kind": "artifact",
+          "path": "artifacts/league-coop-native-20261012/visual-final-review.md"
+        },
+        {
+          "label": "QA warp guard review",
+          "kind": "artifact",
+          "path": "artifacts/league-coop-native-20261012/warp-invite-review.md"
         }
       ]
     }
@@ -11535,6 +11694,91 @@
         }
       ],
       "knownIssues": ""
+    },
+    {
+      "id": "build-c4815e1b",
+      "title": "Native league presentation and scoped owned co-op build",
+      "body": "Final normal dual-renderer build and actual visual acceptance. Current owned WebGPU RTC reports are separately pinned to b34d02c; corrected legacy factory WebGPU/WebGL2 reports remain48bec87. No claims that earlier RTC runs execute the final ring/visibility changes.",
+      "author": "Root",
+      "source": "Actual source-pinned specialist handoffs and browser observations",
+      "createdAt": "2026-10-11T19:53:11.509Z",
+      "revision": "1b754da4e09fb2b8e6bbe123d8ac834750a97d99",
+      "evidence": [
+        {
+          "label": "Exact normal build identity",
+          "kind": "artifact",
+          "path": "artifacts/league-coop-native-20261012/tested-build.json"
+        },
+        {
+          "label": "Complete scoped results",
+          "kind": "artifact",
+          "path": "artifacts/league-coop-native-20261012/README.md"
+        },
+        {
+          "label": "Native test output",
+          "kind": "artifact",
+          "path": "artifacts/league-coop-native-20261012/native-release.log"
+        },
+        {
+          "label": "Shell test output",
+          "kind": "artifact",
+          "path": "artifacts/league-coop-native-20261012/shell-release.log"
+        },
+        {
+          "label": "Build output",
+          "kind": "artifact",
+          "path": "artifacts/league-coop-native-20261012/build-release.log"
+        },
+        {
+          "label": "Actual hosting bounds without secrets",
+          "kind": "artifact",
+          "path": "artifacts/league-coop-native-20261012/final-card-hosting-848.json"
+        }
+      ],
+      "checks": [
+        {
+          "name": "Rust workspace: 805 passed, eight explicit exporters ignored",
+          "result": "pass"
+        },
+        {
+          "name": "Shell: 546 passed, one existing Windows skip",
+          "result": "pass"
+        },
+        {
+          "name": "Strict native and wasm32 Clippy",
+          "result": "pass"
+        },
+        {
+          "name": "Normal dual WASM, TypeScript, game/PWA and Studio build",
+          "result": "pass"
+        },
+        {
+          "name": "Final fixed-camera WebGPU/WebGL2 visual review",
+          "result": "pass"
+        },
+        {
+          "name": "848x480 secret-free idle/hosting/ended bounds",
+          "result": "pass"
+        },
+        {
+          "name": "Pinned b34d owned WebGPU lifecycle/save preservation",
+          "result": "pass"
+        },
+        {
+          "name": "Earlier off-screen owned Drive attempt",
+          "result": "fail"
+        },
+        {
+          "name": "Owned WebGL2 RTC / RENKO fifth-shot browser ownership",
+          "result": "not_run"
+        },
+        {
+          "name": "Physical phones / thirty-minute soak / eight remote clients",
+          "result": "not_run"
+        }
+      ],
+      "url": "http://league-final.localhost:4173/?qa=1&renderer=webgpu",
+      "knownIssues": "Shared rewards/missions and full automatic co-op abilities remain incomplete. Ordinary Pulse Echo lacks native co-op fan/evolution metadata. Diagnostic-warp worlds reject native co-op entry. Physical performance and all-seed art approval remain pending."
     }
   ],
   "feedback": [],
@@ -19978,6 +20222,106 @@
       "author": "Root",
       "source": "Actual integrated source, regression commands and specialist handoffs",
       "createdAt": "2026-10-11T19:13:35.113Z"
+    },
+    {
+      "id": "5520f808-a71d-480a-b6f1-6bc3c2291296",
+      "revision": 845,
+      "kind": "task.create",
+      "itemId": "task-c547ebbe",
+      "title": "Refine native flight icon material to the league sports identity",
+      "author": "Root",
+      "source": "Actual specialist assignments and acknowledged ownership",
+      "createdAt": "2026-10-11T19:16:59.167Z"
+    },
+    {
+      "id": "adcc9185-6d31-42de-bf10-e7c4f13099e3",
+      "revision": 846,
+      "kind": "run",
+      "itemId": "run-7d13996e",
+      "title": "League icon artist · running",
+      "author": "Root",
+      "source": "Actual specialist assignments and acknowledged ownership",
+      "createdAt": "2026-10-11T19:16:59.215Z"
+    },
+    {
+      "id": "f4d96065-2bf0-4166-898a-6d9f9609c066",
+      "revision": 847,
+      "kind": "run",
+      "itemId": "run-75feb537",
+      "title": "Owned-loadout QA specialist · running",
+      "author": "Root",
+      "source": "Actual specialist assignments and acknowledged ownership",
+      "createdAt": "2026-10-11T19:16:59.243Z"
+    },
+    {
+      "id": "d44bef53-aa4a-453c-8766-00d4cc1a66b8",
+      "revision": 848,
+      "kind": "task.update",
+      "itemId": "task-c547ebbe",
+      "title": "Refine native flight icon material to the league sports identity",
+      "author": "Root",
+      "source": "Actual source-pinned specialist handoffs and browser observations",
+      "createdAt": "2026-10-11T19:53:11.418Z"
+    },
+    {
+      "id": "de68ee0d-37e7-4bae-8b00-365685e9dcd1",
+      "revision": 849,
+      "kind": "task.create",
+      "itemId": "task-fd94df14",
+      "title": "Replace artificial planet-ring shadow with native curved material shading",
+      "author": "Root",
+      "source": "Actual source-pinned specialist handoffs and browser observations",
+      "createdAt": "2026-10-11T19:53:11.446Z"
+    },
+    {
+      "id": "adafafb8-1a50-48c3-a31d-bbbe93dbda90",
+      "revision": 850,
+      "kind": "review",
+      "itemId": "review-d414fe44",
+      "title": "Actual asynchronous native, art and QA discussion",
+      "author": "Root",
+      "source": "Actual source-pinned specialist handoffs and browser observations",
+      "createdAt": "2026-10-11T19:53:11.485Z"
+    },
+    {
+      "id": "0229f6a9-7161-4f63-a6bb-3a7c60c7b642",
+      "revision": 851,
+      "kind": "build",
+      "itemId": "build-c4815e1b",
+      "title": "Native league presentation and scoped owned co-op build",
+      "author": "Root",
+      "source": "Actual source-pinned specialist handoffs and browser observations",
+      "createdAt": "2026-10-11T19:53:11.509Z"
+    },
+    {
+      "id": "78a7fa11-6007-4066-bbd6-bde990624693",
+      "revision": 852,
+      "kind": "run",
+      "itemId": "run-73097379",
+      "title": "Native simulation specialist · completed",
+      "author": "Root",
+      "source": "Actual source-pinned specialist handoffs and browser observations",
+      "createdAt": "2026-10-11T19:53:11.545Z"
+    },
+    {
+      "id": "ce45f87f-8848-4800-85e7-db086296cd9f",
+      "revision": 853,
+      "kind": "run",
+      "itemId": "run-4bc4cd5a",
+      "title": "Owned-loadout QA specialist · completed",
+      "author": "Root",
+      "source": "Actual source-pinned specialist handoffs and browser observations",
+      "createdAt": "2026-10-11T19:53:11.561Z"
+    },
+    {
+      "id": "92c6fa45-02db-4e86-ac56-890b6d073894",
+      "revision": 854,
+      "kind": "run",
+      "itemId": "run-42c1eb34",
+      "title": "League visual specialist · completed",
+      "author": "Root",
+      "source": "Actual source-pinned specialist handoffs and browser observations",
+      "createdAt": "2026-10-11T19:53:11.585Z"
     }
   ],
   "runRecords": [
@@ -27708,6 +28052,117 @@
       "author": "Root",
       "source": "Actual integrated source, regression commands and specialist handoffs",
       "createdAt": "2026-10-11T19:13:35.113Z"
+    },
+    {
+      "id": "run-7d13996e",
+      "title": "League icon artist · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "League icon artist",
+      "state": "running",
+      "observedAt": "2026-10-11T19:16:59.198Z",
+      "taskIds": [
+        "task-c547ebbe"
+      ],
+      "summary": "Implementing explicitly owned authoring scripts, assets/ui/flight-icons and FLIGHT_ICON_ART docs; no sharedruntime edits.",
+      "evidence": [
+        {
+          "label": "Actual assignment record",
+          "kind": "artifact",
+          "path": "work/league-coop-next/assignments.txt"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual specialist assignments and acknowledged ownership",
+      "createdAt": "2026-10-11T19:16:59.215Z"
+    },
+    {
+      "id": "run-75feb537",
+      "title": "Owned-loadout QA specialist · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Owned-loadout QA specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T19:16:59.228Z",
+      "taskIds": [
+        "task-05dd95cd"
+      ],
+      "summary": "Preparing separately pinned current-source/current-normalbinary native owned-loadout harness; legacyv1evidence preserved, no browser/listener mutations.",
+      "evidence": [
+        {
+          "label": "Actual assignment record",
+          "kind": "artifact",
+          "path": "work/league-coop-next/assignments.txt"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual specialist assignments and acknowledged ownership",
+      "createdAt": "2026-10-11T19:16:59.243Z"
+    },
+    {
+      "id": "run-73097379",
+      "title": "Native simulation specialist · completed",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Native simulation specialist",
+      "state": "completed",
+      "observedAt": "2026-10-11T19:53:11.520Z",
+      "taskIds": [
+        "task-7e8e0a50"
+      ],
+      "summary": "Completed native fifth-shot implementation, HUGO/PAN parity tests and next Pulse Echo source-pinned plan; no full ability parity claim.",
+      "evidence": [
+        {
+          "label": "Actual specialist contribution",
+          "kind": "artifact",
+          "path": "artifacts/league-coop-native-20261012/echo-plan.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual source-pinned specialist handoffs and browser observations",
+      "createdAt": "2026-10-11T19:53:11.545Z"
+    },
+    {
+      "id": "run-4bc4cd5a",
+      "title": "Owned-loadout QA specialist · completed",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Owned-loadout QA specialist",
+      "state": "completed",
+      "observedAt": "2026-10-11T19:53:11.557Z",
+      "taskIds": [
+        "task-05dd95cd"
+      ],
+      "summary": "Completed coherent owned harness, actual independent report review and diagnostic-warp entry source inspection. Owned GL2 RTC remains pending.",
+      "evidence": [
+        {
+          "label": "Actual specialist contribution",
+          "kind": "artifact",
+          "path": "artifacts/league-coop-native-20261012/owned-webgpu-review.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual source-pinned specialist handoffs and browser observations",
+      "createdAt": "2026-10-11T19:53:11.561Z"
+    },
+    {
+      "id": "run-42c1eb34",
+      "title": "League visual specialist · completed",
+      "agentId": "/root/production_research",
+      "agentLabel": "League visual specialist",
+      "state": "completed",
+      "observedAt": "2026-10-11T19:53:11.578Z",
+      "taskIds": [
+        "task-c547ebbe",
+        "task-fd94df14"
+      ],
+      "summary": "Completed explicitly owned icon/material and planetary-ring work plus actual retained-frame review; all-seed/player art approval remains open.",
+      "evidence": [
+        {
+          "label": "Actual specialist contribution",
+          "kind": "artifact",
+          "path": "artifacts/league-coop-native-20261012/visual-final-review.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual source-pinned specialist handoffs and browser observations",
+      "createdAt": "2026-10-11T19:53:11.585Z"
     }
   ],
   "phaseDescription": "Desktop-first Rust/WASM solo game and local Studio are implemented. Reviewed occupied-cell art, reproducible conversion, responsive native settings/icons and minimap, strict GitHub integration gates and source-backed Dev Bible are integrated. Natural campaign balance, human listening, owner-private update lifecycle and physical phones remain separate pending gates."

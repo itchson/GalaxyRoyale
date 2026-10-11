@@ -1,0 +1,184 @@
+{
+  "version": 2,
+  "run_id": "95d6f45c84179f49",
+  "backend": "webgpu",
+  "checks": [
+    {
+      "name": "two-native-games",
+      "passed": true
+    },
+    {
+      "name": "independent-save-origins",
+      "passed": true
+    },
+    {
+      "name": "distinct-local-profiles",
+      "passed": true
+    },
+    {
+      "name": "saves-unchanged",
+      "passed": true
+    },
+    {
+      "name": "real-channel-ready",
+      "passed": true
+    },
+    {
+      "name": "native-admission",
+      "passed": true
+    },
+    {
+      "name": "native-complete-commit",
+      "passed": true
+    },
+    {
+      "name": "host-end-restored",
+      "passed": true
+    },
+    {
+      "name": "saves-unchanged",
+      "passed": true
+    },
+    {
+      "name": "real-channel-ready",
+      "passed": true
+    },
+    {
+      "name": "native-admission",
+      "passed": true
+    },
+    {
+      "name": "native-complete-commit",
+      "passed": true
+    },
+    {
+      "name": "new-session",
+      "passed": true
+    }
+  ],
+  "clients": [
+    {
+      "role": "host",
+      "init_stage": "ready",
+      "failure_code": null,
+      "phase": "hosting",
+      "mode": "host",
+      "created": 2,
+      "closed": 1,
+      "frames": 925,
+      "ticks": 722,
+      "captures": 113,
+      "entity_pages": 113,
+      "body_pages": 250,
+      "commits": 0,
+      "body_changes": 0,
+      "same_count_changes": 0,
+      "unchanged_bodies": 0,
+      "projectiles": 0,
+      "requests": 1,
+      "timers": 2,
+      "transport_ready": 1,
+      "admitted": 1,
+      "profile_equal": true,
+      "persisted_equal": true,
+      "persistent": true,
+      "progression_false": true,
+      "movement_observed": false,
+      "profile_sha": "d3274ba8f4b1d875f252b963eb3ec3a24cc93c0419112def6ba8645fb11c2448",
+      "baseline_sha": "d3274ba8f4b1d875f252b963eb3ec3a24cc93c0419112def6ba8645fb11c2448",
+      "persisted_sha": "d3274ba8f4b1d875f252b963eb3ec3a24cc93c0419112def6ba8645fb11c2448"
+    },
+    {
+      "role": "guest",
+      "init_stage": "ready",
+      "failure_code": null,
+      "phase": "connected",
+      "mode": "guest",
+      "created": 2,
+      "closed": 1,
+      "frames": 931,
+      "ticks": 722,
+      "captures": 0,
+      "entity_pages": 112,
+      "body_pages": 250,
+      "commits": 111,
+      "body_changes": 62,
+      "same_count_changes": 1,
+      "unchanged_bodies": 6868,
+      "projectiles": 0,
+      "requests": 1,
+      "timers": 2,
+      "transport_ready": 1,
+      "admitted": 1,
+      "profile_equal": true,
+      "persisted_equal": true,
+      "persistent": true,
+      "progression_false": true,
+      "movement_observed": false,
+      "profile_sha": "478b890c148d72a770cdf1ab893e75f92c55c9764257fdb2d22d05ecc64399e9",
+      "baseline_sha": "478b890c148d72a770cdf1ab893e75f92c55c9764257fdb2d22d05ecc64399e9",
+      "persisted_sha": "478b890c148d72a770cdf1ab893e75f92c55c9764257fdb2d22d05ecc64399e9"
+    }
+  ],
+  "session_distinct": true,
+  "source_inputs": {
+    "apps/game/src/coop/wire.ts": "93a2e1f81e7e064ded6dc68ab0a222d9aca0c313ccc5f26bc697972c2914c357",
+    "apps/game/src/coop/signaling.ts": "5582f1434b5e9b485c08dd41463e349e04bacdf7cc2409f6b9b71a4e15eaf120",
+    "apps/game/src/coop/transport.ts": "cd47978582658553da07fe2b0e2f04982c01d0729cbc8774b4bbc90527188129",
+    "apps/game/src/coop/controller.ts": "7094d634be30236f75464816bae79f036437020e90cb813f4b96dd893de318d5",
+    "apps/game/src/coop/wasm-ports.ts": "6ce510639a9a148aaee6319f1b0d3a6fdc25501862baa812e62a2a76003e0514",
+    "apps/game/src/storage.ts": "5dae742bd764f4e8a1efd737825c5ad392a5f4f2b7635880b477589fdf618ba2",
+    "scripts/qa/co-op-transport/wasm-review.html": "016d895c57f3e5692fa70f076ec45adbd3e98d2596f83448ae35ba2bf786b2ac",
+    "scripts/qa/co-op-transport/wasm-review.js": "1188a822c9ddbd349926c49f2ab725af3cf90ba3884aebe1045d6b434ec0da6f",
+    "scripts/qa/co-op-transport/client.html": "a326c6bbe1b156530450b3fc9e811937256faafe77a9f739e2acfecc9dc82a9f",
+    "scripts/qa/co-op-transport/client.js": "09bc91a2596643d6c68d7dbbab452b911a937770b546217b5c1efbfeba15ed83"
+  },
+  "captured_at": "2026-10-11T19:15:18.012Z",
+  "scope": "Root-driven browser observations from real two-Galaxy WASM/controller/RTC on independent QA origins; v1 factory guest/no shared progression; no NAT/performance acceptance",
+  "builds": {
+    "webgpu": "/wasm/webgpu-9cd54518ba647878a057c2afca1356dcbefb0e00532fedc28269a0ab73a0cfb6/galaxy.js",
+    "webgl2": "/wasm/webgl2-0072c7f366f41e6af5a4b85578075c4253e260df7add54226cc41713f68d5dcc/galaxy.js"
+  },
+  "artifacts": [
+    {
+      "path": "wasm/webgpu-9cd54518ba647878a057c2afca1356dcbefb0e00532fedc28269a0ab73a0cfb6/galaxy.d.ts",
+      "bytes": 11574,
+      "sha256": "24c7c886b4ecc9c2e185b8c58701f205a11490382674195339e74f96601f182d"
+    },
+    {
+      "path": "wasm/webgpu-9cd54518ba647878a057c2afca1356dcbefb0e00532fedc28269a0ab73a0cfb6/galaxy.js",
+      "bytes": 87050,
+      "sha256": "5d32dc6fbf10cd6b8ff1391236fc119dd91bcd0b36aa0b827f56372576944f2f"
+    },
+    {
+      "path": "wasm/webgpu-9cd54518ba647878a057c2afca1356dcbefb0e00532fedc28269a0ab73a0cfb6/galaxy_bg.wasm",
+      "bytes": 10178957,
+      "sha256": "d477922baceaf54fdb09453f4b8af4f7b021c5d631cf6e0c4c9763706ef8ab76"
+    },
+    {
+      "path": "wasm/webgpu-9cd54518ba647878a057c2afca1356dcbefb0e00532fedc28269a0ab73a0cfb6/galaxy_bg.wasm.d.ts",
+      "bytes": 6026,
+      "sha256": "aa24b9ff6fe8b10eeb614385c741b8ca7531f4028a5f2384cf9bc81bc96f8793"
+    },
+    {
+      "path": "wasm/webgl2-0072c7f366f41e6af5a4b85578075c4253e260df7add54226cc41713f68d5dcc/galaxy.d.ts",
+      "bytes": 10308,
+      "sha256": "a7c85c12073e21bb10810289a35c8156e5312f8abb916197afc5793e529be063"
+    },
+    {
+      "path": "wasm/webgl2-0072c7f366f41e6af5a4b85578075c4253e260df7add54226cc41713f68d5dcc/galaxy.js",
+      "bytes": 90824,
+      "sha256": "b77e472fd4a37a62575249df5953c9183155b44283831e9e904624dd8e138564"
+    },
+    {
+      "path": "wasm/webgl2-0072c7f366f41e6af5a4b85578075c4253e260df7add54226cc41713f68d5dcc/galaxy_bg.wasm",
+      "bytes": 13783473,
+      "sha256": "eb884222512996340ff365398e04178499ecadb2111b90d9e2ab454be0b8b1e1"
+    },
+    {
+      "path": "wasm/webgl2-0072c7f366f41e6af5a4b85578075c4253e260df7add54226cc41713f68d5dcc/galaxy_bg.wasm.d.ts",
+      "bytes": 4760,
+      "sha256": "342d8aee175242461c56e037470dcf8079f67438619d3837a7ec7c043c251420"
+    }
+  ]
+}

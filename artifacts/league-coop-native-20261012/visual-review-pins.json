@@ -1,0 +1,67 @@
+{
+  "commit": "1b754da4e09fb2b8e6bbe123d8ac834750a97d99",
+  "sources": [
+    {
+      "path": "crates/game_core/src/regions.rs",
+      "git_blob_sha256": "b17d5861933a90bef535313ebfbdd0dd097a2763622fcfaf1d8fd754b745e6d4",
+      "local_sha256": "bdeb0cd9b90f419baff01df5779052c05e5bfe1054b93c659d9787bb91d40760"
+    },
+    {
+      "path": "crates/game_core/src/cosmic_background.rs",
+      "git_blob_sha256": "ea7df8bffa9ec902a2fd8b7cb8527266661b7cc725f697b69675f4d773e32aa3",
+      "local_sha256": "56520e6f79f36b358301c343f45d043bc827823ba98dfadeb9bf0af0f20ba218"
+    },
+    {
+      "path": "crates/game_core/src/lib.rs",
+      "git_blob_sha256": "0984b4a786162f5c3a43a9706b40712df4369b32f8cb06ae9d3d0bab038f3d0c",
+      "local_sha256": "925060ed6e299d7e153fa424dc8ef52dd809febe73341ebe5274401e8bd07d25"
+    },
+    {
+      "path": "apps/game/src/main.ts",
+      "git_blob_sha256": "f6138b2922a9563d031420c602995d45b49ca423d09ca808c3c4d39fde8f30bc",
+      "local_sha256": "f6138b2922a9563d031420c602995d45b49ca423d09ca808c3c4d39fde8f30bc"
+    },
+    {
+      "path": "crates/game_web/src/flight_icons.rs",
+      "git_blob_sha256": "ba02a9aa4e210f5a2746d66af1b7d6bcf0c5ebd89ec3241f00e790f88cbf2503",
+      "local_sha256": "ba02a9aa4e210f5a2746d66af1b7d6bcf0c5ebd89ec3241f00e790f88cbf2503"
+    },
+    {
+      "path": "assets/ui/flight-icons/atlas.json",
+      "git_blob_sha256": "4d811f30347e72d1fbc9583e1d931065cb44af0d2f59dfae2a6850887a2f0704",
+      "local_sha256": "4d811f30347e72d1fbc9583e1d931065cb44af0d2f59dfae2a6850887a2f0704"
+    }
+  ],
+  "images": [
+    {
+      "path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\work\\league-coop-next\\toolbar-webgl2-848.jpg",
+      "sha256": "9bbae8cfe8d16eba8bac10f9d5919a91a870aad89daead2f8d692986b20a2086",
+      "bytes": 20350
+    },
+    {
+      "path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\work\\league-coop-next\\raicho-modal-webgpu-1280-final.jpg",
+      "sha256": "c1ea30cd47a3380298c71b0b4c229e544e2a25a094bbd5d88a9964a41d509538",
+      "bytes": 50906
+    },
+    {
+      "path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\work\\league-coop-next\\planet-webgpu-final.jpg",
+      "sha256": "d088f9d2ec2b9f443a11469b75f6ea09b906bcadb1b6749ed16c647638e84438",
+      "bytes": 19634
+    },
+    {
+      "path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\work\\league-coop-next\\planet-webgl2-final.jpg",
+      "sha256": "4b9d03b4c6b541a806bf416fadc25b5f6d070ccda4d80a05464b6eaca3bfeb87",
+      "bytes": 19548
+    },
+    {
+      "path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\work\\league-coop-next\\nebula-webgl2-final.jpg",
+      "sha256": "f9faddedf2bef94c66627f47a990b33c54c1c22cee7713cf3d62812115fb7933",
+      "bytes": 24886
+    },
+    {
+      "path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\work\\league-coop-next\\toolbar-webgl2-1280-final.jpg",
+      "sha256": "510dea645df9dd1de3280684ff525ede9c51caa4850a799667aafe3aaca1c388",
+      "bytes": 77297
+    }
+  ]
+}

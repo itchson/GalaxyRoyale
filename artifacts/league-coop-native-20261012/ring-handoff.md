@@ -1,0 +1,23 @@
+# Curved planet-ring shadow — frozen native candidate
+
+Source commit **87be4b8232e7022ceadb91c938eb4d181e092e4c**, parent **b34d02cf1eaaf8a734b4d3d79b3143faa8f7270f**, branch `codex/planet-ring-shadow`. Exactly two source files changed: `crates/game_core/src/regions.rs` and `crates/game_core/src/region_immersion_tests.rs`. Tracked checkout clean. Root owns integration and real renderer acceptance.
+
+The read-only planet/galaxy/comet review found one actionable visual inconsistency. The ring forced 150 of its 600 full-detail cells to the darkest shade whenever `x > 17 && y < 5`. Root's persisted `planet-webgl2-full-zoom16-offset.jpg` and `planet-webgpu-final.jpg` show the exposed right ring ending abruptly. Engine confirmed that rectangular mask was an old shadow approximation, not an invariant. The galaxy and detailed comet were inspected without identifying a source-backed defect worth changing in this bounded pass. The reviewed diffuse cloud is untouched.
+
+The approved correction changes only cached ring tones. It lifts the observed ellipse into a circular inclined ring plane, projects toward the existing planet light `[-.52,-.32,.79]`, and applies a five-source-unit smooth penumbra around the unchanged radius37.5 sphere. Eight existing shades still quantize the result; this is a static cosmetic cast-shadow approximation, not a new 3D lighting system. The exposed right tip stays illuminated while the actual rear shadow curves toward the planet. Source dimensions, occupancy, palette mapping, alpha, transforms, parallax, source grain and admission are unchanged. No new per-frame work, lights, shader, gameplay/save or selection policy.
+
+Actual checks:
+
+- `cargo test --locked -p game_core regions:: -- --nocapture`: **32 passed, zero failed, one explicit exporter ignored**. Existing group quotas/order, reduced cache, exact motion freeze, projected fractional/reflected/far corners, node/gameplay invariants remain tested.
+- `cargo clippy --locked -p game_core --all-targets -- -D warnings`: passed. The later test-only formatting correction does not change the checked semantics. Final `cargo fmt --all -- --check`: passed.
+- The new actual-cell right-tip regression first fails the unchanged runtime source (`baseline-regression.log`), then passes. A second independent bounded ray-sampling oracle checks actual deep-shadow and clear material cells, plus nonempty intermediate penumbra shades. Its initial guessed coverage assertion expected >20 deep cells; the numeric ray guard actually covers16. The retained failure is corrected to require both guarded branches be exercised while preserving every per-cell occlusion assertion; no runtime rule changed for that test repair.
+- The existing explicit native exporter ran **one test successfully before and after**, yielding eight groups × three zooms per source. It uses the ordinary Cargo test executable, no alternate executable, browser or exporter implementation.
+- `audit_and_render.py`: all **24 paired views / 107,664 submitted cell records** have identical corners, alpha, counts, order and transforms. Only **97 full / 31 reduced ring RGB records per view** differ. Six non-ring groups are byte-exact. The gas-planet body colors remain exact.
+
+Complete ringed group remains **5,004 full / 1,364 reduced cells and three transforms**. Full rings300+300 / planet4,404; reduced106+106 / planet1,152. Regional ceilings remain6,000/3,000. Atomic rejection still keeps preceding frame/quota unchanged.
+
+`native-software-comparison.png` was rendered and inspected from the actual before/after FrameBuilder/CameraView quad corners and RGBA. It uses four-times supersampled flat-alpha polygons with BOX resolve; this approximates coverage and does not execute WGSL. It shows the material-only right-arc repair at zoom.6/1/1.6 and both quality levels. It is **not a GPU screenshot** or complete Game scene. All native packets and earlier negative logs are retained separately under this folder.
+
+Root browser reproduction remains unchanged: QA profile seed **871238449**, `WARP -1243.7285 5313.427`, or the established zoom1.6 offset `WARP -843.7285 5313.427`. QA warp suppresses rewards/discards run material; it is not natural travel acceptance. Root should inspect actual WebGPU/WebGL2 ring shadow, planet readability and both quality levels after integration. Physical phones, performance/soak and user art approval remain pending.
+
+`manifest.json` pins committed source blobs, raw evidence, and the inspected historical Root images with their declared capture boundaries. No production image/pack changes, server, shared WASM build, browser, Studio or push occurred in this task.

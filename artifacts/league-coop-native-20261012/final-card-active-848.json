@@ -1,0 +1,72 @@
+{
+  "card": {
+    "bottom": 447,
+    "height": 414,
+    "top": 33,
+    "width": 300
+  },
+  "children": [
+    {
+      "bottom": 125.65000343322754,
+      "id": "",
+      "inside": true,
+      "tag": "P",
+      "top": 110.8000030517578
+    },
+    {
+      "bottom": 175.3500099182129,
+      "id": "",
+      "inside": true,
+      "tag": "P",
+      "top": 145.65000915527344
+    },
+    {
+      "bottom": 209.05000686645508,
+      "id": "",
+      "inside": true,
+      "tag": "P",
+      "top": 179.35000610351562
+    },
+    {
+      "bottom": 232.9000034332275,
+      "id": "",
+      "inside": true,
+      "tag": "P",
+      "top": 218.0500030517578
+    },
+    {
+      "bottom": 281.90000915527344,
+      "id": "coop-join-input",
+      "inside": true,
+      "tag": "INPUT",
+      "top": 237.90000915527344
+    },
+    {
+      "bottom": 330.8999938964844,
+      "id": "coop-create",
+      "inside": true,
+      "tag": "BUTTON",
+      "top": 286.8999938964844
+    },
+    {
+      "bottom": 330.8999938964844,
+      "id": "coop-join",
+      "inside": true,
+      "tag": "BUTTON",
+      "top": 286.8999938964844
+    },
+    {
+      "bottom": 399.2999954223633,
+      "id": "",
+      "inside": true,
+      "tag": "P",
+      "top": 339.8999938964844
+    }
+  ],
+  "content": {
+    "bottom": 415.40000915527344,
+    "height": 324,
+    "scrollHeight": 324,
+    "top": 91.8000030517578
+  }
+}
