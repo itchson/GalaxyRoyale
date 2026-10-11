@@ -23,6 +23,7 @@ pub struct Galaxy {
     presentation_time: f64,
     boss_overlay: BossOverlay,
     last_boss_panel: Option<[f32; 4]>,
+    vitals_animation: pixel_ui::VitalsAnimation,
     reduced_motion: bool,
     ui_insets: [f32; 4],
     touch_ui: bool,
@@ -253,6 +254,7 @@ impl Galaxy {
             presentation_time: 0.0,
             boss_overlay: BossOverlay::default(),
             last_boss_panel: None,
+            vitals_animation: pixel_ui::VitalsAnimation::default(),
             reduced_motion: false,
             ui_insets: [0.0; 4],
             touch_ui: false,
@@ -297,6 +299,9 @@ impl Galaxy {
         }
         let simulation_ms = now() - start;
         let mut hud = self.game.hud();
+        let vitals = self
+            .vitals_animation
+            .advance(&hud, delta, self.reduced_motion);
         let render_start = now();
         let alpha = self.accumulator * 60.0;
         self.game.render_into(alpha, &mut self.frame);
@@ -361,7 +366,7 @@ impl Galaxy {
                         .flat_map(|group| &group.nodes)
                         .take(512)
                         .any(|node| matches!(node.kind.as_str(), "status-text" | "warning-text"));
-                    pixel_ui::draw_flight_status(
+                    pixel_ui::draw_flight_status_animated(
                         &mut self.ui_frame,
                         &hud,
                         ui_camera,
@@ -370,6 +375,7 @@ impl Galaxy {
                         self.ui_time,
                         self.reduced_motion,
                         semantic_context,
+                        vitals,
                     );
                 }
             } else {
@@ -416,9 +422,13 @@ impl Galaxy {
         } else {
             None
         };
+        let events = self.game.take_events();
+        if events.iter().any(|event| event.kind == "death") {
+            self.vitals_animation.reset();
+        }
         to_js(&FrameResponse {
             hud,
-            events: self.game.take_events(),
+            events,
             profile,
             pixels: frame.pixel_count + ui_frame.pixel_count,
             simulation_ms,

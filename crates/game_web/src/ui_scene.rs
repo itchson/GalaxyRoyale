@@ -1353,12 +1353,6 @@ impl Painter<'_> {
                 // The measured status slot is distinct from its accessible
                 // 44px hitbox. One logical pixel font stays stable on zoom;
                 // clipping covers full glyph cells, not only their centers.
-                if r[2] < RoyaleMono::WIDTH || r[3] < RoyaleMono::HEIGHT {
-                    return;
-                }
-                let previous_clip = self.clip;
-                self.clip = Some(previous_clip.map_or(r, |clip| intersection(r, clip)));
-                let columns = ((r[2] + 1.0) / RoyaleMono::ADVANCE).floor() as usize;
                 let color = if node.disabled {
                     BUTTON_DISABLED_TEXT
                 } else if node.kind == "warning-text" {
@@ -1376,43 +1370,16 @@ impl Painter<'_> {
                 } else {
                     DIM
                 };
-                let text_local = Transform {
-                    position: Vec2::new(r[0], r[1]),
-                    ..Transform::default()
-                }
-                .affine();
-                for (column, character) in node.text.chars().take(columns.min(256)).enumerate() {
-                    let body = RoyaleMono::body(if character.is_whitespace() {
-                        ' '
-                    } else {
-                        character
-                    });
-                    let count = body.occupied_count();
-                    if count > self.remaining || count > self.work_remaining {
-                        break;
-                    }
-                    if count == 0 {
-                        continue;
-                    }
-                    let local = RoyaleMono::letter_transform(text_local, column);
-                    let world = self.parent.compose(local);
-                    let clip = self.clip.unwrap();
-                    self.frame.push_body_affine_colored(body, world, |cell, _| {
-                        let p = local.point(cell);
-                        if p.x - 0.5 < clip[0]
-                            || p.y - 0.5 < clip[1]
-                            || p.x + 0.5 > clip[0] + clip[2]
-                            || p.y + 0.5 > clip[1] + clip[3]
-                        {
-                            0
-                        } else {
-                            color
-                        }
-                    });
-                    self.remaining -= count;
-                    self.work_remaining -= count;
-                }
-                self.clip = previous_clip;
+                crate::pixel_ui::micro_text(
+                    self.frame,
+                    self.parent,
+                    r,
+                    &node.text,
+                    color,
+                    self.clip,
+                    &mut self.remaining,
+                    &mut self.work_remaining,
+                );
             }
             "offense-text" | "defense-text" | "passive-text" => self.text(
                 r,

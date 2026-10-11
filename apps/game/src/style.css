@@ -613,8 +613,8 @@ body:not(.pixel-ready) #universe {
     )
   );
   height: var(--flight-strip-height, calc(22px * var(--ui-scale, 1)));
-  background: #071018;
-  border-top: 1px solid #233d49;
+  background: transparent;
+  border: 0;
   color: #d8f3ff;
   pointer-events: none;
 }
@@ -651,7 +651,7 @@ body:not(.pixel-ready) #universe {
   height: var(--ui-hit);
   min-height: 44px;
   padding: 0;
-  font-size: calc(8px * var(--ui-scale, 1));
+  font-size: calc(6px * var(--ui-scale, 1));
   line-height: 1;
   white-space: nowrap;
   overflow: hidden;
@@ -810,7 +810,7 @@ body:not(.pixel-ready) #universe {
   );
   height: var(--flight-text-height, calc(7px * var(--ui-scale, 1)));
   padding: 0;
-  font-size: calc(8px * var(--ui-scale, 1));
+  font-size: calc(6px * var(--ui-scale, 1));
   color: #d0faff;
   background: transparent;
   border: 0;
