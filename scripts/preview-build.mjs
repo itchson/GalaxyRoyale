@@ -15,8 +15,11 @@ export async function treeHash(root,paths,exclude=()=>false){
 const runtimePaths=['Cargo.toml','Cargo.lock','rust-toolchain.toml','package.json','pnpm-lock.yaml','tsconfig.json','crates','assets','apps/game','scripts/build.mjs','scripts/build-wasm.mjs','scripts/pwa.mjs','scripts/wasm-artifacts.mjs','scripts/preview-build.mjs'];
 const excluded=name=>/^apps\/game\/(?:dist|node_modules|public\/wasm)(?:\/|$)/.test(name);
 const git=(root,...args)=>execFileSync('git',args,{cwd:root,encoding:'utf8',stdio:['ignore','pipe','pipe']}).trim();
-export async function writePreviewBuild(root){
- const stamp={schemaVersion:1,head:git(root,'rev-parse','HEAD'),branch:git(root,'branch','--show-current'),sourceHash:await treeHash(root,runtimePaths,excluded),packageHash:await treeHash(root,['dist']),builtAt:new Date().toISOString()};
+export async function buildIdentity(root){return {head:git(root,'rev-parse','HEAD'),branch:git(root,'branch','--show-current'),sourceHash:await treeHash(root,runtimePaths,excluded)};}
+export async function writePreviewBuild(root,expected){
+ const identity=await buildIdentity(root);
+ if(expected&&JSON.stringify(identity)!==JSON.stringify(expected))throw Error('Source or revision changed during the build. Freeze inputs and rebuild; no current preview stamp was written.');
+ const stamp={schemaVersion:1,...identity,packageHash:await treeHash(root,['dist']),builtAt:new Date().toISOString()};
  await mkdir(resolve(root,'work'),{recursive:true});await writeFile(resolve(root,'work/preview-build.json'),JSON.stringify(stamp,null,2));return stamp;
 }
 export async function verifyPreviewBuild(root){
