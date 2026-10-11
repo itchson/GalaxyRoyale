@@ -1,0 +1,241 @@
+{
+  "schemaVersion": 1,
+  "testedNormalRevision": "d749bc6972dee2cc0eb63330bb729f427ce2e749",
+  "historicalIterations": [
+    "c87e482d32e8742294edd97c1fbb2a8a0a803e1a",
+    "b98fedbe5ad114484a9e7ed4def5f39787af7503"
+  ],
+  "hashScope": "Canonical Git index blob bytes; original specialist raw hashes are retained in handoffs.",
+  "files": [
+    {
+      "path": "artifacts/native-echo-comet-20261012/README.md",
+      "bytes": 6078,
+      "sha256": "9ec8beb4abe3ad41b44b4179421bb95fb83036135c98700a264ae0e411b91eac"
+    },
+    {
+      "path": "artifacts/native-echo-comet-20261012/build.log",
+      "bytes": 1416,
+      "sha256": "c7f25e9e7e1d064ccdf72f98f3a0ad93ee8f8b37cfb3f1326aec288ae000d900"
+    },
+    {
+      "path": "artifacts/native-echo-comet-20261012/clippy-wasm.log",
+      "bytes": 262,
+      "sha256": "c8287c50272b23cbd5702cb19aca47d82307c99f3fb46a242695155b8a863fe7"
+    },
+    {
+      "path": "artifacts/native-echo-comet-20261012/clippy.log",
+      "bytes": 262,
+      "sha256": "614d2dc82323d24fc94c67b0532de8c84d7c0028a4347955d4e985cc2180a8ed"
+    },
+    {
+      "path": "artifacts/native-echo-comet-20261012/comet-focused.log",
+      "bytes": 1544,
+      "sha256": "2544502319c4b9e57b2f473e11ffde57d1bc1e3140a09b06d95a6d13e8517167"
+    },
+    {
+      "path": "artifacts/native-echo-comet-20261012/comet-handoff.md",
+      "bytes": 5755,
+      "sha256": "93b20c72d33cce04f1bc2406505cf39cd4e6eb664c3e8d9193f754c1064b32b1"
+    },
+    {
+      "path": "artifacts/native-echo-comet-20261012/echo-handoff.md",
+      "bytes": 6025,
+      "sha256": "1acb6610b8cc3e5db147260516f0676473047a144a36035207f10a5a10aa3bf4"
+    },
+    {
+      "path": "artifacts/native-echo-comet-20261012/echo-peer-review.md",
+      "bytes": 5238,
+      "sha256": "b22b7a6b00f4f789d0fff7f2953002cfcb7723813542733680807dcc64c3db6b"
+    },
+    {
+      "path": "artifacts/native-echo-comet-20261012/final-build.log",
+      "bytes": 1416,
+      "sha256": "3cb46b5cc6a0017030cea884a5405adf3376309069c7a1bb5bca9a05e488670a"
+    },
+    {
+      "path": "artifacts/native-echo-comet-20261012/final-clippy-wasm.log",
+      "bytes": 262,
+      "sha256": "a4c6c8b35c2221f975382d9001f612a321d39321c309fc48dbb241d59d22f63a"
+    },
+    {
+      "path": "artifacts/native-echo-comet-20261012/final-clippy.log",
+      "bytes": 262,
+      "sha256": "9075207c40d4a8dbd7fed8c9786db12e0cd5e622a6dc014bc5f411203d405cc9"
+    },
+    {
+      "path": "artifacts/native-echo-comet-20261012/final-shell-tests.log",
+      "bytes": 59156,
+      "sha256": "318e789cfee7a21e56d8d602187b28d86bff0463e52191af5130348be72f77d3"
+    },
+    {
+      "path": "artifacts/native-echo-comet-20261012/final-tested-build.json",
+      "bytes": 317,
+      "sha256": "a5478c9b5d85c49a3a13b096fbedc8c8006710748f25cc7192b9f34a557114eb"
+    },
+    {
+      "path": "artifacts/native-echo-comet-20261012/final-workspace-tests.log",
+      "bytes": 86357,
+      "sha256": "2ee2229e393af10b3b57071552a5ce354707ae725b0a6b4abb1200890a0f6b03"
+    },
+    {
+      "path": "artifacts/native-echo-comet-20261012/gas-build.log",
+      "bytes": 1416,
+      "sha256": "859ea97c263184edf3de7796f3bf6a4b0a9df14322c94ce1eff610be26f54882"
+    },
+    {
+      "path": "artifacts/native-echo-comet-20261012/gas-clippy-wasm.log",
+      "bytes": 262,
+      "sha256": "34c9828795f706bcf4ed89f75326de9a448b08a11a05ab953c5132f85de172b4"
+    },
+    {
+      "path": "artifacts/native-echo-comet-20261012/gas-clippy.log",
+      "bytes": 262,
+      "sha256": "5e1eb22abe21aad38e88c38716fb11c0d6fdd438e242e6582b700e115bfdccbb"
+    },
+    {
+      "path": "artifacts/native-echo-comet-20261012/gas-shell-tests.log",
+      "bytes": 59167,
+      "sha256": "34e5a264fdb214955359555dc773dc4f85a8bb6bd83781e734f76beb7ebf2993"
+    },
+    {
+      "path": "artifacts/native-echo-comet-20261012/gas-tested-build.json",
+      "bytes": 317,
+      "sha256": "91a69296e96d304a76450eec589808c8f15c2dca2678e6d67ba35731c27ca711"
+    },
+    {
+      "path": "artifacts/native-echo-comet-20261012/gas-workspace-tests.log",
+      "bytes": 86460,
+      "sha256": "a871f6679106dc891b29bee57a939e667b80afd8e8155e3c8a119b49d368f112"
+    },
+    {
+      "path": "artifacts/native-echo-comet-20261012/native-echo-focused.log",
+      "bytes": 1977,
+      "sha256": "4023cb5b83e751c8eb25643274a189725ab4c1507c122b88fcebc485e74128b4"
+    },
+    {
+      "path": "artifacts/native-echo-comet-20261012/owned-stage-handoff.md",
+      "bytes": 3942,
+      "sha256": "3e2a6ae4ce7746683f7b7d3c55a6c43b3b89575b2d125c984174e8892ac46dfe"
+    },
+    {
+      "path": "artifacts/native-echo-comet-20261012/remnant-first-handoff.md",
+      "bytes": 5426,
+      "sha256": "9c523906bbc10648c059f9392eb49ca0ba5c91feb42e9318db88fb26bfad4692"
+    },
+    {
+      "path": "artifacts/native-echo-comet-20261012/remnant-first-source-review.md",
+      "bytes": 3964,
+      "sha256": "1b5f86ea2b3f601f2ef1b58e6be55a7ffc3de139bad921b0ef230244ece509b9"
+    },
+    {
+      "path": "artifacts/native-echo-comet-20261012/remnant-gas-handoff.md",
+      "bytes": 5516,
+      "sha256": "24d67c885e8f2b682d5287d101e0b0b3a68c8976260eb51254c8cd7cb3ca7027"
+    },
+    {
+      "path": "artifacts/native-echo-comet-20261012/remnant-gas-review.md",
+      "bytes": 4773,
+      "sha256": "5832dc6a47de2cb928f16047b3bf35985b9ff0c0592911ae993789ab9c0c707b"
+    },
+    {
+      "path": "artifacts/native-echo-comet-20261012/remnant-gas-webgl2-final.jpg",
+      "bytes": 27332,
+      "sha256": "34dacf1a00b8fafcf391b0bd0479cae59510c068115d1273799fb11dd5f4efa7"
+    },
+    {
+      "path": "artifacts/native-echo-comet-20261012/remnant-gas-webgpu-final.jpg",
+      "bytes": 27643,
+      "sha256": "4de8e212be72110860cc2766ae39c19936e1319d592b9157202b01743d94c9a9"
+    },
+    {
+      "path": "artifacts/native-echo-comet-20261012/remnant-offset-webgl2-before.jpg",
+      "bytes": 22475,
+      "sha256": "14dc1256699cb88f970249543ff5b6b62c81c7eea4fb8241482f780db4f84ca9"
+    },
+    {
+      "path": "artifacts/native-echo-comet-20261012/remnant-offset-webgpu-before.jpg",
+      "bytes": 27643,
+      "sha256": "93f24444d8c6bfda6c36d1cac00ccd7e4e6d75d6cd9cd5f1ea2eac1b697f9a71"
+    },
+    {
+      "path": "artifacts/native-echo-comet-20261012/remnant-offset-webgpu-final.jpg",
+      "bytes": 28092,
+      "sha256": "c17ce278ad7eebf4753939bda8fc7939721302837c6fb96365e6b9a94bc75927"
+    },
+    {
+      "path": "artifacts/native-echo-comet-20261012/remnant-webgl2-before.jpg",
+      "bytes": 26176,
+      "sha256": "a4245464e70319f07b4b813ac4a7a4c77d7cde4158cd74fe3e489ce6c95e3970"
+    },
+    {
+      "path": "artifacts/native-echo-comet-20261012/settings-compact-scroll.json",
+      "bytes": 715,
+      "sha256": "65e14ea4c78b87a4d8f39b85ba6c040e92fe9d891ecd6cd6f35771ab50d97370"
+    },
+    {
+      "path": "artifacts/native-echo-comet-20261012/settings-current-webgpu.jpg",
+      "bytes": 48122,
+      "sha256": "f81fb287bef5ec0e0455cf8f449f977c09997cb0a455ac78a98d6b62beee82b5"
+    },
+    {
+      "path": "artifacts/native-echo-comet-20261012/settings-frame-review.md",
+      "bytes": 2322,
+      "sha256": "9585c801b97981ecc094709e052db19c22be3714d2fae99ec54f22d413736e7a"
+    },
+    {
+      "path": "artifacts/native-echo-comet-20261012/settings-league-webgl2-848-scrolled.jpg",
+      "bytes": 24183,
+      "sha256": "73b8005256a00f05282c9f90cd921a78be2da97a79fa926605882c62c9523926"
+    },
+    {
+      "path": "artifacts/native-echo-comet-20261012/settings-league-webgl2-final.jpg",
+      "bytes": 51335,
+      "sha256": "90426088113a2757fdb1aa0b18bdb0d1b7fc41304d7994c10aa583a07ec38404"
+    },
+    {
+      "path": "artifacts/native-echo-comet-20261012/settings-league-webgl2.jpg",
+      "bytes": 48258,
+      "sha256": "0a2674c3b6eeabf332e3ea1e95ebf119faed9f8e0f8f616bdd17c18590f9bab6"
+    },
+    {
+      "path": "artifacts/native-echo-comet-20261012/settings-league-webgpu-848.jpg",
+      "bytes": 26408,
+      "sha256": "43101947af233a9bf576ec254fc76cf7b4d349e63ddb38edb65121606a1a35b4"
+    },
+    {
+      "path": "artifacts/native-echo-comet-20261012/settings-league-webgpu-final.jpg",
+      "bytes": 48414,
+      "sha256": "4602aa1a6c83e4bce89367bfb43d3625a2c072c88be86328495a39c8d632a232"
+    },
+    {
+      "path": "artifacts/native-echo-comet-20261012/settings-source-review.md",
+      "bytes": 4336,
+      "sha256": "8eacb8557057ea929aea8550ac8712b2ee98167b5bf1619cef764db682424440"
+    },
+    {
+      "path": "artifacts/native-echo-comet-20261012/shell-tests.log",
+      "bytes": 59203,
+      "sha256": "3f438dd248b33296b8e14795172f9d3f49c64d6cfa5686307f8e1034ba3ee23a"
+    },
+    {
+      "path": "artifacts/native-echo-comet-20261012/sports-ui.log",
+      "bytes": 1676,
+      "sha256": "1bea497ceccda8416eb17ea672045da9a1c134378b98cc4e61d0841aaa312683"
+    },
+    {
+      "path": "artifacts/native-echo-comet-20261012/tested-build.json",
+      "bytes": 317,
+      "sha256": "47c36c32607964a9f62a194b14c406b2aee5856751ad2bc8365d4cc871944898"
+    },
+    {
+      "path": "artifacts/native-echo-comet-20261012/wire-native-fixtures.log",
+      "bytes": 1792,
+      "sha256": "6ef4e9fa29c4a67ca4b9187f8a0e085d61d46e32ecf26a2b5bcd0651e10f7d3b"
+    },
+    {
+      "path": "artifacts/native-echo-comet-20261012/workspace-tests.log",
+      "bytes": 86106,
+      "sha256": "dcd18d267f8b1855acae390f0e5fd8efb0a86387f095fcb447464b28b7d752ed"
+    }
+  ]
+}
