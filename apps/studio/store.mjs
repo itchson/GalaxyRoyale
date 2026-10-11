@@ -16,10 +16,13 @@ export async function artifactPath(root, input) {
   requireValue(allowed, 'Artifacts must be inside work/, artifacts/, dist/, or apps/game/dist/.');
   let actual;
   try { actual = await realpath(requested); } catch { throw new ApiError(404, 'Artifact does not exist.'); }
-  const escaped = relative(resolve(root), actual);
+  // Windows temp roots can use a short-name alias (RUNNER~1) while realpath
+  // returns the long name. Compare both sides in the same canonical namespace.
+  const canonicalRoot = await realpath(root);
+  const escaped = relative(canonicalRoot, actual);
   requireValue(escaped && escaped !== '..' && !escaped.startsWith(`..${sep}`) && !/^[A-Za-z]:/.test(escaped), 'Artifact resolves outside the workspace.');
   // Resolve each allowlisted directory too: symlinks cannot broaden the allowlist.
-  requireValue(artifactRoots.some(folder => { const rel = relative(resolve(root, folder), actual); return rel && rel !== '..' && !rel.startsWith(`..${sep}`) && !/^[A-Za-z]:/.test(rel); }), 'Artifact resolves outside approved directories.');
+  requireValue(artifactRoots.some(folder => { const rel = relative(resolve(canonicalRoot, folder), actual); return rel && rel !== '..' && !rel.startsWith(`..${sep}`) && !/^[A-Za-z]:/.test(rel); }), 'Artifact resolves outside approved directories.');
   requireValue((await stat(actual)).isFile(), 'Artifact must be a file.');
   return actual;
 }
