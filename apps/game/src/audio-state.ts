@@ -1,5 +1,6 @@
 /** Authored score identities and a deterministic, source-driven mix model. */
 export type AudioArea = "haven" | "belt" | "reach" | "site" | "arena";
+export type AudioCorporation = "pan" | "renko" | "hugo";
 export type AudioState = {
   area: AudioArea;
   biome: number;
@@ -11,10 +12,13 @@ export type AudioState = {
   speed: number;
   throttle: number;
   engines: number;
+  /** Optional for legacy pilots; only the main manufacturer selects home music. */
+  corporation?: AudioCorporation | null;
 };
 export type Mix = {
   themes: number[];
   combat: number;
+  boss: number;
   alarm: number;
   engine: number;
   space: number;
@@ -30,6 +34,7 @@ export const QUIET_STATE: AudioState = {
   speed: 0,
   throttle: 0,
   engines: 0,
+  corporation: null,
 };
 export const unit = (n: number): number =>
   Number.isFinite(n) ? Math.min(1, Math.max(0, n)) : 0;
@@ -62,6 +67,12 @@ export function cleanState(state: AudioState): AudioState {
     engines: Number.isFinite(state.engines)
       ? Math.min(2, Math.max(0, Math.floor(state.engines)))
       : 0,
+    corporation:
+      state.corporation === "pan" ||
+      state.corporation === "renko" ||
+      state.corporation === "hugo"
+        ? state.corporation
+        : null,
   };
 }
 export type Theme = {
@@ -428,7 +439,7 @@ export const THEMES: readonly Theme[] = [
   {
     name: "Expanse / Scouting signal",
     lead: "triangle",
-    arp: "square",
+    arp: "sine",
     bass: "sine",
     order: [2, 1, 0, 3],
     motif: [
@@ -450,11 +461,87 @@ export const THEMES: readonly Theme[] = [
       67,
     ],
   },
+  {
+    name: "PAN / Verdant lanterns",
+    lead: "sine",
+    arp: "sine",
+    bass: "sine",
+    order: [0, 2, 3, 1],
+    motif: [
+      69,
+      null,
+      null,
+      76,
+      null,
+      null,
+      72,
+      null,
+      71,
+      null,
+      null,
+      69,
+      null,
+      64,
+      null,
+      null,
+    ],
+  },
+  {
+    name: "RENKO / Ember courtyard",
+    lead: "triangle",
+    arp: "sine",
+    bass: "sine",
+    order: [1, 0, 2, 3],
+    motif: [
+      64,
+      null,
+      69,
+      null,
+      null,
+      72,
+      null,
+      null,
+      76,
+      null,
+      null,
+      74,
+      72,
+      null,
+      69,
+      null,
+    ],
+  },
+  {
+    name: "HUGO / Blue observatory",
+    lead: "sine",
+    arp: "triangle",
+    bass: "sine",
+    order: [3, 1, 2, 0],
+    motif: [
+      76,
+      null,
+      null,
+      null,
+      72,
+      null,
+      71,
+      null,
+      null,
+      67,
+      null,
+      null,
+      69,
+      null,
+      64,
+      null,
+    ],
+  },
 ];
 export function newMix(): Mix {
   return {
     themes: THEMES.map((_, i) => (i === 0 ? 1 : 0)),
     combat: 0,
+    boss: 0,
     alarm: 0,
     engine: 0,
     space: 0.55,
@@ -472,7 +559,13 @@ export function advanceMix(
   const theme =
     state.champion === null
       ? state.area === "haven"
-        ? 0
+        ? state.corporation === "pan"
+          ? 15
+          : state.corporation === "renko"
+            ? 16
+            : state.corporation === "hugo"
+              ? 17
+              : 0
         : state.biome === 0
           ? 14
           : state.biome
@@ -490,6 +583,7 @@ export function advanceMix(
     state.hull > 0
       ? ((state.throttle * 0.88 + state.speed * 0.12) * state.engines) / 2
       : 0;
+  const boss = state.boss && state.hostiles > 0 && state.combat > 0 ? 1 : 0;
   return {
     themes,
     combat: toward(
@@ -497,6 +591,7 @@ export function advanceMix(
       state.combat,
       state.combat > previous.combat ? 0.45 : 1.6,
     ),
+    boss: toward(previous.boss, boss, boss > previous.boss ? 0.4 : 1.4),
     alarm: toward(previous.alarm, alarm, alarm > previous.alarm ? 0.12 : 0.25),
     engine: toward(
       previous.engine,

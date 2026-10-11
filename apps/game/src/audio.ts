@@ -27,7 +27,13 @@ const FLOOR = 0.0001;
 // Leave room for the score, warning and engine layers before the final compressor.
 // The compressor catches stacked events; this trim is not a brick-wall limiter.
 const CUE_LEVEL = 0.85;
-const ENGINE_LEVEL = 0.32;
+const ENGINE_LEVEL = 0.24;
+const ENGINE_NOTES = [45, 52] as const; // Quiet A–E fifth, shared score harmony.
+// Original palm-muted synth string coloration, not a guitar recording/model.
+const STRING_DRIVE = Float32Array.from(
+  { length: 257 },
+  (_, i) => Math.tanh((i / 128 - 1) * 2.1) / Math.tanh(2.1),
+);
 const clamp = (value: number): number =>
   Number.isFinite(value) ? Math.min(1, Math.max(0, value)) : 0;
 const frequency = (note: number): number => 440 * 2 ** ((note - 69) / 12);
@@ -143,7 +149,11 @@ export class AudioEngine {
           } else {
             this.stopScheduler();
             for (const voice of [...this.voices]) this.release(voice);
-            this.mix.engine = this.mix.alarm = this.mix.combat = 0;
+            this.mix.engine =
+              this.mix.alarm =
+              this.mix.combat =
+              this.mix.boss =
+                0;
             this.resetEngineDuck();
           }
         };
@@ -199,6 +209,8 @@ export class AudioEngine {
       boss: this.state.boss,
       combat: this.mix.combat,
       targetCombat: this.state.combat,
+      bossLayer: this.mix.boss,
+      corporation: this.state.corporation ?? null,
       lowHull: this.mix.alarm,
       hull: this.state.hull,
       engine: this.mix.engine,
@@ -479,7 +491,7 @@ export class AudioEngine {
     // delayed pad cannot continue under the sole allowed death effect.
     this.music?.gain.setTargetAtTime(0, context.currentTime, 0.008);
     this.musicWet?.gain.setTargetAtTime(0, context.currentTime, 0.008);
-    this.mix.engine = this.mix.alarm = this.mix.combat = 0;
+    this.mix.engine = this.mix.alarm = this.mix.combat = this.mix.boss = 0;
     this.resetEngineDuck();
     this.lastWake = -Infinity;
     for (const voice of [...this.voices])
@@ -513,7 +525,7 @@ export class AudioEngine {
     this.paused = true;
     this.stopScheduler();
     for (const voice of [...this.voices]) this.release(voice);
-    this.mix.engine = this.mix.alarm = this.mix.combat = 0;
+    this.mix.engine = this.mix.alarm = this.mix.combat = this.mix.boss = 0;
     this.resetEngineDuck();
     this.lastWake = -Infinity;
     if (this.context && this.context.state !== "closed")
@@ -687,9 +699,9 @@ export class AudioEngine {
               frequency(note + 12),
               frequency(note + 12),
               length * 15.8,
-              theme.arp,
-              0.019 * (1 - combat * 0.4),
-              0.12,
+              combat < 0.12 && theme.arp === "square" ? "triangle" : theme.arp,
+              0.017 * (1 - combat * 0.5),
+              0.22,
             ),
           );
         }
@@ -705,8 +717,9 @@ export class AudioEngine {
           frequency(note),
           frequency(note),
           length * 1.6,
-          theme.arp,
-          0.038 * (1 - combat * 0.35),
+          combat < 0.12 && theme.arp === "square" ? "triangle" : theme.arp,
+          0.032 * (1 - combat * 0.35),
+          0.016,
         );
       }
       const bass = BASS[beat];
@@ -721,7 +734,7 @@ export class AudioEngine {
           frequency(chord[0] + bass),
           frequency(chord[0] + bass),
           length * 1.15,
-          theme.bass,
+          combat < 0.12 && theme.bass === "square" ? "triangle" : theme.bass,
           0.026 + combat * 0.022,
         );
       const lead = theme.motif[(beat + (bar % 2) * 4) % 16];
@@ -736,10 +749,46 @@ export class AudioEngine {
           frequency(lead),
           frequency(lead),
           length * 1.35,
-          theme.lead,
-          0.012 + combat * 0.022,
+          combat < 0.12 && theme.lead === "square" ? "triangle" : theme.lead,
+          0.011 + combat * 0.02,
+          0.01,
         );
       if (voice.pending === 0) this.release(voice);
+    }
+    // One bounded shared power-chord voice: actual aggro, never biome/distance.
+    // Boss counter-notes follow the separate real boss blend; all old theme
+    // identities remain intact and at most two are selected for future notes.
+    if (combat > 0.12 && beat % 2 === 0) {
+      const guitar = this.createVoice("music", time, 0.24, combat * 0.8);
+      if (guitar) {
+        guitar.cue = "music-combat";
+        const duration = length * (this.mix.boss > 0.1 ? 1.55 : 1.15);
+        this.mutedString(
+          guitar,
+          time,
+          frequency(chord[0] + 12),
+          duration,
+          0.026,
+        );
+        this.mutedString(
+          guitar,
+          time,
+          frequency(chord[0] + 19),
+          duration,
+          0.014,
+        );
+        if (this.mix.boss > 0.02 && beat % 4 === 0)
+          this.tone(
+            guitar,
+            time,
+            frequency(chord[2] + 24),
+            frequency(chord[2] + 24),
+            length * 1.3,
+            "triangle",
+            this.mix.boss * 0.012,
+            0.01,
+          );
+      }
     }
     // Percussion follows actual aggro, once per shared clock, independent of
     // how many theme identities currently crossfade.
@@ -768,16 +817,24 @@ export class AudioEngine {
     }
     if (this.engineVoice) {
       this.engineVoice.gain.gain.setTargetAtTime(
-        this.mix.engine * ENGINE_LEVEL,
+        // Low-depth four-second breathing is continuous context-time motion,
+        // not a fabricated beat clock or a repeatedly restarted sound sample.
+        this.mix.engine *
+          ENGINE_LEVEL *
+          (0.97 + 0.03 * Math.sin((now * Math.PI) / 2)),
         now,
-        0.09,
+        0.18,
       );
-      const pitch = 45 + this.state.speed * 25 + this.state.throttle * 20;
+      const bend = 1 + this.state.speed * 0.025 + this.state.throttle * 0.015;
       this.engineOscillators.forEach((source, i) =>
-        source.frequency.setTargetAtTime(pitch * (i ? 1.985 : 1), now, 0.14),
+        source.frequency.setTargetAtTime(
+          frequency(ENGINE_NOTES[i]!) * bend,
+          now,
+          0.24,
+        ),
       );
       this.engineFilter?.frequency.setTargetAtTime(
-        260 + this.state.throttle * 500 + this.state.speed * 100,
+        260 + this.state.throttle * 120 + this.state.speed * 60,
         now,
         0.18,
       );
@@ -837,7 +894,7 @@ export class AudioEngine {
       const filter = context.createBiquadFilter();
       filter.type = "lowpass";
       filter.frequency.value = 260;
-      filter.Q.value = 0.55;
+      filter.Q.value = 0.5;
       const duck = context.createGain();
       duck.gain.setValueAtTime(this.engineDuckTarget, time);
       filter.connect(duck);
@@ -850,14 +907,14 @@ export class AudioEngine {
     const oscillators: OscillatorNode[] = [];
     for (let i = 0; i < 2; i++) {
       const source = context.createOscillator();
-      source.type = kind === "engine" ? (i ? "triangle" : "sine") : "sine";
+      source.type = "sine";
       source.frequency.setValueAtTime(
-        kind === "engine" ? 45 * (i ? 1.985 : 1) : i ? 660 : 440,
+        kind === "engine" ? frequency(ENGINE_NOTES[i]!) : i ? 660 : 440,
         time,
       );
       const envelope = context.createGain();
       envelope.gain.value =
-        kind === "engine" ? (i ? 0.025 : 0.055) : i ? 0.06 : 0.095;
+        kind === "engine" ? (i ? 0.014 : 0.045) : i ? 0.06 : 0.095;
       source.connect(envelope);
       envelope.connect(output);
       voice.nodes.push(source, envelope);
@@ -872,7 +929,7 @@ export class AudioEngine {
       source.buffer = this.noise;
       source.loop = true;
       const envelope = context.createGain();
-      envelope.gain.value = 0.02;
+      envelope.gain.value = 0.008;
       source.connect(envelope);
       envelope.connect(output);
       voice.nodes.push(source, envelope);
@@ -883,6 +940,35 @@ export class AudioEngine {
       this.engineOscillators = oscillators;
     }
     return voice;
+  }
+
+  private mutedString(
+    voice: Voice,
+    time: number,
+    pitch: number,
+    duration: number,
+    level: number,
+  ): void {
+    const context = this.context;
+    if (!context || voice.released) return;
+    const source = context.createOscillator();
+    source.type = "triangle";
+    source.frequency.setValueAtTime(pitch * 1.003, time);
+    source.frequency.exponentialRampToValueAtTime(
+      pitch,
+      time + Math.min(0.045, duration),
+    );
+    const drive = context.createWaveShaper();
+    drive.curve = STRING_DRIVE;
+    drive.oversample = "none";
+    const filter = context.createBiquadFilter();
+    filter.type = "lowpass";
+    filter.frequency.value = 1000 + this.mix.boss * 650;
+    filter.Q.value = 0.5;
+    source.connect(drive);
+    drive.connect(filter);
+    voice.nodes.push(drive, filter);
+    this.attach(voice, source, time, duration, level, 0.005, filter);
   }
 
   private createVoice(
