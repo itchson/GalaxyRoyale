@@ -14,16 +14,16 @@ The [Stadium design presentation](https://media.gdcvault.com/gdc2026/Slides/Hwan
 
 - Flight: small authored navigation icons, top-right map and right-aligned telemetry. Hover/focus reveals the facility or action context. Critical hull/shield state stays near the RAICHO.
 - RAICHO overview: compact license portrait and callsign; level/XP; hull/shield; one ability per category; carried cargo and retained points. Technical output and dock inventory are available through an explicit button without rebuilding focused controls on each simulation tick.
-- Settings: one heading per group, concise names, measured controls and quiet row separators. Hover/focus changes appearance without moving targets. Touch controls retain at least44 CSS pixels of interaction area.
+- Settings: one heading per group, concise names, measured controls and quiet row separators. Hover/focus changes appearance without moving targets. Touch controls retain at least 44 CSS pixels of interaction area. Desktop inspection panels have physical width caps independent of world zoom.
 - License creation: type, main manufacturer/hair, and sub-manufacturer/crystal horns remain separate. The live portrait conveys appearance; the short starter summary names the RAICHO and its ability rather than repeating every appearance token.
 
 ## Typography and motion
 
 Body text uses the engine's RoyaleMono occupied-cell glyphs. Shell font sizes describe semantic layout; native glyph size and clipping must fit that measured area. Shrinking CSS while rounding the requested native scale upward is insufficient. Fractional cell transforms are appropriate when the native pixel renderer can fit the complete glyph and line inside the measured region.
 
-Default shell text is12 CSS pixels minimum /8 logical units; captions11 /7; headings18 /12. These are authored starting values, not a universal readability guarantee. Small target sizes are independent from these text sizes. Native map/footer microtext is not substituted for menu body text.
+Default shell text is 12 CSS pixels minimum / 8 logical units; captions 11 / 7; headings 18 / 12. These are authored starting values, not a universal readability guarantee. Small target sizes are independent from these text sizes. Native map/footer microtext is not substituted for menu body text.
 
-Existing authored64-cell control masks retain neutral metal and category accents. Hover, focus, pressed and save states provide bounded feedback; decorative motion must respect Reduced Motion. No continuous border animation or moving hit regions are needed to explain an action.
+Existing authored 64-cell control masks retain neutral metal and category accents. Hover, focus, pressed and save states provide bounded feedback; decorative motion must respect Reduced Motion. No continuous border animation or moving hit regions are needed to explain an action.
 
 ## Verification boundaries
 
