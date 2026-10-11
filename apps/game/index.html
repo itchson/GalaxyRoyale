@@ -178,7 +178,15 @@
           LAUNCH EXPEDITION <span>↗</span>
         </button>
         <nav class="title-actions" aria-label="Title actions">
-          <button id="launch-settings" class="text-button">SETTINGS</button>
+          <button
+            id="launch-settings"
+            class="text-button"
+            data-pixel-icon="settings-icon"
+            aria-label="Settings"
+            title="Settings"
+          >
+            SETTINGS
+          </button>
           <button
             id="quit-game"
             class="text-button exit-button"
@@ -190,18 +198,14 @@
           </button>
         </nav>
         <div class="control-guide desktop-guide">
-          <span><b>LEFT CLICK</b> Set course / use a dock facility</span
-          ><span><b>RIGHT HOLD</b> Aim + fire</span
-          ><span><b>ESC</b> RAICHO MENU</span>
+          <span>LEFT / MOVE</span><span>RIGHT / FIRE</span
+          ><span>ESC / RAICHO</span>
         </div>
         <div class="control-guide touch-guide">
-          <span><b>LEFT STICK</b> Thrust & steer</span
-          ><span><b>RIGHT HOLD</b> Fire weapons</span>
-          <span><b>TAP FACILITY</b> Open dock service</span>
+          <span>STICK / THRUST</span><span>HOLD / FIRE</span>
         </div>
         <div class="build-line">
-          <span>PLAYABLE SLICE / 01</span
-          ><span id="load-status">INITIALIZING PIXEL ENGINE</span>
+          <span id="load-status">INITIALIZING PIXEL ENGINE</span>
         </div>
       </div>
     </section>

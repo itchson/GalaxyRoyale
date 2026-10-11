@@ -216,9 +216,11 @@ body:not(.pixel-ready) #universe {
 .launch-card button {
   width: 100%;
 }
-.launch-card > .primary-button,
-.title-actions {
+.launch-card > .primary-button {
   width: min(100%, 320px);
+}
+.title-actions {
+  width: min(100%, 112px);
 }
 .launch-card .control-guide,
 .launch-card .build-line {

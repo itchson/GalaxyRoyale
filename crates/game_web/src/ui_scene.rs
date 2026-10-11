@@ -1666,7 +1666,7 @@ impl Painter<'_> {
                 node.text_align,
                 false,
             ),
-            "title-backdrop" => self.rect(r, u32::from_le_bytes([1, 2, 5, 220])),
+            "title-backdrop" => self.rect(r, u32::from_le_bytes([1, 2, 5, 246])),
             "panel" => self.frame("panel", r, node.active, node.disabled),
             "meishi-panel" | "meishi-portrait-frame" | "meishi-seal" | "meishi-socket" => {
                 self.meishi_fittings(node, time, reduced);
