@@ -264,7 +264,12 @@ function fixture() {
     graphicsFailed: false,
     webglLifecycle: null,
     debugConsole: { opened: false },
-    dialoguePanel: { opened: false },
+    dialoguePanel: {
+      opened: false,
+      close() {
+        this.opened = false;
+      },
+    },
     matchMedia: () => ({ matches: false }),
     beforeLaunchMenu: false,
     transitionEpoch: 0,
@@ -428,7 +433,14 @@ test("backend rejection has no HUD fetch, snapshot save, audio cue or invented s
 });
 test("real Forge category survives successful repaint while a fresh open resets to overview", async () => {
   const f = fixture();
+  f.c.dialoguePanel.opened = true;
+  f.c.paused = true;
   f.c.openMenu("upgrades");
+  assert.equal(f.c.dialoguePanel.opened, false);
+  assert.equal(f.c.menu.hidden, false);
+  assert.equal(f.c.document.activeElement, f.element("menu-close"));
+  assert.equal(f.c.input.enabled, false);
+  assert.equal(f.c.paused, false, "the live Forge does not pause the universe");
   f.action("manage-0").click();
   assert.ok(f.action("back"));
   const resets = f.calls.filter((item) => item[0] === "reset-forge").length;
