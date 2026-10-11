@@ -13,6 +13,7 @@ mod navigation;
 pub use navigation::{NavigationHud, NavigationTarget};
 mod pixel_assets;
 mod player_presentation;
+mod raicho_fine;
 mod radiation_enemies;
 mod segmented;
 mod shooting_star;
