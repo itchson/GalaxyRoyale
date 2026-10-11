@@ -295,7 +295,7 @@ test("selected RAICHO and effective equipped ranks refresh without inherited-ran
   const icon = byClass(f, "meishi-ship-icon")[0];
   assert.equal(icon.dataset.pixelKind, "licensed-ship");
   assert.equal(icon.dataset.pixelValue, "0");
-  assert.match(byClass(f, "meishi-slot")[2].textContent, /R1 EFFECTIVE/);
+  assert.match(byClass(f, "meishi-slot")[2].textContent, /R1$/);
   assert.doesNotMatch(visibleText(f.target), /R5/);
   data.campaign.selected_ship = 9;
   data.ship_xp = 0;

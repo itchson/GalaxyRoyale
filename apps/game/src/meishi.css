@@ -33,13 +33,13 @@
   margin: 0;
 }
 .meishi-card p {
-  font-size: var(--ui-caption);
+  font-size: min(12px, var(--ui-caption));
   line-height: 1.5;
   margin: 0;
   overflow-wrap: anywhere;
 }
 .meishi-card .meishi-designation {
-  font-size: var(--ui-text);
+  font-size: var(--ui-caption);
   color: #edf4f5;
   margin-top: 6px;
 }

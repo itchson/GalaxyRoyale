@@ -183,7 +183,10 @@ export function paintMeishiCard(target: HTMLElement, hud: MeishiHud): boolean {
   if (validIdentity) {
     changed = paintLicensePortrait(view.portrait, identity) || changed;
     write(view.designation, identity.short_designation);
-    write(view.manufacturer, identity.designation);
+    write(
+      view.manufacturer,
+      `${identity.kind.toUpperCase()} / ${identity.corporation.toUpperCase()} / ${identity.sub_corporation.toUpperCase()}`,
+    );
   } else {
     write(view.designation, "LEGACY PILOT");
     write(view.manufacturer, "NO ISSUED CORPORATE IDENTITY");
@@ -227,7 +230,7 @@ export function paintMeishiCard(target: HTMLElement, hud: MeishiHud): boolean {
       node,
       `${categories[index]} / ${
         slot && slot.category === index
-          ? `${slot.name} / R${number(slot.effective_rank)} EFFECTIVE`
+          ? `${slot.name} / R${number(slot.effective_rank)}`
           : "EMPTY"
       }`,
     );
@@ -256,10 +259,7 @@ export function paintMeishiCard(target: HTMLElement, hud: MeishiHud): boolean {
         ? `Arena patch ${index + 1}: ${champion.name}, earned`
         : `Arena patch ${index + 1}: empty`,
     );
-    write(
-      slot.caption,
-      `${String(index + 1).padStart(2, "0")} / ${earned ? "EARNED" : "EMPTY"}`,
-    );
+    write(slot.caption, String(index + 1).padStart(2, "0"));
   });
   write(view.patchCount, `ARENA PATCHES ${count}/8`);
   return changed;
