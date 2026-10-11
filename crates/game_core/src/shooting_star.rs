@@ -163,7 +163,8 @@ fn valid(input: &SceneInput) -> bool {
 /// Analytic tail cells have stable seeded identities and bounded local age/orbit.
 /// Arrays are stack-owned. No per-frame particle Vec or simulation entity exists.
 fn particles(input: &SceneInput, phase: f32) -> [(Vec2, u32); TAIL_CELLS] {
-    let clock = time(input).rem_euclid(80.0);
+    // Reset relative dust only at the seeded head cycle's invisible boundary.
+    let clock = phase;
     let gain = envelope(phase);
     std::array::from_fn(|i| {
         let h = mix(input.birth_hash ^ (i as u32 + 1).wrapping_mul(7919));
@@ -486,6 +487,94 @@ mod tests {
             });
             assert_eq!(gs, s);
             assert_eq!(packets(&f), packets(&g));
+        }
+    }
+    #[test]
+    fn visible_tail_stays_continuous_across_absolute_clock_wrap() {
+        // Actual even layer-2 birth for seed 871238449, grid [-1, -3].
+        // Its seeded phase is mid-pass when absolute time crosses 80 seconds.
+        let a = SceneInput {
+            birth_hash: 3_887_264_754,
+            time: 79.999,
+            ..input()
+        };
+        let b = SceneInput { time: 80.001, ..a };
+        let pa = phase(&a);
+        let pb = phase(&b);
+        assert!((2.0..16.0).contains(&pa) && (2.0..16.0).contains(&pb));
+        assert!((parent(&b, pb).position - parent(&a, pa).position).length() < 0.1);
+        let first = particles(&a, pa);
+        let second = particles(&b, pb);
+        for reduced in [false, true] {
+            let visible = first
+                .iter()
+                .zip(&second)
+                .enumerate()
+                .filter(|(i, ((_, ca), (_, cb)))| {
+                    (!reduced || i % 2 == 0) && ca >> 24 >= 8 && cb >> 24 >= 8
+                })
+                .collect::<Vec<_>>();
+            assert!(visible.len() >= 8, "continuity check needs visible dust");
+            for (i, ((before, _), (after, _))) in visible {
+                assert!(
+                    (*after - *before).length() < 0.1,
+                    "visible dust {i} teleported across absolute clock wrap: {before:?} -> {after:?}"
+                );
+            }
+            let (_, sa) = draw(SceneInput { reduced, ..a });
+            let (_, sb) = draw(SceneInput { reduced, ..b });
+            assert_eq!(sa, sb);
+            let frozen_a = draw(SceneInput {
+                reduced,
+                reduced_motion: true,
+                ..a
+            });
+            let frozen_b = draw(SceneInput {
+                reduced,
+                reduced_motion: true,
+                ..b
+            });
+            assert!(frozen_a.1.quads > 0);
+            assert_eq!(packets(&frozen_a.0), packets(&frozen_b.0));
+        }
+    }
+    #[test]
+    fn seeded_cycle_reset_is_invisible_and_keeps_fade_submissions_bounded() {
+        let birth_hash = 3_887_264_754;
+        let reset = 80.0 - unit(mix(birth_hash ^ 303)) * 80.0;
+        let at = SceneInput {
+            birth_hash,
+            time: reset,
+            ..input()
+        };
+        assert_eq!(phase(&at), 0.0);
+        for reduced in [false, true] {
+            let before = draw(SceneInput {
+                reduced,
+                time: reset - 0.001,
+                ..at
+            });
+            assert!(before.1.inactive && before.0.frame().pixel_count == 0);
+            for time in [reset, reset + 0.001] {
+                let (frame, stats) = draw(SceneInput {
+                    reduced,
+                    time,
+                    ..at
+                });
+                assert_eq!(stats.quads, if reduced { 852 } else { 884 });
+                assert_eq!(stats.transforms, 4);
+                assert!(packets(&frame).iter().all(|(_, color, _)| color >> 24 == 0));
+            }
+            let (visible, _) = draw(SceneInput {
+                reduced,
+                time: reset + 0.8,
+                ..at
+            });
+            assert!(
+                packets(&visible)
+                    .iter()
+                    .any(|(_, color, _)| color >> 24 > 0)
+            );
         }
     }
     #[test]
