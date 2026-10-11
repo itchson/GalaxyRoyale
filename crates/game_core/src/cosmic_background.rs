@@ -163,6 +163,8 @@ struct Art {
 // independently from each particle's footprint; it is never a raster minimum.
 const VEIL_SPACING: f32 = 3.0;
 const BILLOW_SPACING: f32 = 2.5;
+const VEIL_THRESHOLD: f32 = 0.06;
+const BILLOW_THRESHOLD: f32 = 0.27;
 struct GasArt {
     veil: Pair,
     billows: Pair,
@@ -180,38 +182,111 @@ fn noise(seed: u32, p: Vec2) -> f32 {
     (a + (b - a) * u) + ((c + (d - c) * u) - (a + (b - a) * u)) * v
 }
 
-/// A fixed turbulent birth field gives the cloud unequal billows and isolated
-/// dust pockets. Initialization samples it once at both densities.
+// Uneven connected paths, not closed elliptical shells. Width changes along
+// each branch; domain warping and correlated detail break its smooth outline.
+const NEBULA_SPINE: [[f32; 3]; 6] = [
+    [-53.0, 8.0, 3.0],
+    [-34.0, 4.0, 10.0],
+    [-15.0, -4.0, 13.0],
+    [5.0, -5.0, 11.0],
+    [28.0, 10.0, 8.0],
+    [51.0, 18.0, 2.0],
+];
+const NEBULA_UPPER: [[f32; 3]; 4] = [
+    [-19.0, -3.0, 8.0],
+    [-10.0, -17.0, 7.0],
+    [5.0, -27.0, 4.0],
+    [22.0, -30.0, 1.0],
+];
+const NEBULA_LOWER: [[f32; 3]; 3] = [[-22.0, 1.0, 8.0], [-35.0, 17.0, 5.0], [-51.0, 27.0, 1.2]];
+const NEBULA_WISP: [[f32; 3]; 3] = [[13.0, 0.0, 5.0], [29.0, -11.0, 3.0], [48.0, -17.0, 0.8]];
+
+fn strand(p: Vec2, path: &[[f32; 3]], width_scale: f32) -> f32 {
+    path.windows(2).fold(0.0, |density, points| {
+        let a = Vec2::new(points[0][0], points[0][1]);
+        let b = Vec2::new(points[1][0], points[1][1]);
+        let delta = b - a;
+        let t = ((p - a).dot(delta) / delta.length_squared()).clamp(0.0, 1.0);
+        let width = (points[0][2] + (points[1][2] - points[0][2]) * t) * width_scale;
+        let radial = (p - a - delta * t).length_squared() / (width * width);
+        density.max(smooth((1.0 - radial).clamp(0.0, 1.0)))
+    })
+}
+
+/// Stable birth-space wisps and open dust clefts. Sampled once into both cached
+/// densities; these authored morphology fields are not a physical gas model.
 fn gas_density(p: Vec2) -> f32 {
     let warp = Vec2::new(
         noise(0x7665_696c, p / 19.0) - 0.5,
         noise(0x6269_6c6c, p / 17.0) - 0.5,
-    ) * 9.0;
+    ) * 5.0;
     let q = p + warp;
-    let billow = |center: Vec2, radii: Vec2| {
-        smooth((1.0 - ((q - center) / radii).length_squared()).clamp(0.0, 1.0))
-    };
-    // Unequal overlapping volumes form one cloud with broad and narrow edges,
-    // rather than two matching ribbons on either side of a continuous slit.
-    let envelope = (billow(Vec2::new(-19.0, 1.0), Vec2::new(33.0, 25.0)) * 0.88
-        + billow(Vec2::new(12.0, -7.0), Vec2::new(31.0, 20.0)) * 0.82
-        + billow(Vec2::new(34.0, 12.0), Vec2::new(21.0, 17.0)) * 0.61
-        + billow(Vec2::new(-39.0, -17.0), Vec2::new(17.0, 15.0)) * 0.46)
-        .min(1.0);
-    let turbulence = noise(0x6e65_6275, q / 12.0) * 0.58
-        + noise(0x6c61_6e65, q / 5.5) * 0.29
-        + noise(0x7269_6467, q / 2.4) * 0.13;
-    let pocket = |center: Vec2, radii: Vec2, angle: f32| {
-        let delta = q - center;
-        let (s, c) = angle.sin_cos();
-        let local = Vec2::new(c * delta.x - s * delta.y, s * delta.x + c * delta.y);
-        let rough_edge = (noise(0x6475_7374, q / 3.4) - 0.5) * 0.25;
-        smooth((((local / radii).length_squared() + rough_edge - 0.25) / 0.65).clamp(0.0, 1.0))
-    };
-    let transmission = pocket(Vec2::new(-17.0, 0.0), Vec2::new(15.0, 4.5), 0.35)
-        .min(pocket(Vec2::new(17.0, -6.0), Vec2::new(10.0, 5.5), -0.6))
-        .min(pocket(Vec2::new(-36.0, 13.0), Vec2::new(8.0, 7.0), -0.2));
-    envelope * (0.35 + turbulence * 0.95) * transmission
+    let envelope = strand(q, &NEBULA_SPINE, 1.0)
+        .max(strand(q, &NEBULA_UPPER, 1.0) * 0.58)
+        .max(strand(q, &NEBULA_LOWER, 1.0) * 0.39)
+        .max(strand(q, &NEBULA_WISP, 1.0) * 0.48);
+    let turbulence = noise(0x6e65_6275, q / 13.0) * 0.42
+        + noise(0x6c61_6e65, q / 5.0) * 0.36
+        + noise(0x7269_6467, q / 2.1) * 0.22;
+    // A faint, wide veil joins the unequal knots without tracing every branch
+    // as a fat tubular limb. Its disturbed edge fades through the low palette.
+    let haze_warp = Vec2::new(
+        noise(0x6861_7a65, q / 9.0) - 0.5,
+        noise(0x6661_6465, q / 8.0) - 0.5,
+    ) * 11.0;
+    let haze_radius =
+        ((q + haze_warp - Vec2::new(-4.0, -2.0)) / Vec2::new(55.0, 32.0)).length_squared();
+    let haze = smooth((1.0 - haze_radius).clamp(0.0, 1.0)) * (0.32 + turbulence * 0.68);
+    // Open routes enter from the sky and narrow toward their internal ends.
+    // Unlike rotated ellipse subtraction they do not form repeated doughnuts.
+    let cleft = strand(
+        q,
+        &[
+            [-60.0, -11.0, 4.0],
+            [-33.0, -10.0, 3.0],
+            [-11.0, -11.0, 0.8],
+        ],
+        1.0,
+    )
+    .max(strand(
+        q,
+        &[[12.0, 37.0, 4.0], [7.0, 14.0, 2.6], [1.0, 0.0, 0.6]],
+        1.0,
+    ));
+    (haze * 0.43 + envelope * (0.10 + turbulence * 0.25)) * (1.0 - cleft * 0.90)
+}
+
+fn nebula_filament(p: Vec2) -> Option<usize> {
+    let q = p + Vec2::new(
+        noise(0x7769_7370, p / 8.0) - 0.5,
+        noise(0x7468_696e, p / 7.0) - 0.5,
+    ) * 2.1;
+    let ridge = strand(q, &NEBULA_SPINE, 0.09)
+        .max(strand(q, &NEBULA_UPPER, 0.11) * 0.85)
+        .max(strand(q, &NEBULA_LOWER, 0.12) * 0.66)
+        .max(strand(q, &NEBULA_WISP, 0.16) * 0.48);
+    let cluster = noise(0x6669_6e65, p / 2.8);
+    if ridge < 0.17 || cluster < 0.22 || gas_density(p) < 0.14 {
+        return None;
+    }
+    Some(((ridge * 0.70 + cluster * 0.30 - 0.18) / 0.80 * 7.0).clamp(0.0, 7.0) as usize)
+}
+
+fn nebula_thread(p: Vec2) -> Option<usize> {
+    let q = p + Vec2::new((p.y * 0.19).sin(), (p.x * 0.16).sin()) * 0.7;
+    let ridge = strand(
+        q,
+        &[
+            [-22.0, 5.0, 0.3],
+            [-9.0, 2.0, 0.8],
+            [1.0, -2.0, 1.0],
+            [17.0, -7.0, 0.25],
+        ],
+        1.0,
+    );
+    let cluster = noise(0x7468_7264, p / 2.6);
+    (ridge > 0.2 && cluster > 0.32)
+        .then(|| ((ridge * 0.67 + cluster * 0.33 - 0.23) / 0.73 * 5.0).clamp(0.0, 5.0) as usize)
 }
 
 fn gas_pair(width: usize, height: usize, spacing: f32, threshold: f32, colors: &[u32]) -> Pair {
@@ -237,7 +312,7 @@ static GAS_ART: LazyLock<GasArt> = LazyLock::new(|| GasArt {
         40,
         24,
         VEIL_SPACING,
-        0.12,
+        VEIL_THRESHOLD,
         &[
             rgba(27, 24, 35, 43),
             rgba(35, 28, 44, 53),
@@ -253,7 +328,7 @@ static GAS_ART: LazyLock<GasArt> = LazyLock::new(|| GasArt {
         48,
         32,
         BILLOW_SPACING,
-        0.27,
+        BILLOW_THRESHOLD,
         &[
             rgba(39, 28, 44, 60),
             rgba(49, 34, 51, 73),
@@ -266,17 +341,6 @@ static GAS_ART: LazyLock<GasArt> = LazyLock::new(|| GasArt {
         ],
     ),
 });
-
-/// Fixed two-unit birth clusters provide coherent ridges rather than independent
-/// bright noise at every tiny cell. This only runs while initializing the cache.
-fn cluster(seed: u32, p: Vec2) -> f32 {
-    unit(hash3(
-        seed,
-        (p.x * 0.5).floor() as i32,
-        (p.y * 0.5).floor() as i32,
-        7,
-    ))
-}
 
 // Smooth cache-only surface field. Fine cells form contiguous material clusters,
 // rather than hard hash-block boundaries or independent point noise.
@@ -454,41 +518,7 @@ static ART: LazyLock<Art> = LazyLock::new(|| Art {
     nebula: Pair::new(
         80,
         48,
-        |p| {
-            let curve = (p.x * 0.11).sin() * 6.0 + (p.x * 0.032).cos() * 3.0;
-            let side = p.y - curve;
-            let distance = side.abs();
-            let c = cluster(0x746f_726e, p);
-            if p.x.abs() > 36.0 || distance > 8.0 {
-                return None;
-            }
-            let lane = (p.x * 0.22).sin() * 0.4;
-            if (side - lane).abs() < 0.6 {
-                return None;
-            }
-            let ridge = (distance - (1.35 + (p.x * 0.17).cos() * 0.5)).abs();
-            if ridge < 0.47 && c > 0.18 {
-                Some(if side < 0.0 && c > 0.70 {
-                    7
-                } else if c > 0.55 {
-                    6
-                } else {
-                    5
-                })
-            } else if distance < 4.6 && c > 0.65 {
-                Some(if distance < 2.8 {
-                    4
-                } else if side < 0.0 {
-                    3
-                } else {
-                    2
-                })
-            } else if distance < 7.5 && c > 0.94 {
-                Some(if side < 0.0 { 1 } else { 0 })
-            } else {
-                None
-            }
-        },
+        nebula_filament,
         &[
             rgba(31, 28, 40, 14),
             rgba(39, 32, 48, 19),
@@ -503,33 +533,7 @@ static ART: LazyLock<Art> = LazyLock::new(|| Art {
     nebula_thread: Pair::new(
         48,
         24,
-        |p| {
-            let curve = (p.x * 0.15).sin() * 3.0;
-            let d = (p.y - curve).abs();
-            let c = cluster(0x7468_7264, p);
-            if p.x.abs() >= 21.0 {
-                return None;
-            }
-            if d < 0.42 && c > 0.18 {
-                Some(if c > 0.78 {
-                    5
-                } else if c > 0.48 {
-                    4
-                } else {
-                    3
-                })
-            } else if d < 1.5 && c > 0.84 {
-                Some(if d < 0.8 {
-                    2
-                } else if p.y < curve {
-                    1
-                } else {
-                    0
-                })
-            } else {
-                None
-            }
-        },
+        nebula_thread,
         &[
             rgba(32, 36, 39, 12),
             rgba(41, 45, 49, 17),

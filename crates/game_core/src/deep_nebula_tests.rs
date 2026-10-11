@@ -47,8 +47,8 @@ fn deep_cloud_cache_has_real_coherent_volume_and_bounded_complete_cost() {
         assert!(soft > if reduced { 100 } else { 400 });
         assert!(required <= if reduced { 1_100 } else { 2_200 });
         for (pair, spacing, threshold) in [
-            (&GAS_ART.veil, VEIL_SPACING, 0.12),
-            (&GAS_ART.billows, BILLOW_SPACING, 0.27),
+            (&GAS_ART.veil, VEIL_SPACING, VEIL_THRESHOLD),
+            (&GAS_ART.billows, BILLOW_SPACING, BILLOW_THRESHOLD),
         ] {
             let s = spacing * if reduced { 2.0 } else { 1.0 };
             assert_eq!(pair.full.width, pair.low.width * 2);
@@ -64,24 +64,43 @@ fn deep_cloud_cache_has_real_coherent_volume_and_bounded_complete_cost() {
 }
 
 #[test]
-fn cloud_has_interrupted_dust_pockets_and_unequal_connected_billow_outline() {
-    // The former whole-length zero channel made both x=0 and the central
-    // bridge empty. Volume now crosses that line while retaining dark pockets.
+fn cloud_has_diffuse_outskirts_dark_sky_and_unequal_connected_billow_outline() {
+    // Retain a connected central mass without requiring closed dark pockets
+    // along one arbitrary axis. The entire sampled field must have both a
+    // diffuse transition and ample surrounding negative space.
     assert!(gas_density(Vec2::ZERO) > 0.27);
     let mut bridges = 0;
-    let mut dark = 0;
     let mut asymmetric = 0;
     for x in -45..=45 {
         let p = Vec2::new(x as f32, 0.0);
         bridges += usize::from(gas_density(p) > 0.27);
-        dark += usize::from(gas_density(p) < 0.05);
         asymmetric += usize::from(
             (gas_density(p + Vec2::Y * 12.0) - gas_density(p - Vec2::Y * 12.0)).abs() > 0.1,
         );
     }
     assert!(bridges >= 20, "actual central bridges={bridges}");
-    assert!(dark >= 5, "actual source dust pockets={dark}");
     assert!(asymmetric >= 15, "actual asymmetric outline={asymmetric}");
+    let mut diffuse = 0;
+    let mut dense = 0;
+    let mut dark = 0;
+    for y in -40..=40 {
+        for x in -60..=60 {
+            let value = gas_density(Vec2::new(x as f32, y as f32));
+            assert!(value.is_finite() && (0.0..=1.0).contains(&value));
+            diffuse += usize::from((VEIL_THRESHOLD..BILLOW_THRESHOLD).contains(&value));
+            dense += usize::from(value >= BILLOW_THRESHOLD);
+            dark += usize::from(value < VEIL_THRESHOLD);
+        }
+    }
+    eprintln!("Nebula source field diffuse={diffuse}, dense={dense}, sky={dark}");
+    assert!(
+        diffuse > dense,
+        "diffuse transition should dominate bright source knots"
+    );
+    assert!(
+        dense >= 300 && dark > 121 * 81 / 2,
+        "substantial knots inside predominantly dark space"
+    );
     for reduced in [false, true] {
         let spacing = VEIL_SPACING * if reduced { 2.0 } else { 1.0 };
         assert!(GAS_ART.veil.body(reduced).cells().any(|(p, _)| {
@@ -89,6 +108,61 @@ fn cloud_has_interrupted_dust_pockets_and_unequal_connected_billow_outline() {
             physical.y.abs() < 4.0 && physical.x.abs() < 6.0
         }));
     }
+}
+
+#[test]
+fn dust_negative_space_is_open_not_large_enclosed_oval_cavities() {
+    // A visual failure oracle independent of the authored path coordinates:
+    // flood dark source samples from outside. Isolated fine dust flecks are
+    // allowed, but a conspicuous enclosed void must open into surrounding sky.
+    const WIDTH: usize = 121;
+    const HEIGHT: usize = 81;
+    let dark: Vec<_> = (0..WIDTH * HEIGHT)
+        .map(|i| {
+            gas_density(Vec2::new(
+                (i % WIDTH) as f32 - 60.0,
+                (i / WIDTH) as f32 - 40.0,
+            )) < 0.12
+        })
+        .collect();
+    let mut visited = vec![false; dark.len()];
+    let mut enclosed = Vec::new();
+    for start in 0..dark.len() {
+        if !dark[start] || visited[start] {
+            continue;
+        }
+        let mut pending = vec![start];
+        visited[start] = true;
+        let mut area = 0;
+        let mut border = false;
+        while let Some(i) = pending.pop() {
+            area += 1;
+            let (x, y) = (i % WIDTH, i / WIDTH);
+            border |= x == 0 || y == 0 || x == WIDTH - 1 || y == HEIGHT - 1;
+            for next in [
+                x.checked_sub(1).map(|x| y * WIDTH + x),
+                (x + 1 < WIDTH).then_some(i + 1),
+                y.checked_sub(1).map(|y| y * WIDTH + x),
+                (y + 1 < HEIGHT).then_some(i + WIDTH),
+            ]
+            .into_iter()
+            .flatten()
+            {
+                if dark[next] && !visited[next] {
+                    visited[next] = true;
+                    pending.push(next);
+                }
+            }
+        }
+        if !border {
+            enclosed.push(area);
+        }
+    }
+    eprintln!("Nebula enclosed dark source regions (one-world-unit samples): {enclosed:?}");
+    assert!(
+        enclosed.iter().all(|&area| area <= 48),
+        "large closed cavity {enclosed:?}"
+    );
 }
 
 #[test]

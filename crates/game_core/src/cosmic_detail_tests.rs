@@ -127,11 +127,14 @@ fn reduced_sampling_preserves_actual_dark_lanes_and_broken_rim() {
                 .cells()
                 .all(|(p, _)| (p * scale).length() >= 5.0)
         );
-        assert!(ART.nebula.body(reduced).cells().all(|(p, _)| {
-            let p = p * scale;
-            let curve = (p.x * 0.11).sin() * 6.0 + (p.x * 0.032).cos() * 3.0;
-            (p.y - curve - (p.x * 0.22).sin() * 0.4).abs() >= 0.6
-        }));
+        // Fine strands live in the gas field, rather than the superseded
+        // uniform empty sinusoidal channel with two matching bright edges.
+        assert!(
+            ART.nebula
+                .body(reduced)
+                .cells()
+                .all(|(p, _)| gas_density(p * scale) >= 0.14)
+        );
         assert!(ART.nova_shell.body(reduced).cells().all(|(p, _)| {
             let p = p * scale;
             !(p.y.atan2(p.x) > -0.18 && p.y.atan2(p.x) < 0.32)
