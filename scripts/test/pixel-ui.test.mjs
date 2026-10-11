@@ -28,6 +28,10 @@ function pixelScene({
   rootBounds = null,
   consoleCommand = null,
   scrollId = "archive-content",
+  flight = false,
+  hover = null,
+  leaveHover = false,
+  settingGeometry = null,
 } = {}) {
   const bounds = rootBounds ?? {
     x: 0,
@@ -46,6 +50,7 @@ function pixelScene({
       return this.bounds ?? bounds;
     }
     closest(selector) {
+      if (selector === "button,label,select") return this;
       if (selector === ".menu-tabs" && this.nav) return root;
       if (selector.includes(`#${scrollId}`) && this.inScroll && scrollBounds)
         return { getBoundingClientRect: () => scrollBounds };
@@ -62,6 +67,7 @@ function pixelScene({
     }
   }
   class Input extends Element {
+    disabled = false;
     type = "range";
     min = min;
     max = max;
@@ -70,9 +76,23 @@ function pixelScene({
   class Button extends Element {}
   const input = new Input();
   const label = new Element();
+  const settingName = new Element();
+  settingName.textContent = "Flight zoom";
+  if (settingGeometry) {
+    label.bounds = settingGeometry.row;
+    input.bounds = settingGeometry.input;
+    input.disabled = settingGeometry.disabled ?? false;
+    settingName.bounds = settingGeometry.name;
+  }
   label.childNodes = [{ textContent: "Flight zoom" }];
-  label.querySelector = () => input;
+  label.querySelector = (selector) =>
+    selector === ".setting-name"
+      ? settingGeometry
+        ? settingName
+        : null
+      : input;
   const root = new Element();
+  if (flight) root.id = "game-ui";
   const events = new Map();
   if (consoleCommand) {
     root.classList = { contains: (name) => name === "console-card" };
@@ -113,7 +133,9 @@ function pixelScene({
         ? [art]
         : selector === "button,.import-label"
           ? buttonElements
-          : [];
+          : flight && selector.includes(".dock-facility")
+            ? buttonElements
+            : [];
   const document = {
     getElementById: () => null,
     addEventListener(name, callback) {
@@ -122,7 +144,9 @@ function pixelScene({
     fonts: { ready: Promise.resolve() },
     querySelectorAll: () => [root],
     activeElement: consoleCommand ? input : null,
-    body: { classList: { contains: () => false } },
+    body: {
+      classList: { contains: (name) => flight && name === "engine-flight" },
+    },
   };
   const exports = {};
   vm.runInNewContext(compiled, {
@@ -145,6 +169,14 @@ function pixelScene({
     () => scale,
   );
   bridge.sync();
+  if (hover !== null) {
+    events.get("pointerover")({ target: buttonElements[hover] });
+    bridge.sync();
+    if (leaveHover) {
+      events.get("pointerout")();
+      bridge.sync();
+    }
+  }
   if (consoleCommand?.moveSelection !== undefined) {
     input.selectionStart = consoleCommand.moveSelection;
     events.get("selectionchange")();
@@ -327,4 +359,48 @@ test("pause actions inherit their own scroll viewport rather than bleeding into 
     ],
   }).groups[0].nodes.find((n) => n.kind === "button");
   assert.deepEqual(Array.from(node.clip), [0, 60, 300, 60]);
+});
+
+test("settings transfer independently measured input and label rectangles through UI scaling", () => {
+  const slider = sliderScene({
+    scale: 2,
+    rootBounds: { x: 40, y: 20, width: 500, height: 360 },
+    settingGeometry: {
+      row: { x: 60, y: 80, width: 220, height: 80 },
+      name: { x: 68, y: 86, width: 180, height: 20 },
+      input: { x: 68, y: 116, width: 192, height: 28 },
+      disabled: true,
+    },
+  });
+  assert.deepEqual(Array.from(slider.label_rect), [14, 33, 90, 10]);
+  assert.deepEqual(Array.from(slider.control_rect), [14, 48, 96, 14]);
+  assert.deepEqual(Array.from(slider.rect), [10, 30, 110, 40]);
+  assert.equal(slider.disabled, true);
+  assert.equal(slider.text, "Flight zoom");
+});
+
+test("facility pixel labels require hover or deliberate focus while controls keep their hit geometry", () => {
+  const facility = {
+    classes: ["dock-facility"],
+    tagName: "BUTTON",
+    innerText: "SHIP FORGE",
+  };
+  const nodes = (options) =>
+    pixelScene({ flight: true, buttons: [facility], ...options }).groups[0]
+      .nodes;
+  assert.equal(nodes({}).filter((n) => n.kind === "facility-label").length, 0);
+  const hovered = nodes({ hover: 0 }).find((n) => n.kind === "facility-label");
+  assert.equal(hovered.text, "SHIP FORGE");
+  assert.equal(hovered.active, true);
+  assert.equal(
+    nodes({ hover: 0, leaveHover: true }).filter(
+      (n) => n.kind === "facility-label",
+    ).length,
+    0,
+  );
+  const focused = nodes({
+    buttons: [{ ...facility, focusedChild: true }],
+  }).find((n) => n.kind === "facility-label");
+  assert.equal(focused.active, true);
+  assert.deepEqual(Array.from(hovered.rect), Array.from(focused.rect));
 });

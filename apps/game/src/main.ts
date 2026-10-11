@@ -127,6 +127,7 @@ interface GalaxyRuntime {
   viewport(): Float32Array;
   world_viewport(): Float32Array;
   flight_status_bounds(): Float32Array;
+  flight_navigation_bounds(): Float32Array;
   flight_status_text_bounds(): Float32Array;
   set_zoom(value: number): void;
   zoom(): number;
@@ -1029,7 +1030,10 @@ function paintFacilities(): void {
   const viewport = galaxy.world_viewport();
   const bounds = canvas.getBoundingClientRect();
   const scale = innerHeight / galaxy.viewport()[1];
-  const strip = galaxy.flight_status_bounds();
+  const reserved = [
+    galaxy.flight_status_bounds(),
+    galaxy.flight_navigation_bounds(),
+  ];
   const blockers = [
     "save-indicator",
     "pause-button",
@@ -1039,18 +1043,19 @@ function paintFacilities(): void {
   ]
     .map((id) => element(id).getBoundingClientRect())
     .filter((r) => r.width > 0 && r.height > 0);
-  if (
-    strip.length === 4 &&
-    Array.from(strip).every(Number.isFinite) &&
-    strip[2] > 0 &&
-    strip[3] > 0
-  )
-    blockers.push({
-      left: strip[0] * scale,
-      top: strip[1] * scale,
-      right: (strip[0] + strip[2]) * scale,
-      bottom: (strip[1] + strip[3]) * scale,
-    } as DOMRect);
+  for (const rect of reserved)
+    if (
+      rect.length === 4 &&
+      Array.from(rect).every(Number.isFinite) &&
+      rect[2] > 0 &&
+      rect[3] > 0
+    )
+      blockers.push({
+        left: rect[0] * scale,
+        top: rect[1] * scale,
+        right: (rect[0] + rect[2]) * scale,
+        bottom: (rect[1] + rect[3]) * scale,
+      } as DOMRect);
   const clear = (
     left: number,
     top: number,

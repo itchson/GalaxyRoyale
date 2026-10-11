@@ -12,6 +12,8 @@ interface Node {
   selected: boolean;
   disabled: boolean;
   clip: number[] | null;
+  label_rect?: number[];
+  control_rect?: number[];
 }
 export class PixelUiBridge {
   private dirty = true;
@@ -152,8 +154,17 @@ export class PixelUiBridge {
         kind: string,
         text = "",
         value = 0,
+        regions?: { label: HTMLElement | null; control: HTMLInputElement },
       ): void => {
         if (!visible(element)) return;
+        // Facility controls remain accessible and clickable; their pixel label
+        // is revealed only by cursor hover or deliberate keyboard focus.
+        if (
+          kind === "facility-label" &&
+          element !== this.hover &&
+          !element.contains(document.activeElement)
+        )
+          return;
         if (element.id === "toast" && !element.classList.contains("visible"))
           return;
         if (
@@ -241,6 +252,15 @@ export class PixelUiBridge {
           authored && Math.abs(size - authored) <= 1 / 64 ? authored : size;
         const width = extent(measuredWidth),
           height = extent(measuredHeight);
+        const regionRect = (region: HTMLElement): number[] => {
+          const area = region.getBoundingClientRect();
+          return [
+            (area.x - bounds.x) / scale,
+            (area.y - bounds.y) / scale,
+            area.width / scale,
+            area.height / scale,
+          ];
+        };
         nodes.push({
           kind,
           rect: [
@@ -270,6 +290,15 @@ export class PixelUiBridge {
             element.dataset.active === "true" ||
             element.getAttribute("aria-selected") === "true",
           disabled: element instanceof HTMLButtonElement && element.disabled,
+          ...(regions
+            ? {
+                ...(regions.label
+                  ? { label_rect: regionRect(regions.label) }
+                  : {}),
+                control_rect: regionRect(regions.control),
+                disabled: regions.control.disabled,
+              }
+            : {}),
         });
       };
       if (root.id !== "game-ui")
@@ -365,7 +394,9 @@ export class PixelUiBridge {
           ".settings label",
         )) {
           const input = label.querySelector<HTMLInputElement>("input");
-          const text = label.childNodes[0]?.textContent ?? "";
+          const name = label.querySelector<HTMLElement>(".setting-name");
+          const text =
+            name?.textContent ?? label.childNodes[0]?.textContent ?? "";
           const rangeProgress = () => {
             const min = input!.min === "" ? 0 : Number(input!.min);
             const max = input!.max === "" ? 100 : Number(input!.max);
@@ -383,6 +414,7 @@ export class PixelUiBridge {
               input.type === "range" ? "slider" : "toggle",
               text,
               input.type === "range" ? rangeProgress() : input.checked ? 1 : 0,
+              { label: name, control: input },
             );
         }
         for (const rank of root.querySelectorAll<HTMLElement>(".rank-dots"))
