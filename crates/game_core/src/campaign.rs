@@ -161,6 +161,7 @@ impl CampaignProgress {
 #[derive(Clone, Debug, Serialize)]
 pub struct ChampionHud {
     pub index: usize,
+    pub discovered: bool,
     pub id: String,
     pub name: String,
     pub species: String,

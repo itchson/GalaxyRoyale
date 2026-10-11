@@ -228,7 +228,11 @@ pub(super) fn initialize(p: &mut Profile, legacy: bool) -> ([u32; 5], bool) {
         let state = &mut p.campaign.abilities[index];
         state.rank = state.rank.min(5);
         match def.blueprint {
-            abilities::Blueprint::Starter => state.blueprint = true,
+            abilities::Blueprint::Starter => {
+                // Anonymous legacy pilots retain the three existing defaults.
+                // A registered Kikai discovers other basics through real pickups.
+                state.blueprint |= p.identity.is_none() || state.rank > 0;
+            }
             abilities::Blueprint::Champion(i) => state.blueprint = p.campaign.patches[i],
             abilities::Blueprint::RoyalVictory => {
                 state.blueprint = p.campaign.victory_claimed;
@@ -434,6 +438,9 @@ impl Game {
         );
         self.profile.campaign.abilities[id as usize].rank = 1;
         self.progression_changed();
+        if self.additional_basic(id) {
+            self.onboarding_fact(identity::ADDITIONAL_CRAFTED);
+        }
         Ok(())
     }
     pub fn upgrade_ability(&mut self, key: &str) -> Result<(), String> {
@@ -461,6 +468,9 @@ impl Game {
             self.repulsor_timer = 0.0;
             self.shot_count = 0;
             self.progression_changed();
+        }
+        if id.is_some_and(|id| self.additional_basic(id)) {
+            self.onboarding_fact(identity::ADDITIONAL_EQUIPPED);
         }
         Ok(())
     }
@@ -503,6 +513,10 @@ impl Game {
         abilities::ABILITIES
             .iter()
             .enumerate()
+            .filter(|(i, _)| {
+                let state = self.profile.campaign.abilities[*i];
+                state.blueprint || state.rank > 0
+            })
             .map(|(i, def)| {
                 let id = i as u8;
                 let state = self.profile.campaign.abilities[i];

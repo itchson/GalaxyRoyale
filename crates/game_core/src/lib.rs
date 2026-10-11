@@ -27,6 +27,7 @@ mod diagnostic_death_tests;
 mod diagnostic_warp_tests;
 #[cfg(test)]
 mod held_thrust_tests;
+pub mod identity;
 #[cfg(test)]
 mod live_overlay_tests;
 #[cfg(test)]
@@ -81,12 +82,14 @@ pub struct Profile {
     pub quests: Vec<QuestProgress>,
     pub relics: Vec<String>,
     pub campaign: campaign::CampaignProgress,
+    pub identity: Option<identity::KikaiIdentity>,
+    pub onboarding: Option<identity::OnboardingProgress>,
 }
 
 impl Default for Profile {
     fn default() -> Self {
         Self {
-            schema_version: 4,
+            schema_version: 5,
             revision: 0,
             seed: 0x4752_4f59,
             currency: [0; 3],
@@ -101,6 +104,8 @@ impl Default for Profile {
             quests: Vec::new(),
             relics: Vec::new(),
             campaign: campaign::CampaignProgress::default(),
+            identity: None,
+            onboarding: None,
         }
     }
 }
@@ -173,6 +178,8 @@ pub struct Hud {
     pub ship_stats: ShipStatsHud,
     pub audio: AudioHud,
     pub navigation: NavigationHud,
+    pub identity: Option<identity::IdentityHud>,
+    pub onboarding: Option<identity::OnboardingHud>,
 }
 
 /// Current effective chassis, XP, hardware and equipped starter statistics.
@@ -574,7 +581,7 @@ pub struct Game {
 impl Game {
     pub fn new(mut profile: Profile) -> Self {
         let legacy = profile.schema_version < 4;
-        let migrated = profile.schema_version != 4;
+        let migrated = profile.schema_version != 5;
         if legacy {
             for rank in &mut profile.ranks {
                 *rank = (*rank).min(5);
@@ -590,6 +597,7 @@ impl Game {
         if profile.seed == 0 {
             profile.seed = 0x4752_4f59;
         }
+        let identity_changed = identity::sanitize(&mut profile);
         let archive_changed = sanitize_archive(&mut profile);
         let bosses_changed = bosses::sanitize_progress(&mut profile);
         let mut campaign_changed = profile.campaign.sanitize();
@@ -604,13 +612,19 @@ impl Game {
             campaign_changed = true;
         }
         let (material_loss, inventory_changed) = ship_progression::initialize(&mut profile, legacy);
-        profile.schema_version = 4;
-        if archive_changed || campaign_changed || bosses_changed || inventory_changed || migrated {
+        profile.schema_version = 5;
+        if archive_changed
+            || campaign_changed
+            || bosses_changed
+            || inventory_changed
+            || migrated
+            || identity_changed
+        {
             profile.revision = profile.revision.saturating_add(1);
         }
         let stats = Stats::from_profile(&profile);
         let mut world = World::new();
-        let ship = campaign::player_body(profile.campaign.selected_ship);
+        let ship = identity::player_body(&profile);
         let player_scale = campaign::player_scale(profile.campaign.selected_ship);
         let player = world.spawn((
             Motion::new(Vec2::ZERO, Vec2::ZERO, -FRAC_PI_2),
@@ -795,7 +809,7 @@ impl Game {
                 sources.push(LightSource {
                     position: (sum / count as f32).to_array(),
                     radius: 64.0,
-                    color: [0.2, 0.78, 1.0],
+                    color: identity::exhaust_light(&self.profile),
                     intensity: 0.15 + self.throttle.clamp(0.0, 1.0) * 0.75,
                 });
             }
@@ -1023,6 +1037,23 @@ impl Game {
             changed = true;
             self.event("discovery", self.position(), 0.65);
         }
+        // Champion contacts use the same real 320-unit approach as their HUD.
+        // Store the canonical site ID, so visiting does not create extra save keys.
+        for champion in &campaign::CHAMPIONS {
+            if let Some(site) = self
+                .nearby_sites
+                .iter()
+                .find(|site| site.grid == champion.grid)
+                && Vec2::from_array(site.position).distance_squared(self.position())
+                    <= 320.0 * 320.0
+                && self.profile.discoveries.len() < MAX_ARCHIVE
+                && !self.profile.discoveries.contains(&site.id)
+            {
+                self.profile.discoveries.push(site.id.clone());
+                changed = true;
+                self.event("discovery", self.position(), 0.65);
+            }
+        }
         if self.position().length_squared() <= DOCK_RADIUS * DOCK_RADIUS {
             for quest in &mut self.profile.quests {
                 if quest.event == "courier" && !quest.completed && quest.progress == 0 {
@@ -1200,6 +1231,9 @@ impl Game {
         self.enforce_asteroid_shields(false);
         self.confine_player();
         self.update_pickups(position, dt);
+        if self.position().length_squared() > SAFE_RADIUS * SAFE_RADIUS {
+            self.onboarding_fact(identity::DEPARTED);
+        }
         if self.position().length_squared() <= SAFE_RADIUS * SAFE_RADIUS
             && self
                 .world
@@ -1347,7 +1381,7 @@ impl Game {
                     transform.point(port),
                     -direction * (30.0 + 75.0 * self.throttle) + motion.velocity * 0.3,
                     0.28 + 0.14 * self.throttle,
-                    rgba(90, 230, 255, 230),
+                    identity::exhaust_color(&self.profile, 230),
                     1.3 + self.throttle * 0.6,
                     ParticleStyle::Exhaust,
                 );
@@ -2371,6 +2405,8 @@ impl Game {
                     });
                 if birth.source != AsteroidSource::HavenBelt {
                     self.award_xp(2);
+                } else {
+                    self.onboarding_fact(identity::BELT_DESTROYED);
                 }
                 if self.random() < 0.25 {
                     self.spawn_material_loot(position, birth.material_tier, 1);
@@ -2557,6 +2593,9 @@ impl Game {
                     loot.amount -= gained;
                 }
                 self.profile.campaign.cargo_materials[material_tier as usize - 1] += gained;
+                if material_tier == 1 {
+                    self.onboarding_fact(identity::T1_COLLECTED);
+                }
                 if self.position().length() > SAFE_RADIUS {
                     let run = self.run.get_or_insert_with(RunSummary::default);
                     run.materials_gained = run.materials_gained.saturating_add(gained);
@@ -2576,6 +2615,9 @@ impl Game {
             }
             if self.world.despawn(entity).is_ok() {
                 self.credit_points(category, amount);
+                if amount > 0 {
+                    self.discover_basic(category);
+                }
                 self.event("pickup", position, category as f32 / 2.0);
                 self.burst(position, 8, currency_color(category), 28.0);
             }
@@ -2744,8 +2786,13 @@ impl Game {
                     let [r, g, b, _] = c.to_le_bytes();
                     p.distance_squared(target) <= 36.0
                         && p.y > body.height as f32 * 0.1
-                        && b as f32 > r as f32 * 1.05
-                        && g as f32 > r as f32 * 1.05
+                        && if self.profile.campaign.selected_ship == 0
+                            && self.profile.identity.is_some()
+                        {
+                            *c == identity::EMITTER
+                        } else {
+                            b as f32 > r as f32 * 1.05 && g as f32 > r as f32 * 1.05
+                        }
                 })
                 .min_by(|a, b| {
                     a.0.distance_squared(target)
@@ -2957,7 +3004,7 @@ impl Game {
             actor.health = stats.hull;
             actor.max_health = stats.hull;
         }
-        let body = campaign::player_body(self.profile.campaign.selected_ship);
+        let body = identity::player_body(&self.profile);
         let scale = campaign::player_scale(self.profile.campaign.selected_ship);
         if let Ok(mut actor) = self.world.get::<&mut Actor>(self.player) {
             actor.scale = scale;
@@ -3229,6 +3276,8 @@ impl Game {
             },
             audio: self.audio_hud(),
             navigation: self.navigation_hud(),
+            identity: identity::hud(&self.profile),
+            onboarding: identity::onboarding_hud(&self.profile),
         }
     }
 
@@ -3326,7 +3375,14 @@ impl Game {
                 &self.dock_body,
                 station,
                 ACTOR_MATERIAL,
-                |cell, color| animate_station_cell(cell, color, self.cosmetic_time(), lights),
+                |cell, color| {
+                    animate_station_cell(
+                        cell,
+                        identity::dock_color(&self.profile, color),
+                        self.cosmetic_time(),
+                        lights.map(|c| identity::dock_color(&self.profile, c)),
+                    )
+                },
             );
         }
         for i in 0..96 {
@@ -3335,12 +3391,17 @@ impl Game {
             }
             let angle = i as f32 * TAU / 96.0;
             let pulse = (self.cosmetic_time() * 1.8 + i as f32 * 0.18).sin() * 0.5 + 0.5;
-            let color = rgba(
-                45,
-                110 + (pulse * 30.0) as u8,
-                145 + (pulse * 40.0) as u8,
-                if i % 4 == 0 { 165 } else { 70 },
-            );
+            let color = if let Some(corp) = identity::main_corporation(&self.profile) {
+                let [r, g, b] = corp.color();
+                rgba(r, g, b, if i % 4 == 0 { 165 } else { 70 })
+            } else {
+                rgba(
+                    45,
+                    110 + (pulse * 30.0) as u8,
+                    145 + (pulse * 40.0) as u8,
+                    if i % 4 == 0 { 165 } else { 70 },
+                )
+            };
             frame.push_pixel(
                 forward(angle) * SAFE_RADIUS,
                 if i % 4 == 0 { 2.0 } else { 1.0 },
@@ -3349,6 +3410,14 @@ impl Game {
         }
         dock_facilities::render(
             frame,
+            Vec2::from_array(self.render_camera(alpha)),
+            self.viewport,
+            self.cosmetic_time(),
+            identity::main_corporation(&self.profile),
+        );
+        identity::render_crest(
+            frame,
+            &self.profile,
             Vec2::from_array(self.render_camera(alpha)),
             self.viewport,
             self.cosmetic_time(),
@@ -3447,10 +3516,8 @@ impl Game {
                             (0..3).map(|i| {
                                 (
                                     Vec2::new(0.0, i as f32 * 0.8),
-                                    rgba(
-                                        120,
-                                        225,
-                                        255,
+                                    identity::jet_glow_color(
+                                        &self.profile,
                                         ((0.65 + glow * 0.35) * 230.0 * self.throttle
                                             / (1.0 + i as f32 * 0.5))
                                             as u8,
@@ -4544,7 +4611,7 @@ mod tests {
         )
         .unwrap();
         let g = Game::new(old);
-        assert_eq!(g.profile.schema_version, 4);
+        assert_eq!(g.profile.schema_version, 5);
         assert_eq!(g.profile.revision, 10);
         assert_eq!(g.profile.currency, [7, 8, 9]);
         assert_eq!(g.profile.ranks[2], 3);

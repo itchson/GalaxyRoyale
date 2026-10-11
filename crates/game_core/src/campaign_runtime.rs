@@ -42,15 +42,20 @@ impl Game {
     }
     pub(super) fn bank_cargo(&mut self) {
         let mut changed = false;
+        let mut tier_one_banked = false;
         for tier in 0..5 {
             let amount = self.profile.campaign.cargo_materials[tier];
             let banked = amount.min(u32::MAX - self.profile.campaign.stored_materials[tier]);
             self.profile.campaign.stored_materials[tier] += banked;
             self.profile.campaign.cargo_materials[tier] -= banked;
             changed |= banked > 0;
+            tier_one_banked |= tier == 0 && banked > 0;
         }
         if changed {
             self.changed();
+        }
+        if tier_one_banked && self.arena.is_none() && self.position().length() <= SAFE_RADIUS {
+            self.onboarding_fact(identity::T1_BANKED);
         }
     }
     pub(super) fn award_xp(&mut self, amount: u32) {
@@ -260,10 +265,9 @@ impl Game {
             actor.health = stats.hull;
             actor.max_health = stats.hull;
         }
-        let _ = self.world.insert_one(
-            self.player,
-            campaign::player_body(self.profile.campaign.selected_ship),
-        );
+        let _ = self
+            .world
+            .insert_one(self.player, identity::player_body(&self.profile));
         self.shield = stats.shield;
         self.invulnerability = 0.8;
         self.fire_timer = 0.0;
@@ -663,20 +667,33 @@ impl Game {
         let champions: Vec<_> = CHAMPIONS
             .iter()
             .enumerate()
-            .map(|(index, c)| ChampionHud {
-                index,
-                id: format!("champion-{index}"),
-                name: c.name.into(),
-                species: c.species.into(),
-                ship: c.ship.into(),
-                ability: c.ability.into(),
-                silhouette: c.silhouette.into(),
-                family: c.family,
-                category: c.category,
-                position: campaign::arena(self.profile.seed, index).unwrap().position,
-                patch: p.patches[index],
-                blueprint: p.blueprints[index],
-                crafted: p.crafted[index],
+            .map(|(index, c)| {
+                let site = campaign::arena(self.profile.seed, index).unwrap();
+                let discovered = p.patches[index]
+                    || p.blueprints[index]
+                    || p.crafted[index]
+                    || self.profile.discoveries.contains(&site.id);
+                ChampionHud {
+                    index,
+                    discovered,
+                    id: format!("champion-{index}"),
+                    name: if discovered {
+                        c.name
+                    } else {
+                        "Unknown champion"
+                    }
+                    .into(),
+                    species: if discovered { c.species } else { "" }.into(),
+                    ship: if discovered { c.ship } else { "" }.into(),
+                    ability: if discovered { c.ability } else { "" }.into(),
+                    silhouette: if discovered { c.silhouette } else { "" }.into(),
+                    family: c.family,
+                    category: c.category,
+                    position: site.position,
+                    patch: p.patches[index],
+                    blueprint: p.blueprints[index],
+                    crafted: p.crafted[index],
+                }
             })
             .collect();
         let arena = champions
@@ -724,8 +741,22 @@ impl Game {
         ];
         let mut ships = vec![ShipHud {
             id: 0,
-            name: "Haven Scout".into(),
-            ability: "Standard pulse drive".into(),
+            name: self
+                .profile
+                .identity
+                .as_ref()
+                .map_or("Haven Scout", |id| id.corporation.starter_name())
+                .into(),
+            ability: self
+                .profile
+                .identity
+                .as_ref()
+                .map_or("Standard pulse drive", |id| {
+                    crate::abilities::get(id.corporation.ability())
+                        .unwrap()
+                        .description
+                })
+                .into(),
             owned: true,
             selected: p.selected_ship == 0,
             category: 0,
@@ -733,6 +764,15 @@ impl Game {
             ..ShipHud::default()
         }];
         for (i, c) in CHAMPIONS.iter().enumerate() {
+            if !p.blueprints[i]
+                && !p.crafted[i]
+                && !self
+                    .profile
+                    .discoveries
+                    .contains(&campaign::arena(self.profile.seed, i).unwrap().id)
+            {
+                continue;
+            }
             ships.push(ShipHud {
                 id: (i + 1) as u8,
                 name: c.ship.into(),
@@ -753,17 +793,20 @@ impl Game {
                 ..ShipHud::default()
             });
         }
-        ships.push(ShipHud {
-            id: 9,
-            name: "Royale Sovereign".into(),
-            ability: "Three equipped rank-5 royal bundles; enhanced chassis; independent ship XP"
-                .into(),
-            owned: p.victory_claimed,
-            selected: p.selected_ship == 9,
-            category: 0,
-            craftable: false,
-            ..ShipHud::default()
-        });
+        if p.victory_claimed {
+            ships.push(ShipHud {
+                id: 9,
+                name: "Royale Sovereign".into(),
+                ability:
+                    "Three equipped rank-5 royal bundles; enhanced chassis; independent ship XP"
+                        .into(),
+                owned: p.victory_claimed,
+                selected: p.selected_ship == 9,
+                category: 0,
+                craftable: false,
+                ..ShipHud::default()
+            });
+        }
         for ship in &mut ships {
             self.ship_hud_details(ship);
         }
@@ -1237,7 +1280,7 @@ mod tests {
         )
         .unwrap();
         let g = Game::new(legacy);
-        assert_eq!(g.profile.schema_version, 4);
+        assert_eq!(g.profile.schema_version, 5);
         assert_eq!(g.profile.currency, [7, 8, 9]);
         assert_eq!(g.profile.ranks[..6], [5, 4, 3, 2, 1, 0]);
     }

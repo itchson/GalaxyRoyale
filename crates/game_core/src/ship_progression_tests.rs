@@ -28,11 +28,11 @@ fn json(g: &Game) -> serde_json::Value {
 fn fresh_hull_is_level_one_with_empty_three_slots_and_six_unpurchased_hardware_rows() {
     let mut g = Game::new(Profile::default());
     let h = g.hud();
-    assert_eq!(g.profile.schema_version, 4);
+    assert_eq!(g.profile.schema_version, 5);
     assert_eq!(h.ship_level, 1);
     assert_eq!(h.ship_xp, 0);
     assert_eq!(h.upgrades.len(), 6);
-    assert_eq!(h.abilities.len(), 17);
+    assert_eq!(h.abilities.len(), 3);
     assert!(h.loadout.iter().all(Option::is_none));
     assert!(
         g.profile
@@ -504,12 +504,25 @@ fn shared_typescript_migration_fixtures_match_actual_constructor_fields_and_loss
         let g = Game::new(input);
         let mut actual = json(&g);
         let mut expected = case["expected"].clone();
+        expected["schema_version"] = 5.into();
+        // The older shared schema-4 fixtures omit the two new nullable fields.
+        // New schema-5 identity fixtures keep their actual expected values.
+        expected
+            .as_object_mut()
+            .unwrap()
+            .entry("identity")
+            .or_insert(serde_json::Value::Null);
+        expected
+            .as_object_mut()
+            .unwrap()
+            .entry("onboarding")
+            .or_insert(serde_json::Value::Null);
         actual.as_object_mut().unwrap().remove("revision");
         expected.as_object_mut().unwrap().remove("revision");
         assert_eq!(actual, expected, "{}", case["name"]);
         assert_eq!(
             g.profile.revision,
-            before_revision + u64::from(version < 4 || has_cargo),
+            before_revision + u64::from(version < 5 || has_cargo),
             "{}",
             case["name"]
         );

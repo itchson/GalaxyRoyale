@@ -215,8 +215,15 @@ pub(super) fn at(player: Vec2, point: Vec2, home_radius: f32) -> Option<u8> {
         .map(|id| id as u8)
 }
 
-fn color(id: usize, cell: Vec2, shade: u32, time: f32) -> u32 {
+fn color(
+    id: usize,
+    cell: Vec2,
+    shade: u32,
+    time: f32,
+    theme: Option<crate::identity::Corporation>,
+) -> u32 {
     let accent = ACCENTS[id];
+    let corporate = theme.map_or(accent, crate::identity::Corporation::color);
     // Signal waves are object-local: conveyor traces, shuttle beacons and score
     // arcs change their lit cells while all roof/deck geometry remains stationary.
     let pulse = if shade == 4 || shade == 5 || shade == 12 {
@@ -234,20 +241,27 @@ fn color(id: usize, cell: Vec2, shade: u32, time: f32) -> u32 {
         1 => ([41, 57, 67], 255),
         2 => (accent.map(|c| (c as f32 * 0.67) as u8), 255),
         3 => (accent.map(|c| (c as f32 * 0.92) as u8), 255),
-        4 | 5 => (accent.map(|c| (c as f32 * pulse) as u8), 255),
+        4 => (accent.map(|c| (c as f32 * pulse) as u8), 255),
+        5 => (corporate.map(|c| (c as f32 * pulse) as u8), 255),
         6 => ([56, 76, 87], 255),
         7 => ([25, 37, 47], 255),
         8 => ([129, 156, 162], 255),
         9 => ([17, 27, 35], 255),
         10 => ([31, 43, 52], 255),
         11 => ([190, 173, 137], 255),
-        _ => (accent.map(|c| (c as f32 * pulse * 0.55) as u8), 255),
+        _ => (corporate.map(|c| (c as f32 * pulse * 0.55) as u8), 255),
     };
     u32::from_le_bytes([rgb[0], rgb[1], rgb[2], alpha])
 }
 
 /// Uses the actual interpolated unshaken extraction camera and frozen cosmetic time.
-pub(super) fn render(frame: &mut FrameBuilder, camera: Vec2, viewport: Vec2, time: f32) {
+pub(super) fn render(
+    frame: &mut FrameBuilder,
+    camera: Vec2,
+    viewport: Vec2,
+    time: f32,
+    theme: Option<crate::identity::Corporation>,
+) {
     if !camera.is_finite()
         || !viewport.is_finite()
         || viewport.min_element() <= 0.0
@@ -272,7 +286,7 @@ pub(super) fn render(frame: &mut FrameBuilder, camera: Vec2, viewport: Vec2, tim
                 light_response: 0.35,
                 emission: 0.0,
             },
-            |cell, shade| color(id, cell, shade, time),
+            |cell, shade| color(id, cell, shade, time, theme),
         );
         frame.push_body_colored_material(
             &ART.buildings[id],
@@ -285,7 +299,7 @@ pub(super) fn render(frame: &mut FrameBuilder, camera: Vec2, viewport: Vec2, tim
                 light_response: 0.75,
                 emission: 0.0,
             },
-            |cell, shade| color(id, cell, shade, time),
+            |cell, shade| color(id, cell, shade, time, theme),
         );
     }
 }
@@ -401,7 +415,7 @@ mod tests {
             }
         }
         let mut builder = FrameBuilder::new();
-        render(&mut builder, Vec2::ZERO, Vec2::new(533.0, 300.0), 0.0);
+        render(&mut builder, Vec2::ZERO, Vec2::new(533.0, 300.0), 0.0, None);
         let frame = builder.finish();
         let transforms: Vec<_> = frame
             .batches
@@ -423,7 +437,7 @@ mod tests {
     fn extraction_is_bounded_culled_local_and_cosmetic_time_freezes_it() {
         let draw = |time, camera| {
             let mut f = FrameBuilder::new();
-            render(&mut f, camera, Vec2::new(533.0, 300.0), time);
+            render(&mut f, camera, Vec2::new(533.0, 300.0), time, None);
             f.finish()
         };
         let a = draw(0.0, Vec2::ZERO);
@@ -453,7 +467,7 @@ mod tests {
         }
         assert_eq!(draw(0.0, Vec2::splat(999000.0)).pixel_count, 0);
         let mut invalid = FrameBuilder::new();
-        render(&mut invalid, Vec2::ZERO, Vec2::splat(0.0), 0.0);
+        render(&mut invalid, Vec2::ZERO, Vec2::splat(0.0), 0.0, None);
         assert_eq!(invalid.frame().pixel_count, 0);
     }
     #[test]
@@ -464,7 +478,7 @@ mod tests {
         let rng = game.rng;
         let expected = {
             let mut f = FrameBuilder::new();
-            render(&mut f, Vec2::ZERO, game.viewport, 0.0);
+            render(&mut f, Vec2::ZERO, game.viewport, 0.0, None);
             packets(f.frame())
         };
         for time in [0.0, 1.0, 50.0] {
