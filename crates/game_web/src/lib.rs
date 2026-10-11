@@ -6,6 +6,7 @@ mod browser;
 mod champion_patches;
 pub mod co_op_bridge;
 pub mod co_op_replica_bridge;
+pub mod co_op_art;
 pub mod dock_art;
 pub mod flight_icons;
 pub mod kikai_art;
