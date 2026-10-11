@@ -114,6 +114,9 @@ class Context {
       n[field] = new Param();
     return n;
   }
+  createWaveShaper() {
+    return new Node(this, "ceiling");
+  }
   createBuffer(channels, length, sampleRate) {
     assert.equal(channels, 1);
     assert.equal(sampleRate, this.sampleRate);
@@ -227,7 +230,7 @@ test("pulse is one dry voice with falling tones and original bandpass noise", as
   assert.equal(voice.sources.length, 3);
   assert.equal(voice.pending, 3);
   assert.equal(sfx(engine).length, 1);
-  assert(Math.abs(voice.gain.gain.value - (0.75 + 0.25 / 6)) < 1e-12);
+  assert(Math.abs(voice.gain.gain.value - (0.75 + 0.25 / 6) * 0.85) < 1e-12);
   isDrySfx(engine, voice);
   assert.deepEqual(
     voice.sources
@@ -718,4 +721,339 @@ test("a late resume state event preserves only the bounded death tail and obeys 
   assert.equal(engine.voices.size, 0);
   assert.equal(timers.timeouts.size, 0);
   engine.dispose();
+});
+
+test("thrust uses a quiet warm sine/triangle bed with one shared lowpass and duck stage", async () => {
+  const { engine, context, timers } = await fixture();
+  engine.update(dynamic({ throttle: 1, speed: 1, engines: 2 }));
+  for (let i = 0; i < 80; i++) stepAudio(context, timers);
+  const voice = engine.engineVoice;
+  assert(voice && !voice.released);
+  assert.deepEqual(
+    voice.sources.slice(0, 2).map((s) => s.type),
+    ["sine", "triangle"],
+  );
+  const gains = voice.sources.map((s) => [...s.connections][0]);
+  assert.deepEqual(
+    gains.map((n) => n.gain.value),
+    [0.055, 0.025, 0.02],
+  );
+  assert(gains.every((n) => [...n.connections][0] === engine.engineFilter));
+  assert.equal(engine.engineFilter.type, "lowpass");
+  assert.equal(engine.engineFilter.Q.value, 0.55);
+  assert.equal(engine.engineFilter.frequency.value, 860);
+  assert.deepEqual(
+    [...engine.engineFilter.connections],
+    [engine.engineDuckGain],
+  );
+  assert.deepEqual([...engine.engineDuckGain.connections], [voice.gain]);
+  assert.deepEqual([...voice.gain.connections], [engine.sfx]);
+  assert(voice.gain.gain.value > 0.319 && voice.gain.gain.value <= 0.32);
+  assert.equal(voice.sources[0].frequency.value, 90);
+  assert.equal(voice.sources[1].frequency.value, 90 * 1.985);
+  assert(voice.sources.every((s) => s.starts.length === 1));
+  engine.dispose();
+});
+
+test("throttle and speed retarget smooth continuous parameters without restarting the engine", async () => {
+  const { engine, context, timers } = await fixture();
+  engine.update(dynamic({ throttle: 0.2, speed: 0.1, engines: 2 }));
+  stepAudio(context, timers, 0.1);
+  const voice = engine.engineVoice;
+  engine.update(dynamic({ throttle: 1, speed: 0.9, engines: 2 }));
+  stepAudio(context, timers);
+  assert.equal(engine.engineVoice, voice);
+  assert.equal(voice.gain.gain.events.at(-1).kind, "target");
+  assert.equal(voice.gain.gain.events.at(-1).extra, 0.09);
+  for (const source of engine.engineOscillators) {
+    assert.equal(source.frequency.events.at(-1).kind, "target");
+    assert.equal(source.frequency.events.at(-1).extra, 0.14);
+    assert.equal(source.starts.length, 1);
+  }
+  assert.equal(engine.engineFilter.frequency.events.at(-1).extra, 0.18);
+  const before = voice.gain.gain.value;
+  engine.update(dynamic({ engines: 2 }));
+  stepAudio(context, timers, 0.025);
+  assert(voice.gain.gain.value > 0 && voice.gain.gain.value < before);
+  for (let i = 0; i < 100; i++) stepAudio(context, timers);
+  assert(voice.released && engine.engineVoice === null);
+  assert(voice.nodes.every((n) => n.disconnects === 1));
+  engine.dispose();
+});
+
+test("only admitted important cues briefly duck propulsion without pumping music", async () => {
+  const { engine, context, timers } = await fixture();
+  engine.setLevels(0.8, 0.45, 0.7);
+  engine.update(dynamic({ throttle: 1, speed: 0.5, engines: 2 }));
+  stepAudio(context, timers, 0.1);
+  const voice = engine.engineVoice;
+  const musicAutomation = engine.music.gain.events.length;
+  for (let i = 0; i < 30; i++) {
+    engine.play(cue("shot"));
+    engine.play(cue("hit", 0.25));
+  }
+  assert.equal(engine.engineDuckGain.gain.value, 1);
+  engine.play(cue("unknown"));
+  assert.equal(engine.diagnostics().engineDuck, 1);
+  engine.play(cue("hit", 0.9));
+  assert.equal(engine.diagnostics().engineDuck, 0.35);
+  assert.equal(engine.engineDuckGain.gain.events.at(-1).extra, 0.015);
+  const heldUntil = engine.engineDuckUntil;
+  stepAudio(context, timers, 0.1);
+  assert.equal(engine.engineVoice, voice);
+  assert.equal(engine.engineDuckGain.gain.value, 0.35);
+  while (context.currentTime <= heldUntil + 0.025) stepAudio(context, timers);
+  assert.equal(engine.engineDuckGain.gain.value, 1);
+  assert.equal(engine.engineDuckGain.gain.events.at(-1).extra, 0.22);
+  assert.equal(engine.music.gain.events.length, musicAutomation);
+  assert.equal(engine.music.gain.value, 0.45);
+  assert(engine.diagnostics().voices.sfx <= 16);
+  engine.dispose();
+});
+
+test("low-hull priority and strongest cue holds fade away after actual healing", async () => {
+  const { engine, context, timers } = await fixture();
+  engine.update(dynamic({ hull: 0.08, throttle: 1, engines: 2 }));
+  for (let i = 0; i < 100; i++) stepAudio(context, timers);
+  assert(
+    engine.diagnostics().engineDuck >= 0.6 &&
+      engine.diagnostics().engineDuck < 0.601,
+  );
+  engine.play(cue("shield"));
+  const shieldTarget = engine.diagnostics().engineDuck;
+  engine.play(cue("mote-charge"));
+  assert.equal(engine.diagnostics().engineDuck, shieldTarget);
+  assert(shieldTarget >= 0.21 && shieldTarget < 0.211);
+  engine.update(dynamic({ hull: 0.8, throttle: 1, engines: 2 }));
+  for (let i = 0; i < 160; i++) stepAudio(context, timers);
+  assert.equal(engine.alarmVoice, null);
+  assert(engine.diagnostics().engineDuck > 0.999);
+  assert.equal(engine.engineDuckDepth, 1);
+  engine.dispose();
+});
+
+test("hidden stop, retry and death cleanup cannot carry a propulsion duck into the next life", async () => {
+  const { engine, context, timers } = await fixture();
+  engine.update(dynamic({ throttle: 1, engines: 2 }));
+  stepAudio(context, timers, 0.1);
+  const old = engine.engineVoice;
+  engine.play(cue("explosion"));
+  assert(engine.engineDuckUntil > context.currentTime);
+  engine.suspend();
+  assert(old.released && old.nodes.every((n) => n.disconnects === 1));
+  assert.equal(engine.engineDuckGain, null);
+  assert.equal(engine.engineDuckUntil, 0);
+  assert.equal(engine.diagnostics().engineDuck, 1);
+  await engine.resume();
+  stepAudio(context, timers, 0.1);
+  assert.equal(engine.engineDuckGain.gain.value, 1);
+  assert.equal(engine.diagnostics().voices.continuous, 1);
+  engine.play(cue("death"));
+  engine.finishDeath();
+  assert.equal(engine.engineVoice, null);
+  assert.equal(engine.engineDuckGain, null);
+  assert.equal(engine.engineDuckUntil, 0);
+  engine.dispose();
+  assert.equal(engine.voices.size, 0);
+});
+
+// Sum recorded source envelope maxima along the real graph, ignoring filters,
+// phase cancellation and compressor dynamics. This is scalar gain evidence,
+// not a sample-peak, RMS or audibility measurement.
+function envelopeSum(voice) {
+  const paramPeak = (p) => Math.max(p.value, ...p.events.map((e) => e.value));
+  const pathGain = (node) => {
+    if (node === voice.gain) return paramPeak(node.gain);
+    const next = [...node.connections][0];
+    assert(next, "every live source reaches its real voice bus");
+    return (node.kind === "gain" ? paramPeak(node.gain) : 1) * pathGain(next);
+  };
+  return voice.sources.reduce((sum, source) => {
+    const peak = source.kind === "buffer" ? 0.7 : 1;
+    return sum + peak * pathGain(source);
+  }, 0);
+}
+test("real gain envelopes leave a quieter engine bed and finite bounded stacked mix", async (t) => {
+  const { engine, context, timers } = await fixture();
+  engine.update(dynamic({ throttle: 1, speed: 1, engines: 2 }));
+  for (let i = 0; i < 80; i++) stepAudio(context, timers);
+  const engineEnvelope = envelopeSum(engine.engineVoice);
+  const previousEngineEnvelope = 0.42 * (0.08 + 0.055 + 0.045 * 0.7);
+  assert(engineEnvelope <= 0.030080001);
+  assert(engineEnvelope / previousEngineEnvelope < 0.431);
+  let maximumCue = { kind: "", envelope: 0 };
+  for (const kind of [
+    "mote-charge",
+    "mote-pulse",
+    "shot",
+    "hit",
+    "player-hit",
+    "explosion",
+    "death",
+    "pickup",
+    "boss",
+    "boss-charge",
+    "shield",
+    "upgrade",
+    "dock",
+    "discovery",
+    "champion",
+    "royale-round",
+    "credits",
+    "ability-echo",
+    "ability-nova",
+    "ability-wake",
+    "ability-royal",
+    "ability-repair",
+    ...[6, 7, 8, 9, 12, 13].map((i) => `ability-signature-${i}`),
+  ]) {
+    const voice = play(engine, kind);
+    const value = envelopeSum(voice);
+    assert(
+      Number.isFinite(value) && value > 0 && value <= 0.55,
+      `${kind}: ${value}`,
+    );
+    if (value > maximumCue.envelope) maximumCue = { kind, envelope: value };
+    context.advance(1);
+  }
+  for (let i = 0; i < 16; i++) play(engine, "death");
+  const stackedEffects = sfx(engine).reduce(
+    (total, v) => total + envelopeSum(v),
+    0,
+  );
+  assert.equal(sfx(engine).length, 16);
+  assert(stackedEffects <= maximumCue.envelope * 16 + 1e-8);
+  const limiter = engine.graph.find((n) => n.kind === "limiter");
+  assert.equal(limiter.threshold.value, -12);
+  assert.equal(limiter.ratio.value, 12);
+  assert.equal(limiter.attack.value, 0.003);
+  assert.equal(limiter.release.value, 0.18);
+  t.diagnostic(
+    JSON.stringify({
+      engineEnvelope,
+      previousEngineEnvelope,
+      scalarChangeDb: 20 * Math.log10(engineEnvelope / previousEngineEnvelope),
+      maximumCue,
+      stackedEffects,
+      defaultBusScalar: stackedEffects * 0.75 * 0.75,
+    }),
+  );
+  engine.dispose();
+});
+
+test("combined adaptive score, alarm, propulsion and real cues retain finite bus gains and voice limits", async (t) => {
+  const { engine, context, timers } = await fixture();
+  engine.setLevels(0.75, 0.4, 0.75);
+  let musicEnvelope = 0,
+    effectsEnvelope = 0,
+    combinedEnvelope = 0;
+  let maximumMusicVoices = 0,
+    maximumSfxVoices = 0;
+  const kinds = [
+    "shot",
+    "shield",
+    "player-hit",
+    "mote-charge",
+    "ability-echo",
+    "ability-nova",
+    "explosion",
+  ];
+  for (let i = 0; i < 960; i++) {
+    engine.update(
+      dynamic({
+        area: "arena",
+        champion: Math.floor(i / 120),
+        hull: 0.08,
+        combat: 1,
+        hostiles: 12,
+        throttle: 1,
+        speed: 1,
+        engines: 2,
+      }),
+    );
+    stepAudio(context, timers);
+    if (i % 12 === 0)
+      engine.play(cue(kinds[Math.floor(i / 12) % kinds.length]));
+    let music = 0,
+      effects = 0;
+    for (const voice of engine.voices) {
+      const value = envelopeSum(voice);
+      assert(Number.isFinite(value));
+      if (voice.lane === "music") music += value;
+      else effects += value;
+    }
+    const d = engine.diagnostics();
+    assert(
+      d.voices.music <= 32 && d.voices.sfx <= 16 && d.voices.continuous === 2,
+    );
+    maximumMusicVoices = Math.max(maximumMusicVoices, d.voices.music);
+    maximumSfxVoices = Math.max(maximumSfxVoices, d.voices.sfx);
+    musicEnvelope = Math.max(musicEnvelope, music);
+    effectsEnvelope = Math.max(effectsEnvelope, effects);
+    combinedEnvelope = Math.max(
+      combinedEnvelope,
+      0.75 * (0.4 * music + 0.75 * effects),
+    );
+  }
+  // Account separately for music's unchanged .12 wet/.16 feedback scalar.
+  const conservativeEchoEnvelope =
+    0.75 *
+    (0.4 * musicEnvelope * (1 + 0.12 / (1 - 0.16)) + 0.75 * effectsEnvelope);
+  assert(
+    Number.isFinite(conservativeEchoEnvelope) &&
+      conservativeEchoEnvelope > combinedEnvelope,
+  );
+  t.diagnostic(
+    JSON.stringify({
+      samples: 960,
+      seconds: 24,
+      maximumMusicVoices,
+      maximumSfxVoices,
+      musicEnvelope,
+      effectsEnvelope,
+      combinedEnvelope,
+      conservativeEchoEnvelope,
+      scope: "recorded graph envelope sums; no DSP peak/RMS",
+    }),
+  );
+  engine.dispose();
+});
+
+test("all real buses reach one final bounded soft ceiling after compression", async () => {
+  const { engine, context } = await fixture();
+  const limiter = engine.graph.find((n) => n.kind === "limiter");
+  const ceiling = engine.graph.find((n) => n.kind === "ceiling");
+  assert(ceiling);
+  assert.equal(engine.graph.filter((n) => n.kind === "ceiling").length, 1);
+  assert.deepEqual([...engine.master.connections], [limiter]);
+  assert.deepEqual([...limiter.connections], [ceiling]);
+  assert.deepEqual([...ceiling.connections], [context.destination]);
+  assert.equal(ceiling.oversample, "none");
+  assert(ceiling.curve instanceof Float32Array);
+  assert.equal(ceiling.curve.length, 4097);
+  let previous = -Infinity;
+  for (let i = 0; i < ceiling.curve.length; i++) {
+    const input = (i / 4096) * 2 - 1,
+      output = ceiling.curve[i];
+    assert(Number.isFinite(output) && Math.abs(output) < 0.915);
+    assert(output >= previous);
+    assert(Math.abs(output + ceiling.curve[4096 - i]) < 1e-7);
+    if (Math.abs(input) <= 0.78) assert(Math.abs(output - input) < 1e-7);
+    else assert(Math.abs(output) <= Math.abs(input) + 1e-7);
+    previous = output;
+  }
+  engine.setLevels(1, 1, 1);
+  for (let i = 0; i < 100; i++) engine.play(cue("death"));
+  assert.equal(sfx(engine).length, 16);
+  assert.deepEqual([...engine.sfx.connections], [engine.master]);
+  engine.suspend();
+  await engine.resume();
+  assert.equal(
+    engine.graph.find((n) => n.kind === "ceiling"),
+    ceiling,
+  );
+  assert.equal(context.nodes.filter((n) => n.kind === "ceiling").length, 1);
+  engine.dispose();
+  assert.equal(ceiling.disconnects, 1);
+  assert.equal(ceiling.connections.size, 0);
 });
