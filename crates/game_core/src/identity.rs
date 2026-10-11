@@ -59,9 +59,9 @@ impl Corporation {
     }
     pub fn starter_name(self) -> &'static str {
         match self {
-            Self::Pan => "PAN Pathfinder",
-            Self::Renko => "RENKO Lancer",
-            Self::Hugo => "HUGO Bulwark",
+            Self::Pan => "PAN HIKARI",
+            Self::Renko => "RENKO HIBANA",
+            Self::Hugo => "HUGO MAMORI",
         }
     }
     pub fn ability(self) -> u8 {
@@ -86,11 +86,31 @@ pub struct KikaiIdentity {
     pub sub_corporation: Corporation,
     pub hex_id: String,
 }
-#[derive(Clone, Debug, Default, Serialize, Deserialize, PartialEq, Eq)]
+#[derive(Clone, Debug, Serialize, Deserialize, PartialEq, Eq)]
 #[serde(default)]
 pub struct OnboardingProgress {
+    #[serde(default = "legacy_onboarding_version")]
+    pub version: u8,
     pub stage: u8,
     pub flags: u8,
+    pub asteroids_destroyed: u8,
+    pub materials_collected: u8,
+    pub legacy_complete: bool,
+}
+fn legacy_onboarding_version() -> u8 {
+    1
+}
+impl Default for OnboardingProgress {
+    fn default() -> Self {
+        Self {
+            version: 2,
+            stage: 0,
+            flags: 0,
+            asteroids_destroyed: 0,
+            materials_collected: 0,
+            legacy_complete: false,
+        }
+    }
 }
 #[derive(Clone, Debug, Serialize)]
 pub struct IdentityHud {
@@ -115,6 +135,20 @@ pub struct OnboardingHud {
     pub title: String,
     pub description: String,
     pub completed: bool,
+    pub version: u8,
+    pub asteroids_destroyed: u8,
+    pub materials_collected: u8,
+    pub target: u8,
+    pub material_id: String,
+    pub material_name: String,
+    pub asteroid_name: String,
+    pub starter_id: String,
+    pub starter_name: String,
+    pub starter_slot: String,
+    pub carried_matching: u32,
+    pub banked_matching: u32,
+    pub can_upgrade: bool,
+    pub upgrade_reason: String,
 }
 pub(super) const LICENSE: u8 = 1;
 pub(super) const DEPARTED: u8 = 2;
@@ -215,10 +249,7 @@ pub(super) fn sanitize(profile: &mut Profile) -> bool {
     if profile.identity.is_none() {
         profile.onboarding = None;
     }
-    if let Some(progress) = &mut profile.onboarding {
-        progress.flags &= 127;
-        progress.stage = stage(progress.flags);
-    }
+    crate::training::sanitize_progress(profile);
     (profile.identity.clone(), profile.onboarding.clone()) != before
 }
 pub fn hud(profile: &Profile) -> Option<IdentityHud> {
@@ -252,7 +283,7 @@ pub fn hud(profile: &Profile) -> Option<IdentityHud> {
         starter_ship: corp.starter_name().into(),
         starter_ability: abilities::get(corp.ability()).unwrap().name.into(),
         license: format!(
-            "{} flight license: {} systems. Your {} includes an equipped rank 1 {}. Keep collected points; bank carried materials physically at Haven before death or abandonment.",
+            "{} flight license: {} systems. Your {} RAICHO includes an equipped rank 1 {}. Keep collected points; bank carried materials physically at Haven before death or abandonment.",
             corp.name(),
             corp.role().to_lowercase(),
             corp.starter_name(),
@@ -260,8 +291,12 @@ pub fn hud(profile: &Profile) -> Option<IdentityHud> {
         ),
     })
 }
-pub fn onboarding_hud(profile: &Profile) -> Option<OnboardingHud> {
+pub fn onboarding_hud(game: &Game) -> Option<OnboardingHud> {
+    let profile = &game.profile;
     let p = profile.onboarding.as_ref()?;
+    let corp = profile.identity.as_ref()?.corporation;
+    let material = crate::training::material_for_corporation(corp);
+    let def = abilities::get(corp.ability()).unwrap();
     let (title, description) = [
         (
             "Accept your flight license",
@@ -272,20 +307,20 @@ pub fn onboarding_hud(profile: &Profile) -> Option<OnboardingHud> {
             "Fly beyond Haven's protected 240-unit radius. The dock shield keeps asteroids outside.",
         ),
         (
-            "Break the tutorial belt",
-            "Destroy an asteroid born in Haven's 700–1400-unit belt. Its random points and tier 1 materials teach crafting; it awards no ship XP.",
+            "Destroy 10 asteroids",
+            "Destroy ten real asteroids of any variety. Haven's tutorial belt awards no ship XP; outer asteroids retain their normal rewards.",
         ),
         (
-            "Collect tier 1 material",
-            "Pick up a real tier 1 crafting material. Carried materials are lost on death or abandonment.",
+            "Collect 10 matching materials",
+            "After the asteroid mission, collect ten matching named tier 1 materials from your assigned asteroid variety. They share the existing cargo space and are lost on death or abandonment.",
         ),
         (
             "Bank at Haven",
-            "Return physically to Haven with tier 1 cargo. Only material actually transferred into storage completes this step.",
+            "Return physically to Haven and bank ten matching materials. If cargo was lost or spent, collect enough replacements; reload never banks cargo.",
         ),
         (
-            "Craft and equip another basic",
-            "Collect a matching category point to discover another basic blueprint. At Haven, craft it for 3 matching points and 2 stored tier 1 materials, then equip it in its matching slot.",
+            "Upgrade your equipped starter",
+            "At Haven, equip your corporation's original starter ability on its starter ship, then install its first upgrade using ten banked matching materials. This one-time training recipe works at ship level 1.",
         ),
         (
             "Flight license complete",
@@ -298,6 +333,23 @@ pub fn onboarding_hud(profile: &Profile) -> Option<OnboardingHud> {
         title: title.into(),
         description: description.into(),
         completed: p.stage == 6,
+        version: p.version,
+        asteroids_destroyed: p.asteroids_destroyed,
+        materials_collected: p.materials_collected,
+        target: 10,
+        material_id: material.id.into(),
+        material_name: material.name.into(),
+        asteroid_name: material.asteroid.into(),
+        starter_id: def.key.into(),
+        starter_name: def.name.into(),
+        starter_slot: ["offense", "defense", "passive"][def.category].into(),
+        carried_matching: profile.campaign.cargo_training_materials[material.index],
+        banked_matching: profile.campaign.stored_training_materials[material.index],
+        can_upgrade: game.training_upgrade_check(corp.ability()).is_ok(),
+        upgrade_reason: game
+            .training_upgrade_check(corp.ability())
+            .err()
+            .unwrap_or_default(),
     })
 }
 
@@ -663,6 +715,10 @@ impl Game {
     }
     pub(super) fn onboarding_fact(&mut self, flag: u8) {
         if !self.progression_enabled() {
+            return;
+        }
+        // The counted v2 objectives are recorded only by their actual event paths.
+        if flag & !(LICENSE | DEPARTED) != 0 {
             return;
         }
         if let Some(progress) = &mut self.profile.onboarding

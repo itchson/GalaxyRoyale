@@ -219,7 +219,7 @@ fn legacy_v4_pilot_preserves_every_saved_asset_and_original_scout() {
     p.campaign.loadouts[0].hardware = [1, 0, 1, 0, 0, 0];
     ship_progression::mirrors(&mut p);
     let mut expected = serde_json::to_value(&p).unwrap();
-    expected["schema_version"] = 5.into();
+    expected["schema_version"] = 6.into();
     expected["revision"] = 1.into();
     let g = Game::new(p);
     assert_eq!(snapshot(&g), expected);
@@ -229,14 +229,24 @@ fn legacy_v4_pilot_preserves_every_saved_asset_and_original_scout() {
 }
 
 #[test]
-fn stage_is_derived_from_bounded_flags_without_fabricated_facts() {
+fn legacy_stages_migrate_without_inventing_the_new_counted_mission() {
     for flags in 0..=255 {
         let mut p = create_profile("talo", "hugo", "pan", "0123456789abcdef").unwrap();
-        p.onboarding = Some(OnboardingProgress { stage: 255, flags });
+        p.onboarding = Some(OnboardingProgress {
+            version: 1,
+            stage: 255,
+            flags,
+            ..Default::default()
+        });
         let g = Game::new(p);
         let progress = g.profile.onboarding.as_ref().unwrap();
-        assert_eq!(progress.flags, flags & 127);
-        assert_eq!(progress.stage, stage(flags & 127));
+        let expected = if flags & 127 == 127 { 127 } else { flags & 3 };
+        assert_eq!(progress.flags, expected);
+        assert_eq!(progress.stage, stage(expected));
+        assert_eq!(
+            (progress.asteroids_destroyed, progress.materials_collected),
+            (0, 0)
+        );
     }
     assert_eq!(stage(31 | ADDITIONAL_CRAFTED), 5);
     assert_eq!(stage(31 | ADDITIONAL_EQUIPPED), 5);
@@ -369,69 +379,45 @@ fn projectile_defeat(g: &mut Game, e: Entity) {
 }
 
 #[test]
-fn complete_tutorial_uses_real_departure_streamed_belt_hit_pickup_bank_craft_and_equip() {
+fn completed_legacy_tutorial_keeps_earned_inventory_without_restarting_training() {
     for corp in ["pan", "renko", "hugo"] {
-        let mut g = fresh(corp);
-        g.acknowledge_license().unwrap();
-        advance(
-            &mut g,
-            &InputFrame {
-                joystick: Some([1.0, 0.0]),
-                ..Default::default()
-            },
-            200,
-        );
-        assert!(g.position().length() > SAFE_RADIUS);
-        assert_eq!(g.profile.onboarding.as_ref().unwrap().stage, 2);
-        // Set travel position for an isolated collision fixture; departure above
-        // is actual movement. The rock itself is deterministic streamed terrain.
-        g.move_player(Vec2::new(950.0, 0.0));
-        g.update_chunks(g.position());
-        let e = g
-            .world
-            .query::<(Entity, &AsteroidBirth)>()
-            .iter()
-            .find(|(_, b)| b.source == AsteroidSource::HavenBelt)
-            .unwrap()
-            .0;
-        projectile_defeat(&mut g, e);
-        assert_eq!(g.profile.onboarding.as_ref().unwrap().stage, 3);
-        assert_eq!(g.profile.campaign.ship_xp, [0; 10]);
-        let extra = if corp == "renko" { 1 } else { 0 };
-        let category = abilities::get(extra).unwrap().category;
-        // Declared loot fixtures enter the real collection path. There is no
-        // chance assertion pretending every rock guarantees material.
-        g.spawn_material_loot(g.position(), 1, 2);
-        g.spawn_loot(g.position(), category, 3);
-        g.tick(&InputFrame::default(), DT);
-        assert_eq!(g.profile.campaign.cargo_materials[0], 2);
-        assert_eq!(g.profile.onboarding.as_ref().unwrap().stage, 4);
-        assert!(g.profile.campaign.abilities[extra as usize].blueprint);
-        // Actual final crossing, rather than reset_to_dock, banks carried cargo.
-        g.move_player(Vec2::new(241.0, 0.0));
-        g.was_safe = false;
-        g.world.get::<&mut Motion>(g.player).unwrap().velocity = Vec2::new(-100.0, 0.0);
-        g.tick(&InputFrame::default(), DT);
-        assert!(g.position().length() < SAFE_RADIUS);
-        assert_eq!(g.profile.campaign.cargo_materials, [0; 5]);
-        assert_eq!(g.profile.campaign.stored_materials[0], 2);
-        assert_eq!(g.profile.onboarding.as_ref().unwrap().stage, 5);
-        let key = abilities::get(extra).unwrap().key;
-        g.craft_ability(key).unwrap();
-        assert_eq!(g.profile.onboarding.as_ref().unwrap().stage, 5);
-        g.equip_ability(category, Some(key)).unwrap();
-        assert_eq!(facts(&g), 127);
+        let mut p = create_profile("dora", corp, "renko", "0123456789abcdef").unwrap();
+        p.schema_version = 5;
+        p.onboarding = Some(OnboardingProgress {
+            version: 1,
+            stage: 6,
+            flags: 127,
+            ..Default::default()
+        });
+        p.currency = [3, 4, 5];
+        p.campaign.stored_materials[0] = 7;
+        let native = p.identity.as_ref().unwrap().corporation.ability();
+        let extra = if native == 0 { 1 } else { 0 };
+        p.campaign.abilities[extra] = campaign::AbilityState {
+            blueprint: true,
+            rank: 1,
+        };
+        p.campaign.loadouts[0].slots[abilities::get(extra as u8).unwrap().category] =
+            Some(extra as u8);
+        let mut g = Game::new(p);
         assert!(g.hud().onboarding.unwrap().completed);
-        assert_eq!(g.profile.currency[category], 0);
-        assert_eq!(g.profile.campaign.stored_materials[0], 0);
+        assert!(g.profile.onboarding.as_ref().unwrap().legacy_complete);
+        assert_eq!(g.profile.campaign.abilities[native as usize].rank, 1);
+        assert_eq!(g.profile.campaign.abilities[extra].rank, 1);
+        assert_eq!(g.profile.campaign.stored_materials[0], 7);
+        assert_eq!(g.profile.campaign.stored_training_materials, [0; 3]);
+        assert_eq!(g.profile.currency, [3, 4, 5]);
         let done = snapshot(&g);
         g.acknowledge_license().unwrap();
-        g.equip_ability(category, Some(key)).unwrap();
+        g.equip_ability(
+            abilities::get(extra as u8).unwrap().category,
+            Some(abilities::get(extra as u8).unwrap().key),
+        )
+        .unwrap();
         assert_eq!(snapshot(&g), done);
         assert_eq!(snapshot(&Game::new(g.profile.clone())), done);
     }
 }
-
 #[test]
 fn wrong_rock_qa_gift_and_reload_never_fake_tutorial_completion() {
     let mut g = fresh("hugo");
@@ -472,7 +458,7 @@ fn saturation_only_records_material_actually_transferred_and_death_does_not_bank
     assert_eq!(g.profile.campaign.cargo_materials[0], 2);
     g.profile.campaign.stored_materials[0] -= 1;
     g.tick(&InputFrame::default(), DT);
-    assert_ne!(facts(&g) & T1_BANKED, 0);
+    assert_eq!(facts(&g) & T1_BANKED, 0); // Generic T1 is not the named training material.
     assert_eq!(g.profile.campaign.cargo_materials[0], 1);
     let mut dead = fresh("renko");
     dead.move_player(Vec2::new(500.0, 0.0));

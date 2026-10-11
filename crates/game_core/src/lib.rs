@@ -36,6 +36,7 @@ mod particle_tests;
 mod ship_progression;
 #[cfg(test)]
 mod ship_progression_tests;
+mod training;
 #[cfg(test)]
 mod weapon_cadence_tests;
 use bosses::BossEncounter;
@@ -90,7 +91,7 @@ pub struct Profile {
 impl Default for Profile {
     fn default() -> Self {
         Self {
-            schema_version: 5,
+            schema_version: 6,
             revision: 0,
             seed: 0x4752_4f59,
             currency: [0; 3],
@@ -172,6 +173,8 @@ pub struct Hud {
     pub stored_materials: u32,
     pub material_cargo: [u32; 5],
     pub material_stash: [u32; 5],
+    pub material_training_cargo: [u32; 3],
+    pub material_training_stash: [u32; 3],
     pub material_loss: [u32; 5],
     pub material_loss_reason: String,
     pub abilities: Vec<ship_progression::AbilityHud>,
@@ -343,6 +346,7 @@ struct Bullet {
 struct Loot {
     category: usize,
     material_tier: u8,
+    training_material: Option<u8>,
     amount: u32,
     life: f32,
 }
@@ -350,6 +354,7 @@ struct Loot {
 struct AsteroidBirth {
     source: AsteroidSource,
     material_tier: u8,
+    variety: u8,
     orbit: Option<asteroid_zones::Orbit>,
 }
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -364,6 +369,7 @@ impl AsteroidBirth {
             return Self {
                 source: AsteroidSource::HavenBelt,
                 material_tier: 1,
+                variety: 0,
                 orbit: Some(asteroid_zones::Orbit::at(seed, position, Vec2::ZERO)),
             };
         }
@@ -377,6 +383,7 @@ impl AsteroidBirth {
                 return Self {
                     source: AsteroidSource::SiteBelt(site.grid),
                     material_tier: belt.material_tier,
+                    variety: 0,
                     orbit: Some(asteroid_zones::Orbit::at(
                         seed,
                         position,
@@ -388,6 +395,7 @@ impl AsteroidBirth {
         Self {
             source: AsteroidSource::Outer,
             material_tier: danger(position).clamp(1, 5) as u8,
+            variety: 0,
             orbit: None,
         }
     }
@@ -584,7 +592,7 @@ pub struct Game {
 impl Game {
     pub fn new(mut profile: Profile) -> Self {
         let legacy = profile.schema_version < 4;
-        let migrated = profile.schema_version != 5;
+        let migrated = profile.schema_version != 6;
         if legacy {
             for rank in &mut profile.ranks {
                 *rank = (*rank).min(5);
@@ -615,13 +623,17 @@ impl Game {
             campaign_changed = true;
         }
         let (material_loss, inventory_changed) = ship_progression::initialize(&mut profile, legacy);
-        profile.schema_version = 5;
+        let before_training = profile.onboarding.clone();
+        training::sanitize_progress(&mut profile);
+        let training_changed = before_training != profile.onboarding;
+        profile.schema_version = 6;
         if archive_changed
             || campaign_changed
             || bosses_changed
             || inventory_changed
             || migrated
             || identity_changed
+            || training_changed
         {
             profile.revision = profile.revision.saturating_add(1);
         }
@@ -1558,7 +1570,8 @@ impl Game {
                     {
                         continue;
                     }
-                    let birth = AsteroidBirth::at(self.profile.seed, p);
+                    let mut birth = AsteroidBirth::at(self.profile.seed, p);
+                    birth.variety = pixel_assets::asteroid_variety(hash);
                     if birth.source == AsteroidSource::Outer && index > 2 {
                         continue;
                     }
@@ -2421,15 +2434,22 @@ impl Game {
                     .unwrap_or(AsteroidBirth {
                         source: AsteroidSource::Outer,
                         material_tier: danger(position).clamp(1, 5) as u8,
+                        variety: 0,
                         orbit: None,
                     });
                 if birth.source != AsteroidSource::HavenBelt {
                     self.award_xp(2);
-                } else {
-                    self.onboarding_fact(identity::BELT_DESTROYED);
                 }
+                self.training_asteroid_defeated();
                 if self.random() < 0.25 {
-                    self.spawn_material_loot(position, birth.material_tier, 1);
+                    let named = (birth.material_tier == 1)
+                        .then(|| training::material_for_variety(birth.variety))
+                        .flatten();
+                    if named.is_some() {
+                        self.spawn_tiered_loot(position, 3, birth.material_tier, named, 1);
+                    } else {
+                        self.spawn_material_loot(position, birth.material_tier, 1);
+                    }
                 }
                 if self.random() < 0.25 {
                     let category = (self.random() * 3.0) as usize;
@@ -2530,18 +2550,21 @@ impl Game {
     }
 
     fn spawn_loot(&mut self, position: Vec2, category: usize, amount: u32) {
-        self.spawn_tiered_loot(position, category, 1, amount);
+        self.spawn_tiered_loot(position, category, 1, None, amount);
     }
     fn spawn_material_loot(&mut self, position: Vec2, tier: u8, amount: u32) {
-        self.spawn_tiered_loot(position, 3, tier.clamp(1, 5), amount);
+        self.spawn_tiered_loot(position, 3, tier.clamp(1, 5), None, amount);
     }
     fn spawn_tiered_loot(
         &mut self,
         position: Vec2,
         category: usize,
         material_tier: u8,
+        training_material: Option<u8>,
         amount: u32,
     ) {
+        let training_material =
+            training_material.filter(|i| category == 3 && material_tier == 1 && *i < 3);
         let count = self.world.query::<(Entity, &Loot)>().iter().count();
         if count >= 96 {
             // Preserve earned drops under load by merging into the nearest matching pickup.
@@ -2549,7 +2572,11 @@ impl Game {
                 .world
                 .query::<(Entity, (&Motion, &Loot))>()
                 .iter()
-                .filter(|(_, (_, l))| l.category == category && l.material_tier == material_tier)
+                .filter(|(_, (_, l))| {
+                    l.category == category
+                        && l.material_tier == material_tier
+                        && l.training_material == training_material
+                })
                 .min_by(|(_, (a, _)), (_, (b, _))| {
                     (a.position - position)
                         .length_squared()
@@ -2569,6 +2596,7 @@ impl Game {
             Loot {
                 category,
                 material_tier,
+                training_material,
                 amount,
                 life: 120.0,
             },
@@ -2588,6 +2616,7 @@ impl Game {
                     entity,
                     loot.category,
                     loot.material_tier,
+                    loot.training_material,
                     loot.amount,
                     motion.position,
                 ));
@@ -2600,7 +2629,7 @@ impl Game {
                 remove.push(entity);
             }
         }
-        for (entity, category, material_tier, amount, position) in collect {
+        for (entity, category, material_tier, training_material, amount, position) in collect {
             if !self.progression_enabled() {
                 let _ = self.world.despawn(entity);
                 continue;
@@ -2617,8 +2646,11 @@ impl Game {
                     loot.amount -= gained;
                 }
                 self.profile.campaign.cargo_materials[material_tier as usize - 1] += gained;
-                if material_tier == 1 {
-                    self.onboarding_fact(identity::T1_COLLECTED);
+                if material_tier == 1
+                    && let Some(index) = training_material.filter(|i| *i < 3)
+                {
+                    self.profile.campaign.cargo_training_materials[index as usize] += gained;
+                    self.training_collected(index, gained);
                 }
                 if self.position().length() > SAFE_RADIUS {
                     let run = self.run.get_or_insert_with(RunSummary::default);
@@ -3118,7 +3150,9 @@ impl Game {
         let next = self.profile.campaign.loadouts[ship].hardware[index] + 1;
         let category = UPGRADES[index].2;
         self.profile.currency[category] -= COST;
-        self.profile.campaign.stored_materials[next as usize - 1] -= 1;
+        let mut materials = [0; 5];
+        materials[next as usize - 1] = 1;
+        self.consume_stored_materials(materials);
         self.profile.campaign.loadouts[ship].hardware[index] = next;
         self.progression_changed();
         let stats = Stats::from_profile(&self.profile);
@@ -3288,6 +3322,8 @@ impl Game {
             stored_materials: ship_progression::total(self.profile.campaign.stored_materials),
             material_cargo: self.profile.campaign.cargo_materials,
             material_stash: self.profile.campaign.stored_materials,
+            material_training_cargo: self.profile.campaign.cargo_training_materials,
+            material_training_stash: self.profile.campaign.stored_training_materials,
             material_loss: self.material_loss,
             material_loss_reason: self.material_loss_reason.clone(),
             abilities: self.ability_hud(),
@@ -3304,7 +3340,7 @@ impl Game {
             audio: self.audio_hud(),
             navigation: self.navigation_hud(),
             identity: identity::hud(&self.profile),
-            onboarding: identity::onboarding_hud(&self.profile),
+            onboarding: identity::onboarding_hud(self),
         }
     }
 
@@ -3627,7 +3663,11 @@ impl Game {
                 continue;
             }
             if loot.category == 3 {
-                ship_progression::draw_material(frame, p, loot.material_tier);
+                if let Some(index) = loot.training_material {
+                    training::draw_material(frame, p, index);
+                } else {
+                    ship_progression::draw_material(frame, p, loot.material_tier);
+                }
                 continue;
             }
             let color = currency_color(loot.category);
@@ -4673,7 +4713,7 @@ mod tests {
         )
         .unwrap();
         let g = Game::new(old);
-        assert_eq!(g.profile.schema_version, 5);
+        assert_eq!(g.profile.schema_version, 6);
         assert_eq!(g.profile.revision, 10);
         assert_eq!(g.profile.currency, [7, 8, 9]);
         assert_eq!(g.profile.ranks[2], 3);

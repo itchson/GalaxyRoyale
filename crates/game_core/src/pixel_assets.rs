@@ -333,9 +333,13 @@ pub(super) fn body(name: &str) -> PixelBody {
 }
 
 pub(super) fn asteroid(seed: u32) -> PixelBody {
-    let style = (seed as usize >> 5) & 3;
+    let style = asteroid_variety(seed) as usize;
     let geology = (seed as usize >> 11) & 3;
     ASSETS.asteroids[style + geology * 4].clone()
+}
+/// Immutable physical variety shares the exact selector used by authored cells.
+pub(super) fn asteroid_variety(seed: u32) -> u8 {
+    ((seed >> 5) & 3) as u8
 }
 
 pub(super) fn color(index: usize) -> u32 {

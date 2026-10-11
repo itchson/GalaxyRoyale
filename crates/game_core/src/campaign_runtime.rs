@@ -45,20 +45,35 @@ impl Game {
             return;
         }
         let mut changed = false;
-        let mut tier_one_banked = false;
+        let mut matching_transferred = 0;
+        let matching = self
+            .profile
+            .identity
+            .as_ref()
+            .map(|id| training::material_for_corporation(id.corporation).index);
         for tier in 0..5 {
             let amount = self.profile.campaign.cargo_materials[tier];
             let banked = amount.min(u32::MAX - self.profile.campaign.stored_materials[tier]);
+            if tier == 0 {
+                let before = self.profile.campaign.cargo_training_materials;
+                training::transfer_labels(
+                    banked,
+                    &mut self.profile.campaign.cargo_training_materials,
+                    &mut self.profile.campaign.stored_training_materials,
+                );
+                matching_transferred = matching.map_or(0, |i| {
+                    before[i] - self.profile.campaign.cargo_training_materials[i]
+                });
+            }
             self.profile.campaign.stored_materials[tier] += banked;
             self.profile.campaign.cargo_materials[tier] -= banked;
             changed |= banked > 0;
-            tier_one_banked |= tier == 0 && banked > 0;
         }
         if changed {
             self.changed();
         }
-        if tier_one_banked && self.arena.is_none() && self.position().length() <= SAFE_RADIUS {
-            self.onboarding_fact(identity::T1_BANKED);
+        if self.arena.is_none() && self.position().length() <= SAFE_RADIUS {
+            self.training_banked(matching_transferred);
         }
     }
     pub(super) fn award_xp(&mut self, amount: u32) {
@@ -185,7 +200,7 @@ impl Game {
             return Err("Construction also requires 6 materials in Haven storage.".into());
         }
         self.profile.currency[champion.category] -= COST;
-        self.profile.campaign.stored_materials[0] -= 6;
+        self.consume_stored_materials([6, 0, 0, 0, 0]);
         self.profile.campaign.crafted[index] = true;
         self.changed();
         self.event("upgrade", self.position(), 1.0);
@@ -1296,7 +1311,7 @@ mod tests {
         )
         .unwrap();
         let g = Game::new(legacy);
-        assert_eq!(g.profile.schema_version, 5);
+        assert_eq!(g.profile.schema_version, 6);
         assert_eq!(g.profile.currency, [7, 8, 9]);
         assert_eq!(g.profile.ranks[..6], [5, 4, 3, 2, 1, 0]);
     }

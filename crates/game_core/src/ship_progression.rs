@@ -114,6 +114,14 @@ pub struct AbilityHud {
     pub craft_reason: String,
     pub upgrade_reason: String,
     pub equip_reason: String,
+    pub training_recipe: bool,
+    pub required_training_material: Option<TrainingMaterialHud>,
+}
+#[derive(Clone, Debug, Serialize)]
+pub struct TrainingMaterialHud {
+    pub id: String,
+    pub name: String,
+    pub amount: u32,
 }
 
 #[derive(Clone, Debug, Serialize)]
@@ -148,11 +156,20 @@ pub(super) fn equipped_rank(p: &Profile, id: u8) -> u8 {
     if ship > 9 || p.campaign.loadouts[ship as usize].slots[def.category] != Some(id) {
         return 0;
     }
+    effective_inventory_rank(p, id)
+}
+pub(super) fn effective_inventory_rank(p: &Profile, id: u8) -> u8 {
+    let ship = p.campaign.selected_ship;
+    let cap = campaign::rank_cap(campaign::level(p.campaign.ship_xp[ship as usize]));
     abilities::effective_rank(
         id,
         p.campaign.abilities[id as usize].rank,
         ship,
-        campaign::rank_cap(campaign::level(p.campaign.ship_xp[ship as usize])),
+        if training::trained_starter(p, id) {
+            cap.max(2)
+        } else {
+            cap
+        },
     )
 }
 
@@ -176,11 +193,17 @@ pub(super) fn mirrors(p: &mut Profile) {
 pub(super) fn initialize(p: &mut Profile, legacy: bool) -> ([u32; 5], bool) {
     let before = serde_json::to_value(&*p).expect("profile is serializable");
     let mut loss = [0; 5];
+    if p.schema_version < 6 {
+        // No previous schema recorded a material's named birth variety.
+        p.campaign.cargo_training_materials = [0; 3];
+        p.campaign.stored_training_materials = [0; 3];
+    }
     if legacy {
         p.campaign.stored_materials[0] =
             total(p.campaign.stored_materials).saturating_add(total(p.campaign.cargo_materials));
         p.campaign.stored_materials[1..].fill(0);
         p.campaign.cargo_materials = [0; 5];
+        p.campaign.cargo_training_materials = [0; 3];
         p.campaign.loadouts = [ShipLoadout::default(); 10];
         p.campaign.loadouts[p.campaign.selected_ship as usize]
             .hardware
@@ -223,6 +246,7 @@ pub(super) fn initialize(p: &mut Profile, legacy: bool) -> ([u32; 5], bool) {
     } else {
         loss = p.campaign.cargo_materials;
         p.campaign.cargo_materials = [0; 5];
+        p.campaign.cargo_training_materials = [0; 3];
     }
     for (index, def) in abilities::ABILITIES.iter().enumerate() {
         let state = &mut p.campaign.abilities[index];
@@ -340,6 +364,7 @@ impl Game {
             return;
         }
         self.profile.campaign.cargo_materials = [0; 5];
+        self.profile.campaign.cargo_training_materials = [0; 3];
         self.material_loss = lost;
         self.material_loss_reason = reason.into();
         if let Some(run) = &mut self.run {
@@ -371,9 +396,7 @@ impl Game {
     }
     fn spend_recipe(&mut self, category: usize, points: u32, materials: [u32; 5]) {
         self.profile.currency[category] -= points;
-        for (tier, cost) in materials.into_iter().enumerate() {
-            self.profile.campaign.stored_materials[tier] -= cost;
-        }
+        self.consume_stored_materials(materials);
     }
     fn ability_check(&self, id: u8, upgrade: bool) -> Result<abilities::Recipe, String> {
         self.require_home()?;
@@ -398,6 +421,13 @@ impl Game {
         } else {
             1
         };
+        if upgrade && self.training_recipe(id) {
+            self.training_upgrade_check(id)?;
+            return Ok(abilities::Recipe {
+                points: 0,
+                materials: [10, 0, 0, 0, 0],
+            });
+        }
         let recipe = abilities::recipe(id, next)
             .ok_or("This ability is at maximum rank or is a Royale reward.")?;
         let level = campaign::required_level(next);
@@ -446,12 +476,21 @@ impl Game {
     pub fn upgrade_ability(&mut self, key: &str) -> Result<(), String> {
         let id = abilities::by_key(key).ok_or("Unknown ability.")?;
         let recipe = self.ability_check(id, true)?;
-        self.spend_recipe(
-            abilities::get(id).unwrap().category,
-            recipe.points,
-            recipe.materials,
-        );
+        if self.training_recipe(id) {
+            let material = training::material_for_corporation(
+                self.profile.identity.as_ref().unwrap().corporation,
+            );
+            self.profile.campaign.stored_training_materials[material.index] -= 10;
+            self.profile.campaign.stored_materials[0] -= 10;
+        } else {
+            self.spend_recipe(
+                abilities::get(id).unwrap().category,
+                recipe.points,
+                recipe.materials,
+            );
+        }
         self.profile.campaign.abilities[id as usize].rank += 1;
+        self.training_recognize_upgrade();
         self.progression_changed();
         Ok(())
     }
@@ -472,6 +511,7 @@ impl Game {
         if id.is_some_and(|id| self.additional_basic(id)) {
             self.onboarding_fact(identity::ADDITIONAL_EQUIPPED);
         }
+        self.training_recognize_upgrade();
         Ok(())
     }
     pub(super) fn progression_changed(&mut self) {
@@ -525,7 +565,20 @@ impl Game {
                 } else {
                     state.rank.saturating_add(1).min(5)
                 };
-                let recipe = abilities::recipe(id, next);
+                let training_recipe = self.training_recipe(id);
+                let recipe = if training_recipe {
+                    Some(abilities::Recipe {
+                        points: 0,
+                        materials: [10, 0, 0, 0, 0],
+                    })
+                } else {
+                    abilities::recipe(id, next)
+                };
+                let material = training_recipe.then(|| {
+                    training::material_for_corporation(
+                        self.profile.identity.as_ref().unwrap().corporation,
+                    )
+                });
                 let craft = self
                     .ability_check(id, false)
                     .map(|_| ())
@@ -549,20 +602,19 @@ impl Game {
                     blueprint: state.blueprint,
                     owned: state.rank > 0,
                     rank: state.rank,
-                    effective_rank: abilities::effective_rank(
-                        id,
-                        state.rank,
-                        self.profile.campaign.selected_ship,
-                        campaign::rank_cap(self.ship_level()),
-                    ),
+                    effective_rank: effective_inventory_rank(&self.profile, id),
                     max_rank: 5,
                     compatible: abilities::compatible(id, self.profile.campaign.selected_ship),
                     equipped: self.profile.campaign.loadouts
                         [self.profile.campaign.selected_ship as usize]
                         .slots[def.category]
                         == Some(id),
-                    required_level: campaign::required_level(next),
-                    material_tier: next,
+                    required_level: if training_recipe {
+                        1
+                    } else {
+                        campaign::required_level(next)
+                    },
+                    material_tier: if training_recipe { 1 } else { next },
                     material_cost: recipe.map_or(0, |r| total(r.materials)),
                     point_cost: recipe.map_or(0, |r| r.points),
                     can_craft: craft.is_empty(),
@@ -571,6 +623,12 @@ impl Game {
                     craft_reason: craft,
                     upgrade_reason: upgrade,
                     equip_reason: equip,
+                    training_recipe,
+                    required_training_material: material.map(|m| TrainingMaterialHud {
+                        id: m.id.into(),
+                        name: m.name.into(),
+                        amount: 10,
+                    }),
                 }
             })
             .collect()

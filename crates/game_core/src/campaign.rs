@@ -20,6 +20,9 @@ pub struct CampaignProgress {
     pub cargo_materials: [u32; 5],
     #[serde(deserialize_with = "deserialize_materials")]
     pub stored_materials: [u32; 5],
+    /// Named tier-1 subsets, not additional cargo: silicate, filament, crystal.
+    pub cargo_training_materials: [u32; 3],
+    pub stored_training_materials: [u32; 3],
     pub abilities: [AbilityState; crate::abilities::COUNT],
     pub loadouts: [ShipLoadout; 10],
     pub last_run: Option<RunSummary>,
@@ -42,6 +45,8 @@ impl Default for CampaignProgress {
             ship_xp: [0; 10],
             cargo_materials: [0; 5],
             stored_materials: [0; 5],
+            cargo_training_materials: [0; 3],
+            stored_training_materials: [0; 3],
             abilities,
             loadouts: [ShipLoadout::default(); 10],
             last_run: None,
@@ -132,6 +137,11 @@ impl CampaignProgress {
             *amount = (*amount).min(remaining);
             remaining -= *amount;
         }
+        crate::training::clamp_labels(self.cargo_materials[0], &mut self.cargo_training_materials);
+        crate::training::clamp_labels(
+            self.stored_materials[0],
+            &mut self.stored_training_materials,
+        );
         if let Some(run) = &mut self.last_run {
             if !run.time.is_finite() || !run.distance_peak.is_finite() {
                 self.last_run = None;

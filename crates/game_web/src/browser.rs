@@ -89,6 +89,65 @@ fn to_js(value: &impl Serialize) -> Result<JsValue, JsValue> {
 pub fn checkpoint_contract(stage: &str) -> Result<JsValue, JsValue> {
     let mut profile = Profile::default();
     match stage {
+        "training-pan-ready"
+        | "training-renko-ready"
+        | "training-hugo-ready"
+        | "training-pan-upgraded"
+        | "training-renko-upgraded"
+        | "training-hugo-upgraded" => {
+            let corporation = stage
+                .split('-')
+                .nth(1)
+                .ok_or_else(|| js("Invalid training fixture"))?;
+            profile = game_core::identity::create_profile(
+                "talo",
+                corporation,
+                "renko",
+                "0123456789abcdef",
+            )
+            .map_err(js)?;
+            // Authored canonical save inputs, not a claim of earned combat.
+            // The upgraded case executes the actual public dock transaction.
+            profile.onboarding = Some(game_core::identity::OnboardingProgress {
+                version: 2,
+                stage: 5,
+                flags: 31,
+                asteroids_destroyed: 10,
+                materials_collected: 10,
+                legacy_complete: false,
+            });
+            let index = match corporation {
+                "pan" => 0,
+                "renko" => 1,
+                _ => 2,
+            };
+            profile.campaign.stored_materials[0] = 10;
+            profile.campaign.stored_training_materials[index] = 10;
+        }
+        "training-cargo-reload" | "training-legacy-complete" | "training-legacy-incomplete" => {
+            profile =
+                game_core::identity::create_profile("talo", "hugo", "pan", "0123456789abcdef")
+                    .map_err(js)?;
+            profile.currency = [7, 8, 9];
+            profile.campaign.stored_materials[0] = 11;
+            if stage == "training-cargo-reload" {
+                profile.campaign.cargo_materials[0] = 12;
+                profile.campaign.cargo_training_materials = [4, 3, 5];
+                profile.campaign.stored_training_materials = [2, 3, 4];
+            } else {
+                profile.schema_version = 5;
+                profile.onboarding = Some(game_core::identity::OnboardingProgress {
+                    version: 1,
+                    stage: 6,
+                    flags: if stage == "training-legacy-complete" {
+                        127
+                    } else {
+                        31
+                    },
+                    ..Default::default()
+                });
+            }
+        }
         "kikai-pan" | "kikai-renko" | "kikai-hugo" => {
             let corporation = stage.trim_start_matches("kikai-");
             profile = game_core::identity::create_profile(
@@ -170,6 +229,14 @@ pub fn checkpoint_contract(stage: &str) -> Result<JsValue, JsValue> {
         _ => return Err(js("Unknown checkpoint contract stage")),
     }
     let mut game = Game::new(profile);
+    if stage.starts_with("training-") && stage.ends_with("-upgraded") {
+        let key = match stage.split('-').nth(1) {
+            Some("pan") => "flux-drive",
+            Some("renko") => "pulse-lens",
+            _ => "guard-coil",
+        };
+        game.upgrade_ability(key).map_err(js)?;
+    }
     if stage == "champion" {
         game.diagnostic("champion-0");
     }
