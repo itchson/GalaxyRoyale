@@ -149,7 +149,7 @@ fn actual_movement_into_discovery_radius_reveals_metadata_without_a_reward() {
         let site = arena(game.profile.seed, index).unwrap();
         let center = Vec2::from_array(site.position);
         // Declared position fixture; subsequent admission comes from actual flight.
-        game.move_player(center + Vec2::X * 330.0);
+        game.move_player(center + Vec2::X * (site.radius.max(320.0) + 10.0));
         game.invulnerability = 10.0;
         game.tick(&InputFrame::default(), DT);
         assert!(!game.hud().campaign.champions[index].discovered);

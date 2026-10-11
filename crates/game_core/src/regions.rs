@@ -8,6 +8,47 @@ pub const REGION_SIZE: f32 = 4200.0;
 pub const COSMETIC_PIXEL_BUDGET: usize = 6000;
 const HUB_RADIUS: f32 = 1400.0;
 
+/// Free space between complete node envelopes, including their asteroid bodies.
+pub const NODE_CLEARANCE: f32 = 256.0;
+pub const BELT_INNER_OFFSET: f32 = 240.0;
+pub const BELT_OUTER_OFFSET: f32 = 520.0;
+/// All streamed asteroid bodies at the configured maximum scale fit this disc.
+pub const BELT_BODY_PADDING: f32 = 32.0;
+// Above the maximum 0.0625-unit f32 world-coordinate ULP. Keep the advertised
+// gap after both independently rounded centers and envelope sums are encoded.
+const NODE_ROUNDING_MARGIN: f32 = 0.25;
+const WORLD_LIMIT: f32 = 1_000_000.0;
+
+#[derive(Debug, Clone, Copy, Serialize, PartialEq, Eq)]
+#[serde(rename_all = "snake_case")]
+pub enum NodeKind {
+    Courier,
+    Bounty,
+    ChampionArena,
+    RoyaleArena,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub struct NodePolicy {
+    pub min_radius: f32,
+    pub max_radius: f32,
+}
+
+impl NodeKind {
+    pub const fn policy(self) -> NodePolicy {
+        let (min_radius, max_radius) = match self {
+            Self::Courier => (160.0, 220.0),
+            Self::Bounty => (180.0, 260.0),
+            Self::ChampionArena => (340.0, 420.0),
+            Self::RoyaleArena => (400.0, 480.0),
+        };
+        NodePolicy {
+            min_radius,
+            max_radius,
+        }
+    }
+}
+
 #[derive(Debug, Clone, Copy, Serialize, PartialEq)]
 pub struct Biome {
     pub kind: u8,
@@ -25,6 +66,7 @@ pub struct Site {
     pub name: &'static str,
     pub event: &'static str,
     pub grid: [i32; 2],
+    pub kind: NodeKind,
     pub position: [f32; 2],
     pub radius: f32,
     pub family: usize,
@@ -47,13 +89,15 @@ pub fn site_belt(seed: u32, site: &Site) -> Option<ZoneBelt> {
         return None;
     }
     let center = Vec2::from_array(site.position);
-    let outer = site.radius + 520.0;
-    if center.length() - outer < HUB_RADIUS || center.abs().max_element() + outer > 1_000_000.0 {
+    let outer = site.radius + BELT_OUTER_OFFSET;
+    if center.length() - site.envelope_radius() < HUB_RADIUS
+        || center.abs().max_element() + site.envelope_radius() > WORLD_LIMIT
+    {
         return None;
     }
     let tier = (1 + ((center.length() - HUB_RADIUS).max(0.0) / 1600.0) as u32).min(5) as u8;
     Some(ZoneBelt {
-        inner: site.radius + 240.0,
+        inner: site.radius + BELT_INNER_OFFSET,
         outer,
         material_tier: tier,
         recommended_level: [1, 3, 5, 10, 12][tier as usize - 1],
@@ -61,6 +105,12 @@ pub fn site_belt(seed: u32, site: &Site) -> Option<ZoneBelt> {
 }
 
 impl Site {
+    /// Reserved birth envelope, not a bound on asteroid drift after impulses.
+    /// The physical sanctuary still uses `radius`, never this cosmetic/belt disc.
+    pub fn envelope_radius(&self) -> f32 {
+        self.radius + BELT_OUTER_OFFSET + BELT_BODY_PADDING
+    }
+
     /// Lets gameplay reuse its nearby-site cache during projectile safety checks.
     pub fn intersects_segment(&self, from: Vec2, to: Vec2) -> bool {
         if !from.is_finite() || !to.is_finite() {
@@ -169,16 +219,20 @@ pub fn at(seed: u32, position: Vec2) -> Biome {
 }
 
 fn site(seed: u32, grid: [i32; 2]) -> Option<Site> {
-    let position = center(seed, grid);
     let h = hash(seed, grid, 0x7369_7465);
-    let radius = 160.0 + unit(mix(h)) * 70.0;
-    // Leave the entire initial combat/belt hub corridor unoccupied by remote sites.
-    if position.length() < HUB_RADIUS + radius + 120.0
-        || position.abs().max_element() + radius > 1_000_000.0
-    {
-        return None;
-    }
     let courier = h & 1 == 0;
+    let kind = if grid == [0, 2] {
+        NodeKind::RoyaleArena
+    } else if crate::campaign::CHAMPIONS.iter().any(|c| c.grid == grid) {
+        NodeKind::ChampionArena
+    } else if courier {
+        NodeKind::Courier
+    } else {
+        NodeKind::Bounty
+    };
+    let policy = kind.policy();
+    let radius = policy.min_radius + unit(mix(h)) * (policy.max_radius - policy.min_radius);
+    let position = node_position(seed, grid, radius)?;
     let names = if courier {
         ["Relay Anchorage", "Wayfarer Station", "Signal Sanctuary"]
     } else {
@@ -189,11 +243,49 @@ fn site(seed: u32, grid: [i32; 2]) -> Option<Site> {
         name: names[(mix(h ^ 11) % 3) as usize],
         event: if courier { "courier" } else { "bounty" },
         grid,
+        kind,
         position: position.to_array(),
         radius,
         family: (mix(h ^ 37) % 3) as usize,
         target_kills: 8 + mix(h ^ 71) % 5,
     })
+}
+
+/// Each center is resolved independently inside its own cell. Insetting by the
+/// complete belt/body envelope plus half the clearance proves separation even
+/// when adjacent nodes select opposite extrema. No neighbor queries or retries.
+fn node_position(seed: u32, grid: [i32; 2], radius: f32) -> Option<Vec2> {
+    let (low, high) = node_bounds(grid, radius)?;
+    let fraction = Vec2::new(
+        unit(hash(seed, grid, 0x6e6f_6478)),
+        unit(hash(seed, grid, 0x6e6f_6479)),
+    );
+    Some(low + (high - low) * fraction)
+}
+
+fn node_bounds(grid: [i32; 2], radius: f32) -> Option<(Vec2, Vec2)> {
+    let envelope = radius + BELT_OUTER_OFFSET + BELT_BODY_PADDING;
+    let inset = envelope + NODE_CLEARANCE * 0.5 + NODE_ROUNDING_MARGIN;
+    let cell = Vec2::new(grid[0] as f32, grid[1] as f32) * REGION_SIZE;
+    let mut low = cell.max(Vec2::splat(-WORLD_LIMIT)) + Vec2::splat(inset);
+    let mut high =
+        (cell + Vec2::splat(REGION_SIZE)).min(Vec2::splat(WORLD_LIMIT)) - Vec2::splat(inset);
+    // The four cells touching Haven use far-corner rectangles. This leaves the
+    // full tutorial belt/corridor clear without deleting a mandatory champion.
+    if grid.iter().all(|coordinate| (-1..=0).contains(coordinate)) {
+        let home_inset = HUB_RADIUS + inset;
+        for axis in 0..2 {
+            if grid[axis] == 0 {
+                low[axis] = low[axis].max(home_inset);
+            } else {
+                high[axis] = high[axis].min(-home_inset);
+            }
+        }
+    }
+    if low.cmpgt(high).any() {
+        return None; // Partial boundary cells cannot hold a complete group.
+    }
+    Some((low, high))
 }
 
 /// Only the adjacent 3×3 network is materialized; IDs do not depend on query order.
@@ -692,6 +784,10 @@ mod isotope_tests;
 mod lod_tests;
 
 #[cfg(test)]
+#[path = "region_node_tests.rs"]
+mod node_tests;
+
+#[cfg(test)]
 mod tests {
     use super::*;
     #[test]
@@ -785,7 +881,8 @@ mod tests {
         assert!(sites.len() <= 9);
         for s in &sites {
             assert_eq!(s.id, format!("{}:{}", s.grid[0], s.grid[1]));
-            assert!((160.0..=230.0).contains(&s.radius));
+            let policy = s.kind.policy();
+            assert!((policy.min_radius..=policy.max_radius).contains(&s.radius));
             assert!((8..=12).contains(&s.target_kills));
             assert!(s.family < 3 && Vec2::from_array(s.position).length() > HUB_RADIUS + s.radius);
             assert_eq!(

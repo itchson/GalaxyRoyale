@@ -286,7 +286,7 @@ impl Game {
             tournament,
             diagnostic,
             center,
-            radius: 340.0,
+            radius: site.radius,
             opponent,
         });
         self.move_player(center - Vec2::new(115.0, 0.0));
