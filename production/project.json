@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 895,
+  "revision": 898,
   "name": "Galaxy Royale",
   "phase": "Playable solo slice → content and validation",
-  "updatedAt": "2026-10-11T22:29:16.261Z",
+  "updatedAt": "2026-10-11T22:30:25.289Z",
   "tasks": [
     {
       "id": "studio",
@@ -21515,6 +21515,36 @@
       "author": "Root",
       "source": "Actual integration, tests and bounded specialist reviews",
       "createdAt": "2026-10-11T22:29:16.261Z"
+    },
+    {
+      "id": "8564497f-5365-4a97-8936-d5621e0f2fc9",
+      "revision": 896,
+      "kind": "run",
+      "itemId": "run-6362117d",
+      "title": "engine_research · running",
+      "author": "Root",
+      "source": "Actual next assignments and frozen warm audit",
+      "createdAt": "2026-10-11T22:30:25.223Z"
+    },
+    {
+      "id": "3e03f60e-2c27-4819-b009-5ec57d8c00f8",
+      "revision": 897,
+      "kind": "run",
+      "itemId": "run-b349bbcd",
+      "title": "production_research · running",
+      "author": "Root",
+      "source": "Actual next assignments and frozen warm audit",
+      "createdAt": "2026-10-11T22:30:25.260Z"
+    },
+    {
+      "id": "66d2f793-6b6f-4646-8bd7-1f8f4720f24d",
+      "revision": 898,
+      "kind": "run",
+      "itemId": "run-78bf717b",
+      "title": "gameplay_design · running",
+      "author": "Root",
+      "source": "Actual next assignments and frozen warm audit",
+      "createdAt": "2026-10-11T22:30:25.289Z"
     }
   ],
   "runRecords": [
@@ -29688,6 +29718,72 @@
       "author": "Root",
       "source": "Actual source-pinned execution, frozen measurements and asynchronous specialist reviews",
       "createdAt": "2026-10-11T20:57:05.749Z"
+    },
+    {
+      "id": "run-6362117d",
+      "title": "engine_research · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "engine_research",
+      "state": "running",
+      "observedAt": "2026-10-11T22:30:25.211Z",
+      "taskIds": [
+        "task-d87d697e"
+      ],
+      "summary": "Finished actual six-case warm audit:1536 samples, all zero stellar populations. No sampler performance claim. Dispatched read-only populated-case methodology; no extra measurement process.",
+      "evidence": [
+        {
+          "label": "Actual contribution scope",
+          "kind": "artifact",
+          "path": "artifacts/nova-stellar-20261012/warm-audit-HANDOFF.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual next assignments and frozen warm audit",
+      "createdAt": "2026-10-11T22:30:25.223Z"
+    },
+    {
+      "id": "run-b349bbcd",
+      "title": "production_research · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "production_research",
+      "state": "running",
+      "observedAt": "2026-10-11T22:30:25.253Z",
+      "taskIds": [
+        "task-91ac3c7f"
+      ],
+      "summary": "Finished actual four supplied stellar-still review. Dispatched bounded source-backed ring orientation proposal; actual ring target captures and motion acceptance remain pending.",
+      "evidence": [
+        {
+          "label": "Actual contribution scope",
+          "kind": "artifact",
+          "path": "artifacts/nova-stellar-20261012/stellar-stills-review-REVIEW.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual next assignments and frozen warm audit",
+      "createdAt": "2026-10-11T22:30:25.260Z"
+    },
+    {
+      "id": "run-78bf717b",
+      "title": "gameplay_design · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "gameplay_design",
+      "state": "running",
+      "observedAt": "2026-10-11T22:30:25.278Z",
+      "taskIds": [
+        "task-74cc552e"
+      ],
+      "summary": "Dispatched exactly one fresh19-file owned QA stage at d1fd777 verified unchanged normal runtime; no listener/browser or cadence pass claimed.",
+      "evidence": [
+        {
+          "label": "Actual contribution scope",
+          "kind": "artifact",
+          "path": "artifacts/nova-stellar-20261012/fifth-qa-author-HANDOFF.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual next assignments and frozen warm audit",
+      "createdAt": "2026-10-11T22:30:25.289Z"
     }
   ],
   "phaseDescription": "Desktop-first Rust/WASM solo game and local Studio are implemented. Reviewed occupied-cell art, reproducible conversion, responsive native settings/icons and minimap, strict GitHub integration gates and source-backed Dev Bible are integrated. Natural campaign balance, human listening, owner-private update lifecycle and physical phones remain separate pending gates."
