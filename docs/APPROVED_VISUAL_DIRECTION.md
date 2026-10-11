@@ -119,6 +119,26 @@ chart connection strokes belong in navigation displays. The interface can
 carry the league's sharp competitive geometry without imposing that geometry
 on natural space scenery.
 
+The latest immersion review rejects detached galactic curves and flat planetary
+texture. Compose a populated, tapered stellar disk with asymmetric dusty gaps,
+clustered light and a connected warm bulge. Sample planetary cloud, ice and
+crater material on the projected sphere, compressing features near its limb;
+apply sunlight after material so neither terrain nor storms brighten the night
+side. Keep distant contrast below the RAICHO and navigation markers.
+
+Natural-form references are NASA's
+[M81 dust lanes](https://science.nasa.gov/asset/hubble/hubble-photographs-grand-design-spiral-galaxy-m81/),
+[NGC 3627 clustered gas and dust](https://science.nasa.gov/asset/webb/webb-and-hubbles-views-of-spiral-galaxy-ngc-3627/),
+and [Jupiter cloud bands and storms](https://science.nasa.gov/jupiter/jupiter-facts/).
+These inform original native materials; their photographs are not imported
+game assets or a claim of scientific simulation.
+
+Common league panels use neutral graphite backing even when a descendant
+control has focus. Platinum cut metal, restrained gold award fittings and
+small enamel action cues express the logo's sports identity. Focus, corporate
+color and category state must not tint the entire panel. Check the actual
+low-luminance display result as well as the authored RGB values.
+
 Review the actual source and its decoded native translation side by side:
 anatomy and silhouette, metal depth, corporate masks, cutouts, relative parts,
 animation states, palette losses and occupied budgets. Native packet tests
