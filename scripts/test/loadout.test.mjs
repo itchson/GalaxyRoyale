@@ -419,3 +419,14 @@ test("Forge prioritizes all three slot controls while retaining cargo guidance a
   );
   assert.match(allText(f.target), /DOCK STASH \/ T1 10 \/ T2 2/);
 });
+
+test("Forge excludes an undiscovered ability rather than showing its locked name", () => {
+  const f = fixture();
+  const h = hud();
+  h.abilities[0].name = "UNDISCOVERED SECRET";
+  h.abilities[0].blueprint = false;
+  h.abilities[0].owned = false;
+  f.exports.paintForge(f.target, h, f.actions);
+  f.find("manage-0").events.click();
+  assert.ok(!allText(f.target).includes("UNDISCOVERED SECRET"));
+});

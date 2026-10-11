@@ -71,7 +71,7 @@ async function fixture(t) {
   return store;
 }
 
-test("schema-four migration waits for a real old database connection and prevents old-version writers", async (t) => {
+test("schema-five migration waits for a real old database connection and prevents old-version writers", async (t) => {
   globalThis.indexedDB = new IDBFactory();
   const opening = indexedDB.open("galaxy-royale", 1);
   opening.onupgradeneeded = () => opening.result.createObjectStore("profile");
@@ -104,7 +104,7 @@ test("schema-four migration waits for a real old database connection and prevent
   old.close();
   const loaded = await loading;
   assert.deepEqual(loaded, normalizeProfile(baseline));
-  assert.equal(store.db.version, 2);
+  assert.equal(store.db.version, 3);
   assert.deepEqual(loaded.campaign.stored_materials, [16, 0, 0, 0, 0]);
   await assert.rejects(request(indexedDB.open("galaxy-royale", 1)), /version/i);
   assert.deepEqual(
@@ -129,7 +129,7 @@ test("an actual version-change event closes obsolete connections and rejects que
     queued,
     (error) => error instanceof SaveConflict,
   );
-  const next = await request(indexedDB.open("galaxy-royale", 3));
+  const next = await request(indexedDB.open("galaxy-royale", 4));
   t.after(() => next.close());
   release();
   await rejection;

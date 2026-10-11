@@ -1,0 +1,96 @@
+.droid-screen {
+  z-index: 25;
+}
+.droid-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: calc(8px * var(--ui-scale, 1));
+  width: min(calc(440px * var(--ui-scale, 1)), 100%);
+  max-height: 100%;
+  overflow: hidden;
+  padding: var(--ui-pad);
+  background: #080e15;
+  border: 1px solid #466273;
+  font-family: "RoyaleMono", monospace;
+  font-size: var(--ui-text);
+  color: #e0ecf1;
+}
+.droid-card h2 {
+  padding-right: var(--ui-hit);
+  margin: 0;
+  font-size: var(--ui-heading);
+}
+.droid-card h3,
+.droid-card p {
+  margin: 0;
+  font-size: var(--ui-text);
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+.droid-card h3 {
+  color: #8db5c4;
+}
+.droid-content {
+  display: flex;
+  flex-direction: column;
+  gap: calc(8px * var(--ui-scale, 1));
+  overflow: auto;
+  min-height: 0;
+  overscroll-behavior: contain;
+}
+.droid-card > h2,
+.droid-card > button {
+  flex-shrink: 0;
+}
+.droid-close {
+  position: absolute;
+  top: var(--ui-pad);
+  right: var(--ui-pad);
+}
+.droid-options {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: calc(6px * var(--ui-scale, 1));
+}
+.droid-options button {
+  min-width: 0;
+  min-height: var(--ui-hit);
+  padding: calc(7px * var(--ui-scale, 1));
+  font: inherit;
+  overflow-wrap: anywhere;
+  color: #c4d5df;
+  border: 1px solid #425866;
+  background: #111c26;
+}
+.droid-options button[aria-pressed="true"] {
+  border-color: #b9e9ee;
+  background: #243744;
+}
+.droid-options [data-corporation="pan"] {
+  color: #9fe18a;
+}
+.droid-options [data-corporation="renko"] {
+  color: #ff9377;
+}
+.droid-options [data-corporation="hugo"] {
+  color: #5cbfff;
+}
+.droid-options [data-sub-corporation="pan"] {
+  color: #9fe18a;
+}
+.droid-options [data-sub-corporation="renko"] {
+  color: #ff9377;
+}
+.droid-options [data-sub-corporation="hugo"] {
+  color: #5cbfff;
+}
+.droid-license-summary {
+  padding: calc(8px * var(--ui-scale, 1)) 0;
+}
+body.pixel-ready .droid-card {
+  opacity: 0;
+}
+.narrow-ui .droid-options {
+  grid-template-columns: 1fr;
+}

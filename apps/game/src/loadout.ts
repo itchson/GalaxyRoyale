@@ -63,6 +63,7 @@ export interface LoadoutShipHud {
   select_reason: string;
 }
 export interface ShipHangarHud {
+  identity?: import("./kikai").IdentityHud | null;
   dock: boolean;
   currency: number[];
   material_stash: number[];
@@ -306,7 +307,9 @@ export function paintForge(
               ? 3
               : 4;
     for (const ability of hud.abilities
-      .filter((item) => item.category === category)
+      .filter(
+        (item) => item.category === category && (item.blueprint || item.owned),
+      )
       .sort((a, b) => order(a) - order(b) || a.index - b.index)) {
       const card = section("ability-card");
       card.dataset.equipped = String(ability.equipped);
@@ -482,8 +485,15 @@ export function paintShipHangar(
     const card = section("ship-hangar-card");
     card.dataset.selected = String(ship.selected);
     const icon = section("campaign-icon campaign-ship");
-    icon.dataset.pixelKind = "campaign-ship";
-    icon.dataset.pixelValue = String(ship.id === 0 ? 9 : ship.id - 1);
+    const licensed = ship.id === 0 && hud.identity;
+    icon.dataset.pixelKind = licensed ? "licensed-ship" : "campaign-ship";
+    icon.dataset.pixelValue = String(
+      licensed
+        ? ["pan", "renko", "hugo"].indexOf(licensed.corporation)
+        : ship.id === 0
+          ? 9
+          : ship.id - 1,
+    );
     icon.dataset.active = String(ship.selected);
     icon.setAttribute("aria-hidden", "true");
     const content = section("loadout-card-content");

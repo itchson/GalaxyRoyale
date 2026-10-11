@@ -1,8 +1,10 @@
 import "./flight-menu.css";
 import type { CampaignHud } from "./campaign";
 import type { EquippedAbilityHud } from "./loadout";
+import type { IdentityHud } from "./kikai";
 
 export interface FlightMenuHud {
+  identity?: IdentityHud | null;
   campaign: Pick<CampaignHud, "selected_ship" | "ships">;
   ship_level: number;
   ship_xp: number;
@@ -32,6 +34,7 @@ interface FlightView {
   icon: HTMLElement;
   title: HTMLElement;
   progress: HTMLElement;
+  license: HTMLElement;
   stats: HTMLElement[];
   slots: HTMLElement[];
   cargo: HTMLElement;
@@ -58,7 +61,8 @@ function createView(target: HTMLElement): FlightView {
   const heading = element("div");
   const title = element("h3");
   const progress = element("p");
-  heading.append(title, progress);
+  const license = element("p", "flight-license");
+  heading.append(title, license, progress);
   identity.append(icon, heading);
   const vitals = element("section", "flight-status-stats");
   vitals.setAttribute("aria-label", "Current effective ship statistics");
@@ -98,6 +102,7 @@ function createView(target: HTMLElement): FlightView {
     icon,
     title,
     progress,
+    license,
     stats,
     slots,
     cargo,
@@ -136,13 +141,31 @@ export function paintFlightMenu(
     (entry) => entry.id === hud.campaign.selected_ship,
   );
   const iconValue = String(
-    hud.campaign.selected_ship === 0 ? 9 : hud.campaign.selected_ship - 1,
+    hud.campaign.selected_ship === 0 && hud.identity
+      ? ["pan", "renko", "hugo"].indexOf(hud.identity.corporation)
+      : hud.campaign.selected_ship === 0
+        ? 9
+        : hud.campaign.selected_ship - 1,
   );
+  const iconKind =
+    hud.campaign.selected_ship === 0 && hud.identity
+      ? "licensed-ship"
+      : "campaign-ship";
+  if (view.icon.dataset.pixelKind !== iconKind) {
+    view.icon.dataset.pixelKind = iconKind;
+    changed = true;
+  }
   if (view.icon.dataset.pixelValue !== iconValue) {
     view.icon.dataset.pixelValue = iconValue;
     changed = true;
   }
   write(view.title, ship?.name ?? "SHIP STATUS");
+  write(
+    view.license,
+    hud.identity
+      ? `${hud.identity.designation} / ${hud.identity.corporation_role}`
+      : "LEGACY PILOT LICENSE",
+  );
   write(
     view.progress,
     `LV ${number(hud.ship_level)} / XP ${number(hud.ship_xp)} / ${hud.ship_level >= 100 ? "MAX LEVEL" : `NEXT ${number(hud.ship_next_xp)}`}`,

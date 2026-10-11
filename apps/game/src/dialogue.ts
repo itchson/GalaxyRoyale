@@ -4,6 +4,8 @@ export interface DialogueContent {
   speaker: string;
   text: string;
   portrait?: number;
+  expression?: number;
+  speaking?: boolean;
   actionLabel?: string;
   onAction?: () => void | Promise<void>;
   onNext?: () => void;
@@ -73,7 +75,13 @@ export class DialoguePanel {
     this.replay.id = "dialogue-replay";
     this.replay.type = "button";
     this.replay.textContent = "REPLAY VOICE";
-    actions.append(this.previous, this.next, this.action, this.replay, this.closeButton);
+    actions.append(
+      this.previous,
+      this.next,
+      this.action,
+      this.replay,
+      this.closeButton,
+    );
     content.append(this.speaker, this.text, actions);
     card.append(this.portrait, content);
     this.screen.append(card);
@@ -104,9 +112,13 @@ export class DialoguePanel {
     const portrait = content.portrait ?? 0;
     this.portrait.dataset.portrait = String(
       Number.isFinite(portrait)
-        ? Math.max(0, Math.min(7, Math.floor(portrait)))
+        ? Math.max(0, Math.min(8, Math.floor(portrait)))
         : 0,
     );
+    this.portrait.dataset.portraitExpression = String(
+      Math.max(0, Math.min(3, content.expression ?? 0)),
+    );
+    this.portrait.dataset.portraitSpeaking = String(content.speaking === true);
     this.onAction = content.onAction;
     this.onNext = content.onNext;
     this.onPrevious = content.onPrevious;
@@ -131,7 +143,12 @@ export class DialoguePanel {
     }
     if (!this.isOpen || this.disposed) return;
     // Refreshes and actions cannot accidentally move focus back into flight.
-    (this.next.hidden ? this.action.hidden ? this.closeButton : this.action : this.next).focus({
+    (this.next.hidden
+      ? this.action.hidden
+        ? this.closeButton
+        : this.action
+      : this.next
+    ).focus({
       preventScroll: true,
     });
   }
@@ -146,6 +163,7 @@ export class DialoguePanel {
     this.onPrevious = undefined;
     this.onReplay = undefined;
     this.screen.hidden = true;
+    this.portrait.dataset.portraitSpeaking = "false";
     this.screen.removeAttribute("aria-busy");
     const previousFocus = this.previousFocus;
     this.previousFocus = null;
@@ -153,6 +171,10 @@ export class DialoguePanel {
     if (!this.isOpen && previousFocus?.isConnected)
       previousFocus.focus({ preventScroll: true });
   };
+
+  setSpeaking(value: boolean): void {
+    if (this.isOpen) this.portrait.dataset.portraitSpeaking = String(value);
+  }
 
   dispose(): void {
     if (this.disposed) return;
@@ -195,8 +217,13 @@ export class DialoguePanel {
       if (!event.isComposing) this.close();
     } else if (event.key === "Tab") {
       event.preventDefault();
-      const available = [this.previous, this.next, this.action, this.replay, this.closeButton]
-        .filter(button => !button.hidden && !button.disabled);
+      const available = [
+        this.previous,
+        this.next,
+        this.action,
+        this.replay,
+        this.closeButton,
+      ].filter((button) => !button.hidden && !button.disabled);
       const index = available.indexOf(
         document.activeElement as HTMLButtonElement,
       );

@@ -28,6 +28,21 @@ const runFixture = {
   materials_lost: [1, 2, 3, 4, 5],
 };
 const stages = {
+  ...Object.fromEntries(
+    ["pan", "renko", "hugo"].map((corporation) => [
+      `kikai-${corporation}`,
+      {
+        identity: {
+          kind: "talo",
+          corporation,
+          sub_corporation: "renko",
+          hex_id: "0123456789abcdef",
+        },
+        onboarding: { stage: 0, flags: 0 },
+        currency: [0, 0, 0],
+      },
+    ]),
+  ),
   fresh: {
     currency: [0, 0, 0],
     boss_kills: [0, 0, 0],
@@ -109,7 +124,25 @@ function run(command, args) {
 async function checkpoint(module, stage, backend) {
   const profile = module.checkpoint_contract(stage);
   const expected = stages[stage];
-  assert.equal(profile.schema_version, 4);
+  assert.equal(profile.schema_version, 5);
+  assert.ok(
+    Object.hasOwn(profile, "identity") && Object.hasOwn(profile, "onboarding"),
+  );
+  if (stage.startsWith("kikai-")) {
+    const starter = { "kikai-pan": 2, "kikai-renko": 0, "kikai-hugo": 1 }[
+      stage
+    ];
+    assert.equal(
+      profile.campaign.abilities.filter((a) => a.rank > 0).length,
+      1,
+    );
+    assert.equal(profile.campaign.abilities[starter].rank, 1);
+    assert.equal(profile.campaign.loadouts[0].slots[starter], starter);
+    assert.equal(
+      profile.campaign.abilities.slice(0, 3).filter((a) => a.blueprint).length,
+      1,
+    );
+  }
   assert.equal(Object.hasOwn(profile.campaign, "last_run"), true);
   assert.notEqual(
     profile.campaign.last_run,

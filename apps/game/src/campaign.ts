@@ -15,6 +15,7 @@ export interface Champion {
   patch: boolean;
   blueprint: boolean;
   crafted: boolean;
+  discovered?: boolean;
 }
 export interface CampaignHud {
   champions: Champion[];
@@ -101,7 +102,17 @@ export function paintCampaign(
   );
   const roster = document.createElement("div");
   roster.className = "campaign-roster";
-  for (const champion of hud.champions) {
+  const knownChampions = hud.champions.filter(
+    (champion) => champion.discovered ?? champion.blueprint,
+  );
+  if (!knownChampions.length)
+    roster.append(
+      text(
+        "p",
+        "Explore the universe to discover arena champions. Their ships and abilities appear when found.",
+      ),
+    );
+  for (const champion of knownChampions) {
     const card = document.createElement("article");
     card.className = "campaign-card";
     card.append(icon("campaign-patch", champion.index, champion.patch));

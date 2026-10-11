@@ -15,24 +15,6 @@ const fn rgb(r: u8, g: u8, b: u8) -> u32 {
 }
 const BUTTON_TEXT: u32 = rgb(224, 236, 241);
 const BUTTON_DISABLED_TEXT: u32 = rgb(139, 155, 166);
-const ICON_EDGE: u32 = rgb(255, 255, 255);
-const ICON_RECESS: u32 = rgb(42, 56, 65);
-const ICON_BEVEL: u32 = rgb(95, 117, 126);
-
-/// Direct authored cells: no bitmap textures or coarse-icon enlargement.
-fn authored_icon(rows: &[&str]) -> PixelBody {
-    PixelBody::from_ascii(
-        rows,
-        &[
-            ('#', WHITE),
-            ('h', ICON_EDGE),
-            ('s', ICON_BEVEL),
-            ('d', DIM),
-            ('v', ICON_RECESS),
-        ],
-    )
-}
-
 /// Semantic action colors are independent of transient hover and tab selection.
 fn button_accent(kind: &str) -> u32 {
     match kind {
@@ -170,6 +152,8 @@ pub struct UiNode {
     /// Older clients may omit either region or explicitly send null.
     pub label_rect: Option<[f32; 4]>,
     pub control_rect: Option<[f32; 4]>,
+    pub portrait_expression: u8,
+    pub portrait_speaking: bool,
 }
 
 #[derive(Deserialize)]
@@ -251,316 +235,6 @@ impl FrameGeometry {
 }
 static CELL: LazyLock<PixelBody> = LazyLock::new(|| PixelBody::from_ascii(&["#"], &[('#', WHITE)]));
 // Original 24-cell controls: final-resolution silhouettes, insets and metal details.
-static CLOSE_ICON: LazyLock<PixelBody> = LazyLock::new(|| {
-    authored_icon(&[
-        "........................",
-        "........................",
-        "...h...............h....",
-        "..h#h.............h#h...",
-        "..h##h...........h###h..",
-        ".h####h.........h#####h.",
-        "..h###dhh.....hh#####s..",
-        "...h###d#h...h##d###s...",
-        "....h#####h.h##d###s....",
-        ".....h#####h######s.....",
-        "......h##########s......",
-        ".......h##hhh###s.......",
-        "........h#hhh##s........",
-        ".......h########h.......",
-        "......h##########h......",
-        ".....h#####s######h.....",
-        "....h#####s.h######h....",
-        "...h###d#s...h##d###h...",
-        "..h###d#s.....hs#d###h..",
-        ".h#####s........h#####h.",
-        "..h###s..........h###s..",
-        "...h#s............h#s...",
-        "....h..............h....",
-        "........................",
-    ])
-});
-static SAVE_ICONS: LazyLock<[PixelBody; 3]> = LazyLock::new(|| {
-    [
-        authored_icon(&[
-            "........................",
-            "........................",
-            "...hhhhhhhhhhhhhhh......",
-            "..h###vvvvvvvvvv##h.....",
-            ".h#h##vvvvvvvhhv###h....",
-            ".h####vvvvvvvhhv####h...",
-            ".h####vvvvvvvhhv#####h..",
-            ".h####vvvvvvvhhv#####s..",
-            ".h####vvvvvvvvvv#####s..",
-            ".h###################s..",
-            ".h###################s..",
-            ".h###################s..",
-            ".h###ddddddddddddd###s..",
-            ".h###vvvvvvvvvvhhv###s..",
-            ".h###vvvvvvvvvhhvv###s..",
-            ".h###vvhhvvvvhhvvv###s..",
-            ".h###vvvhhvvhhvvvv###s..",
-            ".h###vvvvhhhhvvvvv###s..",
-            ".h###vvvvvhhvvvvvv###s..",
-            ".h###vvvvvvvvvvvvv###s..",
-            ".h#################s#s..",
-            "..h#################s...",
-            "...hssssssssssssssss....",
-            "........................",
-        ]),
-        authored_icon(&[
-            "........................",
-            "........................",
-            "...hhhhhhhhhhhhhhh......",
-            "..h###vvvvvvvvvv##h.....",
-            ".h#h##vvvvvvvhhv###h....",
-            ".h####vvvvvvvhhv####h...",
-            ".h####vvvvvvvhhv#####h..",
-            ".h####vvvvvvvhhv#####s..",
-            ".h####vvvvvvvvvv#####s..",
-            ".h###################s..",
-            ".h###################s..",
-            ".h###################s..",
-            ".h###ddddddddddddd###s..",
-            ".h###vvvvvvvvvvvvv###s..",
-            ".h###vvvvvvvvvvvvv###s..",
-            ".h###vvvvvvvvvvvvv###s..",
-            ".h###vvhhvvhhvvhhv###s..",
-            ".h###vvhhvvhhvvhhv###s..",
-            ".h###vvvvvvvvvvvvv###s..",
-            ".h###vvvvvvvvvvvvv###s..",
-            ".h#################s#s..",
-            "..h#################s...",
-            "...hssssssssssssssss....",
-            "........................",
-        ]),
-        authored_icon(&[
-            "........................",
-            "........................",
-            "...hhhhhhhhhhhhhhh......",
-            "..h###vvvvvvvvvv##h.....",
-            ".h#h##vvvvvvvhhv###h....",
-            ".h####vvvvvvvhhv####h...",
-            ".h####vvvvvvvhhv#####h..",
-            ".h####vvvvvvvhhv#####s..",
-            ".h####vvvvvvvvvv#####s..",
-            ".h###################s..",
-            ".h###################s..",
-            ".h###################s..",
-            ".h###ddddddddddddd###s..",
-            ".h###vvvvvvvvvvvvv###s..",
-            ".h###vvhhvvhhvvvvv###s..",
-            ".h###vvvhhhhvvvvvv###s..",
-            ".h###vvvvhhvvvvvvv###s..",
-            ".h###vvvhhhhvvvvvv###s..",
-            ".h###vvhhvvhhvvvvv###s..",
-            ".h###vvvvvvvvvvvvv###s..",
-            ".h#################s#s..",
-            "..h#################s...",
-            "...hssssssssssssssss....",
-            "........................",
-        ]),
-    ]
-});
-static MENU_ICONS: LazyLock<[PixelBody; 7]> = LazyLock::new(|| {
-    [
-        authored_icon(&[
-            "........................",
-            ".........hhhhhh.........",
-            ".........h####s.........",
-            "........h######h........",
-            "....hhhh########hhhh....",
-            "....h###v##########s....",
-            "....h#####ssss#####s....",
-            "....h###sd....hs###s....",
-            "...h###s........hv##h...",
-            ".hh####s........d####hh.",
-            ".h####s..........h####s.",
-            ".h####s..........h####s.",
-            ".h####s..........h####s.",
-            ".h####s..........h####s.",
-            ".hs####d........h####ss.",
-            "...h###s........h###s...",
-            "....h#v#hh....dh###s....",
-            "....h#####hhhh#####s....",
-            "....h##########v###s....",
-            "....hsss########ssss....",
-            "........h######s........",
-            ".........h####s.........",
-            ".........hsssss.........",
-            "........................",
-        ]),
-        authored_icon(&[
-            "........................",
-            "........................",
-            ".....h..................",
-            ".....hhh................",
-            ".....h##hh..............",
-            ".....h####h.............",
-            ".....h#####hh...........",
-            ".....h##h####hh.........",
-            ".....h##hhh####hh.......",
-            ".....h#vhhhhh####h......",
-            ".....h#vhhhhhhh###hh....",
-            ".....h#vhhhhhhhhh###hh..",
-            ".....h#v#######dd###ss..",
-            ".....h#vddddddd###ss....",
-            ".....h#vdddddd###s......",
-            ".....h##dddd###ss.......",
-            ".....h##ddd##ss.........",
-            ".....h##d##ss...........",
-            ".....h####s.............",
-            ".....h##ss..............",
-            ".....hss................",
-            ".....h..................",
-            "........................",
-            "........................",
-        ]),
-        authored_icon(&[
-            "........................",
-            "........................",
-            ".............hh.........",
-            "...h.........h#hh.......",
-            "...hhhhhhhhhhss##hh.....",
-            "...h#######s...hs##h....",
-            "...h######s......h#s....",
-            "...h#####s........h#h...",
-            "....h###s.........h#s...",
-            "....h##s...........h#h..",
-            "..hh##s............d#s..",
-            "..h##s.............h#s..",
-            "..h#s..............h#s..",
-            "..h#s..............h#s..",
-            "..h#s..............h#s..",
-            "...h#h............h#s...",
-            "...h#d............d#s...",
-            "....h#h..........h#s....",
-            "....h##hh......hh##s....",
-            ".....hs##hhhdhh##ss.....",
-            ".......hs######ss.......",
-            ".........hsssss.........",
-            "........................",
-            "........................",
-        ]),
-        authored_icon(&[
-            "........................",
-            "........................",
-            "........................",
-            "..........hhhh..........",
-            ".........h####h.........",
-            "........h######h........",
-            ".......h########h.......",
-            "......h#####s####h......",
-            "......h####s.h###s......",
-            ".....h####hhhhh###h.....",
-            "....h####shhhh.h###h....",
-            "...h####s..dd...h###h...",
-            "..hs###s.........h###h..",
-            "....h###hh....hhh#s#s...",
-            ".....h###s....h##s.h....",
-            "......hvvs....hvvs......",
-            "......hvvs....hvvs......",
-            "......hvvs....hvvs......",
-            "......h##s....h##s......",
-            "......h##s....h##s......",
-            ".....h####hhhh####h.....",
-            ".....hsssssssssssss.....",
-            "........................",
-            "........................",
-        ]),
-        authored_icon(&[
-            "........................",
-            "........................",
-            "..........hhhh..........",
-            "..........h##s..........",
-            ".......h..hh#s..h.......",
-            ".....hhs..hhds..hhh.....",
-            "....h##s..hhds..h##h....",
-            "....h##s..hhds..h##s....",
-            "...h##s...hhds...h##h...",
-            "...h#s....hhds....h#s...",
-            "..h#s.....h##s.....h#h..",
-            "..h#s.....h##s.....h#s..",
-            "..h#s.....hsss.....h#s..",
-            "..h#d..............hds..",
-            "..h#s..............h#s..",
-            "..h#s..............h#s..",
-            "...h#h............h#s...",
-            "...h##h..........h##s...",
-            "....h#dh........h##s....",
-            "....h###h......h###s....",
-            ".....hs##hhhhhh#dss.....",
-            ".......hs######ss.......",
-            ".........hsssss.........",
-            "........................",
-        ]),
-        authored_icon(&[
-            "........................",
-            "........................",
-            "........................",
-            "....hhhhhhhhhhhhhhhh....",
-            "...h################h...",
-            "..h#h################h..",
-            "..h##dddddddddddddd##s..",
-            "..h##vvvvvvvvvvvvvv##s..",
-            "..h##vvvvvvvvvvvvvv##s..",
-            "..h##vvvvhvvvvvvvvv##s..",
-            "..h##vvvvvvvvvvhvvv##s..",
-            "..h##vvvhvvvvvhvvvv##s..",
-            "..h##hhhvvvvhhvvhhh##s..",
-            "..h##vvvvvhvvvvvvvv##s..",
-            "..h##vvvvvvvvvvvvvv##s..",
-            "..h##vvvvvvhvvvvvvv##s..",
-            "..h##v###vdddv###vv##s..",
-            "..h##vvvvvvvvvvvvvv##s..",
-            "..h################d#s..",
-            "...h################s...",
-            "....hsssssssssssssss....",
-            "........................",
-            "........................",
-            "........................",
-        ]),
-        authored_icon(&[
-            "........................",
-            "........................",
-            "........h............h..",
-            "......hh#hh........hhs..",
-            "....hh##v##hhh...hh##s..",
-            "..hh####v#####hhh#h##s..",
-            "..h#####v######v##h##s..",
-            "..h#####v######v#hhh#s..",
-            "..h#d###v######v#hhh#s..",
-            "..h##dd#v######vhhvhhs..",
-            "..h#####vd####dv#hhh#s..",
-            "..h#####v#d##d#v#hhh#s..",
-            "..h#####v##dd##v##h##s..",
-            "..h#####v######v##h##s..",
-            "..h#####v######v#####s..",
-            "..h##h##v######v#####s..",
-            "..h#hhh#v######v#####s..",
-            "..h#####v######v#####s..",
-            "..h####svs#####v####ss..",
-            "..h##ss...hss##v##ss....",
-            "..hss........hs#ss......",
-            "..h............h........",
-            "........................",
-            "........................",
-        ]),
-    ]
-});
-fn menu_icon(kind: &str) -> Option<(&'static PixelBody, u32)> {
-    let (index, accent) = match kind {
-        "settings-icon" => (0, rgb(88, 222, 239)),
-        "resume-icon" => (1, rgb(106, 237, 193)),
-        "restart-icon" => (2, rgb(255, 215, 131)),
-        "title-icon" => (3, rgb(182, 201, 219)),
-        "quit-icon" => (4, rgb(220, 125, 130)),
-        "status-icon" => (5, rgb(182, 201, 219)),
-        "map-icon" => (6, rgb(106, 237, 193)),
-        _ => return None,
-    };
-    Some((&MENU_ICONS[index], accent))
-}
-
 // A chart marker is its own compact occupied object. DOM hit regions stay
 // larger than this art; selecting a marker never adds a generic button frame.
 static MAP_HOME: LazyLock<PixelBody> = LazyLock::new(|| {
@@ -1081,16 +755,18 @@ impl Painter<'_> {
         self.work_remaining -= count;
     }
     fn control_icon(&mut self, node: &UiNode) {
-        let (body, accent) = if node.kind == "close-icon" {
-            (&*CLOSE_ICON, WHITE)
-        } else if let Some(icon) = menu_icon(&node.kind) {
-            icon
-        } else {
-            let state = selection(node.value, SAVE_ICONS.len());
-            (
-                &SAVE_ICONS[state],
-                [rgb(106, 237, 193), rgb(88, 222, 239), rgb(220, 125, 130)][state],
-            )
+        let Some(body) = crate::kikai_art::icon(&node.kind) else {
+            return;
+        };
+        let accent = match node.kind.as_str() {
+            "close-icon" => WHITE,
+            "resume-icon" | "map-icon" => rgb(106, 237, 193),
+            "restart-icon" => rgb(255, 215, 131),
+            "title-icon" | "status-icon" => rgb(182, 201, 219),
+            "quit-icon" => rgb(220, 125, 130),
+            "save-icon" => [rgb(106, 237, 193), rgb(88, 222, 239), rgb(220, 125, 130)]
+                [selection(node.value, 3)],
+            _ => rgb(88, 222, 239),
         };
         let count = body.occupied_count();
         if count > self.remaining || count > self.work_remaining {
@@ -1101,11 +777,7 @@ impl Painter<'_> {
         if !fit.is_finite() || fit <= 0.0 {
             return;
         }
-        let scale = if fit >= 1.0 {
-            fit.floor()
-        } else {
-            1.0 / (1.0 / fit).ceil()
-        };
+        let scale = fit;
         let local = Transform {
             position: Vec2::new(r[0] + r[2] * 0.5, r[1] + r[3] * 0.5),
             scale: Vec2::splat(scale),
@@ -1126,25 +798,14 @@ impl Painter<'_> {
                         || p.y + half > c[1] + c[3]
                 }) {
                     0
-                } else if node.disabled {
-                    BUTTON_DISABLED_TEXT
-                } else if shade == ICON_EDGE {
-                    let [r, g, b, _] = accent.to_le_bytes();
-                    rgb(
-                        r.saturating_add(38),
-                        g.saturating_add(26),
-                        b.saturating_add(20),
-                    )
-                } else if shade == ICON_RECESS {
-                    button_tone(accent, 0.28)
-                } else if shade == ICON_BEVEL {
-                    button_tone(accent, 0.67)
-                } else if shade == DIM {
-                    button_tone(accent, 0.52)
-                } else if node.active {
-                    brighten(accent)
                 } else {
-                    accent
+                    crate::kikai_art::icon_color(
+                        shade,
+                        accent,
+                        node.active,
+                        node.selected,
+                        node.disabled,
+                    )
                 }
             },
         );
@@ -1260,6 +921,27 @@ impl Painter<'_> {
         self.remaining -= art.body.occupied_count();
     }
     fn portrait(&mut self, node: &UiNode, time: f32, reduced: bool) {
+        if node.value == 8.0 {
+            crate::kikai_art::append_dora(
+                self.frame,
+                &crate::kikai_art::DoraInput {
+                    rect: node.rect,
+                    parent: self.parent,
+                    clip: self.clip,
+                    time,
+                    reduced_motion: reduced,
+                    expression: crate::kikai_art::DoraExpression::from_label(
+                        ["neutral", "focused", "concerned", "pleased"]
+                            [node.portrait_expression.min(3) as usize],
+                    ),
+                    speaking: node.portrait_speaking,
+                    disabled: node.disabled,
+                },
+                &mut self.remaining,
+                &mut self.work_remaining,
+            );
+            return;
+        }
         let style = selection(node.value, PORTRAITS.len());
         let art = &PORTRAITS[style];
         let body = &art.body;
@@ -1347,6 +1029,48 @@ impl Painter<'_> {
                     muted(color)
                 } else if node.active {
                     brighten(color)
+                } else {
+                    color
+                }
+            },
+        );
+        self.remaining -= count;
+        self.work_remaining -= count;
+    }
+    fn licensed_ship(&mut self, node: &UiNode) {
+        let corporation = [
+            game_core::identity::Corporation::Pan,
+            game_core::identity::Corporation::Renko,
+            game_core::identity::Corporation::Hugo,
+        ][selection(node.value, 3)];
+        let body = game_core::identity::starter_body(corporation);
+        let count = body.occupied_count();
+        let r = node.rect;
+        let scale = (r[2] / body.width as f32).min(r[3] / body.height as f32);
+        if !scale.is_finite()
+            || scale <= 0.0
+            || count > self.remaining
+            || count > self.work_remaining
+        {
+            return;
+        }
+        let local = Transform {
+            position: Vec2::new(r[0] + r[2] * 0.5, r[1] + r[3] * 0.5),
+            scale: Vec2::splat(scale),
+            ..Transform::default()
+        };
+        let clip = self.clip;
+        self.frame.push_body_affine_colored(
+            body,
+            self.parent.compose(local.affine()),
+            |cell, color| {
+                let p = local.point(cell);
+                if clip.is_some_and(|c| {
+                    p.x < c[0] || p.y < c[1] || p.x >= c[0] + c[2] || p.y >= c[1] + c[3]
+                }) {
+                    0
+                } else if node.disabled {
+                    muted(color)
                 } else {
                     color
                 }
@@ -1765,10 +1489,13 @@ impl Painter<'_> {
             "panel" => self.frame("panel", r, node.active, node.disabled),
             "console-panel" => self.console_panel(r),
             "portrait" => self.portrait(node, time, reduced),
+            "licensed-ship" => self.licensed_ship(node),
             "campaign-patch" => self.campaign(node, false, time, reduced),
             "campaign-ship" => self.campaign(node, true, time, reduced),
             "close-icon" | "save-icon" | "settings-icon" | "resume-icon" | "restart-icon"
-            | "title-icon" | "quit-icon" | "status-icon" | "map-icon" => self.control_icon(node),
+            | "title-icon" | "quit-icon" | "status-icon" | "map-icon" | "fullscreen-icon" => {
+                self.control_icon(node)
+            }
             "map-field" => self.map_field(node),
             "map-ring" => self.map_ring(node),
             "map-home" | "map-player" | "map-site" => self.map_marker(node),

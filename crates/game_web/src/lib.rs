@@ -4,6 +4,7 @@ pub mod boss_overlay;
 #[cfg(target_arch = "wasm32")]
 mod browser;
 mod champion_patches;
+pub mod kikai_art;
 pub mod lighting;
 pub mod pixel_ui;
 #[cfg(target_arch = "wasm32")]

@@ -12,6 +12,7 @@ import {
 } from "./webgl-lifecycle";
 import { DebugConsole } from "./debug-console";
 import { DialoguePanel } from "./dialogue";
+import { DroidCreation, type IdentityHud, type OnboardingHud } from "./kikai";
 import {
   paintCampaign,
   paintCredits,
@@ -38,6 +39,8 @@ import {
 declare const __WASM_BUILDS__: Record<"webgpu" | "webgl2", string>;
 
 interface Hud extends ForgeHud, FlightMenuHud {
+  identity: IdentityHud | null;
+  onboarding: OnboardingHud | null;
   audio: AudioState;
   position: [number, number];
   camera: [number, number];
@@ -147,6 +150,13 @@ interface GalaxyRuntime {
   switch_ship(id: number): void;
   acknowledge_credits(): void;
   return_to_home(): void;
+  register_droid(
+    kind: string,
+    corporation: string,
+    subCorporation: string,
+    hexId: string,
+  ): void;
+  acknowledge_license(): void;
   dock_facility_at(x: number, y: number): number;
   diagnostic(command: string): void;
   boss_ui_bounds(): Float32Array;
@@ -165,6 +175,7 @@ audio.setLevels(settings.master, settings.music, settings.sfx);
 const narrative = new NarrativeDirector({
   voiceEnabled: settings.dialogue_voice,
   voiceVolume: settings.master * settings.voice_volume,
+  onVoiceStatus: (status) => dialoguePanel?.setSpeaking(status === "speaking"),
 });
 const launch = element<HTMLButtonElement>("launch");
 launch.disabled = true;
@@ -212,6 +223,8 @@ let transitionEpoch = 0;
 let preparingEncounter: number | null = null;
 let hud: Hud;
 let launched = false;
+let needsDroidCreation = false;
+let lastTrainingStage = -1;
 let paused = true;
 let recovering = false;
 let graphicsFailed = false;
@@ -358,6 +371,65 @@ const dialoguePanel = new DialoguePanel({
     pixelUi?.invalidate();
   },
 });
+const droidCreation = new DroidCreation({
+  onOpen: () => {
+    launchScreen.hidden = true;
+    galaxy.set_ui_mode(0);
+    input.reset();
+    input.enabled = false;
+    pixelUi?.invalidate();
+  },
+  onClose: () => {
+    pixelUi?.invalidate();
+    if (!needsDroidCreation) {
+      void resume().then(() => showDoraGuide());
+    } else {
+      launchScreen.hidden = false;
+      galaxy.set_ui_mode(2);
+      launch.focus();
+    }
+  },
+  create: async (identity) => {
+    // Retry the same issued license after a failed save, without another grant.
+    if (!galaxy.hud().identity)
+      galaxy.register_droid(
+        identity.kind,
+        identity.corporation,
+        identity.sub_corporation,
+        identity.hex_id,
+      );
+    hud = galaxy.hud();
+    await persist(galaxy.profile());
+    needsDroidCreation = false;
+    launch.textContent = "CONTINUE EXPEDITION";
+    paintHud();
+  },
+});
+function showDoraGuide(): void {
+  const training = hud?.onboarding;
+  if (!training || !hud.identity || !launched || !deathScreen.hidden) return;
+  if (!menu.hidden) menu.hidden = true;
+  dialoguePanel.show({
+    speaker: "DPR#1337 / DORA",
+    text:
+      training.stage === 0
+        ? `Welcome, ${hud.identity.short_designation}. I am DORA-PAN-RENKO-1337, your PAN Dynamics guide. Your Kikai license includes ${hud.identity.starter_ship} and ${hud.identity.starter_ability}.`
+        : training.description,
+    portrait: 8,
+    expression: training.completed ? 3 : training.stage >= 2 ? 1 : 0,
+    actionLabel: training.stage === 0 ? "BEGIN TRAINING" : "CONTINUE FLIGHT",
+    onAction: async () => {
+      if (hud.onboarding?.stage === 0) {
+        galaxy.acknowledge_license();
+        hud = galaxy.hud();
+        await persist(galaxy.profile());
+      }
+      dialoguePanel.close();
+      toast(hud.onboarding?.description ?? "Your expedition is ready.");
+    },
+  });
+  pixelUi?.invalidate();
+}
 function restoreUi(): void {
   if (
     graphicsFailed &&
@@ -446,6 +518,7 @@ async function persist(profile: Profile): Promise<void> {
   }
 }
 function save(profile: Profile): void {
+  if (needsDroidCreation) return;
   void persist(profile).catch((error) => {
     if (error instanceof SaveConflict && launched && menu.hidden) pause(false);
     toast(store.message);
@@ -829,8 +902,23 @@ function selectMenuTab(tab: MenuTab): void {
     const missionHeading = document.createElement("h3");
     missionHeading.textContent = "MISSIONS";
     target.append(heading, missionHeading);
+    if (hud.onboarding) {
+      const training = document.createElement("section");
+      training.className = "upgrade-category passive";
+      const title = document.createElement("h3");
+      title.textContent = `DORA / ${hud.onboarding.title}`;
+      const description = document.createElement("p");
+      description.textContent = hud.onboarding.description;
+      const contact = document.createElement("button");
+      contact.textContent = "CONTACT DORA";
+      contact.addEventListener("click", showDoraGuide);
+      training.append(title, description, contact);
+      target.append(training);
+    }
     const list = document.createElement("ul");
-    const knownSites = new Map(galaxy.universe_map().sites.map(site => [site.id, site.name]));
+    const knownSites = new Map(
+      galaxy.universe_map().sites.map((site) => [site.id, site.name]),
+    );
     for (const quest of hud.quest_log) {
       const item = document.createElement("li");
       item.textContent = `${knownSites.get(quest.site_id) ?? quest.site_id} / ${quest.event === "courier" ? "DELIVERY" : "FAMILY BOUNTY"} / ${quest.completed ? "REWARD CLAIMED" : `${quest.progress}/${quest.target} - return to source`}`;
@@ -963,6 +1051,15 @@ function paintUpgrades(_dock: boolean): void {
 }
 function paintHud(): void {
   if (!hud) return;
+  if (
+    launched &&
+    hud.onboarding &&
+    hud.onboarding.stage !== lastTrainingStage
+  ) {
+    if (lastTrainingStage >= 0)
+      toast(`DORA / ${hud.onboarding.title}: ${hud.onboarding.description}`);
+    lastTrainingStage = hud.onboarding.stage;
+  }
   syncFlightStatusLayout();
   element("sector").textContent =
     `${hud.biome.name.toUpperCase()} / ${hud.safe ? "PROTECTED SPACE" : `DANGER ${hud.danger}`}`;
@@ -1389,6 +1486,7 @@ async function init(): Promise<void> {
   const profile = await store.open((message) => {
     loadStatus.textContent = message;
   });
+  needsDroidCreation = profile === null;
   const forceWebgl = params.get("renderer") === "webgl2";
   const gpuAvailable = "gpu" in navigator;
   const candidates =
@@ -1454,6 +1552,9 @@ async function init(): Promise<void> {
   paintHud();
   loadStatus.textContent = "SYSTEMS ONLINE / READY TO FLY";
   launch.disabled = false;
+  launch.textContent = needsDroidCreation
+    ? "CREATE YOUR DROID"
+    : "CONTINUE EXPEDITION";
   paintSaveStatus();
   save(galaxy.profile());
   if (diagnosticMode) {
@@ -1590,7 +1691,12 @@ launch.addEventListener("click", async () => {
   const epoch = ++transitionEpoch;
   await audio.unlock();
   if (epoch !== transitionEpoch || beforeLaunchMenu || launched) return;
+  if (needsDroidCreation) {
+    droidCreation.open();
+    return;
+  }
   await resume();
+  if (hud.onboarding?.stage === 0) showDoraGuide();
 });
 element("resume").addEventListener("click", () => void resume());
 element("launch-settings").addEventListener("click", openLaunchSettings);
@@ -1718,7 +1824,7 @@ async function quitGame(): Promise<void> {
   const button = element<HTMLButtonElement>("quit-game");
   button.disabled = true;
   try {
-    await persist(galaxy.profile());
+    if (!needsDroidCreation) await persist(galaxy.profile());
     await store.flush();
     audio.suspend();
     narrative.close();

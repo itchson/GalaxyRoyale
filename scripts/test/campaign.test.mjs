@@ -142,6 +142,27 @@ function completedSeason(won) {
   };
 }
 
+test("campaign exposes only genuinely discovered champions and their catalog details", () => {
+  const f = fixture();
+  const hud = completedSeason(false);
+  hud.tournament_unlocked = false;
+  hud.champions.forEach((champion) => {
+    champion.patch = false;
+    champion.blueprint = false;
+    champion.discovered = false;
+  });
+  f.paint(hud);
+  assert.equal(f.patches().length, 0);
+  assert.doesNotMatch(f.text(), /Ship 0|Fixture ability|Champion 0/);
+  assert.equal(f.button("SET COURSE"), undefined);
+  hud.champions[0].discovered = true;
+  f.paint(hud);
+  assert.equal(f.patches().length, 1);
+  assert.match(f.text(), /Ship 0/);
+  assert.ok(f.button("SET COURSE"));
+  assert.doesNotMatch(f.text(), /Ship 1|Champion 1/);
+});
+
 test("a completed losing season offers a new season without victory or credits claims", () => {
   const f = fixture();
   const hud = completedSeason(false);

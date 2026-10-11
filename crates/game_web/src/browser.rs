@@ -89,6 +89,16 @@ fn to_js(value: &impl Serialize) -> Result<JsValue, JsValue> {
 pub fn checkpoint_contract(stage: &str) -> Result<JsValue, JsValue> {
     let mut profile = Profile::default();
     match stage {
+        "kikai-pan" | "kikai-renko" | "kikai-hugo" => {
+            let corporation = stage.trim_start_matches("kikai-");
+            profile = game_core::identity::create_profile(
+                "talo",
+                corporation,
+                "renko",
+                "0123456789abcdef",
+            )
+            .map_err(js)?;
+        }
         "fresh" | "champion" | "tiered-cargo" | "loss-summary" => {}
         "generations" => {
             // Valid saved credit with both higher-tier queues and reserved base credit.
@@ -444,6 +454,37 @@ impl Galaxy {
     }
     pub fn profile(&self) -> Result<JsValue, JsValue> {
         to_js(self.game.profile())
+    }
+    /// Register only an untouched anonymous flight; never replace live progress.
+    pub fn register_droid(
+        &mut self,
+        kind: &str,
+        corporation: &str,
+        sub_corporation: &str,
+        hex_id: &str,
+    ) -> Result<(), JsValue> {
+        if !self.paused || !self.game.can_register_droid() {
+            return Err(JsValue::from_str(
+                "This flight already has a license or progression.",
+            ));
+        }
+        let profile =
+            game_core::identity::create_profile(kind, corporation, sub_corporation, hex_id)
+                .map_err(js)?;
+        self.game = Game::new(profile);
+        let extent = self.world_viewport();
+        self.game.set_viewport(extent[0], extent[1]);
+        self.accumulator = 0.0;
+        self.pending_destination = None;
+        self.ui_joystick = None;
+        self.ui_fire = false;
+        self.boss_overlay.reset();
+        self.vitals_animation.reset();
+        self.last_revision = self.game.profile().revision;
+        Ok(())
+    }
+    pub fn acknowledge_license(&mut self) -> Result<(), JsValue> {
+        self.game.acknowledge_license().map_err(js)
     }
     pub fn purchase(&mut self, id: &str) -> Result<(), JsValue> {
         self.game.purchase(id).map_err(js)

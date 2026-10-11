@@ -14,6 +14,8 @@ interface Node {
   clip: number[] | null;
   label_rect?: number[];
   control_rect?: number[];
+  portrait_expression?: number;
+  portrait_speaking?: boolean;
 }
 export class PixelUiBridge {
   private dirty = true;
@@ -53,6 +55,7 @@ export class PixelUiBridge {
       "debug-console",
       "dialogue-screen",
       "death-screen",
+      "droid-screen",
     ])
       if (document.getElementById(id))
         this.observer.observe(document.getElementById(id)!, {
@@ -65,6 +68,11 @@ export class PixelUiBridge {
             "class",
             "disabled",
             "data-active",
+            "aria-pressed",
+            "data-selected",
+            "data-portrait",
+            "data-portrait-expression",
+            "data-portrait-speaking",
             "data-pixel-icon",
             "data-pixel-kind",
             "data-pixel-value",
@@ -108,6 +116,7 @@ export class PixelUiBridge {
       const icon = element.dataset.pixelIcon;
       if (
         [
+          "close-icon",
           "settings-icon",
           "resume-icon",
           "restart-icon",
@@ -115,6 +124,7 @@ export class PixelUiBridge {
           "quit-icon",
           "status-icon",
           "map-icon",
+          "fullscreen-icon",
         ].includes(icon ?? "")
       )
         return icon!;
@@ -143,7 +153,7 @@ export class PixelUiBridge {
       getComputedStyle(element).display !== "none" &&
       element.getBoundingClientRect().width > 0;
     for (const root of document.querySelectorAll<HTMLElement>(
-      ".launch-card,.menu-card,.console-card,.dialogue-card,.death-card,#game-ui",
+      ".launch-card,.menu-card,.console-card,.dialogue-card,.death-card,.droid-card,#game-ui",
     )) {
       if (!visible(root)) continue;
       const bounds = root.getBoundingClientRect();
@@ -211,7 +221,7 @@ export class PixelUiBridge {
           Math.min(3, Number.parseFloat(style.fontSize) / scale / 8),
         );
         const scrollSelector =
-          ".menu-tabs,#map-chart,#map-content,#flight-status,#pause-content,#upgrade-content,#quest-content,#settings-content,#archive-content,#hangar-content,#campaign-content,#console-output,#dialogue-text,#run-summary";
+          ".menu-tabs,#map-chart,#map-content,#flight-status,#pause-content,#upgrade-content,#quest-content,#settings-content,#archive-content,#hangar-content,#campaign-content,#console-output,#dialogue-text,#run-summary,.droid-content";
         let clipX = bounds.x,
           clipY = bounds.y,
           clipRight = bounds.x + bounds.width,
@@ -288,8 +298,23 @@ export class PixelUiBridge {
                 element.contains(document.activeElement),
           selected:
             element.dataset.active === "true" ||
+            element.getAttribute("aria-pressed") === "true" ||
             element.getAttribute("aria-selected") === "true",
           disabled: element instanceof HTMLButtonElement && element.disabled,
+          ...(kind === "portrait"
+            ? {
+                portrait_expression: Math.floor(
+                  Math.max(
+                    0,
+                    Math.min(
+                      3,
+                      Number(element.dataset.portraitExpression) || 0,
+                    ),
+                  ),
+                ),
+                portrait_speaking: element.dataset.portraitSpeaking === "true",
+              }
+            : {}),
           ...(regions
             ? {
                 ...(regions.label
