@@ -51,6 +51,10 @@ jobs:
         run: python -m pip install -r scripts/asset-requirements.txt
       - name: Exact cell conversions, topology and loss policies
         run: python scripts/asset-pack-tests.py -v
+      - name: KIKAI portraits, current guide canon and authored controls
+        run: python scripts/asset-kikai-tests.py
+      - name: Detailed shooting-star palette and occupied cells
+        run: python scripts/asset-shooting-star-tests.py
       - name: Actual native PixelBody, group and animation extraction
         run: cargo test --locked --manifest-path scripts/asset-native-preview/Cargo.toml
       - name: Extract and audit the accepted dock conversion

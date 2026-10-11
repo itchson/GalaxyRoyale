@@ -2,7 +2,7 @@
 
 The DevBible is the versioned, source-backed reference for the game. Open **DevBible** in the private local Mission Control sidebar. It supports text search, category/status filters and links such as `#wiki/champion-0`.
 
-The original catalog contained 33 entries; the current catalog also records Kikai manufacturers, DPR#1337 and the real first-flight mission. The original coverage includes: the eight named champions, ten-hull fleet identity, seventeen automatic abilities, six biomes, canonical seed nodes, Haven and remote belts, courier/bounty missions, ship XP/material rules, ordinary families and fifteen bosses, Riveter, Radiation Mote, pixel-engine/art contracts, verification boundaries and future modes.
+The original catalog contained 33 entries; the current catalog also records KIKAI manufacturers, OPR#1337 and the real first-flight mission. KIKAI are technological descendants of humans. The guide's friendship, exploration and K-pop hobby, Galaxy Royale's sporting role and independent corporation sponsorship are accepted lore; new sponsor roster candidates remain explicitly authored future content. The original coverage includes: the eight named champions, ten-hull fleet identity, seventeen automatic abilities, six biomes, canonical seed nodes, Haven and remote belts, courier/bounty missions, ship XP/material rules, ordinary families and fifteen bosses, Riveter, Radiation Mote, pixel-engine/art contracts, verification boundaries and future modes.
 
 ## Meaning of status
 

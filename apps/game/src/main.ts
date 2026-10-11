@@ -970,11 +970,11 @@ function selectMenuTab(tab: MenuTab): void {
       const training = document.createElement("section");
       training.className = "upgrade-category passive";
       const title = document.createElement("h3");
-      title.textContent = `DORA / ${hud.onboarding.title}`;
+      title.textContent = `OPR#1337 / ${hud.onboarding.title}`;
       const description = document.createElement("p");
       description.textContent = hud.onboarding.description;
       const contact = document.createElement("button");
-      contact.textContent = "CONTACT DORA";
+      contact.textContent = "CONTACT OPR#1337";
       contact.addEventListener("click", showDoraGuide);
       training.append(title, description, contact);
       target.append(training);
@@ -1121,7 +1121,7 @@ function paintHud(): void {
     hud.onboarding.stage !== lastTrainingStage
   ) {
     if (lastTrainingStage >= 0)
-      toast(`DORA / ${hud.onboarding.title}: ${hud.onboarding.description}`);
+      toast(`OPR#1337 / ${hud.onboarding.title}: ${hud.onboarding.description}`);
     lastTrainingStage = hud.onboarding.stage;
   }
   syncFlightStatusLayout();
