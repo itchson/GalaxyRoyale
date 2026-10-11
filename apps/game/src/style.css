@@ -350,8 +350,8 @@ body:not(.pixel-ready) #universe {
   gap: calc(5px * var(--ui-scale, 1));
 }
 .menu-card:has(.pause-page:not([hidden])) {
-  width: min(calc(390px * var(--ui-scale, 1)), 100%);
-  height: min(calc(300px * var(--ui-scale, 1)), 100%);
+  width: min(640px, calc(390px * var(--ui-scale, 1)), 100%);
+  height: min(560px, calc(300px * var(--ui-scale, 1)), 100%);
 }
 .menu-card:has(.pause-page:not([hidden])) > .menu-actions {
   display: none;
@@ -442,8 +442,8 @@ body:not(.pixel-ready) #universe {
   color: var(--amber);
 }
 .menu-card:has(#settings-content:not([hidden])) {
-  width: min(calc(680px * var(--ui-scale, 1)), 100%);
-  height: min(calc(390px * var(--ui-scale, 1)), 100%);
+  width: min(760px, calc(680px * var(--ui-scale, 1)), 100%);
+  height: min(640px, calc(390px * var(--ui-scale, 1)), 100%);
 }
 .settings {
   display: grid;
