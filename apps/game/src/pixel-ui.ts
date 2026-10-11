@@ -7,6 +7,7 @@ interface Node {
   rect: number[];
   text: string;
   font: number;
+  text_align?: "left" | "center" | "right";
   value: number;
   active: boolean;
   selected: boolean;
@@ -324,6 +325,10 @@ export class PixelUiBridge {
               ? Array.from(text).slice(0, 256).join("")
               : text.replace(/\s+/g, " ").trim().slice(0, 256),
           font,
+          text_align:
+            style.textAlign === "center" || style.textAlign === "right"
+              ? style.textAlign
+              : "left",
           value,
           clip: [
             (clipX - bounds.x) / scale,

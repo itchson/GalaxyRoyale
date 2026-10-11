@@ -24,6 +24,7 @@ function pixelScene({
   icon = null,
   scale = 1,
   fontSize = "8px",
+  textAlign = "left",
   buttons = [],
   scrollBounds = null,
   rootBounds = null,
@@ -200,7 +201,7 @@ function pixelScene({
     HTMLElement: Element,
     HTMLInputElement: Input,
     HTMLButtonElement: Button,
-    getComputedStyle: () => ({ display: "block", fontSize }),
+    getComputedStyle: () => ({ display: "block", fontSize, textAlign }),
     performance: { now: () => 0 },
     MutationObserver: class {
       observe() {}
@@ -603,6 +604,28 @@ test("settings transfer independently measured input and label rectangles throug
   assert.deepEqual(Array.from(slider.rect), [10, 30, 110, 40]);
   assert.equal(slider.disabled, true);
   assert.equal(slider.text, "Flight zoom");
+});
+
+test("semantic text alignment reaches native glyph layout without moving measured bounds", () => {
+  for (const [textAlign, expected] of [
+    ["center", "center"],
+    ["right", "right"],
+    ["left", "left"],
+    ["justify", "left"],
+    [undefined, "left"],
+  ]) {
+    const node = pixelScene({
+      textAlign,
+      paragraph: {
+        id: "card-identity",
+        text: "APR#1337",
+        bounds: { x: 20, y: 50, width: 200, height: 16 },
+      },
+    }).groups[0].nodes.find((n) => n.kind === "text");
+    assert.equal(node.text_align, expected);
+    assert.deepEqual(Array.from(node.rect), [20, 50, 200, 16]);
+    assert.equal(node.text, "APR#1337");
+  }
 });
 
 test("physical menu font caps preserve sub-unit native glyph scale on large viewports", () => {
