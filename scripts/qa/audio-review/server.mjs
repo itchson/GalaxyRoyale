@@ -33,7 +33,7 @@ export function staticFile(urlPath, output) {
 
 export function capturePath(urlPath, output) {
   const match =
-    /^\/capture\/(qa-[0-9]{13}-[a-f0-9]{8})\/(prior-engine\.wav|warm-engine\.wav|representative-mix\.wav|max-bus-burst\.wav|report\.json)$/.exec(
+    /^\/capture\/(qa-[0-9]{13}-[a-f0-9]{8})\/(prior-engine\.wav|warm-engine\.wav|representative-mix\.wav|max-bus-burst\.wav|current-score\.wav|report\.json)$/.exec(
       urlPath,
     );
   return match ? path.join(output, "captures", match[1], match[2]) : null;

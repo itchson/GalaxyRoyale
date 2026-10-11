@@ -38,12 +38,80 @@ const fixtures = [
     seconds: 5,
     burst: true,
   },
+  {
+    key: "current-score",
+    title: "Current corporate homes, exploration, combat and boss release",
+    Engine: AudioEngine,
+    seconds: 24,
+    currentScore: true,
+  },
+];
+// Declared DSP states, not an invented playthrough or a change to pilot identity.
+const currentScorePhases = [
+  { key: "pan-home", start: 0, end: 3, state: { corporation: "pan" } },
+  { key: "renko-home", start: 3, end: 6, state: { corporation: "renko" } },
+  { key: "hugo-home", start: 6, end: 9, state: { corporation: "hugo" } },
+  {
+    key: "quiet-expanse",
+    start: 9,
+    end: 12,
+    state: {
+      area: "reach",
+      corporation: "hugo",
+      engines: 2,
+      throttle: 0.65,
+      speed: 0.4,
+    },
+  },
+  {
+    key: "active-combat",
+    start: 12,
+    end: 16,
+    state: {
+      area: "reach",
+      biome: 3,
+      corporation: "hugo",
+      combat: 0.8,
+      hostiles: 6,
+      hull: 0.65,
+      engines: 2,
+      throttle: 0.9,
+      speed: 0.75,
+    },
+  },
+  {
+    key: "boss-low-hull",
+    start: 16,
+    end: 20,
+    state: {
+      area: "reach",
+      biome: 5,
+      corporation: "hugo",
+      combat: 1,
+      hostiles: 1,
+      boss: true,
+      hull: 0.08,
+      engines: 2,
+      throttle: 1,
+      speed: 1,
+    },
+  },
+  {
+    key: "home-healed-release",
+    start: 20,
+    end: 24,
+    state: { corporation: "pan", engines: 2 },
+  },
 ];
 const sha = async (bytes) =>
   [...new Uint8Array(await crypto.subtle.digest("SHA-256", bytes))]
     .map((n) => n.toString(16).padStart(2, "0"))
     .join("");
 function fixtureState(fixture, time) {
+  if (fixture.currentScore) {
+    const phase = currentScorePhases.findLast((p) => time >= p.start);
+    return { ...QUIET_STATE, ...phase.state };
+  }
   if (fixture.engine)
     return {
       ...QUIET_STATE,
@@ -65,6 +133,27 @@ function fixtureState(fixture, time) {
   };
 }
 function fixtureEvents(fixture) {
+  if (fixture.currentScore)
+    return [
+      { at: 0.8, kind: "dock", count: 1 },
+      { at: 3.8, kind: "dock", count: 1 },
+      { at: 6.8, kind: "dock", count: 1 },
+      { at: 10, kind: "shot", count: 1 },
+      { at: 11.2, kind: "pickup", count: 1 },
+      { at: 12.2, kind: "shot", count: 1 },
+      { at: 12.7, kind: "shot", count: 1 },
+      { at: 13.2, kind: "shield", count: 1 },
+      { at: 14, kind: "player-hit", count: 1 },
+      { at: 15, kind: "ability-echo", count: 1 },
+      { at: 16, kind: "boss", count: 1 },
+      { at: 16.4, kind: "boss-charge", count: 1 },
+      { at: 17, kind: "mote-charge", count: 1 },
+      { at: 18, kind: "mote-pulse", count: 1 },
+      { at: 18.4, kind: "ability-nova", count: 1 },
+      { at: 19, kind: "explosion", count: 1 },
+      { at: 20.1, kind: "dock", count: 1 },
+      { at: 21.2, kind: "ability-repair", count: 1 },
+    ];
   if (fixture.engine) return [];
   if (fixture.burst)
     return [
@@ -203,6 +292,21 @@ async function renderFixture(fixture) {
           hull: d.hull,
           engine: d.engine,
           engineDuck: d.engineDuck ?? 1,
+          ...(fixture.currentScore
+            ? {
+                area: d.area,
+                biome: d.biome,
+                corporation: d.corporation,
+                combat: d.combat,
+                targetCombat: d.targetCombat,
+                boss: d.boss,
+                bossLayer: d.bossLayer,
+                lowHull: d.lowHull,
+                throttle: d.throttle,
+                speed: d.speed,
+                themes: d.themes,
+              }
+            : {}),
         });
       checkpoints++;
       await real.resume();
@@ -237,6 +341,22 @@ async function renderFixture(fixture) {
       wav_bytes: encoded.byteLength,
       wav_sha256: await sha(encoded),
       sourceStates,
+      ...(fixture.currentScore
+        ? {
+            declared_phases: currentScorePhases.map(({ key, start, end }) => ({
+              key,
+              start,
+              end,
+              state: fixtureState(fixture, start),
+            })),
+            phase_metrics: currentScorePhases.map(({ key, start, end }) => ({
+              key,
+              start,
+              end,
+              pcm: pcmMetrics(buffer, start, end),
+            })),
+          }
+        : {}),
     };
     engine.dispose();
     summary.cleanup = {

@@ -122,10 +122,20 @@ test("static and capture allowlists cannot address source, arbitrary paths or ma
   ])
     assert.equal(staticFile(url, output), null);
   assert(capturePath("/capture/qa-1791686562452-e304e589/report.json", output));
+  assert.equal(
+    capturePath("/capture/qa-1791686562452-e304e589/current-score.wav", output),
+    path.join(
+      output,
+      "captures",
+      "qa-1791686562452-e304e589",
+      "current-score.wav",
+    ),
+  );
   for (const url of [
     "/capture/qa-1791686562452-e304e589/other.json",
     "/capture/../report.json",
     "/capture/qa-1791686562452-e304e589/nested/report.json",
+    "/capture/qa-1791686562452-e304e589/current-score-extra.wav",
   ])
     assert.equal(capturePath(url, output), null);
 });
