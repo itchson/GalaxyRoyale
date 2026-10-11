@@ -595,7 +595,7 @@ fn dead_guest_respawns_only_its_body_and_does_not_reset_host_or_profile() {
             .iter()
             .filter(|event| event.kind == "death")
             .count(),
-        1
+        0
     );
     game.tick_co_op(session()).unwrap();
     assert_eq!(
@@ -980,3 +980,6 @@ fn export_actual_authority_serialization_fixtures() {
         std::fs::write(output.join(name), bytes).unwrap();
     }
 }
+
+#[path = "co_op_local_cue_tests.rs"]
+mod local_cue_tests;

@@ -882,7 +882,17 @@ impl Game {
             p.was_home = true;
         }
         for (_, position, admission) in dead.into_iter().flatten() {
-            self.event("death", position, 1.0);
+            // Only the host's local death may drive its death screen. A remote
+            // respawn remains a world explosion with the same light/burst.
+            self.event(
+                if admission.slot == 0 {
+                    "death"
+                } else {
+                    "explosion"
+                },
+                position,
+                1.0,
+            );
             self.burst(position, 40, rgba(255, 130, 70, 255), 90.0);
             let shots: Vec<_> = self
                 .world
@@ -972,7 +982,15 @@ impl Game {
         if absorbed > 0.0 {
             self.event("shield", motion.position, 0.8);
         }
+        let cue_index = self.events.len();
         self.event("hit", motion.position, 0.9);
+        // Preserve the actual impact light; only classify an admitted remote
+        // cue as a world impact rather than the host's personal hit sound.
+        if entity != self.player
+            && let Some(cue) = self.events.get_mut(cue_index)
+        {
+            cue.intensity = 0.25;
+        }
         if let Some((evolution, owner)) = nova {
             self.emit_repulsor_nova(motion.position, evolution, Some(owner));
         }
