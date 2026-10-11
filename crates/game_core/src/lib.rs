@@ -10,6 +10,10 @@ mod biome_enemies;
 mod boss_assets;
 pub mod bosses;
 pub mod campaign;
+pub mod co_op;
+mod co_op_control;
+#[cfg(test)]
+mod co_op_tests;
 #[cfg(test)]
 mod component_tests;
 pub mod components;
@@ -552,6 +556,7 @@ const UPGRADES: [(&str, &str, usize, &str); 9] = [
 
 pub struct Game {
     world: World,
+    co_op: Option<co_op::Session>,
     player: Entity,
     profile: Profile,
     camera: Vec2,
@@ -675,6 +680,7 @@ impl Game {
         let nearby_sites = regions::sites_near(profile.seed, Vec2::ZERO);
         let mut game = Self {
             world,
+            co_op: None,
             player,
             profile,
             camera: Vec2::ZERO,
@@ -731,7 +737,9 @@ impl Game {
     }
 
     pub fn profile(&self) -> &Profile {
-        &self.profile
+        self.co_op
+            .as_ref()
+            .map_or(&self.profile, |session| session.solo.profile())
     }
     /// Initial pointer presses may open a Haven service without issuing a course.
     /// IDs: 0 upgrades, 1 hangar, 2 journal, 3 campaign.
@@ -748,6 +756,7 @@ impl Game {
     /// A live UI overlay cancels click navigation without freezing the universe
     /// or removing the ship's existing momentum and normal thrust decay.
     pub fn cancel_course(&mut self) {
+        self.cancel_co_op_course();
         self.destination = None;
     }
 
@@ -966,7 +975,8 @@ impl Game {
     }
 
     fn progression_enabled(&self) -> bool {
-        !self.diagnostic_scene
+        self.co_op.is_none()
+            && !self.diagnostic_scene
             && !self.boss_qa_scene
             && !self.stress_mode
             && !self.arena.is_some_and(|a| a.diagnostic)
@@ -1179,7 +1189,7 @@ impl Game {
     }
 
     pub fn tick(&mut self, input: &InputFrame, dt: f32) {
-        if self.paused || !dt.is_finite() || dt <= 0.0 {
+        if self.co_op.is_some() || self.paused || !dt.is_finite() || dt <= 0.0 {
             return;
         }
         // A forced QA death must resolve before regeneration, dock repair or
@@ -1311,102 +1321,14 @@ impl Game {
 
     fn control(&mut self, input: &InputFrame, dt: f32) {
         let stats = Stats::from_profile(&self.profile);
-        if let Some(point) = input.destination
-            && point
-                .iter()
-                .all(|v| v.is_finite() && v.abs() <= WORLD_LIMIT)
-        {
-            self.destination = Some(Vec2::from_array(point));
-        }
-        let mut motion = *self.world.get::<&Motion>(self.player).unwrap();
-        let aim = input
-            .aim
-            .filter(|point| {
-                input.fire
-                    && point
-                        .iter()
-                        .all(|v| v.is_finite() && v.abs() <= WORLD_LIMIT)
-            })
-            .map(|point| Vec2::from_array(point) - motion.position)
-            .filter(|delta| delta.length_squared() > 16.0);
-        let mut desired = Vec2::ZERO;
-        let joystick = input
-            .joystick
-            .map(Vec2::from_array)
-            .filter(|stick| stick.is_finite() && stick.abs().max_element() <= 4.0);
-        let held_thrust = input
-            .thrust
-            .filter(|point| {
-                point
-                    .iter()
-                    .all(|v| v.is_finite() && v.abs() <= WORLD_LIMIT)
-            })
-            .map(Vec2::from_array);
-        if let Some(vector) = joystick {
-            let stick = vector.clamp_length_max(1.0);
-            self.destination = None;
-            let power = ((stick.length() - 0.08) / 0.92).clamp(0.0, 1.0);
-            self.throttle += (power - self.throttle) * (1.0 - (-20.0 * dt).exp());
-            if power > 0.0 && aim.is_none() {
-                motion.heading = turn_toward(motion.heading, stick.y.atan2(stick.x), 4.0 * PI * dt);
-            }
-            let direction = if aim.is_some() {
-                // Desktop steering and cursor facing are independent while
-                // aiming. Mobile heading-fire retains the original controller.
-                if power > 0.0 {
-                    stick.normalize_or_zero()
-                } else {
-                    motion.velocity.normalize_or_zero()
-                }
-            } else {
-                forward(motion.heading)
-            };
-            desired = direction * stats.speed * self.throttle;
-        } else if let Some(target) = held_thrust {
-            self.destination = Some(target);
-            let delta = target - motion.position;
-            self.throttle = 1.0;
-            if aim.is_none() && delta.length_squared() > 16.0 {
-                motion.heading = turn_toward(motion.heading, delta.y.atan2(delta.x), 4.0 * PI * dt);
-            }
-            desired = forward(motion.heading) * stats.speed;
-        } else if let Some(target) = self.destination {
-            let delta = target - motion.position;
-            let distance = delta.length();
-            if distance < 4.0 && motion.velocity.length() < 15.0 {
-                self.destination = None;
-                self.throttle = 0.0;
-            } else if distance > 0.01 {
-                if aim.is_none() {
-                    motion.heading =
-                        turn_toward(motion.heading, delta.y.atan2(delta.x), 4.0 * PI * dt);
-                }
-                let speed = (2.0 * stats.acceleration * (distance - 2.0).max(0.0))
-                    .sqrt()
-                    .min(stats.speed);
-                desired = delta / distance * speed;
-                self.throttle = speed / stats.speed;
-            }
-        } else {
-            self.throttle = (self.throttle - dt / 0.15).max(0.0);
-            let direction = if aim.is_some() {
-                motion.velocity.normalize_or_zero()
-            } else {
-                forward(motion.heading)
-            };
-            desired = direction * stats.speed * self.throttle;
-        }
-        if let Some(delta) = aim {
-            motion.heading = turn_toward(motion.heading, delta.y.atan2(delta.x), 4.0 * PI * dt);
-            if joystick.is_none() && held_thrust.is_some() {
-                desired = forward(motion.heading) * stats.speed;
-            }
-        }
-        motion.velocity += (desired - motion.velocity).clamp_length_max(stats.acceleration * dt);
-        motion.velocity = motion.velocity.clamp_length_max(stats.speed);
-        if desired.length_squared() < 0.01 {
-            motion.velocity *= (-3.0 * dt).exp();
-        }
+        let motion = co_op_control::control_motion(
+            *self.world.get::<&Motion>(self.player).unwrap(),
+            &mut self.throttle,
+            &mut self.destination,
+            input,
+            stats,
+            dt,
+        );
         *self.world.get::<&mut Motion>(self.player).unwrap() = motion;
         self.exhaust_timer -= dt;
         if self.throttle > 0.05 && self.exhaust_timer <= 0.0 {
@@ -1539,12 +1461,23 @@ impl Game {
         player: bool,
         hits: u8,
     ) {
+        self.spawn_bullet_entity(position, velocity, damage, player, hits);
+    }
+
+    fn spawn_bullet_entity(
+        &mut self,
+        position: Vec2,
+        velocity: Vec2,
+        damage: f32,
+        player: bool,
+        hits: u8,
+    ) -> Option<Entity> {
         if self.world.query::<(Entity, &Bullet)>().iter().count()
             >= if self.stress_mode { 300 } else { MAX_BULLETS }
         {
-            return;
+            return None;
         }
-        self.world.spawn((
+        Some(self.world.spawn((
             Motion::new(position, velocity, velocity.y.atan2(velocity.x)),
             Bullet {
                 player,
@@ -1553,7 +1486,7 @@ impl Game {
                 remaining_hits: hits,
                 previous_hit: None,
             },
-        ));
+        )))
     }
 
     fn update_chunks(&mut self, position: Vec2) {
@@ -1561,11 +1494,22 @@ impl Game {
             (position.x / CHUNK).floor() as i32,
             (position.y / CHUNK).floor() as i32,
         );
+        let participants = self.co_op_positions();
         let stale: Vec<_> = self
             .chunks
             .keys()
             .copied()
-            .filter(|(x, y)| (x - center.0).abs() > 2 || (y - center.1).abs() > 2)
+            .filter(|(x, y)| {
+                if self.co_op.is_some() {
+                    !participants.iter().flatten().any(|p| {
+                        let px = (p.x / CHUNK).floor() as i32;
+                        let py = (p.y / CHUNK).floor() as i32;
+                        (x - px).abs() <= 2 && (y - py).abs() <= 2
+                    })
+                } else {
+                    (x - center.0).abs() > 2 || (y - center.1).abs() > 2
+                }
+            })
             .collect();
         for key in stale {
             if let Some(entities) = self.chunks.remove(&key) {
@@ -1686,11 +1630,14 @@ impl Game {
             let distance = self.viewport.length() * 0.5 + 60.0 + self.random() * 100.0;
             if let Some(spawn) = self.spawn_location(position, distance) {
                 let entity = self.spawn_enemy(family, false, spawn, tier);
-                self.maybe_riveter(entity, regions::at(self.profile.seed, spawn));
-                self.maybe_mote(entity, regions::at(self.profile.seed, spawn));
+                if self.co_op.is_none() {
+                    self.maybe_riveter(entity, regions::at(self.profile.seed, spawn));
+                    self.maybe_mote(entity, regions::at(self.profile.seed, spawn));
+                }
             }
         }
-        if self.active_boss.is_none()
+        if self.co_op.is_none()
+            && self.active_boss.is_none()
             && self.boss_timer <= 0.0
             && let Some((family, generation)) = self.next_boss()
             && let Some(spawn) = self.spawn_location(position, self.viewport.length() * 0.5 + 45.0)
@@ -1781,6 +1728,9 @@ impl Game {
     }
 
     fn update_enemies(&mut self, player: Vec2, dt: f32) {
+        let participants = self
+            .co_op_positions()
+            .map(|p| p.map(|p| (p, self.safe_zone_at(p))));
         let sanctuary = self.safe_zone_at(player);
         let safe = sanctuary.is_some();
         let refuge_center = sanctuary.map(|zone| zone.0).unwrap_or(Vec2::ZERO);
@@ -1804,6 +1754,28 @@ impl Game {
             if champion.is_some() || boss.is_some() || riveter.is_some() || mote.is_some() {
                 continue;
             }
+            let target = participants
+                .iter()
+                .flatten()
+                .filter(|(_, refuge)| refuge.is_none())
+                .min_by(|(a, _), (b, _)| {
+                    a.distance_squared(motion.position)
+                        .total_cmp(&b.distance_squared(motion.position))
+                })
+                .or_else(|| {
+                    participants.iter().flatten().min_by(|(a, _), (b, _)| {
+                        a.distance_squared(motion.position)
+                            .total_cmp(&b.distance_squared(motion.position))
+                    })
+                });
+            let (player, safe, refuge_center) =
+                target.map_or((player, safe, refuge_center), |(p, refuge)| {
+                    (
+                        *p,
+                        refuge.is_some(),
+                        refuge.map_or(Vec2::ZERO, |zone| zone.0),
+                    )
+                });
             brain.age += dt;
             brain.shot_timer -= dt;
             let delta = player - motion.position;
@@ -2071,7 +2043,13 @@ impl Game {
                 }
             }
             if let Some((_, target, local, is_segment, hit_position)) = nearest {
-                if target == self.player {
+                if let Some(session) = &mut self.co_op {
+                    session.hit_owner =
+                        self.world.get::<&co_op::ShotOwner>(entity).ok().map(|o| *o);
+                }
+                if self.co_op.is_some() && self.world.get::<&co_op::Pilot>(target).is_ok() {
+                    self.hurt_co_op_pilot(target, bullet.damage, Some(local));
+                } else if target == self.player {
                     self.hurt_player(bullet.damage, Some(local));
                 } else if is_segment {
                     self.damage_segment(target, bullet.damage, local);
@@ -2082,6 +2060,9 @@ impl Game {
                         local,
                         motion.velocity.normalize_or_zero() * bullet.damage * 1.2,
                     );
+                }
+                if let Some(session) = &mut self.co_op {
+                    session.hit_owner = None;
                 }
                 bullet.remaining_hits = bullet.remaining_hits.saturating_sub(1);
                 bullet.previous_hit = Some(target);
@@ -2102,40 +2083,44 @@ impl Game {
                 }
             }
         }
-        for (entity, m, a) in &actors {
-            if *entity == self.player || !self.world.contains(*entity) {
-                continue;
-            }
-            let delta = player - m.position;
-            let min_distance = a.radius + player_radius;
-            if delta.length_squared() < min_distance * min_distance && !self.safe() {
-                let direction = if delta.length_squared() > 0.01 {
-                    delta.normalize()
-                } else {
-                    Vec2::X
-                };
-                if let Ok(mut p) = self.world.get::<&mut Motion>(self.player) {
-                    p.position = m.position + direction * min_distance;
-                    p.velocity += direction * 45.0;
+        if self.co_op.is_some() {
+            self.co_op_contacts(&actors, &segments);
+        } else {
+            for (entity, m, a) in &actors {
+                if *entity == self.player || !self.world.contains(*entity) {
+                    continue;
                 }
-                if let Ok(mut other) = self.world.get::<&mut Motion>(*entity) {
-                    other.velocity -= direction * 25.0;
+                let delta = player - m.position;
+                let min_distance = a.radius + player_radius;
+                if delta.length_squared() < min_distance * min_distance && !self.safe() {
+                    let direction = if delta.length_squared() > 0.01 {
+                        delta.normalize()
+                    } else {
+                        Vec2::X
+                    };
+                    if let Ok(mut p) = self.world.get::<&mut Motion>(self.player) {
+                        p.position = m.position + direction * min_distance;
+                        p.velocity += direction * 45.0;
+                    }
+                    if let Ok(mut other) = self.world.get::<&mut Motion>(*entity) {
+                        other.velocity -= direction * 25.0;
+                    }
+                    self.hurt_player(a.damage, None);
                 }
-                self.hurt_player(a.damage, None);
             }
-        }
-        for (entity, m, owner, _scale, segment_radius) in segments {
-            if !self.world.contains(entity) {
-                continue;
-            }
-            let boss = self
-                .world
-                .get::<&Brain>(owner)
-                .map(|b| b.boss)
-                .unwrap_or(false);
-            let radius = segment_radius + player_radius;
-            if (player - m.position).length_squared() < radius * radius {
-                self.hurt_player(if boss { 13.0 } else { 7.0 }, None);
+            for (entity, m, owner, _scale, segment_radius) in segments {
+                if !self.world.contains(entity) {
+                    continue;
+                }
+                let boss = self
+                    .world
+                    .get::<&Brain>(owner)
+                    .map(|b| b.boss)
+                    .unwrap_or(false);
+                let radius = segment_radius + player_radius;
+                if (player - m.position).length_squared() < radius * radius {
+                    self.hurt_player(if boss { 13.0 } else { 7.0 }, None);
+                }
             }
         }
         // Light object-level asteroid impulses, rather than a physics body per cell.
@@ -2424,6 +2409,7 @@ impl Game {
         if !self.world.contains(entity) {
             return;
         }
+        self.record_co_op_destruction(entity, kind);
         let ordinary = self.world.get::<&BossEncounter>(entity).ok().map(|b| *b);
         if self.boss_qa_scene || ordinary.is_some_and(|b| b.diagnostic) {
             self.burst(position, 80, rgba(255, 180, 128, 255), 100.0);
@@ -3123,6 +3109,9 @@ impl Game {
     }
 
     pub fn reset_to_dock(&mut self) {
+        if self.restore_co_op() {
+            return;
+        }
         self.discard_cargo("abandonment");
         self.boss_qa_scene = false;
         self.finish_arena(false, false);
@@ -3546,7 +3535,7 @@ impl Game {
                 );
             }
         }
-        for (_, (motion, actor, body, boss, riveter, mote)) in self
+        for (entity, (motion, actor, body, boss, riveter, mote)) in self
             .world
             .query::<(
                 Entity,
@@ -3586,12 +3575,29 @@ impl Game {
                 self.draw_riveter(frame, body, m, *actor, *riveter);
                 continue;
             }
+            let pilot = self.world.get::<&co_op::Pilot>(entity).ok();
+            let player_hull = pilot.as_ref().map_or(maximum_player_hull, |p| p.stats.hull);
+            let damage_time = pilot.as_ref().map_or(recent_player_damage, |p| {
+                if p.invulnerability > 0.45 {
+                    0.45
+                } else {
+                    p.since_damage
+                }
+            });
+            let corporation = pilot.as_ref().map_or_else(
+                || self.profile.identity.as_ref().map(|id| id.corporation),
+                |p| p.spec.identity.as_ref().map(|id| id.corporation),
+            );
+            let selected_ship = pilot
+                .as_ref()
+                .map_or(self.profile.campaign.selected_ship, |p| p.selected_ship);
+            let shield = pilot.as_ref().map_or(self.shield, |p| p.shield);
             let player_tint = |color| {
                 player_presentation::tint(
                     color,
                     actor.health,
-                    maximum_player_hull,
-                    recent_player_damage,
+                    player_hull,
+                    damage_time,
                     self.cosmetic_time(),
                     self.reduced_motion,
                 )
@@ -3605,12 +3611,12 @@ impl Game {
                 }
             };
             let fine_drawn = actor.kind == Kind::Player
-                && self.profile.campaign.selected_ship == 0
-                && self.profile.identity.as_ref().is_some_and(|identity| {
+                && selected_ship == 0
+                && corporation.is_some_and(|corporation| {
                     raicho_fine::append(
                         frame,
                         body,
-                        identity.corporation,
+                        corporation,
                         raicho_fine::DrawInput {
                             parent: actor_transform(m, *actor).affine(),
                             material: ACTOR_MATERIAL,
@@ -3633,7 +3639,7 @@ impl Game {
             }
             if actor.kind == Kind::Player {
                 let glow = (self.cosmetic_time() * 24.0).sin() * 0.5 + 0.5;
-                if self.throttle > 0.03 {
+                if entity == self.player && self.throttle > 0.03 {
                     let transform = actor_transform(m, *actor);
                     for port in self.exhaust_ports().into_iter().flatten() {
                         frame.push_soft_cells_affine_material(
@@ -3663,13 +3669,13 @@ impl Game {
                         );
                     }
                 }
-                if self.shield > 0.0 {
+                if shield > 0.0 {
                     for i in 0..24 {
                         let angle = i as f32 * TAU / 24.0 + self.cosmetic_time() * 0.3;
                         frame.push_pixel(
                             m.position + forward(angle) * (actor.radius + 3.0),
                             1.0,
-                            rgba(92, 181, 255, if self.since_damage < 0.3 { 210 } else { 65 }),
+                            rgba(92, 181, 255, if damage_time < 0.3 { 210 } else { 65 }),
                         );
                     }
                 }
@@ -3848,6 +3854,9 @@ impl Game {
     /// Explicit deterministic QA scenes. Their ticks never earn progression;
     /// home/reset ends this transient isolation. Unknown commands are no-ops.
     pub fn diagnostic(&mut self, command: &str) {
+        if self.co_op.is_some() {
+            return;
+        }
         if matches!(command, "dock" | "home") {
             self.reset_to_dock();
             return;

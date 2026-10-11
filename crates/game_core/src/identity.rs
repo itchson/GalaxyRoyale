@@ -716,6 +716,9 @@ impl Game {
             && self.material_loss == [0; 5]
     }
     pub fn acknowledge_license(&mut self) -> Result<(), String> {
+        if self.co_op.is_some() {
+            return Err("Training acknowledgement is unavailable in an isolated session.".into());
+        }
         if self.profile.identity.is_none() || self.profile.onboarding.is_none() {
             return Err("This pilot has no new MEISHI training mission.".into());
         }

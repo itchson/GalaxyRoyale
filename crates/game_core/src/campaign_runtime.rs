@@ -222,6 +222,9 @@ impl Game {
     }
 
     pub fn acknowledge_credits(&mut self) {
+        if !self.progression_enabled() {
+            return;
+        }
         if self.profile.campaign.victory_claimed && !self.profile.campaign.credits_seen {
             self.profile.campaign.credits_seen = true;
             self.changed();

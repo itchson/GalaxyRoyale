@@ -353,6 +353,9 @@ impl Game {
         ship.select_reason = select.err().unwrap_or_default();
     }
     pub(super) fn require_home(&self) -> Result<(), String> {
+        if self.co_op.is_some() {
+            return Err("Dock inventory is unavailable in this unfinished co-op session.".into());
+        }
         if self.position().length() > SAFE_RADIUS || self.arena.is_some() {
             Err("Return physically to Haven to use dock inventory.".into())
         } else {
