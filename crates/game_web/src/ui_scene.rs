@@ -1065,8 +1065,12 @@ impl Painter<'_> {
             self.parent.compose(local.affine()),
             |cell, color| {
                 let p = local.point(cell);
+                let half = scale * 0.5;
                 if clip.is_some_and(|c| {
-                    p.x < c[0] || p.y < c[1] || p.x >= c[0] + c[2] || p.y >= c[1] + c[3]
+                    p.x - half < c[0]
+                        || p.y - half < c[1]
+                        || p.x + half > c[0] + c[2]
+                        || p.y + half > c[1] + c[3]
                 }) {
                     0
                 } else if node.disabled {
