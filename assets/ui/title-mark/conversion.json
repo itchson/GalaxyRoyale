@@ -1,0 +1,22 @@
+{
+  "source_dimensions": [
+    2048,
+    768
+  ],
+  "grid": [
+    512,
+    192
+  ],
+  "source_sha256": "c368fb02401a54f0b69a88cff9af3e9f64db7f478ec1b9f942e4c4afbe133684",
+  "source_alpha_threshold_changes": 797945,
+  "sampled_alpha_threshold_changes": 49509,
+  "occupied_cells": 41662,
+  "palette_entries": 64,
+  "rgb_channel_mean_absolute_error": 4.472212887843439,
+  "rgb_channel_max_absolute_error": 77,
+  "decoded_rgba_sha256": "7d74d5bc2f25d1d3cdc5cf509d345fb2583cbcbfa8c5234e50bb92ae997a604e",
+  "pack_sha256": "09ebdb22114938687dba41a65dcf3ba87526fe3ff4e6510c2baf526ccafe69a5",
+  "components_removed": 0,
+  "lossless_reference_claim": false,
+  "runtime_extra_stars": "Three cached nine-cell marks, outside word/crown; relative bounded motion, no model-generated animation."
+}

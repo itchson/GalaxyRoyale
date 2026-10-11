@@ -4,6 +4,8 @@ use crate::pixel_ui::RoyaleMono;
 mod component_art;
 #[path = "meishi_art.rs"]
 mod meishi_art;
+#[path = "title_art.rs"]
+mod title_art;
 use engine_core::{AffineTransform, FrameBuilder, PixelBody, Transform, Vec2};
 use serde::Deserialize;
 use std::{collections::HashMap, sync::LazyLock};
@@ -1664,6 +1666,7 @@ impl Painter<'_> {
                 node.text_align,
                 false,
             ),
+            "title-backdrop" => self.rect(r, u32::from_le_bytes([1, 2, 5, 220])),
             "panel" => self.frame("panel", r, node.active, node.disabled),
             "meishi-panel" | "meishi-portrait-frame" | "meishi-seal" | "meishi-socket" => {
                 self.meishi_fittings(node, time, reduced);
@@ -1781,18 +1784,19 @@ impl Painter<'_> {
             "nav-tab" | "primary-button" | "exit-button" | "offense-button" | "defense-button"
             | "passive-button" | "restart-button" => self.semantic_button(node, font),
             "logo" => {
-                let width = ASSETS
-                    .sprites
-                    .get("logo")
-                    .map_or(256.0, |a| a.body.width as f32);
-                let settle = if reduced {
-                    0.0
-                } else {
-                    (6.0 * (-time.max(0.0) * 4.0).exp()).round()
-                };
-                let shimmer = (!reduced)
-                    .then_some((time * 24.0).rem_euclid(width + 40.0) - width * 0.5 - 20.0);
-                self.artwork("logo", r, 0.0, settle, shimmer, node.disabled);
+                title_art::append(
+                    self.frame,
+                    &title_art::Input {
+                        parent: self.parent,
+                        rect: r,
+                        clip: self.clip,
+                        time,
+                        reduced,
+                        disabled: node.disabled,
+                    },
+                    &mut self.remaining,
+                    &mut self.work_remaining,
+                );
             }
             "seal" => {
                 let rotation = if reduced {
