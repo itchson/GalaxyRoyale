@@ -28,9 +28,9 @@ export async function acquireGameLease(port = GAME_LEASE_PORT) {
   };
 }
 
-export function singleGameRuntime() {
+export function singleGameRuntime(port = GAME_LEASE_PORT) {
   async function reserve(server) {
-    const release = await retainProcessLease();
+    const release = await retainProcessLease(port);
     const onClose = () => { void release().catch(error => console.error('Game runtime cleanup:', error.message)); };
     server.httpServer.once('close', onClose);
     server.httpServer.once('error', onClose);
@@ -45,13 +45,13 @@ export function singleGameRuntime() {
   return { name: 'galaxy-single-game-runtime', configureServer: reserve, configurePreviewServer: reserve };
 }
 
-async function retainProcessLease() {
-  const key = Symbol.for('galaxy-royale.game-runtime-lease.v1');
+async function retainProcessLease(port) {
+  const key = Symbol.for('galaxy-royale.game-runtime-lease.v1.' + port);
   const state = globalThis[key] ??= { owners: new Set(), opening: null, closing: null };
   while (state.closing) await state.closing;
   const owner = Symbol();
   state.owners.add(owner);
-  state.opening ??= acquireGameLease();
+  state.opening ??= acquireGameLease(port);
   let lease;
   try { lease = await state.opening; } catch (error) {
     state.owners.delete(owner);

@@ -29,6 +29,8 @@ Both Vite development and preview now reserve a single OS-held loopback lease on
 
 Only the integrator starts the persistent game preview. Specialists use source checks and temporary test listeners with explicit cleanup, and report their actual last state. Avoid overlapping expensive full builds: specialists run bounded checks; the integrator performs the combined build. Browser checks reuse the one server, close agent-created test tabs afterward, and restore viewport overrides. A browser tab is also a running game client and is included in the cleanup pass.
 
+The lease excludes separate CLI processes. Vite's in-process replacement construction shares a reference-counted reservation until the previous server closes; this preserves config/manual restarts and never-listened cleanup. Deliberately embedding several programmatic Vite servers in one Node process shares that reservation and is outside the normal development workflow.
+
 ## Production records
 
 Mission Control at http://127.0.0.1:4175 owns task statuses and append-only reviews, decisions, builds and actual last-recorded run states. Only its localhost API serializes project-document writes and revision conflicts. Discussions are asynchronous design/review exchanges during actual active sessions. Feedback remains queued between sessions; this pipeline does not imply unattended agents or scheduled work.
