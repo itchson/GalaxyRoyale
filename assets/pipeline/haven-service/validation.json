@@ -1,0 +1,73 @@
+{
+  "recorded_at_utc": "2026-10-11T03:14:05.191437+00:00",
+  "baseline_merge_commit": "2e44ab1f269b11b83fdcfe8be37917c716728bc1",
+  "scope": "Offline asset import and native extraction proof; no runtime ABI or shipping asset changes",
+  "checks": [
+    {
+      "command": "python scripts/asset-pack-tests.py -v",
+      "result": "passed",
+      "tests": 26,
+      "exit_code": 0
+    },
+    {
+      "command": "cargo clippy --locked --offline --manifest-path scripts/asset-native-preview/Cargo.toml --all-targets -- -D warnings",
+      "result": "passed compile-only",
+      "exit_code": 0
+    },
+    {
+      "command": "python scripts/asset-example.py --atlas assets/pixels/atlas.json --output-dir assets/pipeline/haven-service",
+      "result": "passed",
+      "exit_code": 0
+    },
+    {
+      "command": "python scripts/asset-audit.py --pack assets/pipeline/haven-service/pack.json --extraction assets/pipeline/haven-service/native-extraction.json --output assets/pipeline/haven-service/historical-audit.json --historical-extraction",
+      "result": "passed historical packet audit",
+      "exit_code": 0
+    }
+  ],
+  "native_execution": {
+    "earlier_successful_test_count": 4,
+    "earlier_scope": "Adapter tests including affine/129-batch/budget/timeline before final empty-body guard and output-directory helper",
+    "earlier_source_sha256": null,
+    "latest_attempt_command": "cargo test --locked --offline --manifest-path scripts/asset-native-preview/Cargo.toml",
+    "latest_attempt_result": "compiled, never executed: Windows Application Control policy OS error 4551",
+    "latest_attempt_exit_code": 1,
+    "final_expected_test_count": 5,
+    "final_execution_status": "pending clean runner",
+    "policy_bypass_attempted": false
+  },
+  "source_and_artifact_sha256": {
+    "assets/pipeline/haven-service/README.md": "2bb4f4323df8128c20ac7e07e9ba6943ff39efd7cbc0477d7892f055d7da1037",
+    "assets/pipeline/haven-service/cells-preview.png": "e3ff1bda5b03620fb7b3cdd6d756dc9e76676459176e28ebc3954bba7685d1d6",
+    "assets/pipeline/haven-service/dock.png": "40ce08cf8cfa8d4e22fb02bec60f6eca851f6217dc404efac6996138dabe91ee",
+    "assets/pipeline/haven-service/historical-audit.json": "0e0de3b8f6179a5fafda919a0d667610837b37d0c0f435a210ef35d0a8f04586",
+    "assets/pipeline/haven-service/manifest.json": "7e6cf2a00fd417ebc3f9abd8bcaa76b9940556892ff80280fc059649b27baae6",
+    "assets/pipeline/haven-service/native-extraction.json": "003354af02c5aebed9ae74120f0677c8556a157f59eb3ae3e34ef6d2056a321c",
+    "assets/pipeline/haven-service/native-preview.png": "0a198e0947adf1215dc5e9537ca60c5f0f17931ede186ce64c129c80f5258c85",
+    "assets/pipeline/haven-service/pack.json": "a609b7736382abc22b8ae4d8862d4567f99da664f09a310f5afde00092fb8bb8",
+    "assets/pipeline/haven-service/service-0.png": "e7380c252274d1670d6336746842123f743a01e2b8c1a184887a596939870bc6",
+    "assets/pipeline/haven-service/service-1.png": "f7e691dff913b7131dc3b9643f37943457018af955cb18d9b8d9a0376e91a034",
+    "assets/pixels/atlas.json": "1bc8a66f0e0c5d6bb5d9f6a3349032d10d854cb023cd70971e590d61c900051f",
+    "crates/engine_core/src/frame.rs": "c4f521e031f8eb514236d142f0eb79b994a33edc030be534d1faf353097c3380",
+    "crates/engine_core/src/pixels.rs": "2791ba6a228086a2cfce2308102a62fefda0ad46fef5d0b20bf447c199e5ed90",
+    "crates/engine_core/src/transform.rs": "25e8ca1995b845b36b558ef73fa40dc122fa579465e2a237c4de841652ab25bb",
+    "docs/ASSET_PIPELINE.md": "2393d7eb13fbaaec53e916c46902366fe00b3fa408c7808f935b5fc93446582b",
+    "scripts/asset-audit.py": "059db1fa4ca9f510907cea2e83791554f3d5cdd6fa955be011d4527691f43834",
+    "scripts/asset-example.py": "b537c06ccefe627d3e0b707f5f5e2d58df75d82d894a8c22b42a65f9550546dd",
+    "scripts/asset-native-preview/Cargo.lock": "285b32bd9dc08964e42debac8ffe2925d35cd5582083db1654a9752e36f12b5a",
+    "scripts/asset-native-preview/Cargo.toml": "13ea9f8f49b6a2369d7777611b4659308b9e00d3281d008b29084df561c0d564",
+    "scripts/asset-native-preview/src/main.rs": "ba800c750b0973363e116137cd81cabb95722e12a91547033b47aed27610d507",
+    "scripts/asset-native-render.py": "0e3fbb84d2c7c988cac22456f723eb3bb497bc86b3991c8103ca84d2c9569f9c",
+    "scripts/asset-pack-tests.py": "0d2a33b1d7cf0173b033a211df22c87baba79b5c84468c617aec30d1685ead17",
+    "scripts/asset-pack.py": "a83e4a0a031681d40157fafcf827078562b2288d38ef42e8ec4dd735843e4d2b",
+    "scripts/asset-requirements.txt": "41b54a6fb2918667ca47a61d73b522629d84490f3d78f0f20b21135faba10d35"
+  },
+  "pending": [
+    "Final native test/extraction execution on a clean runner",
+    "Peer review",
+    "Explicit live Game metadata adapter",
+    "Both GPU backend presentation",
+    "Human moving readability",
+    "Physical phone acceptance"
+  ]
+}
