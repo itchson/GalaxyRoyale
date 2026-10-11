@@ -43,13 +43,31 @@ pub(super) fn recharge_rate(profile: &Profile) -> f32 {
     }
 }
 
-/// The main manufacturer's bonus requires a real, compatible equipped item in
-/// its canonical category. Secondary manufacture remains visual only.
+fn main_manufacturer(profile: &Profile) -> Option<Corporation> {
+    match profile.campaign.selected_ship {
+        // Hull 0 is the licensed factory variant. Sovereign has no authored
+        // manufacturer yet, so its explicit current policy is licensed-main
+        // affinity; this does not change its enhanced chassis or royal slots.
+        0 | 9 => profile
+            .identity
+            .as_ref()
+            .map(|identity| identity.corporation),
+        1..=8 => Some(
+            campaign::CHAMPIONS[profile.campaign.selected_ship as usize - 1]
+                .identity
+                .corporation,
+        ),
+        _ => None,
+    }
+}
+
+/// The active RAICHO manufacturer's bonus requires a real, compatible equipped
+/// item in its canonical category. Sponsor and secondary manufacture are visual.
 fn matching_slot(profile: &Profile, category: usize) -> bool {
-    let Some(identity) = &profile.identity else {
+    let Some(manufacturer) = main_manufacturer(profile) else {
         return false;
     };
-    let matching_category = match identity.corporation {
+    let matching_category = match manufacturer {
         Corporation::Pan => 2,
         Corporation::Renko => 0,
         Corporation::Hugo => 1,

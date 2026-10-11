@@ -460,3 +460,209 @@ fn unavailable_or_wrong_category_items_cannot_create_a_corporate_bonus() {
         assert!(!game.hud().ship_stats.shield_recharge_unlocked);
     }
 }
+
+fn owned_roster_hull(mut profile: Profile, ship: u8) -> Profile {
+    assert!((1..=8).contains(&ship));
+    let index = ship as usize - 1;
+    profile.campaign.patches[index] = true;
+    profile.campaign.blueprints[index] = true;
+    profile.campaign.crafted[index] = true;
+    profile.campaign.selected_ship = ship;
+    // Declared owned basic library: all three compatible slots expose which
+    // active hull category receives affinity, independent of the pilot.
+    for id in 0..3 {
+        profile.campaign.abilities[id] = campaign::AbilityState {
+            blueprint: true,
+            rank: 1,
+        };
+        profile.campaign.loadouts[ship as usize].slots[id] = Some(id as u8);
+    }
+    profile
+}
+
+#[test]
+fn actual_all_roster_hulls_use_their_manufacturer_with_any_or_anonymous_pilot() {
+    use identity::Corporation::{Hugo, Pan, Renko};
+    let manufacturers = [Pan, Renko, Hugo, Pan, Pan, Hugo, Renko, Hugo];
+    for ship in 1..=8 {
+        let main = manufacturers[ship as usize - 1];
+        assert_eq!(
+            campaign::CHAMPIONS[ship as usize - 1].identity.corporation,
+            main
+        );
+        for pilot in [None, Some("pan"), Some("renko"), Some("hugo")] {
+            let profile = pilot.map_or_else(Profile::default, |main| licensed(main, "hugo"));
+            let mut game = Game::new(owned_roster_hull(profile, ship));
+            let original = checkpoint(&game);
+            let hud = game.hud();
+            let chassis_speed = match ship {
+                2 => 0.92,
+                5 => 1.1,
+                _ => 1.0,
+            };
+            let chassis_accel = if ship == 5 { 1.15 } else { 1.0 };
+            let affinity = if main == Pan { 1.1 } else { 1.0 };
+            close(
+                hud.ship_stats.top_speed,
+                180.0 * chassis_speed * 1.04 * affinity,
+            );
+            close(
+                hud.ship_stats.acceleration,
+                400.0 * chassis_accel * 1.04 * affinity,
+            );
+            close(
+                hud.ship_stats.primary_damage,
+                13.2 * if main == Renko { 1.1 } else { 1.0 },
+            );
+            close(
+                super::incoming_damage_multiplier(game.profile()),
+                if main == Hugo { 0.9 } else { 1.0 },
+            );
+            assert_eq!(
+                checkpoint(&game),
+                original,
+                "HUD/affinity must not rewrite a license or inventory"
+            );
+
+            let category = match main {
+                Pan => 2,
+                Renko => 0,
+                Hugo => 1,
+            };
+            game.equip_ability(category, None).unwrap();
+            let empty = game.hud();
+            match main {
+                Pan => {
+                    close(empty.ship_stats.top_speed, 180.0 * chassis_speed);
+                    close(empty.ship_stats.acceleration, 400.0 * chassis_accel);
+                }
+                Renko => close(empty.ship_stats.primary_damage, 12.0),
+                Hugo => {
+                    close(super::incoming_damage_multiplier(game.profile()), 1.0);
+                    close(empty.max_shield, 30.0);
+                }
+            }
+            assert_eq!(
+                game.profile.identity,
+                serde_json::from_value::<Profile>(original)
+                    .unwrap()
+                    .identity
+            );
+            assert_eq!(game.profile.campaign.ship_xp, [0; 10]);
+        }
+    }
+}
+
+#[test]
+fn actual_roster_shield_hits_follow_hull_main_not_pilot_sponsor_or_horns() {
+    // Hull4 has PAN main, HUGO sponsor/horns. A HUGO pilot must not gain DR.
+    // Hull6 has HUGO main, RENKO sponsor; an anonymous pilot must gain real DR.
+    for (ship, pilot, expected_hull) in [(4, Some("hugo"), 93.0), (6, None, 104.0)] {
+        let profile = pilot.map_or_else(Profile::default, |main| licensed(main, "hugo"));
+        let mut game = Game::new(owned_roster_hull(profile, ship));
+        quiet_departure(&mut game);
+        game.shield = 3.0;
+        let before = checkpoint(&game);
+        let cells_before = game
+            .world
+            .get::<&PixelBody>(game.player)
+            .unwrap()
+            .occupied_count();
+        let events = real_hit(&mut game, 10.0);
+        close(game.hud().shield, 0.0);
+        close(game.hud().hull, expected_hull);
+        assert!(
+            game.world
+                .get::<&PixelBody>(game.player)
+                .unwrap()
+                .occupied_count()
+                < cells_before
+        );
+        assert_eq!(
+            events.iter().filter(|event| event.kind == "shield").count(),
+            1
+        );
+        assert_eq!(checkpoint(&game), before);
+    }
+    // Korr's hull2 is RENKO, despite PAN sponsor and PAN horns. PAN pilot still
+    // emits real RENKO-amplified primary shots without a PAN drive bonus.
+    let mut game = Game::new(owned_roster_hull(licensed("pan", "pan"), 2));
+    quiet_departure(&mut game);
+    let before = checkpoint(&game);
+    game.tick(
+        &InputFrame {
+            fire: true,
+            ..Default::default()
+        },
+        DT,
+    );
+    assert_eq!(
+        game.take_events()
+            .iter()
+            .filter(|event| event.kind == "shot")
+            .count(),
+        1
+    );
+    let bullets: Vec<_> = game
+        .world
+        .query::<&Bullet>()
+        .iter()
+        .filter(|bullet| bullet.player)
+        .map(|bullet| bullet.damage)
+        .collect();
+    assert_eq!(bullets.len(), 1);
+    close(bullets[0], 14.52);
+    assert_eq!(checkpoint(&game), before);
+}
+
+#[test]
+fn actual_roster_invalid_or_unowned_slot_has_no_manufacturer_bonus() {
+    for id in [1, 2, 11] {
+        let mut profile = owned_roster_hull(licensed("pan", "renko"), 6);
+        profile.campaign.abilities[1].rank = 0;
+        if id == 11 {
+            // Impact Nova belongs to this actual hull, but is not owned.
+            profile.campaign.abilities[11].rank = 0;
+        }
+        profile.campaign.loadouts[6].slots[1] = Some(id as u8);
+        let mut game = Game::new(profile);
+        assert_eq!(game.profile.campaign.loadouts[6].slots[1], None);
+        close(super::incoming_damage_multiplier(game.profile()), 1.0);
+        quiet_departure(&mut game);
+        game.shield = 3.0;
+        real_hit(&mut game, 10.0);
+        close(game.hud().hull, 103.0);
+        assert_eq!(game.profile.campaign.ship_xp, [0; 10]);
+    }
+}
+
+#[test]
+fn sovereign_current_licensed_main_policy_is_explicit_without_changing_identity() {
+    for pilot in [None, Some("pan"), Some("renko"), Some("hugo")] {
+        let mut profile = pilot.map_or_else(Profile::default, |main| licensed(main, "renko"));
+        profile.campaign.patches = [true; 8];
+        profile.campaign.blueprints = [true; 8];
+        profile.campaign.royale_results = [1; 8];
+        profile.campaign.victory_claimed = true;
+        profile.campaign.selected_ship = 9;
+        ship_progression::grant_royal(&mut profile);
+        let game = Game::new(profile);
+        let before = checkpoint(&game);
+        close(
+            super::drive_multiplier(game.profile()),
+            if pilot == Some("pan") { 1.1 } else { 1.0 },
+        );
+        close(
+            super::weapon_multiplier(game.profile()),
+            if pilot == Some("renko") { 1.1 } else { 1.0 },
+        );
+        close(
+            super::incoming_damage_multiplier(game.profile()),
+            if pilot == Some("hugo") { 0.9 } else { 1.0 },
+        );
+        close(game.hud().max_shield, 120.0);
+        close(game.hud().ship_stats.shield_regen, 18.0);
+        assert_eq!(game.profile.campaign.ship_xp, [0; 10]);
+        assert_eq!(checkpoint(&game), before);
+    }
+}
