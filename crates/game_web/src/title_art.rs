@@ -1,16 +1,15 @@
-//! Native title mark: cached source cells, relative crown and restrained lens light.
+//! Native sports league mark: cached cells, relative award face and arena light.
 //! DOM owns the8:3 measured rectangle; no bitmap is submitted to the renderer.
 use engine_core::{AffineTransform, FrameBuilder, PixelBody, Transform, Vec2};
 use serde::Deserialize;
 use std::{collections::HashMap, sync::LazyLock};
 
 pub const SOURCE_SIZE: [f32; 2] = [512.0, 192.0];
-pub const OCCUPIED_CELLS: usize = 41_689;
+pub const OCCUPIED_CELLS: usize = 44_985;
 const NAMES: [&str; 9] = [
     "tile-0-0", "tile-0-1", "tile-0-2", "tile-0-3", "tile-1-0", "tile-1-1", "tile-1-2", "tile-1-3",
-    "crown",
+    "crest",
 ];
-const STAR_OFFSETS: [[f32; 2]; 3] = [[-233.0, 71.0], [231.0, 70.0], [186.0, -84.0]];
 
 #[derive(Deserialize)]
 struct Sprite {
@@ -22,6 +21,7 @@ struct Sprite {
 struct Roles {
     energy_cells: Vec<usize>,
     scan_cells: Vec<usize>,
+    award_cells: Vec<usize>,
 }
 #[derive(Deserialize)]
 struct TitleRoles {
@@ -42,7 +42,6 @@ struct Part {
 }
 struct Art {
     parts: [Part; 9],
-    star: PixelBody,
 }
 fn load(source: &str) -> Art {
     let mut pack: Pack = serde_json::from_str(source).expect("compiled title pack JSON");
@@ -65,7 +64,7 @@ fn load(source: &str) -> Art {
             .sprites
             .remove(NAMES[n])
             .expect("expected title subobject");
-        let expected = if n == 8 { [32, 64] } else { [128, 96] };
+        let expected = if n == 8 { [48, 64] } else { [128, 96] };
         assert_eq!([sprite.width, sprite.height], expected);
         assert_eq!(sprite.indices.len(), sprite.width * sprite.height);
         assert!(sprite.indices.iter().all(|&i| i < pack.palette.len()));
@@ -75,7 +74,11 @@ fn load(source: &str) -> Art {
             .remove(NAMES[n])
             .expect("expected title roles");
         let mut roles = vec![0; sprite.indices.len()];
-        for (role, indices) in [(1, masks.energy_cells), (2, masks.scan_cells)] {
+        for (role, indices) in [
+            (1, masks.energy_cells),
+            (2, masks.scan_cells),
+            (3, masks.award_cells),
+        ] {
             for i in indices {
                 assert!(i < roles.len() && sprite.indices[i] != 0 && roles[i] == 0);
                 roles[i] = role;
@@ -107,18 +110,9 @@ fn load(source: &str) -> Art {
     });
     assert_eq!(
         parts.iter().map(|p| p.body.occupied_count()).sum::<usize>(),
-        41_662
+        OCCUPIED_CELLS
     );
-    let star = PixelBody::from_ascii(
-        &["  d  ", "  c  ", "dcwcd", "  c  ", "  d  "],
-        &[
-            ('d', u32::from_le_bytes([38, 95, 114, 255])),
-            ('c', u32::from_le_bytes([91, 194, 211, 255])),
-            ('w', u32::from_le_bytes([226, 244, 237, 255])),
-        ],
-    );
-    assert_eq!(star.occupied_count(), 9);
-    Art { parts, star }
+    Art { parts }
 }
 static ART: LazyLock<Art> =
     LazyLock::new(|| load(include_str!("../../../assets/ui/title-mark/atlas.json")));
@@ -187,27 +181,18 @@ pub fn append(
         }
         .affine()
     };
-    let transforms: [AffineTransform; 12] = std::array::from_fn(|n| {
-        let offset = if n < 9 {
-            ART.parts[n].offset
-                + if n == 8 {
-                    Vec2::new(0.0, (phase * 15.0).sin() * 0.6)
-                } else {
-                    Vec2::ZERO
-                }
-        } else {
-            let i = n - 9;
-            Vec2::from_array(STAR_OFFSETS[i])
-                + Vec2::new(
-                    (phase * 3.0 + i as f32).sin() * 1.1,
-                    (phase * 2.0 + i as f32).sin() * 0.6,
-                )
-        };
+    let transforms: [AffineTransform; 9] = std::array::from_fn(|n| {
+        let offset = ART.parts[n].offset
+            + if n == 8 {
+                Vec2::new(0.0, (phase * 15.0).sin() * 0.35)
+            } else {
+                Vec2::ZERO
+            };
         local(offset)
     });
     // A finite parent can overflow after composition. Fail without mutating frame/quotas.
     for (n, t) in transforms.iter().enumerate() {
-        let body = if n < 9 { &ART.parts[n].body } else { &ART.star };
+        let body = &ART.parts[n].body;
         let composed = input.parent.compose(*t);
         for x in [-0.5, 0.5] {
             for y in [-0.5, 0.5] {
@@ -226,7 +211,7 @@ pub fn append(
         && clip[1] + clip[3] >= r[1] + r[3];
     let scan = time.rem_euclid(8.0) / 8.0 * 720.0 - 360.0;
     for (n, t) in transforms.iter().enumerate() {
-        let body = if n < 9 { &ART.parts[n].body } else { &ART.star };
+        let body = &ART.parts[n].body;
         frame.push_cells_affine_material(
             input.parent.compose(*t),
             Default::default(),
@@ -246,18 +231,19 @@ pub fn append(
                             || p.x > clip[0] + clip[2]
                             || p.y > clip[1] + clip[3]
                     });
-                let strength = if n >= 9 {
-                    0.90 + (phase * 14.0 + n as f32).sin() * 0.1
-                } else {
-                    match ART.parts[n].roles[i] {
-                        1 => 1.0 + (phase * 20.0 + cell.y * 0.04).sin() * 0.07,
-                        2 if !input.reduced
-                            && (cell.x + ART.parts[n].offset.x - scan).abs() < 6.0 =>
-                        {
-                            1.12
-                        }
-                        _ => 1.0,
+                let strength = match ART.parts[n].roles[i] {
+                    1 => {
+                        1.0 + (phase * 20.0
+                            + (cell.x + ART.parts[n].offset.x) * 0.025
+                            + (cell.y + ART.parts[n].offset.y) * 0.04)
+                            .sin()
+                            * 0.07
                     }
+                    2 if !input.reduced && (cell.x + ART.parts[n].offset.x - scan).abs() < 6.0 => {
+                        1.12
+                    }
+                    3 => 1.0 + (phase * 15.0 + cell.x * 0.12).sin() * 0.06,
+                    _ => 1.0,
                 };
                 (
                     cell,

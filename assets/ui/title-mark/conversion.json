@@ -7,16 +7,19 @@
     512,
     192
   ],
-  "source_sha256": "c368fb02401a54f0b69a88cff9af3e9f64db7f478ec1b9f942e4c4afbe133684",
-  "source_alpha_threshold_changes": 797945,
-  "sampled_alpha_threshold_changes": 49509,
-  "occupied_cells": 41662,
+  "source_sha256": "c995256c188af6c24ec94f0a062d17c0c8aa4b12fb73fef62b175474159b52a2",
+  "source_alpha_threshold_changes": 979492,
+  "sampled_alpha_threshold_changes": 61052,
+  "occupied_cells": 44985,
   "palette_entries": 64,
-  "rgb_channel_mean_absolute_error": 4.472212887843439,
+  "rgb_channel_mean_absolute_error": 3.7624096921195953,
   "rgb_channel_max_absolute_error": 77,
-  "decoded_rgba_sha256": "7d74d5bc2f25d1d3cdc5cf509d345fb2583cbcbfa8c5234e50bb92ae997a604e",
-  "pack_sha256": "09ebdb22114938687dba41a65dcf3ba87526fe3ff4e6510c2baf526ccafe69a5",
-  "components_removed": 0,
+  "decoded_rgba_sha256": "ea21588897125537c82828a5fcad7ee129d8b68c18ae5d5f5c959120e25b5b4e",
+  "pack_sha256": "503fd06162f9c9d99c51596a202d5b7af856742979e6a335011cc2d7af83b15f",
+  "component_size_filter_used": false,
   "lossless_reference_claim": false,
-  "runtime_extra_stars": "Three cached nine-cell marks, outside word/crown; relative bounded motion, no model-generated animation."
+  "opaque_sampled_before_dark_cutout": 58065,
+  "dark_cutout_cells_removed": 13080,
+  "dark_cutout_floor": 40,
+  "runtime_animation": "Explicit gold award-face relative movement/glint, arena light chase and narrow metal sweep; no added glitter or model-generated animation."
 }

@@ -25,39 +25,41 @@ class TitleMark(unittest.TestCase):
     def test_full_independent_regeneration_matches_committed_atlas_bytes(self):
         self.assertEqual((self.folder/"atlas.json").read_bytes(),(FOLDER/"atlas.json").read_bytes())
         self.assertEqual(self.atlas,self.regenerated)
-    def test_partition_reconstructs_all_source_rgba_without_duplicate_crown(self):
+    def test_partition_reconstructs_all_source_rgba_without_duplicate_award(self):
         output=Image.new("RGBA",(512,192))
         count=0
         for n,(name,sprite) in enumerate(self.atlas["sprites"].items()):
-            # Manifest order is8tiles followed by the separately moving crown.
-            offset=title.CROWN[:2] if name=="crown" else (int(name[-1])*128,int(name[5])*96)
+            # Eight static tiles followed by the separately moving gold award face.
+            offset=title.CROWN[:2] if name=="crest" else (int(name[-1])*128,int(name[5])*96)
             for i,index in enumerate(sprite["indices"]):
                 if not index: continue
                 point=(offset[0]+i%sprite["width"],offset[1]+i//sprite["width"])
                 self.assertEqual(output.getpixel(point)[3],0)
                 output.putpixel(point,tuple(self.atlas["palette"][index].to_bytes(4,"little")))
                 count+=1
-        self.assertEqual(count,41662)
+        self.assertEqual(count,44985)
         self.assertEqual(output.tobytes(),Image.open(FOLDER/"source-cells.png").convert("RGBA").tobytes())
     def test_role_masks_are_occupied_disjoint_and_explicit(self):
-        totals=[0,0]
+        totals=[0,0,0]
         for name,roles in self.atlas["title_roles"]["parts"].items():
             occupied=self.atlas["sprites"][name]["indices"]
-            a,b=map(set,(roles["energy_cells"],roles["scan_cells"]))
-            self.assertFalse(a&b)
-            self.assertTrue(all(occupied[i] for i in a|b))
-            self.assertEqual(len(a),len(roles["energy_cells"]))
-            self.assertEqual(len(b),len(roles["scan_cells"]))
-            totals[0]+=len(a);totals[1]+=len(b)
-        self.assertEqual(totals,[4799,11520])
+            masks=[set(roles[key]) for key in ("energy_cells","scan_cells","award_cells")]
+            self.assertFalse(masks[0]&masks[1] or masks[0]&masks[2] or masks[1]&masks[2])
+            self.assertTrue(all(occupied[i] for i in set.union(*masks)))
+            for n,key in enumerate(("energy_cells","scan_cells","award_cells")):
+                self.assertEqual(len(masks[n]),len(roles[key]))
+                totals[n]+=len(masks[n])
+        self.assertEqual(totals,[6704,24280,465])
     def test_binary_palette_and_conversion_loss_are_honest(self):
         self.assertEqual(len(self.atlas["palette"]),64)
         self.assertEqual(self.atlas["palette"][0],0)
         self.assertTrue(all(c>>24==255 for c in self.atlas["palette"][1:]))
-        self.assertEqual(self.report["sampled_alpha_threshold_changes"],49509)
+        self.assertEqual(self.report["sampled_alpha_threshold_changes"],61052)
         self.assertGreater(self.report["rgb_channel_mean_absolute_error"],0)
         self.assertFalse(self.report["lossless_reference_claim"])
-        self.assertEqual(self.report["components_removed"],0)
+        self.assertFalse(self.report["component_size_filter_used"])
+        self.assertEqual(self.report["dark_cutout_cells_removed"],13080)
+        self.assertEqual(self.report["dark_cutout_floor"],40)
     def test_exact_indexed_png_roundtrip_and_group_transform_metrics(self):
         pack=title.module()
         output=self.folder/"roundtrip"
@@ -66,9 +68,9 @@ class TitleMark(unittest.TestCase):
         for key in ("version","palette","sprites","title_roles"):
             self.assertEqual(repacked[key],self.atlas[key])
         metrics=self.atlas["asset_metadata"]["groups"][0]["metrics"]
-        self.assertEqual((metrics["occupied_cells"],metrics["transforms"]),(41662,9))
+        self.assertEqual((metrics["occupied_cells"],metrics["transforms"]),(44985,9))
     def test_png_encoding_variants_accept_only_equal_decoded_cells(self):
-        with Image.open(FOLDER/"crown.png") as canonical:
+        with Image.open(FOLDER/"crest.png") as canonical:
             image=canonical.convert("RGBA")
         path=self.folder/"variant.png"
         image.save(path,compress_level=0)
@@ -87,6 +89,6 @@ class TitleMark(unittest.TestCase):
         pack=title.module()
         group=self.atlas["asset_metadata"]["groups"][0]
         with self.assertRaises(pack.AssetError):
-            pack.group_metrics(group,self.atlas["sprites"],pack.budget({"group_cells":41661}))
+            pack.group_metrics(group,self.atlas["sprites"],pack.budget({"group_cells":44984}))
 
 if __name__=="__main__": unittest.main(verbosity=2)

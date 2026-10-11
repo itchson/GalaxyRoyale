@@ -49,14 +49,13 @@ fn title_native_source_roles_counts_and_materials_match_exact_pack() {
             .iter()
             .map(|p| p.body.occupied_count())
             .sum::<usize>(),
-        41662
+        44_985
     );
     assert_eq!(
         ART.parts
             .iter()
             .map(|p| p.body.occupied_count())
-            .sum::<usize>()
-            + ART.star.occupied_count() * 3,
+            .sum::<usize>(),
         OCCUPIED_CELLS
     );
     let frame = extract(&input([0.0, 0.0, 512.0, 192.0], 0.0, true));
@@ -67,7 +66,7 @@ fn title_native_source_roles_counts_and_materials_match_exact_pack() {
             .iter()
             .map(|b| b.transforms.len())
             .sum::<usize>(),
-        12
+        9
     );
     let mut cells = signature(&frame).into_iter();
     for part in &ART.parts {
@@ -79,7 +78,7 @@ fn title_native_source_roles_counts_and_materials_match_exact_pack() {
                 (Vec2::from_array(world) - (cell + part.offset + Vec2::new(256.0, 96.0))).length()
                     < 0.00001
             );
-            assert!(part.roles[index] <= 2);
+            assert!(part.roles[index] <= 3);
         }
     }
     assert!(
@@ -91,18 +90,12 @@ fn title_native_source_roles_counts_and_materials_match_exact_pack() {
 }
 
 #[test]
-fn title_relative_crystal_never_moves_letter_corners_or_duplicates_them() {
+fn title_relative_award_never_moves_letter_corners_or_duplicates_them() {
     let still = signature(&extract(&input([0.0, 0.0, 512.0, 192.0], 0.0, false)));
     let moving = signature(&extract(&input([0.0, 0.0, 512.0, 192.0], 2.0, false)));
-    // Actual L and second A corners border the crystal mount. The initial
-    // broad crown crop included these; their geometry must stay in static tiles.
-    for (x, y) in [
-        (215.0, 48.0),
-        (294.0, 48.0),
-        (216.0, 55.0),
-        (285.0, 55.0),
-        (211.0, 75.0),
-    ] {
+    // Actual upper word faces/corners are outside the explicit gold award mask.
+    // They stay in static tiles even when they overlap its rectangular crop.
+    for (x, y) in [(220.0, 75.0), (288.0, 75.0), (211.0, 90.0), (295.0, 90.0)] {
         let indices: Vec<_> = still
             .iter()
             .enumerate()
@@ -112,12 +105,12 @@ fn title_relative_crystal_never_moves_letter_corners_or_duplicates_them() {
         assert_eq!(indices.len(), 1);
         assert_eq!(still[indices[0]].0, moving[indices[0]].0);
     }
-    let crystal = still
+    let award = still
         .iter()
-        .position(|cell| cell.0 == [256.5, 20.5])
+        .position(|cell| cell.0 == [250.5, 30.5])
         .unwrap();
-    assert_eq!(moving[crystal].0[0], still[crystal].0[0]);
-    assert!((moving[crystal].0[1] - still[crystal].0[1] - 0.6).abs() < 0.00001);
+    assert_eq!(moving[award].0[0], still[award].0[0]);
+    assert!((moving[award].0[1] - still[award].0[1] - 0.35).abs() < 0.00001);
 }
 
 #[test]
@@ -229,7 +222,7 @@ fn title_animation_is_relative_masked_bounded_and_reduced_motion_is_static() {
     let mut cursor = 0;
     let mut changed = 0;
     for (n, part) in ART.parts.iter().enumerate() {
-        for (i, _, _) in part.body.cells_indexed() {
+        for (i, cell, source) in part.body.cells_indexed() {
             if part.roles[i] == 0 {
                 assert_eq!(before[cursor].1, after[cursor].1);
             }
@@ -238,12 +231,32 @@ fn title_animation_is_relative_masked_bounded_and_reduced_motion_is_static() {
             }
             if before[cursor].1 != after[cursor].1 {
                 changed += 1;
+                if part.roles[i] == 2 {
+                    // The metal scan is confined to twelve source columns;
+                    // it cannot flash the complete white word face.
+                    let x = cell.x + part.offset.x;
+                    assert!((x + 360.0).abs() < 6.0 || (x + 72.0).abs() < 6.0);
+                }
+            }
+            if matches!(part.roles[i], 1 | 3) {
+                let amplitude = if part.roles[i] == 1 { 0.07 } else { 0.06 };
+                for color in [before[cursor].1, after[cursor].1] {
+                    for (actual, authored) in color.to_le_bytes()[..3]
+                        .iter()
+                        .zip(source.to_le_bytes()[..3].iter())
+                    {
+                        assert!(*actual as f32 >= *authored as f32 * (1.0 - amplitude) - 1.0);
+                        assert!(
+                            *actual as f32 <= (*authored as f32 * (1.0 + amplitude)).min(255.0)
+                        );
+                    }
+                }
             }
             cursor += 1;
         }
     }
-    println!("TITLE changed mask cells={changed} of41662; neutral mask remains exact");
-    assert!(changed > 100 && changed < OCCUPIED_CELLS / 6);
+    println!("TITLE changed mask cells={changed} of44985; neutral mask remains exact");
+    assert!(changed > 100 && changed < OCCUPIED_CELLS / 5);
     let still = signature(&extract(&input([0.0, 0.0, 512.0, 192.0], 0.0, true)));
     for t in [3.2, 120.0, f32::MAX, f32::NAN] {
         assert_eq!(
@@ -373,7 +386,7 @@ fn title_native_packet_export_is_optional_work_only_and_keeps_source_cells() {
     for (label, time, reduced) in [
         ("still", 0.0, true),
         ("scan", 3.2, false),
-        ("crown", 6.0, false),
+        ("award", 6.0, false),
     ] {
         let frame = extract(&input([0.0, 0.0, 512.0, 192.0], time, reduced));
         assert_eq!(frame.pixel_count, OCCUPIED_CELLS);

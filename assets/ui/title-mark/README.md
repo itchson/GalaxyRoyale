@@ -1,46 +1,52 @@
-# GALAXY ROYALE native title mark
+# GALAXY ROYALE native sports-league mark
 
-The original generated [reference](reference.png) supplies the distinctive
-two-line angular platinum/graphite wordmark, cyan crystal/inlays and restrained
-champagne-gold bevels. [Provenance](provenance.json) and the exact
-[prompt](PROMPT.txt) record the built-in imagegen call; its model/version is not
-exposed. This is a new proposed title identity, not inferred user approval.
+GALAXY ROYALE is the universe's arena-battle sporting league. The current
+[reference](reference.png) supplies forward-leaning athletic lettering, angular
+competition wings and an orbital stadium crest with a gold award face.
+[Provenance](provenance.json) and [prompt](PROMPT.txt) record the actual built-in
+imagegen call; its model/version is not exposed. Root inspected the reference
+and native source field. Final browser presentation and user approval remain
+separate. The fantasy/adventure mark at ee16cea is superseded; its source and
+proof remain in Git history and the historical work folders.
 
-The shipping route is native occupied cells, not a raster billboard. The
-512Ã—192 [source field](source-cells.png) is split into eight 128Ã—96 tiles and one
-32Ã—64 crystal. Their complete source-cell union is preserved without duplicate
-letters. The smaller crystal bounds deliberately exclude the neighbouring
-L/A corners; an actual native regression keeps those letter cells stationary.
-The final atlas has 41,662 converted occupied cells and 64 palette entries.
-Three separately authored nine-cell stellar marks bring runtime cost to
-**41,689 occupied cells /12 transforms**. No coarse LOD or minimum-cell floor
-is used at small sizes. Cold cache/pack parsing and FrameBuilder storage can
-allocate; warmed extraction borrows cached bodies without cloning them.
+The renderer receives occupied native cells, not a raster billboard. The
+512x192 [source field](source-cells.png) is partitioned into eight static
+128x96 tiles and a 48x64 crop containing only the gold award face. The complete
+nonduplicating union is **44,985 cells /9 transforms**: 44,520 static cells and
+465 award cells. No extra glitter is added. Source roles contain 6,704 energy,
+24,280 metal-scan and 465 award cells. Native regressions keep handpicked letter
+corners stationary while the award moves. Continuous fractional fits preserve
+every source cell without a coarse LOD or minimum-cell floor. Cold cache
+parsing and FrameBuilder storage can allocate; warmed extraction borrows
+cached bodies without cloning them.
 
-The raw reference is 2048Ã—768. Conversion intentionally samples it 4:1 with
-nearest neighbour, applies alpha>=128, and quantizes to63 opaque colors plus
-transparent index0. [Measured losses](conversion.json) report 49,509 sampled
-alpha changes, RGB-channel mean absolute error 4.4722/max 77, and zero explicit
-component stripping. Detail lost by sampling is not restored or described as
-lossless. Exact indexed cells are preserved after this declared conversion.
+The raw reference is 2048x768. Conversion explicitly samples 4:1 with nearest
+neighbour, admits alpha>=128 and maxRGB>=40, then quantizes to63 opaque colors
+plus transparent index0. [Measured losses](conversion.json) record 61,052
+sampled alpha changes, including removal of 13,080 near-black haze/recess
+cells; RGB-channel mean absolute error is3.76241/max77. No component-size
+filter is used. Lost source detail is not described as restored or lossless.
+After conversion, exact indexed cells and the complete partition are preserved.
 
-The actual [asset-pack](../../../scripts/asset-pack.py) imports the prepared
-PNGs under a provided exact palette. Authoring group transforms and masks are
-validated; the native adapter explicitly consumes `title_roles` and the
-matching source coordinates. Metadata alone does not produce animation.
-The authored runtime motion consists of a 0.6-source-cell vertical crystal
-float, three slow 1.1/0.6-cell stellar offsets, a narrow eight-second metal
-sweep and restrained cyan breathing. Neutral unmasked material stays exact.
-Reduced Motion freezes positions/colors to a stable pose. All occupied cells,
-including alpha-zero clipped submissions, charge the 60k/120k UI quotas.
-Whole-logo preflight rejects without partial frames or budget mutation.
+The [asset-pack](../../../scripts/asset-pack.py) imports prepared PNGs with an
+exact provided palette. Native code explicitly consumes title_roles and
+subobject coordinates; metadata alone does not animate the asset. Authored
+motion is a0.35-source-cell award float, restrained +/-6% award glint, +/-7%
+arena energy chase and a12-source-column metal sweep over eight seconds.
+Neutral unmasked material remains exact. At the compared poses,7,887 cells
+change color; the new energy mask supersedes the earlier mark's smaller mask.
+Tests separately enforce amplitude bounds, the narrow scan, neutral-color
+invariance and a less-than20% changed-cell ceiling. Reduced Motion freezes
+positions and colors to a stable authored pose.
 
-`UiNode.kind="logo"` is the existing title bridge contract. DOM supplies an
-accessible GALAXY ROYALE label and a responsive 8:3 rectangle; the native helper
-centres a continuous uniform fit. `title-backdrop` supplies the separately
-requested one-quad near-black scrim. No audio or shell lifecycle is implemented
-by this asset. The historical `assets/ui/atlas.json` logo is not a runtime
-fallback for this route.
+Every occupied submission, including alpha-zero clipped cells, charges both
+60k pixel and120k work quotas. Whole-logo admission preflights both quotas and
+finite composed corners before mutation. Source group ceilings are45,000
+cells /9 transforms. Normal128-transform batch splitting preserves all parts.
+UiNode.kind="logo" retains the existing accessible label and measured8:3
+rectangle; native extraction centres a uniform continuous fit.
+title-backdrop supplies a separate near-black quad with alpha246. No shell,
+audio or lifecycle behavior is implemented by this asset.
 
 Focused checks:
 
@@ -52,22 +58,24 @@ cargo clippy --locked -p game_web --all-targets -- -D warnings
 ```
 
 Seven Python checks cover independent exact committed-atlas regeneration,
-all-cell partition/RGBA reconstruction, disjoint masks, declared losses,
-indexed PNG roundtrip, changed cell fail-closed guards and group budgets.
-Canonical PNG compressed bytes are reused only after independent decoded
-dimensions/full RGBA equality, so platform compression differences cannot
-silently change provenance or art. Nine actual native checks cover full and
-tiny fractional extraction, neutral masks/relative motion, letter invariants,
-reflected/sheared partial clips, complete two-quota admission,128-transform
-batch splitting and joined title packet parity. The authored joined scene
-with backdrop, logo, copy, Launch/Settings/Quit, control guide and build line
-retains every isolated component at **45,598 cells /160 transforms**. This is
-a native fixture, not measurement of Root's final DOM or browser frame.
+all-cell/RGBA reconstruction, three disjoint masks, losses, indexed PNG
+roundtrip, changed-cell fail-closed guards and group budgets. Writers use
+canonical LF. Canonical PNG compressed bytes are reused only after independent
+dimensions/full decoded RGBA equality, preventing compression differences
+from changing provenance or art.
 
-The [native software sheet](native-software-contact.png) is derived from actual
-registered Cargo-test FrameBuilder packets. Its4Ã— supersample/BOX flat-unlit
-renderer is an approximation, not WebGPU/WebGL2 execution. Raw packets/logs and
-their exact hashes are retained in `work/title-mark/`. Root owns normal build,
-actual title captures, viewport readability, final approval and the future
-user-supplied MP3. No performance, physical-phone or listening acceptance is
+Nine actual native checks cover full/tiny fractional extraction, relative
+motion and material bounds, letter invariants, reflected/sheared partial
+clips, atomic two-quota admission, batch splitting and joined title parity.
+The authored title fixture retains backdrop, logo, all copy and
+Launch/Settings/Quit controls at **48,894 cells /157 transforms**. It is a
+native fixture, not measurement of Root's final DOM.
+
+The [native software sheet](native-software-contact.png) derives from actual
+registered Cargo-test FrameBuilder packets. Its4x supersample/BOX flat-unlit
+renderer approximates presentation; it is not WebGPU/WebGL2 execution.
+Current packets/logs are in work/title-sports-mark. The prior work/title-mark
+proof is historical. Root owns the normal build, actual title captures,
+viewport readability, final approval and future user-supplied MP3. No
+performance, physical-phone, listening or full concept-parity acceptance is
 claimed here.
