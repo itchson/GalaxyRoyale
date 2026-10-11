@@ -1,0 +1,11 @@
+# Independent affinity status UI review
+
+Scoped source acceptance of exact Root commit `5f11959134650222cd7ae0fd0950a2a56f7d20e6`: no concrete blocker found. The existing native affinity implementation/review remains immutable. This additive row changes display only; no save, balance, reward or slot rules changed.
+
+The new `FlightMenuHud.ship_stats.affinity` type matches the serialized core contract: nullable/optional corporation, slot 0/1/2, authoritative active boolean and source `factory_license`, `roster_manufacturer` or `sovereign_license`. `paintFlightMenu()` reads that object directly. It does not infer a craft manufacturer or activation from the pilot license, sponsor, selected model name or visible loadout. Sovereign's provisional licensed-main source is explicitly prefixed **LICENSED**. A known manufacturer with an empty/invalid slot is displayed **INACTIVE**; the native helper determines that state.
+
+The single row is created only once inside the existing cached WeakMap view. Updates compare text/hidden state and retain all nodes. Null or a missing legacy field hides the row and clears old text; an unchanged missing value causes no write. No focus, scroll, replacement or external action is added to the update path. CSS adds only the existing cyan text color; wrapping remains inherited from the heading's `min-width:0`/`overflow-wrap:anywhere` layout.
+
+Independent execution: materialized the exact commit's flight-menu TS/CSS, portrait helper, index and test bytes under `work/cosmic-independent-review/ui-inputs/`; ran the actual test file through its installed-TypeScript VM adapter. **11/11 passed**, including cross-pilot/hull metadata, ACTIVE→INACTIVE, no HUD mutation, stable nodes/focus/scroll, zero identical writes, Sovereign label and nullable stale-row clearing. This uses the actual source in a fake DOM; it is not browser layout, keyboard or native pixel rendering acceptance. Root's strict TypeScript result remains owner evidence, not a rerun here.
+
+Exact source hashes and the executed log are listed in `UI_REVIEW-pins.json`. Native browser text width/wrapping/scroll and both renderers remain Root acceptance gates. No source, runtime, server, browser, dist or prior handoff files were modified by this review.

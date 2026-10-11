@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "runtime": "65ecaf288d9abd55149beb3aa0a6ae40c9e1944d",
+  "files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 8,
+      "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1834,
+      "sha256": "b1f5602abcc4d1893940b78b280e18b3186fb87913875d0b809bf80713eb4b5c"
+    },
+    {
+      "path": "affinity-handoff.md",
+      "bytes": 3543,
+      "sha256": "b943822d42df6e35799280c3825a9f1d3a9de01fabed66daff4b02897e227987"
+    },
+    {
+      "path": "affinity-ui-review.md",
+      "bytes": 2263,
+      "sha256": "54dff009eebc28d7e0f49ecd792e8e48192feb7eb82117d2c0ca353fc7c4bf3b"
+    },
+    {
+      "path": "build.log",
+      "bytes": 1444,
+      "sha256": "73ae4017f08cd5aabebd45fc3eadb85c25b472e8444cf226401cf68098c8b8fd"
+    },
+    {
+      "path": "clippy.log",
+      "bytes": 265,
+      "sha256": "fd670e0cf194ecddf7cfd1624874c388e7453a6f04254183a38a7ef045e716a6"
+    },
+    {
+      "path": "cosmic-art-review.md",
+      "bytes": 6804,
+      "sha256": "a543a259bcc491515cee7f37b2e8a71fbd5332b8975de4e5216075f173e41b14"
+    },
+    {
+      "path": "cosmic-handoff.md",
+      "bytes": 7841,
+      "sha256": "fc2947b082653f10c77a72f59f90d75751385ec19b30b6de72c06927ab7e0ba6"
+    },
+    {
+      "path": "cosmic-independent-review.md",
+      "bytes": 5889,
+      "sha256": "9cc123f3fe95133bf822b829e1724092e8a5af8aae9b32a4ee2ecb804661facc"
+    },
+    {
+      "path": "cosmic-original-pins.json",
+      "bytes": 33312,
+      "sha256": "d7425a4e5e2b9f7afda0ba7c8e995b805eb83d37d751ca83ae097110af8a1a02"
+    },
+    {
+      "path": "cosmic-software-contact.png",
+      "bytes": 117966,
+      "sha256": "d2bd847396f9c7ec906f96499a34a59dbac5821e9aa30020bcbcdc4c35ae319d"
+    },
+    {
+      "path": "diagnostic-replay-pins.json",
+      "bytes": 4414,
+      "sha256": "15c81d1f3eaf13415c4f5d4d205f6cce2ee880ffe0a66d6bab37a4b0e7bed6b3"
+    },
+    {
+      "path": "diagnostic-replay-review.md",
+      "bytes": 7343,
+      "sha256": "e6ffdbd5da1131811b5ad0be747353ff6195a69e1b36216680947a8ea4f5224f"
+    },
+    {
+      "path": "fine-raicho-root-source.log",
+      "bytes": 2922,
+      "sha256": "fe981fcc57e6e8b29cb893ceb52c74aafeefd8ed169523217ea67485d91fcdd9"
+    },
+    {
+      "path": "fine-raicho-source-handoff.md",
+      "bytes": 5230,
+      "sha256": "fc4852353a910e792ece2338f191f275c5b8d878236e367c2f015f8bbb6bc7ad"
+    },
+    {
+      "path": "fine-raicho-source-review.md",
+      "bytes": 7134,
+      "sha256": "c10bf76697c4419cd636c19393220c69a4b8d03079ae35c01679be5cb7cb2e51"
+    },
+    {
+      "path": "native.log",
+      "bytes": 61483,
+      "sha256": "dbfddbecaf59d9ba923a5248e2f7c048b0fd537f65d647305380aa4109971a1e"
+    },
+    {
+      "path": "served-65ecaf2.json",
+      "bytes": 392,
+      "sha256": "c11272c40cf8617342db458271092c843b5ba63b7be50f413912e00e391d78c2"
+    },
+    {
+      "path": "shell.log",
+      "bytes": 38781,
+      "sha256": "4e4a9d6a268186992af7e5051ccaaae1e58fd0fc67199c3ddc6784e8138dcd5f"
+    },
+    {
+      "path": "status-active-webgpu-848.png",
+      "bytes": 40711,
+      "sha256": "a5ee205df6293f3123acec9f2ac52fa9528d96e4c7ab7ab9472941bc3d8182a7"
+    },
+    {
+      "path": "status-inactive-webgpu-1280.png",
+      "bytes": 87597,
+      "sha256": "c692c277b34c709fc497ba77f5e1939aec96023d261298117a3d4614e1e99c19"
+    },
+    {
+      "path": "wasm-save.log",
+      "bytes": 1122,
+      "sha256": "efc2b9ca98904ea47fdbc1b3c4f7ac9d3acdfd2fb512171778306a483fea8454"
+    },
+    {
+      "path": "webgl-clippy.log",
+      "bytes": 168,
+      "sha256": "db13b129ccb0cae264fe446f4195e2bbe9c5b8fb6a120189a6fa92fd9c75c258"
+    },
+    {
+      "path": "webgpu-clippy.log",
+      "bytes": 265,
+      "sha256": "f5047bb4322f8bbd0e7f2b27f99c9cc39b1c72f4276c2dd9482cd97ccd7a041b"
+    }
+  ]
+}

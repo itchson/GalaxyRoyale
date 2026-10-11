@@ -1,0 +1,86 @@
+{
+  "commit": "65ecaf288d9abd55149beb3aa0a6ae40c9e1944d",
+  "verdict": "No diagnostic reward leak reproduced; production unchanged",
+  "files": [
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\qa-progression-audit\\REVIEW.md",
+      "bytes": 7343,
+      "sha256": "e6ffdbd5da1131811b5ad0be747353ff6195a69e1b36216680947a8ea4f5224f"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\qa-progression-audit\\FOCUSED_TESTS.md",
+      "bytes": 1091,
+      "sha256": "58a5b6f2ebda03f6409c97be5bb1699ea03f7d3ef33db5d1425e4c1ffc733123"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\qa-progression-audit\\public_probe.rs",
+      "bytes": 12074,
+      "sha256": "49319206047bab6da165165ca1b4ed89cfaecd338b0812e94a40a0d51761073a"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\qa-progression-audit\\run.py",
+      "bytes": 2740,
+      "sha256": "7cde0fbd36cb62ae2ed22c3c2fad0262f1990708c92be9a4b7d46e75fb5568db"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\qa-progression-audit\\freeze.py",
+      "bytes": 2231,
+      "sha256": "0fc65a3f56a398c9776e0caa28566d4ebaaba43c8622d65a70319a03245071ff"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\qa-progression-audit\\input-pins.json",
+      "bytes": 12584,
+      "sha256": "6dbad6ae1940d4b8334cf558268878e1e3570bc747fb1845a69c008fcb69c7e9"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\qa-progression-audit\\compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\qa-progression-audit\\execution.log",
+      "bytes": 566,
+      "sha256": "3c8e1729bda679628f19feca01b8c65ebc22d536fc2e3db53554541d303eb89d"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\qa-progression-audit\\public-checkpoints.json",
+      "bytes": 313549,
+      "sha256": "fe7d4b0c79f1e253a1853b713ccdca2a09e4ee4ad9c2bc13958b8785e85bfdfd"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\qa-progression-audit\\summary.json",
+      "bytes": 1073,
+      "sha256": "15fb2a61c159c13c6bf236cb9b8635d87b8f933b8f6045f7a009e1edd5a483e6"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\qa-progression-audit\\first-extra-reset-probe.rs",
+      "bytes": 10185,
+      "sha256": "ac0513eff16cbc82d97d93f2aaf41218cbdf0add6018a19d5acbced884f73212"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\qa-progression-audit\\first-release-direct-link.log",
+      "bytes": 11256,
+      "sha256": "6820898f5b8c8d53fd03b650b3765db9fa525147a3e73f662fe63d067d319726"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\qa-progression-audit\\first-wrong-quiet-event-probe.rs",
+      "bytes": 12072,
+      "sha256": "543d182557b6ecb9453ffb9bb5374a97be40452eaddf2f8e2457b4e6858b70c3"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\qa-progression-audit\\first-wrong-quiet-event-checkpoints.json",
+      "bytes": 313528,
+      "sha256": "22c617e6470e3b3df66cd59df1b1edd395d5a49e28d64dabf7b5cc54d41d8406"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\qa-progression-audit\\first-wrong-quiet-event-execution.log",
+      "bytes": 566,
+      "sha256": "3c8e1729bda679628f19feca01b8c65ebc22d536fc2e3db53554541d303eb89d"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\qa-progression-audit\\first-wrong-quiet-event-input-pins.json",
+      "bytes": 12584,
+      "sha256": "0203f2e7af6fdc5e72dfdd75e46b1bcb5340d6e1bdcd5299824f5c209890cbc8"
+    }
+  ]
+}

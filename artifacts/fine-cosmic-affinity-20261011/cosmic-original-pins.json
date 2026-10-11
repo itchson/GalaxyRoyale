@@ -1,0 +1,1024 @@
+{
+  "version": 1,
+  "commit": "aff95d69b3055191355bfa619a5ea307da852c3c",
+  "parent": "f69d6cbe8d58d182da6e45460b42b963655c5fbc",
+  "branch": "codex/cosmic-fine-detail",
+  "source_domain": "UTF-8 text with CRLF normalized to LF; committed blobs verified against actual working inputs",
+  "changed_files": [
+    "crates/game_core/src/cosmic_background.rs",
+    "crates/game_core/src/cosmic_detail_tests.rs"
+  ],
+  "inputs": [
+    {
+      "path": "Cargo.lock",
+      "bytes": 27791,
+      "sha256": "df228d9f83ef57321dcb768b79d948e9aa24456c0952e971fc8d6fcd7e806bdd",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "Cargo.toml",
+      "bytes": 447,
+      "sha256": "50b077a3fd8e0c8a42456948d6232ae86b2a1bbaa63652ee04da7848c776a3e3",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "assets/pixels/atlas.json",
+      "bytes": 39608,
+      "sha256": "67635f779449feac9d1b24ce1aa264aadb10d7bf70cd54aa5542de44f855876f",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "assets/pixels/boss-atlas.json",
+      "bytes": 421056,
+      "sha256": "68b83e1d83a94993074f06bcb3ffc23a61d9542474fcbac42a11150114e3c850",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "assets/pixels/isotope-scar-atlas.json",
+      "bytes": 44637,
+      "sha256": "dc30b12a2d61f1f6209d36d35b4717e9332fe7b34adbe5f47779a2d214fc4e80",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "assets/pixels/mote-atlas.json",
+      "bytes": 7208,
+      "sha256": "fee68d81defca47f8bb7a4d6c177f7f70bb00d40b8df38d568e82eabf837381a",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "assets/pixels/riveter-atlas.json",
+      "bytes": 5594,
+      "sha256": "6a312b6e0d957e6bb95dfefe5d44563d9c53125a84f5b00586aedc561ee742ae",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "assets/pixels/shooting-star/atlas.json",
+      "bytes": 52755,
+      "sha256": "b7cbd3715f24a976b8f884b57c00c783b571de6b7b554f49c602c9a1c3683360",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "assets/ui/campaign-atlas.json",
+      "bytes": 41347,
+      "sha256": "a7950c45e92c18d5305e6ecb3c1f66ee308cab9489473a73b4b4352a852c8aa0",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/engine_core/Cargo.toml",
+      "bytes": 242,
+      "sha256": "0c7948f6d4cc4f43132f9c8c7c7f5d295b8003d00b15836a295bfe07e9c892bd",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/engine_core/examples/boss_rig_proof.rs",
+      "bytes": 4199,
+      "sha256": "a8166b0236645f614468d419043250d5e1dad8b7414a9e2bf41ebab81937fcce",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/engine_core/examples/engine_proof.rs",
+      "bytes": 5976,
+      "sha256": "49cdf1cafaf49b6265787c6b61ab2b23592e2f5fc9e96109e151e1ad7dc461d8",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/engine_core/src/camera.rs",
+      "bytes": 8926,
+      "sha256": "b08164aa6c9a7e8364ee90e7205e70b702d2013c1861254da33610cb81fdf759",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/engine_core/src/frame.rs",
+      "bytes": 25415,
+      "sha256": "2afd79bb523dc0a57533ddaf1067ce2dd204823cb87f72e3ee7fc976a81969fc",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/engine_core/src/lib.rs",
+      "bytes": 726,
+      "sha256": "eb84c4af2c35898ea6337503c2b169105ae5830f91c71ac7b441e7c114c6035a",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/engine_core/src/pixel_rig.rs",
+      "bytes": 14135,
+      "sha256": "e18ed9ca3ac3a459c9c611a7083494d07d7aa9ed624453df623b9c64730b6582",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/engine_core/src/pixels.rs",
+      "bytes": 17138,
+      "sha256": "3e9f228b54442f66a48a26d0a932b694b6cc22386846d28b7adda0e409f95b5c",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/engine_core/src/topology.rs",
+      "bytes": 13140,
+      "sha256": "72b22bedd285bf61d6e2a74a6ce5d8eddc7f593004e268949574e949fa528bbc",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/engine_core/src/transform.rs",
+      "bytes": 5578,
+      "sha256": "f511ceb89ac4445ce9749d1ed4086e672693357a1e6cf4f4f944dd8fe7220c74",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/engine_core/tests/boss_assets.rs",
+      "bytes": 6852,
+      "sha256": "1adbf8f512929ea715dd26588dfb3429981e13ca98d5b0787641c33dc99fcce8",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/Cargo.toml",
+      "bytes": 285,
+      "sha256": "8997ce52e4c8a2384b2bfe5ef8d7778b6be42df8e1157b6c17300f931af16350",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/examples/game_proof.rs",
+      "bytes": 3831,
+      "sha256": "c7da0d5fa34d11a153a3c97889426b7126cae00c38de63061c8fbbb4068ff1fc",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/src/abilities.rs",
+      "bytes": 14815,
+      "sha256": "a98476b77d1aefeadb045790f35c28baa2fc22122ea4edf1cde783ce41610e58",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/src/asteroid_zones.rs",
+      "bytes": 7952,
+      "sha256": "9f1ba2e68d403796e3ea64ec771c6fb433cfb1614c4091d1170beb28732e61f7",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/src/asteroid_zones/tests.rs",
+      "bytes": 16018,
+      "sha256": "fb8c2ffb8fe53e418f7b9567a80906b41f1cbffe575266c166e855860c0e780c",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/src/audio_runtime.rs",
+      "bytes": 19202,
+      "sha256": "f8cc4ecc9546e876a6fe9192e48e0f5e63146c6693f5c8c2e26a137033682da6",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/src/biome_enemies.rs",
+      "bytes": 34586,
+      "sha256": "b897d6841f9de935e42879f98d8fae2cca8b755ed501cbe6eb3499ab38cbbe64",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/src/boss_assets.rs",
+      "bytes": 4078,
+      "sha256": "6f243e4211c7a40e0feaf35140b8b0300df65d061e2657d6490b90a6ef334699",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/src/bosses.rs",
+      "bytes": 47224,
+      "sha256": "69194ae242129ccecef69ff3661369a784b12bd7fbcf60b64eda15b4642a4408",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/src/campaign.rs",
+      "bytes": 21828,
+      "sha256": "faff4f8e2fdcd4ee134981a241c0baa7cd842c3a4a865a8bb3587018e85499e6",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/src/campaign_runtime.rs",
+      "bytes": 52381,
+      "sha256": "dc174bdaec34cc81f7a96f74ff4135466d370ff2d5971c67f047c04272ba2ad3",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/src/champion_roster_tests.rs",
+      "bytes": 10787,
+      "sha256": "b973c25280033eb5729433a242df6ee9cb9ea15deb249caf32f60dff2b9856e4",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/src/cosmic_background.rs",
+      "bytes": 53304,
+      "sha256": "05f78c74354b4c80f14757aba659a66cc981fba2c0eecc02fb6b33bda8e7f9c8",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/src/cosmic_detail_tests.rs",
+      "bytes": 14363,
+      "sha256": "a651b0f8b9e2a767b9b602f1e6772253a0cc5f156088775ea96deb41528f0af4",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/src/cursor_aim_tests.rs",
+      "bytes": 7483,
+      "sha256": "4abfc3c200c8500a22b334d2d9839386b6f8764bcc0a8c39034d83a1577cdf29",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/src/diagnostic_death_tests.rs",
+      "bytes": 13484,
+      "sha256": "8d57d8feabda34b79dbb27b8858865a9344adb9e52ff859bae7d0d318a68dc87",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/src/diagnostic_warp_tests.rs",
+      "bytes": 4080,
+      "sha256": "33b4b93f6d1049c209e7e50677b9899c3fa09c2e8fcb6b191467e92c458b1971",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/src/dock_facilities.rs",
+      "bytes": 17507,
+      "sha256": "12eb9a70ee44e6431565e13f760a901b3c88206403b68078073a4fc4a980ac61",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/src/held_thrust_tests.rs",
+      "bytes": 4307,
+      "sha256": "6923df268524ab17b812ffb41457abb94dd415a9d3f34efbd5d0730cd6c0df3b",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/src/identity.rs",
+      "bytes": 27493,
+      "sha256": "f967778a6061578c984a74cec9a7052d0ac6d90783e998bbfdd4273c378337c4",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/src/identity_tests.rs",
+      "bytes": 36219,
+      "sha256": "61ffdc52c6ef6416b44ca0b6577fe776e930086528227b01a27824e82dc467ec",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/src/isotope_region_tests.rs",
+      "bytes": 4885,
+      "sha256": "0b44ac187e36da8461f3d8ae3147a3dd02d087d04675e1b3178b80d917ead02a",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/src/isotope_scar.rs",
+      "bytes": 14871,
+      "sha256": "1129a660f47d75219654ebb9bc89e4c5e201e89d5a5ccbd4407cd56b5e720018",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/src/lib.rs",
+      "bytes": 194086,
+      "sha256": "d9ab8701c407120ae5ab474e6f33458cd6f8aa611939e448c8c89cf9c55db8f0",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/src/live_overlay_tests.rs",
+      "bytes": 7085,
+      "sha256": "8d8779f5992401b3e216d31d8c7a699defc929e1bd029868decb774c41802bca",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/src/mote_art.rs",
+      "bytes": 5528,
+      "sha256": "229916ac25331a0dc59add3a8c8a49274d2f4a3e01520ffa14a17d8b8965806f",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/src/mote_controller.rs",
+      "bytes": 19750,
+      "sha256": "1f8127aeb40d02402a11a17cc6a1e90485ea5314b364847349975d538341e881",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/src/navigation.rs",
+      "bytes": 7080,
+      "sha256": "95158dbd0c1d0762c608eb7d9bf5833b477f3c411238304b0e27c14c5c5843fa",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/src/particle_tests.rs",
+      "bytes": 12963,
+      "sha256": "4c9279b38f68658a2e1a732ccfbcb5d2c8501f4eeff26cd9b145a860c648fb13",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/src/pixel_assets.rs",
+      "bytes": 22676,
+      "sha256": "e73c7ca4d1ce654b0e5ce93edf923502f58117ea6689452818c1d97263e88122",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/src/player_presentation.rs",
+      "bytes": 7858,
+      "sha256": "81627fa126d52dcde90a84a979c597893790a64301d70454c780e76d069c432d",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/src/radiation_audio_tests.rs",
+      "bytes": 7656,
+      "sha256": "69045bbd0cd846d77dd8ce6a89811bcc850ef79e0ae7e1f4d383a8974125442b",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/src/radiation_enemies.rs",
+      "bytes": 10756,
+      "sha256": "23b6a40391cc6e3b81dba1ce773cd633233595e30b697405c3305b644079472a",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/src/radiation_enemy_tests.rs",
+      "bytes": 32322,
+      "sha256": "6aaf4dc074559e2e9c6c481111e87565d0549196942d60343d2508e1108642f5",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/src/regions.rs",
+      "bytes": 30758,
+      "sha256": "06226f29cf41d503ee390913433219ea8061dda99cb9f703eebcdf100cf6229e",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/src/regions_lod_tests.rs",
+      "bytes": 14700,
+      "sha256": "1f7893acbb9326a84a7ad2da3ba2dc926d7cb4f5d13b581745e45ad6f2e3e695",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/src/segmented.rs",
+      "bytes": 9359,
+      "sha256": "638463899c37713f1d07c7ff2e2714811f79ac212182eb4fbaffb299b07d979a",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/src/segmented/tests.rs",
+      "bytes": 9972,
+      "sha256": "370dabe7c76ffd024fa75b5fafcfe30e0089fa03465d8d9b1f8f9b3a9ea718db",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/src/shield_progression.rs",
+      "bytes": 3561,
+      "sha256": "5837b430e8762060372369df43e2e159ca54cc3a4e9e37cf074c82c59bb28295",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/src/shield_progression_tests.rs",
+      "bytes": 24832,
+      "sha256": "e4d5699c4706951d2f48eba95972f66188175a86a164e3f1e9d3a89039efa154",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/src/ship_progression.rs",
+      "bytes": 24196,
+      "sha256": "257ce372b5ceba84dcc7dd4211a0fb995031057e8f9f00effffd1435ccb45f2a",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/src/ship_progression_tests.rs",
+      "bytes": 29623,
+      "sha256": "02677d455d24f7c7394ce038f4c08e7b08bdcae3d13b49c45d6a01750c7c4a2c",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/src/shooting_star.rs",
+      "bytes": 19135,
+      "sha256": "395f79f8ff5cfddcef7007567cb34d450a4d689fe9fa751f0d94991dcdd7b4c2",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/src/training.rs",
+      "bytes": 11304,
+      "sha256": "072b7792a40456dda95e63d14d4f7d7fe9fada06f7d96bf1730ad7d8d70f7a59",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/src/training_tests.rs",
+      "bytes": 27814,
+      "sha256": "1976caa165ab0a4b84307b87f78acf174ab55da63f39c40fa156a10a8ffcb473",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/src/universe_map.rs",
+      "bytes": 5595,
+      "sha256": "502fa8b3d7c2854be42f98b57ea49d07ebbe660eca5887591484d29b9d803ad7",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "crates/game_core/src/weapon_cadence_tests.rs",
+      "bytes": 9424,
+      "sha256": "3fb9ac9a8d94d28e854974caa1ce31a056b5249b8668a4c85b978296bb26681e",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "docs/PIXEL_ASSET_STYLE_TARGETS.md",
+      "bytes": 17133,
+      "sha256": "b4de5a0a7892abefdfa24ffa60ced837f83f40cd04c9406792e08f8e4d64ab34",
+      "domain": "UTF-8 LF-canonical"
+    },
+    {
+      "path": "scripts/test/fixtures/ship-save-migrations.json",
+      "bytes": 41445,
+      "sha256": "cb5d4d9605b22e00ed232496ac641d564533e02c26cbc2b4520ad012a604423a",
+      "domain": "UTF-8 LF-canonical"
+    }
+  ],
+  "unchanged_functions": [
+    {
+      "function": "motif",
+      "sha256": "7e2ca6e5243ee1627aa027545272b24410325a40bbf9b2b7961695253f51b726",
+      "bytes": 538
+    },
+    {
+      "function": "parent",
+      "sha256": "3b035444a5a5b082b36ac1566f32a4d7e29b4c70d35f8000113cd8ef13cdd78a",
+      "bytes": 251
+    },
+    {
+      "function": "colored",
+      "sha256": "4d400fb55cb8db281d7cdc2842241e60cf6b599a9260906ac307aacb9c27cb89",
+      "bytes": 399
+    },
+    {
+      "function": "stellar_system",
+      "sha256": "f5f207b3942ed2b4b7e1404ee7db0aab30179c21c1c0ff8c84d50fd21278de0c",
+      "bytes": 777
+    },
+    {
+      "function": "draw_system",
+      "sha256": "5044b549162a4ba76dbf1467c4f24fa2999cc705ae01d70b2d1795a5a1c30866",
+      "bytes": 2220
+    },
+    {
+      "function": "render_gas",
+      "sha256": "6b2eb00aabfca2d7d4800d666bf199c066641517c64e13b6d28fe8317ee88b6e",
+      "bytes": 5041
+    },
+    {
+      "function": "star_cells",
+      "sha256": "b210796fcc0ae53b4923ef44dbdc16bcfc2b5c031f68e33a1d97edb50aa1826c",
+      "bytes": 1657
+    },
+    {
+      "function": "render",
+      "sha256": "a45ca8478cdc850f31fb9b0ff11d38a9f73650e1bbee2914356e9393186790bf",
+      "bytes": 3503
+    }
+  ],
+  "counts": {
+    "galaxy": {
+      "full": [
+        1253,
+        346
+      ],
+      "reduced": [
+        318,
+        87
+      ]
+    },
+    "nebula": {
+      "full": [
+        1029,
+        224
+      ],
+      "reduced": [
+        263,
+        60
+      ]
+    },
+    "nova": {
+      "full": [
+        901,
+        100
+      ],
+      "reduced": [
+        223,
+        36
+      ]
+    }
+  },
+  "results": {
+    "focused": {
+      "passed": 19,
+      "ignored_export": 1
+    },
+    "core": {
+      "passed": 320,
+      "failed": 0,
+      "ignored_export": 1
+    },
+    "explicit_export_passed": 1,
+    "native_clippy": "pass",
+    "core_wasm_library_clippy": "pass",
+    "packets": 12,
+    "software_zoom_views": 36
+  },
+  "limits": "native CPU/assertions plus flat software only; no browser/GPU/device/performance/soak acceptance",
+  "files": [
+    {
+      "path": "core-wasm-clippy.log",
+      "bytes": 472,
+      "sha256": "9de9451a7f1314008997676853eb4fc4f78206ecaa6916579ee599d94e371b3e",
+      "domain": "raw"
+    },
+    {
+      "path": "cosmic-tests.log",
+      "bytes": 5527,
+      "sha256": "c60b77caf43038e0a55b73d93cc2786ff3412a2eb6215beb5e2073a44f17107d",
+      "domain": "raw"
+    },
+    {
+      "path": "final-cached-budgets.log",
+      "bytes": 1030,
+      "sha256": "a0c4d6d2e461d7968f6a155d24c92fe7eb7b5efa0b9004d6d1427fd56febc93b",
+      "domain": "raw"
+    },
+    {
+      "path": "final-native-clippy.log",
+      "bytes": 191,
+      "sha256": "8e2baaefcc4a53bbc8b471b993523e9e35dc5e0dd2c437febdc5acc6c50b95f6",
+      "domain": "raw"
+    },
+    {
+      "path": "final-native-packet-export.log",
+      "bytes": 386,
+      "sha256": "733dc2096c93229fcdaca62b964c1b3f9a327f2ccfe3d3edb3f3982477e41099",
+      "domain": "raw"
+    },
+    {
+      "path": "first-tests.log",
+      "bytes": 9402,
+      "sha256": "edfc7aeb48db1cba90b839f019d01ea9836a8a2efca3e7a62a0d399c0fad567f",
+      "domain": "raw"
+    },
+    {
+      "path": "freeze.py",
+      "bytes": 4455,
+      "sha256": "ed4bc11e8abbd65db7537dd6aa4872d9bb55bbd8c245fb32bb79eb2d34f6ceda",
+      "domain": "raw"
+    },
+    {
+      "path": "frozen-core-tests.log",
+      "bytes": 33340,
+      "sha256": "99c79997ff2e661aa0791d11b166547365ec9304072e5e07c21bfb2650e1e94e",
+      "domain": "raw"
+    },
+    {
+      "path": "frozen-native-clippy.log",
+      "bytes": 191,
+      "sha256": "aaa40e06db775ca98fe8a6d874dfded4ae87e853cf99a972d89853ac7e06e9a5",
+      "domain": "raw"
+    },
+    {
+      "path": "full-core-tests.log",
+      "bytes": 33458,
+      "sha256": "a005b3baef7add9befa6fa8baf6050865260d97ffb330728d92967200761f6d0",
+      "domain": "raw"
+    },
+    {
+      "path": "HANDOFF.md",
+      "bytes": 7841,
+      "sha256": "fc2947b082653f10c77a72f59f90d75751385ec19b30b6de72c06927ab7e0ba6",
+      "domain": "raw"
+    },
+    {
+      "path": "initial-software-proof/native-software-contact.png",
+      "bytes": 111185,
+      "sha256": "7aaae38519a8ef537fe40c31d02c2b0b7a58d17a7f38e58fa023cfde776809c6",
+      "domain": "raw"
+    },
+    {
+      "path": "initial-software-proof/packet-summary.json",
+      "bytes": 1734,
+      "sha256": "bb378282fa17119c2cee5618824a5af9361ae9f2653647fc9b6e72f813272265",
+      "domain": "raw"
+    },
+    {
+      "path": "initial-software-proof/packets/motif-0-reduced-false-time-0.json",
+      "bytes": 700641,
+      "sha256": "09ff226d396cc14cbe0c64db3d6f19197fca1415ba2632ed3377a833552d20a8",
+      "domain": "raw"
+    },
+    {
+      "path": "initial-software-proof/packets/motif-0-reduced-false-time-18.json",
+      "bytes": 700861,
+      "sha256": "6b0c2b8e673dca98e923c59654bda58dd6cac66df5169f0719d328b23c1ab885",
+      "domain": "raw"
+    },
+    {
+      "path": "initial-software-proof/packets/motif-0-reduced-true-time-0.json",
+      "bytes": 168491,
+      "sha256": "941c2eb361c2924900566da3b142900d84324436736ff0aa8d7ac004ad3e9e7a",
+      "domain": "raw"
+    },
+    {
+      "path": "initial-software-proof/packets/motif-0-reduced-true-time-18.json",
+      "bytes": 168715,
+      "sha256": "e6c9191150e99f7f2d421aee243d782e320017eb45c28c75b274ffaa7c74275a",
+      "domain": "raw"
+    },
+    {
+      "path": "initial-software-proof/packets/motif-1-reduced-false-time-0.json",
+      "bytes": 592914,
+      "sha256": "8cd38428976fe80fc7f7144bf9781bf4537eafa1a6e93300f3a2539a9fbe60e5",
+      "domain": "raw"
+    },
+    {
+      "path": "initial-software-proof/packets/motif-1-reduced-false-time-18.json",
+      "bytes": 592986,
+      "sha256": "49fa1db53e816e86f841fd8bc6dd6c74c77a7b67a62c2232a72224ed323b522e",
+      "domain": "raw"
+    },
+    {
+      "path": "initial-software-proof/packets/motif-1-reduced-true-time-0.json",
+      "bytes": 151988,
+      "sha256": "1d020a99c9c8e0ad908fcf63bb8f1450a76bb8ae6d2320079afb82fad8b5ed02",
+      "domain": "raw"
+    },
+    {
+      "path": "initial-software-proof/packets/motif-1-reduced-true-time-18.json",
+      "bytes": 152002,
+      "sha256": "4257d384ac10e6f0eb484ae7e6006cca53c7b61d8f1d9b132f88ba928f3565ba",
+      "domain": "raw"
+    },
+    {
+      "path": "initial-software-proof/packets/motif-2-reduced-false-time-0.json",
+      "bytes": 506895,
+      "sha256": "8e24f6798004cf5723008f5d2d6a1403571522ec27ba09973a689ae6481fc6a7",
+      "domain": "raw"
+    },
+    {
+      "path": "initial-software-proof/packets/motif-2-reduced-false-time-18.json",
+      "bytes": 508168,
+      "sha256": "85db0f5fc435ef1a24201c64630dcd8f4bf50122fe40dff656d04633f22f7576",
+      "domain": "raw"
+    },
+    {
+      "path": "initial-software-proof/packets/motif-2-reduced-true-time-0.json",
+      "bytes": 130211,
+      "sha256": "972303530f79940eb172db9fd4de223628ae695b7a496d1e16a724a7d00889b6",
+      "domain": "raw"
+    },
+    {
+      "path": "initial-software-proof/packets/motif-2-reduced-true-time-18.json",
+      "bytes": 130407,
+      "sha256": "a19ecbcd4a7e21e2675eee49c6d3c91ef64cad34965d8e765ca5cadf7e1b9d0b",
+      "domain": "raw"
+    },
+    {
+      "path": "native-clippy.log",
+      "bytes": 191,
+      "sha256": "b81cf1fe4d60215bb06d48aef169e36cc9ec8768f03ec7fc696c6e8872f8cfcd",
+      "domain": "raw"
+    },
+    {
+      "path": "native-packet-export.log",
+      "bytes": 386,
+      "sha256": "98af77d67c24643cfdf51a9bea95c1546fe68847a9a3417290e8baaa058b8a93",
+      "domain": "raw"
+    },
+    {
+      "path": "native-software-contact.png",
+      "bytes": 117966,
+      "sha256": "d2bd847396f9c7ec906f96499a34a59dbac5821e9aa30020bcbcdc4c35ae319d",
+      "domain": "raw"
+    },
+    {
+      "path": "packet-summary.json",
+      "bytes": 1736,
+      "sha256": "9071c0a5582a4ddb49e3f7848e82878f551db38ad1a4debc989d02d19f02dcfb",
+      "domain": "raw"
+    },
+    {
+      "path": "packets/motif-0-reduced-false-time-0.json",
+      "bytes": 905726,
+      "sha256": "dea8e1ae48e91b1aa7af8c4e6287b25b1868bf9783f69fc01e9f11999b00b130",
+      "domain": "raw"
+    },
+    {
+      "path": "packets/motif-0-reduced-false-time-18.json",
+      "bytes": 905941,
+      "sha256": "0db1bed0fd8e0c2e639c6eb407a64a51a80995f942e1547519811a0483750ba7",
+      "domain": "raw"
+    },
+    {
+      "path": "packets/motif-0-reduced-true-time-0.json",
+      "bytes": 229434,
+      "sha256": "c783e4a2f04880355480598cf25a45c0132c45bb440bad0b2b125cbf9ec9e250",
+      "domain": "raw"
+    },
+    {
+      "path": "packets/motif-0-reduced-true-time-18.json",
+      "bytes": 229658,
+      "sha256": "4cee8658942e9686a439072e194fa9cc68caf1d8bfd3320071113b9cbef989d6",
+      "domain": "raw"
+    },
+    {
+      "path": "packets/motif-1-reduced-false-time-0.json",
+      "bytes": 706227,
+      "sha256": "41537214819282861e1ce97dad0b311e284eb163b92ddba1cdcfe0e79e821ad2",
+      "domain": "raw"
+    },
+    {
+      "path": "packets/motif-1-reduced-false-time-18.json",
+      "bytes": 706507,
+      "sha256": "38613d8086c8076e41c602437ec34c0fbf4a9ee167b58db07e89c83109a2cf35",
+      "domain": "raw"
+    },
+    {
+      "path": "packets/motif-1-reduced-true-time-0.json",
+      "bytes": 182331,
+      "sha256": "96c33bf33810811c6e52da4fe692163ace304c7d1da4ece7d9c66a483f739118",
+      "domain": "raw"
+    },
+    {
+      "path": "packets/motif-1-reduced-true-time-18.json",
+      "bytes": 182362,
+      "sha256": "82eb36875eb73bac5b2cd8f884fc80f3f61530d3afeb0c2fa8d783a8779a53d1",
+      "domain": "raw"
+    },
+    {
+      "path": "packets/motif-2-reduced-false-time-0.json",
+      "bytes": 564919,
+      "sha256": "4c0438e6eee68ae8cb81d6180d0982bfbc2b061ad8199490f26bfb7a0a6604af",
+      "domain": "raw"
+    },
+    {
+      "path": "packets/motif-2-reduced-false-time-18.json",
+      "bytes": 566366,
+      "sha256": "3af14bdb84663a58a47a85f651b89793d85091c34107389ebf103996935743ed",
+      "domain": "raw"
+    },
+    {
+      "path": "packets/motif-2-reduced-true-time-0.json",
+      "bytes": 146510,
+      "sha256": "5f4b62284d525fd8e397ee704019f85f70e0b79e9ebdc62cfc34f588a4eb12f0",
+      "domain": "raw"
+    },
+    {
+      "path": "packets/motif-2-reduced-true-time-18.json",
+      "bytes": 146771,
+      "sha256": "af403051b0bef9baf447f69eb0b7e72579f158ba41fc1fe0034336ad1b7e831f",
+      "domain": "raw"
+    },
+    {
+      "path": "refine.py",
+      "bytes": 7568,
+      "sha256": "d2584ee478ec0a00ef0ea5cc994e620f52ebb468d208ca69742c12d52c6ced3c",
+      "domain": "raw"
+    },
+    {
+      "path": "render_contact.py",
+      "bytes": 2648,
+      "sha256": "fefab9ccc08fcb02917a235dbe53fb6f61f93fa32811a027fd1134803e0aa4b4",
+      "domain": "raw"
+    },
+    {
+      "path": "software/galaxy-False-0.0-0.6.png",
+      "bytes": 2023,
+      "sha256": "6893bd59c779dfd037a4d2395bdf83501080fbcacb31bbc1d920f740b7410666",
+      "domain": "raw"
+    },
+    {
+      "path": "software/galaxy-False-0.0-1.0.png",
+      "bytes": 3145,
+      "sha256": "15987f0f2e0d521b6311e087fe77e2cdd3da513218ad4998660c239e3d5d1263",
+      "domain": "raw"
+    },
+    {
+      "path": "software/galaxy-False-0.0-1.6.png",
+      "bytes": 5075,
+      "sha256": "6119f7d37d1f9c63022c63d1fc41fa481509628e85fa0e43c7f8d47757b4c2e0",
+      "domain": "raw"
+    },
+    {
+      "path": "software/galaxy-False-18.0-0.6.png",
+      "bytes": 1997,
+      "sha256": "a7348786fcee11c02c4444601ce1af251a2873b7a18dfbc43bedd59cc1f219fc",
+      "domain": "raw"
+    },
+    {
+      "path": "software/galaxy-False-18.0-1.0.png",
+      "bytes": 3168,
+      "sha256": "243a8857b826639317be9a1a2552a0c34eba6cf1b6408ce849103b1f643331dd",
+      "domain": "raw"
+    },
+    {
+      "path": "software/galaxy-False-18.0-1.6.png",
+      "bytes": 5126,
+      "sha256": "c3d8fe2a1a54dd647b1c09f1306fadcc96f5b68d6f50292553e7dd32d433a8d1",
+      "domain": "raw"
+    },
+    {
+      "path": "software/galaxy-True-0.0-0.6.png",
+      "bytes": 1846,
+      "sha256": "a84423f5cf457e9a3ca9f7a957205d5c98020f0e8a09787df096c339e2c8125b",
+      "domain": "raw"
+    },
+    {
+      "path": "software/galaxy-True-0.0-1.0.png",
+      "bytes": 2877,
+      "sha256": "b715f08e8bab74f27cbbcf6627830a3bfa4722497421bad4bccf90238d76c53e",
+      "domain": "raw"
+    },
+    {
+      "path": "software/galaxy-True-0.0-1.6.png",
+      "bytes": 4464,
+      "sha256": "ee084f3c66f8e5c73aeb65a81c01f70c9bf1a6e76111eaada7a3f7fbeb7b4ea6",
+      "domain": "raw"
+    },
+    {
+      "path": "software/galaxy-True-18.0-0.6.png",
+      "bytes": 1898,
+      "sha256": "d84c6a3e69e26b0dfc801e96055ab58a39ca51a98e0832eb56a3ddb5dd30e9d2",
+      "domain": "raw"
+    },
+    {
+      "path": "software/galaxy-True-18.0-1.0.png",
+      "bytes": 2911,
+      "sha256": "00404f8227bcd845474b4ea11f6b2fe085a87447a845066dceaedd7c38d2a2f3",
+      "domain": "raw"
+    },
+    {
+      "path": "software/galaxy-True-18.0-1.6.png",
+      "bytes": 4644,
+      "sha256": "ced0a54829f134142b1566fec17054fcd940fdb5dc05d811c6c4203324e4e51d",
+      "domain": "raw"
+    },
+    {
+      "path": "software/nebula-False-0.0-0.6.png",
+      "bytes": 1754,
+      "sha256": "0ad377b590dfc924a50656a257b94f4ae5f2b8aa92e93c352c548e55639f9349",
+      "domain": "raw"
+    },
+    {
+      "path": "software/nebula-False-0.0-1.0.png",
+      "bytes": 2924,
+      "sha256": "66c1ad839dc1b2a17078782ebf310137af4d39359f027e2a4fc8878c44c6c575",
+      "domain": "raw"
+    },
+    {
+      "path": "software/nebula-False-0.0-1.6.png",
+      "bytes": 4675,
+      "sha256": "e4782f4c774f6dcaea6071782932861c12f1687927e199d8b20944e236547f61",
+      "domain": "raw"
+    },
+    {
+      "path": "software/nebula-False-18.0-0.6.png",
+      "bytes": 1788,
+      "sha256": "7fe5b2768e6b5f4d57463aa760402d4c0fc00794ed731ec189ea5a173deb7df4",
+      "domain": "raw"
+    },
+    {
+      "path": "software/nebula-False-18.0-1.0.png",
+      "bytes": 2980,
+      "sha256": "dfff2e8902ed5497913bc284e018cad7f4d243de0003e23c01781f7abc163194",
+      "domain": "raw"
+    },
+    {
+      "path": "software/nebula-False-18.0-1.6.png",
+      "bytes": 4850,
+      "sha256": "743e0bde8efb502a04ce7a6bbd06bb46b8b4912853b4e4d41ad8d7ef9f9a12f9",
+      "domain": "raw"
+    },
+    {
+      "path": "software/nebula-True-0.0-0.6.png",
+      "bytes": 1624,
+      "sha256": "4d7e4ee3e075e1acc3349892da3e32f51aec96e8133c26868cc384bc898118dc",
+      "domain": "raw"
+    },
+    {
+      "path": "software/nebula-True-0.0-1.0.png",
+      "bytes": 2707,
+      "sha256": "3e4e3caec54a3a24f9d1ca9c1c6857f6b7f950da1b92fe9326f226303ab7e376",
+      "domain": "raw"
+    },
+    {
+      "path": "software/nebula-True-0.0-1.6.png",
+      "bytes": 4151,
+      "sha256": "ee869a0b7e981702b725cf122cb69823ffc4c9880673b96324f6d524f9aabd25",
+      "domain": "raw"
+    },
+    {
+      "path": "software/nebula-True-18.0-0.6.png",
+      "bytes": 1675,
+      "sha256": "f50396aa0b062942de0f030c37e1f67c88c1d0cf19f9255bf906253fd5c7eeb3",
+      "domain": "raw"
+    },
+    {
+      "path": "software/nebula-True-18.0-1.0.png",
+      "bytes": 2730,
+      "sha256": "0bdf637f4055f0244cd18ac44f254ba8b3688e8e5f8c91c9793638cbd5b66d3c",
+      "domain": "raw"
+    },
+    {
+      "path": "software/nebula-True-18.0-1.6.png",
+      "bytes": 4244,
+      "sha256": "073ad4cf5a273a6d048436f4a0477a729179cd693f0570c1e991eb637addd9ad",
+      "domain": "raw"
+    },
+    {
+      "path": "software/supernova-False-0.0-0.6.png",
+      "bytes": 1267,
+      "sha256": "fca148ba80f0a9953db555443351774f7f2fcd380941e3a6da52534021d0b54c",
+      "domain": "raw"
+    },
+    {
+      "path": "software/supernova-False-0.0-1.0.png",
+      "bytes": 1919,
+      "sha256": "c4314f5c1fe21423b4810fa2d0f5bcf5e16ebb9c6d970f75771f5baf99a9b7e7",
+      "domain": "raw"
+    },
+    {
+      "path": "software/supernova-False-0.0-1.6.png",
+      "bytes": 3017,
+      "sha256": "40ccfa01e0d87ac386bbf8c34cd64561ce12314efce4e1cb9f8ffb65be335853",
+      "domain": "raw"
+    },
+    {
+      "path": "software/supernova-False-18.0-0.6.png",
+      "bytes": 1546,
+      "sha256": "86fb433eddc556bd4a1054675a707eb95325bb4cf72d993151b9bafe118f5ead",
+      "domain": "raw"
+    },
+    {
+      "path": "software/supernova-False-18.0-1.0.png",
+      "bytes": 2489,
+      "sha256": "a7a9e98c8e92b892cc650eefb7ce6328faef0f3a1b7ec9b62ca3c69cdf967959",
+      "domain": "raw"
+    },
+    {
+      "path": "software/supernova-False-18.0-1.6.png",
+      "bytes": 3874,
+      "sha256": "1d84d5a53b50b6ce94dedf88fa3a5f44101987b33fbba15cd15857c5edef2f1d",
+      "domain": "raw"
+    },
+    {
+      "path": "software/supernova-True-0.0-0.6.png",
+      "bytes": 1216,
+      "sha256": "8828e5893df7e9a980d9956b760e17bd3641e463fe5eaa41e9a18da47561bd78",
+      "domain": "raw"
+    },
+    {
+      "path": "software/supernova-True-0.0-1.0.png",
+      "bytes": 1786,
+      "sha256": "896d5a7cff6950124d94d5cc6d8e34efe71796525e05192606bb04fbc9161368",
+      "domain": "raw"
+    },
+    {
+      "path": "software/supernova-True-0.0-1.6.png",
+      "bytes": 2664,
+      "sha256": "a7b575a00453b38d475785df9f4ef248775ee6f4603d8ec64993ddec9d181d03",
+      "domain": "raw"
+    },
+    {
+      "path": "software/supernova-True-18.0-0.6.png",
+      "bytes": 1481,
+      "sha256": "129a02bde0189f984c18c7570647e289cbdaba610f94dd04bcca8a8317b08cc3",
+      "domain": "raw"
+    },
+    {
+      "path": "software/supernova-True-18.0-1.0.png",
+      "bytes": 2269,
+      "sha256": "e10f317743935632e5c187b2867e1f321c32ef79544b3f949446f2f4904a6f25",
+      "domain": "raw"
+    },
+    {
+      "path": "software/supernova-True-18.0-1.6.png",
+      "bytes": 3452,
+      "sha256": "5fe32b986102daa3100a3980496d6efce4c77a8d80f9d2e4c23c42ff17f83ca8",
+      "domain": "raw"
+    },
+    {
+      "path": "source/cosmic_background.rs",
+      "bytes": 53304,
+      "sha256": "05f78c74354b4c80f14757aba659a66cc981fba2c0eecc02fb6b33bda8e7f9c8",
+      "domain": "raw"
+    },
+    {
+      "path": "source/cosmic_detail_tests.rs",
+      "bytes": 14363,
+      "sha256": "a651b0f8b9e2a767b9b602f1e6772253a0cc5f156088775ea96deb41528f0af4",
+      "domain": "raw"
+    },
+    {
+      "path": "source/parent-cosmic_background.rs",
+      "bytes": 49702,
+      "sha256": "52d290a2f9d69a3e905638b73d87220f8fba8afa87ac965a7d8f0dd57897fad2",
+      "domain": "raw"
+    },
+    {
+      "path": "verify.py",
+      "bytes": 1321,
+      "sha256": "6dabe05623c1cc1fb30cc2b3a465c5c3281269f1a6462d2092995d0ff8917ca2",
+      "domain": "raw"
+    },
+    {
+      "path": "volume-tests.log",
+      "bytes": 5528,
+      "sha256": "5a67a2fb4f776aaf8d71c4e6846eec0372bc144c3a7b9c9b2f115abc3dd99c04",
+      "domain": "raw"
+    }
+  ]
+}

@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 664,
+  "revision": 676,
   "name": "Galaxy Royale",
   "phase": "Playable solo slice → content and validation",
-  "updatedAt": "2026-10-11T09:40:54.678Z",
+  "updatedAt": "2026-10-11T10:18:38.804Z",
   "tasks": [
     {
       "id": "studio",
@@ -6019,17 +6019,17 @@
       "description": "Actual active isolated branch codex/cosmic-fine-detail fromf69; own cosmic_background and dedicated tests only. Full/reduced grids use the same world footprints, sparse clusters/ridges and bounded breathing/curl; preserve existing aggregate caps and dark space. Gameplay specialist independently reviews immutable commit before integration.",
       "department": "Engine",
       "owner": "/root/engine_research",
-      "status": "active",
+      "status": "review",
       "priority": "high",
       "dependencies": [],
       "acceptanceCriteria": [
         {
           "text": "Higher cell-detail galaxy,nebula,nova motifs retain identical full/reduced world footprints and coherent authored clusters.",
-          "met": false
+          "met": true
         },
         {
           "text": "Actual packet counts,determinism,reduced-motion freeze and fractional transforms pass independent review.",
-          "met": false
+          "met": true
         },
         {
           "text": "Root integration and actual both-renderer cosmic captures are recorded.",
@@ -6041,12 +6041,37 @@
           "label": "Actual bounded assignment",
           "kind": "note",
           "details": "Actual active isolated branch codex/cosmic-fine-detail fromf69; own cosmic_background and dedicated tests only. Full/reduced grids use the same world footprints, sparse clusters/ridges and bounded breathing/curl; preserve existing aggregate caps and dark space. Gameplay specialist independently reviews immutable commit before integration."
+        },
+        {
+          "label": "cosmic-handoff.md",
+          "kind": "artifact",
+          "path": "artifacts/fine-cosmic-affinity-20261011/cosmic-handoff.md"
+        },
+        {
+          "label": "cosmic-independent-review.md",
+          "kind": "artifact",
+          "path": "artifacts/fine-cosmic-affinity-20261011/cosmic-independent-review.md"
+        },
+        {
+          "label": "cosmic-art-review.md",
+          "kind": "artifact",
+          "path": "artifacts/fine-cosmic-affinity-20261011/cosmic-art-review.md"
+        },
+        {
+          "label": "cosmic-original-pins.json",
+          "kind": "artifact",
+          "path": "artifacts/fine-cosmic-affinity-20261011/cosmic-original-pins.json"
+        },
+        {
+          "label": "README.md",
+          "kind": "artifact",
+          "path": "artifacts/fine-cosmic-affinity-20261011/README.md"
         }
       ],
       "blocker": "",
-      "revision": 1,
+      "revision": 2,
       "createdAt": "2026-10-11T09:40:54.514Z",
-      "updatedAt": "2026-10-11T09:40:54.514Z"
+      "updatedAt": "2026-10-11T10:18:38.631Z"
     },
     {
       "id": "task-78313163",
@@ -6054,17 +6079,17 @@
       "description": "Actual active isolated art authoring fromf69. Own new96-cell PAN HIKARI,RENKO HIBANA,HUGO MAMORI source/atlas/masks/provenance/scripts/doc only. Full body<=4000cells, sparse fine overlay<=1800; declared scale0.5, mapped to existing48-cell occupancy. Preserve RENKO intentional rail apertures and HUGO declared perimeter inset. No automatic gameplay collision replacement.",
       "department": "Art",
       "owner": "/root/production_research",
-      "status": "active",
+      "status": "review",
       "priority": "high",
       "dependencies": [],
       "acceptanceCriteria": [
         {
           "text": "Three coherent overhead96-cell authored assets with source palette/material masks and strict byte-exact extraction.",
-          "met": false
+          "met": true
         },
         {
           "text": "World footprint,existing occupancy mapping,connectivity and intentional apertures are explicitly validated; bounded fine-overlay budgets.",
-          "met": false
+          "met": true
         },
         {
           "text": "Independent source review and human visual approval before runtime acceptance.",
@@ -6076,12 +6101,32 @@
           "label": "Actual bounded assignment",
           "kind": "note",
           "details": "Actual active isolated art authoring fromf69. Own new96-cell PAN HIKARI,RENKO HIBANA,HUGO MAMORI source/atlas/masks/provenance/scripts/doc only. Full body<=4000cells, sparse fine overlay<=1800; declared scale0.5, mapped to existing48-cell occupancy. Preserve RENKO intentional rail apertures and HUGO declared perimeter inset. No automatic gameplay collision replacement."
+        },
+        {
+          "label": "fine-raicho-source-handoff.md",
+          "kind": "artifact",
+          "path": "artifacts/fine-cosmic-affinity-20261011/fine-raicho-source-handoff.md"
+        },
+        {
+          "label": "fine-raicho-source-review.md",
+          "kind": "artifact",
+          "path": "artifacts/fine-cosmic-affinity-20261011/fine-raicho-source-review.md"
+        },
+        {
+          "label": "fine-raicho-root-source.log",
+          "kind": "artifact",
+          "path": "artifacts/fine-cosmic-affinity-20261011/fine-raicho-root-source.log"
+        },
+        {
+          "label": "README.md",
+          "kind": "artifact",
+          "path": "artifacts/fine-cosmic-affinity-20261011/README.md"
         }
       ],
       "blocker": "",
-      "revision": 1,
+      "revision": 2,
       "createdAt": "2026-10-11T09:40:54.538Z",
-      "updatedAt": "2026-10-11T09:40:54.538Z"
+      "updatedAt": "2026-10-11T10:18:38.693Z"
     },
     {
       "id": "task-a27e49f0",
@@ -6089,21 +6134,21 @@
       "description": "Gameplay specialist frozen9196a866 adds transient Rust-derived affinity metadata with explicit factory,roster and Sovereign-license source. Root reviews/integrates a compact stable status line without deriving gameplay bonuses from pilot or sponsor. No save/balance change.",
       "department": "Gameplay/UI",
       "owner": "/root",
-      "status": "active",
+      "status": "complete",
       "priority": "high",
       "dependencies": [],
       "acceptanceCriteria": [
         {
           "text": "Actual Rust HUD distinguishes active hull manufacturer,slot,active state and licensed Sovereign fallback; compatibility tests pass.",
-          "met": false
+          "met": true
         },
         {
           "text": "Root status view uses authoritative metadata,keeps stable nodes and clears unavailable affinity without claiming sponsor bonuses.",
-          "met": false
+          "met": true
         },
         {
           "text": "Normal dual-backend build and actual responsive status capture recorded.",
-          "met": false
+          "met": true
         }
       ],
       "evidence": [
@@ -6111,12 +6156,112 @@
           "label": "Actual bounded assignment",
           "kind": "note",
           "details": "Gameplay specialist frozen9196a866 adds transient Rust-derived affinity metadata with explicit factory,roster and Sovereign-license source. Root reviews/integrates a compact stable status line without deriving gameplay bonuses from pilot or sponsor. No save/balance change."
+        },
+        {
+          "label": "affinity-handoff.md",
+          "kind": "artifact",
+          "path": "artifacts/fine-cosmic-affinity-20261011/affinity-handoff.md"
+        },
+        {
+          "label": "affinity-ui-review.md",
+          "kind": "artifact",
+          "path": "artifacts/fine-cosmic-affinity-20261011/affinity-ui-review.md"
+        },
+        {
+          "label": "status-inactive-webgpu-1280.png",
+          "kind": "artifact",
+          "path": "artifacts/fine-cosmic-affinity-20261011/status-inactive-webgpu-1280.png"
+        },
+        {
+          "label": "status-active-webgpu-848.png",
+          "kind": "artifact",
+          "path": "artifacts/fine-cosmic-affinity-20261011/status-active-webgpu-848.png"
+        },
+        {
+          "label": "build.log",
+          "kind": "artifact",
+          "path": "artifacts/fine-cosmic-affinity-20261011/build.log"
+        },
+        {
+          "label": "README.md",
+          "kind": "artifact",
+          "path": "artifacts/fine-cosmic-affinity-20261011/README.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-11T09:40:54.569Z",
+      "updatedAt": "2026-10-11T10:18:38.757Z"
+    },
+    {
+      "id": "task-09d2d171",
+      "title": "Quiet contextual pixel UI and compact RAICHO status",
+      "description": "User requests smaller, simpler native-pixel text, correctly spaced interactive icons and restrained motion inspired by primary Overwatch/Halo research. Root owns shell typography, settings and menu hierarchy. Gameplay owns compact live status and explicit detail disclosure. Engine independently checks native text scaling/layout and implements any justified fractional typography fix. Art independently reviews hierarchy and contextual motion. No blanket readability or physical-device acceptance.",
+      "department": "UI/UX",
+      "owner": "/root",
+      "status": "active",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Primary-source design references and original Galaxy Royale hierarchy are documented; repeated headings and optional technical information are reduced.",
+          "met": false
+        },
+        {
+          "text": "Stable status nodes expose correct hull,shield,slots,cargo and authoritative affinity; explicit details keep focus/scroll and update live.",
+          "met": false
+        },
+        {
+          "text": "Native pixel glyphs and interactive regions fit measured layout; desktop and compact both-renderer captures and appropriate regression checks are recorded.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual assignment",
+          "kind": "note",
+          "details": "User requests smaller, simpler native-pixel text, correctly spaced interactive icons and restrained motion inspired by primary Overwatch/Halo research. Root owns shell typography, settings and menu hierarchy. Gameplay owns compact live status and explicit detail disclosure. Engine independently checks native text scaling/layout and implements any justified fractional typography fix. Art independently reviews hierarchy and contextual motion. No blanket readability or physical-device acceptance."
         }
       ],
       "blocker": "",
       "revision": 1,
-      "createdAt": "2026-10-11T09:40:54.569Z",
-      "updatedAt": "2026-10-11T09:40:54.569Z"
+      "createdAt": "2026-10-11T10:08:15.250Z",
+      "updatedAt": "2026-10-11T10:08:15.250Z"
+    },
+    {
+      "id": "task-57db0993",
+      "title": "Corporation starter abilities: drive, three-chunk guard and fifth-shot lens",
+      "description": "Latest user clarification: PAN green/passive speed boost; HUGO blue/defense starts with a three-chunk shield ability; RENKO red/offense adds a stronger extra projectile every fifth shot. Resolve current HUGO five-chunk exception and existing eighth-shot cadence with explicit actual mechanic tests, preserve licensed identity and save grants.",
+      "department": "Gameplay",
+      "owner": "/root/gameplay_design",
+      "status": "active",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "PAN starter improves speed only in the compatible equipped passive slot; role/color data stays canonical.",
+          "met": false
+        },
+        {
+          "text": "HUGO starter shield ability starts with exactly three10HP chunks; later capacity/recharge upgrades are earned.",
+          "met": false
+        },
+        {
+          "text": "RENKO starter produces the extra higher-damage projectile on each fifth actual primary shot, with save/slot and safety regressions.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual assignment",
+          "kind": "note",
+          "details": "Latest user clarification: PAN green/passive speed boost; HUGO blue/defense starts with a three-chunk shield ability; RENKO red/offense adds a stronger extra projectile every fifth shot. Resolve current HUGO five-chunk exception and existing eighth-shot cadence with explicit actual mechanic tests, preserve licensed identity and save grants."
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-11T10:08:15.285Z",
+      "updatedAt": "2026-10-11T10:08:15.285Z"
     }
   ],
   "reviews": [
@@ -7283,6 +7428,52 @@
           "path": "artifacts/corner-shield-20261011/README.md"
         }
       ]
+    },
+    {
+      "id": "review-3d7a9678",
+      "title": "Actual asynchronous cosmic/art/affinity source review and diagnostic replay",
+      "body": "Engine authored frozen half-unit cosmic motifs and independently reviewed the96-cell RAICHO raw source pack. Gameplay independently checked actual cosmic packets/projections, authoritative affinity semantics and a controlled public diagnostic death/retry sequence. Art independently viewed software contact sheets and checked cohesive cosmic structure. Root imported and tested the sources and recorded actual WebGPU active/inactive affinity status. Nominal full/reduced cosmic canvases match; occupied extrema can differ by2.5 world units. Software projections are not GPU acceptance. HUGO fine source has198 partially covered collision cells, so retained-body damage-masked overlay is the proposed runtime path. Source-pack technical criteria are met; new motif GPU/threat/motion and human RAICHO style/runtime acceptance remain pending. No diagnostic reward leak reproduced in controlled native replay; uncontrolled browser reward attribution remains unknown.",
+      "author": "/root",
+      "source": "Actual frozen65ecaf2 build, reviewed source packets and browser baseline",
+      "createdAt": "2026-10-11T10:18:38.789Z",
+      "participants": [
+        "/root",
+        "/root/engine_research",
+        "/root/gameplay_design",
+        "/root/production_research"
+      ],
+      "taskIds": [
+        "task-84772b9a",
+        "task-78313163",
+        "task-a27e49f0"
+      ],
+      "evidence": [
+        {
+          "label": "cosmic-independent-review.md",
+          "kind": "artifact",
+          "path": "artifacts/fine-cosmic-affinity-20261011/cosmic-independent-review.md"
+        },
+        {
+          "label": "cosmic-art-review.md",
+          "kind": "artifact",
+          "path": "artifacts/fine-cosmic-affinity-20261011/cosmic-art-review.md"
+        },
+        {
+          "label": "fine-raicho-source-review.md",
+          "kind": "artifact",
+          "path": "artifacts/fine-cosmic-affinity-20261011/fine-raicho-source-review.md"
+        },
+        {
+          "label": "diagnostic-replay-review.md",
+          "kind": "artifact",
+          "path": "artifacts/fine-cosmic-affinity-20261011/diagnostic-replay-review.md"
+        },
+        {
+          "label": "README.md",
+          "kind": "artifact",
+          "path": "artifacts/fine-cosmic-affinity-20261011/README.md"
+        }
+      ]
     }
   ],
   "decisions": [
@@ -7473,6 +7664,15 @@
       "author": "/root",
       "source": "Actual latest user request and corporation clarification on2026-10-11",
       "createdAt": "2026-10-11T07:59:52.852Z",
+      "status": "accepted"
+    },
+    {
+      "id": "decision-432b0cb9",
+      "title": "Confirmed corporation starter direction",
+      "body": "Direct user clarification: PAN green remains passive and starts a RAICHO speed ability; HUGO blue remains defense/protection and starts its shield ability with three chunks; RENKO red remains offense and starts an extra stronger projectile every fifth shot. Main and sub manufacturing and independent sponsor canon are unchanged. Gameplay implementation and current wiki alignment are active; this decision does not claim the current five-chunk/eighth-shot source is already corrected.",
+      "author": "/root",
+      "source": "Actual user steering and specialist assignments, 2026-10-11",
+      "createdAt": "2026-10-11T10:09:13.525Z",
       "status": "accepted"
     }
   ],
@@ -9078,6 +9278,92 @@
       ],
       "url": "http://127.0.0.1:4173/?qa=1",
       "knownIssues": "Icon clarity/style awaits human approval. Natural upgraded-shield/campaign browser flow and physical coarse-pointer/mobile soak are pending. Reduced motion was exercised on the QA profile. QA fixtures suspend rewards."
+    },
+    {
+      "id": "build-66adba95",
+      "title": "Fine cosmic and authoritative affinity baseline",
+      "body": "Frozen normal dual-backend build before compact UI/latest starter changes. Authoritative affinity WebGPU status captures at1280×720/848×390; native/software cosmic packet checks.96-cell RAICHO art imported as subsequent source-only pack, not rendered in this frozen build.",
+      "author": "/root",
+      "source": "Actual frozen65ecaf2 build, reviewed source packets and browser baseline",
+      "createdAt": "2026-10-11T10:18:38.804Z",
+      "revision": "65ecaf288d9abd55149beb3aa0a6ae40c9e1944d",
+      "evidence": [
+        {
+          "label": "manifest.json",
+          "kind": "artifact",
+          "path": "artifacts/fine-cosmic-affinity-20261011/manifest.json"
+        },
+        {
+          "label": "served-65ecaf2.json",
+          "kind": "artifact",
+          "path": "artifacts/fine-cosmic-affinity-20261011/served-65ecaf2.json"
+        },
+        {
+          "label": "native.log",
+          "kind": "artifact",
+          "path": "artifacts/fine-cosmic-affinity-20261011/native.log"
+        },
+        {
+          "label": "shell.log",
+          "kind": "artifact",
+          "path": "artifacts/fine-cosmic-affinity-20261011/shell.log"
+        },
+        {
+          "label": "build.log",
+          "kind": "artifact",
+          "path": "artifacts/fine-cosmic-affinity-20261011/build.log"
+        },
+        {
+          "label": "wasm-save.log",
+          "kind": "artifact",
+          "path": "artifacts/fine-cosmic-affinity-20261011/wasm-save.log"
+        },
+        {
+          "label": "README.md",
+          "kind": "artifact",
+          "path": "artifacts/fine-cosmic-affinity-20261011/README.md"
+        }
+      ],
+      "checks": [
+        {
+          "name": "Rust workspace588pass/1explicitignore",
+          "result": "pass"
+        },
+        {
+          "name": "Shell/studio353pass/1skip",
+          "result": "pass"
+        },
+        {
+          "name": "Strict native and both WASM Clippy",
+          "result": "pass"
+        },
+        {
+          "name": "Normal dual-backend/PWA build",
+          "result": "pass"
+        },
+        {
+          "name": "42WASM serializer/SaveStore fixture cases",
+          "result": "pass"
+        },
+        {
+          "name": "Actual WebGPU responsive affinity status",
+          "result": "pass"
+        },
+        {
+          "name": "New cosmic both-GPU/motion/threat captures",
+          "result": "not_run"
+        },
+        {
+          "name": "Physical phones and sustained soak",
+          "result": "not_run"
+        },
+        {
+          "name": "Official CI at this unpushed exact head",
+          "result": "not_run"
+        }
+      ],
+      "url": "http://127.0.0.1:4173/?qa=1",
+      "knownIssues": "New compact UI and clarified starter mechanics are active separate tasks. Human art/readability and physical acceptance remain pending."
     }
   ],
   "feedback": [],
@@ -15721,6 +16007,126 @@
       "author": "/root",
       "source": "Root actual f69 integration, specialist handoffs/reviews and desktop browser observations on 2026-10-11",
       "createdAt": "2026-10-11T09:40:54.678Z"
+    },
+    {
+      "id": "45a85bde-5142-4a0f-9f35-e26252463469",
+      "revision": 665,
+      "kind": "task.create",
+      "itemId": "task-09d2d171",
+      "title": "Quiet contextual pixel UI and compact RAICHO status",
+      "author": "/root",
+      "source": "Actual user steering and specialist assignments, 2026-10-11",
+      "createdAt": "2026-10-11T10:08:15.250Z"
+    },
+    {
+      "id": "0bb874dc-3e1d-4222-b5cf-a7793bb56261",
+      "revision": 666,
+      "kind": "task.create",
+      "itemId": "task-57db0993",
+      "title": "Corporation starter abilities: drive, three-chunk guard and fifth-shot lens",
+      "author": "/root",
+      "source": "Actual user steering and specialist assignments, 2026-10-11",
+      "createdAt": "2026-10-11T10:08:15.285Z"
+    },
+    {
+      "id": "55e54a79-49ff-4d36-acce-b2d1a4249d05",
+      "revision": 667,
+      "kind": "decision",
+      "itemId": "decision-432b0cb9",
+      "title": "Confirmed corporation starter direction",
+      "author": "/root",
+      "source": "Actual user steering and specialist assignments, 2026-10-11",
+      "createdAt": "2026-10-11T10:09:13.525Z"
+    },
+    {
+      "id": "33f2b25e-5d41-43a1-9178-1ce3564606d3",
+      "revision": 668,
+      "kind": "run",
+      "itemId": "run-2e84f742",
+      "title": "Production integration · running",
+      "author": "/root",
+      "source": "Actual user steering and specialist assignments, 2026-10-11",
+      "createdAt": "2026-10-11T10:09:13.544Z"
+    },
+    {
+      "id": "0fa16bbd-360d-4e63-acdf-bcfdf80ca06c",
+      "revision": 669,
+      "kind": "run",
+      "itemId": "run-37e382a8",
+      "title": "Gameplay and status specialist · running",
+      "author": "/root",
+      "source": "Actual user steering and specialist assignments, 2026-10-11",
+      "createdAt": "2026-10-11T10:09:13.588Z"
+    },
+    {
+      "id": "d1e4525c-6fd8-4b11-9652-cab1977b7dc0",
+      "revision": 670,
+      "kind": "run",
+      "itemId": "run-a2ae1cb7",
+      "title": "Engine specialist · running",
+      "author": "/root",
+      "source": "Actual user steering and specialist assignments, 2026-10-11",
+      "createdAt": "2026-10-11T10:09:13.619Z"
+    },
+    {
+      "id": "9686e6c1-86e2-4b88-ac0c-6c1092f95aa9",
+      "revision": 671,
+      "kind": "run",
+      "itemId": "run-7e34677b",
+      "title": "Art and interface specialist · running",
+      "author": "/root",
+      "source": "Actual user steering and specialist assignments, 2026-10-11",
+      "createdAt": "2026-10-11T10:09:13.656Z"
+    },
+    {
+      "id": "9099cdaf-0021-4c5b-9e07-65a0b7094507",
+      "revision": 672,
+      "kind": "task.update",
+      "itemId": "task-84772b9a",
+      "title": "Fine-grid bounded cosmic motifs",
+      "author": "/root",
+      "source": "Actual frozen65ecaf2 build, reviewed source packets and browser baseline",
+      "createdAt": "2026-10-11T10:18:38.631Z"
+    },
+    {
+      "id": "3b09cb0c-01b6-4b6f-ae7d-9532c2535bd8",
+      "revision": 673,
+      "kind": "task.update",
+      "itemId": "task-78313163",
+      "title": "Authored96-cell starter RAICHO art pipeline",
+      "author": "/root",
+      "source": "Actual frozen65ecaf2 build, reviewed source packets and browser baseline",
+      "createdAt": "2026-10-11T10:18:38.693Z"
+    },
+    {
+      "id": "87929e57-9bd7-45df-a2ae-0f14cd3260c0",
+      "revision": 674,
+      "kind": "task.update",
+      "itemId": "task-a27e49f0",
+      "title": "Authoritative RAICHO affinity status line",
+      "author": "/root",
+      "source": "Actual frozen65ecaf2 build, reviewed source packets and browser baseline",
+      "createdAt": "2026-10-11T10:18:38.757Z"
+    },
+    {
+      "id": "17d8f156-ecfd-4953-87d8-6f6e7d9a6acc",
+      "revision": 675,
+      "kind": "review",
+      "itemId": "review-3d7a9678",
+      "title": "Actual asynchronous cosmic/art/affinity source review and diagnostic replay",
+      "author": "/root",
+      "source": "Actual frozen65ecaf2 build, reviewed source packets and browser baseline",
+      "createdAt": "2026-10-11T10:18:38.789Z"
+    },
+    {
+      "id": "d9ecd0a6-063e-4294-915c-76963ee0e67b",
+      "revision": 676,
+      "kind": "build",
+      "itemId": "build-66adba95",
+      "title": "Fine cosmic and authoritative affinity baseline",
+      "author": "/root",
+      "source": "Actual frozen65ecaf2 build, reviewed source packets and browser baseline",
+      "createdAt": "2026-10-11T10:18:38.804Z"
     }
   ],
   "runRecords": [
@@ -21487,6 +21893,95 @@
       "author": "/root",
       "source": "Root actual f69 integration, specialist handoffs/reviews and desktop browser observations on 2026-10-11",
       "createdAt": "2026-10-11T09:40:54.678Z"
+    },
+    {
+      "id": "run-2e84f742",
+      "title": "Production integration · running",
+      "agentId": "/root",
+      "agentLabel": "Production integration",
+      "state": "running",
+      "observedAt": "2026-10-11T10:09:13.538Z",
+      "taskIds": [
+        "task-09d2d171"
+      ],
+      "summary": "Actually editing shared shell typography/settings/menu hierarchy and researching primary sources.",
+      "evidence": [
+        {
+          "label": "Actual current assignment",
+          "kind": "note",
+          "details": "Actually editing shared shell typography/settings/menu hierarchy and researching primary sources."
+        }
+      ],
+      "author": "/root",
+      "source": "Actual user steering and specialist assignments, 2026-10-11",
+      "createdAt": "2026-10-11T10:09:13.544Z"
+    },
+    {
+      "id": "run-37e382a8",
+      "title": "Gameplay and status specialist · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Gameplay and status specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T10:09:13.569Z",
+      "taskIds": [
+        "task-09d2d171",
+        "task-57db0993"
+      ],
+      "summary": "Frozen read-only diagnostic reward replay found no leak; now implementing compact status in isolated branch, then scoped starter mechanics.",
+      "evidence": [
+        {
+          "label": "Actual current assignment",
+          "kind": "note",
+          "details": "Frozen read-only diagnostic reward replay found no leak; now implementing compact status in isolated branch, then scoped starter mechanics."
+        }
+      ],
+      "author": "/root",
+      "source": "Actual user steering and specialist assignments, 2026-10-11",
+      "createdAt": "2026-10-11T10:09:13.588Z"
+    },
+    {
+      "id": "run-a2ae1cb7",
+      "title": "Engine specialist · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Engine specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T10:09:13.611Z",
+      "taskIds": [
+        "task-09d2d171"
+      ],
+      "summary": "Completed frozen RAICHO source-pack review; now auditing native typography fit and implementing scoped measured fractional text if justified.",
+      "evidence": [
+        {
+          "label": "Actual current assignment",
+          "kind": "note",
+          "details": "Completed frozen RAICHO source-pack review; now auditing native typography fit and implementing scoped measured fractional text if justified."
+        }
+      ],
+      "author": "/root",
+      "source": "Actual user steering and specialist assignments, 2026-10-11",
+      "createdAt": "2026-10-11T10:09:13.619Z"
+    },
+    {
+      "id": "run-7e34677b",
+      "title": "Art and interface specialist · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "Art and interface specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T10:09:13.641Z",
+      "taskIds": [
+        "task-09d2d171"
+      ],
+      "summary": "Completed frozen cosmic source-art review; now independently proposing contextual hierarchy and restrained original pixel interactions.",
+      "evidence": [
+        {
+          "label": "Actual current assignment",
+          "kind": "note",
+          "details": "Completed frozen cosmic source-art review; now independently proposing contextual hierarchy and restrained original pixel interactions."
+        }
+      ],
+      "author": "/root",
+      "source": "Actual user steering and specialist assignments, 2026-10-11",
+      "createdAt": "2026-10-11T10:09:13.656Z"
     }
   ],
   "phaseDescription": "Desktop-first Rust/WASM solo game and local Studio are implemented. Reviewed occupied-cell art, reproducible conversion, responsive native settings/icons and minimap, strict GitHub integration gates and source-backed Dev Bible are integrated. Natural campaign balance, human listening, owner-private update lifecycle and physical phones remain separate pending gates."
