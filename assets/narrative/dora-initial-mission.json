@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "status": "authored content; host owns authoritative stage and actions",
+  "character": {
+    "id": "dora-pan-renko-1337",
+    "full_name": "DORA-PAN-RENKO-1337",
+    "speaker": "DPR#1337",
+    "portrait": 8,
+    "main_corporation": "PAN",
+    "sub_corporation": "RENKO"
+  },
+  "source_contract": "Approved Game onboarding HUD stage0..6; no invented mission reward or profile progress",
+  "legacy_behavior": "No onboarding prompt when authoritative onboarding HUD is null",
+  "stages": [
+    {
+      "stage": 0,
+      "id": "license",
+      "native_action": "acknowledge_license",
+      "pages": [
+        {"id": "license-intro", "expression": "pleased", "text": "DPR#1337, Haven flight guide. Your license records your main and crystal manufacturers. I am DORA-PAN-RENKO-1337: PAN green hair, RENKO red antenna crystals."},
+        {"id": "license-starter", "expression": "focused", "text": "Your main manufacturer supplies one equipped starter: PAN Flux Drive, RENKO Pulse Lens, or HUGO Guard Coil. The crystal manufacturer adds no extra combat ability. Confirm your license when ready."}
+      ]
+    },
+    {
+      "stage": 1,
+      "id": "depart",
+      "ui_action": "map",
+      "pages": [
+        {"id": "departure-controls", "expression": "focused", "text": "Left-click sets your course. Hold right mouse to aim at the cursor and fire along the ship's nose. Escape opens Ship Status while the universe continues. Close the panel before your first departure."},
+        {"id": "departure-boundary", "expression": "neutral", "text": "Fly beyond Haven's 240-metre shield to begin the expedition. Use the map to check your position. On touch, the left stick turns and thrusts; the right fire control shoots along your current heading."}
+      ]
+    },
+    {
+      "stage": 2,
+      "id": "belt-rock",
+      "ui_action": "map",
+      "pages": [
+        {"id": "belt-practice", "expression": "focused", "text": "The Haven belt lies 700 to 1,400 metres from home. Break a rock born in that belt with real shots. These training rocks grant no ship XP; they may drop basic category points or Tier 1 materials."}
+      ]
+    },
+    {
+      "stage": 3,
+      "id": "collect-tier1",
+      "pages": [
+        {"id": "cargo-pickup", "expression": "neutral", "text": "Pick up a Tier 1 material. Your hold carries sixteen materials across all tiers. If none dropped, try another belt rock. Collecting matching category points also discovers the other basic ability blueprints."},
+        {"id": "cargo-risk", "expression": "concerned", "text": "Materials in the hold are at risk: death, restarting, returning to Title, or reloading discards them. Collected category points remain yours. We bank materials by flying home, not by opening a menu."}
+      ]
+    },
+    {
+      "stage": 4,
+      "id": "bank-tier1",
+      "ui_action": "map",
+      "pages": [
+        {"id": "physical-return", "expression": "focused", "text": "Fly physically inside Haven's shield. A real arrival transfers carried materials to your tiered stash. Watch the cargo and stash readouts; opening Forge from space cannot perform that transfer."}
+      ]
+    },
+    {
+      "stage": 5,
+      "id": "craft-and-equip",
+      "required_flags": [32, 64],
+      "ui_action": "forge",
+      "pages": [
+        {"id": "forge-recipe", "expression": "focused", "text": "At Haven, open Forge and choose a basic ability other than your factory starter. Its first rank costs three matching points and two banked Tier 1 materials. The live recipe explains any missing blueprint or resources."},
+        {"id": "forge-equip", "expression": "neutral", "text": "Craft acquires the ability; it does not install it. Equip it explicitly into its matching offense, defense, or passive slot. Each ship keeps three slots and its own hardware and XP. Craft it, then Equip it to finish this supply loop."}
+      ]
+    },
+    {
+      "stage": 6,
+      "id": "complete",
+      "pages": [
+        {"id": "guide-complete", "expression": "pleased", "text": "Your first supply loop is recorded. Check your equipped ability, then explore beyond the belt for ship XP and stronger threats. Return with your cargo; DPR#1337 will keep the channel clear."}
+      ]
+    }
+  ]
+}
