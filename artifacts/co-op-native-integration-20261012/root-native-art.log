@@ -1,0 +1,23 @@
+   Compiling game_web v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\game_web)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 4.89s
+     Running unittests src\lib.rs (target\debug\deps\game_web-9ea70f65f4ad26fd.exe)
+
+running 9 tests
+test co_op_art::tests::export_co_op_native_art_packet ... ignored, explicit native packet export for the author software contact sheet
+test co_op_art::tests::local_whole_cell_clipping_precedes_exact_reflected_sheared_parent ... ok
+test co_op_art::tests::authored_invite_and_join_have_distinct_landmarks_negative_space_and_materials ... ok
+test co_op_art::tests::invalid_tokens_rectangles_affines_and_overflow_fail_before_append ... ok
+test co_op_art::tests::eight_seats_only_illuminate_admitted_count_without_changing_occupancy ... ok
+test co_op_art::tests::invite_join_and_full_roster_are_bounded_as_three_native_objects ... ok
+test co_op_art::tests::whole_object_admission_rejects_either_quota_without_partial_frame_or_debit ... ok
+test co_op_art::tests::only_explicit_signals_move_and_reduced_motion_idle_and_disabled_freeze ... ok
+test co_op_art::tests::continuous_fit_preserves_all_source_cells_and_full_fractional_bases ... ok
+
+test result: ok. 8 passed; 0 failed; 1 ignored; 0 measured; 278 filtered out; finished in 0.04s
+
+     Running tests\boss_layout.rs (target\debug\deps\boss_layout-427b75710e1283f7.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 31 filtered out; finished in 0.00s
+

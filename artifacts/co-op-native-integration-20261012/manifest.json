@@ -1,0 +1,146 @@
+{
+  "runtimeHead": "48bec87d504dc81ecf768fa22525d29cff8d6f37",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 3438,
+      "sha256": "fe0c7e5f310d4f27d9b8c6a53e1769fa9baa1a6db25476f04d4b31412f900ac1"
+    },
+    {
+      "path": "native-art-handoff.md",
+      "bytes": 5723,
+      "sha256": "4f152c4e4dce74cd108735c6d18ce68148da127b13415b9a068351af1861c741"
+    },
+    {
+      "path": "native-art-software.png",
+      "bytes": 19722,
+      "sha256": "c90b0bae9ccadd81f520e8566d93d7d2e386e2dbbb0cdffb3b25645eded22a88"
+    },
+    {
+      "path": "native-fixture-handoff.md",
+      "bytes": 2534,
+      "sha256": "f7db352a4f4fa5c92fe23f58657c5f50dfbf9cc0715970acf5415a99f16cb4c9"
+    },
+    {
+      "path": "native-replica-handoff.md",
+      "bytes": 6940,
+      "sha256": "151162f3b6392055b7e5416b45815288c8ccd0f9130ecca23b01956111ea874e"
+    },
+    {
+      "path": "nebula-webgpu-final.jpg",
+      "bytes": 25818,
+      "sha256": "b8c0a4b84c8d8ce237cba9fa951030354925ee28e9a4778fb1cfe3e396a8e6b9"
+    },
+    {
+      "path": "network-qa-plan.md",
+      "bytes": 3919,
+      "sha256": "880153438585d82e8409418c0f5e551c532bf3dd51300de87e9666708bde6dd4"
+    },
+    {
+      "path": "panel-webgl2-848-scrolled.jpg",
+      "bytes": 28059,
+      "sha256": "a2adb3d5ae6836dab899da12a19b2f1369dd34f2837abfed4d57f14eb300ea51"
+    },
+    {
+      "path": "panel-webgl2-848.jpg",
+      "bytes": 27558,
+      "sha256": "11e110c0e2657db26ca7d086834145facd8d48ff671ee428a50dfdb4f7f03bb8"
+    },
+    {
+      "path": "panel-webgl2-wide.jpg",
+      "bytes": 49778,
+      "sha256": "5285933ad99f55b67d75e64c394320890196f09895fad5f2da5b2ce97fb7bd67"
+    },
+    {
+      "path": "panel-webgpu-wide.jpg",
+      "bytes": 49173,
+      "sha256": "f5d42a2c78b74a32e2caf1963007b8573bb8d3231b968728d33fd1d0a0b259dd"
+    },
+    {
+      "path": "planet-webgpu-final.jpg",
+      "bytes": 20734,
+      "sha256": "529194d5c48b0130fc00ccc79bf8e2cd6ff54c61ccd50d92fa566184da114c23"
+    },
+    {
+      "path": "profile-after.txt",
+      "bytes": 469,
+      "sha256": "8bf88d9fb5113d9eb902a2adac93e2cae7fac0d919791d24135a1eec1d00e242"
+    },
+    {
+      "path": "profile-before.txt",
+      "bytes": 469,
+      "sha256": "8bf88d9fb5113d9eb902a2adac93e2cae7fac0d919791d24135a1eec1d00e242"
+    },
+    {
+      "path": "profile-report-equality.txt",
+      "bytes": 325,
+      "sha256": "2211248f43b4ca3923ad93697dddb191e74b090784fb6b38d3497826923bde5e"
+    },
+    {
+      "path": "root-build-layer.log",
+      "bytes": 1319,
+      "sha256": "62a0e76506b9fa8876bcc6cd9237c35c73b3516f7971b4a9cfb6afe0b964d7e9"
+    },
+    {
+      "path": "root-clippy-final.log",
+      "bytes": 166,
+      "sha256": "b6956ac76b43ff30de511e5cdb1724aa6222ab3ffad548ab68c35bee935335cb"
+    },
+    {
+      "path": "root-controller-panel-ports.log",
+      "bytes": 7051,
+      "sha256": "00905fbfe80f73ddca0c0733f323a35444620f0ae8c8d52bdcbe365af64d3749"
+    },
+    {
+      "path": "root-full-shell.log",
+      "bytes": 118187,
+      "sha256": "274d5a0594e4d93fbd4b3f8dbbf9ffc9cc5c3409a9c221b2402ba7718cbbf506"
+    },
+    {
+      "path": "root-native-art.log",
+      "bytes": 1500,
+      "sha256": "f53b5ed00c8bf2bf7e3412a24491bc5b8abd3379fb6adba1344ca9181736e977"
+    },
+    {
+      "path": "root-native-full.log",
+      "bytes": 81584,
+      "sha256": "7586a623df80c502b719cde12f870d59fe3eff241d89ad264cd4b23d6409ab45"
+    },
+    {
+      "path": "root-scene-art.log",
+      "bytes": 16188,
+      "sha256": "95eab70b94ad12f643acb6bbd2c765745754519230f9bb319595910a3c4d4e78"
+    },
+    {
+      "path": "root-shell-layer-final.log",
+      "bytes": 56562,
+      "sha256": "13ce90b69b89c846fb5ed87a34e75369218b20d2fe6ea21ab2f36749ed4e56b0"
+    },
+    {
+      "path": "root-wasm-art-clippy.log",
+      "bytes": 166,
+      "sha256": "224b57caf3a93db8141913a7d7c4a470b9480706a6f6993986a0939c236c02d6"
+    },
+    {
+      "path": "solo-harness-handoff.md",
+      "bytes": 1555,
+      "sha256": "70907ab5b5b8305b6227fea4f5eab3c9fcb41b1becd16b7fae53db2b32b0ad41"
+    },
+    {
+      "path": "tested-build.json",
+      "bytes": 317,
+      "sha256": "a63a4cf0527725210f6fc3a013ed01641513d6dac3292b5ba2f0998860bbe993"
+    },
+    {
+      "path": "webgpu-backend.txt",
+      "bytes": 68,
+      "sha256": "1290ba45109a3f991858d351a3586497247b6eda2de9dd9ba9164a49f8c2acb8"
+    },
+    {
+      "path": "wiring-review.md",
+      "bytes": 4744,
+      "sha256": "9d4c9fc3555ef2ff73ed7e7b45a7ccbb6bb55d987e578a1cd59e0aaec59bf80f"
+    }
+  ],
+  "hashScope": "Exact staged Git blob bytes; ordinary Git text checkout may normalize line endings."
+}

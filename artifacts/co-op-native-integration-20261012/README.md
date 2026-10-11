@@ -1,0 +1,17 @@
+# Native co-op integration and league UI — October 12, 2026
+
+Actual built/tested runtime: 48bec87d504dc81ecf768fa22525d29cff8d6f37, codex/testing. tested-build.json records source/package hashes. Follow-up evidence/Studio delivery commits do not change runtime inputs.
+
+The prior natural-space/sports-UI pass remains integrated. This increment adds actual Rust guest replica assembly and rendering, fixed-step host authority, synchronous bounded WASM ports, session controller, Haven invite/join panel, and original cached native league symbols. Separate roles retain host-authoritative occupied pixel destruction and bounded previous-publication interpolation; retained solo Game is not ticked as a guest. Source reviews found and Root fixed deferred save-entry resurrection, direct menu/save/diagnostic bypasses, and stale guest input at restoration. Browser review found child art below button backings; final48bec87 corrects ordering within its UI group and measures labels separately.
+
+Checks: ordinary native workspace run774pass/7explicitexportignored before new art; new art8pass/1explicitexportignored; revised UI-scene143pass. Full final shell528pass/1existingWindows skip. Native all-target and actual wasm32 strict Clippy, formatting, normal dual-WASM/TypeScript/game PWA/Studio build pass. Raw earlier harness/fixture failures are retained and corrected; no ignored tests represented as ordinary passes.
+
+Actual browser: WebGL2 and WebGPU initialized final index-Lu4e40ru.js. Wide panel screenshots1280x720. WebGL2 compact848x480 has an18.4px scroll range; second screenshot demonstrates lower guidance reachable without covering fixed footer. Screen capture bytes preserve native format. Viewport reset afterward.
+
+Root used the real dock click, real signaling service and native host begin, saw HOSTING and1/8pilots, ended session, and compared byte-identical before/after console PROFILE reports. No invitation or bearer capability retained in evidence. This validates one browser host lifecycle and visible progression fields, not two-player RTC or complete browser IndexedDB equality. Native restoration tests establish exact serialized solo Profile separately. No performance claim from hidden IAB frame timing.
+
+Normal preview: one owned game process49300/4173+4172; separate Studio4174/4175 and loopback signaling37708/4176. Existing game processes were checked and stopped before replacement. Signaling allows only three explicit local origins. No HTTPS/TURN/internet multiplayer acceptance.
+
+Still pending: two actual simultaneous Galaxies over RTC, independent saves/guest teardown, eight-player and packet-loss tests, owned guest loadouts/abilities/shared rewards, complete remote rig/FX, background-host policy, phone validation and30minute soak. Current native temporary session is primary-fire only with factory guest RAICHO, disclosed in UI. This is progress on the multiplayer foundation, not a finished co-op release. Physical-phone performance, full-game art consistency, subjective player visual approval and title MP3 remain open.
+
+Final QA space captures use seed871238449, zoom1.00, recorded scene positions. QA warp disables rewards and discards carried run material. Nebula is stylized native gas shading, not a scientific simulation. See prior artifacts/space-league-refinement-20261012 for the completed visual pass and source morphology references. Final preview returns to normal non-QA Haven.

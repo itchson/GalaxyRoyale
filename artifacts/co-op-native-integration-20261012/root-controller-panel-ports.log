@@ -1,0 +1,93 @@
+(node:6312) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ channel ready is separate from native admission and complete replica application (5.3992ms)
+✔ authenticated sender is the native pilot ID, and input is bounded to one local sequence per cadence (12.7209ms)
+✔ acknowledged unchanged body signatures reuse cells while pose pages continue (3.3122ms)
+✔ same-count color mutation changes signature and sends actual indexed cells (3.3429ms)
+✔ backpressure does not advance input sequence or grow a queued input history (3.8401ms)
+✔ a rejected remote input retires only its authenticated pilot and preserves the host (3.3503ms)
+✔ host end and guest leave restore native boundaries exactly once without touching local progression (1.1477ms)
+✔ missing native replica never claims connected and returns to a terminal state (0.9141ms)
+✔ state contains only controlled presentation data and explicit copy getter owns invitation access (0.4025ms)
+✔ unexpected native SCTP close is generic, not falsely attributed to host intent (1.0958ms)
+✔ invalid elapsed/input cannot become an authority tick or native operation (0.5164ms)
+✔ publication wire enforces finite counts, signature format, roles and token bounds (0.2636ms)
+✔ failed native restoration remains latched and blocks a new session until explicit successful recovery (1.5269ms)
+✔ failed replica restoration retains its recovery handle and cannot reopen gameplay (1.5042ms)
+✔ cancellation while signaling create is pending cannot begin native authority after completion (0.1786ms)
+✔ a stale prior-session callback cannot mutate a replacement native session (1.7223ms)
+✔ native commit refusal cannot mark a staged replica running (0.6502ms)
+✔ incomplete or stale publication end cannot install partially received cells (0.419ms)
+✔ rolling publication quotas remain bounded at120Hz rather than allowing window-boundary bursts (29.7752ms)
+✔ no acknowledged receipt expires only the stalled guest while host simulation remains available (0.8655ms)
+✔ replica binds authenticated host world seed while preserving distinct guest local metadata (0.9031ms)
+✔ one-frame click courses survive sampling cadence and backpressure, then are consumed once (1.1769ms)
+✔ cancelInput sends the existing native zero-stick course cancellation, then resumes fresh controls (1.3482ms)
+✔ a synchronous transport end followed by failed native restoration cannot submit another input (0.8738ms)
+✔ an ambiguous successful native begin reply retains ownership until real cleanup (0.2707ms)
+✔ an admitted guest drops a stale published world after 30 seconds without claiming host background simulation (0.7494ms)
+✔ unavailable concrete ports do not launch signaling or publish a connected state (0.1801ms)
+✔ actual 91a18ab publisher rows and indexed cells reach the controller, but partial export cannot claim a complete world (3.1606ms)
+(node:47452) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ cancel during disk save never starts an invitation after the save completes (0.6443ms)
+✔ title or replacement controller during flush prevents a delayed join (0.1226ms)
+✔ a successful save and flush admit exactly one current request (0.3957ms)
+✔ opaque envelope accepts exact transport bounds without truncating long codes (1.5689ms)
+✔ default unavailable dock state cannot start sessions and exposes semantic input hooks (1.1301ms)
+✔ available session copy discloses current guest and reward limitations (0.6432ms)
+✔ join forwards the full bounded code once, including Enter composition guard (1.203ms)
+✔ create invokes inside the real click and promise success cannot invent hosting (0.6833ms)
+✔ only controller phases declare readiness, admission and coherent connection (0.6966ms)
+✔ cancel supersedes a pending start and ignores its late rejection (0.7841ms)
+✔ guest cannot end and repeated exit clicks cannot invoke twice (0.6265ms)
+✔ invitation is read only for an actual copyable host state and copied explicitly (0.7786ms)
+✔ clipboard rejection keeps full manual copy and never displays thrown capability (0.7015ms)
+✔ unknown reasons and controller messages cannot leak secret or raw transport errors (0.6111ms)
+✔ unchanged repaint preserves input node, selection, focus, scroll and performs no writes (0.5705ms)
+✔ ended session and teardown clear fields and isolate late completion from a new view (0.6513ms)
+✔ invalid controller counts or progression fail closed without reading invitations (0.7426ms)
+✔ malformed capability getter remains hidden with no unsafe fallback (0.6051ms)
+✔ failed solo restoration keeps the actual reason and prevents another start (0.484ms)
+✔ failed restoration exposes one explicit retry without claiming restored solo state (0.6103ms)
+✔ invalid state cannot expose recovery or invoke an exit callback (0.4492ms)
+(node:53092) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✖ tracked real publication DTOs retain original native export hashes and validate wire (1.8185ms)
+✔ actual Galaxy batch delegate preserves receiver and native response bytes (1.7401ms)
+✔ replica port maps real publisher DTOs to exact agreed native operation keys (3.5507ms)
+✔ missing exports report unavailable without pretending that a native replica exists (0.5294ms)
+✔ rejected and malformed end replies retain the native session recovery handle (0.2723ms)
+✔ ambiguous begin response keeps a token for cleanup, explicit native rejection does not (0.1742ms)
+✔ stale acquisitions and mismatched sessions are refused before native invocation (0.4354ms)
+✔ unbounded or invalid native response envelopes never become successful operations (0.2768ms)
+ℹ tests 57
+ℹ suites 0
+ℹ pass 56
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 268.6471
+
+✖ failing tests:
+
+test at scripts\test\coop-wasm-ports.test.mjs:24:1
+✖ tracked real publication DTOs retain original native export hashes and validate wire (1.8185ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  183 !== 182
+  
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/coop-wasm-ports.test.mjs:35:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.start (node:internal/test_runner/test:1191:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 183,
+    expected: 182,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

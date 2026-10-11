@@ -1,0 +1,1724 @@
+$ node --experimental-transform-types --test apps/studio/test/*.test.mjs scripts/test/*.test.mjs scripts/qa/audio-review/*.test.mjs
+✔ phase update records metadata and activity only; restart and backup retain previous complete document (11.2725ms)
+✔ queued project metadata edits use the project revision, accept one and atomically reject stale second (6.3261ms)
+✔ invalid phase patches reject full-project rewrites without revision, disk, activity or notification mutation (6.2544ms)
+✔ HTTP PATCH project accepts revision-checked metadata and preserves origin/content-type barriers (84.5017ms)
+✔ CLI project update requires explicit file and routes to PATCH without direct store access (0.488ms)
+✔ review attachments retain independent evidence after restart without aliasing caller data (16.09ms)
+✔ invalid review attachments reject atomically and do not poison a later valid append (10.9343ms)
+✔ serialized writes reject stale revisions without losing accepted state; restart and backup preserve documents (8.2072ms)
+✔ completion needs actual criteria and evidence, including existing artifacts (7.5401ms)
+✔ artifact allowlist rejects traversal, secrets, missing files and directory requests (6.6484ms)
+✔ canonical workspace aliases allow real artifacts without widening approved roots (5.9122ms)
+✔ HTTP API returns stale-edit 409 and blocks foreign origins and non-JSON mutations (109.7183ms)
+✔ dependency cycles are rejected and feedback is queued until explicitly acknowledged or resolved (23.3678ms)
+✔ run records persist as append-only observations without inferring task completion or agent presence (17.935ms)
+✔ run observations validate state, identity, timestamp, task references and artifact evidence (17.7648ms)
+✔ HTTP run endpoint appends observations and rejects edit attempts (39.8623ms)
+✔ review, decision and build records retain their source and explicit check coverage after restart (61.7357ms)
+✔ reviews preserve omitted and empty task references and existing append-only history (325.5319ms)
+✔ malformed review references reject atomically without revision, activity, backup or disk mutation (133.21ms)
+✔ review reference limit accepts forty unique existing tasks and rejects forty-one (18.6621ms)
+✔ HTTP reviews reject null task IDs from a misread creation response and accept item.id references (47.7375ms)
+✔ all eight Wiki champion identities, hulls, categories, seed grids and base hulls match the authoritative Rust table (4.059ms)
+✔ all seventeen ability IDs, effect categories and descriptions match stable Rust registry order (1.0888ms)
+✔ six biome labels/spawn mixes and seed/belt parameters agree with actual Rust generation (1.459ms)
+✔ boss generations, ship-level gates, save schema and pixel packing facts remain source-backed (2.4408ms)
+✔ Wiki variant cell counts match actual runtime atlas occupancy and provenance; missions keep player-facing terminology (1.4148ms)
+✔ curated reader text retains UTF-8 symbols without legacy decoding artifacts (0.7379ms)
+✔ courier guidance includes the actual Haven delivery and source-beacon claim stages (0.9969ms)
+(node:52352) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ actual whole-workspace render preserves a focused backward range and middle caret across refreshes (3.0092ms)
+✔ actual Wiki input edits keep Unicode UTF-16 selection and focus after shared rerender (0.8236ms)
+✔ refresh does not steal focus from another control and missing/null selection is safe (0.8691ms)
+(node:46660) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ gallery serves exact committed native/browser artifacts with distinct classifications and readable provenance (86.1744ms)
+✔ gallery captions preserve observed desktop/QA scope and do not turn a native raster into GPU acceptance (0.5232ms)
+✔ artifact namespace retains exact catalog allowlists and excludes arbitrary records, hidden paths and audio (20.9746ms)
+(node:48536) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ actual catalog categories, references and classified media all validate and resolve (1105.3469ms)
+✔ server and actual UI search cover names, source facts, categories and verification boundaries (3.5751ms)
+✔ rendering escapes every prose/attribute surface and constructs only local allowlisted link shapes (0.452ms)
+✔ catalog validates stable ids, related links, status and bounded structured content (0.3462ms)
+✔ source/media read paths reject traversal, secrets, unlisted and wrong-type content (12.7188ms)
+✔ catalog itself and listed ancestor links fail closed rather than reading redirected content (10.1803ms)
+✔ HTTP Wiki routes return actual listed bytes, filtered catalog and controlled lookup errors (126.0145ms)
+✔ the four earlier declared algorithms are unchanged across every scheduler time (443.4829ms)
+✔ current score declares three home identities, exploration, real boss inputs and healed thrust release (2.1785ms)
+✔ new declared cues are bounded, chronological and end before the native release tail (0.2957ms)
+✔ missing native DSP rejects visibly before mutating adapter globals (7.422ms)
+✔ pre-render injected unlock failure disposes callbacks and restores every adapter owner without samples (3.8003ms)
+✔ CLI constrains output to work/, ports and bounded autoquit without silently changing an occupied port (666.2812ms)
+✔ prepare compiles real tracked sources and exact historical Git bytes with locked TypeScript (210.9821ms)
+✔ server refuses an altered prepared module instead of reporting false source pins (6.1247ms)
+✔ static and capture allowlists cannot address source, arbitrary paths or malformed run IDs (0.41ms)
+✔ actual loopback HTTP serves pinned modules and preserves captures once, rejecting unrelated Origins and oversized input (79.2117ms)
+✔ occupied-port CLI fails clearly and leaves the existing server alive (98.3748ms)
+Isolated native DSP review http://127.0.0.1:56041/; output C:\Users\mitch\Documents\ChatGPT\galaxy-royale\work\audio-review-helper-test-eP9gVg; autoquit 1 seconds
+Closing isolated audio review server.
+Helper evidence output: C:\Users\mitch\Documents\ChatGPT\galaxy-royale\work\audio-review-helper-test-eP9gVg
+✔ autoquit closes only its actual local server and removes its process signal handlers (1009.7423ms)
+✔ PCM metrics count actual nonfinite and >1 values without silently clamping (0.7396ms)
+✔ PCM windows include channels and preserve the requested time interval (0.1526ms)
+✔ Hann FFT distinguishes known low/high analytical tones (math-only fixture) (27.9355ms)
+✔ float32 WAV preserves exact interleaved PCM including values above unity (0.9092ms)
+(node:47224) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ sanctuary exit selects authored Expanse exploration, then blends back home (5.4296ms)
+✔ six biome identities and eight champion motifs remain distinct and bounded (10.2021ms)
+✔ real aggro rises smoothly and sanctuary/recovery fades it without false distance (0.7425ms)
+✔ low hull alarm recedes on healing and engine requires actual live ports (2.7703ms)
+✔ nonfinite boundaries, no-op time and source input normalization are deterministic (1.2242ms)
+✔ three original corporate homes preserve old identities and fade through real sanctuary exit (4.5449ms)
+✔ boss arrangement requires a real hostile and aggro, with bounded smooth rise and decay (5.7312ms)
+(node:40808) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ title mode gates world score and effects on the existing context then restores music controls (7.81ms)
+✔ charge is one dry voice, two distinct rising tones, and ends by 125 ms (1.8362ms)
+✔ pulse is one dry voice with falling tones and original bandpass noise (1.3242ms)
+✔ 100 mixed cues retain the existing 16-voice effects cap and release stolen nodes (3.6021ms)
+✔ separate volume buses and master mute remain authoritative for new cues (1.3062ms)
+✔ suspend, interrupted recovery, repeat gesture and disposal preserve one context (2.3039ms)
+✔ suspend during asynchronous resume prevents late scheduling and audio debt (0.824ms)
+✔ source state cannot create audio before gesture, after suspension, or disposal (1.5691ms)
+✔ continuous engine and hull alarm reuse one voice each inside the shared16 cap (14.0418ms)
+✔ adaptive score follows actual biome/champion states and stays within32 music voices (40.8268ms)
+✔ distinct ability and shield timbres use one dry bounded voice each (2.2389ms)
+✔ wake sound rate limiting never schedules delayed debt and diagnostics are observational (7.2754ms)
+✔ continuous effects honor independent mute buses, interruption and one-context recovery (1.2734ms)
+✔ an older failed resume cannot suspend a newer successful audio intent (1.287ms)
+✔ healing during an OS interruption cannot revive a stale hull alarm (0.9031ms)
+✔ death finish retains only the real existing cue and suspends after its bounded tail (1.0828ms)
+✔ retry cancels a death timeout and a stale callback cannot suspend resumed music (1.056ms)
+✔ hidden/full suspend and disposal cut death tails without creating a context (0.825ms)
+✔ a late resume state event preserves only the bounded death tail and obeys hard suspend (1.3983ms)
+✔ thrust uses a calm sine fifth with one shared lowpass and duck stage (1.1033ms)
+✔ throttle and speed retarget smooth continuous parameters without restarting the engine (0.9823ms)
+✔ only admitted important cues briefly duck propulsion without pumping music (0.8109ms)
+✔ low-hull priority and strongest cue holds fade away after actual healing (2.9351ms)
+✔ hidden stop, retry and death cleanup cannot carry a propulsion duck into the next life (0.8939ms)
+✔ real gain envelopes leave a quieter engine bed and finite bounded stacked mix (1.5979ms)
+ℹ {"engineEnvelope":0.015503942221969217,"historicalEngineEnvelope":0.06993,"priorWarmEnvelope":0.03008,"historicalScalarChangeDb":-13.084427740029469,"priorWarmScalarChangeDb":-5.756713813616779,"maximumCue":{"kind":"upgrade","envelope":0.544},"stackedEffects":7.793003942221965,"defaultBusScalar":4.383564717499855}
+✔ combined adaptive score, alarm, propulsion and real cues retain finite bus gains and voice limits (121.5032ms)
+ℹ {"samples":960,"seconds":24,"maximumMusicVoices":14,"maximumSfxVoices":4,"musicEnvelope":0.4613339677177024,"effectsEnvelope":0.568554,"combinedEnvelope":0.450172040118094,"conservativeEchoEnvelope":0.47798327107464084,"scope":"recorded graph envelope sums; no DSP peak/RMS"}
+✔ all real buses reach one final bounded soft ceiling after compression (3.6805ms)
+✔ calm thrust pitch stays within a tiny musical bend while breathing reuses all sources (2.8065ms)
+✔ corporate home and quiet Iron exploration produce actual softer score nodes (5.8767ms)
+✔ one shared filtered power-chord voice follows aggro and adds only the actual boss counter-note (27.1872ms)
+✔ the ninth Royale emblem appears only for authoritative tournament victory (4.798ms)
+✔ competitor identity and independent sponsor appear only after discovery without mutating rewards (1.2613ms)
+✔ campaign exposes only genuinely discovered champions and their catalog details (1.0547ms)
+✔ a completed losing season offers a new season without victory or credits claims (1.4376ms)
+✔ a losing-season retry remains gated by location and an active encounter (1.8418ms)
+✔ only an authoritative winning season exposes credits and Sovereign victory text (1.0906ms)
+✔ discovered arena copy distinguishes a found hull, an earned blueprint and an owned craft (1.2329ms)
+✔ named T1 subsets sum to the true cargo and bank totals, never double counted (2.2773ms)
+✔ banking updates inventory while unchanged snapshots retain DOM and scroll (0.9291ms)
+✔ only active courier packets appear as mission items, with actual delivery state (0.8687ms)
+(node:51564) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ schema 6 preserves progression and strips injected components without inventing ownership (12.2012ms)
+✔ schema 7 requires exactly three bounded integer component counts (0.7349ms)
+✔ schema 7 retains component snapshots, rejects stale replay and recovers previous valid counts (11.5346ms)
+✔ database 5 migrates both schema 6 snapshots and prevents a cached database 4 writer (2.8399ms)
+(node:51072) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ channel ready is separate from native admission and complete replica application (8.8672ms)
+✔ authenticated sender is the native pilot ID, and input is bounded to one local sequence per cadence (28.9753ms)
+✔ acknowledged unchanged body signatures reuse cells while pose pages continue (8.2526ms)
+✔ same-count color mutation changes signature and sends actual indexed cells (7.2562ms)
+✔ backpressure does not advance input sequence or grow a queued input history (12.2749ms)
+✔ a rejected remote input retires only its authenticated pilot and preserves the host (2.7685ms)
+✔ host end and guest leave restore native boundaries exactly once without touching local progression (3.211ms)
+✔ missing native replica never claims connected and returns to a terminal state (1.2993ms)
+✔ state contains only controlled presentation data and explicit copy getter owns invitation access (0.57ms)
+✔ unexpected native SCTP close is generic, not falsely attributed to host intent (1.5925ms)
+✔ invalid elapsed/input cannot become an authority tick or native operation (0.7961ms)
+✔ publication wire enforces finite counts, signature format, roles and token bounds (0.3992ms)
+✔ failed native restoration remains latched and blocks a new session until explicit successful recovery (2.4746ms)
+✔ failed replica restoration retains its recovery handle and cannot reopen gameplay (3.2798ms)
+✔ cancellation while signaling create is pending cannot begin native authority after completion (0.4406ms)
+✔ a stale prior-session callback cannot mutate a replacement native session (3.0583ms)
+✔ native commit refusal cannot mark a staged replica running (1.2591ms)
+✔ incomplete or stale publication end cannot install partially received cells (0.8475ms)
+✔ rolling publication quotas remain bounded at120Hz rather than allowing window-boundary bursts (88.6641ms)
+✔ no acknowledged receipt expires only the stalled guest while host simulation remains available (2.6821ms)
+✔ replica binds authenticated host world seed while preserving distinct guest local metadata (2.2632ms)
+✔ one-frame click courses survive sampling cadence and backpressure, then are consumed once (3.3529ms)
+✔ cancelInput sends the existing native zero-stick course cancellation, then resumes fresh controls (2.9798ms)
+✔ a synchronous transport end followed by failed native restoration cannot submit another input (2.3822ms)
+✔ an ambiguous successful native begin reply retains ownership until real cleanup (0.3148ms)
+✔ an admitted guest drops a stale published world after 30 seconds without claiming host background simulation (1.3436ms)
+✔ unavailable concrete ports do not launch signaling or publish a connected state (0.2957ms)
+✔ actual 91a18ab publisher rows and indexed cells reach the controller, but partial export cannot claim a complete world (5.234ms)
+(node:28184) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ cancel during disk save never starts an invitation after the save completes (0.9973ms)
+✔ title or replacement controller during flush prevents a delayed join (0.2178ms)
+✔ a successful save and flush admit exactly one current request (0.6929ms)
+✔ opaque envelope accepts exact transport bounds without truncating long codes (3.2365ms)
+✔ default unavailable dock state cannot start sessions and exposes semantic input hooks (1.8671ms)
+✔ available session copy discloses current guest and reward limitations (1.0607ms)
+✔ join forwards the full bounded code once, including Enter composition guard (1.9317ms)
+✔ create invokes inside the real click and promise success cannot invent hosting (1.0571ms)
+✔ only controller phases declare readiness, admission and coherent connection (1.1105ms)
+✔ cancel supersedes a pending start and ignores its late rejection (1.208ms)
+✔ guest cannot end and repeated exit clicks cannot invoke twice (0.9862ms)
+✔ invitation is read only for an actual copyable host state and copied explicitly (1.1833ms)
+✔ clipboard rejection keeps full manual copy and never displays thrown capability (1.043ms)
+✔ unknown reasons and controller messages cannot leak secret or raw transport errors (0.8886ms)
+✔ unchanged repaint preserves input node, selection, focus, scroll and performs no writes (0.8296ms)
+✔ ended session and teardown clear fields and isolate late completion from a new view (3.4526ms)
+✔ invalid controller counts or progression fail closed without reading invitations (1.1262ms)
+✔ malformed capability getter remains hidden with no unsafe fallback (0.9913ms)
+✔ failed solo restoration keeps the actual reason and prevents another start (0.8994ms)
+✔ failed restoration exposes one explicit retry without claiming restored solo state (1.1031ms)
+✔ invalid state cannot expose recovery or invoke an exit callback (0.7664ms)
+✔ HTTP exact Origin, CORS and fixed routes reject untrusted or forged requests (75.7322ms)
+✔ AES-GCM invite is encrypted hex and rejects byte, version, expiry and restart changes (43.3703ms)
+✔ concurrent HTTP admission reserves only host plus seven, including all pending guests (25.1506ms)
+✔ reservations and active guests expire separately; heartbeat does not extend pending admission (31.9984ms)
+✔ guest cannot end, replace, forge metadata, address strangers or bypass offer roles (47.3261ms)
+✔ host end publishes every final long-poll notice atomically, even with guests pending (46.6848ms)
+✔ host leave, timeout and absolute expiry retain a bounded terminal notice then erase credentials (50.8083ms)
+✔ replacement ends only the previous session and failed replacement preserves it (47.9015ms)
+✔ authenticated replacement shares create rates across new bearer credentials (25.282ms)
+✔ event replay and acknowledgment enforce queue capacity without silently dropping signals (49.0496ms)
+✔ body, SDP and ICE byte bounds and schemas reject oversized or forwarding payloads (36.3886ms)
+✔ unauthenticated failures consume bounded admission rates; session and client quotas are finite (67.7496ms)
+✔ per-sender and per-session signaling rates refuse excess without adding events (26.5026ms)
+✔ one bounded long poll per participant, abort cleanup and finite timeout (79.8952ms)
+✔ service stop resolves existing polls and closes every test listener (23.8646ms)
+✔ pure queued transport is cloned and retained departed credentials stay bounded (0.8853ms)
+✔ byte quota and membership overflow preserve terminal notices instead of orphaning peers (12.5419ms)
+✔ ready and guest leave are once-only, free capacity and prune old credentials while host stays live (26.8099ms)
+✔ chunked request stream enforces the body bound without a Content-Length header (7.8074ms)
+✔ maintenance wakes an outstanding poll on host expiry with its retained end notice (259.0068ms)
+✔ QA prepare pins actual source and bounded HTTP serves only allowlisted modules; captures are sanitized (755.38ms)
+✔ QA reports exclude arbitrary telemetry/credentials and prepare refuses outside work (0.574ms)
+(node:51312) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ versioned frame bounds reject corruption, persistent profiles and nonfinite input (2.6153ms)
+✔ native snapshot contract rejects duplicate slots, wrong profile semantics and nonfinite geometry (0.8178ms)
+✔ HTTP reader refuses credential redirects and bounded oversized responses (5.1117ms)
+✔ body pages retain exact cell indices and reject duplicates, oversize and wrong query kinds (1.8243ms)
+✔ snapshot carries same-tick revision and permits finite authoritative projectiles beyond world edge (0.8326ms)
+✔ actual naturally spawned Coil metadata preserves the segment unknown-maximum sentinel only (0.5163ms)
+✔ actual HTTP membership never implies a ready channel or Rust admission (114.1923ms)
+✔ already-open incoming native channel plus later open event sends exactly one hello (76.8156ms)
+✔ RTC diagnostics retain only allowlisted native error detail, never messages or candidates (29.4287ms)
+✔ real HTTP offer/answer/ICE path binds peer IDs and admits only explicit frames (119.3796ms)
+✔ host plus seven guest channels are bounded; ninth reservation fails (233.6164ms)
+✔ backpressure refuses without advancing wire sequence, queueing or replaying stale input (79.0439ms)
+✔ malformed forged peer hello closes only that host peer and leaves no duplicate RTC (56.9365ms)
+✔ malformed replayed sequence closes only that host peer and leaves no duplicate RTC (45.0684ms)
+✔ malformed wrong session closes only that host peer and leaves no duplicate RTC (30.2153ms)
+✔ malformed guest snapshot authority closes only that host peer and leaves no duplicate RTC (48.4314ms)
+✔ input epoch and immutable snapshot seed are checked before sends (47.0161ms)
+✔ explicit rejection frees the guest reservation without ending the host (44.3072ms)
+✔ host end notifies guest, aborts polls and allows a distinct-session rejoin (40.1676ms)
+✔ expiry ends channels using real polling terminal notices (35.8827ms)
+✔ failed negotiation does not fabricate readiness and guest leave frees its reservation (36.3294ms)
+✔ late create result after disposal cannot reopen state and gets a leave cleanup (88.4736ms)
+✔ guest cannot end a host; explicit leave and repeated disposal clean every handler (19.6137ms)
+✔ a retired peer's already-queued ICE cannot terminate an unrelated host peer (96.3921ms)
+✔ SCTP message bound and send rate refuse without an application backlog (29.3097ms)
+✔ unopened negotiation deadline frees membership and every tracked clock task (30.1528ms)
+✔ reconnection cancels loss timeout; actual failed connection closes once (31.429ms)
+(node:38952) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ tracked real publication DTOs retain canonical native export hashes and validate wire (10.3331ms)
+✔ actual Galaxy batch delegate preserves receiver and native response bytes (0.7349ms)
+✔ replica port maps real publisher DTOs to exact agreed native operation keys (3.2064ms)
+✔ missing exports report unavailable without pretending that a native replica exists (0.5339ms)
+✔ rejected and malformed end replies retain the native session recovery handle (0.3863ms)
+✔ ambiguous begin response keeps a token for cleanup, explicit native rejection does not (0.2668ms)
+✔ stale acquisitions and mismatched sessions are refused before native invocation (0.9842ms)
+✔ unbounded or invalid native response envelopes never become successful operations (0.381ms)
+✔ drawer retains pause/capture until the closing transform finishes (3.2849ms)
+✔ closing can reopen without pause callback churn or stale timers (1.3037ms)
+✔ persisted and OS reduced motion both settle immediately (1.4056ms)
+✔ readiness and repeat guard toggles; disposal cancels unfinished opening (1.022ms)
+✔ commands, history/draft and text-only output remain bounded (13.4429ms)
+✔ async commands cannot overlap and closing ignores submissions (3.5201ms)
+✔ champion dialogue uses independently manufactured detailed portraits and clears identity for the next guide (3.4369ms)
+✔ paged dialogue exposes navigation and voice controls without leaking modal focus (1.6244ms)
+✔ a late asynchronous action cannot duplicate a reward or overwrite a newer dialogue page (1.4098ms)
+✔ presentation tokens change on refresh and close, without changing on reads (1.2294ms)
+✔ overflowing dialogue text joins keyboard focus while actions remain available (1.2412ms)
+✖ Escape opens the live RAICHO menu, cancels controls and course, and toggles closed (3.7938ms)
+✖ opening a dedicated page paints it once without building hidden collections (0.935ms)
+✖ a world facility hit opens exactly its dedicated page without changing progression (1.1757ms)
+✖ misses and home/launch/pause gates leave flight untouched (2.6789ms)
+✖ facility overlay handlers validate the authoritative hit before opening (0.9397ms)
+✖ closing a dedicated flight page resumes; closing title settings returns to title (0.9438ms)
+✖ pause settings and both backup actions select only their dedicated content (0.9846ms)
+✖ a live menu continues after hidden/resume and lifecycle gates never restore controls beneath it (0.9034ms)
+✖ Quit waits for a committed save and flush, then provides a normal-tab fallback (1.7471ms)
+✖ Quit write failure keeps the title available and does not close the browser (1.2804ms)
+✖ a delayed launch audio unlock cannot dismiss newer title Settings or Quit intent (0.9641ms)
+✖ dedicated-page close cannot resume through a recovery, modal, hidden or encounter gate (0.8552ms)
+✖ restart ends the expedition through the authoritative boundary and waits for save plus flush before resuming (1.2366ms)
+✖ restart save failure leaves the menu/input safe and reports the actual failure (1.0949ms)
+✖ save indicator moves from pending to committed only after the adapter commits (0.9796ms)
+✖ overlapping saves do not show saved while any write is outstanding (0.9412ms)
+✖ write rejection exposes attention state and a successful retry clears it (1.2888ms)
+✖ memory-only storage never reports a successful persistent save (0.9759ms)
+✖ a SaveConflict opens the live menu once without recursively scheduling rejected saves (1.0038ms)
+✖ dedicated map and settings icons replace the live page and map toggles back to flight (1.1451ms)
+✖ M uses the discovered map without a simulation pause or a repeat toggle (1.5964ms)
+✖ a delayed map course cannot consume a newer Settings intent (1.0924ms)
+✖ map navigation sets a real course after resume even when optional audio is unavailable (0.8262ms)
+✖ MEISHI is a standalone live card; returning to collections restores menu chrome (0.8847ms)
+✖ standalone card keyboard focus can reach its read-only scrolling region (0.7946ms)
+ℹ Error: Test "save indicator moves from pending to committed only after the adapter commits" at scripts\test\dock-menu.test.mjs:784:1 generated asynchronous activity after the test ended. This activity created the error "ReferenceError: coop is not defined" and would have caused the test to fail, but instead triggered an unhandledRejection event.
+ℹ Error: Test "overlapping saves do not show saved while any write is outstanding" at scripts\test\dock-menu.test.mjs:805:1 generated asynchronous activity after the test ended. This activity created the error "ReferenceError: coop is not defined" and would have caused the test to fail, but instead triggered an unhandledRejection event.
+ℹ Error: Test "write rejection exposes attention state and a successful retry clears it" at scripts\test\dock-menu.test.mjs:824:1 generated asynchronous activity after the test ended. This activity created the error "Error: quota exceeded" and would have caused the test to fail, but instead triggered an unhandledRejection event.
+✔ same Haven chooses above-footer labels at GPU2.4scale and below at GL2scale without moving hits (3.2005ms)
+✔ blocked text has no unsafe substitute and a blocked real hit is hidden (0.9131ms)
+✔ invalid world extents and live modal gates never publish interactive facility boxes (1.2265ms)
+✔ actual exported minimap geometry reserves facility art and labels at UI scale (0.8159ms)
+✔ issued license reuses the selected native appearance without resetting live-menu focus or scroll (3.7428ms)
+✔ live status distinguishes earned shield recharge from a locked starter without mutating the loadout (13.187ms)
+✔ status affinity follows Rust hull metadata rather than the pilot, sponsor or visible slot guesses (4.0171ms)
+✔ status clears nullable legacy affinity and labels Sovereign's licensed fallback explicitly (8.6257ms)
+✔ live status displays selected-ship XP, effective stats, slots and actual cargo tiers (3.1328ms)
+✔ compact default shows the short license and essentials while retaining full detail behind an accessible button (4.055ms)
+✔ Details expansion and button focus persist through real live HUD paints, ship changes and nullable affinity (3.3131ms)
+✔ empty cargo has no risk warning and its zero-tier detail remains explicit without repetitive rows (1.4524ms)
+✔ named T1 inventory is shown inside existing totals and clears without recreating the menu (2.0987ms)
+✔ identical or sub-display-resolution live readings perform zero DOM writes (1.9377ms)
+✔ changed values update stable nodes while retaining scroll and action focus (3.5977ms)
+✔ ship switches use the new ship XP and exact shared icon mapping, including max-level caption (1.3132ms)
+✔ HUD names remain plain text and unavailable numbers are not fabricated (2.1378ms)
+✔ dedicated status actions and title Quit use supported native icons with accessible labels (0.8817ms)
+✔ clear native glyphs cannot create a context hit that covers the top-right map (2.6866ms)
+✔ actual native strip and text bounds scale together without rounding fractional quad geometry (1.4397ms)
+✔ clear glyph row cannot create a touch hit overlapping the real movement/fire pads (0.7977ms)
+✔ 44px contextual hit remains centered in a touch gap and clamps only at real safe-area boundaries (1.3038ms)
+✔ native no-fit and nonfinite text geometry removes invisible contextual hit areas (1.6252ms)
+✔ compiled bridge emits exact single-line footer glyphs and a separate real44px contact hit once (6.0504ms)
+✔ five-cell micro footer preserves warnings and contact input at fractional display scales (7.4989ms)
+✔ compiled bridge forwards focused facility label placement without changing hit geometry (2.9801ms)
+✔ visible toast wins the native slot without leaving a concealed contact hit (0.8177ms)
+✔ unavailable or unsafe interactive context creates no invisible button geometry (2.0106ms)
+✔ menu recovery toast retains multiline DOM bounds instead of a flight-only font slot (0.8243ms)
+✔ footer style and interaction visibility changes invalidate actual bridge geometry (0.861ms)
+✖ Forge forwards exact craft/upgrade/equip/empty/hardware arguments, refreshes HUD, then saves the actual snapshot (9.3915ms)
+✖ backend rejection has no HUD fetch, snapshot save, audio cue or invented success (6.0067ms)
+✖ real Forge category survives successful repaint while a fresh open resets to overview (1.9004ms)
+✖ mutation success is not a committed-save claim while deferred persistence fails (4.5841ms)
+✖ Hangar page and construction/selection bindings pass full per-hull XP metadata (2.7422ms)
+✖ rejected ship construction or switching cannot save or report success (2.4506ms)
+✖ an unavailable audio context cannot reject a successful mutation/save flow (3.603ms)
+✔ OS lease rejects a concurrent runtime and is reusable after idempotent close (23.7649ms)
+✔ OS releases the lease when its actual child process is killed (145.7128ms)
+✔ failed service closes its actual sibling before supervision completes (99.6838ms)
+✔ explicit stop waits for every owned child and reports a clean stop (15.7764ms)
+✔ actual Vite never-listened close is idempotent and releases its lease (50.6578ms)
+✔ actual Vite restarts twice without releasing its cross-process reservation (173.8531ms)
+✔ rebundled Vite plugin owners keep the lease until their final explicit close (30.3299ms)
+✔ actual Vite preview close releases its lease (12.9627ms)
+✔ failed Vite preview listen releases the lease and preserves the occupied port owner (13.0444ms)
+✖ real loss notice outlives transient toasts and clears only after restoration (2.5666ms)
+✖ failed reconstruction retains its actual reason across other notifications (0.8602ms)
+✖ pending preparation leaves Game readable and defers GPU resize to latest dimensions (1.5026ms)
+✖ resuming flight uses the latest authoritative audio state before scheduling (0.7755ms)
+✖ overlapping recovery requests prepare and install exactly once (0.7156ms)
+✖ settlement honors death, title, encounter, console, visibility and orientation interruptions (2.1416ms)
+✔ pre-init title visibility stops audio before a Game exists and resumes only when visible (2.366ms)
+✖ title recovery resumes only visible eligible title audio and leaves flight stopped (1.8094ms)
+✖ graphics recovery restores a live menu without restoring flight controls (1.236ms)
+✖ reconstruction rejection reports its cause, preserves Game and stops the RAF retry loop (2.6752ms)
+✖ a modal closed while preparation is pending restores the previously live world (1.1655ms)
+✖ failed reconstruction preserves an existing death report, title or other modal (0.7192ms)
+✖ an invalid install is a controlled failure without changing the live profile (0.6063ms)
+✖ Resume's awaited audio cannot re-enable input when recovery starts meanwhile (0.8483ms)
+✖ a real context loss gates drawing, resize and preparation until restored (0.6299ms)
+✖ a context lost during preparation disposes the uninstalled candidate (0.7025ms)
+✖ restoration during preparation discards stale resources and queues one fresh replacement (0.7659ms)
+✔ closing the last modal after failed reconstruction exposes the pause menu (4.2177ms)
+ℹ Error: Test "failed reconstruction retains its actual reason across other notifications" at scripts\test\graphics-recovery.test.mjs:259:1 generated asynchronous activity after the test ended. This activity created the error "Error: replacement adapter unavailable" and would have caused the test to fail, but instead triggered an unhandledRejection event.
+ℹ Error: Test "pending preparation leaves Game readable and defers GPU resize to latest dimensions" at scripts\test\graphics-recovery.test.mjs:274:1 generated asynchronous activity after the test ended. This activity created the error "ReferenceError: coop is not defined" and would have caused the test to fail, but instead triggered an unhandledRejection event.
+ℹ Error: Test "title recovery resumes only visible eligible title audio and leaves flight stopped" at scripts\test\graphics-recovery.test.mjs:421:1 generated asynchronous activity after the test ended. This activity created the error "ReferenceError: coop is not defined" and would have caused the test to fail, but instead triggered an unhandledRejection event.
+ℹ Error: Test "reconstruction rejection reports its cause, preserves Game and stops the RAF retry loop" at scripts\test\graphics-recovery.test.mjs:451:1 generated asynchronous activity after the test ended. This activity created the error "Error: replacement adapter unavailable" and would have caused the test to fail, but instead triggered an unhandledRejection event.
+ℹ Error: Test "failed reconstruction preserves an existing death report, title or other modal" at scripts\test\graphics-recovery.test.mjs:490:1 generated asynchronous activity after the test ended. This activity created the error "Error: no replacement device" and would have caused the test to fail, but instead triggered an unhandledRejection event.
+ℹ Error: Test "Resume's awaited audio cannot re-enable input when recovery starts meanwhile" at scripts\test\graphics-recovery.test.mjs:544:1 generated asynchronous activity after the test ended. This activity created the error "ReferenceError: coop is not defined" and would have caused the test to fail, but instead triggered an unhandledRejection event.
+ℹ Error: Test "a context lost during preparation disposes the uninstalled candidate" at scripts\test\graphics-recovery.test.mjs:589:1 generated asynchronous activity after the test ended. This activity created the error "ReferenceError: coop is not defined" and would have caused the test to fail, but instead triggered an unhandledRejection event.
+ℹ Error: Test "restoration during preparation discards stale resources and queues one fresh replacement" at scripts\test\graphics-recovery.test.mjs:610:1 generated asynchronous activity after the test ended. This activity created the error "ReferenceError: coop is not defined" and would have caused the test to fail, but instead triggered an unhandledRejection event.
+(node:51228) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ simultaneous joystick and fire use independent pointer channels (2.6002ms)
+✔ blur resets every interrupted input, including mouse buttons (0.5603ms)
+✔ desktop destination maps from unshaken camera and is submitted once (0.4592ms)
+✔ stationary held left cursor continuously projects thrust while a released click retains its course (0.3041ms)
+✔ both mouse buttons keep forward thrust and cursor aim independent of button release order (0.209ms)
+✔ interrupted capture cancels the Rust course but ordinary click release preserves it (0.237ms)
+✔ disabled or cancelled control cannot continue firing (0.1428ms)
+✔ right mouse fires and Space is not a weapon shortcut (0.1887ms)
+✔ campaign navigation submits a real course once and respects interrupted controls (0.1855ms)
+✔ Haven can intercept even a short weapon press from mouse or touch without a lingering shot (0.3651ms)
+✔ right mouse aims at its cursor world point without submitting a navigation course (0.1949ms)
+✔ held stationary mouse aim follows the current unshaken camera and eased world viewport (0.1696ms)
+✔ mouse aim stays held while the one-shot left destination is consumed and then released independently (0.2273ms)
+✔ keyboard thrust and mobile fire retain their own directions while mouse aim is a separate channel (0.1895ms)
+✔ touch canvas releases cannot clear an independently held right-mouse aim (0.1231ms)
+✔ mouse release, cancellation, capture loss, reset and disable cannot resurrect stale aim (0.4115ms)
+✔ malformed or zero-size projections cannot send a nonfinite cursor target or destination (0.3651ms)
+✔ pressing right during a captured left drag triggers Haven interception exactly once (0.1842ms)
+✔ initial left facility press consumes the world point before movement capture and blocks its drag (0.2701ms)
+✔ declined facility press navigates normally and held left dragging never invokes interaction (0.1679ms)
+✔ canvas touch facility taps consume while empty-space touches preserve joystick controls (0.143ms)
+✔ right aim and mobile fire do not invoke facilities and retain optional fire-start compatibility (0.1266ms)
+✔ facility callback disabling input cannot restore a course or consumed held gesture (0.1372ms)
+✔ invalid or disabled projection never invokes a facility callback (0.0843ms)
+✔ release outside an uncaptured facility press admits the next initial click (0.1362ms)
+✔ creator exposes DORA/DORO/TALO and updates the actual license preview across 27 combinations (8.6875ms)
+✔ confirmation issues the previewed identity once and blocks edits/cancellation during the save (3.8221ms)
+✔ failed persistence locks the issued portrait and retries the same identity despite attempted choice changes (2.0495ms)
+(node:42448) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✖ delayed flight SaveConflict closes the guide before showing the live menu (69.2215ms)
+✖ delayed flight SaveConflict closes the guide before showing the live menu with its action pending (30.8857ms)
+✖ training contact presents supplied HUD text and corporation fields without issuing progress (21.9274ms)
+✖ a saved guide acknowledgement cannot close a newer contact (15.0147ms)
+✖ a saved guide acknowledgement respects Back while persistence is pending (13.3747ms)
+✖ an unchanged final guide page closes only after its acknowledgement persists (14.6101ms)
+✖ failed guide persistence keeps the page actionable without acknowledging twice (10.7839ms)
+✖ creator restores Launch if hidden prevents flight after persistence (6.3382ms)
+✖ creator restores Launch if portrait prevents flight after persistence (2.8576ms)
+✖ creator restores Launch if graphics-failed prevents flight after persistence (2.8163ms)
+✖ creator restores Launch if recovering prevents flight after persistence (2.2649ms)
+✖ creator restores Launch if context-lost prevents flight after persistence (2.7527ms)
+✖ healthy creator completion launches and opens the guide once (2.4058ms)
+✖ retrying failed creator persistence preserves the issued identity and one grant (2.021ms)
+(node:40748) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ schema4 upgrades preserve actual progress without a license or starter grant (3.1876ms)
+✔ three valid licensed starters retain one real equipped item through normalization (1.6224ms)
+✔ identity and onboarding validation rejects malformed keys and impossible stages (15.7796ms)
+✔ licensed save reload and backup recovery preserve hash and exactly one starter (10.4104ms)
+✔ schema6 barrier waits for cached schema5 connection and rejects its subsequent writer (2.1891ms)
+✔ schema5 tutorial migration preserves the license and earned assets without invented training counts (2.3742ms)
+✔ named training materials are bounded Tier1 subsets and impossible mission checkpoints are rejected (1.1649ms)
+✔ named material and mission snapshots recover together without duplicating a starter upgrade (3.6476ms)
+✔ first-upgrade recipe shows the actual named banked subset and calls the ordinary native upgrade action (7.7756ms)
+✔ component workshop reveals only discovered recipes and delegates exact authoritative actions (2.187ms)
+✔ advanced ability recipes include banked crafted components without changing starter training (1.5199ms)
+✔ Forge separates three automatic slots and six ship hardware actions (1.4974ms)
+✔ category editor has contextual Back and explicit craft versus equip (2.2541ms)
+✔ availability is authoritative even when visible balances look sufficient or insufficient (2.2178ms)
+✔ owned rank cap and replacement retain inventory and send exact category (2.3434ms)
+✔ actual HUD repaint preserves category, while ship change/reset returns overview (2.1984ms)
+✔ busy mutation and outside-dock clearing cannot dispatch; cargo stays in its separate page (1.7623ms)
+✔ Hangar shows each hull's XP, construction recipe and exact selection callback (1.2806ms)
+✔ all game-provided names and errors are plain text, including malicious markup (1.1789ms)
+✔ victory-only hull has no fake construction recipe and retains real LV1 reward XP (1.0476ms)
+✔ legacy stored hardware rank and active ship cap are shown separately without inventing power (3.043ms)
+✔ Forge prioritizes slots and collection access without repeating cargo inventory (1.188ms)
+✔ Forge excludes an undiscovered ability rather than showing its locked name (0.9636ms)
+✔ ability filters run after discovery and distinguish ownership from blueprint and compatibility (1.8971ms)
+✔ ability filters preserve focus and scroll across real HUD replacements without stealing outside focus (1.5252ms)
+✔ successful crafting exposes Equip and retains action focus without automatically equipping (1.4107ms)
+✔ hull filters keep found, owned and earned blueprint states distinct and preserve real recipe gates (1.5976ms)
+✔ hull filter state persists through checkpoint repaint and does not retain a second inventory (0.8961ms)
+✔ collection costs and level requirements remain supplied by the HUD, including named recipes (0.9145ms)
+✔ in-place collection filters and categories retain the visible scroll position (1.3458ms)
+✔ native collection hierarchy uses real equipped flags and keeps point issuer separate from hull maker (1.326ms)
+✔ canonical lore terms have distinct ASCII labels and functional English introductions (2.5024ms)
+✔ source readings preserve long vowels while canonical labels stay user ASCII (0.232ms)
+✔ starter display models retain the exact manufacturer, hull and ability mapping (0.2638ms)
+✔ historical aliases are exact prefixed labels and never rename champion Bulwark (0.2083ms)
+✔ each lexical claim resolves to an identified checked government or publisher dictionary source (1.0533ms)
+✔ display wording preserves license/progression identifiers and sponsor independence (0.1626ms)
+✔ documentation agrees with data and distinguishes authoring tests from runtime acceptance (0.1676ms)
+✔ actual map art emits semantic Home and site buttons once with fractional chart clipping (4.9053ms)
+✔ selected map marker remains independent of transient hover and real heading value (1.2612ms)
+✔ map style-only pan and pixel-value heading changes invalidate without text mutation (1.347ms)
+✔ new native header semantic kinds appear through the actual flight selector (1.0817ms)
+✔ a wholly off-chart site is omitted and a partial hitbox keeps the exact chart clip (0.9931ms)
+✔ map details and course controls are clipped to content before the saved-status footer (4.2857ms)
+✔ scrolled map artwork intersects both chart and content ancestors on both axes (1.3126ms)
+✔ card uses authoritative native profile and exactly eight anonymous empty patch slots (3.749ms)
+✔ unchanged refresh preserves nodes, scroll, focus and writes nothing (1.5968ms)
+✔ patches are indexed rather than list ordered and only earned identities reach DOM (1.685ms)
+✔ an unearned champion name is never read even when source includes private metadata (1.2929ms)
+✔ losing an earned flag clears visible art and its former name in the same stable slot (1.465ms)
+✔ all eight earned flags use existing campaign-patch routes without a ninth slot (1.2223ms)
+✔ corporate balances follow offense/defense/passive ledger order regardless of pilot manufacturer (1.7783ms)
+✔ compact ship strip retains the selected RAICHO icon, name and authoritative level (3.074ms)
+✔ card never reads removed live XP, vitals or loadout fields (1.2114ms)
+✔ only removed live fields changing leaves the card, focus and scroll untouched (1.5091ms)
+✔ legacy and malformed identity do not relabel another portrait; invalid selected hull paints no art (1.2825ms)
+✔ invalid card level and point numbers are unavailable, not positive progression (1.4123ms)
+✔ view source stays read-only while the card reflows without new animation loops (0.4984ms)
+✔ collectible decoration follows main corporation while sockets reflect only earned patches (2.1574ms)
+(node:34892) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ authored pages are bounded, grounded copies and require no service (1.6061ms)
+✔ invalid facts, progress, characters and personalities are rejected (0.711ms)
+✔ valid optional flavor only updates greeting and preserves canonical state (3.3845ms)
+✔ a replaced greeting cancels replay of its old displayed text (1.1577ms)
+✔ close/reopen aborts stale generation even when provider ignores cancellation (0.9893ms)
+✔ generation timeout and malformed response retain immediate authored content (39.673ms)
+✔ voice is opt-in, explicit and supports per-page replay/pause/resume/volume (0.6503ms)
+✔ stale synthesis never plays; timeout and invalid audio use optional platform fallback (43.7206ms)
+✔ validated audio is copied, bounded and has a matching supported header (0.4895ms)
+✔ invalid synthesis falls back without changing the displayed text request (1.2714ms)
+✔ browser adapter cancels platform speech and releases local audio URLs (1.3919ms)
+(node:44448) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ native glyph window keeps the entire encrypted join value outside geometry (2.2955ms)
+✔ caret-centered window supports middle edits instead of showing a stale prefix (0.9284ms)
+✔ native cursor coordinates count glyphs while DOM selections count UTF16 (0.1592ms)
+✔ absent and invalid selection uses the value end without truncating editable data (0.1387ms)
+✔ collection copy reaches native state/cost routes once with literal measured text (5.8906ms)
+✔ live license portraits deliver all 27 independent appearance choices to native rendering (11.4051ms)
+✔ missing, fractional or malformed profile tokens never invent a fallback identity (5.029ms)
+✔ short-window license body clips the full portrait geometry above the fixed footer (1.0818ms)
+✔ zoom slider pixel thumb follows the semantic range at both limits and default zoom (1.297ms)
+✔ fractional CSS campaign icons retain authored integer fit and measured centers (9.2045ms)
+✔ champion emblem earned state comes from saved progress rather than focus (1.1468ms)
+✔ volume and default HTML range bounds produce finite clamped pixel positions (2.6055ms)
+✔ native controls receive physical active state and cancellation without changing geometry (1.1016ms)
+✔ semantic actions carry persistent selection independently of focus and category colors (0.8943ms)
+✔ MEISHI collection selection remains visible after focus leaves the navigation (0.9474ms)
+✔ owned filters retain selected native style while category filters keep their semantic color (0.8457ms)
+✔ scroll clipping intersects panel on both axes and rejects wholly obscured actions (0.7114ms)
+✔ console command preserves spaces and sends the actual codepoint caret, including selection-only edits (2.3422ms)
+✔ pause actions inherit their own scroll viewport rather than bleeding into the footer (0.7657ms)
+✔ settings transfer independently measured input and label rectangles through UI scaling (0.604ms)
+✔ semantic text alignment reaches native glyph layout without moving measured bounds (2.8421ms)
+✔ physical menu font caps preserve sub-unit native glyph scale on large viewports (1.5961ms)
+✔ facility pixel labels require hover or deliberate focus while controls keep their hit geometry (1.852ms)
+✔ dialogue self-scroll moves full text through a fixed clip without touching actions (2.1804ms)
+✔ dialogue scrolling clamps invalid/overshoot metrics and leaves other paragraphs untouched (3.7457ms)
+✔ standalone MEISHI surface is one locally transformed native group (0.6868ms)
+✔ pressing or focusing an empty MEISHI socket cannot simulate an earned patch (0.9673ms)
+✔ owned game listener detection excludes other projects, Studio and QA tools (0.975ms)
+✔ build fingerprint catches cell source and packaged output edits; excluded generated inputs do not affect source (42.6159ms)
+✔ a complete pair addresses all four files and removes only stale generated outputs (90.8077ms)
+✔ each JS, binary and declaration byte independently participates in the content address (18.2184ms)
+✔ missing, corrupt, incomplete and traversal manifests fail closed with a build instruction (36.4612ms)
+✔ incomplete staging and unknown public files cannot destroy a prior complete pair (47.8741ms)
+﹣ the read-only loader rejects a linked manifest without changing external bytes (22.15ms) # Windows file-symlink privilege is unavailable; directory-junction coverage remains active
+✔ the read-only loader rejects a manifest directory junction before parsing (24.7316ms)
+✔ linked managed targets are rejected before cleanup or publication (33.0596ms)
+✔ new worker navigation and assets read only their own complete release cache (1.2411ms)
+✔ legacy stable-path worker cannot return old bindings for a new content-addressed entry or binary (17.998ms)
+PWA: 10 game assets cached under galaxy-b4de46efc420f269
+✔ actual PWA generation lists exactly the current pairs and derives cache from all payload bytes (27.7536ms)
+(node:49292) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ already waiting update is offered immediately and never twice (1.4695ms)
+✔ installation begun before registration resolves is still watched (0.2102ms)
+✔ installed state before waiting assignment still offers the actual worker (0.1291ms)
+✔ first installation and failed workers do not offer an update (0.2055ms)
+✔ later updates are observed and disposal detaches pending listeners (0.1761ms)
+✔ PWA generation is deterministic, excludes its worker, and changes version when asset content or path changes (324.5465ms)
+✔ installed game assets and entry navigation work offline; unknown, API, studio, foreign and non-GET requests pass through (68.8204ms)
+✔ navigation and listed assets use their coherent installed cache with network only for missing entries (56.6073ms)
+✔ updates wait until an explicit dock activation request, then remove only obsolete game caches (53.7162ms)
+(node:6776) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ schema-five migration waits for a real old database connection and prevents old-version writers (13.4097ms)
+✔ an actual version-change event closes obsolete connections and rejects queued and imported writes (5.9101ms)
+✔ legacy migration banks scalar materials once and isolates old hardware and XP per hull (1.1144ms)
+✔ legacy saturation and unknown new-looking fields cannot poison the supported migration (0.6328ms)
+✔ schema four accepts learned uncrafted blueprints and rejects impossible equipment and mirrors (2.2085ms)
+✔ save normalization preserves live tiered cargo and clones all mutable inventory state (1.6512ms)
+✔ crafting and slot snapshots retain previous inventory and block stale-session material duplication (5.406ms)
+✔ corrupt slot recovery retains banked assets, per-ship XP, and recorded death material loss (3.1413ms)
+(node:50956) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ profile boundary rejects malformed arrays, impossible signature ranks and unsupported versions (3.25ms)
+✔ saving full snapshots never adds currency twice and ignores equal or older revisions (13.4385ms)
+✔ reload recovers a valid previous snapshot when current is corrupted (2.6381ms)
+✔ two corrupted snapshots produce a visible new-profile recovery state (0.8564ms)
+✔ import is ordered after pending saves, captures its input and prevents old-session saves overwriting it (3.1994ms)
+✔ invalid imports preserve current and previous; unavailable storage cannot report a persisted import (2.9186ms)
+✔ another open session cannot overwrite newer progression or duplicate currency (3.0154ms)
+✔ failed database writes leave the accepted snapshot intact and report the failure (1.3777ms)
+✔ v1 current and previous snapshots migrate to v5 without changing progression or awarding currency (5.6351ms)
+✔ legacy recovery and legacy import both retain revision, ranks and currency in v5 snapshots (4.5161ms)
+✔ discoveries, quests and relics persist exactly across reload without replaying completion rewards (1.4073ms)
+✔ v2 rejects malformed, oversized and duplicate site collections and quest bounds (1.1673ms)
+✔ settings migrate old values and round-trip motion and cosmetic density with safe validation (0.4799ms)
+✔ v2 expedition progression migrates to a blank campaign with no new reward or XP (1.8586ms)
+✔ campaign boundary rejects fabricated ownership, malformed league, cargo and run summaries (0.5878ms)
+✔ ship, campaign and run snapshots survive reload without replaying rewards or material costs (3.4313ms)
+✔ old boss aggregates migrate into generation one for every supported save format without rewards (1.5383ms)
+✔ generation boundary rejects malformed or impossible promoted counters and accepts saturated aggregates (0.7856ms)
+✔ same-schema legacy current and backup persist canonical generation matrices atomically with unchanged revisions (3.3551ms)
+✔ generation counters, surplus base kills and pending reservations survive reload without duplicate advancement (2.7292ms)
+✔ another session cannot overwrite a newer boss defeat with stale counters even at a newer proposed revision (2.3337ms)
+✔ impossible generation current recovers its prior legacy snapshot and invalid imports cannot replace it (2.0554ms)
+(node:52204) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ unconfigured title requests nothing and starts no source (1.2991ms)
+✔ one source loops the authored range and never starts during loading (30.0744ms)
+✔ flight transition fades out and rapid title reentry disconnects old source (0.5001ms)
+✔ suspended context does not start after decode; next resume uses retained buffer (0.3573ms)
+✔ invalid loop bounds and decoded memory budget fail silently without sources (1.5025ms)
+✔ late decode after disposal cannot connect or play (4.3766ms)
+✔ map displays only supplied charted sites and real Haven/belt geometry (3.5977ms)
+✔ selection reveals authoritative quest/tier data and navigates to current coordinates without mutating them (1.7915ms)
+✔ unchanged refresh preserves nodes, selection, focus and scroll (0.8223ms)
+✔ real map listeners pan and zoom geometry without changing any world destination (1.3661ms)
+✔ dense discovered maps bound real marker nodes and disclose omitted visible markers (3.3586ms)
+✔ unavailable site belts stay absent and invalid coordinates are not materialized (0.8128ms)
+(node:48052) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ binding never acquires a context and cancels loss before reporting it (5.3158ms)
+✔ only the restored event clears lost state and cancels stale readiness (1.41ms)
+✔ dispose removes both handlers, cancels timers and is idempotent (17.0335ms)
+✔ replaced canvases have independent lifecycle state (0.5641ms)
+✔ probe reports missing context or extension without requesting loss (0.2353ms)
+✔ extension requests neither synthesize events nor prematurely restore lifecycle (0.9648ms)
+✔ same loss callback cannot request restoration before dispatch completes (12.7635ms)
+✔ probe does not claim to restore a natural loss it did not request (14.5671ms)
+✔ disposed probes cannot call extensions (0.3384ms)
+✔ extension exceptions propagate and do not consume a restore request (15.3326ms)
+✔ a later requested loss starts a fresh restore cycle (30.4564ms)
+ℹ tests 527
+ℹ suites 0
+ℹ pass 464
+ℹ fail 62
+ℹ cancelled 0
+ℹ skipped 1
+ℹ todo 0
+ℹ duration_ms 2198.5249
+
+✖ failing tests:
+
+test at scripts\test\dock-menu.test.mjs:401:1
+✖ Escape opens the live RAICHO menu, cancels controls and course, and toggles closed (3.7938ms)
+  ReferenceError: coop is not defined
+      at pause (evalmachine.<anonymous>:62:5)
+      at evalmachine.<anonymous>:515:13
+      at Object.press (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/dock-menu.test.mjs:396:34)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/dock-menu.test.mjs:404:5)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.start (node:internal/test_runner/test:1191:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17)
+
+test at scripts\test\dock-menu.test.mjs:433:1
+✖ opening a dedicated page paints it once without building hidden collections (0.935ms)
+  ReferenceError: coop is not defined
+      at Object.openMenu (evalmachine.<anonymous>:136:5)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/dock-menu.test.mjs:435:13)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3)
+
+test at scripts\test\dock-menu.test.mjs:452:1
+✖ a world facility hit opens exactly its dedicated page without changing progression (1.1757ms)
+  ReferenceError: coop is not defined
+      at openMenu (evalmachine.<anonymous>:136:5)
+      at Object.interactDock (evalmachine.<anonymous>:161:9)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/dock-menu.test.mjs:464:20)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\dock-menu.test.mjs:481:1
+✖ misses and home/launch/pause gates leave flight untouched (2.6789ms)
+  ReferenceError: coop is not defined
+      at openMenu (evalmachine.<anonymous>:136:5)
+      at Object.interactDock (evalmachine.<anonymous>:161:9)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/dock-menu.test.mjs:506:20)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\dock-menu.test.mjs:516:1
+✖ facility overlay handlers validate the authoritative hit before opening (0.9397ms)
+  ReferenceError: coop is not defined
+      at openMenu (evalmachine.<anonymous>:136:5)
+      at evalmachine.<anonymous>:474:13
+      at Element.click (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/dock-menu.test.mjs:185:60)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/dock-menu.test.mjs:529:36)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\dock-menu.test.mjs:535:1
+✖ closing a dedicated flight page resumes; closing title settings returns to title (0.9438ms)
+  ReferenceError: coop is not defined
+      at Object.openMenu (evalmachine.<anonymous>:136:5)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/dock-menu.test.mjs:548:7)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\dock-menu.test.mjs:581:1
+✖ pause settings and both backup actions select only their dedicated content (0.9846ms)
+  ReferenceError: coop is not defined
+      at Object.pause (evalmachine.<anonymous>:62:5)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/dock-menu.test.mjs:584:5)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\dock-menu.test.mjs:596:1
+✖ a live menu continues after hidden/resume and lifecycle gates never restore controls beneath it (0.9034ms)
+  ReferenceError: coop is not defined
+      at Object.openMenu (evalmachine.<anonymous>:136:5)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/dock-menu.test.mjs:599:5)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\dock-menu.test.mjs:622:1
+✖ Quit waits for a committed save and flush, then provides a normal-tab fallback (1.7471ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/dock-menu.test.mjs:631:10)
+      at async Test.run (node:internal/test_runner/test:1332:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at scripts\test\dock-menu.test.mjs:640:1
+✖ Quit write failure keeps the title available and does not close the browser (1.2804ms)
+  AssertionError [ERR_ASSERTION]: false == true
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/dock-menu.test.mjs:652:10)
+      at async Test.run (node:internal/test_runner/test:1332:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at scripts\test\dock-menu.test.mjs:655:1
+✖ a delayed launch audio unlock cannot dismiss newer title Settings or Quit intent (0.9641ms)
+  ReferenceError: coop is not defined
+      at openMenu (evalmachine.<anonymous>:136:5)
+      at Object.openLaunchSettings (evalmachine.<anonymous>:324:5)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/dock-menu.test.mjs:665:34)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\dock-menu.test.mjs:680:1
+✖ dedicated-page close cannot resume through a recovery, modal, hidden or encounter gate (0.8552ms)
+  ReferenceError: coop is not defined
+      at Object.openMenu (evalmachine.<anonymous>:136:5)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/dock-menu.test.mjs:706:7)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\dock-menu.test.mjs:717:1
+✖ restart ends the expedition through the authoritative boundary and waits for save plus flush before resuming (1.2366ms)
+  ReferenceError: coop is not defined
+      at Object.selectMenuTab (evalmachine.<anonymous>:171:5)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/dock-menu.test.mjs:725:5)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\dock-menu.test.mjs:764:1
+✖ restart save failure leaves the menu/input safe and reports the actual failure (1.0949ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/dock-menu.test.mjs:780:10)
+      at async Test.run (node:internal/test_runner/test:1332:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at scripts\test\dock-menu.test.mjs:784:1
+✖ save indicator moves from pending to committed only after the adapter commits (0.9796ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  undefined !== '1'
+  
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/dock-menu.test.mjs:791:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: '1',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at scripts\test\dock-menu.test.mjs:805:1
+✖ overlapping saves do not show saved while any write is outstanding (0.9412ms)
+  ReferenceError: coop is not defined
+      at Object.persist (evalmachine.<anonymous>:30:5)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/dock-menu.test.mjs:812:17)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\dock-menu.test.mjs:824:1
+✖ write rejection exposes attention state and a successful retry clears it (1.2888ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /quota exceeded/. Input:
+  
+  'ReferenceError: coop is not defined'
+  
+      at async TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/dock-menu.test.mjs:832:3)
+      at async Test.run (node:internal/test_runner/test:1332:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: ReferenceError: coop is not defined
+        at Object.persist (evalmachine.<anonymous>:30:5)
+        at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/dock-menu.test.mjs:830:20)
+        at Test.runInAsyncScope (node:async_hooks:227:14)
+        at Test.run (node:internal/test_runner/test:1325:25)
+        at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+        at Test.postRun (node:internal/test_runner/test:1465:19)
+        at Test.run (node:internal/test_runner/test:1390:12)
+        at async Test.processPendingSubtests (node:internal/test_runner/test:911:7),
+    expected: /quota exceeded/,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at scripts\test\dock-menu.test.mjs:846:1
+✖ memory-only storage never reports a successful persistent save (0.9759ms)
+  ReferenceError: coop is not defined
+      at Object.persist (evalmachine.<anonymous>:30:5)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/dock-menu.test.mjs:851:11)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\dock-menu.test.mjs:858:1
+✖ a SaveConflict opens the live menu once without recursively scheduling rejected saves (1.0038ms)
+  ReferenceError: coop is not defined
+      at Object.save (evalmachine.<anonymous>:48:31)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/dock-menu.test.mjs:866:5)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\dock-menu.test.mjs:877:1
+✖ dedicated map and settings icons replace the live page and map toggles back to flight (1.1451ms)
+  ReferenceError: coop is not defined
+      at openMenu (evalmachine.<anonymous>:136:5)
+      at evalmachine.<anonymous>:464:9
+      at Element.click (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/dock-menu.test.mjs:185:60)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/dock-menu.test.mjs:880:27)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\dock-menu.test.mjs:896:1
+✖ M uses the discovered map without a simulation pause or a repeat toggle (1.5964ms)
+  ReferenceError: coop is not defined
+      at openMenu (evalmachine.<anonymous>:136:5)
+      at evalmachine.<anonymous>:527:13
+      at Object.press (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/dock-menu.test.mjs:396:34)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/dock-menu.test.mjs:899:5)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\dock-menu.test.mjs:914:1
+✖ a delayed map course cannot consume a newer Settings intent (1.0924ms)
+  ReferenceError: coop is not defined
+      at Object.openMenu (evalmachine.<anonymous>:136:5)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/dock-menu.test.mjs:917:5)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\dock-menu.test.mjs:933:1
+✖ map navigation sets a real course after resume even when optional audio is unavailable (0.8262ms)
+  ReferenceError: coop is not defined
+      at Object.openMenu (evalmachine.<anonymous>:136:5)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/dock-menu.test.mjs:936:5)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\dock-menu.test.mjs:954:1
+✖ MEISHI is a standalone live card; returning to collections restores menu chrome (0.8847ms)
+  ReferenceError: coop is not defined
+      at Object.openMenu (evalmachine.<anonymous>:136:5)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/dock-menu.test.mjs:957:5)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\dock-menu.test.mjs:989:1
+✖ standalone card keyboard focus can reach its read-only scrolling region (0.7946ms)
+  ReferenceError: coop is not defined
+      at Object.openMenu (evalmachine.<anonymous>:136:5)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/dock-menu.test.mjs:992:5)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\forge-integration.test.mjs:394:1
+✖ Forge forwards exact craft/upgrade/equip/empty/hardware arguments, refreshes HUD, then saves the actual snapshot (9.3915ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+  + []
+  - [
+  -   [
+  -     'purchase',
+  -     'rate'
+  -   ],
+  -   [
+  -     'hud',
+  -     {
+  -       abilities: [
+  -         {
+  -           blueprint: true,
+  -           can_craft: true,
+  -           can_equip: false,
+  -           can_upgrade: false,
+  -           category: 0,
+  -           compatible: true,
+  -           craft_reason: '',
+  -           description: 'Authored automatic effect.',
+  -           effective_rank: 0,
+  -           equip_reason: 'Not owned.',
+  -           equipped: false,
+  -           id: 'pulse-lens',
+  -           index: 0,
+  -           material_cost: 2,
+  -           material_tier: 1,
+  -           max_rank: 5,
+  -           name: 'PULSE LENS',
+  -           owned: false,
+  -           point_cost: 3,
+  -           rank: 0,
+  -           required_level: 1,
+  -           upgrade_reason: 'Not owned.'
+  -         },
+  -         {
+  -           blueprint: true,
+  -           can_craft: true,
+  -           can_equip: false,
+  -           can_upgrade: false,
+  -           category: 1,
+  -           compatible: true,
+  -           craft_reason: '',
+  -           description: 'Authored automatic effect.',
+  -           effective_rank: 0,
+  -           equip_reason: 'Not owned.',
+  -           equipped: false,
+  -           id: 'guard-coil',
+  -           index: 1,
+  -           material_cost: 2,
+  -           material_tier: 1,
+  -           max_rank: 5,
+  -           name: 'GUARD COIL',
+  -           owned: false,
+  -           point_cost: 3,
+  -           rank: 0,
+  -           required_level: 1,
+  -           upgrade_reason: 'Not owned.'
+  -         },
+  -         {
+  -           blueprint: true,
+  -           can_craft: true,
+  -           can_equip: false,
+  -           can_upgrade: false,
+  -           category: 2,
+  -           compatible: true,
+  -           craft_reason: '',
+  -           description: 'Authored automatic effect.',
+  -           effective_rank: 0,
+  -           equip_reason: 'Not owned.',
+  -           equipped: false,
+  -           id: 'flux-drive',
+  -           index: 2,
+  -           material_cost: 2,
+  -           material_tier: 1,
+  -           max_rank: 5,
+  -           name: 'FLUX DRIVE',
+  -           owned: false,
+  -           point_cost: 3,
+  -           rank: 0,
+  -           required_level: 1,
+  -           upgrade_reason: 'Not owned.'
+  -         }
+  -       ],
+  -       boss_progress: [],
+  -       campaign: {
+  -         credits_pending: false,
+  -         selected_ship: 0,
+  -         ships: [
+  -           {
+  -             ability: 'Hull blueprint.',
+  -             can_craft: false,
+  -             can_select: false,
+  -             category: 0,
+  -             craft_reason: 'Already owned.',
+  -             craftable: false,
+  -             family: 0,
+  -             id: 0,
+  -             level: 3,
+  -             material_cost: 6,
+  -             material_tier: 1,
+  -             name: 'HAVEN SCOUT',
+  -             next_xp: 120,
+  -             owned: true,
+  -             point_cost: 10,
+  -             rank_cap: 2,
+  -             select_reason: '',
+  -             selected: true,
+  -             xp: 60
+  -           },
+  -           {
+  -             ability: 'Hull blueprint.',
+  -             can_craft: false,
+  -             can_select: true,
+  -             category: 0,
+  -             craft_reason: 'Already owned.',
+  -             craftable: false,
+  -             family: 0,
+  -             id: 1,
+  -             level: 1,
+  -             material_cost: 6,
+  -             material_tier: 1,
+  -             name: 'DAWNNEEDLE',
+  -             next_xp: 20,
+  -             owned: true,
+  -             point_cost: 10,
+  -             rank_cap: 1,
+  -             select_reason: '',
+  -             selected: false,
+  -             xp: 0
+  -           }
+  -         ]
+  -       },
+  -       components: [],
+  -       currency: [
+  -         0,
+  -         4,
+  -         5
+  -       ],
+  -       discoveries: 0,
+  -       dock: true,
+  -       loadout: [
+  -         null,
+  -         null,
+  -         null
+  -       ],
+  -       marker: 'fresh HUD',
+  -       material_cargo: [
+  -         0,
+  -         0,
+  -         0,
+  -         0,
+  -         0
+  -       ],
+  -       material_loss: [
+  -         0,
+  -         0,
+  -         0,
+  -         0,
+  -         0
+  -       ],
+  -       material_loss_reason: '',
+  -       material_stash: [
+  -         10,
+  -         2,
+  -         0,
+  -         0,
+  -         0
+  -       ],
+  -       quest_log: [],
+  -       rank_cap: 2,
+  -       relics: 0,
+  -       ship_level: 3,
+  -       ship_next_xp: 120,
+  -       ship_xp: 60,
+  -       upgrades: [
+  -         {
+  -           can_purchase: true,
+  -           category: 0,
+  -           description: 'Ship-owned hardware.',
+  -           effective_rank: 0,
+  -           id: 'rate',
+  -           material_cost: 1,
+  -           material_tier: 1,
+  -           max_rank: 5,
+  -           name: 'FIRE RATE',
+  -           point_cost: 10,
+  -           purchase_reason: '',
+  -           rank: 0,
+  -           required_level: 1
+  -         }
+  -       ]
+  -     }
+  -   ],
+  -   [
+  -     'profile',
+  -     {
+  -       marker: 'real post-mutation snapshot',
+  -       revision: 10,
+  -       schema_version: 4
+  -     }
+  -   ],
+  -   [
+  -     'save',
+  -     {
+  -       marker: 'real post-mutation snapshot',
+  -       revision: 10,
+  -       schema_version: 4
+  -     }
+  -   ]
+  - ]
+  
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/forge-integration.test.mjs:420:12)
+      at async Test.run (node:internal/test_runner/test:1332:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [],
+    expected: [ [ 'purchase', 'rate' ], [ 'hud', [Object] ], [ 'profile', [Object] ], [ 'save', [Object] ] ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at scripts\test\forge-integration.test.mjs:433:1
+✖ backend rejection has no HUD fetch, snapshot save, audio cue or invented success (6.0067ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+  + []
+  - [
+  -   [
+  -     'upgrade_ability',
+  -     'guard-coil'
+  -   ]
+  - ]
+  
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/forge-integration.test.mjs:444:10)
+      at async Test.run (node:internal/test_runner/test:1332:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [],
+    expected: [ [ 'upgrade_ability', 'guard-coil' ] ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at scripts\test\forge-integration.test.mjs:447:1
+✖ real Forge category survives successful repaint while a fresh open resets to overview (1.9004ms)
+  ReferenceError: coop is not defined
+      at Object.openMenu (evalmachine.<anonymous>:160:5)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/forge-integration.test.mjs:451:7)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\forge-integration.test.mjs:479:1
+✖ mutation success is not a committed-save claim while deferred persistence fails (4.5841ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== 1
+  
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/forge-integration.test.mjs:489:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at scripts\test\forge-integration.test.mjs:502:1
+✖ Hangar page and construction/selection bindings pass full per-hull XP metadata (2.7422ms)
+  ReferenceError: coop is not defined
+      at Object.selectMenuTab (evalmachine.<anonymous>:182:5)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/forge-integration.test.mjs:504:7)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\forge-integration.test.mjs:540:1
+✖ rejected ship construction or switching cannot save or report success (2.4506ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+  + []
+  - [
+  -   [
+  -     'craft_ship',
+  -     0
+  -   ]
+  - ]
+  
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/forge-integration.test.mjs:549:12)
+      at async Test.run (node:internal/test_runner/test:1332:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [],
+    expected: [ [ 'craft_ship', 0 ] ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at scripts\test\forge-integration.test.mjs:553:1
+✖ an unavailable audio context cannot reject a successful mutation/save flow (3.603ms)
+  AssertionError [ERR_ASSERTION]: Expected "actual" to be reference-equal to "expected":
+  + actual - expected
+  ... Skipped lines
+  
+    {
+      abilities: [
+        {
+          blueprint: true,
+          can_craft: true,
+  ...
+      currency: [
+  +     3,
+  -     0,
+        4,
+        5
+      ],
+      discoveries: 0,
+      dock: true,
+  ...
+      ],
+  -   marker: 'fresh HUD',
+      material_cargo: [
+        0,
+        0,
+        0,
+        0,
+  
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/forge-integration.test.mjs:562:10)
+      at async Test.run (node:internal/test_runner/test:1332:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: { dock: true, ship_level: 3, ship_xp: 60, ship_next_xp: 120, rank_cap: 2, currency: [ 3, 4, 5 ], material_stash: [ 10, 2, 0, 0, 0 ], material_cargo: [ 0, 0, 0, 0, 0 ], material_loss: [ 0, 0, 0, 0, 0 ], material_loss_reason: '', quest_log: [], discoveries: 0, relics: 0, boss_progress: [], campaign: { selected_ship: 0, ships: [Array], credits_pending: false }, loadout: [ null, null, null ], components: [], abilities: [ [Object], [Object], [Object] ], upgrades: [ [Object] ] },
+    expected: { dock: true, ship_level: 3, ship_xp: 60, ship_next_xp: 120, rank_cap: 2, currency: [ 0, 4, 5 ], material_stash: [ 10, 2, 0, 0, 0 ], material_cargo: [ 0, 0, 0, 0, 0 ], material_loss: [ 0, 0, 0, 0, 0 ], material_loss_reason: '', quest_log: [], discoveries: 0, relics: 0, boss_progress: [], campaign: { selected_ship: 0, ships: [Array], credits_pending: false }, loadout: [ null, null, null ], components: [], abilities: [ [Object], [Object], [Object] ], upgrades: [ [Object] ], marker: 'fresh HUD' },
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at scripts\test\graphics-recovery.test.mjs:231:1
+✖ real loss notice outlives transient toasts and clears only after restoration (2.5666ms)
+  ReferenceError: coop is not defined
+      at Object.onWebglLost (evalmachine.<anonymous>:420:5)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/graphics-recovery.test.mjs:237:5)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.start (node:internal/test_runner/test:1191:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17)
+
+test at scripts\test\graphics-recovery.test.mjs:259:1
+✖ failed reconstruction retains its actual reason across other notifications (0.8602ms)
+  ReferenceError: coop is not defined
+      at Object.recover (evalmachine.<anonymous>:16:5)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/graphics-recovery.test.mjs:262:21)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3)
+
+test at scripts\test\graphics-recovery.test.mjs:274:1
+✖ pending preparation leaves Game readable and defers GPU resize to latest dimensions (1.5026ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/graphics-recovery.test.mjs:279:10)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at scripts\test\graphics-recovery.test.mjs:326:1
+✖ resuming flight uses the latest authoritative audio state before scheduling (0.7755ms)
+  ReferenceError: coop is not defined
+      at canSimulateFlight (evalmachine.<anonymous>:185:5)
+      at Object.syncFlightState (evalmachine.<anonymous>:200:17)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/graphics-recovery.test.mjs:331:5)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\graphics-recovery.test.mjs:347:1
+✖ overlapping recovery requests prepare and install exactly once (0.7156ms)
+  ReferenceError: coop is not defined
+      at Object.recover (evalmachine.<anonymous>:16:5)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/graphics-recovery.test.mjs:350:21)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\graphics-recovery.test.mjs:364:1
+✖ settlement honors death, title, encounter, console, visibility and orientation interruptions (2.1416ms)
+  ReferenceError: coop is not defined
+      at Object.recover (evalmachine.<anonymous>:16:5)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/graphics-recovery.test.mjs:391:19)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\graphics-recovery.test.mjs:421:1
+✖ title recovery resumes only visible eligible title audio and leaves flight stopped (1.8094ms)
+  AssertionError [ERR_ASSERTION]: false == true
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/graphics-recovery.test.mjs:428:5)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at scripts\test\graphics-recovery.test.mjs:438:1
+✖ graphics recovery restores a live menu without restoring flight controls (1.236ms)
+  ReferenceError: coop is not defined
+      at Object.recover (evalmachine.<anonymous>:16:5)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/graphics-recovery.test.mjs:442:21)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\graphics-recovery.test.mjs:451:1
+✖ reconstruction rejection reports its cause, preserves Game and stops the RAF retry loop (2.6752ms)
+  ReferenceError: coop is not defined
+      at Object.recover (evalmachine.<anonymous>:16:5)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/graphics-recovery.test.mjs:454:21)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\graphics-recovery.test.mjs:476:1
+✖ a modal closed while preparation is pending restores the previously live world (1.1655ms)
+  ReferenceError: coop is not defined
+      at Object.recover (evalmachine.<anonymous>:16:5)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/graphics-recovery.test.mjs:479:21)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\graphics-recovery.test.mjs:490:1
+✖ failed reconstruction preserves an existing death report, title or other modal (0.7192ms)
+  ReferenceError: coop is not defined
+      at Object.recover (evalmachine.<anonymous>:16:5)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/graphics-recovery.test.mjs:517:23)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\graphics-recovery.test.mjs:530:1
+✖ an invalid install is a controlled failure without changing the live profile (0.6063ms)
+  ReferenceError: coop is not defined
+      at Object.recover (evalmachine.<anonymous>:16:5)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/graphics-recovery.test.mjs:536:21)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\graphics-recovery.test.mjs:544:1
+✖ Resume's awaited audio cannot re-enable input when recovery starts meanwhile (0.8483ms)
+  ReferenceError: coop is not defined
+      at canSimulateFlight (evalmachine.<anonymous>:185:5)
+      at syncFlightState (evalmachine.<anonymous>:200:17)
+      at Object.resume (evalmachine.<anonymous>:165:5)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/graphics-recovery.test.mjs:551:22)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\graphics-recovery.test.mjs:563:1
+✖ a real context loss gates drawing, resize and preparation until restored (0.6299ms)
+  ReferenceError: coop is not defined
+      at Object.onWebglLost (evalmachine.<anonymous>:420:5)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/graphics-recovery.test.mjs:567:5)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\graphics-recovery.test.mjs:589:1
+✖ a context lost during preparation disposes the uninstalled candidate (0.7025ms)
+  ReferenceError: coop is not defined
+      at Object.onWebglLost (evalmachine.<anonymous>:420:5)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/graphics-recovery.test.mjs:595:5)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\graphics-recovery.test.mjs:610:1
+✖ restoration during preparation discards stale resources and queues one fresh replacement (0.7659ms)
+  ReferenceError: coop is not defined
+      at Object.onWebglLost (evalmachine.<anonymous>:420:5)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/graphics-recovery.test.mjs:617:5)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\kikai-lifecycle.test.mjs:328:3
+✖ delayed flight SaveConflict closes the guide before showing the live menu (69.2215ms)
+  evalmachine.<anonymous>:41
+      if (needsDroidCreation || coop?.blocksSolo())
+                                ^
+  
+  ReferenceError: coop is not defined
+      at save (evalmachine.<anonymous>:41:31)
+      at evalmachine.<anonymous>:1:1
+      at Script.runInContext (node:vm:149:12)
+      at Object.runInContext (node:vm:301:6)
+      at file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/kikai-lifecycle.test.mjs:322:8
+      at guideFixture (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/kikai-lifecycle.test.mjs:184:3)
+      at conflictFixture (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/kikai-lifecycle.test.mjs:216:13)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/kikai-lifecycle.test.mjs:329:15)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+
+test at scripts\test\kikai-lifecycle.test.mjs:328:3
+✖ delayed flight SaveConflict closes the guide before showing the live menu with its action pending (30.8857ms)
+  evalmachine.<anonymous>:41
+      if (needsDroidCreation || coop?.blocksSolo())
+                                ^
+  
+  ReferenceError: coop is not defined
+      at save (evalmachine.<anonymous>:41:31)
+      at evalmachine.<anonymous>:1:1
+      at Script.runInContext (node:vm:149:12)
+      at Object.runInContext (node:vm:301:6)
+      at file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/kikai-lifecycle.test.mjs:322:8
+      at guideFixture (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/kikai-lifecycle.test.mjs:184:3)
+      at conflictFixture (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/kikai-lifecycle.test.mjs:216:13)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/kikai-lifecycle.test.mjs:329:15)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+
+test at scripts\test\kikai-lifecycle.test.mjs:379:1
+✖ training contact presents supplied HUD text and corporation fields without issuing progress (21.9274ms)
+  evalmachine.<anonymous>:2
+      if (coop?.blocksSolo())
+      ^
+  
+  ReferenceError: coop is not defined
+      at showDoraGuide (evalmachine.<anonymous>:2:5)
+      at evalmachine.<anonymous>:1:1
+      at Script.runInContext (node:vm:149:12)
+      at Object.runInContext (node:vm:301:6)
+      at guideFixture (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/kikai-lifecycle.test.mjs:186:6)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/kikai-lifecycle.test.mjs:386:15)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+
+test at scripts\test\kikai-lifecycle.test.mjs:411:1
+✖ a saved guide acknowledgement cannot close a newer contact (15.0147ms)
+  evalmachine.<anonymous>:2
+      if (coop?.blocksSolo())
+      ^
+  
+  ReferenceError: coop is not defined
+      at showDoraGuide (evalmachine.<anonymous>:2:5)
+      at evalmachine.<anonymous>:1:1
+      at Script.runInContext (node:vm:149:12)
+      at Object.runInContext (node:vm:301:6)
+      at guideFixture (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/kikai-lifecycle.test.mjs:186:6)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/kikai-lifecycle.test.mjs:412:13)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+
+test at scripts\test\kikai-lifecycle.test.mjs:432:1
+✖ a saved guide acknowledgement respects Back while persistence is pending (13.3747ms)
+  evalmachine.<anonymous>:2
+      if (coop?.blocksSolo())
+      ^
+  
+  ReferenceError: coop is not defined
+      at showDoraGuide (evalmachine.<anonymous>:2:5)
+      at evalmachine.<anonymous>:1:1
+      at Script.runInContext (node:vm:149:12)
+      at Object.runInContext (node:vm:301:6)
+      at guideFixture (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/kikai-lifecycle.test.mjs:186:6)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/kikai-lifecycle.test.mjs:433:13)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+
+test at scripts\test\kikai-lifecycle.test.mjs:447:1
+✖ an unchanged final guide page closes only after its acknowledgement persists (14.6101ms)
+  evalmachine.<anonymous>:2
+      if (coop?.blocksSolo())
+      ^
+  
+  ReferenceError: coop is not defined
+      at showDoraGuide (evalmachine.<anonymous>:2:5)
+      at evalmachine.<anonymous>:1:1
+      at Script.runInContext (node:vm:149:12)
+      at Object.runInContext (node:vm:301:6)
+      at guideFixture (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/kikai-lifecycle.test.mjs:186:6)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/kikai-lifecycle.test.mjs:448:13)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+
+test at scripts\test\kikai-lifecycle.test.mjs:461:1
+✖ failed guide persistence keeps the page actionable without acknowledging twice (10.7839ms)
+  evalmachine.<anonymous>:2
+      if (coop?.blocksSolo())
+      ^
+  
+  ReferenceError: coop is not defined
+      at showDoraGuide (evalmachine.<anonymous>:2:5)
+      at evalmachine.<anonymous>:1:1
+      at Script.runInContext (node:vm:149:12)
+      at Object.runInContext (node:vm:301:6)
+      at guideFixture (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/kikai-lifecycle.test.mjs:186:6)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/kikai-lifecycle.test.mjs:462:13)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+
+test at scripts\test\kikai-lifecycle.test.mjs:560:3
+✖ creator restores Launch if hidden prevents flight after persistence (6.3382ms)
+  ReferenceError: coop is not defined
+      at Object.onOpen (evalmachine.<anonymous>:54:9)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/kikai-lifecycle.test.mjs:562:17)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\kikai-lifecycle.test.mjs:560:3
+✖ creator restores Launch if portrait prevents flight after persistence (2.8576ms)
+  ReferenceError: coop is not defined
+      at Object.onOpen (evalmachine.<anonymous>:54:9)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/kikai-lifecycle.test.mjs:562:17)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\kikai-lifecycle.test.mjs:560:3
+✖ creator restores Launch if graphics-failed prevents flight after persistence (2.8163ms)
+  ReferenceError: coop is not defined
+      at Object.onOpen (evalmachine.<anonymous>:54:9)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/kikai-lifecycle.test.mjs:562:17)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\kikai-lifecycle.test.mjs:560:3
+✖ creator restores Launch if recovering prevents flight after persistence (2.2649ms)
+  ReferenceError: coop is not defined
+      at Object.onOpen (evalmachine.<anonymous>:54:9)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/kikai-lifecycle.test.mjs:562:17)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\kikai-lifecycle.test.mjs:560:3
+✖ creator restores Launch if context-lost prevents flight after persistence (2.7527ms)
+  ReferenceError: coop is not defined
+      at Object.onOpen (evalmachine.<anonymous>:54:9)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/kikai-lifecycle.test.mjs:562:17)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\kikai-lifecycle.test.mjs:585:1
+✖ healthy creator completion launches and opens the guide once (2.4058ms)
+  ReferenceError: coop is not defined
+      at Object.onOpen (evalmachine.<anonymous>:54:9)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/kikai-lifecycle.test.mjs:587:15)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\kikai-lifecycle.test.mjs:600:1
+✖ retrying failed creator persistence preserves the issued identity and one grant (2.021ms)
+  ReferenceError: coop is not defined
+      at Object.onOpen (evalmachine.<anonymous>:54:9)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/test/kikai-lifecycle.test.mjs:602:15)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+[ELIFECYCLE] Test failed. See above for more details.

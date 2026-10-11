@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 818,
+  "revision": 831,
   "name": "Galaxy Royale",
   "phase": "Playable solo slice → content and validation",
-  "updatedAt": "2026-10-11T17:49:19.228Z",
+  "updatedAt": "2026-10-11T18:33:35.737Z",
   "tasks": [
     {
       "id": "studio",
@@ -1071,12 +1071,27 @@
           "label": "Native or transport source handoff",
           "kind": "artifact",
           "path": "artifacts/collection-coop-20261012/transport/NATIVE_OPEN_AMENDMENT.md"
+        },
+        {
+          "label": "Actual native guest integration and pending network acceptance",
+          "kind": "artifact",
+          "path": "artifacts/co-op-native-integration-20261012/README.md"
+        },
+        {
+          "label": "Actual combined build identity",
+          "kind": "artifact",
+          "path": "artifacts/co-op-native-integration-20261012/tested-build.json"
+        },
+        {
+          "label": "Scoped real browser host restoration",
+          "kind": "artifact",
+          "path": "artifacts/co-op-native-integration-20261012/profile-report-equality.txt"
         }
       ],
       "blocker": "",
-      "revision": 5,
+      "revision": 6,
       "createdAt": "2026-10-10T15:31:55.153Z",
-      "updatedAt": "2026-10-11T17:00:09.064Z"
+      "updatedAt": "2026-10-11T18:33:28.012Z"
     },
     {
       "id": "task-7e8e0a50",
@@ -1113,12 +1128,27 @@
           "label": "Native or transport source handoff",
           "kind": "artifact",
           "path": "artifacts/collection-coop-20261012/engine/HANDOFF.md"
+        },
+        {
+          "label": "Actual native guest integration and pending network acceptance",
+          "kind": "artifact",
+          "path": "artifacts/co-op-native-integration-20261012/README.md"
+        },
+        {
+          "label": "Actual combined build identity",
+          "kind": "artifact",
+          "path": "artifacts/co-op-native-integration-20261012/tested-build.json"
+        },
+        {
+          "label": "Scoped real browser host restoration",
+          "kind": "artifact",
+          "path": "artifacts/co-op-native-integration-20261012/profile-report-equality.txt"
         }
       ],
       "blocker": "",
-      "revision": 3,
+      "revision": 4,
       "createdAt": "2026-10-10T16:00:26.992Z",
-      "updatedAt": "2026-10-11T17:00:09.119Z"
+      "updatedAt": "2026-10-11T18:33:28.062Z"
     },
     {
       "id": "task-acf182ad",
@@ -8744,6 +8774,51 @@
           "path": "artifacts/space-league-refinement-20261012/retained-capture-review.md"
         }
       ]
+    },
+    {
+      "id": "review-32580f1f",
+      "title": "Native replica integration — actual asynchronous authority, lifecycle and art review",
+      "body": "Engine authored strict bounded guest replica and previous-publication interpolation, then adapted four solo lifecycle fixtures without relaxing assertions. Gameplay authored real native operation replay and reviewed Root save/action/frame seams; Root fixed guest QA mutation and stale frame on restoration. Production authored cached native league Invite/Join and actual-admitted roster assets. Root integrated native/WASM boundaries and measured semantic UI, found child-art occlusion in browser, corrected layer ordering, performed WebGPU/WebGL2 captures and actual one-host service/native lifecycle with equal exposed progression reports. This was asynchronous development/review, not a simulated meeting. Actual two-client RTC/guest save restoration remains pending.",
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T18:33:28.091Z",
+      "participants": [
+        "/root",
+        "/root/engine_research",
+        "/root/gameplay_design",
+        "/root/production_research"
+      ],
+      "taskIds": [
+        "task-05dd95cd",
+        "task-7e8e0a50"
+      ],
+      "evidence": [
+        {
+          "label": "Independent wiring review",
+          "kind": "artifact",
+          "path": "artifacts/co-op-native-integration-20261012/wiring-review.md"
+        },
+        {
+          "label": "Engine replica handoff",
+          "kind": "artifact",
+          "path": "artifacts/co-op-native-integration-20261012/native-replica-handoff.md"
+        },
+        {
+          "label": "Art author and budgets",
+          "kind": "artifact",
+          "path": "artifacts/co-op-native-integration-20261012/native-art-handoff.md"
+        },
+        {
+          "label": "Real network QA remaining",
+          "kind": "artifact",
+          "path": "artifacts/co-op-native-integration-20261012/network-qa-plan.md"
+        },
+        {
+          "label": "Actual WebGPU panel",
+          "kind": "artifact",
+          "path": "artifacts/co-op-native-integration-20261012/panel-webgpu-wide.jpg"
+        }
+      ]
     }
   ],
   "decisions": [
@@ -11159,6 +11234,70 @@
       ],
       "url": "http://127.0.0.1:4173/",
       "knownIssues": "Stills do not establish motion/performance or subjective full art approval. Co-op browser integration remains pending."
+    },
+    {
+      "id": "build-3c4a7394",
+      "title": "Native co-op and league UI — final48bec87 combined preview",
+      "body": "Normal combined dual-backend build and actual browser host lifecycle; network release acceptance remains pending.",
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T18:33:35.615Z",
+      "revision": "48bec87d504dc81ecf768fa22525d29cff8d6f37",
+      "evidence": [
+        {
+          "label": "Combined raw build",
+          "kind": "artifact",
+          "path": "artifacts/co-op-native-integration-20261012/root-build-layer.log"
+        },
+        {
+          "label": "Final shell",
+          "kind": "artifact",
+          "path": "artifacts/co-op-native-integration-20261012/root-shell-layer-final.log"
+        },
+        {
+          "label": "Original native run",
+          "kind": "artifact",
+          "path": "artifacts/co-op-native-integration-20261012/root-native-full.log"
+        },
+        {
+          "label": "Preview identity",
+          "kind": "artifact",
+          "path": "artifacts/co-op-native-integration-20261012/tested-build.json"
+        },
+        {
+          "label": "Scope and limitations",
+          "kind": "artifact",
+          "path": "artifacts/co-op-native-integration-20261012/README.md"
+        }
+      ],
+      "checks": [
+        {
+          "name": "Ordinary native774pass plus new art8pass and revised scene143pass",
+          "result": "pass"
+        },
+        {
+          "name": "Full shell528pass/one Windows skip",
+          "result": "pass"
+        },
+        {
+          "name": "Native/actual WASM strict Clippy and normal build",
+          "result": "pass"
+        },
+        {
+          "name": "Actual WebGPU/WebGL2 panel and WebGL2 compact scroll",
+          "result": "pass"
+        },
+        {
+          "name": "Actual one-browser native host enter/end and equal visible profile report",
+          "result": "pass"
+        },
+        {
+          "name": "Two actual RTC/WASM clients, independent saves, eight players, physical soak",
+          "result": "not_run"
+        }
+      ],
+      "url": "http://league-final.localhost:4173/?renderer=webgpu",
+      "knownIssues": "Temporary sessions remain primary-fire/factory-guest with shared rewards disabled. Advanced remote effects/loadouts, background hosting and public HTTPS/TURN remain pending. Hidden IAB is not a performance benchmark."
     }
   ],
   "feedback": [],
@@ -19342,6 +19481,136 @@
       "author": "Root",
       "source": "actual-development",
       "createdAt": "2026-10-11T17:49:19.228Z"
+    },
+    {
+      "id": "5d53aef6-5ffb-4bbe-b522-545a9dc16d3b",
+      "revision": 819,
+      "kind": "run",
+      "itemId": "run-f6830afd",
+      "title": "engine_research · running",
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T17:52:26.367Z"
+    },
+    {
+      "id": "f4c42e9f-582d-42df-b884-3471b76c136c",
+      "revision": 820,
+      "kind": "run",
+      "itemId": "run-1ed02660",
+      "title": "gameplay_design · running",
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T17:52:26.398Z"
+    },
+    {
+      "id": "b61befa1-6ecf-4dc6-a666-80ad2e98652c",
+      "revision": 821,
+      "kind": "run",
+      "itemId": "run-23c57616",
+      "title": "production_research · running",
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T17:52:26.416Z"
+    },
+    {
+      "id": "0d51bd61-19fc-4341-855f-b11bc96b17e8",
+      "revision": 822,
+      "kind": "run",
+      "itemId": "run-8648129a",
+      "title": "root · running",
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T17:52:26.442Z"
+    },
+    {
+      "id": "d2ddb640-8a52-47cf-9a29-82e00f5b9206",
+      "revision": 823,
+      "kind": "run",
+      "itemId": "run-f88cde60",
+      "title": "root · running",
+      "author": "Root",
+      "source": "actual-development correction",
+      "createdAt": "2026-10-11T17:52:55.745Z"
+    },
+    {
+      "id": "2747c354-c0de-4ef5-a548-01024cbd042b",
+      "revision": 824,
+      "kind": "task.update",
+      "itemId": "task-05dd95cd",
+      "title": "Invite friends for co-op expeditions",
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T18:33:28.012Z"
+    },
+    {
+      "id": "9bfae6ed-bafd-4e70-89b7-7454d0cad75f",
+      "revision": 825,
+      "kind": "task.update",
+      "itemId": "task-7e8e0a50",
+      "title": "Authoritative multiplayer world and session foundation",
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T18:33:28.062Z"
+    },
+    {
+      "id": "2dfdf286-43ab-45a8-bcc2-e2ae7a13c6d4",
+      "revision": 826,
+      "kind": "review",
+      "itemId": "review-32580f1f",
+      "title": "Native replica integration — actual asynchronous authority, lifecycle and art review",
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T18:33:28.091Z"
+    },
+    {
+      "id": "795c3a12-bb62-46f6-bd40-a107dcf19b72",
+      "revision": 827,
+      "kind": "build",
+      "itemId": "build-3c4a7394",
+      "title": "Native co-op and league UI — final48bec87 combined preview",
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T18:33:35.615Z"
+    },
+    {
+      "id": "1f999c33-8e1a-4242-9732-128ff5ad21a0",
+      "revision": 828,
+      "kind": "run",
+      "itemId": "run-a8954cfd",
+      "title": "engine_research · completed",
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T18:33:35.645Z"
+    },
+    {
+      "id": "5154c3d3-9c0d-411c-ae97-fb321eb62991",
+      "revision": 829,
+      "kind": "run",
+      "itemId": "run-8e772509",
+      "title": "gameplay_design · completed",
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T18:33:35.681Z"
+    },
+    {
+      "id": "6cba7a51-c4da-407d-8dec-5641bdc4b1d5",
+      "revision": 830,
+      "kind": "run",
+      "itemId": "run-45ded9bd",
+      "title": "production_research · completed",
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T18:33:35.712Z"
+    },
+    {
+      "id": "78177230-7604-4932-858c-7d8d4f500a37",
+      "revision": 831,
+      "kind": "run",
+      "itemId": "run-90ec3cc2",
+      "title": "root · completed",
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T18:33:35.737Z"
     }
   ],
   "runRecords": [
@@ -26724,6 +26993,212 @@
       "author": "Root",
       "source": "actual-development",
       "createdAt": "2026-10-11T17:49:19.228Z"
+    },
+    {
+      "id": "run-f6830afd",
+      "title": "engine_research · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "engine_research",
+      "state": "running",
+      "observedAt": "2026-10-11T17:52:26.336Z",
+      "taskIds": [
+        "task-05dd95cd",
+        "task-7e8e0a50"
+      ],
+      "summary": "Implementing validated native guest replica from the reviewed host publication contract; no Profile mutation or guest simulation.",
+      "evidence": [
+        {
+          "label": "Actual assigned boundary",
+          "kind": "note",
+          "details": "Implementing validated native guest replica from the reviewed host publication contract; no Profile mutation or guest simulation."
+        }
+      ],
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T17:52:26.367Z"
+    },
+    {
+      "id": "run-1ed02660",
+      "title": "gameplay_design · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "gameplay_design",
+      "state": "running",
+      "observedAt": "2026-10-11T17:52:26.387Z",
+      "taskIds": [
+        "task-05dd95cd",
+        "task-7e8e0a50"
+      ],
+      "summary": "Refining controller and real WASM port mapping, incomplete transfer, input and teardown tests.",
+      "evidence": [
+        {
+          "label": "Actual assigned boundary",
+          "kind": "note",
+          "details": "Refining controller and real WASM port mapping, incomplete transfer, input and teardown tests."
+        }
+      ],
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T17:52:26.398Z"
+    },
+    {
+      "id": "run-23c57616",
+      "title": "production_research · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "production_research",
+      "state": "running",
+      "observedAt": "2026-10-11T17:52:26.412Z",
+      "taskIds": [
+        "task-05dd95cd",
+        "task-7e8e0a50"
+      ],
+      "summary": "Reviewing dock invitation UX and ownership/restore contracts, independent integration checklist.",
+      "evidence": [
+        {
+          "label": "Actual assigned boundary",
+          "kind": "note",
+          "details": "Reviewing dock invitation UX and ownership/restore contracts, independent integration checklist."
+        }
+      ],
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T17:52:26.416Z"
+    },
+    {
+      "id": "run-8648129a",
+      "title": "root · running",
+      "agentId": "/root",
+      "agentLabel": "root",
+      "state": "running",
+      "observedAt": "2026-10-11T17:52:26.440Z",
+      "taskIds": [
+        "task-05dd95cd",
+        "task-7e8e0a50"
+      ],
+      "summary": "Integrated publication14418fb; seven Root native publication tests and fourteen bridge tests pass; browser integration pending.",
+      "evidence": [
+        {
+          "label": "Actual assigned boundary",
+          "kind": "note",
+          "details": "Integrated publication14418fb; seven Root native publication tests and fourteen bridge tests pass; browser integration pending."
+        }
+      ],
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T17:52:26.442Z"
+    },
+    {
+      "id": "run-f88cde60",
+      "title": "root · running",
+      "agentId": "/root",
+      "agentLabel": "root",
+      "state": "running",
+      "observedAt": "2026-10-11T17:52:55.715Z",
+      "taskIds": [
+        "task-7e8e0a50"
+      ],
+      "summary": "Correction to preceding run note: Root bridge filter ran FOUR tests passed, one explicit exporter ignored, not fourteen. Publication filter ran seven passed. Browser adapter remains pending.",
+      "evidence": [
+        {
+          "label": "Exact actual bridge output",
+          "kind": "artifact",
+          "path": "work/co-op-next/root-bridge-tests.log"
+        }
+      ],
+      "author": "Root",
+      "source": "actual-development correction",
+      "createdAt": "2026-10-11T17:52:55.745Z"
+    },
+    {
+      "id": "run-a8954cfd",
+      "title": "engine_research · completed",
+      "agentId": "/root/engine_research",
+      "agentLabel": "engine_research",
+      "state": "completed",
+      "observedAt": "2026-10-11T18:33:35.633Z",
+      "taskIds": [
+        "task-05dd95cd",
+        "task-7e8e0a50"
+      ],
+      "summary": "Completed bounded native replica/controller/art/Root integration assignment with real evidence. Overall co-op/game tasks remain active and actual multi-client release validation is pending.",
+      "evidence": [
+        {
+          "label": "Exact completed scope",
+          "kind": "artifact",
+          "path": "artifacts/co-op-native-integration-20261012/README.md"
+        }
+      ],
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T18:33:35.645Z"
+    },
+    {
+      "id": "run-8e772509",
+      "title": "gameplay_design · completed",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "gameplay_design",
+      "state": "completed",
+      "observedAt": "2026-10-11T18:33:35.658Z",
+      "taskIds": [
+        "task-05dd95cd",
+        "task-7e8e0a50"
+      ],
+      "summary": "Completed bounded native replica/controller/art/Root integration assignment with real evidence. Overall co-op/game tasks remain active and actual multi-client release validation is pending.",
+      "evidence": [
+        {
+          "label": "Exact completed scope",
+          "kind": "artifact",
+          "path": "artifacts/co-op-native-integration-20261012/README.md"
+        }
+      ],
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T18:33:35.681Z"
+    },
+    {
+      "id": "run-45ded9bd",
+      "title": "production_research · completed",
+      "agentId": "/root/production_research",
+      "agentLabel": "production_research",
+      "state": "completed",
+      "observedAt": "2026-10-11T18:33:35.694Z",
+      "taskIds": [
+        "task-05dd95cd",
+        "task-7e8e0a50"
+      ],
+      "summary": "Completed bounded native replica/controller/art/Root integration assignment with real evidence. Overall co-op/game tasks remain active and actual multi-client release validation is pending.",
+      "evidence": [
+        {
+          "label": "Exact completed scope",
+          "kind": "artifact",
+          "path": "artifacts/co-op-native-integration-20261012/README.md"
+        }
+      ],
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T18:33:35.712Z"
+    },
+    {
+      "id": "run-90ec3cc2",
+      "title": "root · completed",
+      "agentId": "/root",
+      "agentLabel": "root",
+      "state": "completed",
+      "observedAt": "2026-10-11T18:33:35.725Z",
+      "taskIds": [
+        "task-05dd95cd",
+        "task-7e8e0a50"
+      ],
+      "summary": "Completed bounded native replica/controller/art/Root integration assignment with real evidence. Overall co-op/game tasks remain active and actual multi-client release validation is pending.",
+      "evidence": [
+        {
+          "label": "Exact completed scope",
+          "kind": "artifact",
+          "path": "artifacts/co-op-native-integration-20261012/README.md"
+        }
+      ],
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T18:33:35.737Z"
     }
   ],
   "phaseDescription": "Desktop-first Rust/WASM solo game and local Studio are implemented. Reviewed occupied-cell art, reproducible conversion, responsive native settings/icons and minimap, strict GitHub integration gates and source-backed Dev Bible are integrated. Natural campaign balance, human listening, owner-private update lifecycle and physical phones remain separate pending gates."
