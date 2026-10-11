@@ -1,5 +1,7 @@
 //! Generated artwork and semantic DOM layout rendered as actual engine cells.
 use crate::pixel_ui::RoyaleMono;
+#[path = "collection_ui.rs"]
+mod collection_ui;
 #[path = "component_art.rs"]
 mod component_art;
 #[path = "meishi_art.rs"]
@@ -1472,6 +1474,69 @@ impl Painter<'_> {
         };
         match node.kind.as_str() {
             "text" => self.text_aligned(r, &node.text, font, color, node.text_align, false),
+            "collection-name" | "collection-state" | "collection-meta" | "collection-cost"
+            | "collection-reason" => {
+                // This is hierarchy only: all copy, ownership and exact costs
+                // come from the discovered-only host HUD, never a local catalog.
+                let color = if node.disabled {
+                    BUTTON_DISABLED_TEXT
+                } else {
+                    match node.kind.as_str() {
+                        "collection-name" if node.selected => CYAN,
+                        "collection-name" | "collection-cost" => WHITE,
+                        "collection-reason" => rgb(212, 172, 96),
+                        "collection-state" => match node.value {
+                            1.0 => GOLD,  // Known blueprint, not crafted.
+                            2.0 => WHITE, // Owned; no inference of compatibility.
+                            3.0 => CYAN,  // Actual active hull/equipped ability.
+                            _ => DIM,
+                        },
+                        _ => DIM,
+                    }
+                };
+                self.text_aligned(r, &node.text, font, color, node.text_align, false);
+            }
+            "collection-entry" | "category-symbol" | "corporation-symbol" => {
+                let token = (node.value.is_finite()
+                    && node.value.fract() == 0.0
+                    && (0.0..3.0).contains(&node.value))
+                .then_some(node.value as usize);
+                let input = collection_ui::Input {
+                    parent: self.parent,
+                    rect: r,
+                    clip: self.clip,
+                    active: node.active,
+                    selected: node.selected,
+                    disabled: node.disabled,
+                    time,
+                    reduced,
+                };
+                if node.kind == "collection-entry" {
+                    if node.value != -1.0 && token.is_none() {
+                        return;
+                    }
+                    collection_ui::append_entry(
+                        self.frame,
+                        &input,
+                        token,
+                        &mut self.remaining,
+                        &mut self.work_remaining,
+                    );
+                } else if let Some(token) = token {
+                    collection_ui::append_symbol(
+                        self.frame,
+                        &input,
+                        if node.kind == "category-symbol" {
+                            collection_ui::SymbolKind::Category
+                        } else {
+                            collection_ui::SymbolKind::Corporation
+                        },
+                        token,
+                        &mut self.remaining,
+                        &mut self.work_remaining,
+                    );
+                }
+            }
             "status-text" | "warning-text" => {
                 // The measured status slot is distinct from its accessible
                 // 44px hitbox. One logical pixel font stays stable on zoom;
