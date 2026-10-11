@@ -350,16 +350,13 @@ static RINGS: LazyLock<[PixelBody; 2]> = LazyLock::new(|| {
             if !(0.92..1.015).contains(&radius) {
                 return None;
             }
-            let band = ((radius - 0.92) * 95.0).floor() as i32;
-            Some(if x > 17.0 && y < 5.0 {
-                'a'
-            } else if band % 3 == 0 {
-                'd'
-            } else if band % 3 == 1 {
-                'f'
-            } else {
-                'b'
-            })
+            let grain = surface_noise(Vec2::new(x * 0.7, y * 2.0), 0x7269_6e67);
+            let radial = ((radius - 0.92) / 0.095).clamp(0.0, 1.0);
+            let tone = (2.0 + grain * 2.0 + (radial * std::f32::consts::PI).sin()).round() as usize;
+            Some(
+                ['a', 'e', 'b', 'f', 'c', 'g', 'd', 'h']
+                    [if x > 17.0 && y < 5.0 { 0 } else { tone.min(7) }],
+            )
         })
     })
 });
@@ -401,16 +398,6 @@ fn half_body(body: &PixelBody) -> PixelBody {
         }),
     )
 }
-static NEBULA: LazyLock<PixelBody> = LazyLock::new(|| {
-    template(32, 20, |x, y| {
-        let wave = (x * 0.29).sin() * 3.0;
-        if (y - wave).abs() < 4.0 && x.abs() < 14.0 && ((x + y) as i32).rem_euclid(3) != 0 {
-            Some(if y > wave { 'b' } else { 'c' })
-        } else {
-            None
-        }
-    })
-});
 fn template(width: usize, height: usize, sample: impl Fn(f32, f32) -> Option<char>) -> PixelBody {
     let rows: Vec<String> = (0..height)
         .map(|y| {
@@ -440,7 +427,23 @@ fn template(width: usize, height: usize, sample: impl Fn(f32, f32) -> Option<cha
         ],
     )
 }
+// All texture generation is cached. It never consumes Game's combat RNG.
+fn surface_noise(p: Vec2, seed: u32) -> f32 {
+    let q = p / 5.0;
+    let cell = q.floor().as_ivec2();
+    let f = q - q.floor();
+    let f = f * f * (Vec2::splat(3.0) - f * 2.0);
+    let n = |dx, dy| unit(hash(seed, [cell.x + dx, cell.y + dy], 7));
+    let a = n(0, 0) + (n(1, 0) - n(0, 0)) * f.x;
+    let b = n(0, 1) + (n(1, 1) - n(0, 1)) * f.x;
+    a + (b - a) * f.y
+}
+
+const SHADE_CODES: [char; 8] = ['a', 'e', 'b', 'f', 'c', 'g', 'd', 'h'];
 fn planet(kind: usize) -> PixelBody {
+    if kind == 3 {
+        return stellar_remnant();
+    }
     const RADIUS: f32 = 37.5;
     let craters: Vec<_> = (0..23)
         .map(|index| {
@@ -454,99 +457,124 @@ fn planet(kind: usize) -> PixelBody {
         })
         .collect();
     template(96, 96, |x, y| {
-        let distance_squared = x * x + y * y;
-        if distance_squared > RADIUS * RADIUS {
+        let p = Vec2::new(x, y);
+        let squared = p.length_squared();
+        if squared > RADIUS * RADIUS {
             return None;
         }
-        let z = (RADIUS * RADIUS - distance_squared).sqrt();
-        let illumination = ((-0.52 * x - 0.32 * y + 0.79 * z) / RADIUS).clamp(0.0, 1.0);
-        let mut tone = (illumination * 7.5).min(7.0) as usize;
-        match kind {
-            0 => {
-                for (center, radius) in &craters {
-                    let delta = Vec2::new(x, y) - *center;
-                    let distance = delta.length();
-                    if distance < *radius - 0.6 {
-                        tone = tone.saturating_sub(if delta.x + delta.y < 0.0 { 3 } else { 1 });
-                    } else if (distance - radius).abs() < 0.8 {
-                        tone = if delta.x + delta.y < 0.0 {
-                            (tone + 2).min(7)
-                        } else {
-                            tone.saturating_sub(2)
-                        };
-                    }
-                }
-            }
+        let z = (RADIUS * RADIUS - squared).sqrt();
+        let light = ((-0.52 * x - 0.32 * y + 0.79 * z) / RADIUS).clamp(0.0, 1.0);
+        let terrain = surface_noise(p, 0x7375_7266 ^ kind as u32);
+        let mut albedo = match kind {
+            0 => 0.70 + terrain * 0.30,
             1 => {
-                let latitude = y + (x * 0.09).sin() * 2.3 + (z / RADIUS) * 3.0;
-                let band = (latitude / 3.1).floor() as i32;
-                if band.rem_euclid(5) == 0 {
-                    tone = tone.saturating_sub(2);
-                }
-                if band.rem_euclid(5) == 2 {
-                    tone = (tone + 1).min(7);
-                }
-                let storm = ((x + 11.0) / 7.0).powi(2) + ((y - 6.0) / 3.4).powi(2);
-                if (0.5..1.3).contains(&storm) {
-                    tone = tone.saturating_sub(3);
-                }
-                if storm < 0.5 {
-                    tone = (tone + 1).min(7);
-                }
-            }
-            2 => {
-                let vein = (x * 0.11 + y * 0.075).sin() * 8.0 + y * 0.31;
-                if (x - vein - 5.0).abs() < 0.9
-                    || (y + x * 0.42 - (x * 0.17).sin() * 2.0).abs() < 0.7
-                {
-                    tone = if illumination > 0.3 { 7 } else { 2 };
-                }
-                let plate = hash(91, [(x / 8.0).floor() as i32, (y / 7.0).floor() as i32], 9);
-                if plate & 3 == 0 {
-                    tone = tone.saturating_sub(1);
-                }
+                // Curved atmospheric belts vary in width and dissolve into storms.
+                // They modulate albedo before lighting, so no band illuminates night.
+                let latitude = y + (x * 0.065).sin() * 1.8 + terrain * 3.8 + z / RADIUS * 2.0;
+                let cloud = (latitude * 0.27 + (y * 0.11).sin() * 0.7).sin();
+                let storm = ((x + 11.0) / 8.0).powi(2) + ((y - 6.0) / 4.0).powi(2);
+                0.76 + cloud * 0.10 + terrain * 0.12 - (-storm * 0.8).exp() * 0.14
             }
             _ => {
-                let filament = (x * 0.24 + y * 0.17).sin() + (y * 0.33 - x * 0.1).cos();
-                tone = if filament > 0.75 {
-                    7
-                } else if filament < -0.6 {
-                    3
-                } else {
-                    5
-                };
-                if distance_squared > 34.0 * 34.0 {
-                    tone = tone.saturating_sub(2);
+                // Large irregular ice/cloud fields, with small lit fracture traces.
+                let field = surface_noise(p * 0.55 + Vec2::new(7.0, -3.0), 0x6963_6566);
+                let contour = (field - 0.46).abs();
+                0.67 + terrain * 0.19 + if contour < 0.025 { 0.14 } else { field * 0.12 }
+            }
+        };
+        if kind == 0 {
+            for (center, radius) in &craters {
+                let delta = p - *center;
+                let distance = delta.length();
+                if distance < *radius - 0.6 {
+                    albedo *= if delta.x + delta.y < 0.0 { 0.67 } else { 0.86 };
+                } else if (distance - radius).abs() < 0.65 {
+                    albedo *= if delta.x + delta.y < 0.0 { 1.12 } else { 0.80 };
                 }
             }
         }
-        Some(['a', 'e', 'b', 'f', 'c', 'g', 'd', 'h'][tone])
+        let tone = (light.powf(0.72) * albedo.clamp(0.0, 1.0) * 7.0).round() as usize;
+        Some(SHADE_CODES[tone.min(7)])
     })
 }
 
-fn palette_shade(palette: [u32; 4], shade: u32, alpha: u8) -> u32 {
-    let color = if shade < 4 {
-        palette[shade as usize]
-    } else {
-        let (a, b) = match shade {
-            4 => (0, 1),
-            5 => (1, 2),
-            6 => (2, 3),
-            _ => (3, 3),
+fn stellar_remnant() -> PixelBody {
+    template(96, 96, |x, y| {
+        let p = Vec2::new(x, y);
+        let r = Vec2::new(x * 0.93, y * 1.13).length();
+        let angle = y.atan2(x);
+        if angle > -0.22 && angle < 0.40 {
+            return None;
+        }
+        let cloud = surface_noise(p * 1.4, 0x7265_6d6e);
+        let edge = 28.0 + (angle * 2.0 + 0.5).sin() * 3.2 + (angle * 3.0).cos() * 1.4;
+        let distance = (r - edge + (cloud - 0.5) * 2.6).abs();
+        let tone = if distance < 0.85 && cloud > 0.22 {
+            Some((3.0 + cloud * 4.0).round() as usize)
+        } else if distance < 2.5 && cloud > 0.66 {
+            Some(if r < edge { 2 } else { 1 })
+        } else if r < edge - 4.0 && r > edge - 5.1 && angle < -1.0 && cloud > 0.64 {
+            Some(2)
+        } else if (p - Vec2::new(-3.0, 1.0)).length() < 1.5 {
+            Some(7)
+        } else {
+            None
         };
-        let left = palette[a].to_le_bytes();
-        let right = palette[b].to_le_bytes();
-        u32::from_le_bytes(std::array::from_fn(|channel| {
-            if channel == 3 {
-                255
-            } else if shade == 7 {
-                ((left[channel] as u16 * 3 + 255) / 4) as u8
-            } else {
-                ((left[channel] as u16 + right[channel] as u16) / 2) as u8
-            }
-        }))
-    };
-    (color & 0x00ff_ffff) | ((alpha as u32) << 24)
+        tone.map(|i| SHADE_CODES[i.min(7)])
+    })
+}
+
+// Type owns the surface material; biome contributes only a restrained hue bias.
+// The ramp starts near black so terrain cannot erase a physical terminator.
+const PLANET_RAMPS: [[[u8; 3]; 8]; 4] = [
+    [
+        [4, 5, 7],
+        [14, 14, 16],
+        [30, 28, 27],
+        [48, 44, 39],
+        [68, 60, 50],
+        [90, 79, 64],
+        [117, 104, 83],
+        [147, 135, 111],
+    ],
+    [
+        [4, 5, 7],
+        [15, 15, 17],
+        [33, 31, 29],
+        [53, 47, 39],
+        [75, 65, 50],
+        [100, 86, 64],
+        [127, 111, 83],
+        [157, 140, 107],
+    ],
+    [
+        [4, 5, 8],
+        [12, 17, 21],
+        [24, 35, 40],
+        [40, 54, 59],
+        [58, 74, 77],
+        [79, 96, 97],
+        [103, 120, 118],
+        [135, 149, 142],
+    ],
+    [
+        [18, 17, 22],
+        [35, 29, 35],
+        [54, 38, 45],
+        [77, 49, 54],
+        [101, 64, 64],
+        [130, 85, 77],
+        [161, 109, 92],
+        [196, 146, 112],
+    ],
+];
+fn planet_shade(kind: usize, palette: [u32; 4], shade: u32, alpha: u8) -> u32 {
+    let index = [0, 2, 4, 6, 1, 3, 5, 7][shade as usize];
+    let base = PLANET_RAMPS[kind][index];
+    let bias = palette[2].to_le_bytes();
+    let rgb: [u8; 3] =
+        std::array::from_fn(|i| (base[i] as f32 * (0.90 + bias[i] as f32 / 255.0 * 0.16)) as u8);
+    u32::from_le_bytes([rgb[0], rgb[1], rgb[2], alpha])
 }
 
 struct Scenery<'a> {
@@ -559,15 +587,6 @@ impl Scenery<'_> {
     fn visible(&self, position: Vec2, radius: f32) -> bool {
         let d = (position - self.camera).abs();
         d.x <= self.half.x + radius && d.y <= self.half.y + radius
-    }
-    fn body(&mut self, body: &PixelBody, transform: Transform, palette: [u32; 4], alpha: u8) {
-        if body.occupied_count() > self.remaining {
-            return;
-        }
-        self.frame.push_body_colored(body, transform, |_, color| {
-            palette_shade(palette, color, alpha)
-        });
-        self.remaining -= body.occupied_count();
     }
     fn planet_group(
         &mut self,
@@ -587,13 +606,26 @@ impl Scenery<'_> {
             transform.scale *= 2.0;
         }
         if let Some(rings) = rings {
-            self.body(&rings[0], transform, palette, 150);
+            self.planet_body(&rings[0], transform, 0, palette, 120);
         }
-        self.body(&planets[kind], transform, palette, 190);
+        self.planet_body(&planets[kind], transform, kind, palette, 230);
         if let Some(rings) = rings {
-            self.body(&rings[1], transform, palette, 190);
+            self.planet_body(&rings[1], transform, 0, palette, 145);
         }
         required
+    }
+    fn planet_body(
+        &mut self,
+        body: &PixelBody,
+        transform: Transform,
+        kind: usize,
+        palette: [u32; 4],
+        alpha: u8,
+    ) {
+        self.frame.push_body_colored(body, transform, |_, c| {
+            planet_shade(kind, palette, c, alpha)
+        });
+        self.remaining -= body.occupied_count();
     }
     fn nova_group(&mut self, position: Vec2, pulse: f32, reduced: bool) -> usize {
         let body = if reduced {
@@ -601,37 +633,23 @@ impl Scenery<'_> {
         } else {
             &PLANETS[3]
         };
-        let size = 0.8 + pulse * 0.7;
-        let sparks: [Option<Vec2>; 24] = std::array::from_fn(|i| {
-            let angle = i as f32 * TAU / 24.0;
-            let direction = Vec2::new(angle.cos(), angle.sin());
-            let p = position + direction * (15.0 + pulse * 19.0);
-            self.visible(p, size).then_some(p)
-        });
-        let required = body.occupied_count() + sparks.iter().flatten().count();
+        let required = body.occupied_count();
         if required > self.remaining {
             return 0;
         }
-        self.body(
+        // A stable broken remnant, not a flashing disc with equally spaced spokes.
+        self.planet_body(
             body,
             Transform {
                 position,
-                scale: Vec2::splat((0.32 + pulse * 0.2) * if reduced { 2.0 } else { 1.0 }),
+                scale: Vec2::splat(0.52 * if reduced { 2.0 } else { 1.0 }),
                 ..Transform::default()
             },
+            3,
             PALETTES[4],
-            (90.0 + pulse * 100.0) as u8,
+            (65.0 + pulse * 8.0) as u8,
         );
-        for p in sparks.into_iter().flatten() {
-            self.pixel(p, size, 0x80_8fcaff);
-        }
         required
-    }
-    fn pixel(&mut self, p: Vec2, size: f32, color: u32) {
-        if self.remaining > 0 && self.visible(p, size) {
-            self.frame.push_pixel(p, size, color);
-            self.remaining -= 1;
-        }
     }
 }
 
@@ -708,22 +726,8 @@ pub fn background_with_density(
                 let position = origin + camera * (1.0 - factor);
                 let biome = at(seed, origin / factor.max(0.075));
                 if layer == 0 && scene.visible(position, 180.0) {
-                    if h.is_multiple_of(5) {
-                        let transform = Transform {
-                            position,
-                            rotation: unit(mix(h ^ 51)) * TAU,
-                            scale: Vec2::splat(2.4),
-                        };
-                        let alpha = (20.0 + 8.0 * (time * 0.3 + unit(h) * TAU).sin()) as u8;
-                        scene.body(&NEBULA, transform, biome.palette, alpha);
-                    }
                     if h.is_multiple_of(11) {
-                        let phase = (time + unit(mix(h ^ 131)) * 90.0).rem_euclid(90.0);
-                        let pulse = if phase < 12.0 {
-                            (phase / 12.0 * std::f32::consts::PI).sin()
-                        } else {
-                            0.0
-                        };
+                        let pulse = 0.5 + 0.5 * (time * 0.035 + unit(mix(h ^ 131)) * TAU).sin();
                         scene.nova_group(position, pulse, reduced);
                     }
                 } else if layer == 1 && h.is_multiple_of(3) && scene.visible(position, 135.0) {
@@ -780,6 +784,10 @@ pub fn background_with_density(
 mod isotope_tests;
 
 #[cfg(test)]
+#[path = "region_immersion_tests.rs"]
+mod immersion_tests;
+
+#[cfg(test)]
 #[path = "regions_lod_tests.rs"]
 mod lod_tests;
 
@@ -792,7 +800,7 @@ mod tests {
     use super::*;
     #[test]
     fn rich_cached_planets_and_split_rings_keep_fine_geometry() {
-        for planet in PLANETS.iter() {
+        for planet in PLANETS.iter().take(3) {
             assert_eq!((planet.width, planet.height), (96, 96));
             assert!((4_300..4_500).contains(&planet.occupied_count()));
             assert!(planet.cells().all(|(_, shade)| shade < 8));

@@ -140,6 +140,98 @@ fn reduced_sampling_preserves_actual_dark_lanes_and_broken_rim() {
 }
 
 #[test]
+fn qa_galaxy_and_remnant_centers_use_actual_seed_selection_and_calm_group_geometry() {
+    let seed = 871_238_449;
+    for (grid, hash, kind, center) in [
+        (
+            [3, -4],
+            2_591_400_577,
+            MotifKind::Galaxy,
+            [59725.008, -49541.473],
+        ),
+        (
+            [-3, 1],
+            1_888_154_543,
+            MotifKind::Supernova,
+            [-35332.82, 22642.145],
+        ),
+    ] {
+        let m = motif(seed, grid).unwrap();
+        assert_eq!(m.hash, hash);
+        assert!(matches!(
+            (m.kind, kind),
+            (MotifKind::Galaxy, MotifKind::Galaxy) | (MotifKind::Supernova, MotifKind::Supernova)
+        ));
+        let camera = m.origin / MOTIF_PARALLAX;
+        assert!((camera - Vec2::from_array(center)).abs().max_element() < 0.01);
+        eprintln!(
+            "QA {kind:?} grid{grid:?} h{hash}: WARP {} {}",
+            camera.x, camera.y
+        );
+        for reduced in [false, true] {
+            let mut states = Vec::new();
+            for time in [0.0, 120.0, 901.0] {
+                let mut frame = FrameBuilder::new();
+                let scene = SceneInput {
+                    seed,
+                    camera,
+                    time,
+                    reduced,
+                    viewport: Vec2::new(533.0, 300.0),
+                    reduced_motion: false,
+                };
+                let required = motif_cost(kind, reduced);
+                let mut remaining = required;
+                assert_eq!(draw_motif(&mut frame, m, &scene, &mut remaining), required);
+                assert_eq!(remaining, 0);
+                let basis: Vec<_> = frame
+                    .frame()
+                    .batches
+                    .iter()
+                    .flat_map(|b| b.transforms.iter())
+                    .map(|t| [t.a[2], t.a[3], t.b[0], t.b[1]])
+                    .collect();
+                assert_eq!(basis.len(), motif_transforms(kind));
+                states.push(basis);
+            }
+            for later in &states[1..] {
+                for (a, b) in states[0].iter().zip(later) {
+                    for (x, y) in a.iter().zip(b) {
+                        assert!(
+                            (x - y).abs()
+                                < if matches!(kind, MotifKind::Galaxy) {
+                                    0.000001
+                                } else {
+                                    0.025
+                                }
+                        );
+                    }
+                }
+            }
+        }
+    }
+}
+
+#[test]
+fn inclined_galaxy_disk_has_real_low_alpha_interior_mass_with_an_absent_dust_band() {
+    for reduced in [false, true] {
+        let spacing = GALAXY_DISK_SPACING * if reduced { 2.0 } else { 1.0 };
+        let body = ART.galaxy_disk.body(reduced);
+        assert_eq!(body.occupied_count(), if reduced { 103 } else { 389 });
+        let mut interior = 0;
+        for (p, c) in body.cells() {
+            let p = p * spacing;
+            assert!(galactic_disk_density(p) > 0.08);
+            assert!((p.y + p.x * 0.12 + (p.x * 0.18).sin()).abs() >= 3.5);
+            assert!((14..=45).contains(&c.to_le_bytes()[3]));
+            interior += usize::from(p.length() < 20.0);
+        }
+        assert!(interior > if reduced { 25 } else { 100 });
+        assert!(motif_cost(MotifKind::Galaxy, reduced) <= if reduced { 1100 } else { 2200 });
+    }
+}
+
+#[test]
 fn actual_fine_cells_compose_reflection_shear_and_fractional_zoom_without_minimum_geometry() {
     let parent = AffineTransform {
         position: Vec2::new(17.0, -9.0),
@@ -331,7 +423,9 @@ fn far_streamed_motifs_keep_local_detail_finite_and_inside_conservative_culling_
                             if t.b[3] < 0.0 {
                                 // Actual authored soft volume footprints are larger than
                                 // the hard half-unit filaments; neither is a raster clamp.
-                                let spacing = if (t.b[3] + 1.04).abs() < 0.00001 {
+                                let spacing = if t.b[3] == -1.0 {
+                                    GALAXY_DISK_SPACING * 2.4
+                                } else if (t.b[3] + 1.04).abs() < 0.00001 {
                                     VEIL_SPACING * 2.7
                                 } else {
                                     BILLOW_SPACING * 2.4
@@ -375,11 +469,11 @@ fn export_actual_fine_cosmic_packets_for_software_contact_proof() {
                     let cells: Vec<_> = frame.frame().batches.iter().flat_map(|b| b.pixels.iter().map(|p| {
                         let t = b.transforms[p.transform as usize];
                         let corners: Vec<_> = CORNERS.iter().map(|c| view.world_to_screen(t.point(Vec2::from_array(p.local) + *c)).to_array()).collect();
-                        serde_json::json!({"corners": corners, "rgba": p.color.to_le_bytes()})
+                        serde_json::json!({"corners": corners, "rgba": p.color.to_le_bytes(), "material": [t.b[2],t.b[3]]})
                     })).collect();
                     serde_json::json!({"zoom": zoom, "cells": cells})
                 }).collect();
-                let data = serde_json::json!({"kind": format!("{kind:?}"), "reduced": reduced, "time": time, "quads": required, "transforms": motif_transforms(kind), "scope": "actual native FrameBuilder cells/CameraView corners; flat software alpha (soft material omitted), no GPU shader or threat contrast acceptance", "views": views});
+                let data = serde_json::json!({"kind": format!("{kind:?}"), "reduced": reduced, "time": time, "quads": required, "transforms": motif_transforms(kind), "scope": "actual native FrameBuilder/CameraView packets including material tags; offline approximation, no GPU or threat contrast acceptance", "views": views});
                 std::fs::write(
                     output.join(format!("motif-{index}-reduced-{reduced}-time-{time}.json")),
                     serde_json::to_vec(&data).unwrap(),

@@ -150,6 +150,7 @@ impl Pair {
     }
 }
 struct Art {
+    galaxy_disk: Pair,
     galaxy_arms: Pair,
     galaxy_core: Pair,
     nebula: Pair,
@@ -263,69 +264,178 @@ fn cluster(seed: u32, p: Vec2) -> f32 {
     ))
 }
 
+// Smooth cache-only surface field. Fine cells form contiguous material clusters,
+// rather than hard hash-block boundaries or independent point noise.
+fn art_noise(seed: u32, p: Vec2) -> f32 {
+    let q = p / 3.0;
+    let cell = q.floor().as_ivec2();
+    let f = q - q.floor();
+    let x = smooth(f.x);
+    let y = smooth(f.y);
+    let n = |dx, dy| unit(hash3(seed, cell.x + dx, cell.y + dy, 7));
+    let a = n(0, 0) + (n(1, 0) - n(0, 0)) * x;
+    let b = n(0, 1) + (n(1, 1) - n(0, 1)) * x;
+    a + (b - a) * y
+}
+
+fn spiral_arm(p: Vec2) -> Option<usize> {
+    let r = p.length();
+    if !(5.0..44.0).contains(&r) {
+        return None;
+    }
+    let angle = p.y.atan2(p.x);
+    let phase = angle - 1.8 * (r / 6.0).ln() + 0.12 * (r * 0.18 + angle).sin();
+    let cross = phase.sin() * r;
+    let distance = cross.abs();
+    let cloud = art_noise(0x7370_6972, p);
+    let dust = art_noise(0x6475_7374, p);
+    let taper = 0.68 + 0.32 * (1.0 - r / 44.0);
+    let width = (1.7 + cloud * 0.85) * taper * if phase.cos() > 0.0 { 1.0 } else { 0.76 };
+    // An offset dark lane cuts each broad arm, not a uniform geometric outline.
+    let lane = (cross + 0.28 + (r * 0.3).sin() * 0.25).abs() < 0.18;
+    if distance < width && dust > 0.18 && !lane {
+        Some(if distance < 0.24 && dust > 0.70 {
+            6
+        } else if dust > 0.73 {
+            5
+        } else if dust > 0.60 {
+            4
+        } else if dust > 0.45 {
+            3
+        } else if dust > 0.30 {
+            2
+        } else {
+            1
+        })
+    } else if distance < width + 1.9 && dust > 0.60 && r < 36.0 && !lane {
+        Some(0)
+    } else {
+        None
+    }
+}
+
+fn galactic_bulge(p: Vec2) -> Option<usize> {
+    let r = Vec2::new(p.x, p.y * 1.05).length();
+    let cloud = art_noise(0x636f_7265, p);
+    if r < 1.4 {
+        Some(6)
+    } else if r < 2.9 {
+        Some(if p.y < -0.4 { 5 } else { 4 })
+    } else if r < 5.3 && (p.y + p.x * 0.12).abs() > 0.6 {
+        Some(if r < 4.0 { 3 } else { 2 })
+    } else if r < 7.5 && cloud > 0.58 {
+        Some(if r < 6.3 { 1 } else { 0 })
+    } else {
+        None
+    }
+}
+
+fn remnant_filament(p: Vec2) -> Option<usize> {
+    let r = Vec2::new(p.x * 0.94, p.y * 1.1).length();
+    let a = p.y.atan2(p.x);
+    if a > -0.18 && a < 0.32 {
+        return None;
+    }
+    let cloud = art_noise(0x656a_6563, p);
+    let edge = 20.0 + (a * 2.0 + 0.5).sin() * 2.8 + (a * 3.0 - 1.0).sin() * 1.1;
+    let d = (r - edge + (cloud - 0.5) * 2.0).abs();
+    if d < 0.55 && cloud > 0.27 {
+        Some(if cloud > 0.76 && a < 0.0 {
+            7
+        } else if cloud > 0.70 {
+            6
+        } else if cloud > 0.60 {
+            5
+        } else if cloud > 0.45 {
+            4
+        } else {
+            3
+        })
+    } else if d < 2.3 && cloud > 0.70 {
+        Some(if r < edge { 2 } else { 1 })
+    } else if r < edge - 3.0 && r > edge - 4.1 && cloud > 0.72 && a < -1.0 {
+        Some(2)
+    } else if d < 3.4 && cloud > 0.87 {
+        Some(0)
+    } else {
+        None
+    }
+}
+
+fn remnant_source(p: Vec2) -> Option<usize> {
+    let r = (p - Vec2::new(-1.2, 0.5)).length();
+    let cloud = art_noise(0x7075_6c73, p);
+    if r < 0.65 {
+        Some(5)
+    } else if r < 1.0 {
+        Some(4)
+    } else if r < 1.4 {
+        Some(3)
+    } else if r < 1.9 {
+        Some(2)
+    } else if r < 3.8 && cloud > 0.57 {
+        Some(1)
+    } else if r < 4.7 && cloud > 0.70 {
+        Some(0)
+    } else {
+        None
+    }
+}
+
+const GALAXY_DISK_SPACING: f32 = 2.5;
+fn galactic_disk_density(p: Vec2) -> f32 {
+    let r = p.length();
+    let boundary = 32.0 + (p.y.atan2(p.x) * 3.0 + 0.7).sin() * 1.8;
+    let edge = (1.0 - (r / boundary).powi(2)).max(0.0);
+    let cloud = noise(0x6469_736b, p / 9.0) * 0.7 + noise(0x7374_6172, p / 4.0) * 0.3;
+    let dust = (p.y + p.x * 0.12 + (p.x * 0.18).sin()).abs();
+    // Omit an actual dark dust band across the inclined disk. Overlapping soft
+    // cells taper its edge; the compact warm bulge stays a separate source.
+    if dust < 3.5 {
+        0.0
+    } else {
+        edge * (0.45 + cloud * 0.55)
+    }
+}
+fn galactic_disk() -> Pair {
+    let sample = |p: Vec2| {
+        let density = galactic_disk_density(p);
+        (density > 0.08).then(|| (density * 5.0).min(5.0) as usize)
+    };
+    let colors = [
+        rgba(66, 59, 73, 14),
+        rgba(80, 70, 87, 19),
+        rgba(97, 82, 101, 25),
+        rgba(116, 97, 117, 31),
+        rgba(137, 116, 133, 38),
+        rgba(159, 138, 151, 45),
+    ];
+    Pair {
+        full: template(28, 28, GALAXY_DISK_SPACING, &sample, &colors),
+        low: template(14, 14, GALAXY_DISK_SPACING * 2.0, &sample, &colors),
+    }
+}
+
 static ART: LazyLock<Art> = LazyLock::new(|| Art {
+    galaxy_disk: galactic_disk(),
     galaxy_arms: Pair::new(
         96,
         96,
-        |p| {
-            let r = p.length();
-            if !(5.0..44.0).contains(&r) {
-                return None;
-            }
-            let phase = p.y.atan2(p.x) - r * 0.092 + (r * 0.24).sin() * 0.035;
-            let distance = (phase * 2.0).sin().abs() * r * 0.5;
-            let width = 1.0 + (r * 0.31).sin() * 0.22;
-            let c = cluster(0x7370_6972, p);
-            // Two thin dust voids interrupt each arm without filling its silhouette.
-            let lane = (r * 0.21 + phase * 0.5).sin().abs();
-            if distance < width && c > 0.13 && !(lane < 0.10 && r > 15.0) {
-                Some(if distance < 0.16 && c > 0.55 {
-                    6
-                } else if distance < 0.29 {
-                    5
-                } else if c > 0.82 {
-                    4
-                } else if c > 0.60 {
-                    3
-                } else if c > 0.35 {
-                    2
-                } else {
-                    1
-                })
-            } else if distance < width + 1.6 && c > 0.91 && lane > 0.17 {
-                Some(0)
-            } else {
-                None
-            }
-        },
+        spiral_arm,
         &[
-            rgba(49, 43, 58, 12),
-            rgba(64, 53, 73, 18),
-            rgba(80, 65, 88, 24),
-            rgba(98, 77, 105, 29),
-            rgba(114, 89, 119, 35),
-            rgba(137, 111, 142, 41),
-            rgba(162, 135, 162, 49),
+            rgba(57, 54, 63, 18),
+            rgba(73, 66, 80, 24),
+            rgba(87, 77, 96, 29),
+            rgba(103, 89, 110, 35),
+            rgba(120, 105, 124, 41),
+            rgba(143, 126, 145, 48),
+            rgba(167, 151, 165, 56),
         ],
     ),
     galaxy_core: Pair::new(
         24,
         24,
-        |p| {
-            let r = Vec2::new(p.x, p.y * 1.05).length();
-            let c = cluster(0x636f_7265, p);
-            if r < 1.7 {
-                Some(6)
-            } else if r < 3.1 {
-                Some(if p.y < -0.5 { 5 } else { 4 })
-            } else if r < 5.5 && (p.y + p.x * 0.18).abs() > 0.75 && c > 0.18 {
-                Some(if r < 4.2 { 3 } else { 2 })
-            } else if r < 9.5 && (p.y * 0.8 - p.x * 0.35).abs() < 1.0 && c > 0.64 {
-                Some(if c > 0.85 { 1 } else { 0 })
-            } else {
-                None
-            }
-        },
+        galactic_bulge,
         &[
             rgba(81, 65, 88, 14),
             rgba(113, 87, 110, 23),
@@ -427,36 +537,7 @@ static ART: LazyLock<Art> = LazyLock::new(|| Art {
     nova_shell: Pair::new(
         64,
         64,
-        |p| {
-            let r = p.length();
-            let a = p.y.atan2(p.x);
-            // An asymmetric open shell has an actual absent arc, not a dark overlay.
-            if a > -0.18 && a < 0.32 {
-                return None;
-            }
-            let edge = 21.0 + (a * 5.0).sin() * 2.3 + (a * 3.0).cos();
-            let d = (r - edge).abs();
-            let c = cluster(0x656a_6563, p);
-            if d < 0.75 && c > 0.23 {
-                Some(if d < 0.22 && a < 0.0 {
-                    7
-                } else if c > 0.8 {
-                    6
-                } else if c > 0.6 {
-                    5
-                } else if c > 0.4 {
-                    4
-                } else {
-                    3
-                })
-            } else if d < 2.6 && c > 0.86 {
-                Some(if r < edge { 2 } else { 1 })
-            } else if d < 4.1 && c > 0.98 {
-                Some(0)
-            } else {
-                None
-            }
-        },
+        remnant_filament,
         &[
             rgba(49, 36, 45, 9),
             rgba(64, 43, 53, 13),
@@ -471,20 +552,7 @@ static ART: LazyLock<Art> = LazyLock::new(|| Art {
     nova_core: Pair::new(
         12,
         12,
-        |p| {
-            let r = p.length();
-            if r < 0.9 {
-                Some(5)
-            } else if r < 1.7 {
-                Some(if p.y < 0.0 { 4 } else { 3 })
-            } else if (p.x.abs() < 0.6 || p.y.abs() < 0.6) && r < 5.0 {
-                Some(2)
-            } else if (p.x + p.y * 0.3).abs() < 0.45 && r < 3.6 {
-                Some(if p.y < 0.0 { 1 } else { 0 })
-            } else {
-                None
-            }
-        },
+        remnant_source,
         &[
             rgba(88, 64, 73, 20),
             rgba(117, 86, 91, 29),
@@ -650,6 +718,11 @@ fn motif_cost(kind: MotifKind, reduced: bool) -> usize {
     };
     let count: usize = parts.iter().map(|p| p.body(reduced).occupied_count()).sum();
     count
+        + if kind == MotifKind::Galaxy {
+            ART.galaxy_disk.body(reduced).occupied_count()
+        } else {
+            0
+        }
         + if kind == MotifKind::Nebula {
             GAS_ART.veil.body(reduced).occupied_count()
                 + GAS_ART.billows.body(reduced).occupied_count()
@@ -659,7 +732,11 @@ fn motif_cost(kind: MotifKind, reduced: bool) -> usize {
 }
 
 fn motif_transforms(kind: MotifKind) -> usize {
-    if kind == MotifKind::Nebula { 4 } else { 2 }
+    match kind {
+        MotifKind::Galaxy => 3,
+        MotifKind::Nebula => 4,
+        MotifKind::Supernova => 2,
+    }
 }
 fn draw_motif(
     frame: &mut FrameBuilder,
@@ -685,15 +762,14 @@ fn draw_motif(
             &ART.galaxy_arms,
             &ART.galaxy_core,
             Transform {
-                rotation: time * 0.008,
-                scale: Vec2::new(cell_scale, cell_scale * 0.70),
+                scale: Vec2::new(cell_scale, cell_scale * 0.62),
                 ..Transform::default()
             },
             Transform {
-                scale: Vec2::splat(cell_scale),
+                scale: Vec2::new(cell_scale, cell_scale * 0.62),
                 ..Transform::default()
             },
-            0.93 + 0.07 * (time * 0.16 + phase).sin(),
+            0.95 + 0.05 * (time * 0.035 + phase).sin(),
         ),
         MotifKind::Nebula => (
             &ART.nebula,
@@ -716,15 +792,14 @@ fn draw_motif(
                 &ART.nova_shell,
                 &ART.nova_core,
                 Transform {
-                    rotation: time * 0.003,
-                    scale: Vec2::splat(cell_scale * (0.70 + pulse * 0.45)),
+                    scale: Vec2::splat(cell_scale * (0.99 + pulse * 0.02)),
                     ..Transform::default()
                 },
                 Transform {
-                    scale: Vec2::splat(cell_scale * (0.75 + pulse * 0.25)),
+                    scale: Vec2::splat(cell_scale * (0.99 + pulse * 0.02)),
                     ..Transform::default()
                 },
-                0.40 + 0.60 * pulse,
+                0.93 + 0.07 * pulse,
             )
         }
     };
@@ -741,8 +816,31 @@ fn draw_motif(
         cell_scale,
         tint,
         alpha,
-        curl: 0.14,
+        curl: if m.kind == MotifKind::Nebula {
+            0.14
+        } else {
+            0.04
+        },
     };
+    if m.kind == MotifKind::Galaxy {
+        let spacing = GALAXY_DISK_SPACING * if reduced { 2.0 } else { 1.0 };
+        let footprint = spacing * 2.4;
+        let transform = parent.compose(
+            Transform {
+                scale: Vec2::new(footprint, footprint * 0.62),
+                ..Transform::default()
+            }
+            .affine(),
+        );
+        frame.push_soft_cells_affine_material(
+            transform,
+            PixelMaterial::default(),
+            ART.galaxy_disk
+                .body(reduced)
+                .cells()
+                .map(|(p, c)| (p * (spacing / footprint), colored(c, tint, 0.98, alpha))),
+        );
+    }
     if m.kind == MotifKind::Nebula {
         let density_scale = if reduced { 2.0 } else { 1.0 };
         draw_gas_part(
@@ -810,46 +908,17 @@ fn draw_system(
     if (relative.abs() - scene.viewport * 0.5).max_element() > 90.0 {
         return 0;
     }
-    let tint = Atmosphere::at(scene.seed, origin / SYSTEM_PARALLAX).tint;
     let time = if scene.reduced_motion {
         0.0
     } else {
         scene.time
     };
     let brightness = 0.94 + 0.06 * (time * 0.13 + unit(h) * TAU).sin();
-    let mut links = [None; 96];
-    let mut count = 0;
-    for edge in 0..6 {
-        let a = nodes[edge];
-        let b = nodes[edge + 1];
-        let steps = ((b - a).length() / 3.2).ceil() as usize;
-        for step in 1..steps {
-            if (scene.reduced && step % 2 == 1) || count == links.len() {
-                continue;
-            }
-            let p = a.lerp(b, step as f32 / steps as f32);
-            links[count] = Some((
-                p / 0.55,
-                rgba(tint[0] as u8, tint[1] as u8, tint[2] as u8, 38),
-            ));
-            count += 1;
-        }
-    }
-    // Whole asterism admission keeps seven real nodes with their visible links.
-    if remaining < count + nodes.len() {
+    // A physical neighborhood is seven stars, not chart strokes in the universe.
+    if remaining < nodes.len() {
         return 0;
     }
     let parent = origin + scene.camera * (1.0 - SYSTEM_PARALLAX);
-    frame.push_cells_affine_material(
-        Transform {
-            position: parent,
-            scale: Vec2::splat(0.55),
-            ..Transform::default()
-        }
-        .affine(),
-        PixelMaterial::default(),
-        links.into_iter().flatten(),
-    );
     frame.push_cells_affine_material(
         Transform {
             position: parent,
@@ -870,7 +939,7 @@ fn draw_system(
             )
         }),
     );
-    count + nodes.len()
+    nodes.len()
 }
 
 /// Region-owned gas quota: no physics body or combat RNG, and every emitted
@@ -1096,7 +1165,7 @@ pub(super) fn render(frame: &mut FrameBuilder, input: SceneInput) -> Stats {
                 let count = draw_system(frame, &scene, origin, nodes, h, star_limit - stats.stars);
                 stats.stars += count;
                 stats.systems += usize::from(count > 0);
-                stats.transforms += usize::from(count > 0) * 2;
+                stats.transforms += usize::from(count > 0);
             }
         }
     }
@@ -1355,7 +1424,7 @@ mod tests {
                         .transforms
                         .iter()
                         .all(|t| t.b[2] == 0.0
-                            && (t.b[3] == 0.0
+                            && ((t.b[3] == 0.0 || t.b[3] == -1.0)
                                 || (t.b[3] + 1.04).abs() < 0.00001
                                 || (t.b[3] + 1.09).abs() < 0.00001))
                 );
@@ -1430,7 +1499,7 @@ mod tests {
                             .iter()
                             .flat_map(|b| &b.transforms)
                             .all(|t| t.b[2] == 0.0
-                                && (t.b[3] == 0.0
+                                && ((t.b[3] == 0.0 || t.b[3] == -1.0)
                                     || (t.b[3] + 1.04).abs() < 0.00001
                                     || (t.b[3] + 1.09).abs() < 0.00001))
                     );
@@ -1496,7 +1565,8 @@ mod tests {
     }
 
     #[test]
-    fn stellar_neighborhoods_keep_real_nodes_and_exact_seeded_links_under_quality_and_parallax() {
+    fn stellar_neighborhoods_keep_exact_seeded_stars_without_chart_strokes_under_quality_and_parallax()
+     {
         let seed = crate::Profile::default().seed;
         let (origin, nodes, h) = (-8..=8)
             .flat_map(|y| (-8..=8).filter_map(move |x| stellar_system(seed, [x, y])))
@@ -1512,7 +1582,7 @@ mod tests {
             };
             let mut frame = FrameBuilder::new();
             let required = draw_system(&mut frame, &scene, origin, nodes, h, 200);
-            assert!((7..=103).contains(&required));
+            assert_eq!(required, 7);
             assert_eq!(frame.frame().pixel_count, required);
             assert_eq!(
                 frame
@@ -1521,7 +1591,7 @@ mod tests {
                     .iter()
                     .map(|b| b.transforms.len())
                     .sum::<usize>(),
-                2
+                1
             );
             assert!(
                 frame
