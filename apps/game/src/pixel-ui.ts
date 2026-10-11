@@ -386,7 +386,27 @@ export class PixelUiBridge {
             : {}),
         });
       };
-      if (root.id !== "game-ui")
+      if (root.classList.contains("launch-card")) {
+        const screen = document
+          .getElementById("launch-screen")!
+          .getBoundingClientRect();
+        groups.push({
+          position: [screen.x / scale, screen.y / scale],
+          nodes: [
+            {
+              kind: "title-backdrop",
+              rect: [0, 0, screen.width / scale, screen.height / scale],
+              text: "",
+              font: 0,
+              value: 0,
+              active: false,
+              selected: false,
+              disabled: false,
+              clip: null,
+            },
+          ],
+        });
+      } else if (root.id !== "game-ui")
         add(
           root,
           root.classList.contains("console-card")
@@ -425,8 +445,6 @@ export class PixelUiBridge {
       }
       if (root.classList.contains("launch-card")) {
         add(root.querySelector<HTMLElement>("h1")!, "logo");
-        const crest = root.querySelector<HTMLElement>(".title-crest");
-        if (crest) add(crest, "seal");
       }
       const selectors =
         root.id === "game-ui"

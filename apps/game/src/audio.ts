@@ -1,4 +1,5 @@
-/** Authored procedural score and effects: no samples, generated tracks, or network assets. */
+/** Procedural world score/effects plus an optional locally authored title loop. */
+import { TitleTrack, type TitleTheme } from "./title-theme.ts";
 import {
   advanceMix,
   audibleThemes,
@@ -94,6 +95,8 @@ const BASS = [
 ] as const;
 
 export class AudioEngine {
+  private titleTrack: TitleTrack | null = null;
+  private titleScreen = false;
   private context: AudioContext | null = null;
   private master: GainNode | null = null;
   private music: GainNode | null = null;
@@ -124,6 +127,20 @@ export class AudioEngine {
   private paused = true;
   private disposed = false;
 
+  constructor(
+    private titleTheme: TitleTheme = { url: null, loopStart: 0, loopEnd: null },
+  ) {}
+
+  /** Keeps the title loop and world score on the same context and music controls. */
+  setTitleScreen(active: boolean): void {
+    if (this.titleScreen === active) return;
+    this.titleScreen = active;
+    if (active)
+      for (const voice of [...this.voices])
+        if (voice.lane === "sfx" || voice.persistent) this.release(voice);
+    this.setLevels(this.levels[0]!, this.levels[1]!, this.levels[2]!);
+  }
+
   /** Invoked by the launch gesture; the sole AudioContext creation path. */
   async unlock(): Promise<void> {
     if (this.disposed) return;
@@ -148,6 +165,8 @@ export class AudioEngine {
             }
           } else {
             this.stopScheduler();
+            this.titleTrack?.update(false, 0);
+            this.titleTrack?.stop();
             for (const voice of [...this.voices]) this.release(voice);
             this.mix.engine =
               this.mix.alarm =
@@ -162,6 +181,7 @@ export class AudioEngine {
         return;
       }
     }
+    if (this.titleScreen) void this.titleTrack?.load();
     await this.resume();
   }
 
@@ -171,11 +191,19 @@ export class AudioEngine {
     if (!context || context.state === "closed") return;
     [this.master, this.music, this.sfx].forEach((node, index) => {
       node?.gain.setTargetAtTime(
-        index === 1 && this.tailTimer !== null ? 0 : this.levels[index]!,
+        index === 1 && (this.tailTimer !== null || this.titleScreen)
+          ? 0
+          : this.levels[index]!,
         context.currentTime,
-        0.025,
+        index === 1 ? 0.24 : 0.025,
       );
     });
+    this.titleTrack?.update(this.titleScreen && !this.paused, this.levels[1]!);
+    this.musicWet?.gain.setTargetAtTime(
+      this.titleScreen || this.tailTimer !== null ? 0 : 0.12,
+      context.currentTime,
+      0.24,
+    );
   }
 
   /** Called from the authoritative post-step HUD; never creates a context. */
@@ -198,6 +226,11 @@ export class AudioEngine {
     }
     return {
       context: this.context?.state ?? "locked",
+      title: {
+        active: this.titleScreen,
+        track:
+          this.titleTrack?.status ?? (this.titleTheme.url ? "idle" : "absent"),
+      },
       enabled:
         !this.disposed && !this.paused && this.context?.state === "running",
       disposed: this.disposed,
@@ -475,6 +508,8 @@ export class AudioEngine {
 
   /** Death UI keeps only its already-created cue; it never creates audio. */
   finishDeath(): void {
+    this.titleTrack?.update(false, 0);
+    this.titleTrack?.stop();
     if (this.tailTimer !== null) return;
     const context = this.context;
     const death = [...this.voices]
@@ -523,6 +558,8 @@ export class AudioEngine {
     this.lifecycle++;
     this.clearTail();
     this.paused = true;
+    this.titleTrack?.update(false, 0);
+    this.titleTrack?.stop();
     this.stopScheduler();
     for (const voice of [...this.voices]) this.release(voice);
     this.mix.engine = this.mix.alarm = this.mix.combat = this.mix.boss = 0;
@@ -552,10 +589,11 @@ export class AudioEngine {
     ) {
       this.setLevels(this.levels[0]!, this.levels[1]!, this.levels[2]!);
       this.musicWet?.gain.setTargetAtTime(
-        0.12,
+        this.titleScreen ? 0 : 0.12,
         this.context.currentTime,
         0.025,
       );
+      if (this.titleScreen) void this.titleTrack?.load();
       this.startScheduler();
     }
   }
@@ -567,6 +605,8 @@ export class AudioEngine {
     this.clearTail();
     this.paused = true;
     this.stopScheduler();
+    this.titleTrack?.dispose();
+    this.titleTrack = null;
     for (const voice of [...this.voices]) this.release(voice);
     for (const node of this.graph) node.disconnect();
     this.graph = [];
@@ -628,6 +668,8 @@ export class AudioEngine {
     echo.connect(wet);
     wet.connect(this.master);
     this.sfx.connect(this.master);
+    if (this.titleTheme.url)
+      this.titleTrack = new TitleTrack(context, this.master, this.titleTheme);
     this.master.connect(limiter);
     limiter.connect(ceiling);
     ceiling.connect(context.destination);
@@ -681,6 +723,7 @@ export class AudioEngine {
   }
 
   private scoreStep(time: number, step: number, length: number): void {
+    if (this.titleScreen) return;
     const bar = Math.floor(step / 16) % CHORDS.length;
     const beat = step % 16;
     const chord = CHORDS[bar]!;
@@ -809,6 +852,7 @@ export class AudioEngine {
     const context = this.context;
     if (!context || context.state !== "running" || this.paused || this.disposed)
       return;
+    if (this.titleScreen) return;
     const now = context.currentTime;
     this.mix = advanceMix(this.mix, this.state, now - this.mixTime);
     this.mixTime = now;

@@ -176,11 +176,15 @@ body:not(.pixel-ready) #universe {
 }
 .launch-card {
   position: relative;
-  width: min(calc(440px * var(--ui-scale, 1)), 100%);
-  height: min(calc(300px * var(--ui-scale, 1)), 100%);
+  width: min(calc(384px * var(--ui-scale, 1)), 100%);
+  height: auto;
+  border: 0;
+  background: transparent;
   display: flex;
   flex-direction: column;
-  gap: calc(5px * var(--ui-scale, 1));
+  align-items: center;
+  gap: clamp(8px, 1.5dvh, 16px);
+  text-align: center;
   overflow: auto;
   overscroll-behavior: contain;
   scrollbar-width: thin;
@@ -195,27 +199,33 @@ body:not(.pixel-ready) #universe {
   font-weight: normal;
   line-height: 0.9;
   margin: 0;
-  height: min(calc(104px * var(--ui-scale, 1)), 28dvh);
+  width: min(100%, calc(37dvh * 8 / 3));
+  height: auto;
+  aspect-ratio: 8 / 3;
   color: #ecfaff;
 }
 .launch-card h1 span {
   color: var(--cyan);
 }
-.title-crest {
-  position: absolute;
-  right: var(--ui-pad);
-  top: var(--ui-pad);
-  width: calc(24px * var(--ui-scale, 1));
-  height: calc(24px * var(--ui-scale, 1));
-}
 .launch-card p {
-  font-size: var(--ui-text);
+  font-size: var(--ui-caption);
   color: #a2b0c9;
   line-height: 1.35;
   margin: 0;
 }
 .launch-card button {
   width: 100%;
+}
+.launch-card > .primary-button,
+.title-actions {
+  width: min(100%, 320px);
+}
+.launch-card .control-guide,
+.launch-card .build-line {
+  width: min(100%, 480px);
+}
+.launch-card .build-line {
+  border: 0;
 }
 .title-actions {
   display: grid;
@@ -637,7 +647,7 @@ body:not(.pixel-ready) #universe {
   display: none;
 }
 .short-ui .launch-card h1 {
-  height: min(calc(76px * var(--ui-scale, 1)), 26dvh);
+  width: min(100%, calc(32dvh * 8 / 3));
 }
 .short-ui .settings {
   gap: calc(10px * var(--ui-scale, 1));
@@ -1116,7 +1126,7 @@ body.reduced-motion *::after {
   }
   .short-ui .launch-card h1,
   .launch-card h1 {
-    height: 104px;
+    width: min(100%, 256px);
   }
   .launch-card p,
   .launch-card .control-guide,

@@ -251,7 +251,12 @@ function conflictFixture() {
       lastTime: 10,
       menuTab: "pause",
       input: { enabled: true, reset() {} },
-      audio: { update() {}, resume: async () => {}, suspend() {} },
+      audio: {
+        setTitleScreen() {},
+        update() {},
+        resume: async () => {},
+        suspend() {},
+      },
       matchMedia: () => ({ matches: false }),
       paintUpgrades() {},
       paintMeishiCard() {
@@ -518,7 +523,7 @@ function creationFixture() {
     matchMedia: () => ({ matches: context.portrait }),
     menu: { hidden: true },
     deathScreen: { hidden: true },
-    audio: { resume: async () => {}, suspend() {} },
+    audio: { setTitleScreen() {}, resume: async () => {}, suspend() {} },
     lastTime: 0,
     paused: true,
     syncFlightState() {

@@ -187,6 +187,29 @@ async function fixture() {
   await engine.unlock();
   return { engine, context: engine.context, timers };
 }
+
+test("title mode gates world score and effects on the existing context then restores music controls", async () => {
+  const { engine, context, timers } = await fixture();
+  engine.setLevels(0.6, 0.5, 0.7);
+  engine.play({ kind: "shot", x: 0, y: 0, intensity: 1 });
+  assert([...engine.voices].some((v) => v.lane === "sfx"));
+  engine.setTitleScreen(true);
+  assert.equal(engine.music.gain.value, 0);
+  assert.equal(engine.musicWet.gain.value, 0);
+  assert.equal(engine.master.gain.value, 0.6);
+  assert.equal([...engine.voices].filter((v) => v.lane === "sfx").length, 0);
+  const count = context.sources.length;
+  context.advance(0.5);
+  for (const tick of timers.values()) tick();
+  assert.equal(context.sources.length, count, "no new gameplay score in title");
+  engine.setTitleScreen(false);
+  assert.equal(engine.music.gain.value, 0.5);
+  assert.equal(engine.musicWet.gain.value, 0.12);
+  assert.equal(engine.context, context, "no second AudioContext");
+  engine.suspend();
+  assert.equal(timers.size, 0);
+  engine.dispose();
+});
 const cue = (kind, intensity = 1) => ({ kind, x: 10, y: -20, intensity });
 const sfx = (engine) => [...engine.voices].filter((v) => v.lane === "sfx");
 function play(engine, kind, intensity = 1) {

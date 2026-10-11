@@ -292,6 +292,9 @@ function fixture() {
     input: { enabled: true, reset() {} },
     pixelUi: { invalidate() {} },
     audio: {
+      setTitleScreen(active) {
+        this.titleScreen = active;
+      },
       update() {},
       suspend() {},
       async resume() {},

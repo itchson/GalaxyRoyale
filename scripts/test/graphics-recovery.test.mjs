@@ -20,6 +20,7 @@ const names = [
   "resume",
   "canSimulateFlight",
   "syncFlightState",
+  "onVisibilityChanged",
   "frame",
   "restoreUi",
   "onWebglLost",
@@ -129,6 +130,9 @@ function harness() {
       },
     },
     audio: {
+      setTitleScreen(active) {
+        this.titleScreen = active;
+      },
       update(state) {
         calls.push(["audio-update", state]);
       },
@@ -312,7 +316,10 @@ test("pending preparation leaves Game readable and defers GPU resize to latest d
     (v) => Array.isArray(v) && v[0] === "audio-update",
   );
   assert.ok(update > resize && update < h.calls.indexOf("audio-resume"));
-  assert.deepEqual(JSON.parse(JSON.stringify(h.calls[update][1])), { ...c.galaxy.hud().audio, corporation: null });
+  assert.deepEqual(JSON.parse(JSON.stringify(h.calls[update][1])), {
+    ...c.galaxy.hud().audio,
+    corporation: null,
+  });
   assert.equal(c.galaxy.hud().audio.corporation, undefined);
 });
 
@@ -387,7 +394,8 @@ test("settlement honors death, title, encounter, console, visibility and orienta
     assert.equal(await pending, true);
     assert.equal(c.paused, true);
     assert.equal(c.input.enabled, false);
-    assert.equal(h.calls.includes("audio-resume"), false);
+    // A visible title remains simulation-paused while its music resumes.
+    assert.equal(h.calls.includes("audio-resume"), !c.launched);
   }
   const h = harness();
   h.context.paused = true;
@@ -395,6 +403,36 @@ test("settlement honors death, title, encounter, console, visibility and orienta
   h.gate.resolve({});
   assert.equal(await pending, true);
   assert.equal(h.context.paused, false);
+});
+
+test("pre-init title visibility stops audio before a Game exists and resumes only when visible", () => {
+  const h = harness(),
+    c = h.context;
+  c.galaxy = null;
+  c.launched = false;
+  c.document.hidden = true;
+  c.onVisibilityChanged();
+  assert.deepEqual(h.calls, ["audio-suspend"]);
+  c.document.hidden = false;
+  c.onVisibilityChanged();
+  assert.deepEqual(h.calls, ["audio-suspend", "audio-resume"]);
+});
+
+test("title recovery resumes only visible eligible title audio and leaves flight stopped", async () => {
+  for (const hidden of [false, true]) {
+    const h = harness(),
+      c = h.context;
+    c.launched = false;
+    c.document.hidden = hidden;
+    const pending = c.recover("title loss");
+    assert(h.calls.includes("audio-suspend"));
+    h.gate.resolve({});
+    assert.equal(await pending, true);
+    assert.equal(c.audio.titleScreen, true);
+    assert.equal(c.paused, true);
+    assert.equal(c.input.enabled, false);
+    assert.equal(h.calls.includes("audio-resume"), !hidden);
+  }
 });
 
 test("graphics recovery restores a live menu without restoring flight controls", async () => {

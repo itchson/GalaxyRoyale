@@ -2,6 +2,7 @@ import "./style.css";
 import { FlightInput } from "./input";
 import { watchPwaUpdates } from "./pwa-updates";
 import { AudioEngine, type AudioState } from "./audio";
+import { TITLE_THEME } from "./title-theme";
 import { PixelUiBridge } from "./pixel-ui";
 import { paintFlightMenu, type FlightMenuHud } from "./flight-menu";
 import { paintMeishiCard } from "./meishi";
@@ -177,7 +178,8 @@ const element = <T extends HTMLElement>(id: string) =>
   document.getElementById(id) as T;
 let canvas = element<HTMLCanvasElement>("universe");
 const store = new SaveStore();
-const audio = new AudioEngine();
+const audio = new AudioEngine(TITLE_THEME);
+audio.setTitleScreen(true);
 const settings = loadSettings();
 document.body.classList.toggle("reduced-motion", settings.reduced_motion);
 audio.setLevels(settings.master, settings.music, settings.sfx);
@@ -820,6 +822,7 @@ function syncFlightState(): void {
     lastTime = 0;
   }
   input.enabled = run && menu.hidden;
+  audio.setTitleScreen(!launched);
   if (run) {
     // A profile/world transition may precede the next simulation frame.
     const soundHud = galaxy.hud();
@@ -827,6 +830,14 @@ function syncFlightState(): void {
       ...soundHud.audio,
       corporation: soundHud.identity?.corporation ?? null,
     });
+    void audio.resume().catch(() => {});
+  } else if (
+    !launched &&
+    !document.hidden &&
+    !recovering &&
+    !graphicsFailed &&
+    !webglLifecycle?.lost
+  ) {
     void audio.resume().catch(() => {});
   } else audio.suspend();
 }
@@ -1505,7 +1516,7 @@ async function recover(_trigger: unknown): Promise<boolean> {
     if (recoverAfterContextRestore && !webglLifecycle?.lost) {
       recoverAfterContextRestore = false;
       void recover("WebGL restored during preparation");
-    }
+    } else if (!launched) syncFlightState();
   }
 }
 function frame(time: number): void {
@@ -1875,6 +1886,12 @@ async function init(): Promise<void> {
       );
   }
 }
+// Browser autoplay rules require a gesture; the title track uses the existing
+// context and never installs a second media player. No request without a track.
+for (const gesture of ["pointerdown", "keydown"] as const)
+  launchScreen.addEventListener(gesture, () => {
+    if (!launched && !document.hidden && TITLE_THEME.url) void audio.unlock();
+  });
 launch.addEventListener("click", async () => {
   const epoch = ++transitionEpoch;
   await audio.unlock();
@@ -2061,7 +2078,7 @@ function returnToTitle(): void {
   galaxy.set_paused(true);
   galaxy.set_ui_mode(2);
   document.body.classList.remove("engine-flight");
-  audio.suspend();
+  syncFlightState();
   pixelUi.invalidate();
   launch.focus();
 }
@@ -2317,18 +2334,23 @@ window.addEventListener("keydown", (event) => {
     interactSite();
 });
 window.addEventListener("resize", resize);
-document.addEventListener("visibilitychange", () => {
-  if (!galaxy) return;
+function onVisibilityChanged(): void {
+  // The title may unlock music before the asynchronous WASM initialization.
+  if (document.hidden) audio.suspend();
+  if (!galaxy) {
+    if (!document.hidden && !launched) void audio.resume().catch(() => {});
+    return;
+  }
   if (document.hidden) {
     input?.reset();
     galaxy.cancel_course();
     destination = null;
-    audio.suspend();
     narrative.pause();
     save(galaxy.profile());
   }
   syncFlightState();
-});
+}
+document.addEventListener("visibilitychange", onVisibilityChanged);
 for (const key of ["master", "music", "sfx"] as const) {
   const slider = element<HTMLInputElement>(`${key}-volume`);
   slider.value = String(settings[key]);

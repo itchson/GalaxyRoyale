@@ -273,6 +273,9 @@ function fixture() {
       update(state) {
         calls.push(["audio-update", state]);
       },
+      setTitleScreen(active) {
+        this.titleScreen = active;
+      },
       async unlock() {},
       suspend() {
         calls.push("audio-suspend");

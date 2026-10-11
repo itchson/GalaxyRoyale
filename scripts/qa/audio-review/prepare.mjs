@@ -51,6 +51,13 @@ export async function prepare(output) {
 
   const sources = [
     [
+      "title-theme.js",
+      "apps/game/src/title-theme.ts",
+      await fs.readFile(
+        path.join(PROJECT_ROOT, "apps/game/src/title-theme.ts"),
+      ),
+    ],
+    [
       "audio.js",
       "apps/game/src/audio.ts",
       await fs.readFile(path.join(PROJECT_ROOT, "apps/game/src/audio.ts")),
@@ -88,7 +95,9 @@ export async function prepare(output) {
       );
     const js =
       `// Actual source: ${source}; SHA256 ${sha(bytes)}\n` +
-      result.outputText.replaceAll('"./audio-state.ts"', '"./audio-state.js"');
+      result.outputText
+        .replaceAll('"./audio-state.ts"', '"./audio-state.js"')
+        .replaceAll('"./title-theme.ts"', '"./title-theme.js"');
     modules.push([name, js]);
     inputs[source] = {
       bytes: bytes.length,
