@@ -39,6 +39,16 @@ reference except at most six iris accents; all chest cells retain the converted
 source. Blink and speech states keep the same occupied mask and do not alter
 the silhouette or torso.
 
+Regeneration verifies the full dimensions and decoded RGBA bytes of all 30
+authored layers and all three software previews against their committed PNGs.
+Only after equality does it retain those canonical PNG file bytes for import.
+Windows Pillow12.3.0 uses zlib1.3.1.zlib-ng while the observed Linux wheel uses
+zlib1.3: their compressed PNG bytes differ even when every decoded cell is
+identical. The canonical PNG archive preserves real file SHA provenance;
+source-derived art is still regenerated independently and a one-cell color,
+alpha or dimension mismatch fails before replacing any output PNG. Whole-atlas
+raw bytes, raw manifest hashes and palette/index checks remain exact.
+
 Ten binary-alpha PNG layers per type are imported by the existing offline
 asset-pack tool: body, five eyes (neutral, focused, concerned, pleased, blink)
 and four mouths (rest, small, open, smile). This subsequent import performs no
@@ -112,14 +122,40 @@ python scripts/asset-kikai-detail.py
 python scripts/asset-kikai-detail-tests.py
 ```
 
-All 13 focused Python tests passed locally on 2026-10-11 with Python 3.12.14
-and Pillow 12.3.0. They verify source
+The earlier local authoring validation records 13 checks with Python 3.12.14
+and Pillow 12.3.0. The portability repair adds two focused tests: valid PNG
+compression variants preserve canonical encoded bytes after exact RGBA
+verification, while changed color, alpha, dimensions and missing canonical
+files fail closed. The current suite contains 15 tests. It verifies source
 provenance, committed-atlas equality against source regeneration, exact PNG
 import/indexed roundtrip, declared conversion loss, all 60 constant/disjoint
 pose masks, neutral/chest preservation, distinct type silhouettes, gold irises,
 independent roles and exact forehead-color preservation, palette/occupied
 bounds, and malformed-input rejection.
 They do not certify anatomy, execute the native adapter or measure a device.
+
+The portability repair passed all 15 checks locally on Windows11 with Python
+3.12.14/Pillow12.3.0 and WSL Ubuntu24.04 with Python3.12.3/Pillow12.3.0.
+The original Linux CI failure at run38122067411, root f6c7140, was reproduced
+with the same first differing compressed-body SHA. A new clean CI run using
+its pinned Python3.12.10 remains a separate acceptance gate. The accepted
+runtime atlas SHA31fa6a1b04d83f3d5fad377562e73c6ad35530b028626a1136c5b56afd9ea661
+is unchanged by the repair. The checked validation record retains the earlier
+authoring/mask milestone; new local portability logs are under
+`work/kikai-art-portability/`.
+
+For an intentional reviewed art change, stage regenerated PNGs and a pack in a
+separate directory rather than overwriting the archive silently:
+
+```powershell
+python scripts/asset-kikai-detail.py --output-dir work/kikai-next-art --replace-authored-pngs
+```
+
+Review the changed source cells, role masks, palette, previews and provenance
+before adopting that staged output. The replacement option deliberately
+records that platform's new PNG encoding. Normal reproduction omits it and
+requires exact agreement with the canonical authored PNGs. It is not needed
+for the portability fix; that fix retains the accepted runtime atlas bytes.
 
 Root and the gameplay specialist independently viewed the corrected full-size
 sources and authored 192×256 overview. Their scoped visual review found flat

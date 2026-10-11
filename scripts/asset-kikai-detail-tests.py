@@ -72,6 +72,44 @@ class DetailArtTests(unittest.TestCase):
             for key in KEYS:
                 self.assertEqual(roundtrip[key], atlas[key])
 
+    def test_equivalent_png_compression_preserves_archived_bytes_after_full_rgba_check(self):
+        image = Image.new("RGBA", (8, 8), (17, 91, 42, 255))
+        image.putpixel((4, 3), (250, 217, 194, 0))
+        archived = Path(self.temp.name) / "compressed-reference.png"
+        other_encoding = Path(self.temp.name) / "uncompressed-source.png"
+        output = Path(self.temp.name) / "verified-output.png"
+        image.save(archived, compress_level=9)
+        image.save(other_encoding, compress_level=0)
+        self.assertNotEqual(archived.read_bytes(), other_encoding.read_bytes())
+        with Image.open(other_encoding) as generated:
+            detail.write_authored_png(generated, output, archived)
+        self.assertEqual(output.read_bytes(), archived.read_bytes())
+        # The actual full regeneration must verify all30 layers and3
+        # previews before reusing their file bytes for strict provenance.
+        checked = ROOT / "assets/ui/kikai/detail"
+        for kind in ("dora", "doro", "talo"):
+            for name in self.atlas["profiles"][kind]["sprites"]:
+                self.assertEqual((self.output / kind / "source" / f"{name}.png").read_bytes(),
+                                 (checked / kind / "source" / f"{name}.png").read_bytes())
+
+    def test_canonical_png_pixel_alpha_dimension_and_missing_input_mismatch_fail_closed(self):
+        image = Image.new("RGBA", (8, 8), (17, 91, 42, 255))
+        archived = Path(self.temp.name) / "guard-reference.png"
+        output = Path(self.temp.name) / "guard-output.png"
+        image.save(archived)
+        output.write_bytes(b"unchanged sentinel")
+        changed_pixel = image.copy()
+        changed_pixel.putpixel((3, 4), (18, 91, 42, 255))
+        changed_alpha = image.copy()
+        changed_alpha.putpixel((3, 4), (17, 91, 42, 254))
+        for generated in (changed_pixel, changed_alpha, image.crop((0, 0, 7, 8))):
+            with self.assertRaisesRegex(ValueError, "RGBA differs"):
+                detail.write_authored_png(generated, output, archived)
+            self.assertEqual(output.read_bytes(), b"unchanged sentinel")
+        with self.assertRaisesRegex(ValueError, "Canonical PNG missing"):
+            detail.write_authored_png(image, output, Path(self.temp.name) / "missing.png")
+        self.assertEqual(output.read_bytes(), b"unchanged sentinel")
+
     def test_conversion_loss_is_explicit_and_never_an_upscaled96_pack(self):
         for kind, atlas in self.atlas["profiles"].items():
             conversion = atlas["asset_metadata"]["provenance"]["conversion"]

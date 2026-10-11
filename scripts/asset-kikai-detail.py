@@ -70,6 +70,29 @@ def write_json(path, value):
                     encoding="utf-8", newline="\n")
 
 
+def write_authored_png(image, output, canonical, replace=False):
+    """Verify regenerated pixels before preserving archived PNG encoding.
+
+    Pillow wheels can use different zlib implementations on Windows/Linux.
+    The PNG compressor is not part of the art, but its bytes are provenance
+    inputs to asset-pack. Never substitute archived pixels for regeneration.
+    Intentional authoring updates require the explicit CLI replacement flag.
+    """
+    if not replace:
+        if not canonical.is_file():
+            raise ValueError(f"Canonical PNG missing: {canonical}; use --replace-authored-pngs only for an intentional reviewed asset update")
+        with Image.open(canonical) as stored:
+            archived = stored.convert("RGBA")
+            generated = image.convert("RGBA")
+            if archived.size != generated.size or archived.tobytes() != generated.tobytes():
+                raise ValueError(f"Regenerated RGBA differs from canonical PNG: {canonical}; review art before --replace-authored-pngs")
+        output.parent.mkdir(parents=True, exist_ok=True)
+        output.write_bytes(canonical.read_bytes())
+        return
+    output.parent.mkdir(parents=True, exist_ok=True)
+    image.save(output)
+
+
 def source_records():
     metadata = json.loads((ROOT / "assets/concepts/kikai/detail/generation.json").read_text(encoding="utf-8"))
     records = {"dora": metadata["dora"]} | metadata["portraits"]
@@ -348,7 +371,7 @@ def validate_profile(atlas):
     return len(body | eyes | mouth)
 
 
-def author(output):
+def author(output, replace_authored_pngs=False):
     generation, records = source_records()
     output.mkdir(parents=True, exist_ok=True)
     profiles, summaries, previews = {}, {}, {}
@@ -359,7 +382,9 @@ def author(output):
         folder = output / kind
         (folder / "source").mkdir(parents=True, exist_ok=True)
         for name, image in layers.items():
-            image.save(folder / "source" / f"{name}.png")
+            write_authored_png(image, folder / "source" / f"{name}.png",
+                               ROOT / "assets/ui/kikai/detail" / kind / "source" / f"{name}.png",
+                               replace_authored_pngs)
         palette = [0] + sorted({pack.color(p) for image in layers.values() for p in image.get_flattened_data() if p[3]})
         if len(palette) > 64:
             raise ValueError(f"{kind}: authored palette exceeds64: {len(palette)}")
@@ -410,7 +435,8 @@ def author(output):
             draw.text((x, y - 18), kind.upper() + " / " + labels[column], fill=(179, 217, 229))
             enlarged = image.resize((384, 512), Image.Resampling.NEAREST)
             canvas.paste(enlarged, (x, y), enlarged)
-    canvas.save(output / "authoring-contact-sheet.png")
+    write_authored_png(canvas, output / "authoring-contact-sheet.png",
+                       ROOT / "assets/ui/kikai/detail/authoring-contact-sheet.png", replace_authored_pngs)
     overview = Image.new("RGB", (3 * 400, 544), (5, 11, 18))
     draw = ImageDraw.Draw(overview)
     for column, (kind, images) in enumerate(previews.items()):
@@ -418,7 +444,8 @@ def author(output):
         draw.text((x, 6), kind.upper() + " /192x256 source cells / authoring preview", fill=(179, 217, 229))
         enlarged = images[0].resize((384, 512), Image.Resampling.NEAREST)
         overview.paste(enlarged, (x, 24), enlarged)
-    overview.save(output / "authoring-overview.png")
+    write_authored_png(overview, output / "authoring-overview.png",
+                       ROOT / "assets/ui/kikai/detail/authoring-overview.png", replace_authored_pngs)
     role_review = Image.new("RGB", (3 * 400, 3 * 544), (5, 11, 18))
     draw = ImageDraw.Draw(role_review)
     for row, (main, sub) in enumerate((("PAN", "RENKO"), ("HUGO", "PAN"), ("RENKO", "HUGO"))):
@@ -427,7 +454,8 @@ def author(output):
             draw.text((x, y - 18), f"{kind.upper()} / {main} hair / {sub} horns / software roles", fill=(179, 217, 229))
             image = corporate_preview(atlas, main, sub).resize((384, 512), Image.Resampling.NEAREST)
             role_review.paste(image, (x, y), image)
-    role_review.save(output / "corporate-role-review.png")
+    write_authored_png(role_review, output / "corporate-role-review.png",
+                       ROOT / "assets/ui/kikai/detail/corporate-role-review.png", replace_authored_pngs)
     return result, summaries
 
 
@@ -435,6 +463,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output-dir", type=Path, default=ROOT / "assets/ui/kikai/detail")
     parser.add_argument("--prepare-only", action="store_true", help="Inspect explicit192-grid fits before authoring features")
+    parser.add_argument("--replace-authored-pngs", action="store_true",
+                        help="Explicitly replace archived PNG encodings/pixels for a reviewed intentional art update")
     args = parser.parse_args()
     if args.prepare_only:
         _, records = source_records()
@@ -445,7 +475,7 @@ def main():
             image.resize((576, 768), Image.Resampling.NEAREST).save(args.output_dir / f"{kind}-fitted-review.png")
             print(json.dumps({"kind": kind, "conversion": conversion}))
         return
-    _, summaries = author(args.output_dir)
+    _, summaries = author(args.output_dir, args.replace_authored_pngs)
     print(json.dumps(summaries))
 
 
