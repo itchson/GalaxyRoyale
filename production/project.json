@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 858,
+  "revision": 871,
   "name": "Galaxy Royale",
   "phase": "Playable solo slice → content and validation",
-  "updatedAt": "2026-10-11T19:55:24.659Z",
+  "updatedAt": "2026-10-11T20:38:54.314Z",
   "tasks": [
     {
       "id": "studio",
@@ -7203,13 +7203,13 @@
       "description": "Read-only current source and retained native/browser evidence. Propose at most one source-backed visual correction; no broad rewrite or fabricated renderer validation.",
       "department": "Art",
       "owner": "/root/production_research",
-      "status": "active",
+      "status": "complete",
       "priority": "normal",
       "dependencies": [],
       "acceptanceCriteria": [
         {
           "text": "Source-pinned review of zoom, parallax, animation and reduced-detail behavior with actual evidence.",
-          "met": false
+          "met": true
         }
       ],
       "evidence": [
@@ -7217,12 +7217,77 @@
           "label": "Actual dispatched specialist assignments",
           "kind": "artifact",
           "path": "artifacts/next-native-coop-20261012/assignments.md"
+        },
+        {
+          "label": "Actual source-pinned audit and comet correction",
+          "kind": "artifact",
+          "path": "artifacts/native-echo-comet-20261012/comet-handoff.md"
+        },
+        {
+          "label": "Root actual comet contracts",
+          "kind": "artifact",
+          "path": "artifacts/native-echo-comet-20261012/comet-focused.log"
         }
       ],
       "blocker": "",
-      "revision": 1,
+      "revision": 2,
       "createdAt": "2026-10-11T19:55:24.572Z",
-      "updatedAt": "2026-10-11T19:55:24.572Z"
+      "updatedAt": "2026-10-11T20:15:54.547Z"
+    },
+    {
+      "id": "task-dcff078f",
+      "title": "Replace badge-like cosmic remnant with open asymmetric ejecta",
+      "description": "Root reproduced the current thin ring in normal WebGL2 at seed871238449, camera[-35332.8203,22642.1445],zoom1.6. Art owns cache-only morphology; Engine independent source review; Root dual-renderer comparison. Preserve parallax, reduced-motion behavior, part counts and quad limits.",
+      "department": "Art",
+      "owner": "/root/production_research",
+      "status": "complete",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Current-source before/after native packet evidence and meaningful open-filament morphology tests.",
+          "met": true
+        },
+        {
+          "text": "Independent budget/transform/motion review of frozen source.",
+          "met": true
+        },
+        {
+          "text": "Source-matched actual WebGPU/WebGL2 fixed-camera comparison.",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual current WebGL2 baseline",
+          "kind": "artifact",
+          "path": "artifacts/native-echo-comet-20261012/remnant-webgl2-before.jpg"
+        },
+        {
+          "label": "Frozen gas amendment",
+          "kind": "artifact",
+          "path": "artifacts/native-echo-comet-20261012/remnant-gas-handoff.md"
+        },
+        {
+          "label": "Independent source, packets and actual frame review",
+          "kind": "artifact",
+          "path": "artifacts/native-echo-comet-20261012/remnant-gas-review.md"
+        },
+        {
+          "label": "Final actual WebGPU",
+          "kind": "artifact",
+          "path": "artifacts/native-echo-comet-20261012/remnant-gas-webgpu-final.jpg"
+        },
+        {
+          "label": "Final actual WebGL2",
+          "kind": "artifact",
+          "path": "artifacts/native-echo-comet-20261012/remnant-gas-webgl2-final.jpg"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-11T20:15:54.584Z",
+      "updatedAt": "2026-10-11T20:38:54.191Z"
     }
   ],
   "reviews": [
@@ -9124,6 +9189,87 @@
           "label": "QA warp guard review",
           "kind": "artifact",
           "path": "artifacts/league-coop-native-20261012/warp-invite-review.md"
+        }
+      ]
+    },
+    {
+      "id": "review-b4197b8c",
+      "title": "Actual native Echo and deep-space audit discussion",
+      "body": "Engine implemented ordinary per-pilot Pulse Echo and exported bounded evolution metadata; Root added strict browser validation and tests replaying real native serializer values. Art independently reviewed frozen native source with no scoped blocker, without executing it. Gameplay verified coherent immutable stage preparation; no new RTC run yet. Art found a real comet head/dust clock discontinuity and fixed it with native continuity tests. A subsequent current WebGL2 inspection reproduced the cosmic remnant as a weak near-closed ring; open asymmetric ejecta is now separately assigned. This is an actual asynchronous written discussion, not a simulated meeting. Interrupted Spark attempts produced no review verdict.",
+      "author": "Root",
+      "source": "Actual integrated source, tests and current WebGL2 inspection",
+      "createdAt": "2026-10-11T20:15:54.649Z",
+      "participants": [
+        "Root",
+        "/root/engine_research",
+        "/root/production_research",
+        "/root/gameplay_design"
+      ],
+      "taskIds": [
+        "task-7e8e0a50",
+        "task-05dd95cd",
+        "task-3a781b5f",
+        "task-dcff078f"
+      ],
+      "evidence": [
+        {
+          "label": "Native Echo handoff",
+          "kind": "artifact",
+          "path": "artifacts/native-echo-comet-20261012/echo-handoff.md"
+        },
+        {
+          "label": "Independent source-only Echo review",
+          "kind": "artifact",
+          "path": "artifacts/native-echo-comet-20261012/echo-peer-review.md"
+        },
+        {
+          "label": "Comet audit",
+          "kind": "artifact",
+          "path": "artifacts/native-echo-comet-20261012/comet-handoff.md"
+        }
+      ]
+    },
+    {
+      "id": "review-83bfc623",
+      "title": "Rendered remnant iteration held; quiet league settings approved in scoped stills",
+      "body": "Frozen937c/b98 open-ejecta geometry passes native morphology and independent structural review. Actual Root WebGPU display still reads as isolated brown strings, so Root withheld visual completion and assigned faint irregular gas/clump shoulders in the same cached field. This is a subjective art concern, not a claimed native correctness failure. Separately, actual wide and848x480 changed-row settings frames were viewed by Gameplay; no scoped still-image overlap/readability blocker. Short neutral rails preserve section hierarchy and the same two chrome cells. Compact Session is below fold; no scroll/all-aspect acceptance was inferred. Both ordinary co-op stage runs remain pending and the c87 stage gate is now stale.",
+      "author": "Root",
+      "source": "Actual final-build WebGPU screenshots and independent retained-image review",
+      "createdAt": "2026-10-11T20:26:14.466Z",
+      "participants": [
+        "Root",
+        "/root/production_research",
+        "/root/engine_research",
+        "/root/gameplay_design"
+      ],
+      "taskIds": [
+        "task-dcff078f"
+      ],
+      "evidence": [
+        {
+          "label": "Actual current open-ejecta render; not visually accepted",
+          "kind": "artifact",
+          "path": "artifacts/native-echo-comet-20261012/remnant-offset-webgpu-final.jpg"
+        },
+        {
+          "label": "Independent native source-only proof",
+          "kind": "artifact",
+          "path": "artifacts/native-echo-comet-20261012/remnant-first-source-review.md"
+        },
+        {
+          "label": "Actual wide quieter league settings",
+          "kind": "artifact",
+          "path": "artifacts/native-echo-comet-20261012/settings-league-webgpu-final.jpg"
+        },
+        {
+          "label": "Actual compact quieter league settings",
+          "kind": "artifact",
+          "path": "artifacts/native-echo-comet-20261012/settings-league-webgpu-848.jpg"
+        },
+        {
+          "label": "Independent still-image settings review",
+          "kind": "artifact",
+          "path": "artifacts/native-echo-comet-20261012/settings-frame-review.md"
         }
       ]
     }
@@ -11806,6 +11952,161 @@
       ],
       "url": "http://league-final.localhost:4173/?qa=1&renderer=webgpu",
       "knownIssues": "Shared rewards/missions and full automatic co-op abilities remain incomplete. Ordinary Pulse Echo lacks native co-op fan/evolution metadata. Diagnostic-warp worlds reject native co-op entry. Physical performance and all-seed art approval remain pending."
+    },
+    {
+      "id": "build-09e8d40c",
+      "title": "Combined native Echo and continuous comet normal build",
+      "body": "Actual Root full checks and normal dual-renderer build. Browser applied the PWA update through Haven; loaded index-6k5CD0Ch.js and inspected seeded cosmic remnant in WebGL2. Native continuity tests do not certify moving GPU continuity. New owned RTC stage is prepared but not executed.",
+      "author": "Root",
+      "source": "Actual integrated source, tests and current WebGL2 inspection",
+      "createdAt": "2026-10-11T20:15:54.683Z",
+      "revision": "c87e482d32e8742294edd97c1fbb2a8a0a803e1a",
+      "evidence": [
+        {
+          "label": "Build identity",
+          "kind": "artifact",
+          "path": "artifacts/native-echo-comet-20261012/tested-build.json"
+        },
+        {
+          "label": "Actual native full output",
+          "kind": "artifact",
+          "path": "artifacts/native-echo-comet-20261012/workspace-tests.log"
+        },
+        {
+          "label": "Actual shell output",
+          "kind": "artifact",
+          "path": "artifacts/native-echo-comet-20261012/shell-tests.log"
+        },
+        {
+          "label": "Actual normal build output",
+          "kind": "artifact",
+          "path": "artifacts/native-echo-comet-20261012/build.log"
+        },
+        {
+          "label": "Strict native checks",
+          "kind": "artifact",
+          "path": "artifacts/native-echo-comet-20261012/clippy.log"
+        },
+        {
+          "label": "Strict WASM checks",
+          "kind": "artifact",
+          "path": "artifacts/native-echo-comet-20261012/clippy-wasm.log"
+        }
+      ],
+      "checks": [
+        {
+          "name": "Rust workspace:816 passed,8 explicit exporters ignored",
+          "result": "pass"
+        },
+        {
+          "name": "Shell:547 passed,3 skipped (two optional stage tests and existing Windows skip)",
+          "result": "pass"
+        },
+        {
+          "name": "Strict native and wasm32 Clippy",
+          "result": "pass"
+        },
+        {
+          "name": "Normal dual WASM, TypeScript, game/PWA and Studio build",
+          "result": "pass"
+        },
+        {
+          "name": "Actual Haven PWA application and matching WebGL2 shell",
+          "result": "pass"
+        },
+        {
+          "name": "New owned WebGL2 RTC and moving comet GPU continuity",
+          "result": "not_run"
+        },
+        {
+          "name": "Physical phones, eight remote peers and thirty-minute soak",
+          "result": "not_run"
+        }
+      ],
+      "url": "http://league-final.localhost:4173/?qa=1&renderer=webgl2",
+      "knownIssues": "Open-ejecta remnant authoring active. Guest transient FX, full signature parity, shared rewards/missions and Internet/NAT acceptance remain pending."
+    },
+    {
+      "id": "build-3490f418",
+      "title": "Open gas remnant and quiet league UI normal build",
+      "body": "Root integrated source-only reviewed gas shoulder amendment, built both normal backends, applied real PWA update, and compared the same seeded offset pose in WebGPU/WebGL2. Earlier thin-ring and bare-string iterations are retained. Bounded remnant task complete; broad art/motion/all-seed/physical approval remains open.",
+      "author": "Root",
+      "source": "Actual final source, execution logs and independent fixed-frame review",
+      "createdAt": "2026-10-11T20:38:54.213Z",
+      "revision": "d749bc6972dee2cc0eb63330bb729f427ce2e749",
+      "evidence": [
+        {
+          "label": "Actual build identity",
+          "kind": "artifact",
+          "path": "artifacts/native-echo-comet-20261012/gas-tested-build.json"
+        },
+        {
+          "label": "Actual native output",
+          "kind": "artifact",
+          "path": "artifacts/native-echo-comet-20261012/gas-workspace-tests.log"
+        },
+        {
+          "label": "Actual shell output",
+          "kind": "artifact",
+          "path": "artifacts/native-echo-comet-20261012/gas-shell-tests.log"
+        },
+        {
+          "label": "Actual normal build output",
+          "kind": "artifact",
+          "path": "artifacts/native-echo-comet-20261012/gas-build.log"
+        },
+        {
+          "label": "Strict native",
+          "kind": "artifact",
+          "path": "artifacts/native-echo-comet-20261012/gas-clippy.log"
+        },
+        {
+          "label": "Strict WASM",
+          "kind": "artifact",
+          "path": "artifacts/native-echo-comet-20261012/gas-clippy-wasm.log"
+        },
+        {
+          "label": "Scoped combined evidence",
+          "kind": "artifact",
+          "path": "artifacts/native-echo-comet-20261012/README.md"
+        }
+      ],
+      "checks": [
+        {
+          "name": "Rust workspace:818 passed,nine explicit exporters ignored",
+          "result": "pass"
+        },
+        {
+          "name": "Shell:547 passed,three skipped",
+          "result": "pass"
+        },
+        {
+          "name": "Strict native/all-target and wasm32 Clippy",
+          "result": "pass"
+        },
+        {
+          "name": "Normal dual WASM,TypeScript,game/PWA and Studio build",
+          "result": "pass"
+        },
+        {
+          "name": "Actual Haven PWA application and fixed WebGPU/WebGL2 views",
+          "result": "pass"
+        },
+        {
+          "name": "Wide/compact league UI stills and actual compact GL2 wheel reachability",
+          "result": "pass"
+        },
+        {
+          "name": "Moving comet GPU continuity and all-seed art",
+          "result": "not_run"
+        },
+        {
+          "name": "New owned GL2 RTC,remote eight peers,phones and30-minute soak",
+          "result": "not_run"
+        }
+      ],
+      "url": "http://league-final.localhost:4173/?qa=1&renderer=webgpu",
+      "knownIssues": "Remnant intentionally faint. Shared co-op rewards/missions, full signature parity and guest transient FX remain incomplete; oldc87 stage is stale and unlaunched."
     }
   ],
   "feedback": [],
@@ -20389,6 +20690,136 @@
       "author": "Root",
       "source": "Actual bounded next-slice dispatch",
       "createdAt": "2026-10-11T19:55:24.659Z"
+    },
+    {
+      "id": "234e26e7-33a8-4437-8d06-22f406d04a29",
+      "revision": 859,
+      "kind": "task.update",
+      "itemId": "task-3a781b5f",
+      "title": "Audit deep-space animation and particle depth for a concrete immersion defect",
+      "author": "Root",
+      "source": "Actual integrated source, tests and current WebGL2 inspection",
+      "createdAt": "2026-10-11T20:15:54.547Z"
+    },
+    {
+      "id": "c6724827-bb54-4e87-96ba-9032643fe7cd",
+      "revision": 860,
+      "kind": "task.create",
+      "itemId": "task-dcff078f",
+      "title": "Replace badge-like cosmic remnant with open asymmetric ejecta",
+      "author": "Root",
+      "source": "Actual integrated source, tests and current WebGL2 inspection",
+      "createdAt": "2026-10-11T20:15:54.584Z"
+    },
+    {
+      "id": "576c9c99-0084-4d8e-8ec1-52c5f6e31dbd",
+      "revision": 861,
+      "kind": "review",
+      "itemId": "review-b4197b8c",
+      "title": "Actual native Echo and deep-space audit discussion",
+      "author": "Root",
+      "source": "Actual integrated source, tests and current WebGL2 inspection",
+      "createdAt": "2026-10-11T20:15:54.649Z"
+    },
+    {
+      "id": "5711dd13-d1fa-45b4-be6a-b24396f82fe2",
+      "revision": 862,
+      "kind": "build",
+      "itemId": "build-09e8d40c",
+      "title": "Combined native Echo and continuous comet normal build",
+      "author": "Root",
+      "source": "Actual integrated source, tests and current WebGL2 inspection",
+      "createdAt": "2026-10-11T20:15:54.683Z"
+    },
+    {
+      "id": "db9d3de0-0f81-456e-a332-8f7f85d1a866",
+      "revision": 863,
+      "kind": "run",
+      "itemId": "run-9c058938",
+      "title": "Native simulation specialist · running",
+      "author": "Root",
+      "source": "Actual integrated source, tests and current WebGL2 inspection",
+      "createdAt": "2026-10-11T20:15:54.730Z"
+    },
+    {
+      "id": "1be70882-1ee6-4a03-9b5d-6daba59cd91e",
+      "revision": 864,
+      "kind": "run",
+      "itemId": "run-6ad4ee93",
+      "title": "League/deep-space art specialist · running",
+      "author": "Root",
+      "source": "Actual integrated source, tests and current WebGL2 inspection",
+      "createdAt": "2026-10-11T20:15:54.780Z"
+    },
+    {
+      "id": "ee349a5b-242b-4cdb-8b1c-d0478263ec87",
+      "revision": 865,
+      "kind": "run",
+      "itemId": "run-ba55ea3e",
+      "title": "Owned-loadout QA specialist · running",
+      "author": "Root",
+      "source": "Actual integrated source, tests and current WebGL2 inspection",
+      "createdAt": "2026-10-11T20:15:54.811Z"
+    },
+    {
+      "id": "1b4c07e4-161e-400d-a1e0-152f2e71812c",
+      "revision": 866,
+      "kind": "review",
+      "itemId": "review-83bfc623",
+      "title": "Rendered remnant iteration held; quiet league settings approved in scoped stills",
+      "author": "Root",
+      "source": "Actual final-build WebGPU screenshots and independent retained-image review",
+      "createdAt": "2026-10-11T20:26:14.466Z"
+    },
+    {
+      "id": "9f9b83e9-c8b1-4243-ade9-0068ba59d942",
+      "revision": 867,
+      "kind": "task.update",
+      "itemId": "task-dcff078f",
+      "title": "Replace badge-like cosmic remnant with open asymmetric ejecta",
+      "author": "Root",
+      "source": "Actual final source, execution logs and independent fixed-frame review",
+      "createdAt": "2026-10-11T20:38:54.191Z"
+    },
+    {
+      "id": "a46d8a63-59ec-48ed-b143-053765022212",
+      "revision": 868,
+      "kind": "build",
+      "itemId": "build-3490f418",
+      "title": "Open gas remnant and quiet league UI normal build",
+      "author": "Root",
+      "source": "Actual final source, execution logs and independent fixed-frame review",
+      "createdAt": "2026-10-11T20:38:54.213Z"
+    },
+    {
+      "id": "b344d9f2-dc5d-4c5a-8142-c3f1400b9edd",
+      "revision": 869,
+      "kind": "run",
+      "itemId": "run-4e0483c4",
+      "title": "Native simulation and independent engine reviewer · completed",
+      "author": "Root",
+      "source": "Actual final source, execution logs and independent fixed-frame review",
+      "createdAt": "2026-10-11T20:38:54.247Z"
+    },
+    {
+      "id": "ec462a45-cb38-4344-ac5e-b46c2d1317c0",
+      "revision": 870,
+      "kind": "run",
+      "itemId": "run-bed9df6f",
+      "title": "Deep-space art specialist · completed",
+      "author": "Root",
+      "source": "Actual final source, execution logs and independent fixed-frame review",
+      "createdAt": "2026-10-11T20:38:54.280Z"
+    },
+    {
+      "id": "a47f4c75-412d-4dbe-9010-a8ff8b74473e",
+      "revision": 871,
+      "kind": "run",
+      "itemId": "run-ee75c8c7",
+      "title": "League UI and owned-stage QA specialist · completed",
+      "author": "Root",
+      "source": "Actual final source, execution logs and independent fixed-frame review",
+      "createdAt": "2026-10-11T20:38:54.314Z"
     }
   ],
   "runRecords": [
@@ -28296,6 +28727,140 @@
       "author": "Root",
       "source": "Actual bounded next-slice dispatch",
       "createdAt": "2026-10-11T19:55:24.659Z"
+    },
+    {
+      "id": "run-9c058938",
+      "title": "Native simulation specialist · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Native simulation specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T20:15:54.717Z",
+      "taskIds": [
+        "task-7e8e0a50",
+        "task-dcff078f"
+      ],
+      "summary": "Ordinary Pulse Echo source complete and independently reviewed; now assigned read-only frozen remnant review. Broader authority acceptance remains active.",
+      "evidence": [
+        {
+          "label": "Actual assignment/evidence",
+          "kind": "artifact",
+          "path": "artifacts/native-echo-comet-20261012/echo-handoff.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual integrated source, tests and current WebGL2 inspection",
+      "createdAt": "2026-10-11T20:15:54.730Z"
+    },
+    {
+      "id": "run-6ad4ee93",
+      "title": "League/deep-space art specialist · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "League/deep-space art specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T20:15:54.767Z",
+      "taskIds": [
+        "task-dcff078f"
+      ],
+      "summary": "Comet clock correction complete with actual native tests; current browser ring reproduction received and cache-only open-ejecta refinement assigned.",
+      "evidence": [
+        {
+          "label": "Actual assignment/evidence",
+          "kind": "artifact",
+          "path": "artifacts/native-echo-comet-20261012/remnant-webgl2-before.jpg"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual integrated source, tests and current WebGL2 inspection",
+      "createdAt": "2026-10-11T20:15:54.780Z"
+    },
+    {
+      "id": "run-ba55ea3e",
+      "title": "Owned-loadout QA specialist · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Owned-loadout QA specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T20:15:54.803Z",
+      "taskIds": [
+        "task-05dd95cd"
+      ],
+      "summary": "Fresh immutable c87 owned stage prepared; no listener or RTC execution claimed. Final provenance handoff in progress.",
+      "evidence": [
+        {
+          "label": "Actual assignment/evidence",
+          "kind": "artifact",
+          "path": "artifacts/native-echo-comet-20261012/tested-build.json"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual integrated source, tests and current WebGL2 inspection",
+      "createdAt": "2026-10-11T20:15:54.811Z"
+    },
+    {
+      "id": "run-4e0483c4",
+      "title": "Native simulation and independent engine reviewer · completed",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Native simulation and independent engine reviewer",
+      "state": "completed",
+      "observedAt": "2026-10-11T20:38:54.236Z",
+      "taskIds": [
+        "task-7e8e0a50",
+        "task-dcff078f"
+      ],
+      "summary": "Completed ordinary native Pulse Echo and exact remnant source/packet review; independently viewed supplied final GPU+GL2 stills. No independent native/browser rerun claimed.",
+      "evidence": [
+        {
+          "label": "Actual scoped contribution",
+          "kind": "artifact",
+          "path": "artifacts/native-echo-comet-20261012/remnant-gas-review.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual final source, execution logs and independent fixed-frame review",
+      "createdAt": "2026-10-11T20:38:54.247Z"
+    },
+    {
+      "id": "run-bed9df6f",
+      "title": "Deep-space art specialist · completed",
+      "agentId": "/root/production_research",
+      "agentLabel": "Deep-space art specialist",
+      "state": "completed",
+      "observedAt": "2026-10-11T20:38:54.272Z",
+      "taskIds": [
+        "task-dcff078f"
+      ],
+      "summary": "Completed native comet clock correction and two iterative cached remnant morphologies; actual Root GPU concern prompted gas shoulders. Final fixed-frame acceptance is scoped,not all-seed.",
+      "evidence": [
+        {
+          "label": "Actual scoped contribution",
+          "kind": "artifact",
+          "path": "artifacts/native-echo-comet-20261012/remnant-gas-handoff.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual final source, execution logs and independent fixed-frame review",
+      "createdAt": "2026-10-11T20:38:54.280Z"
+    },
+    {
+      "id": "run-ee75c8c7",
+      "title": "League UI and owned-stage QA specialist · completed",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "League UI and owned-stage QA specialist",
+      "state": "completed",
+      "observedAt": "2026-10-11T20:38:54.291Z",
+      "taskIds": [
+        "task-05dd95cd"
+      ],
+      "summary": "Completed strict Echo boundary/source stage preparation and independent supplied wide/compact settings frame review. Owned RTC execution remains pending.",
+      "evidence": [
+        {
+          "label": "Actual scoped contribution",
+          "kind": "artifact",
+          "path": "artifacts/native-echo-comet-20261012/settings-frame-review.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual final source, execution logs and independent fixed-frame review",
+      "createdAt": "2026-10-11T20:38:54.314Z"
     }
   ],
   "phaseDescription": "Desktop-first Rust/WASM solo game and local Studio are implemented. Reviewed occupied-cell art, reproducible conversion, responsive native settings/icons and minimap, strict GitHub integration gates and source-backed Dev Bible are integrated. Natural campaign balance, human listening, owner-private update lifecycle and physical phones remain separate pending gates."

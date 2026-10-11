@@ -1,0 +1,11 @@
+{
+  "scope": "Actual Root CUA wheel input and read-only DOM observation; not a synthetic scroll mutation",
+  "build": "b98fedbe5ad114484a9e7ed4def5f39787af7503",
+  "renderer": "webgl2",
+  "viewport": [848, 480],
+  "input": {"position": [610, 260], "direction": "down", "pages": 1},
+  "content": {"scrollTop": 106.4000015258789, "clientHeight": 300, "scrollHeight": 406},
+  "observation": "Session heading, Save/Backup button and title icon are visibly reachable; title and close icon remain fixed. Scrolled upper rows are clipped at the content edge.",
+  "screenshot": "settings-league-webgl2-848-scrolled.jpg",
+  "limitation": "No all-aspect, touch, physical-phone or complete keyboard-flow acceptance inferred"
+}
