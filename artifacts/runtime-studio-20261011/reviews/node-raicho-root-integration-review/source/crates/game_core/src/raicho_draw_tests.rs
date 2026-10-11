@@ -1,0 +1,98 @@
+//! Actual Game extraction, distinct from the fine asset helper's isolated tests.
+use super::*;
+use engine_core::{AffineTransform, GpuTransform};
+
+fn fine_cells(game: &Game) -> Vec<([f32; 2], u32)> {
+    let motion = *game.world.get::<&Motion>(game.player).unwrap();
+    let actor = *game.world.get::<&Actor>(game.player).unwrap();
+    let parent = actor_transform(motion, actor)
+        .affine()
+        .compose(AffineTransform {
+            basis_x: Vec2::X * 0.5,
+            basis_y: Vec2::Y * 0.5,
+            ..AffineTransform::default()
+        });
+    let expected = GpuTransform::from(parent).with_material(ACTOR_MATERIAL);
+    let frame = game.render(1.0);
+    frame
+        .batches
+        .iter()
+        .flat_map(|batch| {
+            batch.pixels.iter().filter_map(|pixel| {
+                (batch.transforms[pixel.transform as usize] == expected)
+                    .then_some((pixel.local, pixel.color))
+            })
+        })
+        .collect()
+}
+
+fn licensed(main: &str) -> Game {
+    let mut game =
+        Game::new(identity::create_profile("doro", main, "pan", "0123456789abcdef").unwrap());
+    game.camera = Vec2::new(3750.0, 100.0);
+    game.previous_camera = game.camera;
+    {
+        let mut motion = game.world.get::<&mut Motion>(game.player).unwrap();
+        motion.position = game.camera;
+        motion.previous = motion.position;
+        motion.heading = 0.37;
+        motion.previous_heading = motion.heading;
+    }
+    game.set_reduced_motion(true);
+    game
+}
+
+#[test]
+fn actual_game_emits_fine_hulls_without_changing_gameplay_or_refilling_damage() {
+    for (main, expected) in [("pan", 1205), ("renko", 1176), ("hugo", 1740)] {
+        let mut game = licensed(main);
+        let saved = serde_json::to_string(game.profile()).unwrap();
+        let intact = fine_cells(&game);
+        assert_eq!(intact.len(), expected, "{main}");
+        for zoom in [0.6, 1.0, 1.6] {
+            game.set_viewport(800.0 / zoom, 360.0 / zoom);
+            assert_eq!(
+                fine_cells(&game),
+                intact,
+                "world extent must not erase {main} detail"
+            );
+        }
+        {
+            let point = Vec2::from_array(intact[0].0) * 0.5;
+            let mut body = game.world.get::<&mut PixelBody>(game.player).unwrap();
+            assert!(!body.damage(point, 0.8).is_empty());
+        }
+        let damaged = fine_cells(&game);
+        assert!(damaged.len() < intact.len());
+        let body = game.world.get::<&PixelBody>(game.player).unwrap();
+        for (local, _) in damaged {
+            let x = ((local[0] + 47.5) as usize) / 2;
+            let y = ((local[1] + 47.5) as usize) / 2;
+            assert!(
+                body.is_occupied(x, y),
+                "a destroyed cell was cosmetically refilled"
+            );
+        }
+        assert_eq!(serde_json::to_string(game.profile()).unwrap(), saved);
+    }
+}
+
+#[test]
+fn actual_fine_hull_uses_real_hit_and_critical_tint_with_unchanged_alpha() {
+    let mut game = licensed("pan");
+    let healthy = fine_cells(&game);
+    game.world.get::<&mut Actor>(game.player).unwrap().health = 10.0;
+    game.invulnerability = 0.0;
+    game.since_damage = 0.1;
+    let hit = fine_cells(&game);
+    assert_eq!(hit.len(), healthy.len());
+    for ((local, color), (hit_local, hit_color)) in healthy.iter().zip(hit.iter()) {
+        assert_eq!(local, hit_local);
+        assert_eq!(
+            *hit_color,
+            player_presentation::tint(*color, 10.0, 100.0, 0.1, 0.0, true)
+        );
+        assert_eq!(color >> 24, hit_color >> 24);
+    }
+    assert_ne!(healthy, hit);
+}

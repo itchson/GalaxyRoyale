@@ -1,0 +1,102 @@
+{
+  "commit": "2fe20c6401e65f8dcc790b537269e2de18d85b4d",
+  "parent": "a50aab678c98466e8c54838e39ca5a40a9f2b1b7",
+  "node": "v24.18.0",
+  "platform": "win32",
+  "architecture": "x64",
+  "owned": [
+    "apps/coop/store.mjs",
+    "apps/coop/server.mjs",
+    "apps/coop/README.md",
+    "scripts/test/coop-signalling.test.mjs"
+  ],
+  "source": [
+    {
+      "path": "apps/coop/store.mjs",
+      "committed_sha256": "fbe63a8178f08a6f638f89bd7d4e418c61339ff7096ad32e3028d72b80067c1a",
+      "working_sha256": "fbe63a8178f08a6f638f89bd7d4e418c61339ff7096ad32e3028d72b80067c1a",
+      "bytes": 19460,
+      "snapshot": "source/apps__coop__store.mjs"
+    },
+    {
+      "path": "apps/coop/server.mjs",
+      "committed_sha256": "0d2356ef504eeafbbfefec5c3888daa4a8ebead7892baf6c0a986e3684eecc20",
+      "working_sha256": "0d2356ef504eeafbbfefec5c3888daa4a8ebead7892baf6c0a986e3684eecc20",
+      "bytes": 11691,
+      "snapshot": "source/apps__coop__server.mjs"
+    },
+    {
+      "path": "apps/coop/README.md",
+      "committed_sha256": "4f35a5ab67bbf91e787a819bc481fb066be93e37468f1726e95f72b35fbfe04c",
+      "working_sha256": "4f35a5ab67bbf91e787a819bc481fb066be93e37468f1726e95f72b35fbfe04c",
+      "bytes": 11440,
+      "snapshot": "source/apps__coop__README.md"
+    },
+    {
+      "path": "scripts/test/coop-signalling.test.mjs",
+      "committed_sha256": "a7e795b75bd26e9920fb89886a1b752f3395016adb34ca1e8b0902f9193771a5",
+      "working_sha256": "a7e795b75bd26e9920fb89886a1b752f3395016adb34ca1e8b0902f9193771a5",
+      "bytes": 28536,
+      "snapshot": "source/scripts__test__coop-signalling.test.mjs"
+    },
+    {
+      "path": "AGENTS.md",
+      "committed_sha256": "bc9b1825fad84353b91fedd34cde67319015e25c86e9b057a83ad2ce3bd648c6",
+      "working_sha256": "b91f318ced11598207ec3730ff28f24126efff8f5813ebe962bdd3d32f66cdfc",
+      "bytes": 905,
+      "snapshot": "source/AGENTS.md"
+    },
+    {
+      "path": "package.json",
+      "committed_sha256": "0af9a72075f5b4ccfde64e49747136de9aa354e38a223b2bef90e0bb92d72a4b",
+      "working_sha256": "d04f8b6033d1ed21cfdf8afa2ef2315d8e4b5279bd8068508ce25b303d90d902",
+      "bytes": 1085,
+      "snapshot": "source/package.json"
+    },
+    {
+      "path": "pnpm-lock.yaml",
+      "committed_sha256": "6383d7a7deaf07367d08c79447c4faab012da63436cf23df3a1cbb82b4f183d1",
+      "working_sha256": "aab28ac69c754ea40aaf58749f6a97f1983f70307053ac5fcf70b5495e8fa2ed",
+      "bytes": 21972,
+      "snapshot": "source/pnpm-lock.yaml"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "first-tests.log",
+      "sha256": "56994f09be42e14cb16c9eef338596cf7af57a04cd670c087b18bb4b2f4bbc49",
+      "bytes": 2527
+    },
+    {
+      "path": "second-tests.log",
+      "sha256": "8e0471ed946bf9027a193a97b0bc6271537c9c36ba0972466801cc7e21d6dde2",
+      "bytes": 1845
+    },
+    {
+      "path": "third-tests.log",
+      "sha256": "71b1dd55dd015ed7e5031cf3b5e9745783fdb8d31532b90dc87d74ecff7c6d74",
+      "bytes": 2039
+    },
+    {
+      "path": "copy-paste-rate-tests.log",
+      "sha256": "966fac628156c33f24239eed73995a5c062e4eeae29094c78941924484e03f89",
+      "bytes": 3749
+    },
+    {
+      "path": "copy-paste-rate-fixed-tests.log",
+      "sha256": "2064758f58f227eb5c5edb85bf67718f893bc54566d86cc6913607d0ad039c1a",
+      "bytes": 2133
+    },
+    {
+      "path": "final-tests.log",
+      "sha256": "6795d1e6fabc3516684ab36d95f43a2b9bf634fd46de7dfa88fc51d9925a4bd0",
+      "bytes": 2132
+    },
+    {
+      "path": "HANDOFF.md",
+      "sha256": "55f7a33b8c91b77299f6add0d1acdcb62e311ed780c860372841fa312b2e0cd5",
+      "bytes": 5924
+    }
+  ],
+  "verification": "20 focused tests passed; temporary HTTP listeners only; no RTC/gameplay/browser/public deployment acceptance"
+}

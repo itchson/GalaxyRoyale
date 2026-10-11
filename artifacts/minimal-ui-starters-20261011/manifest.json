@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 8,
+      "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da"
+    },
+    {
+      "path": "license-final-webgl2-1280.png",
+      "bytes": 93199,
+      "sha256": "00ec4599c27118b25572bef1c55f8c58cb96940057d1b892116e155edd48e21f"
+    },
+    {
+      "path": "license-webgpu-1280.png",
+      "bytes": 103908,
+      "sha256": "138ef87737a46f4614517554bbf872ce798b77b0c942ddd3a7f724c5cd3b3a5c"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1012,
+      "sha256": "151fa2796875b7ac23d5a4a179e6b22220f23d7eb90248b7947be0c1641bf16d"
+    },
+    {
+      "path": "settings-capped-webgpu-1280.png",
+      "bytes": 65010,
+      "sha256": "887ad8502e08b16ad67e516f1171ef32810d155da70dfff516b781e449b81f00"
+    },
+    {
+      "path": "settings-webgpu-1280.png",
+      "bytes": 61963,
+      "sha256": "b21f9c5724bbbdb349c0369b61fac1025299a7200708234298489c7f339f1025"
+    },
+    {
+      "path": "status-hugo-capped-webgpu-1280.png",
+      "bytes": 63470,
+      "sha256": "8cc426dd0457d8988c155041306c03372e9c274253f88b26456b331e9123b7a1"
+    },
+    {
+      "path": "status-hugo-webgpu-1280.png",
+      "bytes": 64274,
+      "sha256": "90cf5383135795f9f525c3fa0716b104481aca70f5d5eb463104986f2dc19656"
+    },
+    {
+      "path": "status-pan-final-webgl2-848.png",
+      "bytes": 29126,
+      "sha256": "df94b67ccc75848391f7823bc18f7eaffd6caecfdcd2c34414d9838e6e5586ac"
+    }
+  ]
+}

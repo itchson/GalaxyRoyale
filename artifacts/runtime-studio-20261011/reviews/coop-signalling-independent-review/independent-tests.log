@@ -1,0 +1,28 @@
+✔ HTTP exact Origin, CORS and fixed routes reject untrusted or forged requests (37.7602ms)
+✔ AES-GCM invite is encrypted hex and rejects byte, version, expiry and restart changes (24.3074ms)
+✔ concurrent HTTP admission reserves only host plus seven, including all pending guests (11.3332ms)
+✔ reservations and active guests expire separately; heartbeat does not extend pending admission (13.2471ms)
+✔ guest cannot end, replace, forge metadata, address strangers or bypass offer roles (18.6649ms)
+✔ host end publishes every final long-poll notice atomically, even with guests pending (27.8469ms)
+✔ host leave, timeout and absolute expiry retain a bounded terminal notice then erase credentials (14.6236ms)
+✔ replacement ends only the previous session and failed replacement preserves it (18.3619ms)
+✔ authenticated replacement shares create rates across new bearer credentials (8.4868ms)
+✔ event replay and acknowledgment enforce queue capacity without silently dropping signals (14.6432ms)
+✔ body, SDP and ICE byte bounds and schemas reject oversized or forwarding payloads (14.7035ms)
+✔ unauthenticated failures consume bounded admission rates; session and client quotas are finite (28.141ms)
+✔ per-sender and per-session signaling rates refuse excess without adding events (13.1589ms)
+✔ one bounded long poll per participant, abort cleanup and finite timeout (65.3965ms)
+✔ service stop resolves existing polls and closes every test listener (25.0357ms)
+✔ pure queued transport is cloned and retained departed credentials stay bounded (0.5178ms)
+✔ byte quota and membership overflow preserve terminal notices instead of orphaning peers (6.8222ms)
+✔ ready and guest leave are once-only, free capacity and prune old credentials while host stays live (13.4016ms)
+✔ chunked request stream enforces the body bound without a Content-Length header (4.0494ms)
+✔ maintenance wakes an outstanding poll on host expiry with its retained end notice (256.6214ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 20
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 677.5389

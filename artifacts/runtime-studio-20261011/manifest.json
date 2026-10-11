@@ -1,0 +1,665 @@
+{
+  "schemaVersion": 1,
+  "files": [
+    {
+      "path": ".gitattributes",
+      "bytes": 8,
+      "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da"
+    },
+    {
+      "path": "browser-build-receipt.json",
+      "bytes": 392,
+      "sha256": "0b177792d44d48682d406128007a584ac869a281bcae0224745376dad9fc59b3"
+    },
+    {
+      "path": "coop-seams-bounded-review.md",
+      "bytes": 4923,
+      "sha256": "4d1d8c2953e65fefc41ad384c729ba202878106301490e06142fa61b86962633"
+    },
+    {
+      "path": "flight-webgl2-1280.png",
+      "bytes": 28294,
+      "sha256": "b2bbe772b4ea1f328f604b4e2fe1906b8ad39041aea3a7ac925459aaed9d2448"
+    },
+    {
+      "path": "flight-webgl2-zoom16.png",
+      "bytes": 36945,
+      "sha256": "02bd57da5635f2d581b820d48ca69a71c89b467febb43d25c1e6c58338bf3ca5"
+    },
+    {
+      "path": "flight-webgpu-zoom16.png",
+      "bytes": 36577,
+      "sha256": "ed5d4e21de9f918a41c39b41a18cf209c695411d43a19776b020e56c2194b1dd"
+    },
+    {
+      "path": "nodes-fine-ui-clippy-native.log",
+      "bytes": 265,
+      "sha256": "777ce1bc2a3c717db573f9d723f139efd51643bcef277ae8e96ce353663af899"
+    },
+    {
+      "path": "nodes-fine-ui-clippy-webgl.log",
+      "bytes": 168,
+      "sha256": "0f490d882043a1a5f4a631d26373f89313714296c26489db4a7893ace4ed24ab"
+    },
+    {
+      "path": "nodes-fine-ui-clippy-webgpu.log",
+      "bytes": 265,
+      "sha256": "1fc9320cecd754a98ce7dc9d474516861c9da94bac6ba05f1abd64990ae61f81"
+    },
+    {
+      "path": "nodes-fine-ui-native.log",
+      "bytes": 66191,
+      "sha256": "46a766a1c06647af82ef121265ead6d2b425734e8bddd739793c0f3210a1d626"
+    },
+    {
+      "path": "nodes-fine-ui-shell-corrected.log",
+      "bytes": 39239,
+      "sha256": "9cb5687a09ba15dcd47c7c7065d1a602eb64520417048cc4af0c648751e43451"
+    },
+    {
+      "path": "nodes-fine-ui-ts.log",
+      "bytes": 16,
+      "sha256": "5a3973f79ed9becd5f23c4feff467513814de7ea381d75a4d2e339aa8b8edca9"
+    },
+    {
+      "path": "nodes-fine-ui-wasm-save.log",
+      "bytes": 1122,
+      "sha256": "4dc0be4553f0e1bd84987458aa1c748d1b8302b0cc188bb4c565999b96e20e3b"
+    },
+    {
+      "path": "pan-dock-integrated-verification.log",
+      "bytes": 204,
+      "sha256": "f2a9d33a96974d1bd95c8573d46b6484229cb6ab0758ddf7171fc906b810cf86"
+    },
+    {
+      "path": "physical-font-bridge-corrected.log",
+      "bytes": 1838,
+      "sha256": "7c65b85e9c774995bc2081e2266aad8bf6c0688a9b1635a5b7ab9b8e0ebde42f"
+    },
+    {
+      "path": "raicho-game-hook.log",
+      "bytes": 587,
+      "sha256": "7f95095a9b9699effaa2ec9fbe65344d67e01ed7d2c06cc24293963d4c5bf387"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3756,
+      "sha256": "1abd8d1c731a2759d62445936c8aaa5dccca421b143904f402d6644d6991e332"
+    },
+    {
+      "path": "renderer-webgl2.txt",
+      "bytes": 788,
+      "sha256": "14de083e482e8b38b1e525cad665a32e4cea67f529411c8959365ce87d6c1f40"
+    },
+    {
+      "path": "renderer-webgpu.txt",
+      "bytes": 798,
+      "sha256": "5e96b8f5ed2a16bcb1a2d417953ecdef61615601281a8180dd63aee0bd416f6f"
+    },
+    {
+      "path": "reviews/coop-authority-next-slice/pin.mjs",
+      "bytes": 1655,
+      "sha256": "18545b6e8e21d21458f203e945e991c527488e66314eff55dd320c33d9b4025d"
+    },
+    {
+      "path": "reviews/coop-authority-next-slice/REVIEW.md",
+      "bytes": 8928,
+      "sha256": "8a3e62ccc8426d90cc9676bc55b6aa80fac45c9498fba14e987e7f9d3cea38a2"
+    },
+    {
+      "path": "reviews/coop-authority-next-slice/source-pins.json",
+      "bytes": 1769,
+      "sha256": "55a944666ca8a93be0f9dc6308558d0d9761f6dc4c09c9db371f3fd0e2d1a7b3"
+    },
+    {
+      "path": "reviews/coop-signalling-author/copy-paste-rate-fixed-tests.log",
+      "bytes": 2133,
+      "sha256": "2064758f58f227eb5c5edb85bf67718f893bc54566d86cc6913607d0ad039c1a"
+    },
+    {
+      "path": "reviews/coop-signalling-author/copy-paste-rate-tests.log",
+      "bytes": 3749,
+      "sha256": "966fac628156c33f24239eed73995a5c062e4eeae29094c78941924484e03f89"
+    },
+    {
+      "path": "reviews/coop-signalling-author/final-tests.log",
+      "bytes": 2132,
+      "sha256": "6795d1e6fabc3516684ab36d95f43a2b9bf634fd46de7dfa88fc51d9925a4bd0"
+    },
+    {
+      "path": "reviews/coop-signalling-author/first-tests.log",
+      "bytes": 2527,
+      "sha256": "56994f09be42e14cb16c9eef338596cf7af57a04cd670c087b18bb4b2f4bbc49"
+    },
+    {
+      "path": "reviews/coop-signalling-author/freeze.mjs",
+      "bytes": 2051,
+      "sha256": "5826e9e16fbac7da5d18adcb2b3e3eeec214d26c8df70c9d2157c2e865c1fde8"
+    },
+    {
+      "path": "reviews/coop-signalling-author/frozen-hashes.json",
+      "bytes": 3703,
+      "sha256": "48f9613d77016d081549305c0d6ebd3e4a12545d7cde327c19d4526791434a71"
+    },
+    {
+      "path": "reviews/coop-signalling-author/HANDOFF.md",
+      "bytes": 5924,
+      "sha256": "55f7a33b8c91b77299f6add0d1acdcb62e311ed780c860372841fa312b2e0cd5"
+    },
+    {
+      "path": "reviews/coop-signalling-author/second-tests.log",
+      "bytes": 1845,
+      "sha256": "8e0471ed946bf9027a193a97b0bc6271537c9c36ba0972466801cc7e21d6dde2"
+    },
+    {
+      "path": "reviews/coop-signalling-author/source/AGENTS.md",
+      "bytes": 905,
+      "sha256": "bc9b1825fad84353b91fedd34cde67319015e25c86e9b057a83ad2ce3bd648c6"
+    },
+    {
+      "path": "reviews/coop-signalling-author/source/apps__coop__README.md",
+      "bytes": 11440,
+      "sha256": "4f35a5ab67bbf91e787a819bc481fb066be93e37468f1726e95f72b35fbfe04c"
+    },
+    {
+      "path": "reviews/coop-signalling-author/source/apps__coop__server.mjs",
+      "bytes": 11691,
+      "sha256": "0d2356ef504eeafbbfefec5c3888daa4a8ebead7892baf6c0a986e3684eecc20"
+    },
+    {
+      "path": "reviews/coop-signalling-author/source/apps__coop__store.mjs",
+      "bytes": 19460,
+      "sha256": "fbe63a8178f08a6f638f89bd7d4e418c61339ff7096ad32e3028d72b80067c1a"
+    },
+    {
+      "path": "reviews/coop-signalling-author/source/package.json",
+      "bytes": 1085,
+      "sha256": "0af9a72075f5b4ccfde64e49747136de9aa354e38a223b2bef90e0bb92d72a4b"
+    },
+    {
+      "path": "reviews/coop-signalling-author/source/pnpm-lock.yaml",
+      "bytes": 21972,
+      "sha256": "6383d7a7deaf07367d08c79447c4faab012da63436cf23df3a1cbb82b4f183d1"
+    },
+    {
+      "path": "reviews/coop-signalling-author/source/scripts__test__coop-signalling.test.mjs",
+      "bytes": 28536,
+      "sha256": "a7e795b75bd26e9920fb89886a1b752f3395016adb34ca1e8b0902f9193771a5"
+    },
+    {
+      "path": "reviews/coop-signalling-author/third-tests.log",
+      "bytes": 2039,
+      "sha256": "71b1dd55dd015ed7e5031cf3b5e9745783fdb8d31532b90dc87d74ecff7c6d74"
+    },
+    {
+      "path": "reviews/coop-signalling-independent-review/execution-platform.json",
+      "bytes": 741,
+      "sha256": "c112d31fd9fec4ddad92c5bfcb6f1ae313dddccc7c538dec022445ca66e25f85"
+    },
+    {
+      "path": "reviews/coop-signalling-independent-review/independent-tests.log",
+      "bytes": 2133,
+      "sha256": "9187c7c6de80df696ba2df34767693fdad9bc7d05a30ccf5758d64ca03e1a456"
+    },
+    {
+      "path": "reviews/coop-signalling-independent-review/manifest.json",
+      "bytes": 2730,
+      "sha256": "6801c4b83a4d2efa495271ded3fb25791b30341476b7b88d41395be016889c3a"
+    },
+    {
+      "path": "reviews/coop-signalling-independent-review/peer-final-tests.log",
+      "bytes": 2132,
+      "sha256": "6795d1e6fabc3516684ab36d95f43a2b9bf634fd46de7dfa88fc51d9925a4bd0"
+    },
+    {
+      "path": "reviews/coop-signalling-independent-review/peer-HANDOFF.md",
+      "bytes": 5924,
+      "sha256": "55f7a33b8c91b77299f6add0d1acdcb62e311ed780c860372841fa312b2e0cd5"
+    },
+    {
+      "path": "reviews/coop-signalling-independent-review/peer-manifest.json",
+      "bytes": 3703,
+      "sha256": "48f9613d77016d081549305c0d6ebd3e4a12545d7cde327c19d4526791434a71"
+    },
+    {
+      "path": "reviews/coop-signalling-independent-review/peer-verification.json",
+      "bytes": 1690,
+      "sha256": "68f5a567433f3330c79e85910898abcf828294f790763910780b59d2bb9d4300"
+    },
+    {
+      "path": "reviews/coop-signalling-independent-review/REVIEW.md",
+      "bytes": 4929,
+      "sha256": "f6c06f715b9eadb9f1c72726c6b193be7578fbe7041ec8f459f3a7c0f2831c56"
+    },
+    {
+      "path": "reviews/coop-signalling-independent-review/source/apps/coop/README.md",
+      "bytes": 11440,
+      "sha256": "4f35a5ab67bbf91e787a819bc481fb066be93e37468f1726e95f72b35fbfe04c"
+    },
+    {
+      "path": "reviews/coop-signalling-independent-review/source/apps/coop/server.mjs",
+      "bytes": 11691,
+      "sha256": "0d2356ef504eeafbbfefec5c3888daa4a8ebead7892baf6c0a986e3684eecc20"
+    },
+    {
+      "path": "reviews/coop-signalling-independent-review/source/apps/coop/store.mjs",
+      "bytes": 19460,
+      "sha256": "fbe63a8178f08a6f638f89bd7d4e418c61339ff7096ad32e3028d72b80067c1a"
+    },
+    {
+      "path": "reviews/coop-signalling-independent-review/source/scripts/test/coop-signalling.test.mjs",
+      "bytes": 28536,
+      "sha256": "a7e795b75bd26e9920fb89886a1b752f3395016adb34ca1e8b0902f9193771a5"
+    },
+    {
+      "path": "reviews/coop-signalling-independent-review/source-pins.json",
+      "bytes": 716,
+      "sha256": "819f1d21704a33f8e1923a03b42115f8b21a22956358af065d769b225deb00c7"
+    },
+    {
+      "path": "reviews/coop-signalling-independent-review/verify.py",
+      "bytes": 668,
+      "sha256": "d3cc90230b892df0bf8123d24732d50f68354eb6030baa513f7e3fe98faff29d"
+    },
+    {
+      "path": "reviews/game-runtime-lease-independent-review/actual-vite-review.log",
+      "bytes": 888,
+      "sha256": "775d931fab2b694f2bbb6f2bd71d829ca4bda5520c95ab4b6f25ba1c5caa2257"
+    },
+    {
+      "path": "reviews/game-runtime-lease-independent-review/actual-vite-review.test.mjs",
+      "bytes": 6250,
+      "sha256": "93c8d4a27486c0c10a4bfa218ca38520a957c0ba8746c640fda869a3e3c2f420"
+    },
+    {
+      "path": "reviews/game-runtime-lease-independent-review/baseline-source/apps/game/vite.config.ts",
+      "bytes": 687,
+      "sha256": "a5c02859f111a6433669f31422ddcbfefe81d46a4c4a7a203234097fcf247abe"
+    },
+    {
+      "path": "reviews/game-runtime-lease-independent-review/baseline-source/scripts/dev.mjs",
+      "bytes": 2064,
+      "sha256": "ba4ce34738419d1b1624b86c8f14e912e212b3ba146d86bc4c7e62ae3b4725b5"
+    },
+    {
+      "path": "reviews/game-runtime-lease-independent-review/baseline-source/scripts/game-runtime-lease.d.mts",
+      "bytes": 219,
+      "sha256": "51cecfef36b11bd57293f85e0fbc6ec005c29847521f4c76729571ec9395b5c5"
+    },
+    {
+      "path": "reviews/game-runtime-lease-independent-review/baseline-source/scripts/game-runtime-lease.mjs",
+      "bytes": 1620,
+      "sha256": "06dda924d24a9fdde1d25fd032ef3dac0afdc18af524a4936b0396025d726d66"
+    },
+    {
+      "path": "reviews/game-runtime-lease-independent-review/baseline-source/scripts/test/game-runtime-lease.test.mjs",
+      "bytes": 2158,
+      "sha256": "6ca54927f79e972839036c08e2b0586f61ec8f11edf5baa65fdc2c6906e235c9"
+    },
+    {
+      "path": "reviews/game-runtime-lease-independent-review/execution-inputs.json",
+      "bytes": 970,
+      "sha256": "b25a696199db476be1482e0f89bd2ad17fd2751355a964a3244b3d9c28173287"
+    },
+    {
+      "path": "reviews/game-runtime-lease-independent-review/first-repair-source/apps/game/vite.config.ts",
+      "bytes": 687,
+      "sha256": "a5c02859f111a6433669f31422ddcbfefe81d46a4c4a7a203234097fcf247abe"
+    },
+    {
+      "path": "reviews/game-runtime-lease-independent-review/first-repair-source/scripts/dev.mjs",
+      "bytes": 2064,
+      "sha256": "ba4ce34738419d1b1624b86c8f14e912e212b3ba146d86bc4c7e62ae3b4725b5"
+    },
+    {
+      "path": "reviews/game-runtime-lease-independent-review/first-repair-source/scripts/game-runtime-lease.d.mts",
+      "bytes": 219,
+      "sha256": "51cecfef36b11bd57293f85e0fbc6ec005c29847521f4c76729571ec9395b5c5"
+    },
+    {
+      "path": "reviews/game-runtime-lease-independent-review/first-repair-source/scripts/game-runtime-lease.mjs",
+      "bytes": 2831,
+      "sha256": "a16c91cdbc8bf9a62513264ecb3fc2ba7b78fbcced8ce7fa53eade6129b1a715"
+    },
+    {
+      "path": "reviews/game-runtime-lease-independent-review/first-repair-source/scripts/test/game-runtime-lease.test.mjs",
+      "bytes": 2158,
+      "sha256": "6ca54927f79e972839036c08e2b0586f61ec8f11edf5baa65fdc2c6906e235c9"
+    },
+    {
+      "path": "reviews/game-runtime-lease-independent-review/first-repair-source-pins.json",
+      "bytes": 894,
+      "sha256": "d3176e0ab14c977641910031d3deb644b3ef1c53a0e7ddc4a6cd4a274395772d"
+    },
+    {
+      "path": "reviews/game-runtime-lease-independent-review/fixture-first-load-error.log",
+      "bytes": 1546,
+      "sha256": "e72afddcc063b3a47c596b8ef24d1a5d69f0485d2d0803d4a693a11948048a73"
+    },
+    {
+      "path": "reviews/game-runtime-lease-independent-review/installed-vite-close-excerpt.txt",
+      "bytes": 680,
+      "sha256": "46dca7b25c9b61c3df7f23af02cd22ec71de79e192e4a299abe53f41b6bf3146"
+    },
+    {
+      "path": "reviews/game-runtime-lease-independent-review/installed-vite-pins.json",
+      "bytes": 366,
+      "sha256": "2eb1ea9c50ac2e8a94242ce113d85a95de498c928a7c45bd77a230c28230a27c"
+    },
+    {
+      "path": "reviews/game-runtime-lease-independent-review/installed-vite-restart-excerpt.txt",
+      "bytes": 1704,
+      "sha256": "53e55313b9fcd76444bcdb77744f82e5e707498578615169f083ea2b21d3023b"
+    },
+    {
+      "path": "reviews/game-runtime-lease-independent-review/lease-supervisor-tests.log",
+      "bytes": 464,
+      "sha256": "e54d23f138e557767a45c329f8a451fc365248875fbe87663c3ef6b89eb2105e"
+    },
+    {
+      "path": "reviews/game-runtime-lease-independent-review/manifest.json",
+      "bytes": 6234,
+      "sha256": "770f43fc005b8779bb92b8597c21641c212dbc682d8196efe6c3d8da63b30558"
+    },
+    {
+      "path": "reviews/game-runtime-lease-independent-review/permanent-vite-tests.log",
+      "bytes": 553,
+      "sha256": "221330991df8f40d979162c8863fc5f77b52518d125b124bed9088aa055b6b39"
+    },
+    {
+      "path": "reviews/game-runtime-lease-independent-review/permanent-vite.test.mjs",
+      "bytes": 5244,
+      "sha256": "c2818c93c0fc5eee6d253a0bac1ee5c9bdd9d84d9206c76684757968ca01e63b"
+    },
+    {
+      "path": "reviews/game-runtime-lease-independent-review/repair-source/apps/game/vite.config.ts",
+      "bytes": 687,
+      "sha256": "a5c02859f111a6433669f31422ddcbfefe81d46a4c4a7a203234097fcf247abe"
+    },
+    {
+      "path": "reviews/game-runtime-lease-independent-review/repair-source/scripts/dev.mjs",
+      "bytes": 2064,
+      "sha256": "ba4ce34738419d1b1624b86c8f14e912e212b3ba146d86bc4c7e62ae3b4725b5"
+    },
+    {
+      "path": "reviews/game-runtime-lease-independent-review/repair-source/scripts/game-runtime-lease.d.mts",
+      "bytes": 232,
+      "sha256": "7d92c888a76b80a570c18e0a874f5e00dc695bd8cdbbf326bbf77a663b63dacc"
+    },
+    {
+      "path": "reviews/game-runtime-lease-independent-review/repair-source/scripts/game-runtime-lease.mjs",
+      "bytes": 2873,
+      "sha256": "c9b319cb55f7f5e5472c2917f318e1ff22326ebd8c14c69ba05caabde37a5569"
+    },
+    {
+      "path": "reviews/game-runtime-lease-independent-review/repair-source/scripts/test/game-runtime-lease.test.mjs",
+      "bytes": 2158,
+      "sha256": "6ca54927f79e972839036c08e2b0586f61ec8f11edf5baa65fdc2c6906e235c9"
+    },
+    {
+      "path": "reviews/game-runtime-lease-independent-review/REVIEW.md",
+      "bytes": 4343,
+      "sha256": "ecd9a49668cad6408b29fe319dbedbf3be62b99d6f3d47563f04590a50cd8cc0"
+    },
+    {
+      "path": "reviews/game-runtime-lease-independent-review/source-pins.json",
+      "bytes": 2666,
+      "sha256": "8d6c9b7d25a17a1fc8dc4d49f36b03523b71e9f059751381368f664da227363f"
+    },
+    {
+      "path": "reviews/game-runtime-lease-independent-review/verify.py",
+      "bytes": 933,
+      "sha256": "39612fc4d7380b9062fd9294664d9c447b780f1f381421fd183126854cc6dded"
+    },
+    {
+      "path": "reviews/node-raicho-root-integration-review/helper-commit.txt",
+      "bytes": 269,
+      "sha256": "3c62aa38407fd22a3f86abe792bea65c35a679be4e0a5c904c65c4208666dc8f"
+    },
+    {
+      "path": "reviews/node-raicho-root-integration-review/helper.patch",
+      "bytes": 31967,
+      "sha256": "f0aec201192505f9cd8c3b480e4fd655b1a253b26d5b21c737650f671c3430b4"
+    },
+    {
+      "path": "reviews/node-raicho-root-integration-review/hook-commit.txt",
+      "bytes": 274,
+      "sha256": "622a861d1a03f0183bde619d402f397af5aeea7b3a34dabd6c0d907186c9632d"
+    },
+    {
+      "path": "reviews/node-raicho-root-integration-review/hook.patch",
+      "bytes": 7347,
+      "sha256": "2e854778fc8f250c8884b771ebdbbc541f6c688fab5f5749db331ef122836087"
+    },
+    {
+      "path": "reviews/node-raicho-root-integration-review/manifest.json",
+      "bytes": 7717,
+      "sha256": "4a8665b345b9946be5ba020226307ab2efadc17efaeb78079761bd5e6c217fb0"
+    },
+    {
+      "path": "reviews/node-raicho-root-integration-review/node-commit.txt",
+      "bytes": 268,
+      "sha256": "4fa3fc2257f4028e178752d51a46bf097ec15c77bde2fe187b762b77532da572"
+    },
+    {
+      "path": "reviews/node-raicho-root-integration-review/node.patch",
+      "bytes": 30321,
+      "sha256": "e0c76b230cb1024c6ae72f21f62befe3f18e5b14e45241c5b4c5616b1a45ce21"
+    },
+    {
+      "path": "reviews/node-raicho-root-integration-review/nodes-fine-ui-clippy-native.log",
+      "bytes": 265,
+      "sha256": "777ce1bc2a3c717db573f9d723f139efd51643bcef277ae8e96ce353663af899"
+    },
+    {
+      "path": "reviews/node-raicho-root-integration-review/nodes-fine-ui-clippy-webgl.log",
+      "bytes": 168,
+      "sha256": "0f490d882043a1a5f4a631d26373f89313714296c26489db4a7893ace4ed24ab"
+    },
+    {
+      "path": "reviews/node-raicho-root-integration-review/nodes-fine-ui-clippy-webgpu.log",
+      "bytes": 265,
+      "sha256": "1fc9320cecd754a98ce7dc9d474516861c9da94bac6ba05f1abd64990ae61f81"
+    },
+    {
+      "path": "reviews/node-raicho-root-integration-review/nodes-fine-ui-native.log",
+      "bytes": 66191,
+      "sha256": "46a766a1c06647af82ef121265ead6d2b425734e8bddd739793c0f3210a1d626"
+    },
+    {
+      "path": "reviews/node-raicho-root-integration-review/raicho-game-hook.log",
+      "bytes": 587,
+      "sha256": "7f95095a9b9699effaa2ec9fbe65344d67e01ed7d2c06cc24293963d4c5bf387"
+    },
+    {
+      "path": "reviews/node-raicho-root-integration-review/review_head-commit.txt",
+      "bytes": 274,
+      "sha256": "f69d8d545635d03dcce540818b433e4f5b6886c0a6aa0f2f4eee7e36a1259873"
+    },
+    {
+      "path": "reviews/node-raicho-root-integration-review/REVIEW.md",
+      "bytes": 4834,
+      "sha256": "a02e87b64680d2d58fccabbbc4b11c4eb235ebfdee13de3b39d991d70f8e2f51"
+    },
+    {
+      "path": "reviews/node-raicho-root-integration-review/source/assets/pixels/raicho-fine-detail/atlas.json",
+      "bytes": 230223,
+      "sha256": "319aa1fd8cf1112ef33addd06739063c72b92ecca5ca460afcc05aada77666be"
+    },
+    {
+      "path": "reviews/node-raicho-root-integration-review/source/assets/pixels/raicho-fine-detail/provenance.json",
+      "bytes": 4018,
+      "sha256": "708ca2395e455dcc0e50c773a81a655f8f555345f5eba44bbfcfcbea0cdeea4b"
+    },
+    {
+      "path": "reviews/node-raicho-root-integration-review/source/Cargo.lock",
+      "bytes": 27791,
+      "sha256": "df228d9f83ef57321dcb768b79d948e9aa24456c0952e971fc8d6fcd7e806bdd"
+    },
+    {
+      "path": "reviews/node-raicho-root-integration-review/source/Cargo.toml",
+      "bytes": 447,
+      "sha256": "50b077a3fd8e0c8a42456948d6232ae86b2a1bbaa63652ee04da7848c776a3e3"
+    },
+    {
+      "path": "reviews/node-raicho-root-integration-review/source/crates/engine_core/Cargo.toml",
+      "bytes": 242,
+      "sha256": "0c7948f6d4cc4f43132f9c8c7c7f5d295b8003d00b15836a295bfe07e9c892bd"
+    },
+    {
+      "path": "reviews/node-raicho-root-integration-review/source/crates/engine_core/src/camera.rs",
+      "bytes": 8926,
+      "sha256": "b08164aa6c9a7e8364ee90e7205e70b702d2013c1861254da33610cb81fdf759"
+    },
+    {
+      "path": "reviews/node-raicho-root-integration-review/source/crates/engine_core/src/frame.rs",
+      "bytes": 25415,
+      "sha256": "2afd79bb523dc0a57533ddaf1067ce2dd204823cb87f72e3ee7fc976a81969fc"
+    },
+    {
+      "path": "reviews/node-raicho-root-integration-review/source/crates/engine_core/src/pixels.rs",
+      "bytes": 17138,
+      "sha256": "3e9f228b54442f66a48a26d0a932b694b6cc22386846d28b7adda0e409f95b5c"
+    },
+    {
+      "path": "reviews/node-raicho-root-integration-review/source/crates/engine_core/src/transform.rs",
+      "bytes": 5578,
+      "sha256": "f511ceb89ac4445ce9749d1ed4086e672693357a1e6cf4f4f944dd8fe7220c74"
+    },
+    {
+      "path": "reviews/node-raicho-root-integration-review/source/crates/game_core/Cargo.toml",
+      "bytes": 285,
+      "sha256": "8997ce52e4c8a2384b2bfe5ef8d7778b6be42df8e1157b6c17300f931af16350"
+    },
+    {
+      "path": "reviews/node-raicho-root-integration-review/source/crates/game_core/src/audio_runtime.rs",
+      "bytes": 19456,
+      "sha256": "77b46a8dc815347df8625262a099bdf7d9fd7c3a6ca3e5ce56b6171c3fa8c171"
+    },
+    {
+      "path": "reviews/node-raicho-root-integration-review/source/crates/game_core/src/campaign_runtime.rs",
+      "bytes": 52387,
+      "sha256": "c3caa928f345345b0ddad757ecd152b1b29d7904c40579d0e4d09aa77a5c2d11"
+    },
+    {
+      "path": "reviews/node-raicho-root-integration-review/source/crates/game_core/src/champion_roster_tests.rs",
+      "bytes": 10813,
+      "sha256": "c1a895b1943a6b587ccd03f79fc4a8cc7ee340e1a2acff96f28e34cb420859db"
+    },
+    {
+      "path": "reviews/node-raicho-root-integration-review/source/crates/game_core/src/identity.rs",
+      "bytes": 27493,
+      "sha256": "f967778a6061578c984a74cec9a7052d0ac6d90783e998bbfdd4273c378337c4"
+    },
+    {
+      "path": "reviews/node-raicho-root-integration-review/source/crates/game_core/src/lib.rs",
+      "bytes": 195961,
+      "sha256": "94e68fd488248c7b33eca873398d6bfb55652e7e56ddaf0c685616d8fcda848a"
+    },
+    {
+      "path": "reviews/node-raicho-root-integration-review/source/crates/game_core/src/player_presentation.rs",
+      "bytes": 7858,
+      "sha256": "81627fa126d52dcde90a84a979c597893790a64301d70454c780e76d069c432d"
+    },
+    {
+      "path": "reviews/node-raicho-root-integration-review/source/crates/game_core/src/raicho_draw_tests.rs",
+      "bytes": 3601,
+      "sha256": "a09ed61d0cf4edad12221cd9c6caeb5772709171b61fdb2d101f0dc9d77b01d8"
+    },
+    {
+      "path": "reviews/node-raicho-root-integration-review/source/crates/game_core/src/raicho_fine_tests.rs",
+      "bytes": 16407,
+      "sha256": "fd3670de3e336e76b8090b1e20353e9af3d7627fc9715f954d71721575fd6252"
+    },
+    {
+      "path": "reviews/node-raicho-root-integration-review/source/crates/game_core/src/raicho_fine.rs",
+      "bytes": 13818,
+      "sha256": "2b0708400999c46a1c6091ae1eb6b2fd211e7c69fdc5f2e0a6f012f6c15d1552"
+    },
+    {
+      "path": "reviews/node-raicho-root-integration-review/source/crates/game_core/src/region_node_tests.rs",
+      "bytes": 19463,
+      "sha256": "5a1364e53d429459fa9dff39cb505a2be732d1523c26512568b4463dd618e5aa"
+    },
+    {
+      "path": "reviews/node-raicho-root-integration-review/source/crates/game_core/src/regions.rs",
+      "bytes": 34292,
+      "sha256": "8eec4107e3d5cb5e5c039fae563d44f92e0394a50fed5f526a11bf5b824457bf"
+    },
+    {
+      "path": "reviews/node-raicho-root-integration-review/source-checks.json",
+      "bytes": 7867,
+      "sha256": "d47797d19e8150612db9d903fef730cf9aa3038a24f7879fbdc333131ce563b7"
+    },
+    {
+      "path": "reviews/node-raicho-root-integration-review/verify.py",
+      "bytes": 930,
+      "sha256": "79b00e878b4d9a481233ad4253f4e13df78984e54cbc649a879274c412ce4a93"
+    },
+    {
+      "path": "runtime-coop-shell.log",
+      "bytes": 41977,
+      "sha256": "8ee6bcd92a2da1950fe3b643c8c1a3fd9020b2a38f8ead453bd7cb7b40d72a9a"
+    },
+    {
+      "path": "runtime-current-build.log",
+      "bytes": 1347,
+      "sha256": "a7e5e844b76ee927c694ee08ff0d323d2b592289d47122557f094fc161d2683d"
+    },
+    {
+      "path": "runtime-final-focused.log",
+      "bytes": 683,
+      "sha256": "ded1e796c5aa524d622491d87076466f558aa015ad0321c456474a84accdc4bc"
+    },
+    {
+      "path": "runtime-lifecycle-types-corrected.log",
+      "bytes": 16,
+      "sha256": "5a3973f79ed9becd5f23c4feff467513814de7ea381d75a4d2e339aa8b8edca9"
+    },
+    {
+      "path": "runtime-lifecycle-types.log",
+      "bytes": 305,
+      "sha256": "a171d4fe91605d29f50b9fdeca77bb5c517e48028719ac3c148f2b4750bd0019"
+    },
+    {
+      "path": "rust-source-continuity.json",
+      "bytes": 219,
+      "sha256": "bf68fcc9f163bf3c5eb5186bfcde487f77426d890243cffcdd1d4072cc1132d8"
+    },
+    {
+      "path": "settings-webgl2-1280.png",
+      "bytes": 58826,
+      "sha256": "c141c9593fba9095d607294ff5ebf0492e0daa6954b090172c3587dad056f90a"
+    },
+    {
+      "path": "settings-webgl2-848.png",
+      "bytes": 29298,
+      "sha256": "bc4c4ec63d4594df2d482882a2bb4c95cc0ec23e7428aaee11cd587dccba5f69"
+    },
+    {
+      "path": "settings-webgpu-1280.png",
+      "bytes": 62312,
+      "sha256": "5f876ae91a4844905c02df81551e05107d9b2ef03bedf1ad4d2e2b29dbbc3a53"
+    },
+    {
+      "path": "settings-webgpu-848-session.png",
+      "bytes": 28350,
+      "sha256": "c1bf4eee25a472ea7338de210862c429fbae63049aeb8696de22f975764bf457"
+    },
+    {
+      "path": "settings-webgpu-848.png",
+      "bytes": 30392,
+      "sha256": "670bca6da5a71ed0196d46171e0b14fafa1f653918442b93e3128b7b47a44257"
+    },
+    {
+      "path": "status-webgl2-848.png",
+      "bytes": 30908,
+      "sha256": "8f7a1d64e73a04cda409fca6d8e931b975f916c13269f1ced85f9dd945f56cc4"
+    },
+    {
+      "path": "status-webgpu-848.png",
+      "bytes": 31698,
+      "sha256": "35ea75fde5bd049fd9f16ce5c547537b0390f84e94a3eb8eb0f27789f5ad7029"
+    }
+  ]
+}

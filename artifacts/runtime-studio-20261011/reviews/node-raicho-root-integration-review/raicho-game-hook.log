@@ -1,0 +1,10 @@
+   Compiling game_core v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\game_core)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 10.05s
+     Running unittests src\lib.rs (target\debug\deps\game_core-5b2032bfdcb8bcac.exe)
+
+running 2 tests
+test raicho_draw_tests::actual_fine_hull_uses_real_hit_and_critical_tint_with_unchanged_alpha ... ok
+test raicho_draw_tests::actual_game_emits_fine_hulls_without_changing_gameplay_or_refilling_damage ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 350 filtered out; finished in 0.06s
+

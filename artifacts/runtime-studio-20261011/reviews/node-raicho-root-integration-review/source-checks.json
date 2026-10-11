@@ -1,0 +1,203 @@
+{
+  "commits": {
+    "node": "091751fc212d27594b6dd4a60eb4d2b2b4e781b9",
+    "helper": "a50aab678c98466e8c54838e39ca5a40a9f2b1b7",
+    "hook": "8242c09650482a15019e8e1f0f96b35debed8d58",
+    "review_head": "77442770e4abd9d6e36e9691df65512e385f6aa2"
+  },
+  "inputs": [
+    {
+      "path": "Cargo.lock",
+      "bytes": 27791,
+      "sha256": "df228d9f83ef57321dcb768b79d948e9aa24456c0952e971fc8d6fcd7e806bdd",
+      "domain": "exact committed Git blob"
+    },
+    {
+      "path": "Cargo.toml",
+      "bytes": 447,
+      "sha256": "50b077a3fd8e0c8a42456948d6232ae86b2a1bbaa63652ee04da7848c776a3e3",
+      "domain": "exact committed Git blob"
+    },
+    {
+      "path": "crates/game_core/Cargo.toml",
+      "bytes": 285,
+      "sha256": "8997ce52e4c8a2384b2bfe5ef8d7778b6be42df8e1157b6c17300f931af16350",
+      "domain": "exact committed Git blob"
+    },
+    {
+      "path": "crates/engine_core/Cargo.toml",
+      "bytes": 242,
+      "sha256": "0c7948f6d4cc4f43132f9c8c7c7f5d295b8003d00b15836a295bfe07e9c892bd",
+      "domain": "exact committed Git blob"
+    },
+    {
+      "path": "crates/game_core/src/lib.rs",
+      "bytes": 195961,
+      "sha256": "94e68fd488248c7b33eca873398d6bfb55652e7e56ddaf0c685616d8fcda848a",
+      "domain": "exact committed Git blob"
+    },
+    {
+      "path": "crates/game_core/src/regions.rs",
+      "bytes": 34292,
+      "sha256": "8eec4107e3d5cb5e5c039fae563d44f92e0394a50fed5f526a11bf5b824457bf",
+      "domain": "exact committed Git blob"
+    },
+    {
+      "path": "crates/game_core/src/region_node_tests.rs",
+      "bytes": 19463,
+      "sha256": "5a1364e53d429459fa9dff39cb505a2be732d1523c26512568b4463dd618e5aa",
+      "domain": "exact committed Git blob"
+    },
+    {
+      "path": "crates/game_core/src/campaign_runtime.rs",
+      "bytes": 52387,
+      "sha256": "c3caa928f345345b0ddad757ecd152b1b29d7904c40579d0e4d09aa77a5c2d11",
+      "domain": "exact committed Git blob"
+    },
+    {
+      "path": "crates/game_core/src/audio_runtime.rs",
+      "bytes": 19456,
+      "sha256": "77b46a8dc815347df8625262a099bdf7d9fd7c3a6ca3e5ce56b6171c3fa8c171",
+      "domain": "exact committed Git blob"
+    },
+    {
+      "path": "crates/game_core/src/champion_roster_tests.rs",
+      "bytes": 10813,
+      "sha256": "c1a895b1943a6b587ccd03f79fc4a8cc7ee340e1a2acff96f28e34cb420859db",
+      "domain": "exact committed Git blob"
+    },
+    {
+      "path": "crates/game_core/src/raicho_fine.rs",
+      "bytes": 13818,
+      "sha256": "2b0708400999c46a1c6091ae1eb6b2fd211e7c69fdc5f2e0a6f012f6c15d1552",
+      "domain": "exact committed Git blob"
+    },
+    {
+      "path": "crates/game_core/src/raicho_fine_tests.rs",
+      "bytes": 16407,
+      "sha256": "fd3670de3e336e76b8090b1e20353e9af3d7627fc9715f954d71721575fd6252",
+      "domain": "exact committed Git blob"
+    },
+    {
+      "path": "crates/game_core/src/raicho_draw_tests.rs",
+      "bytes": 3601,
+      "sha256": "a09ed61d0cf4edad12221cd9c6caeb5772709171b61fdb2d101f0dc9d77b01d8",
+      "domain": "exact committed Git blob"
+    },
+    {
+      "path": "crates/game_core/src/identity.rs",
+      "bytes": 27493,
+      "sha256": "f967778a6061578c984a74cec9a7052d0ac6d90783e998bbfdd4273c378337c4",
+      "domain": "exact committed Git blob"
+    },
+    {
+      "path": "crates/game_core/src/player_presentation.rs",
+      "bytes": 7858,
+      "sha256": "81627fa126d52dcde90a84a979c597893790a64301d70454c780e76d069c432d",
+      "domain": "exact committed Git blob"
+    },
+    {
+      "path": "crates/engine_core/src/frame.rs",
+      "bytes": 25415,
+      "sha256": "2afd79bb523dc0a57533ddaf1067ce2dd204823cb87f72e3ee7fc976a81969fc",
+      "domain": "exact committed Git blob"
+    },
+    {
+      "path": "crates/engine_core/src/pixels.rs",
+      "bytes": 17138,
+      "sha256": "3e9f228b54442f66a48a26d0a932b694b6cc22386846d28b7adda0e409f95b5c",
+      "domain": "exact committed Git blob"
+    },
+    {
+      "path": "crates/engine_core/src/transform.rs",
+      "bytes": 5578,
+      "sha256": "f511ceb89ac4445ce9749d1ed4086e672693357a1e6cf4f4f944dd8fe7220c74",
+      "domain": "exact committed Git blob"
+    },
+    {
+      "path": "crates/engine_core/src/camera.rs",
+      "bytes": 8926,
+      "sha256": "b08164aa6c9a7e8364ee90e7205e70b702d2013c1861254da33610cb81fdf759",
+      "domain": "exact committed Git blob"
+    },
+    {
+      "path": "assets/pixels/raicho-fine-detail/atlas.json",
+      "bytes": 230223,
+      "sha256": "319aa1fd8cf1112ef33addd06739063c72b92ecca5ca460afcc05aada77666be",
+      "domain": "exact committed Git blob"
+    },
+    {
+      "path": "assets/pixels/raicho-fine-detail/provenance.json",
+      "bytes": 4018,
+      "sha256": "708ca2395e455dcc0e50c773a81a655f8f555345f5eba44bbfcfcbea0cdeea4b",
+      "domain": "exact committed Git blob"
+    }
+  ],
+  "candidate_comparisons": [
+    {
+      "path": "crates/game_core/src/regions.rs",
+      "original_commit": "fe96d002f795a1f3a23af8ad48a8e06a1f2574fa",
+      "integrated_commit": "77442770e4abd9d6e36e9691df65512e385f6aa2",
+      "exact_byte_equal": true,
+      "sha256": "8eec4107e3d5cb5e5c039fae563d44f92e0394a50fed5f526a11bf5b824457bf"
+    },
+    {
+      "path": "crates/game_core/src/region_node_tests.rs",
+      "original_commit": "fe96d002f795a1f3a23af8ad48a8e06a1f2574fa",
+      "integrated_commit": "77442770e4abd9d6e36e9691df65512e385f6aa2",
+      "exact_byte_equal": true,
+      "sha256": "5a1364e53d429459fa9dff39cb505a2be732d1523c26512568b4463dd618e5aa"
+    },
+    {
+      "path": "crates/game_core/src/raicho_fine.rs",
+      "original_commit": "1c73ad32c381e3c727f8bc2fc0d6365c54e7f90c",
+      "integrated_commit": "77442770e4abd9d6e36e9691df65512e385f6aa2",
+      "exact_byte_equal": true,
+      "sha256": "2b0708400999c46a1c6091ae1eb6b2fd211e7c69fdc5f2e0a6f012f6c15d1552"
+    },
+    {
+      "path": "crates/game_core/src/raicho_fine_tests.rs",
+      "original_commit": "1c73ad32c381e3c727f8bc2fc0d6365c54e7f90c",
+      "integrated_commit": "77442770e4abd9d6e36e9691df65512e385f6aa2",
+      "exact_byte_equal": true,
+      "sha256": "fd3670de3e336e76b8090b1e20353e9af3d7627fc9715f954d71721575fd6252"
+    },
+    {
+      "path": "assets/pixels/raicho-fine-detail/atlas.json",
+      "original_commit": "1c73ad32c381e3c727f8bc2fc0d6365c54e7f90c",
+      "integrated_commit": "77442770e4abd9d6e36e9691df65512e385f6aa2",
+      "exact_byte_equal": true,
+      "sha256": "319aa1fd8cf1112ef33addd06739063c72b92ecca5ca460afcc05aada77666be"
+    },
+    {
+      "path": "crates/engine_core/src/frame.rs",
+      "original_commit": "1c73ad32c381e3c727f8bc2fc0d6365c54e7f90c",
+      "integrated_commit": "77442770e4abd9d6e36e9691df65512e385f6aa2",
+      "exact_byte_equal": true,
+      "sha256": "2afd79bb523dc0a57533ddaf1067ce2dd204823cb87f72e3ee7fc976a81969fc"
+    },
+    {
+      "path": "crates/engine_core/src/pixels.rs",
+      "original_commit": "1c73ad32c381e3c727f8bc2fc0d6365c54e7f90c",
+      "integrated_commit": "77442770e4abd9d6e36e9691df65512e385f6aa2",
+      "exact_byte_equal": true,
+      "sha256": "3e9f228b54442f66a48a26d0a932b694b6cc22386846d28b7adda0e409f95b5c"
+    },
+    {
+      "path": "crates/engine_core/src/transform.rs",
+      "original_commit": "1c73ad32c381e3c727f8bc2fc0d6365c54e7f90c",
+      "integrated_commit": "77442770e4abd9d6e36e9691df65512e385f6aa2",
+      "exact_byte_equal": true,
+      "sha256": "f511ceb89ac4445ce9749d1ed4086e672693357a1e6cf4f4f944dd8fe7220c74"
+    },
+    {
+      "path": "crates/engine_core/src/camera.rs",
+      "original_commit": "1c73ad32c381e3c727f8bc2fc0d6365c54e7f90c",
+      "integrated_commit": "77442770e4abd9d6e36e9691df65512e385f6aa2",
+      "exact_byte_equal": true,
+      "sha256": "b08164aa6c9a7e8364ee90e7205e70b702d2013c1861254da33610cb81fdf759"
+    }
+  ],
+  "hook_runtime_unchanged_since": "8242c09650482a15019e8e1f0f96b35debed8d58",
+  "execution_scope": "Read-only source/retained Root evidence verification, not a test/build/browser run"
+}

@@ -1,0 +1,49 @@
+{
+  "commit": "2fe20c6401e65f8dcc790b537269e2de18d85b4d",
+  "inputs": [
+    {
+      "path": "apps/coop/store.mjs",
+      "sha256": "fbe63a8178f08a6f638f89bd7d4e418c61339ff7096ad32e3028d72b80067c1a",
+      "bytes": 19460,
+      "domain": "exact committed Git blob"
+    },
+    {
+      "path": "apps/coop/server.mjs",
+      "sha256": "0d2356ef504eeafbbfefec5c3888daa4a8ebead7892baf6c0a986e3684eecc20",
+      "bytes": 11691,
+      "domain": "exact committed Git blob"
+    },
+    {
+      "path": "apps/coop/README.md",
+      "sha256": "4f35a5ab67bbf91e787a819bc481fb066be93e37468f1726e95f72b35fbfe04c",
+      "bytes": 11440,
+      "domain": "exact committed Git blob"
+    },
+    {
+      "path": "scripts/test/coop-signalling.test.mjs",
+      "sha256": "a7e795b75bd26e9920fb89886a1b752f3395016adb34ca1e8b0902f9193771a5",
+      "bytes": 28536,
+      "domain": "exact committed Git blob"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "bc9b1825fad84353b91fedd34cde67319015e25c86e9b057a83ad2ce3bd648c6",
+      "bytes": 905,
+      "domain": "exact committed Git blob"
+    },
+    {
+      "path": "package.json",
+      "sha256": "0af9a72075f5b4ccfde64e49747136de9aa354e38a223b2bef90e0bb92d72a4b",
+      "bytes": 1085,
+      "domain": "exact committed Git blob"
+    },
+    {
+      "path": "pnpm-lock.yaml",
+      "sha256": "6383d7a7deaf07367d08c79447c4faab012da63436cf23df3a1cbb82b4f183d1",
+      "bytes": 21972,
+      "domain": "exact committed Git blob"
+    }
+  ],
+  "peer_final_log_sha256": "6795d1e6fabc3516684ab36d95f43a2b9bf634fd46de7dfa88fc51d9925a4bd0",
+  "scope": "Seven committed peer source inputs and final retained peer log verified; own test execution is independent-tests.log"
+}

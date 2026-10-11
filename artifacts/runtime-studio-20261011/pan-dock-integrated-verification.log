@@ -1,0 +1,7 @@
+{
+  "input_hashes": 60,
+  "actual_rig_frames": 3,
+  "cells_each": 7100,
+  "immutable_metal_and_geometry": "verified",
+  "scope": "Read-only source/native packets; no GPU or live Game acceptance"
+}

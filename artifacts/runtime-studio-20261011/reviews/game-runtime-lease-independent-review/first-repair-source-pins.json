@@ -1,0 +1,30 @@
+{
+  "root_head": "2be69e7081ea1837d5c3f8cef6232310ddff6b42",
+  "inputs": [
+    {
+      "path": "scripts/game-runtime-lease.mjs",
+      "sha256": "a16c91cdbc8bf9a62513264ecb3fc2ba7b78fbcced8ce7fa53eade6129b1a715",
+      "bytes": 2831
+    },
+    {
+      "path": "scripts/game-runtime-lease.d.mts",
+      "sha256": "51cecfef36b11bd57293f85e0fbc6ec005c29847521f4c76729571ec9395b5c5",
+      "bytes": 219
+    },
+    {
+      "path": "scripts/dev.mjs",
+      "sha256": "ba4ce34738419d1b1624b86c8f14e912e212b3ba146d86bc4c7e62ae3b4725b5",
+      "bytes": 2064
+    },
+    {
+      "path": "apps/game/vite.config.ts",
+      "sha256": "a5c02859f111a6433669f31422ddcbfefe81d46a4c4a7a203234097fcf247abe",
+      "bytes": 687
+    },
+    {
+      "path": "scripts/test/game-runtime-lease.test.mjs",
+      "sha256": "6ca54927f79e972839036c08e2b0586f61ec8f11edf5baa65fdc2c6906e235c9",
+      "bytes": 2158
+    }
+  ]
+}

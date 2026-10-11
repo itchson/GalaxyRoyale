@@ -1,0 +1,12 @@
+✔ OS lease rejects a concurrent runtime and is reusable after idempotent close (13.7271ms)
+✔ OS releases the lease when its actual child process is killed (53.3506ms)
+✔ failed service closes its actual sibling before supervision completes (33.4545ms)
+✔ explicit stop waits for every owned child and reports a clean stop (5.4293ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 155.3395

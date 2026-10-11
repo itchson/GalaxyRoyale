@@ -1,0 +1,25 @@
+{
+  "commit": "2fe20c6401e65f8dcc790b537269e2de18d85b4d",
+  "inputs": [
+    {
+      "path": "apps/coop/store.mjs",
+      "bytes": 19460,
+      "sha256": "fbe63a8178f08a6f638f89bd7d4e418c61339ff7096ad32e3028d72b80067c1a"
+    },
+    {
+      "path": "apps/coop/server.mjs",
+      "bytes": 11691,
+      "sha256": "0d2356ef504eeafbbfefec5c3888daa4a8ebead7892baf6c0a986e3684eecc20"
+    },
+    {
+      "path": "apps/coop/README.md",
+      "bytes": 11440,
+      "sha256": "4f35a5ab67bbf91e787a819bc481fb066be93e37468f1726e95f72b35fbfe04c"
+    },
+    {
+      "path": "scripts/test/coop-signalling.test.mjs",
+      "bytes": 28536,
+      "sha256": "a7e795b75bd26e9920fb89886a1b752f3395016adb34ca1e8b0902f9193771a5"
+    }
+  ]
+}

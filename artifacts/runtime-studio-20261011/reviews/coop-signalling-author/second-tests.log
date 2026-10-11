@@ -1,0 +1,25 @@
+✔ HTTP exact Origin, CORS and fixed routes reject untrusted or forged requests (40.4019ms)
+✔ AES-GCM invite is encrypted hex and rejects byte, version, expiry and restart changes (17.0524ms)
+✔ concurrent HTTP admission reserves only host plus seven, including all pending guests (12.3242ms)
+✔ reservations and active guests expire separately; heartbeat does not extend pending admission (15.8121ms)
+✔ guest cannot end, replace, forge metadata, address strangers or bypass offer roles (21.1435ms)
+✔ host end publishes every final long-poll notice atomically, even with guests pending (22.4047ms)
+✔ host leave, timeout and absolute expiry retain a bounded terminal notice then erase credentials (18.2645ms)
+✔ replacement ends only the previous session and failed replacement preserves it (10.7705ms)
+✔ event replay and acknowledgment enforce queue capacity without silently dropping signals (15.5159ms)
+✔ body, SDP and ICE byte bounds and schemas reject oversized or forwarding payloads (15.6648ms)
+✔ unauthenticated failures consume bounded admission rates; session and client quotas are finite (29.289ms)
+✔ per-sender and per-session signaling rates refuse excess without adding events (12.8343ms)
+✔ one bounded long poll per participant, abort cleanup and finite timeout (69.1499ms)
+✔ service stop resolves existing polls and closes every test listener (17.1751ms)
+✔ pure queued transport is cloned and retained departed credentials stay bounded (0.3729ms)
+✔ byte quota and membership overflow preserve terminal notices instead of orphaning peers (6.9549ms)
+✔ ready and guest leave are once-only, free capacity and prune old credentials while host stays live (13.676ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 403.1115

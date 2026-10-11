@@ -1,0 +1,25 @@
+✔ live license portraits deliver all 27 independent appearance choices to native rendering (21.1331ms)
+✔ missing, fractional or malformed profile tokens never invent a fallback identity (4.0795ms)
+✔ short-window license body clips the full portrait geometry above the fixed footer (2.2326ms)
+✔ zoom slider pixel thumb follows the semantic range at both limits and default zoom (1.9933ms)
+✔ fractional CSS campaign icons retain authored integer fit and measured centers (12.2366ms)
+✔ champion emblem earned state comes from saved progress rather than focus (1.8025ms)
+✔ volume and default HTML range bounds produce finite clamped pixel positions (3.5924ms)
+✔ native controls receive physical active state and cancellation without changing geometry (1.1819ms)
+✔ semantic actions carry persistent selection independently of focus and category colors (1.1396ms)
+✔ scroll clipping intersects panel on both axes and rejects wholly obscured actions (1.2699ms)
+✔ console command preserves spaces and sends the actual codepoint caret, including selection-only edits (2.5164ms)
+✔ pause actions inherit their own scroll viewport rather than bleeding into the footer (0.6887ms)
+✔ settings transfer independently measured input and label rectangles through UI scaling (0.9909ms)
+✔ physical menu font caps preserve sub-unit native glyph scale on large viewports (2.0317ms)
+✔ facility pixel labels require hover or deliberate focus while controls keep their hit geometry (2.6137ms)
+✔ dialogue self-scroll moves full text through a fixed clip without touching actions (3.08ms)
+✔ dialogue scrolling clamps invalid/overshoot metrics and leaves other paragraphs untouched (5.2121ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 509.3591

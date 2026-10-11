@@ -1,0 +1,13 @@
+✔ actual Vite never-listened close is idempotent and releases its lease (21.1842ms)
+✔ actual Vite restarts twice without releasing its cross-process reservation (84.3351ms)
+✔ rebundled Vite plugin owners keep the lease until their final explicit close (17.0632ms)
+✔ actual Vite preview close releases its lease (8.43ms)
+✔ failed Vite preview listen releases the lease and preserves the occupied port owner (7.2466ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 529.3575

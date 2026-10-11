@@ -1,0 +1,10 @@
+{
+  "package": "7.3.7",
+  "chunk_path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\node_modules\\vite\\dist\\node\\chunks\\config.js",
+  "chunk_bytes": 1342444,
+  "chunk_sha256": "2e71344450b7c25a7fe0848d5ee474fb7342614d900ab9168588986150cbb9f9",
+  "source_excerpts": {
+    "restart_lines": "26010\u201326044",
+    "close_lines": "25920\u201325940"
+  }
+}

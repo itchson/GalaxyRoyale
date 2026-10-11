@@ -1,0 +1,182 @@
+{
+  "version": 1,
+  "repair_commit": "3d52739fb22e3fc83a01e82e314830bd394ae200",
+  "test_commit": "d4ca915eaf79428fb612b2d0169366b6da7ecaf6",
+  "scope": "Independent actual ephemeral Node/Vite lifecycle tests and source review; no persistent game/browser/build acceptance",
+  "files": [
+    {
+      "path": "actual-vite-review.log",
+      "bytes": 888,
+      "sha256": "775d931fab2b694f2bbb6f2bd71d829ca4bda5520c95ab4b6f25ba1c5caa2257",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "actual-vite-review.test.mjs",
+      "bytes": 6250,
+      "sha256": "93c8d4a27486c0c10a4bfa218ca38520a957c0ba8746c640fda869a3e3c2f420",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "baseline-source/apps/game/vite.config.ts",
+      "bytes": 687,
+      "sha256": "a5c02859f111a6433669f31422ddcbfefe81d46a4c4a7a203234097fcf247abe",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "baseline-source/scripts/dev.mjs",
+      "bytes": 2064,
+      "sha256": "ba4ce34738419d1b1624b86c8f14e912e212b3ba146d86bc4c7e62ae3b4725b5",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "baseline-source/scripts/game-runtime-lease.d.mts",
+      "bytes": 219,
+      "sha256": "51cecfef36b11bd57293f85e0fbc6ec005c29847521f4c76729571ec9395b5c5",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "baseline-source/scripts/game-runtime-lease.mjs",
+      "bytes": 1620,
+      "sha256": "06dda924d24a9fdde1d25fd032ef3dac0afdc18af524a4936b0396025d726d66",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "baseline-source/scripts/test/game-runtime-lease.test.mjs",
+      "bytes": 2158,
+      "sha256": "6ca54927f79e972839036c08e2b0586f61ec8f11edf5baa65fdc2c6906e235c9",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "execution-inputs.json",
+      "bytes": 970,
+      "sha256": "b25a696199db476be1482e0f89bd2ad17fd2751355a964a3244b3d9c28173287",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "first-repair-source/apps/game/vite.config.ts",
+      "bytes": 687,
+      "sha256": "a5c02859f111a6433669f31422ddcbfefe81d46a4c4a7a203234097fcf247abe",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "first-repair-source/scripts/dev.mjs",
+      "bytes": 2064,
+      "sha256": "ba4ce34738419d1b1624b86c8f14e912e212b3ba146d86bc4c7e62ae3b4725b5",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "first-repair-source/scripts/game-runtime-lease.d.mts",
+      "bytes": 219,
+      "sha256": "51cecfef36b11bd57293f85e0fbc6ec005c29847521f4c76729571ec9395b5c5",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "first-repair-source/scripts/game-runtime-lease.mjs",
+      "bytes": 2831,
+      "sha256": "a16c91cdbc8bf9a62513264ecb3fc2ba7b78fbcced8ce7fa53eade6129b1a715",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "first-repair-source/scripts/test/game-runtime-lease.test.mjs",
+      "bytes": 2158,
+      "sha256": "6ca54927f79e972839036c08e2b0586f61ec8f11edf5baa65fdc2c6906e235c9",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "first-repair-source-pins.json",
+      "bytes": 894,
+      "sha256": "d3176e0ab14c977641910031d3deb644b3ef1c53a0e7ddc4a6cd4a274395772d",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "fixture-first-load-error.log",
+      "bytes": 1546,
+      "sha256": "e72afddcc063b3a47c596b8ef24d1a5d69f0485d2d0803d4a693a11948048a73",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "installed-vite-close-excerpt.txt",
+      "bytes": 680,
+      "sha256": "46dca7b25c9b61c3df7f23af02cd22ec71de79e192e4a299abe53f41b6bf3146",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "installed-vite-pins.json",
+      "bytes": 366,
+      "sha256": "2eb1ea9c50ac2e8a94242ce113d85a95de498c928a7c45bd77a230c28230a27c",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "installed-vite-restart-excerpt.txt",
+      "bytes": 1704,
+      "sha256": "53e55313b9fcd76444bcdb77744f82e5e707498578615169f083ea2b21d3023b",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "lease-supervisor-tests.log",
+      "bytes": 464,
+      "sha256": "e54d23f138e557767a45c329f8a451fc365248875fbe87663c3ef6b89eb2105e",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "permanent-vite-tests.log",
+      "bytes": 553,
+      "sha256": "221330991df8f40d979162c8863fc5f77b52518d125b124bed9088aa055b6b39",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "permanent-vite.test.mjs",
+      "bytes": 5244,
+      "sha256": "c2818c93c0fc5eee6d253a0bac1ee5c9bdd9d84d9206c76684757968ca01e63b",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "repair-source/apps/game/vite.config.ts",
+      "bytes": 687,
+      "sha256": "a5c02859f111a6433669f31422ddcbfefe81d46a4c4a7a203234097fcf247abe",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "repair-source/scripts/dev.mjs",
+      "bytes": 2064,
+      "sha256": "ba4ce34738419d1b1624b86c8f14e912e212b3ba146d86bc4c7e62ae3b4725b5",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "repair-source/scripts/game-runtime-lease.d.mts",
+      "bytes": 232,
+      "sha256": "7d92c888a76b80a570c18e0a874f5e00dc695bd8cdbbf326bbf77a663b63dacc",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "repair-source/scripts/game-runtime-lease.mjs",
+      "bytes": 2873,
+      "sha256": "c9b319cb55f7f5e5472c2917f318e1ff22326ebd8c14c69ba05caabde37a5569",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "repair-source/scripts/test/game-runtime-lease.test.mjs",
+      "bytes": 2158,
+      "sha256": "6ca54927f79e972839036c08e2b0586f61ec8f11edf5baa65fdc2c6906e235c9",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "REVIEW.md",
+      "bytes": 4343,
+      "sha256": "ecd9a49668cad6408b29fe319dbedbf3be62b99d6f3d47563f04590a50cd8cc0",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "source-pins.json",
+      "bytes": 2666,
+      "sha256": "8d6c9b7d25a17a1fc8dc4d49f36b03523b71e9f059751381368f664da227363f",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "verify.py",
+      "bytes": 933,
+      "sha256": "39612fc4d7380b9062fd9294664d9c447b780f1f381421fd183126854cc6dded",
+      "domain": "raw frozen bytes"
+    }
+  ]
+}

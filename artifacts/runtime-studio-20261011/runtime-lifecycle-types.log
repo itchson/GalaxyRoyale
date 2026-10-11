@@ -1,0 +1,3 @@
+$ tsc --noEmit
+apps/game/vite.config.ts(4,35): error TS7016: Could not find a declaration file for module '../../scripts/game-runtime-lease.mjs'. 'C:/Users/mitch/Documents/ChatGPT/galaxy-royale/scripts/game-runtime-lease.mjs' implicitly has an 'any' type.
+[ELIFECYCLE] Command failed with exit code 2.

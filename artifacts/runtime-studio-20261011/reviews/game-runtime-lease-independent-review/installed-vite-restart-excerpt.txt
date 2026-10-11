@@ -1,0 +1,35 @@
+26010: async function restartServer(server) {
+26011: 	global.__vite_start_time = performance$1.now();
+26012: 	let inlineConfig = server.config.inlineConfig;
+26013: 	if (server._forceOptimizeOnRestart) inlineConfig = mergeConfig(inlineConfig, { forceOptimizeDeps: true });
+26014: 	{
+26015: 		let newServer = null;
+26016: 		try {
+26017: 			newServer = await _createServer(inlineConfig, {
+26018: 				listen: false,
+26019: 				previousEnvironments: server.environments,
+26020: 				previousShortcutsState: server._shortcutsState
+26021: 			});
+26022: 		} catch (err$2) {
+26023: 			server.config.logger.error(err$2.message, { timestamp: true });
+26024: 			server.config.logger.error("server restart failed", { timestamp: true });
+26025: 			return;
+26026: 		}
+26027: 		server._shortcutsState = void 0;
+26028: 		await server.close();
+26029: 		const middlewares = server.middlewares;
+26030: 		newServer._configServerPort = server._configServerPort;
+26031: 		newServer._currentServerPort = server._currentServerPort;
+26032: 		Object.assign(server, newServer);
+26033: 		middlewares.stack = newServer.middlewares.stack;
+26034: 		server.middlewares = middlewares;
+26035: 		newServer._setInternalServer(server);
+26036: 	}
+26037: 	const { logger, server: { port, middlewareMode } } = server.config;
+26038: 	if (!middlewareMode) await server.listen(port, true);
+26039: 	else await Promise.all(Object.values(server.environments).map((e$1) => e$1.listen(server)));
+26040: 	logger.info("server restarted.", { timestamp: true });
+26041: 	if (server._shortcutsState?.options) bindCLIShortcuts(server, { print: false }, true);
+26042: }
+26043: /**
+26044: * Internal function to restart the Vite server and print URLs if changed

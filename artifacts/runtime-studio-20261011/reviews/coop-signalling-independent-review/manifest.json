@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "commit": "2fe20c6401e65f8dcc790b537269e2de18d85b4d",
+  "scope": "Independent read-only exact source review and20 ephemeral focused cases; no actual co-op/browser/game/deployment acceptance",
+  "files": [
+    {
+      "path": "execution-platform.json",
+      "bytes": 741,
+      "sha256": "c112d31fd9fec4ddad92c5bfcb6f1ae313dddccc7c538dec022445ca66e25f85",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "independent-tests.log",
+      "bytes": 2133,
+      "sha256": "9187c7c6de80df696ba2df34767693fdad9bc7d05a30ccf5758d64ca03e1a456",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "peer-final-tests.log",
+      "bytes": 2132,
+      "sha256": "6795d1e6fabc3516684ab36d95f43a2b9bf634fd46de7dfa88fc51d9925a4bd0",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "peer-HANDOFF.md",
+      "bytes": 5924,
+      "sha256": "55f7a33b8c91b77299f6add0d1acdcb62e311ed780c860372841fa312b2e0cd5",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "peer-manifest.json",
+      "bytes": 3703,
+      "sha256": "48f9613d77016d081549305c0d6ebd3e4a12545d7cde327c19d4526791434a71",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "peer-verification.json",
+      "bytes": 1690,
+      "sha256": "68f5a567433f3330c79e85910898abcf828294f790763910780b59d2bb9d4300",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "REVIEW.md",
+      "bytes": 4929,
+      "sha256": "f6c06f715b9eadb9f1c72726c6b193be7578fbe7041ec8f459f3a7c0f2831c56",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "source/apps/coop/README.md",
+      "bytes": 11440,
+      "sha256": "4f35a5ab67bbf91e787a819bc481fb066be93e37468f1726e95f72b35fbfe04c",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "source/apps/coop/server.mjs",
+      "bytes": 11691,
+      "sha256": "0d2356ef504eeafbbfefec5c3888daa4a8ebead7892baf6c0a986e3684eecc20",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "source/apps/coop/store.mjs",
+      "bytes": 19460,
+      "sha256": "fbe63a8178f08a6f638f89bd7d4e418c61339ff7096ad32e3028d72b80067c1a",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "source/scripts/test/coop-signalling.test.mjs",
+      "bytes": 28536,
+      "sha256": "a7e795b75bd26e9920fb89886a1b752f3395016adb34ca1e8b0902f9193771a5",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "source-pins.json",
+      "bytes": 716,
+      "sha256": "819f1d21704a33f8e1923a03b42115f8b21a22956358af065d769b225deb00c7",
+      "domain": "raw frozen bytes"
+    },
+    {
+      "path": "verify.py",
+      "bytes": 668,
+      "sha256": "d3cc90230b892df0bf8123d24732d50f68354eb6030baa513f7e3fe98faff29d",
+      "domain": "raw frozen bytes"
+    }
+  ]
+}

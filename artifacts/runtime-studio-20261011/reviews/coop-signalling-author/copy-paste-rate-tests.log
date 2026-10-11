@@ -1,0 +1,66 @@
+✔ HTTP exact Origin, CORS and fixed routes reject untrusted or forged requests (39.5383ms)
+✔ AES-GCM invite is encrypted hex and rejects byte, version, expiry and restart changes (25.9886ms)
+✔ concurrent HTTP admission reserves only host plus seven, including all pending guests (12.34ms)
+✖ reservations and active guests expire separately; heartbeat does not extend pending admission (15.7568ms)
+✔ guest cannot end, replace, forge metadata, address strangers or bypass offer roles (19.7843ms)
+✔ host end publishes every final long-poll notice atomically, even with guests pending (24.193ms)
+✔ host leave, timeout and absolute expiry retain a bounded terminal notice then erase credentials (15.4702ms)
+✖ replacement ends only the previous session and failed replacement preserves it (6.3522ms)
+✔ authenticated replacement shares create rates across new bearer credentials (11.1141ms)
+✔ event replay and acknowledgment enforce queue capacity without silently dropping signals (15.0153ms)
+✔ body, SDP and ICE byte bounds and schemas reject oversized or forwarding payloads (13.8808ms)
+✔ unauthenticated failures consume bounded admission rates; session and client quotas are finite (29.5185ms)
+✔ per-sender and per-session signaling rates refuse excess without adding events (15.163ms)
+✔ one bounded long poll per participant, abort cleanup and finite timeout (52.1089ms)
+✔ service stop resolves existing polls and closes every test listener (11.7082ms)
+✔ pure queued transport is cloned and retained departed credentials stay bounded (0.612ms)
+✔ byte quota and membership overflow preserve terminal notices instead of orphaning peers (7.4745ms)
+✔ ready and guest leave are once-only, free capacity and prune old credentials while host stays live (15.8507ms)
+✔ chunked request stream enforces the body bound without a Content-Length header (4.8548ms)
+✔ maintenance wakes an outstanding poll on host expiry with its retained end notice (259.2137ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 18
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 658.9337
+
+✖ failing tests:
+
+test at scripts\test\coop-signalling.test.mjs:247:1
+✖ reservations and active guests expire separately; heartbeat does not extend pending admission (15.7568ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  410 !== 200
+  
+      at TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/coop-signalling.test.mjs:291:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1332:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 410,
+    expected: 200,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at scripts\test\coop-signalling.test.mjs:437:1
+✖ replacement ends only the previous session and failed replacement preserves it (6.3522ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  429 !== 201
+  
+      at TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/coop-signalling.test.mjs:454:10)
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async Test.run (node:internal/test_runner/test:1332:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 429,
+    expected: 201,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

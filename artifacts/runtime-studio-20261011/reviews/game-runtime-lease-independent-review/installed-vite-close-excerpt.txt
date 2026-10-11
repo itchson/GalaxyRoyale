@@ -1,0 +1,21 @@
+25920: 	let hasListened = false;
+25921: 	const openSockets = /* @__PURE__ */ new Set();
+25922: 	server.on("connection", (socket) => {
+25923: 		openSockets.add(socket);
+25924: 		socket.on("close", () => {
+25925: 			openSockets.delete(socket);
+25926: 		});
+25927: 	});
+25928: 	server.once("listening", () => {
+25929: 		hasListened = true;
+25930: 	});
+25931: 	return () => new Promise((resolve$4, reject) => {
+25932: 		openSockets.forEach((s) => s.destroy());
+25933: 		if (hasListened) server.close((err$2) => {
+25934: 			if (err$2) reject(err$2);
+25935: 			else resolve$4();
+25936: 		});
+25937: 		else resolve$4();
+25938: 	});
+25939: }
+25940: function resolvedAllowDir(root, dir) {
