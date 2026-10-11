@@ -59,6 +59,8 @@ function pixelScene({
       if (selector === ".menu-tabs" && this.nav) return root;
       if (selector === "#collection-navigation" && this.collectionNav)
         return root;
+      if (selector === ".collection-filters" && this.collectionFilter)
+        return root;
       if (
         selector.includes(
           scrollId.startsWith(".") ? scrollId : `#${scrollId}`,
@@ -488,6 +490,32 @@ test("MEISHI collection selection remains visible after focus leaves the navigat
   assert.equal(nodes[0].selected, true);
   assert.equal(nodes[0].active, false);
   assert.equal(nodes[1].selected, false);
+});
+
+test("owned filters retain selected native style while category filters keep their semantic color", () => {
+  const scene = pixelScene({
+    buttons: [
+      {
+        collectionFilter: true,
+        attributes: { "aria-pressed": "true" },
+        textContent: "OWNED",
+      },
+      {
+        collectionFilter: true,
+        dataset: { pixelAction: "offense-button" },
+        attributes: { "aria-pressed": "true" },
+        textContent: "OFFENSE",
+      },
+    ],
+  });
+  const nodes = scene.groups[0].nodes.filter(
+    (node) => node.text === "OWNED" || node.text === "OFFENSE",
+  );
+  assert.deepEqual(
+    Array.from(nodes, (node) => node.kind),
+    ["nav-tab", "offense-button"],
+  );
+  assert.ok(nodes.every((node) => node.selected && !node.active));
 });
 
 test("scroll clipping intersects panel on both axes and rejects wholly obscured actions", () => {

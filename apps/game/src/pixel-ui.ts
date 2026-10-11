@@ -148,7 +148,8 @@ export class PixelUiBridge {
       if (element.classList.contains("dock-facility")) return "facility-label";
       if (
         element.closest(".menu-tabs") ||
-        element.closest("#collection-navigation")
+        element.closest("#collection-navigation") ||
+        (element.closest(".collection-filters") && !element.dataset.pixelAction)
       )
         return "nav-tab";
       if (element.classList.contains("primary-button")) return "primary-button";

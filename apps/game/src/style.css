@@ -296,6 +296,15 @@ body:not(.pixel-ready) #universe {
 .menu-close:hover:not(:disabled) {
   color: #f1f7ff;
 }
+.meishi-settings {
+  position: absolute;
+  top: var(--ui-pad);
+  right: calc(var(--ui-pad) + var(--ui-hit) + 8px);
+}
+.menu-card:has(#meishi-content:not([hidden])) > h2,
+.menu-card:has(#meishi-content:not([hidden])) > #menu-description {
+  width: calc(100% - 2 * var(--ui-hit) - 16px);
+}
 .menu-card p {
   font-size: var(--ui-text);
   color: #a2b0c9;

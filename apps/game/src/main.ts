@@ -985,6 +985,7 @@ function selectMenuTab(tab: MenuTab): void {
   element("menu-description").hidden = !headings[tab][1];
   element("pause-content").hidden = tab !== "pause";
   element("meishi-content").hidden = tab !== "meishi";
+  element("meishi-settings").hidden = tab !== "meishi";
   element("cargo-content").hidden = tab !== "cargo";
   element("collection-navigation").hidden = ![
     "pause",
@@ -1869,6 +1870,9 @@ element("resume").addEventListener("click", () => void resume());
 element("launch-settings").addEventListener("click", openLaunchSettings);
 element("menu-close").addEventListener("click", () => void resume());
 element("pause-settings").addEventListener("click", () => openMenu("settings"));
+element("meishi-settings").addEventListener("click", () =>
+  openMenu("settings"),
+);
 for (const page of [
   "meishi",
   "cargo",
