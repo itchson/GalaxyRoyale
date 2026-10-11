@@ -141,11 +141,56 @@ function text(tag: "h3" | "p", value: string, className = ""): HTMLElement {
   const node = document.createElement(tag);
   node.textContent = value;
   node.className = className;
+  node.dataset.pixelKind =
+    tag === "h3"
+      ? "collection-name"
+      : className === "loadout-reason"
+        ? "collection-reason"
+        : className === "collection-state"
+          ? "collection-state"
+          : "collection-meta";
   return node;
 }
 function section(className: string): HTMLElement {
   const node = document.createElement("div");
   node.className = className;
+  return node;
+}
+/** Presentation flags only: availability, prices and inventory come from Rust. */
+function collectionCard(
+  className: string,
+  category = -1,
+  selected = false,
+): HTMLElement {
+  const node = section(className);
+  node.dataset.pixelKind = "collection-entry";
+  node.dataset.pixelValue = String(category);
+  node.dataset.active = String(selected);
+  return node;
+}
+function symbol(
+  kind: "category-symbol" | "corporation-symbol",
+  value: number,
+): HTMLElement {
+  const node = section("collection-symbol");
+  node.dataset.pixelKind = kind;
+  node.dataset.pixelValue = String(value);
+  node.setAttribute("aria-hidden", "true");
+  return node;
+}
+function collectionHeading(name: string, category: number): HTMLElement {
+  const node = section("collection-heading");
+  node.append(symbol("category-symbol", category), text("h3", name));
+  return node;
+}
+function collectionState(value: string, state: number): HTMLElement {
+  const node = text("p", value, "collection-state");
+  node.dataset.pixelValue = String(state);
+  return node;
+}
+function cost(value: string): HTMLElement {
+  const node = text("p", value);
+  node.dataset.pixelKind = "collection-cost";
   return node;
 }
 function button(
@@ -179,6 +224,7 @@ function rank(
 function categoryHeading(category: number, points: number): HTMLElement {
   const heading = section(`upgrade-category ${colors[category]}`);
   heading.append(
+    symbol("corporation-symbol", [1, 2, 0][category]),
     text(
       "p",
       `${categories[category]} / ${points} ${["RENKO", "HUGO", "PAN"][category]} POINTS`,
@@ -221,29 +267,25 @@ function recipe(
       "coolant-crystal",
     ].indexOf(named.id);
     box.append(
-      text(
-        "p",
+      cost(
         `FIRST UPGRADE / ${named.name.toUpperCase()} ${named.amount} / BANKED ${hud.material_training_stash?.[index] ?? 0}`,
       ),
     );
     return box;
   }
   box.append(
-    text(
-      "p",
+    cost(
       `${["RENKO", "HUGO", "PAN"][category]} POINTS ${pointCost} / HAVE ${hud.currency[category] ?? 0}`,
     ),
   );
   box.append(
-    text(
-      "p",
+    cost(
       `T${materialTier} MATERIALS ${materialCost} / BANKED ${hud.material_stash[materialTier - 1] ?? 0}`,
     ),
   );
   if (component)
     box.append(
-      text(
-        "p",
+      cost(
         `${component.name.toUpperCase()} ${component.amount} / BANKED ${component.owned}`,
       ),
     );
@@ -353,7 +395,7 @@ export function paintForge(
     );
     const workshop = section("component-list");
     for (const component of hud.components) {
-      const card = section("component-card");
+      const card = collectionCard("component-card", component.category);
       card.setAttribute("aria-description", component.description);
       const header = section("component-heading");
       const icon = section("component-icon");
@@ -380,8 +422,7 @@ export function paintForge(
       component.materials.forEach((amount, tier) => {
         if (amount > 0)
           costs.append(
-            text(
-              "p",
+            cost(
               `T${tier + 1} MATERIALS ${amount} / BANKED ${hud.material_stash[tier] ?? 0}`,
             ),
           );
@@ -496,19 +537,21 @@ export function paintForge(
     for (const ability of visible) {
       const category = ability.category;
       const equipped = hud.loadout[category];
-      const card = section("ability-card");
+      const card = collectionCard("ability-card", category, ability.equipped);
       card.dataset.equipped = String(ability.equipped);
       card.dataset.abilityId = ability.id;
-      card.append(text("h3", ability.name), text("p", ability.description));
+      card.append(
+        collectionHeading(ability.name, category),
+        text("p", ability.description),
+      );
       if (ability.owned)
         card.append(
-          text(
-            "p",
+          collectionState(
             `${rank(ability)}${ability.equipped ? " / EQUIPPED" : " / OWNED"}`,
+            ability.equipped ? 3 : 2,
           ),
         );
-      else
-        card.append(text("p", "BLUEPRINT / NOT CRAFTED", "collection-state"));
+      else card.append(collectionState("BLUEPRINT / NOT CRAFTED", 1));
       card.append(
         text(
           "p",
@@ -597,7 +640,11 @@ export function paintForge(
     root.append(shipSummary, text("h3", "AUTOMATIC ABILITY SLOTS"));
     const slots = section("loadout-slots");
     for (let category = 0; category < 3; category++) {
-      const row = section("loadout-slot");
+      const row = collectionCard(
+        "loadout-slot",
+        category,
+        !!hud.loadout[category],
+      );
       const content = section("loadout-card-content");
       content.append(categoryHeading(category, hud.currency[category] ?? 0));
       const equipped = hud.loadout[category];
@@ -640,7 +687,7 @@ export function paintForge(
     );
     const hardware = section("hardware-list");
     for (const item of hud.upgrades) {
-      const card = section("hardware-card");
+      const card = collectionCard("hardware-card", item.category);
       card.append(
         categoryHeading(item.category, hud.currency[item.category] ?? 0),
       );
@@ -735,7 +782,8 @@ export function paintShipHangar(
       (view.filter === "blueprint" && !ship.owned && ship.craftable),
   );
   for (const ship of visible) {
-    const card = section("ship-hangar-card");
+    // Construction currency is not the hull's manufacturer.
+    const card = collectionCard("ship-hangar-card", -1, ship.selected);
     card.dataset.selected = String(ship.selected);
     card.dataset.shipId = String(ship.id);
     const icon = section("campaign-icon campaign-ship");
@@ -753,8 +801,7 @@ export function paintShipHangar(
     const content = section("loadout-card-content");
     content.append(text("h3", ship.name), text("p", ship.ability));
     content.append(
-      text(
-        "p",
+      collectionState(
         ship.selected
           ? "ACTIVE / OWNED"
           : ship.owned
@@ -762,7 +809,7 @@ export function paintShipHangar(
             : ship.craftable
               ? "BLUEPRINT / NOT CRAFTED"
               : "FOUND / BLUEPRINT REQUIRED",
-        "collection-state",
+        ship.selected ? 3 : ship.owned ? 2 : ship.craftable ? 1 : 0,
       ),
     );
     if (ship.owned) {

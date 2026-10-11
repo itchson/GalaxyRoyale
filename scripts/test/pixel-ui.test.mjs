@@ -117,6 +117,7 @@ function pixelScene({
     text.id = paragraph.id ?? "dialogue-text";
     text.tagName = "P";
     text.innerText = paragraph.text ?? "A complete briefing to scroll.";
+    text.dataset = paragraph.dataset ?? {};
     text.bounds = paragraph.bounds;
     text.clientHeight = paragraph.clientHeight ?? paragraph.bounds.height;
     text.scrollHeight = paragraph.scrollHeight;
@@ -171,8 +172,11 @@ function pixelScene({
   root.querySelectorAll = (selector) =>
     selector === ".settings label"
       ? [label]
-      : selector === "[data-pixel-kind]" && icon
-        ? [art]
+      : selector === "[data-pixel-kind]"
+        ? [
+            ...(icon ? [art] : []),
+            ...(paragraph?.dataset?.pixelKind ? [text] : []),
+          ]
         : selector === "button,.import-label"
           ? buttonElements
           : flight && selector.includes(".dock-facility")
@@ -256,6 +260,48 @@ function sliderScene(options) {
   assert.ok(slider, "actual semantic slider must reach the WASM scene");
   return slider;
 }
+
+test("collection copy reaches native state/cost routes once with literal measured text", () => {
+  const scene = pixelScene({
+    paragraph: {
+      id: "ability-state",
+      text: "OWNED RANK 5 / ACTIVE RANK 2 / EQUIPPED",
+      bounds: { x: 8, y: 20, width: 180, height: 18 },
+      dataset: { pixelKind: "collection-state", pixelValue: "3" },
+    },
+  });
+  const nodes = scene.groups[0].nodes.filter(
+    (n) => n.kind === "collection-state",
+  );
+  assert.equal(
+    nodes.length,
+    1,
+    "art iteration must not emit an empty duplicate text node",
+  );
+  assert.equal(nodes[0].value, 3);
+  assert.equal(nodes[0].text, "OWNED RANK 5 / ACTIVE RANK 2 / EQUIPPED");
+  assert.deepEqual(Array.from(nodes[0].rect), [8, 20, 180, 18]);
+  const entry = pixelScene({
+    icon: {
+      kind: "collection-entry",
+      index: -1,
+      width: 120,
+      height: 60,
+      dataset: { active: "true" },
+    },
+  }).groups[0].nodes.find((n) => n.kind === "collection-entry");
+  assert.equal(
+    entry.selected,
+    true,
+    "actual active hull must retain selection without pointer focus",
+  );
+  assert.equal(entry.active, false);
+  assert.equal(
+    entry.value,
+    -1,
+    "neutral hull accent must not invent a manufacturer",
+  );
+});
 
 test("live license portraits deliver all 27 independent appearance choices to native rendering", () => {
   for (const kind of [0, 1, 2])

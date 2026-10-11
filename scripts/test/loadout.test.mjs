@@ -777,3 +777,46 @@ test("in-place collection filters and categories retain the visible scroll posit
   assert.equal(f.target.scrollTop, 63);
   assert.equal(f.document.activeElement, f.find("hull-filter-owned"));
 });
+
+test("native collection hierarchy uses real equipped flags and keeps point issuer separate from hull maker", () => {
+  const f = fixture(),
+    h = hud();
+  h.abilities[2] = ability(2, 2, {
+    owned: true,
+    rank: 5,
+    effective_rank: 2,
+    equipped: true,
+  });
+  h.loadout[2] = h.abilities[2];
+  const before = copy(h);
+  f.exports.paintForge(f.target, h, f.actions);
+  const issuers = flatten(f.target).filter(
+    (n) => n.dataset.pixelKind === "corporation-symbol",
+  );
+  assert.deepEqual(
+    issuers.slice(0, 3).map((n) => n.dataset.pixelValue),
+    ["1", "2", "0"],
+  );
+  f.find("manage-2").events.click();
+  const cards = flatten(f.target).filter((n) => n.dataset.abilityId);
+  assert.equal(cards.length, 1);
+  assert.equal(cards[0].dataset.pixelKind, "collection-entry");
+  assert.equal(cards[0].dataset.active, "true");
+  const state = flatten(cards[0]).find(
+    (n) => n.dataset.pixelKind === "collection-state",
+  );
+  assert.equal(state.dataset.pixelValue, "3");
+  assert.match(state.textContent, /OWNED RANK 5 \/ ACTIVE RANK 2 \/ EQUIPPED/);
+  f.exports.paintShipHangar(f.target, h, { craft() {}, select() {} });
+  const hulls = flatten(f.target).filter((n) => n.dataset.shipId);
+  assert.equal(hulls[0].dataset.active, "true");
+  assert.equal(hulls[1].dataset.active, "false");
+  assert.ok(hulls.every((n) => n.dataset.pixelValue === "-1"));
+  assert.equal(
+    flatten(f.target).filter(
+      (n) => n.dataset.pixelKind === "corporation-symbol",
+    ).length,
+    0,
+  );
+  assert.deepEqual(h, before);
+});

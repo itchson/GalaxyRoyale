@@ -24,9 +24,9 @@
 .hardware-card,
 .ship-hangar-card {
   min-width: 0;
-  padding: calc(4px * var(--ui-scale, 1));
-  border: 1px solid #38556b;
-  background: #0a1423;
+  padding: calc(7px * var(--ui-scale, 1));
+  border: 1px solid #303c43;
+  background: #10181d;
 }
 .loadout-summary,
 .loadout-ship-summary,
@@ -63,7 +63,27 @@
 }
 .collection-summary,
 .collection-state {
-  color: #b9cadd;
+  color: #d4dce0;
+}
+.collection-heading {
+  display: flex;
+  align-items: center;
+  gap: calc(6px * var(--ui-scale, 1));
+  min-width: 0;
+}
+.collection-symbol {
+  width: calc(16px * var(--ui-scale, 1));
+  height: calc(16px * var(--ui-scale, 1));
+  flex: 0 0 auto;
+}
+.forge-view .upgrade-category {
+  display: flex;
+  align-items: center;
+  gap: calc(5px * var(--ui-scale, 1));
+}
+.collection-heading h3 {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 .loadout-slots {
   display: grid;
@@ -77,8 +97,8 @@
   gap: calc(6px * var(--ui-scale, 1));
   min-width: 0;
   padding: calc(4px * var(--ui-scale, 1));
-  border: 1px solid #38556b;
-  background: #0a1423;
+  border: 1px solid #303c43;
+  background: #10181d;
 }
 .loadout-slot .upgrade-category {
   display: block;
@@ -118,7 +138,7 @@
   color: var(--cyan);
 }
 .forge-view button[data-pixel-action="passive-button"] {
-  color: var(--amber);
+  color: #9fe18a;
 }
 .forge-view button[data-pixel-action]:disabled {
   color: #7891a5;

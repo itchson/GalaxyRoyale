@@ -21,6 +21,13 @@ interface Node {
   portrait_main?: number;
   portrait_sub?: number;
 }
+const collectionTextKinds = new Set([
+  "collection-name",
+  "collection-state",
+  "collection-meta",
+  "collection-cost",
+  "collection-reason",
+]);
 export class PixelUiBridge {
   private dirty = true;
   private animateUntil = 0;
@@ -165,6 +172,8 @@ export class PixelUiBridge {
         : "button";
     };
     const textKind = (element: HTMLElement): string => {
+      if (collectionTextKinds.has(element.dataset.pixelKind ?? ""))
+        return element.dataset.pixelKind!;
       if (element.id === "toast") return "warning-text";
       const category = element.closest(".upgrade-category");
       for (const name of ["offense", "defense", "passive"])
@@ -422,7 +431,11 @@ export class PixelUiBridge {
         if (portrait)
           add(portrait, "portrait", "", Number(portrait.dataset.portrait ?? 0));
       }
-      for (const art of root.querySelectorAll<HTMLElement>("[data-pixel-kind]"))
+      for (const art of root.querySelectorAll<HTMLElement>(
+        "[data-pixel-kind]",
+      )) {
+        // Measured collection copy is emitted once by the text loop below.
+        if (collectionTextKinds.has(art.dataset.pixelKind ?? "")) continue;
         add(
           art,
           art.dataset.pixelKind ?? "",
@@ -431,6 +444,7 @@ export class PixelUiBridge {
             : "",
           Number(art.dataset.pixelValue ?? 0),
         );
+      }
       if (root.classList.contains("console-card")) {
         const input = root.querySelector<HTMLInputElement>("#console-input");
         if (input)
@@ -477,7 +491,8 @@ export class PixelUiBridge {
                 : child.id === "save-indicator"
                   ? ""
                   : child.innerText,
-          child.id === "save-indicator" ||
+          collectionTextKinds.has(child.dataset.pixelKind ?? "") ||
+            child.id === "save-indicator" ||
             child.classList.contains("dock-facility")
             ? Number(child.dataset.pixelValue ?? 0)
             : 0,
