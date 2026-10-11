@@ -260,6 +260,16 @@ test("default unavailable dock state cannot start sessions and exposes semantic 
   assert.equal(f.node("coop-invite-output").dataset.pixelKind, "input");
 });
 
+test("available session copy discloses current guest and reward limitations", () => {
+  const f = fixture();
+  f.paint();
+  assert.match(
+    visibleText(f.target),
+    /Primary fire only; guests use factory RAICHO/,
+  );
+  assert.match(visibleText(f.target), /Shared rewards are disabled/);
+});
+
 test("join forwards the full bounded code once, including Enter composition guard", async () => {
   const f = fixture();
   const waiting = deferred();

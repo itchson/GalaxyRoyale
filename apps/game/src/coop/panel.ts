@@ -250,7 +250,7 @@ function render(view: View): boolean {
     ? "Solo play stays blocked until restoration succeeds."
     : idle && !view.canStart
       ? "Return to Haven to invite or join."
-      : "Solo progress is restored on exit. Shared rewards are not enabled yet.";
+      : "Primary fire only; guests use factory RAICHO. Solo progress is restored on exit. Shared rewards are disabled.";
   const guidance = view.root.querySelector<HTMLElement>(".coop-guidance")!;
   text(guidance, availability);
   if (view.root.getAttribute("aria-busy") !== String(view.pending !== null)) {
