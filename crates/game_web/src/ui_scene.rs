@@ -206,6 +206,7 @@ pub struct UiNode {
     pub kind: String,
     pub rect: [f32; 4],
     pub text: String,
+    pub text_align: TextAlign,
     pub font: f32,
     pub value: f32,
     pub active: bool,
@@ -226,6 +227,25 @@ pub struct UiNode {
     pub portrait_main: Option<u8>,
     #[serde(deserialize_with = "portrait_token")]
     pub portrait_sub: Option<u8>,
+}
+
+/// Semantic horizontal alignment for ordinary text; controls keep their own layout.
+#[derive(Debug, Default, Clone, Copy, PartialEq, Eq)]
+pub enum TextAlign {
+    #[default]
+    Left,
+    Center,
+    Right,
+}
+impl<'de> Deserialize<'de> for TextAlign {
+    fn deserialize<D: serde::Deserializer<'de>>(deserializer: D) -> Result<Self, D::Error> {
+        let token = serde_json::Value::deserialize(deserializer)?;
+        Ok(match token.as_str() {
+            Some("center") => Self::Center,
+            Some("right") => Self::Right,
+            _ => Self::Left,
+        })
+    }
 }
 
 fn portrait_token<'de, D: serde::Deserializer<'de>>(
@@ -1268,6 +1288,28 @@ impl Painter<'_> {
         );
     }
     fn text(&mut self, rect: [f32; 4], text: &str, font: f32, color: u32, centered: bool) {
+        self.text_aligned(
+            rect,
+            text,
+            font,
+            color,
+            if centered {
+                TextAlign::Center
+            } else {
+                TextAlign::Left
+            },
+            centered,
+        );
+    }
+    fn text_aligned(
+        &mut self,
+        rect: [f32; 4],
+        text: &str,
+        font: f32,
+        color: u32,
+        alignment: TextAlign,
+        centered: bool,
+    ) {
         let bounds = rect;
         let font = font_scale(font)
             .min((rect[3] / RoyaleMono::HEIGHT).max(MIN_FONT_SCALE))
@@ -1288,10 +1330,11 @@ impl Painter<'_> {
             rect[1]
         };
         for (row, line) in lines.iter().take(rows).enumerate() {
-            let left = if centered {
-                rect[0] + (rect[2] - (line.len() as f32 * 6.0 - 1.0) * font) * 0.5
-            } else {
-                rect[0]
+            let width = (line.len() as f32 * RoyaleMono::ADVANCE - 1.0) * font;
+            let left = match alignment {
+                TextAlign::Left => rect[0],
+                TextAlign::Center => rect[0] + (rect[2] - width) * 0.5,
+                TextAlign::Right => rect[0] + rect[2] - width,
             };
             let text_local = Transform {
                 position: Vec2::new(left, top + row as f32 * 8.0 * font),
@@ -1576,7 +1619,7 @@ impl Painter<'_> {
             WHITE
         };
         match node.kind.as_str() {
-            "text" => self.text(r, &node.text, font, color, false),
+            "text" => self.text_aligned(r, &node.text, font, color, node.text_align, false),
             "status-text" | "warning-text" => {
                 // The measured status slot is distinct from its accessible
                 // 44px hitbox. One logical pixel font stays stable on zoom;
@@ -1609,7 +1652,7 @@ impl Painter<'_> {
                     &mut self.work_remaining,
                 );
             }
-            "offense-text" | "defense-text" | "passive-text" => self.text(
+            "offense-text" | "defense-text" | "passive-text" => self.text_aligned(
                 r,
                 &node.text,
                 font,
@@ -1618,6 +1661,7 @@ impl Painter<'_> {
                 } else {
                     button_accent(&node.kind)
                 },
+                node.text_align,
                 false,
             ),
             "panel" => self.frame("panel", r, node.active, node.disabled),
@@ -2241,6 +2285,154 @@ mod tests {
                             .all(|p| p.color == 0)
                     );
                 }
+            }
+        }
+    }
+
+    #[test]
+    fn semantic_text_alignment_positions_each_wrapped_line_without_vertical_change() {
+        // The authored layout wraps into three differently sized lines at font .75.
+        let lines = ["I", "WWWW", "WWW"];
+        let count = lines
+            .iter()
+            .flat_map(|line| line.chars())
+            .map(|c| RoyaleMono::body(c).occupied_count())
+            .sum::<usize>();
+        for kind in ["text", "offense-text", "defense-text", "passive-text"] {
+            for alignment in [TextAlign::Left, TextAlign::Center, TextAlign::Right] {
+                let mut input = scene(kind);
+                let node = &mut input.groups[0].nodes[0];
+                node.text = "I\nWWWW WWW".into();
+                node.rect = [5.125, 9.375, 24.0, 24.0];
+                node.font = 0.75;
+                node.text_align = alignment;
+                let mut frame = FrameBuilder::new();
+                draw(&mut frame, &input, [0.0; 2], [640.0, 360.0], 0.0, true);
+                assert_eq!(frame.frame().pixel_count, count);
+                let batch = &frame.frame().batches[0];
+                assert_eq!(batch.transforms.len(), 8);
+                let mut index = 0;
+                for (row, line) in lines.iter().enumerate() {
+                    let width = (line.len() as f32 * 6.0 - 1.0) * 0.75;
+                    let left = 5.125
+                        + match alignment {
+                            TextAlign::Left => 0.0,
+                            TextAlign::Center => (24.0 - width) * 0.5,
+                            TextAlign::Right => 24.0 - width,
+                        };
+                    for (column, _) in line.chars().enumerate() {
+                        let t = batch.transforms[index];
+                        assert_eq!(t.a[2], 0.75);
+                        assert_eq!(t.b[1], 0.75);
+                        assert!(
+                            (t.a[0] + 220.0 - (left + column as f32 * 4.5 + 1.875)).abs() < 0.0001
+                        );
+                        assert!(
+                            (t.a[1] + 130.0 - (9.375 + row as f32 * 6.0 + 2.625)).abs() < 0.0001
+                        );
+                        index += 1;
+                    }
+                }
+                assert!(batch.pixels.iter().all(|p| p.color >> 24 != 0));
+            }
+        }
+    }
+
+    #[test]
+    fn semantic_text_alignment_clips_whole_fractional_cells_and_keeps_work_charge() {
+        let mut input = scene("text");
+        let node = &mut input.groups[0].nodes[0];
+        node.rect = [5.125, 9.375, 35.0, 18.0];
+        node.text = "WWW\nI".into();
+        node.font = 0.75;
+        let source_count = "WWWI"
+            .chars()
+            .map(|c| RoyaleMono::body(c).occupied_count())
+            .sum::<usize>();
+        for alignment in [TextAlign::Left, TextAlign::Center, TextAlign::Right] {
+            input.groups[0].nodes[0].text_align = alignment;
+            let clip = [8.125, 10.125, 29.0, 8.25];
+            input.groups[0].nodes[0].clip = Some(clip);
+            let mut frame = FrameBuilder::new();
+            draw(&mut frame, &input, [0.0; 2], [640.0, 360.0], 0.0, true);
+            assert_eq!(frame.frame().pixel_count, source_count);
+            let mut visible = 0;
+            for batch in &frame.frame().batches {
+                for pixel in &batch.pixels {
+                    if pixel.color >> 24 == 0 {
+                        continue;
+                    }
+                    visible += 1;
+                    let t = batch.transforms[pixel.transform as usize];
+                    for corner in [
+                        Vec2::splat(-0.5),
+                        Vec2::new(0.5, -0.5),
+                        Vec2::new(-0.5, 0.5),
+                        Vec2::splat(0.5),
+                    ] {
+                        let p = t.point(Vec2::from_array(pixel.local) + corner)
+                            + Vec2::new(220.0, 130.0);
+                        assert!(p.x >= clip[0] - 0.0001 && p.x <= clip[0] + clip[2] + 0.0001);
+                        assert!(p.y >= clip[1] - 0.0001 && p.y <= clip[1] + clip[3] + 0.0001);
+                    }
+                }
+            }
+            assert!(visible > 0 && visible < source_count);
+            let mut frame = FrameBuilder::new();
+            let mut painter = Painter {
+                frame: &mut frame,
+                parent: AffineTransform::default(),
+                remaining: source_count,
+                viewport: Vec2::new(640.0, 360.0),
+                clip: Some(clip),
+                work_remaining: source_count,
+            };
+            painter.node(&input.groups[0].nodes[0], 0.0, true);
+            assert_eq!((painter.remaining, painter.work_remaining), (0, 0));
+        }
+    }
+
+    #[test]
+    fn semantic_text_alignment_defaults_invalid_payloads_without_losing_other_nodes() {
+        for (token, expected) in [
+            ("\"left\"", TextAlign::Left),
+            ("\"center\"", TextAlign::Center),
+            ("\"right\"", TextAlign::Right),
+            ("\"justify\"", TextAlign::Left),
+            ("null", TextAlign::Left),
+            ("17", TextAlign::Left),
+            ("{}", TextAlign::Left),
+            ("[]", TextAlign::Left),
+        ] {
+            let json = format!(
+                r#"{{"groups":[{{"nodes":[{{"kind":"text","text_align":{token}}},{{"kind":"text"}}]}}]}}"#
+            );
+            let input: UiScene = serde_json::from_str(&json).unwrap();
+            assert_eq!(input.groups[0].nodes.len(), 2);
+            assert_eq!(input.groups[0].nodes[0].text_align, expected);
+            assert_eq!(input.groups[0].nodes[1].text_align, TextAlign::Left);
+        }
+    }
+
+    #[test]
+    fn semantic_text_alignment_does_not_change_centered_button_label_packets() {
+        let render = |alignment| {
+            let mut input = scene("primary-button");
+            input.groups[0].nodes[0].rect = [5.125, 9.375, 80.0, 24.0];
+            input.groups[0].nodes[0].text = "LAUNCH".into();
+            input.groups[0].nodes[0].font = 0.75;
+            input.groups[0].nodes[0].text_align = alignment;
+            let mut frame = FrameBuilder::new();
+            draw(&mut frame, &input, [0.0; 2], [640.0, 360.0], 0.0, true);
+            frame.finish()
+        };
+        let baseline = render(TextAlign::Left);
+        for alignment in [TextAlign::Center, TextAlign::Right] {
+            let other = render(alignment);
+            assert_eq!(baseline.pixel_count, other.pixel_count);
+            for (a, b) in baseline.batches.iter().zip(&other.batches) {
+                assert_eq!(a.pixels, b.pixels);
+                assert_eq!(a.transforms, b.transforms);
             }
         }
     }
