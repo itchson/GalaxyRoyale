@@ -180,6 +180,48 @@ function hud() {
   };
 }
 
+test("first-upgrade recipe shows the actual named banked subset and calls the ordinary native upgrade action", () => {
+  const f = fixture(),
+    data = hud();
+  data.ship_level = 1;
+  data.rank_cap = 1;
+  data.material_stash = [100, 0, 0, 0, 0];
+  data.material_training_stash = [0, 7, 0];
+  data.abilities[0] = {
+    ...data.abilities[0],
+    owned: true,
+    rank: 1,
+    effective_rank: 1,
+    equipped: true,
+    training_recipe: true,
+    required_training_material: {
+      id: "iron-filament",
+      name: "Iron Filament",
+      amount: 10,
+    },
+    material_tier: 1,
+    material_cost: 10,
+    point_cost: 0,
+    required_level: 1,
+    can_upgrade: false,
+    upgrade_reason: "Bank 10 Iron Filament.",
+  };
+  data.loadout[0] = data.abilities[0];
+  f.exports.paintForge(f.target, data, f.actions);
+  f.find("manage-0").events.click();
+  assert.match(
+    allText(f.target),
+    /FIRST UPGRADE \/ IRON FILAMENT 10 \/ BANKED 7/,
+  );
+  assert.equal(f.find("upgrade-ability-0").disabled, true);
+  data.material_training_stash[1] = 10;
+  data.abilities[0].can_upgrade = true;
+  data.abilities[0].upgrade_reason = "";
+  f.exports.paintForge(f.target, data, f.actions);
+  f.find("upgrade-ability-0").events.click();
+  assert.deepEqual(f.calls, [["upgrade", "ability-0"]]);
+});
+
 test("Forge separates three automatic slots and six ship hardware actions", () => {
   const f = fixture();
   f.exports.paintForge(f.target, hud(), f.actions);
@@ -195,7 +237,7 @@ test("Forge separates three automatic slots and six ship hardware actions", () =
     ).length,
     6,
   );
-  assert.match(allText(f.target), /SHIP LV 3 \/ 60 XP/);
+  assert.match(allText(f.target), /RAICHO LV 3 \/ 60 XP/);
   assert.ok(!allText(f.target).includes("PLAYER LEVEL"));
 });
 test("category editor has contextual Back and explicit craft versus equip", () => {
@@ -333,8 +375,8 @@ test("Hangar shows each hull's XP, construction recipe and exact selection callb
     select: (id) => calls.push(["select", id]),
     craft: (id) => calls.push(["craft", id]),
   });
-  assert.match(allText(f.target), /SHIP LV 3 \/ 60 XP/);
-  assert.match(allText(f.target), /SHIP LV 1 \/ 0 XP/);
+  assert.match(allText(f.target), /RAICHO LV 3 \/ 60 XP/);
+  assert.match(allText(f.target), /RAICHO LV 1 \/ 0 XP/);
   assert.equal(f.find("select-ship-0").disabled, true);
   assert.equal(f.find("craft-ship-2").disabled, true);
   f.find("select-ship-1").events.click();
@@ -371,13 +413,13 @@ test("victory-only hull has no fake construction recipe and retains real LV1 rew
   };
   h.campaign.ships = [royal];
   f.exports.paintShipHangar(f.target, h, { select() {}, craft() {} });
-  assert.equal(f.find("craft-ship-9").textContent, "LOCKED SHIP");
+  assert.equal(f.find("craft-ship-9").textContent, "LOCKED RAICHO");
   assert.ok(!allText(f.target).includes("POINTS 0 / HAVE"));
   assert.ok(!allText(f.target).includes("MATERIALS 0 / BANKED"));
   royal.owned = true;
   royal.can_select = true;
   f.exports.paintShipHangar(f.target, h, { select() {}, craft() {} });
-  assert.match(allText(f.target), /SHIP LV 1 \/ 0 XP \/ NEXT 20 XP/);
+  assert.match(allText(f.target), /RAICHO LV 1 \/ 0 XP \/ NEXT 20 XP/);
 });
 test("legacy stored hardware rank and active ship cap are shown separately without inventing power", () => {
   const f = fixture();

@@ -116,18 +116,21 @@ function panelFixture() {
   };
 }
 
-function guideFixture() {
+function guideFixture(
+  training = { stage: 0, description: "Accept the flight license." },
+) {
   const panel = panelFixture(),
     save = deferred(),
     toasts = [];
   let acknowledgements = 0,
     writes = 0;
   const hud = {
-    onboarding: { stage: 0, description: "Accept the flight license." },
+    onboarding: training,
     identity: {
       short_designation: "LICENSE",
       starter_ship: "PAN Pathfinder",
       starter_ability: "Flux Drive",
+      corporation_role: "Passive",
     },
   };
   const context = vm.createContext({
@@ -156,10 +159,12 @@ function guideFixture() {
   });
   vm.runInContext(compile(actualFunction("showDoraGuide")), context);
   vm.runInContext("showDoraGuide()", context);
+  const pages = [panel.element("dialogue-text").textContent];
   while (!panel.element("dialogue-next").hidden) {
     assert.equal(panel.element("dialogue-action").hidden, true);
     assert.equal(acknowledgements, 0);
     panel.click("dialogue-next");
+    pages.push(panel.element("dialogue-text").textContent);
   }
   assert.equal(panel.element("dialogue-action").hidden, false);
   return {
@@ -168,8 +173,41 @@ function guideFixture() {
     toasts,
     acknowledgements: () => acknowledgements,
     writes: () => writes,
+    pages,
   };
 }
+
+test("training contact renders the real counter and corporation material/asteroid/starter slot", () => {
+  for (const [material_name, asteroid_name, starter_name, starter_slot] of [
+    ["Phase Silicate", "porous", "Flux Drive", "passive"],
+    ["Iron Filament", "metallic", "Pulse Lens", "offense"],
+    ["Coolant Crystal", "icy", "Guard Coil", "defense"],
+  ]) {
+    const description = `Collect ${material_name}: 4/10. Banked 2, carried 2.`;
+    const f = guideFixture({
+      stage: 3,
+      version: 2,
+      description,
+      material_name,
+      asteroid_name,
+      starter_name,
+      starter_slot,
+    });
+    assert.equal(f.pages[0], description);
+    const authored = f.pages.join(" ");
+    for (const value of [
+      material_name,
+      asteroid_name,
+      starter_name,
+      starter_slot,
+    ])
+      assert.ok(authored.includes(value));
+    assert.ok(!/\{(?:material|asteroid|starter|slot)\}/.test(authored));
+    assert.ok(f.pages.every((page) => page.length <= 256));
+    assert.equal(f.acknowledgements(), 0);
+    assert.equal(f.writes(), 0);
+  }
+});
 
 test("a saved guide acknowledgement cannot close a newer contact", async () => {
   const f = guideFixture();

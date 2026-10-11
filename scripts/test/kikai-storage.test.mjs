@@ -34,7 +34,14 @@ function licensed(corporation = "pan") {
     sub_corporation: "renko",
     hex_id: "0123456789abcdef",
   };
-  p.onboarding = { stage: 0, flags: 0 };
+  p.onboarding = {
+    version: 2,
+    stage: 0,
+    flags: 0,
+    asteroids_destroyed: 0,
+    materials_collected: 0,
+    legacy_complete: false,
+  };
   p.campaign.abilities.slice(0, 3).forEach((a) => {
     a.blueprint = false;
   });
@@ -54,7 +61,7 @@ test("schema4 upgrades preserve actual progress without a license or starter gra
   p.campaign.ship_xp[0] = 120;
   p.campaign.stored_materials[0] = 7;
   const migrated = normalizeProfile(p);
-  assert.equal(migrated.schema_version, 5);
+  assert.equal(migrated.schema_version, 6);
   assert.equal(migrated.identity, null);
   assert.equal(migrated.onboarding, null);
   assert.deepEqual(migrated.campaign, p.campaign);
@@ -94,12 +101,19 @@ test("identity and onboarding validation rejects malformed keys and impossible s
     [7, 3],
     [15, 4],
     [31, 5],
-    [63, 5],
     [127, 6],
-    [96, 0],
+    [4, 0],
   ]) {
     const p = licensed();
-    p.onboarding = { flags, stage };
+    p.onboarding = {
+      version: 2,
+      flags,
+      stage,
+      asteroids_destroyed: flags & 4 ? 10 : 0,
+      materials_collected: flags & 8 ? 10 : 0,
+      legacy_complete: false,
+    };
+    if (flags === 127) p.campaign.abilities[2].rank = 2;
     assert.equal(validProfile(p), true);
   }
 });
@@ -112,7 +126,7 @@ test("licensed save reload and backup recovery preserve hash and exactly one sta
   await first.save(p);
   const next = structuredClone(p);
   next.revision++;
-  next.onboarding = { flags: 1, stage: 1 };
+  next.onboarding = { ...p.onboarding, flags: 1, stage: 1 };
   await first.save(next);
   const db = await request(indexedDB.open("galaxy-royale"));
   const tx = db.transaction("profile", "readwrite");
@@ -136,9 +150,9 @@ test("licensed save reload and backup recovery preserve hash and exactly one sta
     1,
   );
 });
-test("schema5 barrier waits for cached schema4 connection and rejects its subsequent writer", async (t) => {
+test("schema6 barrier waits for cached schema5 connection and rejects its subsequent writer", async (t) => {
   globalThis.indexedDB = new IDBFactory();
-  const opening = indexedDB.open("galaxy-royale", 2);
+  const opening = indexedDB.open("galaxy-royale", 3);
   opening.onupgradeneeded = () => opening.result.createObjectStore("profile");
   const cached = await request(opening);
   t.after(() => cached.close());
@@ -156,6 +170,131 @@ test("schema5 barrier waits for cached schema4 connection and rejects its subseq
   cached.close();
   const migrated = await load;
   assert.equal(migrated.identity, null);
-  assert.equal(current.db.version, 3);
-  await assert.rejects(request(indexedDB.open("galaxy-royale", 2)), /version/i);
+  assert.equal(current.db.version, 4);
+  await assert.rejects(request(indexedDB.open("galaxy-royale", 3)), /version/i);
+});
+
+test("schema5 tutorial migration preserves the license and earned assets without invented training counts", () => {
+  for (const flags of [0, 1, 3, 7, 15, 31, 63, 127]) {
+    const p = licensed("renko");
+    p.schema_version = 5;
+    const stages = { 0: 0, 1: 1, 3: 2, 7: 3, 15: 4, 31: 5, 63: 5, 127: 6 };
+    p.onboarding = { flags, stage: stages[flags] };
+    delete p.campaign.cargo_training_materials;
+    delete p.campaign.stored_training_materials;
+    p.campaign.ship_xp[0] = 80;
+    p.campaign.stored_materials[0] = 14;
+    const original = structuredClone(p);
+    const migrated = normalizeProfile(p);
+    assert.equal(validProfile(migrated), true);
+    assert.deepEqual(p, original);
+    assert.deepEqual(migrated.identity, p.identity);
+    assert.deepEqual(migrated.currency, p.currency);
+    assert.deepEqual(migrated.campaign.ship_xp, p.campaign.ship_xp);
+    assert.deepEqual(migrated.campaign.abilities, p.campaign.abilities);
+    assert.equal(migrated.onboarding.flags, flags === 127 ? 127 : flags & 3);
+    assert.equal(migrated.onboarding.legacy_complete, flags === 127);
+    assert.equal(migrated.onboarding.asteroids_destroyed, 0);
+    assert.equal(migrated.onboarding.materials_collected, 0);
+    assert.deepEqual(migrated.campaign.stored_training_materials, [0, 0, 0]);
+  }
+});
+
+test("named training materials are bounded Tier1 subsets and impossible mission checkpoints are rejected", () => {
+  const p = licensed();
+  p.campaign.cargo_materials[0] = 8;
+  p.campaign.stored_materials[0] = 15;
+  p.campaign.cargo_training_materials = [3, 2, 1];
+  p.campaign.stored_training_materials = [10, 2, 0];
+  p.onboarding = {
+    version: 2,
+    stage: 3,
+    flags: 7,
+    asteroids_destroyed: 10,
+    materials_collected: 6,
+    legacy_complete: false,
+  };
+  assert.equal(validProfile(p), true);
+  assert.deepEqual(normalizeProfile(p), p);
+  for (const mutate of [
+    (p) => (p.campaign.cargo_training_materials = [5, 3, 1]),
+    (p) => (p.campaign.stored_training_materials = [14, 2, 0]),
+    (p) => delete p.campaign.cargo_training_materials,
+    (p) => (p.campaign.cargo_training_materials = Array(3)),
+    (p) => (p.campaign.stored_training_materials = Array(3)),
+    (p) => (p.campaign.cargo_training_materials = [-1, 0, 0]),
+    (p) => (p.campaign.cargo_training_materials = [1.5, 0, 0]),
+    (p) => (p.onboarding.version = 1),
+    (p) => (p.onboarding.asteroids_destroyed = 11),
+    (p) => (p.onboarding.asteroids_destroyed = 9),
+    (p) => (p.onboarding.materials_collected = 10),
+    (p) => (p.onboarding = { ...p.onboarding, flags: 31, stage: 5 }),
+    (p) =>
+      (p.onboarding = {
+        ...p.onboarding,
+        flags: 63,
+        stage: 5,
+        materials_collected: 10,
+      }),
+    (p) =>
+      (p.onboarding = {
+        ...p.onboarding,
+        flags: 127,
+        stage: 6,
+        materials_collected: 10,
+      }),
+    (p) => (p.onboarding.legacy_complete = true),
+  ]) {
+    const bad = structuredClone(p);
+    mutate(bad);
+    assert.equal(validProfile(bad), false);
+  }
+});
+
+test("named material and mission snapshots recover together without duplicating a starter upgrade", async (t) => {
+  globalThis.indexedDB = new IDBFactory();
+  const store = new SaveStore();
+  await store.open();
+  t.after(() => store.db?.close());
+  const collected = licensed("hugo");
+  collected.onboarding = {
+    version: 2,
+    stage: 4,
+    flags: 15,
+    asteroids_destroyed: 10,
+    materials_collected: 10,
+    legacy_complete: false,
+  };
+  collected.campaign.stored_materials[0] = 10;
+  collected.campaign.stored_training_materials = [0, 0, 10];
+  await store.save(collected);
+  const upgraded = structuredClone(collected);
+  upgraded.revision++;
+  upgraded.onboarding = { ...upgraded.onboarding, stage: 6, flags: 127 };
+  upgraded.campaign.abilities[1].rank = 2;
+  upgraded.campaign.stored_materials[0] = 0;
+  upgraded.campaign.stored_training_materials = [0, 0, 0];
+  await store.save(upgraded);
+  const reload = new SaveStore();
+  t.after(() => reload.db?.close());
+  assert.deepEqual(await reload.open(), upgraded);
+  const db = await request(indexedDB.open("galaxy-royale"));
+  const tx = db.transaction("profile", "readwrite");
+  tx.objectStore("profile").put(
+    {
+      ...upgraded,
+      campaign: { ...upgraded.campaign, stored_training_materials: [0, 0, 10] },
+    },
+    "current",
+  );
+  await new Promise((resolve, reject) => {
+    tx.oncomplete = resolve;
+    tx.onabort = () => reject(tx.error);
+  });
+  db.close();
+  const recovery = new SaveStore();
+  t.after(() => recovery.db?.close());
+  assert.deepEqual(await recovery.open(), collected);
+  assert.match(recovery.message, /Recovered/);
+  assert.equal((await recovery.open()).campaign.abilities[1].rank, 1);
 });

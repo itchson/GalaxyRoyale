@@ -2,6 +2,7 @@ import "./flight-menu.css";
 import type { CampaignHud } from "./campaign";
 import type { EquippedAbilityHud } from "./loadout";
 import type { IdentityHud } from "./kikai";
+import { paintLicensePortrait } from "./kikai-portrait";
 
 export interface FlightMenuHud {
   identity?: IdentityHud | null;
@@ -25,12 +26,15 @@ export interface FlightMenuHud {
   loadout: (EquippedAbilityHud | null)[];
   material_cargo: number[];
   material_stash: number[];
+  material_training_cargo?: number[];
+  material_training_stash?: number[];
   cargo_materials: number;
   cargo_capacity: number;
   currency: number[];
 }
 
 interface FlightView {
+  portrait: HTMLElement;
   icon: HTMLElement;
   title: HTMLElement;
   progress: HTMLElement;
@@ -41,6 +45,8 @@ interface FlightView {
   tiers: HTMLElement;
   stash: HTMLElement;
   points: HTMLElement;
+  namedCargo: HTMLElement;
+  namedStash: HTMLElement;
 }
 const views = new WeakMap<HTMLElement, FlightView>();
 const categories = ["OFFENSE", "DEFENSE", "PASSIVE"];
@@ -54,6 +60,9 @@ function element(tag: string, className = "", value = ""): HTMLElement {
 }
 function createView(target: HTMLElement): FlightView {
   const identity = element("header", "flight-status-identity");
+  const portrait = element("section", "flight-license-portrait");
+  portrait.hidden = true;
+  portrait.setAttribute("role", "img");
   const icon = element("section", "campaign-icon campaign-ship");
   icon.dataset.pixelKind = "campaign-ship";
   icon.dataset.active = "true";
@@ -63,9 +72,9 @@ function createView(target: HTMLElement): FlightView {
   const progress = element("p");
   const license = element("p", "flight-license");
   heading.append(title, license, progress);
-  identity.append(icon, heading);
+  identity.append(portrait, heading, icon);
   const vitals = element("section", "flight-status-stats");
-  vitals.setAttribute("aria-label", "Current effective ship statistics");
+  vitals.setAttribute("aria-label", "Current effective RAICHO statistics");
   const stats = Array.from({ length: 7 }, () => element("p"));
   vitals.append(...stats);
   const abilities = element("section", "flight-status-abilities");
@@ -86,10 +95,14 @@ function createView(target: HTMLElement): FlightView {
   const tiers = element("p");
   const stash = element("p");
   const points = element("p");
+  const namedCargo = element("p");
+  const namedStash = element("p");
   inventory.append(
     cargo,
     tiers,
+    namedCargo,
     stash,
+    namedStash,
     points,
     element(
       "p",
@@ -99,6 +112,7 @@ function createView(target: HTMLElement): FlightView {
   );
   target.replaceChildren(identity, vitals, abilities, inventory);
   const view = {
+    portrait,
     icon,
     title,
     progress,
@@ -109,6 +123,8 @@ function createView(target: HTMLElement): FlightView {
     tiers,
     stash,
     points,
+    namedCargo,
+    namedStash,
   };
   views.set(target, view);
   return view;
@@ -140,6 +156,13 @@ export function paintFlightMenu(
   const ship = hud.campaign.ships.find(
     (entry) => entry.id === hud.campaign.selected_ship,
   );
+  if (view.portrait.hidden !== !hud.identity) {
+    view.portrait.hidden = !hud.identity;
+    changed = true;
+  }
+  if (hud.identity) {
+    changed = paintLicensePortrait(view.portrait, hud.identity) || changed;
+  }
   const iconValue = String(
     hud.campaign.selected_ship === 0 && hud.identity
       ? ["pan", "renko", "hugo"].indexOf(hud.identity.corporation)
@@ -159,7 +182,7 @@ export function paintFlightMenu(
     view.icon.dataset.pixelValue = iconValue;
     changed = true;
   }
-  write(view.title, ship?.name ?? "SHIP STATUS");
+  write(view.title, ship?.name ?? "RAICHO STATUS");
   write(
     view.license,
     hud.identity
@@ -195,6 +218,19 @@ export function paintFlightMenu(
   );
   write(view.tiers, tiers(hud.material_cargo));
   write(view.stash, `BANKED / ${tiers(hud.material_stash)}`);
+  for (const [node, counts, label] of [
+    [view.namedCargo, hud.material_training_cargo, "CARRIED T1 PARTS"],
+    [view.namedStash, hud.material_training_stash, "BANKED T1 PARTS"],
+  ] as const) {
+    const value = counts?.some((n) => n > 0)
+      ? `${label} / PHASE SILICATE ${number(counts[0])} / IRON FILAMENT ${number(counts[1])} / COOLANT KESSHO ${number(counts[2])}`
+      : "";
+    if (node.hidden !== !value) {
+      node.hidden = !value;
+      changed = true;
+    }
+    write(node, value);
+  }
   write(
     view.points,
     `POINTS / OFF ${number(hud.currency[0])} / DEF ${number(hud.currency[1])} / PASS ${number(hud.currency[2])}`,

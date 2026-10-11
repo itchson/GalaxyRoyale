@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 584,
+  "revision": 599,
   "name": "Galaxy Royale",
   "phase": "Playable solo slice → content and validation",
-  "updatedAt": "2026-10-11T05:30:01.031Z",
+  "updatedAt": "2026-10-11T06:15:30.344Z",
   "tasks": [
     {
       "id": "studio",
@@ -5161,12 +5161,12 @@
       "dependencies": [],
       "acceptanceCriteria": [
         {
-          "text": "OPR#1337 / DORA-PAN-RENKO-1337 has layered native portraits: green PAN hair, red RENKO horns; expression, speaking-mask and reduced-motion behavior.",
+          "text": "APR-1337 / DORA-PAN-RENKO-1337 has layered native portraits: green PAN hair, red RENKO horns; expression, speaking-mask and reduced-motion behavior.",
           "met": true
         },
         {
-          "text": "Training stages use authoritative real flight, belt, cargo, banking and crafting events.",
-          "met": true
+          "text": "New training: destroy10 asteroids of anytype, then collect10 specific asteroid materials, bank them and upgrade the main corporation equipped starter once. Counters and actions are authoritative and saved.",
+          "met": false
         },
         {
           "text": "Generated reference and native conversion/animation provenance are documented and visually reviewed.",
@@ -5181,9 +5181,9 @@
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 3,
       "createdAt": "2026-10-11T04:40:15.498Z",
-      "updatedAt": "2026-10-11T05:30:00.885Z"
+      "updatedAt": "2026-10-11T05:51:22.828Z"
     },
     {
       "id": "task-44c5f7a0",
@@ -5462,10 +5462,10 @@
     {
       "id": "task-7a4df889",
       "title": "Native player portraits for long, spiky and crew-cut Kikai hair",
-      "description": "Latest explicit user direction. This is authored original content with source and acceptance gates; not an assertion of complete integrated acceptance.",
+      "description": "Distinct generated DORO short-spiky and TALO crew-cut references are converted into96×128 native pixel packs. Engine implements independent type/hair/crystal transforms. All27 combinations, clipping, budgets and actual browser preview remain acceptance gates.",
       "department": "art/audio",
       "owner": "/root/production_research",
-      "status": "backlog",
+      "status": "active",
       "priority": "high",
       "dependencies": [],
       "acceptanceCriteria": [
@@ -5484,9 +5484,9 @@
       ],
       "evidence": [],
       "blocker": "",
-      "revision": 1,
+      "revision": 2,
       "createdAt": "2026-10-11T05:07:01.583Z",
-      "updatedAt": "2026-10-11T05:07:01.583Z"
+      "updatedAt": "2026-10-11T05:51:22.802Z"
     },
     {
       "id": "task-716d9437",
@@ -5522,6 +5522,157 @@
       "revision": 1,
       "createdAt": "2026-10-11T05:27:15.845Z",
       "updatedAt": "2026-10-11T05:27:15.845Z"
+    },
+    {
+      "id": "task-0cf909b6",
+      "title": "Live procedural droid license portrait",
+      "description": "Creator labels only DORA/DORO/TALO. Native profile portrait reflects selected type/main/sub in real time and is reused on the issued license. Preserve APR guide and player progression.",
+      "department": "engine/UX",
+      "owner": "/root",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "All27 appearance combinations preserve distinct long/spiky/crew-cut silhouettes and independent hair/horn palette roles.",
+          "met": true
+        },
+        {
+          "text": "Creator and issued-license portraits share native pixel-quad appearance parameters, with safe malformed-payload rejection.",
+          "met": true
+        },
+        {
+          "text": "Desktop and compact layouts contain portrait, controls and scrolling text without overlapping actions; actual renderer screenshots.",
+          "met": false
+        },
+        {
+          "text": "Issue/save/reload retains the exact identity and single starter grant.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Integrated native529 cases",
+          "kind": "artifact",
+          "path": "work/live-license-final-native.log"
+        },
+        {
+          "label": "Integrated shell344 pass /1 skip",
+          "kind": "artifact",
+          "path": "work/live-license-final-shell.log"
+        },
+        {
+          "label": "Actual dual-WASM42 serializer/SaveStore cases; explicit fixtures",
+          "kind": "artifact",
+          "path": "work/live-license-wasm-contract.log"
+        },
+        {
+          "label": "Actual profile asset11 checks",
+          "kind": "artifact",
+          "path": "work/live-license-profiles-assets.log"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-11T05:51:22.847Z",
+      "updatedAt": "2026-10-11T06:15:30.224Z"
+    },
+    {
+      "id": "task-63265693",
+      "title": "APR first asteroid and starter-upgrade training missions",
+      "description": "Replace one-rock/additional-ability tutorial with10 any-type asteroid kills followed by10 named materials from specified asteroid varieties. Corporation selects passive/offensive/defensive factory starter. Firstupgrade is rank1→2, available at ship level1. Materials bank on physical return and carried materials are lost on death. Diagnostic scenes never complete missions.",
+      "department": "gameplay",
+      "owner": "/root/gameplay_design",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Exactly10 real asteroid kills unlock the next mission, regardless of asteroidtype; damage alone and diagnostic scenes do not count.",
+          "met": true
+        },
+        {
+          "text": "Real variety-specific drops, capacity, loss, physical banking and10 matching material collection work for all3 corporations.",
+          "met": true
+        },
+        {
+          "text": "First starter upgrade consumes the correct banked items once and preserves other currencies/XP/loadouts.",
+          "met": true
+        },
+        {
+          "text": "Versioned saves, old completed tutorials, interrupted missions and reload are covered by native/storage/WASM tests.",
+          "met": true
+        },
+        {
+          "text": "APR dialogue and journal show accurate counters, target asteroid/material and current starter slot.",
+          "met": true
+        },
+        {
+          "text": "Natural player-earned tutorial pacing and the complete ten-kill/material/banking/upgrade run are observed separately.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Integrated native529 cases",
+          "kind": "artifact",
+          "path": "work/live-license-final-native.log"
+        },
+        {
+          "label": "Integrated shell344 pass /1 skip",
+          "kind": "artifact",
+          "path": "work/live-license-final-shell.log"
+        },
+        {
+          "label": "Actual dual-WASM42 serializer/SaveStore cases; explicit fixtures",
+          "kind": "artifact",
+          "path": "work/live-license-wasm-contract.log"
+        },
+        {
+          "label": "Actual profile asset11 checks",
+          "kind": "artifact",
+          "path": "work/live-license-profiles-assets.log"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-11T05:51:22.873Z",
+      "updatedAt": "2026-10-11T06:15:30.249Z"
+    },
+    {
+      "id": "task-cf5d37d9",
+      "title": "KIKAI / KESSHO / RAICHO lore lexicon and starter models",
+      "description": "Japanese-inspired ASCII game labels and display models PAN HIKARI, RENKO HIBANA, HUGO MAMORI. Preserve save IDs, per-hull XP and the separate champion Bulwark. Current runtime and DevBible wording are integrated.",
+      "department": "Lore / UX",
+      "owner": "/root",
+      "status": "review",
+      "priority": "normal",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Sourced lexical senses, authored fictional usage, exact starter aliases and sponsor independence are documented.",
+          "met": true
+        },
+        {
+          "text": "Current creator, guide, hangar/status and Wiki use canonical names without changing identity or save keys.",
+          "met": true
+        },
+        {
+          "text": "Actual latest browser menus/Wiki show readable updated names.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Seven real lore consistency tests",
+          "kind": "artifact",
+          "path": "work/lore-wiki-focus.log"
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-11T06:15:30.281Z",
+      "updatedAt": "2026-10-11T06:15:30.281Z"
     }
   ],
   "reviews": [
@@ -6457,6 +6608,37 @@
           "path": "artifacts/opr-integration/audio-dsp-report.json"
         }
       ]
+    },
+    {
+      "id": "review-57cb14f9",
+      "title": "Actual live-license and counted-training integration discussion",
+      "body": "Asynchronous design and implementation review, not a fabricated meeting. Gameplay authored real any-asteroid kill counters, born-variety named drops, subset cargo/stash labels, one-time factoryR2 upgrade and schema6 migration. Engine independently executed13 focused training tests and6 public-Game probes, including228 recipe token cases, u32 saturation, strict hull0/equippedR2 scope, old tutorial no-fabrication and90 diagnostic ticks; no native blocker found on b436c95. Its QA-only old fixture correction03fc8b5 is integrated. Art authored genuinely distinct DORO/TALO references/packs and independently reviewed the actual TS integration. Root fixed three reviewed defects: save retry preview divergence, short-height creator scroll overflow, and sparse named-array acceptance. Root current integrated529 native tests,344 shell passes/1 skip, TS, strict native+dual-WASM warnings,11 profile-art checks and42 headless actual WASM serializer/save cases pass. Browser capture, natural tutorial pacing and physical validation are separate gates.",
+      "author": "/root",
+      "source": "Actual integrated source checks and asynchronous specialist handoffs, 2026-10-11",
+      "createdAt": "2026-10-11T06:15:30.268Z",
+      "participants": [
+        "/root",
+        "/root/gameplay_design",
+        "/root/engine_research",
+        "/root/production_research"
+      ],
+      "taskIds": [
+        "task-0cf909b6",
+        "task-63265693",
+        "task-7a4df889"
+      ],
+      "evidence": [
+        {
+          "label": "Source and scoped headless evidence",
+          "kind": "artifact",
+          "path": "work/live-license-final-native.log"
+        },
+        {
+          "label": "Art/TS independent repaired findings",
+          "kind": "artifact",
+          "path": "work/live-license-integration-review/REVIEW.md"
+        }
+      ]
     }
   ],
   "decisions": [
@@ -6620,6 +6802,24 @@
       "author": "/root",
       "source": "Latest user canon and actual scoped work, 11 October 2026",
       "createdAt": "2026-10-11T05:27:15.828Z",
+      "status": "accepted"
+    },
+    {
+      "id": "decision-ec5024f3",
+      "title": "APR canon, live license portrait and first training loop",
+      "body": "Latest human direction supersedes earlier naming: A=DORA, O=DORO, T=TALO; guide APR-1337 is DORA-PAN-RENKO-1337 with long green PAN hair/red RENKO crystals. She is extremely old, knew humans, carries humanity forward through KIKAI, is a friendly explorer and hobby K-pop star. Creator shows only type names and live native portrait. Training starts with10 asteroid destructions of anytype, then10 specified asteroid items to upgrade the corporation starter in its passive/offensive/defensive slot. Existing player hashes and full identity are preserved. Four native agents are currently active; additional worker tasks remain bounded and cannot manufacture review evidence.",
+      "author": "/root",
+      "source": "Actual active assignments and latest user training/profile direction",
+      "createdAt": "2026-10-11T05:51:22.890Z",
+      "status": "accepted"
+    },
+    {
+      "id": "decision-557880e1",
+      "title": "Japanese-inspired game lexicon and RAICHO starter display names",
+      "body": "Latest user direction: technological species KIKAI, crystals KESSHO, flight craft RAICHO, in English ASCII letters. RAICHO is the game usage inspired by Japanese raicho/rock ptarmigan (literal thunder bird), not a claim that it is the Japanese word for spacecraft. Authored starter models: PAN HIKARI/light, RENKO HIBANA/spark, HUGO MAMORI/guarding. Preserve manufacturer/type IDs, hashes, hull0 and existing XP/loadout; aliases are prefixed old model names only. Champion Bulwark and sponsor independence remain unchanged. Primary/government and publisher dictionary references are recorded in the lexicon.",
+      "author": "/root",
+      "source": "Actual integrated source checks and asynchronous specialist handoffs, 2026-10-11",
+      "createdAt": "2026-10-11T06:15:30.312Z",
       "status": "accepted"
     }
   ],
@@ -13708,6 +13908,156 @@
       "author": "/root",
       "source": "OPR scoped integration14d19d7 and actual specialist contributions",
       "createdAt": "2026-10-11T05:30:01.031Z"
+    },
+    {
+      "id": "0a3c8d77-44b5-41ab-874a-7008ee39ed0d",
+      "revision": 585,
+      "kind": "task.update",
+      "itemId": "task-7a4df889",
+      "title": "Native player portraits for long, spiky and crew-cut Kikai hair",
+      "author": "/root",
+      "source": "Actual active assignments and latest user training/profile direction",
+      "createdAt": "2026-10-11T05:51:22.802Z"
+    },
+    {
+      "id": "a71d0a1f-4836-4cc4-8fca-2787edfdeb4b",
+      "revision": 586,
+      "kind": "task.update",
+      "itemId": "task-221245db",
+      "title": "DORA native portrait and guided initial mission",
+      "author": "/root",
+      "source": "Actual active assignments and latest user training/profile direction",
+      "createdAt": "2026-10-11T05:51:22.828Z"
+    },
+    {
+      "id": "734ebeb3-6eb6-4626-b130-7c9bcf44deb2",
+      "revision": 587,
+      "kind": "task.create",
+      "itemId": "task-0cf909b6",
+      "title": "Live procedural droid license portrait",
+      "author": "/root",
+      "source": "Actual active assignments and latest user training/profile direction",
+      "createdAt": "2026-10-11T05:51:22.847Z"
+    },
+    {
+      "id": "d5e34f12-b444-406e-8181-82b2fca413b6",
+      "revision": 588,
+      "kind": "task.create",
+      "itemId": "task-63265693",
+      "title": "APR first asteroid and starter-upgrade training missions",
+      "author": "/root",
+      "source": "Actual active assignments and latest user training/profile direction",
+      "createdAt": "2026-10-11T05:51:22.873Z"
+    },
+    {
+      "id": "d8047582-85b6-4c29-9fee-d0832c849409",
+      "revision": 589,
+      "kind": "decision",
+      "itemId": "decision-ec5024f3",
+      "title": "APR canon, live license portrait and first training loop",
+      "author": "/root",
+      "source": "Actual active assignments and latest user training/profile direction",
+      "createdAt": "2026-10-11T05:51:22.890Z"
+    },
+    {
+      "id": "cd04e90a-fb26-4a23-a14f-809c452c6c93",
+      "revision": 590,
+      "kind": "run",
+      "itemId": "run-f4e760e1",
+      "title": "/root · running",
+      "author": "/root",
+      "source": "Actual active assignments and latest user training/profile direction",
+      "createdAt": "2026-10-11T05:51:22.904Z"
+    },
+    {
+      "id": "6af4809e-d0ba-4742-886e-72e75fa3b428",
+      "revision": 591,
+      "kind": "run",
+      "itemId": "run-a8ee29b7",
+      "title": "/root/production_research · running",
+      "author": "/root",
+      "source": "Actual active assignments and latest user training/profile direction",
+      "createdAt": "2026-10-11T05:51:22.934Z"
+    },
+    {
+      "id": "359f5edf-3a63-4993-91ea-750dae53e73e",
+      "revision": 592,
+      "kind": "run",
+      "itemId": "run-e6318404",
+      "title": "/root/engine_research · running",
+      "author": "/root",
+      "source": "Actual active assignments and latest user training/profile direction",
+      "createdAt": "2026-10-11T05:51:22.951Z"
+    },
+    {
+      "id": "3efdb669-39bb-4fed-a6a9-ddca313c79d3",
+      "revision": 593,
+      "kind": "run",
+      "itemId": "run-ebc696eb",
+      "title": "/root/gameplay_design · running",
+      "author": "/root",
+      "source": "Actual active assignments and latest user training/profile direction",
+      "createdAt": "2026-10-11T05:51:22.967Z"
+    },
+    {
+      "id": "9c522a2e-a9a7-4219-a688-b071c32e1111",
+      "revision": 594,
+      "kind": "task.update",
+      "itemId": "task-0cf909b6",
+      "title": "Live procedural droid license portrait",
+      "author": "/root",
+      "source": "Actual integrated source checks and asynchronous specialist handoffs, 2026-10-11",
+      "createdAt": "2026-10-11T06:15:30.224Z"
+    },
+    {
+      "id": "3b985495-4dfb-41db-8518-4d9713c391bc",
+      "revision": 595,
+      "kind": "task.update",
+      "itemId": "task-63265693",
+      "title": "APR first asteroid and starter-upgrade training missions",
+      "author": "/root",
+      "source": "Actual integrated source checks and asynchronous specialist handoffs, 2026-10-11",
+      "createdAt": "2026-10-11T06:15:30.249Z"
+    },
+    {
+      "id": "49ca2757-6726-4544-badf-936f66ac6f56",
+      "revision": 596,
+      "kind": "review",
+      "itemId": "review-57cb14f9",
+      "title": "Actual live-license and counted-training integration discussion",
+      "author": "/root",
+      "source": "Actual integrated source checks and asynchronous specialist handoffs, 2026-10-11",
+      "createdAt": "2026-10-11T06:15:30.268Z"
+    },
+    {
+      "id": "98d01bf0-32a3-4508-853f-3324302d12c3",
+      "revision": 597,
+      "kind": "task.create",
+      "itemId": "task-cf5d37d9",
+      "title": "KIKAI / KESSHO / RAICHO lore lexicon and starter models",
+      "author": "/root",
+      "source": "Actual integrated source checks and asynchronous specialist handoffs, 2026-10-11",
+      "createdAt": "2026-10-11T06:15:30.281Z"
+    },
+    {
+      "id": "090ebb3c-e3e7-43b2-8b85-d0a917e33e89",
+      "revision": 598,
+      "kind": "decision",
+      "itemId": "decision-557880e1",
+      "title": "Japanese-inspired game lexicon and RAICHO starter display names",
+      "author": "/root",
+      "source": "Actual integrated source checks and asynchronous specialist handoffs, 2026-10-11",
+      "createdAt": "2026-10-11T06:15:30.312Z"
+    },
+    {
+      "id": "62eac006-2d4b-47ab-a29c-15eb63a198a5",
+      "revision": 599,
+      "kind": "run",
+      "itemId": "run-0c451765",
+      "title": "Art and lore specialist · completed",
+      "author": "/root",
+      "source": "Actual integrated source checks and asynchronous specialist handoffs, 2026-10-11",
+      "createdAt": "2026-10-11T06:15:30.344Z"
     }
   ],
   "runRecords": [
@@ -18616,6 +18966,120 @@
       "author": "/root",
       "source": "Latest user canon and actual scoped work, 11 October 2026",
       "createdAt": "2026-10-11T05:27:15.867Z"
+    },
+    {
+      "id": "run-f4e760e1",
+      "title": "/root · running",
+      "agentId": "/root",
+      "agentLabel": "/root",
+      "state": "running",
+      "observedAt": "2026-10-11T05:51:22.897Z",
+      "taskIds": [
+        "task-0cf909b6",
+        "task-63265693"
+      ],
+      "summary": "Integrating real creator/issued-license native appearance parameters, bridge tests, responsive UI, narrative, save validation and the production board.",
+      "evidence": [
+        {
+          "label": "Actual assignment observed",
+          "kind": "note",
+          "details": "Integrating real creator/issued-license native appearance parameters, bridge tests, responsive UI, narrative, save validation and the production board."
+        }
+      ],
+      "author": "/root",
+      "source": "Actual active assignments and latest user training/profile direction",
+      "createdAt": "2026-10-11T05:51:22.904Z"
+    },
+    {
+      "id": "run-a8ee29b7",
+      "title": "/root/production_research · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "/root/production_research",
+      "state": "running",
+      "observedAt": "2026-10-11T05:51:22.916Z",
+      "taskIds": [
+        "task-7a4df889",
+        "task-0cf909b6"
+      ],
+      "summary": "Actually generated distinct DORO and TALO references; authoring independent role masks, blink/speech layers and conversion provenance in isolated art branch.",
+      "evidence": [
+        {
+          "label": "Actual assignment observed",
+          "kind": "note",
+          "details": "Actually generated distinct DORO and TALO references; authoring independent role masks, blink/speech layers and conversion provenance in isolated art branch."
+        }
+      ],
+      "author": "/root",
+      "source": "Actual active assignments and latest user training/profile direction",
+      "createdAt": "2026-10-11T05:51:22.934Z"
+    },
+    {
+      "id": "run-e6318404",
+      "title": "/root/engine_research · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "/root/engine_research",
+      "state": "running",
+      "observedAt": "2026-10-11T05:51:22.942Z",
+      "taskIds": [
+        "task-0cf909b6"
+      ],
+      "summary": "Implementing cached profile9 native extraction for actual per-type packs, all27 role combinations, malformed token isolation, fractional fit and atomic budgets.",
+      "evidence": [
+        {
+          "label": "Actual assignment observed",
+          "kind": "note",
+          "details": "Implementing cached profile9 native extraction for actual per-type packs, all27 role combinations, malformed token isolation, fractional fit and atomic budgets."
+        }
+      ],
+      "author": "/root",
+      "source": "Actual active assignments and latest user training/profile direction",
+      "createdAt": "2026-10-11T05:51:22.951Z"
+    },
+    {
+      "id": "run-ebc696eb",
+      "title": "/root/gameplay_design · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "/root/gameplay_design",
+      "state": "running",
+      "observedAt": "2026-10-11T05:51:22.958Z",
+      "taskIds": [
+        "task-63265693"
+      ],
+      "summary": "Completing diagnostic progression isolation; inspecting specific material/asteroid and save contracts for the revised first training loop.",
+      "evidence": [
+        {
+          "label": "Actual assignment observed",
+          "kind": "note",
+          "details": "Completing diagnostic progression isolation; inspecting specific material/asteroid and save contracts for the revised first training loop."
+        }
+      ],
+      "author": "/root",
+      "source": "Actual active assignments and latest user training/profile direction",
+      "createdAt": "2026-10-11T05:51:22.967Z"
+    },
+    {
+      "id": "run-0c451765",
+      "title": "Art and lore specialist · completed",
+      "agentId": "/root/production_research",
+      "agentLabel": "Art and lore specialist",
+      "state": "completed",
+      "observedAt": "2026-10-11T06:15:30.326Z",
+      "taskIds": [
+        "task-7a4df889",
+        "task-0cf909b6",
+        "task-cf5d37d9"
+      ],
+      "summary": "Actual distinct DORO/TALO art and generated-source provenance handed off; seven focused lore checks and read-only current wording audit completed. Root integrated authored names and repaired the reported stale portrait/schema/Scout claims.",
+      "evidence": [
+        {
+          "label": "Independent integration contribution",
+          "kind": "artifact",
+          "path": "work/live-license-integration-review/REVIEW.md"
+        }
+      ],
+      "author": "/root",
+      "source": "Actual integrated source checks and asynchronous specialist handoffs, 2026-10-11",
+      "createdAt": "2026-10-11T06:15:30.344Z"
     }
   ],
   "phaseDescription": "Desktop-first Rust/WASM solo game and local Studio are implemented. Reviewed occupied-cell art, reproducible conversion, responsive native settings/icons and minimap, strict GitHub integration gates and source-backed Dev Bible are integrated. Natural campaign balance, human listening, owner-private update lifecycle and physical phones remain separate pending gates."

@@ -16,6 +16,9 @@ interface Node {
   control_rect?: number[];
   portrait_expression?: number;
   portrait_speaking?: boolean;
+  portrait_kind?: number;
+  portrait_main?: number;
+  portrait_sub?: number;
 }
 export class PixelUiBridge {
   private dirty = true;
@@ -73,6 +76,9 @@ export class PixelUiBridge {
             "data-portrait",
             "data-portrait-expression",
             "data-portrait-speaking",
+            "data-portrait-kind",
+            "data-portrait-main",
+            "data-portrait-sub",
             "data-pixel-icon",
             "data-pixel-kind",
             "data-pixel-value",
@@ -221,7 +227,7 @@ export class PixelUiBridge {
           Math.min(3, Number.parseFloat(style.fontSize) / scale / 8),
         );
         const scrollSelector =
-          ".menu-tabs,#map-chart,#map-content,#flight-status,#pause-content,#upgrade-content,#quest-content,#settings-content,#archive-content,#hangar-content,#campaign-content,#console-output,#dialogue-text,#run-summary,.droid-content";
+          ".menu-tabs,#map-chart,#map-content,#flight-status,#pause-content,#upgrade-content,#quest-content,#settings-content,#archive-content,#hangar-content,#campaign-content,#console-output,#dialogue-text,#run-summary,.droid-body,.droid-content";
         let clipX = bounds.x,
           clipY = bounds.y,
           clipRight = bounds.x + bounds.width,
@@ -331,6 +337,18 @@ export class PixelUiBridge {
                   ),
                 ),
                 portrait_speaking: element.dataset.portraitSpeaking === "true",
+                ...(value === 9 &&
+                [
+                  element.dataset.portraitKind,
+                  element.dataset.portraitMain,
+                  element.dataset.portraitSub,
+                ].every((token) => token !== undefined && /^[0-2]$/.test(token))
+                  ? {
+                      portrait_kind: Number(element.dataset.portraitKind),
+                      portrait_main: Number(element.dataset.portraitMain),
+                      portrait_sub: Number(element.dataset.portraitSub),
+                    }
+                  : {}),
               }
             : {}),
           ...(regions

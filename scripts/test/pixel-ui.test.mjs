@@ -53,7 +53,13 @@ function pixelScene({
     closest(selector) {
       if (selector === "button,label,select") return this;
       if (selector === ".menu-tabs" && this.nav) return root;
-      if (selector.includes(`#${scrollId}`) && this.inScroll && scrollBounds)
+      if (
+        selector.includes(
+          scrollId.startsWith(".") ? scrollId : `#${scrollId}`,
+        ) &&
+        this.inScroll &&
+        scrollBounds
+      )
         return { getBoundingClientRect: () => scrollBounds };
       return null;
     }
@@ -132,6 +138,7 @@ function pixelScene({
       pixelKind: icon.kind,
       pixelValue: String(icon.index ?? 0),
       active: String(icon.earned ?? false),
+      ...icon.dataset,
     };
     art.bounds = {
       ...bounds,
@@ -141,6 +148,7 @@ function pixelScene({
       height: icon.height * scale,
     };
     art.focusedChild = icon.focusedChild;
+    art.inScroll = icon.inScroll;
   }
   root.querySelectorAll = (selector) =>
     selector === ".settings label"
@@ -220,6 +228,102 @@ function sliderScene(options) {
   assert.ok(slider, "actual semantic slider must reach the WASM scene");
   return slider;
 }
+
+test("live license portraits deliver all 27 independent appearance choices to native rendering", () => {
+  for (const kind of [0, 1, 2])
+    for (const main of [0, 1, 2])
+      for (const sub of [0, 1, 2]) {
+        const node = pixelScene({
+          icon: {
+            kind: "portrait",
+            index: 9,
+            width: 96,
+            height: 128,
+            dataset: {
+              portraitKind: String(kind),
+              portraitMain: String(main),
+              portraitSub: String(sub),
+              portraitExpression: "2",
+              portraitSpeaking: "true",
+            },
+          },
+        }).groups[0].nodes.find((n) => n.kind === "portrait");
+        assert.equal(node.value, 9);
+        assert.equal(node.portrait_kind, kind);
+        assert.equal(node.portrait_main, main);
+        assert.equal(node.portrait_sub, sub);
+        assert.equal(node.portrait_expression, 2);
+        assert.equal(node.portrait_speaking, true);
+      }
+});
+
+test("missing, fractional or malformed profile tokens never invent a fallback identity", () => {
+  for (const invalid of [undefined, "", "-1", "3", "1.5", "01", "NaN"]) {
+    const node = pixelScene({
+      icon: {
+        kind: "portrait",
+        index: 9,
+        width: 96,
+        height: 128,
+        dataset: {
+          portraitKind: invalid,
+          portraitMain: "0",
+          portraitSub: "1",
+        },
+      },
+    }).groups[0].nodes.find((n) => n.kind === "portrait");
+    for (const field of ["portrait_kind", "portrait_main", "portrait_sub"]) {
+      assert.equal(field in node, false);
+    }
+  }
+  const guide = pixelScene({
+    icon: {
+      kind: "portrait",
+      index: 8,
+      width: 96,
+      height: 128,
+      dataset: {
+        portraitKind: "2",
+        portraitMain: "2",
+        portraitSub: "2",
+      },
+    },
+  }).groups[0].nodes.find((n) => n.kind === "portrait");
+  assert.equal(
+    "portrait_kind" in guide,
+    false,
+    "fixed APR guide is not recolored by profile fields",
+  );
+});
+
+test("short-window license body clips the full portrait geometry above the fixed footer", () => {
+  const options = {
+    scrollId: ".droid-body",
+    scrollBounds: { x: 0, y: 70, width: 300, height: 40 },
+    icon: {
+      kind: "portrait",
+      index: 9,
+      width: 96,
+      height: 128,
+      inScroll: true,
+      dataset: { portraitKind: "1", portraitMain: "0", portraitSub: "2" },
+    },
+  };
+  const node = pixelScene(options).groups[0].nodes.find(
+    (n) => n.kind === "portrait",
+  );
+  assert.deepEqual(Array.from(node.rect), [12, 20, 96, 128]);
+  assert.deepEqual(Array.from(node.clip), [0, 70, 300, 40]);
+  assert.equal(node.portrait_kind, 1);
+  const hidden = pixelScene({
+    ...options,
+    scrollBounds: { x: 0, y: 160, width: 300, height: 40 },
+  });
+  assert.equal(
+    hidden.groups[0].nodes.some((n) => n.kind === "portrait"),
+    false,
+  );
+});
 
 test("zoom slider pixel thumb follows the semantic range at both limits and default zoom", () => {
   for (const [value, expected] of [

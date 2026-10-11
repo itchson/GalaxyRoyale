@@ -31,6 +31,9 @@ export interface CampaignProgress {
   ship_xp: number[];
   cargo_materials: number[];
   stored_materials: number[];
+  /** Named subsets of Tier 1, never additional cargo or resources. */
+  cargo_training_materials: number[];
+  stored_training_materials: number[];
   abilities: AbilityState[];
   loadouts: ShipLoadout[];
   last_run: RunSummary | null;
@@ -46,7 +49,13 @@ export interface ShipLoadout {
 }
 interface PreviousCampaign extends Omit<
   CampaignProgress,
-  "cargo_materials" | "stored_materials" | "abilities" | "loadouts" | "last_run"
+  | "cargo_materials"
+  | "stored_materials"
+  | "cargo_training_materials"
+  | "stored_training_materials"
+  | "abilities"
+  | "loadouts"
+  | "last_run"
 > {
   cargo_materials: number;
   stored_materials: number;
@@ -87,6 +96,8 @@ export const emptyCampaign = (): CampaignProgress => ({
   ship_xp: Array(10).fill(0),
   cargo_materials: Array(5).fill(0),
   stored_materials: Array(5).fill(0),
+  cargo_training_materials: Array(3).fill(0),
+  stored_training_materials: Array(3).fill(0),
   abilities: Array.from({ length: 17 }, (_, i) => ({
     blueprint: i < 3,
     rank: 0,
@@ -130,20 +141,35 @@ export interface KikaiIdentity {
   hex_id: string;
 }
 export interface OnboardingProgress {
+  version: 2;
   stage: number;
   flags: number;
+  asteroids_destroyed: number;
+  materials_collected: number;
+  legacy_complete: boolean;
 }
 export interface Profile extends ExplorationProfile {
-  schema_version: 5;
+  schema_version: 6;
   identity: KikaiIdentity | null;
   onboarding: OnboardingProgress | null;
   boss_generations: number[][];
   campaign: CampaignProgress;
 }
+type PriorInventory = Omit<
+  CampaignProgress,
+  "cargo_training_materials" | "stored_training_materials"
+>;
+export interface LicenseProfile extends ExplorationProfile {
+  schema_version: 5;
+  identity: KikaiIdentity | null;
+  onboarding: { stage: number; flags: number } | null;
+  boss_generations: number[][];
+  campaign: PriorInventory;
+}
 export interface EquipmentProfile extends ExplorationProfile {
   schema_version: 4;
   boss_generations: number[][];
-  campaign: CampaignProgress;
+  campaign: PriorInventory;
 }
 export interface CampaignProfile extends ExplorationProfile {
   schema_version: 3;
@@ -157,6 +183,7 @@ export interface LegacyProfile extends ProfileBase {
 }
 export type SupportedProfile =
   | Profile
+  | LicenseProfile
   | EquipmentProfile
   | CampaignProfile
   | PreviousProfile
@@ -244,7 +271,8 @@ export function validProfile(value: unknown): value is SupportedProfile {
       p.schema_version === 2 ||
       p.schema_version === 3 ||
       p.schema_version === 4 ||
-      p.schema_version === 5) &&
+      p.schema_version === 5 ||
+      p.schema_version === 6) &&
     integer(p.revision, Number.MAX_SAFE_INTEGER) &&
     integer(p.seed) &&
     p.seed !== 0 &&
@@ -258,7 +286,7 @@ export function validProfile(value: unknown): value is SupportedProfile {
   ))
     return false;
   if (!normalizedBossGenerations(p)) return false;
-  if (p.schema_version === 5) {
+  if ((p.schema_version as number) >= 5) {
     if (p.identity !== null) {
       if (
         !p.identity ||
@@ -296,6 +324,27 @@ export function validProfile(value: unknown): value is SupportedProfile {
       while (stage < 6 && (flags & required[stage]) === required[stage])
         stage++;
       if (onboarding.stage !== stage) return false;
+      if (p.schema_version === 6) {
+        if (
+          onboarding.version !== 2 ||
+          !integer(onboarding.asteroids_destroyed, 10) ||
+          !integer(onboarding.materials_collected, 10) ||
+          typeof onboarding.legacy_complete !== "boolean"
+        )
+          return false;
+        const kills = onboarding.asteroids_destroyed as number;
+        const collected = onboarding.materials_collected as number;
+        if (onboarding.legacy_complete) {
+          if (flags !== 127 || kills !== 0 || collected !== 0) return false;
+        } else if (
+          ((flags & 4) !== 0) !== (kills === 10) ||
+          ((flags & 8) !== 0) !== (collected === 10) ||
+          (collected > 0 && kills < 10) ||
+          ((flags & 16) !== 0 && (flags & 8) === 0) ||
+          ((flags & 96) !== 0 && ((flags & 96) !== 96 || (flags & 16) === 0))
+        )
+          return false;
+      }
     }
   }
   const ranks = p.ranks as number[];
@@ -389,6 +438,32 @@ export function validProfile(value: unknown): value is SupportedProfile {
       c.loadouts.length !== 10
     )
       return false;
+    if (p.schema_version === 6) {
+      const named = (value: unknown, total: number): value is number[] =>
+        Array.isArray(value) &&
+        value.length === 3 &&
+        Array.from(value).every((n) => integer(n)) &&
+        value.reduce((sum, n) => sum + n, 0) <= total;
+      if (
+        !named(c.cargo_training_materials, c.cargo_materials[0]) ||
+        !named(c.stored_training_materials, c.stored_materials[0])
+      )
+        return false;
+      const progress = p.onboarding as OnboardingProgress | null;
+      if (
+        progress &&
+        !progress.legacy_complete &&
+        (progress.flags & 96) === 96
+      ) {
+        const identity = p.identity as KikaiIdentity;
+        const index = { pan: 2, renko: 0, hugo: 1 }[identity.corporation];
+        if (
+          !c.abilities[index] ||
+          (c.abilities[index] as AbilityState).rank < 2
+        )
+          return false;
+      }
+    }
     const abilities = c.abilities as AbilityState[];
     if (
       !Array.from(abilities).every(
@@ -401,7 +476,7 @@ export function validProfile(value: unknown): value is SupportedProfile {
           (state.rank === 0 || state.blueprint) &&
           (i < 14 || state.rank === (c.victory_claimed ? 5 : 0)) &&
           (i >= 3 ||
-            (p.schema_version === 5 && p.identity !== null) ||
+            ((p.schema_version as number) >= 5 && p.identity !== null) ||
             state.blueprint) &&
           (i < 6 ||
             (i < 14
@@ -500,20 +575,40 @@ export function validProfile(value: unknown): value is SupportedProfile {
     (!c.credits_seen || c.victory_claimed)
   );
 }
-/** Pure format migration. Live schema4 cargo is preserved; Game owns run abandonment. */
+/** Pure format migration. Live cargo is preserved; Game owns run abandonment. */
 export function normalizeProfile(value: unknown): Profile | null {
   if (!validProfile(value)) return null;
   const campaign = migrateCampaign(value);
   return {
-    schema_version: 5,
+    schema_version: 6,
     identity:
-      value.schema_version === 5 && value.identity
+      (value.schema_version === 5 || value.schema_version === 6) &&
+      value.identity
         ? { ...value.identity }
         : null,
     onboarding:
-      value.schema_version === 5 && value.onboarding
+      value.schema_version === 6 && value.onboarding
         ? { ...value.onboarding }
-        : null,
+        : value.schema_version === 5 && value.onboarding
+          ? {
+              version: 2,
+              flags:
+                value.onboarding.flags === 127
+                  ? 127
+                  : value.onboarding.flags & 3,
+              stage:
+                value.onboarding.flags === 127
+                  ? 6
+                  : (value.onboarding.flags & 1) === 0
+                    ? 0
+                    : (value.onboarding.flags & 2) === 0
+                      ? 1
+                      : 2,
+              asteroids_destroyed: 0,
+              materials_collected: 0,
+              legacy_complete: value.onboarding.flags === 127,
+            }
+          : null,
     revision: value.revision,
     seed: value.seed,
     currency: [...value.currency],
@@ -556,7 +651,8 @@ function migrateCampaign(value: SupportedProfile): CampaignProgress {
   if (
     value.schema_version === 3 ||
     value.schema_version === 4 ||
-    value.schema_version === 5
+    value.schema_version === 5 ||
+    value.schema_version === 6
   ) {
     const previous = value.campaign;
     // Copy only schema-owned fields: an older backup may contain unrelated keys.
@@ -581,15 +677,29 @@ function migrateCampaign(value: SupportedProfile): CampaignProgress {
           xp_gained: run.xp_gained,
           materials_gained: run.materials_gained,
           materials_lost:
-            value.schema_version === 4 || value.schema_version === 5
+            value.schema_version === 4 ||
+            value.schema_version === 5 ||
+            value.schema_version === 6
               ? [...value.campaign.last_run!.materials_lost]
               : Array(5).fill(0),
         }
       : null;
   }
-  if (value.schema_version === 4 || value.schema_version === 5) {
+  if (
+    value.schema_version === 4 ||
+    value.schema_version === 5 ||
+    value.schema_version === 6
+  ) {
     campaign.cargo_materials = [...value.campaign.cargo_materials];
     campaign.stored_materials = [...value.campaign.stored_materials];
+    if (value.schema_version === 6) {
+      campaign.cargo_training_materials = [
+        ...value.campaign.cargo_training_materials,
+      ];
+      campaign.stored_training_materials = [
+        ...value.campaign.stored_training_materials,
+      ];
+    }
     campaign.abilities = value.campaign.abilities.map(
       ({ blueprint, rank }) => ({ blueprint, rank }),
     );
@@ -683,9 +793,9 @@ export class SaveStore {
     this.message = "Progress stays on this device.";
     let loaded: Profile | null = null;
     try {
-      // A database version barrier prevents cached schema-four writers from
+      // A database version barrier prevents cached schema-five writers from
       // treating the new format as corrupt and overwriting it with an old run.
-      const r = indexedDB.open("galaxy-royale", 3);
+      const r = indexedDB.open("galaxy-royale", 4);
       r.onblocked = () => {
         this.message =
           "Close other Galaxy Royale tabs to upgrade your save safely.";

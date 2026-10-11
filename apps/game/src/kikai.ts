@@ -1,5 +1,6 @@
 import "./kikai.css";
 import type { KikaiIdentity } from "./storage";
+import { paintLicensePortrait } from "./kikai-portrait";
 
 export interface IdentityHud extends KikaiIdentity {
   kind_name: string;
@@ -13,32 +14,46 @@ export interface IdentityHud extends KikaiIdentity {
   license: string;
 }
 export interface OnboardingHud {
+  version: number;
   stage: number;
   flags: number;
   title: string;
   description: string;
   completed: boolean;
+  asteroids_destroyed: number;
+  materials_collected: number;
+  target: number;
+  material_id: string;
+  material_name: string;
+  asteroid_name: string;
+  starter_id: string;
+  starter_name: string;
+  starter_slot: string;
+  carried_matching: number;
+  banked_matching: number;
+  can_upgrade: boolean;
+  upgrade_reason: string;
 }
 export const corporations = {
   pan: {
     name: "PAN DYNAMICS",
     role: "PASSIVE",
     hair: "GREEN",
-    ship: "PAN PATHFINDER",
+    ship: "PAN HIKARI",
     slot: "PASSIVE",
   },
   renko: {
     name: "RENKO CYBERNETICS",
     role: "OFFENSIVE",
     hair: "RED",
-    ship: "RENKO LANCER",
+    ship: "RENKO HIBANA",
     slot: "OFFENSIVE",
   },
   hugo: {
     name: "HUGO CORP",
     role: "DEFENSIVE",
     hair: "BLUE",
-    ship: "HUGO BULWARK",
+    ship: "HUGO MAMORI",
     slot: "DEFENSIVE",
   },
 } as const;
@@ -55,6 +70,9 @@ export function newDroidHash(
 export class DroidCreation {
   private readonly screen = document.createElement("section");
   private readonly detail = document.createElement("p");
+  private readonly portrait = document.createElement("div");
+  private readonly licenseName = document.createElement("p");
+  private readonly serial = document.createElement("p");
   private readonly submit = document.createElement("button");
   private readonly closeButton = document.createElement("button");
   private readonly choices: HTMLButtonElement[] = [];
@@ -62,6 +80,7 @@ export class DroidCreation {
   private corporation: KikaiIdentity["corporation"] = "pan";
   private subCorporation: KikaiIdentity["sub_corporation"] = "renko";
   private busy = false;
+  private pendingIdentity: KikaiIdentity | null = null;
   private readonly onKey = (event: KeyboardEvent) => {
     if (this.screen.hidden) return;
     event.stopImmediatePropagation();
@@ -113,18 +132,14 @@ export class DroidCreation {
     title.textContent = "YOUR KIKAI LICENSE";
     const intro = document.createElement("p");
     intro.textContent =
-      "Choose your droid and manufacturer. Each license includes a level 1 ship and one equipped ability.";
+      "Choose your droid and manufacturer. Each license includes a level 1 RAICHO flight craft and one equipped ability.";
     const types = document.createElement("section");
     types.className = "droid-options";
     types.setAttribute("aria-label", "Droid type");
     const typeHeading = document.createElement("h3");
     typeHeading.textContent = "DROID TYPE";
-    for (const [kind, gender] of [
-      ["dora", "Female"],
-      ["doro", "Male"],
-      ["talo", "Neutral"],
-    ] as const) {
-      const button = this.choice(`${kind.toUpperCase()} / ${gender}`, () => {
+    for (const kind of ["dora", "doro", "talo"] as const) {
+      const button = this.choice(kind.toUpperCase(), () => {
         this.kind = kind;
         this.paint();
       });
@@ -147,7 +162,7 @@ export class DroidCreation {
       corps.append(button);
     }
     const secondaryHeading = document.createElement("h3");
-    secondaryHeading.textContent = "CRYSTAL HORNS / SUB-MANUFACTURER";
+    secondaryHeading.textContent = "KESSHO / CRYSTAL HORNS / SUB-MANUFACTURER";
     const secondary = document.createElement("section");
     secondary.className = "droid-options";
     secondary.setAttribute("aria-label", "Sub-manufacturer");
@@ -182,7 +197,22 @@ export class DroidCreation {
       secondary,
       this.detail,
     );
-    card.append(this.closeButton, title, content, this.submit);
+    const profile = document.createElement("section");
+    profile.className = "droid-profile";
+    profile.setAttribute("aria-label", "License portrait preview");
+    this.portrait.className = "droid-portrait";
+    this.portrait.dataset.pixelKind = "portrait";
+    this.portrait.dataset.pixelValue = "9";
+    this.portrait.dataset.portraitExpression = "0";
+    this.portrait.dataset.portraitSpeaking = "false";
+    this.portrait.setAttribute("role", "img");
+    this.licenseName.className = "droid-profile-name";
+    this.serial.className = "droid-profile-serial";
+    profile.append(this.portrait, this.licenseName, this.serial);
+    const body = document.createElement("div");
+    body.className = "droid-body";
+    body.append(profile, content);
+    card.append(this.closeButton, title, body, this.submit);
     this.screen.append(card);
     document.body.append(this.screen);
     window.addEventListener("keydown", this.onKey, true);
@@ -209,7 +239,9 @@ export class DroidCreation {
     const button = document.createElement("button");
     button.type = "button";
     button.textContent = label;
-    button.onclick = action;
+    button.onclick = () => {
+      if (!this.busy && !this.pendingIdentity) action();
+    };
     this.choices.push(button);
     return button;
   }
@@ -223,7 +255,16 @@ export class DroidCreation {
       button.dataset.selected = String(selected);
     }
     const corp = corporations[this.corporation];
-    this.detail.textContent = `${this.kind.toUpperCase()}-${this.corporation.toUpperCase()}-${this.subCorporation.toUpperCase()} / ${corp.hair} HAIR / ${corporations[this.subCorporation].hair} HORNS. ${corp.ship} / LEVEL 1 / ${corp.slot} ABILITY EQUIPPED. YOUR HASH IS ISSUED ON CONFIRMATION.`;
+    paintLicensePortrait(this.portrait, {
+      kind: this.kind,
+      corporation: this.corporation,
+      sub_corporation: this.subCorporation,
+    });
+    this.licenseName.textContent = `${this.kind.toUpperCase()}-${this.corporation.toUpperCase()}-${this.subCorporation.toUpperCase()}`;
+    this.serial.textContent = this.pendingIdentity
+      ? `LICENSE / ${this.pendingIdentity.hex_id.toUpperCase()}`
+      : "LICENSE / PENDING";
+    this.detail.textContent = `${this.kind.toUpperCase()}-${this.corporation.toUpperCase()}-${this.subCorporation.toUpperCase()} / ${corp.hair} HAIR / ${corporations[this.subCorporation].hair} HORNS. ${corp.ship} / LEVEL 1 / ${corp.slot} ABILITY EQUIPPED. ${this.pendingIdentity ? "SAVE RETRIES KEEP THIS LICENSE." : "YOUR HASH IS ISSUED ON CONFIRMATION."}`;
   }
   private async confirm(): Promise<void> {
     if (this.busy) return;
@@ -231,12 +272,15 @@ export class DroidCreation {
     for (const button of [...this.choices, this.submit, this.closeButton])
       button.disabled = true;
     try {
-      await this.options.create({
+      this.pendingIdentity ??= {
         kind: this.kind,
         corporation: this.corporation,
         sub_corporation: this.subCorporation,
         hex_id: newDroidHash(),
-      });
+      };
+      this.paint();
+      await this.options.create({ ...this.pendingIdentity });
+      this.pendingIdentity = null;
       this.screen.hidden = true;
       this.options.onClose();
     } catch (error) {
@@ -244,8 +288,10 @@ export class DroidCreation {
         error instanceof Error ? error.message : String(error);
     } finally {
       this.busy = false;
-      for (const button of [...this.choices, this.submit, this.closeButton])
-        button.disabled = false;
+      for (const button of this.choices)
+        button.disabled = this.pendingIdentity !== null;
+      this.submit.disabled = false;
+      this.closeButton.disabled = false;
     }
   }
 }

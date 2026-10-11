@@ -13,7 +13,7 @@
     },
     {
       "id": "ships",
-      "label": "Ships & equipment"
+      "label": "RAICHO & equipment"
     },
     {
       "id": "enemies",
@@ -50,7 +50,7 @@
         },
         {
           "label": "Save",
-          "value": "Profile schema 5; Kikai identity, per-ship XP and loadouts"
+          "value": "Profile schema 6; Kikai identity, per-RAICHO XP and loadouts"
         },
         {
           "label": "Production",
@@ -122,7 +122,7 @@
       ],
       "facts": [
         {
-          "label": "Ship",
+          "label": "RAICHO",
           "value": "Dawnneedle"
         },
         {
@@ -146,7 +146,7 @@
           "value": "260.0"
         },
         {
-          "label": "Ship construction currency",
+          "label": "RAICHO construction currency",
           "value": "Offense"
         }
       ],
@@ -154,14 +154,14 @@
         {
           "title": "Behavior and scope",
           "paragraphs": [
-            "A first production trial victory awards this champion patch, its ship and ability blueprints, three construction-category points and 40 selected-ship XP. Discovering a blueprint does not craft or equip it. Diagnostic scenes suppress those rewards.",
-            "Champion cells are authored occupied sprites. Ship, portrait and patch indices follow this stable eight-character order. The construction currency differs from the equipped ability category where explicitly defined by the ability catalog."
+            "A first production trial victory awards this champion patch, its RAICHO and ability blueprints, three construction-category points and 40 selected-RAICHO XP. Discovering a blueprint does not craft or equip it. Diagnostic scenes suppress those rewards.",
+            "Champion cells are authored occupied sprites. RAICHO, portrait and patch indices follow this stable eight-character order. The construction currency differs from the equipped ability category where explicitly defined by the ability catalog."
           ]
         },
         {
           "title": "KIKAI canon review",
           "paragraphs": [
-            "This encounter’s existing source label is retained for implementation traceability. Biological life cannot survive in the accepted KIKAI setting; technological lineage, droid identity and independent corporation sponsorship still require authored roster review. Stable arena, patch, ship and reward IDs remain in use."
+            "This encounter’s existing source label is retained for implementation traceability. Biological life cannot survive in the accepted KIKAI setting; technological lineage, droid identity and independent corporation sponsorship still require authored roster review. Stable arena, patch, RAICHO and reward IDs remain in use."
           ]
         }
       ],
@@ -228,7 +228,7 @@
       ],
       "facts": [
         {
-          "label": "Ship",
+          "label": "RAICHO",
           "value": "Bulwark"
         },
         {
@@ -252,7 +252,7 @@
           "value": "390.0"
         },
         {
-          "label": "Ship construction currency",
+          "label": "RAICHO construction currency",
           "value": "Defense"
         }
       ],
@@ -260,14 +260,14 @@
         {
           "title": "Behavior and scope",
           "paragraphs": [
-            "A first production trial victory awards this champion patch, its ship and ability blueprints, three construction-category points and 40 selected-ship XP. Discovering a blueprint does not craft or equip it. Diagnostic scenes suppress those rewards.",
-            "Champion cells are authored occupied sprites. Ship, portrait and patch indices follow this stable eight-character order. The construction currency differs from the equipped ability category where explicitly defined by the ability catalog."
+            "A first production trial victory awards this champion patch, its RAICHO and ability blueprints, three construction-category points and 40 selected-RAICHO XP. Discovering a blueprint does not craft or equip it. Diagnostic scenes suppress those rewards.",
+            "Champion cells are authored occupied sprites. RAICHO, portrait and patch indices follow this stable eight-character order. The construction currency differs from the equipped ability category where explicitly defined by the ability catalog."
           ]
         },
         {
           "title": "KIKAI canon review",
           "paragraphs": [
-            "This encounter’s existing source label is retained for implementation traceability. Biological life cannot survive in the accepted KIKAI setting; technological lineage, droid identity and independent corporation sponsorship still require authored roster review. Stable arena, patch, ship and reward IDs remain in use."
+            "This encounter’s existing source label is retained for implementation traceability. Biological life cannot survive in the accepted KIKAI setting; technological lineage, droid identity and independent corporation sponsorship still require authored roster review. Stable arena, patch, RAICHO and reward IDs remain in use."
           ]
         }
       ],
@@ -334,7 +334,7 @@
       ],
       "facts": [
         {
-          "label": "Ship",
+          "label": "RAICHO",
           "value": "Nightrail"
         },
         {
@@ -358,7 +358,7 @@
           "value": "350.0"
         },
         {
-          "label": "Ship construction currency",
+          "label": "RAICHO construction currency",
           "value": "Passive"
         }
       ],
@@ -366,14 +366,14 @@
         {
           "title": "Behavior and scope",
           "paragraphs": [
-            "A first production trial victory awards this champion patch, its ship and ability blueprints, three construction-category points and 40 selected-ship XP. Discovering a blueprint does not craft or equip it. Diagnostic scenes suppress those rewards.",
-            "Champion cells are authored occupied sprites. Ship, portrait and patch indices follow this stable eight-character order. The construction currency differs from the equipped ability category where explicitly defined by the ability catalog."
+            "A first production trial victory awards this champion patch, its RAICHO and ability blueprints, three construction-category points and 40 selected-RAICHO XP. Discovering a blueprint does not craft or equip it. Diagnostic scenes suppress those rewards.",
+            "Champion cells are authored occupied sprites. RAICHO, portrait and patch indices follow this stable eight-character order. The construction currency differs from the equipped ability category where explicitly defined by the ability catalog."
           ]
         },
         {
           "title": "KIKAI canon review",
           "paragraphs": [
-            "This encounter’s existing source label is retained for implementation traceability. Biological life cannot survive in the accepted KIKAI setting; technological lineage, droid identity and independent corporation sponsorship still require authored roster review. Stable arena, patch, ship and reward IDs remain in use."
+            "This encounter’s existing source label is retained for implementation traceability. Biological life cannot survive in the accepted KIKAI setting; technological lineage, droid identity and independent corporation sponsorship still require authored roster review. Stable arena, patch, RAICHO and reward IDs remain in use."
           ]
         }
       ],
@@ -440,7 +440,7 @@
       ],
       "facts": [
         {
-          "label": "Ship",
+          "label": "RAICHO",
           "value": "Prism"
         },
         {
@@ -464,7 +464,7 @@
           "value": "300.0"
         },
         {
-          "label": "Ship construction currency",
+          "label": "RAICHO construction currency",
           "value": "Offense"
         }
       ],
@@ -472,14 +472,14 @@
         {
           "title": "Behavior and scope",
           "paragraphs": [
-            "A first production trial victory awards this champion patch, its ship and ability blueprints, three construction-category points and 40 selected-ship XP. Discovering a blueprint does not craft or equip it. Diagnostic scenes suppress those rewards.",
-            "Champion cells are authored occupied sprites. Ship, portrait and patch indices follow this stable eight-character order. The construction currency differs from the equipped ability category where explicitly defined by the ability catalog."
+            "A first production trial victory awards this champion patch, its RAICHO and ability blueprints, three construction-category points and 40 selected-RAICHO XP. Discovering a blueprint does not craft or equip it. Diagnostic scenes suppress those rewards.",
+            "Champion cells are authored occupied sprites. RAICHO, portrait and patch indices follow this stable eight-character order. The construction currency differs from the equipped ability category where explicitly defined by the ability catalog."
           ]
         },
         {
           "title": "KIKAI canon review",
           "paragraphs": [
-            "This encounter’s existing source label is retained for implementation traceability. Biological life cannot survive in the accepted KIKAI setting; technological lineage, droid identity and independent corporation sponsorship still require authored roster review. Stable arena, patch, ship and reward IDs remain in use."
+            "This encounter’s existing source label is retained for implementation traceability. Biological life cannot survive in the accepted KIKAI setting; technological lineage, droid identity and independent corporation sponsorship still require authored roster review. Stable arena, patch, RAICHO and reward IDs remain in use."
           ]
         }
       ],
@@ -546,7 +546,7 @@
       ],
       "facts": [
         {
-          "label": "Ship",
+          "label": "RAICHO",
           "value": "Windrunner"
         },
         {
@@ -570,7 +570,7 @@
           "value": "290.0"
         },
         {
-          "label": "Ship construction currency",
+          "label": "RAICHO construction currency",
           "value": "Passive"
         }
       ],
@@ -578,14 +578,14 @@
         {
           "title": "Behavior and scope",
           "paragraphs": [
-            "A first production trial victory awards this champion patch, its ship and ability blueprints, three construction-category points and 40 selected-ship XP. Discovering a blueprint does not craft or equip it. Diagnostic scenes suppress those rewards.",
-            "Champion cells are authored occupied sprites. Ship, portrait and patch indices follow this stable eight-character order. The construction currency differs from the equipped ability category where explicitly defined by the ability catalog."
+            "A first production trial victory awards this champion patch, its RAICHO and ability blueprints, three construction-category points and 40 selected-RAICHO XP. Discovering a blueprint does not craft or equip it. Diagnostic scenes suppress those rewards.",
+            "Champion cells are authored occupied sprites. RAICHO, portrait and patch indices follow this stable eight-character order. The construction currency differs from the equipped ability category where explicitly defined by the ability catalog."
           ]
         },
         {
           "title": "KIKAI canon review",
           "paragraphs": [
-            "This encounter’s existing source label is retained for implementation traceability. Biological life cannot survive in the accepted KIKAI setting; technological lineage, droid identity and independent corporation sponsorship still require authored roster review. Stable arena, patch, ship and reward IDs remain in use."
+            "This encounter’s existing source label is retained for implementation traceability. Biological life cannot survive in the accepted KIKAI setting; technological lineage, droid identity and independent corporation sponsorship still require authored roster review. Stable arena, patch, RAICHO and reward IDs remain in use."
           ]
         }
       ],
@@ -652,7 +652,7 @@
       ],
       "facts": [
         {
-          "label": "Ship",
+          "label": "RAICHO",
           "value": "Ironwake"
         },
         {
@@ -676,7 +676,7 @@
           "value": "440.0"
         },
         {
-          "label": "Ship construction currency",
+          "label": "RAICHO construction currency",
           "value": "Defense"
         }
       ],
@@ -684,14 +684,14 @@
         {
           "title": "Behavior and scope",
           "paragraphs": [
-            "A first production trial victory awards this champion patch, its ship and ability blueprints, three construction-category points and 40 selected-ship XP. Discovering a blueprint does not craft or equip it. Diagnostic scenes suppress those rewards.",
-            "Champion cells are authored occupied sprites. Ship, portrait and patch indices follow this stable eight-character order. The construction currency differs from the equipped ability category where explicitly defined by the ability catalog."
+            "A first production trial victory awards this champion patch, its RAICHO and ability blueprints, three construction-category points and 40 selected-RAICHO XP. Discovering a blueprint does not craft or equip it. Diagnostic scenes suppress those rewards.",
+            "Champion cells are authored occupied sprites. RAICHO, portrait and patch indices follow this stable eight-character order. The construction currency differs from the equipped ability category where explicitly defined by the ability catalog."
           ]
         },
         {
           "title": "KIKAI canon review",
           "paragraphs": [
-            "This encounter’s existing source label is retained for implementation traceability. Biological life cannot survive in the accepted KIKAI setting; technological lineage, droid identity and independent corporation sponsorship still require authored roster review. Stable arena, patch, ship and reward IDs remain in use."
+            "This encounter’s existing source label is retained for implementation traceability. Biological life cannot survive in the accepted KIKAI setting; technological lineage, droid identity and independent corporation sponsorship still require authored roster review. Stable arena, patch, RAICHO and reward IDs remain in use."
           ]
         }
       ],
@@ -758,7 +758,7 @@
       ],
       "facts": [
         {
-          "label": "Ship",
+          "label": "RAICHO",
           "value": "Voidcoil"
         },
         {
@@ -782,7 +782,7 @@
           "value": "370.0"
         },
         {
-          "label": "Ship construction currency",
+          "label": "RAICHO construction currency",
           "value": "Passive"
         }
       ],
@@ -790,14 +790,14 @@
         {
           "title": "Behavior and scope",
           "paragraphs": [
-            "A first production trial victory awards this champion patch, its ship and ability blueprints, three construction-category points and 40 selected-ship XP. Discovering a blueprint does not craft or equip it. Diagnostic scenes suppress those rewards.",
-            "Champion cells are authored occupied sprites. Ship, portrait and patch indices follow this stable eight-character order. The construction currency differs from the equipped ability category where explicitly defined by the ability catalog."
+            "A first production trial victory awards this champion patch, its RAICHO and ability blueprints, three construction-category points and 40 selected-RAICHO XP. Discovering a blueprint does not craft or equip it. Diagnostic scenes suppress those rewards.",
+            "Champion cells are authored occupied sprites. RAICHO, portrait and patch indices follow this stable eight-character order. The construction currency differs from the equipped ability category where explicitly defined by the ability catalog."
           ]
         },
         {
           "title": "KIKAI canon review",
           "paragraphs": [
-            "This encounter’s existing source label is retained for implementation traceability. Biological life cannot survive in the accepted KIKAI setting; technological lineage, droid identity and independent corporation sponsorship still require authored roster review. Stable arena, patch, ship and reward IDs remain in use."
+            "This encounter’s existing source label is retained for implementation traceability. Biological life cannot survive in the accepted KIKAI setting; technological lineage, droid identity and independent corporation sponsorship still require authored roster review. Stable arena, patch, RAICHO and reward IDs remain in use."
           ]
         }
       ],
@@ -864,7 +864,7 @@
       ],
       "facts": [
         {
-          "label": "Ship",
+          "label": "RAICHO",
           "value": "Sunspear"
         },
         {
@@ -888,7 +888,7 @@
           "value": "340.0"
         },
         {
-          "label": "Ship construction currency",
+          "label": "RAICHO construction currency",
           "value": "Offense"
         }
       ],
@@ -896,14 +896,14 @@
         {
           "title": "Behavior and scope",
           "paragraphs": [
-            "A first production trial victory awards this champion patch, its ship and ability blueprints, three construction-category points and 40 selected-ship XP. Discovering a blueprint does not craft or equip it. Diagnostic scenes suppress those rewards.",
-            "Champion cells are authored occupied sprites. Ship, portrait and patch indices follow this stable eight-character order. The construction currency differs from the equipped ability category where explicitly defined by the ability catalog."
+            "A first production trial victory awards this champion patch, its RAICHO and ability blueprints, three construction-category points and 40 selected-RAICHO XP. Discovering a blueprint does not craft or equip it. Diagnostic scenes suppress those rewards.",
+            "Champion cells are authored occupied sprites. RAICHO, portrait and patch indices follow this stable eight-character order. The construction currency differs from the equipped ability category where explicitly defined by the ability catalog."
           ]
         },
         {
           "title": "KIKAI canon review",
           "paragraphs": [
-            "This encounter’s existing source label is retained for implementation traceability. Biological life cannot survive in the accepted KIKAI setting; technological lineage, droid identity and independent corporation sponsorship still require authored roster review. Stable arena, patch, ship and reward IDs remain in use."
+            "This encounter’s existing source label is retained for implementation traceability. Biological life cannot survive in the accepted KIKAI setting; technological lineage, droid identity and independent corporation sponsorship still require authored roster review. Stable arena, patch, RAICHO and reward IDs remain in use."
           ]
         }
       ],
@@ -1425,7 +1425,7 @@
           "title": "Behavior and scope",
           "paragraphs": [
             "Sanctuary protection suppresses hostile spawning, incoming damage and firing. Shared projectile sweeps reject protected crossings. Asteroids use canonical circle queries while moving; these are physical exclusions, not a cosmetic shield reward.",
-            "Only physical home arrival banks carried crafting materials. Remote sanctuaries do not become a Forge or a cargo bank. Haven facilities are Forge, Hangar, Journal and Arenas. Each real facility has a semantic world hitbox while the ship remains within Haven."
+            "Only physical home arrival banks carried crafting materials. Remote sanctuaries do not become a Forge or a cargo bank. Haven facilities are Forge, Hangar, Journal and Arenas. Each real facility has a semantic world hitbox while the RAICHO remains within Haven."
           ]
         },
         {
@@ -1564,10 +1564,10 @@
     },
     {
       "id": "ships",
-      "title": "Fleet & hull identity",
+      "title": "RAICHO / flight craft",
       "category": "ships",
       "status": "implemented",
-      "summary": "Ten stable ship IDs separate crafted champion hulls from the tournament reward.",
+      "summary": "Ten stable RAICHO IDs separate crafted champion hulls from the tournament reward.",
       "tags": [
         "ships",
         "implemented"
@@ -1575,11 +1575,11 @@
       "facts": [
         {
           "label": "ID 0",
-          "value": "Haven Scout"
+          "value": "Legacy Haven Scout; licensed PAN HIKARI / RENKO HIBANA / HUGO MAMORI"
         },
         {
           "label": "IDs 1–8",
-          "value": "Champion ships in the eight-character order"
+          "value": "Champion RAICHO in the eight-character order"
         },
         {
           "label": "ID 9",
@@ -1590,15 +1590,15 @@
           "value": "32 × 32 occupied-cell bodies"
         },
         {
-          "label": "Starter ship art",
-          "value": "Existing generated base body retained"
+          "label": "Starter RAICHO art",
+          "value": "Three manufacturer-specific48×48 occupied-cell bodies; anonymous legacy Scout retains its original body"
         }
       ],
       "sections": [
         {
           "title": "Behavior and scope",
           "paragraphs": [
-            "Each ship owns XP, six hardware ranks and one equipped automatic ability in each offense/defense/passive category. Shared crafted inventory does not silently grant effects to other ships. Stronger owned ranks are capped by the selected normal ship level.",
+            "Each RAICHO owns XP, six hardware ranks and one equipped automatic ability in each offense/defense/passive category. Shared crafted inventory does not silently grant effects to other RAICHO. Stronger owned ranks are capped by the selected normal RAICHO level.",
             "Freshly crafted hulls and the new Sovereign award start at XP 0 / LV 1. Sovereign has an explicit enhanced chassis and three rank-five royal bundles while equipped; its reward exception does not fabricate XP or overwrite the ordinary boss counters."
           ]
         }
@@ -1678,14 +1678,14 @@
         },
         {
           "label": "Normal rank cap",
-          "value": "Owned rank capped by selected ship level"
+          "value": "Owned rank capped by selected RAICHO level"
         }
       ],
       "sections": [
         {
           "title": "Behavior and scope",
           "paragraphs": [
-            "Starter and boss abilities fit every owned hull. Champion abilities fit matching family hulls; Scout is family 0 and Sovereign is a wildcard for normal abilities. Royal bundles fit ship 9 only. Crafting acquires inventory without auto-equipping it.",
+            "Starter and boss abilities fit every owned hull. Champion abilities fit matching family hulls; Scout is family 0 and Sovereign is a wildcard for normal abilities. Royal bundles fit RAICHO 9 only. Crafting acquires inventory without auto-equipping it.",
             "Starter recipes cost three matching points plus two T1 materials. Signature/champion recipes cost ten matching points plus two T1. Shared ability upgrades cost ten matching points plus two materials of the next rank tier. Royal bundles are reward-only, not Forge recipes.",
             "Catalog: 0 Pulse Lens [Offense]: Primary shots deal +10% damage per effective rank.; 1 Guard Coil [Defense]: Adds 20 shield at rank 1, then +8 per effective rank; uses normal shield recharge.; 2 Flux Drive [Passive]: Adds +4% speed and acceleration per effective rank.; 3 Pulse Echo [Offense]: Periodically fires an additional piercing fan; rank increases its damage.; 4 Repulsor [Defense]: Taking damage releases a repulsor nova; rank shortens its cooldown.; 5 Ion Wake [Passive]: Fast flight leaves a damaging ion trail; rank increases its damage.; 6 Needle Burst [Offense]: Every fourth primary shot releases a narrow two-shot needle burst.; 7 Broadside [Offense]: Every sixth primary shot fires a pair of side-facing projectiles.; 8 Guided Missile [Offense]: Every fifth primary shot launches a guided missile.; 9 Fork Volley [Offense]: Every third primary shot releases a split-wing fork volley.; 10 Windrunner Wake [Passive]: Fast flight leaves the champion's damaging ion trail.; 11 Impact Nova [Defense]: Taking damage releases a nova with the champion's short cooldown.; 12 Piercing Seeker [Offense]: Every fourth primary shot launches a guided piercing seeker.; 13 Sniper Spear [Offense]: Every sixth primary shot fires a fast projectile that pierces multiple targets.; 14 Royal Prism [Offense]: Sovereign reward: an eight-shot prism burst and fully evolved Pulse Echo.; 15 Royal Aegis [Defense]: Sovereign reward: every eighth primary repairs 4 hull; damage triggers a fully evolved nova.; 16 Royal Wake [Passive]: Sovereign reward: fast flight leaves the fully evolved rank-five ion trail."
           ]
@@ -1875,17 +1875,17 @@
     },
     {
       "id": "ship-levels",
-      "title": "Ship XP, hardware & rank gates",
+      "title": "RAICHO XP, hardware & rank gates",
       "category": "missions",
       "status": "implemented",
-      "summary": "Experience belongs to the active ship; hardware and equipped powers use its real level cap.",
+      "summary": "Experience belongs to the active RAICHO; hardware and equipped powers use its real level cap.",
       "tags": [
         "missions",
         "implemented"
       ],
       "facts": [
         {
-          "label": "Maximum ship level",
+          "label": "Maximum RAICHO level",
           "value": "100"
         },
         {
@@ -1913,8 +1913,8 @@
         {
           "title": "Behavior and scope",
           "paragraphs": [
-            "Normal hardware effective rank is min(stored rank, level rank cap). Stored ownership is preserved when switching to a low-level hull. Six hardware ranks are ship-local. Primary fire always works; automatic signature effects require compatible crafted and equipped slots.",
-            "Non-belt asteroids can award two XP; belt asteroids award no XP. Champion victory gives 40 selected-ship XP and a league match victory gives 30. Experience movement bonus grows by 2.5% per level through level 12; drive and chassis modifiers are separate."
+            "Normal hardware effective rank is min(stored rank, level rank cap). Stored ownership is preserved when switching to a low-level hull. Six hardware ranks are RAICHO-local. Primary fire always works; automatic signature effects require compatible crafted and equipped slots.",
+            "Non-belt asteroids can award two XP; belt asteroids award no XP. Champion victory gives 40 selected-RAICHO XP and a league match victory gives 30. Experience movement bonus grows by 2.5% per level through level 12; drive and chassis modifiers are separate."
           ]
         }
       ],
@@ -1969,7 +1969,7 @@
       "title": "Cargo, bank & death rules",
       "category": "missions",
       "status": "implemented",
-      "summary": "Crafting materials must survive the return trip; points and ship XP are retained immediately.",
+      "summary": "Crafting materials must survive the return trip; points and RAICHO XP are retained immediately.",
       "tags": [
         "missions",
         "implemented"
@@ -2001,7 +2001,7 @@
           "title": "Behavior and scope",
           "paragraphs": [
             "Five-tier cargo and stored arrays are authoritative. A fresh schema-4 reload clears carried materials rather than teleporting abandoned cargo into a bank. Previously retained v3 scalar material state is grandfathered into the T1 stash once. Normal save normalization must preserve current cargo until the actual lifecycle event.",
-            "Points, earned ship XP, crafted inventory, loadouts and completed progression remain retained on death. Last recorded expedition is a historical report: an unplayed forced diagnostic death may leave the previous report rather than invent a new run."
+            "Points, earned RAICHO XP, crafted inventory, loadouts and completed progression remain retained on death. Last recorded expedition is a historical report: an unplayed forced diagnostic death may leave the previous report rather than invent a new run."
           ]
         }
       ],
@@ -2033,7 +2033,7 @@
       ],
       "media": [],
       "data": {
-        "schemaVersion": 5,
+        "schemaVersion": 6,
         "materialTiers": 5,
         "cargoCapacity": 16
       }
@@ -2082,7 +2082,7 @@
           "title": "Sport, sponsors and authored roster candidates",
           "paragraphs": [
             "Galaxy Royale is the universe's biggest and most popular sport. PAN Dynamics, RENKO Cybernetics and HUGO CORP can sponsor arenas and competitors. Sponsor identity is independent of a competitor's main and sub-manufacturers; it does not change hair, horns, license or loadout.",
-            "The user's PAN representative candidate is APP#F344FEE: male DORO-PAN-PAN, in a PAN-sponsored arena. ORP#2323 is a female DORA-RENKO-PAN candidate who may also carry PAN sponsorship. These candidates are documented designs; they have not replaced the eight existing encounters or their stable reward IDs.",
+            "The user's PAN representative candidate is APP#F344FEE: female DORA-PAN-PAN, in a PAN-sponsored arena. ORP#2323 is a male DORO-RENKO-PAN candidate who may also carry PAN sponsorship. These candidates are documented designs; they have not replaced the eight existing encounters or their stable reward IDs.",
             "The current roster retains historical Human, Automaton and alien labels from its implementation. Reconciliation with the new KIKAI setting, where biological life cannot survive, is an explicit roster-authoring task. Existing labels do not establish surviving biological humans."
           ]
         }
@@ -2905,7 +2905,8 @@
       "summary": "Technological descendants of humans carry life forward through persistent droid licenses and independent manufacturers.",
       "tags": [
         "kikai",
-        "kikai"
+        "license",
+        "portrait"
       ],
       "facts": [
         {
@@ -2922,17 +2923,17 @@
         },
         {
           "label": "License",
-          "value": "O female / A male / T neutral, then main + sub initials, #HASH"
+          "value": "A female / O male / T neutral, then main + sub initials; player #HASH, guide APR-1337"
         }
       ],
       "sections": [
         {
           "title": "Canon and behavior",
           "paragraphs": [
-            "The browser issues eight cryptographically random bytes as sixteen hexadecimal digits. Main corporation selects its distinct level-one starter hull and one equipped rank-one ability. PAN Pathfinder carries the passive slot; RENKO Lancer the offensive slot; HUGO Bulwark the defensive slot.",
-            "Main corporation themes hair, the starter hull, its jet and home accents. The independent sub-manufacturer colors horns. Existing anonymous profiles retain their original Scout, progress and loadouts; migration does not issue a license or duplicate a starter item.",
-            "Type-specific player portrait silhouettes are a separate authored-art task; the current detailed guide is DORA. Recolored guide art is not presented as a male or neutral character.",
-            "Appearance follows droid type: feminine DORA with long hair, masculine DORO with short spiky hair, neutral TALO with a crew cut. Callsigns use O/A/T then main and sub-manufacturer initials; the confirmed guide is OPR#1337, PAN main with RENKO horns.",
+            "The browser issues eight cryptographically random bytes as sixteen hexadecimal digits. Main corporation selects its distinct level-one starter hull and one equipped rank-one ability. PAN HIKARI carries the passive slot; RENKO HIBANA the offensive slot; HUGO MAMORI the defensive slot.",
+            "Main corporation themes hair, the starter hull, its RAICHO and home accents. The independent sub-manufacturer colors horns. Existing anonymous profiles retain their original Scout, progress and loadouts; migration does not issue a license or duplicate a starter item.",
+            "Distinct DORA/DORO/TALO profile bodies are implemented with independent main-hair and sub-manufacturer KESSHO crystal palettes. The creator updates all27 combinations in real time and reuses the chosen profile on the issued license. Current integrated browser acceptance is recorded separately.",
+            "Appearance follows droid type: feminine DORA with long hair, masculine DORO with short spiky hair, neutral TALO with a crew cut. Callsigns use A/O/T then main and sub-manufacturer initials; the confirmed guide is APR-1337, PAN main with RENKO horns.",
             "KIKAI are technological life descended from humans in a future where biological life can no longer survive. They have friendships, dreams and hobbies. The setting treats them as people."
           ]
         }
@@ -2955,7 +2956,22 @@
         },
         {
           "path": "apps/game/src/storage.ts",
-          "label": "Validated schema-five snapshots",
+          "label": "Validated schema-six snapshots",
+          "role": "implementation"
+        },
+        {
+          "path": "docs/KIKAI_PROFILE_ART.md",
+          "label": "Distinct profile conversion and animation provenance",
+          "role": "implementation"
+        },
+        {
+          "path": "docs/KIKAI_PROFILE_ART.md",
+          "label": "Distinct profile conversion and animation provenance",
+          "role": "implementation"
+        },
+        {
+          "path": "docs/KIKAI_PROFILE_ART.md",
+          "label": "Distinct profile conversion and animation provenance",
           "role": "implementation"
         }
       ],
@@ -2964,7 +2980,15 @@
         "abilities",
         "cargo"
       ],
-      "media": [],
+      "media": [
+        {
+          "path": "assets/ui/kikai/profiles/authoring-contact-sheet.png",
+          "label": "Distinct DORA, DORO and TALO silhouettes",
+          "kind": "converted-concept",
+          "provenance": "docs/KIKAI_PROFILE_ART.md",
+          "caption": "Software authoring preview of the actual cell packs and color masks; native extraction tests and integrated GPU screenshots have separate evidence scopes."
+        }
+      ],
       "data": {
         "types": [
           "DORA",
@@ -2976,31 +3000,31 @@
             "id": "pan",
             "color": "green",
             "role": "passive",
-            "starter": "PAN Pathfinder",
+            "starter": "PAN HIKARI",
             "ability": 2
           },
           {
             "id": "renko",
             "color": "red",
             "role": "offensive",
-            "starter": "RENKO Lancer",
+            "starter": "RENKO HIBANA",
             "ability": 0
           },
           {
             "id": "hugo",
             "color": "blue",
             "role": "defensive",
-            "starter": "HUGO Bulwark",
+            "starter": "HUGO MAMORI",
             "ability": 1
           }
         ],
         "hashBytes": 8,
-        "schemaVersion": 5
+        "schemaVersion": 6
       }
     },
     {
       "id": "dora",
-      "title": "OPR#1337 / DORA-PAN-RENKO-1337",
+      "title": "APR-1337 / DORA-PAN-RENKO-1337",
       "category": "champions",
       "status": "implemented",
       "summary": "The player's friend is a PAN explorer with green hair, RENKO red crystal horns and a K-pop performance hobby.",
@@ -3011,7 +3035,7 @@
       "facts": [
         {
           "label": "Guide",
-          "value": "DORA-PAN-RENKO-1337; OPR#1337"
+          "value": "DORA-PAN-RENKO-1337; APR-1337"
         },
         {
           "label": "Native portrait",
@@ -3030,8 +3054,9 @@
         {
           "title": "Canon and behavior",
           "paragraphs": [
-            "OPR#1337 has golden eyes, long green PAN hair, red RENKO crystal horns, pale armor and a mechanical neck. This matches the accepted character reference. Her fixed PAN/RENKO appearance is independent of the player's hair and horn palette masks.",
+            "APR-1337 has golden eyes, long green PAN hair, red RENKO crystal horns, pale armor and a mechanical neck. This matches the accepted character reference. Her fixed PAN/RENKO appearance is independent of the player's hair and horn palette masks.",
             "She is a friendly explorer with dreams of her own and performs as a K-pop star as her hobby. She helps the player adjust to their new universe. The introductory mission uses authored dialogue; performances, songs and voice production remain separate work.",
+            "APR-1337 is extremely old despite her youthful appearance. She lived alongside biological humans and now keeps humanity alive through new KIKAI. Her care for new players comes from that lived history. Exact age, chronology and mind-transfer mechanisms have not been specified.",
             "The runtime paints occupied cell objects with group transforms and fractional fitting. The reference conversion declares crop, alpha threshold, nearest resampling and palette reduction; it is not described as lossless. Native software images verify extracted packets, while integrated browser and physical-device acceptance have separate scopes.",
             "No generated speech or local model is claimed. The native portrait API includes an explicitly driven speaking mask; DORA voice assets and inference integration remain future work. Cosmetic animation freezes under Reduced Motion."
           ]
@@ -3073,8 +3098,8 @@
           "caption": "Actual approved generated reference. Runtime conversion is declared and authored animation patches are separate."
         },
         {
-          "path": "artifacts/kikai-opr/native-contact-sheet.png",
-          "label": "Current native OPR layers and controls",
+          "path": "artifacts/kikai-apr/native-contact-sheet.png",
+          "label": "Current native APR layers and controls",
           "kind": "runtime-art",
           "provenance": "docs/KIKAI_ART.md",
           "caption": "Latest green PAN hair/red RENKO horns in actual FrameBuilder packets: expressions, blink, speech masks, independent long-hair recolor previews and ten32-cell icons. This is native extraction evidence, not a GPU screenshot."
@@ -3090,10 +3115,10 @@
     },
     {
       "id": "flight-training",
-      "title": "OPR#1337's first flight mission",
+      "title": "APR-1337's first flight mission",
       "category": "missions",
-      "status": "implemented",
-      "summary": "Ordered persistent stages require actual departure, belt destruction, material pickup, home banking and crafting/equipping.",
+      "status": "verification-pending",
+      "summary": "APR trains the player to destroy10 any-type asteroids, collect10 designated materials, bank them and upgrade the corporation starter once.",
       "tags": [
         "flight-training",
         "kikai"
@@ -3101,11 +3126,11 @@
       "facts": [
         {
           "label": "Progress",
-          "value": "License → departure → Haven-belt rock → Tier 1 pickup → physical bank → craft plus equip"
+          "value": "License → destroy10 asteroids → collect10 specific materials → physical bank → first starter upgrade"
         },
         {
           "label": "Discovery",
-          "value": "Unknown ships and abilities stay absent until real discovery or unlock"
+          "value": "Unknown RAICHO and abilities stay absent until real discovery or unlock"
         },
         {
           "label": "Save",
@@ -3116,9 +3141,9 @@
         {
           "title": "Canon and behavior",
           "paragraphs": [
-            "The authoritative simulation records separate facts, preserving events collected out of order. Haven-belt destruction requires an actual asteroid with belt origin, and banking requires a real physical return across the protected boundary.",
-            "The gifted starter ability does not satisfy the additional crafting/equipping stage. Guide pages display instructions without rewards or hidden progression mutations. The mission remains accessible in the Journal.",
-            "Native tests exercise gameplay paths with explicit accelerated fixtures; they do not prove natural loot pacing or a complete player-earned playthrough."
+            "Latest user direction replaces the earlier one-rock/additional-ability tutorial. The first practical mission counts10 real asteroid destructions of anytype. The second specifies an asteroid variety and10 matching materials to improve the main corporation factory starter.",
+            "PAN upgrades its passive Flux Drive, RENKO its offensive Pulse Lens and HUGO its defensive Guard Coil. The first upgrade is rank1 to rank2, available at RAICHO level1. Cargo must physically return to the home stash; carried crafting items are lost on death.",
+            "The active gameplay specialist is implementing authoritative counters, variety-specific drops and migration. The guide and Journal display the real native state. Diagnostic fixtures cannot earn progress. Natural loot pacing and a complete player-earned playthrough remain separate validation."
           ]
         }
       ],
@@ -3156,6 +3181,70 @@
         ],
         "completedStage": 6
       }
+    },
+    {
+      "id": "lore-lexicon",
+      "title": "KIKAI, KESSHO and RAICHO",
+      "category": "overview",
+      "status": "implemented",
+      "summary": "Japanese-inspired ASCII terminology and authored RAICHO model names, with sourced lexical meanings and stable save identifiers.",
+      "tags": [
+        "lore",
+        "kikai",
+        "kessho",
+        "raicho"
+      ],
+      "facts": [
+        {
+          "label": "KIKAI",
+          "value": "Technological species descended from humans"
+        },
+        {
+          "label": "KESSHO",
+          "value": "Crystals; used for independent sub-manufacturer horns and named resources"
+        },
+        {
+          "label": "RAICHO",
+          "value": "Flight craft, inspired by the Japanese rock-ptarmigan name"
+        },
+        {
+          "label": "Starters",
+          "value": "PAN HIKARI / RENKO HIBANA / HUGO MAMORI"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Naming and compatibility",
+          "paragraphs": [
+            "The game uses ASCII KIKAI, KESSHO and RAICHO. RAICHO is an authored flight-craft usage inspired by the bird whose name literally means thunder bird; it is not the standard Japanese word for spacecraft. The lexicon records the original Japanese readings and primary lexical references.",
+            "HIKARI means light, HIBANA spark and MAMORI guarding/protection. These starter display models retain hull0, their existing manufacturer IDs, single equipped starter ability, XP and loadout. The separate champion Bulwark is unchanged. Sponsor identity remains independent of manufacturers.",
+            "Player-facing creator, hangar, status and guide wording use these terms. Source-backed lexical tests, save compatibility and browser acceptance are recorded separately; no translation certification or completed campaign playthrough is claimed."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "path": "docs/LORE_LEXICON.md",
+          "label": "Meanings, primary references and naming policy",
+          "role": "documentation"
+        },
+        {
+          "path": "assets/narrative/lore-lexicon.json",
+          "label": "Canonical terms and exact model aliases",
+          "role": "implementation"
+        },
+        {
+          "path": "crates/game_core/src/identity.rs",
+          "label": "Native starter model display names",
+          "role": "implementation"
+        }
+      ],
+      "related": [
+        "kikai",
+        "ships",
+        "dora"
+      ],
+      "media": []
     }
   ]
 }

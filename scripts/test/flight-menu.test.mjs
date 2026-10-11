@@ -4,6 +4,19 @@ import { readFileSync } from "node:fs";
 import vm from "node:vm";
 import ts from "typescript";
 
+const portraitCompiled = ts.transpileModule(
+  readFileSync(
+    new URL("../../apps/game/src/kikai-portrait.ts", import.meta.url),
+    "utf8",
+  ),
+  {
+    compilerOptions: {
+      target: ts.ScriptTarget.ES2022,
+      module: ts.ModuleKind.CommonJS,
+    },
+  },
+).outputText;
+
 // Executes the real view with a fake DOM: not renderer, layout or physics QA.
 const compiled = ts.transpileModule(
   readFileSync(
@@ -58,6 +71,9 @@ function fixture() {
       writes++;
       this.attributes[key] = value;
     }
+    getAttribute(key) {
+      return this.attributes[key] ?? null;
+    }
     focus() {
       document.activeElement = this;
     }
@@ -65,7 +81,13 @@ function fixture() {
   document.createElement = (tagName) =>
     Object.assign(new Element(), { tagName });
   const exports = {};
-  vm.runInNewContext(compiled, { exports, document });
+  const portraitExports = {};
+  vm.runInNewContext(portraitCompiled, { exports: portraitExports });
+  vm.runInNewContext(compiled, {
+    exports,
+    document,
+    require: () => portraitExports,
+  });
   return {
     paint: exports.paintFlightMenu,
     target: new Element(),
@@ -139,6 +161,39 @@ function freeze(value) {
   return value;
 }
 
+test("issued license reuses the selected native appearance without resetting live-menu focus or scroll", () => {
+  const f = fixture();
+  const data = hud();
+  data.identity = {
+    kind: "talo",
+    corporation: "hugo",
+    sub_corporation: "pan",
+    designation: "TALO-HUGO-PAN-0123456789ABCDEF",
+    corporation_role: "Defensive",
+  };
+  f.paint(f.target, data);
+  const portrait = flatten(f.target).find(
+    (n) => n.dataset.pixelKind === "portrait",
+  );
+  assert.ok(portrait);
+  assert.equal(portrait.hidden, false);
+  assert.equal(portrait.dataset.pixelValue, "9");
+  assert.equal(portrait.dataset.portraitKind, "2");
+  assert.equal(portrait.dataset.portraitMain, "2");
+  assert.equal(portrait.dataset.portraitSub, "0");
+  assert.equal(
+    portrait.attributes["aria-label"],
+    "TALO profile: BLUE hair, GREEN crystals",
+  );
+  f.target.scrollTop = 110;
+  f.externalButton.focus();
+  f.resetWrites();
+  assert.equal(f.paint(f.target, structuredClone(data)), false);
+  assert.equal(f.writes(), 0);
+  assert.equal(f.target.scrollTop, 110);
+  assert.equal(f.document.activeElement, f.externalButton);
+});
+
 test("live status displays selected-ship XP, effective stats, slots and actual cargo tiers", () => {
   const f = fixture();
   const data = freeze(hud());
@@ -169,6 +224,35 @@ test("live status displays selected-ship XP, effective stats, slots and actual c
   assert.equal(icon.dataset.pixelValue, "9");
   assert.equal(icon.attributes["aria-hidden"], "true");
   assert.equal(data.loadout[0].rank, 5); // Shared owned rank is not rewritten by its effective cap.
+});
+
+test("named T1 inventory is shown inside existing totals and clears without recreating the menu", () => {
+  const f = fixture();
+  const data = hud();
+  data.material_training_cargo = [1, 0, 1];
+  data.material_training_stash = [2, 3, 3];
+  f.paint(f.target, data);
+  assert.ok(f.target.textContent.includes("CARGO 3 / 16 / AT RISK"));
+  assert.ok(
+    f.target.textContent.includes(
+      "CARRIED T1 PARTS / PHASE SILICATE 1 / IRON FILAMENT 0 / COOLANT KESSHO 1",
+    ),
+  );
+  assert.ok(
+    f.target.textContent.includes(
+      "BANKED T1 PARTS / PHASE SILICATE 2 / IRON FILAMENT 3 / COOLANT KESSHO 3",
+    ),
+  );
+  const nodes = flatten(f.target);
+  f.resetWrites();
+  assert.equal(f.paint(f.target, structuredClone(data)), false);
+  assert.equal(f.writes(), 0);
+  data.material_training_cargo = [0, 0, 0];
+  data.material_training_stash = [0, 0, 0];
+  assert.equal(f.paint(f.target, data), true);
+  assert.deepEqual(flatten(f.target), nodes);
+  assert.ok(!f.target.textContent.includes("T1 PARTS"));
+  assert.ok(f.target.textContent.includes("CARGO 3 / 16 / AT RISK"));
 });
 
 test("identical or sub-display-resolution live readings perform zero DOM writes", () => {
@@ -260,6 +344,6 @@ test("dedicated status actions and title Quit use supported native icons with ac
     assert.match(button, /aria-label="[^"]+"/);
     assert.match(button, /title="[^"]+"/);
   }
-  assert.match(html, /id="flight-status"[^>]+aria-label="Live ship status"/);
+  assert.match(html, /id="flight-status"[^>]+aria-label="Live RAICHO status"/);
   assert.ok(!html.includes("Flight paused"));
 });

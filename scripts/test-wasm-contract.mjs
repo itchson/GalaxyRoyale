@@ -16,6 +16,21 @@ const backends = [
 ];
 const zeroGenerations = () => Array.from({ length: 3 }, () => Array(5).fill(0));
 const zeroMaterials = () => Array(5).fill(0);
+const zeroTrainingMaterials = () => Array(3).fill(0);
+const onboarding = (
+  stage = 0,
+  flags = 0,
+  asteroids = 0,
+  materials = 0,
+  legacy = false,
+) => ({
+  version: 2,
+  stage,
+  flags,
+  asteroids_destroyed: asteroids,
+  materials_collected: materials,
+  legacy_complete: legacy,
+});
 const runFixture = {
   time: 3,
   distance_peak: 1800,
@@ -38,11 +53,67 @@ const stages = {
           sub_corporation: "renko",
           hex_id: "0123456789abcdef",
         },
-        onboarding: { stage: 0, flags: 0 },
+        onboarding: onboarding(),
         currency: [0, 0, 0],
       },
     ]),
   ),
+  ...Object.fromEntries(
+    ["pan", "renko", "hugo"].flatMap((corporation, index) =>
+      ["ready", "upgraded"].map((state) => [
+        `training-${corporation}-${state}`,
+        {
+          identity: {
+            kind: "talo",
+            corporation,
+            sub_corporation: "renko",
+            hex_id: "0123456789abcdef",
+          },
+          onboarding:
+            state === "ready"
+              ? onboarding(5, 31, 10, 10)
+              : onboarding(6, 127, 10, 10),
+          currency: [0, 0, 0],
+          campaign: {
+            stored_materials:
+              state === "ready" ? [10, 0, 0, 0, 0] : zeroMaterials(),
+            stored_training_materials:
+              state === "ready"
+                ? [0, 0, 0].map((_, i) => (i === index ? 10 : 0))
+                : zeroTrainingMaterials(),
+            cargo_materials: zeroMaterials(),
+            cargo_training_materials: zeroTrainingMaterials(),
+            ship_xp: Array(10).fill(0),
+          },
+        },
+      ]),
+    ),
+  ),
+  "training-cargo-reload": {
+    currency: [7, 8, 9],
+    campaign: {
+      cargo_materials: zeroMaterials(),
+      cargo_training_materials: zeroTrainingMaterials(),
+      stored_materials: [11, 0, 0, 0, 0],
+      stored_training_materials: [2, 3, 4],
+    },
+  },
+  "training-legacy-complete": {
+    currency: [7, 8, 9],
+    onboarding: onboarding(6, 127, 0, 0, true),
+    campaign: {
+      stored_materials: [11, 0, 0, 0, 0],
+      stored_training_materials: zeroTrainingMaterials(),
+    },
+  },
+  "training-legacy-incomplete": {
+    currency: [7, 8, 9],
+    onboarding: onboarding(2, 3),
+    campaign: {
+      stored_materials: [11, 0, 0, 0, 0],
+      stored_training_materials: zeroTrainingMaterials(),
+    },
+  },
   fresh: {
     currency: [0, 0, 0],
     boss_kills: [0, 0, 0],
@@ -124,7 +195,7 @@ function run(command, args) {
 async function checkpoint(module, stage, backend) {
   const profile = module.checkpoint_contract(stage);
   const expected = stages[stage];
-  assert.equal(profile.schema_version, 5);
+  assert.equal(profile.schema_version, 6);
   assert.ok(
     Object.hasOwn(profile, "identity") && Object.hasOwn(profile, "onboarding"),
   );
@@ -140,6 +211,19 @@ async function checkpoint(module, stage, backend) {
     assert.equal(profile.campaign.loadouts[0].slots[starter], starter);
     assert.equal(
       profile.campaign.abilities.slice(0, 3).filter((a) => a.blueprint).length,
+      1,
+    );
+  }
+  if (/^training-(pan|renko|hugo)-(ready|upgraded)$/.test(stage)) {
+    const [, corporation, state] = stage.split("-");
+    const starter = { pan: 2, renko: 0, hugo: 1 }[corporation];
+    assert.equal(
+      profile.campaign.abilities[starter].rank,
+      state === "ready" ? 1 : 2,
+    );
+    assert.equal(profile.campaign.loadouts[0].slots[starter], starter);
+    assert.equal(
+      profile.campaign.abilities.filter((a) => a.rank > 0).length,
       1,
     );
   }
@@ -218,6 +302,17 @@ async function checkpoint(module, stage, backend) {
   }
   for (const key of ["cargo_materials", "stored_materials"])
     assert.equal(profile.campaign[key].length, 5);
+  for (const [typed, total] of [
+    ["cargo_training_materials", "cargo_materials"],
+    ["stored_training_materials", "stored_materials"],
+  ]) {
+    assert.equal(profile.campaign[typed].length, 3);
+    assert.ok(
+      profile.campaign[typed].reduce((sum, amount) => sum + amount, 0) <=
+        profile.campaign[total][0],
+      "Named materials are a subset of existing T1 inventory, never extra rewards",
+    );
+  }
   if (stage === "inventory") {
     assert.deepEqual(
       profile.campaign.abilities.map((a) => a.rank),

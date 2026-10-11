@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   gap: calc(8px * var(--ui-scale, 1));
-  width: min(calc(440px * var(--ui-scale, 1)), 100%);
+  width: min(calc(740px * var(--ui-scale, 1)), 100%);
   max-height: 100%;
   overflow: hidden;
   padding: var(--ui-pad);
@@ -38,6 +38,31 @@
   overflow: auto;
   min-height: 0;
   overscroll-behavior: contain;
+}
+.droid-body {
+  display: grid;
+  grid-template-columns: calc(136px * var(--ui-scale, 1)) minmax(0, 1fr);
+  gap: calc(16px * var(--ui-scale, 1));
+  min-height: 0;
+}
+.droid-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(8px * var(--ui-scale, 1));
+  min-width: 0;
+}
+.droid-portrait {
+  flex: 0 0 auto;
+  width: calc(96px * var(--ui-scale, 1));
+  height: calc(128px * var(--ui-scale, 1));
+}
+.droid-profile-name,
+.droid-profile-serial {
+  text-align: center;
+}
+.droid-profile-serial {
+  color: #8db5c4;
 }
 .droid-card > h2,
 .droid-card > button {
@@ -91,6 +116,58 @@
 body.pixel-ready .droid-card {
   opacity: 0;
 }
-.narrow-ui .droid-options {
-  grid-template-columns: 1fr;
+@media (max-width: 700px) {
+  .droid-body {
+    display: flex;
+    flex-direction: column;
+    gap: calc(12px * var(--ui-scale, 1));
+  }
+  .droid-profile {
+    flex-shrink: 0;
+    display: grid;
+    grid-template-columns: calc(72px * var(--ui-scale, 1)) minmax(0, 1fr);
+    column-gap: calc(16px * var(--ui-scale, 1));
+  }
+  .droid-content {
+    flex: 1 1 auto;
+  }
+  .droid-portrait {
+    grid-row: span 2;
+    width: calc(72px * var(--ui-scale, 1));
+    height: calc(96px * var(--ui-scale, 1));
+  }
+  .droid-profile-name,
+  .droid-profile-serial {
+    text-align: left;
+  }
+}
+@media (max-height: 380px) {
+  .droid-card h2 {
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .droid-body {
+    display: block;
+    flex: 1 1 auto;
+    overflow: auto;
+    overscroll-behavior: contain;
+  }
+  .droid-profile {
+    display: grid;
+    grid-template-columns: calc(54px * var(--ui-scale, 1)) minmax(0, 1fr);
+    column-gap: calc(12px * var(--ui-scale, 1));
+    margin-bottom: calc(12px * var(--ui-scale, 1));
+  }
+  .droid-portrait {
+    grid-row: span 2;
+    width: calc(54px * var(--ui-scale, 1));
+    height: calc(72px * var(--ui-scale, 1));
+  }
+  .droid-profile-name,
+  .droid-profile-serial {
+    text-align: left;
+  }
+  .droid-content {
+    overflow: visible;
+  }
 }

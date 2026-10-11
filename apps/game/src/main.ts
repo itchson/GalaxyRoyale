@@ -431,22 +431,47 @@ function showDoraGuide(): void {
     (stage) => stage.stage === training.stage,
   )?.pages ?? [{ text: training.description, expression: "neutral" }];
   const pages = authored.flatMap((page) =>
-    splitPages(page.text).map((text) => ({
+    splitPages(
+      page.text
+        .replaceAll(
+          "{material}",
+          training.material_name ?? "matching materials",
+        )
+        .replaceAll(
+          "{asteroid}",
+          training.asteroid_name ?? "designated asteroids",
+        )
+        .replaceAll(
+          "{starter}",
+          training.starter_name ?? hud.identity!.starter_ability,
+        )
+        .replaceAll(
+          "{slot}",
+          training.starter_slot ?? hud.identity!.corporation_role.toLowerCase(),
+        ),
+    ).map((text) => ({
       text,
       expression: ["neutral", "focused", "concerned", "pleased"].indexOf(
         page.expression,
       ),
     })),
   );
+  if (training.stage >= 2 && training.stage <= 5 && training.version === 2)
+    pages.unshift(
+      ...splitPages(training.description).map((text) => ({
+        text,
+        expression: 1,
+      })),
+    );
   if (training.stage === 0)
     pages.unshift({
-      text: `Welcome, ${hud.identity.short_designation}. Your Kikai license includes ${hud.identity.starter_ship} and ${hud.identity.starter_ability}.`,
+      text: `Welcome, ${hud.identity.short_designation}. Your KIKAI license includes ${hud.identity.starter_ship} and ${hud.identity.starter_ability}.`,
       expression: 3,
     });
   let index = 0;
   const draw = (): void => {
     dialoguePanel.show({
-      speaker: "OPR#1337 / DORA",
+      speaker: "APR-1337 / DORA",
       text: pages[index].text,
       portrait: 8,
       expression: Math.max(0, pages[index].expression),
@@ -719,9 +744,11 @@ function pause(dock: boolean): void {
   element("quick-menu").hidden = true;
   deathScreen.hidden = true;
   menu.hidden = false;
-  element("menu-title").textContent = dock ? "Evolve your ship" : "SHIP STATUS";
+  element("menu-title").textContent = dock
+    ? "Evolve your RAICHO"
+    : "RAICHO STATUS";
   element("menu-description").textContent = dock
-    ? "Craft abilities and improve this ship with banked points and materials."
+    ? "Craft abilities and improve this RAICHO with banked points and materials."
     : "Live telemetry / the universe keeps running.";
   hud = galaxy.hud();
   paintUpgrades(dock);
@@ -808,7 +835,7 @@ const campaignActions: CampaignActions = {
       save(galaxy.profile());
       paintShipHangar(element("hangar-content"), hud, campaignActions);
       paintHud();
-      toast("SHIP CRAFTED / select it at Haven");
+      toast("RAICHO CRAFTED / select it at Haven");
     } catch (error) {
       toast(String(error));
     }
@@ -821,7 +848,7 @@ const campaignActions: CampaignActions = {
       paintShipHangar(element("hangar-content"), hud, campaignActions);
       paintUpgrades(true);
       paintHud();
-      toast("SHIP SELECTED");
+      toast("RAICHO SELECTED");
     } catch (error) {
       toast(String(error));
     }
@@ -878,7 +905,7 @@ function openCredits(): void {
   pause(false);
   element("menu-title").textContent = "GALAXY ROYALE WON";
   element("menu-description").textContent =
-    "Your Sovereign ship is ready. Thank you for flying.";
+    "Your Sovereign RAICHO is ready. Thank you for flying.";
   selectMenuTab("credits");
 }
 function finishCredits(): void {
@@ -894,16 +921,16 @@ function finishCredits(): void {
 function selectMenuTab(tab: MenuTab): void {
   menuTab = tab;
   const headings: Record<MenuTab, [string, string]> = {
-    pause: ["SHIP STATUS", "Live telemetry / the universe keeps running."],
+    pause: ["RAICHO STATUS", "Live telemetry / the universe keeps running."],
     upgrades: [
       "HAVEN FORGE",
-      "Craft compatible abilities, choose your three slots, and improve this ship's hardware.",
+      "Craft compatible abilities, choose your three slots, and improve this RAICHO's hardware.",
     ],
     hangar: [
-      "SHIP HANGAR",
+      "RAICHO HANGAR",
       hud.dock
-        ? "Craft blueprints and choose your next ship."
-        : "Return to Haven to craft or switch ships.",
+        ? "Craft blueprints and choose your next RAICHO."
+        : "Return to Haven to craft or switch RAICHO.",
     ],
     campaign: [
       "ARENA CHAMPIONS",
@@ -924,7 +951,7 @@ function selectMenuTab(tab: MenuTab): void {
     ],
     credits: [
       "GALAXY ROYALE WON",
-      "Your Sovereign ship is ready. Thank you for flying.",
+      "Your Sovereign RAICHO is ready. Thank you for flying.",
     ],
   };
   element("menu-title").textContent = headings[tab][0];
@@ -970,11 +997,13 @@ function selectMenuTab(tab: MenuTab): void {
       const training = document.createElement("section");
       training.className = "upgrade-category passive";
       const title = document.createElement("h3");
-      title.textContent = `OPR#1337 / ${hud.onboarding.title}`;
+      title.id = "training-title";
+      title.textContent = `APR-1337 / ${hud.onboarding.title}`;
       const description = document.createElement("p");
+      description.id = "training-description";
       description.textContent = hud.onboarding.description;
       const contact = document.createElement("button");
-      contact.textContent = "CONTACT OPR#1337";
+      contact.textContent = "CONTACT APR-1337";
       contact.addEventListener("click", showDoraGuide);
       training.append(title, description, contact);
       target.append(training);
@@ -999,7 +1028,7 @@ function selectMenuTab(tab: MenuTab): void {
     bossHeading.textContent = "HOSTILE EVOLUTION";
     const bossHint = document.createElement("p");
     bossHint.textContent =
-      "24 family kills summon the first boss. Two defeated bosses summon their next generation. Unfinished queues survive retreat and ship loss.";
+      "24 family kills summon the first boss. Two defeated bosses summon their next generation. Unfinished queues survive retreat and RAICHO loss.";
     target.append(bossHeading, bossHint);
     for (const family of hud.boss_progress ?? []) {
       const familyHeading = document.createElement("h3");
@@ -1098,7 +1127,7 @@ function forgeMutation(action: () => void, message: string): void {
 function paintUpgrades(_dock: boolean): void {
   paintForge(element("upgrade-content"), hud, {
     purchase: (id) =>
-      forgeMutation(() => galaxy.purchase(id), "SHIP HARDWARE UPGRADED"),
+      forgeMutation(() => galaxy.purchase(id), "RAICHO HARDWARE UPGRADED"),
     craftAbility: (id) =>
       forgeMutation(
         () => galaxy.craft_ability(id),
@@ -1115,13 +1144,23 @@ function paintUpgrades(_dock: boolean): void {
 }
 function paintHud(): void {
   if (!hud) return;
+  if (hud.onboarding) {
+    const title = document.getElementById("training-title");
+    const description = document.getElementById("training-description");
+    const label = `APR-1337 / ${hud.onboarding.title}`;
+    if (title && title.textContent !== label) title.textContent = label;
+    if (description && description.textContent !== hud.onboarding.description)
+      description.textContent = hud.onboarding.description;
+  }
   if (
     launched &&
     hud.onboarding &&
     hud.onboarding.stage !== lastTrainingStage
   ) {
     if (lastTrainingStage >= 0)
-      toast(`OPR#1337 / ${hud.onboarding.title}: ${hud.onboarding.description}`);
+      toast(
+        `APR-1337 / ${hud.onboarding.title}: ${hud.onboarding.description}`,
+      );
     lastTrainingStage = hud.onboarding.stage;
   }
   syncFlightStatusLayout();
@@ -1841,7 +1880,7 @@ function showDeath(): void {
       `${Math.round(summary.time)} SECONDS / ${Math.round(summary.distance_peak)} M FURTHEST FROM HAVEN`,
       `${summary.enemies} ENEMIES / ${summary.asteroids} ASTEROIDS / ${summary.champions} CHAMPIONS`,
       `BANKED POINTS / ${summary.points_gained.join(" / ")}`,
-      `${summary.xp_gained} SHIP XP RETAINED / ${summary.materials_gained} MATERIALS COLLECTED`,
+      `${summary.xp_gained} RAICHO XP RETAINED / ${summary.materials_gained} MATERIALS COLLECTED`,
       `CARRIED MATERIALS LOST / ${summary.materials_lost.map((n, tier) => `T${tier + 1} ${n}`).join(" / ")}`,
     ]) {
       const row = document.createElement("p");
@@ -1849,7 +1888,7 @@ function showDeath(): void {
       target.append(row);
     }
   const bank = document.createElement("p");
-  bank.textContent = `DOCK STASH ${hud.stored_materials} MATERIALS / SHIP LEVEL ${hud.ship_level}`;
+  bank.textContent = `DOCK STASH ${hud.stored_materials} MATERIALS / RAICHO LEVEL ${hud.ship_level}`;
   target.append(bank);
   save(galaxy.profile());
   pixelUi.invalidate();
@@ -1931,9 +1970,9 @@ function interactSite(): void {
         status: champion.patch ? "completed" : "available",
         facts: [
           champion.patch
-            ? "You earned my patch and blueprint. Craft my ship at Haven."
-            : "Win this duel to earn my arena patch and ship blueprint.",
-          "The trial boundary is marked. Retreat or ship loss ends your attempt.",
+            ? "You earned my patch and blueprint. Craft my RAICHO at Haven."
+            : "Win this duel to earn my arena patch and RAICHO blueprint.",
+          "The trial boundary is marked. Retreat or RAICHO loss ends your attempt.",
         ],
       },
       arena.can_challenge ? "CHALLENGE" : undefined,
@@ -1951,7 +1990,7 @@ function interactSite(): void {
           "Welcome to Galaxy Royale. Rival champions from eight universes await. Every entrant meets every other entrant once.",
         status: hud.campaign.tournament_won ? "completed" : "available",
         facts: [
-          "Win duels for three points. Finish first to unlock the Sovereign ship and complete the campaign.",
+          "Win duels for three points. Finish first to unlock the Sovereign RAICHO and complete the campaign.",
           "NPC versus NPC results are seeded simulations. Your eight matches are real duels.",
         ],
       },

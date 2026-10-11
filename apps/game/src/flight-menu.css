@@ -34,6 +34,11 @@
   min-width: 0;
   flex: 1 1 0;
 }
+.flight-license-portrait {
+  flex: 0 0 auto;
+  width: calc(48px * var(--ui-scale, 1));
+  height: calc(64px * var(--ui-scale, 1));
+}
 .flight-status .campaign-ship {
   flex: 0 0 auto;
 }

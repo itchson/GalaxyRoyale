@@ -377,7 +377,7 @@ function fixture() {
 
 test("Forge forwards exact craft/upgrade/equip/empty/hardware arguments, refreshes HUD, then saves the actual snapshot", async () => {
   const operations = [
-    ["purchase", ["rate"], "SHIP HARDWARE UPGRADED"],
+    ["purchase", ["rate"], "RAICHO HARDWARE UPGRADED"],
     ["craftAbility", ["pulse-lens"], "ABILITY CRAFTED"],
     ["upgradeAbility", ["pulse-lens"], "ABILITY UPGRADED"],
     ["equipAbility", [0, "pulse-lens"], "ABILITY EQUIPPED"],
@@ -474,8 +474,8 @@ test("mutation success is not a committed-save claim while deferred persistence 
 test("Hangar page and construction/selection bindings pass full per-hull XP metadata", async () => {
   const f = fixture();
   f.c.selectMenuTab("hangar");
-  assert.match(contents(f.element("hangar-content")), /SHIP LV 3 \/ 60 XP/);
-  assert.match(contents(f.element("hangar-content")), /SHIP LV 1 \/ 0 XP/);
+  assert.match(contents(f.element("hangar-content")), /RAICHO LV 3 \/ 60 XP/);
+  assert.match(contents(f.element("hangar-content")), /RAICHO LV 1 \/ 0 XP/);
   f.calls.length = 0;
   f.c.hangarActions.craft(7);
   await settle();
@@ -505,9 +505,9 @@ test("Hangar page and construction/selection bindings pass full per-hull XP meta
   assert.equal(f.calls.find((item) => item[0] === "paint-hangar")[1], next);
   assert.match(
     contents(f.element("upgrade-content")),
-    /DAWNNEEDLE\nSHIP LV 1 \/ 0 XP/,
+    /DAWNNEEDLE\nRAICHO LV 1 \/ 0 XP/,
   );
-  assert.match(contents(f.element("hangar-content")), /SHIP LV 3 \/ 60 XP/);
+  assert.match(contents(f.element("hangar-content")), /RAICHO LV 3 \/ 60 XP/);
 });
 test("rejected ship construction or switching cannot save or report success", async () => {
   for (const [action, method, argument] of [

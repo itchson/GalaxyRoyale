@@ -25,6 +25,12 @@ export interface AbilityHud extends EquippedAbilityHud {
   craft_reason: string;
   equip_reason: string;
   upgrade_reason: string;
+  training_recipe: boolean;
+  required_training_material: {
+    id: string;
+    name: string;
+    amount: number;
+  } | null;
 }
 export interface HardwareHud {
   id: string;
@@ -68,6 +74,8 @@ export interface ShipHangarHud {
   currency: number[];
   material_stash: number[];
   material_cargo: number[];
+  material_training_cargo?: number[];
+  material_training_stash?: number[];
   material_loss: number[];
   material_loss_reason: string;
   campaign: { selected_ship: number; ships: LoadoutShipHud[] };
@@ -132,7 +140,7 @@ function button(
   return node;
 }
 function progress(level: number, xp: number, nextXp: number): string {
-  return `SHIP LV ${level} / ${xp} XP / ${level >= 100 ? "MAX LEVEL" : `NEXT ${nextXp} XP`}`;
+  return `RAICHO LV ${level} / ${xp} XP / ${level >= 100 ? "MAX LEVEL" : `NEXT ${nextXp} XP`}`;
 }
 function tiers(values: number[]): string {
   return values.map((value, index) => `T${index + 1} ${value}`).join(" / ");
@@ -155,8 +163,23 @@ function recipe(
   materialTier: number,
   materialCost: number,
   hud: ShipHangarHud,
+  named?: AbilityHud["required_training_material"],
 ): HTMLElement {
   const box = section("loadout-recipe");
+  if (named) {
+    const index = [
+      "phase-silicate",
+      "iron-filament",
+      "coolant-crystal",
+    ].indexOf(named.id);
+    box.append(
+      text(
+        "p",
+        `FIRST UPGRADE / ${named.name.toUpperCase()} ${named.amount} / BANKED ${hud.material_training_stash?.[index] ?? 0}`,
+      ),
+    );
+    return box;
+  }
   box.append(
     text(
       "p",
@@ -253,7 +276,7 @@ export function paintForge(
     (item) => item.id === hud.campaign.selected_ship,
   );
   const shipSummary = section("loadout-ship-summary");
-  shipSummary.append(text("h3", ship?.name ?? "ACTIVE SHIP"));
+  shipSummary.append(text("h3", ship?.name ?? "ACTIVE RAICHO"));
   shipSummary.append(
     text(
       "p",
@@ -280,7 +303,7 @@ export function paintForge(
     root.append(
       text(
         "p",
-        "Craft to own. Equip swaps this ship's slot; replaced abilities stay owned.",
+        "Craft to own. Equip swaps this RAICHO's slot; replaced abilities stay owned.",
         "loadout-note",
       ),
     );
@@ -365,6 +388,7 @@ export function paintForge(
               ability.material_tier,
               ability.material_cost,
               hud,
+              ability.required_training_material,
             ),
           );
           if (ability.upgrade_reason)
@@ -410,11 +434,11 @@ export function paintForge(
       );
       slots.append(row);
     }
-    root.append(slots, materialNotes(hud), text("h3", "SHIP MODULES"));
+    root.append(slots, materialNotes(hud), text("h3", "RAICHO MODULES"));
     root.append(
       text(
         "p",
-        "Six ship-owned hardware upgrades. No ability slot required.",
+        "Six RAICHO hardware upgrades. No ability slot required.",
         "loadout-note",
       ),
     );
@@ -476,7 +500,7 @@ export function paintShipHangar(
   root.append(
     text(
       "p",
-      "Ship XP, hardware and equipped slots stay with their hull. Crafted ships start at LV 1. Select a ship to fly it.",
+      "RAICHO XP, hardware and equipped slots stay with their hull. Crafted RAICHO start at LV 1. Select a craft to fly it.",
       "loadout-note",
     ),
   );
@@ -504,7 +528,7 @@ export function paintShipHangar(
         content.append(text("p", ship.select_reason, "loadout-reason"));
       content.append(
         button(
-          ship.selected ? "ACTIVE SHIP" : "SELECT SHIP",
+          ship.selected ? "ACTIVE RAICHO" : "SELECT RAICHO",
           `select-ship-${ship.id}`,
           () => actions.select(ship.id),
           !ship.can_select || ship.selected || actions.busy,
@@ -526,7 +550,7 @@ export function paintShipHangar(
         content.append(text("p", ship.craft_reason, "loadout-reason"));
       content.append(
         button(
-          hasRecipe || ship.can_craft ? "CRAFT SHIP" : "LOCKED SHIP",
+          hasRecipe || ship.can_craft ? "CRAFT RAICHO" : "LOCKED RAICHO",
           `craft-ship-${ship.id}`,
           () => actions.craft(ship.id - 1),
           !ship.can_craft || actions.busy,
