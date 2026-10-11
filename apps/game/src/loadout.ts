@@ -351,8 +351,10 @@ export function paintForge(
         "loadout-note",
       ),
     );
+    const workshop = section("component-list");
     for (const component of hud.components) {
       const card = section("component-card");
+      card.setAttribute("aria-description", component.description);
       const header = section("component-heading");
       const icon = section("component-icon");
       icon.dataset.pixelKind = "craft-component";
@@ -369,7 +371,6 @@ export function paintForge(
       header.append(icon, label);
       card.append(
         header,
-        text("p", component.description),
         text(
           "p",
           `BANKED ${component.count}/${component.max_count} / REQUIRES RAICHO LV ${component.required_level}`,
@@ -397,8 +398,9 @@ export function paintForge(
           component.category,
         ),
       );
-      root.append(card);
+      workshop.append(card);
     }
+    root.append(workshop);
     if (!hud.components.length)
       root.append(
         text("p", "No component recipes discovered.", "loadout-note"),

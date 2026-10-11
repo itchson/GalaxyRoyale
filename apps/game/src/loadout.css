@@ -136,6 +136,15 @@
   gap: calc(6px * var(--ui-scale, 1));
   min-width: 0;
 }
+.component-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: calc(6px * var(--ui-scale, 1));
+  min-width: 0;
+}
+.component-card > button {
+  margin-top: auto;
+}
 .component-icon {
   width: 48px;
   height: 48px;
