@@ -2937,10 +2937,10 @@
     },
     {
       "id": "dora",
-      "title": "DPR#1337 / DORA-PAN-RENKO-1337",
+      "title": "ORP#1337 / DORA-RENKO-PAN-1337",
       "category": "champions",
       "status": "implemented",
-      "summary": "PAN's green-haired Kikai guide wears RENKO red crystal horns and introduces real flight and crafting.",
+      "summary": "RENKO's red-haired Kikai guide wears PAN green crystal horns and introduces real flight and crafting.",
       "tags": [
         "dora",
         "kikai"
@@ -2948,7 +2948,7 @@
       "facts": [
         {
           "label": "Guide",
-          "value": "DORA-PAN-RENKO-1337; DPR#1337"
+          "value": "DORA-RENKO-PAN-1337; ORP#1337"
         },
         {
           "label": "Native portrait",
@@ -2967,7 +2967,7 @@
         {
           "title": "Canon and behavior",
           "paragraphs": [
-            "DORA's golden eyes, green hair, red crystal horns, pale armor and mechanical neck preserve the accepted character reference. The guide has a fixed PAN/RENKO appearance; player hair and horn palette masks are independent.",
+            "DORA's golden eyes, red hair, green crystal horns, pale armor and mechanical neck preserve the accepted character reference. The guide has a fixed RENKO/PAN appearance; player hair and horn palette masks are independent.",
             "The runtime paints occupied cell objects with group transforms and fractional fitting. The reference conversion declares crop, alpha threshold, nearest resampling and palette reduction; it is not described as lossless. Native software images verify extracted packets, while integrated browser and physical-device acceptance have separate scopes.",
             "No generated speech or local model is claimed. The native portrait API includes an explicitly driven speaking mask; DORA voice assets and inference integration remain future work. Cosmetic animation freezes under Reduced Motion."
           ]

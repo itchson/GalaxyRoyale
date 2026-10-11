@@ -73,8 +73,8 @@ class KikaiTests(unittest.TestCase):
     def test_onboarding_dialogue_uses_declared_actual_stages_and_bounded_plain_pages(self):
         data=json.loads((ROOT/'assets/narrative/dora-initial-mission.json').read_text(encoding='utf-8'))
         self.assertEqual([s['stage'] for s in data['stages']],list(range(7)))
-        self.assertEqual(data['character']['full_name'],'DORA-PAN-RENKO-1337')
-        self.assertEqual(data['character']['speaker'],'DPR#1337')
+        self.assertEqual(data['character']['full_name'],'DORA-RENKO-PAN-1337')
+        self.assertEqual(data['character']['speaker'],'ORP#1337')
         seen=set()
         for stage in data['stages']:
             self.assertNotIn('reward',stage)

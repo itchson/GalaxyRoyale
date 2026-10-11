@@ -2,12 +2,12 @@
   "version": 1,
   "status": "authored content; host owns authoritative stage and actions",
   "character": {
-    "id": "dora-pan-renko-1337",
-    "full_name": "DORA-PAN-RENKO-1337",
-    "speaker": "DPR#1337",
+    "id": "dora-renko-pan-1337",
+    "full_name": "DORA-RENKO-PAN-1337",
+    "speaker": "ORP#1337",
     "portrait": 8,
-    "main_corporation": "PAN",
-    "sub_corporation": "RENKO"
+    "main_corporation": "RENKO",
+    "sub_corporation": "PAN"
   },
   "source_contract": "Approved Game onboarding HUD stage0..6; no invented mission reward or profile progress",
   "legacy_behavior": "No onboarding prompt when authoritative onboarding HUD is null",
@@ -17,7 +17,7 @@
       "id": "license",
       "native_action": "acknowledge_license",
       "pages": [
-        {"id": "license-intro", "expression": "pleased", "text": "DPR#1337, Haven flight guide. Your license records your main and crystal manufacturers. I am DORA-PAN-RENKO-1337: PAN green hair, RENKO red antenna crystals."},
+        {"id": "license-intro", "expression": "pleased", "text": "ORP#1337, Haven flight guide. Your license records your main and crystal manufacturers. I am DORA-RENKO-PAN-1337: RENKO red hair, PAN green antenna crystals."},
         {"id": "license-starter", "expression": "focused", "text": "Your main manufacturer supplies one equipped starter: PAN Flux Drive, RENKO Pulse Lens, or HUGO Guard Coil. The crystal manufacturer adds no extra combat ability. Confirm your license when ready."}
       ]
     },
@@ -68,7 +68,7 @@
       "stage": 6,
       "id": "complete",
       "pages": [
-        {"id": "guide-complete", "expression": "pleased", "text": "Your first supply loop is recorded. Check your equipped ability, then explore beyond the belt for ship XP and stronger threats. Return with your cargo; DPR#1337 will keep the channel clear."}
+        {"id": "guide-complete", "expression": "pleased", "text": "Your first supply loop is recorded. Check your equipped ability, then explore beyond the belt for ship XP and stronger threats. Return with your cargo; ORP#1337 will keep the channel clear."}
       ]
     }
   ]
