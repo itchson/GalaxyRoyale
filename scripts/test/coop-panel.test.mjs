@@ -562,3 +562,17 @@ test("malformed capability getter remains hidden with no unsafe fallback", () =>
   f.paint(idle({ phase: "hosting", role: "host", invite_available: true }));
   assert.equal(f.node("coop-invite-output").value, "");
 });
+
+test("failed solo restoration keeps the actual reason and prevents another start", () => {
+  const f = fixture();
+  f.paint(idle({ phase: "ended", reason: "restore_failed" }));
+  assert.match(
+    visibleText(f.target),
+    /Solo restoration failed\. Return to title/,
+  );
+  assert.doesNotMatch(visibleText(f.target), /Solo progress is restored/);
+  assert.equal(f.node("coop-create").disabled, true);
+  assert.equal(f.node("coop-join-input").disabled, true);
+  f.node("coop-create").click();
+  assert.equal(f.calls.length, 0);
+});

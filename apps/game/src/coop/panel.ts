@@ -53,6 +53,9 @@ const reasons: Record<string, string> = {
   host_left: "The host ended the session.",
   session_ended: "The session ended.",
   session_expired: "The session expired.",
+  host_ended: "The host ended the session.",
+  restore_failed: "Solo restoration failed. Return to title.",
+  replica_unavailable: "The shared-world view is unavailable.",
 };
 
 /** Mirrors the transport's bounded opaque hex envelope; never decodes its contents. */
@@ -174,7 +177,8 @@ function render(view: View): boolean {
   }
   const idle = valid && (state.phase === "idle" || state.phase === "ended");
   const active = valid && !idle;
-  const busy = view.pending !== null || !valid;
+  const restoreFailed = state.reason === "restore_failed";
+  const busy = view.pending !== null || !valid || restoreFailed;
   const copyable =
     valid &&
     state.role === "host" &&
@@ -234,8 +238,9 @@ function render(view: View): boolean {
     view.end,
     view.pending === "exit" || !active || state.role !== "host",
   );
-  const availability =
-    idle && !view.canStart
+  const availability = restoreFailed
+    ? "Co-op actions are unavailable."
+    : idle && !view.canStart
       ? "Return to Haven to invite or join."
       : "Solo progress is restored on exit. Shared rewards are not enabled yet.";
   const guidance = view.root.querySelector<HTMLElement>(".coop-guidance")!;
