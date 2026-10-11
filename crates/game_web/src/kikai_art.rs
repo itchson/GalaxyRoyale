@@ -1,4 +1,4 @@
-//! DORA-RENKO-PAN-1337: reviewed raster -> authored, immutable object-local cells.
+//! DORA-PAN-RENKO-1337: reviewed raster -> authored, immutable object-local cells.
 //! This module has no game/save state. Host-provided expression/speech is explicit.
 use engine_core::{AffineTransform, FrameBuilder, PixelBody, Transform, Vec2};
 use serde::Deserialize;
@@ -256,7 +256,7 @@ fn horn_color(base: u32, corporation: Corporation) -> u32 {
     u32::from_le_bytes([r, g, b, a])
 }
 
-/// ORP#1337 has RENKO red hair and PAN green crystals, independent of preview defaults.
+/// OPR#1337 has PAN green hair and RENKO red crystals, independent of preview defaults.
 pub fn append_dora(
     frame: &mut FrameBuilder,
     input: &DoraInput,
@@ -267,8 +267,8 @@ pub fn append_dora(
         frame,
         input,
         CorporateAppearance {
-            main: Corporation::Renko,
-            sub: Corporation::Pan,
+            main: Corporation::Pan,
+            sub: Corporation::Renko,
         },
         pixels,
         work,
@@ -525,8 +525,8 @@ mod tests {
                     ..i
                 },
                 CorporateAppearance {
-                    main: Corporation::Renko,
-                    sub: Corporation::Pan,
+                    main: Corporation::Pan,
+                    sub: Corporation::Renko,
                 },
             );
             assert_eq!(clipped_stats.quads, 8656);
@@ -720,22 +720,22 @@ mod tests {
         let (guide, _) = draw(
             input(),
             CorporateAppearance {
-                main: Corporation::Renko,
-                sub: Corporation::Pan,
+                main: Corporation::Pan,
+                sub: Corporation::Renko,
             },
         );
         assert_eq!(colors(&f), colors(&guide));
-        assert_ne!(colors(&f), original);
+        assert_eq!(colors(&f), original);
         let actual_guide = colors(&f);
-        let (mut red_hair, mut green_crystals) = (0, 0);
+        let (mut green_hair, mut red_crystals) = (0, 0);
         for (n, (cell, _)) in body.body.cells().enumerate() {
             let index = local_index(&body.body, cell);
             let [r, g, _, _] = actual_guide[n].to_le_bytes();
-            red_hair += usize::from(body.hair[index] && r > g);
-            green_crystals += usize::from(body.horns[index] && g > r);
+            green_hair += usize::from(body.hair[index] && g > r);
+            red_crystals += usize::from(body.horns[index] && r > g);
         }
-        assert_eq!(red_hair, body.hair.iter().filter(|&&v| v).count());
-        assert_eq!(green_crystals, body.horns.iter().filter(|&&v| v).count());
+        assert_eq!(green_hair, body.hair.iter().filter(|&&v| v).count());
+        assert_eq!(red_crystals, body.horns.iter().filter(|&&v| v).count());
     }
     #[test]
     fn nonfinite_invalid_layouts_are_closed_and_bad_time_is_static_zero() {
