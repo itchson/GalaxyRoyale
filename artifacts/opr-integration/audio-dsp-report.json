@@ -1,0 +1,1787 @@
+{
+  "run": "qa-1791696362395-00025f56",
+  "scope": "native OfflineAudioContext PCM, declared fixtures; no human/mobile/gameplay acceptance",
+  "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+  "created_utc": "2026-10-11T05:26:02.395Z",
+  "cases": [
+    {
+      "key": "prior-engine",
+      "title": "Prior engine, default buses",
+      "seconds": 6,
+      "channels": 2,
+      "sample_rate": 48000,
+      "native_state_after_render": "closed",
+      "native_suspend_checkpoints": 239,
+      "graph_nodes_created": 271,
+      "sources_created": 86,
+      "maximum_voices": {
+        "music": 7,
+        "effects": 1,
+        "continuous": 1
+      },
+      "events_dispatched": 0,
+      "events_declared": 0,
+      "cue_calls": 0,
+      "dispatched": [],
+      "full": {
+        "samples": 576000,
+        "peak": 0.06465665251016617,
+        "rms": 0.02684352126154536,
+        "peak_dbfs": -23.78773568022892,
+        "rms_dbfs": -31.423210303479927,
+        "over_unity": 0,
+        "nonfinite": 0
+      },
+      "steady": {
+        "samples": 192000,
+        "peak": 0.06465665251016617,
+        "rms": 0.033196851309974296,
+        "peak_dbfs": -23.78773568022892,
+        "rms_dbfs": -29.5780621352882,
+        "over_unity": 0,
+        "nonfinite": 0
+      },
+      "tail": {
+        "samples": 48000,
+        "peak": 3.595820201925809e-14,
+        "rms": 3.021598822239879e-15,
+        "peak_dbfs": -268.88404063946393,
+        "rms_dbfs": -290.39526394919983,
+        "over_unity": 0,
+        "nonfinite": 0
+      },
+      "steady_power_above_1khz_ratio": 0.04488680052988582,
+      "wav_bytes": 2304044,
+      "wav_sha256": "634a15f63e580501ca782f68f3b29878044679c07e3a6b8c7f76ca310167637a",
+      "sourceStates": [
+        {
+          "time": 0.02666666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.28346868942621073,
+          "engineDuck": 1
+        },
+        {
+          "time": 1.0266666666666666,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.9999973297363185,
+          "engineDuck": 1
+        },
+        {
+          "time": 2.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.9999999999900488,
+          "engineDuck": 1
+        },
+        {
+          "time": 3.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.9999999999999999,
+          "engineDuck": 1
+        },
+        {
+          "time": 4.026666666666666,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.728573572511394,
+          "engineDuck": 1
+        },
+        {
+          "time": 5.026666666666666,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.0014064778666008175,
+          "engineDuck": 1
+        }
+      ],
+      "cleanup": {
+        "music": 0,
+        "sfx": 0,
+        "continuous": 0,
+        "scheduler_callbacks": 0
+      }
+    },
+    {
+      "key": "warm-engine",
+      "title": "Warm engine, default buses",
+      "seconds": 6,
+      "channels": 2,
+      "sample_rate": 48000,
+      "native_state_after_render": "closed",
+      "native_suspend_checkpoints": 239,
+      "graph_nodes_created": 273,
+      "sources_created": 86,
+      "maximum_voices": {
+        "music": 7,
+        "effects": 1,
+        "continuous": 1
+      },
+      "events_dispatched": 0,
+      "events_declared": 0,
+      "cue_calls": 0,
+      "dispatched": [],
+      "full": {
+        "samples": 576000,
+        "peak": 0.015728354454040527,
+        "rms": 0.006792689859012916,
+        "peak_dbfs": -36.06633424291007,
+        "rms_dbfs": -43.35916427993331,
+        "over_unity": 0,
+        "nonfinite": 0
+      },
+      "steady": {
+        "samples": 192000,
+        "peak": 0.015728354454040527,
+        "rms": 0.008540229204741187,
+        "peak_dbfs": -36.06633424291007,
+        "rms_dbfs": -41.37060946908046,
+        "over_unity": 0,
+        "nonfinite": 0
+      },
+      "tail": {
+        "samples": 48000,
+        "peak": 0,
+        "rms": 0,
+        "peak_dbfs": null,
+        "rms_dbfs": null,
+        "over_unity": 0,
+        "nonfinite": 0
+      },
+      "steady_power_above_1khz_ratio": 0.000005242871614979275,
+      "wav_bytes": 2304044,
+      "wav_sha256": "e703d146df5908d25d88cfed3415a5889108305bbbaf3bcee0321f84280514a5",
+      "sourceStates": [
+        {
+          "time": 0.02666666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.28346868942621073,
+          "engineDuck": 1
+        },
+        {
+          "time": 1.0266666666666666,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.9999973297363185,
+          "engineDuck": 1
+        },
+        {
+          "time": 2.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.9999999999900488,
+          "engineDuck": 1
+        },
+        {
+          "time": 3.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.9999999999999999,
+          "engineDuck": 1
+        },
+        {
+          "time": 4.026666666666666,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.728573572511394,
+          "engineDuck": 1
+        },
+        {
+          "time": 5.026666666666666,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.0014064778666008175,
+          "engineDuck": 1
+        }
+      ],
+      "cleanup": {
+        "music": 0,
+        "sfx": 0,
+        "continuous": 0,
+        "scheduler_callbacks": 0
+      }
+    },
+    {
+      "key": "representative-mix",
+      "title": "Eight-theme score, propulsion, low hull and cues",
+      "seconds": 11,
+      "channels": 2,
+      "sample_rate": 48000,
+      "native_state_after_render": "closed",
+      "native_suspend_checkpoints": 439,
+      "graph_nodes_created": 1564,
+      "sources_created": 493,
+      "maximum_voices": {
+        "music": 14,
+        "effects": 3,
+        "continuous": 2
+      },
+      "events_dispatched": 34,
+      "events_declared": 34,
+      "cue_calls": 34,
+      "dispatched": [
+        {
+          "kind": "shot",
+          "calls": 1,
+          "requested_time": 0.25,
+          "actual_native_time": 0.25066666666666665
+        },
+        {
+          "kind": "shield",
+          "calls": 1,
+          "requested_time": 0.55,
+          "actual_native_time": 0.552
+        },
+        {
+          "kind": "player-hit",
+          "calls": 1,
+          "requested_time": 0.85,
+          "actual_native_time": 0.8506666666666667
+        },
+        {
+          "kind": "mote-charge",
+          "calls": 1,
+          "requested_time": 1.15,
+          "actual_native_time": 1.152
+        },
+        {
+          "kind": "mote-pulse",
+          "calls": 1,
+          "requested_time": 1.45,
+          "actual_native_time": 1.4506666666666668
+        },
+        {
+          "kind": "ability-echo",
+          "calls": 1,
+          "requested_time": 1.75,
+          "actual_native_time": 1.752
+        },
+        {
+          "kind": "ability-nova",
+          "calls": 1,
+          "requested_time": 2.05,
+          "actual_native_time": 2.050666666666667
+        },
+        {
+          "kind": "ability-signature-7",
+          "calls": 1,
+          "requested_time": 2.35,
+          "actual_native_time": 2.352
+        },
+        {
+          "kind": "shot",
+          "calls": 1,
+          "requested_time": 2.65,
+          "actual_native_time": 2.6506666666666665
+        },
+        {
+          "kind": "shield",
+          "calls": 1,
+          "requested_time": 2.9499999999999997,
+          "actual_native_time": 2.952
+        },
+        {
+          "kind": "player-hit",
+          "calls": 1,
+          "requested_time": 3.25,
+          "actual_native_time": 3.2506666666666666
+        },
+        {
+          "kind": "mote-charge",
+          "calls": 1,
+          "requested_time": 3.55,
+          "actual_native_time": 3.552
+        },
+        {
+          "kind": "mote-pulse",
+          "calls": 1,
+          "requested_time": 3.8499999999999996,
+          "actual_native_time": 3.8506666666666667
+        },
+        {
+          "kind": "ability-echo",
+          "calls": 1,
+          "requested_time": 4.15,
+          "actual_native_time": 4.152
+        },
+        {
+          "kind": "ability-nova",
+          "calls": 1,
+          "requested_time": 4.45,
+          "actual_native_time": 4.450666666666667
+        },
+        {
+          "kind": "ability-signature-7",
+          "calls": 1,
+          "requested_time": 4.75,
+          "actual_native_time": 4.752
+        },
+        {
+          "kind": "shot",
+          "calls": 1,
+          "requested_time": 5.05,
+          "actual_native_time": 5.050666666666666
+        },
+        {
+          "kind": "shield",
+          "calls": 1,
+          "requested_time": 5.35,
+          "actual_native_time": 5.352
+        },
+        {
+          "kind": "player-hit",
+          "calls": 1,
+          "requested_time": 5.6499999999999995,
+          "actual_native_time": 5.650666666666667
+        },
+        {
+          "kind": "mote-charge",
+          "calls": 1,
+          "requested_time": 5.95,
+          "actual_native_time": 5.952
+        },
+        {
+          "kind": "mote-pulse",
+          "calls": 1,
+          "requested_time": 6.25,
+          "actual_native_time": 6.250666666666667
+        },
+        {
+          "kind": "ability-echo",
+          "calls": 1,
+          "requested_time": 6.55,
+          "actual_native_time": 6.552
+        },
+        {
+          "kind": "ability-nova",
+          "calls": 1,
+          "requested_time": 6.85,
+          "actual_native_time": 6.850666666666666
+        },
+        {
+          "kind": "ability-signature-7",
+          "calls": 1,
+          "requested_time": 7.1499999999999995,
+          "actual_native_time": 7.152
+        },
+        {
+          "kind": "shot",
+          "calls": 1,
+          "requested_time": 7.449999999999999,
+          "actual_native_time": 7.450666666666667
+        },
+        {
+          "kind": "shield",
+          "calls": 1,
+          "requested_time": 7.75,
+          "actual_native_time": 7.752
+        },
+        {
+          "kind": "player-hit",
+          "calls": 1,
+          "requested_time": 8.05,
+          "actual_native_time": 8.050666666666666
+        },
+        {
+          "kind": "mote-charge",
+          "calls": 1,
+          "requested_time": 8.35,
+          "actual_native_time": 8.352
+        },
+        {
+          "kind": "mote-pulse",
+          "calls": 1,
+          "requested_time": 8.65,
+          "actual_native_time": 8.650666666666666
+        },
+        {
+          "kind": "ability-echo",
+          "calls": 1,
+          "requested_time": 8.95,
+          "actual_native_time": 8.952
+        },
+        {
+          "kind": "ability-nova",
+          "calls": 1,
+          "requested_time": 9.25,
+          "actual_native_time": 9.250666666666667
+        },
+        {
+          "kind": "ability-signature-7",
+          "calls": 1,
+          "requested_time": 9.549999999999999,
+          "actual_native_time": 9.552
+        },
+        {
+          "kind": "shot",
+          "calls": 1,
+          "requested_time": 9.85,
+          "actual_native_time": 9.850666666666667
+        },
+        {
+          "kind": "shield",
+          "calls": 1,
+          "requested_time": 10.15,
+          "actual_native_time": 10.152
+        }
+      ],
+      "full": {
+        "samples": 1056000,
+        "peak": 0.29109102487564087,
+        "rms": 0.03689251546107678,
+        "peak_dbfs": -10.71942369658782,
+        "rms_dbfs": -28.661234640857984,
+        "over_unity": 0,
+        "nonfinite": 0
+      },
+      "steady": {
+        "samples": 192000,
+        "peak": 0.222375750541687,
+        "rms": 0.03731836471504652,
+        "peak_dbfs": -13.058251462314342,
+        "rms_dbfs": -28.561547904508465,
+        "over_unity": 0,
+        "nonfinite": 0
+      },
+      "tail": {
+        "samples": 48000,
+        "peak": 0.12555599212646484,
+        "rms": 0.034302975211255936,
+        "peak_dbfs": -18.023251117347037,
+        "rms_dbfs": -29.29336421034314,
+        "over_unity": 0,
+        "nonfinite": 0
+      },
+      "steady_power_above_1khz_ratio": null,
+      "wav_bytes": 4224044,
+      "wav_sha256": "93b1411ca86b76855069962284aecb60992d757891e4ee6524c59715e924c0ee",
+      "sourceStates": [
+        {
+          "time": 0.02666666666666667,
+          "champion": 0,
+          "hull": 0.08,
+          "engine": 0.2483185719373606,
+          "engineDuck": 0.9202949611667233
+        },
+        {
+          "time": 1.0266666666666666,
+          "champion": 0,
+          "hull": 0.08,
+          "engine": 0.875997660849015,
+          "engineDuck": 0.6000769891321155
+        },
+        {
+          "time": 2.026666666666667,
+          "champion": 1,
+          "hull": 0.08,
+          "engine": 0.8759999999912828,
+          "engineDuck": 0.6000000430572515
+        },
+        {
+          "time": 3.026666666666667,
+          "champion": 2,
+          "hull": 0.08,
+          "engine": 0.8759999999999999,
+          "engineDuck": 0.21000000000290056
+        },
+        {
+          "time": 4.026666666666666,
+          "champion": 3,
+          "hull": 0.08,
+          "engine": 0.8759999999999999,
+          "engineDuck": 0.6000000000000011
+        },
+        {
+          "time": 5.026666666666666,
+          "champion": 4,
+          "hull": 0.08,
+          "engine": 0.8759999999999999,
+          "engineDuck": 0.6000000000000001
+        },
+        {
+          "time": 6.026666666666666,
+          "champion": 4,
+          "hull": 0.08,
+          "engine": 0.8759999999999999,
+          "engineDuck": 0.33000000000000007
+        },
+        {
+          "time": 7.026666666666666,
+          "champion": 5,
+          "hull": 0.08,
+          "engine": 0.8759999999999999,
+          "engineDuck": 0.33000000000000007
+        },
+        {
+          "time": 8.026666666666667,
+          "champion": 6,
+          "hull": 0.08,
+          "engine": 0.8759999999999999,
+          "engineDuck": 0.6000000000000001
+        },
+        {
+          "time": 9.026666666666667,
+          "champion": 7,
+          "hull": 0.08,
+          "engine": 0.8759999999999999,
+          "engineDuck": 0.33000000000000007
+        },
+        {
+          "time": 10.026666666666667,
+          "champion": 7,
+          "hull": 0.08,
+          "engine": 0.8759999999999999,
+          "engineDuck": 0.6000000000000001
+        }
+      ],
+      "cleanup": {
+        "music": 0,
+        "sfx": 0,
+        "continuous": 0,
+        "scheduler_callbacks": 0
+      }
+    },
+    {
+      "key": "max-bus-burst",
+      "title": "Maximum buses with declared capped cue bursts",
+      "seconds": 5,
+      "channels": 2,
+      "sample_rate": 48000,
+      "native_state_after_render": "closed",
+      "native_suspend_checkpoints": 199,
+      "graph_nodes_created": 1000,
+      "sources_created": 336,
+      "maximum_voices": {
+        "music": 13,
+        "effects": 16,
+        "continuous": 2
+      },
+      "events_dispatched": 3,
+      "events_declared": 3,
+      "cue_calls": 48,
+      "dispatched": [
+        {
+          "kind": "explosion",
+          "calls": 16,
+          "requested_time": 1,
+          "actual_native_time": 1
+        },
+        {
+          "kind": "death",
+          "calls": 16,
+          "requested_time": 2,
+          "actual_native_time": 2
+        },
+        {
+          "kind": "upgrade",
+          "calls": 16,
+          "requested_time": 3,
+          "actual_native_time": 3
+        }
+      ],
+      "full": {
+        "samples": 480000,
+        "peak": 0.9148409366607666,
+        "rms": 0.1148319406739391,
+        "peak_dbfs": -0.7730882025103923,
+        "rms_dbfs": -18.79874590965812,
+        "over_unity": 0,
+        "nonfinite": 0
+      },
+      "steady": {
+        "samples": 192000,
+        "peak": 0.9148409366607666,
+        "rms": 0.1330677990099386,
+        "peak_dbfs": -0.7730882025103923,
+        "rms_dbfs": -17.518540529009087,
+        "over_unity": 0,
+        "nonfinite": 0
+      },
+      "tail": {
+        "samples": 48000,
+        "peak": 0.26483768224716187,
+        "rms": 0.06668068858908648,
+        "peak_dbfs": -11.540404430893139,
+        "rms_dbfs": -23.519998480151052,
+        "over_unity": 0,
+        "nonfinite": 0
+      },
+      "steady_power_above_1khz_ratio": null,
+      "wav_bytes": 1920044,
+      "wav_sha256": "2349192170adc31c07ee21d52ff1900f046af021c6cf75c8f82446f8ceb3156b",
+      "sourceStates": [
+        {
+          "time": 0.02666666666666667,
+          "champion": 3,
+          "hull": 0.08,
+          "engine": 0.2483185719373606,
+          "engineDuck": 0.9202949611667233
+        },
+        {
+          "time": 1.0266666666666666,
+          "champion": 3,
+          "hull": 0.08,
+          "engine": 0.875997660849015,
+          "engineDuck": 0.21003365172669874
+        },
+        {
+          "time": 2.026666666666667,
+          "champion": 3,
+          "hull": 0.08,
+          "engine": 0.8759999999912828,
+          "engineDuck": 0.21000000808884792
+        },
+        {
+          "time": 3.026666666666667,
+          "champion": 3,
+          "hull": 0.08,
+          "engine": 0.8759999999999999,
+          "engineDuck": 0.6000000008244615
+        },
+        {
+          "time": 4.026666666666666,
+          "champion": 3,
+          "hull": 0.08,
+          "engine": 0.8759999999999999,
+          "engineDuck": 0.6000000008244615
+        }
+      ],
+      "cleanup": {
+        "music": 0,
+        "sfx": 0,
+        "continuous": 0,
+        "scheduler_callbacks": 0
+      }
+    },
+    {
+      "key": "current-score",
+      "title": "Current corporate homes, exploration, combat and boss release",
+      "seconds": 24,
+      "channels": 2,
+      "sample_rate": 48000,
+      "native_state_after_render": "closed",
+      "native_suspend_checkpoints": 959,
+      "graph_nodes_created": 2056,
+      "sources_created": 647,
+      "maximum_voices": {
+        "music": 14,
+        "effects": 4,
+        "continuous": 2
+      },
+      "events_dispatched": 18,
+      "events_declared": 18,
+      "cue_calls": 18,
+      "dispatched": [
+        {
+          "kind": "dock",
+          "calls": 1,
+          "requested_time": 0.8,
+          "actual_native_time": 0.8
+        },
+        {
+          "kind": "dock",
+          "calls": 1,
+          "requested_time": 3.8,
+          "actual_native_time": 3.8
+        },
+        {
+          "kind": "dock",
+          "calls": 1,
+          "requested_time": 6.8,
+          "actual_native_time": 6.8
+        },
+        {
+          "kind": "shot",
+          "calls": 1,
+          "requested_time": 10,
+          "actual_native_time": 10
+        },
+        {
+          "kind": "pickup",
+          "calls": 1,
+          "requested_time": 11.2,
+          "actual_native_time": 11.2
+        },
+        {
+          "kind": "shot",
+          "calls": 1,
+          "requested_time": 12.2,
+          "actual_native_time": 12.2
+        },
+        {
+          "kind": "shot",
+          "calls": 1,
+          "requested_time": 12.7,
+          "actual_native_time": 12.701333333333332
+        },
+        {
+          "kind": "shield",
+          "calls": 1,
+          "requested_time": 13.2,
+          "actual_native_time": 13.2
+        },
+        {
+          "kind": "player-hit",
+          "calls": 1,
+          "requested_time": 14,
+          "actual_native_time": 14
+        },
+        {
+          "kind": "ability-echo",
+          "calls": 1,
+          "requested_time": 15,
+          "actual_native_time": 15
+        },
+        {
+          "kind": "boss",
+          "calls": 1,
+          "requested_time": 16,
+          "actual_native_time": 16
+        },
+        {
+          "kind": "boss-charge",
+          "calls": 1,
+          "requested_time": 16.4,
+          "actual_native_time": 16.4
+        },
+        {
+          "kind": "mote-charge",
+          "calls": 1,
+          "requested_time": 17,
+          "actual_native_time": 17
+        },
+        {
+          "kind": "mote-pulse",
+          "calls": 1,
+          "requested_time": 18,
+          "actual_native_time": 18
+        },
+        {
+          "kind": "ability-nova",
+          "calls": 1,
+          "requested_time": 18.4,
+          "actual_native_time": 18.4
+        },
+        {
+          "kind": "explosion",
+          "calls": 1,
+          "requested_time": 19,
+          "actual_native_time": 19
+        },
+        {
+          "kind": "dock",
+          "calls": 1,
+          "requested_time": 20.1,
+          "actual_native_time": 20.101333333333333
+        },
+        {
+          "kind": "ability-repair",
+          "calls": 1,
+          "requested_time": 21.2,
+          "actual_native_time": 21.2
+        }
+      ],
+      "full": {
+        "samples": 2304000,
+        "peak": 0.22520124912261963,
+        "rms": 0.018314589823746025,
+        "peak_dbfs": -12.948584098300469,
+        "rms_dbfs": -34.74405606827536,
+        "over_unity": 0,
+        "nonfinite": 0
+      },
+      "steady": {
+        "samples": 192000,
+        "peak": 0.042157649993896484,
+        "rms": 0.0044628511385742566,
+        "peak_dbfs": -27.50247212247961,
+        "rms_dbfs": -47.007751982095854,
+        "over_unity": 0,
+        "nonfinite": 0
+      },
+      "tail": {
+        "samples": 48000,
+        "peak": 0.019559264183044434,
+        "rms": 0.004910508660181178,
+        "peak_dbfs": -34.17294974685213,
+        "rms_dbfs": -46.17747037396448,
+        "over_unity": 0,
+        "nonfinite": 0
+      },
+      "steady_power_above_1khz_ratio": null,
+      "wav_bytes": 9216044,
+      "wav_sha256": "48b0de8bb1681feab79260ff393d0f232729c1a0b59415d1a167e69c8407ef39",
+      "sourceStates": [
+        {
+          "time": 0.02666666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "area": "haven",
+          "biome": 0,
+          "corporation": "pan",
+          "combat": 0,
+          "targetCombat": 0,
+          "boss": false,
+          "bossLayer": 0,
+          "lowHull": 0,
+          "throttle": 0,
+          "speed": 0,
+          "themes": [
+            {
+              "index": 0,
+              "name": "Haven / Return lights",
+              "weight": 0.9811326405284632
+            }
+          ]
+        },
+        {
+          "time": 1.0266666666666666,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "area": "haven",
+          "biome": 0,
+          "corporation": "pan",
+          "combat": 0,
+          "targetCombat": 0,
+          "boss": false,
+          "bossLayer": 0,
+          "lowHull": 0,
+          "throttle": 0,
+          "speed": 0,
+          "themes": [
+            {
+              "index": 15,
+              "name": "PAN / Verdant lanterns",
+              "weight": 0.5196946989102008
+            },
+            {
+              "index": 0,
+              "name": "Haven / Return lights",
+              "weight": 0.48030530108979913
+            }
+          ]
+        },
+        {
+          "time": 2.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "area": "haven",
+          "biome": 0,
+          "corporation": "pan",
+          "combat": 0,
+          "targetCombat": 0,
+          "boss": false,
+          "bossLayer": 0,
+          "lowHull": 0,
+          "throttle": 0,
+          "speed": 0,
+          "themes": [
+            {
+              "index": 15,
+              "name": "PAN / Verdant lanterns",
+              "weight": 0.764870545810498
+            },
+            {
+              "index": 0,
+              "name": "Haven / Return lights",
+              "weight": 0.23512945418950212
+            }
+          ]
+        },
+        {
+          "time": 3.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "area": "haven",
+          "biome": 0,
+          "corporation": "renko",
+          "combat": 0,
+          "targetCombat": 0,
+          "boss": false,
+          "bossLayer": 0,
+          "lowHull": 0,
+          "throttle": 0,
+          "speed": 0,
+          "themes": [
+            {
+              "index": 15,
+              "name": "PAN / Verdant lanterns",
+              "weight": 0.8493509067582238
+            },
+            {
+              "index": 0,
+              "name": "Haven / Return lights",
+              "weight": 0.11510566321464943
+            }
+          ]
+        },
+        {
+          "time": 4.026666666666666,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "area": "haven",
+          "biome": 0,
+          "corporation": "renko",
+          "combat": 0,
+          "targetCombat": 0,
+          "boss": false,
+          "bossLayer": 0,
+          "lowHull": 0,
+          "throttle": 0,
+          "speed": 0,
+          "themes": [
+            {
+              "index": 16,
+              "name": "RENKO / Ember courtyard",
+              "weight": 0.5278583301648729
+            },
+            {
+              "index": 15,
+              "name": "PAN / Verdant lanterns",
+              "weight": 0.4157926524406237
+            }
+          ]
+        },
+        {
+          "time": 5.026666666666666,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "area": "haven",
+          "biome": 0,
+          "corporation": "renko",
+          "combat": 0,
+          "targetCombat": 0,
+          "boss": false,
+          "bossLayer": 0,
+          "lowHull": 0,
+          "throttle": 0,
+          "speed": 0,
+          "themes": [
+            {
+              "index": 16,
+              "name": "RENKO / Ember courtyard",
+              "weight": 0.7688669834029214
+            },
+            {
+              "index": 15,
+              "name": "PAN / Verdant lanterns",
+              "weight": 0.20354782510737018
+            }
+          ]
+        },
+        {
+          "time": 6.026666666666666,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "area": "haven",
+          "biome": 0,
+          "corporation": "hugo",
+          "combat": 0,
+          "targetCombat": 0,
+          "boss": false,
+          "bossLayer": 0,
+          "lowHull": 0,
+          "throttle": 0,
+          "speed": 0,
+          "themes": [
+            {
+              "index": 16,
+              "name": "RENKO / Ember courtyard",
+              "weight": 0.8513073294495346
+            },
+            {
+              "index": 15,
+              "name": "PAN / Verdant lanterns",
+              "weight": 0.09964514010227034
+            }
+          ]
+        },
+        {
+          "time": 7.026666666666666,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "area": "haven",
+          "biome": 0,
+          "corporation": "hugo",
+          "combat": 0,
+          "targetCombat": 0,
+          "boss": false,
+          "bossLayer": 0,
+          "lowHull": 0,
+          "throttle": 0,
+          "speed": 0,
+          "themes": [
+            {
+              "index": 17,
+              "name": "HUGO / Blue observatory",
+              "weight": 0.5278583301648733
+            },
+            {
+              "index": 16,
+              "name": "RENKO / Ember courtyard",
+              "weight": 0.4167504028517227
+            }
+          ]
+        },
+        {
+          "time": 8.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0,
+          "engineDuck": 1,
+          "area": "haven",
+          "biome": 0,
+          "corporation": "hugo",
+          "combat": 0,
+          "targetCombat": 0,
+          "boss": false,
+          "bossLayer": 0,
+          "lowHull": 0,
+          "throttle": 0,
+          "speed": 0,
+          "themes": [
+            {
+              "index": 17,
+              "name": "HUGO / Blue observatory",
+              "weight": 0.7688669834029216
+            },
+            {
+              "index": 16,
+              "name": "RENKO / Ember courtyard",
+              "weight": 0.20401668383306085
+            }
+          ]
+        },
+        {
+          "time": 9.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.2908919406515504,
+          "engineDuck": 1,
+          "area": "reach",
+          "biome": 0,
+          "corporation": "hugo",
+          "combat": 0,
+          "targetCombat": 0,
+          "boss": false,
+          "bossLayer": 0,
+          "lowHull": 0,
+          "throttle": 0.65,
+          "speed": 0.4,
+          "themes": [
+            {
+              "index": 17,
+              "name": "HUGO / Blue observatory",
+              "weight": 0.8513073294495347
+            },
+            {
+              "index": 16,
+              "name": "RENKO / Ember courtyard",
+              "weight": 0.09987466598094288
+            }
+          ]
+        },
+        {
+          "time": 10.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.6199987735284068,
+          "engineDuck": 1,
+          "area": "reach",
+          "biome": 0,
+          "corporation": "hugo",
+          "combat": 0,
+          "targetCombat": 0,
+          "boss": false,
+          "bossLayer": 0,
+          "lowHull": 0,
+          "throttle": 0.65,
+          "speed": 0.4,
+          "themes": [
+            {
+              "index": 14,
+              "name": "Expanse / Scouting signal",
+              "weight": 0.5278583301648724
+            },
+            {
+              "index": 17,
+              "name": "HUGO / Blue observatory",
+              "weight": 0.41675040285172354
+            }
+          ]
+        },
+        {
+          "time": 11.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.6199999999954295,
+          "engineDuck": 1,
+          "area": "reach",
+          "biome": 0,
+          "corporation": "hugo",
+          "combat": 0,
+          "targetCombat": 0,
+          "boss": false,
+          "bossLayer": 0,
+          "lowHull": 0,
+          "throttle": 0.65,
+          "speed": 0.4,
+          "themes": [
+            {
+              "index": 14,
+              "name": "Expanse / Scouting signal",
+              "weight": 0.7688669834029205
+            },
+            {
+              "index": 17,
+              "name": "HUGO / Blue observatory",
+              "weight": 0.20401668383306168
+            }
+          ]
+        },
+        {
+          "time": 12.026666666666667,
+          "champion": null,
+          "hull": 0.65,
+          "engine": 0.7429253039527519,
+          "engineDuck": 1,
+          "area": "reach",
+          "biome": 3,
+          "corporation": "hugo",
+          "combat": 0.08518831164490104,
+          "targetCombat": 0.8,
+          "boss": false,
+          "bossLayer": 0,
+          "lowHull": 0,
+          "throttle": 0.9,
+          "speed": 0.75,
+          "themes": [
+            {
+              "index": 14,
+              "name": "Expanse / Scouting signal",
+              "weight": 0.8513073294495342
+            },
+            {
+              "index": 17,
+              "name": "HUGO / Blue observatory",
+              "weight": 0.09987466598094337
+            }
+          ]
+        },
+        {
+          "time": 13.026666666666667,
+          "champion": null,
+          "hull": 0.65,
+          "engine": 0.8819994817168428,
+          "engineDuck": 1,
+          "area": "reach",
+          "biome": 3,
+          "corporation": "hugo",
+          "combat": 0.7225372703570521,
+          "targetCombat": 0.8,
+          "boss": false,
+          "bossLayer": 0,
+          "lowHull": 0,
+          "throttle": 0.9,
+          "speed": 0.75,
+          "themes": [
+            {
+              "index": 3,
+              "name": "Iron / Foundry relay",
+              "weight": 0.5278583301648724
+            },
+            {
+              "index": 14,
+              "name": "Expanse / Scouting signal",
+              "weight": 0.4167504028517233
+            }
+          ]
+        },
+        {
+          "time": 14.026666666666667,
+          "champion": null,
+          "hull": 0.65,
+          "engine": 0.8819999999980686,
+          "engineDuck": 0.35,
+          "area": "reach",
+          "biome": 3,
+          "corporation": "hugo",
+          "combat": 0.7916055171152218,
+          "targetCombat": 0.8,
+          "boss": false,
+          "bossLayer": 0,
+          "lowHull": 0,
+          "throttle": 0.9,
+          "speed": 0.75,
+          "themes": [
+            {
+              "index": 3,
+              "name": "Iron / Foundry relay",
+              "weight": 0.7688669834029205
+            },
+            {
+              "index": 14,
+              "name": "Expanse / Scouting signal",
+              "weight": 0.20401668383306162
+            }
+          ]
+        },
+        {
+          "time": 15.026666666666667,
+          "champion": null,
+          "hull": 0.65,
+          "engine": 0.8819999999999999,
+          "engineDuck": 0.55,
+          "area": "reach",
+          "biome": 3,
+          "corporation": "hugo",
+          "combat": 0.7990903064838066,
+          "targetCombat": 0.8,
+          "boss": false,
+          "bossLayer": 0,
+          "lowHull": 0,
+          "throttle": 0.9,
+          "speed": 0.75,
+          "themes": [
+            {
+              "index": 3,
+              "name": "Iron / Foundry relay",
+              "weight": 0.8868507594766609
+            },
+            {
+              "index": 14,
+              "name": "Expanse / Scouting signal",
+              "weight": 0.09987466598094331
+            }
+          ]
+        },
+        {
+          "time": 16.026666666666667,
+          "champion": null,
+          "hull": 0.08,
+          "engine": 0.9373633048336821,
+          "engineDuck": 0.47422943411971313,
+          "area": "reach",
+          "biome": 5,
+          "corporation": "hugo",
+          "combat": 0.8211984962231376,
+          "targetCombat": 1,
+          "boss": true,
+          "bossLayer": 0.11897270057689122,
+          "lowHull": 0.344411663092213,
+          "throttle": 1,
+          "speed": 1,
+          "themes": [
+            {
+              "index": 3,
+              "name": "Iron / Foundry relay",
+              "weight": 0.9090653029894691
+            },
+            {
+              "index": 14,
+              "name": "Expanse / Scouting signal",
+              "weight": 0.04889280973200742
+            }
+          ]
+        },
+        {
+          "time": 17.026666666666667,
+          "champion": null,
+          "hull": 0.08,
+          "engine": 0.9999997665747613,
+          "engineDuck": 0.33004329553413814,
+          "area": "reach",
+          "biome": 5,
+          "corporation": "hugo",
+          "combat": 0.9806236344865991,
+          "targetCombat": 1,
+          "boss": true,
+          "bossLayer": 0.9276808753392368,
+          "lowHull": 0.9998424165747106,
+          "throttle": 1,
+          "speed": 1,
+          "themes": [
+            {
+              "index": 5,
+              "name": "Cryo / Distant ice",
+              "weight": 0.5278583301648724
+            },
+            {
+              "index": 3,
+              "name": "Iron / Foundry relay",
+              "weight": 0.4450253370711097
+            }
+          ]
+        },
+        {
+          "time": 18.026666666666667,
+          "champion": null,
+          "hull": 0.08,
+          "engine": 0.9999999999991301,
+          "engineDuck": 0.33000001040692495,
+          "area": "reach",
+          "biome": 5,
+          "corporation": "hugo",
+          "combat": 0.9979002215720878,
+          "targetCombat": 1,
+          "boss": true,
+          "bossLayer": 0.9940636847517398,
+          "lowHull": 0.9999999621217546,
+          "throttle": 1,
+          "speed": 1,
+          "themes": [
+            {
+              "index": 5,
+              "name": "Cryo / Distant ice",
+              "weight": 0.7688669834029205
+            },
+            {
+              "index": 3,
+              "name": "Iron / Foundry relay",
+              "weight": 0.21785844205468377
+            }
+          ]
+        },
+        {
+          "time": 19.026666666666667,
+          "champion": null,
+          "hull": 0.08,
+          "engine": 0.9999999999999999,
+          "engineDuck": 0.21000000000159186,
+          "area": "reach",
+          "biome": 5,
+          "corporation": "hugo",
+          "combat": 0.9997724511625631,
+          "targetCombat": 1,
+          "boss": true,
+          "bossLayer": 0.9995127175710156,
+          "lowHull": 0.9999999999908952,
+          "throttle": 1,
+          "speed": 1,
+          "themes": [
+            {
+              "index": 5,
+              "name": "Cryo / Distant ice",
+              "weight": 0.8868507594766607
+            },
+            {
+              "index": 3,
+              "name": "Iron / Foundry relay",
+              "weight": 0.10665078327194233
+            }
+          ]
+        },
+        {
+          "time": 20.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.7285735725113859,
+          "engineDuck": 0.6733798481893702,
+          "area": "haven",
+          "biome": 0,
+          "corporation": "pan",
+          "combat": 0.9688027338779571,
+          "targetCombat": 0,
+          "boss": false,
+          "bossLayer": 0.9644127837123364,
+          "lowHull": 0.8165503795265744,
+          "throttle": 0,
+          "speed": 0,
+          "themes": [
+            {
+              "index": 5,
+              "name": "Cryo / Distant ice",
+              "weight": 0.9090653029894677
+            },
+            {
+              "index": 3,
+              "name": "Iron / Foundry relay",
+              "weight": 0.05221000143599565
+            }
+          ]
+        },
+        {
+          "time": 21.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.0014064778666008043,
+          "engineDuck": 0.994017743245653,
+          "area": "haven",
+          "biome": 0,
+          "corporation": "pan",
+          "combat": 0.5185627352886186,
+          "targetCombat": 0,
+          "boss": false,
+          "bossLayer": 0.47212023463647845,
+          "lowHull": 0.01495564188586759,
+          "throttle": 0,
+          "speed": 0,
+          "themes": [
+            {
+              "index": 15,
+              "name": "PAN / Verdant lanterns",
+              "weight": 0.5278605447937522
+            },
+            {
+              "index": 5,
+              "name": "Cryo / Distant ice",
+              "weight": 0.44502533707110903
+            }
+          ]
+        },
+        {
+          "time": 22.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.000002715141015092246,
+          "engineDuck": 0.9998904311455477,
+          "area": "haven",
+          "biome": 0,
+          "corporation": "pan",
+          "combat": 0.2775666304673012,
+          "targetCombat": 0,
+          "boss": false,
+          "bossLayer": 0.23112252317436008,
+          "lowHull": 0.0002739221361307785,
+          "throttle": 0,
+          "speed": 0,
+          "themes": [
+            {
+              "index": 15,
+              "name": "PAN / Verdant lanterns",
+              "weight": 0.7688680675560176
+            },
+            {
+              "index": 5,
+              "name": "Cryo / Distant ice",
+              "weight": 0.21785844205468344
+            }
+          ]
+        },
+        {
+          "time": 23.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 5.241455203026321e-9,
+          "engineDuck": 0.9999966868927583,
+          "area": "haven",
+          "biome": 0,
+          "corporation": "pan",
+          "combat": 0.1485707111331304,
+          "targetCombat": 0,
+          "boss": false,
+          "bossLayer": 0.11314410355576668,
+          "lowHull": 0.000005017058929002026,
+          "throttle": 0,
+          "speed": 0,
+          "themes": [
+            {
+              "index": 15,
+              "name": "PAN / Verdant lanterns",
+              "weight": 0.8868512902147675
+            },
+            {
+              "index": 5,
+              "name": "Cryo / Distant ice",
+              "weight": 0.1066507832719422
+            }
+          ]
+        }
+      ],
+      "declared_phases": [
+        {
+          "key": "pan-home",
+          "start": 0,
+          "end": 3,
+          "state": {
+            "area": "haven",
+            "biome": 0,
+            "combat": 0,
+            "hostiles": 0,
+            "champion": null,
+            "boss": false,
+            "hull": 1,
+            "speed": 0,
+            "throttle": 0,
+            "engines": 0,
+            "corporation": "pan"
+          }
+        },
+        {
+          "key": "renko-home",
+          "start": 3,
+          "end": 6,
+          "state": {
+            "area": "haven",
+            "biome": 0,
+            "combat": 0,
+            "hostiles": 0,
+            "champion": null,
+            "boss": false,
+            "hull": 1,
+            "speed": 0,
+            "throttle": 0,
+            "engines": 0,
+            "corporation": "renko"
+          }
+        },
+        {
+          "key": "hugo-home",
+          "start": 6,
+          "end": 9,
+          "state": {
+            "area": "haven",
+            "biome": 0,
+            "combat": 0,
+            "hostiles": 0,
+            "champion": null,
+            "boss": false,
+            "hull": 1,
+            "speed": 0,
+            "throttle": 0,
+            "engines": 0,
+            "corporation": "hugo"
+          }
+        },
+        {
+          "key": "quiet-expanse",
+          "start": 9,
+          "end": 12,
+          "state": {
+            "area": "reach",
+            "biome": 0,
+            "combat": 0,
+            "hostiles": 0,
+            "champion": null,
+            "boss": false,
+            "hull": 1,
+            "speed": 0.4,
+            "throttle": 0.65,
+            "engines": 2,
+            "corporation": "hugo"
+          }
+        },
+        {
+          "key": "active-combat",
+          "start": 12,
+          "end": 16,
+          "state": {
+            "area": "reach",
+            "biome": 3,
+            "combat": 0.8,
+            "hostiles": 6,
+            "champion": null,
+            "boss": false,
+            "hull": 0.65,
+            "speed": 0.75,
+            "throttle": 0.9,
+            "engines": 2,
+            "corporation": "hugo"
+          }
+        },
+        {
+          "key": "boss-low-hull",
+          "start": 16,
+          "end": 20,
+          "state": {
+            "area": "reach",
+            "biome": 5,
+            "combat": 1,
+            "hostiles": 1,
+            "champion": null,
+            "boss": true,
+            "hull": 0.08,
+            "speed": 1,
+            "throttle": 1,
+            "engines": 2,
+            "corporation": "hugo"
+          }
+        },
+        {
+          "key": "home-healed-release",
+          "start": 20,
+          "end": 24,
+          "state": {
+            "area": "haven",
+            "biome": 0,
+            "combat": 0,
+            "hostiles": 0,
+            "champion": null,
+            "boss": false,
+            "hull": 1,
+            "speed": 0,
+            "throttle": 0,
+            "engines": 2,
+            "corporation": "pan"
+          }
+        }
+      ],
+      "phase_metrics": [
+        {
+          "key": "pan-home",
+          "start": 0,
+          "end": 3,
+          "pcm": {
+            "samples": 288000,
+            "peak": 0.11390471458435059,
+            "rms": 0.012317600413598513,
+            "peak_dbfs": -18.86916599680371,
+            "rms_dbfs": -38.18947777303348,
+            "over_unity": 0,
+            "nonfinite": 0
+          }
+        },
+        {
+          "key": "renko-home",
+          "start": 3,
+          "end": 6,
+          "pcm": {
+            "samples": 288000,
+            "peak": 0.11404573917388916,
+            "rms": 0.01210857278003067,
+            "peak_dbfs": -18.858418712408632,
+            "rms_dbfs": -38.338140870062425,
+            "over_unity": 0,
+            "nonfinite": 0
+          }
+        },
+        {
+          "key": "hugo-home",
+          "start": 6,
+          "end": 9,
+          "pcm": {
+            "samples": 288000,
+            "peak": 0.11931407451629639,
+            "rms": 0.012201186785987141,
+            "peak_dbfs": -18.466166462011667,
+            "rms_dbfs": -38.271958485623216,
+            "over_unity": 0,
+            "nonfinite": 0
+          }
+        },
+        {
+          "key": "quiet-expanse",
+          "start": 9,
+          "end": 12,
+          "pcm": {
+            "samples": 288000,
+            "peak": 0.16015493869781494,
+            "rms": 0.009640149991269904,
+            "peak_dbfs": -15.909193289096148,
+            "rms_dbfs": -40.3183241769764,
+            "over_unity": 0,
+            "nonfinite": 0
+          }
+        },
+        {
+          "key": "active-combat",
+          "start": 12,
+          "end": 16,
+          "pcm": {
+            "samples": 384000,
+            "peak": 0.22520124912261963,
+            "rms": 0.014274947120380427,
+            "peak_dbfs": -12.948584098300469,
+            "rms_dbfs": -36.908509837291355,
+            "over_unity": 0,
+            "nonfinite": 0
+          }
+        },
+        {
+          "key": "boss-low-hull",
+          "start": 16,
+          "end": 20,
+          "pcm": {
+            "samples": 384000,
+            "peak": 0.17570948600769043,
+            "rms": 0.035191551165983194,
+            "peak_dbfs": -15.104095833316888,
+            "rms_dbfs": -29.071231799994088,
+            "over_unity": 0,
+            "nonfinite": 0
+          }
+        },
+        {
+          "key": "home-healed-release",
+          "start": 20,
+          "end": 24,
+          "pcm": {
+            "samples": 384000,
+            "peak": 0.15431296825408936,
+            "rms": 0.012853758771520962,
+            "peak_dbfs": -16.231951497592547,
+            "rms_dbfs": -37.81939709641713,
+            "over_unity": 0,
+            "nonfinite": 0
+          }
+        }
+      ],
+      "cleanup": {
+        "music": 0,
+        "sfx": 0,
+        "continuous": 0,
+        "scheduler_callbacks": 0
+      }
+    }
+  ],
+  "sources": {
+    "schema_version": 1,
+    "purpose": "isolated native OfflineAudioContext review; not shipped",
+    "typescript": "5.9.3",
+    "lockfile_sha256": "6383d7a7deaf07367d08c79447c4faab012da63436cf23df3a1cbb82b4f183d1",
+    "baseline_shared_state": "Historical AudioEngine uses the current shared state mixer, matching the declared engine-only comparison; this is not a historical score snapshot.",
+    "inputs": {
+      "apps/game/src/audio.ts": {
+        "bytes": 35761,
+        "sha256": "05a3d9daea27bbc84cf444086d4f033cf5cd20e91e53a38cd8d027ab817bb753",
+        "module": "audio.js",
+        "module_sha256": "fca0ed5265ad6dd74a6098dfad87f11450f59306c5b7249ab8c333e0625bad42"
+      },
+      "apps/game/src/audio-state.ts": {
+        "bytes": 11292,
+        "sha256": "5ba4b0617231efe87572a79a2275fe16e24be0ed1d633a296de0a4d1b9cf3e76",
+        "module": "audio-state.js",
+        "module_sha256": "21a54da42a6ae908388bc423efd2cc85a548c64c45042cda2bcf26249aefaef1"
+      },
+      "git:3bf0c02b5e9fc0011c0ce6921bfaf0fbe664c65d:apps/game/src/audio.ts": {
+        "bytes": 28517,
+        "sha256": "6e06ef04f40367ab8519adfd445258b0c284d6b1c7ac3d955ea212962c629f64",
+        "module": "baseline-audio.js",
+        "module_sha256": "05fdaae0e6f4d87f331a14741ffa240c9c2a4dce304c212ca716f88432e698fb"
+      }
+    },
+    "helpers": {
+      "config.mjs": "e90f426c31929b0cec0a72b073b171689a8d8db7c8d8a8618cfcb4467c4a438b",
+      "prepare.mjs": "67bb8bd9451cef574034b77e602b029586a1694c5dbe8e7bf5cd1bcb923dbd30",
+      "server.mjs": "843f0d459f83ea337c936047ecf816c5fa1bf133d3058531cc943a830b7b3fb0",
+      "review.js": "4b5c790208ee76621beb54a15a34fdef69aa551d85f8db6b6c18e85bb58fbc64",
+      "metrics.js": "9b956833ab2a6153f71662323a45967bb6e74ec512dd17b6e3d7431cdceea3c7",
+      "index.html": "f84adde93d6e5dcc37ac580871723114ea3f7c4c51cdcc659a136d53119c3ee7"
+    }
+  },
+  "engine_comparison": {
+    "steady_rms_change_db": -11.792547333792257,
+    "high_frequency_power_ratio_before": 0.04488680052988582,
+    "high_frequency_power_ratio_after": 0.000005242871614979275
+  },
+  "status": "Completed; no over-unity/nonfinite samples in these declared fixtures"
+}

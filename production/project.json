@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 544,
+  "revision": 584,
   "name": "Galaxy Royale",
   "phase": "Playable solo slice → content and validation",
-  "updatedAt": "2026-10-11T04:14:54.139Z",
+  "updatedAt": "2026-10-11T05:30:01.031Z",
   "tasks": [
     {
       "id": "studio",
@@ -5114,6 +5114,414 @@
       "revision": 2,
       "createdAt": "2026-10-11T03:35:35.354Z",
       "updatedAt": "2026-10-11T03:59:18.478Z"
+    },
+    {
+      "id": "task-2730ef49",
+      "title": "Kikai identity, corporation licenses and starter ships",
+      "description": "Latest user steering: Kikai lore and character onboarding; bounded implementation with real evidence. Full campaign balance and physical testing remain separate gates. Integrated source and native/CPU checks are recorded; current renderer/browser, natural play and human/device validation remain separately scoped.",
+      "department": "gameplay",
+      "owner": "/root/gameplay_design",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "New droids choose DORA, DORO or TALO and PAN/passive, RENKO/offensive or HUGO/defensive.",
+          "met": false
+        },
+        {
+          "text": "Rust issues a distinct corporation starter hull and one real equipped compatible rank-one ability.",
+          "met": false
+        },
+        {
+          "text": "Versioned saves preserve legacy XP, currency and loadouts without duplicate starter grants.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual integration review",
+          "kind": "review",
+          "path": "artifacts/opr-integration/review.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-11T04:40:15.478Z",
+      "updatedAt": "2026-10-11T05:30:00.859Z"
+    },
+    {
+      "id": "task-221245db",
+      "title": "DORA native portrait and guided initial mission",
+      "description": "Latest user steering: Kikai lore and character onboarding; bounded implementation with real evidence. Full campaign balance and physical testing remain separate gates. Integrated source and native/CPU checks are recorded; current renderer/browser, natural play and human/device validation remain separately scoped.",
+      "department": "art/audio",
+      "owner": "/root/production_research",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "OPR#1337 / DORA-PAN-RENKO-1337 has layered native portraits: green PAN hair, red RENKO horns; expression, speaking-mask and reduced-motion behavior.",
+          "met": true
+        },
+        {
+          "text": "Training stages use authoritative real flight, belt, cargo, banking and crafting events.",
+          "met": true
+        },
+        {
+          "text": "Generated reference and native conversion/animation provenance are documented and visually reviewed.",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual integration review",
+          "kind": "review",
+          "path": "artifacts/opr-integration/review.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-11T04:40:15.498Z",
+      "updatedAt": "2026-10-11T05:30:00.885Z"
+    },
+    {
+      "id": "task-44c5f7a0",
+      "title": "Discovery-based ship and ability catalogs",
+      "description": "Latest user steering: Kikai lore and character onboarding; bounded implementation with real evidence. Full campaign balance and physical testing remain separate gates. Integrated source and native/CPU checks are recorded; current renderer/browser, natural play and human/device validation remain separately scoped.",
+      "department": "gameplay",
+      "owner": "/root",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Undiscovered ships and abilities are absent from visible catalogs and authoritative HUD lists.",
+          "met": false
+        },
+        {
+          "text": "Blueprint discovery, owned equipment and equipped loadouts remain distinct states.",
+          "met": false
+        },
+        {
+          "text": "New character creation and license UI use the native pixel font and responsive measured controls.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual integration review",
+          "kind": "review",
+          "path": "artifacts/opr-integration/review.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-11T04:40:15.536Z",
+      "updatedAt": "2026-10-11T05:30:00.900Z"
+    },
+    {
+      "id": "task-a28478e3",
+      "title": "Lower-right navigation and player damage warning",
+      "description": "Latest user steering: Kikai lore and character onboarding; bounded implementation with real evidence. Full campaign balance and physical testing remain separate gates. Integrated source and native/CPU checks are recorded; current renderer/browser, natural play and human/device validation remain separately scoped.",
+      "department": "engine",
+      "owner": "/root/engine_research",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Minimap and status text align lower-right without collisions at tested responsive sizes.",
+          "met": false
+        },
+        {
+          "text": "Surviving player cells flash red on damage and pulse at critical hull without gameplay mutation.",
+          "met": false
+        },
+        {
+          "text": "Reduced motion provides a stable readable critical warning.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual integration review",
+          "kind": "review",
+          "path": "artifacts/opr-integration/review.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-11T04:40:15.550Z",
+      "updatedAt": "2026-10-11T05:30:00.917Z"
+    },
+    {
+      "id": "task-d56c0882",
+      "title": "Detailed coherent native toolbar icons",
+      "description": "Latest user steering: Kikai lore and character onboarding; bounded implementation with real evidence. Full campaign balance and physical testing remain separate gates. Integrated source and native/CPU checks are recorded; current renderer/browser, natural play and human/device validation remain separately scoped.",
+      "department": "art/audio",
+      "owner": "/root/production_research",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Ship status, map, settings and save icons use richer authored native pixel assets.",
+          "met": false
+        },
+        {
+          "text": "Measured hit targets, clarity, hover/press states and responsive placement are preserved.",
+          "met": false
+        },
+        {
+          "text": "Native asset evidence and actual renderer captures distinguish authored proof from browser validation.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual integration review",
+          "kind": "review",
+          "path": "artifacts/opr-integration/review.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-11T04:40:15.581Z",
+      "updatedAt": "2026-10-11T05:30:00.932Z"
+    },
+    {
+      "id": "task-778b8356",
+      "title": "Curved segmented hull and shield beneath the ship",
+      "description": "Latest user requests refined dynamic curved below-ship vitals, consistent approved high-detail pixel artwork and innovative particles, a detailed shooting star, and calm cute beat-aware thrust audio. This is a real queued task; completion requires scoped evidence. Integrated source and native/CPU checks are recorded; current renderer/browser, natural play and human/device validation remain separately scoped.",
+      "department": "engine",
+      "owner": "/root/engine_research",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Follow the ship beneath its silhouette with subtle curvature and no aim/navigation overlap.",
+          "met": false
+        },
+        {
+          "text": "Animate actual hull/shield values, damage hold and healing with reduced-motion behavior.",
+          "met": false
+        },
+        {
+          "text": "Validate representative zoom/aspect ratios and both renderer packages.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual integration review",
+          "kind": "review",
+          "path": "artifacts/opr-integration/review.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 3,
+      "createdAt": "2026-10-11T04:55:52.776Z",
+      "updatedAt": "2026-10-11T05:30:00.947Z"
+    },
+    {
+      "id": "task-ef6ed92a",
+      "title": "Consistent high-detail pixel assets from approved DORA benchmark",
+      "description": "Latest user requests refined dynamic curved below-ship vitals, consistent approved high-detail pixel artwork and innovative particles, a detailed shooting star, and calm cute beat-aware thrust audio. This is a real queued task; completion requires scoped evidence.",
+      "department": "art/audio",
+      "owner": "/root/production_research",
+      "status": "backlog",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Apply approved detailed clustered pixel art style across ships, facilities, enemies and cosmic scenery.",
+          "met": false
+        },
+        {
+          "text": "Maintain actual occupied-cell detail through relative group/layer transforms and fractional scale.",
+          "met": false
+        },
+        {
+          "text": "Record art source, palette roles and runtime extraction evidence for each accepted asset.",
+          "met": false
+        }
+      ],
+      "evidence": [],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-11T04:55:52.801Z",
+      "updatedAt": "2026-10-11T04:55:52.801Z"
+    },
+    {
+      "id": "task-72663b49",
+      "title": "Detailed shooting-star asset and coherent particle trail",
+      "description": "Latest user requests refined dynamic curved below-ship vitals, consistent approved high-detail pixel artwork and innovative particles, a detailed shooting star, and calm cute beat-aware thrust audio. This is a real queued task; completion requires scoped evidence. Integrated source and native/CPU checks are recorded; current renderer/browser, natural play and human/device validation remain separately scoped.",
+      "department": "art/audio",
+      "owner": "/root/production_research",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Replace simple shooting-star appearance with a detailed native pixel asset.",
+          "met": false
+        },
+        {
+          "text": "Use coherent animated head, relative emissive wake and bounded particle clusters.",
+          "met": false
+        },
+        {
+          "text": "Check parallax, fractional scaling, low-density quality and actual renderer visibility.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual integration review",
+          "kind": "review",
+          "path": "artifacts/opr-integration/review.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 3,
+      "createdAt": "2026-10-11T04:55:52.838Z",
+      "updatedAt": "2026-10-11T05:30:00.968Z"
+    },
+    {
+      "id": "task-43e0592c",
+      "title": "Calm musical thrust sound and integrated mix",
+      "description": "Latest user requests refined dynamic curved below-ship vitals, consistent approved high-detail pixel artwork and innovative particles, a detailed shooting star, and calm cute beat-aware thrust audio. This is a real queued task; completion requires scoped evidence. Integrated source and native/CPU checks are recorded; current renderer/browser, natural play and human/device validation remain separately scoped.",
+      "department": "audio",
+      "owner": "/root/gameplay_design",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Author a softer pleasant thrust timbre with restrained noise and smooth proportional envelopes.",
+          "met": false
+        },
+        {
+          "text": "Blend tonal motion with the current background music timing/harmony without gameplay delay.",
+          "met": false
+        },
+        {
+          "text": "Capture actual offline PCM mix/peak/continuity evidence; retain human listening acceptance separately.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual integration review",
+          "kind": "review",
+          "path": "artifacts/opr-integration/review.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 3,
+      "createdAt": "2026-10-11T04:55:52.932Z",
+      "updatedAt": "2026-10-11T05:30:00.994Z"
+    },
+    {
+      "id": "task-ab5c6100",
+      "title": "Original exploration, corporation and encounter music direction",
+      "description": "Latest explicit user direction. This is authored original content with source and acceptance gates; not an assertion of complete integrated acceptance. Integrated source and native/CPU checks are recorded; current renderer/browser, natural play and human/device validation remain separately scoped.",
+      "department": "audio",
+      "owner": "/root/gameplay_design",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Authored calm atmospheric exploration melodies; no copied franchise recordings or melodies.",
+          "met": false
+        },
+        {
+          "text": "PAN, RENKO and HUGO home themes; zone/combat/boss layers blend without discontinuity.",
+          "met": false
+        },
+        {
+          "text": "Bound voices/output and record actual PCM evidence, with separate human listening acceptance.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual integration review",
+          "kind": "review",
+          "path": "artifacts/opr-integration/review.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-11T05:07:01.564Z",
+      "updatedAt": "2026-10-11T05:30:01.011Z"
+    },
+    {
+      "id": "task-7a4df889",
+      "title": "Native player portraits for long, spiky and crew-cut Kikai hair",
+      "description": "Latest explicit user direction. This is authored original content with source and acceptance gates; not an assertion of complete integrated acceptance.",
+      "department": "art/audio",
+      "owner": "/root/production_research",
+      "status": "backlog",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "DORA long hair, DORO short spiky hair, TALO crew cut; consistent approved high-detail pixel style.",
+          "met": false
+        },
+        {
+          "text": "Main manufacturer hair color and independent sub-manufacturer crystal-horn color.",
+          "met": false
+        },
+        {
+          "text": "Original type-appropriate portrait layers with animation, fractional transforms and actual conversion/extraction evidence.",
+          "met": false
+        }
+      ],
+      "evidence": [],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-11T05:07:01.583Z",
+      "updatedAt": "2026-10-11T05:07:01.583Z"
+    },
+    {
+      "id": "task-716d9437",
+      "title": "Author sponsored KIKAI champion roster and arena presentation",
+      "description": "Reconcile eight stable encounters with the technological-life canon; separately model competitor identity and corporation sponsor. User candidates APP#F344FEE (PAN representative) and ORP#2323 with independent sponsorship. Preserve encounter/reward/save IDs. Actual current source labels Human/Automaton/alien are historical and require authored reconciliation.",
+      "department": "gameplay",
+      "owner": "/root/gameplay_design",
+      "status": "backlog",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Accepted competitor identities, technological lineages and sponsors for all eight stable encounters.",
+          "met": false
+        },
+        {
+          "text": "Discovered arena/campaign/dialogue presentation shows independent sponsor and competitor identity without leaking unknown rewards.",
+          "met": false
+        },
+        {
+          "text": "Existing saves retain patches, blueprints, ship XP and league results; regression and actual browser evidence recorded.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Latest accepted lore",
+          "kind": "note",
+          "details": "docs/KIKAI_LORE.md and Wiki league entry describe user candidates and explicitly distinguish planned authored roster from current encounters."
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-11T05:27:15.845Z",
+      "updatedAt": "2026-10-11T05:27:15.845Z"
     }
   ],
   "reviews": [
@@ -5988,6 +6396,67 @@
           "path": "artifacts/presentation-refinement-20261011/SETTINGS_INDEPENDENT_REVIEW.md"
         }
       ]
+    },
+    {
+      "id": "review-ba29428d",
+      "title": "Kikai license, native art and HUD contract discussion",
+      "body": "Actual asynchronous design discussion, 2026-10-11. Root received clean isolated branch handoffs from /root/gameplay_design, /root/engine_research, and /root/production_research. Gameplay proposed starter variants under hull0 to preserve ten historical XP/loadout slots; Root accepted schema5 with explicit fresh registration only and no legacy starter grants. Onboarding flags represent actual license acknowledgment, safe-radius exit, Belt asteroid defeat, T1 collection, physical banking, additional basic craft and equip. Engine proposed pure presentation tint and shared right-side map/footer reservations; Root accepted unchanged bounds signatures. Art proposed layered96x128 occupied-cell portraits fitted fractionally, richer32x32 icons, declared palette roles and actual conversion-loss provenance. Root accepted the real imagegen reference, and user explicitly approved it as the game detail standard. Latest user lore: main PAN/RENKO/HUGO controls hair/ship/home green/red/blue; secondary controls crystal horns green/red/blue. User answered the spelling question: RENKO. Guide full designation DORA-PAN-RENKO-1337, shorthand DPR#1337. This records actual messages and decisions; it is not a fictional synchronous meeting. Implementation and renderer review are ongoing.",
+      "author": "/root",
+      "source": "actual-asynchronous-collaboration",
+      "createdAt": "2026-10-11T04:49:34.628Z",
+      "participants": [
+        "/root",
+        "/root/gameplay_design",
+        "/root/engine_research",
+        "/root/production_research"
+      ],
+      "taskIds": [
+        "task-2730ef49",
+        "task-221245db",
+        "task-44c5f7a0",
+        "task-a28478e3",
+        "task-d56c0882"
+      ],
+      "evidence": [
+        {
+          "label": "Actual asynchronous contract handoffs",
+          "kind": "note",
+          "path": "artifacts/kikai-foundation-20261011/design-discussion.md"
+        }
+      ]
+    },
+    {
+      "id": "review-c53a15e1",
+      "title": "OPR integration: actual asynchronous art, runtime, gameplay and DSP reviews",
+      "body": "Current guide canon and native art agree. Two reproduced runtime lifecycle issues are fixed with deferred-save regressions. Sponsor metadata remains a proposed additive content seam, preserving saves and discovery. Native495 and shell321 pass with1skip; actual five-case native DSP and independent float-WAV audit pass. Current GPU/browser and human/device validation are still distinct.",
+      "author": "/root",
+      "source": "OPR scoped integration14d19d7 and actual specialist contributions",
+      "createdAt": "2026-10-11T05:30:01.031Z",
+      "participants": [
+        "/root",
+        "/root/production_research",
+        "/root/engine_research",
+        "/root/gameplay_design"
+      ],
+      "taskIds": [
+        "task-221245db",
+        "task-2730ef49",
+        "task-716d9437",
+        "task-43e0592c",
+        "task-ab5c6100"
+      ],
+      "evidence": [
+        {
+          "label": "Actual scoped review",
+          "kind": "review",
+          "path": "artifacts/opr-integration/review.md"
+        },
+        {
+          "label": "Real native DSP report",
+          "kind": "report",
+          "path": "artifacts/opr-integration/audio-dsp-report.json"
+        }
+      ]
     }
   ],
   "decisions": [
@@ -6115,6 +6584,42 @@
       "author": "Producer",
       "source": "Actual Root, Engine, Gameplay and Art asynchronous design exchanges during this development session",
       "createdAt": "2026-10-11T03:40:09.845Z",
+      "status": "accepted"
+    },
+    {
+      "id": "decision-7a8f76a1",
+      "title": "Kikai main and sub-manufacturer canon",
+      "body": "PAN Dynamics: green hair, explorer/passive starter and home theme. RENKO Cybernetics: red hair, offensive starter and home theme. HUGO CORP: blue hair, defensive starter and home theme. Sub-manufacturer controls crystal horn color independently and adds no gameplay bonus. DORA-PAN-RENKO-1337 is the guide, called DPR#1337 in lore. Preserve existing anonymous progression; create licenses only for fresh droids. The user explicitly kept official spelling RENKO and approved generated DORA reference as the detail target.",
+      "author": "/root",
+      "source": "actual-asynchronous-collaboration",
+      "createdAt": "2026-10-11T04:49:34.650Z",
+      "status": "accepted"
+    },
+    {
+      "id": "decision-d06dead3",
+      "title": "Kikai hair silhouettes and original dynamic score direction",
+      "body": "DORA has long hair, DORO short spiky hair, TALO a crew cut. Main corporation colors hair; sub-manufacturer colors horns independently. Original calm exploration may draw atmosphere from anime/Hollow Knight; home score follows corporation, zone score follows environment, stronger original guitar-inspired combat and distinct boss layers blend dynamically. Broad family-specific full arrangements and human listening remain separate acceptance.",
+      "author": "/root",
+      "source": "explicit-user-canon",
+      "createdAt": "2026-10-11T05:07:01.747Z",
+      "status": "accepted"
+    },
+    {
+      "id": "decision-25983c44",
+      "title": "ORP guide and O/A/T main-first callsigns supersede DPR",
+      "body": "User confirmed main then sub. Female O, male A, neutral T; main/sub initials then #HASH. Guide is DORA-RENKO-PAN-1337 / ORP#1337: RENKO red hair, PAN green crystal horns, feminine long-hair appearance. DORO masculine with short spiky hair; TALO neutral appearance with crew cut. Full player designation and saved fields remain TYPE-MAIN-SUB-HASH. Approved original reference remains detail/style evidence; guide runtime colors are updated through declared native palette roles.",
+      "author": "/root",
+      "source": "explicit-user-clarification",
+      "createdAt": "2026-10-11T05:19:26.815Z",
+      "status": "accepted"
+    },
+    {
+      "id": "decision-864ff397",
+      "title": "OPR#1337 and technological KIKAI sporting canon",
+      "body": "Latest explicit user clarification supersedes decision-25983c44: guide OPR#1337 is DORA-PAN-RENKO-1337, green PAN long hair and red RENKO horns. Main-first O/A/T naming remains. KIKAI are technological descendants of humans in a future hostile to biological life. OPR is the player’s friend and explorer with dreams and a K-pop performer hobby. Galaxy Royale is the universe’s biggest sport; corporation sponsorship is separate from main/sub identity. APP#F344FEE is a PAN representative candidate; ORP#2323 can also be PAN-sponsored. Existing eight encounter IDs and progression stay stable while roster authorship is reviewed.",
+      "author": "/root",
+      "source": "Latest user canon and actual scoped work, 11 October 2026",
+      "createdAt": "2026-10-11T05:27:15.828Z",
       "status": "accepted"
     }
   ],
@@ -12803,6 +13308,406 @@
       "author": "Producer",
       "source": "Actual exact-source owner-private deployment and direct IAB load failure",
       "createdAt": "2026-10-11T04:14:54.139Z"
+    },
+    {
+      "id": "4e934346-d68e-4dd9-9279-4d6443042bc1",
+      "revision": 545,
+      "kind": "task.create",
+      "itemId": "task-2730ef49",
+      "title": "Kikai identity, corporation licenses and starter ships",
+      "author": "/root",
+      "source": "active-development-session",
+      "createdAt": "2026-10-11T04:40:15.478Z"
+    },
+    {
+      "id": "e2b9c08f-859e-40ee-8cf4-36c461efd62a",
+      "revision": 546,
+      "kind": "task.create",
+      "itemId": "task-221245db",
+      "title": "DORA native portrait and guided initial mission",
+      "author": "/root",
+      "source": "active-development-session",
+      "createdAt": "2026-10-11T04:40:15.498Z"
+    },
+    {
+      "id": "4018b364-90dc-4217-9fd5-4daab638a333",
+      "revision": 547,
+      "kind": "task.create",
+      "itemId": "task-44c5f7a0",
+      "title": "Discovery-based ship and ability catalogs",
+      "author": "/root",
+      "source": "active-development-session",
+      "createdAt": "2026-10-11T04:40:15.536Z"
+    },
+    {
+      "id": "def64da1-9fa1-43e9-b398-113125cf4977",
+      "revision": 548,
+      "kind": "task.create",
+      "itemId": "task-a28478e3",
+      "title": "Lower-right navigation and player damage warning",
+      "author": "/root",
+      "source": "active-development-session",
+      "createdAt": "2026-10-11T04:40:15.550Z"
+    },
+    {
+      "id": "bb1cf727-29d6-468f-aa19-d0ddfe9b3f46",
+      "revision": 549,
+      "kind": "task.create",
+      "itemId": "task-d56c0882",
+      "title": "Detailed coherent native toolbar icons",
+      "author": "/root",
+      "source": "active-development-session",
+      "createdAt": "2026-10-11T04:40:15.581Z"
+    },
+    {
+      "id": "872d9c40-b2d7-4b33-ae4a-67130cd1f344",
+      "revision": 550,
+      "kind": "run",
+      "itemId": "run-0c6dec4b",
+      "title": "/root/gameplay_design · running",
+      "author": "/root",
+      "source": "actual-collaboration-dispatch",
+      "createdAt": "2026-10-11T04:41:36.440Z"
+    },
+    {
+      "id": "cf14bffd-c70b-4767-b788-fc357dea0400",
+      "revision": 551,
+      "kind": "run",
+      "itemId": "run-5c956676",
+      "title": "/root/engine_research · running",
+      "author": "/root",
+      "source": "actual-collaboration-dispatch",
+      "createdAt": "2026-10-11T04:41:36.459Z"
+    },
+    {
+      "id": "85878327-7466-494b-8b80-3ecd295a3ea0",
+      "revision": 552,
+      "kind": "run",
+      "itemId": "run-e273e1a7",
+      "title": "/root/production_research · running",
+      "author": "/root",
+      "source": "actual-collaboration-dispatch",
+      "createdAt": "2026-10-11T04:41:36.471Z"
+    },
+    {
+      "id": "b96110df-0076-45a6-91f6-701e0d058e4e",
+      "revision": 553,
+      "kind": "run",
+      "itemId": "run-25301036",
+      "title": "/root · running",
+      "author": "/root",
+      "source": "actual-collaboration-dispatch",
+      "createdAt": "2026-10-11T04:41:36.497Z"
+    },
+    {
+      "id": "f5ea5ed4-6a20-4b5e-abbd-b5e6330afe2a",
+      "revision": 554,
+      "kind": "review",
+      "itemId": "review-ba29428d",
+      "title": "Kikai license, native art and HUD contract discussion",
+      "author": "/root",
+      "source": "actual-asynchronous-collaboration",
+      "createdAt": "2026-10-11T04:49:34.628Z"
+    },
+    {
+      "id": "28ccd48f-8424-40c2-a1f6-9491e913e65d",
+      "revision": 555,
+      "kind": "decision",
+      "itemId": "decision-7a8f76a1",
+      "title": "Kikai main and sub-manufacturer canon",
+      "author": "/root",
+      "source": "actual-asynchronous-collaboration",
+      "createdAt": "2026-10-11T04:49:34.650Z"
+    },
+    {
+      "id": "445c593a-fe19-466f-8d6c-9bd65a1220d3",
+      "revision": 556,
+      "kind": "run",
+      "itemId": "run-cdaf6009",
+      "title": "Spark Kikai save review · running",
+      "author": "/root",
+      "source": "actual-asynchronous-collaboration",
+      "createdAt": "2026-10-11T04:49:34.678Z"
+    },
+    {
+      "id": "d7e91616-49cb-4282-8fe3-7260ed777498",
+      "revision": 557,
+      "kind": "task.create",
+      "itemId": "task-778b8356",
+      "title": "Curved segmented hull and shield beneath the ship",
+      "author": "/root",
+      "source": "latest-user-todo-request",
+      "createdAt": "2026-10-11T04:55:52.776Z"
+    },
+    {
+      "id": "0add0287-ebd7-433b-98a5-8bbba8c4e86d",
+      "revision": 558,
+      "kind": "task.create",
+      "itemId": "task-ef6ed92a",
+      "title": "Consistent high-detail pixel assets from approved DORA benchmark",
+      "author": "/root",
+      "source": "latest-user-todo-request",
+      "createdAt": "2026-10-11T04:55:52.801Z"
+    },
+    {
+      "id": "7aedf4e6-ec9b-45c1-8042-86a767f49fbe",
+      "revision": 559,
+      "kind": "task.create",
+      "itemId": "task-72663b49",
+      "title": "Detailed shooting-star asset and coherent particle trail",
+      "author": "/root",
+      "source": "latest-user-todo-request",
+      "createdAt": "2026-10-11T04:55:52.838Z"
+    },
+    {
+      "id": "e86c1a3e-184d-40e8-840d-48a10a516548",
+      "revision": 560,
+      "kind": "task.create",
+      "itemId": "task-43e0592c",
+      "title": "Calm musical thrust sound and integrated mix",
+      "author": "/root",
+      "source": "latest-user-todo-request",
+      "createdAt": "2026-10-11T04:55:52.932Z"
+    },
+    {
+      "id": "ff5e621f-e0e9-438e-b9f4-df197aad9f1b",
+      "revision": 561,
+      "kind": "task.update",
+      "itemId": "task-778b8356",
+      "title": "Curved segmented hull and shield beneath the ship",
+      "author": "/root",
+      "source": "actual-native-followup",
+      "createdAt": "2026-10-11T04:57:17.012Z"
+    },
+    {
+      "id": "5d606d6c-d91e-48a7-94b5-f540cba4a533",
+      "revision": 562,
+      "kind": "run",
+      "itemId": "run-4c3377df",
+      "title": "/root/engine_research · running",
+      "author": "/root",
+      "source": "actual-native-followup",
+      "createdAt": "2026-10-11T04:57:17.039Z"
+    },
+    {
+      "id": "23185a7d-74b0-4d76-810c-ddc6b089f549",
+      "revision": 563,
+      "kind": "task.create",
+      "itemId": "task-ab5c6100",
+      "title": "Original exploration, corporation and encounter music direction",
+      "author": "/root",
+      "source": "actual-user-canon-and-audio-direction",
+      "createdAt": "2026-10-11T05:07:01.564Z"
+    },
+    {
+      "id": "7ad64a45-bf0a-4cd0-9d3f-62defbe48463",
+      "revision": 564,
+      "kind": "task.create",
+      "itemId": "task-7a4df889",
+      "title": "Native player portraits for long, spiky and crew-cut Kikai hair",
+      "author": "/root",
+      "source": "actual-user-canon-and-audio-direction",
+      "createdAt": "2026-10-11T05:07:01.583Z"
+    },
+    {
+      "id": "8106824b-2e16-4588-9aa8-c33f438cee3d",
+      "revision": 565,
+      "kind": "task.update",
+      "itemId": "task-43e0592c",
+      "title": "Calm musical thrust sound and integrated mix",
+      "author": "/root",
+      "source": "actual-bounded-parallel-dispatch",
+      "createdAt": "2026-10-11T05:07:01.653Z"
+    },
+    {
+      "id": "5d525989-0181-4dc6-a939-30b809f512cb",
+      "revision": 566,
+      "kind": "task.update",
+      "itemId": "task-72663b49",
+      "title": "Detailed shooting-star asset and coherent particle trail",
+      "author": "/root",
+      "source": "actual-bounded-parallel-dispatch",
+      "createdAt": "2026-10-11T05:07:01.672Z"
+    },
+    {
+      "id": "2ddf5e5d-c293-4e05-a395-62598e4c41ce",
+      "revision": 567,
+      "kind": "run",
+      "itemId": "run-78b429a7",
+      "title": "/root/gameplay_design · running",
+      "author": "/root",
+      "source": "actual-team-handoff",
+      "createdAt": "2026-10-11T05:07:01.684Z"
+    },
+    {
+      "id": "91f7e3f5-e579-4cf9-b59e-8590ab5d683f",
+      "revision": 568,
+      "kind": "run",
+      "itemId": "run-a4ee130b",
+      "title": "/root/production_research · running",
+      "author": "/root",
+      "source": "actual-team-handoff",
+      "createdAt": "2026-10-11T05:07:01.715Z"
+    },
+    {
+      "id": "c14c79b2-def8-401a-9341-88319e4ad4fc",
+      "revision": 569,
+      "kind": "run",
+      "itemId": "run-68a4f8f4",
+      "title": "/root/engine_research · running",
+      "author": "/root",
+      "source": "actual-team-handoff",
+      "createdAt": "2026-10-11T05:07:01.731Z"
+    },
+    {
+      "id": "d3cac621-b5be-49c3-a634-b146c0e9a60a",
+      "revision": 570,
+      "kind": "decision",
+      "itemId": "decision-d06dead3",
+      "title": "Kikai hair silhouettes and original dynamic score direction",
+      "author": "/root",
+      "source": "explicit-user-canon",
+      "createdAt": "2026-10-11T05:07:01.747Z"
+    },
+    {
+      "id": "3a98ccda-23a7-4611-9d05-76acbe2fa6ab",
+      "revision": 571,
+      "kind": "decision",
+      "itemId": "decision-25983c44",
+      "title": "ORP guide and O/A/T main-first callsigns supersede DPR",
+      "author": "/root",
+      "source": "explicit-user-clarification",
+      "createdAt": "2026-10-11T05:19:26.815Z"
+    },
+    {
+      "id": "9a889cf4-7d69-41b3-852f-0197430c7176",
+      "revision": 572,
+      "kind": "decision",
+      "itemId": "decision-864ff397",
+      "title": "OPR#1337 and technological KIKAI sporting canon",
+      "author": "/root",
+      "source": "Latest user canon and actual scoped work, 11 October 2026",
+      "createdAt": "2026-10-11T05:27:15.828Z"
+    },
+    {
+      "id": "faabe6c2-8b58-48c5-92f9-4075ee374528",
+      "revision": 573,
+      "kind": "task.create",
+      "itemId": "task-716d9437",
+      "title": "Author sponsored KIKAI champion roster and arena presentation",
+      "author": "/root",
+      "source": "Latest user canon and actual scoped work, 11 October 2026",
+      "createdAt": "2026-10-11T05:27:15.845Z"
+    },
+    {
+      "id": "77d87a82-01d0-4536-8849-a793b99e0d6e",
+      "revision": 574,
+      "kind": "run",
+      "itemId": "run-1ab006a6",
+      "title": "Spark storage review · interrupted",
+      "author": "/root",
+      "source": "Latest user canon and actual scoped work, 11 October 2026",
+      "createdAt": "2026-10-11T05:27:15.867Z"
+    },
+    {
+      "id": "037ed88c-fb17-4a39-a3b1-4c087697d20e",
+      "revision": 575,
+      "kind": "task.update",
+      "itemId": "task-2730ef49",
+      "title": "Kikai identity, corporation licenses and starter ships",
+      "author": "/root",
+      "source": "OPR scoped integration14d19d7 and actual specialist contributions",
+      "createdAt": "2026-10-11T05:30:00.859Z"
+    },
+    {
+      "id": "5eb6b757-0944-4a17-b1c4-4b2463694fd0",
+      "revision": 576,
+      "kind": "task.update",
+      "itemId": "task-221245db",
+      "title": "DORA native portrait and guided initial mission",
+      "author": "/root",
+      "source": "OPR scoped integration14d19d7 and actual specialist contributions",
+      "createdAt": "2026-10-11T05:30:00.885Z"
+    },
+    {
+      "id": "515ca59e-8410-4c82-904c-25263356c047",
+      "revision": 577,
+      "kind": "task.update",
+      "itemId": "task-44c5f7a0",
+      "title": "Discovery-based ship and ability catalogs",
+      "author": "/root",
+      "source": "OPR scoped integration14d19d7 and actual specialist contributions",
+      "createdAt": "2026-10-11T05:30:00.900Z"
+    },
+    {
+      "id": "6d2be74b-2a82-41ee-add1-d001bcf4d678",
+      "revision": 578,
+      "kind": "task.update",
+      "itemId": "task-a28478e3",
+      "title": "Lower-right navigation and player damage warning",
+      "author": "/root",
+      "source": "OPR scoped integration14d19d7 and actual specialist contributions",
+      "createdAt": "2026-10-11T05:30:00.917Z"
+    },
+    {
+      "id": "af0d48b0-41a5-4ec8-8d5b-86c6d7c92597",
+      "revision": 579,
+      "kind": "task.update",
+      "itemId": "task-d56c0882",
+      "title": "Detailed coherent native toolbar icons",
+      "author": "/root",
+      "source": "OPR scoped integration14d19d7 and actual specialist contributions",
+      "createdAt": "2026-10-11T05:30:00.932Z"
+    },
+    {
+      "id": "569de7f9-f023-42e9-abe4-7fd9faaee656",
+      "revision": 580,
+      "kind": "task.update",
+      "itemId": "task-778b8356",
+      "title": "Curved segmented hull and shield beneath the ship",
+      "author": "/root",
+      "source": "OPR scoped integration14d19d7 and actual specialist contributions",
+      "createdAt": "2026-10-11T05:30:00.947Z"
+    },
+    {
+      "id": "8a3b27e6-504c-4a94-aa18-d3108ec97f79",
+      "revision": 581,
+      "kind": "task.update",
+      "itemId": "task-72663b49",
+      "title": "Detailed shooting-star asset and coherent particle trail",
+      "author": "/root",
+      "source": "OPR scoped integration14d19d7 and actual specialist contributions",
+      "createdAt": "2026-10-11T05:30:00.968Z"
+    },
+    {
+      "id": "cc040ed8-fb42-418f-a91f-0b41230be458",
+      "revision": 582,
+      "kind": "task.update",
+      "itemId": "task-43e0592c",
+      "title": "Calm musical thrust sound and integrated mix",
+      "author": "/root",
+      "source": "OPR scoped integration14d19d7 and actual specialist contributions",
+      "createdAt": "2026-10-11T05:30:00.994Z"
+    },
+    {
+      "id": "edacffcb-817f-413e-ab36-aa1c30a49650",
+      "revision": 583,
+      "kind": "task.update",
+      "itemId": "task-ab5c6100",
+      "title": "Original exploration, corporation and encounter music direction",
+      "author": "/root",
+      "source": "OPR scoped integration14d19d7 and actual specialist contributions",
+      "createdAt": "2026-10-11T05:30:01.011Z"
+    },
+    {
+      "id": "47ab8348-a1cc-4520-89ba-2588301c162e",
+      "revision": 584,
+      "kind": "review",
+      "itemId": "review-c53a15e1",
+      "title": "OPR integration: actual asynchronous art, runtime, gameplay and DSP reviews",
+      "author": "/root",
+      "source": "OPR scoped integration14d19d7 and actual specialist contributions",
+      "createdAt": "2026-10-11T05:30:01.031Z"
     }
   ],
   "runRecords": [
@@ -17483,6 +18388,234 @@
       "author": "Producer",
       "source": "Actual exact-source owner-private deployment and direct IAB load failure",
       "createdAt": "2026-10-11T04:14:54.139Z"
+    },
+    {
+      "id": "run-0c6dec4b",
+      "title": "/root/gameplay_design · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "/root/gameplay_design",
+      "state": "running",
+      "observedAt": "2026-10-11T04:41:36.412Z",
+      "taskIds": [
+        "task-2730ef49"
+      ],
+      "summary": "Implementing authoritative identity/starter/save/discovery contract in isolated branch.",
+      "evidence": [
+        {
+          "label": "Actual native specialist handoff",
+          "kind": "note",
+          "details": "Implementing authoritative identity/starter/save/discovery contract in isolated branch. Root received clean-branch contract handoffs through collaboration messages in this session."
+        }
+      ],
+      "author": "/root",
+      "source": "actual-collaboration-dispatch",
+      "createdAt": "2026-10-11T04:41:36.440Z"
+    },
+    {
+      "id": "run-5c956676",
+      "title": "/root/engine_research · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "/root/engine_research",
+      "state": "running",
+      "observedAt": "2026-10-11T04:41:36.452Z",
+      "taskIds": [
+        "task-a28478e3"
+      ],
+      "summary": "Implementing shared lower-right HUD reservations and pure red damage/critical presentation.",
+      "evidence": [
+        {
+          "label": "Actual native specialist handoff",
+          "kind": "note",
+          "details": "Implementing shared lower-right HUD reservations and pure red damage/critical presentation. Root received clean-branch contract handoffs through collaboration messages in this session."
+        }
+      ],
+      "author": "/root",
+      "source": "actual-collaboration-dispatch",
+      "createdAt": "2026-10-11T04:41:36.459Z"
+    },
+    {
+      "id": "run-e273e1a7",
+      "title": "/root/production_research · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "/root/production_research",
+      "state": "running",
+      "observedAt": "2026-10-11T04:41:36.467Z",
+      "taskIds": [
+        "task-221245db",
+        "task-d56c0882"
+      ],
+      "summary": "Authoring native layered DORA portrait and richer coherent icons from actual user/imagegen references.",
+      "evidence": [
+        {
+          "label": "Actual native specialist handoff",
+          "kind": "note",
+          "details": "Authoring native layered DORA portrait and richer coherent icons from actual user/imagegen references. Root received clean-branch contract handoffs through collaboration messages in this session."
+        }
+      ],
+      "author": "/root",
+      "source": "actual-collaboration-dispatch",
+      "createdAt": "2026-10-11T04:41:36.471Z"
+    },
+    {
+      "id": "run-25301036",
+      "title": "/root · running",
+      "agentId": "/root",
+      "agentLabel": "/root",
+      "state": "running",
+      "observedAt": "2026-10-11T04:41:36.492Z",
+      "taskIds": [
+        "task-44c5f7a0",
+        "task-221245db"
+      ],
+      "summary": "Integrating character creation, schema5 IndexedDB migration, onboarding and discovery UI.",
+      "evidence": [
+        {
+          "label": "Actual native specialist handoff",
+          "kind": "note",
+          "details": "Integrating character creation, schema5 IndexedDB migration, onboarding and discovery UI. Root received clean-branch contract handoffs through collaboration messages in this session."
+        }
+      ],
+      "author": "/root",
+      "source": "actual-collaboration-dispatch",
+      "createdAt": "2026-10-11T04:41:36.497Z"
+    },
+    {
+      "id": "run-cdaf6009",
+      "title": "Spark Kikai save review · running",
+      "agentId": "spark/kikai-save-review",
+      "agentLabel": "Spark Kikai save review",
+      "state": "running",
+      "observedAt": "2026-10-11T04:49:34.660Z",
+      "taskIds": [
+        "task-2730ef49",
+        "task-44c5f7a0"
+      ],
+      "summary": "Actual installed local worker is auditing TypeScript save/creation invariants read-only; result not yet received.",
+      "evidence": [
+        {
+          "label": "Actual wrapper dispatch",
+          "kind": "note",
+          "path": "work/kikai-spark-review-task.txt",
+          "details": "Started through installed worker.py with danger-full-access and approval never, explicit UTF8 task and result paths. Process session87447; no verdict claimed."
+        }
+      ],
+      "author": "/root",
+      "source": "actual-asynchronous-collaboration",
+      "createdAt": "2026-10-11T04:49:34.678Z"
+    },
+    {
+      "id": "run-4c3377df",
+      "title": "/root/engine_research · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "/root/engine_research",
+      "state": "running",
+      "observedAt": "2026-10-11T04:57:17.028Z",
+      "taskIds": [
+        "task-778b8356",
+        "task-a28478e3"
+      ],
+      "summary": "Right-side HUD/damage warning commit03a26f8 delivered and cherry-picked; independent presentation review identified and confirmed repair of observer/portrait/icon hooks. Specialist now implementing curved actual-vitals tracks under ship in another isolated branch.",
+      "evidence": [
+        {
+          "label": "Actual scoped handoff and follow-up",
+          "kind": "note",
+          "details": "Received commit03a26f806734d7275b173d89bedeaaf3b336f734 with actual235core+133web test evidence. Follow-up dispatched through collaboration to codex/curved-ship-vitals; browser acceptance still pending."
+        }
+      ],
+      "author": "/root",
+      "source": "actual-native-followup",
+      "createdAt": "2026-10-11T04:57:17.039Z"
+    },
+    {
+      "id": "run-78b429a7",
+      "title": "/root/gameplay_design · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "/root/gameplay_design",
+      "state": "running",
+      "observedAt": "2026-10-11T05:07:01.680Z",
+      "taskIds": [
+        "task-43e0592c",
+        "task-ab5c6100"
+      ],
+      "summary": "Core feature frozen0e6b6b7 and integrated. Actual next independent branch refines quiet harmonic thrust, optional corporation score context, calmer exploration and bounded original combat/boss layers.",
+      "evidence": [
+        {
+          "label": "Actual specialist source handoff",
+          "kind": "note",
+          "details": "Core feature frozen0e6b6b7 and integrated. Actual next independent branch refines quiet harmonic thrust, optional corporation score context, calmer exploration and bounded original combat/boss layers."
+        }
+      ],
+      "author": "/root",
+      "source": "actual-team-handoff",
+      "createdAt": "2026-10-11T05:07:01.684Z"
+    },
+    {
+      "id": "run-a4ee130b",
+      "title": "/root/production_research · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "/root/production_research",
+      "state": "running",
+      "observedAt": "2026-10-11T05:07:01.700Z",
+      "taskIds": [
+        "task-72663b49"
+      ],
+      "summary": "Native DORA/icon feature frozenbcbaa670 and integrated; actual next independent branch authors a detailed native shooting star with seeded bounded emissive wake.",
+      "evidence": [
+        {
+          "label": "Actual specialist source handoff",
+          "kind": "note",
+          "details": "Native DORA/icon feature frozenbcbaa670 and integrated; actual next independent branch authors a detailed native shooting star with seeded bounded emissive wake."
+        }
+      ],
+      "author": "/root",
+      "source": "actual-team-handoff",
+      "createdAt": "2026-10-11T05:07:01.715Z"
+    },
+    {
+      "id": "run-68a4f8f4",
+      "title": "/root/engine_research · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "/root/engine_research",
+      "state": "running",
+      "observedAt": "2026-10-11T05:07:01.723Z",
+      "taskIds": [
+        "task-a28478e3",
+        "task-778b8356",
+        "task-d56c0882"
+      ],
+      "summary": "HUD/curved features frozen and integrated; actual next isolated review branch checks new32-cell icon and DORA/corporate UI extraction contracts at root source7acd721.",
+      "evidence": [
+        {
+          "label": "Actual specialist source handoff",
+          "kind": "note",
+          "details": "HUD/curved features frozen and integrated; actual next isolated review branch checks new32-cell icon and DORA/corporate UI extraction contracts at root source7acd721."
+        }
+      ],
+      "author": "/root",
+      "source": "actual-team-handoff",
+      "createdAt": "2026-10-11T05:07:01.731Z"
+    },
+    {
+      "id": "run-1ab006a6",
+      "title": "Spark storage review · interrupted",
+      "agentId": "spark/kikai-storage-review",
+      "agentLabel": "Spark storage review",
+      "state": "interrupted",
+      "observedAt": "2026-10-11T05:27:15.852Z",
+      "taskIds": [
+        "task-2730ef49"
+      ],
+      "summary": "Read-only worker stopped after a prolonged bounded audit produced no final report. Iterative command output is not accepted as a completed review. Native independent runtime specialist found two concrete lifecycle issues and is implementing regressions.",
+      "evidence": [
+        {
+          "label": "Actual worker task",
+          "kind": "note",
+          "path": "work/kikai-spark-review-task.txt"
+        }
+      ],
+      "author": "/root",
+      "source": "Latest user canon and actual scoped work, 11 October 2026",
+      "createdAt": "2026-10-11T05:27:15.867Z"
     }
   ],
   "phaseDescription": "Desktop-first Rust/WASM solo game and local Studio are implemented. Reviewed occupied-cell art, reproducible conversion, responsive native settings/icons and minimap, strict GitHub integration gates and source-backed Dev Bible are integrated. Natural campaign balance, human listening, owner-private update lifecycle and physical phones remain separate pending gates."
