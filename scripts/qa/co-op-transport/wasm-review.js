@@ -43,7 +43,56 @@ const actionFailureCodes = new Set([
   "native_command_timeout",
   "native_timeout",
   "capture_rejected",
+  "clients_not_visible",
+  "page_not_visible",
 ]);
+let driveActive = false,
+  driveVisibilityLost = false;
+function requireVisibleClients() {
+  if (document.visibilityState !== "visible")
+    throw new Error("page_not_visible");
+  const width = window.innerWidth,
+    height = window.innerHeight;
+  if (
+    !Number.isFinite(width) ||
+    !Number.isFinite(height) ||
+    width <= 0 ||
+    height <= 0
+  )
+    throw new Error("clients_not_visible");
+  for (const child of Object.values(children)) {
+    const r = child.frame.getBoundingClientRect();
+    if (
+      ![r.left, r.top, r.right, r.bottom, r.width, r.height].every(
+        Number.isFinite,
+      ) ||
+      r.width <= 0 ||
+      r.height <= 0 ||
+      r.left < 0 ||
+      r.top < 0 ||
+      r.right > width ||
+      r.bottom > height
+    )
+      throw new Error("clients_not_visible");
+  }
+}
+function noteDriveVisibility() {
+  if (!driveActive) return;
+  try {
+    requireVisibleClients();
+  } catch {
+    driveVisibilityLost = true;
+    $("status").textContent =
+      "Drive pending: visibility changed. Wait for commands, then leave/dispose; this drive will not pass.";
+  }
+}
+function guardDriveVisibility() {
+  requireVisibleClients();
+  if (driveVisibilityLost) throw new Error("clients_not_visible");
+}
+document.addEventListener("visibilitychange", noteDriveVisibility);
+addEventListener("resize", noteDriveVisibility);
+addEventListener("scroll", noteDriveVisibility);
 for (const child of Object.values(children)) {
   child.ready = false;
   child.frame.src = child.origin + "/client.html";
@@ -174,7 +223,10 @@ async function action(label, fn) {
       ": failed / " +
       (actionFailureCodes.has(error?.message)
         ? error.message
-        : "native_action_failed");
+        : "native_action_failed") +
+      (["clients_not_visible", "page_not_visible"].includes(error?.message)
+        ? ". Keep the page foreground and both client frames fully visible; enlarge the viewport or scroll to the frames before retrying."
+        : "");
   } finally {
     busy = false;
     paint();
@@ -262,19 +314,31 @@ $("initialize").onclick = () =>
     await verify();
   });
 $("connect").onclick = () => action("Create and join", () => connected(false));
-$("drive").onclick = () =>
-  action("Native drive/fire", async () => {
+async function drive() {
+  // Browser cross-origin off-screen throttling is outside native acceptance.
+  requireVisibleClients();
+  driveVisibilityLost = false;
+  driveActive = true;
+  try {
     await Promise.all([send("host", "drive"), send("guest", "drive")]);
-    await until(
-      () =>
+    guardDriveVisibility();
+    await until(() => {
+      guardDriveVisibility();
+      return (
         state.host.movement_observed &&
         state.guest.movement_observed &&
         state.host.projectiles > 0 &&
-        state.guest.projectiles > 0,
-    );
-    check("movement-fire-observed", true);
+        state.guest.projectiles > 0
+      );
+    });
     await verify();
-  });
+    guardDriveVisibility();
+    check("movement-fire-observed", true);
+  } finally {
+    driveActive = false;
+  }
+}
+$("drive").onclick = () => action("Native drive/fire", drive);
 $("end").onclick = () =>
   action("Host end", async () => {
     await send("host", "end");

@@ -33,6 +33,8 @@ The WASM mode CSP permits only self-hosted scripts plus `wasm-unsafe-eval` for c
 
 After Dispose, verify created PCs equal closed PCs, zero transport requests/timers and unchanged saves. Native Galaxies are freed after successful restoration. Close the browser page, then stop the listener; iframe context destruction closes remaining idle database connections. A failure remains visible and is not accepted as successful cleanup. Reload the tool for a second backend.
 
+Drive preflight requires a foreground page and both full iframe rectangles inside the actual viewport. Resize or scroll to the frames before starting; a short viewport can leave the guest frame outside the visible area, where browser timers may be throttled. A visibility/scroll/resize event that moves a client out of view while Drive runs latches an interrupted observation, so it cannot later pass just because the frames became visible again. This does not bypass browser throttling or add a second native clock. Existing commands finish or time out; leave/dispose explicitly afterward. Timer asymmetry alone is not diagnosed as a native bug.
+
 Focused checks:
 
 ```powershell

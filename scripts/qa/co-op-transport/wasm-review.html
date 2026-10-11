@@ -85,6 +85,12 @@
   <pre id="results" aria-label="Sanitized actual native observations">
 No run yet.</pre>
   <p>
+    Before Drive, keep this page foreground and both complete client frames
+    visible. Enlarge the viewport or scroll to the frames. Off-screen
+    cross-origin frames can have throttled timers; a visibility change prevents
+    a drive pass. Leave or Dispose after an interrupted command before retrying.
+  </p>
+  <p>
     Drive uses 360 explicit 1/60-second calls through Galaxy.step per client,
     paced by browser timers. Ordinary QA presentation is bounded to three
     minutes and pauses the solo Game. Owned mode reads each actual native local

@@ -443,6 +443,155 @@ test("Actual New session orchestration uses real controller idempotent leave aft
   assert.deepEqual(calls, ["guest-left", "host-left", "fresh-connect"]);
 });
 
+test("Actual Drive preflight rejects hidden, clipped, zero and nonfinite client bounds before any native command", async () => {
+  const source = await fs.readFile(
+    new URL("../qa/co-op-transport/wasm-review.js", import.meta.url),
+    "utf8",
+  );
+  const visible = {
+    left: 20,
+    top: 224,
+    right: 1260,
+    bottom: 556,
+    width: 1240,
+    height: 332,
+  };
+  const context = vm.createContext({
+    document: { visibilityState: "visible" },
+    window: { innerWidth: 1280, innerHeight: 900 },
+    children: Object.fromEntries(
+      ["host", "guest"].map((role) => [
+        role,
+        { frame: { getBoundingClientRect: () => visible } },
+      ]),
+    ),
+    send: () => assert.fail("invalid visibility must not send a native drive"),
+  });
+  for (const name of ["requireVisibleClients", "drive"])
+    vm.runInContext(functionSource(source, name), context);
+  assert.doesNotThrow(() => context.requireVisibleClients());
+  context.document.visibilityState = "hidden";
+  await assert.rejects(context.drive(), /page_not_visible/);
+  context.document.visibilityState = "visible";
+  for (const rect of [
+    { ...visible, top: 495, bottom: 827 }, // actual short-viewport failure shape
+    { ...visible, left: -1 },
+    { ...visible, right: 1281 },
+    { ...visible, top: -1 },
+    { ...visible, width: 0 },
+    { ...visible, height: 0 },
+    { ...visible, bottom: Infinity },
+    { ...visible, left: NaN },
+  ]) {
+    context.children.guest.frame.getBoundingClientRect = () => rect;
+    context.window.innerHeight = rect.top === 495 ? 480 : 900;
+    await assert.rejects(context.drive(), /clients_not_visible/);
+  }
+  context.children.guest.frame.getBoundingClientRect = () => visible;
+  context.window.innerHeight = 900;
+  context.window.innerWidth = NaN;
+  await assert.rejects(context.drive(), /clients_not_visible/);
+});
+
+test("Actual Drive latches mid-command visibility loss and never labels interrupted observations a native pass", async () => {
+  const source = await fs.readFile(
+    new URL("../qa/co-op-transport/wasm-review.js", import.meta.url),
+    "utf8",
+  );
+  const status = { textContent: "" },
+    calls = [],
+    pending = [];
+  const context = vm.createContext({
+    document: { visibilityState: "visible" },
+    window: { innerWidth: 1280, innerHeight: 900 },
+    children: Object.fromEntries(
+      ["host", "guest"].map((role) => [
+        role,
+        {
+          frame: {
+            getBoundingClientRect: () => ({
+              left: 20,
+              top: 224,
+              right: 620,
+              bottom: 556,
+              width: 600,
+              height: 332,
+            }),
+          },
+        },
+      ]),
+    ),
+    driveActive: false,
+    driveVisibilityLost: false,
+    $: () => status,
+    send: (role) => {
+      calls.push(role);
+      return new Promise((resolve) => pending.push(resolve));
+    },
+    until: () =>
+      assert.fail(
+        "interrupted native commands cannot receive a passing observation",
+      ),
+    check: () =>
+      assert.fail("visibility is not native movement/fire acceptance"),
+    verify: () => {},
+  });
+  for (const name of [
+    "requireVisibleClients",
+    "guardDriveVisibility",
+    "noteDriveVisibility",
+    "drive",
+  ])
+    vm.runInContext(functionSource(source, name), context);
+  const drive = context.drive();
+  assert.deepEqual(calls, ["host", "guest"]);
+  assert.equal(context.driveActive, true);
+  context.document.visibilityState = "hidden";
+  context.noteDriveVisibility();
+  assert.equal(context.driveVisibilityLost, true);
+  assert.match(status.textContent, /will not pass/);
+  context.document.visibilityState = "visible";
+  for (const resolve of pending) resolve({});
+  await assert.rejects(drive, /clients_not_visible/);
+  assert.equal(context.driveActive, false);
+  const previous = status.textContent;
+  context.noteDriveVisibility();
+  assert.equal(
+    status.textContent,
+    previous,
+    "idle visibility changes do not change lifecycle state",
+  );
+  context.state = {
+    host: { movement_observed: true, projectiles: 1 },
+    guest: { movement_observed: true, projectiles: 1 },
+  };
+  context.send = async () => ({});
+  context.until = async (predicate) => assert.equal(predicate(), true);
+  context.verify = async () => {
+    context.document.visibilityState = "hidden";
+    context.noteDriveVisibility();
+  };
+  await assert.rejects(context.drive(), /page_not_visible/);
+  assert.equal(
+    context.driveActive,
+    false,
+    "visibility lost while reading saves still cannot pass movement",
+  );
+  context.document.visibilityState = "visible";
+  const completed = [];
+  context.verify = async () => completed.push("saves-read");
+  context.check = (name, passed) => {
+    assert.equal(passed, true);
+    completed.push(name);
+  };
+  await context.drive();
+  assert.deepEqual(
+    completed,
+    ["saves-read", "movement-fire-observed"],
+    "declared observation boundary passes only after all guards",
+  );
+});
+
 test("WASM report accepts finite observations, refuses capabilities/profile payloads and does not infer a native commit", () => {
   const base = report();
   assert.deepEqual(validateWasmReport(base), base);
