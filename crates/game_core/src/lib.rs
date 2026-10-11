@@ -13,8 +13,10 @@ mod navigation;
 pub use navigation::{NavigationHud, NavigationTarget};
 mod pixel_assets;
 mod player_presentation;
-mod raicho_fine;
 mod radiation_enemies;
+#[cfg(test)]
+mod raicho_draw_tests;
+mod raicho_fine;
 mod segmented;
 mod shooting_star;
 pub mod universe_map;
@@ -3557,26 +3559,51 @@ impl Game {
                 self.draw_riveter(frame, body, m, *actor, *riveter);
                 continue;
             }
-            frame.push_body_colored_material(
-                body,
-                actor_transform(m, *actor),
-                ACTOR_MATERIAL,
-                |cell, color| {
-                    let color = animate_actor_cell(cell, color, self.cosmetic_time(), lights);
-                    if actor.kind == Kind::Player {
-                        player_presentation::tint(
-                            color,
-                            actor.health,
-                            maximum_player_hull,
-                            recent_player_damage,
-                            self.cosmetic_time(),
-                            self.reduced_motion,
-                        )
-                    } else {
-                        color
-                    }
-                },
-            );
+            let player_tint = |color| {
+                player_presentation::tint(
+                    color,
+                    actor.health,
+                    maximum_player_hull,
+                    recent_player_damage,
+                    self.cosmetic_time(),
+                    self.reduced_motion,
+                )
+            };
+            let coarse_color = |cell, color| {
+                let color = animate_actor_cell(cell, color, self.cosmetic_time(), lights);
+                if actor.kind == Kind::Player {
+                    player_tint(color)
+                } else {
+                    color
+                }
+            };
+            let fine_drawn = actor.kind == Kind::Player
+                && self.profile.campaign.selected_ship == 0
+                && self.profile.identity.as_ref().is_some_and(|identity| {
+                    raicho_fine::append(
+                        frame,
+                        body,
+                        identity.corporation,
+                        raicho_fine::DrawInput {
+                            parent: actor_transform(m, *actor).affine(),
+                            material: ACTOR_MATERIAL,
+                            time: self.cosmetic_time(),
+                            reduced_motion: self.reduced_motion,
+                        },
+                        &mut raicho_fine::Budget::default(),
+                        coarse_color,
+                        |_, color| player_tint(color),
+                    )
+                    .is_ok()
+                });
+            if !fine_drawn {
+                frame.push_body_colored_material(
+                    body,
+                    actor_transform(m, *actor),
+                    ACTOR_MATERIAL,
+                    coarse_color,
+                );
+            }
             if actor.kind == Kind::Player {
                 let glow = (self.cosmetic_time() * 24.0).sin() * 0.5 + 0.5;
                 if self.throttle > 0.03 {
