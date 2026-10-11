@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 804,
+  "revision": 818,
   "name": "Galaxy Royale",
   "phase": "Playable solo slice → content and validation",
-  "updatedAt": "2026-10-11T17:00:09.438Z",
+  "updatedAt": "2026-10-11T17:49:19.228Z",
   "tasks": [
     {
       "id": "studio",
@@ -6948,6 +6948,71 @@
       "revision": 2,
       "createdAt": "2026-10-11T16:03:55.341Z",
       "updatedAt": "2026-10-11T17:00:09.007Z"
+    },
+    {
+      "id": "task-1accfc11",
+      "title": "Refine natural deep space and sports league interface",
+      "description": "Latest user visual feedback: remaining background forms break immersion. Refine coherent galactic disks and spherical planet material; carry the original athletic logo material language into restrained native UI. Native geometry correctness is separate from subjective browser/art approval.",
+      "department": "Art and presentation",
+      "owner": "/root",
+      "status": "complete",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Natural planetary projection and coherent galaxy material keep existing simulation, parallax and cosmetic budgets.",
+          "met": true
+        },
+        {
+          "text": "Neutral metallic sports-league UI remains readable and clipped at wide and compact desktop sizes.",
+          "met": true
+        },
+        {
+          "text": "Root verifies actual WebGPU and WebGL2 normal builds and records exact source plus screenshots.",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Approved art and sports direction",
+          "kind": "note",
+          "details": "Current repository docs/APPROVED_VISUAL_DIRECTION.md names exact retained PAN card and native sports league logo references."
+        },
+        {
+          "label": "Actual integrated scope and validation",
+          "kind": "artifact",
+          "path": "artifacts/space-league-refinement-20261012/README.md"
+        },
+        {
+          "label": "Captured space and neutral sports settings",
+          "kind": "artifact",
+          "path": "artifacts/space-league-refinement-20261012/settings-webgl2-848.jpg"
+        },
+        {
+          "label": "Exact evidence hashes",
+          "kind": "artifact",
+          "path": "artifacts/space-league-refinement-20261012/manifest.json"
+        },
+        {
+          "label": "Actual integrated scope and validation",
+          "kind": "artifact",
+          "path": "artifacts/space-league-refinement-20261012/README.md"
+        },
+        {
+          "label": "Captured space and neutral sports settings",
+          "kind": "artifact",
+          "path": "artifacts/space-league-refinement-20261012/settings-webgl2-848.jpg"
+        },
+        {
+          "label": "Exact evidence hashes",
+          "kind": "artifact",
+          "path": "artifacts/space-league-refinement-20261012/manifest.json"
+        }
+      ],
+      "blocker": "",
+      "revision": 3,
+      "createdAt": "2026-10-11T17:28:15.814Z",
+      "updatedAt": "2026-10-11T17:49:19.076Z"
     }
   ],
   "reviews": [
@@ -8638,6 +8703,45 @@
           "label": "Actual Root RTC cleanup",
           "kind": "artifact",
           "path": "artifacts/collection-coop-20261012/rtc-final.txt"
+        }
+      ]
+    },
+    {
+      "id": "review-d9f3d2fd",
+      "title": "Natural space and league UI — actual asynchronous visual review",
+      "body": "Root rejected the leaf-like disk and bilateral cloud lanes, authored spherical planet material, integrated the refinements and performed normal WebGPU/WebGL2 captures. Engine authored coherent stellar population and unequal nebular billows. Production identified low-luminance tinted backing quantization and authored neutral sports fittings. Gameplay independently reviewed source, native budgets and five actual retained Root WebGPU captures. Compact lower-control access was separately confirmed by Root WebGL2 screenshot. No fabricated meeting, motion/performance acceptance or user art approval is claimed.",
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T17:49:10.368Z",
+      "participants": [
+        "/root",
+        "/root/engine_research",
+        "/root/production_research",
+        "/root/gameplay_design"
+      ],
+      "taskIds": [
+        "task-1accfc11"
+      ],
+      "evidence": [
+        {
+          "label": "Independent planet review",
+          "kind": "artifact",
+          "path": "artifacts/space-league-refinement-20261012/planet-review.md"
+        },
+        {
+          "label": "Independent UI review",
+          "kind": "artifact",
+          "path": "artifacts/space-league-refinement-20261012/sports-ui-review.md"
+        },
+        {
+          "label": "Independent galaxy/nebula review",
+          "kind": "artifact",
+          "path": "artifacts/space-league-refinement-20261012/galaxy-nebula-review.md"
+        },
+        {
+          "label": "Actual capture inspection",
+          "kind": "artifact",
+          "path": "artifacts/space-league-refinement-20261012/retained-capture-review.md"
         }
       ]
     }
@@ -10981,6 +11085,80 @@
       ],
       "url": "http://127.0.0.1:4173/",
       "knownIssues": "Co-op browser adapter/replicas, owned guest loadouts and durable reward ownership are pending. Host-end guest may report native SCTP failure; cleanup succeeds, friendly wording remains. Compact collection navigation scrolls horizontally; human readability and moving combat need separate playtest. Audio unchanged."
+    },
+    {
+      "id": "build-240f7409",
+      "title": "Natural space and sports UI normal dual-backend build — dacaf7a",
+      "body": "Actual combined normal build and browser visual checks, with original logs and exact tested runtime retained.",
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T17:49:19.103Z",
+      "revision": "dacaf7a47bfba6cf849fa236e8596e80c951c473",
+      "evidence": [
+        {
+          "label": "Native checks",
+          "kind": "artifact",
+          "path": "artifacts/space-league-refinement-20261012/native-pass.log"
+        },
+        {
+          "label": "Earlier repaired count failure",
+          "kind": "artifact",
+          "path": "artifacts/space-league-refinement-20261012/native-earlier-count-failure.log"
+        },
+        {
+          "label": "Shell checks",
+          "kind": "artifact",
+          "path": "artifacts/space-league-refinement-20261012/shell.log"
+        },
+        {
+          "label": "Clippy",
+          "kind": "artifact",
+          "path": "artifacts/space-league-refinement-20261012/clippy.log"
+        },
+        {
+          "label": "Build",
+          "kind": "artifact",
+          "path": "artifacts/space-league-refinement-20261012/build.log"
+        },
+        {
+          "label": "Compiled identity",
+          "kind": "artifact",
+          "path": "artifacts/space-league-refinement-20261012/tested-build.json"
+        },
+        {
+          "label": "Browser scope",
+          "kind": "artifact",
+          "path": "artifacts/space-league-refinement-20261012/README.md"
+        }
+      ],
+      "checks": [
+        {
+          "name": "Native 745 passed / 5 explicit exporters ignored",
+          "result": "pass"
+        },
+        {
+          "name": "Shell 469 passed / 1 existing Windows skip",
+          "result": "pass"
+        },
+        {
+          "name": "Strict workspace/all-target Clippy",
+          "result": "pass"
+        },
+        {
+          "name": "Normal dual-WASM, TypeScript, game/PWA and Studio build",
+          "result": "pass"
+        },
+        {
+          "name": "Actual WebGPU/WebGL2 space views and wide/compact settings",
+          "result": "pass"
+        },
+        {
+          "name": "Physical phone and 30-minute performance soak",
+          "result": "not_run"
+        }
+      ],
+      "url": "http://127.0.0.1:4173/",
+      "knownIssues": "Stills do not establish motion/performance or subjective full art approval. Co-op browser integration remains pending."
     }
   ],
   "feedback": [],
@@ -19024,6 +19202,146 @@
       "author": "Producer",
       "source": "Actual integrated source, author/reviewer handoffs and Root CUA observations through fb45246",
       "createdAt": "2026-10-11T17:00:09.438Z"
+    },
+    {
+      "id": "1db5564f-60d3-4daa-ac0c-0fa23694ee84",
+      "revision": 805,
+      "kind": "task.create",
+      "itemId": "task-1accfc11",
+      "title": "Refine natural deep space and sports league interface",
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T17:28:15.814Z"
+    },
+    {
+      "id": "c561939d-d0c4-4b3e-adf6-602240e2748b",
+      "revision": 806,
+      "kind": "run",
+      "itemId": "run-3ed556c1",
+      "title": "engine_research · running",
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T17:28:15.847Z"
+    },
+    {
+      "id": "45b75ba9-df3b-40ee-9c45-d1e206c407fd",
+      "revision": 807,
+      "kind": "run",
+      "itemId": "run-6d9b8154",
+      "title": "production_research · running",
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T17:28:15.878Z"
+    },
+    {
+      "id": "2ff6c4f5-ad3c-4c81-bd7e-51fff7159b18",
+      "revision": 808,
+      "kind": "run",
+      "itemId": "run-d3d2f270",
+      "title": "gameplay_design · running",
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T17:28:15.896Z"
+    },
+    {
+      "id": "c1eaec88-d800-4930-9b84-b1e15b6629b3",
+      "revision": 809,
+      "kind": "run",
+      "itemId": "run-72fde53b",
+      "title": "root · running",
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T17:28:15.923Z"
+    },
+    {
+      "id": "571c21d4-03b6-406a-9829-109e5340be3a",
+      "revision": 810,
+      "kind": "task.update",
+      "itemId": "task-1accfc11",
+      "title": "Refine natural deep space and sports league interface",
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T17:49:10.341Z"
+    },
+    {
+      "id": "f0536209-b381-4184-bf4a-19d27942821e",
+      "revision": 811,
+      "kind": "review",
+      "itemId": "review-d9f3d2fd",
+      "title": "Natural space and league UI — actual asynchronous visual review",
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T17:49:10.368Z"
+    },
+    {
+      "id": "fd3311c3-4544-402d-a2da-588c431d118b",
+      "revision": 812,
+      "kind": "task.update",
+      "itemId": "task-1accfc11",
+      "title": "Refine natural deep space and sports league interface",
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T17:49:19.076Z"
+    },
+    {
+      "id": "653e70e3-b560-48e0-b72e-7f28a758f1c5",
+      "revision": 813,
+      "kind": "build",
+      "itemId": "build-240f7409",
+      "title": "Natural space and sports UI normal dual-backend build — dacaf7a",
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T17:49:19.103Z"
+    },
+    {
+      "id": "515ae256-635a-47c7-8c34-239e29537892",
+      "revision": 814,
+      "kind": "run",
+      "itemId": "run-d71f2b77",
+      "title": "engine_research · completed",
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T17:49:19.134Z"
+    },
+    {
+      "id": "ad898d0c-6154-4ed5-8bed-86a230f3ea0f",
+      "revision": 815,
+      "kind": "run",
+      "itemId": "run-d7d5ef0a",
+      "title": "production_research · completed",
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T17:49:19.151Z"
+    },
+    {
+      "id": "77c0242c-9b3b-4e99-af17-43f1bd1aecd2",
+      "revision": 816,
+      "kind": "run",
+      "itemId": "run-39051229",
+      "title": "gameplay_design · completed",
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T17:49:19.180Z"
+    },
+    {
+      "id": "dd112ee0-5f39-4207-8714-8fca8e2f9043",
+      "revision": 817,
+      "kind": "run",
+      "itemId": "run-9b6ab67f",
+      "title": "root · completed",
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T17:49:19.195Z"
+    },
+    {
+      "id": "95bf31ea-fbf4-4253-9ea1-e67019e97f90",
+      "revision": 818,
+      "kind": "run",
+      "itemId": "run-b8dda5ad",
+      "title": "spark-audit · interrupted",
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T17:49:19.228Z"
     }
   ],
   "runRecords": [
@@ -26207,6 +26525,205 @@
       "author": "Producer",
       "source": "Actual integrated source, author/reviewer handoffs and Root CUA observations through fb45246",
       "createdAt": "2026-10-11T17:00:09.438Z"
+    },
+    {
+      "id": "run-3ed556c1",
+      "title": "engine_research · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "engine_research",
+      "state": "running",
+      "observedAt": "2026-10-11T17:28:15.829Z",
+      "taskIds": [
+        "task-1accfc11"
+      ],
+      "summary": "Finished isolated co-op publication source; now refining native coherent galaxy disk and knots on a separate art branch. No new co-op browser acceptance.",
+      "evidence": [
+        {
+          "label": "Actual source and instruction boundary",
+          "kind": "note",
+          "details": "Finished isolated co-op publication source; now refining native coherent galaxy disk and knots on a separate art branch. No new co-op browser acceptance."
+        }
+      ],
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T17:28:15.847Z"
+    },
+    {
+      "id": "run-6d9b8154",
+      "title": "production_research · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "production_research",
+      "state": "running",
+      "observedAt": "2026-10-11T17:28:15.857Z",
+      "taskIds": [
+        "task-1accfc11"
+      ],
+      "summary": "Finished isolated co-op panel and draft review; now refining graphite/platinum/gold sports UI chrome on a separate art branch.",
+      "evidence": [
+        {
+          "label": "Actual source and instruction boundary",
+          "kind": "note",
+          "details": "Finished isolated co-op panel and draft review; now refining graphite/platinum/gold sports UI chrome on a separate art branch."
+        }
+      ],
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T17:28:15.878Z"
+    },
+    {
+      "id": "run-d3d2f270",
+      "title": "gameplay_design · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "gameplay_design",
+      "state": "running",
+      "observedAt": "2026-10-11T17:28:15.892Z",
+      "taskIds": [
+        "task-1accfc11"
+      ],
+      "summary": "Finishing bounded co-op controller freeze; assigned independent source review of planets and the two visual candidates.",
+      "evidence": [
+        {
+          "label": "Actual source and instruction boundary",
+          "kind": "note",
+          "details": "Finishing bounded co-op controller freeze; assigned independent source review of planets and the two visual candidates."
+        }
+      ],
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T17:28:15.896Z"
+    },
+    {
+      "id": "run-72fde53b",
+      "title": "root · running",
+      "agentId": "/root",
+      "agentLabel": "root",
+      "state": "running",
+      "observedAt": "2026-10-11T17:28:15.917Z",
+      "taskIds": [
+        "task-1accfc11"
+      ],
+      "summary": "Implemented spherical planet material projection at7a22324;30 regional tests pass,1 explicit exporter ignored. Current preview remains previously tested e333 until the combined visual candidate is built.",
+      "evidence": [
+        {
+          "label": "Actual source and instruction boundary",
+          "kind": "note",
+          "details": "Implemented spherical planet material projection at7a22324;30 regional tests pass,1 explicit exporter ignored. Current preview remains previously tested e333 until the combined visual candidate is built."
+        }
+      ],
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T17:28:15.923Z"
+    },
+    {
+      "id": "run-d71f2b77",
+      "title": "engine_research · completed",
+      "agentId": "/root/engine_research",
+      "agentLabel": "engine_research",
+      "state": "completed",
+      "observedAt": "2026-10-11T17:49:19.115Z",
+      "taskIds": [
+        "task-1accfc11"
+      ],
+      "summary": "Completed the bounded natural-space/sports-UI assignment. Root browser execution and independent specialist review attribution are retained; overall game development continues.",
+      "evidence": [
+        {
+          "label": "Actual bounded result",
+          "kind": "artifact",
+          "path": "artifacts/space-league-refinement-20261012/README.md"
+        }
+      ],
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T17:49:19.134Z"
+    },
+    {
+      "id": "run-d7d5ef0a",
+      "title": "production_research · completed",
+      "agentId": "/root/production_research",
+      "agentLabel": "production_research",
+      "state": "completed",
+      "observedAt": "2026-10-11T17:49:19.148Z",
+      "taskIds": [
+        "task-1accfc11"
+      ],
+      "summary": "Completed the bounded natural-space/sports-UI assignment. Root browser execution and independent specialist review attribution are retained; overall game development continues.",
+      "evidence": [
+        {
+          "label": "Actual bounded result",
+          "kind": "artifact",
+          "path": "artifacts/space-league-refinement-20261012/README.md"
+        }
+      ],
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T17:49:19.151Z"
+    },
+    {
+      "id": "run-39051229",
+      "title": "gameplay_design · completed",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "gameplay_design",
+      "state": "completed",
+      "observedAt": "2026-10-11T17:49:19.168Z",
+      "taskIds": [
+        "task-1accfc11"
+      ],
+      "summary": "Completed the bounded natural-space/sports-UI assignment. Root browser execution and independent specialist review attribution are retained; overall game development continues.",
+      "evidence": [
+        {
+          "label": "Actual bounded result",
+          "kind": "artifact",
+          "path": "artifacts/space-league-refinement-20261012/README.md"
+        }
+      ],
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T17:49:19.180Z"
+    },
+    {
+      "id": "run-9b6ab67f",
+      "title": "root · completed",
+      "agentId": "/root",
+      "agentLabel": "root",
+      "state": "completed",
+      "observedAt": "2026-10-11T17:49:19.191Z",
+      "taskIds": [
+        "task-1accfc11"
+      ],
+      "summary": "Completed the bounded natural-space/sports-UI assignment. Root browser execution and independent specialist review attribution are retained; overall game development continues.",
+      "evidence": [
+        {
+          "label": "Actual bounded result",
+          "kind": "artifact",
+          "path": "artifacts/space-league-refinement-20261012/README.md"
+        }
+      ],
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T17:49:19.195Z"
+    },
+    {
+      "id": "run-b8dda5ad",
+      "title": "spark-audit · interrupted",
+      "agentId": "/root/spark-audit",
+      "agentLabel": "spark-audit",
+      "state": "interrupted",
+      "observedAt": "2026-10-11T17:49:19.211Z",
+      "taskIds": [
+        "task-05dd95cd",
+        "task-7e8e0a50"
+      ],
+      "summary": "Root stopped the owned read-only audit when co-op work was parked for visual delivery. No final report or accepted validation was produced.",
+      "evidence": [
+        {
+          "label": "Actual interruption",
+          "kind": "artifact",
+          "path": "artifacts/space-league-refinement-20261012/spark-interrupted.txt"
+        }
+      ],
+      "author": "Root",
+      "source": "actual-development",
+      "createdAt": "2026-10-11T17:49:19.228Z"
     }
   ],
   "phaseDescription": "Desktop-first Rust/WASM solo game and local Studio are implemented. Reviewed occupied-cell art, reproducible conversion, responsive native settings/icons and minimap, strict GitHub integration gates and source-backed Dev Bible are integrated. Natural campaign balance, human listening, owner-private update lifecycle and physical phones remain separate pending gates."

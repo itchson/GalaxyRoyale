@@ -1,0 +1,22 @@
+Browser tab: 9, Title: "Galaxy Royale", URL: "http://league-final.localhost:4173/?qa=1&renderer=webgl2".
+1 AXWebArea Galaxy Royale, URL: league-final.localhost:4173/?qa=1&renderer=webgl2
+	2 image Description: Galaxy Royale game universe, ID: universe
+	3 container GALAXY ROYALE // CONSOLE, ID: debug-console
+		4 heading GALAXY ROYALE // CONSOLE, Value: 2, ID: console-title
+			5 text GALAXY ROYALE // CONSOLE
+		6 text HELP / STATS / SCENE <NAME> / CLEAR / ` CLOSE
+		7 container Description: Console output, ID: console-output
+			9 text > warp -843.7285 5313.4268
+			10 text WARP -843.7285, 5313.4268 / QA combat and site rewards disabled. Run ended; carried materials discarded; active duel forfeited.
+			11 text > stats
+			12 text WEBGL2 / 1 FPS / p95 0.00 ms
+			13 text 0 quads / 41 entities / 0 particles
+			14 text POSITION -843.7, 5313.4
+			15 text Haven Expanse / Outer reach · Tier 3 / danger 3
+			16 text HULL 100/100 / SHIELD 0
+			17 text ZOOM 1.00 / WORLD 533 x 300 / UI 533 x 300
+			18 text RAICHO LV 1 / XP 8 / CARGO 0/16
+			19 text LAST BOSS UI NONE
+		8 text field (settable) Description: Console command, ID: console-input
+
+The focused UI element is 8 text field (settable) Description: Console command, ID: console-input
