@@ -46,6 +46,7 @@ interface FlightView {
   title: HTMLElement;
   progress: HTMLElement;
   license: HTMLElement;
+  fullLicense: HTMLElement;
   affinity: HTMLElement;
   stats: HTMLElement[];
   slots: HTMLElement[];
@@ -55,8 +56,10 @@ interface FlightView {
   points: HTMLElement;
   namedCargo: HTMLElement;
   namedStash: HTMLElement;
+  details: HTMLElement;
 }
 const views = new WeakMap<HTMLElement, FlightView>();
+let nextDetailsId = 0;
 const categories = ["OFFENSE", "DEFENSE", "PASSIVE"];
 const colors = ["offense", "defense", "passive"];
 
@@ -79,14 +82,15 @@ function createView(target: HTMLElement): FlightView {
   const title = element("h3");
   const progress = element("p");
   const license = element("p", "flight-license");
+  const fullLicense = element("p", "flight-license-detail");
   const affinity = element("p", "flight-affinity");
   affinity.hidden = true;
-  heading.append(title, license, progress, affinity);
+  heading.append(title, license, progress);
   identity.append(portrait, heading, icon);
   const vitals = element("section", "flight-status-stats");
   vitals.setAttribute("aria-label", "Current effective RAICHO statistics");
   const stats = Array.from({ length: 7 }, () => element("p"));
-  vitals.append(...stats);
+  vitals.append(...stats.slice(0, 2));
   const abilities = element("section", "flight-status-abilities");
   abilities.setAttribute("aria-label", "Automatic ability slots");
   const slots = categories.map((_, index) => {
@@ -107,26 +111,57 @@ function createView(target: HTMLElement): FlightView {
   const points = element("p");
   const namedCargo = element("p");
   const namedStash = element("p");
-  inventory.append(
-    cargo,
+  inventory.append(cargo, points);
+  const details = element("section", "flight-status-details");
+  details.id = `flight-status-details-${++nextDetailsId}`;
+  details.hidden = true;
+  details.setAttribute(
+    "aria-label",
+    "Detailed RAICHO statistics and inventory",
+  );
+  const detailStats = element("div", "flight-status-detail-stats");
+  detailStats.append(...stats.slice(2));
+  const detailInventory = element("div", "flight-status-detail-inventory");
+  detailInventory.append(
     tiers,
     namedCargo,
     stash,
     namedStash,
-    points,
     element(
       "p",
       "flight-status-note",
       "HOME BANKS CARGO / DEATH, RESTART, TITLE OR RELOAD LOSES CARGO",
     ),
   );
-  target.replaceChildren(identity, vitals, abilities, inventory);
+  details.append(fullLicense, affinity, detailStats, detailInventory);
+  const toggle = element(
+    "button",
+    "flight-status-toggle",
+    "DETAILS",
+  ) as HTMLButtonElement;
+  toggle.type = "button";
+  toggle.setAttribute("aria-expanded", "false");
+  toggle.setAttribute("aria-controls", details.id);
+  toggle.addEventListener("click", () => {
+    details.hidden = !details.hidden;
+    toggle.setAttribute("aria-expanded", String(!details.hidden));
+    toggle.textContent = details.hidden ? "DETAILS" : "HIDE DETAILS";
+  });
+  target.replaceChildren(
+    identity,
+    vitals,
+    abilities,
+    inventory,
+    toggle,
+    details,
+  );
   const view = {
     portrait,
     icon,
     title,
     progress,
     license,
+    fullLicense,
     affinity,
     stats,
     slots,
@@ -136,6 +171,7 @@ function createView(target: HTMLElement): FlightView {
     points,
     namedCargo,
     namedStash,
+    details,
   };
   views.set(target, view);
   return view;
@@ -144,10 +180,13 @@ function number(value: number, decimals = 0): string {
   return Number.isFinite(value) ? value.toFixed(decimals) : "--";
 }
 function tiers(values: number[]): string {
-  return Array.from(
-    { length: 5 },
-    (_, index) => `T${index + 1} ${number(values[index])}`,
-  ).join(" / ");
+  return (
+    Array.from({ length: 5 }, (_, index) =>
+      values[index] === 0 ? "" : `T${index + 1} ${number(values[index])}`,
+    )
+      .filter(Boolean)
+      .join(" / ") || "NONE"
+  );
 }
 
 /** Displays authoritative HUD values. Stable nodes preserve live-menu scroll and focus. */
@@ -197,12 +236,18 @@ export function paintFlightMenu(
   write(
     view.license,
     hud.identity
+      ? `LICENSE ${hud.identity.short_designation}`
+      : "LEGACY LICENSE",
+  );
+  write(
+    view.fullLicense,
+    hud.identity
       ? `${hud.identity.designation} / ${hud.identity.corporation_role}`
       : "LEGACY PILOT LICENSE",
   );
   write(
     view.progress,
-    `LV ${number(hud.ship_level)} / XP ${number(hud.ship_xp)} / ${hud.ship_level >= 100 ? "MAX LEVEL" : `NEXT ${number(hud.ship_next_xp)}`}`,
+    `LV ${number(hud.ship_level)} / XP ${number(hud.ship_xp)}${hud.ship_level >= 100 ? " / MAX LEVEL" : `/${number(hud.ship_next_xp)}`}`,
   );
   const stats = hud.ship_stats;
   const affinity = stats.affinity;
@@ -231,22 +276,28 @@ export function paintFlightMenu(
     const slot = hud.loadout[index];
     write(
       node,
-      `${categories[index]} / ${slot ? `${slot.name} / ACTIVE R${number(slot.effective_rank)}` : "EMPTY"}`,
+      `${categories[index]} / ${slot ? `${slot.name} / R${number(slot.effective_rank)}` : "EMPTY"}`,
     );
   });
   write(
     view.cargo,
-    `CARGO ${number(hud.cargo_materials)} / ${number(hud.cargo_capacity)} / AT RISK`,
+    `CARGO ${number(hud.cargo_materials)}/${number(hud.cargo_capacity)}${hud.cargo_materials > 0 ? " / AT RISK" : ""}`,
   );
-  write(view.tiers, tiers(hud.material_cargo));
+  write(view.tiers, `CARRIED / ${tiers(hud.material_cargo)}`);
   write(view.stash, `BANKED / ${tiers(hud.material_stash)}`);
   for (const [node, counts, label] of [
     [view.namedCargo, hud.material_training_cargo, "CARRIED T1 PARTS"],
     [view.namedStash, hud.material_training_stash, "BANKED T1 PARTS"],
   ] as const) {
-    const value = counts?.some((n) => n > 0)
-      ? `${label} / PHASE SILICATE ${number(counts[0])} / IRON FILAMENT ${number(counts[1])} / COOLANT KESSHO ${number(counts[2])}`
-      : "";
+    const parts =
+      counts?.flatMap((count, index) =>
+        count > 0
+          ? [
+              `${["PHASE SILICATE", "IRON FILAMENT", "COOLANT KESSHO"][index]} ${number(count)}`,
+            ]
+          : [],
+      ) ?? [];
+    const value = parts.length ? `${label} / ${parts.join(" / ")}` : "";
     if (node.hidden !== !value) {
       node.hidden = !value;
       changed = true;
@@ -255,7 +306,7 @@ export function paintFlightMenu(
   }
   write(
     view.points,
-    `POINTS / OFF ${number(hud.currency[0])} / DEF ${number(hud.currency[1])} / PASS ${number(hud.currency[2])}`,
+    `POINTS OFF ${number(hud.currency[0])} / DEF ${number(hud.currency[1])} / PASS ${number(hud.currency[2])}`,
   );
   return changed;
 }

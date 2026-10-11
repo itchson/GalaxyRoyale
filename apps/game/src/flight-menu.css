@@ -37,8 +37,8 @@
 }
 .flight-license-portrait {
   flex: 0 0 auto;
-  width: calc(72px * var(--ui-scale, 1));
-  height: calc(96px * var(--ui-scale, 1));
+  width: calc(36px * var(--ui-scale, 1));
+  height: calc(48px * var(--ui-scale, 1));
 }
 .flight-status .campaign-ship {
   flex: 0 0 auto;
@@ -62,9 +62,6 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: calc(3px * var(--ui-scale, 1)) calc(8px * var(--ui-scale, 1));
 }
-.flight-status-stats > :nth-child(n + 5) {
-  grid-column: 1 / -1;
-}
 .flight-status .upgrade-category {
   display: block;
   margin: 0;
@@ -76,11 +73,22 @@
   margin-top: calc(3px * var(--ui-scale, 1));
   color: var(--muted);
 }
+.flight-status-toggle {
+  min-height: var(--ui-hit);
+  padding: calc(3px * var(--ui-scale, 1)) calc(8px * var(--ui-scale, 1));
+  font-size: var(--ui-text);
+  max-width: 100%;
+}
+.flight-status-details {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.flight-status-details > * + *,
+.flight-status-detail-stats > * + *,
+.flight-status-detail-inventory > * + * {
+  margin-top: calc(3px * var(--ui-scale, 1));
+}
 @media (max-width: 480px) {
-  .flight-license-portrait {
-    width: calc(48px * var(--ui-scale, 1));
-    height: calc(64px * var(--ui-scale, 1));
-  }
   .flight-status-stats {
     grid-template-columns: minmax(0, 1fr);
   }

@@ -37,6 +37,8 @@ function fixture() {
     children = [];
     attributes = {};
     className = "";
+    hidden = false;
+    listeners = {};
     scrollTop = 0;
     value = "";
     dataset = new Proxy(
@@ -77,6 +79,13 @@ function fixture() {
     focus() {
       document.activeElement = this;
     }
+    addEventListener(type, listener) {
+      (this.listeners[type] ??= []).push(listener);
+    }
+    click() {
+      for (const listener of this.listeners.click ?? [])
+        listener({ target: this });
+    }
   }
   document.createElement = (tagName) =>
     Object.assign(new Element(), { tagName });
@@ -101,6 +110,20 @@ function fixture() {
 }
 function flatten(node) {
   return [node, ...node.children.flatMap(flatten)];
+}
+function visibleText(node) {
+  if (node.hidden || node.getAttribute("aria-hidden") === "true") return "";
+  return node.value + node.children.map(visibleText).join(" ");
+}
+function detailsControl(target) {
+  return flatten(target).find(
+    (node) => node.className === "flight-status-toggle",
+  );
+}
+function detailsSection(target) {
+  return flatten(target).find(
+    (node) => node.className === "flight-status-details",
+  );
 }
 function hud() {
   return {
@@ -169,6 +192,7 @@ test("issued license reuses the selected native appearance without resetting liv
     corporation: "hugo",
     sub_corporation: "pan",
     designation: "TALO-HUGO-PAN-0123456789ABCDEF",
+    short_designation: "THP#0123456789ABCDEF",
     corporation_role: "Defensive",
   };
   f.paint(f.target, data);
@@ -221,6 +245,7 @@ test("status affinity follows Rust hull metadata rather than the pilot, sponsor 
     corporation: "pan",
     sub_corporation: "hugo",
     designation: "TALO-PAN-HUGO-0123456789ABCDEF",
+    short_designation: "TPH#0123456789ABCDEF",
     corporation_role: "Passive",
   };
   data.campaign.selected_ship = 2;
@@ -280,7 +305,7 @@ test("live status displays selected-ship XP, effective stats, slots and actual c
   const text = f.target.textContent;
   for (const expected of [
     "HAVEN SCOUT",
-    "LV 1 / XP 7 / NEXT 20",
+    "LV 1 / XP 7/20",
     "HULL 73 / 100",
     "SHIELD 4 / 12",
     "SPEED 38 / 100 U/S",
@@ -288,13 +313,13 @@ test("live status displays selected-ship XP, effective stats, slots and actual c
     "PRIMARY 18.0 DMG / 5.5/S",
     "HULL REPAIR 0.4/S AFTER 5S NO HIT",
     "SHIELD RECHARGE 1.8/S AFTER 4S NO HIT",
-    "OFFENSE / PULSE LENS / ACTIVE R1",
+    "OFFENSE / PULSE LENS / R1",
     "DEFENSE / EMPTY",
-    "PASSIVE / FLUX DRIVE / ACTIVE R1",
-    "CARGO 3 / 16 / AT RISK",
-    "T1 2 / T2 1 / T3 0 / T4 0 / T5 0",
-    "BANKED / T1 8 / T2 2 / T3 0 / T4 0 / T5 1",
-    "POINTS / OFF 9 / DEF 4 / PASS 2",
+    "PASSIVE / FLUX DRIVE / R1",
+    "CARGO 3/16 / AT RISK",
+    "CARRIED / T1 2 / T2 1",
+    "BANKED / T1 8 / T2 2 / T5 1",
+    "POINTS OFF 9 / DEF 4 / PASS 2",
   ])
     assert.ok(text.includes(expected), expected);
   const icon = flatten(f.target).find(
@@ -305,16 +330,142 @@ test("live status displays selected-ship XP, effective stats, slots and actual c
   assert.equal(data.loadout[0].rank, 5); // Shared owned rank is not rewritten by its effective cap.
 });
 
+test("compact default shows the short license and essentials while retaining full detail behind an accessible button", () => {
+  const f = fixture(),
+    data = hud();
+  data.identity = {
+    kind: "dora",
+    corporation: "pan",
+    sub_corporation: "renko",
+    designation: "DORA-PAN-RENKO-7F8A52DAECE2ED52",
+    short_designation: "APR#7F8A52DAECE2ED52",
+    corporation_role: "Passive",
+  };
+  data.material_training_cargo = [1, 0, 0];
+  data.material_training_stash = [2, 0, 0];
+  f.paint(f.target, data);
+  const toggle = detailsControl(f.target),
+    details = detailsSection(f.target);
+  assert.equal(toggle.tagName, "button");
+  assert.equal(toggle.type, "button");
+  assert.equal(toggle.getAttribute("aria-expanded"), "false");
+  assert.equal(toggle.getAttribute("aria-controls"), details.id);
+  assert.equal(details.hidden, true);
+  const primary = visibleText(f.target);
+  for (const text of [
+    "LICENSE APR#7F8A52DAECE2ED52",
+    "LV 1 / XP 7/20",
+    "HULL 73 / 100",
+    "SHIELD 4 / 12",
+    "OFFENSE / PULSE LENS / R1",
+    "DEFENSE / EMPTY",
+    "PASSIVE / FLUX DRIVE / R1",
+    "CARGO 3/16 / AT RISK",
+    "POINTS OFF 9 / DEF 4 / PASS 2",
+    "DETAILS",
+  ])
+    assert.ok(primary.includes(text), text);
+  for (const text of [
+    data.identity.designation,
+    "ACCEL",
+    "PRIMARY",
+    "RECHARGE",
+    "BANKED",
+    "PHASE SILICATE",
+    "T3 0",
+  ])
+    assert.ok(
+      !primary.includes(text),
+      `${text} should not crowd the default view`,
+    );
+  toggle.click();
+  assert.equal(toggle.getAttribute("aria-expanded"), "true");
+  assert.equal(details.hidden, false);
+  for (const text of [
+    data.identity.designation,
+    "ACCEL 260",
+    "PRIMARY 18.0",
+    "SHIELD RECHARGE 1.8",
+    "BANKED / T1 8 / T2 2 / T5 1",
+    "PHASE SILICATE 1",
+    "PHASE SILICATE 2",
+    "TITLE OR RELOAD LOSES CARGO",
+  ])
+    assert.ok(visibleText(f.target).includes(text), text);
+  assert.doesNotMatch(
+    visibleText(f.target),
+    /T[1-5] 0|IRON FILAMENT 0|COOLANT KESSHO 0/,
+  );
+});
+
+test("Details expansion and button focus persist through real live HUD paints, ship changes and nullable affinity", () => {
+  const f = fixture(),
+    data = hud();
+  data.ship_stats.affinity = {
+    corporation: "renko",
+    slot: 0,
+    active: true,
+    source: "roster_manufacturer",
+  };
+  f.paint(f.target, data);
+  const toggle = detailsControl(f.target),
+    details = detailsSection(f.target),
+    nodes = flatten(f.target);
+  toggle.focus();
+  toggle.click();
+  f.target.scrollTop = 83;
+  data.hull = 42;
+  data.campaign.selected_ship = 9;
+  data.ship_level = 2;
+  data.ship_stats.affinity = null;
+  f.paint(f.target, data);
+  assert.equal(details.hidden, false);
+  assert.equal(toggle.getAttribute("aria-expanded"), "true");
+  assert.equal(toggle.textContent, "HIDE DETAILS");
+  assert.deepEqual(flatten(f.target), nodes);
+  assert.equal(f.document.activeElement, toggle);
+  assert.equal(f.target.scrollTop, 83);
+  assert.match(visibleText(f.target), /SOVEREIGN.*HULL 42/);
+  assert.doesNotMatch(visibleText(f.target), /AFFINITY/);
+  f.resetWrites();
+  assert.equal(f.paint(f.target, structuredClone(data)), false);
+  assert.equal(f.writes(), 0);
+  toggle.click();
+  assert.equal(details.hidden, true);
+  assert.equal(toggle.getAttribute("aria-expanded"), "false");
+  assert.doesNotMatch(visibleText(f.target), /PRIMARY|BANKED/);
+  assert.equal(f.document.activeElement, toggle);
+  assert.equal(f.target.scrollTop, 83);
+  const other = fixture();
+  other.paint(other.target, data);
+  assert.equal(detailsSection(other.target).hidden, true); // No global expanded state leaks to another view.
+});
+
+test("empty cargo has no risk warning and its zero-tier detail remains explicit without repetitive rows", () => {
+  const f = fixture(),
+    data = hud();
+  data.cargo_materials = 0;
+  data.material_cargo = [0, 0, 0, 0, 0];
+  data.material_stash = [0, 0, 0, 0, 0];
+  f.paint(f.target, data);
+  assert.match(visibleText(f.target), /CARGO 0\/16/);
+  assert.doesNotMatch(visibleText(f.target), /AT RISK/);
+  detailsControl(f.target).click();
+  assert.match(visibleText(f.target), /CARRIED \/ NONE/);
+  assert.match(visibleText(f.target), /BANKED \/ NONE/);
+  assert.doesNotMatch(visibleText(f.target), /T[1-5] 0/);
+});
+
 test("named T1 inventory is shown inside existing totals and clears without recreating the menu", () => {
   const f = fixture();
   const data = hud();
   data.material_training_cargo = [1, 0, 1];
   data.material_training_stash = [2, 3, 3];
   f.paint(f.target, data);
-  assert.ok(f.target.textContent.includes("CARGO 3 / 16 / AT RISK"));
+  assert.ok(f.target.textContent.includes("CARGO 3/16 / AT RISK"));
   assert.ok(
     f.target.textContent.includes(
-      "CARRIED T1 PARTS / PHASE SILICATE 1 / IRON FILAMENT 0 / COOLANT KESSHO 1",
+      "CARRIED T1 PARTS / PHASE SILICATE 1 / COOLANT KESSHO 1",
     ),
   );
   assert.ok(
@@ -331,7 +482,7 @@ test("named T1 inventory is shown inside existing totals and clears without recr
   assert.equal(f.paint(f.target, data), true);
   assert.deepEqual(flatten(f.target), nodes);
   assert.ok(!f.target.textContent.includes("T1 PARTS"));
-  assert.ok(f.target.textContent.includes("CARGO 3 / 16 / AT RISK"));
+  assert.ok(f.target.textContent.includes("CARGO 3/16 / AT RISK"));
 });
 
 test("identical or sub-display-resolution live readings perform zero DOM writes", () => {
@@ -361,7 +512,7 @@ test("changed values update stable nodes while retaining scroll and action focus
   assert.deepEqual(flatten(f.target), nodes);
   assert.equal(f.target.scrollTop, 87);
   assert.equal(f.document.activeElement, f.externalButton);
-  assert.ok(f.target.textContent.includes("ACTIVE R2"));
+  assert.ok(f.target.textContent.includes("PULSE LENS / R2"));
 });
 
 test("ship switches use the new ship XP and exact shared icon mapping, including max-level caption", () => {
