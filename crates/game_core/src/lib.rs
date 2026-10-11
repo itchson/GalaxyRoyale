@@ -7,6 +7,9 @@ mod biome_enemies;
 mod boss_assets;
 pub mod bosses;
 pub mod campaign;
+#[cfg(test)]
+mod component_tests;
+pub mod components;
 mod dock_facilities;
 mod isotope_scar;
 mod navigation;
@@ -73,8 +76,7 @@ const ACTOR_MATERIAL: PixelMaterial = PixelMaterial {
 /// Practical global-f32 extent until chunk-local simulation is implemented.
 const WORLD_LIMIT: f32 = 1_000_000.0;
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
-#[serde(default)]
+#[derive(Clone, Debug, Serialize)]
 pub struct Profile {
     pub schema_version: u32,
     pub revision: u64,
@@ -98,7 +100,7 @@ pub struct Profile {
 impl Default for Profile {
     fn default() -> Self {
         Self {
-            schema_version: 6,
+            schema_version: components::SCHEMA_VERSION,
             revision: 0,
             seed: 0x4752_4f59,
             currency: [0; 3],
@@ -185,6 +187,7 @@ pub struct Hud {
     pub material_loss: [u32; 5],
     pub material_loss_reason: String,
     pub abilities: Vec<ship_progression::AbilityHud>,
+    pub components: Vec<components::ComponentHud>,
     pub loadout: [Option<ship_progression::EquippedAbilityHud>; 3],
     pub ship_stats: ShipStatsHud,
     pub audio: AudioHud,
@@ -596,7 +599,10 @@ pub struct Game {
 impl Game {
     pub fn new(mut profile: Profile) -> Self {
         let legacy = profile.schema_version < 4;
-        let migrated = profile.schema_version != 6;
+        let migrated = profile.schema_version != components::SCHEMA_VERSION;
+        if profile.schema_version < components::SCHEMA_VERSION {
+            profile.campaign.components = [0; components::COUNT];
+        }
         if legacy {
             for rank in &mut profile.ranks {
                 *rank = (*rank).min(5);
@@ -630,7 +636,7 @@ impl Game {
         let before_training = profile.onboarding.clone();
         training::sanitize_progress(&mut profile);
         let training_changed = before_training != profile.onboarding;
-        profile.schema_version = 6;
+        profile.schema_version = components::SCHEMA_VERSION;
         if archive_changed
             || campaign_changed
             || bosses_changed
@@ -3346,6 +3352,7 @@ impl Game {
             material_loss: self.material_loss,
             material_loss_reason: self.material_loss_reason.clone(),
             abilities: self.ability_hud(),
+            components: self.component_hud(),
             loadout: self.loadout_hud(),
             ship_stats: ShipStatsHud {
                 speed: motion.velocity.length(),
@@ -4771,7 +4778,7 @@ mod tests {
         )
         .unwrap();
         let g = Game::new(old);
-        assert_eq!(g.profile.schema_version, 6);
+        assert_eq!(g.profile.schema_version, components::SCHEMA_VERSION);
         assert_eq!(g.profile.revision, 10);
         assert_eq!(g.profile.currency, [7, 8, 9]);
         assert_eq!(g.profile.ranks[2], 3);

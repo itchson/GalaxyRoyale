@@ -116,6 +116,7 @@ pub struct AbilityHud {
     pub equip_reason: String,
     pub training_recipe: bool,
     pub required_training_material: Option<TrainingMaterialHud>,
+    pub required_component: Option<components::ComponentRequirementHud>,
 }
 #[derive(Clone, Debug, Serialize)]
 pub struct TrainingMaterialHud {
@@ -435,6 +436,7 @@ impl Game {
             return Err(format!("Reach active ship level {level} for this rank."));
         }
         self.check_recipe(def.category, recipe.points, recipe.materials)?;
+        self.check_ability_components(id, next)?;
         Ok(recipe)
     }
     fn equip_check(&self, category: usize, id: Option<u8>) -> Result<(), String> {
@@ -483,6 +485,10 @@ impl Game {
             self.profile.campaign.stored_training_materials[material.index] -= 10;
             self.profile.campaign.stored_materials[0] -= 10;
         } else {
+            self.spend_ability_components(
+                id,
+                self.profile.campaign.abilities[id as usize].rank + 1,
+            );
             self.spend_recipe(
                 abilities::get(id).unwrap().category,
                 recipe.points,
@@ -629,6 +635,11 @@ impl Game {
                         name: m.name.into(),
                         amount: 10,
                     }),
+                    required_component: if state.rank < 5 && !training_recipe {
+                        self.component_requirement(id, next)
+                    } else {
+                        None
+                    },
                 }
             })
             .collect()

@@ -1331,7 +1331,7 @@ mod tests {
         )
         .unwrap();
         let g = Game::new(legacy);
-        assert_eq!(g.profile.schema_version, 6);
+        assert_eq!(g.profile.schema_version, components::SCHEMA_VERSION);
         assert_eq!(g.profile.currency, [7, 8, 9]);
         assert_eq!(g.profile.ranks[..6], [5, 4, 3, 2, 1, 0]);
     }

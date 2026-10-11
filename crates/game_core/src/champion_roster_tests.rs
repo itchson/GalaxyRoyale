@@ -213,7 +213,7 @@ fn patch_owned_legacy_profiles_reveal_aliases_without_new_saved_roster_fields() 
     assert_eq!(champion.legacy_model, "Ironwake");
     assert_eq!(champion.display_model, "KUROGANE");
     assert_eq!(snapshot(&game), before);
-    assert_eq!(game.profile.schema_version, 6);
+    assert_eq!(game.profile.schema_version, components::SCHEMA_VERSION);
     assert!(before["campaign"].get("roster").is_none());
     assert!(before["campaign"].get("champions").is_none());
 }

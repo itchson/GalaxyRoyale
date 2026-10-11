@@ -221,7 +221,7 @@ fn legacy_v4_pilot_preserves_every_saved_asset_and_original_scout() {
     p.campaign.loadouts[0].hardware = [1, 0, 1, 0, 0, 0];
     ship_progression::mirrors(&mut p);
     let mut expected = serde_json::to_value(&p).unwrap();
-    expected["schema_version"] = 6.into();
+    expected["schema_version"] = components::SCHEMA_VERSION.into();
     expected["revision"] = 1.into();
     let g = Game::new(p);
     assert_eq!(snapshot(&g), expected);

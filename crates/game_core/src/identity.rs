@@ -701,6 +701,7 @@ impl Game {
             && c.ship_xp == [0; 10]
             && c.cargo_materials == [0; 5]
             && c.stored_materials == [0; 5]
+            && c.components == [0; crate::components::COUNT]
             && c.last_run.is_none()
             && c.loadouts == [campaign::ShipLoadout::default(); 10]
             && c.abilities

@@ -28,7 +28,7 @@ fn json(g: &Game) -> serde_json::Value {
 fn fresh_hull_is_level_one_with_empty_three_slots_and_six_unpurchased_hardware_rows() {
     let mut g = Game::new(Profile::default());
     let h = g.hud();
-    assert_eq!(g.profile.schema_version, 6);
+    assert_eq!(g.profile.schema_version, components::SCHEMA_VERSION);
     assert_eq!(h.ship_level, 1);
     assert_eq!(h.ship_xp, 0);
     assert_eq!(h.upgrades.len(), 6);
@@ -127,7 +127,11 @@ fn crafted_hull_has_independent_zero_xp_hardware_but_shared_rank_is_level_capped
     g.profile.campaign.ship_xp[0] = 1320;
     g.purchase("damage").unwrap();
     g.craft_ability("pulse-lens").unwrap();
-    for _ in 0..4 {
+    g.upgrade_ability("pulse-lens").unwrap();
+    for _ in 0..6 {
+        g.craft_component("pulse-conductor").unwrap();
+    }
+    for _ in 0..3 {
         g.upgrade_ability("pulse-lens").unwrap();
     }
     g.equip_ability(0, Some("pulse-lens")).unwrap();
@@ -504,7 +508,8 @@ fn shared_typescript_migration_fixtures_match_actual_constructor_fields_and_loss
         let g = Game::new(input);
         let mut actual = json(&g);
         let mut expected = case["expected"].clone();
-        expected["schema_version"] = 6.into();
+        expected["schema_version"] = components::SCHEMA_VERSION.into();
+        expected["campaign"]["components"] = serde_json::json!([0, 0, 0]);
         for key in ["cargo_training_materials", "stored_training_materials"] {
             expected["campaign"][key] = serde_json::json!([0, 0, 0]);
         }
@@ -525,7 +530,7 @@ fn shared_typescript_migration_fixtures_match_actual_constructor_fields_and_loss
         assert_eq!(actual, expected, "{}", case["name"]);
         assert_eq!(
             g.profile.revision,
-            before_revision + u64::from(version < 6 || has_cargo),
+            before_revision + u64::from(version < components::SCHEMA_VERSION || has_cargo),
             "{}",
             case["name"]
         );

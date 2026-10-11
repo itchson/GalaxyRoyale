@@ -24,6 +24,8 @@ pub struct CampaignProgress {
     /// Named tier-1 subsets, not additional cargo: silicate, filament, crystal.
     pub cargo_training_materials: [u32; 3],
     pub stored_training_materials: [u32; 3],
+    /// Dock-crafted parts, not cargo: offense, defense, passive. Stable order.
+    pub components: [u32; crate::components::COUNT],
     pub abilities: [AbilityState; crate::abilities::COUNT],
     pub loadouts: [ShipLoadout; 10],
     pub last_run: Option<RunSummary>,
@@ -48,6 +50,7 @@ impl Default for CampaignProgress {
             stored_materials: [0; 5],
             cargo_training_materials: [0; 3],
             stored_training_materials: [0; 3],
+            components: [0; crate::components::COUNT],
             abilities,
             loadouts: [ShipLoadout::default(); 10],
             last_run: None,
@@ -121,6 +124,9 @@ pub fn signature_rank(p: &crate::Profile, index: usize) -> u8 {
 impl CampaignProgress {
     pub fn sanitize(&mut self) -> bool {
         let before = self.clone();
+        for count in &mut self.components {
+            *count = (*count).min(crate::components::MAX_COUNT);
+        }
         self.blueprints = self.patches;
         for i in 0..8 {
             self.crafted[i] &= self.blueprints[i];
