@@ -448,6 +448,53 @@ test("snapshot carries same-tick revision and permits finite authoritative proje
   ])
     assert.throws(() => encode(frame("snapshot", bad)));
 });
+test("actual naturally spawned Coil metadata preserves the segment unknown-maximum sentinel only", () => {
+  // Exact first segment row from peer's public Game6093496 API export after
+  // 1460 real ticks. Whole page SHA2562f98830878dc86104acca83267414d4afc889f590020e7a295799378478e33bb.
+  const segment = {
+    id: "0000000200000049",
+    kind: "segment",
+    participant: null,
+    position: [2760.7256, -413.8149],
+    previous: [2761.1062, -413.58252],
+    velocity: [-22.836912, -13.9434805],
+    heading: 2.4269783,
+    previous_heading: 2.3893313,
+    scale: 0.85,
+    radius: 6.990192,
+    hull: 15,
+    max_hull: 0,
+    width: 16,
+    height: 16,
+    occupied: 87,
+  };
+  const page = {
+    session: "000000000000000000000000000003e8",
+    tick: 1460,
+    revision: 1460,
+    offset: 0,
+    next_offset: null,
+    entities: [segment],
+  };
+  const nativeFrame = {
+    v: 1,
+    session: page.session,
+    seq: 1,
+    kind: "body",
+    payload: page,
+  };
+  assert.deepEqual(decode(encode(nativeFrame)).payload, page);
+  for (const invalid of [
+    { ...segment, kind: "enemy" },
+    { ...segment, max_hull: 14 },
+    { ...segment, hull: -1 },
+    { ...segment, hull: Infinity },
+    { ...segment, max_hull: -1 },
+  ])
+    assert.throws(() =>
+      encode({ ...nativeFrame, payload: { ...page, entities: [invalid] } }),
+    );
+});
 test("actual HTTP membership never implies a ready channel or Rust admission", async (t) => {
   const n = new Network();
   n.autoOpen = false;

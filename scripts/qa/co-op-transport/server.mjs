@@ -91,7 +91,8 @@ export async function start({
   )
     throw new Error("Invalid bounded QA listener options.");
   const stage = stagePath(value),
-    origin = `http://127.0.0.1:${port}`;
+    origin = `http://localhost:${port}`,
+    service = `http://127.0.0.1:${port}`;
   const manifest = JSON.parse(
     await fs.readFile(path.join(stage, "manifest.json"), "utf8"),
   );
@@ -128,15 +129,20 @@ export async function start({
   server.removeListener("request", signaling);
   server.on("request", async (req, res) => {
     try {
-      const url = new URL(req.url, origin);
-      if (req.headers.host !== new URL(origin).host || url.origin !== origin)
+      const url = new URL(req.url, service);
+      if (
+        ![new URL(origin).host, new URL(service).host].includes(
+          req.headers.host,
+        ) ||
+        ![origin, service].includes(url.origin)
+      )
         throw new Error("Invalid QA host.");
       if (url.pathname.startsWith("/v1/")) return signaling(req, res);
       res.setHeader("Cache-Control", "no-store");
       res.setHeader("X-Content-Type-Options", "nosniff");
       res.setHeader(
         "Content-Security-Policy",
-        "default-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; media-src 'none'; object-src 'none'; frame-ancestors 'none'",
+        `default-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self' ${service}; media-src 'none'; object-src 'none'; frame-ancestors 'none'`,
       );
       if (
         req.method === "GET" &&
@@ -147,6 +153,8 @@ export async function start({
         return res.end(
           JSON.stringify({
             modules: moduleNames.length,
+            service,
+            page_origin: origin,
             inputs: manifest.inputs,
             scope: manifest.scope,
           }),
@@ -218,7 +226,7 @@ export async function start({
       `QA port${port} unavailable; no existing process was stopped.`,
     );
   }
-  return { server, stop, origin, stage };
+  return { server, stop, origin, service, stage };
 }
 if (
   process.argv[1] &&

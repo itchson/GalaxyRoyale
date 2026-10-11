@@ -258,7 +258,13 @@ function page(value: unknown): void {
       finite(e.radius, 0, 10_000);
       finite(e.hull, 0, 100_000);
       finite(e.max_hull, 0, 100_000);
-      if (Number(e.hull) > Number(e.max_hull)) fail("invalid_vitals");
+      // Existing Segment metadata has surviving health but no stored maximum.
+      // Zero is the native unknown-maximum sentinel only for this entity kind.
+      if (
+        Number(e.hull) > Number(e.max_hull) &&
+        !(e.kind === "segment" && e.max_hull === 0)
+      )
+        fail("invalid_vitals");
     }
   } else {
     record(o, [

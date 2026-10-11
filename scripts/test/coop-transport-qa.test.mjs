@@ -53,6 +53,41 @@ test("QA prepare pins actual source and bounded HTTP serves only allowlisted mod
   );
   const config = await (await fetch(tool.origin + "/qa/config")).json();
   assert.equal(config.modules, 3);
+  assert.equal(config.service, tool.service);
+  assert.equal(config.page_origin, tool.origin);
+  assert.notEqual(config.page_origin, config.service);
+  const cors = {
+    Origin: config.page_origin,
+    "Content-Type": "application/json",
+  };
+  const grant = await (
+    await fetch(tool.service + "/v1/sessions", {
+      method: "POST",
+      headers: cors,
+      body: JSON.stringify({ seed: 123, protocol: "galaxy-coop-1" }),
+    })
+  ).json();
+  assert.ok(grant.participant?.token);
+  const bearer = { Authorization: `Bearer ${grant.participant.token}` };
+  // Actual browser same-origin GET omits Origin; retain the service rejection.
+  assert.equal(
+    (
+      await fetch(tool.service + "/v1/events?after=0&wait_ms=0", {
+        headers: bearer,
+      })
+    ).status,
+    403,
+  );
+  assert.equal(
+    (
+      await fetch(tool.service + "/v1/events?after=0&wait_ms=0", {
+        headers: { ...bearer, Origin: config.page_origin },
+      })
+    ).status,
+    200,
+  );
+  const headers = (await fetch(tool.origin + "/")).headers;
+  assert.ok(headers.get("content-security-policy").includes(config.service));
   const report = {
     version: 1,
     run_id: "a".repeat(16),

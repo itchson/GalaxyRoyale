@@ -125,20 +125,22 @@ async function action(label, fn) {
   }
 }
 async function connect(rejoining) {
+  if (location.origin !== config.page_origin)
+    throw new Error("Open the configured localhost page origin.");
   if (typeof RTCPeerConnection !== "function" || !isSecureContext)
     throw new Error("Native RTC unavailable");
   hostFrames = [];
   guestFrames = [];
   if (!host)
     host = new CoopTransport({
-      service: location.origin,
+      service: config.service,
       createPeerConnection: factory,
       onChange: paint,
       onFrame: (peer, frame) => hostFrames.push({ peer, frame }),
     });
   if (!guest)
     guest = new CoopTransport({
-      service: location.origin,
+      service: config.service,
       createPeerConnection: factory,
       onChange: paint,
       onFrame: (peer, frame) => guestFrames.push({ peer, frame }),
