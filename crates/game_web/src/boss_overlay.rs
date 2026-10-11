@@ -162,7 +162,10 @@ impl Reserved {
             camera: input.hud.camera,
             zoom: input.zoom,
         }) {
-            for mut rect in [layout.strip, layout.vitals].into_iter().flatten() {
+            for mut rect in [layout.strip, layout.vitals, layout.navigation]
+                .into_iter()
+                .flatten()
+            {
                 rect[0] += left;
                 rect[1] += top;
                 reserved.add(rect);
@@ -411,7 +414,10 @@ mod tests {
                 zoom: 1.0,
             })
             .unwrap();
-            for r in [layout.strip, layout.vitals].into_iter().flatten() {
+            for r in [layout.strip, layout.vitals, layout.navigation]
+                .into_iter()
+                .flatten()
+            {
                 let full = Rect::new(
                     (r[0] + insets[3]).into(),
                     (r[1] + insets[0]).into(),
@@ -505,7 +511,7 @@ mod tests {
                     false,
                 );
                 crate::pixel_ui::draw_controls(&mut frame, ui_camera, safe, None, false);
-                let mut covered: Vec<_> = [layout.strip, layout.vitals]
+                let mut covered: Vec<_> = [layout.strip, layout.vitals, layout.navigation]
                     .into_iter()
                     .flatten()
                     .map(|r| {

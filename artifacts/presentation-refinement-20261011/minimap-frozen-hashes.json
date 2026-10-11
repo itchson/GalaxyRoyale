@@ -1,0 +1,371 @@
+{
+  "schema": 1,
+  "implementation_commit": "8408b123343c0d3b6359d9bf77c6abc3cfb289a4",
+  "base": "6152611ec88653946f809f200a24a0de482cf265",
+  "root_bridge_commit": "bc5703673bd93ff5f43505ceb0853d44dd336698",
+  "inputs": [
+    {
+      "group": "minimap",
+      "live": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\crates\\game_web\\src\\pixel_ui.rs",
+      "source": "crates/game_web/src/pixel_ui.rs",
+      "commit": "8408b123343c0d3b6359d9bf77c6abc3cfb289a4",
+      "working_snapshot": "snapshots/minimap/working/crates/game_web/src/pixel_ui.rs",
+      "working_sha256": "5799252853fbf7724db4c895c0d3c471302ff6eb152cb2c93edc7419bf1879a1",
+      "git_snapshot": "snapshots/minimap/git/crates/game_web/src/pixel_ui.rs",
+      "git_sha256": "5799252853fbf7724db4c895c0d3c471302ff6eb152cb2c93edc7419bf1879a1",
+      "relation": "byte-identical"
+    },
+    {
+      "group": "minimap",
+      "live": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\crates\\game_web\\src\\browser.rs",
+      "source": "crates/game_web/src/browser.rs",
+      "commit": "8408b123343c0d3b6359d9bf77c6abc3cfb289a4",
+      "working_snapshot": "snapshots/minimap/working/crates/game_web/src/browser.rs",
+      "working_sha256": "11eda789206625957e16cf7ea67a641de512b22ae6f064d84cbe833750a1cd48",
+      "git_snapshot": "snapshots/minimap/git/crates/game_web/src/browser.rs",
+      "git_sha256": "11eda789206625957e16cf7ea67a641de512b22ae6f064d84cbe833750a1cd48",
+      "relation": "byte-identical"
+    },
+    {
+      "group": "minimap",
+      "live": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\crates\\game_web\\src\\boss_overlay.rs",
+      "source": "crates/game_web/src/boss_overlay.rs",
+      "commit": "8408b123343c0d3b6359d9bf77c6abc3cfb289a4",
+      "working_snapshot": "snapshots/minimap/working/crates/game_web/src/boss_overlay.rs",
+      "working_sha256": "d481345fffa05a93f6a1a2fd1d87aa2d3d261bc73799b189a5a055283f14c7ba",
+      "git_snapshot": "snapshots/minimap/git/crates/game_web/src/boss_overlay.rs",
+      "git_sha256": "d481345fffa05a93f6a1a2fd1d87aa2d3d261bc73799b189a5a055283f14c7ba",
+      "relation": "byte-identical"
+    },
+    {
+      "group": "minimap",
+      "live": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\crates\\game_web\\src\\ui_flight_status_tests.rs",
+      "source": "crates/game_web/src/ui_flight_status_tests.rs",
+      "commit": "8408b123343c0d3b6359d9bf77c6abc3cfb289a4",
+      "working_snapshot": "snapshots/minimap/working/crates/game_web/src/ui_flight_status_tests.rs",
+      "working_sha256": "f67bfb73aa3b15b515e2984427e05d2c4af5d95b10ea97b90580b49855224d79",
+      "git_snapshot": "snapshots/minimap/git/crates/game_web/src/ui_flight_status_tests.rs",
+      "git_sha256": "f67bfb73aa3b15b515e2984427e05d2c4af5d95b10ea97b90580b49855224d79",
+      "relation": "byte-identical"
+    },
+    {
+      "group": "minimap",
+      "live": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\crates\\game_web\\src\\ui_minimap_tests.rs",
+      "source": "crates/game_web/src/ui_minimap_tests.rs",
+      "commit": "8408b123343c0d3b6359d9bf77c6abc3cfb289a4",
+      "working_snapshot": "snapshots/minimap/working/crates/game_web/src/ui_minimap_tests.rs",
+      "working_sha256": "7d4398fe3d8135606416c7e606f478da28963edb6cb243774a8ef9754ebf0aae",
+      "git_snapshot": "snapshots/minimap/git/crates/game_web/src/ui_minimap_tests.rs",
+      "git_sha256": "7d4398fe3d8135606416c7e606f478da28963edb6cb243774a8ef9754ebf0aae",
+      "relation": "byte-identical"
+    },
+    {
+      "group": "minimap",
+      "live": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\crates\\game_web\\src\\ui_header_tests.rs",
+      "source": "crates/game_web/src/ui_header_tests.rs",
+      "commit": "8408b123343c0d3b6359d9bf77c6abc3cfb289a4",
+      "working_snapshot": "snapshots/minimap/working/crates/game_web/src/ui_header_tests.rs",
+      "working_sha256": "708d485c35856451512bd348cd32e530106cafa491a9760b91bac0cde9c86a34",
+      "git_snapshot": "snapshots/minimap/git/crates/game_web/src/ui_header_tests.rs",
+      "git_sha256": "be2c6d71da371c374aea38c2d71a7c92260ea771d0a1fba2d84574da5f8dc5fd",
+      "relation": "CRLF-only"
+    },
+    {
+      "group": "minimap",
+      "live": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\crates\\game_core\\src\\navigation.rs",
+      "source": "crates/game_core/src/navigation.rs",
+      "commit": "8408b123343c0d3b6359d9bf77c6abc3cfb289a4",
+      "working_snapshot": "snapshots/minimap/working/crates/game_core/src/navigation.rs",
+      "working_sha256": "95158dbd0c1d0762c608eb7d9bf5833b477f3c411238304b0e27c14c5c5843fa",
+      "git_snapshot": "snapshots/minimap/git/crates/game_core/src/navigation.rs",
+      "git_sha256": "95158dbd0c1d0762c608eb7d9bf5833b477f3c411238304b0e27c14c5c5843fa",
+      "relation": "byte-identical"
+    },
+    {
+      "group": "minimap",
+      "live": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\Cargo.toml",
+      "source": "Cargo.toml",
+      "commit": "8408b123343c0d3b6359d9bf77c6abc3cfb289a4",
+      "working_snapshot": "snapshots/minimap/working/Cargo.toml",
+      "working_sha256": "3daf47b4944c8605b4435722425d2203f008b7dfe929e43c78d386c19e64ee27",
+      "git_snapshot": "snapshots/minimap/git/Cargo.toml",
+      "git_sha256": "50b077a3fd8e0c8a42456948d6232ae86b2a1bbaa63652ee04da7848c776a3e3",
+      "relation": "CRLF-only"
+    },
+    {
+      "group": "minimap",
+      "live": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\Cargo.lock",
+      "source": "Cargo.lock",
+      "commit": "8408b123343c0d3b6359d9bf77c6abc3cfb289a4",
+      "working_snapshot": "snapshots/minimap/working/Cargo.lock",
+      "working_sha256": "b00fa97ffca51b80eca3655d7de4acc9f43201b2f8ba0cf974545cf742a99574",
+      "git_snapshot": "snapshots/minimap/git/Cargo.lock",
+      "git_sha256": "df228d9f83ef57321dcb768b79d948e9aa24456c0952e971fc8d6fcd7e806bdd",
+      "relation": "CRLF-only"
+    },
+    {
+      "group": "minimap",
+      "live": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\crates\\game_web\\Cargo.toml",
+      "source": "crates/game_web/Cargo.toml",
+      "commit": "8408b123343c0d3b6359d9bf77c6abc3cfb289a4",
+      "working_snapshot": "snapshots/minimap/working/crates/game_web/Cargo.toml",
+      "working_sha256": "156c8fb5383ab7c6aa3301e03bc170b230a9b2ea30c9b9e81d33f3d029b8ad50",
+      "git_snapshot": "snapshots/minimap/git/crates/game_web/Cargo.toml",
+      "git_sha256": "2ae9524c8e67d4d504a973cff6de954e942c524df5508eb522e2324f210f9c1a",
+      "relation": "CRLF-only"
+    },
+    {
+      "group": "root-bridge",
+      "live": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\apps\\game\\src\\main.ts",
+      "source": "apps/game/src/main.ts",
+      "commit": "bc5703673bd93ff5f43505ceb0853d44dd336698",
+      "working_snapshot": "snapshots/root-bridge/working/apps/game/src/main.ts",
+      "working_sha256": "6fea4ccb963ccb485f9aa24b2740af692728f482af9aa013f6cbf2fb98c039b8",
+      "git_snapshot": "snapshots/root-bridge/git/apps/game/src/main.ts",
+      "git_sha256": "6fea4ccb963ccb485f9aa24b2740af692728f482af9aa013f6cbf2fb98c039b8",
+      "relation": "byte-identical"
+    },
+    {
+      "group": "root-bridge",
+      "live": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\apps\\game\\src\\pixel-ui.ts",
+      "source": "apps/game/src/pixel-ui.ts",
+      "commit": "bc5703673bd93ff5f43505ceb0853d44dd336698",
+      "working_snapshot": "snapshots/root-bridge/working/apps/game/src/pixel-ui.ts",
+      "working_sha256": "4c3ea97bb6b6b4da55383108dda0a38c07a0b7569d056c1931a8e47d784bb822",
+      "git_snapshot": "snapshots/root-bridge/git/apps/game/src/pixel-ui.ts",
+      "git_sha256": "4c3ea97bb6b6b4da55383108dda0a38c07a0b7569d056c1931a8e47d784bb822",
+      "relation": "byte-identical"
+    },
+    {
+      "group": "root-bridge",
+      "live": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\scripts\\test\\pixel-ui.test.mjs",
+      "source": "scripts/test/pixel-ui.test.mjs",
+      "commit": "bc5703673bd93ff5f43505ceb0853d44dd336698",
+      "working_snapshot": "snapshots/root-bridge/working/scripts/test/pixel-ui.test.mjs",
+      "working_sha256": "3bbefa92932f1d605e2d243655490076c40e09be255651e80a134c101f0a03c7",
+      "git_snapshot": "snapshots/root-bridge/git/scripts/test/pixel-ui.test.mjs",
+      "git_sha256": "3bbefa92932f1d605e2d243655490076c40e09be255651e80a134c101f0a03c7",
+      "relation": "byte-identical"
+    },
+    {
+      "group": "root-bridge",
+      "live": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\scripts\\test\\facility-layout.test.mjs",
+      "source": "scripts/test/facility-layout.test.mjs",
+      "commit": "bc5703673bd93ff5f43505ceb0853d44dd336698",
+      "working_snapshot": "snapshots/root-bridge/working/scripts/test/facility-layout.test.mjs",
+      "working_sha256": "8ae9112bfc2fb5539234908167d598d6690a0cbfa775e7ba1219a135c7dd2122",
+      "git_snapshot": "snapshots/root-bridge/git/scripts/test/facility-layout.test.mjs",
+      "git_sha256": "8ae9112bfc2fb5539234908167d598d6690a0cbfa775e7ba1219a135c7dd2122",
+      "relation": "byte-identical"
+    },
+    {
+      "group": "root-bridge",
+      "live": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\scripts\\test\\flight-status-pixel.test.mjs",
+      "source": "scripts/test/flight-status-pixel.test.mjs",
+      "commit": "bc5703673bd93ff5f43505ceb0853d44dd336698",
+      "working_snapshot": "snapshots/root-bridge/working/scripts/test/flight-status-pixel.test.mjs",
+      "working_sha256": "ae617aad29123aba88ce71a66a9860d20c9e41c16645f9c52236d5dd845e2dde",
+      "git_snapshot": "snapshots/root-bridge/git/scripts/test/flight-status-pixel.test.mjs",
+      "git_sha256": "ae617aad29123aba88ce71a66a9860d20c9e41c16645f9c52236d5dd845e2dde",
+      "relation": "byte-identical"
+    }
+  ],
+  "files": [
+    {
+      "path": "freeze.py",
+      "bytes": 3132,
+      "sha256": "c4a75a8420d6b6b4b787568df0654ad49fd8e97e45de3015825c0fbd9b319415"
+    },
+    {
+      "path": "HANDOFF.md",
+      "bytes": 5227,
+      "sha256": "9d8276862a8cd14b0717c297a45db4e5cbfe2e6a1c1a61fa1728c8ca24b8ba92"
+    },
+    {
+      "path": "native-clippy.log",
+      "bytes": 2755,
+      "sha256": "67f1699c5566ea81502697e910854aaed74eaf1d0d7f4b8992a6015b6aac3d2c"
+    },
+    {
+      "path": "native-tests.log",
+      "bytes": 15031,
+      "sha256": "7dcb23bcdd4eaef4b61e652aff14757fd8f38125132dead30aa4749be2a505c1"
+    },
+    {
+      "path": "replace-navigation.py",
+      "bytes": 4673,
+      "sha256": "4a88bb84c9dc028b5d72e3484754bccd94efbf552afdf4a50295f9ca0d8780ef"
+    },
+    {
+      "path": "root-semantic-tests.log",
+      "bytes": 2228,
+      "sha256": "0fbf21b8b00008976367d7236c4caa3049bf771881c717b98549ab0516f8823d"
+    },
+    {
+      "path": "snapshots/minimap/git/Cargo.lock",
+      "bytes": 27791,
+      "sha256": "df228d9f83ef57321dcb768b79d948e9aa24456c0952e971fc8d6fcd7e806bdd"
+    },
+    {
+      "path": "snapshots/minimap/git/Cargo.toml",
+      "bytes": 447,
+      "sha256": "50b077a3fd8e0c8a42456948d6232ae86b2a1bbaa63652ee04da7848c776a3e3"
+    },
+    {
+      "path": "snapshots/minimap/git/crates/game_core/src/navigation.rs",
+      "bytes": 7080,
+      "sha256": "95158dbd0c1d0762c608eb7d9bf5833b477f3c411238304b0e27c14c5c5843fa"
+    },
+    {
+      "path": "snapshots/minimap/git/crates/game_web/Cargo.toml",
+      "bytes": 714,
+      "sha256": "2ae9524c8e67d4d504a973cff6de954e942c524df5508eb522e2324f210f9c1a"
+    },
+    {
+      "path": "snapshots/minimap/git/crates/game_web/src/boss_overlay.rs",
+      "bytes": 31645,
+      "sha256": "d481345fffa05a93f6a1a2fd1d87aa2d3d261bc73799b189a5a055283f14c7ba"
+    },
+    {
+      "path": "snapshots/minimap/git/crates/game_web/src/browser.rs",
+      "bytes": 26325,
+      "sha256": "11eda789206625957e16cf7ea67a641de512b22ae6f064d84cbe833750a1cd48"
+    },
+    {
+      "path": "snapshots/minimap/git/crates/game_web/src/pixel_ui.rs",
+      "bytes": 91230,
+      "sha256": "5799252853fbf7724db4c895c0d3c471302ff6eb152cb2c93edc7419bf1879a1"
+    },
+    {
+      "path": "snapshots/minimap/git/crates/game_web/src/ui_flight_status_tests.rs",
+      "bytes": 21160,
+      "sha256": "f67bfb73aa3b15b515e2984427e05d2c4af5d95b10ea97b90580b49855224d79"
+    },
+    {
+      "path": "snapshots/minimap/git/crates/game_web/src/ui_header_tests.rs",
+      "bytes": 7744,
+      "sha256": "be2c6d71da371c374aea38c2d71a7c92260ea771d0a1fba2d84574da5f8dc5fd"
+    },
+    {
+      "path": "snapshots/minimap/git/crates/game_web/src/ui_minimap_tests.rs",
+      "bytes": 10430,
+      "sha256": "7d4398fe3d8135606416c7e606f478da28963edb6cb243774a8ef9754ebf0aae"
+    },
+    {
+      "path": "snapshots/minimap/working/Cargo.lock",
+      "bytes": 28906,
+      "sha256": "b00fa97ffca51b80eca3655d7de4acc9f43201b2f8ba0cf974545cf742a99574"
+    },
+    {
+      "path": "snapshots/minimap/working/Cargo.toml",
+      "bytes": 467,
+      "sha256": "3daf47b4944c8605b4435722425d2203f008b7dfe929e43c78d386c19e64ee27"
+    },
+    {
+      "path": "snapshots/minimap/working/crates/game_core/src/navigation.rs",
+      "bytes": 7080,
+      "sha256": "95158dbd0c1d0762c608eb7d9bf5833b477f3c411238304b0e27c14c5c5843fa"
+    },
+    {
+      "path": "snapshots/minimap/working/crates/game_web/Cargo.toml",
+      "bytes": 742,
+      "sha256": "156c8fb5383ab7c6aa3301e03bc170b230a9b2ea30c9b9e81d33f3d029b8ad50"
+    },
+    {
+      "path": "snapshots/minimap/working/crates/game_web/src/boss_overlay.rs",
+      "bytes": 31645,
+      "sha256": "d481345fffa05a93f6a1a2fd1d87aa2d3d261bc73799b189a5a055283f14c7ba"
+    },
+    {
+      "path": "snapshots/minimap/working/crates/game_web/src/browser.rs",
+      "bytes": 26325,
+      "sha256": "11eda789206625957e16cf7ea67a641de512b22ae6f064d84cbe833750a1cd48"
+    },
+    {
+      "path": "snapshots/minimap/working/crates/game_web/src/pixel_ui.rs",
+      "bytes": 91230,
+      "sha256": "5799252853fbf7724db4c895c0d3c471302ff6eb152cb2c93edc7419bf1879a1"
+    },
+    {
+      "path": "snapshots/minimap/working/crates/game_web/src/ui_flight_status_tests.rs",
+      "bytes": 21160,
+      "sha256": "f67bfb73aa3b15b515e2984427e05d2c4af5d95b10ea97b90580b49855224d79"
+    },
+    {
+      "path": "snapshots/minimap/working/crates/game_web/src/ui_header_tests.rs",
+      "bytes": 7971,
+      "sha256": "708d485c35856451512bd348cd32e530106cafa491a9760b91bac0cde9c86a34"
+    },
+    {
+      "path": "snapshots/minimap/working/crates/game_web/src/ui_minimap_tests.rs",
+      "bytes": 10430,
+      "sha256": "7d4398fe3d8135606416c7e606f478da28963edb6cb243774a8ef9754ebf0aae"
+    },
+    {
+      "path": "snapshots/root-bridge/git/apps/game/src/main.ts",
+      "bytes": 68836,
+      "sha256": "6fea4ccb963ccb485f9aa24b2740af692728f482af9aa013f6cbf2fb98c039b8"
+    },
+    {
+      "path": "snapshots/root-bridge/git/apps/game/src/pixel-ui.ts",
+      "bytes": 16045,
+      "sha256": "4c3ea97bb6b6b4da55383108dda0a38c07a0b7569d056c1931a8e47d784bb822"
+    },
+    {
+      "path": "snapshots/root-bridge/git/scripts/test/facility-layout.test.mjs",
+      "bytes": 4429,
+      "sha256": "8ae9112bfc2fb5539234908167d598d6690a0cbfa775e7ba1219a135c7dd2122"
+    },
+    {
+      "path": "snapshots/root-bridge/git/scripts/test/flight-status-pixel.test.mjs",
+      "bytes": 8187,
+      "sha256": "ae617aad29123aba88ce71a66a9860d20c9e41c16645f9c52236d5dd845e2dde"
+    },
+    {
+      "path": "snapshots/root-bridge/git/scripts/test/pixel-ui.test.mjs",
+      "bytes": 12511,
+      "sha256": "3bbefa92932f1d605e2d243655490076c40e09be255651e80a134c101f0a03c7"
+    },
+    {
+      "path": "snapshots/root-bridge/working/apps/game/src/main.ts",
+      "bytes": 68836,
+      "sha256": "6fea4ccb963ccb485f9aa24b2740af692728f482af9aa013f6cbf2fb98c039b8"
+    },
+    {
+      "path": "snapshots/root-bridge/working/apps/game/src/pixel-ui.ts",
+      "bytes": 16045,
+      "sha256": "4c3ea97bb6b6b4da55383108dda0a38c07a0b7569d056c1931a8e47d784bb822"
+    },
+    {
+      "path": "snapshots/root-bridge/working/scripts/test/facility-layout.test.mjs",
+      "bytes": 4429,
+      "sha256": "8ae9112bfc2fb5539234908167d598d6690a0cbfa775e7ba1219a135c7dd2122"
+    },
+    {
+      "path": "snapshots/root-bridge/working/scripts/test/flight-status-pixel.test.mjs",
+      "bytes": 8187,
+      "sha256": "ae617aad29123aba88ce71a66a9860d20c9e41c16645f9c52236d5dd845e2dde"
+    },
+    {
+      "path": "snapshots/root-bridge/working/scripts/test/pixel-ui.test.mjs",
+      "bytes": 12511,
+      "sha256": "3bbefa92932f1d605e2d243655490076c40e09be255651e80a134c101f0a03c7"
+    },
+    {
+      "path": "verify.py",
+      "bytes": 859,
+      "sha256": "52261552772670297c2a86127b497311d3b19e7d9454cfc8711d7537f970a433"
+    },
+    {
+      "path": "webgl-clippy.log",
+      "bytes": 1237,
+      "sha256": "37dc7afa850e1636049326549e2debd4a1c1d8d09f57b4182c1982736b0cf272"
+    },
+    {
+      "path": "webgpu-clippy.log",
+      "bytes": 2146,
+      "sha256": "b499958e4efa21375cda7f3c61884a2cfab3fd8f84d69acf228e488a06e3ac90"
+    }
+  ],
+  "scope": "native minimap implementation and scoped source bridge checks; browser/phone Pending"
+}

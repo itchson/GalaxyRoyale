@@ -24,6 +24,7 @@ function fixture({
   slot = true,
   interactive = true,
   facilityValue = null,
+  facilityFocused = false,
   slotHeight = 7,
 } = {}) {
   let output, callback;
@@ -106,7 +107,12 @@ function fixture({
   facility.classList = { contains: (name) => name === "dock-facility" };
   facility.dataset = { pixelValue: String(facilityValue ?? 0) };
   facility.innerText = "JOURNAL";
-  facility.bounds = { x: 140 * scale, y: 120 * scale, width: 48 * scale, height: 48 * scale };
+  facility.bounds = {
+    x: 140 * scale,
+    y: 120 * scale,
+    width: 48 * scale,
+    height: 48 * scale,
+  };
   root.querySelector = (selector) => (selector === "#toast" ? toast : null);
   root.querySelectorAll = (selector) =>
     selector === "[data-pixel-kind]"
@@ -121,7 +127,7 @@ function fixture({
     body: {
       classList: { contains: (name) => flight && name === "engine-flight" },
     },
-    activeElement: null,
+    activeElement: facilityFocused ? facility : null,
     fonts: { ready: Promise.resolve() },
   };
   const exports = {};
@@ -185,27 +191,49 @@ test("compiled bridge emits exact single-line footer glyphs and a separate real4
 test("five-cell micro footer preserves warnings and contact input at fractional display scales", () => {
   for (const scale of [1, 1.375, 2.4, 4.6875]) {
     for (const toastVisible of [false, true]) {
-      const nodes = fixture({scale, slotHeight:5, toastVisible}).nodes();
-      const text = nodes.find(node => node.kind === (toastVisible ? 'warning-text' : 'status-text'));
-      assert.ok(text, 'small native text must not silently disappear in the semantic bridge');
-      assert.ok(text.rect.every((value,index) => Math.abs(value - [106,164,122,5][index]) < 1e-10));
-      const hit = nodes.find(node => node.kind === 'status-hit');
+      const nodes = fixture({ scale, slotHeight: 5, toastVisible }).nodes();
+      const text = nodes.find(
+        (node) => node.kind === (toastVisible ? "warning-text" : "status-text"),
+      );
+      assert.ok(
+        text,
+        "small native text must not silently disappear in the semantic bridge",
+      );
+      assert.ok(
+        text.rect.every(
+          (value, index) => Math.abs(value - [106, 164, 122, 5][index]) < 1e-10,
+        ),
+      );
+      const hit = nodes.find((node) => node.kind === "status-hit");
       if (toastVisible) assert.equal(hit, undefined);
-      else assert.ok(hit.rect[3] * scale >= 44, 'smaller artwork must retain an accessible contact target');
+      else
+        assert.ok(
+          hit.rect[3] * scale >= 44,
+          "smaller artwork must retain an accessible contact target",
+        );
     }
   }
-  assert.deepEqual(fixture({slotHeight:4}).nodes(), []);
+  assert.deepEqual(fixture({ slotHeight: 4 }).nodes(), []);
 });
 
-test("compiled bridge forwards measured facility label placement without changing hit geometry", () => {
+test("compiled bridge forwards focused facility label placement without changing hit geometry", () => {
   for (const value of [0, 1, 2]) {
-    const nodes = fixture({ facilityValue: value }).nodes();
+    const nodes = fixture({
+      facilityValue: value,
+      facilityFocused: true,
+    }).nodes();
     const label = nodes.find((node) => node.kind === "facility-label");
     assert.ok(label);
     assert.equal(label.value, value);
     assert.deepEqual(label.rect, [140, 120, 48, 48]);
     assert.equal(label.text, "JOURNAL");
   }
+  assert.equal(
+    fixture({ facilityValue: 0 })
+      .nodes()
+      .some((n) => n.kind === "facility-label"),
+    false,
+  );
 });
 
 test("visible toast wins the native slot without leaving a concealed contact hit", () => {

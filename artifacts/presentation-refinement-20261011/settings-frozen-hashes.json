@@ -1,0 +1,41 @@
+{
+  "commit": "e88e78eade274d81f2cbf519738f3b7722d2f961",
+  "branch": "codex/settings-pixel-layout",
+  "inputs_sha256": {
+    "apps/game/index.html": "da874bca364edd91099b4f879532a0eb650a87f3953f4528d05b9c793e5ff74b",
+    "apps/game/src/style.css": "98f8aafd2bb5178830cb75662e6900af20273d9643e3d5e55c20de9196993872",
+    "crates/game_web/src/ui_scene.rs": "5d29e1f75ad5e0cb5c677ed2a045c8f45f5e0a7607332d2eaf2320a97a68eb91",
+    "crates/game_web/src/ui_settings_tests.rs": "0671f18c71917c4f227946b9ba242bb942af850917ae63fcb03493a1479dc153",
+    "crates/game_web/src/ui_icon_tests.rs": "4b8e190da2c5e3cc963fefa27d1da0784b7a6ca16218cf29af993800dec6187d",
+    "crates/game_web/src/ui_button_tests.rs": "2fee6dc88ce0b38a4647b1702fc578d8ffa97d8b9e52d3e2bdef22485d270b03",
+    "crates/game_web/src/ui_map_tests.rs": "48c6679503b8981446a856fff12cd15f4a014e0527ab67942df50f7df4d008bb",
+    "crates/game_web/src/pixel_ui.rs": "54e886759575d2e78e1e67998e76ff911eb192c03518532415a5450f83b5639b",
+    "crates/game_web/src/champion_patches.rs": "31f3735f5aed9c13ba83f2b0b1ecc0bd303d15f2fa7fd78add6a89087e176a24",
+    "crates/engine_core/src/frame.rs": "c4f521e031f8eb514236d142f0eb79b994a33edc030be534d1faf353097c3380",
+    "crates/engine_core/src/pixels.rs": "2791ba6a228086a2cfce2308102a62fefda0ad46fef5d0b20bf447c199e5ed90",
+    "Cargo.lock": "b00fa97ffca51b80eca3655d7de4acc9f43201b2f8ba0cf974545cf742a99574",
+    "pnpm-lock.yaml": "aab28ac69c754ea40aaf58749f6a97f1983f70307053ac5fcf70b5495e8fa2ed"
+  },
+  "evidence_sha256": {
+    "authored-contact-sheet.png": "19f65e5f8ca2bb323d752c80a88a5e48abd7b7d7401ab9c130036fd1050f5493",
+    "authored-icons.rs.txt": "879e8a4924eb02f0e445fffffb1968a81d502d16a76ed7f682156fdf7cb1cc37",
+    "author_icons.py": "07a46fbc26d0699a8455c76e152d05fde52f8112894e23881ceba49916ff4626",
+    "format.log": "7e00302fcb82ef125f5a42905f5bd02c77cdee29ee14bf888a15f57ff8bf7824",
+    "HANDOFF.md": "d972e72eb40c56b01d308c68e95e478476fb060ae155ec3051063e65a83d9959",
+    "html-contract.json": "841bbfeb932b140d2aa5828a8f845898e09349e0f398403be14c123b19be31d8",
+    "icon-costs.json": "ce8cdba9d9e430ea8f7a2e4b6f8404ca18a406ae00d88e1778714d1286e0cd26",
+    "native-clippy.log": "aee44f998412717953b123e9d7878815d4cc84ced4e8e9f65c163d609b9e3622",
+    "native-contact-sheet.png": "eacd6305b28f322c954ac4d6046255f41b640ed508a8276ccb74c6cada12cc45",
+    "native-packets.json": "e55be23a6f8e1b6f049eef3675012fc7b54ef09eb57657077d48956f821aab30",
+    "native-ui-tests.log": "a938774147daa4970324b255a33a0f168231cedf27cf71b94814781922d1171c",
+    "packet-preview.pdb": "8c156bee1bc5342d7a3e8899f53ce04bd02f79e0e606d94828d2e24550a0f299",
+    "packet_preview.rs": "20e0ad1fc7557704347d2447dbd4f25b4bbf52633e7d8d1d399afbf631352287",
+    "preview_packets.py": "b631bdf2f40c1aeb1705972fb858836f95616d78ceec266a975aff878e34ccfb",
+    "shell-tests.log": "5b833099a2ef251d44fc5b605a5a09deae193438260e27d456d5669226387a9c",
+    "typecheck.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "root-bridge-review/pins.json": "70695c4c6a639ba77f6efefcfbb2627b762f1b520c8f3d6b577cb46a469223db",
+    "root-bridge-review/tests.log": "0c34c89debdd3f2dda899b81d30f5b4d2f30ad8a188e8eedbae9619ceaad24cc",
+    "root-bridge-review/apps/game/src/pixel-ui.ts": "4c3ea97bb6b6b4da55383108dda0a38c07a0b7569d056c1931a8e47d784bb822",
+    "root-bridge-review/scripts/test/pixel-ui.test.mjs": "3bbefa92932f1d605e2d243655490076c40e09be255651e80a134c101f0a03c7"
+  }
+}

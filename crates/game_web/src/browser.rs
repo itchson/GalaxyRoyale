@@ -531,6 +531,16 @@ impl Galaxy {
             .map(|rect| rect.to_vec())
             .unwrap_or_default()
     }
+    /// Full logical-screen minimap bounds, matching its native reservation.
+    /// Empty means the map cannot fit safely; camera zoom does not resize it.
+    pub fn flight_navigation_bounds(&self) -> Vec<f32> {
+        self.current_flight_status_layout()
+            .and_then(|layout| {
+                pixel_ui::FlightStatusLayout::full_bounds(layout.navigation, self.ui_insets)
+            })
+            .map(|rect| rect.to_vec())
+            .unwrap_or_default()
+    }
     pub fn set_ui_scene(&mut self, scene: JsValue) -> Result<(), JsValue> {
         self.ui_scene = serde_wasm_bindgen::from_value(scene).map_err(js)?;
         Ok(())

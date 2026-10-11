@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 515,
+  "revision": 532,
   "name": "Galaxy Royale",
   "phase": "Playable solo slice → content and validation",
-  "updatedAt": "2026-10-11T03:25:36.736Z",
+  "updatedAt": "2026-10-11T03:59:18.534Z",
   "tasks": [
     {
       "id": "studio",
@@ -4819,7 +4819,7 @@
       "description": "Consistent detailed pixel art; explicit cells/palette/alpha/topology/transforms/animation/provenance. Preserve disconnected parts and dimensions; losses require explicit recorded policies.",
       "department": "Art/Engine",
       "owner": "/root/production_research",
-      "status": "review",
+      "status": "complete",
       "priority": "high",
       "dependencies": [],
       "acceptanceCriteria": [
@@ -4829,7 +4829,7 @@
         },
         {
           "text": "A converted asset passes actual native PixelBody/transform rendering and review; unsupported metadata is disclosed",
-          "met": false
+          "met": true
         }
       ],
       "evidence": [
@@ -4852,12 +4852,22 @@
           "label": "Independent integration contract review",
           "kind": "note",
           "path": "artifacts/presentation-refinement-20261011/ASSET_INTEGRATION_REVIEW.md"
+        },
+        {
+          "label": "Clean Windows, Ubuntu and dual-renderer package CI",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/foundation-ci.json"
+        },
+        {
+          "label": "Actual independent native asset review",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/ASSET_ENGINE_REVIEW.md"
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 3,
       "createdAt": "2026-10-11T02:54:12.119Z",
-      "updatedAt": "2026-10-11T03:25:36.683Z"
+      "updatedAt": "2026-10-11T03:37:32.450Z"
     },
     {
       "id": "task-cf9b0d9c",
@@ -4966,6 +4976,114 @@
       "revision": 2,
       "createdAt": "2026-10-11T02:54:12.335Z",
       "updatedAt": "2026-10-11T03:25:36.736Z"
+    },
+    {
+      "id": "task-2aff015a",
+      "title": "Top-down Haven facilities and hover-only labels",
+      "description": "Four distinct top-down native pixel facilities with coherent animation; Root integrates hover-only labels while preserving accessible hit areas.",
+      "department": "Art/UI",
+      "owner": "/root/production_research",
+      "status": "complete",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Top-down native art and animation preserve facility geometry and collision contracts",
+          "met": true
+        },
+        {
+          "text": "Actual hover/focus labels and desktop renderer/layout inspection are recorded",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual integrated desktop acceptance and remaining gates",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/CURRENT_UI_ACCEPTANCE.md"
+        },
+        {
+          "label": "Frozen implementation handoff",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/HAVEN_TOPDOWN_HANDOFF.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-11T03:35:35.305Z",
+      "updatedAt": "2026-10-11T03:59:18.374Z"
+    },
+    {
+      "id": "task-f90a8218",
+      "title": "Left minimap with colored tracked destinations",
+      "description": "Player-centered north-up native pixel minimap above the footer; yellow Haven and purple actual tracked mission. Fixed world range independent of zoom; bounded marker and overlap handling.",
+      "department": "Engine/UI",
+      "owner": "/root/engine_research",
+      "status": "complete",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Native direction, range clamping and responsive reservation tests pass",
+          "met": true
+        },
+        {
+          "text": "Both desktop renderers show the minimap in the correct left/footer position",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual integrated desktop acceptance and remaining gates",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/CURRENT_UI_ACCEPTANCE.md"
+        },
+        {
+          "label": "Frozen implementation handoff",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/NATIVE_MINIMAP_HANDOFF.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-11T03:35:35.323Z",
+      "updatedAt": "2026-10-11T03:59:18.439Z"
+    },
+    {
+      "id": "task-5ac4cfd3",
+      "title": "Responsive settings controls and detailed pixel icons",
+      "description": "Align menu labels, sliders, toggles and actions to actual semantic geometry; authored reusable detailed native pixel icon assets and coherent spacing at wide/compact sizes.",
+      "department": "UX/UI",
+      "owner": "/root/gameplay_design",
+      "status": "complete",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Native icon/control extraction and semantic bridge tests pass",
+          "met": true
+        },
+        {
+          "text": "Actual settings interactions, scrolling and wide/compact layout are inspected on both renderers",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual integrated desktop acceptance and remaining gates",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/CURRENT_UI_ACCEPTANCE.md"
+        },
+        {
+          "label": "Frozen implementation handoff",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/SETTINGS_HANDOFF.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-11T03:35:35.354Z",
+      "updatedAt": "2026-10-11T03:59:18.478Z"
     }
   ],
   "reviews": [
@@ -5809,6 +5927,37 @@
       "taskIds": [
         "task-4945ccc3"
       ]
+    },
+    {
+      "id": "review-b0a23441",
+      "title": "Actual asynchronous Settings review and integrated UI acceptance",
+      "body": "Gameplay authored e88e78e; Engine independently reviewed exact committed source and ran 58 native UI checks plus 21 Root bridge checks. Root integrated Art773fc6c/54c2c3c and Engine8408b12, ran433 native/292 shell checks plus one skip, strict Clippy/TypeScript, normal dual WASM/PWA builds and18 headless Rust SaveStore cases. Actual wide/compact/narrow WebGL2/WebGPU settings, interactions, facility hover/routes and left map position inspected. Detailed evidence separates actual native purple mission tests from the observed mission-free profile, software sheets from browser screenshots, and bounded desktop from physical/human gates.",
+      "author": "Producer",
+      "source": "Actual frozen department handoffs, independent Settings review, Root normal dual-renderer browser inspection and native integration checks",
+      "createdAt": "2026-10-11T03:59:18.518Z",
+      "participants": [
+        "/root/gameplay_design",
+        "/root/engine_research",
+        "/root/production_research",
+        "/root"
+      ],
+      "taskIds": [
+        "task-2aff015a",
+        "task-f90a8218",
+        "task-5ac4cfd3"
+      ],
+      "evidence": [
+        {
+          "label": "Actual integrated desktop acceptance and remaining gates",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/CURRENT_UI_ACCEPTANCE.md"
+        },
+        {
+          "label": "Independent immutable source review",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/SETTINGS_INDEPENDENT_REVIEW.md"
+        }
+      ]
     }
   ],
   "decisions": [
@@ -5927,6 +6076,15 @@
       "author": "Producer",
       "source": "Actual HUD and adaptive audio assignment discussion",
       "createdAt": "2026-10-11T01:12:52.588Z",
+      "status": "accepted"
+    },
+    {
+      "id": "decision-5df6a4f6",
+      "title": "Keep presentation anchored to actual runtime and semantic geometry",
+      "body": "Gameplay identified settings controls painted from the entire row; Root and Gameplay agreed on optional label_rect/control_rect measured in group-local logical units, preserving real input IDs and disabled state. Engine and Root agreed on a north-up player-centered minimap with fixed 2400-unit world range, yellow Haven and purple the authoritative tracked mission, reserving its exact exported bounds in facility and boss layout. Art identified front-facing tower art, anisotropic pads and vertical offsets; overhead coherent roof/courtyard bodies replace them while preserving facility centers and hit radius. Root keeps facility labels hidden except cursor hover or deliberate keyboard focus. These are implementation contracts; both-renderer browser acceptance and source reviews are still pending for these new refinements.",
+      "author": "Producer",
+      "source": "Actual Root, Engine, Gameplay and Art asynchronous design exchanges during this development session",
+      "createdAt": "2026-10-11T03:40:09.845Z",
       "status": "accepted"
     }
   ],
@@ -7006,6 +7164,89 @@
       ],
       "url": "https://galaxy-royale-itchson.itchson.chatgpt.site/",
       "knownIssues": "Hosted private Apply/reload failed in IAB and remains undiagnosed. No policy bypass or profile reset. Rendered DSP/human listening, phones/soak, timed pointer play, natural crafting/physical return banking and full earned campaign remain pending. Desktop/native/recorded graphs are explicitly scoped."
+    },
+    {
+      "id": "build-75210f54",
+      "title": "Clean final asset foundation CI",
+      "body": "Exact remote head 07d3f131016e8d2caaae5ce9b7efb9890f276c4d passed three actual jobs. Both Windows and Ubuntu ran final native converter tests and extracted/audited the dock through actual PixelBody/FrameBuilder. This resolves the native acceptance pending after local Windows Application Control blocked the executable. New top-down, minimap and settings refinements are subsequent pending work.",
+      "author": "Producer",
+      "source": "Actual clean GitHub Actions run 38108345034 and independent recorded asset review",
+      "createdAt": "2026-10-11T03:37:32.474Z",
+      "revision": "07d3f131016e8d2caaae5ce9b7efb9890f276c4d",
+      "evidence": [
+        {
+          "label": "Clean Windows, Ubuntu and dual-renderer package CI",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/foundation-ci.json"
+        },
+        {
+          "label": "Actual independent native asset review",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/ASSET_ENGINE_REVIEW.md"
+        }
+      ],
+      "checks": [
+        {
+          "name": "Source (ubuntu-24.04)",
+          "result": "pass"
+        },
+        {
+          "name": "Source (windows-latest)",
+          "result": "pass"
+        },
+        {
+          "name": "Browser package",
+          "result": "pass"
+        }
+      ],
+      "knownIssues": "Human audio comfort, physical mobile testing, complete natural campaign and owner-private hosted PWA investigation remain separate."
+    },
+    {
+      "id": "build-61170d1f",
+      "title": "Normal integrated pixel UI dual-renderer build",
+      "body": "Actual source input hash76785526e166f2fb5dc0cdd0f1dc5ba135c80487f6186ba8a2cfe5fb589ed98f. This build was inspected on both desktop backends; current three scoped refinements are complete. Subsequent GitHub final integration checks remain pending.",
+      "author": "Producer",
+      "source": "Actual frozen department handoffs, independent Settings review, Root normal dual-renderer browser inspection and native integration checks",
+      "createdAt": "2026-10-11T03:59:18.534Z",
+      "revision": "ec7504065e8830293c54f5c719ade368985973dd",
+      "evidence": [
+        {
+          "label": "Actual integrated desktop acceptance and remaining gates",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/CURRENT_UI_ACCEPTANCE.md"
+        }
+      ],
+      "checks": [
+        {
+          "name": "Locked workspace native433",
+          "result": "pass"
+        },
+        {
+          "name": "Shell292 pass/1 platform skip",
+          "result": "pass"
+        },
+        {
+          "name": "Strict Clippy/TypeScript",
+          "result": "pass"
+        },
+        {
+          "name": "Normal dual-renderer/PWA build",
+          "result": "pass"
+        },
+        {
+          "name": "Actual Rust/SaveStore18 headless",
+          "result": "pass"
+        },
+        {
+          "name": "Desktop responsive UI interactions",
+          "result": "pass"
+        },
+        {
+          "name": "Physical-phone touch/30-minute soak",
+          "result": "not_run"
+        }
+      ],
+      "knownIssues": "Human audio comfort, natural full campaign and owner-private hosted PWA investigation remain separate."
     }
   ],
   "feedback": [],
@@ -12159,6 +12400,176 @@
       "author": "Producer",
       "source": "Actual scoped pipeline/preview evidence; clean final native CI still pending",
       "createdAt": "2026-10-11T03:25:36.736Z"
+    },
+    {
+      "id": "9ba7dd0d-94c4-4f40-8670-d130bc2de3e7",
+      "revision": 516,
+      "kind": "task.create",
+      "itemId": "task-2aff015a",
+      "title": "Top-down Haven facilities and hover-only labels",
+      "author": "Producer",
+      "source": "Actual latest user steering and direct native agent assignments",
+      "createdAt": "2026-10-11T03:35:35.305Z"
+    },
+    {
+      "id": "84b6d533-19ed-42fd-8f7a-aa3580a92244",
+      "revision": 517,
+      "kind": "task.create",
+      "itemId": "task-f90a8218",
+      "title": "Left minimap with colored tracked destinations",
+      "author": "Producer",
+      "source": "Actual latest user steering and direct native agent assignments",
+      "createdAt": "2026-10-11T03:35:35.323Z"
+    },
+    {
+      "id": "356a1706-ea68-45a1-8f92-3a040a121f87",
+      "revision": 518,
+      "kind": "task.create",
+      "itemId": "task-5ac4cfd3",
+      "title": "Responsive settings controls and detailed pixel icons",
+      "author": "Producer",
+      "source": "Actual latest user steering and direct native agent assignments",
+      "createdAt": "2026-10-11T03:35:35.354Z"
+    },
+    {
+      "id": "7848dacd-f293-4ae9-9ed2-f72f1f62d191",
+      "revision": 519,
+      "kind": "run",
+      "itemId": "run-8890a000",
+      "title": "Top-down Haven facilities and hover-only labels · running",
+      "author": "Producer",
+      "source": "Actual latest user steering and direct native agent assignments",
+      "createdAt": "2026-10-11T03:35:35.385Z"
+    },
+    {
+      "id": "5e45be53-6ad3-445a-bda9-d492f42495be",
+      "revision": 520,
+      "kind": "run",
+      "itemId": "run-97cbb00d",
+      "title": "Left minimap with colored tracked destinations · running",
+      "author": "Producer",
+      "source": "Actual latest user steering and direct native agent assignments",
+      "createdAt": "2026-10-11T03:35:35.416Z"
+    },
+    {
+      "id": "31aabde6-fa53-4d79-b8e0-f171d4162996",
+      "revision": 521,
+      "kind": "run",
+      "itemId": "run-eccdf5a9",
+      "title": "Responsive settings controls and detailed pixel icons · running",
+      "author": "Producer",
+      "source": "Actual latest user steering and direct native agent assignments",
+      "createdAt": "2026-10-11T03:35:35.448Z"
+    },
+    {
+      "id": "77acd2db-0c65-4137-810b-b72897571de6",
+      "revision": 522,
+      "kind": "task.update",
+      "itemId": "task-88f83840",
+      "title": "Exact pixel asset authoring and conversion pipeline",
+      "author": "Producer",
+      "source": "Actual clean GitHub Actions run 38108345034 and independent recorded asset review",
+      "createdAt": "2026-10-11T03:37:32.450Z"
+    },
+    {
+      "id": "3375361c-4993-4223-be43-9ca739d3fdf3",
+      "revision": 523,
+      "kind": "build",
+      "itemId": "build-75210f54",
+      "title": "Clean final asset foundation CI",
+      "author": "Producer",
+      "source": "Actual clean GitHub Actions run 38108345034 and independent recorded asset review",
+      "createdAt": "2026-10-11T03:37:32.474Z"
+    },
+    {
+      "id": "57b53daf-b0c9-428c-b6da-d59c9ffdedfb",
+      "revision": 524,
+      "kind": "decision",
+      "itemId": "decision-5df6a4f6",
+      "title": "Keep presentation anchored to actual runtime and semantic geometry",
+      "author": "Producer",
+      "source": "Actual Root, Engine, Gameplay and Art asynchronous design exchanges during this development session",
+      "createdAt": "2026-10-11T03:40:09.845Z"
+    },
+    {
+      "id": "c7ad039b-a736-4489-a540-c9fac181934e",
+      "revision": 525,
+      "kind": "task.update",
+      "itemId": "task-2aff015a",
+      "title": "Top-down Haven facilities and hover-only labels",
+      "author": "Producer",
+      "source": "Actual frozen department handoffs, independent Settings review, Root normal dual-renderer browser inspection and native integration checks",
+      "createdAt": "2026-10-11T03:59:18.374Z"
+    },
+    {
+      "id": "ab0058a2-ce18-47f6-803f-10e744b35427",
+      "revision": 526,
+      "kind": "run",
+      "itemId": "run-eb7e29f8",
+      "title": "/root/production_research · completed",
+      "author": "Producer",
+      "source": "Actual frozen department handoffs, independent Settings review, Root normal dual-renderer browser inspection and native integration checks",
+      "createdAt": "2026-10-11T03:59:18.394Z"
+    },
+    {
+      "id": "ad6e4413-532f-4eed-ba3c-2302066cfe52",
+      "revision": 527,
+      "kind": "task.update",
+      "itemId": "task-f90a8218",
+      "title": "Left minimap with colored tracked destinations",
+      "author": "Producer",
+      "source": "Actual frozen department handoffs, independent Settings review, Root normal dual-renderer browser inspection and native integration checks",
+      "createdAt": "2026-10-11T03:59:18.439Z"
+    },
+    {
+      "id": "36a1f805-8d7c-43bc-a107-47263a719a39",
+      "revision": 528,
+      "kind": "run",
+      "itemId": "run-9540a9d3",
+      "title": "/root/engine_research · completed",
+      "author": "Producer",
+      "source": "Actual frozen department handoffs, independent Settings review, Root normal dual-renderer browser inspection and native integration checks",
+      "createdAt": "2026-10-11T03:59:18.455Z"
+    },
+    {
+      "id": "2dee6080-ac60-4121-b783-558e3d917063",
+      "revision": 529,
+      "kind": "task.update",
+      "itemId": "task-5ac4cfd3",
+      "title": "Responsive settings controls and detailed pixel icons",
+      "author": "Producer",
+      "source": "Actual frozen department handoffs, independent Settings review, Root normal dual-renderer browser inspection and native integration checks",
+      "createdAt": "2026-10-11T03:59:18.478Z"
+    },
+    {
+      "id": "39759c1c-611d-43b3-9097-0b925b630d1e",
+      "revision": 530,
+      "kind": "run",
+      "itemId": "run-ce368513",
+      "title": "/root/gameplay_design · completed",
+      "author": "Producer",
+      "source": "Actual frozen department handoffs, independent Settings review, Root normal dual-renderer browser inspection and native integration checks",
+      "createdAt": "2026-10-11T03:59:18.502Z"
+    },
+    {
+      "id": "4fce415f-ee19-49b4-a607-29a35e4ecf9b",
+      "revision": 531,
+      "kind": "review",
+      "itemId": "review-b0a23441",
+      "title": "Actual asynchronous Settings review and integrated UI acceptance",
+      "author": "Producer",
+      "source": "Actual frozen department handoffs, independent Settings review, Root normal dual-renderer browser inspection and native integration checks",
+      "createdAt": "2026-10-11T03:59:18.518Z"
+    },
+    {
+      "id": "1255e21c-8bc4-4753-b6ee-e275a650b82c",
+      "revision": 532,
+      "kind": "build",
+      "itemId": "build-61170d1f",
+      "title": "Normal integrated pixel UI dual-renderer build",
+      "author": "Producer",
+      "source": "Actual frozen department handoffs, independent Settings review, Root normal dual-renderer browser inspection and native integration checks",
+      "createdAt": "2026-10-11T03:59:18.534Z"
     }
   ],
   "runRecords": [
@@ -16553,6 +16964,153 @@
       "author": "Producer",
       "source": "Actual bounded local worker timeout",
       "createdAt": "2026-10-11T03:02:54.502Z"
+    },
+    {
+      "id": "run-8890a000",
+      "title": "Top-down Haven facilities and hover-only labels · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "Top-down Haven facilities and hover-only labels",
+      "state": "running",
+      "observedAt": "2026-10-11T03:35:35.366Z",
+      "taskIds": [
+        "task-2aff015a"
+      ],
+      "summary": "Direct assignment accepted by the real specialist. Implementation and acceptance pending.",
+      "evidence": [
+        {
+          "label": "Actual recorded assignment",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/CURRENT_UI_ASSIGNMENTS.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual latest user steering and direct native agent assignments",
+      "createdAt": "2026-10-11T03:35:35.385Z"
+    },
+    {
+      "id": "run-97cbb00d",
+      "title": "Left minimap with colored tracked destinations · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Left minimap with colored tracked destinations",
+      "state": "running",
+      "observedAt": "2026-10-11T03:35:35.397Z",
+      "taskIds": [
+        "task-f90a8218"
+      ],
+      "summary": "Direct assignment accepted by the real specialist. Implementation and acceptance pending.",
+      "evidence": [
+        {
+          "label": "Actual recorded assignment",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/CURRENT_UI_ASSIGNMENTS.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual latest user steering and direct native agent assignments",
+      "createdAt": "2026-10-11T03:35:35.416Z"
+    },
+    {
+      "id": "run-eccdf5a9",
+      "title": "Responsive settings controls and detailed pixel icons · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Responsive settings controls and detailed pixel icons",
+      "state": "running",
+      "observedAt": "2026-10-11T03:35:35.429Z",
+      "taskIds": [
+        "task-5ac4cfd3"
+      ],
+      "summary": "Direct assignment accepted by the real specialist. Implementation and acceptance pending.",
+      "evidence": [
+        {
+          "label": "Actual recorded assignment",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/CURRENT_UI_ASSIGNMENTS.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual latest user steering and direct native agent assignments",
+      "createdAt": "2026-10-11T03:35:35.448Z"
+    },
+    {
+      "id": "run-eb7e29f8",
+      "title": "/root/production_research · completed",
+      "agentId": "/root/production_research",
+      "agentLabel": "/root/production_research",
+      "state": "completed",
+      "observedAt": "2026-10-11T03:59:18.386Z",
+      "taskIds": [
+        "task-2aff015a"
+      ],
+      "summary": "Specialist source/handoff frozen and integrated. Root completed scoped both-backend desktop UI acceptance; physical/human/full natural campaign gates remain separate.",
+      "evidence": [
+        {
+          "label": "Actual integrated desktop acceptance and remaining gates",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/CURRENT_UI_ACCEPTANCE.md"
+        },
+        {
+          "label": "Frozen implementation handoff",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/HAVEN_TOPDOWN_HANDOFF.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual frozen department handoffs, independent Settings review, Root normal dual-renderer browser inspection and native integration checks",
+      "createdAt": "2026-10-11T03:59:18.394Z"
+    },
+    {
+      "id": "run-9540a9d3",
+      "title": "/root/engine_research · completed",
+      "agentId": "/root/engine_research",
+      "agentLabel": "/root/engine_research",
+      "state": "completed",
+      "observedAt": "2026-10-11T03:59:18.448Z",
+      "taskIds": [
+        "task-f90a8218"
+      ],
+      "summary": "Specialist source/handoff frozen and integrated. Root completed scoped both-backend desktop UI acceptance; physical/human/full natural campaign gates remain separate.",
+      "evidence": [
+        {
+          "label": "Actual integrated desktop acceptance and remaining gates",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/CURRENT_UI_ACCEPTANCE.md"
+        },
+        {
+          "label": "Frozen implementation handoff",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/NATIVE_MINIMAP_HANDOFF.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual frozen department handoffs, independent Settings review, Root normal dual-renderer browser inspection and native integration checks",
+      "createdAt": "2026-10-11T03:59:18.455Z"
+    },
+    {
+      "id": "run-ce368513",
+      "title": "/root/gameplay_design · completed",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "/root/gameplay_design",
+      "state": "completed",
+      "observedAt": "2026-10-11T03:59:18.486Z",
+      "taskIds": [
+        "task-5ac4cfd3"
+      ],
+      "summary": "Specialist source/handoff frozen and integrated. Root completed scoped both-backend desktop UI acceptance; physical/human/full natural campaign gates remain separate.",
+      "evidence": [
+        {
+          "label": "Actual integrated desktop acceptance and remaining gates",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/CURRENT_UI_ACCEPTANCE.md"
+        },
+        {
+          "label": "Frozen implementation handoff",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/SETTINGS_HANDOFF.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual frozen department handoffs, independent Settings review, Root normal dual-renderer browser inspection and native integration checks",
+      "createdAt": "2026-10-11T03:59:18.502Z"
     }
   ],
   "phaseDescription": "Desktop-first Rust/WASM solo game and local Studio are implemented. Reviewed occupied-cell art, reproducible conversion, dual renderer builds and source-backed Dev Bible are integrating. Natural campaign balance, human listening, hosted update lifecycle and physical phones remain separate pending gates."
