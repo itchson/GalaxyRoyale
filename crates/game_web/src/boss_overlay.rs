@@ -773,6 +773,64 @@ mod tests {
     }
 
     #[test]
+    fn right_footer_and_minimap_use_the_same_full_screen_overlay_reservations() {
+        let game = game_core::Game::new(game_core::Profile::default());
+        let hud = game.hud();
+        let focus = game.render_focus(1.0);
+        for (viewport, insets, touch) in [
+            ([533.0, 300.0], [0.0; 4], false),
+            ([320.0, 180.0], [0.0; 4], true),
+            ([360.0, 204.0], [10.0, 22.0, 14.0, 18.0], false),
+        ] {
+            let scene = UiScene::default();
+            let input = OverlayInput {
+                hud: &hud,
+                focus,
+                camera: hud.camera,
+                viewport,
+                insets,
+                zoom: 1.0,
+                now_ms: 0,
+                scene: &scene,
+                touch,
+            };
+            let layout = FlightStatusLayout::new(&FlightStatusInput {
+                viewport,
+                insets,
+                header: None,
+                status_hits: [None; 2],
+                touch,
+                attached_vitals: true,
+                player: focus.player,
+                player_radius: focus.player_radius,
+                protected_core: None,
+                camera: hud.camera,
+                zoom: 1.0,
+            })
+            .unwrap();
+            let reserved = Reserved::from_input(&input, false);
+            let footer = layout.strip.unwrap();
+            assert!(footer[2] <= 180.0);
+            for local in [layout.strip, layout.navigation, layout.vitals]
+                .into_iter()
+                .flatten()
+            {
+                let screen = FlightStatusLayout::full_bounds(Some(local), insets).unwrap();
+                let rect = Rect::new(
+                    screen[0].into(),
+                    screen[1].into(),
+                    screen[2].into(),
+                    screen[3].into(),
+                );
+                assert!(reserved.rects[..reserved.len].contains(&rect));
+            }
+            if let Some(map) = layout.navigation {
+                assert_eq!(map[0] + map[2], footer[0] + footer[2]);
+            }
+        }
+    }
+
+    #[test]
     fn small_touch_boss_keeps_critical_widgets_and_restores_telemetry_after_encounter() {
         let mut game = game_core::Game::new(game_core::Profile::default());
         game.diagnostic("boss-bastion-5");

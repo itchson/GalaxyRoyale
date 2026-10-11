@@ -12,6 +12,7 @@ mod isotope_scar;
 mod navigation;
 pub use navigation::{NavigationHud, NavigationTarget};
 mod pixel_assets;
+mod player_presentation;
 mod radiation_enemies;
 mod segmented;
 pub mod universe_map;
@@ -3295,6 +3296,14 @@ impl Game {
             pixel_assets::color(4),
             pixel_assets::color(33),
         ];
+        let maximum_player_hull = Stats::from_profile(&self.profile).hull;
+        // Spawn/dock grace exceeds the hit window; don't replay the previous
+        // ship's damage tint on the freshly repaired/replaced body.
+        let recent_player_damage = if self.invulnerability > 0.45 {
+            0.45
+        } else {
+            self.since_damage
+        };
         self.render_background(frame, Vec2::from_array(self.render_camera(alpha)));
         regions::background_with_density(
             frame,
@@ -3383,14 +3392,6 @@ impl Game {
             if !self.visible(m.position, actor.radius + cue_extent) {
                 continue;
             }
-            if actor.kind == Kind::Player
-                && self.invulnerability > 0.0
-                && !self.reduced_motion
-                && !self.stress_mode
-                && ((self.cosmetic_time() * 18.0).floor() as u32).is_multiple_of(2)
-            {
-                continue;
-            }
             if let Some(boss) = boss
                 && let Kind::Boss(family) = actor.kind
             {
@@ -3409,7 +3410,21 @@ impl Game {
                 body,
                 actor_transform(m, *actor),
                 ACTOR_MATERIAL,
-                |cell, color| animate_actor_cell(cell, color, self.cosmetic_time(), lights),
+                |cell, color| {
+                    let color = animate_actor_cell(cell, color, self.cosmetic_time(), lights);
+                    if actor.kind == Kind::Player {
+                        player_presentation::tint(
+                            color,
+                            actor.health,
+                            maximum_player_hull,
+                            recent_player_damage,
+                            self.cosmetic_time(),
+                            self.reduced_motion,
+                        )
+                    } else {
+                        color
+                    }
+                },
             );
             if actor.kind == Kind::Player {
                 let glow = (self.cosmetic_time() * 24.0).sin() * 0.5 + 0.5;

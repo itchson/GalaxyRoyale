@@ -562,7 +562,7 @@ pub struct FlightStatusLayout {
     pub stats: Option<[f32; 4]>,
     pub context: Option<[f32; 4]>,
     pub vitals: Option<[f32; 4]>,
-    /// North-up minimap, above the footer on the left. Reserved independently.
+    /// North-up minimap, above the right-anchored footer. Reserved independently.
     pub navigation: Option<[f32; 4]>,
     pub viewport: [f32; 2],
 }
@@ -621,10 +621,29 @@ impl FlightStatusLayout {
         let [width, height] = viewport;
         let central_left = hits[0][0] + hits[0][2] + 4.0;
         let central_width = hits[1][0] - 4.0 - central_left;
-        let central = [central_left, height - 28.0, central_width, 22.0];
-        let bottom_strip = [6.0, height - 28.0, width - 12.0, 22.0];
-        let above_pads = [6.0, hits[0][1].min(hits[1][1]) - 26.0, width - 12.0, 22.0];
-        let slim = [6.0, 0.0, width - 12.0, 10.0];
+        // Footer and map share one right edge. Keep text narrow enough to read
+        // as a quiet status block rather than a banner across the universe.
+        let footer_width = (width - 12.0).min(180.0);
+        let central_footer_width = central_width.min(footer_width);
+        let central = [
+            central_left + central_width - central_footer_width,
+            height - 28.0,
+            central_footer_width,
+            22.0,
+        ];
+        let bottom_strip = [
+            width - 6.0 - footer_width,
+            height - 28.0,
+            footer_width,
+            22.0,
+        ];
+        let above_pads = [
+            width - 6.0 - footer_width,
+            hits[0][1].min(hits[1][1]) - 26.0,
+            footer_width,
+            22.0,
+        ];
+        let slim = [width - 6.0 - footer_width, 0.0, footer_width, 10.0];
         let strip = if input.touch {
             [
                 (central_width >= 120.0).then_some(central),
@@ -658,28 +677,31 @@ impl FlightStatusLayout {
             let nearest = p.clamp(Vec2::new(r[0], r[1]), Vec2::new(r[0] + r[2], r[1] + r[3]));
             p.distance_squared(nearest) > radius * radius
         };
-        // Keep one honest, fixed-size map above the footer and (on touch) the
-        // actual joystick hit rectangle. No unsafe right-side rescue or overlap
-        // with a protected boss core; overconstrained tiny layouts omit the map.
+        // Keep one honest, fixed-size map above the footer's right edge and (on
+        // touch) the actual fire hit rectangle. Overconstrained layouts omit
+        // optional navigation rather than obscuring controls or protected cores.
         let navigation = strip
             .filter(|_| input.attached_vitals || core.is_none())
             .and_then(|s| {
-                let y = (s[1] - 4.0 - MINIMAP_SIZE).min(if input.touch {
-                    hits[0][1] - 4.0 - MINIMAP_SIZE
+                let above_footer = s[1] - 4.0 - MINIMAP_SIZE;
+                let above_fire = if input.touch {
+                    above_footer.min(hits[1][1] - 4.0 - MINIMAP_SIZE)
                 } else {
-                    height
-                });
-                let r = [6.0, y, MINIMAP_SIZE, MINIMAP_SIZE];
-                (clear(r)
-                    && !hud_overlap(r, s, 2.0)
-                    && input
-                        .status_hits
-                        .iter()
-                        .flatten()
-                        .all(|hit| !hud_overlap(r, *hit, 2.0))
-                    && avoids_disc(r, center, radius + 4.0)
-                    && core.is_none_or(|(p, radius)| avoids_disc(r, p, radius)))
-                .then_some(r)
+                    above_footer
+                };
+                [above_footer, above_fire].into_iter().find_map(|y| {
+                    let r = [s[0] + s[2] - MINIMAP_SIZE, y, MINIMAP_SIZE, MINIMAP_SIZE];
+                    (clear(r)
+                        && !hud_overlap(r, s, 2.0)
+                        && input
+                            .status_hits
+                            .iter()
+                            .flatten()
+                            .all(|hit| !hud_overlap(r, *hit, 2.0))
+                        && avoids_disc(r, center, radius + 4.0)
+                        && core.is_none_or(|(p, radius)| avoids_disc(r, p, radius)))
+                    .then_some(r)
+                })
             });
         // Never clamp an offscreen ship to a false marker at the viewport edge.
         let vitals = (input.attached_vitals

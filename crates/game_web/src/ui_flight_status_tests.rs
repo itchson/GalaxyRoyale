@@ -311,7 +311,9 @@ fn compact_navigation_keeps_room_for_essential_fallback_and_context_cells() {
             assert!(!hud_overlap(stats, navigation, 0.0));
             assert_eq!([navigation[2], navigation[3]], [44.0, 44.0]);
             assert!(
-                navigation[0] == 6.0 && navigation[1] + navigation[3] < layout.strip.unwrap()[1]
+                navigation[0] + navigation[2]
+                    == layout.strip.unwrap()[0] + layout.strip.unwrap()[2]
+                    && navigation[1] + navigation[3] < layout.strip.unwrap()[1]
             );
         }
         assert!(stats[2] >= "H100 S100 L1 C0/16".len() as f32 * RoyaleMicro::ADVANCE - 1.0);

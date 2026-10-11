@@ -62,7 +62,7 @@ fn world_relative_markers_preserve_cardinals_distance_and_circular_clamp() {
 }
 
 #[test]
-fn left_above_footer_minimap_avoids_actual_header_controls_and_allows_safe_insets() {
+fn right_above_footer_minimap_avoids_actual_header_controls_and_allows_safe_insets() {
     for (viewport, insets, touch, hit) in [
         ([533.0, 300.0], [0.0; 4], false, 22.0),
         ([533.0, 300.0], [0.0; 4], true, 22.0),
@@ -78,10 +78,17 @@ fn left_above_footer_minimap_avoids_actual_header_controls_and_allows_safe_inset
             let scene = header_tests::scene(viewport, insets, hit);
             i.header = flight_header(&scene, insets);
             let layout = FlightStatusLayout::new(&i).unwrap();
-            let map = layout
-                .navigation
-                .expect("supported fixture has room above footer and controls");
-            assert_eq!([map[0], map[2], map[3]], [6.0, 44.0, 44.0]);
+            let Some(map) = layout.navigation else {
+                // At max zoom a central player disc and both real touch pads
+                // can leave no clear right-side map. Essential text survives.
+                assert!(touch && layout.viewport[0] <= 320.0 && zoom > 1.0);
+                assert!(layout.stats.is_some());
+                continue;
+            };
+            let footer = layout.strip.unwrap();
+            assert_eq!([map[2], map[3]], [44.0, 44.0]);
+            assert_eq!(map[0] + map[2], footer[0] + footer[2]);
+            assert!(footer[2] <= 180.0);
             assert!(map[1] >= 0.0 && map[1] + map[3] + 2.0 <= layout.strip.unwrap()[1]);
             assert!(map[0] + map[2] <= layout.viewport[0]);
             assert!(i.header.is_none_or(|r| !hud_overlap(map, r, 2.0)));
@@ -100,6 +107,59 @@ fn left_above_footer_minimap_avoids_actual_header_controls_and_allows_safe_inset
 }
 
 #[test]
+fn footer_moves_with_map_right_edge_and_retains_exact_context_exports() {
+    for (view, insets, touch) in [
+        ([533.0, 300.0], [0.0; 4], false),
+        ([320.0, 180.0], [0.0; 4], false),
+        ([533.0, 300.0], [0.0; 4], true),
+        ([360.0, 204.0], [10.0, 22.0, 14.0, 18.0], true),
+    ] {
+        let mut i = input(view, touch);
+        i.insets = insets;
+        let l = FlightStatusLayout::new(&i).unwrap();
+        let footer = l.strip.unwrap();
+        assert!(footer[2] <= 180.0);
+        let edge = if touch && footer[1] == l.viewport[1] - 28.0 {
+            touch_hit_rects(l.viewport)[1][0] - 4.0
+        } else {
+            l.viewport[0] - 6.0
+        };
+        assert_eq!(footer[0] + footer[2], edge);
+        if !touch {
+            assert_eq!(
+                footer,
+                [l.viewport[0] - 186.0, l.viewport[1] - 28.0, 180.0, 22.0]
+            );
+        }
+        let context = l.context.unwrap();
+        assert_eq!(
+            context,
+            [footer[0] + 4.0, footer[1] + 12.0, footer[2] - 8.0, 5.0]
+        );
+        assert_eq!(
+            FlightStatusLayout::full_bounds(Some(context), insets),
+            Some([
+                context[0] + insets[3],
+                context[1] + insets[0],
+                context[2],
+                context[3]
+            ])
+        );
+        if let Some(map) = l.navigation {
+            assert_eq!(map[0] + map[2], footer[0] + footer[2]);
+            assert!(!hud_overlap(map, footer, 2.0));
+        }
+        if touch {
+            assert!(
+                touch_hit_rects(l.viewport)
+                    .iter()
+                    .all(|hit| !hud_overlap(footer, *hit, 2.0))
+            );
+        }
+    }
+}
+
+#[test]
 fn overconstrained_map_fails_closed_without_hiding_footer_or_health() {
     let mut i = input([180.0, 140.0], true);
     let layout = FlightStatusLayout::new(&i).unwrap();
@@ -108,6 +168,12 @@ fn overconstrained_map_fails_closed_without_hiding_footer_or_health() {
     i = input([320.0, 180.0], true);
     let map = FlightStatusLayout::new(&i).unwrap().navigation.unwrap();
     i.status_hits[0] = Some(map);
+    i.status_hits[1] = Some([
+        map[0],
+        touch_hit_rects(i.viewport)[1][1] - 4.0 - MINIMAP_SIZE,
+        MINIMAP_SIZE,
+        MINIMAP_SIZE,
+    ]);
     assert!(FlightStatusLayout::new(&i).unwrap().navigation.is_none());
     i.status_hits = [None; 2];
     let view = CameraView::new(Vec2::ZERO, Vec2::from_array(i.viewport), 1.0).unwrap();
@@ -116,7 +182,14 @@ fn overconstrained_map_fails_closed_without_hiding_footer_or_health() {
         2.0,
     ));
     let blocked = FlightStatusLayout::new(&i).unwrap();
-    assert!(blocked.navigation.is_none());
+    if let Some(rescue) = blocked.navigation {
+        let core = Vec2::new(map[0] + 22.0, map[1] + 22.0);
+        let nearest = core.clamp(
+            Vec2::new(rescue[0], rescue[1]),
+            Vec2::new(rescue[0] + rescue[2], rescue[1] + rescue[3]),
+        );
+        assert!(core.distance(nearest) > 6.0);
+    }
     assert!(blocked.stats.is_some());
 }
 
