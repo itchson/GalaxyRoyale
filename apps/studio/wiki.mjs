@@ -33,7 +33,7 @@ export function canonicalWikiPath(value) {
   if (
     typeof value !== "string" ||
     value.length > 600 ||
-    !/^(docs|crates|apps|assets)\/[A-Za-z0-9_./-]+$/.test(value) ||
+    !/^(docs|crates|apps|assets|artifacts)\/[A-Za-z0-9_./-]+$/.test(value) ||
     value.split("/").some((part) => !part || part.startsWith("."))
   )
     fail("Invalid Wiki file path.");
