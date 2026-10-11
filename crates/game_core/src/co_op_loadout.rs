@@ -31,6 +31,20 @@ pub struct OwnedLoadout {
     /// Effect-only offline claim; missing historical builds keep evolution one.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub echo_evolution: Option<u8>,
+    /// Ordinary Repulsor effect only; no remote boss defeat history is imported.
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "present_evolution"
+    )]
+    pub nova_evolution: Option<u8>,
+}
+
+fn present_evolution<'de, D: serde::Deserializer<'de>>(
+    deserializer: D,
+) -> Result<Option<u8>, D::Error> {
+    // Missing is the historical default. A supplied null is not a numeric claim.
+    u8::deserialize(deserializer).map(Some)
 }
 
 impl OwnedLoadout {
@@ -75,6 +89,9 @@ impl OwnedLoadout {
             echo_evolution: (ship_progression::equipped_rank(profile, 3) > 0)
                 .then(|| bosses::evolution(profile, 0))
                 .filter(|&evolution| evolution > 1),
+            nova_evolution: (ship_progression::equipped_rank(profile, 4) > 0)
+                .then(|| bosses::evolution(profile, 1))
+                .filter(|&evolution| evolution > 1),
         };
         result.profile(&ParticipantSpec {
             id: co_op::ParticipantId::parse("00000000000000000000000000000000")?,
@@ -94,6 +111,9 @@ impl OwnedLoadout {
             || self.relic_count > 20
             || self.echo_evolution.is_some_and(|evolution| {
                 !(1..=5).contains(&evolution) || !self.slots[0].is_some_and(|slot| slot.index == 3)
+            })
+            || self.nova_evolution.is_some_and(|evolution| {
+                !(1..=5).contains(&evolution) || !self.slots[1].is_some_and(|slot| slot.index == 4)
             })
             || ((self.owned_ships >> 9) != 0) != self.royal_victory
             || (self.royal_victory && self.patches != u8::MAX)

@@ -2342,14 +2342,6 @@ impl Game {
         let impact_rank = ship_progression::equipped_rank(&self.profile, 11);
         if (nova_rank > 0 || impact_rank > 0) && self.repulsor_timer <= 0.0 {
             let evolution = bosses::evolution(&self.profile, 1);
-            let reach = if evolution >= 4 {
-                120.0
-            } else if evolution >= 2 {
-                90.0
-            } else {
-                70.0
-            };
-            self.transient_light(position, 165.0, [0.16, 0.65, 1.0], 1.5, 0.45);
             self.repulsor_timer = if impact_rank > 0 {
                 7.5 * (1.0 - 0.06 * impact_rank.saturating_sub(1) as f32)
             } else {
@@ -2358,57 +2350,7 @@ impl Game {
             if evolution >= 4 {
                 self.repulsor_timer *= 0.85;
             }
-            if evolution >= 3 {
-                let mut reflected = 0;
-                let mut cleared = Vec::new();
-                for (entity, (motion, bullet)) in self
-                    .world
-                    .query_mut::<(Entity, (&mut Motion, &mut Bullet))>()
-                {
-                    if !bullet.player && motion.position.distance(position) < reach {
-                        if evolution >= 5 && reflected < 16 {
-                            bullet.player = true;
-                            bullet.remaining_hits = 2;
-                            bullet.previous_hit = None;
-                            bullet.life = 1.5;
-                            motion.velocity = -motion.velocity;
-                            motion.heading = motion.velocity.y.atan2(motion.velocity.x);
-                            reflected += 1;
-                        } else {
-                            cleared.push(entity);
-                        }
-                    }
-                }
-                for entity in cleared {
-                    let _ = self.world.despawn(entity);
-                }
-            }
-            let targets: Vec<_> = self
-                .world
-                .query::<(Entity, (&Motion, &Actor))>()
-                .iter()
-                .filter(|(_, (m, a))| {
-                    a.kind != Kind::Player
-                        && (m.position - position).length() < reach
-                        && self.safe_zone_at(m.position).is_none()
-                })
-                .map(|(e, (m, _))| (e, *m))
-                .collect();
-            for (e, m) in targets {
-                let direction = (m.position - position).normalize_or_zero();
-                self.damage_actor(e, 12.0, Vec2::ZERO, direction * 110.0);
-            }
-            for i in 0..36 {
-                let d = forward(i as f32 * TAU / 36.0);
-                self.particle(
-                    position + d * 8.0,
-                    d * 150.0,
-                    0.4,
-                    rgba(147, 193, 255, 255),
-                    2.0,
-                );
-            }
-            self.event("ability-nova", position, 1.0);
+            self.emit_repulsor_nova(position, evolution, None);
         }
     }
 

@@ -117,6 +117,9 @@ pub(super) struct Pilot {
     pub echo_rank: u8,
     pub echo_evolution: u8,
     pub echo_phase: u8,
+    pub nova_rank: u8,
+    pub nova_evolution: u8,
+    pub nova_timer: f32,
     pub input: InputFrame,
     pub last_sequence: Option<u32>,
     pub input_tick: u32,
@@ -301,6 +304,10 @@ fn pilot(
         || bosses::evolution(profile, 0),
         |build| build.echo_evolution.unwrap_or(1),
     );
+    let nova_evolution = owned_loadout.as_ref().map_or_else(
+        || bosses::evolution(profile, 1),
+        |build| build.nova_evolution.unwrap_or(1),
+    );
     Pilot {
         admission,
         spec,
@@ -320,6 +327,9 @@ fn pilot(
         echo_rank: ship_progression::equipped_rank(profile, 3),
         echo_evolution,
         echo_phase: 0,
+        nova_rank: ship_progression::equipped_rank(profile, 4),
+        nova_evolution,
+        nova_timer: 0.0,
         input: InputFrame::default(),
         last_sequence: None,
         input_tick: 0,
@@ -627,6 +637,7 @@ impl Game {
             }
             p.since_damage += dt;
             p.invulnerability = (p.invulnerability - dt).max(0.0);
+            p.nova_timer -= dt;
             if p.fire_timer > 0.0 {
                 p.fire_timer -= dt;
                 if p.fire_timer.abs() <= 0.000_001 {
@@ -929,6 +940,21 @@ impl Game {
         let absorbed = p.shield.min(damage);
         p.shield -= absorbed;
         let hull_damage = damage - absorbed;
+        let nova = if p.nova_rank > 0 && p.nova_timer <= 0.0 {
+            p.nova_timer = 18.0 - 2.0 * p.nova_rank.saturating_sub(1) as f32;
+            if p.nova_evolution >= 4 {
+                p.nova_timer *= 0.85;
+            }
+            Some((
+                p.nova_evolution,
+                ShotOwner {
+                    id: p.admission.id,
+                    epoch: p.admission.epoch,
+                },
+            ))
+        } else {
+            None
+        };
         drop(p);
         if hull_damage > 0.0 {
             if let Ok(mut a) = self.world.get::<&mut Actor>(entity) {
@@ -947,6 +973,94 @@ impl Game {
             self.event("shield", motion.position, 0.8);
         }
         self.event("hit", motion.position, 0.9);
+        if let Some((evolution, owner)) = nova {
+            self.emit_repulsor_nova(motion.position, evolution, Some(owner));
+        }
+    }
+
+    /// Shared actual effect; solo retains its own dispatch/cooldown, while co-op
+    /// admits ordinary ID4 only and supplies transient membership ownership.
+    pub(super) fn emit_repulsor_nova(
+        &mut self,
+        position: Vec2,
+        evolution: u8,
+        owner: Option<ShotOwner>,
+    ) {
+        let reach = if evolution >= 4 {
+            120.0
+        } else if evolution >= 2 {
+            90.0
+        } else {
+            70.0
+        };
+        self.transient_light(position, 165.0, [0.16, 0.65, 1.0], 1.5, 0.45);
+        if evolution >= 3 {
+            let mut reflected = [None; 16];
+            let mut count = 0;
+            let mut cleared = Vec::new();
+            for (entity, (motion, bullet)) in self
+                .world
+                .query_mut::<(Entity, (&mut Motion, &mut Bullet))>()
+            {
+                if !bullet.player && motion.position.distance(position) < reach {
+                    if evolution >= 5 && count < reflected.len() {
+                        bullet.player = true;
+                        bullet.remaining_hits = 2;
+                        bullet.previous_hit = None;
+                        bullet.life = 1.5;
+                        motion.velocity = -motion.velocity;
+                        motion.heading = motion.velocity.y.atan2(motion.velocity.x);
+                        reflected[count] = Some(entity);
+                        count += 1;
+                    } else {
+                        cleared.push(entity);
+                    }
+                }
+            }
+            for entity in reflected.into_iter().flatten() {
+                if let Some(owner) = owner {
+                    self.world.insert_one(entity, owner).unwrap();
+                }
+            }
+            for entity in cleared {
+                let _ = self.world.despawn(entity);
+            }
+        }
+        let targets: Vec<_> = self
+            .world
+            .query::<(Entity, (&Motion, &Actor))>()
+            .iter()
+            .filter(|(_, (m, a))| {
+                a.kind != Kind::Player
+                    && (m.position - position).length() < reach
+                    && self.safe_zone_at(m.position).is_none()
+            })
+            .map(|(e, (m, _))| (e, *m))
+            .collect();
+        // Attribute both immediate kills and later reflected bullets to the
+        // triggering membership, then restore the enclosing collision's owner.
+        let previous_owner = self
+            .co_op
+            .as_mut()
+            .map(|session| std::mem::replace(&mut session.hit_owner, owner));
+        for (entity, motion) in targets {
+            let direction = (motion.position - position).normalize_or_zero();
+            self.damage_actor(entity, 12.0, Vec2::ZERO, direction * 110.0);
+        }
+        if let Some(previous) = previous_owner {
+            self.co_op.as_mut().unwrap().hit_owner = previous;
+        }
+        for i in 0..36 {
+            let direction = forward(i as f32 * TAU / 36.0);
+            self.particle(
+                position + direction * 8.0,
+                direction * 150.0,
+                0.4,
+                rgba(147, 193, 255, 255),
+                2.0,
+            );
+        }
+        self.event("ability-nova", position, 1.0);
     }
     pub(super) fn co_op_contacts(
         &mut self,
@@ -1218,3 +1332,7 @@ mod passive_tests;
 #[cfg(test)]
 #[path = "co_op_echo_tests.rs"]
 mod echo_tests;
+
+#[cfg(test)]
+#[path = "co_op_nova_tests.rs"]
+mod nova_tests;
