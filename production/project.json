@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 876,
+  "revision": 886,
   "name": "Galaxy Royale",
   "phase": "Playable solo slice → content and validation",
-  "updatedAt": "2026-10-11T20:42:21.233Z",
+  "updatedAt": "2026-10-11T20:57:05.749Z",
   "tasks": [
     {
       "id": "studio",
@@ -7295,13 +7295,13 @@
       "description": "Sequential isolated native timing/cell/transform evidence for current cached gas artwork. No GPU/phone FPS claim or speculative runtime rewrite.",
       "department": "Engine",
       "owner": "/root/engine_research",
-      "status": "active",
+      "status": "complete",
       "priority": "normal",
       "dependencies": [],
       "acceptanceCriteria": [
         {
           "text": "Actual source-pinned timings/counters and methodology limitations, including cold versus warm scope.",
-          "met": false
+          "met": true
         }
       ],
       "evidence": [
@@ -7309,12 +7309,22 @@
           "label": "Actual dispatched bounded next assignments",
           "kind": "artifact",
           "path": "artifacts/native-space-next-20261012/assignments.md"
+        },
+        {
+          "label": "Actual native measurements and limitations",
+          "kind": "artifact",
+          "path": "artifacts/cosmic-native-efficiency-20261012/HANDOFF.md"
+        },
+        {
+          "label": "All actual cold and warm samples",
+          "kind": "artifact",
+          "path": "artifacts/cosmic-native-efficiency-20261012/measurements.json"
         }
       ],
       "blocker": "",
-      "revision": 1,
+      "revision": 2,
       "createdAt": "2026-10-11T20:42:21.109Z",
-      "updatedAt": "2026-10-11T20:42:21.109Z"
+      "updatedAt": "2026-10-11T20:57:05.492Z"
     },
     {
       "id": "task-44d50df4",
@@ -7322,13 +7332,13 @@
       "description": "Derive camera, native observable clock and real80-second boundary plan; actual Root capture remains pending. No artificial application time mutation.",
       "department": "Art",
       "owner": "/root/production_research",
-      "status": "active",
+      "status": "complete",
       "priority": "normal",
       "dependencies": [],
       "acceptanceCriteria": [
         {
           "text": "Source-pinned executable camera/timing plan with honest visibility/reduced-motion limits.",
-          "met": false
+          "met": true
         }
       ],
       "evidence": [
@@ -7336,12 +7346,85 @@
           "label": "Actual dispatched bounded next assignments",
           "kind": "artifact",
           "path": "artifacts/native-space-next-20261012/assignments.md"
+        },
+        {
+          "label": "Source-pinned executable capture plan",
+          "kind": "artifact",
+          "path": "artifacts/native-space-next-20261012/comet-capture-plan.md"
+        },
+        {
+          "label": "Root frozen view; moving gate remains pending",
+          "kind": "artifact",
+          "path": "artifacts/native-space-next-20261012/comet-observation.md"
         }
       ],
       "blocker": "",
-      "revision": 1,
+      "revision": 2,
       "createdAt": "2026-10-11T20:42:21.134Z",
-      "updatedAt": "2026-10-11T20:42:21.134Z"
+      "updatedAt": "2026-10-11T20:57:05.518Z"
+    },
+    {
+      "id": "task-d87d697e",
+      "title": "Implement ordinary per-pilot Repulsor Nova parity",
+      "description": "Isolated native damage-reactive Nova, grounded solo behavior; cooldown/impulse/localized collision/safe-zone/owner-epoch lifecycle and meaningful native tests. No browser/shared rewards scope.",
+      "department": "Gameplay",
+      "owner": "/root/engine_research",
+      "status": "active",
+      "priority": "normal",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Isolated native damage-reactive Nova, grounded solo behavior; cooldown/impulse/localized collision/safe-zone/owner-epoch lifecycle and meaningful native tests. No browser/shared rewards scope.",
+          "met": false
+        }
+      ],
+      "evidence": [],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-11T20:57:05.606Z",
+      "updatedAt": "2026-10-11T20:57:05.606Z"
+    },
+    {
+      "id": "task-2acbb4c7",
+      "title": "Audit remaining deep-space geometric immersion risks",
+      "description": "Read-only source/native art audit of other samplers; rank at most three concrete candidates. Actual GPU visual approval remains Root work.",
+      "department": "Art",
+      "owner": "/root/production_research",
+      "status": "active",
+      "priority": "normal",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Read-only source/native art audit of other samplers; rank at most three concrete candidates. Actual GPU visual approval remains Root work.",
+          "met": false
+        }
+      ],
+      "evidence": [],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-11T20:57:05.669Z",
+      "updatedAt": "2026-10-11T20:57:05.669Z"
+    },
+    {
+      "id": "task-13d17835",
+      "title": "Design genuine RENKO starter fifth-shot browser proof",
+      "description": "Source-backed isolated-origin native starter test design and projectile evidence boundary. No profile editing, fake earned progress or browser mutation.",
+      "department": "QA",
+      "owner": "/root/gameplay_design",
+      "status": "active",
+      "priority": "normal",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Source-backed isolated-origin native starter test design and projectile evidence boundary. No profile editing, fake earned progress or browser mutation.",
+          "met": false
+        }
+      ],
+      "evidence": [],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-11T20:57:05.713Z",
+      "updatedAt": "2026-10-11T20:57:05.713Z"
     }
   ],
   "reviews": [
@@ -9324,6 +9407,39 @@
           "label": "Independent still-image settings review",
           "kind": "artifact",
           "path": "artifacts/native-echo-comet-20261012/settings-frame-review.md"
+        }
+      ]
+    },
+    {
+      "id": "review-bf817b4b",
+      "title": "Actual owned-starter WebGL2 lifecycle review",
+      "body": "Root executed eight operations against exact6964645 normal bundles and b048 visibility guard. Gameplay independently verified all eight raw capture hashes/provenance and 22 cumulative passing checks (14 unique), actual native owned metadata/complete commits, movement/fire, host end, distinct rejoin, guest leave, unchanged native and independent-origin IndexedDB hashes, and terminal created=closed2 each with zero requests/timers. This is an actual asynchronous evidence review. Six body changes were observed, zero same-count changes. Starter slots only; advanced Echo/full effects/shared rewards/NAT/eight clients/performance remain pending. Root disposed clients, closed the temporary tab, stopped verifiedPID12836 and restored regular4176 signaling.",
+      "author": "Root",
+      "source": "Actual source-pinned execution, frozen measurements and asynchronous specialist reviews",
+      "createdAt": "2026-10-11T20:57:05.544Z",
+      "participants": [
+        "Root",
+        "/root/gameplay_design"
+      ],
+      "taskIds": [
+        "task-05dd95cd",
+        "task-7e8e0a50"
+      ],
+      "evidence": [
+        {
+          "label": "Root actual run scope",
+          "kind": "artifact",
+          "path": "artifacts/owned-webgl2-20261012/README.md"
+        },
+        {
+          "label": "Eight verified captures",
+          "kind": "artifact",
+          "path": "artifacts/owned-webgl2-20261012/verified-summary.json"
+        },
+        {
+          "label": "Independent saved-artifact review",
+          "kind": "artifact",
+          "path": "artifacts/owned-webgl2-20261012/independent-review.md"
         }
       ]
     }
@@ -12161,6 +12277,64 @@
       ],
       "url": "http://league-final.localhost:4173/?qa=1&renderer=webgpu",
       "knownIssues": "Remnant intentionally faint. Shared co-op rewards/missions, full signature parity and guest transient FX remain incomplete; oldc87 stage is stale and unlaunched."
+    },
+    {
+      "id": "build-08c24b64",
+      "title": "Actual normal owned-starter WebGL2 RTC validation",
+      "body": "Validation of existing d749 normal packages; no new build or runtime source mutation. Root visible local two-client real WASM/controller/RTC run and independent review. Native cold/warm measurements are separate CPU-only evidence.",
+      "author": "Root",
+      "source": "Actual source-pinned execution, frozen measurements and asynchronous specialist reviews",
+      "createdAt": "2026-10-11T20:57:05.575Z",
+      "revision": "69646456ac3e104c94ca27bc79aeb774dd9ab757",
+      "evidence": [
+        {
+          "label": "Actual sanitized run",
+          "kind": "artifact",
+          "path": "artifacts/owned-webgl2-20261012/verified-summary.json"
+        },
+        {
+          "label": "Bounded actual native costs",
+          "kind": "artifact",
+          "path": "artifacts/cosmic-native-efficiency-20261012/HANDOFF.md"
+        },
+        {
+          "label": "Actual frozen form and pending motion gate",
+          "kind": "artifact",
+          "path": "artifacts/native-space-next-20261012/comet-observation.md"
+        }
+      ],
+      "checks": [
+        {
+          "name": "Eight actual owned-starter WebGL2 operations,22 cumulative checks",
+          "result": "pass"
+        },
+        {
+          "name": "Native/IndexedDB digests preserved and distinct rejoin",
+          "result": "pass"
+        },
+        {
+          "name": "Disposed all four created PCs;zero requests/timers",
+          "result": "pass"
+        },
+        {
+          "name": "Independent byte/provenance/scope review",
+          "result": "pass"
+        },
+        {
+          "name": "Native CPU measurement evidence verified;no native rerun by Root",
+          "result": "pass"
+        },
+        {
+          "name": "Advanced abilities,remote eight clients,NAT/physical performance",
+          "result": "not_run"
+        },
+        {
+          "name": "Dense moving-comet GPU continuity sequence",
+          "result": "not_run"
+        }
+      ],
+      "url": "http://league-final.localhost:4173/?qa=1&renderer=webgpu",
+      "knownIssues": "Shared rewards/missions and full ability/effect parity incomplete. Frozen comet form viewed; current browser sampling insufficient for dense moving continuity."
     }
   ],
   "feedback": [],
@@ -20924,6 +21098,106 @@
       "author": "Root",
       "source": "Actual next specialist dispatch after final visual evidence",
       "createdAt": "2026-10-11T20:42:21.233Z"
+    },
+    {
+      "id": "510334a3-65e2-4ef8-86ee-efae09bdb3d9",
+      "revision": 877,
+      "kind": "task.update",
+      "itemId": "task-6bf3a525",
+      "title": "Measure bounded native cosmic cache and extraction costs",
+      "author": "Root",
+      "source": "Actual source-pinned execution, frozen measurements and asynchronous specialist reviews",
+      "createdAt": "2026-10-11T20:57:05.492Z"
+    },
+    {
+      "id": "0e16899d-9ee2-43ee-9ba4-a0ed2aa7d59f",
+      "revision": 878,
+      "kind": "task.update",
+      "itemId": "task-44d50df4",
+      "title": "Prepare seeded moving-comet browser continuity capture",
+      "author": "Root",
+      "source": "Actual source-pinned execution, frozen measurements and asynchronous specialist reviews",
+      "createdAt": "2026-10-11T20:57:05.518Z"
+    },
+    {
+      "id": "4b4bcfbf-8d1d-4c58-8c8c-f004d62054d4",
+      "revision": 879,
+      "kind": "review",
+      "itemId": "review-bf817b4b",
+      "title": "Actual owned-starter WebGL2 lifecycle review",
+      "author": "Root",
+      "source": "Actual source-pinned execution, frozen measurements and asynchronous specialist reviews",
+      "createdAt": "2026-10-11T20:57:05.544Z"
+    },
+    {
+      "id": "1f5cf1e6-ee4f-41f9-b668-072a04c4fdf7",
+      "revision": 880,
+      "kind": "build",
+      "itemId": "build-08c24b64",
+      "title": "Actual normal owned-starter WebGL2 RTC validation",
+      "author": "Root",
+      "source": "Actual source-pinned execution, frozen measurements and asynchronous specialist reviews",
+      "createdAt": "2026-10-11T20:57:05.575Z"
+    },
+    {
+      "id": "aefc3527-4861-4b37-957b-b9c678f43cce",
+      "revision": 881,
+      "kind": "task.create",
+      "itemId": "task-d87d697e",
+      "title": "Implement ordinary per-pilot Repulsor Nova parity",
+      "author": "Root",
+      "source": "Actual source-pinned execution, frozen measurements and asynchronous specialist reviews",
+      "createdAt": "2026-10-11T20:57:05.606Z"
+    },
+    {
+      "id": "7f2bb280-9bfe-4b49-870d-9ee6d5ee1ed7",
+      "revision": 882,
+      "kind": "run",
+      "itemId": "run-c6130341",
+      "title": "Gameplay specialist · running",
+      "author": "Root",
+      "source": "Actual source-pinned execution, frozen measurements and asynchronous specialist reviews",
+      "createdAt": "2026-10-11T20:57:05.637Z"
+    },
+    {
+      "id": "a9c8930d-23d8-42b4-8a85-d22753855122",
+      "revision": 883,
+      "kind": "task.create",
+      "itemId": "task-2acbb4c7",
+      "title": "Audit remaining deep-space geometric immersion risks",
+      "author": "Root",
+      "source": "Actual source-pinned execution, frozen measurements and asynchronous specialist reviews",
+      "createdAt": "2026-10-11T20:57:05.669Z"
+    },
+    {
+      "id": "daa6e181-e144-4832-a0be-1cb421b4ffa5",
+      "revision": 884,
+      "kind": "run",
+      "itemId": "run-58f76c26",
+      "title": "Art specialist · running",
+      "author": "Root",
+      "source": "Actual source-pinned execution, frozen measurements and asynchronous specialist reviews",
+      "createdAt": "2026-10-11T20:57:05.699Z"
+    },
+    {
+      "id": "3443f8c5-7319-4465-a2be-2903e83d7ad6",
+      "revision": 885,
+      "kind": "task.create",
+      "itemId": "task-13d17835",
+      "title": "Design genuine RENKO starter fifth-shot browser proof",
+      "author": "Root",
+      "source": "Actual source-pinned execution, frozen measurements and asynchronous specialist reviews",
+      "createdAt": "2026-10-11T20:57:05.713Z"
+    },
+    {
+      "id": "b80d0fde-27c6-471f-baa0-a8653c7dce1f",
+      "revision": 886,
+      "kind": "run",
+      "itemId": "run-f50e3de9",
+      "title": "QA specialist · running",
+      "author": "Root",
+      "source": "Actual source-pinned execution, frozen measurements and asynchronous specialist reviews",
+      "createdAt": "2026-10-11T20:57:05.749Z"
     }
   ],
   "runRecords": [
@@ -29031,6 +29305,72 @@
       "author": "Root",
       "source": "Actual next specialist dispatch after final visual evidence",
       "createdAt": "2026-10-11T20:42:21.233Z"
+    },
+    {
+      "id": "run-c6130341",
+      "title": "Gameplay specialist · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Gameplay specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T20:57:05.619Z",
+      "taskIds": [
+        "task-d87d697e"
+      ],
+      "summary": "Actual bounded follow-up dispatched after preserved evidence: Isolated native damage-reactive Nova, grounded solo behavior; cooldown/impulse/localized collision/safe-zone/owner-epoch lifecycle and meaningful native tests. No browser/shared rewards scope.",
+      "evidence": [
+        {
+          "label": "Current normal evidence boundary",
+          "kind": "artifact",
+          "path": "artifacts/owned-webgl2-20261012/README.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual source-pinned execution, frozen measurements and asynchronous specialist reviews",
+      "createdAt": "2026-10-11T20:57:05.637Z"
+    },
+    {
+      "id": "run-58f76c26",
+      "title": "Art specialist · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "Art specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T20:57:05.688Z",
+      "taskIds": [
+        "task-2acbb4c7"
+      ],
+      "summary": "Actual bounded follow-up dispatched after preserved evidence: Read-only source/native art audit of other samplers; rank at most three concrete candidates. Actual GPU visual approval remains Root work.",
+      "evidence": [
+        {
+          "label": "Current normal evidence boundary",
+          "kind": "artifact",
+          "path": "artifacts/owned-webgl2-20261012/README.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual source-pinned execution, frozen measurements and asynchronous specialist reviews",
+      "createdAt": "2026-10-11T20:57:05.699Z"
+    },
+    {
+      "id": "run-f50e3de9",
+      "title": "QA specialist · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "QA specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T20:57:05.731Z",
+      "taskIds": [
+        "task-13d17835"
+      ],
+      "summary": "Actual bounded follow-up dispatched after preserved evidence: Source-backed isolated-origin native starter test design and projectile evidence boundary. No profile editing, fake earned progress or browser mutation.",
+      "evidence": [
+        {
+          "label": "Current normal evidence boundary",
+          "kind": "artifact",
+          "path": "artifacts/owned-webgl2-20261012/README.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual source-pinned execution, frozen measurements and asynchronous specialist reviews",
+      "createdAt": "2026-10-11T20:57:05.749Z"
     }
   ],
   "phaseDescription": "Desktop-first Rust/WASM solo game and local Studio are implemented. Reviewed occupied-cell art, reproducible conversion, responsive native settings/icons and minimap, strict GitHub integration gates and source-backed Dev Bible are integrated. Natural campaign balance, human listening, owner-private update lifecycle and physical phones remain separate pending gates."

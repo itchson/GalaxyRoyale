@@ -27,7 +27,9 @@ See `artifacts/league-coop-native-20261012/README.md` and its reports for exact 
 - The later visibility safeguard refuses hidden/off-screen drive observations. Earlier successful runs do not execute that amended helper. A fresh source-pinned stage is required for a new claim.
 - Normal 1b754da passed 805 Rust tests, 546 shell tests and strict native/WASM Clippy. Eight explicit native exporters and one existing Windows case were skipped. Final art captures do not extend the earlier RTC scope.
 
-Owned WebGL2 RTC, advanced owned builds, fifth-shot ownership through the browser, equal-count cell mutation over RTC, eight clients, Internet/NAT/TURN, physical phones, background recovery and performance soaks remain open. A native unit test, synthetic boundary fixture or channel-ready event is not a real gameplay run.
+The source-pinned normal 6964645 run with the amended b048 helper now covers actual owned-starter WebGL2 RTC: channel/native admission, complete owned replica commits, visible movement/fire, host end, distinct-session rejoin, guest leave, unchanged native and independent-origin IndexedDB digests, and disposal with every created peer closed and zero requests/timers. Eight immutable Root per-action reports are retained in `artifacts/owned-webgl2-20261012/`. The guest recorded six body changes but zero same-count changes. The exact native runtime remains d749bc6 across the evidence-only HEAD.
+
+Advanced owned builds, fifth-shot ownership through the browser, equal-count cell mutation over RTC, eight clients, Internet/NAT/TURN, physical phones, background recovery and performance soaks remain open. A native unit test, synthetic boundary fixture or channel-ready event is not a real gameplay run. This starter run does not establish Echo execution or full ability/audio/particle parity.
 
 ## Runtime and QA discipline
 

@@ -1,0 +1,7 @@
+{
+  "density": false,
+  "motion": true,
+  "report": "{\"backend\":\"webgpu\",\"scenario\":\"warp\",\"time\":3.49999737739563,\"paused\":false,\"position\":[-10.337005615234375,-6691.4306640625],\"durationSeconds\":50.76739999999997,\"samples\":63,\"quads\":11538,\"quadsRange\":[11538,43966],\"entities\":28,\"particles\":0,\"audio\":{\"context\":\"running\",\"title\":{\"active\":false,\"track\":\"absent\"},\"enabled\":true,\"disposed\":false,\"deathTail\":false,\"area\":\"reach\",\"biome\":4,\"champion\":null,\"hostiles\":0,\"boss\":false,\"combat\":0,\"targetCombat\":0,\"bossLayer\":0,\"corporation\":\"pan\",\"lowHull\":0,\"hull\":1,\"engine\":0,\"engineDuck\":1,\"throttle\":0,\"speed\":0,\"engines\":2,\"voices\":{\"music\":2,\"sfx\":0,\"continuous\":0},\"scheduledThemes\":[4],\"themes\":[{\"index\":4,\"name\":\"Radial / Isotope drift\",\"weight\":0.9999999178143987}]},\"frameMs\":{\"p50\":1000,\"p95\":1000.1000000000349,\"p99\":1004.2000000000116},\"simulationMs\":{\"p50\":1,\"p95\":2.100000001490116},\"renderMs\":{\"p50\":0.8999999985098839,\"p95\":2.7999999970197678},\"viewport\":[1280,720],\"memory\":{\"usedJSHeapSize\":12237606,\"totalJSHeapSize\":13554206,\"jsHeapSizeLimit\":4395630592}}",
+  "visible": "visible",
+  "zoom": "1.6"
+}

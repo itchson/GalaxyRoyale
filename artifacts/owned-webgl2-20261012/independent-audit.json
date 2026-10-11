@@ -1,0 +1,1303 @@
+{
+  "scope": "independent actual saved-artifact and pinned instrumentation review; Root operated browser",
+  "run_id": "7ab444d0ffebd2f4",
+  "backend": "webgl2",
+  "source_commit": "69646456ac3e104c94ca27bc79aeb774dd9ab757",
+  "stage_manifest_sha256": "38773dab964c857d8fc303d48ce7b5bd03e0735fd9e37a305322e24104b2ec2f",
+  "actual_capture_count": 8,
+  "final_cumulative_checks": 22,
+  "unique_checks": 14,
+  "profile_baselines": {
+    "host": "d3274ba8f4b1d875f252b963eb3ec3a24cc93c0419112def6ba8645fb11c2448",
+    "guest": "478b890c148d72a770cdf1ab893e75f92c55c9764257fdb2d22d05ecc64399e9"
+  },
+  "timeline": [
+    {
+      "operation": "initialize",
+      "captured_at": "2026-10-11T20:47:07.302Z",
+      "capture_sha256": "ec4f20f3b366aeef8c3281dd9873fe203032df8d3eae6792e8bb2a1432df6184",
+      "cumulative_checks": 5,
+      "new_check_names": [
+        "two-native-games",
+        "independent-save-origins",
+        "distinct-local-profiles",
+        "native-owned-export",
+        "saves-unchanged"
+      ],
+      "all_checks": [
+        {
+          "name": "two-native-games",
+          "passed": true
+        },
+        {
+          "name": "independent-save-origins",
+          "passed": true
+        },
+        {
+          "name": "distinct-local-profiles",
+          "passed": true
+        },
+        {
+          "name": "native-owned-export",
+          "passed": true
+        },
+        {
+          "name": "saves-unchanged",
+          "passed": true
+        }
+      ],
+      "session_distinct": null,
+      "clients": {
+        "host": {
+          "role": "host",
+          "init_stage": "ready",
+          "failure_code": null,
+          "phase": "idle",
+          "mode": "solo",
+          "created": 0,
+          "closed": 0,
+          "frames": 0,
+          "ticks": 0,
+          "captures": 0,
+          "entity_pages": 0,
+          "body_pages": 0,
+          "commits": 0,
+          "body_changes": 0,
+          "same_count_changes": 0,
+          "unchanged_bodies": 0,
+          "projectiles": 0,
+          "requests": 0,
+          "timers": 0,
+          "transport_ready": 0,
+          "admitted": 0,
+          "profile_equal": true,
+          "persisted_equal": true,
+          "persistent": true,
+          "progression_false": null,
+          "movement_observed": null,
+          "profile_sha": "d3274ba8f4b1d875f252b963eb3ec3a24cc93c0419112def6ba8645fb11c2448",
+          "baseline_sha": "d3274ba8f4b1d875f252b963eb3ec3a24cc93c0419112def6ba8645fb11c2448",
+          "persisted_sha": "d3274ba8f4b1d875f252b963eb3ec3a24cc93c0419112def6ba8645fb11c2448",
+          "owned_export": true,
+          "owned_view": null,
+          "selected_ship": 0,
+          "owned_slots": 1,
+          "owned_sha": "f3c1081d9a590505066994d7cf43c4733264c7a96cd6be53e6d3e4a32018f71a"
+        },
+        "guest": {
+          "role": "guest",
+          "init_stage": "ready",
+          "failure_code": null,
+          "phase": "idle",
+          "mode": "solo",
+          "created": 0,
+          "closed": 0,
+          "frames": 1,
+          "ticks": 0,
+          "captures": 0,
+          "entity_pages": 0,
+          "body_pages": 0,
+          "commits": 0,
+          "body_changes": 0,
+          "same_count_changes": 0,
+          "unchanged_bodies": 0,
+          "projectiles": 0,
+          "requests": 0,
+          "timers": 0,
+          "transport_ready": 0,
+          "admitted": 0,
+          "profile_equal": true,
+          "persisted_equal": true,
+          "persistent": true,
+          "progression_false": null,
+          "movement_observed": null,
+          "profile_sha": "478b890c148d72a770cdf1ab893e75f92c55c9764257fdb2d22d05ecc64399e9",
+          "baseline_sha": "478b890c148d72a770cdf1ab893e75f92c55c9764257fdb2d22d05ecc64399e9",
+          "persisted_sha": "478b890c148d72a770cdf1ab893e75f92c55c9764257fdb2d22d05ecc64399e9",
+          "owned_export": true,
+          "owned_view": null,
+          "selected_ship": 0,
+          "owned_slots": 1,
+          "owned_sha": "aead588bce65196f8679b9733f3bcedcd4f43343ca52295676e146cfe83b717d"
+        }
+      }
+    },
+    {
+      "operation": "create_join",
+      "captured_at": "2026-10-11T20:47:20.865Z",
+      "capture_sha256": "c72556ec3558f07b56f629eb58d95e94a7819f65828095ca5fe5046c7ca62f3c",
+      "cumulative_checks": 9,
+      "new_check_names": [
+        "real-channel-ready",
+        "native-admission",
+        "native-complete-commit",
+        "native-owned-commit"
+      ],
+      "all_checks": [
+        {
+          "name": "two-native-games",
+          "passed": true
+        },
+        {
+          "name": "independent-save-origins",
+          "passed": true
+        },
+        {
+          "name": "distinct-local-profiles",
+          "passed": true
+        },
+        {
+          "name": "native-owned-export",
+          "passed": true
+        },
+        {
+          "name": "saves-unchanged",
+          "passed": true
+        },
+        {
+          "name": "real-channel-ready",
+          "passed": true
+        },
+        {
+          "name": "native-admission",
+          "passed": true
+        },
+        {
+          "name": "native-complete-commit",
+          "passed": true
+        },
+        {
+          "name": "native-owned-commit",
+          "passed": true
+        }
+      ],
+      "session_distinct": null,
+      "clients": {
+        "host": {
+          "role": "host",
+          "init_stage": "ready",
+          "failure_code": null,
+          "phase": "hosting",
+          "mode": "host",
+          "created": 1,
+          "closed": 0,
+          "frames": 434,
+          "ticks": 133,
+          "captures": 3,
+          "entity_pages": 3,
+          "body_pages": 125,
+          "commits": 0,
+          "body_changes": 0,
+          "same_count_changes": 0,
+          "unchanged_bodies": 0,
+          "projectiles": 0,
+          "requests": 1,
+          "timers": 2,
+          "transport_ready": 1,
+          "admitted": 1,
+          "profile_equal": true,
+          "persisted_equal": true,
+          "persistent": true,
+          "progression_false": true,
+          "movement_observed": false,
+          "profile_sha": "d3274ba8f4b1d875f252b963eb3ec3a24cc93c0419112def6ba8645fb11c2448",
+          "baseline_sha": "d3274ba8f4b1d875f252b963eb3ec3a24cc93c0419112def6ba8645fb11c2448",
+          "persisted_sha": "d3274ba8f4b1d875f252b963eb3ec3a24cc93c0419112def6ba8645fb11c2448",
+          "owned_export": true,
+          "owned_view": null,
+          "selected_ship": 0,
+          "owned_slots": 1,
+          "owned_sha": "f3c1081d9a590505066994d7cf43c4733264c7a96cd6be53e6d3e4a32018f71a"
+        },
+        "guest": {
+          "role": "guest",
+          "init_stage": "ready",
+          "failure_code": null,
+          "phase": "connected",
+          "mode": "guest",
+          "created": 1,
+          "closed": 0,
+          "frames": 438,
+          "ticks": 133,
+          "captures": 0,
+          "entity_pages": 3,
+          "body_pages": 125,
+          "commits": 3,
+          "body_changes": 0,
+          "same_count_changes": 0,
+          "unchanged_bodies": 126,
+          "projectiles": 0,
+          "requests": 1,
+          "timers": 2,
+          "transport_ready": 1,
+          "admitted": 1,
+          "profile_equal": true,
+          "persisted_equal": true,
+          "persistent": true,
+          "progression_false": true,
+          "movement_observed": false,
+          "profile_sha": "478b890c148d72a770cdf1ab893e75f92c55c9764257fdb2d22d05ecc64399e9",
+          "baseline_sha": "478b890c148d72a770cdf1ab893e75f92c55c9764257fdb2d22d05ecc64399e9",
+          "persisted_sha": "478b890c148d72a770cdf1ab893e75f92c55c9764257fdb2d22d05ecc64399e9",
+          "owned_export": true,
+          "owned_view": true,
+          "selected_ship": 0,
+          "owned_slots": 1,
+          "owned_sha": "aead588bce65196f8679b9733f3bcedcd4f43343ca52295676e146cfe83b717d"
+        }
+      }
+    },
+    {
+      "operation": "drive_fire",
+      "captured_at": "2026-10-11T20:47:50.917Z",
+      "capture_sha256": "eb010384791e6a66f5ef760756818290f2ad7936d000d79a1d329ab3b6496beb",
+      "cumulative_checks": 11,
+      "new_check_names": [
+        "saves-unchanged",
+        "movement-fire-observed"
+      ],
+      "all_checks": [
+        {
+          "name": "two-native-games",
+          "passed": true
+        },
+        {
+          "name": "independent-save-origins",
+          "passed": true
+        },
+        {
+          "name": "distinct-local-profiles",
+          "passed": true
+        },
+        {
+          "name": "native-owned-export",
+          "passed": true
+        },
+        {
+          "name": "saves-unchanged",
+          "passed": true
+        },
+        {
+          "name": "real-channel-ready",
+          "passed": true
+        },
+        {
+          "name": "native-admission",
+          "passed": true
+        },
+        {
+          "name": "native-complete-commit",
+          "passed": true
+        },
+        {
+          "name": "native-owned-commit",
+          "passed": true
+        },
+        {
+          "name": "saves-unchanged",
+          "passed": true
+        },
+        {
+          "name": "movement-fire-observed",
+          "passed": true
+        }
+      ],
+      "session_distinct": null,
+      "clients": {
+        "host": {
+          "role": "host",
+          "init_stage": "ready",
+          "failure_code": null,
+          "phase": "hosting",
+          "mode": "host",
+          "created": 1,
+          "closed": 0,
+          "frames": 1405,
+          "ticks": 1627,
+          "captures": 309,
+          "entity_pages": 401,
+          "body_pages": 239,
+          "commits": 0,
+          "body_changes": 0,
+          "same_count_changes": 0,
+          "unchanged_bodies": 0,
+          "projectiles": 16,
+          "requests": 1,
+          "timers": 2,
+          "transport_ready": 1,
+          "admitted": 1,
+          "profile_equal": true,
+          "persisted_equal": true,
+          "persistent": true,
+          "progression_false": true,
+          "movement_observed": true,
+          "profile_sha": "d3274ba8f4b1d875f252b963eb3ec3a24cc93c0419112def6ba8645fb11c2448",
+          "baseline_sha": "d3274ba8f4b1d875f252b963eb3ec3a24cc93c0419112def6ba8645fb11c2448",
+          "persisted_sha": "d3274ba8f4b1d875f252b963eb3ec3a24cc93c0419112def6ba8645fb11c2448",
+          "owned_export": true,
+          "owned_view": null,
+          "selected_ship": 0,
+          "owned_slots": 1,
+          "owned_sha": "f3c1081d9a590505066994d7cf43c4733264c7a96cd6be53e6d3e4a32018f71a"
+        },
+        "guest": {
+          "role": "guest",
+          "init_stage": "ready",
+          "failure_code": null,
+          "phase": "connected",
+          "mode": "guest",
+          "created": 1,
+          "closed": 0,
+          "frames": 1412,
+          "ticks": 1627,
+          "captures": 0,
+          "entity_pages": 401,
+          "body_pages": 239,
+          "commits": 309,
+          "body_changes": 5,
+          "same_count_changes": 0,
+          "unchanged_bodies": 22431,
+          "projectiles": 16,
+          "requests": 1,
+          "timers": 2,
+          "transport_ready": 1,
+          "admitted": 1,
+          "profile_equal": true,
+          "persisted_equal": true,
+          "persistent": true,
+          "progression_false": true,
+          "movement_observed": true,
+          "profile_sha": "478b890c148d72a770cdf1ab893e75f92c55c9764257fdb2d22d05ecc64399e9",
+          "baseline_sha": "478b890c148d72a770cdf1ab893e75f92c55c9764257fdb2d22d05ecc64399e9",
+          "persisted_sha": "478b890c148d72a770cdf1ab893e75f92c55c9764257fdb2d22d05ecc64399e9",
+          "owned_export": true,
+          "owned_view": true,
+          "selected_ship": 0,
+          "owned_slots": 1,
+          "owned_sha": "aead588bce65196f8679b9733f3bcedcd4f43343ca52295676e146cfe83b717d"
+        }
+      }
+    },
+    {
+      "operation": "host_end",
+      "captured_at": "2026-10-11T20:48:06.899Z",
+      "capture_sha256": "952ff7b0cf30120ef110f573fd7e31799a917aee2315bfd83730a314aa4bd54d",
+      "cumulative_checks": 13,
+      "new_check_names": [
+        "host-end-restored",
+        "saves-unchanged"
+      ],
+      "all_checks": [
+        {
+          "name": "two-native-games",
+          "passed": true
+        },
+        {
+          "name": "independent-save-origins",
+          "passed": true
+        },
+        {
+          "name": "distinct-local-profiles",
+          "passed": true
+        },
+        {
+          "name": "native-owned-export",
+          "passed": true
+        },
+        {
+          "name": "saves-unchanged",
+          "passed": true
+        },
+        {
+          "name": "real-channel-ready",
+          "passed": true
+        },
+        {
+          "name": "native-admission",
+          "passed": true
+        },
+        {
+          "name": "native-complete-commit",
+          "passed": true
+        },
+        {
+          "name": "native-owned-commit",
+          "passed": true
+        },
+        {
+          "name": "saves-unchanged",
+          "passed": true
+        },
+        {
+          "name": "movement-fire-observed",
+          "passed": true
+        },
+        {
+          "name": "host-end-restored",
+          "passed": true
+        },
+        {
+          "name": "saves-unchanged",
+          "passed": true
+        }
+      ],
+      "session_distinct": null,
+      "clients": {
+        "host": {
+          "role": "host",
+          "init_stage": "ready",
+          "failure_code": null,
+          "phase": "ended",
+          "mode": "solo",
+          "created": 1,
+          "closed": 1,
+          "frames": 1920,
+          "ticks": 2580,
+          "captures": 480,
+          "entity_pages": 743,
+          "body_pages": 240,
+          "commits": 0,
+          "body_changes": 0,
+          "same_count_changes": 0,
+          "unchanged_bodies": 0,
+          "projectiles": 16,
+          "requests": 0,
+          "timers": 0,
+          "transport_ready": 0,
+          "admitted": 0,
+          "profile_equal": true,
+          "persisted_equal": true,
+          "persistent": true,
+          "progression_false": true,
+          "movement_observed": true,
+          "profile_sha": "d3274ba8f4b1d875f252b963eb3ec3a24cc93c0419112def6ba8645fb11c2448",
+          "baseline_sha": "d3274ba8f4b1d875f252b963eb3ec3a24cc93c0419112def6ba8645fb11c2448",
+          "persisted_sha": "d3274ba8f4b1d875f252b963eb3ec3a24cc93c0419112def6ba8645fb11c2448",
+          "owned_export": true,
+          "owned_view": null,
+          "selected_ship": 0,
+          "owned_slots": 1,
+          "owned_sha": "f3c1081d9a590505066994d7cf43c4733264c7a96cd6be53e6d3e4a32018f71a"
+        },
+        "guest": {
+          "role": "guest",
+          "init_stage": "ready",
+          "failure_code": null,
+          "phase": "ended",
+          "mode": "solo",
+          "created": 1,
+          "closed": 1,
+          "frames": 1928,
+          "ticks": 2580,
+          "captures": 0,
+          "entity_pages": 743,
+          "body_pages": 240,
+          "commits": 480,
+          "body_changes": 6,
+          "same_count_changes": 0,
+          "unchanged_bodies": 36110,
+          "projectiles": 16,
+          "requests": 0,
+          "timers": 0,
+          "transport_ready": 0,
+          "admitted": 0,
+          "profile_equal": true,
+          "persisted_equal": true,
+          "persistent": true,
+          "progression_false": true,
+          "movement_observed": true,
+          "profile_sha": "478b890c148d72a770cdf1ab893e75f92c55c9764257fdb2d22d05ecc64399e9",
+          "baseline_sha": "478b890c148d72a770cdf1ab893e75f92c55c9764257fdb2d22d05ecc64399e9",
+          "persisted_sha": "478b890c148d72a770cdf1ab893e75f92c55c9764257fdb2d22d05ecc64399e9",
+          "owned_export": true,
+          "owned_view": true,
+          "selected_ship": 0,
+          "owned_slots": 1,
+          "owned_sha": "aead588bce65196f8679b9733f3bcedcd4f43343ca52295676e146cfe83b717d"
+        }
+      }
+    },
+    {
+      "operation": "new_session",
+      "captured_at": "2026-10-11T20:48:20.124Z",
+      "capture_sha256": "60c36c17127363a9ceaf937d267a6305ac66cb8064b724b352526adf5dae6c48",
+      "cumulative_checks": 18,
+      "new_check_names": [
+        "real-channel-ready",
+        "native-admission",
+        "native-complete-commit",
+        "native-owned-commit",
+        "new-session"
+      ],
+      "all_checks": [
+        {
+          "name": "two-native-games",
+          "passed": true
+        },
+        {
+          "name": "independent-save-origins",
+          "passed": true
+        },
+        {
+          "name": "distinct-local-profiles",
+          "passed": true
+        },
+        {
+          "name": "native-owned-export",
+          "passed": true
+        },
+        {
+          "name": "saves-unchanged",
+          "passed": true
+        },
+        {
+          "name": "real-channel-ready",
+          "passed": true
+        },
+        {
+          "name": "native-admission",
+          "passed": true
+        },
+        {
+          "name": "native-complete-commit",
+          "passed": true
+        },
+        {
+          "name": "native-owned-commit",
+          "passed": true
+        },
+        {
+          "name": "saves-unchanged",
+          "passed": true
+        },
+        {
+          "name": "movement-fire-observed",
+          "passed": true
+        },
+        {
+          "name": "host-end-restored",
+          "passed": true
+        },
+        {
+          "name": "saves-unchanged",
+          "passed": true
+        },
+        {
+          "name": "real-channel-ready",
+          "passed": true
+        },
+        {
+          "name": "native-admission",
+          "passed": true
+        },
+        {
+          "name": "native-complete-commit",
+          "passed": true
+        },
+        {
+          "name": "native-owned-commit",
+          "passed": true
+        },
+        {
+          "name": "new-session",
+          "passed": true
+        }
+      ],
+      "session_distinct": true,
+      "clients": {
+        "host": {
+          "role": "host",
+          "init_stage": "ready",
+          "failure_code": null,
+          "phase": "hosting",
+          "mode": "host",
+          "created": 2,
+          "closed": 1,
+          "frames": 2346,
+          "ticks": 2580,
+          "captures": 483,
+          "entity_pages": 746,
+          "body_pages": 365,
+          "commits": 0,
+          "body_changes": 0,
+          "same_count_changes": 0,
+          "unchanged_bodies": 0,
+          "projectiles": 16,
+          "requests": 1,
+          "timers": 2,
+          "transport_ready": 1,
+          "admitted": 1,
+          "profile_equal": true,
+          "persisted_equal": true,
+          "persistent": true,
+          "progression_false": true,
+          "movement_observed": true,
+          "profile_sha": "d3274ba8f4b1d875f252b963eb3ec3a24cc93c0419112def6ba8645fb11c2448",
+          "baseline_sha": "d3274ba8f4b1d875f252b963eb3ec3a24cc93c0419112def6ba8645fb11c2448",
+          "persisted_sha": "d3274ba8f4b1d875f252b963eb3ec3a24cc93c0419112def6ba8645fb11c2448",
+          "owned_export": true,
+          "owned_view": null,
+          "selected_ship": 0,
+          "owned_slots": 1,
+          "owned_sha": "f3c1081d9a590505066994d7cf43c4733264c7a96cd6be53e6d3e4a32018f71a"
+        },
+        "guest": {
+          "role": "guest",
+          "init_stage": "ready",
+          "failure_code": null,
+          "phase": "connected",
+          "mode": "guest",
+          "created": 2,
+          "closed": 1,
+          "frames": 2354,
+          "ticks": 2580,
+          "captures": 0,
+          "entity_pages": 745,
+          "body_pages": 365,
+          "commits": 482,
+          "body_changes": 6,
+          "same_count_changes": 0,
+          "unchanged_bodies": 36173,
+          "projectiles": 16,
+          "requests": 1,
+          "timers": 2,
+          "transport_ready": 1,
+          "admitted": 1,
+          "profile_equal": true,
+          "persisted_equal": true,
+          "persistent": true,
+          "progression_false": true,
+          "movement_observed": true,
+          "profile_sha": "478b890c148d72a770cdf1ab893e75f92c55c9764257fdb2d22d05ecc64399e9",
+          "baseline_sha": "478b890c148d72a770cdf1ab893e75f92c55c9764257fdb2d22d05ecc64399e9",
+          "persisted_sha": "478b890c148d72a770cdf1ab893e75f92c55c9764257fdb2d22d05ecc64399e9",
+          "owned_export": true,
+          "owned_view": true,
+          "selected_ship": 0,
+          "owned_slots": 1,
+          "owned_sha": "aead588bce65196f8679b9733f3bcedcd4f43343ca52295676e146cfe83b717d"
+        }
+      }
+    },
+    {
+      "operation": "guest_leave",
+      "captured_at": "2026-10-11T20:48:28.023Z",
+      "capture_sha256": "b47a5d419ea3eaa1b3eda32f77373d3fb17a1d68807e8bb1c4cf892c950ed67f",
+      "cumulative_checks": 20,
+      "new_check_names": [
+        "guest-leave-restored",
+        "saves-unchanged"
+      ],
+      "all_checks": [
+        {
+          "name": "two-native-games",
+          "passed": true
+        },
+        {
+          "name": "independent-save-origins",
+          "passed": true
+        },
+        {
+          "name": "distinct-local-profiles",
+          "passed": true
+        },
+        {
+          "name": "native-owned-export",
+          "passed": true
+        },
+        {
+          "name": "saves-unchanged",
+          "passed": true
+        },
+        {
+          "name": "real-channel-ready",
+          "passed": true
+        },
+        {
+          "name": "native-admission",
+          "passed": true
+        },
+        {
+          "name": "native-complete-commit",
+          "passed": true
+        },
+        {
+          "name": "native-owned-commit",
+          "passed": true
+        },
+        {
+          "name": "saves-unchanged",
+          "passed": true
+        },
+        {
+          "name": "movement-fire-observed",
+          "passed": true
+        },
+        {
+          "name": "host-end-restored",
+          "passed": true
+        },
+        {
+          "name": "saves-unchanged",
+          "passed": true
+        },
+        {
+          "name": "real-channel-ready",
+          "passed": true
+        },
+        {
+          "name": "native-admission",
+          "passed": true
+        },
+        {
+          "name": "native-complete-commit",
+          "passed": true
+        },
+        {
+          "name": "native-owned-commit",
+          "passed": true
+        },
+        {
+          "name": "new-session",
+          "passed": true
+        },
+        {
+          "name": "guest-leave-restored",
+          "passed": true
+        },
+        {
+          "name": "saves-unchanged",
+          "passed": true
+        }
+      ],
+      "session_distinct": true,
+      "clients": {
+        "host": {
+          "role": "host",
+          "init_stage": "ready",
+          "failure_code": null,
+          "phase": "hosting",
+          "mode": "host",
+          "created": 2,
+          "closed": 2,
+          "frames": 2600,
+          "ticks": 2580,
+          "captures": 567,
+          "entity_pages": 830,
+          "body_pages": 365,
+          "commits": 0,
+          "body_changes": 0,
+          "same_count_changes": 0,
+          "unchanged_bodies": 0,
+          "projectiles": 16,
+          "requests": 1,
+          "timers": 2,
+          "transport_ready": 0,
+          "admitted": 0,
+          "profile_equal": true,
+          "persisted_equal": true,
+          "persistent": true,
+          "progression_false": true,
+          "movement_observed": true,
+          "profile_sha": "d3274ba8f4b1d875f252b963eb3ec3a24cc93c0419112def6ba8645fb11c2448",
+          "baseline_sha": "d3274ba8f4b1d875f252b963eb3ec3a24cc93c0419112def6ba8645fb11c2448",
+          "persisted_sha": "d3274ba8f4b1d875f252b963eb3ec3a24cc93c0419112def6ba8645fb11c2448",
+          "owned_export": true,
+          "owned_view": null,
+          "selected_ship": 0,
+          "owned_slots": 1,
+          "owned_sha": "f3c1081d9a590505066994d7cf43c4733264c7a96cd6be53e6d3e4a32018f71a"
+        },
+        "guest": {
+          "role": "guest",
+          "init_stage": "ready",
+          "failure_code": null,
+          "phase": "ended",
+          "mode": "solo",
+          "created": 2,
+          "closed": 2,
+          "frames": 2608,
+          "ticks": 2580,
+          "captures": 0,
+          "entity_pages": 830,
+          "body_pages": 365,
+          "commits": 567,
+          "body_changes": 6,
+          "same_count_changes": 0,
+          "unchanged_bodies": 41528,
+          "projectiles": 16,
+          "requests": 0,
+          "timers": 0,
+          "transport_ready": 0,
+          "admitted": 0,
+          "profile_equal": true,
+          "persisted_equal": true,
+          "persistent": true,
+          "progression_false": true,
+          "movement_observed": true,
+          "profile_sha": "478b890c148d72a770cdf1ab893e75f92c55c9764257fdb2d22d05ecc64399e9",
+          "baseline_sha": "478b890c148d72a770cdf1ab893e75f92c55c9764257fdb2d22d05ecc64399e9",
+          "persisted_sha": "478b890c148d72a770cdf1ab893e75f92c55c9764257fdb2d22d05ecc64399e9",
+          "owned_export": true,
+          "owned_view": true,
+          "selected_ship": 0,
+          "owned_slots": 1,
+          "owned_sha": "aead588bce65196f8679b9733f3bcedcd4f43343ca52295676e146cfe83b717d"
+        }
+      }
+    },
+    {
+      "operation": "read_local_saves",
+      "captured_at": "2026-10-11T20:48:32.176Z",
+      "capture_sha256": "bfee5bdd2bfdcc459204413c1215e3017ec6a89d0220d0c36ade943078ba0fa8",
+      "cumulative_checks": 21,
+      "new_check_names": [
+        "saves-unchanged"
+      ],
+      "all_checks": [
+        {
+          "name": "two-native-games",
+          "passed": true
+        },
+        {
+          "name": "independent-save-origins",
+          "passed": true
+        },
+        {
+          "name": "distinct-local-profiles",
+          "passed": true
+        },
+        {
+          "name": "native-owned-export",
+          "passed": true
+        },
+        {
+          "name": "saves-unchanged",
+          "passed": true
+        },
+        {
+          "name": "real-channel-ready",
+          "passed": true
+        },
+        {
+          "name": "native-admission",
+          "passed": true
+        },
+        {
+          "name": "native-complete-commit",
+          "passed": true
+        },
+        {
+          "name": "native-owned-commit",
+          "passed": true
+        },
+        {
+          "name": "saves-unchanged",
+          "passed": true
+        },
+        {
+          "name": "movement-fire-observed",
+          "passed": true
+        },
+        {
+          "name": "host-end-restored",
+          "passed": true
+        },
+        {
+          "name": "saves-unchanged",
+          "passed": true
+        },
+        {
+          "name": "real-channel-ready",
+          "passed": true
+        },
+        {
+          "name": "native-admission",
+          "passed": true
+        },
+        {
+          "name": "native-complete-commit",
+          "passed": true
+        },
+        {
+          "name": "native-owned-commit",
+          "passed": true
+        },
+        {
+          "name": "new-session",
+          "passed": true
+        },
+        {
+          "name": "guest-leave-restored",
+          "passed": true
+        },
+        {
+          "name": "saves-unchanged",
+          "passed": true
+        },
+        {
+          "name": "saves-unchanged",
+          "passed": true
+        }
+      ],
+      "session_distinct": true,
+      "clients": {
+        "host": {
+          "role": "host",
+          "init_stage": "ready",
+          "failure_code": null,
+          "phase": "hosting",
+          "mode": "host",
+          "created": 2,
+          "closed": 2,
+          "frames": 2733,
+          "ticks": 2580,
+          "captures": 567,
+          "entity_pages": 830,
+          "body_pages": 365,
+          "commits": 0,
+          "body_changes": 0,
+          "same_count_changes": 0,
+          "unchanged_bodies": 0,
+          "projectiles": 16,
+          "requests": 1,
+          "timers": 2,
+          "transport_ready": 0,
+          "admitted": 0,
+          "profile_equal": true,
+          "persisted_equal": true,
+          "persistent": true,
+          "progression_false": true,
+          "movement_observed": true,
+          "profile_sha": "d3274ba8f4b1d875f252b963eb3ec3a24cc93c0419112def6ba8645fb11c2448",
+          "baseline_sha": "d3274ba8f4b1d875f252b963eb3ec3a24cc93c0419112def6ba8645fb11c2448",
+          "persisted_sha": "d3274ba8f4b1d875f252b963eb3ec3a24cc93c0419112def6ba8645fb11c2448",
+          "owned_export": true,
+          "owned_view": null,
+          "selected_ship": 0,
+          "owned_slots": 1,
+          "owned_sha": "f3c1081d9a590505066994d7cf43c4733264c7a96cd6be53e6d3e4a32018f71a"
+        },
+        "guest": {
+          "role": "guest",
+          "init_stage": "ready",
+          "failure_code": null,
+          "phase": "ended",
+          "mode": "solo",
+          "created": 2,
+          "closed": 2,
+          "frames": 2741,
+          "ticks": 2580,
+          "captures": 0,
+          "entity_pages": 830,
+          "body_pages": 365,
+          "commits": 567,
+          "body_changes": 6,
+          "same_count_changes": 0,
+          "unchanged_bodies": 41528,
+          "projectiles": 16,
+          "requests": 0,
+          "timers": 0,
+          "transport_ready": 0,
+          "admitted": 0,
+          "profile_equal": true,
+          "persisted_equal": true,
+          "persistent": true,
+          "progression_false": true,
+          "movement_observed": true,
+          "profile_sha": "478b890c148d72a770cdf1ab893e75f92c55c9764257fdb2d22d05ecc64399e9",
+          "baseline_sha": "478b890c148d72a770cdf1ab893e75f92c55c9764257fdb2d22d05ecc64399e9",
+          "persisted_sha": "478b890c148d72a770cdf1ab893e75f92c55c9764257fdb2d22d05ecc64399e9",
+          "owned_export": true,
+          "owned_view": true,
+          "selected_ship": 0,
+          "owned_slots": 1,
+          "owned_sha": "aead588bce65196f8679b9733f3bcedcd4f43343ca52295676e146cfe83b717d"
+        }
+      }
+    },
+    {
+      "operation": "dispose",
+      "captured_at": "2026-10-11T20:48:39.346Z",
+      "capture_sha256": "5124889eaedb1147b66a7e0cf99d174ac5d7bf710aefbdfb0c5e1fdd3541c8be",
+      "cumulative_checks": 22,
+      "new_check_names": [
+        "dispose-clean"
+      ],
+      "all_checks": [
+        {
+          "name": "two-native-games",
+          "passed": true
+        },
+        {
+          "name": "independent-save-origins",
+          "passed": true
+        },
+        {
+          "name": "distinct-local-profiles",
+          "passed": true
+        },
+        {
+          "name": "native-owned-export",
+          "passed": true
+        },
+        {
+          "name": "saves-unchanged",
+          "passed": true
+        },
+        {
+          "name": "real-channel-ready",
+          "passed": true
+        },
+        {
+          "name": "native-admission",
+          "passed": true
+        },
+        {
+          "name": "native-complete-commit",
+          "passed": true
+        },
+        {
+          "name": "native-owned-commit",
+          "passed": true
+        },
+        {
+          "name": "saves-unchanged",
+          "passed": true
+        },
+        {
+          "name": "movement-fire-observed",
+          "passed": true
+        },
+        {
+          "name": "host-end-restored",
+          "passed": true
+        },
+        {
+          "name": "saves-unchanged",
+          "passed": true
+        },
+        {
+          "name": "real-channel-ready",
+          "passed": true
+        },
+        {
+          "name": "native-admission",
+          "passed": true
+        },
+        {
+          "name": "native-complete-commit",
+          "passed": true
+        },
+        {
+          "name": "native-owned-commit",
+          "passed": true
+        },
+        {
+          "name": "new-session",
+          "passed": true
+        },
+        {
+          "name": "guest-leave-restored",
+          "passed": true
+        },
+        {
+          "name": "saves-unchanged",
+          "passed": true
+        },
+        {
+          "name": "saves-unchanged",
+          "passed": true
+        },
+        {
+          "name": "dispose-clean",
+          "passed": true
+        }
+      ],
+      "session_distinct": true,
+      "clients": {
+        "host": {
+          "role": "host",
+          "init_stage": "ready",
+          "failure_code": null,
+          "phase": "disposed",
+          "mode": "solo",
+          "created": 2,
+          "closed": 2,
+          "frames": 2963,
+          "ticks": 2580,
+          "captures": 567,
+          "entity_pages": 830,
+          "body_pages": 365,
+          "commits": 0,
+          "body_changes": 0,
+          "same_count_changes": 0,
+          "unchanged_bodies": 0,
+          "projectiles": 16,
+          "requests": 0,
+          "timers": 0,
+          "transport_ready": 0,
+          "admitted": 0,
+          "profile_equal": true,
+          "persisted_equal": true,
+          "persistent": true,
+          "progression_false": true,
+          "movement_observed": true,
+          "profile_sha": "d3274ba8f4b1d875f252b963eb3ec3a24cc93c0419112def6ba8645fb11c2448",
+          "baseline_sha": "d3274ba8f4b1d875f252b963eb3ec3a24cc93c0419112def6ba8645fb11c2448",
+          "persisted_sha": "d3274ba8f4b1d875f252b963eb3ec3a24cc93c0419112def6ba8645fb11c2448",
+          "owned_export": true,
+          "owned_view": null,
+          "selected_ship": 0,
+          "owned_slots": 1,
+          "owned_sha": "f3c1081d9a590505066994d7cf43c4733264c7a96cd6be53e6d3e4a32018f71a"
+        },
+        "guest": {
+          "role": "guest",
+          "init_stage": "ready",
+          "failure_code": null,
+          "phase": "disposed",
+          "mode": "solo",
+          "created": 2,
+          "closed": 2,
+          "frames": 2973,
+          "ticks": 2580,
+          "captures": 0,
+          "entity_pages": 830,
+          "body_pages": 365,
+          "commits": 567,
+          "body_changes": 6,
+          "same_count_changes": 0,
+          "unchanged_bodies": 41528,
+          "projectiles": 16,
+          "requests": 0,
+          "timers": 0,
+          "transport_ready": 0,
+          "admitted": 0,
+          "profile_equal": true,
+          "persisted_equal": true,
+          "persistent": true,
+          "progression_false": true,
+          "movement_observed": true,
+          "profile_sha": "478b890c148d72a770cdf1ab893e75f92c55c9764257fdb2d22d05ecc64399e9",
+          "baseline_sha": "478b890c148d72a770cdf1ab893e75f92c55c9764257fdb2d22d05ecc64399e9",
+          "persisted_sha": "478b890c148d72a770cdf1ab893e75f92c55c9764257fdb2d22d05ecc64399e9",
+          "owned_export": true,
+          "owned_view": true,
+          "selected_ship": 0,
+          "owned_slots": 1,
+          "owned_sha": "aead588bce65196f8679b9733f3bcedcd4f43343ca52295676e146cfe83b717d"
+        }
+      }
+    }
+  ],
+  "final_disposed_image_dimensions": [
+    1265,
+    889
+  ],
+  "input_pins": [
+    {
+      "source": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\owned-webgl2-20261012\\captures\\7ab444d0ffebd2f4-ec4f20f3b366aeef8c3281dd9873fe203032df8d3eae6792e8bb2a1432df6184.json",
+      "copy": "inputs\\captures\\7ab444d0ffebd2f4-ec4f20f3b366aeef8c3281dd9873fe203032df8d3eae6792e8bb2a1432df6184.json",
+      "bytes": 7226,
+      "sha256": "ec4f20f3b366aeef8c3281dd9873fe203032df8d3eae6792e8bb2a1432df6184"
+    },
+    {
+      "source": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\owned-webgl2-20261012\\captures\\7ab444d0ffebd2f4-c72556ec3558f07b56f629eb58d95e94a7819f65828095ca5fe5046c7ca62f3c.json",
+      "copy": "inputs\\captures\\7ab444d0ffebd2f4-c72556ec3558f07b56f629eb58d95e94a7819f65828095ca5fe5046c7ca62f3c.json",
+      "bytes": 7534,
+      "sha256": "c72556ec3558f07b56f629eb58d95e94a7819f65828095ca5fe5046c7ca62f3c"
+    },
+    {
+      "source": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\owned-webgl2-20261012\\captures\\7ab444d0ffebd2f4-eb010384791e6a66f5ef760756818290f2ad7936d000d79a1d329ab3b6496beb.json",
+      "copy": "inputs\\captures\\7ab444d0ffebd2f4-eb010384791e6a66f5ef760756818290f2ad7936d000d79a1d329ab3b6496beb.json",
+      "bytes": 7689,
+      "sha256": "eb010384791e6a66f5ef760756818290f2ad7936d000d79a1d329ab3b6496beb"
+    },
+    {
+      "source": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\owned-webgl2-20261012\\captures\\7ab444d0ffebd2f4-952ff7b0cf30120ef110f573fd7e31799a917aee2315bfd83730a314aa4bd54d.json",
+      "copy": "inputs\\captures\\7ab444d0ffebd2f4-952ff7b0cf30120ef110f573fd7e31799a917aee2315bfd83730a314aa4bd54d.json",
+      "bytes": 7818,
+      "sha256": "952ff7b0cf30120ef110f573fd7e31799a917aee2315bfd83730a314aa4bd54d"
+    },
+    {
+      "source": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\owned-webgl2-20261012\\captures\\7ab444d0ffebd2f4-60c36c17127363a9ceaf937d267a6305ac66cb8064b724b352526adf5dae6c48.json",
+      "copy": "inputs\\captures\\7ab444d0ffebd2f4-60c36c17127363a9ceaf937d267a6305ac66cb8064b724b352526adf5dae6c48.json",
+      "bytes": 8171,
+      "sha256": "60c36c17127363a9ceaf937d267a6305ac66cb8064b724b352526adf5dae6c48"
+    },
+    {
+      "source": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\owned-webgl2-20261012\\captures\\7ab444d0ffebd2f4-b47a5d419ea3eaa1b3eda32f77373d3fb17a1d68807e8bb1c4cf892c950ed67f.json",
+      "copy": "inputs\\captures\\7ab444d0ffebd2f4-b47a5d419ea3eaa1b3eda32f77373d3fb17a1d68807e8bb1c4cf892c950ed67f.json",
+      "bytes": 8305,
+      "sha256": "b47a5d419ea3eaa1b3eda32f77373d3fb17a1d68807e8bb1c4cf892c950ed67f"
+    },
+    {
+      "source": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\owned-webgl2-20261012\\captures\\7ab444d0ffebd2f4-bfee5bdd2bfdcc459204413c1215e3017ec6a89d0220d0c36ade943078ba0fa8.json",
+      "copy": "inputs\\captures\\7ab444d0ffebd2f4-bfee5bdd2bfdcc459204413c1215e3017ec6a89d0220d0c36ade943078ba0fa8.json",
+      "bytes": 8372,
+      "sha256": "bfee5bdd2bfdcc459204413c1215e3017ec6a89d0220d0c36ade943078ba0fa8"
+    },
+    {
+      "source": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\owned-webgl2-20261012\\captures\\7ab444d0ffebd2f4-5124889eaedb1147b66a7e0cf99d174ac5d7bf710aefbdfb0c5e1fdd3541c8be.json",
+      "copy": "inputs\\captures\\7ab444d0ffebd2f4-5124889eaedb1147b66a7e0cf99d174ac5d7bf710aefbdfb0c5e1fdd3541c8be.json",
+      "bytes": 8441,
+      "sha256": "5124889eaedb1147b66a7e0cf99d174ac5d7bf710aefbdfb0c5e1fdd3541c8be"
+    },
+    {
+      "source": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\owned-webgl2-20261012\\stage-manifest.json",
+      "copy": "inputs\\stage-manifest.json",
+      "bytes": 6923,
+      "sha256": "38773dab964c857d8fc303d48ce7b5bd03e0735fd9e37a305322e24104b2ec2f"
+    },
+    {
+      "source": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\owned-webgl2-20261012\\preparation.md",
+      "copy": "inputs\\preparation.md",
+      "bytes": 3980,
+      "sha256": "782d7ddfce94f1482296cc2d37db3a5642d3b0bb71c16083dcbc1881894405c0"
+    },
+    {
+      "source": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\owned-webgl2-20261012\\disposed-webgl2.jpg",
+      "copy": "inputs\\disposed-webgl2.jpg",
+      "bytes": 100713,
+      "sha256": "28a1e5b75d94397dfaf4b808c097d9cd5682cd5bd0e2d668b2793df133ef5bf3"
+    },
+    {
+      "source": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\co-op-wasm-qa\\owned-v2\\stage-6964645\\client.js",
+      "copy": "inputs\\stage-source\\client.js",
+      "bytes": 16687,
+      "sha256": "d088839368496080e724360030f387da306bcbd619f1dd9dcd1d18e1261637a1"
+    },
+    {
+      "source": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\co-op-wasm-qa\\owned-v2\\stage-6964645\\wasm-review.js",
+      "copy": "inputs\\stage-source\\wasm-review.js",
+      "bytes": 12157,
+      "sha256": "5c45baf64c1aa481b283fb8709acf406a6a94e94eb99fbf517d848f28026179b"
+    },
+    {
+      "source": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\co-op-wasm-qa\\owned-v2\\preparation-6964645\\verification.json",
+      "copy": "inputs\\preparation-verification.json",
+      "bytes": 6609,
+      "sha256": "b3d89d730ab80cd44db26a1732175dfa6d2adce4ce6f1c87e9a27a3824159bf3"
+    }
+  ],
+  "actual_checks": {
+    "filename_content_hashes": true,
+    "original_stage_capture_copy_equality": true,
+    "exact_source_and_build_provenance": true,
+    "monotonic_cumulative_check_prefixes": true,
+    "all_checks_true": true,
+    "native_and_persisted_canonical_profile_hashes_unchanged": true,
+    "terminal_resource_counters_zero": true
+  },
+  "actions": {
+    "read_artifacts": true,
+    "viewed_disposed_frame": true,
+    "read_pinned_instrumentation": true,
+    "browser": false,
+    "listener": false,
+    "runtime_edits": false,
+    "build": false,
+    "new_tests": false
+  }
+}

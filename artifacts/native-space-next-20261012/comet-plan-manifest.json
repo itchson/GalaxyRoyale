@@ -1,0 +1,99 @@
+{
+  "source_commit": "22a8906cd668e92db0180d725da87b0a2c8408d5",
+  "latest_evidence_head": "69646456ac3e104c94ca27bc79aeb774dd9ab757",
+  "all_eight_source_files_equal_at_latest_head": true,
+  "shooting_star_equal_to_first_native_freeze": "de8547cf4e5f0d795acc7f265c466f9f78ca68df",
+  "scope": "read-only source/stdlib formula derivation; no new native or browser execution",
+  "pins": [
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\moving-comet-browser-plan\\derivation.json",
+      "sha256": "84ae708e6fd3f333b8958f2512e90bb6fcff387cde72f79f6b52dd05185ff656",
+      "bytes": 2684
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\moving-comet-browser-plan\\derive.py",
+      "sha256": "ee2e94711b9b201beb9abb1613bbba27c5ec3e07b969622484f8540b67fab4b7",
+      "bytes": 3267
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\moving-comet-browser-plan\\inputs\\apps\\game\\index.html",
+      "sha256": "9999fad5ad7ac0bbbffc1ff41d04c47b87a71b3f734c02bc8fb9e5fb02368284",
+      "bytes": 16717
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\moving-comet-browser-plan\\inputs\\apps\\game\\src\\debug-console.ts",
+      "sha256": "a25fa0293e3526221315a49641df115aae74876984673a006e229120bbdf041e",
+      "bytes": 11370
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\moving-comet-browser-plan\\inputs\\apps\\game\\src\\main.ts",
+      "sha256": "f6138b2922a9563d031420c602995d45b49ca423d09ca808c3c4d39fde8f30bc",
+      "bytes": 88855
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\moving-comet-browser-plan\\inputs\\crates\\game_core\\src\\bosses.rs",
+      "sha256": "69194ae242129ccecef69ff3661369a784b12bd7fbcf60b64eda15b4642a4408",
+      "bytes": 47224
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\moving-comet-browser-plan\\inputs\\crates\\game_core\\src\\lib.rs",
+      "sha256": "0984b4a786162f5c3a43a9706b40712df4369b32f8cb06ae9d3d0bab038f3d0c",
+      "bytes": 197547
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\moving-comet-browser-plan\\inputs\\crates\\game_core\\src\\regions.rs",
+      "sha256": "b17d5861933a90bef535313ebfbdd0dd097a2763622fcfaf1d8fd754b745e6d4",
+      "bytes": 35964
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\moving-comet-browser-plan\\inputs\\crates\\game_core\\src\\shooting_star.rs",
+      "sha256": "549444b3c23dc05d072083de6c23b4ff88e706307c714b95869744f4aba74b59",
+      "bytes": 22504
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\moving-comet-browser-plan\\inputs\\crates\\game_web\\src\\browser.rs",
+      "sha256": "99670ca781c1df5c21059c45bb5fe40ff7da540bb57862ac08c78e3e44e78156",
+      "bytes": 39690
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\moving-comet-browser-plan\\PLAN.md",
+      "sha256": "653241eec1428566ef81ca53c2ecad742ae1e018b2915f76c29f7fe318399d95",
+      "bytes": 9941
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\moving-comet-browser-plan\\verify.py",
+      "sha256": "26b3acec9b85b8872e5147067a82223ef85622c1e892dc4c543e87d11855321e",
+      "bytes": 2806
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\deep-background-audit\\HANDOFF.md",
+      "sha256": "93b20c72d33cce04f1bc2406505cf39cd4e6eb664c3e8d9193f754c1064b32b1",
+      "bytes": 5755
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\deep-background-audit\\manifest.json",
+      "sha256": "1c97c73a88879e505c0e56f142b29d9cfaf1cf04ce060ebd3b5498f255cae95c",
+      "bytes": 8665
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\deep-background-audit\\native-baseline-continuity.log",
+      "sha256": "a4ece6e37c565e8dff48134f9ed55cc28c90910fa6dc21e3b92a617272fb20dc",
+      "bytes": 1011
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\deep-background-audit\\native-final.log",
+      "sha256": "fe77d115239bfd2ee166fc60e01558752bcfd835d8f0c072b276a2475ebf6cd5",
+      "bytes": 1580
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\deep-background-audit\\clock-check.json",
+      "sha256": "03686f23b06446c26bd22a8a882e62b41009b4ddf5c7afc6051800ceb59e9675",
+      "bytes": 2013
+    },
+    {
+      "path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\native-echo-comet-20261012\\gas-tested-build.json",
+      "sha256": "91a69296e96d304a76450eec589808c8f15c2dca2678e6d67ba35731c27ca711",
+      "bytes": 317
+    }
+  ]
+}

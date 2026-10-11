@@ -1,0 +1,237 @@
+{
+  "schemaVersion": 1,
+  "scope": "Actual local owned-starter WebGL2 RTC reports; no performance/NAT/eight-player/every-ability claim",
+  "sourceCommit": "69646456ac3e104c94ca27bc79aeb774dd9ab757",
+  "build": {
+    "schemaVersion": 1,
+    "head": "69646456ac3e104c94ca27bc79aeb774dd9ab757",
+    "branch": "codex/testing",
+    "sourceHash": "dfbcd33501214c59dafcf3d4c766b84c20a47f7c79e4567cb05f5c66ab8be3ce",
+    "packageHash": "7b166b22eb7dd48bcb05936c6c6f734fdcc5074ea0a42854e01a6be1b9cd27c5",
+    "builtAt": "2026-10-11T20:32:45.999Z"
+  },
+  "runId": "7ab444d0ffebd2f4",
+  "operations": [
+    {
+      "file": "captures/7ab444d0ffebd2f4-ec4f20f3b366aeef8c3281dd9873fe203032df8d3eae6792e8bb2a1432df6184.json",
+      "sha256": "ec4f20f3b366aeef8c3281dd9873fe203032df8d3eae6792e8bb2a1432df6184",
+      "bytes": 7226,
+      "capturedAt": "2026-10-11T20:47:07.302Z",
+      "checks": 5
+    },
+    {
+      "file": "captures/7ab444d0ffebd2f4-c72556ec3558f07b56f629eb58d95e94a7819f65828095ca5fe5046c7ca62f3c.json",
+      "sha256": "c72556ec3558f07b56f629eb58d95e94a7819f65828095ca5fe5046c7ca62f3c",
+      "bytes": 7534,
+      "capturedAt": "2026-10-11T20:47:20.865Z",
+      "checks": 9
+    },
+    {
+      "file": "captures/7ab444d0ffebd2f4-eb010384791e6a66f5ef760756818290f2ad7936d000d79a1d329ab3b6496beb.json",
+      "sha256": "eb010384791e6a66f5ef760756818290f2ad7936d000d79a1d329ab3b6496beb",
+      "bytes": 7689,
+      "capturedAt": "2026-10-11T20:47:50.917Z",
+      "checks": 11
+    },
+    {
+      "file": "captures/7ab444d0ffebd2f4-952ff7b0cf30120ef110f573fd7e31799a917aee2315bfd83730a314aa4bd54d.json",
+      "sha256": "952ff7b0cf30120ef110f573fd7e31799a917aee2315bfd83730a314aa4bd54d",
+      "bytes": 7818,
+      "capturedAt": "2026-10-11T20:48:06.899Z",
+      "checks": 13
+    },
+    {
+      "file": "captures/7ab444d0ffebd2f4-60c36c17127363a9ceaf937d267a6305ac66cb8064b724b352526adf5dae6c48.json",
+      "sha256": "60c36c17127363a9ceaf937d267a6305ac66cb8064b724b352526adf5dae6c48",
+      "bytes": 8171,
+      "capturedAt": "2026-10-11T20:48:20.124Z",
+      "checks": 18
+    },
+    {
+      "file": "captures/7ab444d0ffebd2f4-b47a5d419ea3eaa1b3eda32f77373d3fb17a1d68807e8bb1c4cf892c950ed67f.json",
+      "sha256": "b47a5d419ea3eaa1b3eda32f77373d3fb17a1d68807e8bb1c4cf892c950ed67f",
+      "bytes": 8305,
+      "capturedAt": "2026-10-11T20:48:28.023Z",
+      "checks": 20
+    },
+    {
+      "file": "captures/7ab444d0ffebd2f4-bfee5bdd2bfdcc459204413c1215e3017ec6a89d0220d0c36ade943078ba0fa8.json",
+      "sha256": "bfee5bdd2bfdcc459204413c1215e3017ec6a89d0220d0c36ade943078ba0fa8",
+      "bytes": 8372,
+      "capturedAt": "2026-10-11T20:48:32.176Z",
+      "checks": 21
+    },
+    {
+      "file": "captures/7ab444d0ffebd2f4-5124889eaedb1147b66a7e0cf99d174ac5d7bf710aefbdfb0c5e1fdd3541c8be.json",
+      "sha256": "5124889eaedb1147b66a7e0cf99d174ac5d7bf710aefbdfb0c5e1fdd3541c8be",
+      "bytes": 8441,
+      "capturedAt": "2026-10-11T20:48:39.346Z",
+      "checks": 22
+    }
+  ],
+  "finalChecks": [
+    {
+      "name": "two-native-games",
+      "passed": true
+    },
+    {
+      "name": "independent-save-origins",
+      "passed": true
+    },
+    {
+      "name": "distinct-local-profiles",
+      "passed": true
+    },
+    {
+      "name": "native-owned-export",
+      "passed": true
+    },
+    {
+      "name": "saves-unchanged",
+      "passed": true
+    },
+    {
+      "name": "real-channel-ready",
+      "passed": true
+    },
+    {
+      "name": "native-admission",
+      "passed": true
+    },
+    {
+      "name": "native-complete-commit",
+      "passed": true
+    },
+    {
+      "name": "native-owned-commit",
+      "passed": true
+    },
+    {
+      "name": "saves-unchanged",
+      "passed": true
+    },
+    {
+      "name": "movement-fire-observed",
+      "passed": true
+    },
+    {
+      "name": "host-end-restored",
+      "passed": true
+    },
+    {
+      "name": "saves-unchanged",
+      "passed": true
+    },
+    {
+      "name": "real-channel-ready",
+      "passed": true
+    },
+    {
+      "name": "native-admission",
+      "passed": true
+    },
+    {
+      "name": "native-complete-commit",
+      "passed": true
+    },
+    {
+      "name": "native-owned-commit",
+      "passed": true
+    },
+    {
+      "name": "new-session",
+      "passed": true
+    },
+    {
+      "name": "guest-leave-restored",
+      "passed": true
+    },
+    {
+      "name": "saves-unchanged",
+      "passed": true
+    },
+    {
+      "name": "saves-unchanged",
+      "passed": true
+    },
+    {
+      "name": "dispose-clean",
+      "passed": true
+    }
+  ],
+  "finalClients": [
+    {
+      "role": "host",
+      "init_stage": "ready",
+      "failure_code": null,
+      "phase": "disposed",
+      "mode": "solo",
+      "created": 2,
+      "closed": 2,
+      "frames": 2963,
+      "ticks": 2580,
+      "captures": 567,
+      "entity_pages": 830,
+      "body_pages": 365,
+      "commits": 0,
+      "body_changes": 0,
+      "same_count_changes": 0,
+      "unchanged_bodies": 0,
+      "projectiles": 16,
+      "requests": 0,
+      "timers": 0,
+      "transport_ready": 0,
+      "admitted": 0,
+      "profile_equal": true,
+      "persisted_equal": true,
+      "persistent": true,
+      "progression_false": true,
+      "movement_observed": true,
+      "profile_sha": "d3274ba8f4b1d875f252b963eb3ec3a24cc93c0419112def6ba8645fb11c2448",
+      "baseline_sha": "d3274ba8f4b1d875f252b963eb3ec3a24cc93c0419112def6ba8645fb11c2448",
+      "persisted_sha": "d3274ba8f4b1d875f252b963eb3ec3a24cc93c0419112def6ba8645fb11c2448",
+      "owned_export": true,
+      "owned_view": null,
+      "selected_ship": 0,
+      "owned_slots": 1,
+      "owned_sha": "f3c1081d9a590505066994d7cf43c4733264c7a96cd6be53e6d3e4a32018f71a"
+    },
+    {
+      "role": "guest",
+      "init_stage": "ready",
+      "failure_code": null,
+      "phase": "disposed",
+      "mode": "solo",
+      "created": 2,
+      "closed": 2,
+      "frames": 2973,
+      "ticks": 2580,
+      "captures": 0,
+      "entity_pages": 830,
+      "body_pages": 365,
+      "commits": 567,
+      "body_changes": 6,
+      "same_count_changes": 0,
+      "unchanged_bodies": 41528,
+      "projectiles": 16,
+      "requests": 0,
+      "timers": 0,
+      "transport_ready": 0,
+      "admitted": 0,
+      "profile_equal": true,
+      "persisted_equal": true,
+      "persistent": true,
+      "progression_false": true,
+      "movement_observed": true,
+      "profile_sha": "478b890c148d72a770cdf1ab893e75f92c55c9764257fdb2d22d05ecc64399e9",
+      "baseline_sha": "478b890c148d72a770cdf1ab893e75f92c55c9764257fdb2d22d05ecc64399e9",
+      "persisted_sha": "478b890c148d72a770cdf1ab893e75f92c55c9764257fdb2d22d05ecc64399e9",
+      "owned_export": true,
+      "owned_view": true,
+      "selected_ship": 0,
+      "owned_slots": 1,
+      "owned_sha": "aead588bce65196f8679b9733f3bcedcd4f43343ca52295676e146cfe83b717d"
+    }
+  ],
+  "sessionDistinct": true
+}

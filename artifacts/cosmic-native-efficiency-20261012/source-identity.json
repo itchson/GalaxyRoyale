@@ -1,0 +1,18 @@
+{
+  "base": "22a8906cd668e92db0180d725da87b0a2c8408d5",
+  "instrumentation_commit": "d7327c729f483176e26d342b055a665e9471b11c",
+  "root_evidence_head": "69646456ac3e104c94ca27bc79aeb774dd9ab757",
+  "root_runtime_source_hash": "dfbcd33501214c59dafcf3d4c766b84c20a47f7c79e4567cb05f5c66ab8be3ce",
+  "base_to_root_changes": [
+    "artifacts/native-space-next-20261012/assignments.md",
+    "production/project.json"
+  ],
+  "instrumentation_changes": [
+    "crates/game_core/src/cosmic_background.rs",
+    "crates/game_core/src/cosmic_perf_tests.rs"
+  ],
+  "background_production_source_exact_after_removing_cfg_test_hook": true,
+  "base_background_git_lf_sha256": "a7e2a670a388ee1f6d86dbf1d5c218b97ca56aaf7df70e98a697613135daab9b",
+  "measured_instrumented_background_git_lf_sha256": "2c9f833fdf0ba81d911a49d8545e3ad5d75f0d0a6e7669d9af3e500ba7c9f95b",
+  "raw_tree_hash_scope": "Root raw buildIdentity hash recomputed before instrumentation. Own raw tree hash differs; no byte-identical whole-working-tree claim. Canonical tracked native source matches the pinned base except the two test-only files."
+}
