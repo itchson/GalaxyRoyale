@@ -1,0 +1,32 @@
+{
+  "root": "C:/Users/mitch/Documents/ChatGPT/galaxy-royale",
+  "head": "0b99d9b2de8da7f14d5d265caf4edee2beb85a48",
+  "stage": "read-only card budget proposal; incoming art not measured",
+  "files": [
+    {
+      "path": "crates/game_web/src/ui_scene.rs",
+      "bytes": 107768,
+      "sha256": "b612e2b9bf27567c19a88983e06c00e648416ee64ff9e562304f3afd51ffe1c8"
+    },
+    {
+      "path": "crates/game_web/src/meishi_art.rs",
+      "bytes": 20064,
+      "sha256": "c61bd07a6dd7da9ad6fc1d7e27f4b0d455737d97f64faf623fee9695b91ec72c"
+    },
+    {
+      "path": "crates/game_web/src/kikai_art.rs",
+      "bytes": 36953,
+      "sha256": "0d0d7fe7e7ae2b453b28a9b48fb301b66f3ee1272e66ab33a0898c3f7e83cbb0"
+    },
+    {
+      "path": "crates/game_web/src/flight_icons.rs",
+      "bytes": 10702,
+      "sha256": "ba02a9aa4e210f5a2746d66af1b7d6bcf0c5ebd89ec3241f00e790f88cbf2503"
+    },
+    {
+      "path": "crates/game_web/src/champion_patches.rs",
+      "bytes": 17061,
+      "sha256": "b139249a335a784c99bbc44f79cb46c0e273ceacecbbcfadd862af067303f55b"
+    }
+  ]
+}

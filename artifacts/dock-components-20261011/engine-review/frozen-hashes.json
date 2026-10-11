@@ -1,0 +1,36 @@
+{
+  "source_commit": "7d3673e3a2f051aeefac6540e443ef7fc5d0ad9c",
+  "domain": "Raw local evidence bytes; runtime source/reference pins have their explicitly separate domains.",
+  "files": [
+    {
+      "path": "focused-storage-workshop-tests.log",
+      "bytes": 1323,
+      "sha256": "719ab13d180807fb63a8b4698e520134e820dde87ee0e157a59f56e62e3f03f7"
+    },
+    {
+      "path": "REVIEW.md",
+      "bytes": 3610,
+      "sha256": "bc3c1663e95852b117c6c1edffa79daa3f360bd655b9301821874c877d27b812"
+    },
+    {
+      "path": "reviewed-root-diff.patch",
+      "bytes": 25167,
+      "sha256": "1cc4ef8c62631f789d629b52ff22b0ec4393b6efdc885a83f7a2e244548ae8d2"
+    },
+    {
+      "path": "source-memory-and-work.json",
+      "bytes": 754,
+      "sha256": "50441424926afc23686fdee805c3d87761fe35311141185905a237220b8ba885"
+    },
+    {
+      "path": "source-pins-after.json",
+      "bytes": 2508,
+      "sha256": "74f7cbe4ab3f73871a3c2dd841e49d162587e8834b11ea6d42aa1164f872a208"
+    },
+    {
+      "path": "source-pins-before.json",
+      "bytes": 2564,
+      "sha256": "0f0dbae2a7f65dfbc7622776a7123ab9a0777e1ede879e3f46d041df56695711"
+    }
+  ]
+}

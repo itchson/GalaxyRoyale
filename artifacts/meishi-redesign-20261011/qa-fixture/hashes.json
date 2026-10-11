@@ -1,0 +1,74 @@
+{
+  "root_source_commit": "f3a723081033a2cdd9bab15e37241fe334530716",
+  "scope": "Supplied QA fixture and actual current TypeScript validation/normalization/SaveStore execution; native invariant source inspection only; no production mutation/build/browser or natural-earn claim",
+  "sources": [
+    {
+      "path": "apps/game/src/storage.ts",
+      "executed_or_inspected_working_sha256": "7be13895761a2e14c21249473797956f0147ea58e3c761921daf6739e21f9dd8",
+      "committed_sha256": "7be13895761a2e14c21249473797956f0147ea58e3c761921daf6739e21f9dd8",
+      "checkout_LF_text_equals_commit": true
+    },
+    {
+      "path": "crates/game_core/src/campaign.rs",
+      "executed_or_inspected_working_sha256": "08c2ddf555a871750d1b3415d6ab05a19362406dc3259ef3118b25c129822a92",
+      "committed_sha256": "6a5d90403e42a936edaac37f2a5f5668f40a925116d94b54c499a7cd6899ca65",
+      "checkout_LF_text_equals_commit": true
+    },
+    {
+      "path": "crates/game_core/src/ship_progression.rs",
+      "executed_or_inspected_working_sha256": "a78f9bec7271e8ee78481628a6d55ee7145ad95275f78ed11a7c7a3880fd3a24",
+      "committed_sha256": "8ea582f564b79903e64c746b8cb715301570ad4b44e051d2fd7a3258b48f8955",
+      "checkout_LF_text_equals_commit": true
+    },
+    {
+      "path": "crates/game_core/src/components.rs",
+      "executed_or_inspected_working_sha256": "647f83a576473985593e2dc539ecd92e4aa9df75bd4c0cf7a17f3be3d9e7f470",
+      "committed_sha256": "c2a9cef6263bd9be289e991fa80dfcdfd85502f92b13536670dc2dff9e680471",
+      "checkout_LF_text_equals_commit": true
+    },
+    {
+      "path": "crates/game_core/src/abilities.rs",
+      "executed_or_inspected_working_sha256": "8f023ca505874d83f5764800ec09dd5cb5913e09fd74be0ab6423a7bd6eb6f4c",
+      "committed_sha256": "394d8dcd566d4bbcf2a9d2dea7320512248dfc16b83fa3ee98d767849ba47509",
+      "checkout_LF_text_equals_commit": true
+    },
+    {
+      "path": "crates/game_core/src/lib.rs",
+      "executed_or_inspected_working_sha256": "099b0834a76215d388200c89ca923c762850cf15dae04180086facf062a8097b",
+      "committed_sha256": "df52ae62b1598bee2cd29cff071b5e0409b16d4f95b0fc604d8f8a08f20e7393",
+      "checkout_LF_text_equals_commit": true
+    }
+  ],
+  "evidence": [
+    {
+      "file": "all8-earned.json",
+      "sha256": "53cee673d1ec0be2c2f8fd67cd67b82b4378b379c01559d62eccf8e0b10668d4",
+      "bytes": 5037
+    },
+    {
+      "file": "rejected-original.json",
+      "sha256": "2ca50cebbe0de734c46aa6bbda2769bf1a38ec29b9c6dabb8cd743d69ad29797",
+      "bytes": 5044
+    },
+    {
+      "file": "validate.mjs",
+      "sha256": "3c95c225a96afcb4763e19de82055ff34b6de0548babced161f50d08bcdda894",
+      "bytes": 4219
+    },
+    {
+      "file": "validation.json",
+      "sha256": "fa183654b8160091666f137a11bde95d7805c9efce43600fcbce5a9189a2c9ae",
+      "bytes": 1596
+    },
+    {
+      "file": "validation.log",
+      "sha256": "f5ad1fde7107717ddf823963f7400b00ed0b0e9c485f889cbdfb69a3888d2818",
+      "bytes": 1817
+    },
+    {
+      "file": "README.md",
+      "sha256": "147fc652d8131a54a727c58cdc79bdc4fd6ba27b3a6bf34b18c7b080928bb5c9",
+      "bytes": 2062
+    }
+  ]
+}

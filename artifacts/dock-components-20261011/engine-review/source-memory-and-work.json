@@ -1,0 +1,21 @@
+{
+  "domain": "source-derived payload and loop cardinalities, not allocator/RSS measurement",
+  "cachedBodies": 36,
+  "colorBytes": 2359296,
+  "occupancyBytes": 73728.0,
+  "cachedRoleBytes": 65536,
+  "cachedPlacementBytes": 384,
+  "embeddedJsonBytes": 2302820,
+  "sourceRoleOccupied": [
+    18844,
+    7075,
+    705,
+    1925
+  ],
+  "submittedCellsPerVisibleHome": 28549,
+  "instanceRecordPayloadBytes": 456784,
+  "transformRecordPayloadBytes": 512,
+  "occupancyCandidatesPerVisibleHome": 262144,
+  "survivingRoleComparisonsPerVisibleHome": 114196,
+  "excluded": "PixelBody/PixelRig headers, parts/name allocations, allocator overhead, temporary parsing/rows, other art, frame capacity slack, renderer scratch/GPU buffers and RSS"
+}

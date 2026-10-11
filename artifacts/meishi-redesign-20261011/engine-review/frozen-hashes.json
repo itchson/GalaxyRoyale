@@ -1,0 +1,63 @@
+{
+  "art_commit": "be4e9cc72497b7de3b4b7f5b44e58a69ceb309a9",
+  "test_only_color_repair": "9281d801170b0d6f8cf765c8372a64edc010b5b8",
+  "joined_head": "9281d801170b0d6f8cf765c8372a64edc010b5b8",
+  "files": [
+    {
+      "path": "crates/game_web/src/meishi_art.rs",
+      "bytes": 41974,
+      "sha256": "6d6cd02244d0cb2cacdc971e1061eb1840045801a7a7e9b4e400f7ff36c09fd6",
+      "domain": "raw working bytes"
+    },
+    {
+      "path": "crates/game_web/src/ui_scene.rs",
+      "bytes": 124254,
+      "sha256": "2c4877159cceb306b76e1b8fdc85f151e865c7441de35ee1c1f815a2ed30e519",
+      "domain": "raw working bytes"
+    },
+    {
+      "path": "work/meishi-art-review/rail-amendment/REVIEW.md",
+      "bytes": 2624,
+      "sha256": "bb6243b3ab6bfeb113939a394ec343635ced21fd378b345b4adc2019f6228a41",
+      "domain": "raw working bytes"
+    },
+    {
+      "path": "work/meishi-art-review/rail-amendment/native-meishi-tests.log",
+      "bytes": 4043,
+      "sha256": "51449cb8e0008f17f8ee153da2e3e23565d3a5cd6c4f4337fec212c1497fa1bf",
+      "domain": "raw working bytes"
+    },
+    {
+      "path": "work/meishi-art-review/rail-amendment/native-clippy.log",
+      "bytes": 189,
+      "sha256": "e133ed093241876a83d35f1b46232152302e9c24b80278f5137aafec430a2156",
+      "domain": "raw working bytes"
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/meishi-reference-detail/amendment/native-software-contact.png",
+      "bytes": 539742,
+      "sha256": "fac58f496c92f1f037c90f6b583a1ac0826063adcc0e4e529e690dd8f285142d",
+      "domain": "raw inspected peer PNG"
+    }
+  ],
+  "git_blobs": [
+    {
+      "commit": "be4e9cc72497b7de3b4b7f5b44e58a69ceb309a9",
+      "path": "crates/game_web/src/meishi_art.rs",
+      "bytes": 40810,
+      "sha256": "6a08d819914181792fe21f7b556e460cec81c1c11699dec8ef19efe37b5431f5",
+      "domain": "raw Git blob",
+      "working_lf_equivalent": true
+    },
+    {
+      "commit": "9281d801170b0d6f8cf765c8372a64edc010b5b8",
+      "path": "crates/game_web/src/ui_scene.rs",
+      "bytes": 124254,
+      "sha256": "2c4877159cceb306b76e1b8fdc85f151e865c7441de35ee1c1f815a2ed30e519",
+      "domain": "raw Git blob",
+      "working_lf_equivalent": true
+    }
+  ],
+  "executed": "12 affected native MEISHI tests / strict native lib-test Clippy",
+  "limitations": "No browser/GPU/phone or human reference-fidelity acceptance"
+}

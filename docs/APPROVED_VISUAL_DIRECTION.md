@@ -15,6 +15,21 @@ No model/version is inferred from the image. Generated text, slogans, Japanese
 writing, statistics and craft variants are illustrative; current game data,
 identity and functional copy remain authoritative.
 
+The user subsequently approved the **new in-game spacehub/arena detail and
+animation** as a much closer match to the desired quality. Its
+[actual PAN WebGPU capture](../artifacts/dock-components-20261011/dock-pan-webgpu-1280.png)
+is a second practical benchmark. Preserve the overhead silhouette, layered
+mechanical construction and localized lamp animation when improving the
+remaining facility and world assets.
+
+The prior native MEISHI card was explicitly rejected as too close to the old
+UI despite passing its technical checks. Its earlier screenshots are
+historical evidence, not visual approval. The active rework enlarges the
+portrait, reduces the RAICHO strip to current hull and level, and replaces thin
+outlines with substantial metallic fittings and octagonal sockets. Retained
+points, canonical identity, eight earned-only patches and the Close-only
+interaction remain. Visual acceptance is assessed on the rebuilt game.
+
 ## What the reference establishes
 
 **Recognizable anatomy before decoration.** The DORA portrait has a distinct

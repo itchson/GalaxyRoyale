@@ -1,0 +1,481 @@
+{
+  "alpha": 1.0,
+  "cases": [
+    {
+      "baseline": {
+        "packet": {
+          "batches": 1,
+          "quads": 10068,
+          "transforms": 102
+        },
+        "timing": {
+          "iterations": 600,
+          "max_ms": 0.2627,
+          "min_ms": 0.1465,
+          "p50_ms": 0.1495,
+          "p95_ms": 0.2342,
+          "p99_ms": 0.2444,
+          "total_ms": 94.5724
+        }
+      },
+      "candidate": {
+        "packet": {
+          "batches": 1,
+          "quads": 37163,
+          "transforms": 117
+        },
+        "timing": {
+          "iterations": 600,
+          "max_ms": 1.2061,
+          "min_ms": 0.6512,
+          "p50_ms": 0.6738,
+          "p95_ms": 0.7232,
+          "p99_ms": 0.897,
+          "total_ms": 410.1283
+        }
+      },
+      "candidate_first": false,
+      "corporation": "pan",
+      "cosmetics": "full",
+      "world_zoom_equivalent": 0.6000000238418579
+    },
+    {
+      "baseline": {
+        "packet": {
+          "batches": 1,
+          "quads": 9497,
+          "transforms": 33
+        },
+        "timing": {
+          "iterations": 600,
+          "max_ms": 0.1474,
+          "min_ms": 0.1005,
+          "p50_ms": 0.1021,
+          "p95_ms": 0.107,
+          "p99_ms": 0.1288,
+          "total_ms": 61.8362
+        }
+      },
+      "candidate": {
+        "packet": {
+          "batches": 1,
+          "quads": 36592,
+          "transforms": 48
+        },
+        "timing": {
+          "iterations": 600,
+          "max_ms": 0.7183,
+          "min_ms": 0.6032,
+          "p50_ms": 0.6119,
+          "p95_ms": 0.633,
+          "p99_ms": 0.6596,
+          "total_ms": 368.6893
+        }
+      },
+      "candidate_first": true,
+      "corporation": "pan",
+      "cosmetics": "full",
+      "world_zoom_equivalent": 1.600000023841858
+    },
+    {
+      "baseline": {
+        "packet": {
+          "batches": 1,
+          "quads": 9840,
+          "transforms": 91
+        },
+        "timing": {
+          "iterations": 600,
+          "max_ms": 0.1587,
+          "min_ms": 0.1282,
+          "p50_ms": 0.1302,
+          "p95_ms": 0.1334,
+          "p99_ms": 0.1369,
+          "total_ms": 78.2833
+        }
+      },
+      "candidate": {
+        "packet": {
+          "batches": 1,
+          "quads": 36935,
+          "transforms": 106
+        },
+        "timing": {
+          "iterations": 600,
+          "max_ms": 1.1712,
+          "min_ms": 0.6249,
+          "p50_ms": 0.6403,
+          "p95_ms": 0.7668,
+          "p99_ms": 1.1331,
+          "total_ms": 400.1386
+        }
+      },
+      "candidate_first": true,
+      "corporation": "pan",
+      "cosmetics": "reduced",
+      "world_zoom_equivalent": 0.6000000238418579
+    },
+    {
+      "baseline": {
+        "packet": {
+          "batches": 1,
+          "quads": 9484,
+          "transforms": 24
+        },
+        "timing": {
+          "iterations": 600,
+          "max_ms": 0.1132,
+          "min_ms": 0.0956,
+          "p50_ms": 0.0966,
+          "p95_ms": 0.0996,
+          "p99_ms": 0.1016,
+          "total_ms": 58.1374
+        }
+      },
+      "candidate": {
+        "packet": {
+          "batches": 1,
+          "quads": 36579,
+          "transforms": 39
+        },
+        "timing": {
+          "iterations": 600,
+          "max_ms": 1.1042,
+          "min_ms": 0.5894,
+          "p50_ms": 0.6126,
+          "p95_ms": 1.0392,
+          "p99_ms": 1.0814,
+          "total_ms": 411.9449
+        }
+      },
+      "candidate_first": false,
+      "corporation": "pan",
+      "cosmetics": "reduced",
+      "world_zoom_equivalent": 1.600000023841858
+    },
+    {
+      "baseline": {
+        "packet": {
+          "batches": 1,
+          "quads": 10068,
+          "transforms": 102
+        },
+        "timing": {
+          "iterations": 600,
+          "max_ms": 0.3684,
+          "min_ms": 0.1534,
+          "p50_ms": 0.1642,
+          "p95_ms": 0.3097,
+          "p99_ms": 0.3531,
+          "total_ms": 114.1817
+        }
+      },
+      "candidate": {
+        "packet": {
+          "batches": 1,
+          "quads": 37163,
+          "transforms": 117
+        },
+        "timing": {
+          "iterations": 600,
+          "max_ms": 1.4086,
+          "min_ms": 0.6634,
+          "p50_ms": 0.7624,
+          "p95_ms": 1.2406,
+          "p99_ms": 1.2909,
+          "total_ms": 506.6098
+        }
+      },
+      "candidate_first": true,
+      "corporation": "renko",
+      "cosmetics": "full",
+      "world_zoom_equivalent": 0.6000000238418579
+    },
+    {
+      "baseline": {
+        "packet": {
+          "batches": 1,
+          "quads": 9497,
+          "transforms": 33
+        },
+        "timing": {
+          "iterations": 600,
+          "max_ms": 0.2704,
+          "min_ms": 0.1066,
+          "p50_ms": 0.1711,
+          "p95_ms": 0.1883,
+          "p99_ms": 0.2206,
+          "total_ms": 93.5676
+        }
+      },
+      "candidate": {
+        "packet": {
+          "batches": 1,
+          "quads": 36592,
+          "transforms": 48
+        },
+        "timing": {
+          "iterations": 600,
+          "max_ms": 0.8364,
+          "min_ms": 0.6113,
+          "p50_ms": 0.6316,
+          "p95_ms": 0.6699,
+          "p99_ms": 0.7302,
+          "total_ms": 381.6763
+        }
+      },
+      "candidate_first": false,
+      "corporation": "renko",
+      "cosmetics": "full",
+      "world_zoom_equivalent": 1.600000023841858
+    },
+    {
+      "baseline": {
+        "packet": {
+          "batches": 1,
+          "quads": 9840,
+          "transforms": 91
+        },
+        "timing": {
+          "iterations": 600,
+          "max_ms": 0.4575,
+          "min_ms": 0.1275,
+          "p50_ms": 0.1334,
+          "p95_ms": 0.2356,
+          "p99_ms": 0.2846,
+          "total_ms": 92.0847
+        }
+      },
+      "candidate": {
+        "packet": {
+          "batches": 1,
+          "quads": 36935,
+          "transforms": 106
+        },
+        "timing": {
+          "iterations": 600,
+          "max_ms": 2.5696,
+          "min_ms": 0.6298,
+          "p50_ms": 0.6536,
+          "p95_ms": 0.6905,
+          "p99_ms": 0.7622,
+          "total_ms": 397.9183
+        }
+      },
+      "candidate_first": false,
+      "corporation": "renko",
+      "cosmetics": "reduced",
+      "world_zoom_equivalent": 0.6000000238418579
+    },
+    {
+      "baseline": {
+        "packet": {
+          "batches": 1,
+          "quads": 9484,
+          "transforms": 24
+        },
+        "timing": {
+          "iterations": 600,
+          "max_ms": 0.153,
+          "min_ms": 0.0977,
+          "p50_ms": 0.0987,
+          "p95_ms": 0.1024,
+          "p99_ms": 0.1129,
+          "total_ms": 59.6886
+        }
+      },
+      "candidate": {
+        "packet": {
+          "batches": 1,
+          "quads": 36579,
+          "transforms": 39
+        },
+        "timing": {
+          "iterations": 600,
+          "max_ms": 1.0832,
+          "min_ms": 0.5755,
+          "p50_ms": 0.6126,
+          "p95_ms": 0.6592,
+          "p99_ms": 0.8864,
+          "total_ms": 373.7301
+        }
+      },
+      "candidate_first": true,
+      "corporation": "renko",
+      "cosmetics": "reduced",
+      "world_zoom_equivalent": 1.600000023841858
+    },
+    {
+      "baseline": {
+        "packet": {
+          "batches": 1,
+          "quads": 11020,
+          "transforms": 102
+        },
+        "timing": {
+          "iterations": 600,
+          "max_ms": 0.2246,
+          "min_ms": 0.1589,
+          "p50_ms": 0.1612,
+          "p95_ms": 0.166,
+          "p99_ms": 0.1853,
+          "total_ms": 97.3203
+        }
+      },
+      "candidate": {
+        "packet": {
+          "batches": 1,
+          "quads": 38115,
+          "transforms": 117
+        },
+        "timing": {
+          "iterations": 600,
+          "max_ms": 1.2924,
+          "min_ms": 0.6796,
+          "p50_ms": 0.6987,
+          "p95_ms": 0.8323,
+          "p99_ms": 1.2535,
+          "total_ms": 433.546
+        }
+      },
+      "candidate_first": false,
+      "corporation": "hugo",
+      "cosmetics": "full",
+      "world_zoom_equivalent": 0.6000000238418579
+    },
+    {
+      "baseline": {
+        "packet": {
+          "batches": 1,
+          "quads": 10449,
+          "transforms": 33
+        },
+        "timing": {
+          "iterations": 600,
+          "max_ms": 0.3064,
+          "min_ms": 0.1138,
+          "p50_ms": 0.1241,
+          "p95_ms": 0.2017,
+          "p99_ms": 0.2262,
+          "total_ms": 88.5413
+        }
+      },
+      "candidate": {
+        "packet": {
+          "batches": 1,
+          "quads": 37544,
+          "transforms": 48
+        },
+        "timing": {
+          "iterations": 600,
+          "max_ms": 1.1503,
+          "min_ms": 0.6111,
+          "p50_ms": 0.6339,
+          "p95_ms": 1.0677,
+          "p99_ms": 1.1098,
+          "total_ms": 421.1326
+        }
+      },
+      "candidate_first": true,
+      "corporation": "hugo",
+      "cosmetics": "full",
+      "world_zoom_equivalent": 1.600000023841858
+    },
+    {
+      "baseline": {
+        "packet": {
+          "batches": 1,
+          "quads": 10792,
+          "transforms": 91
+        },
+        "timing": {
+          "iterations": 600,
+          "max_ms": 0.395,
+          "min_ms": 0.1501,
+          "p50_ms": 0.1817,
+          "p95_ms": 0.2857,
+          "p99_ms": 0.3469,
+          "total_ms": 121.2577
+        }
+      },
+      "candidate": {
+        "packet": {
+          "batches": 1,
+          "quads": 37887,
+          "transforms": 106
+        },
+        "timing": {
+          "iterations": 600,
+          "max_ms": 1.5641,
+          "min_ms": 0.6654,
+          "p50_ms": 0.7596,
+          "p95_ms": 1.2618,
+          "p99_ms": 1.332,
+          "total_ms": 523.9276
+        }
+      },
+      "candidate_first": true,
+      "corporation": "hugo",
+      "cosmetics": "reduced",
+      "world_zoom_equivalent": 0.6000000238418579
+    },
+    {
+      "baseline": {
+        "packet": {
+          "batches": 1,
+          "quads": 10436,
+          "transforms": 24
+        },
+        "timing": {
+          "iterations": 600,
+          "max_ms": 0.2424,
+          "min_ms": 0.11,
+          "p50_ms": 0.1223,
+          "p95_ms": 0.1971,
+          "p99_ms": 0.2184,
+          "total_ms": 86.109
+        }
+      },
+      "candidate": {
+        "packet": {
+          "batches": 1,
+          "quads": 37531,
+          "transforms": 39
+        },
+        "timing": {
+          "iterations": 600,
+          "max_ms": 1.1891,
+          "min_ms": 0.6212,
+          "p50_ms": 0.6507,
+          "p95_ms": 0.7679,
+          "p99_ms": 1.1678,
+          "total_ms": 403.46
+        }
+      },
+      "candidate_first": false,
+      "corporation": "hugo",
+      "cosmetics": "reduced",
+      "world_zoom_equivalent": 1.600000023841858
+    }
+  ],
+  "cold": {
+    "baseline_packet": {
+      "batches": 1,
+      "quads": 10068,
+      "transforms": 102
+    },
+    "candidate_packet": {
+      "batches": 1,
+      "quads": 37163,
+      "transforms": 117
+    },
+    "first_dock_callback_ms": 26.7173,
+    "includes": "first dock parse/cache expansion and first larger pooled frame; Game construction and other art cache warmup excluded",
+    "total_game_render_ms": 27.0154
+  },
+  "fixture": "stationary actual licensed Game at Haven, no simulation advance/time zero",
+  "iterations_per_path": 600,
+  "scope": "native optimized CPU extraction only; no browser/WASM/GPU/RSS or device acceptance",
+  "trial": 2,
+  "warmup_per_path": 60
+}

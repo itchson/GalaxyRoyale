@@ -1,0 +1,24 @@
+{
+  "cpu": {
+    "Name": "AMD Ryzen 9 9950X3D 16-Core Processor          ",
+    "NumberOfCores": 16,
+    "NumberOfLogicalProcessors": 32
+  },
+  "os": {
+    "Caption": "Microsoft Windows 11 Pro",
+    "Version": "10.0.26200",
+    "BuildNumber": "26200"
+  },
+  "rustc": [
+    "rustc 1.97.0 (2d8144b78 2026-07-07)",
+    "binary: rustc",
+    "commit-hash: 2d8144b7880597b6e6d3dfd63a9a9efae3f533d3",
+    "commit-date: 2026-07-07",
+    "host: x86_64-pc-windows-msvc",
+    "release: 1.97.0",
+    "LLVM version: 22.1.6"
+  ],
+  "cargo": "cargo 1.97.0 (c980f4866 2026-06-30)",
+  "scope": "Native desktop CPU extraction only. Root native/WASM validation was running in parallel; process isolation does not imply an idle machine.",
+  "build": "cargo build -p game_web --lib --no-default-features --release --locked --target-dir work/dock-runtime-benchmark/target -j 4; standalone rustc -O -C lto=thin links actual produced rlibs"
+}

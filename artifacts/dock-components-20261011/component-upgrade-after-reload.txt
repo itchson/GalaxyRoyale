@@ -1,0 +1,62 @@
+- generic "Galaxy Royale game universe"
+- status
+- dialog "ABILITY COLLECTION":
+  - button "Close menu": X
+  - heading "ABILITY COLLECTION" [level=2]
+  - paragraph: Craft, equip and upgrade at Haven.
+  - navigation "Personal collections":
+    - button "MEISHI"
+    - button "CARGO"
+    - button "HULLS"
+    - button "ABILITIES" [pressed]
+    - button "STATS"
+  - button "BACK TO LOADOUT" [active]
+  - heading "ABILITY COLLECTION" [level=3]
+  - heading "PAN HIKARI" [level=3]
+  - paragraph: RAICHO LV 5 / 200 XP / NEXT 300 XP / RANK CAP 3/5
+  - button "CRAFT COMPONENTS"
+  - paragraph: Craft to own. Equip swaps this RAICHO's slot; replaced abilities stay owned.
+  - group "Ability categories":
+    - button "ALL SLOTS" [pressed]
+    - button "OFFENSIVE"
+    - button "DEFENSIVE"
+    - button "PASSIVE"
+  - group "ability filters":
+    - button "ALL" [pressed]
+    - button "OWNED"
+    - button "BLUEPRINT"
+    - button "COMPATIBLE"
+  - paragraph: 3 FOUND / 3 OWNED
+  - heading "Flux Drive" [level=3]
+  - paragraph: Adds +4% speed and acceleration per effective rank.
+  - paragraph: RANK 2 / EQUIPPED
+  - paragraph: PASSIVE / COMPATIBLE WITH ACTIVE HULL
+  - paragraph: REQUIRES RAICHO LV 5
+  - paragraph: PAN POINTS 10 / HAVE 30
+  - paragraph: T3 MATERIALS 2 / BANKED 8
+  - paragraph: FLUX BEARING 1 / BANKED 0
+  - paragraph: Requires 1 crafted Flux Bearing at the dock.
+  - button "UPGRADE" [disabled]
+  - heading "Pulse Lens" [level=3]
+  - paragraph: Primary shots deal +10% damage per effective rank; every fifth fired shot adds a bolt dealing 150% of primary damage.
+  - paragraph: RANK 3 / OWNED
+  - paragraph: OFFENSIVE / COMPATIBLE WITH ACTIVE HULL
+  - paragraph: REQUIRES RAICHO LV 8
+  - paragraph: RENKO POINTS 10 / HAVE 20
+  - paragraph: T4 MATERIALS 2 / BANKED 10
+  - paragraph: PULSE CONDUCTOR 2 / BANKED 0
+  - paragraph: Reach active ship level 8 for this rank.
+  - button "EQUIP"
+  - button "UPGRADE" [disabled]
+  - heading "Guard Coil" [level=3]
+  - paragraph: Grants 30 shield at rank 1, then +8 per effective rank; rank 2 unlocks recharge after 4s without damage.
+  - paragraph: RANK 2 / OWNED
+  - paragraph: DEFENSIVE / COMPATIBLE WITH ACTIVE HULL
+  - paragraph: REQUIRES RAICHO LV 5
+  - paragraph: HUGO POINTS 10 / HAVE 30
+  - paragraph: T3 MATERIALS 2 / BANKED 8
+  - paragraph: AEGIS LATTICE 1 / BANKED 0
+  - paragraph: Requires 1 crafted Aegis Lattice at the dock.
+  - button "EQUIP"
+  - button "UPGRADE" [disabled]
+  - status "Progress saved automatically on this device.": Saved on this device.

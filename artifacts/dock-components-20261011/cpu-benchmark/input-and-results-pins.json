@@ -1,0 +1,122 @@
+{
+  "source_commit": "7d3673e3a2f051aeefac6540e443ef7fc5d0ad9c",
+  "tracked_status": "",
+  "source_files": {
+    "Cargo.toml": {
+      "bytes": 467,
+      "sha256": "3daf47b4944c8605b4435722425d2203f008b7dfe929e43c78d386c19e64ee27"
+    },
+    "Cargo.lock": {
+      "bytes": 28906,
+      "sha256": "b00fa97ffca51b80eca3655d7de4acc9f43201b2f8ba0cf974545cf742a99574"
+    },
+    "crates/engine_core/Cargo.toml": {
+      "bytes": 256,
+      "sha256": "6da6af202b5a9d01028ae0e4eefe45a776de3ab00f0ec88e28e671fcf162272f"
+    },
+    "crates/game_core/Cargo.toml": {
+      "bytes": 301,
+      "sha256": "9808ea450c15c662f8b2168d232905b1485c3d22a8f4bf58e595b79ed03396f1"
+    },
+    "crates/game_web/Cargo.toml": {
+      "bytes": 742,
+      "sha256": "156c8fb5383ab7c6aa3301e03bc170b230a9b2ea30c9b9e81d33f3d029b8ad50"
+    },
+    "crates/engine_core/src/pixels.rs": {
+      "bytes": 17598,
+      "sha256": "2791ba6a228086a2cfce2308102a62fefda0ad46fef5d0b20bf447c199e5ed90"
+    },
+    "crates/engine_core/src/pixel_rig.rs": {
+      "bytes": 14550,
+      "sha256": "e26f9c373e34b6ddf35edcb45236664fbf1eff62f44029e815f2407fabbcd442"
+    },
+    "crates/engine_core/src/frame.rs": {
+      "bytes": 26160,
+      "sha256": "c4f521e031f8eb514236d142f0eb79b994a33edc030be534d1faf353097c3380"
+    },
+    "crates/game_core/src/lib.rs": {
+      "bytes": 201710,
+      "sha256": "e91a4d8366ed6e7828a07504ae4741a8dbf6bb257311e6c90aae7461c2f549e7"
+    },
+    "crates/game_web/src/dock_art.rs": {
+      "bytes": 9556,
+      "sha256": "6205442703302a8ef80b9d10376358a56e169a41bf7b76401e6c7ad9defa6d62"
+    },
+    "crates/game_web/src/dock_art_tests.rs": {
+      "bytes": 11196,
+      "sha256": "6fe9975fbd4e521ce07eeb88987df66200c8383dad39b362020a2615b1204f6e"
+    },
+    "crates/game_web/src/lib.rs": {
+      "bytes": 383,
+      "sha256": "85a375a5895049a1064285d3c5c4ebcaeef2ffa12df33cf1b439f779359fdc05"
+    },
+    "assets/pipeline/pan-coop-dock/native256/pack.json": {
+      "bytes": 2302820,
+      "sha256": "36031366f135b12b290f59e3f2c382e56774f9663e5fdb5241584051ad24832b"
+    }
+  },
+  "actual_linked_libraries": {
+    "target/release/deps/libengine_core-ae9e091f16768be2.rlib": {
+      "bytes": 546358,
+      "sha256": "f769c6fd9cdf2225edb17a005a37c95629dec6a5232630a78a3cbbc6ccb2c3a7"
+    },
+    "target/release/deps/libgame_core-1ca2956b621f5a34.rlib": {
+      "bytes": 18682410,
+      "sha256": "23782501f012d47a4487c2ab7bcc4cf7652c129623a8ac3322bc392f545ba51b"
+    },
+    "target/release/deps/libgame_web.rlib": {
+      "bytes": 20127546,
+      "sha256": "5d619213411846e36a5d6a2849b3080dcb94a50cd95ef204564df41ff7888d83"
+    },
+    "target/release/deps/libserde_json-710f30e7ef29a844.rlib": {
+      "bytes": 2502824,
+      "sha256": "c01a90388ed6d966a40571ad38a16e53db8b0c9eef838ac8bde4ad07e2024f26"
+    }
+  },
+  "evidence": {
+    "probe.rs": {
+      "bytes": 6789,
+      "sha256": "34832d60002089aec66f25dce5470b2b0de6e56cb6bf73e5ce65354c35212fbb"
+    },
+    "summarize.py": {
+      "bytes": 4720,
+      "sha256": "4e34fc0356a7c80bc9c8014787a06848522c771065f390e43115a6e70c6b7c53"
+    },
+    "build.log": {
+      "bytes": 2938,
+      "sha256": "f4f2ca4129b848cd85e2967a984163717adaf911c6964d5633b83e6288e95c1f"
+    },
+    "probe-build-record.json": {
+      "bytes": 628,
+      "sha256": "2bd2d4fe79930f1b8b387eecd9cac2efb0294a4c5673c53fb7849b7a6a8871a0"
+    },
+    "dock-runtime-benchmark.exe": {
+      "bytes": 4302848,
+      "sha256": "8c5c43b68275cbca46d554499f047b370a69e8556ef24839369e7d4dc80cbd9a"
+    },
+    "trial-0.json": {
+      "bytes": 11812,
+      "sha256": "0df7d46c99740c5050b0e8311afdbe59ae57224faa454da134e81bc38a0ad499"
+    },
+    "trial-1.json": {
+      "bytes": 11815,
+      "sha256": "ce94de842a7067f5605bdbfe7a08eef65bceb65245afdd86bdea5219dcc835da"
+    },
+    "trial-2.json": {
+      "bytes": 11817,
+      "sha256": "eb6e5b7ef7e480caac3da80b13ef31b8c714965f972b8af43e7d71057c7ee869"
+    },
+    "summary.json": {
+      "bytes": 11184,
+      "sha256": "cbb50836f733c1fc8721cacaf0fca59a515e0e18989c812d3d96a6aaca5b6a23"
+    },
+    "table.md": {
+      "bytes": 1100,
+      "sha256": "1c16eae2e67e5a25cd349ac30c3ac668d338f754216d28f0f349ce8b733a6d58"
+    },
+    "platform.json": {
+      "bytes": 943,
+      "sha256": "732cedac354de15ee9fa5a21b59ba6accca0d9eee932c78489705c23ae295d73"
+    }
+  }
+}

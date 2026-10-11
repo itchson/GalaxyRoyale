@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 731,
+  "revision": 752,
   "name": "Galaxy Royale",
   "phase": "Playable solo slice → content and validation",
-  "updatedAt": "2026-10-11T13:06:55.231Z",
+  "updatedAt": "2026-10-11T14:21:20.907Z",
   "tasks": [
     {
       "id": "studio",
@@ -5377,8 +5377,8 @@
     },
     {
       "id": "task-ef6ed92a",
-      "title": "Consistent high-detail pixel assets from approved DORA benchmark",
-      "description": "Latest user requests refined dynamic curved below-ship vitals, consistent approved high-detail pixel artwork and innovative particles, a detailed shooting star, and calm cute beat-aware thrust audio. This is a real queued task; completion requires scoped evidence.",
+      "title": "Consistent detailed assets from approved MEISHI and hub benchmarks",
+      "description": "Apply the approved collectible concept and newly approved in-game hub material/animation quality across remaining assets. Current native portraits, controls, sparse96-cell RAICHO overlays, dock and cosmic hooks are implemented at distinct validation stages; do not label them absent or uniformly accepted. Active MEISHI redesign is tracked separately. Next passes should compare facilities, hull presentation, threats and world surfaces at actual gameplay sizes, preserving independent collision/damage masks, corporate material roles, relative animation and bounded extraction.",
       "department": "art/audio",
       "owner": "/root/production_research",
       "status": "backlog",
@@ -5398,11 +5398,17 @@
           "met": false
         }
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "label": "Source-audited rollout inventory with corrected runtime status",
+          "kind": "artifact",
+          "path": "artifacts/meishi-redesign-20261011/content-tests/ASSET_ROLLOUT.md"
+        }
+      ],
       "blocker": "",
-      "revision": 1,
+      "revision": 2,
       "createdAt": "2026-10-11T04:55:52.801Z",
-      "updatedAt": "2026-10-11T04:55:52.801Z"
+      "updatedAt": "2026-10-11T14:02:03.652Z"
     },
     {
       "id": "task-72663b49",
@@ -6366,7 +6372,7 @@
     {
       "id": "task-6f886f1f",
       "title": "Detailed generated PAN dock with bounded native quadrant animation",
-      "description": "Integrated offline256 candidate92fb9f6/bc910fa:28,549cells16transforms,three lamp-only states and compressed decoded-hash proof. Art native checks, Gameplay exact packet review and root conversion verification pass. Production game dock replacement, interaction geometry, GPU visual/human approval and measured runtime cost remain pending.",
+      "description": "Detailed dock is integrated with bounded relative quadrant/lamp animation. User approved its visual quality and animation as a benchmark. Both PAN backend captures and real facility interaction are recorded. Native CPU extraction:43,200 frames, cold25.51-27.03ms and warm median added0.504-0.529ms. GPU/frame-memory/phone soak and cold prewarm remain follow-ups; CPU evidence is not final-device performance.",
       "department": "Art/Engine",
       "owner": "/root/production_research",
       "status": "review",
@@ -6391,12 +6397,27 @@
           "label": "Native128 candidate and visual comparison",
           "kind": "note",
           "path": "artifacts/runtime-studio-20261011/README.md"
+        },
+        {
+          "label": "Dock and component evidence with explicit cost limits",
+          "kind": "artifact",
+          "path": "artifacts/dock-components-20261011/README.md"
+        },
+        {
+          "label": "Actual PAN dock WebGL2",
+          "kind": "artifact",
+          "path": "artifacts/dock-components-20261011/dock-pan-webgl2-1280.png"
+        },
+        {
+          "label": "Measured CPU table",
+          "kind": "artifact",
+          "path": "artifacts/dock-components-20261011/cpu-benchmark/table.md"
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 4,
       "createdAt": "2026-10-11T11:32:06.321Z",
-      "updatedAt": "2026-10-11T11:54:33.837Z"
+      "updatedAt": "2026-10-11T14:21:20.698Z"
     },
     {
       "id": "task-613742d2",
@@ -6456,45 +6477,66 @@
     {
       "id": "task-1cba1e46",
       "title": "Crafted components for advanced ability upgrade recipes",
-      "description": "User direction: some higher-level ability upgrades consume crafted components plus matching corporation points. Current recipes consume raw tier or named training materials; do not call these crafted items. Define finite component inventory/recipes, explicit discovery/level gates, atomic spending, Rust-authoritative HUD/actions and versioned previous-save migration before implementation.",
+      "description": "Schema7 retained components, native workshop icons and atomic advanced ability recipes are integrated. Training remains unchanged. Fifty actual WASM/SaveStore cases pass across both backends. Public WebGPU restore/craft/upgrade/reload/export preserved exact rank, component, point and material balances; level8 correctly gates the next rank. Supplied level5 starting inventory is QA data, not natural progression.",
       "department": "Gameplay",
       "owner": "/root/gameplay_design",
-      "status": "backlog",
+      "status": "complete",
       "priority": "normal",
       "dependencies": [],
       "acceptanceCriteria": [
         {
           "text": "Actual crafted components have distinct owned counts and documented recipes.",
-          "met": false
+          "met": true
         },
         {
           "text": "Upgrade consumes matching points and component atomically with level/compatibility guards.",
-          "met": false
+          "met": true
         },
         {
           "text": "Save round trips, migration, failed spending and repeat actions preserve all balances.",
-          "met": false
+          "met": true
         }
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "label": "Component implementation and measured browser flow",
+          "kind": "artifact",
+          "path": "artifacts/dock-components-20261011/README.md"
+        },
+        {
+          "label": "Actual post-reload exported QA progression",
+          "kind": "artifact",
+          "path": "artifacts/dock-components-20261011/qa-export-after-upgrade.json"
+        },
+        {
+          "label": "Fifty actual WASM save contract cases",
+          "kind": "artifact",
+          "path": "artifacts/dock-components-20261011/dock-components-wasm-contract.log"
+        },
+        {
+          "label": "Independent atomic action/storage review",
+          "kind": "artifact",
+          "path": "artifacts/dock-components-20261011/engine-review/REVIEW.md"
+        }
+      ],
       "blocker": "",
-      "revision": 1,
+      "revision": 3,
       "createdAt": "2026-10-11T11:46:13.155Z",
-      "updatedAt": "2026-10-11T11:46:13.155Z"
+      "updatedAt": "2026-10-11T14:21:20.731Z"
     },
     {
       "id": "task-d6b739e3",
       "title": "Collectible MEISHI art and eight recessed patch sockets",
-      "description": "Implemented collectible MEISHI native pixel card with main-manufacturer colors, separately animated existing portrait, current RAICHO/abilities/retained balances and eight designed earned-only sockets. Close remains the only action. Continuous patch scaling and bounded component admission preserve meaningful art. Root browser acceptance and independent source review attached; physical-device/soak and all-eight-earned browser progression remain explicitly untested.",
+      "description": "Portrait-led native redesign integrated and checked on WebGPU/WebGL2 at desktop, short landscape and narrow sizes, including supplied all-eight-earned QA data. Actual reviews found no confirmed clipping blocker. Technical validation passes; user visual approval and further portrait/metal/socket refinement remain pending. Prior card screenshots remain historical evidence after explicit rejection.",
       "department": "Art/UI/Engine",
       "owner": "/root",
-      "status": "complete",
+      "status": "review",
       "priority": "high",
       "dependencies": [],
       "acceptanceCriteria": [
         {
           "text": "Detailed corporation-specific native frame, portrait surround, seal and eight designed sockets with actual earned emblems.",
-          "met": true
+          "met": false
         },
         {
           "text": "Readable portrait/landscape layouts retain read-only card semantics and main/sub manufacturer independence.",
@@ -6540,12 +6582,37 @@
           "label": "Normal tested build receipt",
           "kind": "artifact",
           "path": "artifacts/meishi-collectible-20261011/tested-build.json"
+        },
+        {
+          "label": "Current redesigned card: validation and remaining style gaps",
+          "kind": "artifact",
+          "path": "artifacts/meishi-redesign-20261011/README.md"
+        },
+        {
+          "label": "Final WebGPU card",
+          "kind": "artifact",
+          "path": "artifacts/meishi-redesign-20261011/pan-final-webgpu-1280.png"
+        },
+        {
+          "label": "Final WebGL2 card",
+          "kind": "artifact",
+          "path": "artifacts/meishi-redesign-20261011/pan-final-webgl2-1280.png"
+        },
+        {
+          "label": "Eight emblems: supplied QA state, not earned campaign",
+          "kind": "artifact",
+          "path": "artifacts/meishi-redesign-20261011/pan-all8-fixture-webgpu-1280.png"
+        },
+        {
+          "label": "Independent source/build/process audit",
+          "kind": "artifact",
+          "path": "artifacts/meishi-redesign-20261011/evidence-audit/REVIEW.md"
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 4,
       "createdAt": "2026-10-11T12:41:11.160Z",
-      "updatedAt": "2026-10-11T13:05:02.957Z"
+      "updatedAt": "2026-10-11T14:21:20.675Z"
     }
   ],
   "reviews": [
@@ -7973,6 +8040,96 @@
           "path": "artifacts/meishi-collectible-20261011/tested-build.json"
         }
       ]
+    },
+    {
+      "id": "review-72b6ab01",
+      "title": "Portrait-led MEISHI rework: content, budgets and responsive findings",
+      "body": "Root retained current RAICHO name and level because the card must carry ship information, while Gameplay removed duplicated live combat stats and added failing-before/passing-after regressions. Art is authoring deeper metallic fittings and recommended a two-thirds emblem aperture for visible socket catches. Engine measured the prior conservative UI budget and is preserving60k admission; larger displayed portraits do not add source cells. Root observed all8 sockets at1280x720,848x390 and320x700 without DOM overflow, and identified ignored CSS text alignment; Engine and Root are implementing the actual native/bridge fix. New fittings and renderer output are still awaiting final integration and browser review.",
+      "author": "/root",
+      "source": "Actual asynchronous art, engine and UX discussion",
+      "createdAt": "2026-10-11T13:51:20.623Z",
+      "participants": [
+        "/root",
+        "/root/production_research",
+        "/root/engine_research",
+        "/root/gameplay_design"
+      ],
+      "taskIds": [
+        "task-d6b739e3"
+      ],
+      "evidence": [
+        {
+          "label": "Actual content regression results",
+          "kind": "artifact",
+          "path": "artifacts/meishi-redesign-20261011/content-tests/HANDOFF.md"
+        },
+        {
+          "label": "Layout before new fittings: desktop",
+          "kind": "artifact",
+          "path": "artifacts/meishi-redesign-20261011/layout-before-fittings.png"
+        },
+        {
+          "label": "Independent budget assessment",
+          "kind": "artifact",
+          "path": "artifacts/dock-components-20261011/engine-review/MEISHI_BUDGET_NOTE.md"
+        }
+      ]
+    },
+    {
+      "id": "review-59692c30",
+      "title": "Detailed dock, component workshop and redesigned MEISHI: integration review",
+      "body": "Art independently inspected saved WebGPU/WebGL2 card captures and requests closer portrait framing, more sculpted metal and deeper socket recesses before reference parity. Gameplay/UX verified compact content, independent manufacturer roles, earned-only disclosure and corrected the supplied all-eight fixture after the validator rejected inconsistent champion blueprints. Engine checked exact native budget/palette expectations, fractional hull fit and semantic text alignment; it independently audited680 native passes,425 shell passes and exactly one matching preview process. Root checked both actual renderer diagnostics, responsive captures, keyboard focus and public craft/upgrade/reload/export. User approved the hub visual direction; final card art approval is not inferred.",
+      "author": "/root",
+      "source": "Actual asynchronous specialist contributions and Root integration",
+      "createdAt": "2026-10-11T14:21:20.769Z",
+      "participants": [
+        "/root",
+        "/root/production_research",
+        "/root/gameplay_design",
+        "/root/engine_research"
+      ],
+      "taskIds": [
+        "task-d6b739e3",
+        "task-6f886f1f",
+        "task-1cba1e46"
+      ],
+      "evidence": [
+        {
+          "label": "Current redesigned card: validation and remaining style gaps",
+          "kind": "artifact",
+          "path": "artifacts/meishi-redesign-20261011/README.md"
+        },
+        {
+          "label": "Final WebGPU card",
+          "kind": "artifact",
+          "path": "artifacts/meishi-redesign-20261011/pan-final-webgpu-1280.png"
+        },
+        {
+          "label": "Final WebGL2 card",
+          "kind": "artifact",
+          "path": "artifacts/meishi-redesign-20261011/pan-final-webgl2-1280.png"
+        },
+        {
+          "label": "Eight emblems: supplied QA state, not earned campaign",
+          "kind": "artifact",
+          "path": "artifacts/meishi-redesign-20261011/pan-all8-fixture-webgpu-1280.png"
+        },
+        {
+          "label": "Independent source/build/process audit",
+          "kind": "artifact",
+          "path": "artifacts/meishi-redesign-20261011/evidence-audit/REVIEW.md"
+        },
+        {
+          "label": "Art critique and remaining gaps",
+          "kind": "artifact",
+          "path": "artifacts/meishi-redesign-20261011/art-review/BROWSER_REVIEW.md"
+        },
+        {
+          "label": "Gameplay final visual review",
+          "kind": "artifact",
+          "path": "artifacts/meishi-redesign-20261011/content-tests/FINAL_WEBGPU_REVIEW.md"
+        }
+      ]
     }
   ],
   "decisions": [
@@ -8199,6 +8356,24 @@
       "author": "/root",
       "source": "User correction and actual standalone-card implementation 2bab5b1",
       "createdAt": "2026-10-11T12:15:47.736Z",
+      "status": "accepted"
+    },
+    {
+      "id": "decision-3d53206c",
+      "title": "Approved high-detail MEISHI reference defines the game art direction",
+      "body": "The user explicitly approved the generated PAN MEISHI image as the game art style. Use its detailed layered metal, dark negative space, corporate enamel, expressive KIKAI portrait and recessed eight-patch layout as the quality reference. Generated text and numbers are concept placeholders, not game data. This approval concerns visual direction; each native asset still needs its own in-engine fidelity, readability, animation and budget validation.",
+      "author": "/root",
+      "source": "Direct user visual approval",
+      "createdAt": "2026-10-11T13:25:28.003Z",
+      "status": "accepted"
+    },
+    {
+      "id": "decision-5385701b",
+      "title": "New hub detail and animation are an approved visual benchmark",
+      "body": "User likes the new spacehub/arena appearance much more than the previous version, specifically its quality and animation. Preserve this direction while redesigning the rejected native MEISHI card and improving remaining assets. This approves the visual direction, not unmeasured performance or all future assets.",
+      "author": "/root",
+      "source": "Direct user visual feedback",
+      "createdAt": "2026-10-11T13:44:43.577Z",
       "status": "accepted"
     }
   ],
@@ -10030,6 +10205,51 @@
       ],
       "url": "http://127.0.0.1:4173/?qa=1&renderer=webgpu",
       "knownIssues": "Representative native all-earned composition is measured; browser profiles have zero earned patches. Physical devices, sustained performance and subjective player readability approval remain pending."
+    },
+    {
+      "id": "build-8bb227ab",
+      "title": "Detailed dock, component crafting and portrait-led MEISHI",
+      "body": "Normal Rust/WASM WebGPU/WebGL2 plus game/PWA/Studio build at f3a7230. Full native680pass/1ignored, shell425pass/1skip, TypeScript and strict workspace/all-target Clippy passed. Real browser backend, responsive card and public component purchase/reload checks are captured. Final art approval and device performance remain independent.",
+      "author": "/root",
+      "source": "Actual integration checks and normal single preview",
+      "createdAt": "2026-10-11T14:21:20.807Z",
+      "revision": "f3a723081033a2cdd9bab15e37241fe334530716",
+      "evidence": [
+        {
+          "label": "Build and all check logs",
+          "kind": "artifact",
+          "path": "artifacts/meishi-redesign-20261011/README.md"
+        },
+        {
+          "label": "Verified tested build receipt",
+          "kind": "artifact",
+          "path": "artifacts/meishi-redesign-20261011/tested-preview.json"
+        }
+      ],
+      "checks": [
+        {
+          "name": "Workspace native:680pass/1ignored",
+          "result": "pass"
+        },
+        {
+          "name": "Shell:425pass/1Windows skip",
+          "result": "pass"
+        },
+        {
+          "name": "TypeScript / strict Clippy / production builds",
+          "result": "pass"
+        },
+        {
+          "name": "Actual WebGPU/WebGL2 card + public workshop persistence",
+          "result": "pass"
+        },
+        {
+          "name": "Phone FPS/memory and30minute soak",
+          "result": "not_run"
+        }
+      ],
+      "url": "http://127.0.0.1:4173/?qa=1&renderer=webgpu",
+      "knownIssues": "Card reference parity/user approval and whole-game style rollout pending. Dock cold CPU callback25.51-27.03ms measured on prior pinned integration source. Phone/soak unmeasured. Eight-patch display used suppliedQA; natural campaign and playable co-op remain pending."
     }
   ],
   "feedback": [],
@@ -17343,6 +17563,216 @@
       "author": "/root",
       "source": "Actual completed bounded production documentation follow-up",
       "createdAt": "2026-10-11T13:06:55.231Z"
+    },
+    {
+      "id": "f68c4fea-8e22-4361-ba49-00567a4f60b0",
+      "revision": 732,
+      "kind": "task.update",
+      "itemId": "task-1cba1e46",
+      "title": "Crafted components for advanced ability upgrade recipes",
+      "author": "/root",
+      "source": "Active integration session",
+      "createdAt": "2026-10-11T13:18:55.977Z"
+    },
+    {
+      "id": "5f87e17d-1757-41b6-bb89-cc812ba21efc",
+      "revision": 733,
+      "kind": "run",
+      "itemId": "run-7b27e577",
+      "title": "Engine · running",
+      "author": "/root",
+      "source": "Observed live assignments",
+      "createdAt": "2026-10-11T13:19:12.233Z"
+    },
+    {
+      "id": "3637eee1-7113-46fc-ba54-28e74514508d",
+      "revision": 734,
+      "kind": "run",
+      "itemId": "run-48441ba4",
+      "title": "Gameplay · running",
+      "author": "/root",
+      "source": "Observed live assignments",
+      "createdAt": "2026-10-11T13:19:12.264Z"
+    },
+    {
+      "id": "8b5734b3-8ece-40a2-bb5e-6ebc120a76d1",
+      "revision": 735,
+      "kind": "run",
+      "itemId": "run-c78b780d",
+      "title": "Art and review · running",
+      "author": "/root",
+      "source": "Observed live assignments",
+      "createdAt": "2026-10-11T13:19:12.277Z"
+    },
+    {
+      "id": "f9ba823e-a397-47de-b5e6-b1c47c153532",
+      "revision": 736,
+      "kind": "decision",
+      "itemId": "decision-3d53206c",
+      "title": "Approved high-detail MEISHI reference defines the game art direction",
+      "author": "/root",
+      "source": "Direct user visual approval",
+      "createdAt": "2026-10-11T13:25:28.003Z"
+    },
+    {
+      "id": "0fc5a390-9b33-41c0-981a-e03d9c351587",
+      "revision": 737,
+      "kind": "task.update",
+      "itemId": "task-d6b739e3",
+      "title": "Collectible MEISHI art and eight recessed patch sockets",
+      "author": "/root",
+      "source": "Current user comparison and native card redesign",
+      "createdAt": "2026-10-11T13:44:43.524Z"
+    },
+    {
+      "id": "597fd0a5-1be4-404c-92ab-373f22bf56ee",
+      "revision": 738,
+      "kind": "task.update",
+      "itemId": "task-6f886f1f",
+      "title": "Detailed generated PAN dock with bounded native quadrant animation",
+      "author": "/root",
+      "source": "User approved new hub appearance and animation",
+      "createdAt": "2026-10-11T13:44:43.549Z"
+    },
+    {
+      "id": "df25dbd0-e83b-4429-8290-446c9cc98654",
+      "revision": 739,
+      "kind": "decision",
+      "itemId": "decision-5385701b",
+      "title": "New hub detail and animation are an approved visual benchmark",
+      "author": "/root",
+      "source": "Direct user visual feedback",
+      "createdAt": "2026-10-11T13:44:43.577Z"
+    },
+    {
+      "id": "f3440a65-fd31-48e5-8d9e-bda6550758e0",
+      "revision": 740,
+      "kind": "run",
+      "itemId": "run-b750f924",
+      "title": "Art · running",
+      "author": "/root",
+      "source": "Actual dispatched bounded assignments",
+      "createdAt": "2026-10-11T13:44:43.594Z"
+    },
+    {
+      "id": "25624d75-59ce-4b40-b7b4-889bd9ad8977",
+      "revision": 741,
+      "kind": "run",
+      "itemId": "run-a2121c57",
+      "title": "Engine · running",
+      "author": "/root",
+      "source": "Actual dispatched bounded assignments",
+      "createdAt": "2026-10-11T13:44:43.623Z"
+    },
+    {
+      "id": "1f3ec769-d03c-4afd-87b5-d3c5dc58240b",
+      "revision": 742,
+      "kind": "run",
+      "itemId": "run-a9184f96",
+      "title": "Gameplay / UX · running",
+      "author": "/root",
+      "source": "Actual dispatched bounded assignments",
+      "createdAt": "2026-10-11T13:44:43.658Z"
+    },
+    {
+      "id": "888a7cf4-5213-46fd-be49-92c827701527",
+      "revision": 743,
+      "kind": "review",
+      "itemId": "review-72b6ab01",
+      "title": "Portrait-led MEISHI rework: content, budgets and responsive findings",
+      "author": "/root",
+      "source": "Actual asynchronous art, engine and UX discussion",
+      "createdAt": "2026-10-11T13:51:20.623Z"
+    },
+    {
+      "id": "9fc7e2b9-0444-4abc-9e9a-50bf15bb5d81",
+      "revision": 744,
+      "kind": "task.update",
+      "itemId": "task-ef6ed92a",
+      "title": "Consistent detailed assets from approved MEISHI and hub benchmarks",
+      "author": "/root",
+      "source": "Approved hub plus source-audited asset rollout",
+      "createdAt": "2026-10-11T14:02:03.652Z"
+    },
+    {
+      "id": "bc376495-e22f-4788-9bd1-8b0e67994fd4",
+      "revision": 745,
+      "kind": "task.update",
+      "itemId": "task-d6b739e3",
+      "title": "Collectible MEISHI art and eight recessed patch sockets",
+      "author": "/root",
+      "source": "Integrated code and actual browser/independent reviews",
+      "createdAt": "2026-10-11T14:21:20.675Z"
+    },
+    {
+      "id": "614a0e19-faab-4244-a3c2-83eb8ab2ad71",
+      "revision": 746,
+      "kind": "task.update",
+      "itemId": "task-6f886f1f",
+      "title": "Detailed generated PAN dock with bounded native quadrant animation",
+      "author": "/root",
+      "source": "Direct user approval plus actual two-backend captures and native measurement",
+      "createdAt": "2026-10-11T14:21:20.698Z"
+    },
+    {
+      "id": "c66e1477-5bd4-4757-b51a-e8c7ffdb1431",
+      "revision": 747,
+      "kind": "task.update",
+      "itemId": "task-1cba1e46",
+      "title": "Crafted components for advanced ability upgrade recipes",
+      "author": "/root",
+      "source": "Atomic Rust recipes, save contracts and public browser craft/upgrade/reload",
+      "createdAt": "2026-10-11T14:21:20.731Z"
+    },
+    {
+      "id": "506383e1-23c7-411e-a7d9-aa362facf294",
+      "revision": 748,
+      "kind": "review",
+      "itemId": "review-59692c30",
+      "title": "Detailed dock, component workshop and redesigned MEISHI: integration review",
+      "author": "/root",
+      "source": "Actual asynchronous specialist contributions and Root integration",
+      "createdAt": "2026-10-11T14:21:20.769Z"
+    },
+    {
+      "id": "c9d8d632-53ed-481e-963a-35f9cb3f7b81",
+      "revision": 749,
+      "kind": "build",
+      "itemId": "build-8bb227ab",
+      "title": "Detailed dock, component crafting and portrait-led MEISHI",
+      "author": "/root",
+      "source": "Actual integration checks and normal single preview",
+      "createdAt": "2026-10-11T14:21:20.807Z"
+    },
+    {
+      "id": "318d97e0-d80d-4fe3-9dce-1de08e43e9a2",
+      "revision": 750,
+      "kind": "run",
+      "itemId": "run-67b410dd",
+      "title": "Art · completed",
+      "author": "/root",
+      "source": "Actual returned bounded assignment results",
+      "createdAt": "2026-10-11T14:21:20.845Z"
+    },
+    {
+      "id": "b9b416e3-a3c9-4095-9002-d0ab6a86215c",
+      "revision": 751,
+      "kind": "run",
+      "itemId": "run-be8409f4",
+      "title": "Engine · completed",
+      "author": "/root",
+      "source": "Actual returned bounded assignment results",
+      "createdAt": "2026-10-11T14:21:20.877Z"
+    },
+    {
+      "id": "3d817dcc-7a2a-4ee2-83d6-3cb945edec09",
+      "revision": 752,
+      "kind": "run",
+      "itemId": "run-735f5d43",
+      "title": "Gameplay / UX · completed",
+      "author": "/root",
+      "source": "Actual returned bounded assignment results",
+      "createdAt": "2026-10-11T14:21:20.907Z"
     }
   ],
   "runRecords": [
@@ -23797,6 +24227,205 @@
       "author": "/root",
       "source": "Actual completed bounded production documentation follow-up",
       "createdAt": "2026-10-11T13:06:55.231Z"
+    },
+    {
+      "id": "run-7b27e577",
+      "title": "Engine · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Engine",
+      "state": "running",
+      "observedAt": "2026-10-11T13:19:12.149Z",
+      "taskIds": [
+        "task-6f886f1f"
+      ],
+      "summary": "Integrating the authored dock pack through a narrow render callback; native tests and budget checks in progress.",
+      "evidence": [
+        {
+          "label": "Live collaboration",
+          "kind": "note",
+          "details": "Native collaboration list confirms this assigned specialist is running; work is not yet integrated or accepted."
+        }
+      ],
+      "author": "/root",
+      "source": "Observed live assignments",
+      "createdAt": "2026-10-11T13:19:12.233Z"
+    },
+    {
+      "id": "run-48441ba4",
+      "title": "Gameplay · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Gameplay",
+      "state": "running",
+      "observedAt": "2026-10-11T13:19:12.262Z",
+      "taskIds": [
+        "task-1cba1e46"
+      ],
+      "summary": "Implementing three dock-stored crafted components, schema 7 migration and atomic advanced ability upgrades.",
+      "evidence": [
+        {
+          "label": "Live collaboration",
+          "kind": "note",
+          "details": "Native collaboration list confirms this assigned specialist is running; work is not yet integrated or accepted."
+        }
+      ],
+      "author": "/root",
+      "source": "Observed live assignments",
+      "createdAt": "2026-10-11T13:19:12.264Z"
+    },
+    {
+      "id": "run-c78b780d",
+      "title": "Art and review · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "Art and review",
+      "state": "running",
+      "observedAt": "2026-10-11T13:19:12.278Z",
+      "taskIds": [
+        "task-6f886f1f",
+        "task-1cba1e46"
+      ],
+      "summary": "Reviewed dock source and palette roles; authoring three native component icons and reviewing the gameplay contract.",
+      "evidence": [
+        {
+          "label": "Live collaboration",
+          "kind": "note",
+          "details": "Native collaboration list confirms this assigned specialist is running; work is not yet integrated or accepted."
+        }
+      ],
+      "author": "/root",
+      "source": "Observed live assignments",
+      "createdAt": "2026-10-11T13:19:12.277Z"
+    },
+    {
+      "id": "run-b750f924",
+      "title": "Art · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "Art",
+      "state": "running",
+      "observedAt": "2026-10-11T13:44:43.586Z",
+      "taskIds": [
+        "task-d6b739e3"
+      ],
+      "summary": "Authoring detailed native MEISHI chassis, metallic octagonal sockets and corporate seal.",
+      "evidence": [
+        {
+          "label": "Real assignment",
+          "kind": "note",
+          "details": "Native collaboration assignment delivered in this session. Completion awaits returned code and evidence."
+        }
+      ],
+      "author": "/root",
+      "source": "Actual dispatched bounded assignments",
+      "createdAt": "2026-10-11T13:44:43.594Z"
+    },
+    {
+      "id": "run-a2121c57",
+      "title": "Engine · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Engine",
+      "state": "running",
+      "observedAt": "2026-10-11T13:44:43.607Z",
+      "taskIds": [
+        "task-d6b739e3"
+      ],
+      "summary": "Reviewing fixed UI quad budget and fixing fractional sizing of campaign hull icons.",
+      "evidence": [
+        {
+          "label": "Real assignment",
+          "kind": "note",
+          "details": "Native collaboration assignment delivered in this session. Completion awaits returned code and evidence."
+        }
+      ],
+      "author": "/root",
+      "source": "Actual dispatched bounded assignments",
+      "createdAt": "2026-10-11T13:44:43.623Z"
+    },
+    {
+      "id": "run-a9184f96",
+      "title": "Gameplay / UX · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Gameplay / UX",
+      "state": "running",
+      "observedAt": "2026-10-11T13:44:43.637Z",
+      "taskIds": [
+        "task-d6b739e3"
+      ],
+      "summary": "Reviewing compact card content and implementing display contract regression tests.",
+      "evidence": [
+        {
+          "label": "Real assignment",
+          "kind": "note",
+          "details": "Native collaboration assignment delivered in this session. Completion awaits returned code and evidence."
+        }
+      ],
+      "author": "/root",
+      "source": "Actual dispatched bounded assignments",
+      "createdAt": "2026-10-11T13:44:43.658Z"
+    },
+    {
+      "id": "run-67b410dd",
+      "title": "Art · completed",
+      "agentId": "/root/production_research",
+      "agentLabel": "Art",
+      "state": "completed",
+      "observedAt": "2026-10-11T14:21:20.836Z",
+      "taskIds": [
+        "task-d6b739e3"
+      ],
+      "summary": "Detailed fittings integrated; independent saved-capture review identifies remaining portrait/metal/socket refinements.",
+      "evidence": [
+        {
+          "label": "Actual returned report",
+          "kind": "artifact",
+          "path": "artifacts/meishi-redesign-20261011/art-review/WEBGL2_REVIEW.md"
+        }
+      ],
+      "author": "/root",
+      "source": "Actual returned bounded assignment results",
+      "createdAt": "2026-10-11T14:21:20.845Z"
+    },
+    {
+      "id": "run-be8409f4",
+      "title": "Engine · completed",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Engine",
+      "state": "completed",
+      "observedAt": "2026-10-11T14:21:20.867Z",
+      "taskIds": [
+        "task-d6b739e3"
+      ],
+      "summary": "Native fit/alignment and artcost fixes integrated; independent final evidence and single-preview audit complete.",
+      "evidence": [
+        {
+          "label": "Actual returned report",
+          "kind": "artifact",
+          "path": "artifacts/meishi-redesign-20261011/evidence-audit/REVIEW.md"
+        }
+      ],
+      "author": "/root",
+      "source": "Actual returned bounded assignment results",
+      "createdAt": "2026-10-11T14:21:20.877Z"
+    },
+    {
+      "id": "run-735f5d43",
+      "title": "Gameplay / UX · completed",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Gameplay / UX",
+      "state": "completed",
+      "observedAt": "2026-10-11T14:21:20.902Z",
+      "taskIds": [
+        "task-d6b739e3"
+      ],
+      "summary": "Content regressions and final visual review complete; supplied all-eight fixture validated with coherent blueprint flags.",
+      "evidence": [
+        {
+          "label": "Actual returned report",
+          "kind": "artifact",
+          "path": "artifacts/meishi-redesign-20261011/qa-fixture/README.md"
+        }
+      ],
+      "author": "/root",
+      "source": "Actual returned bounded assignment results",
+      "createdAt": "2026-10-11T14:21:20.907Z"
     }
   ],
   "phaseDescription": "Desktop-first Rust/WASM solo game and local Studio are implemented. Reviewed occupied-cell art, reproducible conversion, responsive native settings/icons and minimap, strict GitHub integration gates and source-backed Dev Bible are integrated. Natural campaign balance, human listening, owner-private update lifecycle and physical phones remain separate pending gates."

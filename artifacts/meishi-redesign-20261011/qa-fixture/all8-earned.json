@@ -1,0 +1,389 @@
+{
+  "schema_version": 7,
+  "revision": 0,
+  "seed": 2277258045,
+  "currency": [
+    30,
+    30,
+    30
+  ],
+  "ranks": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "unlocked": [
+    false,
+    false,
+    false
+  ],
+  "kills": [
+    0,
+    0,
+    0
+  ],
+  "boss_kills": [
+    0,
+    0,
+    0
+  ],
+  "boss_generations": [
+    [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  ],
+  "pity": [
+    0,
+    0,
+    0
+  ],
+  "pending": [
+    false,
+    false,
+    false
+  ],
+  "discoveries": [],
+  "quests": [],
+  "relics": [],
+  "campaign": {
+    "patches": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "blueprints": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "crafted": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    "selected_ship": 0,
+    "royale_results": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "tournament_attempt": 0,
+    "victory_claimed": false,
+    "credits_seen": false,
+    "ship_xp": [
+      200,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "cargo_materials": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "stored_materials": [
+      10,
+      10,
+      10,
+      10,
+      10
+    ],
+    "cargo_training_materials": [
+      0,
+      0,
+      0
+    ],
+    "stored_training_materials": [
+      0,
+      0,
+      0
+    ],
+    "components": [
+      0,
+      0,
+      0
+    ],
+    "abilities": [
+      {
+        "blueprint": true,
+        "rank": 2
+      },
+      {
+        "blueprint": true,
+        "rank": 2
+      },
+      {
+        "blueprint": true,
+        "rank": 2
+      },
+      {
+        "blueprint": false,
+        "rank": 0
+      },
+      {
+        "blueprint": false,
+        "rank": 0
+      },
+      {
+        "blueprint": false,
+        "rank": 0
+      },
+      {
+        "blueprint": true,
+        "rank": 0
+      },
+      {
+        "blueprint": true,
+        "rank": 0
+      },
+      {
+        "blueprint": true,
+        "rank": 0
+      },
+      {
+        "blueprint": true,
+        "rank": 0
+      },
+      {
+        "blueprint": true,
+        "rank": 0
+      },
+      {
+        "blueprint": true,
+        "rank": 0
+      },
+      {
+        "blueprint": true,
+        "rank": 0
+      },
+      {
+        "blueprint": true,
+        "rank": 0
+      },
+      {
+        "blueprint": false,
+        "rank": 0
+      },
+      {
+        "blueprint": false,
+        "rank": 0
+      },
+      {
+        "blueprint": false,
+        "rank": 0
+      }
+    ],
+    "loadouts": [
+      {
+        "hardware": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "slots": [
+          null,
+          null,
+          2
+        ]
+      },
+      {
+        "hardware": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "slots": [
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "hardware": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "slots": [
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "hardware": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "slots": [
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "hardware": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "slots": [
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "hardware": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "slots": [
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "hardware": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "slots": [
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "hardware": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "slots": [
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "hardware": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "slots": [
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "hardware": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "slots": [
+          null,
+          null,
+          null
+        ]
+      }
+    ],
+    "last_run": null
+  },
+  "identity": {
+    "kind": "dora",
+    "corporation": "pan",
+    "sub_corporation": "renko",
+    "hex_id": "0123456789abcdef"
+  },
+  "onboarding": null
+}
