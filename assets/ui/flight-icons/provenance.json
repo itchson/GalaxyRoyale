@@ -1,0 +1,82 @@
+{
+  "schema": 1,
+  "authorship": "Original pixel cells authored directly by Codex with Python/Pillow shape masks and explicit pixel clusters.",
+  "generation_model": null,
+  "source_grid": [
+    64,
+    64
+  ],
+  "palette_count": 21,
+  "alpha_policy": "binary exact",
+  "components": "all retained, intentional open silhouette holes",
+  "conversion_loss": "none",
+  "source_png_encoding": "filter0, explicitly stored DEFLATE blocks; decoded by Pillow; reproducible encoded bytes",
+  "atlas_sha256": "e86980bbb99f3c1423900283f78e7bba2aac4b90d02b4a0855291c2e5ff8ee73",
+  "source_sha256": {
+    "icon_status": "7c9a4ab8fe8be191f4bd9e54c1cb2bc8eeeeca486f552919e549b65103a840b2",
+    "icon_map": "c8444c744410710c1e5023ac49aa9a9f1939ae977483314ad986356164853b25",
+    "icon_settings": "3d69c9828ed5ddc6af32fe9cfba43c747184cc4e501dd32886b61a62f84ab0f9",
+    "icon_save": "aae1a26c9b75c8c1b47a94276f09021d5076a86685c63add19aa4364d8726290",
+    "icon_close": "4f49aa581485827e1dcc5ee4a08983dafc273abc502fa25be92d272c8e40ab82",
+    "icon_resume": "454606c1be574ff6d87ba1e797b1fd1b37f1296ab9e467a2550dfac453f54d69",
+    "icon_restart": "2958bbefb329afd04820509b7d93841bbc1449987234189ab8d863c86e804faf",
+    "icon_title": "5b173d643c3fa2b0389656c92ef84f0c3bd5c6836ab7394cb204932d5dded6c7",
+    "icon_quit": "a9e8b98252ff7128993d365965785000b059758f52df79dc5e45f312b7425f14",
+    "icon_fullscreen": "dc6c8633b6c27cc574f43967c5f5e49dcbfbed73d5437ae1599a632a4b170844"
+  },
+  "budgets": {
+    "icon_status": {
+      "occupied": 1291,
+      "accent": 113,
+      "emitter": 18
+    },
+    "icon_map": {
+      "occupied": 2036,
+      "accent": 178,
+      "emitter": 15
+    },
+    "icon_settings": {
+      "occupied": 1802,
+      "accent": 100,
+      "emitter": 36
+    },
+    "icon_save": {
+      "occupied": 1503,
+      "accent": 36,
+      "emitter": 12
+    },
+    "icon_close": {
+      "occupied": 1289,
+      "accent": 98,
+      "emitter": 16
+    },
+    "icon_resume": {
+      "occupied": 1362,
+      "accent": 156,
+      "emitter": 26
+    },
+    "icon_restart": {
+      "occupied": 1373,
+      "accent": 97,
+      "emitter": 18
+    },
+    "icon_title": {
+      "occupied": 1591,
+      "accent": 51,
+      "emitter": 18
+    },
+    "icon_quit": {
+      "occupied": 1322,
+      "accent": 100,
+      "emitter": 27
+    },
+    "icon_fullscreen": {
+      "occupied": 1140,
+      "accent": 312,
+      "emitter": 76
+    }
+  },
+  "all_ten_occupied": 14709,
+  "animation_contract": "Host may vary only explicit accent/emitter color or emission, with fixed geometry. Metadata does not install an animation loop.",
+  "review_scope": "Authoring PNGs and nearest software14/28/42px samples only; actual native extraction, GPU presentation, human/phone readability remain unmeasured."
+}

@@ -1,0 +1,88 @@
+{
+  "schema": 1,
+  "palette": {
+    "mode": "provided",
+    "max_colors": 64,
+    "colors": [
+      0,
+      4280096011,
+      4281674524,
+      4283450416,
+      4286015822,
+      4288582263,
+      4291281582,
+      4293060572,
+      4293523958,
+      4285356083,
+      4287790409,
+      4289962859,
+      4284765461,
+      4288909082,
+      4292793666,
+      4293785001,
+      4281553256,
+      4283270570,
+      4286299616,
+      4281280587,
+      4282926475
+    ]
+  },
+  "defaults": {
+    "alpha": {
+      "mode": "exact"
+    },
+    "components": {
+      "mode": "all"
+    },
+    "resize": {
+      "mode": "none"
+    }
+  },
+  "sprites": [
+    {
+      "name": "icon_status",
+      "source": "source/icon_status.png"
+    },
+    {
+      "name": "icon_map",
+      "source": "source/icon_map.png"
+    },
+    {
+      "name": "icon_settings",
+      "source": "source/icon_settings.png"
+    },
+    {
+      "name": "icon_save",
+      "source": "source/icon_save.png"
+    },
+    {
+      "name": "icon_close",
+      "source": "source/icon_close.png"
+    },
+    {
+      "name": "icon_resume",
+      "source": "source/icon_resume.png"
+    },
+    {
+      "name": "icon_restart",
+      "source": "source/icon_restart.png"
+    },
+    {
+      "name": "icon_title",
+      "source": "source/icon_title.png"
+    },
+    {
+      "name": "icon_quit",
+      "source": "source/icon_quit.png"
+    },
+    {
+      "name": "icon_fullscreen",
+      "source": "source/icon_fullscreen.png"
+    }
+  ],
+  "provenance": {
+    "source_type": "original64-cell-python-authoring",
+    "tool": "asset-flight-icons.py",
+    "loss": "none; exact PNG import"
+  }
+}
