@@ -1653,6 +1653,14 @@
             "Forge, Hangar, Journal and Arena facilities are authored as overhead occupied-pixel objects with distinct planar silhouettes and relative signal animations. Facility centers and interaction radius 24 remain unchanged. Their native labels are hidden at rest, appear under cursor hover, and remain available for keyboard focus.",
             "The current dock retains its 1454-cell collision silhouette while its planar sectors gain fine cyan/gold and steel detail. Native public Game extraction verifies 7428 facility-and-dock cells across nine transforms. Reduced Motion freezes authored signal animation."
           ]
+        },
+        {
+          "title": "Seeded asteroid bodies and compact mineral deposits",
+          "paragraphs": [
+            "Each streamed asteroid authors its own seeded 64-grid occupied body at birth, replacing a reused sixteen-body pool. Rock, metal, ice and porous families have distinct facets, opaque crater floors and compact irregular mineral deposits. The user rejected the initial long decorative mineral streaks; the current revision removes those lines. Dark pits are solid until actual damage removes cells.",
+            "Immutable birth tier and material family control the coherent surface, physical size, motion and rewards. Fine cells use a 0.625 world-unit base scale; finer artwork does not multiply health. The live asteroid limit remains 112, with at most 3,000 occupied cells per body and normal view culling. This is a foreground cost, separate from cosmetic gas budgets.",
+            "Haven’s 700–1,400 training belt gives no XP and only T1 material. Genuine defeats independently roll a 25% material drop and a 25% basic category point. Remote belts and outer fields retain their established birth-tier rewards; moving an asteroid does not upgrade its loot. APR’s destroy-ten / collect-ten / bank-and-upgrade training remains unchanged."
+          ]
         }
       ],
       "references": [
@@ -1693,6 +1701,13 @@
           "kind": "runtime-screenshot",
           "provenance": "artifacts/presentation-refinement-20261011/EVIDENCE_SCOPE.md",
           "caption": "Actual normal runtime capture at 1280×720. The belt was entered through the QA console, not natural travel or earned progression. This historical desktop image is visual evidence only."
+        },
+        {
+          "path": "artifacts/space-title-20261012/asteroids-software.png",
+          "kind": "runtime-art",
+          "label": "Current asteroid mineral clusters",
+          "caption": "Final source after removing the rejected long stripes. Thirty-two actual native packet cases, flat software rendering; not a browser capture.",
+          "provenance": "artifacts/space-title-20261012/asteroids-handoff.md"
         }
       ],
       "data": {
@@ -2189,6 +2204,13 @@
             "Licensed factory hull 0 has no innate shield. Equipped Guard Coil grants 30 shield HP at effective rank 1, then eight more per effective rank; HUGO MAMORI therefore starts with exactly three 10-HP chunks. Anonymous legacy Scout and later chassis retain innate 30 HP before hardware or equipped defense. Guard Coil has no recharge at rank 1. Aegis Capacitors rank 1 or Guard Coil rank 2 unlocks recharge after four seconds without damage; effective rank and RAICHO level improve the rate. Capacity and charge remain separate, including fractional final chunks.",
             "One owned compatible ability may occupy each offensive, defensive and passive slot. Haven-only swaps retain displaced inventory. PAN passive grants 10% drive speed and acceleration, RENKO offensive grants 10% derived weapon damage, and HUGO defensive grants 10% incoming damage reduction while the matching valid item is equipped. Collectible RAICHO use their own authored main manufacturer independently of pilot and sponsor."
           ]
+        },
+        {
+          "title": "Capacity-based hull display",
+          "paragraphs": [
+            "A factory RAICHO starts with 100 hull HP, displayed as five 20-HP chunks under the craft. The display follows real maximum capacity: Reinforced Hull adds 15 HP per effective hardware rank, including a partial final chunk. Existing chassis and relic bonuses also change capacity. The current maximum of 260 HP fits thirteen chunks inside the same curved track. These are presentation marks; occupied cells remain the collision body.",
+            "HUGO MAMORI retains Guard Coil R1: 30 shield HP in three 10-HP chunks. Fresh licensed PAN and RENKO craft do not gain innate shield capacity from this display change. Recharge and manufacturer affinity follow their existing equipped-ability rules."
+          ]
         }
       ],
       "references": [
@@ -2381,6 +2403,13 @@
             "Galaxy Royale is the universe's biggest and most popular sport. PAN Dynamics, RENKO Cybernetics and HUGO CORP can sponsor arenas and competitors. Sponsor identity is independent of a competitor's main and sub-manufacturers; it does not change hair, horns, license or loadout.",
             "The fixed roster includes APP#F344FEE: female DORA-PAN-PAN in a PAN-sponsored arena, and ORP#2323: male DORO-RENKO-PAN with independent PAN sponsorship. Authored identities retain the existing eight encounter and reward indices; their historical aliases remain documented separately.",
             "The current eight encounters have authored KIKAI identities and independent sponsors. Their old Human, Automaton and alien labels are historical aliases, not surviving biological species. Stable encounter, patch and blueprint indices retain their progression meaning; new roster expansion remains separately planned."
+          ]
+        },
+        {
+          "title": "The premier sporting league",
+          "paragraphs": [
+            "GALAXY ROYALE is the KIKAI universe’s biggest and most famous arena-battle sport. Its major league and tournament are the pinnacle of that competition. Arena champions, collectible patches, corporation sponsorship and the final tournament belong to this sporting culture.",
+            "Its visual identity should read as a futuristic professional sports league: bold athletic lettering, an arena or orbital crest, strong recognition at small sizes and restrained competitive energy animation. This replaces the earlier fantasy-like crystal title direction."
           ]
         }
       ],
@@ -3029,6 +3058,13 @@
             "On 11 October 2026 the user approved the detailed PAN MEISHI concept as the game art style: expressive high-detail KIKAI portraits, layered platinum and graphite construction, green PAN enamel, dark space and recessed patch sockets. Main manufacturer colors remain PAN green, RENKO red and HUGO blue; horns follow the sub-manufacturer.",
             "This establishes the target visual direction. Generated lettering, balances and slogans are reference-only. Native artwork is assessed separately for fidelity at its actual display size, restrained animation, coherent transforms and bounded rendering cost."
           ]
+        },
+        {
+          "title": "Layered deep nebula gas",
+          "paragraphs": [
+            "Deep nebulae combine soft diffuse veils, turbulent billows and fine emission filaments around a sparse dust lane. Four relative transforms submit 2,128 cells at full detail or 538 at reduced detail. Seeded origins and 0.08 parallax remain stable; continuous curl, rotation and breathing freeze under Reduced Motion.",
+            "Both renderers use the existing soft-quad material. The global cosmic caps remain 8,000 / 4,000 cells and whole motifs are admitted atomically. The regional gas helper is unchanged. Software packet images are labeled separately from actual browser captures; physical-device and long-soak measurements remain pending."
+          ]
         }
       ],
       "references": [
@@ -3081,6 +3117,13 @@
           "kind": "concept",
           "provenance": "artifacts/concepts/meishi-collectible-20261011/provenance.json",
           "caption": "User-approved visual direction. Generated text and values are placeholders; this is a concept image, not a runtime screenshot."
+        },
+        {
+          "path": "artifacts/space-title-20261012/nebula-software.png",
+          "kind": "runtime-art",
+          "label": "Layered nebula native packets",
+          "caption": "Actual native packets projected in an offline software model at three zooms and times; not a GPU screenshot.",
+          "provenance": "artifacts/space-title-20261012/nebula-handoff.md"
         }
       ]
     },
@@ -3688,6 +3731,79 @@
           0
         ]
       }
+    },
+    {
+      "id": "title-mark",
+      "title": "GALAXY ROYALE sports-league identity & theme",
+      "category": "technology",
+      "status": "implemented",
+      "summary": "An original athletic wordmark and arena crest rendered as native pixel quads. The original title theme awaits the user’s composition.",
+      "tags": [
+        "title",
+        "art",
+        "audio"
+      ],
+      "facts": [
+        {
+          "label": "Native source",
+          "value": "512 × 192; 44,985 occupied cells; nine relative transforms"
+        },
+        {
+          "label": "Animation",
+          "value": "Stable lettering, restrained light sweep and separate award crest; Reduced Motion freezes animation"
+        },
+        {
+          "label": "Music",
+          "value": "One optional decoded loop on the existing AudioContext; no track shipped yet"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Production and delivery",
+          "paragraphs": [
+            "A retained generated sports-league reference is sampled onto a 512 × 192 field, removes declared low-alpha/near-black haze and reduces to a bounded palette. Exact converted cells are split into cached native bodies. Platinum lettering and arena rails stay stable; the gold award face is a separate group. This is an explicit adaptation with documented losses, not a claim of lossless image conversion or final user approval.",
+            "The game is prepared to load the user’s edited title theme after a gesture, using Master/Music volume controls and a bounded crossfade into the world score. Loop bounds, cancellation, suspension and graphics recovery are tested. The real recording, audible seam, loudness and musical transition approval remain pending delivery."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "path": "crates/game_web/src/title_art.rs",
+          "label": "Native title renderer",
+          "role": "implementation"
+        },
+        {
+          "path": "assets/ui/title-mark/provenance.json",
+          "label": "Generated source provenance",
+          "role": "provenance"
+        },
+        {
+          "path": "assets/audio/title-theme-delivery.md",
+          "label": "Theme delivery instructions",
+          "role": "documentation"
+        }
+      ],
+      "related": [
+        "cosmic-art",
+        "pixel-engine",
+        "validation"
+      ],
+      "media": [
+        {
+          "path": "artifacts/space-title-20261012/title-webgpu-1280.jpg",
+          "kind": "runtime-screenshot",
+          "label": "Sports-league title in the game",
+          "caption": "Actual WebGPU title at 1280 × 720. Native occupied pixel quads; the original theme recording is pending.",
+          "provenance": "artifacts/space-title-20261012/README.md"
+        },
+        {
+          "path": "assets/ui/title-mark/source-cells.png",
+          "kind": "converted-concept",
+          "label": "Native title cells",
+          "caption": "Declared 512 × 192 conversion, before runtime lighting and group animation.",
+          "provenance": "assets/ui/title-mark/provenance.json"
+        }
+      ]
     }
   ]
 }

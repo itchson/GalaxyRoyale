@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 752,
+  "revision": 773,
   "name": "Galaxy Royale",
   "phase": "Playable solo slice → content and validation",
-  "updatedAt": "2026-10-11T14:21:20.907Z",
+  "updatedAt": "2026-10-11T15:17:07.319Z",
   "tasks": [
     {
       "id": "studio",
@@ -6613,6 +6613,175 @@
       "revision": 4,
       "createdAt": "2026-10-11T12:41:11.160Z",
       "updatedAt": "2026-10-11T14:21:20.675Z"
+    },
+    {
+      "id": "task-57b15a5c",
+      "title": "Five starting hull chunks with capacity-based growth",
+      "description": "Five starting 20-HP hull chunks follow real maximum capacity, including partial upgrade chunks. HUGO retains three starting shield chunks; PAN and RENKO gain no innate shield. Damage trails and the shared curved track remain bounded.",
+      "department": "Engine/UI",
+      "owner": "/root",
+      "status": "complete",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Fresh 100-HP RAICHO renders five hull chunks; HUGO retains 30 shield HP in three chunks.",
+          "met": true
+        },
+        {
+          "text": "Upgraded and fractional capacities, trails and bounded geometry pass native checks.",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual HUGO starter",
+          "kind": "file",
+          "path": "artifacts/space-title-20261012/hugo-five-hull-three-shield.jpg"
+        },
+        {
+          "label": "Validation scope",
+          "kind": "file",
+          "path": "artifacts/space-title-20261012/README.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-11T14:34:29.462Z",
+      "updatedAt": "2026-10-11T15:17:06.992Z"
+    },
+    {
+      "id": "task-dfbf5ed0",
+      "title": "Unique seeded asteroid bodies and regional material families",
+      "description": "Per-instance seeded 64-grid rock, metal, ice and porous bodies replace the repeated body pool. Compact mineral deposits remove the rejected decorative stripes. Opaque initial interiors, native cell destruction, zone protection and immutable training/remote rewards remain intact.",
+      "department": "Gameplay/Art",
+      "owner": "/root/gameplay_design",
+      "status": "complete",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Seeded instance variety, coherent material/tier palettes and bounded live bodies are verified.",
+          "met": true
+        },
+        {
+          "text": "Occupied-cell destruction, sanctuary protection, T1 training drops and no asteroid XP pass native tests.",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Gameplay source and tests",
+          "kind": "file",
+          "path": "artifacts/space-title-20261012/asteroids-handoff.md"
+        },
+        {
+          "label": "Corrected native contact sheet",
+          "kind": "file",
+          "path": "artifacts/space-title-20261012/asteroids-software.png"
+        },
+        {
+          "label": "Actual WebGPU asteroid scene",
+          "kind": "file",
+          "path": "artifacts/space-title-20261012/asteroids-webgpu.jpg"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-11T14:34:29.490Z",
+      "updatedAt": "2026-10-11T15:17:07.026Z"
+    },
+    {
+      "id": "task-febffb65",
+      "title": "Layered deep-space nebula gas with fine native quads",
+      "description": "Seeded diffuse veils, turbulent billows and fine emission filaments use four relative transforms and the existing shared soft material. Depth, parallax, continuous zoom and Reduced Motion remain bounded by existing cosmic budgets.",
+      "department": "Engine/Art",
+      "owner": "/root/engine_research",
+      "status": "complete",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Actual native gas composition stays within the existing cell and transform budgets.",
+          "met": true
+        },
+        {
+          "text": "Both browser backends and native parallax/motion checks have evidence; WebGL2 zoom extremes and reduced-detail controls were inspected.",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Engine source and tests",
+          "kind": "file",
+          "path": "artifacts/space-title-20261012/nebula-handoff.md"
+        },
+        {
+          "label": "Actual WebGPU gas",
+          "kind": "file",
+          "path": "artifacts/space-title-20261012/nebula-webgpu.jpg"
+        },
+        {
+          "label": "Actual WebGL2 gas",
+          "kind": "file",
+          "path": "artifacts/space-title-20261012/nebula-webgl2.jpg"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-11T14:34:29.523Z",
+      "updatedAt": "2026-10-11T15:17:07.057Z"
+    },
+    {
+      "id": "task-278ff973",
+      "title": "Animated sports-league title and authored-theme delivery slot",
+      "description": "GALAXY ROYALE is the universe’s premier arena sport. Original athletic lettering, an orbital arena crest and gold award mark are converted to cached native quad groups. The responsive title uses restricted lighting and crest motion. Optional original theme playback is prepared; the user’s MP3 and listening approval remain pending.",
+      "department": "Art/Audio/UI",
+      "owner": "/root/production_research",
+      "status": "complete",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Native sports-league mark and responsive title controls are verified, including Reduced Motion and bounded admission.",
+          "met": true
+        },
+        {
+          "text": "Optional theme loading, loop bounds, cancellation, hidden tabs and graphics recovery pass lifecycle tests; actual soundtrack delivery and audible approval remain explicitly pending.",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Final sports-logo handoff",
+          "kind": "file",
+          "path": "artifacts/space-title-20261012/title-handoff.md"
+        },
+        {
+          "label": "Independent native logo review",
+          "kind": "file",
+          "path": "artifacts/space-title-20261012/title-independent-review.md"
+        },
+        {
+          "label": "Actual final WebGPU title",
+          "kind": "file",
+          "path": "artifacts/space-title-20261012/title-webgpu-1280.jpg"
+        },
+        {
+          "label": "Actual final WebGL2 title",
+          "kind": "file",
+          "path": "artifacts/space-title-20261012/title-webgl2-1280.jpg"
+        },
+        {
+          "label": "Audio lifecycle review",
+          "kind": "file",
+          "path": "artifacts/space-title-20261012/independent-review.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-11T14:34:29.545Z",
+      "updatedAt": "2026-10-11T15:17:07.110Z"
     }
   ],
   "reviews": [
@@ -8130,6 +8299,85 @@
           "path": "artifacts/meishi-redesign-20261011/content-tests/FINAL_WEBGPU_REVIEW.md"
         }
       ]
+    },
+    {
+      "id": "review-90716f83",
+      "title": "Space/title pass: actual implementation discussion",
+      "body": "Gameplay traced asteroid repetition to16cachedbodies and proposes unique64-grid instance geometry with fixed world footprint, connected opaque interiors and type/tier palettes. Engine traced nebula sparsity to narrow ribbon motifs; it is implementing multiscale soft gas within existing8k/4k extraction limits. Art generated an original2048x768 title reference and chose512x192 native cells after comparing the loss at384x144, subject to60k complete-title admission. Root confirmed user choice offivehullchunks/threeHUGOshieldchunks and owns responsive shell/audio handoff. These are real asynchronous findings; runtime/browser acceptance is pending.",
+      "author": "/root",
+      "source": "Current user request and actual parallel assignments",
+      "createdAt": "2026-10-11T14:34:29.663Z",
+      "participants": [
+        "/root",
+        "/root/gameplay_design",
+        "/root/engine_research",
+        "/root/production_research"
+      ],
+      "taskIds": [
+        "task-57b15a5c",
+        "task-dfbf5ed0",
+        "task-febffb65",
+        "task-278ff973"
+      ]
+    },
+    {
+      "id": "review-3d53d963",
+      "title": "Asteroid stripe correction and title league identity",
+      "body": "The user inspected the first native asteroid contact and rejected the long mineral lines. Gameplay replaced those overlays with compact deposits; Root inspected the revised contact and actual WebGPU belt screenshot. Collision cells and rewards remain unchanged. The integrated native suite passes 701 tests with two explicit exports ignored; shell suite passes 434 with one existing skip. Root caught a narrow title layout issue in the browser and fixed the heading/icon bounds. The user clarified that Galaxy Royale is the universe’s premier arena sport, so Art is revising the title from a metallic adventure wordmark into a futuristic sports-league emblem. Earlier title captures are superseded for visual approval. Root is checking both renderers; phone/soak, natural loot pacing and the user-composed theme remain pending.",
+      "author": "/root",
+      "source": "Actual implementation review and current user feedback",
+      "createdAt": "2026-10-11T15:00:15.826Z",
+      "participants": [
+        "/root",
+        "/root/gameplay_design",
+        "/root/engine_research",
+        "/root/production_research"
+      ],
+      "taskIds": [
+        "task-57b15a5c",
+        "task-dfbf5ed0",
+        "task-febffb65",
+        "task-278ff973"
+      ],
+      "evidence": [
+        {
+          "label": "Final asteroid correction",
+          "kind": "file",
+          "path": "artifacts/space-title-20261012/asteroids-handoff.md"
+        },
+        {
+          "label": "Actual asteroid scene",
+          "kind": "file",
+          "path": "artifacts/space-title-20261012/asteroids-webgpu.png"
+        }
+      ]
+    },
+    {
+      "id": "review-98cf7bd5",
+      "title": "Integrated space, vitals and sports-league presentation review",
+      "body": "Root inspected the corrected compact-deposit asteroid sheet and actual WebGPU belt, HUGO’s five hull/three shield chunks, deep gas on both renderers and the final native sports-league title at desktop, short landscape and narrow layouts. Engine independently reviewed budgets, conversion and Reduced Motion. Audio lifecycle fixes cover visible graphics recovery and pre-initialization hidden tabs. Authored soundtrack delivery/listening, broad physical-device validation, long-soak performance and natural training/campaign playthrough remain pending. Read the evidence report for exact source and test counts; software sheets are never presented as GPU screenshots.",
+      "author": "/root",
+      "source": "Actual integrated implementation, specialist reviews and browser verification",
+      "createdAt": "2026-10-11T15:17:07.240Z",
+      "participants": [
+        "/root",
+        "/root/engine_research",
+        "/root/gameplay_design",
+        "/root/production_research"
+      ],
+      "taskIds": [
+        "task-57b15a5c",
+        "task-dfbf5ed0",
+        "task-febffb65",
+        "task-278ff973"
+      ],
+      "evidence": [
+        {
+          "label": "Integrated validation report",
+          "kind": "file",
+          "path": "artifacts/space-title-20261012/README.md"
+        }
+      ]
     }
   ],
   "decisions": [
@@ -8374,6 +8622,15 @@
       "author": "/root",
       "source": "Direct user visual feedback",
       "createdAt": "2026-10-11T13:44:43.577Z",
+      "status": "accepted"
+    },
+    {
+      "id": "decision-de3ea2d8",
+      "title": "GALAXY ROYALE is the premier arena-battle sport",
+      "body": "The user clarified that GALAXY ROYALE is the universe’s biggest and most famous sport, with its major league/tournament at the pinnacle. The title identity therefore uses forward-leaning athletic lettering, an orbital arena crest, cyan/platinum construction and a gold award star. This supersedes the previous fantasy-like crystal title direction. Corporate sponsors, champion patches and the final tournament belong to the same sporting culture.",
+      "author": "/root",
+      "source": "Actual integrated implementation, specialist reviews and browser verification",
+      "createdAt": "2026-10-11T15:17:07.129Z",
       "status": "accepted"
     }
   ],
@@ -10250,6 +10507,46 @@
       ],
       "url": "http://127.0.0.1:4173/?qa=1&renderer=webgpu",
       "knownIssues": "Card reference parity/user approval and whole-game style rollout pending. Dock cold CPU callback25.51-27.03ms measured on prior pinned integration source. Phone/soak unmeasured. Eight-patch display used suppliedQA; natural campaign and playable co-op remain pending."
+    },
+    {
+      "id": "build-78a97548",
+      "title": "Sports-league title, native space detail and five hull chunks",
+      "body": "Integrated native rendering and shell validation. The optional title theme intentionally has no shipped recording while awaiting the user’s composition.",
+      "author": "/root",
+      "source": "Actual integrated implementation, specialist reviews and browser verification",
+      "createdAt": "2026-10-11T15:17:07.319Z",
+      "revision": "d85e82a8f9c8fee1d05b9b7ee54f1e3d1219337f",
+      "evidence": [
+        {
+          "label": "Build evidence and limitations",
+          "kind": "file",
+          "path": "artifacts/space-title-20261012/README.md"
+        }
+      ],
+      "checks": [
+        {
+          "name": "Workspace native tests and strict Clippy",
+          "result": "pass"
+        },
+        {
+          "name": "Shell tests, TypeScript and normal dual-backend build",
+          "result": "pass"
+        },
+        {
+          "name": "Actual WebGPU/WebGL2 title and gas captures; narrow title layout",
+          "result": "pass"
+        },
+        {
+          "name": "Physical phones and 30-minute FPS/memory soak",
+          "result": "not_run"
+        },
+        {
+          "name": "Original title recording and audible loop/transition approval",
+          "result": "not_run"
+        }
+      ],
+      "url": "http://league-final.localhost:4173/?qa=1&renderer=webgpu",
+      "knownIssues": "The title theme MP3 is pending the composer. Physical-device/soak measurement and natural campaign completion are not claimed. Final subjective art approval remains with the user."
     }
   ],
   "feedback": [],
@@ -17773,6 +18070,216 @@
       "author": "/root",
       "source": "Actual returned bounded assignment results",
       "createdAt": "2026-10-11T14:21:20.907Z"
+    },
+    {
+      "id": "ad3bea26-4e10-48dd-ad41-11b4a358e862",
+      "revision": 753,
+      "kind": "task.create",
+      "itemId": "task-57b15a5c",
+      "title": "Five starting hull chunks with capacity-based growth",
+      "author": "/root",
+      "source": "Current user request and actual parallel assignments",
+      "createdAt": "2026-10-11T14:34:29.462Z"
+    },
+    {
+      "id": "16ce5e7d-abdf-4f81-b185-2f7b42e430be",
+      "revision": 754,
+      "kind": "task.create",
+      "itemId": "task-dfbf5ed0",
+      "title": "Unique seeded asteroid bodies and regional material families",
+      "author": "/root",
+      "source": "Current user request and actual parallel assignments",
+      "createdAt": "2026-10-11T14:34:29.490Z"
+    },
+    {
+      "id": "06235579-47b7-4242-bc10-7beb46b331e5",
+      "revision": 755,
+      "kind": "task.create",
+      "itemId": "task-febffb65",
+      "title": "Layered deep-space nebula gas with fine native quads",
+      "author": "/root",
+      "source": "Current user request and actual parallel assignments",
+      "createdAt": "2026-10-11T14:34:29.523Z"
+    },
+    {
+      "id": "94956e63-c817-4dba-a976-63a43b3c3110",
+      "revision": 756,
+      "kind": "task.create",
+      "itemId": "task-278ff973",
+      "title": "Detailed animated Galaxy Royale title mark and theme-song slot",
+      "author": "/root",
+      "source": "Current user request and actual parallel assignments",
+      "createdAt": "2026-10-11T14:34:29.545Z"
+    },
+    {
+      "id": "afa0bf56-946c-4412-8ef3-7146cd3731f5",
+      "revision": 757,
+      "kind": "run",
+      "itemId": "run-7f483d23",
+      "title": "Gameplay / procedural asteroids · running",
+      "author": "/root",
+      "source": "Current user request and actual parallel assignments",
+      "createdAt": "2026-10-11T14:34:29.583Z"
+    },
+    {
+      "id": "d216c630-723f-45a7-99af-e1e2081f4875",
+      "revision": 758,
+      "kind": "run",
+      "itemId": "run-c2b72ed1",
+      "title": "Engine / deep gas · running",
+      "author": "/root",
+      "source": "Current user request and actual parallel assignments",
+      "createdAt": "2026-10-11T14:34:29.607Z"
+    },
+    {
+      "id": "94caaa10-476d-4485-8730-5b18fed5908b",
+      "revision": 759,
+      "kind": "run",
+      "itemId": "run-50285dab",
+      "title": "Art / title mark · running",
+      "author": "/root",
+      "source": "Current user request and actual parallel assignments",
+      "createdAt": "2026-10-11T14:34:29.633Z"
+    },
+    {
+      "id": "799c288b-ffb3-42b4-a6ba-8484bc63342d",
+      "revision": 760,
+      "kind": "review",
+      "itemId": "review-90716f83",
+      "title": "Space/title pass: actual implementation discussion",
+      "author": "/root",
+      "source": "Current user request and actual parallel assignments",
+      "createdAt": "2026-10-11T14:34:29.663Z"
+    },
+    {
+      "id": "d1e6c56c-17f3-4248-aaba-23cdec959cdd",
+      "revision": 761,
+      "kind": "review",
+      "itemId": "review-3d53d963",
+      "title": "Asteroid stripe correction and title league identity",
+      "author": "/root",
+      "source": "Actual implementation review and current user feedback",
+      "createdAt": "2026-10-11T15:00:15.826Z"
+    },
+    {
+      "id": "d943de7e-4459-4d2a-92d9-265ce4ce7327",
+      "revision": 762,
+      "kind": "run",
+      "itemId": "run-e6b3b5fd",
+      "title": "Gameplay / asteroid generation · completed",
+      "author": "/root",
+      "source": "Actual implementation review and current user feedback",
+      "createdAt": "2026-10-11T15:00:15.870Z"
+    },
+    {
+      "id": "5355314c-d48e-4f75-8cc5-fb226d82f142",
+      "revision": 763,
+      "kind": "run",
+      "itemId": "run-4a8b5111",
+      "title": "Spark / bounded audio audit · interrupted",
+      "author": "/root",
+      "source": "Actual implementation review and current user feedback",
+      "createdAt": "2026-10-11T15:00:15.900Z"
+    },
+    {
+      "id": "81658ee9-8a37-4b48-88c8-954f912fc6a7",
+      "revision": 764,
+      "kind": "run",
+      "itemId": "run-c9157a7e",
+      "title": "Art / native sports-league title · running",
+      "author": "/root",
+      "source": "User sports-league clarification and actual art assignment",
+      "createdAt": "2026-10-11T15:07:39.169Z"
+    },
+    {
+      "id": "5f8300b2-e177-4c94-9a74-5797a61dc070",
+      "revision": 765,
+      "kind": "task.update",
+      "itemId": "task-57b15a5c",
+      "title": "Five starting hull chunks with capacity-based growth",
+      "author": "/root",
+      "source": "Actual integrated implementation, specialist reviews and browser verification",
+      "createdAt": "2026-10-11T15:17:06.992Z"
+    },
+    {
+      "id": "af27fb93-2e62-4df4-acb6-53b739612e89",
+      "revision": 766,
+      "kind": "task.update",
+      "itemId": "task-dfbf5ed0",
+      "title": "Unique seeded asteroid bodies and regional material families",
+      "author": "/root",
+      "source": "Actual integrated implementation, specialist reviews and browser verification",
+      "createdAt": "2026-10-11T15:17:07.026Z"
+    },
+    {
+      "id": "d3838bd7-3319-4f3c-9780-5dfbe11eedb4",
+      "revision": 767,
+      "kind": "task.update",
+      "itemId": "task-febffb65",
+      "title": "Layered deep-space nebula gas with fine native quads",
+      "author": "/root",
+      "source": "Actual integrated implementation, specialist reviews and browser verification",
+      "createdAt": "2026-10-11T15:17:07.057Z"
+    },
+    {
+      "id": "dffb053f-56d2-4aaa-a1bc-cf97cb13e828",
+      "revision": 768,
+      "kind": "task.update",
+      "itemId": "task-278ff973",
+      "title": "Animated sports-league title and authored-theme delivery slot",
+      "author": "/root",
+      "source": "Actual integrated implementation, specialist reviews and browser verification",
+      "createdAt": "2026-10-11T15:17:07.110Z"
+    },
+    {
+      "id": "3bd8f22f-5b78-4419-b6fc-fc7bf4e80754",
+      "revision": 769,
+      "kind": "decision",
+      "itemId": "decision-de3ea2d8",
+      "title": "GALAXY ROYALE is the premier arena-battle sport",
+      "author": "/root",
+      "source": "Actual integrated implementation, specialist reviews and browser verification",
+      "createdAt": "2026-10-11T15:17:07.129Z"
+    },
+    {
+      "id": "6ccfe7ff-9df2-45e8-ac12-b9704f02c7ba",
+      "revision": 770,
+      "kind": "run",
+      "itemId": "run-2aae54c8",
+      "title": "Engine / gas and independent review · completed",
+      "author": "/root",
+      "source": "Actual integrated implementation, specialist reviews and browser verification",
+      "createdAt": "2026-10-11T15:17:07.164Z"
+    },
+    {
+      "id": "d0533bfc-0652-4550-a421-34796d55639c",
+      "revision": 771,
+      "kind": "run",
+      "itemId": "run-a9e7746f",
+      "title": "Art / sports-league title · completed",
+      "author": "/root",
+      "source": "Actual integrated implementation, specialist reviews and browser verification",
+      "createdAt": "2026-10-11T15:17:07.212Z"
+    },
+    {
+      "id": "821bded1-bbf4-40a9-8a8b-b6295d7049c5",
+      "revision": 772,
+      "kind": "review",
+      "itemId": "review-98cf7bd5",
+      "title": "Integrated space, vitals and sports-league presentation review",
+      "author": "/root",
+      "source": "Actual integrated implementation, specialist reviews and browser verification",
+      "createdAt": "2026-10-11T15:17:07.240Z"
+    },
+    {
+      "id": "30697768-2002-4607-82ab-3d984f9bda17",
+      "revision": 773,
+      "kind": "build",
+      "itemId": "build-78a97548",
+      "title": "Sports-league title, native space detail and five hull chunks",
+      "author": "/root",
+      "source": "Actual integrated implementation, specialist reviews and browser verification",
+      "createdAt": "2026-10-11T15:17:07.319Z"
     }
   ],
   "runRecords": [
@@ -24426,6 +24933,183 @@
       "author": "/root",
       "source": "Actual returned bounded assignment results",
       "createdAt": "2026-10-11T14:21:20.907Z"
+    },
+    {
+      "id": "run-7f483d23",
+      "title": "Gameplay / procedural asteroids · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Gameplay / procedural asteroids",
+      "state": "running",
+      "observedAt": "2026-10-11T14:34:29.567Z",
+      "taskIds": [
+        "task-dfbf5ed0"
+      ],
+      "summary": "Replace repeated16cachedbodies with unique instance geometry and coherent type/zone/tier morphology, mineral shading and movement ranges. Keep native occupied-cell destruction, solid initial interiors and tutorial rewards.",
+      "evidence": [
+        {
+          "label": "Actual dispatched assignment",
+          "kind": "note",
+          "details": "Delivered to existing isolated worktree from56af06fe; no additional preview servers permitted."
+        }
+      ],
+      "author": "/root",
+      "source": "Current user request and actual parallel assignments",
+      "createdAt": "2026-10-11T14:34:29.583Z"
+    },
+    {
+      "id": "run-c2b72ed1",
+      "title": "Engine / deep gas · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Engine / deep gas",
+      "state": "running",
+      "observedAt": "2026-10-11T14:34:29.603Z",
+      "taskIds": [
+        "task-febffb65"
+      ],
+      "summary": "Replace narrow ribbon cloud motifs with seeded multiscale veils, billows and emission filaments. Correct depth/parallax, continuous zoom/time and reducedmotion. ExistingsoftmaterialsharedbyWebGPU/WebGL2; no ABI expansion planned.",
+      "evidence": [
+        {
+          "label": "Actual dispatched assignment",
+          "kind": "note",
+          "details": "Delivered to existing isolated worktree from56af06fe; no additional preview servers permitted."
+        }
+      ],
+      "author": "/root",
+      "source": "Current user request and actual parallel assignments",
+      "createdAt": "2026-10-11T14:34:29.607Z"
+    },
+    {
+      "id": "run-50285dab",
+      "title": "Art / title mark · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "Art / title mark",
+      "state": "running",
+      "observedAt": "2026-10-11T14:34:29.628Z",
+      "taskIds": [
+        "task-278ff973"
+      ],
+      "summary": "Generateoriginalprofessionalreferenceandadapttocachednativequadgroupswithsubtlemetal/light/crownanimation. Root ownsresponsive titleandoptional authoredMP3loop/single-contextfadeintogameplay. Theme song pendinguser composition; no placeholder recording.",
+      "evidence": [
+        {
+          "label": "Actual dispatched assignment",
+          "kind": "note",
+          "details": "Delivered to existing isolated worktree from56af06fe; no additional preview servers permitted."
+        }
+      ],
+      "author": "/root",
+      "source": "Current user request and actual parallel assignments",
+      "createdAt": "2026-10-11T14:34:29.633Z"
+    },
+    {
+      "id": "run-e6b3b5fd",
+      "title": "Gameplay / asteroid generation · completed",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Gameplay / asteroid generation",
+      "state": "completed",
+      "observedAt": "2026-10-11T15:00:15.843Z",
+      "taskIds": [
+        "task-dfbf5ed0"
+      ],
+      "summary": "Delivered seeded geometry and user-requested removal of decorative stripes in commits 59e6603 and ebcaf46; Root integrated and inspected the native sheet and WebGPU scene.",
+      "evidence": [
+        {
+          "label": "Source and test handoff",
+          "kind": "file",
+          "path": "artifacts/space-title-20261012/asteroids-handoff.md"
+        }
+      ],
+      "author": "/root",
+      "source": "Actual implementation review and current user feedback",
+      "createdAt": "2026-10-11T15:00:15.870Z"
+    },
+    {
+      "id": "run-4a8b5111",
+      "title": "Spark / bounded audio audit · interrupted",
+      "agentId": "spark/title-theme-audit",
+      "agentLabel": "Spark / bounded audio audit",
+      "state": "interrupted",
+      "observedAt": "2026-10-11T15:00:15.885Z",
+      "taskIds": [
+        "task-278ff973"
+      ],
+      "summary": "Read-only worker was stopped after prolonged inspection without returning its requested report. No review approval is credited. The native engine specialist independently reviewed the lifecycle, found two issues and verified Root’s fixes.",
+      "evidence": [
+        {
+          "label": "Independent completed review",
+          "kind": "file",
+          "path": "artifacts/space-title-20261012/independent-review.md"
+        }
+      ],
+      "author": "/root",
+      "source": "Actual implementation review and current user feedback",
+      "createdAt": "2026-10-11T15:00:15.900Z"
+    },
+    {
+      "id": "run-c9157a7e",
+      "title": "Art / native sports-league title · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "Art / native sports-league title",
+      "state": "running",
+      "observedAt": "2026-10-11T15:07:39.127Z",
+      "taskIds": [
+        "task-278ff973"
+      ],
+      "summary": "Generated an original futuristic sports-league reference, converted to 44,985 occupied native cells, and authored restricted crest/light animation. Root inspected the reference. The engine specialist is independently reviewing native limits and provenance; final integration and browser checks are pending.",
+      "evidence": [
+        {
+          "label": "Actual in-progress specialist contribution",
+          "kind": "note",
+          "details": "Worktree galaxy-pixel-art; the earlier crystal wordmark is superseded by the user sports-league direction."
+        }
+      ],
+      "author": "/root",
+      "source": "User sports-league clarification and actual art assignment",
+      "createdAt": "2026-10-11T15:07:39.169Z"
+    },
+    {
+      "id": "run-2aae54c8",
+      "title": "Engine / gas and independent review · completed",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Engine / gas and independent review",
+      "state": "completed",
+      "observedAt": "2026-10-11T15:17:07.152Z",
+      "taskIds": [
+        "task-febffb65",
+        "task-278ff973"
+      ],
+      "summary": "Delivered bounded layered gas, independently reviewed title audio and the sports-logo native implementation, and documented actual checks. Root verified gas on both renderers.",
+      "evidence": [
+        {
+          "label": "Actual specialist handoff",
+          "kind": "file",
+          "path": "artifacts/space-title-20261012/title-independent-review.md"
+        }
+      ],
+      "author": "/root",
+      "source": "Actual integrated implementation, specialist reviews and browser verification",
+      "createdAt": "2026-10-11T15:17:07.164Z"
+    },
+    {
+      "id": "run-a9e7746f",
+      "title": "Art / sports-league title · completed",
+      "agentId": "/root/production_research",
+      "agentLabel": "Art / sports-league title",
+      "state": "completed",
+      "observedAt": "2026-10-11T15:17:07.189Z",
+      "taskIds": [
+        "task-278ff973"
+      ],
+      "summary": "Delivered the original sports-league reference, explicit native conversion, cached relative groups, animation, tests and source-pinned handoff. Root integrated and inspected the final title on both renderers.",
+      "evidence": [
+        {
+          "label": "Actual specialist handoff",
+          "kind": "file",
+          "path": "artifacts/space-title-20261012/title-handoff.md"
+        }
+      ],
+      "author": "/root",
+      "source": "Actual integrated implementation, specialist reviews and browser verification",
+      "createdAt": "2026-10-11T15:17:07.212Z"
     }
   ],
   "phaseDescription": "Desktop-first Rust/WASM solo game and local Studio are implemented. Reviewed occupied-cell art, reproducible conversion, responsive native settings/icons and minimap, strict GitHub integration gates and source-backed Dev Bible are integrated. Natural campaign balance, human listening, owner-private update lifecycle and physical phones remain separate pending gates."

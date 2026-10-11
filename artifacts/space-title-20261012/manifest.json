@@ -1,0 +1,427 @@
+{
+  "schema": 1,
+  "createdAt": "2026-10-11T15:17:38.553Z",
+  "runtimeSource": {
+    "head": "d85e82a8f9c8fee1d05b9b7ee54f1e3d1219337f",
+    "branch": "codex/testing",
+    "sourceHash": "9257aa3415bad1ef40978ad5309731019620c2971bd15c1111709688308ae6c1"
+  },
+  "build": {
+    "schemaVersion": 1,
+    "head": "d85e82a8f9c8fee1d05b9b7ee54f1e3d1219337f",
+    "branch": "codex/testing",
+    "sourceHash": "9257aa3415bad1ef40978ad5309731019620c2971bd15c1111709688308ae6c1",
+    "packageHash": "04b173108160e28bec644e4f5d6ed62bee10540ac0aa33083b89c4bb4527b572",
+    "builtAt": "2026-10-11T15:13:34.534Z"
+  },
+  "native": {
+    "passed": 701,
+    "ignored": 2,
+    "failed": 0
+  },
+  "shell": {
+    "passed": 434,
+    "skipped": 1,
+    "failed": 0
+  },
+  "conversion": {
+    "passed": 7,
+    "failed": 0
+  },
+  "wikiAfterFinalMedia": {
+    "passed": 20,
+    "failed": 0
+  },
+  "scope": "Raw local hashes. World captures use f8e2f65; final sports title captures use d85e82a. No physical-device, performance-soak or audible-theme acceptance.",
+  "source": [
+    {
+      "path": "apps/game/index.html",
+      "sha256": "b1fb59c128082ff759f00f7abfb5ffcea88a9f4e32e5d24c9686dd6d7c642ecd"
+    },
+    {
+      "path": "apps/game/src/audio.ts",
+      "sha256": "8b64895bd84c0fffd602e4084bfc0aff23c777b82515354fd5b8aca74ebead09"
+    },
+    {
+      "path": "apps/game/src/main.ts",
+      "sha256": "e311484ab6c76ca1c658a0a04ea15085022723312422a46c3357f20e18aac930"
+    },
+    {
+      "path": "apps/game/src/pixel-ui.ts",
+      "sha256": "180b99862fa9cd5ca768d056c7fb2dca334eed985d2d86e7c78cfdd72f6be91b"
+    },
+    {
+      "path": "apps/game/src/style.css",
+      "sha256": "821c6a1f8d169f3a476d8bc6e86eb95ce3306fb66ff34b7e908d51fba71bc7c8"
+    },
+    {
+      "path": "apps/game/src/title-theme.ts",
+      "sha256": "3adb1e83c2ff2f65e1f6b8adc0d9382b1c95b8f40409bc07a5dd3d7b1d91f20d"
+    },
+    {
+      "path": "assets/audio/title-theme-delivery.md",
+      "sha256": "0e9e08337cefa25e96b44e15ea9fd97f1ca4f33bb70991b91f5724b56cd4191e"
+    },
+    {
+      "path": "assets/ui/title-mark/.gitattributes",
+      "sha256": "15805fdbe0bf3e5cc3f7894fea2fc03a6f72d36b811fe5f3ee69cd318fc2d3d9"
+    },
+    {
+      "path": "assets/ui/title-mark/PROMPT.txt",
+      "sha256": "226be75023004bf299cc17b76c67bf255819e3bb622c11cdaa5ee5cc0842d454"
+    },
+    {
+      "path": "assets/ui/title-mark/README.md",
+      "sha256": "b0d70b67f2b564499e0721302911848765fdc17075d16679c5d9860832608524"
+    },
+    {
+      "path": "assets/ui/title-mark/atlas.json",
+      "sha256": "503fd06162f9c9d99c51596a202d5b7af856742979e6a335011cc2d7af83b15f"
+    },
+    {
+      "path": "assets/ui/title-mark/conversion.json",
+      "sha256": "11db971a2df7211bc3a69c7d7a1bc6e905bebdeab12548e0cfb397fb34163bfd"
+    },
+    {
+      "path": "assets/ui/title-mark/crest.png",
+      "sha256": "147a9a105107939c2e793f423fc8f26dfb63959045880861e39d1d45a6afb948"
+    },
+    {
+      "path": "assets/ui/title-mark/manifest.json",
+      "sha256": "7abe22bfd4705ec541014ab3d8293a873353f7701b0fcf383b79c3c06474b289"
+    },
+    {
+      "path": "assets/ui/title-mark/native-software-contact.png",
+      "sha256": "52f605f649ccb3973c50cff8ac60c1e5d2f916d4894d329fc7bdfa6f54728d5c"
+    },
+    {
+      "path": "assets/ui/title-mark/provenance.json",
+      "sha256": "7443217e5a5c083efd8923cd097e307c4e2ba7c0bb2b3804631de80c1b681ea7"
+    },
+    {
+      "path": "assets/ui/title-mark/reference.png",
+      "sha256": "c995256c188af6c24ec94f0a062d17c0c8aa4b12fb73fef62b175474159b52a2"
+    },
+    {
+      "path": "assets/ui/title-mark/source-cells.png",
+      "sha256": "3e30eb0790702e0fe3cb14a3935b324d71381077db93b69c808c81385695d372"
+    },
+    {
+      "path": "assets/ui/title-mark/tile-0-0.png",
+      "sha256": "f183a4e5381b3ef6dec22e0a43a6ae12edd2d2cfb27bc251dbee97ea2d9bc770"
+    },
+    {
+      "path": "assets/ui/title-mark/tile-0-1.png",
+      "sha256": "8d20b3080675e90b9a2f4a6b5d9477a1c4f176deaf4917c241e9afbc789833f7"
+    },
+    {
+      "path": "assets/ui/title-mark/tile-0-2.png",
+      "sha256": "cc911afddd1b7a8520b0ab363077de103b662aff4fb49ac6c776540ca1924bbf"
+    },
+    {
+      "path": "assets/ui/title-mark/tile-0-3.png",
+      "sha256": "aefab613e912715a6d3c3de7239df348ee32c8f7afb0bd745daaeefdeb42d1a1"
+    },
+    {
+      "path": "assets/ui/title-mark/tile-1-0.png",
+      "sha256": "73d7a572d2a876e2eb5dad9631731ebca9e43bd199619a84554d272069e9bed1"
+    },
+    {
+      "path": "assets/ui/title-mark/tile-1-1.png",
+      "sha256": "dda049263459de81551a382528281a29fc19edbc312806367b0b7ed8f94dabc7"
+    },
+    {
+      "path": "assets/ui/title-mark/tile-1-2.png",
+      "sha256": "0c9074ad6543e732119b12ec437b9de403d867a197b6d0cc68a31a24b4559d40"
+    },
+    {
+      "path": "assets/ui/title-mark/tile-1-3.png",
+      "sha256": "3771436746e82feb466c7b8a1e943130d049e5630fb0f89b83696b10f053c4a3"
+    },
+    {
+      "path": "crates/game_core/src/asteroid_art.rs",
+      "sha256": "2c4f31de4db4637c1d23c4e52590d24d7502bc51f5c3b311e207852804d17876"
+    },
+    {
+      "path": "crates/game_core/src/asteroid_diversity_tests.rs",
+      "sha256": "f58d0095a7a5c7191eaf188f229d0beea6c2b69b2967101f053e69046c3ce5e7"
+    },
+    {
+      "path": "crates/game_core/src/cosmic_background.rs",
+      "sha256": "5f6324e3b6182503b0f5299a04b16dd66dbfbad6c2c5c7f5189fb18813a2c47c"
+    },
+    {
+      "path": "crates/game_core/src/cosmic_detail_tests.rs",
+      "sha256": "0f44375c3a0c4166f75e61d14b4ad4f8dae53a1dfd1bd1f70dc080aef47a5486"
+    },
+    {
+      "path": "crates/game_core/src/deep_nebula_tests.rs",
+      "sha256": "de4f9754239af650f8b7df3f81189c28d0e0e122140231e25bc956a008cd9dc1"
+    },
+    {
+      "path": "crates/game_core/src/lib.rs",
+      "sha256": "873a4e7c0b62696a75c777814f8eb1f8bafdbdd03ae79e0b723ae6e1c40faceb"
+    },
+    {
+      "path": "crates/game_core/src/pixel_assets.rs",
+      "sha256": "1a662f6dcdaaef60170861f0dc0e33eab24a80adbc1ba20d06b01367d1319d0f"
+    },
+    {
+      "path": "crates/game_web/src/pixel_ui.rs",
+      "sha256": "f7631289ca6fcd87c117e67fd6fd3b1705ebb3c602dfcfd74c5d181e0cc4e334"
+    },
+    {
+      "path": "crates/game_web/src/title_art.rs",
+      "sha256": "b0592877e3a8b79ffd6f7db542a91ae7a9641fe28d80cf05cae9ccdb3388f650"
+    },
+    {
+      "path": "crates/game_web/src/title_art_tests.rs",
+      "sha256": "04f1586590f4f10e56c2707e0a29c66c6b20c83f8d2ae771c0321d4697adf88d"
+    },
+    {
+      "path": "crates/game_web/src/ui_curved_vitals_tests.rs",
+      "sha256": "cf4252c37c702aaae3b67944ed23a829577c31565b9699f5c487c392f7515777"
+    },
+    {
+      "path": "crates/game_web/src/ui_scene.rs",
+      "sha256": "7efc3b2f7d38dd1e204bd473696292fba6bef001e227e9b543eb282611679803"
+    },
+    {
+      "path": "crates/game_web/src/ui_shield_capacity_tests.rs",
+      "sha256": "e453f04af3274589992a6708765f4aad378df24b70027dfb45984b9ec757db2c"
+    },
+    {
+      "path": "scripts/asset-title-mark-tests.py",
+      "sha256": "68fbdfdf588c336ec4b43c8820c2aefa9449bf417bbef2649383b4d178459b92"
+    },
+    {
+      "path": "scripts/asset-title-mark.py",
+      "sha256": "2d47a2bece2c1003871aef8c5d82ca44e71bf2dcce755d9aad2de300f447fc5f"
+    },
+    {
+      "path": "scripts/qa/audio-review/prepare.mjs",
+      "sha256": "a151bcd7c52ce40a894c31c8e4ce2192d4977d0da4c9b5a1b6fa32b1e906cbfb"
+    },
+    {
+      "path": "scripts/test/audio.test.mjs",
+      "sha256": "c9356bfd21640eb80bf4e4e468fe02dbc8bb781d037b9e1129d35d27ea8cdcab"
+    },
+    {
+      "path": "scripts/test/dock-menu.test.mjs",
+      "sha256": "6df266a9412669f63edf9837b1e76040d78cd6fc8b4591306a5286b63d1d5098"
+    },
+    {
+      "path": "scripts/test/forge-integration.test.mjs",
+      "sha256": "9c1b3edfca16ec43163c1428e69c0558a1bd4adc9e56395fd4529ab8775b6848"
+    },
+    {
+      "path": "scripts/test/graphics-recovery.test.mjs",
+      "sha256": "6e06248d1a7b61e7c9cdbeb368884a0a2dbacac29f9250fc1f0d365c635310e4"
+    },
+    {
+      "path": "scripts/test/kikai-lifecycle.test.mjs",
+      "sha256": "e707527588eada64209c4b876b8ce12d5f5fe366a47b8f32d5db728c5762bfb8"
+    },
+    {
+      "path": "scripts/test/title-theme.test.mjs",
+      "sha256": "b2a485325cfced05f6e27afb854f463372367e54cae359be251b49ae4b42f81c"
+    }
+  ],
+  "files": [
+    {
+      "path": "artifacts/space-title-20261012/.gitattributes",
+      "bytes": 9,
+      "sha256": "8b9c3028d6467ff3be7c793141927841d70f47f52d0590677438f488ca154992"
+    },
+    {
+      "path": "artifacts/space-title-20261012/README.md",
+      "bytes": 5922,
+      "sha256": "858d5b9aecf64b75f286f05da53533964712b5313b6ec25903afb0415b1ee8d7"
+    },
+    {
+      "path": "artifacts/space-title-20261012/asteroids-handoff.md",
+      "bytes": 3569,
+      "sha256": "919481aaae17230ed1ad6a4c1a84defab754e6de7e75492b241770c29a394b98"
+    },
+    {
+      "path": "artifacts/space-title-20261012/asteroids-software.png",
+      "bytes": 72071,
+      "sha256": "7f3487e507c3d394627ba70154f279aed68027fd76aaebf85d730a7fd646f50c"
+    },
+    {
+      "path": "artifacts/space-title-20261012/asteroids-webgpu.jpg",
+      "bytes": 23492,
+      "sha256": "6817f79ad72067784c1a20e41459a2bee6c995a1a5d38afb37f2ecedf87ffa79"
+    },
+    {
+      "path": "artifacts/space-title-20261012/asteroids-webgpu.png",
+      "bytes": 23492,
+      "sha256": "6817f79ad72067784c1a20e41459a2bee6c995a1a5d38afb37f2ecedf87ffa79"
+    },
+    {
+      "path": "artifacts/space-title-20261012/asteroids-wiki-draft.md",
+      "bytes": 4260,
+      "sha256": "d59d6e3af451a0c53e33a0f1374095459da60e9a0c0e7c6f93630ca6fa18af90"
+    },
+    {
+      "path": "artifacts/space-title-20261012/hugo-five-hull-three-shield.jpg",
+      "bytes": 47818,
+      "sha256": "7d5727b08805646a689a2524acc1342b921c95883683c774b6a65590394f7914"
+    },
+    {
+      "path": "artifacts/space-title-20261012/independent-review.md",
+      "bytes": 3104,
+      "sha256": "6d51cc3b632c6c81c81b24b908a393ca7a8708f21772e60a2279107aa0e5403b"
+    },
+    {
+      "path": "artifacts/space-title-20261012/nebula-handoff.md",
+      "bytes": 5862,
+      "sha256": "8d63abe464455af1174e35f95540b34ad2b49ee95d0c7529f5080d511ae3054a"
+    },
+    {
+      "path": "artifacts/space-title-20261012/nebula-software-summary.json",
+      "bytes": 6286,
+      "sha256": "4433b5954c4729d9b50c9ae24f45a212bda3eb8b690d339e9fb2ca8f6b849c3d"
+    },
+    {
+      "path": "artifacts/space-title-20261012/nebula-software.png",
+      "bytes": 621784,
+      "sha256": "0b99ddc4d0aec0fbe719ac68536b6819479da1d040d7998ed0db53681f04a534"
+    },
+    {
+      "path": "artifacts/space-title-20261012/nebula-webgl2-reduced-z160.jpg",
+      "bytes": 20705,
+      "sha256": "de0fcc6bfcb5a73c37bdaee7e814929e95f75e27165905ce9732a313809df05d"
+    },
+    {
+      "path": "artifacts/space-title-20261012/nebula-webgl2-z060.jpg",
+      "bytes": 24294,
+      "sha256": "86e4654baa7d1089f0cf1cec67933fd46f1cc2a41e9046346604711d8127f9b3"
+    },
+    {
+      "path": "artifacts/space-title-20261012/nebula-webgl2.jpg",
+      "bytes": 26393,
+      "sha256": "042adcfaef4bc90fefa952fc2fc7359fa1755d8966c31013e88199c6712f782a"
+    },
+    {
+      "path": "artifacts/space-title-20261012/nebula-webgpu.jpg",
+      "bytes": 26099,
+      "sha256": "1b45248a5e39e628e4327f72af882b7dccad473a382fc4aca4f20cc7290d1f68"
+    },
+    {
+      "path": "artifacts/space-title-20261012/renderer-webgl2.jpg",
+      "bytes": 45019,
+      "sha256": "6a3577b866a7619501ebcc1bf214a1f1ab772fea06d802ab64d4e13488c3335a"
+    },
+    {
+      "path": "artifacts/space-title-20261012/renderer-webgpu.jpg",
+      "bytes": 45410,
+      "sha256": "b59285124108b2405acbafbef7dca45a5a0319b32d817cb51bb88b15aab35e52"
+    },
+    {
+      "path": "artifacts/space-title-20261012/space-title-build-final.log",
+      "bytes": 1445,
+      "sha256": "2e2c8d683ec05a45d47600c6f580ece1eb3d1165439f527266e6beb38badb3fb"
+    },
+    {
+      "path": "artifacts/space-title-20261012/space-title-build-sports.log",
+      "bytes": 1322,
+      "sha256": "2eebcb82c387941ffddb5e8db835e45eb850fa8ca06bb3f5d584c792fd39c433"
+    },
+    {
+      "path": "artifacts/space-title-20261012/space-title-clippy-final.log",
+      "bytes": 265,
+      "sha256": "1fca968d790887c668d54b96fcf80d3082a8ba1dadd20bdd7bbb13907a5c21c3"
+    },
+    {
+      "path": "artifacts/space-title-20261012/space-title-clippy-sports.log",
+      "bytes": 168,
+      "sha256": "1d25c2e51f179dbfe7ab4fa6ba428791b7c055ca10e2f8360cc313545c48ad15"
+    },
+    {
+      "path": "artifacts/space-title-20261012/space-title-clippy.log",
+      "bytes": 265,
+      "sha256": "9881e02e1326fcc80ec542d434d25504626c5ff43a89d002662d8c6f2c2b1ad4"
+    },
+    {
+      "path": "artifacts/space-title-20261012/space-title-conversion-sports.log",
+      "bytes": 1136,
+      "sha256": "c3b64a77ac054f7efe268935c4a401e6846ffd0c0f5f36f286064133a664f34b"
+    },
+    {
+      "path": "artifacts/space-title-20261012/space-title-native-all.log",
+      "bytes": 73831,
+      "sha256": "2fa46f45c55c840c4425c45ae3cfee478fe1f7e914023207d0c55fb3fb0a399b"
+    },
+    {
+      "path": "artifacts/space-title-20261012/space-title-native-final.log",
+      "bytes": 73945,
+      "sha256": "4267a019dae908958631d4ed0bf4a85f8ac2e3e66b5b23f9690a16d2fa1378c4"
+    },
+    {
+      "path": "artifacts/space-title-20261012/space-title-native-sports.log",
+      "bytes": 73846,
+      "sha256": "2e907a254e672979cfefe69b96a968d7e15105fa72a421b2288bd3186d0dd593"
+    },
+    {
+      "path": "artifacts/space-title-20261012/space-title-shell-checked.log",
+      "bytes": 47050,
+      "sha256": "01cacf06f13010841236a3b5c2de2a9a33a306d4f63665a8235b94bf8b6567bc"
+    },
+    {
+      "path": "artifacts/space-title-20261012/space-title-shell-final.log",
+      "bytes": 47055,
+      "sha256": "f21c5021be44335e0bef6529dcfad6871e31c9c36d00f2510ff2c5f68ad8c13f"
+    },
+    {
+      "path": "artifacts/space-title-20261012/space-title-shell-sports.log",
+      "bytes": 46925,
+      "sha256": "fd04310fb2d014cb7dd245a9a6ebf1756f9b32013874c3c40404868d72c6c719"
+    },
+    {
+      "path": "artifacts/space-title-20261012/space-title-typecheck-final.log",
+      "bytes": 16,
+      "sha256": "5a3973f79ed9becd5f23c4feff467513814de7ea381d75a4d2e339aa8b8edca9"
+    },
+    {
+      "path": "artifacts/space-title-20261012/space-title-wiki-final.log",
+      "bytes": 2871,
+      "sha256": "5e77928943c5cc3dac54cd42ac895c007cdd93d092492a06a683349bdbee341e"
+    },
+    {
+      "path": "artifacts/space-title-20261012/title-handoff.md",
+      "bytes": 3544,
+      "sha256": "8f96ba02b6d4348abb6cefe566ad62cb9638b8bec2eed6f10f256abd291a075c"
+    },
+    {
+      "path": "artifacts/space-title-20261012/title-independent-review.md",
+      "bytes": 3581,
+      "sha256": "34c7326ec7a5664db91c2d72d9d44f40db9c4646ca47c407ba6dee0d3bc4b968"
+    },
+    {
+      "path": "artifacts/space-title-20261012/title-webgl2-1280.jpg",
+      "bytes": 73615,
+      "sha256": "72b304b2f4fbfc01033a749250de6e92e19aacc963d12868fae25cd2758c6158"
+    },
+    {
+      "path": "artifacts/space-title-20261012/title-webgl2-reduced.jpg",
+      "bytes": 73598,
+      "sha256": "2d4a9e3c6490ebb91035c31497ab34afa37610ed4cff7423e59a5668e26a385c"
+    },
+    {
+      "path": "artifacts/space-title-20261012/title-webgpu-1280.jpg",
+      "bytes": 74060,
+      "sha256": "7169b50173fcb03620ee5e101f059f3429606c66914e77a2897a62247dee0523"
+    },
+    {
+      "path": "artifacts/space-title-20261012/title-webgpu-390.jpg",
+      "bytes": 37904,
+      "sha256": "5b095ae161567696675a8bc92291d8d559ccc90d990208bc57fb62fd3278422c"
+    },
+    {
+      "path": "artifacts/space-title-20261012/title-webgpu-848.jpg",
+      "bytes": 33546,
+      "sha256": "83e73e55b6b3f255f6bbfd4dea1698577e251ab477a1a52a2dcb4ea16756c692"
+    }
+  ]
+}
