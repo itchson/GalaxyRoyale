@@ -1152,15 +1152,25 @@ body.reduced-motion *::after {
   }
 }
 .menu-card:has(#coop-content:not([hidden])) {
+  --coop-hit-rows: 4;
   width: min(calc(300px * var(--ui-scale, 1)), 100%);
   --coop-control-extra: max(
     0px,
     calc(var(--ui-hit) - 18px * var(--ui-scale, 1))
   );
   height: min(
-    calc(230px * var(--ui-scale, 1) + 4 * var(--coop-control-extra)),
+    calc(
+      230px * var(--ui-scale, 1) + var(--coop-hit-rows) *
+        var(--coop-control-extra)
+    ),
     100%
   );
+}
+.menu-card:has(#coop-content:not([hidden]) .coop-invitation:not([hidden])),
+.menu-card:has(
+  #coop-content:not([hidden]) .coop-panel > .loadout-note:not([hidden])
+) {
+  --coop-hit-rows: 7;
 }
 .coop-panel .coop-start,
 .coop-panel .coop-invitation,
