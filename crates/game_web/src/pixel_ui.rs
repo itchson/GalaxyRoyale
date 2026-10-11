@@ -562,7 +562,7 @@ pub struct FlightStatusLayout {
     pub stats: Option<[f32; 4]>,
     pub context: Option<[f32; 4]>,
     pub vitals: Option<[f32; 4]>,
-    /// Compass cells are contained by the already-reserved invisible footer.
+    /// North-up minimap, above the footer on the left. Reserved independently.
     pub navigation: Option<[f32; 4]>,
     pub viewport: [f32; 2],
 }
@@ -573,7 +573,8 @@ pub struct FlightStatusInput {
     pub header: Option<[f32; 4]>,
     pub status_hits: [Option<[f32; 4]>; 2],
     pub touch: bool,
-    /// Compact boss allocation may use the footer's H/S readout instead.
+    /// Compact boss allocation uses the footer's H/S readout and omits the
+    /// optional map when a protected core is present, freeing a boss anchor.
     pub attached_vitals: bool,
     pub player: Vec2,
     pub player_radius: f32,
@@ -636,18 +637,7 @@ impl FlightStatusLayout {
         .into_iter()
         .flatten()
         .find(|r| clear(*r));
-        let navigation = strip.filter(|r| r[2] >= 120.0).map(|r| {
-            let w = if r[2] >= 210.0 { 100.0 } else { 32.0 };
-            [r[0] + r[2] - 4.0 - w, r[1] + 2.0, w, 5.0]
-        });
-        let stats = strip.map(|r| {
-            [
-                r[0] + 4.0,
-                r[1] + 2.0,
-                r[2] - 8.0 - navigation.map_or(0.0, |n| n[2] + 6.0),
-                5.0,
-            ]
-        });
+        let stats = strip.map(|r| [r[0] + 4.0, r[1] + 2.0, r[2] - 8.0, 5.0]);
         let context = strip
             .filter(|r| r[3] >= 22.0)
             .map(|r| [r[0] + 4.0, r[1] + 12.0, r[2] - 8.0, 5.0]);
@@ -664,6 +654,33 @@ impl FlightStatusLayout {
                 r * input.zoom + 4.0,
             )
         });
+        let avoids_disc = |r: [f32; 4], p: Vec2, radius: f32| {
+            let nearest = p.clamp(Vec2::new(r[0], r[1]), Vec2::new(r[0] + r[2], r[1] + r[3]));
+            p.distance_squared(nearest) > radius * radius
+        };
+        // Keep one honest, fixed-size map above the footer and (on touch) the
+        // actual joystick hit rectangle. No unsafe right-side rescue or overlap
+        // with a protected boss core; overconstrained tiny layouts omit the map.
+        let navigation = strip
+            .filter(|_| input.attached_vitals || core.is_none())
+            .and_then(|s| {
+                let y = (s[1] - 4.0 - MINIMAP_SIZE).min(if input.touch {
+                    hits[0][1] - 4.0 - MINIMAP_SIZE
+                } else {
+                    height
+                });
+                let r = [6.0, y, MINIMAP_SIZE, MINIMAP_SIZE];
+                (clear(r)
+                    && !hud_overlap(r, s, 2.0)
+                    && input
+                        .status_hits
+                        .iter()
+                        .flatten()
+                        .all(|hit| !hud_overlap(r, *hit, 2.0))
+                    && avoids_disc(r, center, radius + 4.0)
+                    && core.is_none_or(|(p, radius)| avoids_disc(r, p, radius)))
+                .then_some(r)
+            });
         // Never clamp an offscreen ship to a false marker at the viewport edge.
         let vitals = (input.attached_vitals
             && center.x >= 0.0
@@ -679,6 +696,7 @@ impl FlightStatusLayout {
                 .find(|r| {
                     clear(*r)
                         && strip.is_none_or(|s| !hud_overlap(*r, s, 2.0))
+                        && navigation.is_none_or(|n| !hud_overlap(*r, n, 2.0))
                         && input
                             .status_hits
                             .iter()
@@ -1032,113 +1050,151 @@ fn dim_color(color: u32, strength: f32) -> u32 {
     ])
 }
 
+/// Fixed presentation range; world zoom never changes navigation distances.
+pub(crate) const MINIMAP_WORLD_RANGE: f32 = 2400.0;
+pub(crate) const MINIMAP_SIZE: f32 = 44.0;
+const MINIMAP_HOME: u32 = 0xff_85e9ff;
+const MINIMAP_MISSION: u32 = 0xff_ff8acd;
+
+#[derive(Clone, Copy, Debug, PartialEq)]
+struct MinimapMarker {
+    position: Vec2,
+    off_range: bool,
+}
+
+/// World +X is east and +Y south, matching the game. The player stays centered;
+/// distant targets retain their bearing on a circular edge rather than each
+/// axis clamping independently. No world camera or undiscovered site is used.
+fn minimap_marker(rect: [f32; 4], player: Vec2, target: Vec2) -> Option<MinimapMarker> {
+    if rect.iter().any(|v| !v.is_finite()) || rect[2] < 20.0 || rect[3] < 20.0 {
+        return None;
+    }
+    let delta = target - player;
+    let distance = delta.length();
+    if !player.is_finite() || !target.is_finite() || !distance.is_finite() {
+        return None;
+    }
+    let radius = rect[2].min(rect[3]) * 0.5 - 5.0;
+    let off_range = distance > MINIMAP_WORLD_RANGE;
+    let offset = if off_range {
+        delta / distance * radius
+    } else {
+        delta / MINIMAP_WORLD_RANGE * radius
+    };
+    Some(MinimapMarker {
+        position: Vec2::new(rect[0] + rect[2] * 0.5, rect[1] + rect[3] * 0.5) + offset,
+        off_range,
+    })
+}
+
 fn draw_navigation(ui: &mut Ui<'_>, hud: &Hud, rect: [f32; 4]) {
-    static ARROWS: LazyLock<[PixelBody; 8]> = LazyLock::new(|| {
-        std::array::from_fn(|i| {
-            let angle = i as f32 * std::f32::consts::FRAC_PI_4;
-            let (sin, cos) = angle.sin_cos();
-            let mut masks = [0u8; 5];
-            for (x, y) in [
-                (-2., 0.),
-                (-1., 0.),
-                (0., 0.),
-                (1., 0.),
-                (2., 0.),
-                (1., -1.),
-                (0., -2.),
-                (1., 1.),
-                (0., 2.),
-            ] {
-                let px = (x * cos - y * sin).round() as i32 + 2;
-                let py = (x * sin + y * cos).round() as i32 + 2;
-                if (0..5).contains(&px) && (0..5).contains(&py) {
-                    masks[py as usize] |= 1 << (4 - px);
-                }
-            }
-            let rows: [String; 5] = std::array::from_fn(|y| {
-                (0..5)
-                    .map(|x| {
-                        if masks[y] & (1 << (4 - x)) != 0 {
-                            '#'
-                        } else {
-                            ' '
-                        }
-                    })
-                    .collect()
-            });
+    static SYMBOLS: LazyLock<[PixelBody; 3]> = LazyLock::new(|| {
+        [
+            // Gold home hub; violet hollow mission diamond remains visible
+            // when a courier target and home intentionally share a position.
             PixelBody::from_ascii(
-                &rows.iter().map(String::as_str).collect::<Vec<_>>(),
+                &["..#..", ".#.#.", "#.#.#", ".#.#.", "..#.."],
                 &[('#', WHITE)],
-            )
-        })
-    });
-    static HOME: LazyLock<PixelBody> = LazyLock::new(|| {
-        PixelBody::from_ascii(
-            &["..#..", ".###.", "##.##", ".###.", "..#.."],
-            &[('#', WHITE)],
-        )
+            ),
+            PixelBody::from_ascii(
+                &[
+                    "...#...", "..#.#..", ".#...#.", "#.....#", ".#...#.", "..#.#..", "...#...",
+                ],
+                &[('#', WHITE)],
+            ),
+            // Heading zero faces right; rotate this local child, not the map.
+            PixelBody::from_ascii(&["#..", "###", "#.."], &[('#', WHITE)]),
+        ]
     });
     let player = Vec2::from_array(hud.position);
-    if !player.is_finite() {
+    if !player.is_finite()
+        || rect.iter().any(|v| !v.is_finite())
+        || rect[2] < 20.0
+        || rect[3] < 20.0
+    {
         return;
     }
-    let mut item = |r: [f32; 4], target: [f32; 2], tag: &str, color: u32| {
-        let delta = Vec2::from_array(target) - player;
-        if !delta.is_finite() || r[2] < 12.0 {
-            return;
+    let [x, y, w, h] = rect;
+    // A quiet field and stepped corner pins, not another telemetry bubble.
+    ui.rect(x + 2.0, y + 2.0, w - 4.0, h - 4.0, 0xb0_190c07);
+    for (cx, cy, dx, dy) in [
+        (x + 1.0, y + 1.0, 1.0, 1.0),
+        (x + w - 2.0, y + 1.0, -1.0, 1.0),
+        (x + 1.0, y + h - 2.0, 1.0, -1.0),
+        (x + w - 2.0, y + h - 2.0, -1.0, -1.0),
+    ] {
+        for step in 0..5 {
+            ui.rect(cx + dx * step as f32, cy, 1.0, 1.0, DIM);
+            if step != 0 {
+                ui.rect(cx, cy + dy * step as f32, 1.0, 1.0, DIM);
+            }
         }
-        let distance = delta.length();
-        let octant = ((delta.y.atan2(delta.x) / std::f32::consts::FRAC_PI_4).round() as i32)
-            .rem_euclid(8) as usize;
-        let body = if distance <= 16.0 {
-            &*HOME
-        } else {
-            &ARROWS[octant]
-        };
-        ui.frame.push_body_colored(
-            body,
-            Transform {
-                position: ui.origin + Vec2::new(r[0] + 2.5, r[1] + 2.5),
-                ..Transform::default()
-            },
-            |_, _| color,
+    }
+    let center = Vec2::new(x + w * 0.5, y + h * 0.5);
+    for offset in [-12.0, -8.0, 8.0, 12.0] {
+        ui.rect(
+            center.x + offset - 0.5,
+            center.y - 0.5,
+            1.0,
+            1.0,
+            0xb0_63452f,
         );
-        let mut text = StatusText::new();
-        use std::fmt::Write;
-        let _ = if distance >= 1_000_000.0 {
-            write!(text, "{tag}{}M", (distance / 1_000_000.0).round() as u32)
-        } else if distance >= 1000.0 {
-            write!(text, "{tag}{}K", (distance / 1000.0).round() as u32)
-        } else {
-            write!(text, "{tag}{}", distance.round() as u32)
-        };
-        ui.micro_text([r[0] + 7.0, r[1], r[2] - 7.0, 5.0], text.as_str(), color);
-    };
-    let quest = hud.navigation.quest.as_ref();
-    let quest_tag = |kind| match kind {
-        0 => "MH",
-        1 => "MC",
-        _ => "MB",
-    };
-    if rect[2] >= 100.0 {
-        item(
-            [rect[0], rect[1], 48.0, 5.0],
-            hud.navigation.home,
-            "H",
-            CYAN,
+        ui.rect(
+            center.x - 0.5,
+            center.y + offset - 0.5,
+            1.0,
+            1.0,
+            0xb0_63452f,
         );
-        if let Some(q) = quest {
-            item(
-                [rect[0] + 52.0, rect[1], 48.0, 5.0],
-                q.position,
-                quest_tag(q.kind),
-                GOLD,
+    }
+    ui.micro_text([x + 3.0, y + 3.0, 3.0, 5.0], "N", DIM);
+    let parent = Transform {
+        position: ui.origin + center,
+        ..Transform::default()
+    }
+    .affine();
+    let mut target = |position: [f32; 2], symbol: usize, color| {
+        if let Some(marker) = minimap_marker(rect, player, Vec2::from_array(position)) {
+            ui.frame.push_body_affine_colored(
+                &SYMBOLS[symbol],
+                parent.compose(
+                    Transform {
+                        position: marker.position - center,
+                        ..Transform::default()
+                    }
+                    .affine(),
+                ),
+                |_, _| color,
             );
+            if marker.off_range {
+                // One inward cell distinguishes edge pins from in-range sites.
+                let inward = (center - marker.position).normalize_or_zero() * 4.0;
+                ui.rect(
+                    marker.position.x + inward.x - 0.5,
+                    marker.position.y + inward.y - 0.5,
+                    1.0,
+                    1.0,
+                    dim_color(color, 0.65),
+                );
+            }
         }
-    } else if let Some(q) = quest {
-        item(rect, q.position, quest_tag(q.kind), GOLD);
-    } else {
-        item(rect, hud.navigation.home, "H", CYAN);
+    };
+    target(hud.navigation.home, 0, MINIMAP_HOME);
+    if let Some(mission) = &hud.navigation.quest {
+        target(mission.position, 1, MINIMAP_MISSION);
+    }
+    if hud.heading.is_finite() {
+        ui.frame.push_body_affine_colored(
+            &SYMBOLS[2],
+            parent.compose(
+                Transform {
+                    rotation: hud.heading,
+                    ..Transform::default()
+                }
+                .affine(),
+            ),
+            |_, _| WHITE,
+        );
     }
 }
 
@@ -2476,3 +2532,7 @@ mod tests {
 #[cfg(test)]
 #[path = "ui_flight_status_tests.rs"]
 mod flight_status_tests;
+
+#[cfg(test)]
+#[path = "ui_minimap_tests.rs"]
+mod minimap_tests;
