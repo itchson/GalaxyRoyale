@@ -21,7 +21,7 @@ fn hud() -> Hud {
     game_core::Game::new(game_core::Profile::default()).hud()
 }
 fn bounds_check(frame: &FrameBuilder, origin: Vec2, layout: FlightStatusLayout) {
-    let bounds: Vec<_> = [layout.strip, layout.vitals]
+    let bounds: Vec<_> = [layout.strip, layout.vitals, layout.navigation]
         .into_iter()
         .flatten()
         .collect();
@@ -73,7 +73,7 @@ fn packet(frame: &FrameBuilder) -> Vec<PackedCell> {
 }
 
 #[test]
-fn micro_footer_is_only_cached_glyphs_and_compass_inside_shared_reservations() {
+fn micro_footer_and_minimap_stay_inside_their_shared_reservations() {
     let mut i = input([533.0, 300.0], false);
     i.attached_vitals = false;
     let layout = FlightStatusLayout::new(&i).unwrap();
@@ -94,12 +94,21 @@ fn micro_footer_is_only_cached_glyphs_and_compass_inside_shared_reservations() {
     for batch in &frame.frame().batches {
         for p in &batch.pixels {
             let t = batch.transforms[p.transform as usize];
-            assert_eq!(
-                t.a[2].abs() + t.a[3].abs(),
-                1.0,
-                "no strip fill or border geometry"
-            );
-            assert_eq!(t.b[0].abs() + t.b[1].abs(), 1.0);
+            let center =
+                t.point(Vec2::from_array(p.local)) + Vec2::from_array(layout.viewport) * 0.5;
+            if let Some(strip) = layout.strip
+                && center.x >= strip[0]
+                && center.y >= strip[1]
+                && center.x <= strip[0] + strip[2]
+                && center.y <= strip[1] + strip[3]
+            {
+                assert_eq!(
+                    t.a[2].abs() + t.a[3].abs(),
+                    1.0,
+                    "footer remains glyphs only"
+                );
+                assert_eq!(t.b[0].abs() + t.b[1].abs(), 1.0);
+            }
             assert_ne!(p.color, 0xee_0e0907);
         }
     }
@@ -254,7 +263,7 @@ fn shaped_segment_cells_keep_fractional_health_and_static_reduced_motion() {
 }
 
 #[test]
-fn compact_compass_uses_actual_world_direction_without_presentation_shake() {
+fn minimap_uses_actual_world_direction_without_presentation_shake() {
     let i = input([533.0, 300.0], false);
     let mut layout = FlightStatusLayout::new(&i).unwrap();
     layout.strip = None;
@@ -298,15 +307,18 @@ fn compact_navigation_keeps_room_for_essential_fallback_and_context_cells() {
         i.attached_vitals = false;
         let layout = FlightStatusLayout::new(&i).unwrap();
         let stats = layout.stats.unwrap();
-        let navigation = layout.navigation.unwrap();
-        assert!(!hud_overlap(stats, navigation, 0.0));
+        if let Some(navigation) = layout.navigation {
+            assert!(!hud_overlap(stats, navigation, 0.0));
+            assert_eq!([navigation[2], navigation[3]], [44.0, 44.0]);
+            assert!(
+                navigation[0] == 6.0 && navigation[1] + navigation[3] < layout.strip.unwrap()[1]
+            );
+        }
         assert!(stats[2] >= "H100 S100 L1 C0/16".len() as f32 * RoyaleMicro::ADVANCE - 1.0);
         assert_eq!(stats[3], 5.0);
         if let Some(context) = layout.context {
             assert_eq!(context[3], 5.0);
         }
-        let strip = layout.strip.unwrap();
-        assert!(navigation[0] >= strip[0] && navigation[0] + navigation[2] <= strip[0] + strip[2]);
     }
 }
 
