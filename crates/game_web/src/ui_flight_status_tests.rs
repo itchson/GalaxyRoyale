@@ -247,7 +247,10 @@ fn shaped_segment_cells_keep_fractional_health_and_static_reduced_motion() {
             },
         );
         bounds_check(frame, -Vec2::from_array(layout.viewport) * 0.5, layout);
-        assert!(frame.frame().pixel_count < 120);
+        assert!(
+            frame.frame().pixel_count <= 314,
+            "bounded occupied arc layers"
+        );
     }
     assert_ne!(
         packet(&low),
@@ -258,8 +261,8 @@ fn shaped_segment_cells_keep_fractional_health_and_static_reduced_motion() {
     i.insets = [8.0, 12.0, 9.0, 15.0];
     i.zoom = 1.6;
     let layout = FlightStatusLayout::new(&i).unwrap();
-    assert_eq!([rect[2], rect[3]], [44.0, 9.0]);
-    assert_eq!(layout.vitals.unwrap()[2..], [44.0, 9.0]);
+    assert_eq!([rect[2], rect[3]], VITALS_SIZE);
+    assert_eq!(layout.vitals.unwrap()[2..], VITALS_SIZE);
 }
 
 #[test]
@@ -350,7 +353,7 @@ fn footer_and_attached_bars_share_bounds_at_supported_extents_and_insets() {
             }
             if let Some(vitals) = layout.vitals {
                 assert!(!hud_overlap(vitals, strip, 0.0));
-                assert_eq!([vitals[2], vitals[3]], [44.0, 9.0]);
+                assert_eq!([vitals[2], vitals[3]], VITALS_SIZE);
             }
             let [top, right, bottom, left] = insets;
             let render_camera = [2.0 + (left - right) * 0.5, -1.0 + (top - bottom) * 0.5];
@@ -402,8 +405,8 @@ fn current_unshaken_projection_scales_offset_and_radius_but_not_bar_geometry() {
             let view = CameraView::new(world_camera, Vec2::from_array(i.viewport), zoom).unwrap();
             let p = view.world_to_screen(i.player) - Vec2::new(5.0, 9.0);
             assert!((rect[0] + 22.0 - p.x).abs() < 0.001);
-            assert!((rect[1] + 20.0 * zoom + 14.0 - p.y).abs() < 0.001);
-            assert_eq!([rect[2], rect[3]], [44.0, 9.0]);
+            assert!((rect[1] - 20.0 * zoom - VITALS_CLEARANCE - p.y).abs() < 0.001);
+            assert_eq!([rect[2], rect[3]], VITALS_SIZE);
             // Footer exports have no moving-world/zoom dependency.
             let mut stationary = input(i.viewport, false);
             stationary.insets = i.insets;
@@ -438,17 +441,17 @@ fn offscreen_ship_never_becomes_a_clamped_edge_marker_and_invalid_projection_fai
 fn attached_tracks_avoid_a_real_core_and_compact_boss_priority_retains_footer_health() {
     let mut i = input([533.0, 300.0], false);
     let original = FlightStatusLayout::new(&i).unwrap();
-    let top = original.vitals.unwrap();
+    let below = original.vitals.unwrap();
     // World coordinates are projected through the same actual CameraView.
     let view = CameraView::new(Vec2::ZERO, Vec2::from_array(i.viewport), 1.0).unwrap();
     i.protected_core = Some((
-        view.screen_to_world(Vec2::new(top[0] + 22.0, top[1] + 4.5)),
+        view.screen_to_world(Vec2::new(below[0] + 22.0, below[1] + 6.0)),
         8.0,
     ));
     let protected = FlightStatusLayout::new(&i).unwrap();
     assert!(
-        protected.vitals.unwrap()[1] > 150.0,
-        "choose below ship instead of hiding its core"
+        protected.vitals.is_none(),
+        "a blocked below-ship arc falls back to truthful footer health"
     );
     i.attached_vitals = false;
     let compact = FlightStatusLayout::new(&i).unwrap();

@@ -502,7 +502,7 @@ pub(crate) fn flight_header(
             visited += 1;
             if !matches!(
                 node.kind.as_str(),
-                "save-icon" | "status-icon" | "map-icon" | "settings-icon"
+                "save-icon" | "status-icon" | "map-icon" | "settings-icon" | "fullscreen-icon"
             ) {
                 continue;
             }
@@ -710,26 +710,26 @@ impl FlightStatusLayout {
             && center.x <= width
             && center.y <= height)
             .then(|| {
-                [
-                    [center.x - 22.0, center.y - radius - 14.0, 44.0, 9.0],
-                    [center.x - 22.0, center.y + radius + 5.0, 44.0, 9.0],
-                ]
-                .into_iter()
-                .find(|r| {
-                    clear(*r)
-                        && strip.is_none_or(|s| !hud_overlap(*r, s, 2.0))
-                        && navigation.is_none_or(|n| !hud_overlap(*r, n, 2.0))
-                        && input
-                            .status_hits
-                            .iter()
-                            .flatten()
-                            .all(|hit| !hud_overlap(*r, *hit, 2.0))
-                        && core.is_none_or(|(p, radius)| {
-                            let nearest =
-                                p.clamp(Vec2::new(r[0], r[1]), Vec2::new(r[0] + r[2], r[1] + r[3]));
-                            p.distance_squared(nearest) > radius * radius
-                        })
-                })
+                let r = [
+                    center.x - VITALS_SIZE[0] * 0.5,
+                    center.y + radius + VITALS_CLEARANCE,
+                    VITALS_SIZE[0],
+                    VITALS_SIZE[1],
+                ];
+                (clear(r)
+                    && strip.is_none_or(|s| !hud_overlap(r, s, 2.0))
+                    && navigation.is_none_or(|n| !hud_overlap(r, n, 2.0))
+                    && input
+                        .status_hits
+                        .iter()
+                        .flatten()
+                        .all(|hit| !hud_overlap(r, *hit, 2.0))
+                    && core.is_none_or(|(p, radius)| {
+                        let nearest =
+                            p.clamp(Vec2::new(r[0], r[1]), Vec2::new(r[0] + r[2], r[1] + r[3]));
+                        p.distance_squared(nearest) > radius * radius
+                    }))
+                .then_some(r)
             })
             .flatten();
         Some(Self {
@@ -994,72 +994,137 @@ pub(crate) fn draw_flight_status_animated(
     if let Some(rect) = layout.navigation {
         draw_navigation(&mut ui, hud, rect);
     }
-    if let Some([x, y, w, _]) = layout.vitals {
-        // A three-cell reticle and a shield rune, each cached as a local body.
-        static ICONS: LazyLock<[PixelBody; 2]> = LazyLock::new(|| {
-            [
-                PixelBody::from_ascii(&[".#.", "###", ".#."], &[('#', WHITE)]),
-                PixelBody::from_ascii(&["###", "#.#", ".#."], &[('#', WHITE)]),
-            ]
-        });
-        for (row, (_value, _maximum, color)) in [
-            (
-                hud.hull,
-                hud.max_hull,
-                if low_hull {
-                    warning_color(1, time, reduced_motion)
-                } else {
-                    MINT
-                },
-            ),
-            (
-                hud.shield,
-                hud.max_shield,
-                if shield_down {
-                    warning_color(2, time, reduced_motion)
-                } else {
-                    CYAN
-                },
-            ),
-        ]
-        .into_iter()
-        .enumerate()
-        {
-            let row_y = y + row as f32 * 5.0;
-            ui.frame.push_body_colored(
-                &ICONS[row],
+    if let Some(rect) = layout.vitals {
+        let colors = [
+            if low_hull {
+                warning_color(1, time, reduced_motion)
+            } else {
+                MINT
+            },
+            if shield_down {
+                warning_color(2, time, reduced_motion)
+            } else {
+                CYAN
+            },
+        ];
+        let parent = Transform {
+            position: ui.origin,
+            ..Transform::default()
+        }
+        .affine();
+        append_curved_vitals(ui.frame, parent, rect, presentation, colors);
+    }
+    draw_boss(&mut ui, hud, Vec2::from_array(layout.viewport), boss_panel);
+}
+
+/// Fixed UI envelope, independent of zoom; the shared layout reserves all cells.
+const VITALS_SIZE: [f32; 2] = [44.0, 12.0];
+const VITALS_CLEARANCE: f32 = 5.0;
+const VITAL_ARC_Y: [f32; 11] = [0.0, 1.0, 2.0, 3.0, 4.0, 4.0, 4.0, 3.0, 2.0, 1.0, 0.0];
+static VITAL_SEGMENT: LazyLock<PixelBody> =
+    LazyLock::new(|| PixelBody::from_ascii(&[".#.", "###", "###"], &[('#', WHITE)]));
+
+/// Two stepped arcs made from cached occupied local objects. Fractional health
+/// clips each occupied quad continuously; it never rounds health or cell size.
+fn append_curved_vitals(
+    frame: &mut FrameBuilder,
+    parent: AffineTransform,
+    rect: [f32; 4],
+    presentation: VitalsPresentation,
+    colors: [u32; 2],
+) {
+    if rect.iter().any(|v| !v.is_finite()) || rect[2] <= 0.0 || rect[3] <= 0.0 {
+        return;
+    }
+    let group = parent.compose(
+        Transform {
+            position: Vec2::new(rect[0], rect[1]),
+            scale: Vec2::new(rect[2] / VITALS_SIZE[0], rect[3] / VITALS_SIZE[1]),
+            ..Transform::default()
+        }
+        .affine(),
+    );
+    let fraction = |value: f32| {
+        if value.is_finite() {
+            value.clamp(0.0, 1.0)
+        } else {
+            0.0
+        }
+    };
+    let shade = |cell: Vec2, color| {
+        dim_color(
+            color,
+            if cell.y < -0.5 {
+                0.90
+            } else if cell.y > 0.5 {
+                0.72
+            } else {
+                1.0
+            },
+        )
+    };
+    for (row, &color) in colors.iter().enumerate() {
+        let track = group.compose(
+            Transform {
+                position: Vec2::new(0.5, row as f32 * 5.0),
+                ..Transform::default()
+            }
+            .affine(),
+        );
+        let fill = fraction(presentation.fill[row]);
+        let trail = fraction(presentation.trail[row]).max(fill);
+        for (index, &y) in VITAL_ARC_Y.iter().enumerate() {
+            let segment = track.compose(
                 Transform {
-                    position: ui.origin + Vec2::new(x + 1.5, row_y + 1.5),
+                    position: Vec2::new(index as f32 * 4.0 + 1.5, y + 1.5),
                     ..Transform::default()
-                },
-                |_, _| color,
+                }
+                .affine(),
             );
-            let fill = presentation.fill[row].clamp(0.0, 1.0);
-            let trail = presentation.trail[row].clamp(fill, 1.0);
-            // Nine individual stepped cells, with a restrained inner highlight
-            // and a damage tail. No health state is quantized to the segments.
-            let track = (w - 8.0).max(0.0);
-            let cell = (track - 8.0) / 9.0;
-            for segment in 0..9 {
-                let sx = x + 7.0 + segment as f32 * (cell + 1.0);
-                ui.rect(sx, row_y + 1.0, cell, 2.0, 0x90_34261e);
-                let part = |value: f32| (value * 9.0 - segment as f32).clamp(0.0, 1.0) * cell;
-                ui.rect(
-                    sx,
-                    row_y + 1.0,
-                    part(trail),
-                    2.0,
+            frame.push_body_affine_colored(&VITAL_SEGMENT, segment, |cell, _| {
+                shade(cell, 0x90_34261e)
+            });
+            let part = |value: f32| {
+                (value * VITAL_ARC_Y.len() as f32 - index as f32).clamp(0.0, 1.0) * 3.0
+            };
+            let fill_end = part(fill);
+            let trail_end = part(trail);
+            for (start, end, color) in [
+                (
+                    fill_end,
+                    trail_end,
                     if row == 0 { 0xa0_85d4ff } else { 0xa0_a48563 },
-                );
-                ui.rect(sx, row_y + 1.0, part(fill), 1.0, color);
-                ui.rect(sx, row_y + 2.0, part(fill), 1.0, dim_color(color, 0.72));
-                if part(fill) > 0.0 {
-                    ui.rect(sx, row_y, part(fill).min(1.0), 1.0, dim_color(color, 0.9));
+                ),
+                (0.0, fill_end, color),
+            ] {
+                if end <= start {
+                    continue;
+                }
+                if start == 0.0 && end == 3.0 {
+                    frame.push_body_affine_colored(&VITAL_SEGMENT, segment, |cell, _| {
+                        shade(cell, color)
+                    });
+                    continue;
+                }
+                for (cell, _) in VITAL_SEGMENT.cells() {
+                    let left = (cell.x - 0.5).max(start - 1.5);
+                    let right = (cell.x + 0.5).min(end - 1.5);
+                    if right <= left {
+                        continue;
+                    }
+                    let clipped = segment.compose(
+                        Transform {
+                            position: Vec2::new((left + right) * 0.5, cell.y),
+                            scale: Vec2::new(right - left, 1.0),
+                            ..Transform::default()
+                        }
+                        .affine(),
+                    );
+                    frame.push_body_affine_colored(&CELL, clipped, |_, _| shade(cell, color));
                 }
             }
         }
     }
-    draw_boss(&mut ui, hud, Vec2::from_array(layout.viewport), boss_panel);
 }
 
 fn dim_color(color: u32, strength: f32) -> u32 {
@@ -2559,3 +2624,7 @@ mod flight_status_tests;
 #[cfg(test)]
 #[path = "ui_minimap_tests.rs"]
 mod minimap_tests;
+
+#[cfg(test)]
+#[path = "ui_curved_vitals_tests.rs"]
+mod curved_vitals_tests;
