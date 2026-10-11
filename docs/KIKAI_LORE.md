@@ -4,6 +4,8 @@ KIKAI are technological life descended from humans in a future where biological 
 
 The setting calls its flight craft **RAICHO**, inspired by the Japanese bird name, and crystals **KESSHO**. The exact ASCII spellings, sourced meanings and starter model names are recorded in [the lore lexicon](LORE_LEXICON.md). These display terms do not rename save keys, redistribute XP or grant another starter.
 
+Anatomy is authored separately for each type. DORA has a feminine chest; DORO has a masculine, flat mechanical chest with angular plate construction; TALO has a neutral, flat torso. DORO and TALO armor must not inherit rounded breast forms or cup-shaped seams from the DORA reference. Hair length and recoloring alone do not establish the type's silhouette. Inspect the source art and the actual native portrait at its intended display size.
+
 The full format is `TYPE-MAIN-SUB-HASH`. Compact names use **A for female, O for male and T for neutral**, followed by main and sub-manufacturer initials. The guide is **DORA-PAN-RENKO-1337**, called **APR-1337**. Her green hair identifies PAN Dynamics; her red crystal horns identify RENKO Cybernetics as sub-manufacturer. The user's latest clarification on 11 October 2026 supersedes the earlier reversed A/O prefixes and OPR/ORP guide names. RENKO retains its confirmed spelling. The current player license formatter retains the previously specified `#HASH`; APR-1337 is the guide's authored display name. No saved identity, hash or progression is rewritten by the display-prefix correction.
 
 | Corporation | Main hair / hull / home color | Specialization | First RAICHO |

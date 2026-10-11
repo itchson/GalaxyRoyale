@@ -26,8 +26,8 @@
 }
 .dialogue-portrait {
   flex: 0 0 auto;
-  width: calc(48px * var(--ui-scale, 1));
-  height: calc(64px * var(--ui-scale, 1));
+  width: calc(72px * var(--ui-scale, 1));
+  height: calc(96px * var(--ui-scale, 1));
   background: #13263a;
 }
 .dialogue-content {
@@ -84,7 +84,7 @@
   color: #8296b8;
 }
 .narrow-ui .dialogue-portrait {
-  width: calc(32px * var(--ui-scale, 1));
+  width: calc(36px * var(--ui-scale, 1));
   height: calc(48px * var(--ui-scale, 1));
 }
 .narrow-ui .dialogue-actions {
