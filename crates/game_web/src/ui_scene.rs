@@ -2686,7 +2686,32 @@ mod tests {
             active: true,
             ..scene("campaign-patch").groups[0].nodes.remove(0)
         };
-        for (pixels, work, expected) in [(200, 120000, 0), (60000, 200, 0), (550, 550, 550)] {
+        let submitted_cost = |node: &UiNode| {
+            let mut frame = FrameBuilder::new();
+            let mut painter = Painter {
+                frame: &mut frame,
+                parent: AffineTransform::default(),
+                remaining: MAX_UI_PIXELS,
+                viewport: Vec2::new(640.0, 360.0),
+                clip: None,
+                work_remaining: MAX_UI_PIXELS * 2,
+            };
+            painter.node(node, 0.0, true);
+            painter.frame.frame().pixel_count
+        };
+        let socket_cost = submitted_cost(&socket);
+        let patch_cost = submitted_cost(&patch);
+        assert_eq!(socket_cost, 634); // 632 authored well cells plus two floor quads.
+        assert_eq!(patch_cost, 165);
+        let pair_cost = socket_cost + patch_cost;
+        for (pixels, work, expected) in [
+            (200, 120000, 0),
+            (60000, 200, 0),
+            (socket_cost - 1, 120000, 0),
+            (60000, socket_cost - 1, 0),
+            (pair_cost - 1, pair_cost - 1, socket_cost),
+            (pair_cost, pair_cost, pair_cost),
+        ] {
             let mut frame = FrameBuilder::new();
             let mut painter = Painter {
                 frame: &mut frame,
@@ -2846,15 +2871,23 @@ mod tests {
                 }
                 assert_eq!(isolated_counts[2], [34594, 28524, 24262][kind as usize]);
                 assert_eq!(isolated_counts[4], [662, 688, 1040][corp as usize]);
-                assert_eq!(isolated_counts[0], 1033);
-                assert_eq!(isolated_counts[1], 631);
+                assert_eq!(isolated_counts[0], 5818);
+                assert_eq!(isolated_counts[1], 1677);
                 for (slot, count) in [165, 321, 275, 219, 225, 323, 326, 202]
                     .into_iter()
                     .enumerate()
                 {
-                    assert_eq!(isolated_counts[12 + slot * 2], 385);
+                    assert_eq!(isolated_counts[12 + slot * 2], 634);
                     assert_eq!(isolated_counts[13 + slot * 2], count);
                 }
+                let decoration = isolated_counts[0]
+                    + isolated_counts[1]
+                    + isolated_counts[3]
+                    + (0..8)
+                        .map(|slot| isolated_counts[12 + slot * 2])
+                        .sum::<usize>();
+                assert_eq!(decoration, [12_949, 12_887, 12_957][corp as usize]);
+                assert!(decoration <= 13_000);
                 let complete = render(joined);
                 assert!(complete.pixel_count < MAX_UI_PIXELS);
                 assert_eq!(complete.pixel_count, expected.len());
