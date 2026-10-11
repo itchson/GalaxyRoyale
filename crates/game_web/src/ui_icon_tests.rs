@@ -4,13 +4,14 @@ use engine_core::RenderFrame;
 
 const VIEW: [f32; 2] = [640.0, 360.0];
 const GROUP: [f32; 2] = [20.25, 10.5];
-const MENU_KINDS: [&str; 6] = [
+const MENU_KINDS: [&str; 7] = [
     "settings-icon",
     "resume-icon",
     "restart-icon",
     "title-icon",
     "quit-icon",
     "status-icon",
+    "map-icon",
 ];
 fn icon(kind: &str, state: f32, rect: [f32; 4]) -> UiNode {
     UiNode {
@@ -67,11 +68,11 @@ fn original_control_icons_are_distinct_cached_objects_with_state_colors() {
         .enumerate()
     {
         let body = &SAVE_ICONS[state];
-        assert_eq!((body.width, body.height), (9, 9));
+        assert_eq!((body.width, body.height), (18, 18));
         assert!(
             signatures.insert(
-                (0..9)
-                    .flat_map(|y| (0..9).map(move |x| body.is_occupied(x, y)))
+                (0..18)
+                    .flat_map(|y| (0..18).map(move |x| body.is_occupied(x, y)))
                     .collect::<Vec<_>>()
             )
         );
@@ -90,21 +91,22 @@ fn original_control_icons_are_distinct_cached_objects_with_state_colors() {
         false,
     );
     assert_eq!(frame.pixel_count, CLOSE_ICON.occupied_count());
-    assert!(frame.batches[0].pixels.iter().all(|p| p.color == WHITE));
+    assert!(frame.batches[0].pixels.iter().all(|p| p.color >> 24 == 255));
+    assert!(frame.batches[0].pixels.iter().any(|p| p.color != WHITE));
 }
 
 #[test]
-fn menu_symbols_are_six_distinct_cached_unlit_objects_without_text_placeholders() {
+fn menu_symbols_are_seven_distinct_detailed_cached_unlit_objects_without_text_placeholders() {
     let mut signatures = std::collections::HashSet::new();
     let mut total = 0;
     for kind in MENU_KINDS {
         let (body, accent) = menu_icon(kind).unwrap();
         assert!(std::ptr::eq(body, menu_icon(kind).unwrap().0));
-        assert_eq!((body.width, body.height), (10, 10));
+        assert_eq!((body.width, body.height), (20, 20));
         assert!(
             signatures.insert(
-                (0..10)
-                    .flat_map(|y| (0..10).map(move |x| body.is_occupied(x, y)))
+                (0..20)
+                    .flat_map(|y| (0..20).map(move |x| body.is_occupied(x, y)))
                     .collect::<Vec<_>>()
             )
         );
@@ -128,8 +130,8 @@ fn menu_symbols_are_six_distinct_cached_unlit_objects_without_text_placeholders(
         total += body.occupied_count();
     }
     assert!(
-        total < 500,
-        "all six control objects remain below the bounded control budget"
+        total < 2000,
+        "all seven control objects remain below the bounded control budget"
     );
     assert!(menu_icon("unknown-icon").is_none());
 }
@@ -137,7 +139,7 @@ fn menu_symbols_are_six_distinct_cached_unlit_objects_without_text_placeholders(
 #[test]
 fn semantic_icon_routes_keep_their_authored_readable_shapes() {
     let landmarks = [
-        ("settings-icon", [(3, 0), (0, 4)], [(4, 4), (0, 0)]),
+        ("settings-icon", [(4, 0), (0, 4)], [(4, 4), (0, 0)]),
         ("resume-icon", [(2, 0), (6, 4)], [(7, 4), (0, 4)]),
         ("restart-icon", [(6, 4), (9, 4)], [(9, 5), (5, 6)]),
         ("title-icon", [(4, 0), (3, 7)], [(4, 7), (0, 0)]),
@@ -146,20 +148,24 @@ fn semantic_icon_routes_keep_their_authored_readable_shapes() {
     for (kind, filled, empty) in landmarks {
         let body = menu_icon(kind).unwrap().0;
         for (x, y) in filled {
-            assert!(body.is_occupied(x, y), "{kind} landmark {x},{y}");
+            assert!(
+                body.is_occupied(x * 2 + 1, y * 2),
+                "{kind} landmark {x},{y}"
+            );
         }
         for (x, y) in empty {
-            assert!(!body.is_occupied(x, y), "{kind} open region {x},{y}");
+            assert!(
+                !body.is_occupied(x * 2, y * 2),
+                "{kind} open region {x},{y}"
+            );
         }
     }
     let status = menu_icon("status-icon").unwrap().0;
-    for y in 0..10 {
-        for x in 0..10 {
-            assert_eq!(
-                status.is_occupied(x, y),
-                (1..=8).contains(&x) && [1, 2, 4, 5, 7, 8].contains(&y)
-            );
-        }
+    for y in [3, 9, 15] {
+        assert!(status.is_occupied(4, y) && status.is_occupied(15, y));
+    }
+    for y in [0, 6, 12, 19] {
+        assert!(!status.is_occupied(10, y));
     }
 }
 
@@ -371,7 +377,7 @@ fn icon_composes_a_reflected_sheared_parent_without_absolute_cell_expansion() {
     let node = icon("close-icon", 0.0, [7.0, 13.0, 18.0, 18.0]);
     let local = Transform {
         position: Vec2::new(16.0, 22.0),
-        scale: Vec2::splat(2.0),
+        scale: Vec2::splat(1.0),
         ..Transform::default()
     }
     .affine();

@@ -15,6 +15,70 @@ const fn rgb(r: u8, g: u8, b: u8) -> u32 {
 }
 const BUTTON_TEXT: u32 = rgb(224, 236, 241);
 const BUTTON_DISABLED_TEXT: u32 = rgb(139, 155, 166);
+const ICON_EDGE: u32 = rgb(255, 255, 255);
+const ICON_RECESS: u32 = rgb(42, 56, 65);
+const ICON_BEVEL: u32 = rgb(95, 117, 126);
+
+/// Fine cells author chamfers, raised light-facing edges and recessed panel
+/// grooves inside the old footprint. This runs once, never in the painter.
+fn detailed_icon(rows: &[&str]) -> PixelBody {
+    let source: Vec<Vec<char>> = rows.iter().map(|r| r.chars().collect()).collect();
+    let width = source.iter().map(Vec::len).max().unwrap_or(0);
+    let occupied = |x: isize, y: isize| {
+        x >= 0
+            && y >= 0
+            && source
+                .get(y as usize)
+                .and_then(|r| r.get(x as usize))
+                .is_some_and(|c| *c == '#' || *c == '+')
+    };
+    let mut detail = Vec::with_capacity(rows.len() * 2);
+    for y in 0..rows.len() * 2 {
+        let mut row = String::with_capacity(width * 2);
+        for x in 0..width * 2 {
+            let sx = (x / 2) as isize;
+            let sy = (y / 2) as isize;
+            if !occupied(sx, sy) {
+                row.push('.');
+                continue;
+            }
+            let left = !occupied(sx - 1, sy);
+            let right = !occupied(sx + 1, sy);
+            let top = !occupied(sx, sy - 1);
+            let bottom = !occupied(sx, sy + 1);
+            // A one-cell chamfer is actual silhouette geometry; inset hairline
+            // joins and bevels are opaque and cannot turn controls translucent.
+            let chamfer = (left && top && x % 2 == 0 && y % 2 == 0)
+                || (right && bottom && x % 2 == 1 && y % 2 == 1);
+            let shade = if chamfer {
+                '.'
+            } else if (left && x % 2 == 0) || (top && y % 2 == 0) {
+                'h'
+            } else if (right && x % 2 == 1) || (bottom && y % 2 == 1) {
+                's'
+            } else if source[sy as usize][sx as usize] == '+' {
+                'd'
+            } else if x % 8 == 3 && y % 2 == 1 {
+                'v'
+            } else {
+                '#'
+            };
+            row.push(shade);
+        }
+        detail.push(row);
+    }
+    let rows: Vec<_> = detail.iter().map(String::as_str).collect();
+    PixelBody::from_ascii(
+        &rows,
+        &[
+            ('#', WHITE),
+            ('h', ICON_EDGE),
+            ('s', ICON_BEVEL),
+            ('d', DIM),
+            ('v', ICON_RECESS),
+        ],
+    )
+}
 
 /// Semantic action colors are independent of transient hover and tab selection.
 fn button_accent(kind: &str) -> u32 {
@@ -153,20 +217,17 @@ impl FrameGeometry {
 static CELL: LazyLock<PixelBody> = LazyLock::new(|| PixelBody::from_ascii(&["#"], &[('#', WHITE)]));
 // Compact original control symbols are cached occupied objects, never text.
 static CLOSE_ICON: LazyLock<PixelBody> = LazyLock::new(|| {
-    PixelBody::from_ascii(
-        &[
-            "##.....##",
-            ".##...##.",
-            "..##.##..",
-            "...###...",
-            "....#....",
-            "...###...",
-            "..##.##..",
-            ".##...##.",
-            "##.....##",
-        ],
-        &[('#', WHITE)],
-    )
+    detailed_icon(&[
+        "##.....##",
+        ".##...##.",
+        "..##.##..",
+        "...###...",
+        "....#....",
+        "...###...",
+        "..##.##..",
+        ".##...##.",
+        "##.....##",
+    ])
 });
 static SAVE_ICONS: LazyLock<[PixelBody; 3]> = LazyLock::new(|| {
     [
@@ -204,23 +265,23 @@ static SAVE_ICONS: LazyLock<[PixelBody; 3]> = LazyLock::new(|| {
             "#########",
         ],
     ]
-    .map(|rows| PixelBody::from_ascii(&rows, &[('#', WHITE), ('+', DIM)]))
+    .map(|rows| detailed_icon(&rows))
 });
 // Authored gear, play, return arrow, home, power and menu silhouettes share the same
-// object-local control path as close/save. Each is a single cached 10×10 body.
+// object-local control path as close/save. Each is a cached detailed 20×20 body.
 static MENU_ICONS: LazyLock<[PixelBody; 7]> = LazyLock::new(|| {
     [
         [
-            "...####...",
-            "...#++#...",
-            ".###..###.",
-            "##.#..#.##",
-            "#..#..#..#",
-            "#..#..#..#",
-            "##.#..#.##",
-            ".###..###.",
-            "...#++#...",
-            "...####...",
+            "....##....",
+            ".##.##.##.",
+            ".########.",
+            "..##..##..",
+            "###....###",
+            "###....###",
+            "..##..##..",
+            ".########.",
+            ".##.##.##.",
+            "....##....",
         ],
         [
             "..#.......",
@@ -295,7 +356,7 @@ static MENU_ICONS: LazyLock<[PixelBody; 7]> = LazyLock::new(|| {
             ".###..###.",
         ],
     ]
-    .map(|rows| PixelBody::from_ascii(&rows, &[('#', WHITE), ('+', DIM)]))
+    .map(|rows| detailed_icon(&rows))
 });
 fn menu_icon(kind: &str) -> Option<(&'static PixelBody, u32)> {
     let (index, accent) = match kind {
@@ -878,6 +939,17 @@ impl Painter<'_> {
                     0
                 } else if node.disabled {
                     BUTTON_DISABLED_TEXT
+                } else if shade == ICON_EDGE {
+                    let [r, g, b, _] = accent.to_le_bytes();
+                    rgb(
+                        r.saturating_add(38),
+                        g.saturating_add(26),
+                        b.saturating_add(20),
+                    )
+                } else if shade == ICON_RECESS {
+                    button_tone(accent, 0.28)
+                } else if shade == ICON_BEVEL {
+                    button_tone(accent, 0.67)
                 } else if shade == DIM {
                     button_tone(accent, 0.52)
                 } else if node.active {

@@ -112,22 +112,82 @@ struct Art {
     pad: PixelBody,
     buildings: [PixelBody; 4],
 }
-static ART: LazyLock<Art> = LazyLock::new(|| {
-    let palette = [
-        ('s', 0),
-        ('b', 1),
-        ('a', 2),
-        ('w', 3),
-        ('l', 4),
-        ('t', 5),
-        ('p', 6),
-        ('q', 7),
-    ];
-    Art {
-        pad: PixelBody::from_ascii(PAD, &palette),
-        buildings: [UPGRADE, HANGAR, JOURNAL, CAMPAIGN]
-            .map(|rows| PixelBody::from_ascii(rows, &palette)),
+/// Fine object-local metalwork: chamfered corners, recessed vents, staggered
+/// fasteners and two-tone screens. The half-sized cells retain the world bounds.
+fn detail_building(rows: &[&str]) -> PixelBody {
+    let source: Vec<Vec<char>> = rows.iter().map(|r| r.chars().collect()).collect();
+    let width = source.iter().map(Vec::len).max().unwrap_or(0);
+    let sample = |x: isize, y: isize| {
+        if x < 0 || y < 0 {
+            return ' ';
+        }
+        source
+            .get(y as usize)
+            .and_then(|r| r.get(x as usize))
+            .copied()
+            .unwrap_or(' ')
+    };
+    let mut detail = Vec::with_capacity(rows.len() * 2);
+    for y in 0..rows.len() * 2 {
+        let mut row = String::with_capacity(width * 2);
+        for x in 0..width * 2 {
+            let sx = (x / 2) as isize;
+            let sy = (y / 2) as isize;
+            let original = sample(sx, sy);
+            if original == ' ' {
+                row.push(' ');
+                continue;
+            }
+            let left = sample(sx - 1, sy) == ' ';
+            let right = sample(sx + 1, sy) == ' ';
+            let top = sample(sx, sy - 1) == ' ';
+            let bottom = sample(sx, sy + 1) == ' ';
+            let shade = if (left && top && x % 2 == 0 && y % 2 == 0)
+                || (right && bottom && x % 2 == 1 && y % 2 == 1)
+            {
+                ' '
+            } else if (left && x % 2 == 0) || (top && y % 2 == 0) {
+                'h'
+            } else if (right && x % 2 == 1) || (bottom && y % 2 == 1) {
+                'd'
+            } else if original == 'b' && y % 6 == 3 {
+                'v'
+            } else if original == 'b' && x % 8 == 2 && y % 6 == 1 {
+                'r'
+            } else if original == 'l' && y % 2 == 0 {
+                'e'
+            } else if original == 'a' && x % 6 == 3 {
+                'd'
+            } else {
+                original
+            };
+            row.push(shade);
+        }
+        detail.push(row);
     }
+    let borrowed: Vec<_> = detail.iter().map(String::as_str).collect();
+    PixelBody::from_ascii(
+        &borrowed,
+        &[
+            ('s', 0),
+            ('b', 1),
+            ('a', 2),
+            ('w', 3),
+            ('l', 4),
+            ('t', 5),
+            ('p', 6),
+            ('q', 7),
+            ('h', 8),
+            ('d', 9),
+            ('v', 10),
+            ('r', 11),
+            ('e', 12),
+        ],
+    )
+}
+static ART: LazyLock<Art> = LazyLock::new(|| Art {
+    pad: detail_building(PAD),
+    buildings: [UPGRADE, HANGAR, JOURNAL, CAMPAIGN].map(detail_building),
 });
 
 pub(super) fn at(player: Vec2, point: Vec2, home_radius: f32) -> Option<u8> {
@@ -157,7 +217,12 @@ fn color(id: usize, shade: u32, time: f32) -> u32 {
         3 => (accent.map(|c| (c as f32 * 0.92) as u8), 255),
         4 | 5 => (accent.map(|c| (c as f32 * pulse) as u8), 255),
         6 => ([41, 47, 52], 125),
-        _ => ([27, 33, 38], 110),
+        7 => ([27, 33, 38], 110),
+        8 => ([160, 183, 183], 255),
+        9 => ([17, 27, 35], 255),
+        10 => ([31, 43, 52], 255),
+        11 => ([190, 173, 137], 255),
+        _ => (accent.map(|c| (c as f32 * pulse * 0.55) as u8), 255),
     };
     u32::from_le_bytes([rgb[0], rgb[1], rgb[2], alpha])
 }
@@ -181,7 +246,7 @@ pub(super) fn render(frame: &mut FrameBuilder, camera: Vec2, viewport: Vec2, tim
             &ART.pad,
             Transform {
                 position: center + Vec2::new(0.0, 8.0),
-                scale: Vec2::new(1.5, 1.0),
+                scale: Vec2::new(0.75, 0.5),
                 ..Transform::default()
             },
             PixelMaterial {
@@ -194,7 +259,7 @@ pub(super) fn render(frame: &mut FrameBuilder, camera: Vec2, viewport: Vec2, tim
             &ART.buildings[id],
             Transform {
                 position: center + Vec2::new(0.0, -3.0),
-                scale: Vec2::splat(1.1),
+                scale: Vec2::splat(0.55),
                 ..Transform::default()
             },
             PixelMaterial {
@@ -248,7 +313,10 @@ mod tests {
     #[test]
     fn authored_buildings_have_unique_live_cells_and_all_corners_fit_hit_radius() {
         for (id, body) in ART.buildings.iter().enumerate() {
-            assert!(body.occupied_count() > 100 && body.occupied_count() < 500);
+            assert!(body.occupied_count() > 400 && body.occupied_count() < 2000);
+            let shades: std::collections::HashSet<_> = body.cells().map(|(_, c)| c).collect();
+            assert!(shades.contains(&8) && shades.contains(&9));
+            assert!(shades.contains(&10) && shades.contains(&11));
             for (p, _) in body.cells() {
                 for corner in [
                     Vec2::splat(-0.5),
@@ -256,7 +324,7 @@ mod tests {
                     Vec2::splat(0.5),
                     Vec2::new(-0.5, 0.5),
                 ] {
-                    assert!(((p + corner) * 1.1 + Vec2::new(0.0, -3.0)).length() < HIT_RADIUS);
+                    assert!(((p + corner) * 0.55 + Vec2::new(0.0, -3.0)).length() < HIT_RADIUS);
                 }
             }
             for other in ART.buildings.iter().skip(id + 1) {
@@ -267,9 +335,14 @@ mod tests {
             }
         }
         for (p, _) in ART.pad.cells() {
-            for corner in [Vec2::splat(-0.5), Vec2::splat(0.5)] {
+            for corner in [
+                Vec2::splat(-0.5),
+                Vec2::new(0.5, -0.5),
+                Vec2::splat(0.5),
+                Vec2::new(-0.5, 0.5),
+            ] {
                 assert!(
-                    ((p + corner) * Vec2::new(1.5, 1.0) + Vec2::new(0.0, 8.0)).length()
+                    ((p + corner) * Vec2::new(0.75, 0.5) + Vec2::new(0.0, 8.0)).length()
                         < HIT_RADIUS
                 );
             }
@@ -283,7 +356,7 @@ mod tests {
             f.finish()
         };
         let a = draw(0.0, Vec2::ZERO);
-        assert!(a.pixel_count > 800 && a.pixel_count < 2500);
+        assert!(a.pixel_count > 3200 && a.pixel_count < 8000);
         assert_eq!(
             a.batches.iter().map(|b| b.transforms.len()).sum::<usize>(),
             8
