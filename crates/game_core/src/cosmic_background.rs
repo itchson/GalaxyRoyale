@@ -443,10 +443,28 @@ fn remnant_filament(p: Vec2) -> Option<usize> {
     ));
     let density = upper.max(lower).max(spur).max(interior);
     let cloud = art_noise(0x656a_6563, p);
-    if density < 0.07 || cloud < 0.18 {
+    // Filled uneven pockets accompany selected fragments rather than tracing
+    // every strand with an identical halo. Alpha bands are still hard native
+    // cells; no radial soft material, point light or new part is introduced.
+    let pocket = |center: Vec2, radius: Vec2| {
+        let distance = ((q - center) / radius).length();
+        smooth((1.0 - distance).clamp(0.0, 1.0))
+    };
+    let shoulders = pocket(Vec2::new(-18.0, -21.0), Vec2::new(6.0, 3.8))
+        .max(pocket(Vec2::new(-12.0, 15.0), Vec2::new(7.0, 4.0)))
+        .max(pocket(Vec2::new(20.0, -6.0), Vec2::new(5.2, 3.2)))
+        .max(pocket(Vec2::new(-3.0, 8.0), Vec2::new(5.0, 4.0)))
+        .max(pocket(Vec2::new(-9.0, -8.0), Vec2::new(4.5, 2.8)));
+    let grain = art_noise(0x6475_7374, p * 2.8);
+    let gas = shoulders * (0.68 + 0.32 * cloud) * (0.72 + 0.28 * grain);
+    if (density < 0.07 || cloud < 0.18) && gas < 0.065 {
         None
+    } else if density > 0.35 && cloud > 0.60 {
+        // Brighter fragments occur inside a few correlated knots. Most of the
+        // branch and its outskirts stay subdued instead of drawing long wires.
+        Some((3.0 + (density * 0.5 + cloud * 0.5 - 0.5) * 7.0).clamp(3.0, 7.0) as usize)
     } else {
-        Some(((density * 0.74 + cloud * 0.4) * 7.0).clamp(0.0, 7.0) as usize)
+        Some(((gas * 2.4 + density * 0.6 + cloud * 0.3) * 3.0).clamp(0.0, 3.0) as usize)
     }
 }
 
@@ -1319,6 +1337,48 @@ mod tests {
                 open_runs >= 3,
                 "remnant still reads as a rim with a single cut"
             );
+        }
+    }
+
+    #[test]
+    fn supernova_has_broad_faint_density_beside_sparse_bright_filaments() {
+        for reduced in [false, true] {
+            let body = ART.nova_shell.body(reduced);
+            let radius = if reduced { 1 } else { 2 };
+            let mut broad_centers = 0;
+            let mut faint = 0;
+            let mut bright = 0;
+            for (index, _, color) in body.cells_indexed() {
+                let alpha = color.to_le_bytes()[3];
+                faint += usize::from(alpha <= 23);
+                bright += usize::from(alpha >= 31);
+                let x = index % body.width;
+                let y = index / body.width;
+                if x < radius || y < radius {
+                    continue;
+                }
+                // Actual occupied low-alpha areas at least two world units
+                // across, not a string with a few dim edge cells. Both source
+                // grids must preserve broad density while leaving sky open.
+                if (y - radius..=y + radius).all(|yy| {
+                    (x - radius..=x + radius).all(|xx| {
+                        body.color_at(xx, yy)
+                            .is_some_and(|c| c.to_le_bytes()[3] <= 23)
+                    })
+                }) {
+                    broad_centers += 1;
+                }
+            }
+            eprintln!(
+                "Actual remnant density low{reduced}: {broad_centers} broad faint centers, {faint} faint / {bright} bright / {} total",
+                body.occupied_count()
+            );
+            assert!(
+                broad_centers >= if reduced { 6 } else { 24 },
+                "ejecta is bare contours without broad faint shoulders"
+            );
+            assert!(faint * 100 >= body.occupied_count() * 35);
+            assert!(bright * 100 <= body.occupied_count() * 35);
         }
     }
 
