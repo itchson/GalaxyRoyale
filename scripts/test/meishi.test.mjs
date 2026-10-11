@@ -279,26 +279,34 @@ test("corporate balances follow offense/defense/passive ledger order regardless 
   data.identity.corporation = "hugo";
   f.paint(f.target, data);
   const values = byClass(f, "meishi-points").map((node) => node.textContent);
-  assert.deepEqual(values, [
-    "RENKO / 13",
-    "HUGO / 29",
-    "PAN / 47",
-  ]);
+  assert.deepEqual(values, ["RENKO / 13", "HUGO / 29", "PAN / 47"]);
   data.currency = [2, 3, 5];
   assert.equal(f.paint(f.target, data), true);
   assert.equal(byClass(f, "meishi-points")[2].textContent, "PAN / 5");
-  assert.equal(byClass(f, "meishi-points")[2].getAttribute("aria-label"), "PAN / PASSIVE POINTS 5");
+  assert.equal(
+    byClass(f, "meishi-points")[2].getAttribute("aria-label"),
+    "PAN / PASSIVE POINTS 5",
+  );
 });
 
-test("selected RAICHO and effective equipped ranks refresh without inherited-rank or XP fabrication", () => {
+test("compact ship strip retains the selected RAICHO icon, name and authoritative level", () => {
   const f = fixture();
   const data = hud();
   f.paint(f.target, data);
   const icon = byClass(f, "meishi-ship-icon")[0];
   assert.equal(icon.dataset.pixelKind, "licensed-ship");
   assert.equal(icon.dataset.pixelValue, "0");
-  assert.match(byClass(f, "meishi-slot")[2].textContent, /R1$/);
-  assert.doesNotMatch(visibleText(f.target), /R5/);
+  assert.equal(byClass(f, "meishi-ship-name")[0].textContent, "PAN HIKARI");
+  const progress = byClass(f, "meishi-progress")[0];
+  assert.equal(progress.textContent, "LV 1");
+  assert.equal(progress.getAttribute("aria-label"), "RAICHO level 1");
+  assert.equal(
+    byClass(f, "meishi-raicho")[0].getAttribute("aria-label"),
+    "Current RAICHO",
+  );
+  for (const removed of ["meishi-vitals", "meishi-slot", "meishi-equipped"])
+    assert.equal(byClass(f, removed).length, 0);
+  assert.doesNotMatch(visibleText(f.target), /XP|HULL|SHIELD|FLUX DRIVE|R5/);
   data.campaign.selected_ship = 9;
   data.ship_xp = 0;
   data.hull = 21;
@@ -310,11 +318,75 @@ test("selected RAICHO and effective equipped ranks refresh without inherited-ran
     byClass(f, "meishi-ship-name")[0].textContent,
     "ROYALE SOVEREIGN",
   );
-  assert.match(byClass(f, "meishi-progress")[0].textContent, /LV 1 \/ XP 0/);
-  assert.match(byClass(f, "meishi-vitals")[0].textContent, /HULL 21\/100/);
-  data.loadout[2] = null;
+  assert.equal(byClass(f, "meishi-progress")[0], progress);
+  assert.equal(progress.textContent, "LV 1");
+  assert.equal(progress.getAttribute("aria-label"), "RAICHO level 1");
+  data.ship_level = 100;
   f.paint(f.target, data);
-  assert.equal(byClass(f, "meishi-slot")[2].textContent, "PASSIVE / EMPTY");
+  assert.equal(progress.textContent, "LV 100");
+  assert.equal(progress.getAttribute("aria-label"), "RAICHO level 100");
+  assert.doesNotMatch(visibleText(f.target), /XP|NEXT|HULL|SHIELD|FLUX DRIVE/);
+});
+
+test("card never reads removed live XP, vitals or loadout fields", () => {
+  const f = fixture(),
+    data = hud();
+  for (const key of [
+    "ship_xp",
+    "ship_next_xp",
+    "hull",
+    "max_hull",
+    "shield",
+    "max_shield",
+    "loadout",
+  ]) {
+    Object.defineProperty(data, key, {
+      enumerable: true,
+      get() {
+        throw new Error(`removed field read: ${key}`);
+      },
+    });
+  }
+  Object.freeze(data);
+  assert.equal(f.paint(f.target, data), true);
+  assert.equal(byClass(f, "meishi-progress")[0].textContent, "LV 1");
+  f.resetWrites();
+  assert.equal(f.paint(f.target, data), false);
+  assert.equal(f.writes(), 0);
+});
+
+test("only removed live fields changing leaves the card, focus and scroll untouched", () => {
+  const f = fixture(),
+    data = hud();
+  f.paint(f.target, data);
+  const before = all(f.target);
+  f.target.scrollTop = 117;
+  f.external.focus();
+  for (const changed of [
+    {
+      ship_xp: 999,
+      ship_next_xp: 1320,
+      hull: 1,
+      shield: 0,
+      loadout: [null, null, null],
+    },
+    {
+      ship_xp: NaN,
+      ship_next_xp: Infinity,
+      hull: 100,
+      max_hull: 150,
+      shield: 80,
+      max_shield: 90,
+      loadout: [data.loadout[2], null, null],
+    },
+  ]) {
+    f.resetWrites();
+    assert.equal(f.paint(f.target, { ...data, ...changed }), false);
+    assert.equal(f.writes(), 0);
+    assert.equal(f.target.scrollTop, 117);
+    assert.equal(f.document.activeElement, f.external);
+    all(f.target).forEach((node, index) => assert.equal(node, before[index]));
+  }
 });
 
 test("legacy and malformed identity do not relabel another portrait; invalid selected hull paints no art", () => {
@@ -338,18 +410,22 @@ test("legacy and malformed identity do not relabel another portrait; invalid sel
   );
 });
 
-test("nonfinite HUD numbers are displayed as unavailable, not positive progression", () => {
+test("invalid card level and point numbers are unavailable, not positive progression", () => {
   const f = fixture();
   const data = hud();
-  data.hull = Infinity;
-  data.ship_xp = NaN;
   data.currency = [-1, NaN, Infinity];
-  f.paint(f.target, data);
-  assert.match(byClass(f, "meishi-vitals")[0].textContent, /HULL --\/100/);
-  assert.match(byClass(f, "meishi-progress")[0].textContent, /XP --/);
-  byClass(f, "meishi-points").forEach((node) =>
-    assert.match(node.textContent, / --$/),
-  );
+  for (const level of [NaN, Infinity, -1]) {
+    data.ship_level = level;
+    f.paint(f.target, data);
+    assert.equal(byClass(f, "meishi-progress")[0].textContent, "LV --");
+    assert.equal(
+      byClass(f, "meishi-progress")[0].getAttribute("aria-label"),
+      "RAICHO level --",
+    );
+    byClass(f, "meishi-points").forEach((node) =>
+      assert.match(node.textContent, / --$/),
+    );
+  }
 });
 
 test("view source stays read-only while the card reflows without new animation loops", () => {
