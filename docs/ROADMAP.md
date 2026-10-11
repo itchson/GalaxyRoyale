@@ -10,7 +10,11 @@ Future player-owned docks will support upgrades to their protection radius and a
 
 ## Co-op and network authority
 
-Invite-based co-op remains backlog. A separate authority milestone must define shared world ownership, session/invite lifecycle, deterministic seeds, trusted simulation, synchronization of destruction and quest rewards, reconnect, and compatible profile versions. That milestone is also a prerequisite for multiplayer battle royale. No network service, co-op session or matchmaking has been accepted in the current slice.
+The accepted co-op direction is eight participants including the host. The central dock exposes Invite and Join; Invite creates an encrypted hexadecimal invitation, and Join resolves an available host session. Every guest uses the host's world seed and protected home dock. When the host quits or joins another world, the session ends and guests return to their own saved local worlds. Host migration is outside this milestone.
+
+WebRTC carries game traffic in a host-to-guest star. A small signaling service resolves invitations and negotiates connections; real cross-network acceptance additionally requires measured ICE/TURN configuration. Signaling and admission are under development. They do not yet implement shared gameplay. The Rust authority milestone must replace the current single-player assumptions with participant-owned input, bodies, projectile ownership, targeting, damage, rewards and local-save boundaries. Remote world state must never overwrite a participant's local world seed or identity. Pending participants count toward the eight-person limit. Version mismatch, expired codes, failed connections and host departure require explicit recovery tests.
+
+Acceptance requires actual simultaneous clients sharing movement, destructible cells, missions and single-claim rewards, followed by host departure and safe return to each local world. Reconnect and compatible progression transfer need their own tested rules. No playable co-op session, public signaling service or TURN deployment is accepted in the current slice. This authority milestone is also a prerequisite for multiplayer battle royale.
 
 ## Separate battle royale mode
 
