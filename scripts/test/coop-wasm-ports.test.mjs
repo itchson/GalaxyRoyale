@@ -238,3 +238,67 @@ test("unbounded or invalid native response envelopes never become successful ope
     replica.end();
   }
 });
+
+test("complete ef5b55b native operation recording maps through ports with no manufactured success replies", () => {
+  const provenance = fixture("native-replica-provenance");
+  assert.equal(provenance.commit, "ef5b55bd303b422aea6a2a93748370128839277c");
+  const raw = canonicalFixtureBytes(
+    readFileSync(
+      new URL(
+        `./fixtures/co-op-publication/${provenance.file}`,
+        import.meta.url,
+      ),
+    ),
+  );
+  assert.equal(raw.length, provenance.bytes);
+  assert.equal(
+    createHash("sha256").update(raw).digest("hex"),
+    provenance.sha256,
+  );
+  const actual = JSON.parse(raw);
+  assert.match(actual.scope, /not executed WASM\/browser wrapper/);
+  assert.equal(actual.operations.length, 9);
+  let index = 0;
+  const replica = createGalaxyCoopPorts({
+    co_op_replica(text) {
+      assert.ok(Buffer.byteLength(text) <= 65_536);
+      const recorded = actual.operations[index++];
+      assert.deepEqual(JSON.parse(text), recorded.request);
+      return JSON.stringify(recorded.response);
+    },
+  }).replica;
+  for (const { request: r } of actual.operations) {
+    switch (r.op) {
+      case "replica_begin":
+        assert.equal(
+          replica.begin(r.session, r.peer, r.epoch, r.world_seed),
+          true,
+        );
+        break;
+      case "replica_stage":
+        assert.equal(replica.stage(r.header), true);
+        break;
+      case "replica_entities":
+      case "replica_body":
+        assert.equal(replica.page(r.page), true);
+        break;
+      case "replica_commit":
+        assert.equal(replica.commit(r.acquisition, r.revision), true);
+        break;
+      case "replica_end":
+        replica.end();
+        break;
+      default:
+        assert.fail("Unknown recorded native operation");
+    }
+  }
+  assert.equal(index, actual.operations.length);
+  const header = actual.operations.find((o) => o.request.op === "replica_stage")
+    .request.header;
+  assert.equal(header.snapshot.participants.length, 2);
+  assert.equal(header.counts.entities, 3);
+  assert.equal(header.counts.occupied_cells, 1974);
+  assert.equal(header.counts.body_pages, 4);
+  // Native Result mapping is retained actual evidence. This Node process still
+  // does not instantiate Game, Replica, RTC or a generated Galaxy WASM module.
+});
