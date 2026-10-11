@@ -155,6 +155,9 @@
 .meishi-card .meishi-patch-caption {
   font-size: 11px;
   line-height: 1.25;
+  width: max-content;
+  max-width: 100%;
+  margin: 0 auto;
 }
 .meishi-card [hidden] {
   display: none;
@@ -183,7 +186,7 @@ body.pixel-ready .meishi-raicho {
   }
   .meishi-portrait-frame {
     width: 100px;
-    height: 128px;
+    height: 130px;
     padding: 5px;
   }
   .meishi-identity {
@@ -240,7 +243,7 @@ body.pixel-ready .meishi-raicho {
   }
   .meishi-portrait-frame {
     width: 112px;
-    height: 144px;
+    height: 146px;
     padding: 5px;
   }
   .meishi-seal {

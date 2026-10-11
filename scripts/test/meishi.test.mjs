@@ -280,13 +280,14 @@ test("corporate balances follow offense/defense/passive ledger order regardless 
   f.paint(f.target, data);
   const values = byClass(f, "meishi-points").map((node) => node.textContent);
   assert.deepEqual(values, [
-    "RENKO / OFFENSIVE 13",
-    "HUGO / DEFENSIVE 29",
-    "PAN / PASSIVE 47",
+    "RENKO / 13",
+    "HUGO / 29",
+    "PAN / 47",
   ]);
   data.currency = [2, 3, 5];
   assert.equal(f.paint(f.target, data), true);
-  assert.equal(byClass(f, "meishi-points")[2].textContent, "PAN / PASSIVE 5");
+  assert.equal(byClass(f, "meishi-points")[2].textContent, "PAN / 5");
+  assert.equal(byClass(f, "meishi-points")[2].getAttribute("aria-label"), "PAN / PASSIVE POINTS 5");
 });
 
 test("selected RAICHO and effective equipped ranks refresh without inherited-rank or XP fabrication", () => {

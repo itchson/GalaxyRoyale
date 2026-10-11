@@ -266,10 +266,11 @@ export function paintMeishiCard(target: HTMLElement, hud: MeishiHud): boolean {
     );
   });
   view.points.forEach((node, index) => {
-    write(
-      node,
-      `${["RENKO", "HUGO", "PAN"][index]} / ${["OFFENSIVE", "DEFENSIVE", "PASSIVE"][index]} ${number(hud.currency[index])}`,
-    );
+    const issuer = ["RENKO", "HUGO", "PAN"][index];
+    const role = ["OFFENSIVE", "DEFENSIVE", "PASSIVE"][index];
+    const balance = number(hud.currency[index]);
+    write(node, `${issuer} / ${balance}`);
+    attribute(node, "aria-label", `${issuer} / ${role} POINTS ${balance}`);
   });
 
   let count = 0;
