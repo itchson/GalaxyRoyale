@@ -1081,7 +1081,14 @@ pub(crate) fn draw_flight_status_animated(
             ..Transform::default()
         }
         .affine();
-        append_curved_vitals(ui.frame, parent, rect, presentation, colors, hud.max_shield);
+        append_curved_vitals(
+            ui.frame,
+            parent,
+            rect,
+            presentation,
+            colors,
+            [hud.max_hull, hud.max_shield],
+        );
     }
     draw_boss(&mut ui, hud, Vec2::from_array(layout.viewport), boss_panel);
 }
@@ -1092,11 +1099,14 @@ const VITALS_CLEARANCE: f32 = 5.0;
 const SHIELD_CHUNK_CAPACITY: f32 = 10.0;
 // Current valid profiles top out at 182 HP. Nineteen marks bound extraction work.
 const SHIELD_MAX_CHUNKS: usize = 19;
-const HULL_VITAL_MARKS: usize = 11;
+const HULL_CHUNK_CAPACITY: f32 = 20.0;
+// 100 base hull = five marks. Current fully upgraded Sovereign tops out at260.
+const HULL_MAX_CHUNKS: usize = 13;
+const VITAL_TRACK_MARKS: usize = 11;
 static VITAL_SEGMENT: LazyLock<PixelBody> =
     LazyLock::new(|| PixelBody::from_ascii(&[".#.", "###", "###"], &[('#', WHITE)]));
 
-/// The hull keeps 11 marks. Shield marks each represent 10 capacity points,
+/// Hull marks represent20HP; shield marks represent10 capacity points,
 /// with the last capacity/charge slice kept fractional. Marks above 11 compress
 /// their whole horizontal field together, retaining gaps in the same envelope.
 fn append_curved_vitals(
@@ -1105,7 +1115,7 @@ fn append_curved_vitals(
     rect: [f32; 4],
     presentation: VitalsPresentation,
     colors: [u32; 2],
-    max_shield: f32,
+    capacities: [f32; 2],
 ) {
     if rect.iter().any(|v| !v.is_finite()) || rect[2] <= 0.0 || rect[3] <= 0.0 {
         return;
@@ -1137,22 +1147,22 @@ fn append_curved_vitals(
             },
         )
     };
-    let shield_units = if max_shield.is_finite() && max_shield > 0.0 {
-        (max_shield / SHIELD_CHUNK_CAPACITY).min(SHIELD_MAX_CHUNKS as f32)
-    } else {
-        0.0
-    };
     for (row, &color) in colors.iter().enumerate() {
-        let units = if row == 0 {
-            HULL_VITAL_MARKS as f32
+        let (chunk, limit) = if row == 0 {
+            (HULL_CHUNK_CAPACITY, HULL_MAX_CHUNKS)
         } else {
-            shield_units
+            (SHIELD_CHUNK_CAPACITY, SHIELD_MAX_CHUNKS)
+        };
+        let units = if capacities[row].is_finite() && capacities[row] > 0.0 {
+            (capacities[row] / chunk).min(limit as f32)
+        } else {
+            0.0
         };
         let count = units.ceil() as usize;
         if count == 0 {
             continue;
         }
-        let horizontal_scale = (HULL_VITAL_MARKS as f32 / count as f32).min(1.0);
+        let horizontal_scale = (VITAL_TRACK_MARKS as f32 / count as f32).min(1.0);
         let span = (count as f32 * 4.0 - 1.0) * horizontal_scale;
         let track = group.compose(
             Transform {
@@ -1165,18 +1175,13 @@ fn append_curved_vitals(
         let fill = fraction(presentation.fill[row]);
         let trail = fraction(presentation.trail[row]).max(fill);
         for index in 0..count {
-            let y = if row == 0 {
-                index.min(count - 1 - index).min(4) as f32
-            } else {
-                // Follow the existing hull curve at this physical horizontal
-                // slot. A shorter independent arc would overlap its middle.
-                let x =
-                    (VITALS_SIZE[0] - span) * 0.5 + (index as f32 * 4.0 + 1.5) * horizontal_scale;
-                let hull_slot = (x - 2.0) / 4.0;
-                hull_slot
-                    .min(HULL_VITAL_MARKS as f32 - 1.0 - hull_slot)
-                    .clamp(0.0, 4.0)
-            };
+            // Both tracks follow the same physical arc even when their
+            // capacity differs; growing either track cannot cross the other.
+            let x = (VITALS_SIZE[0] - span) * 0.5 + (index as f32 * 4.0 + 1.5) * horizontal_scale;
+            let slot = (x - 2.0) / 4.0;
+            let y = slot
+                .min(VITAL_TRACK_MARKS as f32 - 1.0 - slot)
+                .clamp(0.0, 4.0);
             let segment = track.compose(
                 Transform {
                     position: Vec2::new(index as f32 * 4.0 + 1.5, y + 1.5),

@@ -38,7 +38,7 @@ fn draw(capacity: f32, fill: f32, trail: f32) -> FrameBuilder {
             trail: [1.0, trail],
         },
         [MINT, CYAN],
-        capacity,
+        [220.0, capacity],
     );
     frame
 }
@@ -56,6 +56,7 @@ fn shield_active_right(frame: &FrameBuilder) -> f32 {
 fn actual_hud_draw_uses_three_base_capacity_marks_and_preserves_hull_cells() {
     let mut hud = game_core::Game::new(game_core::Profile::default()).hud();
     hud.dock = false;
+    hud.max_hull = 220.0;
     hud.hull = hud.max_hull;
     hud.max_shield = 30.0;
     hud.shield = 30.0;
@@ -179,7 +180,7 @@ fn valid_capacity_extremes_have_clear_gaps_and_bounded_nested_affine_corners() {
                 trail: [1.0; 2],
             },
             [MINT, CYAN],
-            capacity,
+            [220.0, capacity],
         );
         assert!(frame.frame().pixel_count <= 420);
         assert_eq!(frame.frame().batches.len(), 1);
@@ -322,4 +323,102 @@ fn shorter_and_compressed_shield_tracks_never_overlap_actual_hull_cells() {
             }
         }
     }
+}
+
+#[test]
+fn starter_hull_is_five_capacity_marks_and_upgrades_add_real_capacity() {
+    let mut hud = game_core::Game::new(game_core::Profile::default()).hud();
+    assert_eq!(hud.max_hull, 100.0);
+    hud.dock = false;
+    let render = |capacity, fill| {
+        let mut f = FrameBuilder::new();
+        append_curved_vitals(
+            &mut f,
+            AffineTransform::default(),
+            [0.0, 0.0, 44.0, 12.0],
+            VitalsPresentation {
+                fill: [fill, 1.0],
+                trail: [fill, 1.0],
+            },
+            [MINT, CYAN],
+            [capacity, 0.0],
+        );
+        f
+    };
+    // Five seven-cell silhouettes, with capacity and charge passes.
+    let base = render(hud.max_hull, 1.0);
+    assert_eq!(base.frame().pixel_count, 5 * 7 * 2);
+    let capacity_cells = |f: &FrameBuilder| {
+        packet(f)
+            .into_iter()
+            .filter(|p| p.0 >> 24 == 0x90)
+            .collect::<Vec<_>>()
+    };
+    assert_eq!(capacity_cells(&base).len(), 35);
+    let upgraded = render(120.0, 1.0);
+    assert_eq!(capacity_cells(&upgraded).len(), 42);
+    let partial_upgrade = render(115.0, 1.0);
+    let partial_damage = render(115.0, 109.0 / 115.0);
+    assert_eq!(
+        capacity_cells(&partial_upgrade),
+        capacity_cells(&partial_damage)
+    );
+    assert_ne!(packet(&partial_upgrade), packet(&partial_damage));
+    assert_ne!(packet(&render(115.0, 0.599)), packet(&render(115.0, 0.601)));
+
+    // Current thirteen-chunk hull maximum remains under the same layout and
+    // batching envelope, with no interaction or world-zoom dependence.
+    for hull in [100.0, 115.0, 130.0, 175.0, 220.0, 260.0, f32::MAX] {
+        let mut f = FrameBuilder::new();
+        append_curved_vitals(
+            &mut f,
+            AffineTransform::default(),
+            [0.0, 0.0, 44.0, 12.0],
+            VitalsPresentation {
+                fill: [0.43, 0.37],
+                trail: [1.0; 2],
+            },
+            [MINT, CYAN],
+            [hull, 182.0],
+        );
+        assert_eq!(f.frame().batches.len(), 1);
+        assert!(f.frame().pixel_count <= 460);
+        assert!(packet(&f).iter().flat_map(|p| p.1).all(|p| p.is_finite()
+            && p.x >= 0.0
+            && p.x <= 44.0
+            && p.y >= 0.0
+            && p.y <= 12.0));
+    }
+    assert_eq!(packet(&render(260.0, 1.0)), packet(&render(f32::MAX, 1.0)));
+}
+
+#[test]
+fn actual_default_hud_draw_has_five_hull_chunks_and_three_shield_chunks() {
+    let mut hud = game_core::Game::new(game_core::Profile::default()).hud();
+    hud.dock = false;
+    assert_eq!([hud.max_hull, hud.max_shield], [100.0, 30.0]);
+    let layout = FlightStatusLayout {
+        viewport: [533.0, 300.0],
+        vitals: Some([0.0, 0.0, 44.0, 12.0]),
+        strip: None,
+        stats: None,
+        context: None,
+        navigation: None,
+    };
+    let mut f = FrameBuilder::new();
+    draw_flight_status(
+        &mut f,
+        &hud,
+        [266.5, 150.0],
+        &layout,
+        None,
+        0.0,
+        true,
+        false,
+    );
+    assert_eq!(f.frame().pixel_count, (5 + 3) * 7 * 2);
+    assert_eq!(
+        packet(&f).iter().filter(|p| p.0 >> 24 == 0x90).count(),
+        (5 + 3) * 7
+    );
 }
