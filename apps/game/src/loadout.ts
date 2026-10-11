@@ -156,7 +156,12 @@ function rank(
 }
 function categoryHeading(category: number, points: number): HTMLElement {
   const heading = section(`upgrade-category ${colors[category]}`);
-  heading.append(text("p", `${categories[category]} / ${points} MEISHI`));
+  heading.append(
+    text(
+      "p",
+      `${categories[category]} / ${points} ${["RENKO", "HUGO", "PAN"][category]} POINTS`,
+    ),
+  );
   return heading;
 }
 function filters<T extends string>(
@@ -203,7 +208,7 @@ function recipe(
   box.append(
     text(
       "p",
-      `${categories[category]} MEISHI ${pointCost} / HAVE ${hud.currency[category] ?? 0}`,
+      `${["RENKO", "HUGO", "PAN"][category]} POINTS ${pointCost} / HAVE ${hud.currency[category] ?? 0}`,
     ),
   );
   box.append(

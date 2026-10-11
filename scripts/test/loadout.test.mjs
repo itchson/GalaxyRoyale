@@ -332,7 +332,7 @@ test("actual HUD repaint preserves category, while ship change/reset returns ove
   f.exports.paintForge(f.target, updated, f.actions);
   assert.ok(f.find("back"));
   assert.equal(f.target.scrollTop, 77);
-  assert.match(allText(f.target), /PASSIVE MEISHI 3 \/ HAVE 50/);
+  assert.match(allText(f.target), /PAN POINTS 3 \/ HAVE 50/);
   updated.campaign.selected_ship = 1;
   updated.ship_level = 1;
   updated.ship_xp = 0;
@@ -608,7 +608,7 @@ test("hull filters keep found, owned and earned blueprint states distinct and pr
   assert.match(allText(f.target), /HULL COLLECTION/);
   assert.match(allText(f.target), /4 FOUND \/ 2 OWNED/);
   assert.match(allText(f.target), /FOUND \/ BLUEPRINT REQUIRED/);
-  assert.match(allText(f.target), /OFFENSIVE MEISHI 10 \/ HAVE 3/);
+  assert.match(allText(f.target), /RENKO POINTS 10 \/ HAVE 3/);
   assert.match(allText(f.target), /T1 MATERIALS 6 \/ BANKED 2/);
   assert.doesNotMatch(
     allText(f.target),
@@ -673,7 +673,7 @@ test("collection costs and level requirements remain supplied by the HUD, includ
   f.exports.paintForge(f.target, h, f.actions);
   f.find("manage-1").events.click();
   assert.match(allText(f.target), /REQUIRES RAICHO LV 10/);
-  assert.match(allText(f.target), /DEFENSIVE MEISHI 17 \/ HAVE 4/);
+  assert.match(allText(f.target), /HUGO POINTS 17 \/ HAVE 4/);
   assert.match(allText(f.target), /T3 MATERIALS 4 \/ BANKED 0/);
   assert.equal(f.find("craft-ability-1").disabled, true);
 });

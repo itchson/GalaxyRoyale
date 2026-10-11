@@ -459,7 +459,7 @@ test("real Forge category survives successful repaint while a fresh open resets 
   );
   assert.match(
     contents(f.element("upgrade-content")),
-    /OFFENSIVE MEISHI 3 \/ HAVE 0/,
+    /RENKO POINTS 3 \/ HAVE 0/,
   );
   f.c.openMenu("upgrades");
   assert.equal(f.action("back"), undefined);

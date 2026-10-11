@@ -1,4 +1,7 @@
 .meishi-card {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
   min-width: 0;
   max-width: 100%;
   padding: min(12px, calc(6px * var(--ui-scale, 1)));
@@ -49,9 +52,7 @@
   grid-template-columns: auto minmax(0, 1fr);
   align-items: center;
   gap: 8px 12px;
-  margin-top: 12px;
-  padding-top: 8px;
-  border-top: 1px solid #263d50;
+  margin-top: 0;
 }
 .meishi-ship-icon {
   width: calc(32px * var(--ui-scale, 1));
@@ -68,15 +69,17 @@
   color: inherit;
 }
 .meishi-balances {
+  grid-column: 1 / -1;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px;
-  margin-top: 12px;
+  margin-top: 0;
   padding-top: 8px;
   border-top: 1px solid #263d50;
 }
 .meishi-patches {
-  margin-top: 12px;
+  grid-column: 1 / -1;
+  margin-top: 0;
   padding-top: 8px;
   border-top: 1px solid #263d50;
 }
@@ -125,6 +128,9 @@ body.pixel-ready .meishi-card {
   }
 }
 @media (max-width: 480px) {
+  .meishi-card {
+    grid-template-columns: minmax(0, 1fr);
+  }
   .meishi-portrait {
     width: 72px;
     height: 96px;
@@ -134,5 +140,11 @@ body.pixel-ready .meishi-card {
   }
   .meishi-patch-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-height: 500px) {
+  .meishi-portrait {
+    width: 72px;
+    height: 96px;
   }
 }
