@@ -2270,3 +2270,7 @@ mod facility_label_tests;
 #[cfg(test)]
 #[path = "ui_settings_tests.rs"]
 mod settings_tests;
+
+#[cfg(test)]
+#[path = "ui_kikai_integration_tests.rs"]
+mod kikai_integration_tests;

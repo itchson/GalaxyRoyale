@@ -86,9 +86,12 @@ fn same(a: &RenderFrame, b: &RenderFrame) {
 
 #[test]
 fn map_icon_and_six_biome_objects_are_cached_distinct_unlit_masks() {
-    let (body, _) = menu_icon("map-icon").unwrap();
-    assert_eq!((body.width, body.height), (24, 24));
-    assert!(std::ptr::eq(body, menu_icon("map-icon").unwrap().0));
+    let body = crate::kikai_art::icon("map-icon").unwrap();
+    assert_eq!((body.width, body.height), (32, 32));
+    assert!(std::ptr::eq(
+        body,
+        crate::kikai_art::icon("map-icon").unwrap()
+    ));
     assert!(body.is_occupied(2, 8) && !body.is_occupied(0, 0));
     let mut masks = std::collections::HashSet::new();
     for (kind, body) in MAP_SITES.iter().enumerate() {
@@ -337,7 +340,7 @@ fn sixty_four_markers_and_six_rings_stay_bounded_and_oversize_input_cannot_leak_
             .sum::<usize>(),
         frame.batches.len(),
         MAP_SITES.each_ref().map(|b| b.occupied_count()),
-        menu_icon("map-icon").unwrap().0.occupied_count()
+        crate::kikai_art::icon("map-icon").unwrap().occupied_count()
     );
     assert!(frame.pixel_count < 10_000);
     assert!(frame.batches.iter().all(|b| {
