@@ -120,7 +120,55 @@
       "open",
       "smile"
     ],
-    "role_selection": "Reviewed head-only green hair/red crystals; no neck or eyebrow recolor"
+    "role_selection": "Explicit crystal regions and seeded saturated-facet masks; facial skin, eyebrows and neck protected",
+    "corporate_regions": {
+      "gems": [
+        [
+          [
+            47,
+            2,
+            68,
+            73
+          ],
+          [
+            49,
+            20
+          ]
+        ],
+        [
+          [
+            109,
+            2,
+            129,
+            75
+          ],
+          [
+            127,
+            4
+          ]
+        ]
+      ],
+      "eyebrows": [
+        [
+          59,
+          94,
+          91,
+          117
+        ],
+        [
+          99,
+          92,
+          132,
+          114
+        ]
+      ],
+      "neck": [
+        60,
+        145,
+        134,
+        256
+      ]
+    }
   },
   "exact_import": "asset-pack imports authored binary-alpha PNGs with provided palette; no resize or removed components",
   "runtime_boundary": "Host selects cached layers and corporate colors; metadata alone does not animate"

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "observed_at_utc": "2026-10-11T07:17:51Z",
+  "observed_at_utc": "2026-10-11T07:29:33Z",
   "scope": "Actual authoring/import Python checks; no native renderer, browser, listening or physical-device acceptance.",
   "environment": {
     "python": "3.12.14",
@@ -15,15 +15,15 @@
     {
       "command": "python scripts/asset-kikai-detail-tests.py",
       "exit_code": 0,
-      "tests": 12,
+      "tests": 13,
       "failures": 0,
-      "duration_seconds": 14.678
+      "duration_seconds": 17.454
     }
   ],
   "runtime_atlas": {
     "path": "assets/ui/kikai/detail/atlas.json",
-    "sha256": "03b2651c77f6164c9261b880e407ba333318f67e4e3b1155248edca033e0db95",
-    "bytes": 3252935,
+    "sha256": "31fa6a1b04d83f3d5fad377562e73c6ad35530b028626a1136c5b56afd9ea661",
+    "bytes": 3247005,
     "encoding": "UTF-8 compact JSON separators(',',':') with final LF",
     "profiles": {
       "dora": 34594,
@@ -48,5 +48,39 @@
     "cells_palette_roles_and_other_metadata_equal": true,
     "only_changed_metadata_key": "manifest_sha256",
     "policy": "Canonical LF before manifest hashing and at Git checkout"
+  },
+  "prior_observation": {
+    "observed_at_utc": "2026-10-11T07:17:51Z",
+    "atlas_sha256": "03b2651c77f6164c9261b880e407ba333318f67e4e3b1155248edca033e0db95",
+    "tests": 12,
+    "scope": "Initial192 pack before normalWebGPU forehead-mask finding"
+  },
+  "mask_repair": {
+    "finding": "Actual WebGPU TALO-RENKO-HUGO blueforehead andDORO-HUGO-PAN greenforehead inRoot captures",
+    "baseline_commit": "01aa5b5",
+    "actual_git_blob_comparison_exit_code": 0,
+    "all_palette_and_sprite_cells_equal": true,
+    "hair_masks_equal": true,
+    "current_horn_roles": {
+      "dora": 942,
+      "doro": 864,
+      "talo": 1009
+    },
+    "current_signal_roles": {
+      "dora": 737,
+      "doro": 621,
+      "talo": 664
+    },
+    "known_skin_probe": [
+      105,
+      80
+    ],
+    "all9_static_main_sub_forehead_colors_checked": true,
+    "native_browser_retest": "Pending Root normal rebuild"
+  },
+  "corporate_role_review": {
+    "path": "assets/ui/kikai/detail/corporate-role-review.png",
+    "sha256": "feb39aa56110bb1d48fc798207fabdc55224e6a92707b3a4107223b2f878f7a6",
+    "scope": "Python software static color-role preview, not native/GPU"
   }
 }

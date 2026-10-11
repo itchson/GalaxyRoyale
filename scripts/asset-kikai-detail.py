@@ -44,6 +44,19 @@ AUTHORING = {
              "lip": (94, 141), "hair_top": 90, "hair_sides": (59, 132, 124),
              "fringe": (76, 98, 91)},
 }
+# Spatially reviewed regions in the committed192-grid anatomy. Hue alone
+# cannot distinguish warm forehead skin from red KESSHO crystal facets.
+CORPORATE_REGIONS = {
+    "dora": {"gems": [((42, 0, 65, 78), (45, 20)), ((101, 0, 123, 78), (119, 1))],
+             "eyebrows": [(52, 103, 82, 126), (96, 99, 129, 121)],
+             "neck": (60, 158, 130, 256)},
+    "doro": {"gems": [((47, 2, 68, 73), (49, 20)), ((109, 2, 129, 75), (127, 4))],
+             "eyebrows": [(59, 94, 91, 117), (99, 92, 132, 114)],
+             "neck": (60, 145, 134, 256)},
+    "talo": {"gems": [((47, 1, 70, 77), (49, 20)), ((110, 1, 131, 78), (128, 5))],
+             "eyebrows": [(57, 104, 86, 124), (100, 101, 133, 121)],
+             "neck": (59, 155, 134, 256)},
+}
 
 
 def sha(path):
@@ -210,18 +223,58 @@ def portrait_layers(base, kind):
 
 def portrait_roles(body, kind):
     layout = AUTHORING[kind]
+    regions = CORPORATE_REGIONS[kind]
     hair, horns, signals = [], [], []
     left, right, side_bottom = layout["hair_sides"]
     fringe_left, fringe_right, fringe_bottom = layout["fringe"]
+
+    def inside(x, y, rect):
+        return rect[0] <= x < rect[2] and rect[1] <= y < rect[3]
+
+    def protected(x, y, color):
+        r, g, b, _ = color
+        # Warm skin is tested only within the facial anatomy, not across
+        # ivory armor or neutral bright crystal highlights elsewhere.
+        facial_skin = inside(x, y, (52, 70, 136, 175)) and r > 150 and g > 100 and b > 80 and r >= g >= b
+        return (facial_skin or any(inside(x, y, rect) for rect in regions["eyebrows"])
+                or inside(x, y, regions["neck"]))
+
+    # Keep only saturated facets connected to each declared crystal seed,
+    # within its explicit spatial region. Forehead clusters cannot join the
+    # role just because their pale warm RGB satisfies a loose red threshold.
+    gem_cells = set()
+    for rect, seed in regions["gems"]:
+        candidates = set()
+        for y in range(rect[1], rect[3]):
+            for x in range(rect[0], rect[2]):
+                color = body.getpixel((x, y))
+                r, g, b, a = color
+                if a and not protected(x, y, color) and r > g + 20 and r > b + 10 and r > g * 1.5:
+                    candidates.add(y * WIDTH + x)
+        start = seed[1] * WIDTH + seed[0]
+        if start not in candidates:
+            raise ValueError(f"{kind}: reviewed crystal seed is not a saturated occupied facet")
+        pending, selected = [start], {start}
+        while pending:
+            index = pending.pop()
+            x, y = index % WIDTH, index // WIDTH
+            for dy in (-1, 0, 1):
+                for dx in (-1, 0, 1):
+                    neighbor = (y + dy) * WIDTH + x + dx
+                    if 0 <= x + dx < WIDTH and 0 <= y + dy < HEIGHT and neighbor in candidates and neighbor not in selected:
+                        selected.add(neighbor)
+                        pending.append(neighbor)
+        gem_cells.update(selected)
+
     for i, (r, g, b, a) in enumerate(body.get_flattened_data()):
         if not a:
             continue
         x, y = i % WIDTH, i // WIDTH
         head_region = (y < layout["hair_top"] or (y < side_bottom and (x < left or x >= right))
                        or (fringe_left <= x < fringe_right and y < fringe_bottom))
-        if head_region and g > r + 3 and g > b + 2:
+        if head_region and not protected(x, y, (r, g, b, a)) and g > r + 3 and g > b + 2:
             hair.append(i)
-        if y < 85 and r > g + 20 and r > b + 10:
+        if i in gem_cells:
             horns.append(i)
             if r > 170 and r > g * 2 and r > b * 1.5:
                 signals.append(i)
@@ -233,6 +286,29 @@ def compose(layers, eyes="neutral", mouth="rest"):
     result = layers["body"].copy()
     result.alpha_composite(layers[f"eyes_{eyes}"])
     result.alpha_composite(layers[f"mouth_{mouth}"])
+    return result
+
+
+def corporate_preview(atlas, main, sub):
+    """Offline role review with the native static color formulas; no GPU claim."""
+    sprites, palette, roles = atlas["sprites"], atlas["palette"], atlas["portrait_roles"]
+    hair, horns = set(roles["hair_cells"]), set(roles["horn_cells"])
+    result = Image.new("RGBA", (WIDTH, HEIGHT))
+    colors = []
+    for index, (a, b, c) in enumerate(zip(sprites["body"]["indices"], sprites["eyes_neutral"]["indices"], sprites["mouth_rest"]["indices"])):
+        r, g, b, alpha = pack.rgba(palette[a or b or c])
+        if index in hair:
+            if main == "RENKO":
+                r, g, b = g, (r + b) * 3 // 10, b * 4 // 5
+            elif main == "HUGO":
+                r, g, b = b * 7 // 25, (r * 13 + g * 6) // 20, g
+        if index in horns:
+            if sub == "PAN":
+                r, g, b = g * 4 // 5, r, b * 4 // 5
+            elif sub == "HUGO":
+                r, g, b = b * 4 // 5, g * 4 // 5, r
+        colors.append((r, g, b, alpha))
+    result.putdata(colors)
     return result
 
 
@@ -295,7 +371,8 @@ def author(output):
                       "manual_authoring": {"facial_patches": AUTHORING[kind],
                                            "fine_feature_line_width": 1, "neutral_reference_iris_retained": True,
                                            "expression_states": list(EYE_STATES), "mouth_states": list(MOUTH_STATES),
-                                           "role_selection": "Reviewed head-only green hair/red crystals; no neck or eyebrow recolor"},
+                                           "role_selection": "Explicit crystal regions and seeded saturated-facet masks; facial skin, eyebrows and neck protected",
+                                           "corporate_regions": CORPORATE_REGIONS[kind]},
                       "exact_import": "asset-pack imports authored binary-alpha PNGs with provided palette; no resize or removed components",
                       "runtime_boundary": "Host selects cached layers and corporate colors; metadata alone does not animate"}
         manifest = {"schema": 1, "palette": {"mode": "provided", "max_colors": 64, "colors": palette},
@@ -342,6 +419,15 @@ def author(output):
         enlarged = images[0].resize((384, 512), Image.Resampling.NEAREST)
         overview.paste(enlarged, (x, 24), enlarged)
     overview.save(output / "authoring-overview.png")
+    role_review = Image.new("RGB", (3 * 400, 3 * 544), (5, 11, 18))
+    draw = ImageDraw.Draw(role_review)
+    for row, (main, sub) in enumerate((("PAN", "RENKO"), ("HUGO", "PAN"), ("RENKO", "HUGO"))):
+        for column, (kind, atlas) in enumerate(profiles.items()):
+            x, y = column * 400 + 8, row * 544 + 24
+            draw.text((x, y - 18), f"{kind.upper()} / {main} hair / {sub} horns / software roles", fill=(179, 217, 229))
+            image = corporate_preview(atlas, main, sub).resize((384, 512), Image.Resampling.NEAREST)
+            role_review.paste(image, (x, y), image)
+    role_review.save(output / "corporate-role-review.png")
     return result, summaries
 
 

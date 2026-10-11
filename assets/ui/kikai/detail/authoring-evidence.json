@@ -11,8 +11,8 @@
       "mouth_cells": 414,
       "role_cells": {
         "hair_cells": 14556,
-        "horn_cells": 1139,
-        "signal_cells": 740
+        "horn_cells": 942,
+        "signal_cells": 737
       },
       "transforms": 3,
       "max_portrait_submissions": 34594
@@ -25,8 +25,8 @@
       "mouth_cells": 504,
       "role_cells": {
         "hair_cells": 6015,
-        "horn_cells": 1219,
-        "signal_cells": 622
+        "horn_cells": 864,
+        "signal_cells": 621
       },
       "transforms": 3,
       "max_portrait_submissions": 28524
@@ -39,7 +39,7 @@
       "mouth_cells": 504,
       "role_cells": {
         "hair_cells": 3814,
-        "horn_cells": 1567,
+        "horn_cells": 1009,
         "signal_cells": 664
       },
       "transforms": 3,

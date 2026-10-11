@@ -59,7 +59,7 @@ class DetailArtTests(unittest.TestCase):
             self.assertEqual(atlas["asset_metadata"], checked["profiles"][kind]["asset_metadata"])
         evidence = json.loads((ROOT / "assets/ui/kikai/detail/authoring-evidence.json").read_text(encoding="utf-8"))
         self.assertEqual(evidence["profiles"], self.summary)
-        for filename in ("authoring-overview.png", "authoring-contact-sheet.png"):
+        for filename in ("authoring-overview.png", "authoring-contact-sheet.png", "corporate-role-review.png"):
             self.assertEqual(detail.sha(self.output / filename), detail.sha(ROOT / "assets/ui/kikai/detail" / filename))
 
     def test_authored_png_import_and_indexed_png_roundtrip_preserve_every_cell(self):
@@ -154,7 +154,7 @@ class DetailArtTests(unittest.TestCase):
             self.assertFalse(hair & horns)
             self.assertTrue(signals <= horns)
             self.assertGreater(len(hair), 3000)
-            self.assertGreater(len(horns), 1000)
+            self.assertGreater(len(horns), 700)
             for index in hair:
                 r, g, b, a = detail.pack.rgba(palette[body[index]])
                 self.assertGreater(g, r + 3)
@@ -165,6 +165,32 @@ class DetailArtTests(unittest.TestCase):
                 self.assertGreater(r, g + 20)
                 self.assertGreater(r, b + 10)
                 self.assertLess(index // 192, 85)
+
+    def test_actual_forehead_skin_never_inherits_corporate_color_and_crystals_still_do(self):
+        # Coordinates are the actual fixed192 anatomy observed in Root's
+        # TALO-RENKO-HUGO and DORO-HUGO-PAN WebGPU failures, not a generic y cap.
+        skin = {"dora": [((105, 80), (246, 214, 192, 255))],
+                "doro": [((105, 80), (249, 216, 189, 255)), ((115, 75), (249, 216, 189, 255))],
+                "talo": [((105, 80), (250, 217, 194, 255)), ((75, 84), (249, 218, 196, 255))]}
+        crystals = {"dora": [(45, 20), (58, 50)],
+                    "doro": [(49, 20), (62, 50)], "talo": [(49, 20), (59, 40)]}
+        for kind, atlas in self.atlas["profiles"].items():
+            body, palette, roles = atlas["sprites"]["body"]["indices"], atlas["palette"], atlas["portrait_roles"]
+            hair, horns, signals = [set(roles[k]) for k in ("hair_cells", "horn_cells", "signal_cells")]
+            for (x, y), expected in skin[kind]:
+                index = y * 192 + x
+                self.assertEqual(detail.pack.rgba(palette[body[index]]), expected)
+                self.assertNotIn(index, hair | horns | signals, f"{kind} forehead skin must retain its source color")
+                for main in ("PAN", "RENKO", "HUGO"):
+                    for sub in ("PAN", "RENKO", "HUGO"):
+                        self.assertEqual(detail.corporate_preview(atlas, main, sub).getpixel((x, y)), expected)
+            for x, y in crystals[kind]:
+                self.assertIn(y * 192 + x, horns, f"{kind} real crystal facet must still recolor")
+            # All authored eye/eyebrow/mouth cells and the central neck region
+            # stay outside the body-owned color masks, including future hues.
+            for rect in detail.CORPORATE_REGIONS[kind]["eyebrows"] + [detail.CORPORATE_REGIONS[kind]["neck"]]:
+                self.assertFalse(any(y * 192 + x in hair | horns | signals
+                                     for y in range(rect[1], rect[3]) for x in range(rect[0], rect[2])))
 
     def test_binary_alpha_palette_and_49152_cell_bound_are_exact(self):
         self.assertEqual({kind: summary["composed_occupied_cells"] for kind, summary in self.summary.items()},

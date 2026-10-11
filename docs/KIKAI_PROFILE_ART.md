@@ -47,14 +47,26 @@ every authored index and palette entry.
 
 | Type | Body | Eyes | Mouth | Total occupied cells | Palette entries | Hair / horn / signal roles |
 | --- | ---: | ---: | ---: | ---: | ---: | --- |
-| DORA | 32,764 | 1,416 | 414 | 34,594 | 63 | 14,556 / 1,139 / 740 |
-| DORO | 26,558 | 1,462 | 504 | 28,524 | 61 | 6,015 / 1,219 / 622 |
-| TALO | 22,518 | 1,240 | 504 | 24,262 | 60 | 3,814 / 1,567 / 664 |
+| DORA | 32,764 | 1,416 | 414 | 34,594 | 63 | 14,556 / 942 / 737 |
+| DORO | 26,558 | 1,462 | 504 | 28,524 | 61 | 6,015 / 864 / 621 |
+| TALO | 22,518 | 1,240 | 504 | 24,262 | 60 | 3,814 / 1,009 / 664 |
 
 Every one of the 60 type/eye/mouth combinations has mutually disjoint body,
 eyes and mouth layers with unchanged occupied positions. Roles are sorted
 occupied body indices. Hair and horns are disjoint; animated signals are a
 subset of horns. Neck cables and eyebrows do not inherit hair color.
+
+Root's first normal WebGPU review exposed a role-selection defect: a broad
+red-hue test also tagged warm forehead skin as crystal. The corrected masks
+use explicit per-type gem regions, saturated-facet selection and a connected
+crystal seed for each horn. Facial skin, eye/eyebrow layers and the central
+neck are protected. Neutral bright crystal highlights remain unchanged.
+This correction changes role metadata only; all palette entries, sprite cells,
+hair masks, silhouette and facial states match the previous detailed pack.
+The regression checks actual skin RGB at the reported forehead coordinates,
+all nine static main/sub combinations, and positive crystal facets. The
+corporate review sheet uses the native static color formulas in offline Python;
+it is not a native renderer or GPU capture.
 
 ## Native integration contract
 
@@ -100,12 +112,13 @@ python scripts/asset-kikai-detail.py
 python scripts/asset-kikai-detail-tests.py
 ```
 
-All 12 focused Python tests passed locally on 2026-10-11 with Python 3.12.14
+All 13 focused Python tests passed locally on 2026-10-11 with Python 3.12.14
 and Pillow 12.3.0. They verify source
 provenance, committed-atlas equality against source regeneration, exact PNG
 import/indexed roundtrip, declared conversion loss, all 60 constant/disjoint
 pose masks, neutral/chest preservation, distinct type silhouettes, gold irises,
-independent roles, palette/occupied bounds, and malformed-input rejection.
+independent roles and exact forehead-color preservation, palette/occupied
+bounds, and malformed-input rejection.
 They do not certify anatomy, execute the native adapter or measure a device.
 
 Root and the gameplay specialist independently viewed the corrected full-size
@@ -121,6 +134,8 @@ small-display readability, blink/speech playback, normal WebGPU/WebGL2
 presentation and physical-device performance require separate validation.
 
 ![Current 192×256 authored portraits](../assets/ui/kikai/detail/authoring-overview.png)
+
+![Corrected corporate color roles, offline review](../assets/ui/kikai/detail/corporate-role-review.png)
 
 ## Preserved history
 
