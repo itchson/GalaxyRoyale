@@ -1,0 +1,124 @@
+{
+  "baseline": "4e014bff3a84b356c5254b4291560e38accef64d",
+  "peer_deep_nebula": "c3904b8f57b9c96cf5e5f2b5672b3bc9e3d020a5",
+  "peer_exact_source_parity": {
+    "crates/game_core/src/cosmic_background.rs": true,
+    "crates/game_core/src/cosmic_detail_tests.rs": true,
+    "crates/game_core/src/deep_nebula_tests.rs": true
+  },
+  "checks": "Read-only committed-blob inspection; no native/browser execution",
+  "facts": {
+    "cosmic_full": 8000,
+    "cosmic_reduced": 4000,
+    "star_system_reserve_full": 1800,
+    "star_system_reserve_reduced": 900,
+    "region_full": 6000,
+    "region_reduced": 3000,
+    "gas_in_region_full": 800,
+    "gas_in_region_reduced": 400,
+    "ui_pixels": 60000,
+    "nebula_transforms": 4
+  },
+  "inputs": [
+    {
+      "path": "crates/game_core/src/cosmic_background.rs",
+      "sha256": "a0d32e6246cf7070188859a4917f92daa13fbef388fcdff46bbe1e8e37c1a050",
+      "bytes": 60001
+    },
+    {
+      "path": "crates/game_core/src/cosmic_detail_tests.rs",
+      "sha256": "ffeafb13715887f8a60ccddb28a64b8bf88026e3b50cabd28d36599d5b1c4cb1",
+      "bytes": 15111
+    },
+    {
+      "path": "crates/game_core/src/deep_nebula_tests.rs",
+      "sha256": "c6329a30e92b56b2f105c957eef8112d2091dc5db97ae18a023c0098a1453ec5",
+      "bytes": 12197
+    },
+    {
+      "path": "crates/game_core/src/regions.rs",
+      "sha256": "8eec4107e3d5cb5e5c039fae563d44f92e0394a50fed5f526a11bf5b824457bf",
+      "bytes": 34292
+    },
+    {
+      "path": "crates/game_core/src/regions_lod_tests.rs",
+      "sha256": "1f7893acbb9326a84a7ad2da3ba2dc926d7cb4f5d13b581745e45ad6f2e3e695",
+      "bytes": 14700
+    },
+    {
+      "path": "crates/game_core/src/region_node_tests.rs",
+      "sha256": "5a1364e53d429459fa9dff39cb505a2be732d1523c26512568b4463dd618e5aa",
+      "bytes": 19463
+    },
+    {
+      "path": "crates/game_core/src/isotope_scar.rs",
+      "sha256": "1129a660f47d75219654ebb9bc89e4c5e201e89d5a5ccbd4407cd56b5e720018",
+      "bytes": 14871
+    },
+    {
+      "path": "crates/game_core/src/lib.rs",
+      "sha256": "454f2a8b6dd5175524deab46725fd0de0ca60a5f87c3f051dc6d31f98ccee55b",
+      "bytes": 197345
+    },
+    {
+      "path": "crates/game_core/src/radiation_enemies.rs",
+      "sha256": "23b6a40391cc6e3b81dba1ce773cd633233595e30b697405c3305b644079472a",
+      "bytes": 10756
+    },
+    {
+      "path": "crates/engine_core/src/frame.rs",
+      "sha256": "2afd79bb523dc0a57533ddaf1067ce2dd204823cb87f72e3ee7fc976a81969fc",
+      "bytes": 25415
+    },
+    {
+      "path": "crates/engine_core/src/camera.rs",
+      "sha256": "b08164aa6c9a7e8364ee90e7205e70b702d2013c1861254da33610cb81fdf759",
+      "bytes": 8926
+    },
+    {
+      "path": "crates/game_web/src/ui_scene.rs",
+      "sha256": "6b6bb4e398bd4fd6d1e3e5c07afccade653d0b5448926efc1e46c8dd48fb0c08",
+      "bytes": 124298
+    },
+    {
+      "path": "crates/game_web/src/pixel_ui.rs",
+      "sha256": "f7631289ca6fcd87c117e67fd6fd3b1705ebb3c602dfcfd74c5d181e0cc4e334",
+      "bytes": 97799
+    },
+    {
+      "path": "crates/game_web/src/renderer.rs",
+      "sha256": "b005d9be722c94ee85826faa3bfc480c644b0b8a09c49dd0df1da2a3c9127359",
+      "bytes": 26563
+    },
+    {
+      "path": "crates/game_web/src/pixel.wgsl",
+      "sha256": "8e18cbb217a62659d697f1705b941e09dbfee444fcdf7a9a1e29506c8a5ea976",
+      "bytes": 3875
+    },
+    {
+      "path": "crates/game_web/src/present.wgsl",
+      "sha256": "767e72b385823cfb10bee5ba055812ae40fd32f20130ea32271aa7e85a212de5",
+      "bytes": 1652
+    },
+    {
+      "path": "apps/game/src/style.css",
+      "sha256": "821c6a1f8d169f3a476d8bc6e86eb95ce3306fb66ff34b7e908d51fba71bc7c8",
+      "bytes": 26182
+    },
+    {
+      "path": "apps/game/src/pixel-ui.ts",
+      "sha256": "180b99862fa9cd5ca768d056c7fb2dca334eed985d2d86e7c78cfdd72f6be91b",
+      "bytes": 19801
+    },
+    {
+      "path": "apps/game/src/meishi.css",
+      "sha256": "3fd379c0baa554787cd88c35bf00a128e193d9f3a0e7378fb4025ebe7fce6cf2",
+      "bytes": 4688
+    },
+    {
+      "path": "apps/game/src/flight-menu.css",
+      "sha256": "4721ebb4f77bd61ccdefef109384ab9847a31c0fade4f5ef336e8a7607212567",
+      "bytes": 2241
+    }
+  ]
+}

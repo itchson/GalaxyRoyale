@@ -1,0 +1,98 @@
+{
+  "version": 1,
+  "commit": "4d032e99bfdf1da056ba72516667c0f7745bd246",
+  "base": "4e014bf",
+  "scope": "native common chrome; no browser or device acceptance",
+  "sources": [
+    {
+      "path": "crates/game_web/src/sports_ui.rs",
+      "bytes": 12231,
+      "sha256": "b059a0dbea9348d41e7c61facfbd33dd66f193911da05ea8661235239db2395e",
+      "git_blob_sha256": "b059a0dbea9348d41e7c61facfbd33dd66f193911da05ea8661235239db2395e",
+      "crlf_only_difference": false
+    },
+    {
+      "path": "crates/game_web/src/sports_ui_tests.rs",
+      "bytes": 12090,
+      "sha256": "9da0c77e4dbc60d1b9f889e67581c5efbe4171b06459bfcacb93731d59e2a419",
+      "git_blob_sha256": "9da0c77e4dbc60d1b9f889e67581c5efbe4171b06459bfcacb93731d59e2a419",
+      "crlf_only_difference": false
+    },
+    {
+      "path": "crates/game_web/src/ui_scene.rs",
+      "bytes": 117981,
+      "sha256": "1dc700dc51b7697032c37f8e6472f2db90d6fa8f6a18cab826b4c98a8323efa7",
+      "git_blob_sha256": "1dc700dc51b7697032c37f8e6472f2db90d6fa8f6a18cab826b4c98a8323efa7",
+      "crlf_only_difference": false
+    },
+    {
+      "path": "crates/game_web/src/ui_button_tests.rs",
+      "bytes": 15300,
+      "sha256": "9498ed455a0329bbfc8ac2169d8919f127101b0831fa2cc071897e4ce8bb65dc",
+      "git_blob_sha256": "9498ed455a0329bbfc8ac2169d8919f127101b0831fa2cc071897e4ce8bb65dc",
+      "crlf_only_difference": false
+    },
+    {
+      "path": "crates/game_web/src/ui_settings_skin_tests.rs",
+      "bytes": 4854,
+      "sha256": "ebc90f7189ccfb8564b6e6f7df462140cb77dddec14e57b8ed54cfd2a1fe84de",
+      "git_blob_sha256": "ebc90f7189ccfb8564b6e6f7df462140cb77dddec14e57b8ed54cfd2a1fe84de",
+      "crlf_only_difference": false
+    },
+    {
+      "path": "crates/game_web/src/ui_kikai_integration_tests.rs",
+      "bytes": 40634,
+      "sha256": "66f7ca36821d3d28140a0c32e589ab5e100faf3ef305cfcceae7eda701a2ccb3",
+      "git_blob_sha256": "66f7ca36821d3d28140a0c32e589ab5e100faf3ef305cfcceae7eda701a2ccb3",
+      "crlf_only_difference": false
+    }
+  ],
+  "evidence": [
+    {
+      "path": "focused-native-final.log",
+      "bytes": 1544,
+      "sha256": "a5399a59c477205eb97e6c4d1b3f02003febcdb65e2ee413df9ab4c2963ae6e8"
+    },
+    {
+      "path": "clippy-final.log",
+      "bytes": 184,
+      "sha256": "a18c7eea12517606ff67c8e2ea64b397aba86c4ba1348d3ee77cd7c2b23b9e0e"
+    },
+    {
+      "path": "web-library-committed.log",
+      "bytes": 28043,
+      "sha256": "632a8079f247903bd9cbcb5b274f51ffb56da6907e9d7a871b4bd771bfe83f68"
+    },
+    {
+      "path": "semantic-controls.log",
+      "bytes": 1771,
+      "sha256": "955607f08f7e92b0b7a4c6c6af2b87aebbe53824a9200af07f3075e86063aeaf"
+    },
+    {
+      "path": "title-composition.log",
+      "bytes": 651,
+      "sha256": "e979a679073da3ff26af91d96798be30c9c064bbcba554892bf9ac8411fc324c"
+    },
+    {
+      "path": "native-export.log",
+      "bytes": 697,
+      "sha256": "a2589ecb83adb016e8985cd55a3e91171c137a937a9bdcadfa259cd28c718379"
+    },
+    {
+      "path": "packets/menu.json",
+      "bytes": 2659978,
+      "sha256": "81af32896ecb26f0045ec0ed08262a8056b9bf7ffdefec0bdd7575a206cfce9a"
+    },
+    {
+      "path": "render.py",
+      "bytes": 1166,
+      "sha256": "f1c59cab2ce15a056a58b59a48bb89358c635552b0d00404bcd9f2643eb6486f"
+    },
+    {
+      "path": "native-software-menu.png",
+      "bytes": 103727,
+      "sha256": "34468b18c2dc529eaa4754f95edf68c40c6423d04932a0904c6d7ab5a6c24b7e"
+    }
+  ],
+  "handoff_sha256": "330b4d8335c2710d69e02199a9aafa0f701db197cb87c714ca65e2e903de0669"
+}

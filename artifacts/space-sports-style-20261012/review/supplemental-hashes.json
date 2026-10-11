@@ -1,0 +1,25 @@
+{
+  "scope": "Supplied baseline images and independent read-only observations; not final candidate acceptance",
+  "pins": [
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\background-style-review\\SUPPLEMENTAL_BASELINES.md",
+      "bytes": 2278,
+      "sha256": "225409720f0ed0c8e73686dcc52a6a5fa95ec312fc46b7f275c92fd4bf6ce50d"
+    },
+    {
+      "path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\space-sports-style-20261012\\wisp-before.jpg",
+      "bytes": 25582,
+      "sha256": "415fb274785ae0c1a0644bd76009eb80c555a64401a1de29a9bafa65cf3a2321"
+    },
+    {
+      "path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\space-sports-style-20261012\\regional-remnant-before.jpg",
+      "bytes": 20326,
+      "sha256": "ecf67e15b099986e523d959450b865a7c2d202485f1681bd5a73b9becca0fa11"
+    },
+    {
+      "path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\space-sports-style-20261012\\settings-compact-before.jpg",
+      "bytes": 34394,
+      "sha256": "b4e4fa52c1269fca7e72a15094b8f384d17b11bfbc4968636fbb828970812875"
+    }
+  ]
+}

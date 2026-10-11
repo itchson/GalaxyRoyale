@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 773,
+  "revision": 788,
   "name": "Galaxy Royale",
   "phase": "Playable solo slice → content and validation",
-  "updatedAt": "2026-10-11T15:17:07.319Z",
+  "updatedAt": "2026-10-11T15:55:58.484Z",
   "tasks": [
     {
       "id": "studio",
@@ -6782,6 +6782,108 @@
       "revision": 2,
       "createdAt": "2026-10-11T14:34:29.545Z",
       "updatedAt": "2026-10-11T15:17:07.110Z"
+    },
+    {
+      "id": "task-1d96967b",
+      "title": "Recognizable deep-space parallax art",
+      "description": "Improve artificial galaxy, remnant and planet forms using coherent silhouettes, terminator lighting and subtle animation. Preserve shared soft gas, deterministic generation and fixed cosmic budgets.",
+      "department": "Engine/Art",
+      "owner": "/root/engine_research",
+      "status": "complete",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Actual native composition has recognizable space forms and coherent depth/materials.",
+          "met": true
+        },
+        {
+          "text": "Determinism, fixed budgets, Reduced Motion and two browser backends have appropriate evidence.",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual scope, checks and browser observations",
+          "kind": "file",
+          "path": "artifacts/space-sports-style-20261012/README.md"
+        },
+        {
+          "label": "Frozen Engine handoff",
+          "kind": "file",
+          "path": "artifacts/space-sports-style-20261012/engine/HANDOFF.md"
+        },
+        {
+          "label": "Frozen native UI handoff",
+          "kind": "file",
+          "path": "artifacts/space-sports-style-20261012/ui/HANDOFF.md"
+        },
+        {
+          "label": "Independent final source review",
+          "kind": "file",
+          "path": "artifacts/space-sports-style-20261012/review/background-candidate/REVIEW.md"
+        },
+        {
+          "label": "Actual integrated WebGPU Settings",
+          "kind": "file",
+          "path": "artifacts/space-sports-style-20261012/settings-webgpu-after.jpg"
+        }
+      ],
+      "blocker": "",
+      "revision": 3,
+      "createdAt": "2026-10-11T15:21:56.837Z",
+      "updatedAt": "2026-10-11T15:55:58.309Z"
+    },
+    {
+      "id": "task-d86101ee",
+      "title": "Sports-arcade interface chrome",
+      "description": "Unify common menu/control frames with the native league logo: graphite, angular platinum bevels and restrained cyan/gold/semantic accents. Preserve text anchors, interactive bounds, corporation colors and UI admission limits.",
+      "department": "Art/UI",
+      "owner": "/root/production_research",
+      "status": "complete",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Shared native panel/button/settings chrome follows the sports identity without repetitive old ornament.",
+          "met": true
+        },
+        {
+          "text": "Controls remain legible, bounded, responsive and functional on both renderers.",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual scope, checks and browser observations",
+          "kind": "file",
+          "path": "artifacts/space-sports-style-20261012/README.md"
+        },
+        {
+          "label": "Frozen Engine handoff",
+          "kind": "file",
+          "path": "artifacts/space-sports-style-20261012/engine/HANDOFF.md"
+        },
+        {
+          "label": "Frozen native UI handoff",
+          "kind": "file",
+          "path": "artifacts/space-sports-style-20261012/ui/HANDOFF.md"
+        },
+        {
+          "label": "Independent final source review",
+          "kind": "file",
+          "path": "artifacts/space-sports-style-20261012/review/background-candidate/REVIEW.md"
+        },
+        {
+          "label": "Actual integrated WebGPU Settings",
+          "kind": "file",
+          "path": "artifacts/space-sports-style-20261012/settings-webgpu-after.jpg"
+        }
+      ],
+      "blocker": "",
+      "revision": 3,
+      "createdAt": "2026-10-11T15:21:56.896Z",
+      "updatedAt": "2026-10-11T15:55:58.391Z"
     }
   ],
   "reviews": [
@@ -8378,6 +8480,51 @@
           "path": "artifacts/space-title-20261012/README.md"
         }
       ]
+    },
+    {
+      "id": "review-a62322df",
+      "title": "Space morphology and sports UI: actual asynchronous review",
+      "body": "Engine, Art, Gameplay reviewer and Root reviewed independent work. The first revised galaxy still read as detached curves in native software output; Root and Gameplay requested a diffuse disk/dust lane before accepting integration. Frozen source and raw packet checks preserve gas, seeded placements, gameplay inputs, whole-group limits and measured controls. Root inspected real WebGPU/WebGL2 seeded frames, zoom limits and wide/compact menus. Still-image review found no scoped blocker; a suspected clipped HUD label was resolved at original image detail. User style approval, moving crowded combat, physical phones and soak performance remain separate.",
+      "author": "/root",
+      "source": "Frozen specialist work, actual independent review and Root normal-build validation",
+      "createdAt": "2026-10-11T15:55:58.105Z",
+      "participants": [
+        "/root",
+        "/root/engine_research",
+        "/root/production_research",
+        "/root/gameplay_design"
+      ],
+      "taskIds": [
+        "task-1d96967b",
+        "task-d86101ee"
+      ],
+      "evidence": [
+        {
+          "label": "Actual scope, checks and browser observations",
+          "kind": "file",
+          "path": "artifacts/space-sports-style-20261012/README.md"
+        },
+        {
+          "label": "Frozen Engine handoff",
+          "kind": "file",
+          "path": "artifacts/space-sports-style-20261012/engine/HANDOFF.md"
+        },
+        {
+          "label": "Frozen native UI handoff",
+          "kind": "file",
+          "path": "artifacts/space-sports-style-20261012/ui/HANDOFF.md"
+        },
+        {
+          "label": "Independent final source review",
+          "kind": "file",
+          "path": "artifacts/space-sports-style-20261012/review/background-candidate/REVIEW.md"
+        },
+        {
+          "label": "Actual integrated WebGPU Settings",
+          "kind": "file",
+          "path": "artifacts/space-sports-style-20261012/settings-webgpu-after.jpg"
+        }
+      ]
     }
   ],
   "decisions": [
@@ -8631,6 +8778,15 @@
       "author": "/root",
       "source": "Actual integrated implementation, specialist reviews and browser verification",
       "createdAt": "2026-10-11T15:17:07.129Z",
+      "status": "accepted"
+    },
+    {
+      "id": "decision-12b82a4d",
+      "title": "Natural distant scenery; competitive geometry reserved for UI",
+      "body": "Retain dark space and subdued distant materials. Use irregular stellar disks, dust cavities, quiet broken remnants and albedo-before-lighting planets. Remove legacy stripe ribbons, chart connectors and shield-like nova spokes; keep exact seeded star positions and approved deep gas. Shared native UI extends the sports title with graphite/platinum and short semantic accents while preserving measured interaction geometry and existing caps.",
+      "author": "/root",
+      "source": "Frozen specialist work, actual independent review and Root normal-build validation",
+      "createdAt": "2026-10-11T15:55:58.139Z",
       "status": "accepted"
     }
   ],
@@ -10547,6 +10703,74 @@
       ],
       "url": "http://league-final.localhost:4173/?qa=1&renderer=webgpu",
       "knownIssues": "The title theme MP3 is pending the composer. Physical-device/soak measurement and natural campaign completion are not claimed. Final subjective art approval remains with the user."
+    },
+    {
+      "id": "build-e6d04745",
+      "title": "Integrated natural-space and native sports UI testing build",
+      "body": "Normal build at a8ca67b on codex/testing. Actual isolated QA seed871238449 on one owned preview; PWA ready builds applied via actual Haven update flow. Backend diagnostics confirmed both WebGPU and WebGL2. See retained receipts for exact scope.",
+      "author": "/root",
+      "source": "Frozen specialist work, actual independent review and Root normal-build validation",
+      "createdAt": "2026-10-11T15:55:58.180Z",
+      "revision": "a8ca67b3f37b7f86e7c431296d2259a8abf52275",
+      "evidence": [
+        {
+          "label": "Actual scope, checks and browser observations",
+          "kind": "file",
+          "path": "artifacts/space-sports-style-20261012/README.md"
+        },
+        {
+          "label": "Frozen Engine handoff",
+          "kind": "file",
+          "path": "artifacts/space-sports-style-20261012/engine/HANDOFF.md"
+        },
+        {
+          "label": "Frozen native UI handoff",
+          "kind": "file",
+          "path": "artifacts/space-sports-style-20261012/ui/HANDOFF.md"
+        },
+        {
+          "label": "Independent final source review",
+          "kind": "file",
+          "path": "artifacts/space-sports-style-20261012/review/background-candidate/REVIEW.md"
+        },
+        {
+          "label": "Actual integrated WebGPU Settings",
+          "kind": "file",
+          "path": "artifacts/space-sports-style-20261012/settings-webgpu-after.jpg"
+        }
+      ],
+      "checks": [
+        {
+          "name": "Workspace native713 passed /3 explicit exporters ignored",
+          "result": "pass"
+        },
+        {
+          "name": "Strict workspace/all-target Clippy",
+          "result": "pass"
+        },
+        {
+          "name": "Shell434 passed /1 existing Windows skip",
+          "result": "pass"
+        },
+        {
+          "name": "Updated Wiki20 checks",
+          "result": "pass"
+        },
+        {
+          "name": "Normal dual-WASM /TypeScript /PWA /Studio build",
+          "result": "pass"
+        },
+        {
+          "name": "Actual seeded GPU/GL frames and bounded responsive controls",
+          "result": "pass"
+        },
+        {
+          "name": "Physical phone and30-minute soak",
+          "result": "not_run"
+        }
+      ],
+      "url": "http://league-final.localhost:4173/?qa=1&renderer=webgpu",
+      "knownIssues": "Full-game art consistency and final subjective approval remain ongoing. Moving crowded-combat perception and natural campaign acceptance are separate. Physical-device performance, cold/warm latency and30-minute memory/frame-time soak unmeasured. Original theme recording and audible audio acceptance unchanged."
     }
   ],
   "feedback": [],
@@ -18280,6 +18504,156 @@
       "author": "/root",
       "source": "Actual integrated implementation, specialist reviews and browser verification",
       "createdAt": "2026-10-11T15:17:07.319Z"
+    },
+    {
+      "id": "8e0afa2b-0af0-42fa-a8ec-b2ae6a4a9713",
+      "revision": 774,
+      "kind": "task.create",
+      "itemId": "task-1d96967b",
+      "title": "Recognizable deep-space parallax art",
+      "author": "/root",
+      "source": "Current user request and actual isolated specialist assignments",
+      "createdAt": "2026-10-11T15:21:56.837Z"
+    },
+    {
+      "id": "9926f9fd-2851-4104-9ee2-b6529e070e84",
+      "revision": 775,
+      "kind": "run",
+      "itemId": "run-c65c366e",
+      "title": "Engine/Art specialist · running",
+      "author": "/root",
+      "source": "Current user request and actual isolated specialist assignments",
+      "createdAt": "2026-10-11T15:21:56.866Z"
+    },
+    {
+      "id": "6dcc44a5-ffd1-4f30-83bc-2b78a9f4d361",
+      "revision": 776,
+      "kind": "task.create",
+      "itemId": "task-d86101ee",
+      "title": "Sports-arcade interface chrome",
+      "author": "/root",
+      "source": "Current user request and actual isolated specialist assignments",
+      "createdAt": "2026-10-11T15:21:56.896Z"
+    },
+    {
+      "id": "84a8319b-540f-4d32-82f3-9f6397fdef84",
+      "revision": 777,
+      "kind": "run",
+      "itemId": "run-329d6d17",
+      "title": "Art/UI specialist · running",
+      "author": "/root",
+      "source": "Current user request and actual isolated specialist assignments",
+      "createdAt": "2026-10-11T15:21:56.926Z"
+    },
+    {
+      "id": "8e00472f-77e0-437e-b419-6cfb2c6d80cf",
+      "revision": 778,
+      "kind": "run",
+      "itemId": "run-048a66c1",
+      "title": "Independent space/art review · running",
+      "author": "/root",
+      "source": "Current user request and actual isolated specialist assignments",
+      "createdAt": "2026-10-11T15:21:56.957Z"
+    },
+    {
+      "id": "1a0ec52f-5ca5-4221-b8f5-ebfac7e32733",
+      "revision": 779,
+      "kind": "review",
+      "itemId": "review-a62322df",
+      "title": "Space morphology and sports UI: actual asynchronous review",
+      "author": "/root",
+      "source": "Frozen specialist work, actual independent review and Root normal-build validation",
+      "createdAt": "2026-10-11T15:55:58.105Z"
+    },
+    {
+      "id": "f4eeec40-1b3e-46b4-b415-1c27719e53b2",
+      "revision": 780,
+      "kind": "decision",
+      "itemId": "decision-12b82a4d",
+      "title": "Natural distant scenery; competitive geometry reserved for UI",
+      "author": "/root",
+      "source": "Frozen specialist work, actual independent review and Root normal-build validation",
+      "createdAt": "2026-10-11T15:55:58.139Z"
+    },
+    {
+      "id": "516b7189-582b-4cc4-9285-70c0bd7646b5",
+      "revision": 781,
+      "kind": "build",
+      "itemId": "build-e6d04745",
+      "title": "Integrated natural-space and native sports UI testing build",
+      "author": "/root",
+      "source": "Frozen specialist work, actual independent review and Root normal-build validation",
+      "createdAt": "2026-10-11T15:55:58.180Z"
+    },
+    {
+      "id": "494521ec-a906-4857-9e94-61fb29803505",
+      "revision": 782,
+      "kind": "task.update",
+      "itemId": "task-1d96967b",
+      "title": "Recognizable deep-space parallax art",
+      "author": "/root",
+      "source": "Frozen specialist work, actual independent review and Root normal-build validation",
+      "createdAt": "2026-10-11T15:55:58.236Z"
+    },
+    {
+      "id": "5007f462-9e7a-4cfa-b1eb-f5600c2a69ab",
+      "revision": 783,
+      "kind": "task.update",
+      "itemId": "task-1d96967b",
+      "title": "Recognizable deep-space parallax art",
+      "author": "/root",
+      "source": "Frozen specialist work, actual independent review and Root normal-build validation",
+      "createdAt": "2026-10-11T15:55:58.309Z"
+    },
+    {
+      "id": "01eae2c8-9415-4acd-b1fc-3942d849f090",
+      "revision": 784,
+      "kind": "task.update",
+      "itemId": "task-d86101ee",
+      "title": "Sports-arcade interface chrome",
+      "author": "/root",
+      "source": "Frozen specialist work, actual independent review and Root normal-build validation",
+      "createdAt": "2026-10-11T15:55:58.344Z"
+    },
+    {
+      "id": "46c89f75-2489-4fa1-a689-2edb906357d0",
+      "revision": 785,
+      "kind": "task.update",
+      "itemId": "task-d86101ee",
+      "title": "Sports-arcade interface chrome",
+      "author": "/root",
+      "source": "Frozen specialist work, actual independent review and Root normal-build validation",
+      "createdAt": "2026-10-11T15:55:58.391Z"
+    },
+    {
+      "id": "d0a65f41-d644-458c-82fc-fbbaecaea6b8",
+      "revision": 786,
+      "kind": "run",
+      "itemId": "run-40ce9f58",
+      "title": "Background engine/art specialist · completed",
+      "author": "/root",
+      "source": "Frozen specialist work, actual independent review and Root normal-build validation",
+      "createdAt": "2026-10-11T15:55:58.422Z"
+    },
+    {
+      "id": "3a1b6a1f-40af-41e9-b3a2-296cb4392f7a",
+      "revision": 787,
+      "kind": "run",
+      "itemId": "run-deb7d89c",
+      "title": "Native UI art specialist · completed",
+      "author": "/root",
+      "source": "Frozen specialist work, actual independent review and Root normal-build validation",
+      "createdAt": "2026-10-11T15:55:58.453Z"
+    },
+    {
+      "id": "4eb94721-cd39-4373-9439-d5ea14177153",
+      "revision": 788,
+      "kind": "run",
+      "itemId": "run-4a0c5906",
+      "title": "Independent source and supplied-image reviewer · completed",
+      "author": "/root",
+      "source": "Frozen specialist work, actual independent review and Root normal-build validation",
+      "createdAt": "2026-10-11T15:55:58.484Z"
     }
   ],
   "runRecords": [
@@ -25110,6 +25484,200 @@
       "author": "/root",
       "source": "Actual integrated implementation, specialist reviews and browser verification",
       "createdAt": "2026-10-11T15:17:07.212Z"
+    },
+    {
+      "id": "run-c65c366e",
+      "title": "Engine/Art specialist · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Engine/Art specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T15:21:56.851Z",
+      "taskIds": [
+        "task-1d96967b"
+      ],
+      "summary": "Improve artificial galaxy, remnant and planet forms using coherent silhouettes, terminator lighting and subtle animation. Preserve shared soft gas, deterministic generation and fixed cosmic budgets.",
+      "evidence": [
+        {
+          "label": "Actual assigned worktree contribution",
+          "kind": "note",
+          "details": "Existing isolated worktree from4e014bf; no additional game server."
+        }
+      ],
+      "author": "/root",
+      "source": "Current user request and actual isolated specialist assignments",
+      "createdAt": "2026-10-11T15:21:56.866Z"
+    },
+    {
+      "id": "run-329d6d17",
+      "title": "Art/UI specialist · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "Art/UI specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T15:21:56.917Z",
+      "taskIds": [
+        "task-d86101ee"
+      ],
+      "summary": "Unify common menu/control frames with the native league logo: graphite, angular platinum bevels and restrained cyan/gold/semantic accents. Preserve text anchors, interactive bounds, corporation colors and UI admission limits.",
+      "evidence": [
+        {
+          "label": "Actual assigned worktree contribution",
+          "kind": "note",
+          "details": "Existing isolated worktree from4e014bf; no additional game server."
+        }
+      ],
+      "author": "/root",
+      "source": "Current user request and actual isolated specialist assignments",
+      "createdAt": "2026-10-11T15:21:56.926Z"
+    },
+    {
+      "id": "run-048a66c1",
+      "title": "Independent space/art review · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Independent space/art review",
+      "state": "running",
+      "observedAt": "2026-10-11T15:21:56.938Z",
+      "taskIds": [
+        "task-1d96967b",
+        "task-d86101ee"
+      ],
+      "summary": "Read-only review of artificial background forms, physical space references, gameplay readability and scoped acceptance checks.",
+      "evidence": [
+        {
+          "label": "Actual review assignment",
+          "kind": "note",
+          "details": "Existing galaxy-audio-refinement worktree; no shared-source or browser mutations."
+        }
+      ],
+      "author": "/root",
+      "source": "Current user request and actual isolated specialist assignments",
+      "createdAt": "2026-10-11T15:21:56.957Z"
+    },
+    {
+      "id": "run-40ce9f58",
+      "title": "Background engine/art specialist · completed",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Background engine/art specialist",
+      "state": "completed",
+      "observedAt": "2026-10-11T15:55:58.413Z",
+      "taskIds": [
+        "task-1d96967b"
+      ],
+      "summary": "Frozen61492ce2 integrated as a8ca67b; actual source checks and handoff complete.",
+      "evidence": [
+        {
+          "label": "Actual scope, checks and browser observations",
+          "kind": "file",
+          "path": "artifacts/space-sports-style-20261012/README.md"
+        },
+        {
+          "label": "Frozen Engine handoff",
+          "kind": "file",
+          "path": "artifacts/space-sports-style-20261012/engine/HANDOFF.md"
+        },
+        {
+          "label": "Frozen native UI handoff",
+          "kind": "file",
+          "path": "artifacts/space-sports-style-20261012/ui/HANDOFF.md"
+        },
+        {
+          "label": "Independent final source review",
+          "kind": "file",
+          "path": "artifacts/space-sports-style-20261012/review/background-candidate/REVIEW.md"
+        },
+        {
+          "label": "Actual integrated WebGPU Settings",
+          "kind": "file",
+          "path": "artifacts/space-sports-style-20261012/settings-webgpu-after.jpg"
+        }
+      ],
+      "author": "/root",
+      "source": "Frozen specialist work, actual independent review and Root normal-build validation",
+      "createdAt": "2026-10-11T15:55:58.422Z"
+    },
+    {
+      "id": "run-deb7d89c",
+      "title": "Native UI art specialist · completed",
+      "agentId": "/root/production_research",
+      "agentLabel": "Native UI art specialist",
+      "state": "completed",
+      "observedAt": "2026-10-11T15:55:58.445Z",
+      "taskIds": [
+        "task-d86101ee"
+      ],
+      "summary": "Frozen4d032e99 integrated as d62dec5; actual source checks and handoff complete.",
+      "evidence": [
+        {
+          "label": "Actual scope, checks and browser observations",
+          "kind": "file",
+          "path": "artifacts/space-sports-style-20261012/README.md"
+        },
+        {
+          "label": "Frozen Engine handoff",
+          "kind": "file",
+          "path": "artifacts/space-sports-style-20261012/engine/HANDOFF.md"
+        },
+        {
+          "label": "Frozen native UI handoff",
+          "kind": "file",
+          "path": "artifacts/space-sports-style-20261012/ui/HANDOFF.md"
+        },
+        {
+          "label": "Independent final source review",
+          "kind": "file",
+          "path": "artifacts/space-sports-style-20261012/review/background-candidate/REVIEW.md"
+        },
+        {
+          "label": "Actual integrated WebGPU Settings",
+          "kind": "file",
+          "path": "artifacts/space-sports-style-20261012/settings-webgpu-after.jpg"
+        }
+      ],
+      "author": "/root",
+      "source": "Frozen specialist work, actual independent review and Root normal-build validation",
+      "createdAt": "2026-10-11T15:55:58.453Z"
+    },
+    {
+      "id": "run-4a0c5906",
+      "title": "Independent source and supplied-image reviewer · completed",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Independent source and supplied-image reviewer",
+      "state": "completed",
+      "observedAt": "2026-10-11T15:55:58.468Z",
+      "taskIds": [
+        "task-1d96967b",
+        "task-d86101ee"
+      ],
+      "summary": "Frozen source, packet and supplied-image review complete; actual browser execution attributed Root.",
+      "evidence": [
+        {
+          "label": "Actual scope, checks and browser observations",
+          "kind": "file",
+          "path": "artifacts/space-sports-style-20261012/README.md"
+        },
+        {
+          "label": "Frozen Engine handoff",
+          "kind": "file",
+          "path": "artifacts/space-sports-style-20261012/engine/HANDOFF.md"
+        },
+        {
+          "label": "Frozen native UI handoff",
+          "kind": "file",
+          "path": "artifacts/space-sports-style-20261012/ui/HANDOFF.md"
+        },
+        {
+          "label": "Independent final source review",
+          "kind": "file",
+          "path": "artifacts/space-sports-style-20261012/review/background-candidate/REVIEW.md"
+        },
+        {
+          "label": "Actual integrated WebGPU Settings",
+          "kind": "file",
+          "path": "artifacts/space-sports-style-20261012/settings-webgpu-after.jpg"
+        }
+      ],
+      "author": "/root",
+      "source": "Frozen specialist work, actual independent review and Root normal-build validation",
+      "createdAt": "2026-10-11T15:55:58.484Z"
     }
   ],
   "phaseDescription": "Desktop-first Rust/WASM solo game and local Studio are implemented. Reviewed occupied-cell art, reproducible conversion, responsive native settings/icons and minimap, strict GitHub integration gates and source-backed Dev Bible are integrated. Natural campaign balance, human listening, owner-private update lifecycle and physical phones remain separate pending gates."

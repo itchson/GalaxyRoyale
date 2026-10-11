@@ -1,0 +1,208 @@
+{
+  "scope": "Independent retained actual FrameBuilder/CameraView packet metadata, finite projected corners, colors/materials; no new native/GPU execution",
+  "packets": [
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\work\\background-immersion\\after-final\\motif-0-reduced-false-time-0.json",
+      "bytes": 1147004,
+      "sha256": "a984ddac504353138d2e453280a285e2972760d35d4e63a1f169c6239e281a78",
+      "kind": "Galaxy",
+      "reduced": false,
+      "time": 0.0,
+      "quads": 1826,
+      "transforms": 3
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\work\\background-immersion\\after-final\\motif-0-reduced-false-time-18.json",
+      "bytes": 1146723,
+      "sha256": "5144a009d2eb5dbb2c028edbc1f456d137bb65d9011b7062c268743653c90635",
+      "kind": "Galaxy",
+      "reduced": false,
+      "time": 18.0,
+      "quads": 1826,
+      "transforms": 3
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\work\\background-immersion\\after-final\\motif-0-reduced-true-time-0.json",
+      "bytes": 285543,
+      "sha256": "799c759625919ad39e59594d4ed84dd400caf303702e86b408f0239a8ba21c6e",
+      "kind": "Galaxy",
+      "reduced": true,
+      "time": 0.0,
+      "quads": 454,
+      "transforms": 3
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\work\\background-immersion\\after-final\\motif-0-reduced-true-time-18.json",
+      "bytes": 285462,
+      "sha256": "12dbf3793e59f9936038b5c8463fe01469baaef1f8fd5604f570c083eb3b2fe0",
+      "kind": "Galaxy",
+      "reduced": true,
+      "time": 18.0,
+      "quads": 454,
+      "transforms": 3
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\work\\background-immersion\\after-final\\motif-1-reduced-false-time-0.json",
+      "bytes": 1375757,
+      "sha256": "d438188c894d3426123f754ec1b12f0f2e14306193be25ac519d53c5a6507a76",
+      "kind": "Nebula",
+      "reduced": false,
+      "time": 0.0,
+      "quads": 2128,
+      "transforms": 4
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\work\\background-immersion\\after-final\\motif-1-reduced-false-time-18.json",
+      "bytes": 1376409,
+      "sha256": "70a7936177f0534551fc7c142d725ef453aca68951a92a8551c3f3289fb81dc9",
+      "kind": "Nebula",
+      "reduced": false,
+      "time": 18.0,
+      "quads": 2128,
+      "transforms": 4
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\work\\background-immersion\\after-final\\motif-1-reduced-true-time-0.json",
+      "bytes": 347852,
+      "sha256": "6cb926fa7c910ed7c4cac589d953c48c3a22a28811dada465ec32db1e9741ae0",
+      "kind": "Nebula",
+      "reduced": true,
+      "time": 0.0,
+      "quads": 538,
+      "transforms": 4
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\work\\background-immersion\\after-final\\motif-1-reduced-true-time-18.json",
+      "bytes": 348074,
+      "sha256": "268690a93830c1faa387c8571f240a7fa827bc36506e650b6aba94cdd5129d21",
+      "kind": "Nebula",
+      "reduced": true,
+      "time": 18.0,
+      "quads": 538,
+      "transforms": 4
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\work\\background-immersion\\after-final\\motif-2-reduced-false-time-0.json",
+      "bytes": 537227,
+      "sha256": "0eb4b6db2992ade1c54dc1f849a59e996a2306ac1bec4af350150df8b55c167e",
+      "kind": "Supernova",
+      "reduced": false,
+      "time": 0.0,
+      "quads": 857,
+      "transforms": 2
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\work\\background-immersion\\after-final\\motif-2-reduced-false-time-18.json",
+      "bytes": 537225,
+      "sha256": "af08f1bb230f7387606097e902d280bf5d6a52ac95cbc6b48ea4ecde8603aefb",
+      "kind": "Supernova",
+      "reduced": false,
+      "time": 18.0,
+      "quads": 857,
+      "transforms": 2
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\work\\background-immersion\\after-final\\motif-2-reduced-true-time-0.json",
+      "bytes": 131896,
+      "sha256": "3f63842e3a7b8b8dae537eb51736bb6a99a77f5cc54394becb6205d06b0c5f97",
+      "kind": "Supernova",
+      "reduced": true,
+      "time": 0.0,
+      "quads": 210,
+      "transforms": 2
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\work\\background-immersion\\after-final\\motif-2-reduced-true-time-18.json",
+      "bytes": 131884,
+      "sha256": "bbcd2488509f0cc377f3270d4b4213599c3a4d2860641aa80deeeb9c9bc60a41",
+      "kind": "Supernova",
+      "reduced": true,
+      "time": 18.0,
+      "quads": 210,
+      "transforms": 2
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\work\\background-immersion\\regions\\region-0-reduced-false.json",
+      "bytes": 2488151,
+      "sha256": "2423c95570f31d4199d351a1f8e6645cebf96627f5a355679c57da153626d0ab",
+      "kind": "Region0",
+      "reduced": false,
+      "time": 0.0,
+      "quads": 4404,
+      "transforms": 1
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\work\\background-immersion\\regions\\region-0-reduced-true.json",
+      "bytes": 651058,
+      "sha256": "31a1462cf0db72c60467e109b99c043932a12f80f0188aafac3ad51058374d10",
+      "kind": "Region0",
+      "reduced": true,
+      "time": 0.0,
+      "quads": 1152,
+      "transforms": 1
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\work\\background-immersion\\regions\\region-1-reduced-false.json",
+      "bytes": 2824546,
+      "sha256": "eb453de2bdcb03391dbd0c2b301262258b3638e9748b31319cbb72c14ef64c40",
+      "kind": "Region1",
+      "reduced": false,
+      "time": 0.0,
+      "quads": 5004,
+      "transforms": 3
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\work\\background-immersion\\regions\\region-1-reduced-true.json",
+      "bytes": 770032,
+      "sha256": "4d34b3ac56a7e36c2133ef0c4f210f45dd00f7d727e22f77114ad4c8e491bf4a",
+      "kind": "Region1",
+      "reduced": true,
+      "time": 0.0,
+      "quads": 1364,
+      "transforms": 3
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\work\\background-immersion\\regions\\region-2-reduced-false.json",
+      "bytes": 2487698,
+      "sha256": "2a520cbd48680306453fad7a08cd0541f4a7c01c95c876e0681feea020d32098",
+      "kind": "Region2",
+      "reduced": false,
+      "time": 0.0,
+      "quads": 4404,
+      "transforms": 1
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\work\\background-immersion\\regions\\region-2-reduced-true.json",
+      "bytes": 650962,
+      "sha256": "4ba4374c77628e8c9de4ff9828df45c00d206a3f1d76dda9454e64c8605f5793",
+      "kind": "Region2",
+      "reduced": true,
+      "time": 0.0,
+      "quads": 1152,
+      "transforms": 1
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\work\\background-immersion\\regions\\region-3-reduced-false.json",
+      "bytes": 179702,
+      "sha256": "4db9749672c02715fc8d97bfcad15b3a7e451dc76f51f61731787c46eec85167",
+      "kind": "Region3",
+      "reduced": false,
+      "time": 0.0,
+      "quads": 323,
+      "transforms": 1
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-hud-navigation\\galaxy-royale\\work\\background-immersion\\regions\\region-3-reduced-true.json",
+      "bytes": 79022,
+      "sha256": "1ba47a3278c9d53f94fddef9110691f6bd75afc64202da86e7561148a2582889",
+      "kind": "Region3",
+      "reduced": true,
+      "time": 0.0,
+      "quads": 141,
+      "transforms": 1
+    }
+  ],
+  "packet_count": 20,
+  "zoom_view_count": 60,
+  "finite_submitted_corners_checked": 359640
+}

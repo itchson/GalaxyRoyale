@@ -103,6 +103,22 @@ or lifting a cap without review.
 
 ## Quality gate and acceptance boundary
 
+The current interface target also follows the original sports-league logo in
+`assets/ui/title-mark/`: forward athletic shapes, layered platinum fittings,
+graphite recesses and narrow cyan energy rails with restrained gold award
+accents. Apply this material language to common panels and controls while
+keeping compact readable RoyaleMono text. Preserve PAN green, RENKO red and
+HUGO blue for corporate identity and equipment meaning. Repeating decorative
+magenta/cyan ornaments around every edge are superseded by this direction.
+
+Deep scenery follows recognizable space forms: irregular spiral arm knots and
+a diffuse galactic bulge, broken filamentary remnants, cloud systems and a
+consistent planetary terminator. Keep dark negative space and subdued distant
+contrast. Seeded stellar neighborhoods should be visible as star patterns;
+chart connection strokes belong in navigation displays. The interface can
+carry the league's sharp competitive geometry without imposing that geometry
+on natural space scenery.
+
 Review the actual source and its decoded native translation side by side:
 anatomy and silhouette, metal depth, corporate masks, cutouts, relative parts,
 animation states, palette losses and occupied budgets. Native packet tests

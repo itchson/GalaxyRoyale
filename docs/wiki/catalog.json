@@ -2937,9 +2937,16 @@
         {
           "title": "Responsive native controls and navigation",
           "paragraphs": [
-            "Settings labels and real inputs are measured independently in group-local coordinates. Audio, Display & motion and Session sections reflow into a single column in narrow layouts and retain a separate scroll region. Eleven authored 24×24 PixelBody icons use the same relative transform/material pipeline as other native UI assets.",
-            "The lower-left north-up minimap sits above the text footer and tracks real Hud.navigation destinations: Haven in yellow and the active mission in purple. Its 2400-world-unit range is independent of zoom. Native reservations account for the map, player vitals, boss banners and touch controls. No undiscovered destination is invented.",
+            "Settings labels and real inputs are measured independently in group-local coordinates. Audio, Display & motion and Session reflow into a single column in narrow layouts and retain a separate scroll region. Detailed 64-cell control icons use the same relative transform/material pipeline as other native UI assets.",
+            "The top-right north-up minimap sits above the right-aligned telemetry and tracks real Hud.navigation destinations: Haven in yellow and the active mission in purple. Its 2400-world-unit range is independent of zoom. Native reservations account for the map, player vitals, boss banners and touch controls. No undiscovered destination is invented.",
             "Both desktop backends were inspected at 1280×720, 848×480 and 480×800. This bounded acceptance does not establish physical phone performance or universal perceptual readability."
+          ]
+        },
+        {
+          "title": "Sports-arcade common chrome",
+          "paragraphs": [
+            "Common panels and buttons now extend the league title’s platinum, graphite and restrained cyan/gold material language. Opaque neutral backing keeps live dock geometry out of settings labels. Short semantic rails preserve equipment/corporation colors; measured text, controls and existing icons keep their authoritative bounds.",
+            "Cached corners and stretched rails compose native local-cell groups with continuous fractional fits and clipping. A panel submits 1,168 cells, a button 348. The realistic five-icon/largest-DORA fixture retains all components at 47,360 cells; the UI ceiling remains 60,000. Source tests and software output are separate from actual browser layout evidence."
           ]
         }
       ],
@@ -2988,6 +2995,16 @@
           "path": "artifacts/presentation-refinement-20261011/CURRENT_UI_ACCEPTANCE.md",
           "label": "Current pixel UI acceptance",
           "role": "validation evidence"
+        },
+        {
+          "path": "crates/game_web/src/sports_ui.rs",
+          "label": "Native sports chrome",
+          "role": "implementation"
+        },
+        {
+          "path": "artifacts/space-sports-style-20261012/README.md",
+          "label": "Space and sports UI delivery",
+          "role": "actual validation scope"
         }
       ],
       "related": [
@@ -3008,6 +3025,13 @@
           "caption": "Actual integrated desktop WebGPU settings. Browser inspection is distinct from physical-phone acceptance.",
           "provenance": "artifacts/presentation-refinement-20261011/CURRENT_UI_ACCEPTANCE.md",
           "label": "Current desktop native Settings"
+        },
+        {
+          "path": "artifacts/space-sports-style-20261012/settings-webgpu-after.jpg",
+          "label": "Sports-arcade native Settings",
+          "kind": "runtime-screenshot",
+          "provenance": "artifacts/space-sports-style-20261012/README.md",
+          "caption": "Actual integrated WebGPU menu. Opaque graphite backing, quiet metal edges and measured controls; phone acceptance remains separate."
         }
       ],
       "data": {
@@ -3065,6 +3089,14 @@
             "Deep nebulae combine soft diffuse veils, turbulent billows and fine emission filaments around a sparse dust lane. Four relative transforms submit 2,128 cells at full detail or 538 at reduced detail. Seeded origins and 0.08 parallax remain stable; continuous curl, rotation and breathing freeze under Reduced Motion.",
             "Both renderers use the existing soft-quad material. The global cosmic caps remain 8,000 / 4,000 cells and whole motifs are admitted atomically. The regional gas helper is unchanged. Software packet images are labeled separately from actual browser captures; physical-device and long-soak measurements remain pending."
           ]
+        },
+        {
+          "title": "Recognizable distant space forms",
+          "paragraphs": [
+            "Galaxies now combine an inclined diffuse stellar disk, absent dust lane, irregular tapered spiral-arm knots and warm central bulge. Whole-body rotation was replaced by subtle local curl and color breathing. The complete galaxy is 1,826 full-detail cells or 454 reduced cells across three transforms.",
+            "The legacy striped regional ribbon is removed. Remnants use broken quiet filaments rather than expanding bright discs with evenly spaced spokes. Planets apply terrain albedo before illumination, preserving a dark terminator, and use natural material ramps with restrained biome hue. Ring ordering and atomic admission remain intact. Seven seeded stellar neighborhood positions remain without chart connection strokes.",
+            "Approved four-part deep gas remains byte-equivalent in the checked native packets. Existing 8,000/4,000 custom and 6,000/3,000 regional limits are unchanged. Both desktop backends were inspected at declared seeded locations; frames have different runtime phases and do not prove pixel parity, moving-combat perception, physical devices or sustained performance."
+          ]
         }
       ],
       "references": [
@@ -3097,6 +3129,16 @@
           "path": "docs/APPROVED_VISUAL_DIRECTION.md",
           "label": "User-approved visual direction",
           "role": "style target and native fidelity checks"
+        },
+        {
+          "path": "artifacts/space-sports-style-20261012/engine/HANDOFF.md",
+          "label": "Frozen background source handoff",
+          "role": "native source and evidence boundary"
+        },
+        {
+          "path": "artifacts/space-sports-style-20261012/README.md",
+          "label": "Matched seeded browser comparison",
+          "role": "actual validation scope"
         }
       ],
       "related": [
@@ -3124,6 +3166,13 @@
           "label": "Layered nebula native packets",
           "caption": "Actual native packets projected in an offline software model at three zooms and times; not a GPU screenshot.",
           "provenance": "artifacts/space-title-20261012/nebula-handoff.md"
+        },
+        {
+          "path": "artifacts/space-sports-style-20261012/planet-webgl2-full-zoom16-offset.jpg",
+          "label": "Natural ringed planet material",
+          "kind": "runtime-screenshot",
+          "provenance": "artifacts/space-sports-style-20261012/README.md",
+          "caption": "Actual WebGL2 full-detail planet at zoom1.6. A +400 world-X camera offset exposes the body beside the RAICHO; this is not a same-camera baseline frame."
         }
       ]
     },
