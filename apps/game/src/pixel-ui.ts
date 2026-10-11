@@ -584,6 +584,13 @@ export class PixelUiBridge {
         for (const rank of root.querySelectorAll<HTMLElement>(".rank-dots"))
           add(rank, "rank", "", rank.querySelectorAll(".earned").length);
       }
+      // Child artwork belongs above the measured button's backing, while
+      // keeping the semantic hitbox and label in the same local UI group.
+      nodes.sort(
+        (a, b) =>
+          Number(a.kind.startsWith("co-op-")) -
+          Number(b.kind.startsWith("co-op-")),
+      );
       groups.push({ position, nodes: nodes.slice(0, 256) });
     }
     this.runtime.set_ui_scene({ groups });
