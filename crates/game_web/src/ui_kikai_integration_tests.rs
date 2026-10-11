@@ -789,7 +789,9 @@ fn high_detail_profiles_and_real_dense_menu_controls_fit_the_shared_scene_cap() 
         );
     }
     let all_ten = extract(controls(true), [0.0; 2], 0.0, true);
-    assert_eq!(all_ten.pixel_count, 21_226);
+    // The competition header adds 389 occupied cells to this single-panel
+    // fixture. All ten controls and the portrait must still be admitted whole.
+    assert_eq!(all_ten.pixel_count, 21_615);
     let mut all_ten_with_dora = controls(true);
     let mut dora = licensed_portrait(0, 0, 1);
     dora.rect = [24.0, 52.0, 120.0, 160.0];
