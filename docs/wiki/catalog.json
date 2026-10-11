@@ -1379,6 +1379,13 @@
             "Sanctuary protection suppresses hostile spawning, incoming damage and firing. Shared projectile sweeps reject protected crossings. Asteroids use canonical circle queries while moving; these are physical exclusions, not a cosmetic shield reward.",
             "Only physical home arrival banks carried crafting materials. Remote sanctuaries do not become a Forge or a cargo bank. Haven facilities are Forge, Hangar, Journal and Arenas. Each real facility has a semantic world hitbox while the ship remains within Haven."
           ]
+        },
+        {
+          "title": "Top-down Haven facilities",
+          "paragraphs": [
+            "Forge, Hangar, Journal and Arena facilities are authored as overhead occupied-pixel objects with distinct planar silhouettes and relative signal animations. Facility centers and interaction radius24 remain unchanged. Their native labels are hidden at rest, appear under cursor hover, and remain available for keyboard focus.",
+            "The current dock retains its1454-cell collision silhouette while its planar sectors gain fine cyan/gold and steel detail. Native public Game extraction verifies7428 facility-and-dock cells across nine transforms. Reduced Motion freezes authored signal animation."
+          ]
         }
       ],
       "references": [
@@ -1401,6 +1408,11 @@
           "path": "crates/game_core/src/lib.rs",
           "label": "lib.rs",
           "role": "implementation"
+        },
+        {
+          "path": "docs/HAVEN_TOPDOWN.md",
+          "label": "Top-down art and actual native extraction",
+          "role": "documentation"
         }
       ],
       "related": [
@@ -2534,6 +2546,14 @@
             "Generated raster art remains a concept reference until native cells are authored or converted with explicitly reviewed policies. Exact conversion preserves dimensions, exact colors, binary alpha and detached parts; indexed round trips also preserve palette indices. Optional losses are measured. Topology, affine groups, animation references and budgets are validated before integration.",
             "The offline adapter emits through the actual PixelBody and FrameBuilder. Its group and animation metadata is opt-in review data; the shipped Game does not automatically install these groups, play these frames or change collision anchors. Asset briefs and actual independent reviews define the runtime acceptance boundary."
           ]
+        },
+        {
+          "title": "Responsive native controls and navigation",
+          "paragraphs": [
+            "Settings labels and real inputs are measured independently in group-local coordinates. Audio, Display & motion and Session sections reflow into a single column in narrow layouts and retain a separate scroll region. Eleven authored24×24 PixelBody icons use the same relative transform/material pipeline as other native UI assets.",
+            "The lower-left north-up minimap sits above the text footer and tracks real Hud.navigation destinations: Haven in yellow and the active mission in purple. Its2400-world-unit range is independent of zoom. Native reservations account for the map, player vitals, boss banners and touch controls. No undiscovered destination is invented.",
+            "Both desktop backends were inspected at1280×720,848×480 and480×800. This bounded acceptance does not establish physical phone performance or universal perceptual readability."
+          ]
         }
       ],
       "references": [
@@ -2576,6 +2596,11 @@
           "path": "docs/ASSET_BRIEF.md",
           "label": "Asset brief and acceptance record",
           "role": "production template"
+        },
+        {
+          "path": "artifacts/presentation-refinement-20261011/CURRENT_UI_ACCEPTANCE.md",
+          "label": "Current pixel UI acceptance",
+          "role": "validation evidence"
         }
       ],
       "related": [
@@ -2589,6 +2614,13 @@
           "kind": "runtime-art",
           "provenance": "artifacts/presentation-refinement-20261011/ART_REVIEW.md",
           "caption": "Flat software raster of actual occupied PixelBody/FrameBuilder extraction for rock, dock, facility and control details. This inspection image does not model GPU filtering, lighting or blended colors and is not a browser screenshot."
+        },
+        {
+          "kind": "runtime-screenshot",
+          "path": "artifacts/presentation-refinement-20261011/settings-webgpu-wide.jpg",
+          "caption": "Actual integrated desktop WebGPU settings. Browser inspection is distinct from physical-phone acceptance.",
+          "provenance": "artifacts/presentation-refinement-20261011/CURRENT_UI_ACCEPTANCE.md",
+          "label": "Current desktop native Settings"
         }
       ],
       "data": {

@@ -1,0 +1,17 @@
+(node:54812) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ actual catalog categories, references and classified media all validate and resolve (266.0679ms)
+✔ server and actual UI search cover names, source facts, categories and verification boundaries (2.5121ms)
+✔ rendering escapes every prose/attribute surface and constructs only local allowlisted link shapes (0.3436ms)
+✔ catalog validates stable ids, related links, status and bounded structured content (0.3657ms)
+✔ source/media read paths reject traversal, secrets, unlisted and wrong-type content (10.3661ms)
+✔ catalog itself and listed ancestor links fail closed rather than reading redirected content (9.3427ms)
+✔ HTTP Wiki routes return actual listed bytes, filtered catalog and controlled lookup errors (113.7064ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 511.8007

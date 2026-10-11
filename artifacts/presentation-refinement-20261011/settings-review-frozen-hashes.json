@@ -1,0 +1,636 @@
+{
+  "schema": 1,
+  "scope": "independent Settings exact-commit/native/source review; browser Pending",
+  "files": [
+    {
+      "path": "check-contract.py",
+      "bytes": 2654,
+      "sha256": "ac4f1119f32014dec185d8b3ad5b1025f4ec5bd5c5d9879f7a9f775f04c87268"
+    },
+    {
+      "path": "exact-commit/assets/pipeline/haven-service/historical-audit.json",
+      "bytes": 1389,
+      "sha256": "12096b62befb6ed7ecfed01d2ad2c09f5bc667966275d0b269618bca08b9649c"
+    },
+    {
+      "path": "exact-commit/assets/pipeline/haven-service/manifest.json",
+      "bytes": 4929,
+      "sha256": "9da9962abbde3638dbc4979e00601980e75b0cc2986e2c36a8bab33a8a9419c0"
+    },
+    {
+      "path": "exact-commit/assets/pipeline/haven-service/native-extraction.json",
+      "bytes": 1417501,
+      "sha256": "003354af02c5aebed9ae74120f0677c8556a157f59eb3ae3e34ef6d2056a321c"
+    },
+    {
+      "path": "exact-commit/assets/pipeline/haven-service/pack.json",
+      "bytes": 58987,
+      "sha256": "b1de7d4faafe4baae666c020f618d14d73d5143e796fd0f24d290aa9fbef7dcd"
+    },
+    {
+      "path": "exact-commit/assets/pipeline/haven-service/validation.json",
+      "bytes": 4720,
+      "sha256": "57a9377e7874eeddf5fb25dcc2e9c0c2c7bda233a3cbb7b5d1ee383fa3d6a71f"
+    },
+    {
+      "path": "exact-commit/assets/pixels/atlas.json",
+      "bytes": 39608,
+      "sha256": "67635f779449feac9d1b24ce1aa264aadb10d7bf70cd54aa5542de44f855876f"
+    },
+    {
+      "path": "exact-commit/assets/pixels/boss-atlas.json",
+      "bytes": 421056,
+      "sha256": "68b83e1d83a94993074f06bcb3ffc23a61d9542474fcbac42a11150114e3c850"
+    },
+    {
+      "path": "exact-commit/assets/pixels/boss-budgets.json",
+      "bytes": 2658,
+      "sha256": "5a66772c1fc0fef384db854b2ccc6f026067b76cd2400322cb660962b1800640"
+    },
+    {
+      "path": "exact-commit/assets/pixels/boss-native-proof.json",
+      "bytes": 4290,
+      "sha256": "316c96c78eba9ca83eb8a5fd40f3d08fec98f525cf7de38784c61effde03bf25"
+    },
+    {
+      "path": "exact-commit/assets/pixels/isotope-scar-atlas.json",
+      "bytes": 44637,
+      "sha256": "dc30b12a2d61f1f6209d36d35b4717e9332fe7b34adbe5f47779a2d214fc4e80"
+    },
+    {
+      "path": "exact-commit/assets/pixels/isotope-scar-provenance.json",
+      "bytes": 806,
+      "sha256": "d680dc311a0ec10d65e43da9e247a7511aee7e93c101424be1ded11d8f5a2090"
+    },
+    {
+      "path": "exact-commit/assets/pixels/mote-atlas.json",
+      "bytes": 7208,
+      "sha256": "fee68d81defca47f8bb7a4d6c177f7f70bb00d40b8df38d568e82eabf837381a"
+    },
+    {
+      "path": "exact-commit/assets/pixels/mote-provenance.json",
+      "bytes": 309,
+      "sha256": "9dcc43b9f40d5a3c92dc144a015aa25eadcb50190d6de848a1b07962cb00ba46"
+    },
+    {
+      "path": "exact-commit/assets/pixels/riveter-atlas.json",
+      "bytes": 5594,
+      "sha256": "6a312b6e0d957e6bb95dfefe5d44563d9c53125a84f5b00586aedc561ee742ae"
+    },
+    {
+      "path": "exact-commit/assets/pixels/riveter-provenance.json",
+      "bytes": 343,
+      "sha256": "445f1f72f6d387e91401ebe9b28e1250e5d81c775c38a3de515e04d68879fc6f"
+    },
+    {
+      "path": "exact-commit/assets/ui/atlas.json",
+      "bytes": 88654,
+      "sha256": "e06db7d94ccd1f12a4c0928e7a7c30c7725af2a81de958c5de0c2934598e7e75"
+    },
+    {
+      "path": "exact-commit/assets/ui/campaign-atlas.json",
+      "bytes": 41347,
+      "sha256": "a7950c45e92c18d5305e6ecb3c1f66ee308cab9489473a73b4b4352a852c8aa0"
+    },
+    {
+      "path": "exact-commit/assets/ui/champion-patches-atlas.json",
+      "bytes": 13547,
+      "sha256": "9916ba83ccec6d7df7b7061d8aef54a02f408666c993e33dc5a5872d8835580b"
+    },
+    {
+      "path": "exact-commit/assets/ui/champion-patches-provenance.json",
+      "bytes": 2388,
+      "sha256": "d05c0322f97753a962198efa83627228e6c399c342e80ae16c5178c6506baa8a"
+    },
+    {
+      "path": "exact-commit/assets/ui/provenance.json",
+      "bytes": 3423,
+      "sha256": "e198806ec2645b3540b5354626ff6a7b9b6d1d98f0edc1347600376a19c9ea1f"
+    },
+    {
+      "path": "exact-commit/Cargo.lock",
+      "bytes": 27791,
+      "sha256": "df228d9f83ef57321dcb768b79d948e9aa24456c0952e971fc8d6fcd7e806bdd"
+    },
+    {
+      "path": "exact-commit/Cargo.toml",
+      "bytes": 447,
+      "sha256": "50b077a3fd8e0c8a42456948d6232ae86b2a1bbaa63652ee04da7848c776a3e3"
+    },
+    {
+      "path": "exact-commit/crates/engine_core/Cargo.toml",
+      "bytes": 242,
+      "sha256": "0c7948f6d4cc4f43132f9c8c7c7f5d295b8003d00b15836a295bfe07e9c892bd"
+    },
+    {
+      "path": "exact-commit/crates/engine_core/examples/boss_rig_proof.rs",
+      "bytes": 4199,
+      "sha256": "a8166b0236645f614468d419043250d5e1dad8b7414a9e2bf41ebab81937fcce"
+    },
+    {
+      "path": "exact-commit/crates/engine_core/examples/engine_proof.rs",
+      "bytes": 5976,
+      "sha256": "49cdf1cafaf49b6265787c6b61ab2b23592e2f5fc9e96109e151e1ad7dc461d8"
+    },
+    {
+      "path": "exact-commit/crates/engine_core/src/camera.rs",
+      "bytes": 8926,
+      "sha256": "b08164aa6c9a7e8364ee90e7205e70b702d2013c1861254da33610cb81fdf759"
+    },
+    {
+      "path": "exact-commit/crates/engine_core/src/frame.rs",
+      "bytes": 25415,
+      "sha256": "2afd79bb523dc0a57533ddaf1067ce2dd204823cb87f72e3ee7fc976a81969fc"
+    },
+    {
+      "path": "exact-commit/crates/engine_core/src/lib.rs",
+      "bytes": 726,
+      "sha256": "eb84c4af2c35898ea6337503c2b169105ae5830f91c71ac7b441e7c114c6035a"
+    },
+    {
+      "path": "exact-commit/crates/engine_core/src/pixel_rig.rs",
+      "bytes": 14135,
+      "sha256": "e18ed9ca3ac3a459c9c611a7083494d07d7aa9ed624453df623b9c64730b6582"
+    },
+    {
+      "path": "exact-commit/crates/engine_core/src/pixels.rs",
+      "bytes": 17138,
+      "sha256": "3e9f228b54442f66a48a26d0a932b694b6cc22386846d28b7adda0e409f95b5c"
+    },
+    {
+      "path": "exact-commit/crates/engine_core/src/topology.rs",
+      "bytes": 13140,
+      "sha256": "72b22bedd285bf61d6e2a74a6ce5d8eddc7f593004e268949574e949fa528bbc"
+    },
+    {
+      "path": "exact-commit/crates/engine_core/src/transform.rs",
+      "bytes": 5578,
+      "sha256": "f511ceb89ac4445ce9749d1ed4086e672693357a1e6cf4f4f944dd8fe7220c74"
+    },
+    {
+      "path": "exact-commit/crates/engine_core/tests/boss_assets.rs",
+      "bytes": 6852,
+      "sha256": "1adbf8f512929ea715dd26588dfb3429981e13ca98d5b0787641c33dc99fcce8"
+    },
+    {
+      "path": "exact-commit/crates/game_core/Cargo.toml",
+      "bytes": 285,
+      "sha256": "8997ce52e4c8a2384b2bfe5ef8d7778b6be42df8e1157b6c17300f931af16350"
+    },
+    {
+      "path": "exact-commit/crates/game_core/examples/game_proof.rs",
+      "bytes": 3831,
+      "sha256": "c7da0d5fa34d11a153a3c97889426b7126cae00c38de63061c8fbbb4068ff1fc"
+    },
+    {
+      "path": "exact-commit/crates/game_core/src/abilities.rs",
+      "bytes": 14795,
+      "sha256": "b1edd83584bc78e8136eebe254ca22e6eab77714ef4f4314e26d6b3afa2d3ad7"
+    },
+    {
+      "path": "exact-commit/crates/game_core/src/asteroid_zones/tests.rs",
+      "bytes": 16018,
+      "sha256": "fb8c2ffb8fe53e418f7b9567a80906b41f1cbffe575266c166e855860c0e780c"
+    },
+    {
+      "path": "exact-commit/crates/game_core/src/asteroid_zones.rs",
+      "bytes": 7952,
+      "sha256": "9f1ba2e68d403796e3ea64ec771c6fb433cfb1614c4091d1170beb28732e61f7"
+    },
+    {
+      "path": "exact-commit/crates/game_core/src/audio_runtime.rs",
+      "bytes": 19202,
+      "sha256": "f8cc4ecc9546e876a6fe9192e48e0f5e63146c6693f5c8c2e26a137033682da6"
+    },
+    {
+      "path": "exact-commit/crates/game_core/src/biome_enemies.rs",
+      "bytes": 34491,
+      "sha256": "43b3736cb8da31872a62ac90f0f2b54e78f54ca7ee2f07ef622a45a7241e5cc8"
+    },
+    {
+      "path": "exact-commit/crates/game_core/src/boss_assets.rs",
+      "bytes": 4078,
+      "sha256": "6f243e4211c7a40e0feaf35140b8b0300df65d061e2657d6490b90a6ef334699"
+    },
+    {
+      "path": "exact-commit/crates/game_core/src/bosses.rs",
+      "bytes": 47224,
+      "sha256": "69194ae242129ccecef69ff3661369a784b12bd7fbcf60b64eda15b4642a4408"
+    },
+    {
+      "path": "exact-commit/crates/game_core/src/campaign.rs",
+      "bytes": 16385,
+      "sha256": "55769110e0dcbe0e962b784183348ccf83aed81d2c8a140b14b2a95a042f097c"
+    },
+    {
+      "path": "exact-commit/crates/game_core/src/campaign_runtime.rs",
+      "bytes": 48526,
+      "sha256": "0013cce5510c474ac0625b9ffdf2d9957816b9dd45c0a660716768248186f285"
+    },
+    {
+      "path": "exact-commit/crates/game_core/src/cosmic_background.rs",
+      "bytes": 49702,
+      "sha256": "52d290a2f9d69a3e905638b73d87220f8fba8afa87ac965a7d8f0dd57897fad2"
+    },
+    {
+      "path": "exact-commit/crates/game_core/src/cursor_aim_tests.rs",
+      "bytes": 7483,
+      "sha256": "4abfc3c200c8500a22b334d2d9839386b6f8764bcc0a8c39034d83a1577cdf29"
+    },
+    {
+      "path": "exact-commit/crates/game_core/src/diagnostic_death_tests.rs",
+      "bytes": 13484,
+      "sha256": "8d57d8feabda34b79dbb27b8858865a9344adb9e52ff859bae7d0d318a68dc87"
+    },
+    {
+      "path": "exact-commit/crates/game_core/src/diagnostic_warp_tests.rs",
+      "bytes": 3887,
+      "sha256": "792e1fb344ece0e5ca7d50eefddbd8aa97e935ccddc55154a679a0fb30d37270"
+    },
+    {
+      "path": "exact-commit/crates/game_core/src/dock_facilities.rs",
+      "bytes": 13894,
+      "sha256": "79c912febc7c821daa247a2104e98efff0c84055e2aaec8473061610c3c4023c"
+    },
+    {
+      "path": "exact-commit/crates/game_core/src/held_thrust_tests.rs",
+      "bytes": 4307,
+      "sha256": "6923df268524ab17b812ffb41457abb94dd415a9d3f34efbd5d0730cd6c0df3b"
+    },
+    {
+      "path": "exact-commit/crates/game_core/src/isotope_region_tests.rs",
+      "bytes": 4885,
+      "sha256": "0b44ac187e36da8461f3d8ae3147a3dd02d087d04675e1b3178b80d917ead02a"
+    },
+    {
+      "path": "exact-commit/crates/game_core/src/isotope_scar.rs",
+      "bytes": 14871,
+      "sha256": "1129a660f47d75219654ebb9bc89e4c5e201e89d5a5ccbd4407cd56b5e720018"
+    },
+    {
+      "path": "exact-commit/crates/game_core/src/lib.rs",
+      "bytes": 185765,
+      "sha256": "35158348c02378e89b1170453b0433e295d9f66796ff1b664857c22b97a80a94"
+    },
+    {
+      "path": "exact-commit/crates/game_core/src/live_overlay_tests.rs",
+      "bytes": 6729,
+      "sha256": "87fb5b97a73ad07a2d6a901b2d4278ff8d6d752b570f0c12fe92567f54f74507"
+    },
+    {
+      "path": "exact-commit/crates/game_core/src/mote_art.rs",
+      "bytes": 5528,
+      "sha256": "229916ac25331a0dc59add3a8c8a49274d2f4a3e01520ffa14a17d8b8965806f"
+    },
+    {
+      "path": "exact-commit/crates/game_core/src/mote_controller.rs",
+      "bytes": 19750,
+      "sha256": "1f8127aeb40d02402a11a17cc6a1e90485ea5314b364847349975d538341e881"
+    },
+    {
+      "path": "exact-commit/crates/game_core/src/navigation.rs",
+      "bytes": 7080,
+      "sha256": "95158dbd0c1d0762c608eb7d9bf5833b477f3c411238304b0e27c14c5c5843fa"
+    },
+    {
+      "path": "exact-commit/crates/game_core/src/particle_tests.rs",
+      "bytes": 12963,
+      "sha256": "4c9279b38f68658a2e1a732ccfbcb5d2c8501f4eeff26cd9b145a860c648fb13"
+    },
+    {
+      "path": "exact-commit/crates/game_core/src/pixel_assets.rs",
+      "bytes": 21185,
+      "sha256": "b4ef4ae26d0d2b2c9b187fd3e3b75ff854dac986a3fda72e5698721d48383921"
+    },
+    {
+      "path": "exact-commit/crates/game_core/src/radiation_audio_tests.rs",
+      "bytes": 7656,
+      "sha256": "69045bbd0cd846d77dd8ce6a89811bcc850ef79e0ae7e1f4d383a8974125442b"
+    },
+    {
+      "path": "exact-commit/crates/game_core/src/radiation_enemies.rs",
+      "bytes": 10756,
+      "sha256": "23b6a40391cc6e3b81dba1ce773cd633233595e30b697405c3305b644079472a"
+    },
+    {
+      "path": "exact-commit/crates/game_core/src/radiation_enemy_tests.rs",
+      "bytes": 32221,
+      "sha256": "86be1789f11c3c6e50e75482e703fa1cae0dba47d90e81b0a1b939cb398370ed"
+    },
+    {
+      "path": "exact-commit/crates/game_core/src/regions.rs",
+      "bytes": 30796,
+      "sha256": "a3dfd7561af5f03fd970de93c8caaed6e3ef51ee959394f28fb03643fa71aa01"
+    },
+    {
+      "path": "exact-commit/crates/game_core/src/regions_lod_tests.rs",
+      "bytes": 14589,
+      "sha256": "40ceacf922315e7e3372f663c44929d41c0d5948985e60cd743352f93ae04d5e"
+    },
+    {
+      "path": "exact-commit/crates/game_core/src/segmented/tests.rs",
+      "bytes": 9972,
+      "sha256": "370dabe7c76ffd024fa75b5fafcfe30e0089fa03465d8d9b1f8f9b3a9ea718db"
+    },
+    {
+      "path": "exact-commit/crates/game_core/src/segmented.rs",
+      "bytes": 9359,
+      "sha256": "638463899c37713f1d07c7ff2e2714811f79ac212182eb4fbaffb299b07d979a"
+    },
+    {
+      "path": "exact-commit/crates/game_core/src/ship_progression.rs",
+      "bytes": 21296,
+      "sha256": "82479d93af143c013ca3ba3989dd5b166a4c7dcaca9b2863d7d5b2148411a213"
+    },
+    {
+      "path": "exact-commit/crates/game_core/src/ship_progression_tests.rs",
+      "bytes": 28963,
+      "sha256": "c9b629a1044981fdd9cf86b2d718785d4a44a58532ce314806f400ef9f735629"
+    },
+    {
+      "path": "exact-commit/crates/game_core/src/universe_map.rs",
+      "bytes": 5595,
+      "sha256": "502fa8b3d7c2854be42f98b57ea49d07ebbe660eca5887591484d29b9d803ad7"
+    },
+    {
+      "path": "exact-commit/crates/game_core/src/weapon_cadence_tests.rs",
+      "bytes": 9424,
+      "sha256": "3fb9ac9a8d94d28e854974caa1ce31a056b5249b8668a4c85b978296bb26681e"
+    },
+    {
+      "path": "exact-commit/crates/game_web/Cargo.toml",
+      "bytes": 714,
+      "sha256": "2ae9524c8e67d4d504a973cff6de954e942c524df5508eb522e2324f210f9c1a"
+    },
+    {
+      "path": "exact-commit/crates/game_web/src/boss_layout.rs",
+      "bytes": 38812,
+      "sha256": "97ae0496ec27b89510b46ad21785a377d2ca6ae0d88d1fe95dcbc30a1758e353"
+    },
+    {
+      "path": "exact-commit/crates/game_web/src/boss_overlay.rs",
+      "bytes": 31496,
+      "sha256": "aaaef71b8192766d7602761296077b3d7dd8aafd2fb59d642a4ca0fa95529036"
+    },
+    {
+      "path": "exact-commit/crates/game_web/src/browser.rs",
+      "bytes": 25849,
+      "sha256": "aea59114e10431ea90d9100e3805f2fac2edcaa98755aa1f5dbd50126b2ab0df"
+    },
+    {
+      "path": "exact-commit/crates/game_web/src/champion_patches.rs",
+      "bytes": 15512,
+      "sha256": "70dca6fb509cc20053bde53b319cf36d3a3e4027f78a7b7354ad1e9ca85907e9"
+    },
+    {
+      "path": "exact-commit/crates/game_web/src/lib.rs",
+      "bytes": 324,
+      "sha256": "f569aba6fe067dc5a1d028629895a2eceb8df84bc5072be30bb8715bc0805007"
+    },
+    {
+      "path": "exact-commit/crates/game_web/src/lighting.rs",
+      "bytes": 7782,
+      "sha256": "7341868f9d9d7a940bd00a231c72ff3b32a638f5b1c739c5dc6f7843b4102dc6"
+    },
+    {
+      "path": "exact-commit/crates/game_web/src/pixel.wgsl",
+      "bytes": 3875,
+      "sha256": "8e18cbb217a62659d697f1705b941e09dbfee444fcdf7a9a1e29506c8a5ea976"
+    },
+    {
+      "path": "exact-commit/crates/game_web/src/pixel_ui.rs",
+      "bytes": 88595,
+      "sha256": "0f5a96314702515fa2ee86d098f27c3ae510c784f66eba1ae38d0b87518c5d3f"
+    },
+    {
+      "path": "exact-commit/crates/game_web/src/present.wgsl",
+      "bytes": 1497,
+      "sha256": "eb46f26ea1dbbba776a1e5cc72d7362d676944123cb918ceeb02b37e18f269e6"
+    },
+    {
+      "path": "exact-commit/crates/game_web/src/renderer.rs",
+      "bytes": 26081,
+      "sha256": "a0244b9e23fd7cb5eae5950a45aa82db175f7773de7b09dd877fef6ce3d0bd0c"
+    },
+    {
+      "path": "exact-commit/crates/game_web/src/ui_button_tests.rs",
+      "bytes": 15191,
+      "sha256": "1f6db77456db2c32778cf333e933da441d296feb907b03ad038e252130c99731"
+    },
+    {
+      "path": "exact-commit/crates/game_web/src/ui_facility_label_tests.rs",
+      "bytes": 3880,
+      "sha256": "f7859d97e44b3f305d34e5a60c569544b86fd936e6ae57f676527473c6b96bbc"
+    },
+    {
+      "path": "exact-commit/crates/game_web/src/ui_flight_status_tests.rs",
+      "bytes": 20692,
+      "sha256": "9005e616def317b00a6178354b0bed6aa6c6de7d782fec7bca830084ebc253ae"
+    },
+    {
+      "path": "exact-commit/crates/game_web/src/ui_header_tests.rs",
+      "bytes": 7744,
+      "sha256": "be2c6d71da371c374aea38c2d71a7c92260ea771d0a1fba2d84574da5f8dc5fd"
+    },
+    {
+      "path": "exact-commit/crates/game_web/src/ui_icon_tests.rs",
+      "bytes": 17161,
+      "sha256": "4b8e190da2c5e3cc963fefa27d1da0784b7a6ca16218cf29af993800dec6187d"
+    },
+    {
+      "path": "exact-commit/crates/game_web/src/ui_map_tests.rs",
+      "bytes": 12199,
+      "sha256": "0de3fdd5be10ba1c7609e4d9f9877e92bddb7bc71f3db0935f66e7cf9eed7e15"
+    },
+    {
+      "path": "exact-commit/crates/game_web/src/ui_scene.rs",
+      "bytes": 90652,
+      "sha256": "5d29e1f75ad5e0cb5c677ed2a045c8f45f5e0a7607332d2eaf2320a97a68eb91"
+    },
+    {
+      "path": "exact-commit/crates/game_web/src/ui_settings_tests.rs",
+      "bytes": 9314,
+      "sha256": "0671f18c71917c4f227946b9ba242bb942af850917ae63fcb03493a1479dc153"
+    },
+    {
+      "path": "exact-commit/crates/game_web/src/ui_wrap_tests.rs",
+      "bytes": 4080,
+      "sha256": "fd49eb586b709c1c248a77722feb0053aa45ce829994f265bed6a8b397252860"
+    },
+    {
+      "path": "exact-commit/crates/game_web/tests/boss_layout.rs",
+      "bytes": 26504,
+      "sha256": "5677f4d583f541704de954a2607182d5b97a5f440ec94c99c951fe5f710c6faf"
+    },
+    {
+      "path": "freeze.py",
+      "bytes": 895,
+      "sha256": "433db347a9991d976b182ae1fa36dff851be3be6df0f7b094ce490b60cf98e26"
+    },
+    {
+      "path": "input-pins.json",
+      "bytes": 37822,
+      "sha256": "55fb8f997bfae8968d686fe957f19bab63d04b2f6b196a2f51ca05b10644390d"
+    },
+    {
+      "path": "native-ui-tests.log",
+      "bytes": 9571,
+      "sha256": "43556234792a8231a988d90fe0dee4bf6152b63708626ef64bb8453a417dc5d0"
+    },
+    {
+      "path": "prepare.py",
+      "bytes": 2352,
+      "sha256": "bca3e6296626121f510a2a2821330ba7e193afcde3d3167b4273bcc7ed2675e2"
+    },
+    {
+      "path": "REVIEW.md",
+      "bytes": 5756,
+      "sha256": "198afdce1b15ad29ba84a37bf54b4ddf48ebd6ca657599dd1d50943375e9c8fa"
+    },
+    {
+      "path": "root-semantic-tests.log",
+      "bytes": 2227,
+      "sha256": "f80129813944da91676473fac6621c458f36f0a051ec3b4441216af12b59115f"
+    },
+    {
+      "path": "source-contract.json",
+      "bytes": 494,
+      "sha256": "cdccb299c8e67b48d0ff191fa49e46cc0f159fb48872a7ab0e2a55c7138176ce"
+    },
+    {
+      "path": "source-pins/exact-owned/apps/game/index.html",
+      "bytes": 15491,
+      "sha256": "da874bca364edd91099b4f879532a0eb650a87f3953f4528d05b9c793e5ff74b"
+    },
+    {
+      "path": "source-pins/exact-owned/apps/game/src/main.ts",
+      "bytes": 68694,
+      "sha256": "f26473c0b31712fba2e8eeb9962bb3a4b093742f5f03d74cf4a3bcdbe86d9d5f"
+    },
+    {
+      "path": "source-pins/exact-owned/apps/game/src/pixel-ui.ts",
+      "bytes": 14827,
+      "sha256": "a5134067926615cfa2a308753bfc0107dc77aed98caa5ca755bf216d08e1e09c"
+    },
+    {
+      "path": "source-pins/exact-owned/apps/game/src/style.css",
+      "bytes": 24650,
+      "sha256": "98f8aafd2bb5178830cb75662e6900af20273d9643e3d5e55c20de9196993872"
+    },
+    {
+      "path": "source-pins/exact-owned/crates/game_web/src/pixel_ui.rs",
+      "bytes": 88595,
+      "sha256": "0f5a96314702515fa2ee86d098f27c3ae510c784f66eba1ae38d0b87518c5d3f"
+    },
+    {
+      "path": "source-pins/exact-owned/crates/game_web/src/ui_button_tests.rs",
+      "bytes": 15191,
+      "sha256": "1f6db77456db2c32778cf333e933da441d296feb907b03ad038e252130c99731"
+    },
+    {
+      "path": "source-pins/exact-owned/crates/game_web/src/ui_icon_tests.rs",
+      "bytes": 17161,
+      "sha256": "4b8e190da2c5e3cc963fefa27d1da0784b7a6ca16218cf29af993800dec6187d"
+    },
+    {
+      "path": "source-pins/exact-owned/crates/game_web/src/ui_map_tests.rs",
+      "bytes": 12199,
+      "sha256": "0de3fdd5be10ba1c7609e4d9f9877e92bddb7bc71f3db0935f66e7cf9eed7e15"
+    },
+    {
+      "path": "source-pins/exact-owned/crates/game_web/src/ui_scene.rs",
+      "bytes": 90652,
+      "sha256": "5d29e1f75ad5e0cb5c677ed2a045c8f45f5e0a7607332d2eaf2320a97a68eb91"
+    },
+    {
+      "path": "source-pins/exact-owned/crates/game_web/src/ui_settings_tests.rs",
+      "bytes": 9314,
+      "sha256": "0671f18c71917c4f227946b9ba242bb942af850917ae63fcb03493a1479dc153"
+    },
+    {
+      "path": "source-pins/exact-owned/scripts/test/facility-layout.test.mjs",
+      "bytes": 3857,
+      "sha256": "a95a94d329933cfa507cddb8f35994bbecf2d717cc95ca18ca0564a15a55f252"
+    },
+    {
+      "path": "source-pins/exact-owned/scripts/test/flight-status-pixel.test.mjs",
+      "bytes": 7810,
+      "sha256": "83ff6ac115ac8ba08f5733952cb49f47a2118ac1adc6f8476aca68f0842cc872"
+    },
+    {
+      "path": "source-pins/exact-owned/scripts/test/pixel-ui.test.mjs",
+      "bytes": 9904,
+      "sha256": "a5284a667cc50e871ea53a33616f6556c926c8095408b530b8cb82665c09acba"
+    },
+    {
+      "path": "source-pins/integrated-root/apps/game/index.html",
+      "bytes": 15491,
+      "sha256": "da874bca364edd91099b4f879532a0eb650a87f3953f4528d05b9c793e5ff74b"
+    },
+    {
+      "path": "source-pins/integrated-root/apps/game/src/main.ts",
+      "bytes": 68836,
+      "sha256": "6fea4ccb963ccb485f9aa24b2740af692728f482af9aa013f6cbf2fb98c039b8"
+    },
+    {
+      "path": "source-pins/integrated-root/apps/game/src/pixel-ui.ts",
+      "bytes": 16045,
+      "sha256": "4c3ea97bb6b6b4da55383108dda0a38c07a0b7569d056c1931a8e47d784bb822"
+    },
+    {
+      "path": "source-pins/integrated-root/apps/game/src/style.css",
+      "bytes": 24650,
+      "sha256": "98f8aafd2bb5178830cb75662e6900af20273d9643e3d5e55c20de9196993872"
+    },
+    {
+      "path": "source-pins/integrated-root/crates/game_web/src/pixel_ui.rs",
+      "bytes": 91274,
+      "sha256": "215d01976573ede81715877194c168c4356c021cc51f36c5caa8e11190072ff9"
+    },
+    {
+      "path": "source-pins/integrated-root/crates/game_web/src/ui_button_tests.rs",
+      "bytes": 15191,
+      "sha256": "1f6db77456db2c32778cf333e933da441d296feb907b03ad038e252130c99731"
+    },
+    {
+      "path": "source-pins/integrated-root/crates/game_web/src/ui_icon_tests.rs",
+      "bytes": 17161,
+      "sha256": "4b8e190da2c5e3cc963fefa27d1da0784b7a6ca16218cf29af993800dec6187d"
+    },
+    {
+      "path": "source-pins/integrated-root/crates/game_web/src/ui_map_tests.rs",
+      "bytes": 12199,
+      "sha256": "0de3fdd5be10ba1c7609e4d9f9877e92bddb7bc71f3db0935f66e7cf9eed7e15"
+    },
+    {
+      "path": "source-pins/integrated-root/crates/game_web/src/ui_scene.rs",
+      "bytes": 90652,
+      "sha256": "5d29e1f75ad5e0cb5c677ed2a045c8f45f5e0a7607332d2eaf2320a97a68eb91"
+    },
+    {
+      "path": "source-pins/integrated-root/crates/game_web/src/ui_settings_tests.rs",
+      "bytes": 9314,
+      "sha256": "0671f18c71917c4f227946b9ba242bb942af850917ae63fcb03493a1479dc153"
+    },
+    {
+      "path": "source-pins/integrated-root/scripts/test/facility-layout.test.mjs",
+      "bytes": 4429,
+      "sha256": "8ae9112bfc2fb5539234908167d598d6690a0cbfa775e7ba1219a135c7dd2122"
+    },
+    {
+      "path": "source-pins/integrated-root/scripts/test/flight-status-pixel.test.mjs",
+      "bytes": 8187,
+      "sha256": "ae617aad29123aba88ce71a66a9860d20c9e41c16645f9c52236d5dd845e2dde"
+    },
+    {
+      "path": "source-pins/integrated-root/scripts/test/pixel-ui.test.mjs",
+      "bytes": 12511,
+      "sha256": "3bbefa92932f1d605e2d243655490076c40e09be255651e80a134c101f0a03c7"
+    },
+    {
+      "path": "verify.py",
+      "bytes": 412,
+      "sha256": "169d5d1e5c04e77ec3b253914b8f7efdd505a2d91af5803a2d82585ad624a9d8"
+    }
+  ]
+}
