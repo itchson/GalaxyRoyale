@@ -1830,6 +1830,59 @@ element("launch-settings").addEventListener("click", openLaunchSettings);
 element("menu-close").addEventListener("click", () => void resume());
 element("pause-settings").addEventListener("click", () => openMenu("settings"));
 element("settings-backup").addEventListener("click", () => openMenu("archive"));
+// Only the hovered or keyboard-focused action explains itself. Its native text
+// shares the toolbar's stable edge; controls never move to make room for it.
+const toolbar =
+  element("game-ui").querySelector<HTMLElement>(".header-actions")!;
+const toolbarHint = element("toolbar-hint");
+function showToolbarHint(button: HTMLButtonElement | null): void {
+  if (!button || !document.body.classList.contains("engine-flight")) {
+    toolbarHint.hidden = true;
+    return;
+  }
+  const labels: Record<string, string> = {
+    "pause-button": "RAICHO / ESC",
+    "map-button": "UNIVERSE MAP",
+    "flight-settings": "SETTINGS",
+    "save-indicator": "AUTOSAVE / BACKUP",
+    fullscreen: "FULLSCREEN",
+  };
+  const label = labels[button.id];
+  if (!label) return;
+  const scale = innerHeight / galaxy.viewport()[1];
+  const anchor = toolbar.getBoundingClientRect();
+  const map = galaxy.flight_navigation_bounds();
+  const left = Math.max(8, anchor.left);
+  let top = anchor.bottom + 4 * scale;
+  let width = Math.min(160 * scale, innerWidth - left - 8);
+  if (map.length === 4 && map[2] > 0 && map[3] > 0) {
+    const clearWidth = map[0] * scale - left - 4 * scale;
+    if (clearWidth >= 100) width = Math.min(width, clearWidth);
+    else top = Math.max(top, (map[1] + map[3]) * scale + 4 * scale);
+  }
+  toolbarHint.style.left = `${left}px`;
+  toolbarHint.style.top = `${top}px`;
+  toolbarHint.style.width = `${Math.max(0, width)}px`;
+  toolbarHint.textContent = label;
+  toolbarHint.hidden = false;
+  pixelUi?.invalidate();
+}
+toolbar.addEventListener("pointerover", (event) =>
+  showToolbarHint((event.target as Element).closest("button")),
+);
+toolbar.addEventListener("pointerout", (event) => {
+  if (!toolbar.contains((event as PointerEvent).relatedTarget as Node | null))
+    showToolbarHint(null);
+});
+toolbar.addEventListener("pointerdown", () => showToolbarHint(null));
+document.addEventListener("focusin", (event) =>
+  showToolbarHint(
+    toolbar.contains(event.target as Node)
+      ? (event.target as Element).closest("button")
+      : null,
+  ),
+);
+window.addEventListener("resize", () => showToolbarHint(null));
 element("save-indicator").addEventListener("click", () => openMenu("archive"));
 element("restart-flight").addEventListener("click", () => {
   void beginEncounter(() => galaxy.return_to_home()).catch((error) =>

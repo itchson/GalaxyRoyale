@@ -413,7 +413,7 @@ export class PixelUiBridge {
       const selectors =
         root.id === "game-ui"
           ? document.body.classList.contains("engine-flight")
-            ? ".dock-facility,#save-indicator,#site-button,#dock-button,#pause-button,#map-button,#flight-settings,#fullscreen,#quick-settings,#quick-title,#toast,#destination-marker"
+            ? ".dock-facility,#save-indicator,#site-button,#dock-button,#pause-button,#map-button,#flight-settings,#fullscreen,#quick-settings,#quick-title,#toast,#destination-marker,#toolbar-hint"
             : "#toast"
           : "h2,h3,p,small,.eyebrow,.build-line span,.control-guide span,.upgrade-category span,.upgrade-category b,#quest-content li";
       for (const child of root.querySelectorAll<HTMLElement>(selectors)) {

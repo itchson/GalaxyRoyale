@@ -477,9 +477,10 @@ body:not(.pixel-ready) #universe {
   min-width: 0;
 }
 .settings label {
-  display: flex;
-  flex-direction: column;
-  gap: calc(3px * var(--ui-scale, 1));
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  align-items: center;
+  gap: calc(8px * var(--ui-scale, 1));
   min-width: 0;
   min-height: var(--ui-hit);
   padding: calc(5px * var(--ui-scale, 1));
@@ -551,6 +552,7 @@ body:not(.pixel-ready) #universe {
   background: transparent;
 }
 .settings label.toggle-setting {
+  display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
@@ -666,6 +668,18 @@ body:not(.pixel-ready) #universe {
 .flight-header .icon-button {
   width: max(28px, calc(14px * var(--ui-scale, 1)));
   height: max(28px, calc(14px * var(--ui-scale, 1)));
+}
+#toolbar-hint {
+  position: fixed;
+  pointer-events: none;
+  margin: 0;
+  color: #c1d1dd;
+  font-size: var(--ui-caption);
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+body:not(.engine-flight) #toolbar-hint {
+  display: none;
 }
 @media (pointer: coarse) {
   .flight-header .icon-button {
@@ -981,6 +995,7 @@ body:not(.engine-flight) #flight-status-strip {
 .pixel-ready #map-button,
 .pixel-ready #flight-settings,
 .pixel-ready #save-indicator,
+.pixel-ready #toolbar-hint,
 .pixel-ready .dock-facility,
 .pixel-ready #fullscreen,
 .pixel-ready #flight-status-strip,
