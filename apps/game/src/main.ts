@@ -2255,7 +2255,9 @@ window.addEventListener("keydown", (event) => {
   }
   if (!menu.hidden && event.key === "Tab") {
     const controls = Array.from(
-      menu.querySelectorAll<HTMLElement>("button,input,select,a[href]"),
+      menu.querySelectorAll<HTMLElement>(
+        'button,input,select,a[href],#meishi-content[tabindex="0"]',
+      ),
     ).filter(
       (node) =>
         !node.closest("[hidden]") &&

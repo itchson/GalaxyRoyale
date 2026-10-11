@@ -982,3 +982,23 @@ test("MEISHI is a standalone live card; returning to collections restores menu c
   );
   assert.equal(c.menu.attributes.get("aria-labelledby"), "menu-title");
 });
+
+test("standalone card keyboard focus can reach its read-only scrolling region", () => {
+  const f = fixture(),
+    c = f.context;
+  c.openMenu("meishi");
+  const close = f.element("menu-close"),
+    content = f.element("meishi-content");
+  c.menu.querySelectorAll = (selector) => {
+    assert.ok(selector.includes('#meishi-content[tabindex="0"]'));
+    return [close, content];
+  };
+  close.closest = content.closest = () => null;
+  close.focus();
+  f.press("Tab");
+  assert.equal(c.document.activeElement, content);
+  f.press("Tab");
+  assert.equal(c.document.activeElement, close);
+  f.press("Tab", { shiftKey: true });
+  assert.equal(c.document.activeElement, content);
+});
