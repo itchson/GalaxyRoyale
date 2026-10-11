@@ -1151,6 +1151,9 @@ body.reduced-motion *::after {
     flex-basis: 30%;
   }
 }
+.menu-card:has(#coop-content:not([hidden])) {
+  width: min(calc(400px * var(--ui-scale, 1)), 100%);
+}
 .coop-panel .coop-start,
 .coop-panel .coop-invitation,
 .coop-panel .coop-label {

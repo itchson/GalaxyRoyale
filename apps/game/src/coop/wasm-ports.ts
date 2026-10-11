@@ -8,6 +8,8 @@ import {
   validatePayload,
 } from "./wire.ts";
 import type { Json } from "./wire.ts";
+import { ownedLoadout } from "./wire.ts";
+import type { OwnedLoadout } from "./wire.ts";
 
 /** Structural generated-WASM boundary; no Game/Profile or JS simulation. */
 export interface GalaxyCoop {
@@ -21,6 +23,34 @@ export interface GalaxyCoopPorts {
 }
 const MAX_REQUEST = 65_536;
 const bytes = (text: string): number => new TextEncoder().encode(text).length;
+
+/** Extract a bounded equipment declaration from the actual native solo Profile. */
+export function readOwnedLoadout(galaxy: GalaxyCoop): OwnedLoadout {
+  if (typeof galaxy.co_op_batch !== "function") fail("native_unavailable");
+  const raw = galaxy.co_op_batch(
+    JSON.stringify({ v: 1, operations: [{ op: "export_loadout" }] }),
+  );
+  if (typeof raw !== "string" || bytes(raw) > MAX_REQUEST)
+    fail("native_loadout_bound");
+  let decoded: unknown;
+  try {
+    decoded = JSON.parse(raw);
+  } catch {
+    return fail("native_loadout_response");
+  }
+  const response = record(decoded, ["v", "results"]);
+  if (
+    response.v !== 1 ||
+    !Array.isArray(response.results) ||
+    response.results.length !== 1
+  )
+    fail("native_loadout_response");
+  const result = record(response.results[0], ["ok", "value", "error"]);
+  if (result.ok !== true || result.error !== undefined)
+    fail("native_loadout_unavailable");
+  ownedLoadout(result.value);
+  return result.value;
+}
 
 /** Call synchronous native transactions with bounded, strict response framing. */
 export function createGalaxyCoopPorts(galaxy: GalaxyCoop): GalaxyCoopPorts {

@@ -20,6 +20,30 @@ fn guest() -> Value {
 }
 
 #[test]
+fn owned_equipment_export_and_join_preserve_the_solo_profile() {
+    let mut game = Game::new(Profile::default());
+    let before = serde_json::to_string(game.profile()).unwrap();
+    let exported = batch(&mut game, json!([{ "op":"export_loadout" }]));
+    assert_eq!(exported["results"][0]["ok"], true);
+    let equipment = exported["results"][0]["value"].clone();
+    assert_eq!(equipment["version"], 1);
+    assert!(equipment.get("currency").is_none());
+    let mut join = guest();
+    join["participant"]["owned_loadout"] = equipment.clone();
+    let admitted = batch(&mut game, json!([begin(), join, {"op":"export_loadout"}]));
+    assert_eq!(admitted["results"][1]["ok"], true);
+    assert_eq!(admitted["results"][2]["error"], "active_session");
+    let captured = batch(&mut game, json!([{"op":"acquire","session":id(100)}]));
+    assert_eq!(
+        captured["results"][0]["value"]["snapshot"]["participants"][1]["owned_loadout"],
+        equipment
+    );
+    let ended = batch(&mut game, json!([{"op":"end","session":id(100)}]));
+    assert_eq!(ended["results"][0]["ok"], true);
+    assert_eq!(serde_json::to_string(game.profile()).unwrap(), before);
+}
+
+#[test]
 fn real_admission_input_capture_and_pages_use_authority_without_profiles() {
     let mut game = Game::new(Profile::default());
     let solo = serde_json::to_string(game.profile()).unwrap();

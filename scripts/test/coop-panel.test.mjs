@@ -263,10 +263,7 @@ test("default unavailable dock state cannot start sessions and exposes semantic 
 test("available session copy discloses current guest and reward limitations", () => {
   const f = fixture();
   f.paint();
-  assert.match(
-    visibleText(f.target),
-    /Primary fire only; guests use factory RAICHO/,
-  );
+  assert.match(visibleText(f.target), /Native RAICHO stats; primary fire only/);
   assert.match(visibleText(f.target), /Shared rewards are disabled/);
 });
 
@@ -295,7 +292,7 @@ test("join forwards the full bounded code once, including Enter composition guar
   );
   waiting.resolve();
   await settle();
-  assert.match(visibleText(f.target), /CO-OP AT HAVEN/);
+  assert.match(visibleText(f.target), /INVITE/);
   assert.doesNotMatch(visibleText(f.target), /CONNECTED/);
 });
 
@@ -308,7 +305,7 @@ test("create invokes inside the real click and promise success cannot invent hos
   f.node("coop-create").click();
   await settle();
   assert.equal(f.calls.filter(([kind]) => kind === "create").length, 1);
-  assert.match(visibleText(f.target), /CO-OP AT HAVEN/);
+  assert.match(visibleText(f.target), /INVITE/);
   assert.doesNotMatch(visibleText(f.target), /HOSTING|CONNECTED/);
 });
 

@@ -2,7 +2,7 @@
 //! Authorization maps authenticated channels outside this module. No Profile DTO.
 use game_core::{
     Game, InputFrame,
-    co_op::{Error, ParticipantId, ParticipantSpec},
+    co_op::{Error, OwnedLoadout, ParticipantId, ParticipantSpec},
     identity::{Corporation, KikaiIdentity, KikaiKind},
 };
 use serde::{Deserialize, Serialize};
@@ -53,6 +53,8 @@ struct Participant {
     id: ParticipantId,
     local_seed: u32,
     identity: Option<Identity>,
+    #[serde(default)]
+    owned_loadout: Option<OwnedLoadout>,
 }
 impl From<Participant> for ParticipantSpec {
     fn from(p: Participant) -> Self {
@@ -71,6 +73,7 @@ impl From<Participant> for ParticipantSpec {
 #[derive(Deserialize)]
 #[serde(tag = "op", rename_all = "snake_case", deny_unknown_fields)]
 enum Operation {
+    ExportLoadout,
     Begin {
         protocol: String,
         session: ParticipantId,
@@ -138,6 +141,12 @@ fn value(value: impl Serialize) -> Result<Value, Error> {
 }
 fn execute(game: &mut Game, op: Operation) -> Result<Value, Error> {
     match op {
+        Operation::ExportLoadout => {
+            if game.co_op_session().is_some() {
+                return Err(Error::ActiveSession);
+            }
+            value(game.co_op_owned_loadout()?)
+        }
         Operation::Begin {
             protocol,
             session,
@@ -145,8 +154,15 @@ fn execute(game: &mut Game, op: Operation) -> Result<Value, Error> {
         } => value(game.begin_co_op(&protocol, session, host)?),
         Operation::Join {
             session,
-            participant,
-        } => value(game.join_co_op(session, participant.into())?),
+            mut participant,
+        } => {
+            let owned = participant.owned_loadout.take();
+            let spec = participant.into();
+            value(match owned {
+                Some(loadout) => game.join_co_op_owned(session, spec, loadout)?,
+                None => game.join_co_op(session, spec)?,
+            })
+        }
         Operation::HostInput {
             session,
             seq,

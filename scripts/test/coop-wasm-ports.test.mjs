@@ -2,8 +2,15 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
-import { createGalaxyCoopPorts } from "../../apps/game/src/coop/wasm-ports.ts";
-import { validatePayload, publication } from "../../apps/game/src/coop/wire.ts";
+import {
+  createGalaxyCoopPorts,
+  readOwnedLoadout,
+} from "../../apps/game/src/coop/wasm-ports.ts";
+import {
+  validatePayload,
+  publication,
+  spec,
+} from "../../apps/game/src/coop/wire.ts";
 
 // Replay exact native serializer output; this verifies the browser boundary,
 // not execution of native Game/Replica or real RTC in this Node process.
@@ -20,6 +27,83 @@ const body = fixture("body").results[0].value;
 const session = capture.snapshot.session;
 const self = capture.snapshot.participants[1];
 const ok = JSON.stringify({ v: 1, ok: true, value: null });
+
+const equipment = () => ({
+  version: 1,
+  selected_ship: 0,
+  owned_ships: 1,
+  patches: 0,
+  royal_victory: false,
+  ship_xp: 8,
+  hardware: [0, 0, 0, 0, 0, 0],
+  slots: [null, null, { index: 2, rank: 1 }],
+  trained_starter: false,
+  relic_count: 0,
+});
+
+test("equipment extraction delegates to native solo Profile, preserving receiver", () => {
+  const value = equipment();
+  const galaxy = {
+    co_op_batch(request) {
+      assert.equal(this, galaxy);
+      assert.deepEqual(JSON.parse(request), {
+        v: 1,
+        operations: [{ op: "export_loadout" }],
+      });
+      return JSON.stringify({ v: 1, results: [{ ok: true, value }] });
+    },
+  };
+  assert.deepEqual(readOwnedLoadout(galaxy), value);
+});
+
+test("equipment extraction fails closed for absent native export and malformed declarations", () => {
+  assert.throws(() => readOwnedLoadout({}), /native_unavailable/);
+  for (const raw of [
+    "bad JSON",
+    "x".repeat(65537),
+    JSON.stringify({ v: 1, results: [{ ok: false, error: "active_session" }] }),
+    JSON.stringify({ v: 1, results: [] }),
+    JSON.stringify({
+      v: 1,
+      results: [{ ok: true, value: { ...equipment(), currency: [9, 9, 9] } }],
+    }),
+    JSON.stringify({
+      v: 1,
+      results: [
+        { ok: true, value: { ...equipment(), hardware: [0, 0, 0, 0, 0, 6] } },
+      ],
+    }),
+    JSON.stringify({
+      v: 1,
+      results: [
+        {
+          ok: true,
+          value: { ...equipment(), slots: [null, null, { index: 2, rank: 6 }] },
+        },
+      ],
+    }),
+  ])
+    assert.throws(() => readOwnedLoadout({ co_op_batch: () => raw }));
+});
+
+test("optional owned equipment preserves legacy spec and publication while rejecting inconsistent hulls", () => {
+  const legacy = { local_seed: 123, identity: null };
+  spec(legacy);
+  spec({ ...legacy, owned_loadout: equipment() });
+  assert.throws(() =>
+    spec({ ...legacy, owned_loadout: { ...equipment(), ship_xp: -1 } }),
+  );
+  const updated = structuredClone(capture);
+  const participant = updated.snapshot.participants[1];
+  participant.owned_loadout = {
+    ...equipment(),
+    selected_ship: participant.selected_ship,
+  };
+  publication(updated);
+  participant.owned_loadout.selected_ship =
+    (participant.selected_ship + 1) % 10;
+  assert.throws(() => publication(updated));
+});
 
 // Native export and committed Git bytes use LF. A Windows text checkout may
 // supply CRLF; this changes no JSON value or native numeric data.

@@ -1,6 +1,6 @@
 import "./style.css";
 import { CoopController } from "./coop/controller";
-import { createGalaxyCoopPorts } from "./coop/wasm-ports";
+import { createGalaxyCoopPorts, readOwnedLoadout } from "./coop/wasm-ports";
 import { paintCoopPanel } from "./coop/panel";
 import { enterAfterSave } from "./coop/entry";
 import { FlightInput } from "./input";
@@ -1249,7 +1249,11 @@ function configureCoop(): void {
       availability: ports.availability,
       localSpec: () => {
         const profile = galaxy.profile();
-        return { local_seed: profile.seed, identity: profile.identity ?? null };
+        return {
+          local_seed: profile.seed,
+          identity: profile.identity ?? null,
+          owned_loadout: readOwnedLoadout(galaxy),
+        };
       },
       onChange: () => {
         const mode = coop?.frameMode() ?? "solo";

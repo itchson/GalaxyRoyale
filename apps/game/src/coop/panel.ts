@@ -202,6 +202,8 @@ function render(view: View): boolean {
     changed = true;
   }
   text(view.heading, valid ? phases[state.phase][0] : "SESSION UNAVAILABLE");
+  hidden(view.heading, valid && state.phase === "idle");
+  hidden(view.status, valid && state.phase === "idle" && !recovering);
   text(
     view.status,
     recovering
@@ -264,7 +266,7 @@ function render(view: View): boolean {
     ? "Solo play stays blocked until restoration succeeds."
     : idle && !view.canStart
       ? "Return to Haven to invite or join."
-      : "Primary fire only; guests use factory RAICHO. Solo progress is restored on exit. Shared rewards are disabled.";
+      : "Native RAICHO stats; primary fire only. Solo progress is restored on exit. Shared rewards are disabled.";
   const guidance = view.root.querySelector<HTMLElement>(".coop-guidance")!;
   text(guidance, availability);
   if (view.root.getAttribute("aria-busy") !== String(view.pending !== null)) {

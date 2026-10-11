@@ -585,6 +585,8 @@ test("real HTTP offer/answer/ICE path binds peer IDs and admits only explicit fr
   );
   assert.equal(p.guest.markSimulation(p.hostId, true), true);
   assert.deepEqual(local, before);
+  // Admission can precede asynchronous trickled ICE delivery through HTTP.
+  await until(() => f.network.pcs.every((pc) => pc.candidates.length === 2));
   assert.ok(f.network.pcs.every((pc) => pc.candidates.length === 2));
   const diagnostics = JSON.stringify(p.host.diagnostics());
   assert.ok(

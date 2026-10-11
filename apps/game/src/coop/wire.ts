@@ -29,12 +29,26 @@ export interface Frame {
 }
 export interface ParticipantSpec {
   local_seed: number;
+  /** Native-exported offline equipment declaration; host derives effective stats. */
+  owned_loadout?: OwnedLoadout;
   identity: null | {
     kind: "dora" | "doro" | "talo";
     corporation: "pan" | "renko" | "hugo";
     sub_corporation: "pan" | "renko" | "hugo";
     hex_id: string;
   };
+}
+export interface OwnedLoadout {
+  version: 1;
+  selected_ship: number;
+  owned_ships: number;
+  patches: number;
+  royal_victory: boolean;
+  ship_xp: number;
+  hardware: number[];
+  slots: ({ index: number; rank: number } | null)[];
+  trained_starter: boolean;
+  relic_count: number;
 }
 export class TransportError extends Error {
   constructor(public readonly code: string) {
@@ -98,8 +112,9 @@ export function json(value: unknown): asserts value is Json {
   visit(value, 0);
 }
 export function spec(value: unknown): asserts value is ParticipantSpec {
-  const o = record(value, ["local_seed", "identity"]);
+  const o = record(value, ["local_seed", "identity", "owned_loadout"]);
   if (!uint(o.local_seed) || o.local_seed === 0) fail("invalid_local_seed");
+  if (o.owned_loadout !== undefined) ownedLoadout(o.owned_loadout);
   if (o.identity === null) return;
   const i = record(o.identity, [
     "kind",
@@ -115,6 +130,50 @@ export function spec(value: unknown): asserts value is ParticipantSpec {
     !/^[0-9a-f]{16}$/.test(i.hex_id)
   )
     fail("invalid_identity");
+}
+/** Shape bounds only. Registry, ownership declarations and compatibility are native checks. */
+export function ownedLoadout(value: unknown): asserts value is OwnedLoadout {
+  const o = record(value, [
+    "version",
+    "selected_ship",
+    "owned_ships",
+    "patches",
+    "royal_victory",
+    "ship_xp",
+    "hardware",
+    "slots",
+    "trained_starter",
+    "relic_count",
+  ]);
+  const bounded = (n: unknown, min: number, max: number) =>
+    uint(n) && Number(n) >= min && Number(n) <= max;
+  if (
+    Object.keys(o).length !== 10 ||
+    o.version !== 1 ||
+    !bounded(o.selected_ship, 0, 9) ||
+    !bounded(o.owned_ships, 1, 1023) ||
+    !bounded(o.patches, 0, 255) ||
+    typeof o.royal_victory !== "boolean" ||
+    !uint(o.ship_xp) ||
+    typeof o.trained_starter !== "boolean" ||
+    !bounded(o.relic_count, 0, 20) ||
+    !Array.isArray(o.hardware) ||
+    o.hardware.length !== 6 ||
+    o.hardware.some((n) => !bounded(n, 0, 5)) ||
+    !Array.isArray(o.slots) ||
+    o.slots.length !== 3
+  )
+    fail("invalid_owned_loadout");
+  for (const slot of o.slots) {
+    if (slot === null) continue;
+    const s = record(slot, ["index", "rank"]);
+    if (
+      Object.keys(s).length !== 2 ||
+      !bounded(s.index, 0, 255) ||
+      !bounded(s.rank, 1, 5)
+    )
+      fail("invalid_owned_loadout");
+  }
 }
 function input(value: unknown): void {
   const o = record(value, ["epoch", "seq", "input"]);
@@ -395,6 +454,7 @@ export function snapshot(value: unknown): void {
       "local_seed",
       "identity",
       "selected_ship",
+      "owned_loadout",
       "position",
       "previous",
       "velocity",
@@ -424,6 +484,11 @@ export function snapshot(value: unknown): void {
     ids.add(p.id);
     slots.add(p.slot);
     spec({ local_seed: p.local_seed, identity: p.identity });
+    if (p.owned_loadout !== undefined) {
+      ownedLoadout(p.owned_loadout);
+      if (p.owned_loadout.selected_ship !== p.selected_ship)
+        fail("invalid_snapshot_participant");
+    }
     for (const key of ["position", "previous", "velocity"]) vector(p[key]);
     for (const key of ["heading", "previous_heading"])
       finite(p[key], -1_000_000, 1_000_000);
