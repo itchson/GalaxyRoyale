@@ -1,0 +1,44 @@
+[
+  {
+    "command": [
+      "rustfmt",
+      "--edition",
+      "2024",
+      "--config",
+      "skip_children=true",
+      "crates/game_web/src/ui_scene.rs",
+      "crates/game_web/src/ui_facility_label_tests.rs"
+    ],
+    "exit_code": 0,
+    "log": "format.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "test",
+      "-p",
+      "game_web",
+      "--locked",
+      "facility_label",
+      "--",
+      "--nocapture"
+    ],
+    "exit_code": 0,
+    "log": "native-tests.log"
+  },
+  {
+    "command": [
+      "cargo",
+      "clippy",
+      "-p",
+      "game_web",
+      "--locked",
+      "--all-targets",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "log": "native-clippy.log"
+  }
+]

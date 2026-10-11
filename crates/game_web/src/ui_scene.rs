@@ -206,6 +206,255 @@ static SAVE_ICONS: LazyLock<[PixelBody; 3]> = LazyLock::new(|| {
     ]
     .map(|rows| PixelBody::from_ascii(&rows, &[('#', WHITE), ('+', DIM)]))
 });
+// Authored gear, play, return arrow, home, power and menu silhouettes share the same
+// object-local control path as close/save. Each is a single cached 10×10 body.
+static MENU_ICONS: LazyLock<[PixelBody; 7]> = LazyLock::new(|| {
+    [
+        [
+            "...####...",
+            "...#++#...",
+            ".###..###.",
+            "##.#..#.##",
+            "#..#..#..#",
+            "#..#..#..#",
+            "##.#..#.##",
+            ".###..###.",
+            "...#++#...",
+            "...####...",
+        ],
+        [
+            "..#.......",
+            "..##......",
+            "..###.....",
+            "..####....",
+            "..#####...",
+            "..#####...",
+            "..####....",
+            "..###.....",
+            "..##......",
+            "..#.......",
+        ],
+        [
+            "...####...",
+            ".##....##.",
+            "##......##",
+            "#.......##",
+            "#.....####",
+            "#......##.",
+            "#.........",
+            "##......#.",
+            ".##....##.",
+            "...####...",
+        ],
+        [
+            "....##....",
+            "...####...",
+            "..##++##..",
+            ".##++++##.",
+            "##++++++##",
+            "..######..",
+            "..##..##..",
+            "..##..##..",
+            "..##..##..",
+            "..######..",
+        ],
+        [
+            "....##....",
+            "....##....",
+            ".##.##.##.",
+            "##..##..##",
+            "#...##...#",
+            "#........#",
+            "#........#",
+            "##......##",
+            ".##....##.",
+            "...####...",
+        ],
+        [
+            "..........",
+            ".########.",
+            ".########.",
+            "..........",
+            ".########.",
+            ".########.",
+            "..........",
+            ".########.",
+            ".########.",
+            "..........",
+        ],
+        [
+            ".###..###.",
+            "##.####.##",
+            "#++#..#++#",
+            "#++#..#++#",
+            "#++####++#",
+            "#++#++#++#",
+            "#++#++#++#",
+            "#++#..#++#",
+            "##.#..#.##",
+            ".###..###.",
+        ],
+    ]
+    .map(|rows| PixelBody::from_ascii(&rows, &[('#', WHITE), ('+', DIM)]))
+});
+fn menu_icon(kind: &str) -> Option<(&'static PixelBody, u32)> {
+    let (index, accent) = match kind {
+        "settings-icon" => (0, rgb(88, 222, 239)),
+        "resume-icon" => (1, rgb(106, 237, 193)),
+        "restart-icon" => (2, rgb(255, 215, 131)),
+        "title-icon" => (3, rgb(182, 201, 219)),
+        "quit-icon" => (4, rgb(220, 125, 130)),
+        "status-icon" => (5, rgb(182, 201, 219)),
+        "map-icon" => (6, rgb(106, 237, 193)),
+        _ => return None,
+    };
+    Some((&MENU_ICONS[index], accent))
+}
+
+// A chart marker is its own compact occupied object. DOM hit regions stay
+// larger than this art; selecting a marker never adds a generic button frame.
+static MAP_HOME: LazyLock<PixelBody> = LazyLock::new(|| {
+    PixelBody::from_ascii(
+        &[
+            "....#....",
+            "....#....",
+            "..#####..",
+            "..#...#..",
+            "###.+.###",
+            "..#...#..",
+            "..#####..",
+            "....#....",
+            "....#....",
+        ],
+        &[('#', WHITE), ('+', DIM)],
+    )
+});
+static MAP_PLAYER: LazyLock<PixelBody> = LazyLock::new(|| {
+    PixelBody::from_ascii(
+        &[
+            ".........",
+            ".##......",
+            "..###....",
+            "...####..",
+            "...++####",
+            "...####..",
+            "..###....",
+            ".##......",
+            ".........",
+        ],
+        &[('#', WHITE), ('+', DIM)],
+    )
+});
+static MAP_SITES: LazyLock<[PixelBody; 6]> = LazyLock::new(|| {
+    [
+        [
+            "....#....",
+            "...###...",
+            "....#....",
+            ".#..#..#.",
+            "#########",
+            ".#..#..#.",
+            "....#....",
+            "...###...",
+            "....#....",
+        ],
+        [
+            "....#....",
+            "...#.#...",
+            "..#...#..",
+            ".#..+..#.",
+            "#..+++..#",
+            ".#..+..#.",
+            "..#...#..",
+            "...#.#...",
+            "....#....",
+        ],
+        [
+            "....##...",
+            "...##....",
+            "..##..##.",
+            ".##..##..",
+            "##..##...",
+            "...##..##",
+            "..##..##.",
+            ".##..##..",
+            "....##...",
+        ],
+        [
+            "..#####..",
+            ".#.....#.",
+            "#..#.#..#",
+            "#..#.#..#",
+            "#..+++..#",
+            "#..#.#..#",
+            "#..#.#..#",
+            ".#.....#.",
+            "..#####..",
+        ],
+        [
+            "....#....",
+            "...###...",
+            "..#####..",
+            ".........",
+            "##..+..##",
+            "##.+++.##",
+            ".#..+..#.",
+            "..#...#..",
+            ".........",
+        ],
+        [
+            "#...#...#",
+            ".#..#..#.",
+            "..#.#.#..",
+            "...###...",
+            "#########",
+            "...###...",
+            "..#.#.#..",
+            ".#..#..#.",
+            "#...#...#",
+        ],
+    ]
+    .map(|rows| PixelBody::from_ascii(&rows, &[('#', WHITE), ('+', DIM)]))
+});
+fn map_color(kind: usize) -> u32 {
+    [
+        rgb(88, 222, 239),
+        rgb(194, 142, 244),
+        rgb(118, 230, 177),
+        rgb(244, 180, 105),
+        rgb(216, 224, 122),
+        rgb(141, 193, 252),
+    ][kind.min(5)]
+}
+
+/// Midpoint perimeter, eight octants with diagonal/axis duplicates removed.
+/// It streams at most 8*(radius+1) local cells without a temporary bitmap.
+fn map_ring_cells(radius: i32) -> impl Iterator<Item = Vec2> {
+    std::iter::successors(Some((radius, 0, 1 - radius)), |&(x, y, error)| {
+        let y = y + 1;
+        let (x, error) = if error < 0 {
+            (x, error + 2 * y + 1)
+        } else {
+            (x - 1, error + 2 * (y - (x - 1)) + 1)
+        };
+        (y <= x).then_some((x, y, error))
+    })
+    .flat_map(|(x, y, _)| {
+        let points = [
+            (x, y),
+            (y, x),
+            (-y, x),
+            (-x, y),
+            (-x, -y),
+            (-y, -x),
+            (y, -x),
+            (x, -y),
+        ];
+        points.into_iter().enumerate().filter_map(move |(i, p)| {
+            (!points[..i].contains(&p)).then_some(Vec2::new(p.0 as f32, p.1 as f32))
+        })
+    })
+}
 // Original comms portrait, authored here as object-local cells. The dark suit,
 // helmet, brows, headset and face remain readable at its native 24×32 size.
 const PORTRAIT_MASK: [&str; 32] = [
@@ -421,9 +670,171 @@ struct Painter<'a> {
     work_remaining: usize,
 }
 impl Painter<'_> {
+    fn map_field(&mut self, node: &UiNode) {
+        let r = node.rect;
+        let old_clip = self.clip;
+        self.clip = Some(old_clip.map_or(r, |c| intersection(r, c)));
+        let mut strip = |rect, color| {
+            if self.work_remaining > 0 {
+                self.work_remaining -= 1;
+                self.rect(rect, color);
+            }
+        };
+        strip(r, rgb(4, 10, 17));
+        // Rectangular local quad strips remain in the parent group. A fixed
+        // logical grid supports chart orientation without inventing world zones.
+        for x in (16..r[2].ceil() as usize).step_by(16) {
+            strip([r[0] + x as f32, r[1], 1.0, r[3]], rgb(13, 25, 34));
+        }
+        for y in (16..r[3].ceil() as usize).step_by(16) {
+            strip([r[0], r[1] + y as f32, r[2], 1.0], rgb(13, 25, 34));
+        }
+        for border in [
+            [r[0], r[1], r[2], 1.0],
+            [r[0], r[1] + r[3] - 1.0, r[2], 1.0],
+            [r[0], r[1], 1.0, r[3]],
+            [r[0] + r[2] - 1.0, r[1], 1.0, r[3]],
+        ] {
+            strip(border, rgb(38, 67, 80));
+        }
+        self.clip = old_clip;
+    }
+
+    fn map_ring(&mut self, node: &UiNode) {
+        let r = node.rect;
+        let radius = ((r[2].min(r[3]) - 1.0) * 0.5).floor() as i32;
+        if radius < 1 || self.remaining == 0 || self.work_remaining == 0 {
+            return;
+        }
+        let center = Vec2::new(r[0] + r[2] * 0.5, r[1] + r[3] * 0.5);
+        let clip = self.clip.map_or(r, |c| intersection(r, c));
+        let local = Transform {
+            position: center,
+            ..Transform::default()
+        }
+        .affine();
+        let color = match selection(node.value, 3) {
+            1 => rgb(168, 123, 62),
+            2 => rgb(61, 135, 153),
+            _ => rgb(72, 169, 187),
+        };
+        let mut attempted = 0;
+        let cells = map_ring_cells(radius)
+            .take(self.work_remaining)
+            .filter_map(|p| {
+                attempted += 1;
+                let c = p + center;
+                (c.x - 0.5 >= clip[0]
+                    && c.x + 0.5 <= clip[0] + clip[2]
+                    && c.y - 0.5 >= clip[1]
+                    && c.y + 0.5 <= clip[1] + clip[3])
+                    .then_some((p, color))
+            })
+            .take(self.remaining);
+        let count = self.frame.push_cells_affine_material(
+            self.parent.compose(local),
+            engine_core::PixelMaterial::default(),
+            cells,
+        );
+        self.remaining -= count;
+        self.work_remaining -= attempted;
+    }
+
+    fn map_marker(&mut self, node: &UiNode) {
+        let (body, accent, rotation) = match node.kind.as_str() {
+            "map-home" => (&*MAP_HOME, map_color(0), 0.0),
+            "map-player" => (
+                &*MAP_PLAYER,
+                rgb(255, 215, 131),
+                if node.value.is_finite() {
+                    node.value.rem_euclid(std::f32::consts::TAU)
+                } else {
+                    0.0
+                },
+            ),
+            _ => {
+                let kind = selection(node.value, 6);
+                (&MAP_SITES[kind], map_color(kind), 0.0)
+            }
+        };
+        let count = body.occupied_count();
+        if count > self.remaining || count > self.work_remaining {
+            return;
+        }
+        let r = node.rect;
+        // The player rotates as one real object. Fit its transformed cell
+        // corners, rather than rotating a pre-fitted square beyond the hitbox.
+        let basis = Transform {
+            rotation,
+            ..Transform::default()
+        };
+        let extent = body
+            .cells()
+            .flat_map(|(p, _)| {
+                [
+                    p + Vec2::splat(-0.5),
+                    p + Vec2::new(0.5, -0.5),
+                    p + Vec2::new(-0.5, 0.5),
+                    p + Vec2::splat(0.5),
+                ]
+            })
+            .map(|p| basis.point(p).abs())
+            .fold(Vec2::ZERO, Vec2::max)
+            * 2.0;
+        let fit = (r[2] / extent.x).min(r[3] / extent.y).min(1.0);
+        if !fit.is_finite() || fit <= 0.0 {
+            return;
+        }
+        let local = Transform {
+            position: Vec2::new(r[0] + r[2] * 0.5, r[1] + r[3] * 0.5),
+            rotation,
+            scale: Vec2::splat(fit),
+        };
+        let clip = self.clip.map_or(r, |c| intersection(r, c));
+        let color = if node.disabled {
+            BUTTON_DISABLED_TEXT
+        } else if node.selected {
+            rgb(255, 215, 131)
+        } else if node.active {
+            brighten(accent)
+        } else {
+            accent
+        };
+        self.frame.push_body_affine_colored(
+            body,
+            self.parent.compose(local.affine()),
+            |p, shade| {
+                let outside = [
+                    p + Vec2::splat(-0.5),
+                    p + Vec2::new(0.5, -0.5),
+                    p + Vec2::new(-0.5, 0.5),
+                    p + Vec2::splat(0.5),
+                ]
+                .into_iter()
+                .map(|p| local.point(p))
+                .any(|p| {
+                    p.x < clip[0]
+                        || p.x > clip[0] + clip[2]
+                        || p.y < clip[1]
+                        || p.y > clip[1] + clip[3]
+                });
+                if outside {
+                    0
+                } else if shade == DIM && !node.disabled {
+                    button_tone(color, 0.55)
+                } else {
+                    color
+                }
+            },
+        );
+        self.remaining -= count;
+        self.work_remaining -= count;
+    }
     fn control_icon(&mut self, node: &UiNode) {
         let (body, accent) = if node.kind == "close-icon" {
             (&*CLOSE_ICON, WHITE)
+        } else if let Some(icon) = menu_icon(&node.kind) {
+            icon
         } else {
             let state = selection(node.value, SAVE_ICONS.len());
             (
@@ -938,6 +1349,71 @@ impl Painter<'_> {
         };
         match node.kind.as_str() {
             "text" => self.text(r, &node.text, font, color, false),
+            "status-text" | "warning-text" => {
+                // The measured status slot is distinct from its accessible
+                // 44px hitbox. One logical pixel font stays stable on zoom;
+                // clipping covers full glyph cells, not only their centers.
+                if r[2] < RoyaleMono::WIDTH || r[3] < RoyaleMono::HEIGHT {
+                    return;
+                }
+                let previous_clip = self.clip;
+                self.clip = Some(previous_clip.map_or(r, |clip| intersection(r, clip)));
+                let columns = ((r[2] + 1.0) / RoyaleMono::ADVANCE).floor() as usize;
+                let color = if node.disabled {
+                    BUTTON_DISABLED_TEXT
+                } else if node.kind == "warning-text" {
+                    crate::pixel_ui::warning_color(
+                        if node.value.is_finite() {
+                            node.value.clamp(0.0, 2.0) as u8
+                        } else {
+                            0
+                        },
+                        time,
+                        reduced,
+                    )
+                } else if node.active {
+                    CYAN
+                } else {
+                    DIM
+                };
+                let text_local = Transform {
+                    position: Vec2::new(r[0], r[1]),
+                    ..Transform::default()
+                }
+                .affine();
+                for (column, character) in node.text.chars().take(columns.min(256)).enumerate() {
+                    let body = RoyaleMono::body(if character.is_whitespace() {
+                        ' '
+                    } else {
+                        character
+                    });
+                    let count = body.occupied_count();
+                    if count > self.remaining || count > self.work_remaining {
+                        break;
+                    }
+                    if count == 0 {
+                        continue;
+                    }
+                    let local = RoyaleMono::letter_transform(text_local, column);
+                    let world = self.parent.compose(local);
+                    let clip = self.clip.unwrap();
+                    self.frame.push_body_affine_colored(body, world, |cell, _| {
+                        let p = local.point(cell);
+                        if p.x - 0.5 < clip[0]
+                            || p.y - 0.5 < clip[1]
+                            || p.x + 0.5 > clip[0] + clip[2]
+                            || p.y + 0.5 > clip[1] + clip[3]
+                        {
+                            0
+                        } else {
+                            color
+                        }
+                    });
+                    self.remaining -= count;
+                    self.work_remaining -= count;
+                }
+                self.clip = previous_clip;
+            }
             "offense-text" | "defense-text" | "passive-text" => self.text(
                 r,
                 &node.text,
@@ -954,9 +1430,28 @@ impl Painter<'_> {
             "portrait" => self.portrait(node, time, reduced),
             "campaign-patch" => self.campaign(node, false, time, reduced),
             "campaign-ship" => self.campaign(node, true, time, reduced),
-            "close-icon" | "save-icon" => self.control_icon(node),
+            "close-icon" | "save-icon" | "settings-icon" | "resume-icon" | "restart-icon"
+            | "title-icon" | "quit-icon" | "status-icon" | "map-icon" => self.control_icon(node),
+            "map-field" => self.map_field(node),
+            "map-ring" => self.map_ring(node),
+            "map-home" | "map-player" | "map-site" => self.map_marker(node),
             "facility-label" => {
-                let label = [r[0] + r[2] * 0.5 - 50.0, r[1] + r[3] + 2.0, 100.0, 10.0];
+                // The shell selects a safe label side without moving the real
+                // facility hit area. Nonfinite values retain the below default.
+                let placement = selection(node.value, 3);
+                if placement == 2 {
+                    return;
+                }
+                let label = [
+                    r[0] + r[2] * 0.5 - 50.0,
+                    if placement == 1 {
+                        r[1] - 12.0
+                    } else {
+                        r[1] + r[3] + 2.0
+                    },
+                    100.0,
+                    10.0,
+                ];
                 let previous_clip = self.clip;
                 self.clip = Some(previous_clip.map_or(label, |clip| intersection(label, clip)));
                 self.text(
@@ -1757,3 +2252,11 @@ mod semantic_button_tests;
 #[cfg(test)]
 #[path = "ui_icon_tests.rs"]
 mod icon_tests;
+
+#[cfg(test)]
+#[path = "ui_map_tests.rs"]
+mod map_tests;
+
+#[cfg(test)]
+#[path = "ui_facility_label_tests.rs"]
+mod facility_label_tests;

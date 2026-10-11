@@ -78,22 +78,23 @@ fn isolated_warp_cannot_claim_a_ready_quest_but_normal_flight_still_can() {
 }
 
 #[test]
-fn valid_warp_explicitly_finishes_and_banks_an_existing_run_only_once() {
+fn valid_warp_explicitly_abandons_cargo_and_finishes_an_existing_run_only_once() {
     let mut game = Game::new(Profile::default());
     game.move_player(Vec2::new(1600.0, 0.0));
     game.track_run(1.0);
-    game.profile.campaign.cargo_materials = 3;
-    game.profile.campaign.stored_materials = 7;
+    game.profile.campaign.cargo_materials = [3, 0, 0, 0, 0];
+    game.profile.campaign.stored_materials = [7, 0, 0, 0, 0];
     game.profile.currency = [1, 2, 3];
     game.profile.campaign.ship_xp[0] = 60;
     game.diagnostic("warp 2000 100");
-    assert_eq!(game.profile.campaign.cargo_materials, 0);
-    assert_eq!(game.profile.campaign.stored_materials, 10);
+    assert_eq!(game.profile.campaign.cargo_materials, [0, 0, 0, 0, 0]);
+    assert_eq!(game.profile.campaign.stored_materials, [7, 0, 0, 0, 0]);
     assert_eq!(game.profile.currency, [1, 2, 3]);
     assert_eq!(game.profile.campaign.ship_xp[0], 60);
     let report = game.profile.campaign.last_run.clone().unwrap();
     assert_eq!(report.time, 1.0);
     assert_eq!(report.distance_peak, 1600.0);
+    assert_eq!(report.materials_lost, [3, 0, 0, 0, 0]);
     let before = serde_json::to_value(&game.profile).unwrap();
     game.diagnostic("warp 3000 100");
     assert_eq!(serde_json::to_value(&game.profile).unwrap(), before);

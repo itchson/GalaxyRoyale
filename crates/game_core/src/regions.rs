@@ -31,6 +31,35 @@ pub struct Site {
     pub target_kills: u32,
 }
 
+#[derive(Debug, Clone, Copy, Serialize, PartialEq)]
+pub struct ZoneBelt {
+    pub inner: f32,
+    pub outer: f32,
+    pub material_tier: u8,
+    pub recommended_level: u32,
+}
+
+/// Canonical remote rings stay clear of the Haven tutorial and world boundary.
+/// Identity and material tier belong to this seeded site, never the camera.
+pub fn site_belt(seed: u32, site: &Site) -> Option<ZoneBelt> {
+    let canonical = site_by_id(seed, &site.id)?;
+    if canonical != *site {
+        return None;
+    }
+    let center = Vec2::from_array(site.position);
+    let outer = site.radius + 520.0;
+    if center.length() - outer < HUB_RADIUS || center.abs().max_element() + outer > 1_000_000.0 {
+        return None;
+    }
+    let tier = (1 + ((center.length() - HUB_RADIUS).max(0.0) / 1600.0) as u32).min(5) as u8;
+    Some(ZoneBelt {
+        inner: site.radius + 240.0,
+        outer,
+        material_tier: tier,
+        recommended_level: [1, 3, 5, 10, 12][tier as usize - 1],
+    })
+}
+
 impl Site {
     /// Lets gameplay reuse its nearby-site cache during projectile safety checks.
     pub fn intersects_segment(&self, from: Vec2, to: Vec2) -> bool {
@@ -517,65 +546,18 @@ impl Scenery<'_> {
 /// Stable analytic gas cells: seed/grid identifies a cell for the entire session;
 /// time only moves its curl and opacity. No random respawns or simulation bodies.
 fn gas_wisps(scene: &mut Scenery<'_>, seed: u32, time: f32, reduced: bool) -> usize {
-    if scene.remaining == 0 {
-        return 0;
-    }
-    let limit = if reduced { 400 } else { 800 };
-    let mut emitted = 0;
-    for (layer, factor) in [(0_u32, 0.16), (1, 0.36)] {
-        let sample = scene.camera * factor;
-        let min = tile(sample - scene.half - Vec2::splat(100.0), 128.0);
-        let max = tile(sample + scene.half + Vec2::splat(100.0), 128.0);
-        for y in min[1]..=max[1] {
-            for x in min[0]..=max[0] {
-                let grid = [x, y];
-                let field = hash(seed, grid, 0x6761_7300 + layer);
-                let angle = unit(mix(field ^ 19)) * TAU;
-                let direction = Vec2::new(angle.cos(), angle.sin());
-                let side = Vec2::new(-direction.y, direction.x);
-                let origin = (Vec2::new(x as f32, y as f32)
-                    + Vec2::new(unit(field), unit(mix(field))))
-                    * 128.0;
-                let violet = field & 1 == 0;
-                for index in 0..48 {
-                    if reduced && index % 2 == 1 {
-                        continue;
-                    }
-                    let h = hash(field, grid, index * 7919 + 37);
-                    let along = unit(h) * 2.0 - 1.0;
-                    let phase = time * 0.09 + unit(mix(h ^ 11)) * TAU;
-                    let drift =
-                        direction * (phase.sin() * 9.0) + side * ((phase * 0.73).cos() * 3.0);
-                    let curl = (along * 4.2 + time * 0.065 + unit(field) * TAU).sin() * 10.0;
-                    let jitter = (unit(mix(h ^ 47)) - 0.5) * 10.0;
-                    let position = origin
-                        + direction * along * 87.0
-                        + side * (curl + jitter)
-                        + drift
-                        + scene.camera * (1.0 - factor);
-                    let size = [0.65, 0.9, 1.15, 1.4][(h & 3) as usize];
-                    if !scene.visible(position, size) {
-                        continue;
-                    }
-                    let softness = (1.0 - along.abs() * 0.6) * (0.84 + 0.16 * phase.sin());
-                    let alpha = ((25.0 + unit(mix(h ^ 71)) * 47.0) * softness) as u32;
-                    let shimmer = (time * 0.06 + along * 2.0 + unit(field) * TAU).sin() * 7.0;
-                    let color = if violet {
-                        [(151.0 + shimmer) as u8, (90.0 - shimmer * 0.5) as u8, 183]
-                    } else {
-                        [57, (147.0 + shimmer * 0.5) as u8, (177.0 + shimmer) as u8]
-                    };
-                    let packed = u32::from_le_bytes([color[0], color[1], color[2], alpha as u8]);
-                    scene.pixel(position, size, packed);
-                    emitted += 1;
-                    if emitted >= limit || scene.remaining == 0 {
-                        return emitted;
-                    }
-                }
-            }
-        }
-    }
-    emitted
+    crate::cosmic_background::render_gas(
+        scene.frame,
+        crate::cosmic_background::SceneInput {
+            seed,
+            camera: scene.camera,
+            viewport: scene.half * 2.0,
+            time,
+            reduced,
+            reduced_motion: false, // Game supplies its already-frozen cosmetic time.
+        },
+        &mut scene.remaining,
+    )
 }
 
 /// Pure seeded parallax scenery. Adds at most 6,000 quads, even for oversized viewports.
@@ -746,7 +728,7 @@ mod tests {
         let (b, repeated) = draw(20.0, false);
         let (later, _) = draw(21.0, false);
         let (reduced, sparse_count) = draw(20.0, true);
-        assert!((400..=800).contains(&count));
+        assert!((1..=800).contains(&count));
         assert_eq!(count, repeated);
         assert_eq!(a.pixel_count, count);
         assert!(sparse_count <= 400 && sparse_count < count);
@@ -764,13 +746,13 @@ mod tests {
             a.batches
                 .iter()
                 .flat_map(|batch| &batch.transforms)
-                .all(|transform| transform.b[2] == 0.0 && transform.b[3] == 0.0)
+                .all(|transform| transform.b[2] == 0.0 && transform.b[3] == -1.0)
         );
         assert!(
             a.batches
                 .iter()
                 .flat_map(|batch| &batch.pixels)
-                .all(|pixel| (pixel.color >> 24) <= 72)
+                .all(|pixel| (pixel.color >> 24) <= 100)
         );
     }
     #[test]

@@ -1,0 +1,4265 @@
+{
+  "recordedAt": "2026-10-11T01:10:20.557Z",
+  "scope": "Desktop Chrome WebGL2 UI observations only; historical 810 milestone, no phone/GPU performance/authenticated remote claim.",
+  "browser": {
+    "provider": "Chrome extension",
+    "profile": "same selected Chrome profile",
+    "origin": "http://127.0.0.1:4212",
+    "replacementTabs": [
+      "1254884539",
+      "1254884542"
+    ],
+    "userAgent": "not exposed by the supported read-only DOM evaluator"
+  },
+  "cache": "galaxy-810fccad52eabc00",
+  "assetCount": 19,
+  "assets": [
+    "/assets/index-D-wW9yK0.css",
+    "/assets/index-D39CEEWH.js",
+    "/fonts/OFL.txt",
+    "/fonts/RoyaleMono.ttf",
+    "/fonts/Tiny5.ttf",
+    "/icon-192.png",
+    "/icon-512.png",
+    "/icon.svg",
+    "/index.html",
+    "/manifest.webmanifest",
+    "/wasm/builds.json",
+    "/wasm/webgl2-e93f4425ad151df865204b4e003a3fde9175d83144d132c847e6c5ecaa504532/galaxy.d.ts",
+    "/wasm/webgl2-e93f4425ad151df865204b4e003a3fde9175d83144d132c847e6c5ecaa504532/galaxy.js",
+    "/wasm/webgl2-e93f4425ad151df865204b4e003a3fde9175d83144d132c847e6c5ecaa504532/galaxy_bg.wasm",
+    "/wasm/webgl2-e93f4425ad151df865204b4e003a3fde9175d83144d132c847e6c5ecaa504532/galaxy_bg.wasm.d.ts",
+    "/wasm/webgpu-122fa21465ea9fb5d7e66ce69db6cab3cc38e52e9dbec1d9b942e2b46ac79658/galaxy.d.ts",
+    "/wasm/webgpu-122fa21465ea9fb5d7e66ce69db6cab3cc38e52e9dbec1d9b942e2b46ac79658/galaxy.js",
+    "/wasm/webgpu-122fa21465ea9fb5d7e66ce69db6cab3cc38e52e9dbec1d9b942e2b46ac79658/galaxy_bg.wasm",
+    "/wasm/webgpu-122fa21465ea9fb5d7e66ce69db6cab3cc38e52e9dbec1d9b942e2b46ac79658/galaxy_bg.wasm.d.ts"
+  ],
+  "loaded": [
+    {
+      "id": "71ea4ed7b31a4481",
+      "kind": "script",
+      "name": "index-D39CEEWH.js",
+      "sources": [
+        {
+          "kind": "resource",
+          "property": "script"
+        },
+        {
+          "kind": "attribute",
+          "nodeId": 110,
+          "property": "src"
+        }
+      ],
+      "url": "http://127.0.0.1:4212/assets/index-D39CEEWH.js"
+    },
+    {
+      "id": "88893c0a1b394e65",
+      "kind": "stylesheet",
+      "name": "index-D-wW9yK0.css",
+      "sources": [
+        {
+          "kind": "resource",
+          "property": "link"
+        },
+        {
+          "kind": "attribute",
+          "nodeId": 111,
+          "property": "href"
+        }
+      ],
+      "url": "http://127.0.0.1:4212/assets/index-D-wW9yK0.css"
+    },
+    {
+      "id": "cd890ffbe8f99134",
+      "kind": "script",
+      "name": "galaxy.js",
+      "sources": [
+        {
+          "kind": "resource",
+          "property": "script"
+        }
+      ],
+      "url": "http://127.0.0.1:4212/wasm/webgl2-e93f4425ad151df865204b4e003a3fde9175d83144d132c847e6c5ecaa504532/galaxy.js"
+    },
+    {
+      "id": "c538cdb7ee4d18a5",
+      "kind": "other",
+      "name": "galaxy_bg.wasm",
+      "sources": [
+        {
+          "kind": "resource",
+          "property": "fetch"
+        }
+      ],
+      "url": "http://127.0.0.1:4212/wasm/webgl2-e93f4425ad151df865204b4e003a3fde9175d83144d132c847e6c5ecaa504532/galaxy_bg.wasm"
+    }
+  ],
+  "package": [
+    {
+      "path": "dist/index.html",
+      "sha256": "d8f54b161cd95e96e30b0fdb0c6433a9d5d231548378f0114e22bee8edf94b71"
+    },
+    {
+      "path": "dist/sw.js",
+      "sha256": "950393a9ff4f3c59c848a264e899c8f992d1714969227cee7d945053c8ed20d1"
+    },
+    {
+      "path": "dist/assets/index-D39CEEWH.js",
+      "sha256": "91e22a4ed788839a03039ea0689134b828c352a6efcec56ed61102c03995bf08"
+    },
+    {
+      "path": "dist/assets/index-D-wW9yK0.css",
+      "sha256": "8c1c3390bf3a37655050f96ac8d75b21e59f7da8c77da5fc481fc2e0aff8e178"
+    },
+    {
+      "path": "dist/wasm/webgl2-e93f4425ad151df865204b4e003a3fde9175d83144d132c847e6c5ecaa504532/galaxy.js",
+      "sha256": "c63b9a275560712b7dad7b29def3e6f0fd1d7a639a81fb97382a848dc8972de1"
+    },
+    {
+      "path": "dist/wasm/webgl2-e93f4425ad151df865204b4e003a3fde9175d83144d132c847e6c5ecaa504532/galaxy_bg.wasm",
+      "sha256": "0bab64828d72ee25f707d4527da9a718d59b0bfe96968c031bba39ceffa9ad8e"
+    }
+  ],
+  "geometry": [
+    {
+      "name": "final-flight-1280-geometry.json",
+      "viewport": [
+        1280,
+        720
+      ],
+      "uiScale": "2",
+      "classes": "pixel-ready engine-flight",
+      "canvas": [
+        1280,
+        720
+      ],
+      "controls": [
+        {
+          "id": "menu-close",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "flight-status",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "resume",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "restart-flight",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "pause-settings",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "return-title",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "pause-button",
+          "visible": true,
+          "rect": [
+            1108,
+            24,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "map-button",
+          "visible": true,
+          "rect": [
+            1160,
+            24,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "flight-settings",
+          "visible": true,
+          "rect": [
+            1212,
+            24,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "save-indicator",
+          "visible": true,
+          "rect": [
+            1054,
+            24,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "map-content",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "settings-content",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "quit-game",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "name": "final-flight-320-geometry.json",
+      "viewport": [
+        320,
+        180
+      ],
+      "uiScale": "1",
+      "classes": "pixel-ready narrow-ui short-ui engine-flight",
+      "canvas": [
+        320,
+        180
+      ],
+      "controls": [
+        {
+          "id": "menu-close",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "flight-status",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "resume",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "restart-flight",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "pause-settings",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "return-title",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "pause-button",
+          "visible": true,
+          "rect": [
+            168,
+            12,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "map-button",
+          "visible": true,
+          "rect": [
+            216,
+            12,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "flight-settings",
+          "visible": true,
+          "rect": [
+            264,
+            12,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "save-indicator",
+          "visible": true,
+          "rect": [
+            119,
+            12,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "map-content",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "settings-content",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "quit-game",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "name": "final-map-1280-geometry.json",
+      "viewport": [
+        1280,
+        720
+      ],
+      "uiScale": "2",
+      "classes": "pixel-ready",
+      "canvas": [
+        1280,
+        720
+      ],
+      "controls": [
+        {
+          "id": "menu-close",
+          "visible": true,
+          "rect": [
+            1171,
+            65,
+            44,
+            44
+          ],
+          "opacity": "1",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "flight-status",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "resume",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "restart-flight",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "pause-settings",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "return-title",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "pause-button",
+          "visible": true,
+          "rect": [
+            1108,
+            24,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "map-button",
+          "visible": true,
+          "rect": [
+            1160,
+            24,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "flight-settings",
+          "visible": true,
+          "rect": [
+            1212,
+            24,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "save-indicator",
+          "visible": true,
+          "rect": [
+            1054,
+            24,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "map-content",
+          "visible": true,
+          "rect": [
+            65,
+            191.796875,
+            1150,
+            420.203125
+          ],
+          "opacity": "1",
+          "client": [
+            1140,
+            420
+          ],
+          "scroll": [
+            1140,
+            540,
+            0
+          ]
+        },
+        {
+          "id": "settings-content",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "quit-game",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "name": "final-map-1280-scrolled-geometry.json",
+      "viewport": [
+        1280,
+        720
+      ],
+      "uiScale": "2",
+      "classes": "pixel-ready",
+      "canvas": [
+        1280,
+        720
+      ],
+      "controls": [
+        {
+          "id": "menu-close",
+          "visible": true,
+          "rect": [
+            1171,
+            65,
+            44,
+            44
+          ],
+          "opacity": "1",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "flight-status",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "resume",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "restart-flight",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "pause-settings",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "return-title",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "pause-button",
+          "visible": true,
+          "rect": [
+            1108,
+            24,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "map-button",
+          "visible": true,
+          "rect": [
+            1160,
+            24,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "flight-settings",
+          "visible": true,
+          "rect": [
+            1212,
+            24,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "save-indicator",
+          "visible": true,
+          "rect": [
+            1054,
+            24,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "map-content",
+          "visible": true,
+          "rect": [
+            65,
+            191.796875,
+            1150,
+            420.203125
+          ],
+          "opacity": "1",
+          "client": [
+            1140,
+            420
+          ],
+          "scroll": [
+            1140,
+            540,
+            120
+          ]
+        },
+        {
+          "id": "settings-content",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "quit-game",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "name": "final-map-320-geometry.json",
+      "viewport": [
+        320,
+        180
+      ],
+      "uiScale": "1",
+      "classes": "pixel-ready narrow-ui short-ui",
+      "canvas": [
+        320,
+        180
+      ],
+      "controls": [
+        {
+          "id": "menu-close",
+          "visible": true,
+          "rect": [
+            259,
+            17,
+            44,
+            44
+          ],
+          "opacity": "1",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "flight-status",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "resume",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "restart-flight",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "pause-settings",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "return-title",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "pause-button",
+          "visible": true,
+          "rect": [
+            187.234375,
+            12,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "map-button",
+          "visible": true,
+          "rect": [
+            235.234375,
+            12,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "flight-settings",
+          "visible": true,
+          "rect": [
+            283.234375,
+            12,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "save-indicator",
+          "visible": true,
+          "rect": [
+            138.234375,
+            12,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "map-content",
+          "visible": true,
+          "rect": [
+            17,
+            65,
+            286,
+            59
+          ],
+          "opacity": "1",
+          "client": [
+            276,
+            59
+          ],
+          "scroll": [
+            276,
+            490,
+            120
+          ]
+        },
+        {
+          "id": "settings-content",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "quit-game",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "name": "final-map-320-scrolled-geometry.json",
+      "viewport": [
+        320,
+        180
+      ],
+      "uiScale": "1",
+      "classes": "pixel-ready narrow-ui short-ui",
+      "canvas": [
+        320,
+        180
+      ],
+      "controls": [
+        {
+          "id": "menu-close",
+          "visible": true,
+          "rect": [
+            259,
+            17,
+            44,
+            44
+          ],
+          "opacity": "1",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "flight-status",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "resume",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "restart-flight",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "pause-settings",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "return-title",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "pause-button",
+          "visible": true,
+          "rect": [
+            187.234375,
+            12,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "map-button",
+          "visible": true,
+          "rect": [
+            235.234375,
+            12,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "flight-settings",
+          "visible": true,
+          "rect": [
+            283.234375,
+            12,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "save-indicator",
+          "visible": true,
+          "rect": [
+            138.234375,
+            12,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "map-content",
+          "visible": true,
+          "rect": [
+            17,
+            65,
+            286,
+            59
+          ],
+          "opacity": "1",
+          "client": [
+            276,
+            59
+          ],
+          "scroll": [
+            276,
+            490,
+            431
+          ]
+        },
+        {
+          "id": "settings-content",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "quit-game",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "name": "final-map-844-geometry.json",
+      "viewport": [
+        844,
+        390
+      ],
+      "uiScale": "1",
+      "classes": "pixel-ready",
+      "canvas": [
+        844,
+        390
+      ],
+      "controls": [
+        {
+          "id": "menu-close",
+          "visible": true,
+          "rect": [
+            665,
+            48,
+            44,
+            44
+          ],
+          "opacity": "1",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "flight-status",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "resume",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "restart-flight",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "pause-settings",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "return-title",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "pause-button",
+          "visible": true,
+          "rect": [
+            692,
+            12,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "map-button",
+          "visible": true,
+          "rect": [
+            740,
+            12,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "flight-settings",
+          "visible": true,
+          "rect": [
+            788,
+            12,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "save-indicator",
+          "visible": true,
+          "rect": [
+            643,
+            12,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "map-content",
+          "visible": true,
+          "rect": [
+            135,
+            96,
+            574,
+            221
+          ],
+          "opacity": "1",
+          "client": [
+            564,
+            221
+          ],
+          "scroll": [
+            564,
+            396,
+            120
+          ]
+        },
+        {
+          "id": "settings-content",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "quit-game",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "name": "final-settings-1280-geometry.json",
+      "viewport": [
+        1280,
+        720
+      ],
+      "uiScale": "2",
+      "classes": "pixel-ready",
+      "canvas": [
+        1280,
+        720
+      ],
+      "controls": [
+        {
+          "id": "menu-close",
+          "visible": true,
+          "rect": [
+            1171,
+            65,
+            44,
+            44
+          ],
+          "opacity": "1",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "flight-status",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "resume",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "restart-flight",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "pause-settings",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "return-title",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "pause-button",
+          "visible": true,
+          "rect": [
+            1108,
+            24,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "map-button",
+          "visible": true,
+          "rect": [
+            1160,
+            24,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "flight-settings",
+          "visible": true,
+          "rect": [
+            1212,
+            24,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "save-indicator",
+          "visible": true,
+          "rect": [
+            1054,
+            24,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "map-content",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "settings-content",
+          "visible": true,
+          "rect": [
+            65,
+            191.796875,
+            1150,
+            420.203125
+          ],
+          "opacity": "1",
+          "client": [
+            1150,
+            420
+          ],
+          "scroll": [
+            1150,
+            420,
+            0
+          ]
+        },
+        {
+          "id": "quit-game",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "name": "final-settings-320-geometry.json",
+      "viewport": [
+        320,
+        180
+      ],
+      "uiScale": "1",
+      "classes": "pixel-ready narrow-ui short-ui",
+      "canvas": [
+        320,
+        180
+      ],
+      "controls": [
+        {
+          "id": "menu-close",
+          "visible": true,
+          "rect": [
+            259,
+            17,
+            44,
+            44
+          ],
+          "opacity": "1",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "flight-status",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "resume",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "restart-flight",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "pause-settings",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "return-title",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "pause-button",
+          "visible": true,
+          "rect": [
+            187.234375,
+            12,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "map-button",
+          "visible": true,
+          "rect": [
+            235.234375,
+            12,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "flight-settings",
+          "visible": true,
+          "rect": [
+            283.234375,
+            12,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "save-indicator",
+          "visible": true,
+          "rect": [
+            138.234375,
+            12,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "map-content",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "settings-content",
+          "visible": true,
+          "rect": [
+            17,
+            65,
+            286,
+            59
+          ],
+          "opacity": "1",
+          "client": [
+            276,
+            59
+          ],
+          "scroll": [
+            276,
+            368,
+            0
+          ]
+        },
+        {
+          "id": "quit-game",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "name": "final-settings-844-geometry.json",
+      "viewport": [
+        844,
+        390
+      ],
+      "uiScale": "1",
+      "classes": "pixel-ready",
+      "canvas": [
+        844,
+        390
+      ],
+      "controls": [
+        {
+          "id": "menu-close",
+          "visible": true,
+          "rect": [
+            665,
+            48,
+            44,
+            44
+          ],
+          "opacity": "1",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "flight-status",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "resume",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "restart-flight",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "pause-settings",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "return-title",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "pause-button",
+          "visible": true,
+          "rect": [
+            692,
+            12,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "map-button",
+          "visible": true,
+          "rect": [
+            740,
+            12,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "flight-settings",
+          "visible": true,
+          "rect": [
+            788,
+            12,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "save-indicator",
+          "visible": true,
+          "rect": [
+            643,
+            12,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "map-content",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "settings-content",
+          "visible": true,
+          "rect": [
+            135,
+            96,
+            574,
+            221
+          ],
+          "opacity": "1",
+          "client": [
+            574,
+            221
+          ],
+          "scroll": [
+            574,
+            221,
+            0
+          ]
+        },
+        {
+          "id": "quit-game",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "name": "final-status-1280-geometry.json",
+      "viewport": [
+        1280,
+        720
+      ],
+      "uiScale": "2",
+      "classes": "pixel-ready",
+      "canvas": [
+        1280,
+        720
+      ],
+      "controls": [
+        {
+          "id": "menu-close",
+          "visible": true,
+          "rect": [
+            1001,
+            75,
+            44,
+            44
+          ],
+          "opacity": "1",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "flight-status",
+          "visible": true,
+          "rect": [
+            235,
+            255.796875,
+            810,
+            389.203125
+          ],
+          "opacity": "1",
+          "client": [
+            800,
+            389
+          ],
+          "scroll": [
+            800,
+            470,
+            0
+          ]
+        },
+        {
+          "id": "resume",
+          "visible": true,
+          "rect": [
+            235,
+            201.796875,
+            196.5,
+            44
+          ],
+          "opacity": "1",
+          "client": [
+            195,
+            42
+          ],
+          "scroll": [
+            195,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "restart-flight",
+          "visible": true,
+          "rect": [
+            439.5,
+            201.796875,
+            196.5,
+            44
+          ],
+          "opacity": "1",
+          "client": [
+            195,
+            42
+          ],
+          "scroll": [
+            195,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "pause-settings",
+          "visible": true,
+          "rect": [
+            644,
+            201.796875,
+            196.5,
+            44
+          ],
+          "opacity": "1",
+          "client": [
+            195,
+            42
+          ],
+          "scroll": [
+            195,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "return-title",
+          "visible": true,
+          "rect": [
+            848.5,
+            201.796875,
+            196.5,
+            44
+          ],
+          "opacity": "1",
+          "client": [
+            195,
+            42
+          ],
+          "scroll": [
+            195,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "pause-button",
+          "visible": true,
+          "rect": [
+            1108,
+            24,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "map-button",
+          "visible": true,
+          "rect": [
+            1160,
+            24,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "flight-settings",
+          "visible": true,
+          "rect": [
+            1212,
+            24,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "save-indicator",
+          "visible": true,
+          "rect": [
+            1054,
+            24,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "map-content",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "settings-content",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "quit-game",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "name": "final-status-320-geometry.json",
+      "viewport": [
+        320,
+        180
+      ],
+      "uiScale": "1",
+      "classes": "pixel-ready narrow-ui short-ui",
+      "canvas": [
+        320,
+        180
+      ],
+      "controls": [
+        {
+          "id": "menu-close",
+          "visible": true,
+          "rect": [
+            259,
+            17,
+            44,
+            44
+          ],
+          "opacity": "1",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "flight-status",
+          "visible": true,
+          "rect": [
+            17,
+            114,
+            286,
+            49
+          ],
+          "opacity": "1",
+          "client": [
+            276,
+            49
+          ],
+          "scroll": [
+            276,
+            492,
+            0
+          ]
+        },
+        {
+          "id": "resume",
+          "visible": true,
+          "rect": [
+            17,
+            65,
+            68.5,
+            44
+          ],
+          "opacity": "1",
+          "client": [
+            67,
+            42
+          ],
+          "scroll": [
+            67,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "restart-flight",
+          "visible": true,
+          "rect": [
+            89.5,
+            65,
+            68.5,
+            44
+          ],
+          "opacity": "1",
+          "client": [
+            67,
+            42
+          ],
+          "scroll": [
+            67,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "pause-settings",
+          "visible": true,
+          "rect": [
+            162,
+            65,
+            68.5,
+            44
+          ],
+          "opacity": "1",
+          "client": [
+            67,
+            42
+          ],
+          "scroll": [
+            67,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "return-title",
+          "visible": true,
+          "rect": [
+            234.5,
+            65,
+            68.5,
+            44
+          ],
+          "opacity": "1",
+          "client": [
+            67,
+            42
+          ],
+          "scroll": [
+            67,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "pause-button",
+          "visible": true,
+          "rect": [
+            187.234375,
+            12,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "map-button",
+          "visible": true,
+          "rect": [
+            235.234375,
+            12,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "flight-settings",
+          "visible": true,
+          "rect": [
+            283.234375,
+            12,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "save-indicator",
+          "visible": true,
+          "rect": [
+            138.234375,
+            12,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "map-content",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "settings-content",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "quit-game",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "name": "final-status-320-scrolled-geometry.json",
+      "viewport": [
+        320,
+        180
+      ],
+      "uiScale": "1",
+      "classes": "pixel-ready narrow-ui short-ui",
+      "canvas": [
+        320,
+        180
+      ],
+      "controls": [
+        {
+          "id": "menu-close",
+          "visible": true,
+          "rect": [
+            259,
+            17,
+            44,
+            44
+          ],
+          "opacity": "1",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "flight-status",
+          "visible": true,
+          "rect": [
+            17,
+            114,
+            286,
+            49
+          ],
+          "opacity": "1",
+          "client": [
+            276,
+            49
+          ],
+          "scroll": [
+            276,
+            492,
+            443
+          ]
+        },
+        {
+          "id": "resume",
+          "visible": true,
+          "rect": [
+            17,
+            65,
+            68.5,
+            44
+          ],
+          "opacity": "1",
+          "client": [
+            67,
+            42
+          ],
+          "scroll": [
+            67,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "restart-flight",
+          "visible": true,
+          "rect": [
+            89.5,
+            65,
+            68.5,
+            44
+          ],
+          "opacity": "1",
+          "client": [
+            67,
+            42
+          ],
+          "scroll": [
+            67,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "pause-settings",
+          "visible": true,
+          "rect": [
+            162,
+            65,
+            68.5,
+            44
+          ],
+          "opacity": "1",
+          "client": [
+            67,
+            42
+          ],
+          "scroll": [
+            67,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "return-title",
+          "visible": true,
+          "rect": [
+            234.5,
+            65,
+            68.5,
+            44
+          ],
+          "opacity": "1",
+          "client": [
+            67,
+            42
+          ],
+          "scroll": [
+            67,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "pause-button",
+          "visible": true,
+          "rect": [
+            187.234375,
+            12,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "map-button",
+          "visible": true,
+          "rect": [
+            235.234375,
+            12,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "flight-settings",
+          "visible": true,
+          "rect": [
+            283.234375,
+            12,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "save-indicator",
+          "visible": true,
+          "rect": [
+            138.234375,
+            12,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "map-content",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "settings-content",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "quit-game",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "name": "final-status-844-geometry.json",
+      "viewport": [
+        844,
+        390
+      ],
+      "uiScale": "1",
+      "classes": "pixel-ready",
+      "canvas": [
+        844,
+        390
+      ],
+      "controls": [
+        {
+          "id": "menu-close",
+          "visible": true,
+          "rect": [
+            580,
+            53,
+            44,
+            44
+          ],
+          "opacity": "1",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "flight-status",
+          "visible": true,
+          "rect": [
+            220,
+            150,
+            404,
+            187
+          ],
+          "opacity": "1",
+          "client": [
+            394,
+            187
+          ],
+          "scroll": [
+            394,
+            353,
+            0
+          ]
+        },
+        {
+          "id": "resume",
+          "visible": true,
+          "rect": [
+            220,
+            101,
+            98,
+            44
+          ],
+          "opacity": "1",
+          "client": [
+            96,
+            42
+          ],
+          "scroll": [
+            96,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "restart-flight",
+          "visible": true,
+          "rect": [
+            322,
+            101,
+            98,
+            44
+          ],
+          "opacity": "1",
+          "client": [
+            96,
+            42
+          ],
+          "scroll": [
+            96,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "pause-settings",
+          "visible": true,
+          "rect": [
+            424,
+            101,
+            98,
+            44
+          ],
+          "opacity": "1",
+          "client": [
+            96,
+            42
+          ],
+          "scroll": [
+            96,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "return-title",
+          "visible": true,
+          "rect": [
+            526,
+            101,
+            98,
+            44
+          ],
+          "opacity": "1",
+          "client": [
+            96,
+            42
+          ],
+          "scroll": [
+            96,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "pause-button",
+          "visible": true,
+          "rect": [
+            692,
+            12,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "map-button",
+          "visible": true,
+          "rect": [
+            740,
+            12,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "flight-settings",
+          "visible": true,
+          "rect": [
+            788,
+            12,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "save-indicator",
+          "visible": true,
+          "rect": [
+            643,
+            12,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "map-content",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "settings-content",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "quit-game",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "name": "final-title-320-geometry.json",
+      "viewport": [
+        320,
+        180
+      ],
+      "uiScale": "1",
+      "classes": "pixel-ready narrow-ui short-ui",
+      "canvas": [
+        320,
+        180
+      ],
+      "controls": [
+        {
+          "id": "menu-close",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "flight-status",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "resume",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "restart-flight",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "pause-settings",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "return-title",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "pause-button",
+          "visible": true,
+          "rect": [
+            187.234375,
+            12,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "map-button",
+          "visible": true,
+          "rect": [
+            235.234375,
+            12,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "flight-settings",
+          "visible": true,
+          "rect": [
+            283.234375,
+            12,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "save-indicator",
+          "visible": true,
+          "rect": [
+            138.234375,
+            12,
+            44,
+            44
+          ],
+          "opacity": "0",
+          "client": [
+            42,
+            42
+          ],
+          "scroll": [
+            42,
+            42,
+            0
+          ]
+        },
+        {
+          "id": "map-content",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "settings-content",
+          "visible": false,
+          "rect": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "opacity": "1",
+          "client": [
+            0,
+            0
+          ],
+          "scroll": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "id": "quit-game",
+          "visible": true,
+          "rect": [
+            157.5,
+            167,
+            139.5,
+            44
+          ],
+          "opacity": "1",
+          "client": [
+            138,
+            42
+          ],
+          "scroll": [
+            138,
+            42,
+            0
+          ]
+        }
+      ]
+    }
+  ],
+  "observations": {
+    "firstUpgrade": "Old stable WASM mismatch recovered by bound content-addressed runtime; actual Haven Apply to965c succeeded.",
+    "secondUpgrade": "965c Save lacked Apply; manual owned-tab close/reopen activated3aad, then actual Haven Apply loaded810.",
+    "reloadReadout": "Returned DOM observation after ordinary reload: Scout LV2/XP51/NEXT60, bankT1=1, points5/4/6, empty slots. Later saved snapshot was title; no cause asserted.",
+    "footer": "DOM12px RoyaleMono,15px line height,286x30px text box; native long copy wraps3rows and clips lastword at320."
+  },
+  "pending": [
+    "Short footer copy/revalidation",
+    "Populated discovered map and natural beacon navigation",
+    "Nonempty ability slot browser fixture",
+    "Physical touch/safearea/orientation",
+    "Performance/30minute soak",
+    "Human pacing/listening/full natural campaign",
+    "Owner-authenticated private execution"
+  ]
+}

@@ -1,0 +1,15 @@
+# Corrected recovery presentation: actual WebGL2 amendment
+
+Accepted within this bounded desktop regression. The historical `work/flat-hud-browser-qa` a9c3 review remains unchanged, including its original timer finding. This amendment tests the subsequent shell repair; it does not repeat or replace the earlier responsive matrix.
+
+Normal package expected cache `galaxy-c7071f87acd6932e`; actual browser inventory loaded `index-BsKUpWlB.js`, `index-B7ubo1mX.css` and the unchanged content-addressed WebGL2 module `42d9d5261cbd1e64442f8427726ed9425957e6e7c8302e0473c6c2423d46ff57`. The cache identifier is verified against local `dist/sw.js`; no hidden cache/SW API was queried.
+
+The same selected Chrome profile (`1`) and origin `http://127.0.0.1:4212` retained the prior DB/SW state. A fresh ephemeral replacement tab initially loaded the a9c3 JS/CSS and showed the waiting-build notice. Launch → Save & Backup → **Apply update at Haven** was executed through actual UI, then the final resource pair was observed. No profile/reset/import/permission/configuration mutation occurred.
+
+The declared QA URL exposed actual **Lose WebGL context** / **Restore WebGL context** controls. The loss event was observed before measuring the wait. At **15.199 seconds after confirmed loss**, beyond the previous 3.5-second timeout, the original waiting reason still had `className="visible"`, display:block and computed opacity 1. The main canvas retained its 1438×1192 geometry but had visibility:hidden; the screenshot shows a dark fallback instead of the earlier white lost surface. Actual Status → Settings navigation during loss preserved the same waiting reason with opacity 1 and canvas hidden.
+
+Actual restoration completed with “Graphics restored. Your expedition is intact.” **Settings remained open**, pixel-ready returned and the canvas became visible. `restored-settings.jpg` shows the native rendered Settings page. Closing it and opening Ship Status showed the same actual Haven Scout LV 2 / XP 51 / NEXT 60, hull 100, empty slots, cargo 0/16, T1 stash 1 and points 5/4/6. No reward/progression assertion relies on a fixture.
+
+The declared QA toolbar overlays part of the bottom notice in these default-viewport screenshots; the complete reason is present in the actual accessibility/DOM text and visible glyphs around it. This extra toolbar is absent from normal gameplay. No new normal UI blocker was found. Failed preparation, overlapping recovery, native phone lifecycle, DSP/listening and long soak were not exercised in this pass; focused VM evidence reported by Root is separate from this actual browser execution.
+
+Captured warn/error entries originate from a Chrome extension; filtering those source URLs leaves no application warn/error entries. The only owned tab was returned to Title and closed. No viewport override was used; reset was still called at cleanup. Root's preview and all retained origin state remain intact. Exact timing, resources, DOM geometry, screenshots and cleanup are frozen in this folder. `pins.json` is a read-time local source/package record, not a committed/private execution attestation.

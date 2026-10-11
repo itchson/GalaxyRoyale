@@ -1,0 +1,95 @@
+{
+  "created_utc": "2026-10-11T01:27:03.114463+00:00",
+  "sources": [
+    {
+      "path": "crates/game_web/src/pixel_ui.rs",
+      "kind": "owned",
+      "size": 74581,
+      "sha256": "51a106200e13487ae6b5fd1019d782aca6a778e22fb7a6ae90cd01e647a1c824"
+    },
+    {
+      "path": "crates/game_web/src/ui_scene.rs",
+      "kind": "owned",
+      "size": 78319,
+      "sha256": "485e6820661a6071e6f53ea65f2190511d06e9000518470df16faaf5e2c6b1b7"
+    },
+    {
+      "path": "crates/game_web/src/browser.rs",
+      "kind": "owned",
+      "size": 25443,
+      "sha256": "ba4d4b07ee6d51d1435cdcaf524e35479b910309c73a274b44e6aebbdec6535e"
+    },
+    {
+      "path": "crates/game_web/src/boss_overlay.rs",
+      "kind": "owned",
+      "size": 31496,
+      "sha256": "aaaef71b8192766d7602761296077b3d7dd8aafd2fb59d642a4ca0fa95529036"
+    },
+    {
+      "path": "crates/game_web/src/ui_flight_status_tests.rs",
+      "kind": "owned",
+      "size": 13109,
+      "sha256": "ad0c4ce41e9bec4f8064f04e217189da443ab9f6f003984aa9c70d4c047a6abc"
+    },
+    {
+      "path": "apps/game/src/pixel-ui.ts",
+      "kind": "owned",
+      "size": 14770,
+      "sha256": "29b48dee69ef156c93f8313d3f72c9e468f65e912a8dbb4b786d0b1f40894ffa"
+    },
+    {
+      "path": "scripts/test/flight-status-pixel.test.mjs",
+      "kind": "owned",
+      "size": 6031,
+      "sha256": "7e1a288cecf91486a7e4ba32884548b2c9c4ca2e6d27b746b7309d1a691b5a32"
+    },
+    {
+      "path": "Cargo.lock",
+      "kind": "linked-observation",
+      "size": 27791,
+      "sha256": "df228d9f83ef57321dcb768b79d948e9aa24456c0952e971fc8d6fcd7e806bdd"
+    },
+    {
+      "path": "crates/engine_core/src/camera.rs",
+      "kind": "linked-observation",
+      "size": 8926,
+      "sha256": "b08164aa6c9a7e8364ee90e7205e70b702d2013c1861254da33610cb81fdf759"
+    },
+    {
+      "path": "crates/engine_core/src/frame.rs",
+      "kind": "linked-observation",
+      "size": 25415,
+      "sha256": "2afd79bb523dc0a57533ddaf1067ce2dd204823cb87f72e3ee7fc976a81969fc"
+    },
+    {
+      "path": "crates/game_core/src/lib.rs",
+      "kind": "linked-observation",
+      "size": 185612,
+      "sha256": "ece2ffcd97a0a96b4e52915e796008c14d0c532db5b2b9f5256ee381793d7d03"
+    },
+    {
+      "path": "crates/game_web/src/boss_layout.rs",
+      "kind": "linked-observation",
+      "size": 38812,
+      "sha256": "97ae0496ec27b89510b46ad21785a377d2ca6ae0d88d1fe95dcbc30a1758e353"
+    },
+    {
+      "path": "apps/game/src/main.ts",
+      "kind": "linked-observation",
+      "size": 66310,
+      "sha256": "587da9f5f6ec4debd37f7dcbedbcbf6a33df20ef28d509585a7f015624a15d53"
+    },
+    {
+      "path": "apps/game/src/style.css",
+      "kind": "linked-observation",
+      "size": 21545,
+      "sha256": "ba0a3856cd33c59dca5ad114e2d696c0a09deabc523f8b6f34df91e959722237"
+    },
+    {
+      "path": "apps/game/index.html",
+      "kind": "linked-observation",
+      "size": 13855,
+      "sha256": "d8ebd898007a868fecc8f4c4f2a7f1a72e2f9771741e8745404c0dbd85c8bc66"
+    }
+  ]
+}

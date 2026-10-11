@@ -1,0 +1,46 @@
+{
+  "body": "pixel-ready narrow-ui short-ui",
+  "nodes": {
+    "map-chart": {
+      "client": 140,
+      "h": 140,
+      "scroll": 140,
+      "scrollTop": 0,
+      "text": "",
+      "w": 273,
+      "x": 17,
+      "y": -295
+    },
+    "map-content": {
+      "client": 81,
+      "h": 81,
+      "scroll": 490,
+      "scrollTop": 409,
+      "text": "HOME\nSHIP\nALL\n-\n+\n\nCENTER 0, 0 / SPAN 13203 / 0/0 VISIBLE BEACONS / 0 CHARTED\n\nHAVEN / HOME DOCK\n\nSAFE RADIUS 240 / ASTEROID BELT 700-1400\n\nCURRENT BIOME / Haven Expanse / REACH REMOTE SANCTUARIES TO CHART BEACONS\n\nSHIELD BLOCKS ASTEROIDS / BELT ORBITS OUTSIDE\n\nSET COURSE",
+      "w": 286,
+      "x": 17,
+      "y": 65
+    },
+    "menu-close": {
+      "client": 42,
+      "h": 44,
+      "scroll": 42,
+      "scrollTop": 0,
+      "text": "X",
+      "w": 44,
+      "x": 259,
+      "y": 17
+    },
+    "save-status": {
+      "client": 8,
+      "h": 8,
+      "scroll": 8,
+      "scrollTop": 0,
+      "text": "Saved on this device.",
+      "w": 286,
+      "x": 17,
+      "y": 155
+    }
+  },
+  "scale": "1"
+}

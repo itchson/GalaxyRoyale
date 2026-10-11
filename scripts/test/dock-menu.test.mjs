@@ -21,12 +21,16 @@ const functions = [
   "persist",
   "save",
   "pause",
+  "canSimulateFlight",
+  "syncFlightState",
   "openMenu",
   "interactDock",
   "selectMenuTab",
   "openLaunchSettings",
   "resume",
+  "navigate",
   "beginEncounter",
+  "quitGame",
 ].map((name) => {
   const node = source.statements.find(
     (node) => ts.isFunctionDeclaration(node) && node.name?.text === name,
@@ -83,6 +87,13 @@ const facilities = source.statements.find(
     node.expression.getText(source) === "facilityPages.entries()",
 );
 assert.ok(facilities, "Missing real facility handlers");
+const launchHandler = source.statements.find(
+  (node) =>
+    ts.isExpressionStatement(node) &&
+    ts.isCallExpression(node.expression) &&
+    node.expression.expression.getText(source) === "launch.addEventListener",
+);
+assert.ok(launchHandler, "Missing real launch handler");
 const compiled = ts.transpileModule(
   [
     ...constants,
@@ -94,9 +105,13 @@ const compiled = ts.transpileModule(
       "settings-backup",
       "save-indicator",
       "restart-flight",
+      "quit-game",
+      "map-button",
+      "flight-settings",
     ].map(registration),
     facilities.getText(source),
     keydown.getText(source),
+    launchHandler.getText(source),
   ].join("\n"),
   { compilerOptions: { target: ts.ScriptTarget.ES2022 } },
 ).outputText;
@@ -107,6 +122,7 @@ const pageIds = [
   "hangar-content",
   "campaign-content",
   "quest-content",
+  "map-content",
   "settings-content",
   "archive-content",
 ];
@@ -188,6 +204,18 @@ function fixture() {
   document.body = { classList: new Element("body").classList };
   const profile = { revision: 9, currency: [3, 4, 5] };
   const hud = {
+    audio: {
+      area: "haven",
+      biome: 0,
+      combat: 0,
+      hostiles: 0,
+      champion: null,
+      boss: false,
+      hull: 1,
+      speed: 0,
+      throttle: 0,
+      engines: 2,
+    },
     dock: true,
     currency: profile.currency,
     stored_materials: 0,
@@ -205,6 +233,8 @@ function fixture() {
     paused: false,
     beforeLaunchMenu: false,
     menuTab: "upgrades",
+    lastMapPaint: 0,
+    performance: { now: () => 100 },
     transitionEpoch: 0,
     preparingEncounter: null,
     recovering: false,
@@ -229,11 +259,18 @@ function fixture() {
     pixelUi: { invalidate() {} },
     input: {
       enabled: true,
+      setCourse(position) {
+        calls.push(["set-course", ...position]);
+      },
       reset() {
         calls.push("input-reset");
       },
     },
     audio: {
+      update(state) {
+        calls.push(["audio-update", state]);
+      },
+      async unlock() {},
       suspend() {
         calls.push("audio-suspend");
       },
@@ -242,8 +279,15 @@ function fixture() {
       },
     },
     galaxy: {
+      cancel_course() {
+        calls.push("cancel-course");
+      },
       hud() {
         return hud;
+      },
+      universe_map() {
+        calls.push("query-discovered-map");
+        return { position: [0, 0], heading: 0, sites: [] };
       },
       profile() {
         return profile;
@@ -276,7 +320,16 @@ function fixture() {
     paintUpgrades(dock) {
       calls.push(["paint-upgrades", dock]);
     },
-    paintHangar() {
+    paintFlightMenu() {
+      calls.push("paint-flight-menu");
+      return true;
+    },
+    paintUniverseMap(_target, data) {
+      calls.push(["paint-map", data.sites.length]);
+      return true;
+    },
+    resetForge() {},
+    paintShipHangar() {
       calls.push("paint-hangar");
     },
     paintCampaign() {
@@ -297,10 +350,21 @@ function fixture() {
       return { matches: false };
     },
     HTMLButtonElement: Element,
+    HTMLElement: Element,
     window: {
+      close() {
+        calls.push("window-close");
+      },
       addEventListener(name, callback) {
         windowEvents.set(name, callback);
       },
+    },
+  };
+  context.loadStatus = element("load-status");
+  context.launch = element("launch");
+  context.narrative = {
+    close() {
+      calls.push("narrative-close");
     },
   };
   context.menu.hidden =
@@ -315,30 +379,37 @@ function fixture() {
     profile,
     element,
     visiblePages: () => pageIds.filter((id) => !element(id).hidden),
-    press(key) {
-      windowEvents.get("keydown")({ key, preventDefault() {} });
+    press(key, properties = {}) {
+      windowEvents.get("keydown")({ key, preventDefault() {}, ...properties });
     },
   };
 }
 
-test("Escape opens only the compact pause page with four actions", async () => {
+test("Escape opens a live ship menu, cancels controls and course, and toggles closed", async () => {
   const f = fixture(),
     c = f.context;
   f.press("Escape");
-  assert.equal(c.paused, true);
+  assert.equal(c.paused, false);
   assert.equal(c.input.enabled, false);
   assert.equal(c.menu.hidden, false);
   assert.deepEqual(f.visiblePages(), ["pause-content"]);
-  const pause = html.match(/<div id="pause-content"[\s\S]*?<\/div>/)?.[0];
-  assert.ok(pause);
-  assert.deepEqual(
-    [...pause.matchAll(/<button id="([^"]+)"/g)].map((match) => match[1]),
-    ["resume", "restart-flight", "pause-settings", "return-title"],
+  assert.ok(f.calls.includes("cancel-course"));
+  assert.ok(f.calls.includes("paint-flight-menu"));
+  assert.equal(f.calls.includes("audio-suspend"), false);
+  assert.equal(
+    f.calls.some((call) => Array.isArray(call) && call[0] === "paused"),
+    false,
   );
+  assert.match(f.element("menu-description").textContent, /keeps running/);
   assert.doesNotMatch(
     html,
     /menu-tabs|role="tab(?:list|panel)?"|aria-labelledby="tab-/,
   );
+  f.press("Escape");
+  await settle();
+  assert.equal(c.menu.hidden, true);
+  assert.equal(c.input.enabled, true);
+  assert.equal(c.paused, false);
   await settle();
 });
 
@@ -357,7 +428,7 @@ test("a world facility hit opens exactly its dedicated page without changing pro
     assert.equal(c.interactDock([40, -25]), true);
     assert.deepEqual(f.visiblePages(), [expected[index]]);
     assert.equal(c.menu.hidden, false);
-    assert.equal(c.paused, true);
+    assert.equal(c.paused, false);
     assert.equal(c.input.enabled, false);
     assert.equal(c.document.activeElement, f.element("menu-close"));
     assert.deepEqual(
@@ -442,11 +513,12 @@ test("closing a dedicated flight page resumes; closing title settings returns to
     assert.equal(c.menu.hidden, true);
     assert.equal(c.paused, false);
     assert.equal(c.input.enabled, true);
-    assert.ok(
+    assert.equal(
       f.calls.some(
         (value) =>
-          Array.isArray(value) && value[0] === "paused" && value[1] === false,
+          Array.isArray(value) && value[0] === "paused" && value[1] === true,
       ),
+      false,
     );
   }
   const f = fixture(),
@@ -479,8 +551,92 @@ test("pause settings and both backup actions select only their dedicated content
   await c.resume();
   f.element("save-indicator").click();
   assert.deepEqual(f.visiblePages(), ["archive-content"]);
-  assert.equal(c.paused, true);
+  assert.equal(c.paused, false);
   await settle();
+});
+
+test("a live menu continues after hidden/resume and lifecycle gates never restore controls beneath it", async () => {
+  const f = fixture(),
+    c = f.context;
+  c.openMenu("settings");
+  c.document.hidden = true;
+  c.syncFlightState();
+  assert.equal(c.paused, true);
+  assert.equal(c.input.enabled, false);
+  c.document.hidden = false;
+  c.syncFlightState();
+  assert.equal(c.paused, false);
+  assert.equal(c.input.enabled, false);
+  assert.equal(c.menu.hidden, false);
+  // Idempotent synchronization must not keep resetting Rust's accumulator.
+  const pauseCalls = f.calls.filter(
+    (v) => Array.isArray(v) && v[0] === "paused",
+  ).length;
+  c.syncFlightState();
+  c.syncFlightState();
+  assert.equal(
+    f.calls.filter((v) => Array.isArray(v) && v[0] === "paused").length,
+    pauseCalls,
+  );
+  await settle();
+});
+
+test("Quit waits for a committed save and flush, then provides a normal-tab fallback", async () => {
+  const f = fixture(),
+    c = f.context,
+    gate = deferred();
+  c.launched = false;
+  c.paused = true;
+  c.store.flush = () => gate.promise;
+  const quitting = c.quitGame();
+  await settle();
+  assert.equal(f.element("quit-game").disabled, true);
+  assert.equal(f.calls.includes("window-close"), false);
+  gate.resolve();
+  await quitting;
+  assert.ok(f.calls.includes("window-close"));
+  assert.match(c.loadStatus.textContent, /close this tab or app/);
+  assert.equal(f.element("quit-game").disabled, false);
+});
+
+test("Quit write failure keeps the title available and does not close the browser", async () => {
+  const f = fixture(),
+    c = f.context;
+  c.launched = false;
+  c.store.save = async () => {
+    throw new Error("save transaction failed");
+  };
+  await c.quitGame();
+  assert.equal(f.calls.includes("window-close"), false);
+  assert.equal(f.calls.includes("flush"), false);
+  assert.equal(f.element("quit-game").disabled, false);
+  assert.match(c.loadStatus.textContent, /SAVE NEEDS ATTENTION/);
+  assert.ok(f.notices.includes("Error: save transaction failed"));
+});
+
+test("a delayed launch audio unlock cannot dismiss newer title Settings or Quit intent", async () => {
+  for (const action of ["settings", "quit"]) {
+    const f = fixture(),
+      c = f.context,
+      gate = deferred();
+    c.launched = false;
+    c.paused = true;
+    c.input.enabled = false;
+    c.audio.unlock = () => gate.promise;
+    const launching = f.element("launch").click();
+    if (action === "settings") c.openLaunchSettings();
+    else await c.quitGame();
+    gate.resolve();
+    await launching;
+    assert.equal(c.launched, false);
+    assert.equal(c.input.enabled, false);
+    if (action === "settings") {
+      assert.equal(c.beforeLaunchMenu, true);
+      assert.deepEqual(f.visiblePages(), ["settings-content"]);
+      assert.equal(c.menu.hidden, false);
+    }
+    assert.equal(f.calls.includes("audio-resume"), false);
+  }
 });
 
 test("dedicated-page close cannot resume through a recovery, modal, hidden or encounter gate", async () => {
@@ -511,6 +667,7 @@ test("dedicated-page close cannot resume through a recovery, modal, hidden or en
       c = f.context;
     c.openMenu("settings");
     block(c);
+    c.syncFlightState();
     f.element("menu-close").click();
     await settle();
     assert.equal(c.menu.hidden, false);
@@ -519,7 +676,7 @@ test("dedicated-page close cannot resume through a recovery, modal, hidden or en
   }
 });
 
-test("restart banks through the existing boundary and waits for save plus flush before resuming", async () => {
+test("restart ends the expedition through the authoritative boundary and waits for save plus flush before resuming", async () => {
   const f = fixture(),
     c = f.context,
     saved = deferred(),
@@ -537,7 +694,12 @@ test("restart banks through the existing boundary and waits for save plus flush 
     return flushed.promise;
   };
   f.element("restart-flight").click();
-  assert.deepEqual(f.calls.slice(0, 2), ["return-home", ["save", 9]]);
+  const homeCall = f.calls.indexOf("return-home");
+  const saveCall = f.calls.findIndex(
+    (v) => Array.isArray(v) && v[0] === "save",
+  );
+  assert.ok(homeCall >= 0 && saveCall > homeCall);
+  assert.deepEqual(f.calls[saveCall], ["save", 9]);
   assert.equal(c.preparingEncounter !== null, true);
   assert.equal(c.menu.hidden, false);
   await c.resume();
@@ -591,11 +753,14 @@ test("save indicator moves from pending to committed only after the adapter comm
   assert.equal(indicator.dataset.pixelValue, "1");
   assert.match(indicator.title, /Saving/);
   assert.match(indicator.attributes.get("aria-label"), /Saving/);
+  assert.equal(f.element("save-status").textContent, "Saving…");
+  assert.equal(f.element("save-status").title, indicator.title);
   gate.resolve();
   await saving;
   assert.equal(indicator.dataset.pixelValue, "0");
   assert.match(indicator.title, /saved automatically/);
-  assert.equal(f.element("save-status").textContent, indicator.title);
+  assert.equal(f.element("save-status").textContent, "Saved on this device.");
+  assert.equal(f.element("save-status").title, indicator.title);
   assert.equal(c.pendingSaves, 0);
 });
 
@@ -629,6 +794,8 @@ test("write rejection exposes attention state and a successful retry clears it",
   await assert.rejects(saving, /quota exceeded/);
   assert.equal(f.element("save-indicator").dataset.pixelValue, "2");
   assert.equal(f.element("save-indicator").title, c.store.message);
+  assert.equal(f.element("save-status").textContent, "Save needs attention.");
+  assert.equal(f.element("save-status").title, c.store.message);
   assert.match(
     f.element("save-indicator").attributes.get("aria-label"),
     /needs attention/,
@@ -645,6 +812,103 @@ test("memory-only storage never reports a successful persistent save", async () 
   c.store.message = "Storage is unavailable. Export your progress.";
   await c.persist(f.profile);
   assert.equal(f.element("save-indicator").dataset.pixelValue, "2");
-  assert.equal(f.element("save-status").textContent, c.store.message);
+  assert.equal(f.element("save-status").textContent, "Save needs attention.");
+  assert.equal(f.element("save-status").title, c.store.message);
   assert.doesNotMatch(f.element("save-indicator").title, /saved automatically/);
+});
+
+test("a SaveConflict opens the live menu once without recursively scheduling rejected saves", async () => {
+  const f = fixture(),
+    c = f.context;
+  let writes = 0;
+  c.store.save = async () => {
+    writes++;
+    throw new c.SaveConflict("another tab owns this save");
+  };
+  c.save(f.profile);
+  await settle();
+  assert.equal(c.menu.hidden, false);
+  assert.equal(c.paused, false);
+  assert.equal(c.input.enabled, false);
+  assert.equal(writes, 2); // initial write, then one menu-entry checkpoint
+  const stable = writes;
+  await settle();
+  assert.equal(writes, stable);
+});
+
+test("dedicated map and settings icons replace the live page and map toggles back to flight", async () => {
+  const f = fixture(),
+    c = f.context;
+  f.element("map-button").click();
+  assert.equal(c.menuTab, "map");
+  assert.deepEqual(f.visiblePages(), ["map-content"]);
+  assert.equal(c.paused, false);
+  assert.equal(c.input.enabled, false);
+  assert.ok(f.calls.includes("query-discovered-map"));
+  f.element("flight-settings").click();
+  assert.deepEqual(f.visiblePages(), ["settings-content"]);
+  assert.equal(c.paused, false);
+  f.element("map-button").click();
+  f.element("map-button").click();
+  await settle();
+  assert.equal(c.menu.hidden, true);
+  assert.equal(c.input.enabled, true);
+});
+
+test("M uses the discovered map without a simulation pause or a repeat toggle", async () => {
+  const f = fixture(),
+    c = f.context;
+  f.press("m");
+  assert.equal(c.menuTab, "map");
+  assert.equal(c.paused, false);
+  assert.equal(c.input.enabled, false);
+  f.press("m", { repeat: true });
+  assert.equal(c.menu.hidden, false);
+  f.press("m");
+  await settle();
+  assert.equal(c.menu.hidden, true);
+  assert.equal(c.input.enabled, true);
+  assert.ok(
+    !f.calls.some((call) => Array.isArray(call) && call[0] === "paused"),
+  );
+});
+
+test("a delayed map course cannot consume a newer Settings intent", async () => {
+  const f = fixture(),
+    c = f.context;
+  c.openMenu("map");
+  const gate = deferred();
+  c.audio.resume = () => gate.promise;
+  const pending = c.navigate([5000, 1000]);
+  c.openMenu("settings");
+  gate.resolve();
+  await pending;
+  assert.equal(c.menuTab, "settings");
+  assert.equal(c.menu.hidden, false);
+  assert.equal(c.input.enabled, false);
+  assert.ok(
+    !f.calls.some((call) => Array.isArray(call) && call[0] === "set-course"),
+  );
+  assert.ok(!f.notices.some((value) => value.startsWith("COURSE SET")));
+});
+
+test("map navigation sets a real course after resume even when optional audio is unavailable", async () => {
+  const f = fixture(),
+    c = f.context;
+  c.openMenu("map");
+  c.audio.resume = async () => {
+    throw new Error("audio unavailable");
+  };
+  await c.navigate([5000, 1000]);
+  assert.equal(c.menu.hidden, true);
+  assert.equal(c.input.enabled, true);
+  assert.ok(
+    f.calls.some(
+      (call) =>
+        Array.isArray(call) &&
+        call[0] === "set-course" &&
+        call[1] === 5000 &&
+        call[2] === 1000,
+    ),
+  );
 });

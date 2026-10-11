@@ -1,7 +1,9 @@
 //! Presentation-only adapter between the renderer's projection and pixel HUD.
 use crate::{
     boss_layout,
-    pixel_ui::{flight_layout, touch_hit_rects},
+    pixel_ui::{
+        FlightStatusInput, FlightStatusLayout, flight_header, flight_status_hits, touch_hit_rects,
+    },
     ui_scene::UiScene,
 };
 use boss_layout::{FrameInput, LayoutController, Outcome, Point, Rect, Screen, WorldDisc};
@@ -147,11 +149,20 @@ impl Reserved {
             input.viewport[0] - left - right,
             input.viewport[1] - top - bottom,
         ];
-        if let Some(layout) = flight_layout(input.hud, [width, height], minimal, input.touch) {
-            for mut rect in [layout.biome, layout.currency, layout.radar, layout.meter]
-                .into_iter()
-                .flatten()
-            {
+        if let Some(layout) = FlightStatusLayout::new(&FlightStatusInput {
+            viewport: input.viewport,
+            insets: input.insets,
+            header: flight_header(input.scene, input.insets),
+            status_hits: flight_status_hits(input.scene, input.insets),
+            touch: input.touch,
+            attached_vitals: !minimal,
+            player: input.focus.player,
+            player_radius: input.focus.player_radius,
+            protected_core: input.focus.boss.map(|b| (b.core, b.core_radius)),
+            camera: input.hud.camera,
+            zoom: input.zoom,
+        }) {
+            for mut rect in [layout.strip, layout.vitals].into_iter().flatten() {
                 rect[0] += left;
                 rect[1] += top;
                 reserved.add(rect);
@@ -213,6 +224,19 @@ impl Reserved {
                         | "offense-text"
                         | "defense-text"
                         | "passive-text"
+                        | "restart-button"
+                        | "close-icon"
+                        | "save-icon"
+                        | "status-icon"
+                        | "settings-icon"
+                        | "map-icon"
+                        | "resume-icon"
+                        | "restart-icon"
+                        | "title-icon"
+                        | "quit-icon"
+                        | "status-text"
+                        | "warning-text"
+                        | "status-hit"
                 ) {
                     continue;
                 }
@@ -250,6 +274,7 @@ impl Reserved {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::pixel_ui::flight_layout;
     use crate::ui_scene::{UiGroup, UiNode};
 
     #[test]
@@ -298,6 +323,16 @@ mod tests {
             "offense-text",
             "defense-text",
             "passive-text",
+            "restart-button",
+            "close-icon",
+            "save-icon",
+            "status-icon",
+            "settings-icon",
+            "map-icon",
+            "resume-icon",
+            "restart-icon",
+            "title-icon",
+            "quit-icon",
         ] {
             let scene = UiScene {
                 groups: vec![UiGroup {
@@ -314,6 +349,77 @@ mod tests {
             reserved.scene(&scene);
             assert_eq!(reserved.len, 1, "semantic exclusion missing: {kind}");
             assert_eq!(reserved.rects[0], Rect::new(60.0, 65.0, 60.0, 20.0));
+        }
+    }
+
+    #[test]
+    fn allocated_boss_panels_avoid_all_measured_header_icons_and_relocated_telemetry() {
+        let mut game = game_core::Game::new(game_core::Profile::default());
+        game.diagnostic("boss-bastion-5");
+        let hud = game.hud();
+        let camera = game.render_camera(0.5);
+        for (viewport, insets, hit, touch) in [
+            ([533.0, 300.0], [0.0; 4], 22.0, false),
+            ([350.0, 200.0], [7.0, 19.0, 13.0, 11.0], 44.0, true),
+        ] {
+            let scene = crate::pixel_ui::header_tests::scene(viewport, insets, hit);
+            let mut focus = game.render_focus(0.5);
+            // Source extraction uses the real focus projection; only target
+            // poses/radii are controlled to make a reproducible clear fixture.
+            focus.player = Vec2::from_array(camera) + Vec2::new(0.0, 24.0);
+            focus.player_radius = 8.0;
+            focus.boss.as_mut().unwrap().core = Vec2::from_array(camera) + Vec2::new(0.0, -30.0);
+            focus.boss.as_mut().unwrap().core_radius = 4.0;
+            let input = OverlayInput {
+                hud: &hud,
+                focus,
+                camera,
+                viewport,
+                insets,
+                zoom: 1.0,
+                now_ms: 0,
+                scene: &scene,
+                touch,
+            };
+            let mut overlay = BossOverlay::default();
+            let panel = overlay
+                .update(&input)
+                .expect("clear fixture retains health and phase");
+            let reserved = Reserved::from_input(&input, overlay.minimal());
+            let screen_panel = Rect::new(
+                (panel[0] + insets[3]).into(),
+                (panel[1] + insets[0]).into(),
+                panel[2].into(),
+                panel[3].into(),
+            );
+            assert!(
+                reserved.rects[..reserved.len]
+                    .iter()
+                    .all(|r| !screen_panel.intersects(r.expanded(boss_layout::WIDGET_CLEARANCE)))
+            );
+            let layout = FlightStatusLayout::new(&FlightStatusInput {
+                viewport,
+                insets,
+                header: flight_header(&scene, insets),
+                status_hits: flight_status_hits(&scene, insets),
+                touch,
+                attached_vitals: !overlay.minimal(),
+                player: focus.player,
+                player_radius: focus.player_radius,
+                protected_core: focus.boss.map(|b| (b.core, b.core_radius)),
+                camera: hud.camera,
+                zoom: 1.0,
+            })
+            .unwrap();
+            for r in [layout.strip, layout.vitals].into_iter().flatten() {
+                let full = Rect::new(
+                    (r[0] + insets[3]).into(),
+                    (r[1] + insets[0]).into(),
+                    r[2].into(),
+                    r[3].into(),
+                );
+                assert!(reserved.rects[..reserved.len].contains(&full));
+            }
         }
     }
 
@@ -374,31 +480,43 @@ mod tests {
                     camera.x + (left - right) * 0.5,
                     camera.y + (top - bottom) * 0.5,
                 ];
-                crate::pixel_ui::draw_ui_with_boss_panel_and_touch(
+                let layout = FlightStatusLayout::new(&FlightStatusInput {
+                    viewport,
+                    insets,
+                    header: flight_header(&scene, insets),
+                    status_hits: flight_status_hits(&scene, insets),
+                    touch: true,
+                    attached_vitals: !overlay.minimal(),
+                    player: focus.player,
+                    player_radius: focus.player_radius,
+                    protected_core: focus.boss.map(|b| (b.core, b.core_radius)),
+                    camera: hud.camera,
+                    zoom: 1.6,
+                })
+                .unwrap();
+                crate::pixel_ui::draw_flight_status(
                     &mut frame,
                     &hud,
                     ui_camera,
-                    safe,
-                    1,
+                    &layout,
                     Some(panel),
-                    overlay.minimal(),
+                    0.0,
                     true,
+                    false,
                 );
                 crate::pixel_ui::draw_controls(&mut frame, ui_camera, safe, None, false);
-                let layout = flight_layout(&hud, safe, overlay.minimal(), true).unwrap();
-                let mut covered: Vec<_> =
-                    [layout.biome, layout.currency, layout.radar, layout.meter]
-                        .into_iter()
-                        .flatten()
-                        .map(|r| {
-                            Rect::new(
-                                (r[0] + left).into(),
-                                (r[1] + top).into(),
-                                r[2].into(),
-                                r[3].into(),
-                            )
-                        })
-                        .collect();
+                let mut covered: Vec<_> = [layout.strip, layout.vitals]
+                    .into_iter()
+                    .flatten()
+                    .map(|r| {
+                        Rect::new(
+                            (r[0] + left).into(),
+                            (r[1] + top).into(),
+                            r[2].into(),
+                            r[3].into(),
+                        )
+                    })
+                    .collect();
                 covered.extend(touch_hit_rects(safe).map(|r| {
                     Rect::new(
                         (r[0] + left).into(),
@@ -607,15 +725,29 @@ mod tests {
             .expect("200px safe area retains compact row");
         assert!(overlay.minimal());
         let mut frame = engine_core::FrameBuilder::new();
-        crate::pixel_ui::draw_ui_with_boss_panel_and_touch(
+        let layout = FlightStatusLayout::new(&FlightStatusInput {
+            viewport: input.viewport,
+            insets: input.insets,
+            header: None,
+            status_hits: [None; 2],
+            touch: true,
+            attached_vitals: !overlay.minimal(),
+            player: focus.player,
+            player_radius: focus.player_radius,
+            protected_core: focus.boss.map(|b| (b.core, b.core_radius)),
+            camera: hud.camera,
+            zoom: 1.6,
+        })
+        .unwrap();
+        crate::pixel_ui::draw_flight_status(
             &mut frame,
             &hud,
             [0.0; 2],
-            [200.0, 180.0],
-            1,
+            &layout,
             Some(panel),
-            overlay.minimal(),
+            0.0,
             true,
+            false,
         );
         let hud_count = frame.frame().pixel_count;
         assert!(

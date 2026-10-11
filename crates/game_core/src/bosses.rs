@@ -39,7 +39,7 @@ pub fn queues(profile: &Profile, family: usize) -> [u32; 5] {
     })
 }
 pub fn evolution(profile: &Profile, family: usize) -> u8 {
-    if profile.campaign.selected_ship == 9 && profile.campaign.victory_claimed {
+    if family < 3 && ship_progression::equipped_rank(profile, (family + 14) as u8) > 0 {
         return 5;
     }
     profile.boss_generations[family]
@@ -246,29 +246,13 @@ impl Game {
             }
             let body = boss_assets::segment(generation);
             let segment_scale = 1.25;
-            let radius = pixel_assets::radius(&body, segment_scale);
-            let head_radius = pixel_assets::radius(&art.body, scale);
-            let mut distance = 0.0;
-            for index in 1..=(9 + 2 * generation) {
-                let spacing = if index == 1 {
-                    head_radius + radius * 0.8
-                } else {
-                    radius * 1.7
-                };
-                distance += spacing;
-                self.world.spawn((
-                    Motion::new(position + direction * distance, Vec2::ZERO, heading),
-                    Segment {
-                        owner: entity,
-                        index,
-                        health: 42.0 + 8.0 * generation.saturating_sub(1) as f32,
-                        scale: segment_scale,
-                        radius,
-                        spacing,
-                    },
-                    body.clone(),
-                ));
-            }
+            self.spawn_chain(
+                entity,
+                body,
+                segment_scale,
+                9 + 2 * generation,
+                42.0 + 8.0 * generation.saturating_sub(1) as f32,
+            );
         }
     }
     pub(super) fn diagnostic_boss_active(&self) -> bool {
@@ -650,7 +634,10 @@ mod tests {
         assert!(!game.world.contains(entity));
     }
     fn sovereign() -> Profile {
-        let mut profile = Profile::default();
+        let mut profile = Profile {
+            schema_version: 3,
+            ..Profile::default()
+        }; // declared pre-slot reward migration fixture
         profile.campaign.patches = [true; 8];
         profile.campaign.blueprints = [true; 8];
         profile.campaign.royale_results = [1; 8];
@@ -948,6 +935,7 @@ mod tests {
         assert_eq!(game.profile.unlocked, [false; 3]);
         let mut profile = Profile::default();
         profile.unlocked[0] = true;
+        profile.schema_version = 3;
         profile.ranks[6] = 5;
         profile.boss_generations[0] = [16, 8, 4, 2, 1];
         profile.boss_kills[0] = 31;
@@ -1138,7 +1126,7 @@ mod tests {
     }
 
     #[test]
-    fn old_vertical_coil_layout_causes_real_contact_before_the_natural_spawn_telegraph() {
+    fn articulated_solver_repairs_old_vertical_layout_before_spawn_contact() {
         let mut game = Game::new(Profile::default());
         game.move_player(Vec2::new(1800.0, 0.0));
         game.set_viewport(533.0, 300.0);
@@ -1151,12 +1139,23 @@ mod tests {
             .query::<(Entity, &Segment)>()
             .iter()
             .filter(|(_, segment)| segment.owner == owner)
-            .map(|(entity, segment)| (entity, segment.index, segment.spacing))
+            .map(|(entity, segment)| {
+                (
+                    entity,
+                    segment.index,
+                    if segment.index == 1 {
+                        game.world.get::<&Actor>(owner).unwrap().radius + segment.radius * 0.8
+                    } else {
+                        segment.radius * 1.7
+                    },
+                )
+            })
             .collect();
         segments.sort_by_key(|(_, index, _)| *index);
         let mut length = 0.0;
         // Reconstruct the old initialization through actual physics entities.
-        // This proves the failure was contact, rather than an art-only overlap.
+        // The old orientation would cross the player; articulation repairs it
+        // before the first contact pass without hiding or invulnerabling enemies.
         for (entity, _, spacing) in segments {
             length += spacing;
             *game.world.get::<&mut Motion>(entity).unwrap() =
@@ -1165,8 +1164,8 @@ mod tests {
         let hull = game.hud().hull;
         game.take_events();
         first_chain_tick(&mut game);
-        assert_eq!(game.hud().hull, hull - 13.0);
-        assert!(game.take_events().iter().any(|event| event.kind == "hit"));
+        assert_eq!(game.hud().hull, hull);
+        assert!(game.take_events().iter().all(|event| event.kind != "hit"));
         let boss = game.world.get::<&BossEncounter>(owner).unwrap();
         assert_eq!(boss.phase, Phase::Tell);
         assert!(boss.phase_age < 0.02);

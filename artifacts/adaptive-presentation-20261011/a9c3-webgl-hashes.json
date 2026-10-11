@@ -1,0 +1,203 @@
+{
+  "frozen_utc": "2026-10-11T01:46:23.244225+00:00",
+  "files": [
+    {
+      "path": "work/flat-hud-browser-qa/actual-webgl-loss.jpg",
+      "bytes": 45393,
+      "sha256": "948a0ee1211fe5fbaf1d40238166c0d01434baffa9269162883ccf9958a37e80",
+      "modified_utc": "2026-10-11T01:43:41.922091+00:00"
+    },
+    {
+      "path": "work/flat-hud-browser-qa/actual-webgl-restored-settings.jpg",
+      "bytes": 124878,
+      "sha256": "0bd4addb87343e84e8c05645bbae07f48438080ffb5c2a18aea0b29fa8d2970f",
+      "modified_utc": "2026-10-11T01:44:07.245339+00:00"
+    },
+    {
+      "path": "work/flat-hud-browser-qa/before-apply-dom.txt",
+      "bytes": 930,
+      "sha256": "b7cf1455ee7494c3f2eb0020dc390e70d5e33dc052d2791213c7f4d0639c3e6e",
+      "modified_utc": "2026-10-11T01:41:43.109281+00:00"
+    },
+    {
+      "path": "work/flat-hud-browser-qa/before-loss-metrics.txt",
+      "bytes": 97,
+      "sha256": "098c4a058a96a3716a6706a1996664c764c69e8d68ca628d442cd5340b03b420",
+      "modified_utc": "2026-10-11T01:43:35.758850+00:00"
+    },
+    {
+      "path": "work/flat-hud-browser-qa/before-update-resources.json",
+      "bytes": 2993,
+      "sha256": "42cc2bc231a6101a9e616bf746af6065fe316af579135687f913ee7e6972c65a",
+      "modified_utc": "2026-10-11T01:41:36.048378+00:00"
+    },
+    {
+      "path": "work/flat-hud-browser-qa/browser-warnings.json",
+      "bytes": 4964,
+      "sha256": "d77906b0838c1751c4bc79478590b09501717bcc1554c2e5656ecedd43711b20",
+      "modified_utc": "2026-10-11T01:44:51.050246+00:00"
+    },
+    {
+      "path": "work/flat-hud-browser-qa/cleanup.json",
+      "bytes": 246,
+      "sha256": "cdc6989901e10e37baa3202d5048947379ee631e5204b1f327e999df494409ba",
+      "modified_utc": "2026-10-11T01:44:55.075507+00:00"
+    },
+    {
+      "path": "work/flat-hud-browser-qa/desktop-flight-geometry.json",
+      "bytes": 4774,
+      "sha256": "4a235a13ede4196980dad370d3acfff4e8416e892254484cec59b1e17ac87903",
+      "modified_utc": "2026-10-11T01:42:11.100428+00:00"
+    },
+    {
+      "path": "work/flat-hud-browser-qa/desktop-flight.jpg",
+      "bytes": 35711,
+      "sha256": "e5c24b20638a088fbc00ca640f76f4a36815fc703dc80350e1a54f7af6f61967",
+      "modified_utc": "2026-10-11T01:42:11.123051+00:00"
+    },
+    {
+      "path": "work/flat-hud-browser-qa/desktop-status-dom.txt",
+      "bytes": 1329,
+      "sha256": "532073d34d0d62f2434b5d89c3ecea11f579716559e636535852b828912a8983",
+      "modified_utc": "2026-10-11T01:42:19.047101+00:00"
+    },
+    {
+      "path": "work/flat-hud-browser-qa/desktop-status.jpg",
+      "bytes": 72517,
+      "sha256": "8d4e3e5ac1395168949e8405ac3d4a3fb582dc40a8fdd3c3949c13cf9aba754d",
+      "modified_utc": "2026-10-11T01:42:19.030937+00:00"
+    },
+    {
+      "path": "work/flat-hud-browser-qa/diagnostic-belt-metrics.json",
+      "bytes": 1000,
+      "sha256": "313f145b5376860858adda4377dfc6e5e00efd430479f4a8b426139925ac1971",
+      "modified_utc": "2026-10-11T01:44:41.852716+00:00"
+    },
+    {
+      "path": "work/flat-hud-browser-qa/diagnostic-belt.jpg",
+      "bytes": 71078,
+      "sha256": "1e669a429f77c6f80155d6d34e3062be141013691628b32e1b7169f7f7857b8c",
+      "modified_utc": "2026-10-11T01:44:41.880963+00:00"
+    },
+    {
+      "path": "work/flat-hud-browser-qa/final-resources.json",
+      "bytes": 3412,
+      "sha256": "26edca3553356eb625b8ae50d469393318ec5a62f29498fd85aa221d6ad0aa64",
+      "modified_utc": "2026-10-11T01:41:48.510211+00:00"
+    },
+    {
+      "path": "work/flat-hud-browser-qa/final-title-dom.txt",
+      "bytes": 1032,
+      "sha256": "db2f645845eafa16bbbe5186585506258f136b19302af6441539ad33ae658a53",
+      "modified_utc": "2026-10-11T01:44:51.060389+00:00"
+    },
+    {
+      "path": "work/flat-hud-browser-qa/landscape-flight.jpg",
+      "bytes": 17655,
+      "sha256": "28d2b06ff342d88632198fd656e35d7ae58bacf7f246093429063b7fed132e34",
+      "modified_utc": "2026-10-11T01:42:24.359850+00:00"
+    },
+    {
+      "path": "work/flat-hud-browser-qa/landscape-map.jpg",
+      "bytes": 37583,
+      "sha256": "c51c1f3bad0232bac1b741bc5d7ce7cc5d9eda9e6f06b6db8f09679156197073",
+      "modified_utc": "2026-10-11T01:42:29.797669+00:00"
+    },
+    {
+      "path": "work/flat-hud-browser-qa/landscape-settings.jpg",
+      "bytes": 37122,
+      "sha256": "b290ccfe879ad9fa9ef51a31ce8ca4adbcdde2b157cf24792e98aa15a07fe22b",
+      "modified_utc": "2026-10-11T01:42:34.752351+00:00"
+    },
+    {
+      "path": "work/flat-hud-browser-qa/loss-dom.txt",
+      "bytes": 1221,
+      "sha256": "d03a7079b56fecd7d4f67829b65911215a0f747fc450b5bb5a755a9fb5eaefd2",
+      "modified_utc": "2026-10-11T01:43:41.894929+00:00"
+    },
+    {
+      "path": "work/flat-hud-browser-qa/lost-settings-dom.txt",
+      "bytes": 1331,
+      "sha256": "6755b0738d24549236ff17a22cb0bfb801608ee10943de9f6c7ed5cba9aa7610",
+      "modified_utc": "2026-10-11T01:43:49.943417+00:00"
+    },
+    {
+      "path": "work/flat-hud-browser-qa/lost-settings-fallback.jpg",
+      "bytes": 100929,
+      "sha256": "7821a0b4fe3a82909b784d0b43f5e75f3d68da6d1d837891627c71e35f483531",
+      "modified_utc": "2026-10-11T01:43:49.971186+00:00"
+    },
+    {
+      "path": "work/flat-hud-browser-qa/lost-toast-geometry.json",
+      "bytes": 1656,
+      "sha256": "eb167951c04b5b9574b5b554dcdf7350c3e15156b2fd2f978e1e35656936618c",
+      "modified_utc": "2026-10-11T01:44:13.716733+00:00"
+    },
+    {
+      "path": "work/flat-hud-browser-qa/pins.json",
+      "bytes": 3963,
+      "sha256": "0c3b856fceaf760dc6ef9ed1c36569af5d743e5139082e426e16bc369b913f5f",
+      "modified_utc": "2026-10-11T01:46:23.239591+00:00"
+    },
+    {
+      "path": "work/flat-hud-browser-qa/PROTOCOL.md",
+      "bytes": 3383,
+      "sha256": "6d87d77b84d19763ef067db88a7dc4d37fda027061be8b5722b5039fb6c58d65",
+      "modified_utc": "2026-10-11T01:36:51.541627+00:00"
+    },
+    {
+      "path": "work/flat-hud-browser-qa/restored-haven-metrics.json",
+      "bytes": 873,
+      "sha256": "d0b9b7d1e9d4dea7dddfbe3da5930040f7b3fa1bdc56d701401ba3373c096b76",
+      "modified_utc": "2026-10-11T01:44:35.576586+00:00"
+    },
+    {
+      "path": "work/flat-hud-browser-qa/REVIEW.md",
+      "bytes": 6898,
+      "sha256": "8ed38921b08589ff2f0ca89c47a48b8a32246fe18ad53318b3e3e44f478c51ca",
+      "modified_utc": "2026-10-11T01:46:23.198908+00:00"
+    },
+    {
+      "path": "work/flat-hud-browser-qa/tiny-flight.jpg",
+      "bytes": 10256,
+      "sha256": "b736f42c739f8ef8a6412a274016fc39105ab6304b45136fbaa796506fc5a88f",
+      "modified_utc": "2026-10-11T01:42:42.410513+00:00"
+    },
+    {
+      "path": "work/flat-hud-browser-qa/tiny-map-details-settled.jpg",
+      "bytes": 12922,
+      "sha256": "204d16148e3f13050b9fa0a20b4f7fb341a9a4ce21a654a4bcbae0ff3a1f28c3",
+      "modified_utc": "2026-10-11T01:43:11.959674+00:00"
+    },
+    {
+      "path": "work/flat-hud-browser-qa/tiny-map-details.jpg",
+      "bytes": 14161,
+      "sha256": "e9287f03a004f29157456a21a8dbe8e7445e7e3fb4eddde68fb9d7322977e4b9",
+      "modified_utc": "2026-10-11T01:43:06.009236+00:00"
+    },
+    {
+      "path": "work/flat-hud-browser-qa/tiny-map-geometry.json",
+      "bytes": 1064,
+      "sha256": "ed9124bb2b20464271d741794f0ba6551dafe8a2f5d1a4a3a39e89077df563ef",
+      "modified_utc": "2026-10-11T01:43:06.026975+00:00"
+    },
+    {
+      "path": "work/flat-hud-browser-qa/tiny-settings-actions.jpg",
+      "bytes": 12750,
+      "sha256": "7b3352aece9f5207782574f43ee5f2a88426747a0adc9ba56ab7c6c7689e5b26",
+      "modified_utc": "2026-10-11T01:43:24.885409+00:00"
+    },
+    {
+      "path": "work/flat-hud-browser-qa/tiny-status-geometry.json",
+      "bytes": 3914,
+      "sha256": "17b7df6f2dfd51d96b149a9c9121f2bb97c3e8fce0b793c45be4d1d6bc7beb3c",
+      "modified_utc": "2026-10-11T01:42:50.972010+00:00"
+    },
+    {
+      "path": "work/flat-hud-browser-qa/tiny-status.jpg",
+      "bytes": 15428,
+      "sha256": "62f34759a011be3c912b17da36072de192ff8eccab81a50d113f62a11cc0dd1f",
+      "modified_utc": "2026-10-11T01:42:50.955617+00:00"
+    }
+  ]
+}

@@ -4,6 +4,14 @@ use engine_core::RenderFrame;
 
 const VIEW: [f32; 2] = [640.0, 360.0];
 const GROUP: [f32; 2] = [20.25, 10.5];
+const MENU_KINDS: [&str; 6] = [
+    "settings-icon",
+    "resume-icon",
+    "restart-icon",
+    "title-icon",
+    "quit-icon",
+    "status-icon",
+];
 fn icon(kind: &str, state: f32, rect: [f32; 4]) -> UiNode {
     UiNode {
         kind: kind.into(),
@@ -83,6 +91,166 @@ fn original_control_icons_are_distinct_cached_objects_with_state_colors() {
     );
     assert_eq!(frame.pixel_count, CLOSE_ICON.occupied_count());
     assert!(frame.batches[0].pixels.iter().all(|p| p.color == WHITE));
+}
+
+#[test]
+fn menu_symbols_are_six_distinct_cached_unlit_objects_without_text_placeholders() {
+    let mut signatures = std::collections::HashSet::new();
+    let mut total = 0;
+    for kind in MENU_KINDS {
+        let (body, accent) = menu_icon(kind).unwrap();
+        assert!(std::ptr::eq(body, menu_icon(kind).unwrap().0));
+        assert_eq!((body.width, body.height), (10, 10));
+        assert!(
+            signatures.insert(
+                (0..10)
+                    .flat_map(|y| (0..10).map(move |x| body.is_occupied(x, y)))
+                    .collect::<Vec<_>>()
+            )
+        );
+        let mut node = icon(kind, 1234.0, [7.0, 13.0, 20.0, 20.0]);
+        node.text = "IGNORED ACCESSIBLE CAPTION".into();
+        let frame = extract(node, [0.0; 2], 0.0, false);
+        assert_eq!(frame.pixel_count, body.occupied_count());
+        assert_eq!(frame.batches.len(), 1);
+        assert_eq!(frame.batches[0].transforms.len(), 1);
+        assert_eq!(frame.batches[0].transforms[0].b[2..], [0.0, 0.0]);
+        assert!(frame.batches[0].pixels.iter().any(|p| p.color == accent));
+        same(
+            &frame,
+            &extract(
+                icon(kind, f32::NAN, [7.0, 13.0, 20.0, 20.0]),
+                [0.0; 2],
+                999.0,
+                true,
+            ),
+        );
+        total += body.occupied_count();
+    }
+    assert!(
+        total < 500,
+        "all six control objects remain below the bounded control budget"
+    );
+    assert!(menu_icon("unknown-icon").is_none());
+}
+
+#[test]
+fn semantic_icon_routes_keep_their_authored_readable_shapes() {
+    let landmarks = [
+        ("settings-icon", [(3, 0), (0, 4)], [(4, 4), (0, 0)]),
+        ("resume-icon", [(2, 0), (6, 4)], [(7, 4), (0, 4)]),
+        ("restart-icon", [(6, 4), (9, 4)], [(9, 5), (5, 6)]),
+        ("title-icon", [(4, 0), (3, 7)], [(4, 7), (0, 0)]),
+        ("quit-icon", [(4, 0), (4, 4)], [(4, 5), (0, 0)]),
+    ];
+    for (kind, filled, empty) in landmarks {
+        let body = menu_icon(kind).unwrap().0;
+        for (x, y) in filled {
+            assert!(body.is_occupied(x, y), "{kind} landmark {x},{y}");
+        }
+        for (x, y) in empty {
+            assert!(!body.is_occupied(x, y), "{kind} open region {x},{y}");
+        }
+    }
+    let status = menu_icon("status-icon").unwrap().0;
+    for y in 0..10 {
+        for x in 0..10 {
+            assert_eq!(
+                status.is_occupied(x, y),
+                (1..=8).contains(&x) && [1, 2, 4, 5, 7, 8].contains(&y)
+            );
+        }
+    }
+}
+
+#[test]
+fn menu_icons_fit_44_physical_pixel_hitboxes_at_fractional_and_tiny_logical_scales() {
+    for kind in MENU_KINDS {
+        for ui_scale in [1.0, 1.375, 2.4, 3.0, 4.0, 6.0] {
+            let rect = [31.25, 23.5, 44.0 / ui_scale, 44.0 / ui_scale];
+            let frame = extract(icon(kind, 0.0, rect), [0.0; 2], 0.0, false);
+            let batch = &frame.batches[0];
+            let center = local_point(batch.transforms[0], Vec2::ZERO, [0.0; 2]);
+            assert!(
+                (center - Vec2::new(rect[0] + rect[2] * 0.5, rect[1] + rect[3] * 0.5))
+                    .abs()
+                    .max_element()
+                    < 0.0001
+            );
+            for p in &batch.pixels {
+                assert_ne!(p.color.to_le_bytes()[3], 0);
+                for c in corners(Vec2::from_array(p.local)) {
+                    let point = local_point(batch.transforms[p.transform as usize], c, [0.0; 2]);
+                    assert!(point.x >= rect[0] - 0.0001 && point.x <= rect[0] + rect[2] + 0.0001);
+                    assert!(point.y >= rect[1] - 0.0001 && point.y <= rect[1] + rect[3] + 0.0001);
+                    let physical = (point - Vec2::new(rect[0], rect[1])) * ui_scale;
+                    assert!(physical.min_element() >= -0.001 && physical.max_element() <= 44.001);
+                }
+            }
+        }
+    }
+}
+
+#[test]
+fn menu_icon_clip_hover_disabled_and_atomic_budgets_use_the_existing_control_contract() {
+    let clip = [5.0, 2.0, 10.0, 14.0];
+    for kind in MENU_KINDS {
+        let (body, accent) = menu_icon(kind).unwrap();
+        let mut node = icon(kind, 0.0, [0.0, 0.0, 20.0, 20.0]);
+        node.active = true;
+        let hovered = extract(node, [0.0; 2], 0.0, false);
+        assert!(
+            hovered.batches[0]
+                .pixels
+                .iter()
+                .any(|p| p.color == brighten(accent))
+        );
+        let mut node = icon(kind, 0.0, [0.0, 0.0, 20.0, 20.0]);
+        node.active = true;
+        node.disabled = true;
+        let disabled = extract(node, [0.0; 2], 0.0, false);
+        assert!(
+            disabled.batches[0]
+                .pixels
+                .iter()
+                .all(|p| p.color == BUTTON_DISABLED_TEXT)
+        );
+        let mut node = icon(kind, 0.0, [0.0, 0.0, 20.0, 20.0]);
+        node.clip = Some(clip);
+        let frame = extract(node, [0.0; 2], 0.0, false);
+        assert_eq!(frame.pixel_count, body.occupied_count());
+        let mut visible = 0;
+        for batch in &frame.batches {
+            for p in &batch.pixels {
+                if p.color.to_le_bytes()[3] == 0 {
+                    continue;
+                }
+                visible += 1;
+                for c in corners(Vec2::from_array(p.local)) {
+                    let point = local_point(batch.transforms[p.transform as usize], c, [0.0; 2]);
+                    assert!(point.x >= clip[0] && point.x <= clip[0] + clip[2]);
+                    assert!(point.y >= clip[1] && point.y <= clip[1] + clip[3]);
+                }
+            }
+        }
+        assert!(visible > 0 && visible < body.occupied_count());
+        for work_limited in [false, true] {
+            let count = body.occupied_count();
+            let mut builder = FrameBuilder::new();
+            let mut painter = Painter {
+                frame: &mut builder,
+                parent: AffineTransform::default(),
+                remaining: count - usize::from(!work_limited),
+                work_remaining: count - usize::from(work_limited),
+                viewport: Vec2::from_array(VIEW),
+                clip: None,
+            };
+            painter.control_icon(&icon(kind, 0.0, [0.0, 0.0, 20.0, 20.0]));
+            assert_eq!(painter.remaining, count - usize::from(!work_limited));
+            assert_eq!(painter.work_remaining, count - usize::from(work_limited));
+            assert_eq!(builder.frame().pixel_count, 0);
+        }
+    }
 }
 
 #[test]

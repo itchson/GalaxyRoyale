@@ -1,0 +1,35 @@
+# Native flight presentation handoff
+
+Production ownership is frozen for the seven `owned` files in `source-pins.json`. This changes flight presentation only. Historical `galaxy-810fccad52eabc00` source/package and browser observations remain separate; no normal distribution was built or published by this specialist.
+
+## Runtime contract
+
+`pixel_ui::FlightStatusLayout::new(&FlightStatusInput)` is the stack-only geometry authority used by the native painter and `BossOverlay::Reserved`. Its rectangles are safe-area-local. Actual semantic header rectangles and contact hitboxes are clipped/group-composed before rebasing. The world player and optional boss core are projected with actual `CameraView`, the interpolated **unshaken** camera and current eased zoom before subtracting safe left/top. The UI upload uses the actual shaken camera, keeping these logical overlay coordinates fixed.
+
+Flight now draws one flat near-black footer with a quiet steel/cyan rail. At normal desktop extents its bounds are `[6,H-28,W-12,22]`. Touch uses the actual central gap between the shared joystick/fire hit rectangles when it is at least120 logical units; otherwise it tries the clear above-pad slot, then a10-high essential readout. No unsafe rectangle is manufactured. The first row contains concise ship level/carried cargo and points where they fit. The second row is context. Biome and SAFE/threat are a native fallback rather than separate framed bubbles. The old public painter wrappers remain compatible for native callers/tests; the actual browser invokes `draw_flight_status`.
+
+Hull/shield tracks are44×9 logical units, positioned above or below the actual projected player and body-derived radius. They avoid safe edges, measured header, footer, actual touch pads, actual contact hits and the projected boss core. Offscreen ships produce no clamped edge marker. A cramped boss allocation can omit attached tracks; the shared footer then retains H/S percentages and the boss keeps health/phase. Both reservation and painter take that same compact priority decision.
+
+`Galaxy.flight_status_bounds()` and `flight_status_text_bounds()` each return a Float32Array `[x,y,w,h]` in full logical-screen coordinates, or an empty array when unavailable/outside flight. They are bounded four-float JS allocations; the layout itself allocates nothing. Footer/context geometry depends on viewport, insets, touch and actual header rather than moving ship coordinates, so ordinary HUD cadence plus immediate resize/header invalidation is sufficient. The actual bar layout is recomputed each frame.
+
+## Semantic status and hit geometry
+
+Native kinds `status-text` and `warning-text` draw one bounded RoyaleMono line at1:1 logical font size, with whole-cell clip checks and the existing60,000-cell/work budgets. They have no frame. `warning-text.value`0 is a quiet cyan message,1 is low-hull coral,2 is shield-down amber. Native low-hull requires positive finite hull<=25% of positive max; shield-down requires positive hull, positive max shield and current shield<=0. Dead frames do not start these native alarms. Color-only warnings vary by18% once per second; Reduced Motion holds the full accent. A depleted-shield readout is a persistent truthful state, not a fabricated shield-break event/timer.
+
+The actual bridge reads inherited physical `--flight-text-x/y/width/height` to recover the exact seven-logical-unit glyph slot. A visible contact additionally emits one non-rendered `status-hit` node with its **actual** clipped button bbox, whose CSS height is a44physical-pixel minimum (`max(44px,22*uiScale)`). At most two such contacts are intended. This preserves pointer geometry rather than treating seven-pixel glyphs as the hit target. Toast wins and concealed/unsafe contacts produce no hit or glyph nodes. Footer style/context-visibility changes invalidate the bridge. Actual facility hitboxes remain unchanged. Outside flight, recovery/menu toast uses its measured multiline DOM bounds and existing wrapping, retaining the accessible complete message.
+
+Root owns physical hit collision gating against measured header/touch controls and publishes both CSS bound sets. Production owns the accessible DOM and `data-context-interactive/available` visibility rules. A clear visual text slot alone is not proof that a44px-minimum touch hit fits; e.g. the documented280×180 above-pad case needs the shell's collision gate. Genuine overconstrained geometry remains fail-closed.
+
+## Verification actually executed
+
+Commands and exit codes are in `commands.json`; complete output is retained alongside it. The final actual native library run passed109 unit tests and31 external layout tests. Seven new native tests exercise supported533×300/320×180/tiny180×140 extents, asymmetric insets, f32 zoom endpoints, far-world projection, world-core exclusion, actual contact metadata, nontransparent quad corners, unlit materials, no-fit/footer fallback, static Reduced Motion and bounded semantic glyph submission. Ten retained boss adapter tests now exercise the new runtime painter/reservations. Native all-target Clippy and both locked WebGPU/WebGL2 WASM Clippy passed. TypeScript typecheck passed.
+
+Twenty targeted **actual compiled bridge VM** tests passed (five new status cases plus retained map/semantic controls). They prove once-only art, fractional logical scaling, full min-hit versus glyph bounds, hidden contacts/toast precedence, multiline nonflight fallback and style invalidation. They are not browser DOM captures.
+
+Actual native HUD-only default-profile extraction fixtures emitted174–640 cells,20–49 transforms, one batch across the12 tested viewport/zoom cases. These figures exclude boss panels, semantic icons/messages, touch-pad pixels, world extraction and GPU work. The largest tested normal fixture is640 cells/49 transforms. This is measured extraction geometry, not FPS or phone performance. `native-tests.log` records each fixture.
+
+## Art/material consistency scope
+
+The new footer and compact cached hull/shield symbols reuse the existing near-black/steel, ivory, cyan, coral and mint native palette. RoyaleMono letters remain separately composed cached occupied objects. All UI material fields are zero/unlit, so menu/status hues do not inherit world lighting or zoom. Existing generated ship/dock cells, authored campaign32-unit hulls, fifteen boss rigs, damage occupancy, palette shading, emission and connected-body transforms were left intact. Source review confirms runtime assets are local `PixelBody` cells rather than raster overlays. No new art file was altered, no source body was scaled to force unrelated distant physical pixel sizes to match, and old atlas-only budgets are not presented as new whole-scene counts.
+
+The fresh normal GPU/WebGL2 composition, actual responsive DOM/hit capture, natural low-hull/shield feedback and physical-device/human acceptance remain Root/Production gates. The specialist did not perform browser interaction or capture for this change.

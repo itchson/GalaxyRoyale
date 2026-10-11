@@ -1,0 +1,11 @@
+(node:41532) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+Building isolated webgpu WASM checkpoint contract.
+   Compiling game_web v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\game_web)
+    Finished `release` profile [optimized] target(s) in 2.17s
+PASS webgpu: 9 actual Rust serializer/save/reload cases; release excludes QA probe.
+Building isolated webgl2 WASM checkpoint contract.
+   Compiling game_web v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\game_web)
+    Finished `release` profile [optimized] target(s) in 2.23s
+PASS webgl2: 9 actual Rust serializer/save/reload cases; release excludes QA probe.
+PASS: 18 headless WASM serializer/SaveStore cases. Supplied inventory/history fixtures are not earned reward proof; IndexedDB uses fake-indexeddb. No browser/GPU/device acceptance.

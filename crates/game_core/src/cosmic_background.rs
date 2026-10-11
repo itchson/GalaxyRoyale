@@ -11,6 +11,11 @@ const STAR_CANDIDATES: u32 = 32;
 const MOTIF_TILE: f32 = 1200.0;
 const MOTIF_PARALLAX: f32 = 0.08;
 const MOTIF_RADIUS: f32 = 180.0;
+const SYSTEM_TILE: f32 = 768.0;
+const SYSTEM_PARALLAX: f32 = 0.27;
+const GAS_LIMIT: usize = 800;
+const GAS_TILE: f32 = 256.0;
+const GAS_SIZES: [f32; 4] = [0.45, 0.7, 1.05, 1.55];
 const DENSITIES: [f32; 6] = [0.14, 0.54, 0.80, 0.29, 0.43, 0.65];
 const TINTS: [[f32; 3]; 6] = [
     [137.0, 141.0, 150.0],
@@ -38,6 +43,7 @@ pub(super) struct Stats {
     pub motif_quads: usize,
     pub motifs: usize,
     pub transforms: usize,
+    pub systems: usize,
 }
 
 #[derive(Clone, Copy)]
@@ -255,9 +261,9 @@ static ART: LazyLock<Art> = LazyLock::new(|| {
             }
         },
         &[
-            rgba(43, 37, 58, 13),
-            rgba(75, 57, 93, 23),
-            rgba(127, 85, 131, 38),
+            rgba(43, 37, 58, 30),
+            rgba(75, 57, 93, 58),
+            rgba(127, 85, 131, 96),
         ],
     );
     let nebula_thread = template(
@@ -271,7 +277,7 @@ static ART: LazyLock<Art> = LazyLock::new(|| {
                 None
             }
         },
-        &[rgba(48, 60, 71, 18), rgba(88, 111, 116, 32)],
+        &[rgba(48, 60, 71, 32), rgba(88, 111, 116, 58)],
     );
     let nova_shell = template(
         64,
@@ -461,6 +467,223 @@ fn draw_motif(
     required
 }
 
+/// A seeded stellar neighborhood is born once in field space. Its nodes and
+/// connecting dotted asterism never depend on camera, quality or animation.
+fn stellar_system(seed: u32, grid: [i32; 2]) -> Option<(Vec2, [Vec2; 7], u32)> {
+    let h = hash3(seed ^ 0x7379_7374, grid[0], grid[1], 71);
+    if !h.is_multiple_of(17) {
+        return None;
+    }
+    let origin = (Vec2::new(grid[0] as f32, grid[1] as f32)
+        + Vec2::new(0.2 + unit(h) * 0.6, 0.2 + unit(mix(h ^ 31)) * 0.6))
+        * SYSTEM_TILE;
+    let angle = unit(mix(h ^ 137)) * TAU;
+    let axis = Vec2::new(angle.cos(), angle.sin());
+    let side = Vec2::new(-axis.y, axis.x);
+    let nodes = std::array::from_fn(|i| {
+        let q = mix(h ^ (i as u32 + 1).wrapping_mul(7919));
+        let x = (i as f32 - 3.0) * 20.0 + (unit(q) - 0.5) * 10.0;
+        let y = (unit(mix(q ^ 83)) - 0.5) * 55.0;
+        axis * x + side * y
+    });
+    Some((origin, nodes, h))
+}
+
+fn draw_system(
+    frame: &mut FrameBuilder,
+    scene: &SceneInput,
+    origin: Vec2,
+    nodes: [Vec2; 7],
+    h: u32,
+    remaining: usize,
+) -> usize {
+    let relative = origin - scene.camera * SYSTEM_PARALLAX;
+    if (relative.abs() - scene.viewport * 0.5).max_element() > 90.0 {
+        return 0;
+    }
+    let tint = Atmosphere::at(scene.seed, origin / SYSTEM_PARALLAX).tint;
+    let time = if scene.reduced_motion {
+        0.0
+    } else {
+        scene.time
+    };
+    let brightness = 0.94 + 0.06 * (time * 0.13 + unit(h) * TAU).sin();
+    let mut links = [None; 96];
+    let mut count = 0;
+    for edge in 0..6 {
+        let a = nodes[edge];
+        let b = nodes[edge + 1];
+        let steps = ((b - a).length() / 3.2).ceil() as usize;
+        for step in 1..steps {
+            if (scene.reduced && step % 2 == 1) || count == links.len() {
+                continue;
+            }
+            let p = a.lerp(b, step as f32 / steps as f32);
+            links[count] = Some((
+                p / 0.55,
+                rgba(tint[0] as u8, tint[1] as u8, tint[2] as u8, 38),
+            ));
+            count += 1;
+        }
+    }
+    // Whole asterism admission keeps seven real nodes with their visible links.
+    if remaining < count + nodes.len() {
+        return 0;
+    }
+    let parent = origin + scene.camera * (1.0 - SYSTEM_PARALLAX);
+    frame.push_cells_affine_material(
+        Transform {
+            position: parent,
+            scale: Vec2::splat(0.55),
+            ..Transform::default()
+        }
+        .affine(),
+        PixelMaterial::default(),
+        links.into_iter().flatten(),
+    );
+    frame.push_cells_affine_material(
+        Transform {
+            position: parent,
+            scale: Vec2::splat(1.15),
+            ..Transform::default()
+        }
+        .affine(),
+        PixelMaterial::default(),
+        nodes.into_iter().enumerate().map(|(i, p)| {
+            let warm = if (h >> i) & 1 == 0 {
+                [229, 211, 179]
+            } else {
+                [172, 211, 227]
+            };
+            (
+                p / 1.15,
+                rgba(warm[0], warm[1], warm[2], (190.0 * brightness) as u8),
+            )
+        }),
+    );
+    count + nodes.len()
+}
+
+/// Region-owned gas quota: no physics body or combat RNG, and every emitted
+/// soft cell is charged against the caller's existing cosmetic quota. Field
+/// translations are encoded once; curl remains small local affine geometry.
+pub(super) fn render_gas(
+    frame: &mut FrameBuilder,
+    scene: SceneInput,
+    remaining: &mut usize,
+) -> usize {
+    if !scene.camera.is_finite()
+        || !scene.viewport.is_finite()
+        || scene.viewport.min_element() <= 0.0
+        || !scene.time.is_finite()
+    {
+        return 0;
+    }
+    let scene = SceneInput {
+        camera: scene
+            .camera
+            .clamp(Vec2::splat(-1_000_000.0), Vec2::splat(1_000_000.0)),
+        ..scene
+    };
+    let limit = (if scene.reduced {
+        GAS_LIMIT / 2
+    } else {
+        GAS_LIMIT
+    })
+    .min(*remaining);
+    let mut emitted = 0;
+    let time = if scene.reduced_motion {
+        0.0
+    } else {
+        scene.time
+    };
+    let half = scene.viewport.min(Vec2::splat(8192.0)) * 0.5;
+    for (layer, factor) in [(0_u32, 0.16), (1, 0.36)] {
+        let sample = scene.camera * factor;
+        let min = ((sample - half - Vec2::splat(116.0)) / GAS_TILE)
+            .floor()
+            .as_ivec2();
+        let max = ((sample + half + Vec2::splat(116.0)) / GAS_TILE)
+            .floor()
+            .as_ivec2();
+        for y in min.y..=max.y {
+            for x in min.x..=max.x {
+                let field = hash3(scene.seed ^ 0x6761_7300, x, y, layer);
+                let origin = (Vec2::new(x as f32, y as f32)
+                    + Vec2::new(0.15 + unit(field) * 0.7, 0.15 + unit(mix(field ^ 29)) * 0.7))
+                    * GAS_TILE;
+                let blend = FieldBlend::new(
+                    scene.seed,
+                    Vec2::new(x as f32, y as f32) * GAS_TILE,
+                    GAS_TILE,
+                    factor,
+                );
+                let atmosphere = blend.sample(Vec2::splat(0.5), origin / factor);
+                let angle = unit(mix(field ^ 19)) * TAU;
+                let direction = Vec2::new(angle.cos(), angle.sin());
+                let side = Vec2::new(-direction.y, direction.x);
+                let biome = regions::at(scene.seed, origin / factor);
+                let palette = biome.palette[2].to_le_bytes();
+                let haven_gain =
+                    smooth((((origin / factor).length() - 500.0) / 2000.0).clamp(0.0, 1.0));
+                for (size_index, size) in GAS_SIZES.into_iter().enumerate() {
+                    let cells = (0..96_u32).filter_map(|i| {
+                        let h = mix(field ^ i.wrapping_mul(7919) ^ 37);
+                        if h as usize & 3 != size_index
+                            || (scene.reduced && h & 4 != 0)
+                            || unit(mix(h ^ 131)) > atmosphere.density * 0.9 + 0.1
+                        {
+                            return None;
+                        }
+                        let along = unit(h) * 2.0 - 1.0;
+                        let phase =
+                            time * (0.07 + unit(mix(h ^ 41)) * 0.035) + unit(mix(h ^ 11)) * TAU;
+                        let curl = (along * 5.2 + phase * 0.8).sin() * 13.0;
+                        let local = direction * (along * 99.0 + phase.sin() * 7.0)
+                            + side
+                                * (curl
+                                    + (unit(mix(h ^ 47)) - 0.5) * 14.0
+                                    + (phase * 0.73).cos() * 4.0);
+                        let relative = origin - scene.camera * factor + local;
+                        // Four world units conservatively cover tiny soft raster
+                        // expansion for the supported mobile/desktop extents.
+                        if (relative.abs() - half).max_element() > size + 4.0 {
+                            return None;
+                        }
+                        let envelope = (1.0 - along.abs() * 0.55) * (0.82 + 0.18 * phase.sin());
+                        let alpha = ((34.0 + unit(mix(h ^ 71)) * 66.0)
+                            * envelope
+                            * (0.07 + 0.93 * haven_gain)) as u8;
+                        let tint: [u8; 3] = std::array::from_fn(|j| {
+                            ((atmosphere.tint[j] * 0.42 + palette[j] as f32 * 0.55)
+                                * (0.8 + 0.2 * envelope))
+                                .min(190.0) as u8
+                        });
+                        Some((local / size, rgba(tint[0], tint[1], tint[2], alpha)))
+                    });
+                    let count = frame.push_soft_cells_affine_material(
+                        Transform {
+                            position: origin + scene.camera * (1.0 - factor),
+                            scale: Vec2::splat(size),
+                            ..Transform::default()
+                        }
+                        .affine(),
+                        PixelMaterial::default(),
+                        cells.take(limit - emitted),
+                    );
+                    emitted += count;
+                    if emitted == limit {
+                        *remaining -= emitted;
+                        return emitted;
+                    }
+                }
+            }
+        }
+    }
+    *remaining -= emitted;
+    emitted
+}
+
 fn star_cells(
     seed: u32,
     grid: [i32; 2],
@@ -548,6 +771,23 @@ pub(super) fn render(frame: &mut FrameBuilder, input: SceneInput) -> Stats {
                     stats.motifs += 1;
                     stats.transforms += 2;
                 }
+            }
+        }
+    }
+    let sample = scene.camera * SYSTEM_PARALLAX;
+    let min = ((sample - half - Vec2::splat(90.0)) / SYSTEM_TILE)
+        .floor()
+        .as_ivec2();
+    let max = ((sample + half + Vec2::splat(90.0)) / SYSTEM_TILE)
+        .floor()
+        .as_ivec2();
+    for y in min.y..=max.y {
+        for x in min.x..=max.x {
+            if let Some((origin, nodes, h)) = stellar_system(scene.seed, [x, y]) {
+                let count = draw_system(frame, &scene, origin, nodes, h, star_limit - stats.stars);
+                stats.stars += count;
+                stats.systems += usize::from(count > 0);
+                stats.transforms += usize::from(count > 0) * 2;
             }
         }
     }
@@ -770,6 +1010,74 @@ mod tests {
         }
     }
     #[test]
+    fn nebula_visibility_keeps_authored_cells_unlit_and_within_existing_group_budget() {
+        let seed = crate::Profile::default().seed;
+        let m = (-16..=16)
+            .flat_map(|y| (-16..=16).filter_map(move |x| motif(seed, [x, y])))
+            .filter(|m| m.kind == MotifKind::Nebula)
+            .min_by(|a, b| {
+                a.origin
+                    .length_squared()
+                    .total_cmp(&b.origin.length_squared())
+            })
+            .unwrap();
+        let camera = m.origin / MOTIF_PARALLAX;
+        assert_eq!(camera, Vec2::new(29410.637, 11408.639));
+        for reduced in [false, true] {
+            let a = ART.nebula.body(reduced);
+            let b = ART.nebula_thread.body(reduced);
+            let expected = a.occupied_count() + b.occupied_count();
+            for time in [0.0, 15.0, 47.0] {
+                let scene = SceneInput {
+                    seed,
+                    camera,
+                    reduced,
+                    time,
+                    ..input()
+                };
+                let mut frame = FrameBuilder::new();
+                let mut budget = expected;
+                assert_eq!(draw_motif(&mut frame, m, &scene, &mut budget), expected);
+                assert_eq!(budget, 0);
+                assert_eq!(frame.frame().pixel_count, expected);
+                assert_eq!(frame.frame().batches[0].transforms.len(), 2);
+                assert!(
+                    frame.frame().batches[0]
+                        .transforms
+                        .iter()
+                        .all(|t| t.b[2..] == [0.0, 0.0])
+                );
+                let submitted: Vec<_> = frame.frame().batches[0].pixels.iter().collect();
+                let source: Vec<_> = a.cells().chain(b.cells()).collect();
+                assert!(
+                    submitted
+                        .iter()
+                        .zip(source)
+                        .all(|(pixel, (local, _))| pixel.local == local.to_array())
+                );
+                let min_alpha = submitted
+                    .iter()
+                    .map(|p| p.color.to_le_bytes()[3])
+                    .min()
+                    .unwrap();
+                let max_alpha = submitted
+                    .iter()
+                    .map(|p| p.color.to_le_bytes()[3])
+                    .max()
+                    .unwrap();
+                assert!(min_alpha >= 21 && (69..=96).contains(&max_alpha));
+                eprintln!(
+                    "Actual nebula reduced={reduced} time={time}: {expected} cells/2 transforms, alpha {min_alpha}..{max_alpha}"
+                );
+                let mut rejected = FrameBuilder::new();
+                let mut short = expected - 1;
+                assert_eq!(draw_motif(&mut rejected, m, &scene, &mut short), 0);
+                assert_eq!(short, expected - 1);
+                assert!(rejected.frame().batches.is_empty());
+            }
+        }
+    }
+    #[test]
     fn cosmic_groups_reject_atomically_and_all_packets_respect_custom_caps() {
         for reduced in [false, true] {
             for kind in [MotifKind::Galaxy, MotifKind::Nebula, MotifKind::Supernova] {
@@ -866,5 +1174,197 @@ mod tests {
                 .cells()
                 .all(|(_, c)| c.to_le_bytes()[3] <= 90)
         );
+    }
+
+    #[test]
+    fn stellar_neighborhoods_keep_real_nodes_and_exact_seeded_links_under_quality_and_parallax() {
+        let seed = crate::Profile::default().seed;
+        let (origin, nodes, h) = (-8..=8)
+            .flat_map(|y| (-8..=8).filter_map(move |x| stellar_system(seed, [x, y])))
+            .min_by(|a, b| a.0.length_squared().total_cmp(&b.0.length_squared()))
+            .unwrap();
+        let camera = origin / SYSTEM_PARALLAX;
+        for reduced in [false, true] {
+            let scene = SceneInput {
+                seed,
+                camera,
+                reduced,
+                ..input()
+            };
+            let mut frame = FrameBuilder::new();
+            let required = draw_system(&mut frame, &scene, origin, nodes, h, 200);
+            assert!((7..=103).contains(&required));
+            assert_eq!(frame.frame().pixel_count, required);
+            assert_eq!(
+                frame
+                    .frame()
+                    .batches
+                    .iter()
+                    .map(|b| b.transforms.len())
+                    .sum::<usize>(),
+                2
+            );
+            assert!(
+                frame
+                    .frame()
+                    .batches
+                    .iter()
+                    .flat_map(|b| &b.transforms)
+                    .all(|t| t.b[2..] == [0.0, 0.0])
+            );
+            let mut rejected = FrameBuilder::new();
+            assert_eq!(
+                draw_system(&mut rejected, &scene, origin, nodes, h, required - 1),
+                0
+            );
+            assert_eq!(rejected.frame().pixel_count, 0);
+            for zoom in [0.6, 1.0, 1.6] {
+                let viewport = Vec2::new(533.0, 300.0) / zoom;
+                let (actual, stats) = draw(SceneInput { viewport, ..scene });
+                assert!(stats.systems > 0);
+                assert!(
+                    packets(&actual)
+                        .windows(required)
+                        .any(|p| p == packets(frame.frame()))
+                );
+            }
+            let mut frozen = FrameBuilder::new();
+            let mut again = FrameBuilder::new();
+            draw_system(
+                &mut frozen,
+                &SceneInput {
+                    time: 0.0,
+                    reduced_motion: true,
+                    ..scene
+                },
+                origin,
+                nodes,
+                h,
+                200,
+            );
+            draw_system(
+                &mut again,
+                &SceneInput {
+                    time: 901.0,
+                    reduced_motion: true,
+                    ..scene
+                },
+                origin,
+                nodes,
+                h,
+                200,
+            );
+            assert_eq!(packets(frozen.frame()), packets(again.frame()));
+        }
+        eprintln!("actual seeded system camera={camera:?},7nodes,hash={h}");
+    }
+
+    #[test]
+    fn soft_seeded_gas_uses_local_fractional_cells_and_charges_actual_shared_quota() {
+        for reduced in [false, true] {
+            for camera in [
+                Vec2::ZERO,
+                Vec2::new(27000.0, -19000.0),
+                Vec2::new(999000.0, -999000.0),
+            ] {
+                for zoom in [0.6, 1.0, 1.6] {
+                    let scene = SceneInput {
+                        camera,
+                        reduced,
+                        viewport: Vec2::new(533.0, 300.0) / zoom,
+                        ..input()
+                    };
+                    let mut frame = FrameBuilder::new();
+                    frame.push_pixel(Vec2::ZERO, 1.0, 0xffffffff);
+                    let mut remaining = if reduced { 3000 } else { 6000 };
+                    let initial = remaining;
+                    let count = render_gas(&mut frame, scene, &mut remaining);
+                    assert!(count > 0 && count <= if reduced { 400 } else { 800 });
+                    assert_eq!(remaining, initial - count);
+                    assert_eq!(frame.frame().pixel_count, count + 1);
+                    assert!(
+                        frame
+                            .frame()
+                            .batches
+                            .iter()
+                            .all(|b| b.transforms.len() <= 128)
+                    );
+                    let soft: Vec<_> = frame
+                        .frame()
+                        .batches
+                        .iter()
+                        .flat_map(|b| &b.transforms)
+                        .filter(|t| t.b[3] < 0.0)
+                        .collect();
+                    assert!(!soft.is_empty());
+                    assert!(soft.iter().all(|t| t.b[2..] == [0.0, -1.0]));
+                    assert!(
+                        soft.iter()
+                            .all(|t| GAS_SIZES.iter().any(|s| (t.a[2] - *s).abs() < 0.00001))
+                    );
+                    let mut limited = FrameBuilder::new();
+                    let mut quota = 31;
+                    let actual = render_gas(&mut limited, scene, &mut quota);
+                    assert_eq!(actual, limited.frame().pixel_count);
+                    assert_eq!(31 - actual, quota);
+                    assert!(actual <= 31);
+                    let view = CameraView::new(camera, Vec2::new(533.0, 300.0), zoom).unwrap();
+                    for b in &frame.frame().batches {
+                        for p in &b.pixels {
+                            let transform = b.transforms[p.transform as usize];
+                            if transform.b[3] >= 0.0 {
+                                continue;
+                            }
+                            let relative = view.relative_transform(transform);
+                            let point = relative.point(Vec2::from_array(p.local));
+                            assert!(point.is_finite());
+                            assert!((point.abs() - scene.viewport * 0.5).max_element() < 6.0);
+                        }
+                    }
+                    eprintln!(
+                        "gas reduced{reduced} camera{camera:?} zoom{zoom}: submitted{count},remaining{remaining},softgroups{}",
+                        soft.len()
+                    );
+                }
+            }
+        }
+    }
+
+    #[test]
+    fn gas_curl_is_repeatable_and_reduced_motion_freezes_all_submitted_cells() {
+        let render = |time, reduced_motion| {
+            let mut frame = FrameBuilder::new();
+            let mut quota = 6000;
+            render_gas(
+                &mut frame,
+                SceneInput {
+                    camera: Vec2::new(27000.0, -19000.0),
+                    time,
+                    reduced_motion,
+                    ..input()
+                },
+                &mut quota,
+            );
+            frame.finish()
+        };
+        let a = render(20.0, false);
+        assert_eq!(packets(&a), packets(&render(20.0, false)));
+        assert_ne!(packets(&a), packets(&render(21.0, false)));
+        assert_eq!(packets(&render(20.0, true)), packets(&render(901.0, true)));
+        let mut frame = FrameBuilder::new();
+        let mut quota = 6000;
+        assert_eq!(
+            render_gas(
+                &mut frame,
+                SceneInput {
+                    time: f32::NAN,
+                    ..input()
+                },
+                &mut quota
+            ),
+            0
+        );
+        assert_eq!(quota, 6000);
+        assert_eq!(frame.frame().pixel_count, 0);
     }
 }

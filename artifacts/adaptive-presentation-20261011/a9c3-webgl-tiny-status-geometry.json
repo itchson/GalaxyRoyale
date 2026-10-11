@@ -1,0 +1,162 @@
+{
+  "body": "pixel-ready narrow-ui short-ui",
+  "nodes": {
+    "flight-settings": {
+      "client": 42,
+      "display": "block",
+      "h": 44,
+      "opacity": "0",
+      "scroll": 42,
+      "scrollTop": 0,
+      "text": "",
+      "w": 44,
+      "x": 264,
+      "y": 12
+    },
+    "flight-status": {
+      "client": 49,
+      "display": "block",
+      "h": 49,
+      "opacity": "1",
+      "scroll": 492,
+      "scrollTop": 0,
+      "text": "Haven Scout\n\nLV 2 / XP 51 / NEXT 60\n\nHULL 100 / 100\n\nSHIELD 0 / 0\n\nSPEED 0 / 103 U/S\n\nACCEL 267 U/S2\n\nPRIMARY 12.0 DMG / 5.0/S\n\nHULL REPAIR 0.0/S AFTER 5S NO HIT\n\nSHIELD REGEN 0.0/S AFTER 4S NO HIT\n\nOFFENSE / EMPTY\n\nDEFENSE / EMPTY\n\nPASSIVE / EMPTY\n\nCARGO 0 / 16 / AT RISK\n\nT1 0 / T2 0 / T3 0 / T4 0 / T5 0\n\nBANKED / T1 1 / T2 0 / T3 0 / T4 0 / T5 0\n\nPOINTS / OFF 5 / DEF 4 / PASS 6\n\nHOME BANKS CARGO / DEATH, RESTART, TITLE OR RELOAD LOSES CARGO",
+      "w": 286,
+      "x": 17,
+      "y": 114
+    },
+    "flight-status-strip": {
+      "client": 0,
+      "display": "block",
+      "h": 0,
+      "opacity": "0",
+      "scroll": 0,
+      "scrollTop": 0,
+      "text": "",
+      "w": 0,
+      "x": 0,
+      "y": 0
+    },
+    "map-button": {
+      "client": 42,
+      "display": "block",
+      "h": 44,
+      "opacity": "0",
+      "scroll": 42,
+      "scrollTop": 0,
+      "text": "",
+      "w": 44,
+      "x": 216,
+      "y": 12
+    },
+    "menu-close": {
+      "client": 42,
+      "display": "block",
+      "h": 44,
+      "opacity": "1",
+      "scroll": 42,
+      "scrollTop": 0,
+      "text": "X",
+      "w": 44,
+      "x": 259,
+      "y": 17
+    },
+    "pause-button": {
+      "client": 42,
+      "display": "block",
+      "h": 44,
+      "opacity": "0",
+      "scroll": 42,
+      "scrollTop": 0,
+      "text": "",
+      "w": 44,
+      "x": 168,
+      "y": 12
+    },
+    "pause-content": {
+      "client": 98,
+      "display": "flex",
+      "h": 98,
+      "opacity": "1",
+      "scroll": 98,
+      "scrollTop": 0,
+      "text": "GO\nRST\nSET\nTITLE\nHaven Scout\n\nLV 2 / XP 51 / NEXT 60\n\nHULL 100 / 100\n\nSHIELD 0 / 0\n\nSPEED 0 / 103 U/S\n\nACCEL 267 U/S2\n\nPRIMARY 12.0 DMG / 5.0/S\n\nHULL REPAIR 0.0/S AFTER 5S NO HIT\n\nSHIELD REGEN 0.0/S AFTER 4S NO HIT\n\nOFFENSE / EMPTY\n\nDEFENSE / EMPTY\n\nPASSIVE / EMPTY\n\nCARGO 0 / 16 / AT RISK\n\nT1 0 / T2 0 / T3 0 / T4 0 / T5 0\n\nBANKED / T1 1 / T2 0 / T3 0 / T4 0 / T5 0\n\nPOINTS / OFF 5 / DEF 4 / PASS 6\n\nHOME BANKS CARGO / DEATH, RESTART, TITLE OR RELOAD LOSES CARGO",
+      "w": 286,
+      "x": 17,
+      "y": 65
+    },
+    "pause-settings": {
+      "client": 42,
+      "display": "flex",
+      "h": 44,
+      "opacity": "1",
+      "scroll": 42,
+      "scrollTop": 0,
+      "text": "SET",
+      "w": 68.5,
+      "x": 162,
+      "y": 65
+    },
+    "restart-flight": {
+      "client": 42,
+      "display": "flex",
+      "h": 44,
+      "opacity": "1",
+      "scroll": 42,
+      "scrollTop": 0,
+      "text": "RST",
+      "w": 68.5,
+      "x": 89.5,
+      "y": 65
+    },
+    "resume": {
+      "client": 42,
+      "display": "flex",
+      "h": 44,
+      "opacity": "1",
+      "scroll": 42,
+      "scrollTop": 0,
+      "text": "GO",
+      "w": 68.5,
+      "x": 17,
+      "y": 65
+    },
+    "return-title": {
+      "client": 42,
+      "display": "flex",
+      "h": 44,
+      "opacity": "1",
+      "scroll": 42,
+      "scrollTop": 0,
+      "text": "TITLE",
+      "w": 68.5,
+      "x": 234.5,
+      "y": 65
+    },
+    "save-indicator": {
+      "client": 42,
+      "display": "block",
+      "h": 44,
+      "opacity": "0",
+      "scroll": 42,
+      "scrollTop": 0,
+      "text": "",
+      "w": 44,
+      "x": 119,
+      "y": 12
+    },
+    "save-status": {
+      "client": 0,
+      "display": "block",
+      "h": 0,
+      "opacity": "1",
+      "scroll": 0,
+      "scrollTop": 0,
+      "text": "Saved on this device.",
+      "w": 0,
+      "x": 0,
+      "y": 0
+    }
+  },
+  "uiScale": "1"
+}

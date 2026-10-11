@@ -1,0 +1,125 @@
+{
+  "kind": "production authored adaptive-audio source freeze; native/recorded-API evidence only",
+  "created_utc": "2026-10-11T01:29:55.201232+00:00",
+  "owned_sources": [
+    {
+      "path": "apps/game/src/audio.ts",
+      "bytes": 28517,
+      "sha256": "6e06ef04f40367ab8519adfd445258b0c284d6b1c7ac3d955ea212962c629f64"
+    },
+    {
+      "path": "apps/game/src/audio-state.ts",
+      "bytes": 8962,
+      "sha256": "6c8a836a6d61efb1c1e290378022974bca546586721031d500ff01553c0a2578"
+    },
+    {
+      "path": "scripts/test/audio.test.mjs",
+      "bytes": 23657,
+      "sha256": "9b8d8c767a8e7d53fb7900b864fd9b3733a86bad99d2762733a4fd7f1fea031e"
+    },
+    {
+      "path": "scripts/test/audio-state.test.mjs",
+      "bytes": 4220,
+      "sha256": "c9719e6c1bac8893b6b562aa3a8e6812f64ccdd540a207814813f593c07eaaae"
+    },
+    {
+      "path": "crates/game_core/src/audio_runtime.rs",
+      "bytes": 19202,
+      "sha256": "f8cc4ecc9546e876a6fe9192e48e0f5e63146c6693f5c8c2e26a137033682da6"
+    },
+    {
+      "path": "crates/game_core/src/lib.rs",
+      "bytes": 185612,
+      "sha256": "ece2ffcd97a0a96b4e52915e796008c14d0c532db5b2b9f5256ee381793d7d03"
+    },
+    {
+      "path": "crates/game_core/src/campaign_runtime.rs",
+      "bytes": 48526,
+      "sha256": "0013cce5510c474ac0625b9ffdf2d9957816b9dd45c0a660716768248186f285"
+    }
+  ],
+  "read_inputs": [
+    {
+      "path": "package.json",
+      "bytes": 1024,
+      "sha256": "048d1c56e2cc6ce5beb44975893b87d38376892778dde34be7aea83710301b1b"
+    },
+    {
+      "path": "tsconfig.json",
+      "bytes": 291,
+      "sha256": "c0de18e3ddab8718ca79686d1d204a4b6e0daecb3e28cadab874abc678f768db"
+    },
+    {
+      "path": "Cargo.toml",
+      "bytes": 447,
+      "sha256": "50b077a3fd8e0c8a42456948d6232ae86b2a1bbaa63652ee04da7848c776a3e3"
+    },
+    {
+      "path": "Cargo.lock",
+      "bytes": 27791,
+      "sha256": "df228d9f83ef57321dcb768b79d948e9aa24456c0952e971fc8d6fcd7e806bdd"
+    },
+    {
+      "path": "crates/game_core/Cargo.toml",
+      "bytes": 285,
+      "sha256": "8997ce52e4c8a2384b2bfe5ef8d7778b6be42df8e1157b6c17300f931af16350"
+    },
+    {
+      "path": "crates/game_core/src/campaign.rs",
+      "bytes": 16385,
+      "sha256": "55769110e0dcbe0e962b784183348ccf83aed81d2c8a140b14b2a95a042f097c"
+    },
+    {
+      "path": "crates/game_core/src/regions.rs",
+      "bytes": 30796,
+      "sha256": "a3dfd7561af5f03fd970de93c8caaed6e3ef51ee959394f28fb03643fa71aa01"
+    },
+    {
+      "path": "crates/game_core/src/bosses.rs",
+      "bytes": 47224,
+      "sha256": "69194ae242129ccecef69ff3661369a784b12bd7fbcf60b64eda15b4642a4408"
+    },
+    {
+      "path": "crates/game_core/src/ship_progression.rs",
+      "bytes": 21296,
+      "sha256": "82479d93af143c013ca3ba3989dd5b166a4c7dcaca9b2863d7d5b2148411a213"
+    },
+    {
+      "path": "crates/game_core/src/radiation_enemies.rs",
+      "bytes": 11034,
+      "sha256": "3ba40361fe25d37049a1d30029c218f7b7e3de5307ac631ef36fcbe5bfaf10c2"
+    },
+    {
+      "path": "crates/game_core/src/biome_enemies.rs",
+      "bytes": 34491,
+      "sha256": "43b3736cb8da31872a62ac90f0f2b54e78f54ca7ee2f07ef622a45a7241e5cc8"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "core-tests.log",
+      "bytes": 22997,
+      "sha256": "240191019e52ffecd8784dc228b4d37bd4031356814210e5dd51e73b9a43cba4"
+    },
+    {
+      "path": "core-clippy.log",
+      "bytes": 170,
+      "sha256": "15f22a97c7097de8ea52b5dc0fa1bbb85bfb715f1d865d0d82ca810febcc2627"
+    },
+    {
+      "path": "core-wasm-clippy.log",
+      "bytes": 271,
+      "sha256": "d26c81ae0f2834642077b3b5de407ba74e054d4dfe6f3d2c906f64e2747d9f59"
+    },
+    {
+      "path": "audio-tests.log",
+      "bytes": 2632,
+      "sha256": "0655f9722dcfdafca98ae60df48c634109e4b3696ca64c44cb646988fad85911"
+    },
+    {
+      "path": "typecheck.log",
+      "bytes": 53,
+      "sha256": "62889ae4bbb11608ccc3b65b9cf21a576201f0c2d04ab434284f985ec03fb581"
+    }
+  ]
+}

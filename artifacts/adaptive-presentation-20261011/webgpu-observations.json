@@ -1,0 +1,476 @@
+[
+  {
+    "label": "Actual combat after marked QA scene",
+    "report": {
+      "backend": "webgpu",
+      "scenario": "combat",
+      "time": 68.9669189453125,
+      "paused": false,
+      "position": [
+        1405.4732666015625,
+        328.2544250488281
+      ],
+      "durationSeconds": 7.450199999999997,
+      "samples": 1789,
+      "quads": 17402,
+      "quadsRange": [
+        9326,
+        17402
+      ],
+      "entities": 111,
+      "particles": 28,
+      "audio": {
+        "context": "running",
+        "enabled": true,
+        "disposed": false,
+        "deathTail": false,
+        "area": "reach",
+        "biome": 4,
+        "champion": null,
+        "hostiles": 13,
+        "boss": false,
+        "combat": 0.7799999807063649,
+        "targetCombat": 0.7800000309944153,
+        "lowHull": 0.9958682460277214,
+        "hull": 0.009999999776482582,
+        "engine": 0.08919780884021003,
+        "throttle": 0,
+        "speed": 0.7749590873718262,
+        "engines": 2,
+        "voices": {
+          "music": 3,
+          "sfx": 2,
+          "continuous": 2
+        },
+        "scheduledThemes": [
+          4
+        ],
+        "themes": [
+          {
+            "index": 4,
+            "name": "Radial / Isotope drift",
+            "weight": 0.9951165569355545
+          }
+        ]
+      },
+      "frameMs": {
+        "p50": 4.19999999999709,
+        "p95": 4.30000000000291,
+        "p99": 4.30000000000291
+      },
+      "simulationMs": {
+        "p50": 0,
+        "p95": 0.4000000059604645
+      },
+      "renderMs": {
+        "p50": 0.4000000059604645,
+        "p95": 0.6000000238418579
+      },
+      "viewport": [
+        1280,
+        720
+      ],
+      "memory": {
+        "usedJSHeapSize": 18442300,
+        "totalJSHeapSize": 38983604,
+        "jsHeapSizeLimit": 4395630592
+      }
+    }
+  },
+  {
+    "label": "Actual champion0 simulation from marked console fixture",
+    "report": {
+      "backend": "webgpu",
+      "scenario": "champion-0",
+      "time": 73.88463592529297,
+      "paused": false,
+      "position": [
+        -1488.254150390625,
+        -2302.224853515625
+      ],
+      "durationSeconds": 4.5251000000000055,
+      "samples": 1086,
+      "quads": 8490,
+      "quadsRange": [
+        7624,
+        8575
+      ],
+      "entities": 61,
+      "particles": 8,
+      "audio": {
+        "context": "running",
+        "enabled": true,
+        "disposed": false,
+        "deathTail": false,
+        "area": "arena",
+        "biome": 5,
+        "champion": 0,
+        "hostiles": 1,
+        "boss": false,
+        "combat": 0.5549759055348945,
+        "targetCombat": 0.5550000071525574,
+        "lowHull": 0,
+        "hull": 0.7524999976158142,
+        "engine": 0,
+        "throttle": 0,
+        "speed": 0,
+        "engines": 2,
+        "voices": {
+          "music": 7,
+          "sfx": 0,
+          "continuous": 0
+        },
+        "scheduledThemes": [
+          4,
+          6
+        ],
+        "themes": [
+          {
+            "index": 6,
+            "name": "Lyra Voss / Needle dance",
+            "weight": 0.9603859501150233
+          },
+          {
+            "index": 4,
+            "name": "Radial / Isotope drift",
+            "weight": 0.03265982408647932
+          }
+        ]
+      },
+      "frameMs": {
+        "p50": 4.19999999999709,
+        "p95": 4.30000000000291,
+        "p99": 4.30000000000291
+      },
+      "simulationMs": {
+        "p50": 0,
+        "p95": 0.30000001192092896
+      },
+      "renderMs": {
+        "p50": 0.30000001192092896,
+        "p95": 0.5999999940395355
+      },
+      "viewport": [
+        1280,
+        720
+      ],
+      "memory": {
+        "usedJSHeapSize": 14580891,
+        "totalJSHeapSize": 39246347,
+        "jsHeapSizeLimit": 4395630592
+      }
+    }
+  },
+  {
+    "label": "Actual WebGPU LoseGPU recovery and Haven state",
+    "report": {
+      "backend": "webgpu",
+      "scenario": "dock",
+      "time": 85.4204330444336,
+      "paused": false,
+      "position": [
+        0,
+        0
+      ],
+      "durationSeconds": 6.166800000000003,
+      "samples": 1470,
+      "quads": 5140,
+      "quadsRange": [
+        4209,
+        5450
+      ],
+      "entities": 57,
+      "particles": 0,
+      "audio": {
+        "context": "running",
+        "enabled": true,
+        "disposed": false,
+        "deathTail": false,
+        "area": "haven",
+        "biome": 0,
+        "champion": null,
+        "hostiles": 0,
+        "boss": false,
+        "combat": 0,
+        "targetCombat": 0,
+        "lowHull": 0,
+        "hull": 1,
+        "engine": 0,
+        "throttle": 0,
+        "speed": 0,
+        "engines": 2,
+        "voices": {
+          "music": 2,
+          "sfx": 0,
+          "continuous": 0
+        },
+        "scheduledThemes": [
+          0
+        ],
+        "themes": [
+          {
+            "index": 0,
+            "name": "Haven / Return lights",
+            "weight": 0.9872720164969303
+          }
+        ]
+      },
+      "frameMs": {
+        "p50": 4.19999999999709,
+        "p95": 4.30000000000291,
+        "p99": 4.30000000000291
+      },
+      "simulationMs": {
+        "p50": 0,
+        "p95": 0.30000001192092896
+      },
+      "renderMs": {
+        "p50": 0.30000001192092896,
+        "p95": 0.5
+      },
+      "viewport": [
+        1280,
+        720
+      ],
+      "memory": {
+        "usedJSHeapSize": 18843571,
+        "totalJSHeapSize": 40033003,
+        "jsHeapSizeLimit": 4395630592
+      }
+    }
+  },
+  {
+    "label": "Actual released desktop destination and motion audio",
+    "report": {
+      "backend": "webgpu",
+      "scenario": "warp",
+      "time": 33.46632766723633,
+      "paused": false,
+      "position": [
+        29526.7109375,
+        11408.1806640625
+      ],
+      "durationSeconds": 40.642399999999995,
+      "samples": 3600,
+      "quads": 3951,
+      "quadsRange": [
+        3950,
+        6861
+      ],
+      "entities": 28,
+      "particles": 0,
+      "audio": {
+        "context": "running",
+        "enabled": true,
+        "disposed": false,
+        "deathTail": false,
+        "area": "reach",
+        "biome": 5,
+        "champion": null,
+        "hostiles": 0,
+        "boss": false,
+        "combat": 0,
+        "targetCombat": 0,
+        "lowHull": 0,
+        "hull": 0.9200000166893005,
+        "engine": 2.7932807707717956e-14,
+        "throttle": 0,
+        "speed": 0,
+        "engines": 2,
+        "voices": {
+          "music": 1,
+          "sfx": 0,
+          "continuous": 0
+        },
+        "scheduledThemes": [
+          5
+        ],
+        "themes": [
+          {
+            "index": 5,
+            "name": "Cryo / Distant ice",
+            "weight": 0.9999999999492835
+          }
+        ]
+      },
+      "frameMs": {
+        "p50": 4.19999999999709,
+        "p95": 4.299999999999272,
+        "p99": 4.30000000000291
+      },
+      "simulationMs": {
+        "p50": 0,
+        "p95": 0.19999998807907104
+      },
+      "renderMs": {
+        "p50": 0.30000001192092896,
+        "p95": 0.5
+      },
+      "viewport": [
+        1280,
+        720
+      ],
+      "memory": {
+        "usedJSHeapSize": 21721713,
+        "totalJSHeapSize": 52877825,
+        "jsHeapSizeLimit": 4395630592
+      }
+    }
+  },
+  {
+    "label": "Actual desktop course after visible left click",
+    "report": {
+      "backend": "webgpu",
+      "scenario": "warp",
+      "time": 53.5993537902832,
+      "paused": false,
+      "position": [
+        29750.36328125,
+        11482.78125
+      ],
+      "durationSeconds": 60.7803,
+      "samples": 3600,
+      "quads": 6344,
+      "quadsRange": [
+        3949,
+        6861
+      ],
+      "entities": 37,
+      "particles": 0,
+      "audio": {
+        "context": "running",
+        "enabled": true,
+        "disposed": false,
+        "deathTail": false,
+        "area": "reach",
+        "biome": 5,
+        "champion": null,
+        "hostiles": 0,
+        "boss": false,
+        "combat": 0,
+        "targetCombat": 0,
+        "lowHull": 0,
+        "hull": 0.9200000166893005,
+        "engine": 5.139539595402066e-10,
+        "throttle": 0,
+        "speed": 0,
+        "engines": 2,
+        "voices": {
+          "music": 2,
+          "sfx": 0,
+          "continuous": 0
+        },
+        "scheduledThemes": [
+          5
+        ],
+        "themes": [
+          {
+            "index": 5,
+            "name": "Cryo / Distant ice",
+            "weight": 0.9999999999999928
+          }
+        ]
+      },
+      "frameMs": {
+        "p50": 4.19999999999709,
+        "p95": 4.299999999995634,
+        "p99": 4.30000000000291
+      },
+      "simulationMs": {
+        "p50": 0,
+        "p95": 0.19999998807907104
+      },
+      "renderMs": {
+        "p50": 0.30000001192092896,
+        "p95": 0.5
+      },
+      "viewport": [
+        1280,
+        720
+      ],
+      "memory": {
+        "usedJSHeapSize": 23575885,
+        "totalJSHeapSize": 53139969,
+        "jsHeapSizeLimit": 4395630592
+      }
+    }
+  },
+  {
+    "label": "Clean Haven view after explicit QA warp",
+    "report": {
+      "backend": "webgpu",
+      "scenario": "warp",
+      "time": 62.59921646118164,
+      "paused": false,
+      "position": [
+        0,
+        0
+      ],
+      "durationSeconds": 70.0097,
+      "samples": 3600,
+      "quads": 5135,
+      "quadsRange": [
+        3949,
+        6861
+      ],
+      "entities": 57,
+      "particles": 0,
+      "audio": {
+        "context": "running",
+        "enabled": true,
+        "disposed": false,
+        "deathTail": false,
+        "area": "haven",
+        "biome": 0,
+        "champion": null,
+        "hostiles": 0,
+        "boss": false,
+        "combat": 0,
+        "targetCombat": 0,
+        "lowHull": 0,
+        "hull": 1,
+        "engine": 0,
+        "throttle": 0,
+        "speed": 0,
+        "engines": 2,
+        "voices": {
+          "music": 2,
+          "sfx": 0,
+          "continuous": 0
+        },
+        "scheduledThemes": [
+          0
+        ],
+        "themes": [
+          {
+            "index": 0,
+            "name": "Haven / Return lights",
+            "weight": 0.9977889454698301
+          }
+        ]
+      },
+      "frameMs": {
+        "p50": 4.19999999999709,
+        "p95": 4.299999999995634,
+        "p99": 4.30000000000291
+      },
+      "simulationMs": {
+        "p50": 0,
+        "p95": 0.29999998211860657
+      },
+      "renderMs": {
+        "p50": 0.30000001192092896,
+        "p95": 0.5
+      },
+      "viewport": [
+        1280,
+        720
+      ],
+      "memory": {
+        "usedJSHeapSize": 24945775,
+        "totalJSHeapSize": 66771711,
+        "jsHeapSizeLimit": 4395630592
+      }
+    }
+  }
+]

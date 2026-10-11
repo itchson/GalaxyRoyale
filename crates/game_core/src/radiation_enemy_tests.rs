@@ -771,7 +771,10 @@ fn actual_emitted_sweep_hurts_hull_and_erases_ship_cells_through_shared_collisio
 
 #[test]
 fn actual_mote_sweep_triggers_owned_nova_and_reflects_other_real_pulse_projectiles() {
-    let mut profile = Profile::default();
+    let mut profile = Profile {
+        schema_version: 3,
+        ..Profile::default()
+    }; // legacy installed shield/Nova migration fixture
     profile.ranks[3] = 5;
     profile.ranks[4] = 5;
     profile.ranks[7] = 5;

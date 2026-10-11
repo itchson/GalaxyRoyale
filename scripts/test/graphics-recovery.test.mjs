@@ -13,10 +13,13 @@ const source = ts.createSourceFile(
   true,
 );
 const names = [
+  "toast",
   "recover",
   "resize",
   "resizeGraphics",
   "resume",
+  "canSimulateFlight",
+  "syncFlightState",
   "frame",
   "restoreUi",
   "onWebglLost",
@@ -45,13 +48,45 @@ function harness() {
   const gate = deferred(),
     calls = [],
     notices = [],
-    nodes = new Map();
+    nodes = new Map(),
+    timers = new Map();
+  let timerId = 0;
   const element = (id) => {
-    if (!nodes.has(id)) nodes.set(id, { hidden: true, textContent: "" });
+    if (!nodes.has(id)) {
+      const classes = new Set();
+      let value = "";
+      nodes.set(id, {
+        hidden: id !== "toast",
+        get textContent() {
+          return value;
+        },
+        set textContent(next) {
+          value = next;
+          if (id === "toast") notices.push(next);
+        },
+        classList: {
+          add: (v) => classes.add(v),
+          remove: (v) => classes.delete(v),
+          contains: (v) => classes.has(v),
+        },
+      });
+    }
     return nodes.get(id);
   };
   const classes = new Set(["pixel-ready"]);
   const profile = { revision: 1, currency: [2, 3, 4] };
+  const audioState = {
+    area: "haven",
+    biome: 0,
+    combat: 0,
+    hostiles: 0,
+    champion: null,
+    boss: false,
+    hull: 1,
+    speed: 0,
+    throttle: 0,
+    engines: 2,
+  };
   const context = {
     canvas: {},
     recovering: false,
@@ -71,6 +106,22 @@ function harness() {
     debugConsole: { opened: false },
     dialoguePanel: { opened: false },
     portrait: false,
+    graphicsNotice: null,
+    toastTimeout: undefined,
+    window: {
+      setTimeout(fn) {
+        const id = ++timerId;
+        timers.set(id, fn);
+        return id;
+      },
+    },
+    clearTimeout(id) {
+      timers.delete(id);
+    },
+    flightSafeInsets: [0, 0],
+    syncFlightStatusLayout() {
+      calls.push("flight-layout");
+    },
     input: {
       enabled: true,
       reset() {
@@ -78,6 +129,9 @@ function harness() {
       },
     },
     audio: {
+      update(state) {
+        calls.push(["audio-update", state]);
+      },
       suspend() {
         calls.push("audio-suspend");
       },
@@ -86,6 +140,9 @@ function harness() {
       },
     },
     galaxy: {
+      hud() {
+        return { audio: audioState };
+      },
       set_paused(value) {
         calls.push(["paused", value]);
       },
@@ -158,17 +215,57 @@ function harness() {
       context.menu.hidden = false;
       calls.push("pause-menu");
     },
-    toast(value) {
-      notices.push(value);
-    },
     requestAnimationFrame() {
       calls.push("raf");
     },
     element,
   };
   vm.runInNewContext(compiled, context);
-  return { context, gate, calls, notices, classes, profile };
+  return { context, gate, calls, notices, classes, profile, timers };
 }
+
+test("real loss notice outlives transient toasts and clears only after restoration", async () => {
+  const h = harness(),
+    c = h.context;
+  c.toast("Collected material");
+  assert.equal(h.timers.size, 1);
+  c.webglLifecycle = { lost: true };
+  c.onWebglLost();
+  const target = c.element("toast");
+  const reason = target.textContent;
+  assert.ok(reason.includes("Waiting for browser restoration"));
+  assert.equal(h.timers.size, 0);
+  c.toast("Settings changed");
+  assert.equal(target.textContent, reason);
+  assert.equal(target.classList.contains("visible"), true);
+  assert.equal(h.timers.size, 0);
+  c.webglLifecycle.lost = false;
+  c.onWebglRestored();
+  assert.equal(c.graphicsNotice, "Reconnecting the graphics engine…");
+  assert.equal(h.timers.size, 0);
+  h.gate.resolve({});
+  await new Promise((resolve) => setImmediate(resolve));
+  assert.equal(c.graphicsNotice, null);
+  assert.ok(target.textContent.includes("Graphics restored"));
+  assert.equal(h.timers.size, 1);
+  for (const expire of h.timers.values()) expire();
+  assert.equal(target.classList.contains("visible"), false);
+});
+
+test("failed reconstruction retains its actual reason across other notifications", async () => {
+  const h = harness(),
+    c = h.context;
+  const pending = c.recover("loss");
+  assert.equal(h.timers.size, 0);
+  h.gate.reject(new Error("replacement adapter unavailable"));
+  assert.equal(await pending, false);
+  c.toast("Opened settings");
+  assert.ok(
+    c.element("toast").textContent.includes("replacement adapter unavailable"),
+  );
+  assert.equal(c.element("toast").classList.contains("visible"), true);
+  assert.equal(h.timers.size, 0);
+});
 
 test("pending preparation leaves Game readable and defers GPU resize to latest dimensions", async () => {
   const h = harness(),
@@ -210,6 +307,33 @@ test("pending preparation leaves Game readable and defers GPU resize to latest d
   assert.equal(c.paused, false);
   assert.equal(c.input.enabled, true);
   assert.equal(c.lastTime, 0);
+  assert.ok(h.calls.indexOf("flight-layout") > resize);
+  const update = h.calls.findIndex(
+    (v) => Array.isArray(v) && v[0] === "audio-update",
+  );
+  assert.ok(update > resize && update < h.calls.indexOf("audio-resume"));
+  assert.equal(h.calls[update][1], c.galaxy.hud().audio);
+});
+
+test("resuming flight uses the latest authoritative audio state before scheduling", () => {
+  const h = harness(),
+    c = h.context;
+  const fresh = { ...c.galaxy.hud().audio, area: "arena", champion: 5 };
+  c.galaxy.hud = () => ({ audio: fresh });
+  c.syncFlightState();
+  assert.deepEqual(h.calls.slice(-2), [
+    ["audio-update", fresh],
+    "audio-resume",
+  ]);
+  h.calls.length = 0;
+  c.document.hidden = true;
+  c.syncFlightState();
+  assert.equal(h.calls.includes("audio-resume"), false);
+  assert.equal(
+    h.calls.some((v) => Array.isArray(v) && v[0] === "audio-update"),
+    false,
+  );
+  assert.ok(h.calls.includes("audio-suspend"));
 });
 
 test("overlapping recovery requests prepare and install exactly once", async () => {
@@ -229,14 +353,8 @@ test("overlapping recovery requests prepare and install exactly once", async () 
   );
 });
 
-test("settlement honors latest menu, death, title, encounter, console, visibility and orientation intent", async () => {
+test("settlement honors death, title, encounter, console, visibility and orientation interruptions", async () => {
   const mutations = [
-    (c) => {
-      c.paused = true;
-    },
-    (c) => {
-      c.menu.hidden = false;
-    },
     (c) => {
       c.deathScreen.hidden = false;
     },
@@ -275,7 +393,20 @@ test("settlement honors latest menu, death, title, encounter, console, visibilit
   const pending = h.context.recover("paused loss");
   h.gate.resolve({});
   assert.equal(await pending, true);
-  assert.equal(h.context.paused, true);
+  assert.equal(h.context.paused, false);
+});
+
+test("graphics recovery restores a live menu without restoring flight controls", async () => {
+  const h = harness(),
+    c = h.context;
+  c.menu.hidden = false;
+  const pending = c.recover("live menu loss");
+  h.gate.resolve({});
+  assert.equal(await pending, true);
+  assert.equal(c.paused, false);
+  assert.equal(c.input.enabled, false);
+  assert.equal(c.menu.hidden, false);
+  assert.ok(h.calls.includes("audio-resume"));
 });
 
 test("reconstruction rejection reports its cause, preserves Game and stops the RAF retry loop", async () => {
@@ -303,7 +434,7 @@ test("reconstruction rejection reports its cause, preserves Game and stops the R
   );
 });
 
-test("a modal closed while preparation is pending settles to a visible pause menu", async () => {
+test("a modal closed while preparation is pending restores the previously live world", async () => {
   const h = harness(),
     c = h.context;
   const pending = c.recover("loss");
@@ -312,9 +443,9 @@ test("a modal closed while preparation is pending settles to a visible pause men
   c.debugConsole.opened = false;
   h.gate.resolve({});
   assert.equal(await pending, true);
-  assert.equal(c.menu.hidden, false);
-  assert.equal(c.input.enabled, false);
-  assert.ok(h.calls.includes("pause-menu"));
+  assert.equal(c.menu.hidden, true);
+  assert.equal(c.input.enabled, true);
+  assert.equal(c.paused, false);
 });
 
 test("failed reconstruction preserves an existing death report, title or other modal", async () => {
@@ -386,8 +517,8 @@ test("Resume's awaited audio cannot re-enable input when recovery starts meanwhi
   assert.equal(c.input.enabled, false);
   h.gate.resolve({});
   assert.equal(await recovery, true);
-  assert.equal(c.paused, true);
-  assert.equal(c.input.enabled, false);
+  assert.equal(c.paused, false);
+  assert.equal(c.input.enabled, true);
 });
 
 test("a real context loss gates drawing, resize and preparation until restored", async () => {

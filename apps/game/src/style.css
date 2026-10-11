@@ -96,6 +96,10 @@ h2 {
   image-rendering: pixelated;
   touch-action: none;
 }
+/* A lost context may clear its surface to white. Keep the quiet fallback visible. */
+body:not(.pixel-ready) #universe {
+  visibility: hidden;
+}
 .screen-overlay {
   position: fixed;
   inset: 0;
@@ -212,6 +216,11 @@ h2 {
 .launch-card button {
   width: 100%;
 }
+.title-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: calc(5px * var(--ui-scale, 1));
+}
 .control-guide,
 .build-line {
   display: flex;
@@ -320,26 +329,29 @@ h2 {
 #save-status {
   display: block;
   color: #8296b8;
-  font-size: max(12px, calc(8px * var(--ui-scale, 1)));
-  line-height: 1.25;
-  overflow-wrap: anywhere;
+  font-size: calc(8px * var(--ui-scale, 1));
+  min-height: calc(8px * var(--ui-scale, 1));
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .menu-actions #apply-update {
   flex: 0 1 auto;
 }
 .pause-page {
-  flex-basis: auto;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  align-content: start;
-  gap: calc(6px * var(--ui-scale, 1));
-}
-.pause-page button {
-  min-height: var(--ui-hit);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding-right: 0;
+  gap: calc(5px * var(--ui-scale, 1));
 }
 .menu-card:has(.pause-page:not([hidden])) {
-  width: min(calc(360px * var(--ui-scale, 1)), 100%);
-  height: auto;
+  width: min(calc(430px * var(--ui-scale, 1)), 100%);
+  height: min(calc(310px * var(--ui-scale, 1)), 100%);
+}
+.menu-card:has(.pause-page:not([hidden])) > .menu-actions {
+  display: none;
 }
 .restart-button {
   color: #ffe0a0;
@@ -526,38 +538,25 @@ h2 {
 }
 .flight-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: calc(8px * var(--ui-scale, 1));
   align-items: flex-start;
-}
-.sector {
-  display: flex;
-  gap: calc(6px * var(--ui-scale, 1));
-  min-width: 0;
-}
-.sector b {
-  font-weight: normal;
-  color: var(--cyan);
-}
-.sector small {
-  display: block;
-  color: var(--muted);
-  font-size: inherit;
-}
-.brand-icon {
-  color: var(--cyan);
 }
 .header-right {
   display: flex;
   gap: calc(5px * var(--ui-scale, 1));
   align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  max-width: 100%;
 }
-.cargo {
+.flight-toolbar {
   display: flex;
-  gap: calc(8px * var(--ui-scale, 1));
+  gap: calc(4px * var(--ui-scale, 1));
+  flex: 0 0 auto;
 }
-.cargo span {
-  white-space: nowrap;
+.settings-title {
+  margin-top: calc(5px * var(--ui-scale, 1));
 }
 .icon-button {
   width: var(--ui-hit);
@@ -573,76 +572,126 @@ h2 {
 #fullscreen {
   display: none;
 }
-.ship-module {
-  position: absolute;
-  bottom: max(calc(8px * var(--ui-scale, 1)), env(safe-area-inset-bottom));
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(calc(176px * var(--ui-scale, 1)), 50%);
-}
-.hull-label {
-  display: flex;
-  justify-content: space-between;
-  gap: calc(4px * var(--ui-scale, 1));
-  font-size: inherit;
-}
-.hull-track,
-.shield-track,
 .boss-track {
   height: calc(3px * var(--ui-scale, 1));
   background: #274458;
 }
-.hull-track i,
-.shield-track i,
 .boss-track i {
   display: block;
   height: 100%;
   background: var(--cyan);
 }
-.shield-track {
-  margin-top: calc(2px * var(--ui-scale, 1));
-  height: calc(2px * var(--ui-scale, 1));
-}
-.shield-track i {
-  background: #a895ff;
-}
-.nav-module {
+.flight-telemetry {
+  /* Live fields remain available to assistive technology without floating panels. */
   position: absolute;
-  bottom: calc(8px * var(--ui-scale, 1));
-  left: calc(12px * var(--ui-scale, 1));
-  display: flex;
-  gap: calc(4px * var(--ui-scale, 1));
-  align-items: center;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  border: 0;
+  pointer-events: none;
 }
-.nav-module small,
-.nav-module b {
-  display: block;
-  font-size: inherit;
-}
-.nav-module canvas {
-  width: calc(40px * var(--ui-scale, 1));
-  height: calc(40px * var(--ui-scale, 1));
+#flight-status-strip {
+  /* Rust exports these physical bounds through the shell after layout/resize. */
+  position: fixed;
+  left: var(
+    --flight-strip-x,
+    calc(env(safe-area-inset-left) + 6px * var(--ui-scale, 1))
+  );
+  top: var(
+    --flight-strip-y,
+    calc(100dvh - env(safe-area-inset-bottom) - 28px * var(--ui-scale, 1))
+  );
+  width: var(
+    --flight-strip-width,
+    calc(
+      100vw - env(safe-area-inset-left) - env(safe-area-inset-right) - 12px *
+        var(--ui-scale, 1)
+    )
+  );
+  height: var(--flight-strip-height, calc(22px * var(--ui-scale, 1)));
+  background: #071018;
+  border-top: 1px solid #233d49;
+  color: #d8f3ff;
+  pointer-events: none;
 }
 .dock-prompt {
-  position: absolute;
-  bottom: calc(62px * var(--ui-scale, 1) + env(safe-area-inset-bottom));
-  left: 50%;
-  transform: translateX(-50%);
-  max-width: calc(100% - 24px);
-  min-height: var(--ui-hit);
-  padding: calc(5px * var(--ui-scale, 1));
-  font-size: var(--ui-text);
-  background: #0c223d;
+  position: fixed;
+  left: var(
+    --flight-text-x,
+    calc(env(safe-area-inset-left) + 10px * var(--ui-scale, 1))
+  );
+  top: var(
+    --flight-hit-y,
+    clamp(
+      env(safe-area-inset-top),
+      calc(
+        var(
+            --flight-text-y,
+            calc(
+              100dvh - env(safe-area-inset-bottom) - 16px * var(--ui-scale, 1)
+            )
+          ) +
+          var(--flight-text-height, calc(7px * var(--ui-scale, 1))) / 2 -
+          var(--ui-hit) / 2
+      ),
+      calc(100dvh - env(safe-area-inset-bottom) - var(--ui-hit))
+    )
+  );
+  width: var(
+    --flight-text-width,
+    calc(
+      100vw - env(safe-area-inset-left) - env(safe-area-inset-right) - 20px *
+        var(--ui-scale, 1)
+    )
+  );
+  height: var(--ui-hit);
+  min-height: 44px;
+  padding: 0;
+  font-size: calc(8px * var(--ui-scale, 1));
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border: 0;
+  background: transparent;
   color: var(--cyan);
+  touch-action: manipulation;
 }
-.dock-prompt:active {
-  transform: translateX(-50%);
+.dock-prompt:hover:not(:disabled),
+.dock-prompt:active:not(:disabled) {
+  background: transparent;
+  color: #c4f7ff;
 }
-.dock-prompt span {
-  margin-right: calc(4px * var(--ui-scale, 1));
+#flight-status-strip:has(#toast.visible) .dock-prompt,
+.engine-flight
+  #flight-status-strip[data-context-available="false"]
+  .dock-prompt,
+.engine-flight
+  #flight-status-strip[data-context-interactive="false"]
+  .dock-prompt {
+  display: none;
 }
-.dock-prompt small {
-  margin-left: calc(5px * var(--ui-scale, 1));
+.touch-ui #flight-status-strip {
+  top: var(
+    --flight-strip-y,
+    calc(100dvh - env(safe-area-inset-bottom) - 118px * var(--ui-scale, 1))
+  );
+}
+.touch-ui .dock-prompt {
+  top: var(
+    --flight-hit-y,
+    max(
+      env(safe-area-inset-top),
+      calc(
+        100dvh - env(safe-area-inset-bottom) - 92px * var(--ui-scale, 1) -
+          var(--ui-hit)
+      )
+    )
+  );
 }
 .dock-facility {
   position: absolute;
@@ -666,13 +715,22 @@ h2 {
   top: calc(100% + 2px * var(--ui-scale, 1));
   left: 50%;
   transform: translateX(-50%);
-  width: max-content;
-  padding: calc(2px * var(--ui-scale, 1));
-  font-size: max(12px, calc(8px * var(--ui-scale, 1)));
+  width: calc(100px * var(--ui-scale, 1));
+  height: calc(10px * var(--ui-scale, 1));
+  padding: 0;
+  font-size: calc(8px * var(--ui-scale, 1));
   line-height: 1.25;
+  text-align: center;
   white-space: nowrap;
-  background: #091221f5;
+  background: transparent;
   pointer-events: none;
+}
+.dock-facility[data-label-position="above"] > span {
+  top: auto;
+  bottom: calc(100% + 2px * var(--ui-scale, 1));
+}
+.dock-facility[data-label-position="hidden"] > span {
+  display: none;
 }
 #boss-hud {
   position: absolute;
@@ -725,9 +783,6 @@ h2 {
   touch-action: none;
   opacity: 0;
 }
-.touch-ui .dock-prompt {
-  bottom: calc(100px * var(--ui-scale, 1) + env(safe-area-inset-bottom));
-}
 #destination-marker {
   position: absolute;
   width: calc(12px * var(--ui-scale, 1));
@@ -736,21 +791,35 @@ h2 {
   transform: translate(-50%, -50%);
 }
 #toast {
-  position: absolute;
+  position: fixed;
   z-index: 5;
-  top: calc(54px * var(--ui-scale, 1) + env(safe-area-inset-top));
-  left: 50%;
-  transform: translateX(-50%);
-  max-width: calc(100% - 24px);
-  padding: calc(5px * var(--ui-scale, 1));
-  font-size: var(--ui-text);
+  top: var(
+    --flight-text-y,
+    calc(100dvh - env(safe-area-inset-bottom) - 16px * var(--ui-scale, 1))
+  );
+  left: var(
+    --flight-text-x,
+    calc(env(safe-area-inset-left) + 10px * var(--ui-scale, 1))
+  );
+  width: var(
+    --flight-text-width,
+    calc(
+      100vw - env(safe-area-inset-left) - env(safe-area-inset-right) - 20px *
+        var(--ui-scale, 1)
+    )
+  );
+  height: var(--flight-text-height, calc(7px * var(--ui-scale, 1)));
+  padding: 0;
+  font-size: calc(8px * var(--ui-scale, 1));
   color: #d0faff;
-  background: #112440;
-  border: 1px solid #497790;
-  line-height: 1.35;
-  overflow-wrap: anywhere;
+  background: transparent;
+  border: 0;
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   opacity: 0;
-  transition: opacity 150ms;
+  pointer-events: none;
 }
 #toast.visible {
   opacity: 1;
@@ -763,18 +832,28 @@ h2 {
   font: 12px monospace;
   color: #97cbde;
 }
-.engine-flight .sector,
-.engine-flight .cargo,
-.engine-flight .ship-module,
-.engine-flight .nav-module {
-  opacity: 0;
-  pointer-events: none;
-}
 body:not(.engine-flight) #game-ui {
   visibility: hidden;
 }
-body:not(.engine-flight) #toast {
+body:not(.engine-flight) #toast,
+body:not(.pixel-ready) #toast {
   visibility: visible;
+  left: max(12px, env(safe-area-inset-left));
+  top: auto;
+  bottom: max(12px, env(safe-area-inset-bottom));
+  width: calc(
+    100vw - max(12px, env(safe-area-inset-left)) -
+      max(12px, env(safe-area-inset-right))
+  );
+  height: auto;
+  min-height: calc(8px * var(--ui-scale, 1));
+  white-space: normal;
+  overflow-wrap: anywhere;
+  background: #071018;
+}
+body:not(.engine-flight) #flight-status-strip {
+  background: transparent;
+  border: 0;
 }
 /* Semantic DOM supplies accessibility and exact hit regions; Rust paints its cells. */
 .pixel-ready .launch-card,
@@ -782,9 +861,12 @@ body:not(.engine-flight) #toast {
 .pixel-ready #dock-button,
 .pixel-ready #site-button,
 .pixel-ready #pause-button,
+.pixel-ready #map-button,
+.pixel-ready #flight-settings,
 .pixel-ready #save-indicator,
 .pixel-ready .dock-facility,
 .pixel-ready #fullscreen,
+.pixel-ready #flight-status-strip,
 .pixel-ready #toast,
 .pixel-ready #destination-marker,
 .pixel-ready #boss-hud {
@@ -872,16 +954,11 @@ body.reduced-motion *::after {
     padding: calc(8px * var(--ui-scale, 1));
   }
   .narrow-ui .settings,
-  .settings,
-  .pause-page {
+  .settings {
     grid-template-columns: minmax(0, 1fr);
   }
 }
 @media (max-height: 240px) {
-  .pause-page {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 4px;
-  }
   .menu-actions {
     gap: 4px;
     padding-top: 4px;

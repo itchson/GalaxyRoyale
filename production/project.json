@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 368,
+  "revision": 440,
   "name": "Galaxy Royale",
   "phase": "Foundation → playable vertical slice",
-  "updatedAt": "2026-10-10T23:26:32.725Z",
+  "updatedAt": "2026-10-11T02:02:49.904Z",
   "tasks": [
     {
       "id": "studio",
@@ -3463,13 +3463,13 @@
       "description": "Keep XP per ship, bank cargo only on physical home arrival, lose unbanked crafting materials on death/abandonment, preserve dock points/stash and migrate old saves without duplicate assets.",
       "department": "gameplay",
       "owner": "Gameplay / Producer",
-      "status": "active",
+      "status": "review",
       "priority": "high",
       "dependencies": [],
       "acceptanceCriteria": [
         {
           "text": "Authoritative gameplay and save migration proven without lost or duplicated assets",
-          "met": false
+          "met": true
         },
         {
           "text": "Actual crafting/equip/death/return flows verified in normal browsers",
@@ -3485,12 +3485,27 @@
           "label": "Actual new user request and team decisions",
           "kind": "note",
           "path": "work/record-dock-console-review.mjs"
+        },
+        {
+          "label": "Integrated native rules and source limitations",
+          "kind": "note",
+          "path": "artifacts/navigation-desktop-20261011/core-handoff.md"
+        },
+        {
+          "label": "387 integrated Rust tests",
+          "kind": "note",
+          "path": "work/navigation-release-native-tests.log"
+        },
+        {
+          "label": "201 shell checks, one unsupported file-symlink check skipped",
+          "kind": "note",
+          "path": "work/navigation-release-shell-tests.log"
         }
       ],
       "blocker": "",
-      "revision": 1,
+      "revision": 2,
       "createdAt": "2026-10-10T23:21:35.302Z",
-      "updatedAt": "2026-10-10T23:21:35.302Z"
+      "updatedAt": "2026-10-11T00:57:29.590Z"
     },
     {
       "id": "task-2138420d",
@@ -3498,13 +3513,13 @@
       "description": "Three automatic ability slots per ship, real starter recipes, compatible owned ability inventory, material and ship-level gated upgrades, dedicated readable craft/equip menus. Six hardware modules remain ship-local.",
       "department": "gameplay",
       "owner": "Engine / Gameplay / Producer / Production",
-      "status": "active",
+      "status": "review",
       "priority": "high",
       "dependencies": [],
       "acceptanceCriteria": [
         {
           "text": "Authoritative gameplay and save migration proven without lost or duplicated assets",
-          "met": false
+          "met": true
         },
         {
           "text": "Actual crafting/equip/death/return flows verified in normal browsers",
@@ -3520,12 +3535,27 @@
           "label": "Actual new user request and team decisions",
           "kind": "note",
           "path": "work/record-dock-console-review.mjs"
+        },
+        {
+          "label": "Integrated native rules and source limitations",
+          "kind": "note",
+          "path": "artifacts/navigation-desktop-20261011/core-handoff.md"
+        },
+        {
+          "label": "387 integrated Rust tests",
+          "kind": "note",
+          "path": "work/navigation-release-native-tests.log"
+        },
+        {
+          "label": "201 shell checks, one unsupported file-symlink check skipped",
+          "kind": "note",
+          "path": "work/navigation-release-shell-tests.log"
         }
       ],
       "blocker": "",
-      "revision": 1,
+      "revision": 2,
       "createdAt": "2026-10-10T23:21:35.350Z",
-      "updatedAt": "2026-10-10T23:21:35.350Z"
+      "updatedAt": "2026-10-11T00:57:29.617Z"
     },
     {
       "id": "task-96a89aa2",
@@ -3533,13 +3563,13 @@
       "description": "Belt-birth provenance limits drops to basic points and tier-one crafting materials, never XP. Actual deterministic asteroid geometry variants and practical tutorial guidance.",
       "department": "art",
       "owner": "Gameplay / Producer",
-      "status": "active",
+      "status": "review",
       "priority": "high",
       "dependencies": [],
       "acceptanceCriteria": [
         {
           "text": "Authoritative gameplay and save migration proven without lost or duplicated assets",
-          "met": false
+          "met": true
         },
         {
           "text": "Actual crafting/equip/death/return flows verified in normal browsers",
@@ -3555,12 +3585,688 @@
           "label": "Actual new user request and team decisions",
           "kind": "note",
           "path": "work/record-dock-console-review.mjs"
+        },
+        {
+          "label": "Integrated native rules and source limitations",
+          "kind": "note",
+          "path": "artifacts/navigation-desktop-20261011/core-handoff.md"
+        },
+        {
+          "label": "387 integrated Rust tests",
+          "kind": "note",
+          "path": "work/navigation-release-native-tests.log"
+        },
+        {
+          "label": "201 shell checks, one unsupported file-symlink check skipped",
+          "kind": "note",
+          "path": "work/navigation-release-shell-tests.log"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-10T23:21:35.380Z",
+      "updatedAt": "2026-10-11T00:57:29.665Z"
+    },
+    {
+      "id": "task-40611e41",
+      "title": "Fractional world quads with independent pixel UI raster",
+      "description": "Render hard world geometry at backing resolution, preserve local affine quads and camera-relative coordinates, keep existing logical UI pixels independent. Soft particles use coverage filtering without changing collision or hard-cell geometry.",
+      "department": "engine",
+      "owner": "Engine / Producer",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Actual Rust geometry/material/lifecycle tests and deterministic limits pass",
+          "met": true
+        },
+        {
+          "text": "Normal WebGPU and WebGL2 zoom, UI composition, effects and context recovery visually checked",
+          "met": false
+        },
+        {
+          "text": "Exact independently reviewed private package published",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual scope and assignments",
+          "kind": "note",
+          "path": "work/record-particle-development.mjs"
+        },
+        {
+          "label": "Integrated native rules and source limitations",
+          "kind": "note",
+          "path": "artifacts/navigation-desktop-20261011/core-handoff.md"
+        },
+        {
+          "label": "387 integrated Rust tests",
+          "kind": "note",
+          "path": "work/navigation-release-native-tests.log"
+        },
+        {
+          "label": "201 shell checks, one unsupported file-symlink check skipped",
+          "kind": "note",
+          "path": "work/navigation-release-shell-tests.log"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-10T23:53:28.581Z",
+      "updatedAt": "2026-10-11T00:57:29.692Z"
+    },
+    {
+      "id": "task-a6a2a3e6",
+      "title": "Seeded gas, fire, trails and parallax constellations",
+      "description": "Bounded Rust cosmetic flow, lifetime, curl and drag; tiny gas/fire pixel quads with real source lighting. Seeded parallax star systems and constellations remain independent of combat RNG and obey cosmic density/reduced-motion settings.",
+      "department": "art",
+      "owner": "Gameplay / Engine / Producer",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Actual Rust geometry/material/lifecycle tests and deterministic limits pass",
+          "met": true
+        },
+        {
+          "text": "Normal WebGPU and WebGL2 zoom, UI composition, effects and context recovery visually checked",
+          "met": false
+        },
+        {
+          "text": "Exact independently reviewed private package published",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual scope and assignments",
+          "kind": "note",
+          "path": "work/record-particle-development.mjs"
+        },
+        {
+          "label": "Integrated native rules and source limitations",
+          "kind": "note",
+          "path": "artifacts/navigation-desktop-20261011/core-handoff.md"
+        },
+        {
+          "label": "387 integrated Rust tests",
+          "kind": "note",
+          "path": "work/navigation-release-native-tests.log"
+        },
+        {
+          "label": "201 shell checks, one unsupported file-symlink check skipped",
+          "kind": "note",
+          "path": "work/navigation-release-shell-tests.log"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-10T23:53:28.614Z",
+      "updatedAt": "2026-10-11T00:57:29.742Z"
+    },
+    {
+      "id": "task-970f203c",
+      "title": "Live Escape telemetry, pixel action icons and saved Quit",
+      "description": "Escape and in-flight Settings consume controls but keep the Rust universe running. Show authoritative ship slots, carried materials, XP and effective stats. Settings/title/continue actions use authored engine pixel icons; title Quit commits progression before attempting browser close and offers a normal-tab fallback.",
+      "department": "integration",
+      "owner": "Producer / Production / Engine / Gameplay",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Actual shell transition and native simulation/stat tests pass",
+          "met": true
+        },
+        {
+          "text": "Normal GPU and GL live menu, death priority, responsive icons and title navigation observed",
+          "met": false
+        },
+        {
+          "text": "Exact reviewed private build published with validation boundaries",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual bounded assignments and integration",
+          "kind": "note",
+          "path": "work/record-live-menu.mjs"
+        },
+        {
+          "label": "Integrated native rules and source limitations",
+          "kind": "note",
+          "path": "artifacts/navigation-desktop-20261011/core-handoff.md"
+        },
+        {
+          "label": "387 integrated Rust tests",
+          "kind": "note",
+          "path": "work/navigation-release-native-tests.log"
+        },
+        {
+          "label": "201 shell checks, one unsupported file-symlink check skipped",
+          "kind": "note",
+          "path": "work/navigation-release-shell-tests.log"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-11T00:16:28.255Z",
+      "updatedAt": "2026-10-11T00:57:29.773Z"
+    },
+    {
+      "id": "task-0b1b0efa",
+      "title": "Connected articulated Coil bodies",
+      "description": "Use occupied-art attachment joints for continuous overlapping segment chains, including authored boss scales and render interpolation. Preserve local destruction and sanctuary boundaries.",
+      "department": "gameplay",
+      "owner": "Gameplay specialist",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Authoritative production behavior and meaningful focused tests validated",
+          "met": true
+        },
+        {
+          "text": "Normal packaged desktop behavior observed with backend and update boundaries recorded",
+          "met": false
+        },
+        {
+          "text": "Exact reviewed source and private deployment recorded",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual bounded task assignment",
+          "kind": "note",
+          "path": "work/record-navigation-milestone.mjs"
+        },
+        {
+          "label": "Integrated native rules and source limitations",
+          "kind": "note",
+          "path": "artifacts/navigation-desktop-20261011/core-handoff.md"
+        },
+        {
+          "label": "387 integrated Rust tests",
+          "kind": "note",
+          "path": "work/navigation-release-native-tests.log"
+        },
+        {
+          "label": "201 shell checks, one unsupported file-symlink check skipped",
+          "kind": "note",
+          "path": "work/navigation-release-shell-tests.log"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-11T00:34:02.658Z",
+      "updatedAt": "2026-10-11T00:57:29.439Z"
+    },
+    {
+      "id": "task-3b9f6350",
+      "title": "Held-left desktop forward thrust",
+      "description": "Hold left to steer and continuously thrust along the actual heading; right holds cursor aim/fire; release restores destination braking; interruptions cancel route and held state.",
+      "department": "integration",
+      "owner": "Producer / Gameplay specialist",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Authoritative production behavior and meaningful focused tests validated",
+          "met": true
+        },
+        {
+          "text": "Normal packaged desktop behavior observed with backend and update boundaries recorded",
+          "met": false
+        },
+        {
+          "text": "Exact reviewed source and private deployment recorded",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual bounded task assignment",
+          "kind": "note",
+          "path": "work/record-navigation-milestone.mjs"
+        },
+        {
+          "label": "Integrated native rules and source limitations",
+          "kind": "note",
+          "path": "artifacts/navigation-desktop-20261011/core-handoff.md"
+        },
+        {
+          "label": "387 integrated Rust tests",
+          "kind": "note",
+          "path": "work/navigation-release-native-tests.log"
+        },
+        {
+          "label": "201 shell checks, one unsupported file-symlink check skipped",
+          "kind": "note",
+          "path": "work/navigation-release-shell-tests.log"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-11T00:34:02.689Z",
+      "updatedAt": "2026-10-11T00:57:29.494Z"
+    },
+    {
+      "id": "task-73510faf",
+      "title": "Discovered universe map and regional resource belts",
+      "description": "Three compact ship/map/settings icons; live discovery-only map regenerated in Rust from seed and canonical saved discoveries, pixel quad rings/glyphs, route navigation, deterministic remote tiered belts with home T1/noXP unchanged. Desktop/web first.",
+      "department": "integration",
+      "owner": "Producer / Production / Engine / Gameplay",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Authoritative production behavior and meaningful focused tests validated",
+          "met": true
+        },
+        {
+          "text": "Normal packaged desktop behavior observed with backend and update boundaries recorded",
+          "met": false
+        },
+        {
+          "text": "Exact reviewed source and private deployment recorded",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual bounded task assignment",
+          "kind": "note",
+          "path": "work/record-navigation-milestone.mjs"
+        },
+        {
+          "label": "Integrated native rules and source limitations",
+          "kind": "note",
+          "path": "artifacts/navigation-desktop-20261011/core-handoff.md"
+        },
+        {
+          "label": "387 integrated Rust tests",
+          "kind": "note",
+          "path": "work/navigation-release-native-tests.log"
+        },
+        {
+          "label": "201 shell checks, one unsupported file-symlink check skipped",
+          "kind": "note",
+          "path": "work/navigation-release-shell-tests.log"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-11T00:34:02.733Z",
+      "updatedAt": "2026-10-11T00:57:29.520Z"
+    },
+    {
+      "id": "task-388e1f9b",
+      "title": "Coherent content-addressed Rust WASM updates",
+      "description": "Fix actual old-SW/new-shell mismatch. Build-specific glue and relative binary URLs, validated complete two-backend manifest and service-worker own-cache shell coherence. Exercise the previously blocked old browser profile.",
+      "department": "engine",
+      "owner": "Engine specialist / Producer",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Authoritative production behavior and meaningful focused tests validated",
+          "met": true
+        },
+        {
+          "text": "Normal packaged desktop behavior observed with backend and update boundaries recorded",
+          "met": false
+        },
+        {
+          "text": "Exact reviewed source and private deployment recorded",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual bounded task assignment",
+          "kind": "note",
+          "path": "work/record-navigation-milestone.mjs"
+        },
+        {
+          "label": "Integrated native rules and source limitations",
+          "kind": "note",
+          "path": "artifacts/navigation-desktop-20261011/core-handoff.md"
+        },
+        {
+          "label": "387 integrated Rust tests",
+          "kind": "note",
+          "path": "work/navigation-release-native-tests.log"
+        },
+        {
+          "label": "201 shell checks, one unsupported file-symlink check skipped",
+          "kind": "note",
+          "path": "work/navigation-release-shell-tests.log"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-11T00:34:02.781Z",
+      "updatedAt": "2026-10-11T00:57:29.550Z"
+    },
+    {
+      "id": "task-5d42b89b",
+      "title": "Orbital asteroid belts and sanctuary shield collisions",
+      "description": "Seeded orbital belts outside Haven and remote sanctuaries, bounded restoring forces preserving real impulses, swept asteroid-radius shield collisions and post-contact separation. No asteroid may enter a protected zone or generate rewards by hitting its shield.",
+      "department": "gameplay",
+      "owner": "Gameplay specialist / Producer",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Authoritative production behavior and meaningful focused tests validated",
+          "met": true
+        },
+        {
+          "text": "Normal packaged desktop behavior observed with backend and update boundaries recorded",
+          "met": false
+        },
+        {
+          "text": "Exact reviewed source and private deployment recorded",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual bounded task assignment",
+          "kind": "note",
+          "path": "work/record-navigation-milestone.mjs"
+        },
+        {
+          "label": "Integrated native rules and source limitations",
+          "kind": "note",
+          "path": "artifacts/navigation-desktop-20261011/core-handoff.md"
+        },
+        {
+          "label": "387 integrated Rust tests",
+          "kind": "note",
+          "path": "work/navigation-release-native-tests.log"
+        },
+        {
+          "label": "201 shell checks, one unsupported file-symlink check skipped",
+          "kind": "note",
+          "path": "work/navigation-release-shell-tests.log"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-11T00:37:30.676Z",
+      "updatedAt": "2026-10-11T00:57:29.390Z"
+    },
+    {
+      "id": "task-e52fb3b4",
+      "title": "Restrained native pixel HUD and attached ship bars",
+      "description": "One flat responsive status strip, projected hull/shield bars, retained compact icons and truthful low-hull/shield-down warnings. Native pixel font, shared safe-area layout and accessible DOM alignment.",
+      "department": "Engine",
+      "owner": "Engine specialist",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Actual source implementation and meaningful focused state/layout/lifecycle checks pass.",
+          "met": true
+        },
+        {
+          "text": "Final desktop WebGPU/WebGL2 presentation and lifecycle observations are recorded with limitations.",
+          "met": true
+        },
+        {
+          "text": "Exact source/package review and owner-private publication match the tested build.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Frozen native painter and real geometry checks",
+          "kind": "note",
+          "path": "work/native-flight-hud-handoff/HANDOFF.md"
+        },
+        {
+          "label": "Independent physical hit/recovery integration review",
+          "kind": "note",
+          "path": "work/hud-status-integration-review.md"
+        },
+        {
+          "label": "Final actual WebGPU facility placement and menu",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/final-webgpu-label-review.md"
+        },
+        {
+          "label": "Final retained-profile WebGL2 Apply and narrow layouts",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/final-webgl-labels-REVIEW.md"
+        },
+        {
+          "label": "Actual earlier audio transitions with explicit scoped limits",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/webgpu-review.md"
+        },
+        {
+          "label": "Actual corrected prolonged WebGL loss and preserved menu",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/c707-recovery-REVIEW.md"
+        },
+        {
+          "label": "406 final native tests",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/final-native-tests.log"
+        },
+        {
+          "label": "239 final shell passes and explicit Windows capability skip",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/final-shell-tests.log"
+        },
+        {
+          "label": "18 actual dual-WASM serializer/SaveStore cases",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/final-wasm-contract.log"
+        }
+      ],
+      "blocker": "",
+      "revision": 3,
+      "createdAt": "2026-10-11T01:12:52.505Z",
+      "updatedAt": "2026-10-11T02:00:00.859Z"
+    },
+    {
+      "id": "task-0702e217",
+      "title": "Adaptive authored space score and ship effects",
+      "description": "Real biome, sanctuary, hostile pursuit, champion identity, low hull and actual throttle/speed drive bounded music/effects. Smooth transitions, separate volume buses and lifecycle recovery.",
+      "department": "Audio / Gameplay",
+      "owner": "Gameplay specialist",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Actual source implementation and meaningful focused state/layout/lifecycle checks pass.",
+          "met": true
+        },
+        {
+          "text": "Final desktop WebGPU/WebGL2 presentation and lifecycle observations are recorded with limitations.",
+          "met": true
+        },
+        {
+          "text": "Exact source/package review and owner-private publication match the tested build.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual frozen adaptive audio source and caller contract",
+          "kind": "note",
+          "path": "work/adaptive-audio-handoff/HANDOFF.md"
+        },
+        {
+          "label": "Current integrated234 shell checks (233pass/1platformskip)",
+          "kind": "note",
+          "path": "work/adaptive-final-shell-tests.log"
+        },
+        {
+          "label": "Current workspace403 Rust tests",
+          "kind": "note",
+          "path": "work/adaptive-final-native-tests.log"
+        },
+        {
+          "label": "Final actual WebGPU facility placement and menu",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/final-webgpu-label-review.md"
+        },
+        {
+          "label": "Final retained-profile WebGL2 Apply and narrow layouts",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/final-webgl-labels-REVIEW.md"
+        },
+        {
+          "label": "Actual earlier audio transitions with explicit scoped limits",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/webgpu-review.md"
+        },
+        {
+          "label": "Actual corrected prolonged WebGL loss and preserved menu",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/c707-recovery-REVIEW.md"
+        },
+        {
+          "label": "406 final native tests",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/final-native-tests.log"
+        },
+        {
+          "label": "239 final shell passes and explicit Windows capability skip",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/final-shell-tests.log"
+        },
+        {
+          "label": "18 actual dual-WASM serializer/SaveStore cases",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/final-wasm-contract.log"
+        }
+      ],
+      "blocker": "",
+      "revision": 3,
+      "createdAt": "2026-10-11T01:12:52.527Z",
+      "updatedAt": "2026-10-11T02:00:00.932Z"
+    },
+    {
+      "id": "task-4aed8f22",
+      "title": "Consistent retro pixel visual language",
+      "description": "Document and apply current palette, silhouette, density, fractional quad transforms and semantic colors. Simplify contextual DOM/native HUD to match the real engine.",
+      "department": "Art / Production",
+      "owner": "Production specialist",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Actual source implementation and meaningful focused state/layout/lifecycle checks pass.",
+          "met": true
+        },
+        {
+          "text": "Final desktop WebGPU/WebGL2 presentation and lifecycle observations are recorded with limitations.",
+          "met": true
+        },
+        {
+          "text": "Exact source/package review and owner-private publication match the tested build.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual minimal DOM/CSS/art contract groundwork",
+          "kind": "note",
+          "path": "work/hud-status-shell-review.md"
+        },
+        {
+          "label": "Bounded source integration amendment",
+          "kind": "note",
+          "path": "work/hud-status-integration-review.md"
+        },
+        {
+          "label": "Final actual WebGPU facility placement and menu",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/final-webgpu-label-review.md"
+        },
+        {
+          "label": "Final retained-profile WebGL2 Apply and narrow layouts",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/final-webgl-labels-REVIEW.md"
+        },
+        {
+          "label": "Actual earlier audio transitions with explicit scoped limits",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/webgpu-review.md"
+        },
+        {
+          "label": "Actual corrected prolonged WebGL loss and preserved menu",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/c707-recovery-REVIEW.md"
+        },
+        {
+          "label": "406 final native tests",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/final-native-tests.log"
+        },
+        {
+          "label": "239 final shell passes and explicit Windows capability skip",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/final-shell-tests.log"
+        },
+        {
+          "label": "18 actual dual-WASM serializer/SaveStore cases",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/final-wasm-contract.log"
+        }
+      ],
+      "blocker": "",
+      "revision": 3,
+      "createdAt": "2026-10-11T01:12:52.555Z",
+      "updatedAt": "2026-10-11T02:00:00.980Z"
+    },
+    {
+      "id": "task-f341486f",
+      "title": "Adaptive score listening and rendered audio review",
+      "description": "Review authored Haven/biome/combat/champion transitions and warning/engine/ability cues in actual normal gameplay. Recorded graph/DOM resource tests do not establish audible quality. Capture output levels and transitions before accepting hearing quality; physical-device measurements remain in the existing phone task.",
+      "department": "QA",
+      "owner": "Gameplay/audio specialist",
+      "status": "ready",
+      "priority": "normal",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Actual output capture reports peak/RMS and no clipping or stuck voices during normal transitions and recovery.",
+          "met": false
+        },
+        {
+          "text": "Human listening accepts warning audibility, continuous engine balance and music/effects buses in sustained normal play.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Executed graph/state source handoff and limits",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/audio-handoff.md"
         }
       ],
       "blocker": "",
       "revision": 1,
-      "createdAt": "2026-10-10T23:21:35.380Z",
-      "updatedAt": "2026-10-10T23:21:35.380Z"
+      "createdAt": "2026-10-11T02:00:01.121Z",
+      "updatedAt": "2026-10-11T02:00:01.121Z"
     }
   ],
   "reviews": [
@@ -4233,6 +4939,124 @@
         "task-2ab5ed21",
         "task-d6a4013a"
       ]
+    },
+    {
+      "id": "review-98d35d6c",
+      "title": "Actual old worker blocks new ship menu",
+      "body": "Production Chrome on existing 4212 profile loaded new shell with old stable WASM, missing cancel_course and preventing menu access. The 2cf package cannot be publication evidence. Engine implemented content-addressed full binding sets and own-cache shell loading, with eight focused tests and a fixture copy probe. Actual profile upgrade verification waits for the new final normal build.",
+      "author": "Producer",
+      "source": "Actual desktop navigation / articulation assignments",
+      "createdAt": "2026-10-11T00:34:02.837Z",
+      "participants": [
+        "Producer",
+        "Production specialist",
+        "Engine specialist"
+      ],
+      "taskIds": [
+        "task-388e1f9b"
+      ]
+    },
+    {
+      "id": "review-2b8b1300",
+      "title": "Actual old worker blocks new ship menu",
+      "body": "Production Chrome on existing 4212 profile loaded new shell with old stable WASM, missing cancel_course and preventing menu access. The 2cf package cannot be publication evidence. Engine implemented content-addressed full binding sets and own-cache shell loading, with eight focused tests and a fixture copy probe. Actual profile upgrade verification waits for the new final normal build.",
+      "author": "Producer",
+      "source": "Actual desktop navigation / articulation assignments",
+      "createdAt": "2026-10-11T00:37:30.814Z",
+      "participants": [
+        "Producer",
+        "Production specialist",
+        "Engine specialist"
+      ],
+      "taskIds": [
+        "task-388e1f9b"
+      ]
+    },
+    {
+      "id": "review-06591a02",
+      "title": "Root assessment of actual Spark storage audit",
+      "body": "Worker performed a real read-only audit while storage.ts changed; report records that limitation. Its proposed open/reload cargo-clear test mislabels the boundary: SaveStore preserves valid live cargo, and Game reconstruction clears it without banking. Root keeps the authoritative boundary and meaningful native/IndexedDB tests. Current30 storage tests pass; physical/browser transactions and exact publication have separate evidence gates.",
+      "author": "Producer",
+      "source": "Actual local worker execution and root inspection",
+      "createdAt": "2026-10-11T00:45:43.584Z",
+      "participants": [
+        "Producer",
+        "Spark storage worker"
+      ],
+      "taskIds": [
+        "task-8d55901c",
+        "task-2138420d"
+      ]
+    },
+    {
+      "id": "review-ca62e1db",
+      "title": "Observed upgrade, toolbar and map clipping review",
+      "body": "Actual retained Chrome origin upgraded from the former stable-WASM worker without resetting its profile. The new content-addressed normal bindings eliminated the observed cancel_course mismatch. The review then found DOM MAP/SET labels over native icons and map text crossing the footer. Producer repaired the pixel-ready opacity selectors; Engine repaired intersection of all enclosing semantic scroll clips and added two actual compiled-bridge regressions. These were real asynchronous design/review contributions, not a simulated meeting. Current normal cache is galaxy-3aad1a2d2d75f0ab. Corrected responsive browser acceptance and exact private publication remain in progress.",
+      "author": "Producer",
+      "source": "Actual integrated desktop release validation",
+      "createdAt": "2026-10-11T00:57:29.792Z",
+      "participants": [
+        "Producer",
+        "Production specialist",
+        "Engine specialist"
+      ],
+      "taskIds": [
+        "task-73510faf",
+        "task-388e1f9b",
+        "task-970f203c"
+      ]
+    },
+    {
+      "id": "review-90a5ed36",
+      "title": "Actual native HUD and semantic hit integration review",
+      "body": "The actual shared FlightStatusLayout uses one flat22logical footer and attached44x9 tracks, with unshaken interpolation, zoom, safe-area, real control/contact and boss-core reservations. Native warnings use positivehull<=25% or real depletedshield state and static Reduced Motion. Engine froze7owned files after140nativeUI/layout and20compiledbridge checks. Production preserved accessible telemetry/contact IDs and caught a clear7pixel glyph row whose44physical-minimum hit overlapped touchpads; Producer added real DOM hit-intersection gating and4actualshell checks. Production also found and repaired a recoverytoast hidden by zero native bounds while pixel-ready was removed. These are actual asynchronous review contributions. Existing generated/authored world cells remain unchanged; the new style guide records their coherent current contract. New normal-package/browser acceptance and publication remain pending.",
+      "author": "Producer",
+      "source": "Actual specialist source handoffs and integration inspection",
+      "createdAt": "2026-10-11T01:29:54.210Z",
+      "participants": [
+        "Producer",
+        "Engine specialist",
+        "Production specialist"
+      ],
+      "taskIds": [
+        "task-e52fb3b4",
+        "task-4aed8f22"
+      ]
+    },
+    {
+      "id": "review-a9d8f858",
+      "title": "Authoritative adaptive score and lifecycle integration",
+      "body": "Actual frozen source adds public AudioHud driven by canonical areas/champion visits, real living hostile pursuit, hull, motion and surviving ports;15 authored compatible themes blend with combat/alarm arrangements. Effects use real shot/ability/charge/impact events,16total effects and32music bounds.23 focused audio checks exercise the actual engine against a recorded API, not DSP. Producer supplied latest authoritative audio before live/recovered resume and verified ordering, hard gates and deferred lifecycle in43 integrated tests. Current full234shell checks have233pass/1Windows file-symlink capabilityskip;403Rust tests pass. Actual browser presentation/context transitions and exactprivate publication are next; human listening/DSP/mobile remain unmeasured.",
+      "author": "Producer",
+      "source": "Actual audio source handoff and integrated checks",
+      "createdAt": "2026-10-11T01:36:47.126Z",
+      "participants": [
+        "Producer",
+        "Gameplay / Audio specialist",
+        "Engine specialist"
+      ],
+      "taskIds": [
+        "task-0702e217"
+      ]
+    },
+    {
+      "id": "review-aceacc82",
+      "title": "Actual final desktop presentation and adaptive-state review",
+      "body": "Actual asynchronous contributions are recorded. Native renderer owns the flat strip and interpolated ship tracks. Production found a real expired graphics-loss reason/white canvas; Producer fixed persistent authoritative notice and hid the unavailable surface; actual Chrome loss after15.199seconds and restoration preserved Settings. Producer found Journal/Arena footer overlap atGPUUIscale2.4; Engine added same-font above/below/hidden extraction, Producer selected positions against real geometry and bridge forwarded it. Final cc8 IAB1280 shows corrected above labels, and retained Chrome actualApply shows correct GL1280/320 with saved profile preserved. Adaptive audio actual a9c3 diagnostics prove Haven/environment/champion/pursuit/low-hull state transitions; its production source is unchanged through the final layout-only delta. Recorded WebAudio graph tests are not hearing or rendered DSP. Final406native/239shell with1explicitfile-symlinkcapabilityskip, strictTS/native/bothWASMClippy, dualbuild and18isolatedactualWASMserializer/store cases pass. Physical devices, timed pointer play, natural crafting/return banking, sustained combat/soak and human listening remain open gates. Exact committed source/archive/private publication remains pending.",
+      "author": "Producer",
+      "source": "Actual normal dual-backend captures, specialist reviews and executed final checks",
+      "createdAt": "2026-10-11T02:00:01.017Z",
+      "participants": [
+        "Producer",
+        "Engine specialist",
+        "Gameplay/audio specialist",
+        "Production specialist"
+      ],
+      "taskIds": [
+        "task-e52fb3b4",
+        "task-0702e217",
+        "task-4aed8f22"
+      ]
     }
   ],
   "decisions": [
@@ -4315,6 +5139,42 @@
       "author": "Producer",
       "source": "Actual source, test logs, specialist handoffs and browser observations",
       "createdAt": "2026-10-10T23:21:35.444Z",
+      "status": "accepted"
+    },
+    {
+      "id": "decision-5fa6e780",
+      "title": "Fractional world raster and bounded emitter decision",
+      "body": "The user explicitly requests no artificial minimum hard pixel size, richer gas/fire/light trails and seeded parallax star systems. Engine owns split backing-resolution world/logical-resolution UI plus soft coverage/emission API; Gameplay owns existing bounded Rust particle lifecycle/background helpers and isolated cosmetic hashing; Producer owns integration/normal browser checks; Production owns Forge readability checks. Hard collision/body masks and world transforms remain authoritative. Arbitrarily small low-energy shapes cannot be guaranteed visible below screen resolution. No software-only particle candidate is claimed as GPU proof. Physical phone frame time and 30-minute soak remain pending.",
+      "author": "Producer",
+      "source": "Actual latest user request and specialist assignment",
+      "createdAt": "2026-10-10T23:53:28.669Z",
+      "status": "accepted"
+    },
+    {
+      "id": "decision-55e2ba5b",
+      "title": "Escape consumes controls and remains live",
+      "body": "User explicitly requests that Escape never pause the world. All launched game menus use live simulation with controls gated and persistent course cancelled; ship telemetry refreshes from authoritative HUD. Intentional debug console/dialogue, death report, hidden tab, portrait touch guard, encounter-save preparation and lost renderer remain separate lifecycle gates. Root owns main lifecycle/tests; Production owns markup and responsive live readout; Gameplay owns seven effective HUD stats and course cancellation; Engine owns five authored pixel icons and bridge mapping. Browser Quit saves and flushes first; browser restrictions may require the user to close their ordinary tab.",
+      "author": "Producer",
+      "source": "Actual user steering and current source implementation",
+      "createdAt": "2026-10-11T00:16:28.291Z",
+      "status": "accepted"
+    },
+    {
+      "id": "decision-73f13f17",
+      "title": "Desktop exploration uses live discovered navigation",
+      "body": "User steers validation toward desktop/web. Escape remains a live ship readout; dedicated ship/map/settings icons expose their own views. The map includes only canonically discovered sanctuaries with generated seeded coordinates and current position, not unseen-site guesses or invented biome borders. Held-left uses full forward thrust and right-fire controls facing. Gameplay owns articulation and immutable home/remote asteroid reward origins; production owns responsive navigation markup; engine owns pixel map primitives/PWA coherence; producer owns shell/input/API, tests and exact publication. Mobile UI remains functional but physical-device acceptance remains pending.",
+      "author": "Producer",
+      "source": "Actual desktop navigation / articulation assignments",
+      "createdAt": "2026-10-11T00:34:02.827Z",
+      "status": "accepted"
+    },
+    {
+      "id": "decision-cb3c8553",
+      "title": "Minimal native HUD and real adaptive audio",
+      "body": "Producer, Engine, Gameplay and Production agreed in actual asynchronous messages: use a docked flat bottom strip rather than scattered floating panels, attach constant-logical-size hull/shield bars through the actual unshaken interpolated camera, preserve real top-right icon hitboxes, and derive score changes from authoritative AudioHud pursuit/biome/champion/thrust/hull state. Low-hull and shield-down warnings are distinct. Author procedural score/effects with bounded voices; no unmeasured local AI music experiment is required for this scope. Physical phone, Safari and human listening remain separate pending validation.",
+      "author": "Producer",
+      "source": "Actual HUD and adaptive audio assignment discussion",
+      "createdAt": "2026-10-11T01:12:52.588Z",
       "status": "accepted"
     }
   ],
@@ -5270,6 +6130,55 @@
       ],
       "url": "https://galaxy-royale-itchson.itchson.chatgpt.site/",
       "knownIssues": "Physical-device and other unmeasured gates remain pending. New cargo/shiploadout features are not in this published artifact."
+    },
+    {
+      "id": "build-11515ef7",
+      "title": "Integrated desktop navigation and asteroid shields",
+      "body": "Normal complete dual-WASM/Vite/PWA build succeeded after the two observed map presentation corrections. Content-addressed WebGPU and WebGL2 use shared actual Rust gameplay. The authoritative shield, articulated joints, held-input, progression, cargo and renderer rules passed integrated tests. Supplied save fixtures and QA scenes are labelled and do not prove naturally earned progression.",
+      "author": "Producer",
+      "source": "Actual integrated desktop release validation",
+      "createdAt": "2026-10-11T00:57:29.820Z",
+      "revision": "working-tree / galaxy-3aad1a2d2d75f0ab",
+      "evidence": [
+        {
+          "label": "Actual normal release build log",
+          "kind": "note",
+          "path": "work/navigation-release-build.log"
+        },
+        {
+          "label": "Actual isolated WASM save checks",
+          "kind": "note",
+          "path": "artifacts/navigation-desktop-20261011/wasm-save-contract.log"
+        }
+      ],
+      "checks": [
+        {
+          "name": "387 Rust tests",
+          "result": "pass"
+        },
+        {
+          "name": "201 shell assertions / one Windows file-symlink capability skip",
+          "result": "pass"
+        },
+        {
+          "name": "Strict TypeScript and native/both WASM Clippy",
+          "result": "pass"
+        },
+        {
+          "name": "18 actual WASM serializer/SaveStore cases with fake IndexedDB",
+          "result": "pass"
+        },
+        {
+          "name": "Corrected final browser matrix",
+          "result": "not_run"
+        },
+        {
+          "name": "Physical phones, Safari, audio listening and 30-minute soak",
+          "result": "not_run"
+        }
+      ],
+      "url": "http://127.0.0.1:4214/?qa=1&toolbar=1&renderer=webgpu",
+      "knownIssues": "Final browser and source/archive gates pending. Real held-mouse timing and physical cargo-return play review remain separate from native/VM evidence. Device, human balance and authenticated remote runtime unmeasured."
     }
   ],
   "feedback": [],
@@ -8953,6 +9862,726 @@
       "author": "Producer",
       "source": "Successful native private publication and independent committed/archive review",
       "createdAt": "2026-10-10T23:26:32.725Z"
+    },
+    {
+      "id": "eb79355a-3aca-4232-a6f1-b8b538abc07a",
+      "revision": 369,
+      "kind": "task.create",
+      "itemId": "task-40611e41",
+      "title": "Fractional world quads with independent pixel UI raster",
+      "author": "Producer",
+      "source": "Actual latest user request and specialist assignment",
+      "createdAt": "2026-10-10T23:53:28.581Z"
+    },
+    {
+      "id": "765d0d59-17f5-4115-be5c-ac1799dd79c2",
+      "revision": 370,
+      "kind": "task.create",
+      "itemId": "task-a6a2a3e6",
+      "title": "Seeded gas, fire, trails and parallax constellations",
+      "author": "Producer",
+      "source": "Actual latest user request and specialist assignment",
+      "createdAt": "2026-10-10T23:53:28.614Z"
+    },
+    {
+      "id": "0c7850fe-e89f-4cdf-97fc-f45764c2bc16",
+      "revision": 371,
+      "kind": "decision",
+      "itemId": "decision-5fa6e780",
+      "title": "Fractional world raster and bounded emitter decision",
+      "author": "Producer",
+      "source": "Actual latest user request and specialist assignment",
+      "createdAt": "2026-10-10T23:53:28.669Z"
+    },
+    {
+      "id": "76894a20-5113-4e49-817a-d13dbd42843e",
+      "revision": 372,
+      "kind": "run",
+      "itemId": "run-b1f902ca",
+      "title": "Producer / integration · running",
+      "author": "Producer",
+      "source": "Actual latest user request and specialist assignment",
+      "createdAt": "2026-10-10T23:53:28.685Z"
+    },
+    {
+      "id": "6f37b932-2ab5-4517-8897-66e3f5bb824e",
+      "revision": 373,
+      "kind": "run",
+      "itemId": "run-c3e7d616",
+      "title": "Engine specialist · running",
+      "author": "Producer",
+      "source": "Actual latest user request and specialist assignment",
+      "createdAt": "2026-10-10T23:53:28.700Z"
+    },
+    {
+      "id": "04b2b3b8-7ad5-42f4-8fb9-b0e93bb51759",
+      "revision": 374,
+      "kind": "run",
+      "itemId": "run-efa3e933",
+      "title": "Gameplay specialist · running",
+      "author": "Producer",
+      "source": "Actual latest user request and specialist assignment",
+      "createdAt": "2026-10-10T23:53:28.715Z"
+    },
+    {
+      "id": "db189509-79ff-4757-b176-35a752a0de1b",
+      "revision": 375,
+      "kind": "run",
+      "itemId": "run-df549b0a",
+      "title": "Production / responsive QA · running",
+      "author": "Producer",
+      "source": "Actual latest user request and specialist assignment",
+      "createdAt": "2026-10-10T23:53:28.731Z"
+    },
+    {
+      "id": "b9a3d6e5-fc23-4712-aff8-2f9f12c2f710",
+      "revision": 376,
+      "kind": "run",
+      "itemId": "run-f666ac7e",
+      "title": "Spark read-only storage auditor · running",
+      "author": "Producer",
+      "source": "Actual latest user request and specialist assignment",
+      "createdAt": "2026-10-10T23:53:28.746Z"
+    },
+    {
+      "id": "1f7ae0b4-32e2-4581-acc7-0ef1db1e5369",
+      "revision": 377,
+      "kind": "task.create",
+      "itemId": "task-970f203c",
+      "title": "Live Escape telemetry, pixel action icons and saved Quit",
+      "author": "Producer",
+      "source": "Actual user steering and current source implementation",
+      "createdAt": "2026-10-11T00:16:28.255Z"
+    },
+    {
+      "id": "523b0ee8-1590-4b63-b3f5-a72fe937f934",
+      "revision": 378,
+      "kind": "decision",
+      "itemId": "decision-55e2ba5b",
+      "title": "Escape consumes controls and remains live",
+      "author": "Producer",
+      "source": "Actual user steering and current source implementation",
+      "createdAt": "2026-10-11T00:16:28.291Z"
+    },
+    {
+      "id": "11281aaa-e3fa-4511-9803-4081eddf6929",
+      "revision": 379,
+      "kind": "run",
+      "itemId": "run-f1087f3f",
+      "title": "Producer / integration · running",
+      "author": "Producer",
+      "source": "Actual user steering and current source implementation",
+      "createdAt": "2026-10-11T00:16:28.315Z"
+    },
+    {
+      "id": "a8c58c87-a351-4648-a9b5-0ce400813b9b",
+      "revision": 380,
+      "kind": "run",
+      "itemId": "run-e56af00b",
+      "title": "Production / responsive UI · running",
+      "author": "Producer",
+      "source": "Actual user steering and current source implementation",
+      "createdAt": "2026-10-11T00:16:28.330Z"
+    },
+    {
+      "id": "9581cd7b-8da6-45c7-822b-6ed3922f49d6",
+      "revision": 381,
+      "kind": "run",
+      "itemId": "run-aa3a6949",
+      "title": "Gameplay specialist · running",
+      "author": "Producer",
+      "source": "Actual user steering and current source implementation",
+      "createdAt": "2026-10-11T00:16:28.346Z"
+    },
+    {
+      "id": "bd2f9b58-0379-4470-8f7f-e5d21c73501a",
+      "revision": 382,
+      "kind": "run",
+      "itemId": "run-5cafbeee",
+      "title": "Engine specialist · running",
+      "author": "Producer",
+      "source": "Actual user steering and current source implementation",
+      "createdAt": "2026-10-11T00:16:28.361Z"
+    },
+    {
+      "id": "2d6f8e58-1647-4bad-805c-12932d17bbf3",
+      "revision": 383,
+      "kind": "task.create",
+      "itemId": "task-0b1b0efa",
+      "title": "Connected articulated Coil bodies",
+      "author": "Producer",
+      "source": "Actual desktop navigation / articulation assignments",
+      "createdAt": "2026-10-11T00:34:02.658Z"
+    },
+    {
+      "id": "b4796512-8344-46c6-9f7a-3bcb16e2db04",
+      "revision": 384,
+      "kind": "task.create",
+      "itemId": "task-3b9f6350",
+      "title": "Held-left desktop forward thrust",
+      "author": "Producer",
+      "source": "Actual desktop navigation / articulation assignments",
+      "createdAt": "2026-10-11T00:34:02.689Z"
+    },
+    {
+      "id": "eba2a923-a51a-4f01-ae5e-fa1deda0e6cb",
+      "revision": 385,
+      "kind": "task.create",
+      "itemId": "task-73510faf",
+      "title": "Discovered universe map and regional resource belts",
+      "author": "Producer",
+      "source": "Actual desktop navigation / articulation assignments",
+      "createdAt": "2026-10-11T00:34:02.733Z"
+    },
+    {
+      "id": "b0d839b3-07b5-44e1-9554-6c706a68ef48",
+      "revision": 386,
+      "kind": "task.create",
+      "itemId": "task-388e1f9b",
+      "title": "Coherent content-addressed Rust WASM updates",
+      "author": "Producer",
+      "source": "Actual desktop navigation / articulation assignments",
+      "createdAt": "2026-10-11T00:34:02.781Z"
+    },
+    {
+      "id": "b5883771-2ab8-41f4-9d99-7f2313840a9f",
+      "revision": 387,
+      "kind": "decision",
+      "itemId": "decision-73f13f17",
+      "title": "Desktop exploration uses live discovered navigation",
+      "author": "Producer",
+      "source": "Actual desktop navigation / articulation assignments",
+      "createdAt": "2026-10-11T00:34:02.827Z"
+    },
+    {
+      "id": "dfabae89-8b58-41ea-af1d-1404338753fe",
+      "revision": 388,
+      "kind": "review",
+      "itemId": "review-98d35d6c",
+      "title": "Actual old worker blocks new ship menu",
+      "author": "Producer",
+      "source": "Actual desktop navigation / articulation assignments",
+      "createdAt": "2026-10-11T00:34:02.837Z"
+    },
+    {
+      "id": "b9755735-fb46-4199-b1ca-367b7e37ffef",
+      "revision": 389,
+      "kind": "run",
+      "itemId": "run-bb3ac968",
+      "title": "Producer · running",
+      "author": "Producer",
+      "source": "Actual desktop navigation / articulation assignments",
+      "createdAt": "2026-10-11T00:34:02.860Z"
+    },
+    {
+      "id": "4d5d1028-bb33-4f83-bdbb-bd7d93759525",
+      "revision": 390,
+      "kind": "run",
+      "itemId": "run-47987f36",
+      "title": "Gameplay specialist · running",
+      "author": "Producer",
+      "source": "Actual desktop navigation / articulation assignments",
+      "createdAt": "2026-10-11T00:34:02.873Z"
+    },
+    {
+      "id": "ff32c345-965e-4d21-8b93-c1838d6c371a",
+      "revision": 391,
+      "kind": "run",
+      "itemId": "run-d5ec4b86",
+      "title": "Production specialist · running",
+      "author": "Producer",
+      "source": "Actual desktop navigation / articulation assignments",
+      "createdAt": "2026-10-11T00:34:02.889Z"
+    },
+    {
+      "id": "7b6aa4f9-2360-4f00-8a85-1cf659d57db0",
+      "revision": 392,
+      "kind": "run",
+      "itemId": "run-77e5755f",
+      "title": "Engine specialist · running",
+      "author": "Producer",
+      "source": "Actual desktop navigation / articulation assignments",
+      "createdAt": "2026-10-11T00:34:02.905Z"
+    },
+    {
+      "id": "93bd0463-f601-4bf5-b0da-6363da716f48",
+      "revision": 393,
+      "kind": "task.create",
+      "itemId": "task-5d42b89b",
+      "title": "Orbital asteroid belts and sanctuary shield collisions",
+      "author": "Producer",
+      "source": "Actual desktop navigation / articulation assignments",
+      "createdAt": "2026-10-11T00:37:30.676Z"
+    },
+    {
+      "id": "2b11cdb0-2ddc-4156-9adb-ea7f64369629",
+      "revision": 394,
+      "kind": "review",
+      "itemId": "review-2b8b1300",
+      "title": "Actual old worker blocks new ship menu",
+      "author": "Producer",
+      "source": "Actual desktop navigation / articulation assignments",
+      "createdAt": "2026-10-11T00:37:30.814Z"
+    },
+    {
+      "id": "5f1e0712-0169-433e-acac-732398c55413",
+      "revision": 395,
+      "kind": "run",
+      "itemId": "run-08eed431",
+      "title": "Producer · running",
+      "author": "Producer",
+      "source": "Actual desktop navigation / articulation assignments",
+      "createdAt": "2026-10-11T00:37:30.841Z"
+    },
+    {
+      "id": "1257bc74-c644-4968-8281-ecfb9adec9d7",
+      "revision": 396,
+      "kind": "run",
+      "itemId": "run-45bfee4e",
+      "title": "Gameplay specialist · running",
+      "author": "Producer",
+      "source": "Actual desktop navigation / articulation assignments",
+      "createdAt": "2026-10-11T00:37:30.856Z"
+    },
+    {
+      "id": "81e18e4c-07c7-43ee-95ac-6ef5c8ca6d7d",
+      "revision": 397,
+      "kind": "run",
+      "itemId": "run-18fb5db9",
+      "title": "Production specialist · running",
+      "author": "Producer",
+      "source": "Actual desktop navigation / articulation assignments",
+      "createdAt": "2026-10-11T00:37:30.878Z"
+    },
+    {
+      "id": "d09c4dd6-2c72-4eaf-857a-7a67a0ef773a",
+      "revision": 398,
+      "kind": "run",
+      "itemId": "run-a9e05362",
+      "title": "Engine specialist · running",
+      "author": "Producer",
+      "source": "Actual desktop navigation / articulation assignments",
+      "createdAt": "2026-10-11T00:37:30.906Z"
+    },
+    {
+      "id": "85ac6ff5-e248-49f3-b82a-71cb999c8dc5",
+      "revision": 399,
+      "kind": "run",
+      "itemId": "run-66b0e8b7",
+      "title": "Spark / bounded storage audit · completed",
+      "author": "Producer",
+      "source": "Actual local worker execution and root inspection",
+      "createdAt": "2026-10-11T00:45:43.561Z"
+    },
+    {
+      "id": "14d27a66-99be-4ad7-908e-c01f6aceef18",
+      "revision": 400,
+      "kind": "review",
+      "itemId": "review-06591a02",
+      "title": "Root assessment of actual Spark storage audit",
+      "author": "Producer",
+      "source": "Actual local worker execution and root inspection",
+      "createdAt": "2026-10-11T00:45:43.584Z"
+    },
+    {
+      "id": "8fd44c69-b7f2-4c3b-9380-cfdf7d714ab7",
+      "revision": 401,
+      "kind": "run",
+      "itemId": "run-246c9cff",
+      "title": "Spark / bounded desktop input audit · running",
+      "author": "Producer",
+      "source": "Actual local worker execution and root inspection",
+      "createdAt": "2026-10-11T00:45:43.614Z"
+    },
+    {
+      "id": "b8a35ecc-ba8f-4bf1-b865-6fe422abbc53",
+      "revision": 402,
+      "kind": "task.update",
+      "itemId": "task-5d42b89b",
+      "title": "Orbital asteroid belts and sanctuary shield collisions",
+      "author": "Producer",
+      "source": "Actual integrated desktop release validation",
+      "createdAt": "2026-10-11T00:57:29.390Z"
+    },
+    {
+      "id": "e38304fe-4d0e-4b62-8a4f-56bc6fed81c0",
+      "revision": 403,
+      "kind": "task.update",
+      "itemId": "task-0b1b0efa",
+      "title": "Connected articulated Coil bodies",
+      "author": "Producer",
+      "source": "Actual integrated desktop release validation",
+      "createdAt": "2026-10-11T00:57:29.439Z"
+    },
+    {
+      "id": "61b906f0-6af9-444c-8877-e2abd7479db4",
+      "revision": 404,
+      "kind": "task.update",
+      "itemId": "task-3b9f6350",
+      "title": "Held-left desktop forward thrust",
+      "author": "Producer",
+      "source": "Actual integrated desktop release validation",
+      "createdAt": "2026-10-11T00:57:29.494Z"
+    },
+    {
+      "id": "6ca3955c-f767-416d-813c-02a3d5c3bceb",
+      "revision": 405,
+      "kind": "task.update",
+      "itemId": "task-73510faf",
+      "title": "Discovered universe map and regional resource belts",
+      "author": "Producer",
+      "source": "Actual integrated desktop release validation",
+      "createdAt": "2026-10-11T00:57:29.520Z"
+    },
+    {
+      "id": "40920da0-28a3-4e5c-b16a-918f0e9b3b10",
+      "revision": 406,
+      "kind": "task.update",
+      "itemId": "task-388e1f9b",
+      "title": "Coherent content-addressed Rust WASM updates",
+      "author": "Producer",
+      "source": "Actual integrated desktop release validation",
+      "createdAt": "2026-10-11T00:57:29.550Z"
+    },
+    {
+      "id": "78f1377c-2064-4604-a1d5-cb60b6ed5fdd",
+      "revision": 407,
+      "kind": "task.update",
+      "itemId": "task-8d55901c",
+      "title": "Ship-owned progression and expedition cargo risk",
+      "author": "Producer",
+      "source": "Actual integrated desktop release validation",
+      "createdAt": "2026-10-11T00:57:29.590Z"
+    },
+    {
+      "id": "721ff534-6f0c-4b29-8711-fd73f88234bf",
+      "revision": 408,
+      "kind": "task.update",
+      "itemId": "task-2138420d",
+      "title": "Crafted compatible three-slot ship loadouts",
+      "author": "Producer",
+      "source": "Actual integrated desktop release validation",
+      "createdAt": "2026-10-11T00:57:29.617Z"
+    },
+    {
+      "id": "af4438b1-27d0-4e0f-92fa-5d5bd111adae",
+      "revision": 409,
+      "kind": "task.update",
+      "itemId": "task-96a89aa2",
+      "title": "Seeded tutorial belt rocks and basic crafting drops",
+      "author": "Producer",
+      "source": "Actual integrated desktop release validation",
+      "createdAt": "2026-10-11T00:57:29.665Z"
+    },
+    {
+      "id": "518cf658-c5af-425e-b095-a05c62999e6b",
+      "revision": 410,
+      "kind": "task.update",
+      "itemId": "task-40611e41",
+      "title": "Fractional world quads with independent pixel UI raster",
+      "author": "Producer",
+      "source": "Actual integrated desktop release validation",
+      "createdAt": "2026-10-11T00:57:29.692Z"
+    },
+    {
+      "id": "eddf8a0f-f3be-49d2-a99d-7db3de03b01c",
+      "revision": 411,
+      "kind": "task.update",
+      "itemId": "task-a6a2a3e6",
+      "title": "Seeded gas, fire, trails and parallax constellations",
+      "author": "Producer",
+      "source": "Actual integrated desktop release validation",
+      "createdAt": "2026-10-11T00:57:29.742Z"
+    },
+    {
+      "id": "e3b41174-a268-4240-bc78-8f9c397c453d",
+      "revision": 412,
+      "kind": "task.update",
+      "itemId": "task-970f203c",
+      "title": "Live Escape telemetry, pixel action icons and saved Quit",
+      "author": "Producer",
+      "source": "Actual integrated desktop release validation",
+      "createdAt": "2026-10-11T00:57:29.773Z"
+    },
+    {
+      "id": "ef81d78a-af03-4a3b-8ac0-c450d8206326",
+      "revision": 413,
+      "kind": "review",
+      "itemId": "review-ca62e1db",
+      "title": "Observed upgrade, toolbar and map clipping review",
+      "author": "Producer",
+      "source": "Actual integrated desktop release validation",
+      "createdAt": "2026-10-11T00:57:29.792Z"
+    },
+    {
+      "id": "f2e9f412-5f22-44c6-9263-c32859b79dbf",
+      "revision": 414,
+      "kind": "build",
+      "itemId": "build-11515ef7",
+      "title": "Integrated desktop navigation and asteroid shields",
+      "author": "Producer",
+      "source": "Actual integrated desktop release validation",
+      "createdAt": "2026-10-11T00:57:29.820Z"
+    },
+    {
+      "id": "7ff3af6b-7d56-477f-a6b2-8d536e1317d8",
+      "revision": 415,
+      "kind": "task.create",
+      "itemId": "task-e52fb3b4",
+      "title": "Restrained native pixel HUD and attached ship bars",
+      "author": "Producer",
+      "source": "Actual HUD and adaptive audio assignment discussion",
+      "createdAt": "2026-10-11T01:12:52.505Z"
+    },
+    {
+      "id": "e7cfc295-d509-49f9-ba1b-1c566450035b",
+      "revision": 416,
+      "kind": "task.create",
+      "itemId": "task-0702e217",
+      "title": "Adaptive authored space score and ship effects",
+      "author": "Producer",
+      "source": "Actual HUD and adaptive audio assignment discussion",
+      "createdAt": "2026-10-11T01:12:52.527Z"
+    },
+    {
+      "id": "56509bcc-c0b0-482a-a5b6-c50ff777ebc6",
+      "revision": 417,
+      "kind": "task.create",
+      "itemId": "task-4aed8f22",
+      "title": "Consistent retro pixel visual language",
+      "author": "Producer",
+      "source": "Actual HUD and adaptive audio assignment discussion",
+      "createdAt": "2026-10-11T01:12:52.555Z"
+    },
+    {
+      "id": "0671de07-af9b-4972-8cb6-ca89faf153d2",
+      "revision": 418,
+      "kind": "decision",
+      "itemId": "decision-cb3c8553",
+      "title": "Minimal native HUD and real adaptive audio",
+      "author": "Producer",
+      "source": "Actual HUD and adaptive audio assignment discussion",
+      "createdAt": "2026-10-11T01:12:52.588Z"
+    },
+    {
+      "id": "7d6dfde5-da66-430f-bc46-98defb8cdb03",
+      "revision": 419,
+      "kind": "run",
+      "itemId": "run-2169b75e",
+      "title": "Engine specialist · running",
+      "author": "Producer",
+      "source": "Actual HUD and adaptive audio assignment discussion",
+      "createdAt": "2026-10-11T01:12:52.600Z"
+    },
+    {
+      "id": "a70db4b0-1fec-4df4-acc5-6f8c9c2291fe",
+      "revision": 420,
+      "kind": "run",
+      "itemId": "run-0cd0ea38",
+      "title": "Gameplay / Audio specialist · running",
+      "author": "Producer",
+      "source": "Actual HUD and adaptive audio assignment discussion",
+      "createdAt": "2026-10-11T01:12:52.629Z"
+    },
+    {
+      "id": "9f8b0622-3120-4455-be9e-88f7462e3a05",
+      "revision": 421,
+      "kind": "run",
+      "itemId": "run-0eada3df",
+      "title": "Production specialist · running",
+      "author": "Producer",
+      "source": "Actual HUD and adaptive audio assignment discussion",
+      "createdAt": "2026-10-11T01:12:52.646Z"
+    },
+    {
+      "id": "077d4d88-bd1f-450b-b969-02d4eee09f3c",
+      "revision": 422,
+      "kind": "run",
+      "itemId": "run-ab32944a",
+      "title": "Producer · running",
+      "author": "Producer",
+      "source": "Actual HUD and adaptive audio assignment discussion",
+      "createdAt": "2026-10-11T01:12:52.681Z"
+    },
+    {
+      "id": "03996248-64be-4790-8c11-35fdb3601ff9",
+      "revision": 423,
+      "kind": "task.update",
+      "itemId": "task-e52fb3b4",
+      "title": "Restrained native pixel HUD and attached ship bars",
+      "author": "Producer",
+      "source": "Actual specialist source handoffs and integration inspection",
+      "createdAt": "2026-10-11T01:29:54.134Z"
+    },
+    {
+      "id": "2ff67adb-f79e-4a3d-ad05-a4bba785f353",
+      "revision": 424,
+      "kind": "task.update",
+      "itemId": "task-4aed8f22",
+      "title": "Consistent retro pixel visual language",
+      "author": "Producer",
+      "source": "Actual specialist source handoffs and integration inspection",
+      "createdAt": "2026-10-11T01:29:54.179Z"
+    },
+    {
+      "id": "e9fb59e0-c929-4e99-b471-79567eb61389",
+      "revision": 425,
+      "kind": "review",
+      "itemId": "review-90a5ed36",
+      "title": "Actual native HUD and semantic hit integration review",
+      "author": "Producer",
+      "source": "Actual specialist source handoffs and integration inspection",
+      "createdAt": "2026-10-11T01:29:54.210Z"
+    },
+    {
+      "id": "781d4ee1-e1ea-49a5-8ab4-103880acbc27",
+      "revision": 426,
+      "kind": "run",
+      "itemId": "run-89769579",
+      "title": "Engine specialist · completed",
+      "author": "Producer",
+      "source": "Actual specialist source handoffs and integration inspection",
+      "createdAt": "2026-10-11T01:29:54.223Z"
+    },
+    {
+      "id": "ce1f6b73-b1b7-4d07-b533-1d8b70b71bf7",
+      "revision": 427,
+      "kind": "run",
+      "itemId": "run-e2b64cc7",
+      "title": "Production specialist · completed",
+      "author": "Producer",
+      "source": "Actual specialist source handoffs and integration inspection",
+      "createdAt": "2026-10-11T01:29:54.253Z"
+    },
+    {
+      "id": "4db64f51-d8ff-4f22-8b96-5789826a8046",
+      "revision": 428,
+      "kind": "task.update",
+      "itemId": "task-0702e217",
+      "title": "Adaptive authored space score and ship effects",
+      "author": "Producer",
+      "source": "Actual audio source handoff and integrated checks",
+      "createdAt": "2026-10-11T01:36:47.107Z"
+    },
+    {
+      "id": "caa20e0e-a5c5-4ba1-820c-44a874be71c6",
+      "revision": 429,
+      "kind": "review",
+      "itemId": "review-a9d8f858",
+      "title": "Authoritative adaptive score and lifecycle integration",
+      "author": "Producer",
+      "source": "Actual audio source handoff and integrated checks",
+      "createdAt": "2026-10-11T01:36:47.126Z"
+    },
+    {
+      "id": "f8b36cad-cef6-48fb-883c-c3951fc8994b",
+      "revision": 430,
+      "kind": "run",
+      "itemId": "run-e3950db1",
+      "title": "Gameplay / Audio specialist · completed",
+      "author": "Producer",
+      "source": "Actual audio source handoff and integrated checks",
+      "createdAt": "2026-10-11T01:36:47.140Z"
+    },
+    {
+      "id": "9babd5c8-32ea-44b5-9d98-d373a2adba33",
+      "revision": 431,
+      "kind": "run",
+      "itemId": "run-e5135cae",
+      "title": "Engine specialist · running",
+      "author": "Producer",
+      "source": "Actual audio source handoff and integrated checks",
+      "createdAt": "2026-10-11T01:36:47.158Z"
+    },
+    {
+      "id": "eed96dfd-5159-4b8a-92ff-fc7f24e2772e",
+      "revision": 432,
+      "kind": "task.update",
+      "itemId": "task-e52fb3b4",
+      "title": "Restrained native pixel HUD and attached ship bars",
+      "author": "Producer",
+      "source": "Actual normal dual-backend captures, specialist reviews and executed final checks",
+      "createdAt": "2026-10-11T02:00:00.859Z"
+    },
+    {
+      "id": "6cca0ab9-26c4-478d-8f19-6b8995dabdd6",
+      "revision": 433,
+      "kind": "task.update",
+      "itemId": "task-0702e217",
+      "title": "Adaptive authored space score and ship effects",
+      "author": "Producer",
+      "source": "Actual normal dual-backend captures, specialist reviews and executed final checks",
+      "createdAt": "2026-10-11T02:00:00.932Z"
+    },
+    {
+      "id": "fc747dae-0ffd-45d4-9c88-4a35f471d1aa",
+      "revision": 434,
+      "kind": "task.update",
+      "itemId": "task-4aed8f22",
+      "title": "Consistent retro pixel visual language",
+      "author": "Producer",
+      "source": "Actual normal dual-backend captures, specialist reviews and executed final checks",
+      "createdAt": "2026-10-11T02:00:00.980Z"
+    },
+    {
+      "id": "3ac3a56f-ae6c-444e-9a1d-85571d3f4c3b",
+      "revision": 435,
+      "kind": "review",
+      "itemId": "review-aceacc82",
+      "title": "Actual final desktop presentation and adaptive-state review",
+      "author": "Producer",
+      "source": "Actual normal dual-backend captures, specialist reviews and executed final checks",
+      "createdAt": "2026-10-11T02:00:01.017Z"
+    },
+    {
+      "id": "9aa983c8-d579-47c1-bf9e-a3dc35f4f346",
+      "revision": 436,
+      "kind": "run",
+      "itemId": "run-b8b516aa",
+      "title": "Production specialist · completed",
+      "author": "Producer",
+      "source": "Actual normal dual-backend captures, specialist reviews and executed final checks",
+      "createdAt": "2026-10-11T02:00:01.045Z"
+    },
+    {
+      "id": "88088cb3-c2e2-402d-8132-6c60f9aeb76e",
+      "revision": 437,
+      "kind": "run",
+      "itemId": "run-f90f94b8",
+      "title": "Producer · running",
+      "author": "Producer",
+      "source": "Actual normal dual-backend captures, specialist reviews and executed final checks",
+      "createdAt": "2026-10-11T02:00:01.059Z"
+    },
+    {
+      "id": "785b4d0e-7d70-4fee-9df2-4201bf11754d",
+      "revision": 438,
+      "kind": "task.create",
+      "itemId": "task-f341486f",
+      "title": "Adaptive score listening and rendered audio review",
+      "author": "Producer",
+      "source": "Actual normal dual-backend captures, specialist reviews and executed final checks",
+      "createdAt": "2026-10-11T02:00:01.121Z"
+    },
+    {
+      "id": "beee7e20-474d-457e-aea8-16ff026da6d0",
+      "revision": 439,
+      "kind": "run",
+      "itemId": "run-54d97f2e",
+      "title": "Spark input audit · interrupted",
+      "author": "Producer",
+      "source": "Verified owned local-worker completion/interruption observations",
+      "createdAt": "2026-10-11T02:02:49.880Z"
+    },
+    {
+      "id": "699ea54e-30b1-4961-966a-a35d582195b4",
+      "revision": 440,
+      "kind": "run",
+      "itemId": "run-1a7047b8",
+      "title": "Spark storage audit · completed",
+      "author": "Producer",
+      "source": "Verified owned local-worker completion/interruption observations",
+      "createdAt": "2026-10-11T02:02:49.904Z"
     }
   ],
   "runRecords": [
@@ -12221,6 +13850,763 @@
       "author": "Producer",
       "source": "Actual source, test logs, specialist handoffs and browser observations",
       "createdAt": "2026-10-10T23:21:35.506Z"
+    },
+    {
+      "id": "run-b1f902ca",
+      "title": "Producer / integration · running",
+      "agentId": "root",
+      "agentLabel": "Producer / integration",
+      "state": "running",
+      "observedAt": "2026-10-10T23:53:28.675Z",
+      "taskIds": [
+        "task-8d55901c",
+        "task-2138420d",
+        "task-96a89aa2",
+        "task-40611e41",
+        "task-a6a2a3e6"
+      ],
+      "summary": "Actual normal crafting fixture imported through IAB; real craft, replace, empty, ship select and rank upgrade exported and verified. Source tests159 shell/331 native passed before renderer changes; final release gates active.",
+      "evidence": [
+        {
+          "label": "Actual assignment record",
+          "kind": "note",
+          "path": "work/record-particle-development.mjs"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual latest user request and specialist assignment",
+      "createdAt": "2026-10-10T23:53:28.685Z"
+    },
+    {
+      "id": "run-c3e7d616",
+      "title": "Engine specialist · running",
+      "agentId": "engine_research",
+      "agentLabel": "Engine specialist",
+      "state": "running",
+      "observedAt": "2026-10-10T23:53:28.690Z",
+      "taskIds": [
+        "task-40611e41",
+        "task-2138420d"
+      ],
+      "summary": "Actual read-only progression review found future-version SaveStore guard gap; Producer repaired it and tested save/import rejection. Now implementing world/UI split and soft particle material.",
+      "evidence": [
+        {
+          "label": "Actual assignment record",
+          "kind": "note",
+          "path": "work/record-particle-development.mjs"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual latest user request and specialist assignment",
+      "createdAt": "2026-10-10T23:53:28.700Z"
+    },
+    {
+      "id": "run-efa3e933",
+      "title": "Gameplay specialist · running",
+      "agentId": "gameplay_design",
+      "agentLabel": "Gameplay specialist",
+      "state": "running",
+      "observedAt": "2026-10-10T23:53:28.706Z",
+      "taskIds": [
+        "task-a6a2a3e6",
+        "task-8d55901c",
+        "task-96a89aa2"
+      ],
+      "summary": "181 core tests/source freeze completed for progression, including actual positive-hull empty-body projectile death. Now owns bounded cosmic and live particle effect work without economy changes.",
+      "evidence": [
+        {
+          "label": "Actual assignment record",
+          "kind": "note",
+          "path": "work/record-particle-development.mjs"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual latest user request and specialist assignment",
+      "createdAt": "2026-10-10T23:53:28.715Z"
+    },
+    {
+      "id": "run-df549b0a",
+      "title": "Production / responsive QA · running",
+      "agentId": "production_research",
+      "agentLabel": "Production / responsive QA",
+      "state": "running",
+      "observedAt": "2026-10-10T23:53:28.721Z",
+      "taskIds": [
+        "task-2138420d"
+      ],
+      "summary": "Actual normal Chrome fresh-profile Forge layout measured; initial MANAGE controls below fold. Compact overview changes in progress; file fixture upload unavailable in Chrome extension, Producer IAB covers transactions.",
+      "evidence": [
+        {
+          "label": "Actual assignment record",
+          "kind": "note",
+          "path": "work/record-particle-development.mjs"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual latest user request and specialist assignment",
+      "createdAt": "2026-10-10T23:53:28.731Z"
+    },
+    {
+      "id": "run-f666ac7e",
+      "title": "Spark read-only storage auditor · running",
+      "agentId": "spark-storage-audit",
+      "agentLabel": "Spark read-only storage auditor",
+      "state": "running",
+      "observedAt": "2026-10-10T23:53:28.736Z",
+      "taskIds": [
+        "task-8d55901c"
+      ],
+      "summary": "Actual explicit-permission local worker running bounded storage/migration audit; no completed result yet.",
+      "evidence": [
+        {
+          "label": "Actual assignment record",
+          "kind": "note",
+          "path": "work/record-particle-development.mjs"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual latest user request and specialist assignment",
+      "createdAt": "2026-10-10T23:53:28.746Z"
+    },
+    {
+      "id": "run-f1087f3f",
+      "title": "Producer / integration · running",
+      "agentId": "root",
+      "agentLabel": "Producer / integration",
+      "state": "running",
+      "observedAt": "2026-10-11T00:16:28.300Z",
+      "taskIds": [
+        "task-970f203c"
+      ],
+      "summary": "Actual shell lifecycle split, save-before-Quit and transition tests under implementation.",
+      "evidence": [
+        {
+          "label": "Actual bounded implementation record",
+          "kind": "note",
+          "path": "work/record-live-menu.mjs"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual user steering and current source implementation",
+      "createdAt": "2026-10-11T00:16:28.315Z"
+    },
+    {
+      "id": "run-e56af00b",
+      "title": "Production / responsive UI · running",
+      "agentId": "production_research",
+      "agentLabel": "Production / responsive UI",
+      "state": "running",
+      "observedAt": "2026-10-11T00:16:28.323Z",
+      "taskIds": [
+        "task-970f203c"
+      ],
+      "summary": "Actual flight-menu.ts/CSS and title/Escape markup assignment accepted; frozen Forge remains historical.",
+      "evidence": [
+        {
+          "label": "Actual bounded implementation record",
+          "kind": "note",
+          "path": "work/record-live-menu.mjs"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual user steering and current source implementation",
+      "createdAt": "2026-10-11T00:16:28.330Z"
+    },
+    {
+      "id": "run-aa3a6949",
+      "title": "Gameplay specialist · running",
+      "agentId": "gameplay_design",
+      "agentLabel": "Gameplay specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T00:16:28.338Z",
+      "taskIds": [
+        "task-970f203c"
+      ],
+      "summary": "Actual native seven-stat HUD and course cancellation tests pass; final native validation ongoing.",
+      "evidence": [
+        {
+          "label": "Actual bounded implementation record",
+          "kind": "note",
+          "path": "work/record-live-menu.mjs"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual user steering and current source implementation",
+      "createdAt": "2026-10-11T00:16:28.346Z"
+    },
+    {
+      "id": "run-5cafbeee",
+      "title": "Engine specialist · running",
+      "agentId": "engine_research",
+      "agentLabel": "Engine specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T00:16:28.355Z",
+      "taskIds": [
+        "task-970f203c"
+      ],
+      "summary": "Historical normal6407 package source/export inspection frozen; actual five authored UI pixel icons now assigned.",
+      "evidence": [
+        {
+          "label": "Actual bounded implementation record",
+          "kind": "note",
+          "path": "work/record-live-menu.mjs"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual user steering and current source implementation",
+      "createdAt": "2026-10-11T00:16:28.361Z"
+    },
+    {
+      "id": "run-bb3ac968",
+      "title": "Producer · running",
+      "agentId": "root",
+      "agentLabel": "Producer",
+      "state": "running",
+      "observedAt": "2026-10-11T00:34:02.849Z",
+      "taskIds": [
+        "task-3b9f6350",
+        "task-73510faf",
+        "task-388e1f9b"
+      ],
+      "summary": "Actual input/shell/on-demand Rust map integration and verification underway.",
+      "evidence": [
+        {
+          "label": "Actual milestone assignments",
+          "kind": "note",
+          "path": "work/record-navigation-milestone.mjs"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual desktop navigation / articulation assignments",
+      "createdAt": "2026-10-11T00:34:02.860Z"
+    },
+    {
+      "id": "run-47987f36",
+      "title": "Gameplay specialist · running",
+      "agentId": "gameplay_design",
+      "agentLabel": "Gameplay specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T00:34:02.866Z",
+      "taskIds": [
+        "task-0b1b0efa",
+        "task-3b9f6350",
+        "task-73510faf"
+      ],
+      "summary": "Actual articulated occupied joints, native held-thrust controls and immutable remote belt resource generation assigned.",
+      "evidence": [
+        {
+          "label": "Actual milestone assignments",
+          "kind": "note",
+          "path": "work/record-navigation-milestone.mjs"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual desktop navigation / articulation assignments",
+      "createdAt": "2026-10-11T00:34:02.873Z"
+    },
+    {
+      "id": "run-d5ec4b86",
+      "title": "Production specialist · running",
+      "agentId": "production_research",
+      "agentLabel": "Production specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T00:34:02.880Z",
+      "taskIds": [
+        "task-73510faf",
+        "task-388e1f9b"
+      ],
+      "summary": "Actual responsive 3-icon toolbar, discovered map view and preserved old-worker browser upgrade profile assigned.",
+      "evidence": [
+        {
+          "label": "Actual milestone assignments",
+          "kind": "note",
+          "path": "work/record-navigation-milestone.mjs"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual desktop navigation / articulation assignments",
+      "createdAt": "2026-10-11T00:34:02.889Z"
+    },
+    {
+      "id": "run-77e5755f",
+      "title": "Engine specialist · running",
+      "agentId": "engine_research",
+      "agentLabel": "Engine specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T00:34:02.895Z",
+      "taskIds": [
+        "task-73510faf",
+        "task-388e1f9b"
+      ],
+      "summary": "PWA source/tests handed off; actual pixel map glyph/ring/marker primitives now assigned.",
+      "evidence": [
+        {
+          "label": "Actual milestone assignments",
+          "kind": "note",
+          "path": "work/record-navigation-milestone.mjs"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual desktop navigation / articulation assignments",
+      "createdAt": "2026-10-11T00:34:02.905Z"
+    },
+    {
+      "id": "run-08eed431",
+      "title": "Producer · running",
+      "agentId": "root",
+      "agentLabel": "Producer",
+      "state": "running",
+      "observedAt": "2026-10-11T00:37:30.823Z",
+      "taskIds": [
+        "task-3b9f6350",
+        "task-73510faf",
+        "task-388e1f9b",
+        "task-5d42b89b"
+      ],
+      "summary": "Actual input/shell/on-demand Rust map integration underway; newly requested physical asteroid shield collisions assigned.",
+      "evidence": [
+        {
+          "label": "Actual milestone assignments",
+          "kind": "note",
+          "path": "work/record-navigation-milestone.mjs"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual desktop navigation / articulation assignments",
+      "createdAt": "2026-10-11T00:37:30.841Z"
+    },
+    {
+      "id": "run-45bfee4e",
+      "title": "Gameplay specialist · running",
+      "agentId": "gameplay_design",
+      "agentLabel": "Gameplay specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T00:37:30.850Z",
+      "taskIds": [
+        "task-0b1b0efa",
+        "task-3b9f6350",
+        "task-73510faf",
+        "task-5d42b89b"
+      ],
+      "summary": "Actual articulated occupied joints, native held-thrust controls and immutable remote belt resources underway; latest orbital/shield physics now assigned.",
+      "evidence": [
+        {
+          "label": "Actual milestone assignments",
+          "kind": "note",
+          "path": "work/record-navigation-milestone.mjs"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual desktop navigation / articulation assignments",
+      "createdAt": "2026-10-11T00:37:30.856Z"
+    },
+    {
+      "id": "run-18fb5db9",
+      "title": "Production specialist · running",
+      "agentId": "production_research",
+      "agentLabel": "Production specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T00:37:30.865Z",
+      "taskIds": [
+        "task-73510faf",
+        "task-388e1f9b"
+      ],
+      "summary": "Actual responsive 3-icon toolbar, discovered map view and preserved old-worker browser upgrade profile underway.",
+      "evidence": [
+        {
+          "label": "Actual milestone assignments",
+          "kind": "note",
+          "path": "work/record-navigation-milestone.mjs"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual desktop navigation / articulation assignments",
+      "createdAt": "2026-10-11T00:37:30.878Z"
+    },
+    {
+      "id": "run-a9e05362",
+      "title": "Engine specialist · running",
+      "agentId": "engine_research",
+      "agentLabel": "Engine specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T00:37:30.888Z",
+      "taskIds": [
+        "task-73510faf",
+        "task-388e1f9b"
+      ],
+      "summary": "PWA guard handed off; actual pixel map glyph/ring/marker primitives underway.",
+      "evidence": [
+        {
+          "label": "Actual milestone assignments",
+          "kind": "note",
+          "path": "work/record-navigation-milestone.mjs"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual desktop navigation / articulation assignments",
+      "createdAt": "2026-10-11T00:37:30.906Z"
+    },
+    {
+      "id": "run-66b0e8b7",
+      "title": "Spark / bounded storage audit · completed",
+      "agentId": "spark_storage_audit",
+      "agentLabel": "Spark / bounded storage audit",
+      "state": "completed",
+      "observedAt": "2026-10-11T00:45:43.537Z",
+      "taskIds": [
+        "task-8d55901c",
+        "task-2138420d"
+      ],
+      "summary": "Installed explicit-permission worker exited successfully; root read the full report. Moving-source audit and 22 worker-executed focused checks are historical scope, not final all-source approval. Root current storage suite separately passed30 cases.",
+      "evidence": [
+        {
+          "label": "Actual worker report",
+          "kind": "note",
+          "path": "work/ship-storage-audit/storage-migration-audit.md"
+        },
+        {
+          "label": "Current producer storage checks",
+          "kind": "note",
+          "path": "work/storage-final-current.log"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual local worker execution and root inspection",
+      "createdAt": "2026-10-11T00:45:43.561Z"
+    },
+    {
+      "id": "run-246c9cff",
+      "title": "Spark / bounded desktop input audit · running",
+      "agentId": "spark_input_audit",
+      "agentLabel": "Spark / bounded desktop input audit",
+      "state": "running",
+      "observedAt": "2026-10-11T00:45:43.592Z",
+      "taskIds": [
+        "task-3b9f6350",
+        "task-73510faf"
+      ],
+      "summary": "Actual installed worker launched with UTF-8 task file, cwd and danger-full-access/never. Read-only desktop pointer/menu integration review; source can change during audit. No production edits, recursive wrapper or browser authority.",
+      "evidence": [
+        {
+          "label": "Exact bounded audit task",
+          "kind": "note",
+          "path": "work/navigation-input-audit/task.txt"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual local worker execution and root inspection",
+      "createdAt": "2026-10-11T00:45:43.614Z"
+    },
+    {
+      "id": "run-2169b75e",
+      "title": "Engine specialist · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Engine specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T01:12:52.597Z",
+      "taskIds": [
+        "task-e52fb3b4"
+      ],
+      "summary": "Actual assignment accepted for FlightStatusLayout, native status/warnings, projected bars and narrow browser/boss reservations. No public/dist mutations.",
+      "evidence": [
+        {
+          "label": "Actual assigned work and accepted contracts",
+          "kind": "note",
+          "details": "Actual assignment accepted for FlightStatusLayout, native status/warnings, projected bars and narrow browser/boss reservations. No public/dist mutations."
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual HUD and adaptive audio assignment discussion",
+      "createdAt": "2026-10-11T01:12:52.600Z"
+    },
+    {
+      "id": "run-0cd0ea38",
+      "title": "Gameplay / Audio specialist · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Gameplay / Audio specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T01:12:52.613Z",
+      "taskIds": [
+        "task-0702e217"
+      ],
+      "summary": "Actual AudioHud contract agreed; owns audio source/state tests and narrow authoritative HUD/events additions. Producer integrates main shell.",
+      "evidence": [
+        {
+          "label": "Actual assigned work and accepted contracts",
+          "kind": "note",
+          "details": "Actual AudioHud contract agreed; owns audio source/state tests and narrow authoritative HUD/events additions. Producer integrates main shell."
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual HUD and adaptive audio assignment discussion",
+      "createdAt": "2026-10-11T01:12:52.629Z"
+    },
+    {
+      "id": "run-0eada3df",
+      "title": "Production specialist · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "Production specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T01:12:52.640Z",
+      "taskIds": [
+        "task-4aed8f22",
+        "task-e52fb3b4"
+      ],
+      "summary": "Historical responsive810 review completed and owned Chrome tab closed. New actual assignment is restrained DOM/CSS and documented art consistency with shared Engine geometry.",
+      "evidence": [
+        {
+          "label": "Actual assigned work and accepted contracts",
+          "kind": "note",
+          "details": "Historical responsive810 review completed and owned Chrome tab closed. New actual assignment is restrained DOM/CSS and documented art consistency with shared Engine geometry."
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual HUD and adaptive audio assignment discussion",
+      "createdAt": "2026-10-11T01:12:52.646Z"
+    },
+    {
+      "id": "run-ab32944a",
+      "title": "Producer · running",
+      "agentId": "/root",
+      "agentLabel": "Producer",
+      "state": "running",
+      "observedAt": "2026-10-11T01:12:52.663Z",
+      "taskIds": [
+        "task-e52fb3b4",
+        "task-0702e217",
+        "task-4aed8f22"
+      ],
+      "summary": "Integrating save footer, real frame audio, evidence, actual browser verification and eventual exact private deployment. Currentdist810 remains historical while specialists edit source.",
+      "evidence": [
+        {
+          "label": "Actual assigned work and accepted contracts",
+          "kind": "note",
+          "details": "Integrating save footer, real frame audio, evidence, actual browser verification and eventual exact private deployment. Currentdist810 remains historical while specialists edit source."
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual HUD and adaptive audio assignment discussion",
+      "createdAt": "2026-10-11T01:12:52.681Z"
+    },
+    {
+      "id": "run-89769579",
+      "title": "Engine specialist · completed",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Engine specialist",
+      "state": "completed",
+      "observedAt": "2026-10-11T01:29:54.219Z",
+      "taskIds": [
+        "task-e52fb3b4"
+      ],
+      "summary": "Completed assigned native HUD source stage; new independent finalpackage audit is separately active.",
+      "evidence": [
+        {
+          "label": "Actual source freeze",
+          "kind": "note",
+          "path": "work/native-flight-hud-handoff/HANDOFF.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual specialist source handoffs and integration inspection",
+      "createdAt": "2026-10-11T01:29:54.223Z"
+    },
+    {
+      "id": "run-e2b64cc7",
+      "title": "Production specialist · completed",
+      "agentId": "/root/production_research",
+      "agentLabel": "Production specialist",
+      "state": "completed",
+      "observedAt": "2026-10-11T01:29:54.243Z",
+      "taskIds": [
+        "task-4aed8f22",
+        "task-e52fb3b4"
+      ],
+      "summary": "Completed source/layout/parser stage and independent integration review. Final normal Chrome browser stage awaits build.",
+      "evidence": [
+        {
+          "label": "Actual source integration review",
+          "kind": "note",
+          "path": "work/hud-status-integration-review.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual specialist source handoffs and integration inspection",
+      "createdAt": "2026-10-11T01:29:54.253Z"
+    },
+    {
+      "id": "run-e3950db1",
+      "title": "Gameplay / Audio specialist · completed",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Gameplay / Audio specialist",
+      "state": "completed",
+      "observedAt": "2026-10-11T01:36:47.134Z",
+      "taskIds": [
+        "task-0702e217"
+      ],
+      "summary": "Actual seven-file source freeze completed;223core/23audio checks and strictnative/WASMcoreClippy/TS pass. No renderer build, browser listening, or publication claim.",
+      "evidence": [
+        {
+          "label": "Actual frozen adaptive audio source and caller contract",
+          "kind": "note",
+          "path": "work/adaptive-audio-handoff/HANDOFF.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual audio source handoff and integrated checks",
+      "createdAt": "2026-10-11T01:36:47.140Z"
+    },
+    {
+      "id": "run-e5135cae",
+      "title": "Engine specialist · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Engine specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T01:36:47.148Z",
+      "taskIds": [
+        "task-e52fb3b4",
+        "task-0702e217",
+        "task-4aed8f22"
+      ],
+      "summary": "Actual final read-only source/dist audit received cache galaxy-a9c3cb3540f78b9b, including new fresh-audio-before-resume caller change. Exact committed/archive stage follows packaging.",
+      "evidence": [
+        {
+          "label": "Actual normal dual-renderer build",
+          "kind": "note",
+          "path": "work/adaptive-final-build.log"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual audio source handoff and integrated checks",
+      "createdAt": "2026-10-11T01:36:47.158Z"
+    },
+    {
+      "id": "run-b8b516aa",
+      "title": "Production specialist · completed",
+      "agentId": "/root/production_research",
+      "agentLabel": "Production specialist",
+      "state": "completed",
+      "observedAt": "2026-10-11T02:00:01.024Z",
+      "taskIds": [
+        "task-e52fb3b4",
+        "task-0702e217",
+        "task-4aed8f22"
+      ],
+      "summary": "Finished actual retained Chrome normal Apply, responsive/menu reviews, corrected prolonged real-GL-loss regression, and final bounded label/footer review. Owned tabs closed, viewport reset, profile preserved. No DSP/hearing/phone claims.",
+      "evidence": [
+        {
+          "label": "Final retained-profile WebGL2 Apply and narrow layouts",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/final-webgl-labels-REVIEW.md"
+        },
+        {
+          "label": "Actual corrected prolonged WebGL loss and preserved menu",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/c707-recovery-REVIEW.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual normal dual-backend captures, specialist reviews and executed final checks",
+      "createdAt": "2026-10-11T02:00:01.045Z"
+    },
+    {
+      "id": "run-f90f94b8",
+      "title": "Producer · running",
+      "agentId": "/root",
+      "agentLabel": "Producer",
+      "state": "running",
+      "observedAt": "2026-10-11T02:00:01.055Z",
+      "taskIds": [
+        "task-e52fb3b4",
+        "task-0702e217",
+        "task-4aed8f22"
+      ],
+      "summary": "Final normal desktop checks and source integration complete. Committed-source/package audit and existing owner-private publication are the remaining release operations.",
+      "evidence": [
+        {
+          "label": "Final actual WebGPU facility placement and menu",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/final-webgpu-label-review.md"
+        },
+        {
+          "label": "Final retained-profile WebGL2 Apply and narrow layouts",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/final-webgl-labels-REVIEW.md"
+        },
+        {
+          "label": "Actual earlier audio transitions with explicit scoped limits",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/webgpu-review.md"
+        },
+        {
+          "label": "Actual corrected prolonged WebGL loss and preserved menu",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/c707-recovery-REVIEW.md"
+        },
+        {
+          "label": "406 final native tests",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/final-native-tests.log"
+        },
+        {
+          "label": "239 final shell passes and explicit Windows capability skip",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/final-shell-tests.log"
+        },
+        {
+          "label": "18 actual dual-WASM serializer/SaveStore cases",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/final-wasm-contract.log"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual normal dual-backend captures, specialist reviews and executed final checks",
+      "createdAt": "2026-10-11T02:00:01.059Z"
+    },
+    {
+      "id": "run-54d97f2e",
+      "title": "Spark input audit · interrupted",
+      "agentId": "spark_input_audit",
+      "agentLabel": "Spark input audit",
+      "state": "interrupted",
+      "observedAt": "2026-10-11T02:02:49.857Z",
+      "taskIds": [
+        "task-3b9f6350",
+        "task-73510faf"
+      ],
+      "summary": "Stopped verified owned read-only worker tree after prolonged inference. Streamed47 focused passes and partial moving-source inspection; no final returned findings or source approval. No production edits and no unrelated service stopped. Final independent review/checks stand separately.",
+      "evidence": [
+        {
+          "label": "Actual interruption and partial scope",
+          "kind": "note",
+          "path": "artifacts/navigation-desktop-20261011/local-input-audit-interrupted.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Verified owned local-worker completion/interruption observations",
+      "createdAt": "2026-10-11T02:02:49.880Z"
+    },
+    {
+      "id": "run-1a7047b8",
+      "title": "Spark storage audit · completed",
+      "agentId": "spark-storage-audit",
+      "agentLabel": "Spark storage audit",
+      "state": "completed",
+      "observedAt": "2026-10-11T02:02:49.890Z",
+      "taskIds": [
+        "task-8d55901c",
+        "task-2138420d"
+      ],
+      "summary": "Corrects the initial hyphenated run identity with the already observed completed worker result. Its moving-source audit/22focused passes and root current30 storage checks remain separately scoped. No newly rerun worker or final-all-source approval is claimed.",
+      "evidence": [
+        {
+          "label": "Actual retained completed storage audit",
+          "kind": "note",
+          "path": "artifacts/navigation-desktop-20261011/spark-storage-audit.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Verified owned local-worker completion/interruption observations",
+      "createdAt": "2026-10-11T02:02:49.904Z"
     }
   ]
 }

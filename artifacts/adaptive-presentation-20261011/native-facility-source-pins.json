@@ -1,0 +1,14 @@
+[
+  {
+    "path": "crates/game_web/src/ui_scene.rs",
+    "sha256": "05ef59fad5c9326743839f1a22cd410e5e8192bff6c225cefafc8dda7923a2a6",
+    "git_lf_sha256": "05ef59fad5c9326743839f1a22cd410e5e8192bff6c225cefafc8dda7923a2a6",
+    "bytes": 78928
+  },
+  {
+    "path": "crates/game_web/src/ui_facility_label_tests.rs",
+    "sha256": "f7859d97e44b3f305d34e5a60c569544b86fd936e6ae57f676527473c6b96bbc",
+    "git_lf_sha256": "f7859d97e44b3f305d34e5a60c569544b86fd936e6ae57f676527473c6b96bbc",
+    "bytes": 3880
+  }
+]

@@ -1,0 +1,130 @@
+{
+  "scope": "Exact label release delta/source/literal/declaration checks against frozen c707; no actual GPU/browser/DSP/device acceptance",
+  "prior_cache": "galaxy-c7071f87acd6932e",
+  "cache": "galaxy-cc8da99d023ae67a",
+  "added_source_inputs": [
+    "apps/game/public/wasm/webgl2-46109afebf38148945721d7340e90ecc55a0645e5d13d59e966b770877a157f0/galaxy.d.ts",
+    "apps/game/public/wasm/webgl2-46109afebf38148945721d7340e90ecc55a0645e5d13d59e966b770877a157f0/galaxy.js",
+    "apps/game/public/wasm/webgl2-46109afebf38148945721d7340e90ecc55a0645e5d13d59e966b770877a157f0/galaxy_bg.wasm",
+    "apps/game/public/wasm/webgl2-46109afebf38148945721d7340e90ecc55a0645e5d13d59e966b770877a157f0/galaxy_bg.wasm.d.ts",
+    "apps/game/public/wasm/webgpu-3c47eae459be4db04e65eda321a1b3cfebbb20dcaa44002291852222254e2c5a/galaxy.d.ts",
+    "apps/game/public/wasm/webgpu-3c47eae459be4db04e65eda321a1b3cfebbb20dcaa44002291852222254e2c5a/galaxy.js",
+    "apps/game/public/wasm/webgpu-3c47eae459be4db04e65eda321a1b3cfebbb20dcaa44002291852222254e2c5a/galaxy_bg.wasm",
+    "apps/game/public/wasm/webgpu-3c47eae459be4db04e65eda321a1b3cfebbb20dcaa44002291852222254e2c5a/galaxy_bg.wasm.d.ts",
+    "crates/game_web/src/ui_facility_label_tests.rs",
+    "scripts/test/facility-layout.test.mjs"
+  ],
+  "removed_source_inputs": [
+    "apps/game/public/wasm/webgl2-42d9d5261cbd1e64442f8427726ed9425957e6e7c8302e0473c6c2423d46ff57/galaxy.d.ts",
+    "apps/game/public/wasm/webgl2-42d9d5261cbd1e64442f8427726ed9425957e6e7c8302e0473c6c2423d46ff57/galaxy.js",
+    "apps/game/public/wasm/webgl2-42d9d5261cbd1e64442f8427726ed9425957e6e7c8302e0473c6c2423d46ff57/galaxy_bg.wasm",
+    "apps/game/public/wasm/webgl2-42d9d5261cbd1e64442f8427726ed9425957e6e7c8302e0473c6c2423d46ff57/galaxy_bg.wasm.d.ts",
+    "apps/game/public/wasm/webgpu-c53c7a22610eca47001f4b8a6f299f4c6aad7b1f370952385172d7b3e0fd41c4/galaxy.d.ts",
+    "apps/game/public/wasm/webgpu-c53c7a22610eca47001f4b8a6f299f4c6aad7b1f370952385172d7b3e0fd41c4/galaxy.js",
+    "apps/game/public/wasm/webgpu-c53c7a22610eca47001f4b8a6f299f4c6aad7b1f370952385172d7b3e0fd41c4/galaxy_bg.wasm",
+    "apps/game/public/wasm/webgpu-c53c7a22610eca47001f4b8a6f299f4c6aad7b1f370952385172d7b3e0fd41c4/galaxy_bg.wasm.d.ts"
+  ],
+  "changed_source_inputs": [
+    "apps/game/public/wasm/builds.json",
+    "apps/game/src/main.ts",
+    "apps/game/src/pixel-ui.ts",
+    "apps/game/src/style.css",
+    "crates/game_web/src/ui_scene.rs",
+    "scripts/test/flight-status-pixel.test.mjs"
+  ],
+  "unchanged_source_inputs": 135,
+  "embedded_assets": [
+    {
+      "backend": "webgpu",
+      "path": "assets/pixels/atlas.json",
+      "exact_literal_bytes_present": true
+    },
+    {
+      "backend": "webgpu",
+      "path": "assets/pixels/boss-atlas.json",
+      "exact_literal_bytes_present": true
+    },
+    {
+      "backend": "webgpu",
+      "path": "assets/pixels/isotope-scar-atlas.json",
+      "exact_literal_bytes_present": true
+    },
+    {
+      "backend": "webgpu",
+      "path": "assets/pixels/mote-atlas.json",
+      "exact_literal_bytes_present": true
+    },
+    {
+      "backend": "webgpu",
+      "path": "assets/pixels/riveter-atlas.json",
+      "exact_literal_bytes_present": true
+    },
+    {
+      "backend": "webgpu",
+      "path": "assets/ui/atlas.json",
+      "exact_literal_bytes_present": true
+    },
+    {
+      "backend": "webgpu",
+      "path": "assets/ui/campaign-atlas.json",
+      "exact_literal_bytes_present": true
+    },
+    {
+      "backend": "webgpu",
+      "path": "assets/ui/champion-patches-atlas.json",
+      "exact_literal_bytes_present": true
+    },
+    {
+      "backend": "webgl2",
+      "path": "assets/pixels/atlas.json",
+      "exact_literal_bytes_present": true
+    },
+    {
+      "backend": "webgl2",
+      "path": "assets/pixels/boss-atlas.json",
+      "exact_literal_bytes_present": true
+    },
+    {
+      "backend": "webgl2",
+      "path": "assets/pixels/isotope-scar-atlas.json",
+      "exact_literal_bytes_present": true
+    },
+    {
+      "backend": "webgl2",
+      "path": "assets/pixels/mote-atlas.json",
+      "exact_literal_bytes_present": true
+    },
+    {
+      "backend": "webgl2",
+      "path": "assets/pixels/riveter-atlas.json",
+      "exact_literal_bytes_present": true
+    },
+    {
+      "backend": "webgl2",
+      "path": "assets/ui/atlas.json",
+      "exact_literal_bytes_present": true
+    },
+    {
+      "backend": "webgl2",
+      "path": "assets/ui/campaign-atlas.json",
+      "exact_literal_bytes_present": true
+    },
+    {
+      "backend": "webgl2",
+      "path": "assets/ui/champion-patches-atlas.json",
+      "exact_literal_bytes_present": true
+    }
+  ],
+  "declarations": [
+    {
+      "backend": "webgpu",
+      "paired_status_bounds": "Float32Array",
+      "qa_checkpoint_absent": true
+    },
+    {
+      "backend": "webgl2",
+      "paired_status_bounds": "Float32Array",
+      "qa_checkpoint_absent": true
+    }
+  ]
+}

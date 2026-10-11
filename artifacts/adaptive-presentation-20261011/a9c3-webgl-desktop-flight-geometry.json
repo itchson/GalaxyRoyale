@@ -1,0 +1,238 @@
+{
+  "body": {
+    "classes": "pixel-ready engine-flight",
+    "scale": "2"
+  },
+  "canvases": [
+    {
+      "height": 720,
+      "rect": {
+        "height": 720,
+        "width": 1280,
+        "x": 0,
+        "y": 0
+      },
+      "width": 1280
+    },
+    {
+      "height": 112,
+      "rect": {
+        "height": 112,
+        "width": 112,
+        "x": 23,
+        "y": 265
+      },
+      "width": 112
+    }
+  ],
+  "nodes": {
+    "dock-button": {
+      "client": 0,
+      "dataset": {
+        "pixelKind": "status-text"
+      },
+      "display": "none",
+      "hidden": true,
+      "opacity": "0",
+      "rect": {
+        "height": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "scroll": 0,
+      "text": "\n          FORGE / SHIP UPGRADES [E]\n        "
+    },
+    "flight-settings": {
+      "client": 42,
+      "dataset": {
+        "pixelIcon": "settings-icon"
+      },
+      "display": "block",
+      "hidden": false,
+      "opacity": "0",
+      "rect": {
+        "height": 44,
+        "width": 44,
+        "x": 1212,
+        "y": 24
+      },
+      "scroll": 42,
+      "text": "SET"
+    },
+    "flight-status-strip": {
+      "client": 43,
+      "dataset": {
+        "contextAvailable": "true",
+        "contextInteractive": "true"
+      },
+      "display": "block",
+      "hidden": false,
+      "opacity": "0",
+      "rect": {
+        "height": 44,
+        "width": 1256,
+        "x": 12,
+        "y": 664
+      },
+      "scroll": 43,
+      "text": ""
+    },
+    "game-ui": {
+      "client": 720,
+      "dataset": {},
+      "display": "block",
+      "hidden": false,
+      "opacity": "1",
+      "rect": {
+        "height": 720,
+        "width": 1280,
+        "x": 0,
+        "y": 0
+      },
+      "scroll": 720,
+      "text": "S\n≡\nMAP\nSET\nHAVEN EXPANSE / PROTECTED SPACE\nOffense 5 Defense 4 Passive 6\n0 m FROM HAVENSANCTUARY\nHULL INTEGRITY100 / 100\nFORGE\nHANGAR\nJOURNAL\nARENAS"
+    },
+    "joystick": {
+      "client": 0,
+      "dataset": {},
+      "display": "none",
+      "hidden": false,
+      "opacity": "1",
+      "rect": {
+        "height": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "scroll": 0,
+      "text": "\n        \n        \n      "
+    },
+    "map-button": {
+      "client": 42,
+      "dataset": {
+        "pixelIcon": "map-icon"
+      },
+      "display": "block",
+      "hidden": false,
+      "opacity": "0",
+      "rect": {
+        "height": 44,
+        "width": 44,
+        "x": 1160,
+        "y": 24
+      },
+      "scroll": 42,
+      "text": "MAP"
+    },
+    "menu-close": {
+      "client": 0,
+      "dataset": {},
+      "display": "block",
+      "hidden": false,
+      "opacity": "1",
+      "rect": {
+        "height": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "scroll": 0,
+      "text": "\n          X\n        "
+    },
+    "pause-button": {
+      "client": 42,
+      "dataset": {
+        "pixelIcon": "status-icon"
+      },
+      "display": "block",
+      "hidden": false,
+      "opacity": "0",
+      "rect": {
+        "height": 44,
+        "width": 44,
+        "x": 1108,
+        "y": 24
+      },
+      "scroll": 42,
+      "text": "≡"
+    },
+    "save-indicator": {
+      "client": 42,
+      "dataset": {
+        "pixelValue": "0"
+      },
+      "display": "block",
+      "hidden": false,
+      "opacity": "0",
+      "rect": {
+        "height": 44,
+        "width": 44,
+        "x": 1054,
+        "y": 24
+      },
+      "scroll": 42,
+      "text": "S"
+    },
+    "save-status": {
+      "client": 0,
+      "dataset": {},
+      "display": "block",
+      "hidden": false,
+      "opacity": "1",
+      "rect": {
+        "height": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "scroll": 0,
+      "text": "Saved on this device."
+    },
+    "site-button": {
+      "client": 0,
+      "dataset": {
+        "pixelKind": "status-text"
+      },
+      "display": "none",
+      "hidden": true,
+      "opacity": "0",
+      "rect": {
+        "height": 0,
+        "width": 0,
+        "x": 0,
+        "y": 0
+      },
+      "scroll": 0,
+      "text": "\n          DISCOVERY / INTERACT [E]\n        "
+    },
+    "toast": {
+      "client": 14,
+      "dataset": {
+        "pixelKind": "warning-text"
+      },
+      "display": "block",
+      "hidden": false,
+      "opacity": "0",
+      "rect": {
+        "height": 14,
+        "width": 1240,
+        "x": 20,
+        "y": 688
+      },
+      "scroll": 14,
+      "text": ""
+    }
+  },
+  "vars": {
+    "--flight-hit-y": "673px",
+    "--flight-strip-height": "44px",
+    "--flight-strip-width": "1256px",
+    "--flight-strip-x": "12px",
+    "--flight-strip-y": "664px",
+    "--flight-text-height": "14px",
+    "--flight-text-width": "1240px",
+    "--flight-text-x": "20px",
+    "--flight-text-y": "688px"
+  }
+}

@@ -1,0 +1,75 @@
+.map-controls {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: calc(4px * var(--ui-scale, 1));
+  margin-bottom: calc(5px * var(--ui-scale, 1));
+}
+.map-control {
+  min-height: var(--ui-hit);
+  padding: calc(3px * var(--ui-scale, 1));
+  font-size: var(--ui-text);
+}
+.universe-map-chart {
+  position: relative;
+  width: 100%;
+  height: clamp(140px, 36dvh, calc(210px * var(--ui-scale, 1)));
+  overflow: hidden;
+  background-color: #07111c;
+  outline: 1px solid #324d60;
+  touch-action: none;
+  cursor: grab;
+}
+.map-dragging {
+  cursor: grabbing;
+}
+.map-art {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.map-ring {
+  border: 1px solid #376873;
+  border-radius: 50%;
+}
+.map-home,
+.map-site {
+  width: var(--ui-hit);
+  height: var(--ui-hit);
+  padding: 0;
+  pointer-events: auto;
+  background: transparent;
+  border: 1px solid #376873;
+}
+.map-home:active:not(:disabled),
+.map-site:active:not(:disabled) {
+  transform: translate(-50%, -50%);
+}
+.map-home[data-active="true"],
+.map-site[data-active="true"] {
+  border-color: var(--cyan);
+}
+.map-player {
+  width: calc(12px * var(--ui-scale, 1));
+  height: calc(12px * var(--ui-scale, 1));
+  border: 1px solid var(--amber);
+}
+.menu-card .map-caption {
+  color: var(--muted);
+  margin-top: calc(4px * var(--ui-scale, 1));
+}
+.map-details h3 {
+  font-size: var(--ui-text);
+  color: var(--cyan);
+  font-weight: normal;
+  line-height: 1.3;
+  margin: 0 0 calc(3px * var(--ui-scale, 1));
+}
+.map-details > button {
+  min-height: var(--ui-hit);
+  min-width: min(100%, calc(110px * var(--ui-scale, 1)));
+  font-size: var(--ui-text);
+  padding: calc(4px * var(--ui-scale, 1));
+}
+.map-details .map-safety-note {
+  color: var(--muted);
+}

@@ -1,0 +1,103 @@
+{
+  "canvas": {
+    "h": 720,
+    "w": 1280
+  },
+  "classes": "pixel-ready engine-flight",
+  "nodes": {
+    "facility-0": {
+      "dataset": {
+        "labelPosition": "below",
+        "pixelValue": "0"
+      },
+      "display": "block",
+      "h": 93.15625,
+      "hidden": false,
+      "label": {
+        "h": 20,
+        "text": "FORGE",
+        "w": 200,
+        "x": 307.078125,
+        "y": 254.296875
+      },
+      "text": "FORGE",
+      "w": 93.15625,
+      "x": 360.5,
+      "y": 158.140625
+    },
+    "facility-1": {
+      "dataset": {
+        "labelPosition": "below",
+        "pixelValue": "0"
+      },
+      "display": "block",
+      "h": 93.15625,
+      "hidden": false,
+      "label": {
+        "h": 20,
+        "text": "HANGAR",
+        "w": 200,
+        "x": 772.90625,
+        "y": 254.296875
+      },
+      "text": "HANGAR",
+      "w": 93.15625,
+      "x": 826.328125,
+      "y": 158.140625
+    },
+    "facility-2": {
+      "dataset": {
+        "labelPosition": "below",
+        "pixelValue": "0"
+      },
+      "display": "block",
+      "h": 93.15625,
+      "hidden": false,
+      "label": {
+        "h": 20,
+        "text": "JOURNAL",
+        "w": 200,
+        "x": 307.078125,
+        "y": 593.953125
+      },
+      "text": "JOURNAL",
+      "w": 93.15625,
+      "x": 360.5,
+      "y": 497.796875
+    },
+    "facility-3": {
+      "dataset": {
+        "labelPosition": "below",
+        "pixelValue": "0"
+      },
+      "display": "block",
+      "h": 93.15625,
+      "hidden": false,
+      "label": {
+        "h": 20,
+        "text": "ARENAS",
+        "w": 200,
+        "x": 772.90625,
+        "y": 593.953125
+      },
+      "text": "ARENAS",
+      "w": 93.15625,
+      "x": 826.328125,
+      "y": 497.796875
+    },
+    "flight-status-strip": {
+      "dataset": {
+        "contextAvailable": "true",
+        "contextInteractive": "true"
+      },
+      "display": "block",
+      "h": 44,
+      "hidden": false,
+      "text": "",
+      "w": 1256,
+      "x": 12,
+      "y": 664
+    }
+  },
+  "scale": "2"
+}

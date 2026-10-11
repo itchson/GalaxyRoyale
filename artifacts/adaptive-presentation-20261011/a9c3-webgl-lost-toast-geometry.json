@@ -1,0 +1,56 @@
+{
+  "classes": "engine-flight",
+  "nodes": {
+    "flight-status-strip": {
+      "background": "rgb(7, 16, 24)",
+      "className": "",
+      "color": "rgb(216, 243, 255)",
+      "display": "block",
+      "font": "27.0227px",
+      "h": 66.046875,
+      "hidden": false,
+      "opacity": "1",
+      "position": "fixed",
+      "text": "Graphics context lost. Waiting for browser restoration.",
+      "visibility": "visible",
+      "w": 1402.171875,
+      "x": 18,
+      "y": 1107.921875,
+      "z": "auto"
+    },
+    "game-ui": {
+      "background": "rgba(0, 0, 0, 0)",
+      "className": "",
+      "color": "rgb(241, 247, 255)",
+      "display": "block",
+      "font": "27.0227px",
+      "h": 1192,
+      "hidden": false,
+      "opacity": "1",
+      "position": "fixed",
+      "text": "S\n≡\nMAP\nSET\nHAVEN EXPANSE / PROTECTED SPACE\nOffense 5 Defense 4 Passive 6\n0 m FROM HAVENSANCTUARY\nHULL INTEGRITY100 / 100\nGraphics context lost. Waiting for browser restoration.\nFORGE\nHANGAR\nJOURNAL\nARENAS\nWEBGL2 4 FPS\n5,282 PIXEL QUADS\n57 ENTITIES / 0 PARTICLES\np95 1004.1 ms\nSIM 0.60 / RENDER 0.60 ms",
+      "visibility": "visible",
+      "w": 1438,
+      "x": 0,
+      "y": 0,
+      "z": "auto"
+    },
+    "toast": {
+      "background": "rgb(7, 16, 24)",
+      "className": "",
+      "color": "rgb(208, 250, 255)",
+      "display": "block",
+      "font": "24.0202px",
+      "h": 24.015625,
+      "hidden": false,
+      "opacity": "0",
+      "position": "fixed",
+      "text": "Graphics context lost. Waiting for browser restoration.",
+      "visibility": "visible",
+      "w": 1414,
+      "x": 12,
+      "y": 1155.984375,
+      "z": "5"
+    }
+  }
+}

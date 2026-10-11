@@ -1,0 +1,45 @@
+- generic "Galaxy Royale game universe"
+- status: Graphics restored. Your expedition is intact.
+- dialog "SETTINGS":
+  - button "Close menu": X
+  - generic: HAVEN COMMAND
+  - heading "SETTINGS" [level=2]
+  - paragraph: Tune your flight. Settings stay on this device.
+  - text: Master volume
+  - slider "Master volume": "0.65"
+  - text: Music
+  - slider "Music": "0.45"
+  - text: Effects
+  - slider "Effects": "0.75"
+  - text: Camera shake
+  - checkbox "Camera shake" [checked]
+  - text: Reduced motion
+  - checkbox "Reduced motion"
+  - text: Reduced cosmic detail
+  - checkbox "Reduced cosmic detail"
+  - text: Dialogue voice
+  - checkbox "Dialogue voice"
+  - text: Voice volume
+  - slider "Voice volume": "0.7"
+  - text: Flight zoom
+  - slider "Flight zoom": "0.95"
+  - button "Fullscreen"
+  - button "SAVE & BACKUP":
+    - generic: S
+    - text: SAVE & BACKUP
+  - button "Return to title": TITLE
+  - status "Progress saved automatically on this device.": Saved on this device.
+- complementary "Validation scenes":
+  - button "dock"
+  - button "belt"
+  - button "site"
+  - button "combat"
+  - button "boss-dart"
+  - button "boss-bastion"
+  - button "boss-coil"
+  - button "stress"
+  - button "die"
+  - button "Recover GPU"
+  - button "Lose GPU"
+  - button "Lose WebGL context"
+  - button "Restore WebGL context" [active]

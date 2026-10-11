@@ -8,6 +8,8 @@ work/
 .openai/local/
 *.log
 !artifacts/*.log
+!artifacts/navigation-desktop-20261011/*.log
+!artifacts/adaptive-presentation-20261011/*.log
 __pycache__/
 production/project.backup.json
 production/project.json.backup

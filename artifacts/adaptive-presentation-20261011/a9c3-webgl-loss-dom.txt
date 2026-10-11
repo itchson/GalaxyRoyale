@@ -1,0 +1,40 @@
+- generic "Galaxy Royale game universe"
+- banner:
+  - button "Progress saved. Open save and backup": S
+  - navigation "Flight pages":
+    - button "Ship status": ≡
+    - button "Universe map": MAP
+    - button "Settings": SET
+- region "Flight telemetry":
+  - text: HAVEN EXPANSE / PROTECTED SPACE
+  - generic "Collected upgrade points":
+    - generic: Offense 5
+    - generic: Defense 4
+    - generic: Passive 6
+  - generic: 0 m FROM HAVENSANCTUARY
+  - generic: HULL INTEGRITY100 / 100
+- generic "Flight status":
+  - status: Graphics context lost. Waiting for browser restoration.
+- button "Ship upgrades":
+  - generic: FORGE
+- button "Ship hangar":
+  - generic: HANGAR
+- button "Expedition journal":
+  - generic: JOURNAL
+- button "Arena campaign":
+  - generic: ARENAS
+- generic: WEBGL2 1 FPS 5,156 PIXEL QUADS 57 ENTITIES / 0 PARTICLES p95 1004.1 ms SIM 1.10 / RENDER 0.70 ms
+- complementary "Validation scenes":
+  - button "dock"
+  - button "belt"
+  - button "site"
+  - button "combat"
+  - button "boss-dart"
+  - button "boss-bastion"
+  - button "boss-coil"
+  - button "stress"
+  - button "die"
+  - button "Recover GPU"
+  - button "Lose GPU"
+  - button "Lose WebGL context" [active]
+  - button "Restore WebGL context"

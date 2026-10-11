@@ -1,0 +1,218 @@
+{
+  "recordedAt": "2026-10-11T01:10:20.557Z",
+  "cache": "galaxy-810fccad52eabc00",
+  "pins": [
+    {
+      "path": "work/universe-map-browser-qa/BROWSER_EVIDENCE.json",
+      "sha256": "ca9e0eb3f001968bd01ede55c2ffe872199ab0918fba02c68231189e2422db87"
+    },
+    {
+      "path": "work/universe-map-browser-qa/INTERIM_REVIEW.md",
+      "sha256": "c0498362965cb47973f8c31eda7852e9d2251d66f28f32ab60d036105d78fcc8"
+    },
+    {
+      "path": "work/universe-map-browser-qa/REVIEW.md",
+      "sha256": "aa741cc26b4598cbfa448cffad764c96b4be960bd200e6c119d7c98252597d7f"
+    },
+    {
+      "path": "work/universe-map-browser-qa/final-apply-visible.jpg",
+      "sha256": "52447a4a1eb7eb8f9ee7d2be9e3847be8599427962a2c551083c0c1a3d67867f"
+    },
+    {
+      "path": "work/universe-map-browser-qa/final-assets.json",
+      "sha256": "0ac7338a9ae070e6315e03702105fdcc5b71d6af0d6fe432a82e27259c996d9a"
+    },
+    {
+      "path": "work/universe-map-browser-qa/final-flight-1280-geometry.json",
+      "sha256": "c9161accda4ca38142b687a95297b862a3f274ef6bc1dc3d756149ab80b5c553"
+    },
+    {
+      "path": "work/universe-map-browser-qa/final-flight-320-geometry.json",
+      "sha256": "a6f6c2a4b43b6509c015f19a20529d5dd13cea860053006365b708e4b4b193d7"
+    },
+    {
+      "path": "work/universe-map-browser-qa/final-flight-320.jpg",
+      "sha256": "3a60be970457efa014f34ef9f5d3b60b5886f8ef68ebebd91bc51c35fc032e27"
+    },
+    {
+      "path": "work/universe-map-browser-qa/final-map-1280-geometry.json",
+      "sha256": "42f099d4bf28c13e34988cd3eaa0df6fe5a9b9580a1bacc6a846da57727390c1"
+    },
+    {
+      "path": "work/universe-map-browser-qa/final-map-1280-scrolled-geometry.json",
+      "sha256": "1578aede01b15b0711f22f8d9d10ec453723544e3299fe5480343cc1f534fca7"
+    },
+    {
+      "path": "work/universe-map-browser-qa/final-map-1280-scrolled.jpg",
+      "sha256": "b17d9a77830622072fdb969613a0ea9209a02e585faf29b8b8425b13578ba610"
+    },
+    {
+      "path": "work/universe-map-browser-qa/final-map-1280.jpg",
+      "sha256": "9bf4251be873208ac5ca2667287ea8f08d72f4b1e73a191cac56b7980403a69f"
+    },
+    {
+      "path": "work/universe-map-browser-qa/final-map-320-geometry.json",
+      "sha256": "8123b9d4ab5632f423b78cbea2a5c355798b256efb6dd2e0bb0bb15a65442a41"
+    },
+    {
+      "path": "work/universe-map-browser-qa/final-map-320-scrolled-geometry.json",
+      "sha256": "2c71f0fc0a34a022114de5c8519f95da7962b348b84295101758b835525f9d9d"
+    },
+    {
+      "path": "work/universe-map-browser-qa/final-map-320-scrolled.jpg",
+      "sha256": "f004261f41a3506a519a589faf42c53e244a7a1399aa31148f7a848be3c34698"
+    },
+    {
+      "path": "work/universe-map-browser-qa/final-map-320.jpg",
+      "sha256": "15009045c7ac4b289b662b3093fdc6df26b6bdbdbca5c9b419c51373882dc91c"
+    },
+    {
+      "path": "work/universe-map-browser-qa/final-map-844-geometry.json",
+      "sha256": "a775add6969038f81a1b59b6e549cd25ec1271ba127a8791b3814dbf5a3d8606"
+    },
+    {
+      "path": "work/universe-map-browser-qa/final-map-844.jpg",
+      "sha256": "a38755b44b470639327e0c155edc3371f374c7403917b2f9a3585957a7dd3829"
+    },
+    {
+      "path": "work/universe-map-browser-qa/final-settings-1280-geometry.json",
+      "sha256": "f9e594dda7a29d561f2c9dcef60799d7ebd9f38b3ee4576f01121288fa898a7e"
+    },
+    {
+      "path": "work/universe-map-browser-qa/final-settings-1280.jpg",
+      "sha256": "048f4a52da400df0b2a162e203a1a6859f2ef69a55572ef1013e2b36f3ae9a83"
+    },
+    {
+      "path": "work/universe-map-browser-qa/final-settings-320-geometry.json",
+      "sha256": "c646bd448e1592c54e0ad3564c87425b6c6684a6949623530d849dd64c155b41"
+    },
+    {
+      "path": "work/universe-map-browser-qa/final-settings-320.jpg",
+      "sha256": "e11227d0cfe408f1933e98647f854e7c6c6f8b514707cb8cc833915fd4d5a1aa"
+    },
+    {
+      "path": "work/universe-map-browser-qa/final-settings-844-geometry.json",
+      "sha256": "751b19de4c76ddafc392c0c298c66edd6826eea0e8c8a0cbc256a834f13d82b2"
+    },
+    {
+      "path": "work/universe-map-browser-qa/final-settings-844.jpg",
+      "sha256": "0e3ebfe8a795bb23f79b85bf5228c526f98daa302f5699f0e3088de0b9d07232"
+    },
+    {
+      "path": "work/universe-map-browser-qa/final-status-1280-geometry.json",
+      "sha256": "2031bb2659bc14702995a35e70e96bb86b2ae41fa5b557798dcb7ca184b74b34"
+    },
+    {
+      "path": "work/universe-map-browser-qa/final-status-1280.jpg",
+      "sha256": "d04ec3bc6d35680fcb073301daaf34510a4cc6e499836500575ccdf216453e0b"
+    },
+    {
+      "path": "work/universe-map-browser-qa/final-status-1280.txt",
+      "sha256": "532073d34d0d62f2434b5d89c3ecea11f579716559e636535852b828912a8983"
+    },
+    {
+      "path": "work/universe-map-browser-qa/final-status-320-geometry.json",
+      "sha256": "23061dc0c962cf325c1256b469d443ab2597b8c333fa8b347075bfda00d941de"
+    },
+    {
+      "path": "work/universe-map-browser-qa/final-status-320-scrolled-geometry.json",
+      "sha256": "2b6961af47c5ad12caa6e2ddabee6410c70a30e92b39de1cd4d61aea386ae28b"
+    },
+    {
+      "path": "work/universe-map-browser-qa/final-status-320-scrolled.jpg",
+      "sha256": "a9984477a95ef5eeb740b3ef66b95ee8e1a81e5e9d112ee7321febf9d14fef2a"
+    },
+    {
+      "path": "work/universe-map-browser-qa/final-status-320.jpg",
+      "sha256": "b6c26f29335cb56a47f9ca69bf5861b31aaebe85ab6d8af703ed8cae731f4d19"
+    },
+    {
+      "path": "work/universe-map-browser-qa/final-status-844-geometry.json",
+      "sha256": "303a655784b96428e1c23c873ac4757f285266b53872d618c249d933d9abe6b8"
+    },
+    {
+      "path": "work/universe-map-browser-qa/final-status-844.jpg",
+      "sha256": "64d164f8de689ca7bb6ff467d590c3b738f0ba4536fda70db4c3ec7834c5a588"
+    },
+    {
+      "path": "work/universe-map-browser-qa/final-title-320-geometry.json",
+      "sha256": "63dc03c44b392a6041024deebaa6d3d94661e3f212f8c8a28e6f07c7471d81c5"
+    },
+    {
+      "path": "work/universe-map-browser-qa/final-title-320.jpg",
+      "sha256": "3e04e426ac431a1081c16d17c41c34500a8541f7524704bc21f9a52e1aa99613"
+    },
+    {
+      "path": "work/universe-map-browser-qa/final-warning-error-logs.json",
+      "sha256": "a828467131265d754191b68c574b422323d129da29b7134f8a18b23f3fb45f43"
+    },
+    {
+      "path": "work/universe-map-browser-qa/flight-desktop.jpg",
+      "sha256": "f6fd1437e3fe78c08d439b8490f10ad18f168521961bf9b2b24f47a5b478237f"
+    },
+    {
+      "path": "work/universe-map-browser-qa/footer-320-measurement.json",
+      "sha256": "3c0c457a7f2d308aa49181b9a555688803f5829485ced93c16701a111178b844"
+    },
+    {
+      "path": "work/universe-map-browser-qa/footer-320-observation.jpg",
+      "sha256": "248ab63135de419ae4c4e7cf6ec6da187efafc55630fbe9e4473b3a6567b2709"
+    },
+    {
+      "path": "work/universe-map-browser-qa/interim-page-logs.json",
+      "sha256": "b95c1d2763fcd27a034a34573e579f69a224cf84cb897998e4bc08f0ee7a2250"
+    },
+    {
+      "path": "work/universe-map-browser-qa/interim-page-state.txt",
+      "sha256": "9f9f44592c7de348c3a83bb9f4e0685cdb0a37ac650573cb3eaa0833d1a84ef3"
+    },
+    {
+      "path": "work/universe-map-browser-qa/later-title-state.txt",
+      "sha256": "c99f74bf8e4d8a3dc9aa93cf9fdfa971d7bf741874aec77601680bcf6cf77e12"
+    },
+    {
+      "path": "work/universe-map-browser-qa/map-desktop-geometry.json",
+      "sha256": "c191535f8728fd4e5fa95fefb26522cf7a944328f4a49ca80363055b2087a959"
+    },
+    {
+      "path": "work/universe-map-browser-qa/map-desktop.jpg",
+      "sha256": "3e11751563af74a2f7b180f56a90f7b8260e94856c111091d7a776c76f9e06bb"
+    },
+    {
+      "path": "work/universe-map-browser-qa/pin-browser-evidence.mjs",
+      "sha256": "50526fba1a94ef57797d1acb0729d9f00056b0c7ad5bdf62b59026aafc8971e6"
+    },
+    {
+      "path": "work/universe-map-browser-qa/pre-apply-assets.json",
+      "sha256": "59d35ffe14e2ae53075852be7e5ae049b1d5451e14688675240a7de28ebaa5d2"
+    },
+    {
+      "path": "work/universe-map-browser-qa/pre-apply-save-settled.jpg",
+      "sha256": "9313b3e8ebd36e775f4d277eee3dacc400cbec6ee83b50ab00fd7b3b339d4a4f"
+    },
+    {
+      "path": "work/universe-map-browser-qa/pre-apply-save.jpg",
+      "sha256": "7a6535d749455ed11f9434a992482273e8109a599b9ef84ba46f04f4092f9ecd"
+    },
+    {
+      "path": "work/universe-map-browser-qa/status-desktop-geometry.json",
+      "sha256": "ad1d1693d16590bf6b3dbfac09b1cc87f1ef6ce6468f13df2cb12904e8d61a29"
+    },
+    {
+      "path": "work/universe-map-browser-qa/status-desktop.jpg",
+      "sha256": "4efa8ac6ee702cb5d7d4dd9835d1e67d5f0a4aae2a45cc7c990ada949444da66"
+    },
+    {
+      "path": "work/universe-map-browser-qa/waiting-update-absent-assets.json",
+      "sha256": "5bd589d9f4782059dde759e95ec4840ea3afd926e3869aa30a5181e931a6a4cf"
+    },
+    {
+      "path": "work/universe-map-browser-qa/waiting-update-absent.jpg",
+      "sha256": "65c61b98526b0cecfba24f3a3b926b6b5901057306fa309da2f2b12c44ecf3f5"
+    },
+    {
+      "path": "work/universe-map-browser-qa/waiting-update-absent.txt",
+      "sha256": "1088166c902a7c29cd873837edc1236ee7b8e8cb4e927a1995a9c3433a226121"
+    }
+  ]
+}

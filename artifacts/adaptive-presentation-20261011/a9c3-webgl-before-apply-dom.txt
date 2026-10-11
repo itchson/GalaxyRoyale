@@ -1,0 +1,15 @@
+- generic "Galaxy Royale game universe"
+- status: A new flight build is ready. Apply it from the Haven menu.
+- dialog "SAVE & BACKUP":
+  - button "Close menu" [active]: X
+  - generic: HAVEN COMMAND
+  - heading "SAVE & BACKUP" [level=2]
+  - paragraph: Automatic saves keep your progression on this device.
+  - heading "AUTOMATIC SAVES" [level=3]
+  - paragraph: Ship XP, collected points, owned equipment and dock storage save on this device. Carried crafting materials bank only when you physically return to Haven. Death, restart, return to title or reload discards carried materials.
+  - heading "BACKUP YOUR PROGRESSION" [level=3]
+  - paragraph: Export a backup to keep a copy or move your progression to another device. Restoring a backup replaces this device's saved progression.
+  - button "EXPORT BACKUP"
+  - button "RESTORE BACKUP"
+  - button "Apply update at Haven"
+  - status: Progress saved automatically on this device.

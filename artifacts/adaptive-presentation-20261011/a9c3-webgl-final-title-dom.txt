@@ -1,0 +1,37 @@
+- generic "Galaxy Royale game universe"
+- status: Graphics restored. Your expedition is intact.
+- generic: AN ENDLESS PIXEL FRONTIER
+- heading "GALAXY ROYALE" [level=1]:
+  - text: GALAXY
+  - text: ROYALE
+- paragraph:
+  - text: Leave the sanctuary. Break the belt.
+  - text: Become the brightest thing in the void.
+- button "LAUNCH EXPEDITION ↗" [active]:
+  - text: LAUNCH EXPEDITION
+  - generic: ↗
+- navigation "Title actions":
+  - button "SETTINGS"
+  - button "Quit game": QUIT
+- generic: LEFT CLICK
+- text: Set course / use a dock facility
+- generic: RIGHT HOLD
+- text: Aim + fire
+- generic: ESC
+- text: Live ship status
+- generic: PLAYABLE SLICE / 01
+- generic: SYSTEMS ONLINE / READY TO FLY
+- complementary "Validation scenes":
+  - button "dock"
+  - button "belt"
+  - button "site"
+  - button "combat"
+  - button "boss-dart"
+  - button "boss-bastion"
+  - button "boss-coil"
+  - button "stress"
+  - button "die"
+  - button "Recover GPU"
+  - button "Lose GPU"
+  - button "Lose WebGL context"
+  - button "Restore WebGL context"

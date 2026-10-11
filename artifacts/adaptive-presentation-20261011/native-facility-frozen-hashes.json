@@ -1,0 +1,46 @@
+{
+  "recorded_utc": "2026-10-11T01:54:25.858221+00:00",
+  "scope": "Native facility-label placement, source frozen; final normal/browser acceptance separate",
+  "files": [
+    {
+      "path": "commands.json",
+      "bytes": 759,
+      "sha256": "00668aa2b709dfd7cdc20674128823aae4691b5126c4ce33ca0ab89ad6649776"
+    },
+    {
+      "path": "format.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "HANDOFF.md",
+      "bytes": 1289,
+      "sha256": "3298120d5a77cfbdf8e8ee4eafc6b7ab6020d2ce105acaef93780828450861b9"
+    },
+    {
+      "path": "inputs/crates/game_web/src/ui_facility_label_tests.rs",
+      "bytes": 3880,
+      "sha256": "f7859d97e44b3f305d34e5a60c569544b86fd936e6ae57f676527473c6b96bbc"
+    },
+    {
+      "path": "inputs/crates/game_web/src/ui_scene.rs",
+      "bytes": 78928,
+      "sha256": "05ef59fad5c9326743839f1a22cd410e5e8192bff6c225cefafc8dda7923a2a6"
+    },
+    {
+      "path": "native-clippy.log",
+      "bytes": 166,
+      "sha256": "5cc8cc6cf33f59d697afdac70f5677ceb6fd82aeb5824a3612cad06967962d05"
+    },
+    {
+      "path": "native-tests.log",
+      "bytes": 1015,
+      "sha256": "d29ae3927f463ed39f29ca92ce4ac18bfd7721ab557e8e5e2ece70d41cb7149e"
+    },
+    {
+      "path": "source-pins.json",
+      "bytes": 523,
+      "sha256": "392c21777bdbb3f5f5107530bdc12b046b1485bc61c8c4e69fe43d0ab102ac9c"
+    }
+  ]
+}

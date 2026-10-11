@@ -1,0 +1,17 @@
+- generic "Galaxy Royale game universe"
+- banner:
+  - button "Progress saved. Open save and backup": S
+  - navigation "Flight pages":
+    - button "Ship status": ≡
+    - button "Universe map": MAP
+    - button "Settings": SET
+- region "Flight telemetry":
+  - text: HAVEN EXPANSE / PROTECTED SPACE
+  - generic "Collected upgrade points":
+    - generic: Offense 5
+    - generic: Defense 4
+    - generic: Passive 6
+  - generic: 0 m FROM HAVENSANCTUARY
+  - generic: HULL INTEGRITY100 / 100
+- generic "Flight status":
+  - status

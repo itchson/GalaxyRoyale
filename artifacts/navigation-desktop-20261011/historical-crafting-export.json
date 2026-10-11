@@ -1,0 +1,367 @@
+{
+  "schema_version": 4,
+  "revision": 108,
+  "seed": 1196576601,
+  "currency": [
+    2,
+    15,
+    15
+  ],
+  "ranks": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    2,
+    0,
+    0
+  ],
+  "unlocked": [
+    true,
+    false,
+    false
+  ],
+  "kills": [
+    0,
+    0,
+    0
+  ],
+  "boss_kills": [
+    0,
+    0,
+    0
+  ],
+  "boss_generations": [
+    [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  ],
+  "pity": [
+    0,
+    0,
+    0
+  ],
+  "pending": [
+    false,
+    false,
+    false
+  ],
+  "discoveries": [],
+  "quests": [],
+  "relics": [],
+  "campaign": {
+    "patches": [
+      false,
+      false,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    "blueprints": [
+      false,
+      false,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    "crafted": [
+      false,
+      false,
+      true,
+      false,
+      false,
+      false,
+      false,
+      false
+    ],
+    "selected_ship": 0,
+    "royale_results": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "tournament_attempt": 0,
+    "victory_claimed": false,
+    "credits_seen": false,
+    "ship_xp": [
+      0,
+      0,
+      0,
+      60,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "cargo_materials": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "stored_materials": [
+      10,
+      2,
+      0,
+      0,
+      0
+    ],
+    "abilities": [
+      {
+        "blueprint": true,
+        "rank": 1
+      },
+      {
+        "blueprint": true,
+        "rank": 0
+      },
+      {
+        "blueprint": true,
+        "rank": 0
+      },
+      {
+        "blueprint": true,
+        "rank": 2
+      },
+      {
+        "blueprint": false,
+        "rank": 0
+      },
+      {
+        "blueprint": false,
+        "rank": 0
+      },
+      {
+        "blueprint": false,
+        "rank": 0
+      },
+      {
+        "blueprint": false,
+        "rank": 0
+      },
+      {
+        "blueprint": true,
+        "rank": 1
+      },
+      {
+        "blueprint": false,
+        "rank": 0
+      },
+      {
+        "blueprint": false,
+        "rank": 0
+      },
+      {
+        "blueprint": false,
+        "rank": 0
+      },
+      {
+        "blueprint": false,
+        "rank": 0
+      },
+      {
+        "blueprint": false,
+        "rank": 0
+      },
+      {
+        "blueprint": false,
+        "rank": 0
+      },
+      {
+        "blueprint": false,
+        "rank": 0
+      },
+      {
+        "blueprint": false,
+        "rank": 0
+      }
+    ],
+    "loadouts": [
+      {
+        "hardware": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "slots": [
+          3,
+          null,
+          null
+        ]
+      },
+      {
+        "hardware": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "slots": [
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "hardware": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "slots": [
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "hardware": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "slots": [
+          8,
+          null,
+          null
+        ]
+      },
+      {
+        "hardware": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "slots": [
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "hardware": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "slots": [
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "hardware": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "slots": [
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "hardware": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "slots": [
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "hardware": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "slots": [
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "hardware": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "slots": [
+          null,
+          null,
+          null
+        ]
+      }
+    ],
+    "last_run": null
+  }
+}

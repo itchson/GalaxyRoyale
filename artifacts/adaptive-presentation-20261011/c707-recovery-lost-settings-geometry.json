@@ -1,0 +1,19 @@
+{
+  "observedUtc": "2026-10-11T01:48:54.997Z",
+  "bodyClasses": "",
+  "canvas": {
+    "height": 1192,
+    "visibility": "hidden",
+    "width": 1438
+  },
+  "toast": {
+    "className": "visible",
+    "display": "block",
+    "h": 24.015625,
+    "opacity": "1",
+    "text": "Graphics context lost. Waiting for browser restoration.",
+    "w": 1414,
+    "x": 12,
+    "y": 1155.984375
+  }
+}

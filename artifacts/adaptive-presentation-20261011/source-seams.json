@@ -1,0 +1,148 @@
+{
+  "scope": "Actual normal WASM literal/declaration evidence and separately attributed Root validation logs; no instantiation/GPU/browser acceptance",
+  "cache": "galaxy-a9c3cb3540f78b9b",
+  "embedded_assets": [
+    {
+      "backend": "webgpu",
+      "path": "assets/pixels/atlas.json",
+      "bytes": 39609,
+      "exact_literal_bytes_present": true
+    },
+    {
+      "backend": "webgpu",
+      "path": "assets/pixels/boss-atlas.json",
+      "bytes": 421057,
+      "exact_literal_bytes_present": true
+    },
+    {
+      "backend": "webgpu",
+      "path": "assets/pixels/isotope-scar-atlas.json",
+      "bytes": 44638,
+      "exact_literal_bytes_present": true
+    },
+    {
+      "backend": "webgpu",
+      "path": "assets/pixels/mote-atlas.json",
+      "bytes": 7209,
+      "exact_literal_bytes_present": true
+    },
+    {
+      "backend": "webgpu",
+      "path": "assets/pixels/riveter-atlas.json",
+      "bytes": 5595,
+      "exact_literal_bytes_present": true
+    },
+    {
+      "backend": "webgpu",
+      "path": "assets/ui/atlas.json",
+      "bytes": 88655,
+      "exact_literal_bytes_present": true
+    },
+    {
+      "backend": "webgpu",
+      "path": "assets/ui/campaign-atlas.json",
+      "bytes": 41348,
+      "exact_literal_bytes_present": true
+    },
+    {
+      "backend": "webgpu",
+      "path": "assets/ui/champion-patches-atlas.json",
+      "bytes": 13548,
+      "exact_literal_bytes_present": true
+    },
+    {
+      "backend": "webgl2",
+      "path": "assets/pixels/atlas.json",
+      "bytes": 39609,
+      "exact_literal_bytes_present": true
+    },
+    {
+      "backend": "webgl2",
+      "path": "assets/pixels/boss-atlas.json",
+      "bytes": 421057,
+      "exact_literal_bytes_present": true
+    },
+    {
+      "backend": "webgl2",
+      "path": "assets/pixels/isotope-scar-atlas.json",
+      "bytes": 44638,
+      "exact_literal_bytes_present": true
+    },
+    {
+      "backend": "webgl2",
+      "path": "assets/pixels/mote-atlas.json",
+      "bytes": 7209,
+      "exact_literal_bytes_present": true
+    },
+    {
+      "backend": "webgl2",
+      "path": "assets/pixels/riveter-atlas.json",
+      "bytes": 5595,
+      "exact_literal_bytes_present": true
+    },
+    {
+      "backend": "webgl2",
+      "path": "assets/ui/atlas.json",
+      "bytes": 88655,
+      "exact_literal_bytes_present": true
+    },
+    {
+      "backend": "webgl2",
+      "path": "assets/ui/campaign-atlas.json",
+      "bytes": 41348,
+      "exact_literal_bytes_present": true
+    },
+    {
+      "backend": "webgl2",
+      "path": "assets/ui/champion-patches-atlas.json",
+      "bytes": 13548,
+      "exact_literal_bytes_present": true
+    }
+  ],
+  "binding_declarations": [
+    {
+      "backend": "webgpu",
+      "paired_status_bounds": "Float32Array",
+      "qa_contract_absent": true
+    },
+    {
+      "backend": "webgl2",
+      "paired_status_bounds": "Float32Array",
+      "qa_contract_absent": true
+    }
+  ],
+  "root_native_suite_counts": [
+    37,
+    3,
+    223,
+    109,
+    31
+  ],
+  "root_native_total": 403,
+  "root_shell": {
+    "tests": 234,
+    "pass": 233,
+    "skipped": 1,
+    "failed": 0
+  },
+  "root_logs": [
+    {
+      "path": "work/adaptive-final-build.log",
+      "bytes": 1415,
+      "sha256": "e786f91674ca56ba447a0fa7bec80e459f7fa886050c82ae5c6cb4a774149892",
+      "execution_owner": "Root; read/captured by independent specialist"
+    },
+    {
+      "path": "work/adaptive-final-native-tests.log",
+      "bytes": 40953,
+      "sha256": "cc5b25221139f22b9c6c49a46d8fd79545da5f0b05d66b29f4b541ad6c72d408",
+      "execution_owner": "Root; read/captured by independent specialist"
+    },
+    {
+      "path": "work/adaptive-final-shell-tests.log",
+      "bytes": 24432,
+      "sha256": "5c69155a81087e35da26d8c351ed592b2048844043ba4fbc0e5a41618713e870",
+      "execution_owner": "Root; read/captured by independent specialist"
+    }
+  ]
+}

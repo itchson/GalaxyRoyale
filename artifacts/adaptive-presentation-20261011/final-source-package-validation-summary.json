@@ -1,0 +1,20 @@
+{
+  "scope": "Root-executed final checks, copied without rerunning; no browser/physical/DSP acceptance",
+  "native_passed": 406,
+  "native_groups": [
+    37,
+    3,
+    223,
+    112,
+    31
+  ],
+  "shell_total": 240,
+  "shell_passed": 239,
+  "shell_skipped": 1,
+  "shell_failed": 0,
+  "skip": "Windows file-symlink capability",
+  "normal_dual_build": "completed; game and separate Studio outputs are distinguished",
+  "strict_native_and_both_wasm_clippy": "completed",
+  "headless_wasm_serializer_cases": 18,
+  "headless_limits": "Root execution; supplied fixture inventories not earned rewards; fake-indexeddb; no GPU/browser/device instantiation"
+}

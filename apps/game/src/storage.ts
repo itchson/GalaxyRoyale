@@ -29,9 +29,28 @@ export interface CampaignProgress {
   victory_claimed: boolean;
   credits_seen: boolean;
   ship_xp: number[];
+  cargo_materials: number[];
+  stored_materials: number[];
+  abilities: AbilityState[];
+  loadouts: ShipLoadout[];
+  last_run: RunSummary | null;
+}
+export interface AbilityState {
+  blueprint: boolean;
+  /** Zero means uncrafted; owned item ranks are1..5. */
+  rank: number;
+}
+export interface ShipLoadout {
+  hardware: number[];
+  slots: (number | null)[];
+}
+interface PreviousCampaign extends Omit<
+  CampaignProgress,
+  "cargo_materials" | "stored_materials" | "abilities" | "loadouts" | "last_run"
+> {
   cargo_materials: number;
   stored_materials: number;
-  last_run: RunSummary | null;
+  last_run: Omit<RunSummary, "materials_lost"> | null;
 }
 export interface RunSummary {
   time: number;
@@ -42,7 +61,20 @@ export interface RunSummary {
   points_gained: number[];
   xp_gained: number;
   materials_gained: number;
+  materials_lost: number[];
 }
+const abilityCategories = [0, 1, 2, 0, 1, 2, 0, 0, 0, 0, 2, 1, 0, 0, 0, 1, 2];
+const shipFamilies = [0, 0, 1, 2, 0, 0, 1, 2, 1];
+function compatibleAbility(index: number, ship: number): boolean {
+  if (index >= 14) return ship === 9;
+  return (
+    index < 6 || ship === 9 || shipFamilies[ship] === shipFamilies[index - 5]
+  );
+}
+const emptyLoadout = (): ShipLoadout => ({
+  hardware: Array(6).fill(0),
+  slots: [null, null, null],
+});
 export const emptyCampaign = (): CampaignProgress => ({
   patches: Array(8).fill(false),
   blueprints: Array(8).fill(false),
@@ -53,25 +85,38 @@ export const emptyCampaign = (): CampaignProgress => ({
   victory_claimed: false,
   credits_seen: false,
   ship_xp: Array(10).fill(0),
-  cargo_materials: 0,
-  stored_materials: 0,
+  cargo_materials: Array(5).fill(0),
+  stored_materials: Array(5).fill(0),
+  abilities: Array.from({ length: 17 }, (_, i) => ({
+    blueprint: i < 3,
+    rank: 0,
+  })),
+  loadouts: Array.from({ length: 10 }, emptyLoadout),
   last_run: null,
 });
 function wonLeague(seed: number, campaign: CampaignProgress): boolean {
   const mix = (value: number): number => {
-    value ^= value >>> 16; value = Math.imul(value, 0x7feb352d);
-    value ^= value >>> 15; value = Math.imul(value, 0x846ca68b);
+    value ^= value >>> 16;
+    value = Math.imul(value, 0x7feb352d);
+    value ^= value >>> 15;
+    value = Math.imul(value, 0x846ca68b);
     return (value ^ (value >>> 16)) >>> 0;
   };
   const scores = Array<number>(9).fill(0);
   for (let a = 0; a < 8; a++) {
     for (let b = a + 1; b < 8; b++)
-      scores[(mix(seed ^ (a * 7919) ^ (b * 104729) ^ 0x6e706373) & 1) === 0 ? a : b]! += 3;
+      scores[
+        (mix(seed ^ (a * 7919) ^ (b * 104729) ^ 0x6e706373) & 1) === 0 ? a : b
+      ]! += 3;
     scores[campaign.royale_results[a] === 1 ? 8 : a]! += 3;
   }
-  const tie = (entrant: number) => mix(seed ^ Math.imul(entrant, 0x9e3779b9) ^ 0x726f796c);
-  return scores.every((score, entrant) => score < scores[8]! ||
-    (score === scores[8]! && (tie(entrant) > tie(8) || entrant === 8)));
+  const tie = (entrant: number) =>
+    mix(seed ^ Math.imul(entrant, 0x9e3779b9) ^ 0x726f796c);
+  return scores.every(
+    (score, entrant) =>
+      score < scores[8]! ||
+      (score === scores[8]! && (tie(entrant) > tie(8) || entrant === 8)),
+  );
 }
 interface ExplorationProfile extends ProfileBase {
   discoveries: string[];
@@ -79,9 +124,13 @@ interface ExplorationProfile extends ProfileBase {
   relics: string[];
 }
 export interface Profile extends ExplorationProfile {
-  schema_version: 3;
+  schema_version: 4;
   boss_generations: number[][];
   campaign: CampaignProgress;
+}
+export interface CampaignProfile extends ExplorationProfile {
+  schema_version: 3;
+  campaign: PreviousCampaign;
 }
 export interface PreviousProfile extends ExplorationProfile {
   schema_version: 2;
@@ -89,7 +138,8 @@ export interface PreviousProfile extends ExplorationProfile {
 export interface LegacyProfile extends ProfileBase {
   schema_version: 1;
 }
-export type SupportedProfile = Profile | PreviousProfile | LegacyProfile;
+export type SupportedProfile =
+  Profile | CampaignProfile | PreviousProfile | LegacyProfile;
 export interface Settings {
   master: number;
   music: number;
@@ -112,23 +162,45 @@ export const defaultSettings: Settings = {
   voice_volume: 0.7,
   zoom: 1,
 };
-function normalizedBossGenerations(p: Record<string, unknown>): number[][] | null {
+function normalizedBossGenerations(
+  p: Record<string, unknown>,
+): number[][] | null {
   const totals = p.boss_kills as number[];
   if (!Object.hasOwn(p, "boss_generations"))
-    return totals.map(total => [total, 0, 0, 0, 0]);
+    return totals.map((total) => [total, 0, 0, 0, 0]);
   const input = p.boss_generations;
   if (!Array.isArray(input) || input.length !== 3) return null;
   const result: number[][] = [];
   for (let family = 0; family < 3; family++) {
     const row: unknown = input[family];
-    if (!Array.isArray(row) || row.length !== 5 ||
-      !Array.from(row).every(v => typeof v === "number" && Number.isInteger(v) && v >= 0 && v <= 0xffffffff)) return null;
+    if (
+      !Array.isArray(row) ||
+      row.length !== 5 ||
+      !Array.from(row).every(
+        (v) =>
+          typeof v === "number" &&
+          Number.isInteger(v) &&
+          v >= 0 &&
+          v <= 0xffffffff,
+      )
+    )
+      return null;
     const defeats = [...row] as number[];
-    if (defeats.reduce((sum, value) => sum + value, 0) === 0 && totals[family]! > 0)
+    if (
+      defeats.reduce((sum, value) => sum + value, 0) === 0 &&
+      totals[family]! > 0
+    )
       defeats[0] = totals[family]!;
-    if (Math.min(0xffffffff, defeats.reduce((sum, value) => sum + value, 0)) !== totals[family]) return null;
+    if (
+      Math.min(
+        0xffffffff,
+        defeats.reduce((sum, value) => sum + value, 0),
+      ) !== totals[family]
+    )
+      return null;
     for (let generation = 1; generation < 5; generation++)
-      if (defeats[generation]! > Math.floor(defeats[generation - 1]! / 2)) return null;
+      if (defeats[generation]! > Math.floor(defeats[generation - 1]! / 2))
+        return null;
     result.push(defeats);
   }
   return result;
@@ -147,7 +219,10 @@ export function validProfile(value: unknown): value is SupportedProfile {
     p[key].length === 3 &&
     Array.from(p[key]).every((v: unknown) => typeof v === "boolean");
   if (!(
-    (p.schema_version === 1 || p.schema_version === 2 || p.schema_version === 3) &&
+    (p.schema_version === 1 ||
+      p.schema_version === 2 ||
+      p.schema_version === 3 ||
+      p.schema_version === 4) &&
     integer(p.revision, Number.MAX_SAFE_INTEGER) &&
     integer(p.seed) &&
     p.seed !== 0 &&
@@ -163,6 +238,7 @@ export function validProfile(value: unknown): value is SupportedProfile {
   if (!normalizedBossGenerations(p)) return false;
   const ranks = p.ranks as number[];
   if (
+    p.schema_version !== 4 &&
     !(p.unlocked as boolean[]).every((unlocked, i) =>
       unlocked ? ranks[i + 6] >= 1 : ranks[i + 6] === 0,
     )
@@ -197,55 +273,194 @@ export function validProfile(value: unknown): value is SupportedProfile {
       typeof quest.completed === "boolean"
     );
   };
-  const explorationValid = (
+  const explorationValid =
     Array.from(p.quests).every(validQuest) &&
-    new Set(p.quests.map((quest) => quest.site_id)).size === p.quests.length
-  );
+    new Set(p.quests.map((quest) => quest.site_id)).size === p.quests.length;
   if (!explorationValid || p.schema_version === 2) return explorationValid;
-  if (!p.campaign || typeof p.campaign !== "object" || Array.isArray(p.campaign)) return false;
+  if (
+    !p.campaign ||
+    typeof p.campaign !== "object" ||
+    Array.isArray(p.campaign)
+  )
+    return false;
   const c = p.campaign as Record<string, unknown>;
-  const flags = (key: string) => Array.isArray(c[key]) && c[key].length === 8 &&
-    Array.from(c[key]).every(v => typeof v === "boolean");
-  if (!flags("patches") || !flags("blueprints") || !flags("crafted") ||
-    !integer(c.selected_ship, 9) || !integer(c.tournament_attempt) ||
-    typeof c.victory_claimed !== "boolean" || typeof c.credits_seen !== "boolean" ||
-    !Array.isArray(c.royale_results) || c.royale_results.length !== 8 ||
-    !Array.from(c.royale_results).every(v => integer(v, 2))) return false;
-  const patches = c.patches as boolean[], blueprints = c.blueprints as boolean[], crafted = c.crafted as boolean[];
+  const flags = (key: string) =>
+    Array.isArray(c[key]) &&
+    c[key].length === 8 &&
+    Array.from(c[key]).every((v) => typeof v === "boolean");
+  if (
+    !flags("patches") ||
+    !flags("blueprints") ||
+    !flags("crafted") ||
+    !integer(c.selected_ship, 9) ||
+    !integer(c.tournament_attempt) ||
+    typeof c.victory_claimed !== "boolean" ||
+    typeof c.credits_seen !== "boolean" ||
+    !Array.isArray(c.royale_results) ||
+    c.royale_results.length !== 8 ||
+    !Array.from(c.royale_results).every((v) => integer(v, 2))
+  )
+    return false;
+  const patches = c.patches as boolean[],
+    blueprints = c.blueprints as boolean[],
+    crafted = c.crafted as boolean[];
   const unlocked = patches.every(Boolean);
   const results = c.royale_results as number[];
-  if (!Array.isArray(c.ship_xp) || c.ship_xp.length !== 10 || !Array.from(c.ship_xp).every(v => integer(v)) ||
-    !integer(c.cargo_materials, 16) || !integer(c.stored_materials)) return false;
+  if (
+    !Array.isArray(c.ship_xp) ||
+    c.ship_xp.length !== 10 ||
+    !Array.from(c.ship_xp).every((v) => integer(v))
+  )
+    return false;
+  const tiers = (value: unknown): value is number[] =>
+    Array.isArray(value) &&
+    value.length === 5 &&
+    Array.from(value).every((v) => integer(v));
+  if (p.schema_version === 4) {
+    if (
+      !tiers(c.cargo_materials) ||
+      c.cargo_materials.reduce((sum, n) => sum + n, 0) > 16 ||
+      !tiers(c.stored_materials) ||
+      !Array.isArray(c.abilities) ||
+      c.abilities.length !== 17 ||
+      !Array.isArray(c.loadouts) ||
+      c.loadouts.length !== 10
+    )
+      return false;
+    const abilities = c.abilities as AbilityState[];
+    if (
+      !Array.from(abilities).every(
+        (state, i) =>
+          state &&
+          typeof state === "object" &&
+          !Array.isArray(state) &&
+          typeof state.blueprint === "boolean" &&
+          integer(state.rank, 5) &&
+          (state.rank === 0 || state.blueprint) &&
+          (i < 14 || state.rank === (c.victory_claimed ? 5 : 0)) &&
+          (i >= 3 || state.blueprint) &&
+          (i < 6 ||
+            (i < 14
+              ? state.blueprint === patches[i - 6]
+              : state.blueprint === c.victory_claimed)),
+      )
+    )
+      return false;
+    const owned = (ship: number) =>
+      ship === 0 || (ship === 9 ? c.victory_claimed : crafted[ship - 1]);
+    const loadouts = c.loadouts as ShipLoadout[];
+    if (
+      !Array.from(loadouts).every(
+        (loadout, ship) =>
+          loadout &&
+          typeof loadout === "object" &&
+          !Array.isArray(loadout) &&
+          Array.isArray(loadout.hardware) &&
+          loadout.hardware.length === 6 &&
+          Array.from(loadout.hardware).every((n) => integer(n, 5)) &&
+          Array.isArray(loadout.slots) &&
+          loadout.slots.length === 3 &&
+          Array.from(loadout.slots).every(
+            (id, slot) =>
+              id === null ||
+              (integer(id, 16) &&
+                abilityCategories[id] === slot &&
+                compatibleAbility(id, ship) &&
+                abilities[id].rank > 0),
+          ) &&
+          (owned(ship) ||
+            (loadout.hardware.every((n) => n === 0) &&
+              loadout.slots.every((id) => id === null))),
+      )
+    )
+      return false;
+    if (
+      !(p.unlocked as boolean[]).every(
+        (unlocked, i) => unlocked === abilities[i + 3].blueprint,
+      ) ||
+      !ranks.every(
+        (rank, i) =>
+          rank ===
+          (i < 6
+            ? loadouts[c.selected_ship as number].hardware[i]
+            : abilities[i - 3].rank),
+      )
+    )
+      return false;
+  } else if (!integer(c.cargo_materials, 16) || !integer(c.stored_materials))
+    return false;
   if (c.last_run !== null) {
-    if (!c.last_run || typeof c.last_run !== "object" || Array.isArray(c.last_run)) return false;
+    if (
+      !c.last_run ||
+      typeof c.last_run !== "object" ||
+      Array.isArray(c.last_run)
+    )
+      return false;
     const run = c.last_run as Record<string, unknown>;
-    if (typeof run.time !== "number" || !Number.isFinite(run.time) || run.time < 0 || run.time > 1e9 ||
-      typeof run.distance_peak !== "number" || !Number.isFinite(run.distance_peak) || run.distance_peak < 0 || run.distance_peak > 1_500_000 ||
-      !["enemies", "asteroids", "champions", "xp_gained", "materials_gained"].every(key => integer(run[key])) ||
-      !Array.isArray(run.points_gained) || run.points_gained.length !== 3 || !Array.from(run.points_gained).every(v => integer(v))) return false;
+    if (
+      typeof run.time !== "number" ||
+      !Number.isFinite(run.time) ||
+      run.time < 0 ||
+      run.time > 1e9 ||
+      typeof run.distance_peak !== "number" ||
+      !Number.isFinite(run.distance_peak) ||
+      run.distance_peak < 0 ||
+      run.distance_peak > 1_500_000 ||
+      ![
+        "enemies",
+        "asteroids",
+        "champions",
+        "xp_gained",
+        "materials_gained",
+      ].every((key) => integer(run[key])) ||
+      !Array.isArray(run.points_gained) ||
+      run.points_gained.length !== 3 ||
+      !Array.from(run.points_gained).every((v) => integer(v)) ||
+      (p.schema_version === 4 && !tiers(run.materials_lost))
+    )
+      return false;
   }
-  return patches.every((patch, i) => patch === blueprints[i] && (!crafted[i] || blueprints[i])) &&
-    (c.selected_ship === 0 || (c.selected_ship === 9 ? c.victory_claimed : crafted[(c.selected_ship as number) - 1])) &&
-    (unlocked || results.every(v => v === 0)) &&
-    (!c.victory_claimed || (unlocked && results.every(v => v > 0) && wonLeague(p.seed as number, c as unknown as CampaignProgress))) &&
-    (!c.credits_seen || c.victory_claimed);
+  return (
+    patches.every(
+      (patch, i) => patch === blueprints[i] && (!crafted[i] || blueprints[i]),
+    ) &&
+    (c.selected_ship === 0 ||
+      (c.selected_ship === 9
+        ? c.victory_claimed
+        : crafted[(c.selected_ship as number) - 1])) &&
+    (unlocked || results.every((v) => v === 0)) &&
+    (!c.victory_claimed ||
+      (unlocked &&
+        results.every((v) => v > 0) &&
+        wonLeague(p.seed as number, c as unknown as CampaignProgress))) &&
+    (!c.credits_seen || c.victory_claimed)
+  );
 }
-/** Pure format migration; no currency, ranks, rewards or revision are changed. */
+/** Pure format migration. Live schema4 cargo is preserved; Game owns run abandonment. */
 export function normalizeProfile(value: unknown): Profile | null {
   if (!validProfile(value)) return null;
+  const campaign = migrateCampaign(value);
   return {
-    schema_version: 3,
+    schema_version: 4,
     revision: value.revision,
     seed: value.seed,
     currency: [...value.currency],
-    ranks: [...value.ranks],
-    unlocked: [...value.unlocked],
+    ranks: [
+      ...campaign.loadouts[campaign.selected_ship].hardware,
+      ...campaign.abilities.slice(3, 6).map((a) => a.rank),
+    ],
+    unlocked: campaign.abilities.slice(3, 6).map((a) => a.blueprint),
     kills: [...value.kills],
     boss_kills: [...value.boss_kills],
-    boss_generations: normalizedBossGenerations(value as unknown as Record<string, unknown>)!,
+    boss_generations: normalizedBossGenerations(
+      value as unknown as Record<string, unknown>,
+    )!,
     pity: [...value.pity],
     pending: [...value.pending],
-    discoveries: value.schema_version >= 2 ? [...(value as ExplorationProfile).discoveries] : [],
+    discoveries:
+      value.schema_version >= 2
+        ? [...(value as ExplorationProfile).discoveries]
+        : [],
     quests:
       value.schema_version >= 2
         ? (value as ExplorationProfile).quests.map((quest) => ({
@@ -257,9 +472,104 @@ export function normalizeProfile(value: unknown): Profile | null {
             completed: quest.completed,
           }))
         : [],
-    relics: value.schema_version >= 2 ? [...(value as ExplorationProfile).relics] : [],
-    campaign: value.schema_version === 3 ? structuredClone(value.campaign) : emptyCampaign(),
+    relics:
+      value.schema_version >= 2
+        ? [...(value as ExplorationProfile).relics]
+        : [],
+    campaign,
   };
+}
+function migrateCampaign(value: SupportedProfile): CampaignProgress {
+  const campaign = emptyCampaign();
+  if (value.schema_version === 3 || value.schema_version === 4) {
+    const previous = value.campaign;
+    // Copy only schema-owned fields: an older backup may contain unrelated keys.
+    campaign.patches = [...previous.patches];
+    campaign.blueprints = [...previous.blueprints];
+    campaign.crafted = [...previous.crafted];
+    campaign.selected_ship = previous.selected_ship;
+    campaign.royale_results = [...previous.royale_results];
+    campaign.tournament_attempt = previous.tournament_attempt;
+    campaign.victory_claimed = previous.victory_claimed;
+    campaign.credits_seen = previous.credits_seen;
+    campaign.ship_xp = [...previous.ship_xp];
+    const run = previous.last_run;
+    campaign.last_run = run
+      ? {
+          time: run.time,
+          distance_peak: run.distance_peak,
+          enemies: run.enemies,
+          asteroids: run.asteroids,
+          champions: run.champions,
+          points_gained: [...run.points_gained],
+          xp_gained: run.xp_gained,
+          materials_gained: run.materials_gained,
+          materials_lost:
+            value.schema_version === 4
+              ? [...value.campaign.last_run!.materials_lost]
+              : Array(5).fill(0),
+        }
+      : null;
+  }
+  if (value.schema_version === 4) {
+    campaign.cargo_materials = [...value.campaign.cargo_materials];
+    campaign.stored_materials = [...value.campaign.stored_materials];
+    campaign.abilities = value.campaign.abilities.map(
+      ({ blueprint, rank }) => ({ blueprint, rank }),
+    );
+    campaign.loadouts = value.campaign.loadouts.map(({ hardware, slots }) => ({
+      hardware: [...hardware],
+      slots: [...slots],
+    }));
+    return campaign;
+  }
+  if (value.schema_version === 3) {
+    const previous = value.campaign;
+    campaign.cargo_materials = Array(5).fill(0);
+    campaign.stored_materials = [
+      Math.min(
+        0xffffffff,
+        previous.stored_materials + previous.cargo_materials,
+      ),
+      0,
+      0,
+      0,
+      0,
+    ];
+  }
+  campaign.loadouts[campaign.selected_ship].hardware = [
+    ...value.ranks.slice(0, 6),
+  ];
+  for (let family = 0; family < 3; family++)
+    if (value.unlocked[family])
+      campaign.abilities[family + 3] = {
+        blueprint: true,
+        rank: Math.max(1, value.ranks[family + 6]),
+      };
+  for (let champion = 0; champion < 8; champion++)
+    campaign.abilities[champion + 6] = {
+      blueprint: campaign.blueprints[champion],
+      rank: campaign.crafted[champion] ? 1 : 0,
+    };
+  if (campaign.victory_claimed)
+    for (let id = 14; id < 17; id++)
+      campaign.abilities[id] = { blueprint: true, rank: 5 };
+  for (let ship = 0; ship < 10; ship++) {
+    if (
+      ship !== 0 &&
+      !(ship === 9 ? campaign.victory_claimed : campaign.crafted[ship - 1])
+    )
+      continue;
+    for (let family = 0; family < 3; family++)
+      if (campaign.abilities[family + 3].rank > 0)
+        campaign.loadouts[ship].slots[family] = family + 3;
+    if (ship > 0 && ship < 9) {
+      const id = ship + 5;
+      campaign.loadouts[ship].slots[abilityCategories[id]] = id;
+    }
+    if (ship === 9) campaign.loadouts[ship].slots = [14, 15, 16];
+  }
+  return campaign;
 }
 function request<T>(r: IDBRequest<T>): Promise<T> {
   return new Promise((resolve, reject) => {
@@ -281,24 +591,43 @@ export class SaveStore {
   private queue: Promise<void> = Promise.resolve();
   private latest?: Profile;
   private imported = false;
+  private invalidated = false;
   message = "Progress stays on this device.";
   get persistent(): boolean {
     return Boolean(this.db);
   }
-  async open(): Promise<Profile | null> {
+  async open(
+    onStatus: (message: string) => void = () => {},
+  ): Promise<Profile | null> {
     this.db?.close();
     this.db = undefined;
     this.latest = undefined;
     this.imported = false;
+    this.invalidated = false;
     this.message = "Progress stays on this device.";
     let loaded: Profile | null = null;
     try {
-      const r = indexedDB.open("galaxy-royale", 1);
+      // A database version barrier prevents cached schema-three writers from
+      // treating the new format as corrupt and overwriting it with an old run.
+      const r = indexedDB.open("galaxy-royale", 2);
+      r.onblocked = () => {
+        this.message =
+          "Close other Galaxy Royale tabs to upgrade your save safely.";
+        onStatus(this.message);
+      };
       r.onupgradeneeded = () => {
         if (!r.result.objectStoreNames.contains("profile"))
           r.result.createObjectStore("profile");
       };
       this.db = await request(r);
+      this.db.onversionchange = () => {
+        this.db?.close();
+        this.db = undefined;
+        this.invalidated = true;
+        this.message =
+          "The save format changed in another tab. Reload before continuing.";
+        onStatus(this.message);
+      };
       const tx = this.db.transaction("profile", "readwrite");
       const done = committed(tx);
       // Observe an early transaction failure even when one of the reads rejects first.
@@ -311,12 +640,14 @@ export class SaveStore {
       const normalizedCurrent = normalizeProfile(current);
       const normalizedPrevious = normalizeProfile(previous);
       loaded = normalizedCurrent ?? normalizedPrevious;
-      const currentMigrated = normalizedCurrent && JSON.stringify(current) !== JSON.stringify(normalizedCurrent);
-      const previousMigrated = normalizedPrevious && JSON.stringify(previous) !== JSON.stringify(normalizedPrevious);
-      if (currentMigrated)
-        store.put(normalizedCurrent, "current");
-      if (previousMigrated)
-        store.put(normalizedPrevious, "previous");
+      const currentMigrated =
+        normalizedCurrent &&
+        JSON.stringify(current) !== JSON.stringify(normalizedCurrent);
+      const previousMigrated =
+        normalizedPrevious &&
+        JSON.stringify(previous) !== JSON.stringify(normalizedPrevious);
+      if (currentMigrated) store.put(normalizedCurrent, "current");
+      if (previousMigrated) store.put(normalizedPrevious, "previous");
       await done;
       if (normalizedCurrent) {
         this.latest = structuredClone(normalizedCurrent);
@@ -332,7 +663,13 @@ export class SaveStore {
       if (current || previous)
         this.message =
           "Saved data was invalid. A new profile is ready; export a backup after playing.";
-    } catch {
+    } catch (error) {
+      if (error instanceof DOMException && error.name === "VersionError") {
+        this.invalidated = true;
+        this.message =
+          "This save needs a newer game version. Reload or update Galaxy Royale.";
+        throw new SaveConflict(this.message);
+      }
       if (loaded) {
         this.latest = structuredClone(loaded);
         this.message =
@@ -345,6 +682,7 @@ export class SaveStore {
     return null;
   }
   save(profile: SupportedProfile): Promise<void> {
+    if (this.invalidated) return Promise.reject(new SaveConflict(this.message));
     const copy = normalizeProfile(profile);
     if (!copy) return Promise.reject(new Error("Invalid profile snapshot"));
     // The caller reloads after import. Old simulation snapshots must not replace the imported run.
@@ -352,6 +690,7 @@ export class SaveStore {
     this.queue = this.queue
       .catch(() => {})
       .then(async () => {
+        if (this.invalidated) throw new SaveConflict(this.message);
         if (this.latest && copy.revision <= this.latest.revision) return;
         if (!this.db) {
           this.latest = copy;
@@ -398,6 +737,7 @@ export class SaveStore {
     return this.queue;
   }
   replace(profile: SupportedProfile): Promise<void> {
+    if (this.invalidated) return Promise.reject(new SaveConflict(this.message));
     const copy = normalizeProfile(profile);
     if (!copy)
       return Promise.reject(
@@ -417,6 +757,7 @@ export class SaveStore {
     this.queue = this.queue
       .catch(() => {})
       .then(async () => {
+        if (this.invalidated) throw new SaveConflict(this.message);
         const tx = this.db!.transaction("profile", "readwrite");
         const done = committed(tx);
         const store = tx.objectStore("profile");
@@ -483,9 +824,13 @@ export function normalizeSettings(value: unknown): Settings {
       s.cosmetic_density === "full" || s.cosmetic_density === "reduced"
         ? s.cosmetic_density
         : defaultSettings.cosmetic_density,
-    dialogue_voice: typeof s.dialogue_voice === "boolean" ? s.dialogue_voice : false,
+    dialogue_voice:
+      typeof s.dialogue_voice === "boolean" ? s.dialogue_voice : false,
     voice_volume: level(s.voice_volume, defaultSettings.voice_volume),
-    zoom: typeof s.zoom === "number" && Number.isFinite(s.zoom) ? Math.max(0.6, Math.min(1.6, s.zoom)) : 1,
+    zoom:
+      typeof s.zoom === "number" && Number.isFinite(s.zoom)
+        ? Math.max(0.6, Math.min(1.6, s.zoom))
+        : 1,
   };
 }
 export function saveSettings(settings: Settings): void {

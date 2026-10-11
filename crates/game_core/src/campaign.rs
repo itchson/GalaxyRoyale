@@ -3,7 +3,7 @@ use crate::{PixelBody, pixel_assets, regions};
 use serde::{Deserialize, Serialize};
 use std::sync::LazyLock;
 
-#[derive(Clone, Debug, Default, Serialize, Deserialize, PartialEq)]
+#[derive(Clone, Debug, Serialize, Deserialize, PartialEq)]
 #[serde(default)]
 pub struct CampaignProgress {
     pub patches: [bool; 8],
@@ -16,9 +16,64 @@ pub struct CampaignProgress {
     pub victory_claimed: bool,
     pub credits_seen: bool,
     pub ship_xp: [u32; 10],
-    pub cargo_materials: u32,
-    pub stored_materials: u32,
+    #[serde(deserialize_with = "deserialize_materials")]
+    pub cargo_materials: [u32; 5],
+    #[serde(deserialize_with = "deserialize_materials")]
+    pub stored_materials: [u32; 5],
+    pub abilities: [AbilityState; crate::abilities::COUNT],
+    pub loadouts: [ShipLoadout; 10],
     pub last_run: Option<RunSummary>,
+}
+impl Default for CampaignProgress {
+    fn default() -> Self {
+        let mut abilities = [AbilityState::default(); crate::abilities::COUNT];
+        for state in &mut abilities[..3] {
+            state.blueprint = true;
+        }
+        Self {
+            patches: [false; 8],
+            blueprints: [false; 8],
+            crafted: [false; 8],
+            selected_ship: 0,
+            royale_results: [0; 8],
+            tournament_attempt: 0,
+            victory_claimed: false,
+            credits_seen: false,
+            ship_xp: [0; 10],
+            cargo_materials: [0; 5],
+            stored_materials: [0; 5],
+            abilities,
+            loadouts: [ShipLoadout::default(); 10],
+            last_run: None,
+        }
+    }
+}
+
+#[derive(Clone, Copy, Debug, Default, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(default)]
+pub struct AbilityState {
+    pub blueprint: bool,
+    /// Zero is an uncrafted blueprint; 1..5 is a shared crafted inventory rank.
+    pub rank: u8,
+}
+#[derive(Clone, Copy, Debug, Default, Serialize, Deserialize, PartialEq, Eq)]
+#[serde(default)]
+pub struct ShipLoadout {
+    pub hardware: [u8; 6],
+    pub slots: [Option<u8>; 3],
+}
+
+fn deserialize_materials<'de, D: serde::Deserializer<'de>>(d: D) -> Result<[u32; 5], D::Error> {
+    #[derive(Deserialize)]
+    #[serde(untagged)]
+    enum Materials {
+        Legacy(u32),
+        Tiers([u32; 5]),
+    }
+    Ok(match Materials::deserialize(d)? {
+        Materials::Legacy(amount) => [amount, 0, 0, 0, 0],
+        Materials::Tiers(tiers) => tiers,
+    })
 }
 
 #[derive(Clone, Debug, Default, Serialize, Deserialize, PartialEq)]
@@ -32,6 +87,7 @@ pub struct RunSummary {
     pub points_gained: [u32; 3],
     pub xp_gained: u32,
     pub materials_gained: u32,
+    pub materials_lost: [u32; 5],
 }
 pub fn level(xp: u32) -> u32 {
     let mut level = 1;
@@ -53,13 +109,7 @@ pub fn rank_cap(level: u32) -> u8 {
         .count() as u8
 }
 pub fn signature_rank(p: &crate::Profile, index: usize) -> u8 {
-    if p.campaign.selected_ship == 9 {
-        5
-    } else {
-        p.ranks[index].min(rank_cap(level(
-            p.campaign.ship_xp[p.campaign.selected_ship as usize],
-        )))
-    }
+    crate::ship_progression::family_rank(p, index.saturating_sub(6))
 }
 
 impl CampaignProgress {
@@ -77,7 +127,11 @@ impl CampaignProgress {
         }
         self.victory_claimed &= self.patches.iter().all(|v| *v) && self.complete();
         self.credits_seen &= self.victory_claimed;
-        self.cargo_materials = self.cargo_materials.min(16);
+        let mut remaining = 16;
+        for amount in &mut self.cargo_materials {
+            *amount = (*amount).min(remaining);
+            remaining -= *amount;
+        }
         if let Some(run) = &mut self.last_run {
             if !run.time.is_finite() || !run.distance_peak.is_finite() {
                 self.last_run = None;
@@ -134,7 +188,7 @@ pub struct EncounterHud {
     pub health: f32,
     pub max_health: f32,
 }
-#[derive(Clone, Debug, Serialize)]
+#[derive(Clone, Debug, Default, Serialize)]
 pub struct ShipHud {
     pub id: u8,
     pub name: String,
@@ -143,6 +197,18 @@ pub struct ShipHud {
     pub selected: bool,
     pub category: usize,
     pub craftable: bool,
+    pub family: usize,
+    pub level: u32,
+    pub xp: u32,
+    pub next_xp: u32,
+    pub rank_cap: u8,
+    pub point_cost: u32,
+    pub material_tier: u8,
+    pub material_cost: u32,
+    pub can_craft: bool,
+    pub can_select: bool,
+    pub craft_reason: String,
+    pub select_reason: String,
 }
 #[derive(Clone, Debug, Serialize, PartialEq)]
 pub struct StandingHud {

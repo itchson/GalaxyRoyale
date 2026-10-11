@@ -21,19 +21,7 @@
     <canvas id="universe" aria-label="Galaxy Royale game universe"></canvas>
     <div id="game-ui">
       <header class="flight-header">
-        <div class="sector">
-          <span class="brand-icon">✦</span>
-          <div>
-            <b>GALAXY <span>ROYALE</span></b
-            ><small id="sector">HAVEN / PROTECTED SPACE</small>
-          </div>
-        </div>
         <div class="header-right">
-          <div class="cargo" aria-label="Collected upgrade points">
-            <span class="offense">◆ <b id="currency-0">0</b></span
-            ><span class="defense">⬡ <b id="currency-1">0</b></span
-            ><span class="passive">✦ <b id="currency-2">0</b></span>
-          </div>
           <button
             id="save-indicator"
             class="icon-button save-indicator"
@@ -42,9 +30,36 @@
           >
             <span aria-hidden="true">S</span>
           </button>
-          <button id="pause-button" class="icon-button" aria-label="Pause">
-            Ⅱ</button
-          ><button id="fullscreen" class="icon-button" aria-label="Fullscreen">
+          <nav class="flight-toolbar" aria-label="Flight pages">
+            <button
+              id="pause-button"
+              class="icon-button"
+              data-pixel-icon="status-icon"
+              aria-label="Ship status"
+              title="Ship status / Escape"
+            >
+              ≡
+            </button>
+            <button
+              id="map-button"
+              class="icon-button"
+              data-pixel-icon="map-icon"
+              aria-label="Universe map"
+              title="Universe map"
+            >
+              MAP
+            </button>
+            <button
+              id="flight-settings"
+              class="icon-button"
+              data-pixel-icon="settings-icon"
+              aria-label="Settings"
+              title="Settings"
+            >
+              SET
+            </button>
+          </nav>
+          <button id="fullscreen" class="icon-button" aria-label="Fullscreen">
             ⛶
           </button>
         </div>
@@ -58,36 +73,54 @@
         ><b id="boss-name"></b>
         <div class="boss-track"><i id="boss-health"></i></div>
       </div>
-      <div class="nav-module">
-        <canvas
-          id="radar"
-          width="112"
-          height="112"
-          aria-label="Dock bearing radar"
-        ></canvas>
-        <div>
-          <small id="distance">0 m FROM HAVEN</small
-          ><b id="danger">SANCTUARY</b>
+      <section class="flight-telemetry" aria-label="Flight telemetry">
+        <small id="sector">HAVEN / PROTECTED SPACE</small>
+        <div class="cargo" aria-label="Collected upgrade points">
+          <span class="offense">Offense <b id="currency-0">0</b></span>
+          <span class="defense">Defense <b id="currency-1">0</b></span>
+          <span class="passive">Passive <b id="currency-2">0</b></span>
         </div>
-      </div>
-      <div class="ship-module">
-        <div class="hull-label">
-          <span>HULL INTEGRITY</span><b id="hull-number">100 / 100</b>
+        <div class="nav-module">
+          <canvas
+            id="radar"
+            width="112"
+            height="112"
+            aria-label="Dock bearing radar"
+            aria-hidden="true"
+          ></canvas>
+          <div>
+            <small id="distance">0 m FROM HAVEN</small
+            ><b id="danger">SANCTUARY</b>
+          </div>
         </div>
-        <div class="hull-track"><i id="hull-fill"></i></div>
-        <div class="shield-track"><i id="shield-fill"></i></div>
+        <div class="ship-module">
+          <div class="hull-label">
+            <span>HULL INTEGRITY</span><b id="hull-number">100 / 100</b>
+          </div>
+          <div class="hull-track"><i id="hull-fill"></i></div>
+          <div class="shield-track"><i id="shield-fill"></i></div>
+        </div>
+      </section>
+      <div id="flight-status-strip" aria-label="Flight status">
+        <button
+          id="dock-button"
+          class="dock-prompt"
+          data-pixel-kind="status-text"
+          aria-label="Open ship upgrades"
+          hidden
+        >
+          FORGE / SHIP UPGRADES [E]
+        </button>
+        <button
+          id="site-button"
+          class="dock-prompt"
+          data-pixel-kind="status-text"
+          hidden
+        >
+          DISCOVERY / INTERACT [E]
+        </button>
+        <div id="toast" data-pixel-kind="warning-text" role="status"></div>
       </div>
-      <button
-        id="dock-button"
-        class="dock-prompt"
-        aria-label="Open ship upgrades"
-        hidden
-      >
-        <span aria-hidden="true">⌘</span> FORGE / SHIP UPGRADES <small>E</small>
-      </button>
-      <button id="site-button" class="dock-prompt" hidden>
-        DISCOVERY / INTERACT [E]
-      </button>
       <button
         id="facility-0"
         class="dock-facility"
@@ -128,7 +161,6 @@
       <button id="fire-button" aria-label="Hold to fire">
         <span>⌖</span><small>FIRE</small>
       </button>
-      <div id="toast" role="status"></div>
       <div id="performance" hidden></div>
     </div>
     <section id="launch-screen" class="screen-overlay">
@@ -143,11 +175,22 @@
         <button id="launch" class="primary-button">
           LAUNCH EXPEDITION <span>↗</span>
         </button>
-        <button id="launch-settings" class="text-button">SETTINGS</button>
+        <nav class="title-actions" aria-label="Title actions">
+          <button id="launch-settings" class="text-button">SETTINGS</button>
+          <button
+            id="quit-game"
+            class="text-button exit-button"
+            data-pixel-icon="quit-icon"
+            aria-label="Quit game"
+            title="Quit game"
+          >
+            QUIT
+          </button>
+        </nav>
         <div class="control-guide desktop-guide">
           <span><b>LEFT CLICK</b> Set course / use a dock facility</span
           ><span><b>RIGHT HOLD</b> Aim + fire</span
-          ><span><b>ESC</b> Pause</span>
+          ><span><b>ESC</b> Live ship status</span>
         </div>
         <div class="control-guide touch-guide">
           <span><b>LEFT STICK</b> Thrust & steer</span
@@ -178,20 +221,58 @@
           <span aria-hidden="true">X</span>
         </button>
         <div class="eyebrow">HAVEN COMMAND</div>
-        <h2 id="menu-title">Flight paused</h2>
-        <p id="menu-description">Your next expedition awaits.</p>
+        <h2 id="menu-title">Ship status</h2>
+        <p id="menu-description">
+          The universe continues while you inspect your ship.
+        </p>
         <div id="pause-content" class="menu-page pause-page" hidden>
-          <button id="resume" class="primary-button">CONTINUE</button>
-          <button id="restart-flight" class="text-button restart-button">
-            RESTART FLIGHT
-          </button>
-          <button id="pause-settings" class="text-button">SETTINGS</button>
-          <button id="return-title" class="text-button exit-button">
-            RETURN TO TITLE
-          </button>
+          <nav class="flight-menu-actions" aria-label="Flight actions">
+            <button
+              id="resume"
+              class="flight-menu-action primary-button"
+              data-pixel-icon="resume-icon"
+              aria-label="Continue flight"
+              title="Continue flight"
+            >
+              GO
+            </button>
+            <button
+              id="restart-flight"
+              class="flight-menu-action text-button restart-button"
+              data-pixel-icon="restart-icon"
+              aria-label="Restart flight"
+              title="Restart flight / carried materials are lost"
+            >
+              RST
+            </button>
+            <button
+              id="pause-settings"
+              class="flight-menu-action text-button"
+              data-pixel-icon="settings-icon"
+              aria-label="Settings"
+              title="Settings"
+            >
+              SET
+            </button>
+            <button
+              id="return-title"
+              class="flight-menu-action text-button exit-button"
+              data-pixel-icon="title-icon"
+              aria-label="Return to title"
+              title="Return to title / carried materials are lost"
+            >
+              TITLE
+            </button>
+          </nav>
+          <section
+            id="flight-status"
+            class="flight-status"
+            aria-label="Live ship status"
+          ></section>
         </div>
         <div id="upgrade-content" class="menu-page"></div>
         <div id="quest-content" class="menu-page" hidden></div>
+        <div id="map-content" class="menu-page" hidden></div>
         <div id="hangar-content" class="menu-page" hidden></div>
         <div id="campaign-content" class="menu-page" hidden></div>
         <div id="settings-content" class="settings menu-page" hidden>
@@ -248,14 +329,24 @@
           <button id="settings-backup" class="text-button icon-action">
             <span aria-hidden="true">S</span> SAVE &amp; BACKUP
           </button>
+          <button
+            id="settings-title"
+            class="icon-button settings-title"
+            data-pixel-icon="title-icon"
+            aria-label="Return to title"
+            title="Return to title / carried materials are lost"
+          >
+            TITLE
+          </button>
         </div>
         <div id="archive-content" class="menu-page" hidden>
           <div class="save-card">
             <h3>AUTOMATIC SAVES</h3>
             <p>
-              Your progression saves on this device as you play. Collected
-              points and dock storage survive ship loss. Reloading starts at
-              Haven.
+              Ship XP, collected points, owned equipment and dock storage save
+              on this device. Carried crafting materials bank only when you
+              physically return to Haven. Death, restart, return to title or
+              reload discards carried materials.
             </p>
             <h3>BACKUP YOUR PROGRESSION</h3>
             <p>
@@ -283,9 +374,7 @@
           <button id="apply-update" class="text-button" hidden>
             Apply update at Haven
           </button>
-          <small id="save-status" role="status"
-            >Progress stays on this device.</small
-          >
+          <small id="save-status" role="status">Saves on this device.</small>
         </div>
       </div>
     </section>
@@ -293,7 +382,10 @@
       <div class="death-card">
         <div class="eyebrow">EXPEDITION ENDED</div>
         <h2>SHIP LOST</h2>
-        <p>Your collected points and materials are safe at Haven.</p>
+        <p>
+          Ship XP, points and dock storage are retained. Carried crafting
+          materials are lost with your ship.
+        </p>
         <div id="run-summary" aria-label="Expedition report"></div>
         <div class="death-actions">
           <button id="retry" class="primary-button">RETRY EXPEDITION</button>

@@ -24,11 +24,7 @@ pub(super) struct Homing {
 impl Game {
     pub(super) fn ship_level(&self) -> u32 {
         let selected = self.profile.campaign.selected_ship as usize;
-        campaign::level(self.profile.campaign.ship_xp[selected]).max(if selected == 9 {
-            12
-        } else {
-            1
-        })
+        campaign::level(self.profile.campaign.ship_xp[selected])
     }
     pub(super) fn track_run(&mut self, dt: f32) {
         let distance = self.position().length();
@@ -45,15 +41,16 @@ impl Game {
         }
     }
     pub(super) fn bank_cargo(&mut self) {
-        let amount = self.profile.campaign.cargo_materials;
-        if amount > 0 {
-            let space = u32::MAX - self.profile.campaign.stored_materials;
-            let banked = amount.min(space);
-            self.profile.campaign.stored_materials += banked;
-            self.profile.campaign.cargo_materials -= banked;
-            if banked > 0 {
-                self.changed();
-            }
+        let mut changed = false;
+        for tier in 0..5 {
+            let amount = self.profile.campaign.cargo_materials[tier];
+            let banked = amount.min(u32::MAX - self.profile.campaign.stored_materials[tier]);
+            self.profile.campaign.stored_materials[tier] += banked;
+            self.profile.campaign.cargo_materials[tier] -= banked;
+            changed |= banked > 0;
+        }
+        if changed {
+            self.changed();
         }
     }
     pub(super) fn award_xp(&mut self, amount: u32) {
@@ -153,9 +150,7 @@ impl Game {
     }
 
     pub fn craft_ship(&mut self, index: usize) -> Result<(), String> {
-        if self.position().length() > SAFE_RADIUS {
-            return Err("Return to Haven dock to construct ships.".into());
-        }
+        self.ship_craft_check(index)?;
         let champion = CHAMPIONS.get(index).ok_or("Unknown blueprint.")?;
         if !self.profile.campaign.blueprints[index] {
             return Err("Defeat this champion to earn its blueprint.".into());
@@ -166,11 +161,11 @@ impl Game {
         if self.profile.currency[champion.category] < COST {
             return Err("Construction requires 10 matching category fragments.".into());
         }
-        if self.profile.campaign.stored_materials < 6 {
+        if self.profile.campaign.stored_materials[0] < 6 {
             return Err("Construction also requires 6 materials in Haven storage.".into());
         }
         self.profile.currency[champion.category] -= COST;
-        self.profile.campaign.stored_materials -= 6;
+        self.profile.campaign.stored_materials[0] -= 6;
         self.profile.campaign.crafted[index] = true;
         self.changed();
         self.event("upgrade", self.position(), 1.0);
@@ -178,14 +173,13 @@ impl Game {
     }
 
     pub fn switch_ship(&mut self, id: u8) -> Result<(), String> {
-        if self.position().length() > SAFE_RADIUS {
-            return Err("Return to Haven dock to switch ships.".into());
-        }
-        if !self.profile.campaign.owned(id) {
-            return Err("This ship is not in your hangar.".into());
-        }
+        self.ship_select_check(id)?;
         if self.profile.campaign.selected_ship != id {
             self.profile.campaign.selected_ship = id;
+            ship_progression::mirrors(&mut self.profile);
+            self.wake.clear();
+            self.repulsor_timer = 0.0;
+            self.shot_count = 0;
             self.changed();
             self.enter_dock();
         }
@@ -242,6 +236,7 @@ impl Game {
             actor.damage = 15.0 + index as f32 * 0.8;
         }
         let _ = self.world.insert_one(opponent, body);
+        self.rebind_chain_head(opponent);
         let _ = self.world.insert_one(
             opponent,
             ChampionFighter {
@@ -326,8 +321,7 @@ impl Game {
                     let (standings, _) = table(self.profile.seed, &self.profile.campaign);
                     if standings[0].entrant == 8 && !self.profile.campaign.victory_claimed {
                         self.profile.campaign.victory_claimed = true;
-                        self.profile.campaign.ship_xp[9] =
-                            self.profile.campaign.ship_xp[9].max(1320);
+                        ship_progression::grant_royal(&mut self.profile);
                         self.changed();
                         self.event("credits", arena.center, 1.0);
                     }
@@ -335,6 +329,7 @@ impl Game {
             } else if won && !self.profile.campaign.patches[arena.index] {
                 self.profile.campaign.patches[arena.index] = true;
                 self.profile.campaign.blueprints[arena.index] = true;
+                self.profile.campaign.abilities[arena.index + 6].blueprint = true;
                 let family = CHAMPIONS[arena.index].family;
                 let category = CHAMPIONS[arena.index].category;
                 self.credit_points(category, 3);
@@ -597,43 +592,69 @@ impl Game {
     }
 
     pub(super) fn ship_signature(&mut self, motion: Motion, stats: Stats) {
-        let ship = self.profile.campaign.selected_ship;
+        let slot =
+            self.profile.campaign.loadouts[self.profile.campaign.selected_ship as usize].slots[0];
+        let rank = slot.map_or(0, |id| ship_progression::equipped_rank(&self.profile, id));
+        let damage_rank = 1.0 + 0.15 * rank.saturating_sub(1) as f32;
         let shot = self.shot_count;
+        let before = self.world.query::<&Bullet>().iter().count();
         let mut fan = |offset: f32, speed: f32, damage: f32, hits: u8| {
             let dir = forward(motion.heading + offset);
             self.spawn_bullet(
                 motion.position + dir * 20.0,
                 dir * speed,
-                stats.damage * damage,
+                stats.damage * damage * damage_rank,
                 true,
                 hits,
             );
         };
-        match ship {
-            1 if shot.is_multiple_of(4) => {
+        match slot.filter(|_| rank > 0) {
+            Some(6) if shot.is_multiple_of(4) => {
                 fan(-0.1, 520.0, 0.65, 1);
                 fan(0.1, 520.0, 0.65, 1);
             }
-            2 if shot.is_multiple_of(6) => {
+            Some(7) if shot.is_multiple_of(6) => {
                 fan(FRAC_PI_2, 330.0, 1.0, 1);
                 fan(-FRAC_PI_2, 330.0, 1.0, 1);
             }
-            3 if shot.is_multiple_of(5) => self.guided_shot(motion, stats.damage * 1.4, 1, 1.9),
-            4 if shot.is_multiple_of(3) => {
+            Some(8) if shot.is_multiple_of(5) => {
+                self.guided_shot(motion, stats.damage * 1.4 * damage_rank, 1, 1.9)
+            }
+            Some(9) if shot.is_multiple_of(3) => {
                 fan(-0.28, 370.0, 0.6, 1);
                 fan(0.28, 370.0, 0.6, 1);
             }
-            7 if shot.is_multiple_of(4) => self.guided_shot(motion, stats.damage, 3, 0.9),
-            8 if shot.is_multiple_of(6) => fan(0.0, 780.0, 1.8, 5),
-            9 if shot.is_multiple_of(8) => {
+            Some(12) if shot.is_multiple_of(4) => {
+                self.guided_shot(motion, stats.damage * damage_rank, 3, 0.9)
+            }
+            Some(13) if shot.is_multiple_of(6) => fan(0.0, 780.0, 1.8, 5),
+            Some(14) if shot.is_multiple_of(8) => {
                 for n in 0..8 {
                     fan(n as f32 * TAU / 8.0, 350.0, 0.5, 1);
                 }
-                if let Ok(mut actor) = self.world.get::<&mut Actor>(self.player) {
-                    actor.health = (actor.health + 4.0).min(actor.max_health);
-                }
             }
             _ => {}
+        }
+        if self.world.query::<&Bullet>().iter().count() > before {
+            let kind = if slot == Some(14) {
+                "ability-royal".into()
+            } else {
+                format!("ability-signature-{}", slot.unwrap())
+            };
+            self.event(&kind, motion.position, 0.65);
+        }
+        let mut repaired = false;
+        if ship_progression::equipped_rank(&self.profile, 15) > 0
+            && shot.is_multiple_of(8)
+            && let Ok(mut actor) = self.world.get::<&mut Actor>(self.player)
+            && actor.health > 0.0
+        {
+            let previous = actor.health;
+            actor.health = (actor.health + 4.0).min(actor.max_health);
+            repaired = actor.health > previous;
+        }
+        if repaired {
+            self.event("ability-repair", motion.position, 0.45);
         }
     }
 
@@ -693,11 +714,11 @@ impl Game {
         });
         let abilities = [
             "Needle burst every 4 shots",
-            "Broadside every 6 shots; +20 hull / -8% speed",
+            "Broadside every 6 shots",
             "Guided missile every 5 shots",
             "Fork volley every 3 shots",
-            "Automatic fast-flight wake; +10% speed",
-            "Damage-triggered nova every 7.5 seconds; +10 hull",
+            "Automatic fast-flight wake",
+            "Damage-triggered nova every 7.5 seconds",
             "Piercing seeker every 4 shots",
             "Piercing spear every 6 shots",
         ];
@@ -709,19 +730,43 @@ impl Game {
             selected: p.selected_ship == 0,
             category: 0,
             craftable: false,
+            ..ShipHud::default()
         }];
         for (i, c) in CHAMPIONS.iter().enumerate() {
             ships.push(ShipHud {
                 id: (i + 1) as u8,
                 name: c.ship.into(),
-                ability: abilities[i].into(),
+                ability: format!(
+                    "Chassis: {}. Native blueprint: {}",
+                    match i {
+                        1 => "+20 hull / -8% speed",
+                        4 => "+10% speed / +15% acceleration",
+                        5 => "+10 hull",
+                        _ => "standard frame",
+                    },
+                    abilities[i]
+                ),
                 owned: p.crafted[i],
                 selected: p.selected_ship == i as u8 + 1,
                 category: c.category,
                 craftable: p.blueprints[i] && !p.crafted[i],
+                ..ShipHud::default()
             });
         }
-        ships.push(ShipHud {id:9,name:"Royale Sovereign".into(),ability:"Intrinsic rank5 offense/defense/passives; prism nova +4 repair; enhanced hull/shield/drive".into(),owned:p.victory_claimed,selected:p.selected_ship==9,category:0,craftable:false});
+        ships.push(ShipHud {
+            id: 9,
+            name: "Royale Sovereign".into(),
+            ability: "Three equipped rank-5 royal bundles; enhanced chassis; independent ship XP"
+                .into(),
+            owned: p.victory_claimed,
+            selected: p.selected_ship == 9,
+            category: 0,
+            craftable: false,
+            ..ShipHud::default()
+        });
+        for ship in &mut ships {
+            self.ship_hud_details(ship);
+        }
         let (standings, matches) = table(self.profile.seed, p);
         let tournament_position = tournament_site(self.profile.seed).position;
         CampaignHud {
@@ -1014,7 +1059,7 @@ mod tests {
         assert!(reloaded.hud().campaign.tournament_won);
         assert_eq!(reloaded.profile.campaign.royale_results, [1; 8]);
         assert!(reloaded.hud().campaign.credits_pending);
-        assert_eq!(reloaded.profile.campaign.ship_xp[9], 1320);
+        assert_eq!(reloaded.profile.campaign.ship_xp[9], 0);
         assert!(reloaded.start_tournament().is_err());
         let victory = Game::new(reloaded.profile.clone());
         assert!(victory.profile.campaign.owned(9));
@@ -1032,7 +1077,7 @@ mod tests {
         g.spawn_loot(g.position(), 3, 20);
         g.spawn_loot(g.position(), 0, 7);
         g.update_pickups(g.position(), 1.0 / 60.0);
-        assert_eq!(g.profile.campaign.cargo_materials, 16);
+        assert_eq!(g.profile.campaign.cargo_materials, [16, 0, 0, 0, 0]);
         assert_eq!(g.profile.currency[0], 7);
         assert_eq!(
             g.world
@@ -1042,9 +1087,10 @@ mod tests {
                 .sum::<u32>(),
             4
         );
-        g.reset_to_dock();
-        assert_eq!(g.profile.campaign.cargo_materials, 0);
-        assert_eq!(g.profile.campaign.stored_materials, 16);
+        g.move_player(Vec2::ZERO);
+        g.enter_dock();
+        assert_eq!(g.profile.campaign.cargo_materials, [0, 0, 0, 0, 0]);
+        assert_eq!(g.profile.campaign.stored_materials, [16, 0, 0, 0, 0]);
         assert_eq!(
             g.profile
                 .campaign
@@ -1059,30 +1105,31 @@ mod tests {
             [7, 0, 0]
         );
         g.bank_cargo();
-        assert_eq!(g.profile.campaign.stored_materials, 16);
+        assert_eq!(g.profile.campaign.stored_materials, [16, 0, 0, 0, 0]);
         g.profile.campaign.patches[0] = true;
         g.profile.campaign.blueprints[0] = true;
         g.profile.currency[0] = 10;
-        g.profile.campaign.stored_materials = 5;
+        g.profile.campaign.stored_materials = [5, 0, 0, 0, 0];
         assert!(g.craft_ship(0).is_err());
         assert_eq!(g.profile.currency[0], 10);
-        assert_eq!(g.profile.campaign.stored_materials, 5);
-        g.profile.campaign.stored_materials = 6;
+        assert_eq!(g.profile.campaign.stored_materials, [5, 0, 0, 0, 0]);
+        g.profile.campaign.stored_materials = [6, 0, 0, 0, 0];
         g.craft_ship(0).unwrap();
         assert_eq!(g.profile.currency[0], 0);
-        assert_eq!(g.profile.campaign.stored_materials, 0);
+        assert_eq!(g.profile.campaign.stored_materials, [0, 0, 0, 0, 0]);
         assert!(g.craft_ship(0).is_err());
         g.switch_ship(1).unwrap();
         assert_eq!(g.world.get::<&PixelBody>(g.player).unwrap().width, 32);
         assert!(g.switch_ship(9).is_err());
     }
     #[test]
-    fn real_kills_level_selected_ship_and_gate_global_hardware_purchases() {
+    fn real_kills_level_selected_ship_and_gate_ship_local_hardware_purchases() {
         let mut g = Game::new(Profile::default());
         let initial = Stats::from_profile(&g.profile);
         assert!((initial.speed - 100.0).abs() < 0.001);
         assert!((initial.acceleration - 260.0).abs() < 0.001);
         g.profile.currency[0] = 100;
+        g.profile.campaign.stored_materials = [10; 5];
         g.purchase("damage").unwrap();
         assert!(g.purchase("damage").is_err());
         g.move_player(Vec2::new(1800.0, 0.0));
@@ -1107,9 +1154,10 @@ mod tests {
         let mut g = Game::new(profile);
         g.switch_ship(1).unwrap();
         assert_eq!(g.ship_level(), 1);
-        assert_eq!(g.profile.ranks[0], 2);
-        assert!(Stats::from_profile(&g.profile).damage > 12.0);
-        assert!(g.purchase("damage").is_err());
+        assert_eq!(g.profile.ranks[0], 0);
+        assert_eq!(Stats::from_profile(&g.profile).damage, 12.0);
+        g.purchase("damage").unwrap();
+        assert_eq!(g.profile.ranks[0], 1);
     }
     #[test]
     fn death_retains_banked_points_xp_materials_and_preserves_summary_without_reload_popup() {
@@ -1125,7 +1173,7 @@ mod tests {
         g.tick(&InputFrame::default(), 1.0 / 60.0);
         assert_eq!(g.position(), Vec2::ZERO);
         assert_eq!(g.profile.currency[2], 5);
-        assert_eq!(g.profile.campaign.stored_materials, 2);
+        assert_eq!(g.profile.campaign.stored_materials, [0; 5]);
         assert_eq!(g.profile.campaign.ship_xp[0], 5);
         let summary = g.profile.campaign.last_run.clone().unwrap();
         assert!(summary.time >= 3.0);
@@ -1138,13 +1186,14 @@ mod tests {
     #[test]
     fn sovereign_has_intrinsic_maximum_upgrades_without_changing_global_progress() {
         let mut p = qualified();
+        p.schema_version = 3; // migrate the previously awarded reward ship
         p.campaign.royale_results = [1; 8];
         p.campaign.victory_claimed = true;
         p.campaign.selected_ship = 9;
         let mut g = Game::new(p);
         assert_eq!(g.profile.ranks, [0; 9]);
         assert_eq!(g.profile.unlocked, [false; 3]);
-        assert_eq!(g.ship_level(), 12);
+        assert_eq!(g.ship_level(), 1);
         let stats = Stats::from_profile(&g.profile);
         assert!((stats.hull - 240.0).abs() < 0.001);
         assert!((stats.shield - 100.0).abs() < 0.001);
@@ -1176,19 +1225,19 @@ mod tests {
         p.campaign.victory_claimed = true;
         p.campaign.credits_seen = true;
         p.campaign.selected_ship = 9;
-        p.campaign.cargo_materials = 999;
+        p.campaign.cargo_materials = [999, 0, 0, 0, 0];
         let g = Game::new(p);
         assert!(!g.profile.campaign.victory_claimed);
         assert!(!g.profile.campaign.credits_seen);
         assert_eq!(g.profile.campaign.selected_ship, 0);
-        assert_eq!(g.profile.campaign.cargo_materials, 0);
-        assert_eq!(g.profile.campaign.stored_materials, 16);
+        assert_eq!(g.profile.campaign.cargo_materials, [0, 0, 0, 0, 0]);
+        assert_eq!(g.profile.campaign.stored_materials, [0; 5]);
         let legacy: Profile = serde_json::from_str(
             r#"{"schema_version":2,"currency":[7,8,9],"ranks":[5,4,3,2,1,0,0,0,0]}"#,
         )
         .unwrap();
         let g = Game::new(legacy);
-        assert_eq!(g.profile.schema_version, 3);
+        assert_eq!(g.profile.schema_version, 4);
         assert_eq!(g.profile.currency, [7, 8, 9]);
         assert_eq!(g.profile.ranks[..6], [5, 4, 3, 2, 1, 0]);
     }

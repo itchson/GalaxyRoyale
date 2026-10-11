@@ -17,7 +17,8 @@ pub struct PixelMaterial {
 pub struct GpuTransform {
     /// Translation.xy, basis_x.xy.
     pub a: [f32; 4],
-    /// basis_y.xy, light response, emission.
+    /// basis_y.xy, light response, emission. Only explicit soft extraction uses
+    /// negative emission, encoded as -(1 + emission); hard materials stay >=0.
     pub b: [f32; 4],
 }
 
@@ -238,11 +239,64 @@ impl FrameBuilder {
         {
             return 0;
         }
+        self.push_cells_packed(GpuTransform::from(transform).with_material(material), cells)
+    }
+
+    /// Radially filtered cosmetic cells with local fractional geometry. The
+    /// shader conserves projected area while filtering a subpixel footprint;
+    /// hard quads and collision occupancy are never enlarged by this API.
+    /// All submitted cells, including alpha zero, consume the caller's budget.
+    pub fn push_soft_cells_affine(
+        &mut self,
+        transform: AffineTransform,
+        cells: impl IntoIterator<Item = (Vec2, u32)>,
+    ) -> usize {
+        self.push_soft_cells_affine_material(transform, PixelMaterial::default(), cells)
+    }
+
+    /// Soft gas/fire can receive bounded lighting and emission independently.
+    /// Emission changes this material's brightness; real light sources must
+    /// still be supplied by the simulation. Invalid or unrepresentable soft
+    /// bases add neither pixels nor transform slots.
+    pub fn push_soft_cells_affine_material(
+        &mut self,
+        transform: AffineTransform,
+        material: PixelMaterial,
+        cells: impl IntoIterator<Item = (Vec2, u32)>,
+    ) -> usize {
+        let determinant = transform.basis_x.perp_dot(transform.basis_y);
+        let area_scale = transform.basis_x.length() * transform.basis_y.length();
+        if !transform.position.is_finite()
+            || !transform.basis_x.is_finite()
+            || !transform.basis_y.is_finite()
+            || transform.basis_x.abs().max_element() > 4096.0
+            || transform.basis_y.abs().max_element() > 4096.0
+            || !determinant.is_finite()
+            || determinant == 0.0
+            || determinant.abs() < area_scale * 0.0001
+        {
+            return 0;
+        }
+        let mut packed = GpuTransform::from(transform).with_material(material);
+        packed.b[3] = -(1.0 + packed.b[3]);
+        self.push_cells_packed(
+            packed,
+            cells
+                .into_iter()
+                .filter(|(local, _)| local.is_finite() && transform.point(*local).is_finite()),
+        )
+    }
+
+    fn push_cells_packed(
+        &mut self,
+        transform: GpuTransform,
+        cells: impl IntoIterator<Item = (Vec2, u32)>,
+    ) -> usize {
         let mut cells = cells.into_iter().filter(|(local, _)| local.is_finite());
         let Some(first) = cells.next() else {
             return 0;
         };
-        let slot = self.add_transform(GpuTransform::from(transform).with_material(material));
+        let slot = self.add_transform(transform);
         let batch = self
             .frame
             .batches
@@ -565,5 +619,127 @@ mod tests {
                 .iter()
                 .all(|pixel| pixel.color == 0xff_ab32ef)
         );
+    }
+
+    #[test]
+    fn soft_material_keeps_local_fractional_geometry_and_fixed_abi() {
+        let transform = Transform {
+            position: Vec2::new(999_000.0, -999_000.0),
+            rotation: 0.7,
+            scale: Vec2::new(0.2, -0.4),
+        }
+        .affine();
+        let local = Vec2::new(0.05, -0.075);
+        let mut builder = FrameBuilder::new();
+        assert_eq!(
+            builder.push_soft_cells_affine_material(
+                transform,
+                PixelMaterial {
+                    light_response: 0.6,
+                    emission: 0.75
+                },
+                [(local, 0xff_abcdef), (Vec2::ZERO, 0)],
+            ),
+            2
+        );
+        let batch = &builder.frame().batches[0];
+        let original = GpuTransform::from(transform);
+        assert_eq!(batch.transforms[0].a, original.a);
+        assert_eq!(&batch.transforms[0].b[..2], &original.b[..2]);
+        assert_eq!(&batch.transforms[0].b[2..], &[0.6, -1.75]);
+        assert_eq!(batch.pixels[0].local, local.to_array());
+        assert_eq!(batch.pixels[1].color, 0);
+        assert_eq!(std::mem::size_of::<PixelInstance>(), 16);
+        assert_eq!(std::mem::size_of::<GpuTransform>(), 32);
+        let packed = crate::CameraView::new(transform.position, Vec2::new(533.0, 300.0), 0.6)
+            .unwrap()
+            .relative_transform(batch.transforms[0]);
+        near(
+            packed.point(local),
+            transform.basis_x * local.x + transform.basis_y * local.y,
+        );
+    }
+
+    #[test]
+    fn soft_invalid_groups_and_empty_iterators_do_not_spend_slots() {
+        let mut builder = FrameBuilder::new();
+        for transform in [
+            Transform {
+                scale: Vec2::ZERO,
+                ..Default::default()
+            }
+            .affine(),
+            Transform {
+                position: Vec2::splat(f32::NAN),
+                ..Default::default()
+            }
+            .affine(),
+            AffineTransform {
+                position: Vec2::ZERO,
+                basis_x: Vec2::X,
+                basis_y: Vec2::X,
+            },
+            AffineTransform {
+                position: Vec2::ZERO,
+                basis_x: Vec2::new(4096.0, 4095.0),
+                basis_y: Vec2::new(4095.0, 4094.0),
+            },
+        ] {
+            assert_eq!(
+                builder.push_soft_cells_affine(transform, [(Vec2::ZERO, 1)]),
+                0
+            );
+        }
+        assert_eq!(
+            builder.push_soft_cells_affine(AffineTransform::default(), []),
+            0
+        );
+        assert!(builder.frame().batches.is_empty());
+        let tiny = Transform {
+            scale: Vec2::splat(0.00005),
+            ..Default::default()
+        }
+        .affine();
+        assert_eq!(
+            builder.push_soft_cells_affine_material(
+                tiny,
+                PixelMaterial {
+                    light_response: f32::NAN,
+                    emission: f32::INFINITY
+                },
+                [(Vec2::ZERO, 1), (Vec2::splat(f32::NAN), 2)]
+            ),
+            1
+        );
+        assert_eq!(
+            &builder.frame().batches[0].transforms[0].b[2..],
+            &[0.0, -1.0]
+        );
+        near(
+            builder.frame().batches[0].transforms[0].point(Vec2::X),
+            Vec2::new(0.00005, 0.0),
+        );
+    }
+
+    #[test]
+    fn soft_groups_split_and_reuse_without_changing_hard_materials() {
+        let mut builder = FrameBuilder::new();
+        for _ in 0..129 {
+            builder.push_soft_cells_affine(AffineTransform::default(), [(Vec2::ZERO, 1)]);
+        }
+        builder.push_body(&pixel_body(), Transform::default());
+        assert_eq!(builder.frame().pixel_count, 130);
+        assert_eq!(builder.frame().batches[0].transforms.len(), 128);
+        let batch = &builder.frame().batches[1];
+        assert_eq!(batch.pixels[0].transform, 0);
+        assert_eq!(batch.pixels[1].transform, 1);
+        assert_eq!(&batch.transforms[1].b[2..], &[0.0, 0.0]);
+        let allocation = batch.pixels.as_ptr();
+        builder.clear();
+        for _ in 0..129 {
+            builder.push_soft_cells_affine(AffineTransform::default(), [(Vec2::ZERO, 1)]);
+        }
+        builder.push_body(&pixel_body(), Transform::default());
+        assert_eq!(builder.frame().batches[1].pixels.as_ptr(), allocation);
     }
 }

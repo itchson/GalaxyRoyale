@@ -1,0 +1,33 @@
+- generic "Galaxy Royale game universe"
+- status
+- dialog "SHIP STATUS":
+  - button "Close menu": X
+  - generic: HAVEN COMMAND
+  - heading "SHIP STATUS" [level=2]
+  - paragraph: Live telemetry / the universe keeps running.
+  - navigation "Flight actions":
+    - button "Continue flight": GO
+    - button "Restart flight": RST
+    - button "Settings": SET
+    - button "Return to title": TITLE
+  - region "Live ship status":
+    - heading "Haven Scout" [level=3]
+    - paragraph: LV 2 / XP 51 / NEXT 60
+    - region "Current effective ship statistics":
+      - paragraph: HULL 100 / 100
+      - paragraph: SHIELD 0 / 0
+      - paragraph: SPEED 0 / 103 U/S
+      - paragraph: ACCEL 267 U/S2
+      - paragraph: PRIMARY 12.0 DMG / 5.0/S
+      - paragraph: HULL REPAIR 0.0/S AFTER 5S NO HIT
+      - paragraph: SHIELD REGEN 0.0/S AFTER 4S NO HIT
+    - region "Automatic ability slots":
+      - paragraph: OFFENSE / EMPTY
+      - paragraph: DEFENSE / EMPTY
+      - paragraph: PASSIVE / EMPTY
+    - region "Carried materials and retained inventory":
+      - paragraph: CARGO 0 / 16 / AT RISK
+      - paragraph: T1 0 / T2 0 / T3 0 / T4 0 / T5 0
+      - paragraph: BANKED / T1 1 / T2 0 / T3 0 / T4 0 / T5 0
+      - paragraph: POINTS / OFF 5 / DEF 4 / PASS 6
+      - paragraph: HOME BANKS CARGO / DEATH, RESTART, TITLE OR RELOAD LOSES CARGO

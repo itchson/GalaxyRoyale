@@ -1,6 +1,6 @@
 //! Screen-space HUD built from the same affine pixel quads as the world.
 //! Coordinates are logical pixels; DOM controls retain interaction/accessibility.
-use engine_core::{AffineTransform, FrameBuilder, PixelBody, Transform, Vec2};
+use engine_core::{AffineTransform, CameraView, FrameBuilder, PixelBody, Transform, Vec2};
 use game_core::Hud;
 use std::sync::LazyLock;
 
@@ -223,7 +223,581 @@ pub(crate) enum MeterStyle {
     Full,
     Compact,
     Micro,
+    Slim,
 }
+
+/// Actual semantic header art, converted once to the inset HUD coordinates.
+/// No assumed CSS hit size or toolbar width is duplicated in the painter.
+pub(crate) fn flight_header(
+    scene: &crate::ui_scene::UiScene,
+    insets: [f32; 4],
+) -> Option<[f32; 4]> {
+    let [top, _, _, left] = insets;
+    if !top.is_finite() || !left.is_finite() {
+        return None;
+    }
+    let mut union: Option<[f32; 4]> = None;
+    let mut visited = 0;
+    for group in scene.groups.iter().take(128) {
+        if group
+            .position
+            .iter()
+            .any(|v| !v.is_finite() || v.abs() > 8192.0)
+        {
+            continue;
+        }
+        for node in &group.nodes {
+            if visited == 512 {
+                return union;
+            }
+            visited += 1;
+            if !matches!(
+                node.kind.as_str(),
+                "save-icon" | "status-icon" | "map-icon" | "settings-icon"
+            ) {
+                continue;
+            }
+            let mut r = node.rect;
+            if r.iter().any(|v| !v.is_finite() || v.abs() > 8192.0) || r[2] <= 0.0 || r[3] <= 0.0 {
+                continue;
+            }
+            if let Some(c) = node.clip {
+                if c.iter().any(|v| !v.is_finite() || v.abs() > 8192.0)
+                    || c[2] <= 0.0
+                    || c[3] <= 0.0
+                {
+                    continue;
+                }
+                let x = r[0].max(c[0]);
+                let y = r[1].max(c[1]);
+                r = [
+                    x,
+                    y,
+                    (r[0] + r[2]).min(c[0] + c[2]) - x,
+                    (r[1] + r[3]).min(c[1] + c[3]) - y,
+                ];
+            }
+            if r[2] <= 0.0 || r[3] <= 0.0 {
+                continue;
+            }
+            r[0] += group.position[0] - left;
+            r[1] += group.position[1] - top;
+            union = Some(union.map_or(r, |u| {
+                let x = u[0].min(r[0]);
+                let y = u[1].min(r[1]);
+                [
+                    x,
+                    y,
+                    (u[0] + u[2]).max(r[0] + r[2]) - x,
+                    (u[1] + u[3]).max(r[1] + r[3]) - y,
+                ]
+            }));
+        }
+    }
+    union
+}
+
+fn hud_overlap(a: [f32; 4], b: [f32; 4], gap: f32) -> bool {
+    a[0] < b[0] + b[2] + gap
+        && a[0] + a[2] > b[0] - gap
+        && a[1] < b[1] + b[3] + gap
+        && a[1] + a[3] > b[1] - gap
+}
+
+/// Presentation geometry shared by the native painter, DOM bounds and boss
+/// allocator. Rectangles are safe-area local; world projection happens before
+/// subtracting the safe origin. No movement, health or camera state is changed.
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct FlightStatusLayout {
+    pub strip: Option<[f32; 4]>,
+    pub stats: Option<[f32; 4]>,
+    pub context: Option<[f32; 4]>,
+    pub vitals: Option<[f32; 4]>,
+    pub viewport: [f32; 2],
+}
+
+pub struct FlightStatusInput {
+    pub viewport: [f32; 2],
+    pub insets: [f32; 4],
+    pub header: Option<[f32; 4]>,
+    pub status_hits: [Option<[f32; 4]>; 2],
+    pub touch: bool,
+    /// Compact boss allocation may use the footer's H/S readout instead.
+    pub attached_vitals: bool,
+    pub player: Vec2,
+    pub player_radius: f32,
+    pub protected_core: Option<(Vec2, f32)>,
+    /// Interpolated unshaken world camera, including the current eased zoom.
+    pub camera: [f32; 2],
+    pub zoom: f32,
+}
+
+impl FlightStatusLayout {
+    pub fn new(input: &FlightStatusInput) -> Option<Self> {
+        if input.insets.iter().any(|v| !v.is_finite() || *v < 0.0)
+            || input.viewport.iter().any(|v| !v.is_finite() || *v > 8192.0)
+            || !input.player.is_finite()
+            || !input.player_radius.is_finite()
+            || input.player_radius < 0.0
+            || input
+                .protected_core
+                .is_some_and(|(p, r)| !p.is_finite() || !r.is_finite() || r < 0.0)
+            || !(engine_core::MIN_CAMERA_ZOOM..=engine_core::MAX_CAMERA_ZOOM).contains(&input.zoom)
+        {
+            return None;
+        }
+        let [top, right, bottom, left] = input.insets;
+        let viewport = [
+            input.viewport[0] - left - right,
+            input.viewport[1] - top - bottom,
+        ];
+        if viewport[0] < 180.0 || viewport[1] < 140.0 {
+            return None;
+        }
+        let header = input
+            .header
+            .filter(|r| r.iter().all(|v| v.is_finite()) && r[2] > 0.0 && r[3] > 0.0);
+        let hits = touch_hit_rects(viewport);
+        let clear = |r: [f32; 4]| {
+            r[0] >= 0.0
+                && r[1] >= 0.0
+                && r[0] + r[2] <= viewport[0]
+                && r[1] + r[3] <= viewport[1]
+                && header.is_none_or(|h| !hud_overlap(r, h, 2.0))
+                && (!input.touch || hits.iter().all(|h| !hud_overlap(r, *h, 2.0)))
+        };
+        let [width, height] = viewport;
+        let central_left = hits[0][0] + hits[0][2] + 4.0;
+        let central_width = hits[1][0] - 4.0 - central_left;
+        let central = [central_left, height - 28.0, central_width, 22.0];
+        let bottom_strip = [6.0, height - 28.0, width - 12.0, 22.0];
+        let above_pads = [6.0, hits[0][1].min(hits[1][1]) - 26.0, width - 12.0, 22.0];
+        let slim = [6.0, 0.0, width - 12.0, 10.0];
+        let strip = if input.touch {
+            [
+                (central_width >= 120.0).then_some(central),
+                Some(above_pads),
+                Some(slim),
+            ]
+        } else {
+            [Some(bottom_strip), Some(slim), None]
+        }
+        .into_iter()
+        .flatten()
+        .find(|r| clear(*r));
+        let stats = strip.map(|r| [r[0] + 4.0, r[1] + 2.0, r[2] - 8.0, 7.0]);
+        let context = strip
+            .filter(|r| r[3] >= 22.0)
+            .map(|r| [r[0] + 4.0, r[1] + 12.0, r[2] - 8.0, 7.0]);
+        let view = CameraView::new(
+            Vec2::from_array(input.camera),
+            Vec2::from_array(input.viewport),
+            input.zoom,
+        )?;
+        let center = view.world_to_screen(input.player) - Vec2::new(left, top);
+        let radius = input.player_radius * input.zoom;
+        let core = input.protected_core.map(|(p, r)| {
+            (
+                view.world_to_screen(p) - Vec2::new(left, top),
+                r * input.zoom + 4.0,
+            )
+        });
+        // Never clamp an offscreen ship to a false marker at the viewport edge.
+        let vitals = (input.attached_vitals
+            && center.x >= 0.0
+            && center.y >= 0.0
+            && center.x <= width
+            && center.y <= height)
+            .then(|| {
+                [
+                    [center.x - 22.0, center.y - radius - 14.0, 44.0, 9.0],
+                    [center.x - 22.0, center.y + radius + 5.0, 44.0, 9.0],
+                ]
+                .into_iter()
+                .find(|r| {
+                    clear(*r)
+                        && strip.is_none_or(|s| !hud_overlap(*r, s, 2.0))
+                        && input
+                            .status_hits
+                            .iter()
+                            .flatten()
+                            .all(|hit| !hud_overlap(*r, *hit, 2.0))
+                        && core.is_none_or(|(p, radius)| {
+                            let nearest =
+                                p.clamp(Vec2::new(r[0], r[1]), Vec2::new(r[0] + r[2], r[1] + r[3]));
+                            p.distance_squared(nearest) > radius * radius
+                        })
+                })
+            })
+            .flatten();
+        Some(Self {
+            strip,
+            stats,
+            context,
+            vitals,
+            viewport,
+        })
+    }
+
+    pub fn full_bounds(rect: Option<[f32; 4]>, insets: [f32; 4]) -> Option<[f32; 4]> {
+        rect.map(|[x, y, w, h]| [x + insets[3], y + insets[0], w, h])
+    }
+}
+
+/// Real semantic contact hits are taller than their single-line font slot.
+/// Preserve their measured, clipped bounds when avoiding attached ship bars.
+pub(crate) fn flight_status_hits(
+    scene: &crate::ui_scene::UiScene,
+    insets: [f32; 4],
+) -> [Option<[f32; 4]>; 2] {
+    let mut hits = [None; 2];
+    let mut count = 0;
+    let mut visited = 0;
+    for group in scene.groups.iter().take(128) {
+        if group
+            .position
+            .iter()
+            .any(|v| !v.is_finite() || v.abs() > 8192.0)
+        {
+            continue;
+        }
+        for node in &group.nodes {
+            if visited == 512 || count == 2 {
+                return hits;
+            }
+            visited += 1;
+            if node.kind != "status-hit" {
+                continue;
+            }
+            let mut r = node.rect;
+            if r.iter().any(|v| !v.is_finite() || v.abs() > 8192.0) || r[2] <= 0.0 || r[3] <= 0.0 {
+                continue;
+            }
+            if let Some(c) = node.clip {
+                if c.iter().any(|v| !v.is_finite() || v.abs() > 8192.0)
+                    || c[2] <= 0.0
+                    || c[3] <= 0.0
+                {
+                    continue;
+                }
+                let x = r[0].max(c[0]);
+                let y = r[1].max(c[1]);
+                r = [
+                    x,
+                    y,
+                    (r[0] + r[2]).min(c[0] + c[2]) - x,
+                    (r[1] + r[3]).min(c[1] + c[3]) - y,
+                ];
+            }
+            if r[2] <= 0.0 || r[3] <= 0.0 {
+                continue;
+            }
+            r[0] += group.position[0] - insets[3];
+            r[1] += group.position[1] - insets[0];
+            hits[count] = Some(r);
+            count += 1;
+        }
+    }
+    hits
+}
+
+/// Color-only warning cue. Reduced Motion keeps the full readable accent;
+/// normal presentation varies by 18%, once a second, without flashing off.
+pub(crate) fn warning_color(kind: u8, time: f32, reduced_motion: bool) -> u32 {
+    let base = match kind {
+        1 => RED,
+        2 => GOLD,
+        _ => CYAN,
+    };
+    if reduced_motion || !time.is_finite() || kind == 0 {
+        return base;
+    }
+    let strength = 0.91 + 0.09 * (time * std::f32::consts::TAU).sin();
+    let [r, g, b, a] = base.to_le_bytes();
+    u32::from_le_bytes([
+        (r as f32 * strength) as u8,
+        (g as f32 * strength) as u8,
+        (b as f32 * strength) as u8,
+        a,
+    ])
+}
+
+/// Small stack formatter for the single-line native footer. UI strings never
+/// exceed the font's 256-character bound and extraction allocates no strings.
+struct StatusText {
+    bytes: [u8; 160],
+    len: usize,
+}
+impl StatusText {
+    fn new() -> Self {
+        Self {
+            bytes: [0; 160],
+            len: 0,
+        }
+    }
+    fn as_str(&self) -> &str {
+        std::str::from_utf8(&self.bytes[..self.len]).unwrap_or("")
+    }
+}
+impl std::fmt::Write for StatusText {
+    fn write_str(&mut self, text: &str) -> std::fmt::Result {
+        if self.len + text.len() > self.bytes.len() {
+            return Err(std::fmt::Error);
+        }
+        self.bytes[self.len..self.len + text.len()].copy_from_slice(text.as_bytes());
+        self.len += text.len();
+        Ok(())
+    }
+}
+
+/// Current flight painter: one docked strip and two compact ship-relative
+/// tracks. Detailed information belongs to Ship Status rather than flight.
+#[allow(clippy::too_many_arguments)]
+pub fn draw_flight_status(
+    frame: &mut FrameBuilder,
+    hud: &Hud,
+    camera: [f32; 2],
+    layout: &FlightStatusLayout,
+    boss_panel: Option<[f32; 4]>,
+    time: f32,
+    reduced_motion: bool,
+    semantic_context: bool,
+) {
+    use std::fmt::Write;
+    let camera = Vec2::from_array(camera);
+    if !camera.is_finite() {
+        return;
+    }
+    let mut ui = Ui {
+        frame,
+        origin: camera - Vec2::from_array(layout.viewport) * 0.5,
+    };
+    let low_hull = hud.hull.is_finite()
+        && hud.hull > 0.0
+        && hud.max_hull.is_finite()
+        && hud.max_hull > 0.0
+        && ratio(hud.hull, hud.max_hull) <= 0.25;
+    let shield_down = hud.hull.is_finite()
+        && hud.hull > 0.0
+        && hud.max_shield.is_finite()
+        && hud.max_shield > 0.0
+        && hud.shield.is_finite()
+        && hud.shield <= 0.0;
+    let warning = if low_hull {
+        1
+    } else if shield_down {
+        2
+    } else {
+        0
+    };
+    if let Some([x, y, w, h]) = layout.strip {
+        ui.rect(x, y, w, h, 0xee_0e0907);
+        ui.rect(x, y, w, 1.0, EDGE);
+        ui.rect(x, y, 3.0, 1.0, CYAN);
+    }
+    if let Some([x, y, w, _]) = layout.stats {
+        let mut text = StatusText::new();
+        if layout.vitals.is_none() {
+            let _ = write!(
+                text,
+                "H{} S{} ",
+                (ratio(hud.hull, hud.max_hull) * 100.0).ceil() as u32,
+                (ratio(hud.shield, hud.max_shield) * 100.0).ceil() as u32
+            );
+        } else if w >= 260.0 {
+            let _ = write!(text, "{}  ", hud.biome.name);
+        }
+        let _ = write!(
+            text,
+            "L{} C{}/{}",
+            hud.ship_level, hud.cargo_materials, hud.cargo_capacity
+        );
+        let mut points = StatusText::new();
+        let _ = points.write_str(" ");
+        for (index, value) in hud.currency.into_iter().enumerate() {
+            if index > 0 {
+                let _ = points.write_str("/");
+            }
+            let _ = if value >= 1_000_000 {
+                write!(points, "{}M", value / 1_000_000)
+            } else if value >= 1000 {
+                write!(points, "{}K", value / 1000)
+            } else {
+                write!(points, "{value}")
+            };
+        }
+        // Very narrow rows prioritize essential health, level and carried loot.
+        if (text.len + points.len) as f32 * RoyaleMono::ADVANCE - 1.0 <= w {
+            let _ = text.write_str(points.as_str());
+        }
+        ui.text_bounded(
+            x,
+            y,
+            text.as_str(),
+            1.0,
+            if layout.vitals.is_none() && warning != 0 {
+                warning_color(warning, time, reduced_motion)
+            } else {
+                DIM
+            },
+            w,
+        );
+    }
+    if !semantic_context && let Some([x, y, w, _]) = layout.context {
+        let mut text = StatusText::new();
+        let color = if warning != 0 {
+            let _ = text.write_str(if warning == 1 {
+                "LOW HULL"
+            } else {
+                "SHIELD DOWN"
+            });
+            warning_color(warning, time, reduced_motion)
+        } else if hud.safe {
+            let _ = write!(text, "{} / SAFE", hud.biome.name);
+            MINT
+        } else {
+            let _ = write!(text, "{} / THREAT {}", hud.biome.name, hud.danger);
+            GOLD
+        };
+        ui.text_bounded(x, y, text.as_str(), 1.0, color, w);
+    }
+    if let Some([x, y, w, _]) = layout.vitals {
+        // A three-cell reticle and a shield rune, each cached as a local body.
+        static ICONS: LazyLock<[PixelBody; 2]> = LazyLock::new(|| {
+            [
+                PixelBody::from_ascii(&[".#.", "###", ".#."], &[('#', WHITE)]),
+                PixelBody::from_ascii(&["###", "#.#", ".#."], &[('#', WHITE)]),
+            ]
+        });
+        for (row, (value, maximum, color)) in [
+            (
+                hud.hull,
+                hud.max_hull,
+                if low_hull {
+                    warning_color(1, time, reduced_motion)
+                } else {
+                    MINT
+                },
+            ),
+            (
+                hud.shield,
+                hud.max_shield,
+                if shield_down {
+                    warning_color(2, time, reduced_motion)
+                } else {
+                    CYAN
+                },
+            ),
+        ]
+        .into_iter()
+        .enumerate()
+        {
+            let row_y = y + row as f32 * 4.0;
+            ui.frame.push_body_colored(
+                &ICONS[row],
+                Transform {
+                    position: ui.origin + Vec2::new(x + 1.5, row_y + 2.5),
+                    ..Transform::default()
+                },
+                |_, _| color,
+            );
+            ui.rect(x + 6.0, row_y + 1.0, w - 6.0, 2.0, 0xee_24130b);
+            ui.rect(
+                x + 6.0,
+                row_y + 1.0,
+                (w - 6.0) * ratio(value, maximum),
+                2.0,
+                color,
+            );
+        }
+    }
+    draw_boss(&mut ui, hud, Vec2::from_array(layout.viewport), boss_panel);
+}
+
+/// Uses the same measured toolbar rectangle for extraction and exclusion.
+/// Legacy callers without a scene keep the original layout exactly.
+pub(crate) fn flight_layout_with_header(
+    hud: &Hud,
+    viewport: [f32; 2],
+    minimal: bool,
+    touch: bool,
+    header: Option<[f32; 4]>,
+) -> Option<FlightLayout> {
+    let mut layout = flight_layout(hud, viewport, minimal, touch)?;
+    let Some(header) =
+        header.filter(|r| r.iter().all(|v| v.is_finite()) && r[2] > 0.0 && r[3] > 0.0)
+    else {
+        return Some(layout);
+    };
+    let [width, height] = viewport;
+    let hits = touch_hit_rects(viewport);
+    let clear = |r: [f32; 4]| {
+        r[0] >= 0.0
+            && r[1] >= 0.0
+            && r[0] + r[2] <= width
+            && r[1] + r[3] <= height
+            && !hud_overlap(r, header, 2.0)
+            && (!touch || hits.iter().all(|h| !hud_overlap(r, *h, 2.0)))
+    };
+    if let Some(meter) = layout.meter
+        && !clear(meter)
+    {
+        // Tiny touch layouts use the space above fire and beside the joystick.
+        let x = hits[0][0] + hits[0][2] + 2.0;
+        let micro = [x, hits[1][1] - 18.0, (width - 12.0 - x).min(176.0), 16.0];
+        let slim = [12.0, 0.0, (width - 24.0).min(176.0), 10.0];
+        if touch && micro[2] >= 64.0 && clear(micro) {
+            layout.meter = Some(micro);
+            layout.meter_style = MeterStyle::Micro;
+        } else if clear(slim) {
+            layout.meter = Some(slim);
+            layout.meter_style = MeterStyle::Slim;
+        } else {
+            // There is no supported essential-meter slot under this supplied
+            // geometry. Never paint over real controls to manufacture a fit.
+            return None;
+        }
+    }
+    let meter = layout.meter;
+    let radar = layout.radar;
+    let clear_telemetry = |r: [f32; 4], other: Option<[f32; 4]>| {
+        clear(r)
+            && meter.is_none_or(|m| !hud_overlap(r, m, 2.0))
+            && radar.is_none_or(|m| !hud_overlap(r, m, 2.0))
+            && other.is_none_or(|m| !hud_overlap(r, m, 4.0))
+    };
+    for biome in [true, false] {
+        let original = if biome { layout.biome } else { layout.currency };
+        let Some(r) = original else {
+            continue;
+        };
+        let other = if biome {
+            layout.currency.filter(|c| clear(*c))
+        } else {
+            layout.biome
+        };
+        let mut beside = r;
+        beside[0] = if biome { 12.0 } else { header[0] - 4.0 - r[2] };
+        if biome {
+            beside[2] = beside[2].min(header[0] - 16.0);
+        }
+        let below = [12.0, header[1] + header[3] + 4.0, r[2], r[3]];
+        let below_second = [12.0, below[1] + 32.0, r[2], r[3]];
+        let chosen = [r, beside, below, below_second]
+            .into_iter()
+            .find(|c| c[2] >= if biome { 80.0 } else { r[2] } && clear_telemetry(*c, other));
+        if biome {
+            layout.biome = chosen;
+        } else {
+            layout.currency = chosen;
+        }
+    }
+    Some(layout)
+}
+
+#[cfg(test)]
+#[path = "ui_header_tests.rs"]
+pub(crate) mod header_tests;
 
 pub(crate) fn touch_hit_rects(viewport: [f32; 2]) -> [[f32; 4]; 2] {
     [
@@ -425,6 +999,24 @@ pub fn draw_ui_with_boss_panel_and_touch(
     minimal: bool,
     touch: bool,
 ) {
+    draw_ui_with_boss_panel_and_touch_and_header(
+        frame, hud, camera, viewport, mode, boss_panel, minimal, touch, None,
+    );
+}
+
+/// Actual semantic header-aware painter. The previous APIs remain wrappers.
+#[allow(clippy::too_many_arguments)]
+pub fn draw_ui_with_boss_panel_and_touch_and_header(
+    frame: &mut FrameBuilder,
+    hud: &Hud,
+    camera: [f32; 2],
+    viewport: [f32; 2],
+    mode: u8,
+    boss_panel: Option<[f32; 4]>,
+    minimal: bool,
+    touch: bool,
+    header: Option<[f32; 4]>,
+) {
     let camera = Vec2::from_array(camera);
     let viewport = Vec2::from_array(viewport);
     if mode == 0
@@ -462,7 +1054,8 @@ pub fn draw_ui_with_boss_panel_and_touch(
     if mode != 1 {
         return;
     }
-    let Some(layout) = flight_layout(hud, viewport.to_array(), minimal, touch) else {
+    let Some(layout) = flight_layout_with_header(hud, viewport.to_array(), minimal, touch, header)
+    else {
         return;
     };
     if let Some([x, y, w, h]) = layout.biome {
@@ -490,61 +1083,7 @@ pub fn draw_ui_with_boss_panel_and_touch(
             w - padding * 2.0,
         );
     }
-    if let (Some(boss), Some([x, y, width, height])) = (&hud.boss, boss_panel)
-        && [x, y, width, height].iter().all(|v| v.is_finite())
-        && width >= 100.0
-        && height == 40.0
-        && x >= 0.0
-        && y >= 0.0
-        && x + width <= viewport.x
-        && y + height <= viewport.y
-    {
-        let limit = ((width - 14.0) / RoyaleMono::ADVANCE).floor() as usize;
-        let name = if width < 140.0 && boss.generation > 0 {
-            format!(
-                "G{} / {}",
-                boss.generation,
-                ["DART", "BASTION", "COIL"][boss.family.min(2)]
-            )
-        } else if boss.generation > 0 {
-            format!("G{} / {}", boss.generation, boss.name)
-        } else {
-            boss.name.clone()
-        };
-        let label = boss_phase_label(&boss.phase, width);
-        let phase = if boss.telegraph {
-            format!(
-                "{} / {}",
-                if width < 168.0 { "WARN" } else { "WARNING" },
-                label
-            )
-        } else {
-            label.into()
-        };
-        ui.panel(x, y, width, height);
-        ui.text(
-            x + 7.0,
-            y + 5.0,
-            &name.chars().take(limit).collect::<String>(),
-            1.0,
-            MAGENTA,
-        );
-        ui.text(
-            x + 7.0,
-            y + 17.0,
-            &phase.chars().take(limit).collect::<String>(),
-            1.0,
-            if boss.telegraph { GOLD } else { DIM },
-        );
-        ui.bar(
-            x + 7.0,
-            y + 31.0,
-            width - 14.0,
-            boss.health,
-            boss.max_health,
-            RED,
-        );
-    }
+    draw_boss(&mut ui, hud, viewport, boss_panel);
 
     if let Some([currency_x, y, width, height]) = layout.currency {
         ui.panel(currency_x, y, width, height);
@@ -569,7 +1108,16 @@ pub fn draw_ui_with_boss_panel_and_touch(
 
     if let Some([meter_x, y, width, height]) = layout.meter {
         ui.panel(meter_x, y, width, height);
-        if layout.meter_style == MeterStyle::Micro {
+        if layout.meter_style == MeterStyle::Slim {
+            for (column, label, value, maximum, color) in [
+                (0.0, "H", hud.hull, hud.max_hull, MINT),
+                (1.0, "S", hud.shield, hud.max_shield, CYAN),
+            ] {
+                let x = meter_x + column * width * 0.5;
+                ui.text(x + 3.0, y + 1.0, label, 1.0, DIM);
+                ui.bar(x + 12.0, y + 3.0, width * 0.5 - 16.0, value, maximum, color);
+            }
+        } else if layout.meter_style == MeterStyle::Micro {
             for (row, label, value, maximum, color) in [
                 (
                     0.0,
@@ -701,6 +1249,64 @@ pub fn draw_ui_with_boss_panel_and_touch(
             let p = (direction * i as f32).round();
             ui.dot(center.x + p.x, center.y + p.y, 1.0, WHITE);
         }
+    }
+}
+
+fn draw_boss(ui: &mut Ui<'_>, hud: &Hud, viewport: Vec2, boss_panel: Option<[f32; 4]>) {
+    if let (Some(boss), Some([x, y, width, height])) = (&hud.boss, boss_panel)
+        && [x, y, width, height].iter().all(|v| v.is_finite())
+        && width >= 100.0
+        && height == 40.0
+        && x >= 0.0
+        && y >= 0.0
+        && x + width <= viewport.x
+        && y + height <= viewport.y
+    {
+        let limit = ((width - 14.0) / RoyaleMono::ADVANCE).floor() as usize;
+        let name = if width < 140.0 && boss.generation > 0 {
+            format!(
+                "G{} / {}",
+                boss.generation,
+                ["DART", "BASTION", "COIL"][boss.family.min(2)]
+            )
+        } else if boss.generation > 0 {
+            format!("G{} / {}", boss.generation, boss.name)
+        } else {
+            boss.name.clone()
+        };
+        let label = boss_phase_label(&boss.phase, width);
+        let phase = if boss.telegraph {
+            format!(
+                "{} / {}",
+                if width < 168.0 { "WARN" } else { "WARNING" },
+                label
+            )
+        } else {
+            label.into()
+        };
+        ui.panel(x, y, width, height);
+        ui.text(
+            x + 7.0,
+            y + 5.0,
+            &name.chars().take(limit).collect::<String>(),
+            1.0,
+            MAGENTA,
+        );
+        ui.text(
+            x + 7.0,
+            y + 17.0,
+            &phase.chars().take(limit).collect::<String>(),
+            1.0,
+            if boss.telegraph { GOLD } else { DIM },
+        );
+        ui.bar(
+            x + 7.0,
+            y + 31.0,
+            width - 14.0,
+            boss.health,
+            boss.max_health,
+            RED,
+        );
     }
 }
 
@@ -1438,3 +2044,7 @@ mod tests {
         assert_eq!(knob([f32::NAN, 0.0]), Vec2::new(56.0, 310.0));
     }
 }
+
+#[cfg(test)]
+#[path = "ui_flight_status_tests.rs"]
+mod flight_status_tests;

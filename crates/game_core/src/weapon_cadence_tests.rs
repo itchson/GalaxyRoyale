@@ -3,7 +3,10 @@ use super::*;
 
 const DT: f32 = 1.0 / 60.0;
 fn fixture(rank: u8, echo: bool) -> Game {
-    let mut p = Profile::default();
+    let mut p = Profile {
+        schema_version: 3,
+        ..Profile::default()
+    }; // explicit legacy R5 hardware / learned Echo fixture
     p.ranks[..6].fill(5);
     p.ranks[1] = rank;
     p.campaign.ship_xp[0] = 1320;

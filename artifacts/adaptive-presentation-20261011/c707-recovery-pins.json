@@ -1,0 +1,79 @@
+{
+  "recorded_utc": "2026-10-11T01:49:53.647624+00:00",
+  "scope": "read-time source/package only; browser pairing is final-resources.json",
+  "metadata_head_at_read": "a9feee7fcf29989944f2ff0b506b99d954ebf045",
+  "expected_cache": "galaxy-c7071f87acd6932e",
+  "actual_dist_cache": "galaxy-c7071f87acd6932e",
+  "wasm_comparison": [
+    {
+      "path": "dist/wasm/webgl2-42d9d5261cbd1e64442f8427726ed9425957e6e7c8302e0473c6c2423d46ff57/galaxy_bg.wasm",
+      "unchanged_from_a9c3": true
+    },
+    {
+      "path": "dist/wasm/webgpu-c53c7a22610eca47001f4b8a6f299f4c6aad7b1f370952385172d7b3e0fd41c4/galaxy_bg.wasm",
+      "unchanged_from_a9c3": true
+    }
+  ],
+  "files": [
+    {
+      "path": "apps/game/src/main.ts",
+      "bytes": 66743,
+      "sha256": "163e32fc03f0c5d55c628c215bb7f1ac8ed11819e9b1ba9a85140cdf4bc2f5c5",
+      "modified_utc": "2026-10-11T01:46:44.049506+00:00"
+    },
+    {
+      "path": "apps/game/src/style.css",
+      "bytes": 21690,
+      "sha256": "828fbf79a9a020758d8cf293a817d7fec2820fee1e56d58a3dabc3adfb877207",
+      "modified_utc": "2026-10-11T01:46:44.049506+00:00"
+    },
+    {
+      "path": "scripts/test/graphics-recovery.test.mjs",
+      "bytes": 17796,
+      "sha256": "5328e993f6092faa7132e64c0b912ac5e45997a7850c5a4302fff8c2e686d701",
+      "modified_utc": "2026-10-11T01:46:44.830544+00:00"
+    },
+    {
+      "path": "dist/sw.js",
+      "bytes": 1963,
+      "sha256": "f51c133713f996deda4fd21220994576f0561f49eee9274814a597920d7a2f71",
+      "modified_utc": "2026-10-11T01:47:21.733909+00:00"
+    },
+    {
+      "path": "dist/index.html",
+      "bytes": 13954,
+      "sha256": "b99fd05e406fad5b175d5e306b9552ab24e0c473f8789adc12af926f445507e2",
+      "modified_utc": "2026-10-11T01:47:21.659755+00:00"
+    },
+    {
+      "path": "dist/wasm/builds.json",
+      "bytes": 247,
+      "sha256": "be9c4fea0a1fc33b2a7773f0c942eb28ce810c43c94225af036027a4eeded796",
+      "modified_utc": "2026-10-11T01:47:20.292469+00:00"
+    },
+    {
+      "path": "dist/assets/index-BsKUpWlB.js",
+      "bytes": 121291,
+      "sha256": "7b3b2a057dcec6249ea5603cf465cba9a637150ad265ab4a58eecab342719ac3",
+      "modified_utc": "2026-10-11T01:47:21.659755+00:00"
+    },
+    {
+      "path": "dist/assets/index-B7ubo1mX.css",
+      "bytes": 31392,
+      "sha256": "4ebd5d15c3d70f801c25a781c946d0ea265ba8a64c054b8068ebe76406eb39d1",
+      "modified_utc": "2026-10-11T01:47:21.659755+00:00"
+    },
+    {
+      "path": "dist/wasm/webgl2-42d9d5261cbd1e64442f8427726ed9425957e6e7c8302e0473c6c2423d46ff57/galaxy_bg.wasm",
+      "bytes": 6232119,
+      "sha256": "82b64a479b7bec708c32497cc0797c1283ee472a5ee996728f4025f6d7736af6",
+      "modified_utc": "2026-10-11T01:35:31.825629+00:00"
+    },
+    {
+      "path": "dist/wasm/webgpu-c53c7a22610eca47001f4b8a6f299f4c6aad7b1f370952385172d7b3e0fd41c4/galaxy_bg.wasm",
+      "bytes": 2604995,
+      "sha256": "6e0422292fef5b363d26d78b8cc3e9c92e563fb53606b8a48937e857060e566c",
+      "modified_utc": "2026-10-11T01:35:29.255689+00:00"
+    }
+  ]
+}

@@ -2,6 +2,8 @@ export interface InputFrame {
   joystick: [number, number] | null;
   destination: [number, number] | null;
   aim: [number, number] | null;
+  /** Held left mouse: continuous full thrust toward the unshaken cursor. */
+  thrust: [number, number] | null;
   fire: boolean;
 }
 export class FlightInput {
@@ -10,6 +12,7 @@ export class FlightInput {
   private joystick: [number, number] | null = null;
   private destination: [number, number] | null = null;
   private aimCursor: [number, number] | null = null;
+  private moveCursor: [number, number] | null = null;
   private mouseFire = false;
   private mouseMove = false;
   private consumedLeftPointer: number | null = null;
@@ -33,6 +36,7 @@ export class FlightInput {
     private onDestination: (world: [number, number]) => void,
     private onFireStart: () => void = () => {},
     private onInteract: (world: [number, number]) => boolean = () => false,
+    private onCancel: () => void = () => {},
   ) {
     canvas.addEventListener("contextmenu", (e) => e.preventDefault());
     canvas.addEventListener("pointerdown", (e) => {
@@ -72,15 +76,19 @@ export class FlightInput {
     });
     canvas.addEventListener("pointerup", (e) => {
       if (!this.enabled || e.pointerType === "touch") return;
+      if (this.mouseMove && e.button === 0) this.target(e);
       this.mouseButtons(e, false);
       if ((e.buttons & 1) === 0) this.consumedLeftPointer = null;
     });
     canvas.addEventListener("pointercancel", () => this.reset());
     canvas.addEventListener("lostpointercapture", () => {
+      const interrupted = this.mouseFire || this.mouseMove;
       this.mouseFire = false;
       this.mouseMove = false;
+      this.moveCursor = null;
       this.consumedLeftPointer = null;
       this.aimCursor = null;
+      if (interrupted) this.onCancel();
     });
     const releaseConsumed = (e: PointerEvent) => {
       if (
@@ -158,6 +166,7 @@ export class FlightInput {
     this.mouseFire = (e.buttons & 2) !== 0;
     this.mouseMove =
       (e.buttons & 1) !== 0 && e.pointerId !== this.consumedLeftPointer;
+    this.moveCursor = this.mouseMove ? [e.clientX, e.clientY] : null;
     this.aimCursor = this.mouseFire ? [e.clientX, e.clientY] : null;
     // Establish all held state before a Haven callback can disable/reset it.
     if (notifyStart && this.mouseFire && !wasFiring) this.onFireStart();
@@ -216,7 +225,13 @@ export class FlightInput {
   }
   sample(): InputFrame {
     if (!this.enabled)
-      return { joystick: null, destination: null, aim: null, fire: false };
+      return {
+        joystick: null,
+        destination: null,
+        aim: null,
+        thrust: null,
+        fire: false,
+      };
     let joystick = this.joystick;
     const x =
       Number(this.keys.has("d") || this.keys.has("arrowright")) -
@@ -238,6 +253,10 @@ export class FlightInput {
           ? this.worldPoint(...this.aimCursor)
           : null,
       fire: this.mouseFire || this.firePointer !== null,
+      thrust:
+        this.mouseMove && this.moveCursor
+          ? this.worldPoint(...this.moveCursor)
+          : null,
     };
     this.destination = null;
     return frame;
@@ -246,6 +265,7 @@ export class FlightInput {
     this.joystick = null;
     this.destination = null;
     this.aimCursor = null;
+    this.moveCursor = null;
     this.movePointer = null;
     this.firePointer = null;
     this.mouseFire = false;
@@ -254,5 +274,6 @@ export class FlightInput {
     this.keys.clear();
     this.stick.style.transform = "";
     this.fireButton.classList.remove("firing");
+    this.onCancel();
   }
 }

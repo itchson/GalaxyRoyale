@@ -1,0 +1,65 @@
+{
+  "observedUtc": "2026-10-11T01:48:40.061Z",
+  "secondsSinceConfirmedLoss": 15.199,
+  "canvases": [
+    {
+      "display": "block",
+      "height": 1192,
+      "id": "universe",
+      "visibility": "hidden",
+      "width": 1438
+    },
+    {
+      "display": "inline",
+      "height": 112,
+      "id": "radar",
+      "visibility": "visible",
+      "width": 112
+    }
+  ],
+  "classes": "engine-flight",
+  "nodes": {
+    "flight-status-strip": {
+      "background": "rgb(7, 16, 24)",
+      "className": "",
+      "color": "rgb(216, 243, 255)",
+      "display": "block",
+      "h": 66.046875,
+      "hidden": false,
+      "opacity": "1",
+      "text": "Graphics context lost. Waiting for browser restoration.",
+      "visibility": "visible",
+      "w": 1402.171875,
+      "x": 18,
+      "y": 1107.921875
+    },
+    "toast": {
+      "background": "rgb(7, 16, 24)",
+      "className": "visible",
+      "color": "rgb(208, 250, 255)",
+      "display": "block",
+      "h": 24.015625,
+      "hidden": false,
+      "opacity": "1",
+      "text": "Graphics context lost. Waiting for browser restoration.",
+      "visibility": "visible",
+      "w": 1414,
+      "x": 12,
+      "y": 1155.984375
+    },
+    "universe": {
+      "background": "rgba(0, 0, 0, 0)",
+      "className": "",
+      "color": "rgb(241, 247, 255)",
+      "display": "block",
+      "h": 1192,
+      "hidden": false,
+      "opacity": "1",
+      "text": "",
+      "visibility": "hidden",
+      "w": 1438,
+      "x": 0,
+      "y": 0
+    }
+  }
+}

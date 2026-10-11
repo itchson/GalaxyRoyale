@@ -1,0 +1,113 @@
+{
+  "frozen_utc": "2026-10-11T01:50:10.439825+00:00",
+  "files": [
+    {
+      "path": "work/flat-hud-recovery-amendment/before-apply-dom.txt",
+      "bytes": 1288,
+      "sha256": "0d584c2252c697cda5b1f3f9f6a8df91a272e3d6996c7d0992c8af2fff62ab27",
+      "modified_utc": "2026-10-11T01:48:10.303200+00:00"
+    },
+    {
+      "path": "work/flat-hud-recovery-amendment/before-update-resources.json",
+      "bytes": 3019,
+      "sha256": "51d33e0462d06461f837cc3b8e9f5a9cfc51bb1b8eb23b2668e09af4adc9f90f",
+      "modified_utc": "2026-10-11T01:48:03.101012+00:00"
+    },
+    {
+      "path": "work/flat-hud-recovery-amendment/browser-warnings.json",
+      "bytes": 3310,
+      "sha256": "5127de002ce17c05347ef1ea7aba329bc74f9b254ecdb5bd83ebfaa48057bd63",
+      "modified_utc": "2026-10-11T01:49:17.088410+00:00"
+    },
+    {
+      "path": "work/flat-hud-recovery-amendment/cleanup.json",
+      "bytes": 255,
+      "sha256": "5aad46a810cdfd24ce1aa6f8749d84074e49704d4e57f401ac979eaeb25874ff",
+      "modified_utc": "2026-10-11T01:49:17.179108+00:00"
+    },
+    {
+      "path": "work/flat-hud-recovery-amendment/final-resources.json",
+      "bytes": 3102,
+      "sha256": "0b14f675c7a33ca279b63367c2860050065645cf2e81a759538f1b918c1b872a",
+      "modified_utc": "2026-10-11T01:48:15.762956+00:00"
+    },
+    {
+      "path": "work/flat-hud-recovery-amendment/initial-lost-dom.txt",
+      "bytes": 1181,
+      "sha256": "940e30de2892a95bf9ca3e374542db26b0060d65ca0ecc601f371637fb1ffe7b",
+      "modified_utc": "2026-10-11T01:48:24.881339+00:00"
+    },
+    {
+      "path": "work/flat-hud-recovery-amendment/loss-start.json",
+      "bytes": 47,
+      "sha256": "6d59ea7e473a798e3d959bcdbd14222b279ac58962ffe203f326173e212a92d2",
+      "modified_utc": "2026-10-11T01:48:24.882344+00:00"
+    },
+    {
+      "path": "work/flat-hud-recovery-amendment/lost-settings-dom.txt",
+      "bytes": 1291,
+      "sha256": "6ac8059aaeaf29e48ca69688124ec791afa14edf74016ed4f828e4839f2df5e7",
+      "modified_utc": "2026-10-11T01:48:54.986183+00:00"
+    },
+    {
+      "path": "work/flat-hud-recovery-amendment/lost-settings-geometry.json",
+      "bytes": 383,
+      "sha256": "4d1c771b7d76b109d47a5eba8433809c2612b3bc22c2dbd8f0d0669b9d475049",
+      "modified_utc": "2026-10-11T01:48:54.998623+00:00"
+    },
+    {
+      "path": "work/flat-hud-recovery-amendment/persistent-lost-settings.jpg",
+      "bytes": 106391,
+      "sha256": "5c4fd6c99885d4fc61caea836bbccbcd80bccd7db9379f75c85bc13a2a117001",
+      "modified_utc": "2026-10-11T01:48:55.025953+00:00"
+    },
+    {
+      "path": "work/flat-hud-recovery-amendment/pins.json",
+      "bytes": 3077,
+      "sha256": "1622213cdf2cf37eab1a510775745288b4a49655d9885b9d120979dbf38b5f63",
+      "modified_utc": "2026-10-11T01:49:53.688516+00:00"
+    },
+    {
+      "path": "work/flat-hud-recovery-amendment/prolonged-flight-geometry.json",
+      "bytes": 1497,
+      "sha256": "fe7074156624af5eb21f0cf050e1b98280f07bd9680015b6a072bacc80246c7a",
+      "modified_utc": "2026-10-11T01:48:40.085974+00:00"
+    },
+    {
+      "path": "work/flat-hud-recovery-amendment/prolonged-flight-loss.jpg",
+      "bytes": 52070,
+      "sha256": "9c987c8931bc70649d4ea2e2e8226bdcc5ecfeb6734db0182e26e9b22369968b",
+      "modified_utc": "2026-10-11T01:48:40.110105+00:00"
+    },
+    {
+      "path": "work/flat-hud-recovery-amendment/restored-geometry.json",
+      "bytes": 194,
+      "sha256": "69675b96e4d40a8e3202f30b75a666d996695b1b1446d55cddd58b423a56b744",
+      "modified_utc": "2026-10-11T01:49:06.871483+00:00"
+    },
+    {
+      "path": "work/flat-hud-recovery-amendment/restored-settings-dom.txt",
+      "bytes": 1321,
+      "sha256": "7c7a053c32aefe7f13c10584201d1011103ffbdc4ee2eb52f006c770e21b8a50",
+      "modified_utc": "2026-10-11T01:49:00.822433+00:00"
+    },
+    {
+      "path": "work/flat-hud-recovery-amendment/restored-settings.jpg",
+      "bytes": 124812,
+      "sha256": "469e217470ef142c7809ef58758dfe0c1b70068f32878c7385c984ad49d9deae",
+      "modified_utc": "2026-10-11T01:49:06.901530+00:00"
+    },
+    {
+      "path": "work/flat-hud-recovery-amendment/retained-profile-dom.txt",
+      "bytes": 1710,
+      "sha256": "6a061ad372c6eeb6bba4e096e218e6729e24a786a3b8d14a983398adfadaae4d",
+      "modified_utc": "2026-10-11T01:49:08.962096+00:00"
+    },
+    {
+      "path": "work/flat-hud-recovery-amendment/REVIEW.md",
+      "bytes": 3156,
+      "sha256": "5aa1233389266e004d8b6dfb0064e4c9ca208e52d08d84e0d15e30ea38378e4b",
+      "modified_utc": "2026-10-11T01:50:03.063243+00:00"
+    }
+  ]
+}

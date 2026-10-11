@@ -51,6 +51,7 @@ test("simultaneous joystick and fire use independent pointer channels", () => {
   pointer(area, "pointerdown", { pointerId: 3, clientX: 84 });
   pointer(fire, "pointerdown", { pointerId: 7 });
   assert.deepEqual(input.sample(), {
+    thrust: null,
     joystick: [1, 0],
     destination: null,
     aim: null,
@@ -58,6 +59,7 @@ test("simultaneous joystick and fire use independent pointer channels", () => {
   });
   pointer(area, "pointercancel", { pointerId: 3 });
   assert.deepEqual(input.sample(), {
+    thrust: null,
     joystick: null,
     destination: null,
     aim: null,
@@ -77,6 +79,7 @@ test("blur resets every interrupted input, including mouse buttons", () => {
   });
   window.dispatchEvent(new Event("blur"));
   assert.deepEqual(input.sample(), {
+    thrust: null,
     joystick: null,
     destination: null,
     aim: null,
@@ -100,6 +103,7 @@ test("desktop destination maps from unshaken camera and is submitted once", () =
     buttons: 3,
   });
   assert.deepEqual(input.sample(), {
+    thrust: [420, 200],
     joystick: null,
     destination: [420, 200],
     aim: [420, 200],
@@ -107,11 +111,94 @@ test("desktop destination maps from unshaken camera and is submitted once", () =
   });
   pointer(canvas, "pointercancel", { pointerType: "mouse" });
   assert.deepEqual(input.sample(), {
+    thrust: null,
     joystick: null,
     destination: null,
     aim: null,
     fire: false,
   });
+});
+
+test("stationary held left cursor continuously projects thrust while a released click retains its course", () => {
+  const { input, canvas, selected } = setup();
+  pointer(canvas, "pointerdown", {
+    pointerType: "mouse",
+    clientX: 75,
+    clientY: 25,
+  });
+  assert.deepEqual(input.sample().thrust, [300, 110]);
+  input.camera = [130, 220];
+  input.viewport = [400, 180];
+  assert.deepEqual(input.sample().thrust, [230, 175]);
+  assert.equal(input.sample().destination, null);
+  pointer(canvas, "pointerup", {
+    pointerType: "mouse",
+    buttons: 0,
+    clientX: 75,
+    clientY: 25,
+  });
+  const released = input.sample();
+  assert.equal(released.thrust, null);
+  assert.deepEqual(released.destination, [230, 175]);
+  assert.deepEqual(selected(), [230, 175]);
+  assert.equal(input.sample().destination, null);
+});
+
+test("both mouse buttons keep forward thrust and cursor aim independent of button release order", () => {
+  const { input, canvas } = setup();
+  pointer(canvas, "pointerdown", {
+    pointerType: "mouse",
+    buttons: 3,
+    clientX: 75,
+    clientY: 25,
+  });
+  const both = input.sample();
+  assert.deepEqual(both.thrust, [300, 110]);
+  assert.deepEqual(both.aim, both.thrust);
+  pointer(canvas, "pointerup", {
+    pointerType: "mouse",
+    button: 2,
+    buttons: 1,
+    clientX: 75,
+    clientY: 25,
+  });
+  assert.equal(input.sample().fire, false);
+  assert.deepEqual(input.sample().thrust, [300, 110]);
+  pointer(canvas, "pointerup", {
+    pointerType: "mouse",
+    button: 0,
+    buttons: 0,
+    clientX: 75,
+    clientY: 25,
+  });
+  assert.equal(input.sample().thrust, null);
+});
+
+test("interrupted capture cancels the Rust course but ordinary click release preserves it", () => {
+  globalThis.window = new EventTarget();
+  const canvas = new Surface();
+  let cancelled = 0;
+  const input = new FlightInput(
+    canvas,
+    new Surface(),
+    new Surface(),
+    new Surface(),
+    () => {},
+    undefined,
+    undefined,
+    () => cancelled++,
+  );
+  input.enabled = true;
+  pointer(canvas, "pointerdown", { pointerType: "mouse" });
+  pointer(canvas, "pointerup", { pointerType: "mouse", buttons: 0 });
+  pointer(canvas, "lostpointercapture", { pointerType: "mouse", buttons: 0 });
+  assert.equal(cancelled, 0);
+  pointer(canvas, "pointerdown", { pointerType: "mouse" });
+  pointer(canvas, "lostpointercapture", { pointerType: "mouse", buttons: 0 });
+  assert.equal(cancelled, 1);
+  assert.equal(input.sample().thrust, null);
+  window.dispatchEvent(new Event("blur"));
+  assert.equal(cancelled, 2);
 });
 test("disabled or cancelled control cannot continue firing", () => {
   const { input, fire } = setup();
@@ -204,6 +291,7 @@ test("right mouse aims at its cursor world point without submitting a navigation
     clientY: 45,
   });
   assert.deepEqual(input.sample(), {
+    thrust: null,
     joystick: null,
     destination: null,
     aim: [200, -250],
@@ -254,6 +342,7 @@ test("mouse aim stays held while the one-shot left destination is consumed and t
     clientY: 50,
   });
   assert.deepEqual(input.sample(), {
+    thrust: [420, 200],
     joystick: null,
     destination: [420, 200],
     aim: [420, 200],
@@ -269,9 +358,10 @@ test("mouse aim stays held while the one-shot left destination is consumed and t
     clientY: 30,
   });
   assert.deepEqual(input.sample().aim, [340, 128]);
-  assert.deepEqual(selected(), [420, 200]);
+  assert.deepEqual(selected(), [340, 128]);
   pointer(canvas, "pointerup", { pointerType: "mouse", button: 2, buttons: 0 });
   assert.deepEqual(input.sample(), {
+    thrust: null,
     joystick: null,
     destination: null,
     aim: null,
@@ -292,6 +382,7 @@ test("keyboard thrust and mobile fire retain their own directions while mouse ai
     clientY: 50,
   });
   assert.deepEqual(input.sample(), {
+    thrust: null,
     joystick: [0, -1],
     destination: null,
     aim: [300, 200],
@@ -301,6 +392,7 @@ test("keyboard thrust and mobile fire retain their own directions while mouse ai
   pointer(area, "pointerdown", { pointerId: 3, clientX: 84 });
   pointer(fire, "pointerdown", { pointerId: 7 });
   assert.deepEqual(input.sample(), {
+    thrust: null,
     joystick: [1, 0],
     destination: null,
     aim: null,
@@ -353,6 +445,7 @@ test("mouse release, cancellation, capture loss, reset and disable cannot resurr
     assert.deepEqual(controls.input.sample().aim, [300, 110]);
     stop(controls);
     assert.deepEqual(controls.input.sample(), {
+      thrust: null,
       joystick: null,
       destination: null,
       aim: null,
@@ -434,6 +527,7 @@ test("pressing right during a captured left drag triggers Haven interception exa
   });
   assert.equal(intents, 1);
   assert.deepEqual(input.sample(), {
+    thrust: null,
     joystick: null,
     destination: null,
     aim: null,
@@ -572,6 +666,7 @@ test("facility callback disabling input cannot restore a course or consumed held
   });
   assert.deepEqual(controls.canvas.captures, []);
   assert.deepEqual(input.sample(), {
+    thrust: null,
     joystick: null,
     destination: null,
     aim: null,
@@ -580,6 +675,7 @@ test("facility callback disabling input cannot restore a course or consumed held
   pointer(controls.canvas, "pointermove", { pointerType: "mouse", buttons: 1 });
   input.enabled = true;
   assert.deepEqual(input.sample(), {
+    thrust: null,
     joystick: null,
     destination: null,
     aim: null,

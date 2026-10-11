@@ -88,7 +88,7 @@ fn to_js(value: &impl Serialize) -> Result<JsValue, JsValue> {
 pub fn checkpoint_contract(stage: &str) -> Result<JsValue, JsValue> {
     let mut profile = Profile::default();
     match stage {
-        "fresh" | "champion" => {}
+        "fresh" | "champion" | "tiered-cargo" | "loss-summary" => {}
         "generations" => {
             // Valid saved credit with both higher-tier queues and reserved base credit.
             let mut value = serde_json::to_value(&profile).map_err(js)?;
@@ -103,6 +103,7 @@ pub fn checkpoint_contract(stage: &str) -> Result<JsValue, JsValue> {
         }
         "legacy-bosses" => {
             let mut value = serde_json::to_value(&profile).map_err(js)?;
+            value["schema_version"] = serde_json::json!(3);
             value
                 .as_object_mut()
                 .ok_or_else(|| js("Invalid profile fixture"))?
@@ -114,11 +115,110 @@ pub fn checkpoint_contract(stage: &str) -> Result<JsValue, JsValue> {
             value["revision"] = serde_json::json!(9);
             profile = serde_json::from_value(value).map_err(js)?;
         }
+        "legacy-cargo" => {
+            // Contract input fixture, not an earned gameplay reward. Exercise
+            // the real schema-three scalar deserializer and Game migration.
+            let mut value = serde_json::to_value(&profile).map_err(js)?;
+            value["schema_version"] = serde_json::json!(3);
+            value["currency"] = serde_json::json!([20, 30, 40]);
+            value["ranks"] = serde_json::json!([2, 1, 3, 0, 0, 0, 4, 2, 1]);
+            value["unlocked"] = serde_json::json!([true, true, true]);
+            value["revision"] = serde_json::json!(9);
+            value["campaign"]["cargo_materials"] = serde_json::json!(5);
+            value["campaign"]["stored_materials"] = serde_json::json!(7);
+            value["campaign"]["patches"][1] = serde_json::json!(true);
+            value["campaign"]["blueprints"][1] = serde_json::json!(true);
+            value["campaign"]["crafted"][1] = serde_json::json!(true);
+            value["campaign"]["selected_ship"] = serde_json::json!(2);
+            value["campaign"]["ship_xp"][2] = serde_json::json!(60);
+            profile = serde_json::from_value(value).map_err(js)?;
+        }
+        "inventory" => {
+            // Supplied checkpoint fixture only. Actual dock transactions below
+            // are tested; these patches, XP and materials are not combat proof.
+            profile.currency = [100; 3];
+            profile.unlocked = [true; 3];
+            profile.campaign.patches = [true; 8];
+            profile.campaign.blueprints = [true; 8];
+            profile.campaign.crafted = [true; 8];
+            profile.campaign.royale_results = [1; 8];
+            profile.campaign.victory_claimed = true;
+            profile.campaign.selected_ship = 2;
+            profile.campaign.ship_xp[2] = 60;
+            profile.campaign.stored_materials = [50; 5];
+            for state in &mut profile.campaign.abilities {
+                state.blueprint = true;
+            }
+        }
+        "cargo-reload" => {
+            // A supplied in-flight checkpoint: Game must discard carried
+            // materials on reconstruction without converting them to stash.
+            profile.campaign.cargo_materials = [1, 2, 3, 4, 5];
+            profile.campaign.stored_materials = [10, 20, 30, 40, 50];
+        }
         _ => return Err(js("Unknown checkpoint contract stage")),
     }
     let mut game = Game::new(profile);
     if stage == "champion" {
         game.diagnostic("champion-0");
+    }
+    if stage == "inventory" {
+        for key in [
+            "pulse-lens",
+            "guard-coil",
+            "flux-drive",
+            "pulse-echo",
+            "broadside",
+        ] {
+            game.craft_ability(key).map_err(js)?;
+        }
+        game.upgrade_ability("pulse-lens").map_err(js)?;
+        game.purchase("damage").map_err(js)?;
+        game.purchase("damage").map_err(js)?;
+        // Craft on its actual compatible owned hull, then return: the later
+        // rejection isolates family compatibility rather than missing ownership.
+        game.switch_ship(3).map_err(js)?;
+        game.craft_ability("guided-missile").map_err(js)?;
+        game.switch_ship(2).map_err(js)?;
+        for (slot, key) in ["broadside", "guard-coil", "flux-drive"].iter().enumerate() {
+            game.equip_ability(slot, Some(key)).map_err(js)?;
+        }
+        let before = serde_json::to_value(game.profile()).map_err(js)?;
+        for (slot, key) in [
+            (256, None),
+            (1, Some("pulse-lens")),
+            (0, Some("guided-missile")),
+            (0, Some("not-an-ability")),
+        ] {
+            if game.equip_ability(slot, key).is_ok() {
+                return Err(js("Invalid equip contract was accepted"));
+            }
+            if serde_json::to_value(game.profile()).map_err(js)? != before {
+                return Err(js("Rejected equip contract mutated the checkpoint"));
+            }
+        }
+    }
+    if matches!(stage, "tiered-cargo" | "loss-summary") {
+        // Typed serializer fixtures. SaveStore roundtrips these fields without
+        // claiming an actual pickup, death, reward or browser-rendered session.
+        let mut checkpoint = game.profile().clone();
+        if stage == "tiered-cargo" {
+            checkpoint.campaign.cargo_materials = [1, 2, 3, 4, 5];
+            checkpoint.campaign.stored_materials = [10, 20, 30, 40, 50];
+        } else {
+            checkpoint.campaign.last_run = Some(game_core::RunSummary {
+                time: 3.0,
+                distance_peak: 1800.0,
+                enemies: 2,
+                asteroids: 3,
+                champions: 0,
+                points_gained: [4, 5, 6],
+                xp_gained: 12,
+                materials_gained: 15,
+                materials_lost: [1, 2, 3, 4, 5],
+            });
+        }
+        return to_js(&checkpoint);
     }
     to_js(game.profile())
 }
@@ -219,10 +319,11 @@ impl Galaxy {
             render_camera[1] + (top - bottom) * 0.5,
         ];
         if self.ui_mode == 1 || self.ui_scene.groups.is_empty() {
+            let focus = self.game.render_focus(alpha);
             let boss_panel = if self.ui_mode == 1 {
                 let panel = self.boss_overlay.update(&OverlayInput {
                     hud: &hud,
-                    focus: self.game.render_focus(alpha),
+                    focus,
                     camera: render_camera,
                     viewport,
                     insets: self.ui_insets,
@@ -236,16 +337,50 @@ impl Galaxy {
             } else {
                 None
             };
-            pixel_ui::draw_ui_with_boss_panel_and_touch(
-                &mut self.ui_frame,
-                &hud,
-                ui_camera,
-                ui_viewport,
-                self.ui_mode,
-                boss_panel,
-                self.boss_overlay.minimal(),
-                self.touch_ui,
-            );
+            if self.ui_mode == 1 {
+                if let Some(layout) =
+                    pixel_ui::FlightStatusLayout::new(&pixel_ui::FlightStatusInput {
+                        viewport,
+                        insets: self.ui_insets,
+                        header: pixel_ui::flight_header(&self.ui_scene, self.ui_insets),
+                        status_hits: pixel_ui::flight_status_hits(&self.ui_scene, self.ui_insets),
+                        touch: self.touch_ui,
+                        attached_vitals: !self.boss_overlay.minimal(),
+                        player: focus.player,
+                        player_radius: focus.player_radius,
+                        protected_core: focus.boss.map(|b| (b.core, b.core_radius)),
+                        camera: hud.camera,
+                        zoom: self.camera_zoom.value(),
+                    })
+                {
+                    let semantic_context = self
+                        .ui_scene
+                        .groups
+                        .iter()
+                        .take(128)
+                        .flat_map(|group| &group.nodes)
+                        .take(512)
+                        .any(|node| matches!(node.kind.as_str(), "status-text" | "warning-text"));
+                    pixel_ui::draw_flight_status(
+                        &mut self.ui_frame,
+                        &hud,
+                        ui_camera,
+                        &layout,
+                        boss_panel,
+                        self.ui_time,
+                        self.reduced_motion,
+                        semantic_context,
+                    );
+                }
+            } else {
+                pixel_ui::draw_ui(
+                    &mut self.ui_frame,
+                    &hud,
+                    ui_camera,
+                    ui_viewport,
+                    self.ui_mode,
+                );
+            }
         }
         if self.touch_ui && self.ui_mode == 1 {
             pixel_ui::draw_controls(
@@ -292,6 +427,10 @@ impl Galaxy {
     }
     pub fn hud(&self) -> Result<JsValue, JsValue> {
         to_js(&self.game.hud())
+    }
+    /// Bounded discovered-beacon snapshot, requested only by the open map.
+    pub fn universe_map(&self) -> Result<JsValue, JsValue> {
+        to_js(&self.game.universe_map())
     }
     pub fn profile(&self) -> Result<JsValue, JsValue> {
         to_js(self.game.profile())
@@ -341,6 +480,12 @@ impl Galaxy {
         self.pending_destination = None;
         self.game.set_paused(value);
     }
+    /// Cancel both a not-yet-stepped click and the live Game's persistent route.
+    /// Existing drift and fixed-step accumulation continue under a live menu.
+    pub fn cancel_course(&mut self) {
+        self.pending_destination = None;
+        self.game.cancel_course();
+    }
     pub fn set_shake(&mut self, value: bool) {
         self.shake = value;
     }
@@ -355,6 +500,25 @@ impl Galaxy {
     pub fn boss_ui_bounds(&self) -> Vec<f32> {
         self.last_boss_panel
             .map(|bounds| bounds.to_vec())
+            .unwrap_or_default()
+    }
+    /// Full logical-screen footer bounds, shared with actual native painting.
+    /// Empty means no supported safe rectangle under the supplied viewport.
+    pub fn flight_status_bounds(&self) -> Vec<f32> {
+        self.current_flight_status_layout()
+            .and_then(|layout| {
+                pixel_ui::FlightStatusLayout::full_bounds(layout.strip, self.ui_insets)
+            })
+            .map(|rect| rect.to_vec())
+            .unwrap_or_default()
+    }
+    /// Seven-logical-pixel context glyph slot, distinct from accessible hits.
+    pub fn flight_status_text_bounds(&self) -> Vec<f32> {
+        self.current_flight_status_layout()
+            .and_then(|layout| {
+                pixel_ui::FlightStatusLayout::full_bounds(layout.context, self.ui_insets)
+            })
+            .map(|rect| rect.to_vec())
             .unwrap_or_default()
     }
     pub fn set_ui_scene(&mut self, scene: JsValue) -> Result<(), JsValue> {
@@ -392,6 +556,18 @@ impl Galaxy {
     }
     pub fn craft_ship(&mut self, index: usize) -> Result<(), JsValue> {
         self.game.craft_ship(index).map_err(js)
+    }
+    /// Craft into the shared dock inventory; this does not change any loadout.
+    pub fn craft_ability(&mut self, id: &str) -> Result<(), JsValue> {
+        self.game.craft_ability(id).map_err(js)
+    }
+    pub fn upgrade_ability(&mut self, id: &str) -> Result<(), JsValue> {
+        self.game.upgrade_ability(id).map_err(js)
+    }
+    /// Slot 0 offense, 1 defense, 2 passive on the selected ship. A null or
+    /// undefined ID clears that slot; all ownership/gates are enforced by Game.
+    pub fn equip_ability(&mut self, slot: usize, id: Option<String>) -> Result<(), JsValue> {
+        self.game.equip_ability(slot, id.as_deref()).map_err(js)
     }
     pub fn switch_ship(&mut self, id: u8) -> Result<(), JsValue> {
         self.game.switch_ship(id).map_err(js)
@@ -435,6 +611,26 @@ impl Galaxy {
 }
 
 impl Galaxy {
+    fn current_flight_status_layout(&self) -> Option<pixel_ui::FlightStatusLayout> {
+        if self.ui_mode != 1 {
+            return None;
+        }
+        let alpha = self.accumulator * 60.0;
+        let focus = self.game.render_focus(alpha);
+        pixel_ui::FlightStatusLayout::new(&pixel_ui::FlightStatusInput {
+            viewport: self.renderer.viewport(),
+            insets: self.ui_insets,
+            header: pixel_ui::flight_header(&self.ui_scene, self.ui_insets),
+            status_hits: pixel_ui::flight_status_hits(&self.ui_scene, self.ui_insets),
+            touch: self.touch_ui,
+            attached_vitals: !self.boss_overlay.minimal(),
+            player: focus.player,
+            player_radius: focus.player_radius,
+            protected_core: focus.boss.map(|b| (b.core, b.core_radius)),
+            camera: self.game.render_camera(alpha),
+            zoom: self.camera_zoom.value(),
+        })
+    }
     fn update_world_viewport(&mut self) {
         let viewport = self
             .camera_zoom

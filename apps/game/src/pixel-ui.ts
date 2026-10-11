@@ -23,6 +23,17 @@ export class PixelUiBridge {
     private scale: () => number,
   ) {
     this.observer = new MutationObserver((records) => {
+      // Map pan/zoom moves art without necessarily changing text. Other
+      // per-frame world markers already have explicit shell invalidation.
+      if (
+        records.every(
+          ({ attributeName, target }) =>
+            attributeName === "style" &&
+            target instanceof Element &&
+            !target.closest("#map-chart,#flight-status-strip"),
+        )
+      )
+        return;
       if (
         records.some(
           ({ target }) =>
@@ -52,6 +63,12 @@ export class PixelUiBridge {
             "class",
             "disabled",
             "data-active",
+            "data-pixel-icon",
+            "data-pixel-kind",
+            "data-pixel-value",
+            "data-context-available",
+            "data-context-interactive",
+            "style",
             "aria-selected",
           ],
         });
@@ -82,8 +99,23 @@ export class PixelUiBridge {
     if (!Number.isFinite(scale) || scale <= 0) return;
     const groups: { position: number[]; nodes: Node[] }[] = [];
     const buttonKind = (element: HTMLElement): string => {
+      if (["site-button", "dock-button"].includes(element.id))
+        return "status-text";
       if (element.id === "menu-close") return "close-icon";
       if (element.id === "save-indicator") return "save-icon";
+      const icon = element.dataset.pixelIcon;
+      if (
+        [
+          "settings-icon",
+          "resume-icon",
+          "restart-icon",
+          "title-icon",
+          "quit-icon",
+          "status-icon",
+          "map-icon",
+        ].includes(icon ?? "")
+      )
+        return icon!;
       if (element.classList.contains("dock-facility")) return "facility-label";
       if (element.closest(".menu-tabs")) return "nav-tab";
       if (element.classList.contains("primary-button")) return "primary-button";
@@ -98,6 +130,7 @@ export class PixelUiBridge {
         : "button";
     };
     const textKind = (element: HTMLElement): string => {
+      if (element.id === "toast") return "warning-text";
       const category = element.closest(".upgrade-category");
       for (const name of ["offense", "defense", "passive"])
         if (category?.classList.contains(name)) return `${name}-text`;
@@ -119,33 +152,76 @@ export class PixelUiBridge {
         kind: string,
         text = "",
         value = 0,
-      ) => {
+      ): void => {
         if (!visible(element)) return;
         if (element.id === "toast" && !element.classList.contains("visible"))
           return;
-        const box = element.getBoundingClientRect();
+        if (
+          ["site-button", "dock-button"].includes(element.id) &&
+          root
+            .querySelector<HTMLElement>("#toast")
+            ?.classList.contains("visible")
+        )
+          return;
+        let box = element.getBoundingClientRect();
+        const style = getComputedStyle(element);
+        if (kind === "status-text" || kind === "warning-text") {
+          const flight =
+            root.id === "game-ui" &&
+            document.body.classList.contains("engine-flight");
+          const properties = ["x", "y", "width", "height"].map((axis) =>
+            Number.parseFloat(
+              style.getPropertyValue?.(`--flight-text-${axis}`) ?? "",
+            ),
+          );
+          if (
+            flight &&
+            properties.every(Number.isFinite) &&
+            properties[2] >= 5 * scale &&
+            properties[3] >= 7 * scale
+          ) {
+            if (element.tagName === "BUTTON") add(element, "status-hit");
+            box = {
+              x: properties[0],
+              y: properties[1],
+              width: properties[2],
+              height: properties[3],
+            } as DOMRect;
+          } else if (!flight && kind === "warning-text") {
+            // Menu/recovery messages retain the DOM's multiline measured area.
+            // Flight warnings use the exact exported single-line footer slot.
+            kind = "text";
+          } else {
+            return;
+          }
+        }
         const font = Math.max(
           1,
-          Math.min(
-            3,
-            Number.parseFloat(getComputedStyle(element).fontSize) / scale / 8,
-          ),
+          Math.min(3, Number.parseFloat(style.fontSize) / scale / 8),
         );
-        const scroll = element.closest<HTMLElement>(
-          ".menu-tabs,#pause-content,#upgrade-content,#quest-content,#settings-content,#archive-content,#hangar-content,#campaign-content,#console-output,#dialogue-text,#run-summary",
-        );
-        const scrollBounds = scroll ? scroll.getBoundingClientRect() : bounds;
-        // Intersect both axes: scrolling never lets engine cells cross a panel.
-        const clipX = Math.max(bounds.x, scrollBounds.x);
-        const clipY = Math.max(bounds.y, scrollBounds.y);
-        const clipRight = Math.min(
-          bounds.x + bounds.width,
-          scrollBounds.x + scrollBounds.width,
-        );
-        const clipBottom = Math.min(
-          bounds.y + bounds.height,
-          scrollBounds.y + scrollBounds.height,
-        );
+        const scrollSelector =
+          ".menu-tabs,#map-chart,#map-content,#flight-status,#pause-content,#upgrade-content,#quest-content,#settings-content,#archive-content,#hangar-content,#campaign-content,#console-output,#dialogue-text,#run-summary";
+        let clipX = bounds.x,
+          clipY = bounds.y,
+          clipRight = bounds.x + bounds.width,
+          clipBottom = bounds.y + bounds.height;
+        // Intersect every enclosing scroll region on both axes. A map chart
+        // can itself scroll beyond the content viewport, header or footer.
+        for (
+          let scroll = element.closest<HTMLElement>(scrollSelector);
+          scroll;
+          scroll =
+            scroll.parentElement?.closest<HTMLElement>(scrollSelector) ?? null
+        ) {
+          const scrollBounds = scroll.getBoundingClientRect();
+          clipX = Math.max(clipX, scrollBounds.x);
+          clipY = Math.max(clipY, scrollBounds.y);
+          clipRight = Math.min(clipRight, scrollBounds.x + scrollBounds.width);
+          clipBottom = Math.min(
+            clipBottom,
+            scrollBounds.y + scrollBounds.height,
+          );
+        }
         if (
           clipRight <= clipX ||
           clipBottom <= clipY ||
@@ -210,7 +286,9 @@ export class PixelUiBridge {
         add(
           art,
           art.dataset.pixelKind ?? "",
-          "",
+          ["status-text", "warning-text"].includes(art.dataset.pixelKind ?? "")
+            ? art.innerText
+            : "",
           Number(art.dataset.pixelValue ?? 0),
         );
       if (root.classList.contains("console-card")) {
@@ -233,19 +311,27 @@ export class PixelUiBridge {
       const selectors =
         root.id === "game-ui"
           ? document.body.classList.contains("engine-flight")
-            ? ".dock-facility,#save-indicator,#site-button,#pause-button,#fullscreen,#quick-settings,#quick-title,#toast,#destination-marker"
+            ? ".dock-facility,#save-indicator,#site-button,#dock-button,#pause-button,#map-button,#flight-settings,#fullscreen,#quick-settings,#quick-title,#toast,#destination-marker"
             : "#toast"
           : "h2,h3,p,small,.eyebrow,.build-line span,.control-guide span,.upgrade-category span,.upgrade-category b,#quest-content li";
-      for (const child of root.querySelectorAll<HTMLElement>(selectors))
+      for (const child of root.querySelectorAll<HTMLElement>(selectors)) {
+        if (
+          ["status-text", "warning-text"].includes(
+            child.dataset.pixelKind ?? "",
+          )
+        )
+          continue;
         add(
           child,
           child.tagName === "BUTTON" ? buttonKind(child) : textKind(child),
           child.id === "pause-button"
-            ? document.body.classList.contains("touch-ui")
-              ? root.querySelector<HTMLElement>("#quick-menu")?.hidden
-                ? "+"
-                : "X"
-              : "II"
+            ? child.dataset.pixelIcon === "status-icon"
+              ? ""
+              : document.body.classList.contains("touch-ui")
+                ? root.querySelector<HTMLElement>("#quick-menu")?.hidden
+                  ? "+"
+                  : "X"
+                : "II"
             : child.id === "fullscreen"
               ? "[]"
               : child.id === "destination-marker"
@@ -253,14 +339,20 @@ export class PixelUiBridge {
                 : child.id === "save-indicator"
                   ? ""
                   : child.innerText,
-          child.id === "save-indicator"
+          child.id === "save-indicator" ||
+            child.classList.contains("dock-facility")
             ? Number(child.dataset.pixelValue ?? 0)
             : 0,
         );
+      }
       if (root.id !== "game-ui") {
         for (const button of root.querySelectorAll<HTMLButtonElement>(
           "button,.import-label",
-        ))
+        )) {
+          // These accessible marker buttons were emitted once by the artwork
+          // loop. Their hitboxes do not become generic frames or text objects.
+          if (["map-home", "map-site"].includes(button.dataset.pixelKind ?? ""))
+            continue;
           add(
             button,
             buttonKind(button),
@@ -268,6 +360,7 @@ export class PixelUiBridge {
               ? "SAVE / BACKUP"
               : (button.textContent ?? ""),
           );
+        }
         for (const label of root.querySelectorAll<HTMLLabelElement>(
           ".settings label",
         )) {

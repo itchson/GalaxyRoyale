@@ -1,0 +1,138 @@
+{
+  "assets": [
+    {
+      "id": "bd54c8b49578db57",
+      "kind": "script",
+      "name": "index-BsKUpWlB.js",
+      "sources": [
+        {
+          "kind": "resource",
+          "property": "script"
+        },
+        {
+          "kind": "attribute",
+          "nodeId": 611,
+          "property": "src"
+        }
+      ],
+      "url": "http://127.0.0.1:4212/assets/index-BsKUpWlB.js"
+    },
+    {
+      "id": "6f49ff1c9260d131",
+      "kind": "stylesheet",
+      "name": "index-B7ubo1mX.css",
+      "sources": [
+        {
+          "kind": "resource",
+          "property": "link"
+        },
+        {
+          "kind": "attribute",
+          "nodeId": 613,
+          "property": "href"
+        }
+      ],
+      "url": "http://127.0.0.1:4212/assets/index-B7ubo1mX.css"
+    },
+    {
+      "id": "9a60ffaf81dda6ae",
+      "kind": "font",
+      "name": "RoyaleMono.ttf",
+      "sources": [
+        {
+          "kind": "resource",
+          "property": "css"
+        }
+      ],
+      "url": "http://127.0.0.1:4212/fonts/RoyaleMono.ttf"
+    },
+    {
+      "id": "ce658a5123dc424e",
+      "kind": "font",
+      "name": "Tiny5.ttf",
+      "sources": [
+        {
+          "kind": "resource",
+          "property": "css"
+        }
+      ],
+      "url": "http://127.0.0.1:4212/fonts/Tiny5.ttf"
+    },
+    {
+      "id": "5ce39cf3cd24321a",
+      "kind": "other",
+      "name": "manifest.webmanifest",
+      "sources": [
+        {
+          "kind": "resource",
+          "property": "link"
+        },
+        {
+          "kind": "attribute",
+          "nodeId": 602,
+          "property": "href"
+        }
+      ],
+      "url": "http://127.0.0.1:4212/manifest.webmanifest"
+    },
+    {
+      "id": "fc97b6a9ca7d73f2",
+      "kind": "image",
+      "name": "icon.svg",
+      "sources": [
+        {
+          "kind": "resource",
+          "property": "other"
+        },
+        {
+          "kind": "resource",
+          "property": "other"
+        },
+        {
+          "kind": "resource",
+          "property": "other"
+        }
+      ],
+      "url": "http://127.0.0.1:4212/icon.svg"
+    },
+    {
+      "id": "02ad9cbfe38f9d83",
+      "kind": "script",
+      "name": "galaxy.js",
+      "sources": [
+        {
+          "kind": "resource",
+          "property": "script"
+        }
+      ],
+      "url": "http://127.0.0.1:4212/wasm/webgl2-42d9d5261cbd1e64442f8427726ed9425957e6e7c8302e0473c6c2423d46ff57/galaxy.js"
+    },
+    {
+      "id": "4e30dfdedd52eedb",
+      "kind": "other",
+      "name": "galaxy_bg.wasm",
+      "sources": [
+        {
+          "kind": "resource",
+          "property": "fetch"
+        }
+      ],
+      "url": "http://127.0.0.1:4212/wasm/webgl2-42d9d5261cbd1e64442f8427726ed9425957e6e7c8302e0473c6c2423d46ff57/galaxy_bg.wasm"
+    }
+  ],
+  "id": "529eeb17-4c41-489b-8d69-f19fd07d0dd9",
+  "inlineSvgs": [],
+  "pageUrl": "http://127.0.0.1:4212/?renderer=webgl2&qa=1&metrics=1&toolbar=1",
+  "summary": {
+    "byKind": {
+      "font": 2,
+      "image": 1,
+      "other": 2,
+      "script": 2,
+      "stylesheet": 1,
+      "video": 0
+    },
+    "inlineSvgCount": 0,
+    "totalCount": 8
+  }
+}

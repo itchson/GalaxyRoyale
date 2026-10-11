@@ -1,0 +1,129 @@
+{
+  "files": [
+    {
+      "path": "bridge-tests.log",
+      "size": 2099,
+      "sha256": "292a3722a4bbac72d02ad9d9b8e3dad6e29230b29c6f4d7571d246e7ac466a8e"
+    },
+    {
+      "path": "commands.json",
+      "size": 1449,
+      "sha256": "94cadaee4c1822167e8cee5f27922e3ef9d995c72fb3278dfeeabfcb9651ac92"
+    },
+    {
+      "path": "HANDOFF.md",
+      "size": 7010,
+      "sha256": "4ca88c8532f5bad1742af9ac339d2b47330f4d9ef599938c1234a876fd00f2b8"
+    },
+    {
+      "path": "inputs/apps/game/index.html",
+      "size": 13855,
+      "sha256": "d8ebd898007a868fecc8f4c4f2a7f1a72e2f9771741e8745404c0dbd85c8bc66"
+    },
+    {
+      "path": "inputs/apps/game/src/main.ts",
+      "size": 66310,
+      "sha256": "587da9f5f6ec4debd37f7dcbedbcbf6a33df20ef28d509585a7f015624a15d53"
+    },
+    {
+      "path": "inputs/apps/game/src/pixel-ui.ts",
+      "size": 14770,
+      "sha256": "29b48dee69ef156c93f8313d3f72c9e468f65e912a8dbb4b786d0b1f40894ffa"
+    },
+    {
+      "path": "inputs/apps/game/src/style.css",
+      "size": 21545,
+      "sha256": "ba0a3856cd33c59dca5ad114e2d696c0a09deabc523f8b6f34df91e959722237"
+    },
+    {
+      "path": "inputs/Cargo.lock",
+      "size": 27791,
+      "sha256": "df228d9f83ef57321dcb768b79d948e9aa24456c0952e971fc8d6fcd7e806bdd"
+    },
+    {
+      "path": "inputs/crates/engine_core/src/camera.rs",
+      "size": 8926,
+      "sha256": "b08164aa6c9a7e8364ee90e7205e70b702d2013c1861254da33610cb81fdf759"
+    },
+    {
+      "path": "inputs/crates/engine_core/src/frame.rs",
+      "size": 25415,
+      "sha256": "2afd79bb523dc0a57533ddaf1067ce2dd204823cb87f72e3ee7fc976a81969fc"
+    },
+    {
+      "path": "inputs/crates/game_core/src/lib.rs",
+      "size": 185612,
+      "sha256": "ece2ffcd97a0a96b4e52915e796008c14d0c532db5b2b9f5256ee381793d7d03"
+    },
+    {
+      "path": "inputs/crates/game_web/src/boss_layout.rs",
+      "size": 38812,
+      "sha256": "97ae0496ec27b89510b46ad21785a377d2ca6ae0d88d1fe95dcbc30a1758e353"
+    },
+    {
+      "path": "inputs/crates/game_web/src/boss_overlay.rs",
+      "size": 31496,
+      "sha256": "aaaef71b8192766d7602761296077b3d7dd8aafd2fb59d642a4ca0fa95529036"
+    },
+    {
+      "path": "inputs/crates/game_web/src/browser.rs",
+      "size": 25443,
+      "sha256": "ba4d4b07ee6d51d1435cdcaf524e35479b910309c73a274b44e6aebbdec6535e"
+    },
+    {
+      "path": "inputs/crates/game_web/src/pixel_ui.rs",
+      "size": 74581,
+      "sha256": "51a106200e13487ae6b5fd1019d782aca6a778e22fb7a6ae90cd01e647a1c824"
+    },
+    {
+      "path": "inputs/crates/game_web/src/ui_flight_status_tests.rs",
+      "size": 13109,
+      "sha256": "ad0c4ce41e9bec4f8064f04e217189da443ab9f6f003984aa9c70d4c047a6abc"
+    },
+    {
+      "path": "inputs/crates/game_web/src/ui_scene.rs",
+      "size": 78319,
+      "sha256": "485e6820661a6071e6f53ea65f2190511d06e9000518470df16faaf5e2c6b1b7"
+    },
+    {
+      "path": "inputs/scripts/test/flight-status-pixel.test.mjs",
+      "size": 6031,
+      "sha256": "7e1a288cecf91486a7e4ba32884548b2c9c4ca2e6d27b746b7309d1a691b5a32"
+    },
+    {
+      "path": "native-clippy.log",
+      "size": 168,
+      "sha256": "569b82d80b38473f5e543342eacf2a212092e0d7bdfda3710beff908106b9e32"
+    },
+    {
+      "path": "native-tests.log",
+      "size": 15977,
+      "sha256": "73f1f2b432b97702aba13ab342d7191e8188df61776d7a8c58f46683d3b53de1"
+    },
+    {
+      "path": "source-pins.json",
+      "size": 3079,
+      "sha256": "382593fe25ee054680f25a5584862a99c7ae1084d670379c07baba55d0af9890"
+    },
+    {
+      "path": "typecheck.log",
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "verify.py",
+      "size": 850,
+      "sha256": "1a9bc84abbf6eb5db711db83d1e8638451c55653638722541d85d61287d62060"
+    },
+    {
+      "path": "webgl-clippy.log",
+      "size": 73,
+      "sha256": "65bba1b73fa889199915f21a0c23ad215b808bde713de9faff6a5a5612fe72d1"
+    },
+    {
+      "path": "webgpu-clippy.log",
+      "size": 73,
+      "sha256": "3a094cca6611a3bd9593d2db21dbb4930947cf2dc732e8991dbe1a08ee0399ec"
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "scope": "read-time local inputs and exact browser-loaded normal package; no commit/source rebuild attestation",
+  "recorded_utc": "2026-10-11T01:46:23.206425+00:00",
+  "metadata_head_at_read": "a9feee7fcf29989944f2ff0b506b99d954ebf045",
+  "expected_cache": "galaxy-a9c3cb3540f78b9b",
+  "actual_dist_cache": "galaxy-a9c3cb3540f78b9b",
+  "browser_gl_folder": "webgl2-42d9d5261cbd1e64442f8427726ed9425957e6e7c8302e0473c6c2423d46ff57",
+  "files": [
+    {
+      "path": "apps/game/index.html",
+      "bytes": 13855,
+      "sha256": "d8ebd898007a868fecc8f4c4f2a7f1a72e2f9771741e8745404c0dbd85c8bc66",
+      "modified_utc": "2026-10-11T01:16:52.391706+00:00"
+    },
+    {
+      "path": "apps/game/src/style.css",
+      "bytes": 21545,
+      "sha256": "ba0a3856cd33c59dca5ad114e2d696c0a09deabc523f8b6f34df91e959722237",
+      "modified_utc": "2026-10-11T01:23:36.071377+00:00"
+    },
+    {
+      "path": "apps/game/src/main.ts",
+      "bytes": 66495,
+      "sha256": "8843c6e43a5d8116e2a9acaa2bce28c7c6521ae822c48d06d29ac3b6cd39f8ba",
+      "modified_utc": "2026-10-11T01:35:02.486537+00:00"
+    },
+    {
+      "path": "apps/game/src/pixel-ui.ts",
+      "bytes": 14770,
+      "sha256": "29b48dee69ef156c93f8313d3f72c9e468f65e912a8dbb4b786d0b1f40894ffa",
+      "modified_utc": "2026-10-11T01:23:35.493603+00:00"
+    },
+    {
+      "path": "apps/game/src/audio.ts",
+      "bytes": 28517,
+      "sha256": "6e06ef04f40367ab8519adfd445258b0c284d6b1c7ac3d955ea212962c629f64",
+      "modified_utc": "2026-10-11T01:29:37.371588+00:00"
+    },
+    {
+      "path": "apps/game/src/audio-state.ts",
+      "bytes": 8962,
+      "sha256": "6c8a836a6d61efb1c1e290378022974bca546586721031d500ff01553c0a2578",
+      "modified_utc": "2026-10-11T01:25:31.237513+00:00"
+    },
+    {
+      "path": "apps/game/src/webgl-lifecycle.ts",
+      "bytes": 3583,
+      "sha256": "faf4ed915b85bc76cec2c22e6c16884eb35d5d4fc492b1b8ac13770cc672bf17",
+      "modified_utc": "2026-10-10T22:48:15.063323+00:00"
+    },
+    {
+      "path": "crates/game_web/src/browser.rs",
+      "bytes": 25443,
+      "sha256": "ba4d4b07ee6d51d1435cdcaf524e35479b910309c73a274b44e6aebbdec6535e",
+      "modified_utc": "2026-10-11T01:23:34.927516+00:00"
+    },
+    {
+      "path": "dist/index.html",
+      "bytes": 13954,
+      "sha256": "6e1aa135f3bdd14b259ab8a4d7413a86cb44ed9e405241be4229e8863eb10b9d",
+      "modified_utc": "2026-10-11T01:35:33.362390+00:00"
+    },
+    {
+      "path": "dist/sw.js",
+      "bytes": 1963,
+      "sha256": "48811c1afd5b26e60e9ad6ee1c15e0956ebc7ccb294056700e4ae5ca2ff0b677",
+      "modified_utc": "2026-10-11T01:35:33.434248+00:00"
+    },
+    {
+      "path": "dist/wasm/builds.json",
+      "bytes": 247,
+      "sha256": "be9c4fea0a1fc33b2a7773f0c942eb28ce810c43c94225af036027a4eeded796",
+      "modified_utc": "2026-10-11T01:35:31.910893+00:00"
+    },
+    {
+      "path": "dist/assets/index-5rV-IuNs.js",
+      "bytes": 121230,
+      "sha256": "2fd90275ea5e6dd358f351fe9c77db5f3a6977f92cc97f8cccb6ca5d632cbab2",
+      "modified_utc": "2026-10-11T01:35:33.362390+00:00"
+    },
+    {
+      "path": "dist/assets/index-BLHOm9mL.css",
+      "bytes": 31341,
+      "sha256": "70f38883537001ae386f5b04206fdb1b4aaf84033a5dc94c6ca482e48572a930",
+      "modified_utc": "2026-10-11T01:35:33.362390+00:00"
+    },
+    {
+      "path": "dist/wasm/webgl2-42d9d5261cbd1e64442f8427726ed9425957e6e7c8302e0473c6c2423d46ff57/galaxy_bg.wasm",
+      "bytes": 6232119,
+      "sha256": "82b64a479b7bec708c32497cc0797c1283ee472a5ee996728f4025f6d7736af6",
+      "modified_utc": "2026-10-11T01:35:31.825629+00:00"
+    },
+    {
+      "path": "dist/wasm/webgpu-c53c7a22610eca47001f4b8a6f299f4c6aad7b1f370952385172d7b3e0fd41c4/galaxy_bg.wasm",
+      "bytes": 2604995,
+      "sha256": "6e0422292fef5b363d26d78b8cc3e9c92e563fb53606b8a48937e857060e566c",
+      "modified_utc": "2026-10-11T01:35:29.255689+00:00"
+    }
+  ]
+}

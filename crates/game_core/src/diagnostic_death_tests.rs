@@ -5,13 +5,14 @@ const DT: f32 = 1.0 / 60.0;
 
 fn survival_profile() -> Profile {
     let mut profile = Profile {
+        schema_version: 3, // migrate the declared existing fully installed hardware
         currency: [7, 8, 9],
         ranks: [5, 5, 5, 5, 5, 5, 0, 0, 0],
         ..Profile::default()
     };
     // Explicit existing-profile fixture, not a reward granted by any diagnostic.
     profile.campaign.ship_xp = [1320, 130, 240, 310, 420, 520, 620, 720, 820, 1320];
-    profile.campaign.stored_materials = 11;
+    profile.campaign.stored_materials = [11, 0, 0, 0, 0];
     profile
 }
 
@@ -224,7 +225,7 @@ fn earned_run() -> Game {
     }
     game.tick(&InputFrame::default(), DT);
     assert_eq!(deaths(&game.take_events()), 0);
-    assert_eq!(game.profile.campaign.cargo_materials, 5);
+    assert_eq!(game.profile.campaign.cargo_materials, [5, 0, 0, 0, 0]);
     let run = game.run.as_ref().unwrap();
     assert_eq!(run.enemies, 1);
     assert_eq!(run.xp_gained, 5);
@@ -237,7 +238,8 @@ fn earned_run() -> Game {
 fn forced_normal_run_death_retains_earned_progress_and_finishes_report_once() {
     let mut game = earned_run();
     let before = game.profile.clone();
-    let run = game.run.clone().unwrap();
+    let mut run = game.run.clone().unwrap();
+    run.materials_lost = before.campaign.cargo_materials;
     let time = game.time;
     game.diagnostic("die");
     game.tick(&InputFrame::default(), DT);
@@ -246,9 +248,8 @@ fn forced_normal_run_death_retains_earned_progress_and_finishes_report_once() {
     assert_eq!(game.time, time);
     let mut expected = before.clone();
     expected.campaign.last_run = Some(run.clone());
-    expected.campaign.stored_materials += expected.campaign.cargo_materials;
-    expected.campaign.cargo_materials = 0;
-    expected.revision += 2; // one actual cargo bank, one finished run
+    expected.campaign.cargo_materials = [0, 0, 0, 0, 0];
+    expected.revision += 2; // one actual cargo loss, one finished run
     assert_eq!(profile_json(&game), serde_json::to_value(expected).unwrap());
     assert_eq!(game.hud().last_run, Some(run));
     assert!(game.run.is_none());
@@ -307,10 +308,10 @@ fn natural_lethal_occupied_cell_collision_keeps_the_existing_end_of_tick_path() 
     assert!((game.time - time - DT).abs() < 0.00001);
     expected_run.time += DT;
     expected_run.distance_peak = expected_run.distance_peak.max(position.length());
+    expected_run.materials_lost = before.campaign.cargo_materials;
     let mut expected = before;
     expected.campaign.last_run = Some(expected_run);
-    expected.campaign.stored_materials += expected.campaign.cargo_materials;
-    expected.campaign.cargo_materials = 0;
+    expected.campaign.cargo_materials = [0, 0, 0, 0, 0];
     expected.revision += 2;
     assert_eq!(profile_json(&game), serde_json::to_value(expected).unwrap());
 }
