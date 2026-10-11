@@ -30,9 +30,15 @@ const pictures = [
     "runtime-art",
     "10063d573057be4dfdba591880d1f971a7e7d3bc0e1280d92f6927b262f16a8c",
   ],
+  [
+    "pixel-engine",
+    "settings-webgpu-wide.jpg",
+    "runtime-screenshot",
+    "2d89103465015e4f84fe5437bb98b39675c3b006bb3c06cd40fa8ff6e2d30f47",
+  ],
 ];
 
-test("gallery serves the three exact committed native/browser artifacts with distinct classifications and readable provenance", async () => {
+test("gallery serves exact committed native/browser artifacts with distinct classifications and readable provenance", async () => {
   for (const [id, name, kind, hash] of pictures) {
     const entry = catalog.entries.find((entry) => entry.id === id);
     const media = entry.media.find((media) => media.path === prefix + name);
@@ -51,12 +57,32 @@ test("gallery serves the three exact committed native/browser artifacts with dis
 });
 
 test("gallery captions preserve observed desktop/QA scope and do not turn a native raster into GPU acceptance", () => {
-  const get = (id) => catalog.entries.find((e) => e.id === id).media.at(-1);
-  assert.match(get("galaxy-royale").caption, /1280×720/);
-  assert.match(get("galaxy-royale").caption, /Historical[\s\S]*no mobile/);
-  assert.match(get("sanctuaries").caption, /QA console, not natural travel/);
-  assert.match(get("pixel-engine").caption, /software raster/);
-  assert.match(get("pixel-engine").caption, /not a browser screenshot/);
+  const get = (id, name) =>
+    catalog.entries
+      .find((e) => e.id === id)
+      .media.find((m) => m.path === prefix + name);
+  assert.match(get("galaxy-royale", "webgpu-haven.jpg").caption, /1280×720/);
+  assert.match(
+    get("galaxy-royale", "webgpu-haven.jpg").caption,
+    /Historical[\s\S]*no mobile/,
+  );
+  assert.match(
+    get("sanctuaries", "webgpu-belt.jpg").caption,
+    /QA console, not natural travel/,
+  );
+  assert.match(
+    get("pixel-engine", "native-art-contact-sheet.png").caption,
+    /software raster/,
+  );
+  assert.match(
+    get("pixel-engine", "native-art-contact-sheet.png").caption,
+    /not a browser screenshot/,
+  );
+  const current = get("pixel-engine", "settings-webgpu-wide.jpg");
+  assert.equal(current.kind, "runtime-screenshot");
+  assert.match(current.caption, /desktop WebGPU/);
+  assert.match(current.caption, /distinct from physical-phone acceptance/);
+  assert.equal(current.provenance, prefix + "CURRENT_UI_ACCEPTANCE.md");
 });
 
 test("artifact namespace retains exact catalog allowlists and excludes arbitrary records, hidden paths and audio", async () => {

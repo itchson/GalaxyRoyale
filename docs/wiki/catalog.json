@@ -1383,8 +1383,8 @@
         {
           "title": "Top-down Haven facilities",
           "paragraphs": [
-            "Forge, Hangar, Journal and Arena facilities are authored as overhead occupied-pixel objects with distinct planar silhouettes and relative signal animations. Facility centers and interaction radius24 remain unchanged. Their native labels are hidden at rest, appear under cursor hover, and remain available for keyboard focus.",
-            "The current dock retains its1454-cell collision silhouette while its planar sectors gain fine cyan/gold and steel detail. Native public Game extraction verifies7428 facility-and-dock cells across nine transforms. Reduced Motion freezes authored signal animation."
+            "Forge, Hangar, Journal and Arena facilities are authored as overhead occupied-pixel objects with distinct planar silhouettes and relative signal animations. Facility centers and interaction radius 24 remain unchanged. Their native labels are hidden at rest, appear under cursor hover, and remain available for keyboard focus.",
+            "The current dock retains its 1454-cell collision silhouette while its planar sectors gain fine cyan/gold and steel detail. Native public Game extraction verifies 7428 facility-and-dock cells across nine transforms. Reduced Motion freezes authored signal animation."
           ]
         }
       ],
@@ -2550,9 +2550,9 @@
         {
           "title": "Responsive native controls and navigation",
           "paragraphs": [
-            "Settings labels and real inputs are measured independently in group-local coordinates. Audio, Display & motion and Session sections reflow into a single column in narrow layouts and retain a separate scroll region. Eleven authored24×24 PixelBody icons use the same relative transform/material pipeline as other native UI assets.",
-            "The lower-left north-up minimap sits above the text footer and tracks real Hud.navigation destinations: Haven in yellow and the active mission in purple. Its2400-world-unit range is independent of zoom. Native reservations account for the map, player vitals, boss banners and touch controls. No undiscovered destination is invented.",
-            "Both desktop backends were inspected at1280×720,848×480 and480×800. This bounded acceptance does not establish physical phone performance or universal perceptual readability."
+            "Settings labels and real inputs are measured independently in group-local coordinates. Audio, Display & motion and Session sections reflow into a single column in narrow layouts and retain a separate scroll region. Eleven authored 24×24 PixelBody icons use the same relative transform/material pipeline as other native UI assets.",
+            "The lower-left north-up minimap sits above the text footer and tracks real Hud.navigation destinations: Haven in yellow and the active mission in purple. Its 2400-world-unit range is independent of zoom. Native reservations account for the map, player vitals, boss banners and touch controls. No undiscovered destination is invented.",
+            "Both desktop backends were inspected at 1280×720, 848×480 and 480×800. This bounded acceptance does not establish physical phone performance or universal perceptual readability."
           ]
         }
       ],
