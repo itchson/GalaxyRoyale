@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 831,
+  "revision": 844,
   "name": "Galaxy Royale",
   "phase": "Playable solo slice → content and validation",
-  "updatedAt": "2026-10-11T18:33:35.737Z",
+  "updatedAt": "2026-10-11T19:13:35.113Z",
   "tasks": [
     {
       "id": "studio",
@@ -7043,6 +7043,52 @@
       "revision": 3,
       "createdAt": "2026-10-11T17:28:15.814Z",
       "updatedAt": "2026-10-11T17:49:19.076Z"
+    },
+    {
+      "id": "task-c41339a0",
+      "title": "Refine deep-space gas morphology to preserve immersion",
+      "description": "Replace enclosed oval cloud holes and tubular forms with diffuse irregular filaments and open dust clefts, retaining native seed/parallax/cosmetic bounds.",
+      "department": "Art",
+      "owner": "/root/production_research",
+      "status": "complete",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Native field removes large enclosed artificial cavities and preserves deterministic generation and budgets.",
+          "met": true
+        },
+        {
+          "text": "Actual compiled WebGPU and WebGL2 scene visually inspected.",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "nebula-handoff.md",
+          "kind": "artifact",
+          "path": "artifacts/space-coop-refinement-20261012/nebula-handoff.md"
+        },
+        {
+          "label": "cloud-capture-review.md",
+          "kind": "artifact",
+          "path": "artifacts/space-coop-refinement-20261012/cloud-capture-review.md"
+        },
+        {
+          "label": "nebula-webgpu.jpg",
+          "kind": "artifact",
+          "path": "artifacts/space-coop-refinement-20261012/nebula-webgpu.jpg"
+        },
+        {
+          "label": "nebula-webgl2.jpg",
+          "kind": "artifact",
+          "path": "artifacts/space-coop-refinement-20261012/nebula-webgl2.jpg"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-11T18:44:52.945Z",
+      "updatedAt": "2026-10-11T19:11:59.230Z"
     }
   ],
   "reviews": [
@@ -8817,6 +8863,81 @@
           "label": "Actual WebGPU panel",
           "kind": "artifact",
           "path": "artifacts/co-op-native-integration-20261012/panel-webgpu-wide.jpg"
+        }
+      ]
+    },
+    {
+      "id": "review-9eaa7133",
+      "title": "Native deep-space gas and compact league UI: actual saved-frame review",
+      "body": "# Native deep-space and league UI refinement\n\nNormal runtime compiled at b26307fb4364724ad20a6fdd5195c8c03c1c01a1. Subsequent helper/evidence commits do not change its runtime inputs. Actual normal WebGPU and WebGL2 builds passed; full native suite 793 passed with 8 explicit exporters ignored, strict native/WASM clippy passed. Full shell suite before QA initialization repair: 531 passed, 1 existing Windows skip. See raw logs for scope.\n\nCloud frames were captured from d1abe9c (same native background as b26307f), actual seed3150181497, QA camera[-36006.722,-45135.246], at different animation times. QA warp was used and progression was suppressed. They are actual browser renders, not concepts. Irregular gas/open dust clefts replace enclosed oval voids, while deterministic culling, transforms, parallax and density caps remain. Native generated field:1672 occupied cells/full,434/reduced; no physical gas simulation claim. Independent saved-frame review found no concrete morphology blocker in these stills. All-seed/zoom/moving-threat and physical-device testing remain open.\n\nFinal co-op menu capture is b26307f after actual PWA Apply update at Haven; observed script index-BraI6h3x.js. Compact300x230 logical card, quiet graphite/platinum/cyan sports styling. Wide1280x720 idle layout reviewed; narrow and active/long-code states pending. Prior oversized capture is retained as negative evidence.\n\nNative guest owned-loadout bridge and validation are implemented and tested; primary attacks only, shared rewards disabled. Actual two-native-Game local WebGPU WebRTC QA used explicitly older48bec87 factory-loadout artifacts. Connect, movement/fire, complete guest commits, host end and Dispose were observed, local native and IndexedDB profile hashes unchanged. A rejoin attempt failed because the QA harness called host end twice, before new session creation; preserved reports are not a passing rejoin claim. WebGL2 RTC, rejoin, same-count destruction, Internet/NAT and eight clients remain pending. Temporary QA4189 was disposed and stopped; normal4173 preview plus local4176 signaling restored. No second game preview left running.\n\nThe user's two pre-existing opr-integration JPEGs were untouched. Studio records use actual reviews and runs; broader multiplayer/AAA acceptance remains open.",
+      "author": "Root",
+      "source": "Actual native integration, browser captures and asynchronous specialist review",
+      "createdAt": "2026-10-11T19:11:59.111Z",
+      "participants": [
+        "Root",
+        "/root/production_research"
+      ],
+      "taskIds": [
+        "task-c41339a0"
+      ],
+      "evidence": [
+        {
+          "label": "cloud-capture-review.md",
+          "kind": "artifact",
+          "path": "artifacts/space-coop-refinement-20261012/cloud-capture-review.md"
+        },
+        {
+          "label": "final-panel-review.md",
+          "kind": "artifact",
+          "path": "artifacts/space-coop-refinement-20261012/final-panel-review.md"
+        },
+        {
+          "label": "nebula-webgpu.jpg",
+          "kind": "artifact",
+          "path": "artifacts/space-coop-refinement-20261012/nebula-webgpu.jpg"
+        },
+        {
+          "label": "nebula-webgl2.jpg",
+          "kind": "artifact",
+          "path": "artifacts/space-coop-refinement-20261012/nebula-webgl2.jpg"
+        },
+        {
+          "label": "panel-webgl2-final.jpg",
+          "kind": "artifact",
+          "path": "artifacts/space-coop-refinement-20261012/panel-webgl2-final.jpg"
+        }
+      ]
+    },
+    {
+      "id": "review-68823a93",
+      "title": "Actual local WebGPU RTC observations, with preserved harness failure",
+      "body": "Root connected two real native Games using older48bec87 normal binaries and independent QA IndexedDB origins. Movement/fire, complete guest commits, host end and Dispose observed; native and stored profile hashes unchanged. Rejoin failed before creation because helper called host end twice; not marked pass. Current owned-loadout RTC, fallback, same-count holes, Internet/NAT/eight-player are pending.",
+      "author": "Root",
+      "source": "Actual native integration, browser captures and asynchronous specialist review",
+      "createdAt": "2026-10-11T19:11:59.322Z",
+      "participants": [
+        "Root",
+        "/root/gameplay_design"
+      ],
+      "taskIds": [
+        "task-05dd95cd",
+        "task-7e8e0a50"
+      ],
+      "evidence": [
+        {
+          "label": "rtc-webgpu-review.md",
+          "kind": "artifact",
+          "path": "artifacts/space-coop-refinement-20261012/rtc-webgpu-review.md"
+        },
+        {
+          "label": "rtc-webgpu-flight.jpg",
+          "kind": "artifact",
+          "path": "artifacts/space-coop-refinement-20261012/rtc-webgpu-flight.jpg"
+        },
+        {
+          "label": "README.md",
+          "kind": "artifact",
+          "path": "artifacts/space-coop-refinement-20261012/README.md"
         }
       ]
     }
@@ -11298,6 +11419,122 @@
       ],
       "url": "http://league-final.localhost:4173/?renderer=webgpu",
       "knownIssues": "Temporary sessions remain primary-fire/factory-guest with shared rewards disabled. Advanced remote effects/loadouts, background hosting and public HTTPS/TURN remain pending. Hidden IAB is not a performance benchmark."
+    },
+    {
+      "id": "build-e44bd5b1",
+      "title": "Dual renderer integration b26307f",
+      "body": "Frozen runtime native gas morphology, owned guest loadout and compact co-op sports panel; actual tests and normal build. RTC harness observations use explicitly older48bec87 artifacts and do not prove current owned-loadout RTC.",
+      "author": "Root",
+      "source": "Actual native integration, browser captures and asynchronous specialist review",
+      "createdAt": "2026-10-11T19:11:59.147Z",
+      "revision": "b26307fb4364724ad20a6fdd5195c8c03c1c01a1",
+      "evidence": [
+        {
+          "label": "native-full.log",
+          "kind": "artifact",
+          "path": "artifacts/space-coop-refinement-20261012/native-full.log"
+        },
+        {
+          "label": "build-final.log",
+          "kind": "artifact",
+          "path": "artifacts/space-coop-refinement-20261012/build-final.log"
+        },
+        {
+          "label": "README.md",
+          "kind": "artifact",
+          "path": "artifacts/space-coop-refinement-20261012/README.md"
+        }
+      ],
+      "checks": [
+        {
+          "name": "Native full suite793pass/8exportignored",
+          "result": "pass"
+        },
+        {
+          "name": "Native and wasm32 strict clippy",
+          "result": "pass"
+        },
+        {
+          "name": "Shell531pass/1Windows skip before helper repair",
+          "result": "pass"
+        },
+        {
+          "name": "Normal WebGPU and WebGL2 build",
+          "result": "pass"
+        },
+        {
+          "name": "Browser gas and wide compact card review",
+          "result": "pass"
+        },
+        {
+          "name": "Multiplayer rejoin and WebGL2 RTC",
+          "result": "not_run"
+        },
+        {
+          "name": "Physical phones /30minute soak",
+          "result": "not_run"
+        }
+      ],
+      "knownIssues": "Rejoin attempt failed at QA orchestration; correction and rerun pending. Narrow/active UI, all-seed artwork, Internet/eight-player and physical-device acceptance pending."
+    },
+    {
+      "id": "build-5cc7850b",
+      "title": "Post-initialization QA helper integration shell check",
+      "body": "COOP_QA_DIST pointed at actual current normal dist for full pnpm test;538pass/0fail/1 existingWindows skip. No new native renderer build or RTC browser acceptance is implied.",
+      "author": "Root",
+      "source": "Actual post-helper regression command",
+      "createdAt": "2026-10-11T19:12:53.769Z",
+      "revision": "2d494ebb3b1ae46495545a8af80d0fa78ca3e58b",
+      "evidence": [
+        {
+          "label": "Actual shell output",
+          "kind": "artifact",
+          "path": "work/space-coop-refinement/shell-after-helper-with-dist.log"
+        }
+      ],
+      "checks": [
+        {
+          "name": "Full shell539checks with real current normal bundles",
+          "result": "pass"
+        },
+        {
+          "name": "Fresh actual native rejoin/fallback",
+          "result": "not_run"
+        }
+      ],
+      "knownIssues": ""
+    },
+    {
+      "id": "build-7a394291",
+      "title": "Final QA regression integration0ed2c58",
+      "body": "Full pnpm test using current normal dist:539pass,0fail,1existingWindows skip. Corrected rejoin orchestration is covered by actual helper regression. Native runtime remains frozen b26307f; no new browser rejoin pass claimed.",
+      "author": "Root",
+      "source": "Actual integrated source, regression commands and specialist handoffs",
+      "createdAt": "2026-10-11T19:13:35.072Z",
+      "revision": "0ed2c58",
+      "evidence": [
+        {
+          "label": "shell-final-with-dist.log",
+          "kind": "artifact",
+          "path": "artifacts/space-coop-refinement-20261012/shell-final-with-dist.log"
+        },
+        {
+          "label": "rtc-rejoin-correction.md",
+          "kind": "artifact",
+          "path": "artifacts/space-coop-refinement-20261012/rtc-rejoin-correction.md"
+        }
+      ],
+      "checks": [
+        {
+          "name": "Full shell540checks actual normal bundles",
+          "result": "pass"
+        },
+        {
+          "name": "Fresh native browser rejoin / WebGL2 RTC",
+          "result": "not_run"
+        }
+      ],
+      "knownIssues": ""
     }
   ],
   "feedback": [],
@@ -19611,6 +19848,136 @@
       "author": "Root",
       "source": "actual-development",
       "createdAt": "2026-10-11T18:33:35.737Z"
+    },
+    {
+      "id": "29403c05-1d37-4c24-87da-f0100fa09de2",
+      "revision": 832,
+      "kind": "task.create",
+      "itemId": "task-c41339a0",
+      "title": "Refine deep-space gas morphology to preserve immersion",
+      "author": "Root",
+      "source": "actual-session",
+      "createdAt": "2026-10-11T18:44:52.945Z"
+    },
+    {
+      "id": "3b174d87-513e-4405-8eda-21bc6a6523c2",
+      "revision": 833,
+      "kind": "run",
+      "itemId": "run-8ea8a436",
+      "title": "Engine specialist · running",
+      "author": "Root",
+      "source": "actual-session",
+      "createdAt": "2026-10-11T18:45:00.859Z"
+    },
+    {
+      "id": "8b7dff3a-feee-4b36-9cdb-23da86d490f4",
+      "revision": 834,
+      "kind": "run",
+      "itemId": "run-5dab6a15",
+      "title": "Gameplay and QA specialist · running",
+      "author": "Root",
+      "source": "actual-session",
+      "createdAt": "2026-10-11T18:45:00.888Z"
+    },
+    {
+      "id": "fddcc71c-e2fa-42aa-baf2-67e68ab3327a",
+      "revision": 835,
+      "kind": "run",
+      "itemId": "run-8de6d4f2",
+      "title": "Space art specialist · running",
+      "author": "Root",
+      "source": "actual-session",
+      "createdAt": "2026-10-11T18:45:00.918Z"
+    },
+    {
+      "id": "b0e6ea9b-8d96-473b-9b01-a56e6919e107",
+      "revision": 836,
+      "kind": "review",
+      "itemId": "review-9eaa7133",
+      "title": "Native deep-space gas and compact league UI: actual saved-frame review",
+      "author": "Root",
+      "source": "Actual native integration, browser captures and asynchronous specialist review",
+      "createdAt": "2026-10-11T19:11:59.111Z"
+    },
+    {
+      "id": "da0a0c6a-4d42-49f7-a226-9d0835044ee7",
+      "revision": 837,
+      "kind": "build",
+      "itemId": "build-e44bd5b1",
+      "title": "Dual renderer integration b26307f",
+      "author": "Root",
+      "source": "Actual native integration, browser captures and asynchronous specialist review",
+      "createdAt": "2026-10-11T19:11:59.147Z"
+    },
+    {
+      "id": "df490177-ea7f-44b2-a413-8c333b9ef212",
+      "revision": 838,
+      "kind": "task.update",
+      "itemId": "task-c41339a0",
+      "title": "Refine deep-space gas morphology to preserve immersion",
+      "author": "Root",
+      "source": "Actual compiled browser and native morphology evidence",
+      "createdAt": "2026-10-11T19:11:59.230Z"
+    },
+    {
+      "id": "0fe9c093-9ca1-48aa-a314-3b08138872e9",
+      "revision": 839,
+      "kind": "run",
+      "itemId": "run-9ed90ec7",
+      "title": "Space art and sports UI specialist · completed",
+      "author": "Root",
+      "source": "Actual native integration, browser captures and asynchronous specialist review",
+      "createdAt": "2026-10-11T19:11:59.286Z"
+    },
+    {
+      "id": "39d89427-47ee-442c-bd6f-d8420d1122b0",
+      "revision": 840,
+      "kind": "review",
+      "itemId": "review-68823a93",
+      "title": "Actual local WebGPU RTC observations, with preserved harness failure",
+      "author": "Root",
+      "source": "Actual native integration, browser captures and asynchronous specialist review",
+      "createdAt": "2026-10-11T19:11:59.322Z"
+    },
+    {
+      "id": "117ecc13-ad99-4069-a910-402420edc520",
+      "revision": 841,
+      "kind": "build",
+      "itemId": "build-5cc7850b",
+      "title": "Post-initialization QA helper integration shell check",
+      "author": "Root",
+      "source": "Actual post-helper regression command",
+      "createdAt": "2026-10-11T19:12:53.769Z"
+    },
+    {
+      "id": "dd303ead-ec00-4338-a9d5-79a6490d233f",
+      "revision": 842,
+      "kind": "build",
+      "itemId": "build-7a394291",
+      "title": "Final QA regression integration0ed2c58",
+      "author": "Root",
+      "source": "Actual integrated source, regression commands and specialist handoffs",
+      "createdAt": "2026-10-11T19:13:35.072Z"
+    },
+    {
+      "id": "a7cc28be-54ef-4c4e-9b5a-34031bdae441",
+      "revision": 843,
+      "kind": "run",
+      "itemId": "run-ad04223b",
+      "title": "Native co-op QA specialist · completed",
+      "author": "Root",
+      "source": "Actual integrated source, regression commands and specialist handoffs",
+      "createdAt": "2026-10-11T19:13:35.096Z"
+    },
+    {
+      "id": "8c9ac00d-1ebd-4f48-9680-ab4c078d37d0",
+      "revision": 844,
+      "kind": "run",
+      "itemId": "run-4ddb48f4",
+      "title": "Native co-op engine specialist · running",
+      "author": "Root",
+      "source": "Actual integrated source, regression commands and specialist handoffs",
+      "createdAt": "2026-10-11T19:13:35.113Z"
     }
   ],
   "runRecords": [
@@ -27199,6 +27566,148 @@
       "author": "Root",
       "source": "actual-development",
       "createdAt": "2026-10-11T18:33:35.737Z"
+    },
+    {
+      "id": "run-8ea8a436",
+      "title": "Engine specialist · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Engine specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T18:45:00.783Z",
+      "taskIds": [
+        "task-7e8e0a50"
+      ],
+      "summary": "Actual bounded native owned RAICHO admission assignment.",
+      "evidence": [
+        {
+          "label": "Actual specialist assignment observation",
+          "kind": "artifact",
+          "path": "work/space-coop-refinement/assignments.txt"
+        }
+      ],
+      "author": "Root",
+      "source": "actual-session",
+      "createdAt": "2026-10-11T18:45:00.859Z"
+    },
+    {
+      "id": "run-5dab6a15",
+      "title": "Gameplay and QA specialist · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Gameplay and QA specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T18:45:00.882Z",
+      "taskIds": [
+        "task-05dd95cd"
+      ],
+      "summary": "Actual bounded two compiled WASM client WebRTC and independent save QA assignment.",
+      "evidence": [
+        {
+          "label": "Actual specialist assignment observation",
+          "kind": "artifact",
+          "path": "work/space-coop-refinement/assignments.txt"
+        }
+      ],
+      "author": "Root",
+      "source": "actual-session",
+      "createdAt": "2026-10-11T18:45:00.888Z"
+    },
+    {
+      "id": "run-8de6d4f2",
+      "title": "Space art specialist · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "Space art specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T18:45:00.900Z",
+      "taskIds": [
+        "task-c41339a0"
+      ],
+      "summary": "Actual bounded native open-cleft nebula morphology assignment and software packet review.",
+      "evidence": [
+        {
+          "label": "Actual specialist assignment observation",
+          "kind": "artifact",
+          "path": "work/space-coop-refinement/assignments.txt"
+        }
+      ],
+      "author": "Root",
+      "source": "actual-session",
+      "createdAt": "2026-10-11T18:45:00.918Z"
+    },
+    {
+      "id": "run-9ed90ec7",
+      "title": "Space art and sports UI specialist · completed",
+      "agentId": "/root/production_research",
+      "agentLabel": "Space art and sports UI specialist",
+      "state": "completed",
+      "observedAt": "2026-10-11T19:11:59.266Z",
+      "taskIds": [
+        "task-c41339a0"
+      ],
+      "summary": "Actual native morphology implementation and saved-frame cloud/compact-card reviews delivered; scoped task evidence complete. Broader physical and layout acceptance remains open.",
+      "evidence": [
+        {
+          "label": "cloud-capture-review.md",
+          "kind": "artifact",
+          "path": "artifacts/space-coop-refinement-20261012/cloud-capture-review.md"
+        },
+        {
+          "label": "final-panel-review.md",
+          "kind": "artifact",
+          "path": "artifacts/space-coop-refinement-20261012/final-panel-review.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual native integration, browser captures and asynchronous specialist review",
+      "createdAt": "2026-10-11T19:11:59.286Z"
+    },
+    {
+      "id": "run-ad04223b",
+      "title": "Native co-op QA specialist · completed",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Native co-op QA specialist",
+      "state": "completed",
+      "observedAt": "2026-10-11T19:13:35.088Z",
+      "taskIds": [
+        "task-05dd95cd"
+      ],
+      "summary": "Delivered actual independent WebGPU connect/drive/end/dispose evidence review, identified double-end rejoin harness bug, committed meaningful correction and regression. Actual browser rejoin/fallback acceptance pending.",
+      "evidence": [
+        {
+          "label": "rtc-webgpu-review.md",
+          "kind": "artifact",
+          "path": "artifacts/space-coop-refinement-20261012/rtc-webgpu-review.md"
+        },
+        {
+          "label": "rtc-rejoin-correction.md",
+          "kind": "artifact",
+          "path": "artifacts/space-coop-refinement-20261012/rtc-rejoin-correction.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual integrated source, regression commands and specialist handoffs",
+      "createdAt": "2026-10-11T19:13:35.096Z"
+    },
+    {
+      "id": "run-4ddb48f4",
+      "title": "Native co-op engine specialist · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Native co-op engine specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T19:13:35.108Z",
+      "taskIds": [
+        "task-7e8e0a50"
+      ],
+      "summary": "Owned-loadout boundary integration delivered and tested; now implementing bounded native every-fifth successful RENKO primary pulse parity in isolated co-op core files. Not yet integrated or validated by Root.",
+      "evidence": [
+        {
+          "label": "Actual specialist assignment and acknowledged scope",
+          "kind": "note",
+          "details": "Root assigned /root/engine_research, which acknowledged branch codex/co-op-pulse-lens from integrated2d494eb; owns co_op.rs and new co_op_starter_tests.rs only, no listeners/wire/Profile/browser edits."
+        }
+      ],
+      "author": "Root",
+      "source": "Actual integrated source, regression commands and specialist handoffs",
+      "createdAt": "2026-10-11T19:13:35.113Z"
     }
   ],
   "phaseDescription": "Desktop-first Rust/WASM solo game and local Studio are implemented. Reviewed occupied-cell art, reproducible conversion, responsive native settings/icons and minimap, strict GitHub integration gates and source-backed Dev Bible are integrated. Natural campaign balance, human listening, owner-private update lifecycle and physical phones remain separate pending gates."

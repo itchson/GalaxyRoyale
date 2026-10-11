@@ -1,0 +1,26 @@
+✔ opaque envelope accepts exact transport bounds without truncating long codes (1.8136ms)
+✔ default unavailable dock state cannot start sessions and exposes semantic input hooks (1.1892ms)
+✔ available session copy discloses current guest and reward limitations (0.6412ms)
+✔ join forwards the full bounded code once, including Enter composition guard (1.1715ms)
+✔ create invokes inside the real click and promise success cannot invent hosting (0.7128ms)
+✔ only controller phases declare readiness, admission and coherent connection (0.7033ms)
+✔ cancel supersedes a pending start and ignores its late rejection (0.7962ms)
+✔ guest cannot end and repeated exit clicks cannot invoke twice (0.7445ms)
+✔ invitation is read only for an actual copyable host state and copied explicitly (1.7171ms)
+✔ clipboard rejection keeps full manual copy and never displays thrown capability (0.6753ms)
+✔ unknown reasons and controller messages cannot leak secret or raw transport errors (0.5659ms)
+✔ unchanged repaint preserves input node, selection, focus, scroll and performs no writes (0.5137ms)
+✔ ended session and teardown clear fields and isolate late completion from a new view (0.6345ms)
+✔ invalid controller counts or progression fail closed without reading invitations (0.6448ms)
+✔ malformed capability getter remains hidden with no unsafe fallback (0.5823ms)
+✔ failed solo restoration keeps the actual reason and prevents another start (0.4624ms)
+✔ failed restoration exposes one explicit retry without claiming restored solo state (0.6142ms)
+✔ invalid state cannot expose recovery or invoke an exit callback (0.4629ms)
+ℹ tests 18
+ℹ suites 0
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 259.3797

@@ -1,0 +1,19 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.11s
+     Running unittests src\lib.rs (target\debug\deps\game_web-9ea70f65f4ad26fd.exe)
+
+running 6 tests
+test co_op_bridge::tests::export_actual_publication_bridge_fixtures ... ignored, explicit actual native publication JSON export
+test co_op_bridge::tests::malformed_batch_and_bounds_reject_before_any_mutation ... ok
+test co_op_bridge::tests::semantic_failures_are_finite_per_op_and_never_alias_host_or_stale_membership ... ok
+test co_op_bridge::tests::owned_equipment_export_and_join_preserve_the_solo_profile ... ok
+test co_op_bridge::tests::membership_clear_restoration_and_new_capture_tokens_are_visible_in_bridge ... ok
+test co_op_bridge::tests::real_admission_input_capture_and_pages_use_authority_without_profiles ... ok
+
+test result: ok. 5 passed; 0 failed; 1 ignored; 0 measured; 282 filtered out; finished in 0.10s
+
+     Running tests\boss_layout.rs (target\debug\deps\boss_layout-427b75710e1283f7.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 31 filtered out; finished in 0.00s
+
