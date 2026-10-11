@@ -21,7 +21,7 @@ The [Stadium design presentation](https://media.gdcvault.com/gdc2026/Slides/Hwan
 
 Body text uses the engine's RoyaleMono occupied-cell glyphs. Shell font sizes describe semantic layout; native glyph size and clipping must fit that measured area. Shrinking CSS while rounding the requested native scale upward is insufficient. Fractional cell transforms are appropriate when the native pixel renderer can fit the complete glyph and line inside the measured region.
 
-Default shell text is 12 CSS pixels minimum / 8 logical units; captions 11 / 7; headings 18 / 12. These are authored starting values, not a universal readability guarantee. Small target sizes are independent from these text sizes. Native map/footer microtext is not substituted for menu body text.
+Default shell text scales from 8 logical units within 12–16 CSS pixels; captions from 7 within 11–14; headings from 12 within 18–24. Physical upper bounds keep wide-screen menus compact. Interaction targets retain 44–52 CSS pixels independently of text size; Settings row padding and license status portraits also have physical upper bounds. These are authored starting values, not a universal readability guarantee. Native map/footer microtext is not substituted for menu body text.
 
 Existing authored 64-cell control masks retain neutral metal and category accents. Hover, focus, pressed and save states provide bounded feedback; decorative motion must respect Reduced Motion. No continuous border animation or moving hit regions are needed to explain an action.
 

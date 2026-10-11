@@ -23,7 +23,7 @@
   padding-right: calc(3px * var(--ui-scale, 1));
 }
 .flight-status > * + * {
-  margin-top: calc(6px * var(--ui-scale, 1));
+  margin-top: min(12px, calc(6px * var(--ui-scale, 1)));
 }
 .flight-status-identity {
   display: flex;
@@ -37,8 +37,8 @@
 }
 .flight-license-portrait {
   flex: 0 0 auto;
-  width: calc(36px * var(--ui-scale, 1));
-  height: calc(48px * var(--ui-scale, 1));
+  width: min(72px, calc(36px * var(--ui-scale, 1)));
+  height: min(96px, calc(48px * var(--ui-scale, 1)));
 }
 .flight-status .campaign-ship {
   flex: 0 0 auto;

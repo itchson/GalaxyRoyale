@@ -17,10 +17,10 @@
   --pink: #ff699b;
   --amber: #ffd783;
   --muted: #8296b8;
-  --ui-text: max(12px, calc(8px * var(--ui-scale, 1)));
-  --ui-caption: max(11px, calc(7px * var(--ui-scale, 1)));
-  --ui-heading: max(18px, calc(12px * var(--ui-scale, 1)));
-  --ui-hit: max(44px, calc(22px * var(--ui-scale, 1)));
+  --ui-text: clamp(12px, calc(8px * var(--ui-scale, 1)), 16px);
+  --ui-caption: clamp(11px, calc(7px * var(--ui-scale, 1)), 14px);
+  --ui-heading: clamp(18px, calc(12px * var(--ui-scale, 1)), 24px);
+  --ui-hit: clamp(44px, calc(18px * var(--ui-scale, 1)), 52px);
   --ui-pad: calc(10px * var(--ui-scale, 1));
   --safe-top: max(8px, env(safe-area-inset-top));
   --safe-right: max(8px, env(safe-area-inset-right));
@@ -473,7 +473,7 @@ body:not(.pixel-ready) #universe {
 }
 .settings-controls {
   display: grid;
-  gap: calc(4px * var(--ui-scale, 1));
+  gap: min(8px, calc(4px * var(--ui-scale, 1)));
   min-width: 0;
 }
 .settings label {
@@ -483,7 +483,7 @@ body:not(.pixel-ready) #universe {
   gap: calc(8px * var(--ui-scale, 1));
   min-width: 0;
   min-height: var(--ui-hit);
-  padding: calc(5px * var(--ui-scale, 1));
+  padding: clamp(6px, calc(3px * var(--ui-scale, 1)), 10px);
   color: #c1d1dd;
   font-size: var(--ui-text);
   line-height: 1.4;
