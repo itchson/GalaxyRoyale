@@ -177,11 +177,11 @@ function guideFixture(
   };
 }
 
-test("training contact renders the real counter and corporation material/asteroid/starter slot", () => {
+test("training contact presents supplied HUD text and corporation fields without issuing progress", () => {
   for (const [material_name, asteroid_name, starter_name, starter_slot] of [
     ["Phase Silicate", "porous", "Flux Drive", "passive"],
     ["Iron Filament", "metallic", "Pulse Lens", "offense"],
-    ["Coolant Crystal", "icy", "Guard Coil", "defense"],
+    ["Coolant KESSHO", "Ice asteroid", "Guard Coil", "defense"],
   ]) {
     const description = `Collect ${material_name}: 4/10. Banked 2, carried 2.`;
     const f = guideFixture({

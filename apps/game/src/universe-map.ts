@@ -387,7 +387,7 @@ function render(view: MapView): boolean {
     write(
       view.detail[2],
       selected
-        ? `COORD ${Math.round(selected.position[0])}, ${Math.round(selected.position[1])}${selected.material_tier !== null ? ` / T${selected.material_tier} MATERIALS` : ""}${selected.recommended_level !== null ? ` / RECOMMENDED SHIP LV ${selected.recommended_level}` : ""}`
+        ? `COORD ${Math.round(selected.position[0])}, ${Math.round(selected.position[1])}${selected.material_tier !== null ? ` / T${selected.material_tier} MATERIALS` : ""}${selected.recommended_level !== null ? ` / RECOMMENDED RAICHO LV ${selected.recommended_level}` : ""}`
         : `CURRENT BIOME / ${view.data.biome.name}${sites.length ? "" : " / REACH REMOTE SANCTUARIES TO CHART BEACONS"}`,
     ) || changed;
   changed =

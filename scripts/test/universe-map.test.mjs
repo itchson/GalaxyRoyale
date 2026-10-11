@@ -210,7 +210,7 @@ test("selection reveals authoritative quest/tier data and navigates to current c
   f.paint(f.target, map, f.navigate);
   find(f, "Select RELAY ANCHORAGE / Amethyst Drift").events.click();
   assert.ok(text(f.target).includes("Amethyst Drift / COURIER / ACTIVE / 0/1"));
-  assert.ok(text(f.target).includes("T2 MATERIALS / RECOMMENDED SHIP LV 3"));
+  assert.ok(text(f.target).includes("T2 MATERIALS / RECOMMENDED RAICHO LV 3"));
   const updated = structuredClone(map);
   updated.sites[0].position = [1600, 70];
   updated.sites[0].status = "ready";

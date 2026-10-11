@@ -12,7 +12,7 @@ The full format is `TYPE-MAIN-SUB-HASH`. Compact names use **A for female, O for
 | RENKO Cybernetics | Red | Weapons and technology / offensive | RENKO HIBANA |
 | HUGO CORP | Blue | Protection / defensive | HUGO MAMORI |
 
-The sub-manufacturer independently colors crystal horns: PAN green, RENKO red, HUGO blue. Main manufacturer determines the first hull, its initial equipped ability, and Haven's visual theme. XP belongs to the individual ship; a new license starts with a level-one ship.
+The sub-manufacturer independently colors crystal horns: PAN green, RENKO red, HUGO blue. Main manufacturer determines the first hull, its initial equipped ability, and Haven's visual theme. XP belongs to the individual RAICHO; a new license starts with a level-one RAICHO.
 
 ## APR-1337, the player's friend
 
