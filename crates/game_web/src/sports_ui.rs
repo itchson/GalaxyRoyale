@@ -224,8 +224,24 @@ pub fn append(
         if strong {
             quad(r, rgb(20, 20, 20));
         }
-        quad([r[0], r[1] + r[3] - 0.6, r[2], 0.3], ALLOY);
-        quad([r[0], r[1] + r[3] - 0.3, r[2], 0.3], RECESS);
+        // A quiet broken alloy locator leaves the label on open graphite.
+        // Two existing surface cells retain the row's bounded chrome cost.
+        let rail_width = (r[2] * 0.16).min(20.0);
+        let cut = (rail_width * 0.2).min(2.0);
+        let right = r[0] + r[2];
+        quad(
+            [right - rail_width, r[1] + r[3] - 0.6, rail_width - cut, 0.3],
+            ALLOY,
+        );
+        quad(
+            [
+                right - rail_width * 0.32,
+                r[1] + r[3] - 0.3,
+                rail_width * 0.32,
+                0.3,
+            ],
+            GRAPHITE,
+        );
     } else {
         let target = if input.kind == Kind::Panel {
             6.0_f32

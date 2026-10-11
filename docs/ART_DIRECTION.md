@@ -1,5 +1,29 @@
 # Galaxy Royale art direction
 
+## Current league and deep-space direction
+
+The approved futuristic sports-league logo is the shared interface reference:
+compact beveled metal, intentional cut corners, restrained illuminated accents
+and crisp high-detail cell clusters. Toolbar icons, card trim and menu controls
+should share those materials without repeating a heavy frame around every item.
+Preserve the small flight HUD and clear action hierarchy.
+
+Deep-space forms have a different silhouette language: irregular gas density,
+unequal open dust lanes, asymmetric stellar ejecta and curved planetary shading.
+Avoid decorative badges, closed outline rings and repeated geometric cavities
+that make natural objects look like interface symbols. Keep their luminance
+subordinate to RAICHO, threats and projectiles. Fine source cells retain their
+fractional world transforms, independent parallax and bounded animation; reduced
+detail preserves the recognizable form rather than filling its dark lanes.
+
+Acceptance requires source-matched native contracts and actual browser views at
+recorded seed, camera, zoom and renderer. Software packet previews are useful
+authoring evidence, but do not certify GPU lighting or motion. The October 12
+WebGL2 inspection reproduced a thin ring-like cosmic remnant at seed 871238449,
+camera [-35332.8203, 22642.1445], zoom 1.6. Its open-ejecta refinement is tracked
+separately from the completed comet clock correction; all-seed and physical
+performance approval remain pending.
+
 The direction reference in `artifacts/concepts/galaxy-royale-direction.png` was generated with the session image tool. Runtime ships, asteroids and dock use the separately generated sprite sheet, converted into editable local pixel cells in `assets/pixels/atlas.json`. Rust expands those indexed cells into PixelBodies, with individual quad rendering, object transforms, localized damage and cell animation.
 
 The visual palette uses near-black navy, an ivory and cyan player hull, cyan dock guidance, magenta Dart threats, amber Bastion armor and jade Coil bodies. Offensive points are coral, defensive cyan and passive gold. Different silhouettes and bright enemy shots give encounters readable roles against the subdued space background. North-facing source ships align with movement through the actor heading plus a quarter-turn transform.
