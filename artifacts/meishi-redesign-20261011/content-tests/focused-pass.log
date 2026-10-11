@@ -1,0 +1,22 @@
+✔ card uses authoritative native profile and exactly eight anonymous empty patch slots (2.5373ms)
+✔ unchanged refresh preserves nodes, scroll, focus and writes nothing (0.9818ms)
+✔ patches are indexed rather than list ordered and only earned identities reach DOM (1.7443ms)
+✔ an unearned champion name is never read even when source includes private metadata (0.8911ms)
+✔ losing an earned flag clears visible art and its former name in the same stable slot (0.9372ms)
+✔ all eight earned flags use existing campaign-patch routes without a ninth slot (0.8229ms)
+✔ corporate balances follow offense/defense/passive ledger order regardless of pilot manufacturer (1.1607ms)
+✔ compact ship strip retains the selected RAICHO icon, name and authoritative level (1.1099ms)
+✔ card never reads removed live XP, vitals or loadout fields (0.8141ms)
+✔ only removed live fields changing leaves the card, focus and scroll untouched (0.9557ms)
+✔ legacy and malformed identity do not relabel another portrait; invalid selected hull paints no art (1.6778ms)
+✔ invalid card level and point numbers are unavailable, not positive progression (1.0071ms)
+✔ view source stays read-only while the card reflows without new animation loops (0.3211ms)
+✔ collectible decoration follows main corporation while sockets reflect only earned patches (1.438ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 232.8873

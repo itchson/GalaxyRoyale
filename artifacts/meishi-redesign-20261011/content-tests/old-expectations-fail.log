@@ -1,0 +1,44 @@
+✔ card uses authoritative native profile and exactly eight anonymous empty patch slots (2.5885ms)
+✔ unchanged refresh preserves nodes, scroll, focus and writes nothing (0.9585ms)
+✔ patches are indexed rather than list ordered and only earned identities reach DOM (1.5155ms)
+✔ an unearned champion name is never read even when source includes private metadata (0.8809ms)
+✔ losing an earned flag clears visible art and its former name in the same stable slot (0.9873ms)
+✔ all eight earned flags use existing campaign-patch routes without a ninth slot (0.8741ms)
+✔ corporate balances follow offense/defense/passive ledger order regardless of pilot manufacturer (1.303ms)
+✖ selected RAICHO and effective equipped ranks refresh without inherited-rank or XP fabrication (1.011ms)
+✔ legacy and malformed identity do not relabel another portrait; invalid selected hull paints no art (0.9573ms)
+✖ nonfinite HUD numbers are displayed as unavailable, not positive progression (0.8596ms)
+✔ view source stays read-only while the card reflows without new animation loops (0.4035ms)
+✔ collectible decoration follows main corporation while sockets reflect only earned patches (2.2492ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 10
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 250.9995
+
+✖ failing tests:
+
+test at scripts\test\meishi.test.mjs:293:1
+✖ selected RAICHO and effective equipped ranks refresh without inherited-rank or XP fabrication (1.011ms)
+  TypeError: Cannot read properties of undefined (reading 'textContent')
+      at TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/meishi.test.mjs:300:44)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)
+
+test at scripts\test\meishi.test.mjs:341:1
+✖ nonfinite HUD numbers are displayed as unavailable, not positive progression (0.8596ms)
+  TypeError: Cannot read properties of undefined (reading 'textContent')
+      at TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/meishi.test.mjs:348:46)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7)

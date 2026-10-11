@@ -1,0 +1,43 @@
+(node:43520) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+{
+  "scope": "Supplied QA progression fixture only; not naturally earned. Actual Root TypeScript validator/normalizer/SaveStore executed; IndexedDB is explicitly an isolated in-memory test adapter, not a browser acceptance claim.",
+  "node": "v24.18.0",
+  "storage_source": {
+    "path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\apps\\game\\src\\storage.ts",
+    "sha256": "7be13895761a2e14c21249473797956f0147ea58e3c761921daf6739e21f9dd8"
+  },
+  "fixture": {
+    "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-audio-refinement\\galaxy-royale\\work\\meishi-layout-tests\\earned-fixture\\all8-earned.json",
+    "sha256": "53cee673d1ec0be2c2f8fd67cd67b82b4378b379c01559d62eccf8e0b10668d4"
+  },
+  "rejected_original": {
+    "sha256": "2ca50cebbe0de734c46aa6bbda2769bf1a38ec29b9c6dabb8cd743d69ad29797"
+  },
+  "checks": [
+    {
+      "name": "Retained original is rejected by actual Root validProfile",
+      "passed": true
+    },
+    {
+      "name": "Minimal repair changes only eight champion ability blueprint flags",
+      "passed": true
+    },
+    {
+      "name": "Repaired fixture passes actual Root validProfile and normalizes without changes",
+      "passed": true
+    },
+    {
+      "name": "Every champion patch/ability inconsistency remains rejected",
+      "passed": true
+    },
+    {
+      "name": "Fixture has eight supplied earned patches, no champion ownership or Royale grants",
+      "passed": true
+    },
+    {
+      "name": "Actual Root SaveStore.replace/open keeps the exact fixture on an isolated in-memory IndexedDB adapter",
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+✖ card never reads removed live XP, vitals or loadout fields (2.1379ms)
+✖ only removed live fields changing leaves the card, focus and scroll untouched (1.3753ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 0
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 215.5314
+
+✖ failing tests:
+
+test at scripts\test\meishi.test.mjs:331:1
+✖ card never reads removed live XP, vitals or loadout fields (2.1379ms)
+  Error: removed field read: ship_xp
+      at Object.get [as ship_xp] (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/meishi.test.mjs:346:15)
+      at Object.paintMeishiCard [as paint] (evalmachine.<anonymous>:180:74)
+      at TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/meishi.test.mjs:351:18)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.start (node:internal/test_runner/test:1191:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:385:17)
+
+test at scripts\test\meishi.test.mjs:358:1
+✖ only removed live fields changing leaves the card, focus and scroll untouched (1.3753ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/meishi.test.mjs:384:12)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1325:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:911:18)
+      at Test.postRun (node:internal/test_runner/test:1465:19)
+      at Test.run (node:internal/test_runner/test:1390:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
