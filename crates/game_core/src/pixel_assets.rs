@@ -20,7 +20,7 @@ struct Sprite {
 
 struct Assets {
     bodies: HashMap<String, PixelBody>,
-    asteroids: [PixelBody; 4],
+    asteroids: [PixelBody; 16],
     palette: Vec<u32>,
 }
 
@@ -34,19 +34,50 @@ static ASSETS: LazyLock<Assets> = LazyLock::new(|| {
     let bodies = atlas
         .sprites
         .iter()
-        .map(|(name, sprite)| (name.clone(), expand(sprite, &atlas.palette)))
+        .map(|(name, sprite)| {
+            let body = expand(sprite, &atlas.palette);
+            let body = if name == "dock" {
+                detail_dock(&body)
+            } else {
+                body
+            };
+            (name.clone(), body)
+        })
         .collect();
     let asteroid = atlas.sprites.get("asteroid").expect("asteroid artwork");
-    let asteroids = std::array::from_fn(|variant| {
-        if variant > 0 {
-            return procedural_asteroid(variant);
+    // Four mineral families, each with four cached deterministic surface fields.
+    // The silhouettes are fixed: recoloring cannot alter orbit/collision radii.
+    let asteroids = std::array::from_fn(|index| {
+        let style = index & 3;
+        let geology = index >> 2;
+        if style == 0 {
+            let body = expand(asteroid, &atlas.palette);
+            if geology == 0 {
+                body
+            } else {
+                map_colors(&body, |x, y, original| {
+                    let grain =
+                        crate::mix((x as u32 * 73) ^ (y as u32 * 193) ^ (geology as u32 * 991));
+                    let [r, g, b, a] = original.to_le_bytes();
+                    let band = ((x + y * (geology + 1)) / 7) % 4;
+                    let factor = if band == 0 {
+                        0.82
+                    } else if grain.is_multiple_of(29) {
+                        1.13
+                    } else {
+                        1.0
+                    };
+                    u32::from_le_bytes([
+                        (r as f32 * factor).min(255.0) as u8,
+                        (g as f32 * factor).min(255.0) as u8,
+                        (b as f32 * factor).min(255.0) as u8,
+                        a,
+                    ])
+                })
+            }
+        } else {
+            procedural_asteroid(style, geology)
         }
-        let palette: Vec<_> = atlas
-            .palette
-            .iter()
-            .map(|&color| mineral_color(color, variant))
-            .collect();
-        expand(asteroid, &palette)
     });
     Assets {
         bodies,
@@ -55,32 +86,40 @@ static ASSETS: LazyLock<Assets> = LazyLock::new(|| {
     }
 });
 
-/// Original bounded silhouettes: forged metal, split ice and porous basalt.
-/// The rock template retains the generated faceted artwork. All four templates
-/// are expanded once; every streamed asteroid still owns destructible cells.
-fn procedural_asteroid(style: usize) -> PixelBody {
+/// Intact material is solid. Cracks, pits and ice cleavages are opaque shades;
+/// only actual damage may turn an interior cell into a collision hole.
+fn procedural_asteroid(style: usize, geology: usize) -> PixelBody {
     let palettes = [
-        [[0, 0, 0]; 5],
+        [[0, 0, 0]; 8],
         [
-            [27, 38, 48],
-            [50, 70, 82],
-            [83, 111, 122],
-            [139, 163, 164],
-            [203, 211, 183],
+            [20, 31, 41],
+            [35, 48, 59],
+            [51, 69, 79],
+            [72, 94, 104],
+            [98, 125, 132],
+            [133, 158, 161],
+            [176, 194, 183],
+            [221, 228, 205],
         ],
         [
-            [22, 48, 66],
-            [41, 88, 115],
-            [74, 133, 157],
-            [122, 182, 193],
-            [190, 225, 211],
+            [17, 36, 54],
+            [26, 57, 79],
+            [39, 81, 105],
+            [56, 110, 133],
+            [81, 144, 164],
+            [118, 180, 190],
+            [165, 213, 214],
+            [215, 238, 224],
         ],
         [
-            [38, 28, 43],
-            [66, 49, 68],
-            [95, 78, 87],
-            [131, 110, 105],
-            [173, 147, 118],
+            [30, 22, 35],
+            [47, 35, 51],
+            [67, 51, 67],
+            [87, 70, 80],
+            [112, 90, 94],
+            [143, 115, 106],
+            [175, 143, 118],
+            [203, 174, 136],
         ],
     ];
     let colors: Vec<_> = palettes[style]
@@ -97,73 +136,128 @@ fn procedural_asteroid(style: usize) -> PixelBody {
     for y in 0..40usize {
         let mut row = String::with_capacity(40);
         for x in 0..40usize {
-            let px = x as f32 - 19.5;
-            let py = y as f32 - 19.5;
-            let hash = crate::mix((x as u32 * 73) ^ (y as u32 * 193) ^ (style as u32 * 991));
-            let occupied = match style {
-                1 => px.abs() < 17.5 && py.abs() < 14.5 && px.abs() + py.abs() * 0.8 < 26.0,
-                2 => {
-                    px.abs() * 0.72 + py.abs() < 18.8
-                        && px.abs() < 15.0
-                        && !(px > 1.0 && px < 3.0 && py > -8.0 && py < 11.0)
-                }
-                _ => {
-                    px * px / 280.0 + py * py / 250.0 < 1.0
-                        && ![
-                            (-7.0, -5.0, 3.5),
-                            (6.0, 4.0, 4.0),
-                            (4.0, -10.0, 2.2),
-                            (-5.0, 10.0, 2.5),
-                        ]
-                        .iter()
-                        .any(|&(cx, cy, r)| (px - cx).powi(2) + (py - cy).powi(2) < r * r)
-                }
-            };
-            if !occupied {
+            let p = engine_core::Vec2::new(x as f32 - 19.5, y as f32 - 19.5);
+            if !rock_mask(style, p.x, p.y) {
                 row.push(' ');
                 continue;
             }
-            let shade = match style {
-                1 => {
-                    if py < -10.0 || px < -14.0 {
-                        4
-                    } else if ((x + y * 2) / 7).is_multiple_of(3) {
-                        3
-                    } else if px > 10.0 || py > 9.0 {
-                        1
-                    } else {
-                        2
-                    }
-                }
-                2 => {
-                    if px + py * 0.7 < -6.0 {
-                        4
-                    } else if py > 6.0 {
-                        1
-                    } else if (x * 2 + y) / 6 % 2 == 0 {
-                        3
-                    } else {
-                        2
-                    }
-                }
-                _ => {
-                    if hash % 17 < 3 {
-                        4
-                    } else if px + py > 11.0 {
-                        0
-                    } else if ((x + y) / 5).is_multiple_of(3) {
-                        3
-                    } else {
-                        2
-                    }
-                }
+            let grain = crate::mix(
+                (x as u32 * 73) ^ (y as u32 * 193) ^ (style as u32 * 991) ^ (geology as u32 * 1777),
+            );
+            let mut shade = if p.x * 0.6 + p.y * 0.8 < -5.0 {
+                5
+            } else if p.x + p.y > 12.0 {
+                2
+            } else {
+                3
             };
+            // Directional faceted strata avoid random bright speckle/noisy holes.
+            if ((x + y * (style + 1) + geology * 3) / 7).is_multiple_of(4) {
+                shade += 1;
+            }
+            if grain.is_multiple_of(37) {
+                shade = (shade + 1).min(6);
+            }
+            let edge = [(-1.0, 0.0), (1.0, 0.0), (0.0, -1.0), (0.0, 1.0)]
+                .iter()
+                .any(|&(dx, dy)| !rock_mask(style, p.x + dx, p.y + dy));
+            if edge {
+                shade = if p.x + p.y < 0.0 { 6 } else { 1 };
+            }
+            let shift = geology as f32 * 1.4;
+            for (cx, cy, r) in [
+                (-7.0 + shift, -5.0, 3.5),
+                (6.0, 4.0 - shift, 4.0),
+                (4.0, -10.0, 2.2),
+                (-5.0, 10.0, 2.5),
+            ] {
+                let dx = p.x - cx;
+                let dy = p.y - cy;
+                let d = dx * dx + dy * dy;
+                if d < r * r {
+                    // Opaque crater floor and a light-facing inner lip.
+                    shade = if d > (r - 1.0) * (r - 1.0) && dx + dy < 0.0 {
+                        5
+                    } else if d < r * r * 0.45 {
+                        0
+                    } else {
+                        1
+                    };
+                } else if d < (r + 0.8) * (r + 0.8) && dx + dy > 0.0 {
+                    shade = 4;
+                }
+            }
+            let seam = match style {
+                1 => (p.y * 0.35 + p.x - 4.0 + shift).abs() < 0.65 && p.y.abs() < 10.0,
+                2 => (p.x - (1.5 + p.y * 0.12 - shift)).abs() < 0.75 && p.y > -9.0 && p.y < 11.0,
+                _ => (p.y + p.x * 0.45 + 3.0 - shift).abs() < 0.65 && p.x.abs() < 12.0,
+            };
+            if seam && !edge {
+                shade = 0;
+            }
             row.push((b'a' + shade) as char);
         }
         rows.push(row);
     }
     let borrowed: Vec<_> = rows.iter().map(String::as_str).collect();
     PixelBody::from_ascii(&borrowed, &colors)
+}
+
+fn rock_mask(style: usize, x: f32, y: f32) -> bool {
+    match style {
+        1 => x.abs() < 17.5 && y.abs() < 14.5 && x.abs() + y.abs() * 0.8 < 26.0,
+        2 => x.abs() * 0.72 + y.abs() < 18.8 && x.abs() < 15.0,
+        _ => x * x / 280.0 + y * y / 250.0 < 1.0,
+    }
+}
+
+/// Initializer-only palette mapping; it preserves every occupied cell exactly.
+fn map_colors(body: &PixelBody, mut map: impl FnMut(usize, usize, u32) -> u32) -> PixelBody {
+    let mut keys = HashMap::new();
+    let mut palette = Vec::new();
+    let mut rows = Vec::with_capacity(body.height);
+    for y in 0..body.height {
+        let mut row = String::new();
+        for x in 0..body.width {
+            let Some(original) = body.color_at(x, y) else {
+                row.push(' ');
+                continue;
+            };
+            let color = map(x, y, original);
+            let key = *keys.entry(color).or_insert_with(|| {
+                let key = char::from_u32(0xe000 + palette.len() as u32).unwrap();
+                palette.push((key, color));
+                key
+            });
+            row.push(key);
+        }
+        rows.push(row);
+    }
+    let borrowed: Vec<_> = rows.iter().map(String::as_str).collect();
+    PixelBody::from_ascii(&borrowed, &palette)
+}
+
+fn detail_dock(body: &PixelBody) -> PixelBody {
+    map_colors(body, |x, y, original| {
+        let p = engine_core::Vec2::new(x as f32 - 31.5, y as f32 - 31.5);
+        let r = p.length();
+        // Authored panel joins, service lanes and lit latch sockets sit only on
+        // existing hull cells. The landing aperture and collision mask stay open.
+        let channel = (p.x.abs() < 0.8 || p.y.abs() < 0.8) && (17.0..28.0).contains(&r);
+        let bolts = [(-19.5, -9.5), (19.5, -9.5), (-19.5, 9.5), (19.5, 9.5)];
+        if bolts
+            .iter()
+            .any(|&(bx, by)| (p.x - bx).abs() < 0.6 && (p.y - by).abs() < 0.6)
+        {
+            u32::from_le_bytes([209, 226, 218, 255])
+        } else if channel {
+            u32::from_le_bytes([20, 37, 50, 255])
+        } else if (18.0..25.0).contains(&r) && (x + y * 2).is_multiple_of(13) {
+            u32::from_le_bytes([113, 184, 196, 255])
+        } else {
+            original
+        }
+    })
 }
 
 fn expand(sprite: &Sprite, colors: &[u32]) -> PixelBody {
@@ -198,24 +292,6 @@ fn expand(sprite: &Sprite, colors: &[u32]) -> PixelBody {
     PixelBody::from_ascii(&borrowed, &palette)
 }
 
-fn mineral_color(color: u32, variant: usize) -> u32 {
-    if color == 0 || variant == 0 {
-        return color;
-    }
-    let [r, g, b, a] = color.to_le_bytes();
-    let tint = match variant {
-        1 => [0.85, 0.98, 1.12],
-        2 => [1.08, 0.92, 0.82],
-        _ => [1.05, 0.86, 1.13],
-    };
-    u32::from_le_bytes([
-        (r as f32 * tint[0]).min(255.0) as u8,
-        (g as f32 * tint[1]).min(255.0) as u8,
-        (b as f32 * tint[2]).min(255.0) as u8,
-        a,
-    ])
-}
-
 pub(super) fn body(name: &str) -> PixelBody {
     ASSETS
         .bodies
@@ -225,7 +301,9 @@ pub(super) fn body(name: &str) -> PixelBody {
 }
 
 pub(super) fn asteroid(seed: u32) -> PixelBody {
-    ASSETS.asteroids[(seed as usize >> 5) & 3].clone()
+    let style = (seed as usize >> 5) & 3;
+    let geology = (seed as usize >> 11) & 3;
+    ASSETS.asteroids[style + geology * 4].clone()
 }
 
 pub(super) fn color(index: usize) -> u32 {
@@ -298,11 +376,11 @@ mod tests {
     }
 
     #[test]
-    fn four_authored_types_keep_real_cavities_conservative_collision_and_damaged_clone_isolation() {
+    fn sixteen_solid_surface_fields_preserve_family_radii_and_clone_isolation() {
         let types: Vec<_> = (0..4).map(|style| asteroid(style * 32)).collect();
         for (i, body) in types.iter().enumerate() {
             assert_eq!((body.width, body.height), (40, 40));
-            assert!((500..=1067).contains(&body.occupied_count()));
+            assert!((500..=1600).contains(&body.occupied_count()));
             assert!(body.cells().all(|(_, color)| color >> 24 == 255));
             for scale in [0.55, 1.0] {
                 let r = radius(body, scale);
@@ -332,19 +410,166 @@ mod tests {
                     other.cells().map(|(p, _)| p).collect::<Vec<_>>()
                 );
             }
+            let positions: Vec<_> = body.cells().map(|(p, _)| p).collect();
+            let mut colors = std::collections::HashSet::new();
+            for geology in 0..4 {
+                let variant = asteroid(i as u32 * 32 + geology * 2048);
+                assert_eq!(
+                    variant.cells().map(|(p, _)| p).collect::<Vec<_>>(),
+                    positions
+                );
+                assert_eq!(radius(&variant, 0.55), radius(body, 0.55));
+                assert_eq!(
+                    variant.cells().collect::<Vec<_>>(),
+                    asteroid(i as u32 * 32 + geology * 2048)
+                        .cells()
+                        .collect::<Vec<_>>()
+                );
+                assert!(colors.insert(variant.cells().map(|(_, c)| c).collect::<Vec<_>>()));
+                assert_solid_connected(&variant);
+            }
         }
-        assert!(!types[2].is_occupied(21, 20)); // split ice's real empty fissure
-        assert!(!types[3].is_occupied(26, 24)); // porous basalt's real crater hole
+        assert!(types[2].is_occupied(21, 20)); // Opaque ice cleavage.
+        assert!(types[3].is_occupied(26, 24)); // Opaque crater floor.
         assert!(types[1].is_occupied(26, 24));
         assert!(
             types[3]
                 .hit_segment(Vec2::new(5.5, 3.5), Vec2::new(6.5, 4.5))
-                .is_none()
+                .is_some()
         );
         assert!(
             types[1]
                 .hit_segment(Vec2::new(5.5, 3.5), Vec2::new(6.5, 4.5))
                 .is_some()
         );
+    }
+
+    fn assert_solid_connected(body: &PixelBody) {
+        use std::collections::{HashSet, VecDeque};
+        let neighbors = |x: usize, y: usize| {
+            [
+                (x.wrapping_sub(1), y),
+                (x + 1, y),
+                (x, y.wrapping_sub(1)),
+                (x, y + 1),
+            ]
+        };
+        let flood = |starts: Vec<(usize, usize)>, filled: bool| {
+            let mut seen: HashSet<_> = starts.iter().copied().collect();
+            let mut todo = VecDeque::from(starts);
+            while let Some((x, y)) = todo.pop_front() {
+                for p in neighbors(x, y) {
+                    if p.0 < body.width
+                        && p.1 < body.height
+                        && body.is_occupied(p.0, p.1) == filled
+                        && seen.insert(p)
+                    {
+                        todo.push_back(p);
+                    }
+                }
+            }
+            seen
+        };
+        let first = (0..body.height)
+            .flat_map(|y| (0..body.width).map(move |x| (x, y)))
+            .find(|&(x, y)| body.is_occupied(x, y))
+            .unwrap();
+        assert_eq!(
+            flood(vec![first], true).len(),
+            body.occupied_count(),
+            "intact rock must be one connected body"
+        );
+        let boundary = (0..body.height)
+            .flat_map(|y| (0..body.width).map(move |x| (x, y)))
+            .filter(|&(x, y)| {
+                (x == 0 || y == 0 || x == body.width - 1 || y == body.height - 1)
+                    && !body.is_occupied(x, y)
+            })
+            .collect();
+        assert_eq!(
+            flood(boundary, false).len() + body.occupied_count(),
+            body.width * body.height,
+            "initial rock must have no enclosed transparent cavities"
+        );
+    }
+
+    #[test]
+    fn actual_damage_opens_a_previously_opaque_crater_without_changing_other_rocks() {
+        let mut basalt = asteroid(96);
+        let start = Vec2::new(5.5, 3.5);
+        let end = Vec2::new(6.5, 4.5);
+        assert!(basalt.hit_segment(start, end).is_some());
+        let before = basalt.occupied_count();
+        let removed = basalt.damage(Vec2::new(6.0, 4.0), 2.5);
+        assert!(!removed.is_empty());
+        assert_eq!(before - basalt.occupied_count(), removed.len());
+        assert!(basalt.hit_segment(start, end).is_none());
+        assert!(
+            basalt
+                .hit_segment(Vec2::new(-20.0, 0.0), Vec2::ZERO)
+                .is_some()
+        );
+        assert!(asteroid(96).hit_segment(start, end).is_some());
+    }
+
+    #[test]
+    fn filled_interiors_keep_the_previously_published_outer_collision_radii() {
+        for style in 1..=3 {
+            let mut previous_radius = 0.0f32;
+            for y in 0..40 {
+                for x in 0..40 {
+                    let p = Vec2::new(x as f32 - 19.5, y as f32 - 19.5);
+                    // Published pre-change material mask. Interior fissures/craters
+                    // were absent, but the occupied outer perimeter was the same.
+                    let old = match style {
+                        1 => {
+                            p.x.abs() < 17.5
+                                && p.y.abs() < 14.5
+                                && p.x.abs() + p.y.abs() * 0.8 < 26.0
+                        }
+                        2 => {
+                            p.x.abs() * 0.72 + p.y.abs() < 18.8
+                                && p.x.abs() < 15.0
+                                && !(p.x > 1.0 && p.x < 3.0 && p.y > -8.0 && p.y < 11.0)
+                        }
+                        _ => {
+                            p.x * p.x / 280.0 + p.y * p.y / 250.0 < 1.0
+                                && ![
+                                    (-7.0, -5.0, 3.5),
+                                    (6.0, 4.0, 4.0),
+                                    (4.0, -10.0, 2.2),
+                                    (-5.0, 10.0, 2.5),
+                                ]
+                                .iter()
+                                .any(|&(cx, cy, r)| (p.x - cx).powi(2) + (p.y - cy).powi(2) < r * r)
+                        }
+                    };
+                    if old {
+                        previous_radius =
+                            previous_radius.max(p.length() + std::f32::consts::FRAC_1_SQRT_2);
+                    }
+                }
+            }
+            assert_eq!(radius(&asteroid(style * 32), 1.0), previous_radius);
+        }
+    }
+
+    #[test]
+    fn authored_dock_panel_detail_keeps_exact_generated_open_hull() {
+        let atlas: Atlas =
+            serde_json::from_str(include_str!("../../../assets/pixels/atlas.json")).unwrap();
+        let old = expand(&atlas.sprites["dock"], &atlas.palette);
+        let detailed = body("dock");
+        assert_eq!(
+            old.cells().map(|(p, _)| p).collect::<Vec<_>>(),
+            detailed.cells().map(|(p, _)| p).collect::<Vec<_>>()
+        );
+        assert_eq!(radius(&old, 1.0), radius(&detailed, 1.0));
+        let changed = old
+            .cells()
+            .zip(detailed.cells())
+            .filter(|(a, b)| a.1 != b.1)
+            .count();
+        assert!(changed > 30 && changed < old.occupied_count() / 2);
     }
 }
