@@ -1,0 +1,941 @@
+{
+  "version": 1,
+  "source": "abb339b59c3d185cbc8342f2c1eeed1c540cfaa9",
+  "files": [
+    {
+      "path": "after/system-0-reduced-false.json",
+      "bytes": 5322,
+      "sha256": "0b7300a83520f0ef133a6117085f2100a161bdd4e795c4010106912fb8820cd9"
+    },
+    {
+      "path": "after/system-0-reduced-true.json",
+      "bytes": 5321,
+      "sha256": "13f9f950d517d152843b0469f654e85beb4677ea384934f57ec557c042992840"
+    },
+    {
+      "path": "after/system-1-reduced-false.json",
+      "bytes": 5345,
+      "sha256": "43e1d0ab72003816f98024248dba577322f6298fe7f3a6b7a82f86cc6c0c03e1"
+    },
+    {
+      "path": "after/system-1-reduced-true.json",
+      "bytes": 5344,
+      "sha256": "9ec848a335f2f105bd22440e05dc1bc74924b4b2a57a6560b52547cc63e76562"
+    },
+    {
+      "path": "after/system-2-reduced-false.json",
+      "bytes": 5329,
+      "sha256": "1dcfe0db45a70b720a361af8e947847637e9b08e8d558a1657e2c5902d2bdef3"
+    },
+    {
+      "path": "after/system-2-reduced-true.json",
+      "bytes": 5328,
+      "sha256": "bf73843c3d21afc0d0260538db5a24720956f627cb8a36818de79a1f750f7043"
+    },
+    {
+      "path": "after/system-3-reduced-false.json",
+      "bytes": 5327,
+      "sha256": "5e9769079e571bedba8ab043b847a4c1d0b40f4c76909c97fe8ea9b874953416"
+    },
+    {
+      "path": "after/system-3-reduced-true.json",
+      "bytes": 5326,
+      "sha256": "1368c2b74641cdbe61427e2c9264058e3de2e6479fece645a1c00972a6177b40"
+    },
+    {
+      "path": "after/system-4-reduced-false.json",
+      "bytes": 5339,
+      "sha256": "491934d0e2c662c363177c5a38393432bc6a35c8f8268f5054bf21dc32b5a403"
+    },
+    {
+      "path": "after/system-4-reduced-true.json",
+      "bytes": 5338,
+      "sha256": "4902d23bfa6c0631981ecfe441ea66ebc5fa978e02b81d8e01c54568d2a459b8"
+    },
+    {
+      "path": "after/system-5-reduced-false.json",
+      "bytes": 5330,
+      "sha256": "96cc25f1daa6d25076cb1f59d006c2953a2e8e814205f1a4195e1c91cc581792"
+    },
+    {
+      "path": "after/system-5-reduced-true.json",
+      "bytes": 5329,
+      "sha256": "1373fc65e6525f21fcb758ed18bc7821ede1e12afbef20bb15b9ec990d05ccf6"
+    },
+    {
+      "path": "after-export.log",
+      "bytes": 502,
+      "sha256": "c7da0170a4093b9a48cf49f9bf9c8036a13881ce4b604373fed578d5dac5089f"
+    },
+    {
+      "path": "baseline-morphology.log",
+      "bytes": 1129,
+      "sha256": "29d257c1905d0c58ea0ace38bf322b39d1429327842c9f0dcabfad1f8efe8221"
+    },
+    {
+      "path": "before/system-0-reduced-false.json",
+      "bytes": 5328,
+      "sha256": "7a4a8fc649b3f1d29d062d29670bfe1ea65070bc26494b421993187b1f3fea3d"
+    },
+    {
+      "path": "before/system-0-reduced-true.json",
+      "bytes": 5327,
+      "sha256": "15c135e3d578bd5cdaf82b0c042c74ec7e0d188f91c3bf12e12e0d7bb4bd87eb"
+    },
+    {
+      "path": "before/system-1-reduced-false.json",
+      "bytes": 5314,
+      "sha256": "63a5c8a4aa5d8845cee89c491daff7d5a59c6d414b64750e295548352838283e"
+    },
+    {
+      "path": "before/system-1-reduced-true.json",
+      "bytes": 5313,
+      "sha256": "bcadfd6f65a8851ca225e78c85d7558820a132782dec968d98ec5a04b98282eb"
+    },
+    {
+      "path": "before/system-2-reduced-false.json",
+      "bytes": 5314,
+      "sha256": "03ea0a661409df3dcde40e8544464a89c3135d7b520b1f4d50d9d11ee7e1a5d7"
+    },
+    {
+      "path": "before/system-2-reduced-true.json",
+      "bytes": 5313,
+      "sha256": "6770d9908d2c64d8899ca105f3d3012c1436dd93d28dbe2840d23b428f145bc8"
+    },
+    {
+      "path": "before/system-3-reduced-false.json",
+      "bytes": 5329,
+      "sha256": "173e43adf267b8ee65846e8b1bca930798d92d602231cf14ebdf2836b8206ac4"
+    },
+    {
+      "path": "before/system-3-reduced-true.json",
+      "bytes": 5328,
+      "sha256": "d46fdc462e9d8a17a4b9cf70c9bfb898a832467aa292bd5e0f55c3b233c74b5d"
+    },
+    {
+      "path": "before/system-4-reduced-false.json",
+      "bytes": 5316,
+      "sha256": "5e53c58dff120ed8c6fca2740ca03efcadd6f11b26b98c2f0649c8908d33dedd"
+    },
+    {
+      "path": "before/system-4-reduced-true.json",
+      "bytes": 5315,
+      "sha256": "99116ebcf6ff4a0c6b11759282b44db00bfc828dbd00a7ae2a025cede265f3b6"
+    },
+    {
+      "path": "before/system-5-reduced-false.json",
+      "bytes": 5337,
+      "sha256": "d80a66f46f2114d2711a4b049a86fd9cfbc2566b41b451722793a6f1633e360a"
+    },
+    {
+      "path": "before/system-5-reduced-true.json",
+      "bytes": 5336,
+      "sha256": "c1c061ea81c12ea9d6db3e3c4cfc7e085b24caa6af5035ecca749b34d5bbc0d0"
+    },
+    {
+      "path": "before-export.log",
+      "bytes": 502,
+      "sha256": "ec80a6544b8391c0bec5c5a754d491e7e2d52a55cf522121182c84d1ec7114db"
+    },
+    {
+      "path": "before-source.rs",
+      "bytes": 71394,
+      "sha256": "3c0c4d5ae5f33c8917a76e45867fe3585e92741c6ee7b5d2fe6d9c3093c9181a"
+    },
+    {
+      "path": "before-tests.rs",
+      "bytes": 7364,
+      "sha256": "129db6327453e2c0c3fd4c3d0bacb7e505eff3526518e91f0154b9480d8c5388"
+    },
+    {
+      "path": "clippy-final.log",
+      "bytes": 186,
+      "sha256": "5dfd5031039121acbc30613b59a58368089afda8006a670db7649773575c64ba"
+    },
+    {
+      "path": "cosmic-final.log",
+      "bytes": 8964,
+      "sha256": "485c992409be7e6273da6f800db7d44f934cbbf13e1315ac4f7241c099067d03"
+    },
+    {
+      "path": "fmt-final.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "focused.log",
+      "bytes": 1121,
+      "sha256": "b6e7d3d1237c3dc28037ecbb769b7d81c23317e6c562b7622cbef2d21510553f"
+    },
+    {
+      "path": "freeze_proof.py",
+      "bytes": 3052,
+      "sha256": "a38a513f1b96766844e3bb729c0658187811a75ba8281a5f3fa3021456a76477"
+    },
+    {
+      "path": "HANDOFF.md",
+      "bytes": 7647,
+      "sha256": "5e22d43707e391234382c07aa1e6749e34029ac2584425bfc49bc698e260432e"
+    },
+    {
+      "path": "inputs/36e08b75cf287bb43adf684008cb725c3d9eb2a0/crates/game_core/src/cosmic_background.rs",
+      "bytes": 71306,
+      "sha256": "a7e2a670a388ee1f6d86dbf1d5c218b97ca56aaf7df70e98a697613135daab9b"
+    },
+    {
+      "path": "inputs/abb339b59c3d185cbc8342f2c1eeed1c540cfaa9/crates/game_core/src/cosmic_background.rs",
+      "bytes": 72401,
+      "sha256": "0d4ef0c612d20d888ac92a4d6dce848005d3242092ff889464f04a6817b07068"
+    },
+    {
+      "path": "inputs/abb339b59c3d185cbc8342f2c1eeed1c540cfaa9/crates/game_core/src/stellar_neighborhood_tests.rs",
+      "bytes": 8407,
+      "sha256": "ef04db3538a447cbbd51479ac455c8c6c217ea84f9ecd81586ffbb68f8920333"
+    },
+    {
+      "path": "native-software-contact.png",
+      "bytes": 31911,
+      "sha256": "0d63d1f203d315b3ddef70281587bc1f61c7d02881d612e65eeabf2aba418b95"
+    },
+    {
+      "path": "packet-audit.json",
+      "bytes": 3912,
+      "sha256": "2816bce4e74b4a228220fa77862996ebc55e684950322ee5a300006fdb1b111a"
+    },
+    {
+      "path": "render_contact.py",
+      "bytes": 4645,
+      "sha256": "322bd3b58b128d9d36732ce1e9589832d4c8ce6d28fd8e8ff1e4bb6367c63d14"
+    },
+    {
+      "path": "software/after/system-0-reduced-false-zoom-0.6000000238418579.png",
+      "bytes": 1042,
+      "sha256": "a0d1dd01d0ed0dcc8d2e8210d0bf3f79b6e37358204f0c085bc77666ae632ecd"
+    },
+    {
+      "path": "software/after/system-0-reduced-false-zoom-1.0.png",
+      "bytes": 1094,
+      "sha256": "f086c9e9b34b68297401bf1d0858c34510dcf38e13f57fc3ac6cd6bda6c06c8d"
+    },
+    {
+      "path": "software/after/system-0-reduced-false-zoom-1.600000023841858.png",
+      "bytes": 1192,
+      "sha256": "28e5e0f23646b75b66b9d0df97ce563e6c18b28462a0164d3dceeb6109b72f32"
+    },
+    {
+      "path": "software/after/system-0-reduced-true-zoom-0.6000000238418579.png",
+      "bytes": 1042,
+      "sha256": "a0d1dd01d0ed0dcc8d2e8210d0bf3f79b6e37358204f0c085bc77666ae632ecd"
+    },
+    {
+      "path": "software/after/system-0-reduced-true-zoom-1.0.png",
+      "bytes": 1094,
+      "sha256": "f086c9e9b34b68297401bf1d0858c34510dcf38e13f57fc3ac6cd6bda6c06c8d"
+    },
+    {
+      "path": "software/after/system-0-reduced-true-zoom-1.600000023841858.png",
+      "bytes": 1192,
+      "sha256": "28e5e0f23646b75b66b9d0df97ce563e6c18b28462a0164d3dceeb6109b72f32"
+    },
+    {
+      "path": "software/after/system-1-reduced-false-zoom-0.6000000238418579.png",
+      "bytes": 1056,
+      "sha256": "8d08df8d62227341139fd3874bec2550bc4469331f95afc45147425c74f5f4f9"
+    },
+    {
+      "path": "software/after/system-1-reduced-false-zoom-1.0.png",
+      "bytes": 1132,
+      "sha256": "39e69066b4ffaac33af5f44917773399e76bc0a2bc249a0e2306c3cb676dbd4c"
+    },
+    {
+      "path": "software/after/system-1-reduced-false-zoom-1.600000023841858.png",
+      "bytes": 1224,
+      "sha256": "26948125f8b53f5049fe335baf3f81f0953f43f1dd885ca9fa02d78c1f66b42e"
+    },
+    {
+      "path": "software/after/system-1-reduced-true-zoom-0.6000000238418579.png",
+      "bytes": 1056,
+      "sha256": "8d08df8d62227341139fd3874bec2550bc4469331f95afc45147425c74f5f4f9"
+    },
+    {
+      "path": "software/after/system-1-reduced-true-zoom-1.0.png",
+      "bytes": 1132,
+      "sha256": "39e69066b4ffaac33af5f44917773399e76bc0a2bc249a0e2306c3cb676dbd4c"
+    },
+    {
+      "path": "software/after/system-1-reduced-true-zoom-1.600000023841858.png",
+      "bytes": 1224,
+      "sha256": "26948125f8b53f5049fe335baf3f81f0953f43f1dd885ca9fa02d78c1f66b42e"
+    },
+    {
+      "path": "software/after/system-2-reduced-false-zoom-0.6000000238418579.png",
+      "bytes": 1074,
+      "sha256": "ac5d1d857c72e76a6de2f618dc93cc7c9040478fc35c312f5b8b75b2bf39d60d"
+    },
+    {
+      "path": "software/after/system-2-reduced-false-zoom-1.0.png",
+      "bytes": 1121,
+      "sha256": "dc85b90c3784c6c56a6ae45f4df9bec4bfa1ad78e6501c09bd9052fa07ec7fe8"
+    },
+    {
+      "path": "software/after/system-2-reduced-false-zoom-1.600000023841858.png",
+      "bytes": 1237,
+      "sha256": "3a376d5c9ea3233100f6a8581277946d621f29c2ae59d29048dd40e7e2445f1c"
+    },
+    {
+      "path": "software/after/system-2-reduced-true-zoom-0.6000000238418579.png",
+      "bytes": 1074,
+      "sha256": "ac5d1d857c72e76a6de2f618dc93cc7c9040478fc35c312f5b8b75b2bf39d60d"
+    },
+    {
+      "path": "software/after/system-2-reduced-true-zoom-1.0.png",
+      "bytes": 1121,
+      "sha256": "dc85b90c3784c6c56a6ae45f4df9bec4bfa1ad78e6501c09bd9052fa07ec7fe8"
+    },
+    {
+      "path": "software/after/system-2-reduced-true-zoom-1.600000023841858.png",
+      "bytes": 1237,
+      "sha256": "3a376d5c9ea3233100f6a8581277946d621f29c2ae59d29048dd40e7e2445f1c"
+    },
+    {
+      "path": "software/after/system-3-reduced-false-zoom-0.6000000238418579.png",
+      "bytes": 1057,
+      "sha256": "e431aa229c117d3a966530ff5296b6c0bb783c84a3bedadfbf6f116e58207a47"
+    },
+    {
+      "path": "software/after/system-3-reduced-false-zoom-1.0.png",
+      "bytes": 1118,
+      "sha256": "c20679d75588e5c8562c4c0acb484159592b3a07eb81e30d26602171ad16d3aa"
+    },
+    {
+      "path": "software/after/system-3-reduced-false-zoom-1.600000023841858.png",
+      "bytes": 1243,
+      "sha256": "16850981d43ed97d76be17f653f273ba3ac0b0b9fc5c28defe4d458b707015ae"
+    },
+    {
+      "path": "software/after/system-3-reduced-true-zoom-0.6000000238418579.png",
+      "bytes": 1057,
+      "sha256": "e431aa229c117d3a966530ff5296b6c0bb783c84a3bedadfbf6f116e58207a47"
+    },
+    {
+      "path": "software/after/system-3-reduced-true-zoom-1.0.png",
+      "bytes": 1118,
+      "sha256": "c20679d75588e5c8562c4c0acb484159592b3a07eb81e30d26602171ad16d3aa"
+    },
+    {
+      "path": "software/after/system-3-reduced-true-zoom-1.600000023841858.png",
+      "bytes": 1243,
+      "sha256": "16850981d43ed97d76be17f653f273ba3ac0b0b9fc5c28defe4d458b707015ae"
+    },
+    {
+      "path": "software/after/system-4-reduced-false-zoom-0.6000000238418579.png",
+      "bytes": 1074,
+      "sha256": "cc60744318ed35e6723d3ea643bb0cf2754cc6a00e6bc57fd85f0ac29ae72c4b"
+    },
+    {
+      "path": "software/after/system-4-reduced-false-zoom-1.0.png",
+      "bytes": 1108,
+      "sha256": "978680957565d7589dd6169b8a7b7794c65965be067cd0387d2b3e34c5b6b2d5"
+    },
+    {
+      "path": "software/after/system-4-reduced-false-zoom-1.600000023841858.png",
+      "bytes": 1204,
+      "sha256": "8fa424423b01a2c724ec60f2c3298b5e91b3c052cda8f1ed6c867a129321b844"
+    },
+    {
+      "path": "software/after/system-4-reduced-true-zoom-0.6000000238418579.png",
+      "bytes": 1074,
+      "sha256": "cc60744318ed35e6723d3ea643bb0cf2754cc6a00e6bc57fd85f0ac29ae72c4b"
+    },
+    {
+      "path": "software/after/system-4-reduced-true-zoom-1.0.png",
+      "bytes": 1108,
+      "sha256": "978680957565d7589dd6169b8a7b7794c65965be067cd0387d2b3e34c5b6b2d5"
+    },
+    {
+      "path": "software/after/system-4-reduced-true-zoom-1.600000023841858.png",
+      "bytes": 1204,
+      "sha256": "8fa424423b01a2c724ec60f2c3298b5e91b3c052cda8f1ed6c867a129321b844"
+    },
+    {
+      "path": "software/after/system-5-reduced-false-zoom-0.6000000238418579.png",
+      "bytes": 1078,
+      "sha256": "2f452412b751abc9be8409fbed03a1e98cb8ccb926da064feaa647b5751526a2"
+    },
+    {
+      "path": "software/after/system-5-reduced-false-zoom-1.0.png",
+      "bytes": 1109,
+      "sha256": "83b67e8535499d676c00ed07a9291d35fb17088ec96963e2d10818eeab125401"
+    },
+    {
+      "path": "software/after/system-5-reduced-false-zoom-1.600000023841858.png",
+      "bytes": 1227,
+      "sha256": "0feeb0b95fe17bf148e58165ff8f06188bc6542efcef8fa16db80f8dc0ce6bae"
+    },
+    {
+      "path": "software/after/system-5-reduced-true-zoom-0.6000000238418579.png",
+      "bytes": 1078,
+      "sha256": "2f452412b751abc9be8409fbed03a1e98cb8ccb926da064feaa647b5751526a2"
+    },
+    {
+      "path": "software/after/system-5-reduced-true-zoom-1.0.png",
+      "bytes": 1109,
+      "sha256": "83b67e8535499d676c00ed07a9291d35fb17088ec96963e2d10818eeab125401"
+    },
+    {
+      "path": "software/after/system-5-reduced-true-zoom-1.600000023841858.png",
+      "bytes": 1227,
+      "sha256": "0feeb0b95fe17bf148e58165ff8f06188bc6542efcef8fa16db80f8dc0ce6bae"
+    },
+    {
+      "path": "software/before/system-0-reduced-false-zoom-0.6000000238418579.png",
+      "bytes": 1077,
+      "sha256": "0d2c3ea890f71aab11dd9a0fa179780410555a6c0e8682c60bde8b61756c8e99"
+    },
+    {
+      "path": "software/before/system-0-reduced-false-zoom-1.0.png",
+      "bytes": 1177,
+      "sha256": "ffca385f46109f7b74d64d98fb30a0f64295f9b64a891b6c0d173cda1a841038"
+    },
+    {
+      "path": "software/before/system-0-reduced-false-zoom-1.600000023841858.png",
+      "bytes": 1177,
+      "sha256": "054a3359c2cc63be6ae1b0fd3a04766a6fcf555fa2cccdf3fb6838ba5bc5aafe"
+    },
+    {
+      "path": "software/before/system-0-reduced-true-zoom-0.6000000238418579.png",
+      "bytes": 1077,
+      "sha256": "0d2c3ea890f71aab11dd9a0fa179780410555a6c0e8682c60bde8b61756c8e99"
+    },
+    {
+      "path": "software/before/system-0-reduced-true-zoom-1.0.png",
+      "bytes": 1177,
+      "sha256": "ffca385f46109f7b74d64d98fb30a0f64295f9b64a891b6c0d173cda1a841038"
+    },
+    {
+      "path": "software/before/system-0-reduced-true-zoom-1.600000023841858.png",
+      "bytes": 1177,
+      "sha256": "054a3359c2cc63be6ae1b0fd3a04766a6fcf555fa2cccdf3fb6838ba5bc5aafe"
+    },
+    {
+      "path": "software/before/system-1-reduced-false-zoom-0.6000000238418579.png",
+      "bytes": 1076,
+      "sha256": "4e1a2bc7a0c3ba0d192f3bb191e02c53bca0df819574769ba8c8bbd0bfb9bc7b"
+    },
+    {
+      "path": "software/before/system-1-reduced-false-zoom-1.0.png",
+      "bytes": 1094,
+      "sha256": "58ec8e23cb0f22b35c0de1bd3741ed20f5bf448753812fa8df97341c4d8fd6cd"
+    },
+    {
+      "path": "software/before/system-1-reduced-false-zoom-1.600000023841858.png",
+      "bytes": 1248,
+      "sha256": "a04aac91e73133c86b6b465ff1fbb60476f6d39e8a4ebc8dfb81f0c7b9dd1e64"
+    },
+    {
+      "path": "software/before/system-1-reduced-true-zoom-0.6000000238418579.png",
+      "bytes": 1076,
+      "sha256": "4e1a2bc7a0c3ba0d192f3bb191e02c53bca0df819574769ba8c8bbd0bfb9bc7b"
+    },
+    {
+      "path": "software/before/system-1-reduced-true-zoom-1.0.png",
+      "bytes": 1094,
+      "sha256": "58ec8e23cb0f22b35c0de1bd3741ed20f5bf448753812fa8df97341c4d8fd6cd"
+    },
+    {
+      "path": "software/before/system-1-reduced-true-zoom-1.600000023841858.png",
+      "bytes": 1248,
+      "sha256": "a04aac91e73133c86b6b465ff1fbb60476f6d39e8a4ebc8dfb81f0c7b9dd1e64"
+    },
+    {
+      "path": "software/before/system-2-reduced-false-zoom-0.6000000238418579.png",
+      "bytes": 1073,
+      "sha256": "7e73e3de51954948c726bc81cb1af8563a92f7e79891485a5b0aac752118b488"
+    },
+    {
+      "path": "software/before/system-2-reduced-false-zoom-1.0.png",
+      "bytes": 1087,
+      "sha256": "12004600c2efbe0991abc339e573450f95d26edddbe5ce1c4f290396f521d443"
+    },
+    {
+      "path": "software/before/system-2-reduced-false-zoom-1.600000023841858.png",
+      "bytes": 1261,
+      "sha256": "e1afa81e26df868d1fded4165f4211c4ac3a4f54a04c15fc120e2d261beb35d5"
+    },
+    {
+      "path": "software/before/system-2-reduced-true-zoom-0.6000000238418579.png",
+      "bytes": 1073,
+      "sha256": "7e73e3de51954948c726bc81cb1af8563a92f7e79891485a5b0aac752118b488"
+    },
+    {
+      "path": "software/before/system-2-reduced-true-zoom-1.0.png",
+      "bytes": 1087,
+      "sha256": "12004600c2efbe0991abc339e573450f95d26edddbe5ce1c4f290396f521d443"
+    },
+    {
+      "path": "software/before/system-2-reduced-true-zoom-1.600000023841858.png",
+      "bytes": 1261,
+      "sha256": "e1afa81e26df868d1fded4165f4211c4ac3a4f54a04c15fc120e2d261beb35d5"
+    },
+    {
+      "path": "software/before/system-3-reduced-false-zoom-0.6000000238418579.png",
+      "bytes": 1041,
+      "sha256": "f9d1f553eb7dc96eeda5abda28af7136fc5fc5493c6eee13b9f114b5f4194228"
+    },
+    {
+      "path": "software/before/system-3-reduced-false-zoom-1.0.png",
+      "bytes": 1138,
+      "sha256": "93d484ef997a45a932ad17a93752998ce268fb01c840df6c97aa5fe6d25c2b79"
+    },
+    {
+      "path": "software/before/system-3-reduced-false-zoom-1.600000023841858.png",
+      "bytes": 1225,
+      "sha256": "0b9e151f73fe56e4eb441fa9c793f75b31b411ddc8e65e508e4dabc8a2e34086"
+    },
+    {
+      "path": "software/before/system-3-reduced-true-zoom-0.6000000238418579.png",
+      "bytes": 1041,
+      "sha256": "f9d1f553eb7dc96eeda5abda28af7136fc5fc5493c6eee13b9f114b5f4194228"
+    },
+    {
+      "path": "software/before/system-3-reduced-true-zoom-1.0.png",
+      "bytes": 1138,
+      "sha256": "93d484ef997a45a932ad17a93752998ce268fb01c840df6c97aa5fe6d25c2b79"
+    },
+    {
+      "path": "software/before/system-3-reduced-true-zoom-1.600000023841858.png",
+      "bytes": 1225,
+      "sha256": "0b9e151f73fe56e4eb441fa9c793f75b31b411ddc8e65e508e4dabc8a2e34086"
+    },
+    {
+      "path": "software/before/system-4-reduced-false-zoom-0.6000000238418579.png",
+      "bytes": 1042,
+      "sha256": "1d1e84f57984a7a7af567451d023438e57989c7eae0e76ce579795d2d1c59d32"
+    },
+    {
+      "path": "software/before/system-4-reduced-false-zoom-1.0.png",
+      "bytes": 1145,
+      "sha256": "80c3a841e13c9a36d6838d771fe9439482f2dee3ee12ccf176d1f444adcb311b"
+    },
+    {
+      "path": "software/before/system-4-reduced-false-zoom-1.600000023841858.png",
+      "bytes": 1241,
+      "sha256": "9454e4a923b6931ae7291bd1fde91c3d6cbd5460674a9e5140e16c8fff9ae0c5"
+    },
+    {
+      "path": "software/before/system-4-reduced-true-zoom-0.6000000238418579.png",
+      "bytes": 1042,
+      "sha256": "1d1e84f57984a7a7af567451d023438e57989c7eae0e76ce579795d2d1c59d32"
+    },
+    {
+      "path": "software/before/system-4-reduced-true-zoom-1.0.png",
+      "bytes": 1145,
+      "sha256": "80c3a841e13c9a36d6838d771fe9439482f2dee3ee12ccf176d1f444adcb311b"
+    },
+    {
+      "path": "software/before/system-4-reduced-true-zoom-1.600000023841858.png",
+      "bytes": 1241,
+      "sha256": "9454e4a923b6931ae7291bd1fde91c3d6cbd5460674a9e5140e16c8fff9ae0c5"
+    },
+    {
+      "path": "software/before/system-5-reduced-false-zoom-0.6000000238418579.png",
+      "bytes": 1064,
+      "sha256": "30b5bec622860e78835619009542187092556509b97f7a9640d92142e07286a0"
+    },
+    {
+      "path": "software/before/system-5-reduced-false-zoom-1.0.png",
+      "bytes": 1121,
+      "sha256": "59b82815365ec6b77590140cffa5fdd396b5139888122e8d1e4e975ffdd00b89"
+    },
+    {
+      "path": "software/before/system-5-reduced-false-zoom-1.600000023841858.png",
+      "bytes": 1207,
+      "sha256": "162814c6ad88bb4a111f94f0d0ca8aefa901180295453bb58b98a276cdbcdc17"
+    },
+    {
+      "path": "software/before/system-5-reduced-true-zoom-0.6000000238418579.png",
+      "bytes": 1064,
+      "sha256": "30b5bec622860e78835619009542187092556509b97f7a9640d92142e07286a0"
+    },
+    {
+      "path": "software/before/system-5-reduced-true-zoom-1.0.png",
+      "bytes": 1121,
+      "sha256": "59b82815365ec6b77590140cffa5fdd396b5139888122e8d1e4e975ffdd00b89"
+    },
+    {
+      "path": "software/before/system-5-reduced-true-zoom-1.600000023841858.png",
+      "bytes": 1207,
+      "sha256": "162814c6ad88bb4a111f94f0d0ca8aefa901180295453bb58b98a276cdbcdc17"
+    },
+    {
+      "path": "software-final/after/system-0-reduced-false-zoom-0.6.png",
+      "bytes": 1042,
+      "sha256": "a0d1dd01d0ed0dcc8d2e8210d0bf3f79b6e37358204f0c085bc77666ae632ecd"
+    },
+    {
+      "path": "software-final/after/system-0-reduced-false-zoom-1.0.png",
+      "bytes": 1094,
+      "sha256": "f086c9e9b34b68297401bf1d0858c34510dcf38e13f57fc3ac6cd6bda6c06c8d"
+    },
+    {
+      "path": "software-final/after/system-0-reduced-false-zoom-1.6.png",
+      "bytes": 1192,
+      "sha256": "28e5e0f23646b75b66b9d0df97ce563e6c18b28462a0164d3dceeb6109b72f32"
+    },
+    {
+      "path": "software-final/after/system-0-reduced-true-zoom-0.6.png",
+      "bytes": 1042,
+      "sha256": "a0d1dd01d0ed0dcc8d2e8210d0bf3f79b6e37358204f0c085bc77666ae632ecd"
+    },
+    {
+      "path": "software-final/after/system-0-reduced-true-zoom-1.0.png",
+      "bytes": 1094,
+      "sha256": "f086c9e9b34b68297401bf1d0858c34510dcf38e13f57fc3ac6cd6bda6c06c8d"
+    },
+    {
+      "path": "software-final/after/system-0-reduced-true-zoom-1.6.png",
+      "bytes": 1192,
+      "sha256": "28e5e0f23646b75b66b9d0df97ce563e6c18b28462a0164d3dceeb6109b72f32"
+    },
+    {
+      "path": "software-final/after/system-1-reduced-false-zoom-0.6.png",
+      "bytes": 1056,
+      "sha256": "8d08df8d62227341139fd3874bec2550bc4469331f95afc45147425c74f5f4f9"
+    },
+    {
+      "path": "software-final/after/system-1-reduced-false-zoom-1.0.png",
+      "bytes": 1132,
+      "sha256": "39e69066b4ffaac33af5f44917773399e76bc0a2bc249a0e2306c3cb676dbd4c"
+    },
+    {
+      "path": "software-final/after/system-1-reduced-false-zoom-1.6.png",
+      "bytes": 1224,
+      "sha256": "26948125f8b53f5049fe335baf3f81f0953f43f1dd885ca9fa02d78c1f66b42e"
+    },
+    {
+      "path": "software-final/after/system-1-reduced-true-zoom-0.6.png",
+      "bytes": 1056,
+      "sha256": "8d08df8d62227341139fd3874bec2550bc4469331f95afc45147425c74f5f4f9"
+    },
+    {
+      "path": "software-final/after/system-1-reduced-true-zoom-1.0.png",
+      "bytes": 1132,
+      "sha256": "39e69066b4ffaac33af5f44917773399e76bc0a2bc249a0e2306c3cb676dbd4c"
+    },
+    {
+      "path": "software-final/after/system-1-reduced-true-zoom-1.6.png",
+      "bytes": 1224,
+      "sha256": "26948125f8b53f5049fe335baf3f81f0953f43f1dd885ca9fa02d78c1f66b42e"
+    },
+    {
+      "path": "software-final/after/system-2-reduced-false-zoom-0.6.png",
+      "bytes": 1074,
+      "sha256": "ac5d1d857c72e76a6de2f618dc93cc7c9040478fc35c312f5b8b75b2bf39d60d"
+    },
+    {
+      "path": "software-final/after/system-2-reduced-false-zoom-1.0.png",
+      "bytes": 1121,
+      "sha256": "dc85b90c3784c6c56a6ae45f4df9bec4bfa1ad78e6501c09bd9052fa07ec7fe8"
+    },
+    {
+      "path": "software-final/after/system-2-reduced-false-zoom-1.6.png",
+      "bytes": 1237,
+      "sha256": "3a376d5c9ea3233100f6a8581277946d621f29c2ae59d29048dd40e7e2445f1c"
+    },
+    {
+      "path": "software-final/after/system-2-reduced-true-zoom-0.6.png",
+      "bytes": 1074,
+      "sha256": "ac5d1d857c72e76a6de2f618dc93cc7c9040478fc35c312f5b8b75b2bf39d60d"
+    },
+    {
+      "path": "software-final/after/system-2-reduced-true-zoom-1.0.png",
+      "bytes": 1121,
+      "sha256": "dc85b90c3784c6c56a6ae45f4df9bec4bfa1ad78e6501c09bd9052fa07ec7fe8"
+    },
+    {
+      "path": "software-final/after/system-2-reduced-true-zoom-1.6.png",
+      "bytes": 1237,
+      "sha256": "3a376d5c9ea3233100f6a8581277946d621f29c2ae59d29048dd40e7e2445f1c"
+    },
+    {
+      "path": "software-final/after/system-3-reduced-false-zoom-0.6.png",
+      "bytes": 1057,
+      "sha256": "e431aa229c117d3a966530ff5296b6c0bb783c84a3bedadfbf6f116e58207a47"
+    },
+    {
+      "path": "software-final/after/system-3-reduced-false-zoom-1.0.png",
+      "bytes": 1118,
+      "sha256": "c20679d75588e5c8562c4c0acb484159592b3a07eb81e30d26602171ad16d3aa"
+    },
+    {
+      "path": "software-final/after/system-3-reduced-false-zoom-1.6.png",
+      "bytes": 1243,
+      "sha256": "16850981d43ed97d76be17f653f273ba3ac0b0b9fc5c28defe4d458b707015ae"
+    },
+    {
+      "path": "software-final/after/system-3-reduced-true-zoom-0.6.png",
+      "bytes": 1057,
+      "sha256": "e431aa229c117d3a966530ff5296b6c0bb783c84a3bedadfbf6f116e58207a47"
+    },
+    {
+      "path": "software-final/after/system-3-reduced-true-zoom-1.0.png",
+      "bytes": 1118,
+      "sha256": "c20679d75588e5c8562c4c0acb484159592b3a07eb81e30d26602171ad16d3aa"
+    },
+    {
+      "path": "software-final/after/system-3-reduced-true-zoom-1.6.png",
+      "bytes": 1243,
+      "sha256": "16850981d43ed97d76be17f653f273ba3ac0b0b9fc5c28defe4d458b707015ae"
+    },
+    {
+      "path": "software-final/after/system-4-reduced-false-zoom-0.6.png",
+      "bytes": 1074,
+      "sha256": "cc60744318ed35e6723d3ea643bb0cf2754cc6a00e6bc57fd85f0ac29ae72c4b"
+    },
+    {
+      "path": "software-final/after/system-4-reduced-false-zoom-1.0.png",
+      "bytes": 1108,
+      "sha256": "978680957565d7589dd6169b8a7b7794c65965be067cd0387d2b3e34c5b6b2d5"
+    },
+    {
+      "path": "software-final/after/system-4-reduced-false-zoom-1.6.png",
+      "bytes": 1204,
+      "sha256": "8fa424423b01a2c724ec60f2c3298b5e91b3c052cda8f1ed6c867a129321b844"
+    },
+    {
+      "path": "software-final/after/system-4-reduced-true-zoom-0.6.png",
+      "bytes": 1074,
+      "sha256": "cc60744318ed35e6723d3ea643bb0cf2754cc6a00e6bc57fd85f0ac29ae72c4b"
+    },
+    {
+      "path": "software-final/after/system-4-reduced-true-zoom-1.0.png",
+      "bytes": 1108,
+      "sha256": "978680957565d7589dd6169b8a7b7794c65965be067cd0387d2b3e34c5b6b2d5"
+    },
+    {
+      "path": "software-final/after/system-4-reduced-true-zoom-1.6.png",
+      "bytes": 1204,
+      "sha256": "8fa424423b01a2c724ec60f2c3298b5e91b3c052cda8f1ed6c867a129321b844"
+    },
+    {
+      "path": "software-final/after/system-5-reduced-false-zoom-0.6.png",
+      "bytes": 1078,
+      "sha256": "2f452412b751abc9be8409fbed03a1e98cb8ccb926da064feaa647b5751526a2"
+    },
+    {
+      "path": "software-final/after/system-5-reduced-false-zoom-1.0.png",
+      "bytes": 1109,
+      "sha256": "83b67e8535499d676c00ed07a9291d35fb17088ec96963e2d10818eeab125401"
+    },
+    {
+      "path": "software-final/after/system-5-reduced-false-zoom-1.6.png",
+      "bytes": 1227,
+      "sha256": "0feeb0b95fe17bf148e58165ff8f06188bc6542efcef8fa16db80f8dc0ce6bae"
+    },
+    {
+      "path": "software-final/after/system-5-reduced-true-zoom-0.6.png",
+      "bytes": 1078,
+      "sha256": "2f452412b751abc9be8409fbed03a1e98cb8ccb926da064feaa647b5751526a2"
+    },
+    {
+      "path": "software-final/after/system-5-reduced-true-zoom-1.0.png",
+      "bytes": 1109,
+      "sha256": "83b67e8535499d676c00ed07a9291d35fb17088ec96963e2d10818eeab125401"
+    },
+    {
+      "path": "software-final/after/system-5-reduced-true-zoom-1.6.png",
+      "bytes": 1227,
+      "sha256": "0feeb0b95fe17bf148e58165ff8f06188bc6542efcef8fa16db80f8dc0ce6bae"
+    },
+    {
+      "path": "software-final/before/system-0-reduced-false-zoom-0.6.png",
+      "bytes": 1077,
+      "sha256": "0d2c3ea890f71aab11dd9a0fa179780410555a6c0e8682c60bde8b61756c8e99"
+    },
+    {
+      "path": "software-final/before/system-0-reduced-false-zoom-1.0.png",
+      "bytes": 1177,
+      "sha256": "ffca385f46109f7b74d64d98fb30a0f64295f9b64a891b6c0d173cda1a841038"
+    },
+    {
+      "path": "software-final/before/system-0-reduced-false-zoom-1.6.png",
+      "bytes": 1177,
+      "sha256": "054a3359c2cc63be6ae1b0fd3a04766a6fcf555fa2cccdf3fb6838ba5bc5aafe"
+    },
+    {
+      "path": "software-final/before/system-0-reduced-true-zoom-0.6.png",
+      "bytes": 1077,
+      "sha256": "0d2c3ea890f71aab11dd9a0fa179780410555a6c0e8682c60bde8b61756c8e99"
+    },
+    {
+      "path": "software-final/before/system-0-reduced-true-zoom-1.0.png",
+      "bytes": 1177,
+      "sha256": "ffca385f46109f7b74d64d98fb30a0f64295f9b64a891b6c0d173cda1a841038"
+    },
+    {
+      "path": "software-final/before/system-0-reduced-true-zoom-1.6.png",
+      "bytes": 1177,
+      "sha256": "054a3359c2cc63be6ae1b0fd3a04766a6fcf555fa2cccdf3fb6838ba5bc5aafe"
+    },
+    {
+      "path": "software-final/before/system-1-reduced-false-zoom-0.6.png",
+      "bytes": 1076,
+      "sha256": "4e1a2bc7a0c3ba0d192f3bb191e02c53bca0df819574769ba8c8bbd0bfb9bc7b"
+    },
+    {
+      "path": "software-final/before/system-1-reduced-false-zoom-1.0.png",
+      "bytes": 1094,
+      "sha256": "58ec8e23cb0f22b35c0de1bd3741ed20f5bf448753812fa8df97341c4d8fd6cd"
+    },
+    {
+      "path": "software-final/before/system-1-reduced-false-zoom-1.6.png",
+      "bytes": 1248,
+      "sha256": "a04aac91e73133c86b6b465ff1fbb60476f6d39e8a4ebc8dfb81f0c7b9dd1e64"
+    },
+    {
+      "path": "software-final/before/system-1-reduced-true-zoom-0.6.png",
+      "bytes": 1076,
+      "sha256": "4e1a2bc7a0c3ba0d192f3bb191e02c53bca0df819574769ba8c8bbd0bfb9bc7b"
+    },
+    {
+      "path": "software-final/before/system-1-reduced-true-zoom-1.0.png",
+      "bytes": 1094,
+      "sha256": "58ec8e23cb0f22b35c0de1bd3741ed20f5bf448753812fa8df97341c4d8fd6cd"
+    },
+    {
+      "path": "software-final/before/system-1-reduced-true-zoom-1.6.png",
+      "bytes": 1248,
+      "sha256": "a04aac91e73133c86b6b465ff1fbb60476f6d39e8a4ebc8dfb81f0c7b9dd1e64"
+    },
+    {
+      "path": "software-final/before/system-2-reduced-false-zoom-0.6.png",
+      "bytes": 1073,
+      "sha256": "7e73e3de51954948c726bc81cb1af8563a92f7e79891485a5b0aac752118b488"
+    },
+    {
+      "path": "software-final/before/system-2-reduced-false-zoom-1.0.png",
+      "bytes": 1087,
+      "sha256": "12004600c2efbe0991abc339e573450f95d26edddbe5ce1c4f290396f521d443"
+    },
+    {
+      "path": "software-final/before/system-2-reduced-false-zoom-1.6.png",
+      "bytes": 1261,
+      "sha256": "e1afa81e26df868d1fded4165f4211c4ac3a4f54a04c15fc120e2d261beb35d5"
+    },
+    {
+      "path": "software-final/before/system-2-reduced-true-zoom-0.6.png",
+      "bytes": 1073,
+      "sha256": "7e73e3de51954948c726bc81cb1af8563a92f7e79891485a5b0aac752118b488"
+    },
+    {
+      "path": "software-final/before/system-2-reduced-true-zoom-1.0.png",
+      "bytes": 1087,
+      "sha256": "12004600c2efbe0991abc339e573450f95d26edddbe5ce1c4f290396f521d443"
+    },
+    {
+      "path": "software-final/before/system-2-reduced-true-zoom-1.6.png",
+      "bytes": 1261,
+      "sha256": "e1afa81e26df868d1fded4165f4211c4ac3a4f54a04c15fc120e2d261beb35d5"
+    },
+    {
+      "path": "software-final/before/system-3-reduced-false-zoom-0.6.png",
+      "bytes": 1041,
+      "sha256": "f9d1f553eb7dc96eeda5abda28af7136fc5fc5493c6eee13b9f114b5f4194228"
+    },
+    {
+      "path": "software-final/before/system-3-reduced-false-zoom-1.0.png",
+      "bytes": 1138,
+      "sha256": "93d484ef997a45a932ad17a93752998ce268fb01c840df6c97aa5fe6d25c2b79"
+    },
+    {
+      "path": "software-final/before/system-3-reduced-false-zoom-1.6.png",
+      "bytes": 1225,
+      "sha256": "0b9e151f73fe56e4eb441fa9c793f75b31b411ddc8e65e508e4dabc8a2e34086"
+    },
+    {
+      "path": "software-final/before/system-3-reduced-true-zoom-0.6.png",
+      "bytes": 1041,
+      "sha256": "f9d1f553eb7dc96eeda5abda28af7136fc5fc5493c6eee13b9f114b5f4194228"
+    },
+    {
+      "path": "software-final/before/system-3-reduced-true-zoom-1.0.png",
+      "bytes": 1138,
+      "sha256": "93d484ef997a45a932ad17a93752998ce268fb01c840df6c97aa5fe6d25c2b79"
+    },
+    {
+      "path": "software-final/before/system-3-reduced-true-zoom-1.6.png",
+      "bytes": 1225,
+      "sha256": "0b9e151f73fe56e4eb441fa9c793f75b31b411ddc8e65e508e4dabc8a2e34086"
+    },
+    {
+      "path": "software-final/before/system-4-reduced-false-zoom-0.6.png",
+      "bytes": 1042,
+      "sha256": "1d1e84f57984a7a7af567451d023438e57989c7eae0e76ce579795d2d1c59d32"
+    },
+    {
+      "path": "software-final/before/system-4-reduced-false-zoom-1.0.png",
+      "bytes": 1145,
+      "sha256": "80c3a841e13c9a36d6838d771fe9439482f2dee3ee12ccf176d1f444adcb311b"
+    },
+    {
+      "path": "software-final/before/system-4-reduced-false-zoom-1.6.png",
+      "bytes": 1241,
+      "sha256": "9454e4a923b6931ae7291bd1fde91c3d6cbd5460674a9e5140e16c8fff9ae0c5"
+    },
+    {
+      "path": "software-final/before/system-4-reduced-true-zoom-0.6.png",
+      "bytes": 1042,
+      "sha256": "1d1e84f57984a7a7af567451d023438e57989c7eae0e76ce579795d2d1c59d32"
+    },
+    {
+      "path": "software-final/before/system-4-reduced-true-zoom-1.0.png",
+      "bytes": 1145,
+      "sha256": "80c3a841e13c9a36d6838d771fe9439482f2dee3ee12ccf176d1f444adcb311b"
+    },
+    {
+      "path": "software-final/before/system-4-reduced-true-zoom-1.6.png",
+      "bytes": 1241,
+      "sha256": "9454e4a923b6931ae7291bd1fde91c3d6cbd5460674a9e5140e16c8fff9ae0c5"
+    },
+    {
+      "path": "software-final/before/system-5-reduced-false-zoom-0.6.png",
+      "bytes": 1064,
+      "sha256": "30b5bec622860e78835619009542187092556509b97f7a9640d92142e07286a0"
+    },
+    {
+      "path": "software-final/before/system-5-reduced-false-zoom-1.0.png",
+      "bytes": 1121,
+      "sha256": "59b82815365ec6b77590140cffa5fdd396b5139888122e8d1e4e975ffdd00b89"
+    },
+    {
+      "path": "software-final/before/system-5-reduced-false-zoom-1.6.png",
+      "bytes": 1207,
+      "sha256": "162814c6ad88bb4a111f94f0d0ca8aefa901180295453bb58b98a276cdbcdc17"
+    },
+    {
+      "path": "software-final/before/system-5-reduced-true-zoom-0.6.png",
+      "bytes": 1064,
+      "sha256": "30b5bec622860e78835619009542187092556509b97f7a9640d92142e07286a0"
+    },
+    {
+      "path": "software-final/before/system-5-reduced-true-zoom-1.0.png",
+      "bytes": 1121,
+      "sha256": "59b82815365ec6b77590140cffa5fdd396b5139888122e8d1e4e975ffdd00b89"
+    },
+    {
+      "path": "software-final/before/system-5-reduced-true-zoom-1.6.png",
+      "bytes": 1207,
+      "sha256": "162814c6ad88bb4a111f94f0d0ca8aefa901180295453bb58b98a276cdbcdc17"
+    },
+    {
+      "path": "source-boundary.json",
+      "bytes": 1113,
+      "sha256": "9c48acff21fd67141153a727f010758d7cad236787d70ee0bc7776cca8582959"
+    },
+    {
+      "path": "verify.py",
+      "bytes": 1037,
+      "sha256": "d27ffac79803bd216f71505c251c424f9b90211600221119b8979fe618408ba9"
+    }
+  ]
+}

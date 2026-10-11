@@ -1,0 +1,36 @@
+# Ordinary per-pilot Repulsor Nova native handoff
+
+Frozen commit `f31873bfe3e181c57bc4ef0bdf157b14f291de11` on `codex/co-op-repulsor-nova`, base `69646456ac3e104c94ca27bc79aeb774dd9ab757`. The real host Game ECS now reacts to accepted participant damage with equipped ordinary Repulsor ID4, using each membership's effective rank, earned evolution and cooldown. Source scope is exactly four files: `co_op.rs`, `co_op_loadout.rs`, new `co_op_nova_tests.rs`, and the approved mechanical solo emission extraction in `lib.rs`.
+
+Solo and co-op share `emit_repulsor_nova(position, evolution, Option<ShotOwner>)`. The original solo ordinary/Impact/Royal dispatch and cooldown calculations remain in `hurt_player`; co-op admits only equipped ordinary ID4. Shared emission retains strict 70/90/120 reach, 12 actual actor damage at local zero, 110 outward impulse, ordinary damage masks/debris/kill handling, protected-target exclusion and all-player exclusion. Evolution3+ clears nearby hostile bullets; evolution5 reverses up to16 actual bullets with life1.5, two hits and cleared previous-hit state. It emits the existing 36-particle burst, transient light and ability-nova event.
+
+Co-op adds only transient Pilot rank/evolution/timer state. Its fixed tick subtracts the same 1/60-second duration as solo. Timer is independent of other pilots and input streams. Accepted shield absorption also triggers; invalid/nonpositive damage, sanctuary, current invulnerability and already-dead actors do not. Cooldown is 18−2×(effective rank−1), scaled0.85 from evolution4. Solo's death policy retains cooldown, so co-op respawn retains its membership timer while removing that member's shots. Leave/rejoin starts a fresh timer/epoch; session end restores the exact retained solo state/timer/profile.
+
+Immediate Nova destruction and reflected bullets carry the triggering participant ID and membership epoch. The shared helper restores the enclosing collision's prior hit owner after immediate targets. Existing player-shot exclusion prevents PvP; existing session progression guards prevent XP/currency/material/mission grants. No reward or Profile mutation path was added.
+
+## Exact additive contract
+
+`co_op::OwnedLoadout` reexports the same type from `co_op_loadout.rs`, now with optional `nova_evolution: Option<u8>`. Missing tokens default toNone and are omitted on serialization. Actual native export emits a value only with equipped ordinary defense ID4 and actual family-1 evolution>1. A declared numeric1 is accepted only with that slot. Values0/6/255, wrong slots, fractional/string/overflow/object values reject; an explicit JSON null rejects via direct u8 field deserialization. Echo's existing behavior was not changed. No fabricated boss-generation history enters the temporary guest Profile. Legacy factory callers and their exact ten-field declaration bytes are unchanged.
+
+No public method signatures changed: `Game::co_op_owned_loadout()`, `join_co_op_owned(session,spec,loadout)` and existing publication carry the additive type. Root owns the strict wire whitelist/fixtures and browser integration. Root's native replica temporary build validator uses the same OwnedLoadout semantics. Offline declarations remain self-reported plausible builds, not cryptographic ownership proofs.
+
+Actual serializer fixtures: `legacy-loadout.json` (183 payload bytes) and `evolved-nova-loadout.json` (218 payload bytes), copied byte-for-byte from the final native test's printed serde strings with one final LF for the files. `fixture-provenance.json` records markers and hashes. The evolved fixture uses configured valid defeat counters/stored rank5/XP0 and proves effective rank1 independently of evolution5; it is not naturally earned player history. Reproduce the strings with `cargo test --locked -p game_core co_op::nova_tests::native_export_preserves_legacy_bytes_and_validates_effect_only_nova_metadata -- --exact --nocapture`; no exporter or server is necessary.
+
+## Actual checks
+
+- Final new Nova module: **11 passed**, 466filtered, no ignore; `focused-final.log`.
+- Broader co-op/publication/replica/loadout tests: **78 passed, two existing fixture writers ignored**, 397filtered; `co-op-final.log`.
+- After shared emission extraction, `cargo test --locked -p game_core nova -- --nocapture`: **16 passed**, including existing solo Nova/sanctuary, actual Mote projectile reflection and audio cue tests; `nova-after-extraction.log`. This filter also includes two existing cosmic supernova tests. Subsequent source edits changed only new test assertions/one unnecessary fixture clone.
+- Strict `cargo clippy --locked -p game_core --all-targets -- -D warnings`, formatting and diff checks passed. `clippy-final.log` is retained. Successful no-output formatting/diff checks did not create a Tee-Object transcript; `check-observations.json` records their observed exit codes.
+
+New tests compare real solo/session target health, occupied-cell holes, impulses and cooldowns across all five evolutions, stored-rank5 capped at XP0 and effective-rank5 at XP1560. Independent fixed-distance probes at65/85/110/125 verify the shared helper's range/damage rather than trusting only two calls to the same helper. Actual cooldown retrigger boundaries observed at1081/919/600/510 ticks for the four stated fixture combinations. Tests execute real occupied-cell hostile collisions, targeted guest damage, immediate and later reflected destruction attribution, eight staggered participants, sanctuary/invalid/invulnerability exclusion, local hull mask damage, membership cleanup/restoration and explicit Impact/Royal exclusion.
+
+Caps remain180 shared projectiles,1100 particles,32 transient lights. Reflection converts existing bullets rather than creating extras; a full180 hostile-shot fixture leaves16 reflected shots. Particle/light near-cap fixtures retain those limits. Sixteen reflection IDs use a fixed stack array. The existing target/clear vectors run only on accepted triggers; no new global world cap or gameplay-body omission was introduced.
+
+Earlier logs are retained honestly: first compilation had two fixture API/type mistakes; second run had one incorrect wrong-slot assertion when evolution1's token was absent; post-extraction run had an exact110.0 float fixture assertion against109.99999 normalization; first Clippy rejected an unnecessary fixture clone. All were corrected in test code, with final results above. None is claimed as an observed runtime defect.
+
+## Scope limits
+
+This is native authority parity for ordinary equipped ID4. Champion Impact Nova, Royal defense, other signature abilities and shared rewards remain outside co-op. Native particles/light/events are emitted, but guest burst/audio presentation and complete browser/WASM/RTC acceptance are not established by these tests. No Root source, shell/protocol files, save schema, preview, listener, Studio record, shared build or WASM was edited or executed. Root owns integrated full checks and browser acceptance. No performance/FPS claim is made.
+
+`manifest.json` separately pins committed Git LF source, actual working bytes and raw evidence. `verify.py` is read-only and does not execute tests or exports. No full raw tree snapshots are required; the exact commit preserves source.

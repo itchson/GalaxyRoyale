@@ -1,0 +1,128 @@
+{
+  "version": 1,
+  "build": "ab71442b9540c3f33c61a418d445323a1b9ccc1e",
+  "files": [
+    {
+      "path": "freeze.py",
+      "sha256": "bac28bdaaf108f1b563504fa84c3862315e1ff7be7f693fd465d733ae7077599",
+      "bytes": 2971
+    },
+    {
+      "path": "inputs/crates/engine_core/src/camera.rs",
+      "sha256": "b08164aa6c9a7e8364ee90e7205e70b702d2013c1861254da33610cb81fdf759",
+      "bytes": 8926
+    },
+    {
+      "path": "inputs/crates/game_core/src/cosmic_background.rs",
+      "sha256": "0d4ef0c612d20d888ac92a4d6dce848005d3242092ff889464f04a6817b07068",
+      "bytes": 72401
+    },
+    {
+      "path": "inputs/crates/game_core/src/regions.rs",
+      "sha256": "b17d5861933a90bef535313ebfbdd0dd097a2763622fcfaf1d8fd754b745e6d4",
+      "bytes": 35964
+    },
+    {
+      "path": "inputs/crates/game_core/src/shooting_star.rs",
+      "sha256": "549444b3c23dc05d072083de6c23b4ff88e706307c714b95869744f4aba74b59",
+      "bytes": 22504
+    },
+    {
+      "path": "inputs/crates/game_core/src/stellar_neighborhood_tests.rs",
+      "sha256": "ef04db3538a447cbbd51479ac455c8c6c217ea84f9ecd81586ffbb68f8920333",
+      "bytes": 8407
+    },
+    {
+      "path": "inputs/crates/game_web/src/lighting.rs",
+      "sha256": "a126e38f40f8cd750f9a92483dc244d9fbcabfcd6685ac4e2a767227f3e9f5c6",
+      "bytes": 11278
+    },
+    {
+      "path": "inputs/crates/game_web/src/pixel.wgsl",
+      "sha256": "8e18cbb217a62659d697f1705b941e09dbfee444fcdf7a9a1e29506c8a5ea976",
+      "bytes": 3875
+    },
+    {
+      "path": "inputs/crates/game_web/src/present.wgsl",
+      "sha256": "767e72b385823cfb10bee5ba055812ae40fd32f20130ea32271aa7e85a212de5",
+      "bytes": 1652
+    },
+    {
+      "path": "inputs/crates/game_web/src/renderer.rs",
+      "sha256": "b005d9be722c94ee85826faa3bfc480c644b0b8a09c49dd0df1da2a3c9127359",
+      "bytes": 26563
+    },
+    {
+      "path": "point-analysis.json",
+      "sha256": "ae1533bbaba32f55dc153961a855c89a6192767533086f05cbfc5e273556a979",
+      "bytes": 29422
+    },
+    {
+      "path": "project_points.py",
+      "sha256": "59d04f904ee02654831d6ed1828a8e886aa39754703c092af056ecc3a43973c5",
+      "bytes": 3555
+    },
+    {
+      "path": "REVIEW.md",
+      "sha256": "0525382516fd9807809665e4071f9dabcf5f3da7384e195bfad488c4a148a92b",
+      "bytes": 7180
+    },
+    {
+      "path": "source-pins.json",
+      "sha256": "7002a839b9a1a5ca687b8d7b22773d4828bb82f8adfed6d9382467e047479dd3",
+      "bytes": 2922
+    },
+    {
+      "path": "verify.py",
+      "sha256": "45e3c435ed5a6998048eeaa70481103131de686d03f75f48fc89b54d8c62c082",
+      "bytes": 1098
+    }
+  ],
+  "external": [
+    {
+      "path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\nova-stellar-20261012\\compact-webgpu.jpg",
+      "sha256": "54050169745d903bdb32a63d7bd3af1a52a611500c2ca21d79538d3b2c864777",
+      "bytes": 23156
+    },
+    {
+      "path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\nova-stellar-20261012\\loose-webgpu.jpg",
+      "sha256": "483dca896ee9f8b6fba50c60fb816297c6dce9469a9b6f84c77d57a494bb4396",
+      "bytes": 26932
+    },
+    {
+      "path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\nova-stellar-20261012\\compact-webgl2-ab714.jpg",
+      "sha256": "96b807ab54e78e4590107fcec6b23ebd70ec9cb6f8e2394e0548ce487fbdfe58",
+      "bytes": 22846
+    },
+    {
+      "path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\nova-stellar-20261012\\loose-webgl2-ab714.jpg",
+      "sha256": "70486367ce6b6962c1e3e707afb6f10d46824eced1652ebde7a46bf6a7caa728",
+      "bytes": 24510
+    },
+    {
+      "path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\nova-stellar-20261012\\tested-build.json",
+      "sha256": "3469e6495dbae9c3ff415bad1e64f33b14292561839c252ffc47071f0241394d",
+      "bytes": 317
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\stellar-neighborhood-art\\after\\system-0-reduced-false.json",
+      "sha256": "0b7300a83520f0ef133a6117085f2100a161bdd4e795c4010106912fb8820cd9",
+      "bytes": 5322
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\stellar-neighborhood-art\\after\\system-3-reduced-false.json",
+      "sha256": "5e9769079e571bedba8ab043b847a4c1d0b40f4c76909c97fe8ea9b874953416",
+      "bytes": 5327
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\stellar-neighborhood-art\\HANDOFF.md",
+      "sha256": "5e22d43707e391234382c07aa1e6749e34029ac2584425bfc49bc698e260432e",
+      "bytes": 7647
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\stellar-neighborhood-art\\manifest.json",
+      "sha256": "31b2b99e9e796d175d7d6aafdfd642e76fdb2139935ffac173ac737502e2a3fb",
+      "bytes": 34989
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.04s
+     Running unittests src\lib.rs (target\debug\deps\game_core-5b2032bfdcb8bcac.exe)
+
+running 5 tests
+test co_op_tests::local_cue_tests::full_cue_queue_does_not_reclassify_an_earlier_local_hit ... ok
+test co_op_tests::local_cue_tests::actual_guest_shield_hit_is_world_impact_and_does_not_change_host_vitals ... ok
+test co_op_tests::local_cue_tests::actual_host_collision_keeps_local_death_and_player_hit_routing ... ok
+test co_op_tests::local_cue_tests::actual_guest_death_respawns_guest_without_host_local_death_or_hit_cues ... ok
+test co_op_tests::local_cue_tests::eight_simultaneous_respawns_emit_one_local_death_with_existing_effect_caps ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 480 filtered out; finished in 0.13s
+

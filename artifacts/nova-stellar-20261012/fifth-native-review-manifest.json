@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "helper_commit": "81ac24c858e98593ac7dd40862cbf424f0b5ca53",
+  "native_reference_commit": "ab71442b9540c3f33c61a418d445323a1b9ccc1e",
+  "scope": "Source only; no execution or browser acceptance",
+  "source": [
+    {
+      "commit": "81ac24c858e98593ac7dd40862cbf424f0b5ca53",
+      "path": "scripts/qa/co-op-transport/fifth-shot.js",
+      "bytes": 7003,
+      "git_lf_sha256": "e7a587855f908ef1f5b760b0cb90b87c48f73587cc3785347aacf09cf9c94a26"
+    },
+    {
+      "commit": "81ac24c858e98593ac7dd40862cbf424f0b5ca53",
+      "path": "scripts/qa/co-op-transport/client.js",
+      "bytes": 22020,
+      "git_lf_sha256": "edad12d0a1ae6a916bfd792a9f5934959dba1bbb0c7dc4a8285ac8f0e7a87e94"
+    },
+    {
+      "commit": "81ac24c858e98593ac7dd40862cbf424f0b5ca53",
+      "path": "scripts/qa/co-op-transport/wasm-review.js",
+      "bytes": 14265,
+      "git_lf_sha256": "3cd6b1153f75e7b648e55ce549d9b3bd4da70c92ad00d427e537e006686fe422"
+    },
+    {
+      "commit": "81ac24c858e98593ac7dd40862cbf424f0b5ca53",
+      "path": "scripts/qa/co-op-transport/README.md",
+      "bytes": 11325,
+      "git_lf_sha256": "086da109b5b6b628368794d18fd78da4e132ddcb0bc9d8994cb346dd0ec69b4c"
+    },
+    {
+      "commit": "81ac24c858e98593ac7dd40862cbf424f0b5ca53",
+      "path": "scripts/test/coop-transport-fifth-qa.test.mjs",
+      "bytes": 14649,
+      "git_lf_sha256": "2814ae9ac3fa68dd41627dccbf7c196ba5cc7930da51c2209d3d238f51d81cd1"
+    },
+    {
+      "commit": "ab71442b9540c3f33c61a418d445323a1b9ccc1e",
+      "path": "crates/game_core/src/co_op.rs",
+      "bytes": 48100,
+      "git_lf_sha256": "9daf1e934e4363a4069c40e8a0ced1e3b30f624d1d58fcad3c5f10d428a41a58"
+    },
+    {
+      "commit": "ab71442b9540c3f33c61a418d445323a1b9ccc1e",
+      "path": "crates/game_core/src/lib.rs",
+      "bytes": 195203,
+      "git_lf_sha256": "610fcc5eb36165e3fcecfe138419c62b1f3e42fd32c59cad8e7d63a90d380393"
+    },
+    {
+      "commit": "ab71442b9540c3f33c61a418d445323a1b9ccc1e",
+      "path": "crates/game_core/src/co_op_publish.rs",
+      "bytes": 7851,
+      "git_lf_sha256": "d6658330e942537435e668c05bad6089b6ec5570999b74f2d27c784c51862f3d"
+    },
+    {
+      "commit": "ab71442b9540c3f33c61a418d445323a1b9ccc1e",
+      "path": "crates/game_web/src/browser.rs",
+      "bytes": 39690,
+      "git_lf_sha256": "99670ca781c1df5c21059c45bb5fe40ff7da540bb57862ac08c78e3e44e78156"
+    },
+    {
+      "commit": "ab71442b9540c3f33c61a418d445323a1b9ccc1e",
+      "path": "crates/game_web/src/co_op_replica_bridge.rs",
+      "bytes": 6564,
+      "git_lf_sha256": "e1543fa5352b44c32b4e966ff3c956934ceddfd026eac443dc5964714a0291ef"
+    },
+    {
+      "commit": "ab71442b9540c3f33c61a418d445323a1b9ccc1e",
+      "path": "apps/game/src/coop/controller.ts",
+      "bytes": 30858,
+      "git_lf_sha256": "7094d634be30236f75464816bae79f036437020e90cb813f4b96dd893de318d5"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "REVIEW.md",
+      "bytes": 4984,
+      "sha256": "b8e62138fb9ff2c5fd73a224b65e1e883a6ca44490b200397d5b5e59bd8f3379"
+    }
+  ]
+}

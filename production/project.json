@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 886,
+  "revision": 895,
   "name": "Galaxy Royale",
   "phase": "Playable solo slice → content and validation",
-  "updatedAt": "2026-10-11T20:57:05.749Z",
+  "updatedAt": "2026-10-11T22:29:16.261Z",
   "tasks": [
     {
       "id": "studio",
@@ -7369,20 +7369,26 @@
       "description": "Isolated native damage-reactive Nova, grounded solo behavior; cooldown/impulse/localized collision/safe-zone/owner-epoch lifecycle and meaningful native tests. No browser/shared rewards scope.",
       "department": "Gameplay",
       "owner": "/root/engine_research",
-      "status": "active",
+      "status": "complete",
       "priority": "normal",
       "dependencies": [],
       "acceptanceCriteria": [
         {
           "text": "Isolated native damage-reactive Nova, grounded solo behavior; cooldown/impulse/localized collision/safe-zone/owner-epoch lifecycle and meaningful native tests. No browser/shared rewards scope.",
-          "met": false
+          "met": true
         }
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "label": "Actual bounded contribution",
+          "kind": "artifact",
+          "path": "artifacts/nova-stellar-20261012/nova-HANDOFF.md"
+        }
+      ],
       "blocker": "",
-      "revision": 1,
+      "revision": 2,
       "createdAt": "2026-10-11T20:57:05.606Z",
-      "updatedAt": "2026-10-11T20:57:05.606Z"
+      "updatedAt": "2026-10-11T22:28:53.934Z"
     },
     {
       "id": "task-2acbb4c7",
@@ -7390,20 +7396,26 @@
       "description": "Read-only source/native art audit of other samplers; rank at most three concrete candidates. Actual GPU visual approval remains Root work.",
       "department": "Art",
       "owner": "/root/production_research",
-      "status": "active",
+      "status": "complete",
       "priority": "normal",
       "dependencies": [],
       "acceptanceCriteria": [
         {
           "text": "Read-only source/native art audit of other samplers; rank at most three concrete candidates. Actual GPU visual approval remains Root work.",
-          "met": false
+          "met": true
         }
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "label": "Actual bounded contribution",
+          "kind": "artifact",
+          "path": "artifacts/nova-stellar-20261012/stellar-author-HANDOFF.md"
+        }
+      ],
       "blocker": "",
-      "revision": 1,
+      "revision": 2,
       "createdAt": "2026-10-11T20:57:05.669Z",
-      "updatedAt": "2026-10-11T20:57:05.669Z"
+      "updatedAt": "2026-10-11T22:28:53.965Z"
     },
     {
       "id": "task-13d17835",
@@ -7411,20 +7423,134 @@
       "description": "Source-backed isolated-origin native starter test design and projectile evidence boundary. No profile editing, fake earned progress or browser mutation.",
       "department": "QA",
       "owner": "/root/gameplay_design",
-      "status": "active",
+      "status": "complete",
       "priority": "normal",
       "dependencies": [],
       "acceptanceCriteria": [
         {
           "text": "Source-backed isolated-origin native starter test design and projectile evidence boundary. No profile editing, fake earned progress or browser mutation.",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual bounded contribution",
+          "kind": "artifact",
+          "path": "artifacts/nova-stellar-20261012/fifth-qa-author-HANDOFF.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-11T20:57:05.713Z",
+      "updatedAt": "2026-10-11T22:28:54.005Z"
+    },
+    {
+      "id": "task-b6a81e79",
+      "title": "Replace axial star strips with irregular seeded neighborhoods",
+      "description": "Native bounded layouts, independent source review and actual fixed WebGPU/WebGL2 views; no universal/motion claim.",
+      "department": "Art",
+      "owner": "/root/production_research",
+      "status": "complete",
+      "priority": "normal",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Native bounded layouts, independent source review and actual fixed WebGPU/WebGL2 views; no universal/motion claim.",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Evidence and scope",
+          "kind": "artifact",
+          "path": "artifacts/nova-stellar-20261012/stellar-stills-review-REVIEW.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-11T22:28:54.043Z",
+      "updatedAt": "2026-10-11T22:28:54.043Z"
+    },
+    {
+      "id": "task-edf864e0",
+      "title": "Route host-local damage and death cues by participant",
+      "description": "Actual failing baseline, native role-aware fix and independent browser-consumer source review.",
+      "department": "Gameplay",
+      "owner": "/root/engine_research",
+      "status": "complete",
+      "priority": "normal",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Actual failing baseline, native role-aware fix and independent browser-consumer source review.",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Evidence and scope",
+          "kind": "artifact",
+          "path": "artifacts/nova-stellar-20261012/local-cues-consumer-review-REVIEW.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-11T22:28:54.086Z",
+      "updatedAt": "2026-10-11T22:28:54.086Z"
+    },
+    {
+      "id": "task-74cc552e",
+      "title": "Execute real RENKO fifth-shot browser cadence",
+      "description": "Fresh source-pinned owned stage and actual admitted-shot evidence; browser cadence remains pending.",
+      "department": "QA",
+      "owner": "/root/gameplay_design",
+      "status": "ready",
+      "priority": "normal",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Fresh source-pinned owned stage and actual admitted-shot evidence; browser cadence remains pending.",
           "met": false
         }
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "label": "Evidence and scope",
+          "kind": "artifact",
+          "path": "artifacts/nova-stellar-20261012/fifth-qa-author-HANDOFF.md"
+        }
+      ],
       "blocker": "",
       "revision": 1,
-      "createdAt": "2026-10-11T20:57:05.713Z",
-      "updatedAt": "2026-10-11T20:57:05.713Z"
+      "createdAt": "2026-10-11T22:28:54.119Z",
+      "updatedAt": "2026-10-11T22:28:54.119Z"
+    },
+    {
+      "id": "task-91ac3c7f",
+      "title": "Validate seeded ringed-planet variations",
+      "description": "Actual target browser captures before deciding a bounded native variation. Source-only camera plan completed.",
+      "department": "Art",
+      "owner": "/root/production_research",
+      "status": "ready",
+      "priority": "normal",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Actual target browser captures before deciding a bounded native variation. Source-only camera plan completed.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Evidence and scope",
+          "kind": "artifact",
+          "path": "artifacts/nova-stellar-20261012/ring-plan-PLAN.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-11T22:28:54.152Z",
+      "updatedAt": "2026-10-11T22:28:54.152Z"
     }
   ],
   "reviews": [
@@ -9440,6 +9566,43 @@
           "label": "Independent saved-artifact review",
           "kind": "artifact",
           "path": "artifacts/owned-webgl2-20261012/independent-review.md"
+        }
+      ]
+    },
+    {
+      "id": "review-081b5224",
+      "title": "Asynchronous Nova, stellar and cue integration discussion",
+      "body": "Engine implemented ordinary Nova and found guest death routing into host UI. Root reproduced source flow, integrated fix and ran final workspace/shell checks. Art authored irregular bounded stars and reviewed four actual supplied stills: 28 guided correspondences, scoped still-form acceptance. QA independently reviewed native fifth-shot cadence helper and cue consumer; actual new RTC cadence remains pending. These are real asynchronous contributions, not a synchronous meeting.",
+      "author": "Root",
+      "source": "Actual integration, tests and bounded specialist reviews",
+      "createdAt": "2026-10-11T22:29:16.217Z",
+      "participants": [
+        "Root",
+        "/root/engine_research",
+        "/root/production_research",
+        "/root/gameplay_design"
+      ],
+      "taskIds": [],
+      "evidence": [
+        {
+          "label": "Native author",
+          "kind": "artifact",
+          "path": "artifacts/nova-stellar-20261012/nova-HANDOFF.md"
+        },
+        {
+          "label": "Actual still review",
+          "kind": "artifact",
+          "path": "artifacts/nova-stellar-20261012/stellar-stills-review-REVIEW.md"
+        },
+        {
+          "label": "Cue source consumer review",
+          "kind": "artifact",
+          "path": "artifacts/nova-stellar-20261012/local-cues-consumer-review-REVIEW.md"
+        },
+        {
+          "label": "Fifth-shot helper",
+          "kind": "artifact",
+          "path": "artifacts/nova-stellar-20261012/fifth-qa-author-HANDOFF.md"
         }
       ]
     }
@@ -12335,6 +12498,70 @@
       ],
       "url": "http://league-final.localhost:4173/?qa=1&renderer=webgpu",
       "knownIssues": "Shared rewards/missions and full ability/effect parity incomplete. Frozen comet form viewed; current browser sampling insufficient for dense moving continuity."
+    },
+    {
+      "id": "build-88a8fcc0",
+      "title": "Nova, irregular stellar neighborhoods and participant-local cues",
+      "body": "Normal dual WASM build applied through real Haven PWA update; observed index-COm1aR-P.js. One normal preview PID2748. Fixed stellar captures preserve their original ab714 build identity; cosmic code unchanged at final597.",
+      "author": "Root",
+      "source": "Actual integration, tests and bounded specialist reviews",
+      "createdAt": "2026-10-11T22:29:16.261Z",
+      "revision": "597f0720704656187056bf57c5d5c1d6bdcfcab3",
+      "evidence": [
+        {
+          "label": "Current build",
+          "kind": "artifact",
+          "path": "artifacts/nova-stellar-20261012/final-tested-build.json"
+        },
+        {
+          "label": "Final Rust",
+          "kind": "artifact",
+          "path": "artifacts/nova-stellar-20261012/workspace-final.log"
+        },
+        {
+          "label": "Final shell",
+          "kind": "artifact",
+          "path": "artifacts/nova-stellar-20261012/shell-cue-final.log"
+        },
+        {
+          "label": "Build output",
+          "kind": "artifact",
+          "path": "artifacts/nova-stellar-20261012/build-cue-final.log"
+        },
+        {
+          "label": "Scope",
+          "kind": "artifact",
+          "path": "artifacts/nova-stellar-20261012/README.md"
+        }
+      ],
+      "checks": [
+        {
+          "name": "Rust workspace 836 passed,10 explicit exporters ignored",
+          "result": "pass"
+        },
+        {
+          "name": "Shell560 passed,three skipped",
+          "result": "pass"
+        },
+        {
+          "name": "Strict native/all-target and wasm32 Clippy",
+          "result": "pass"
+        },
+        {
+          "name": "Normal dual WASM/TypeScript/game/PWA/Studio build",
+          "result": "pass"
+        },
+        {
+          "name": "Actual PWA update and four fixed star views",
+          "result": "pass"
+        },
+        {
+          "name": "RENKO cadence/advanced Nova real RTC, phones and soak",
+          "result": "not_run"
+        }
+      ],
+      "url": "http://league-final.localhost:4173/?qa=1&renderer=webgl2",
+      "knownIssues": "Guest transient effects, rewards/missions, advanced abilities and remote eight-player/physical validation remain open. Ringed variation and moving continuity remain pending."
     }
   ],
   "feedback": [],
@@ -21198,6 +21425,96 @@
       "author": "Root",
       "source": "Actual source-pinned execution, frozen measurements and asynchronous specialist reviews",
       "createdAt": "2026-10-11T20:57:05.749Z"
+    },
+    {
+      "id": "b0db488a-75f0-4832-9ade-bfeae5253526",
+      "revision": 887,
+      "kind": "task.update",
+      "itemId": "task-d87d697e",
+      "title": "Implement ordinary per-pilot Repulsor Nova parity",
+      "author": "Root",
+      "source": "Actual integration, tests and bounded specialist reviews",
+      "createdAt": "2026-10-11T22:28:53.934Z"
+    },
+    {
+      "id": "8d78c3f4-3f2f-471b-9c98-f6fe064f239e",
+      "revision": 888,
+      "kind": "task.update",
+      "itemId": "task-2acbb4c7",
+      "title": "Audit remaining deep-space geometric immersion risks",
+      "author": "Root",
+      "source": "Actual integration, tests and bounded specialist reviews",
+      "createdAt": "2026-10-11T22:28:53.965Z"
+    },
+    {
+      "id": "2b08b24a-fe94-4a9a-8e1f-5eed20296e0e",
+      "revision": 889,
+      "kind": "task.update",
+      "itemId": "task-13d17835",
+      "title": "Design genuine RENKO starter fifth-shot browser proof",
+      "author": "Root",
+      "source": "Actual integration, tests and bounded specialist reviews",
+      "createdAt": "2026-10-11T22:28:54.005Z"
+    },
+    {
+      "id": "c532b540-b92d-40b2-8f40-ab932c12abf0",
+      "revision": 890,
+      "kind": "task.create",
+      "itemId": "task-b6a81e79",
+      "title": "Replace axial star strips with irregular seeded neighborhoods",
+      "author": "Root",
+      "source": "Actual integration, tests and bounded specialist reviews",
+      "createdAt": "2026-10-11T22:28:54.043Z"
+    },
+    {
+      "id": "5c6b0518-5721-4669-bea2-95f0e7b419ac",
+      "revision": 891,
+      "kind": "task.create",
+      "itemId": "task-edf864e0",
+      "title": "Route host-local damage and death cues by participant",
+      "author": "Root",
+      "source": "Actual integration, tests and bounded specialist reviews",
+      "createdAt": "2026-10-11T22:28:54.086Z"
+    },
+    {
+      "id": "c13af495-5518-4769-8efa-eeec780352fb",
+      "revision": 892,
+      "kind": "task.create",
+      "itemId": "task-74cc552e",
+      "title": "Execute real RENKO fifth-shot browser cadence",
+      "author": "Root",
+      "source": "Actual integration, tests and bounded specialist reviews",
+      "createdAt": "2026-10-11T22:28:54.119Z"
+    },
+    {
+      "id": "017680f5-e5be-4d78-b99e-8b890273a872",
+      "revision": 893,
+      "kind": "task.create",
+      "itemId": "task-91ac3c7f",
+      "title": "Validate seeded ringed-planet variations",
+      "author": "Root",
+      "source": "Actual integration, tests and bounded specialist reviews",
+      "createdAt": "2026-10-11T22:28:54.152Z"
+    },
+    {
+      "id": "b5a54d19-b075-4eff-b5c5-179578f6dc43",
+      "revision": 894,
+      "kind": "review",
+      "itemId": "review-081b5224",
+      "title": "Asynchronous Nova, stellar and cue integration discussion",
+      "author": "Root",
+      "source": "Actual integration, tests and bounded specialist reviews",
+      "createdAt": "2026-10-11T22:29:16.217Z"
+    },
+    {
+      "id": "50376492-0ae5-40e6-9e22-123258d7d077",
+      "revision": 895,
+      "kind": "build",
+      "itemId": "build-88a8fcc0",
+      "title": "Nova, irregular stellar neighborhoods and participant-local cues",
+      "author": "Root",
+      "source": "Actual integration, tests and bounded specialist reviews",
+      "createdAt": "2026-10-11T22:29:16.261Z"
     }
   ],
   "runRecords": [

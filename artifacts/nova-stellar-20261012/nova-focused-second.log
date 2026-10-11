@@ -1,0 +1,33 @@
+   Compiling game_core v0.1.0 (C:\Users\mitch\.codex\worktrees\galaxy-hud-navigation\galaxy-royale\crates\game_core)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 20.13s
+     Running unittests src\lib.rs (target\debug\deps\game_core-5b2032bfdcb8bcac.exe)
+
+running 9 tests
+actual_legacy_export={"version":1,"selected_ship":0,"owned_ships":1,"patches":0,"royal_victory":false,"ship_xp":0,"hardware":[0,0,0,0,0,0],"slots":[null,null,null],"trained_starter":false,"relic_count":0}
+test co_op::nova_tests::death_preserves_solo_cooldown_policy_but_leave_rejoin_resets_membership_and_shots ... ok
+test co_op::nova_tests::actual_hostile_collision_targets_guest_and_attributes_nova_destruction_without_grants ... ok
+test co_op::nova_tests::safe_invulnerable_invalid_and_unequipped_damage_cannot_trigger_nova ... ok
+test co_op::nova_tests::eight_staggered_collision_triggers_keep_timers_and_destruction_owners_independent ... ok
+
+thread 'co_op::nova_tests::native_export_preserves_legacy_bytes_and_validates_effect_only_nova_metadata' (27392) panicked at crates\game_core\src\co_op_nova_tests.rs:195:9:
+assertion failed: matches!(invalid.profile(&spec(source.profile(), 2)),
+    Err(Error::InvalidLoadout))
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test co_op::nova_tests::native_export_preserves_legacy_bytes_and_validates_effect_only_nova_metadata ... FAILED
+test co_op::nova_tests::evolved_clear_and_reflection_match_solo_and_keep_shared_caps_and_membership_owner ... ok
+test co_op::nova_tests::solo_and_owned_guest_nova_match_real_actor_damage_holes_impulses_and_cooldowns ... ok
+test co_op::nova_tests::reflected_real_projectile_damages_actor_and_never_other_pilots ... ok
+cooldown_fixture stored_rank=1 xp=0 evolution=1 first_retrigger_tick=1081
+cooldown_fixture stored_rank=5 xp=0 evolution=4 first_retrigger_tick=919
+cooldown_fixture stored_rank=5 xp=1560 evolution=1 first_retrigger_tick=600
+cooldown_fixture stored_rank=5 xp=1560 evolution=4 first_retrigger_tick=510
+test co_op::nova_tests::real_ticks_keep_rank_and_evolution_cooldown_boundaries_per_pilot ... ok
+
+failures:
+
+failures:
+    co_op::nova_tests::native_export_preserves_legacy_bytes_and_validates_effect_only_nova_metadata
+
+test result: FAILED. 8 passed; 1 failed; 0 ignored; 0 measured; 466 filtered out; finished in 0.36s
+
+error: test failed, to rerun pass `-p game_core --lib`

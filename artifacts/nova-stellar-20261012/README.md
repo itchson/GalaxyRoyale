@@ -1,0 +1,9 @@
+# Nova, stellar and local cue integration — actual evidence
+
+Final runtime: 597f0720704656187056bf57c5d5c1d6bdcfcab3. Final normal dual backend build: final-tested-build.json. Real PWA application observed at league-final.localhost:4173; DOM script index-COm1aR-P.js. One normal preview, PID2748.
+
+Root final gates: 836 native tests passed, 10 explicit exporters ignored; 560 shell tests passed, three skipped; strict native/all-target and wasm32 Clippy passed. Initial shell teardown failure is retained alongside the controlled-response test fix and final passing log. Local cue baseline failure is retained: guest death previously routed to the host death UI, now world explosion cues; guest hit audio no longer receives the host-local warning strength, while its original impact light remains unchanged.
+
+Four original browser stills belong to ab71442, identified in tested-build.json. Stellar/render sources remain byte-identical in final597. Actual seed871238449, zoom1,1280x720 CSS/640x360 logical, full motion/density, shake off. Compact/loose native neighborhoods verified on both WebGPU and WebGL2; loose GL2 had a small physical drift. No exact pixel parity claimed. Specialist still review finds 28/28 guided point correspondences, but unaided group readability, moving continuity, all-seed acceptance and physical testing remain open.
+
+Ordinary Nova native parity and strict optional browser metadata are implemented; actual native serializer fixtures are in scripts/test/fixtures/co-op-nova-loadout. No advanced Nova real RTC claim. RENKO fifth-shot helper is implemented/source reviewed; actual browser cadence remains pending. Ringed-planet camera plan is source-only, not an implemented variation. Guest transient FX is an independent proposal, not shipped. Original author manifests refer to their frozen worktree inputs; this folder's EVIDENCE-MANIFEST pins the exact preserved Git bytes.

@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "source_commit": "ab71442b9540c3f33c61a418d445323a1b9ccc1e",
+  "scope": "Independent source-backed proposal before Spark result; no code or runtime execution",
+  "source": [
+    {
+      "commit": "ab71442b9540c3f33c61a418d445323a1b9ccc1e",
+      "path": "crates/game_core/src/lib.rs",
+      "bytes": 195203,
+      "git_lf_sha256": "610fcc5eb36165e3fcecfe138419c62b1f3e42fd32c59cad8e7d63a90d380393"
+    },
+    {
+      "commit": "ab71442b9540c3f33c61a418d445323a1b9ccc1e",
+      "path": "crates/game_core/src/co_op.rs",
+      "bytes": 48100,
+      "git_lf_sha256": "9daf1e934e4363a4069c40e8a0ced1e3b30f624d1d58fcad3c5f10d428a41a58"
+    },
+    {
+      "commit": "ab71442b9540c3f33c61a418d445323a1b9ccc1e",
+      "path": "crates/game_core/src/co_op_publish.rs",
+      "bytes": 7851,
+      "git_lf_sha256": "d6658330e942537435e668c05bad6089b6ec5570999b74f2d27c784c51862f3d"
+    },
+    {
+      "commit": "ab71442b9540c3f33c61a418d445323a1b9ccc1e",
+      "path": "crates/game_core/src/co_op_replica.rs",
+      "bytes": 44941,
+      "git_lf_sha256": "6c083cca3e89d78f3970f5f69cf4d865115a5abaaf50a5cb2edda4ba2ea076ff"
+    },
+    {
+      "commit": "ab71442b9540c3f33c61a418d445323a1b9ccc1e",
+      "path": "crates/game_web/src/browser.rs",
+      "bytes": 39690,
+      "git_lf_sha256": "99670ca781c1df5c21059c45bb5fe40ff7da540bb57862ac08c78e3e44e78156"
+    },
+    {
+      "commit": "ab71442b9540c3f33c61a418d445323a1b9ccc1e",
+      "path": "crates/game_web/src/co_op_replica_bridge.rs",
+      "bytes": 6564,
+      "git_lf_sha256": "e1543fa5352b44c32b4e966ff3c956934ceddfd026eac443dc5964714a0291ef"
+    },
+    {
+      "commit": "ab71442b9540c3f33c61a418d445323a1b9ccc1e",
+      "path": "apps/game/src/coop/controller.ts",
+      "bytes": 30858,
+      "git_lf_sha256": "7094d634be30236f75464816bae79f036437020e90cb813f4b96dd893de318d5"
+    },
+    {
+      "commit": "ab71442b9540c3f33c61a418d445323a1b9ccc1e",
+      "path": "apps/game/src/coop/wire.ts",
+      "bytes": 17963,
+      "git_lf_sha256": "3508a7c0921905a54fd9bf0227ea3e10ae3488825bb312cbdc972116abc5737c"
+    },
+    {
+      "commit": "ab71442b9540c3f33c61a418d445323a1b9ccc1e",
+      "path": "apps/game/src/main.ts",
+      "bytes": 88855,
+      "git_lf_sha256": "f6138b2922a9563d031420c602995d45b49ca423d09ca808c3c4d39fde8f30bc"
+    },
+    {
+      "commit": "ab71442b9540c3f33c61a418d445323a1b9ccc1e",
+      "path": "apps/game/src/audio.ts",
+      "bytes": 36343,
+      "git_lf_sha256": "8b64895bd84c0fffd602e4084bfc0aff23c777b82515354fd5b8aca74ebead09"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "PROPOSAL.md",
+      "bytes": 8267,
+      "sha256": "9c86ae7ea5181fe1e474b4d21f8d3d7bc4dc89bbd1e990e647a3b563bc5d2665"
+    }
+  ]
+}

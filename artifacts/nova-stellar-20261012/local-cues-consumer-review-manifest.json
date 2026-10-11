@@ -1,0 +1,60 @@
+{
+  "sourceCommit": "27262a42302506e3724246dbb237a15e73b996c9",
+  "sources": [
+    {
+      "path": "apps/game/src/main.ts",
+      "commit": "27262a42302506e3724246dbb237a15e73b996c9",
+      "bytes": 88855,
+      "sha256": "f6138b2922a9563d031420c602995d45b49ca423d09ca808c3c4d39fde8f30bc"
+    },
+    {
+      "path": "apps/game/src/audio.ts",
+      "commit": "27262a42302506e3724246dbb237a15e73b996c9",
+      "bytes": 36343,
+      "sha256": "8b64895bd84c0fffd602e4084bfc0aff23c777b82515354fd5b8aca74ebead09"
+    },
+    {
+      "path": "crates/game_web/src/browser.rs",
+      "commit": "27262a42302506e3724246dbb237a15e73b996c9",
+      "bytes": 39690,
+      "sha256": "99670ca781c1df5c21059c45bb5fe40ff7da540bb57862ac08c78e3e44e78156"
+    },
+    {
+      "path": "crates/game_core/src/lib.rs",
+      "commit": "27262a42302506e3724246dbb237a15e73b996c9",
+      "bytes": 195203,
+      "sha256": "610fcc5eb36165e3fcecfe138419c62b1f3e42fd32c59cad8e7d63a90d380393"
+    },
+    {
+      "path": "crates/game_core/src/co_op.rs",
+      "commit": "27262a42302506e3724246dbb237a15e73b996c9",
+      "bytes": 48785,
+      "sha256": "9abdb9b5c4e541e28f784e4630dd7439e9f1c301f28f0c8e3e9082e9b1330d29"
+    },
+    {
+      "path": "crates/game_core/src/co_op_local_cue_tests.rs",
+      "commit": "27262a42302506e3724246dbb237a15e73b996c9",
+      "bytes": 5428,
+      "sha256": "ed6018b5f3bafb6cd426eac2c3d610576988730a276ba3f7eb08119cb4832984"
+    },
+    {
+      "path": "crates/game_core/src/co_op_tests.rs",
+      "commit": "27262a42302506e3724246dbb237a15e73b996c9",
+      "bytes": 33125,
+      "sha256": "4267ae047998e2eeeecfb34428d2df665cdf1d0f91eac986136f059009977f4a"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "REVIEW.md",
+      "bytes": 2487,
+      "sha256": "67a29e278d7a55babe90fd06e2fbf994a81abbbe2c938337c35263e47f382a28"
+    },
+    {
+      "path": "pin.py",
+      "bytes": 1393,
+      "sha256": "0c51044f61f9b2b70bed9b666ae050e5fac67cf975f5c1f36c850a37a83ff312"
+    }
+  ],
+  "scope": "final exact source consumer and regression-design review; native execution attributed Engine; no browser proof"
+}

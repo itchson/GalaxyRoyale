@@ -1,0 +1,203 @@
+{
+  "schema": 1,
+  "commit": "f31873bfe3e181c57bc4ef0bdf157b14f291de11",
+  "base": "69646456ac3e104c94ca27bc79aeb774dd9ab757",
+  "source_domains": "Git LF and working raw separately declared",
+  "evidence_domain": "actual raw bytes",
+  "source": [
+    {
+      "path": "crates/game_core/src/co_op.rs",
+      "changed": true,
+      "git_lf_sha256": "9daf1e934e4363a4069c40e8a0ced1e3b30f624d1d58fcad3c5f10d428a41a58",
+      "git_lf_size": 48100,
+      "raw_sha256": "9daf1e934e4363a4069c40e8a0ced1e3b30f624d1d58fcad3c5f10d428a41a58",
+      "raw_size": 48100
+    },
+    {
+      "path": "crates/game_core/src/co_op_loadout.rs",
+      "changed": true,
+      "git_lf_sha256": "13b360e880a52ec4e2f8b5ddb68fe2daa4a128d1c220f92409b0a9b4eb141666",
+      "git_lf_size": 8348,
+      "raw_sha256": "13b360e880a52ec4e2f8b5ddb68fe2daa4a128d1c220f92409b0a9b4eb141666",
+      "raw_size": 8348
+    },
+    {
+      "path": "crates/game_core/src/co_op_nova_tests.rs",
+      "changed": true,
+      "git_lf_sha256": "672d0efc10332bdec97e3bcb07eb7f5fe8f5c600090561a3a3094062a7cfe506",
+      "git_lf_size": 26543,
+      "raw_sha256": "672d0efc10332bdec97e3bcb07eb7f5fe8f5c600090561a3a3094062a7cfe506",
+      "raw_size": 26543
+    },
+    {
+      "path": "crates/game_core/src/lib.rs",
+      "changed": true,
+      "git_lf_sha256": "610fcc5eb36165e3fcecfe138419c62b1f3e42fd32c59cad8e7d63a90d380393",
+      "git_lf_size": 195203,
+      "raw_sha256": "0fe613299ed2e720c43d0799fe6e95205f91979f740f5d7d3881e926bba15983",
+      "raw_size": 200386
+    },
+    {
+      "path": "crates/game_core/src/abilities.rs",
+      "changed": false,
+      "git_lf_sha256": "394d8dcd566d4bbcf2a9d2dea7320512248dfc16b83fa3ee98d767849ba47509",
+      "git_lf_size": 14884,
+      "raw_sha256": "8f023ca505874d83f5764800ec09dd5cb5913e09fd74be0ab6423a7bd6eb6f4c",
+      "raw_size": 15353
+    },
+    {
+      "path": "crates/game_core/src/bosses.rs",
+      "changed": false,
+      "git_lf_sha256": "69194ae242129ccecef69ff3661369a784b12bd7fbcf60b64eda15b4642a4408",
+      "git_lf_size": 47224,
+      "raw_sha256": "f4ee90687a1a449a430b7a91f1375f1451322c0b16066a19a75ae0b1ed6dfc43",
+      "raw_size": 48440
+    },
+    {
+      "path": "crates/game_core/src/campaign.rs",
+      "changed": false,
+      "git_lf_sha256": "6a5d90403e42a936edaac37f2a5f5668f40a925116d94b54c499a7cd6899ca65",
+      "git_lf_size": 22135,
+      "raw_sha256": "08c2ddf555a871750d1b3415d6ab05a19362406dc3259ef3118b25c129822a92",
+      "raw_size": 22848
+    },
+    {
+      "path": "crates/game_core/src/ship_progression.rs",
+      "changed": false,
+      "git_lf_sha256": "451e4e17bc3de83b815200fefc433b3f9f594e6cea1d4eaca54f127ec199e458",
+      "git_lf_size": 24832,
+      "raw_sha256": "451e4e17bc3de83b815200fefc433b3f9f594e6cea1d4eaca54f127ec199e458",
+      "raw_size": 24832
+    },
+    {
+      "path": "crates/game_core/src/shield_progression.rs",
+      "changed": false,
+      "git_lf_sha256": "a308a0c46cbaa020bc0c998fa90be20276322b6912ef209df7d9bb89a93d97af",
+      "git_lf_size": 5281,
+      "raw_sha256": "0a38a560632be94813d27ca6eced7f9a9033fdfa3965e603047297fec69c2763",
+      "raw_size": 5431
+    },
+    {
+      "path": "crates/game_core/src/co_op_control.rs",
+      "changed": false,
+      "git_lf_sha256": "ba0d2b8c07206f23be6e05c038ba175e1b20034a83b80999b2983ea305625f0d",
+      "git_lf_size": 3994,
+      "raw_sha256": "ba0d2b8c07206f23be6e05c038ba175e1b20034a83b80999b2983ea305625f0d",
+      "raw_size": 3994
+    },
+    {
+      "path": "crates/game_core/src/co_op_publish.rs",
+      "changed": false,
+      "git_lf_sha256": "d6658330e942537435e668c05bad6089b6ec5570999b74f2d27c784c51862f3d",
+      "git_lf_size": 7851,
+      "raw_sha256": "6c21184ed46db90ce992a74fc2699f1356210d474aa77f152c837a983de2a676",
+      "raw_size": 8078
+    },
+    {
+      "path": "crates/game_core/src/co_op_replica.rs",
+      "changed": false,
+      "git_lf_sha256": "6c083cca3e89d78f3970f5f69cf4d865115a5abaaf50a5cb2edda4ba2ea076ff",
+      "git_lf_size": 44941,
+      "raw_sha256": "6c083cca3e89d78f3970f5f69cf4d865115a5abaaf50a5cb2edda4ba2ea076ff",
+      "raw_size": 44941
+    },
+    {
+      "path": "crates/engine_core/src/pixels.rs",
+      "changed": false,
+      "git_lf_sha256": "cb2a283d8798e3d705be859fbe0385981a1e9f4dd78c79a198e917ebd78bfa17",
+      "git_lf_size": 20423,
+      "raw_sha256": "46c69f3c9806fdcaeba02a8ecb9539c98d68861f10e23992f7876a6ce2247b6e",
+      "raw_size": 20968
+    },
+    {
+      "path": "crates/engine_core/src/frame.rs",
+      "changed": false,
+      "git_lf_sha256": "2afd79bb523dc0a57533ddaf1067ce2dd204823cb87f72e3ee7fc976a81969fc",
+      "git_lf_size": 25415,
+      "raw_sha256": "c4f521e031f8eb514236d142f0eb79b994a33edc030be534d1faf353097c3380",
+      "raw_size": 26160
+    }
+  ],
+  "evidence": [
+    {
+      "path": "check-observations.json",
+      "sha256": "61ae62240f0a9b8d52500b5bf845dbf2005ed9c99a85b974473684e6e80b6c1c",
+      "size": 309
+    },
+    {
+      "path": "clippy-final.log",
+      "sha256": "fc4728f6b9f5ab44c5d1fe95a75a2a0f692f56601296cd38b5c4aedf56d1bcb6",
+      "size": 191
+    },
+    {
+      "path": "clippy-first.log",
+      "sha256": "f4c837b6d761598b82a540298fbf3ad6f25feb10f83f3741f233876304ae58d8",
+      "size": 776
+    },
+    {
+      "path": "co-op-final.log",
+      "sha256": "c05ce3a6449c68fcd8c1f580c4830bb29cf1e2617aefd8301956134e40d71930",
+      "size": 11463
+    },
+    {
+      "path": "co-op-post-extraction-first.log",
+      "sha256": "8e7dfc6b5b9acb0eca03ea27ad5c34d1702bcf29dc0c24cb2f19a2c6d87f89c3",
+      "size": 12003
+    },
+    {
+      "path": "evolved-nova-loadout.json",
+      "sha256": "41b9caf535e0fbb0ec013fe1e32a8e3be3cc93b4bb8690bd5e8717767142380e",
+      "size": 219
+    },
+    {
+      "path": "fixture-provenance.json",
+      "sha256": "0229299520389709191661888a8064ffb7f60899f711b938fda980ddb92d8bc7",
+      "size": 1431
+    },
+    {
+      "path": "focused-final.log",
+      "sha256": "733c74d4f09850748a69b44c7e2f56bce1fc2a8c1775bfd8041117d9374eed2d",
+      "size": 2328
+    },
+    {
+      "path": "focused-first.log",
+      "sha256": "70642267125a1c35b4eb178b35e840fa565592f99a12050e8eff21520aeb3158",
+      "size": 3040
+    },
+    {
+      "path": "focused-second.log",
+      "sha256": "67d4b6bd32911581ba427972e5fc2258834917e98af268e363a49b2d70db529e",
+      "size": 2432
+    },
+    {
+      "path": "focused-third.log",
+      "sha256": "629925c4efa69a1cdca59fdf0958766893a3b0edf45240d824560a82ba5528a9",
+      "size": 2328
+    },
+    {
+      "path": "freeze.py",
+      "sha256": "3245a5c0159abb2f551325382861422c429b31ddb7745f80ef6bf94385ae3d95",
+      "size": 11674
+    },
+    {
+      "path": "HANDOFF.md",
+      "sha256": "7d395bb47a84a0dc14f5bfbce75691ddc1a5e7445c4c5aa679db3a51e4d24752",
+      "size": 7263
+    },
+    {
+      "path": "legacy-loadout.json",
+      "sha256": "da5b43e9f803abd1cc5bd190f24fa84649225b2c225c74ec9327be86a7bde87f",
+      "size": 184
+    },
+    {
+      "path": "nova-after-extraction.log",
+      "sha256": "843aa7e0696d5b6f3879f635c3a7fb7b61d130a33fd3345c682721ef0083764d",
+      "size": 3172
+    },
+    {
+      "path": "verify.py",
+      "sha256": "803c3fdc9a405b092bdd10eb1a64eca18cae27e516f64a51229a172857ec0e6e",
+      "size": 2028
+    }
+  ]
+}

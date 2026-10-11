@@ -1,0 +1,32 @@
+
+> galaxy-royale@0.1.0 build
+> node scripts/build.mjs
+
+   Compiling game_core v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\game_core)
+   Compiling game_web v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\game_web)
+    Finished `release` profile [optimized] target(s) in 11.85s
+   Compiling game_web v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\game_web)
+    Finished `release` profile [optimized] target(s) in 4.76s
+WASM builds: {
+  webgpu: '/wasm/webgpu-8b526758156c07afe3e410773559aff4cbe3ad215ab884630db4fc7210804180/galaxy.js',
+  webgl2: '/wasm/webgl2-2a6b6f8c5524df1e20fa9c144f063667aa73d359d1a7a372ced2c838363dab18/galaxy.js'
+}
+vite v7.3.7 building client environment for production...
+transforming...
+✓ 40 modules transformed.
+rendering chunks...
+computing gzip size...
+../../dist/index.html                  16.82 kB │ gzip:  3.74 kB
+../../dist/assets/index-DxwF0LEm.css   46.02 kB │ gzip:  8.65 kB
+../../dist/assets/index-COm1aR-P.js   222.52 kB │ gzip: 70.98 kB
+✓ built in 353ms
+PWA: 19 game assets cached under galaxy-60deef7552b700cf
+vite v7.3.7 building client environment for production...
+transforming...
+✓ 6 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                  0.42 kB │ gzip:  0.30 kB
+dist/assets/index-Crakh5IY.css  27.18 kB │ gzip:  7.20 kB
+dist/assets/index-Cx1OyMxB.js   29.92 kB │ gzip: 10.01 kB
+✓ built in 76ms
