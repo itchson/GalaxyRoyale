@@ -163,6 +163,26 @@ pub fn checkpoint_contract(stage: &str) -> Result<JsValue, JsValue> {
             .map_err(js)?;
         }
         "fresh" | "champion" | "tiered-cargo" | "loss-summary" => {}
+        "components-ready" | "components-crafted" | "components-upgraded" | "components-legacy" => {
+            // Supplied save fixture for contract/UI review; never awarded by gameplay.
+            profile =
+                game_core::identity::create_profile("dora", "pan", "renko", "0123456789abcdef")
+                    .map_err(js)?;
+            profile.onboarding = None;
+            profile.currency = [30; 3];
+            profile.campaign.ship_xp[0] = 200;
+            profile.campaign.stored_materials = [10; 5];
+            for state in &mut profile.campaign.abilities[..3] {
+                state.blueprint = true;
+                state.rank = 2;
+            }
+            if stage == "components-legacy" {
+                let mut value = serde_json::to_value(&profile).map_err(js)?;
+                value["schema_version"] = serde_json::json!(6);
+                value["campaign"]["components"] = serde_json::json!("ignored legacy injection");
+                profile = serde_json::from_value(value).map_err(js)?;
+            }
+        }
         "generations" => {
             // Valid saved credit with both higher-tier queues and reserved base credit.
             let mut value = serde_json::to_value(&profile).map_err(js)?;
@@ -233,6 +253,23 @@ pub fn checkpoint_contract(stage: &str) -> Result<JsValue, JsValue> {
         _ => return Err(js("Unknown checkpoint contract stage")),
     }
     let mut game = Game::new(profile);
+    if matches!(stage, "components-crafted" | "components-upgraded") {
+        for id in ["pulse-conductor", "aegis-lattice", "flux-bearing"] {
+            game.craft_component(id).map_err(js)?;
+        }
+        if stage == "components-upgraded" {
+            for id in ["pulse-lens", "guard-coil", "flux-drive"] {
+                game.upgrade_ability(id).map_err(js)?;
+            }
+            let before = serde_json::to_value(game.profile()).map_err(js)?;
+            if game.craft_component("invalid").is_ok()
+                || game.upgrade_ability("pulse-lens").is_ok()
+                || serde_json::to_value(game.profile()).map_err(js)? != before
+            {
+                return Err(js("Failed component transaction changed progression"));
+            }
+        }
+    }
     if stage.starts_with("training-") && stage.ends_with("-upgraded") {
         let key = match stage.split('-').nth(1) {
             Some("pan") => "flux-drive",
@@ -385,7 +422,27 @@ impl Galaxy {
             .advance(&hud, delta, self.reduced_motion);
         let render_start = now();
         let alpha = self.accumulator * 60.0;
-        self.game.render_into(alpha, &mut self.frame);
+        let corporation = self
+            .game
+            .profile()
+            .identity
+            .as_ref()
+            .map(|id| id.corporation);
+        let reduced_motion = self.reduced_motion;
+        self.game
+            .render_into_with_home(alpha, &mut self.frame, |frame, parent, time| {
+                crate::dock_art::append(
+                    frame,
+                    &crate::dock_art::DockInput {
+                        parent,
+                        corporation,
+                        time,
+                        reduced_motion,
+                    },
+                    &mut crate::dock_art::DockBudget::default(),
+                )
+                .is_some()
+            });
         self.ui_frame.clear();
         hud.camera = self.game.render_camera(alpha);
         let amount = if self.shake && !self.reduced_motion {
@@ -692,6 +749,9 @@ impl Galaxy {
     /// Craft into the shared dock inventory; this does not change any loadout.
     pub fn craft_ability(&mut self, id: &str) -> Result<(), JsValue> {
         self.game.craft_ability(id).map_err(js)
+    }
+    pub fn craft_component(&mut self, id: &str) -> Result<(), JsValue> {
+        self.game.craft_component(id).map_err(js)
     }
     pub fn upgrade_ability(&mut self, id: &str) -> Result<(), JsValue> {
         self.game.upgrade_ability(id).map_err(js)

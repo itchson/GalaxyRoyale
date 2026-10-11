@@ -119,6 +119,22 @@ const stages = {
     boss_kills: [0, 0, 0],
     boss_generations: zeroGenerations(),
   },
+  "components-ready": {
+    currency: [30, 30, 30],
+    campaign: { components: [0, 0, 0], stored_materials: [10, 10, 10, 10, 10] },
+  },
+  "components-crafted": {
+    currency: [30, 30, 30],
+    campaign: { components: [1, 1, 1], stored_materials: [4, 7, 10, 10, 10] },
+  },
+  "components-upgraded": {
+    currency: [20, 20, 20],
+    campaign: { components: [0, 0, 0], stored_materials: [4, 7, 4, 10, 10] },
+  },
+  "components-legacy": {
+    currency: [30, 30, 30],
+    campaign: { components: [0, 0, 0], stored_materials: [10, 10, 10, 10, 10] },
+  },
   champion: {
     currency: [0, 0, 0],
     boss_kills: [0, 0, 0],
@@ -195,7 +211,7 @@ function run(command, args) {
 async function checkpoint(module, stage, backend) {
   const profile = module.checkpoint_contract(stage);
   const expected = stages[stage];
-  assert.equal(profile.schema_version, 6);
+  assert.equal(profile.schema_version, 7);
   assert.ok(
     Object.hasOwn(profile, "identity") && Object.hasOwn(profile, "onboarding"),
   );
@@ -275,6 +291,19 @@ async function checkpoint(module, stage, backend) {
       "QA diagnostic must not award champion ownership",
     );
   assert.equal(profile.campaign.abilities.length, 17);
+  assert.equal(profile.campaign.components.length, 3);
+  assert.ok(
+    profile.campaign.components.every(
+      (n) => Number.isInteger(n) && n >= 0 && n <= 99,
+    ),
+  );
+  if (stage.startsWith("components-")) {
+    assert.deepEqual(
+      profile.campaign.abilities.slice(0, 3).map((a) => a.rank),
+      stage === "components-upgraded" ? [3, 3, 3] : [2, 2, 2],
+    );
+    assert.equal(profile.campaign.ship_xp[0], 200);
+  }
   assert.equal(profile.campaign.loadouts.length, 10);
   const selected = profile.campaign.loadouts[profile.campaign.selected_ship];
   assert.deepEqual(

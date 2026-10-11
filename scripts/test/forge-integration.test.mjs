@@ -125,6 +125,7 @@ function initialHud() {
       credits_pending: false,
     },
     loadout: [null, null, null],
+    components: [],
     abilities: [0, 1, 2].map((category) => ({
       id: ["pulse-lens", "guard-coil", "flux-drive"][category],
       index: category,
@@ -348,6 +349,7 @@ function fixture() {
   for (const method of [
     "purchase",
     "craft_ability",
+    "craft_component",
     "upgrade_ability",
     "equip_ability",
     "craft_ship",
@@ -390,6 +392,7 @@ test("Forge forwards exact craft/upgrade/equip/empty/hardware arguments, refresh
   const operations = [
     ["purchase", ["rate"], "RAICHO HARDWARE UPGRADED"],
     ["craftAbility", ["pulse-lens"], "ABILITY CRAFTED"],
+    ["craftComponent", ["pulse-conductor"], "COMPONENT STORED AT HAVEN"],
     ["upgradeAbility", ["pulse-lens"], "ABILITY UPGRADED"],
     ["equipAbility", [0, "pulse-lens"], "ABILITY EQUIPPED"],
     ["equipAbility", [2, null], "ABILITY SLOT EMPTY"],
@@ -397,6 +400,7 @@ test("Forge forwards exact craft/upgrade/equip/empty/hardware arguments, refresh
   const methods = {
     purchase: "purchase",
     craftAbility: "craft_ability",
+    craftComponent: "craft_component",
     upgradeAbility: "upgrade_ability",
     equipAbility: "equip_ability",
   };

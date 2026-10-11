@@ -31,6 +31,25 @@ export interface AbilityHud extends EquippedAbilityHud {
     name: string;
     amount: number;
   } | null;
+  required_component: {
+    id: string;
+    name: string;
+    amount: number;
+    owned: number;
+  } | null;
+}
+export interface ComponentHud {
+  id: string;
+  index: number;
+  name: string;
+  category: number;
+  description: string;
+  count: number;
+  max_count: number;
+  required_level: number;
+  materials: number[];
+  can_craft: boolean;
+  craft_reason: string;
 }
 export interface HardwareHud {
   id: string;
@@ -86,12 +105,14 @@ export interface ForgeHud extends ShipHangarHud {
   ship_next_xp: number;
   rank_cap: number;
   abilities: AbilityHud[];
+  components: ComponentHud[];
   loadout: (EquippedAbilityHud | null)[];
   upgrades: HardwareHud[];
 }
 export interface ForgeActions {
   purchase: (id: string) => void;
   craftAbility: (id: string) => void;
+  craftComponent: (id: string) => void;
   upgradeAbility: (id: string) => void;
   equipAbility: (category: number, id: string | null) => void;
   busy?: boolean;
@@ -108,6 +129,7 @@ interface ForgeView {
   category: number | null;
   ship: number;
   collection: boolean;
+  workshop: boolean;
   filter: AbilityFilter;
 }
 type HullFilter = "all" | "owned" | "blueprint";
@@ -189,6 +211,7 @@ function recipe(
   materialCost: number,
   hud: ShipHangarHud,
   named?: AbilityHud["required_training_material"],
+  component?: AbilityHud["required_component"],
 ): HTMLElement {
   const box = section("loadout-recipe");
   if (named) {
@@ -217,6 +240,13 @@ function recipe(
       `T${materialTier} MATERIALS ${materialCost} / BANKED ${hud.material_stash[materialTier - 1] ?? 0}`,
     ),
   );
+  if (component)
+    box.append(
+      text(
+        "p",
+        `${component.name.toUpperCase()} ${component.amount} / BANKED ${component.owned}`,
+      ),
+    );
   return box;
 }
 function restore(
@@ -262,6 +292,7 @@ export function paintForge(
           category: null,
           ship: hud.campaign.selected_ship,
           collection: false,
+          workshop: false,
           filter: "all",
         };
   views.set(target, view);
@@ -290,13 +321,89 @@ export function paintForge(
     collection = category !== null,
   ) => {
     const previousScroll =
-      view.collection === collection ? target.scrollTop : 0;
+      !view.workshop && view.collection === collection ? target.scrollTop : 0;
     view.category = category;
     view.collection = collection;
+    view.workshop = false;
     paintForge(target, hud, actions);
     restore(target, nextFocus, previousScroll);
   };
-  if (view.collection) {
+  const workshopButton = () =>
+    button("CRAFT COMPONENTS", "browse-components", () => {
+      view.workshop = true;
+      paintForge(target, hud, actions);
+      restore(target, "components-back", 0);
+    });
+  if (view.workshop) {
+    const heading = section("loadout-editor-heading");
+    heading.append(
+      button("BACK TO LOADOUT", "components-back", () =>
+        navigate(null, "browse-components"),
+      ),
+      text("h3", "COMPONENT WORKSHOP"),
+    );
+    root.append(
+      heading,
+      shipSummary,
+      text(
+        "p",
+        "Crafted parts stay at Haven. Use them for advanced ability upgrades.",
+        "loadout-note",
+      ),
+    );
+    for (const component of hud.components) {
+      const card = section("component-card");
+      const header = section("component-heading");
+      const icon = section("component-icon");
+      icon.dataset.pixelKind = "craft-component";
+      icon.dataset.pixelValue = String(component.index);
+      icon.setAttribute("aria-hidden", "true");
+      const label = section("loadout-card-content");
+      label.append(
+        text("h3", component.name),
+        text(
+          "p",
+          `${["RENKO", "HUGO", "PAN"][component.category]} / ${categories[component.category]}`,
+        ),
+      );
+      header.append(icon, label);
+      card.append(
+        header,
+        text("p", component.description),
+        text(
+          "p",
+          `BANKED ${component.count}/${component.max_count} / REQUIRES RAICHO LV ${component.required_level}`,
+        ),
+      );
+      const costs = section("loadout-recipe");
+      component.materials.forEach((amount, tier) => {
+        if (amount > 0)
+          costs.append(
+            text(
+              "p",
+              `T${tier + 1} MATERIALS ${amount} / BANKED ${hud.material_stash[tier] ?? 0}`,
+            ),
+          );
+      });
+      card.append(costs);
+      if (component.craft_reason)
+        card.append(text("p", component.craft_reason, "loadout-reason"));
+      card.append(
+        button(
+          "CRAFT ONE",
+          `component-${component.id}`,
+          () => actions.craftComponent(component.id),
+          !component.can_craft || actions.busy,
+          component.category,
+        ),
+      );
+      root.append(card);
+    }
+    if (!hud.components.length)
+      root.append(
+        text("p", "No component recipes discovered.", "loadout-note"),
+      );
+  } else if (view.collection) {
     const editorHeading = section("loadout-editor-heading");
     const back = button("BACK TO LOADOUT", "back", () =>
       navigate(
@@ -307,6 +414,7 @@ export function paintForge(
     back.classList.add("loadout-back");
     editorHeading.append(back, text("h3", "ABILITY COLLECTION"));
     root.append(editorHeading, shipSummary);
+    if (hud.components.length) root.append(workshopButton());
     root.append(
       text(
         "p",
@@ -459,6 +567,7 @@ export function paintForge(
               ability.material_cost,
               hud,
               ability.required_training_material,
+              ability.required_component,
             ),
           );
           if (ability.upgrade_reason)
@@ -510,6 +619,7 @@ export function paintForge(
         navigate(null, "back", true),
       ),
     );
+    if (hud.components.length) root.append(workshopButton());
     if (!hud.dock)
       root.append(
         text(

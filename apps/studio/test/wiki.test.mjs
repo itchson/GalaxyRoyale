@@ -88,7 +88,7 @@ async function fixture(t) {
 }
 test("actual catalog categories, references and classified media all validate and resolve", async () => {
   assert.equal(validateCatalog(catalog), catalog);
-  assert.equal(catalog.entries.length, 37);
+  assert.equal(catalog.entries.length, 38);
   const wiki = new WikiStore(workspace);
   for (const entry of catalog.entries) {
     assert.ok(entry.references.length > 0, entry.id);

@@ -20,6 +20,7 @@
 }
 .loadout-summary,
 .ability-card,
+.component-card,
 .hardware-card,
 .ship-hangar-card {
   min-width: 0;
@@ -123,10 +124,22 @@
   color: #7891a5;
 }
 .ability-card,
+.component-card,
 .hardware-card {
   display: flex;
   flex-direction: column;
   gap: calc(3px * var(--ui-scale, 1));
+}
+.component-heading {
+  display: flex;
+  align-items: center;
+  gap: calc(6px * var(--ui-scale, 1));
+  min-width: 0;
+}
+.component-icon {
+  width: 48px;
+  height: 48px;
+  flex: 0 0 auto;
 }
 .ability-card[data-equipped="true"] {
   border-color: var(--cyan);

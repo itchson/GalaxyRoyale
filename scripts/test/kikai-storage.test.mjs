@@ -61,7 +61,7 @@ test("schema4 upgrades preserve actual progress without a license or starter gra
   p.campaign.ship_xp[0] = 120;
   p.campaign.stored_materials[0] = 7;
   const migrated = normalizeProfile(p);
-  assert.equal(migrated.schema_version, 6);
+  assert.equal(migrated.schema_version, 7);
   assert.equal(migrated.identity, null);
   assert.equal(migrated.onboarding, null);
   assert.deepEqual(migrated.campaign, p.campaign);
@@ -170,7 +170,7 @@ test("schema6 barrier waits for cached schema5 connection and rejects its subseq
   cached.close();
   const migrated = await load;
   assert.equal(migrated.identity, null);
-  assert.equal(current.db.version, 4);
+  assert.equal(current.db.version, 5);
   await assert.rejects(request(indexedDB.open("galaxy-royale", 3)), /version/i);
 });
 

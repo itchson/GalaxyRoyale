@@ -1159,6 +1159,9 @@ impl Painter<'_> {
             game_core::identity::Corporation::Hugo,
         ][selection(node.value, 3)];
         let body = game_core::identity::starter_body(corporation);
+        self.fitted_body(node, body);
+    }
+    fn fitted_body(&mut self, node: &UiNode, body: &PixelBody) {
         let count = body.occupied_count();
         let r = node.rect;
         let scale = (r[2] / body.width as f32).min(r[3] / body.height as f32);
@@ -1654,6 +1657,15 @@ impl Painter<'_> {
             "console-panel" => self.console_panel(r),
             "portrait" => self.portrait(node, time, reduced),
             "licensed-ship" => self.licensed_ship(node),
+            "craft-component" => {
+                if node.value.is_finite()
+                    && node.value.fract() == 0.0
+                    && node.value >= 0.0
+                    && let Some(body) = component_art::body(node.value as usize)
+                {
+                    self.fitted_body(node, body);
+                }
+            }
             "campaign-patch" => self.campaign(node, false, time, reduced),
             "campaign-ship" => self.campaign(node, true, time, reduced),
             "close-icon" | "save-icon" | "settings-icon" | "resume-icon" | "restart-icon"
@@ -2086,6 +2098,96 @@ mod tests {
                     assert!(p.x >= 5.0 && p.x < 65.0 && p.y >= 9.0 && p.y < 79.0);
                 }
             }
+        }
+    }
+    #[test]
+    fn component_icons_keep_source_detail_at_fractional_fit_and_clip_whole_cells() {
+        for category in 0..3 {
+            for extent in [17.25, 48.0, 73.5] {
+                for clipped in [false, true] {
+                    let mut input = scene("craft-component");
+                    let node = &mut input.groups[0].nodes[0];
+                    node.value = category as f32;
+                    node.rect = [5.25, 9.5, extent, extent];
+                    let clip = [5.25, 9.5, extent * 0.6, extent];
+                    node.clip = clipped.then_some(clip);
+                    let mut frame = FrameBuilder::new();
+                    draw(&mut frame, &input, [0.0; 2], [640.0, 360.0], 1.5, false);
+                    let full = component_art::body(category).unwrap().occupied_count();
+                    assert!(frame.frame().pixel_count > 0);
+                    assert_eq!(frame.frame().pixel_count, full);
+                    let visible = frame
+                        .frame()
+                        .batches
+                        .iter()
+                        .flat_map(|b| &b.pixels)
+                        .filter(|p| p.color >> 24 != 0)
+                        .count();
+                    if clipped {
+                        assert!(visible > 0 && visible < full);
+                    } else {
+                        assert_eq!(visible, full);
+                    }
+                    for batch in &frame.frame().batches {
+                        for pixel in &batch.pixels {
+                            if pixel.color >> 24 == 0 {
+                                continue;
+                            }
+                            let t = batch.transforms[pixel.transform as usize];
+                            assert_eq!(t.a[2], extent / 64.0);
+                            assert_eq!(t.b[1], extent / 64.0);
+                            assert_eq!(t.b[2..], [0.0, 0.0]);
+                            let p =
+                                t.point(Vec2::from_array(pixel.local)) + Vec2::new(220.0, 130.0);
+                            let half = extent / 128.0;
+                            let bounds = if clipped {
+                                clip
+                            } else {
+                                [5.25, 9.5, extent, extent]
+                            };
+                            assert!(
+                                p.x - half >= bounds[0] - 0.0001
+                                    && p.y - half >= bounds[1] - 0.0001
+                            );
+                            assert!(
+                                p.x + half <= bounds[0] + bounds[2] + 0.0001
+                                    && p.y + half <= bounds[1] + bounds[3] + 0.0001
+                            );
+                        }
+                    }
+                }
+            }
+        }
+    }
+    #[test]
+    fn component_icon_rejects_invalid_ids_and_preserves_each_shared_budget() {
+        for value in [-1.0, 1.5, 3.0, f32::NAN, f32::INFINITY, 1e20] {
+            let mut input = scene("craft-component");
+            input.groups[0].nodes[0].value = value;
+            let mut frame = FrameBuilder::new();
+            draw(&mut frame, &input, [0.0; 2], [640.0, 360.0], 0.0, true);
+            assert_eq!(frame.frame().pixel_count, 0);
+        }
+        let input = scene("craft-component");
+        let count = component_art::body(0).unwrap().occupied_count();
+        for (pixels, work, expected) in [
+            (count - 1, count, 0),
+            (count, count - 1, 0),
+            (count, count, count),
+        ] {
+            let mut frame = FrameBuilder::new();
+            let mut painter = Painter {
+                frame: &mut frame,
+                parent: AffineTransform::default(),
+                remaining: pixels,
+                viewport: Vec2::new(640.0, 360.0),
+                clip: None,
+                work_remaining: work,
+            };
+            painter.node(&input.groups[0].nodes[0], 0.0, true);
+            assert_eq!(painter.frame.frame().pixel_count, expected);
+            assert_eq!(painter.remaining, pixels - expected);
+            assert_eq!(painter.work_remaining, work - expected);
         }
     }
     #[test]

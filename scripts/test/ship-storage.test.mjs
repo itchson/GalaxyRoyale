@@ -104,7 +104,7 @@ test("schema-five migration waits for a real old database connection and prevent
   old.close();
   const loaded = await loading;
   assert.deepEqual(loaded, normalizeProfile(baseline));
-  assert.equal(store.db.version, 4);
+  assert.equal(store.db.version, 5);
   assert.deepEqual(loaded.campaign.stored_materials, [16, 0, 0, 0, 0]);
   await assert.rejects(request(indexedDB.open("galaxy-royale", 1)), /version/i);
   assert.deepEqual(
@@ -129,7 +129,7 @@ test("an actual version-change event closes obsolete connections and rejects que
     queued,
     (error) => error instanceof SaveConflict,
   );
-  const next = await request(indexedDB.open("galaxy-royale", 5));
+  const next = await request(indexedDB.open("galaxy-royale", 6));
   t.after(() => next.close());
   release();
   await rejection;

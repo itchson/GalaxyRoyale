@@ -143,10 +143,13 @@ test("boss generations, ship-level gates, save schema and pixel packing facts re
   assert.deepEqual(data("ship-levels").rankGates, [1, 3, 5, 8, 12]);
   assert.match(campaign, /let mut remaining = 16/);
   const lib = await source("crates/game_core/src/lib.rs");
+  const components = await source("crates/game_core/src/components.rs");
+  assert.match(lib, /schema_version: components::SCHEMA_VERSION/);
   assert.equal(
     data("cargo").schemaVersion,
-    Number(/schema_version: (\d+),/.exec(lib)[1]),
+    Number(/SCHEMA_VERSION: u32 = (\d+);/.exec(components)[1]),
   );
+  assert.equal(data("ability-components").maxCount, Number(/MAX_COUNT: u32 = (\d+);/.exec(components)[1]));
   assert.equal(
     data("sanctuaries").havenSafeRadius,
     Number(/SAFE_RADIUS: f32 = ([\d.]+)/.exec(lib)[1]),

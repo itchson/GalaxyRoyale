@@ -132,6 +132,7 @@ interface GalaxyRuntime {
   profile(): Profile;
   purchase(id: string): void;
   craft_ability(id: string): void;
+  craft_component(id: string): void;
   upgrade_ability(id: string): void;
   equip_ability(slot: number, id: string | null): void;
   resize(width: number, height: number): void;
@@ -1192,6 +1193,11 @@ function paintUpgrades(_dock: boolean): void {
       forgeMutation(
         () => galaxy.craft_ability(id),
         "ABILITY CRAFTED / choose EQUIP to install it",
+      ),
+    craftComponent: (id) =>
+      forgeMutation(
+        () => galaxy.craft_component(id),
+        "COMPONENT STORED AT HAVEN",
       ),
     upgradeAbility: (id) =>
       forgeMutation(() => galaxy.upgrade_ability(id), "ABILITY UPGRADED"),

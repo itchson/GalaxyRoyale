@@ -73,6 +73,7 @@ function fixture() {
   const actions = {
     purchase: (id) => calls.push(["purchase", id]),
     craftAbility: (id) => calls.push(["craft", id]),
+    craftComponent: (id) => calls.push(["component", id]),
     upgradeAbility: (id) => calls.push(["upgrade", id]),
     equipAbility: (slot, id) => calls.push(["equip", slot, id]),
   };
@@ -161,6 +162,7 @@ function hud() {
     ship_next_xp: 120,
     rank_cap: 2,
     abilities: [ability(0, 0), ability(1, 1), ability(2, 2)],
+    components: [],
     loadout: [null, null, null],
     upgrades: Array.from({ length: 6 }, (_, index) => ({
       id: `hardware-${index}`,
@@ -220,6 +222,85 @@ test("first-upgrade recipe shows the actual named banked subset and calls the or
   f.exports.paintForge(f.target, data, f.actions);
   f.find("upgrade-ability-0").events.click();
   assert.deepEqual(f.calls, [["upgrade", "ability-0"]]);
+});
+
+test("component workshop reveals only discovered recipes and delegates exact authoritative actions", () => {
+  const f = fixture(),
+    data = hud();
+  f.exports.paintForge(f.target, data, f.actions);
+  assert.equal(f.find("browse-components"), undefined);
+  data.components = [
+    {
+      id: "pulse-conductor",
+      index: 0,
+      name: "Pulse Conductor",
+      category: 0,
+      description: "Stabilizes advanced offensive abilities.",
+      count: 2,
+      max_count: 99,
+      required_level: 3,
+      materials: [2, 1, 0, 0, 0],
+      can_craft: false,
+      craft_reason: "Return to Haven.",
+    },
+  ];
+  f.exports.paintForge(f.target, data, f.actions);
+  f.find("browse-components").events.click();
+  assert.equal(f.target.scrollTop, 0);
+  assert.equal(f.document.activeElement, f.find("components-back"));
+  assert.match(allText(f.target), /BANKED 2\/99/);
+  assert.match(allText(f.target), /T1 MATERIALS 2 \/ BANKED 10/);
+  assert.match(allText(f.target), /T2 MATERIALS 1 \/ BANKED 2/);
+  assert.doesNotMatch(allText(f.target), /Aegis Lattice|Flux Bearing|POINTS/);
+  assert.equal(
+    flatten(f.target).filter((n) => n.dataset.pixelKind === "craft-component")
+      .length,
+    1,
+  );
+  f.find("component-pulse-conductor").events.click();
+  assert.deepEqual(f.calls, []);
+  data.components[0].can_craft = true;
+  data.components[0].craft_reason = "";
+  f.exports.paintForge(f.target, data, f.actions);
+  f.find("component-pulse-conductor").focus();
+  f.target.scrollTop = 21;
+  f.find("component-pulse-conductor").events.click();
+  assert.deepEqual(f.calls, [["component", "pulse-conductor"]]);
+  data.components[0].count = 3;
+  f.exports.paintForge(f.target, data, f.actions);
+  assert.equal(f.document.activeElement, f.find("component-pulse-conductor"));
+  assert.equal(f.target.scrollTop, 21);
+  assert.match(allText(f.target), /BANKED 3\/99/);
+  f.exports.paintForge(f.target, data, { ...f.actions, busy: true });
+  assert.equal(f.find("component-pulse-conductor").disabled, true);
+  f.find("components-back").events.click();
+  assert.equal(f.document.activeElement, f.find("browse-components"));
+});
+
+test("advanced ability recipes include banked crafted components without changing starter training", () => {
+  const f = fixture(),
+    data = hud();
+  Object.assign(data.abilities[0], {
+    owned: true,
+    rank: 2,
+    point_cost: 10,
+    material_tier: 3,
+    material_cost: 2,
+    required_component: {
+      id: "pulse-conductor",
+      name: "Pulse Conductor",
+      amount: 1,
+      owned: 0,
+    },
+    can_upgrade: false,
+    upgrade_reason: "Craft 1 Pulse Conductor.",
+  });
+  f.exports.paintForge(f.target, data, f.actions);
+  f.find("manage-0").events.click();
+  assert.match(allText(f.target), /RENKO POINTS 10 \/ HAVE 3/);
+  assert.match(allText(f.target), /T3 MATERIALS 2 \/ BANKED 0/);
+  assert.match(allText(f.target), /PULSE CONDUCTOR 1 \/ BANKED 0/);
+  assert.equal(f.find("upgrade-ability-0").disabled, true);
 });
 
 test("Forge separates three automatic slots and six ship hardware actions", () => {

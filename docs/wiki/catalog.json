@@ -50,7 +50,7 @@
         },
         {
           "label": "Save",
-          "value": "Profile schema 6; Kikai identity, per-RAICHO XP and loadouts"
+          "value": "Profile schema 7; Kikai identity, per-RAICHO XP and loadouts"
         },
         {
           "label": "Production",
@@ -2276,14 +2276,14 @@
         },
         {
           "label": "Profile",
-          "value": "Schema 6; five-tier stock with named T1 subsets"
+          "value": "Schema 7; five-tier stock with named T1 subsets"
         }
       ],
       "sections": [
         {
           "title": "Behavior and scope",
           "paragraphs": [
-            "Five-tier cargo and stored arrays are authoritative. Schema 4 introduced material abandonment on reload, retained in the current schema 6, rather than teleporting abandoned cargo into a bank. Legacy v3 scalar material state is grandfathered into T1 stash once. Normal save normalization preserves current cargo until the actual lifecycle event.",
+            "Five-tier cargo and stored arrays are authoritative. Schema 4 introduced material abandonment on reload, retained in the current schema 7, rather than teleporting abandoned cargo into a bank. Legacy v3 scalar material state is grandfathered into T1 stash once. Normal save normalization preserves current cargo until the actual lifecycle event.",
             "Points, earned RAICHO XP, crafted inventory, loadouts and completed progression remain retained on death. Last recorded expedition is a historical report: an unplayed forced diagnostic death may leave the previous report rather than invent a new run."
           ]
         },
@@ -2330,7 +2330,7 @@
       ],
       "media": [],
       "data": {
-        "schemaVersion": 6,
+        "schemaVersion": 7,
         "materialTiers": 5,
         "cargoCapacity": 16
       }
@@ -3022,6 +3022,13 @@
             "Art contact sheets are inspection images. Runtime body atlases are palette-index arrays expanded to occupied PixelBodies; preview PNGs are not game textures. Original campaign, boss, Riveter, Mote and Scar cell art have source/provenance records. The base and title/UI atlas includes generated concept material converted to palette cells; its provenance remains distinct from authored cell geometry.",
             "Gas and fire use fractional local quads under parent layers; explicit engine/impact/projectile light sources remain bounded. Distant physical scales stay independent. The full-resolution world path improves available raster detail, but tiny projected cells still depend on zoom, backing resolution and actual hardware."
           ]
+        },
+        {
+          "title": "Approved collectible visual direction",
+          "paragraphs": [
+            "On 11 October 2026 the user approved the detailed PAN MEISHI concept as the game art style: expressive high-detail KIKAI portraits, layered platinum and graphite construction, green PAN enamel, dark space and recessed patch sockets. Main manufacturer colors remain PAN green, RENKO red and HUGO blue; horns follow the sub-manufacturer.",
+            "This establishes the target visual direction. Generated lettering, balances and slogans are reference-only. Native artwork is assessed separately for fidelity at its actual display size, restrained animation, coherent transforms and bounded rendering cost."
+          ]
         }
       ],
       "references": [
@@ -3049,6 +3056,11 @@
           "path": "assets/pixels/isotope-scar-provenance.json",
           "label": "isotope-scar-provenance.json",
           "role": "asset provenance"
+        },
+        {
+          "path": "docs/APPROVED_VISUAL_DIRECTION.md",
+          "label": "User-approved visual direction",
+          "role": "style target and native fidelity checks"
         }
       ],
       "related": [
@@ -3062,6 +3074,13 @@
           "kind": "converted-concept",
           "provenance": "assets/ui/provenance.json",
           "caption": "Generated source components converted to runtime palette cells. An atlas preview, not a gameplay screenshot."
+        },
+        {
+          "path": "artifacts/concepts/meishi-collectible-20261011/pan-collectible-reference.png",
+          "label": "User-approved PAN MEISHI style reference",
+          "kind": "concept",
+          "provenance": "artifacts/concepts/meishi-collectible-20261011/provenance.json",
+          "caption": "User-approved visual direction. Generated text and values are placeholders; this is a concept image, not a runtime screenshot."
         }
       ]
     },
@@ -3587,6 +3606,88 @@
         "dora"
       ],
       "media": []
+    },
+    {
+      "id": "ability-components",
+      "title": "Crafted ability components",
+      "category": "ships",
+      "status": "implemented",
+      "summary": "Three dock-stored parts support advanced ability ranks; the first training recipe is unchanged.",
+      "tags": [
+        "crafting",
+        "abilities",
+        "schema7"
+      ],
+      "facts": [
+        {
+          "label": "RENKO / Offensive",
+          "value": "Pulse Conductor"
+        },
+        {
+          "label": "HUGO / Defensive",
+          "value": "Aegis Lattice"
+        },
+        {
+          "label": "PAN / Passive",
+          "value": "Flux Bearing"
+        },
+        {
+          "label": "Craft recipe",
+          "value": "2 banked T1 + 1 banked T2; active RAICHO LV 3"
+        },
+        {
+          "label": "Capacity",
+          "value": "99 of each component, retained at Haven"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Discovery and upgrades",
+          "paragraphs": [
+            "The matching recipe appears when an ordinary ability reaches rank 2, a matching advanced blueprint is known, or a component is already owned. Unknown recipes are omitted from the game workshop.",
+            "Ranks 3, 4 and 5 of ordinary abilities consume 1, 2 and 3 matching crafted components in addition to the existing matching corporation points and raw tier recipe. Level, compatibility and all balances are checked before anything is spent. Royal abilities and the first training upgrade keep their own rules."
+          ]
+        },
+        {
+          "title": "Persistence and verification",
+          "paragraphs": [
+            "Schema 7 stores three bounded component counts separately from carried cargo. Components survive death. Older snapshots migrate to zero components without altering earned ranks, points or training. Malformed current-format counts are rejected so the previous valid snapshot can be recovered.",
+            "The workshop uses the authoritative Rust HUD and actions, with native 64-by-64 component artwork. The scoped integration evidence records actual tests and browser observations; this is not a claim of full natural progression, physical-phone validation or multiplayer."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "path": "crates/game_core/src/components.rs",
+          "label": "Component definitions and transactions",
+          "role": "implementation"
+        },
+        {
+          "path": "docs/ABILITY_COMPONENTS.md",
+          "label": "Component recipe contract",
+          "role": "documentation"
+        },
+        {
+          "path": "apps/game/src/loadout.ts",
+          "label": "Workshop presentation",
+          "role": "implementation"
+        }
+      ],
+      "related": [
+        "pixel-engine"
+      ],
+      "media": [],
+      "data": {
+        "maxCount": 99,
+        "requiredLevel": 3,
+        "materials": [
+          2,
+          1,
+          0,
+          0,
+          0
+        ]
+      }
     }
   ]
 }
