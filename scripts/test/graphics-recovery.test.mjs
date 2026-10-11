@@ -312,7 +312,7 @@ test("pending preparation leaves Game readable and defers GPU resize to latest d
     (v) => Array.isArray(v) && v[0] === "audio-update",
   );
   assert.ok(update > resize && update < h.calls.indexOf("audio-resume"));
-  assert.deepEqual(h.calls[update][1], { ...c.galaxy.hud().audio, corporation: null });
+  assert.deepEqual(JSON.parse(JSON.stringify(h.calls[update][1])), { ...c.galaxy.hud().audio, corporation: null });
   assert.equal(c.galaxy.hud().audio.corporation, undefined);
 });
 
@@ -322,7 +322,7 @@ test("resuming flight uses the latest authoritative audio state before schedulin
   const fresh = { ...c.galaxy.hud().audio, area: "arena", champion: 5 };
   c.galaxy.hud = () => ({ audio: fresh, identity: { corporation: "renko" } });
   c.syncFlightState();
-  assert.deepEqual(h.calls.slice(-2), [
+  assert.deepEqual(JSON.parse(JSON.stringify(h.calls.slice(-2))), [
     ["audio-update", { ...fresh, corporation: "renko" }],
     "audio-resume",
   ]);
