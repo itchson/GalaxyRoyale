@@ -30,10 +30,39 @@ export async function acquireGameLease(port = GAME_LEASE_PORT) {
 
 export function singleGameRuntime() {
   async function reserve(server) {
-    const lease = await acquireGameLease();
-    const release = () => { void lease.close().catch(error => console.error('Game runtime cleanup:', error.message)); };
-    server.httpServer.once('close', release);
-    server.httpServer.once('error', release);
+    const release = await retainProcessLease();
+    const onClose = () => { void release().catch(error => console.error('Game runtime cleanup:', error.message)); };
+    server.httpServer.once('close', onClose);
+    server.httpServer.once('error', onClose);
+    // Vite creates its replacement before closing the old server. References
+    // share the same process lease across config rebundles during that handoff.
+    // A never-listened dev server also needs explicit cleanup (no HTTP close).
+    if (typeof server.close === 'function') {
+      const close = server.close.bind(server);
+      server.close = async (...args) => { try { return await close(...args); } finally { await release(); } };
+    }
   }
   return { name: 'galaxy-single-game-runtime', configureServer: reserve, configurePreviewServer: reserve };
+}
+
+async function retainProcessLease() {
+  const key = Symbol.for('galaxy-royale.game-runtime-lease.v1');
+  const state = globalThis[key] ??= { owners: new Set(), opening: null, closing: null };
+  while (state.closing) await state.closing;
+  const owner = Symbol();
+  state.owners.add(owner);
+  state.opening ??= acquireGameLease();
+  let lease;
+  try { lease = await state.opening; } catch (error) {
+    state.owners.delete(owner);
+    if (!state.owners.size) state.opening = null;
+    throw error;
+  }
+  let released;
+  return () => released ??= (async () => {
+    state.owners.delete(owner);
+    if (state.owners.size) return;
+    state.closing = lease.close();
+    try { await state.closing; } finally { state.opening = null; state.closing = null; }
+  })();
 }
