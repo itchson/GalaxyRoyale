@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 532,
+  "revision": 541,
   "name": "Galaxy Royale",
   "phase": "Playable solo slice → content and validation",
-  "updatedAt": "2026-10-11T03:59:18.534Z",
+  "updatedAt": "2026-10-11T04:10:25.170Z",
   "tasks": [
     {
       "id": "studio",
@@ -4727,7 +4727,7 @@
       "description": "Connect the user-created repository, isolate department worktrees, record actual reviews, validate Windows/Linux and dual WASM packaging before integration.",
       "department": "Production",
       "owner": "/root",
-      "status": "review",
+      "status": "complete",
       "priority": "high",
       "dependencies": [],
       "acceptanceCriteria": [
@@ -4737,7 +4737,7 @@
         },
         {
           "text": "Windows/Linux source checks and dual-renderer package checks pass at the reviewed head",
-          "met": false
+          "met": true
         }
       ],
       "evidence": [
@@ -4765,12 +4765,27 @@
           "label": "Final integration CI candidate",
           "kind": "note",
           "url": "https://github.com/itchson/GalaxyRoyale/pull/6"
+        },
+        {
+          "label": "Merged UI integration PR",
+          "kind": "note",
+          "url": "https://github.com/itchson/GalaxyRoyale/pull/7"
+        },
+        {
+          "label": "Verified actual main branch gates",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/github-main-protection.json"
+        },
+        {
+          "label": "Exact reviewed-head final CI",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/final-ui-ci.json"
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 3,
       "createdAt": "2026-10-11T02:54:11.997Z",
-      "updatedAt": "2026-10-11T03:25:15.441Z"
+      "updatedAt": "2026-10-11T04:10:25.062Z"
     },
     {
       "id": "task-4945ccc3",
@@ -4947,7 +4962,7 @@
       "description": "Close verified older project game servers, use one strict-port current codex/testing preview and keep Studio separate. Temporary QA servers stop when finished.",
       "department": "Web/QA",
       "owner": "/root",
-      "status": "review",
+      "status": "complete",
       "priority": "high",
       "dependencies": [],
       "acceptanceCriteria": [
@@ -4970,12 +4985,22 @@
           "label": "Owned listeners closed",
           "kind": "note",
           "path": "artifacts/presentation-refinement-20261011/closed-old-previews.json"
+        },
+        {
+          "label": "Actual canonical preview acceptance and earlier guard review",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/CURRENT_UI_ACCEPTANCE.md"
+        },
+        {
+          "label": "Live local preview receipt (refreshes on canonical startup)",
+          "kind": "note",
+          "path": "work/game-preview.json"
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 3,
       "createdAt": "2026-10-11T02:54:12.335Z",
-      "updatedAt": "2026-10-11T03:25:36.736Z"
+      "updatedAt": "2026-10-11T04:10:25.092Z"
     },
     {
       "id": "task-2aff015a",
@@ -7247,6 +7272,48 @@
         }
       ],
       "knownIssues": "Human audio comfort, natural full campaign and owner-private hosted PWA investigation remain separate."
+    },
+    {
+      "id": "build-a25c42a4",
+      "title": "Reviewed UI integration accepted on clean Windows/Linux and both WASM backends",
+      "body": "Actual run38110408367 passed all three jobs after the explicit gallery-selector repair. PR7 merged asd138a9f2b24e6248b70aff78f26d1ae58ada7f9b. Both source jobs ran native/shell/asset/native conversion checks; Browser package built both normal renderers, game-only PWA, strict WASM warnings and18 Rust serializer/SaveStore cases. Actual desktop UI checks remain separately scoped; source/runtime hash unchanged by later documentation/ledger receipts.",
+      "author": "Producer",
+      "source": "Actual PR7 exact-head clean CI, merged integration, verified main protection and canonical preview ownership",
+      "createdAt": "2026-10-11T04:10:24.967Z",
+      "revision": "a8d8b315df441b84b7e9714b4b30e59d62ff43be",
+      "evidence": [
+        {
+          "label": "Exact final clean CI",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/final-ui-ci.json"
+        },
+        {
+          "label": "Actual desktop UI acceptance",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/CURRENT_UI_ACCEPTANCE.md"
+        },
+        {
+          "label": "Historical failed CI and repaired classification test",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/UI_CI_GALLERY_REPAIR.md"
+        }
+      ],
+      "checks": [
+        {
+          "name": "Source (ubuntu-24.04)",
+          "result": "pass"
+        },
+        {
+          "name": "Browser package",
+          "result": "pass"
+        },
+        {
+          "name": "Source (windows-latest)",
+          "result": "pass"
+        }
+      ],
+      "url": "https://github.com/itchson/GalaxyRoyale/actions/runs/38110408367",
+      "knownIssues": "Physical phones and touch, sustained human listening, naturally earned campaign/material progression and owner-private hosted update lifecycle remain explicit separate gates."
     }
   ],
   "feedback": [],
@@ -12570,6 +12637,96 @@
       "author": "Producer",
       "source": "Actual frozen department handoffs, independent Settings review, Root normal dual-renderer browser inspection and native integration checks",
       "createdAt": "2026-10-11T03:59:18.534Z"
+    },
+    {
+      "id": "91f506c4-ba41-47db-9b2b-bd876a906b2d",
+      "revision": 533,
+      "kind": "run",
+      "itemId": "run-16effc8c",
+      "title": "Engine specialist (legacy record) · completed",
+      "author": "Producer",
+      "source": "Actual frozen earlier specialist handoffs and current observed completion; historical identifiers retained without rewriting past records",
+      "createdAt": "2026-10-11T04:06:36.315Z"
+    },
+    {
+      "id": "daf616fb-3ef3-4727-817c-9232f9299396",
+      "revision": 534,
+      "kind": "run",
+      "itemId": "run-3c81a808",
+      "title": "Gameplay specialist (legacy record) · completed",
+      "author": "Producer",
+      "source": "Actual frozen earlier specialist handoffs and current observed completion; historical identifiers retained without rewriting past records",
+      "createdAt": "2026-10-11T04:06:36.335Z"
+    },
+    {
+      "id": "dc4d37a6-ace5-42c6-bca3-8ddc34c5aacb",
+      "revision": 535,
+      "kind": "run",
+      "itemId": "run-e5e3c72c",
+      "title": "Art specialist (legacy record) · completed",
+      "author": "Producer",
+      "source": "Actual frozen earlier specialist handoffs and current observed completion; historical identifiers retained without rewriting past records",
+      "createdAt": "2026-10-11T04:06:36.346Z"
+    },
+    {
+      "id": "36a754f5-6ff9-47a5-adf8-f8a2564e39e6",
+      "revision": 536,
+      "kind": "run",
+      "itemId": "run-a9fc5bc3",
+      "title": "Producer (legacy scope) · completed",
+      "author": "Producer",
+      "source": "Actual frozen earlier specialist handoffs and current observed completion; historical identifiers retained without rewriting past records",
+      "createdAt": "2026-10-11T04:06:36.363Z"
+    },
+    {
+      "id": "5d9fa605-a26c-439a-8fe8-150f293b7789",
+      "revision": 537,
+      "kind": "run",
+      "itemId": "run-1f15763b",
+      "title": "Spark bounded Haven art inspection · interrupted",
+      "author": "Producer",
+      "source": "Actual Art specialist final handoff of bounded Spark inspection without verdict",
+      "createdAt": "2026-10-11T04:06:36.394Z"
+    },
+    {
+      "id": "28b20fec-1d7d-429c-8e71-2224064d6a57",
+      "revision": 538,
+      "kind": "build",
+      "itemId": "build-a25c42a4",
+      "title": "Reviewed UI integration accepted on clean Windows/Linux and both WASM backends",
+      "author": "Producer",
+      "source": "Actual PR7 exact-head clean CI, merged integration, verified main protection and canonical preview ownership",
+      "createdAt": "2026-10-11T04:10:24.967Z"
+    },
+    {
+      "id": "3a7c2821-e25f-46e9-959f-c339c45090a6",
+      "revision": 539,
+      "kind": "task.update",
+      "itemId": "task-cf125df1",
+      "title": "GitHub feature branches, review gates and reproducible CI",
+      "author": "Producer",
+      "source": "Actual PR7 exact-head clean CI, merged integration, verified main protection and canonical preview ownership",
+      "createdAt": "2026-10-11T04:10:25.062Z"
+    },
+    {
+      "id": "cd6bac6c-2237-465b-8f49-c2921168e312",
+      "revision": 540,
+      "kind": "task.update",
+      "itemId": "task-55bd21c0",
+      "title": "One canonical testing-branch game preview",
+      "author": "Producer",
+      "source": "Actual PR7 exact-head clean CI, merged integration, verified main protection and canonical preview ownership",
+      "createdAt": "2026-10-11T04:10:25.092Z"
+    },
+    {
+      "id": "6225cd1e-a83f-4126-8201-ee677c26c501",
+      "revision": 541,
+      "kind": "project.update",
+      "itemId": "project",
+      "title": "Project phase: Playable solo slice → content and validation",
+      "author": "Producer",
+      "source": "Actual PR7 exact-head clean CI, merged integration, verified main protection and canonical preview ownership",
+      "createdAt": "2026-10-11T04:10:25.170Z"
     }
   ],
   "runRecords": [
@@ -17111,7 +17268,117 @@
       "author": "Producer",
       "source": "Actual frozen department handoffs, independent Settings review, Root normal dual-renderer browser inspection and native integration checks",
       "createdAt": "2026-10-11T03:59:18.502Z"
+    },
+    {
+      "id": "run-16effc8c",
+      "title": "Engine specialist (legacy record) · completed",
+      "agentId": "engine_research",
+      "agentLabel": "Engine specialist (legacy record)",
+      "state": "completed",
+      "observedAt": "2026-10-11T04:06:36.290Z",
+      "taskIds": [
+        "task-0280e21e"
+      ],
+      "summary": "This earlier bounded scope has a frozen completed handoff. The old identifier is retained for history; future specialist records use canonical /root paths. This is not a new agent or currently running process.",
+      "evidence": [
+        {
+          "label": "Actual earlier frozen scope",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/HUD_HANDOFF.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual frozen earlier specialist handoffs and current observed completion; historical identifiers retained without rewriting past records",
+      "createdAt": "2026-10-11T04:06:36.315Z"
+    },
+    {
+      "id": "run-3c81a808",
+      "title": "Gameplay specialist (legacy record) · completed",
+      "agentId": "gameplay_design",
+      "agentLabel": "Gameplay specialist (legacy record)",
+      "state": "completed",
+      "observedAt": "2026-10-11T04:06:36.328Z",
+      "taskIds": [
+        "task-d4893127"
+      ],
+      "summary": "This earlier bounded scope has a frozen completed handoff. The old identifier is retained for history; future specialist records use canonical /root paths. This is not a new agent or currently running process.",
+      "evidence": [
+        {
+          "label": "Actual earlier frozen scope",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/AUDIO_HANDOFF.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual frozen earlier specialist handoffs and current observed completion; historical identifiers retained without rewriting past records",
+      "createdAt": "2026-10-11T04:06:36.335Z"
+    },
+    {
+      "id": "run-e5e3c72c",
+      "title": "Art specialist (legacy record) · completed",
+      "agentId": "production_research",
+      "agentLabel": "Art specialist (legacy record)",
+      "state": "completed",
+      "observedAt": "2026-10-11T04:06:36.344Z",
+      "taskIds": [
+        "task-a09ddcf4"
+      ],
+      "summary": "This earlier bounded scope has a frozen completed handoff. The old identifier is retained for history; future specialist records use canonical /root paths. This is not a new agent or currently running process.",
+      "evidence": [
+        {
+          "label": "Actual earlier frozen scope",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/ART_REVIEW.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual frozen earlier specialist handoffs and current observed completion; historical identifiers retained without rewriting past records",
+      "createdAt": "2026-10-11T04:06:36.346Z"
+    },
+    {
+      "id": "run-a9fc5bc3",
+      "title": "Producer (legacy scope) · completed",
+      "agentId": "root",
+      "agentLabel": "Producer (legacy scope)",
+      "state": "completed",
+      "observedAt": "2026-10-11T04:06:36.357Z",
+      "taskIds": [
+        "task-388e1f9b"
+      ],
+      "summary": "This earlier bounded scope has a frozen completed handoff. The old identifier is retained for history; future specialist records use canonical /root paths. This is not a new agent or currently running process.",
+      "evidence": [
+        {
+          "label": "Actual earlier frozen scope",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/SESSION_RECONCILIATION.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual frozen earlier specialist handoffs and current observed completion; historical identifiers retained without rewriting past records",
+      "createdAt": "2026-10-11T04:06:36.363Z"
+    },
+    {
+      "id": "run-1f15763b",
+      "title": "Spark bounded Haven art inspection · interrupted",
+      "agentId": "spark-haven-art-audit",
+      "agentLabel": "Spark bounded Haven art inspection",
+      "state": "interrupted",
+      "observedAt": "2026-10-11T04:06:36.377Z",
+      "taskIds": [
+        "task-2aff015a"
+      ],
+      "summary": "Read-only inspection stopped after approximately4m25s without a final result; no passing independent Spark review is claimed. Actual OpenAI/source/native/browser reviews remain separately linked.",
+      "evidence": [
+        {
+          "label": "Art handoff with worker limitation",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/HAVEN_TOPDOWN_HANDOFF.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual Art specialist final handoff of bounded Spark inspection without verdict",
+      "createdAt": "2026-10-11T04:06:36.394Z"
     }
   ],
-  "phaseDescription": "Desktop-first Rust/WASM solo game and local Studio are implemented. Reviewed occupied-cell art, reproducible conversion, dual renderer builds and source-backed Dev Bible are integrating. Natural campaign balance, human listening, hosted update lifecycle and physical phones remain separate pending gates."
+  "phaseDescription": "Desktop-first Rust/WASM solo game and local Studio are implemented. Reviewed occupied-cell art, reproducible conversion, responsive native settings/icons and minimap, strict GitHub integration gates and source-backed Dev Bible are integrated. Natural campaign balance, human listening, owner-private update lifecycle and physical phones remain separate pending gates."
 }

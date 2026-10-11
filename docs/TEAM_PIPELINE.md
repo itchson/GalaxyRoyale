@@ -19,6 +19,8 @@ For the presentation work already running when GitHub was connected, specialists
 
 The producer is the current integrator. Integration/review assignments rotate to a free specialist for independent scrutiny; a second imaginary always-running agent or fabricated meeting is not recorded.
 
+`main` now requires a pull request, resolved conversations and all three verified GitHub Actions checks with an up-to-date base, including for administrators. Force pushes and branch deletion are disabled. The review count remains zero because agents share one authorized GitHub account; actual independent review evidence is mandatory in Mission Control and source instead of inventing a second GitHub approval. The observed policy is retained in `artifacts/presentation-refinement-20261011/github-main-protection.json`.
+
 ## Local candidate preview
 
 Build on `codex/testing` with `pnpm build`, then use `pnpm preview:game`. The launcher verifies the recorded commit, branch, runtime source/assets and packaged output, refuses an older or modified build, and refuses another owned project game Vite process even on a different port. Vite also uses a strict port: `http://127.0.0.1:4173`. The launcher never kills an unrelated process. Stop the existing preview with Ctrl+C before building and starting its replacement. Studio remains separate on 4174/4175. `work/game-preview.json` records the live owned PID and exact candidate; `work/preview-build.json` is local build evidence, not a shipped dependency.
@@ -26,5 +28,7 @@ Build on `codex/testing` with `pnpm build`, then use `pnpm preview:game`. The la
 ## Production records
 
 Mission Control at http://127.0.0.1:4175 owns task statuses and append-only reviews, decisions, builds and actual last-recorded run states. Only its localhost API serializes project-document writes and revision conflicts. Discussions are asynchronous design/review exchanges during actual active sessions. Feedback remains queued between sessions; this pipeline does not imply unattended agents or scheduled work.
+
+Use canonical agent paths such as `/root/engine_research` for future run observations. Earlier short identifiers are retained as legacy records with their actual bounded scope completed; they are not extra running staff.
 
 Completion requires evidence for the task's actual acceptance criteria. Keep code implementation distinct from natural play, audible review, named physical hardware and soak tests. Reconcile the session's requests with existing tasks before creating duplicates. Future co-op, player-owned arenas and battle royale remain explicit backlog; a portable topology primitive does not complete those modes.

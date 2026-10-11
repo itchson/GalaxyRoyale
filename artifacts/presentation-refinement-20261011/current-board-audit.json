@@ -1,0 +1,887 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-10-11T04:10:25.231Z",
+  "revision": 541,
+  "total": 94,
+  "counts": {
+    "complete": 52,
+    "review": 32,
+    "backlog": 8,
+    "ready": 2
+  },
+  "completeWithoutEvidence": [],
+  "completeWithUnmetCriteria": [],
+  "remaining": [
+    {
+      "id": "audio",
+      "title": "Retro synthesis and adaptive sequencer",
+      "status": "review",
+      "dependencies": [],
+      "criteria": [
+        {
+          "text": "Gesture-unlocked audio and master/music/SFX settings",
+          "met": true
+        },
+        {
+          "text": "Authored gameplay cues and hub/combat/boss music",
+          "met": true
+        },
+        {
+          "text": "Sustained human listening and physical-device audio lifecycle acceptance are measured",
+          "met": false
+        }
+      ]
+    },
+    {
+      "id": "asteroids",
+      "title": "Asteroid damage, impact and loot validation",
+      "status": "review",
+      "dependencies": [
+        "engine",
+        "gameplay",
+        "web-shell"
+      ],
+      "criteria": [
+        {
+          "text": "Visible pixel destruction and responsive impacts",
+          "met": false
+        },
+        {
+          "text": "Loot recorded in persistent progression",
+          "met": true
+        }
+      ]
+    },
+    {
+      "id": "controls-qa",
+      "title": "Controller and input interruption tests",
+      "status": "review",
+      "dependencies": [
+        "web-shell"
+      ],
+      "criteria": [
+        {
+          "text": "Pointer cancellation clears joystick/fire",
+          "met": true
+        },
+        {
+          "text": "Mobile multitouch and desktop destination movement reviewed",
+          "met": false
+        }
+      ]
+    },
+    {
+      "id": "boss-qa",
+      "title": "Fifteen boss encounters: full browser and unlock play review",
+      "status": "review",
+      "dependencies": [
+        "gameplay",
+        "web-shell"
+      ],
+      "criteria": [
+        {
+          "text": "Each first-generation boss encounter is reachable",
+          "met": false
+        },
+        {
+          "text": "Signature ability drops, unlocks and upgrades verified",
+          "met": false
+        }
+      ]
+    },
+    {
+      "id": "art-direction",
+      "title": "Neo-retro cosmic visual polish",
+      "status": "review",
+      "dependencies": [
+        "web-shell"
+      ],
+      "criteria": [
+        {
+          "text": "Distinct silhouettes, parallax stars and nebulae",
+          "met": true
+        },
+        {
+          "text": "Effects support enemy and hazard readability",
+          "met": false
+        }
+      ]
+    },
+    {
+      "id": "performance",
+      "title": "Performance captures and quality limits",
+      "status": "review",
+      "dependencies": [
+        "web-shell"
+      ],
+      "criteria": [
+        {
+          "text": "Measured frame time and pixel/entity budgets",
+          "met": true
+        },
+        {
+          "text": "Sustained phone testing recorded separately from emulation",
+          "met": false
+        }
+      ]
+    },
+    {
+      "id": "mobile",
+      "title": "Physical midrange-phone acceptance",
+      "status": "backlog",
+      "dependencies": [
+        "controls-qa",
+        "performance"
+      ],
+      "criteria": [
+        {
+          "text": "Named iOS/Android hardware and browser evidence",
+          "met": false
+        },
+        {
+          "text": "Target 60 FPS tested during representative sustained combat",
+          "met": false
+        }
+      ]
+    },
+    {
+      "id": "balance",
+      "title": "Slice combat and progression tuning",
+      "status": "review",
+      "dependencies": [
+        "boss-qa",
+        "asteroids"
+      ],
+      "criteria": [
+        {
+          "text": "Radial difficulty and rewards form a coherent run",
+          "met": false
+        },
+        {
+          "text": "Upgrade costs and boss thresholds reviewed in play",
+          "met": false
+        }
+      ]
+    },
+    {
+      "id": "accessibility",
+      "title": "Readability, motion and audio settings",
+      "status": "review",
+      "dependencies": [
+        "web-shell"
+      ],
+      "criteria": [
+        {
+          "text": "Reduced shake and independent volume controls",
+          "met": true
+        },
+        {
+          "text": "Readable touch targets and critical HUD information",
+          "met": false
+        }
+      ]
+    },
+    {
+      "id": "audio-ai",
+      "title": "Optional offline music candidate experiment",
+      "status": "backlog",
+      "dependencies": [],
+      "criteria": [
+        {
+          "text": "Up to three short ACE-Step XL candidates with provenance",
+          "met": false
+        },
+        {
+          "text": "Document acceptance or rejection; game remains independent",
+          "met": false
+        }
+      ]
+    },
+    {
+      "id": "slice-review",
+      "title": "Integrated slice review and release evidence",
+      "status": "review",
+      "dependencies": [
+        "studio",
+        "boss-qa",
+        "balance",
+        "pwa",
+        "audio"
+      ],
+      "criteria": [
+        {
+          "text": "Playable build and recorded known issues",
+          "met": true
+        },
+        {
+          "text": "Real specialist review with linked validation evidence",
+          "met": true
+        }
+      ]
+    },
+    {
+      "id": "deep-bosses",
+      "title": "Fifteen authored family bosses and five-generation promotion",
+      "status": "review",
+      "dependencies": [
+        "gameplay"
+      ],
+      "criteria": [
+        {
+          "text": "Fifteen distinct family/generation encounters with implemented telegraphed attack phases",
+          "met": true
+        },
+        {
+          "text": "24 base kills queue generation one; two previous-tier defeats promote; surplus and retreat/death/reload preserve credits",
+          "met": true
+        },
+        {
+          "text": "Only one ordinary boss active; all five tiers have authored destructible silhouettes",
+          "met": true
+        },
+        {
+          "text": "Full browser choreography and natural-progression human play review for all fifteen encounters",
+          "met": false
+        }
+      ]
+    },
+    {
+      "id": "task-05dd95cd",
+      "title": "Invite friends for co-op expeditions",
+      "status": "backlog",
+      "dependencies": [
+        "task-7e8e0a50"
+      ],
+      "criteria": [
+        {
+          "text": "Define authoritative world ownership and invite lifecycle",
+          "met": false
+        },
+        {
+          "text": "Synchronize destruction, missions and progression without duplicate rewards",
+          "met": false
+        },
+        {
+          "text": "Validate reconnect and compatible save versions",
+          "met": false
+        }
+      ]
+    },
+    {
+      "id": "task-7e8e0a50",
+      "title": "Authoritative multiplayer world and session foundation",
+      "status": "backlog",
+      "dependencies": [
+        "slice-review"
+      ],
+      "criteria": [
+        {
+          "text": "Document authority, session identity, invite/reconnect lifecycle and compatible save boundaries",
+          "met": false
+        },
+        {
+          "text": "Synchronize movement, destruction, missions and single-claim rewards under server validation",
+          "met": false
+        },
+        {
+          "text": "Record real multi-client, reconnect and stale/replayed-message tests",
+          "met": false
+        }
+      ]
+    },
+    {
+      "id": "task-acf182ad",
+      "title": "Player-owned docks: radius upgrades and arenas",
+      "status": "backlog",
+      "dependencies": [
+        "slice-review",
+        "task-60e6273d"
+      ],
+      "criteria": [
+        {
+          "text": "Approve ownership, protection radius limits/costs and arena entry, exit and reward rules",
+          "met": false
+        },
+        {
+          "text": "Verify protection, spawn exclusion, interactions and visual radius agree at upgraded boundaries",
+          "met": false
+        },
+        {
+          "text": "Verify reload/migration, ownership and single-claim arena rewards with recorded play evidence",
+          "met": false
+        }
+      ]
+    },
+    {
+      "id": "task-2439af52",
+      "title": "Battle royale: compact circular seeded world and antipodal edges",
+      "status": "backlog",
+      "dependencies": [
+        "task-7e8e0a50",
+        "task-05dd95cd"
+      ],
+      "criteria": [
+        {
+          "text": "Approve compact circular dimensions and deterministic equally spaced zone layout",
+          "met": false
+        },
+        {
+          "text": "Deterministic edge tests preserve heading/speed and resolve overshoot/repeated crossings",
+          "met": false
+        },
+        {
+          "text": "Camera rebase avoids a cross-universe sweep; targets/effects and multi-client state remain consistent",
+          "met": false
+        }
+      ]
+    },
+    {
+      "id": "task-e665335c",
+      "title": "Battle royale: arena sieges and last-player-standing match loop",
+      "status": "backlog",
+      "dependencies": [
+        "task-7e8e0a50",
+        "task-05dd95cd",
+        "task-acf182ad",
+        "task-2439af52"
+      ],
+      "criteria": [
+        {
+          "text": "Approve siege objectives, elimination/respawn, protection interaction and player-count rules",
+          "met": false
+        },
+        {
+          "text": "Authoritative match ends once for the last surviving player with defined simultaneous-elimination handling",
+          "met": false
+        },
+        {
+          "text": "Record real multiplayer match, reconnect and reward-isolation acceptance evidence",
+          "met": false
+        }
+      ]
+    },
+    {
+      "id": "task-d60fcaaa",
+      "title": "Sanctuary mission completion and reward-claim play review",
+      "status": "review",
+      "dependencies": [
+        "task-35a00493",
+        "task-60e6273d",
+        "save"
+      ],
+      "criteria": [
+        {
+          "text": "Native courier/bounty single-claim, death and reload tests pass",
+          "met": true
+        },
+        {
+          "text": "Actual browser completed-event reward action, journal/currency/relic/hull and replay/reload are verified",
+          "met": false
+        }
+      ]
+    },
+    {
+      "id": "task-0f6ce1db",
+      "title": "Original NPC voice clips and optional local inference acceptance",
+      "status": "backlog",
+      "dependencies": [
+        "task-629ac41a"
+      ],
+      "criteria": [
+        {
+          "text": "Verify a compatible isolated local runtime using the existing model cache; record package/model licenses and reference provenance.",
+          "met": false
+        },
+        {
+          "text": "Generate and listen to reviewed short clips for eight original NPC characters with stable character mapping.",
+          "met": false
+        },
+        {
+          "text": "Measure latency, memory and offline replay; choose prerecorded portable clips or explicit desktop-only bridge based on evidence.",
+          "met": false
+        },
+        {
+          "text": "Test cancellation, page replay and failure fallback on a real browser and physical phone without making inference mandatory.",
+          "met": false
+        }
+      ]
+    },
+    {
+      "id": "task-52a708c0",
+      "title": "Eight solo champion arena trials and distinct ship signatures",
+      "status": "review",
+      "dependencies": [
+        "gameplay"
+      ],
+      "criteria": [
+        {
+          "text": "Native tests verify eight unique arenas, signatures, trial boundaries and one-time patch/blueprint rewards.",
+          "met": true
+        },
+        {
+          "text": "Browser play confirms challenge, victory, retreat, death/retry and persistence for each champion.",
+          "met": false
+        },
+        {
+          "text": "Balance/readability acceptance covers all eight encounters rather than only QA scene setup.",
+          "met": false
+        }
+      ]
+    },
+    {
+      "id": "task-57a3ed52",
+      "title": "Champion blueprints, dock crafting and ship selection",
+      "status": "review",
+      "dependencies": [
+        "task-52a708c0",
+        "save"
+      ],
+      "criteria": [
+        {
+          "text": "Final crafting checks a valid earned blueprint, dock location, material/category costs and single purchase.",
+          "met": true
+        },
+        {
+          "text": "Owned selected ships retain their signature and progression after reload without duplicating rewards.",
+          "met": true
+        },
+        {
+          "text": "Browser hangar can craft/select with clear lock and insufficient-resource feedback.",
+          "met": true
+        }
+      ]
+    },
+    {
+      "id": "task-0a386265",
+      "title": "Solo Galaxy Royale round robin and standings",
+      "status": "review",
+      "dependencies": [
+        "task-52a708c0"
+      ],
+      "criteria": [
+        {
+          "text": "Native tests prove deterministic standings, complete pair schedule, tie-break behavior and idempotent victory grant.",
+          "met": true
+        },
+        {
+          "text": "Browser play verifies all eight matches, losses/forfeits, completion, retry and persisted standings.",
+          "met": false
+        },
+        {
+          "text": "UI labels simulated NPC results accurately and gated tournament entry requires all eight patches.",
+          "met": true
+        }
+      ]
+    },
+    {
+      "id": "task-83929b1c",
+      "title": "Campaign victory credits and continued hangar play",
+      "status": "review",
+      "dependencies": [
+        "task-0a386265"
+      ],
+      "criteria": [
+        {
+          "text": "Actual campaign first-place victory opens readable credits and grants Sovereign exactly once.",
+          "met": false
+        },
+        {
+          "text": "Acknowledging/closing credits and reloading retains ownership and prevents repeated unsolicited presentation.",
+          "met": false
+        },
+        {
+          "text": "Player can return to hangar/flight/title without background simulation or stale async transitions.",
+          "met": false
+        }
+      ]
+    },
+    {
+      "id": "task-5771502c",
+      "title": "Dialogue pages and voice replay: integrated browser acceptance",
+      "status": "review",
+      "dependencies": [
+        "task-629ac41a"
+      ],
+      "criteria": [
+        {
+          "text": "Pages, contextual portraits and final-page action remain readable and reachable at desktop and narrow landscape layouts.",
+          "met": false
+        },
+        {
+          "text": "Voice preference stays off by default, Replay is explicit and unavailable speech never blocks readable dialogue.",
+          "met": false
+        },
+        {
+          "text": "Close/navigation/hide pause or cancel actual audio and stale provider callbacks cannot replace a new conversation.",
+          "met": false
+        },
+        {
+          "text": "Independent voice volume and per-page replay usability are accepted or the shared SFX-volume limitation is recorded.",
+          "met": true
+        }
+      ]
+    },
+    {
+      "id": "task-aaf77ab5",
+      "title": "Death report, Retry/title and safe menu transitions",
+      "status": "review",
+      "dependencies": [
+        "web-shell",
+        "controls-qa"
+      ],
+      "criteria": [
+        {
+          "text": "Death report displays the real run result; Retry resumes at Haven and title stops simulation/input/audio.",
+          "met": false
+        },
+        {
+          "text": "Dock fire opens the dock menu without firing, and desktop pause/resume remains consistent.",
+          "met": false
+        },
+        {
+          "text": "Mobile collapsed icons open reachable settings/title actions and never leak pointer input into flight.",
+          "met": false
+        },
+        {
+          "text": "Late encounter saves and delayed drawer closure cannot resume flight after title/death/pause transitions.",
+          "met": true
+        }
+      ]
+    },
+    {
+      "id": "task-e2cec34f",
+      "title": "Autosave, ship XP/rank gates and bounded dock material stash",
+      "status": "review",
+      "dependencies": [
+        "save",
+        "task-57a3ed52"
+      ],
+      "criteria": [
+        {
+          "text": "Progress/autosave survives reload with per-ship XP/level/rank gates intact and no duplicated rewards.",
+          "met": true
+        },
+        {
+          "text": "Cargo cannot exceed its capacity; docking deposits materials into the persistent stash exactly once.",
+          "met": true
+        },
+        {
+          "text": "Death/title/retreat cargo outcomes match the authored rule and summary reports real earned XP/materials.",
+          "met": true
+        },
+        {
+          "text": "Crafting and upgrades enforce final level/resource gates consistently in Rust and browser feedback.",
+          "met": false
+        }
+      ]
+    },
+    {
+      "id": "task-b0a59d63",
+      "title": "Mote moving-player warning admission and encounter pacing",
+      "status": "review",
+      "dependencies": [
+        "task-e8684a94"
+      ],
+      "criteria": [
+        {
+          "text": "Independent actual-core moving-camera analysis and bounded reproducible experiment if warranted",
+          "met": true
+        },
+        {
+          "text": "Reviewed production tuning with actual normal browser warning and moving-player acceptance",
+          "met": false
+        }
+      ]
+    },
+    {
+      "id": "task-4a0debda",
+      "title": "Authored Radiation Mote charge and pulse audio",
+      "status": "review",
+      "dependencies": [
+        "task-e8684a94",
+        "audio"
+      ],
+      "criteria": [
+        {
+          "text": "Concrete bounded SFX/event patch with meaningful actual event/cap tests and independent review",
+          "met": true
+        },
+        {
+          "text": "Production integration, normal package and actual listening/mute/recovery validation",
+          "met": false
+        }
+      ]
+    },
+    {
+      "id": "task-08d59c38",
+      "title": "Original Vesper distant comet pixel group and seeded admission design",
+      "status": "review",
+      "dependencies": [
+        "engine"
+      ],
+      "criteria": [
+        {
+          "text": "Original local-cell art with actual engine helper/affine/budget/frozen-motion evidence",
+          "met": true
+        },
+        {
+          "text": "Independent review, deterministic seeded production integration and actual renderer presentation",
+          "met": false
+        }
+      ]
+    },
+    {
+      "id": "task-8d55901c",
+      "title": "Ship-owned progression and expedition cargo risk",
+      "status": "review",
+      "dependencies": [],
+      "criteria": [
+        {
+          "text": "Authoritative gameplay and save migration proven without lost or duplicated assets",
+          "met": true
+        },
+        {
+          "text": "Actual crafting/equip/death/return flows verified in normal browsers",
+          "met": false
+        },
+        {
+          "text": "Exact reviewed private game package published",
+          "met": true
+        }
+      ]
+    },
+    {
+      "id": "task-2138420d",
+      "title": "Crafted compatible three-slot ship loadouts",
+      "status": "review",
+      "dependencies": [],
+      "criteria": [
+        {
+          "text": "Authoritative gameplay and save migration proven without lost or duplicated assets",
+          "met": true
+        },
+        {
+          "text": "Actual crafting/equip/death/return flows verified in normal browsers",
+          "met": false
+        },
+        {
+          "text": "Exact reviewed private game package published",
+          "met": true
+        }
+      ]
+    },
+    {
+      "id": "task-96a89aa2",
+      "title": "Seeded tutorial belt rocks and basic crafting drops",
+      "status": "review",
+      "dependencies": [],
+      "criteria": [
+        {
+          "text": "Authoritative gameplay and save migration proven without lost or duplicated assets",
+          "met": true
+        },
+        {
+          "text": "Actual crafting/equip/death/return flows verified in normal browsers",
+          "met": false
+        },
+        {
+          "text": "Exact reviewed private game package published",
+          "met": true
+        }
+      ]
+    },
+    {
+      "id": "task-40611e41",
+      "title": "Fractional world quads with independent pixel UI raster",
+      "status": "review",
+      "dependencies": [],
+      "criteria": [
+        {
+          "text": "Actual Rust geometry/material/lifecycle tests and deterministic limits pass",
+          "met": true
+        },
+        {
+          "text": "Normal WebGPU and WebGL2 zoom, UI composition, effects and context recovery visually checked",
+          "met": false
+        },
+        {
+          "text": "Exact independently reviewed private package published",
+          "met": true
+        }
+      ]
+    },
+    {
+      "id": "task-a6a2a3e6",
+      "title": "Seeded gas, fire, trails and parallax constellations",
+      "status": "review",
+      "dependencies": [],
+      "criteria": [
+        {
+          "text": "Actual Rust geometry/material/lifecycle tests and deterministic limits pass",
+          "met": true
+        },
+        {
+          "text": "Normal WebGPU and WebGL2 zoom, UI composition, effects and context recovery visually checked",
+          "met": false
+        },
+        {
+          "text": "Exact independently reviewed private package published",
+          "met": true
+        }
+      ]
+    },
+    {
+      "id": "task-970f203c",
+      "title": "Live Escape telemetry, pixel action icons and saved Quit",
+      "status": "review",
+      "dependencies": [],
+      "criteria": [
+        {
+          "text": "Actual shell transition and native simulation/stat tests pass",
+          "met": true
+        },
+        {
+          "text": "Normal GPU and GL live menu, death priority, responsive icons and title navigation observed",
+          "met": false
+        },
+        {
+          "text": "Exact reviewed private build published with validation boundaries",
+          "met": true
+        }
+      ]
+    },
+    {
+      "id": "task-0b1b0efa",
+      "title": "Connected articulated Coil bodies",
+      "status": "review",
+      "dependencies": [],
+      "criteria": [
+        {
+          "text": "Authoritative production behavior and meaningful focused tests validated",
+          "met": true
+        },
+        {
+          "text": "Normal packaged desktop behavior observed with backend and update boundaries recorded",
+          "met": false
+        },
+        {
+          "text": "Exact reviewed source and private deployment recorded",
+          "met": true
+        }
+      ]
+    },
+    {
+      "id": "task-3b9f6350",
+      "title": "Held-left desktop forward thrust",
+      "status": "review",
+      "dependencies": [],
+      "criteria": [
+        {
+          "text": "Authoritative production behavior and meaningful focused tests validated",
+          "met": true
+        },
+        {
+          "text": "Normal packaged desktop behavior observed with backend and update boundaries recorded",
+          "met": false
+        },
+        {
+          "text": "Exact reviewed source and private deployment recorded",
+          "met": true
+        }
+      ]
+    },
+    {
+      "id": "task-73510faf",
+      "title": "Discovered universe map and regional resource belts",
+      "status": "review",
+      "dependencies": [],
+      "criteria": [
+        {
+          "text": "Authoritative production behavior and meaningful focused tests validated",
+          "met": true
+        },
+        {
+          "text": "Normal packaged desktop behavior observed with backend and update boundaries recorded",
+          "met": false
+        },
+        {
+          "text": "Exact reviewed source and private deployment recorded",
+          "met": true
+        }
+      ]
+    },
+    {
+      "id": "task-388e1f9b",
+      "title": "Coherent content-addressed Rust WASM updates",
+      "status": "review",
+      "dependencies": [],
+      "criteria": [
+        {
+          "text": "Authoritative production behavior and meaningful focused tests validated",
+          "met": true
+        },
+        {
+          "text": "Normal packaged desktop behavior observed with backend and update boundaries recorded",
+          "met": false
+        },
+        {
+          "text": "Exact reviewed source and private deployment recorded",
+          "met": true
+        }
+      ]
+    },
+    {
+      "id": "task-5d42b89b",
+      "title": "Orbital asteroid belts and sanctuary shield collisions",
+      "status": "review",
+      "dependencies": [],
+      "criteria": [
+        {
+          "text": "Authoritative production behavior and meaningful focused tests validated",
+          "met": true
+        },
+        {
+          "text": "Normal packaged desktop behavior observed with backend and update boundaries recorded",
+          "met": false
+        },
+        {
+          "text": "Exact reviewed source and private deployment recorded",
+          "met": true
+        }
+      ]
+    },
+    {
+      "id": "task-f341486f",
+      "title": "Adaptive score listening and rendered audio review",
+      "status": "ready",
+      "dependencies": [],
+      "criteria": [
+        {
+          "text": "Actual output capture reports peak/RMS and no clipping or stuck voices during normal transitions and recovery.",
+          "met": false
+        },
+        {
+          "text": "Human listening accepts warning audibility, continuous engine balance and music/effects buses in sustained normal play.",
+          "met": false
+        }
+      ]
+    },
+    {
+      "id": "task-01f28dc1",
+      "title": "Investigate owner-private hosted PWA reload in the in-app browser",
+      "status": "ready",
+      "dependencies": [],
+      "criteria": [
+        {
+          "text": "Supported evidence identifies the actual navigation/update failure cause without policy bypass or retained-profile reset.",
+          "met": false
+        },
+        {
+          "text": "Actual owner-private normal reload/Apply completes, renders coherent final assets and preserves recorded progression.",
+          "met": false
+        }
+      ]
+    }
+  ],
+  "boundary": "Completion is scoped to recorded criteria. Physical mobile, human listening, natural complete campaign and future multiplayer/BR remain pending; no all-game perfection claim."
+}
