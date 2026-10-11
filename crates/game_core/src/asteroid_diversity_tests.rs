@@ -99,6 +99,62 @@ fn distinct_seeded_instances_are_solid_and_tier_grading_does_not_redraw_the_shap
 }
 
 #[test]
+fn actual_mineral_cells_form_compact_deposits_instead_of_long_surface_streaks() {
+    let mut components = 0;
+    for family in 0..4u32 {
+        for n in 0..32u32 {
+            let seed = (mix(n.wrapping_mul(7919)) & !96) | (family * 32);
+            for tier in [1, 5] {
+                let body = pixel_assets::asteroid_instance(seed, tier);
+                let colors = asteroid_art::mineral_colors(seed, tier);
+                let mut remaining: HashSet<_> = body
+                    .cells_indexed()
+                    .filter_map(|(i, _, c)| colors.contains(&c).then_some(i))
+                    .collect();
+                let mut deposits = 0;
+                while let Some(&first) = remaining.iter().next() {
+                    remaining.remove(&first);
+                    let mut queue = VecDeque::from([first]);
+                    let mut cells = Vec::new();
+                    while let Some(i) = queue.pop_front() {
+                        cells.push((i % body.width, i / body.width));
+                        let x = i % body.width;
+                        let y = i / body.width;
+                        for dy in -1..=1isize {
+                            for dx in -1..=1isize {
+                                let nx = x.wrapping_add_signed(dx);
+                                let ny = y.wrapping_add_signed(dy);
+                                if nx < body.width && ny < body.height {
+                                    let next = ny * body.width + nx;
+                                    if remaining.remove(&next) {
+                                        queue.push_back(next);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    let width = cells.iter().map(|p| p.0).max().unwrap()
+                        - cells.iter().map(|p| p.0).min().unwrap()
+                        + 1;
+                    let height = cells.iter().map(|p| p.1).max().unwrap()
+                        - cells.iter().map(|p| p.1).min().unwrap()
+                        + 1;
+                    assert!(
+                        (6..=40).contains(&cells.len()),
+                        "deposit lost clustered area"
+                    );
+                    assert!(width <= 9 && height <= 9, "long mineral overlay returned");
+                    deposits += 1;
+                    components += 1;
+                }
+                assert_eq!(deposits, 4, "separated mineral deposits joined or vanished");
+            }
+        }
+    }
+    println!("Verified {components} actual compact mineral components across 256 bodies");
+}
+
+#[test]
 fn complete_cell_corners_fit_the_existing_zone_padding_for_every_configured_scale() {
     // Even an entirely filled64-grid would fit; real occupied extents are smaller.
     let theoretical = (31.5_f32 * std::f32::consts::SQRT_2 + std::f32::consts::FRAC_1_SQRT_2)

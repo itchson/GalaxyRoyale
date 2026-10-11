@@ -122,6 +122,12 @@ struct Crater {
     center: Vec2,
     radius: f32,
 }
+#[derive(Clone, Copy)]
+struct Mineral {
+    center: Vec2,
+    angle: f32,
+    radii: Vec2,
+}
 struct Geology {
     center: Vec2,
     angle: f32,
@@ -129,8 +135,7 @@ struct Geology {
     planes: [(Vec2, f32); 10],
     plane_count: usize,
     craters: [Crater; 5],
-    vein_angle: f32,
-    vein_offset: f32,
+    minerals: [Mineral; 4],
     facet_phase: f32,
 }
 impl Geology {
@@ -161,6 +166,20 @@ impl Geology {
                 radius: 2.5 + sample(seed, salt ^ 123) * if family == 3 { 4.5 } else { 3.5 },
             }
         });
+        // Separated compact deposits: no long streak crosses the rock surface.
+        let minerals = std::array::from_fn(|i| {
+            let salt = 0x6d69_0000 + i as u32 * 211;
+            let theta = i as f32 * TAU / 4.0 + (sample(seed, salt) - 0.5) * 0.24;
+            let reach = 9.0 + sample(seed, salt ^ 79) * 3.0;
+            Mineral {
+                center: Vec2::new(theta.cos(), theta.sin()) * reach,
+                angle: sample(seed, salt ^ 113) * TAU,
+                radii: Vec2::new(
+                    2.3 + sample(seed, salt ^ 53) * 0.8,
+                    2.2 + sample(seed, salt ^ 179) * 0.8,
+                ),
+            }
+        });
         Self {
             center,
             angle,
@@ -168,8 +187,7 @@ impl Geology {
             planes,
             plane_count,
             craters,
-            vein_angle: sample(seed, 0x7665_696e) * TAU,
-            vein_offset: (sample(seed, 0x6f66_6673) - 0.5) * 10.0,
+            minerals,
             facet_phase: sample(seed, 0x6661_6365) * TAU,
         }
     }
@@ -184,6 +202,33 @@ impl Geology {
             .iter()
             .all(|(n, d)| p.dot(*n) < *d)
     }
+    fn mineral_shade(&self, q: Vec2) -> Option<usize> {
+        self.minerals.iter().find_map(|mineral| {
+            let d = q - mineral.center;
+            let (s, c) = mineral.angle.sin_cos();
+            let p = Vec2::new(c * d.x + s * d.y, -s * d.x + c * d.y) / mineral.radii;
+            // One beveled irregular nodule with a lit facet and dark outer lip.
+            if p.length_squared() < 1.0 && p.x + p.y * 0.6 < 0.95 && p.y - p.x * 0.4 < 0.92 {
+                Some(if p.length_squared() > 0.64 {
+                    8
+                } else if d.x + d.y < -0.7 {
+                    11
+                } else if d.x + d.y < 0.7 {
+                    10
+                } else {
+                    9
+                })
+            } else {
+                None
+            }
+        })
+    }
+}
+
+#[cfg(test)]
+pub(super) fn mineral_colors(seed: u32, tier: u8) -> [u32; 4] {
+    let palette = PALETTES[variety(seed) as usize * 5 + tier.clamp(1, 5) as usize - 1];
+    palette[8..].try_into().unwrap()
 }
 
 /// The central component removes only rasterized diagonal-only tip fragments.
@@ -276,20 +321,8 @@ pub(super) fn body(seed: u32, tier: u8) -> PixelBody {
                     shade = 4;
                 }
             }
-            let (s, c) = geology.vein_angle.sin_cos();
-            let across = q.x * c + q.y * s;
-            let along = q.y * c - q.x * s;
-            let bend = (along * 0.18 + geology.facet_phase).sin() * 1.3;
-            let vein = (across - geology.vein_offset - bend).abs();
-            if !edge && along.abs() < 17.0 && vein < if family == 2 { 1.25 } else { 0.85 } {
-                shade = if vein < 0.35 { 10 } else { 8 };
-            }
-            if family == 1
-                && !edge
-                && ((across + 7.0).abs() < 0.65 || (across - 9.0).abs() < 0.65)
-                && along.abs() < 12.0
-            {
-                shade = 7;
+            if !edge && let Some(mineral) = geology.mineral_shade(q) {
+                shade = mineral;
             }
             if edge {
                 shade = if p.x + p.y < 0.0 { 6 } else { 0 };
