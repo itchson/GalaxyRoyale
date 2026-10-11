@@ -15,7 +15,7 @@
 .menu-card .forge-view p,
 .menu-card .ship-hangar-view p {
   margin: 0;
-  font-size: var(--ui-text);
+  font-size: var(--ui-caption);
   line-height: 1.35;
 }
 .loadout-summary,
@@ -178,6 +178,15 @@
 .ship-hangar-view .loadout-recipe p {
   color: #b9cadd;
 }
+.loadout-recipe {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: calc(3px * var(--ui-scale, 1));
+}
+.loadout-recipe > :only-child,
+.loadout-recipe > :nth-child(3) {
+  grid-column: 1 / -1;
+}
 .forge-view p.loadout-reason,
 .forge-view p.loadout-note,
 .ship-hangar-view p.loadout-reason,
@@ -207,6 +216,9 @@
 }
 @media (max-width: 560px) {
   .ship-hangar-roster {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .loadout-recipe {
     grid-template-columns: minmax(0, 1fr);
   }
 }

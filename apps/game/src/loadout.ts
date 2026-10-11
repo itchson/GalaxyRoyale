@@ -455,13 +455,19 @@ export function paintForge(
       ),
     );
     back.classList.add("loadout-back");
-    editorHeading.append(back, text("h3", "ABILITY COLLECTION"));
-    root.append(editorHeading, shipSummary);
+    editorHeading.append(back);
+    root.append(
+      editorHeading,
+      text(
+        "h3",
+        `${ship?.name ?? "ACTIVE RAICHO"} / LV ${hud.ship_level} / RANK CAP ${hud.rank_cap}`,
+      ),
+    );
     if (hud.components.length) root.append(workshopButton());
     root.append(
       text(
         "p",
-        "Craft to own. Equip swaps this RAICHO's slot; replaced abilities stay owned.",
+        "Craft to collect. Equip swaps your slot; replaced abilities stay owned.",
         "loadout-note",
       ),
     );
@@ -749,7 +755,6 @@ export function paintShipHangar(
   target.replaceChildren();
   const root = section("ship-hangar-view");
   root.append(
-    text("h3", "HULL COLLECTION"),
     text(
       "p",
       `${hud.campaign.ships.length} FOUND / ${hud.campaign.ships.filter((ship) => ship.owned).length} OWNED`,
@@ -769,7 +774,7 @@ export function paintShipHangar(
   root.append(
     text(
       "p",
-      "RAICHO XP, hardware and equipped slots stay with their hull. Crafted RAICHO start at LV 1. Select a craft to fly it.",
+      "Each RAICHO keeps its own XP and slots. Crafted hulls start at LV 1.",
       "loadout-note",
     ),
   );

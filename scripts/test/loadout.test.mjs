@@ -579,7 +579,7 @@ test("ability filters run after discovery and distinguish ownership from bluepri
       .map((node) => node.dataset.abilityId);
   f.exports.paintForge(f.target, h, f.actions);
   f.find("browse-abilities").events.click();
-  assert.match(allText(f.target), /ABILITY COLLECTION/);
+  assert.match(allText(f.target), /Craft to collect/);
   assert.match(allText(f.target), /3 FOUND \/ 2 OWNED/);
   assert.match(allText(f.target), /BLUEPRINT \/ NOT CRAFTED/);
   assert.match(allText(f.target), /OWNED RANK 3 \/ ACTIVE RANK 1/);
@@ -686,7 +686,7 @@ test("hull filters keep found, owned and earned blueprint states distinct and pr
       .filter((node) => node.dataset.shipId)
       .map((node) => node.dataset.shipId);
   f.exports.paintShipHangar(f.target, h, actions);
-  assert.match(allText(f.target), /HULL COLLECTION/);
+  assert.match(allText(f.target), /Each RAICHO keeps its own XP and slots/);
   assert.match(allText(f.target), /4 FOUND \/ 2 OWNED/);
   assert.match(allText(f.target), /FOUND \/ BLUEPRINT REQUIRED/);
   assert.match(allText(f.target), /RENKO POINTS 10 \/ HAVE 3/);
