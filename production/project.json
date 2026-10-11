@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 854,
+  "revision": 858,
   "name": "Galaxy Royale",
   "phase": "Playable solo slice → content and validation",
-  "updatedAt": "2026-10-11T19:53:11.585Z",
+  "updatedAt": "2026-10-11T19:55:24.659Z",
   "tasks": [
     {
       "id": "studio",
@@ -7196,6 +7196,33 @@
       "revision": 1,
       "createdAt": "2026-10-11T19:53:11.446Z",
       "updatedAt": "2026-10-11T19:53:11.446Z"
+    },
+    {
+      "id": "task-3a781b5f",
+      "title": "Audit deep-space animation and particle depth for a concrete immersion defect",
+      "description": "Read-only current source and retained native/browser evidence. Propose at most one source-backed visual correction; no broad rewrite or fabricated renderer validation.",
+      "department": "Art",
+      "owner": "/root/production_research",
+      "status": "active",
+      "priority": "normal",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Source-pinned review of zoom, parallax, animation and reduced-detail behavior with actual evidence.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual dispatched specialist assignments",
+          "kind": "artifact",
+          "path": "artifacts/next-native-coop-20261012/assignments.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-11T19:55:24.572Z",
+      "updatedAt": "2026-10-11T19:55:24.572Z"
     }
   ],
   "reviews": [
@@ -20322,6 +20349,46 @@
       "author": "Root",
       "source": "Actual source-pinned specialist handoffs and browser observations",
       "createdAt": "2026-10-11T19:53:11.585Z"
+    },
+    {
+      "id": "860e2338-bad3-4d7e-a9bd-702f60984a74",
+      "revision": 855,
+      "kind": "task.create",
+      "itemId": "task-3a781b5f",
+      "title": "Audit deep-space animation and particle depth for a concrete immersion defect",
+      "author": "Root",
+      "source": "Actual bounded next-slice dispatch",
+      "createdAt": "2026-10-11T19:55:24.572Z"
+    },
+    {
+      "id": "10434d07-526f-4c63-8d70-83e356bf0a15",
+      "revision": 856,
+      "kind": "run",
+      "itemId": "run-7be7a0a5",
+      "title": "Native simulation specialist · running",
+      "author": "Root",
+      "source": "Actual bounded next-slice dispatch",
+      "createdAt": "2026-10-11T19:55:24.600Z"
+    },
+    {
+      "id": "0d670dd5-f277-4cbf-a1f1-62935f152a37",
+      "revision": 857,
+      "kind": "run",
+      "itemId": "run-cc096c65",
+      "title": "Owned-loadout QA specialist · running",
+      "author": "Root",
+      "source": "Actual bounded next-slice dispatch",
+      "createdAt": "2026-10-11T19:55:24.634Z"
+    },
+    {
+      "id": "68636e93-32ea-4e80-bddc-33a98f710325",
+      "revision": 858,
+      "kind": "run",
+      "itemId": "run-33089ae4",
+      "title": "Deep-space visual specialist · running",
+      "author": "Root",
+      "source": "Actual bounded next-slice dispatch",
+      "createdAt": "2026-10-11T19:55:24.659Z"
     }
   ],
   "runRecords": [
@@ -28163,6 +28230,72 @@
       "author": "Root",
       "source": "Actual source-pinned specialist handoffs and browser observations",
       "createdAt": "2026-10-11T19:53:11.585Z"
+    },
+    {
+      "id": "run-7be7a0a5",
+      "title": "Native simulation specialist · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Native simulation specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T19:55:24.585Z",
+      "taskIds": [
+        "task-7e8e0a50"
+      ],
+      "summary": "Dispatched ordinary Pulse Echo implementation and validated optional evolution metadata; Root coordinates strict browser wire integration.",
+      "evidence": [
+        {
+          "label": "Actual dispatched specialist assignments",
+          "kind": "artifact",
+          "path": "artifacts/next-native-coop-20261012/assignments.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual bounded next-slice dispatch",
+      "createdAt": "2026-10-11T19:55:24.600Z"
+    },
+    {
+      "id": "run-cc096c65",
+      "title": "Owned-loadout QA specialist · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Owned-loadout QA specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T19:55:24.610Z",
+      "taskIds": [
+        "task-05dd95cd"
+      ],
+      "summary": "Dispatched coherent immutable current-stage preparation for future owned WebGL2 browser acceptance; no new listener or passing browser run claimed.",
+      "evidence": [
+        {
+          "label": "Actual dispatched specialist assignments",
+          "kind": "artifact",
+          "path": "artifacts/next-native-coop-20261012/assignments.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual bounded next-slice dispatch",
+      "createdAt": "2026-10-11T19:55:24.634Z"
+    },
+    {
+      "id": "run-33089ae4",
+      "title": "Deep-space visual specialist · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "Deep-space visual specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T19:55:24.646Z",
+      "taskIds": [
+        "task-3a781b5f"
+      ],
+      "summary": "Dispatched bounded source/evidence audit of background animation and particle depth; no mutation yet authorized.",
+      "evidence": [
+        {
+          "label": "Actual dispatched specialist assignments",
+          "kind": "artifact",
+          "path": "artifacts/next-native-coop-20261012/assignments.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual bounded next-slice dispatch",
+      "createdAt": "2026-10-11T19:55:24.659Z"
     }
   ],
   "phaseDescription": "Desktop-first Rust/WASM solo game and local Studio are implemented. Reviewed occupied-cell art, reproducible conversion, responsive native settings/icons and minimap, strict GitHub integration gates and source-backed Dev Bible are integrated. Natural campaign balance, human listening, owner-private update lifecycle and physical phones remain separate pending gates."
