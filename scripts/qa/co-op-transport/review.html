@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="utf-8" /><meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  />
+  <title>Local WebRTC transport review</title>
+  <style>
+    body {
+      font: 16px system-ui;
+      margin: 24px;
+      max-width: 960px;
+      background: #101620;
+      color: #e8edf3;
+    }
+    button {
+      font: inherit;
+      min-height: 44px;
+      margin: 4px;
+      padding: 8px 12px;
+    }
+    pre {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      padding: 12px;
+      background: #1c2633;
+    }
+    p {
+      line-height: 1.5;
+    }
+    .note {
+      color: #aebcce;
+    }
+  </style>
+  <h1>Local WebRTC transport review</h1>
+  <p>
+    Two actual browser RTCPeerConnection clients on this page, using the actual
+    ephemeral signaling service and ordered DataChannel. No camera, microphone,
+    renderer, Profile or save integration.
+  </p>
+  <p class="note">
+    Admission below is a declared framing fixture. Transport ready requires a
+    real opened channel and peer hello. Simulation remains waiting. This does
+    not prove separate devices, NAT, TURN or playable co-op.
+  </p>
+  <div>
+    <button id="connect">1. Connect real local clients</button>
+    <button id="send" disabled>2. Send join and input fixture</button>
+    <button id="end" disabled>3. Host end</button>
+    <button id="rejoin" disabled>4. Rejoin new session</button>
+    <button id="dispose">Dispose clients</button>
+  </div>
+  <p id="status" role="status">Ready. No clients created.</p>
+  <pre id="results" aria-label="Sanitized transport observations">
+No run yet.</pre>
+  <p class="note">
+    Results contain counts and declared checks only. Invites, bearer credentials
+    and SDP/ICE remain private in memory and are excluded from output.
+  </p>
+  <script type="module" src="/review.js"></script>
+</html>
