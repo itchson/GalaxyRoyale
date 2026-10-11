@@ -63,8 +63,8 @@ fn cached_half_unit_clusters_have_bounded_whole_motif_cost_and_same_physical_ext
     for kind in KINDS {
         let parts = parts(kind);
         let mut colors = std::collections::BTreeSet::new();
-        let full: usize = parts.iter().map(|p| p.full.occupied_count()).sum();
-        let low: usize = parts.iter().map(|p| p.low.occupied_count()).sum();
+        let full = motif_cost(kind, false);
+        let low = motif_cost(kind, true);
         assert!(full <= 2_200, "{kind:?} full={full}");
         assert!(low <= 1_100, "{kind:?} reduced={low}");
         assert!(
@@ -101,8 +101,9 @@ fn cached_half_unit_clusters_have_bounded_whole_motif_cost_and_same_physical_ext
             colors.len()
         );
         eprintln!(
-            "{kind:?}: full={full}, reduced={low}, cached colors={}, 2 transforms",
-            colors.len()
+            "{kind:?}: full={full}, reduced={low}, cached filament colors={}, {} transforms",
+            colors.len(),
+            motif_transforms(kind)
         );
     }
     assert_eq!(
@@ -253,10 +254,7 @@ fn actual_motifs_keep_small_continuous_motion_and_freeze_under_reduced_motion() 
 fn atomic_whole_motif_admission_preserves_prior_packets_at_transform_boundary() {
     for kind in KINDS {
         for reduced in [false, true] {
-            let required: usize = parts(kind)
-                .iter()
-                .map(|p| p.body(reduced).occupied_count())
-                .sum();
+            let required = motif_cost(kind, reduced);
             let mut frame = FrameBuilder::new();
             for i in 0..127 {
                 frame.push_cells_affine_material(
@@ -286,7 +284,10 @@ fn atomic_whole_motif_admission_preserves_prior_packets_at_transform_boundary() 
             assert_eq!(frame.frame().pixel_count, required + 127);
             assert_eq!(frame.frame().batches.len(), 2);
             assert_eq!(frame.frame().batches[0].transforms.len(), 128);
-            assert_eq!(frame.frame().batches[1].transforms.len(), 1);
+            assert_eq!(
+                frame.frame().batches[1].transforms.len(),
+                motif_transforms(kind) - 1
+            );
             assert!(frame.frame().batches.iter().all(|b| {
                 b.pixels
                     .iter()
@@ -327,7 +328,19 @@ fn far_streamed_motifs_keep_local_detail_finite_and_inside_conservative_culling_
                             }
                             let width = t.point(Vec2::from_array(p.local) + Vec2::X)
                                 - t.point(Vec2::from_array(p.local));
-                            assert!(width.length() > 0.3 && width.length() < 1.3);
+                            if t.b[3] < 0.0 {
+                                // Actual authored soft volume footprints are larger than
+                                // the hard half-unit filaments; neither is a raster clamp.
+                                let spacing = if (t.b[3] + 1.04).abs() < 0.00001 {
+                                    VEIL_SPACING * 2.7
+                                } else {
+                                    BILLOW_SPACING * 2.4
+                                };
+                                let expected = spacing * if reduced { 2.0 } else { 1.0 } * m.scale;
+                                assert!((width.length() - expected).abs() < 0.0001);
+                            } else {
+                                assert!(width.length() > 0.3 && width.length() < 1.3);
+                            }
                         }
                     }
                 }
@@ -366,7 +379,7 @@ fn export_actual_fine_cosmic_packets_for_software_contact_proof() {
                     })).collect();
                     serde_json::json!({"zoom": zoom, "cells": cells})
                 }).collect();
-                let data = serde_json::json!({"kind": format!("{kind:?}"), "reduced": reduced, "time": time, "quads": required, "transforms": 2, "scope": "actual native FrameBuilder cells/CameraView corners; flat software alpha, no GPU shader or threat contrast acceptance", "views": views});
+                let data = serde_json::json!({"kind": format!("{kind:?}"), "reduced": reduced, "time": time, "quads": required, "transforms": motif_transforms(kind), "scope": "actual native FrameBuilder cells/CameraView corners; flat software alpha (soft material omitted), no GPU shader or threat contrast acceptance", "views": views});
                 std::fs::write(
                     output.join(format!("motif-{index}-reduced-{reduced}-time-{time}.json")),
                     serde_json::to_vec(&data).unwrap(),

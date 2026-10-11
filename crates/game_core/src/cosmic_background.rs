@@ -158,6 +158,100 @@ struct Art {
     nova_core: Pair,
 }
 
+// These cells overlap as radially filtered volumes. The spacing is authored
+// independently from each particle's footprint; it is never a raster minimum.
+const VEIL_SPACING: f32 = 3.0;
+const BILLOW_SPACING: f32 = 2.5;
+struct GasArt {
+    veil: Pair,
+    billows: Pair,
+}
+
+fn noise(seed: u32, p: Vec2) -> f32 {
+    let grid = p.floor().as_ivec2();
+    let uv = p - p.floor();
+    let u = smooth(uv.x);
+    let v = smooth(uv.y);
+    let a = unit(hash3(seed, grid.x, grid.y, 0));
+    let b = unit(hash3(seed, grid.x + 1, grid.y, 0));
+    let c = unit(hash3(seed, grid.x, grid.y + 1, 0));
+    let d = unit(hash3(seed, grid.x + 1, grid.y + 1, 0));
+    (a + (b - a) * u) + ((c + (d - c) * u) - (a + (b - a) * u)) * v
+}
+
+/// A fixed turbulent birth field gives the cloud large billows, a torn dust
+/// channel, and nested ridges. Initialization samples it once at both densities.
+fn gas_density(p: Vec2) -> f32 {
+    let warp = Vec2::new(
+        noise(0x7665_696c, p / 19.0) - 0.5,
+        noise(0x6269_6c6c, p / 17.0) - 0.5,
+    ) * 9.0;
+    let q = p + warp;
+    let curve = (q.x * 0.055).sin() * 8.0 + (q.x * 0.13).sin() * 2.3;
+    let side = q.y - curve;
+    let envelope = (1.0 - (q.x / 58.0).powi(2)).max(0.0) * (1.0 - (side / 26.0).powi(2)).max(0.0);
+    let turbulence = noise(0x6e65_6275, q / 12.0) * 0.58
+        + noise(0x6c61_6e65, q / 5.5) * 0.29
+        + noise(0x7269_6467, q / 2.4) * 0.13;
+    let lane = (side - (q.x * 0.08).sin() * 2.0).abs();
+    // A real sparse source channel remains between the surrounding soft cells.
+    let channel = smooth(((lane - 3.8) / 3.5).clamp(0.0, 1.0));
+    envelope * (0.35 + turbulence * 0.95) * channel
+}
+
+fn gas_pair(width: usize, height: usize, spacing: f32, threshold: f32, colors: &[u32]) -> Pair {
+    let sample = |p: Vec2| {
+        let density = gas_density(p);
+        (density > threshold).then(|| {
+            // The upper-left illuminated ridge is part of the authored gas
+            // material. It is not a foreground light or a new simulation event.
+            let ridge =
+                noise(0x6c69_7465, p / 7.0) * 0.3 + (0.5 - p.y / 80.0).clamp(0.0, 1.0) * 0.18;
+            ((density * 0.72 + ridge) * (colors.len() - 1) as f32)
+                .clamp(0.0, (colors.len() - 1) as f32) as usize
+        })
+    };
+    Pair {
+        full: template(width, height, spacing, &sample, colors),
+        low: template(width / 2, height / 2, spacing * 2.0, &sample, colors),
+    }
+}
+
+static GAS_ART: LazyLock<GasArt> = LazyLock::new(|| GasArt {
+    veil: gas_pair(
+        40,
+        24,
+        VEIL_SPACING,
+        0.12,
+        &[
+            rgba(27, 24, 35, 43),
+            rgba(35, 28, 44, 53),
+            rgba(45, 34, 55, 64),
+            rgba(57, 41, 65, 77),
+            rgba(69, 48, 77, 88),
+            rgba(82, 55, 88, 101),
+            rgba(96, 66, 99, 113),
+            rgba(113, 79, 110, 125),
+        ],
+    ),
+    billows: gas_pair(
+        48,
+        32,
+        BILLOW_SPACING,
+        0.27,
+        &[
+            rgba(39, 28, 44, 60),
+            rgba(49, 34, 51, 73),
+            rgba(62, 41, 61, 86),
+            rgba(77, 50, 69, 99),
+            rgba(92, 59, 77, 112),
+            rgba(107, 72, 86, 126),
+            rgba(123, 87, 98, 138),
+            rgba(141, 103, 111, 150),
+        ],
+    ),
+});
+
 /// Fixed two-unit birth clusters provide coherent ridges rather than independent
 /// bright noise at every tiny cell. This only runs while initializing the cache.
 fn cluster(seed: u32, p: Vec2) -> f32 {
@@ -501,6 +595,72 @@ fn draw_part(
         }),
     );
 }
+
+fn gas_flow(physical: Vec2, time: f32, phase: f32, depth: usize) -> Vec2 {
+    let t = time * if depth == 0 { 0.045 } else { -0.065 };
+    let curl = Vec2::new(
+        (physical.y * 0.09 + t + phase).sin() + (physical.x * 0.055 - t * 0.7 + phase).cos() * 0.28,
+        (physical.x * 0.075 - t * 0.8 + phase).cos() + (physical.y * 0.12 + t * 0.6).sin() * 0.22,
+    );
+    curl * if depth == 0 { 1.15 } else { 0.72 }
+}
+
+fn draw_gas_part(
+    frame: &mut FrameBuilder,
+    body: &PixelBody,
+    parent: AffineTransform,
+    spacing: f32,
+    style: CellStyle,
+    depth: usize,
+) {
+    let footprint = spacing * if depth == 0 { 2.7 } else { 2.4 };
+    let pose = Transform {
+        position: if depth == 0 {
+            Vec2::ZERO
+        } else {
+            Vec2::new(1.5, -1.0)
+        },
+        rotation: (style.time * 0.025 + style.phase).sin()
+            * if depth == 0 { 0.018 } else { -0.012 },
+        scale: Vec2::splat(footprint),
+    };
+    frame.push_soft_cells_affine_material(
+        parent.compose(pose.affine()),
+        PixelMaterial {
+            light_response: 0.0,
+            emission: if depth == 0 { 0.04 } else { 0.09 },
+        },
+        body.cells().map(|(local, color)| {
+            let physical = local * spacing;
+            let breathing =
+                0.88 + 0.12 * (style.time * 0.075 + physical.x * 0.038 + style.phase).sin();
+            (
+                (physical + gas_flow(physical, style.time, style.phase, depth)) / footprint,
+                colored(color, style.tint, 0.98, style.alpha * breathing),
+            )
+        }),
+    );
+}
+
+fn motif_cost(kind: MotifKind, reduced: bool) -> usize {
+    let parts = match kind {
+        MotifKind::Galaxy => [&ART.galaxy_arms, &ART.galaxy_core],
+        MotifKind::Nebula => [&ART.nebula, &ART.nebula_thread],
+        MotifKind::Supernova => [&ART.nova_shell, &ART.nova_core],
+    };
+    let count: usize = parts.iter().map(|p| p.body(reduced).occupied_count()).sum();
+    count
+        + if kind == MotifKind::Nebula {
+            GAS_ART.veil.body(reduced).occupied_count()
+                + GAS_ART.billows.body(reduced).occupied_count()
+        } else {
+            0
+        }
+}
+
+fn motif_transforms(kind: MotifKind) -> usize {
+    if kind == MotifKind::Nebula { 4 } else { 2 }
+}
 fn draw_motif(
     frame: &mut FrameBuilder,
     m: Motif,
@@ -570,7 +730,7 @@ fn draw_motif(
     };
     let a = a.body(reduced);
     let b = b.body(reduced);
-    let required = a.occupied_count() + b.occupied_count();
+    let required = motif_cost(m.kind, reduced);
     if required > *remaining {
         return 0;
     }
@@ -583,6 +743,25 @@ fn draw_motif(
         alpha,
         curl: 0.14,
     };
+    if m.kind == MotifKind::Nebula {
+        let density_scale = if reduced { 2.0 } else { 1.0 };
+        draw_gas_part(
+            frame,
+            GAS_ART.veil.body(reduced),
+            parent,
+            VEIL_SPACING * density_scale,
+            style,
+            0,
+        );
+        draw_gas_part(
+            frame,
+            GAS_ART.billows.body(reduced),
+            parent,
+            BILLOW_SPACING * density_scale,
+            style,
+            1,
+        );
+    }
     draw_part(frame, a, parent.compose(first.affine()), style);
     draw_part(
         frame,
@@ -899,7 +1078,7 @@ pub(super) fn render(frame: &mut FrameBuilder, input: SceneInput) -> Stats {
                 if count > 0 {
                     stats.motif_quads += count;
                     stats.motifs += 1;
-                    stats.transforms += 2;
+                    stats.transforms += motif_transforms(m.kind);
                 }
             }
         }
@@ -1156,7 +1335,7 @@ mod tests {
         for reduced in [false, true] {
             let a = ART.nebula.body(reduced);
             let b = ART.nebula_thread.body(reduced);
-            let expected = a.occupied_count() + b.occupied_count();
+            let expected = motif_cost(MotifKind::Nebula, reduced);
             for time in [0.0, 15.0, 47.0] {
                 let scene = SceneInput {
                     seed,
@@ -1170,14 +1349,22 @@ mod tests {
                 assert_eq!(draw_motif(&mut frame, m, &scene, &mut budget), expected);
                 assert_eq!(budget, 0);
                 assert_eq!(frame.frame().pixel_count, expected);
-                assert_eq!(frame.frame().batches[0].transforms.len(), 2);
+                assert_eq!(frame.frame().batches[0].transforms.len(), 4);
                 assert!(
                     frame.frame().batches[0]
                         .transforms
                         .iter()
-                        .all(|t| t.b[2..] == [0.0, 0.0])
+                        .all(|t| t.b[2] == 0.0
+                            && (t.b[3] == 0.0
+                                || (t.b[3] + 1.04).abs() < 0.00001
+                                || (t.b[3] + 1.09).abs() < 0.00001))
                 );
-                let submitted: Vec<_> = frame.frame().batches[0].pixels.iter().collect();
+                let batch = &frame.frame().batches[0];
+                let submitted: Vec<_> = batch
+                    .pixels
+                    .iter()
+                    .filter(|p| batch.transforms[p.transform as usize].b[3] == 0.0)
+                    .collect();
                 let source: Vec<_> = a.cells().chain(b.cells()).collect();
                 let cell_scale = if reduced { 1.0 } else { 0.5 };
                 assert!(submitted.iter().zip(source).all(|(pixel, (local, _))| {
@@ -1196,7 +1383,7 @@ mod tests {
                     .unwrap();
                 assert!(min_alpha >= 8 && (59..=83).contains(&max_alpha));
                 eprintln!(
-                    "Actual nebula reduced={reduced} time={time}: {expected} cells/2 transforms, alpha {min_alpha}..{max_alpha}"
+                    "Actual nebula reduced={reduced} time={time}: {expected} cells/4 transforms, hard filament alpha {min_alpha}..{max_alpha}"
                 );
                 let mut rejected = FrameBuilder::new();
                 let mut short = expected - 1;
@@ -1242,7 +1429,10 @@ mod tests {
                             .batches
                             .iter()
                             .flat_map(|b| &b.transforms)
-                            .all(|t| t.b[2..] == [0.0, 0.0])
+                            .all(|t| t.b[2] == 0.0
+                                && (t.b[3] == 0.0
+                                    || (t.b[3] + 1.04).abs() < 0.00001
+                                    || (t.b[3] + 1.09).abs() < 0.00001))
                     );
                 }
             }
@@ -1501,3 +1691,7 @@ mod tests {
 #[cfg(test)]
 #[path = "cosmic_detail_tests.rs"]
 mod detail_tests;
+
+#[cfg(test)]
+#[path = "deep_nebula_tests.rs"]
+mod deep_nebula_tests;
