@@ -44,6 +44,15 @@ jobs:
         run: pnpm test
       - name: TypeScript
         run: pnpm typecheck
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12.10'
+      - name: Install pinned offline asset tooling
+        run: python -m pip install -r scripts/asset-requirements.txt
+      - name: Exact cell conversions, topology and loss policies
+        run: python scripts/asset-pack-tests.py -v
+      - name: Actual native PixelBody, group and animation extraction
+        run: cargo test --locked --manifest-path scripts/asset-native-preview/Cargo.toml
 
   browser-package:
     name: Browser package
