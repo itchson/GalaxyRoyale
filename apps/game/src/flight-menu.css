@@ -75,6 +75,7 @@
 }
 .flight-status-toggle {
   min-height: var(--ui-hit);
+  min-width: min(100%, 220px);
   padding: calc(3px * var(--ui-scale, 1)) calc(8px * var(--ui-scale, 1));
   font-size: var(--ui-text);
   max-width: 100%;
