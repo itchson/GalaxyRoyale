@@ -248,7 +248,7 @@ fn valid_input(input: &InputFrame) -> bool {
                 point.is_none_or(|v| v.iter().all(|x| x.is_finite() && x.abs() <= WORLD_LIMIT))
             })
 }
-fn guest_profile(spec: &ParticipantSpec) -> Result<Profile, Error> {
+pub(super) fn guest_profile(spec: &ParticipantSpec) -> Result<Profile, Error> {
     if spec.local_seed == 0 {
         return Err(Error::InvalidSeed);
     }
