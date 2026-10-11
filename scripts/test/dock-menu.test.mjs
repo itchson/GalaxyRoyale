@@ -401,7 +401,7 @@ test("Escape opens a live ship menu, cancels controls and course, and toggles cl
     f.calls.some((call) => Array.isArray(call) && call[0] === "paused"),
     false,
   );
-  assert.match(f.element("menu-description").textContent, /keeps running/);
+  assert.equal(f.element("menu-description").textContent, "FLIGHT LIVE");
   assert.doesNotMatch(
     html,
     /menu-tabs|role="tab(?:list|panel)?"|aria-labelledby="tab-/,

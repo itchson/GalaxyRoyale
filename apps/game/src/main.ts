@@ -948,34 +948,23 @@ function finishCredits(): void {
 function selectMenuTab(tab: MenuTab): void {
   menuTab = tab;
   const headings: Record<MenuTab, [string, string]> = {
-    pause: ["RAICHO STATUS", "Live telemetry / the universe keeps running."],
-    upgrades: [
-      "HAVEN FORGE",
-      "Craft compatible abilities, choose your three slots, and improve this RAICHO's hardware.",
-    ],
+    pause: ["RAICHO", "FLIGHT LIVE"],
+    upgrades: ["HAVEN FORGE", "Craft, equip and upgrade."],
     hangar: [
       "RAICHO HANGAR",
-      hud.dock
-        ? "Craft blueprints and choose your next RAICHO."
-        : "Return to Haven to craft or switch RAICHO.",
+      hud.dock ? "Choose your RAICHO." : "Return to Haven to craft or switch.",
     ],
     campaign: [
       "ARENA CHAMPIONS",
       "Eight patches reveal the Galaxy Royale tournament.",
     ],
-    settings: ["SETTINGS", "Tune your flight. Settings stay on this device."],
-    archive: [
-      "SAVE & BACKUP",
-      "Automatic saves keep your progression on this device.",
-    ],
+    settings: ["SETTINGS", ""],
+    archive: ["SAVE & BACKUP", "Saved on this device."],
     journal: [
       "EXPEDITION JOURNAL",
       "Discover sanctuaries and return to claim their rewards.",
     ],
-    map: [
-      "UNIVERSE MAP",
-      "Chart discovered beacons / the universe keeps running.",
-    ],
+    map: ["UNIVERSE MAP", "Discovered beacons / flight live."],
     credits: [
       "GALAXY ROYALE WON",
       "Your Sovereign RAICHO is ready. Thank you for flying.",
@@ -983,6 +972,7 @@ function selectMenuTab(tab: MenuTab): void {
   };
   element("menu-title").textContent = headings[tab][0];
   element("menu-description").textContent = headings[tab][1];
+  element("menu-description").hidden = !headings[tab][1];
   element("pause-content").hidden = tab !== "pause";
   element("upgrade-content").hidden = tab !== "upgrades";
   element("settings-content").hidden = tab !== "settings";

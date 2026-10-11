@@ -41,6 +41,7 @@ export const corporations = {
     hair: "GREEN",
     ship: "PAN HIKARI",
     slot: "PASSIVE",
+    ability: "FLUX DRIVE / SPEED",
   },
   renko: {
     name: "RENKO CYBERNETICS",
@@ -48,6 +49,7 @@ export const corporations = {
     hair: "RED",
     ship: "RENKO HIBANA",
     slot: "OFFENSIVE",
+    ability: "PULSE LENS / EXTRA SHOT",
   },
   hugo: {
     name: "HUGO CORP",
@@ -55,6 +57,7 @@ export const corporations = {
     hair: "BLUE",
     ship: "HUGO MAMORI",
     slot: "DEFENSIVE",
+    ability: "GUARD COIL / SHIELD",
   },
 } as const;
 
@@ -129,15 +132,15 @@ export class DroidCreation {
     this.closeButton.onclick = () => this.close();
     const title = document.createElement("h2");
     title.id = "droid-title";
-    title.textContent = "YOUR KIKAI LICENSE";
+    title.textContent = "KIKAI LICENSE";
     const intro = document.createElement("p");
     intro.textContent =
-      "Choose your droid and manufacturer. Each license includes a level 1 RAICHO flight craft and one equipped ability.";
+      "Choose your KIKAI. A starter RAICHO and ability are included.";
     const types = document.createElement("section");
     types.className = "droid-options";
     types.setAttribute("aria-label", "Droid type");
     const typeHeading = document.createElement("h3");
-    typeHeading.textContent = "DROID TYPE";
+    typeHeading.textContent = "TYPE";
     for (const kind of ["dora", "doro", "talo"] as const) {
       const button = this.choice(kind.toUpperCase(), () => {
         this.kind = kind;
@@ -150,19 +153,21 @@ export class DroidCreation {
     corps.className = "droid-options";
     corps.setAttribute("aria-label", "Manufacturer");
     const corpHeading = document.createElement("h3");
-    corpHeading.textContent = "MANUFACTURER";
+    corpHeading.textContent = "MAIN MANUFACTURER / HAIR";
     for (const [id, value] of Object.entries(corporations)) {
       const corporation = id as KikaiIdentity["corporation"];
-      const button = this.choice(value.name, () => {
+      const button = this.choice(id.toUpperCase(), () => {
         this.corporation = corporation;
         this.paint();
       });
       button.dataset.corporation = id;
+      button.title = `${value.name} / ${value.role}`;
+      button.setAttribute("aria-label", `${value.name} / ${value.role}`);
       button.dataset.pixelAction = `${corporation === "pan" ? "passive" : corporation === "renko" ? "offense" : "defense"}-button`;
       corps.append(button);
     }
     const secondaryHeading = document.createElement("h3");
-    secondaryHeading.textContent = "KESSHO / CRYSTAL HORNS / SUB-MANUFACTURER";
+    secondaryHeading.textContent = "SUB-MANUFACTURER / KESSHO HORNS";
     const secondary = document.createElement("section");
     secondary.className = "droid-options";
     secondary.setAttribute("aria-label", "Sub-manufacturer");
@@ -264,7 +269,7 @@ export class DroidCreation {
     this.serial.textContent = this.pendingIdentity
       ? `LICENSE / ${this.pendingIdentity.hex_id.toUpperCase()}`
       : "LICENSE / PENDING";
-    this.detail.textContent = `${this.kind.toUpperCase()}-${this.corporation.toUpperCase()}-${this.subCorporation.toUpperCase()} / ${corp.hair} HAIR / ${corporations[this.subCorporation].hair} HORNS. ${corp.ship} / LEVEL 1 / ${corp.slot} ABILITY EQUIPPED. ${this.pendingIdentity ? "SAVE RETRIES KEEP THIS LICENSE." : "YOUR HASH IS ISSUED ON CONFIRMATION."}`;
+    this.detail.textContent = `${corp.ship} / LV 1 / ${corp.slot}\n${corp.ability}${this.pendingIdentity ? " / LICENSE RESERVED" : ""}`;
   }
   private async confirm(): Promise<void> {
     if (this.busy) return;
