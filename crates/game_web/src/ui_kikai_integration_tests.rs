@@ -912,3 +912,161 @@ fn invalid_layouts_are_closed_and_nonfinite_time_or_corporation_defaults_are_saf
         );
     }
 }
+
+#[test]
+fn meishi_card_all_profile_types_factory_hulls_and_eight_earned_patches_fit_60k() {
+    // Authored occupancy is an independent oracle; scene admission is exercised
+    // by the actual draw path. This is a logical fixture, not measured DOM QA.
+    let patches: serde_json::Value = serde_json::from_str(include_str!(
+        "../../../assets/ui/champion-patches-atlas.json"
+    ))
+    .unwrap();
+    let patch_counts: [usize; 8] = std::array::from_fn(|index| {
+        patches["sprites"][format!("campaign_patch_{index}")]["indices"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .filter(|value| value.as_u64().unwrap() != 0)
+            .count()
+    });
+    assert_eq!(patch_counts.iter().sum::<usize>(), 2056);
+    assert_eq!(MAX_UI_PIXELS, 60_000, "the shared cap must stay unchanged");
+
+    let text = |value: &str, rect| UiNode {
+        text: value.into(),
+        font: 0.75,
+        ..node("text", 0.0, rect)
+    };
+    let packet = |frame: &RenderFrame| {
+        frame
+            .batches
+            .iter()
+            .flat_map(|batch| {
+                batch.pixels.iter().map(|pixel| {
+                    let transform = batch.transforms[pixel.transform as usize];
+                    (pixel.local, pixel.color, transform.a, transform.b)
+                })
+            })
+            .collect::<Vec<_>>()
+    };
+    for kind in 0..3 {
+        for (main, corporation) in [Corporation::Pan, Corporation::Renko, Corporation::Hugo]
+            .into_iter()
+            .enumerate()
+        {
+            let mut profile = licensed_portrait(kind as u8, main as u8, ((main + 1) % 3) as u8);
+            // Actual96CSS portrait at scale2.4, continuous source-cell fitting.
+            profile.rect = [20.25, 60.5, 40.0, 128.0 / 2.4];
+            let hull = node("licensed-ship", main as f32, [20.25, 129.5, 32.0, 32.0]);
+            let mut nodes = vec![
+                node("panel", 0.0, [5.0, 5.0, 614.0, 340.0]),
+                node("close-icon", 0.0, [581.0, 14.0, 28.0, 28.0]),
+                profile,
+                text("MEISHI CARD", [78.25, 60.5, 360.0, 12.0]),
+                text("APR#0123456789ABCDEF", [78.25, 74.5, 360.0, 12.0]),
+                text(
+                    "DORA-PAN-RENKO-0123456789ABCDEF",
+                    [78.25, 88.5, 360.0, 12.0],
+                ),
+                hull,
+                text(
+                    "CURRENT FACTORY RAICHO / LV 1 / XP 7 / NEXT 20",
+                    [66.25, 129.5, 510.0, 12.0],
+                ),
+                text("HULL 73/100 / SHIELD 0/0", [66.25, 143.5, 510.0, 12.0]),
+            ];
+            for (index, value) in [
+                "OFFENSE / PULSE LENS / R1 EFFECTIVE",
+                "DEFENSE / GUARD COIL / R1 EFFECTIVE",
+                "PASSIVE / FLUX DRIVE / R1 EFFECTIVE",
+                "RENKO OFFENSIVE 13 / HUGO DEFENSIVE 29 / PAN PASSIVE 47",
+                "ARENA PATCHES 8/8",
+            ]
+            .into_iter()
+            .enumerate()
+            {
+                nodes.push(text(
+                    value,
+                    [20.25, 167.5 + index as f32 * 12.0, 568.0, 10.0],
+                ));
+            }
+            for index in 0..8 {
+                let x = 20.25 + index as f32 * 65.0;
+                let mut patch = node("campaign-patch", index as f32, [x, 232.5, 24.0, 24.0]);
+                patch.active = true;
+                nodes.push(patch);
+                nodes.push(text(
+                    &format!("{:02} EARNED", index + 1),
+                    [x, 260.5, 60.0, 12.0],
+                ));
+            }
+            for (index, label) in ["MEISHI", "CARGO", "HULLS", "ABILITIES", "STATS"]
+                .into_iter()
+                .enumerate()
+            {
+                nodes.push(UiNode {
+                    text: label.into(),
+                    font: 0.75,
+                    selected: index == 0,
+                    ..node(
+                        "nav-tab",
+                        0.0,
+                        [20.25 + index as f32 * 116.0, 307.5, 104.0, 22.0],
+                    )
+                });
+            }
+            nodes.push(node("settings-icon", 0.0, [548.0, 14.0, 28.0, 28.0]));
+
+            // Every isolated component must appear byte-for-byte in the mixed
+            // scene: a capped portrait, absent late patch or missing caption
+            // cannot be hidden by merely checking an upper-bound total.
+            let mut parts = Vec::new();
+            let mut joined = Vec::new();
+            for node in nodes {
+                let mut scene = UiScene {
+                    groups: vec![UiGroup {
+                        position: GROUP,
+                        nodes: vec![node],
+                    }],
+                };
+                let mut frame = FrameBuilder::new();
+                draw(&mut frame, &scene, [0.0; 2], VIEW, 0.0, true);
+                parts.push(frame.finish());
+                joined.push(scene.groups[0].nodes.remove(0));
+            }
+            assert_eq!(parts[2].pixel_count, portrait_cells_for(kind));
+            assert_eq!(
+                assert_rect(&parts[2], joined[2].rect, [0.0; 2], 0.0001),
+                portrait_cells_for(kind)
+            );
+            assert_eq!(
+                parts[6].pixel_count,
+                starter_body(corporation).occupied_count()
+            );
+            for (index, count) in patch_counts.into_iter().enumerate() {
+                let part = &parts[14 + index * 2];
+                assert_eq!(part.pixel_count, count);
+                assert_eq!(
+                    assert_rect(part, joined[14 + index * 2].rect, [0.0; 2], 0.0001),
+                    count
+                );
+            }
+            assert!(parts.iter().all(|part| part.pixel_count > 0));
+            let expected: Vec<_> = parts.iter().flat_map(packet).collect();
+            let actual = extract(joined, [0.0; 2], 0.0, true);
+            assert!(actual.pixel_count < MAX_UI_PIXELS);
+            assert_eq!(actual.pixel_count, expected.len());
+            assert_eq!(packet(&actual), expected);
+            println!(
+                "MEISHI kind{kind}/corp{main}: profile{} + hull{} + eight patches2056 + chrome/text{} = {} /60000",
+                portrait_cells_for(kind),
+                starter_body(corporation).occupied_count(),
+                actual.pixel_count
+                    - portrait_cells_for(kind)
+                    - starter_body(corporation).occupied_count()
+                    - 2056,
+                actual.pixel_count,
+            );
+        }
+    }
+}
