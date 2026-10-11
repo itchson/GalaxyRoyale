@@ -747,6 +747,9 @@ function pause(dock: boolean): void {
   element("quick-menu").hidden = true;
   deathScreen.hidden = true;
   menu.hidden = false;
+  // A delayed save conflict can open this menu while a contact is active.
+  // Close after showing the menu so the contact restores the current UI mode.
+  dialoguePanel.close();
   element("menu-title").textContent = dock
     ? "Evolve your RAICHO"
     : "RAICHO STATUS";
@@ -761,6 +764,7 @@ function pause(dock: boolean): void {
   save(galaxy.profile());
   beforeLaunchMenu = false;
   selectMenuTab(dock ? "upgrades" : "pause");
+  element("menu-close").focus();
   syncFlightState();
 }
 // Menus consume controls without stopping the world. Lifecycle interruptions

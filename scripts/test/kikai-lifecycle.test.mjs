@@ -55,7 +55,7 @@ function deferred() {
 }
 const settle = () => new Promise((resolve) => setImmediate(resolve));
 
-function panelFixture() {
+function panelFixture(callbacks = {}) {
   let document;
   class Element {
     children = [];
@@ -63,6 +63,7 @@ function panelFixture() {
     attributes = new Map();
     events = new Map();
     isConnected = true;
+    classList = { add() {}, remove() {}, toggle() {} };
     append(...children) {
       this.children.push(...children);
     }
@@ -87,6 +88,7 @@ function panelFixture() {
       ? parent
       : parent.children.map((child) => find(child, id)).find(Boolean);
   document = {
+    hidden: false,
     body: new Element(),
     activeElement: null,
     createElement: () => new Element(),
@@ -103,13 +105,18 @@ function panelFixture() {
   });
   let closes = 0;
   const panel = new exports.DialoguePanel({
-    onOpen() {},
+    onOpen() {
+      callbacks.onOpen?.();
+    },
     onClose() {
       closes++;
+      callbacks.onClose?.();
     },
   });
   return {
     panel,
+    document,
+    Element,
     element: (id) => find(document.body, id),
     closes: () => closes,
     click: (id) => find(document.body, id).events.get("click")(),
@@ -118,8 +125,10 @@ function panelFixture() {
 
 function guideFixture(
   training = { stage: 0, description: "Accept the flight license." },
+  configure = () => {},
 ) {
-  const panel = panelFixture(),
+  const callbacks = {},
+    panel = panelFixture(callbacks),
     save = deferred(),
     toasts = [];
   let acknowledgements = 0,
@@ -157,6 +166,7 @@ function guideFixture(
     toast: (message) => toasts.push(message),
     pixelUi: { invalidate() {} },
   });
+  configure(context, panel, callbacks);
   vm.runInContext(compile(actualFunction("showDoraGuide")), context);
   vm.runInContext("showDoraGuide()", context);
   const pages = [panel.element("dialogue-text").textContent];
@@ -169,12 +179,175 @@ function guideFixture(
   assert.equal(panel.element("dialogue-action").hidden, false);
   return {
     ...panel,
+    context,
     save,
     toasts,
     acknowledgements: () => acknowledgements,
     writes: () => writes,
     pages,
   };
+}
+
+function conflictFixture() {
+  const saves = [],
+    modes = [],
+    pauses = [];
+  const profile = {
+    revision: 7,
+    currency: [3, 4, 5],
+    ship_xp: [0],
+    materials: [2],
+  };
+  const f = guideFixture(undefined, (context, panel, callbacks) => {
+    const nodes = new Map();
+    const html = readFileSync(
+      new URL("../../apps/game/index.html", import.meta.url),
+      "utf8",
+    );
+    for (const match of html.matchAll(/\bid="([^"]+)"/g)) {
+      const node = new panel.Element();
+      node.id = match[1];
+      nodes.set(node.id, node);
+    }
+    const element = (id) => {
+      assert.ok(nodes.has(id), `Missing actual HTML id ${id}`);
+      return nodes.get(id);
+    };
+    class SaveConflict extends Error {}
+    Object.assign(context, {
+      document: panel.document,
+      element,
+      SaveConflict,
+      menu: element("menu-screen"),
+      deathScreen: element("death-screen"),
+      needsDroidCreation: false,
+      pendingSaves: 0,
+      saveFailed: false,
+      transitionEpoch: 0,
+      destination: [10, 20],
+      waitingUpdate: null,
+      beforeLaunchMenu: false,
+      preparingEncounter: null,
+      recovering: false,
+      graphicsFailed: false,
+      webglLifecycle: null,
+      debugConsole: { opened: false },
+      paused: false,
+      lastTime: 10,
+      menuTab: "pause",
+      input: { enabled: true, reset() {} },
+      audio: { update() {}, resume: async () => {}, suspend() {} },
+      matchMedia: () => ({ matches: false }),
+      paintUpgrades() {},
+      paintFlightMenu() {},
+      store: {
+        persistent: true,
+        message: "A newer save exists. Reload to continue.",
+        save(snapshot) {
+          assert.deepEqual(snapshot, profile);
+          const write = deferred();
+          saves.push(write);
+          return write.promise;
+        },
+      },
+    });
+    context.menu.hidden = true;
+    context.deathScreen.hidden = true;
+    Object.assign(context.galaxy, {
+      set_paused: (value) => pauses.push(value),
+      set_ui_mode: (mode) => modes.push(mode),
+      cancel_course() {},
+      profile: () => profile,
+    });
+    const options = main.statements
+      .filter(ts.isVariableStatement)
+      .flatMap((statement) => [...statement.declarationList.declarations])
+      .find((node) => node.name.getText(main) === "dialoguePanel")?.initializer
+      ?.arguments?.[0];
+    assert.ok(options && ts.isObjectLiteralExpression(options));
+    for (const name of ["onOpen", "onClose"]) {
+      const property = options.properties.find(
+        (node) => node.name?.getText(main) === name,
+      );
+      assert.ok(property && ts.isPropertyAssignment(property));
+      callbacks[name] = vm.runInContext(
+        compile(`(${property.initializer.getText(main)})`),
+        context,
+      );
+    }
+    vm.runInContext(
+      compile(
+        [
+          "paintSaveStatus",
+          "persist",
+          "save",
+          "pause",
+          "canSimulateFlight",
+          "syncFlightState",
+          "restoreUi",
+          "selectMenuTab",
+        ]
+          .map(actualFunction)
+          .join("\n"),
+      ),
+      context,
+    );
+    // The first flight checkpoint is already pending when the contact opens.
+    vm.runInContext("save(galaxy.profile())", context);
+  });
+  return { ...f, saves, profile, modes, pauses };
+}
+
+for (const pendingAcknowledgement of [false, true]) {
+  test(`delayed flight SaveConflict closes the guide before showing the live menu${pendingAcknowledgement ? " with its action pending" : ""}`, async () => {
+    const f = conflictFixture();
+    const before = JSON.stringify(f.profile);
+    const token = f.panel.presentationToken;
+    assert.equal(f.panel.opened, true);
+    assert.equal(f.context.menu.hidden, true);
+    assert.equal(f.context.paused, true);
+    const action = pendingAcknowledgement
+      ? f.click("dialogue-action")
+      : undefined;
+    f.saves[0].reject(new f.context.SaveConflict("Newer checkpoint"));
+    await settle();
+    assert.equal(f.panel.opened, false);
+    assert.equal(f.element("dialogue-screen").hidden, true);
+    assert.ok(f.panel.presentationToken > token);
+    assert.equal(f.context.menu.hidden, false);
+    assert.equal(f.context.document.activeElement.id, "menu-close");
+    assert.equal(f.context.input.enabled, false);
+    assert.equal(
+      f.context.paused,
+      false,
+      "the menu leaves the universe running",
+    );
+    assert.equal(f.modes.at(-1), 3);
+    assert.equal(f.acknowledgements(), pendingAcknowledgement ? 1 : 0);
+    assert.equal(
+      JSON.stringify(f.profile),
+      before,
+      "menu transition grants no progression",
+    );
+    assert.ok(f.toasts.includes(f.context.store.message));
+    const closedToken = f.panel.presentationToken;
+    // The menu's checkpoint may also conflict; it must not open recursively.
+    const menuSave = f.saves.at(-1);
+    menuSave.reject(new f.context.SaveConflict("Still newer"));
+    if (action) {
+      f.saves[1].resolve();
+      await action;
+    }
+    await settle();
+    assert.equal(f.saves.length, pendingAcknowledgement ? 3 : 2);
+    assert.equal(f.context.pendingSaves, 0);
+    assert.equal(f.panel.opened, false);
+    assert.equal(f.panel.presentationToken, closedToken);
+    assert.equal(f.context.document.activeElement.id, "menu-close");
+    assert.equal(f.acknowledgements(), pendingAcknowledgement ? 1 : 0);
+    assert.equal(f.closes(), 1);
+    assert.equal(JSON.stringify(f.profile), before);
+  });
 }
 
 test("training contact presents supplied HUD text and corporation fields without issuing progress", () => {
