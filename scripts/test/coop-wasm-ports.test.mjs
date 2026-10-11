@@ -105,6 +105,69 @@ test("optional owned equipment preserves legacy spec and publication while rejec
   assert.throws(() => publication(updated));
 });
 
+test("ordinary Echo evolution survives native extraction, join and publication boundaries", () => {
+  for (const evolution of [1, 2, 3, 4, 5]) {
+    const value = {
+      ...equipment(),
+      slots: [{ index: 3, rank: 4 }, null, null],
+      echo_evolution: evolution,
+    };
+    const raw = JSON.stringify({ v: 1, results: [{ ok: true, value }] });
+    const extracted = readOwnedLoadout({ co_op_batch: () => raw });
+    assert.deepEqual(extracted, value);
+    validatePayload("join", {
+      local_seed: 123,
+      identity: null,
+      owned_loadout: extracted,
+    });
+    const updated = structuredClone(capture);
+    const participant = updated.snapshot.participants[1];
+    participant.owned_loadout = {
+      ...extracted,
+      selected_ship: participant.selected_ship,
+    };
+    publication(updated);
+    assert.equal(participant.owned_loadout.echo_evolution, evolution);
+    assert.equal(Object.hasOwn(extracted, "boss_generations"), false);
+  }
+});
+
+test("Echo evolution refuses malformed tokens, wrong slots and persisted progression containers", () => {
+  const valid = {
+    ...equipment(),
+    slots: [{ index: 3, rank: 1 }, null, null],
+    echo_evolution: 2,
+  };
+  const invalid = [
+    ...[undefined, null, 0, 6, -1, 1.5, "2", true, NaN, Infinity].map(
+      (echo_evolution) => ({ ...valid, echo_evolution }),
+    ),
+    { ...valid, slots: [null, null, { index: 3, rank: 1 }] },
+    { ...valid, slots: [{ index: 0, rank: 1 }, null, null] },
+    { ...valid, boss_generations: [[0, 0, 0, 0, 0]] },
+    { ...valid, currency: [10, 10, 10] },
+    (() => {
+      const value = { ...valid };
+      delete value.relic_count;
+      return value;
+    })(),
+  ];
+  for (const value of invalid) {
+    assert.throws(() =>
+      spec({ local_seed: 123, identity: null, owned_loadout: value }),
+    );
+    // JSON's undefined/NaN handling can erase or normalize a malformed token;
+    // direct shape rejection above remains the oracle for those inputs.
+    if (
+      value.echo_evolution !== undefined &&
+      Number.isFinite(value.echo_evolution)
+    ) {
+      const raw = JSON.stringify({ v: 1, results: [{ ok: true, value }] });
+      assert.throws(() => readOwnedLoadout({ co_op_batch: () => raw }));
+    }
+  }
+});
+
 // Native export and committed Git bytes use LF. A Windows text checkout may
 // supply CRLF; this changes no JSON value or native numeric data.
 const canonicalFixtureBytes = (raw) =>

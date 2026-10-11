@@ -1,17 +1,38 @@
-# Co-op stages and boundaries
+# Co-op integration and evidence boundaries
 
-The invitation/signaling service, browser transport and native authority are implemented independently. They are not yet wired into the shipped browser flight controller. The game still launches a solo expedition.
+## Current normal build
 
-`game_core::co_op` operates on the actual Game ECS: one host and seven guests, fixed 60 Hz input, participant-owned primary shots, shared destructible bodies and targeted hostile hits. The entire original solo Game is retained and restored on exit. Guest metadata excludes Profile, currency, ranks, XP and inventory. This stage uses validated factory hulls; owned guest hulls/loadouts, automatic abilities and shared rewards remain required work. Local seeds never replace the host world seed.
+The dock's INVITE/JOIN panel is connected to the browser controller and real Rust Game/Replica ports. This is an experimental local co-op foundation, not a completed multiplayer release. One authoritative host can admit seven guests. The host's seeded universe and dock are shared; each client retains separate local progression. Exiting restores the boxed original solo Game. Shared rewards and missions remain disabled.
 
-`apps/game/src/coop` opens real ordered WebRTC DataChannels through the ephemeral signaling service. Transport readiness requires an opened channel and validated hello. Admission and simulation readiness are separate. Frames are versioned and bounded to 64 KiB; buffered sends have a 262144-byte ceiling with no application backlog. Session IDs, membership epochs and strictly increasing sequences reject retired traffic. Authenticated channel IDs must be mapped to the native participant API by the future adapter.
+The controller uses ordered WebRTC DataChannels and ephemeral signaling. Channel opening and validated hello establish transport readiness; native admission and a complete committed publication establish game readiness separately. Session IDs, membership epochs and increasing sequences reject retired traffic. Remote inputs bind to their authenticated participants. Frames remain bounded to 64 KiB, buffered sends to 262,144 bytes, with no unbounded application send backlog.
 
-Actual same-page browser loopback connected two real RTCPeerConnection clients, delivered a declared join/admission/input fixture, ended, rejoined a distinct session and disposed all four created connections with zero tracked timers/requests. It did not call Game, render remote pilots or exercise separate machines/NAT/TURN. Earlier Origin and native-open failures are retained in the evidence. During host-end the guest observed a native SCTP close error; cleanup succeeded, but friendly termination wording remains a presentation task.
+Publication acquisition pins one native revision and bounded body pages. The guest stages a complete publication and commits it transactionally; an incomplete update does not replace its current native world. Body occupancy and authored transforms are native data. These mechanisms do not establish bandwidth, latency or eight-client performance acceptance.
 
-## Next integration gate
+## Owned equipment and native abilities
 
-Publish coherent snapshots/body pages from one exact native revision. A 60 Hz tick invalidates an older page revision; a remote query cannot simply fetch arbitrary pages from the continuously advancing live Game. Cache one bounded publication set or introduce an explicit acquisition phase, then define update cadence/backpressure within the existing limits. The exercised full snapshot is approximately 45 KB for eight participants and 180 shots; this is a finite fixture, not a bandwidth/performance guarantee. Avoid transmitting the full world or Profile each frame.
+The native solo Profile exports a bounded `OwnedLoadout`: selected/owned hull declarations, patch/victory facts, selected-hull XP, six hardware ranks, three equipped ability/rank declarations, starter-training fact and relic count. Full Profile, currency, cargo, collection history and save containers are excluded. This is a self-declared offline equipment claim, not cryptographic proof of earned ownership. Native validation applies registry, hull compatibility and effective level/rank rules; the browser checks the bounded shape.
 
-Bind the WASM API, map local/remote inputs through authenticated membership, render interpolated replicas with damage holes and local camera/input targeting, and prove two actual browser game clients share destruction. Keep all collected progression transactions disabled until a reviewed reward/ownership policy exists. Test host join/title/quit/timeout restoration, stale callbacks, guest death, reconnect, CPU/memory, congestion and remote networks. Do not increase existing gameplay caps to hide a failure.
+Current normal native gameplay has per-pilot primary attacks and the RENKO/Pulse Lens fifth-successful-primary extra bolt. The bolt carries participant ID and membership epoch, uses actual collision/destruction paths and respects the 180-projectile cap. Refused primaries do not advance its counter; a refused bonus is consumed rather than replayed. Native parity tests compare HUGO delayed recharge and PAN movement with corresponding solo builds. They do not prove all automatic abilities or audiovisual parity.
 
-Temporary RTC QA uses one localhost listener, separate exact page/service origins and no microphone/camera permissions. It does not relax the signaling service's Origin policy and is excluded from the game package. The persistent game preview remains singular.
+Ordinary Pulse Echo is the next implementation slice. Its earned boss evolution cannot be reconstructed from current equipment fields. The additive `echo_evolution` proposal is a native-exported integer 1–5 attached only to equipped ordinary offensive ability 3; absence means evolution one. Browser boundary support is in development. Native cadence, ownership, collision/cap/lifecycle tests and a matching rebuilt bundle are required before calling it integrated. Do not insert fabricated boss history into a temporary guest Profile. Mixed older clients have not been accepted; use matching tested bundles.
+
+Repulsor Nova, Ion Wake, Royal/signature effects and guest transient ability lights/particles remain separate gaps. Published projectiles and damaged bodies do not establish complete remote effects, audio or progression.
+
+## Actual validation scopes
+
+See `artifacts/league-coop-native-20261012/README.md` and its reports for exact revisions and limitations:
+
+- Factory-loadout browser runs use immutable normal 48bec87 bundles. WebGPU lifecycle and WebGL2 drive/fire, host end, distinct-session rejoin, guest exit and disposal were observed on two actual local Rust/WASM clients. These are not current owned-loadout tests.
+- Owned-starter runs use normal b34d02c and helper 15b9e0f. A visible WebGPU retry passed native metadata/complete commits, movement/fire, lifecycle and unchanged native/IndexedDB save hashes. An earlier off-screen Drive timeout remains failed; eventual cleanup passed. Exact scheduling causation was not established.
+- The later visibility safeguard refuses hidden/off-screen drive observations. Earlier successful runs do not execute that amended helper. A fresh source-pinned stage is required for a new claim.
+- Normal 1b754da passed 805 Rust tests, 546 shell tests and strict native/WASM Clippy. Eight explicit native exporters and one existing Windows case were skipped. Final art captures do not extend the earlier RTC scope.
+
+Owned WebGL2 RTC, advanced owned builds, fifth-shot ownership through the browser, equal-count cell mutation over RTC, eight clients, Internet/NAT/TURN, physical phones, background recovery and performance soaks remain open. A native unit test, synthetic boundary fixture or channel-ready event is not a real gameplay run.
+
+## Runtime and QA discipline
+
+One normal game preview is retained. Studio and signaling are separate services; the shipped game does not depend on Studio. Temporary native RTC QA replaces regular signaling only for bounded tests. Dispose clients, stop the exact owned process and restore regular signaling afterward. No microphone/camera permissions or relaxed Origin policy are required.
+
+Stage preparation pins source HEAD, runtime/package hashes, compilation time and addressed bundles before and after copying. Changed source or package must fail closed; never bypass the provenance guard. Unchanged compiled packages may be carried forward across evidence-only commits only after rechecking both hashes and preserving compilation time.
+
+Diagnostic WARP retains isolated QA flags and disables progression. Native co-op startup rejects that world even after `WARP 0 0` returns to the dock. The panel can offer an invitation based on position, then display a generic failure after native refusal. Use a fresh unwarped expedition for co-op acceptance. Source inspection supports the retained failure, but its actual native error was not captured.

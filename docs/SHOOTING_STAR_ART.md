@@ -6,9 +6,11 @@ The group submits **644 nucleus +176 coma +64 tail =884 cells** in full density 
 
 The existing layer-2 field hash selects the original angle, 80-second cycle, 18-second pass and 22-world-unit/second motion. Parallax remains 0.48, encoded once from the unmodified birth origin. The host supplies the eased world viewport; zoom changes projection rather than authored occupancy or scale. Relative tail particles move through deterministic age/side oscillation and remain within the same head group. Reduced Motion freezes the cosmetic clock, including head motion, colors and tail positions. The runtime uses existing hard and radially filtered soft extraction with emission 0.18–0.26 and no light response or new light source. It changes no gameplay, save, combat RNG or audio state.
 
-## Root integration
+The particle clock now uses the same seeded phase as the head. Previously, dust reset at absolute 80-second boundaries while the head could still be mid-pass; visible dust jumped despite continuous head motion. The correction resets the trail only at the seeded cycle's invisible boundary. Native continuity checks cover full/reduced density and exact Reduced Motion packets; the clock change adds no allocation, entity or transform.
 
-The art commit deliberately leaves shared registration and `regions.rs` unchanged. Register `mod shooting_star;` in the native core. Replace the existing `else if layer == 2` point-trail block with:
+## Native integration
+
+The group is registered in the native core and extracted from the existing layer-2 field. The following records its original integration contract; the clock refinement changes no registration or caller behavior:
 
 ```rust
 crate::shooting_star::extract(

@@ -49,6 +49,8 @@ export interface OwnedLoadout {
   slots: ({ index: number; rank: number } | null)[];
   trained_starter: boolean;
   relic_count: number;
+  /** Native-exported ordinary Pulse Echo evolution; absent retains evolution one. */
+  echo_evolution?: number;
 }
 export class TransportError extends Error {
   constructor(public readonly code: string) {
@@ -144,11 +146,12 @@ export function ownedLoadout(value: unknown): asserts value is OwnedLoadout {
     "slots",
     "trained_starter",
     "relic_count",
+    "echo_evolution",
   ]);
   const bounded = (n: unknown, min: number, max: number) =>
     uint(n) && Number(n) >= min && Number(n) <= max;
   if (
-    Object.keys(o).length !== 10 ||
+    Object.keys(o).length !== (Object.hasOwn(o, "echo_evolution") ? 11 : 10) ||
     o.version !== 1 ||
     !bounded(o.selected_ship, 0, 9) ||
     !bounded(o.owned_ships, 1, 1023) ||
@@ -174,6 +177,13 @@ export function ownedLoadout(value: unknown): asserts value is OwnedLoadout {
     )
       fail("invalid_owned_loadout");
   }
+  if (
+    Object.hasOwn(o, "echo_evolution") &&
+    (!bounded(o.echo_evolution, 1, 5) ||
+      o.slots[0] === null ||
+      record(o.slots[0]).index !== 3)
+  )
+    fail("invalid_owned_loadout");
 }
 function input(value: unknown): void {
   const o = record(value, ["epoch", "seq", "input"]);
