@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 788,
+  "revision": 804,
   "name": "Galaxy Royale",
   "phase": "Playable solo slice → content and validation",
-  "updatedAt": "2026-10-11T15:55:58.484Z",
+  "updatedAt": "2026-10-11T17:00:09.438Z",
   "tasks": [
     {
       "id": "studio",
@@ -1039,9 +1039,9 @@
     {
       "id": "task-05dd95cd",
       "title": "Invite friends for co-op expeditions",
-      "description": "Accepted eight participants including host. Central dock Invite/Join with encrypted hex invitation; guests use host seed and dock. Host quits/joins elsewhere ends session and guests return to their own local worlds. Gameplay specialist is implementing signaling/admission tests in an isolated branch. Shared authoritative Rust entities, actual WebRTC peers, progression ownership and cross-network recovery remain pending.",
+      "description": "Real ordered RTC transport, signaling lifecycle, bounded framing and teardown are integrated as a separate stage. Root proved two actual same-page RTCPeerConnections through fixture admission/input, host end, new session and disposal; four created/four closed, zero tracked requests/timers. Root owns browser Game integration. Remote NAT/TURN, eight browser players, rewards, save compatibility and playable reconnect remain pending.",
       "department": "Networking",
-      "owner": "Unassigned",
+      "owner": "/root",
       "status": "active",
       "priority": "normal",
       "dependencies": [
@@ -1050,7 +1050,7 @@
       "acceptanceCriteria": [
         {
           "text": "Define authoritative world ownership and invite lifecycle",
-          "met": false
+          "met": true
         },
         {
           "text": "Synchronize destruction, missions and progression without duplicate rewards",
@@ -1061,19 +1061,30 @@
           "met": false
         }
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "label": "Scoped integrated delivery and pending gates",
+          "kind": "artifact",
+          "path": "artifacts/collection-coop-20261012/README.md"
+        },
+        {
+          "label": "Native or transport source handoff",
+          "kind": "artifact",
+          "path": "artifacts/collection-coop-20261012/transport/NATIVE_OPEN_AMENDMENT.md"
+        }
+      ],
       "blocker": "",
-      "revision": 3,
+      "revision": 5,
       "createdAt": "2026-10-10T15:31:55.153Z",
-      "updatedAt": "2026-10-11T11:18:51.352Z"
+      "updatedAt": "2026-10-11T17:00:09.064Z"
     },
     {
       "id": "task-7e8e0a50",
       "title": "Authoritative multiplayer world and session foundation",
-      "description": "Future prerequisite for invite co-op and battle royale. Define trusted simulation/world ownership, seeded sessions, invitation lifecycle, synchronization of pixel destruction and mission rewards, reconnect, anti-duplication and compatible profile versions. No current network implementation or server acceptance is implied.",
+      "description": "Real Game ECS host-authority session is integrated and independently reviewed: host plus seven factory-hull guests, owned primary shots, shared occupied-cell holes, targeted damage and exact original solo restoration. Session/epoch/replay/input-expiry boundaries have native checks. Root owns next WASM/publication/replica integration. No shared browser-world, owned guest loadouts, missions or durable rewards acceptance is claimed.",
       "department": "Networking",
-      "owner": "Unassigned",
-      "status": "backlog",
+      "owner": "/root",
+      "status": "active",
       "priority": "high",
       "dependencies": [
         "slice-review"
@@ -1081,7 +1092,7 @@
       "acceptanceCriteria": [
         {
           "text": "Document authority, session identity, invite/reconnect lifecycle and compatible save boundaries",
-          "met": false
+          "met": true
         },
         {
           "text": "Synchronize movement, destruction, missions and single-claim rewards under server validation",
@@ -1092,11 +1103,22 @@
           "met": false
         }
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "label": "Scoped integrated delivery and pending gates",
+          "kind": "artifact",
+          "path": "artifacts/collection-coop-20261012/README.md"
+        },
+        {
+          "label": "Native or transport source handoff",
+          "kind": "artifact",
+          "path": "artifacts/collection-coop-20261012/engine/HANDOFF.md"
+        }
+      ],
       "blocker": "",
-      "revision": 1,
+      "revision": 3,
       "createdAt": "2026-10-10T16:00:26.992Z",
-      "updatedAt": "2026-10-10T16:00:26.992Z"
+      "updatedAt": "2026-10-11T17:00:09.119Z"
     },
     {
       "id": "task-acf182ad",
@@ -6884,6 +6906,48 @@
       "revision": 3,
       "createdAt": "2026-10-11T15:21:56.896Z",
       "updatedAt": "2026-10-11T15:55:58.391Z"
+    },
+    {
+      "id": "task-27c9b19e",
+      "title": "Sports-arcade Hangar and ability collection hierarchy",
+      "description": "Native cached alloy fittings and detailed category/corporation symbols are integrated. Root refined authoritative equipped/owned/discovered states and responsive detail/actions layout. Actual wide/compact WebGPU/WebGL2 desktop captures, slot clear/equip/reload and independent source/image review are retained. Phone, moving combat and human style approval remain separate gates.",
+      "department": "Art / UX",
+      "owner": "/root/production_research",
+      "status": "complete",
+      "priority": "normal",
+      "dependencies": [
+        "task-d86101ee"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Native detailed category/corporation symbols and selection/ownership hierarchy preserve discovered-only content and authoritative cost labels.",
+          "met": true
+        },
+        {
+          "text": "Focused native clipping/budget/hit geometry checks and independent source review pass.",
+          "met": true
+        },
+        {
+          "text": "Actual wide and compact desktop browser captures verify both backends and collection actions on the integrated build.",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Scoped integrated delivery and pending gates",
+          "kind": "artifact",
+          "path": "artifacts/collection-coop-20261012/README.md"
+        },
+        {
+          "label": "Native or transport source handoff",
+          "kind": "artifact",
+          "path": "artifacts/collection-coop-20261012/ui/HANDOFF.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-11T16:03:55.341Z",
+      "updatedAt": "2026-10-11T17:00:09.007Z"
     }
   ],
   "reviews": [
@@ -8525,6 +8589,57 @@
           "path": "artifacts/space-sports-style-20261012/settings-webgpu-after.jpg"
         }
       ]
+    },
+    {
+      "id": "review-76ff9208",
+      "title": "Collection hierarchy and co-op stage review — actual October 12 continuation",
+      "body": "Asynchronous actual contributions: Production authored native collection fittings and reviewed Game authority, then inspected retained final wide/compact images. Engine authored Game authority and independently found real positive-health Coil segments with max_hull=0 rejected by the first wire validator; the scoped segment fix passed. Gameplay authored RTC transport and independently inspected Root retained successful browser reports. Root refined wide actions/compact stacking, tested actual empty/equip/reload, reproduced Origin/native-open failures, verified the final real channel lifecycle and integrated all bounded changes. Native-open idempotence and sanitized RTC error details were reviewed after the observed race. No live meeting, unattended staff, NAT play or physical acceptance is claimed.",
+      "author": "Producer",
+      "source": "Actual integrated source, author/reviewer handoffs and Root CUA observations through fb45246",
+      "createdAt": "2026-10-11T17:00:09.196Z",
+      "participants": [
+        "/root",
+        "/root/engine_research",
+        "/root/gameplay_design",
+        "/root/production_research"
+      ],
+      "taskIds": [
+        "task-27c9b19e",
+        "task-05dd95cd",
+        "task-7e8e0a50"
+      ],
+      "evidence": [
+        {
+          "label": "Authority independent review",
+          "kind": "artifact",
+          "path": "artifacts/collection-coop-20261012/authority-review/REVIEW.md"
+        },
+        {
+          "label": "Transport independent review",
+          "kind": "artifact",
+          "path": "artifacts/collection-coop-20261012/transport-review/REVIEW.md"
+        },
+        {
+          "label": "Final wide collection review",
+          "kind": "artifact",
+          "path": "artifacts/collection-coop-20261012/authority-review/COLLECTION_FINAL_WIDE.md"
+        },
+        {
+          "label": "Final compact collection review",
+          "kind": "artifact",
+          "path": "artifacts/collection-coop-20261012/authority-review/COLLECTION_FINAL_COMPACT.md"
+        },
+        {
+          "label": "Preserved native-open and browser review evidence",
+          "kind": "artifact",
+          "path": "artifacts/collection-coop-20261012/transport-review/evidence.zip"
+        },
+        {
+          "label": "Actual Root RTC cleanup",
+          "kind": "artifact",
+          "path": "artifacts/collection-coop-20261012/rtc-final.txt"
+        }
+      ]
     }
   ],
   "decisions": [
@@ -8787,6 +8902,15 @@
       "author": "/root",
       "source": "Frozen specialist work, actual independent review and Root normal-build validation",
       "createdAt": "2026-10-11T15:55:58.139Z",
+      "status": "accepted"
+    },
+    {
+      "id": "decision-c62d85d1",
+      "title": "Keep native authority, RTC readiness and playable co-op acceptance separate",
+      "body": "Integrate reviewed isolated Game authority and real bounded RTC transport while the shipped controller remains solo. Transport open/hello, native admission and simulation readiness are separate states. Next: coherent cached publication from one native revision, authenticated WASM participant mapping and remote replicas. Keep collected reward transactions disabled until ownership/idempotence policy is reviewed. Temporary guest factory hulls do not claim guest-owned progression. Existing gameplay and UI caps stay unchanged.",
+      "author": "Producer",
+      "source": "Actual integrated source, author/reviewer handoffs and Root CUA observations through fb45246",
+      "createdAt": "2026-10-11T17:00:09.328Z",
       "status": "accepted"
     }
   ],
@@ -10771,6 +10895,92 @@
       ],
       "url": "http://league-final.localhost:4173/?qa=1&renderer=webgpu",
       "knownIssues": "Full-game art consistency and final subjective approval remain ongoing. Moving crowded-combat perception and natural campaign acceptance are separate. Physical-device performance, cold/warm latency and30-minute memory/frame-time soak unmeasured. Original theme recording and audible audio acceptance unchanged."
+    },
+    {
+      "id": "build-b1ec0067",
+      "title": "Combined native collections and bounded co-op stages — eb758e8",
+      "body": "Normal combined dual-WASM, TypeScript, game/PWA and Studio build passed. Runtime/package hashes are retained. Collection captures use 92433b4 with final UI from 0dd47b2; later transport changes do not affect those frames. The separate local RTC harness uses declared authority fixtures, not Game. Latest integrated native and shell logs are retained.",
+      "author": "Producer",
+      "source": "Actual integrated source, author/reviewer handoffs and Root CUA observations through fb45246",
+      "createdAt": "2026-10-11T17:00:09.260Z",
+      "revision": "eb758e8453d4d016634fa9ec60e304af396437c4",
+      "evidence": [
+        {
+          "label": "Normal build",
+          "kind": "artifact",
+          "path": "artifacts/collection-coop-20261012/collection-coop-build-delivery.log"
+        },
+        {
+          "label": "Native checks",
+          "kind": "artifact",
+          "path": "artifacts/collection-coop-20261012/collection-coop-native-final.log"
+        },
+        {
+          "label": "Shell checks",
+          "kind": "artifact",
+          "path": "artifacts/collection-coop-20261012/collection-coop-shell-final.log"
+        },
+        {
+          "label": "Strict Clippy",
+          "kind": "artifact",
+          "path": "artifacts/collection-coop-20261012/collection-coop-clippy-final.log"
+        },
+        {
+          "label": "Wiki checks",
+          "kind": "artifact",
+          "path": "artifacts/collection-coop-20261012/collection-coop-wiki-final.log"
+        },
+        {
+          "label": "Build identity",
+          "kind": "artifact",
+          "path": "artifacts/collection-coop-20261012/tested-build.json"
+        },
+        {
+          "label": "Actual scope and browser files",
+          "kind": "artifact",
+          "path": "artifacts/collection-coop-20261012/README.md"
+        }
+      ],
+      "checks": [
+        {
+          "name": "Native workspace: 739 passed; four explicit exporters ignored",
+          "result": "pass"
+        },
+        {
+          "name": "Strict workspace/all-target Clippy",
+          "result": "pass"
+        },
+        {
+          "name": "Shell: 465 passed; one existing Windows skip",
+          "result": "pass"
+        },
+        {
+          "name": "Final Wiki: 20 passed",
+          "result": "pass"
+        },
+        {
+          "name": "Normal WebGPU/WebGL2 WASM, TypeScript, PWA and Studio build",
+          "result": "pass"
+        },
+        {
+          "name": "Actual wide/compact collection desktop checks and slot reload",
+          "result": "pass"
+        },
+        {
+          "name": "Actual local two-peer RTC lifecycle; four created/four closed",
+          "result": "pass"
+        },
+        {
+          "name": "Playable shared browser world and remote-network acceptance",
+          "result": "not_run"
+        },
+        {
+          "name": "Physical phone and 30-minute frame-time/RSS soak",
+          "result": "not_run"
+        }
+      ],
+      "url": "http://127.0.0.1:4173/",
+      "knownIssues": "Co-op browser adapter/replicas, owned guest loadouts and durable reward ownership are pending. Host-end guest may report native SCTP failure; cleanup succeeds, friendly wording remains. Compact collection navigation scrolls horizontally; human readability and moving combat need separate playtest. Audio unchanged."
     }
   ],
   "feedback": [],
@@ -18654,6 +18864,166 @@
       "author": "/root",
       "source": "Frozen specialist work, actual independent review and Root normal-build validation",
       "createdAt": "2026-10-11T15:55:58.484Z"
+    },
+    {
+      "id": "a80e5a58-39f0-485b-974b-482bbc0e1697",
+      "revision": 789,
+      "kind": "task.update",
+      "itemId": "task-05dd95cd",
+      "title": "Invite friends for co-op expeditions",
+      "author": "Producer",
+      "source": "Actual root continuation dispatch and source inspection at 5aa5cfa",
+      "createdAt": "2026-10-11T16:03:55.303Z"
+    },
+    {
+      "id": "46b7a22c-e36d-46e7-ad07-bfe1a6d8d05c",
+      "revision": 790,
+      "kind": "task.update",
+      "itemId": "task-7e8e0a50",
+      "title": "Authoritative multiplayer world and session foundation",
+      "author": "Producer",
+      "source": "Actual root continuation dispatch and source inspection at 5aa5cfa",
+      "createdAt": "2026-10-11T16:03:55.324Z"
+    },
+    {
+      "id": "412a9528-c070-4412-8274-33d41f8c0c06",
+      "revision": 791,
+      "kind": "task.create",
+      "itemId": "task-27c9b19e",
+      "title": "Sports-arcade Hangar and ability collection hierarchy",
+      "author": "Producer",
+      "source": "Actual root continuation dispatch and source inspection at 5aa5cfa",
+      "createdAt": "2026-10-11T16:03:55.341Z"
+    },
+    {
+      "id": "2a962cd2-5695-4ccd-9b3b-0a4e52ee74b3",
+      "revision": 792,
+      "kind": "run",
+      "itemId": "run-a8b21034",
+      "title": "engine_research · running",
+      "author": "Producer",
+      "source": "Actual root continuation dispatch and source inspection at 5aa5cfa",
+      "createdAt": "2026-10-11T16:03:55.371Z"
+    },
+    {
+      "id": "0fce65a1-754c-4ed0-8c31-b28df9a3012d",
+      "revision": 793,
+      "kind": "run",
+      "itemId": "run-2fe1379b",
+      "title": "gameplay_design · running",
+      "author": "Producer",
+      "source": "Actual root continuation dispatch and source inspection at 5aa5cfa",
+      "createdAt": "2026-10-11T16:03:55.399Z"
+    },
+    {
+      "id": "5e22b5f0-92a2-4433-913b-fe6f752c6369",
+      "revision": 794,
+      "kind": "run",
+      "itemId": "run-e971229a",
+      "title": "production_research · running",
+      "author": "Producer",
+      "source": "Actual root continuation dispatch and source inspection at 5aa5cfa",
+      "createdAt": "2026-10-11T16:03:55.430Z"
+    },
+    {
+      "id": "c1e3c0c4-0c8a-4096-a0e3-c938e1e9506d",
+      "revision": 795,
+      "kind": "task.update",
+      "itemId": "task-27c9b19e",
+      "title": "Sports-arcade Hangar and ability collection hierarchy",
+      "author": "Producer",
+      "source": "Actual integrated source, author/reviewer handoffs and Root CUA observations through fb45246",
+      "createdAt": "2026-10-11T17:00:09.007Z"
+    },
+    {
+      "id": "f125459a-09dc-4b3d-98d5-a193c56cec39",
+      "revision": 796,
+      "kind": "task.update",
+      "itemId": "task-05dd95cd",
+      "title": "Invite friends for co-op expeditions",
+      "author": "Producer",
+      "source": "Actual integrated source, author/reviewer handoffs and Root CUA observations through fb45246",
+      "createdAt": "2026-10-11T17:00:09.064Z"
+    },
+    {
+      "id": "22ab8660-3105-42b2-b833-d924d209e645",
+      "revision": 797,
+      "kind": "task.update",
+      "itemId": "task-7e8e0a50",
+      "title": "Authoritative multiplayer world and session foundation",
+      "author": "Producer",
+      "source": "Actual integrated source, author/reviewer handoffs and Root CUA observations through fb45246",
+      "createdAt": "2026-10-11T17:00:09.119Z"
+    },
+    {
+      "id": "722813e4-8d0f-4eb1-a0a1-063b1a8e2630",
+      "revision": 798,
+      "kind": "review",
+      "itemId": "review-76ff9208",
+      "title": "Collection hierarchy and co-op stage review — actual October 12 continuation",
+      "author": "Producer",
+      "source": "Actual integrated source, author/reviewer handoffs and Root CUA observations through fb45246",
+      "createdAt": "2026-10-11T17:00:09.196Z"
+    },
+    {
+      "id": "485de926-33ce-4c6d-80cd-6c05119e201a",
+      "revision": 799,
+      "kind": "build",
+      "itemId": "build-b1ec0067",
+      "title": "Combined native collections and bounded co-op stages — eb758e8",
+      "author": "Producer",
+      "source": "Actual integrated source, author/reviewer handoffs and Root CUA observations through fb45246",
+      "createdAt": "2026-10-11T17:00:09.260Z"
+    },
+    {
+      "id": "3aad5ebd-d625-45e0-8c8f-0bd648f31232",
+      "revision": 800,
+      "kind": "decision",
+      "itemId": "decision-c62d85d1",
+      "title": "Keep native authority, RTC readiness and playable co-op acceptance separate",
+      "author": "Producer",
+      "source": "Actual integrated source, author/reviewer handoffs and Root CUA observations through fb45246",
+      "createdAt": "2026-10-11T17:00:09.328Z"
+    },
+    {
+      "id": "1c9266b2-3668-4eda-93c6-a25aa05eb895",
+      "revision": 801,
+      "kind": "run",
+      "itemId": "run-62c429de",
+      "title": "engine_research · completed",
+      "author": "Producer",
+      "source": "Actual integrated source, author/reviewer handoffs and Root CUA observations through fb45246",
+      "createdAt": "2026-10-11T17:00:09.359Z"
+    },
+    {
+      "id": "4169ddc1-91f7-437b-8d27-bdb31a9eb346",
+      "revision": 802,
+      "kind": "run",
+      "itemId": "run-4f213df0",
+      "title": "gameplay_design · completed",
+      "author": "Producer",
+      "source": "Actual integrated source, author/reviewer handoffs and Root CUA observations through fb45246",
+      "createdAt": "2026-10-11T17:00:09.389Z"
+    },
+    {
+      "id": "44e272aa-03c6-4160-92f5-ff09e121ed8e",
+      "revision": 803,
+      "kind": "run",
+      "itemId": "run-9b881fa8",
+      "title": "production_research · completed",
+      "author": "Producer",
+      "source": "Actual integrated source, author/reviewer handoffs and Root CUA observations through fb45246",
+      "createdAt": "2026-10-11T17:00:09.421Z"
+    },
+    {
+      "id": "2c7b11f9-df7d-455d-b1da-5eee397c3ab8",
+      "revision": 804,
+      "kind": "run",
+      "itemId": "run-8a335e16",
+      "title": "spark-audit · failed",
+      "author": "Producer",
+      "source": "Actual integrated source, author/reviewer handoffs and Root CUA observations through fb45246",
+      "createdAt": "2026-10-11T17:00:09.438Z"
     }
   ],
   "runRecords": [
@@ -25678,6 +26048,165 @@
       "author": "/root",
       "source": "Frozen specialist work, actual independent review and Root normal-build validation",
       "createdAt": "2026-10-11T15:55:58.484Z"
+    },
+    {
+      "id": "run-a8b21034",
+      "title": "engine_research · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "engine_research",
+      "state": "running",
+      "observedAt": "2026-10-11T16:03:55.357Z",
+      "taskIds": [
+        "task-7e8e0a50"
+      ],
+      "summary": "Dispatched actual Rust authority implementation in existing managed engine worktree. Root owns integration.",
+      "evidence": [
+        {
+          "label": "Actual dispatch / branch ownership",
+          "kind": "note",
+          "details": "Dispatched actual Rust authority implementation in existing managed engine worktree. Root owns integration."
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual root continuation dispatch and source inspection at 5aa5cfa",
+      "createdAt": "2026-10-11T16:03:55.371Z"
+    },
+    {
+      "id": "run-2fe1379b",
+      "title": "gameplay_design · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "gameplay_design",
+      "state": "running",
+      "observedAt": "2026-10-11T16:03:55.382Z",
+      "taskIds": [
+        "task-05dd95cd"
+      ],
+      "summary": "Worker confirms tracked-clean baseline and actual codex/co-op-transport branch at 5aa5cfa, inspecting signaling contract.",
+      "evidence": [
+        {
+          "label": "Actual dispatch / branch ownership",
+          "kind": "note",
+          "details": "Worker confirms tracked-clean baseline and actual codex/co-op-transport branch at 5aa5cfa, inspecting signaling contract."
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual root continuation dispatch and source inspection at 5aa5cfa",
+      "createdAt": "2026-10-11T16:03:55.399Z"
+    },
+    {
+      "id": "run-e971229a",
+      "title": "production_research · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "production_research",
+      "state": "running",
+      "observedAt": "2026-10-11T16:03:55.411Z",
+      "taskIds": [
+        "task-27c9b19e"
+      ],
+      "summary": "Dispatched native Hangar/Forge sports collection polish in existing managed art worktree. Root owns browser acceptance.",
+      "evidence": [
+        {
+          "label": "Actual dispatch / branch ownership",
+          "kind": "note",
+          "details": "Dispatched native Hangar/Forge sports collection polish in existing managed art worktree. Root owns browser acceptance."
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual root continuation dispatch and source inspection at 5aa5cfa",
+      "createdAt": "2026-10-11T16:03:55.430Z"
+    },
+    {
+      "id": "run-62c429de",
+      "title": "engine_research · completed",
+      "agentId": "/root/engine_research",
+      "agentLabel": "engine_research",
+      "state": "completed",
+      "observedAt": "2026-10-11T17:00:09.340Z",
+      "taskIds": [
+        "task-7e8e0a50"
+      ],
+      "summary": "Completed bounded Game authority implementation and independent transport/native-open review; handed off pinned source and actual checks. Root owns the unfinished shared-browser integration.",
+      "evidence": [
+        {
+          "label": "Actual bounded result",
+          "kind": "artifact",
+          "path": "artifacts/collection-coop-20261012/engine/HANDOFF.md",
+          "details": "Completed bounded Game authority implementation and independent transport/native-open review; handed off pinned source and actual checks. Root owns the unfinished shared-browser integration."
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual integrated source, author/reviewer handoffs and Root CUA observations through fb45246",
+      "createdAt": "2026-10-11T17:00:09.359Z"
+    },
+    {
+      "id": "run-4f213df0",
+      "title": "gameplay_design · completed",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "gameplay_design",
+      "state": "completed",
+      "observedAt": "2026-10-11T17:00:09.371Z",
+      "taskIds": [
+        "task-05dd95cd"
+      ],
+      "summary": "Completed bounded real RTC transport, segment/native-open amendments and independent inspection of Root actual local browser reports. This is not playable shared Game acceptance.",
+      "evidence": [
+        {
+          "label": "Actual bounded result",
+          "kind": "artifact",
+          "path": "artifacts/collection-coop-20261012/transport/NATIVE_OPEN_AMENDMENT.md",
+          "details": "Completed bounded real RTC transport, segment/native-open amendments and independent inspection of Root actual local browser reports. This is not playable shared Game acceptance."
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual integrated source, author/reviewer handoffs and Root CUA observations through fb45246",
+      "createdAt": "2026-10-11T17:00:09.389Z"
+    },
+    {
+      "id": "run-9b881fa8",
+      "title": "production_research · completed",
+      "agentId": "/root/production_research",
+      "agentLabel": "production_research",
+      "state": "completed",
+      "observedAt": "2026-10-11T17:00:09.403Z",
+      "taskIds": [
+        "task-27c9b19e"
+      ],
+      "summary": "Completed native collection fittings, independent authority review and final retained-image inspection. Root performed actual browser actions.",
+      "evidence": [
+        {
+          "label": "Actual bounded result",
+          "kind": "artifact",
+          "path": "artifacts/collection-coop-20261012/authority-review/COLLECTION_FINAL_COMPACT.md",
+          "details": "Completed native collection fittings, independent authority review and final retained-image inspection. Root performed actual browser actions."
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual integrated source, author/reviewer handoffs and Root CUA observations through fb45246",
+      "createdAt": "2026-10-11T17:00:09.421Z"
+    },
+    {
+      "id": "run-8a335e16",
+      "title": "spark-audit · failed",
+      "agentId": "/root/spark-audit",
+      "agentLabel": "spark-audit",
+      "state": "failed",
+      "observedAt": "2026-10-11T17:00:09.433Z",
+      "taskIds": [
+        "task-27c9b19e",
+        "task-05dd95cd"
+      ],
+      "summary": "Separate read-only audit failed on local router 502/400 responses; no accepted report or passing review was produced.",
+      "evidence": [
+        {
+          "label": "Actual bounded result",
+          "kind": "artifact",
+          "path": "artifacts/collection-coop-20261012/README.md",
+          "details": "Separate read-only audit failed on local router 502/400 responses; no accepted report or passing review was produced."
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual integrated source, author/reviewer handoffs and Root CUA observations through fb45246",
+      "createdAt": "2026-10-11T17:00:09.438Z"
     }
   ],
   "phaseDescription": "Desktop-first Rust/WASM solo game and local Studio are implemented. Reviewed occupied-cell art, reproducible conversion, responsive native settings/icons and minimap, strict GitHub integration gates and source-backed Dev Bible are integrated. Natural campaign balance, human listening, owner-private update lifecycle and physical phones remain separate pending gates."
