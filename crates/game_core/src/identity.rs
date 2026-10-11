@@ -283,7 +283,7 @@ pub fn hud(profile: &Profile) -> Option<IdentityHud> {
         starter_ship: corp.starter_name().into(),
         starter_ability: abilities::get(corp.ability()).unwrap().name.into(),
         license: format!(
-            "{} flight license: {} systems. Your {} RAICHO includes an equipped rank 1 {}. Keep collected points; bank carried materials physically at Haven before death or abandonment.",
+            "{} MEISHI CARD: {} systems. Your {} RAICHO includes an equipped rank 1 {}. Keep collected points; bank carried materials physically at Haven before death or abandonment.",
             corp.name(),
             corp.role().to_lowercase(),
             corp.starter_name(),
@@ -302,16 +302,16 @@ pub fn onboarding_hud(game: &Game) -> Option<OnboardingHud> {
     let slot = ["offense", "defense", "passive"][def.category];
     let stage = p.stage.min(6);
     let title = [
-        "Accept your flight license",
+        "Accept your MEISHI CARD",
         "Leave Haven",
         "Destroy 10 asteroids",
         "Collect 10 matching materials",
         "Bank at Haven",
         "Upgrade your equipped starter",
-        "Flight license complete",
+        "Flight training complete",
     ][stage as usize];
     let description = match stage {
-        0 => "Review your corporation's starter RAICHO and equipment, then acknowledge the flight license.".into(),
+        0 => "Review your corporation's starter RAICHO and equipment, then acknowledge your MEISHI CARD.".into(),
         1 => "Fly beyond Haven's protected 240-unit radius. The dock shield keeps asteroids outside.".into(),
         2 => format!(
             "Asteroids destroyed: {}/10. Destroy real asteroids of any variety. Haven's tutorial belt awards no XP for your RAICHO; outer asteroids retain their normal rewards.",
@@ -716,7 +716,7 @@ impl Game {
     }
     pub fn acknowledge_license(&mut self) -> Result<(), String> {
         if self.profile.identity.is_none() || self.profile.onboarding.is_none() {
-            return Err("This pilot has no new flight-license mission.".into());
+            return Err("This pilot has no new MEISHI training mission.".into());
         }
         self.onboarding_fact(LICENSE);
         Ok(())

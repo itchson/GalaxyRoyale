@@ -83,7 +83,7 @@ function fixture(create = async () => {}) {
     opens: () => opens,
     closes: () => closes,
     portrait: () => nodes().find((n) => n.dataset.pixelKind === "portrait"),
-    issue: () => nodes().find((n) => n.textContent === "ISSUE LICENSE"),
+    issue: () => nodes().find((n) => n.textContent === "CREATE MEISHI"),
     close: () =>
       nodes().find(
         (n) => n.attributes["aria-label"] === "Cancel droid creation",

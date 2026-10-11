@@ -254,6 +254,12 @@ function conflictFixture() {
       audio: { update() {}, resume: async () => {}, suspend() {} },
       matchMedia: () => ({ matches: false }),
       paintUpgrades() {},
+      paintMeishiCard() {
+        return true;
+      },
+      paintCargo() {
+        return true;
+      },
       paintFlightMenu() {},
       store: {
         persistent: true,

@@ -118,6 +118,8 @@ const compiled = ts.transpileModule(
 
 const pageIds = [
   "pause-content",
+  "meishi-content",
+  "cargo-content",
   "upgrade-content",
   "hangar-content",
   "campaign-content",
@@ -321,6 +323,13 @@ function fixture() {
     paintUpgrades(dock) {
       calls.push(["paint-upgrades", dock]);
     },
+    paintMeishiCard() {
+      calls.push("paint-meishi");
+      return true;
+    },
+    paintCargo() {
+      return true;
+    },
     paintFlightMenu() {
       calls.push("paint-flight-menu");
       return true;
@@ -386,16 +395,20 @@ function fixture() {
   };
 }
 
-test("Escape opens a live ship menu, cancels controls and course, and toggles closed", async () => {
+test("Escape opens a live MEISHI menu, cancels controls and course, and toggles closed", async () => {
   const f = fixture(),
     c = f.context;
   f.press("Escape");
   assert.equal(c.paused, false);
   assert.equal(c.input.enabled, false);
   assert.equal(c.menu.hidden, false);
-  assert.deepEqual(f.visiblePages(), ["pause-content"]);
+  assert.deepEqual(f.visiblePages(), ["meishi-content"]);
   assert.ok(f.calls.includes("cancel-course"));
-  assert.ok(f.calls.includes("paint-flight-menu"));
+  assert.ok(f.calls.includes("paint-meishi"));
+  assert.equal(
+    f.calls.some((call) => Array.isArray(call) && call[0] === "paint-upgrades"),
+    false,
+  );
   assert.equal(f.calls.includes("audio-suspend"), false);
   assert.equal(
     f.calls.some((call) => Array.isArray(call) && call[0] === "paused"),
@@ -412,6 +425,25 @@ test("Escape opens a live ship menu, cancels controls and course, and toggles cl
   assert.equal(c.input.enabled, true);
   assert.equal(c.paused, false);
   await settle();
+});
+
+test("opening a dedicated page paints it once without building hidden collections", () => {
+  const f = fixture();
+  f.context.openMenu("settings");
+  assert.deepEqual(f.visiblePages(), ["settings-content"]);
+  assert.equal(f.calls.includes("paint-meishi"), false);
+  assert.equal(
+    f.calls.some((call) => Array.isArray(call) && call[0] === "paint-upgrades"),
+    false,
+  );
+  f.context.openMenu("upgrades");
+  assert.deepEqual(f.visiblePages(), ["upgrade-content"]);
+  assert.equal(
+    f.calls.filter(
+      (call) => Array.isArray(call) && call[0] === "paint-upgrades",
+    ).length,
+    1,
+  );
 });
 
 test("a world facility hit opens exactly its dedicated page without changing progression", async () => {

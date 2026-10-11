@@ -35,8 +35,8 @@
               id="pause-button"
               class="icon-button"
               data-pixel-icon="status-icon"
-              aria-label="RAICHO status"
-              title="RAICHO status / Escape"
+              aria-label="MEISHI CARD"
+              title="MEISHI CARD / Escape"
             >
               ≡
             </button>
@@ -230,6 +230,49 @@
         <p id="menu-description">
           The universe continues while you inspect your RAICHO.
         </p>
+        <nav
+          id="collection-navigation"
+          aria-label="Personal collections"
+          hidden
+        >
+          <button
+            id="collection-meishi"
+            class="text-button"
+            aria-pressed="false"
+          >
+            MEISHI
+          </button>
+          <button
+            id="collection-cargo"
+            class="text-button"
+            aria-pressed="false"
+          >
+            CARGO
+          </button>
+          <button
+            id="collection-hangar"
+            class="text-button"
+            aria-pressed="false"
+          >
+            HULLS
+          </button>
+          <button
+            id="collection-upgrades"
+            class="text-button"
+            aria-pressed="false"
+          >
+            ABILITIES
+          </button>
+          <button
+            id="collection-pause"
+            class="text-button"
+            aria-pressed="false"
+          >
+            STATS
+          </button>
+        </nav>
+        <div id="meishi-content" class="menu-page" hidden></div>
+        <div id="cargo-content" class="menu-page" hidden></div>
         <div id="pause-content" class="menu-page pause-page" hidden>
           <nav class="flight-menu-actions" aria-label="Flight actions">
             <button

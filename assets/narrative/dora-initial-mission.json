@@ -33,7 +33,7 @@
         {
           "id": "license-starter",
           "expression": "focused",
-          "text": "Your main manufacturer supplies one equipped starter: PAN Flux Drive, RENKO Pulse Lens, or HUGO Guard Coil. The crystal manufacturer adds no extra combat ability. Confirm your license when ready."
+          "text": "Your main manufacturer supplies one equipped starter: PAN Flux Drive, RENKO Pulse Lens, or HUGO Guard Coil. The crystal manufacturer adds no extra combat ability. Confirm your MEISHI CARD when ready."
         }
       ]
     },
@@ -45,7 +45,7 @@
         {
           "id": "departure-controls",
           "expression": "focused",
-          "text": "Left-click sets your course. Hold right mouse to aim at the cursor and fire along the RAICHO's nose. Escape opens RAICHO Status while the universe continues. Close the panel before your first departure."
+          "text": "Left-click sets your course. Hold right mouse to aim at the cursor and fire along the RAICHO's nose. Escape opens your MEISHI CARD while the universe continues. Close the panel before your first departure."
         },
         {
           "id": "departure-boundary",

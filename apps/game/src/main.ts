@@ -4,6 +4,8 @@ import { watchPwaUpdates } from "./pwa-updates";
 import { AudioEngine, type AudioState } from "./audio";
 import { PixelUiBridge } from "./pixel-ui";
 import { paintFlightMenu, type FlightMenuHud } from "./flight-menu";
+import { paintMeishiCard } from "./meishi";
+import { paintCargo } from "./cargo";
 import { paintUniverseMap, type UniverseMapData } from "./universe-map";
 import {
   bindWebglLifecycle,
@@ -205,6 +207,8 @@ let flightSafeInsets: [number, number] = [0, 0];
 let beforeLaunchMenu = false;
 type MenuTab =
   | "pause"
+  | "meishi"
+  | "cargo"
   | "upgrades"
   | "hangar"
   | "campaign"
@@ -469,7 +473,7 @@ function showDoraGuide(): void {
     );
   if (training.stage === 0)
     pages.unshift({
-      text: `Welcome, ${hud.identity.short_designation}. Your KIKAI license includes ${hud.identity.starter_ship} and ${hud.identity.starter_ability}.`,
+      text: `Welcome, ${hud.identity.short_designation}. Your MEISHI CARD records ${hud.identity.starter_ship} and ${hud.identity.starter_ability}.`,
       expression: 3,
     });
   let index = 0;
@@ -755,7 +759,10 @@ function syncFlightStatusLayout(): void {
       hit.bottom <= innerHeight - flightSafeInsets[1],
   );
 }
-function pause(dock: boolean): void {
+function pause(
+  dock: boolean,
+  page: MenuTab = dock ? "upgrades" : "meishi",
+): void {
   if (!galaxy || !launched) return;
   transitionEpoch++;
   input.enabled = false;
@@ -777,13 +784,12 @@ function pause(dock: boolean): void {
     ? "Craft abilities and improve this RAICHO with banked points and materials."
     : "Live telemetry / the universe keeps running.";
   hud = galaxy.hud();
-  paintUpgrades(dock);
   element("apply-update").hidden = !waitingUpdate;
   element<HTMLButtonElement>("apply-update").disabled = !hud.dock;
   paintSaveStatus();
   save(galaxy.profile());
   beforeLaunchMenu = false;
-  selectMenuTab(dock ? "upgrades" : "pause");
+  selectMenuTab(page);
   element("menu-close").focus();
   syncFlightState();
 }
@@ -826,8 +832,10 @@ function syncFlightState(): void {
 function openMenu(page: MenuTab): void {
   if (!galaxy) return;
   if (page === "upgrades") resetForge(element("upgrade-content"));
-  if (launched) pause(false);
-  else {
+  if (launched) {
+    pause(false, page);
+    return;
+  } else {
     transitionEpoch++;
     beforeLaunchMenu = true;
     launchScreen.hidden = true;
@@ -949,9 +957,11 @@ function selectMenuTab(tab: MenuTab): void {
   menuTab = tab;
   const headings: Record<MenuTab, [string, string]> = {
     pause: ["RAICHO", "FLIGHT LIVE"],
-    upgrades: ["HAVEN FORGE", "Craft, equip and upgrade."],
+    meishi: ["MEISHI CARD", "FLIGHT LIVE"],
+    cargo: ["CARGO INVENTORY", "Materials and mission items."],
+    upgrades: ["ABILITY COLLECTION", "Craft, equip and upgrade at Haven."],
     hangar: [
-      "RAICHO HANGAR",
+      "HULL COLLECTION",
       hud.dock ? "Choose your RAICHO." : "Return to Haven to craft or switch.",
     ],
     campaign: [
@@ -974,6 +984,27 @@ function selectMenuTab(tab: MenuTab): void {
   element("menu-description").textContent = headings[tab][1];
   element("menu-description").hidden = !headings[tab][1];
   element("pause-content").hidden = tab !== "pause";
+  element("meishi-content").hidden = tab !== "meishi";
+  element("cargo-content").hidden = tab !== "cargo";
+  element("collection-navigation").hidden = ![
+    "pause",
+    "meishi",
+    "cargo",
+    "hangar",
+    "upgrades",
+  ].includes(tab);
+  for (const page of [
+    "meishi",
+    "cargo",
+    "hangar",
+    "upgrades",
+    "pause",
+  ] as const) {
+    element(`collection-${page}`).setAttribute(
+      "aria-pressed",
+      String(tab === page),
+    );
+  }
   element("upgrade-content").hidden = tab !== "upgrades";
   element("settings-content").hidden = tab !== "settings";
   element("archive-content").hidden = tab !== "archive";
@@ -984,6 +1015,8 @@ function selectMenuTab(tab: MenuTab): void {
   menu.classList.toggle("pause-menu", tab === "pause");
   menu.setAttribute("aria-labelledby", "menu-title");
   if (tab === "pause") paintFlightMenu(element("flight-status"), hud);
+  if (tab === "meishi") paintMeishiCard(element("meishi-content"), hud);
+  if (tab === "cargo") paintCargo(element("cargo-content"), hud);
   if (tab === "map") {
     paintUniverseMap(
       element("map-content"),
@@ -1060,11 +1093,6 @@ function selectMenuTab(tab: MenuTab): void {
       }
       target.append(familyHeading, generations);
     }
-  }
-  if (tab === "upgrades" && !hud.dock) {
-    const hint = document.createElement("p");
-    hint.textContent = "Return to Haven dock to spend your upgrade points.";
-    element("upgrade-content").replaceChildren(hint);
   }
   pixelUi?.invalidate();
 }
@@ -1519,6 +1547,18 @@ function frame(time: number): void {
         if (paintFlightMenu(element("flight-status"), hud))
           pixelUi?.invalidate();
       }
+      if (
+        !menu.hidden &&
+        menuTab === "meishi" &&
+        paintMeishiCard(element("meishi-content"), hud)
+      )
+        pixelUi?.invalidate();
+      if (
+        !menu.hidden &&
+        menuTab === "cargo" &&
+        paintCargo(element("cargo-content"), hud)
+      )
+        pixelUi?.invalidate();
       lastHudPaint = time;
     }
     if (!menu.hidden && menuTab === "map" && time - lastMapPaint > 1000) {
@@ -1829,6 +1869,18 @@ element("resume").addEventListener("click", () => void resume());
 element("launch-settings").addEventListener("click", openLaunchSettings);
 element("menu-close").addEventListener("click", () => void resume());
 element("pause-settings").addEventListener("click", () => openMenu("settings"));
+for (const page of [
+  "meishi",
+  "cargo",
+  "hangar",
+  "upgrades",
+  "pause",
+] as const) {
+  element(`collection-${page}`).addEventListener("click", () => {
+    selectMenuTab(page);
+    element("menu-close").focus();
+  });
+}
 element("settings-backup").addEventListener("click", () => openMenu("archive"));
 // Only the hovered or keyboard-focused action explains itself. Its native text
 // shares the toolbar's stable edge; controls never move to make room for it.
@@ -1841,7 +1893,7 @@ function showToolbarHint(button: HTMLButtonElement | null): void {
     return;
   }
   const labels: Record<string, string> = {
-    "pause-button": "RAICHO / ESC",
+    "pause-button": "MEISHI CARD / ESC",
     "map-button": "UNIVERSE MAP",
     "flight-settings": "SETTINGS",
     "save-indicator": "AUTOSAVE / BACKUP",

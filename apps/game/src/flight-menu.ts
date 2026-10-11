@@ -235,15 +235,13 @@ export function paintFlightMenu(
   write(view.title, ship?.name ?? "RAICHO STATUS");
   write(
     view.license,
-    hud.identity
-      ? `LICENSE ${hud.identity.short_designation}`
-      : "LEGACY LICENSE",
+    hud.identity ? `MEISHI ${hud.identity.short_designation}` : "LEGACY MEISHI",
   );
   write(
     view.fullLicense,
     hud.identity
       ? `${hud.identity.designation} / ${hud.identity.corporation_role}`
-      : "LEGACY PILOT LICENSE",
+      : "LEGACY KIKAI RECORD",
   );
   write(
     view.progress,
@@ -252,7 +250,7 @@ export function paintFlightMenu(
   const stats = hud.ship_stats;
   const affinity = stats.affinity;
   const affinityText = affinity
-    ? `${affinity.source === "sovereign_license" ? "LICENSED " : ""}${affinity.corporation.toUpperCase()} / ${categories[affinity.slot]} AFFINITY ${affinity.active ? "ACTIVE" : "INACTIVE"}`
+    ? `${affinity.source === "sovereign_license" ? "KIKAI " : ""}${affinity.corporation.toUpperCase()} / ${categories[affinity.slot]} AFFINITY ${affinity.active ? "ACTIVE" : "INACTIVE"}`
     : "";
   if (view.affinity.hidden !== !affinityText) {
     view.affinity.hidden = !affinityText;

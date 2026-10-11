@@ -57,6 +57,8 @@ function pixelScene({
     closest(selector) {
       if (selector === "button,label,select") return this;
       if (selector === ".menu-tabs" && this.nav) return root;
+      if (selector === "#collection-navigation" && this.collectionNav)
+        return root;
       if (
         selector.includes(
           scrollId.startsWith(".") ? scrollId : `#${scrollId}`,
@@ -464,6 +466,28 @@ test("semantic actions carry persistent selection independently of focus and cat
   assert.equal(nodes[1].selected, false);
   assert.equal(nodes[1].active, true);
   assert.ok(nodes.slice(4).every((n) => n.disabled));
+});
+
+test("MEISHI collection selection remains visible after focus leaves the navigation", () => {
+  const scene = pixelScene({
+    buttons: [
+      {
+        collectionNav: true,
+        attributes: { "aria-pressed": "true" },
+        textContent: "MEISHI",
+      },
+      {
+        collectionNav: true,
+        attributes: { "aria-pressed": "false" },
+        textContent: "CARGO",
+      },
+    ],
+  });
+  const nodes = scene.groups[0].nodes.filter((node) => node.kind === "nav-tab");
+  assert.equal(nodes.length, 2);
+  assert.equal(nodes[0].selected, true);
+  assert.equal(nodes[0].active, false);
+  assert.equal(nodes[1].selected, false);
 });
 
 test("scroll clipping intersects panel on both axes and rejects wholly obscured actions", () => {

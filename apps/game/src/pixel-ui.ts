@@ -146,7 +146,11 @@ export class PixelUiBridge {
       )
         return icon!;
       if (element.classList.contains("dock-facility")) return "facility-label";
-      if (element.closest(".menu-tabs")) return "nav-tab";
+      if (
+        element.closest(".menu-tabs") ||
+        element.closest("#collection-navigation")
+      )
+        return "nav-tab";
       if (element.classList.contains("primary-button")) return "primary-button";
       if (element.classList.contains("restart-button")) return "restart-button";
       if (["return-title", "death-title", "quick-title"].includes(element.id))
@@ -238,7 +242,7 @@ export class PixelUiBridge {
           Math.min(3, Number.parseFloat(style.fontSize) / scale / 8),
         );
         const scrollSelector =
-          ".menu-tabs,#map-chart,#map-content,#flight-status,#pause-content,#upgrade-content,#quest-content,#settings-content,#archive-content,#hangar-content,#campaign-content,#console-output,#dialogue-text,#run-summary,.droid-body,.droid-content";
+          ".menu-tabs,#collection-navigation,#meishi-content,#cargo-content,#map-chart,#map-content,#flight-status,#pause-content,#upgrade-content,#quest-content,#settings-content,#archive-content,#hangar-content,#campaign-content,#console-output,#dialogue-text,#run-summary,.droid-body,.droid-content";
         let clipX = bounds.x,
           clipY = bounds.y,
           clipRight = bounds.x + bounds.width,

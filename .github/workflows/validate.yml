@@ -66,6 +66,9 @@ jobs:
           python scripts/qa/pan-coop-dock/test_conversion.py
           python scripts/qa/pan-coop-dock/verify.py
           cargo test --locked --manifest-path scripts/qa/pan-coop-dock/native/Cargo.toml
+          python scripts/qa/pan-coop-dock/test_256.py
+          python scripts/qa/pan-coop-dock/verify_256.py
+          cargo test --locked --manifest-path scripts/qa/pan-coop-dock/native256/Cargo.toml
       - name: Actual native PixelBody, group and animation extraction
         run: cargo test --locked --manifest-path scripts/asset-native-preview/Cargo.toml
       - name: Extract and audit the accepted dock conversion

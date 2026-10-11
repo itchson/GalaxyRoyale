@@ -132,7 +132,7 @@ export class DroidCreation {
     this.closeButton.onclick = () => this.close();
     const title = document.createElement("h2");
     title.id = "droid-title";
-    title.textContent = "KIKAI LICENSE";
+    title.textContent = "MEISHI CARD";
     const intro = document.createElement("p");
     intro.textContent =
       "Choose your KIKAI. A starter RAICHO and ability are included.";
@@ -188,7 +188,7 @@ export class DroidCreation {
     this.detail.setAttribute("aria-live", "polite");
     this.submit.type = "button";
     this.submit.className = "primary-button";
-    this.submit.textContent = "ISSUE LICENSE";
+    this.submit.textContent = "CREATE MEISHI";
     this.submit.onclick = () => void this.confirm();
     const content = document.createElement("section");
     content.className = "droid-content";
@@ -204,7 +204,7 @@ export class DroidCreation {
     );
     const profile = document.createElement("section");
     profile.className = "droid-profile";
-    profile.setAttribute("aria-label", "License portrait preview");
+    profile.setAttribute("aria-label", "MEISHI portrait preview");
     this.portrait.className = "droid-portrait";
     this.portrait.dataset.pixelKind = "portrait";
     this.portrait.dataset.pixelValue = "9";
@@ -267,9 +267,9 @@ export class DroidCreation {
     });
     this.licenseName.textContent = `${this.kind.toUpperCase()}-${this.corporation.toUpperCase()}-${this.subCorporation.toUpperCase()}`;
     this.serial.textContent = this.pendingIdentity
-      ? `LICENSE / ${this.pendingIdentity.hex_id.toUpperCase()}`
-      : "LICENSE / PENDING";
-    this.detail.textContent = `${corp.ship} / LV 1 / ${corp.slot}\n${corp.ability}${this.pendingIdentity ? " / LICENSE RESERVED" : ""}`;
+      ? `MEISHI / ${this.pendingIdentity.hex_id.toUpperCase()}`
+      : "MEISHI / PENDING";
+    this.detail.textContent = `${corp.ship} / LV 1 / ${corp.slot}\n${corp.ability}${this.pendingIdentity ? " / MEISHI RESERVED" : ""}`;
   }
   private async confirm(): Promise<void> {
     if (this.busy) return;

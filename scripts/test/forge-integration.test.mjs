@@ -315,6 +315,12 @@ function fixture() {
       calls.push(["paint-forge", value]);
       exports.paintForge(target, value, actions);
     },
+    paintMeishiCard() {
+      return true;
+    },
+    paintCargo() {
+      return true;
+    },
     paintFlightMenu() {},
     resetForge(target) {
       calls.push(["reset-forge", target]);

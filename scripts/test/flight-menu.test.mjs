@@ -286,7 +286,7 @@ test("status clears nullable legacy affinity and labels Sovereign's licensed fal
   f.paint(f.target, data);
   const row = flatten(f.target).find((n) => n.className === "flight-affinity");
   assert.equal(row.hidden, false);
-  assert.equal(row.textContent, "LICENSED HUGO / DEFENSE AFFINITY ACTIVE");
+  assert.equal(row.textContent, "KIKAI HUGO / DEFENSE AFFINITY ACTIVE");
   const nodes = flatten(f.target);
   data.ship_stats.affinity = null;
   f.paint(f.target, data);
@@ -353,7 +353,7 @@ test("compact default shows the short license and essentials while retaining ful
   assert.equal(details.hidden, true);
   const primary = visibleText(f.target);
   for (const text of [
-    "LICENSE APR#7F8A52DAECE2ED52",
+    "MEISHI APR#7F8A52DAECE2ED52",
     "LV 1 / XP 7/20",
     "HULL 73 / 100",
     "SHIELD 4 / 12",
