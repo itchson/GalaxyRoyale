@@ -19,6 +19,12 @@ For the presentation work already running when GitHub was connected, specialists
 
 The producer is the current integrator. Integration/review assignments rotate to a free specialist for independent scrutiny; a second imaginary always-running agent or fabricated meeting is not recorded.
 
+## Engine efficiency gate
+
+Prefer existing Rust simulation, packed cells, transforms, material controls and native UI routes before adding a second implementation. Browser presentation reads authoritative HUD snapshots; it must not maintain another wallet, inventory or gameplay simulation. Update stable UI nodes only when their values change and build only the requested page. Reuse buffers and cached immutable assets where measurements identify repeated allocation or decoding.
+
+Record a concrete cost before claiming an optimization: relevant allocation, extraction, upload, frame-time or package-size evidence on the same workload. Correctness and backend parity remain mandatory; a higher cap or reduced gameplay density is not an optimization. Keep high-resolution authoring sources and large proof exports outside shipped bundles. Lossless compressed review packets must retain decoded hashes and bounded verification. Avoid speculative abstractions, extra services and dependencies without an exercised requirement.
+
 `main` now requires a pull request, resolved conversations and all three verified GitHub Actions checks with an up-to-date base, including for administrators. Force pushes and branch deletion are disabled. The review count remains zero because agents share one authorized GitHub account; actual independent review evidence is mandatory in Mission Control and source instead of inventing a second GitHub approval. The observed policy is retained in `artifacts/presentation-refinement-20261011/github-main-protection.json`.
 
 ## Local candidate preview
