@@ -43,14 +43,14 @@ fn real_hit(game: &mut Game, damage: f32) -> Vec<GameEvent> {
 }
 
 #[test]
-fn fresh_chassis_has_three_base_chunks_and_only_actual_factory_capacity() {
+fn fresh_factory_shield_comes_from_guard_and_legacy_chassis_keeps_three_chunks() {
     let anonymous = Game::new(Profile::default());
     close(anonymous.hud().max_shield, 30.0);
     assert!(!anonymous.hud().ship_stats.shield_recharge_unlocked);
     for main in ["pan", "renko", "hugo"] {
         let game = Game::new(licensed(main, "renko"));
         let hud = game.hud();
-        close(hud.max_shield, if main == "hugo" { 50.0 } else { 30.0 });
+        close(hud.max_shield, if main == "hugo" { 30.0 } else { 0.0 });
         close(hud.shield, hud.max_shield);
         close(hud.ship_stats.shield_regen, 0.0);
         assert!(!hud.ship_stats.shield_recharge_unlocked);
@@ -66,10 +66,20 @@ fn real_damage_does_not_recharge_without_a_purchased_unlock() {
         quiet_departure(&mut game);
         let before = game.hud();
         let events = real_hit(&mut game, 10.0);
-        assert_eq!(events.iter().filter(|e| e.kind == "shield").count(), 1);
-        let expected = before.shield - if main == "hugo" { 9.0 } else { 10.0 };
+        assert_eq!(
+            events.iter().filter(|e| e.kind == "shield").count(),
+            usize::from(main == "hugo")
+        );
+        let expected = if main == "hugo" {
+            before.shield - 9.0
+        } else {
+            0.0
+        };
         close(game.hud().shield, expected);
-        close(game.hud().hull, before.hull);
+        close(
+            game.hud().hull,
+            before.hull - if main == "hugo" { 0.0 } else { 10.0 },
+        );
         for _ in 0..720 {
             game.tick(&InputFrame::default(), DT);
             assert!(game.take_events().iter().all(|e| e.kind != "death"));
@@ -91,7 +101,7 @@ fn actual_aegis_purchase_unlocks_delayed_rate_with_atomic_existing_recipe() {
     assert_eq!(game.profile.campaign.stored_materials[0], 0);
     assert_eq!(game.profile.campaign.loadouts[0].hardware[3], 1);
     assert!(game.hud().ship_stats.shield_recharge_unlocked);
-    close(game.hud().max_shield, 40.0);
+    close(game.hud().max_shield, 10.0);
     close(game.hud().ship_stats.shield_regen, 3.0);
     quiet_departure(&mut game);
     real_hit(&mut game, 12.0);
@@ -164,17 +174,17 @@ fn genuine_training_rank_two_unlock_is_scoped_to_equipped_factory_hull() {
     profile.campaign.crafted[0] = true;
     profile.campaign.loadouts[1].slots[1] = Some(1);
     let mut game = Game::new(profile);
-    close(game.hud().max_shield, 58.0);
+    close(game.hud().max_shield, 38.0);
     close(game.hud().ship_stats.shield_regen, 3.0);
     game.switch_ship(1).unwrap();
-    close(game.hud().max_shield, 50.0);
+    close(game.hud().max_shield, 60.0);
     close(game.hud().ship_stats.shield_regen, 0.0);
     assert_eq!(ship_progression::equipped_rank(game.profile(), 1), 1);
     game.switch_ship(0).unwrap();
     assert_eq!(ship_progression::equipped_rank(game.profile(), 1), 2);
     close(game.hud().ship_stats.shield_regen, 3.0);
     game.equip_ability(1, None).unwrap();
-    close(game.hud().max_shield, 30.0);
+    close(game.hud().max_shield, 0.0);
     assert!(!game.hud().ship_stats.shield_recharge_unlocked);
     close(super::incoming_damage_multiplier(game.profile()), 1.0);
     let reload = Game::new(game.profile.clone());
@@ -202,7 +212,7 @@ fn factory_guard_first_upgrade_really_unlocks_recharge_without_fabricated_xp() {
     assert_eq!(game.profile.campaign.stored_materials[0], 0);
     assert_eq!(game.profile.campaign.stored_training_materials[2], 0);
     assert_eq!(game.profile.campaign.ship_xp, [0; 10]);
-    close(game.hud().max_shield, 58.0);
+    close(game.hud().max_shield, 38.0);
     close(game.hud().ship_stats.shield_regen, 3.0);
     assert!(game.hud().ship_stats.shield_recharge_unlocked);
     let before = checkpoint(&game);
@@ -260,16 +270,18 @@ fn actual_hugo_projectile_damage_reduces_shield_and_hull_with_no_phantom_defense
             game.equip_ability(1, None).unwrap();
         }
         quiet_departure(&mut game);
-        game.shield = 3.0; // Declared already-depleted real shield fixture.
         let body_cells = game
             .world
             .get::<&PixelBody>(game.player)
             .unwrap()
             .occupied_count();
-        let events = real_hit(&mut game, 10.0);
+        let events = real_hit(&mut game, 40.0);
         close(game.hud().shield, 0.0);
-        close(game.hud().hull, if equipped { 94.0 } else { 93.0 });
-        assert_eq!(events.iter().filter(|e| e.kind == "shield").count(), 1);
+        close(game.hud().hull, if equipped { 94.0 } else { 60.0 });
+        assert_eq!(
+            events.iter().filter(|e| e.kind == "shield").count(),
+            usize::from(equipped)
+        );
         assert!(
             game.world
                 .get::<&PixelBody>(game.player)
@@ -405,7 +417,7 @@ fn enhanced_sovereign_is_explicit_and_all_valid_capacity_is_bounded() {
     };
     game.profile.campaign.ship_xp[9] = 1320;
     game.equip_ability(1, Some("guard-coil")).unwrap();
-    close(game.hud().max_shield, 172.0);
+    close(game.hud().max_shield, 182.0);
     close(game.hud().ship_stats.shield_regen, 18.0);
     game.switch_ship(0).unwrap();
     assert!(!game.hud().ship_stats.shield_recharge_unlocked);
@@ -414,7 +426,7 @@ fn enhanced_sovereign_is_explicit_and_all_valid_capacity_is_bounded() {
 }
 
 #[test]
-fn all_ten_owned_maximum_rank_hulls_fit_the_authoritative_eighteen_chunk_bound() {
+fn all_ten_owned_maximum_rank_hulls_fit_the_authoritative_nineteen_chunk_bound() {
     for ship in 0..10 {
         let mut profile = Profile::default();
         profile.campaign.patches = [true; 8];
@@ -432,8 +444,8 @@ fn all_ten_owned_maximum_rank_hulls_fit_the_authoritative_eighteen_chunk_bound()
         profile.campaign.loadouts[ship as usize].slots[1] = Some(1);
         let game = Game::new(profile);
         let maximum = game.hud().max_shield;
-        close(maximum, if ship == 9 { 172.0 } else { 132.0 });
-        assert!((maximum / super::SHIELD_CHUNK_HP).ceil() <= 18.0);
+        close(maximum, if ship == 9 { 182.0 } else { 142.0 });
+        assert!((maximum / super::SHIELD_CHUNK_HP).ceil() <= 19.0);
     }
 }
 
@@ -456,7 +468,7 @@ fn unavailable_or_wrong_category_items_cannot_create_a_corporate_bonus() {
         let game = Game::new(profile);
         assert_eq!(game.profile.campaign.loadouts[0].slots[1], None);
         close(super::incoming_damage_multiplier(game.profile()), 1.0);
-        close(game.hud().max_shield, 30.0);
+        close(game.hud().max_shield, 0.0);
         assert!(!game.hud().ship_stats.shield_recharge_unlocked);
     }
 }

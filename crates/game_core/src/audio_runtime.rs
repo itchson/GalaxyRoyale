@@ -277,6 +277,7 @@ mod tests {
         fill_bullets(&mut game);
         game.take_events();
         let shots = game.shot_count;
+        let cooldown = game.fire_timer;
         game.fire(stats);
         let events = game.take_events();
         assert!(
@@ -284,7 +285,8 @@ mod tests {
                 .iter()
                 .any(|e| e.kind == "shot" || e.kind == "ability-echo")
         );
-        assert_eq!(game.shot_count, shots + 1);
+        assert_eq!(game.shot_count, shots); // Refused capacity is not a fired primary.
+        assert!((game.fire_timer - cooldown - 1.0 / stats.fire_rate).abs() < 0.00001);
         assert_eq!(game.world.query::<&Bullet>().iter().count(), MAX_BULLETS);
         game.move_player(Vec2::ZERO);
         clear_bullets(&mut game);

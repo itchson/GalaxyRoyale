@@ -27,10 +27,17 @@ pub(super) const BASE_SHIELD: f32 = 3.0 * SHIELD_CHUNK_HP;
 pub(super) fn capacity(profile: &Profile) -> f32 {
     let hardware = ship_progression::hardware_ranks(profile)[3];
     let guard = ship_progression::equipped_rank(profile, 1);
-    BASE_SHIELD
-        + SHIELD_CHUNK_HP * hardware as f32
+    // Licensed factory hulls start with their single equipped corporate ability.
+    // Guard Coil supplies HUGO's three chunks; speed/offense hulls have no innate
+    // shield. Anonymous legacy Scout and later chassis retain their base armor.
+    let base = if profile.campaign.selected_ship == 0 && profile.identity.is_some() {
+        0.0
+    } else {
+        BASE_SHIELD
+    };
+    base + SHIELD_CHUNK_HP * hardware as f32
         + if guard > 0 {
-            20.0 + 8.0 * guard.saturating_sub(1) as f32
+            30.0 + 8.0 * guard.saturating_sub(1) as f32
         } else {
             0.0
         }

@@ -152,7 +152,9 @@ fn actual_starter_stats_and_secondary_manufacturer_have_no_hidden_grants() {
     assert!((a.acceleration - 297.44).abs() < 0.001);
     assert!((b.damage - 14.52).abs() < 0.001);
     assert_eq!(b.speed, 100.0);
-    assert_eq!(c.shield, 50.0);
+    assert_eq!(a.shield, 0.0);
+    assert_eq!(b.shield, 0.0);
+    assert_eq!(c.shield, 30.0);
     assert_eq!(c.damage, 12.0);
     for sub in ["pan", "renko", "hugo"] {
         let p = create_profile("doro", "pan", sub, "0123456789abcdef").unwrap();

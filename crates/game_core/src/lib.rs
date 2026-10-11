@@ -38,6 +38,8 @@ pub use shield_progression::{RaichoAffinityHud, RaichoAffinitySource};
 mod ship_progression;
 #[cfg(test)]
 mod ship_progression_tests;
+#[cfg(test)]
+mod starter_ability_tests;
 mod training;
 #[cfg(test)]
 mod weapon_cadence_tests;
@@ -1445,11 +1447,25 @@ impl Game {
         // Carry active-fire overshoot into the next period instead of rounding
         // every purchased cadence down to a fixed whole number of ticks.
         self.fire_timer += 1.0 / stats.fire_rate;
-        self.shot_count += 1;
-        self.ship_signature(motion, stats);
-        if primary_fired {
-            self.event("shot", motion.position, 0.6);
+        if !primary_fired {
+            return; // Capacity refusal neither counts a shot nor banks a bonus.
         }
+        self.shot_count += 1;
+        if ship_progression::equipped_rank(&self.profile, 0) > 0
+            && self.shot_count.is_multiple_of(5)
+        {
+            // Pulse Lens is the basic offense slot, separate from boss Echo.
+            // The shared projectile cap may refuse this bolt; it never replays.
+            self.spawn_bullet(
+                motion.position + dir * 21.0,
+                dir * 500.0 + motion.velocity * 0.25,
+                stats.damage * 1.5,
+                true,
+                1,
+            );
+        }
+        self.ship_signature(motion, stats);
+        self.event("shot", motion.position, 0.6);
         self.styled_particle(
             motion.position + dir * 21.0,
             dir * 10.0,

@@ -76,7 +76,7 @@ fn three_real_starters_craft_then_equip_with_exact_atomic_banked_costs() {
     }
     let stats = Stats::from_profile(g.profile());
     assert!((stats.damage - base.damage * 1.1).abs() < 0.001);
-    assert_eq!(stats.shield, 50.0);
+    assert_eq!(stats.shield, 60.0);
     assert!((stats.speed - base.speed * 1.04).abs() < 0.001);
     assert!((stats.acceleration - base.acceleration * 1.04).abs() < 0.001);
     for category in 0..3 {
