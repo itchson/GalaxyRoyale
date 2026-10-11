@@ -3,7 +3,8 @@
   width: min(500px, 100%);
   height: auto;
   max-height: 100%;
-  padding: 26px 24px 22px;
+  /* The scroller starts below Close, including while its text scrolls upward. */
+  padding: calc(var(--ui-hit) + 14px) 24px 22px;
   gap: 0;
 }
 .meishi-surface #meishi-content {
@@ -175,7 +176,7 @@ body.pixel-ready .meishi-raicho {
 @media (max-height: 560px) and (min-width: 601px) {
   .menu-card.meishi-surface {
     width: min(820px, 100%);
-    padding: 20px 24px 16px;
+    padding: calc(var(--ui-hit) + 14px) 24px 16px;
   }
   .meishi-card {
     grid-template-columns: 1.15fr 1fr;
