@@ -234,7 +234,7 @@ export class PixelUiBridge {
           }
         }
         const font = Math.max(
-          1,
+          0.25,
           Math.min(3, Number.parseFloat(style.fontSize) / scale / 8),
         );
         const scrollSelector =

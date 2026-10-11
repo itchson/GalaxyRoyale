@@ -23,6 +23,7 @@ function pixelScene({
   value = "50",
   icon = null,
   scale = 1,
+  fontSize = "8px",
   buttons = [],
   scrollBounds = null,
   rootBounds = null,
@@ -189,7 +190,7 @@ function pixelScene({
     HTMLElement: Element,
     HTMLInputElement: Input,
     HTMLButtonElement: Button,
-    getComputedStyle: () => ({ display: "block", fontSize: "8px" }),
+    getComputedStyle: () => ({ display: "block", fontSize }),
     performance: { now: () => 0 },
     MutationObserver: class {
       observe() {}
@@ -546,6 +547,18 @@ test("settings transfer independently measured input and label rectangles throug
   assert.equal(slider.text, "Flight zoom");
 });
 
+test("physical menu font caps preserve sub-unit native glyph scale on large viewports", () => {
+  for (const [scale, fontSize, expected] of [
+    [2.4, "16px", 16 / 2.4 / 8],
+    [4, "16px", 0.5],
+    [8, "16px", 0.25],
+  ]) {
+    const slider = sliderScene({ scale, fontSize });
+    assert.ok(Math.abs(slider.font - expected) < 1e-6);
+    assert.ok(Math.abs(slider.font * scale * 8 - 16) < 1e-6);
+  }
+});
+
 test("facility pixel labels require hover or deliberate focus while controls keep their hit geometry", () => {
   const facility = {
     classes: ["dock-facility"],
@@ -620,7 +633,7 @@ test("dialogue self-scroll moves full text through a fixed clip without touching
       assert.equal(text.text, "A complete briefing to scroll.");
       assert.equal(
         text.font,
-        1,
+        frames[0].groups[0].nodes.find((node) => node.kind === "text").font,
         "scroll preserves native font/width/wrapping inputs",
       );
     }
