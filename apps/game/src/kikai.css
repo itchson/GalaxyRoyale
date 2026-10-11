@@ -68,6 +68,9 @@
 .droid-card > button {
   flex-shrink: 0;
 }
+.droid-card > h2 {
+  min-height: var(--ui-hit);
+}
 .droid-close {
   position: absolute;
   top: var(--ui-pad);
