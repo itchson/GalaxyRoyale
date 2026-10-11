@@ -253,6 +253,7 @@ function fixture() {
     marker: "before",
   };
   const c = {
+    coop: null,
     document,
     HTMLElement: Element,
     element,

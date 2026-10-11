@@ -158,6 +158,7 @@ function guideFixture(
     },
   };
   const context = vm.createContext({
+    coop: null,
     hud,
     launched: true,
     deathScreen: { hidden: true },
@@ -481,6 +482,7 @@ function creationFixture() {
     modes = [];
   const hud = { identity: null };
   const context = vm.createContext({
+    coop: null,
     DroidCreation: class {
       constructor(options) {
         callbacks = options;

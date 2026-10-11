@@ -89,6 +89,7 @@ function harness() {
     engines: 2,
   };
   const context = {
+    coop: null,
     canvas: {},
     recovering: false,
     graphicsFailed: false,

@@ -26,6 +26,7 @@ const functions = [
   "openMenu",
   "interactDock",
   "selectMenuTab",
+  "paintCoop",
   "openLaunchSettings",
   "resume",
   "navigate",
@@ -118,6 +119,7 @@ const compiled = ts.transpileModule(
 
 const pageIds = [
   "pause-content",
+  "coop-content",
   "meishi-content",
   "cargo-content",
   "upgrade-content",
@@ -228,6 +230,7 @@ function fixture() {
     campaign: { credits_pending: false },
   };
   const context = {
+    coop: null,
     menu: element("menu-screen"),
     deathScreen: element("death-screen"),
     launchScreen: element("launch-screen"),
@@ -450,6 +453,12 @@ test("opening a dedicated page paints it once without building hidden collection
 });
 
 test("a world facility hit opens exactly its dedicated page without changing progression", async () => {
+  const positions = [
+    [-120, -80],
+    [120, -80],
+    [-120, 95],
+    [120, 95],
+  ];
   const expected = [
     "upgrade-content",
     "hangar-content",
@@ -461,7 +470,7 @@ test("a world facility hit opens exactly its dedicated page without changing pro
       c = f.context,
       before = structuredClone(f.profile);
     c.hit = index;
-    assert.equal(c.interactDock([40, -25]), true);
+    assert.equal(c.interactDock(positions[index]), true);
     assert.deepEqual(f.visiblePages(), [expected[index]]);
     assert.equal(c.menu.hidden, false);
     assert.equal(c.paused, false);
@@ -471,11 +480,28 @@ test("a world facility hit opens exactly its dedicated page without changing pro
       f.calls.find(
         (value) => Array.isArray(value) && value[0] === "facility-hit",
       ),
-      ["facility-hit", 40, -25],
+      ["facility-hit", ...positions[index]],
     );
     assert.deepEqual(f.profile, before);
     await settle();
   }
+});
+
+test("the central Haven hub opens co-op without a facility hit or progression mutation", async () => {
+  const f = fixture(),
+    c = f.context,
+    before = structuredClone(f.profile);
+  assert.equal(c.interactDock([0, 0]), true);
+  assert.deepEqual(f.visiblePages(), ["coop-content"]);
+  assert.match(f.element("coop-content").textContent, /configured session service/);
+  assert.equal(
+    f.calls.some((value) => Array.isArray(value) && value[0] === "facility-hit"),
+    false,
+  );
+  assert.equal(c.input.enabled, false);
+  assert.equal(c.document.activeElement, f.element("menu-close"));
+  assert.deepEqual(f.profile, before);
+  await settle();
 });
 
 test("misses and home/launch/pause gates leave flight untouched", () => {
@@ -503,7 +529,7 @@ test("misses and home/launch/pause gates leave flight untouched", () => {
       c = f.context;
     configure(c);
     const before = [c.paused, c.input.enabled];
-    assert.equal(c.interactDock([0, 0]), false);
+    assert.equal(c.interactDock([100, 0]), false);
     assert.equal(c.menu.hidden, true);
     assert.deepEqual([c.paused, c.input.enabled], before);
     assert.equal(
