@@ -166,3 +166,21 @@ test("curated reader text retains UTF-8 symbols without legacy decoding artifact
       .facts.some((f) => f.value.includes("±1,000,000")),
   );
 });
+
+test("courier guidance includes the actual Haven delivery and source-beacon claim stages", async () => {
+  const lib = await source("crates/game_core/src/lib.rs");
+  assert.match(lib, /if quest\.event == "courier"[\s\S]*?quest\.progress = 1/);
+  assert.match(
+    lib,
+    /Deliver the retained cargo to Haven dock, then return here\./,
+  );
+  const entry = catalog.entries.find((e) => e.id === "missions");
+  assert.match(
+    entry.facts.find((f) => f.label === "Courier").value,
+    /Collect the relay packet, visit Haven, then return to the source beacon to claim/,
+  );
+  assert.match(
+    entry.sections.flatMap((s) => s.paragraphs).join(" "),
+    /Visiting Haven marks the delivery complete; claiming[\s\S]*same source beacon/,
+  );
+});

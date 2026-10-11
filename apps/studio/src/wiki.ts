@@ -31,6 +31,36 @@ export interface WikiCatalog {
   categories: { id: string; label: string }[];
   entries: WikiEntry[];
 }
+export interface WikiSearchFocus {
+  start: number | null;
+  end: number | null;
+  direction: "forward" | "backward" | "none" | null;
+}
+/** Capture before the workspace DOM is replaced, including an SSE refresh. */
+export function captureWikiSearch(
+  root: HTMLElement,
+  activeElement: Element | null,
+): WikiSearchFocus | null {
+  const input = root.querySelector<HTMLInputElement>("#wiki-search");
+  if (!input || input !== activeElement) return null;
+  return {
+    start: input.selectionStart,
+    end: input.selectionEnd,
+    direction: input.selectionDirection,
+  };
+}
+/** Restore to the new input; never steal focus from another control. */
+export function restoreWikiSearch(
+  root: HTMLElement,
+  saved: WikiSearchFocus | null,
+): void {
+  if (!saved) return;
+  const input = root.querySelector<HTMLInputElement>("#wiki-search");
+  if (!input) return;
+  input.focus({ preventScroll: true });
+  if (saved.start !== null && saved.end !== null)
+    input.setSelectionRange(saved.start, saved.end, saved.direction ?? "none");
+}
 export const escapeWiki = (value: unknown): string =>
   String(value ?? "").replace(
     /[&<>"']/g,
@@ -185,7 +215,6 @@ export class WikiView {
       ?.addEventListener("input", (event) => {
         this.query = (event.target as HTMLInputElement).value;
         onChange();
-        root.querySelector<HTMLInputElement>("#wiki-search")?.focus();
       });
   }
 }

@@ -1222,7 +1222,7 @@
       "facts": [
         {
           "label": "Courier",
-          "value": "Collect the site packet; return it to Haven"
+          "value": "Collect the relay packet, visit Haven, then return to the source beacon to claim"
         },
         {
           "label": "Bounty",
@@ -1242,6 +1242,7 @@
           "title": "Behavior and scope",
           "paragraphs": [
             "Player-facing language uses missions. Existing Rust/JSON fields named quests remain unchanged; the DevBible does not silently rename the save protocol. Courier packets are mission state, distinct from unbanked crafting cargo.",
+            "A courier mission collects a relay packet at its source beacon. Visiting Haven marks the delivery complete; claiming the once-only reward still requires returning to that same source beacon.",
             "A bounty requires the site-defined family and 8–12 kills. Bosses count as one family kill. Progress can be earned away from the source site; the navigation target leads to the known source for the claim, not to a fabricated enemy location. Claims are checked in the Rust simulation."
           ]
         }
