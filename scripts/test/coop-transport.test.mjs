@@ -876,22 +876,43 @@ test("unopened negotiation deadline frees membership and every tracked clock tas
     clock = new ManualClock();
   const host = f.client();
   await host.create(123);
-  const guest = f.client({ clock });
-  await guest.join(host.invite());
-  await until(
-    () =>
-      n.pcs.length === 2 &&
-      n.pcs.some((pc) => pc.remoteDescription?.type === "answer"),
-  );
-  assert.equal(clock.fireDelay(15000), true);
-  await until(
-    () =>
-      guest.diagnostics().phase === "ended" &&
-      host.diagnostics().peers.length === 0 &&
-      guest.diagnostics().pendingRequests === 0,
-  );
-  assert.equal(guest.diagnostics().reason, "negotiation_timeout");
-  assert.equal(clock.tasks.size, 0);
+  let releaseLeaveNotice;
+  const leaveNotice = new Promise((resolve) => {
+    releaseLeaveNotice = resolve;
+  });
+  const guest = f.client({
+    clock,
+    fetch: async (url, init) => {
+      const response = await f.fetcher(url, init);
+      // Local teardown precedes the best-effort service acknowledgement. Hold
+      // that response deliberately instead of depending on HTTP scheduling.
+      if (String(url).endsWith("/v1/leave")) await leaveNotice;
+      return response;
+    },
+  });
+  try {
+    await guest.join(host.invite());
+    await until(
+      () =>
+        n.pcs.length === 2 &&
+        n.pcs.some((pc) => pc.remoteDescription?.type === "answer"),
+    );
+    assert.equal(clock.fireDelay(15000), true);
+    await until(
+      () =>
+        guest.diagnostics().phase === "ended" &&
+        host.diagnostics().peers.length === 0 &&
+        guest.diagnostics().pendingRequests === 0,
+    );
+    assert.equal(guest.diagnostics().reason, "negotiation_timeout");
+    assert.equal(guest.diagnostics().timers, 0);
+    assert.equal(clock.tasks.size, 1); // The separately bounded leave notice.
+    releaseLeaveNotice();
+    await until(() => clock.tasks.size === 0);
+    assert.equal(clock.tasks.size, 0);
+  } finally {
+    releaseLeaveNotice();
+  }
 });
 test("reconnection cancels loss timeout; actual failed connection closes once", async (t) => {
   const clock = new ManualClock(),
