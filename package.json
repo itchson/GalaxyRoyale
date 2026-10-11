@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "node scripts/dev.mjs",
     "dev:game": "vite --config apps/game/vite.config.ts",
+    "preview:game": "node scripts/preview-game.mjs",
     "dev:studio": "node apps/studio/server.mjs",
     "build": "node scripts/build.mjs",
     "build:web": "vite build --config apps/game/vite.config.ts",
