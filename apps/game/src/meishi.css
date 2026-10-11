@@ -1,9 +1,9 @@
-/* One native UiGroup owns this card surface and its local art/text transforms. */
+/* Accessible layout for one native collectible-card group. Art is painted in Rust. */
 .menu-card.meishi-surface {
-  width: min(740px, 100%);
+  width: min(500px, 100%);
   height: auto;
   max-height: 100%;
-  padding: 24px;
+  padding: 26px 24px 22px;
   gap: 0;
 }
 .meishi-surface #meishi-content {
@@ -11,22 +11,29 @@
   padding: 0;
 }
 .meishi-surface .menu-close {
-  top: 6px;
-  right: 6px;
+  top: 7px;
+  right: 7px;
 }
 .meishi-card {
+  --meishi-accent: #9ce6b3;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
   min-width: 0;
   max-width: 100%;
-  padding: 12px 0 0;
-  background: #080f18;
+  padding: 6px 0;
+  background: #080e0e;
+}
+.meishi-card[data-corporation="renko"] {
+  --meishi-accent: #ef9989;
+}
+.meishi-card[data-corporation="hugo"] {
+  --meishi-accent: #99cbef;
 }
 .meishi-heading {
   display: flex;
   align-items: center;
-  gap: min(18px, calc(8px * var(--ui-scale, 1)));
+  gap: 18px;
 }
 .meishi-identity,
 .meishi-ship-summary,
@@ -34,31 +41,50 @@
   min-width: 0;
   overflow-wrap: anywhere;
 }
-.meishi-portrait {
+.meishi-identity {
+  padding: 16px 18px 0 0;
+}
+.meishi-portrait-frame {
   flex: 0 0 auto;
-  width: 96px;
-  height: 128px;
+  width: 160px;
+  height: 208px;
+  padding: 8px;
+  background: #111e19;
+  border: 1px solid var(--meishi-accent);
+}
+.meishi-portrait {
+  width: 100%;
+  height: 100%;
+}
+.meishi-seal {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 10px;
 }
 .meishi-card h3 {
-  font-size: var(--ui-text);
+  font-size: 16px;
   font-weight: normal;
   line-height: 1.5;
-  color: var(--cyan);
+  color: var(--meishi-accent);
   margin: 0;
 }
 .meishi-card p {
-  font-size: min(12px, var(--ui-caption));
+  font-size: 12px;
   line-height: 1.5;
   margin: 0;
   overflow-wrap: anywhere;
 }
 .meishi-card .meishi-designation {
-  font-size: var(--ui-caption);
+  font-size: 14px;
   color: #edf4f5;
-  margin-top: 6px;
+  margin-top: 8px;
+}
+.meishi-card .meishi-issuer {
+  color: var(--meishi-accent);
+  margin-top: 12px;
 }
 .meishi-card .meishi-manufacturer {
-  margin-top: 6px;
+  margin-top: 4px;
   color: var(--muted);
 }
 .meishi-raicho {
@@ -66,12 +92,13 @@
   grid-template-columns: auto minmax(0, 1fr);
   align-items: center;
   gap: 8px 12px;
-  margin-top: 0;
-  padding-right: 22px;
+  padding: 8px 0;
+  border-top: 1px solid #34463e;
+  border-bottom: 1px solid #34463e;
 }
 .meishi-ship-icon {
-  width: calc(32px * var(--ui-scale, 1));
-  height: calc(32px * var(--ui-scale, 1));
+  width: 56px;
+  height: 56px;
 }
 .meishi-equipped {
   grid-column: 1 / -1;
@@ -84,79 +111,150 @@
   color: inherit;
 }
 .meishi-balances {
-  grid-column: 1 / -1;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px;
-  margin-top: 0;
-  padding-top: 8px;
-  border-top: 1px solid #263d50;
+}
+.meishi-card .meishi-points {
+  font-size: 11px;
 }
 .meishi-patches {
-  grid-column: 1 / -1;
-  margin-top: 0;
-  padding-top: 8px;
-  border-top: 1px solid #263d50;
+  min-width: 0;
 }
 .meishi-patch-grid {
   display: grid;
-  grid-template-columns: repeat(8, minmax(0, 1fr));
-  gap: 8px 4px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px 8px;
   list-style: none;
   padding: 0;
-  margin: 8px 0 0;
+  margin: 10px 0 0;
 }
 .meishi-patch-slot {
   min-width: 0;
   text-align: center;
 }
-.meishi-patch-icon,
-.meishi-card .meishi-patch-empty {
-  width: calc(24px * var(--ui-scale, 1));
-  height: calc(24px * var(--ui-scale, 1));
+.meishi-patch-well {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  max-width: 100%;
   margin: 0 auto 4px;
+  border: 2px solid #52665d;
+  background: #101b16;
 }
-.meishi-card .meishi-patch-empty {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--muted);
+.meishi-patch-well[data-active="true"] {
+  border-color: var(--meishi-accent);
+}
+.meishi-patch-icon {
+  position: absolute;
+  width: 75%;
+  height: 75%;
+  left: 12.5%;
+  top: 12.5%;
 }
 .meishi-card .meishi-patch-caption {
-  font-size: var(--ui-caption);
+  font-size: 11px;
+  line-height: 1.25;
 }
-/* Preserve hidden native art and placeholder semantics despite flex rules. */
 .meishi-card [hidden] {
   display: none;
 }
-/* Native quads paint the card's art/text; CSS remains the accessible fallback. */
-body.pixel-ready .meishi-card {
+body.pixel-ready .meishi-card,
+body.pixel-ready .meishi-portrait-frame,
+body.pixel-ready .meishi-patch-well {
   background: transparent;
   border-color: transparent;
 }
-@media (max-width: 600px) {
-  .meishi-patch-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
+body.pixel-ready .meishi-raicho {
+  border-color: transparent;
 }
-@media (max-width: 480px) {
+/* The same card's regions reflow for short landscape windows; no tabs or flips. */
+@media (max-height: 560px) and (min-width: 601px) {
+  .menu-card.meishi-surface {
+    width: min(820px, 100%);
+    padding: 20px 24px 16px;
+  }
   .meishi-card {
-    grid-template-columns: minmax(0, 1fr);
+    grid-template-columns: 1.15fr 1fr;
+    gap: 12px 20px;
   }
-  .meishi-portrait {
-    width: 72px;
-    height: 96px;
+  .meishi-heading {
+    gap: 12px;
   }
-  .meishi-balances {
-    grid-template-columns: minmax(0, 1fr);
+  .meishi-portrait-frame {
+    width: 100px;
+    height: 128px;
+    padding: 5px;
+  }
+  .meishi-identity {
+    padding-top: 0;
+    padding-right: 0;
+  }
+  .meishi-seal {
+    width: 28px;
+    height: 28px;
+    margin-bottom: 3px;
+  }
+  .meishi-card h3 {
+    font-size: 14px;
+  }
+  .meishi-card .meishi-designation {
+    margin-top: 2px;
+    font-size: 12px;
+  }
+  .meishi-card .meishi-issuer {
+    margin-top: 4px;
+    font-size: 11px;
+  }
+  .meishi-card .meishi-manufacturer {
+    font-size: 11px;
+  }
+  .meishi-raicho {
+    padding: 12px 28px 0 0;
+    gap: 4px 8px;
+    border: 0;
+  }
+  .meishi-ship-icon {
+    width: 40px;
+    height: 40px;
+  }
+  .meishi-balances,
+  .meishi-patches {
+    grid-column: 1 / -1;
   }
   .meishi-patch-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    margin-top: 6px;
+  }
+  .meishi-patch-well {
+    width: 48px;
+    height: 48px;
   }
 }
-@media (max-height: 500px) {
-  .meishi-portrait {
-    width: 72px;
-    height: 96px;
+@media (max-width: 390px) {
+  .menu-card.meishi-surface {
+    padding-inline: 18px;
+  }
+  .meishi-heading {
+    gap: 10px;
+  }
+  .meishi-portrait-frame {
+    width: 112px;
+    height: 144px;
+    padding: 5px;
+  }
+  .meishi-seal {
+    width: 28px;
+    height: 28px;
+  }
+  .meishi-card .meishi-designation {
+    font-size: 12px;
+  }
+  .meishi-identity {
+    padding-right: 0;
+  }
+  .meishi-patch-well {
+    width: 56px;
+    height: 56px;
   }
 }

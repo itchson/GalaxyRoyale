@@ -337,10 +337,12 @@ export class PixelUiBridge {
               : element === this.hover ||
                 element.contains(document.activeElement),
           selected:
-            element.matches(":active") ||
-            element.dataset.active === "true" ||
-            element.getAttribute("aria-pressed") === "true" ||
-            element.getAttribute("aria-selected") === "true",
+            kind === "meishi-socket"
+              ? element.dataset.active === "true"
+              : element.matches(":active") ||
+                element.dataset.active === "true" ||
+                element.getAttribute("aria-pressed") === "true" ||
+                element.getAttribute("aria-selected") === "true",
           disabled: element instanceof HTMLButtonElement && element.disabled,
           ...(kind === "portrait"
             ? {

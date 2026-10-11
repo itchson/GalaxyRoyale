@@ -211,10 +211,10 @@ test("patches are indexed rather than list ordered and only earned identities re
     slots[6].getAttribute("aria-label"),
     /SECRET CHAMPION 6, earned/,
   );
-  assert.equal(slots[6].children[0].dataset.pixelValue, "6");
-  assert.equal(slots[6].children[0].dataset.active, "true");
-  assert.equal(slots[6].children[0].hidden, false);
-  assert.equal(slots[6].children[1].hidden, true);
+  assert.equal(byClass(f, "meishi-patch-icon")[6].dataset.pixelValue, "6");
+  assert.equal(byClass(f, "meishi-patch-icon")[6].dataset.active, "true");
+  assert.equal(byClass(f, "meishi-patch-icon")[6].hidden, false);
+  assert.equal(byClass(f, "meishi-patch-empty")[6].hidden, true);
   assert.equal(
     byClass(f, "meishi-patch-count")[0].textContent,
     "ARENA PATCHES 1/8",
@@ -247,8 +247,9 @@ test("losing an earned flag clears visible art and its former name in the same s
   data.campaign.champions[2].patch = false;
   assert.equal(f.paint(f.target, data), true);
   assert.equal(byClass(f, "meishi-patch-slot")[2], slot);
-  assert.equal(slot.children[0].hidden, true);
-  assert.equal(slot.children[1].hidden, false);
+  assert.equal(byClass(f, "meishi-patch-icon")[2].hidden, true);
+  assert.equal(byClass(f, "meishi-patch-empty")[2].hidden, false);
+  assert.equal(byClass(f, "meishi-patch-well")[2].dataset.active, "false");
   assert.equal(slot.getAttribute("aria-label"), "Arena patch 3: empty");
   assert.doesNotMatch(JSON.stringify(f.target), /SECRET CHAMPION 2/);
 });
@@ -350,7 +351,7 @@ test("nonfinite HUD numbers are displayed as unavailable, not positive progressi
   );
 });
 
-test("view source stays read-only and responsive CSS retains native logical patch/ship dimensions", () => {
+test("view source stays read-only while the card reflows without new animation loops", () => {
   const css = readFileSync(
     new URL("../../apps/game/src/meishi.css", import.meta.url),
     "utf8",
@@ -359,11 +360,34 @@ test("view source stays read-only and responsive CSS retains native logical patc
     source,
     /localStorage|indexedDB|setInterval|requestAnimationFrame|innerHTML|\.style\./,
   );
-  assert.match(css, /width: calc\(24px \* var\(--ui-scale, 1\)\)/);
-  assert.match(css, /width: calc\(32px \* var\(--ui-scale, 1\)\)/);
-  assert.match(css, /@media \(max-width: 600px\)/);
-  assert.match(css, /@media \(max-width: 480px\)/);
   assert.match(css, /\.meishi-card \[hidden\]\s*\{\s*display: none;/);
   assert.doesNotMatch(css, /overflow:\s*hidden|height:\s*100vh|animation:/);
   // These are source policy checks, not computed BCR or GPU layout acceptance.
+});
+
+test("collectible decoration follows main corporation while sockets reflect only earned patches", () => {
+  const f = fixture(),
+    data = hud();
+  for (const [corpIndex, corporation] of ["pan", "renko", "hugo"].entries()) {
+    data.identity.corporation = corporation;
+    data.identity.sub_corporation = ["hugo", "pan", "renko"][corpIndex];
+    data.campaign.champions[3].patch = true;
+    f.paint(f.target, freeze(structuredClone(data)));
+    assert.equal(byClass(f, "meishi-card")[0].dataset.corporation, corporation);
+    for (const name of ["meishi-portrait-frame", "meishi-seal"])
+      assert.equal(byClass(f, name)[0].dataset.pixelValue, String(corpIndex));
+    const wells = byClass(f, "meishi-patch-well");
+    assert.equal(wells.length, 8);
+    wells.forEach((well, index) => {
+      assert.equal(well.dataset.pixelKind, "meishi-socket");
+      assert.equal(well.dataset.pixelValue, String(corpIndex * 8 + index));
+      assert.equal(well.dataset.active, String(index === 3));
+      assert.equal(byClass(f, "meishi-patch-icon")[index].hidden, index !== 3);
+    });
+    assert.equal(
+      f.paint(f.target, freeze(structuredClone(data))),
+      false,
+      "unchanged card does not rewrite art or text",
+    );
+  }
 });

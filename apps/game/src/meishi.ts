@@ -25,11 +25,16 @@ export interface MeishiHud {
 
 interface PatchSlot {
   row: HTMLElement;
+  well: HTMLElement;
   icon: HTMLElement;
   empty: HTMLElement;
   caption: HTMLElement;
 }
 interface CardView {
+  card: HTMLElement;
+  portraitFrame: HTMLElement;
+  seal: HTMLElement;
+  issuer: HTMLElement;
   portrait: HTMLElement;
   designation: HTMLElement;
   manufacturer: HTMLElement;
@@ -59,6 +64,8 @@ function createView(target: HTMLElement): CardView {
   const card = element("article", "meishi-card");
   card.setAttribute("aria-label", "MEISHI CARD / pilot and current RAICHO");
   const heading = element("header", "meishi-heading");
+  const portraitFrame = element("section", "meishi-portrait-frame");
+  portraitFrame.dataset.pixelKind = "meishi-portrait-frame";
   const portrait = element("section", "meishi-portrait");
   portrait.setAttribute("role", "img");
   portrait.hidden = true;
@@ -67,8 +74,13 @@ function createView(target: HTMLElement): CardView {
   const manufacturer = element("p", "meishi-manufacturer");
   const title = element("h3", "meishi-title", "MEISHI CARD");
   title.id = "meishi-card-title";
-  identity.append(title, designation, manufacturer);
-  heading.append(portrait, identity);
+  const seal = element("section", "meishi-seal");
+  seal.dataset.pixelKind = "meishi-seal";
+  seal.setAttribute("aria-hidden", "true");
+  const issuer = element("p", "meishi-issuer");
+  identity.append(seal, title, designation, issuer, manufacturer);
+  portraitFrame.append(portrait);
+  heading.append(portraitFrame, identity);
 
   const raicho = element("section", "meishi-raicho");
   raicho.setAttribute("aria-label", "Current RAICHO and equipped abilities");
@@ -105,23 +117,31 @@ function createView(target: HTMLElement): CardView {
   patchList.setAttribute("aria-label", "Eight arena patch slots");
   const patches = Array.from({ length: 8 }, (_, index): PatchSlot => {
     const row = element("li", "meishi-patch-slot");
+    const well = element("section", "meishi-patch-well");
+    well.dataset.pixelKind = "meishi-socket";
+    well.setAttribute("aria-hidden", "true");
     const icon = element("section", "meishi-patch-icon");
     icon.dataset.pixelKind = "campaign-patch";
     icon.dataset.pixelValue = String(index);
     icon.dataset.active = "false";
     icon.setAttribute("aria-hidden", "true");
     icon.hidden = true;
-    const empty = element("p", "meishi-patch-empty", "--");
+    const empty = element("span", "meishi-patch-empty");
     empty.setAttribute("aria-hidden", "true");
     const caption = element("p", "meishi-patch-caption");
-    row.append(icon, empty, caption);
+    well.append(icon, empty);
+    row.append(well, caption);
     patchList.append(row);
-    return { row, icon, empty, caption };
+    return { row, well, icon, empty, caption };
   });
   collection.append(patchCount, patchList);
   card.append(heading, raicho, balances, collection);
   target.replaceChildren(card);
   const view = {
+    card,
+    portraitFrame,
+    seal,
+    issuer,
     portrait,
     designation,
     manufacturer,
@@ -177,6 +197,18 @@ export function paintMeishiCard(target: HTMLElement, hud: MeishiHud): boolean {
     kinds.includes(identity.kind) &&
     corporations.includes(identity.corporation) &&
     corporations.includes(identity.sub_corporation);
+  const corporation = validIdentity
+    ? corporations.indexOf(identity.corporation)
+    : 0;
+  data(view.card, "corporation", corporations[corporation]);
+  data(view.portraitFrame, "pixelValue", String(corporation));
+  data(view.seal, "pixelValue", String(corporation));
+  write(
+    view.issuer,
+    validIdentity
+      ? ["PAN DYNAMICS", "RENKO CYBERNETICS", "HUGO CORP"][corporation]
+      : "LEGACY RECORD",
+  );
   hide(view.portrait, !validIdentity);
   if (validIdentity) {
     changed = paintLicensePortrait(view.portrait, identity) || changed;
@@ -250,6 +282,8 @@ export function paintMeishiCard(target: HTMLElement, hud: MeishiHud): boolean {
     hide(slot.icon, !earned);
     hide(slot.empty, earned);
     data(slot.icon, "active", String(earned));
+    data(slot.well, "active", String(earned));
+    data(slot.well, "pixelValue", String(corporation * 8 + index));
     attribute(
       slot.row,
       "aria-label",

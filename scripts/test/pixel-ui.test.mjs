@@ -164,6 +164,7 @@ function pixelScene({
       height: icon.height * scale,
     };
     art.focusedChild = icon.focusedChild;
+    art.matches = (selector) => selector === ":active" && !!icon.pressed;
     art.inScroll = icon.inScroll;
   }
   root.querySelectorAll = (selector) =>
@@ -739,4 +740,25 @@ test("standalone MEISHI surface is one locally transformed native group", () => 
     scene.groups[0].nodes.some((n) => n.kind === "panel"),
     false,
   );
+});
+
+test("pressing or focusing an empty MEISHI socket cannot simulate an earned patch", () => {
+  for (const earned of [false, true]) {
+    const scene = pixelScene({
+      icon: {
+        kind: "meishi-socket",
+        index: 19,
+        width: 40,
+        height: 40,
+        earned,
+        pressed: true,
+        focusedChild: true,
+      },
+    });
+    const socket = scene.groups[0].nodes.find(
+      (n) => n.kind === "meishi-socket",
+    );
+    assert.equal(socket.selected, earned);
+    assert.equal(socket.value, 19);
+  }
 });
