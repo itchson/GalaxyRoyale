@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 613,
+  "revision": 629,
   "name": "Galaxy Royale",
   "phase": "Playable solo slice → content and validation",
-  "updatedAt": "2026-10-11T06:40:30.155Z",
+  "updatedAt": "2026-10-11T07:38:18.418Z",
   "tasks": [
     {
       "id": "studio",
@@ -5477,7 +5477,7 @@
     {
       "id": "task-7a4df889",
       "title": "Native player portraits for long, spiky and crew-cut Kikai hair",
-      "description": "Distinct generated DORO short-spiky and TALO crew-cut references are converted into96×128 native pixel packs. Engine implements independent type/hair/crystal transforms. All27 combinations, clipping, budgets and actual browser preview remain acceptance gates. Current scoped browser/native evidence is pinned in EVIDENCE_SCOPE.md; natural pacing, human style acceptance and physical devices remain separately recorded.",
+      "description": "DORO flat masculine armor and TALO flat neutral torso corrected through pinned source edits. All3 portraits rebuilt at192x256 with body/eyes/mouth cells; native UI renders at physical presentation size without changing logical layout/input. Root browser review caught forehead recoloring; explicit connected crystal masks fix it.538 native tests,346 shell passes+1 existing skip,13 asset checks and42 dual-WASM save fixtures pass. Actual WebGPU andWebGL2 screenshots verify creator/guide/issued-license scenes. Overall human style acceptance remains pending; this task is Review, not Complete.",
       "department": "art/audio",
       "owner": "/root/production_research",
       "status": "review",
@@ -5486,7 +5486,7 @@
       "acceptanceCriteria": [
         {
           "text": "DORA long hair, DORO short spiky hair, TALO crew cut; consistent approved high-detail pixel style.",
-          "met": true
+          "met": false
         },
         {
           "text": "Main manufacturer hair color and independent sub-manufacturer crystal-horn color.",
@@ -5495,34 +5495,48 @@
         {
           "text": "Original type-appropriate portrait layers with animation, fractional transforms and actual conversion/extraction evidence.",
           "met": true
+        },
+        {
+          "text": "DORO masculine flat mechanical chest and TALO neutral flat torso; DORA retains feminine anatomy. Visual source and native-screen inspection required.",
+          "met": true
         }
       ],
       "evidence": [
         {
-          "label": "Exact capture revisions and acceptance limits",
+          "label": "Current correction, negative evidence and acceptance limits",
           "kind": "artifact",
-          "path": "artifacts/raicho-licenses/EVIDENCE_SCOPE.md"
+          "path": "artifacts/kikai-detail/EVIDENCE_SCOPE.md"
         },
         {
-          "label": "Actual distinct DORO WebGPU portrait",
+          "label": "Final detailed DORO creator in WebGPU",
           "kind": "artifact",
-          "path": "artifacts/raicho-licenses/doro-hugo-pan-webgpu-1280.jpg"
+          "path": "artifacts/kikai-detail/doro-webgpu-1280-final.jpg"
         },
         {
-          "label": "Actual distinct TALO WebGPU portrait",
+          "label": "Final TALO torso and clean skin",
           "kind": "artifact",
-          "path": "artifacts/raicho-licenses/talo-renko-hugo-webgpu-1280.jpg"
+          "path": "artifacts/kikai-detail/talo-webgpu-1280-final.jpg"
         },
         {
-          "label": "Real profile-cell checks",
+          "label": "Persisted detailed DORO license in WebGL2",
           "kind": "artifact",
-          "path": "work/live-license-profiles-assets.log"
+          "path": "artifacts/kikai-detail/license-webgl2-1280-final.jpg"
+        },
+        {
+          "label": "Independent role-mask repair and native failing/passing controls",
+          "kind": "artifact",
+          "path": "artifacts/kikai-detail/role-repair-review.md"
+        },
+        {
+          "label": "Portable evidence manifest",
+          "kind": "artifact",
+          "path": "artifacts/kikai-detail/manifest.json"
         }
       ],
       "blocker": "",
-      "revision": 3,
+      "revision": 5,
       "createdAt": "2026-10-11T05:07:01.583Z",
-      "updatedAt": "2026-10-11T06:40:29.942Z"
+      "updatedAt": "2026-10-11T07:38:18.274Z"
     },
     {
       "id": "task-716d9437",
@@ -6793,6 +6807,84 @@
           "label": "Corrected actual tutorial",
           "kind": "artifact",
           "path": "artifacts/raicho-licenses/training-journal-webgpu-corrected.txt"
+        }
+      ]
+    },
+    {
+      "id": "review-e6ad0a04",
+      "title": "Evidence hash portability independently repaired and verified",
+      "body": "At60486b5, the independent reviewer found three Windows CRLF log hashes differed from committed LF blobs. Root changed only the manifest hashing/size domain and its explanation. At3c41fb3626a8bc356c68dadc1f5f7540ad8d7ca0, reviewer verified all28 tracked entries against both working bytes and committed blobs:11 UTF-8/LF text and17 raw JPG,56 size/hash checks. No missing/duplicate/undeclared artifact; observed edbe0f2 build, individual capture revisions and negative flags unchanged. PR8 is created as a draft, attached to the task and current remote validation is underway. No merged/released or CI-passed claim.",
+      "author": "/root",
+      "source": "Actual GitHub PR8 and independently verified evidence packaging",
+      "createdAt": "2026-10-11T06:46:31.095Z",
+      "participants": [
+        "/root",
+        "/root/engine_research"
+      ],
+      "taskIds": [
+        "task-0cf909b6",
+        "task-cf5d37d9",
+        "task-63265693"
+      ],
+      "evidence": [
+        {
+          "label": "Reviewed portable evidence manifest",
+          "kind": "artifact",
+          "path": "artifacts/raicho-licenses/manifest.json"
+        },
+        {
+          "label": "Exact PR8",
+          "kind": "link",
+          "url": "https://github.com/itchson/GalaxyRoyale/pull/8"
+        }
+      ]
+    },
+    {
+      "id": "review-56db460c",
+      "title": "Detailed KIKAI portraits: anatomy, native raster and repaired crystal masks",
+      "body": "Actual asynchronous contributions: Art authored corrected DORO/TALO source edits, all3 detailed packs and provenance; Engine implemented physical UI raster and bounded native extraction; independent QA reviewed sources, found modal exclusivity defect and added failing-then-passing native skin/crystal tests. Root integrated and inspected normal browser scenes; original screen review exposed a role-mask skin tint missed by structural tests. Art repair was independently checked to preserve all palettes, sprite cells and hair masks. Root final screenshots show cleared forehead tint and flat DORO/TALO armor. Source/static review claims are distinct from browser and human acceptance; original negative evidence remains pinned.",
+      "author": "/root",
+      "source": "Actual portrait correction, isolated specialist work and final normal-browser verification",
+      "createdAt": "2026-10-11T07:38:18.296Z",
+      "participants": [
+        "/root",
+        "/root/production_research",
+        "/root/engine_research",
+        "/root/gameplay_design"
+      ],
+      "taskIds": [
+        "task-7a4df889"
+      ],
+      "evidence": [
+        {
+          "label": "Current correction, negative evidence and acceptance limits",
+          "kind": "artifact",
+          "path": "artifacts/kikai-detail/EVIDENCE_SCOPE.md"
+        },
+        {
+          "label": "Final detailed DORO creator in WebGPU",
+          "kind": "artifact",
+          "path": "artifacts/kikai-detail/doro-webgpu-1280-final.jpg"
+        },
+        {
+          "label": "Final TALO torso and clean skin",
+          "kind": "artifact",
+          "path": "artifacts/kikai-detail/talo-webgpu-1280-final.jpg"
+        },
+        {
+          "label": "Persisted detailed DORO license in WebGL2",
+          "kind": "artifact",
+          "path": "artifacts/kikai-detail/license-webgl2-1280-final.jpg"
+        },
+        {
+          "label": "Independent role-mask repair and native failing/passing controls",
+          "kind": "artifact",
+          "path": "artifacts/kikai-detail/role-repair-review.md"
+        },
+        {
+          "label": "Portable evidence manifest",
+          "kind": "artifact",
+          "path": "artifacts/kikai-detail/manifest.json"
         }
       ]
     }
@@ -8288,6 +8380,141 @@
       ],
       "url": "http://127.0.0.1:4173/?qa=1&renderer=webgpu",
       "knownIssues": "Human audio/style acceptance, full natural material/upgrade run, campaign balance and physical-device/performance validation remain open. Spark audit returned no report. Captures are revision-scoped, not universal layout proof."
+    },
+    {
+      "id": "build-1b928f40",
+      "title": "RAICHO integration exact-head Windows/Linux/Browser CI passed",
+      "body": "All three actual remote jobs completed successfully on the exact PR8 head. The Browser package log explicitly records42 headless WASM serializer/SaveStore cases; fixtures are not earned gameplay or physical-browser proof. Current local preview was rebuilt on the same head and verified as the single owned game process, with unchanged runtime source/package hashes. PR remains a draft for further play review.",
+      "author": "/root",
+      "source": "Actual exact-head GitHub Actions results and verified current single local preview",
+      "createdAt": "2026-10-11T06:54:07.677Z",
+      "revision": "3c41fb3626a8bc356c68dadc1f5f7540ad8d7ca0",
+      "evidence": [
+        {
+          "label": "Exact CI result with job IDs and actual42-case log line",
+          "kind": "artifact",
+          "path": "work/raicho-ci-result.json"
+        },
+        {
+          "label": "Accepted remote validation",
+          "kind": "link",
+          "url": "https://github.com/itchson/GalaxyRoyale/actions/runs/38119056732"
+        },
+        {
+          "label": "Draft PR8",
+          "kind": "link",
+          "url": "https://github.com/itchson/GalaxyRoyale/pull/8"
+        }
+      ],
+      "checks": [
+        {
+          "name": "Browser package",
+          "result": "pass"
+        },
+        {
+          "name": "Source (ubuntu-24.04)",
+          "result": "pass"
+        },
+        {
+          "name": "Source (windows-latest)",
+          "result": "pass"
+        },
+        {
+          "name": "Actual42-case dual-WASM serializer/SaveStore log",
+          "result": "pass"
+        },
+        {
+          "name": "Single current local testing preview stamp",
+          "result": "pass"
+        },
+        {
+          "name": "Full naturally earned training and loot pacing",
+          "result": "not_run"
+        },
+        {
+          "name": "Physical phones and30-minute soak",
+          "result": "not_run"
+        }
+      ],
+      "url": "http://127.0.0.1:4173/?qa=1&renderer=webgpu",
+      "knownIssues": "Natural material/bank/upgrade pacing, sustained human audio/style acceptance, campaign balance and physical-device/performance gates remain open. Hosted private preview was not republished."
+    },
+    {
+      "id": "build-ef98d4aa",
+      "title": "Detailed portrait local normal-bundle validation",
+      "body": "Normal browser package captured at8d9c29a;50b710d adds two native tests only. Actual renderer console confirmsWEBGPU andWEBGL2. Isolated issued identity persists on reload; creator/long guide controls checked at1280x720,848x390 and320x180. Minimum size scrolls content and cannot reveal all source cells. No warnings/errors returned by final tab query. Root full native tests538;37 focused tests are a subset. The WASM42 cases are fixture SaveStore checks, not earned gameplay.",
+      "author": "/root",
+      "source": "Actual portrait correction, isolated specialist work and final normal-browser verification",
+      "createdAt": "2026-10-11T07:38:18.331Z",
+      "revision": "50b710d",
+      "evidence": [
+        {
+          "label": "Current correction, negative evidence and acceptance limits",
+          "kind": "artifact",
+          "path": "artifacts/kikai-detail/EVIDENCE_SCOPE.md"
+        },
+        {
+          "label": "Final detailed DORO creator in WebGPU",
+          "kind": "artifact",
+          "path": "artifacts/kikai-detail/doro-webgpu-1280-final.jpg"
+        },
+        {
+          "label": "Final TALO torso and clean skin",
+          "kind": "artifact",
+          "path": "artifacts/kikai-detail/talo-webgpu-1280-final.jpg"
+        },
+        {
+          "label": "Persisted detailed DORO license in WebGL2",
+          "kind": "artifact",
+          "path": "artifacts/kikai-detail/license-webgl2-1280-final.jpg"
+        },
+        {
+          "label": "Independent role-mask repair and native failing/passing controls",
+          "kind": "artifact",
+          "path": "artifacts/kikai-detail/role-repair-review.md"
+        },
+        {
+          "label": "Portable evidence manifest",
+          "kind": "artifact",
+          "path": "artifacts/kikai-detail/manifest.json"
+        }
+      ],
+      "checks": [
+        {
+          "name": "Native workspace538",
+          "result": "pass"
+        },
+        {
+          "name": "Shell346+one declared skip",
+          "result": "pass"
+        },
+        {
+          "name": "Exact detailed asset13",
+          "result": "pass"
+        },
+        {
+          "name": "Dual-WASM SaveStore42 fixtures",
+          "result": "pass"
+        },
+        {
+          "name": "Normal both-bundle build and TypeScript",
+          "result": "pass"
+        },
+        {
+          "name": "Actual WebGPU/WebGL2 scoped portrait scenes",
+          "result": "pass"
+        },
+        {
+          "name": "Human overall art acceptance",
+          "result": "not_run"
+        },
+        {
+          "name": "Physical devices, cold-start memory and soak",
+          "result": "not_run"
+        }
+      ],
+      "url": "http://127.0.0.1:4173/?qa=1&renderer=webgpu",
+      "knownIssues": "Overall art acceptance and broader world asset reauthoring remain open. Phones, performance soak, cold-start/peak-memory and natural full training are not measured here. Remote CI for this revision is pending; no public/private hosted republish."
     }
   ],
   "feedback": [],
@@ -14421,6 +14648,166 @@
       "author": "/root",
       "source": "Frozen specialist reviews, actual dual-renderer browser observations and current local checks, 2026-10-11",
       "createdAt": "2026-10-11T06:40:30.155Z"
+    },
+    {
+      "id": "43c2d974-77f5-448c-873f-f15ab83455f4",
+      "revision": 614,
+      "kind": "run",
+      "itemId": "run-ec44fdfb",
+      "title": "Evidence packaging reviewer · running",
+      "author": "/root",
+      "source": "Actual native reviewer assignment and live agent status",
+      "createdAt": "2026-10-11T06:45:16.095Z"
+    },
+    {
+      "id": "b2f56efe-1842-492c-863b-100916ea9b96",
+      "revision": 615,
+      "kind": "review",
+      "itemId": "review-e6ad0a04",
+      "title": "Evidence hash portability independently repaired and verified",
+      "author": "/root",
+      "source": "Actual GitHub PR8 and independently verified evidence packaging",
+      "createdAt": "2026-10-11T06:46:31.095Z"
+    },
+    {
+      "id": "1bc22dc5-e069-41f5-a246-02d821803ef7",
+      "revision": 616,
+      "kind": "run",
+      "itemId": "run-b673c309",
+      "title": "Evidence packaging reviewer · completed",
+      "author": "/root",
+      "source": "Actual GitHub PR8 and independently verified evidence packaging",
+      "createdAt": "2026-10-11T06:46:31.116Z"
+    },
+    {
+      "id": "03a97c48-decd-42c4-8323-2d9d038ea6c0",
+      "revision": 617,
+      "kind": "run",
+      "itemId": "run-ce12be71",
+      "title": "Repository integration producer · running",
+      "author": "/root",
+      "source": "Actual GitHub PR8 and independently verified evidence packaging",
+      "createdAt": "2026-10-11T06:46:31.131Z"
+    },
+    {
+      "id": "60b66b16-09d0-4e49-a791-3bff1e9da110",
+      "revision": 618,
+      "kind": "build",
+      "itemId": "build-1b928f40",
+      "title": "RAICHO integration exact-head Windows/Linux/Browser CI passed",
+      "author": "/root",
+      "source": "Actual exact-head GitHub Actions results and verified current single local preview",
+      "createdAt": "2026-10-11T06:54:07.677Z"
+    },
+    {
+      "id": "9f067000-7e44-45b2-888d-fe10285e332d",
+      "revision": 619,
+      "kind": "run",
+      "itemId": "run-6f8d281d",
+      "title": "Repository integration producer · completed",
+      "author": "/root",
+      "source": "Actual exact-head GitHub Actions results and verified current single local preview",
+      "createdAt": "2026-10-11T06:54:07.698Z"
+    },
+    {
+      "id": "055bae2c-72fe-4e78-9911-cf2dda83a95c",
+      "revision": 620,
+      "kind": "task.update",
+      "itemId": "task-7a4df889",
+      "title": "Native player portraits for long, spiky and crew-cut Kikai hair",
+      "author": "Root",
+      "source": "Codex active development",
+      "createdAt": "2026-10-11T06:59:05.926Z"
+    },
+    {
+      "id": "40d46b37-4a88-4ac3-8591-aaa5613e03a0",
+      "revision": 621,
+      "kind": "run",
+      "itemId": "run-9d8a9dfd",
+      "title": "KIKAI art specialist · running",
+      "author": "Root",
+      "source": "Codex collaboration assignments",
+      "createdAt": "2026-10-11T06:59:14.877Z"
+    },
+    {
+      "id": "e56f6d1c-8d07-4a41-b94d-7fbc8eb65b4f",
+      "revision": 622,
+      "kind": "run",
+      "itemId": "run-5b6e8964",
+      "title": "Pixel renderer specialist · running",
+      "author": "Root",
+      "source": "Codex collaboration assignments",
+      "createdAt": "2026-10-11T06:59:14.903Z"
+    },
+    {
+      "id": "937c3a21-1b66-4da9-8e94-25fbc165b554",
+      "revision": 623,
+      "kind": "run",
+      "itemId": "run-65b7d99d",
+      "title": "Independent portrait QA · running",
+      "author": "Root",
+      "source": "Codex collaboration assignments",
+      "createdAt": "2026-10-11T06:59:14.917Z"
+    },
+    {
+      "id": "9263a657-0289-43db-9ea5-d70ea01ce639",
+      "revision": 624,
+      "kind": "task.update",
+      "itemId": "task-7a4df889",
+      "title": "Native player portraits for long, spiky and crew-cut Kikai hair",
+      "author": "/root",
+      "source": "Actual portrait correction, isolated specialist work and final normal-browser verification",
+      "createdAt": "2026-10-11T07:38:18.274Z"
+    },
+    {
+      "id": "92ec48c0-388e-4ded-89e9-f8c11f5c3f2d",
+      "revision": 625,
+      "kind": "review",
+      "itemId": "review-56db460c",
+      "title": "Detailed KIKAI portraits: anatomy, native raster and repaired crystal masks",
+      "author": "/root",
+      "source": "Actual portrait correction, isolated specialist work and final normal-browser verification",
+      "createdAt": "2026-10-11T07:38:18.296Z"
+    },
+    {
+      "id": "6f152329-5573-4d2d-bf10-d5364d7bee6a",
+      "revision": 626,
+      "kind": "build",
+      "itemId": "build-ef98d4aa",
+      "title": "Detailed portrait local normal-bundle validation",
+      "author": "/root",
+      "source": "Actual portrait correction, isolated specialist work and final normal-browser verification",
+      "createdAt": "2026-10-11T07:38:18.331Z"
+    },
+    {
+      "id": "c962c11b-890f-42e7-9a66-3e0518d09dc2",
+      "revision": 627,
+      "kind": "run",
+      "itemId": "run-eade1af1",
+      "title": "Art / KIKAI detail · completed",
+      "author": "/root",
+      "source": "Actual portrait correction, isolated specialist work and final normal-browser verification",
+      "createdAt": "2026-10-11T07:38:18.360Z"
+    },
+    {
+      "id": "ecacdb89-69a4-4660-906f-387acad4ad59",
+      "revision": 628,
+      "kind": "run",
+      "itemId": "run-6f31936a",
+      "title": "Engine / portrait presentation · completed",
+      "author": "/root",
+      "source": "Actual portrait correction, isolated specialist work and final normal-browser verification",
+      "createdAt": "2026-10-11T07:38:18.387Z"
+    },
+    {
+      "id": "44760664-718e-4b30-8982-234efeecb00a",
+      "revision": 629,
+      "kind": "run",
+      "itemId": "run-400db7d6",
+      "title": "Independent QA / KIKAI portraits · completed",
+      "author": "/root",
+      "source": "Actual portrait correction, isolated specialist work and final normal-browser verification",
+      "createdAt": "2026-10-11T07:38:18.418Z"
     }
   ],
   "runRecords": [
@@ -19561,6 +19948,268 @@
       "author": "/root",
       "source": "Frozen specialist reviews, actual dual-renderer browser observations and current local checks, 2026-10-11",
       "createdAt": "2026-10-11T06:40:30.139Z"
+    },
+    {
+      "id": "run-ec44fdfb",
+      "title": "Evidence packaging reviewer · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Evidence packaging reviewer",
+      "state": "running",
+      "observedAt": "2026-10-11T06:45:16.069Z",
+      "taskIds": [
+        "task-0cf909b6",
+        "task-cf5d37d9"
+      ],
+      "summary": "Actual bounded independent manifest review found CRLF/Git normalization mismatches in three log hashes. Root fixed the explicit LF-canonical text domain; reviewer is verifying every working and committed file at3c41fb3.",
+      "evidence": [
+        {
+          "label": "Actual reviewed manifest and correction",
+          "kind": "artifact",
+          "path": "artifacts/raicho-licenses/EVIDENCE_SCOPE.md"
+        }
+      ],
+      "author": "/root",
+      "source": "Actual native reviewer assignment and live agent status",
+      "createdAt": "2026-10-11T06:45:16.095Z"
+    },
+    {
+      "id": "run-b673c309",
+      "title": "Evidence packaging reviewer · completed",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Evidence packaging reviewer",
+      "state": "completed",
+      "observedAt": "2026-10-11T06:46:31.109Z",
+      "taskIds": [
+        "task-0cf909b6",
+        "task-cf5d37d9",
+        "task-63265693"
+      ],
+      "summary": "Actual independent final packaging verdict PASS on3c41fb3:28 tracked entries,56 committed/working size/hash checks; raw JPG/LF text policy, revision metadata and old observed build pins validated. No source/browser edits.",
+      "evidence": [
+        {
+          "label": "Reviewed portable evidence manifest",
+          "kind": "artifact",
+          "path": "artifacts/raicho-licenses/manifest.json"
+        },
+        {
+          "label": "Exact PR8",
+          "kind": "link",
+          "url": "https://github.com/itchson/GalaxyRoyale/pull/8"
+        }
+      ],
+      "author": "/root",
+      "source": "Actual GitHub PR8 and independently verified evidence packaging",
+      "createdAt": "2026-10-11T06:46:31.116Z"
+    },
+    {
+      "id": "run-ce12be71",
+      "title": "Repository integration producer · running",
+      "agentId": "/root",
+      "agentLabel": "Repository integration producer",
+      "state": "running",
+      "observedAt": "2026-10-11T06:46:31.125Z",
+      "taskIds": [
+        "task-0cf909b6",
+        "task-cf5d37d9",
+        "task-63265693"
+      ],
+      "summary": "PR8 opened and attached; exact3c41fb3 Windows,Ubuntu and Browser package CI is underway. Root is refreshing the single verified local preview and waiting for actual remote results. Natural-play/physical gates remain pending.",
+      "evidence": [
+        {
+          "label": "Reviewed portable evidence manifest",
+          "kind": "artifact",
+          "path": "artifacts/raicho-licenses/manifest.json"
+        },
+        {
+          "label": "Exact PR8",
+          "kind": "link",
+          "url": "https://github.com/itchson/GalaxyRoyale/pull/8"
+        }
+      ],
+      "author": "/root",
+      "source": "Actual GitHub PR8 and independently verified evidence packaging",
+      "createdAt": "2026-10-11T06:46:31.131Z"
+    },
+    {
+      "id": "run-6f8d281d",
+      "title": "Repository integration producer · completed",
+      "agentId": "/root",
+      "agentLabel": "Repository integration producer",
+      "state": "completed",
+      "observedAt": "2026-10-11T06:54:07.691Z",
+      "taskIds": [
+        "task-0cf909b6",
+        "task-cf5d37d9",
+        "task-63265693"
+      ],
+      "summary": "Current scoped implementation/review/publication contribution finished. PR8 attached and updated; exact3c41fb3 Windows,Ubuntu and dual-renderer Browser CI passed, actual42-case log verified. Single local preview15272 serves the matching validated source. Later natural-play/human/physical gates remain separate; no merge or hosted-release claim.",
+      "evidence": [
+        {
+          "label": "Exact CI result with job IDs and actual42-case log line",
+          "kind": "artifact",
+          "path": "work/raicho-ci-result.json"
+        },
+        {
+          "label": "Accepted remote validation",
+          "kind": "link",
+          "url": "https://github.com/itchson/GalaxyRoyale/actions/runs/38119056732"
+        },
+        {
+          "label": "Draft PR8",
+          "kind": "link",
+          "url": "https://github.com/itchson/GalaxyRoyale/pull/8"
+        }
+      ],
+      "author": "/root",
+      "source": "Actual exact-head GitHub Actions results and verified current single local preview",
+      "createdAt": "2026-10-11T06:54:07.698Z"
+    },
+    {
+      "id": "run-9d8a9dfd",
+      "title": "KIKAI art specialist · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "KIKAI art specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T06:59:14.804Z",
+      "taskIds": [
+        "task-7a4df889"
+      ],
+      "summary": "Correct DORO/TALO source anatomy, regenerate detailed native portraits, preserve expression and manufacturer masks.",
+      "evidence": [
+        {
+          "label": "Actual active assignment",
+          "kind": "note",
+          "details": "Dispatched via collaboration.followup_task this session; no completion claimed."
+        }
+      ],
+      "author": "Root",
+      "source": "Codex collaboration assignments",
+      "createdAt": "2026-10-11T06:59:14.877Z"
+    },
+    {
+      "id": "run-5b6e8964",
+      "title": "Pixel renderer specialist · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Pixel renderer specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T06:59:14.899Z",
+      "taskIds": [
+        "task-7a4df889"
+      ],
+      "summary": "Inspect portrait cell budgets and UI raster fidelity, implement bounded high-detail support in both backends.",
+      "evidence": [
+        {
+          "label": "Actual active assignment",
+          "kind": "note",
+          "details": "Dispatched via collaboration.followup_task this session; no completion claimed."
+        }
+      ],
+      "author": "Root",
+      "source": "Codex collaboration assignments",
+      "createdAt": "2026-10-11T06:59:14.903Z"
+    },
+    {
+      "id": "run-65b7d99d",
+      "title": "Independent portrait QA · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Independent portrait QA",
+      "state": "running",
+      "observedAt": "2026-10-11T06:59:14.914Z",
+      "taskIds": [
+        "task-7a4df889"
+      ],
+      "summary": "Read-only audit of portrait fidelity and anatomy acceptance, then independent review of peer changes.",
+      "evidence": [
+        {
+          "label": "Actual active assignment",
+          "kind": "note",
+          "details": "Dispatched via collaboration.followup_task this session; no completion claimed."
+        }
+      ],
+      "author": "Root",
+      "source": "Codex collaboration assignments",
+      "createdAt": "2026-10-11T06:59:14.917Z"
+    },
+    {
+      "id": "run-eade1af1",
+      "title": "Art / KIKAI detail · completed",
+      "agentId": "/root/production_research",
+      "agentLabel": "Art / KIKAI detail",
+      "state": "completed",
+      "observedAt": "2026-10-11T07:38:18.348Z",
+      "taskIds": [
+        "task-7a4df889"
+      ],
+      "summary": "Completed corrected reference edits,192-grid asset pipeline and crystal-mask repair1b5e408.13 exact asset checks pass; pinned prompts and source provenance retained.",
+      "evidence": [
+        {
+          "label": "Current correction, negative evidence and acceptance limits",
+          "kind": "artifact",
+          "path": "artifacts/kikai-detail/EVIDENCE_SCOPE.md"
+        },
+        {
+          "label": "Independent role-mask repair and native failing/passing controls",
+          "kind": "artifact",
+          "path": "artifacts/kikai-detail/role-repair-review.md"
+        }
+      ],
+      "author": "/root",
+      "source": "Actual portrait correction, isolated specialist work and final normal-browser verification",
+      "createdAt": "2026-10-11T07:38:18.360Z"
+    },
+    {
+      "id": "run-6f31936a",
+      "title": "Engine / portrait presentation · completed",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Engine / portrait presentation",
+      "state": "completed",
+      "observedAt": "2026-10-11T07:38:18.372Z",
+      "taskIds": [
+        "task-7a4df889"
+      ],
+      "summary": "Completed physical UI raster and bounded native portrait extractione4098875; read-only pause/layout integration review found no blocker. No physical performance claim.",
+      "evidence": [
+        {
+          "label": "Current correction, negative evidence and acceptance limits",
+          "kind": "artifact",
+          "path": "artifacts/kikai-detail/EVIDENCE_SCOPE.md"
+        },
+        {
+          "label": "Independent role-mask repair and native failing/passing controls",
+          "kind": "artifact",
+          "path": "artifacts/kikai-detail/role-repair-review.md"
+        }
+      ],
+      "author": "/root",
+      "source": "Actual portrait correction, isolated specialist work and final normal-browser verification",
+      "createdAt": "2026-10-11T07:38:18.387Z"
+    },
+    {
+      "id": "run-400db7d6",
+      "title": "Independent QA / KIKAI portraits · completed",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Independent QA / KIKAI portraits",
+      "state": "completed",
+      "observedAt": "2026-10-11T07:38:18.399Z",
+      "taskIds": [
+        "task-7a4df889"
+      ],
+      "summary": "Completed scoped art/geometry review, actual modal exclusivity fix and native skin/crystal regressiona609fbf. Preserved old18/27 skin failure and correctedall27 evidence.",
+      "evidence": [
+        {
+          "label": "Current correction, negative evidence and acceptance limits",
+          "kind": "artifact",
+          "path": "artifacts/kikai-detail/EVIDENCE_SCOPE.md"
+        },
+        {
+          "label": "Independent role-mask repair and native failing/passing controls",
+          "kind": "artifact",
+          "path": "artifacts/kikai-detail/role-repair-review.md"
+        }
+      ],
+      "author": "/root",
+      "source": "Actual portrait correction, isolated specialist work and final normal-browser verification",
+      "createdAt": "2026-10-11T07:38:18.418Z"
     }
   ],
   "phaseDescription": "Desktop-first Rust/WASM solo game and local Studio are implemented. Reviewed occupied-cell art, reproducible conversion, responsive native settings/icons and minimap, strict GitHub integration gates and source-backed Dev Bible are integrated. Natural campaign balance, human listening, owner-private update lifecycle and physical phones remain separate pending gates."

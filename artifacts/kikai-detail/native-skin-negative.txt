@@ -1,0 +1,24 @@
+   Compiling game_core v0.1.0 (C:\Users\mitch\.codex\worktrees\galaxy-audio-refinement\galaxy-royale\crates\game_core)
+   Compiling game_web v0.1.0 (C:\Users\mitch\.codex\worktrees\galaxy-audio-refinement\galaxy-royale\crates\game_web)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 4.80s
+     Running unittests src\lib.rs (target\debug\deps\game_web-9ea70f65f4ad26fd.exe)
+
+running 2 tests
+test kikai_art::profile_tests::actual_forehead_skin_stays_source_rgb_across_all_27_extracted_profiles ... FAILED
+test kikai_art::profile_tests::actual_crystal_cells_follow_sub_corporation_independently_of_main ... ok
+
+failures:
+
+---- kikai_art::profile_tests::actual_forehead_skin_stays_source_rgb_across_all_27_extracted_profiles stdout ----
+
+thread 'kikai_art::profile_tests::actual_forehead_skin_stays_source_rgb_across_all_27_extracted_profiles' (51616) panicked at crates\game_web\src\kikai_profile_tests.rs:74:5:
+forehead extraction changed: [(0, 0, 0, [171, 246, 153, 255], [246, 214, 192, 255]), (0, 0, 2, [153, 171, 246, 255], [246, 214, 192, 255]), (0, 1, 0, [171, 246, 153, 255], [246, 214, 192, 255]), (0, 1, 2, [153, 171, 246, 255], [246, 214, 192, 255]), (0, 2, 0, [171, 246, 153, 255], [246, 214, 192, 255]), (0, 2, 2, [153, 171, 246, 255], [246, 214, 192, 255]), (1, 0, 0, [172, 249, 151, 255], [249, 216, 189, 255]), (1, 0, 2, [151, 172, 249, 255], [249, 216, 189, 255]), (1, 1, 0, [172, 249, 151, 255], [249, 216, 189, 255]), (1, 1, 2, [151, 172, 249, 255], [249, 216, 189, 255]), (1, 2, 0, [172, 249, 151, 255], [249, 216, 189, 255]), (1, 2, 2, [151, 172, 249, 255], [249, 216, 189, 255]), (2, 0, 0, [173, 250, 155, 255], [250, 217, 194, 255]), (2, 0, 2, [155, 173, 250, 255], [250, 217, 194, 255]), (2, 1, 0, [173, 250, 155, 255], [250, 217, 194, 255]), (2, 1, 2, [155, 173, 250, 255], [250, 217, 194, 255]), (2, 2, 0, [173, 250, 155, 255], [250, 217, 194, 255]), (2, 2, 2, [155, 173, 250, 255], [250, 217, 194, 255])]
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    kikai_art::profile_tests::actual_forehead_skin_stays_source_rgb_across_all_27_extracted_profiles
+
+test result: FAILED. 1 passed; 1 failed; 0 ignored; 0 measured; 176 filtered out; finished in 1.41s
+
+error: test failed, to rerun pass `-p game_web --lib`

@@ -1,0 +1,14 @@
+{
+  "art": {
+    "sha256": "c0c0024297618b36076e091a802cb621c4dd3fd5c24a904f31b670a6226ca809",
+    "bytes": 3252935
+  },
+  "engine": {
+    "sha256": "c0c0024297618b36076e091a802cb621c4dd3fd5c24a904f31b670a6226ca809",
+    "bytes": 3252935
+  },
+  "parsed_json_equal": true,
+  "canonical_structural_sha256": "ad4b6d679763c2f2ecc3e88a53ac8d7e868a3a33eeb194f842ea3d843535622d",
+  "pretty_crlf_reconstruction_sha256": "1e529a4ae853005aa4b7881befabb4dc715c265141b8d230622107de5aad3b7b",
+  "matches_reviewed_precompact_atlas_exactly": true
+}

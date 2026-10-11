@@ -1,0 +1,16 @@
+   Compiling game_web v0.1.0 (C:\Users\mitch\.codex\worktrees\galaxy-audio-refinement\galaxy-royale\crates\game_web)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.37s
+     Running unittests src\lib.rs (target\debug\deps\game_web-9ea70f65f4ad26fd.exe)
+
+running 2 tests
+test kikai_art::profile_tests::actual_forehead_skin_stays_source_rgb_across_all_27_extracted_profiles ... ok
+test kikai_art::profile_tests::actual_crystal_cells_follow_sub_corporation_independently_of_main ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 176 filtered out; finished in 1.30s
+
+     Running tests\boss_layout.rs (target\debug\deps\boss_layout-427b75710e1283f7.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 31 filtered out; finished in 0.00s
+

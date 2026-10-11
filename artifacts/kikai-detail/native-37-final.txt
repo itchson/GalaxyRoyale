@@ -1,0 +1,50 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.10s
+     Running unittests src\lib.rs (target\debug\deps\game_web-9ea70f65f4ad26fd.exe)
+
+running 37 tests
+test kikai_art::tests::icon_hover_press_and_disabled_colors_preserve_opaque_role_contrast ... ok
+test kikai_art::profile_tests::tokens_are_explicit_and_invalid_type_or_corporation_never_falls_back ... ok
+test ui_scene::kikai_integration_tests::licensed_ship_partial_scroll_clip_keeps_all_four_cell_corners_inside ... ok
+test ui_scene::kikai_integration_tests::licensed_previews_share_three_cached_authoritative_corporate_bodies_and_fractional_fit ... ok
+test kikai_art::tests::ten_original_32_cell_control_masks_are_distinct_detailed_and_contained ... ok
+test kikai_art::tests::group_preflight_rejects_without_partial_geometry_or_budget_mutation ... ok
+test ui_scene::kikai_integration_tests::scene_cap_and_transform_batch_boundary_keep_whole_portrait_objects_and_valid_indices ... ok
+test ui_scene::kikai_integration_tests::dora_and_licensed_ship_reject_insufficient_submitted_or_work_budget_atomically ... ok
+test kikai_art::tests::reflected_sheared_parent_and_128_slot_boundary_preserve_nested_corners ... ok
+test ui_scene::kikai_integration_tests::portrait_and_ship_child_affines_survive_reflection_shear_and_nonuniform_parent ... ok
+test kikai_art::tests::finite_clipping_consumes_all_submitted_work_including_masked_cells ... ok
+test ui_scene::kikai_integration_tests::profile_semantic_missing_invalid_or_malformed_tokens_draw_nothing_and_guide_ignores_tokens ... ok
+test kikai_art::profile_tests::each_profile_group_rejects_atomically_for_budget_or_invalid_geometry ... ok
+test kikai_art::profile_tests::partial_cells_clip_before_reflected_sheared_parent_and_still_charge_both_budgets ... ok
+test ui_scene::kikai_integration_tests::far_camera_group_translation_stays_local_with_declared_f32_tolerance ... ok
+test ui_scene::kikai_integration_tests::portrait_id8_defaults_deserialize_and_route_to_actual_three_layers ... ok
+test ui_scene::kikai_integration_tests::high_detail_profiles_and_real_dense_menu_controls_fit_the_shared_scene_cap ... ok
+test kikai_art::tests::default_and_narrow_fractional_fit_keep_every_occupied_cell ... ok
+test ui_scene::kikai_integration_tests::invalid_layouts_are_closed_and_nonfinite_time_or_corporation_defaults_are_safe ... ok
+test kikai_art::tests::nonfinite_invalid_layouts_are_closed_and_bad_time_is_static_zero ... ok
+test kikai_art::tests::expressions_change_actual_eye_and_mouth_colors_with_same_bounds ... ok
+test kikai_art::tests::tiny_fit_keeps_every_authored_cell_but_real_clip_still_masks_partial_cells ... ok
+test kikai_art::tests::main_hair_and_sub_horns_recolor_only_explicit_disjoint_roles ... ok
+test ui_scene::kikai_integration_tests::portrait_fractional_fit_has_no_floor_and_partial_scroll_keeps_whole_cells ... ok
+test ui_scene::kikai_integration_tests::profile_scene_fractional_clipping_motion_and_quota_preserve_type_geometry ... ok
+test ui_scene::kikai_integration_tests::portrait_expression_fields_select_four_real_poses_without_changing_occupancy ... ok
+test kikai_art::tests::real_cached_layers_have_disjoint_regions_and_fine_detail_below_group_budget ... ok
+test ui_scene::kikai_integration_tests::speaking_blink_and_reduced_motion_use_explicit_fields_not_hover ... ok
+test kikai_art::profile_tests::fractional_fit_keeps_every_cell_and_profile_dora_is_exact_guide_when_pan_renko ... ok
+test ui_scene::kikai_integration_tests::two_detail_portraits_share_the_original_cap_without_partial_layers ... ok
+test kikai_art::profile_tests::actual_forehead_skin_stays_source_rgb_across_all_27_extracted_profiles ... ok
+test kikai_art::profile_tests::actual_crystal_cells_follow_sub_corporation_independently_of_main ... ok
+test kikai_art::profile_tests::each_type_animates_actual_facial_states_but_reduced_or_disabled_is_exact_static ... ok
+test kikai_art::profile_tests::all_27_profiles_recolor_only_main_hair_and_sub_horns_without_changing_geometry ... ok
+test ui_scene::kikai_integration_tests::profile_id9_routes_all_27_licensed_tokens_to_actual_type_cells_and_independent_roles ... ok
+test kikai_art::profile_tests::three_types_have_cached_distinct_authored_masks_and_disjoint_constant_state_layers ... ok
+test kikai_art::tests::animation_needs_explicit_speech_and_freezes_for_reduced_or_disabled ... ok
+
+test result: ok. 37 passed; 0 failed; 0 ignored; 0 measured; 141 filtered out; finished in 2.84s
+
+     Running tests\boss_layout.rs (target\debug\deps\boss_layout-427b75710e1283f7.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 31 filtered out; finished in 0.00s
+
