@@ -352,11 +352,29 @@ static RINGS: LazyLock<[PixelBody; 2]> = LazyLock::new(|| {
             }
             let grain = surface_noise(Vec2::new(x * 0.7, y * 2.0), 0x7269_6e67);
             let radial = ((radius - 0.92) / 0.095).clamp(0.0, 1.0);
-            let tone = (2.0 + grain * 2.0 + (radial * std::f32::consts::PI).sin()).round() as usize;
-            Some(
-                ['a', 'e', 'b', 'f', 'c', 'g', 'd', 'h']
-                    [if x > 17.0 && y < 5.0 { 0 } else { tone.min(7) }],
-            )
+            // Lift the observed ellipse into its circular ring plane. Positive
+            // y is the foreground half, so it is nearer the observer in z.
+            // The existing sphere/light casts a curved shadow, not an unrelated
+            // x/y rectangle that severs the exposed right tip of the ring.
+            let position = [x, y, y * ((58.0_f32 / 18.0).powi(2) - 1.0).sqrt()];
+            let light = [-0.52_f32, -0.32, 0.79];
+            let light_squared = light.iter().map(|v| v * v).sum::<f32>();
+            let toward_light = position.iter().zip(light).map(|(p, l)| p * l).sum::<f32>();
+            let transmission = if toward_light >= 0.0 {
+                1.0
+            } else {
+                let distance = (position.iter().map(|v| v * v).sum::<f32>()
+                    - toward_light * toward_light / light_squared)
+                    .max(0.0)
+                    .sqrt();
+                // A narrow five-source-unit penumbra around the unchanged
+                // radius37.5 sphere; cached eight-shade quantization stays crisp.
+                let t = ((distance - 35.0) / 5.0).clamp(0.0, 1.0);
+                t * t * (3.0 - 2.0 * t)
+            };
+            let tone = ((2.0 + grain * 2.0 + (radial * std::f32::consts::PI).sin()) * transmission)
+                .round() as usize;
+            Some(['a', 'e', 'b', 'f', 'c', 'g', 'd', 'h'][tone.min(7)])
         })
     })
 });

@@ -46,6 +46,68 @@ fn night_side_stays_dark_for_every_surface_and_biome_without_erasing_sphere() {
 }
 
 #[test]
+fn ring_shadow_does_not_black_out_the_unoccluded_right_tip() {
+    let tone = |x: f32, y: f32| -> u32 {
+        let shade = RINGS[usize::from(y >= 0.0)]
+            .cells()
+            .find(|(p, _)| *p == Vec2::new(x, y))
+            .expect("probe must be an actual retained ring cell")
+            .1;
+        [0, 2, 4, 6, 1, 3, 5, 7][shade as usize]
+    };
+    // These two neighboring cells sit outside the sphere's projected shadow.
+    // The old x>17/y<5 rectangle blackened only the first one, visibly severing
+    // the right ring. Light/shadow must not jump at that unrelated horizontal.
+    let above = tone(54.5, 4.5);
+    let below = tone(54.5, 5.5);
+    assert!(above >= 2 && below >= 2, "unoccluded tip must retain alloy");
+    assert!(above.abs_diff(below) <= 1);
+    // Same latitude, opposite sides of the sphere: the ray toward the existing
+    // upper-left/front light clears the left ring and intersects from the right.
+    assert!(tone(-34.5, -14.5) >= 2);
+    assert_eq!(tone(34.5, -14.5), 0);
+}
+
+#[test]
+fn actual_ring_material_obeys_light_ray_occlusion_with_intermediate_shades() {
+    let mut umbra = 0;
+    let mut clear = 0;
+    let mut intermediate = 0;
+    for (p, shade) in RINGS.iter().flat_map(PixelBody::cells) {
+        let origin = [p.x, p.y, p.y * ((58.0_f32 / 18.0).powi(2) - 1.0).sqrt()];
+        // Independent bounded ray sampling, rather than the production
+        // perpendicular-distance formula. Wide guards exclude penumbra cells.
+        let closest = (0..=240)
+            .map(|step| {
+                let t = step as f32 * 0.5;
+                origin
+                    .into_iter()
+                    .zip([-0.52, -0.32, 0.79])
+                    .map(|(p, light)| (p + t * light).powi(2))
+                    .sum::<f32>()
+            })
+            .fold(f32::INFINITY, f32::min);
+        let tone = [0, 2, 4, 6, 1, 3, 5, 7][shade as usize];
+        if closest < 31.0_f32.powi(2) {
+            assert_eq!(tone, 0, "actual shadowed material cell at {p:?}");
+            umbra += 1;
+        } else if closest > 43.0_f32.powi(2) {
+            assert!(tone >= 2, "unoccluded material cell at {p:?}");
+            clear += 1;
+        }
+        intermediate += usize::from(tone == 1);
+    }
+    assert!(
+        umbra > 0 && clear > 0,
+        "both guarded ray cases must be exercised"
+    );
+    assert!(
+        intermediate > 4,
+        "penumbra must survive eight-shade authoring"
+    );
+}
+
+#[test]
 fn remnant_keeps_open_filament_geometry_and_calm_fixed_footprint() {
     assert_eq!(PLANETS[3].occupied_count(), 323);
     assert_eq!(LOW_PLANETS[3].occupied_count(), 141);
