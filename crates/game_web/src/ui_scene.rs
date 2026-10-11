@@ -1194,6 +1194,59 @@ impl Painter<'_> {
         self.remaining -= count;
         self.work_remaining -= count;
     }
+    fn meishi_panel(&mut self, node: &UiNode) {
+        // One quiet card surface in its existing relative group. Preflight the
+        // complete fixed geometry; a short shared quota never leaves half a card.
+        const QUADS: usize = 14;
+        if self.remaining < QUADS || self.work_remaining < QUADS {
+            return;
+        }
+        self.work_remaining -= QUADS;
+        let r = node.rect;
+        let corner = 2.0_f32.min(r[2].min(r[3]) * 0.25);
+        let rail = corner * 0.5;
+        let fill = rgb(4, 7, 10);
+        let border = rgb(35, 46, 55);
+        let accent = match selection(node.value, 3) {
+            1 => rgb(195, 113, 107),
+            2 => rgb(89, 148, 191),
+            _ => rgb(109, 170, 113),
+        };
+        let previous_clip = self.clip;
+        self.clip = Some(previous_clip.map_or(r, |clip| intersection(r, clip)));
+        for rect in [
+            [r[0], r[1] + corner, r[2], r[3] - corner * 2.0],
+            [r[0] + corner, r[1], r[2] - corner * 2.0, corner],
+            [
+                r[0] + corner,
+                r[1] + r[3] - corner,
+                r[2] - corner * 2.0,
+                corner,
+            ],
+            [r[0] + rail, r[1] + rail, r[2] - corner, rail],
+            [r[0] + rail, r[1] + r[3] - corner, r[2] - corner, rail],
+        ] {
+            self.rect(rect, fill);
+        }
+        for rect in [
+            [r[0] + corner, r[1], r[2] - corner * 2.0, rail],
+            [r[0] + corner, r[1] + r[3] - rail, r[2] - corner * 2.0, rail],
+            [r[0], r[1] + corner, rail, r[3] - corner * 2.0],
+            [r[0] + r[2] - rail, r[1] + corner, rail, r[3] - corner * 2.0],
+        ] {
+            self.rect(rect, border);
+        }
+        for x in [r[0] + rail, r[0] + r[2] - corner] {
+            for y in [r[1] + rail, r[1] + r[3] - corner] {
+                self.rect([x, y, rail, rail], border);
+            }
+        }
+        self.rect(
+            [r[0] + corner, r[1], (r[2] - corner * 2.0).min(18.0), rail],
+            accent,
+        );
+        self.clip = previous_clip;
+    }
     fn console_panel(&mut self, r: [f32; 4]) {
         self.rect(r, 0xff_000000);
         self.rect([r[0], r[1] + r[3] - 1.0, r[2], 1.0], CYAN);
@@ -1626,6 +1679,7 @@ impl Painter<'_> {
                 false,
             ),
             "panel" => self.frame("panel", r, node.active, node.disabled),
+            "meishi-panel" => self.meishi_panel(node),
             "console-panel" => self.console_panel(r),
             "portrait" => self.portrait(node, time, reduced),
             "licensed-ship" => self.licensed_ship(node),
@@ -2021,6 +2075,139 @@ mod tests {
             }
         }
     }
+    #[test]
+    fn meishi_panel_has_distinct_trim_and_whole_clipped_relative_geometry() {
+        let camera = Vec2::new(75.5, -39.25);
+        let group = Vec2::new(100.25, 50.5);
+        let viewport = Vec2::new(640.0, 360.0);
+        for (value, trim) in [
+            (0.0, rgb(109, 170, 113)),
+            (1.0, rgb(195, 113, 107)),
+            (2.0, rgb(89, 148, 191)),
+            (f32::NAN, rgb(109, 170, 113)),
+        ] {
+            for rect in [[5.125, 9.375, 240.5, 137.25], [5.125, 9.375, 3.5, 2.75]] {
+                for clip in [
+                    None,
+                    Some([
+                        rect[0] + 0.125,
+                        rect[1] + 0.125,
+                        rect[2] * 0.6,
+                        rect[3] * 0.6,
+                    ]),
+                ] {
+                    let mut input = scene("meishi-panel");
+                    input.groups[0].position = group.to_array();
+                    let node = &mut input.groups[0].nodes[0];
+                    node.rect = rect;
+                    node.value = value;
+                    node.clip = clip;
+                    let mut frame = FrameBuilder::new();
+                    draw(
+                        &mut frame,
+                        &input,
+                        camera.to_array(),
+                        viewport.to_array(),
+                        19.0,
+                        false,
+                    );
+                    assert!(frame.frame().pixel_count > 0);
+                    assert!(frame.frame().pixel_count <= 14);
+                    let allowed = clip.map_or(rect, |clip| intersection(rect, clip));
+                    for batch in &frame.frame().batches {
+                        for cell in &batch.pixels {
+                            let transform = batch.transforms[cell.transform as usize];
+                            assert_eq!(transform.b[2..], [0.0, 0.0]);
+                            assert_eq!(cell.color >> 24, 255);
+                            assert!([rgb(4, 7, 10), rgb(35, 46, 55), trim].contains(&cell.color));
+                            for corner in [
+                                Vec2::splat(-0.5),
+                                Vec2::new(0.5, -0.5),
+                                Vec2::new(-0.5, 0.5),
+                                Vec2::splat(0.5),
+                            ] {
+                                let local = transform.point(Vec2::from_array(cell.local) + corner)
+                                    - camera
+                                    + viewport * 0.5
+                                    - group;
+                                assert!(local.is_finite());
+                                assert!(
+                                    local.x >= allowed[0] - 0.0001
+                                        && local.x <= allowed[0] + allowed[2] + 0.0001
+                                );
+                                assert!(
+                                    local.y >= allowed[1] - 0.0001
+                                        && local.y <= allowed[1] + allowed[3] + 0.0001
+                                );
+                            }
+                        }
+                    }
+                    if clip.is_none() {
+                        let batch = &frame.frame().batches[0];
+                        assert_eq!(frame.frame().pixel_count, 14);
+                        assert_eq!(
+                            batch
+                                .pixels
+                                .iter()
+                                .filter(|cell| cell.color == trim)
+                                .count(),
+                            1
+                        );
+                        // The external corner stays open; this is a stepped card,
+                        // rather than another rectangular menu frame.
+                        let corner = Vec2::new(rect[0], rect[1]) + Vec2::splat(0.01);
+                        assert!(!batch.pixels.iter().any(|cell| {
+                            let t = batch.transforms[cell.transform as usize];
+                            let min = t.point(Vec2::from_array(cell.local) - Vec2::splat(0.5))
+                                - camera
+                                + viewport * 0.5
+                                - group;
+                            let max = t.point(Vec2::from_array(cell.local) + Vec2::splat(0.5))
+                                - camera
+                                + viewport * 0.5
+                                - group;
+                            corner.x >= min.x
+                                && corner.x <= max.x
+                                && corner.y >= min.y
+                                && corner.y <= max.y
+                        }));
+                    }
+                }
+            }
+        }
+    }
+
+    #[test]
+    fn meishi_panel_preflights_both_shared_quotas_without_partial_emission() {
+        for (pixels, work, expected) in [(13, 100, 0), (100, 13, 0), (14, 14, 14)] {
+            let mut frame = FrameBuilder::new();
+            frame.push_body(&CELL, Transform::default());
+            let previous = frame.frame().clone();
+            let mut painter = Painter {
+                frame: &mut frame,
+                parent: AffineTransform::default(),
+                remaining: pixels,
+                viewport: Vec2::new(640.0, 360.0),
+                clip: None,
+                work_remaining: work,
+            };
+            painter.node(&scene("meishi-panel").groups[0].nodes[0], 0.0, true);
+            assert_eq!(painter.frame.frame().pixel_count, 1 + expected);
+            assert_eq!(painter.remaining, pixels - expected);
+            assert_eq!(painter.work_remaining, work - expected);
+            if expected == 0 {
+                assert_eq!(
+                    painter.frame.frame().batches[0].pixels,
+                    previous.batches[0].pixels
+                );
+                assert_eq!(
+                    painter.frame.frame().batches[0].transforms,
+                    previous.batches[0].transforms
+                );
+            }
+        }
+    }
+
     #[test]
     fn console_panel_is_exact_opaque_black_with_only_a_rail_and_pins() {
         let mut scene = scene("console-panel");
