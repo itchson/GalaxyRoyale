@@ -1,0 +1,32 @@
+
+running 6 tests
+
+thread 'anonymous_crafted_pan_hull_gets_its_own_passive_affinity' (3604) panicked at C:\Users\mitch\.codex\worktrees\galaxy-hud-navigation\galaxy-royale\work\shield-core-independent-review\public_game_probe.rs:6:5:
+observed 187.2, contract 205.92
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+thread 'anonymous_crafted_renko_hull_gets_main_not_pan_sponsor_offense' (18412) panicked at C:\Users\mitch\.codex\worktrees\galaxy-hud-navigation\galaxy-royale\work\shield-core-independent-review\public_game_probe.rs:6:5:
+observed 13.200001, contract 14.520001
+
+thread 'pan_crafted_hull_does_not_inherit_hugo_pilot_defense' (38920) panicked at C:\Users\mitch\.codex\worktrees\galaxy-hud-navigation\galaxy-royale\work\shield-core-independent-review\public_game_probe.rs:6:5:
+observed 21.2, contract 18
+test anonymous_crafted_pan_hull_gets_its_own_passive_affinity ... FAILED
+test anonymous_crafted_renko_hull_gets_main_not_pan_sponsor_offense ... FAILED
+test pan_crafted_hull_does_not_inherit_hugo_pilot_defense ... FAILED
+
+thread 'anonymous_crafted_hugo_hull_gets_defense_through_actual_damage_api' (5420) panicked at C:\Users\mitch\.codex\worktrees\galaxy-hud-navigation\galaxy-royale\work\shield-core-independent-review\public_game_probe.rs:6:5:
+observed 18, contract 21.2
+test anonymous_crafted_hugo_hull_gets_defense_through_actual_damage_api ... FAILED
+test owned_hardware_recharge_survives_exact_public_checkpoint_reload ... ok
+test base_capacity_empty_unknown_and_wrong_category_slots_are_safe ... ok
+
+failures:
+
+failures:
+    anonymous_crafted_hugo_hull_gets_defense_through_actual_damage_api
+    anonymous_crafted_pan_hull_gets_its_own_passive_affinity
+    anonymous_crafted_renko_hull_gets_main_not_pan_sponsor_offense
+    pan_crafted_hull_does_not_inherit_hugo_pilot_defense
+
+test result: FAILED. 2 passed; 4 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
