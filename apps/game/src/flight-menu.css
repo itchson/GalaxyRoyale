@@ -33,6 +33,7 @@
 .flight-status-identity > div {
   min-width: 0;
   flex: 1 1 0;
+  overflow-wrap: anywhere;
 }
 .flight-license-portrait {
   flex: 0 0 auto;
