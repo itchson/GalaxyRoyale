@@ -213,6 +213,66 @@ test("live status distinguishes earned shield recharge from a locked starter wit
   assert.match(f.target.textContent, /SHIELD RECHARGE 3.0\/S AFTER 4S NO HIT/);
   assert.doesNotMatch(f.target.textContent, /RECHARGE LOCKED/);
 });
+test("status affinity follows Rust hull metadata rather than the pilot, sponsor or visible slot guesses", () => {
+  const f = fixture(),
+    data = hud();
+  data.identity = {
+    kind: "talo",
+    corporation: "pan",
+    sub_corporation: "hugo",
+    designation: "TALO-PAN-HUGO-0123456789ABCDEF",
+    corporation_role: "Passive",
+  };
+  data.campaign.selected_ship = 2;
+  data.ship_stats.affinity = {
+    corporation: "renko",
+    slot: 0,
+    active: true,
+    source: "roster_manufacturer",
+  };
+  const before = structuredClone(data);
+  f.paint(f.target, data);
+  assert.match(f.target.textContent, /RENKO \/ OFFENSE AFFINITY ACTIVE/);
+  assert.doesNotMatch(f.target.textContent, /PAN \/ PASSIVE AFFINITY/);
+  assert.deepEqual(data, before);
+  const nodes = flatten(f.target);
+  f.target.scrollTop = 67;
+  f.externalButton.focus();
+  f.resetWrites();
+  assert.equal(f.paint(f.target, structuredClone(data)), false);
+  assert.equal(f.writes(), 0);
+  data.ship_stats.affinity.active = false;
+  assert.equal(f.paint(f.target, data), true);
+  assert.match(f.target.textContent, /RENKO \/ OFFENSE AFFINITY INACTIVE/);
+  assert.equal(f.writes(), 1);
+  assert.deepEqual(flatten(f.target), nodes);
+  assert.equal(f.target.scrollTop, 67);
+  assert.equal(f.document.activeElement, f.externalButton);
+});
+test("status clears nullable legacy affinity and labels Sovereign's licensed fallback explicitly", () => {
+  const f = fixture(),
+    data = hud();
+  data.ship_stats.affinity = {
+    corporation: "hugo",
+    slot: 1,
+    active: true,
+    source: "sovereign_license",
+  };
+  f.paint(f.target, data);
+  const row = flatten(f.target).find((n) => n.className === "flight-affinity");
+  assert.equal(row.hidden, false);
+  assert.equal(row.textContent, "LICENSED HUGO / DEFENSE AFFINITY ACTIVE");
+  const nodes = flatten(f.target);
+  data.ship_stats.affinity = null;
+  f.paint(f.target, data);
+  assert.equal(row.hidden, true);
+  assert.equal(row.textContent, "");
+  assert.deepEqual(flatten(f.target), nodes);
+  delete data.ship_stats.affinity;
+  f.resetWrites();
+  assert.equal(f.paint(f.target, data), false);
+  assert.equal(f.writes(), 0);
+});
 test("live status displays selected-ship XP, effective stats, slots and actual cargo tiers", () => {
   const f = fixture();
   const data = freeze(hud());

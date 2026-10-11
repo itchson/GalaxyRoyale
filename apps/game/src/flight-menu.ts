@@ -23,6 +23,12 @@ export interface FlightMenuHud {
     hull_regen: number;
     shield_regen: number;
     shield_recharge_unlocked?: boolean;
+    affinity?: {
+      corporation: "pan" | "renko" | "hugo";
+      slot: 0 | 1 | 2;
+      active: boolean;
+      source: "factory_license" | "roster_manufacturer" | "sovereign_license";
+    } | null;
   };
   loadout: (EquippedAbilityHud | null)[];
   material_cargo: number[];
@@ -40,6 +46,7 @@ interface FlightView {
   title: HTMLElement;
   progress: HTMLElement;
   license: HTMLElement;
+  affinity: HTMLElement;
   stats: HTMLElement[];
   slots: HTMLElement[];
   cargo: HTMLElement;
@@ -72,7 +79,9 @@ function createView(target: HTMLElement): FlightView {
   const title = element("h3");
   const progress = element("p");
   const license = element("p", "flight-license");
-  heading.append(title, license, progress);
+  const affinity = element("p", "flight-affinity");
+  affinity.hidden = true;
+  heading.append(title, license, progress, affinity);
   identity.append(portrait, heading, icon);
   const vitals = element("section", "flight-status-stats");
   vitals.setAttribute("aria-label", "Current effective RAICHO statistics");
@@ -118,6 +127,7 @@ function createView(target: HTMLElement): FlightView {
     title,
     progress,
     license,
+    affinity,
     stats,
     slots,
     cargo,
@@ -195,6 +205,15 @@ export function paintFlightMenu(
     `LV ${number(hud.ship_level)} / XP ${number(hud.ship_xp)} / ${hud.ship_level >= 100 ? "MAX LEVEL" : `NEXT ${number(hud.ship_next_xp)}`}`,
   );
   const stats = hud.ship_stats;
+  const affinity = stats.affinity;
+  const affinityText = affinity
+    ? `${affinity.source === "sovereign_license" ? "LICENSED " : ""}${affinity.corporation.toUpperCase()} / ${categories[affinity.slot]} AFFINITY ${affinity.active ? "ACTIVE" : "INACTIVE"}`
+    : "";
+  if (view.affinity.hidden !== !affinityText) {
+    view.affinity.hidden = !affinityText;
+    changed = true;
+  }
+  write(view.affinity, affinityText);
   const values = [
     `HULL ${number(hud.hull)} / ${number(hud.max_hull)}`,
     `SHIELD ${number(hud.shield)} / ${number(hud.max_shield)}`,
