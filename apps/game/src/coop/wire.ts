@@ -12,6 +12,9 @@ export type FrameKind =
   | "admission"
   | "input"
   | "snapshot"
+  | "publication"
+  | "publication-end"
+  | "publication-ack"
   | "body-query"
   | "body"
   | "notice";
@@ -165,7 +168,12 @@ export function validatePayload(
     )
       fail("invalid_admission");
   } else if (kind === "snapshot") snapshot(payload);
-  else if (kind === "body-query") {
+  else if (kind === "publication") publication(payload);
+  else if (kind === "publication-end" || kind === "publication-ack") {
+    const p = record(payload, ["acquisition", "revision"]);
+    if (!uint(p.acquisition) || p.acquisition === 0 || !uint(p.revision))
+      fail("invalid_publication_token");
+  } else if (kind === "body-query") {
     const q = record(payload, ["kind", "expected_revision", "offset", "id"]);
     if (
       !uint(q.expected_revision) ||
@@ -184,6 +192,31 @@ export function validatePayload(
     )
       fail("invalid_notice");
   }
+}
+/** Exact native capture header. Cells follow in bounded native page messages. */
+export function publication(value: unknown): void {
+  const p = record(value, ["acquisition", "snapshot", "counts"]);
+  if (!uint(p.acquisition) || p.acquisition === 0)
+    fail("invalid_publication_token");
+  snapshot(p.snapshot);
+  const c = record(p.counts, [
+    "entities",
+    "occupied_cells",
+    "storage_cells",
+    "entity_pages",
+    "body_pages",
+  ]);
+  if (
+    Object.keys(c).length !== 5 ||
+    Object.values(c).some((x) => !uint(x)) ||
+    Number(c.entities) > 512 ||
+    Number(c.storage_cells) > 1_048_576 ||
+    Number(c.occupied_cells) > Number(c.storage_cells) ||
+    c.entity_pages !== Math.ceil(Number(c.entities) / 64) ||
+    Number(c.body_pages) > 1_536 ||
+    (c.entities === 0 && (c.storage_cells !== 0 || c.occupied_cells !== 0))
+  )
+    fail("invalid_publication_counts");
 }
 const entityId = (v: unknown): v is string =>
   typeof v === "string" && /^[0-9a-f]{16}$/.test(v);
@@ -239,6 +272,7 @@ function page(value: unknown): void {
         "width",
         "height",
         "occupied",
+        "body_signature",
       ]);
       if (
         !entityId(e.id) ||
@@ -250,6 +284,12 @@ function page(value: unknown): void {
       )
         fail("invalid_entity");
       seen.add(e.id);
+      if (
+        e.body_signature !== undefined &&
+        (typeof e.body_signature !== "string" ||
+          !/^[0-9a-f]{16}$/.test(e.body_signature))
+      )
+        fail("invalid_body_signature");
       dimensions(e);
       for (const key of ["position", "previous", "velocity"]) vector(e[key]);
       for (const key of ["heading", "previous_heading"])
@@ -431,8 +471,15 @@ export function allowed(kind: FrameKind, sender: Role): boolean {
   return (
     kind === "hello" ||
     (sender === "host"
-      ? ["admission", "snapshot", "body", "notice"].includes(kind)
-      : ["join", "input", "body-query"].includes(kind))
+      ? [
+          "admission",
+          "snapshot",
+          "publication",
+          "publication-end",
+          "body",
+          "notice",
+        ].includes(kind)
+      : ["join", "input", "body-query", "publication-ack"].includes(kind))
   );
 }
 export function encode(frame: Frame): string {
@@ -455,6 +502,9 @@ function validateFrame(value: unknown): asserts value is Frame {
       "admission",
       "input",
       "snapshot",
+      "publication",
+      "publication-end",
+      "publication-ack",
       "body-query",
       "body",
       "notice",

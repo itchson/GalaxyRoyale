@@ -631,7 +631,15 @@ export class CoopTransport {
         }
         if (
           p.state !== "ready" ||
-          (["input", "snapshot", "body", "body-query"].includes(frame.kind) &&
+          ([
+            "input",
+            "snapshot",
+            "publication",
+            "publication-end",
+            "publication-ack",
+            "body",
+            "body-query",
+          ].includes(frame.kind) &&
             p.admission !== "admitted")
         )
           fail("not_admitted");
@@ -644,6 +652,14 @@ export class CoopTransport {
           frame.kind === "snapshot" &&
           (record(frame.payload).session !== this.#session!.id ||
             record(frame.payload).world_seed !== this.#session!.seed)
+        )
+          fail("snapshot_session");
+        if (
+          frame.kind === "publication" &&
+          (record(record(frame.payload).snapshot).session !==
+            this.#session!.id ||
+            record(record(frame.payload).snapshot).world_seed !==
+              this.#session!.seed)
         )
           fail("snapshot_session");
         if (
@@ -756,7 +772,15 @@ export class CoopTransport {
     )
       return false;
     if (
-      ["input", "snapshot", "body", "body-query"].includes(kind) &&
+      [
+        "input",
+        "snapshot",
+        "publication",
+        "publication-end",
+        "publication-ack",
+        "body",
+        "body-query",
+      ].includes(kind) &&
       p.admission !== "admitted"
     )
       return false;
@@ -771,6 +795,12 @@ export class CoopTransport {
     )
       return false;
     if (kind === "body" && record(payload).session !== this.#session!.id)
+      return false;
+    if (
+      kind === "publication" &&
+      (record(record(payload).snapshot).session !== this.#session!.id ||
+        record(record(payload).snapshot).world_seed !== this.#session!.seed)
+    )
       return false;
     const sent = this.#send(p, kind, payload);
     if (sent && kind === "admission") {
@@ -788,6 +818,13 @@ export class CoopTransport {
     if (!p || p.state !== "ready" || p.admission !== "admitted") return false;
     p.simulation = running ? "running" : "waiting";
     this.#changed();
+    return true;
+  }
+  /** Host adapter retirement: close only this authenticated channel. */
+  disconnect(peerId: string): boolean {
+    const p = this.#peers.get(peerId);
+    if (this.#member?.role !== "host" || !p) return false;
+    this.#drop(p, "admission_closed");
     return true;
   }
   #closePeer(p: Peer): void {
