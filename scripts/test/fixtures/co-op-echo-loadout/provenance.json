@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "nativeSourceCommit": "84c485a858464ed45e6f34ef56a6baee69757763",
+  "rootExecutionCommit": "15442cbb692d6b3e09f078b4544670ca8828d393",
+  "nativeFunction": "Game::co_op_owned_loadout",
+  "nativeTest": "co_op::echo_tests::native_export_validates_evolution_without_defeat_history_or_legacy_byte_changes",
+  "command": "cargo test --locked -p game_core co_op::echo_tests -- --nocapture",
+  "scope": "Actual native serialized value bodies. Node supplies a boundary-test envelope; no WASM/RTC execution is claimed by replay.",
+  "fixtureSetup": {
+    "legacy": "Profile::default()",
+    "evolved": {
+      "droidType": "talo",
+      "corporation": "renko",
+      "selectedHull": 0,
+      "selectedHullXp": 0,
+      "storedAbilityRank": 5,
+      "nativeEffectiveAbilityRank": 1,
+      "equippedOffense": 3,
+      "familyZeroDefeats": [
+        16,
+        8,
+        4,
+        2,
+        1
+      ],
+      "naturallyEarned": false
+    }
+  },
+  "files": [
+    {
+      "file": "legacy.json",
+      "bytes": 184,
+      "sha256": "da5b43e9f803abd1cc5bd190f24fa84649225b2c225c74ec9327be86a7bde87f"
+    },
+    {
+      "file": "evolved.json",
+      "bytes": 219,
+      "sha256": "44a94c2370eb1abc3a55ee42885ff5fb38456520a158c16aa1e00d4409fc3763"
+    }
+  ]
+}

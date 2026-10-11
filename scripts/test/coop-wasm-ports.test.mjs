@@ -173,6 +173,39 @@ test("Echo evolution refuses malformed tokens, wrong slots and persisted progres
 const canonicalFixtureBytes = (raw) =>
   Buffer.from(raw.toString("utf8").replace(/\r\n/g, "\n"));
 
+test("actual native legacy and evolved Echo value exports replay without invented history or rank clamping", () => {
+  const root = new URL("./fixtures/co-op-echo-loadout/", import.meta.url);
+  const provenance = JSON.parse(readFileSync(new URL("provenance.json", root)));
+  assert.equal(
+    provenance.nativeSourceCommit,
+    "84c485a858464ed45e6f34ef56a6baee69757763",
+  );
+  assert.equal(provenance.fixtureSetup.evolved.naturallyEarned, false);
+  for (const pin of provenance.files) {
+    const raw = canonicalFixtureBytes(readFileSync(new URL(pin.file, root)));
+    assert.equal(raw.length, pin.bytes);
+    assert.equal(createHash("sha256").update(raw).digest("hex"), pin.sha256);
+    const value = JSON.parse(raw);
+    // Only this envelope is supplied by the boundary double. The retained value
+    // bytes came from actual native Game export in two separate executions.
+    const extracted = readOwnedLoadout({
+      co_op_batch: () =>
+        JSON.stringify({ v: 1, results: [{ ok: true, value }] }),
+    });
+    assert.deepEqual(extracted, value);
+    spec({ local_seed: 123, identity: null, owned_loadout: extracted });
+    assert.equal(Object.hasOwn(extracted, "boss_generations"), false);
+    if (pin.file === "evolved.json") {
+      assert.equal(extracted.echo_evolution, 5);
+      assert.deepEqual(extracted.slots[0], { index: 3, rank: 5 });
+      assert.equal(extracted.ship_xp, 0);
+    } else {
+      assert.equal(Object.hasOwn(extracted, "echo_evolution"), false);
+      assert.equal(Object.keys(extracted).length, 10);
+    }
+  }
+});
+
 test("tracked real publication DTOs retain canonical native export hashes and validate wire", () => {
   const provenance = JSON.parse(
     readFileSync(
