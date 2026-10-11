@@ -941,8 +941,8 @@ fn draw_motif(
     required
 }
 
-/// A seeded stellar neighborhood is born once in field space. Its nodes and
-/// connecting dotted asterism never depend on camera, quality or animation.
+/// A seeded stellar neighborhood is born once in field space. Its stars never
+/// depend on camera, quality or animation; it contains no navigation strokes.
 fn stellar_system(seed: u32, grid: [i32; 2]) -> Option<(Vec2, [Vec2; 7], u32)> {
     let h = hash3(seed ^ 0x7379_7374, grid[0], grid[1], 71);
     if !h.is_multiple_of(17) {
@@ -954,12 +954,35 @@ fn stellar_system(seed: u32, grid: [i32; 2]) -> Option<(Vec2, [Vec2; 7], u32)> {
     let angle = unit(mix(h ^ 137)) * TAU;
     let axis = Vec2::new(angle.cos(), angle.sin());
     let side = Vec2::new(-axis.y, axis.x);
-    let nodes = std::array::from_fn(|i| {
-        let q = mix(h ^ (i as u32 + 1).wrapping_mul(7919));
-        let x = (i as f32 - 3.0) * 20.0 + (unit(q) - 0.5) * 10.0;
-        let y = (unit(mix(q ^ 83)) - 0.5) * 55.0;
-        axis * x + side * y
-    });
+    // Compact clusters and loose asymmetric neighborhoods share no fixed
+    // axial bins. The largest rotated corner plus star extent stays inside
+    // the existing 90-unit culling envelope. All candidates are field-local.
+    let span = 52.0 + unit(mix(h ^ 213)) * 68.0;
+    let aspect = 0.64 + unit(mix(h ^ 197)) * 0.36;
+    let mut nodes = [Vec2::ZERO; 7];
+    for i in 0..nodes.len() {
+        let mut best = Vec2::ZERO;
+        let mut best_gap = -1.0;
+        // Prefer a clear point over an overlapping speck without an unbounded
+        // rejection loop or heap. On exhaustion retain the widest sampled gap.
+        for attempt in 0_u32..16 {
+            let q = mix(h ^ (i as u32 + 1).wrapping_mul(7919) ^ attempt.wrapping_mul(0x9e37_79b9));
+            let p = axis * ((unit(q) - 0.5) * span)
+                + side * ((unit(mix(q ^ 83)) - 0.5) * span * aspect);
+            let gap = nodes[..i]
+                .iter()
+                .map(|other| p.distance_squared(*other))
+                .fold(f32::INFINITY, f32::min);
+            if gap > best_gap {
+                best = p;
+                best_gap = gap;
+            }
+            if gap >= 8.0 * 8.0 {
+                break;
+            }
+        }
+        nodes[i] = best;
+    }
     Some((origin, nodes, h))
 }
 
@@ -1972,3 +1995,7 @@ mod detail_tests;
 #[cfg(test)]
 #[path = "deep_nebula_tests.rs"]
 mod deep_nebula_tests;
+
+#[cfg(test)]
+#[path = "stellar_neighborhood_tests.rs"]
+mod stellar_neighborhood_tests;
