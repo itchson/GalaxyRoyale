@@ -58,7 +58,7 @@ jobs:
           pnpm install --frozen-lockfile
       - name: Build both renderer packages and game-only PWA
         run: pnpm build
-      - name: Actual Rust saves across the WASM and IndexedDB boundary
+      - name: Actual Rust WASM snapshots through SaveStore with headless fake-indexeddb
         run: pnpm test:wasm-contract
       - name: WASM warnings
         run: |
