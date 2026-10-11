@@ -3422,6 +3422,18 @@ impl Game {
 
     /// Extraction into caller-owned storage avoids reallocating frame batches.
     pub fn render_into(&self, alpha: f32, frame: &mut FrameBuilder) {
+        self.render_into_with_home(alpha, frame, |_, _, _| false);
+    }
+
+    /// A presentation adapter may replace only the visible home artwork.
+    /// Rejection preserves the portable body; all facility/gameplay draw order
+    /// and simulation state remain identical to ordinary extraction.
+    pub fn render_into_with_home(
+        &self,
+        alpha: f32,
+        frame: &mut FrameBuilder,
+        mut draw_home: impl FnMut(&mut FrameBuilder, Transform, f32) -> bool,
+    ) {
         let alpha = alpha.clamp(0.0, 1.0);
         frame.clear();
         let lights = [
@@ -3454,7 +3466,7 @@ impl Game {
             rotation: 0.0,
             scale: Vec2::splat(DOCK_SCALE),
         };
-        if self.visible(Vec2::ZERO, 100.0) {
+        if self.visible(Vec2::ZERO, 100.0) && !draw_home(frame, station, self.cosmetic_time()) {
             frame.push_body_colored_material(
                 &self.dock_body,
                 station,
