@@ -1,0 +1,52 @@
+[
+  {
+    "port": 4219,
+    "processId": 42960,
+    "command": "\"C:\\Program Files\\nodejs\\node.exe\" node_modules/vite/bin/vite.js preview --config apps/game/vite.config.ts --host 127.0.0.1 --port 4219 --strictPort"
+  },
+  {
+    "port": 4218,
+    "processId": 18324,
+    "command": "\"C:\\Program Files\\nodejs\\node.exe\" node_modules/vite/bin/vite.js preview --config apps/game/vite.config.ts --host 127.0.0.1 --port 4218 --strictPort"
+  },
+  {
+    "port": 4217,
+    "processId": 24156,
+    "command": "\"C:\\Program Files\\nodejs\\node.exe\" node_modules/vite/bin/vite.js preview --config apps/game/vite.config.ts --host 127.0.0.1 --port 4217 --strictPort"
+  },
+  {
+    "port": 4216,
+    "processId": 33928,
+    "command": "\"C:\\Program Files\\nodejs\\node.exe\" node_modules/vite/bin/vite.js preview --config apps/game/vite.config.ts --host 127.0.0.1 --port 4216 --strictPort"
+  },
+  {
+    "port": 4214,
+    "processId": 55940,
+    "command": "\"C:\\Program Files\\nodejs\\node.exe\" node_modules/vite/bin/vite.js preview --config apps/game/vite.config.ts --host 127.0.0.1 --port 4214 --strictPort"
+  },
+  {
+    "port": 4213,
+    "processId": 26332,
+    "command": "\"C:\\Program Files\\nodejs\\node.exe\" node_modules/vite/bin/vite.js preview --config apps/game/vite.config.ts --host 127.0.0.1 --port 4213 --strictPort"
+  },
+  {
+    "port": 4212,
+    "processId": 57104,
+    "command": "\"C:\\Program Files\\nodejs\\node.exe\" node_modules/vite/bin/vite.js preview --config apps/game/vite.config.ts --host 127.0.0.1 --port 4212 --strictPort"
+  },
+  {
+    "port": 4210,
+    "processId": 40076,
+    "command": "\"C:\\Program Files\\nodejs\\node.exe\" node_modules/vite/bin/vite.js preview --config apps/game/vite.config.ts --host 127.0.0.1 --port 4210 --strictPort"
+  },
+  {
+    "port": 4191,
+    "processId": 27552,
+    "command": "\"C:\\Program Files\\nodejs\\node.exe\" node_modules/vite/bin/vite.js preview --config apps/game/vite.config.ts --host 127.0.0.1 --port 4191 --strictPort"
+  },
+  {
+    "port": 4173,
+    "processId": 28212,
+    "command": "\"C:\\Program Files\\nodejs\\node.exe\" node_modules/vite/bin/vite.js --config apps/game/vite.config.ts"
+  }
+]

@@ -46,6 +46,14 @@ Conversion checks verify exact dimensions, row-major indices, hard alpha, common
 
 Physical phone performance and final visual acceptance remain separate checks. Audio uses an authored chip/synth score and synthesized cues; optional offline music generation is a later asset experiment.
 
+## Current detailed-cell production standard
+
+New assets follow [the exact asset pipeline](ASSET_PIPELINE.md) and [the asset brief](ASSET_BRIEF.md). The historical generated-sheet recipes above describe their inspected inputs; they do not authorize silent resizing, alpha changes or component removal for future art.
+
+Keep the same faction/category palette and silhouette language across ships, facilities, enemies and UI. Build detail from a readable silhouette, a few directional material planes, then restrained panels, vents, fasteners and lamps. Dark crater floors are occupied material on intact rocks; landing apertures and authored hull gaps are intentional transparent cells. Pixel count alone does not establish visual quality. Inspect normal gameplay size, both zoom limits and biome contrast before accepting detail.
+
+The current four procedural rock families have connected opaque interiors and deterministic geometric/color variation. Haven facilities and action icons use original finer cells within their existing footprints; native software contact sheets and actual browser captures are separate evidence. The text-only flight footer uses the smaller original RoyaleMicro cell font; attached beveled hull/shield chunks animate while retaining immediate health truth. Compact-viewport human readability remains an explicit review gate.
+
 ## Fifteen ordinary bosses
 
 `assets/pixels/boss-source.py` authors fifteen distinct 64-unit hull designs and five Coil modules. It writes `boss-atlas.json`, measured `boss-budgets.json`, and the optional Pillow contact sheet `boss-preview.png`. These are original authored cells rather than image-model output. Each head has its own silhouette, armor panel layout, actual transparent openings and occupied reactor; later tiers add forked wings, citadel bays or annular/gill shapes. Native sizes are 64, 72, 80, 88 and 96 cells. The common 64-entry hard-alpha palette retains magenta Dart, amber Bastion and jade Coil recognition, with layered metal shading, rails, vents and firing hardware.

@@ -136,6 +136,7 @@ export class ProjectStore {
         const taskIds = input.taskIds === undefined ? [] : input.taskIds;
         requireValue(Array.isArray(taskIds) && taskIds.length <= 40 && new Set(taskIds).size === taskIds.length && Array.from(taskIds).every(id => typeof id === 'string' && next.tasks.some(t => t.id === id)), 'Review task IDs must be an array of at most 40 unique existing task IDs.');
         item.participants = input.participants; item.taskIds = [...taskIds];
+        if (input.evidence !== undefined) item.evidence = validateEvidence(input.evidence);
       }
       if (kind === 'decision') { requireValue(['proposed','accepted','rejected','superseded'].includes(input.status), 'Invalid decision status.'); item.status = input.status; }
       if (kind === 'build') {

@@ -1,4 +1,8 @@
 import { spawnSync } from "node:child_process";
+import {writePreviewBuild,buildIdentity} from './preview-build.mjs';
+import {fileURLToPath} from 'node:url';
+const projectRoot=fileURLToPath(new URL('..',import.meta.url));
+const initialInputs=await buildIdentity(projectRoot);
 const commands = [
   ["node", ["scripts/build-wasm.mjs"]],
   ["node", ["node_modules/typescript/bin/tsc", "--noEmit"]],
@@ -29,3 +33,4 @@ for (const [command, args] of commands) {
   });
   if (result.status !== 0) process.exit(result.status ?? 1);
 }
+await writePreviewBuild(projectRoot,initialInputs);

@@ -39,7 +39,10 @@
       "category": "overview",
       "status": "implemented",
       "summary": "A solo Rust/WASM space shooter with local saves, destructible occupied pixels, procedural regions and an eight-champion campaign.",
-      "tags": ["overview", "implemented"],
+      "tags": [
+        "overview",
+        "implemented"
+      ],
       "facts": [
         {
           "label": "Runtime",
@@ -90,7 +93,13 @@
           "role": "maintenance"
         }
       ],
-      "related": ["validation", "world-seed", "ships", "league", "future"],
+      "related": [
+        "validation",
+        "world-seed",
+        "ships",
+        "league",
+        "future"
+      ],
       "media": [
         {
           "path": "artifacts/presentation-refinement-20261011/webgpu-haven.jpg",
@@ -107,7 +116,10 @@
       "category": "champions",
       "status": "implemented",
       "summary": "Human champion piloting Dawnneedle.",
-      "tags": ["champions", "implemented"],
+      "tags": [
+        "champions",
+        "implemented"
+      ],
       "facts": [
         {
           "label": "Ship",
@@ -164,7 +176,11 @@
           "role": "documentation"
         }
       ],
-      "related": ["ships", "league", "abilities"],
+      "related": [
+        "ships",
+        "league",
+        "abilities"
+      ],
       "media": [
         {
           "path": "assets/ui/campaign-preview.png",
@@ -182,9 +198,16 @@
         "silhouette": "needle",
         "family": 0,
         "constructionCategory": 0,
-        "grid": [-1, -1],
-        "color": [255, 195, 88],
-        "baseHull": 260.0
+        "grid": [
+          -1,
+          -1
+        ],
+        "color": [
+          255,
+          195,
+          88
+        ],
+        "baseHull": 260
       }
     },
     {
@@ -193,7 +216,10 @@
       "category": "champions",
       "status": "implemented",
       "summary": "Automaton champion piloting Bulwark.",
-      "tags": ["champions", "implemented"],
+      "tags": [
+        "champions",
+        "implemented"
+      ],
       "facts": [
         {
           "label": "Ship",
@@ -250,7 +276,11 @@
           "role": "documentation"
         }
       ],
-      "related": ["ships", "league", "abilities"],
+      "related": [
+        "ships",
+        "league",
+        "abilities"
+      ],
       "media": [
         {
           "path": "assets/ui/campaign-preview.png",
@@ -268,9 +298,16 @@
         "silhouette": "shoulder-armor",
         "family": 1,
         "constructionCategory": 1,
-        "grid": [0, -1],
-        "color": [255, 104, 102],
-        "baseHull": 390.0
+        "grid": [
+          0,
+          -1
+        ],
+        "color": [
+          255,
+          104,
+          102
+        ],
+        "baseHull": 390
       }
     },
     {
@@ -279,7 +316,10 @@
       "category": "champions",
       "status": "implemented",
       "summary": "Vesper champion piloting Nightrail.",
-      "tags": ["champions", "implemented"],
+      "tags": [
+        "champions",
+        "implemented"
+      ],
       "facts": [
         {
           "label": "Ship",
@@ -336,7 +376,11 @@
           "role": "documentation"
         }
       ],
-      "related": ["ships", "league", "abilities"],
+      "related": [
+        "ships",
+        "league",
+        "abilities"
+      ],
       "media": [
         {
           "path": "assets/ui/campaign-preview.png",
@@ -354,9 +398,16 @@
         "silhouette": "forked-serpent",
         "family": 2,
         "constructionCategory": 2,
-        "grid": [1, -1],
-        "color": [188, 123, 255],
-        "baseHull": 350.0
+        "grid": [
+          1,
+          -1
+        ],
+        "color": [
+          188,
+          123,
+          255
+        ],
+        "baseHull": 350
       }
     },
     {
@@ -365,7 +416,10 @@
       "category": "champions",
       "status": "implemented",
       "summary": "Crystalline champion piloting Prism.",
-      "tags": ["champions", "implemented"],
+      "tags": [
+        "champions",
+        "implemented"
+      ],
       "facts": [
         {
           "label": "Ship",
@@ -422,7 +476,11 @@
           "role": "documentation"
         }
       ],
-      "related": ["ships", "league", "abilities"],
+      "related": [
+        "ships",
+        "league",
+        "abilities"
+      ],
       "media": [
         {
           "path": "assets/ui/campaign-preview.png",
@@ -440,9 +498,16 @@
         "silhouette": "split-wings",
         "family": 0,
         "constructionCategory": 0,
-        "grid": [1, 0],
-        "color": [104, 230, 255],
-        "baseHull": 300.0
+        "grid": [
+          1,
+          0
+        ],
+        "color": [
+          104,
+          230,
+          255
+        ],
+        "baseHull": 300
       }
     },
     {
@@ -451,7 +516,10 @@
       "category": "champions",
       "status": "implemented",
       "summary": "Human champion piloting Windrunner.",
-      "tags": ["champions", "implemented"],
+      "tags": [
+        "champions",
+        "implemented"
+      ],
       "facts": [
         {
           "label": "Ship",
@@ -508,7 +576,11 @@
           "role": "documentation"
         }
       ],
-      "related": ["ships", "league", "abilities"],
+      "related": [
+        "ships",
+        "league",
+        "abilities"
+      ],
       "media": [
         {
           "path": "assets/ui/campaign-preview.png",
@@ -526,9 +598,16 @@
         "silhouette": "swept-wings",
         "family": 0,
         "constructionCategory": 2,
-        "grid": [1, 1],
-        "color": [113, 244, 153],
-        "baseHull": 290.0
+        "grid": [
+          1,
+          1
+        ],
+        "color": [
+          113,
+          244,
+          153
+        ],
+        "baseHull": 290
       }
     },
     {
@@ -537,7 +616,10 @@
       "category": "champions",
       "status": "implemented",
       "summary": "Golem champion piloting Ironwake.",
-      "tags": ["champions", "implemented"],
+      "tags": [
+        "champions",
+        "implemented"
+      ],
       "facts": [
         {
           "label": "Ship",
@@ -594,7 +676,11 @@
           "role": "documentation"
         }
       ],
-      "related": ["ships", "league", "abilities"],
+      "related": [
+        "ships",
+        "league",
+        "abilities"
+      ],
       "media": [
         {
           "path": "assets/ui/campaign-preview.png",
@@ -612,9 +698,16 @@
         "silhouette": "ram-prow",
         "family": 1,
         "constructionCategory": 1,
-        "grid": [0, 1],
-        "color": [255, 157, 88],
-        "baseHull": 440.0
+        "grid": [
+          0,
+          1
+        ],
+        "color": [
+          255,
+          157,
+          88
+        ],
+        "baseHull": 440
       }
     },
     {
@@ -623,7 +716,10 @@
       "category": "champions",
       "status": "implemented",
       "summary": "Voidborn champion piloting Voidcoil.",
-      "tags": ["champions", "implemented"],
+      "tags": [
+        "champions",
+        "implemented"
+      ],
       "facts": [
         {
           "label": "Ship",
@@ -680,7 +776,11 @@
           "role": "documentation"
         }
       ],
-      "related": ["ships", "league", "abilities"],
+      "related": [
+        "ships",
+        "league",
+        "abilities"
+      ],
       "media": [
         {
           "path": "assets/ui/campaign-preview.png",
@@ -698,9 +798,16 @@
         "silhouette": "ring-fins",
         "family": 2,
         "constructionCategory": 2,
-        "grid": [-1, 1],
-        "color": [239, 116, 228],
-        "baseHull": 370.0
+        "grid": [
+          -1,
+          1
+        ],
+        "color": [
+          239,
+          116,
+          228
+        ],
+        "baseHull": 370
       }
     },
     {
@@ -709,7 +816,10 @@
       "category": "champions",
       "status": "implemented",
       "summary": "Ancient automaton champion piloting Sunspear.",
-      "tags": ["champions", "implemented"],
+      "tags": [
+        "champions",
+        "implemented"
+      ],
       "facts": [
         {
           "label": "Ship",
@@ -766,7 +876,11 @@
           "role": "documentation"
         }
       ],
-      "related": ["ships", "league", "abilities"],
+      "related": [
+        "ships",
+        "league",
+        "abilities"
+      ],
       "media": [
         {
           "path": "assets/ui/campaign-preview.png",
@@ -784,9 +898,16 @@
         "silhouette": "spear-prow",
         "family": 1,
         "constructionCategory": 0,
-        "grid": [-1, 0],
-        "color": [255, 233, 158],
-        "baseHull": 340.0
+        "grid": [
+          -1,
+          0
+        ],
+        "color": [
+          255,
+          233,
+          158
+        ],
+        "baseHull": 340
       }
     },
     {
@@ -795,7 +916,10 @@
       "category": "universe",
       "status": "implemented",
       "summary": "Seeded biome 0 with its own palette, scenery and ordinary family mixture.",
-      "tags": ["universe", "implemented"],
+      "tags": [
+        "universe",
+        "implemented"
+      ],
       "facts": [
         {
           "label": "Kind",
@@ -832,11 +956,18 @@
           "role": "documentation"
         }
       ],
-      "related": ["world-seed", "sanctuaries"],
+      "related": [
+        "world-seed",
+        "sanctuaries"
+      ],
       "media": [],
       "data": {
         "kind": 0,
-        "spawnWeights": [4, 3, 3]
+        "spawnWeights": [
+          4,
+          3,
+          3
+        ]
       }
     },
     {
@@ -845,7 +976,10 @@
       "category": "universe",
       "status": "implemented",
       "summary": "Seeded biome 1 with its own palette, scenery and ordinary family mixture.",
-      "tags": ["universe", "implemented"],
+      "tags": [
+        "universe",
+        "implemented"
+      ],
       "facts": [
         {
           "label": "Kind",
@@ -882,11 +1016,18 @@
           "role": "documentation"
         }
       ],
-      "related": ["world-seed", "sanctuaries"],
+      "related": [
+        "world-seed",
+        "sanctuaries"
+      ],
       "media": [],
       "data": {
         "kind": 1,
-        "spawnWeights": [2, 3, 6]
+        "spawnWeights": [
+          2,
+          3,
+          6
+        ]
       }
     },
     {
@@ -895,7 +1036,10 @@
       "category": "universe",
       "status": "implemented",
       "summary": "Seeded biome 2 with its own palette, scenery and ordinary family mixture.",
-      "tags": ["universe", "implemented"],
+      "tags": [
+        "universe",
+        "implemented"
+      ],
       "facts": [
         {
           "label": "Kind",
@@ -932,11 +1076,18 @@
           "role": "documentation"
         }
       ],
-      "related": ["world-seed", "sanctuaries"],
+      "related": [
+        "world-seed",
+        "sanctuaries"
+      ],
       "media": [],
       "data": {
         "kind": 2,
-        "spawnWeights": [5, 2, 4]
+        "spawnWeights": [
+          5,
+          2,
+          4
+        ]
       }
     },
     {
@@ -945,7 +1096,10 @@
       "category": "universe",
       "status": "implemented",
       "summary": "Seeded biome 3 with its own palette, scenery and ordinary family mixture.",
-      "tags": ["universe", "implemented"],
+      "tags": [
+        "universe",
+        "implemented"
+      ],
       "facts": [
         {
           "label": "Kind",
@@ -982,11 +1136,18 @@
           "role": "documentation"
         }
       ],
-      "related": ["world-seed", "sanctuaries"],
+      "related": [
+        "world-seed",
+        "sanctuaries"
+      ],
       "media": [],
       "data": {
         "kind": 3,
-        "spawnWeights": [2, 7, 2]
+        "spawnWeights": [
+          2,
+          7,
+          2
+        ]
       }
     },
     {
@@ -995,7 +1156,10 @@
       "category": "universe",
       "status": "implemented",
       "summary": "Seeded biome 4 with its own palette, scenery and ordinary family mixture.",
-      "tags": ["universe", "implemented"],
+      "tags": [
+        "universe",
+        "implemented"
+      ],
       "facts": [
         {
           "label": "Kind",
@@ -1032,11 +1196,18 @@
           "role": "documentation"
         }
       ],
-      "related": ["world-seed", "sanctuaries"],
+      "related": [
+        "world-seed",
+        "sanctuaries"
+      ],
       "media": [],
       "data": {
         "kind": 4,
-        "spawnWeights": [7, 3, 2]
+        "spawnWeights": [
+          7,
+          3,
+          2
+        ]
       }
     },
     {
@@ -1045,7 +1216,10 @@
       "category": "universe",
       "status": "implemented",
       "summary": "Seeded biome 5 with its own palette, scenery and ordinary family mixture.",
-      "tags": ["universe", "implemented"],
+      "tags": [
+        "universe",
+        "implemented"
+      ],
       "facts": [
         {
           "label": "Kind",
@@ -1082,11 +1256,18 @@
           "role": "documentation"
         }
       ],
-      "related": ["world-seed", "sanctuaries"],
+      "related": [
+        "world-seed",
+        "sanctuaries"
+      ],
       "media": [],
       "data": {
         "kind": 5,
-        "spawnWeights": [3, 3, 6]
+        "spawnWeights": [
+          3,
+          3,
+          6
+        ]
       }
     },
     {
@@ -1095,7 +1276,10 @@
       "category": "universe",
       "status": "implemented",
       "summary": "A deterministic nearest-jittered-tile network with canonical discovery-site identities.",
-      "tags": ["universe", "implemented"],
+      "tags": [
+        "universe",
+        "implemented"
+      ],
       "facts": [
         {
           "label": "Region size",
@@ -1144,7 +1328,11 @@
           "role": "documentation"
         }
       ],
-      "related": ["missions", "sanctuaries", "biome-0"],
+      "related": [
+        "missions",
+        "sanctuaries",
+        "biome-0"
+      ],
       "media": [],
       "data": {
         "regionSize": 4200,
@@ -1158,7 +1346,10 @@
       "category": "universe",
       "status": "implemented",
       "summary": "Haven is the repair, banking and construction hub; remote safe sites have seeded missions and orbital belts.",
-      "tags": ["universe", "implemented"],
+      "tags": [
+        "universe",
+        "implemented"
+      ],
       "facts": [
         {
           "label": "Haven safety",
@@ -1212,7 +1403,10 @@
           "role": "implementation"
         }
       ],
-      "related": ["cargo", "missions"],
+      "related": [
+        "cargo",
+        "missions"
+      ],
       "media": [
         {
           "path": "artifacts/presentation-refinement-20261011/webgpu-belt.jpg",
@@ -1224,8 +1418,17 @@
       ],
       "data": {
         "havenSafeRadius": 240,
-        "beltOffsets": [240, 520],
-        "beltRecommendedLevels": [1, 3, 5, 10, 12]
+        "beltOffsets": [
+          240,
+          520
+        ],
+        "beltRecommendedLevels": [
+          1,
+          3,
+          5,
+          10,
+          12
+        ]
       }
     },
     {
@@ -1234,7 +1437,10 @@
       "category": "missions",
       "status": "implemented",
       "summary": "Two seeded site mission types use real accepted progress and once-only claims.",
-      "tags": ["missions", "implemented"],
+      "tags": [
+        "missions",
+        "implemented"
+      ],
       "facts": [
         {
           "label": "Courier",
@@ -1280,11 +1486,20 @@
           "role": "documentation"
         }
       ],
-      "related": ["world-seed", "cargo"],
+      "related": [
+        "world-seed",
+        "cargo"
+      ],
       "media": [],
       "data": {
-        "events": ["courier", "bounty"],
-        "targetKills": [8, 12]
+        "events": [
+          "courier",
+          "bounty"
+        ],
+        "targetKills": [
+          8,
+          12
+        ]
       }
     },
     {
@@ -1293,7 +1508,10 @@
       "category": "ships",
       "status": "implemented",
       "summary": "Ten stable ship IDs separate crafted champion hulls from the tournament reward.",
-      "tags": ["ships", "implemented"],
+      "tags": [
+        "ships",
+        "implemented"
+      ],
       "facts": [
         {
           "label": "ID 0",
@@ -1347,7 +1565,11 @@
           "role": "documentation"
         }
       ],
-      "related": ["abilities", "ship-levels", "league"],
+      "related": [
+        "abilities",
+        "ship-levels",
+        "league"
+      ],
       "media": [
         {
           "path": "assets/ui/campaign-preview.png",
@@ -1369,7 +1591,10 @@
       "category": "ships",
       "status": "implemented",
       "summary": "Seventeen stable inventory entries feed exactly three equipped categories.",
-      "tags": ["ships", "implemented"],
+      "tags": [
+        "ships",
+        "implemented"
+      ],
       "facts": [
         {
           "label": "Catalog size",
@@ -1423,7 +1648,11 @@
           "role": "documentation"
         }
       ],
-      "related": ["ship-levels", "cargo", "bosses"],
+      "related": [
+        "ship-levels",
+        "cargo",
+        "bosses"
+      ],
       "media": [],
       "data": {
         "count": 17,
@@ -1590,7 +1819,10 @@
       "category": "missions",
       "status": "implemented",
       "summary": "Experience belongs to the active ship; hardware and equipped powers use its real level cap.",
-      "tags": ["missions", "implemented"],
+      "tags": [
+        "missions",
+        "implemented"
+      ],
       "facts": [
         {
           "label": "Maximum ship level",
@@ -1648,13 +1880,28 @@
           "role": "documentation"
         }
       ],
-      "related": ["cargo", "abilities"],
+      "related": [
+        "cargo",
+        "abilities"
+      ],
       "media": [],
       "data": {
         "maxLevel": 100,
-        "rankGates": [1, 3, 5, 8, 12],
+        "rankGates": [
+          1,
+          3,
+          5,
+          8,
+          12
+        ],
         "ordinaryXp": 5,
-        "bossXp": [25, 35, 45, 55, 65]
+        "bossXp": [
+          25,
+          35,
+          45,
+          55,
+          65
+        ]
       }
     },
     {
@@ -1663,7 +1910,10 @@
       "category": "missions",
       "status": "implemented",
       "summary": "Crafting materials must survive the return trip; points and ship XP are retained immediately.",
-      "tags": ["missions", "implemented"],
+      "tags": [
+        "missions",
+        "implemented"
+      ],
       "facts": [
         {
           "label": "Cargo capacity",
@@ -1717,7 +1967,10 @@
           "role": "documentation"
         }
       ],
-      "related": ["ship-levels", "sanctuaries"],
+      "related": [
+        "ship-levels",
+        "sanctuaries"
+      ],
       "media": [],
       "data": {
         "schemaVersion": 4,
@@ -1731,7 +1984,10 @@
       "category": "champions",
       "status": "implemented",
       "summary": "Eight real champion duels unlock a nine-entrant solo round-robin tournament.",
-      "tags": ["champions", "implemented"],
+      "tags": [
+        "champions",
+        "implemented"
+      ],
       "facts": [
         {
           "label": "Entrants",
@@ -1806,7 +2062,10 @@
       "category": "enemies",
       "status": "implemented",
       "summary": "Fast pursuing needle hulls.",
-      "tags": ["enemies", "implemented"],
+      "tags": [
+        "enemies",
+        "implemented"
+      ],
       "facts": [
         {
           "label": "Family",
@@ -1841,7 +2100,9 @@
           "role": "implementation"
         }
       ],
-      "related": ["bosses"],
+      "related": [
+        "bosses"
+      ],
       "media": []
     },
     {
@@ -1850,7 +2111,10 @@
       "category": "enemies",
       "status": "implemented",
       "summary": "Armored pursuing hulls with ranged pressure.",
-      "tags": ["enemies", "implemented"],
+      "tags": [
+        "enemies",
+        "implemented"
+      ],
       "facts": [
         {
           "label": "Family",
@@ -1885,7 +2149,9 @@
           "role": "implementation"
         }
       ],
-      "related": ["bosses"],
+      "related": [
+        "bosses"
+      ],
       "media": []
     },
     {
@@ -1894,7 +2160,10 @@
       "category": "enemies",
       "status": "implemented",
       "summary": "Connected segmented serpent hulls.",
-      "tags": ["enemies", "implemented"],
+      "tags": [
+        "enemies",
+        "implemented"
+      ],
       "facts": [
         {
           "label": "Family",
@@ -1935,7 +2204,9 @@
           "role": "implementation"
         }
       ],
-      "related": ["bosses"],
+      "related": [
+        "bosses"
+      ],
       "media": []
     },
     {
@@ -1944,7 +2215,10 @@
       "category": "enemies",
       "status": "implemented",
       "summary": "Three base families promote through five distinct generations with charge, attack and recovery phases.",
-      "tags": ["enemies", "implemented"],
+      "tags": [
+        "enemies",
+        "implemented"
+      ],
       "facts": [
         {
           "label": "Dart generations",
@@ -2002,7 +2276,12 @@
           "role": "documentation"
         }
       ],
-      "related": ["abilities", "enemy-0", "enemy-1", "enemy-2"],
+      "related": [
+        "abilities",
+        "enemy-0",
+        "enemy-1",
+        "enemy-2"
+      ],
       "media": [
         {
           "path": "assets/pixels/boss-preview.png",
@@ -2014,14 +2293,38 @@
       ],
       "data": {
         "names": [
-          ["Matriarch", "Harrier", "Reaver", "Tempest", "Imperatrix"],
-          ["Prime", "Sentinel", "Gatekeeper", "Citadel", "Oblivion"],
-          ["Sovereign", "Sidewinder", "Ouroboros", "Leviathan", "Worldeater"]
+          [
+            "Matriarch",
+            "Harrier",
+            "Reaver",
+            "Tempest",
+            "Imperatrix"
+          ],
+          [
+            "Prime",
+            "Sentinel",
+            "Gatekeeper",
+            "Citadel",
+            "Oblivion"
+          ],
+          [
+            "Sovereign",
+            "Sidewinder",
+            "Ouroboros",
+            "Leviathan",
+            "Worldeater"
+          ]
         ],
         "generations": 5,
         "baseCredit": 24,
         "promotionCredit": 2,
-        "coilSegments": [11, 13, 15, 17, 19]
+        "coilSegments": [
+          11,
+          13,
+          15,
+          17,
+          19
+        ]
       }
     },
     {
@@ -2030,7 +2333,10 @@
       "category": "enemies",
       "status": "implemented",
       "summary": "A birth-biome Bastion variant with two destructible barrels and a locked triple burst.",
-      "tags": ["enemies", "implemented"],
+      "tags": [
+        "enemies",
+        "implemented"
+      ],
       "facts": [
         {
           "label": "Eligibility",
@@ -2079,7 +2385,10 @@
           "role": "asset provenance"
         }
       ],
-      "related": ["biome-3", "enemy-1"],
+      "related": [
+        "biome-3",
+        "enemy-1"
+      ],
       "media": [
         {
           "path": "assets/pixels/riveter-preview.png",
@@ -2100,7 +2409,10 @@
       "category": "enemies",
       "status": "implemented",
       "summary": "A Radial Wastes Dart variant whose surviving pylons emit two six-shot pulses around an escape gap.",
-      "tags": ["enemies", "implemented"],
+      "tags": [
+        "enemies",
+        "implemented"
+      ],
       "facts": [
         {
           "label": "Eligibility",
@@ -2158,7 +2470,10 @@
           "role": "asset provenance"
         }
       ],
-      "related": ["biome-4", "enemy-0"],
+      "related": [
+        "biome-4",
+        "enemy-0"
+      ],
       "media": [
         {
           "path": "assets/pixels/mote-preview.png",
@@ -2179,7 +2494,10 @@
       "category": "technology",
       "status": "implemented",
       "summary": "The renderer expands local occupied cells into batched quads with parent-relative affine transforms.",
-      "tags": ["technology", "implemented"],
+      "tags": [
+        "technology",
+        "implemented"
+      ],
       "facts": [
         {
           "label": "Pixel instance",
@@ -2208,6 +2526,13 @@
           "paragraphs": [
             "PixelBody owns packed palette indices and real holes. Swept projectile hits query surviving occupancy through the inverse transform. PixelRig partitions the current body by role and retains destruction across rendering. Exact affine composition supports reflected, rotated and nonuniform parent transforms.",
             "Hard pixel geometry has no forced minimum-size quad. Soft particle materials use coverage-aware raster expansion with area compensation; this cannot create detail beyond physical screen resolution. UI is composed separately so world zoom does not enlarge its fonts or hitboxes."
+          ]
+        },
+        {
+          "title": "Asset production pipeline",
+          "paragraphs": [
+            "Generated raster art remains a concept reference until native cells are authored or converted with explicitly reviewed policies. Exact conversion preserves dimensions, exact colors, binary alpha and detached parts; indexed round trips also preserve palette indices. Optional losses are measured. Topology, affine groups, animation references and budgets are validated before integration.",
+            "The offline adapter emits through the actual PixelBody and FrameBuilder. Its group and animation metadata is opt-in review data; the shipped Game does not automatically install these groups, play these frames or change collision anchors. Asset briefs and actual independent reviews define the runtime acceptance boundary."
           ]
         }
       ],
@@ -2241,9 +2566,22 @@
           "path": "artifacts/presentation-refinement-20261011/HUD_HANDOFF.md",
           "label": "HUD source and native proof handoff",
           "role": "recorded native evidence; browser gates separate"
+        },
+        {
+          "path": "docs/ASSET_PIPELINE.md",
+          "label": "Exact asset pipeline",
+          "role": "authoring contract and verification boundary"
+        },
+        {
+          "path": "docs/ASSET_BRIEF.md",
+          "label": "Asset brief and acceptance record",
+          "role": "production template"
         }
       ],
-      "related": ["cosmic-art", "validation"],
+      "related": [
+        "cosmic-art",
+        "validation"
+      ],
       "media": [
         {
           "path": "artifacts/presentation-refinement-20261011/native-art-contact-sheet.png",
@@ -2265,7 +2603,10 @@
       "category": "technology",
       "status": "implemented",
       "summary": "Layered local-cell stars, nebulas, planets and Isotope Scar use bounded cosmetic extraction.",
-      "tags": ["technology", "implemented"],
+      "tags": [
+        "technology",
+        "implemented"
+      ],
       "facts": [
         {
           "label": "Regional cap",
@@ -2320,7 +2661,10 @@
           "role": "asset provenance"
         }
       ],
-      "related": ["pixel-engine", "validation"],
+      "related": [
+        "pixel-engine",
+        "validation"
+      ],
       "media": [
         {
           "path": "assets/ui/atlas-preview.png",
@@ -2337,7 +2681,10 @@
       "category": "overview",
       "status": "verification-pending",
       "summary": "Implementation, source tests, browser observation and physical-device acceptance are recorded separately.",
-      "tags": ["overview", "verification-pending"],
+      "tags": [
+        "overview",
+        "verification-pending"
+      ],
       "facts": [
         {
           "label": "Native / shell",
@@ -2391,7 +2738,10 @@
           "role": "historical source/cache, QA entry route and untested acceptance limits"
         }
       ],
-      "related": ["galaxy-royale", "future"],
+      "related": [
+        "galaxy-royale",
+        "future"
+      ],
       "media": []
     },
     {
@@ -2400,7 +2750,10 @@
       "category": "overview",
       "status": "planned",
       "summary": "Owned arenas, co-op, battle royale and optional neural dialogue remain explicit future scope.",
-      "tags": ["overview", "planned"],
+      "tags": [
+        "overview",
+        "planned"
+      ],
       "facts": [
         {
           "label": "Multiplayer",
@@ -2445,7 +2798,10 @@
           "role": "documentation"
         }
       ],
-      "related": ["league", "world-seed"],
+      "related": [
+        "league",
+        "world-seed"
+      ],
       "media": []
     }
   ]
