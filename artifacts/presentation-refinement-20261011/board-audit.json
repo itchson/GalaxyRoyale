@@ -1,6 +1,6 @@
 {
-  "observedAt": "2026-10-11T03:04:45.698Z",
-  "revision": 493,
+  "observedAt": "2026-10-11T03:25:36.759Z",
+  "revision": 515,
   "tasks": [
     {
       "id": "studio",
@@ -721,36 +721,29 @@
     {
       "id": "task-d4893127",
       "title": "Pleasant thrust and disciplined audio mix",
-      "status": "review",
-      "unmet": [
-        "Actual rendered mix evidence; human listening remains separately pending"
-      ],
+      "status": "complete",
+      "unmet": [],
       "unfinishedDependencies": []
     },
     {
       "id": "task-0280e21e",
       "title": "Text-only footer, animated segmented vitals and navigation",
-      "status": "review",
-      "unmet": [
-        "Actual desktop browser inspection with both renderers; limits recorded"
-      ],
+      "status": "complete",
+      "unmet": [],
       "unfinishedDependencies": []
     },
     {
       "id": "task-a09ddcf4",
       "title": "Solid varied procedural asteroids and detailed pixel facilities/icons",
-      "status": "review",
-      "unmet": [
-        "Actual desktop art review with visual evidence; detailed scope recorded"
-      ],
+      "status": "complete",
+      "unmet": [],
       "unfinishedDependencies": []
     },
     {
       "id": "task-cf125df1",
       "title": "GitHub feature branches, review gates and reproducible CI",
-      "status": "active",
+      "status": "review",
       "unmet": [
-        "Feature branches and real PRs are linked with actual review evidence",
         "Windows/Linux source checks and dual-renderer package checks pass at the reviewed head"
       ],
       "unfinishedDependencies": []
@@ -758,19 +751,15 @@
     {
       "id": "task-4945ccc3",
       "title": "Searchable source-backed Studio Dev Bible",
-      "status": "active",
-      "unmet": [
-        "Search, categories, statuses, source/media links and canonical game data are usable",
-        "Security, source drift, revision/restart tests and actual Studio browser inspection pass"
-      ],
+      "status": "complete",
+      "unmet": [],
       "unfinishedDependencies": []
     },
     {
       "id": "task-88f83840",
       "title": "Exact pixel asset authoring and conversion pipeline",
-      "status": "active",
+      "status": "review",
       "unmet": [
-        "Exact roundtrips and invalid/lossy policy cases are tested with reproducible tools",
         "A converted asset passes actual native PixelBody/transform rendering and review; unsupported metadata is disclosed"
       ],
       "unfinishedDependencies": []
@@ -778,31 +767,22 @@
     {
       "id": "task-cf9b0d9c",
       "title": "Reproducible native Web Audio review tooling",
-      "status": "active",
-      "unmet": [
-        "Fresh preparation and helper/math checks pass without ignored snapshots",
-        "Actual rendered audio evidence is linked; human listening remains a separate pending gate"
-      ],
+      "status": "complete",
+      "unmet": [],
       "unfinishedDependencies": []
     },
     {
       "id": "task-06e080d9",
       "title": "Reconcile session requirements and honest acceptance states",
-      "status": "active",
-      "unmet": [
-        "Current and future requirements map to tasks and documented game facts",
-        "Actual evidence, completed runs, interrupted audits and remaining gates are recorded without fabricated meetings"
-      ],
+      "status": "complete",
+      "unmet": [],
       "unfinishedDependencies": []
     },
     {
       "id": "task-55bd21c0",
       "title": "One canonical testing-branch game preview",
-      "status": "active",
-      "unmet": [
-        "Older game listeners are stopped with exact ownership evidence",
-        "Latest normal build runs on one canonical preview and stale/foreign listeners fail visibly"
-      ],
+      "status": "review",
+      "unmet": [],
       "unfinishedDependencies": []
     }
   ]

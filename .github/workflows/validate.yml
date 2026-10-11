@@ -53,6 +53,19 @@ jobs:
         run: python scripts/asset-pack-tests.py -v
       - name: Actual native PixelBody, group and animation extraction
         run: cargo test --locked --manifest-path scripts/asset-native-preview/Cargo.toml
+      - name: Extract and audit the accepted dock conversion
+        run: |
+          cargo run --locked --manifest-path scripts/asset-native-preview/Cargo.toml -- assets/pipeline/haven-service/pack.json service-pulse work/ci-asset-native.json
+          python scripts/asset-audit.py --pack assets/pipeline/haven-service/pack.json --extraction work/ci-asset-native.json --output work/ci-asset-audit.json
+      - name: Retain actual native conversion evidence
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: asset-proof-${{ matrix.os }}-${{ github.sha }}
+          path: |
+            work/ci-asset-native.json
+            work/ci-asset-audit.json
+          if-no-files-found: error
+          retention-days: 14
 
   browser-package:
     name: Browser package
