@@ -431,13 +431,19 @@ test("busy mutation and outside-dock clearing cannot dispatch; cargo stays in it
   h.dock = false;
   h.material_loss = [1, 0, 2, 0, 0];
   h.material_loss_reason = "reload";
-  h.loadout[0] = ability(0, 0, { owned: true, rank: 1, effective_rank: 1 });
+  h.abilities[0] = ability(0, 0, {
+    owned: true,
+    equipped: true,
+    rank: 1,
+    effective_rank: 1,
+  });
+  h.loadout[0] = h.abilities[0];
   f.exports.paintForge(f.target, h, { ...f.actions, busy: true });
   assert.match(allText(f.target), /Return to Haven to craft, upgrade or equip/);
   assert.doesNotMatch(allText(f.target), /MATERIALS LOST|CARRIED|DOCK STASH/);
   f.find("manage-0").events.click();
   assert.equal(f.find("empty-0").disabled, true);
-  assert.equal(f.find("craft-ability-0").disabled, true);
+  assert.equal(f.find("upgrade-ability-0").disabled, true);
   f.find("empty-0").events.click();
   assert.equal(f.calls.length, 0);
 });

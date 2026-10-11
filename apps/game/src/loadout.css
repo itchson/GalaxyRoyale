@@ -235,3 +235,19 @@
     width: 100%;
   }
 }
+
+.ability-summary,
+.ability-requirements {
+  display: flex;
+  flex-direction: column;
+  gap: calc(3px * var(--ui-scale, 1));
+  min-width: 0;
+}
+@media (min-width: 800px) {
+  .ability-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: calc(10px * var(--ui-scale, 1));
+    align-items: start;
+  }
+}

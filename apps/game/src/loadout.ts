@@ -455,14 +455,14 @@ export function paintForge(
       ),
     );
     back.classList.add("loadout-back");
-    editorHeading.append(back);
-    root.append(
-      editorHeading,
+    editorHeading.append(
+      back,
       text(
         "h3",
         `${ship?.name ?? "ACTIVE RAICHO"} / LV ${hud.ship_level} / RANK CAP ${hud.rank_cap}`,
       ),
     );
+    root.append(editorHeading);
     if (hud.components.length) root.append(workshopButton());
     root.append(
       text(
@@ -508,17 +508,6 @@ export function paintForge(
         "collection-summary",
       ),
     );
-    const slot = view.category;
-    if (slot !== null && hud.loadout[slot])
-      root.append(
-        button(
-          "EMPTY SLOT",
-          `empty-${slot}`,
-          () => actions.equipAbility(slot, null),
-          !hud.dock || actions.busy,
-          slot,
-        ),
-      );
     const list = section("ability-list");
     const order = (ability: AbilityHud) =>
       ability.equipped
@@ -546,19 +535,21 @@ export function paintForge(
       const card = collectionCard("ability-card", category, ability.equipped);
       card.dataset.equipped = String(ability.equipped);
       card.dataset.abilityId = ability.id;
-      card.append(
+      const summary = section("ability-summary");
+      const requirements = section("ability-requirements");
+      summary.append(
         collectionHeading(ability.name, category),
         text("p", ability.description),
       );
       if (ability.owned)
-        card.append(
+        summary.append(
           collectionState(
             `${rank(ability)}${ability.equipped ? " / EQUIPPED" : " / OWNED"}`,
             ability.equipped ? 3 : 2,
           ),
         );
-      else card.append(collectionState("BLUEPRINT / NOT CRAFTED", 1));
-      card.append(
+      else summary.append(collectionState("BLUEPRINT / NOT CRAFTED", 1));
+      summary.append(
         text(
           "p",
           `${categories[category]} / ${ability.compatible ? "COMPATIBLE" : "INCOMPATIBLE"} WITH ACTIVE HULL`,
@@ -566,7 +557,7 @@ export function paintForge(
         ),
       );
       if (ability.rank < ability.max_rank)
-        card.append(
+        requirements.append(
           text(
             "p",
             `REQUIRES RAICHO LV ${ability.required_level}`,
@@ -575,7 +566,7 @@ export function paintForge(
         );
       const controls = section("loadout-actions");
       if (!ability.owned) {
-        card.append(
+        requirements.append(
           recipe(
             category,
             ability.point_cost,
@@ -585,7 +576,9 @@ export function paintForge(
           ),
         );
         if (ability.craft_reason)
-          card.append(text("p", ability.craft_reason, "loadout-reason"));
+          requirements.append(
+            text("p", ability.craft_reason, "loadout-reason"),
+          );
         controls.append(
           button(
             "CRAFT",
@@ -598,7 +591,9 @@ export function paintForge(
       } else {
         if (!ability.equipped) {
           if (ability.equip_reason)
-            card.append(text("p", ability.equip_reason, "loadout-reason"));
+            requirements.append(
+              text("p", ability.equip_reason, "loadout-reason"),
+            );
           controls.append(
             button(
               equipped ? "REPLACE" : "EQUIP",
@@ -610,7 +605,7 @@ export function paintForge(
           );
         }
         if (ability.rank < ability.max_rank) {
-          card.append(
+          requirements.append(
             recipe(
               category,
               ability.point_cost,
@@ -622,7 +617,9 @@ export function paintForge(
             ),
           );
           if (ability.upgrade_reason)
-            card.append(text("p", ability.upgrade_reason, "loadout-reason"));
+            requirements.append(
+              text("p", ability.upgrade_reason, "loadout-reason"),
+            );
           controls.append(
             button(
               "UPGRADE",
@@ -632,9 +629,20 @@ export function paintForge(
               category,
             ),
           );
-        } else card.append(text("p", "MAX OWNED RANK", "loadout-note"));
+        } else requirements.append(text("p", "MAX OWNED RANK", "loadout-note"));
       }
-      card.append(controls);
+      if (ability.equipped)
+        controls.append(
+          button(
+            "EMPTY SLOT",
+            `empty-${category}`,
+            () => actions.equipAbility(category, null),
+            !hud.dock || actions.busy,
+            category,
+          ),
+        );
+      requirements.append(controls);
+      card.append(summary, requirements);
       list.append(card);
     }
     if (!visible.length)
