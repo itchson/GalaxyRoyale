@@ -1,0 +1,246 @@
+{
+  "schema": 1,
+  "palette": {
+    "mode": "provided",
+    "max_colors": 64,
+    "colors": [
+      0,
+      4292012526,
+      4288601581,
+      4286694889,
+      4281570535,
+      4289446591,
+      4292529953,
+      4286944683,
+      4286813004,
+      4281234660,
+      4280970427,
+      4286480272,
+      4285624970,
+      4285820280,
+      4285291885,
+      4285232684,
+      4285160244,
+      4282201051,
+      4281482621,
+      4284762975,
+      4282004574,
+      4284106314,
+      4283578181,
+      4283248195,
+      4282459455,
+      4283646248,
+      4284301324,
+      4282789166,
+      4283182863,
+      4283244592,
+      4281933866,
+      4282130716,
+      4282327305,
+      4281732068,
+      4282189770,
+      4282518181,
+      4281533095,
+      4282846835,
+      4282254198,
+      4282584657,
+      4282123602,
+      4282257723,
+      4282062119,
+      4281927741,
+      4281403433,
+      4281996567,
+      4280816662,
+      4281076246,
+      4280812564,
+      4281538055,
+      4281143558,
+      4281208325,
+      4280552966,
+      4281142022,
+      4281076481,
+      4280486661,
+      4280813574,
+      4280813569,
+      4280747016,
+      4280747009,
+      4280157956,
+      4280157696,
+      4279960070,
+      4279894528
+    ]
+  },
+  "sprites": [
+    {
+      "name": "dock",
+      "source": "dock.png",
+      "encoding": "indices",
+      "topology": "holes-allowed"
+    },
+    {
+      "name": "service_0",
+      "source": "service-0.png",
+      "encoding": "indices",
+      "topology": "holes-allowed"
+    },
+    {
+      "name": "service_1",
+      "source": "service-1.png",
+      "encoding": "indices",
+      "topology": "holes-allowed"
+    }
+  ],
+  "groups": [
+    {
+      "name": "haven-0",
+      "parts": [
+        {
+          "name": "dock",
+          "sprite": "dock",
+          "transform": {
+            "position": [
+              0,
+              0
+            ],
+            "basis_x": [
+              0.9,
+              0.12
+            ],
+            "basis_y": [
+              -0.08,
+              0.75
+            ]
+          }
+        },
+        {
+          "name": "service-left",
+          "sprite": "service_0",
+          "parent": "dock",
+          "transform": {
+            "position": [
+              -22,
+              8
+            ],
+            "basis_x": [
+              0.75,
+              0.18
+            ],
+            "basis_y": [
+              0,
+              0.9
+            ]
+          }
+        },
+        {
+          "name": "service-reflected",
+          "sprite": "service_0",
+          "parent": "service-left",
+          "transform": {
+            "position": [
+              24,
+              -12
+            ],
+            "basis_x": [
+              -0.8,
+              0
+            ],
+            "basis_y": [
+              0.25,
+              0.8
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "haven-1",
+      "parts": [
+        {
+          "name": "dock",
+          "sprite": "dock",
+          "transform": {
+            "position": [
+              0,
+              0
+            ],
+            "basis_x": [
+              0.9,
+              0.12
+            ],
+            "basis_y": [
+              -0.08,
+              0.75
+            ]
+          }
+        },
+        {
+          "name": "service-left",
+          "sprite": "service_1",
+          "parent": "dock",
+          "transform": {
+            "position": [
+              -22,
+              8
+            ],
+            "basis_x": [
+              0.75,
+              0.18
+            ],
+            "basis_y": [
+              0,
+              0.9
+            ]
+          }
+        },
+        {
+          "name": "service-reflected",
+          "sprite": "service_1",
+          "parent": "service-left",
+          "transform": {
+            "position": [
+              24,
+              -12
+            ],
+            "basis_x": [
+              -0.8,
+              0
+            ],
+            "basis_y": [
+              0.25,
+              0.8
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "animations": [
+    {
+      "name": "service-pulse",
+      "loop": true,
+      "frames": [
+        {
+          "kind": "group",
+          "name": "haven-0",
+          "duration_ms": 600
+        },
+        {
+          "kind": "group",
+          "name": "haven-1",
+          "duration_ms": 600
+        }
+      ]
+    }
+  ],
+  "budgets": {
+    "group_cells": 2000,
+    "group_transforms": 16
+  },
+  "provenance": {
+    "source_type": "accepted-cell-source-plus-original-authored-service-lights",
+    "dock_source": "assets/pixels/atlas.json#dock",
+    "dock_source_sha256": "1bc8a66f0e0c5d6bb5d9f6a3349032d10d854cb023cd70971e590d61c900051f",
+    "generator": "scripts/asset-example.py",
+    "note": "Dock retains the accepted generated atlas's exact palette/indices. Lamps are original authored cells. Animation is an offline preview contract, not automatic Game integration."
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "scope": "Actual native PixelBody/FrameBuilder packets compared against authoring cells; offline adapter only, not live Game animation or GPU acceptance",
+  "historical_extraction": true,
+  "timeline_sample_times_verified": false,
+  "frames": [
+    {
+      "group": "haven-0",
+      "sample_time_ms": null,
+      "duration_ms": 600,
+      "occupied_cells": 1518,
+      "transforms": 3,
+      "batches": 1,
+      "maximum_corner_error_world": 3.4393310528457732e-06,
+      "maximum_bound_error_world": 9.918212882098487e-07
+    },
+    {
+      "group": "haven-1",
+      "sample_time_ms": null,
+      "duration_ms": 600,
+      "occupied_cells": 1518,
+      "transforms": 3,
+      "batches": 1,
+      "maximum_corner_error_world": 3.4393310528457732e-06,
+      "maximum_bound_error_world": 9.918212882098487e-07
+    }
+  ],
+  "pending": [
+    "Final native executable execution after Windows Application Control block",
+    "Runtime metadata adapter",
+    "Both GPU backend presentation",
+    "Moving human readability",
+    "Physical phone performance"
+  ],
+  "recorded_at_utc": "2026-10-11T03:13:19.543227+00:00",
+  "input_sha256": {
+    "assets\\pipeline\\haven-service\\pack.json": "a609b7736382abc22b8ae4d8862d4567f99da664f09a310f5afde00092fb8bb8",
+    "assets\\pipeline\\haven-service\\native-extraction.json": "003354af02c5aebed9ae74120f0677c8556a157f59eb3ae3e34ef6d2056a321c"
+  }
+}
