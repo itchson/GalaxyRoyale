@@ -24,12 +24,13 @@ function fixture({
   slot = true,
   interactive = true,
   facilityValue = null,
+  slotHeight = 7,
 } = {}) {
   let output, callback;
   const props = Object.fromEntries(
     ["x", "y", "width", "height"].map((axis, i) => [
       `--flight-text-${axis}`,
-      slot ? `${[106, 164, 122, 7][i] * scale}px` : "0px",
+      slot ? `${[106, 164, 122, slotHeight][i] * scale}px` : "0px",
     ]),
   );
   class Element {
@@ -179,6 +180,21 @@ test("compiled bridge emits exact single-line footer glyphs and a separate real4
     assert.equal(text.text, "FORGE / CONTACT [E]");
     assert.ok(hit.rect[3] > text.rect[3]);
   }
+});
+
+test("five-cell micro footer preserves warnings and contact input at fractional display scales", () => {
+  for (const scale of [1, 1.375, 2.4, 4.6875]) {
+    for (const toastVisible of [false, true]) {
+      const nodes = fixture({scale, slotHeight:5, toastVisible}).nodes();
+      const text = nodes.find(node => node.kind === (toastVisible ? 'warning-text' : 'status-text'));
+      assert.ok(text, 'small native text must not silently disappear in the semantic bridge');
+      assert.ok(text.rect.every((value,index) => Math.abs(value - [106,164,122,5][index]) < 1e-10));
+      const hit = nodes.find(node => node.kind === 'status-hit');
+      if (toastVisible) assert.equal(hit, undefined);
+      else assert.ok(hit.rect[3] * scale >= 44, 'smaller artwork must retain an accessible contact target');
+    }
+  }
+  assert.deepEqual(fixture({slotHeight:4}).nodes(), []);
 });
 
 test("compiled bridge forwards measured facility label placement without changing hit geometry", () => {

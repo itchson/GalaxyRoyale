@@ -76,6 +76,15 @@ interface Hud extends ForgeHud, FlightMenuHud {
     can_interact: boolean;
   } | null;
   quest_log: Profile["quests"];
+  navigation: {
+    home: [number, number];
+    quest: {
+      position: [number, number];
+      kind: number;
+      site_id: string;
+      name: string;
+    } | null;
+  };
   discoveries: number;
   relics: number;
   campaign: CampaignHud;
@@ -260,7 +269,7 @@ const debugConsole = new DebugConsole({
     }
     if (verb === "profile") {
       const p = galaxy.profile();
-      return `SCHEMA ${p.schema_version} / revision ${p.revision} / seed ${p.seed}\nCURRENCY ${p.currency.join(" / ")}\nBOSS GENERATIONS ${p.boss_generations?.map((row) => row.join(",")).join(" / ") ?? "legacy"}\nDISCOVERIES ${p.discoveries.length} / quests ${p.quests.length} / relics ${p.relics.length}\nPATCHES ${p.campaign.patches.filter(Boolean).length}/8 / ship ${p.campaign.selected_ship} / Royale ${p.campaign.victory_claimed ? "WON" : "PENDING"}\nSHIP XP ${p.campaign.ship_xp.join(" / ")}\nMATERIAL CARGO ${p.campaign.cargo_materials.join(" / ")} / STASH ${p.campaign.stored_materials.join(" / ")}\nSLOTS ${p.campaign.loadouts[p.campaign.selected_ship].slots.map((id) => id ?? "EMPTY").join(" / ")}\n${store.message}`;
+      return `SCHEMA ${p.schema_version} / revision ${p.revision} / seed ${p.seed}\nCURRENCY ${p.currency.join(" / ")}\nBOSS GENERATIONS ${p.boss_generations?.map((row) => row.join(",")).join(" / ") ?? "legacy"}\nDISCOVERIES ${p.discoveries.length} / missions ${p.quests.length} / relics ${p.relics.length}\nPATCHES ${p.campaign.patches.filter(Boolean).length}/8 / ship ${p.campaign.selected_ship} / Royale ${p.campaign.victory_claimed ? "WON" : "PENDING"}\nSHIP XP ${p.campaign.ship_xp.join(" / ")}\nMATERIAL CARGO ${p.campaign.cargo_materials.join(" / ")} / STASH ${p.campaign.stored_materials.join(" / ")}\nSLOTS ${p.campaign.loadouts[p.campaign.selected_ship].slots.map((id) => id ?? "EMPTY").join(" / ")}\n${store.message}`;
     }
     if (verb === "renderer")
       return `${backend.toUpperCase()} / ${galaxy.viewport().join(" x ")} logical pixels / eight bounded lights`;
@@ -816,17 +825,20 @@ function selectMenuTab(tab: MenuTab): void {
     target.replaceChildren();
     const heading = document.createElement("p");
     heading.textContent = `${hud.discoveries} discoveries / ${hud.relics} relics. Each relic adds 1 hull, up to 20.`;
-    target.append(heading);
+    const missionHeading = document.createElement("h3");
+    missionHeading.textContent = "MISSIONS";
+    target.append(heading, missionHeading);
     const list = document.createElement("ul");
+    const knownSites = new Map(galaxy.universe_map().sites.map(site => [site.id, site.name]));
     for (const quest of hud.quest_log) {
       const item = document.createElement("li");
-      item.textContent = `${quest.site_id} / ${quest.event.toUpperCase()} / ${quest.completed ? "REWARD CLAIMED" : `${quest.progress}/${quest.target} - return to source`}`;
+      item.textContent = `${knownSites.get(quest.site_id) ?? quest.site_id} / ${quest.event === "courier" ? "DELIVERY" : "FAMILY BOUNTY"} / ${quest.completed ? "REWARD CLAIMED" : `${quest.progress}/${quest.target} - return to source`}`;
       list.append(item);
     }
     if (!hud.quest_log.length) {
       const hint = document.createElement("p");
       hint.textContent =
-        "Seek sanctuary beacons beyond Haven. Accept a courier delivery or a family bounty, then return for a unique relic.";
+        "Seek sanctuary beacons beyond Haven. Accept a delivery or bounty mission, then return for a unique relic.";
       target.append(hint);
     }
     target.append(list);
@@ -1002,41 +1014,16 @@ function paintHud(): void {
       hud.boss.max_health,
     );
   }
-  const radar = element<HTMLCanvasElement>("radar").getContext("2d");
-  if (radar) {
-    radar.clearRect(0, 0, 112, 112);
-    radar.strokeStyle = "#4c8ba54a";
-    radar.lineWidth = 1;
-    for (const radius of [20, 38, 52]) {
-      radar.beginPath();
-      radar.arc(56, 56, radius, 0, Math.PI * 2);
-      radar.stroke();
-    }
-    radar.beginPath();
-    radar.moveTo(4, 56);
-    radar.lineTo(108, 56);
-    radar.moveTo(56, 4);
-    radar.lineTo(56, 108);
-    radar.stroke();
-    radar.fillStyle = "#7df2ff";
-    radar.fillRect(54, 54, 4, 4);
-    if (distance > 40) {
-      const dx = -hud.position[0] / distance,
-        dy = -hud.position[1] / distance;
-      radar.fillStyle = "#ffd783";
-      radar.beginPath();
-      radar.arc(56 + dx * 43, 56 + dy * 43, 3, 0, Math.PI * 2);
-      radar.fill();
-    }
-    radar.strokeStyle = "#75efff";
-    radar.beginPath();
-    radar.moveTo(56, 56);
-    radar.lineTo(
-      56 + Math.cos(hud.heading) * 13,
-      56 + Math.sin(hud.heading) * 13,
-    );
-    radar.stroke();
-  }
+  // Native pixel objects paint the compass; this hidden semantic counterpart
+  // follows the same authoritative target without maintaining a Canvas2D HUD.
+  const quest = hud.navigation.quest;
+  element("radar").setAttribute(
+    "aria-label",
+    `Haven ${Math.round(distance)} metres away` +
+      (quest
+        ? `. ${quest.kind === 0 ? `Deliver the ${quest.name} mission packet to Haven` : quest.kind === 1 ? `Claim mission reward at ${quest.name}` : `Bounty mission beacon ${quest.name}; matching enemies may be defeated elsewhere`}, ${Math.round(Math.hypot(quest.position[0] - hud.position[0], quest.position[1] - hud.position[1]))} metres away.`
+        : ". No active mission waypoint."),
+  );
 }
 function paintFacilities(): void {
   const viewport = galaxy.world_viewport();

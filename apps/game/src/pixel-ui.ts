@@ -177,8 +177,8 @@ export class PixelUiBridge {
           if (
             flight &&
             properties.every(Number.isFinite) &&
-            properties[2] >= 5 * scale &&
-            properties[3] >= 7 * scale
+            properties[2] >= 3 * scale &&
+            properties[3] >= 5 * scale
           ) {
             if (element.tagName === "BUTTON") add(element, "status-hit");
             box = {
