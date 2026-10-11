@@ -1,4 +1,21 @@
 /** Semantic controls provide input and accessibility; Rust draws their pixel cells. */
+/** Only the visible glyph window crosses into UI geometry; editing retains the
+ * full DOM value. Native input nodes have a 256-glyph packet bound. */
+export function pixelInputWindow(value: string, selection: number | null) {
+  const cursor = Number.isFinite(selection)
+    ? Math.max(0, Math.min(value.length, selection ?? value.length))
+    : value.length;
+  const glyphs = Array.from(value);
+  const caret = Array.from(value.slice(0, cursor)).length;
+  const start = Math.max(
+    0,
+    Math.min(Math.max(0, glyphs.length - 256), caret - 128),
+  );
+  return {
+    text: glyphs.slice(start, start + 256).join(""),
+    caret: caret - start,
+  };
+}
 export interface PixelUiRuntime {
   set_ui_scene(scene: unknown): void;
 }
@@ -119,7 +136,12 @@ export class PixelUiBridge {
       document.addEventListener(name, () => this.invalidate(), true);
     // The native input owns editing; its selection can change without an input event.
     document.addEventListener("selectionchange", () => {
-      if (document.activeElement?.id === "console-input") this.invalidate();
+      if (
+        document.activeElement?.id === "console-input" ||
+        (document.activeElement instanceof HTMLInputElement &&
+          document.activeElement.dataset.pixelKind === "input")
+      )
+        this.invalidate();
     });
     window.addEventListener("resize", () => this.invalidate());
     document.fonts.ready.then(() => this.invalidate());
@@ -436,6 +458,14 @@ export class PixelUiBridge {
       )) {
         // Measured collection copy is emitted once by the text loop below.
         if (collectionTextKinds.has(art.dataset.pixelKind ?? "")) continue;
+        if (
+          art.dataset.pixelKind === "input" &&
+          art instanceof HTMLInputElement
+        ) {
+          const window = pixelInputWindow(art.value, art.selectionStart);
+          add(art, "input", window.text, window.caret);
+          continue;
+        }
         add(
           art,
           art.dataset.pixelKind ?? "",
