@@ -5,17 +5,17 @@
     "max_colors": 64,
     "colors": [
       0,
-      4280096011,
-      4281674524,
-      4283450416,
-      4286015822,
-      4288582263,
-      4291281582,
-      4293060572,
-      4293523958,
-      4285356083,
-      4287790409,
-      4289962859,
+      4279241996,
+      4280491547,
+      4282661941,
+      4286082660,
+      4289832345,
+      4293056975,
+      4294111210,
+      4294835451,
+      4282200874,
+      4285752404,
+      4291015837,
       4284765461,
       4288909082,
       4292793666,
@@ -83,6 +83,7 @@
   "provenance": {
     "source_type": "original64-cell-python-authoring",
     "tool": "asset-flight-icons.py",
-    "loss": "none; exact PNG import"
+    "loss": "none; exact PNG import",
+    "style_revision": "sports-league-graphite-platinum-facets"
   }
 }

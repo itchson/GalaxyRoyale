@@ -21,10 +21,10 @@ SIZE = 64
 KINDS = ("status", "map", "settings", "save", "close", "resume", "restart",
          "title", "quit", "fullscreen")
 COLORS = (
-    (0, 0, 0, 0), (11, 21, 29, 255), (28, 43, 53, 255),
-    (48, 68, 80, 255), (78, 105, 119, 255), (119, 146, 158, 255),
-    (174, 194, 199, 255), (220, 231, 226, 255), (246, 249, 233, 255),
-    (51, 88, 109, 255), (73, 125, 146, 255), (107, 163, 179, 255),
+    (0, 0, 0, 0), (12, 13, 16, 255), (27, 30, 35, 255),
+    (53, 60, 68, 255), (100, 110, 120, 255), (153, 165, 177, 255),
+    (207, 217, 226, 255), (234, 239, 242, 255), (251, 252, 253, 255),
+    (42, 51, 61, 255), (84, 100, 115, 255), (157, 180, 195, 255),
     (21, 85, 100, 255), (26, 143, 163, 255), (66, 213, 222, 255),
     (169, 245, 237, 255), (104, 81, 51, 255), (170, 133, 77, 255),
     (224, 189, 123, 255), (75, 40, 47, 255), (139, 69, 72, 255),
@@ -97,8 +97,6 @@ class Icon:
                     shade = LIGHT if x + y < 64 else BEVEL
                 elif distance == 3:
                     shade = IVORY if y < 27 else LIGHT
-                elif (x + 2 * y) // 16 % 4 == 0:
-                    shade = LIGHT
                 self.indices[y * SIZE + x] = shade
 
     def paint(self, shape, color, *, accent=False, emitter=False):
@@ -140,6 +138,84 @@ class Icon:
     def sprite(self):
         return {"width": SIZE, "height": SIZE, "indices": self.indices,
                 "accent_cells": sorted(self.accents), "emitter_cells": sorted(self.emitters)}
+
+
+def sports_metal(a):
+    """Per-object alloy planes, never generic repeated diagonal texture.
+
+    These cuts only shade the already authored mask, before semantic indicators
+    are painted. They cannot fill apertures, change bounds, or tint accent roles.
+    Fixed gold locator fittings are quiet hardware, not ownership/game state.
+    """
+    if a.kind == "status":
+        a.polygon([(9, 42), (24, 28), (23, 39), (15, 44)], IVORY)
+        a.polygon([(40, 29), (53, 42), (50, 46), (41, 41)], BEVEL)
+        a.polygon([(27, 44), (37, 44), (38, 49), (26, 49)], STEEL)
+        a.line([(28, 47), (36, 47)], SHADOW)
+        a.rect((11, 42, 13, 43), BRASS_LIGHT)
+        a.rect((26, 49, 28, 50), BRASS)
+        a.polygon([(31, 5), (34, 5), (35, 10), (30, 10)], IVORY)
+    elif a.kind == "map":
+        # Three distinct folded metal planes, with strong recess/face contrast.
+        a.polygon([(7, 17), (17, 12), (17, 46), (7, 51)], LIGHT)
+        a.polygon([(7, 40), (17, 35), (17, 47), (7, 52)], STEEL)
+        a.polygon([(26, 10), (36, 14), (36, 48), (26, 45)], METAL)
+        a.polygon([(46, 15), (55, 11), (55, 42), (46, 46)], BEVEL)
+        a.line([(8, 18), (16, 15)], IVORY)
+        a.line([(47, 17), (54, 14)], LIGHT)
+        a.rect((8, 14, 10, 15), BRASS_LIGHT)
+        a.rect((49, 46, 52, 47), BRASS)
+    elif a.kind == "settings":
+        a.polygon([(9, 25), (15, 22), (22, 13), (25, 11), (26, 17), (15, 28)], IVORY)
+        a.polygon([(42, 46), (49, 39), (54, 35), (55, 42), (49, 51), (43, 54)], BEVEL)
+        a.polygon([(22, 54), (20, 46), (25, 48), (33, 51), (30, 57)], STEEL)
+        a.rect((34, 6, 37, 8), BRASS_LIGHT)
+        a.rect((8, 42, 10, 43), BRASS)
+    elif a.kind == "save":
+        a.polygon([(43, 9), (51, 17), (49, 23), (43, 16)], IVORY)
+        a.polygon([(48, 35), (53, 30), (53, 53), (48, 49)], BEVEL)
+        a.line([(12, 25), (12, 47)], LIGHT)
+        a.line([(17, 54), (25, 54)], SHADOW, 2)
+        a.rect((12, 9, 14, 11), BRASS_LIGHT)
+        a.rect((41, 53, 46, 54), BRASS)
+    elif a.kind == "close":
+        a.polygon([(8, 10), (11, 9), (25, 22), (24, 25)], IVORY)
+        a.polygon([(39, 23), (51, 9), (55, 12), (41, 27)], LIGHT)
+        a.polygon([(38, 42), (52, 56), (54, 52), (41, 38)], BEVEL)
+        a.polygon([(9, 51), (22, 38), (25, 42), (12, 56)], STEEL)
+        a.rect((10, 7, 12, 9), BRASS_LIGHT)
+        a.rect((50, 54, 52, 55), BRASS)
+    elif a.kind == "resume":
+        a.polygon([(16, 9), (19, 9), (48, 28), (48, 31), (16, 11)], IVORY)
+        a.polygon([(20, 52), (47, 36), (49, 38), (20, 56)], STEEL)
+        a.polygon([(14, 12), (16, 14), (16, 51), (14, 54)], LIGHT)
+        a.rect((16, 9, 18, 11), BRASS_LIGHT)
+        a.rect((18, 54, 22, 55), BRASS)
+    elif a.kind == "restart":
+        a.polygon([(32, 7), (45, 10), (55, 21), (48, 19), (43, 14), (33, 12)], IVORY)
+        a.polygon([(49, 40), (54, 39), (50, 50), (40, 55), (32, 54), (34, 50)], STEEL)
+        a.polygon([(7, 21), (22, 8), (21, 12), (11, 22)], LIGHT)
+        a.rect((53, 40, 55, 42), BRASS_LIGHT)
+        a.rect((20, 48, 22, 49), BRASS)
+    elif a.kind == "title":
+        a.polygon([(10, 28), (31, 10), (31, 15), (16, 29)], IVORY)
+        a.polygon([(35, 15), (54, 29), (52, 31), (36, 20)], BEVEL)
+        a.rect((16, 37, 18, 49), LIGHT)
+        a.rect((45, 37, 48, 50), STEEL)
+        a.rect((30, 8, 33, 10), BRASS_LIGHT)
+        a.rect((41, 53, 45, 54), BRASS)
+    elif a.kind == "quit":
+        a.polygon([(38, 10), (48, 15), (54, 24), (50, 24), (43, 16), (37, 14)], IVORY)
+        a.polygon([(8, 38), (14, 43), (22, 51), (24, 55), (14, 51), (8, 44)], STEEL)
+        a.line([(29, 6), (29, 27)], IVORY)
+        a.rect((50, 43, 52, 45), BRASS_LIGHT)
+        a.rect((14, 20, 15, 23), BRASS)
+    else:
+        for fx, fy in ((False, False), (True, False), (False, True), (True, True)):
+            t = lambda x, y: (63-x if fx else x, 63-y if fy else y)
+            a.polygon([t(x, y) for x, y in ((6, 6), (26, 6), (26, 8), (9, 8), (9, 13), (6, 13))], IVORY)
+            a.polygon([t(x, y) for x, y in ((11, 15), (14, 15), (14, 25), (11, 25))], STEEL)
+            a.line([t(18, 7), t(21, 7)], BRASS_LIGHT)
 
 
 def author_icons():
@@ -205,6 +281,7 @@ def author_icons():
                 arm = [(6, 6), (26, 6), (26, 13), (14, 13), (14, 26), (6, 26)]
                 d.polygon([(63-x if flip_x else x, 63-y if flip_y else y) for x, y in arm], fill=1)
         a.shade()
+        sports_metal(a)
         if kind == "status":
             a.polygon([(31, 11), (34, 11), (38, 27), (34, 36), (30, 36), (26, 27)], RECESS)
             a.polygon([(31, 14), (33, 14), (35, 26), (32, 30), (29, 26)], CYAN_DARK)
@@ -344,7 +421,7 @@ def validate(atlas):
 
 
 def render_review(icons, output):
-    sheet = Image.new("RGBA", (5 * 160, 2 * 196), (8, 15, 22, 255))
+    sheet = Image.new("RGBA", (5 * 160, 2 * 196), (8, 9, 12, 255))
     draw = ImageDraw.Draw(sheet)
     for n, (name, icon) in enumerate(icons.items()):
         x, y = n % 5 * 160, n // 5 * 196
@@ -352,7 +429,7 @@ def render_review(icons, output):
         draw.text((x+12, y+151), name.removeprefix("icon_"), fill=COLORS[IVORY])
         draw.text((x+12, y+169), str(sum(bool(i) for i in icon.indices)) + " cells", fill=COLORS[STEEL_LIGHT])
     write_png(output / "authoring-overview.png", sheet)
-    small = Image.new("RGBA", (800, 244), (8, 15, 22, 255))
+    small = Image.new("RGBA", (800, 244), (8, 9, 12, 255))
     draw = ImageDraw.Draw(small)
     for n, (name, icon) in enumerate(icons.items()):
         x = n * 80
@@ -374,7 +451,7 @@ def author(output):
     manifest = {"schema": 1, "palette": {"mode": "provided", "max_colors": 64, "colors": palette},
                 "defaults": {"alpha": {"mode": "exact"}, "components": {"mode": "all"}, "resize": {"mode": "none"}},
                 "sprites": [{"name": name, "source": "source/" + name + ".png"} for name in icons],
-                "provenance": {"source_type": "original64-cell-python-authoring", "tool": "asset-flight-icons.py", "loss": "none; exact PNG import"}}
+                "provenance": {"source_type": "original64-cell-python-authoring", "tool": "asset-flight-icons.py", "loss": "none; exact PNG import", "style_revision": "sports-league-graphite-platinum-facets"}}
     write_json(output / "manifest.json", manifest)
     spec = importlib.util.spec_from_file_location("asset_pack", ROOT / "scripts/asset-pack.py")
     pack = importlib.util.module_from_spec(spec)
@@ -390,6 +467,8 @@ def author(output):
         "generation_model": None, "source_grid": [SIZE, SIZE], "palette_count": len(palette),
         "alpha_policy": "binary exact", "components": "all retained, intentional open silhouette holes", "conversion_loss": "none",
         "source_png_encoding": "filter0, explicitly stored DEFLATE blocks; decoded by Pillow; reproducible encoded bytes",
+        "style_revision": "Athletic league material pass: authored alloy planes, recessed chip/vent details and fixed gold locators; neutral graphite/platinum metal replaces blue-gray wash.",
+        "preserved_baseline": "e86980bbb99f3c1423900283f78e7bba2aac4b90d02b4a0855291c2e5ff8ee73: all occupancy/bounds and both animation masks unchanged",
         "atlas_sha256": digest(output / "atlas.json"), "source_sha256": {name: digest(output / "source" / (name + ".png")) for name in icons},
         "budgets": counts, "all_ten_occupied": sum(c["occupied"] for c in counts.values()),
         "animation_contract": "Host may vary only explicit accent/emitter color or emission, with fixed geometry. Metadata does not install an animation loop.",

@@ -3,17 +3,29 @@
 The current authoring set contains ten original **64×64** control objects in
 `assets/ui/flight-icons/atlas.json`. They are newly drawn cell silhouettes and
 panel clusters, rather than enlarged copies of the historical 32-cell KIKAI
-icons. The old pack remains an independent historical asset/API until the host
-integrates this set. This change covers controls, not every game asset.
+icons. The native flight-control loader already consumes this version1 schema;
+the 32-cell pack remains historical/separate. This refinement changes the asset
+cells and palette only, not the loader, animation code, layout or hit targets.
+It covers controls, not every game asset.
 
-All controls share restrained ivory/silver bevels, dark graphite recesses,
-steel panel insets and cyan indicators. Each central motif is deliberately
+All controls share neutral platinum bevels, dark graphite recesses, authored
+alloy planes and cyan indicators, matching the athletic sports-league mark in
+`assets/ui/title-mark/`. Generic repeated diagonal blue-gray bands are replaced
+with specific wing facets, folded plate faces, gear chamfers, cartridge cuts,
+cross-arm planes and locator-arm recesses. Small fixed gold fasteners/locators
+occupy at most3% of each object; they do not signal ownership or gameplay state.
+Each central motif is deliberately
 larger than its seams or rivets. The status control is an overhead RAICHO;
 map has three folded plates and route nodes; settings has an open gear bore;
 save has an open data aperture; close has crossing rails; resume has a strong
 triangle; restart has a return arrow; title has the Haven roof and docking
 throat; quit has a power-ring gap; fullscreen has four separate locator arms.
 Intentional transparent apertures and disconnected parts are retained.
+
+Every occupancy cell, open aperture, outer bound, accent cell and emitter cell
+is unchanged from the first64-cell pack (`e86980bb…`). The10 controls still cost
+14,709 cells. Cyan source colors and semantic animation masks remain exact;
+only neutral material faces and unmasked fixed gold fittings are reauthored.
 
 ## Pack contract
 
@@ -93,10 +105,19 @@ back to its exact indexed RGBA cells, verify visual landmark coordinates and
 open apertures, enforce bounds/palette/mask/work budgets, reject malformed
 roles and alpha, and distinguish fine 64-cell clusters from doubled 32-cell
 blocks. The encoding test also covers multi-block stored PNG streams.
+The sports pass additionally checks a frozen all-cell occupancy/role digest,
+handpicked facet/fitting coordinates, the restrained gold budget, exact cyan
+role colors and neutral graphite/platinum contrast. Counts alone cannot pass
+if an edge, aperture or role cell moves.
 
 `authoring-overview.png` presents the actual source objects at 2× nearest.
 `compact-readability.png` presents 14/28/42-pixel software samples enlarged for
 inspection. No AI bitmap was generated for this set and no conversion loss is
 claimed or hidden: the source cells were authored directly by the script.
+The sports revision's source and14/28/42px previews were inspected; they retain
+ten distinct main motifs while their thinner seams fade at14px. This is an
+authoring/software assessment. Final normal native/GPU presentation of the
+revised colors, state animation and small-size user readability remain Root's
+integration gate; no new browser or physical-device claim is made here.
 Future intentional artwork changes require review of the regenerated sources,
 mask landmarks and budget evidence before committing them.

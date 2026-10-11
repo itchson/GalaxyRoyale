@@ -11,18 +11,20 @@
   "components": "all retained, intentional open silhouette holes",
   "conversion_loss": "none",
   "source_png_encoding": "filter0, explicitly stored DEFLATE blocks; decoded by Pillow; reproducible encoded bytes",
-  "atlas_sha256": "e86980bbb99f3c1423900283f78e7bba2aac4b90d02b4a0855291c2e5ff8ee73",
+  "style_revision": "Athletic league material pass: authored alloy planes, recessed chip/vent details and fixed gold locators; neutral graphite/platinum metal replaces blue-gray wash.",
+  "preserved_baseline": "e86980bbb99f3c1423900283f78e7bba2aac4b90d02b4a0855291c2e5ff8ee73: all occupancy/bounds and both animation masks unchanged",
+  "atlas_sha256": "4d811f30347e72d1fbc9583e1d931065cb44af0d2f59dfae2a6850887a2f0704",
   "source_sha256": {
-    "icon_status": "7c9a4ab8fe8be191f4bd9e54c1cb2bc8eeeeca486f552919e549b65103a840b2",
-    "icon_map": "c8444c744410710c1e5023ac49aa9a9f1939ae977483314ad986356164853b25",
-    "icon_settings": "3d69c9828ed5ddc6af32fe9cfba43c747184cc4e501dd32886b61a62f84ab0f9",
-    "icon_save": "aae1a26c9b75c8c1b47a94276f09021d5076a86685c63add19aa4364d8726290",
-    "icon_close": "4f49aa581485827e1dcc5ee4a08983dafc273abc502fa25be92d272c8e40ab82",
-    "icon_resume": "454606c1be574ff6d87ba1e797b1fd1b37f1296ab9e467a2550dfac453f54d69",
-    "icon_restart": "2958bbefb329afd04820509b7d93841bbc1449987234189ab8d863c86e804faf",
-    "icon_title": "5b173d643c3fa2b0389656c92ef84f0c3bd5c6836ab7394cb204932d5dded6c7",
-    "icon_quit": "a9e8b98252ff7128993d365965785000b059758f52df79dc5e45f312b7425f14",
-    "icon_fullscreen": "dc6c8633b6c27cc574f43967c5f5e49dcbfbed73d5437ae1599a632a4b170844"
+    "icon_status": "404e9f713f40a07371830413156f0c10a71019dd0cfc17e82a6d8e39a098280c",
+    "icon_map": "34ca3a0089526e6e0d573f202e44165bf206c5e1678cd9592281945168a426e5",
+    "icon_settings": "0efe73a66746cbdc4cd369e56c7305755a7f89ec132c380e220e774205e93a36",
+    "icon_save": "ff34d1db1fd6880aa83e1eede1d64e7e615f51df27a44d997825434a09b5e90a",
+    "icon_close": "28bce345eb42ca44a8cc55b3e9144dd88b95c07c7eaab655d75a9fc909e00eae",
+    "icon_resume": "b252964d242c7d29f54d67cf51c9024d8ade47d3195791035e32b7aa76520bab",
+    "icon_restart": "ee544f27ca60b0f65890ca31f378489cace42c8ce865a8620ef43727a0372b8b",
+    "icon_title": "ad6d66d6f3ec8ee5a1d7e9946ab393bf5f1afd23a9e4bddc3a535e02cc5927d1",
+    "icon_quit": "12232000b361afb90609b0e22aa9225eef4d005d1adda620345830eb42c6eda7",
+    "icon_fullscreen": "7c95d05b3043912fc0ab26a481f62b2b4e13839dc7d48dd238c48c44fac09e2a"
   },
   "budgets": {
     "icon_status": {

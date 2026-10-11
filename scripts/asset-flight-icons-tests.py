@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import copy
+import hashlib
 import importlib.util
 import json
 import tempfile
@@ -18,6 +19,22 @@ ASSETS = ROOT / "assets/ui/flight-icons"
 
 COUNTS = {"status": 1291, "map": 2036, "settings": 1802, "save": 1503, "close": 1289,
           "resume": 1362, "restart": 1373, "title": 1591, "quit": 1322, "fullscreen": 1140}
+# Independent frozen e86980bb structure: every occupied location and both roles.
+# Unlike counts alone, this fails if a fine edge, hole or animation cell moves.
+BASELINE_STRUCTURE_SHA256 = "608f809385553f46bbb391f8c21417201efa979150b1de4df61db9937332008c"
+# Source-coordinate planes and fixed hardware locators; not sampled role output.
+METAL_LANDMARKS = {
+    "status": [((12, 42), 18), ((18, 35), 7)],
+    "map": [((8, 15), 18), ((8, 48), 9)],
+    "settings": [((35, 7), 18), ((51, 43), 4)],
+    "save": [((12, 10), 18), ((48, 17), 7)],
+    "close": [((11, 8), 18), ((10, 10), 7)],
+    "resume": [((16, 10), 18), ((22, 11), 7)],
+    "restart": [((54, 41), 18), ((42, 52), 9)],
+    "title": [((31, 9), 18), ((47, 44), 9)],
+    "quit": [((51, 44), 18), ((21, 52), 9)],
+    "fullscreen": [((18, 7), 18), ((12, 20), 9)],
+}
 # Hand-picked spatial landmarks describe the visible designs, not role-list output.
 LANDMARKS = {
     "status": {"solid": [(32, 5), (8, 42)], "open": [(3, 32)], "emitter": [(26, 58), (37, 58)]},
@@ -60,6 +77,38 @@ class FlightIcons(unittest.TestCase):
                 actual = list(source.convert("RGBA").get_flattened_data())
             expected = [tuple(c >> shift & 255 for shift in (0, 8, 16, 24)) for c in (self.atlas["palette"][i] for i in sprite["indices"])]
             self.assertEqual(actual, expected)
+
+    def test_sports_revision_preserves_every_frozen_mask_cell(self):
+        structure = {name: {
+            "occupied": [bool(i) for i in sprite["indices"]],
+            "accent_cells": sprite["accent_cells"],
+            "emitter_cells": sprite["emitter_cells"],
+        } for name, sprite in self.atlas["sprites"].items()}
+        encoded = json.dumps(structure, sort_keys=True, separators=(",", ":")).encode()
+        self.assertEqual(hashlib.sha256(encoded).hexdigest(), BASELINE_STRUCTURE_SHA256)
+
+    def test_sports_metal_planes_and_small_gold_fittings_are_authored(self):
+        for kind, landmarks in METAL_LANDMARKS.items():
+            sprite = self.atlas["sprites"]["icon_" + kind]
+            for (x, y), index in landmarks:
+                with self.subTest(icon=kind, point=(x, y)):
+                    cell = y * 64 + x
+                    self.assertEqual(sprite["indices"][cell], index)
+                    self.assertNotIn(cell, sprite["accent_cells"])
+            gold = {i for i, p in enumerate(sprite["indices"]) if p in (16, 17, 18)}
+            self.assertGreater(len(gold), 0, kind)
+            self.assertLessEqual(len(gold), COUNTS[kind] * 3 // 100, kind)
+            self.assertFalse(gold & set(sprite["accent_cells"]), kind)
+
+    def test_graphite_platinum_and_existing_cyan_roles_remain_separate(self):
+        rgba = lambda c: tuple((c >> shift) & 255 for shift in (0, 8, 16, 24))
+        palette = [rgba(c) for c in self.atlas["palette"]]
+        self.assertEqual(palette[1], (12, 13, 16, 255))
+        self.assertEqual(palette[7], (234, 239, 242, 255))
+        self.assertEqual(palette[12:16], [(21, 85, 100, 255), (26, 143, 163, 255),
+                                         (66, 213, 222, 255), (169, 245, 237, 255)])
+        self.assertTrue(all(max(c[:3]) - min(c[:3]) <= 24 for c in palette[1:9]))
+        self.assertGreater(min(palette[7][:3]) - max(palette[2][:3]), 180)
 
     def test_all_exact_conversion_policies_remain_lossless(self):
         metadata = self.atlas["asset_metadata"]["sprites"]
