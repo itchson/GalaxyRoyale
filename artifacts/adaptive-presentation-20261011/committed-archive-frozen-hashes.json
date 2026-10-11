@@ -1,0 +1,28 @@
+{
+  "scope": "Immutable exact committed source/official archive addendum, separate from frozen normal review",
+  "recorded_utc": "2026-10-11T02:05:02.277230+00:00",
+  "source_commit": "3bf0c02b5e9fc0011c0ce6921bfaf0fbe664c65d",
+  "archive_sha256": "baed5574e8bf4151b2d3f9b9dfea724fd92827e5b7e6a46d06ad293df4bb9cd9",
+  "files": [
+    {
+      "path": "archive-evidence.json",
+      "bytes": 50031,
+      "sha256": "27fbfa24916b452de3ffffd43b4c070235c06ce15f1e6f0ece4e1d5bfa3ce760"
+    },
+    {
+      "path": "check.py",
+      "bytes": 6722,
+      "sha256": "25af361ba12cdaa60b677e387b1565d2163944d0f4ccce5e80b8a83d51f45523"
+    },
+    {
+      "path": "REVIEW.md",
+      "bytes": 2233,
+      "sha256": "c37d7c7d9e47f49fc02bad12becdf68988c769c73d872bf7cb21252f81d6470a"
+    },
+    {
+      "path": "verify.py",
+      "bytes": 1968,
+      "sha256": "ba45e2027153b908770366851765c503ab1f05a39bbfa57b86bafca8c432b5c9"
+    }
+  ]
+}

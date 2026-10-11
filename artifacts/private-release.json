@@ -1,8 +1,8 @@
 {
-  "id": "appgdep_6acac92a31688191b10ebe86a800987c",
+  "id": "appgdep_6acaeebe4b9c8191a99a3896f032bd54",
   "project_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93",
   "title": "Galaxy Royale",
-  "version_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93~appgver_2d03819338448191a141a33ca57eeb0d",
+  "version_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93~appgver_9679795b02a881919c56afe615e4358b",
   "type": "publish",
   "status": "succeeded",
   "url": "https://galaxy-royale-itchson.itchson.chatgpt.site",
@@ -11,15 +11,15 @@
   "provider_deployment_id": "site---6aca50f5b1bc81918526a6ee969aac93",
   "failure_message": null,
   "env_set_revision": 0,
-  "updated_at": "2026-10-10T23:24:45.437700+00:00",
-  "commit_sha": "991153c187b0eb3920829dc3ff94ea04f99ee864",
-  "cacheVersion": "galaxy-ac19daf73e83b006",
-  "browserAccess": "Exact owner-private publication succeeded. Final normal WebGPU and WebGL2 console/reconstruction were observed locally, with scoped responsive Chrome WebGL checks. Authenticated remote execution remains unmeasured.",
-  "archiveContent": "Exactly20 game-only files:18 cached normal assets,sw.js and normalized dist/.openai/hosting.json.94 committed inputs independently matched,77exactbyte and17LF/CRLF representations. ArchiveSHA499f0979bdf351a32365786ca883a5e2b64b76c8a888d5d57f27a619071ed065.",
-  "validation": "302Rust/134shell, strict TypeScript/native/both-WASMClippy and normal dual build pass. Scoped actual native recovery and320x180/720x360/portrait UI/console checks pass; exact94 sourcepins/20filearchive reviewed. Phones/soak, fulltimingmatrix, audiblehumanreview/naturalcampaign and authenticatedremote gameplay pending. New cargo/ability request is a later active milestone, not claimed in this artifact.",
+  "updated_at": "2026-10-11T02:05:08.604983+00:00",
+  "commit_sha": "3bf0c02b5e9fc0011c0ce6921bfaf0fbe664c65d",
+  "cacheVersion": "galaxy-cc8da99d023ae67a",
+  "browserAccess": "Exact owner-private publication succeeded. Actual private IAB loaded final JS/CSS, initialized WebGPU and launched normal Haven with existing points 6/5/1. Apply update then failed with ERR_FAILED; a fresh authorized tab also failed. Further observation/navigation/cleanup was refused by browser URL policy on its generated error document. Hosted update and reload remain unresolved; normal local WebGPU/WebGL2 and retained-profile Apply passed. No policy bypass or profile reset performed.",
+  "archiveContent": "Exactly 21 game-only files: 19 cached normal payloads, sw.js and normalized dist/.openai/hosting.json. 142 committed inputs independently matched, 127 byte-exact / 15 LF-CRLF text representations; nine generated WASM inputs excluded from Git and compared directly. Archive SHA baed5574e8bf4151b2d3f9b9dfea724fd92827e5b7e6a46d06ad293df4bb9cd9.",
+  "validation": "406 native / 239 shell passes with one explicit Windows file-symlink capability skip; strict TypeScript/native/both-WASM Clippy, normal dual build and 18 isolated actual WASM serializer/SaveStore fixture cases pass. Actual staged a9c3 adaptive resource/menu checks, corrected c707 prolonged real GL loss and final cc8 native label/footer/responsive Apply checks are separately scoped. Rendered DSP/human listening, natural crafting/physical-return banking, timed inputs, physical phones and 30-minute soak pending. Hosted private update/reload failed in IAB and remains an explicit follow-up.",
   "backendHashes": {
-    "webgpu": "ccce86e239d72b86aac6a7dac5c0daa1b8b5968b6b4da502c02cca009e4b8246",
-    "webgl2": "ae10fa80c88bc5bdc2b9a597e1163ef9b7298b085c0423b2db45e86dcae0485e"
+    "webgpu": "3c47eae459be4db04e65eda321a1b3cfebbb20dcaa44002291852222254e2c5a",
+    "webgl2": "46109afebf38148945721d7340e90ecc55a0645e5d13d59e966b770877a157f0"
   },
   "previousDeployments": [
     {
@@ -91,6 +91,14 @@
       "status": "succeeded",
       "updated_at": "2026-10-10T22:37:01.886731+00:00",
       "cacheVersion": "galaxy-95d0a4d39116971e"
+    },
+    {
+      "id": "appgdep_6acac92a31688191b10ebe86a800987c",
+      "version_id": "appgprj_6aca50f5b1bc81918526a6ee969aac93~appgver_2d03819338448191a141a33ca57eeb0d",
+      "commit_sha": "991153c187b0eb3920829dc3ff94ea04f99ee864",
+      "status": "succeeded",
+      "updated_at": "2026-10-10T23:24:45.437700+00:00",
+      "cacheVersion": "galaxy-ac19daf73e83b006"
     }
   ]
 }

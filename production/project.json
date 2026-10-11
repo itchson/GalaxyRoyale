@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 440,
+  "revision": 459,
   "name": "Galaxy Royale",
   "phase": "Foundation → playable vertical slice",
-  "updatedAt": "2026-10-11T02:02:49.904Z",
+  "updatedAt": "2026-10-11T02:09:26.594Z",
   "tasks": [
     {
       "id": "studio",
@@ -3477,7 +3477,7 @@
         },
         {
           "text": "Exact reviewed private game package published",
-          "met": false
+          "met": true
         }
       ],
       "evidence": [
@@ -3500,12 +3500,32 @@
           "label": "201 shell checks, one unsupported file-symlink check skipped",
           "kind": "note",
           "path": "work/navigation-release-shell-tests.log"
+        },
+        {
+          "label": "142 committed inputs and exact21-file official archive audit",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/committed-archive-REVIEW.md"
+        },
+        {
+          "label": "Actual per-file archive/source correspondence",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/committed-archive-archive-evidence.json"
+        },
+        {
+          "label": "Successful owner-private publication with explicit validation limits",
+          "kind": "note",
+          "path": "artifacts/private-release.json"
+        },
+        {
+          "label": "Actual private startup and unresolved hosted Apply/reload",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/private-browser-observation.md"
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 3,
       "createdAt": "2026-10-10T23:21:35.302Z",
-      "updatedAt": "2026-10-11T00:57:29.590Z"
+      "updatedAt": "2026-10-11T02:09:26.313Z"
     },
     {
       "id": "task-2138420d",
@@ -3527,7 +3547,7 @@
         },
         {
           "text": "Exact reviewed private game package published",
-          "met": false
+          "met": true
         }
       ],
       "evidence": [
@@ -3550,12 +3570,32 @@
           "label": "201 shell checks, one unsupported file-symlink check skipped",
           "kind": "note",
           "path": "work/navigation-release-shell-tests.log"
+        },
+        {
+          "label": "142 committed inputs and exact21-file official archive audit",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/committed-archive-REVIEW.md"
+        },
+        {
+          "label": "Actual per-file archive/source correspondence",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/committed-archive-archive-evidence.json"
+        },
+        {
+          "label": "Successful owner-private publication with explicit validation limits",
+          "kind": "note",
+          "path": "artifacts/private-release.json"
+        },
+        {
+          "label": "Actual private startup and unresolved hosted Apply/reload",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/private-browser-observation.md"
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 3,
       "createdAt": "2026-10-10T23:21:35.350Z",
-      "updatedAt": "2026-10-11T00:57:29.617Z"
+      "updatedAt": "2026-10-11T02:09:26.360Z"
     },
     {
       "id": "task-96a89aa2",
@@ -3577,7 +3617,7 @@
         },
         {
           "text": "Exact reviewed private game package published",
-          "met": false
+          "met": true
         }
       ],
       "evidence": [
@@ -3600,12 +3640,32 @@
           "label": "201 shell checks, one unsupported file-symlink check skipped",
           "kind": "note",
           "path": "work/navigation-release-shell-tests.log"
+        },
+        {
+          "label": "142 committed inputs and exact21-file official archive audit",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/committed-archive-REVIEW.md"
+        },
+        {
+          "label": "Actual per-file archive/source correspondence",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/committed-archive-archive-evidence.json"
+        },
+        {
+          "label": "Successful owner-private publication with explicit validation limits",
+          "kind": "note",
+          "path": "artifacts/private-release.json"
+        },
+        {
+          "label": "Actual private startup and unresolved hosted Apply/reload",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/private-browser-observation.md"
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 3,
       "createdAt": "2026-10-10T23:21:35.380Z",
-      "updatedAt": "2026-10-11T00:57:29.665Z"
+      "updatedAt": "2026-10-11T02:09:26.391Z"
     },
     {
       "id": "task-40611e41",
@@ -3627,7 +3687,7 @@
         },
         {
           "text": "Exact independently reviewed private package published",
-          "met": false
+          "met": true
         }
       ],
       "evidence": [
@@ -3650,12 +3710,32 @@
           "label": "201 shell checks, one unsupported file-symlink check skipped",
           "kind": "note",
           "path": "work/navigation-release-shell-tests.log"
+        },
+        {
+          "label": "142 committed inputs and exact21-file official archive audit",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/committed-archive-REVIEW.md"
+        },
+        {
+          "label": "Actual per-file archive/source correspondence",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/committed-archive-archive-evidence.json"
+        },
+        {
+          "label": "Successful owner-private publication with explicit validation limits",
+          "kind": "note",
+          "path": "artifacts/private-release.json"
+        },
+        {
+          "label": "Actual private startup and unresolved hosted Apply/reload",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/private-browser-observation.md"
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 3,
       "createdAt": "2026-10-10T23:53:28.581Z",
-      "updatedAt": "2026-10-11T00:57:29.692Z"
+      "updatedAt": "2026-10-11T02:09:26.420Z"
     },
     {
       "id": "task-a6a2a3e6",
@@ -3677,7 +3757,7 @@
         },
         {
           "text": "Exact independently reviewed private package published",
-          "met": false
+          "met": true
         }
       ],
       "evidence": [
@@ -3700,12 +3780,32 @@
           "label": "201 shell checks, one unsupported file-symlink check skipped",
           "kind": "note",
           "path": "work/navigation-release-shell-tests.log"
+        },
+        {
+          "label": "142 committed inputs and exact21-file official archive audit",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/committed-archive-REVIEW.md"
+        },
+        {
+          "label": "Actual per-file archive/source correspondence",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/committed-archive-archive-evidence.json"
+        },
+        {
+          "label": "Successful owner-private publication with explicit validation limits",
+          "kind": "note",
+          "path": "artifacts/private-release.json"
+        },
+        {
+          "label": "Actual private startup and unresolved hosted Apply/reload",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/private-browser-observation.md"
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 3,
       "createdAt": "2026-10-10T23:53:28.614Z",
-      "updatedAt": "2026-10-11T00:57:29.742Z"
+      "updatedAt": "2026-10-11T02:09:26.454Z"
     },
     {
       "id": "task-970f203c",
@@ -3727,7 +3827,7 @@
         },
         {
           "text": "Exact reviewed private build published with validation boundaries",
-          "met": false
+          "met": true
         }
       ],
       "evidence": [
@@ -3750,12 +3850,32 @@
           "label": "201 shell checks, one unsupported file-symlink check skipped",
           "kind": "note",
           "path": "work/navigation-release-shell-tests.log"
+        },
+        {
+          "label": "142 committed inputs and exact21-file official archive audit",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/committed-archive-REVIEW.md"
+        },
+        {
+          "label": "Actual per-file archive/source correspondence",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/committed-archive-archive-evidence.json"
+        },
+        {
+          "label": "Successful owner-private publication with explicit validation limits",
+          "kind": "note",
+          "path": "artifacts/private-release.json"
+        },
+        {
+          "label": "Actual private startup and unresolved hosted Apply/reload",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/private-browser-observation.md"
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 3,
       "createdAt": "2026-10-11T00:16:28.255Z",
-      "updatedAt": "2026-10-11T00:57:29.773Z"
+      "updatedAt": "2026-10-11T02:09:26.485Z"
     },
     {
       "id": "task-0b1b0efa",
@@ -3777,7 +3897,7 @@
         },
         {
           "text": "Exact reviewed source and private deployment recorded",
-          "met": false
+          "met": true
         }
       ],
       "evidence": [
@@ -3800,12 +3920,32 @@
           "label": "201 shell checks, one unsupported file-symlink check skipped",
           "kind": "note",
           "path": "work/navigation-release-shell-tests.log"
+        },
+        {
+          "label": "142 committed inputs and exact21-file official archive audit",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/committed-archive-REVIEW.md"
+        },
+        {
+          "label": "Actual per-file archive/source correspondence",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/committed-archive-archive-evidence.json"
+        },
+        {
+          "label": "Successful owner-private publication with explicit validation limits",
+          "kind": "note",
+          "path": "artifacts/private-release.json"
+        },
+        {
+          "label": "Actual private startup and unresolved hosted Apply/reload",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/private-browser-observation.md"
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 3,
       "createdAt": "2026-10-11T00:34:02.658Z",
-      "updatedAt": "2026-10-11T00:57:29.439Z"
+      "updatedAt": "2026-10-11T02:09:26.127Z"
     },
     {
       "id": "task-3b9f6350",
@@ -3827,7 +3967,7 @@
         },
         {
           "text": "Exact reviewed source and private deployment recorded",
-          "met": false
+          "met": true
         }
       ],
       "evidence": [
@@ -3850,12 +3990,32 @@
           "label": "201 shell checks, one unsupported file-symlink check skipped",
           "kind": "note",
           "path": "work/navigation-release-shell-tests.log"
+        },
+        {
+          "label": "142 committed inputs and exact21-file official archive audit",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/committed-archive-REVIEW.md"
+        },
+        {
+          "label": "Actual per-file archive/source correspondence",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/committed-archive-archive-evidence.json"
+        },
+        {
+          "label": "Successful owner-private publication with explicit validation limits",
+          "kind": "note",
+          "path": "artifacts/private-release.json"
+        },
+        {
+          "label": "Actual private startup and unresolved hosted Apply/reload",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/private-browser-observation.md"
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 3,
       "createdAt": "2026-10-11T00:34:02.689Z",
-      "updatedAt": "2026-10-11T00:57:29.494Z"
+      "updatedAt": "2026-10-11T02:09:26.163Z"
     },
     {
       "id": "task-73510faf",
@@ -3877,7 +4037,7 @@
         },
         {
           "text": "Exact reviewed source and private deployment recorded",
-          "met": false
+          "met": true
         }
       ],
       "evidence": [
@@ -3900,12 +4060,32 @@
           "label": "201 shell checks, one unsupported file-symlink check skipped",
           "kind": "note",
           "path": "work/navigation-release-shell-tests.log"
+        },
+        {
+          "label": "142 committed inputs and exact21-file official archive audit",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/committed-archive-REVIEW.md"
+        },
+        {
+          "label": "Actual per-file archive/source correspondence",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/committed-archive-archive-evidence.json"
+        },
+        {
+          "label": "Successful owner-private publication with explicit validation limits",
+          "kind": "note",
+          "path": "artifacts/private-release.json"
+        },
+        {
+          "label": "Actual private startup and unresolved hosted Apply/reload",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/private-browser-observation.md"
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 3,
       "createdAt": "2026-10-11T00:34:02.733Z",
-      "updatedAt": "2026-10-11T00:57:29.520Z"
+      "updatedAt": "2026-10-11T02:09:26.203Z"
     },
     {
       "id": "task-388e1f9b",
@@ -3927,7 +4107,7 @@
         },
         {
           "text": "Exact reviewed source and private deployment recorded",
-          "met": false
+          "met": true
         }
       ],
       "evidence": [
@@ -3950,12 +4130,32 @@
           "label": "201 shell checks, one unsupported file-symlink check skipped",
           "kind": "note",
           "path": "work/navigation-release-shell-tests.log"
+        },
+        {
+          "label": "142 committed inputs and exact21-file official archive audit",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/committed-archive-REVIEW.md"
+        },
+        {
+          "label": "Actual per-file archive/source correspondence",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/committed-archive-archive-evidence.json"
+        },
+        {
+          "label": "Successful owner-private publication with explicit validation limits",
+          "kind": "note",
+          "path": "artifacts/private-release.json"
+        },
+        {
+          "label": "Actual private startup and unresolved hosted Apply/reload",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/private-browser-observation.md"
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 3,
       "createdAt": "2026-10-11T00:34:02.781Z",
-      "updatedAt": "2026-10-11T00:57:29.550Z"
+      "updatedAt": "2026-10-11T02:09:26.234Z"
     },
     {
       "id": "task-5d42b89b",
@@ -3977,7 +4177,7 @@
         },
         {
           "text": "Exact reviewed source and private deployment recorded",
-          "met": false
+          "met": true
         }
       ],
       "evidence": [
@@ -4000,12 +4200,32 @@
           "label": "201 shell checks, one unsupported file-symlink check skipped",
           "kind": "note",
           "path": "work/navigation-release-shell-tests.log"
+        },
+        {
+          "label": "142 committed inputs and exact21-file official archive audit",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/committed-archive-REVIEW.md"
+        },
+        {
+          "label": "Actual per-file archive/source correspondence",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/committed-archive-archive-evidence.json"
+        },
+        {
+          "label": "Successful owner-private publication with explicit validation limits",
+          "kind": "note",
+          "path": "artifacts/private-release.json"
+        },
+        {
+          "label": "Actual private startup and unresolved hosted Apply/reload",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/private-browser-observation.md"
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 3,
       "createdAt": "2026-10-11T00:37:30.676Z",
-      "updatedAt": "2026-10-11T00:57:29.390Z"
+      "updatedAt": "2026-10-11T02:09:26.095Z"
     },
     {
       "id": "task-e52fb3b4",
@@ -4013,7 +4233,7 @@
       "description": "One flat responsive status strip, projected hull/shield bars, retained compact icons and truthful low-hull/shield-down warnings. Native pixel font, shared safe-area layout and accessible DOM alignment.",
       "department": "Engine",
       "owner": "Engine specialist",
-      "status": "review",
+      "status": "complete",
       "priority": "high",
       "dependencies": [],
       "acceptanceCriteria": [
@@ -4027,7 +4247,7 @@
         },
         {
           "text": "Exact source/package review and owner-private publication match the tested build.",
-          "met": false
+          "met": true
         }
       ],
       "evidence": [
@@ -4075,12 +4295,32 @@
           "label": "18 actual dual-WASM serializer/SaveStore cases",
           "kind": "note",
           "path": "artifacts/adaptive-presentation-20261011/final-wasm-contract.log"
+        },
+        {
+          "label": "142 committed inputs and exact21-file official archive audit",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/committed-archive-REVIEW.md"
+        },
+        {
+          "label": "Actual per-file archive/source correspondence",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/committed-archive-archive-evidence.json"
+        },
+        {
+          "label": "Successful owner-private publication with explicit validation limits",
+          "kind": "note",
+          "path": "artifacts/private-release.json"
+        },
+        {
+          "label": "Actual private startup and unresolved hosted Apply/reload",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/private-browser-observation.md"
         }
       ],
       "blocker": "",
-      "revision": 3,
+      "revision": 4,
       "createdAt": "2026-10-11T01:12:52.505Z",
-      "updatedAt": "2026-10-11T02:00:00.859Z"
+      "updatedAt": "2026-10-11T02:09:25.975Z"
     },
     {
       "id": "task-0702e217",
@@ -4088,7 +4328,7 @@
       "description": "Real biome, sanctuary, hostile pursuit, champion identity, low hull and actual throttle/speed drive bounded music/effects. Smooth transitions, separate volume buses and lifecycle recovery.",
       "department": "Audio / Gameplay",
       "owner": "Gameplay specialist",
-      "status": "review",
+      "status": "complete",
       "priority": "high",
       "dependencies": [],
       "acceptanceCriteria": [
@@ -4102,7 +4342,7 @@
         },
         {
           "text": "Exact source/package review and owner-private publication match the tested build.",
-          "met": false
+          "met": true
         }
       ],
       "evidence": [
@@ -4155,12 +4395,32 @@
           "label": "18 actual dual-WASM serializer/SaveStore cases",
           "kind": "note",
           "path": "artifacts/adaptive-presentation-20261011/final-wasm-contract.log"
+        },
+        {
+          "label": "142 committed inputs and exact21-file official archive audit",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/committed-archive-REVIEW.md"
+        },
+        {
+          "label": "Actual per-file archive/source correspondence",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/committed-archive-archive-evidence.json"
+        },
+        {
+          "label": "Successful owner-private publication with explicit validation limits",
+          "kind": "note",
+          "path": "artifacts/private-release.json"
+        },
+        {
+          "label": "Actual private startup and unresolved hosted Apply/reload",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/private-browser-observation.md"
         }
       ],
       "blocker": "",
-      "revision": 3,
+      "revision": 4,
       "createdAt": "2026-10-11T01:12:52.527Z",
-      "updatedAt": "2026-10-11T02:00:00.932Z"
+      "updatedAt": "2026-10-11T02:09:26.031Z"
     },
     {
       "id": "task-4aed8f22",
@@ -4168,7 +4428,7 @@
       "description": "Document and apply current palette, silhouette, density, fractional quad transforms and semantic colors. Simplify contextual DOM/native HUD to match the real engine.",
       "department": "Art / Production",
       "owner": "Production specialist",
-      "status": "review",
+      "status": "complete",
       "priority": "high",
       "dependencies": [],
       "acceptanceCriteria": [
@@ -4182,7 +4442,7 @@
         },
         {
           "text": "Exact source/package review and owner-private publication match the tested build.",
-          "met": false
+          "met": true
         }
       ],
       "evidence": [
@@ -4230,12 +4490,32 @@
           "label": "18 actual dual-WASM serializer/SaveStore cases",
           "kind": "note",
           "path": "artifacts/adaptive-presentation-20261011/final-wasm-contract.log"
+        },
+        {
+          "label": "142 committed inputs and exact21-file official archive audit",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/committed-archive-REVIEW.md"
+        },
+        {
+          "label": "Actual per-file archive/source correspondence",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/committed-archive-archive-evidence.json"
+        },
+        {
+          "label": "Successful owner-private publication with explicit validation limits",
+          "kind": "note",
+          "path": "artifacts/private-release.json"
+        },
+        {
+          "label": "Actual private startup and unresolved hosted Apply/reload",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/private-browser-observation.md"
         }
       ],
       "blocker": "",
-      "revision": 3,
+      "revision": 4,
       "createdAt": "2026-10-11T01:12:52.555Z",
-      "updatedAt": "2026-10-11T02:00:00.980Z"
+      "updatedAt": "2026-10-11T02:09:26.062Z"
     },
     {
       "id": "task-f341486f",
@@ -4267,6 +4547,37 @@
       "revision": 1,
       "createdAt": "2026-10-11T02:00:01.121Z",
       "updatedAt": "2026-10-11T02:00:01.121Z"
+    },
+    {
+      "id": "task-01f28dc1",
+      "title": "Investigate owner-private hosted PWA reload in the in-app browser",
+      "description": "Initial authenticated cc8 game startup/flight succeeded, but actual Apply at Haven and one fresh authorized tab returned ERR_FAILED. The generated data error document is blocked by browser URL policy. Diagnose through supported authorized hosting/browser evidence when available. Do not bypass policy, reset the retained origin/profile or weaken private access; do not assume game or host cause from this symptom alone.",
+      "department": "QA",
+      "owner": "Production specialist",
+      "status": "ready",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Supported evidence identifies the actual navigation/update failure cause without policy bypass or retained-profile reset.",
+          "met": false
+        },
+        {
+          "text": "Actual owner-private normal reload/Apply completes, renders coherent final assets and preserves recorded progression.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual private startup and unresolved hosted Apply/reload",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/private-browser-observation.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-11T02:09:26.559Z",
+      "updatedAt": "2026-10-11T02:09:26.559Z"
     }
   ],
   "reviews": [
@@ -5056,6 +5367,24 @@
         "task-e52fb3b4",
         "task-0702e217",
         "task-4aed8f22"
+      ]
+    },
+    {
+      "id": "review-91981c29",
+      "title": "Exact source/archive publication gate and actual hosted limit",
+      "body": "Engine actually parsed both archived modules, matched142 committed source inputs (127byte-exact/15CRLF-LF text representations), compared9 ignored generated inputs and all21 official tar files, recomputed cc8 cache and found no blocker. Producer used the official source helper with hidden stdin credentials and exact pushed commit, then successful owner-private publication. Actual private startup/flight loaded final JS/CSS and existing points6/5/1; actual Apply failed to reload and a fresh authorized tab failed too. Further IAB error-page operations were refused by URL policy. Cause not diagnosed, no alternate route/profile reset/security change. Latest presentation implementation tasks close their explicit local desktop/source/publication criteria; the hosted update and outstanding natural-play/device/hearing acceptance are retained as separate work. Prior task criteria requiring broader gameplay remain unmet.",
+      "author": "Producer",
+      "source": "Exact official source/archive audit and successful owner-private publication; actual hosted reload failure recorded separately",
+      "createdAt": "2026-10-11T02:09:26.533Z",
+      "participants": [
+        "Producer",
+        "Engine specialist"
+      ],
+      "taskIds": [
+        "task-e52fb3b4",
+        "task-0702e217",
+        "task-4aed8f22",
+        "task-388e1f9b"
       ]
     }
   ],
@@ -6179,6 +6508,81 @@
       ],
       "url": "http://127.0.0.1:4214/?qa=1&toolbar=1&renderer=webgpu",
       "knownIssues": "Final browser and source/archive gates pending. Real held-mouse timing and physical cargo-return play review remain separate from native/VM evidence. Device, human balance and authenticated remote runtime unmeasured."
+    },
+    {
+      "id": "build-b91a194b",
+      "title": "Private adaptive presentation release / cc8",
+      "body": "The exact reviewed runtime source was pushed and packaged through the official helper; the game-only archive passed independent142-input/21-file comparison before successful owner-private publication appgdep_6acaeebe4b9c8191a99a3896f032bd54. Initial private IAB normal WebGPU startup and Haven flight loaded final assets. Hosted Apply then failed with ERR_FAILED, including one fresh authorized tab; observation/navigation/cleanup of the generated error page was blocked by browser URL policy. No bypass/reset/security change attempted. This hosting/update gate remains unresolved, separate from actual successful normal local backend/layout/update/recovery checks. Original audience preserved; Studio stays local.",
+      "author": "Producer",
+      "source": "Exact official source/archive audit and successful owner-private publication; actual hosted reload failure recorded separately",
+      "createdAt": "2026-10-11T02:09:26.508Z",
+      "revision": "3bf0c02b5e9fc0011c0ce6921bfaf0fbe664c65d",
+      "evidence": [
+        {
+          "label": "142 committed inputs and exact21-file official archive audit",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/committed-archive-REVIEW.md"
+        },
+        {
+          "label": "Actual per-file archive/source correspondence",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/committed-archive-archive-evidence.json"
+        },
+        {
+          "label": "Successful owner-private publication with explicit validation limits",
+          "kind": "note",
+          "path": "artifacts/private-release.json"
+        },
+        {
+          "label": "Actual private startup and unresolved hosted Apply/reload",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/private-browser-observation.md"
+        }
+      ],
+      "checks": [
+        {
+          "name": "406 native tests",
+          "result": "pass"
+        },
+        {
+          "name": "239 shell tests; one explicit Windows file-symlink capability skip",
+          "result": "pass"
+        },
+        {
+          "name": "Strict TypeScript/native/both-WASM Clippy and normal dual build",
+          "result": "pass"
+        },
+        {
+          "name": "18 isolated actual Rust serializer/SaveStore fixture cases",
+          "result": "pass"
+        },
+        {
+          "name": "Actual staged local WebGPU/WebGL2 presentation and retained-profile Apply",
+          "result": "pass"
+        },
+        {
+          "name": "Exact committed source/official archive correspondence",
+          "result": "pass"
+        },
+        {
+          "name": "Existing owner-private publication",
+          "result": "pass"
+        },
+        {
+          "name": "Initial hosted normal WebGPU startup and Haven flight",
+          "result": "pass"
+        },
+        {
+          "name": "Hosted in-app-browser Apply/reload",
+          "result": "fail"
+        },
+        {
+          "name": "Physical phones, sustained soak/memory and human listening/rendered DSP",
+          "result": "not_run"
+        }
+      ],
+      "url": "https://galaxy-royale-itchson.itchson.chatgpt.site/",
+      "knownIssues": "Hosted private Apply/reload failed in IAB and remains undiagnosed. No policy bypass or profile reset. Rendered DSP/human listening, phones/soak, timed pointer play, natural crafting/physical return banking and full earned campaign remain pending. Desktop/native/recorded graphs are explicitly scoped."
     }
   ],
   "feedback": [],
@@ -10582,6 +10986,196 @@
       "author": "Producer",
       "source": "Verified owned local-worker completion/interruption observations",
       "createdAt": "2026-10-11T02:02:49.904Z"
+    },
+    {
+      "id": "3a1589d3-5819-4106-a7a9-c41c0bb1d300",
+      "revision": 441,
+      "kind": "task.update",
+      "itemId": "task-e52fb3b4",
+      "title": "Restrained native pixel HUD and attached ship bars",
+      "author": "Producer",
+      "source": "Exact official source/archive audit and successful owner-private publication; actual hosted reload failure recorded separately",
+      "createdAt": "2026-10-11T02:09:25.975Z"
+    },
+    {
+      "id": "9c4110fc-2677-459c-b68a-84fba8e7a1d5",
+      "revision": 442,
+      "kind": "task.update",
+      "itemId": "task-0702e217",
+      "title": "Adaptive authored space score and ship effects",
+      "author": "Producer",
+      "source": "Exact official source/archive audit and successful owner-private publication; actual hosted reload failure recorded separately",
+      "createdAt": "2026-10-11T02:09:26.031Z"
+    },
+    {
+      "id": "c5101243-23aa-4719-ab60-6445c24b7256",
+      "revision": 443,
+      "kind": "task.update",
+      "itemId": "task-4aed8f22",
+      "title": "Consistent retro pixel visual language",
+      "author": "Producer",
+      "source": "Exact official source/archive audit and successful owner-private publication; actual hosted reload failure recorded separately",
+      "createdAt": "2026-10-11T02:09:26.062Z"
+    },
+    {
+      "id": "090346e5-eb29-4a3d-a8a8-c62a60cd2da4",
+      "revision": 444,
+      "kind": "task.update",
+      "itemId": "task-5d42b89b",
+      "title": "Orbital asteroid belts and sanctuary shield collisions",
+      "author": "Producer",
+      "source": "Exact official source/archive audit and successful owner-private publication; actual hosted reload failure recorded separately",
+      "createdAt": "2026-10-11T02:09:26.095Z"
+    },
+    {
+      "id": "050ccf84-5008-4668-9790-99bc6923c020",
+      "revision": 445,
+      "kind": "task.update",
+      "itemId": "task-0b1b0efa",
+      "title": "Connected articulated Coil bodies",
+      "author": "Producer",
+      "source": "Exact official source/archive audit and successful owner-private publication; actual hosted reload failure recorded separately",
+      "createdAt": "2026-10-11T02:09:26.127Z"
+    },
+    {
+      "id": "9f105238-2052-490c-958c-a57ceb960268",
+      "revision": 446,
+      "kind": "task.update",
+      "itemId": "task-3b9f6350",
+      "title": "Held-left desktop forward thrust",
+      "author": "Producer",
+      "source": "Exact official source/archive audit and successful owner-private publication; actual hosted reload failure recorded separately",
+      "createdAt": "2026-10-11T02:09:26.163Z"
+    },
+    {
+      "id": "327e8f1b-7749-4f65-aada-4fe6849401f1",
+      "revision": 447,
+      "kind": "task.update",
+      "itemId": "task-73510faf",
+      "title": "Discovered universe map and regional resource belts",
+      "author": "Producer",
+      "source": "Exact official source/archive audit and successful owner-private publication; actual hosted reload failure recorded separately",
+      "createdAt": "2026-10-11T02:09:26.203Z"
+    },
+    {
+      "id": "604a76a2-3948-4fda-932d-cbb65ac7cd9e",
+      "revision": 448,
+      "kind": "task.update",
+      "itemId": "task-388e1f9b",
+      "title": "Coherent content-addressed Rust WASM updates",
+      "author": "Producer",
+      "source": "Exact official source/archive audit and successful owner-private publication; actual hosted reload failure recorded separately",
+      "createdAt": "2026-10-11T02:09:26.234Z"
+    },
+    {
+      "id": "77b76bb9-9002-4432-98b4-0680bf2d1cfb",
+      "revision": 449,
+      "kind": "task.update",
+      "itemId": "task-8d55901c",
+      "title": "Ship-owned progression and expedition cargo risk",
+      "author": "Producer",
+      "source": "Exact official source/archive audit and successful owner-private publication; actual hosted reload failure recorded separately",
+      "createdAt": "2026-10-11T02:09:26.313Z"
+    },
+    {
+      "id": "c8dd4bcd-2ba1-4cc9-8fc4-652f4123887e",
+      "revision": 450,
+      "kind": "task.update",
+      "itemId": "task-2138420d",
+      "title": "Crafted compatible three-slot ship loadouts",
+      "author": "Producer",
+      "source": "Exact official source/archive audit and successful owner-private publication; actual hosted reload failure recorded separately",
+      "createdAt": "2026-10-11T02:09:26.360Z"
+    },
+    {
+      "id": "556e370a-971a-47ed-8881-3620e9da02cb",
+      "revision": 451,
+      "kind": "task.update",
+      "itemId": "task-96a89aa2",
+      "title": "Seeded tutorial belt rocks and basic crafting drops",
+      "author": "Producer",
+      "source": "Exact official source/archive audit and successful owner-private publication; actual hosted reload failure recorded separately",
+      "createdAt": "2026-10-11T02:09:26.391Z"
+    },
+    {
+      "id": "45ec2bf1-7ae2-4d5e-a007-c62a1a045c90",
+      "revision": 452,
+      "kind": "task.update",
+      "itemId": "task-40611e41",
+      "title": "Fractional world quads with independent pixel UI raster",
+      "author": "Producer",
+      "source": "Exact official source/archive audit and successful owner-private publication; actual hosted reload failure recorded separately",
+      "createdAt": "2026-10-11T02:09:26.420Z"
+    },
+    {
+      "id": "7d2cf04f-2a61-41c3-9606-84ff9a0598f0",
+      "revision": 453,
+      "kind": "task.update",
+      "itemId": "task-a6a2a3e6",
+      "title": "Seeded gas, fire, trails and parallax constellations",
+      "author": "Producer",
+      "source": "Exact official source/archive audit and successful owner-private publication; actual hosted reload failure recorded separately",
+      "createdAt": "2026-10-11T02:09:26.454Z"
+    },
+    {
+      "id": "c2558df4-24bb-44b7-b43a-07b95547ac81",
+      "revision": 454,
+      "kind": "task.update",
+      "itemId": "task-970f203c",
+      "title": "Live Escape telemetry, pixel action icons and saved Quit",
+      "author": "Producer",
+      "source": "Exact official source/archive audit and successful owner-private publication; actual hosted reload failure recorded separately",
+      "createdAt": "2026-10-11T02:09:26.485Z"
+    },
+    {
+      "id": "ee358f12-6e00-4ad7-9380-c71646d49f8d",
+      "revision": 455,
+      "kind": "build",
+      "itemId": "build-b91a194b",
+      "title": "Private adaptive presentation release / cc8",
+      "author": "Producer",
+      "source": "Exact official source/archive audit and successful owner-private publication; actual hosted reload failure recorded separately",
+      "createdAt": "2026-10-11T02:09:26.508Z"
+    },
+    {
+      "id": "af185f6c-7755-483d-a553-36221c441d51",
+      "revision": 456,
+      "kind": "review",
+      "itemId": "review-91981c29",
+      "title": "Exact source/archive publication gate and actual hosted limit",
+      "author": "Producer",
+      "source": "Exact official source/archive audit and successful owner-private publication; actual hosted reload failure recorded separately",
+      "createdAt": "2026-10-11T02:09:26.533Z"
+    },
+    {
+      "id": "c169973d-eb20-4457-ad08-fb44623deaac",
+      "revision": 457,
+      "kind": "task.create",
+      "itemId": "task-01f28dc1",
+      "title": "Investigate owner-private hosted PWA reload in the in-app browser",
+      "author": "Producer",
+      "source": "Exact official source/archive audit and successful owner-private publication; actual hosted reload failure recorded separately",
+      "createdAt": "2026-10-11T02:09:26.559Z"
+    },
+    {
+      "id": "b2a2741e-3e4f-454f-8382-885f12ef19ba",
+      "revision": 458,
+      "kind": "run",
+      "itemId": "run-c387f8aa",
+      "title": "Engine specialist · completed",
+      "author": "Producer",
+      "source": "Exact official source/archive audit and successful owner-private publication; actual hosted reload failure recorded separately",
+      "createdAt": "2026-10-11T02:09:26.582Z"
+    },
+    {
+      "id": "7b58eb4a-a149-4288-a410-1dc8a045a064",
+      "revision": 459,
+      "kind": "run",
+      "itemId": "run-fe991140",
+      "title": "Producer · completed",
+      "author": "Producer",
+      "source": "Exact official source/archive audit and successful owner-private publication; actual hosted reload failure recorded separately",
+      "createdAt": "2026-10-11T02:09:26.594Z"
     }
   ],
   "runRecords": [
@@ -14607,6 +15201,84 @@
       "author": "Producer",
       "source": "Verified owned local-worker completion/interruption observations",
       "createdAt": "2026-10-11T02:02:49.904Z"
+    },
+    {
+      "id": "run-c387f8aa",
+      "title": "Engine specialist · completed",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Engine specialist",
+      "state": "completed",
+      "observedAt": "2026-10-11T02:09:26.574Z",
+      "taskIds": [
+        "task-e52fb3b4",
+        "task-0702e217",
+        "task-4aed8f22"
+      ],
+      "summary": "Completed independently frozen finalsource/dist review and actual exact committed-source/officialarchive audit with no blocker. Browser/publication limits are separate.",
+      "evidence": [
+        {
+          "label": "142 committed inputs and exact21-file official archive audit",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/committed-archive-REVIEW.md"
+        },
+        {
+          "label": "Actual per-file archive/source correspondence",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/committed-archive-archive-evidence.json"
+        },
+        {
+          "label": "Successful owner-private publication with explicit validation limits",
+          "kind": "note",
+          "path": "artifacts/private-release.json"
+        },
+        {
+          "label": "Actual private startup and unresolved hosted Apply/reload",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/private-browser-observation.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Exact official source/archive audit and successful owner-private publication; actual hosted reload failure recorded separately",
+      "createdAt": "2026-10-11T02:09:26.582Z"
+    },
+    {
+      "id": "run-fe991140",
+      "title": "Producer · completed",
+      "agentId": "/root",
+      "agentLabel": "Producer",
+      "state": "completed",
+      "observedAt": "2026-10-11T02:09:26.592Z",
+      "taskIds": [
+        "task-e52fb3b4",
+        "task-0702e217",
+        "task-4aed8f22"
+      ],
+      "summary": "Implemented/integrated latest pixel presentation and adaptive audio; final desktop checks and owner-private publication complete. Actual hosted Apply failure retained in a specific Ready investigation; physical/natural-play/hearing gates remain open.",
+      "evidence": [
+        {
+          "label": "142 committed inputs and exact21-file official archive audit",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/committed-archive-REVIEW.md"
+        },
+        {
+          "label": "Actual per-file archive/source correspondence",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/committed-archive-archive-evidence.json"
+        },
+        {
+          "label": "Successful owner-private publication with explicit validation limits",
+          "kind": "note",
+          "path": "artifacts/private-release.json"
+        },
+        {
+          "label": "Actual private startup and unresolved hosted Apply/reload",
+          "kind": "note",
+          "path": "artifacts/adaptive-presentation-20261011/private-browser-observation.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Exact official source/archive audit and successful owner-private publication; actual hosted reload failure recorded separately",
+      "createdAt": "2026-10-11T02:09:26.594Z"
     }
   ]
 }
