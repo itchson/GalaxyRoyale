@@ -1408,13 +1408,19 @@ impl Painter<'_> {
         } else {
             rgb(41, 59, 68)
         };
-        // One quiet card outline. The label and interactive strip are both
-        // independently measured and retain their own padding inside it.
-        self.rect(r, rgb(10, 18, 24));
-        self.rect([r[0], r[1], r[2], 0.5], border);
+        // Idle rows stay open. Focus adds restrained hierarchy while the label
+        // and control retain their independently measured semantic geometry.
+        if node.active && !node.disabled {
+            self.rect(r, rgb(10, 18, 24));
+            let height = (r[3] - 4.0).clamp(0.0, 12.0);
+            if r[2] >= 3.0 && height > 0.0 {
+                self.rect(
+                    [r[0] + 2.0, r[1] + (r[3] - height) * 0.5, 0.75, height],
+                    CYAN,
+                );
+            }
+        }
         self.rect([r[0], r[1] + r[3] - 0.5, r[2], 0.5], border);
-        self.rect([r[0], r[1], 0.5, r[3]], border);
-        self.rect([r[0] + r[2] - 0.5, r[1], 0.5, r[3]], border);
         self.settings_label(
             label,
             &node.text,
@@ -2398,3 +2404,7 @@ mod kikai_integration_tests;
 #[cfg(test)]
 #[path = "ui_typography_tests.rs"]
 mod typography_tests;
+
+#[cfg(test)]
+#[path = "ui_settings_skin_tests.rs"]
+mod settings_skin_tests;
