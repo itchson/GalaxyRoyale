@@ -6,7 +6,7 @@ const fn rgb(r: u8, g: u8, b: u8) -> u32 {
     u32::from_le_bytes([r, g, b, 255])
 }
 const BLACK: u32 = rgb(4, 8, 11);
-const DECK: u32 = rgb(8, 29, 18);
+const DECK: u32 = rgb(6, 11, 10);
 const GRAPHITE: u32 = rgb(23, 32, 38);
 const STEEL: u32 = rgb(76, 90, 96);
 const PLATINUM: u32 = rgb(162, 175, 176);
@@ -356,7 +356,7 @@ struct Part {
 
 fn shade(original: u32, corporation: usize, earned: bool, phase: f32) -> u32 {
     if original == DECK {
-        return [rgb(8, 29, 18), rgb(34, 12, 19), rgb(10, 22, 39)][corporation];
+        return [rgb(6, 11, 10), rgb(12, 8, 10), rgb(7, 10, 14)][corporation];
     }
     let accent = [
         [111.0, 201.0, 137.0],
@@ -445,7 +445,11 @@ pub(super) fn append(
         "meishi-panel" | "meishi-portrait-frame" => {
             let panel = input.kind == "meishi-panel";
             let corner = if panel { 36.0_f32 } else { 10.0_f32 }.min(r[2].min(r[3]) * 0.25);
-            let thickness = corner * 0.125;
+            let thickness = corner * if panel { 7.0 / 36.0 } else { 0.125 };
+            // Wider rails overlap the long corner arms. The corner's authored
+            // bevel, crystals and catches render over the joint; no gap or
+            // added decorative submission is needed.
+            let rail_start = if panel { corner * 0.5 } else { corner };
             let cut = corner * if panel { 18.0 / 64.0 } else { 8.0 / 32.0 };
             // Near-black portrait aperture remains neutral; corporate enamel
             // belongs to the chassis. Two fill quads preserve the cut corners.
@@ -471,31 +475,31 @@ pub(super) fn append(
             for (axis, rect, flip) in [
                 (
                     0,
-                    [r[0] + corner, r[1], r[2] - corner * 2.0, thickness],
+                    [r[0] + rail_start, r[1], r[2] - rail_start * 2.0, thickness],
                     [1.0, 1.0],
                 ),
                 (
                     0,
                     [
-                        r[0] + corner,
+                        r[0] + rail_start,
                         r[1] + r[3] - thickness,
-                        r[2] - corner * 2.0,
+                        r[2] - rail_start * 2.0,
                         thickness,
                     ],
                     [1.0, -1.0],
                 ),
                 (
                     1,
-                    [r[0], r[1] + corner, thickness, r[3] - corner * 2.0],
+                    [r[0], r[1] + rail_start, thickness, r[3] - rail_start * 2.0],
                     [1.0, 1.0],
                 ),
                 (
                     1,
                     [
                         r[0] + r[2] - thickness,
-                        r[1] + corner,
+                        r[1] + rail_start,
                         thickness,
-                        r[3] - corner * 2.0,
+                        r[3] - rail_start * 2.0,
                     ],
                     [-1.0, 1.0],
                 ),
