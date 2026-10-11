@@ -953,10 +953,10 @@ impl Galaxy {
     }
     fn current_hud(&self) -> Result<Hud, JsValue> {
         let base = self.game.hud();
-        if let Some(view) = &self.guest_view {
-            if let Some(scene) = view.replica.scene() {
-                return scene.guest_hud(view.peer, view.camera, base).map_err(js);
-            }
+        if let Some(view) = &self.guest_view
+            && let Some(scene) = view.replica.scene()
+        {
+            return scene.guest_hud(view.peer, view.camera, base).map_err(js);
         }
         Ok(base)
     }
