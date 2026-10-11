@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Galaxy Royale — isolated audio DSP review</title>
+    <style>
+      body {
+        max-width: 1100px;
+        margin: 30px auto;
+        padding: 0 20px;
+        background: #11151b;
+        color: #e5eef3;
+        font: 16px system-ui;
+      }
+      button,
+      a {
+        font: inherit;
+      }
+      button {
+        padding: 12px 20px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+      }
+      th,
+      td {
+        text-align: left;
+        border-bottom: 1px solid #394450;
+        padding: 9px;
+      }
+      pre {
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        font: 13px monospace;
+      }
+      a {
+        color: #78daea;
+      }
+      audio {
+        display: block;
+        width: 100%;
+        margin: 8px 0;
+      }
+      p {
+        line-height: 1.5;
+      }
+      .pending {
+        color: #efc981;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Actual browser offline audio review</h1>
+    <p>
+      Dev-only page. Hash-pinned copies of the real AudioEngine render through
+      this browser's native OfflineAudioContext. A page-local adapter exposes
+      its real nodes, current time and sample rate; scheduler callbacks advance
+      only at actual offline suspend points. No game, microphone, network sound,
+      mocked samples or shipped QA API is used.
+    </p>
+    <p class="pending">
+      These declared fixtures measure DSP. They do not establish human
+      listening, natural combat balance, realtime/phone performance or mobile
+      recovery.
+    </p>
+    <button id="run" type="button">Run native DSP review</button>
+    <p id="status" role="status">Ready; no context or audio created yet.</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Fixture</th>
+          <th>Peak</th>
+          <th>RMS</th>
+          <th>Over-unity / invalid</th>
+          <th>Music / effects</th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <div id="downloads"></div>
+    <pre id="report">Results pending.</pre>
+    <script type="module" src="./review.js"></script>
+  </body>
+</html>
