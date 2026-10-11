@@ -1,5 +1,7 @@
 //! Generated artwork and semantic DOM layout rendered as actual engine cells.
 use crate::pixel_ui::RoyaleMono;
+#[path = "meishi_art.rs"]
+mod meishi_art;
 use engine_core::{AffineTransform, FrameBuilder, PixelBody, Transform, Vec2};
 use serde::Deserialize;
 use std::{collections::HashMap, sync::LazyLock};
@@ -1194,58 +1196,23 @@ impl Painter<'_> {
         self.remaining -= count;
         self.work_remaining -= count;
     }
-    fn meishi_panel(&mut self, node: &UiNode) {
-        // One quiet card surface in its existing relative group. Preflight the
-        // complete fixed geometry; a short shared quota never leaves half a card.
-        const QUADS: usize = 14;
-        if self.remaining < QUADS || self.work_remaining < QUADS {
-            return;
-        }
-        self.work_remaining -= QUADS;
-        let r = node.rect;
-        let corner = 2.0_f32.min(r[2].min(r[3]) * 0.25);
-        let rail = corner * 0.5;
-        let fill = rgb(4, 7, 10);
-        let border = rgb(35, 46, 55);
-        let accent = match selection(node.value, 3) {
-            1 => rgb(195, 113, 107),
-            2 => rgb(89, 148, 191),
-            _ => rgb(109, 170, 113),
-        };
-        let previous_clip = self.clip;
-        self.clip = Some(previous_clip.map_or(r, |clip| intersection(r, clip)));
-        for rect in [
-            [r[0], r[1] + corner, r[2], r[3] - corner * 2.0],
-            [r[0] + corner, r[1], r[2] - corner * 2.0, corner],
-            [
-                r[0] + corner,
-                r[1] + r[3] - corner,
-                r[2] - corner * 2.0,
-                corner,
-            ],
-            [r[0] + rail, r[1] + rail, r[2] - corner, rail],
-            [r[0] + rail, r[1] + r[3] - corner, r[2] - corner, rail],
-        ] {
-            self.rect(rect, fill);
-        }
-        for rect in [
-            [r[0] + corner, r[1], r[2] - corner * 2.0, rail],
-            [r[0] + corner, r[1] + r[3] - rail, r[2] - corner * 2.0, rail],
-            [r[0], r[1] + corner, rail, r[3] - corner * 2.0],
-            [r[0] + r[2] - rail, r[1] + corner, rail, r[3] - corner * 2.0],
-        ] {
-            self.rect(rect, border);
-        }
-        for x in [r[0] + rail, r[0] + r[2] - corner] {
-            for y in [r[1] + rail, r[1] + r[3] - corner] {
-                self.rect([x, y, rail, rail], border);
-            }
-        }
-        self.rect(
-            [r[0] + corner, r[1], (r[2] - corner * 2.0).min(18.0), rail],
-            accent,
+    fn meishi_fittings(&mut self, node: &UiNode, time: f32, reduced: bool) {
+        meishi_art::append(
+            self.frame,
+            meishi_art::Input {
+                kind: &node.kind,
+                rect: node.rect,
+                parent: self.parent,
+                clip: self.clip,
+                value: node.value,
+                // Only the saved earned state illuminates an anonymous socket.
+                earned: node.kind != "meishi-socket" || node.selected,
+                time,
+                reduced,
+            },
+            &mut self.remaining,
+            &mut self.work_remaining,
         );
-        self.clip = previous_clip;
     }
     fn console_panel(&mut self, r: [f32; 4]) {
         self.rect(r, 0xff_000000);
@@ -1679,7 +1646,9 @@ impl Painter<'_> {
                 false,
             ),
             "panel" => self.frame("panel", r, node.active, node.disabled),
-            "meishi-panel" => self.meishi_panel(node),
+            "meishi-panel" | "meishi-portrait-frame" | "meishi-seal" | "meishi-socket" => {
+                self.meishi_fittings(node, time, reduced);
+            }
             "console-panel" => self.console_panel(r),
             "portrait" => self.portrait(node, time, reduced),
             "licensed-ship" => self.licensed_ship(node),
@@ -2051,7 +2020,7 @@ mod tests {
     }
 
     #[test]
-    fn campaign_quads_fit_integer_scale_and_keep_unlit_material() {
+    fn campaign_quads_fit_authored_rects_and_keep_unlit_material() {
         for kind in ["campaign-ship", "campaign-patch", "portrait"] {
             for value in 0..8 {
                 let mut scene = scene(kind);
@@ -2065,7 +2034,11 @@ mod tests {
                 assert_eq!(batch.transforms.len(), 1);
                 let t = batch.transforms[0];
                 assert_eq!(t.b[2..], [0.0, 0.0]);
-                assert_eq!(t.a[2].fract(), 0.0);
+                if kind == "campaign-patch" {
+                    assert_eq!(t.a[2], 2.5);
+                } else {
+                    assert_eq!(t.a[2].fract(), 0.0);
+                }
                 assert_eq!(t.a[2], t.b[1]);
                 for pixel in &batch.pixels {
                     let p = t.point(Vec2::from_array(pixel.local)) + Vec2::new(320.0, 180.0)
@@ -2076,31 +2049,29 @@ mod tests {
         }
     }
     #[test]
-    fn meishi_panel_has_distinct_trim_and_whole_clipped_relative_geometry() {
+    fn meishi_fittings_keep_metal_neutral_corporate_enamel_and_whole_clipped_cells() {
         let camera = Vec2::new(75.5, -39.25);
         let group = Vec2::new(100.25, 50.5);
         let viewport = Vec2::new(640.0, 360.0);
-        for (value, trim) in [
-            (0.0, rgb(109, 170, 113)),
-            (1.0, rgb(195, 113, 107)),
-            (2.0, rgb(89, 148, 191)),
-            (f32::NAN, rgb(109, 170, 113)),
+        for kind in [
+            "meishi-panel",
+            "meishi-portrait-frame",
+            "meishi-seal",
+            "meishi-socket",
         ] {
-            for rect in [[5.125, 9.375, 240.5, 137.25], [5.125, 9.375, 3.5, 2.75]] {
-                for clip in [
-                    None,
-                    Some([
-                        rect[0] + 0.125,
-                        rect[1] + 0.125,
-                        rect[2] * 0.6,
-                        rect[3] * 0.6,
-                    ]),
-                ] {
-                    let mut input = scene("meishi-panel");
+            let mut palettes = Vec::new();
+            for corporation in 0..3 {
+                for clip in [None, Some([5.25, 9.5, 22.0, 27.0])] {
+                    let mut input = scene(kind);
                     input.groups[0].position = group.to_array();
                     let node = &mut input.groups[0].nodes[0];
-                    node.rect = rect;
-                    node.value = value;
+                    node.rect = [5.125, 9.375, 40.5, 40.5];
+                    node.value = if kind == "meishi-socket" {
+                        corporation * 8 + 3
+                    } else {
+                        corporation
+                    } as f32;
+                    node.selected = true;
                     node.clip = clip;
                     let mut frame = FrameBuilder::new();
                     draw(
@@ -2109,17 +2080,19 @@ mod tests {
                         camera.to_array(),
                         viewport.to_array(),
                         19.0,
-                        false,
+                        true,
                     );
-                    assert!(frame.frame().pixel_count > 0);
-                    assert!(frame.frame().pixel_count <= 14);
-                    let allowed = clip.map_or(rect, |clip| intersection(rect, clip));
+                    assert!(frame.frame().pixel_count > 100);
+                    let allowed = clip.unwrap_or([5.125, 9.375, 40.5, 40.5]);
+                    let mut colors = std::collections::HashSet::new();
                     for batch in &frame.frame().batches {
                         for cell in &batch.pixels {
                             let transform = batch.transforms[cell.transform as usize];
                             assert_eq!(transform.b[2..], [0.0, 0.0]);
-                            assert_eq!(cell.color >> 24, 255);
-                            assert!([rgb(4, 7, 10), rgb(35, 46, 55), trim].contains(&cell.color));
+                            if cell.color >> 24 == 0 {
+                                continue;
+                            }
+                            colors.insert(cell.color);
                             for corner in [
                                 Vec2::splat(-0.5),
                                 Vec2::new(0.5, -0.5),
@@ -2143,66 +2116,218 @@ mod tests {
                         }
                     }
                     if clip.is_none() {
-                        let batch = &frame.frame().batches[0];
-                        assert_eq!(frame.frame().pixel_count, 14);
-                        assert_eq!(
-                            batch
-                                .pixels
-                                .iter()
-                                .filter(|cell| cell.color == trim)
-                                .count(),
-                            1
-                        );
-                        // The external corner stays open; this is a stepped card,
-                        // rather than another rectangular menu frame.
-                        let corner = Vec2::new(rect[0], rect[1]) + Vec2::splat(0.01);
-                        assert!(!batch.pixels.iter().any(|cell| {
-                            let t = batch.transforms[cell.transform as usize];
-                            let min = t.point(Vec2::from_array(cell.local) - Vec2::splat(0.5))
-                                - camera
-                                + viewport * 0.5
-                                - group;
-                            let max = t.point(Vec2::from_array(cell.local) + Vec2::splat(0.5))
-                                - camera
-                                + viewport * 0.5
-                                - group;
-                            corner.x >= min.x
-                                && corner.x <= max.x
-                                && corner.y >= min.y
-                                && corner.y <= max.y
-                        }));
+                        palettes.push(colors);
                     }
+                }
+            }
+            assert_ne!(palettes[0], palettes[1]);
+            assert_ne!(palettes[1], palettes[2]);
+            if kind != "meishi-seal" {
+                for colors in palettes {
+                    assert!(colors.contains(&rgb(162, 175, 176)));
                 }
             }
         }
     }
 
     #[test]
-    fn meishi_panel_preflights_both_shared_quotas_without_partial_emission() {
-        for (pixels, work, expected) in [(13, 100, 0), (100, 13, 0), (14, 14, 14)] {
+    fn meishi_fittings_preflight_each_shared_quota_and_freeze_reduced_color() {
+        for kind in [
+            "meishi-panel",
+            "meishi-portrait-frame",
+            "meishi-seal",
+            "meishi-socket",
+        ] {
+            let input = scene(kind);
+            let mut complete = FrameBuilder::new();
+            draw(&mut complete, &input, [0.0; 2], [640.0, 360.0], 0.0, true);
+            let count = complete.frame().pixel_count;
+            for (pixels, work, expected) in [
+                (count - 1, 120000, 0),
+                (60000, count - 1, 0),
+                (count, count, count),
+            ] {
+                let mut frame = FrameBuilder::new();
+                frame.push_body(&CELL, Transform::default());
+                let previous = frame.frame().clone();
+                let mut painter = Painter {
+                    frame: &mut frame,
+                    parent: AffineTransform::default(),
+                    remaining: pixels,
+                    viewport: Vec2::new(640.0, 360.0),
+                    clip: None,
+                    work_remaining: work,
+                };
+                painter.node(&input.groups[0].nodes[0], 0.0, true);
+                assert_eq!(painter.frame.frame().pixel_count, 1 + expected);
+                assert_eq!(painter.remaining, pixels - expected);
+                assert_eq!(painter.work_remaining, work - expected);
+                if expected == 0 {
+                    assert_eq!(
+                        painter.frame.frame().batches[0].pixels,
+                        previous.batches[0].pixels
+                    );
+                    assert_eq!(
+                        painter.frame.frame().batches[0].transforms,
+                        previous.batches[0].transforms
+                    );
+                }
+            }
+            let mut later = FrameBuilder::new();
+            draw(&mut later, &input, [0.0; 2], [640.0, 360.0], 3.7, true);
+            assert_eq!(complete.frame().batches.len(), later.frame().batches.len());
+            for (a, b) in complete.frame().batches.iter().zip(&later.frame().batches) {
+                assert_eq!(a.pixels, b.pixels);
+                assert_eq!(a.transforms, b.transforms);
+            }
+        }
+    }
+
+    #[test]
+    fn meishi_collectible_all_earned_card_admits_every_component_for_nine_profiles() {
+        let node = |kind: &str, value, rect| UiNode {
+            kind: kind.into(),
+            value,
+            rect,
+            ..Default::default()
+        };
+        let packet = |frame: &engine_core::RenderFrame| {
+            frame
+                .batches
+                .iter()
+                .flat_map(|batch| {
+                    batch.pixels.iter().map(|pixel| {
+                        let t = batch.transforms[pixel.transform as usize];
+                        (pixel.local, pixel.color, t.a, t.b)
+                    })
+                })
+                .collect::<Vec<_>>()
+        };
+        let render = |nodes| {
             let mut frame = FrameBuilder::new();
-            frame.push_body(&CELL, Transform::default());
-            let previous = frame.frame().clone();
-            let mut painter = Painter {
-                frame: &mut frame,
-                parent: AffineTransform::default(),
-                remaining: pixels,
-                viewport: Vec2::new(640.0, 360.0),
-                clip: None,
-                work_remaining: work,
-            };
-            painter.node(&scene("meishi-panel").groups[0].nodes[0], 0.0, true);
-            assert_eq!(painter.frame.frame().pixel_count, 1 + expected);
-            assert_eq!(painter.remaining, pixels - expected);
-            assert_eq!(painter.work_remaining, work - expected);
-            if expected == 0 {
+            draw(
+                &mut frame,
+                &UiScene {
+                    groups: vec![UiGroup {
+                        position: [20.25, 10.5],
+                        nodes,
+                    }],
+                },
+                [0.0; 2],
+                [640.0, 360.0],
+                0.0,
+                true,
+            );
+            frame.finish()
+        };
+        for kind in 0..3 {
+            for corp in 0..3 {
+                let mut nodes = vec![
+                    node("meishi-panel", corp as f32, [5.0, 5.0, 240.0, 324.0]),
+                    node(
+                        "meishi-portrait-frame",
+                        corp as f32,
+                        [14.0, 30.0, 80.0, 104.0],
+                    ),
+                    UiNode {
+                        portrait_kind: Some(kind),
+                        portrait_main: Some(corp),
+                        portrait_sub: Some((corp + 1) % 3),
+                        ..node("portrait", 9.0, [18.0, 34.0, 72.0, 96.0])
+                    },
+                    node("meishi-seal", corp as f32, [102.0, 34.0, 24.0, 24.0]),
+                    node("licensed-ship", corp as f32, [102.0, 82.0, 32.0, 32.0]),
+                    node("close-icon", 0.0, [215.0, 12.0, 22.0, 22.0]),
+                ];
+                for (index, text) in [
+                    "MEISHI CARD",
+                    "APR#0123456789ABCDEF",
+                    "DORA-PAN-RENKO",
+                    "FACTORY RAICHO LV 1",
+                    "RENKO 13 HUGO 29 PAN 47",
+                    "EIGHT ARENA PATCHES",
+                ]
+                .into_iter()
+                .enumerate()
+                {
+                    nodes.push(UiNode {
+                        text: text.into(),
+                        font: 0.75,
+                        ..node("text", 0.0, [14.0, 144.0 + index as f32 * 11.0, 220.0, 9.0])
+                    });
+                }
+                for slot in 0..8 {
+                    let x = 18.125 + (slot % 4) as f32 * 54.0;
+                    let y = 219.375 + (slot / 4) as f32 * 49.0;
+                    nodes.push(UiNode {
+                        selected: true,
+                        ..node(
+                            "meishi-socket",
+                            (corp as usize * 8 + slot) as f32,
+                            [x, y, 32.0, 32.0],
+                        )
+                    });
+                    // The previous DOM border/75% fit really measured22.5, while
+                    // the corrected well measures24. Both retain the source cells.
+                    let size = if slot % 2 == 0 { 22.5 } else { 24.0 };
+                    let inset = (32.0 - size) * 0.5;
+                    nodes.push(UiNode {
+                        active: true,
+                        ..node(
+                            "campaign-patch",
+                            slot as f32,
+                            [x + inset, y + inset, size, size],
+                        )
+                    });
+                }
+                let mut joined = Vec::new();
+                let mut expected = Vec::new();
+                let mut isolated_counts = Vec::new();
+                for node in nodes {
+                    let mut scene = UiScene {
+                        groups: vec![UiGroup {
+                            position: [20.25, 10.5],
+                            nodes: vec![node],
+                        }],
+                    };
+                    let mut frame = FrameBuilder::new();
+                    draw(&mut frame, &scene, [0.0; 2], [640.0, 360.0], 0.0, true);
+                    assert!(frame.frame().pixel_count > 0);
+                    assert!(
+                        frame
+                            .frame()
+                            .batches
+                            .iter()
+                            .flat_map(|b| &b.pixels)
+                            .all(|p| p.color >> 24 != 0),
+                        "full-fit component lost a visible cell"
+                    );
+                    isolated_counts.push(frame.frame().pixel_count);
+                    expected.extend(packet(frame.frame()));
+                    joined.push(scene.groups[0].nodes.remove(0));
+                }
+                assert_eq!(isolated_counts[2], [34594, 28524, 24262][kind as usize]);
+                assert_eq!(isolated_counts[4], [662, 688, 1040][corp as usize]);
+                assert_eq!(isolated_counts[0], 1027);
+                assert_eq!(isolated_counts[1], 631);
+                for (slot, count) in [165, 321, 275, 219, 225, 323, 326, 202]
+                    .into_iter()
+                    .enumerate()
+                {
+                    assert_eq!(isolated_counts[12 + slot * 2], 385);
+                    assert_eq!(isolated_counts[13 + slot * 2], count);
+                }
+                let complete = render(joined);
+                assert!(complete.pixel_count < MAX_UI_PIXELS);
+                assert_eq!(complete.pixel_count, expected.len());
                 assert_eq!(
-                    painter.frame.frame().batches[0].pixels,
-                    previous.batches[0].pixels
+                    packet(&complete),
+                    expected,
+                    "late component suppressed or altered"
                 );
-                assert_eq!(
-                    painter.frame.frame().batches[0].transforms,
-                    previous.batches[0].transforms
+                println!(
+                    "MEISHI collectible type{kind}/corp{corp}: {} /60000 complete cells",
+                    complete.pixel_count
                 );
             }
         }
