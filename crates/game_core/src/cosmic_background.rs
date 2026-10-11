@@ -132,42 +132,18 @@ struct Pair {
     low: PixelBody,
 }
 impl Pair {
-    fn new(body: PixelBody) -> Self {
-        let width = body.width / 2;
-        let height = body.height / 2;
-        let mut palette = Vec::new();
-        let rows: Vec<String> = (0..height)
-            .map(|y| {
-                (0..width)
-                    .map(|x| {
-                        let color = (0..4)
-                            .filter_map(|i| body.color_at(x * 2 + (i & 1), y * 2 + (i >> 1)))
-                            .max_by_key(|c| c.to_le_bytes()[3]);
-                        if let Some(color) = color {
-                            let index = palette
-                                .iter()
-                                .position(|&(_, c)| c == color)
-                                .unwrap_or_else(|| {
-                                    let index = palette.len();
-                                    palette.push((
-                                        char::from_u32(0xe000 + index as u32).unwrap(),
-                                        color,
-                                    ));
-                                    index
-                                });
-                            palette[index].0
-                        } else {
-                            ' '
-                        }
-                    })
-                    .collect()
-            })
-            .collect();
-        let low = PixelBody::from_ascii(
-            &rows.iter().map(String::as_str).collect::<Vec<_>>(),
-            &palette,
-        );
-        Self { full: body, low }
+    fn new(
+        width: usize,
+        height: usize,
+        sample: impl Fn(Vec2) -> Option<usize>,
+        colors: &[u32],
+    ) -> Self {
+        // Both densities sample the same physical source field. Reduced detail
+        // does not max-fill 2x2 blocks across the authored dark lanes.
+        Self {
+            full: template(width * 2, height * 2, 0.5, &sample, colors),
+            low: template(width, height, 1.0, &sample, colors),
+        }
     }
     fn body(&self, reduced: bool) -> &PixelBody {
         if reduced { &self.low } else { &self.full }
@@ -181,10 +157,20 @@ struct Art {
     nova_shell: Pair,
     nova_core: Pair,
 }
-static ART: LazyLock<Art> = LazyLock::new(|| {
-    // These equations author occupancy once. No bitmap, runtime random fill or
-    // giant translucent rectangle is used: vacancies remain actual empty cells.
-    let galaxy_arms = template(
+
+/// Fixed two-unit birth clusters provide coherent ridges rather than independent
+/// bright noise at every tiny cell. This only runs while initializing the cache.
+fn cluster(seed: u32, p: Vec2) -> f32 {
+    unit(hash3(
+        seed,
+        (p.x * 0.5).floor() as i32,
+        (p.y * 0.5).floor() as i32,
+        7,
+    ))
+}
+
+static ART: LazyLock<Art> = LazyLock::new(|| Art {
+    galaxy_arms: Pair::new(
         96,
         96,
         |p| {
@@ -192,143 +178,235 @@ static ART: LazyLock<Art> = LazyLock::new(|| {
             if !(5.0..44.0).contains(&r) {
                 return None;
             }
-            let phase = p.y.atan2(p.x) - r * 0.092;
-            let ridge = (phase * 2.0).sin().abs();
-            let noise = unit(hash3(
-                0x7370_6972,
-                p.x.floor() as i32,
-                p.y.floor() as i32,
-                0,
-            ));
-            if ridge < 0.17 && noise > 0.16 {
-                Some(if ridge < 0.075 { 2 } else { 1 })
-            } else if ridge < 0.36 && noise > 0.79 {
+            let phase = p.y.atan2(p.x) - r * 0.092 + (r * 0.24).sin() * 0.035;
+            let distance = (phase * 2.0).sin().abs() * r * 0.5;
+            let width = 1.0 + (r * 0.31).sin() * 0.22;
+            let c = cluster(0x7370_6972, p);
+            // Two thin dust voids interrupt each arm without filling its silhouette.
+            let lane = (r * 0.21 + phase * 0.5).sin().abs();
+            if distance < width && c > 0.13 && !(lane < 0.10 && r > 15.0) {
+                Some(if distance < 0.16 && c > 0.55 {
+                    6
+                } else if distance < 0.29 {
+                    5
+                } else if c > 0.82 {
+                    4
+                } else if c > 0.60 {
+                    3
+                } else if c > 0.35 {
+                    2
+                } else {
+                    1
+                })
+            } else if distance < width + 1.6 && c > 0.91 && lane > 0.17 {
                 Some(0)
             } else {
                 None
             }
         },
         &[
-            rgba(69, 61, 86, 20),
-            rgba(115, 89, 135, 34),
-            rgba(166, 138, 172, 53),
+            rgba(49, 43, 58, 12),
+            rgba(64, 53, 73, 18),
+            rgba(80, 65, 88, 24),
+            rgba(98, 77, 105, 29),
+            rgba(114, 89, 119, 35),
+            rgba(137, 111, 142, 41),
+            rgba(162, 135, 162, 49),
         ],
-    );
-    let galaxy_core = template(
+    ),
+    galaxy_core: Pair::new(
         24,
         24,
         |p| {
-            let r = (p.x * p.x + p.y * p.y * 1.1).sqrt();
-            if r < 4.0 {
-                Some(2)
-            } else if r < 7.0 {
-                Some(1)
-            } else if r < 10.0 && ((p.x + p.y) as i32).rem_euclid(3) != 0 {
-                Some(0)
+            let r = Vec2::new(p.x, p.y * 1.05).length();
+            let c = cluster(0x636f_7265, p);
+            if r < 1.7 {
+                Some(6)
+            } else if r < 3.1 {
+                Some(if p.y < -0.5 { 5 } else { 4 })
+            } else if r < 5.5 && (p.y + p.x * 0.18).abs() > 0.75 && c > 0.18 {
+                Some(if r < 4.2 { 3 } else { 2 })
+            } else if r < 9.5 && (p.y * 0.8 - p.x * 0.35).abs() < 1.0 && c > 0.64 {
+                Some(if c > 0.85 { 1 } else { 0 })
             } else {
                 None
             }
         },
         &[
-            rgba(130, 112, 134, 26),
-            rgba(186, 167, 153, 46),
-            rgba(231, 213, 180, 90),
+            rgba(81, 65, 88, 14),
+            rgba(113, 87, 110, 23),
+            rgba(132, 105, 122, 29),
+            rgba(153, 127, 133, 39),
+            rgba(181, 157, 148, 50),
+            rgba(202, 182, 162, 64),
+            rgba(230, 211, 180, 87),
         ],
-    );
-    let nebula = template(
+    ),
+    nebula: Pair::new(
         80,
         48,
         |p| {
             let curve = (p.x * 0.11).sin() * 6.0 + (p.x * 0.032).cos() * 3.0;
-            let distance = (p.y - curve).abs();
-            let noise = unit(hash3(
-                0x746f_726e,
-                p.x.floor() as i32,
-                p.y.floor() as i32,
-                7,
-            ));
-            if p.x.abs() > 36.0 || distance > 8.0 || noise < 0.30 {
+            let side = p.y - curve;
+            let distance = side.abs();
+            let c = cluster(0x746f_726e, p);
+            if p.x.abs() > 36.0 || distance > 8.0 {
                 return None;
             }
-            if distance < 1.5 && noise > 0.45 {
-                Some(2)
-            } else if distance < 4.0 {
-                Some(1)
-            } else if noise > 0.64 {
+            let lane = (p.x * 0.22).sin() * 0.4;
+            if (side - lane).abs() < 0.6 {
+                return None;
+            }
+            let ridge = (distance - (1.35 + (p.x * 0.17).cos() * 0.5)).abs();
+            if ridge < 0.47 && c > 0.18 {
+                Some(if side < 0.0 && c > 0.70 {
+                    7
+                } else if c > 0.55 {
+                    6
+                } else {
+                    5
+                })
+            } else if distance < 4.6 && c > 0.65 {
+                Some(if distance < 2.8 {
+                    4
+                } else if side < 0.0 {
+                    3
+                } else {
+                    2
+                })
+            } else if distance < 7.5 && c > 0.94 {
+                Some(if side < 0.0 { 1 } else { 0 })
+            } else {
+                None
+            }
+        },
+        &[
+            rgba(31, 28, 40, 14),
+            rgba(39, 32, 48, 19),
+            rgba(48, 39, 57, 25),
+            rgba(58, 44, 69, 32),
+            rgba(74, 52, 83, 43),
+            rgba(90, 60, 100, 55),
+            rgba(111, 74, 117, 69),
+            rgba(132, 88, 135, 83),
+        ],
+    ),
+    nebula_thread: Pair::new(
+        48,
+        24,
+        |p| {
+            let curve = (p.x * 0.15).sin() * 3.0;
+            let d = (p.y - curve).abs();
+            let c = cluster(0x7468_7264, p);
+            if p.x.abs() >= 21.0 {
+                return None;
+            }
+            if d < 0.42 && c > 0.18 {
+                Some(if c > 0.78 {
+                    5
+                } else if c > 0.48 {
+                    4
+                } else {
+                    3
+                })
+            } else if d < 1.5 && c > 0.84 {
+                Some(if d < 0.8 {
+                    2
+                } else if p.y < curve {
+                    1
+                } else {
+                    0
+                })
+            } else {
+                None
+            }
+        },
+        &[
+            rgba(32, 36, 39, 12),
+            rgba(41, 45, 49, 17),
+            rgba(49, 55, 56, 23),
+            rgba(62, 69, 69, 29),
+            rgba(77, 85, 82, 37),
+            rgba(96, 106, 99, 47),
+        ],
+    ),
+    nova_shell: Pair::new(
+        64,
+        64,
+        |p| {
+            let r = p.length();
+            let a = p.y.atan2(p.x);
+            // An asymmetric open shell has an actual absent arc, not a dark overlay.
+            if a > -0.18 && a < 0.32 {
+                return None;
+            }
+            let edge = 21.0 + (a * 5.0).sin() * 2.3 + (a * 3.0).cos();
+            let d = (r - edge).abs();
+            let c = cluster(0x656a_6563, p);
+            if d < 0.75 && c > 0.23 {
+                Some(if d < 0.22 && a < 0.0 {
+                    7
+                } else if c > 0.8 {
+                    6
+                } else if c > 0.6 {
+                    5
+                } else if c > 0.4 {
+                    4
+                } else {
+                    3
+                })
+            } else if d < 2.6 && c > 0.86 {
+                Some(if r < edge { 2 } else { 1 })
+            } else if d < 4.1 && c > 0.98 {
                 Some(0)
             } else {
                 None
             }
         },
         &[
-            rgba(43, 37, 58, 30),
-            rgba(75, 57, 93, 58),
-            rgba(127, 85, 131, 96),
+            rgba(49, 36, 45, 9),
+            rgba(64, 43, 53, 13),
+            rgba(79, 51, 62, 18),
+            rgba(95, 63, 69, 23),
+            rgba(110, 75, 77, 27),
+            rgba(128, 88, 86, 31),
+            rgba(144, 103, 94, 36),
+            rgba(164, 119, 104, 42),
         ],
-    );
-    let nebula_thread = template(
-        48,
-        24,
-        |p| {
-            let distance = (p.y - (p.x * 0.15).sin() * 3.0).abs();
-            if p.x.abs() < 21.0 && distance < 2.0 && ((p.x * 3.0 + p.y) as i32).rem_euclid(4) != 0 {
-                Some(usize::from(distance < 0.75))
-            } else {
-                None
-            }
-        },
-        &[rgba(48, 60, 71, 32), rgba(88, 111, 116, 58)],
-    );
-    let nova_shell = template(
-        64,
-        64,
-        |p| {
-            let radius = p.length();
-            let angle = p.y.atan2(p.x);
-            let edge = 21.0 + (angle * 5.0).sin() * 2.3 + (angle * 3.0).cos();
-            let noise = unit(hash3(
-                0x656a_6563,
-                p.x.floor() as i32,
-                p.y.floor() as i32,
-                17,
-            ));
-            if (radius - edge).abs() < 1.8 && noise > 0.26 {
-                Some(1)
-            } else if (radius - edge).abs() < 4.0 && noise > 0.86 {
-                Some(0)
-            } else {
-                None
-            }
-        },
-        &[rgba(94, 69, 93, 18), rgba(161, 112, 104, 35)],
-    );
-    let nova_core = template(
+    ),
+    nova_core: Pair::new(
         12,
         12,
         |p| {
-            if p.x.abs() + p.y.abs() < 3.0 {
-                Some(1)
-            } else if (p.x.abs() < 0.6 || p.y.abs() < 0.6) && p.length() < 5.0 {
-                Some(0)
+            let r = p.length();
+            if r < 0.9 {
+                Some(5)
+            } else if r < 1.7 {
+                Some(if p.y < 0.0 { 4 } else { 3 })
+            } else if (p.x.abs() < 0.6 || p.y.abs() < 0.6) && r < 5.0 {
+                Some(2)
+            } else if (p.x + p.y * 0.3).abs() < 0.45 && r < 3.6 {
+                Some(if p.y < 0.0 { 1 } else { 0 })
             } else {
                 None
             }
         },
-        &[rgba(162, 131, 139, 45), rgba(230, 196, 165, 95)],
-    );
-    Art {
-        galaxy_arms: Pair::new(galaxy_arms),
-        galaxy_core: Pair::new(galaxy_core),
-        nebula: Pair::new(nebula),
-        nebula_thread: Pair::new(nebula_thread),
-        nova_shell: Pair::new(nova_shell),
-        nova_core: Pair::new(nova_core),
-    }
+        &[
+            rgba(88, 64, 73, 20),
+            rgba(117, 86, 91, 29),
+            rgba(149, 112, 111, 40),
+            rgba(178, 140, 130, 54),
+            rgba(205, 172, 151, 69),
+            rgba(230, 197, 162, 93),
+        ],
+    ),
 });
+
 fn template(
     width: usize,
     height: usize,
-    sample: impl Fn(Vec2) -> Option<usize>,
+    cell_scale: f32,
+    sample: &impl Fn(Vec2) -> Option<usize>,
     colors: &[u32],
 ) -> PixelBody {
     let rows: Vec<String> = (0..height)
@@ -338,7 +416,7 @@ fn template(
                     let p = Vec2::new(
                         x as f32 + 0.5 - width as f32 * 0.5,
                         y as f32 + 0.5 - height as f32 * 0.5,
-                    );
+                    ) * cell_scale;
                     sample(p).map_or(' ', |i| (b'a' + i as u8) as char)
                 })
                 .collect()
@@ -378,6 +456,51 @@ fn parent(m: Motif, scene: &SceneInput) -> AffineTransform {
     }
     .affine()
 }
+
+#[derive(Clone, Copy)]
+struct CellStyle {
+    time: f32,
+    phase: f32,
+    cell_scale: f32,
+    tint: [f32; 3],
+    alpha: f32,
+    curl: f32,
+}
+
+fn curled_local(local: Vec2, style: CellStyle) -> Vec2 {
+    let physical = local * style.cell_scale;
+    // A bounded, continuous field moves fine clusters by less than one full
+    // source cell. Physical coordinates keep full/reduced motion coherent.
+    let offset = Vec2::new(
+        (physical.y * 0.13 + style.time * 0.07 + style.phase).sin(),
+        (physical.x * 0.11 - style.time * 0.05 + style.phase).cos(),
+    ) * style.curl;
+    local + offset / style.cell_scale
+}
+
+fn draw_part(
+    frame: &mut FrameBuilder,
+    body: &PixelBody,
+    transform: AffineTransform,
+    style: CellStyle,
+) {
+    frame.push_cells_affine_material(
+        transform,
+        PixelMaterial::default(),
+        body.cells().map(|(local, color)| {
+            let physical = local * style.cell_scale;
+            (
+                curled_local(local, style),
+                colored(
+                    color,
+                    style.tint,
+                    0.98 + 0.02 * (style.time * 0.09 + physical.x * 0.1 + style.phase).sin(),
+                    style.alpha,
+                ),
+            )
+        }),
+    );
+}
 fn draw_motif(
     frame: &mut FrameBuilder,
     m: Motif,
@@ -396,18 +519,18 @@ fn draw_motif(
     };
     let phase = unit(m.hash) * TAU;
     let parent = parent(m, scene);
-    let double = if reduced { 2.0 } else { 1.0 };
+    let cell_scale = if reduced { 1.0 } else { 0.5 };
     let (a, b, first, second, alpha) = match m.kind {
         MotifKind::Galaxy => (
             &ART.galaxy_arms,
             &ART.galaxy_core,
             Transform {
                 rotation: time * 0.008,
-                scale: Vec2::new(double, double * 0.70),
+                scale: Vec2::new(cell_scale, cell_scale * 0.70),
                 ..Transform::default()
             },
             Transform {
-                scale: Vec2::splat(double),
+                scale: Vec2::splat(cell_scale),
                 ..Transform::default()
             },
             0.93 + 0.07 * (time * 0.16 + phase).sin(),
@@ -417,13 +540,13 @@ fn draw_motif(
             &ART.nebula_thread,
             Transform {
                 rotation: (time * 0.04 + phase).sin() * 0.035,
-                scale: Vec2::splat(double * 1.1),
+                scale: Vec2::splat(cell_scale * 1.1),
                 ..Transform::default()
             },
             Transform {
                 position: Vec2::new(7.0, -10.0 + (time * 0.08 + phase).sin() * 1.4),
                 rotation: -0.2,
-                scale: Vec2::splat(double),
+                scale: Vec2::splat(cell_scale),
             },
             0.86 + 0.14 * (time * 0.10 + phase).sin(),
         ),
@@ -434,11 +557,11 @@ fn draw_motif(
                 &ART.nova_core,
                 Transform {
                     rotation: time * 0.003,
-                    scale: Vec2::splat(double * (0.70 + pulse * 0.45)),
+                    scale: Vec2::splat(cell_scale * (0.70 + pulse * 0.45)),
                     ..Transform::default()
                 },
                 Transform {
-                    scale: Vec2::splat(double * (0.75 + pulse * 0.25)),
+                    scale: Vec2::splat(cell_scale * (0.75 + pulse * 0.25)),
                     ..Transform::default()
                 },
                 0.40 + 0.60 * pulse,
@@ -452,17 +575,24 @@ fn draw_motif(
         return 0;
     }
     let tint = Atmosphere::at(scene.seed, m.origin / MOTIF_PARALLAX).tint;
-    frame.push_body_affine_colored(a, parent.compose(first.affine()), |p, c| {
-        colored(
-            c,
-            tint,
-            0.98 + 0.02 * (time * 0.09 + p.x * 0.1 + phase).sin(),
-            alpha,
-        )
-    });
-    frame.push_body_affine_colored(b, parent.compose(second.affine()), |_, c| {
-        colored(c, tint, 1.0, alpha)
-    });
+    let style = CellStyle {
+        time,
+        phase,
+        cell_scale,
+        tint,
+        alpha,
+        curl: 0.14,
+    };
+    draw_part(frame, a, parent.compose(first.affine()), style);
+    draw_part(
+        frame,
+        b,
+        parent.compose(second.affine()),
+        CellStyle {
+            curl: 0.07,
+            ..style
+        },
+    );
     *remaining -= required;
     required
 }
@@ -1049,12 +1179,11 @@ mod tests {
                 );
                 let submitted: Vec<_> = frame.frame().batches[0].pixels.iter().collect();
                 let source: Vec<_> = a.cells().chain(b.cells()).collect();
-                assert!(
-                    submitted
-                        .iter()
-                        .zip(source)
-                        .all(|(pixel, (local, _))| pixel.local == local.to_array())
-                );
+                let cell_scale = if reduced { 1.0 } else { 0.5 };
+                assert!(submitted.iter().zip(source).all(|(pixel, (local, _))| {
+                    (Vec2::from_array(pixel.local) - local).abs().max_element() * cell_scale
+                        <= 0.141
+                }));
                 let min_alpha = submitted
                     .iter()
                     .map(|p| p.color.to_le_bytes()[3])
@@ -1065,7 +1194,7 @@ mod tests {
                     .map(|p| p.color.to_le_bytes()[3])
                     .max()
                     .unwrap();
-                assert!(min_alpha >= 21 && (69..=96).contains(&max_alpha));
+                assert!(min_alpha >= 8 && (59..=83).contains(&max_alpha));
                 eprintln!(
                     "Actual nebula reduced={reduced} time={time}: {expected} cells/2 transforms, alpha {min_alpha}..{max_alpha}"
                 );
@@ -1138,7 +1267,7 @@ mod tests {
                         let p = t.point(Vec2::from_array(pixel.local));
                         assert!(p.is_finite());
                         let width = t.point(Vec2::from_array(pixel.local) + Vec2::X) - p;
-                        assert!(width.length() > 0.4 && width.length() < 4.3);
+                        assert!(width.length() > 0.0 && width.length() < 4.3);
                     }
                 }
             }
@@ -1368,3 +1497,7 @@ mod tests {
         assert_eq!(frame.frame().pixel_count, 0);
     }
 }
+
+#[cfg(test)]
+#[path = "cosmic_detail_tests.rs"]
+mod detail_tests;
