@@ -275,7 +275,7 @@ export class PixelUiBridge {
           Math.min(3, Number.parseFloat(style.fontSize) / scale / 8),
         );
         const scrollSelector =
-          ".menu-tabs,#collection-navigation,#meishi-content,#cargo-content,#map-chart,#map-content,#flight-status,#pause-content,#upgrade-content,#quest-content,#settings-content,#archive-content,#hangar-content,#campaign-content,#console-output,#dialogue-text,#run-summary,.droid-body,.droid-content";
+          ".menu-tabs,#collection-navigation,#meishi-content,#cargo-content,#map-chart,#map-content,#flight-status,#pause-content,#upgrade-content,#quest-content,#settings-content,#archive-content,#hangar-content,#coop-content,#campaign-content,#console-output,#dialogue-text,#run-summary,.droid-body,.droid-content";
         let clipX = bounds.x,
           clipY = bounds.y,
           clipRight = bounds.x + bounds.width,

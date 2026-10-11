@@ -1,4 +1,8 @@
 import "./style.css";
+import { CoopController } from "./coop/controller";
+import { createGalaxyCoopPorts } from "./coop/wasm-ports";
+import { paintCoopPanel } from "./coop/panel";
+import { enterAfterSave } from "./coop/entry";
 import { FlightInput } from "./input";
 import { watchPwaUpdates } from "./pwa-updates";
 import { AudioEngine, type AudioState } from "./audio";
@@ -46,6 +50,7 @@ import {
 } from "./storage";
 
 declare const __WASM_BUILDS__: Record<"webgpu" | "webgl2", string>;
+declare const __COOP_SERVICE__: string | null;
 
 interface Hud extends ForgeHud, FlightMenuHud {
   identity: IdentityHud | null;
@@ -127,6 +132,8 @@ interface RendererRecovery {
   free(): void;
 }
 interface GalaxyRuntime {
+  co_op_batch(request: string): string;
+  co_op_replica(request: string): string;
   step(milliseconds: number, input: unknown): Step;
   hud(): Hud;
   universe_map(): UniverseMapData;
@@ -203,6 +210,9 @@ const touchUi =
   (diagnosticMode && params.has("touch"));
 document.body.classList.toggle("touch-ui", touchUi);
 let galaxy: GalaxyRuntime;
+let coop: CoopController | null = null;
+let previousCoopMode = "solo";
+let coopActionEpoch = 0;
 let prepareRecovery: (canvas: HTMLCanvasElement) => Promise<RendererRecovery>;
 let input: FlightInput;
 let pixelUi: PixelUiBridge;
@@ -219,6 +229,7 @@ type MenuTab =
   | "map"
   | "settings"
   | "archive"
+  | "coop"
   | "credits";
 let menuTab: MenuTab = "upgrades";
 let lastMapPaint = 0;
@@ -273,6 +284,7 @@ const debugConsole = new DebugConsole({
     paused = true;
     input.enabled = false;
     input.reset();
+    coop?.cancelInput();
     galaxy.set_paused(true);
     galaxy.set_ui_mode(0);
     document.body.classList.remove("engine-flight");
@@ -286,6 +298,14 @@ const debugConsole = new DebugConsole({
   },
   run: async (command) => {
     const [verb, ...args] = command.trim().toLowerCase().split(/\s+/);
+    if (verb === "coop") {
+      const state = coop?.state();
+      return state
+        ? `${state.phase.toUpperCase()} / ${state.role ?? "SOLO"} / ${state.members}/8 PILOTS\n${state.admitted} ADMITTED / ${state.transport_ready} CHANNELS READY\n${state.message}`
+        : "CO-OP UNAVAILABLE / session service is not configured.";
+    }
+    if (coop?.blocksSolo() && ["warp", "scene"].includes(verb))
+      return "Leave co-op before changing the local QA scene.";
     if (verb === "help")
       return "HELP / STATS / PROFILE / RENDERER / RECOVER\nSCENE dock|belt|combat|site|biome-riveter|biome-mote|boss-dart[-1..5]|boss-bastion[-1..5]|boss-coil[-1..5]|champion-0..7|tournament|stress|die (QA mode)\nWARP x y (QA mode, world coordinates within +/-1000000)\nCLEAR / Up, Down: history / Backtick or Escape: close";
     if (verb === "stats") {
@@ -374,6 +394,7 @@ const dialoguePanel = new DialoguePanel({
     paused = true;
     input.enabled = false;
     input.reset();
+    coop?.cancelInput();
     galaxy.set_paused(true);
     galaxy.set_ui_mode(0);
     document.body.classList.remove("engine-flight");
@@ -392,6 +413,7 @@ const droidCreation = new DroidCreation({
     launchScreen.hidden = true;
     galaxy.set_ui_mode(0);
     input.reset();
+    coop?.cancelInput();
     input.enabled = false;
     pixelUi?.invalidate();
   },
@@ -431,6 +453,7 @@ const droidCreation = new DroidCreation({
   },
 });
 function showDoraGuide(): void {
+  if (coop?.blocksSolo()) return;
   const training = hud?.onboarding;
   if (!training || !hud.identity || !launched || !deathScreen.hidden) return;
   if (!menu.hidden) menu.hidden = true;
@@ -600,6 +623,8 @@ function paintSaveStatus(): void {
   pixelUi?.invalidate();
 }
 async function persist(profile: Profile): Promise<void> {
+  if (coop?.blocksSolo())
+    throw new Error("Leave co-op before saving local progression.");
   pendingSaves++;
   paintSaveStatus();
   try {
@@ -614,7 +639,7 @@ async function persist(profile: Profile): Promise<void> {
   }
 }
 function save(profile: Profile): void {
-  if (needsDroidCreation) return;
+  if (needsDroidCreation || coop?.blocksSolo()) return;
   void persist(profile).catch((error) => {
     if (error instanceof SaveConflict && launched && menu.hidden) pause(false);
     toast(store.message);
@@ -663,6 +688,7 @@ function resizeGraphics(): void {
       ]),
     );
     input.reset();
+    coop?.cancelInput();
     syncFlightStatusLayout();
     pixelUi?.invalidate();
   }
@@ -770,6 +796,7 @@ function pause(
   transitionEpoch++;
   input.enabled = false;
   input.reset();
+  coop?.cancelInput();
   galaxy.cancel_course();
   galaxy.set_ui_mode(3);
   document.body.classList.remove("engine-flight");
@@ -800,6 +827,7 @@ function pause(
 // and intentional debug/dialogue/death transitions remain separate gates.
 function canSimulateFlight(): boolean {
   return (
+    coop?.frameMode() !== "blocked" &&
     launched &&
     deathScreen.hidden &&
     preparingEncounter === null &&
@@ -843,6 +871,10 @@ function syncFlightState(): void {
 }
 function openMenu(page: MenuTab): void {
   if (!galaxy) return;
+  if (coop?.blocksSolo() && !["coop", "pause", "settings"].includes(page)) {
+    toast("Leave co-op to manage your local collection and missions.");
+    page = "coop";
+  }
   if (page === "upgrades") resetForge(element("upgrade-content"));
   if (launched) {
     pause(false, page);
@@ -860,6 +892,10 @@ function openMenu(page: MenuTab): void {
 }
 function interactDock(world: [number, number]): boolean {
   if (!launched || paused || !menu.hidden || !hud.dock) return false;
+  if (Math.hypot(...world) < 68) {
+    openMenu("coop");
+    return true;
+  }
   const index = galaxy.dock_facility_at(...world);
   if (index < 0 || index >= facilityPages.length) return false;
   openMenu(facilityPages[index]);
@@ -877,6 +913,8 @@ const campaignActions: CampaignActions = {
   },
   craft: (index) => {
     try {
+      if (coop?.blocksSolo())
+        throw new Error("Leave co-op before crafting a RAICHO.");
       galaxy.craft_ship(index);
       hud = galaxy.hud();
       save(galaxy.profile());
@@ -889,6 +927,8 @@ const campaignActions: CampaignActions = {
   },
   select: (id) => {
     try {
+      if (coop?.blocksSolo())
+        throw new Error("Leave co-op before changing your RAICHO.");
       galaxy.switch_ship(id);
       hud = galaxy.hud();
       save(galaxy.profile());
@@ -917,6 +957,8 @@ async function navigate(position: [number, number]): Promise<void> {
   toast("COURSE SET / fly or steer to your destination");
 }
 async function beginEncounter(start: () => void): Promise<void> {
+  if (coop?.blocksSolo())
+    throw new Error("Leave co-op before starting a local encounter.");
   const epoch = ++transitionEpoch;
   preparingEncounter = epoch;
   syncFlightState();
@@ -930,6 +972,7 @@ async function beginEncounter(start: () => void): Promise<void> {
     preparingEncounter = null;
     dialoguePanel.close();
     input.reset();
+    coop?.cancelInput();
     destination = null;
     previousDock = hud.dock;
     paintHud();
@@ -966,8 +1009,13 @@ function finishCredits(): void {
   selectMenuTab("hangar");
 }
 function selectMenuTab(tab: MenuTab): void {
+  if (coop?.blocksSolo() && !["coop", "pause", "settings"].includes(tab)) {
+    tab = "coop";
+    toast("Leave co-op to manage your local collection and missions.");
+  }
   menuTab = tab;
   const headings: Record<MenuTab, [string, string]> = {
+    coop: ["HAVEN CO-OP", "One host / up to eight pilots."],
     pause: ["RAICHO", "FLIGHT LIVE"],
     meishi: ["MEISHI CARD", "FLIGHT LIVE"],
     cargo: ["CARGO INVENTORY", "Materials and mission items."],
@@ -1010,6 +1058,7 @@ function selectMenuTab(tab: MenuTab): void {
     card ? "Close MEISHI card" : "Close menu",
   );
   element("cargo-content").hidden = tab !== "cargo";
+  element("coop-content").hidden = tab !== "coop";
   element("collection-navigation").hidden = ![
     "pause",
     "cargo",
@@ -1042,6 +1091,7 @@ function selectMenuTab(tab: MenuTab): void {
   );
   menu.setAttribute("aria-describedby", card ? "" : "menu-description");
   if (tab === "pause") paintFlightMenu(element("flight-status"), hud);
+  if (tab === "coop") paintCoop();
   if (tab === "meishi") paintMeishiCard(element("meishi-content"), hud);
   if (tab === "cargo") paintCargo(element("cargo-content"), hud);
   if (tab === "map") {
@@ -1126,6 +1176,100 @@ function selectMenuTab(tab: MenuTab): void {
 function openLaunchSettings(): void {
   openMenu("settings");
 }
+function paintCoop(): void {
+  const target = element("coop-content");
+  if (!coop) {
+    target.textContent =
+      "Co-op needs a configured session service. Your local universe is available.";
+    pixelUi?.invalidate();
+    return;
+  }
+  if (
+    paintCoopPanel(
+      target,
+      coop.state(),
+      {
+        create: async () => {
+          await startCoop(() => coop!.create());
+        },
+        join: async (invitation) => {
+          await startCoop(() => coop!.join(invitation));
+        },
+        leave: () => {
+          coopActionEpoch++;
+          return coop!.leave();
+        },
+        end: () => {
+          coopActionEpoch++;
+          return coop!.end();
+        },
+        invite: () => coop!.invite(),
+        copy: (invitation) => navigator.clipboard.writeText(invitation),
+        changed: () => pixelUi?.invalidate(),
+      },
+      launched && hud.dock,
+    )
+  )
+    pixelUi?.invalidate();
+}
+async function startCoop(enter: () => Promise<void>): Promise<void> {
+  const controller = coop;
+  const transition = transitionEpoch;
+  const action = ++coopActionEpoch;
+  await enterAfterSave(
+    () => persist(galaxy.profile()),
+    () => store.flush(),
+    () =>
+      controller !== null &&
+      controller === coop &&
+      action === coopActionEpoch &&
+      transition === transitionEpoch &&
+      launched &&
+      !menu.hidden &&
+      menuTab === "coop" &&
+      galaxy.hud().dock &&
+      !controller.blocksSolo(),
+    enter,
+  );
+}
+function configureCoop(): void {
+  const local =
+    location.hostname === "localhost" ||
+    location.hostname === "127.0.0.1" ||
+    location.hostname.endsWith(".localhost");
+  const service = __COOP_SERVICE__ ?? (local ? "http://127.0.0.1:4176" : null);
+  if (!service) return;
+  const ports = createGalaxyCoopPorts(galaxy);
+  if (!ports.availability.host || !ports.availability.guest) return;
+  try {
+    coop = new CoopController({
+      service,
+      native: ports.native,
+      replica: ports.replica,
+      availability: ports.availability,
+      localSpec: () => {
+        const profile = galaxy.profile();
+        return { local_seed: profile.seed, identity: profile.identity ?? null };
+      },
+      onChange: () => {
+        const mode = coop?.frameMode() ?? "solo";
+        if (mode !== previousCoopMode) {
+          previousCoopMode = mode;
+          input?.reset();
+          coop?.cancelInput();
+          destination = null;
+          lastTime = 0;
+        }
+        syncFlightState();
+        if (!menu.hidden && menuTab === "coop") paintCoop();
+        pixelUi?.invalidate();
+      },
+    });
+  } catch {
+    // A bad deployment endpoint cannot prevent solo play or expose its details.
+    coop = null;
+  }
+}
 async function resume(): Promise<void> {
   if (menuTab === "credits" && hud?.campaign.credits_pending) {
     galaxy.acknowledge_credits();
@@ -1173,12 +1317,15 @@ async function resume(): Promise<void> {
     paused = true;
     input.enabled = false;
     input.reset();
+    coop?.cancelInput();
     galaxy.set_paused(true);
     audio.suspend();
   }
 }
 function forgeMutation(action: () => void, message: string): void {
   try {
+    if (coop?.blocksSolo())
+      throw new Error("Leave co-op before changing your local equipment.");
     action();
     hud = galaxy.hud();
     save(galaxy.profile());
@@ -1425,6 +1572,7 @@ function paintDestination(): void {
 }
 function onWebglLost(): void {
   input.reset();
+  coop?.cancelInput();
   input.enabled = false;
   galaxy.set_paused(true);
   audio.suspend();
@@ -1445,6 +1593,7 @@ async function recover(_trigger: unknown): Promise<boolean> {
   recovering = true;
   document.body.classList.remove("pixel-ready");
   input.reset();
+  coop?.cancelInput();
   input.enabled = false;
   galaxy.set_paused(true);
   audio.suspend();
@@ -1463,6 +1612,7 @@ async function recover(_trigger: unknown): Promise<boolean> {
     document.body.classList.add("pixel-ready");
     resizeGraphics();
     const canRun =
+      coop?.frameMode() !== "blocked" &&
       launched &&
       deathScreen.hidden &&
       preparingEncounter === null &&
@@ -1534,8 +1684,15 @@ function frame(time: number): void {
   lastTime = time;
   try {
     pixelUi?.sync();
-    const controls = input.sample();
-    const result = galaxy.step(dt, controls);
+    let controls = input.sample();
+    const modeBeforeStep = coop?.frameMode() ?? "solo";
+    coop?.beforeStep(dt / 1000, controls);
+    const modeChanged = modeBeforeStep !== (coop?.frameMode() ?? "solo");
+    if (modeChanged) controls = input.sample();
+    if (coop?.frameMode() === "blocked") galaxy.set_paused(true);
+    const stepDt = modeChanged ? 0 : dt;
+    const result = galaxy.step(stepDt, controls);
+    coop?.afterStep(stepDt / 1000);
     hud = result.hud;
     input.camera = hud.camera;
     const worldViewport = galaxy.world_viewport();
@@ -1575,6 +1732,7 @@ function frame(time: number): void {
     }
     if (time - lastHudPaint > 80) {
       paintHud();
+      if (!menu.hidden && menuTab === "coop") paintCoop();
       if (!menu.hidden && menuTab === "pause") {
         if (paintFlightMenu(element("flight-status"), hud))
           pixelUi?.invalidate();
@@ -1748,6 +1906,7 @@ async function init(): Promise<void> {
   pixelUi = new PixelUiBridge(galaxy, () => innerHeight / galaxy.viewport()[1]);
   document.body.classList.add("pixel-ready");
   hud = galaxy.hud();
+  configureCoop();
   paintHud();
   loadStatus.textContent = "SYSTEMS ONLINE / READY TO FLY";
   launch.disabled = false;
@@ -1780,6 +1939,7 @@ async function init(): Promise<void> {
       const button = document.createElement("button");
       button.textContent = scene;
       button.addEventListener("click", () => {
+        if (coop?.blocksSolo()) return;
         scenario = scene;
         minPixels = Infinity;
         maxPixels = 0;
@@ -1791,6 +1951,7 @@ async function init(): Promise<void> {
         destination = null;
         previousDock = true;
         input.reset();
+        coop?.cancelInput();
       });
       controls.append(button);
     }
@@ -2017,6 +2178,7 @@ function showDeath(): void {
   paused = true;
   input.enabled = false;
   input.reset();
+  coop?.cancelInput();
   destination = null;
   galaxy.set_paused(true);
   galaxy.set_ui_mode(0);
@@ -2056,6 +2218,22 @@ function showDeath(): void {
 }
 function returnToTitle(): void {
   if (!galaxy) return;
+  coopActionEpoch++;
+  if (coop?.blocksSolo()) {
+    void coop
+      .leave()
+      .then(() => {
+        if (coop?.blocksSolo())
+          toast("Restore your local universe before returning to title.");
+        else returnToTitle();
+      })
+      .catch(() =>
+        toast(
+          "Local restoration needs attention. Retry in the Haven co-op menu.",
+        ),
+      );
+    return;
+  }
   transitionEpoch++;
   preparingEncounter = null;
   // Returning ends an active encounter through the same Rust retreat rules.
@@ -2075,6 +2253,7 @@ function returnToTitle(): void {
   destination = null;
   input.enabled = false;
   input.reset();
+  coop?.cancelInput();
   galaxy.set_paused(true);
   galaxy.set_ui_mode(2);
   document.body.classList.remove("engine-flight");
@@ -2115,6 +2294,7 @@ async function quitGame(): Promise<void> {
 }
 element("dock-button").addEventListener("click", () => pause(true));
 function interactSite(): void {
+  if (coop?.blocksSolo()) return;
   if (paused || !menu.hidden || debugConsole.opened || hud.campaign.encounter)
     return;
   if (hud.campaign.arena) {
@@ -2247,6 +2427,10 @@ function commitSite(): void {
 }
 element("site-button").addEventListener("click", interactSite);
 element("apply-update").addEventListener("click", async () => {
+  if (coop?.blocksSolo()) {
+    toast("Return to your universe before applying the update.");
+    return;
+  }
   if (!waitingUpdate || !galaxy.hud().dock) return;
   try {
     await persist(galaxy.profile());
@@ -2343,6 +2527,7 @@ function onVisibilityChanged(): void {
   }
   if (document.hidden) {
     input?.reset();
+    coop?.cancelInput();
     galaxy.cancel_course();
     destination = null;
     narrative.pause();
@@ -2351,6 +2536,12 @@ function onVisibilityChanged(): void {
   syncFlightState();
 }
 document.addEventListener("visibilitychange", onVisibilityChanged);
+window.addEventListener("pagehide", () => {
+  coopActionEpoch++;
+  // Native restoration and channel teardown start synchronously; service
+  // liveness remains the fallback when browser shutdown aborts the request.
+  void coop?.dispose().catch(() => {});
+});
 for (const key of ["master", "music", "sfx"] as const) {
   const slider = element<HTMLInputElement>(`${key}-volume`);
   slider.value = String(settings[key]);
@@ -2422,6 +2613,10 @@ function onFlightWheel(event: WheelEvent): void {
   setZoom(settings.zoom * Math.exp(-delta * 0.001));
 }
 element("export-save").addEventListener("click", () => {
+  if (coop?.blocksSolo()) {
+    toast("Leave co-op before exporting your local save.");
+    return;
+  }
   const url = URL.createObjectURL(
     new Blob([JSON.stringify(galaxy.profile(), null, 2)], {
       type: "application/json",
@@ -2444,8 +2639,18 @@ element<HTMLInputElement>("import-save").addEventListener(
     if (!file) return;
     let importEpoch: number | null = null;
     try {
+      if (coop?.blocksSolo())
+        throw new Error("Leave co-op before importing a save.");
+      const action = coopActionEpoch;
+      const transition = transitionEpoch;
       if (file.size > 65536) throw new Error("Save file is too large.");
       const value: unknown = JSON.parse(await file.text());
+      if (
+        coop?.blocksSolo() ||
+        action !== coopActionEpoch ||
+        transition !== transitionEpoch
+      )
+        throw new Error("Save import cancelled by a session or screen change.");
       if (!validProfile(value)) throw new Error("Unsupported or invalid save.");
       pause(false);
       importEpoch = ++transitionEpoch;

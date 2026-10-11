@@ -11,9 +11,9 @@ mod boss_assets;
 pub mod bosses;
 pub mod campaign;
 pub mod co_op;
+mod co_op_control;
 pub mod co_op_publish;
 pub mod co_op_replica;
-mod co_op_control;
 #[cfg(test)]
 mod co_op_tests;
 #[cfg(test)]

@@ -1151,3 +1151,33 @@ body.reduced-motion *::after {
     flex-basis: 30%;
   }
 }
+.coop-panel .coop-start,
+.coop-panel .coop-invitation,
+.coop-panel .coop-label {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: calc(5px * var(--ui-scale, 1));
+}
+.coop-panel .coop-start,
+.coop-panel .coop-invitation {
+  margin-block: calc(5px * var(--ui-scale, 1));
+}
+.coop-input {
+  width: 100%;
+  min-width: 0;
+  min-height: var(--ui-hit);
+  border: 1px solid #75878c;
+  background: #121212;
+  color: #e1e7e8;
+  padding: calc(5px * var(--ui-scale, 1));
+  font: inherit;
+  font-size: var(--ui-caption);
+}
+.pixel-ready .coop-input {
+  color: transparent;
+  caret-color: transparent;
+  border-color: transparent;
+  background: transparent;
+  outline: none;
+}
