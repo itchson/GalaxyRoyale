@@ -50,6 +50,13 @@ def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def write_json(path, value):
+    # asset-pack fingerprints raw manifest bytes. Canonical LF is necessary
+    # before import as well as at Git checkout, for Windows/Linux parity.
+    path.write_text(json.dumps(value, indent=2, ensure_ascii=False) + "\n",
+                    encoding="utf-8", newline="\n")
+
+
 def source_records():
     metadata = json.loads((ROOT / "assets/concepts/kikai/detail/generation.json").read_text(encoding="utf-8"))
     records = {"dora": metadata["dora"]} | metadata["portraits"]
@@ -294,11 +301,11 @@ def author(output):
         manifest = {"schema": 1, "palette": {"mode": "provided", "max_colors": 64, "colors": palette},
                     "sprites": [{"name": name, "source": f"source/{name}.png", "topology": "holes-allowed"} for name in layers],
                     "provenance": provenance, "extensions": {"portrait_roles": roles}}
-        pack.write_json(folder / "manifest.json", manifest)
+        write_json(folder / "manifest.json", manifest)
         atlas = pack.pack(folder / "manifest.json")
         count = validate_profile(atlas)
         profiles[kind] = atlas
-        pack.write_json(folder / "provenance.json", provenance)
+        write_json(folder / "provenance.json", provenance)
         previews[kind] = [compose(layers, e) for e in EYE_STATES] + [compose(layers, "neutral", m) for m in MOUTH_STATES[1:]]
         summaries[kind] = {"palette_entries": len(palette), "composed_occupied_cells": count,
                            "body_cells": sum(p[3] != 0 for p in layers["body"].get_flattened_data()),
@@ -312,7 +319,7 @@ def author(output):
     (output / "atlas.json").write_text(
         json.dumps(result, ensure_ascii=False, separators=(",", ":")) + "\n",
         encoding="utf-8", newline="\n")
-    pack.write_json(output / "authoring-evidence.json", {
+    write_json(output / "authoring-evidence.json", {
         "version": 1, "scope": "Authored PNG/packed-cell software previews; not native/GPU/browser acceptance",
         "generation_metadata_sha256": sha(ROOT / "assets/concepts/kikai/detail/generation.json"),
         "profiles": summaries, "shared_runtime_ui_budget": 60000,

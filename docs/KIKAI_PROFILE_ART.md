@@ -68,8 +68,9 @@ are exactly `body`, `eyes_neutral`, `eyes_focused`, `eyes_concerned`,
 `mouth_smile`. Cells are row-major palette indices; colors are little-endian
 RGBAu32 with transparent index 0. The runtime JSON uses compact separators
 and a final LF; readable provenance remains in separate files. Removing JSON
-whitespace changes no cells or schema. Scoped Git attributes preserve JSON LF
-on Windows and Linux. Metadata records authoring evidence;
+whitespace changes no cells or schema. The detail authoring writer uses LF
+before asset-pack fingerprints the manifests, and scoped Git attributes retain
+those exact bytes on Windows and Linux. Metadata records authoring evidence;
 it does not select poses or drive gameplay.
 
 The engine specialist owns the dimension-driven cached PixelBody adapter:

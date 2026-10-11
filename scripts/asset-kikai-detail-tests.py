@@ -46,6 +46,11 @@ class DetailArtTests(unittest.TestCase):
                          (json.dumps(checked, ensure_ascii=False, separators=(",", ":")) + "\n").encode("utf-8"))
         self.assertEqual(checked_path.read_bytes(), (self.output / "atlas.json").read_bytes())
         self.assertLess(checked_path.stat().st_size, 4_000_000, "Runtime payload must not include pretty-array padding")
+        for kind in ("dora", "doro", "talo"):
+            committed_manifest = ROOT / "assets/ui/kikai/detail" / kind / "manifest.json"
+            self.assertNotIn(b"\r", committed_manifest.read_bytes())
+            self.assertEqual(detail.sha(committed_manifest), checked["profiles"][kind]["asset_metadata"]["manifest_sha256"])
+            self.assertEqual(committed_manifest.read_bytes(), (self.output / kind / "manifest.json").read_bytes())
         self.assertEqual(checked["version"], 1)
         self.assertEqual(set(checked["profiles"]), {"dora", "doro", "talo"})
         for kind, atlas in self.atlas["profiles"].items():

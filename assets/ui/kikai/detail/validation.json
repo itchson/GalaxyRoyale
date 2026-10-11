@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "observed_at_utc": "2026-10-11T07:15:09Z",
+  "observed_at_utc": "2026-10-11T07:17:51Z",
   "scope": "Actual authoring/import Python checks; no native renderer, browser, listening or physical-device acceptance.",
   "environment": {
     "python": "3.12.14",
@@ -17,12 +17,12 @@
       "exit_code": 0,
       "tests": 12,
       "failures": 0,
-      "duration_seconds": 14.522
+      "duration_seconds": 14.678
     }
   ],
   "runtime_atlas": {
     "path": "assets/ui/kikai/detail/atlas.json",
-    "sha256": "c0c0024297618b36076e091a802cb621c4dd3fd5c24a904f31b670a6226ca809",
+    "sha256": "03b2651c77f6164c9261b880e407ba333318f67e4e3b1155248edca033e0db95",
     "bytes": 3252935,
     "encoding": "UTF-8 compact JSON separators(',',':') with final LF",
     "profiles": {
@@ -40,5 +40,13 @@
     "Normal WebGPU/WebGL2 rendering and physical raster fidelity",
     "Compact actual UI readability and blink/speech playback",
     "Physical-device performance and human playthrough"
-  ]
+  ],
+  "newline_parity": {
+    "previous_commit": "606d525",
+    "previous_atlas_sha256": "c0c0024297618b36076e091a802cb621c4dd3fd5c24a904f31b670a6226ca809",
+    "executed_git_blob_comparison_exit_code": 0,
+    "cells_palette_roles_and_other_metadata_equal": true,
+    "only_changed_metadata_key": "manifest_sha256",
+    "policy": "Canonical LF before manifest hashing and at Git checkout"
+  }
 }
