@@ -1,0 +1,52 @@
+{
+  "scope": "Actual public Game fixed-step plus PixelBody/FrameBuilder extraction; native flat software review only",
+  "objects": [
+    {
+      "name": "dock",
+      "occupied_cells": 1454,
+      "transforms": 1,
+      "maximum_actual_world_corner_radius": 48.21047603996459,
+      "changed_color_cells_after60ticks": 67
+    },
+    {
+      "name": "forge",
+      "occupied_cells": 1584,
+      "transforms": 2,
+      "maximum_actual_world_corner_radius": 13.11954731765051,
+      "changed_color_cells_after60ticks": 152,
+      "roof": 1356,
+      "rail": 228
+    },
+    {
+      "name": "hangar",
+      "occupied_cells": 1702,
+      "transforms": 2,
+      "maximum_actual_world_corner_radius": 14.644884694155682,
+      "changed_color_cells_after60ticks": 88,
+      "roof": 1358,
+      "rail": 344
+    },
+    {
+      "name": "journal",
+      "occupied_cells": 1404,
+      "transforms": 2,
+      "maximum_actual_world_corner_radius": 12.87517615929398,
+      "changed_color_cells_after60ticks": 159,
+      "roof": 1216,
+      "rail": 188
+    },
+    {
+      "name": "arenas",
+      "occupied_cells": 1284,
+      "transforms": 2,
+      "maximum_actual_world_corner_radius": 12.541936367512244,
+      "changed_color_cells_after60ticks": 232,
+      "roof": 996,
+      "rail": 288
+    }
+  ],
+  "total_cells": 7428,
+  "total_transforms": 9,
+  "reduced_motion_packets_equal": true,
+  "profile_unchanged": true
+}

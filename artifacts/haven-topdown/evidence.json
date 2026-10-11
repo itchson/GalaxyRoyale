@@ -1,0 +1,129 @@
+{
+  "version": 1,
+  "recorded_at": "2026-10-11T03:53:38.468031+00:00",
+  "runtime_commit": "773fc6c2092e06a038eda0175852ba941569e2ab",
+  "base_commit": "6152611ec88653946f809f200a24a0de482cf265",
+  "scope": "Actual public Game native fixed-step and extracted PixelBody quads; software raster review only",
+  "checks": [
+    {
+      "command": "cargo test --locked -p game_core",
+      "exit_code": 0,
+      "passed": 231,
+      "failed": 0,
+      "log": "artifacts/haven-topdown/final-tests.log"
+    },
+    {
+      "command": "cargo clippy --locked -p game_core --all-targets -- -D warnings",
+      "exit_code": 0,
+      "log": "artifacts/haven-topdown/final-clippy.log"
+    },
+    {
+      "command": "powershell -NoProfile -File artifacts/haven-topdown/run.ps1",
+      "exit_code": 0,
+      "actual_game": true,
+      "fixed_steps_live": 60,
+      "fixed_steps_reduced_motion": 60,
+      "profile_unchanged": true,
+      "live_signal_change_all_five": true,
+      "reduced_motion_packets_equal": true
+    },
+    {
+      "command": "python artifacts/haven-topdown/render.py work/haven-topdown-repro",
+      "exit_code": 0,
+      "reproduced_packets_byte_identical": true,
+      "reproduced_images_byte_identical": true,
+      "python": "3.12.10",
+      "pillow": "12.3.0"
+    }
+  ],
+  "metrics": {
+    "scope": "Actual public Game fixed-step plus PixelBody/FrameBuilder extraction; native flat software review only",
+    "objects": [
+      {
+        "name": "dock",
+        "occupied_cells": 1454,
+        "transforms": 1,
+        "maximum_actual_world_corner_radius": 48.21047603996459,
+        "changed_color_cells_after60ticks": 67
+      },
+      {
+        "name": "forge",
+        "occupied_cells": 1584,
+        "transforms": 2,
+        "maximum_actual_world_corner_radius": 13.11954731765051,
+        "changed_color_cells_after60ticks": 152,
+        "roof": 1356,
+        "rail": 228
+      },
+      {
+        "name": "hangar",
+        "occupied_cells": 1702,
+        "transforms": 2,
+        "maximum_actual_world_corner_radius": 14.644884694155682,
+        "changed_color_cells_after60ticks": 88,
+        "roof": 1358,
+        "rail": 344
+      },
+      {
+        "name": "journal",
+        "occupied_cells": 1404,
+        "transforms": 2,
+        "maximum_actual_world_corner_radius": 12.87517615929398,
+        "changed_color_cells_after60ticks": 159,
+        "roof": 1216,
+        "rail": 188
+      },
+      {
+        "name": "arenas",
+        "occupied_cells": 1284,
+        "transforms": 2,
+        "maximum_actual_world_corner_radius": 12.541936367512244,
+        "changed_color_cells_after60ticks": 232,
+        "roof": 996,
+        "rail": 288
+      }
+    ],
+    "total_cells": 7428,
+    "total_transforms": 9,
+    "reduced_motion_packets_equal": true,
+    "profile_unchanged": true
+  },
+  "raw_packets": {
+    "path": "work/haven-topdown/native-extraction.json",
+    "sha256": "8cc3a21bc0235d5e6b20523b612bd756825cc162ec41759cd274ecd5ae764fe3",
+    "bytes": 8962661,
+    "tracked": false,
+    "repro_path": "work/haven-topdown-repro/native-extraction.json"
+  },
+  "spark_review": {
+    "state": "interrupted",
+    "started": "2026-10-11T03:47:18.967346Z",
+    "stopped": "2026-10-11T03:51:44.1851958Z",
+    "output_file_produced": false,
+    "reason": "Bounded read-only review stopped without a completed result; no peer acceptance claimed"
+  },
+  "pending": [
+    "Integrated normal WebGPU/WebGL2 browser material and lighting presentation",
+    "Minimum-zoom readable silhouettes in the normal package",
+    "Broader human art evaluation",
+    "Physical phone acceptance and performance"
+  ],
+  "files": {
+    "crates/game_core/src/dock_facilities.rs": "7454ef9c6aad539e355677dcd988ff313e70a5c5f4f74de853f5fdc9d9f0235b",
+    "crates/game_core/src/pixel_assets.rs": "e8c20b854ffde3ad2f35b274d4452758a56d08604c81ab8f851572cb094fc9ea",
+    "crates/game_core/src/lib.rs": "9b5d3749642278c9f1036d4c982a7102e8112b9e6d9676fbdcc594c696b40e74",
+    "crates/engine_core/src/lib.rs": "42d731037c40748ca7949e31903b262f8f1c5a53805e5c2ca24caf7249f1b1aa",
+    "assets/pixels/atlas.json": "1bc8a66f0e0c5d6bb5d9f6a3349032d10d854cb023cd70971e590d61c900051f",
+    "Cargo.lock": "b00fa97ffca51b80eca3655d7de4acc9f43201b2f8ba0cf974545cf742a99574",
+    "docs/HAVEN_TOPDOWN.md": "7c3d97cdc4c053b5f51a7ef74f0d94599a64e4d371ec53727a01ac8ee39ad097",
+    "artifacts/haven-topdown/proof.rs": "5e78b373df85050aab11e78c1a316b6707646e4de2b09ab04b2568252b131245",
+    "artifacts/haven-topdown/run.ps1": "038fc67bf748f6553910e4a8823bf6ffd35f624f0297ab9fc8e3b9665f43b214",
+    "artifacts/haven-topdown/render.py": "79dbeebfb80a4c12ba258218a13bafc6b2e2f008c1036a2fc48943f641888431",
+    "artifacts/haven-topdown/metrics.json": "57c774e83b6b5b1a6b3afc58925ed79f08ae94c0ed02541e96fd64309468b308",
+    "artifacts/haven-topdown/contact-sheet.png": "ac5f59e27c03d6217d67b615946b4b3f6cdd2c4b9bb9a6d97c3d7d3a1fb14ed9",
+    "artifacts/haven-topdown/world-overview.png": "75dcffd2dfc93137b9e5ab25a8d4d26ecbaf80adcbb811e169cc51d514e61dc3",
+    "artifacts/haven-topdown/final-tests.log": "8e55661794e390f020d51e40756a90a8d5b6a32e6aa774da807d38fa7b39663c",
+    "artifacts/haven-topdown/final-clippy.log": "cc6dcadbf79cc743dc932a83e070aeee235b01dc5647074275cec3c3f174dbde",
+    "artifacts/haven-topdown/native-extraction.log": "1e0975a4552cdf30b063c0af1bc38fb1059c0cd00ec7d1141a5ca7167bed07c9"
+  }
+}
