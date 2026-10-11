@@ -719,8 +719,8 @@ fn high_detail_profiles_and_real_dense_menu_controls_fit_the_shared_scene_cap() 
             "quit-icon",
             "fullscreen-icon",
         ];
-        // The current status modal exposes these five actions. The deliberately
-        // overloaded all-ten-symbol variant below remains a separate cap proof.
+        // The current status modal exposes these five actions. The all-ten
+        // stress variant and deliberately doubled interface remain separate.
         let status = [
             "close-icon",
             "resume-icon",
@@ -788,11 +788,27 @@ fn high_detail_profiles_and_real_dense_menu_controls_fit_the_shared_scene_cap() 
             interface.pixel_count, actual.pixel_count
         );
     }
-    let overloaded = extract(controls(true), [0.0; 2], 0.0, true);
-    assert_eq!(overloaded.pixel_count, 25_934);
+    let all_ten = extract(controls(true), [0.0; 2], 0.0, true);
+    assert_eq!(all_ten.pixel_count, 21_226);
+    let mut all_ten_with_dora = controls(true);
+    let mut dora = licensed_portrait(0, 0, 1);
+    dora.rect = [24.0, 52.0, 120.0, 160.0];
+    all_ten_with_dora.push(dora);
+    assert_eq!(
+        extract(all_ten_with_dora, [0.0; 2], 0.0, true).pixel_count,
+        all_ten.pixel_count + portrait_cells_for(0),
+        "efficient native chrome now admits the full all-ten stress fixture"
+    );
+    let overload_controls = || {
+        let mut nodes = controls(true);
+        nodes.extend(controls(true));
+        nodes
+    };
+    let overloaded = extract(overload_controls(), [0.0; 2], 0.0, true);
+    assert_eq!(overloaded.pixel_count, 2 * all_ten.pixel_count);
     assert!(overloaded.pixel_count + portrait_cells_for(0) > MAX_UI_PIXELS);
     for kind in 0..3 {
-        let mut nodes = controls(true);
+        let mut nodes = overload_controls();
         let mut portrait = licensed_portrait(kind as u8, 0, 1);
         portrait.rect = [24.0, 52.0, 120.0, 160.0];
         nodes.push(portrait);

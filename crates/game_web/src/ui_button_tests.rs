@@ -80,8 +80,14 @@ fn persistent_selection_survives_hover_of_another_tab() {
     let b = &both.batches[0];
     assert_eq!(&b.transforms[..a.transforms.len()], &a.transforms);
     assert_eq!(&b.pixels[..a.pixels.len()], &a.pixels);
-    assert_eq!(a.transforms[6].a[2], 94.0, "single selected bar width");
-    assert_eq!(a.transforms[6].b[1], 2.0);
+    assert_eq!(
+        a.transforms
+            .iter()
+            .filter(|t| t.a[2] == 94.0 && t.b[1] == 2.0)
+            .count(),
+        1,
+        "one independent selected bar keeps its exact original bounds"
+    );
     let mut hovered_selected = node("nav-tab", [0.0, 0.0, 100.0, 24.0], "SETTINGS");
     hovered_selected.selected = true;
     hovered_selected.active = true;

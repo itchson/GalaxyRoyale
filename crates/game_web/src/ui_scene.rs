@@ -4,6 +4,8 @@ use crate::pixel_ui::RoyaleMono;
 mod component_art;
 #[path = "meishi_art.rs"]
 mod meishi_art;
+#[path = "sports_ui.rs"]
+mod sports_ui;
 #[path = "title_art.rs"]
 mod title_art;
 use engine_core::{AffineTransform, FrameBuilder, PixelBody, Transform, Vec2};
@@ -11,10 +13,10 @@ use serde::Deserialize;
 use std::{collections::HashMap, sync::LazyLock};
 
 pub const MAX_UI_PIXELS: usize = 60_000;
-const WHITE: u32 = 0xff_f6ead9;
-const CYAN: u32 = 0xff_f4e887;
-const DIM: u32 = 0xff_a48563;
-const GOLD: u32 = 0xff_85d4ff;
+const WHITE: u32 = 0xff_f4f1eb;
+const CYAN: u32 = 0xff_efde58;
+const DIM: u32 = 0xff_a29787;
+const GOLD: u32 = 0xff_66bce8;
 
 const fn rgb(r: u8, g: u8, b: u8) -> u32 {
     u32::from_le_bytes([r, g, b, 255])
@@ -274,69 +276,11 @@ struct Sprite {
 }
 struct Art {
     body: PixelBody,
-    sprite: Sprite,
 }
 struct Assets {
-    palette: Vec<u32>,
     sprites: HashMap<String, Art>,
 }
 
-/// Original corner silhouettes remain intact. Ornament cells are sampled once
-/// at the center; the remaining rails use a neutral two-cell metal strip.
-#[derive(Clone, Copy)]
-struct FrameGeometry {
-    size: [usize; 2],
-    source: [usize; 2],
-    rail: [usize; 2],
-    corner: [usize; 2],
-    neutral: [usize; 2],
-}
-impl FrameGeometry {
-    fn new(name: &str, size: [usize; 2], source: [usize; 2]) -> Self {
-        let panel = name == "panel";
-        let mut geometry = Self {
-            size,
-            source,
-            rail: if panel { [8, 8] } else { [4, 4] },
-            corner: if panel { [24, 16] } else { [8, 8] },
-            neutral: if panel { [28, 16] } else { [16, 8] },
-        };
-        for axis in 0..2 {
-            geometry.corner[axis] = geometry.corner[axis]
-                .min(size[axis] / 2)
-                .min(source[axis] / 2);
-            geometry.rail[axis] = geometry.rail[axis].min(geometry.corner[axis]);
-            geometry.neutral[axis] = geometry.neutral[axis].min(source[axis].saturating_sub(2));
-        }
-        geometry
-    }
-
-    fn source_at(self, p: [usize; 2]) -> [usize; 2] {
-        let edge = |n: usize, axis: usize| {
-            if n < self.size[axis] / 2 {
-                n
-            } else {
-                self.source[axis] - (self.size[axis] - n)
-            }
-        };
-        let corner_x = p[0] < self.corner[0] || p[0] >= self.size[0] - self.corner[0];
-        let corner_y = p[1] < self.corner[1] || p[1] >= self.size[1] - self.corner[1];
-        if corner_x && corner_y {
-            [edge(p[0], 0), edge(p[1], 1)]
-        } else if p[1] < self.rail[1] || p[1] >= self.size[1] - self.rail[1] {
-            let ornament = 20.min(self.size[0].saturating_sub(self.corner[0] * 2));
-            let begin = (self.size[0] - ornament) / 2;
-            let sx = if (begin..begin + ornament).contains(&p[0]) {
-                (self.source[0] - ornament) / 2 + p[0] - begin
-            } else {
-                self.neutral[0] + p[0] % 2
-            };
-            [sx, edge(p[1], 1)]
-        } else {
-            [edge(p[0], 0), self.neutral[1] + p[1] % 2]
-        }
-    }
-}
 static CELL: LazyLock<PixelBody> = LazyLock::new(|| PixelBody::from_ascii(&["#"], &[('#', WHITE)]));
 // Original 24-cell controls: final-resolution silhouettes, insets and metal details.
 // A chart marker is its own compact occupied object. DOM hit regions stay
@@ -644,15 +588,11 @@ fn load_assets(source: &str) -> Assets {
                 name,
                 Art {
                     body: PixelBody::from_ascii(&borrowed, &palette),
-                    sprite,
                 },
             )
         })
         .collect();
-    Assets {
-        palette: atlas.palette,
-        sprites,
-    }
+    Assets { sprites }
 }
 static ASSETS: LazyLock<Assets> =
     LazyLock::new(|| load_assets(include_str!("../../../assets/ui/atlas.json")));
@@ -1221,72 +1161,21 @@ impl Painter<'_> {
             }
         }
     }
-    fn frame(&mut self, name: &str, rect: [f32; 4], active: bool, disabled: bool) {
-        let Some(art) = ASSETS.sprites.get(name) else {
-            return;
-        };
-        self.rect(rect, 0xf5_26140d);
-        let width = rect[2].round().max(1.0) as usize;
-        let height = rect[3].round().max(1.0) as usize;
-        let geometry =
-            FrameGeometry::new(name, [width, height], [art.sprite.width, art.sprite.height]);
-        if geometry.rail.contains(&0) {
-            return;
-        }
-        for y in 0..height {
-            let outer = y < geometry.rail[1] || y >= height - geometry.rail[1];
-            let corner = y < geometry.corner[1] || y >= height - geometry.corner[1];
-            let side = if corner {
-                geometry.corner[0]
-            } else {
-                geometry.rail[0]
-            };
-            let left_end = if outer { width } else { side };
-            for x in 0..left_end {
-                self.frame_cell(art, rect, [x, y], geometry, (active, disabled));
-                if self.remaining == 0 || self.work_remaining == 0 {
-                    return;
-                }
-            }
-            if !outer {
-                for x in width - side..width {
-                    self.frame_cell(art, rect, [x, y], geometry, (active, disabled));
-                    if self.remaining == 0 || self.work_remaining == 0 {
-                        return;
-                    }
-                }
-            }
-        }
-    }
-    fn frame_cell(
-        &mut self,
-        art: &Art,
-        rect: [f32; 4],
-        p: [usize; 2],
-        geometry: FrameGeometry,
-        state: (bool, bool),
-    ) {
-        if self.work_remaining == 0 {
-            return;
-        }
-        self.work_remaining -= 1;
-        let (active, disabled) = state;
-        let [sx, sy] = geometry.source_at(p);
-        let index = art.sprite.indices[sy * art.sprite.width + sx] as usize;
-        if index == 0 {
-            return;
-        }
-        let color = ASSETS.palette[index];
-        self.pixel(
-            Vec2::new(rect[0] + p[0] as f32, rect[1] + p[1] as f32),
-            1.0,
-            if disabled {
-                muted(color)
-            } else if active {
-                brighten(color)
-            } else {
-                color
+    fn skin(&mut self, node: &UiNode, kind: sports_ui::Kind) {
+        sports_ui::append(
+            self.frame,
+            &sports_ui::Input {
+                parent: self.parent,
+                rect: node.rect,
+                clip: self.clip,
+                kind,
+                accent: button_accent(&node.kind),
+                active: node.active,
+                selected: node.kind == "nav-tab" && node.selected,
+                disabled: node.disabled,
             },
+            &mut self.remaining,
+            &mut self.work_remaining,
         );
     }
     fn text(&mut self, rect: [f32; 4], text: &str, font: f32, color: u32, centered: bool) {
@@ -1457,19 +1346,9 @@ impl Painter<'_> {
         } else {
             rgb(41, 59, 68)
         };
-        // Idle rows stay open. Focus adds restrained hierarchy while the label
-        // and control retain their independently measured semantic geometry.
-        if node.active && !node.disabled {
-            self.rect(r, rgb(10, 18, 24));
-            let height = (r[3] - 4.0).clamp(0.0, 12.0);
-            if r[2] >= 3.0 && height > 0.0 {
-                self.rect(
-                    [r[0] + 2.0, r[1] + (r[3] - height) * 0.5, 0.75, height],
-                    CYAN,
-                );
-            }
-        }
-        self.rect([r[0], r[1] + r[3] - 0.5, r[2], 0.5], border);
+        // Open graphite rows retain measured label/control geometry.
+        // Only focus receives a small native competitive chevron.
+        self.skin(node, sports_ui::Kind::Row);
         self.settings_label(
             label,
             &node.text,
@@ -1555,39 +1434,10 @@ impl Painter<'_> {
         let r = node.rect;
         let accent = button_accent(&node.kind);
         let selected = node.kind == "nav-tab" && node.selected;
-        let active = node.active && !node.disabled;
-        let fill = if node.disabled {
-            rgb(10, 16, 22)
-        } else {
-            button_tone(
-                accent,
-                if selected {
-                    0.20
-                } else if active {
-                    0.14
-                } else {
-                    0.07
-                },
-            )
-        };
-        let rail = if node.disabled {
-            rgb(51, 64, 74)
-        } else if selected || active {
-            accent
-        } else {
-            button_tone(accent, 0.40)
-        };
+        self.skin(node, sports_ui::Kind::Button);
         if r[2] < 3.0 || r[3] < 3.0 {
-            self.rect(r, fill);
             return;
         }
-        // Stepped corners, continuous rails and one quiet inner bevel.
-        self.rect([r[0] + 1.0, r[1], r[2] - 2.0, r[3]], fill);
-        self.rect([r[0], r[1] + 1.0, r[2], r[3] - 2.0], fill);
-        self.rect([r[0] + 1.0, r[1], r[2] - 2.0, 1.0], rail);
-        self.rect([r[0] + 1.0, r[1] + r[3] - 1.0, r[2] - 2.0, 1.0], rail);
-        self.rect([r[0], r[1] + 1.0, 1.0, r[3] - 2.0], rail);
-        self.rect([r[0] + r[2] - 1.0, r[1] + 1.0, 1.0, r[3] - 2.0], rail);
         if selected && r[2] >= 10.0 && r[3] >= 10.0 {
             self.rect(
                 [r[0] + 3.0, r[1] + r[3] - 3.0, r[2] - 6.0, 2.0],
@@ -1667,7 +1517,7 @@ impl Painter<'_> {
                 false,
             ),
             "title-backdrop" => self.rect(r, u32::from_le_bytes([1, 2, 5, 246])),
-            "panel" => self.frame("panel", r, node.active, node.disabled),
+            "panel" => self.skin(node, sports_ui::Kind::Panel),
             "meishi-panel" | "meishi-portrait-frame" | "meishi-seal" | "meishi-socket" => {
                 self.meishi_fittings(node, time, reduced);
             }
@@ -1778,7 +1628,7 @@ impl Painter<'_> {
                 self.clip = previous_clip;
             }
             "button" => {
-                self.frame("button", r, node.active, node.disabled);
+                self.skin(node, sports_ui::Kind::Button);
                 self.button_label(node, font, color);
             }
             "nav-tab" | "primary-button" | "exit-button" | "offense-button" | "defense-button"
@@ -2995,25 +2845,6 @@ mod tests {
             extract(0.0, true).batches[0].pixels,
             extract(4.4, true).batches[0].pixels
         );
-    }
-
-    #[test]
-    fn rails_keep_original_corners_and_one_centered_ornament() {
-        for (name, source) in [("panel", [96, 48]), ("button", [96, 20])] {
-            for width in [96, 300, 600] {
-                let geometry = FrameGeometry::new(name, [width, 120], source);
-                let ornaments: Vec<_> = (geometry.corner[0]..width - geometry.corner[0])
-                    .filter(|&x| (38..58).contains(&geometry.source_at([x, 0])[0]))
-                    .collect();
-                assert_eq!(
-                    ornaments,
-                    (width / 2 - 10..width / 2 + 10).collect::<Vec<_>>()
-                );
-                assert_eq!(geometry.source_at([3, 3]), [3, 3]);
-                assert_eq!(geometry.source_at([width - 3, 118]), [93, source[1] - 2]);
-                assert_eq!(geometry.source_at([0, 60])[1], geometry.neutral[1]);
-            }
-        }
     }
 
     #[test]

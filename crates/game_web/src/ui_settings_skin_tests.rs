@@ -76,12 +76,15 @@ fn idle_settings_leave_the_row_open_except_for_control_and_bottom_separator() {
             let corners = corners(batch.transforms[p.transform as usize], p.local);
             assert!(corners.into_iter().all(|p| inside(p, ROW)));
             if !corners.into_iter().all(|p| inside(p, CONTROL)) {
-                assert!(corners.into_iter().all(|p| p.y >= ROW[1] + ROW[3] - 0.5001));
+                assert!(corners.into_iter().all(|p| p.y >= ROW[1] + ROW[3] - 0.6001));
                 separator += 1;
             }
         }
     }
-    assert_eq!(separator, 1, "no top/side rails or repetitive filled cards");
+    assert_eq!(
+        separator, 2,
+        "two thin metal/recess cells, no top/side rails or repeated filled cards"
+    );
     assert!(!control_packets(&frame).is_empty());
 }
 
@@ -103,11 +106,11 @@ fn focus_marks_the_row_without_moving_or_recoloring_actual_slider_control() {
             }
         }
     }
-    assert_eq!(leading_accent, 1);
+    assert_eq!(leading_accent, 12, "authored6x6 chevron, not a filled rail");
     assert_eq!(
         focused.pixel_count - idle.pixel_count,
-        2,
-        "only background and leading accent are added"
+        13,
+        "only one background and12 fine chevron cells are added"
     );
 }
 
