@@ -1835,7 +1835,8 @@
           "title": "Hull collection: discovery and ownership",
           "paragraphs": [
             "Hull discovery or a blueprint reveals a model; it does not craft or select that hull. Crafted and rewarded ownership is retained separately. The active RAICHO keeps its own XP, hardware and equipped abilities when another hull is selected.",
-            "The MEISHI CARD reports the current RAICHO; the dedicated hull collection presents revealed models, real recipes and crafted ownership. New collection filtering, navigation and browser layout remain verification pending. Internal numeric hull IDs and historical display aliases are unchanged."
+            "The MEISHI CARD reports the current RAICHO; the dedicated hull collection presents revealed models, real recipes and crafted ownership. New collection filtering, navigation and browser layout remain verification pending. Internal numeric hull IDs and historical display aliases are unchanged.",
+            "This collection is a separate view reached through the live RAICHO menu. It is not linked from or embedded as an action in the standalone MEISHI CARD. Current navigation and browser presentation remain verification pending."
           ]
         }
       ],
@@ -1941,7 +1942,8 @@
           "title": "Ability collection and recipe scope",
           "paragraphs": [
             "A discovered blueprint, a shared owned rank and an equipped slot are distinct states. Craft acquires inventory; explicit Equip changes only a compatible category on the active RAICHO and retains displaced ownership. Effective ranks still derive from that RAICHO level and authored exceptions.",
-            "The dedicated ability collection presents discovered, owned and equipped state with authoritative reasons and recipes. Its current filter/route/layout browser acceptance remains verification pending. There is no separate crafted-component inventory today: ordinary recipes consume raw tiers and points, while the explicit first training upgrade consumes the matching ten named T1 units."
+            "The dedicated ability collection presents discovered, owned and equipped state with authoritative reasons and recipes. Its current filter/route/layout browser acceptance remains verification pending. There is no separate crafted-component inventory today: ordinary recipes consume raw tiers and points, while the explicit first training upgrade consumes the matching ten named T1 units.",
+            "This collection is a separate view reached through the live RAICHO menu. It is not linked from or embedded as an action in the standalone MEISHI CARD. Current navigation and browser presentation remain verification pending."
           ]
         }
       ],
@@ -2290,7 +2292,8 @@
           "paragraphs": [
             "Phase Silicate, Iron Filament and Coolant KESSHO are named subsets of the existing T1 cargo/stash. Show those labels plus remaining other T1 stock rather than adding the labels to the tier total. Capacity remains sixteen material units across five tiers; physical home arrival banks the carried stock.",
             "Courier packets are mission state and use no material slots. They are retained separately; visiting Haven records the delivery, and reporting to the same source beacon claims its reward. The cargo view distinguishes that state from at-risk crafting materials.",
-            "Current inventory/collection browser presentation remains verification pending. Crafted component stock and component-to-item recipes are planned. Today only raw tiers and the explicit named-material training recipe are consumed; no component count or additional capacity is invented."
+            "Current inventory/collection browser presentation remains verification pending. Crafted component stock and component-to-item recipes are planned. Today only raw tiers and the explicit named-material training recipe are consumed; no component count or additional capacity is invented.",
+            "This collection is a separate view reached through the live RAICHO menu. It is not linked from or embedded as an action in the standalone MEISHI CARD. Current navigation and browser presentation remain verification pending."
           ]
         }
       ],
@@ -3203,7 +3206,7 @@
       "title": "KIKAI / MEISHI CARD and manufacturers",
       "category": "champions",
       "status": "verification-pending",
-      "summary": "The MEISHI CARD shows the selected KIKAI profile, current RAICHO and exactly eight arena patch slots; collection presentation awaits normal-build verification.",
+      "summary": "Standalone read-only MEISHI CARD: selected KIKAI profile, current RAICHO and eight arena patch slots. Close only; current browser presentation awaits verification.",
       "tags": [
         "kikai",
         "meishi-card",
@@ -3234,6 +3237,10 @@
         {
           "label": "Arena patch slots",
           "value": "Exactly 8; earned patches only"
+        },
+        {
+          "label": "Card controls",
+          "value": "Close only; no navigation, Settings or save footer"
         }
       ],
       "sections": [
@@ -3261,7 +3268,8 @@
           "paragraphs": [
             "The card reads the authoritative identity, current RAICHO, its own level/XP, hull/shield, three effective equipped slots and retained RENKO offensive, HUGO defensive and PAN passive points. Eight fixed patch positions correspond to the stable champion order. Empty positions do not expose an unknown opponent or invent a reward.",
             "MEISHI CARD is the active display name. Existing license/factory_license/kikai_license source names, saved hash and progression remain stable; the card is not a second save or a duplicate starter grant. Historical evidence and software asset-license/provenance records retain their original meanings.",
-            "Materials and mission cargo, hull discovery and crafted ownership, and ability discovery/ownership/equipment have separate collection views. Current route/filter/layout validation is pending normal-build browser evidence; existing native and historical portrait evidence keeps its original scope."
+            "MEISHI CARD is a standalone read-only native card, with Close as its only control. Cargo, hull, ability and stats links/tabs/buttons, Settings and the save/update footer are absent. Current identity, RAICHO and equipment are readouts, not navigation controls. A dedicated meishi-panel and its local content share one native UI group.",
+            "Escape and the status toolbar open the live RAICHO menu while the universe runs. Its MEISHI entry opens the separate card. Cargo, Hull and Ability collections are reached from that menu, never through the card. Standalone-card and collection route/layout acceptance remains verification pending until normal-build browser evidence is recorded; historical portrait evidence retains its original scope."
           ]
         }
       ],

@@ -20,7 +20,11 @@ The sub-manufacturer independently colors crystal horns: PAN green, RENKO red, H
 
 The active player-facing identity record is **MEISHI CARD**. It reuses the selected identity's animated native profile portrait (portrait ID 9), designation and manufacturers. APR-1337 remains the separate authored guide portrait (ID 8). The card reads the authoritative current RAICHO, its own level/XP, hull/shield, three equipped ability categories and retained RENKO offensive, HUGO defensive and PAN passive point balances. It is a view of existing progression, not a second inventory or a new character grant.
 
-There are exactly **eight arena patch slots**, one for each stable champion index. Only an actually earned patch occupies its slot; empty slots do not invent an opponent's identity or reward. Repainting the card preserves its nodes and scroll/focus while values change. The MEISHI CARD and collection routes are source-integrated work whose current browser presentation remains **verification pending** until evidence names the tested normal build.
+The card is a **standalone read-only surface with Close as its only control**. It has no cargo, hull, ability or stats links, tabs or buttons; no Settings action and no save/update footer. Its identity, current RAICHO and equipment values are readouts, not navigation controls. A dedicated native `meishi-panel` belongs to the same local UI group as its portrait, text and patches.
+
+There are exactly **eight arena patch slots**, one for each stable champion index. Only an actually earned patch occupies its slot; empty slots do not invent an opponent's identity or reward. Repainting the card preserves its nodes and scroll/focus while values change. The current standalone presentation remains **verification pending** until evidence names the tested normal build.
+
+**Escape and the status toolbar open the live RAICHO menu**, while the universe continues running. That menu provides a MEISHI entry to open the separate card and access to the separate Cargo, Hull and Ability collections. Those routes do not turn the card into a menu; Close leaves the card. Current collection integration and browser acceptance are tracked independently.
 
 Personal collections have distinct meanings:
 
