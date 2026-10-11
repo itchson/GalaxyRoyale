@@ -1158,3 +1158,7 @@ impl Game {
 #[cfg(test)]
 #[path = "co_op_starter_tests.rs"]
 mod starter_tests;
+
+#[cfg(test)]
+#[path = "co_op_passive_tests.rs"]
+mod passive_tests;
