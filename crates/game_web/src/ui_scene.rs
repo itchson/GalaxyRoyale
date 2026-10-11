@@ -2605,7 +2605,7 @@ mod tests {
                 for (colors, deck) in
                     palettes
                         .iter()
-                        .zip([rgb(8, 29, 18), rgb(34, 12, 19), rgb(10, 22, 39)])
+                        .zip([rgb(6, 11, 10), rgb(12, 8, 10), rgb(7, 10, 14)])
                 {
                     assert!(
                         colors.contains(&deck),
