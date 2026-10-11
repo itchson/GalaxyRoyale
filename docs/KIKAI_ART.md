@@ -1,5 +1,7 @@
 # DORA and native control art
 
+**Historical 96×128 milestone.** The portrait counts, fit scales and captured proofs below describe the earlier pack. The current game uses freshly authored **192×256** DORA, DORO and TALO portraits from `assets/ui/kikai/detail/atlas.json`, documented in [KIKAI_PROFILE_ART.md](KIKAI_PROFILE_ART.md). Guide ID 8 is fixed APR-1337; licensed profile ID 9 selects the actual DORA/DORO/TALO body. The historical control-icon pack remains in use. The standalone native proof script now reads the current portrait dimensions and expected cell count from the runtime pack; old proof files are retained as historical evidence.
+
 DORA-PAN-RENKO-1337 (`APR-1337`) is the Haven guide. A denotes female, O male and T neutral; PAN green hair denotes her main corporation, and RENKO red crystal horns her secondary manufacturer. This is the user's latest naming clarification on 2026-10-11, superseding the former OPR shorthand. Golden eyes, pale armor, long female hair and the black mechanical neck retain the accepted reference's detail. The guide's appearance is fixed explicitly by `append_dora`, independently of generic preview defaults. This milestone changes labels and proof metadata, not portrait geometry or colors.
 
 Her youthful appearance contrasts with her extreme age: the guide existed alongside biological humans and preserves their continuity through new KIKAI. She is a friendly explorer and K-pop performer. These are character facts, not new animation, age simulation or gameplay effects.

@@ -25,6 +25,21 @@ fn packets(frame: &FrameBuilder) -> Vec<Value> {
 }
 fn main() {
     let mut scenes = Vec::new();
+    let authored: Value =
+        serde_json::from_str(include_str!("../assets/ui/kikai/detail/atlas.json"))
+            .expect("validated detailed portrait pack");
+    let expected_quads: usize = ["body", "eyes_neutral", "mouth_rest"]
+        .iter()
+        .map(|name| {
+            authored["profiles"]["dora"]["sprites"][name]["indices"]
+                .as_array()
+                .unwrap()
+                .iter()
+                .filter(|index| index.as_u64().unwrap() != 0)
+                .count()
+        })
+        .sum();
+    let [width, height] = art::PORTRAIT_SIZE;
     for (scene_index, (name, expression, speaking, time, reduced, main, sub)) in [
         (
             "APR_neutral",
@@ -113,7 +128,7 @@ fn main() {
     {
         let input = DoraInput {
             parent: AffineTransform::default(),
-            rect: [0.0, 0.0, 96.0, 128.0],
+            rect: [0.0, 0.0, width as f32, height as f32],
             clip: None,
             time,
             reduced_motion: reduced,
@@ -135,10 +150,10 @@ fn main() {
                 &mut work,
             )
         };
-        assert_eq!(stats.quads, 8656);
+        assert_eq!(stats.quads, expected_quads);
         assert_eq!(stats.quads, stats.visible_cells);
         assert_eq!(stats.quads, frame.frame().pixel_count);
-        scenes.push(json!({"name":name,"width":96,"height":128,"quads":stats.quads,"transforms":stats.transforms,
+        scenes.push(json!({"name":name,"width":width,"height":height,"quads":stats.quads,"transforms":stats.transforms,
             "api":if is_guide {"append_dora"} else {"append_corporate_portrait"},
             "identity":if is_guide {"DORA-PAN-RENKO-1337"} else {"long-hair recolor only; not DORO/TALO"},
             "blink":stats.blink,"mouth_frame":stats.mouth_frame,"cells":packets(&frame)}));

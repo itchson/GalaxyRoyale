@@ -55,6 +55,8 @@ jobs:
         run: python scripts/asset-kikai-tests.py
       - name: Distinct licensed DORO and TALO cell packs
         run: python scripts/asset-kikai-profiles-tests.py
+      - name: Detailed KIKAI portraits and exact committed cell packs
+        run: python scripts/asset-kikai-detail-tests.py
       - name: Detailed shooting-star palette and occupied cells
         run: python scripts/asset-shooting-star-tests.py
       - name: Actual native PixelBody, group and animation extraction

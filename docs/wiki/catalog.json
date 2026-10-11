@@ -2924,6 +2924,10 @@
         {
           "label": "License",
           "value": "A female / O male / T neutral, then main + sub initials; player #HASH, guide APR-1337"
+        },
+        {
+          "label": "Portrait grid",
+          "value": "192 × 256 source cells; three native object layers per portrait"
         }
       ],
       "sections": [
@@ -2933,8 +2937,16 @@
             "The browser issues eight cryptographically random bytes as sixteen hexadecimal digits. Main corporation selects its distinct level-one starter hull and one equipped rank-one ability. PAN HIKARI carries the passive slot; RENKO HIBANA the offensive slot; HUGO MAMORI the defensive slot.",
             "Main corporation themes hair, the starter hull, its RAICHO and home accents. The independent sub-manufacturer colors horns. Existing anonymous profiles retain their original Scout, progress and loadouts; migration does not issue a license or duplicate a starter item.",
             "Distinct DORA/DORO/TALO profile bodies are implemented with independent main-hair and sub-manufacturer KESSHO crystal palettes. The creator updates all27 combinations in real time and reuses the chosen profile on the issued license. Current integrated browser acceptance is recorded separately.",
-            "Appearance follows droid type: feminine DORA with long hair, masculine DORO with short spiky hair, neutral TALO with a crew cut. Callsigns use A/O/T then main and sub-manufacturer initials; the confirmed guide is APR-1337, PAN main with RENKO horns.",
+            "Appearance follows droid type: feminine DORA with long hair, masculine DORO with short spiky hair and flat angular chest armor, neutral TALO with a crew cut and flat torso. DORO and TALO do not inherit breast forms or cup-shaped seams. Callsigns use A/O/T then main and sub-manufacturer initials; the guide is APR-1337, PAN main with RENKO horns.",
             "KIKAI are technological life descended from humans in a future where biological life can no longer survive. They have friendships, dreams and hobbies. The setting treats them as people."
+          ]
+        },
+        {
+          "title": "Portrait fidelity",
+          "paragraphs": [
+            "All three runtime portraits are freshly authored at 192 × 256 cells from the full-resolution references, with separately animated body, eyes and mouth. The source conversion is declared lossy; the authored PNG-to-cell import is exact. The corrected DORO and TALO references use flat mechanical torso plates.",
+            "UI art rasterizes at its physical canvas presentation resolution while layout, fonts and input retain logical coordinates. Each whole portrait is admitted within the existing 60,000-quad UI budget. Smaller display rectangles still have a finite number of physical samples; no minimum cell size or coarse fallback is introduced. Browser evidence and performance measurements have separate scopes.",
+            "This refinement covers the three KIKAI portrait types and the common UI raster path. Broader RAICHO, environment, enemy and facility artwork remains a separately tracked art pass."
           ]
         }
       ],
@@ -2963,16 +2975,6 @@
           "path": "docs/KIKAI_PROFILE_ART.md",
           "label": "Distinct profile conversion and animation provenance",
           "role": "implementation"
-        },
-        {
-          "path": "docs/KIKAI_PROFILE_ART.md",
-          "label": "Distinct profile conversion and animation provenance",
-          "role": "implementation"
-        },
-        {
-          "path": "docs/KIKAI_PROFILE_ART.md",
-          "label": "Distinct profile conversion and animation provenance",
-          "role": "implementation"
         }
       ],
       "related": [
@@ -2982,11 +2984,11 @@
       ],
       "media": [
         {
-          "path": "assets/ui/kikai/profiles/authoring-contact-sheet.png",
-          "label": "Distinct DORA, DORO and TALO silhouettes",
+          "path": "assets/ui/kikai/detail/authoring-overview.png",
+          "label": "Detailed DORA, DORO and TALO portraits",
           "kind": "converted-concept",
           "provenance": "docs/KIKAI_PROFILE_ART.md",
-          "caption": "Software authoring preview of the actual cell packs and color masks; native extraction tests and integrated GPU screenshots have separate evidence scopes."
+          "caption": "Actual authored 192×256 cell-pack preview. DORO and TALO have flat plated torsos. This software authoring overview is not a GPU screenshot."
         }
       ],
       "data": {
@@ -3039,7 +3041,7 @@
         },
         {
           "label": "Native portrait",
-          "value": "96 × 128 cells; 8,656 occupied submissions in three layers"
+          "value": "192 × 256 cells; 34,594 occupied submissions in three layers"
         },
         {
           "label": "Animation",
@@ -3064,8 +3066,8 @@
       ],
       "references": [
         {
-          "path": "docs/KIKAI_ART.md",
-          "label": "Portrait and conversion contract",
+          "path": "docs/KIKAI_PROFILE_ART.md",
+          "label": "Current detailed portrait conversion contract",
           "role": "implementation"
         },
         {
@@ -3074,8 +3076,8 @@
           "role": "implementation"
         },
         {
-          "path": "assets/ui/kikai/provenance.json",
-          "label": "Actual provenance",
+          "path": "assets/ui/kikai/detail/dora/provenance.json",
+          "label": "Current detailed source and import provenance",
           "role": "implementation"
         },
         {
@@ -3099,17 +3101,24 @@
         },
         {
           "path": "artifacts/kikai-apr/native-contact-sheet.png",
-          "label": "Current native APR layers and controls",
+          "label": "Historical 96×128 native APR proof",
           "kind": "runtime-art",
           "provenance": "docs/KIKAI_ART.md",
-          "caption": "Latest green PAN hair/red RENKO horns in actual FrameBuilder packets: expressions, blink, speech masks, independent long-hair recolor previews and ten32-cell icons. This is native extraction evidence, not a GPU screenshot."
+          "caption": "Historical native FrameBuilder extraction of the earlier 96×128 guide and the unchanged 32-cell controls. Current portraits use the separate 192×256 detail pack."
+        },
+        {
+          "path": "assets/ui/kikai/detail/authoring-overview.png",
+          "label": "Current detailed KIKAI authoring",
+          "kind": "converted-concept",
+          "provenance": "docs/KIKAI_PROFILE_ART.md",
+          "caption": "Current 192×256 authored-cell preview, including fixed PAN/RENKO guide colors. Native and browser validation are recorded separately."
         }
       ],
       "data": {
         "portraitId": 8,
-        "width": 96,
-        "height": 128,
-        "occupied": 8656,
+        "width": 192,
+        "height": 256,
+        "occupied": 34594,
         "layers": 3
       }
     },
