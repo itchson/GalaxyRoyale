@@ -351,7 +351,7 @@ export class PixelUiBridge {
               : element === this.hover ||
                 element.contains(document.activeElement),
           selected:
-            kind === "meishi-socket"
+            kind === "meishi-socket" || kind === "collection-entry"
               ? element.dataset.active === "true"
               : element.matches(":active") ||
                 element.dataset.active === "true" ||

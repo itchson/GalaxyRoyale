@@ -301,6 +301,23 @@ test("collection copy reaches native state/cost routes once with literal measure
     -1,
     "neutral hull accent must not invent a manufacturer",
   );
+  const pressedCard = pixelScene({
+    icon: {
+      kind: "collection-entry",
+      index: 0,
+      width: 120,
+      height: 60,
+      pressed: true,
+      focusedChild: true,
+      dataset: { active: "false" },
+    },
+  }).groups[0].nodes.find((n) => n.kind === "collection-entry");
+  assert.equal(pressedCard.active, true);
+  assert.equal(
+    pressedCard.selected,
+    false,
+    "pointer or keyboard focus must never invent equipped ownership",
+  );
 });
 
 test("live license portraits deliver all 27 independent appearance choices to native rendering", () => {
