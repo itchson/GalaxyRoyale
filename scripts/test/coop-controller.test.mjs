@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { readFileSync } from "node:fs";
 import { CoopController } from "../../apps/game/src/coop/controller.ts";
 import {
   allowed,
@@ -383,20 +384,32 @@ class Replica {
     this.ends++;
   };
 }
-async function pair({ replica = new Replica() } = {}) {
+async function pair({
+  replica = new Replica(),
+  guestSpec = local,
+  hostSpec = local,
+  sessionCounter = 0,
+} = {}) {
   const network = new Network(),
     native = new Native(),
     guestNative = new Native();
   let now = 0;
+  network.session = sessionCounter;
+  native.saved.seed = hostSpec.local_seed;
   const options = {
     service: "http://127.0.0.1:4176",
-    localSpec: () => structuredClone(local),
+    localSpec: () => structuredClone(hostSpec),
     native,
     transportFactory: network.factory,
     now: () => now,
   };
   const host = new CoopController(options),
-    guest = new CoopController({ ...options, native: guestNative, replica });
+    guest = new CoopController({
+      ...options,
+      localSpec: () => structuredClone(guestSpec),
+      native: guestNative,
+      replica,
+    });
   await host.create();
   await guest.join(host.invite());
   await flush();
@@ -682,6 +695,8 @@ test("cancellation while signaling create is pending cannot begin native authori
     transportFactory: network.factory,
   });
   const pending = controller.create();
+  assert.equal(controller.frameMode(), "blocked");
+  assert.equal(controller.blocksSolo(), true);
   await flush();
   await controller.leave();
   release();
@@ -689,6 +704,7 @@ test("cancellation while signaling create is pending cannot begin native authori
   assert.equal(controller.state().phase, "ended");
   assert.equal(controller.invite(), null);
   assert.equal(native.calls.length, 0);
+  assert.equal(controller.frameMode(), "solo");
   await controller.dispose();
 });
 test("a stale prior-session callback cannot mutate a replacement native session", async () => {
@@ -779,6 +795,256 @@ test("no acknowledged receipt expires only the stalled guest while host simulati
   assert.equal(p.host.state().phase, "hosting");
   assert.equal(p.native.active, true);
   assert.ok(p.native.calls.some((o) => o.op === "leave" && o.peer === pid(2)));
+  await p.host.end();
+  await p.guest.dispose();
+});
+
+test("replica binds authenticated host world seed while preserving distinct guest local metadata", async () => {
+  const guestSpec = {
+    local_seed: 1234,
+    identity: { ...local.identity, corporation: "hugo" },
+  };
+  const before = structuredClone(guestSpec);
+  const p = await pair({ guestSpec });
+  await p.frame(8);
+  assert.deepEqual(p.replica.begins, [
+    [p.native.session, pid(2), 2, local.local_seed],
+  ]);
+  assert.deepEqual(p.native.calls.find((o) => o.op === "join").participant, {
+    id: pid(2),
+    ...guestSpec,
+  });
+  assert.deepEqual(guestSpec, before);
+  assert.equal(p.host.frameMode(), "host");
+  assert.equal(p.guest.frameMode(), "guest");
+  assert.equal(p.guest.blocksSolo(), true);
+  await p.host.end();
+  assert.equal(p.host.frameMode(), "solo");
+  await p.guest.dispose();
+});
+
+test("one-frame click courses survive sampling cadence and backpressure, then are consumed once", async () => {
+  const p = await pair();
+  await p.frame(8);
+  p.host.beforeStep(0.04, empty);
+  const before = p.native.calls.length;
+  p.host.beforeStep(0.001, { fire: false, destination: [50, 70] });
+  assert.equal(p.native.calls.length, before);
+  p.host.beforeStep(0.04, empty);
+  assert.deepEqual(p.native.calls.at(-1).input.destination, [50, 70]);
+  p.host.beforeStep(0.04, empty);
+  assert.equal(p.native.calls.at(-1).input.destination, null);
+
+  const transport = p.network.transports[1];
+  transport.blocked = true;
+  const inputCount = () =>
+    p.network.sent.filter((f) => f.kind === "input").length;
+  const count = inputCount();
+  p.guest.beforeStep(0.04, { fire: false, destination: [90, 30] });
+  p.guest.beforeStep(0.04, { fire: false, destination: [110, 60] });
+  p.guest.beforeStep(0.04, empty);
+  assert.equal(inputCount(), count);
+  transport.blocked = false;
+  p.guest.beforeStep(0, { fire: true, aim: [120, 60] });
+  const delivered = p.network.sent
+    .filter((f) => f.kind === "input")
+    .at(-1).payload;
+  assert.deepEqual(delivered.input.destination, [110, 60]);
+  assert.deepEqual(delivered.input.aim, [120, 60]);
+  assert.equal(delivered.input.fire, true);
+  p.guest.beforeStep(0.04, empty);
+  assert.equal(
+    p.network.sent.filter((f) => f.kind === "input").at(-1).payload.input
+      .destination,
+    null,
+  );
+  await p.host.end();
+  await p.guest.dispose();
+});
+
+test("cancelInput sends the existing native zero-stick course cancellation, then resumes fresh controls", async () => {
+  const p = await pair();
+  await p.frame(8);
+  for (const controller of [p.host, p.guest]) {
+    controller.beforeStep(0.001, { fire: true, destination: [500, 20] });
+    controller.cancelInput();
+    controller.beforeStep(0, thrust);
+  }
+  const zero = {
+    joystick: [0, 0],
+    destination: null,
+    thrust: null,
+    aim: null,
+    fire: false,
+  };
+  assert.deepEqual(
+    p.native.calls.filter((o) => o.op === "host_input").at(-1).input,
+    zero,
+  );
+  assert.deepEqual(
+    p.network.sent.filter((f) => f.kind === "input").at(-1).payload.input,
+    zero,
+  );
+  p.host.beforeStep(0.04, thrust);
+  p.guest.beforeStep(0.04, thrust);
+  assert.deepEqual(
+    p.native.calls.filter((o) => o.op === "host_input").at(-1).input.thrust,
+    thrust.thrust,
+  );
+  assert.equal(
+    p.native.calls.filter((o) => o.op === "host_input").at(-1).input.fire,
+    true,
+  );
+  assert.deepEqual(
+    p.network.sent.filter((f) => f.kind === "input").at(-1).payload.input
+      .thrust,
+    thrust.thrust,
+  );
+  await p.host.end();
+  await p.guest.dispose();
+});
+
+test("a synchronous transport end followed by failed native restoration cannot submit another input", async () => {
+  const p = await pair();
+  await p.frame(8);
+  p.native.failEnd = true;
+  const transport = p.network.transports[0];
+  // Deliberately omit onChange: beforeStep itself must discover this transition.
+  transport.phase = "ended";
+  transport.reason = "channel_error";
+  const before = p.native.calls.length;
+  p.host.beforeStep(0.04, thrust);
+  assert.deepEqual(
+    p.native.calls.slice(before).map((o) => o.op),
+    ["end"],
+  );
+  assert.equal(p.host.state().reason, "restore_failed");
+  assert.equal(p.host.frameMode(), "blocked");
+  p.host.afterStep(0.04);
+  assert.equal(p.native.calls.length, before + 1);
+  p.native.failEnd = false;
+  await p.host.leave();
+  assert.equal(p.host.frameMode(), "solo");
+  await p.guest.dispose();
+});
+
+test("an ambiguous successful native begin reply retains ownership until real cleanup", async () => {
+  const network = new Network(),
+    native = new Native();
+  const delegate = native.co_op_batch;
+  native.co_op_batch = (text) => {
+    const response = delegate(text);
+    return JSON.parse(text).operations[0].op === "begin" ? "{" : response;
+  };
+  const controller = new CoopController({
+    service: "http://127.0.0.1:4176",
+    localSpec: () => local,
+    native,
+    transportFactory: network.factory,
+  });
+  await controller.create();
+  assert.equal(controller.state().phase, "ended");
+  assert.deepEqual(
+    native.calls.map((o) => o.op),
+    ["begin", "end"],
+  );
+  assert.equal(native.active, false);
+  assert.equal(controller.frameMode(), "solo");
+  await controller.dispose();
+});
+
+test("an admitted guest drops a stale published world after 30 seconds without claiming host background simulation", async () => {
+  const p = await pair();
+  await p.frame(8);
+  const commits = p.replica.commits.length;
+  assert.ok(commits > 0);
+  p.now(31_000);
+  p.guest.beforeStep(0, empty);
+  await flush();
+  assert.equal(p.guest.state().phase, "ended");
+  assert.equal(p.guest.state().reason, "publication_stalled");
+  assert.equal(
+    p.guest.state().message,
+    "Shared-world updates stopped. Session closed.",
+  );
+  assert.equal(p.replica.ends, 1);
+  assert.equal(p.replica.commits.length, commits);
+  assert.equal(p.host.frameMode(), "host");
+  await p.host.end();
+  await p.guest.dispose();
+});
+
+test("unavailable concrete ports do not launch signaling or publish a connected state", async () => {
+  const network = new Network(),
+    native = new Native();
+  const controller = new CoopController({
+    service: "http://127.0.0.1:4176",
+    localSpec: () => local,
+    native,
+    availability: { host: false, guest: false },
+    transportFactory: network.factory,
+  });
+  await assert.rejects(controller.create(), /native_unavailable/);
+  await assert.rejects(
+    controller.join("#" + "A".repeat(300)),
+    /replica_unavailable/,
+  );
+  assert.equal(network.session, 0);
+  assert.equal(native.calls.length, 0);
+  assert.equal(controller.frameMode(), "solo");
+  await controller.dispose();
+});
+
+test("actual 91a18ab publisher rows and indexed cells reach the controller, but partial export cannot claim a complete world", async () => {
+  const actual = (name) =>
+    JSON.parse(
+      readFileSync(
+        new URL(`./fixtures/co-op-publication/${name}.json`, import.meta.url),
+        "utf8",
+      ),
+    ).results[0].value;
+  const header = actual("capture"),
+    rows = actual("entities"),
+    body = actual("body");
+  const p = await pair({
+    hostSpec: { local_seed: header.snapshot.world_seed, identity: null },
+    guestSpec: { local_seed: 123, identity: null },
+    sessionCounter: -1,
+  });
+  const transport = p.network.transports[0];
+  assert.equal(p.native.session, header.snapshot.session);
+  transport.send(pid(2), "admission", { accepted: true, slot: 1, epoch: 2 });
+  await flush();
+  for (const [kind, payload] of [
+    ["publication", header],
+    ["body", rows],
+    ["body", body],
+  ]) {
+    transport.send(pid(2), kind, payload);
+    await flush();
+  }
+  assert.deepEqual(p.replica.header, header);
+  assert.deepEqual(p.replica.pages, [rows, body]);
+  assert.equal(p.guest.state().phase, "loading");
+  assert.equal(p.replica.commits.length, 0);
+  // Original export contains one of 120 full-body pages; refusing completion
+  // here is a controller boundary proof, not execution of native Replica.
+  assert.throws(
+    () =>
+      p.network.transports[1].options.onFrame(pid(1), {
+        v: 1,
+        session: header.snapshot.session,
+        seq: 1,
+        kind: "publication-end",
+        payload: {
+          acquisition: header.acquisition,
+          revision: header.snapshot.revision,
+        },
+      }),
+    /publication_incomplete/,
+  );
+  assert.equal(p.replica.commits.length, 0);
+  assert.equal(p.network.transports[1].sim.includes(true), false);
   await p.host.end();
   await p.guest.dispose();
 });

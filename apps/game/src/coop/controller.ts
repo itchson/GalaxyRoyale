@@ -58,7 +58,12 @@ export interface Publication {
 }
 /** Concrete delegates must call the native transaction/render path, never JS gameplay. */
 export interface ReplicaPort {
-  begin(session: string, peer: string, epoch: number): boolean;
+  begin(
+    session: string,
+    peer: string,
+    epoch: number,
+    worldSeed: number,
+  ): boolean;
   stage(header: Publication): boolean;
   page(page: Json): boolean;
   commit(acquisition: number, revision: number): boolean;
@@ -71,6 +76,7 @@ export interface ControllerOptions extends Omit<
   localSpec: () => ParticipantSpec;
   native: { co_op_batch(request: string): string };
   replica?: ReplicaPort;
+  availability?: { host: boolean; guest: boolean };
   onChange?: () => void;
   now?: () => number;
   /** Lifecycle tests can inject the transport boundary; production uses actual RTC. */
@@ -124,20 +130,24 @@ const MAX_BYTES = 1_048_576,
 const message = (phase: CoopState["phase"], reason: string | null): string => {
   if (reason === "host_ended") return "The host ended the session.";
   if (reason === "restore_failed")
-    return "Connection ended. Solo restoration failed; return to title.";
+    return "Connection ended. Solo restoration failed. Retry restore.";
+  if (reason === "native_unavailable")
+    return "Native co-op hosting is unavailable.";
   if (reason === "replica_unavailable")
     return "Native guest rendering is unavailable.";
   if (reason === "admission_rejected")
     return "The host could not admit this participant.";
+  if (reason === "publication_stalled")
+    return "Shared-world updates stopped. Session closed.";
   if (reason === "local_left" || reason === "disposed")
     return "Session closed.";
   return {
     idle: "Co-op is not active.",
-    creating: "Creating an invitationÃ¢â‚¬Â¦",
-    joining: "Joining the signaling sessionÃ¢â‚¬Â¦",
+    creating: "Creating an invitation...",
+    joining: "Joining the signaling session...",
     hosting: "Hosting a temporary session. Progression is disabled.",
-    admitting: "Channel ready. Waiting for host admissionÃ¢â‚¬Â¦",
-    loading: "Loading the native shared-world viewÃ¢â‚¬Â¦",
+    admitting: "Channel ready. Waiting for host admission...",
+    loading: "Loading the native shared-world view...",
     connected: "Native shared-world view active. Progression is disabled.",
     ended: "Connection ended.",
   }[phase];
@@ -160,7 +170,11 @@ export class CoopController {
   #replicaActive = false;
   #joined = false;
   #epoch = 0;
+  #worldSeed = 0;
+  #lastPublication = 0;
   #sequence = 0;
+  #destination: [number, number] | null = null;
+  #cancelCourse = false;
   #inputTime = 1;
   #publicationTime = 1;
   #members = 0;
@@ -217,6 +231,26 @@ export class CoopController {
   }
   invite(): string | null {
     return this.#phase === "hosting" ? this.#transport.invite() : null;
+  }
+  /** Root must suppress solo ticks/saves while this transient ownership exists. */
+  frameMode(): "solo" | "host" | "guest" | "blocked" {
+    if (this.#restoreFailed) return "blocked";
+    if (this.#nativeActive) return "host";
+    if (this.#replicaActive) return "guest";
+    return this.#session ||
+      this.#phase === "creating" ||
+      this.#phase === "joining"
+      ? "blocked"
+      : "solo";
+  }
+  blocksSolo(): boolean {
+    return this.frameMode() !== "solo";
+  }
+  /** Existing zero-stick semantics clear the native pilot's persistent course. */
+  cancelInput(): void {
+    this.#destination = null;
+    this.#cancelCourse = true;
+    this.#inputTime = 1;
   }
   #results(operations: Json[]): ({ ok: true; value: Json } | { ok: false })[] {
     if (operations.length > 16) fail("native_batch_bound");
@@ -293,13 +327,28 @@ export class CoopController {
     this.#ack = null;
     if (!this.#restoreFailed) this.#session = this.#self = this.#host = null;
     this.#epoch = this.#sequence = 0;
+    this.#worldSeed = 0;
+    this.#lastPublication = 0;
+    this.#destination = null;
+    this.#cancelCourse = false;
     this.#joined = false;
   }
   async #start(role: "host" | "guest", invite?: string): Promise<void> {
     if (this.#disposed) fail("disposed");
     if (this.#restoreFailed) fail("restore_failed");
+    if (this.#options.availability?.[role] === false)
+      fail(role === "host" ? "native_unavailable" : "replica_unavailable");
     const generation = ++this.#generation;
     this.#restore();
+    if (this.#restoreFailed) {
+      this.#phase = "ended";
+      this.#emit();
+      fail("restore_failed");
+    }
+    this.#role = role;
+    this.#reason = null;
+    this.#phase = role === "host" ? "creating" : "joining";
+    this.#emit();
     await this.#transport.leave("replaced");
     if (generation !== this.#generation) return;
     if (this.#restoreFailed) {
@@ -322,19 +371,24 @@ export class CoopController {
         fail("signaling_unavailable");
       this.#session = d.session.id;
       this.#self = d.participant.id;
+      this.#worldSeed = d.session.seed;
       this.#inputTime = this.#publicationTime = 1;
       if (role === "host") {
-        const a = record(
-          this.#batch([
-            {
-              op: "begin",
-              protocol: PROTOCOL,
-              session: this.#session,
-              host: this.#self,
-            },
-          ])[0],
-        );
+        // Retain ownership if a successful native side effect has a malformed reply.
         this.#nativeActive = true;
+        const result = this.#results([
+          {
+            op: "begin",
+            protocol: PROTOCOL,
+            session: this.#session,
+            host: this.#self,
+          },
+        ])[0];
+        if (!result.ok) {
+          this.#nativeActive = false;
+          fail("native_rejected");
+        }
+        const a = record(result.value);
         if (
           a.id !== this.#self ||
           a.slot !== 0 ||
@@ -347,8 +401,14 @@ export class CoopController {
         this.#phase = "hosting";
       } else this.#phase = "joining";
       this.#sync();
-    } catch {
-      if (generation === this.#generation) await this.#stop("session_failed");
+    } catch (error) {
+      if (generation === this.#generation)
+        await this.#stop(
+          error instanceof TransportError &&
+            ["native_unavailable", "replica_unavailable"].includes(error.code)
+            ? error.code
+            : "session_failed",
+        );
     }
   }
   create(): Promise<void> {
@@ -499,15 +559,30 @@ export class CoopController {
           return;
         }
         this.#epoch = Number(a.epoch);
-        if (
-          !this.#options.replica ||
-          !this.#options.replica.begin(this.#session, this.#self!, this.#epoch)
-        ) {
+        if (!this.#options.replica) {
           void this.#stop("replica_unavailable");
           return;
         }
         this.#replicaActive = true;
+        try {
+          if (
+            !this.#options.replica.begin(
+              this.#session,
+              this.#self!,
+              this.#epoch,
+              this.#worldSeed,
+            )
+          ) {
+            this.#replicaActive = false;
+            void this.#stop("replica_rejected");
+            return;
+          }
+        } catch {
+          void this.#stop("replica_failed");
+          return;
+        }
         this.#phase = "loading";
+        this.#lastPublication = this.#now();
       } else if (frame.kind === "publication") {
         const h = frame.payload as unknown as Publication;
         if (
@@ -529,6 +604,7 @@ export class CoopController {
           entityPages: 0,
           bodyPages: 0,
         };
+        this.#lastPublication = this.#now();
         this.#ack = null;
         this.#members = h.snapshot.participants.length;
       } else if (frame.kind === "body") this.#page(frame.payload);
@@ -649,6 +725,7 @@ export class CoopController {
     this.#receiving = null;
     this.#ack = payload;
     this.#phase = "connected";
+    this.#lastPublication = this.#now();
     this.#transport.markSimulation(this.#host!, true);
   }
   /** Call before the existing Galaxy.step; no simulation tick is performed here. */
@@ -657,7 +734,32 @@ export class CoopController {
       fail("invalid_elapsed");
     if (!this.#session || this.#restoreFailed) return;
     this.#sync();
-    if (!this.#session) return;
+    if (!this.#session || this.#restoreFailed || this.#phase === "ended")
+      return;
+    if (
+      this.#role === "guest" &&
+      this.#replicaActive &&
+      this.#now() - this.#lastPublication > TRANSFER_MS
+    ) {
+      void this.#stop("publication_stalled");
+      return;
+    }
+    validatePayload("input", {
+      epoch: this.#epoch,
+      seq: this.#sequence,
+      input,
+    });
+    if (input.destination && !this.#cancelCourse)
+      this.#destination = [...input.destination];
+    const controls: FlightInput = this.#cancelCourse
+      ? {
+          joystick: [0, 0],
+          destination: null,
+          thrust: null,
+          aim: null,
+          fire: false,
+        }
+      : { ...input, destination: this.#destination };
     this.#inputTime += elapsed;
     if (this.#role === "host") {
       const operations: Json[] = [];
@@ -681,21 +783,27 @@ export class CoopController {
         validatePayload("input", {
           epoch: this.#epoch,
           seq: this.#sequence + 1,
-          input,
+          input: controls,
         });
         operations.push({
           op: "host_input",
           session: this.#session,
           seq: ++this.#sequence,
-          input: input as unknown as Json,
+          input: controls as unknown as Json,
         });
         this.#inputTime = 0;
       }
       try {
         if (operations.length)
           this.#results(operations).forEach((r, index) => {
-            if (r.ok) return;
             const op = record(operations[index]);
+            if (r.ok) {
+              if (op.op === "host_input") {
+                this.#destination = null;
+                this.#cancelCourse = false;
+              }
+              return;
+            }
             if (op.op === "input") this.#retire(String(op.peer));
             else fail("native_rejected");
           });
@@ -711,11 +819,13 @@ export class CoopController {
         this.#transport.send(this.#host!, "input", {
           epoch: this.#epoch,
           seq: this.#sequence + 1,
-          input: input as unknown as Json,
+          input: controls as unknown as Json,
         })
       ) {
         this.#sequence++;
         this.#inputTime = 0;
+        this.#destination = null;
+        this.#cancelCourse = false;
       }
     }
     if (
