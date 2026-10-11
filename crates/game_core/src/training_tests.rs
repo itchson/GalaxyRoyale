@@ -568,3 +568,178 @@ fn first_mission_counts_outer_and_site_belt_asteroids_with_their_existing_xp_pol
     );
     assert_eq!(g.profile.campaign.ship_xp[0], 4);
 }
+
+#[test]
+fn live_hud_descriptions_follow_actual_counts_sources_banking_and_starter_recipe() {
+    for (corp, index, material, asteroid, ability, slot, chassis) in [
+        (
+            "pan",
+            0,
+            "Phase Silicate",
+            "Porous asteroid",
+            "Flux Drive",
+            "passive",
+            "PAN HIKARI",
+        ),
+        (
+            "renko",
+            1,
+            "Iron Filament",
+            "Metal asteroid",
+            "Pulse Lens",
+            "offense",
+            "RENKO HIBANA",
+        ),
+        (
+            "hugo",
+            2,
+            "Coolant KESSHO",
+            "Ice asteroid",
+            "Guard Coil",
+            "defense",
+            "HUGO MAMORI",
+        ),
+    ] {
+        let mut g = fresh(corp);
+        assert!(g.hud().onboarding.unwrap().description.contains("RAICHO"));
+        g.acknowledge_license().unwrap();
+        for _ in 0..200 {
+            g.tick(
+                &InputFrame {
+                    joystick: Some([1.0, 0.0]),
+                    ..Default::default()
+                },
+                DT,
+            );
+        }
+        let hud = g.hud().onboarding.unwrap();
+        assert_eq!(hud.stage, 2);
+        assert!(hud.description.contains("Asteroids destroyed: 0/10"));
+        assert!(hud.description.contains("RAICHO"));
+        for count in 1..=10 {
+            let e = rock(&mut g, None);
+            defeat(&mut g, e, 10_000);
+            let hud = g.hud().onboarding.unwrap();
+            assert_eq!(hud.asteroids_destroyed, count);
+            if count < 10 {
+                assert!(
+                    hud.description
+                        .contains(&format!("Asteroids destroyed: {count}/10"))
+                );
+            }
+        }
+        let hud = g.hud().onboarding.unwrap();
+        assert_eq!(hud.stage, 3);
+        assert!(
+            hud.description
+                .contains(&format!("Collected 0/10 {material}"))
+        );
+        assert!(
+            hud.description
+                .contains(&format!("Assigned source: {asteroid}"))
+        );
+        // Declared named pickup inputs pass through the actual capacity/pickup path.
+        collect_named(&mut g, index, 4);
+        let hud = g.hud().onboarding.unwrap();
+        assert!(
+            hud.description
+                .contains(&format!("Collected 4/10 {material}"))
+        );
+        collect_named(&mut g, index, 6);
+        let hud = g.hud().onboarding.unwrap();
+        assert_eq!(hud.stage, 4);
+        assert!(hud.description.contains(&format!("Carried: 10 {material}")));
+        assert!(hud.description.contains("banked: 0/10"));
+        assert!(hud.description.contains("Collected progress is 10/10"));
+        bank_by_crossing(&mut g);
+        let before = json(&g);
+        let hud = g.hud().onboarding.unwrap();
+        assert_eq!(
+            json(&g),
+            before,
+            "Description extraction cannot change progress"
+        );
+        assert_eq!(hud.stage, 5);
+        assert!(hud.description.contains(ability));
+        assert!(hud.description.contains(&format!("{slot} slot")));
+        assert!(hud.description.contains(&format!("{chassis} RAICHO")));
+        assert!(
+            hud.description
+                .contains(&format!("Banked: 10/10 {material}"))
+        );
+        assert!(
+            hud.description
+                .contains(&format!("first upgrade costs 10 {material}"))
+        );
+        assert!(hud.description.contains("no points"));
+        assert!(hud.can_upgrade);
+        g.upgrade_ability(&hud.starter_id).unwrap();
+        let hud = g.hud().onboarding.unwrap();
+        assert_eq!(hud.stage, 6);
+        assert!(hud.description.contains("RAICHO"));
+    }
+}
+
+#[test]
+fn live_hud_keeps_collected_history_separate_from_lost_and_spent_matching_stock() {
+    let mut g = fresh("pan");
+    g.acknowledge_license().unwrap();
+    ten_real_kills(&mut g);
+    collect_named(&mut g, 0, 10);
+    let mut g = Game::new(g.profile().clone()); // Actual reload discards unbanked cargo.
+    let hud = g.hud().onboarding.unwrap();
+    assert_eq!(hud.stage, 4);
+    assert_eq!(hud.materials_collected, 10);
+    assert_eq!(hud.carried_matching, 0);
+    assert_eq!(hud.banked_matching, 0);
+    assert!(
+        hud.description
+            .contains("Carried: 0 Phase Silicate; banked: 0/10")
+    );
+    assert!(hud.description.contains("Collected progress is 10/10"));
+    assert!(
+        hud.description
+            .contains("replace any material lost or spent")
+    );
+    assert!(hud.description.contains("Reload never banks cargo"));
+    collect_named(&mut g, 0, 3);
+    bank_by_crossing(&mut g);
+    g.consume_stored_materials([2, 0, 0, 0, 0]); // Actual shared generic debit path.
+    let hud = g.hud().onboarding.unwrap();
+    assert_eq!(hud.stage, 4);
+    assert_eq!(hud.materials_collected, 10);
+    assert_eq!(hud.banked_matching, 1);
+    assert!(
+        hud.description
+            .contains("Carried: 0 Phase Silicate; banked: 1/10")
+    );
+    assert!(hud.description.contains("Collected progress is 10/10"));
+    assert!(!hud.can_upgrade);
+}
+
+#[test]
+fn live_hud_does_not_recharge_an_already_owned_upgrade_after_materials_are_spent() {
+    let mut g = fresh("renko");
+    // Declared existing earned rank; genuine goals still use real kills and pickups.
+    g.profile.campaign.abilities[0].rank = 4;
+    g.profile.campaign.ship_xp[0] = 560;
+    g.equip_ability(0, None).unwrap();
+    g.acknowledge_license().unwrap();
+    ten_real_kills(&mut g);
+    collect_named(&mut g, 1, 10);
+    bank_by_crossing(&mut g);
+    g.consume_stored_materials([2, 0, 0, 0, 0]);
+    let hud = g.hud().onboarding.unwrap();
+    assert_eq!(hud.stage, 5);
+    assert_eq!(hud.banked_matching, 8);
+    assert!(hud.description.contains("Pulse Lens in the offense slot"));
+    assert!(hud.description.contains("RENKO HIBANA RAICHO"));
+    assert!(hud.description.contains("Banked: 8/10 Iron Filament"));
+    assert!(hud.description.contains("without another material cost"));
+    assert!(!hud.description.contains("first upgrade costs"));
+    g.equip_ability(0, Some("pulse-lens")).unwrap();
+    assert!(g.hud().onboarding.unwrap().completed);
+    assert_eq!(g.profile.campaign.stored_training_materials[1], 8);
+    assert_eq!(g.profile.campaign.abilities[0].rank, 4);
+    assert_eq!(g.profile.campaign.ship_xp[0], 560);
+}

@@ -297,41 +297,49 @@ pub fn onboarding_hud(game: &Game) -> Option<OnboardingHud> {
     let corp = profile.identity.as_ref()?.corporation;
     let material = crate::training::material_for_corporation(corp);
     let def = abilities::get(corp.ability()).unwrap();
-    let (title, description) = [
-        (
-            "Accept your flight license",
-            "Review your corporation's starter ship and equipment, then acknowledge the flight license.",
+    let carried = profile.campaign.cargo_training_materials[material.index];
+    let banked = profile.campaign.stored_training_materials[material.index];
+    let slot = ["offense", "defense", "passive"][def.category];
+    let stage = p.stage.min(6);
+    let title = [
+        "Accept your flight license",
+        "Leave Haven",
+        "Destroy 10 asteroids",
+        "Collect 10 matching materials",
+        "Bank at Haven",
+        "Upgrade your equipped starter",
+        "Flight license complete",
+    ][stage as usize];
+    let description = match stage {
+        0 => "Review your corporation's starter RAICHO and equipment, then acknowledge the flight license.".into(),
+        1 => "Fly beyond Haven's protected 240-unit radius. The dock shield keeps asteroids outside.".into(),
+        2 => format!(
+            "Asteroids destroyed: {}/10. Destroy real asteroids of any variety. Haven's tutorial belt awards no XP for your RAICHO; outer asteroids retain their normal rewards.",
+            p.asteroids_destroyed
         ),
-        (
-            "Leave Haven",
-            "Fly beyond Haven's protected 240-unit radius. The dock shield keeps asteroids outside.",
+        3 => format!(
+            "Collected {}/10 {}. Assigned source: {}. Collect matching tier 1 drops after the asteroid mission. Materials share cargo space and are lost on death or abandonment.",
+            p.materials_collected, material.name, material.asteroid
         ),
-        (
-            "Destroy 10 asteroids",
-            "Destroy ten real asteroids of any variety. Haven's tutorial belt awards no ship XP; outer asteroids retain their normal rewards.",
+        4 => format!(
+            "Carried: {carried} {}; banked: {banked}/10. Return physically to Haven to bank 10. Collected progress is {}/10; replace any material lost or spent. Reload never banks cargo.",
+            material.name, p.materials_collected
         ),
-        (
-            "Collect 10 matching materials",
-            "After the asteroid mission, collect ten matching named tier 1 materials from your assigned asteroid variety. They share the existing cargo space and are lost on death or abandonment.",
+        5 if profile.campaign.abilities[corp.ability() as usize].rank >= 2 => format!(
+            "At Haven, equip {} in the {slot} slot on your {} RAICHO. Banked: {banked}/10 {}. Your already-owned upgrade is recognized without another material cost.",
+            def.name, corp.starter_name(), material.name
         ),
-        (
-            "Bank at Haven",
-            "Return physically to Haven and bank ten matching materials. If cargo was lost or spent, collect enough replacements; reload never banks cargo.",
+        5 => format!(
+            "At Haven, equip {} in the {slot} slot on your {} RAICHO. Banked: {banked}/10 {}. The first upgrade costs 10 {} and no points, and works at RAICHO level 1.",
+            def.name, corp.starter_name(), material.name, material.name
         ),
-        (
-            "Upgrade your equipped starter",
-            "At Haven, equip your corporation's original starter ability on its starter ship, then install its first upgrade using ten banked matching materials. This one-time training recipe works at ship level 1.",
-        ),
-        (
-            "Flight license complete",
-            "Your corporation's starter is ready for the outer reaches. Each ship earns its own XP; discovered blueprints and dock inventory persist.",
-        ),
-    ][p.stage.min(6) as usize];
+        _ => "Your corporation's starter RAICHO is ready for the outer reaches. Each RAICHO earns its own XP; discovered blueprints and dock inventory persist.".into(),
+    };
     Some(OnboardingHud {
         stage: p.stage,
         flags: p.flags,
         title: title.into(),
-        description: description.into(),
+        description,
         completed: p.stage == 6,
         version: p.version,
         asteroids_destroyed: p.asteroids_destroyed,
@@ -342,9 +350,9 @@ pub fn onboarding_hud(game: &Game) -> Option<OnboardingHud> {
         asteroid_name: material.asteroid.into(),
         starter_id: def.key.into(),
         starter_name: def.name.into(),
-        starter_slot: ["offense", "defense", "passive"][def.category].into(),
-        carried_matching: profile.campaign.cargo_training_materials[material.index],
-        banked_matching: profile.campaign.stored_training_materials[material.index],
+        starter_slot: slot.into(),
+        carried_matching: carried,
+        banked_matching: banked,
         can_upgrade: game.training_upgrade_check(corp.ability()).is_ok(),
         upgrade_reason: game
             .training_upgrade_check(corp.ability())
