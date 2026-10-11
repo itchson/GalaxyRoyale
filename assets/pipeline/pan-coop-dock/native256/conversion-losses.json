@@ -1,0 +1,70 @@
+{
+  "source_dimensions": [
+    1254,
+    1254
+  ],
+  "native_dimensions": [
+    256,
+    256
+  ],
+  "threshold": 128,
+  "sampling": "Pillow nearest center sample; no crop or component filter",
+  "source_topology_threshold128": {
+    "occupied": 684505,
+    "components": 1,
+    "hole_cells": 0,
+    "bounds": [
+      11,
+      11,
+      1243,
+      1243
+    ]
+  },
+  "native_topology": {
+    "occupied": 28549,
+    "components": 1,
+    "hole_cells": 0,
+    "bounds": [
+      2,
+      2,
+      254,
+      254
+    ]
+  },
+  "alpha_values_changed_before_sampling": 717441,
+  "source_mask_vs_native_nearest_reprojection": {
+    "false_opaque_source_pixels": 3248,
+    "false_transparent_source_pixels": 3334,
+    "intersection_over_union": 0.9904297036872249
+  },
+  "quantized_occupied_color_cells": 26943,
+  "mean_absolute_rgb_channel_error": 3.184735016988336,
+  "maximum_rgb_channel_error": 138,
+  "rgb_channel_rmse": 6.181149072032599,
+  "palette_colors": 64,
+  "lamp_cells": 1528,
+  "changed_lamp_cells": [
+    0,
+    1391,
+    1188
+  ],
+  "source_cell_scale": 0.5,
+  "reference_footprint": [
+    128,
+    128
+  ],
+  "group_cells": 28549,
+  "group_transforms": 16,
+  "tile_counts": {
+    "nw": 7127,
+    "ne": 7142,
+    "sw": 7131,
+    "se": 7149
+  },
+  "part_counts": {
+    "deck": 18844,
+    "alloy": 7075,
+    "screens": 705,
+    "signals": 1925
+  }
+}
