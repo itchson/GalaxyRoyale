@@ -1,6 +1,6 @@
 import { CoopController } from "/modules/controller.js";
 import { CoopTransport } from "/modules/transport.js";
-import { createGalaxyCoopPorts } from "/modules/wasm-ports.js";
+import * as wasmPorts from "/modules/wasm-ports.js";
 import { SaveStore, normalizeProfile } from "/modules/storage.js";
 
 const config = await (await fetch("/qa/config", { cache: "no-store" })).json();
@@ -21,7 +21,13 @@ let lastTime = performance.now(),
   loopDeadline = 0,
   firstPosition = null;
 let lastRows = new Map(),
-  stagedRows = new Map();
+  stagedRows = new Map(),
+  observedSession = null,
+  ownedLoadout = null,
+  ownedSha = null,
+  ownedExport = null,
+  ownedView = null,
+  stagedOwnedView = null;
 const counters = {
   created: 0,
   closed: 0,
@@ -53,6 +59,33 @@ const canonical = (v) =>
             .map((k) => [k, canonical(v[k])]),
         )
       : v;
+async function digestValue(value) {
+  const bytes = await crypto.subtle.digest(
+    "SHA-256",
+    new TextEncoder().encode(JSON.stringify(canonical(value))),
+  );
+  return [...new Uint8Array(bytes)]
+    .map((n) => n.toString(16).padStart(2, "0"))
+    .join("");
+}
+function localSpec() {
+  const profile = galaxy.profile();
+  if (config.profile_mode !== "owned")
+    return { local_seed: profile.seed, identity: profile.identity ?? null };
+  if (typeof wasmPorts.readOwnedLoadout !== "function")
+    throw new Error("native_owned_unavailable");
+  const actual = wasmPorts.readOwnedLoadout(galaxy);
+  if (
+    JSON.stringify(canonical(actual)) !==
+    JSON.stringify(canonical(ownedLoadout))
+  )
+    throw new Error("native_owned_changed");
+  return {
+    local_seed: profile.seed,
+    identity: profile.identity ?? null,
+    owned_loadout: actual,
+  };
+}
 async function digest(profile) {
   const valid = normalizeProfile(profile);
   if (!valid) throw new Error("profile_invalid");
@@ -89,6 +122,16 @@ function observations() {
     profile_sha: profileSha,
     baseline_sha: baseline ?? null,
     persisted_sha: persistedSha,
+    ...(config.profile_mode === "owned"
+      ? {
+          owned_export: ownedExport,
+          owned_view: ownedView,
+          selected_ship: ownedLoadout?.selected_ship ?? null,
+          owned_slots:
+            ownedLoadout?.slots.filter((slot) => slot !== null).length ?? null,
+          owned_sha: ownedSha,
+        }
+      : {}),
   };
 }
 function update() {
@@ -98,10 +141,29 @@ function update() {
 function observeHeader(header) {
   if (!header?.snapshot) return;
   const s = header.snapshot;
+  if (observedSession !== s.session) {
+    observedSession = s.session;
+    lastRows = new Map();
+    stagedRows = new Map();
+    firstPosition = null;
+    stagedOwnedView = null;
+    ownedView = null;
+  }
   counters.ticks = Math.max(counters.ticks, s.tick);
   counters.projectiles = Math.max(counters.projectiles, s.projectiles.length);
   progressionFalse = s.progression === false;
-  const p = s.participants.find((p) => p.slot === (role === "host" ? 0 : 1));
+  const peer = transport?.diagnostics().participant?.id;
+  const p = s.participants.find((p) =>
+    peer ? p.id === peer : p.slot === (role === "host" ? 0 : 1),
+  );
+  if (config.profile_mode === "owned" && role === "guest")
+    stagedOwnedView = Boolean(
+      p?.owned_loadout &&
+      ownedLoadout &&
+      JSON.stringify(canonical(p.owned_loadout)) ===
+        JSON.stringify(canonical(ownedLoadout)) &&
+      p.selected_ship === ownedLoadout.selected_ship,
+    );
   if (p) {
     firstPosition ??= p.position;
     movementObserved =
@@ -119,6 +181,8 @@ function observeRows(rows) {
     });
 }
 function observeCommit() {
+  if (config.profile_mode === "owned" && role === "guest")
+    ownedView = stagedOwnedView;
   for (const [id, row] of stagedRows) {
     const old = lastRows.get(id);
     if (old?.signature === row.signature) counters.unchanged_bodies++;
@@ -279,6 +343,14 @@ async function initialize(selectedBackend, runId) {
     galaxy.set_ui_mode(1);
     galaxy.set_shake(false);
   });
+  if (config.profile_mode === "owned")
+    await initStep("read_owned_loadout", async () => {
+      if (typeof wasmPorts.readOwnedLoadout !== "function")
+        throw new Error("native_owned_unavailable");
+      ownedLoadout = wasmPorts.readOwnedLoadout(galaxy);
+      ownedSha = await digestValue(ownedLoadout);
+      ownedExport = true;
+    });
   const observed = {
     co_op_batch(request) {
       const response = galaxy.co_op_batch(request),
@@ -324,16 +396,13 @@ async function initialize(selectedBackend, runId) {
   };
   initStage = "bind_controller";
   update();
-  const ports = createGalaxyCoopPorts(observed);
+  const ports = wasmPorts.createGalaxyCoopPorts(observed);
   controller = new CoopController({
     service: config.service,
     native: ports.native,
     replica: ports.replica,
     availability: ports.availability,
-    localSpec: () => {
-      const p = galaxy.profile();
-      return { local_seed: p.seed, identity: p.identity ?? null };
-    },
+    localSpec,
     transportFactory: (options) => {
       transport = new CoopTransport({
         ...options,

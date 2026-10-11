@@ -3,7 +3,9 @@ import path from "node:path";
 import crypto from "node:crypto";
 import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
+import { execFileSync } from "node:child_process";
 import { wasmContentHash, WASM_FILES } from "../../wasm-artifacts.mjs";
+import { buildIdentity, treeHash } from "../../preview-build.mjs";
 
 export const root = path.resolve(
   fileURLToPath(new URL("../../..", import.meta.url)),
@@ -20,6 +22,77 @@ export const wasmPageNames = [
   "client.html",
   "client.js",
 ];
+export const moduleSource = (name) =>
+  name === "storage"
+    ? "apps/game/src/storage.ts"
+    : `apps/game/src/coop/${name}.ts`;
+export const ownedSources = [...wasmModuleNames, "storage"].map(moduleSource);
+const git = (sourceRoot, ...args) =>
+  execFileSync("git", args, {
+    cwd: sourceRoot,
+    stdio: ["ignore", "pipe", "pipe"],
+    maxBuffer: 2_000_000,
+  });
+const lf = (bytes) => bytes.toString("utf8").replaceAll("\r\n", "\n");
+export async function verifyOwnedSource({ sourceRoot, sourceCommit, dist }) {
+  if (
+    !path.isAbsolute(sourceRoot ?? "") ||
+    !/^[a-f0-9]{40}$/.test(sourceCommit ?? "") ||
+    path.resolve(dist ?? "") !== path.join(path.resolve(sourceRoot), "dist")
+  )
+    throw new Error(
+      "Owned mode requires an exact source commit and its absolute normal dist.",
+    );
+  const source = path.resolve(sourceRoot);
+  if (
+    (await fs.realpath(source)) !== source ||
+    (await fs.realpath(dist)) !== path.resolve(dist)
+  )
+    throw new Error("Linked owned source/dist is not accepted.");
+  const stamp = JSON.parse(
+    await fs.readFile(path.join(source, "work/preview-build.json"), "utf8"),
+  );
+  if (
+    Object.keys(stamp).sort().join() !==
+      "branch,builtAt,head,packageHash,schemaVersion,sourceHash" ||
+    stamp.schemaVersion !== 1 ||
+    stamp.head !== sourceCommit ||
+    stamp.branch !== "codex/testing" ||
+    !/^[a-f0-9]{64}$/.test(stamp.sourceHash ?? "") ||
+    !/^[a-f0-9]{64}$/.test(stamp.packageHash ?? "") ||
+    typeof stamp.builtAt !== "string" ||
+    !Number.isFinite(Date.parse(stamp.builtAt))
+  )
+    throw new Error(
+      "Owned normal build record does not match the requested source commit.",
+    );
+  const actual = await buildIdentity(source);
+  if (
+    actual.sourceHash !== stamp.sourceHash ||
+    (await treeHash(source, ["dist"])) !== stamp.packageHash
+  )
+    throw new Error(
+      "Owned runtime source/package changed since the normal build.",
+    );
+  const blobs = new Map(),
+    gitInputs = {};
+  for (const relative of ownedSources) {
+    const bytes = git(source, "show", `${sourceCommit}:${relative}`);
+    if (lf(await regular(path.join(source, relative), 250_000)) !== lf(bytes))
+      throw new Error(
+        "Owned adapter source differs from the exact compiled source commit.",
+      );
+    blobs.set(relative, bytes);
+    gitInputs[relative] = sha(bytes);
+  }
+  return {
+    sourceRoot: source,
+    sourceCommit,
+    buildStamp: stamp,
+    blobs,
+    gitInputs,
+  };
+}
 export const fileLimit = (name) =>
   name.endsWith(".wasm")
     ? 32 * 1024 * 1024
@@ -30,7 +103,8 @@ export function preparedNames(manifest) {
   if (manifest.version === 1 && manifest.mode === undefined)
     return [...pageNames, ...moduleNames.map((n) => `modules/${n}.js`)];
   if (
-    manifest.version !== 2 ||
+    ![2, 3].includes(manifest.version) ||
+    (manifest.version === 3 && manifest.profile_mode !== "owned") ||
     manifest.mode !== "wasm" ||
     !manifest.builds ||
     Object.keys(manifest.builds).sort().join() !== "webgl2,webgpu"
@@ -68,7 +142,10 @@ export function stagePath(value) {
     );
   return target;
 }
-export async function prepare(value, { dist } = {}) {
+export async function prepare(
+  value,
+  { dist, ownedLoadout = false, sourceRoot, sourceCommit } = {},
+) {
   const stage = stagePath(value);
   if (await fs.stat(path.join(stage, "manifest.json")).catch(() => null))
     throw new Error(
@@ -82,15 +159,21 @@ export async function prepare(value, { dist } = {}) {
     throw new Error(
       "Install lockfile-pinned TypeScript5.9.3 before preparing.",
     );
+  if (!ownedLoadout && (sourceRoot !== undefined || sourceCommit !== undefined))
+    throw new Error(
+      "Source commit options require explicit owned-loadout mode.",
+    );
+  const provenance = ownedLoadout
+    ? await verifyOwnedSource({ sourceRoot, sourceCommit, dist })
+    : null;
   await fs.mkdir(path.join(stage, "modules"), { recursive: true });
   const inputs = {},
     files = {};
   for (const name of dist ? [...wasmModuleNames, "storage"] : moduleNames) {
-    const source =
-        name === "storage"
-          ? "apps/game/src/storage.ts"
-          : `apps/game/src/coop/${name}.ts`,
-      bytes = await fs.readFile(path.join(root, source));
+    const source = moduleSource(name),
+      bytes =
+        provenance?.blobs.get(source) ??
+        (await fs.readFile(path.join(root, source)));
     const result = ts.transpileModule(bytes.toString("utf8"), {
       compilerOptions: {
         target: ts.ScriptTarget.ES2022,
@@ -116,7 +199,9 @@ export async function prepare(value, { dist } = {}) {
         .replaceAll('"./controller.ts"', '"./controller.js"');
     const relative = `modules/${name}.js`;
     await fs.writeFile(path.join(stage, relative), output);
-    inputs[source] = sha(bytes);
+    inputs[source] = sha(
+      await fs.readFile(path.join(provenance?.sourceRoot ?? root, source)),
+    );
     files[relative] = sha(output);
   }
   for (const name of dist ? wasmPageNames : pageNames) {
@@ -185,15 +270,37 @@ export async function prepare(value, { dist } = {}) {
       if (sha(await fs.readFile(path.join(dist, item.path))) !== item.sha256)
         throw new Error("Normal dist changed during preparation.");
   }
+  if (provenance) {
+    const after = await verifyOwnedSource({ sourceRoot, sourceCommit, dist });
+    if (
+      JSON.stringify(after.buildStamp) !==
+        JSON.stringify(provenance.buildStamp) ||
+      JSON.stringify(after.gitInputs) !== JSON.stringify(provenance.gitInputs)
+    )
+      throw new Error(
+        "Owned normal source/build record changed during preparation.",
+      );
+  }
   const manifest = {
-    version: dist ? 2 : 1,
+    version: ownedLoadout ? 3 : dist ? 2 : 1,
+    ...(provenance
+      ? {
+          profile_mode: "owned",
+          source_root: provenance.sourceRoot,
+          source_commit: provenance.sourceCommit,
+          git_inputs: provenance.gitInputs,
+          build_stamp: provenance.buildStamp,
+        }
+      : {}),
     ...(dist
       ? { mode: "wasm", builds, artifacts, dist: path.resolve(dist) }
       : {}),
     typescript: ts.version,
-    scope: dist
-      ? "prepared real two-Galaxy WASM/RTC QA; browser execution pending; factory guest v1, no shared progression/NAT acceptance"
-      : "actual browser local RTC loopback; no Game authority",
+    scope: ownedLoadout
+      ? "prepared real owned-loadout two-Galaxy WASM/RTC QA from exact compiled source; browser execution pending; no shared rewards/NAT/eight-player/fifth-shot acceptance"
+      : dist
+        ? "prepared real two-Galaxy WASM/RTC QA; browser execution pending; factory guest v1, no shared progression/NAT acceptance"
+        : "actual browser local RTC loopback; no Game authority",
     inputs,
     files,
   };
@@ -207,21 +314,29 @@ if (
   process.argv[1] &&
   path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)
 ) {
-  const args = process.argv.slice(2);
-  if (
-    ![2, 4].includes(args.length) ||
-    args[0] !== "--stage" ||
-    (args.length === 4 && args[2] !== "--dist")
-  )
-    throw new Error(
-      "Usage: node scripts/qa/co-op-transport/prepare.mjs --stage work/co-op-transport/stage [--dist ABSOLUTE_ROOT_DIST]",
-    );
-  const manifest = await prepare(args[1], { dist: args[3] });
+  const args = process.argv.slice(2),
+    options = {},
+    pairs = new Set(["--stage", "--dist", "--source-root", "--source-commit"]);
+  for (let i = 0; i < args.length; i++) {
+    const key = args[i];
+    if (Object.hasOwn(options, key))
+      throw new Error("Duplicate preparation option.");
+    if (key === "--owned-loadout") options[key] = true;
+    else if (pairs.has(key) && args[i + 1] && !args[i + 1].startsWith("--"))
+      options[key] = args[++i];
+    else throw new Error("Invalid preparation options.");
+  }
+  const manifest = await prepare(options["--stage"], {
+    dist: options["--dist"],
+    ownedLoadout: options["--owned-loadout"] ?? false,
+    sourceRoot: options["--source-root"],
+    sourceCommit: options["--source-commit"],
+  });
   console.log(
     JSON.stringify({
-      prepared: stagePath(args[1]),
+      prepared: stagePath(options["--stage"]),
       modules:
-        manifest.version === 2
+        manifest.mode === "wasm"
           ? wasmModuleNames.length + 1
           : moduleNames.length,
       inputs: Object.keys(manifest.inputs).length,

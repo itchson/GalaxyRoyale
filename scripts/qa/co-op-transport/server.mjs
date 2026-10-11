@@ -10,6 +10,8 @@ import {
   moduleNames,
   preparedNames,
   fileLimit,
+  ownedSources,
+  verifyOwnedSource,
 } from "./prepare.mjs";
 
 const checkNames = new Set([
@@ -95,6 +97,8 @@ export const wasmCheckNames = new Set([
   "movement-fire-observed",
   "host-end-restored",
   "guest-leave-restored",
+  "native-owned-export",
+  "native-owned-commit",
   "new-session",
   "saves-unchanged",
   "dispose-clean",
@@ -109,6 +113,7 @@ export const initializationStages = [
   "pause_solo",
   "register_license",
   "configure_view",
+  "read_owned_loadout",
   "bind_controller",
   "save_baseline",
   "read_baseline",
@@ -156,6 +161,7 @@ export function validateWasmReport(o) {
     "movement_observed",
   ];
   const hashes = ["profile_sha", "baseline_sha", "persisted_sha"];
+  const owned = o?.version === 3;
   if (
     !exact(o, [
       "version",
@@ -164,8 +170,10 @@ export function validateWasmReport(o) {
       "checks",
       "clients",
       "session_distinct",
+      ...(owned ? ["profile_mode"] : []),
     ]) ||
-    o.version !== 2 ||
+    ![2, 3].includes(o.version) ||
+    (owned && o.profile_mode !== "owned") ||
     !/^[a-f0-9]{16}$/.test(o.run_id) ||
     !["webgpu", "webgl2"].includes(o.backend) ||
     !flag(o.session_distinct) ||
@@ -194,6 +202,15 @@ export function validateWasmReport(o) {
         ...counters,
         ...flags,
         ...hashes,
+        ...(owned
+          ? [
+              "owned_export",
+              "owned_view",
+              "selected_ship",
+              "owned_slots",
+              "owned_sha",
+            ]
+          : []),
       ]) ||
       c.role !== ["host", "guest"][i] ||
       !initializationStages.includes(c.init_stage) ||
@@ -217,7 +234,19 @@ export function validateWasmReport(o) {
       c.admitted > 7 ||
       c.transport_ready > 7 ||
       flags.some((k) => !flag(c[k])) ||
-      hashes.some((k) => !hash(c[k]))
+      hashes.some((k) => !hash(c[k])) ||
+      (owned &&
+        (!flag(c.owned_export) ||
+          !flag(c.owned_view) ||
+          !hash(c.owned_sha) ||
+          (c.selected_ship !== null &&
+            (!Number.isInteger(c.selected_ship) ||
+              c.selected_ship < 0 ||
+              c.selected_ship > 9)) ||
+          (c.owned_slots !== null &&
+            (!Number.isInteger(c.owned_slots) ||
+              c.owned_slots < 0 ||
+              c.owned_slots > 3))))
     )
       throw new Error("Invalid WASM client observations.");
   }
@@ -255,17 +284,35 @@ export async function start({
     await fs.readFile(path.join(stage, "manifest.json"), "utf8"),
   );
   const names = new Set(preparedNames(manifest)),
-    wasm = manifest.version === 2;
+    wasm = manifest.mode === "wasm";
   if (
     manifest.typescript !== "5.9.3" ||
     Object.keys(manifest.files).length !== names.size ||
     Object.keys(manifest.files).some((n) => !names.has(n))
   )
     throw new Error("Invalid prepared manifest.");
-  for (const [source, hash] of Object.entries(manifest.inputs)) {
-    const absolute = path.resolve(root, source);
+  if (manifest.version === 3) {
+    const provenance = await verifyOwnedSource({
+      sourceRoot: manifest.source_root,
+      sourceCommit: manifest.source_commit,
+      dist: manifest.dist,
+    });
     if (
-      !absolute.startsWith(root + path.sep) ||
+      JSON.stringify(provenance.gitInputs) !==
+        JSON.stringify(manifest.git_inputs) ||
+      JSON.stringify(provenance.buildStamp) !==
+        JSON.stringify(manifest.build_stamp)
+    )
+      throw new Error("Owned prepared provenance changed.");
+  }
+  for (const [source, hash] of Object.entries(manifest.inputs)) {
+    const sourceRoot =
+      manifest.version === 3 && ownedSources.includes(source)
+        ? manifest.source_root
+        : root;
+    const absolute = path.resolve(sourceRoot, source);
+    if (
+      !absolute.startsWith(sourceRoot + path.sep) ||
       sha(await fs.readFile(absolute)) !== hash
     )
       throw new Error(
@@ -329,6 +376,13 @@ export async function start({
                     req.headers.host === new URL(guestOrigin).host
                       ? "guest"
                       : "host",
+                  profile_mode: manifest.profile_mode ?? "factory",
+                  ...(manifest.version === 3
+                    ? {
+                        source_commit: manifest.source_commit,
+                        build_stamp: manifest.build_stamp,
+                      }
+                    : {}),
                 }
               : {}),
           }),
@@ -347,15 +401,27 @@ export async function start({
         const report = (wasm ? validateWasmReport : validateReport)(
           await body(req),
         );
+        if (wasm && report.version !== manifest.version)
+          throw new Error("Report mode does not match prepared provenance.");
         const captured = {
           ...report,
           source_inputs: manifest.inputs,
           captured_at: new Date().toISOString(),
-          scope: wasm
-            ? "Root-driven browser observations from real two-Galaxy WASM/controller/RTC on independent QA origins; v1 factory guest/no shared progression; no NAT/performance acceptance"
-            : "actual same-page browser RTC loopback; declared framing admission; no Game authority/NAT",
+          scope:
+            manifest.version === 3
+              ? "Root-driven browser observations from real native owned-loadout export and two-Galaxy WASM/controller/RTC; no shared progression/NAT/performance/every-ability acceptance"
+              : wasm
+                ? "Root-driven browser observations from real two-Galaxy WASM/controller/RTC on independent QA origins; v1 factory guest/no shared progression; no NAT/performance acceptance"
+                : "actual same-page browser RTC loopback; declared framing admission; no Game authority/NAT",
           ...(wasm
             ? { builds: manifest.builds, artifacts: manifest.artifacts }
+            : {}),
+          ...(manifest.version === 3
+            ? {
+                source_commit: manifest.source_commit,
+                git_inputs: manifest.git_inputs,
+                build_stamp: manifest.build_stamp,
+              }
             : {}),
         };
         const encoded = JSON.stringify(captured, null, 2) + "\n",

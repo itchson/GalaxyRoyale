@@ -27,6 +27,7 @@ const failureCodes = new Set([
     "pause_solo",
     "register_license",
     "configure_view",
+    "read_owned_loadout",
     "bind_controller",
     "save_baseline",
     "read_baseline",
@@ -113,6 +114,7 @@ function paint() {
       scope:
         "Actual two native Games/RTC on independent QA origins; no Internet/performance acceptance",
       backend,
+      profile_mode: config.profile_mode ?? "factory",
       checks,
       clients: [state.host, state.guest],
       session_distinct: sessionDistinct,
@@ -143,7 +145,8 @@ async function capture() {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      version: 2,
+      version: config.profile_mode === "owned" ? 3 : 2,
+      ...(config.profile_mode === "owned" ? { profile_mode: "owned" } : {}),
       run_id: run,
       backend,
       checks,
@@ -214,6 +217,8 @@ async function connected(rejoin) {
     state.guest.admitted > 0 && state.host.admitted > 0,
   );
   check("native-complete-commit", state.guest.commits > commitsBefore);
+  if (config.profile_mode === "owned")
+    check("native-owned-commit", state.guest.owned_view === true);
   if (rejoin) check("new-session", sessionDistinct === true);
 }
 async function restartSession() {
@@ -249,6 +254,11 @@ $("initialize").onclick = () =>
       "distinct-local-profiles",
       state.host.profile_sha !== state.guest.profile_sha,
     );
+    if (config.profile_mode === "owned")
+      check(
+        "native-owned-export",
+        state.host.owned_export === true && state.guest.owned_export === true,
+      );
     await verify();
   });
 $("connect").onclick = () => action("Create and join", () => connected(false));

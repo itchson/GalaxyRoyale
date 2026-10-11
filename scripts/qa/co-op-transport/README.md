@@ -19,7 +19,15 @@ Initialization has one 45-second total deadline and reports finite `init_stage` 
 
 New session first leaves both controllers through their idempotent leave path, so it works after the explicit Host end action as well as while a session remains live. It then requires a distinct service session and a new actual native commit. Earlier failed browser attempts remain historical evidence; this correction alone does not establish browser rejoin acceptance.
 
-Save checks compare canonical valid local Profile digests and read the actual origin's persisted SaveStore state. No session frame is saved. Reports contain controlled enums, finite counts, booleans and digests only; invitation/token/SDP/ICE/Profile/position data are rejected. Per-action reports are immutable files under stage `captures`. Body-change counters compare complete native entity signatures; `unchanged_bodies` counts unchanged content signatures, not measured network cache hits. Same-count changes can remain zero if natural play did not produce one. The supplied v1 runtime uses factory guests and primary shots; advanced owned builds, ability activation and shared rewards remain separate work.
+The separate owned-loadout path requires an exact normal-build source commit and that checkout's normal `dist`. It reads the six adapter/storage sources from Git at that commit, checks their live equivalents, and verifies the complete runtime-source and package hashes against the retained normal build record before and after copying. A concurrent build, dirty runtime source, mismatched commit or package fails visibly. Later record-only commits may leave a valid retained build record; runtime bytes must still match. The temporary server repeats these provenance checks at launch. Existing factory manifests remain version 2; owned manifests/reports are version 3 and cannot be interchanged.
+
+```powershell
+node scripts/qa/co-op-transport/prepare.mjs --stage work/co-op-wasm-qa/owned-v2/fresh-stage --dist C:/absolute/normal/project/dist --owned-loadout --source-root C:/absolute/normal/project --source-commit EXACT_40_HEX_BUILD_COMMIT
+```
+
+Owned mode calls the actual staged `readOwnedLoadout` adapter against each real Galaxy. Only its bounded native equipment declaration accompanies seed/identity; no Profile or currency is sent. A guest's `owned_view` becomes true only after successful native replica commit of a header matching that local export, selected craft included. The host uses its authoritative native solo build and does not require a guest-style `owned_loadout` snapshot field. Reports include only export/commit flags, selected craft/slot counts and a declaration digest. Existing origin saves are retained; an empty store receives a legitimate unprogressed license. Thus a fresh run covers its actual starter declaration, not every advanced build. Equipment metadata acceptance does not establish all ability effects, balance or shared progression.
+
+Save checks compare canonical valid local Profile digests and read the actual origin's persisted SaveStore state. No session frame is saved. Reports contain controlled enums, finite counts, booleans and digests only; invitation/token/SDP/ICE/Profile/position data are rejected. Per-action reports are immutable files under stage `captures`. Body-change counters compare complete native entity signatures within one session; rejoin clears the comparison baseline because ECS IDs may be reused. `unchanged_bodies` counts unchanged content signatures, not measured network cache hits. Same-count changes can remain zero if natural play did not produce one. Historical factory reports may include a cross-session comparison; that is not evidence of same-count destruction. The supplied v1 runtime uses factory guests and primary shots; owned behavior and shared rewards remain separate acceptance scopes.
 
 The WASM mode CSP permits only self-hosted scripts plus `wasm-unsafe-eval` for compilation, exact service connections and exact client frames; general JavaScript eval remains disabled. This follows [Mozilla's script-src documentation](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/script-src#unsafe_webassembly_execution). Header checks in Node do not prove browser enforcement: Root must verify actual WebGPU and WebGL2 initialization.
 
@@ -29,6 +37,10 @@ Focused checks:
 
 ```powershell
 $env:COOP_QA_DIST = 'C:/absolute/normal/project/dist'
+# Optional real owned-stage HTTP/provenance test (not browser execution):
+$env:COOP_QA_SOURCE_ROOT = 'C:/absolute/normal/project'
+$env:COOP_QA_SOURCE_COMMIT = 'EXACT_40_HEX_BUILD_COMMIT'
+$env:COOP_QA_OWNED_DIST = 'C:/absolute/normal/project/dist'
 node --experimental-transform-types --test scripts/test/coop-transport-qa.test.mjs scripts/test/coop-transport-wasm-qa.test.mjs
 ```
 

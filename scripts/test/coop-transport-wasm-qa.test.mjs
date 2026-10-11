@@ -7,12 +7,17 @@ import { createServer } from "node:net";
 import { request } from "node:http";
 import vm from "node:vm";
 import ts from "typescript";
+import { execFileSync } from "node:child_process";
+import { pathToFileURL } from "node:url";
+import { buildIdentity, treeHash } from "../preview-build.mjs";
 import { CoopController } from "../../apps/game/src/coop/controller.ts";
 import {
   prepare,
   preparedNames,
   root,
   sha,
+  verifyOwnedSource,
+  ownedSources,
 } from "../qa/co-op-transport/prepare.mjs";
 import { start, validateWasmReport } from "../qa/co-op-transport/server.mjs";
 
@@ -58,6 +63,20 @@ function report() {
     clients: [client("host"), client("guest")],
     session_distinct: null,
   };
+}
+function ownedReport() {
+  const value = report();
+  value.version = 3;
+  value.profile_mode = "owned";
+  for (const c of value.clients)
+    Object.assign(c, {
+      owned_export: true,
+      owned_view: c.role === "guest" ? true : null,
+      selected_ship: 0,
+      owned_slots: 1,
+      owned_sha: "c".repeat(64),
+    });
+  return value;
 }
 function functionSource(source, name) {
   const ast = ts.createSourceFile(
@@ -142,11 +161,14 @@ test("Actual initialization pauses fresh Galaxy before guarded license registrat
           },
         },
       }),
-      createGalaxyCoopPorts: () => ({
-        native: {},
-        replica: {},
-        availability: true,
-      }),
+      wasmPorts: {
+        createGalaxyCoopPorts: () => ({
+          native: {},
+          replica: {},
+          availability: true,
+        }),
+      },
+      localSpec: () => ({}),
       CoopController: class {},
       digest: async () => "a".repeat(64),
       update: () => stages.push(context.initStage),
@@ -321,6 +343,7 @@ test("Actual rejoin gate requires a new complete native commit, not a cumulative
   let advance = false;
   const context = vm.createContext({
     state,
+    config: {},
     firstSession: "old",
     sessionDistinct: null,
     send: async (role, name) =>
@@ -448,6 +471,263 @@ test("WASM report accepts finite observations, refuses capabilities/profile payl
     assert.throws(() => validateWasmReport(invalid));
   }
 });
+test("Owned reports preserve the factory format and admit only finite, secret-free native metadata", () => {
+  const good = ownedReport();
+  assert.deepEqual(validateWasmReport(good), good);
+  for (const mutate of [
+    (r) => (r.profile_mode = "factory"),
+    (r) => (r.clients[1].selected_ship = 10),
+    (r) => (r.clients[1].owned_slots = 4),
+    (r) => (r.clients[0].owned_sha = "raw loadout"),
+    (r) => (r.clients[1].owned_view = "ready"),
+    (r) => (r.clients[0].owned_loadout = {}),
+    (r) => (r.clients[0].owned_export = "true"),
+    (r) => delete r.clients[1].owned_export,
+  ]) {
+    const bad = structuredClone(good);
+    mutate(bad);
+    assert.throws(() => validateWasmReport(bad));
+  }
+  assert.deepEqual(validateWasmReport(report()), report());
+});
+
+test("Actual localSpec reads the native export only in explicit owned mode and never forwards Profile", async () => {
+  const source = await fs.readFile(
+    new URL("../qa/co-op-transport/client.js", import.meta.url),
+    "utf8",
+  );
+  const loadout = {
+    version: 1,
+    selected_ship: 0,
+    slots: [null, { index: 1, rank: 1 }, null],
+  };
+  let exports = 0;
+  const context = vm.createContext({
+    config: { profile_mode: "factory" },
+    ownedLoadout: loadout,
+    canonical: (v) => v,
+    galaxy: {
+      profile: () => ({
+        seed: 41,
+        identity: null,
+        currency: [99, 99, 99],
+        secret: "not transport data",
+      }),
+    },
+    wasmPorts: {
+      readOwnedLoadout: () => {
+        exports++;
+        return structuredClone(loadout);
+      },
+    },
+  });
+  vm.runInContext(functionSource(source, "localSpec"), context);
+  assert.deepEqual(JSON.parse(JSON.stringify(context.localSpec())), {
+    local_seed: 41,
+    identity: null,
+  });
+  assert.equal(exports, 0);
+  context.config.profile_mode = "owned";
+  assert.deepEqual(JSON.parse(JSON.stringify(context.localSpec())), {
+    local_seed: 41,
+    identity: null,
+    owned_loadout: loadout,
+  });
+  assert.equal(exports, 1);
+  context.wasmPorts.readOwnedLoadout = () => ({ ...loadout, selected_ship: 1 });
+  assert.throws(() => context.localSpec(), /native_owned_changed/);
+  context.wasmPorts = {};
+  assert.throws(() => context.localSpec(), /native_owned_unavailable/);
+});
+
+test("Actual commit observations reset session IDs and cannot mistake a staged owned header for a complete native commit", async () => {
+  const source = await fs.readFile(
+    new URL("../qa/co-op-transport/client.js", import.meta.url),
+    "utf8",
+  );
+  const loadout = {
+    selected_ship: 0,
+    slots: [null, { index: 1, rank: 1 }, null],
+  };
+  const context = vm.createContext({
+    config: { profile_mode: "owned" },
+    role: "guest",
+    transport: undefined,
+    observedSession: null,
+    lastRows: new Map(),
+    stagedRows: new Map(),
+    firstPosition: null,
+    ownedLoadout: loadout,
+    ownedView: null,
+    stagedOwnedView: null,
+    movementObserved: null,
+    canonical: (v) => v,
+    counters: {
+      ticks: 0,
+      projectiles: 0,
+      body_changes: 0,
+      same_count_changes: 0,
+      unchanged_bodies: 0,
+    },
+  });
+  for (const name of ["observeHeader", "observeRows", "observeCommit"])
+    vm.runInContext(functionSource(source, name), context);
+  const header = (session) => ({
+    snapshot: {
+      session,
+      tick: 1,
+      projectiles: [],
+      progression: false,
+      participants: [
+        { slot: 1, position: [0, 0], selected_ship: 0, owned_loadout: loadout },
+      ],
+    },
+  });
+  context.observeHeader(header("session-a"));
+  assert.equal(
+    context.ownedView,
+    null,
+    "header staging is not native commit acceptance",
+  );
+  context.observeRows([{ id: "same", occupied: 3, body_signature: "old" }]);
+  context.observeCommit();
+  assert.equal(context.ownedView, true);
+  context.transport = {
+    diagnostics: () => ({ participant: { id: "authenticated-guest" } }),
+  };
+  const wrongPeer = header("session-a");
+  wrongPeer.snapshot.participants[0].id = "another-guest";
+  context.observeHeader(wrongPeer);
+  context.observeCommit();
+  assert.equal(
+    context.ownedView,
+    false,
+    "another participant's matching declaration is not the authenticated guest",
+  );
+  context.transport = undefined;
+  context.observeHeader(header("session-a"));
+  context.observeRows([{ id: "same", occupied: 3, body_signature: "old" }]);
+  context.observeCommit();
+  context.observeRows([{ id: "same", occupied: 3, body_signature: "changed" }]);
+  context.observeCommit();
+  assert.equal(
+    context.counters.same_count_changes,
+    1,
+    "a same-session content change is counted",
+  );
+  context.observeHeader(header("session-b"));
+  assert.equal(context.ownedView, null);
+  context.observeRows([
+    { id: "same", occupied: 3, body_signature: "new-session" },
+  ]);
+  context.observeCommit();
+  assert.equal(
+    context.counters.same_count_changes,
+    1,
+    "reused IDs in another session add no false change",
+  );
+});
+
+test("Owned preparation guards exact Git adapter content, whole normal source/package stamp and independent source options", async (t) => {
+  // Small declared filesystem/Git fixture exercises provenance guards, not a native build.
+  const fixture = await fs.mkdtemp(
+    path.join(root, "work", "coop-owned-provenance-test-"),
+  );
+  t.after(async () => {
+    assert.ok(fixture.startsWith(path.join(root, "work") + path.sep));
+    await fs.rm(fixture, { recursive: true });
+  });
+  const run = (...args) =>
+    execFileSync("git", args, {
+      cwd: fixture,
+      stdio: ["ignore", "pipe", "pipe"],
+    })
+      .toString()
+      .trim();
+  for (const dir of ["crates", "assets", "dist", "work"])
+    await fs.mkdir(path.join(fixture, dir), { recursive: true });
+  for (const name of [
+    "Cargo.toml",
+    "Cargo.lock",
+    "rust-toolchain.toml",
+    "package.json",
+    "pnpm-lock.yaml",
+    "tsconfig.json",
+    "scripts/build.mjs",
+    "scripts/build-wasm.mjs",
+    "scripts/pwa.mjs",
+    "scripts/wasm-artifacts.mjs",
+    "scripts/preview-build.mjs",
+    "scripts/game-runtime-lease.mjs",
+    ...ownedSources,
+  ]) {
+    await fs.mkdir(path.dirname(path.join(fixture, name)), { recursive: true });
+    await fs.writeFile(path.join(fixture, name), "// declared fixture\n");
+  }
+  await fs.writeFile(path.join(fixture, "dist/index.html"), "declared package");
+  run("init", "-b", "codex/testing");
+  run("add", ".");
+  run(
+    "-c",
+    "user.name=Codex",
+    "-c",
+    "user.email=codex@openai.com",
+    "commit",
+    "-m",
+    "Declared provenance fixture",
+  );
+  const identity = await buildIdentity(fixture);
+  let stamp = {
+    schemaVersion: 1,
+    ...identity,
+    packageHash: await treeHash(fixture, ["dist"]),
+    builtAt: "2026-10-12T00:00:00.000Z",
+  };
+  const saveStamp = () =>
+    fs.writeFile(
+      path.join(fixture, "work/preview-build.json"),
+      JSON.stringify(stamp),
+    );
+  await saveStamp();
+  const options = {
+    sourceRoot: fixture,
+    sourceCommit: identity.head,
+    dist: path.join(fixture, "dist"),
+  };
+  const accepted = await verifyOwnedSource(options);
+  assert.equal(accepted.blobs.size, 6);
+  stamp.extra = "must not enter captured provenance";
+  await saveStamp();
+  await assert.rejects(verifyOwnedSource(options), /record/);
+  delete stamp.extra;
+  await saveStamp();
+  await assert.rejects(
+    verifyOwnedSource({ ...options, sourceCommit: "a".repeat(40) }),
+    /record/,
+  );
+  await assert.rejects(
+    verifyOwnedSource({ ...options, dist: path.join(root, "dist") }),
+    /absolute normal dist/,
+  );
+  await assert.rejects(
+    prepare(path.join(fixture, "unused"), { sourceRoot: fixture }),
+    /explicit owned-loadout/,
+  );
+  await fs.appendFile(path.join(fixture, ownedSources[0]), "// dirty\n");
+  await assert.rejects(verifyOwnedSource(options), /changed since/);
+  // Even a matching live hash cannot bless adapter bytes absent from the requested Git revision.
+  stamp = { ...stamp, sourceHash: (await buildIdentity(fixture)).sourceHash };
+  await saveStamp();
+  await assert.rejects(verifyOwnedSource(options), /exact compiled source/);
+  await fs.writeFile(
+    path.join(fixture, ownedSources[0]),
+    accepted.blobs.get(ownedSources[0]),
+  );
+  stamp = { ...stamp, sourceHash: identity.sourceHash };
+  await saveStamp();
+  await fs.appendFile(path.join(fixture, "dist/index.html"), "changed");
+  await assert.rejects(verifyOwnedSource(options), /changed since/);
+});
 test("WASM allowlist fixes backend paths and cannot request unrelated files", () => {
   const builds = {
     webgpu: `/wasm/webgpu-${"a".repeat(64)}/galaxy.js`,
@@ -467,135 +747,215 @@ test("WASM allowlist fixes backend paths and cannot request unrelated files", ()
     );
 });
 
-test(
-  "Actual supplied normal WASM stage serves two exact QA origins, real binaries and immutable secret-free captures",
-  { skip: !process.env.COOP_QA_DIST },
-  async (t) => {
-    // These HTTP assertions use actual normal build bytes. They do not run WASM/RTC in Node.
-    const stage = await fs.mkdtemp(
-      path.join(root, "work", "coop-wasm-qa-test-"),
-    );
-    let tool;
-    t.after(async () => {
-      await tool?.stop();
-      assert.ok(!tool?.server.listening);
-      assert.ok(stage.startsWith(path.join(root, "work") + path.sep));
-      await fs.rm(stage, { recursive: true });
-    });
-    const manifest = await prepare(stage, {
-      dist: path.resolve(process.env.COOP_QA_DIST),
-    });
-    assert.equal(manifest.version, 2);
-    assert.equal(Object.keys(manifest.files).length, 18);
-    assert.equal(manifest.artifacts.length, 8);
-    for (const name of ["controller", "wasm-ports"]) {
-      const js = await fs.readFile(
-        path.join(stage, `modules/${name}.js`),
-        "utf8",
+for (const owned of [false, true])
+  test(
+    `Actual supplied ${owned ? "owned source-pinned" : "factory"} normal WASM stage serves two exact QA origins, real binaries and immutable secret-free captures`,
+    {
+      skip: owned
+        ? !(
+            process.env.COOP_QA_SOURCE_ROOT &&
+            process.env.COOP_QA_SOURCE_COMMIT &&
+            process.env.COOP_QA_OWNED_DIST
+          )
+        : !process.env.COOP_QA_DIST,
+    },
+    async (t) => {
+      // These HTTP assertions use actual normal build bytes. They do not run WASM/RTC in Node.
+      const stage = await fs.mkdtemp(
+        path.join(root, "work", "coop-wasm-qa-test-"),
       );
-      assert.ok(!js.includes('"./wire.ts"'));
-      assert.ok(!js.includes('"./transport.ts"'));
-    }
-    await assert.rejects(
-      prepare(stage, { dist: path.resolve(process.env.COOP_QA_DIST) }),
-      /fresh stage/,
-    );
-    const reservation = createServer();
-    reservation.listen(0, "127.0.0.1");
-    await once(reservation, "listening");
-    const port = reservation.address().port;
-    await new Promise((r) => reservation.close(r));
-    tool = await start({ stage, port, maxMs: 10_000 });
-    const config = await (await fetch(tool.origin + "/qa/config")).json();
-    assert.equal(config.mode, "wasm");
-    assert.equal(config.modules, 6);
-    assert.equal(config.guest_origin, `http://guest.localhost:${port}`);
-    assert.equal(config.client_role, "host");
-    // Undici fetch replaces a supplied Host header; use a real HTTP request
-    // to exercise the guest virtual host without depending on Node DNS aliases.
-    const guestConfig = await new Promise((resolve, reject) => {
-      const req = request(
-        tool.service + "/qa/config",
-        { headers: { Host: `guest.localhost:${port}` } },
-        (res) => {
-          const chunks = [];
-          res.on("data", (c) => chunks.push(c));
-          res.on("end", () => resolve(JSON.parse(Buffer.concat(chunks))));
-          res.on("error", reject);
-        },
-      );
-      req.on("error", reject);
-      req.end();
-    });
-    assert.equal(guestConfig.client_role, "guest");
-    const page = await fetch(tool.origin + "/");
-    assert.match(await page.text(), /two.*native/i);
-    assert.ok(
-      page.headers
-        .get("content-security-policy")
-        .includes("'wasm-unsafe-eval'"),
-    );
-    assert.ok(
-      page.headers.get("content-security-policy").includes(config.guest_origin),
-    );
-    const binaryURL = config.builds.webgpu.replace(
-      "galaxy.js",
-      "galaxy_bg.wasm",
-    );
-    const binary = await fetch(tool.origin + binaryURL);
-    assert.equal(binary.headers.get("content-type"), "application/wasm");
-    const bytes = Buffer.from(await binary.arrayBuffer());
-    assert.deepEqual([...bytes.subarray(0, 8)], [0, 97, 115, 109, 1, 0, 0, 0]);
-    assert.equal(sha(bytes), manifest.files[binaryURL.slice(1)]);
-    assert.equal((await fetch(tool.origin + "/review.js")).status, 404);
-    assert.equal((await fetch(tool.origin + "/wasm/builds.json")).status, 404);
-    assert.equal(
-      (await fetch(tool.origin + binaryURL + "?token=forbidden")).status,
-      404,
-    );
-    for (const origin of [tool.origin, config.guest_origin]) {
-      const response = await fetch(tool.service + "/v1/sessions", {
-        method: "POST",
-        headers: { Origin: origin, "Content-Type": "application/json" },
-        body: JSON.stringify({ seed: 123, protocol: "galaxy-coop-1" }),
+      let tool;
+      t.after(async () => {
+        await tool?.stop();
+        assert.ok(!tool?.server.listening);
+        assert.ok(stage.startsWith(path.join(root, "work") + path.sep));
+        await fs.rm(stage, { recursive: true });
       });
-      assert.equal(response.status, 201);
-      const grant = await response.json();
-      assert.ok(grant.participant.token);
-      assert.equal(response.headers.get("access-control-allow-origin"), origin);
-    }
-    assert.equal(
-      (
-        await fetch(tool.service + "/v1/sessions", {
-          method: "POST",
-          headers: {
-            Origin: "http://untrusted.localhost",
-            "Content-Type": "application/json",
+      const manifest = await prepare(stage, {
+        dist: path.resolve(
+          owned ? process.env.COOP_QA_OWNED_DIST : process.env.COOP_QA_DIST,
+        ),
+        ...(owned
+          ? {
+              ownedLoadout: true,
+              sourceRoot: path.resolve(process.env.COOP_QA_SOURCE_ROOT),
+              sourceCommit: process.env.COOP_QA_SOURCE_COMMIT,
+            }
+          : {}),
+      });
+      assert.equal(manifest.version, owned ? 3 : 2);
+      assert.equal(Object.keys(manifest.files).length, 18);
+      assert.equal(manifest.artifacts.length, 8);
+      for (const name of ["controller", "wasm-ports"]) {
+        const js = await fs.readFile(
+          path.join(stage, `modules/${name}.js`),
+          "utf8",
+        );
+        assert.ok(!js.includes('"./wire.ts"'));
+        assert.ok(!js.includes('"./transport.ts"'));
+      }
+      await assert.rejects(
+        prepare(stage, { dist: path.resolve(process.env.COOP_QA_DIST) }),
+        /fresh stage/,
+      );
+      const reservation = createServer();
+      reservation.listen(0, "127.0.0.1");
+      await once(reservation, "listening");
+      const port = reservation.address().port;
+      await new Promise((r) => reservation.close(r));
+      tool = await start({ stage, port, maxMs: 10_000 });
+      const config = await (await fetch(tool.origin + "/qa/config")).json();
+      assert.equal(config.mode, "wasm");
+      assert.equal(config.profile_mode, owned ? "owned" : "factory");
+      if (owned) {
+        assert.equal(config.source_commit, process.env.COOP_QA_SOURCE_COMMIT);
+        assert.equal(config.build_stamp.head, config.source_commit);
+        assert.equal(Object.keys(manifest.git_inputs).length, 6);
+        const ports = await import(
+          pathToFileURL(path.join(stage, "modules/wasm-ports.js")).href
+        );
+        // Execute the actual staged native-export adapter against a declared response boundary.
+        // Native execution is reserved for the real browser; this tests request/response contract.
+        const value = {
+          version: 1,
+          selected_ship: 0,
+          owned_ships: 1,
+          patches: 0,
+          royal_victory: false,
+          ship_xp: 0,
+          hardware: [0, 0, 0, 0, 0, 0],
+          slots: [null, null, { index: 2, rank: 1 }],
+          trained_starter: false,
+          relic_count: 0,
+        };
+        assert.deepEqual(
+          ports.readOwnedLoadout({
+            co_op_batch(encoded) {
+              assert.deepEqual(JSON.parse(encoded), {
+                v: 1,
+                operations: [{ op: "export_loadout" }],
+              });
+              return JSON.stringify({ v: 1, results: [{ ok: true, value }] });
+            },
+          }),
+          value,
+        );
+      }
+      assert.equal(config.modules, 6);
+      assert.equal(config.guest_origin, `http://guest.localhost:${port}`);
+      assert.equal(config.client_role, "host");
+      // Undici fetch replaces a supplied Host header; use a real HTTP request
+      // to exercise the guest virtual host without depending on Node DNS aliases.
+      const guestConfig = await new Promise((resolve, reject) => {
+        const req = request(
+          tool.service + "/qa/config",
+          { headers: { Host: `guest.localhost:${port}` } },
+          (res) => {
+            const chunks = [];
+            res.on("data", (c) => chunks.push(c));
+            res.on("end", () => resolve(JSON.parse(Buffer.concat(chunks))));
+            res.on("error", reject);
           },
-          body: "{}",
-        })
-      ).status,
-      403,
-    );
-    const post = (value) =>
-      fetch(tool.origin + "/qa/report", {
-        method: "POST",
-        headers: { Origin: tool.origin, "Content-Type": "application/json" },
-        body: JSON.stringify(value),
+        );
+        req.on("error", reject);
+        req.end();
       });
-    assert.equal((await post({ ...report(), invite: "private" })).status, 400);
-    assert.equal((await post(report())).status, 200);
-    const files = await fs.readdir(path.join(stage, "captures"));
-    assert.equal(files.length, 1);
-    const captured = JSON.parse(
-      await fs.readFile(path.join(stage, "captures", files[0]), "utf8"),
-    );
-    assert.ok(captured.scope.includes("Root-driven"));
-    assert.deepEqual(captured.artifacts, manifest.artifacts);
-    assert.deepEqual(captured.builds, manifest.builds);
-    await tool.stop();
-    assert.equal(tool.server.coop.pendingPolls(), 0);
-    await fs.appendFile(path.join(stage, binaryURL.slice(1)), Buffer.from([0]));
-    await assert.rejects(start({ stage, port, maxMs: 10_000 }), /digest/);
-  },
-);
+      assert.equal(guestConfig.client_role, "guest");
+      const page = await fetch(tool.origin + "/");
+      assert.match(await page.text(), /two.*native/i);
+      assert.ok(
+        page.headers
+          .get("content-security-policy")
+          .includes("'wasm-unsafe-eval'"),
+      );
+      assert.ok(
+        page.headers
+          .get("content-security-policy")
+          .includes(config.guest_origin),
+      );
+      const binaryURL = config.builds.webgpu.replace(
+        "galaxy.js",
+        "galaxy_bg.wasm",
+      );
+      const binary = await fetch(tool.origin + binaryURL);
+      assert.equal(binary.headers.get("content-type"), "application/wasm");
+      const bytes = Buffer.from(await binary.arrayBuffer());
+      assert.deepEqual(
+        [...bytes.subarray(0, 8)],
+        [0, 97, 115, 109, 1, 0, 0, 0],
+      );
+      assert.equal(sha(bytes), manifest.files[binaryURL.slice(1)]);
+      assert.equal((await fetch(tool.origin + "/review.js")).status, 404);
+      assert.equal(
+        (await fetch(tool.origin + "/wasm/builds.json")).status,
+        404,
+      );
+      assert.equal(
+        (await fetch(tool.origin + binaryURL + "?token=forbidden")).status,
+        404,
+      );
+      for (const origin of [tool.origin, config.guest_origin]) {
+        const response = await fetch(tool.service + "/v1/sessions", {
+          method: "POST",
+          headers: { Origin: origin, "Content-Type": "application/json" },
+          body: JSON.stringify({ seed: 123, protocol: "galaxy-coop-1" }),
+        });
+        assert.equal(response.status, 201);
+        const grant = await response.json();
+        assert.ok(grant.participant.token);
+        assert.equal(
+          response.headers.get("access-control-allow-origin"),
+          origin,
+        );
+      }
+      assert.equal(
+        (
+          await fetch(tool.service + "/v1/sessions", {
+            method: "POST",
+            headers: {
+              Origin: "http://untrusted.localhost",
+              "Content-Type": "application/json",
+            },
+            body: "{}",
+          })
+        ).status,
+        403,
+      );
+      const post = (value) =>
+        fetch(tool.origin + "/qa/report", {
+          method: "POST",
+          headers: { Origin: tool.origin, "Content-Type": "application/json" },
+          body: JSON.stringify(value),
+        });
+      const actualReport = owned ? ownedReport() : report();
+      assert.equal(
+        (await post({ ...actualReport, invite: "private" })).status,
+        400,
+      );
+      assert.equal(
+        (await post(owned ? report() : ownedReport())).status,
+        400,
+        "a report cannot silently change stage modes",
+      );
+      assert.equal((await post(actualReport)).status, 200);
+      const files = await fs.readdir(path.join(stage, "captures"));
+      assert.equal(files.length, 1);
+      const captured = JSON.parse(
+        await fs.readFile(path.join(stage, "captures", files[0]), "utf8"),
+      );
+      assert.ok(captured.scope.includes("Root-driven"));
+      assert.deepEqual(captured.artifacts, manifest.artifacts);
+      assert.deepEqual(captured.builds, manifest.builds);
+      if (owned) {
+        assert.deepEqual(captured.git_inputs, manifest.git_inputs);
+        assert.deepEqual(captured.build_stamp, manifest.build_stamp);
+      }
+      await tool.stop();
+      assert.equal(tool.server.coop.pendingPolls(), 0);
+      await fs.appendFile(
+        path.join(stage, binaryURL.slice(1)),
+        Buffer.from([0]),
+      );
+      await assert.rejects(start({ stage, port, maxMs: 10_000 }), /digest/);
+    },
+  );
