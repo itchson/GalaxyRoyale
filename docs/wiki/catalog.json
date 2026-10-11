@@ -50,7 +50,7 @@
         },
         {
           "label": "Save",
-          "value": "Profile schema 4; per-ship XP and loadouts"
+          "value": "Profile schema 5; Kikai identity, per-ship XP and loadouts"
         },
         {
           "label": "Production",
@@ -1985,7 +1985,7 @@
       ],
       "media": [],
       "data": {
-        "schemaVersion": 4,
+        "schemaVersion": 5,
         "materialTiers": 5,
         "cargoCapacity": 16
       }
@@ -2835,6 +2835,263 @@
         "world-seed"
       ],
       "media": []
+    },
+    {
+      "id": "kikai",
+      "title": "Kikai licenses and manufacturers",
+      "category": "champions",
+      "status": "implemented",
+      "summary": "A persistent droid license chooses type, main corporation and independent crystal-horn manufacturer.",
+      "tags": [
+        "kikai",
+        "kikai"
+      ],
+      "facts": [
+        {
+          "label": "Types",
+          "value": "DORA female/long hair; DORO male/short spiky hair; TALO neutral/crew cut"
+        },
+        {
+          "label": "Main manufacturer",
+          "value": "PAN green/passive; RENKO red/offensive; HUGO blue/defensive"
+        },
+        {
+          "label": "Sub-manufacturer",
+          "value": "Colors crystal horns independently of hair and home theme"
+        },
+        {
+          "label": "License",
+          "value": "TYPE-MAIN-SUB-HASH; three initials followed by #HASH"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Canon and behavior",
+          "paragraphs": [
+            "The browser issues eight cryptographically random bytes as sixteen hexadecimal digits. Main corporation selects its distinct level-one starter hull and one equipped rank-one ability. PAN Pathfinder carries the passive slot; RENKO Lancer the offensive slot; HUGO Bulwark the defensive slot.",
+            "Main corporation themes hair, the starter hull, its jet and home accents. The independent sub-manufacturer colors horns. Existing anonymous profiles retain their original Scout, progress and loadouts; migration does not issue a license or duplicate a starter item.",
+            "Type-specific player portrait silhouettes are a separate authored-art task; the current detailed guide is DORA. Recolored guide art is not presented as a male or neutral character."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "path": "docs/KIKAI_LORE.md",
+          "label": "Accepted Kikai canon",
+          "role": "implementation"
+        },
+        {
+          "path": "crates/game_core/src/identity.rs",
+          "label": "Authoritative registration and mission flags",
+          "role": "implementation"
+        },
+        {
+          "path": "apps/game/src/kikai.ts",
+          "label": "License choices and secure random hash",
+          "role": "implementation"
+        },
+        {
+          "path": "apps/game/src/storage.ts",
+          "label": "Validated schema-five snapshots",
+          "role": "implementation"
+        }
+      ],
+      "related": [
+        "ships",
+        "abilities",
+        "cargo"
+      ],
+      "media": [],
+      "data": {
+        "types": [
+          "DORA",
+          "DORO",
+          "TALO"
+        ],
+        "corporations": [
+          {
+            "id": "pan",
+            "color": "green",
+            "role": "passive",
+            "starter": "PAN Pathfinder",
+            "ability": 2
+          },
+          {
+            "id": "renko",
+            "color": "red",
+            "role": "offensive",
+            "starter": "RENKO Lancer",
+            "ability": 0
+          },
+          {
+            "id": "hugo",
+            "color": "blue",
+            "role": "defensive",
+            "starter": "HUGO Bulwark",
+            "ability": 1
+          }
+        ],
+        "hashBytes": 8,
+        "schemaVersion": 5
+      }
+    },
+    {
+      "id": "dora",
+      "title": "DPR#1337 / DORA-PAN-RENKO-1337",
+      "category": "champions",
+      "status": "implemented",
+      "summary": "PAN's green-haired Kikai guide wears RENKO red crystal horns and introduces real flight and crafting.",
+      "tags": [
+        "dora",
+        "kikai"
+      ],
+      "facts": [
+        {
+          "label": "Guide",
+          "value": "DORA-PAN-RENKO-1337; DPR#1337"
+        },
+        {
+          "label": "Native portrait",
+          "value": "96 × 128 cells; 8,656 occupied submissions in three layers"
+        },
+        {
+          "label": "Animation",
+          "value": "Authored expressions, blinking and explicitly driven speaking"
+        },
+        {
+          "label": "Accepted reference",
+          "value": "Approved generated expression sheet; declared conversion and authored patches"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Canon and behavior",
+          "paragraphs": [
+            "DORA's golden eyes, green hair, red crystal horns, pale armor and mechanical neck preserve the accepted character reference. The guide has a fixed PAN/RENKO appearance; player hair and horn palette masks are independent.",
+            "The runtime paints occupied cell objects with group transforms and fractional fitting. The reference conversion declares crop, alpha threshold, nearest resampling and palette reduction; it is not described as lossless. Native software images verify extracted packets, while integrated browser and physical-device acceptance have separate scopes.",
+            "No generated speech or local model is claimed. The native portrait API includes an explicitly driven speaking mask; DORA voice assets and inference integration remain future work. Cosmetic animation freezes under Reduced Motion."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "path": "docs/KIKAI_ART.md",
+          "label": "Portrait and conversion contract",
+          "role": "implementation"
+        },
+        {
+          "path": "crates/game_web/src/kikai_art.rs",
+          "label": "Native layers and controls",
+          "role": "implementation"
+        },
+        {
+          "path": "assets/ui/kikai/provenance.json",
+          "label": "Actual provenance",
+          "role": "implementation"
+        },
+        {
+          "path": "assets/narrative/dora-initial-mission.json",
+          "label": "Authored guide pages",
+          "role": "implementation"
+        }
+      ],
+      "related": [
+        "ships",
+        "abilities",
+        "cargo"
+      ],
+      "media": [
+        {
+          "path": "assets/concepts/kikai/dora-reference-expression-sheet.png",
+          "label": "Approved DORA detail reference",
+          "kind": "concept",
+          "provenance": "assets/ui/kikai/provenance.json",
+          "caption": "Actual approved generated reference. Runtime conversion is declared and authored animation patches are separate."
+        },
+        {
+          "path": "artifacts/kikai/native-contact-sheet.png",
+          "label": "Actual native DORA layers and controls",
+          "kind": "runtime-art",
+          "provenance": "docs/KIKAI_ART.md",
+          "caption": "Software rendering of actual FrameBuilder packets: expressions, blink, speech masks, independent recolor roles and ten32-cell icons. This is native extraction evidence, not a GPU screenshot."
+        }
+      ],
+      "data": {
+        "portraitId": 8,
+        "width": 96,
+        "height": 128,
+        "occupied": 8656,
+        "layers": 3
+      }
+    },
+    {
+      "id": "flight-training",
+      "title": "DORA's first flight mission",
+      "category": "missions",
+      "status": "implemented",
+      "summary": "Ordered persistent stages require actual departure, belt destruction, material pickup, home banking and crafting/equipping.",
+      "tags": [
+        "flight-training",
+        "kikai"
+      ],
+      "facts": [
+        {
+          "label": "Progress",
+          "value": "License → departure → Haven-belt rock → Tier 1 pickup → physical bank → craft plus equip"
+        },
+        {
+          "label": "Discovery",
+          "value": "Unknown ships and abilities stay absent until real discovery or unlock"
+        },
+        {
+          "label": "Save",
+          "value": "Collected facts persist; reload does not fabricate a physical home return"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Canon and behavior",
+          "paragraphs": [
+            "The authoritative simulation records separate facts, preserving events collected out of order. Haven-belt destruction requires an actual asteroid with belt origin, and banking requires a real physical return across the protected boundary.",
+            "The gifted starter ability does not satisfy the additional crafting/equipping stage. Guide pages display instructions without rewards or hidden progression mutations. The mission remains accessible in the Journal.",
+            "Native tests exercise gameplay paths with explicit accelerated fixtures; they do not prove natural loot pacing or a complete player-earned playthrough."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "path": "crates/game_core/src/identity_tests.rs",
+          "label": "Real simulation path regressions",
+          "role": "implementation"
+        },
+        {
+          "path": "crates/game_core/src/identity.rs",
+          "label": "Persistent flag derivation",
+          "role": "implementation"
+        },
+        {
+          "path": "apps/game/src/main.ts",
+          "label": "Guide and Journal integration",
+          "role": "implementation"
+        }
+      ],
+      "related": [
+        "ships",
+        "abilities",
+        "cargo"
+      ],
+      "media": [],
+      "data": {
+        "masks": [
+          1,
+          2,
+          4,
+          8,
+          16,
+          96
+        ],
+        "completedStage": 6
+      }
     }
   ]
 }

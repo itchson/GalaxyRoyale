@@ -230,6 +230,7 @@ function fixture() {
     deathScreen: element("death-screen"),
     launchScreen: element("launch-screen"),
     launched: true,
+    needsDroidCreation: false,
     paused: false,
     beforeLaunchMenu: false,
     menuTab: "upgrades",

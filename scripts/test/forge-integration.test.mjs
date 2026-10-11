@@ -257,6 +257,7 @@ function fixture() {
     element,
     hud: authoritativeHud,
     launched: true,
+    needsDroidCreation: false,
     paused: false,
     preparingEncounter: null,
     recovering: false,

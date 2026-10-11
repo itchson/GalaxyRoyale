@@ -25,7 +25,12 @@ import {
   paintShipHangar,
   type ForgeHud,
 } from "./loadout";
-import { NarrativeDirector, type NarrativeContext } from "./narrative";
+import {
+  NarrativeDirector,
+  splitPages,
+  type NarrativeContext,
+} from "./narrative";
+import doraGuideSource from "../../../assets/narrative/dora-initial-mission.json?raw";
 import {
   SaveStore,
   SaveConflict,
@@ -409,25 +414,65 @@ function showDoraGuide(): void {
   const training = hud?.onboarding;
   if (!training || !hud.identity || !launched || !deathScreen.hidden) return;
   if (!menu.hidden) menu.hidden = true;
-  dialoguePanel.show({
-    speaker: "DPR#1337 / DORA",
-    text:
-      training.stage === 0
-        ? `Welcome, ${hud.identity.short_designation}. I am DORA-PAN-RENKO-1337, your PAN Dynamics guide. Your Kikai license includes ${hud.identity.starter_ship} and ${hud.identity.starter_ability}.`
-        : training.description,
-    portrait: 8,
-    expression: training.completed ? 3 : training.stage >= 2 ? 1 : 0,
-    actionLabel: training.stage === 0 ? "BEGIN TRAINING" : "CONTINUE FLIGHT",
-    onAction: async () => {
-      if (hud.onboarding?.stage === 0) {
-        galaxy.acknowledge_license();
-        hud = galaxy.hud();
-        await persist(galaxy.profile());
-      }
-      dialoguePanel.close();
-      toast(hud.onboarding?.description ?? "Your expedition is ready.");
-    },
-  });
+  narrative.close();
+  const content = JSON.parse(doraGuideSource) as {
+    stages: { stage: number; pages: { text: string; expression: string }[] }[];
+  };
+  const authored = content.stages.find(
+    (stage) => stage.stage === training.stage,
+  )?.pages ?? [{ text: training.description, expression: "neutral" }];
+  const pages = authored.flatMap((page) =>
+    splitPages(page.text).map((text) => ({
+      text,
+      expression: ["neutral", "focused", "concerned", "pleased"].indexOf(
+        page.expression,
+      ),
+    })),
+  );
+  if (training.stage === 0)
+    pages.unshift({
+      text: `Welcome, ${hud.identity.short_designation}. Your Kikai license includes ${hud.identity.starter_ship} and ${hud.identity.starter_ability}.`,
+      expression: 3,
+    });
+  let index = 0;
+  const draw = (): void => {
+    dialoguePanel.show({
+      speaker: "DPR#1337 / DORA",
+      text: pages[index].text,
+      portrait: 8,
+      expression: Math.max(0, pages[index].expression),
+      page: index,
+      pageCount: pages.length,
+      onPrevious:
+        index > 0
+          ? () => {
+              index--;
+              draw();
+            }
+          : undefined,
+      onNext:
+        index < pages.length - 1
+          ? () => {
+              index++;
+              draw();
+            }
+          : undefined,
+      actionLabel: training.stage === 0 ? "BEGIN TRAINING" : "CONTINUE FLIGHT",
+      onAction:
+        index === pages.length - 1
+          ? async () => {
+              if (hud.onboarding?.stage === 0) {
+                galaxy.acknowledge_license();
+                hud = galaxy.hud();
+                await persist(galaxy.profile());
+              }
+              dialoguePanel.close();
+              toast(hud.onboarding?.description ?? "Your expedition is ready.");
+            }
+          : undefined,
+    });
+  };
+  draw();
   pixelUi?.invalidate();
 }
 function restoreUi(): void {
