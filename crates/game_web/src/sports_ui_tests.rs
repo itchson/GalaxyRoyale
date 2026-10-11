@@ -76,6 +76,63 @@ fn authored_cut_metal_corners_have_distinct_facets_recesses_enamel_and_locator()
 }
 
 #[test]
+fn header_competition_wing_has_authored_slope_facets_award_and_recess() {
+    assert_eq!((HEADER_WING.width, HEADER_WING.height), (48, 12));
+    assert_eq!(color_at(&HEADER_WING, 0, 0), Some(SPECULAR));
+    assert_eq!(color_at(&HEADER_WING, 9, 3), Some(ENAMEL));
+    assert_eq!(color_at(&HEADER_WING, 9, 6), Some(GOLD));
+    assert_eq!(color_at(&HEADER_WING, 9, 2), Some(GRAPHITE));
+    assert_eq!(
+        color_at(&HEADER_WING, 40, 9),
+        None,
+        "real cut-back shoulder"
+    );
+    assert_eq!(color_at(&HEADER_WING, 0, 5), None, "sloped leading edge");
+    for color in [SPECULAR, PLATINUM, ALLOY, GRAPHITE, ENAMEL, GOLD] {
+        assert!(HEADER_WING.cells().any(|(_, c)| c == color));
+    }
+    println!(
+        "SPORTS refined shoulder source cells={}",
+        HEADER_WING.occupied_count()
+    );
+}
+
+#[test]
+fn panel_inherited_focus_and_corporation_cannot_tint_the_opaque_neutral_backing() {
+    let mut panel = input(Kind::Panel, [0.0, 0.0, 300.0, 180.0]);
+    let baseline = signature(&extract(&panel));
+    assert!(baseline.iter().filter(|p| p.1 == RECESS).count() >= 2);
+    for color in [rgb(255, 147, 119), rgb(92, 191, 255), rgb(159, 225, 138)] {
+        panel.accent = color;
+        panel.active = true;
+        panel.selected = true;
+        assert_eq!(
+            signature(&extract(&panel)),
+            baseline,
+            "focus stays on actual controls"
+        );
+    }
+    let [r, g, b, a] = RECESS.to_le_bytes();
+    assert_eq!((r, g, b, a), (18, 18, 18, 255));
+}
+
+#[test]
+fn neutral_surface_survives_linear_eight_bit_ui_quantization_without_cyan_shift() {
+    // Independent model of pixel.wgsl's source conversion into Rgba8Unorm.
+    // It reproduces the observed old dark focus-fill failure; not a GPU test.
+    let quantized = |color: u32| {
+        let [r, g, b, _] = color.to_le_bytes();
+        [r, g, b].map(|v| ((v as f32 / 255.0).powf(2.2) * 255.0).round() as u8)
+    };
+    assert_eq!(quantized(rgb(12, 18, 24)), [0, 1, 1]);
+    assert_eq!(quantized(RECESS), [1, 1, 1]);
+    for source in [RECESS, subdued(RECESS), rgb(20, 20, 20)] {
+        let [r, g, b] = quantized(source);
+        assert_eq!((r, g), (g, b));
+    }
+}
+
+#[test]
 fn fractional_tiny_chrome_preserves_full_source_cells_and_local_geometry() {
     for kind in [Kind::Panel, Kind::Button] {
         let mut counts = vec![];

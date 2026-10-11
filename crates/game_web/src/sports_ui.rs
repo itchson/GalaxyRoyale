@@ -8,9 +8,11 @@ const fn rgb(r: u8, g: u8, b: u8) -> u32 {
 }
 pub const PLATINUM: u32 = rgb(194, 207, 216);
 const SPECULAR: u32 = rgb(234, 240, 242);
-const ALLOY: u32 = rgb(91, 110, 125);
-const GRAPHITE: u32 = rgb(28, 36, 46);
-const RECESS: u32 = rgb(8, 12, 17);
+const ALLOY: u32 = rgb(99, 108, 118);
+const GRAPHITE: u32 = rgb(30, 32, 36);
+// Equal source channels also remain neutral after the physical UI's linear
+// eight-bit attachment. Very dark unequal channels can quantize to cyan.
+const RECESS: u32 = rgb(18, 18, 18);
 const ENAMEL: u32 = rgb(88, 222, 239);
 const GOLD: u32 = rgb(212, 172, 96);
 
@@ -78,6 +80,48 @@ static CHEVRON: LazyLock<PixelBody> = LazyLock::new(|| {
         &[('#', ENAMEL)],
     )
 });
+// An original athletic shoulder/award rail, rather than a repeated logo or
+// another frame around content. Its sloped facets echo the title's wings.
+static HEADER_WING: LazyLock<PixelBody> = LazyLock::new(|| {
+    let rows: Vec<String> = (0..12)
+        .map(|y| {
+            (0..48)
+                .map(|x| {
+                    let left = y / 2;
+                    let right = 47 - y;
+                    if x < left || x > right || (y >= 8 && x > 14) {
+                        ' '
+                    } else if x == left || y == 0 || x == right {
+                        's'
+                    } else if y == 1 || x == right - 1 {
+                        'p'
+                    } else if y == 2 && (7..35).contains(&x) {
+                        'd'
+                    } else if (y == 3 || y == 4) && (9..30).contains(&x) {
+                        'c'
+                    } else if (y == 6 || y == 7) && (7..13).contains(&x) {
+                        'g'
+                    } else if y == 5 || x == left + 1 {
+                        'm'
+                    } else {
+                        'd'
+                    }
+                })
+                .collect()
+        })
+        .collect();
+    PixelBody::from_ascii(
+        &rows.iter().map(String::as_str).collect::<Vec<_>>(),
+        &[
+            ('s', SPECULAR),
+            ('p', PLATINUM),
+            ('m', ALLOY),
+            ('d', GRAPHITE),
+            ('c', ENAMEL),
+            ('g', GOLD),
+        ],
+    )
+});
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Kind {
@@ -107,7 +151,7 @@ fn rect_valid(r: [f32; 4]) -> bool {
 fn subdued(color: u32) -> u32 {
     let [r, g, b, _] = color.to_le_bytes();
     let gray = (r as f32 * 0.21 + g as f32 * 0.72 + b as f32 * 0.07) * 0.55;
-    rgb(gray as u8, (gray + 6.0) as u8, (gray + 11.0) as u8)
+    rgb(gray as u8, gray as u8, gray as u8)
 }
 fn accent(color: u32, strong: bool) -> u32 {
     if strong {
@@ -160,15 +204,25 @@ pub fn append(
             used += 1;
         }
     };
-    let strong = (input.active || input.selected) && !input.disabled;
+    // Focusing a descendant makes the semantic root active. A whole panel must
+    // not change its backing or corporation tint merely because a slider owns
+    // focus; small controls retain independent action/category accents.
+    let strong = input.kind != Kind::Panel && (input.active || input.selected) && !input.disabled;
     let rail = if input.disabled {
         subdued(ENAMEL)
     } else {
-        accent(input.accent, strong)
+        accent(
+            if input.kind == Kind::Panel {
+                ENAMEL
+            } else {
+                input.accent
+            },
+            strong,
+        )
     };
     if input.kind == Kind::Row {
         if strong {
-            quad(r, rgb(10, 15, 21));
+            quad(r, rgb(20, 20, 20));
         }
         quad([r[0], r[1] + r[3] - 0.6, r[2], 0.3], ALLOY);
         quad([r[0], r[1] + r[3] - 0.3, r[2], 0.3], RECESS);
@@ -181,17 +235,36 @@ pub fn append(
         let c = target.min(r[2] * 0.25).min(r[3] * 0.25);
         let d = c * 0.12;
         // Two open cut-corner surfaces, not an opaque colored panel wash.
-        let fill = if input.disabled {
-            rgb(9, 12, 17)
+        let fill = if input.kind == Kind::Panel {
+            RECESS
+        } else if input.disabled {
+            rgb(11, 11, 11)
         } else if strong {
-            rgb(12, 18, 24)
+            rgb(26, 27, 29)
         } else {
             RECESS
         };
         quad([r[0] + c * 0.4, r[1], r[2] - c * 0.8, r[3]], fill);
         quad([r[0], r[1] + c * 0.4, r[2], r[3] - c * 0.8], fill);
         for (offset, color) in [(0.0, PLATINUM), (d, ALLOY), (d * 2.0, GRAPHITE)] {
-            quad([r[0] + c, r[1] + offset, r[2] - c * 2.0, d], color);
+            let width = r[2] - c * 2.0;
+            if input.kind == Kind::Panel {
+                // Asymmetric broken shoulder rail with a recessed interval.
+                // Native source facets give the header its sports identity;
+                // the long perimeter remains quiet, uncolored metal.
+                quad([r[0] + c, r[1] + offset, width * 0.62, d], color);
+                quad(
+                    [
+                        r[0] + r[2] - c - width * 0.14,
+                        r[1] + offset,
+                        width * 0.14,
+                        d,
+                    ],
+                    color,
+                );
+            } else {
+                quad([r[0] + c, r[1] + offset, width, d], color);
+            }
             quad(
                 [r[0] + c, r[1] + r[3] - offset - d, r[2] - c * 2.0, d],
                 color,
@@ -204,7 +277,12 @@ pub fn append(
         }
         // A short recessed enamel rail signals action/category. Metal is
         // unchanged by hover; selected navigation keeps its independent bar.
-        quad([r[0] + c, r[1] + d * 3.0, (r[2] - c * 2.0) * 0.22, d], rail);
+        let accent_width = if input.kind == Kind::Panel {
+            (r[2] - c * 2.0).min(22.0)
+        } else {
+            (r[2] - c * 2.0) * 0.22
+        };
+        quad([r[0] + c, r[1] + d * 3.0, accent_width, d], rail);
         quad(
             [r[0] + r[2] - c - 1.25, r[1] + r[3] - d * 2.0, 1.25, d],
             GOLD,
@@ -259,6 +337,23 @@ pub fn append(
                         if x { -scale } else { scale },
                         if y { -scale } else { scale },
                     ),
+                    ..Default::default()
+                }
+                .affine(),
+                color: None,
+            });
+            used += 1;
+        }
+        if input.kind == Kind::Panel {
+            let fit = c / 24.0;
+            parts[used] = Some(Part {
+                body: &HEADER_WING,
+                local: Transform {
+                    position: Vec2::new(
+                        r[0] + c + HEADER_WING.width as f32 * fit * 0.5,
+                        r[1] + c * 0.24 + HEADER_WING.height as f32 * fit * 0.5,
+                    ),
+                    scale: Vec2::splat(fit),
                     ..Default::default()
                 }
                 .affine(),
