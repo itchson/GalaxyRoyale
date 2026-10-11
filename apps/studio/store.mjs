@@ -88,7 +88,18 @@ export class ProjectStore {
     const source = cleanString(payload.source, 'Source', 1000);
     const now = new Date().toISOString();
     let item;
-    if (kind === 'task.create') {
+    if (kind === 'project.update') {
+      if (payload.expectedRevision !== next.revision) throw new ApiError(409, `Project changed. Current revision is ${next.revision}; refresh before editing.`);
+      requireValue(payload.patch && typeof payload.patch === 'object' && !Array.isArray(payload.patch), 'Expected a project patch.');
+      const keys = Object.keys(payload.patch);
+      requireValue(keys.length > 0 && keys.every(key => ['phase', 'phaseDescription'].includes(key)), 'Project patch permits phase and phaseDescription only.');
+      if ('phase' in payload.patch) next.phase = cleanString(payload.patch.phase, 'Project phase', 200);
+      if ('phaseDescription' in payload.patch) {
+        requireValue(typeof payload.patch.phaseDescription === 'string' && payload.patch.phaseDescription.length <= 2000, 'Phase description must be a string (maximum 2000 characters).');
+        next.phaseDescription = payload.patch.phaseDescription.trim();
+      }
+      item = { id: 'project', title: `Project phase: ${next.phase || 'Unspecified'}`, phase: next.phase, phaseDescription: next.phaseDescription || '' };
+    } else if (kind === 'task.create') {
       item = { id: `task-${randomUUID().slice(0, 8)}`, title: '', description: '', department: 'Production', owner: '', status: 'backlog', priority: 'normal', dependencies: [], acceptanceCriteria: [], evidence: [], blocker: '', revision: 1, createdAt: now, updatedAt: now };
       Object.assign(item, Object.fromEntries(Object.entries(payload.task || {}).filter(([key]) => ['title','description','department','owner','status','priority','dependencies','acceptanceCriteria','evidence','blocker'].includes(key))));
       validateTask(item, next); next.tasks.push(item);

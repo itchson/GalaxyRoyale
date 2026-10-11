@@ -3,14 +3,26 @@ import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { resolve, extname } from 'node:path';
 import { ProjectStore, ApiError, artifactPath } from './store.mjs';
+import { WikiStore } from './wiki.mjs';
 
-export function makeServer(store) {
+export function makeServer(store, wiki = new WikiStore(store.root)) {
   const json = (res, status, value) => { res.writeHead(status, {'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'}); res.end(JSON.stringify(value)); };
   return createServer(async (req, res) => {
     try {
       const host = (req.headers.host || '').split(':')[0];
       if (!['127.0.0.1','localhost'].includes(host)) throw new ApiError(403, 'Local requests only.');
       const url = new URL(req.url, 'http://127.0.0.1');
+      if (req.method === 'GET' && url.pathname.startsWith('/api/wiki')) {
+        if (url.pathname === '/api/wiki') return json(res, 200, await wiki.catalog(Object.fromEntries(url.searchParams)));
+        if (['/api/wiki/media', '/api/wiki/source'].includes(url.pathname)) {
+          const file = await wiki.file(url.pathname.endsWith('/media') ? 'media' : 'source', url.searchParams.get('path'));
+          res.writeHead(200, {'Content-Type':file.type, 'X-Content-Type-Options':'nosniff', 'Content-Security-Policy':"default-src 'none'; sandbox", 'Cache-Control':'no-store'});
+          res.end(file.bytes); return;
+        }
+        const match = /^\/api\/wiki\/([a-z0-9-]+)$/.exec(url.pathname);
+        if (match) return json(res, 200, await wiki.entry(match[1]));
+        throw new ApiError(404, 'Wiki route not found.');
+      }
       if (req.method === 'GET' && url.pathname === '/api/project') return json(res, 200, store.snapshot());
       if (req.method === 'GET' && url.pathname === '/api/events') {
         res.writeHead(200, {'Content-Type':'text/event-stream','Cache-Control':'no-store','Connection':'keep-alive'});
@@ -31,6 +43,7 @@ export function makeServer(store) {
       let payload; try { payload = JSON.parse(body); } catch { throw new ApiError(400, 'Invalid JSON.'); }
       if (!payload || typeof payload !== 'object' || Array.isArray(payload)) throw new ApiError(400, 'Expected a JSON object.');
       let kind;
+      if (req.method === 'PATCH' && url.pathname === '/api/project') kind = 'project.update';
       if (req.method === 'PATCH' && /^\/api\/tasks\/[^/]+$/.test(url.pathname)) { kind = 'task.update'; payload.id = decodeURIComponent(url.pathname.split('/').at(-1)); }
       if (req.method === 'PATCH' && /^\/api\/feedback\/[^/]+$/.test(url.pathname)) { kind = 'feedback.update'; payload.id = decodeURIComponent(url.pathname.split('/').at(-1)); }
       if (req.method === 'POST') kind = {'/api/tasks':'task.create','/api/reviews':'review','/api/decisions':'decision','/api/builds':'build','/api/feedback':'feedback','/api/runs':'run'}[url.pathname];

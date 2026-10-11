@@ -28,10 +28,18 @@ Create commands: `task`, `review`, `decision`, `build`, or `feedback`, followed 
 
 Task patches require the latest task `expectedRevision`; stale writes return 409. Completion requires all criteria met, completed dependencies and evidence. Artifact paths must reference existing files within `work/`, `artifacts/`, `dist/`, or `apps/game/dist/`. Files resolving outside these directories are rejected. Evidence notes record assertions and outcomes; the service does not itself rerun tests or verify an asserted pass.
 
-Test: `node --test apps/studio/test/*.test.mjs`. Build: `npm run build:studio`.
+Test: `node --experimental-transform-types --test apps/studio/test/*.test.mjs`. Build: `npm run build:studio`.
 
 ## Recorded agent runs
 
 `POST /api/runs` and `node scripts/studio-cli.mjs run create --file <payload.json>` append an observation to `runRecords` and the activity log. Run records cannot be edited or deleted by the API. Payload: `{author,source,record:{agentId,agentLabel,state,observedAt,taskIds,summary,evidence}}`. Use a stable space-free agent identity, UTC ISO `observedAt`, existing task IDs and evidence (a source-backed observation note or an existing artifact). States: `running`, `completed`, `interrupted`, `failed`, `blocked`. Future timestamps are rejected, with 30 seconds allowed for clock skew. The service adds `createdAt`; missing run history in older snapshots loads as an empty list.
 
 The board shows the last appended observation for each agent; Activity shows the complete history. A completed run scope does not complete the linked tasks. Recording a running state does not assert that the agent remains connected, and there is no session polling or wakeup mechanism. Observations must come from actual session exchanges or outputs; record the current observation time when a precise earlier time is unavailable rather than inventing a start or completion time.
+
+## DevBible and project phase
+
+The **DevBible** sidebar view provides search, category/status filters, linked source facts and an art/provenance gallery. Its versioned reference is `docs/wiki/catalog.json`; see `docs/DEV_BIBLE.md`. The localhost Wiki routes read only exact catalog-listed files. They are independent of the shipped game.
+
+Project phase is displayed from the recorded project metadata rather than a hardcoded Foundation label. The phase editor and `PATCH /api/project` use the current **project** revision, reject stale writes and permit only `phase` / `phaseDescription`. They do not alter tasks or existing records. CLI: `node scripts/studio-cli.mjs project update --file <payload.json>` with `{author,source,expectedRevision,patch:{phase,phaseDescription}}`. Read the latest snapshot first. `node scripts/studio-cli.mjs wiki` reads the actual catalog.
+
+Studio tests that import the actual TypeScript Wiki reader require the repository's Node 24 invocation: `node --experimental-transform-types --test apps/studio/test/*.test.mjs`. Run `pnpm exec tsc --noEmit` for type checks. Browser layout/accessibility remains a separate integration check.

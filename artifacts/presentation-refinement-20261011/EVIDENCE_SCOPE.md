@@ -1,0 +1,9 @@
+# Evidence scope
+
+The native art contact sheet is a flat software raster of actual occupied PixelBody/FrameBuilder cells. It does not substitute for GPU rendering. `webgpu-haven.png` and `webgpu-belt.png` are actual in-app-browser screenshots of the normal current Rust/WASM runtime on the canonical localhost preview, at 1280×720. The belt was admitted through the exposed QA console, not earned progression.
+
+The normal build log records WebGPU 0ddfdccc43fdff164b379f052a8d0ef00b2327561e8f23cae7ed7d45a9018a0d and WebGL2 a7c277aa5bf7ebc3172bf510240e9399fdbe381a3b50faec60a6f08b62f415ad; cache galaxy-add4abbaaf9fed4c. Source was the integrated presentation candidate before subsequent developer tooling/wiki changes. Native checks passed 419 cases; shell passed 249 with one explicit Windows file-symlink skip; 18 isolated WASM serializer/SaveStore checks used headless fake-indexeddb. Later final build evidence must name its own head.
+
+The audio reports preserve both the measured pre-ceiling overshoot and the final bounded native offline PCM. All 5,376,000 raw float32 channel samples in eight captures were independently decoded and verified. `warm-engine.wav` is the actual six-second final fixture, not an AI-produced soundtrack. Its immutable captured report gives the source/pins/sample-rate/hash. The screenshot `audio-helper-ready.png` shows the tool after its page was reloaded to Ready; it is not a screenshot of passing results. DSP results come from the immutable reports/PCM verification, not that image. The tracked review helper is reproducible from Git and locked TypeScript.
+
+No sustained human audio comfort, real-time output-device recovery, physical-phone performance, 30-minute soak or complete natural campaign/boss progression acceptance is claimed. Private hosted PWA reload remains a separate pending investigation. Actual ledger statuses preserve these gates.
