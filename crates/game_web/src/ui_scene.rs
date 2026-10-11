@@ -107,21 +107,75 @@ fn setting_regions(node: &UiNode) -> Option<([f32; 4], [f32; 4])> {
     Some((label, control))
 }
 
-fn settings_font(rect: [f32; 4], text: &str, requested: f32) -> f32 {
-    let requested = if requested.is_finite() {
-        requested.round().clamp(1.0, 4.0) as u32
+fn font_scale(requested: f32) -> f32 {
+    if requested.is_finite() {
+        requested.clamp(1.0, 4.0)
     } else {
-        1
+        1.0
+    }
+}
+
+fn text_capacity(rect: [f32; 4], font: f32) -> (usize, usize) {
+    (
+        ((rect[2] + font) / (RoyaleMono::ADVANCE * font)).floor() as usize,
+        ((rect[3] + font) / (8.0 * font)).floor() as usize,
+    )
+}
+
+fn fractional_text_rect(rect: [f32; 4], font: f32) -> [f32; 4] {
+    if font.fract() == 0.0 {
+        return rect;
+    }
+    // Child translation and cell-corner composition can round in opposite
+    // directions on an exact fractional fit. Reserve only f32 arithmetic
+    // roundoff inside the measured box; preserve integer font positions.
+    let magnitude = rect[0]
+        .abs()
+        .max(rect[1].abs())
+        .max((rect[0] + rect[2]).abs())
+        .max((rect[1] + rect[3]).abs())
+        .max(1.0);
+    let gutter = magnitude * f32::EPSILON * 8.0;
+    [
+        rect[0] + gutter,
+        rect[1] + gutter,
+        (rect[2] - gutter * 2.0).max(0.0),
+        (rect[3] - gutter * 2.0).max(0.0),
+    ]
+}
+
+fn settings_font(rect: [f32; 4], text: &str, requested: f32) -> f32 {
+    let requested = font_scale(requested);
+    let complete = |font| {
+        let (columns, rows) = text_capacity(fractional_text_rect(rect, font), font);
+        columns > 0 && rows > 0 && wrap(text, columns).len() <= rows
     };
-    for size in (1..=requested).rev() {
-        let font = size as f32;
-        let columns = ((rect[2] + font) / (RoyaleMono::ADVANCE * font)).floor() as usize;
-        let rows = ((rect[3] + font) / (8.0 * font)).floor() as usize;
-        if columns > 0 && rows > 0 && wrap(text, columns).len() <= rows {
-            return font;
+    if complete(requested) {
+        return requested;
+    }
+    // Each candidate keeps a complete number of lines, but its cell scale is
+    // continuous. The wrapper is stack-only and bounds names to 256 characters;
+    // requested sizes that already fit avoid this bounded fallback search.
+    let mut best = 1.0;
+    for columns in 1..=text.chars().take(TEXT_CHARS).count().max(1) {
+        let rows = wrap(text, columns).len().max(1);
+        let mut font = requested
+            .min(rect[2] / (columns as f32 * RoyaleMono::ADVANCE - 1.0))
+            .min(rect[3] / (rows as f32 * 8.0 - 1.0));
+        let fit = fractional_text_rect(rect, font);
+        font = font
+            .min(fit[2] / (columns as f32 * RoyaleMono::ADVANCE - 1.0))
+            .min(fit[3] / (rows as f32 * 8.0 - 1.0));
+        // A division on an exact column/row boundary may round up by one ULP.
+        // Validate with the actual wrapper rather than assume candidate fit.
+        if font >= 1.0 && !complete(font) {
+            font = font.next_down();
+        }
+        if font > best && complete(font) {
+            best = font;
         }
     }
-    1.0
+    best
 }
 
 #[derive(Debug, Default, Deserialize)]
@@ -1212,13 +1266,15 @@ impl Painter<'_> {
         );
     }
     fn text(&mut self, rect: [f32; 4], text: &str, font: f32, color: u32, centered: bool) {
+        let bounds = rect;
+        let font = font_scale(font)
+            .min((rect[3] / RoyaleMono::HEIGHT).max(1.0))
+            .min((rect[2] / RoyaleMono::WIDTH).max(1.0));
+        let rect = fractional_text_rect(rect, font);
         let font = font
-            .round()
-            .clamp(1.0, 4.0)
-            .min((rect[3] / 7.0).floor().max(1.0))
-            .min((rect[2] / 5.0).floor().max(1.0));
-        let columns = ((rect[2] + font) / (6.0 * font)).floor() as usize;
-        let rows = ((rect[3] + font) / (8.0 * font)).floor() as usize;
+            .min((rect[3] / RoyaleMono::HEIGHT).max(1.0))
+            .min((rect[2] / RoyaleMono::WIDTH).max(1.0));
+        let (columns, rows) = text_capacity(rect, font);
         if columns == 0 || rows == 0 {
             return;
         }
@@ -1252,17 +1308,27 @@ impl Painter<'_> {
                 }
                 let letter_local = RoyaleMono::letter_transform(text_local, column);
                 let letter_world = self.parent.compose(letter_local);
-                let clip = self.clip;
+                let clip = self.clip.map_or(bounds, |clip| intersection(bounds, clip));
                 self.frame
                     .push_body_affine_colored(body, letter_world, |cell, _| {
-                        let p = letter_local.point(cell);
-                        if clip.is_some_and(|r| {
-                            p.x < r[0] || p.x >= r[0] + r[2] || p.y < r[1] || p.y >= r[1] + r[3]
-                        }) {
-                            0
-                        } else {
-                            color
-                        }
+                        // Scroll clipping covers complete source cells, including
+                        // fractional edge cells. Hidden cells still charge both
+                        // budgets and retain their glyph's composed transform.
+                        let outside = [
+                            cell + Vec2::splat(-0.5),
+                            cell + Vec2::new(0.5, -0.5),
+                            cell + Vec2::new(-0.5, 0.5),
+                            cell + Vec2::splat(0.5),
+                        ]
+                        .into_iter()
+                        .map(|p| letter_local.point(p))
+                        .any(|p| {
+                            p.x < clip[0]
+                                || p.x > clip[0] + clip[2]
+                                || p.y < clip[1]
+                                || p.y > clip[1] + clip[3]
+                        });
+                        if outside { 0 } else { color }
                     });
                 self.remaining -= count;
                 self.work_remaining -= count;
@@ -1285,10 +1351,19 @@ impl Painter<'_> {
             .collect();
         let characters = label.chars().count();
         let units = (characters as f32 * RoyaleMono::ADVANCE - 1.0).max(RoyaleMono::WIDTH);
-        let font = font
-            .min((width / units).floor().max(1.0))
-            .min((height / RoyaleMono::HEIGHT).floor().max(1.0));
-        let columns = ((width + font) / (RoyaleMono::ADVANCE * font)).floor() as usize;
+        let content = [r[0] + padding_x, r[1] + 2.0, width, height];
+        let mut font = font_scale(font)
+            .min((width / units).max(1.0))
+            .min((height / RoyaleMono::HEIGHT).max(1.0));
+        let fit = fractional_text_rect(content, font);
+        font = font
+            .min((fit[2] / units).max(1.0))
+            .min((fit[3] / RoyaleMono::HEIGHT).max(1.0));
+        let mut columns = text_capacity(fractional_text_rect(content, font), font).0;
+        if font > 1.0 && columns < characters {
+            font = font.next_down().max(1.0);
+            columns = text_capacity(fractional_text_rect(content, font), font).0;
+        }
         if characters > columns {
             let visible = if columns >= 4 { columns - 3 } else { columns };
             if let Some((byte, _)) = label.char_indices().nth(visible) {
@@ -1298,7 +1373,6 @@ impl Painter<'_> {
                 label.push_str("...");
             }
         }
-        let content = [r[0] + padding_x, r[1] + 2.0, width, height];
         let previous_clip = self.clip;
         self.clip = Some(previous_clip.map_or(content, |clip| intersection(content, clip)));
         self.text(content, &label, font, color, true);
@@ -1483,11 +1557,7 @@ impl Painter<'_> {
     }
     fn node(&mut self, node: &UiNode, time: f32, reduced: bool) {
         let r = node.rect;
-        let font = if node.font.is_finite() {
-            node.font.round().clamp(1.0, 4.0)
-        } else {
-            1.0
-        };
+        let font = font_scale(node.font);
         let color = if node.disabled {
             DIM
         } else if node.active {
@@ -1595,7 +1665,7 @@ impl Painter<'_> {
                 self.rect(r, rgb(0, 0, 0));
                 self.rect([r[0], r[1], r[2], 1.0], rgb(38, 55, 63));
                 let height = (r[3] - 6.0).max(RoyaleMono::HEIGHT);
-                let font = font.min((height / RoyaleMono::HEIGHT).floor().max(1.0));
+                let font = font.min((height / RoyaleMono::HEIGHT).max(1.0));
                 let advance = RoyaleMono::ADVANCE * font;
                 let columns = ((r[2] + font) / advance).floor() as usize;
                 let chars: Vec<_> = node.text.chars().take(256).collect();
@@ -2324,3 +2394,7 @@ mod settings_tests;
 #[cfg(test)]
 #[path = "ui_kikai_integration_tests.rs"]
 mod kikai_integration_tests;
+
+#[cfg(test)]
+#[path = "ui_typography_tests.rs"]
+mod typography_tests;
