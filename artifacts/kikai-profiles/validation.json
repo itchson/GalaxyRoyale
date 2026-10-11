@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "base_commit": "7976c074874c2e9e4fdf1ba4564e677142997bfe",
+  "scope": "Authored sources and exact asset-pack roundtrips, not runtime/browser or subjective acceptance",
+  "python_tests": {
+    "passed": 11,
+    "command": "python scripts/asset-kikai-profiles-tests.py",
+    "log": "artifacts/kikai-profiles/authoring-tests.log"
+  },
+  "profiles": {
+    "doro": {
+      "palette_entries": 54,
+      "composed_occupied_cells": 6829,
+      "body_cells": 6481,
+      "eye_cells": 252,
+      "mouth_cells": 96,
+      "role_cells": {
+        "hair_cells": 1580,
+        "horn_cells": 272,
+        "signal_cells": 172
+      },
+      "max_portrait_submissions": 6829,
+      "transforms": 3
+    },
+    "talo": {
+      "palette_entries": 54,
+      "composed_occupied_cells": 6035,
+      "body_cells": 5516,
+      "eye_cells": 415,
+      "mouth_cells": 104,
+      "role_cells": {
+        "hair_cells": 947,
+        "horn_cells": 308,
+        "signal_cells": 134
+      },
+      "max_portrait_submissions": 6035,
+      "transforms": 3
+    }
+  },
+  "native_peer_evidence": "Engine independently reported33focused nativeKikai tests passing, separately owned handoff",
+  "pending": [
+    "Normal dualWASM integration",
+    "Live browser type/main/sub selection",
+    "Browser animation/readability",
+    "Physical-device performance",
+    "Subjective portrait approval"
+  ],
+  "sha256": {
+    "assets/concepts/kikai/dora-reference-expression-sheet.png": "b558e6572e9d065319ff7957fcdc7faadb1bc38f6ae7cdc39d3d826cc5f83742",
+    "assets/concepts/kikai/profiles/doro-reference.png": "5b31880502297c0e0dc5174779042b14db3ce8cf17f2ac1bbb1aec88dbd45d64",
+    "assets/concepts/kikai/profiles/generation.json": "a9b95123e45c1176b5cfb84ec8b6d8840ff14f53f02496e08334f0c1694db3ec",
+    "assets/concepts/kikai/profiles/talo-reference.png": "ee4081bc98b3748efa12f1e0070b379cd3be476b2d010ad0945f1ff8eaa41964",
+    "assets/ui/kikai/profiles/atlas.json": "8a6512c12eeeac3da059c3c1e3f0fcb84226a064e6233812c1f6650ccaf3eb90",
+    "assets/ui/kikai/profiles/authoring-contact-sheet.png": "a530466edbb76d31249a061a314fa124743715df3ef8a6dfe88a041d9ddd9e43",
+    "assets/ui/kikai/profiles/authoring-evidence.json": "137dd37efb61c57764f4fff1858d6adfefd5665ee776e8f4657fb660e5fa6c33",
+    "assets/ui/kikai/profiles/doro/manifest.json": "5bcd8ca50b0e0bd50d2200a75968b1fb005a5db72821f40c4a0e224bd69ff19f",
+    "assets/ui/kikai/profiles/doro/provenance.json": "88e91c7b91bf6fdc9ff927fd51cfd6a95fb5c69e3e60d801adc6cef35c66bead",
+    "assets/ui/kikai/profiles/doro/source/body.png": "82c50ef106573674d7c33654cd66f5f2022b1de7c24a0c255b6c7a064b911024",
+    "assets/ui/kikai/profiles/doro/source/eyes_blink.png": "5d54754d43f7d8de7b706e6e747037fe9a81eeaab527dd47c6a83d154991b07f",
+    "assets/ui/kikai/profiles/doro/source/eyes_concerned.png": "bdb148b83b2eb7e779ef157389e5f241d493e36fb674637d4a5326d750e276b9",
+    "assets/ui/kikai/profiles/doro/source/eyes_focused.png": "3321b9ca4b57a420e114fad6a04a03f738c0012b18f4fea574aca68a651582da",
+    "assets/ui/kikai/profiles/doro/source/eyes_neutral.png": "76d2104e59d83476c7beab3284d6d774c540a5ffd51cf388fa12223ffcd5f694",
+    "assets/ui/kikai/profiles/doro/source/eyes_pleased.png": "fcdc581a827e01e923918e15e4029ff97b8a18ab3bf5f54bc18001da40522397",
+    "assets/ui/kikai/profiles/doro/source/mouth_open.png": "685a543656d6ce5424bd6832db1373e450d04ea874ff322791fcf47977b71047",
+    "assets/ui/kikai/profiles/doro/source/mouth_rest.png": "63bbbad7db67d102e2816908b09cda060ea734cf62713a756a4a381104d0425f",
+    "assets/ui/kikai/profiles/doro/source/mouth_small.png": "cfdff09247486b7bb037497b117e006832b08ce1a57ce9f7746819705b3cda03",
+    "assets/ui/kikai/profiles/doro/source/mouth_smile.png": "ad6023f851ca9a4a85bcbea1649214872ad7ba3662b435e552eb889959e50bc8",
+    "assets/ui/kikai/profiles/talo/manifest.json": "7f68f9a2f13c9c8c10bce7f33b821365bf232ff18b822ced139afcf3b5123aec",
+    "assets/ui/kikai/profiles/talo/provenance.json": "5d1392f0eed5186d17814d5ba40577c398cef35b35a61419bba42b408c8f3790",
+    "assets/ui/kikai/profiles/talo/source/body.png": "84932817c208335d4f0bb2c382bd7b92748c9f4bd2184e2412bed4748c070bfc",
+    "assets/ui/kikai/profiles/talo/source/eyes_blink.png": "3731f03cc87b0130c5917b1e6a03ecbc54794d3b8c8469c8ced236086d42f381",
+    "assets/ui/kikai/profiles/talo/source/eyes_concerned.png": "739f0bfcca0cecc8a22e996ef43edd42206a8102c9285e4ad99a2c91727eb4b0",
+    "assets/ui/kikai/profiles/talo/source/eyes_focused.png": "edda0494863b43a7a3b6971030388514f38f93f9a6fd5539924f2497486ea18c",
+    "assets/ui/kikai/profiles/talo/source/eyes_neutral.png": "c8fd966e0e67dfa89652f855563737d176bc5b645aa99d6de11332640de9e18e",
+    "assets/ui/kikai/profiles/talo/source/eyes_pleased.png": "c21fd4916958f72575c16182d6bb4b8f0ad9e975c67a3ba21418ddc016aa3187",
+    "assets/ui/kikai/profiles/talo/source/mouth_open.png": "bada42d8cf8ea3906d7bb0233a059157c8a66bbd266d13ded8b90220d477b856",
+    "assets/ui/kikai/profiles/talo/source/mouth_rest.png": "0903c40a9bc121fe509dc747b3b7e425592eca1277708d77f0e7fd39c4a704f0",
+    "assets/ui/kikai/profiles/talo/source/mouth_small.png": "92c11037cbec33e2c7c5956b1f8dab174da3fff0efc02acd2791acf3598e1c10",
+    "assets/ui/kikai/profiles/talo/source/mouth_smile.png": "16242f4008137812266fc7cb8275ff5334df92fe791853550c4bd4ce11371b1f",
+    "scripts/asset-kikai-profiles.py": "972cb31fb4901b8eb779ba4d7fbffc6a8872abda619cac6a8fd77c14c6a80ceb",
+    "scripts/asset-kikai-profiles-tests.py": "41118e6278ea62fe5e911673ec20b7b7edadcda5034c9dab6a40ac95b1ec2ac7",
+    "docs/KIKAI_PROFILE_ART.md": "881e9822a7ba832ccbcb4f1701cb2b0ac76644db217e86e4963f864756e03e1e",
+    "artifacts/kikai-profiles/authoring-tests.log": "f83d15c538125d976b0d078d64f49cee6c2ba14b49ed3022f6d843d2662f7c68"
+  }
+}

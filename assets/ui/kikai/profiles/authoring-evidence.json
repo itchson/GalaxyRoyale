@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "scope": "Authored PNG/packed-cell software preview; no GPU or browser acceptance",
+  "profiles": {
+    "doro": {
+      "palette_entries": 54,
+      "composed_occupied_cells": 6829,
+      "body_cells": 6481,
+      "eye_cells": 252,
+      "mouth_cells": 96,
+      "role_cells": {
+        "hair_cells": 1580,
+        "horn_cells": 272,
+        "signal_cells": 172
+      },
+      "max_portrait_submissions": 6829,
+      "transforms": 3
+    },
+    "talo": {
+      "palette_entries": 54,
+      "composed_occupied_cells": 6035,
+      "body_cells": 5516,
+      "eye_cells": 415,
+      "mouth_cells": 104,
+      "role_cells": {
+        "hair_cells": 947,
+        "horn_cells": 308,
+        "signal_cells": 134
+      },
+      "max_portrait_submissions": 6035,
+      "transforms": 3
+    }
+  }
+}

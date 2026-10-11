@@ -1,0 +1,123 @@
+{
+  "type": "TALO",
+  "main_corporation": "PAN",
+  "sub_corporation": "RENKO",
+  "source_path": "assets/concepts/kikai/profiles/talo-reference.png",
+  "source_sha256": "ee4081bc98b3748efa12f1e0070b379cd3be476b2d010ad0945f1ff8eaa41964",
+  "pillow": "12.3.0",
+  "generation": {
+    "path": "assets/concepts/kikai/profiles/talo-reference.png",
+    "sha256": "ee4081bc98b3748efa12f1e0070b379cd3be476b2d010ad0945f1ff8eaa41964",
+    "generated_artifact": "exec-8e0d6983-8644-455a-a52d-e5a3848e216c.png",
+    "tool": "image_gen.imagegen",
+    "model": null,
+    "prompt": "Use case: style-transfer. Image 1 is the approved DORA pixel-art STYLE reference only, not an edit target. Create ONE new TALO adult gender-neutral KIKAI android license portrait with genuinely distinct facial and hair geometry, not DORA with a recolor, not the masculine spiky design, and not a character sheet. Detailed hand-crafted retro pixel-art clusters and crisp mechanical shading at the supplied reference's quality. Upper-chest bust centered in tall 3:4 composition, facing nearly forward with subtle three-quarter depth. Balanced neutral facial proportions: softly angular compact jaw, moderate brows, calm friendly gold eyes, visible broad forehead, no makeup or pronounced eyelashes. Very SHORT EMERALD PAN CREW CUT: clipped close around the head with a low level crown and clearly visible clean tapered temples. NO long bangs, no sweeping fringe, no tall spikes, no long side hair. Two RED RENKO faceted crystal antenna horns, ivory pale mechanical shoulder armor, black articulated synthetic neck with fine metal/gold connectors. Match the reference's emerald/red/ivory/black/gold material palette, coherent small highlights, skin and metal recesses. Neutral closed-mouth expression; eyes/mouth clearly exposed for later authored blink/speech patches. Entire head, horns and shoulders visible inside transparent padding. Truly transparent background; no text, labels, logos, UI, extra accessories, weapons, glow haze or watermark. Preserve original DORA reference unchanged."
+  },
+  "conversion": {
+    "source_dimensions": [
+      1086,
+      1448
+    ],
+    "crop": [
+      0,
+      0,
+      1086,
+      1448
+    ],
+    "alpha_threshold": 128,
+    "source_nonbinary_alpha_cells": 760957,
+    "source_hard_occupied_cells": 733503,
+    "tight_bbox": [
+      13,
+      71,
+      1073,
+      1448
+    ],
+    "output_dimensions": [
+      96,
+      128
+    ],
+    "fitted_dimensions": [
+      96,
+      125
+    ],
+    "center_offset": [
+      0,
+      1
+    ],
+    "nearest_resize": true,
+    "aspect_policy": "uniform fit; integer output rounding only",
+    "occupied_after_resize": 6035,
+    "quantize_colors": 47,
+    "dither": false,
+    "changed_occupied_color_cells": 5545,
+    "component_policy": "all; no connected-component removal",
+    "output_components_8_neighbor": 1
+  },
+  "manual_authoring": {
+    "facial_patches": {
+      "eyes": [
+        [
+          27,
+          49,
+          44,
+          60
+        ],
+        [
+          49,
+          46,
+          68,
+          58
+        ]
+      ],
+      "iris": [
+        [
+          35,
+          55
+        ],
+        [
+          56,
+          53
+        ]
+      ],
+      "mouth": [
+        39,
+        68,
+        52,
+        76
+      ],
+      "lip": [
+        45,
+        71
+      ],
+      "hair_top": 40,
+      "hair_sides": [
+        29,
+        67,
+        59
+      ],
+      "fringe": [
+        38,
+        44,
+        43
+      ]
+    },
+    "gold_iris_clusters": true,
+    "expression_states": [
+      "neutral",
+      "focused",
+      "concerned",
+      "pleased",
+      "blink"
+    ],
+    "mouth_states": [
+      "rest",
+      "small",
+      "open",
+      "smile"
+    ],
+    "role_selection": "Reviewed head-only green hair/red crystals; no neck or eyebrow recolor"
+  },
+  "exact_import": "asset-pack imports authored binary-alpha PNG layers with provided palette; no resize or removed components",
+  "runtime_boundary": "Host selects layers and corporate colors; JSON metadata alone does not animate"
+}
