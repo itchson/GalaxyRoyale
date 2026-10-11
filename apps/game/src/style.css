@@ -628,21 +628,21 @@ body:not(.pixel-ready) #universe {
 }
 .flight-header {
   display: flex;
-  justify-content: flex-end;
-  gap: calc(8px * var(--ui-scale, 1));
+  justify-content: flex-start;
+  gap: calc(3px * var(--ui-scale, 1));
   align-items: flex-start;
 }
-.header-right {
+.header-actions {
   display: flex;
-  gap: calc(5px * var(--ui-scale, 1));
+  gap: calc(3px * var(--ui-scale, 1));
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-start;
   flex-wrap: wrap;
   max-width: 100%;
 }
 .flight-toolbar {
   display: flex;
-  gap: calc(4px * var(--ui-scale, 1));
+  gap: calc(3px * var(--ui-scale, 1));
   flex: 0 0 auto;
 }
 .settings-title {
@@ -654,6 +654,16 @@ body:not(.pixel-ready) #universe {
   height: var(--ui-hit);
   padding: 0;
   font-size: var(--ui-text);
+}
+.flight-header .icon-button {
+  width: max(28px, calc(14px * var(--ui-scale, 1)));
+  height: max(28px, calc(14px * var(--ui-scale, 1)));
+}
+@media (pointer: coarse) {
+  .flight-header .icon-button {
+    width: max(44px, calc(14px * var(--ui-scale, 1)));
+    height: max(44px, calc(14px * var(--ui-scale, 1)));
+  }
 }
 .save-indicator {
   border-color: #386a68;

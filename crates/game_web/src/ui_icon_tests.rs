@@ -4,6 +4,9 @@ use engine_core::RenderFrame;
 
 const VIEW: [f32; 2] = [640.0, 360.0];
 const GROUP: [f32; 2] = [20.25, 10.5];
+fn current_icon(kind: &str) -> &'static PixelBody {
+    &crate::flight_icons::icon(kind).unwrap().body
+}
 const MENU_KINDS: [&str; 8] = [
     "settings-icon",
     "resume-icon",
@@ -60,15 +63,12 @@ fn same(a: &RenderFrame, b: &RenderFrame) {
 }
 
 #[test]
-fn direct_32_cell_controls_are_cached_distinct_and_keep_save_state_color_semantics() {
-    let close = crate::kikai_art::icon("close-icon").unwrap();
-    assert!(std::ptr::eq(
-        close,
-        crate::kikai_art::icon("close-icon").unwrap()
-    ));
-    let save = crate::kikai_art::icon("save-icon").unwrap();
-    assert_eq!((save.width, save.height), (32, 32));
-    assert_eq!(save.occupied_count(), 640);
+fn direct_64_cell_controls_are_cached_distinct_and_keep_save_state_color_semantics() {
+    let close = current_icon("close-icon");
+    assert!(std::ptr::eq(close, current_icon("close-icon")));
+    let save = current_icon("save-icon");
+    assert_eq!((save.width, save.height), (64, 64));
+    assert_eq!(save.occupied_count(), 1503);
     let mut signatures = std::collections::HashSet::new();
     for (state, accent) in [rgb(106, 237, 193), rgb(88, 222, 239), rgb(220, 125, 130)]
         .into_iter()
@@ -80,16 +80,23 @@ fn direct_32_cell_controls_are_cached_distinct_and_keep_save_state_color_semanti
         let batch = &frame.batches[0];
         assert_eq!(frame.pixel_count, save.occupied_count());
         assert_eq!(batch.transforms.len(), 1);
-        assert_eq!(batch.transforms[0].a[2..], [0.75, 0.0]);
-        assert_eq!(batch.transforms[0].b, [0.0, 0.75, 0.0, 0.0]);
+        assert_eq!(batch.transforms[0].a[2..], [0.375, 0.0]);
+        assert_eq!(batch.transforms[0].b, [0.0, 0.375, 0.0, 0.0]);
         for (pixel, (position, shade)) in batch.pixels.iter().zip(save.cells()) {
             assert_eq!(pixel.local, position.to_array());
             assert_eq!(
                 pixel.color,
-                crate::kikai_art::icon_color(shade, accent, false, false, false)
+                crate::flight_icons::icon("save-icon").unwrap().color(
+                    position,
+                    shade,
+                    crate::flight_icons::State {
+                        accent,
+                        busy: state == 1,
+                        ..Default::default()
+                    }
+                )
             );
         }
-        assert!(batch.pixels.iter().any(|p| p.color == accent));
         assert!(signatures.insert(batch.pixels.iter().map(|p| p.color).collect::<Vec<_>>()));
     }
     let frame = extract(
@@ -98,7 +105,7 @@ fn direct_32_cell_controls_are_cached_distinct_and_keep_save_state_color_semanti
         0.0,
         false,
     );
-    assert_eq!(frame.pixel_count, 349);
+    assert_eq!(frame.pixel_count, 1289);
     assert_ne!(close.occupied_count(), save.occupied_count());
     assert!(frame.batches[0].pixels.iter().all(|p| p.color >> 24 == 255));
     assert!(
@@ -118,16 +125,16 @@ fn menu_symbols_are_eight_distinct_detailed_cached_unlit_objects_without_text_pl
     let mut total = 0;
     for (kind, count) in MENU_KINDS
         .into_iter()
-        .zip([492, 326, 373, 498, 364, 355, 626, 340])
+        .zip([1802, 1362, 1373, 1591, 1322, 1291, 2036, 1140])
     {
-        let body = crate::kikai_art::icon(kind).unwrap();
-        assert!(std::ptr::eq(body, crate::kikai_art::icon(kind).unwrap()));
-        assert_eq!((body.width, body.height), (32, 32));
+        let body = current_icon(kind);
+        assert!(std::ptr::eq(body, current_icon(kind)));
+        assert_eq!((body.width, body.height), (64, 64));
         assert_eq!(body.occupied_count(), count);
         assert!(
             signatures.insert(
-                (0..32)
-                    .flat_map(|y| (0..32).map(move |x| body.is_occupied(x, y)))
+                (0..64)
+                    .flat_map(|y| (0..64).map(move |x| body.is_occupied(x, y)))
                     .collect::<Vec<_>>()
             )
         );
@@ -150,7 +157,7 @@ fn menu_symbols_are_eight_distinct_detailed_cached_unlit_objects_without_text_pl
         total += count;
     }
     assert_eq!(
-        total, 3374,
+        total, 11917,
         "all eight control masks have an explicit submitted budget"
     );
     assert!(crate::kikai_art::icon("unknown-icon").is_none());
@@ -167,7 +174,7 @@ fn menu_symbols_are_eight_distinct_detailed_cached_unlit_objects_without_text_pl
 }
 
 #[test]
-fn semantic_icon_routes_keep_their_authored_32_cell_landmarks() {
+fn historical_32_cell_icon_routes_keep_their_authored_landmarks() {
     // Gear aperture, play tip, return ring/arrow, open door, broken power ring,
     // ship prow, folded map edge, and four fullscreen corners remain explicit.
     let landmarks = [
@@ -199,17 +206,73 @@ fn semantic_icon_routes_keep_their_authored_32_cell_landmarks() {
 }
 
 #[test]
+fn current_native_controls_keep_64_cell_silhouette_landmarks_and_authored_material_depth() {
+    type Landmark = (
+        &'static str,
+        &'static [(usize, usize)],
+        &'static [(usize, usize)],
+    );
+    let landmarks: &[Landmark] = &[
+        ("status-icon", &[(32, 5), (8, 42)], &[(3, 32)]),
+        ("map-icon", &[(30, 18)], &[(21, 31), (41, 31)]),
+        ("settings-icon", &[(8, 31), (31, 9)], &[(31, 31)]),
+        ("save-icon", &[(30, 44)], &[(25, 15), (30, 39)]),
+        ("close-icon", &[(10, 10)], &[(31, 10), (10, 31)]),
+        ("resume-icon", &[(14, 31), (56, 32)], &[(50, 12)]),
+        ("restart-icon", &[(22, 15), (9, 38)], &[(31, 31), (30, 10)]),
+        ("title-icon", &[(31, 10), (18, 45)], &[(31, 50)]),
+        ("quit-icon", &[(50, 26)], &[(31, 39), (24, 10)]),
+        (
+            "fullscreen-icon",
+            &[(10, 10), (53, 10), (10, 53), (53, 53)],
+            &[(31, 31)],
+        ),
+    ];
+    for &(kind, filled, empty) in landmarks {
+        let body = current_icon(kind);
+        for &(x, y) in filled {
+            assert!(body.is_occupied(x, y), "{kind}: {x},{y}");
+        }
+        for &(x, y) in empty {
+            assert!(!body.is_occupied(x, y), "{kind}: open {x},{y}");
+        }
+        assert!(
+            body.cells()
+                .map(|(_, c)| c)
+                .collect::<std::collections::HashSet<_>>()
+                .len()
+                >= 5
+        );
+        // Even a compact14-logical slot retains all64 source cells with no
+        // snapped minimum cell size or substitution of a lower-resolution mask.
+        let f = extract(
+            icon(kind, 0.0, [7.25, 13.5, 14.0, 14.0]),
+            [0.0; 2],
+            0.0,
+            true,
+        );
+        assert_eq!(f.pixel_count, body.occupied_count());
+        assert_eq!(f.batches[0].transforms[0].a[2], 14.0 / 64.0);
+        assert_eq!(
+            f.batches[0]
+                .pixels
+                .iter()
+                .map(|p| p.local)
+                .collect::<Vec<_>>(),
+            body.cells().map(|(p, _)| p.to_array()).collect::<Vec<_>>()
+        );
+    }
+}
+
+#[test]
 fn menu_icons_fit_44_physical_pixel_hitboxes_with_continuous_fractional_scaling() {
     for kind in MENU_KINDS.into_iter().chain(["close-icon", "save-icon"]) {
         for ui_scale in [1.0, 1.375, 2.4, 3.0, 4.0, 6.0] {
             let rect = [31.25, 23.5, 44.0 / ui_scale, 44.0 / ui_scale];
             let frame = extract(icon(kind, 0.0, rect), [0.0; 2], 0.0, false);
             let batch = &frame.batches[0];
-            assert_eq!(
-                frame.pixel_count,
-                crate::kikai_art::icon(kind).unwrap().occupied_count()
-            );
-            assert!((batch.transforms[0].a[2] - 44.0 / ui_scale / 32.0).abs() < 0.000001);
+            assert_eq!(frame.pixel_count, current_icon(kind).occupied_count());
+            assert!((batch.transforms[0].a[2] - 44.0 / ui_scale / 64.0).abs() < 0.000001);
             let center = local_point(batch.transforms[0], Vec2::ZERO, [0.0; 2]);
             assert!(
                 (center - Vec2::new(rect[0] + rect[2] * 0.5, rect[1] + rect[3] * 0.5))
@@ -272,12 +335,10 @@ fn icon_hover_press_and_disabled_change_tone_without_changing_geometry_or_alpha(
         node.active = true;
         node.disabled = true;
         let disabled = extract(node, [0.0; 2], 0.0, false);
-        assert!(
-            disabled.batches[0]
-                .pixels
-                .iter()
-                .all(|p| p.color == rgb(105, 122, 138))
-        );
+        assert!(disabled.batches[0].pixels.iter().all(|p| {
+            let c = p.color.to_le_bytes();
+            c[0] < c[1] && c[1] < c[2] && c[3] == 255
+        }));
         assert_eq!(normal.pixel_count, disabled.pixel_count);
     }
 }
@@ -298,7 +359,7 @@ fn measured_icons_center_and_keep_every_corner_inside_their_rect_even_far_from_o
                 assert!(frame.pixel_count > 0);
                 let b = &frame.batches[0];
                 assert!(
-                    (b.transforms[0].a[2] - (size[0] / 32.0).min(size[1] / 32.0)).abs() < 0.000001
+                    (b.transforms[0].a[2] - (size[0] / 64.0).min(size[1] / 64.0)).abs() < 0.000001
                 );
                 let center = local_point(b.transforms[0], Vec2::ZERO, camera);
                 assert!(
@@ -327,7 +388,7 @@ fn measured_icons_center_and_keep_every_corner_inside_their_rect_even_far_from_o
 fn clipped_icons_charge_whole_authored_bodies_and_reject_each_insufficient_budget_atomically() {
     let clip = [4.25, 1.75, 8.0, 10.0];
     for kind in MENU_KINDS.into_iter().chain(["close-icon", "save-icon"]) {
-        let count = crate::kikai_art::icon(kind).unwrap().occupied_count();
+        let count = current_icon(kind).occupied_count();
         let mut node = icon(kind, 0.0, [0.0, 0.0, 18.0, 18.0]);
         node.clip = Some(clip);
         let frame = extract(node, [0.0; 2], 0.0, false);
@@ -366,7 +427,7 @@ fn clipped_icons_charge_whole_authored_bodies_and_reject_each_insufficient_budge
                 viewport: Vec2::from_array(VIEW),
                 clip: None,
             };
-            painter.control_icon(&icon(kind, 0.0, [0.0, 0.0, 18.0, 18.0]));
+            painter.control_icon(&icon(kind, 0.0, [0.0, 0.0, 18.0, 18.0]), 0.0, false);
             if budget < count || work < count {
                 assert_eq!((painter.remaining, painter.work_remaining), (budget, work));
                 same(&before, builder.frame());
@@ -420,7 +481,7 @@ fn icon_composes_a_reflected_sheared_parent_without_absolute_cell_expansion() {
     let node = icon("close-icon", 0.0, [7.0, 13.0, 24.0, 24.0]);
     let local = Transform {
         position: Vec2::new(19.0, 25.0),
-        scale: Vec2::splat(0.75),
+        scale: Vec2::splat(0.375),
         ..Transform::default()
     }
     .affine();
@@ -433,7 +494,7 @@ fn icon_composes_a_reflected_sheared_parent_without_absolute_cell_expansion() {
         viewport: Vec2::from_array(VIEW),
         clip: None,
     };
-    painter.control_icon(&node);
+    painter.control_icon(&node, 0.0, false);
     let frame = builder.finish();
     assert_eq!(frame.batches[0].transforms.len(), 1);
     let expected = parent.compose(local);

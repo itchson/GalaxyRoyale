@@ -1,5 +1,11 @@
 import "./campaign.css";
 import type { LoadoutShipHud } from "./loadout";
+import type { KikaiIdentity } from "./storage";
+
+export interface ChampionIdentity extends KikaiIdentity {
+  designation: string;
+  short_designation: string;
+}
 
 export interface Champion {
   index: number;
@@ -16,6 +22,12 @@ export interface Champion {
   blueprint: boolean;
   crafted: boolean;
   discovered?: boolean;
+  identity: ChampionIdentity | null;
+  sponsor: KikaiIdentity["corporation"] | null;
+  display_model: string;
+  legacy_model: string;
+  legacy_species: string;
+  introduction: string;
 }
 export interface CampaignHud {
   champions: Champion[];
@@ -118,6 +130,13 @@ export function paintCampaign(
     card.append(icon("campaign-patch", champion.index, champion.patch));
     const content = document.createElement("div");
     content.append(text("h3", `${champion.name} / ${champion.species}`));
+    if (champion.identity)
+      content.append(
+        text(
+          "p",
+          `${champion.identity.short_designation} / ${champion.sponsor?.toUpperCase() ?? "INDEPENDENT"} SPONSORED`,
+        ),
+      );
     content.append(text("p", `${champion.ship} / ${champion.ability}`));
     content.append(
       text(

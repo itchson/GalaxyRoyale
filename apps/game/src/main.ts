@@ -12,6 +12,7 @@ import {
 } from "./webgl-lifecycle";
 import { DebugConsole } from "./debug-console";
 import { DialoguePanel } from "./dialogue";
+import type { PortraitIdentity } from "./kikai-portrait";
 import { DroidCreation, type IdentityHud, type OnboardingHud } from "./kikai";
 import {
   paintCampaign,
@@ -711,23 +712,42 @@ function syncFlightStatusLayout(): void {
     right: (text[0] + text[2]) * scale,
     bottom: hitY + hitHeight,
   };
-  const blocked = [
-    "save-indicator",
-    "pause-button",
-    "map-button",
-    "flight-settings",
-    ...(touchUi ? ["joystick", "fire-button"] : []),
-  ].some((id) => {
-    const rect = element(id).getBoundingClientRect();
-    return (
-      rect.width > 0 &&
-      rect.height > 0 &&
-      hit.left < rect.right &&
-      hit.right > rect.left &&
-      hit.top < rect.bottom &&
-      hit.bottom > rect.top
-    );
-  });
+  const overlaps = (rect: {
+    left: number;
+    top: number;
+    right: number;
+    bottom: number;
+  }): boolean =>
+    hit.left < rect.right &&
+    hit.right > rect.left &&
+    hit.top < rect.bottom &&
+    hit.bottom > rect.top;
+  const navigation = galaxy.flight_navigation_bounds();
+  // The accessible context hit can be taller than its glyphs. Keep the entire
+  // target clear of the native map, as well as measured shell controls.
+  const blocksNavigation =
+    navigation.length === 4 &&
+    Array.from(navigation).every(Number.isFinite) &&
+    navigation[2] > 0 &&
+    navigation[3] > 0 &&
+    overlaps({
+      left: navigation[0] * scale,
+      top: navigation[1] * scale,
+      right: (navigation[0] + navigation[2]) * scale,
+      bottom: (navigation[1] + navigation[3]) * scale,
+    });
+  const blocked =
+    blocksNavigation ||
+    [
+      "save-indicator",
+      "pause-button",
+      "map-button",
+      "flight-settings",
+      ...(touchUi ? ["joystick", "fire-button"] : []),
+    ].some((id) => {
+      const rect = element(id).getBoundingClientRect();
+      return rect.width > 0 && rect.height > 0 && overlaps(rect);
+    });
   strip.dataset.contextInteractive = String(
     hasContext &&
       !blocked &&
@@ -1971,9 +1991,9 @@ function interactSite(): void {
     showConversation(
       {
         id: champion.id,
-        speaker: champion.name,
+        speaker: champion.identity?.short_designation ?? champion.name,
         personality: champion.index,
-        description: `${champion.species} arena champion. I fly the ${champion.ship}. ${champion.ability}`,
+        description: champion.introduction,
         status: champion.patch ? "completed" : "available",
         facts: [
           champion.patch
@@ -1984,6 +2004,7 @@ function interactSite(): void {
       },
       arena.can_challenge ? "CHALLENGE" : undefined,
       arena.can_challenge ? () => beginChampion(arena.index) : undefined,
+      champion.identity ?? undefined,
     );
     return;
   }
@@ -2033,6 +2054,7 @@ function showConversation(
   context: NarrativeContext,
   label?: string,
   action?: () => void | Promise<void>,
+  appearance?: PortraitIdentity,
 ): void {
   const pages = narrative.open(context);
   const draw = (): void => {
@@ -2043,6 +2065,7 @@ function showConversation(
       speaker: page.speaker,
       text: page.text,
       portrait: page.portrait,
+      portraitIdentity: appearance,
       page: index,
       pageCount: pages.length,
       actionLabel: label,

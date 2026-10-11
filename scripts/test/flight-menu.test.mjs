@@ -194,6 +194,25 @@ test("issued license reuses the selected native appearance without resetting liv
   assert.equal(f.document.activeElement, f.externalButton);
 });
 
+test("live status distinguishes earned shield recharge from a locked starter without mutating the loadout", () => {
+  const f = fixture(),
+    data = hud();
+  data.ship_stats.shield_regen = 0;
+  data.ship_stats.shield_recharge_unlocked = false;
+  const before = structuredClone(data);
+  f.paint(f.target, data);
+  assert.match(
+    f.target.textContent,
+    /SHIELD RECHARGE LOCKED \/ UPGRADE AEGIS OR GUARD COIL/,
+  );
+  assert.doesNotMatch(f.target.textContent, /SHIELD RECHARGE 0.0\/S/);
+  assert.deepEqual(data, before);
+  data.ship_stats.shield_regen = 3;
+  data.ship_stats.shield_recharge_unlocked = true;
+  f.paint(f.target, data);
+  assert.match(f.target.textContent, /SHIELD RECHARGE 3.0\/S AFTER 4S NO HIT/);
+  assert.doesNotMatch(f.target.textContent, /RECHARGE LOCKED/);
+});
 test("live status displays selected-ship XP, effective stats, slots and actual cargo tiers", () => {
   const f = fixture();
   const data = freeze(hud());
@@ -208,7 +227,7 @@ test("live status displays selected-ship XP, effective stats, slots and actual c
     "ACCEL 260 U/S2",
     "PRIMARY 18.0 DMG / 5.5/S",
     "HULL REPAIR 0.4/S AFTER 5S NO HIT",
-    "SHIELD REGEN 1.8/S AFTER 4S NO HIT",
+    "SHIELD RECHARGE 1.8/S AFTER 4S NO HIT",
     "OFFENSE / PULSE LENS / ACTIVE R1",
     "DEFENSE / EMPTY",
     "PASSIVE / FLUX DRIVE / ACTIVE R1",

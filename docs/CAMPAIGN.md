@@ -2,16 +2,18 @@
 
 The campaign has eight deterministic arena sites surrounding Haven. Their positions use the existing seed grid. Fly within 180 world units of the beacon and challenge its champion; descriptors appear within 320 units. Accepting a trial repairs the ship and activates combat at that arena only. Haven's 240-unit sanctuary remains protected. A 340-unit arena boundary contains the player, champion and its segments. Normal enemy waves and asteroid collisions are excluded from the arena.
 
-| Champion                   | Ship       | Encounter                              | Craftable ability blueprint                    |
-| -------------------------- | ---------- | -------------------------------------- | ---------------------------------------------- |
-| Lyra Voss, Human           | Dawnneedle | Stutter dash and narrow triple burst   | Two fast needle shots every four primary shots |
-| Korr-9, Automaton          | Bulwark    | Rotating five-shot broadside           | Broadside: side shots every six primary shots  |
-| Sable Myrr, Vesper         | Nightrail  | Sinusoidal serpent and rotating spiral | Guided missile every five shots                |
-| Xil of Aurora, Crystalline | Prism      | Lateral weave and paired fork volley   | Forked shots every three shots                 |
-| Maera Quill, Human         | Windrunner | Charge and damaging wake               | Windrunner Wake: fast-flight damaging trail    |
-| Orun Vale, Golem           | Ironwake   | Telegraphed ram and radial nova        | Impact Nova: damage-triggered repulsor         |
-| Vexa Null, Voidborn        | Voidcoil   | Circling helix and inward volleys      | Piercing seeker every four shots               |
-| Atlas-0, Ancient automaton | Sunspear   | Long-range sniper burst                | Fast piercing spear every six shots            |
+| Champion                    | Ship      | Encounter                              | Craftable ability blueprint                    |
+| --------------------------- | --------- | -------------------------------------- | ---------------------------------------------- |
+| Lyra Voss, APP#F344FEE      | AKATSUKI  | Stutter dash and narrow triple burst   | Two fast needle shots every four primary shots |
+| Korr-9, ORP#2323            | TATE      | Rotating five-shot broadside           | Broadside: side shots every six primary shots  |
+| Sable Myrr, THR#A91CE204    | YORUMICHI | Sinusoidal serpent and rotating spiral | Guided missile every five shots                |
+| Xil of Aurora, TPH#C7E5503B | KESSHO    | Lateral weave and paired fork volley   | Forked shots every three shots                 |
+| Maera Quill, APH#1A2B44D0   | KAZEHAYA  | Charge and damaging wake               | Windrunner Wake: fast-flight damaging trail    |
+| Orun Vale, OHH#90BDE511     | KUROGANE  | Telegraphed ram and radial nova        | Impact Nova: damage-triggered repulsor         |
+| Vexa Null, ARR#E0A66F42     | UZUSHIO   | Circling helix and inward volleys      | Piercing seeker every four shots               |
+| Atlas-0, OHP#7FA70C09       | HINOHOKO  | Long-range sniper burst                | Fast piercing spear every six shots            |
+
+All eight competitors are technological KIKAI. The first identity letter is A for DORA, O for DORO, T for TALO, followed by main and sub manufacturer letters. Their independent sponsors in stable order are PAN, PAN, RENKO, HUGO, PAN, RENKO, HUGO, HUGO. Main controls hair and manufacturer affinity; sub controls crystal horns. Sponsorship changes neither. Previous species/model labels remain historical aliases in source metadata. Unknown gameplay entries hide identity, sponsor, models and abilities until actual discovery.
 
 Defeating a champion through actual combat grants its patch, hull blueprint and corresponding ability blueprint together, three matching construction-category points and 40 XP to the selected ship. Rewards are issued once. The encounter uses real pixel masks, hull damage, projectile sweeps and destructible segments. It does not advance ordinary boss queues. Champion ships have separately authored pixel outlines from `assets/ui/campaign-atlas.json`; their behavior builds on the three existing enemy families. Additional portraits, environments and encounter choreography can still be expanded.
 

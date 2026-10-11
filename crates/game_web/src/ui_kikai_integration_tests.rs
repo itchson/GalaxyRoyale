@@ -659,7 +659,7 @@ fn scene_cap_and_transform_batch_boundary_keep_whole_portrait_objects_and_valid_
         true,
     );
     let frame = builder.finish();
-    let controls = 662 + 688 + 1040 + 4363;
+    let controls = 662 + 688 + 1040 + 14_709;
     let admitted = (MAX_UI_PIXELS - controls) / portrait_cells();
     assert!((1..=2).contains(&admitted));
     assert!(admitted * portrait_cells() + controls <= MAX_UI_PIXELS);
@@ -688,7 +688,7 @@ fn scene_cap_and_transform_batch_boundary_keep_whole_portrait_objects_and_valid_
 
 #[test]
 fn high_detail_profiles_and_real_dense_menu_controls_fit_the_shared_scene_cap() {
-    fn controls() -> Vec<UiNode> {
+    fn controls(all_symbols: bool) -> Vec<UiNode> {
         let mut controls = vec![node("panel", 0.0, [8.0, 8.0, 604.0, 326.0])];
         for (i, text) in [
             "LICENSED FLIGHT SYSTEMS",
@@ -707,7 +707,7 @@ fn high_detail_profiles_and_real_dense_menu_controls_fit_the_shared_scene_cap() 
             });
         }
         controls.push(node("licensed-ship", 0.0, [182.0, 164.0, 64.0, 64.0]));
-        for (i, kind) in [
+        let all = [
             "status-icon",
             "map-icon",
             "settings-icon",
@@ -718,10 +718,18 @@ fn high_detail_profiles_and_real_dense_menu_controls_fit_the_shared_scene_cap() 
             "title-icon",
             "quit-icon",
             "fullscreen-icon",
-        ]
-        .into_iter()
-        .enumerate()
-        {
+        ];
+        // The current status modal exposes these five actions. The deliberately
+        // overloaded all-ten-symbol variant below remains a separate cap proof.
+        let status = [
+            "close-icon",
+            "resume-icon",
+            "restart-icon",
+            "settings-icon",
+            "title-icon",
+        ];
+        let symbols = if all_symbols { &all[..] } else { &status[..] };
+        for (i, &kind) in symbols.iter().enumerate() {
             controls.push(node(kind, 0.0, [24.0 + i as f32 * 56.0, 254.0, 32.0, 32.0]));
         }
         for (i, (kind, text)) in [
@@ -743,13 +751,13 @@ fn high_detail_profiles_and_real_dense_menu_controls_fit_the_shared_scene_cap() 
         }
         controls
     }
-    let interface = extract(controls(), [0.0; 2], 0.0, true);
+    let interface = extract(controls(false), [0.0; 2], 0.0, true);
     assert!(
         interface.pixel_count > 5000,
         "fixture must contain real dense native controls"
     );
     for kind in 0..3 {
-        let mut nodes = controls();
+        let mut nodes = controls(false);
         let mut portrait = licensed_portrait(kind as u8, 0, 1);
         portrait.rect = [24.0, 52.0, 120.0, 160.0];
         nodes.push(portrait);
@@ -779,6 +787,33 @@ fn high_detail_profiles_and_real_dense_menu_controls_fit_the_shared_scene_cap() 
             "{kind}: portrait{expected} + menu{} = {} quads",
             interface.pixel_count, actual.pixel_count
         );
+    }
+    let overloaded = extract(controls(true), [0.0; 2], 0.0, true);
+    assert_eq!(overloaded.pixel_count, 25_934);
+    assert!(overloaded.pixel_count + portrait_cells_for(0) > MAX_UI_PIXELS);
+    for kind in 0..3 {
+        let mut nodes = controls(true);
+        let mut portrait = licensed_portrait(kind as u8, 0, 1);
+        portrait.rect = [24.0, 52.0, 120.0, 160.0];
+        nodes.push(portrait);
+        let expected = portrait_cells_for(kind);
+        let fits = overloaded.pixel_count + expected <= MAX_UI_PIXELS;
+        let actual = extract(nodes, [0.0; 2], 0.0, true);
+        assert_eq!(
+            actual.pixel_count,
+            overloaded.pixel_count + if fits { expected } else { 0 }
+        );
+        if !fits {
+            for (before, after) in overloaded.batches.iter().zip(&actual.batches) {
+                assert_eq!(before.transforms, after.transforms);
+                assert_eq!(before.pixels, after.pixels);
+            }
+            assert_eq!(
+                overloaded.batches.len(),
+                actual.batches.len(),
+                "overload cannot emit a partial body/face or consume a transform"
+            );
+        }
     }
 }
 

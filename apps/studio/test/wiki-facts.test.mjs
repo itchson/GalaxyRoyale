@@ -13,7 +13,7 @@ test("all eight Wiki champion identities, hulls, categories, seed grids and base
   const rust = await source("crates/game_core/src/campaign.rs");
   const rows = [
     ...rust.matchAll(
-      /Champion \{\s*name: "([^"]+)",\s*species: "([^"]+)",\s*ship: "([^"]+)",\s*ability: "([^"]+)",\s*silhouette: "([^"]+)",\s*family: (\d),\s*category: (\d),\s*grid: \[(-?\d+), (-?\d+)\],\s*color: \[(\d+), (\d+), (\d+)\],\s*health: ([\d.]+)/g,
+      /Champion \{\s*name: "([^"]+)",\s*species: "([^"]+)",\s*legacy_species: "([^"]+)",\s*identity: RosterIdentity \{\s*kind: KikaiKind::(\w+),\s*corporation: Corporation::(\w+),\s*sub_corporation: Corporation::(\w+),\s*hex_id: "([^"]+)",\s*\},\s*sponsor: Corporation::(\w+),\s*ship: "([^"]+)",\s*legacy_model: "([^"]+)",\s*ability: "([^"]+)",\s*silhouette: "([^"]+)",\s*family: (\d),\s*category: (\d),\s*grid: \[(-?\d+), (-?\d+)\],\s*color: \[(\d+), (\d+), (\d+)\],\s*health: ([\d.]+)/g,
     ),
   ];
   assert.equal(rows.length, 8);
@@ -23,14 +23,29 @@ test("all eight Wiki champion identities, hulls, categories, seed grids and base
     assert.deepEqual(entry.data, {
       index,
       species: m[2],
-      ship: m[3],
-      ability: m[4],
-      silhouette: m[5],
-      family: Number(m[6]),
-      constructionCategory: Number(m[7]),
-      grid: [Number(m[8]), Number(m[9])],
-      color: [Number(m[10]), Number(m[11]), Number(m[12])],
-      baseHull: Number(m[13]),
+      legacySpecies: m[3],
+      identity: {
+        kind: m[4].toLowerCase(),
+        corporation: m[5].toLowerCase(),
+        sub_corporation: m[6].toLowerCase(),
+        hex_id: m[7],
+        short_designation:
+          { Dora: "A", Doro: "O", Talo: "T" }[m[4]] +
+          m[5][0] +
+          m[6][0] +
+          "#" +
+          m[7].toUpperCase(),
+      },
+      sponsor: m[8].toLowerCase(),
+      ship: m[9],
+      legacyModel: m[10],
+      ability: m[11],
+      silhouette: m[12],
+      family: Number(m[13]),
+      constructionCategory: Number(m[14]),
+      grid: [Number(m[15]), Number(m[16])],
+      color: [Number(m[17]), Number(m[18]), Number(m[19])],
+      baseHull: Number(m[20]),
     });
   });
 });

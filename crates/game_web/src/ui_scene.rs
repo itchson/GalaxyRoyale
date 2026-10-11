@@ -771,10 +771,11 @@ impl Painter<'_> {
         self.remaining -= count;
         self.work_remaining -= count;
     }
-    fn control_icon(&mut self, node: &UiNode) {
-        let Some(body) = crate::kikai_art::icon(&node.kind) else {
+    fn control_icon(&mut self, node: &UiNode, time: f32, reduced: bool) {
+        let Some(icon) = crate::flight_icons::icon(&node.kind) else {
             return;
         };
+        let body = &icon.body;
         let accent = match node.kind.as_str() {
             "close-icon" => WHITE,
             "resume-icon" | "map-icon" => rgb(106, 237, 193),
@@ -816,12 +817,18 @@ impl Painter<'_> {
                 }) {
                     0
                 } else {
-                    crate::kikai_art::icon_color(
+                    icon.color(
+                        cell,
                         shade,
-                        accent,
-                        node.active,
-                        node.selected,
-                        node.disabled,
+                        crate::flight_icons::State {
+                            accent,
+                            hovered: node.active,
+                            pressed: node.selected,
+                            disabled: node.disabled,
+                            busy: node.kind == "save-icon" && selection(node.value, 3) == 1,
+                            time,
+                            reduced_motion: reduced,
+                        },
                     )
                 }
             },
@@ -1511,7 +1518,7 @@ impl Painter<'_> {
                 } else {
                     DIM
                 };
-                crate::pixel_ui::micro_text(
+                crate::pixel_ui::micro_text_right(
                     self.frame,
                     self.parent,
                     r,
@@ -1541,7 +1548,7 @@ impl Painter<'_> {
             "campaign-ship" => self.campaign(node, true, time, reduced),
             "close-icon" | "save-icon" | "settings-icon" | "resume-icon" | "restart-icon"
             | "title-icon" | "quit-icon" | "status-icon" | "map-icon" | "fullscreen-icon" => {
-                self.control_icon(node)
+                self.control_icon(node, time, reduced)
             }
             "map-field" => self.map_field(node),
             "map-ring" => self.map_ring(node),

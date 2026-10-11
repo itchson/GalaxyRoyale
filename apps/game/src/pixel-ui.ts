@@ -96,7 +96,18 @@ export class PixelUiBridge {
       this.hover = null;
       this.invalidate();
     });
-    for (const name of ["input", "change", "focusin", "focusout", "scroll"])
+    for (const name of [
+      "input",
+      "change",
+      "focusin",
+      "focusout",
+      "scroll",
+      "pointerdown",
+      "pointerup",
+      "pointercancel",
+      "keydown",
+      "keyup",
+    ])
       document.addEventListener(name, () => this.invalidate(), true);
     // The native input owns editing; its selection can change without an input event.
     document.addEventListener("selectionchange", () => {
@@ -321,6 +332,7 @@ export class PixelUiBridge {
               : element === this.hover ||
                 element.contains(document.activeElement),
           selected:
+            element.matches(":active") ||
             element.dataset.active === "true" ||
             element.getAttribute("aria-pressed") === "true" ||
             element.getAttribute("aria-selected") === "true",

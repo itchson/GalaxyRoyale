@@ -30,6 +30,8 @@ function pixelScene({
   scrollId = "archive-content",
   flight = false,
   hover = null,
+  pressed = null,
+  releasePress = false,
   leaveHover = false,
   settingGeometry = null,
   paragraph = null,
@@ -42,6 +44,7 @@ function pixelScene({
     width: 300,
     height: 200,
   };
+  let activePointer = null;
   class Element {
     id = "";
     dataset = {};
@@ -68,6 +71,9 @@ function pixelScene({
     }
     contains(element) {
       return element === this || !!this.focusedChild;
+    }
+    matches(selector) {
+      return selector === ":active" && buttonElements?.[activePointer] === this;
     }
     querySelectorAll() {
       return [];
@@ -201,6 +207,16 @@ function pixelScene({
     () => scale,
   );
   bridge.sync();
+  if (pressed !== null) {
+    activePointer = pressed;
+    events.get("pointerdown")();
+    bridge.sync();
+    if (releasePress) {
+      activePointer = null;
+      events.get("pointercancel")();
+      bridge.sync();
+    }
+  }
   if (hover !== null) {
     events.get("pointerover")({ target: buttonElements[hover] });
     bridge.sync();
@@ -219,7 +235,7 @@ function pixelScene({
     events.get("scroll")();
     bridge.sync();
   }
-  if (paragraph?.scrollTo) return snapshots;
+  if (paragraph?.scrollTo || releasePress) return snapshots;
   return scene;
 }
 function sliderScene(options) {
@@ -398,6 +414,23 @@ test("volume and default HTML range bounds produce finite clamped pixel position
   assert.equal(sliderScene({ min: "oops", max: "2", value: "1" }).value, 0);
 });
 
+test("native controls receive physical active state and cancellation without changing geometry", () => {
+  const states = pixelScene({
+    buttons: [
+      { dataset: { pixelIcon: "settings-icon" }, textContent: "Settings" },
+    ],
+    pressed: 0,
+    releasePress: true,
+  });
+  const control = (scene) =>
+    scene.groups[0].nodes.find((n) => n.kind === "settings-icon");
+  assert.deepEqual(
+    states.map((s) => control(s).selected),
+    [false, true, false],
+  );
+  assert.deepEqual(control(states[0]).rect, control(states[1]).rect);
+  assert.deepEqual(control(states[1]).rect, control(states[2]).rect);
+});
 test("semantic actions carry persistent selection independently of focus and category colors", () => {
   const actions = [
     { nav: true, dataset: { active: "true" }, textContent: "SAVE" },

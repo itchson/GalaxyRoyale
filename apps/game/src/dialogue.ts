@@ -1,9 +1,11 @@
 import "./dialogue.css";
+import { paintLicensePortrait, type PortraitIdentity } from "./kikai-portrait";
 
 export interface DialogueContent {
   speaker: string;
   text: string;
   portrait?: number;
+  portraitIdentity?: PortraitIdentity;
   expression?: number;
   speaking?: boolean;
   actionLabel?: string;
@@ -117,11 +119,25 @@ export class DialoguePanel {
     this.text.textContent = content.text.trim().slice(0, 256);
     this.text.scrollTop = 0;
     const portrait = content.portrait ?? 0;
-    this.portrait.dataset.portrait = String(
-      Number.isFinite(portrait)
-        ? Math.max(0, Math.min(8, Math.floor(portrait)))
-        : 0,
-    );
+    if (content.portraitIdentity) {
+      paintLicensePortrait(this.portrait, content.portraitIdentity);
+      this.portrait.dataset.portrait = "9";
+    } else {
+      for (const key of [
+        "pixelKind",
+        "pixelValue",
+        "portraitKind",
+        "portraitMain",
+        "portraitSub",
+      ])
+        delete this.portrait.dataset[key];
+      this.portrait.removeAttribute("aria-label");
+      this.portrait.dataset.portrait = String(
+        Number.isFinite(portrait)
+          ? Math.max(0, Math.min(8, Math.floor(portrait)))
+          : 0,
+      );
+    }
     this.portrait.dataset.portraitExpression = String(
       Math.max(0, Math.min(3, content.expression ?? 0)),
     );

@@ -89,6 +89,40 @@ test("the ninth Royale emblem appears only for authoritative tournament victory"
     assert.deepEqual(hud, before);
   }
 });
+test("competitor identity and independent sponsor appear only after discovery without mutating rewards", () => {
+  const f = fixture();
+  const hud = completedSeason(false);
+  hud.tournament_unlocked = false;
+  hud.champions.forEach((c) => {
+    c.discovered = false;
+    c.patch = false;
+    c.blueprint = false;
+  });
+  Object.assign(hud.champions[1], {
+    name: "Korr-9",
+    ship: "TATE",
+    ability: "Guard Coil",
+    identity: {
+      kind: "doro",
+      corporation: "renko",
+      sub_corporation: "pan",
+      hex_id: "2323",
+      short_designation: "ORP#2323",
+    },
+    sponsor: "pan",
+  });
+  f.paint(hud);
+  assert.doesNotMatch(
+    f.text(),
+    /ORP#2323|PAN SPONSORED|Korr-9|Guard Coil|TATE/,
+  );
+  hud.champions[1].discovered = true;
+  const before = structuredClone(hud);
+  f.paint(hud);
+  assert.match(f.text(), /ORP#2323 \/ PAN SPONSORED/);
+  assert.match(f.text(), /TATE \/ Guard Coil/);
+  assert.deepEqual(hud, before);
+});
 
 function completedSeason(won) {
   return {

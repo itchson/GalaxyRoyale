@@ -44,6 +44,17 @@ const dialogueSource = readFileSync(
   new URL("../../apps/game/src/dialogue.ts", import.meta.url),
   "utf8",
 ).replace('import "./dialogue.css";', "");
+const portraitExports = {};
+vm.runInNewContext(
+  compile(
+    readFileSync(
+      new URL("../../apps/game/src/kikai-portrait.ts", import.meta.url),
+      "utf8",
+    ),
+    true,
+  ),
+  { exports: portraitExports },
+);
 
 function deferred() {
   let resolve, reject;
@@ -98,6 +109,10 @@ function panelFixture(callbacks = {}) {
   const exports = {};
   vm.runInNewContext(compile(dialogueSource, true), {
     exports,
+    require: (name) => {
+      assert.equal(name, "./kikai-portrait");
+      return portraitExports;
+    },
     Error,
     document,
     HTMLElement: Element,

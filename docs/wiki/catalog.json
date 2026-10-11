@@ -115,15 +115,27 @@
       "title": "Lyra Voss",
       "category": "champions",
       "status": "implemented",
-      "summary": "Existing Human-labeled encounter piloting Dawnneedle.",
+      "summary": "APP#F344FEE, a DORA KIKAI competitor flying AKATSUKI; PAN sponsor is independent of main/sub manufacturer.",
       "tags": [
         "champions",
         "implemented"
       ],
       "facts": [
         {
+          "label": "KIKAI identity",
+          "value": "APP#F344FEE"
+        },
+        {
+          "label": "Sponsor",
+          "value": "PAN"
+        },
+        {
+          "label": "Main / sub manufacturer",
+          "value": "PAN / PAN"
+        },
+        {
           "label": "RAICHO",
-          "value": "Dawnneedle"
+          "value": "AKATSUKI"
         },
         {
           "label": "Historical encounter label",
@@ -159,9 +171,10 @@
           ]
         },
         {
-          "title": "KIKAI canon review",
+          "title": "Authored KIKAI identity and discovery",
           "paragraphs": [
-            "This encounter’s existing source label is retained for implementation traceability. Biological life cannot survive in the accepted KIKAI setting; technological lineage, droid identity and independent corporation sponsorship still require authored roster review. Stable arena, patch, RAICHO and reward IDs remain in use."
+            "The current encounter is technological KIKAI. Main PAN determines hair/manufacturer affinity; sub PAN determines crystal horns. Sponsor PAN does not recolor either. Human and Dawnneedle are preserved historical aliases, not biological species present in this setting.",
+            "Arena/patch/blueprint/RAICHO/league indices remain 0. Unknown competitors expose no identity, sponsor, model or ability in the gameplay catalog. Actual production discovery and combat rewards retain their existing gates. Dialogue uses the detailed native type/manufacturer portrait, with the sponsor kept separate."
           ]
         }
       ],
@@ -198,8 +211,8 @@
       ],
       "data": {
         "index": 0,
-        "species": "Human",
-        "ship": "Dawnneedle",
+        "species": "KIKAI",
+        "ship": "AKATSUKI",
         "ability": "Stutter dash / needle burst",
         "silhouette": "needle",
         "family": 0,
@@ -213,7 +226,17 @@
           195,
           88
         ],
-        "baseHull": 260
+        "baseHull": 260,
+        "identity": {
+          "kind": "dora",
+          "corporation": "pan",
+          "sub_corporation": "pan",
+          "hex_id": "f344fee",
+          "short_designation": "APP#F344FEE"
+        },
+        "sponsor": "pan",
+        "legacySpecies": "Human",
+        "legacyModel": "Dawnneedle"
       }
     },
     {
@@ -221,15 +244,27 @@
       "title": "Korr-9",
       "category": "champions",
       "status": "implemented",
-      "summary": "Existing Automaton-labeled encounter piloting Bulwark.",
+      "summary": "ORP#2323, a DORO KIKAI competitor flying TATE; PAN sponsor is independent of main/sub manufacturer.",
       "tags": [
         "champions",
         "implemented"
       ],
       "facts": [
         {
+          "label": "KIKAI identity",
+          "value": "ORP#2323"
+        },
+        {
+          "label": "Sponsor",
+          "value": "PAN"
+        },
+        {
+          "label": "Main / sub manufacturer",
+          "value": "RENKO / PAN"
+        },
+        {
           "label": "RAICHO",
-          "value": "Bulwark"
+          "value": "TATE"
         },
         {
           "label": "Historical encounter label",
@@ -265,9 +300,10 @@
           ]
         },
         {
-          "title": "KIKAI canon review",
+          "title": "Authored KIKAI identity and discovery",
           "paragraphs": [
-            "This encounter’s existing source label is retained for implementation traceability. Biological life cannot survive in the accepted KIKAI setting; technological lineage, droid identity and independent corporation sponsorship still require authored roster review. Stable arena, patch, RAICHO and reward IDs remain in use."
+            "The current encounter is technological KIKAI. Main RENKO determines hair/manufacturer affinity; sub PAN determines crystal horns. Sponsor PAN does not recolor either. Automaton and Bulwark are preserved historical aliases, not biological species present in this setting.",
+            "Arena/patch/blueprint/RAICHO/league indices remain 1. Unknown competitors expose no identity, sponsor, model or ability in the gameplay catalog. Actual production discovery and combat rewards retain their existing gates. Dialogue uses the detailed native type/manufacturer portrait, with the sponsor kept separate."
           ]
         }
       ],
@@ -304,8 +340,8 @@
       ],
       "data": {
         "index": 1,
-        "species": "Automaton",
-        "ship": "Bulwark",
+        "species": "KIKAI",
+        "ship": "TATE",
         "ability": "Rotating broadside",
         "silhouette": "shoulder-armor",
         "family": 1,
@@ -319,7 +355,17 @@
           104,
           102
         ],
-        "baseHull": 390
+        "baseHull": 390,
+        "identity": {
+          "kind": "doro",
+          "corporation": "renko",
+          "sub_corporation": "pan",
+          "hex_id": "2323",
+          "short_designation": "ORP#2323"
+        },
+        "sponsor": "pan",
+        "legacySpecies": "Automaton",
+        "legacyModel": "Bulwark"
       }
     },
     {
@@ -327,15 +373,27 @@
       "title": "Sable Myrr",
       "category": "champions",
       "status": "implemented",
-      "summary": "Existing Vesper-labeled encounter piloting Nightrail.",
+      "summary": "THR#A91CE204, a TALO KIKAI competitor flying YORUMICHI; RENKO sponsor is independent of main/sub manufacturer.",
       "tags": [
         "champions",
         "implemented"
       ],
       "facts": [
         {
+          "label": "KIKAI identity",
+          "value": "THR#A91CE204"
+        },
+        {
+          "label": "Sponsor",
+          "value": "RENKO"
+        },
+        {
+          "label": "Main / sub manufacturer",
+          "value": "HUGO / RENKO"
+        },
+        {
           "label": "RAICHO",
-          "value": "Nightrail"
+          "value": "YORUMICHI"
         },
         {
           "label": "Historical encounter label",
@@ -371,9 +429,10 @@
           ]
         },
         {
-          "title": "KIKAI canon review",
+          "title": "Authored KIKAI identity and discovery",
           "paragraphs": [
-            "This encounter’s existing source label is retained for implementation traceability. Biological life cannot survive in the accepted KIKAI setting; technological lineage, droid identity and independent corporation sponsorship still require authored roster review. Stable arena, patch, RAICHO and reward IDs remain in use."
+            "The current encounter is technological KIKAI. Main HUGO determines hair/manufacturer affinity; sub RENKO determines crystal horns. Sponsor RENKO does not recolor either. Vesper and Nightrail are preserved historical aliases, not biological species present in this setting.",
+            "Arena/patch/blueprint/RAICHO/league indices remain 2. Unknown competitors expose no identity, sponsor, model or ability in the gameplay catalog. Actual production discovery and combat rewards retain their existing gates. Dialogue uses the detailed native type/manufacturer portrait, with the sponsor kept separate."
           ]
         }
       ],
@@ -410,8 +469,8 @@
       ],
       "data": {
         "index": 2,
-        "species": "Vesper",
-        "ship": "Nightrail",
+        "species": "KIKAI",
+        "ship": "YORUMICHI",
         "ability": "Serpent spiral / guided missiles",
         "silhouette": "forked-serpent",
         "family": 2,
@@ -425,7 +484,17 @@
           123,
           255
         ],
-        "baseHull": 350
+        "baseHull": 350,
+        "identity": {
+          "kind": "talo",
+          "corporation": "hugo",
+          "sub_corporation": "renko",
+          "hex_id": "a91ce204",
+          "short_designation": "THR#A91CE204"
+        },
+        "sponsor": "renko",
+        "legacySpecies": "Vesper",
+        "legacyModel": "Nightrail"
       }
     },
     {
@@ -433,15 +502,27 @@
       "title": "Xil of Aurora",
       "category": "champions",
       "status": "implemented",
-      "summary": "Existing Crystalline-labeled encounter piloting Prism.",
+      "summary": "TPH#C7E5503B, a TALO KIKAI competitor flying KESSHO; HUGO sponsor is independent of main/sub manufacturer.",
       "tags": [
         "champions",
         "implemented"
       ],
       "facts": [
         {
+          "label": "KIKAI identity",
+          "value": "TPH#C7E5503B"
+        },
+        {
+          "label": "Sponsor",
+          "value": "HUGO"
+        },
+        {
+          "label": "Main / sub manufacturer",
+          "value": "PAN / HUGO"
+        },
+        {
           "label": "RAICHO",
-          "value": "Prism"
+          "value": "KESSHO"
         },
         {
           "label": "Historical encounter label",
@@ -477,9 +558,10 @@
           ]
         },
         {
-          "title": "KIKAI canon review",
+          "title": "Authored KIKAI identity and discovery",
           "paragraphs": [
-            "This encounter’s existing source label is retained for implementation traceability. Biological life cannot survive in the accepted KIKAI setting; technological lineage, droid identity and independent corporation sponsorship still require authored roster review. Stable arena, patch, RAICHO and reward IDs remain in use."
+            "The current encounter is technological KIKAI. Main PAN determines hair/manufacturer affinity; sub HUGO determines crystal horns. Sponsor HUGO does not recolor either. Crystalline and Prism are preserved historical aliases, not biological species present in this setting.",
+            "Arena/patch/blueprint/RAICHO/league indices remain 3. Unknown competitors expose no identity, sponsor, model or ability in the gameplay catalog. Actual production discovery and combat rewards retain their existing gates. Dialogue uses the detailed native type/manufacturer portrait, with the sponsor kept separate."
           ]
         }
       ],
@@ -516,8 +598,8 @@
       ],
       "data": {
         "index": 3,
-        "species": "Crystalline",
-        "ship": "Prism",
+        "species": "KIKAI",
+        "ship": "KESSHO",
         "ability": "Offset fork volleys",
         "silhouette": "split-wings",
         "family": 0,
@@ -531,7 +613,17 @@
           230,
           255
         ],
-        "baseHull": 300
+        "baseHull": 300,
+        "identity": {
+          "kind": "talo",
+          "corporation": "pan",
+          "sub_corporation": "hugo",
+          "hex_id": "c7e5503b",
+          "short_designation": "TPH#C7E5503B"
+        },
+        "sponsor": "hugo",
+        "legacySpecies": "Crystalline",
+        "legacyModel": "Prism"
       }
     },
     {
@@ -539,15 +631,27 @@
       "title": "Maera Quill",
       "category": "champions",
       "status": "implemented",
-      "summary": "Existing Human-labeled encounter piloting Windrunner.",
+      "summary": "APH#1A2B44D0, a DORA KIKAI competitor flying KAZEHAYA; PAN sponsor is independent of main/sub manufacturer.",
       "tags": [
         "champions",
         "implemented"
       ],
       "facts": [
         {
+          "label": "KIKAI identity",
+          "value": "APH#1A2B44D0"
+        },
+        {
+          "label": "Sponsor",
+          "value": "PAN"
+        },
+        {
+          "label": "Main / sub manufacturer",
+          "value": "PAN / HUGO"
+        },
+        {
           "label": "RAICHO",
-          "value": "Windrunner"
+          "value": "KAZEHAYA"
         },
         {
           "label": "Historical encounter label",
@@ -583,9 +687,10 @@
           ]
         },
         {
-          "title": "KIKAI canon review",
+          "title": "Authored KIKAI identity and discovery",
           "paragraphs": [
-            "This encounter’s existing source label is retained for implementation traceability. Biological life cannot survive in the accepted KIKAI setting; technological lineage, droid identity and independent corporation sponsorship still require authored roster review. Stable arena, patch, RAICHO and reward IDs remain in use."
+            "The current encounter is technological KIKAI. Main PAN determines hair/manufacturer affinity; sub HUGO determines crystal horns. Sponsor PAN does not recolor either. Human and Windrunner are preserved historical aliases, not biological species present in this setting.",
+            "Arena/patch/blueprint/RAICHO/league indices remain 4. Unknown competitors expose no identity, sponsor, model or ability in the gameplay catalog. Actual production discovery and combat rewards retain their existing gates. Dialogue uses the detailed native type/manufacturer portrait, with the sponsor kept separate."
           ]
         }
       ],
@@ -622,8 +727,8 @@
       ],
       "data": {
         "index": 4,
-        "species": "Human",
-        "ship": "Windrunner",
+        "species": "KIKAI",
+        "ship": "KAZEHAYA",
         "ability": "Charge / damaging ion wake",
         "silhouette": "swept-wings",
         "family": 0,
@@ -637,7 +742,17 @@
           244,
           153
         ],
-        "baseHull": 290
+        "baseHull": 290,
+        "identity": {
+          "kind": "dora",
+          "corporation": "pan",
+          "sub_corporation": "hugo",
+          "hex_id": "1a2b44d0",
+          "short_designation": "APH#1A2B44D0"
+        },
+        "sponsor": "pan",
+        "legacySpecies": "Human",
+        "legacyModel": "Windrunner"
       }
     },
     {
@@ -645,15 +760,27 @@
       "title": "Orun Vale",
       "category": "champions",
       "status": "implemented",
-      "summary": "Existing Golem-labeled encounter piloting Ironwake.",
+      "summary": "OHH#90BDE511, a DORO KIKAI competitor flying KUROGANE; RENKO sponsor is independent of main/sub manufacturer.",
       "tags": [
         "champions",
         "implemented"
       ],
       "facts": [
         {
+          "label": "KIKAI identity",
+          "value": "OHH#90BDE511"
+        },
+        {
+          "label": "Sponsor",
+          "value": "RENKO"
+        },
+        {
+          "label": "Main / sub manufacturer",
+          "value": "HUGO / HUGO"
+        },
+        {
           "label": "RAICHO",
-          "value": "Ironwake"
+          "value": "KUROGANE"
         },
         {
           "label": "Historical encounter label",
@@ -689,9 +816,10 @@
           ]
         },
         {
-          "title": "KIKAI canon review",
+          "title": "Authored KIKAI identity and discovery",
           "paragraphs": [
-            "This encounter’s existing source label is retained for implementation traceability. Biological life cannot survive in the accepted KIKAI setting; technological lineage, droid identity and independent corporation sponsorship still require authored roster review. Stable arena, patch, RAICHO and reward IDs remain in use."
+            "The current encounter is technological KIKAI. Main HUGO determines hair/manufacturer affinity; sub HUGO determines crystal horns. Sponsor RENKO does not recolor either. Golem and Ironwake are preserved historical aliases, not biological species present in this setting.",
+            "Arena/patch/blueprint/RAICHO/league indices remain 5. Unknown competitors expose no identity, sponsor, model or ability in the gameplay catalog. Actual production discovery and combat rewards retain their existing gates. Dialogue uses the detailed native type/manufacturer portrait, with the sponsor kept separate."
           ]
         }
       ],
@@ -728,8 +856,8 @@
       ],
       "data": {
         "index": 5,
-        "species": "Golem",
-        "ship": "Ironwake",
+        "species": "KIKAI",
+        "ship": "KUROGANE",
         "ability": "Telegraphed ram / impact nova",
         "silhouette": "ram-prow",
         "family": 1,
@@ -743,7 +871,17 @@
           157,
           88
         ],
-        "baseHull": 440
+        "baseHull": 440,
+        "identity": {
+          "kind": "doro",
+          "corporation": "hugo",
+          "sub_corporation": "hugo",
+          "hex_id": "90bde511",
+          "short_designation": "OHH#90BDE511"
+        },
+        "sponsor": "renko",
+        "legacySpecies": "Golem",
+        "legacyModel": "Ironwake"
       }
     },
     {
@@ -751,15 +889,27 @@
       "title": "Vexa Null",
       "category": "champions",
       "status": "implemented",
-      "summary": "Existing Voidborn-labeled encounter piloting Voidcoil.",
+      "summary": "ARR#E0A66F42, a DORA KIKAI competitor flying UZUSHIO; HUGO sponsor is independent of main/sub manufacturer.",
       "tags": [
         "champions",
         "implemented"
       ],
       "facts": [
         {
+          "label": "KIKAI identity",
+          "value": "ARR#E0A66F42"
+        },
+        {
+          "label": "Sponsor",
+          "value": "HUGO"
+        },
+        {
+          "label": "Main / sub manufacturer",
+          "value": "RENKO / RENKO"
+        },
+        {
           "label": "RAICHO",
-          "value": "Voidcoil"
+          "value": "UZUSHIO"
         },
         {
           "label": "Historical encounter label",
@@ -795,9 +945,10 @@
           ]
         },
         {
-          "title": "KIKAI canon review",
+          "title": "Authored KIKAI identity and discovery",
           "paragraphs": [
-            "This encounter’s existing source label is retained for implementation traceability. Biological life cannot survive in the accepted KIKAI setting; technological lineage, droid identity and independent corporation sponsorship still require authored roster review. Stable arena, patch, RAICHO and reward IDs remain in use."
+            "The current encounter is technological KIKAI. Main RENKO determines hair/manufacturer affinity; sub RENKO determines crystal horns. Sponsor HUGO does not recolor either. Voidborn and Voidcoil are preserved historical aliases, not biological species present in this setting.",
+            "Arena/patch/blueprint/RAICHO/league indices remain 6. Unknown competitors expose no identity, sponsor, model or ability in the gameplay catalog. Actual production discovery and combat rewards retain their existing gates. Dialogue uses the detailed native type/manufacturer portrait, with the sponsor kept separate."
           ]
         }
       ],
@@ -834,8 +985,8 @@
       ],
       "data": {
         "index": 6,
-        "species": "Voidborn",
-        "ship": "Voidcoil",
+        "species": "KIKAI",
+        "ship": "UZUSHIO",
         "ability": "Circling helix / piercing seekers",
         "silhouette": "ring-fins",
         "family": 2,
@@ -849,7 +1000,17 @@
           116,
           228
         ],
-        "baseHull": 370
+        "baseHull": 370,
+        "identity": {
+          "kind": "dora",
+          "corporation": "renko",
+          "sub_corporation": "renko",
+          "hex_id": "e0a66f42",
+          "short_designation": "ARR#E0A66F42"
+        },
+        "sponsor": "hugo",
+        "legacySpecies": "Voidborn",
+        "legacyModel": "Voidcoil"
       }
     },
     {
@@ -857,15 +1018,27 @@
       "title": "Atlas-0",
       "category": "champions",
       "status": "implemented",
-      "summary": "Existing Ancient automaton-labeled encounter piloting Sunspear.",
+      "summary": "OHP#7FA70C09, a DORO KIKAI competitor flying HINOHOKO; HUGO sponsor is independent of main/sub manufacturer.",
       "tags": [
         "champions",
         "implemented"
       ],
       "facts": [
         {
+          "label": "KIKAI identity",
+          "value": "OHP#7FA70C09"
+        },
+        {
+          "label": "Sponsor",
+          "value": "HUGO"
+        },
+        {
+          "label": "Main / sub manufacturer",
+          "value": "HUGO / PAN"
+        },
+        {
           "label": "RAICHO",
-          "value": "Sunspear"
+          "value": "HINOHOKO"
         },
         {
           "label": "Historical encounter label",
@@ -901,9 +1074,10 @@
           ]
         },
         {
-          "title": "KIKAI canon review",
+          "title": "Authored KIKAI identity and discovery",
           "paragraphs": [
-            "This encounter’s existing source label is retained for implementation traceability. Biological life cannot survive in the accepted KIKAI setting; technological lineage, droid identity and independent corporation sponsorship still require authored roster review. Stable arena, patch, RAICHO and reward IDs remain in use."
+            "The current encounter is technological KIKAI. Main HUGO determines hair/manufacturer affinity; sub PAN determines crystal horns. Sponsor HUGO does not recolor either. Ancient automaton and Sunspear are preserved historical aliases, not biological species present in this setting.",
+            "Arena/patch/blueprint/RAICHO/league indices remain 7. Unknown competitors expose no identity, sponsor, model or ability in the gameplay catalog. Actual production discovery and combat rewards retain their existing gates. Dialogue uses the detailed native type/manufacturer portrait, with the sponsor kept separate."
           ]
         }
       ],
@@ -940,8 +1114,8 @@
       ],
       "data": {
         "index": 7,
-        "species": "Ancient automaton",
-        "ship": "Sunspear",
+        "species": "KIKAI",
+        "ship": "HINOHOKO",
         "ability": "Sniper burst / piercing spear",
         "silhouette": "spear-prow",
         "family": 1,
@@ -955,7 +1129,17 @@
           233,
           158
         ],
-        "baseHull": 340
+        "baseHull": 340,
+        "identity": {
+          "kind": "doro",
+          "corporation": "hugo",
+          "sub_corporation": "pan",
+          "hex_id": "7fa70c09",
+          "short_designation": "OHP#7FA70C09"
+        },
+        "sponsor": "hugo",
+        "legacySpecies": "Ancient automaton",
+        "legacyModel": "Sunspear"
       }
     },
     {
@@ -1687,7 +1871,7 @@
           "paragraphs": [
             "Starter and boss abilities fit every owned hull. Champion abilities fit matching family hulls; Scout is family 0 and Sovereign is a wildcard for normal abilities. Royal bundles fit RAICHO 9 only. Crafting acquires inventory without auto-equipping it.",
             "Starter recipes cost three matching points plus two T1 materials. Signature/champion recipes cost ten matching points plus two T1. Shared ability upgrades cost ten matching points plus two materials of the next rank tier. Royal bundles are reward-only, not Forge recipes.",
-            "Catalog: 0 Pulse Lens [Offense]: Primary shots deal +10% damage per effective rank.; 1 Guard Coil [Defense]: Adds 20 shield at rank 1, then +8 per effective rank; uses normal shield recharge.; 2 Flux Drive [Passive]: Adds +4% speed and acceleration per effective rank.; 3 Pulse Echo [Offense]: Periodically fires an additional piercing fan; rank increases its damage.; 4 Repulsor [Defense]: Taking damage releases a repulsor nova; rank shortens its cooldown.; 5 Ion Wake [Passive]: Fast flight leaves a damaging ion trail; rank increases its damage.; 6 Needle Burst [Offense]: Every fourth primary shot releases a narrow two-shot needle burst.; 7 Broadside [Offense]: Every sixth primary shot fires a pair of side-facing projectiles.; 8 Guided Missile [Offense]: Every fifth primary shot launches a guided missile.; 9 Fork Volley [Offense]: Every third primary shot releases a split-wing fork volley.; 10 Windrunner Wake [Passive]: Fast flight leaves the champion's damaging ion trail.; 11 Impact Nova [Defense]: Taking damage releases a nova with the champion's short cooldown.; 12 Piercing Seeker [Offense]: Every fourth primary shot launches a guided piercing seeker.; 13 Sniper Spear [Offense]: Every sixth primary shot fires a fast projectile that pierces multiple targets.; 14 Royal Prism [Offense]: Sovereign reward: an eight-shot prism burst and fully evolved Pulse Echo.; 15 Royal Aegis [Defense]: Sovereign reward: every eighth primary repairs 4 hull; damage triggers a fully evolved nova.; 16 Royal Wake [Passive]: Sovereign reward: fast flight leaves the fully evolved rank-five ion trail."
+            "Catalog: 0 Pulse Lens [Offense]: Primary shots deal +10% damage per effective rank.; 1 Guard Coil [Defense]: Adds 20 shield at rank 1, then +8 per effective rank; rank 2 unlocks recharge after 4s without damage.; 2 Flux Drive [Passive]: Adds +4% speed and acceleration per effective rank.; 3 Pulse Echo [Offense]: Periodically fires an additional piercing fan; rank increases its damage.; 4 Repulsor [Defense]: Taking damage releases a repulsor nova; rank shortens its cooldown.; 5 Ion Wake [Passive]: Fast flight leaves a damaging ion trail; rank increases its damage.; 6 Needle Burst [Offense]: Every fourth primary shot releases a narrow two-shot needle burst.; 7 Broadside [Offense]: Every sixth primary shot fires a pair of side-facing projectiles.; 8 Guided Missile [Offense]: Every fifth primary shot launches a guided missile.; 9 Fork Volley [Offense]: Every third primary shot releases a split-wing fork volley.; 10 Windrunner Wake [Passive]: Fast flight leaves the champion's damaging ion trail.; 11 Impact Nova [Defense]: Taking damage releases a nova with the champion's short cooldown.; 12 Piercing Seeker [Offense]: Every fourth primary shot launches a guided piercing seeker.; 13 Sniper Spear [Offense]: Every sixth primary shot fires a fast projectile that pierces multiple targets.; 14 Royal Prism [Offense]: Sovereign reward: an eight-shot prism burst and fully evolved Pulse Echo.; 15 Royal Aegis [Defense]: Sovereign reward: every eighth primary repairs 4 hull; damage triggers a fully evolved nova.; 16 Royal Wake [Passive]: Sovereign reward: fast flight leaves the fully evolved rank-five ion trail."
           ]
         }
       ],
@@ -1733,7 +1917,7 @@
             "category": 1,
             "blueprint": "Starter",
             "effect": "GuardCoil",
-            "description": "Adds 20 shield at rank 1, then +8 per effective rank; uses normal shield recharge."
+            "description": "Adds 20 shield at rank 1, then +8 per effective rank; rank 2 unlocks recharge after 4s without damage."
           },
           {
             "index": 2,
@@ -1916,6 +2100,13 @@
             "Normal hardware effective rank is min(stored rank, level rank cap). Stored ownership is preserved when switching to a low-level hull. Six hardware ranks are RAICHO-local. Primary fire always works; automatic signature effects require compatible crafted and equipped slots.",
             "Non-belt asteroids can award two XP; belt asteroids award no XP. Champion victory gives 40 selected-RAICHO XP and a league match victory gives 30. Experience movement bonus grows by 2.5% per level through level 12; drive and chassis modifiers are separate."
           ]
+        },
+        {
+          "title": "Earned shield recharge and RAICHO affinities",
+          "paragraphs": [
+            "Ordinary chassis starts with 30 shield HP: three 10-HP chunks. Factory Guard Coil adds 20 HP but does not recharge at rank 1. Aegis rank 1 or Guard Coil rank 2 unlocks recharge after four seconds without damage; effective rank and RAICHO level improve the rate. Capacity and charge remain separate, including fractional final chunks.",
+            "One owned compatible ability may occupy each offensive, defensive and passive slot. Haven-only swaps retain displaced inventory. PAN passive grants 10% drive speed and acceleration, RENKO offensive grants 10% derived weapon damage, and HUGO defensive grants 10% incoming damage reduction while the matching valid item is equipped. Collectible RAICHO use their own authored main manufacturer independently of pilot and sponsor."
+          ]
         }
       ],
       "references": [
@@ -1937,6 +2128,16 @@
         {
           "path": "docs/CAMPAIGN.md",
           "label": "CAMPAIGN.md",
+          "role": "documentation"
+        },
+        {
+          "path": "crates/game_core/src/shield_progression.rs",
+          "label": "Authoritative shield and affinity rules",
+          "role": "implementation"
+        },
+        {
+          "path": "docs/SHIELD_PROGRESSION.md",
+          "label": "Shield capacity and recharge contract",
           "role": "documentation"
         }
       ],

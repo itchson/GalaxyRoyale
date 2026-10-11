@@ -22,6 +22,7 @@ export interface FlightMenuHud {
     fire_rate: number;
     hull_regen: number;
     shield_regen: number;
+    shield_recharge_unlocked?: boolean;
   };
   loadout: (EquippedAbilityHud | null)[];
   material_cargo: number[];
@@ -201,7 +202,9 @@ export function paintFlightMenu(
     `ACCEL ${number(stats.acceleration)} U/S2`,
     `PRIMARY ${number(stats.primary_damage, 1)} DMG / ${number(stats.fire_rate, 1)}/S`,
     `HULL REPAIR ${number(stats.hull_regen, 1)}/S AFTER 5S NO HIT`,
-    `SHIELD REGEN ${number(stats.shield_regen, 1)}/S AFTER 4S NO HIT`,
+    stats.shield_recharge_unlocked === false || stats.shield_regen <= 0
+      ? "SHIELD RECHARGE LOCKED / UPGRADE AEGIS OR GUARD COIL"
+      : `SHIELD RECHARGE ${number(stats.shield_regen, 1)}/S AFTER 4S NO HIT`,
   ];
   values.forEach((value, index) => write(view.stats[index], value));
   // Slot order is authoritative: offense, defense, passive.
