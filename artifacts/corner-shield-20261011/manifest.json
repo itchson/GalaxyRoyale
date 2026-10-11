@@ -4,6 +4,11 @@
   "scope": "Actual source, native/software checks and desktop WebGPU/WebGL2 observations. Physical-device, extended soak and human art/audio acceptance are pending.",
   "files": [
     {
+      "path": ".gitattributes",
+      "bytes": 89,
+      "sha256": "e7a6bac265c2e452146e758a6b0f71a00539e2afc62794e4026d52db7f05af66"
+    },
+    {
       "path": "README.md",
       "bytes": 5216,
       "sha256": "1fc17aab2617455f905d94301f5500a6d15164531898a4aa21a6cf176a0c477a"
