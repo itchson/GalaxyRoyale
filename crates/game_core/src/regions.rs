@@ -440,6 +440,41 @@ fn surface_noise(p: Vec2, seed: u32) -> f32 {
 }
 
 const SHADE_CODES: [char; 8] = ['a', 'e', 'b', 'f', 'c', 'g', 'd', 'h'];
+// Sample materials in spherical coordinates. Screen-space texture would stretch
+// evenly across the disc and make clouds look like flat stripes or camouflage.
+fn sphere_surface(p: Vec2, z: f32, radius: f32) -> Vec2 {
+    Vec2::new(
+        p.x.atan2(z) * radius,
+        (p.y / radius).clamp(-1.0, 1.0).asin() * radius,
+    )
+}
+
+fn planet_albedo(kind: usize, surface: Vec2) -> f32 {
+    let broad = surface_noise(surface * 0.45, 0x7375_7266 ^ kind as u32);
+    let fine = surface_noise(surface * 1.9, 0x6669_6e65 ^ kind as u32);
+    match kind {
+        0 => 0.66 + broad * 0.25 + fine * 0.09,
+        1 => {
+            // Latitude bands are interrupted by a warped turbulent flow. A
+            // compact elliptical vortex carries its own curved cloud wakes.
+            let flow = surface.y + (surface.x * 0.075).sin() * 2.5 + broad * 3.0;
+            let storm = Vec2::new((surface.x + 13.0) / 8.5, (surface.y - 7.0) / 4.5);
+            let radius = storm.length();
+            let wake = (storm.y.atan2(storm.x) * 2.0 - radius * 5.0).sin()
+                * (-radius * radius * 0.65).exp();
+            0.77 + (flow * 0.34).sin() * 0.11 + fine * 0.09 + wake * 0.11
+                - (-radius * radius * 2.0).exp() * 0.13
+        }
+        _ => {
+            let shelf = surface_noise(surface * 0.6 + Vec2::new(7.0, -3.0), 0x6963_6566);
+            let ridge = (shelf - 0.46).abs();
+            0.64 + broad * 0.15
+                + fine * 0.08
+                + shelf * 0.12
+                + if ridge < 0.018 { 0.13 } else { 0.0 }
+        }
+    }
+}
 fn planet(kind: usize) -> PixelBody {
     if kind == 3 {
         return stellar_remnant();
@@ -464,27 +499,11 @@ fn planet(kind: usize) -> PixelBody {
         }
         let z = (RADIUS * RADIUS - squared).sqrt();
         let light = ((-0.52 * x - 0.32 * y + 0.79 * z) / RADIUS).clamp(0.0, 1.0);
-        let terrain = surface_noise(p, 0x7375_7266 ^ kind as u32);
-        let mut albedo = match kind {
-            0 => 0.70 + terrain * 0.30,
-            1 => {
-                // Curved atmospheric belts vary in width and dissolve into storms.
-                // They modulate albedo before lighting, so no band illuminates night.
-                let latitude = y + (x * 0.065).sin() * 1.8 + terrain * 3.8 + z / RADIUS * 2.0;
-                let cloud = (latitude * 0.27 + (y * 0.11).sin() * 0.7).sin();
-                let storm = ((x + 11.0) / 8.0).powi(2) + ((y - 6.0) / 4.0).powi(2);
-                0.76 + cloud * 0.10 + terrain * 0.12 - (-storm * 0.8).exp() * 0.14
-            }
-            _ => {
-                // Large irregular ice/cloud fields, with small lit fracture traces.
-                let field = surface_noise(p * 0.55 + Vec2::new(7.0, -3.0), 0x6963_6566);
-                let contour = (field - 0.46).abs();
-                0.67 + terrain * 0.19 + if contour < 0.025 { 0.14 } else { field * 0.12 }
-            }
-        };
+        let surface = sphere_surface(p, z, RADIUS);
+        let mut albedo = planet_albedo(kind, surface);
         if kind == 0 {
             for (center, radius) in &craters {
-                let delta = p - *center;
+                let delta = surface - *center;
                 let distance = delta.length();
                 if distance < *radius - 0.6 {
                     albedo *= if delta.x + delta.y < 0.0 { 0.67 } else { 0.86 };
