@@ -33,6 +33,87 @@ fn colors(frame: &FrameBuilder) -> Vec<u32> {
         .flat_map(|b| b.pixels.iter().map(|p| p.color))
         .collect()
 }
+fn extracted_body_color(frame: &FrameBuilder, x: u32, y: u32) -> [u8; 4] {
+    let local = [x as f32 + 0.5 - 96.0, y as f32 + 0.5 - 128.0];
+    let matches = frame
+        .frame()
+        .batches
+        .iter()
+        .flat_map(|batch| &batch.pixels)
+        .filter(|pixel| pixel.transform == 0 && pixel.local == local)
+        .collect::<Vec<_>>();
+    assert_eq!(matches.len(), 1, "missing or duplicate body cell ({x},{y})");
+    matches[0].color.to_le_bytes()
+}
+
+#[test]
+fn actual_forehead_skin_stays_source_rgb_across_all_27_extracted_profiles() {
+    // Source-image probes, deliberately independent of the authored role masks.
+    // The previous red-threshold mask wrongly treated this warm skin as crystal.
+    let source_skin = [
+        [246, 214, 192, 255],
+        [249, 216, 189, 255],
+        [250, 217, 194, 255],
+    ];
+    let mut failures = Vec::new();
+    for (kind, expected) in source_skin.into_iter().enumerate() {
+        for main in 0..3 {
+            for sub in 0..3 {
+                let (frame, stats) = extract(
+                    input(),
+                    ProfileAppearance::from_tokens(kind as u8, main, sub).unwrap(),
+                );
+                assert!(!stats.budget_rejected);
+                let actual = extracted_body_color(&frame, 105, 80);
+                if actual != expected {
+                    failures.push((kind, main, sub, actual, expected));
+                }
+            }
+        }
+    }
+    assert!(
+        failures.is_empty(),
+        "forehead extraction changed: {failures:?}"
+    );
+}
+
+#[test]
+fn actual_crystal_cells_follow_sub_corporation_independently_of_main() {
+    // Two occupied source crystal facets per type. Expected RGBs are explicit,
+    // not read from role membership or calculated by the production tint helper.
+    let probes = [
+        (
+            [(45, 20), (58, 50)],
+            [[14, 187, 17, 255], [187, 18, 22, 255], [17, 14, 187, 255]],
+        ),
+        (
+            [(49, 20), (62, 50)],
+            [[18, 200, 13, 255], [200, 23, 17, 255], [13, 18, 200, 255]],
+        ),
+        (
+            [(49, 20), (59, 40)],
+            [[6, 222, 14, 255], [222, 8, 18, 255], [14, 6, 222, 255]],
+        ),
+    ];
+    for (kind, (cells, expected_colors)) in probes.into_iter().enumerate() {
+        for main in 0..3 {
+            for (sub, expected) in expected_colors.into_iter().enumerate() {
+                let (frame, stats) = extract(
+                    input(),
+                    ProfileAppearance::from_tokens(kind as u8, main, sub as u8).unwrap(),
+                );
+                assert!(!stats.budget_rejected);
+                for (x, y) in cells {
+                    assert_eq!(
+                        extracted_body_color(&frame, x, y),
+                        expected,
+                        "crystal ({x},{y}) type={kind} main={main} sub={sub}"
+                    );
+                }
+            }
+        }
+    }
+}
 fn cells(body: &PixelBody) -> Vec<(u32, u32)> {
     body.cells()
         .map(|(p, _)| (p.x.to_bits(), p.y.to_bits()))
