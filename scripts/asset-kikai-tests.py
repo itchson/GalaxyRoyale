@@ -75,6 +75,8 @@ class KikaiTests(unittest.TestCase):
         self.assertEqual([s['stage'] for s in data['stages']],list(range(7)))
         self.assertEqual(data['character']['full_name'],'DORA-RENKO-PAN-1337')
         self.assertEqual(data['character']['speaker'],'ORP#1337')
+        self.assertEqual(data['character']['main_corporation'],'RENKO')
+        self.assertEqual(data['character']['sub_corporation'],'PAN')
         seen=set()
         for stage in data['stages']:
             self.assertNotIn('reward',stage)

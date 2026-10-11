@@ -1,4 +1,4 @@
-//! DORA-PAN-RENKO-1337: reviewed raster -> authored, immutable object-local cells.
+//! DORA-RENKO-PAN-1337: reviewed raster -> authored, immutable object-local cells.
 //! This module has no game/save state. Host-provided expression/speech is explicit.
 use engine_core::{AffineTransform, FrameBuilder, PixelBody, Transform, Vec2};
 use serde::Deserialize;
@@ -214,8 +214,15 @@ fn full_cell_inside(local: Transform, cell: Vec2, rect: [f32; 4], clip: Option<[
         [Some(rect), clip]
             .into_iter()
             .flatten()
-            .all(|r| p.x >= r[0] && p.x <= r[0] + r[2] && p.y >= r[1] && p.y <= r[1] + r[3])
+            .all(|r| inside_axis(p.x, r[0], r[0] + r[2]) && inside_axis(p.y, r[1], r[1] + r[3]))
     })
+}
+fn inside_axis(value: f32, min: f32, max: f32) -> bool {
+    // Fit/center arithmetic can disagree with the equivalent rectangle edge by
+    // a few f32 rounding bits. This is at most 0.00001 local units, not a cell
+    // margin; genuine partial cells outside either the fit or clip stay masked.
+    let roundoff = (2.0 * f32::EPSILON * min.abs().max(max.abs()).max(1.0)).min(0.00001);
+    value >= min - roundoff && value <= max + roundoff
 }
 fn local_index(body: &PixelBody, cell: Vec2) -> usize {
     let x = (cell.x + (body.width - 1) as f32 * 0.5).round() as usize;
@@ -249,16 +256,25 @@ fn horn_color(base: u32, corporation: Corporation) -> u32 {
     u32::from_le_bytes([r, g, b, a])
 }
 
-/// DORA always belongs to PAN. Character creation uses the separate explicit API.
+/// ORP#1337 has RENKO red hair and PAN green crystals, independent of preview defaults.
 pub fn append_dora(
     frame: &mut FrameBuilder,
     input: &DoraInput,
     pixels: &mut usize,
     work: &mut usize,
 ) -> DoraStats {
-    append_corporate_portrait(frame, input, CorporateAppearance::default(), pixels, work)
+    append_corporate_portrait(
+        frame,
+        input,
+        CorporateAppearance {
+            main: Corporation::Renko,
+            sub: Corporation::Pan,
+        },
+        pixels,
+        work,
+    )
 }
-/// Shared Kikai preview geometry; this recolor does not author a new character identity.
+/// Female long-hair preview geometry; recolor does not author DORO/TALO haircuts or an identity.
 pub fn append_corporate_portrait(
     frame: &mut FrameBuilder,
     input: &DoraInput,
@@ -484,6 +500,64 @@ mod tests {
         }
     }
     #[test]
+    fn tiny_fit_keeps_all_8656_opaque_cells_but_real_clip_still_masks_partial_cells() {
+        for origin in [[0.0, 0.0], [7.0, 9.0], [-7.3, -9.7]] {
+            let i = DoraInput {
+                rect: [origin[0], origin[1], 4.8, 6.4],
+                ..input()
+            };
+            let mut frame = FrameBuilder::new();
+            let (mut pixels, mut work) = (60_000, 120_000);
+            let stats = append_dora(&mut frame, &i, &mut pixels, &mut work);
+            assert_eq!(stats.quads, 8656);
+            assert_eq!(stats.visible_cells, 8656);
+            assert_eq!(
+                colors(&frame).iter().filter(|&&c| c >> 24 != 0).count(),
+                8656
+            );
+            assert_eq!(stats.scale, 0.05);
+            assert_eq!((pixels, work), (60_000 - 8656, 120_000 - 8656));
+
+            let clip = [origin[0], origin[1], 2.4, 6.4];
+            let (clipped, clipped_stats) = draw(
+                DoraInput {
+                    clip: Some(clip),
+                    ..i
+                },
+                CorporateAppearance {
+                    main: Corporation::Renko,
+                    sub: Corporation::Pan,
+                },
+            );
+            assert_eq!(clipped_stats.quads, 8656);
+            assert!(clipped_stats.visible_cells > 0 && clipped_stats.visible_cells < 8656);
+            for batch in &clipped.frame().batches {
+                for pixel in &batch.pixels {
+                    if pixel.color >> 24 == 0 {
+                        continue;
+                    }
+                    let transform = batch.transforms[pixel.transform as usize];
+                    for corner in [
+                        Vec2::splat(-0.5),
+                        Vec2::new(0.5, -0.5),
+                        Vec2::new(-0.5, 0.5),
+                        Vec2::splat(0.5),
+                    ] {
+                        let p = transform.point(Vec2::from_array(pixel.local) + corner);
+                        assert!(p.x >= clip[0] - 0.00001 && p.x <= clip[0] + clip[2] + 0.00001);
+                        assert!(p.y >= clip[1] - 0.00001 && p.y <= clip[1] + clip[3] + 0.00001);
+                    }
+                }
+            }
+        }
+        // Even at the largest admitted local coordinates, real overhang larger
+        // than the absolute tolerance cannot become visible.
+        for edge in [0.0, 4.8, 8192.0] {
+            assert!(!inside_axis(edge - 0.001, edge, edge + 1.0));
+            assert!(!inside_axis(edge + 1.001, edge, edge + 1.0));
+        }
+    }
+    #[test]
     fn finite_clipping_consumes_all_submitted_work_including_masked_cells() {
         let (_, full) = draw(input(), CorporateAppearance::default());
         let (f, s) = draw(
@@ -601,8 +675,8 @@ mod tests {
     }
     #[test]
     fn main_hair_and_sub_horns_recolor_only_explicit_disjoint_roles() {
-        let (guide, _) = draw(input(), CorporateAppearance::default());
-        let original = colors(&guide);
+        let (reference, _) = draw(input(), CorporateAppearance::default());
+        let original = colors(&reference);
         let body = &ART["dora_body"];
         for appearance in [
             CorporateAppearance {
@@ -643,7 +717,25 @@ mod tests {
         let mut f = FrameBuilder::new();
         let (mut p, mut w) = (60_000, 120_000);
         append_dora(&mut f, &input(), &mut p, &mut w);
-        assert_eq!(colors(&f), original);
+        let (guide, _) = draw(
+            input(),
+            CorporateAppearance {
+                main: Corporation::Renko,
+                sub: Corporation::Pan,
+            },
+        );
+        assert_eq!(colors(&f), colors(&guide));
+        assert_ne!(colors(&f), original);
+        let actual_guide = colors(&f);
+        let (mut red_hair, mut green_crystals) = (0, 0);
+        for (n, (cell, _)) in body.body.cells().enumerate() {
+            let index = local_index(&body.body, cell);
+            let [r, g, _, _] = actual_guide[n].to_le_bytes();
+            red_hair += usize::from(body.hair[index] && r > g);
+            green_crystals += usize::from(body.horns[index] && g > r);
+        }
+        assert_eq!(red_hair, body.hair.iter().filter(|&&v| v).count());
+        assert_eq!(green_crystals, body.horns.iter().filter(|&&v| v).count());
     }
     #[test]
     fn nonfinite_invalid_layouts_are_closed_and_bad_time_is_static_zero() {

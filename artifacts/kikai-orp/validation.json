@@ -1,0 +1,337 @@
+{
+  "schema": 1,
+  "recorded_at_utc": "2026-10-11T05:20:51.059213+00:00",
+  "base_commit": "d62a0ffb87ad20aaf5ee9eb019d17a70a6d9c476",
+  "scope": "Current native ORP guide palette and bounded f32 full-corner clipping correction; public API unchanged; no source registration/browser/save edits",
+  "guide": {
+    "full_name": "DORA-RENKO-PAN-1337",
+    "short_name": "ORP#1337",
+    "main": "RENKO",
+    "sub": "PAN",
+    "geometry": "DORA female long hair; recolor is not DORO/TALO",
+    "actual_red_hair_cells": 3992,
+    "actual_green_crystal_cells": 257
+  },
+  "python": {
+    "version": "3.12.14",
+    "pillow": "12.3.0",
+    "command": "python scripts/asset-kikai-tests.py",
+    "exit_code": 0,
+    "tests_passed": 7,
+    "log": "artifacts/kikai-orp/python-tests.log"
+  },
+  "native": {
+    "command": "powershell -NoProfile -File scripts/asset-kikai-native.ps1 -Python <pinned Python> -SkipDependencies -OutputDirectory work/orp-guide-art/native",
+    "dependency_build": "cargo build --locked -p game_web exit0, artifacts/kikai-orp/dependency-build.log",
+    "exit_code": 0,
+    "tests_passed": 12,
+    "strict_library_clippy": true,
+    "actual_engine_frame_builder": true,
+    "poses": [
+      {
+        "api": "append_dora",
+        "blink": false,
+        "height": 128,
+        "identity": "DORA-RENKO-PAN-1337",
+        "mouth_frame": 0,
+        "name": "ORP_neutral",
+        "quads": 8656,
+        "transforms": 3,
+        "width": 96
+      },
+      {
+        "api": "append_dora",
+        "blink": false,
+        "height": 128,
+        "identity": "DORA-RENKO-PAN-1337",
+        "mouth_frame": 0,
+        "name": "ORP_focused",
+        "quads": 8656,
+        "transforms": 3,
+        "width": 96
+      },
+      {
+        "api": "append_dora",
+        "blink": false,
+        "height": 128,
+        "identity": "DORA-RENKO-PAN-1337",
+        "mouth_frame": 0,
+        "name": "ORP_concerned",
+        "quads": 8656,
+        "transforms": 3,
+        "width": 96
+      },
+      {
+        "api": "append_dora",
+        "blink": false,
+        "height": 128,
+        "identity": "DORA-RENKO-PAN-1337",
+        "mouth_frame": 0,
+        "name": "ORP_pleased",
+        "quads": 8656,
+        "transforms": 3,
+        "width": 96
+      },
+      {
+        "api": "append_dora",
+        "blink": true,
+        "height": 128,
+        "identity": "DORA-RENKO-PAN-1337",
+        "mouth_frame": 0,
+        "name": "ORP_blink",
+        "quads": 8656,
+        "transforms": 3,
+        "width": 96
+      },
+      {
+        "api": "append_dora",
+        "blink": false,
+        "height": 128,
+        "identity": "DORA-RENKO-PAN-1337",
+        "mouth_frame": 2,
+        "name": "ORP_speech_open",
+        "quads": 8656,
+        "transforms": 3,
+        "width": 96
+      },
+      {
+        "api": "append_corporate_portrait",
+        "blink": false,
+        "height": 128,
+        "identity": "long-hair recolor only; not DORO/TALO",
+        "mouth_frame": 0,
+        "name": "LONG_HAIR_PAN_RENKO",
+        "quads": 8656,
+        "transforms": 3,
+        "width": 96
+      },
+      {
+        "api": "append_corporate_portrait",
+        "blink": false,
+        "height": 128,
+        "identity": "long-hair recolor only; not DORO/TALO",
+        "mouth_frame": 0,
+        "name": "LONG_HAIR_HUGO_RENKO",
+        "quads": 8656,
+        "transforms": 3,
+        "width": 96
+      },
+      {
+        "api": "append_corporate_portrait",
+        "blink": false,
+        "height": 128,
+        "identity": "long-hair recolor only; not DORO/TALO",
+        "mouth_frame": 0,
+        "name": "LONG_HAIR_PAN_HUGO",
+        "quads": 8656,
+        "transforms": 3,
+        "width": 96
+      }
+    ],
+    "icons": [
+      {
+        "height": 32,
+        "name": "status-icon",
+        "quads": 355,
+        "width": 32
+      },
+      {
+        "height": 32,
+        "name": "map-icon",
+        "quads": 626,
+        "width": 32
+      },
+      {
+        "height": 32,
+        "name": "settings-icon",
+        "quads": 492,
+        "width": 32
+      },
+      {
+        "height": 32,
+        "name": "save-icon",
+        "quads": 640,
+        "width": 32
+      },
+      {
+        "height": 32,
+        "name": "close-icon",
+        "quads": 349,
+        "width": 32
+      },
+      {
+        "height": 32,
+        "name": "resume-icon",
+        "quads": 326,
+        "width": 32
+      },
+      {
+        "height": 32,
+        "name": "restart-icon",
+        "quads": 373,
+        "width": 32
+      },
+      {
+        "height": 32,
+        "name": "title-icon",
+        "quads": 498,
+        "width": 32
+      },
+      {
+        "height": 32,
+        "name": "quit-icon",
+        "quads": 364,
+        "width": 32
+      },
+      {
+        "height": 32,
+        "name": "fullscreen-icon",
+        "quads": 340,
+        "width": 32
+      }
+    ],
+    "preview": "artifacts/kikai-orp/native-contact-sheet.png",
+    "raw_packets_untracked_path": "work/orp-guide-art/native/native-packets.json",
+    "raw_packets_sha256": "2cb519f3a1539742518cff7556af159f8e3dd197d95891e76e31726209ee7dcc",
+    "software_rasterizer": "scripts/asset-kikai-render.py: flat actual affine cell corners, not GPU/material output"
+  },
+  "clipping": {
+    "maximum_roundoff_local_units": 1e-05,
+    "calculation": "min(2*f32::EPSILON*max(abs(min),abs(max),1),0.00001)",
+    "tiny_fit": [
+      4.8,
+      6.4
+    ],
+    "scale": 0.05,
+    "opaque_cells": 8656,
+    "tested_origins": [
+      [
+        0,
+        0
+      ],
+      [
+        7,
+        9
+      ],
+      [
+        -7.3,
+        -9.7
+      ]
+    ],
+    "real_half_width_crop": "preserves all8656 submissions/budgets; masks partial cells; every visible corner within clip + at most0.00001",
+    "representable_overhang_check": "0.001 outside admitted edge at0/4.8/8192 is rejected"
+  },
+  "pack": {
+    "sprites": 20,
+    "palette_entries": 60,
+    "portrait_dimensions": [
+      96,
+      128
+    ],
+    "authored_source_appearance": "Historical PAN/RENKO unchanged; runtime guide uses declared role recolor",
+    "role_cells": {
+      "hair_cells": 3992,
+      "horn_cells": 257,
+      "signal_cells": 159
+    }
+  },
+  "onboarding_content": {
+    "file": "assets/narrative/dora-initial-mission.json",
+    "character": {
+      "id": "dora-renko-pan-1337",
+      "full_name": "DORA-RENKO-PAN-1337",
+      "speaker": "ORP#1337",
+      "portrait": 8,
+      "main_corporation": "RENKO",
+      "sub_corporation": "PAN"
+    },
+    "pages": 11,
+    "status": "Root-authored current data tested; no progress or reward mutation by this art module"
+  },
+  "historical_proof": {
+    "commit": "bcbaa670ae8335b4e5cffff3348b0ae0a3144299",
+    "path": "artifacts/kikai/validation.json",
+    "sha256": "d80fd18b58c1f08b406cd82cac182e9dcaf44edbac0b07e9f7ba8db091a704de",
+    "status": "Preserved PAN/RENKO original guide evidence; superseded identity/color captions, not rewritten"
+  },
+  "pending": [
+    "Normal dual-WASM/current guide browser presentation",
+    "Actual animation playback and narrow portrait human readability",
+    "Physical phone/device performance",
+    "Separate DORO short-spiky and TALO crew-cut authoring"
+  ],
+  "sha256": {
+    "Cargo.lock": "b00fa97ffca51b80eca3655d7de4acc9f43201b2f8ba0cf974545cf742a99574",
+    "artifacts/kikai-orp/dependency-build.log": "c058b9fb7dfc17e92845b5ec72d20925b6a078ad28019041cbf10a42153ec3b4",
+    "artifacts/kikai-orp/native-checks.log": "b15a477b5598991e9e986c3daf9918c9f798bb755938295cb406e6b70cb5b573",
+    "artifacts/kikai-orp/native-contact-sheet.png": "a85d1ff56a03fd6f6b6e617022bd997fa70479e06176af6007cf6234497e2031",
+    "artifacts/kikai-orp/native-proof.log": "6d12670a4b8a1954336340ab69fc14862dcfbecda29c45810c291cf6b8dc3d16",
+    "artifacts/kikai-orp/native-tests.log": "a9aaab2dc73ffcd05f3e94779e2f07b3f5c2c7f50b0650a52616145c36244a07",
+    "artifacts/kikai-orp/python-tests.log": "ea5cc67a9d9871f2d04fbbe20e7ec93402bb031009597c40701b48a1f4e3fdad",
+    "assets/concepts/kikai/dora-reference-expression-sheet.png": "b558e6572e9d065319ff7957fcdc7faadb1bc38f6ae7cdc39d3d826cc5f83742",
+    "assets/narrative/dora-initial-mission.json": "6e4792ce92f8b9bc046a9794761dfde5b88fca03bd02eeb836c03da2479ff1f9",
+    "assets/ui/kikai/atlas.json": "b8514f0b77d104f6cfbb56adc1df75c6401738cb804e87f26bdf7c5cb8939ebe",
+    "assets/ui/kikai/layers-preview.png": "4a0fbb22389e4744e16e0ecb95a11373c75c2da99c4711c9d0a0a473088186b8",
+    "assets/ui/kikai/manifest.json": "b2d6e78e6e25e7c8b3b138714183bc67976a10e05afee128738facd047502f9b",
+    "assets/ui/kikai/provenance.json": "865557d05402e7b2c1e7ce8fb91c1957eec583e7aff8859e7154045d1e6b1e33",
+    "assets/ui/kikai/source/dora_body.png": "459bfee45bbde516730ae225ab91aeb008835e688bc069696737bad1a9fe55fc",
+    "assets/ui/kikai/source/dora_eyes_blink.png": "72fd18a13827751f7357382de515dd0d6cbc94faa1c404ed23b4c084fd61a4cd",
+    "assets/ui/kikai/source/dora_eyes_concerned.png": "5b9c85327a872cdd9fff2e72584d76acb74a7a792f46dcf159eec58fc6320d96",
+    "assets/ui/kikai/source/dora_eyes_focused.png": "d2bd3ddfc774a6f79a8915d84dce9fc57a80c5d962af937b2d63bb973e0ad938",
+    "assets/ui/kikai/source/dora_eyes_neutral.png": "042071b4835017bb6bd74d3d01f4dbb457e96ef4b1567d1293f5666d92e611ec",
+    "assets/ui/kikai/source/dora_eyes_pleased.png": "d0d73cea2c3dfb111a003e615ab542fb8fe57b56698cb4e2135c2fe0a43e362a",
+    "assets/ui/kikai/source/dora_mouth_open.png": "1a4e554133bdfb5204c807e88db1ddc48d9a2f168adffdf9029a2ca880e80b1e",
+    "assets/ui/kikai/source/dora_mouth_rest.png": "7bb76c57252c0d1042e91f506396c97b4fa4c9471134b3ad1be44f41b4fd03e6",
+    "assets/ui/kikai/source/dora_mouth_small.png": "e05555f5abbc46679832d59cd37f3502006d6d0dbc35cf8fd1951f6d2c304812",
+    "assets/ui/kikai/source/dora_mouth_smile.png": "84d4d1e33a5587a8535ac8de34a1866b0e1d2a7614220acabf837b90232cb45c",
+    "assets/ui/kikai/source/icon_close.png": "3a96bd172342f389d166a8e551e54c965b292ce726f9253569e699f6a8baf3b6",
+    "assets/ui/kikai/source/icon_fullscreen.png": "9cd56c146255c9aaf49b9db51718312eda036b21c3763f09308950111496e32b",
+    "assets/ui/kikai/source/icon_map.png": "c5eda01937c825f2d4b67e4dda054febf2ff1a69df55e272988462823578bbbb",
+    "assets/ui/kikai/source/icon_quit.png": "6d59eeb2c9095fba87186bdd971a41ba61177aeed027d2a7a1b1d152e23a32a8",
+    "assets/ui/kikai/source/icon_restart.png": "614462f8abd73b2d4d8621fcf6f4edd38a24d40ffd129da27d3a99ce321aa940",
+    "assets/ui/kikai/source/icon_resume.png": "97199e38577546892996d8128194a5ce7ea24a05b5e8346fbf46f939bea9dc8d",
+    "assets/ui/kikai/source/icon_save.png": "12a79a775ab7476c01802213ca3bb4768cd8396cd4c0e32c18219773eadcf177",
+    "assets/ui/kikai/source/icon_settings.png": "4fd771c2464dd3947184e2d5dc11fb7938651d7250b0846f44778c2b0f08c36a",
+    "assets/ui/kikai/source/icon_status.png": "63fde781389c976ae223418f9bcd2911f2b4e61688235cc6508d78dc8336f1dd",
+    "assets/ui/kikai/source/icon_title.png": "e8cfd82bf1640a92d2eb863e9356fd7a59e4c952cc986d034bb2b51b88d075ca",
+    "crates/engine_core/src/camera.rs": "1ac883393d468b0501953e59dc6538e292b1a4aeba412bdbbc7af6a279382fe1",
+    "crates/engine_core/src/frame.rs": "c4f521e031f8eb514236d142f0eb79b994a33edc030be534d1faf353097c3380",
+    "crates/engine_core/src/lib.rs": "42d731037c40748ca7949e31903b262f8f1c5a53805e5c2ca24caf7249f1b1aa",
+    "crates/engine_core/src/pixel_rig.rs": "e26f9c373e34b6ddf35edcb45236664fbf1eff62f44029e815f2407fabbcd442",
+    "crates/engine_core/src/pixels.rs": "2791ba6a228086a2cfce2308102a62fefda0ad46fef5d0b20bf447c199e5ed90",
+    "crates/engine_core/src/topology.rs": "ebdf873912e179df5280f3019a05d2f88713302c43fe6e99a171383a3dfeebc3",
+    "crates/engine_core/src/transform.rs": "25e8ca1995b845b36b558ef73fa40dc122fa579465e2a237c4de841652ab25bb",
+    "crates/game_web/src/kikai_art.rs": "0e6306c3dbc2c19b1519385b28bf1d96bce28ba2181889abc814e95f55828be1",
+    "docs/KIKAI_ART.md": "5f281b1c51324dadc650824af01c6d0560c7b4566ffe23a88dbfd7f2de6e4b60",
+    "scripts/asset-kikai-native.ps1": "c76d037b6066e74fa78e0ffb0e990a45abac6c32dae1688d5aae25e70e1c1a1b",
+    "scripts/asset-kikai-proof.rs": "9e304677ec1c3f088f2e3464c68e3ef219b2fa5217a901ace8c8ee1793100aa1",
+    "scripts/asset-kikai-render.py": "7f69ff3414bcfe25b29bd28c2bdb9b77f492277b458cb59d9057dde1552f83d9",
+    "scripts/asset-kikai-tests.py": "bf948d5de5bcab9b9dd9fa9513b4193c69db0b2997ea4015f5ccea35bdf132f7",
+    "scripts/asset-kikai.py": "ebbe522aa9e7a8cbd7488a06b6a8583899cf920650d3d97337470ae65469915a",
+    "scripts/asset-pack.py": "a83e4a0a031681d40157fafcf827078562b2288d38ef42e8ec4dd735843e4d2b",
+    "scripts/asset-requirements.txt": "41b54a6fb2918667ca47a61d73b522629d84490f3d78f0f20b21135faba10d35"
+  },
+  "canonical_lf_sha256": {
+    "Cargo.lock": "df228d9f83ef57321dcb768b79d948e9aa24456c0952e971fc8d6fcd7e806bdd",
+    "assets/narrative/dora-initial-mission.json": "ec8b1431fd18d98cbcb8127437b64ecc967c640d2f10e7fcbcee83bcf6edf48e",
+    "assets/ui/kikai/atlas.json": "7f6d2182116ede7121d0bd4c3b539bb148b3b8d2d4d3817630545889a7759a5d",
+    "assets/ui/kikai/manifest.json": "b871c55ec9b79055c96f2c932d49e99bce554b522782c3ad49a0a07accf48ad4",
+    "assets/ui/kikai/provenance.json": "7c0fbff13ddd1fc98c4093d28ff77986fc11f3732b93f85bd9f194b6bf0d9b9e",
+    "crates/engine_core/src/camera.rs": "b08164aa6c9a7e8364ee90e7205e70b702d2013c1861254da33610cb81fdf759",
+    "crates/engine_core/src/frame.rs": "2afd79bb523dc0a57533ddaf1067ce2dd204823cb87f72e3ee7fc976a81969fc",
+    "crates/engine_core/src/lib.rs": "eb84c4af2c35898ea6337503c2b169105ae5830f91c71ac7b441e7c114c6035a",
+    "crates/engine_core/src/pixel_rig.rs": "e18ed9ca3ac3a459c9c611a7083494d07d7aa9ed624453df623b9c64730b6582",
+    "crates/engine_core/src/pixels.rs": "3e9f228b54442f66a48a26d0a932b694b6cc22386846d28b7adda0e409f95b5c",
+    "crates/engine_core/src/topology.rs": "72b22bedd285bf61d6e2a74a6ce5d8eddc7f593004e268949574e949fa528bbc",
+    "crates/engine_core/src/transform.rs": "f511ceb89ac4445ce9749d1ed4086e672693357a1e6cf4f4f944dd8fe7220c74",
+    "crates/game_web/src/kikai_art.rs": "0e6306c3dbc2c19b1519385b28bf1d96bce28ba2181889abc814e95f55828be1",
+    "docs/KIKAI_ART.md": "5f281b1c51324dadc650824af01c6d0560c7b4566ffe23a88dbfd7f2de6e4b60",
+    "scripts/asset-kikai-native.ps1": "c76d037b6066e74fa78e0ffb0e990a45abac6c32dae1688d5aae25e70e1c1a1b",
+    "scripts/asset-kikai-proof.rs": "9e304677ec1c3f088f2e3464c68e3ef219b2fa5217a901ace8c8ee1793100aa1",
+    "scripts/asset-kikai-render.py": "7f69ff3414bcfe25b29bd28c2bdb9b77f492277b458cb59d9057dde1552f83d9",
+    "scripts/asset-kikai-tests.py": "d08263fd178a77148f5a175e8fde1e6f9a90015ecaf33511a64e6f7757c546d5",
+    "scripts/asset-kikai.py": "ebbe522aa9e7a8cbd7488a06b6a8583899cf920650d3d97337470ae65469915a",
+    "scripts/asset-pack.py": "dc1673175eadf56042d273e6d816d93eb36ce9517c7dd75e85d39f276bca1e35",
+    "scripts/asset-requirements.txt": "41b54a6fb2918667ca47a61d73b522629d84490f3d78f0f20b21135faba10d35"
+  }
+}

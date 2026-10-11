@@ -25,72 +25,72 @@ fn packets(frame: &FrameBuilder) -> Vec<Value> {
 }
 fn main() {
     let mut scenes = Vec::new();
-    for (name, expression, speaking, time, reduced, main, sub) in [
+    for (scene_index, (name, expression, speaking, time, reduced, main, sub)) in [
         (
-            "neutral",
+            "ORP_neutral",
             DoraExpression::Neutral,
             false,
             0.0,
             true,
-            Corporation::Pan,
             Corporation::Renko,
+            Corporation::Pan,
         ),
         (
-            "focused",
+            "ORP_focused",
             DoraExpression::Focused,
             false,
             0.0,
             true,
-            Corporation::Pan,
             Corporation::Renko,
+            Corporation::Pan,
         ),
         (
-            "concerned",
+            "ORP_concerned",
             DoraExpression::Concerned,
             false,
             0.0,
             true,
-            Corporation::Pan,
             Corporation::Renko,
+            Corporation::Pan,
         ),
         (
-            "pleased",
+            "ORP_pleased",
             DoraExpression::Pleased,
             false,
             0.0,
             true,
-            Corporation::Pan,
             Corporation::Renko,
+            Corporation::Pan,
         ),
         (
-            "blink",
+            "ORP_blink",
             DoraExpression::Neutral,
             false,
             4.4,
             false,
-            Corporation::Pan,
             Corporation::Renko,
+            Corporation::Pan,
         ),
         (
-            "speech_open",
+            "ORP_speech_open",
             DoraExpression::Neutral,
             true,
             0.34,
             false,
-            Corporation::Pan,
             Corporation::Renko,
+            Corporation::Pan,
         ),
         (
-            "RENKO_hair_PAN_horns",
+            "LONG_HAIR_PAN_RENKO",
             DoraExpression::Neutral,
             false,
             0.0,
             true,
-            Corporation::Renko,
             Corporation::Pan,
+            Corporation::Renko,
         ),
         (
-            "HUGO_hair_RENKO_horns",
+            "LONG_HAIR_HUGO_RENKO",
             DoraExpression::Neutral,
             false,
             0.0,
@@ -99,7 +99,7 @@ fn main() {
             Corporation::Renko,
         ),
         (
-            "PAN_hair_HUGO_horns",
+            "LONG_HAIR_PAN_HUGO",
             DoraExpression::Neutral,
             false,
             0.0,
@@ -107,7 +107,10 @@ fn main() {
             Corporation::Pan,
             Corporation::Hugo,
         ),
-    ] {
+    ]
+    .into_iter()
+    .enumerate()
+    {
         let input = DoraInput {
             parent: AffineTransform::default(),
             rect: [0.0, 0.0, 96.0, 128.0],
@@ -120,16 +123,24 @@ fn main() {
         };
         let mut frame = FrameBuilder::new();
         let (mut pixels, mut work) = (60_000, 120_000);
-        let stats = art::append_corporate_portrait(
-            &mut frame,
-            &input,
-            CorporateAppearance { main, sub },
-            &mut pixels,
-            &mut work,
-        );
-        assert!(stats.quads > 7000 && stats.quads == stats.visible_cells);
+        let is_guide = scene_index < 6;
+        let stats = if is_guide {
+            art::append_dora(&mut frame, &input, &mut pixels, &mut work)
+        } else {
+            art::append_corporate_portrait(
+                &mut frame,
+                &input,
+                CorporateAppearance { main, sub },
+                &mut pixels,
+                &mut work,
+            )
+        };
+        assert_eq!(stats.quads, 8656);
+        assert_eq!(stats.quads, stats.visible_cells);
         assert_eq!(stats.quads, frame.frame().pixel_count);
         scenes.push(json!({"name":name,"width":96,"height":128,"quads":stats.quads,"transforms":stats.transforms,
+            "api":if is_guide {"append_dora"} else {"append_corporate_portrait"},
+            "identity":if is_guide {"DORA-RENKO-PAN-1337"} else {"long-hair recolor only; not DORO/TALO"},
             "blink":stats.blink,"mouth_frame":stats.mouth_frame,"cells":packets(&frame)}));
     }
     let mut icons = Vec::new();
@@ -159,7 +170,7 @@ fn main() {
         );
         icons.push(json!({"name":kind,"width":32,"height":32,"quads":body.occupied_count(),"cells":packets(&frame)}));
     }
-    let output = json!({"scope":"Actual native cached PixelBody/FrameBuilder extraction; posed state, flat software review only",
+    let output = json!({"scope":"Actual native ORP#1337 RENKO-hair/PAN-crystal cached PixelBody/FrameBuilder extraction; posed state, flat software review only",
         "portraits":scenes,"icons":icons});
     let path = std::env::args().nth(1).expect("OutputJSONpath");
     std::fs::write(path, serde_json::to_string(&output).unwrap()).unwrap();
