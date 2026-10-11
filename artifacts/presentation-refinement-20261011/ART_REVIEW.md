@@ -1,0 +1,28 @@
+# Native art and intact-rock refinement
+
+Scope: actual original cell authoring in `pixel_assets.rs`, `dock_facilities.rs`, `ui_scene.rs`, and their associated icon/map tests. No game/save/reward/orbit/controller, DOM hit target, atlas JSON, renderer, Studio or deployment changes were made by this specialist. Current source has separate concurrent HUD/audio work owned by other agents.
+
+The sixteen cached asteroid surface fields retain four published family silhouettes and conservative collision radii. Their opaque strata, seams and crater floors now cover every intact interior cell. Boundary-seeded empty-space flood fills prove no enclosed transparent holes; occupied-cell flood fills prove one connected rock per field. Four variants per family share exact occupancy/radius and have distinct deterministic color fields. Actual `PixelBody.damage` removes cells and changes swept `hit_segment` results through a formerly opaque basalt crater, without changing a cached pristine clone. Filling interior material deliberately adds cells to formerly hollow ice/basalt; the outer collision envelope is unchanged.
+
+The generated dock's 1,454 occupied cells and central landing aperture remain exact. Authored panel joins, bolts and service highlights recolor a limited subset of those cells. The four Haven facilities add actual half-cell corner chamfers, recessed vent rows, warm latch fasteners, raised directional bevels and split screen shading. They use 0.55-world cells for buildings and [0.75,0.5] for pads, retaining the old world footprint, centers and 24-world hit radius. Animation only changes existing screen/indicator colors; actual Game extraction verifies frozen cosmetic time under Reduced Motion without changing profile or RNG.
+
+Cached control objects have authored fine-cell chamfers, bevel/recess materials and a clearer eight-tooth settings silhouette. Seven menu icons are 20×20; close/save are 18×18. Existing measured hit rectangles, semantic states and center fitting remain authoritative. Tests cover all seven icons at 44 physical pixels across UI scales 1, 1.375, 2.4, 3, 4 and 6, plus far coordinates, reflected/sheared parent transforms, whole-cell scrolling clips, opaque disabled colors and atomic submitted/work budgets. These original objects remain unlit and static. Map's compact world/chart markers were not reauthored.
+
+Only flight `status-text`/`warning-text` dispatch now calls Engine's allocation-free RoyaleMicro 3×5 helper; menus and recovery text keep the existing font. This does not change their semantic hit rectangles or native color selection.
+
+## Actual native evidence
+
+- `native-tests.log`: 230 game_core + 118 game_web + 31 external boss-layout tests passed. This complete run preceded only the final eight-tooth settings-mask refinement. The final refinement then passed all 11 actual icon extraction checks in `icon-final-tests.log`.
+- `native-clippy-final.log`, `wasm-webgpu-clippy.log`, `wasm-webgl-clippy.log`: strict native all-target and both WASM backend Clippy passed after the final icon refinement.
+- Focused topology/radius/damage/dock tests: seven native asset checks; four native facility checks. Current full run contains the existing real projectile/asteroid sanctuary/reflection/reward checks, including actual projectile knockback and immutable remote birth rewards.
+- `native-packets.json` and `native-art-contact-sheet.png`: actual occupied `PixelBody`/`FrameBuilder` extraction, then nearest integer flat-color software raster. No textured sprite replacement or runtime raster path is introduced. The software preview deliberately does not model GPU filtering, lighting or blended-color fidelity.
+
+Measured occupancy is 1,067 / 940 / 804 / 836 cells per rock family, one transform each; each of the four color fields in a family keeps that count. Dock is 1,454 / one. All four facilities together are 4,889 cells / eight transforms, with per-facility pad+building totals 1,181 / 1,366 / 1,250 / 1,092. These are extraction counts, not performance measurements. The exact final icon counts are in `native-packets.json`/`evidence.json`.
+
+A single read-only Spark review was invoked with explicit UTF-8 task text and the actual danger-full-access/never flags. It inspected the diff but did not finish a verdict within the bounded review window; the owned worker was interrupted at approximately 4 minutes 45 seconds. There is no completed independent model-review acceptance to claim. Native test/extraction evidence and parent review remain the acceptance basis.
+
+## Reproduction and acceptance limits
+
+Run `cargo test --locked -p game_core -p game_web`; focused filters are `pixel_assets::tests`, `dock_facilities::tests`, `ui_scene::icon_tests` and `ui_scene::map_tests`. Run strict native and both WASM backend Clippy with the commands recorded in evidence. For the native image artifact, run `cargo run --offline --manifest-path work/native-art-detail-review/preview/Cargo.toml --quiet > work/native-art-detail-review/native-packets.json`, then bundled Python/Pillow on `render-preview.py`. The work-only preview imports the actual art modules and public native UI painter; its production hash function is the exact current one. It is not included in the shipping game.
+
+Browser inspection of new detail at ordinary/tiny/fractional scales, live lighting, moving-world readability and full art consistency remains pending the parent's fresh normal build. Existing cc8 browser evidence is historical and cannot accept this new source. Physical phones, touch acquisition, hearing, sustained performance and natural full progression remain pending. This bounded change does not claim every ship/boss/background asset has been reauthored.

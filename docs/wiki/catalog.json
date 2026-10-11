@@ -91,7 +91,15 @@
         }
       ],
       "related": ["validation", "world-seed", "ships", "league", "future"],
-      "media": []
+      "media": [
+        {
+          "path": "artifacts/presentation-refinement-20261011/webgpu-haven.jpg",
+          "label": "Observed Haven flight / WebGPU",
+          "kind": "runtime-screenshot",
+          "provenance": "artifacts/presentation-refinement-20261011/EVIDENCE_SCOPE.md",
+          "caption": "Actual normal Rust/WASM WebGPU capture at 1280×720, recorded 11 October 2026. Historical integrated presentation cache galaxy-add4abbaaf9fed4c; no mobile, sustained performance or later-build acceptance claim."
+        }
+      ]
     },
     {
       "id": "champion-0",
@@ -1205,7 +1213,15 @@
         }
       ],
       "related": ["cargo", "missions"],
-      "media": [],
+      "media": [
+        {
+          "path": "artifacts/presentation-refinement-20261011/webgpu-belt.jpg",
+          "label": "Observed asteroid belt / WebGPU",
+          "kind": "runtime-screenshot",
+          "provenance": "artifacts/presentation-refinement-20261011/EVIDENCE_SCOPE.md",
+          "caption": "Actual normal runtime capture at 1280×720. The belt was entered through the QA console, not natural travel or earned progression. This historical desktop image is visual evidence only."
+        }
+      ],
       "data": {
         "havenSafeRadius": 240,
         "beltOffsets": [240, 520],
@@ -2220,10 +2236,23 @@
           "path": "docs/ENGINE.md",
           "label": "ENGINE.md",
           "role": "documentation"
+        },
+        {
+          "path": "artifacts/presentation-refinement-20261011/HUD_HANDOFF.md",
+          "label": "HUD source and native proof handoff",
+          "role": "recorded native evidence; browser gates separate"
         }
       ],
       "related": ["cosmic-art", "validation"],
-      "media": [],
+      "media": [
+        {
+          "path": "artifacts/presentation-refinement-20261011/native-art-contact-sheet.png",
+          "label": "Actual native-cell art contact sheet",
+          "kind": "runtime-art",
+          "provenance": "artifacts/presentation-refinement-20261011/ART_REVIEW.md",
+          "caption": "Flat software raster of actual occupied PixelBody/FrameBuilder extraction for rock, dock, facility and control details. This inspection image does not model GPU filtering, lighting or blended colors and is not a browser screenshot."
+        }
+      ],
       "data": {
         "instanceBytes": 16,
         "transformBytes": 32,
@@ -2355,6 +2384,11 @@
           "path": "apps/studio/README.md",
           "label": "README.md",
           "role": "implementation"
+        },
+        {
+          "path": "artifacts/presentation-refinement-20261011/EVIDENCE_SCOPE.md",
+          "label": "Recorded presentation evidence scope",
+          "role": "historical source/cache, QA entry route and untested acceptance limits"
         }
       ],
       "related": ["galaxy-royale", "future"],

@@ -76,7 +76,7 @@ const stateLabels: Record<string, string> = {
 };
 export function wikiFileUrl(kind: "source" | "media", path: string): string {
   if (
-    !/^(docs|crates|apps|assets)\/[A-Za-z0-9_./-]+$/.test(path) ||
+    !/^(docs|crates|apps|assets|artifacts)\/[A-Za-z0-9_./-]+$/.test(path) ||
     path.split("/").some((p) => !p || p.startsWith("."))
   )
     return "";
