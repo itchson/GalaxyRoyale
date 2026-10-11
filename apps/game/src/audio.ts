@@ -24,6 +24,10 @@ type Voice = {
   theme: number | null;
 };
 const FLOOR = 0.0001;
+// Leave room for the score, warning and engine layers before the final compressor.
+// The compressor catches stacked events; this trim is not a brick-wall limiter.
+const CUE_LEVEL = 0.85;
+const ENGINE_LEVEL = 0.32;
 const clamp = (value: number): number =>
   Number.isFinite(value) ? Math.min(1, Math.max(0, value)) : 0;
 const frequency = (note: number): number => 440 * 2 ** ((note - 69) / 12);
@@ -101,6 +105,10 @@ export class AudioEngine {
   private engineVoice: Voice | null = null;
   private engineOscillators: OscillatorNode[] = [];
   private engineFilter: BiquadFilterNode | null = null;
+  private engineDuckGain: GainNode | null = null;
+  private engineDuckTarget = 1;
+  private engineDuckDepth = 1;
+  private engineDuckUntil = 0;
   private alarmVoice: Voice | null = null;
   private lifecycle = 0;
   private lastWake = -Infinity;
@@ -136,6 +144,7 @@ export class AudioEngine {
             this.stopScheduler();
             for (const voice of [...this.voices]) this.release(voice);
             this.mix.engine = this.mix.alarm = this.mix.combat = 0;
+            this.resetEngineDuck();
           }
         };
       } catch {
@@ -193,6 +202,7 @@ export class AudioEngine {
       lowHull: this.mix.alarm,
       hull: this.state.hull,
       engine: this.mix.engine,
+      engineDuck: this.engineDuckTarget,
       throttle: this.state.throttle,
       speed: this.state.speed,
       engines: this.state.engines,
@@ -226,7 +236,7 @@ export class AudioEngine {
       "sfx",
       now,
       0,
-      0.75 + clamp(event.intensity) * 0.25,
+      (0.75 + clamp(event.intensity) * 0.25) * CUE_LEVEL,
     );
     if (!voice) return;
     voice.cue = event.kind;
@@ -423,6 +433,32 @@ export class AudioEngine {
         this.release(voice);
         return;
     }
+    // Only an admitted real cue ducks the engine. Primary fire and ordinary
+    // cell hits do not repeatedly pump the propulsion bed or the music bus.
+    const important =
+      kind === "player-hit" ||
+      kind === "shield" ||
+      kind === "explosion" ||
+      kind === "death";
+    const warning =
+      kind === "boss" ||
+      kind === "boss-charge" ||
+      kind === "mote-charge" ||
+      kind === "mote-pulse" ||
+      kind === "champion" ||
+      kind === "royale-round" ||
+      (kind.startsWith("ability-") && kind !== "ability-wake");
+    if (important || warning) {
+      this.engineDuckDepth = Math.min(
+        now < this.engineDuckUntil ? this.engineDuckDepth : 1,
+        important ? 0.35 : 0.55,
+      );
+      this.engineDuckUntil = Math.max(
+        this.engineDuckUntil,
+        now + Math.min(0.4, Math.max(0.16, voice.end - now)),
+      );
+      this.updateEngineDuck(now);
+    }
   }
 
   /** Death UI keeps only its already-created cue; it never creates audio. */
@@ -444,6 +480,7 @@ export class AudioEngine {
     this.music?.gain.setTargetAtTime(0, context.currentTime, 0.008);
     this.musicWet?.gain.setTargetAtTime(0, context.currentTime, 0.008);
     this.mix.engine = this.mix.alarm = this.mix.combat = 0;
+    this.resetEngineDuck();
     this.lastWake = -Infinity;
     for (const voice of [...this.voices])
       if (voice !== death) this.release(voice);
@@ -477,6 +514,7 @@ export class AudioEngine {
     this.stopScheduler();
     for (const voice of [...this.voices]) this.release(voice);
     this.mix.engine = this.mix.alarm = this.mix.combat = 0;
+    this.resetEngineDuck();
     this.lastWake = -Infinity;
     if (this.context && this.context.state !== "closed")
       void this.context.suspend().catch(() => undefined);
@@ -531,6 +569,7 @@ export class AudioEngine {
     this.sfx = null;
     this.musicWet = null;
     this.noise = null;
+    this.resetEngineDuck();
   }
 
   private buildGraph(context: AudioContext): void {
@@ -543,6 +582,21 @@ export class AudioEngine {
     limiter.ratio.value = 12;
     limiter.attack.value = 0.003;
     limiter.release.value = 0.18;
+    // The compressor has attack overshoot. Bound the actual final samples,
+    // leaving normal-level score/effects linear instead of lowering user buses.
+    const ceiling = context.createWaveShaper();
+    const curve = new Float32Array(4097);
+    for (let i = 0; i < curve.length; i++) {
+      const value = (i / (curve.length - 1)) * 2 - 1;
+      const absolute = Math.abs(value);
+      curve[i] =
+        absolute <= 0.78
+          ? value
+          : Math.sign(value) *
+            (0.78 + 0.15 * Math.tanh((absolute - 0.78) / 0.15));
+    }
+    ceiling.curve = curve;
+    ceiling.oversample = "none";
     const warmth = context.createBiquadFilter();
     warmth.type = "lowpass";
     warmth.frequency.value = 5600;
@@ -563,12 +617,14 @@ export class AudioEngine {
     wet.connect(this.master);
     this.sfx.connect(this.master);
     this.master.connect(limiter);
-    limiter.connect(context.destination);
+    limiter.connect(ceiling);
+    ceiling.connect(context.destination);
     this.graph = [
       this.master,
       this.music,
       this.sfx,
       limiter,
+      ceiling,
       warmth,
       echo,
       feedback,
@@ -712,18 +768,18 @@ export class AudioEngine {
     }
     if (this.engineVoice) {
       this.engineVoice.gain.gain.setTargetAtTime(
-        this.mix.engine * 0.42,
+        this.mix.engine * ENGINE_LEVEL,
         now,
-        0.04,
+        0.09,
       );
-      const pitch = 48 + this.state.speed * 46 + this.state.throttle * 35;
+      const pitch = 45 + this.state.speed * 25 + this.state.throttle * 20;
       this.engineOscillators.forEach((source, i) =>
-        source.frequency.setTargetAtTime(pitch * (i ? 2.015 : 1), now, 0.055),
+        source.frequency.setTargetAtTime(pitch * (i ? 1.985 : 1), now, 0.14),
       );
       this.engineFilter?.frequency.setTargetAtTime(
-        350 + this.state.throttle * 1150,
+        260 + this.state.throttle * 500 + this.state.speed * 100,
         now,
-        0.08,
+        0.18,
       );
       if (
         this.mix.engine < 0.002 &&
@@ -748,6 +804,25 @@ export class AudioEngine {
         this.release(this.alarmVoice);
       if (this.state.hull === 0) this.release(this.alarmVoice);
     }
+    this.updateEngineDuck(now);
+  }
+
+  private updateEngineDuck(now: number): void {
+    if (now >= this.engineDuckUntil) this.engineDuckDepth = 1;
+    const target = this.engineDuckDepth * (1 - this.mix.alarm * 0.4);
+    if (Math.abs(target - this.engineDuckTarget) > 0.00001) {
+      this.engineDuckGain?.gain.setTargetAtTime(
+        target,
+        now,
+        target < this.engineDuckTarget ? 0.015 : 0.22,
+      );
+      this.engineDuckTarget = target;
+    }
+  }
+
+  private resetEngineDuck(): void {
+    this.engineDuckTarget = this.engineDuckDepth = 1;
+    this.engineDuckUntil = 0;
   }
 
   private continuous(kind: "engine" | "alarm", time: number): Voice | null {
@@ -755,19 +830,36 @@ export class AudioEngine {
     if (!context) return null;
     const voice = this.createVoice("sfx", time, 86400, 0, true);
     if (!voice) return null;
+    let output: AudioNode = voice.gain;
+    if (kind === "engine") {
+      // A single lowpass shapes both tonal harmonics and the air bed; the
+      // separate duck stage can lower propulsion without changing score gain.
+      const filter = context.createBiquadFilter();
+      filter.type = "lowpass";
+      filter.frequency.value = 260;
+      filter.Q.value = 0.55;
+      const duck = context.createGain();
+      duck.gain.setValueAtTime(this.engineDuckTarget, time);
+      filter.connect(duck);
+      duck.connect(voice.gain);
+      voice.nodes.push(filter, duck);
+      this.engineFilter = filter;
+      this.engineDuckGain = duck;
+      output = filter;
+    }
     const oscillators: OscillatorNode[] = [];
     for (let i = 0; i < 2; i++) {
       const source = context.createOscillator();
-      source.type = kind === "engine" ? (i ? "triangle" : "square") : "sine";
+      source.type = kind === "engine" ? (i ? "triangle" : "sine") : "sine";
       source.frequency.setValueAtTime(
-        kind === "engine" ? 48 * (i ? 2.015 : 1) : i ? 660 : 440,
+        kind === "engine" ? 45 * (i ? 1.985 : 1) : i ? 660 : 440,
         time,
       );
       const envelope = context.createGain();
       envelope.gain.value =
-        kind === "engine" ? (i ? 0.055 : 0.08) : i ? 0.06 : 0.095;
+        kind === "engine" ? (i ? 0.025 : 0.055) : i ? 0.06 : 0.095;
       source.connect(envelope);
-      envelope.connect(voice.gain);
+      envelope.connect(output);
       voice.nodes.push(source, envelope);
       voice.sources.push(source);
       voice.pending++;
@@ -779,22 +871,16 @@ export class AudioEngine {
       const source = context.createBufferSource();
       source.buffer = this.noise;
       source.loop = true;
-      const filter = context.createBiquadFilter();
-      filter.type = "bandpass";
-      filter.frequency.value = 350;
-      filter.Q.value = 0.6;
       const envelope = context.createGain();
-      envelope.gain.value = 0.045;
-      source.connect(filter);
-      filter.connect(envelope);
-      envelope.connect(voice.gain);
-      voice.nodes.push(source, filter, envelope);
+      envelope.gain.value = 0.02;
+      source.connect(envelope);
+      envelope.connect(output);
+      voice.nodes.push(source, envelope);
       voice.sources.push(source);
       voice.pending++;
       source.onended = () => this.release(voice);
       source.start(time);
       this.engineOscillators = oscillators;
-      this.engineFilter = filter;
     }
     return voice;
   }
@@ -917,6 +1003,7 @@ export class AudioEngine {
       this.engineVoice = null;
       this.engineOscillators = [];
       this.engineFilter = null;
+      this.engineDuckGain = null;
     }
     if (this.alarmVoice === voice) this.alarmVoice = null;
     if (this.tailVoice === voice) this.tailVoice = null;
