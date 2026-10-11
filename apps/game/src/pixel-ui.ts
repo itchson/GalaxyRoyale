@@ -343,6 +343,13 @@ export class PixelUiBridge {
             area.height / scale,
           ];
         };
+        const coopLabel =
+          element.id === "coop-create" || element.id === "coop-join"
+            ? element.querySelector<HTMLElement>(".coop-button-label")
+            : null;
+        const coopButton = kind.startsWith("co-op-")
+          ? element.closest<HTMLButtonElement>("button")
+          : null;
         nodes.push({
           kind,
           rect: [
@@ -379,7 +386,10 @@ export class PixelUiBridge {
                 element.dataset.active === "true" ||
                 element.getAttribute("aria-pressed") === "true" ||
                 element.getAttribute("aria-selected") === "true",
-          disabled: element instanceof HTMLButtonElement && element.disabled,
+          disabled:
+            (element instanceof HTMLButtonElement && element.disabled) ||
+            Boolean(coopButton?.disabled),
+          ...(coopLabel ? { label_rect: regionRect(coopLabel) } : {}),
           ...(kind === "portrait"
             ? {
                 portrait_expression: Math.floor(

@@ -79,6 +79,7 @@ interface View {
   heading: HTMLElement;
   status: HTMLElement;
   members: HTMLElement;
+  roster: HTMLElement;
   reason: HTMLElement;
   noteNode: HTMLElement;
   start: HTMLElement;
@@ -210,6 +211,19 @@ function render(view: View): boolean {
         : "Close the panel and try again.",
   );
   text(view.members, valid ? `${state.members} / 8 PILOTS` : "");
+  const admitted =
+    !valid || restoreFailed
+      ? 0
+      : state.role === "host" && active
+        ? 1 + state.admitted
+        : state.role === "guest" && state.phase === "connected"
+          ? state.members
+          : 0;
+  const rosterValue = String(Math.max(0, Math.min(8, admitted)));
+  if (view.roster.dataset.pixelValue !== rosterValue) {
+    view.roster.dataset.pixelValue = rosterValue;
+    changed = true;
+  }
   text(
     view.reason,
     valid && state.reason !== null
@@ -320,17 +334,31 @@ function build(
   const status = element("p", "loadout-note");
   const members = element("p", "collection-state");
   members.dataset.pixelKind = "collection-state";
+  const roster = element("span", "coop-roster");
+  roster.dataset.pixelKind = "co-op-roster";
+  roster.dataset.pixelValue = "0";
+  roster.setAttribute("aria-hidden", "true");
   const reason = element("p", "loadout-reason");
   const noteNode = element("p", "loadout-note");
   noteNode.setAttribute("role", "status");
   const start = element("section", "coop-start");
   const create = action("coop-create", "INVITE");
+  const inviteArt = element("span", "coop-symbol");
+  inviteArt.dataset.pixelKind = "co-op-invite";
+  inviteArt.setAttribute("aria-hidden", "true");
+  const inviteLabel = element("span", "coop-button-label", "INVITE");
+  create.replaceChildren(inviteLabel, inviteArt);
   create.dataset.pixelAction = "primary-button";
   const label = element("label", "coop-label");
   label.append(element("p", "loadout-note", "INVITATION CODE"));
   const input = field("coop-join-input", "Invitation code to join");
   label.append(input);
   const join = action("coop-join", "JOIN");
+  const joinArt = element("span", "coop-symbol");
+  joinArt.dataset.pixelKind = "co-op-join";
+  joinArt.setAttribute("aria-hidden", "true");
+  const joinLabel = element("span", "coop-button-label", "JOIN");
+  join.replaceChildren(joinLabel, joinArt);
   const startActions = element("div", "loadout-actions");
   startActions.append(create, join);
   start.append(label, startActions);
@@ -351,6 +379,7 @@ function build(
   root.append(
     heading,
     members,
+    roster,
     status,
     reason,
     start,
@@ -373,6 +402,7 @@ function build(
     heading,
     status,
     members,
+    roster,
     reason,
     noteNode,
     start,

@@ -1181,3 +1181,30 @@ body.reduced-motion *::after {
   background: transparent;
   outline: none;
 }
+
+.coop-symbol {
+  display: inline-block;
+  width: calc(16px * var(--ui-scale, 1));
+  height: calc(16px * var(--ui-scale, 1));
+  margin-left: calc(4px * var(--ui-scale, 1));
+  vertical-align: middle;
+  pointer-events: none;
+}
+.coop-roster {
+  display: block;
+  width: calc(64px * var(--ui-scale, 1));
+  height: calc(12px * var(--ui-scale, 1));
+  max-width: 100%;
+  pointer-events: none;
+}
+#coop-create,
+#coop-join {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(4px * var(--ui-scale, 1));
+}
+.coop-button-label {
+  display: inline-block;
+  flex: 0 0 auto;
+}

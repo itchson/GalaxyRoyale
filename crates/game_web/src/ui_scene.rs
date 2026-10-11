@@ -1289,7 +1289,10 @@ impl Painter<'_> {
             .collect();
         let characters = label.chars().count();
         let units = (characters as f32 * RoyaleMono::ADVANCE - 1.0).max(RoyaleMono::WIDTH);
-        let content = [r[0] + padding_x, r[1] + 2.0, width, height];
+        let content = node
+            .label_rect
+            .and_then(|label| contained_region(label, r))
+            .unwrap_or([r[0] + padding_x, r[1] + 2.0, width, height]);
         let mut font = font_scale(font)
             .min((width / units).max(MIN_FONT_SCALE))
             .min((height / RoyaleMono::HEIGHT).max(MIN_FONT_SCALE));
@@ -1473,6 +1476,38 @@ impl Painter<'_> {
             WHITE
         };
         match node.kind.as_str() {
+            "co-op-invite" | "co-op-join" | "co-op-roster" => {
+                use crate::co_op_art::{self, Kind};
+                let kind = match node.kind.as_str() {
+                    "co-op-invite" => Kind::Invite,
+                    "co-op-join" => Kind::Join,
+                    _ if node.value.is_finite()
+                        && node.value.fract() == 0.0
+                        && (0.0..=8.0).contains(&node.value) =>
+                    {
+                        Kind::Roster(node.value as u8)
+                    }
+                    _ => return,
+                };
+                co_op_art::append(
+                    self.frame,
+                    &co_op_art::Input {
+                        kind,
+                        rect: r,
+                        clip: self.clip,
+                        parent: self.parent,
+                        style: co_op_art::Style {
+                            hovered: node.active,
+                            busy: node.selected,
+                            disabled: node.disabled,
+                            time,
+                            reduced_motion: reduced,
+                        },
+                    },
+                    &mut self.remaining,
+                    &mut self.work_remaining,
+                );
+            }
             "text" => self.text_aligned(r, &node.text, font, color, node.text_align, false),
             "collection-name" | "collection-state" | "collection-meta" | "collection-cost"
             | "collection-reason" => {
