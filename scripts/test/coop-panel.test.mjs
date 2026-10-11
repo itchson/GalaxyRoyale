@@ -1,0 +1,564 @@
+import assert from "node:assert/strict";
+import test from "node:test";
+import { readFileSync } from "node:fs";
+import vm from "node:vm";
+import ts from "typescript";
+
+const compiled = ts.transpileModule(
+  readFileSync(
+    new URL("../../apps/game/src/coop/panel.ts", import.meta.url),
+    "utf8",
+  ),
+  {
+    compilerOptions: {
+      target: ts.ScriptTarget.ES2022,
+      module: ts.ModuleKind.CommonJS,
+    },
+  },
+).outputText;
+
+// Real panel code with a semantic DOM fixture. This does not test pixels/layout/network.
+function fixture() {
+  let writes = 0;
+  const document = { activeElement: null };
+  class Element {
+    children = [];
+    attributes = {};
+    listeners = {};
+    className = "";
+    id = "";
+    scrollTop = 0;
+    readOnly = false;
+    _text = "";
+    _value = "";
+    _hidden = false;
+    _disabled = false;
+    selectionStart = 0;
+    selectionEnd = 0;
+    selected = false;
+    dataset = new Proxy(
+      {},
+      {
+        set(target, key, value) {
+          writes++;
+          target[key] = value;
+          return true;
+        },
+      },
+    );
+    get textContent() {
+      return (
+        this._text + this.children.map((node) => node.textContent).join("")
+      );
+    }
+    set textContent(value) {
+      writes++;
+      this._text = value;
+      this.children = [];
+    }
+    get value() {
+      return this._value;
+    }
+    set value(value) {
+      writes++;
+      this._value = value;
+    }
+    get hidden() {
+      return this._hidden;
+    }
+    set hidden(value) {
+      writes++;
+      this._hidden = value;
+    }
+    get disabled() {
+      return this._disabled;
+    }
+    set disabled(value) {
+      writes++;
+      this._disabled = value;
+    }
+    append(...children) {
+      writes++;
+      this.children.push(...children);
+    }
+    replaceChildren(...children) {
+      writes++;
+      this.children = children;
+    }
+    setAttribute(key, value) {
+      writes++;
+      this.attributes[key] = value;
+    }
+    getAttribute(key) {
+      return this.attributes[key] ?? null;
+    }
+    addEventListener(type, listener) {
+      (this.listeners[type] ??= []).push(listener);
+    }
+    dispatch(type, fields = {}) {
+      const event = {
+        target: this,
+        prevented: false,
+        preventDefault() {
+          this.prevented = true;
+        },
+        ...fields,
+      };
+      for (const listener of this.listeners[type] ?? []) listener(event);
+      return event;
+    }
+    click() {
+      return this.dispatch("click");
+    }
+    focus() {
+      document.activeElement = this;
+    }
+    select() {
+      this.selected = true;
+      this.selectionStart = 0;
+      this.selectionEnd = this.value.length;
+    }
+    querySelector(selector) {
+      return (
+        flatten(this).find(
+          (node) =>
+            selector.startsWith(".") &&
+            node.className.split(" ").includes(selector.slice(1)),
+        ) ?? null
+      );
+    }
+  }
+  document.createElement = (tagName) =>
+    Object.assign(new Element(), { tagName });
+  const exports = {};
+  vm.runInNewContext(compiled, {
+    exports,
+    document,
+    console: {
+      log() {
+        throw Error("The panel must not log.");
+      },
+      error() {
+        throw Error("The panel must not log.");
+      },
+    },
+  });
+  const target = new Element();
+  const calls = [];
+  const actions = {
+    create: async () => {
+      calls.push(["create"]);
+    },
+    join: async (value) => {
+      calls.push(["join", value]);
+    },
+    leave: async () => {
+      calls.push(["leave"]);
+    },
+    end: async () => {
+      calls.push(["end"]);
+    },
+    invite: () => null,
+    copy: async (value) => {
+      calls.push(["copy", value]);
+    },
+    changed: () => {
+      calls.push(["changed"]);
+    },
+  };
+  return {
+    ...exports,
+    target,
+    calls,
+    actions,
+    document,
+    paint(state = idle(), available = true) {
+      return exports.paintCoopPanel(target, state, actions, available);
+    },
+    node(id) {
+      return flatten(target).find((node) => node.id === id);
+    },
+    resetWrites() {
+      writes = 0;
+    },
+    writes() {
+      return writes;
+    },
+  };
+}
+function flatten(node) {
+  return [node, ...node.children.flatMap(flatten)];
+}
+function visibleText(node) {
+  return node.hidden
+    ? ""
+    : node._text + node.children.map(visibleText).join(" ");
+}
+function idle(overrides = {}) {
+  return {
+    phase: "idle",
+    role: null,
+    members: 0,
+    transport_ready: 0,
+    admitted: 0,
+    reason: null,
+    message: "",
+    invite_available: false,
+    progression: false,
+    ...overrides,
+  };
+}
+function deferred() {
+  let resolve, reject;
+  const promise = new Promise((accept, fail) => {
+    resolve = accept;
+    reject = fail;
+  });
+  return { promise, resolve, reject };
+}
+const settle = async () => {
+  await Promise.resolve();
+  await Promise.resolve();
+};
+const code = "#" + "A3".repeat(136); // Deliberately longer than the native 256-character window.
+
+test("opaque envelope accepts exact transport bounds without truncating long codes", () => {
+  const f = fixture();
+  assert.equal(f.joinCode("  " + code + "  "), code);
+  assert.equal(f.joinCode("ab".repeat(32)), "ab".repeat(32));
+  const maximum = "#" + "aB".repeat(512);
+  assert.equal(f.joinCode(maximum + " ".repeat(75)), maximum);
+  assert.equal(f.joinCode(maximum + " ".repeat(76)), null);
+  for (const invalid of [
+    "",
+    "ab".repeat(31),
+    "a".repeat(65),
+    "a".repeat(1026),
+    "##" + code,
+    "＃" + code,
+    code + "z",
+    "a b".repeat(32),
+  ])
+    assert.equal(f.joinCode(invalid), null);
+});
+
+test("default unavailable dock state cannot start sessions and exposes semantic input hooks", () => {
+  const f = fixture();
+  f.paintCoopPanel(f.target, idle(), f.actions);
+  assert.equal(f.node("coop-create").disabled, true);
+  assert.equal(f.node("coop-join-input").disabled, true);
+  f.node("coop-create").click();
+  assert.equal(f.calls.length, 0);
+  assert.match(visibleText(f.target), /Return to Haven/);
+  const input = f.node("coop-join-input");
+  assert.equal(input.maxLength, 1100);
+  assert.equal(input.dataset.pixelKind, "input");
+  assert.equal(input.getAttribute("aria-label"), "Invitation code to join");
+  assert.equal(input.autocomplete, "off");
+  assert.equal(input.spellcheck, false);
+  assert.equal(f.node("coop-invite-output").readOnly, true);
+  assert.equal(f.node("coop-invite-output").dataset.pixelKind, "input");
+});
+
+test("join forwards the full bounded code once, including Enter composition guard", async () => {
+  const f = fixture();
+  const waiting = deferred();
+  f.actions.join = (value) => {
+    f.calls.push(["join", value]);
+    return waiting.promise;
+  };
+  f.paint();
+  const input = f.node("coop-join-input");
+  input.value = " " + code + " ";
+  input.dispatch("input");
+  assert.equal(f.node("coop-join").disabled, false);
+  input.dispatch("keydown", { key: "Enter", isComposing: true });
+  assert.equal(f.calls.filter(([kind]) => kind === "join").length, 0);
+  assert.equal(
+    input.dispatch("keydown", { key: "Enter", isComposing: false }).prevented,
+    true,
+  );
+  f.node("coop-join").click();
+  assert.deepEqual(
+    f.calls.filter(([kind]) => kind === "join"),
+    [["join", code]],
+  );
+  waiting.resolve();
+  await settle();
+  assert.match(visibleText(f.target), /CO-OP AT HAVEN/);
+  assert.doesNotMatch(visibleText(f.target), /CONNECTED/);
+});
+
+test("create invokes inside the real click and promise success cannot invent hosting", async () => {
+  const f = fixture();
+  f.paint();
+  f.node("coop-create").click();
+  assert.equal(f.calls[0][0], "changed");
+  assert.equal(f.calls.filter(([kind]) => kind === "create").length, 1);
+  f.node("coop-create").click();
+  await settle();
+  assert.equal(f.calls.filter(([kind]) => kind === "create").length, 1);
+  assert.match(visibleText(f.target), /CO-OP AT HAVEN/);
+  assert.doesNotMatch(visibleText(f.target), /HOSTING|CONNECTED/);
+});
+
+test("only controller phases declare readiness, admission and coherent connection", () => {
+  const f = fixture();
+  for (const [phase, heading] of [
+    ["creating", "CREATING INVITATION"],
+    ["joining", "JOINING SESSION"],
+    ["admitting", "WAITING FOR ADMISSION"],
+    ["loading", "LOADING SHARED WORLD"],
+    ["connected", "CONNECTED"],
+    ["hosting", "HOSTING"],
+    ["ended", "SESSION ENDED"],
+  ]) {
+    f.paint(
+      idle({
+        phase,
+        role: phase === "hosting" ? "host" : "guest",
+        members: 8,
+        transport_ready: 7,
+        admitted: 7,
+      }),
+    );
+    assert.match(visibleText(f.target), new RegExp(heading));
+    assert.match(visibleText(f.target), /8 \/ 8 PILOTS/);
+    if (phase !== "connected")
+      assert.doesNotMatch(visibleText(f.target), /CONNECTED/);
+  }
+});
+
+test("cancel supersedes a pending start and ignores its late rejection", async () => {
+  const f = fixture();
+  const waiting = deferred();
+  f.actions.create = () => {
+    f.paint(idle({ phase: "creating", role: "host", members: 1 }));
+    return waiting.promise;
+  };
+  f.actions.leave = async () => {
+    f.calls.push(["leave"]);
+    f.paint(idle({ phase: "ended" }));
+  };
+  f.paint();
+  f.node("coop-create").click();
+  assert.equal(f.node("coop-leave").textContent, "CANCEL");
+  assert.equal(f.node("coop-leave").disabled, false);
+  f.node("coop-leave").click();
+  waiting.reject(Error("opaque-network-payload"));
+  await settle();
+  assert.equal(f.calls.filter(([kind]) => kind === "leave").length, 1);
+  assert.match(visibleText(f.target), /SESSION ENDED/);
+  assert.doesNotMatch(visibleText(f.target), /did not complete|opaque-network/);
+});
+
+test("guest cannot end and repeated exit clicks cannot invoke twice", async () => {
+  const f = fixture();
+  const waiting = deferred();
+  f.actions.leave = () => {
+    f.calls.push(["leave"]);
+    return waiting.promise;
+  };
+  f.paint(idle({ phase: "connected", role: "guest", members: 2 }));
+  assert.equal(f.node("coop-end").hidden, true);
+  f.node("coop-end").click();
+  f.node("coop-leave").click();
+  f.node("coop-leave").click();
+  assert.deepEqual(
+    f.calls.filter(([kind]) => kind === "leave" || kind === "end"),
+    [["leave"]],
+  );
+  waiting.resolve();
+  await settle();
+});
+
+test("invitation is read only for an actual copyable host state and copied explicitly", async () => {
+  const f = fixture();
+  let reads = 0;
+  f.actions.invite = () => {
+    reads++;
+    return code;
+  };
+  f.paint(idle({ phase: "admitting", role: "guest", invite_available: true }));
+  assert.equal(reads, 0);
+  f.paint(
+    idle({
+      phase: "hosting",
+      role: "host",
+      members: 1,
+      invite_available: false,
+    }),
+  );
+  assert.equal(reads, 0);
+  f.paint(
+    idle({
+      phase: "hosting",
+      role: "host",
+      members: 1,
+      invite_available: true,
+    }),
+  );
+  assert.equal(f.node("coop-invite-output").value, code);
+  assert.equal(f.calls.filter(([kind]) => kind === "copy").length, 0);
+  for (const node of flatten(f.target)) {
+    assert.equal(JSON.stringify(node.attributes).includes(code), false);
+    assert.equal(JSON.stringify(node.dataset).includes(code), false);
+  }
+  assert.equal(visibleText(f.target).includes(code), false);
+  f.node("coop-copy").click();
+  assert.deepEqual(
+    f.calls.filter(([kind]) => kind === "copy"),
+    [["copy", code]],
+  );
+  await settle();
+  assert.match(visibleText(f.target), /Invitation copied/);
+});
+
+test("clipboard rejection keeps full manual copy and never displays thrown capability", async () => {
+  const f = fixture();
+  f.actions.invite = () => code;
+  f.actions.copy = async () => {
+    throw Error(code);
+  };
+  f.paint(
+    idle({
+      phase: "hosting",
+      role: "host",
+      members: 1,
+      invite_available: true,
+    }),
+  );
+  f.node("coop-copy").click();
+  await settle();
+  const output = f.node("coop-invite-output");
+  assert.equal(f.document.activeElement, output);
+  assert.equal(output.selected, true);
+  assert.equal(output.selectionEnd, code.length);
+  assert.match(visibleText(f.target), /Copy unavailable/);
+  assert.equal(visibleText(f.target).includes(code), false);
+});
+
+test("unknown reasons and controller messages cannot leak secret or raw transport errors", async () => {
+  const f = fixture();
+  f.paint(
+    idle({ phase: "ended", reason: code, message: "Network Error " + code }),
+  );
+  assert.match(visibleText(f.target), /Connection stopped/);
+  assert.equal(visibleText(f.target).includes(code), false);
+  f.paint(idle({ reason: "session_full" }));
+  assert.match(visibleText(f.target), /The session is full/);
+  f.actions.create = () => {
+    throw Error(code);
+  };
+  f.node("coop-create").click();
+  await settle();
+  assert.match(visibleText(f.target), /The action did not complete/);
+  assert.equal(visibleText(f.target).includes(code), false);
+});
+
+test("unchanged repaint preserves input node, selection, focus, scroll and performs no writes", () => {
+  const f = fixture();
+  f.paint();
+  const input = f.node("coop-join-input");
+  input.value = code;
+  input.dispatch("input");
+  input.focus();
+  input.selectionStart = 28;
+  input.selectionEnd = 31;
+  f.target.scrollTop = 73;
+  f.resetWrites();
+  assert.equal(f.paint(), false);
+  assert.equal(f.writes(), 0);
+  assert.equal(f.node("coop-join-input"), input);
+  assert.equal(f.document.activeElement, input);
+  assert.equal(input.selectionStart, 28);
+  assert.equal(input.selectionEnd, 31);
+  assert.equal(f.target.scrollTop, 73);
+  assert.equal(f.paint(idle({ members: 1 })), true);
+  assert.equal(f.node("coop-join-input"), input);
+  assert.equal(input.value, code);
+});
+
+test("ended session and teardown clear fields and isolate late completion from a new view", async () => {
+  const f = fixture();
+  const waiting = deferred();
+  f.actions.invite = () => code;
+  f.actions.copy = () => waiting.promise;
+  f.paint(
+    idle({
+      phase: "hosting",
+      role: "host",
+      members: 1,
+      invite_available: true,
+    }),
+  );
+  const oldOutput = f.node("coop-invite-output");
+  const oldInput = f.node("coop-join-input");
+  oldInput.value = code;
+  f.node("coop-copy").click();
+  f.disposeCoopPanel(f.target);
+  assert.equal(oldInput.value, "");
+  assert.equal(oldOutput.value, "");
+  assert.equal(f.target.children.length, 0);
+  f.paint();
+  waiting.resolve();
+  await settle();
+  assert.doesNotMatch(visibleText(f.target), /Invitation copied/);
+  assert.equal(f.node("coop-join-input").value, "");
+  f.node("coop-join-input").value = code;
+  f.paint(idle({ phase: "ended" }));
+  assert.equal(f.node("coop-join-input").value, "");
+  assert.equal(f.node("coop-invite-output").value, "");
+});
+
+test("invalid controller counts or progression fail closed without reading invitations", () => {
+  const f = fixture();
+  let reads = 0;
+  f.actions.invite = () => {
+    reads++;
+    return code;
+  };
+  for (const patch of [
+    { members: 9 },
+    { members: -1 },
+    { admitted: 8 },
+    { transport_ready: 0.5 },
+    { progression: true },
+    { phase: "ready" },
+    { role: "owner" },
+  ]) {
+    f.paint(
+      idle({
+        phase: "hosting",
+        role: "host",
+        invite_available: true,
+        ...patch,
+      }),
+    );
+    assert.match(visibleText(f.target), /SESSION UNAVAILABLE/);
+    for (const id of [
+      "coop-create",
+      "coop-join",
+      "coop-copy",
+      "coop-leave",
+      "coop-end",
+    ])
+      assert.equal(f.node(id).disabled, true);
+  }
+  assert.equal(reads, 0);
+});
+
+test("malformed capability getter remains hidden with no unsafe fallback", () => {
+  const f = fixture();
+  for (const value of ["abc", " " + code, "#" + "a".repeat(1026), null]) {
+    f.actions.invite = () => value;
+    f.paint(idle({ phase: "hosting", role: "host", invite_available: true }));
+    assert.equal(f.node("coop-invite-output").value, "");
+    assert.equal(f.node("coop-copy").disabled, true);
+  }
+  f.actions.invite = () => {
+    throw Error(code);
+  };
+  f.paint(idle({ phase: "hosting", role: "host", invite_available: true }));
+  assert.equal(f.node("coop-invite-output").value, "");
+});
