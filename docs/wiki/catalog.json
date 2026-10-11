@@ -2861,7 +2861,7 @@
         },
         {
           "label": "License",
-          "value": "TYPE-MAIN-SUB-HASH; three initials followed by #HASH"
+          "value": "O female / A male / T neutral, then main + sub initials, #HASH"
         }
       ],
       "sections": [
@@ -2870,7 +2870,8 @@
           "paragraphs": [
             "The browser issues eight cryptographically random bytes as sixteen hexadecimal digits. Main corporation selects its distinct level-one starter hull and one equipped rank-one ability. PAN Pathfinder carries the passive slot; RENKO Lancer the offensive slot; HUGO Bulwark the defensive slot.",
             "Main corporation themes hair, the starter hull, its jet and home accents. The independent sub-manufacturer colors horns. Existing anonymous profiles retain their original Scout, progress and loadouts; migration does not issue a license or duplicate a starter item.",
-            "Type-specific player portrait silhouettes are a separate authored-art task; the current detailed guide is DORA. Recolored guide art is not presented as a male or neutral character."
+            "Type-specific player portrait silhouettes are a separate authored-art task; the current detailed guide is DORA. Recolored guide art is not presented as a male or neutral character.",
+            "Appearance follows droid type: feminine DORA with long hair, masculine DORO with short spiky hair, neutral TALO with a crew cut. Callsigns use O/A/T then main and sub-manufacturer initials; the confirmed guide is ORP#1337, RENKO main with PAN horns."
           ]
         }
       ],
