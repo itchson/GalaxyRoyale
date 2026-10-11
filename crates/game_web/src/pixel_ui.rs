@@ -1090,8 +1090,8 @@ pub(crate) fn draw_flight_status_animated(
 const VITALS_SIZE: [f32; 2] = [44.0, 12.0];
 const VITALS_CLEARANCE: f32 = 5.0;
 const SHIELD_CHUNK_CAPACITY: f32 = 10.0;
-// Current valid profiles top out at 172 HP. Eighteen marks bound extraction work.
-const SHIELD_MAX_CHUNKS: usize = 18;
+// Current valid profiles top out at 182 HP. Nineteen marks bound extraction work.
+const SHIELD_MAX_CHUNKS: usize = 19;
 const HULL_VITAL_MARKS: usize = 11;
 static VITAL_SEGMENT: LazyLock<PixelBody> =
     LazyLock::new(|| PixelBody::from_ascii(&[".#.", "###", "###"], &[('#', WHITE)]));

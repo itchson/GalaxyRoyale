@@ -118,6 +118,36 @@ fn final_capacity_and_charge_slices_represent_actual_hit_points_separately() {
 }
 
 #[test]
+fn current_sovereign_182_hp_has_nineteen_marks_with_true_two_hp_final_capacity() {
+    let full = draw(182.0, 1.0, 1.0);
+    let one_hp_lost = draw(182.0, 181.0 / 182.0, 1.0);
+    let complete_nineteen = draw(190.0, 1.0, 1.0);
+    let scale = 11.0 / 19.0;
+    let background = |f: &FrameBuilder| {
+        packet(f)
+            .into_iter()
+            .skip(154)
+            .filter(|cell| cell.0 >> 24 == 0x90)
+            .collect::<Vec<_>>()
+    };
+    // Eighteen 7-cell 10HP shapes plus two cells trimmed to 20% width. Geometry
+    // is measured from the actual packet, not inferred from a rounded count.
+    assert_eq!(background(&full).len(), 18 * 7 + 2);
+    assert_eq!(full.frame().pixel_count, 154 + (18 * 7 + 2) * 2);
+    assert_eq!(background(&full), background(&one_hp_lost));
+    assert!(
+        (shield_active_right(&complete_nineteen) - shield_active_right(&full) - 2.4 * scale).abs()
+            < 0.0001
+    );
+    assert!(
+        (shield_active_right(&full) - shield_active_right(&one_hp_lost) - 0.3 * scale).abs()
+            < 0.0001
+    );
+    assert_eq!(&packet(&full)[..154], &packet(&draw(0.0, 1.0, 1.0)));
+    assert!(packet(&one_hp_lost).iter().any(|cell| cell.0 >> 24 == 0xa0));
+}
+
+#[test]
 fn valid_capacity_extremes_have_clear_gaps_and_bounded_nested_affine_corners() {
     let parent = Transform {
         position: Vec2::new(99.25, -33.5),
@@ -134,7 +164,9 @@ fn valid_capacity_extremes_have_clear_gaps_and_bounded_nested_affine_corners() {
         .affine(),
     );
     let rect = [7.5, 13.25, 44.0, 12.0];
-    for capacity in [30.0, 50.0, 58.0, 120.0, 132.0, 172.0, 180.0] {
+    for capacity in [
+        30.0, 50.0, 58.0, 120.0, 132.0, 142.0, 172.0, 180.0, 182.0, 190.0,
+    ] {
         let count = (capacity / 10.0_f32).ceil() as usize;
         let scale = (11.0 / count as f32).min(1.0);
         let mut frame = FrameBuilder::new();
@@ -149,7 +181,7 @@ fn valid_capacity_extremes_have_clear_gaps_and_bounded_nested_affine_corners() {
             [MINT, CYAN],
             capacity,
         );
-        assert!(frame.frame().pixel_count <= 406);
+        assert!(frame.frame().pixel_count <= 420);
         assert_eq!(frame.frame().batches.len(), 1);
         for (_, corners) in packet(&frame) {
             for p in corners {
@@ -200,11 +232,11 @@ fn invalid_or_zero_capacity_is_absent_and_above_bound_work_is_fixed() {
     }
     assert_eq!(
         packet(&draw(f32::MAX, 1.0, 1.0)),
-        packet(&draw(180.0, 1.0, 1.0))
+        packet(&draw(190.0, 1.0, 1.0))
     );
     for fill in [0.0, 0.001, 0.599, 0.601, 1.0, f32::NAN] {
-        let frame = draw(172.0, fill, 1.0);
-        assert!(frame.frame().pixel_count <= 412);
+        let frame = draw(182.0, fill, 1.0);
+        assert!(frame.frame().pixel_count <= 426);
         assert_eq!(frame.frame().batches.len(), 1);
         assert!(
             packet(&frame)
@@ -273,7 +305,7 @@ fn shorter_and_compressed_shield_tracks_never_overlap_actual_hull_cells() {
         (lo, hi)
     };
     for capacity in [
-        30.0, 0.01, 10.0, 20.0, 50.0, 58.0, 110.0, 120.0, 132.0, 172.0, 180.0,
+        30.0, 0.01, 10.0, 20.0, 50.0, 58.0, 110.0, 120.0, 132.0, 142.0, 172.0, 180.0, 182.0, 190.0,
     ] {
         let frame = draw(capacity, 1.0, 1.0);
         let cells = packet(&frame);
