@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "observed_at_utc": "2026-10-11T07:15:09Z",
+  "scope": "Actual authoring/import Python checks; no native renderer, browser, listening or physical-device acceptance.",
+  "environment": {
+    "python": "3.12.14",
+    "pillow": "12.3.0",
+    "executable": "C:/Users/mitch/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe"
+  },
+  "commands": [
+    {
+      "command": "python scripts/asset-kikai-detail.py",
+      "exit_code": 0
+    },
+    {
+      "command": "python scripts/asset-kikai-detail-tests.py",
+      "exit_code": 0,
+      "tests": 12,
+      "failures": 0,
+      "duration_seconds": 14.522
+    }
+  ],
+  "runtime_atlas": {
+    "path": "assets/ui/kikai/detail/atlas.json",
+    "sha256": "c0c0024297618b36076e091a802cb621c4dd3fd5c24a904f31b670a6226ca809",
+    "bytes": 3252935,
+    "encoding": "UTF-8 compact JSON separators(',',':') with final LF",
+    "profiles": {
+      "dora": 34594,
+      "doro": 28524,
+      "talo": 24262
+    }
+  },
+  "generation_metadata": {
+    "path": "assets/concepts/kikai/detail/generation.json",
+    "sha256": "e2d206e5a6d5cfafe4dae23d98368ba4e19141d7b9809d03e56aae678c9bf593"
+  },
+  "pending": [
+    "Exact final native adapter integration",
+    "Normal WebGPU/WebGL2 rendering and physical raster fidelity",
+    "Compact actual UI readability and blink/speech playback",
+    "Physical-device performance and human playthrough"
+  ]
+}

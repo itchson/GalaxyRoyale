@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "scope": "Authored PNG/packed-cell software previews; not native/GPU/browser acceptance",
+  "generation_metadata_sha256": "e2d206e5a6d5cfafe4dae23d98368ba4e19141d7b9809d03e56aae678c9bf593",
+  "profiles": {
+    "dora": {
+      "palette_entries": 63,
+      "composed_occupied_cells": 34594,
+      "body_cells": 32764,
+      "eye_cells": 1416,
+      "mouth_cells": 414,
+      "role_cells": {
+        "hair_cells": 14556,
+        "horn_cells": 1139,
+        "signal_cells": 740
+      },
+      "transforms": 3,
+      "max_portrait_submissions": 34594
+    },
+    "doro": {
+      "palette_entries": 61,
+      "composed_occupied_cells": 28524,
+      "body_cells": 26558,
+      "eye_cells": 1462,
+      "mouth_cells": 504,
+      "role_cells": {
+        "hair_cells": 6015,
+        "horn_cells": 1219,
+        "signal_cells": 622
+      },
+      "transforms": 3,
+      "max_portrait_submissions": 28524
+    },
+    "talo": {
+      "palette_entries": 60,
+      "composed_occupied_cells": 24262,
+      "body_cells": 22518,
+      "eye_cells": 1240,
+      "mouth_cells": 504,
+      "role_cells": {
+        "hair_cells": 3814,
+        "horn_cells": 1567,
+        "signal_cells": 664
+      },
+      "transforms": 3,
+      "max_portrait_submissions": 24262
+    }
+  },
+  "shared_runtime_ui_budget": 60000,
+  "admission": "The host admits each whole portrait atomically against remaining pixel and work budgets."
+}

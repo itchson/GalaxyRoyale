@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "tool": "image_gen.imagegen",
+  "mode": "built-in edit",
+  "model": null,
+  "model_note": "The built-in tool did not supply a model identifier.",
+  "session_date": "2026-10-11",
+  "purpose": "Correct DORO/TALO flat mechanical torsos while retaining their identity and the approved DORA pixel-detail style.",
+  "portraits": {
+    "doro": {
+      "input": "assets/concepts/kikai/profiles/doro-reference.png",
+      "input_sha256": "5b31880502297c0e0dc5174779042b14db3ce8cf17f2ac1bbb1aec88dbd45d64",
+      "path": "assets/concepts/kikai/detail/doro-reference.png",
+      "sha256": "bc2528830a21bee7d20548587cc3099580d94524c480ebde232a0a6056ebfb73",
+      "prompt": "Use case: precise-object-edit. Asset type: Galaxy Royale KIKAI DORO licensed-character high-detail pixel-quad portrait reference. Edit target image: current DORO reference, an adult masculine technological person with short spiky emerald PAN hair, two tall faceted red RENKO crystal horns, golden iris eyes, pale ivory shoulder armor and exposed black mechanical neck. Preserve the current identity, face angle, hair silhouette, horn size/location, color roles and upper facial proportions. Change the torso armor to a visibly FLAT male mechanical chest: a broad flat graphite armored sternum plate with straight planar pectoral plate seams, flat beveled hard-surface geometry and a few restrained machined vents. ABSOLUTELY no breasts, breast cups, rounded bust lobes, under-breast arcs, plunging curvy chest seam, or feminine torso. Keep shoulder domes as shoulder armor only, separated from the flat chest. Add deliberate fine pixel clusters/material detail suitable for conversion to a192x256 native sprite: crisp square stepped pixel edges, controlled ivory/graphite/emerald/red/gold palette, sharp pixel shading, no blurry gradients or painterly/airbrushed surface. Composition: one centered head-and-upper-torso portrait, full horns and armor in frame, canvas portrait3:4, genuine transparent background, high-resolution raster source at least1080px tall, no text, no watermark, no shadow backdrop. Retain warm capable expression. The reference is a mechanical character, not a photograph. This is a torso correction plus finer authored pixel detail, not a new character."
+    },
+    "talo": {
+      "input": "assets/concepts/kikai/profiles/talo-reference.png",
+      "input_sha256": "ee4081bc98b3748efa12f1e0070b379cd3be476b2d010ad0945f1ff8eaa41964",
+      "path": "assets/concepts/kikai/detail/talo-reference.png",
+      "sha256": "dd8c5db88da03861ecef13dce28bda1f04ddc77d5b2faaba24d5acd6c349938a",
+      "prompt": "Use case: precise-object-edit. Asset type: Galaxy Royale KIKAI TALO licensed-character high-detail pixel-quad portrait reference. Edit target image: current TALO reference, a neutral technological person with compact green PAN crew-cut hair, tall faceted red RENKO crystal horns, golden iris eyes, pale ivory shoulder armor and exposed black mechanical neck. Preserve the character's neutral identity, compact crew cut, face proportions, horn size/location, clear color roles and pose. Change the torso armor to a visibly FLAT neutral mechanical upper body: one broad flat graphite chest slab with a flush straight sternum strip, thin rectilinear machined seams, restrained tiny vents and bolts. No rounded chest projections, no breasts or breast cups, no paired curving bust highlights, no cleavage, no under-breast curves, no feminine torso. Shoulder armor domes stay visibly separate from this flat chest plane. Keep mechanical fashion modest and practical, not sexualized. Fine detailed high-resolution pixel-art shading: intentionally placed tiny square stepped clusters and thin hard edges, crisp metal bevels, controlled ivory/graphite/emerald/red/gold palette; no blurry gradients, no painterly or antialiased glossy surfaces. One centered head-and-upper-torso, full horns and shoulders in frame, portrait3:4 transparent canvas, at least1080px tall raster source, no text, no watermark, no background fill or shadow. Keep a calm friendly neutral expression. The generated character must remain distinct from long-haired DORA and short-spiky DORO. This is a precise flat-torso correction with fine detail, not a different character."
+    }
+  },
+  "dora": {
+    "path": "assets/concepts/kikai/dora-reference-expression-sheet.png",
+    "sha256": "b558e6572e9d065319ff7957fcdc7faadb1bc38f6ae7cdc39d3d826cc5f83742",
+    "mode": "Existing approved full-resolution source, first portrait crop, no new image generation.",
+    "preserve": "Original bitmap remains unchanged."
+  },
+  "license_note": "Recorded tool/source provenance is not an independent licensing guarantee."
+}

@@ -1,0 +1,126 @@
+{
+  "type": "DORA",
+  "main_corporation": "PAN",
+  "sub_corporation": "RENKO",
+  "source_path": "assets/concepts/kikai/dora-reference-expression-sheet.png",
+  "source_sha256": "b558e6572e9d065319ff7957fcdc7faadb1bc38f6ae7cdc39d3d826cc5f83742",
+  "pillow": "12.3.0",
+  "generation": {
+    "path": "assets/concepts/kikai/dora-reference-expression-sheet.png",
+    "sha256": "b558e6572e9d065319ff7957fcdc7faadb1bc38f6ae7cdc39d3d826cc5f83742",
+    "mode": "Existing approved full-resolution source, first portrait crop, no new image generation.",
+    "preserve": "Original bitmap remains unchanged."
+  },
+  "conversion": {
+    "source_dimensions": [
+      1881,
+      836
+    ],
+    "crop": [
+      0,
+      0,
+      627,
+      836
+    ],
+    "alpha_threshold": 128,
+    "source_nonbinary_alpha_cells": 384237,
+    "source_hard_occupied_cells": 360888,
+    "tight_bbox": [
+      0,
+      9,
+      620,
+      836
+    ],
+    "output_dimensions": [
+      192,
+      256
+    ],
+    "fitted_dimensions": [
+      192,
+      256
+    ],
+    "center_offset": [
+      0,
+      0
+    ],
+    "nearest_resize": true,
+    "aspect_policy": "uniform fit; integer output rounding only",
+    "occupied_after_resize": 34594,
+    "quantize_colors": 55,
+    "dither": false,
+    "palette_eye_region_extra_weight": 20,
+    "source_gold_mask_cells": 98,
+    "authored_gold_tones": 4,
+    "changed_occupied_color_cells": 34486,
+    "component_policy": "all; no connected-component removal",
+    "source_is_old_96cell_pack": false
+  },
+  "guide": "APR-1337 / DORA-PAN-RENKO-1337",
+  "manual_authoring": {
+    "facial_patches": {
+      "eyes": [
+        [
+          52,
+          103,
+          82,
+          126
+        ],
+        [
+          96,
+          99,
+          129,
+          121
+        ]
+      ],
+      "iris": [
+        [
+          66,
+          116
+        ],
+        [
+          111,
+          112
+        ]
+      ],
+      "mouth": [
+        80,
+        137,
+        103,
+        155
+      ],
+      "lip": [
+        91,
+        147
+      ],
+      "hair_top": 96,
+      "hair_sides": [
+        60,
+        130,
+        226
+      ],
+      "fringe": [
+        72,
+        101,
+        115
+      ]
+    },
+    "fine_feature_line_width": 1,
+    "neutral_reference_iris_retained": true,
+    "expression_states": [
+      "neutral",
+      "focused",
+      "concerned",
+      "pleased",
+      "blink"
+    ],
+    "mouth_states": [
+      "rest",
+      "small",
+      "open",
+      "smile"
+    ],
+    "role_selection": "Reviewed head-only green hair/red crystals; no neck or eyebrow recolor"
+  },
+  "exact_import": "asset-pack imports authored binary-alpha PNGs with provided palette; no resize or removed components",
+  "runtime_boundary": "Host selects cached layers and corporate colors; metadata alone does not animate"
+}

@@ -1,0 +1,127 @@
+{
+  "type": "TALO",
+  "main_corporation": "PAN",
+  "sub_corporation": "RENKO",
+  "source_path": "assets/concepts/kikai/detail/talo-reference.png",
+  "source_sha256": "dd8c5db88da03861ecef13dce28bda1f04ddc77d5b2faaba24d5acd6c349938a",
+  "pillow": "12.3.0",
+  "generation": {
+    "input": "assets/concepts/kikai/profiles/talo-reference.png",
+    "input_sha256": "ee4081bc98b3748efa12f1e0070b379cd3be476b2d010ad0945f1ff8eaa41964",
+    "path": "assets/concepts/kikai/detail/talo-reference.png",
+    "sha256": "dd8c5db88da03861ecef13dce28bda1f04ddc77d5b2faaba24d5acd6c349938a",
+    "prompt": "Use case: precise-object-edit. Asset type: Galaxy Royale KIKAI TALO licensed-character high-detail pixel-quad portrait reference. Edit target image: current TALO reference, a neutral technological person with compact green PAN crew-cut hair, tall faceted red RENKO crystal horns, golden iris eyes, pale ivory shoulder armor and exposed black mechanical neck. Preserve the character's neutral identity, compact crew cut, face proportions, horn size/location, clear color roles and pose. Change the torso armor to a visibly FLAT neutral mechanical upper body: one broad flat graphite chest slab with a flush straight sternum strip, thin rectilinear machined seams, restrained tiny vents and bolts. No rounded chest projections, no breasts or breast cups, no paired curving bust highlights, no cleavage, no under-breast curves, no feminine torso. Shoulder armor domes stay visibly separate from this flat chest plane. Keep mechanical fashion modest and practical, not sexualized. Fine detailed high-resolution pixel-art shading: intentionally placed tiny square stepped clusters and thin hard edges, crisp metal bevels, controlled ivory/graphite/emerald/red/gold palette; no blurry gradients, no painterly or antialiased glossy surfaces. One centered head-and-upper-torso, full horns and shoulders in frame, portrait3:4 transparent canvas, at least1080px tall raster source, no text, no watermark, no background fill or shadow. Keep a calm friendly neutral expression. The generated character must remain distinct from long-haired DORA and short-spiky DORO. This is a precise flat-torso correction with fine detail, not a different character."
+  },
+  "conversion": {
+    "source_dimensions": [
+      1086,
+      1448
+    ],
+    "crop": [
+      0,
+      0,
+      1086,
+      1448
+    ],
+    "alpha_threshold": 128,
+    "source_nonbinary_alpha_cells": 786054,
+    "source_hard_occupied_cells": 750003,
+    "tight_bbox": [
+      9,
+      51,
+      1077,
+      1434
+    ],
+    "output_dimensions": [
+      192,
+      256
+    ],
+    "fitted_dimensions": [
+      192,
+      249
+    ],
+    "center_offset": [
+      0,
+      3
+    ],
+    "nearest_resize": true,
+    "aspect_policy": "uniform fit; integer output rounding only",
+    "occupied_after_resize": 24262,
+    "quantize_colors": 55,
+    "dither": false,
+    "palette_eye_region_extra_weight": 20,
+    "source_gold_mask_cells": 84,
+    "authored_gold_tones": 4,
+    "changed_occupied_color_cells": 23361,
+    "component_policy": "all; no connected-component removal",
+    "source_is_old_96cell_pack": false
+  },
+  "guide": null,
+  "manual_authoring": {
+    "facial_patches": {
+      "eyes": [
+        [
+          57,
+          104,
+          86,
+          124
+        ],
+        [
+          100,
+          101,
+          133,
+          121
+        ]
+      ],
+      "iris": [
+        [
+          73,
+          113
+        ],
+        [
+          115,
+          110
+        ]
+      ],
+      "mouth": [
+        79,
+        134,
+        107,
+        152
+      ],
+      "lip": [
+        94,
+        141
+      ],
+      "hair_top": 90,
+      "hair_sides": [
+        59,
+        132,
+        124
+      ],
+      "fringe": [
+        76,
+        98,
+        91
+      ]
+    },
+    "fine_feature_line_width": 1,
+    "neutral_reference_iris_retained": true,
+    "expression_states": [
+      "neutral",
+      "focused",
+      "concerned",
+      "pleased",
+      "blink"
+    ],
+    "mouth_states": [
+      "rest",
+      "small",
+      "open",
+      "smile"
+    ],
+    "role_selection": "Reviewed head-only green hair/red crystals; no neck or eyebrow recolor"
+  },
+  "exact_import": "asset-pack imports authored binary-alpha PNGs with provided palette; no resize or removed components",
+  "runtime_boundary": "Host selects cached layers and corporate colors; metadata alone does not animate"
+}
