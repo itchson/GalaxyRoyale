@@ -34,6 +34,7 @@ mod live_overlay_tests;
 #[cfg(test)]
 mod particle_tests;
 mod shield_progression;
+pub use shield_progression::{RaichoAffinityHud, RaichoAffinitySource};
 mod ship_progression;
 #[cfg(test)]
 mod ship_progression_tests;
@@ -199,6 +200,7 @@ pub struct ShipStatsHud {
     pub hull_regen: f32,
     pub shield_regen: f32,
     pub shield_recharge_unlocked: bool,
+    pub affinity: Option<RaichoAffinityHud>,
 }
 
 #[derive(Clone, Debug, Serialize)]
@@ -3335,6 +3337,7 @@ impl Game {
                 hull_regen: stats.regeneration,
                 shield_regen: stats.shield_regeneration,
                 shield_recharge_unlocked: stats.shield_regeneration > 0.0,
+                affinity: shield_progression::hud(&self.profile),
             },
             audio: self.audio_hud(),
             navigation: self.navigation_hud(),

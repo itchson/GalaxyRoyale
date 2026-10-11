@@ -151,14 +151,15 @@ fn live_ship_stats_match_effective_level_caps_actual_velocity_and_primary_projec
                 * (1.0 + 0.03 * campaign::level(xp).min(12).saturating_sub(1) as f32),
         );
         let serialized = serde_json::to_value(&hud.ship_stats).unwrap();
-        assert_eq!(serialized.as_object().unwrap().len(), 8);
+        assert_eq!(serialized.as_object().unwrap().len(), 9);
         assert_eq!(serialized["shield_recharge_unlocked"], true);
+        assert_eq!(serialized["affinity"], serde_json::Value::Null);
         assert!(
             serialized
                 .as_object()
                 .unwrap()
                 .iter()
-                .filter(|(key, _)| key.as_str() != "shield_recharge_unlocked")
+                .filter(|(key, _)| !matches!(key.as_str(), "shield_recharge_unlocked" | "affinity"))
                 .map(|(_, value)| value)
                 .all(|v| v.as_f64().is_some_and(f64::is_finite))
         );
