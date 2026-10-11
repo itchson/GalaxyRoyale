@@ -1785,6 +1785,16 @@
             "Each RAICHO owns XP, six hardware ranks and one equipped automatic ability in each offense/defense/passive category. Shared crafted inventory does not silently grant effects to other RAICHO. Stronger owned ranks are capped by the selected normal RAICHO level.",
             "Freshly crafted hulls and the new Sovereign award start at XP 0 / LV 1. Sovereign has an explicit enhanced chassis and three rank-five royal bundles while equipped; its reward exception does not fabricate XP or overwrite the ordinary boss counters."
           ]
+        },
+        {
+          "title": "Factory starter roles",
+          "paragraphs": [
+            "A fresh licensed factory RAICHO starts at LV 1 with one owned and equipped rank-one corporate ability. Its chassis has no innate shield; capacity comes from equipped defense and purchased shield hardware. Anonymous legacy Scout and later chassis retain their innate 30 shield HP.",
+            "PAN HIKARI equips Flux Drive in the passive slot. Its rank-one +4% speed and acceleration multiplies the active PAN +10% drive affinity. Fresh top speed is 114.4 world units/s and acceleration is 297.44 world units/s²; those are derived limits, not current velocity.",
+            "RENKO HIBANA equips Pulse Lens in the offensive slot. Rank one adds +10% primary damage, multiplied by the active RENKO +10% weapon affinity: fresh primary damage is 14.52. Every fifth actual primary attempts a separate 21.78-damage bolt subject to the shared projectile cap.",
+            "HUGO MAMORI equips Guard Coil in the defensive slot. Rank one supplies 30 shield HP in three 10-HP chunks and enables the active HUGO 10% incoming damage reduction. It has no automatic recharge at rank one. Guard Coil effective rank two supplies 38 HP and unlocks recharge after four seconds without damage.",
+            "The corporation affinity requires a valid compatible item in its matching slot. Unequipping the factory item removes that item’s effects; an empty matching slot also disables its affinity. Sub-manufacturer and arena sponsor do not supply these bonuses. XP, recipes, existing inventory and saved identity remain separate from the stat derivation."
+          ]
         }
       ],
       "references": [
@@ -1801,6 +1811,11 @@
         {
           "path": "crates/game_core/src/ship_progression.rs",
           "label": "ship_progression.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "crates/game_core/src/shield_progression.rs",
+          "label": "Factory shield and equipped manufacturer affinities",
           "role": "implementation"
         },
         {
@@ -1871,7 +1886,8 @@
           "paragraphs": [
             "Starter and boss abilities fit every owned hull. Champion abilities fit matching family hulls; Scout is family 0 and Sovereign is a wildcard for normal abilities. Royal bundles fit RAICHO 9 only. Crafting acquires inventory without auto-equipping it.",
             "Starter recipes cost three matching points plus two T1 materials. Signature/champion recipes cost ten matching points plus two T1. Shared ability upgrades cost ten matching points plus two materials of the next rank tier. Royal bundles are reward-only, not Forge recipes.",
-            "Catalog: 0 Pulse Lens [Offense]: Primary shots deal +10% damage per effective rank.; 1 Guard Coil [Defense]: Adds 20 shield at rank 1, then +8 per effective rank; rank 2 unlocks recharge after 4s without damage.; 2 Flux Drive [Passive]: Adds +4% speed and acceleration per effective rank.; 3 Pulse Echo [Offense]: Periodically fires an additional piercing fan; rank increases its damage.; 4 Repulsor [Defense]: Taking damage releases a repulsor nova; rank shortens its cooldown.; 5 Ion Wake [Passive]: Fast flight leaves a damaging ion trail; rank increases its damage.; 6 Needle Burst [Offense]: Every fourth primary shot releases a narrow two-shot needle burst.; 7 Broadside [Offense]: Every sixth primary shot fires a pair of side-facing projectiles.; 8 Guided Missile [Offense]: Every fifth primary shot launches a guided missile.; 9 Fork Volley [Offense]: Every third primary shot releases a split-wing fork volley.; 10 Windrunner Wake [Passive]: Fast flight leaves the champion's damaging ion trail.; 11 Impact Nova [Defense]: Taking damage releases a nova with the champion's short cooldown.; 12 Piercing Seeker [Offense]: Every fourth primary shot launches a guided piercing seeker.; 13 Sniper Spear [Offense]: Every sixth primary shot fires a fast projectile that pierces multiple targets.; 14 Royal Prism [Offense]: Sovereign reward: an eight-shot prism burst and fully evolved Pulse Echo.; 15 Royal Aegis [Defense]: Sovereign reward: every eighth primary repairs 4 hull; damage triggers a fully evolved nova.; 16 Royal Wake [Passive]: Sovereign reward: fast flight leaves the fully evolved rank-five ion trail."
+            "Catalog: 0 Pulse Lens [Offense]: Primary shots deal +10% damage per effective rank; every fifth fired shot adds a bolt dealing 150% of primary damage.; 1 Guard Coil [Defense]: Grants 30 shield at rank 1, then +8 per effective rank; rank 2 unlocks recharge after 4s without damage.; 2 Flux Drive [Passive]: Adds +4% speed and acceleration per effective rank.; 3 Pulse Echo [Offense]: Periodically fires an additional piercing fan; rank increases its damage.; 4 Repulsor [Defense]: Taking damage releases a repulsor nova; rank shortens its cooldown.; 5 Ion Wake [Passive]: Fast flight leaves a damaging ion trail; rank increases its damage.; 6 Needle Burst [Offense]: Every fourth primary shot releases a narrow two-shot needle burst.; 7 Broadside [Offense]: Every sixth primary shot fires a pair of side-facing projectiles.; 8 Guided Missile [Offense]: Every fifth primary shot launches a guided missile.; 9 Fork Volley [Offense]: Every third primary shot releases a split-wing fork volley.; 10 Windrunner Wake [Passive]: Fast flight leaves the champion's damaging ion trail.; 11 Impact Nova [Defense]: Taking damage releases a nova with the champion's short cooldown.; 12 Piercing Seeker [Offense]: Every fourth primary shot launches a guided piercing seeker.; 13 Sniper Spear [Offense]: Every sixth primary shot fires a fast projectile that pierces multiple targets.; 14 Royal Prism [Offense]: Sovereign reward: an eight-shot prism burst and fully evolved Pulse Echo.; 15 Royal Aegis [Defense]: Sovereign reward: every eighth primary repairs 4 hull; damage triggers a fully evolved nova.; 16 Royal Wake [Passive]: Sovereign reward: fast flight leaves the fully evolved rank-five ion trail.",
+            "Pulse Lens counts actual admitted primary shots. Every fifth attempts one extra bolt at 150% of current primary damage, moving at 500 world units/s plus 25% of the RAICHO velocity. A full projectile cap refuses the primary without advancing its shot count; a refused fifth-shot bolt is dropped rather than replayed later. Pulse Echo remains a separate boss ability with its own piercing fan cadence."
           ]
         }
       ],
@@ -1879,6 +1895,11 @@
         {
           "path": "crates/game_core/src/abilities.rs",
           "label": "abilities.rs",
+          "role": "implementation"
+        },
+        {
+          "path": "crates/game_core/src/lib.rs",
+          "label": "Actual primary and fifth-shot projectile path",
           "role": "implementation"
         },
         {
@@ -1908,7 +1929,7 @@
             "category": 0,
             "blueprint": "Starter",
             "effect": "PulseLens",
-            "description": "Primary shots deal +10% damage per effective rank."
+            "description": "Primary shots deal +10% damage per effective rank; every fifth fired shot adds a bolt dealing 150% of primary damage."
           },
           {
             "index": 1,
@@ -1917,7 +1938,7 @@
             "category": 1,
             "blueprint": "Starter",
             "effect": "GuardCoil",
-            "description": "Adds 20 shield at rank 1, then +8 per effective rank; rank 2 unlocks recharge after 4s without damage."
+            "description": "Grants 30 shield at rank 1, then +8 per effective rank; rank 2 unlocks recharge after 4s without damage."
           },
           {
             "index": 2,
@@ -2104,7 +2125,7 @@
         {
           "title": "Earned shield recharge and RAICHO affinities",
           "paragraphs": [
-            "Ordinary chassis starts with 30 shield HP: three 10-HP chunks. Factory Guard Coil adds 20 HP but does not recharge at rank 1. Aegis rank 1 or Guard Coil rank 2 unlocks recharge after four seconds without damage; effective rank and RAICHO level improve the rate. Capacity and charge remain separate, including fractional final chunks.",
+            "Licensed factory hull 0 has no innate shield. Equipped Guard Coil grants 30 shield HP at effective rank 1, then eight more per effective rank; HUGO MAMORI therefore starts with exactly three 10-HP chunks. Anonymous legacy Scout and later chassis retain innate 30 HP before hardware or equipped defense. Guard Coil has no recharge at rank 1. Aegis Capacitors rank 1 or Guard Coil rank 2 unlocks recharge after four seconds without damage; effective rank and RAICHO level improve the rate. Capacity and charge remain separate, including fractional final chunks.",
             "One owned compatible ability may occupy each offensive, defensive and passive slot. Haven-only swaps retain displaced inventory. PAN passive grants 10% drive speed and acceleration, RENKO offensive grants 10% derived weapon damage, and HUGO defensive grants 10% incoming damage reduction while the matching valid item is equipped. Collectible RAICHO use their own authored main manufacturer independently of pilot and sponsor."
           ]
         }
@@ -3136,6 +3157,7 @@
           "title": "Canon and behavior",
           "paragraphs": [
             "The browser issues eight cryptographically random bytes as sixteen hexadecimal digits. Main corporation selects its distinct level-one starter hull and one equipped rank-one ability. PAN HIKARI carries the passive slot; RENKO HIBANA the offensive slot; HUGO MAMORI the defensive slot.",
+            "Starter effects come from the equipped item and the active hull manufacturer. PAN Flux Drive combines its rank-one +4% drive modifier with an equipped passive-slot +10% PAN affinity. RENKO Pulse Lens adds primary damage and its fifth-shot bolt; HUGO Guard Coil supplies the factory hull’s three shield chunks, with recharge earned through a real upgrade. Empty or invalid matching slots disable the manufacturer affinity; secondary horns and sponsorship grant no combat effect.",
             "Main corporation themes hair, the starter hull, its RAICHO and home accents. The independent sub-manufacturer colors horns. Existing anonymous profiles retain their original Scout, progress and loadouts; migration does not issue a license or duplicate a starter item.",
             "Distinct DORA/DORO/TALO profile bodies are implemented with independent main-hair and sub-manufacturer KESSHO crystal palettes. The creator updates all27 combinations in real time and reuses the chosen profile on the issued license. Current integrated browser acceptance is recorded separately.",
             "Appearance follows droid type: feminine DORA with long hair, masculine DORO with short spiky hair and flat angular chest armor, neutral TALO with a crew cut and flat torso. DORO and TALO do not inherit breast forms or cup-shaped seams. Callsigns use A/O/T then main and sub-manufacturer initials; the guide is APR-1337, PAN main with RENKO horns.",

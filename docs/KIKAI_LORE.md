@@ -16,6 +16,23 @@ The full format is `TYPE-MAIN-SUB-HASH`. Compact names use **A for female, O for
 
 The sub-manufacturer independently colors crystal horns: PAN green, RENKO red, HUGO blue. Main manufacturer determines the first hull, its initial equipped ability, and Haven's visual theme. XP belongs to the individual RAICHO; a new license starts with a level-one RAICHO.
 
+## Factory starter equipment
+
+A fresh license equips one owned rank-one ability on its level-one factory RAICHO. The licensed factory chassis has no innate shield: defense comes from an equipped ability or purchased shield hardware. Anonymous legacy Scout and later chassis retain their innate 30 shield HP. A sub-manufacturer changes horn color; it does not add another factory item or a combat bonus.
+
+| Factory RAICHO | Equipped starter | Actual fresh effect |
+|---|---|---|
+| PAN HIKARI | Flux Drive / passive | +4% speed and acceleration, multiplied by the active PAN +10% drive affinity: top speed 114.4 world units/s and acceleration 297.44 world units/s². |
+| RENKO HIBANA | Pulse Lens / offense | +10% primary damage, multiplied by the active RENKO +10% weapon affinity: primary damage 14.52. Every fifth actual primary attempts an extra bolt at 150% of current primary damage, initially 21.78. |
+| HUGO MAMORI | Guard Coil / defense | 30 shield HP in three 10-HP chunks, plus the active HUGO 10% incoming damage reduction. Rank one does not recharge; effective rank two grants 38 HP and unlocks recharge after four seconds without damage. |
+
+The PAN figures are derived movement limits, not a claim that the RAICHO is already moving. The RENKO bolt travels at 500 world units/s plus 25% of the RAICHO velocity. Only admitted primary shots advance its counter. Projectile capacity can refuse a primary or the extra bolt; a refused fifth-shot bolt is discarded and never replayed. Pulse Echo is a separate boss ability, not the factory fifth-shot effect.
+
+Item ownership, equipment and manufacturer affinity remain distinct. Unequipping the starter removes its item effects; an empty or invalid matching slot disables the hull's affinity. Another owned compatible item in the matching category can activate that affinity. The active hull's manufacturer governs the bonus independently of pilot, secondary manufacturer and sponsor. These rules derive from existing loadout and XP records; they do not add a license, grant points or reset progression.
+
+The authoritative effect registry, shot admission and shield rules are in `crates/game_core/src/abilities.rs`, `lib.rs` and `shield_progression.rs`. Native rule checks are separate from natural progression, subjective balance, browser cue readability and physical-device acceptance.
+
+
 ## APR-1337, the player's friend
 
 APR-1337 is extremely old despite her youthful feminine appearance. She existed when biological humans still lived and now devotes herself to keeping humanity alive through the KIKAI. Newly created players are new KIKAI entering the Galaxy Royale universe; she welcomes and helps them because that continuity matters to her. No exact age, human-era date or mind-transfer mechanism is invented.
