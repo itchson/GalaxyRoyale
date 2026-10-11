@@ -597,8 +597,13 @@ pub fn background_with_density(
     gas_wisps(&mut scene, seed, time, reduced);
     for (layer, factor, spacing) in [(0_u32, 0.075, 1800.0), (1, 0.22, 860.0), (2, 0.48, 1300.0)] {
         let sample = camera * factor;
-        let min = tile(sample - scene.half - Vec2::splat(180.0), spacing);
-        let max = tile(sample + scene.half + Vec2::splat(180.0), spacing);
+        let margin = if layer == 2 {
+            crate::shooting_star::STREAM_RADIUS
+        } else {
+            180.0
+        };
+        let min = tile(sample - scene.half - Vec2::splat(margin), spacing);
+        let max = tile(sample + scene.half + Vec2::splat(margin), spacing);
         for y in min[1]..=max[1] {
             for x in min[0]..=max[0] {
                 let grid = [x, y];
@@ -658,20 +663,20 @@ pub fn background_with_density(
                     };
                     scene.planet_group(kind, transform, biome.palette, reduced);
                 } else if layer == 2 {
-                    let phase = (time + unit(mix(h ^ 303)) * 80.0).rem_euclid(80.0);
-                    if phase < 18.0 {
-                        let angle = -0.55 + unit(mix(h ^ 107)) * 1.1;
-                        let d = Vec2::new(angle.cos(), angle.sin());
-                        let head = position + d * ((phase - 9.0) * 22.0);
-                        for i in (0..18).rev() {
-                            let alpha = (190 - i * 9) as u32;
-                            scene.pixel(
-                                head - d * i as f32 * 5.0,
-                                if i < 3 { 2.0 } else { 1.0 },
-                                (biome.palette[3] & 0x00ff_ffff) | (alpha << 24),
-                            );
-                        }
-                    }
+                    crate::shooting_star::extract(
+                        scene.frame,
+                        &crate::shooting_star::SceneInput {
+                            origin,
+                            camera: scene.camera,
+                            viewport: scene.half * 2.0,
+                            time,
+                            birth_hash: h,
+                            tint: biome.palette,
+                            reduced,
+                            reduced_motion: false,
+                        },
+                        &mut scene.remaining,
+                    );
                 }
             }
         }

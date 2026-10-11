@@ -746,7 +746,11 @@ function syncFlightState(): void {
   input.enabled = run && menu.hidden;
   if (run) {
     // A profile/world transition may precede the next simulation frame.
-    audio.update(galaxy.hud().audio);
+    const soundHud = galaxy.hud();
+    audio.update({
+      ...soundHud.audio,
+      corporation: soundHud.identity?.corporation ?? null,
+    });
     void audio.resume().catch(() => {});
   } else audio.suspend();
 }
@@ -1339,7 +1343,11 @@ async function recover(_trigger: unknown): Promise<boolean> {
     galaxy.set_paused(paused);
     input.enabled = canRun && menu.hidden;
     if (canRun) {
-      audio.update(galaxy.hud().audio);
+      const soundHud = galaxy.hud();
+      audio.update({
+        ...soundHud.audio,
+        corporation: soundHud.identity?.corporation ?? null,
+      });
       void audio.resume().catch(() => {});
     } else if (
       launched &&
@@ -1417,7 +1425,10 @@ function frame(time: number): void {
       if (event.kind === "pickup" && event.intensity >= 2)
         toast("NEW SIGNATURE ABILITY / evolve at Haven");
     }
-    audio.update(hud.audio);
+    audio.update({
+      ...hud.audio,
+      corporation: hud.identity?.corporation ?? null,
+    });
     previousDock = hud.dock;
     if (
       launched &&
@@ -1876,7 +1887,9 @@ async function quitGame(): Promise<void> {
     // Browsers allow a script-opened window to close; an ordinary browser tab
     // may stay open. Keep its saved title screen usable in that case.
     window.close();
-    loadStatus.textContent = "PROGRESS SAVED / close this tab or app to quit.";
+    loadStatus.textContent = needsDroidCreation
+      ? "Close this tab or app to quit."
+      : "PROGRESS SAVED / close this tab or app to quit.";
   } catch (error) {
     loadStatus.textContent =
       "SAVE NEEDS ATTENTION / use Settings > Save & backup.";

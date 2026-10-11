@@ -15,6 +15,7 @@ mod pixel_assets;
 mod player_presentation;
 mod radiation_enemies;
 mod segmented;
+mod shooting_star;
 pub mod universe_map;
 pub use campaign::RunSummary;
 mod campaign_runtime;

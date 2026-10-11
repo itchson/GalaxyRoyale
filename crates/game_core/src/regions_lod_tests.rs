@@ -24,7 +24,9 @@ fn validate(frame: &RenderFrame) {
         assert!(batch.transforms.iter().all(|t| {
             t.a.into_iter().chain(t.b).all(f32::is_finite)
                 && t.b[2] == 0.0
-                && [0.0, -1.0].contains(&t.b[3])
+                && [0.0, -1.0, -1.26, -1.18, -1.20, 0.18]
+                    .iter()
+                    .any(|emission| (t.b[3] - emission).abs() < 0.000001)
         }));
         assert!(batch.pixels.iter().all(|p| {
             p.local.into_iter().all(f32::is_finite)
