@@ -9,6 +9,8 @@ pub mod bosses;
 pub mod campaign;
 mod dock_facilities;
 mod isotope_scar;
+mod navigation;
+pub use navigation::{NavigationHud, NavigationTarget};
 mod pixel_assets;
 mod radiation_enemies;
 mod segmented;
@@ -169,6 +171,7 @@ pub struct Hud {
     pub loadout: [Option<ship_progression::EquippedAbilityHud>; 3],
     pub ship_stats: ShipStatsHud,
     pub audio: AudioHud,
+    pub navigation: NavigationHud,
 }
 
 /// Current effective chassis, XP, hardware and equipped starter statistics.
@@ -3224,6 +3227,7 @@ impl Game {
                 shield_regen: stats.shield * 0.15,
             },
             audio: self.audio_hud(),
+            navigation: self.navigation_hud(),
         }
     }
 

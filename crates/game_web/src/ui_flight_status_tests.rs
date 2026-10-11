@@ -73,6 +73,244 @@ fn packet(frame: &FrameBuilder) -> Vec<PackedCell> {
 }
 
 #[test]
+fn micro_footer_is_only_cached_glyphs_and_compass_inside_shared_reservations() {
+    let mut i = input([533.0, 300.0], false);
+    i.attached_vitals = false;
+    let layout = FlightStatusLayout::new(&i).unwrap();
+    assert_eq!(layout.context.unwrap()[3], 5.0);
+    assert!(layout.navigation.is_some());
+    let mut frame = FrameBuilder::new();
+    draw_flight_status(
+        &mut frame,
+        &hud(),
+        [0.0; 2],
+        &layout,
+        None,
+        0.0,
+        true,
+        false,
+    );
+    assert!(frame.frame().pixel_count > 0);
+    for batch in &frame.frame().batches {
+        for p in &batch.pixels {
+            let t = batch.transforms[p.transform as usize];
+            assert_eq!(
+                t.a[2].abs() + t.a[3].abs(),
+                1.0,
+                "no strip fill or border geometry"
+            );
+            assert_eq!(t.b[0].abs() + t.b[1].abs(), 1.0);
+            assert_ne!(p.color, 0xee_0e0907);
+        }
+    }
+    bounds_check(&frame, -Vec2::from_array(layout.viewport) * 0.5, layout);
+    assert!(std::ptr::eq(RoyaleMicro::body('a'), RoyaleMicro::body('A')));
+    assert_eq!(
+        RoyaleMicro::letter_transform(AffineTransform::default(), 1).position,
+        Vec2::new(5.5, 2.5)
+    );
+}
+
+#[test]
+fn micro_text_clips_whole_cells_and_charges_actual_occupied_objects() {
+    let mut frame = FrameBuilder::new();
+    let mut budget = 30;
+    let mut work = 30;
+    let parent = Transform {
+        position: Vec2::new(17.0, -23.0),
+        rotation: 0.3,
+        scale: Vec2::new(2.0, 0.8),
+    }
+    .affine();
+    let clip = [2.5, 0.0, 4.0, 5.0];
+    micro_text(
+        &mut frame,
+        parent,
+        [0.0, 0.0, 20.0, 5.0],
+        "ABCD",
+        WHITE,
+        Some(clip),
+        &mut budget,
+        &mut work,
+    );
+    assert_eq!(30 - budget, frame.frame().pixel_count);
+    assert_eq!(budget, work);
+    for batch in &frame.frame().batches {
+        for p in &batch.pixels {
+            if p.color >> 24 == 0 {
+                continue;
+            }
+            let t = batch.transforms[p.transform as usize];
+            for corner in [
+                Vec2::splat(-0.5),
+                Vec2::splat(0.5),
+                Vec2::new(-0.5, 0.5),
+                Vec2::new(0.5, -0.5),
+            ] {
+                let local = parent
+                    .try_inverse_point(t.point(Vec2::from_array(p.local) + corner))
+                    .unwrap();
+                assert!(
+                    local.x >= clip[0] - 0.001
+                        && local.x <= clip[0] + clip[2] + 0.001
+                        && local.y >= -0.001
+                        && local.y <= 5.001
+                );
+            }
+            assert_eq!(t.b[2..], [0.0, 0.0]);
+        }
+    }
+    let before = packet(&frame);
+    micro_text(
+        &mut frame,
+        parent,
+        [0.0, 0.0, 20.0, 4.99],
+        "A",
+        WHITE,
+        None,
+        &mut budget,
+        &mut work,
+    );
+    assert_eq!(
+        packet(&frame),
+        before,
+        "five-height glyphs do not escape shorter slot"
+    );
+}
+
+#[test]
+fn damage_trail_healing_and_resets_are_presentation_only() {
+    let mut h = hud();
+    h.dock = false;
+    h.max_shield = 100.0;
+    h.shield = 100.0;
+    let mut animation = VitalsAnimation::default();
+    assert_eq!(animation.advance(&h, 0.0, false).fill, [1.0, 1.0]);
+    h.hull = h.max_hull * 0.4;
+    h.shield = 30.0;
+    let hit = animation.advance(&h, 0.02, false);
+    assert_eq!(hit.fill, [0.4, 0.3]);
+    assert_eq!(hit.trail, [1.0, 1.0]);
+    for _ in 0..20 {
+        animation.advance(&h, 0.1, false);
+    }
+    let settled = animation.advance(&h, 0.0, false);
+    assert_eq!(settled.fill, settled.trail);
+    h.hull = h.max_hull * 0.9;
+    let heal = animation.advance(&h, 0.05, false);
+    assert!(heal.fill[0] > 0.4 && heal.fill[0] < 0.9);
+    assert_eq!(animation.advance(&h, 0.05, true).fill, [0.9, 0.3]);
+    h.campaign.selected_ship = 1;
+    assert_eq!(animation.advance(&h, 0.0, false).trail, [0.9, 0.3]);
+    h.hull = 0.0;
+    assert_eq!(animation.advance(&h, f32::NAN, false).fill[0], 0.0);
+    animation.reset();
+    h.hull = h.max_hull;
+    h.shield = 100.0;
+    h.dock = true;
+    assert_eq!(animation.advance(&h, 0.0, false).trail, [1.0, 1.0]);
+}
+
+#[test]
+fn shaped_segment_cells_keep_fractional_health_and_static_reduced_motion() {
+    let mut i = input([533.0, 300.0], false);
+    let mut layout = FlightStatusLayout::new(&i).unwrap();
+    layout.strip = None;
+    layout.stats = None;
+    layout.context = None;
+    layout.navigation = None;
+    let rect = layout.vitals.unwrap();
+    let mut low = FrameBuilder::new();
+    let mut high = FrameBuilder::new();
+    for (value, frame) in [(0.599, &mut low), (0.601, &mut high)] {
+        draw_flight_status_animated(
+            frame,
+            &hud(),
+            [0.0; 2],
+            &layout,
+            None,
+            0.0,
+            true,
+            false,
+            VitalsPresentation {
+                fill: [value; 2],
+                trail: [0.8; 2],
+            },
+        );
+        bounds_check(frame, -Vec2::from_array(layout.viewport) * 0.5, layout);
+        assert!(frame.frame().pixel_count < 120);
+    }
+    assert_ne!(
+        packet(&low),
+        packet(&high),
+        "fractional fill is not a health bucket"
+    );
+    // The same animated envelope remains safe with an actual inset toolbar.
+    i.insets = [8.0, 12.0, 9.0, 15.0];
+    i.zoom = 1.6;
+    let layout = FlightStatusLayout::new(&i).unwrap();
+    assert_eq!([rect[2], rect[3]], [44.0, 9.0]);
+    assert_eq!(layout.vitals.unwrap()[2..], [44.0, 9.0]);
+}
+
+#[test]
+fn compact_compass_uses_actual_world_direction_without_presentation_shake() {
+    let i = input([533.0, 300.0], false);
+    let mut layout = FlightStatusLayout::new(&i).unwrap();
+    layout.strip = None;
+    layout.stats = None;
+    layout.context = None;
+    layout.vitals = None;
+    let mut h = hud();
+    h.position = [1000.0, 0.0];
+    let mut left = FrameBuilder::new();
+    let mut up = FrameBuilder::new();
+    draw_flight_status(&mut left, &h, [0.0; 2], &layout, None, 0.0, true, false);
+    h.position = [0.0, 1000.0];
+    draw_flight_status(&mut up, &h, [0.0; 2], &layout, None, 0.0, true, false);
+    assert_ne!(packet(&left), packet(&up));
+    let mut shaken = FrameBuilder::new();
+    draw_flight_status(
+        &mut shaken,
+        &h,
+        [3.0, -2.0],
+        &layout,
+        None,
+        0.0,
+        true,
+        false,
+    );
+    for (a, b) in packet(&up).iter().zip(packet(&shaken)) {
+        assert_eq!(a.0, b.0);
+        assert_eq!(a.1, b.1);
+        assert!((b.2[0] - a.2[0] - 3.0).abs() < 0.001 && (b.2[1] - a.2[1] + 2.0).abs() < 0.001);
+    }
+}
+
+#[test]
+fn compact_navigation_keeps_room_for_essential_fallback_and_context_cells() {
+    for (viewport, touch) in [
+        ([320.0, 180.0], true),
+        ([180.0, 140.0], true),
+        ([320.0, 180.0], false),
+    ] {
+        let mut i = input(viewport, touch);
+        i.attached_vitals = false;
+        let layout = FlightStatusLayout::new(&i).unwrap();
+        let stats = layout.stats.unwrap();
+        let navigation = layout.navigation.unwrap();
+        assert!(!hud_overlap(stats, navigation, 0.0));
+        assert!(stats[2] >= "H100 S100 L1 C0/16".len() as f32 * RoyaleMicro::ADVANCE - 1.0);
+        assert_eq!(stats[3], 5.0);
+        if let Some(context) = layout.context {
+            assert_eq!(context[3], 5.0);
+        }
+        let strip = layout.strip.unwrap();
+        assert!(navigation[0] >= strip[0] && navigation[0] + navigation[2] <= strip[0] + strip[2]);
+    }
+}
+
+#[test]
 fn footer_and_attached_bars_share_bounds_at_supported_extents_and_insets() {
     for (viewport, insets, hit, touch) in [
         ([533.0, 300.0], [0.0; 4], 22.0, false),
@@ -226,7 +464,7 @@ fn real_contact_hit_is_separate_from_font_slot_and_forces_truthful_footer_fallba
     };
     i.status_hits = flight_status_hits(&scene, [0.0; 4]);
     let layout = FlightStatusLayout::new(&i).unwrap();
-    assert_eq!(layout.context, Some([106.0, 164.0, 122.0, 7.0]));
+    assert_eq!(layout.context, Some([106.0, 164.0, 122.0, 5.0]));
     assert!(
         layout.vitals.is_none(),
         "actual44px hit blocks below-ship track"

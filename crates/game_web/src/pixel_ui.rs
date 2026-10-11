@@ -67,11 +67,260 @@ impl RoyaleMono {
     }
 }
 
+/// An original three-by-five footer font. Cached glyphs remain real local
+/// objects; the ordinary interface retains its larger RoyaleMono font.
+pub(crate) struct RoyaleMicro;
+impl RoyaleMicro {
+    pub const WIDTH: f32 = 3.0;
+    pub const HEIGHT: f32 = 5.0;
+    pub const ADVANCE: f32 = 4.0;
+
+    pub fn body(character: char) -> &'static PixelBody {
+        static BODIES: LazyLock<[PixelBody; 128]> = LazyLock::new(|| {
+            std::array::from_fn(|index| {
+                let masks = micro_glyph(index as u8 as char);
+                let rows: [String; 5] = std::array::from_fn(|y| {
+                    (0..3)
+                        .map(|x| {
+                            if masks[y] & (1 << (2 - x)) != 0 {
+                                '#'
+                            } else {
+                                ' '
+                            }
+                        })
+                        .collect()
+                });
+                let rows: Vec<_> = rows.iter().map(String::as_str).collect();
+                PixelBody::from_ascii(&rows, &[('#', WHITE)])
+            })
+        });
+        let c = character.to_ascii_uppercase();
+        &BODIES[if c.is_ascii() {
+            c as usize
+        } else {
+            b'?' as usize
+        }]
+    }
+
+    pub fn letter_transform(parent: AffineTransform, column: usize) -> AffineTransform {
+        parent.compose(
+            Transform {
+                position: Vec2::new(
+                    column as f32 * Self::ADVANCE + Self::WIDTH * 0.5,
+                    Self::HEIGHT * 0.5,
+                ),
+                ..Transform::default()
+            }
+            .affine(),
+        )
+    }
+}
+
+fn micro_glyph(c: char) -> [u8; 5] {
+    match c.to_ascii_uppercase() {
+        'A' => [2, 5, 7, 5, 5],
+        'B' => [6, 5, 6, 5, 6],
+        'C' => [3, 4, 4, 4, 3],
+        'D' => [6, 5, 5, 5, 6],
+        'E' => [7, 4, 6, 4, 7],
+        'F' => [7, 4, 6, 4, 4],
+        'G' => [3, 4, 5, 5, 3],
+        'H' => [5, 5, 7, 5, 5],
+        'I' => [7, 2, 2, 2, 7],
+        'J' => [1, 1, 1, 5, 2],
+        'K' => [5, 5, 6, 5, 5],
+        'L' => [4, 4, 4, 4, 7],
+        'M' => [5, 7, 7, 5, 5],
+        'N' => [5, 7, 7, 7, 5],
+        'O' => [2, 5, 5, 5, 2],
+        'P' => [6, 5, 6, 4, 4],
+        'Q' => [2, 5, 5, 3, 1],
+        'R' => [6, 5, 6, 5, 5],
+        'S' => [3, 4, 2, 1, 6],
+        'T' => [7, 2, 2, 2, 2],
+        'U' => [5, 5, 5, 5, 7],
+        'V' => [5, 5, 5, 5, 2],
+        'W' => [5, 5, 7, 7, 5],
+        'X' => [5, 5, 2, 5, 5],
+        'Y' => [5, 5, 2, 2, 2],
+        'Z' => [7, 1, 2, 4, 7],
+        '0' => [7, 5, 5, 5, 7],
+        '1' => [2, 6, 2, 2, 7],
+        '2' => [6, 1, 2, 4, 7],
+        '3' => [6, 1, 2, 1, 6],
+        '4' => [5, 5, 7, 1, 1],
+        '5' => [7, 4, 6, 1, 6],
+        '6' => [3, 4, 6, 5, 2],
+        '7' => [7, 1, 2, 2, 2],
+        '8' => [2, 5, 2, 5, 2],
+        '9' => [2, 5, 3, 1, 6],
+        '/' => [1, 1, 2, 4, 4],
+        '-' => [0, 0, 7, 0, 0],
+        '+' => [0, 2, 7, 2, 0],
+        ':' => [0, 2, 0, 2, 0],
+        '.' => [0, 0, 0, 0, 2],
+        '%' => [5, 1, 2, 4, 5],
+        '?' => [6, 1, 2, 0, 2],
+        '!' => [2, 2, 2, 0, 2],
+        _ => [0; 5],
+    }
+}
+
+/// Shared footer extraction, including full-cell clipping and caller budgets.
+/// Rect and clip are relative to `parent`; no temporary strings or cell lists.
+#[allow(clippy::too_many_arguments)]
+pub(crate) fn micro_text(
+    frame: &mut FrameBuilder,
+    parent: AffineTransform,
+    rect: [f32; 4],
+    text: &str,
+    color: u32,
+    clip: Option<[f32; 4]>,
+    remaining: &mut usize,
+    work_remaining: &mut usize,
+) {
+    if rect.iter().any(|v| !v.is_finite())
+        || rect[2] < 3.0
+        || rect[3] < 5.0
+        || !parent.position.is_finite()
+        || !parent.basis_x.is_finite()
+        || !parent.basis_y.is_finite()
+        || clip.is_some_and(|r| r.iter().any(|v| !v.is_finite()) || r[2] <= 0.0 || r[3] <= 0.0)
+    {
+        return;
+    }
+    let clip = clip.map_or(rect, |c| {
+        let x = rect[0].max(c[0]);
+        let y = rect[1].max(c[1]);
+        [
+            x,
+            y,
+            (rect[0] + rect[2]).min(c[0] + c[2]) - x,
+            (rect[1] + rect[3]).min(c[1] + c[3]) - y,
+        ]
+    });
+    if clip[2] <= 0.0 || clip[3] <= 0.0 {
+        return;
+    }
+    let text_local = Transform {
+        position: Vec2::new(rect[0], rect[1]),
+        ..Transform::default()
+    }
+    .affine();
+    let columns = ((rect[2] + 1.0) / RoyaleMicro::ADVANCE).floor() as usize;
+    for (column, c) in text.chars().take(columns.min(256)).enumerate() {
+        let body = RoyaleMicro::body(if c.is_whitespace() { ' ' } else { c });
+        let count = body.occupied_count();
+        if count > *remaining || count > *work_remaining {
+            break;
+        }
+        if count == 0 {
+            continue;
+        }
+        let local = RoyaleMicro::letter_transform(text_local, column);
+        frame.push_body_affine_colored(body, parent.compose(local), |cell, _| {
+            let p = local.point(cell);
+            if p.x - 0.5 < clip[0]
+                || p.y - 0.5 < clip[1]
+                || p.x + 0.5 > clip[0] + clip[2]
+                || p.y + 0.5 > clip[1] + clip[3]
+            {
+                0
+            } else {
+                color
+            }
+        });
+        *remaining -= count;
+        *work_remaining -= count;
+    }
+}
+
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct VitalsPresentation {
+    pub fill: [f32; 2],
+    pub trail: [f32; 2],
+}
+
+/// Presentation only: damage is immediate; healing eases and the lost segment
+/// lingers briefly. Actual health and all gameplay remain authoritative.
+#[derive(Default)]
+pub struct VitalsAnimation {
+    ship: Option<u8>,
+    last: [f32; 2],
+    fill: [f32; 2],
+    trail: [f32; 2],
+    hold: [f32; 2],
+}
+impl VitalsAnimation {
+    pub fn reset(&mut self) {
+        *self = Self::default();
+    }
+    pub fn advance(&mut self, hud: &Hud, dt: f32, reduced: bool) -> VitalsPresentation {
+        let actual = [
+            ratio(hud.hull, hud.max_hull),
+            ratio(hud.shield, hud.max_shield),
+        ];
+        let fresh = self.ship != Some(hud.campaign.selected_ship)
+            || hud.hull <= 0.0
+            || (hud.dock && actual[0] == 1.0 && (hud.max_shield <= 0.0 || actual[1] == 1.0));
+        if fresh || reduced {
+            self.ship = Some(hud.campaign.selected_ship);
+            self.last = actual;
+            self.fill = actual;
+            self.trail = actual;
+            self.hold = [0.0; 2];
+        } else {
+            let dt = if dt.is_finite() {
+                dt.clamp(0.0, 0.1)
+            } else {
+                0.0
+            };
+            for (i, &value) in actual.iter().enumerate() {
+                if value < self.last[i] {
+                    self.hold[i] = 0.22;
+                    self.trail[i] = self.trail[i].max(self.fill[i]);
+                    self.fill[i] = value;
+                } else {
+                    self.fill[i] += (value - self.fill[i]) * (1.0 - (-10.0 * dt).exp());
+                }
+                self.hold[i] = (self.hold[i] - dt).max(0.0);
+                if self.hold[i] == 0.0 {
+                    self.trail[i] = (self.trail[i] - dt * 0.9).max(self.fill[i]);
+                }
+                self.trail[i] = self.trail[i].max(self.fill[i]);
+                self.last[i] = value;
+            }
+        }
+        VitalsPresentation {
+            fill: self.fill,
+            trail: self.trail,
+        }
+    }
+}
+
 struct Ui<'a> {
     frame: &'a mut FrameBuilder,
     origin: Vec2,
 }
 impl Ui<'_> {
+    fn micro_text(&mut self, rect: [f32; 4], text: &str, color: u32) {
+        let mut remaining = 2000;
+        let mut work = 2000;
+        micro_text(
+            self.frame,
+            Transform {
+                position: self.origin,
+                ..Transform::default()
+            }
+            .affine(),
+            rect,
+            text,
+            color,
+            None,
+            &mut remaining,
+            &mut work,
+        );
+    }
     fn rect(&mut self, x: f32, y: f32, w: f32, h: f32, color: u32) {
         if w <= 0.0 || h <= 0.0 {
             return;
@@ -313,6 +562,8 @@ pub struct FlightStatusLayout {
     pub stats: Option<[f32; 4]>,
     pub context: Option<[f32; 4]>,
     pub vitals: Option<[f32; 4]>,
+    /// Compass cells are contained by the already-reserved invisible footer.
+    pub navigation: Option<[f32; 4]>,
     pub viewport: [f32; 2],
 }
 
@@ -385,10 +636,21 @@ impl FlightStatusLayout {
         .into_iter()
         .flatten()
         .find(|r| clear(*r));
-        let stats = strip.map(|r| [r[0] + 4.0, r[1] + 2.0, r[2] - 8.0, 7.0]);
+        let navigation = strip.filter(|r| r[2] >= 120.0).map(|r| {
+            let w = if r[2] >= 210.0 { 100.0 } else { 32.0 };
+            [r[0] + r[2] - 4.0 - w, r[1] + 2.0, w, 5.0]
+        });
+        let stats = strip.map(|r| {
+            [
+                r[0] + 4.0,
+                r[1] + 2.0,
+                r[2] - 8.0 - navigation.map_or(0.0, |n| n[2] + 6.0),
+                5.0,
+            ]
+        });
         let context = strip
             .filter(|r| r[3] >= 22.0)
-            .map(|r| [r[0] + 4.0, r[1] + 12.0, r[2] - 8.0, 7.0]);
+            .map(|r| [r[0] + 4.0, r[1] + 12.0, r[2] - 8.0, 5.0]);
         let view = CameraView::new(
             Vec2::from_array(input.camera),
             Vec2::from_array(input.viewport),
@@ -435,6 +697,7 @@ impl FlightStatusLayout {
             stats,
             context,
             vitals,
+            navigation,
             viewport,
         })
     }
@@ -563,6 +826,40 @@ pub fn draw_flight_status(
     reduced_motion: bool,
     semantic_context: bool,
 ) {
+    draw_flight_status_animated(
+        frame,
+        hud,
+        camera,
+        layout,
+        boss_panel,
+        time,
+        reduced_motion,
+        semantic_context,
+        VitalsPresentation {
+            fill: [
+                ratio(hud.hull, hud.max_hull),
+                ratio(hud.shield, hud.max_shield),
+            ],
+            trail: [
+                ratio(hud.hull, hud.max_hull),
+                ratio(hud.shield, hud.max_shield),
+            ],
+        },
+    );
+}
+
+#[allow(clippy::too_many_arguments)]
+pub(crate) fn draw_flight_status_animated(
+    frame: &mut FrameBuilder,
+    hud: &Hud,
+    camera: [f32; 2],
+    layout: &FlightStatusLayout,
+    boss_panel: Option<[f32; 4]>,
+    time: f32,
+    reduced_motion: bool,
+    semantic_context: bool,
+    presentation: VitalsPresentation,
+) {
     use std::fmt::Write;
     let camera = Vec2::from_array(camera);
     if !camera.is_finite() {
@@ -590,11 +887,7 @@ pub fn draw_flight_status(
     } else {
         0
     };
-    if let Some([x, y, w, h]) = layout.strip {
-        ui.rect(x, y, w, h, 0xee_0e0907);
-        ui.rect(x, y, w, 1.0, EDGE);
-        ui.rect(x, y, 3.0, 1.0, CYAN);
-    }
+    // The footer reserves geometry but paints only original micro glyphs.
     if let Some([x, y, w, _]) = layout.stats {
         let mut text = StatusText::new();
         if layout.vitals.is_none() {
@@ -627,20 +920,17 @@ pub fn draw_flight_status(
             };
         }
         // Very narrow rows prioritize essential health, level and carried loot.
-        if (text.len + points.len) as f32 * RoyaleMono::ADVANCE - 1.0 <= w {
+        if (text.len + points.len) as f32 * RoyaleMicro::ADVANCE - 1.0 <= w {
             let _ = text.write_str(points.as_str());
         }
-        ui.text_bounded(
-            x,
-            y,
+        ui.micro_text(
+            [x, y, w, 5.0],
             text.as_str(),
-            1.0,
             if layout.vitals.is_none() && warning != 0 {
                 warning_color(warning, time, reduced_motion)
             } else {
                 DIM
             },
-            w,
         );
     }
     if !semantic_context && let Some([x, y, w, _]) = layout.context {
@@ -659,7 +949,10 @@ pub fn draw_flight_status(
             let _ = write!(text, "{} / THREAT {}", hud.biome.name, hud.danger);
             GOLD
         };
-        ui.text_bounded(x, y, text.as_str(), 1.0, color, w);
+        ui.micro_text([x, y, w, 5.0], text.as_str(), color);
+    }
+    if let Some(rect) = layout.navigation {
+        draw_navigation(&mut ui, hud, rect);
     }
     if let Some([x, y, w, _]) = layout.vitals {
         // A three-cell reticle and a shield rune, each cached as a local body.
@@ -669,7 +962,7 @@ pub fn draw_flight_status(
                 PixelBody::from_ascii(&["###", "#.#", ".#."], &[('#', WHITE)]),
             ]
         });
-        for (row, (value, maximum, color)) in [
+        for (row, (_value, _maximum, color)) in [
             (
                 hud.hull,
                 hud.max_hull,
@@ -692,26 +985,161 @@ pub fn draw_flight_status(
         .into_iter()
         .enumerate()
         {
-            let row_y = y + row as f32 * 4.0;
+            let row_y = y + row as f32 * 5.0;
             ui.frame.push_body_colored(
                 &ICONS[row],
                 Transform {
-                    position: ui.origin + Vec2::new(x + 1.5, row_y + 2.5),
+                    position: ui.origin + Vec2::new(x + 1.5, row_y + 1.5),
                     ..Transform::default()
                 },
                 |_, _| color,
             );
-            ui.rect(x + 6.0, row_y + 1.0, w - 6.0, 2.0, 0xee_24130b);
-            ui.rect(
-                x + 6.0,
-                row_y + 1.0,
-                (w - 6.0) * ratio(value, maximum),
-                2.0,
-                color,
-            );
+            let fill = presentation.fill[row].clamp(0.0, 1.0);
+            let trail = presentation.trail[row].clamp(fill, 1.0);
+            // Nine individual stepped cells, with a restrained inner highlight
+            // and a damage tail. No health state is quantized to the segments.
+            let track = (w - 8.0).max(0.0);
+            let cell = (track - 8.0) / 9.0;
+            for segment in 0..9 {
+                let sx = x + 7.0 + segment as f32 * (cell + 1.0);
+                ui.rect(sx, row_y + 1.0, cell, 2.0, 0x90_34261e);
+                let part = |value: f32| (value * 9.0 - segment as f32).clamp(0.0, 1.0) * cell;
+                ui.rect(
+                    sx,
+                    row_y + 1.0,
+                    part(trail),
+                    2.0,
+                    if row == 0 { 0xa0_85d4ff } else { 0xa0_a48563 },
+                );
+                ui.rect(sx, row_y + 1.0, part(fill), 1.0, color);
+                ui.rect(sx, row_y + 2.0, part(fill), 1.0, dim_color(color, 0.72));
+                if part(fill) > 0.0 {
+                    ui.rect(sx, row_y, part(fill).min(1.0), 1.0, dim_color(color, 0.9));
+                }
+            }
         }
     }
     draw_boss(&mut ui, hud, Vec2::from_array(layout.viewport), boss_panel);
+}
+
+fn dim_color(color: u32, strength: f32) -> u32 {
+    let [r, g, b, a] = color.to_le_bytes();
+    u32::from_le_bytes([
+        (r as f32 * strength) as u8,
+        (g as f32 * strength) as u8,
+        (b as f32 * strength) as u8,
+        a,
+    ])
+}
+
+fn draw_navigation(ui: &mut Ui<'_>, hud: &Hud, rect: [f32; 4]) {
+    static ARROWS: LazyLock<[PixelBody; 8]> = LazyLock::new(|| {
+        std::array::from_fn(|i| {
+            let angle = i as f32 * std::f32::consts::FRAC_PI_4;
+            let (sin, cos) = angle.sin_cos();
+            let mut masks = [0u8; 5];
+            for (x, y) in [
+                (-2., 0.),
+                (-1., 0.),
+                (0., 0.),
+                (1., 0.),
+                (2., 0.),
+                (1., -1.),
+                (0., -2.),
+                (1., 1.),
+                (0., 2.),
+            ] {
+                let px = (x * cos - y * sin).round() as i32 + 2;
+                let py = (x * sin + y * cos).round() as i32 + 2;
+                if (0..5).contains(&px) && (0..5).contains(&py) {
+                    masks[py as usize] |= 1 << (4 - px);
+                }
+            }
+            let rows: [String; 5] = std::array::from_fn(|y| {
+                (0..5)
+                    .map(|x| {
+                        if masks[y] & (1 << (4 - x)) != 0 {
+                            '#'
+                        } else {
+                            ' '
+                        }
+                    })
+                    .collect()
+            });
+            PixelBody::from_ascii(
+                &rows.iter().map(String::as_str).collect::<Vec<_>>(),
+                &[('#', WHITE)],
+            )
+        })
+    });
+    static HOME: LazyLock<PixelBody> = LazyLock::new(|| {
+        PixelBody::from_ascii(
+            &["..#..", ".###.", "##.##", ".###.", "..#.."],
+            &[('#', WHITE)],
+        )
+    });
+    let player = Vec2::from_array(hud.position);
+    if !player.is_finite() {
+        return;
+    }
+    let mut item = |r: [f32; 4], target: [f32; 2], tag: &str, color: u32| {
+        let delta = Vec2::from_array(target) - player;
+        if !delta.is_finite() || r[2] < 12.0 {
+            return;
+        }
+        let distance = delta.length();
+        let octant = ((delta.y.atan2(delta.x) / std::f32::consts::FRAC_PI_4).round() as i32)
+            .rem_euclid(8) as usize;
+        let body = if distance <= 16.0 {
+            &*HOME
+        } else {
+            &ARROWS[octant]
+        };
+        ui.frame.push_body_colored(
+            body,
+            Transform {
+                position: ui.origin + Vec2::new(r[0] + 2.5, r[1] + 2.5),
+                ..Transform::default()
+            },
+            |_, _| color,
+        );
+        let mut text = StatusText::new();
+        use std::fmt::Write;
+        let _ = if distance >= 1_000_000.0 {
+            write!(text, "{tag}{}M", (distance / 1_000_000.0).round() as u32)
+        } else if distance >= 1000.0 {
+            write!(text, "{tag}{}K", (distance / 1000.0).round() as u32)
+        } else {
+            write!(text, "{tag}{}", distance.round() as u32)
+        };
+        ui.micro_text([r[0] + 7.0, r[1], r[2] - 7.0, 5.0], text.as_str(), color);
+    };
+    let quest = hud.navigation.quest.as_ref();
+    let quest_tag = |kind| match kind {
+        0 => "MH",
+        1 => "MC",
+        _ => "MB",
+    };
+    if rect[2] >= 100.0 {
+        item(
+            [rect[0], rect[1], 48.0, 5.0],
+            hud.navigation.home,
+            "H",
+            CYAN,
+        );
+        if let Some(q) = quest {
+            item(
+                [rect[0] + 52.0, rect[1], 48.0, 5.0],
+                q.position,
+                quest_tag(q.kind),
+                GOLD,
+            );
+        }
+    } else if let Some(q) = quest {
+        item(rect, q.position, quest_tag(q.kind), GOLD);
+    } else {
+        item(rect, hud.navigation.home, "H", CYAN);
+    }
 }
 
 /// Uses the same measured toolbar rectangle for extraction and exclusion.
