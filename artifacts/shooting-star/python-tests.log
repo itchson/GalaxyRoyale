@@ -1,0 +1,7 @@
+test_authored_cells_roundtrip_without_loss_and_keep_real_facet_palette (__main__.ShootingStarTests.test_authored_cells_roundtrip_without_loss_and_keep_real_facet_palette) ... ok
+test_original_generation_is_deterministic_and_has_explicit_authorship (__main__.ShootingStarTests.test_original_generation_is_deterministic_and_has_explicit_authorship) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.106s
+
+OK

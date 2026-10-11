@@ -1,0 +1,18 @@
+
+running 10 tests
+test tests::seeded_cycle_origin_heading_and_speed_match_original_exactly ... ok
+test tests::relative_tail_is_bounded_emissive_and_fractional_head_keeps_all_cells ... ok
+test tests::reduced_density_removes_a_stable_tail_half_and_preserves_every_head_packet ... ok
+test tests::faded_zero_alpha_cells_still_consume_the_atomic_submitted_budget ... ok
+test tests::batches_cross_128_without_changing_material_or_group_accounting ... ok
+test tests::cached_overhead_head_has_facet_crater_rim_detail_and_no_new_lod ... ok
+test tests::reduced_motion_freezes_head_coma_particles_and_colors ... ok
+test tests::exact_shared_budget_preflight_has_no_partial_head_or_orphan_tail ... ok
+test tests::camera_parallax_is_encoded_once_and_zoom_only_changes_projection ... ok
+test tests::invalid_distant_and_wrap_cases_add_nothing_or_stay_finite ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+Eight actual native posed scenes emitted; full884/reduced852 cells, four transforms, frozen geometry/color equality
+Eight CameraView-projected packet scenes and a magnified exact-cell inset rasterized
+Native proof saved to C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\work\shooting-star-detail\final; posed software review only
