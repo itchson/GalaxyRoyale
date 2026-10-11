@@ -235,6 +235,42 @@ pub(crate) fn micro_text(
     }
 }
 
+/// Right-align the same bounded micro glyphs without changing their cell size.
+/// Long labels retain their leading characters within the supplied slot.
+#[allow(clippy::too_many_arguments)]
+pub(crate) fn micro_text_right(
+    frame: &mut FrameBuilder,
+    parent: AffineTransform,
+    mut rect: [f32; 4],
+    text: &str,
+    color: u32,
+    clip: Option<[f32; 4]>,
+    remaining: &mut usize,
+    work_remaining: &mut usize,
+) {
+    if rect.iter().any(|v| !v.is_finite()) || rect[2] < RoyaleMicro::WIDTH {
+        return;
+    }
+    let columns = (((rect[2] + 1.0) / RoyaleMicro::ADVANCE).floor() as usize).min(256);
+    let count = text.chars().take(columns).count();
+    if count == 0 {
+        return;
+    }
+    let width = count as f32 * RoyaleMicro::ADVANCE - 1.0;
+    rect[0] += rect[2] - width;
+    rect[2] = width;
+    micro_text(
+        frame,
+        parent,
+        rect,
+        text,
+        color,
+        clip,
+        remaining,
+        work_remaining,
+    );
+}
+
 #[derive(Clone, Copy, Debug, Default, PartialEq)]
 pub struct VitalsPresentation {
     pub fill: [f32; 2],
@@ -307,6 +343,24 @@ impl Ui<'_> {
         let mut remaining = 2000;
         let mut work = 2000;
         micro_text(
+            self.frame,
+            Transform {
+                position: self.origin,
+                ..Transform::default()
+            }
+            .affine(),
+            rect,
+            text,
+            color,
+            None,
+            &mut remaining,
+            &mut work,
+        );
+    }
+    fn micro_text_right(&mut self, rect: [f32; 4], text: &str, color: u32) {
+        let mut remaining = 2000;
+        let mut work = 2000;
+        micro_text_right(
             self.frame,
             Transform {
                 position: self.origin,
@@ -562,7 +616,7 @@ pub struct FlightStatusLayout {
     pub stats: Option<[f32; 4]>,
     pub context: Option<[f32; 4]>,
     pub vitals: Option<[f32; 4]>,
-    /// North-up minimap, above the right-anchored footer. Reserved independently.
+    /// North-up minimap at the safe top-right, above the status text.
     pub navigation: Option<[f32; 4]>,
     pub viewport: [f32; 2],
 }
@@ -573,7 +627,7 @@ pub struct FlightStatusInput {
     pub header: Option<[f32; 4]>,
     pub status_hits: [Option<[f32; 4]>; 2],
     pub touch: bool,
-    /// Compact boss allocation uses the footer's H/S readout and omits the
+    /// Compact boss allocation uses the status H/S readout and omits the
     /// optional map when a protected core is present, freeing a boss anchor.
     pub attached_vitals: bool,
     pub player: Vec2,
@@ -619,47 +673,6 @@ impl FlightStatusLayout {
                 && (!input.touch || hits.iter().all(|h| !hud_overlap(r, *h, 2.0)))
         };
         let [width, height] = viewport;
-        let central_left = hits[0][0] + hits[0][2] + 4.0;
-        let central_width = hits[1][0] - 4.0 - central_left;
-        // Footer and map share one right edge. Keep text narrow enough to read
-        // as a quiet status block rather than a banner across the universe.
-        let footer_width = (width - 12.0).min(180.0);
-        let central_footer_width = central_width.min(footer_width);
-        let central = [
-            central_left + central_width - central_footer_width,
-            height - 28.0,
-            central_footer_width,
-            22.0,
-        ];
-        let bottom_strip = [
-            width - 6.0 - footer_width,
-            height - 28.0,
-            footer_width,
-            22.0,
-        ];
-        let above_pads = [
-            width - 6.0 - footer_width,
-            hits[0][1].min(hits[1][1]) - 26.0,
-            footer_width,
-            22.0,
-        ];
-        let slim = [width - 6.0 - footer_width, 0.0, footer_width, 10.0];
-        let strip = if input.touch {
-            [
-                (central_width >= 120.0).then_some(central),
-                Some(above_pads),
-                Some(slim),
-            ]
-        } else {
-            [Some(bottom_strip), Some(slim), None]
-        }
-        .into_iter()
-        .flatten()
-        .find(|r| clear(*r));
-        let stats = strip.map(|r| [r[0] + 4.0, r[1] + 2.0, r[2] - 8.0, 5.0]);
-        let context = strip
-            .filter(|r| r[3] >= 22.0)
-            .map(|r| [r[0] + 4.0, r[1] + 12.0, r[2] - 8.0, 5.0]);
         let view = CameraView::new(
             Vec2::from_array(input.camera),
             Vec2::from_array(input.viewport),
@@ -677,32 +690,78 @@ impl FlightStatusLayout {
             let nearest = p.clamp(Vec2::new(r[0], r[1]), Vec2::new(r[0] + r[2], r[1] + r[3]));
             p.distance_squared(nearest) > radius * radius
         };
-        // Keep one honest, fixed-size map above the footer's right edge and (on
-        // touch) the actual fire hit rectangle. Overconstrained layouts omit
-        // optional navigation rather than obscuring controls or protected cores.
-        let navigation = strip
-            .filter(|_| input.attached_vitals || core.is_none())
-            .and_then(|s| {
-                let above_footer = s[1] - 4.0 - MINIMAP_SIZE;
-                let above_fire = if input.touch {
-                    above_footer.min(hits[1][1] - 4.0 - MINIMAP_SIZE)
-                } else {
-                    above_footer
-                };
-                [above_footer, above_fire].into_iter().find_map(|y| {
-                    let r = [s[0] + s[2] - MINIMAP_SIZE, y, MINIMAP_SIZE, MINIMAP_SIZE];
-                    (clear(r)
-                        && !hud_overlap(r, s, 2.0)
-                        && input
-                            .status_hits
-                            .iter()
-                            .flatten()
-                            .all(|hit| !hud_overlap(r, *hit, 2.0))
-                        && avoids_disc(r, center, radius + 4.0)
-                        && core.is_none_or(|(p, radius)| avoids_disc(r, p, radius)))
-                    .then_some(r)
+        // Both rectangles share the right safe edge. The primary map starts at
+        // six logical units; a measured toolbar may require a lower group.
+        // Width fallback affects text capacity, never font or marker scale.
+        let right_edge = width - 6.0;
+        let text_widths = [(width - 12.0).min(180.0), 140.0, 100.0];
+        let map_y = [6.0, header.map_or(6.0, |r| (r[1] + r[3] + 4.0).max(6.0))];
+        let map_clear = |r| {
+            clear(r)
+                && input
+                    .status_hits
+                    .iter()
+                    .flatten()
+                    .all(|hit| !hud_overlap(r, *hit, 2.0))
+                && avoids_disc(r, center, radius + 4.0)
+                && core.is_none_or(|(p, radius)| avoids_disc(r, p, radius))
+        };
+        let paired = (input.attached_vitals || core.is_none())
+            .then(|| {
+                map_y.into_iter().find_map(|y| {
+                    let map = [right_edge - MINIMAP_SIZE, y, MINIMAP_SIZE, MINIMAP_SIZE];
+                    if !map_clear(map) {
+                        return None;
+                    }
+                    let below_map = y + MINIMAP_SIZE + 4.0;
+                    [
+                        below_map,
+                        header.map_or(below_map, |r| (r[1] + r[3] + 4.0).max(below_map)),
+                    ]
+                    .into_iter()
+                    .find_map(|text_y| {
+                        text_widths.into_iter().find_map(|w| {
+                            let s = [right_edge - w, text_y, w, 22.0];
+                            (clear(s) && core.is_none_or(|(p, radius)| avoids_disc(s, p, radius)))
+                                .then_some((map, s))
+                        })
+                    })
                 })
-            });
+            })
+            .flatten();
+        let navigation = paired.map(|(map, _)| map);
+        let strip = paired.map(|(_, s)| s).or_else(|| {
+            // Optional map omission never recreates the old bottom bubbles.
+            // Compact touch boss mode frees its actual rescue panel area by
+            // docking essential text above measured pads. A short top-right
+            // H/S row is the last fallback; neither paints a panel.
+            let essential_y = if input.touch && !input.attached_vitals && core.is_some() {
+                hits[0][1].min(hits[1][1]) - 26.0
+            } else {
+                54.0
+            };
+            [
+                essential_y,
+                54.0,
+                6.0,
+                header.map_or(6.0, |r| r[1] + r[3] + 4.0),
+                0.0,
+            ]
+            .into_iter()
+            .find_map(|y| {
+                [22.0, 10.0].into_iter().find_map(|h| {
+                    text_widths.into_iter().find_map(|w| {
+                        let s = [right_edge - w, y, w, h];
+                        (clear(s) && core.is_none_or(|(p, radius)| avoids_disc(s, p, radius)))
+                            .then_some(s)
+                    })
+                })
+            })
+        });
+        let stats = strip.map(|r| [r[0] + 4.0, r[1] + 2.0, r[2] - 8.0, 5.0]);
+        let context = strip
+            .filter(|r| r[3] >= 22.0)
+            .map(|r| [r[0] + 4.0, r[1] + 12.0, r[2] - 8.0, 5.0]);
         // Never clamp an offscreen ship to a false marker at the viewport edge.
         let vitals = (input.attached_vitals
             && center.x >= 0.0
@@ -927,7 +986,7 @@ pub(crate) fn draw_flight_status_animated(
     } else {
         0
     };
-    // The footer reserves geometry but paints only original micro glyphs.
+    // Status reserves geometry but paints only right-aligned micro glyphs.
     if let Some([x, y, w, _]) = layout.stats {
         let mut text = StatusText::new();
         if layout.vitals.is_none() {
@@ -963,7 +1022,7 @@ pub(crate) fn draw_flight_status_animated(
         if (text.len + points.len) as f32 * RoyaleMicro::ADVANCE - 1.0 <= w {
             let _ = text.write_str(points.as_str());
         }
-        ui.micro_text(
+        ui.micro_text_right(
             [x, y, w, 5.0],
             text.as_str(),
             if layout.vitals.is_none() && warning != 0 {
@@ -989,7 +1048,7 @@ pub(crate) fn draw_flight_status_animated(
             let _ = write!(text, "{} / THREAT {}", hud.biome.name, hud.danger);
             GOLD
         };
-        ui.micro_text([x, y, w, 5.0], text.as_str(), color);
+        ui.micro_text_right([x, y, w, 5.0], text.as_str(), color);
     }
     if let Some(rect) = layout.navigation {
         draw_navigation(&mut ui, hud, rect);

@@ -188,6 +188,134 @@ fn micro_text_clips_whole_cells_and_charges_actual_occupied_objects() {
 }
 
 #[test]
+fn right_aligned_micro_cells_keep_exact_size_clip_and_both_budgets() {
+    let parent = Transform {
+        position: Vec2::new(170.25, -82.5),
+        rotation: 0.3,
+        scale: Vec2::new(1.7, 0.9),
+    }
+    .affine()
+    .compose(
+        Transform {
+            rotation: -0.2,
+            ..Transform::default()
+        }
+        .affine(),
+    );
+    for (rect, text, expected_chars) in [
+        ([7.25, 13.5, 172.0, 5.0], "ABC", 3),
+        ([7.25, 13.5, 6.0, 5.0], "ABCD", 1),
+    ] {
+        let mut frame = FrameBuilder::new();
+        let mut quota = 200;
+        let mut work = 200;
+        micro_text_right(
+            &mut frame, parent, rect, text, WHITE, None, &mut quota, &mut work,
+        );
+        let expected: usize = text
+            .chars()
+            .take(expected_chars)
+            .map(|c| RoyaleMicro::body(c).occupied_count())
+            .sum();
+        assert_eq!(frame.frame().pixel_count, expected);
+        assert_eq!(200 - quota, expected);
+        assert_eq!(quota, work);
+        let mut max_x = f32::NEG_INFINITY;
+        for batch in &frame.frame().batches {
+            for cell in &batch.pixels {
+                assert_ne!(cell.color >> 24, 0);
+                let t = batch.transforms[cell.transform as usize];
+                for corner in [
+                    Vec2::splat(-0.5),
+                    Vec2::splat(0.5),
+                    Vec2::new(-0.5, 0.5),
+                    Vec2::new(0.5, -0.5),
+                ] {
+                    let p = parent
+                        .try_inverse_point(t.point(Vec2::from_array(cell.local) + corner))
+                        .unwrap();
+                    assert!(p.x >= rect[0] - 0.001 && p.x <= rect[0] + rect[2] + 0.001);
+                    assert!(p.y >= rect[1] - 0.001 && p.y <= rect[1] + rect[3] + 0.001);
+                    max_x = max_x.max(p.x);
+                }
+            }
+        }
+        assert!((max_x - rect[0] - rect[2]).abs() < 0.001);
+        let before = packet(&frame);
+        let previous_quota = quota;
+        micro_text_right(
+            &mut frame,
+            parent,
+            [0.0, 0.0, f32::NAN, 5.0],
+            "ABC",
+            WHITE,
+            None,
+            &mut quota,
+            &mut work,
+        );
+        assert_eq!(packet(&frame), before);
+        assert_eq!(quota, previous_quota);
+    }
+    let mut frame = FrameBuilder::new();
+    let mut quota = 200;
+    let mut work = 200;
+    let clip = [14.0, 0.0, 3.0, 5.0];
+    micro_text_right(
+        &mut frame,
+        AffineTransform::default(),
+        [0.0, 0.0, 20.0, 5.0],
+        "ABC",
+        CYAN,
+        Some(clip),
+        &mut quota,
+        &mut work,
+    );
+    assert_eq!(frame.frame().pixel_count, 200 - quota);
+    assert_eq!(quota, work);
+    assert!(
+        frame
+            .frame()
+            .batches
+            .iter()
+            .flat_map(|b| &b.pixels)
+            .any(|p| p.color >> 24 == 0)
+    );
+    for b in &frame.frame().batches {
+        for p in &b.pixels {
+            if p.color >> 24 == 0 {
+                continue;
+            }
+            let t = b.transforms[p.transform as usize];
+            for corner in [
+                Vec2::splat(-0.5),
+                Vec2::splat(0.5),
+                Vec2::new(-0.5, 0.5),
+                Vec2::new(0.5, -0.5),
+            ] {
+                let point = t.point(Vec2::from_array(p.local) + corner);
+                assert!(point.x >= clip[0] && point.x <= clip[0] + clip[2]);
+                assert!(point.y >= 0.0 && point.y <= 5.0);
+            }
+        }
+    }
+    let mut none = FrameBuilder::new();
+    let mut insufficient = RoyaleMicro::body('A').occupied_count() - 1;
+    let mut enough = 200;
+    micro_text_right(
+        &mut none,
+        AffineTransform::default(),
+        [0.0, 0.0, 20.0, 5.0],
+        "A",
+        WHITE,
+        None,
+        &mut insufficient,
+        &mut enough,
+    );
+    assert_eq!(none.frame().pixel_count, 0);
+    assert_eq!(enough, 200);
+}
+
+#[test]
 fn damage_trail_healing_and_resets_are_presentation_only() {
     let mut h = hud();
     h.dock = false;
@@ -464,6 +592,28 @@ fn attached_tracks_avoid_a_real_core_and_compact_boss_priority_retains_footer_he
 }
 
 #[test]
+fn compact_touch_boss_preserves_essential_text_above_actual_pad_rescue_area() {
+    let mut i = input([240.0, 180.0], true);
+    i.insets = [0.0, 20.0, 0.0, 20.0];
+    i.zoom = 1.6;
+    i.attached_vitals = false;
+    i.protected_core = Some((Vec2::new(0.0, -70.0), 5.0));
+    let l = FlightStatusLayout::new(&i).unwrap();
+    assert!(l.navigation.is_none() && l.vitals.is_none());
+    let pads = touch_hit_rects(l.viewport);
+    let strip = l.strip.unwrap();
+    assert_eq!(
+        strip,
+        [14.0, pads[0][1].min(pads[1][1]) - 26.0, 180.0, 22.0]
+    );
+    assert!(pads.iter().all(|p| !hud_overlap(strip, *p, 2.0)));
+    let mut frame = FrameBuilder::new();
+    draw_flight_status(&mut frame, &hud(), [0.0; 2], &l, None, 0.0, true, false);
+    bounds_check(&frame, -Vec2::from_array(l.viewport) * 0.5, l);
+    assert!(frame.frame().pixel_count > 0);
+}
+
+#[test]
 fn real_contact_hit_is_separate_from_font_slot_and_forces_truthful_footer_fallback() {
     let mut i = input([320.0, 180.0], true);
     i.header = Some([119.0, 12.0, 189.0, 44.0]);
@@ -481,7 +631,7 @@ fn real_contact_hit_is_separate_from_font_slot_and_forces_truthful_footer_fallba
     };
     i.status_hits = flight_status_hits(&scene, [0.0; 4]);
     let layout = FlightStatusLayout::new(&i).unwrap();
-    assert_eq!(layout.context, Some([106.0, 164.0, 122.0, 5.0]));
+    assert_eq!(layout.context, Some([138.0, 72.0, 172.0, 5.0]));
     assert!(
         layout.vitals.is_none(),
         "actual44px hit blocks below-ship track"
