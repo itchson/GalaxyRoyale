@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "commit": "bad0fb3b3fcd98bd8a6ee999a25def9706307762",
+  "base": "5aa5cfaeb4db4e71511ac4dc251ce17d1b423923",
+  "source": [
+    {
+      "path": "crates/game_web/src/collection_ui.rs",
+      "bytes": 11375,
+      "sha256": "3080ddd7389cdf9265eab19e3c0cb25522d58f3acd62cce783b58fb306055d56",
+      "git_blob_sha256": "3080ddd7389cdf9265eab19e3c0cb25522d58f3acd62cce783b58fb306055d56",
+      "crlf_only_difference": false
+    },
+    {
+      "path": "crates/game_web/src/collection_ui_tests.rs",
+      "bytes": 18432,
+      "sha256": "1128c0e558c5ba1d554d280609a4d479cc567fa8baeaed2b88551df54d261ba6",
+      "git_blob_sha256": "1128c0e558c5ba1d554d280609a4d479cc567fa8baeaed2b88551df54d261ba6",
+      "crlf_only_difference": false
+    },
+    {
+      "path": "crates/game_web/src/ui_scene.rs",
+      "bytes": 120919,
+      "sha256": "3ebe7105cc7e87a2778d71729c615d1626a68f867fc6c3830c2761c5a0b28e7a",
+      "git_blob_sha256": "3ebe7105cc7e87a2778d71729c615d1626a68f867fc6c3830c2761c5a0b28e7a",
+      "crlf_only_difference": false
+    }
+  ],
+  "unchanged_dependencies": [
+    {
+      "path": "crates/game_web/src/flight_icons.rs",
+      "bytes": 11034,
+      "sha256": "733c4e18b70511014dceac45ab47b2abc8e77e8dfc6b25e0fb0b11544d8ae32c",
+      "git_blob_sha256": "ba02a9aa4e210f5a2746d66af1b7d6bcf0c5ebd89ec3241f00e790f88cbf2503",
+      "crlf_only_difference": true
+    },
+    {
+      "path": "crates/game_web/src/kikai_art.rs",
+      "bytes": 36953,
+      "sha256": "0d0d7fe7e7ae2b453b28a9b48fb301b66f3ee1272e66ab33a0898c3f7e83cbb0",
+      "git_blob_sha256": "e3c2b7e1331e506de6e76ab6d0839ca8bf14db47e8e192ee6c8113d5c44bbc3a",
+      "crlf_only_difference": true
+    },
+    {
+      "path": "crates/game_web/src/meishi_art.rs",
+      "bytes": 40810,
+      "sha256": "6a08d819914181792fe21f7b556e460cec81c1c11699dec8ef19efe37b5431f5",
+      "git_blob_sha256": "6a08d819914181792fe21f7b556e460cec81c1c11699dec8ef19efe37b5431f5",
+      "crlf_only_difference": false
+    },
+    {
+      "path": "crates/game_web/src/title_art.rs",
+      "bytes": 8944,
+      "sha256": "bddac1425595fefa14eede80aaca0a195edaaa8c12ecee31f8495cac62886cad",
+      "git_blob_sha256": "bddac1425595fefa14eede80aaca0a195edaaa8c12ecee31f8495cac62886cad",
+      "crlf_only_difference": false
+    }
+  ],
+  "evidence": [
+    {
+      "path": "focused-native.log",
+      "bytes": 1970,
+      "sha256": "e94504e47c7c18789fdf14c3f04adaaf2689b08e02a32ed2ea888a0e5104dbd6"
+    },
+    {
+      "path": "clippy.log",
+      "bytes": 297,
+      "sha256": "8b20b10111a59e15e822eaeb6dc7c5b848bce9da5451490d139792d5097d1327"
+    },
+    {
+      "path": "web-library.log",
+      "bytes": 29123,
+      "sha256": "6cea5ddb3ba12c9299cfcc765953a205197d6562cba320323d6c54ba7416aa42"
+    },
+    {
+      "path": "native-export.log",
+      "bytes": 571,
+      "sha256": "443d8152a8b10a8555162bc719f18d05e617c6d7545c33f29792b9c2e9ef972f"
+    },
+    {
+      "path": "software-render.log",
+      "bytes": 122,
+      "sha256": "d33eb9e3c6ab700d1804ccc3929792534d3289121999531855db6932a936ea11"
+    },
+    {
+      "path": "packets/collection.json",
+      "bytes": 2796851,
+      "sha256": "c1e1a7d1f85039f1524e89f2d784a10d3ba00d8317b5bd4ab55a551c7c1955b0"
+    },
+    {
+      "path": "render.py",
+      "bytes": 1385,
+      "sha256": "3cbf4fa90a8340dbbbbd9778fe10b7660eb5b62f250fa56efe61d5abfbca6c92"
+    },
+    {
+      "path": "native-software-collection.png",
+      "bytes": 71540,
+      "sha256": "358488271a29ab395fc8f93537d13d71e20cb10bbd1b4752012d0a712991ad64"
+    }
+  ],
+  "handoff_sha256": "d15268ccb5bcd76f7a0ca23c2b39d807deb40c8f338a4c68e7e17f15f27072d0"
+}

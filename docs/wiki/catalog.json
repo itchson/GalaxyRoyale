@@ -2948,6 +2948,13 @@
             "Common panels and buttons now extend the league title’s platinum, graphite and restrained cyan/gold material language. Opaque neutral backing keeps live dock geometry out of settings labels. Short semantic rails preserve equipment/corporation colors; measured text, controls and existing icons keep their authoritative bounds.",
             "Cached corners and stretched rails compose native local-cell groups with continuous fractional fits and clipping. A panel submits 1,168 cells, a button 348. The realistic five-icon/largest-DORA fixture retains all components at 47,360 cells; the UI ceiling remains 60,000. Source tests and software output are separate from actual browser layout evidence."
           ]
+        },
+        {
+          "title": "Sports-arcade collections",
+          "paragraphs": [
+            "Hangar and ability collection entries use quiet graphite plates, alloy fittings and detailed native category/corporation symbols. Short selection rails identify the active hull or actually equipped ability; clicking an entry does not invent ownership. Authoritative HUD data controls discovery, costs, rank and compatibility.",
+            "Ability requirements and actions sit beside the description on wide screens and stack in compact layouts. Root checked actual WebGPU/WebGL2 desktop captures and an empty-slot/equip/reload round trip. Vertical and horizontal collection scrolling remain intentional; these observations do not establish physical-phone acceptance."
+          ]
         }
       ],
       "references": [
@@ -3005,6 +3012,16 @@
           "path": "artifacts/space-sports-style-20261012/README.md",
           "label": "Space and sports UI delivery",
           "role": "actual validation scope"
+        },
+        {
+          "path": "crates/game_web/src/collection_ui.rs",
+          "label": "Native collection fittings",
+          "role": "implementation"
+        },
+        {
+          "path": "artifacts/collection-coop-20261012/README.md",
+          "label": "Collection and co-op stage evidence",
+          "role": "actual validation scope"
         }
       ],
       "related": [
@@ -3032,6 +3049,13 @@
           "kind": "runtime-screenshot",
           "provenance": "artifacts/space-sports-style-20261012/README.md",
           "caption": "Actual integrated WebGPU menu. Opaque graphite backing, quiet metal edges and measured controls; phone acceptance remains separate."
+        },
+        {
+          "path": "artifacts/collection-coop-20261012/passive-final-webgpu-1280.jpg",
+          "label": "Native ability collection",
+          "kind": "runtime-screenshot",
+          "provenance": "artifacts/collection-coop-20261012/README.md",
+          "caption": "Actual integrated WebGPU ability detail with adjacent requirements and actions. This is a desktop presentation capture, not physical-phone or natural training evidence."
         }
       ],
       "data": {
@@ -3258,7 +3282,7 @@
       "facts": [
         {
           "label": "Multiplayer",
-          "value": "No network runtime implemented"
+          "value": "Native authority and real local RTC transport; shared browser-world integration pending"
         },
         {
           "label": "Circular topology",
@@ -3284,8 +3308,8 @@
         {
           "title": "Crafted components and co-op boundaries",
           "paragraphs": [
-            "A distinct crafted-component inventory and recipes that assemble those components into items are planned. Current crafting uses raw tier materials and the named T1 training recipe; MEISHI CARD and collection wording do not add inventory or save fields.",
-            "Playable co-op remains pending. The generated PAN co-op dock reference and converted native128/native256 candidates are reviewed source/native art proofs, not a shipping dock replacement or acceptance of a shared playable universe."
+            "Schema 7 includes Pulse Conductor, Aegis Lattice and Flux Bearing in dock-stored crafted stock. Discovered component recipes spend two banked T1 and one T2 material at RAICHO LV 3; ordinary ability ranks 3–5 consume matching components. The named T1 training upgrade is unchanged.",
+            "The detailed animated dock is shipped native art. Separate host authority operates in the real Game ECS with up to eight temporary participants, and real browser RTC channels have local loopback evidence. The shipped browser controller still runs solo: remote replicas, guest-owned loadouts, durable rewards and remote-network acceptance remain pending."
           ]
         }
       ],
@@ -3304,6 +3328,16 @@
           "path": "docs/ROADMAP.md",
           "label": "ROADMAP.md",
           "role": "documentation"
+        },
+        {
+          "path": "docs/COOP_INTEGRATION.md",
+          "label": "Co-op stages and next gates",
+          "role": "integration boundaries"
+        },
+        {
+          "path": "docs/ABILITY_COMPONENTS.md",
+          "label": "Crafted component transactions",
+          "role": "authoritative rules"
         }
       ],
       "related": [

@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "typescript": "5.9.3",
+  "scope": "actual browser local RTC loopback; no Game authority",
+  "inputs": {
+    "apps/game/src/coop/wire.ts": "4fa8bd44636d327436a3662247bb622b434b1937dbc45caf0674e78290c20b53",
+    "apps/game/src/coop/signaling.ts": "5eeb24771bd3859168acb900981d7b2233bb4fdaa6fbd34132a5fbf2d6cfdb26",
+    "apps/game/src/coop/transport.ts": "ef00cf429c078d2a8db4faeb824410437fb6c2ec4b9f8f3aadd2e640e968c571",
+    "scripts/qa/co-op-transport/review.html": "8041dbbba388a09cb13cc52dfa49c977e3edeaf5d7e0e92d3fd5eb34377ed184",
+    "scripts/qa/co-op-transport/review.js": "7a59a3d40ce6bf09816b1efa4893f52ca2ff5e6b0ed6d08d8fbe6952dd5b8eaa"
+  },
+  "files": {
+    "modules/wire.js": "90a65e3c422f17c979083307e56af56d7353c8dd4a57e8ddfd27c31442eb1383",
+    "modules/signaling.js": "abd75e4bf711372982a02b2d279e9b6ee7a27f6c58889b4bf81af9a5b2665b43",
+    "modules/transport.js": "9395779c469750bfc04ffe451991ebc7a6da7777c067a2a3f62ae37aa9243032",
+    "review.html": "8041dbbba388a09cb13cc52dfa49c977e3edeaf5d7e0e92d3fd5eb34377ed184",
+    "review.js": "7a59a3d40ce6bf09816b1efa4893f52ca2ff5e6b0ed6d08d8fbe6952dd5b8eaa"
+  }
+}

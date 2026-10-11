@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "run_id": "3e0368c627e46b8d",
+  "checks": [
+    {
+      "name": "operation-failed",
+      "passed": false,
+      "counts": {}
+    },
+    {
+      "name": "dispose-clean",
+      "passed": true,
+      "counts": {
+        "created": 2,
+        "closed": 2
+      }
+    }
+  ],
+  "created": 2,
+  "closed": 2,
+  "secure_context": true,
+  "rtc_available": true,
+  "source_inputs": {
+    "apps/game/src/coop/wire.ts": "4fa8bd44636d327436a3662247bb622b434b1937dbc45caf0674e78290c20b53",
+    "apps/game/src/coop/signaling.ts": "5eeb24771bd3859168acb900981d7b2233bb4fdaa6fbd34132a5fbf2d6cfdb26",
+    "apps/game/src/coop/transport.ts": "859a5392fc8c86f31d0329b451b4f5a83d7dd2ab84cb0e2fccaa5d2b2fcd8367",
+    "scripts/qa/co-op-transport/review.html": "8041dbbba388a09cb13cc52dfa49c977e3edeaf5d7e0e92d3fd5eb34377ed184",
+    "scripts/qa/co-op-transport/review.js": "c484d93dbf17879bb664690dafa99cc35ff2935cffe2a3ce1db0f4055b0a07d5"
+  },
+  "captured_at": "2026-10-11T16:40:13.658Z",
+  "scope": "actual same-page browser RTC loopback; declared framing admission; no Game authority/NAT"
+}

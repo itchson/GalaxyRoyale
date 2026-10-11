@@ -1,0 +1,102 @@
+{
+  "version": 1,
+  "run_id": "d77a95f3698ca9ec",
+  "checks": [
+    {
+      "name": "real-channel-ready",
+      "passed": true,
+      "counts": {
+        "created": 2,
+        "closed": 0
+      }
+    },
+    {
+      "name": "admission-pending",
+      "passed": true,
+      "counts": {}
+    },
+    {
+      "name": "join-sent",
+      "passed": true,
+      "counts": {}
+    },
+    {
+      "name": "authenticated-join",
+      "passed": true,
+      "counts": {}
+    },
+    {
+      "name": "input-before-admission-refused",
+      "passed": true,
+      "counts": {}
+    },
+    {
+      "name": "fixture-admission-sent",
+      "passed": true,
+      "counts": {}
+    },
+    {
+      "name": "input-sent",
+      "passed": true,
+      "counts": {}
+    },
+    {
+      "name": "input-delivered",
+      "passed": true,
+      "counts": {}
+    },
+    {
+      "name": "simulation-still-waiting",
+      "passed": true,
+      "counts": {}
+    },
+    {
+      "name": "host-end-clean",
+      "passed": true,
+      "counts": {
+        "created": 2,
+        "closed": 2
+      }
+    },
+    {
+      "name": "new-session-ready",
+      "passed": true,
+      "counts": {
+        "created": 4,
+        "closed": 2
+      }
+    },
+    {
+      "name": "rejoin-admission-pending",
+      "passed": true,
+      "counts": {}
+    },
+    {
+      "name": "distinct-session",
+      "passed": true,
+      "counts": {}
+    },
+    {
+      "name": "dispose-clean",
+      "passed": true,
+      "counts": {
+        "created": 4,
+        "closed": 4
+      }
+    }
+  ],
+  "created": 4,
+  "closed": 4,
+  "secure_context": true,
+  "rtc_available": true,
+  "rtc_errors": [],
+  "source_inputs": {
+    "apps/game/src/coop/wire.ts": "4fa8bd44636d327436a3662247bb622b434b1937dbc45caf0674e78290c20b53",
+    "apps/game/src/coop/signaling.ts": "5eeb24771bd3859168acb900981d7b2233bb4fdaa6fbd34132a5fbf2d6cfdb26",
+    "apps/game/src/coop/transport.ts": "ef00cf429c078d2a8db4faeb824410437fb6c2ec4b9f8f3aadd2e640e968c571",
+    "scripts/qa/co-op-transport/review.html": "8041dbbba388a09cb13cc52dfa49c977e3edeaf5d7e0e92d3fd5eb34377ed184",
+    "scripts/qa/co-op-transport/review.js": "7a59a3d40ce6bf09816b1efa4893f52ca2ff5e6b0ed6d08d8fbe6952dd5b8eaa"
+  },
+  "captured_at": "2026-10-11T16:43:56.949Z",
+  "scope": "actual same-page browser RTC loopback; declared framing admission; no Game authority/NAT"
+}

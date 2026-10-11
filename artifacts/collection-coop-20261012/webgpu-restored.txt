@@ -1,0 +1,35 @@
+- generic "Galaxy Royale game universe"
+- status: ABILITY EQUIPPED
+- dialog "ABILITY COLLECTION":
+  - button "Close menu": X
+  - heading "ABILITY COLLECTION" [level=2]
+  - navigation "Personal collections":
+    - button "MEISHI"
+    - button "CARGO"
+    - button "HULLS"
+    - button "ABILITIES" [pressed]
+    - button "STATS"
+  - button "BACK TO LOADOUT"
+  - heading "PAN HIKARI / LV 1 / RANK CAP 1" [level=3]
+  - paragraph: Craft to collect. Equip swaps your slot; replaced abilities stay owned.
+  - group "Ability categories":
+    - button "ALL SLOTS"
+    - button "OFFENSIVE"
+    - button "DEFENSIVE"
+    - button "PASSIVE" [active] [pressed]
+  - group "ability filters":
+    - button "ALL" [pressed]
+    - button "OWNED"
+    - button "BLUEPRINT"
+    - button "COMPATIBLE"
+  - paragraph: 1 FOUND / 1 OWNED
+  - heading "Flux Drive" [level=3]
+  - paragraph: Adds +4% speed and acceleration per effective rank.
+  - paragraph: RANK 1 / EQUIPPED
+  - paragraph: PASSIVE / COMPATIBLE WITH ACTIVE HULL
+  - paragraph: REQUIRES RAICHO LV 1
+  - paragraph: FIRST UPGRADE / PHASE SILICATE 10 / BANKED 1
+  - paragraph: Destroy 10 asteroids of any variety first.
+  - button "UPGRADE" [disabled]
+  - button "EMPTY SLOT"
+  - status "Progress saved automatically on this device.": Saved on this device.
