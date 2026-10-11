@@ -107,9 +107,11 @@ fn setting_regions(node: &UiNode) -> Option<([f32; 4], [f32; 4])> {
     Some((label, control))
 }
 
+const MIN_FONT_SCALE: f32 = 0.25;
+
 fn font_scale(requested: f32) -> f32 {
-    if requested.is_finite() {
-        requested.clamp(1.0, 4.0)
+    if requested.is_finite() && requested > 0.0 {
+        requested.clamp(MIN_FONT_SCALE, 4.0)
     } else {
         1.0
     }
@@ -123,12 +125,17 @@ fn text_capacity(rect: [f32; 4], font: f32) -> (usize, usize) {
 }
 
 fn fractional_text_rect(rect: [f32; 4], font: f32) -> [f32; 4] {
-    if font.fract() == 0.0 {
+    if font.fract() == 0.0
+        && rect
+            .iter()
+            .all(|coordinate| (coordinate * 4.0).fract() == 0.0)
+    {
         return rect;
     }
     // Child translation and cell-corner composition can round in opposite
     // directions on an exact fractional fit. Reserve only f32 arithmetic
-    // roundoff inside the measured box; preserve integer font positions.
+    // roundoff inside the measured box. Integer fonts on the existing exact
+    // quarter-cell grid retain their placement and scale.
     let magnitude = rect[0]
         .abs()
         .max(rect[1].abs())
@@ -156,7 +163,7 @@ fn settings_font(rect: [f32; 4], text: &str, requested: f32) -> f32 {
     // Each candidate keeps a complete number of lines, but its cell scale is
     // continuous. The wrapper is stack-only and bounds names to 256 characters;
     // requested sizes that already fit avoid this bounded fallback search.
-    let mut best = 1.0;
+    let mut best = MIN_FONT_SCALE;
     for columns in 1..=text.chars().take(TEXT_CHARS).count().max(1) {
         let rows = wrap(text, columns).len().max(1);
         let mut font = requested
@@ -168,7 +175,7 @@ fn settings_font(rect: [f32; 4], text: &str, requested: f32) -> f32 {
             .min(fit[3] / (rows as f32 * 8.0 - 1.0));
         // A division on an exact column/row boundary may round up by one ULP.
         // Validate with the actual wrapper rather than assume candidate fit.
-        if font >= 1.0 && !complete(font) {
+        if font >= MIN_FONT_SCALE && !complete(font) {
             font = font.next_down();
         }
         if font > best && complete(font) {
@@ -1268,12 +1275,12 @@ impl Painter<'_> {
     fn text(&mut self, rect: [f32; 4], text: &str, font: f32, color: u32, centered: bool) {
         let bounds = rect;
         let font = font_scale(font)
-            .min((rect[3] / RoyaleMono::HEIGHT).max(1.0))
-            .min((rect[2] / RoyaleMono::WIDTH).max(1.0));
+            .min((rect[3] / RoyaleMono::HEIGHT).max(MIN_FONT_SCALE))
+            .min((rect[2] / RoyaleMono::WIDTH).max(MIN_FONT_SCALE));
         let rect = fractional_text_rect(rect, font);
         let font = font
-            .min((rect[3] / RoyaleMono::HEIGHT).max(1.0))
-            .min((rect[2] / RoyaleMono::WIDTH).max(1.0));
+            .min((rect[3] / RoyaleMono::HEIGHT).max(MIN_FONT_SCALE))
+            .min((rect[2] / RoyaleMono::WIDTH).max(MIN_FONT_SCALE));
         let (columns, rows) = text_capacity(rect, font);
         if columns == 0 || rows == 0 {
             return;
@@ -1353,15 +1360,15 @@ impl Painter<'_> {
         let units = (characters as f32 * RoyaleMono::ADVANCE - 1.0).max(RoyaleMono::WIDTH);
         let content = [r[0] + padding_x, r[1] + 2.0, width, height];
         let mut font = font_scale(font)
-            .min((width / units).max(1.0))
-            .min((height / RoyaleMono::HEIGHT).max(1.0));
+            .min((width / units).max(MIN_FONT_SCALE))
+            .min((height / RoyaleMono::HEIGHT).max(MIN_FONT_SCALE));
         let fit = fractional_text_rect(content, font);
         font = font
-            .min((fit[2] / units).max(1.0))
-            .min((fit[3] / RoyaleMono::HEIGHT).max(1.0));
+            .min((fit[2] / units).max(MIN_FONT_SCALE))
+            .min((fit[3] / RoyaleMono::HEIGHT).max(MIN_FONT_SCALE));
         let mut columns = text_capacity(fractional_text_rect(content, font), font).0;
-        if font > 1.0 && columns < characters {
-            font = font.next_down().max(1.0);
+        if font > MIN_FONT_SCALE && columns < characters {
+            font = font.next_down().max(MIN_FONT_SCALE);
             columns = text_capacity(fractional_text_rect(content, font), font).0;
         }
         if characters > columns {
@@ -1379,7 +1386,9 @@ impl Painter<'_> {
         self.clip = previous_clip;
     }
     fn settings_label(&mut self, rect: [f32; 4], text: &str, font: f32, color: u32) {
-        if rect[2] < RoyaleMono::WIDTH || rect[3] < RoyaleMono::HEIGHT {
+        if rect[2] < RoyaleMono::WIDTH * MIN_FONT_SCALE
+            || rect[3] < RoyaleMono::HEIGHT * MIN_FONT_SCALE
+        {
             return;
         }
         // DOM text can wrap differently from the native bitmap font. Select the
@@ -1671,7 +1680,7 @@ impl Painter<'_> {
                 self.rect(r, rgb(0, 0, 0));
                 self.rect([r[0], r[1], r[2], 1.0], rgb(38, 55, 63));
                 let height = (r[3] - 6.0).max(RoyaleMono::HEIGHT);
-                let font = font.min((height / RoyaleMono::HEIGHT).max(1.0));
+                let font = font.min((height / RoyaleMono::HEIGHT).max(MIN_FONT_SCALE));
                 let advance = RoyaleMono::ADVANCE * font;
                 let columns = ((r[2] + font) / advance).floor() as usize;
                 let chars: Vec<_> = node.text.chars().take(256).collect();
@@ -2404,6 +2413,10 @@ mod kikai_integration_tests;
 #[cfg(test)]
 #[path = "ui_typography_tests.rs"]
 mod typography_tests;
+
+#[cfg(test)]
+#[path = "ui_capped_settings_tests.rs"]
+mod capped_settings_tests;
 
 #[cfg(test)]
 #[path = "ui_settings_skin_tests.rs"]

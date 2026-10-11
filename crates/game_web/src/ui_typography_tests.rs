@@ -257,6 +257,9 @@ fn invalid_or_extreme_requested_fonts_stay_finite_and_bounded() {
         (f32::NEG_INFINITY, 1.0),
         (-3.0, 1.0),
         (0.0, 1.0),
+        (0.1, 0.25),
+        (0.25, 0.25),
+        (0.833_333_3, 0.833_333_3),
         (1.375, 1.375),
         (19.0, 4.0),
     ] {
@@ -270,7 +273,7 @@ fn invalid_or_extreme_requested_fonts_stay_finite_and_bounded() {
         });
         assert_glyphs(&frame, WHITE, glyph_count("FIT"), expected, rect);
     }
-    for rect in [[0.0, 0.0, 4.9, 7.0], [0.0, 0.0, 5.0, 6.9]] {
+    for rect in [[0.0, 0.0, 1.24, 1.75], [0.0, 0.0, 1.25, 1.74]] {
         let frame = extract(UiNode {
             kind: "text".into(),
             rect,
@@ -299,7 +302,7 @@ fn complete_fractional_settings_names_survive_compact_width_height_and_roundoff_
                 for requested in [1.0, 1.125, 1.375, 1.5, 1.75, 2.0] {
                     let rect = [10.25, 20.5, width, height];
                     let font = settings_font(rect, text, requested);
-                    assert!(font.is_finite() && font >= 1.0 && font <= requested);
+                    assert!(font.is_finite() && font >= MIN_FONT_SCALE && font <= requested);
                     let columns = ((width + font) / (6.0 * font)).floor() as usize;
                     let lines = wrap(text, columns);
                     if (lines.len() as f32 * 8.0 - 1.0) * font > height {
