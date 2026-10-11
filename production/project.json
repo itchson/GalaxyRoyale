@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 459,
+  "revision": 493,
   "name": "Galaxy Royale",
   "phase": "Foundation → playable vertical slice",
-  "updatedAt": "2026-10-11T02:09:26.594Z",
+  "updatedAt": "2026-10-11T03:04:45.651Z",
   "tasks": [
     {
       "id": "studio",
@@ -226,15 +226,19 @@
       "status": "review",
       "owner": "Gameplay specialist / Producer listening",
       "priority": "normal",
-      "description": "Authored procedural score and cues implemented, compiled and integrated. Subjective listening/level balance, gesture/interruption lifecycle and physical device audio acceptance remain Review.",
+      "description": "Authored adaptive cues/music, gesture-unlocked desktop output and bus settings are implemented. Native offline PCM fixtures measure peak/RMS/spectral change and bounded cleanup, with max-bus overshoot corrected. Sustained realtime human listening and physical-device gesture/interruption/output acceptance remain pending.",
       "dependencies": [],
       "acceptanceCriteria": [
         {
           "text": "Gesture-unlocked audio and master/music/SFX settings",
-          "met": false
+          "met": true
         },
         {
           "text": "Authored gameplay cues and hub/combat/boss music",
+          "met": true
+        },
+        {
+          "text": "Sustained human listening and physical-device audio lifecycle acceptance are measured",
           "met": false
         }
       ],
@@ -249,12 +253,22 @@
           "label": "Authored adaptive Web Audio implementation",
           "kind": "note",
           "details": "Authored score, retro synthesis cues, spatial/danger modulation and master/music/SFX buses are implemented in apps/game/src/audio.ts. No generated track accepted. Listening, interruption and physical-device acceptance remain pending."
+        },
+        {
+          "label": "Actual native PCM final fixture report; not human hearing",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/audio-final-report.json"
+        },
+        {
+          "label": "Actual raw float32 PCM verification",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/audio-raw-pcm-verification.json"
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 5,
       "createdAt": "2026-10-10T14:29:27.000Z",
-      "updatedAt": "2026-10-10T16:20:09.013Z"
+      "updatedAt": "2026-10-11T03:04:45.597Z"
     },
     {
       "id": "save",
@@ -728,7 +742,7 @@
       "status": "review",
       "owner": "Producer",
       "priority": "normal",
-      "description": "Current private preview source8b19c6c/cache37e3441c8c48302c integrates desktop cursor aim, bounded pixel-font wrapping and legal interior Mote approach tuning. 252 Rust checks (37 engine,131 gameplay,84 web),87 shell checks, strict TypeScript/native/both-WASM Clippy and normal dual-WASM/game/Studio build pass. Independent engine review reran six actual source tests and three owned Game tick/projectile checks. Independent package review matched78source inputs and the20file archive to runtime8b19c6c and cache37e3441c8c48302c. Actual normal localhost WebGPU/WebGL2 right-held cursor turning and primary shots, plus one Haven-update/reload path, are captured in a declared isolated QAfixture. Reviewed bounded pixel-font wrapping and interior Mote targeting are integrated. Broader narrow moving combat, human listening/balancing, natural campaign, named physicalphones/soak, complete recovery/offline matrix and authenticated remote game execution remain pending.",
+      "description": "Current codex/testing presentation candidate integrates softer bounded thrust, text-only footer, animated segmented vitals, restored native home/mission compass, solid varied asteroid interiors and detailed pixel facilities/icons. 419 native checks, 249 passing shell checks plus one Windows-only file-link skip, strict native Clippy/TS, dual normal WASM build and 18 headless Rust serializer/SaveStore cases passed before tooling/wiki integration. Current evidence supersedes older build captions. Full natural campaign/boss progression, human listening/balance, physical phones/soaks and private hosted PWA reload remain explicit unfinished dependencies.",
       "dependencies": [
         "studio",
         "boss-qa",
@@ -748,7 +762,7 @@
       ],
       "evidence": [
         {
-          "label": "Exact successful private deployment",
+          "label": "Exact successful private release identity and remaining gates",
           "kind": "note",
           "path": "artifacts/private-release.json"
         },
@@ -761,11 +775,6 @@
           "label": "Independent final acceptance scope review",
           "kind": "note",
           "path": "artifacts/hud-riveter-evidence-review.md"
-        },
-        {
-          "label": "Confirmed owner-private release identity and limits",
-          "kind": "note",
-          "path": "artifacts/private-release.json"
         },
         {
           "label": "Actual193Rust/70shell and normal browser corrections",
@@ -793,11 +802,6 @@
           "path": "artifacts/max-level-caption-webgl2-final.jpg"
         },
         {
-          "label": "Exact successful private source/deployment identity and pending gates",
-          "kind": "note",
-          "path": "artifacts/private-release.json"
-        },
-        {
           "label": "Current normal-browser bounded evidence",
           "kind": "note",
           "path": "artifacts/mote-browser-validation.md"
@@ -811,11 +815,6 @@
           "label": "Independent final evidence and completion-scope review",
           "kind": "note",
           "path": "artifacts/mote-final-evidence-review.md"
-        },
-        {
-          "label": "Exact successful private release identity and remaining gates",
-          "kind": "note",
-          "path": "artifacts/private-release.json"
         },
         {
           "label": "Actual bounded normal browser observations",
@@ -851,12 +850,27 @@
           "label": "Current normal browser claim review",
           "kind": "note",
           "path": "artifacts/cursor-aim-browser-review.md"
+        },
+        {
+          "label": "Session request mapping and actual acceptance audit",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/SESSION_RECONCILIATION.md"
+        },
+        {
+          "label": "Current native checks",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/integrated-native-tests.log"
+        },
+        {
+          "label": "Current normal dual-renderer package",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/normal-build.log"
         }
       ],
       "blocker": "",
-      "revision": 10,
+      "revision": 13,
       "createdAt": "2026-10-10T14:29:27.000Z",
-      "updatedAt": "2026-10-10T21:56:46.991Z"
+      "updatedAt": "2026-10-11T03:04:45.651Z"
     },
     {
       "id": "deep-bosses",
@@ -976,7 +990,7 @@
     },
     {
       "id": "task-60e6273d",
-      "title": "Seeded biomes, protected discoveries and sidequests",
+      "title": "Seeded biomes, protected discoveries and discovery missions",
       "description": "Seeded region/biome grid, protected site radii, courier/family bounty events, persistent discoveries/relics and bounded rich background bodies implemented. Native determinism/sanctuary and single-claim reward tests pass. Actual browser accept event and offline reload retained the quest. Additional biome enemy content/hazards and complete reward-action play review remain separate.",
       "department": "Gameplay",
       "owner": "Gameplay specialist",
@@ -1018,9 +1032,9 @@
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 3,
       "createdAt": "2026-10-10T15:31:55.137Z",
-      "updatedAt": "2026-10-10T16:20:08.838Z"
+      "updatedAt": "2026-10-11T03:02:36.578Z"
     },
     {
       "id": "task-05dd95cd",
@@ -1358,7 +1372,7 @@
     },
     {
       "id": "task-d60fcaaa",
-      "title": "Sanctuary quest completion and reward-claim play review",
+      "title": "Sanctuary mission completion and reward-claim play review",
       "description": "Actual browser event acceptance and retained quest reload already pass. Finish a courier/bounty and claim its reward through the dialogue in an actual browser playthrough, verify journal/currency/relic/hull and that replay/reload cannot claim twice. Native single-claim tests pass; no completed browser reward claimed yet.",
       "department": "QA",
       "owner": "Producer / Gameplay review",
@@ -1394,9 +1408,9 @@
         }
       ],
       "blocker": "",
-      "revision": 1,
+      "revision": 2,
       "createdAt": "2026-10-10T16:20:09.141Z",
-      "updatedAt": "2026-10-10T16:20:09.141Z"
+      "updatedAt": "2026-10-11T03:02:36.603Z"
     },
     {
       "id": "task-629ac41a",
@@ -4578,6 +4592,249 @@
       "revision": 1,
       "createdAt": "2026-10-11T02:09:26.559Z",
       "updatedAt": "2026-10-11T02:09:26.559Z"
+    },
+    {
+      "id": "task-d4893127",
+      "title": "Pleasant thrust and disciplined audio mix",
+      "description": "Replace harsh engine timbre, review headroom and engine-only important-cue ducking. Preserve score and lifecycle.",
+      "department": "Audio",
+      "owner": "/root/gameplay_design",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Recorded production graph and voice/lifecycle checks pass",
+          "met": true
+        },
+        {
+          "text": "Actual rendered mix evidence; human listening remains separately pending",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Specialist evidence and limitations",
+          "kind": "note",
+          "path": "work/warm-thrust-output-ceiling/HANDOFF.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-11T02:32:16.741Z",
+      "updatedAt": "2026-10-11T02:54:12.430Z"
+    },
+    {
+      "id": "task-0280e21e",
+      "title": "Text-only footer, animated segmented vitals and navigation",
+      "description": "Smaller original pixel text, shaped animated ship vitals, restored authoritative home/quest guidance.",
+      "department": "Engine/UI",
+      "owner": "/root/engine_research",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Native geometry/navigation/animation regression checks pass",
+          "met": true
+        },
+        {
+          "text": "Actual desktop browser inspection with both renderers; limits recorded",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Specialist evidence and limitations",
+          "kind": "note",
+          "path": "work/minimal-flight-native-handoff/HANDOFF.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-11T02:32:45.489Z",
+      "updatedAt": "2026-10-11T02:54:12.469Z"
+    },
+    {
+      "id": "task-a09ddcf4",
+      "title": "Solid varied procedural asteroids and detailed pixel facilities/icons",
+      "description": "Solid occupied intact asteroid interiors with shaded geology; original more detailed facility and icon cell art.",
+      "department": "Art/Gameplay",
+      "owner": "/root/production_research",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Seeded topology/determinism/destruction and asset containment checks pass",
+          "met": true
+        },
+        {
+          "text": "Actual desktop art review with visual evidence; detailed scope recorded",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Specialist evidence and limitations",
+          "kind": "note",
+          "path": "work/native-art-detail-review/REVIEW.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-11T02:32:45.585Z",
+      "updatedAt": "2026-10-11T02:54:12.522Z"
+    },
+    {
+      "id": "task-cf125df1",
+      "title": "GitHub feature branches, review gates and reproducible CI",
+      "description": "Connect the user-created repository, isolate department worktrees, record actual reviews, validate Windows/Linux and dual WASM packaging before integration.",
+      "department": "Production",
+      "owner": "/root",
+      "status": "active",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Feature branches and real PRs are linked with actual review evidence",
+          "met": false
+        },
+        {
+          "text": "Windows/Linux source checks and dual-renderer package checks pass at the reviewed head",
+          "met": false
+        }
+      ],
+      "evidence": [],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-11T02:54:11.997Z",
+      "updatedAt": "2026-10-11T02:54:11.997Z"
+    },
+    {
+      "id": "task-4945ccc3",
+      "title": "Searchable source-backed Studio Dev Bible",
+      "description": "Game wiki with actual source facts, images/provenance, characters/ships/enemies/universe/missions, and planned versus implemented status. Exact listed-file reads; revision-safe project phase update.",
+      "department": "Engine/UI",
+      "owner": "/root/engine_research",
+      "status": "active",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Search, categories, statuses, source/media links and canonical game data are usable",
+          "met": false
+        },
+        {
+          "text": "Security, source drift, revision/restart tests and actual Studio browser inspection pass",
+          "met": false
+        }
+      ],
+      "evidence": [],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-11T02:54:12.054Z",
+      "updatedAt": "2026-10-11T02:54:12.054Z"
+    },
+    {
+      "id": "task-88f83840",
+      "title": "Exact pixel asset authoring and conversion pipeline",
+      "description": "Consistent detailed pixel art; explicit cells/palette/alpha/topology/transforms/animation/provenance. Preserve disconnected parts and dimensions; losses require explicit recorded policies.",
+      "department": "Art/Engine",
+      "owner": "/root/production_research",
+      "status": "active",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Exact roundtrips and invalid/lossy policy cases are tested with reproducible tools",
+          "met": false
+        },
+        {
+          "text": "A converted asset passes actual native PixelBody/transform rendering and review; unsupported metadata is disclosed",
+          "met": false
+        }
+      ],
+      "evidence": [],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-11T02:54:12.119Z",
+      "updatedAt": "2026-10-11T02:54:12.119Z"
+    },
+    {
+      "id": "task-cf9b0d9c",
+      "title": "Reproducible native Web Audio review tooling",
+      "description": "Tracked preparation/manual native offline PCM review tool replaces ignored scratch dependencies. Fixed historical baseline from Git, current actual audio graph, bounded local server and immutable captures.",
+      "department": "Audio/QA",
+      "owner": "/root/gameplay_design",
+      "status": "active",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Fresh preparation and helper/math checks pass without ignored snapshots",
+          "met": false
+        },
+        {
+          "text": "Actual rendered audio evidence is linked; human listening remains a separate pending gate",
+          "met": false
+        }
+      ],
+      "evidence": [],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-11T02:54:12.183Z",
+      "updatedAt": "2026-10-11T02:54:12.183Z"
+    },
+    {
+      "id": "task-06e080d9",
+      "title": "Reconcile session requirements and honest acceptance states",
+      "description": "Audit requested features across the session; use missions player-facing, preserve internal save compatibility; retain future/physical/natural-play validation gates and unmet dependencies.",
+      "department": "Production",
+      "owner": "/root",
+      "status": "active",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Current and future requirements map to tasks and documented game facts",
+          "met": false
+        },
+        {
+          "text": "Actual evidence, completed runs, interrupted audits and remaining gates are recorded without fabricated meetings",
+          "met": false
+        }
+      ],
+      "evidence": [],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-11T02:54:12.258Z",
+      "updatedAt": "2026-10-11T02:54:12.258Z"
+    },
+    {
+      "id": "task-55bd21c0",
+      "title": "One canonical testing-branch game preview",
+      "description": "Close verified older project game servers, use one strict-port current codex/testing preview and keep Studio separate. Temporary QA servers stop when finished.",
+      "department": "Web/QA",
+      "owner": "/root",
+      "status": "active",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Older game listeners are stopped with exact ownership evidence",
+          "met": false
+        },
+        {
+          "text": "Latest normal build runs on one canonical preview and stale/foreign listeners fail visibly",
+          "met": false
+        }
+      ],
+      "evidence": [],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-11T02:54:12.335Z",
+      "updatedAt": "2026-10-11T02:54:12.335Z"
     }
   ],
   "reviews": [
@@ -5385,6 +5642,25 @@
         "task-0702e217",
         "task-4aed8f22",
         "task-388e1f9b"
+      ]
+    },
+    {
+      "id": "review-e2058015",
+      "title": "Session requirements, branch isolation and acceptance review",
+      "body": "Mapped the session to current/future tasks without treating imported fixtures, offline PCM or desktop images as natural-play, human or physical-phone acceptance. Historical reviews remain append-only. Two Review tasks with all local criteria met retain unfinished dependencies. The specialists contributed actual frozen implementation handoffs; this audit was completed by the producer.",
+      "author": "Producer",
+      "source": "Actual session audit, frozen specialist handoffs and repository CI",
+      "createdAt": "2026-10-11T03:02:54.486Z",
+      "participants": [
+        "Producer",
+        "Engine/UI specialist",
+        "Art specialist",
+        "Audio/gameplay specialist"
+      ],
+      "taskIds": [
+        "task-06e080d9",
+        "slice-review",
+        "task-cf125df1"
       ]
     }
   ],
@@ -11176,6 +11452,346 @@
       "author": "Producer",
       "source": "Exact official source/archive audit and successful owner-private publication; actual hosted reload failure recorded separately",
       "createdAt": "2026-10-11T02:09:26.594Z"
+    },
+    {
+      "id": "e26f3ff0-ccd0-4ffd-b0c5-d7a3dcc8e114",
+      "revision": 460,
+      "kind": "task.create",
+      "itemId": "task-d4893127",
+      "title": "Pleasant thrust and disciplined audio mix",
+      "author": "Producer",
+      "source": "Current user refinement request and actual specialist dispatch",
+      "createdAt": "2026-10-11T02:32:16.741Z"
+    },
+    {
+      "id": "a0e4fda8-84b3-4032-9302-a04e78d7a4d4",
+      "revision": 461,
+      "kind": "run",
+      "itemId": "run-07019e9a",
+      "title": "/root/gameplay_design · running",
+      "author": "Producer",
+      "source": "Actual followup dispatch",
+      "createdAt": "2026-10-11T02:32:45.432Z"
+    },
+    {
+      "id": "cfc26edf-a813-401d-a16a-fd0efef22ef7",
+      "revision": 462,
+      "kind": "task.create",
+      "itemId": "task-0280e21e",
+      "title": "Text-only footer, animated segmented vitals and navigation",
+      "author": "Producer",
+      "source": "Current user refinement request and actual specialist dispatch",
+      "createdAt": "2026-10-11T02:32:45.489Z"
+    },
+    {
+      "id": "e859da14-51fe-4616-80da-4950fb49974e",
+      "revision": 463,
+      "kind": "run",
+      "itemId": "run-bfd4bc71",
+      "title": "/root/engine_research · running",
+      "author": "Producer",
+      "source": "Actual followup dispatch",
+      "createdAt": "2026-10-11T02:32:45.536Z"
+    },
+    {
+      "id": "b6d53215-f729-4c20-bdb3-6371073e08b2",
+      "revision": 464,
+      "kind": "task.create",
+      "itemId": "task-a09ddcf4",
+      "title": "Solid varied procedural asteroids and detailed pixel facilities/icons",
+      "author": "Producer",
+      "source": "Current user refinement request and actual specialist dispatch",
+      "createdAt": "2026-10-11T02:32:45.585Z"
+    },
+    {
+      "id": "afe7de32-ee83-4348-96bc-be0ef870f545",
+      "revision": 465,
+      "kind": "run",
+      "itemId": "run-49a3740c",
+      "title": "/root/production_research · running",
+      "author": "Producer",
+      "source": "Actual followup dispatch",
+      "createdAt": "2026-10-11T02:32:45.631Z"
+    },
+    {
+      "id": "153fc6a7-7a24-4d2c-a1c2-e6b2957cda76",
+      "revision": 466,
+      "kind": "task.create",
+      "itemId": "task-cf125df1",
+      "title": "GitHub feature branches, review gates and reproducible CI",
+      "author": "Producer",
+      "source": "Actual user request and isolated feature assignments",
+      "createdAt": "2026-10-11T02:54:11.997Z"
+    },
+    {
+      "id": "cee5e549-a0dc-41bc-97c2-1c6a20e4b09e",
+      "revision": 467,
+      "kind": "run",
+      "itemId": "run-6a60f3d9",
+      "title": "/root · running",
+      "author": "Producer",
+      "source": "Actual task dispatch / root integration work",
+      "createdAt": "2026-10-11T02:54:12.026Z"
+    },
+    {
+      "id": "e89d46e7-c13c-471c-bc46-42f32ac1b231",
+      "revision": 468,
+      "kind": "task.create",
+      "itemId": "task-4945ccc3",
+      "title": "Searchable source-backed Studio Dev Bible",
+      "author": "Producer",
+      "source": "Actual user request and isolated feature assignments",
+      "createdAt": "2026-10-11T02:54:12.054Z"
+    },
+    {
+      "id": "a2e93474-3731-4030-8222-87e94bdcef8e",
+      "revision": 469,
+      "kind": "run",
+      "itemId": "run-42bb3257",
+      "title": "/root/engine_research · running",
+      "author": "Producer",
+      "source": "Actual task dispatch / root integration work",
+      "createdAt": "2026-10-11T02:54:12.086Z"
+    },
+    {
+      "id": "3902b578-5868-4966-b8c9-1a7e07f656ca",
+      "revision": 470,
+      "kind": "task.create",
+      "itemId": "task-88f83840",
+      "title": "Exact pixel asset authoring and conversion pipeline",
+      "author": "Producer",
+      "source": "Actual user request and isolated feature assignments",
+      "createdAt": "2026-10-11T02:54:12.119Z"
+    },
+    {
+      "id": "e3b5fe20-bcb4-4dbc-aa63-fc7aab0ec650",
+      "revision": 471,
+      "kind": "run",
+      "itemId": "run-2e02a54d",
+      "title": "/root/production_research · running",
+      "author": "Producer",
+      "source": "Actual task dispatch / root integration work",
+      "createdAt": "2026-10-11T02:54:12.148Z"
+    },
+    {
+      "id": "b220fa20-efbc-42db-aece-88ca61f7179a",
+      "revision": 472,
+      "kind": "task.create",
+      "itemId": "task-cf9b0d9c",
+      "title": "Reproducible native Web Audio review tooling",
+      "author": "Producer",
+      "source": "Actual user request and isolated feature assignments",
+      "createdAt": "2026-10-11T02:54:12.183Z"
+    },
+    {
+      "id": "4e304461-617c-445d-82c6-909794a9dfbc",
+      "revision": 473,
+      "kind": "run",
+      "itemId": "run-ca0bbaac",
+      "title": "/root/gameplay_design · running",
+      "author": "Producer",
+      "source": "Actual task dispatch / root integration work",
+      "createdAt": "2026-10-11T02:54:12.228Z"
+    },
+    {
+      "id": "f322307c-521e-4fa2-9106-83e94b73584d",
+      "revision": 474,
+      "kind": "task.create",
+      "itemId": "task-06e080d9",
+      "title": "Reconcile session requirements and honest acceptance states",
+      "author": "Producer",
+      "source": "Actual user request and isolated feature assignments",
+      "createdAt": "2026-10-11T02:54:12.258Z"
+    },
+    {
+      "id": "a270520b-7b5e-4d39-a489-90dc77630482",
+      "revision": 475,
+      "kind": "run",
+      "itemId": "run-b5d34f2e",
+      "title": "/root · running",
+      "author": "Producer",
+      "source": "Actual task dispatch / root integration work",
+      "createdAt": "2026-10-11T02:54:12.305Z"
+    },
+    {
+      "id": "4363e0c9-6f8a-41e5-a881-5ed04acdbdba",
+      "revision": 476,
+      "kind": "task.create",
+      "itemId": "task-55bd21c0",
+      "title": "One canonical testing-branch game preview",
+      "author": "Producer",
+      "source": "Actual user request and isolated feature assignments",
+      "createdAt": "2026-10-11T02:54:12.335Z"
+    },
+    {
+      "id": "8c1c3e57-594f-43bd-b675-c8df7fd4c161",
+      "revision": 477,
+      "kind": "run",
+      "itemId": "run-1c5968cb",
+      "title": "/root · running",
+      "author": "Producer",
+      "source": "Actual task dispatch / root integration work",
+      "createdAt": "2026-10-11T02:54:12.385Z"
+    },
+    {
+      "id": "8ec74063-42d5-4e45-9972-5f3abfb77d5d",
+      "revision": 478,
+      "kind": "run",
+      "itemId": "run-9f9d8611",
+      "title": "/root/gameplay_design · completed",
+      "author": "Producer",
+      "source": "Actual frozen specialist handoff and isolated migration",
+      "createdAt": "2026-10-11T02:54:12.399Z"
+    },
+    {
+      "id": "0d137ead-ba9f-43ce-841b-5a834a8985e4",
+      "revision": 479,
+      "kind": "task.update",
+      "itemId": "task-d4893127",
+      "title": "Pleasant thrust and disciplined audio mix",
+      "author": "Producer",
+      "source": "Actual native specialist evidence",
+      "createdAt": "2026-10-11T02:54:12.430Z"
+    },
+    {
+      "id": "179f332b-e9a7-45f3-bea7-2eaf93091b5d",
+      "revision": 480,
+      "kind": "run",
+      "itemId": "run-eb7f28ae",
+      "title": "/root/engine_research · completed",
+      "author": "Producer",
+      "source": "Actual frozen specialist handoff and isolated migration",
+      "createdAt": "2026-10-11T02:54:12.446Z"
+    },
+    {
+      "id": "07ba45bc-0c78-412a-8fc7-a37f5f1c03a8",
+      "revision": 481,
+      "kind": "task.update",
+      "itemId": "task-0280e21e",
+      "title": "Text-only footer, animated segmented vitals and navigation",
+      "author": "Producer",
+      "source": "Actual native specialist evidence",
+      "createdAt": "2026-10-11T02:54:12.469Z"
+    },
+    {
+      "id": "ae19c9c4-ae35-4cb7-801d-8f7c54a852c8",
+      "revision": 482,
+      "kind": "run",
+      "itemId": "run-d4d3278e",
+      "title": "/root/production_research · completed",
+      "author": "Producer",
+      "source": "Actual frozen specialist handoff and isolated migration",
+      "createdAt": "2026-10-11T02:54:12.491Z"
+    },
+    {
+      "id": "ba896412-b401-4f6f-bcdd-8e36e426eda9",
+      "revision": 483,
+      "kind": "task.update",
+      "itemId": "task-a09ddcf4",
+      "title": "Solid varied procedural asteroids and detailed pixel facilities/icons",
+      "author": "Producer",
+      "source": "Actual native specialist evidence",
+      "createdAt": "2026-10-11T02:54:12.522Z"
+    },
+    {
+      "id": "6daf5bf5-32e6-49ca-88b2-cdd3b26b377e",
+      "revision": 484,
+      "kind": "task.update",
+      "itemId": "task-60e6273d",
+      "title": "Seeded biomes, protected discoveries and discovery missions",
+      "author": "Producer",
+      "source": "Latest user terminology: quests are missions; serialized field remains compatible",
+      "createdAt": "2026-10-11T03:02:36.578Z"
+    },
+    {
+      "id": "43a291ad-6d24-4e3a-9feb-46af7645d147",
+      "revision": 485,
+      "kind": "task.update",
+      "itemId": "task-d60fcaaa",
+      "title": "Sanctuary mission completion and reward-claim play review",
+      "author": "Producer",
+      "source": "Latest user terminology: quests are missions; serialized field remains compatible",
+      "createdAt": "2026-10-11T03:02:36.603Z"
+    },
+    {
+      "id": "670b6b49-b7b9-48a6-bc00-81b940ee35bf",
+      "revision": 486,
+      "kind": "task.update",
+      "itemId": "audio",
+      "title": "Retro synthesis and adaptive sequencer",
+      "author": "Producer",
+      "source": "Actual gesture-unlocked running context, authored source tests and offline PCM; human acceptance remains explicit",
+      "createdAt": "2026-10-11T03:02:36.630Z"
+    },
+    {
+      "id": "1ebc735c-92e5-49ff-8782-3ff62a46fbd5",
+      "revision": 487,
+      "kind": "task.update",
+      "itemId": "slice-review",
+      "title": "Integrated slice review and release evidence",
+      "author": "Producer",
+      "source": "Current integrated source evidence; preserve unfinished release dependencies",
+      "createdAt": "2026-10-11T03:02:36.680Z"
+    },
+    {
+      "id": "a3e2bd1a-6077-41ed-a1bb-162ec1d2ba3d",
+      "revision": 488,
+      "kind": "task.update",
+      "itemId": "audio",
+      "title": "Retro synthesis and adaptive sequencer",
+      "author": "Producer",
+      "source": "Actual gesture-unlocked running context, authored source tests and offline PCM; human acceptance remains explicit",
+      "createdAt": "2026-10-11T03:02:54.409Z"
+    },
+    {
+      "id": "4eaf23f3-2a0d-48b1-87f8-f9d5459d11b6",
+      "revision": 489,
+      "kind": "task.update",
+      "itemId": "slice-review",
+      "title": "Integrated slice review and release evidence",
+      "author": "Producer",
+      "source": "Current integrated source evidence; preserve unfinished release dependencies",
+      "createdAt": "2026-10-11T03:02:54.471Z"
+    },
+    {
+      "id": "c96119fc-2090-4fa3-9280-3b40b9a93a2a",
+      "revision": 490,
+      "kind": "review",
+      "itemId": "review-e2058015",
+      "title": "Session requirements, branch isolation and acceptance review",
+      "author": "Producer",
+      "source": "Actual session audit, frozen specialist handoffs and repository CI",
+      "createdAt": "2026-10-11T03:02:54.486Z"
+    },
+    {
+      "id": "ad741b9a-bdba-4a17-bc01-c0374edf43d5",
+      "revision": 491,
+      "kind": "run",
+      "itemId": "run-80b33728",
+      "title": "Spark readonly session-audit worker · interrupted",
+      "author": "Producer",
+      "source": "Actual bounded local worker timeout",
+      "createdAt": "2026-10-11T03:02:54.502Z"
+    },
+    {
+      "id": "2cfc6fb9-4fad-4772-8f43-776c1a47a60d",
+      "revision": 492,
+      "kind": "task.update",
+      "itemId": "audio",
+      "title": "Retro synthesis and adaptive sequencer",
+      "author": "Producer",
+      "source": "Deduplicate current audit evidence and retain one explicit pending human/device audio gate",
+      "createdAt": "2026-10-11T03:04:45.597Z"
+    },
+    {
+      "id": "5c3a5a23-2c01-4de6-8559-e7093a8f7b32",
+      "revision": 493,
+      "kind": "task.update",
+      "itemId": "slice-review",
+      "title": "Integrated slice review and release evidence",
+      "author": "Producer",
+      "source": "Deduplicate current audit evidence and retain one explicit pending human/device audio gate",
+      "createdAt": "2026-10-11T03:04:45.651Z"
     }
   ],
   "runRecords": [
@@ -15279,6 +15895,297 @@
       "author": "Producer",
       "source": "Exact official source/archive audit and successful owner-private publication; actual hosted reload failure recorded separately",
       "createdAt": "2026-10-11T02:09:26.594Z"
+    },
+    {
+      "id": "run-07019e9a",
+      "title": "/root/gameplay_design · running",
+      "agentId": "gameplay_design",
+      "agentLabel": "/root/gameplay_design",
+      "state": "running",
+      "observedAt": "2026-10-11T02:32:45.427Z",
+      "taskIds": [
+        "task-d4893127"
+      ],
+      "summary": "Replace harsh engine timbre, review headroom and engine-only important-cue ducking. Preserve score and lifecycle.",
+      "evidence": [
+        {
+          "label": "Actual ownership assignment",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/ASSIGNMENTS.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual followup dispatch",
+      "createdAt": "2026-10-11T02:32:45.432Z"
+    },
+    {
+      "id": "run-bfd4bc71",
+      "title": "/root/engine_research · running",
+      "agentId": "engine_research",
+      "agentLabel": "/root/engine_research",
+      "state": "running",
+      "observedAt": "2026-10-11T02:32:45.520Z",
+      "taskIds": [
+        "task-0280e21e"
+      ],
+      "summary": "Smaller original pixel text, shaped animated ship vitals, restored authoritative home/quest guidance.",
+      "evidence": [
+        {
+          "label": "Actual ownership assignment",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/ASSIGNMENTS.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual followup dispatch",
+      "createdAt": "2026-10-11T02:32:45.536Z"
+    },
+    {
+      "id": "run-49a3740c",
+      "title": "/root/production_research · running",
+      "agentId": "production_research",
+      "agentLabel": "/root/production_research",
+      "state": "running",
+      "observedAt": "2026-10-11T02:32:45.615Z",
+      "taskIds": [
+        "task-a09ddcf4"
+      ],
+      "summary": "Solid occupied intact asteroid interiors with shaded geology; original more detailed facility and icon cell art.",
+      "evidence": [
+        {
+          "label": "Actual ownership assignment",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/ASSIGNMENTS.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual followup dispatch",
+      "createdAt": "2026-10-11T02:32:45.631Z"
+    },
+    {
+      "id": "run-6a60f3d9",
+      "title": "/root · running",
+      "agentId": "/root",
+      "agentLabel": "/root",
+      "state": "running",
+      "observedAt": "2026-10-11T02:54:12.024Z",
+      "taskIds": [
+        "task-cf125df1"
+      ],
+      "summary": "Connect the user-created repository, isolate department worktrees, record actual reviews, validate Windows/Linux and dual WASM packaging before integration.",
+      "evidence": [
+        {
+          "label": "Actual assignment",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/ASSIGNMENTS.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual task dispatch / root integration work",
+      "createdAt": "2026-10-11T02:54:12.026Z"
+    },
+    {
+      "id": "run-42bb3257",
+      "title": "/root/engine_research · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "/root/engine_research",
+      "state": "running",
+      "observedAt": "2026-10-11T02:54:12.074Z",
+      "taskIds": [
+        "task-4945ccc3"
+      ],
+      "summary": "Game wiki with actual source facts, images/provenance, characters/ships/enemies/universe/missions, and planned versus implemented status. Exact listed-file reads; revision-safe project phase update.",
+      "evidence": [
+        {
+          "label": "Actual assignment",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/ASSIGNMENTS.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual task dispatch / root integration work",
+      "createdAt": "2026-10-11T02:54:12.086Z"
+    },
+    {
+      "id": "run-2e02a54d",
+      "title": "/root/production_research · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "/root/production_research",
+      "state": "running",
+      "observedAt": "2026-10-11T02:54:12.140Z",
+      "taskIds": [
+        "task-88f83840"
+      ],
+      "summary": "Consistent detailed pixel art; explicit cells/palette/alpha/topology/transforms/animation/provenance. Preserve disconnected parts and dimensions; losses require explicit recorded policies.",
+      "evidence": [
+        {
+          "label": "Actual assignment",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/ASSIGNMENTS.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual task dispatch / root integration work",
+      "createdAt": "2026-10-11T02:54:12.148Z"
+    },
+    {
+      "id": "run-ca0bbaac",
+      "title": "/root/gameplay_design · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "/root/gameplay_design",
+      "state": "running",
+      "observedAt": "2026-10-11T02:54:12.227Z",
+      "taskIds": [
+        "task-cf9b0d9c"
+      ],
+      "summary": "Tracked preparation/manual native offline PCM review tool replaces ignored scratch dependencies. Fixed historical baseline from Git, current actual audio graph, bounded local server and immutable captures.",
+      "evidence": [
+        {
+          "label": "Actual assignment",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/ASSIGNMENTS.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual task dispatch / root integration work",
+      "createdAt": "2026-10-11T02:54:12.228Z"
+    },
+    {
+      "id": "run-b5d34f2e",
+      "title": "/root · running",
+      "agentId": "/root",
+      "agentLabel": "/root",
+      "state": "running",
+      "observedAt": "2026-10-11T02:54:12.289Z",
+      "taskIds": [
+        "task-06e080d9"
+      ],
+      "summary": "Audit requested features across the session; use missions player-facing, preserve internal save compatibility; retain future/physical/natural-play validation gates and unmet dependencies.",
+      "evidence": [
+        {
+          "label": "Actual assignment",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/ASSIGNMENTS.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual task dispatch / root integration work",
+      "createdAt": "2026-10-11T02:54:12.305Z"
+    },
+    {
+      "id": "run-1c5968cb",
+      "title": "/root · running",
+      "agentId": "/root",
+      "agentLabel": "/root",
+      "state": "running",
+      "observedAt": "2026-10-11T02:54:12.367Z",
+      "taskIds": [
+        "task-55bd21c0"
+      ],
+      "summary": "Close verified older project game servers, use one strict-port current codex/testing preview and keep Studio separate. Temporary QA servers stop when finished.",
+      "evidence": [
+        {
+          "label": "Actual assignment",
+          "kind": "note",
+          "path": "artifacts/presentation-refinement-20261011/ASSIGNMENTS.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual task dispatch / root integration work",
+      "createdAt": "2026-10-11T02:54:12.385Z"
+    },
+    {
+      "id": "run-9f9d8611",
+      "title": "/root/gameplay_design · completed",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "/root/gameplay_design",
+      "state": "completed",
+      "observedAt": "2026-10-11T02:54:12.393Z",
+      "taskIds": [
+        "task-d4893127"
+      ],
+      "summary": "Source and native checks handed off; browser integration and relevant human/device gates remain pending.",
+      "evidence": [
+        {
+          "label": "Frozen specialist handoff",
+          "kind": "note",
+          "path": "work/warm-thrust-output-ceiling/HANDOFF.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual frozen specialist handoff and isolated migration",
+      "createdAt": "2026-10-11T02:54:12.399Z"
+    },
+    {
+      "id": "run-eb7f28ae",
+      "title": "/root/engine_research · completed",
+      "agentId": "/root/engine_research",
+      "agentLabel": "/root/engine_research",
+      "state": "completed",
+      "observedAt": "2026-10-11T02:54:12.437Z",
+      "taskIds": [
+        "task-0280e21e"
+      ],
+      "summary": "Source and native checks handed off; browser integration and relevant human/device gates remain pending.",
+      "evidence": [
+        {
+          "label": "Frozen specialist handoff",
+          "kind": "note",
+          "path": "work/minimal-flight-native-handoff/HANDOFF.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual frozen specialist handoff and isolated migration",
+      "createdAt": "2026-10-11T02:54:12.446Z"
+    },
+    {
+      "id": "run-d4d3278e",
+      "title": "/root/production_research · completed",
+      "agentId": "/root/production_research",
+      "agentLabel": "/root/production_research",
+      "state": "completed",
+      "observedAt": "2026-10-11T02:54:12.477Z",
+      "taskIds": [
+        "task-a09ddcf4"
+      ],
+      "summary": "Source and native checks handed off; browser integration and relevant human/device gates remain pending.",
+      "evidence": [
+        {
+          "label": "Frozen specialist handoff",
+          "kind": "note",
+          "path": "work/native-art-detail-review/REVIEW.md"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual frozen specialist handoff and isolated migration",
+      "createdAt": "2026-10-11T02:54:12.491Z"
+    },
+    {
+      "id": "run-80b33728",
+      "title": "Spark readonly session-audit worker · interrupted",
+      "agentId": "spark-mission-audit",
+      "agentLabel": "Spark readonly session-audit worker",
+      "state": "interrupted",
+      "observedAt": "2026-10-11T03:02:54.497Z",
+      "taskIds": [
+        "task-06e080d9"
+      ],
+      "summary": "Bounded readonly audit reached its 240-second timeout without a final verdict. Producer completed the mapping directly; no independent passing review claimed.",
+      "evidence": [
+        {
+          "label": "Actual bounded task input",
+          "kind": "note",
+          "path": "work/mission-audit-task.txt"
+        },
+        {
+          "label": "Audit inputs",
+          "kind": "note",
+          "path": "work/mission-audit-input.json"
+        }
+      ],
+      "author": "Producer",
+      "source": "Actual bounded local worker timeout",
+      "createdAt": "2026-10-11T03:02:54.502Z"
     }
   ]
 }

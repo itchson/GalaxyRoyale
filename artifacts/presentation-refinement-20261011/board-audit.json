@@ -1,0 +1,809 @@
+{
+  "observedAt": "2026-10-11T03:04:45.698Z",
+  "revision": 493,
+  "tasks": [
+    {
+      "id": "studio",
+      "title": "Mission Control: real production board",
+      "status": "complete",
+      "unmet": [],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "engine",
+      "title": "Pixel quad engine and hierarchy",
+      "status": "complete",
+      "unmet": [],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "gameplay",
+      "title": "Combat, radial zones and progression",
+      "status": "complete",
+      "unmet": [],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "web-shell",
+      "title": "WASM renderer, controls and web shell",
+      "status": "complete",
+      "unmet": [],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "audio",
+      "title": "Retro synthesis and adaptive sequencer",
+      "status": "review",
+      "unmet": [
+        "Sustained human listening and physical-device audio lifecycle acceptance are measured"
+      ],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "save",
+      "title": "Versioned local progression and settings",
+      "status": "complete",
+      "unmet": [],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "pwa",
+      "title": "Offline PWA packaging",
+      "status": "complete",
+      "unmet": [],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "asteroids",
+      "title": "Asteroid damage, impact and loot validation",
+      "status": "review",
+      "unmet": [
+        "Visible pixel destruction and responsive impacts"
+      ],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "controls-qa",
+      "title": "Controller and input interruption tests",
+      "status": "review",
+      "unmet": [
+        "Mobile multitouch and desktop destination movement reviewed"
+      ],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "boss-qa",
+      "title": "Fifteen boss encounters: full browser and unlock play review",
+      "status": "review",
+      "unmet": [
+        "Each first-generation boss encounter is reachable",
+        "Signature ability drops, unlocks and upgrades verified"
+      ],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "art-direction",
+      "title": "Neo-retro cosmic visual polish",
+      "status": "review",
+      "unmet": [
+        "Effects support enemy and hazard readability"
+      ],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "performance",
+      "title": "Performance captures and quality limits",
+      "status": "review",
+      "unmet": [
+        "Sustained phone testing recorded separately from emulation"
+      ],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "mobile",
+      "title": "Physical midrange-phone acceptance",
+      "status": "backlog",
+      "unmet": [
+        "Named iOS/Android hardware and browser evidence",
+        "Target 60 FPS tested during representative sustained combat"
+      ],
+      "unfinishedDependencies": [
+        "controls-qa",
+        "performance"
+      ]
+    },
+    {
+      "id": "balance",
+      "title": "Slice combat and progression tuning",
+      "status": "review",
+      "unmet": [
+        "Radial difficulty and rewards form a coherent run",
+        "Upgrade costs and boss thresholds reviewed in play"
+      ],
+      "unfinishedDependencies": [
+        "boss-qa",
+        "asteroids"
+      ]
+    },
+    {
+      "id": "accessibility",
+      "title": "Readability, motion and audio settings",
+      "status": "review",
+      "unmet": [
+        "Readable touch targets and critical HUD information"
+      ],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "audio-ai",
+      "title": "Optional offline music candidate experiment",
+      "status": "backlog",
+      "unmet": [
+        "Up to three short ACE-Step XL candidates with provenance",
+        "Document acceptance or rejection; game remains independent"
+      ],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "slice-review",
+      "title": "Integrated slice review and release evidence",
+      "status": "review",
+      "unmet": [],
+      "unfinishedDependencies": [
+        "boss-qa",
+        "balance",
+        "audio"
+      ]
+    },
+    {
+      "id": "deep-bosses",
+      "title": "Fifteen authored family bosses and five-generation promotion",
+      "status": "review",
+      "unmet": [
+        "Full browser choreography and natural-progression human play review for all fifteen encounters"
+      ],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-0cdf6811",
+      "title": "Generated pixel UI, animated title and settings",
+      "status": "complete",
+      "unmet": [],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-60e6273d",
+      "title": "Seeded biomes, protected discoveries and discovery missions",
+      "status": "complete",
+      "unmet": [],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-05dd95cd",
+      "title": "Invite friends for co-op expeditions",
+      "status": "backlog",
+      "unmet": [
+        "Define authoritative world ownership and invite lifecycle",
+        "Synchronize destruction, missions and progression without duplicate rewards",
+        "Validate reconnect and compatible save versions"
+      ],
+      "unfinishedDependencies": [
+        "task-7e8e0a50"
+      ]
+    },
+    {
+      "id": "task-7e8e0a50",
+      "title": "Authoritative multiplayer world and session foundation",
+      "status": "backlog",
+      "unmet": [
+        "Document authority, session identity, invite/reconnect lifecycle and compatible save boundaries",
+        "Synchronize movement, destruction, missions and single-claim rewards under server validation",
+        "Record real multi-client, reconnect and stale/replayed-message tests"
+      ],
+      "unfinishedDependencies": [
+        "slice-review"
+      ]
+    },
+    {
+      "id": "task-acf182ad",
+      "title": "Player-owned docks: radius upgrades and arenas",
+      "status": "backlog",
+      "unmet": [
+        "Approve ownership, protection radius limits/costs and arena entry, exit and reward rules",
+        "Verify protection, spawn exclusion, interactions and visual radius agree at upgraded boundaries",
+        "Verify reload/migration, ownership and single-claim arena rewards with recorded play evidence"
+      ],
+      "unfinishedDependencies": [
+        "slice-review"
+      ]
+    },
+    {
+      "id": "task-2439af52",
+      "title": "Battle royale: compact circular seeded world and antipodal edges",
+      "status": "backlog",
+      "unmet": [
+        "Approve compact circular dimensions and deterministic equally spaced zone layout",
+        "Deterministic edge tests preserve heading/speed and resolve overshoot/repeated crossings",
+        "Camera rebase avoids a cross-universe sweep; targets/effects and multi-client state remain consistent"
+      ],
+      "unfinishedDependencies": [
+        "task-7e8e0a50",
+        "task-05dd95cd"
+      ]
+    },
+    {
+      "id": "task-e665335c",
+      "title": "Battle royale: arena sieges and last-player-standing match loop",
+      "status": "backlog",
+      "unmet": [
+        "Approve siege objectives, elimination/respawn, protection interaction and player-count rules",
+        "Authoritative match ends once for the last surviving player with defined simultaneous-elimination handling",
+        "Record real multiplayer match, reconnect and reward-isolation acceptance evidence"
+      ],
+      "unfinishedDependencies": [
+        "task-7e8e0a50",
+        "task-05dd95cd",
+        "task-acf182ad",
+        "task-2439af52"
+      ]
+    },
+    {
+      "id": "task-168fe92e",
+      "title": "Developer console: bounded semantic controls",
+      "status": "complete",
+      "unmet": [],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-00ee2401",
+      "title": "Console and compact HUD: integrated browser acceptance",
+      "status": "complete",
+      "unmet": [],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-35a00493",
+      "title": "Contextual sanctuary dialogue and pixel portraits",
+      "status": "complete",
+      "unmet": [],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-d60fcaaa",
+      "title": "Sanctuary mission completion and reward-claim play review",
+      "status": "review",
+      "unmet": [
+        "Actual browser completed-event reward action, journal/currency/relic/hull and replay/reload are verified"
+      ],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-629ac41a",
+      "title": "Authored narrative director and optional voice boundary",
+      "status": "complete",
+      "unmet": [],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-0f6ce1db",
+      "title": "Original NPC voice clips and optional local inference acceptance",
+      "status": "backlog",
+      "unmet": [
+        "Verify a compatible isolated local runtime using the existing model cache; record package/model licenses and reference provenance.",
+        "Generate and listen to reviewed short clips for eight original NPC characters with stable character mapping.",
+        "Measure latency, memory and offline replay; choose prerecorded portable clips or explicit desktop-only bridge based on evidence.",
+        "Test cancellation, page replay and failure fallback on a real browser and physical phone without making inference mandatory."
+      ],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-52a708c0",
+      "title": "Eight solo champion arena trials and distinct ship signatures",
+      "status": "review",
+      "unmet": [
+        "Browser play confirms challenge, victory, retreat, death/retry and persistence for each champion.",
+        "Balance/readability acceptance covers all eight encounters rather than only QA scene setup."
+      ],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-57a3ed52",
+      "title": "Champion blueprints, dock crafting and ship selection",
+      "status": "review",
+      "unmet": [],
+      "unfinishedDependencies": [
+        "task-52a708c0"
+      ]
+    },
+    {
+      "id": "task-0a386265",
+      "title": "Solo Galaxy Royale round robin and standings",
+      "status": "review",
+      "unmet": [
+        "Browser play verifies all eight matches, losses/forfeits, completion, retry and persisted standings."
+      ],
+      "unfinishedDependencies": [
+        "task-52a708c0"
+      ]
+    },
+    {
+      "id": "task-83929b1c",
+      "title": "Campaign victory credits and continued hangar play",
+      "status": "review",
+      "unmet": [
+        "Actual campaign first-place victory opens readable credits and grants Sovereign exactly once.",
+        "Acknowledging/closing credits and reloading retains ownership and prevents repeated unsolicited presentation.",
+        "Player can return to hangar/flight/title without background simulation or stale async transitions."
+      ],
+      "unfinishedDependencies": [
+        "task-0a386265"
+      ]
+    },
+    {
+      "id": "task-5771502c",
+      "title": "Dialogue pages and voice replay: integrated browser acceptance",
+      "status": "review",
+      "unmet": [
+        "Pages, contextual portraits and final-page action remain readable and reachable at desktop and narrow landscape layouts.",
+        "Voice preference stays off by default, Replay is explicit and unavailable speech never blocks readable dialogue.",
+        "Close/navigation/hide pause or cancel actual audio and stale provider callbacks cannot replace a new conversation."
+      ],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-aaf77ab5",
+      "title": "Death report, Retry/title and safe menu transitions",
+      "status": "review",
+      "unmet": [
+        "Death report displays the real run result; Retry resumes at Haven and title stops simulation/input/audio.",
+        "Dock fire opens the dock menu without firing, and desktop pause/resume remains consistent.",
+        "Mobile collapsed icons open reachable settings/title actions and never leak pointer input into flight."
+      ],
+      "unfinishedDependencies": [
+        "controls-qa"
+      ]
+    },
+    {
+      "id": "task-e2cec34f",
+      "title": "Autosave, ship XP/rank gates and bounded dock material stash",
+      "status": "review",
+      "unmet": [
+        "Crafting and upgrades enforce final level/resource gates consistently in Rust and browser feedback."
+      ],
+      "unfinishedDependencies": [
+        "task-57a3ed52"
+      ]
+    },
+    {
+      "id": "task-933d3130",
+      "title": "Bounded world zoom and gradual Scout drive progression",
+      "status": "complete",
+      "unmet": [],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-607637a7",
+      "title": "Fresh WASM checkpoint contract and explicit nullable save fields",
+      "status": "complete",
+      "unmet": [],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-cdf65b48",
+      "title": "Fifteen boss pixel silhouettes and collision-aligned phase art",
+      "status": "complete",
+      "unmet": [],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-27850da6",
+      "title": "Five-generation save migration and compact boss UI integration",
+      "status": "complete",
+      "unmet": [],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-3b49be6a",
+      "title": "Independent adversarial five-generation progression review",
+      "status": "complete",
+      "unmet": [],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-426419e2",
+      "title": "Adaptive boss HUD placement: prototype and integration",
+      "status": "complete",
+      "unmet": [],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-8db643cb",
+      "title": "Iron Belt Riveter: first biome-specific pixel enemy",
+      "status": "complete",
+      "unmet": [],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-e8684a94",
+      "title": "Radiation biome enemy: deterministic controller and pixel concept",
+      "status": "complete",
+      "unmet": [],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-6c761ea8",
+      "title": "Fixed-tick weapon cadence: make every fire-rate rank meaningful",
+      "status": "complete",
+      "unmet": [],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-696d7d24",
+      "title": "Maximum ship level: truthful XP progress caption",
+      "status": "complete",
+      "unmet": [],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-80134b58",
+      "title": "Studio reviews: reject malformed task references atomically",
+      "status": "complete",
+      "unmet": [],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-b27a43c9",
+      "title": "Centered dock prompts: retain their pressed-state hitbox",
+      "status": "complete",
+      "unmet": [],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-0851af86",
+      "title": "QA forced death: prevent eligible regeneration from reviving the fixture",
+      "status": "complete",
+      "unmet": [],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-b0a59d63",
+      "title": "Mote moving-player warning admission and encounter pacing",
+      "status": "review",
+      "unmet": [
+        "Reviewed production tuning with actual normal browser warning and moving-player acceptance"
+      ],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-4a0debda",
+      "title": "Authored Radiation Mote charge and pulse audio",
+      "status": "review",
+      "unmet": [
+        "Production integration, normal package and actual listening/mute/recovery validation"
+      ],
+      "unfinishedDependencies": [
+        "audio"
+      ]
+    },
+    {
+      "id": "task-59dfc802",
+      "title": "Radial Wastes distant pixel planet and gaseous layers",
+      "status": "complete",
+      "unmet": [],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-403cf3c4",
+      "title": "Original pixel arena patches and Royale victory emblem",
+      "status": "complete",
+      "unmet": [],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-6c38f853",
+      "title": "QA world-coordinate warp with retained-run bookkeeping",
+      "status": "complete",
+      "unmet": [],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-aaf6d58e",
+      "title": "Desktop right-button cursor aim with independent flight course",
+      "status": "complete",
+      "unmet": [],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-90acc365",
+      "title": "Bounded pixel-font wrapping without dynamic line allocation",
+      "status": "complete",
+      "unmet": [],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-08d59c38",
+      "title": "Original Vesper distant comet pixel group and seeded admission design",
+      "status": "review",
+      "unmet": [
+        "Independent review, deterministic seeded production integration and actual renderer presentation"
+      ],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-93af6b6f",
+      "title": "Near-black space with seeded cosmic pixel scenery",
+      "status": "complete",
+      "unmet": [],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-efc26bbf",
+      "title": "Six clear responsive command pages and scroll containment",
+      "status": "complete",
+      "unmet": [],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-f090d98d",
+      "title": "Semantic pixel action colors and readable settings controls",
+      "status": "complete",
+      "unmet": [],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-6664d4ee",
+      "title": "Responsive native HUD shares boss reservation geometry",
+      "status": "complete",
+      "unmet": [],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-2c33a7b8",
+      "title": "Haven facilities and dedicated pixel menus",
+      "status": "complete",
+      "unmet": [],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-2ab5ed21",
+      "title": "Two-phase renderer and real WebGL lifecycle",
+      "status": "complete",
+      "unmet": [],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-d6a4013a",
+      "title": "Complete reduced-detail planet groups",
+      "status": "complete",
+      "unmet": [],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-8d55901c",
+      "title": "Ship-owned progression and expedition cargo risk",
+      "status": "review",
+      "unmet": [
+        "Actual crafting/equip/death/return flows verified in normal browsers"
+      ],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-2138420d",
+      "title": "Crafted compatible three-slot ship loadouts",
+      "status": "review",
+      "unmet": [
+        "Actual crafting/equip/death/return flows verified in normal browsers"
+      ],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-96a89aa2",
+      "title": "Seeded tutorial belt rocks and basic crafting drops",
+      "status": "review",
+      "unmet": [
+        "Actual crafting/equip/death/return flows verified in normal browsers"
+      ],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-40611e41",
+      "title": "Fractional world quads with independent pixel UI raster",
+      "status": "review",
+      "unmet": [
+        "Normal WebGPU and WebGL2 zoom, UI composition, effects and context recovery visually checked"
+      ],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-a6a2a3e6",
+      "title": "Seeded gas, fire, trails and parallax constellations",
+      "status": "review",
+      "unmet": [
+        "Normal WebGPU and WebGL2 zoom, UI composition, effects and context recovery visually checked"
+      ],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-970f203c",
+      "title": "Live Escape telemetry, pixel action icons and saved Quit",
+      "status": "review",
+      "unmet": [
+        "Normal GPU and GL live menu, death priority, responsive icons and title navigation observed"
+      ],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-0b1b0efa",
+      "title": "Connected articulated Coil bodies",
+      "status": "review",
+      "unmet": [
+        "Normal packaged desktop behavior observed with backend and update boundaries recorded"
+      ],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-3b9f6350",
+      "title": "Held-left desktop forward thrust",
+      "status": "review",
+      "unmet": [
+        "Normal packaged desktop behavior observed with backend and update boundaries recorded"
+      ],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-73510faf",
+      "title": "Discovered universe map and regional resource belts",
+      "status": "review",
+      "unmet": [
+        "Normal packaged desktop behavior observed with backend and update boundaries recorded"
+      ],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-388e1f9b",
+      "title": "Coherent content-addressed Rust WASM updates",
+      "status": "review",
+      "unmet": [
+        "Normal packaged desktop behavior observed with backend and update boundaries recorded"
+      ],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-5d42b89b",
+      "title": "Orbital asteroid belts and sanctuary shield collisions",
+      "status": "review",
+      "unmet": [
+        "Normal packaged desktop behavior observed with backend and update boundaries recorded"
+      ],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-e52fb3b4",
+      "title": "Restrained native pixel HUD and attached ship bars",
+      "status": "complete",
+      "unmet": [],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-0702e217",
+      "title": "Adaptive authored space score and ship effects",
+      "status": "complete",
+      "unmet": [],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-4aed8f22",
+      "title": "Consistent retro pixel visual language",
+      "status": "complete",
+      "unmet": [],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-f341486f",
+      "title": "Adaptive score listening and rendered audio review",
+      "status": "ready",
+      "unmet": [
+        "Actual output capture reports peak/RMS and no clipping or stuck voices during normal transitions and recovery.",
+        "Human listening accepts warning audibility, continuous engine balance and music/effects buses in sustained normal play."
+      ],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-01f28dc1",
+      "title": "Investigate owner-private hosted PWA reload in the in-app browser",
+      "status": "ready",
+      "unmet": [
+        "Supported evidence identifies the actual navigation/update failure cause without policy bypass or retained-profile reset.",
+        "Actual owner-private normal reload/Apply completes, renders coherent final assets and preserves recorded progression."
+      ],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-d4893127",
+      "title": "Pleasant thrust and disciplined audio mix",
+      "status": "review",
+      "unmet": [
+        "Actual rendered mix evidence; human listening remains separately pending"
+      ],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-0280e21e",
+      "title": "Text-only footer, animated segmented vitals and navigation",
+      "status": "review",
+      "unmet": [
+        "Actual desktop browser inspection with both renderers; limits recorded"
+      ],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-a09ddcf4",
+      "title": "Solid varied procedural asteroids and detailed pixel facilities/icons",
+      "status": "review",
+      "unmet": [
+        "Actual desktop art review with visual evidence; detailed scope recorded"
+      ],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-cf125df1",
+      "title": "GitHub feature branches, review gates and reproducible CI",
+      "status": "active",
+      "unmet": [
+        "Feature branches and real PRs are linked with actual review evidence",
+        "Windows/Linux source checks and dual-renderer package checks pass at the reviewed head"
+      ],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-4945ccc3",
+      "title": "Searchable source-backed Studio Dev Bible",
+      "status": "active",
+      "unmet": [
+        "Search, categories, statuses, source/media links and canonical game data are usable",
+        "Security, source drift, revision/restart tests and actual Studio browser inspection pass"
+      ],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-88f83840",
+      "title": "Exact pixel asset authoring and conversion pipeline",
+      "status": "active",
+      "unmet": [
+        "Exact roundtrips and invalid/lossy policy cases are tested with reproducible tools",
+        "A converted asset passes actual native PixelBody/transform rendering and review; unsupported metadata is disclosed"
+      ],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-cf9b0d9c",
+      "title": "Reproducible native Web Audio review tooling",
+      "status": "active",
+      "unmet": [
+        "Fresh preparation and helper/math checks pass without ignored snapshots",
+        "Actual rendered audio evidence is linked; human listening remains a separate pending gate"
+      ],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-06e080d9",
+      "title": "Reconcile session requirements and honest acceptance states",
+      "status": "active",
+      "unmet": [
+        "Current and future requirements map to tasks and documented game facts",
+        "Actual evidence, completed runs, interrupted audits and remaining gates are recorded without fabricated meetings"
+      ],
+      "unfinishedDependencies": []
+    },
+    {
+      "id": "task-55bd21c0",
+      "title": "One canonical testing-branch game preview",
+      "status": "active",
+      "unmet": [
+        "Older game listeners are stopped with exact ownership evidence",
+        "Latest normal build runs on one canonical preview and stale/foreign listeners fail visibly"
+      ],
+      "unfinishedDependencies": []
+    }
+  ]
+}

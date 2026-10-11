@@ -1,0 +1,690 @@
+{
+  "run": "qa-1791686360305-ceff9789",
+  "scope": "native OfflineAudioContext PCM, declared fixtures; no human/mobile/gameplay acceptance",
+  "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36",
+  "created_utc": "2026-10-11T02:39:20.305Z",
+  "cases": [
+    {
+      "key": "prior-engine",
+      "title": "Prior engine, default buses",
+      "seconds": 6,
+      "channels": 2,
+      "sample_rate": 48000,
+      "native_state_after_render": "closed",
+      "native_suspend_checkpoints": 239,
+      "graph_nodes_created": 271,
+      "sources_created": 86,
+      "maximum_voices": {
+        "music": 7,
+        "effects": 1,
+        "continuous": 1
+      },
+      "events_dispatched": 0,
+      "events_declared": 0,
+      "cue_calls": 0,
+      "dispatched": [],
+      "full": {
+        "samples": 576000,
+        "peak": 0.06465665251016617,
+        "rms": 0.026843521261552098,
+        "peak_dbfs": -23.78773568022892,
+        "rms_dbfs": -31.423210303477745,
+        "clipped": 0,
+        "nonfinite": 0
+      },
+      "steady": {
+        "samples": 192000,
+        "peak": 0.06465665251016617,
+        "rms": 0.033196851309974296,
+        "peak_dbfs": -23.78773568022892,
+        "rms_dbfs": -29.5780621352882,
+        "clipped": 0,
+        "nonfinite": 0
+      },
+      "tail": {
+        "samples": 48000,
+        "peak": 3.595820201925809e-14,
+        "rms": 3.0215988192007627e-15,
+        "peak_dbfs": -268.88404063946393,
+        "rms_dbfs": -290.3952639579361,
+        "clipped": 0,
+        "nonfinite": 0
+      },
+      "steady_power_above_1khz_ratio": 0.04488680052988582,
+      "wav_bytes": 2304044,
+      "wav_sha256": "3c6a4e3b9a9b8b1b6a71c120e526f135654719dc8d231f81e60c339f5fb9dd75",
+      "sourceStates": [
+        {
+          "time": 0.02666666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.28346868942621073,
+          "engineDuck": 1
+        },
+        {
+          "time": 1.0266666666666666,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.9999973297363185,
+          "engineDuck": 1
+        },
+        {
+          "time": 2.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.9999999999900488,
+          "engineDuck": 1
+        },
+        {
+          "time": 3.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.9999999999999999,
+          "engineDuck": 1
+        },
+        {
+          "time": 4.026666666666666,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.728573572511394,
+          "engineDuck": 1
+        },
+        {
+          "time": 5.026666666666666,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.0014064778666008175,
+          "engineDuck": 1
+        }
+      ],
+      "cleanup": {
+        "music": 0,
+        "sfx": 0,
+        "continuous": 0,
+        "scheduler_callbacks": 0
+      }
+    },
+    {
+      "key": "warm-engine",
+      "title": "Warm engine, default buses",
+      "seconds": 6,
+      "channels": 2,
+      "sample_rate": 48000,
+      "native_state_after_render": "closed",
+      "native_suspend_checkpoints": 239,
+      "graph_nodes_created": 272,
+      "sources_created": 86,
+      "maximum_voices": {
+        "music": 7,
+        "effects": 1,
+        "continuous": 1
+      },
+      "events_dispatched": 0,
+      "events_declared": 0,
+      "cue_calls": 0,
+      "dispatched": [],
+      "full": {
+        "samples": 576000,
+        "peak": 0.0281390268355608,
+        "rms": 0.011362012787635585,
+        "peak_dbfs": -31.013818526976543,
+        "rms_dbfs": -38.89089452543775,
+        "clipped": 0,
+        "nonfinite": 0
+      },
+      "steady": {
+        "samples": 192000,
+        "peak": 0.028096770867705345,
+        "rms": 0.01410098759394033,
+        "peak_dbfs": -31.026871804689623,
+        "rms_dbfs": -37.015009390043346,
+        "clipped": 0,
+        "nonfinite": 0
+      },
+      "tail": {
+        "samples": 48000,
+        "peak": 3.595820201925809e-14,
+        "rms": 3.0215988189804184e-15,
+        "peak_dbfs": -268.88404063946393,
+        "rms_dbfs": -290.3952639585695,
+        "clipped": 0,
+        "nonfinite": 0
+      },
+      "steady_power_above_1khz_ratio": 0.00042789428589059885,
+      "wav_bytes": 2304044,
+      "wav_sha256": "fdf0a34cedbdb99ad3e2277b1fc6b9a56201bcba08775acc00829c29ed62505e",
+      "sourceStates": [
+        {
+          "time": 0.02666666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.28346868942621073,
+          "engineDuck": 1
+        },
+        {
+          "time": 1.0266666666666666,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.9999973297363185,
+          "engineDuck": 1
+        },
+        {
+          "time": 2.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.9999999999900488,
+          "engineDuck": 1
+        },
+        {
+          "time": 3.026666666666667,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.9999999999999999,
+          "engineDuck": 1
+        },
+        {
+          "time": 4.026666666666666,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.728573572511394,
+          "engineDuck": 1
+        },
+        {
+          "time": 5.026666666666666,
+          "champion": null,
+          "hull": 1,
+          "engine": 0.0014064778666008175,
+          "engineDuck": 1
+        }
+      ],
+      "cleanup": {
+        "music": 0,
+        "sfx": 0,
+        "continuous": 0,
+        "scheduler_callbacks": 0
+      }
+    },
+    {
+      "key": "representative-mix",
+      "title": "Eight-theme score, propulsion, low hull and cues",
+      "seconds": 11,
+      "channels": 2,
+      "sample_rate": 48000,
+      "native_state_after_render": "closed",
+      "native_suspend_checkpoints": 439,
+      "graph_nodes_created": 1194,
+      "sources_created": 411,
+      "maximum_voices": {
+        "music": 12,
+        "effects": 3,
+        "continuous": 2
+      },
+      "events_dispatched": 34,
+      "events_declared": 34,
+      "cue_calls": 34,
+      "dispatched": [
+        {
+          "kind": "shot",
+          "calls": 1,
+          "requested_time": 0.25,
+          "actual_native_time": 0.25066666666666665
+        },
+        {
+          "kind": "shield",
+          "calls": 1,
+          "requested_time": 0.55,
+          "actual_native_time": 0.552
+        },
+        {
+          "kind": "player-hit",
+          "calls": 1,
+          "requested_time": 0.85,
+          "actual_native_time": 0.8506666666666667
+        },
+        {
+          "kind": "mote-charge",
+          "calls": 1,
+          "requested_time": 1.15,
+          "actual_native_time": 1.152
+        },
+        {
+          "kind": "mote-pulse",
+          "calls": 1,
+          "requested_time": 1.45,
+          "actual_native_time": 1.4506666666666668
+        },
+        {
+          "kind": "ability-echo",
+          "calls": 1,
+          "requested_time": 1.75,
+          "actual_native_time": 1.752
+        },
+        {
+          "kind": "ability-nova",
+          "calls": 1,
+          "requested_time": 2.05,
+          "actual_native_time": 2.050666666666667
+        },
+        {
+          "kind": "ability-signature-7",
+          "calls": 1,
+          "requested_time": 2.35,
+          "actual_native_time": 2.352
+        },
+        {
+          "kind": "shot",
+          "calls": 1,
+          "requested_time": 2.65,
+          "actual_native_time": 2.6506666666666665
+        },
+        {
+          "kind": "shield",
+          "calls": 1,
+          "requested_time": 2.9499999999999997,
+          "actual_native_time": 2.952
+        },
+        {
+          "kind": "player-hit",
+          "calls": 1,
+          "requested_time": 3.25,
+          "actual_native_time": 3.2506666666666666
+        },
+        {
+          "kind": "mote-charge",
+          "calls": 1,
+          "requested_time": 3.55,
+          "actual_native_time": 3.552
+        },
+        {
+          "kind": "mote-pulse",
+          "calls": 1,
+          "requested_time": 3.8499999999999996,
+          "actual_native_time": 3.8506666666666667
+        },
+        {
+          "kind": "ability-echo",
+          "calls": 1,
+          "requested_time": 4.15,
+          "actual_native_time": 4.152
+        },
+        {
+          "kind": "ability-nova",
+          "calls": 1,
+          "requested_time": 4.45,
+          "actual_native_time": 4.450666666666667
+        },
+        {
+          "kind": "ability-signature-7",
+          "calls": 1,
+          "requested_time": 4.75,
+          "actual_native_time": 4.752
+        },
+        {
+          "kind": "shot",
+          "calls": 1,
+          "requested_time": 5.05,
+          "actual_native_time": 5.050666666666666
+        },
+        {
+          "kind": "shield",
+          "calls": 1,
+          "requested_time": 5.35,
+          "actual_native_time": 5.352
+        },
+        {
+          "kind": "player-hit",
+          "calls": 1,
+          "requested_time": 5.6499999999999995,
+          "actual_native_time": 5.650666666666667
+        },
+        {
+          "kind": "mote-charge",
+          "calls": 1,
+          "requested_time": 5.95,
+          "actual_native_time": 5.952
+        },
+        {
+          "kind": "mote-pulse",
+          "calls": 1,
+          "requested_time": 6.25,
+          "actual_native_time": 6.250666666666667
+        },
+        {
+          "kind": "ability-echo",
+          "calls": 1,
+          "requested_time": 6.55,
+          "actual_native_time": 6.552
+        },
+        {
+          "kind": "ability-nova",
+          "calls": 1,
+          "requested_time": 6.85,
+          "actual_native_time": 6.850666666666666
+        },
+        {
+          "kind": "ability-signature-7",
+          "calls": 1,
+          "requested_time": 7.1499999999999995,
+          "actual_native_time": 7.152
+        },
+        {
+          "kind": "shot",
+          "calls": 1,
+          "requested_time": 7.449999999999999,
+          "actual_native_time": 7.450666666666667
+        },
+        {
+          "kind": "shield",
+          "calls": 1,
+          "requested_time": 7.75,
+          "actual_native_time": 7.752
+        },
+        {
+          "kind": "player-hit",
+          "calls": 1,
+          "requested_time": 8.05,
+          "actual_native_time": 8.050666666666666
+        },
+        {
+          "kind": "mote-charge",
+          "calls": 1,
+          "requested_time": 8.35,
+          "actual_native_time": 8.352
+        },
+        {
+          "kind": "mote-pulse",
+          "calls": 1,
+          "requested_time": 8.65,
+          "actual_native_time": 8.650666666666666
+        },
+        {
+          "kind": "ability-echo",
+          "calls": 1,
+          "requested_time": 8.95,
+          "actual_native_time": 8.952
+        },
+        {
+          "kind": "ability-nova",
+          "calls": 1,
+          "requested_time": 9.25,
+          "actual_native_time": 9.250666666666667
+        },
+        {
+          "kind": "ability-signature-7",
+          "calls": 1,
+          "requested_time": 9.549999999999999,
+          "actual_native_time": 9.552
+        },
+        {
+          "kind": "shot",
+          "calls": 1,
+          "requested_time": 9.85,
+          "actual_native_time": 9.850666666666667
+        },
+        {
+          "kind": "shield",
+          "calls": 1,
+          "requested_time": 10.15,
+          "actual_native_time": 10.152
+        }
+      ],
+      "full": {
+        "samples": 1056000,
+        "peak": 0.2954135537147522,
+        "rms": 0.03701459724791483,
+        "peak_dbfs": -10.591391658579496,
+        "rms_dbfs": -28.632539435407175,
+        "clipped": 0,
+        "nonfinite": 0
+      },
+      "steady": {
+        "samples": 192000,
+        "peak": 0.21969875693321228,
+        "rms": 0.03743519865294889,
+        "peak_dbfs": -13.16344800665796,
+        "rms_dbfs": -28.534397158211505,
+        "clipped": 0,
+        "nonfinite": 0
+      },
+      "tail": {
+        "samples": 48000,
+        "peak": 0.12344453483819962,
+        "rms": 0.03451409531828576,
+        "peak_dbfs": -18.17056264961897,
+        "rms_dbfs": -29.24007011662789,
+        "clipped": 0,
+        "nonfinite": 0
+      },
+      "steady_power_above_1khz_ratio": null,
+      "wav_bytes": 4224044,
+      "wav_sha256": "34ae70b96331cc2e855c068967bbbed6350be910ae865d87b5cacc2a2ca7de4c",
+      "sourceStates": [
+        {
+          "time": 0.02666666666666667,
+          "champion": 0,
+          "hull": 0.08,
+          "engine": 0.2483185719373606,
+          "engineDuck": 0.9202949611667233
+        },
+        {
+          "time": 1.0266666666666666,
+          "champion": 0,
+          "hull": 0.08,
+          "engine": 0.875997660849015,
+          "engineDuck": 0.6000769891321155
+        },
+        {
+          "time": 2.026666666666667,
+          "champion": 1,
+          "hull": 0.08,
+          "engine": 0.8759999999912828,
+          "engineDuck": 0.6000000430572515
+        },
+        {
+          "time": 3.026666666666667,
+          "champion": 2,
+          "hull": 0.08,
+          "engine": 0.8759999999999999,
+          "engineDuck": 0.21000000000290056
+        },
+        {
+          "time": 4.026666666666666,
+          "champion": 3,
+          "hull": 0.08,
+          "engine": 0.8759999999999999,
+          "engineDuck": 0.6000000000000011
+        },
+        {
+          "time": 5.026666666666666,
+          "champion": 4,
+          "hull": 0.08,
+          "engine": 0.8759999999999999,
+          "engineDuck": 0.6000000000000001
+        },
+        {
+          "time": 6.026666666666666,
+          "champion": 4,
+          "hull": 0.08,
+          "engine": 0.8759999999999999,
+          "engineDuck": 0.33000000000000007
+        },
+        {
+          "time": 7.026666666666666,
+          "champion": 5,
+          "hull": 0.08,
+          "engine": 0.8759999999999999,
+          "engineDuck": 0.33000000000000007
+        },
+        {
+          "time": 8.026666666666667,
+          "champion": 6,
+          "hull": 0.08,
+          "engine": 0.8759999999999999,
+          "engineDuck": 0.6000000000000001
+        },
+        {
+          "time": 9.026666666666667,
+          "champion": 7,
+          "hull": 0.08,
+          "engine": 0.8759999999999999,
+          "engineDuck": 0.33000000000000007
+        },
+        {
+          "time": 10.026666666666667,
+          "champion": 7,
+          "hull": 0.08,
+          "engine": 0.8759999999999999,
+          "engineDuck": 0.6000000000000001
+        }
+      ],
+      "cleanup": {
+        "music": 0,
+        "sfx": 0,
+        "continuous": 0,
+        "scheduler_callbacks": 0
+      }
+    },
+    {
+      "key": "max-bus-burst",
+      "title": "Maximum buses with declared capped cue bursts",
+      "seconds": 5,
+      "channels": 2,
+      "sample_rate": 48000,
+      "native_state_after_render": "closed",
+      "native_suspend_checkpoints": 199,
+      "graph_nodes_created": 828,
+      "sources_created": 298,
+      "maximum_voices": {
+        "music": 11,
+        "effects": 16,
+        "continuous": 2
+      },
+      "events_dispatched": 3,
+      "events_declared": 3,
+      "cue_calls": 48,
+      "dispatched": [
+        {
+          "kind": "explosion",
+          "calls": 16,
+          "requested_time": 1,
+          "actual_native_time": 1
+        },
+        {
+          "kind": "death",
+          "calls": 16,
+          "requested_time": 2,
+          "actual_native_time": 2
+        },
+        {
+          "kind": "upgrade",
+          "calls": 16,
+          "requested_time": 3,
+          "actual_native_time": 3
+        }
+      ],
+      "full": {
+        "samples": 480000,
+        "peak": 1.0465022325515747,
+        "rms": 0.11515671169284125,
+        "peak_dbfs": 0.394803183523637,
+        "rms_dbfs": -18.774214898463917,
+        "clipped": 6,
+        "nonfinite": 0
+      },
+      "steady": {
+        "samples": 192000,
+        "peak": 1.0465022325515747,
+        "rms": 0.1333051161357743,
+        "peak_dbfs": 0.394803183523637,
+        "rms_dbfs": -17.503063648347357,
+        "clipped": 6,
+        "nonfinite": 0
+      },
+      "tail": {
+        "samples": 48000,
+        "peak": 0.26283031702041626,
+        "rms": 0.0665309144708432,
+        "peak_dbfs": -11.606490822178316,
+        "rms_dbfs": -23.539530142258446,
+        "clipped": 0,
+        "nonfinite": 0
+      },
+      "steady_power_above_1khz_ratio": null,
+      "wav_bytes": 1920044,
+      "wav_sha256": "22908da692f20c11553e6856373cb8b6285f71e8b46374f4b6346606ecc6c86a",
+      "sourceStates": [
+        {
+          "time": 0.02666666666666667,
+          "champion": 3,
+          "hull": 0.08,
+          "engine": 0.2483185719373606,
+          "engineDuck": 0.9202949611667233
+        },
+        {
+          "time": 1.0266666666666666,
+          "champion": 3,
+          "hull": 0.08,
+          "engine": 0.875997660849015,
+          "engineDuck": 0.21003365172669874
+        },
+        {
+          "time": 2.026666666666667,
+          "champion": 3,
+          "hull": 0.08,
+          "engine": 0.8759999999912828,
+          "engineDuck": 0.21000000808884792
+        },
+        {
+          "time": 3.026666666666667,
+          "champion": 3,
+          "hull": 0.08,
+          "engine": 0.8759999999999999,
+          "engineDuck": 0.6000000008244615
+        },
+        {
+          "time": 4.026666666666666,
+          "champion": 3,
+          "hull": 0.08,
+          "engine": 0.8759999999999999,
+          "engineDuck": 0.6000000008244615
+        }
+      ],
+      "cleanup": {
+        "music": 0,
+        "sfx": 0,
+        "continuous": 0,
+        "scheduler_callbacks": 0
+      }
+    }
+  ],
+  "sources": {
+    "purpose": "isolated real OfflineAudioContext review; not shipped",
+    "typescript": "5.9.3",
+    "inputs": {
+      "apps/game/src/audio.ts": {
+        "bytes": 31056,
+        "sha256": "fb0879b0407987ab420b0e3bbe80c2ada6e15ad5f1b5910146ae0afec08a7e64",
+        "module": "audio.js",
+        "module_sha256": "29e44c76a19a0817aaec5eb44ef91e707edbda576a7d3249bca8440ac37f2b9b"
+      },
+      "apps/game/src/audio-state.ts": {
+        "bytes": 8962,
+        "sha256": "6c8a836a6d61efb1c1e290378022974bca546586721031d500ff01553c0a2578",
+        "module": "audio-state.js",
+        "module_sha256": "c93ebbbc01763eb1b0b5e3c53af7698e36f50adf1c7911670bc53394d2b9ec36"
+      },
+      "work/adaptive-audio-handoff/snapshots/apps/game/src/audio.ts": {
+        "bytes": 28517,
+        "sha256": "6e06ef04f40367ab8519adfd445258b0c284d6b1c7ac3d955ea212962c629f64",
+        "module": "baseline-audio.js",
+        "module_sha256": "791779beb5fb4a57ba2ce6f1697c44d212ef3fc7c6ec09c9f087f88b14e9f788"
+      }
+    }
+  },
+  "engine_comparison": {
+    "steady_rms_change_db": -7.436947254755145,
+    "high_frequency_power_ratio_before": 0.04488680052988582,
+    "high_frequency_power_ratio_after": 0.00042789428589059885
+  },
+  "status": "Completed; clipped samples require review"
+}
