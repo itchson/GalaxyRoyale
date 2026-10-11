@@ -37,7 +37,7 @@ static ASSETS: LazyLock<Assets> = LazyLock::new(|| {
         .map(|(name, sprite)| {
             let body = expand(sprite, &atlas.palette);
             let body = if name == "dock" {
-                detail_dock(&body)
+                detail_dock(&body, &atlas.palette)
             } else {
                 body
             };
@@ -237,26 +237,58 @@ fn map_colors(body: &PixelBody, mut map: impl FnMut(usize, usize, u32) -> u32) -
     PixelBody::from_ascii(&borrowed, &palette)
 }
 
-fn detail_dock(body: &PixelBody) -> PixelBody {
-    map_colors(body, |x, y, original| {
+/// A strictly overhead deck treatment on the exact accepted docking footprint.
+/// Roof seams, radial berths and flush signal sockets replace elevation shading;
+/// the open bay, actor radius and every existing occupied cell stay unchanged.
+fn detail_dock(body: &PixelBody, palette: &[u32]) -> PixelBody {
+    map_colors(body, |x, y, _| {
         let p = engine_core::Vec2::new(x as f32 - 31.5, y as f32 - 31.5);
+        let a = p.abs();
         let r = p.length();
-        // Authored panel joins, service lanes and lit latch sockets sit only on
-        // existing hull cells. The landing aperture and collision mask stay open.
-        let channel = (p.x.abs() < 0.8 || p.y.abs() < 0.8) && (17.0..28.0).contains(&r);
-        let bolts = [(-19.5, -9.5), (19.5, -9.5), (-19.5, 9.5), (19.5, 9.5)];
-        if bolts
-            .iter()
-            .any(|&(bx, by)| (p.x - bx).abs() < 0.6 && (p.y - by).abs() < 0.6)
-        {
-            u32::from_le_bytes([209, 226, 218, 255])
-        } else if channel {
-            u32::from_le_bytes([20, 37, 50, 255])
-        } else if (18.0..25.0).contains(&r) && (x + y * 2).is_multiple_of(13) {
-            u32::from_le_bytes([113, 184, 196, 255])
+        let edge = [
+            (x.wrapping_sub(1), y),
+            (x + 1, y),
+            (x, y.wrapping_sub(1)),
+            (x, y + 1),
+        ]
+        .iter()
+        .any(|&(nx, ny)| !body.is_occupied(nx, ny));
+        let rgb = if edge {
+            if p.x + p.y < 0.0 {
+                [139, 169, 175]
+            } else {
+                [27, 43, 54]
+            }
+        } else if (a.x - 19.5).abs() < 0.1 && (a.y - 9.5).abs() < 0.1 {
+            [209, 226, 218]
+        } else if (17.0..=25.0).contains(&r) && (x + y * 3).is_multiple_of(11) {
+            // These exact palette signals use the existing host's object-local
+            // cosmetic wave and therefore respect its Reduced Motion clock.
+            return palette[if x.is_multiple_of(2) { 6 } else { 4 }];
+        } else if a.max_element() >= 26.0 {
+            if a.min_element() < 0.7 {
+                [16, 33, 46]
+            } else if ((a.max_element() as usize) / 3).is_multiple_of(2) {
+                [61, 91, 107]
+            } else {
+                [36, 58, 75]
+            }
+        } else if (a.x - a.y).abs() < 0.7 || (21.0..=22.0).contains(&r) {
+            [17, 31, 44]
+        } else if (16.5..=19.0).contains(&r) {
+            [81, 166, 184]
+        } else if (24.0..=26.0).contains(&r) {
+            if (x + y).is_multiple_of(4) {
+                [196, 151, 79]
+            } else {
+                [74, 94, 108]
+            }
+        } else if a.min_element() < 1.0 && r >= 23.0 {
+            [102, 186, 196]
         } else {
-            original
-        }
+            [48, 69, 84]
+        };
+        u32::from_le_bytes([rgb[0], rgb[1], rgb[2], 255])
     })
 }
 
@@ -570,6 +602,8 @@ mod tests {
             .zip(detailed.cells())
             .filter(|(a, b)| a.1 != b.1)
             .count();
-        assert!(changed > 30 && changed < old.occupied_count() / 2);
+        assert!(changed > old.occupied_count() * 3 / 4 && changed <= old.occupied_count());
+        assert!(detailed.cells().any(|(_, color)| color == atlas.palette[6]));
+        assert!(detailed.cells().any(|(_, color)| color == atlas.palette[4]));
     }
 }
