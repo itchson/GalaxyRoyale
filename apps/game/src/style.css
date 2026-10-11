@@ -1153,7 +1153,14 @@ body.reduced-motion *::after {
 }
 .menu-card:has(#coop-content:not([hidden])) {
   width: min(calc(300px * var(--ui-scale, 1)), 100%);
-  height: min(calc(230px * var(--ui-scale, 1)), 100%);
+  --coop-control-extra: max(
+    0px,
+    calc(var(--ui-hit) - 18px * var(--ui-scale, 1))
+  );
+  height: min(
+    calc(230px * var(--ui-scale, 1) + 4 * var(--coop-control-extra)),
+    100%
+  );
 }
 .coop-panel .coop-start,
 .coop-panel .coop-invitation,
