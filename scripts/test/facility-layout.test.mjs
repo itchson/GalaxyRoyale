@@ -43,6 +43,7 @@ function fixture(logicalHeight, worldHeight, stripTop) {
     galaxy: {
       world_viewport: () => [worldWidth, worldHeight],
       viewport: () => [(logicalHeight * width) / height, logicalHeight],
+      flight_navigation_bounds: () => new Float32Array(),
       flight_status_bounds: () =>
         new Float32Array([
           6,
@@ -126,4 +127,17 @@ test("invalid world extents and live modal gates never publish interactive facil
   live.context.menu.hidden = false;
   live.context.paintFacilities();
   assert.ok(live.nodes.every((n) => n.hidden));
+});
+
+test("actual exported minimap geometry reserves facility art and labels at UI scale", () => {
+  const f = fixture(300, 300, 272);
+  f.context.galaxy.flight_navigation_bounds = () =>
+    new Float32Array([120, 220, 44, 44]);
+  f.context.paintFacilities();
+  assert.equal(f.nodes[2].hidden, true);
+  assert.equal(f.nodes[3].hidden, false);
+  f.context.galaxy.flight_navigation_bounds = () =>
+    new Float32Array([NaN, 220, 44, 44]);
+  f.context.paintFacilities();
+  assert.ok(f.nodes.every((n) => !n.hidden));
 });
