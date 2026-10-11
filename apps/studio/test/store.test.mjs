@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtemp, mkdir, writeFile, readFile, readdir, rm } from 'node:fs/promises';
+import { mkdtemp, mkdir, writeFile, readFile, readdir, rm, realpath, symlink } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, dirname, resolve, basename } from 'node:path';
 import { ProjectStore, artifactPath } from '../store.mjs';
@@ -39,11 +39,20 @@ test('completion needs actual criteria and evidence, including existing artifact
 
 test('artifact allowlist rejects traversal, secrets, missing files and directory requests',async t=>{
   const {root}=await fixture(t);await writeFile(join(root,'.env'),'fixture only');
-  assert.equal(await artifactPath(root,'work/result.log'),join(root,'work','result.log'));
+  assert.equal(await artifactPath(root,'work/result.log'),await realpath(join(root,'work','result.log')));
   await assert.rejects(artifactPath(root,'work/../.env'),/inside/);
   await assert.rejects(artifactPath(root,'../outside.log'),/inside/);
   await assert.rejects(artifactPath(root,'work'),/inside/);
   await assert.rejects(artifactPath(root,'work/not-created.log'),/does not exist/);
+});
+
+test('canonical workspace aliases allow real artifacts without widening approved roots',async t=>{
+  const {root}=await fixture(t);
+  const alias=join(dirname(root),`${basename(root)}-alias`);
+  await symlink(root,alias,process.platform==='win32'?'junction':'dir');
+  t.after(()=>rm(alias,{force:true,recursive:process.platform!=='win32'}));
+  assert.equal(await artifactPath(alias,'work/result.log'),await realpath(join(root,'work','result.log')));
+  await assert.rejects(artifactPath(alias,'work/../project.json'),/inside/);
 });
 
 test('HTTP API returns stale-edit 409 and blocks foreign origins and non-JSON mutations',async t=>{
