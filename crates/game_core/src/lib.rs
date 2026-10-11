@@ -2,6 +2,9 @@
 pub mod abilities;
 mod audio_runtime;
 pub use audio_runtime::AudioHud;
+mod asteroid_art;
+#[cfg(test)]
+mod asteroid_diversity_tests;
 mod asteroid_zones;
 mod biome_enemies;
 mod boss_assets;
@@ -1608,8 +1611,13 @@ impl Game {
                     if count >= 112 {
                         break;
                     }
-                    let scale = 0.55 + unit(mix(hash ^ 43)) * 0.45;
-                    let body = asteroid_body(hash);
+                    let belt = birth.source != AsteroidSource::Outer;
+                    let size = asteroid_art::size(hash, birth.material_tier, belt);
+                    let scale = size * asteroid_art::CELL_SCALE;
+                    let body = pixel_assets::asteroid_instance(hash, birth.material_tier);
+                    if let Some(orbit) = &mut birth.orbit {
+                        orbit.speed = asteroid_art::speed(hash, birth.material_tier, true);
+                    }
                     let body_radius = pixel_assets::radius(&body, scale);
                     if regions::sites_near(self.profile.seed, p)
                         .iter()
@@ -1624,9 +1632,9 @@ impl Game {
                     let velocity = if let Some(orbit) = birth.orbit {
                         orbit.tangent(p) * orbit.speed
                     } else {
-                        forward(heading) * (3.0 + unit(mix(hash ^ 123)) * 9.0)
+                        forward(heading) * asteroid_art::speed(hash, birth.material_tier, false)
                     };
-                    let hp = 20.0 + scale * 30.0;
+                    let hp = 20.0 + size * 30.0;
                     let entity = self.world.spawn((
                         Motion::new(p, velocity, heading),
                         Actor {
@@ -3975,8 +3983,8 @@ impl Game {
                             kind: Kind::Asteroid,
                             health: 100_000.0,
                             max_health: 100_000.0,
-                            radius: pixel_assets::radius(&body, 1.0),
-                            scale: 1.0,
+                            radius: pixel_assets::radius(&body, asteroid_art::CELL_SCALE),
+                            scale: asteroid_art::CELL_SCALE,
                             damage: 8.0,
                         },
                         body,
