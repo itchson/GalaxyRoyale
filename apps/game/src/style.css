@@ -11,12 +11,12 @@
 :root {
   font-family: "RoyaleMono", monospace;
   color: #f1f7ff;
-  background: #070b18;
+  background: #050608;
   font-synthesis: none;
-  --cyan: #73efff;
+  --cyan: #66d5e6;
   --pink: #ff699b;
-  --amber: #ffd783;
-  --muted: #8296b8;
+  --amber: #e7c785;
+  --muted: #8c99a2;
   --ui-text: clamp(12px, calc(8px * var(--ui-scale, 1)), 16px);
   --ui-caption: clamp(11px, calc(7px * var(--ui-scale, 1)), 14px);
   --ui-heading: clamp(18px, calc(12px * var(--ui-scale, 1)), 24px);
@@ -51,17 +51,17 @@ button {
   min-width: 0;
   border: 1px solid #38556b;
   border-radius: 0;
-  background: #142638;
-  color: #d8f3ff;
+  background: #161d24;
+  color: #e0ecf1;
   line-height: 1.25;
 }
 button:hover:not(:disabled),
 .import-label:hover {
-  background: #294963;
+  background: #263139;
 }
 button:active:not(:disabled) {
   border-color: var(--cyan);
-  background: #24485a;
+  background: #22343b;
 }
 button:disabled {
   color: #7891a5;
@@ -109,7 +109,7 @@ body:not(.pixel-ready) #universe {
   align-items: center;
   justify-content: center;
   padding: var(--safe-top) var(--safe-right) var(--safe-bottom) var(--safe-left);
-  background: #060917b8;
+  background: #020304c7;
 }
 .launch-card,
 .menu-card {
@@ -117,7 +117,7 @@ body:not(.pixel-ready) #universe {
   min-height: 0;
   max-height: 100%;
   border: 1px solid #38556b;
-  background: #091221f5;
+  background: #0a0c0ff5;
   padding: var(--ui-pad);
 }
 .eyebrow {
@@ -165,8 +165,8 @@ body:not(.pixel-ready) #universe {
 }
 .text-button,
 .import-label {
-  background: #142638;
-  color: #d8f3ff;
+  background: #161d24;
+  color: #e0ecf1;
   border: 1px solid #38556b;
 }
 .import-label {
@@ -474,7 +474,7 @@ body:not(.pixel-ready) #universe {
   color: var(--cyan);
 }
 .passive {
-  color: var(--amber);
+  color: #9fd98a;
 }
 .menu-card:has(#settings-content:not([hidden])) {
   width: min(760px, calc(680px * var(--ui-scale, 1)), 100%);
@@ -773,7 +773,7 @@ body:not(.engine-flight) #toolbar-hint {
   height: var(--flight-strip-height, calc(22px * var(--ui-scale, 1)));
   background: transparent;
   border: 0;
-  color: #d8f3ff;
+  color: #e0ecf1;
   pointer-events: none;
 }
 .dock-prompt {
