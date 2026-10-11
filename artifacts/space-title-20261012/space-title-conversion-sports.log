@@ -1,0 +1,12 @@
+test_binary_palette_and_conversion_loss_are_honest (__main__.TitleMark.test_binary_palette_and_conversion_loss_are_honest) ... ok
+test_exact_indexed_png_roundtrip_and_group_transform_metrics (__main__.TitleMark.test_exact_indexed_png_roundtrip_and_group_transform_metrics) ... ok
+test_full_independent_regeneration_matches_committed_atlas_bytes (__main__.TitleMark.test_full_independent_regeneration_matches_committed_atlas_bytes) ... ok
+test_group_cap_rejects_without_silently_dropping_components (__main__.TitleMark.test_group_cap_rejects_without_silently_dropping_components) ... ok
+test_partition_reconstructs_all_source_rgba_without_duplicate_award (__main__.TitleMark.test_partition_reconstructs_all_source_rgba_without_duplicate_award) ... ok
+test_png_encoding_variants_accept_only_equal_decoded_cells (__main__.TitleMark.test_png_encoding_variants_accept_only_equal_decoded_cells) ... ok
+test_role_masks_are_occupied_disjoint_and_explicit (__main__.TitleMark.test_role_masks_are_occupied_disjoint_and_explicit) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 1.755s
+
+OK
