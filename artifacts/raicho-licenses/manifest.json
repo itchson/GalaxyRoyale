@@ -1,5 +1,6 @@
 {
-  "version": 1,
+  "version": 2,
+  "hashPolicy": "UTF-8 text (.md/.json/.log/.txt): replace CRLF with LF before hashing and measuring size. JPG: hash and measure raw bytes. No artifact content is rewritten.",
   "scope": "EVIDENCE_SCOPE.md",
   "observedBuild": {
     "schemaVersion": 1,
@@ -12,14 +13,16 @@
   "files": [
     {
       "path": "EVIDENCE_SCOPE.md",
-      "size": 4915,
-      "sha256": "750b8e1271cb9b41f5515d1a54f174fef5a2248aac3db5ff9b570245315912da",
+      "size": 5417,
+      "sha256": "4eea7bf121cc73d58488d5d8de2aec794b685b05836c2e813ee983e828a5d365",
+      "hashDomain": "utf8-lf",
       "kind": "source-review-evidence"
     },
     {
       "path": "apr-lore-webgl2-848.jpg",
       "size": 43029,
       "sha256": "979da2dd5a392eb87a60a41112aa0843486b53ba760d9fe37041f9d024a79c2a",
+      "hashDomain": "raw-bytes",
       "kind": "actual-browser-observation",
       "revision": "31496beea0292dc542c8693715981c6cea6c419a",
       "negativeEvidence": false
@@ -28,6 +31,7 @@
       "path": "apr-training-webgpu-corrected.jpg",
       "size": 55847,
       "sha256": "7331997f0876bc23134838acd652b579e7d6d528078de4cf689ba2a07f1c6bf1",
+      "hashDomain": "raw-bytes",
       "kind": "actual-browser-observation",
       "revision": "edbe0f28fec793ce03ffec839c9f1c6bbe560ab6",
       "negativeEvidence": false
@@ -36,6 +40,7 @@
       "path": "creator-27-combinations.json",
       "size": 9128,
       "sha256": "17f48b5fe023711c263bd20095c9954b710857d1ac6f24e12e735b0caf31a1ca",
+      "hashDomain": "utf8-lf",
       "kind": "actual-browser-observation",
       "revision": "332908fc83f68669e1c7d5f9e1bf4b71ff582d74",
       "negativeEvidence": false
@@ -44,6 +49,7 @@
       "path": "creator-webgl2-320-final.jpg",
       "size": 13025,
       "sha256": "42435fe547d0b9ee71290ce19c955f28391b65eab5bda73df9de853cec8666ef",
+      "hashDomain": "raw-bytes",
       "kind": "actual-browser-observation",
       "revision": "31496beea0292dc542c8693715981c6cea6c419a",
       "negativeEvidence": false
@@ -52,6 +58,7 @@
       "path": "creator-webgl2-320-scrolled.jpg",
       "size": 13904,
       "sha256": "4a48132bb26f2c4542c7259637b4b56f3d0a3bff36121c19a2c27e4575889e9d",
+      "hashDomain": "raw-bytes",
       "kind": "actual-browser-observation",
       "revision": "332908fc83f68669e1c7d5f9e1bf4b71ff582d74",
       "negativeEvidence": true
@@ -60,6 +67,7 @@
       "path": "dev-bible-lexicon-1280.jpg",
       "size": 62842,
       "sha256": "a27eb832c3d89f17de2a1a67b107b7438f9949407e9635ed85c64fa7d451195b",
+      "hashDomain": "raw-bytes",
       "kind": "actual-browser-observation",
       "revision": "edbe0f28fec793ce03ffec839c9f1c6bbe560ab6",
       "negativeEvidence": false
@@ -68,6 +76,7 @@
       "path": "dora-pan-renko-webgpu-1280.jpg",
       "size": 99114,
       "sha256": "fc12cff18bf2504cf4a32b52013908068ae244b57ec5f258a32b2ba081efb75e",
+      "hashDomain": "raw-bytes",
       "kind": "actual-browser-observation",
       "revision": "31496beea0292dc542c8693715981c6cea6c419a",
       "negativeEvidence": false
@@ -76,6 +85,7 @@
       "path": "doro-hugo-pan-webgl2-1280.jpg",
       "size": 89797,
       "sha256": "06b997cff95e3d32c58f1d6bd8f2d61517de6c802f195b881d0186163afe12c0",
+      "hashDomain": "raw-bytes",
       "kind": "actual-browser-observation",
       "revision": "332908fc83f68669e1c7d5f9e1bf4b71ff582d74",
       "negativeEvidence": false
@@ -84,6 +94,7 @@
       "path": "doro-hugo-pan-webgl2-848-final.jpg",
       "size": 62124,
       "sha256": "03352da20bde751632d685ebb1ef2f7bd25629a21dcc6b568f467c9e51cab5a6",
+      "hashDomain": "raw-bytes",
       "kind": "actual-browser-observation",
       "revision": "31496beea0292dc542c8693715981c6cea6c419a",
       "negativeEvidence": false
@@ -92,6 +103,7 @@
       "path": "doro-hugo-pan-webgpu-1280.jpg",
       "size": 98216,
       "sha256": "6371e2f338215dbf7229e8fbfec0ea39b1c05a6a0b4d77453106476ddb731954",
+      "hashDomain": "raw-bytes",
       "kind": "actual-browser-observation",
       "revision": "31496beea0292dc542c8693715981c6cea6c419a",
       "negativeEvidence": false
@@ -100,6 +112,7 @@
       "path": "issued-license-webgl2-848.jpg",
       "size": 43171,
       "sha256": "4b57ea0801a54a876885b88e10d80c3d8f3c0afc85c37e1e6cbe922bb3085f26",
+      "hashDomain": "raw-bytes",
       "kind": "actual-browser-observation",
       "revision": "31496beea0292dc542c8693715981c6cea6c419a",
       "negativeEvidence": false
@@ -108,6 +121,7 @@
       "path": "issued-license-webgl2-reload-current.jpg",
       "size": 73853,
       "sha256": "43f26c15b3ab306143b5aacc04fdc1030eeee26a4f054552b59127713f71a012",
+      "hashDomain": "raw-bytes",
       "kind": "actual-browser-observation",
       "revision": "edbe0f28fec793ce03ffec839c9f1c6bbe560ab6",
       "negativeEvidence": false
@@ -116,26 +130,30 @@
       "path": "issued-license-webgpu-1280.jpg",
       "size": 73953,
       "sha256": "5444ca2d5d40ccad9feb7aeb05eb1303fbf417cd7060ea4f1cec4a101e7bab60",
+      "hashDomain": "raw-bytes",
       "kind": "actual-browser-observation",
       "revision": "31496beea0292dc542c8693715981c6cea6c419a",
       "negativeEvidence": false
     },
     {
       "path": "native-tests.log",
-      "size": 54948,
-      "sha256": "6ff7730c55ae58dc726859ee45545a5b984fa19f92e06327582cdfb44430fa0c",
+      "size": 54365,
+      "sha256": "b198e0c5557756a7f483a635158fadc1543a7569b537c2a90d4c641eb184cb90",
+      "hashDomain": "utf8-lf",
       "kind": "source-review-evidence"
     },
     {
       "path": "shell-tests.log",
-      "size": 37758,
-      "sha256": "9ed2325fc5ddfedebe653b5d649ee0d33770359818f3cffa690bf4c9589adfe3",
+      "size": 37372,
+      "sha256": "b4fdd057782331566e4f3b642d400e96576da4a9b84a7f8be2f3db68602f0669",
+      "hashDomain": "utf8-lf",
       "kind": "source-review-evidence"
     },
     {
       "path": "talo-renko-hugo-webgl2-1280.jpg",
       "size": 88711,
       "sha256": "0b1becc58b6f4b46cf0531dc12851b956c93b92932301d4081cab81e90899741",
+      "hashDomain": "raw-bytes",
       "kind": "actual-browser-observation",
       "revision": "332908fc83f68669e1c7d5f9e1bf4b71ff582d74",
       "negativeEvidence": false
@@ -144,6 +162,7 @@
       "path": "talo-renko-hugo-webgpu-1280.jpg",
       "size": 97296,
       "sha256": "3e649347e2604429ca1ceb8c28b7124265444b3db1a7fbbe82a1def5d6ddf731",
+      "hashDomain": "raw-bytes",
       "kind": "actual-browser-observation",
       "revision": "31496beea0292dc542c8693715981c6cea6c419a",
       "negativeEvidence": false
@@ -152,12 +171,14 @@
       "path": "training-hud-review.md",
       "size": 4182,
       "sha256": "6c9ae3dab86d258567f9ade46d22af4b9676c160cb431402bdc3b20435560e24",
+      "hashDomain": "utf8-lf",
       "kind": "source-review-evidence"
     },
     {
       "path": "training-journal-webgl2-corrected.jpg",
       "size": 87718,
       "sha256": "ab1e15a42ba6e6be360ef01b7e2b8e4a8a47639e25dbdd9a56d943321a5e2bcf",
+      "hashDomain": "raw-bytes",
       "kind": "actual-browser-observation",
       "revision": "edbe0f28fec793ce03ffec839c9f1c6bbe560ab6",
       "negativeEvidence": false
@@ -166,6 +187,7 @@
       "path": "training-journal-webgpu-1280.jpg",
       "size": 84271,
       "sha256": "b723eccf4193b8eb2dd9b63d30c6d6533d8ebdd352f810cb2657e03ded0830ea",
+      "hashDomain": "raw-bytes",
       "kind": "actual-browser-observation",
       "revision": "31496beea0292dc542c8693715981c6cea6c419a",
       "negativeEvidence": true
@@ -174,6 +196,7 @@
       "path": "training-journal-webgpu-1280.txt",
       "size": 775,
       "sha256": "008499de31ddf3dc8501fb243057b96b0e40de5bfd274ada7dfda2a7036fba6e",
+      "hashDomain": "utf8-lf",
       "kind": "actual-browser-observation",
       "revision": "31496beea0292dc542c8693715981c6cea6c419a",
       "negativeEvidence": true
@@ -182,6 +205,7 @@
       "path": "training-journal-webgpu-corrected.jpg",
       "size": 87073,
       "sha256": "273c9b1a13140af7efb30be99e52ba5f45a32348aae9c6302b8a44992cef3085",
+      "hashDomain": "raw-bytes",
       "kind": "actual-browser-observation",
       "revision": "edbe0f28fec793ce03ffec839c9f1c6bbe560ab6",
       "negativeEvidence": false
@@ -190,6 +214,7 @@
       "path": "training-journal-webgpu-corrected.txt",
       "size": 1670,
       "sha256": "ddf96ddebe835ddec3514b53e4cf300ca69c607e136f17c37bb2350fa4d292de",
+      "hashDomain": "utf8-lf",
       "kind": "actual-browser-observation",
       "revision": "edbe0f28fec793ce03ffec839c9f1c6bbe560ab6",
       "negativeEvidence": false
@@ -198,6 +223,7 @@
       "path": "training-profile-webgl2-reloaded.txt",
       "size": 541,
       "sha256": "42a87af6b8000d12c5f5022c1363cb59fa167cd91d8588c98248fe724a20c159",
+      "hashDomain": "utf8-lf",
       "kind": "actual-browser-observation",
       "revision": "edbe0f28fec793ce03ffec839c9f1c6bbe560ab6",
       "negativeEvidence": false
@@ -206,20 +232,23 @@
       "path": "training-profile-webgpu.txt",
       "size": 471,
       "sha256": "2aa927da12f4590db675ec6576f899a3fe181f4363aa6f92a6e2ff7d06c17032",
+      "hashDomain": "utf8-lf",
       "kind": "actual-browser-observation",
       "revision": "edbe0f28fec793ce03ffec839c9f1c6bbe560ab6",
       "negativeEvidence": false
     },
     {
       "path": "typecheck.log",
-      "size": 16,
-      "sha256": "5a3973f79ed9becd5f23c4feff467513814de7ea381d75a4d2e339aa8b8edca9",
+      "size": 15,
+      "sha256": "8366207267355d3e3d5bf3bf6e8c94c5f93f6078c34f08973fa2b38cdda6cc92",
+      "hashDomain": "utf8-lf",
       "kind": "source-review-evidence"
     },
     {
       "path": "webgpu-stats.txt",
       "size": 256,
       "sha256": "46f4d2fb7aced72b202a87d8c439d0529b5140c9ee8f87e72b51c8fe1ce2233b",
+      "hashDomain": "utf8-lf",
       "kind": "actual-browser-observation",
       "revision": "31496beea0292dc542c8693715981c6cea6c419a",
       "negativeEvidence": false

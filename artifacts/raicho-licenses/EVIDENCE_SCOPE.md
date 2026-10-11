@@ -2,6 +2,8 @@
 
 These are actual in-app-browser captures and native/source checks, not rendered mockups. The filename alone does not establish a source revision. Preserve the earlier negative observations alongside their corrections.
 
+Manifest version2 declares a portable byte domain: UTF-8 text (`.md/.json/.log/.txt`) is hashed and sized after CRLF→LF normalization; JPG images use raw bytes. This does not rewrite captured artifacts. Independent packaging review found that the original three Windows log hashes measured CRLF bytes while Git committed LF blobs; the declared canonical rule corrects that mismatch and also works after a fresh Windows checkout. Capture revisions and observed runtime/package pins remain unchanged.
+
 ## Capture revisions
 
 - `332908fc83f68669e1c7d5f9e1bf4b71ff582d74`: the 27 actual creator selections in `creator-27-combinations.json`, the DORO/TALO WebGL2 1280 images, and `creator-webgl2-320-scrolled.jpg`. The last image is **negative evidence**: the close control overlapped the short-height creator content. It is not accepted as the final layout.
