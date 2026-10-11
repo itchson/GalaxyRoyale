@@ -64,6 +64,34 @@ fn deep_cloud_cache_has_real_coherent_volume_and_bounded_complete_cost() {
 }
 
 #[test]
+fn cloud_has_interrupted_dust_pockets_and_unequal_connected_billow_outline() {
+    // The former whole-length zero channel made both x=0 and the central
+    // bridge empty. Volume now crosses that line while retaining dark pockets.
+    assert!(gas_density(Vec2::ZERO) > 0.27);
+    let mut bridges = 0;
+    let mut dark = 0;
+    let mut asymmetric = 0;
+    for x in -45..=45 {
+        let p = Vec2::new(x as f32, 0.0);
+        bridges += usize::from(gas_density(p) > 0.27);
+        dark += usize::from(gas_density(p) < 0.05);
+        asymmetric += usize::from(
+            (gas_density(p + Vec2::Y * 12.0) - gas_density(p - Vec2::Y * 12.0)).abs() > 0.1,
+        );
+    }
+    assert!(bridges >= 20, "actual central bridges={bridges}");
+    assert!(dark >= 5, "actual source dust pockets={dark}");
+    assert!(asymmetric >= 15, "actual asymmetric outline={asymmetric}");
+    for reduced in [false, true] {
+        let spacing = VEIL_SPACING * if reduced { 2.0 } else { 1.0 };
+        assert!(GAS_ART.veil.body(reduced).cells().any(|(p, _)| {
+            let physical = p * spacing;
+            physical.y.abs() < 4.0 && physical.x.abs() < 6.0
+        }));
+    }
+}
+
+#[test]
 fn deep_cloud_whole_group_rejects_one_short_and_crosses_transform_batch_safely() {
     for reduced in [false, true] {
         let required = motif_cost(MotifKind::Nebula, reduced);

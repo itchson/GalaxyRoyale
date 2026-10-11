@@ -180,24 +180,38 @@ fn noise(seed: u32, p: Vec2) -> f32 {
     (a + (b - a) * u) + ((c + (d - c) * u) - (a + (b - a) * u)) * v
 }
 
-/// A fixed turbulent birth field gives the cloud large billows, a torn dust
-/// channel, and nested ridges. Initialization samples it once at both densities.
+/// A fixed turbulent birth field gives the cloud unequal billows and isolated
+/// dust pockets. Initialization samples it once at both densities.
 fn gas_density(p: Vec2) -> f32 {
     let warp = Vec2::new(
         noise(0x7665_696c, p / 19.0) - 0.5,
         noise(0x6269_6c6c, p / 17.0) - 0.5,
     ) * 9.0;
     let q = p + warp;
-    let curve = (q.x * 0.055).sin() * 8.0 + (q.x * 0.13).sin() * 2.3;
-    let side = q.y - curve;
-    let envelope = (1.0 - (q.x / 58.0).powi(2)).max(0.0) * (1.0 - (side / 26.0).powi(2)).max(0.0);
+    let billow = |center: Vec2, radii: Vec2| {
+        smooth((1.0 - ((q - center) / radii).length_squared()).clamp(0.0, 1.0))
+    };
+    // Unequal overlapping volumes form one cloud with broad and narrow edges,
+    // rather than two matching ribbons on either side of a continuous slit.
+    let envelope = (billow(Vec2::new(-19.0, 1.0), Vec2::new(33.0, 25.0)) * 0.88
+        + billow(Vec2::new(12.0, -7.0), Vec2::new(31.0, 20.0)) * 0.82
+        + billow(Vec2::new(34.0, 12.0), Vec2::new(21.0, 17.0)) * 0.61
+        + billow(Vec2::new(-39.0, -17.0), Vec2::new(17.0, 15.0)) * 0.46)
+        .min(1.0);
     let turbulence = noise(0x6e65_6275, q / 12.0) * 0.58
         + noise(0x6c61_6e65, q / 5.5) * 0.29
         + noise(0x7269_6467, q / 2.4) * 0.13;
-    let lane = (side - (q.x * 0.08).sin() * 2.0).abs();
-    // A real sparse source channel remains between the surrounding soft cells.
-    let channel = smooth(((lane - 3.8) / 3.5).clamp(0.0, 1.0));
-    envelope * (0.35 + turbulence * 0.95) * channel
+    let pocket = |center: Vec2, radii: Vec2, angle: f32| {
+        let delta = q - center;
+        let (s, c) = angle.sin_cos();
+        let local = Vec2::new(c * delta.x - s * delta.y, s * delta.x + c * delta.y);
+        let rough_edge = (noise(0x6475_7374, q / 3.4) - 0.5) * 0.25;
+        smooth((((local / radii).length_squared() + rough_edge - 0.25) / 0.65).clamp(0.0, 1.0))
+    };
+    let transmission = pocket(Vec2::new(-17.0, 0.0), Vec2::new(15.0, 4.5), 0.35)
+        .min(pocket(Vec2::new(17.0, -6.0), Vec2::new(10.0, 5.5), -0.6))
+        .min(pocket(Vec2::new(-36.0, 13.0), Vec2::new(8.0, 7.0), -0.2));
+    envelope * (0.35 + turbulence * 0.95) * transmission
 }
 
 fn gas_pair(width: usize, height: usize, spacing: f32, threshold: f32, colors: &[u32]) -> Pair {
@@ -280,54 +294,28 @@ fn art_noise(seed: u32, p: Vec2) -> f32 {
 
 fn spiral_arm(p: Vec2) -> Option<usize> {
     let r = p.length();
-    if !(5.0..44.0).contains(&r) {
+    if !(5.0..43.0).contains(&r) {
         return None;
     }
-    let angle = p.y.atan2(p.x);
-    let phase = angle - 1.8 * (r / 6.0).ln() + 0.12 * (r * 0.18 + angle).sin();
-    let cross = phase.sin() * r;
-    let distance = cross.abs();
-    let cloud = art_noise(0x7370_6972, p);
-    let dust = art_noise(0x6475_7374, p);
-    let taper = 0.68 + 0.32 * (1.0 - r / 44.0);
-    let width = (1.7 + cloud * 0.85) * taper * if phase.cos() > 0.0 { 1.0 } else { 0.76 };
-    // An offset dark lane cuts each broad arm, not a uniform geometric outline.
-    let lane = (cross + 0.28 + (r * 0.3).sin() * 0.25).abs() < 0.18;
-    if distance < width && dust > 0.18 && !lane {
-        Some(if distance < 0.24 && dust > 0.70 {
-            6
-        } else if dust > 0.73 {
-            5
-        } else if dust > 0.60 {
-            4
-        } else if dust > 0.45 {
-            3
-        } else if dust > 0.30 {
-            2
-        } else {
-            1
-        })
-    } else if distance < width + 1.9 && dust > 0.60 && r < 36.0 && !lane {
-        Some(0)
-    } else {
-        None
+    let field = galactic_field(p);
+    // Small correlated knots populate the disk, biased toward its broad arms.
+    // There is no continuously traced arm edge or disconnected outer arc.
+    let knot = art_noise(0x7370_6972, p * 2.1);
+    let threshold = 0.90 - field.arm * 0.065 - field.density.min(0.7) * 0.065;
+    if field.density < 0.05 || field.transmission < 0.42 || knot < threshold {
+        return None;
     }
+    Some(
+        ((knot - threshold) * 28.0 + field.arm * 2.0 + field.density * 3.0).clamp(0.0, 6.0)
+            as usize,
+    )
 }
 
 fn galactic_bulge(p: Vec2) -> Option<usize> {
-    let r = Vec2::new(p.x, p.y * 1.05).length();
-    let cloud = art_noise(0x636f_7265, p);
-    if r < 1.4 {
-        Some(6)
-    } else if r < 2.9 {
-        Some(if p.y < -0.4 { 5 } else { 4 })
-    } else if r < 5.3 && (p.y + p.x * 0.12).abs() > 0.6 {
-        Some(if r < 4.0 { 3 } else { 2 })
-    } else if r < 7.5 && cloud > 0.58 {
-        Some(if r < 6.3 { 1 } else { 0 })
-    } else {
-        None
-    }
+    let q = p - Vec2::new(0.4, -0.2);
+    let r = Vec2::new(q.x * 0.9, q.y * 1.15).length();
+    let light = (-(r / 4.2).powi(2)).exp() * (0.88 + art_noise(0x636f_7265, p) * 0.12);
+    (light > 0.18).then(|| ((light - 0.18) * 8.0).min(6.0) as usize)
 }
 
 fn remnant_filament(p: Vec2) -> Option<usize> {
@@ -383,36 +371,53 @@ fn remnant_source(p: Vec2) -> Option<usize> {
 }
 
 const GALAXY_DISK_SPACING: f32 = 2.5;
-fn galactic_disk_density(p: Vec2) -> f32 {
+struct GalacticField {
+    density: f32,
+    arm: f32,
+    transmission: f32,
+}
+fn galactic_field(p: Vec2) -> GalacticField {
     let r = p.length();
-    let boundary = 32.0 + (p.y.atan2(p.x) * 3.0 + 0.7).sin() * 1.8;
-    let edge = (1.0 - (r / boundary).powi(2)).max(0.0);
-    let cloud = noise(0x6469_736b, p / 9.0) * 0.7 + noise(0x7374_6172, p / 4.0) * 0.3;
-    let dust = (p.y + p.x * 0.12 + (p.x * 0.18).sin()).abs();
-    // Omit an actual dark dust band across the inclined disk. Overlapping soft
-    // cells taper its edge; the compact warm bulge stays a separate source.
-    if dust < 3.5 {
-        0.0
-    } else {
-        edge * (0.45 + cloud * 0.55)
+    let cloud = noise(0x6469_736b, p / 8.0);
+    let phase = p.y.atan2(p.x) - 1.65 * ((r + 3.0) / 7.0).ln() + (cloud - 0.5) * 0.35;
+    let cross = phase.sin() * r;
+    let width = (5.5 + cloud * 2.5) * (1.0 - (r / 45.0).min(1.0) * 0.45);
+    let arm = smooth((1.0 - cross.abs() / width).clamp(0.0, 1.0));
+    // Dust winds off-center along the stellar arms. Its strength fades into
+    // the warm bulge instead of dividing the entire galaxy into two leaves.
+    let dust = (cross + (1.2 + cloud) * phase.cos()).abs();
+    let lane = 1.0 - smooth((dust / (0.75 + cloud * 0.65)).clamp(0.0, 1.0));
+    let lane_strength =
+        smooth(((r - 6.0) / 10.0).clamp(0.0, 1.0)) * smooth(((43.0 - r) / 10.0).clamp(0.0, 1.0));
+    let transmission = 1.0 - lane * lane_strength * 0.82;
+    let boundary = 43.0 + (noise(0x6564_6765, p / 11.0) - 0.5) * 3.0;
+    let edge = smooth(((boundary - r) / 15.0).clamp(0.0, 1.0));
+    let population = 0.22 + (-(r / 25.0).powi(2)).exp() * 0.50;
+    GalacticField {
+        density: edge * population * (0.68 + cloud * 0.32) * (0.70 + arm * 0.30) * transmission,
+        arm,
+        transmission,
     }
+}
+fn galactic_disk_density(p: Vec2) -> f32 {
+    galactic_field(p).density
 }
 fn galactic_disk() -> Pair {
     let sample = |p: Vec2| {
         let density = galactic_disk_density(p);
-        (density > 0.08).then(|| (density * 5.0).min(5.0) as usize)
+        (density > 0.05).then(|| (density * 8.0).min(5.0) as usize)
     };
     let colors = [
-        rgba(66, 59, 73, 14),
-        rgba(80, 70, 87, 19),
-        rgba(97, 82, 101, 25),
-        rgba(116, 97, 117, 31),
-        rgba(137, 116, 133, 38),
-        rgba(159, 138, 151, 45),
+        rgba(62, 59, 70, 14),
+        rgba(79, 73, 85, 21),
+        rgba(98, 88, 102, 28),
+        rgba(118, 104, 119, 35),
+        rgba(140, 122, 136, 43),
+        rgba(164, 145, 152, 51),
     ];
     Pair {
-        full: template(28, 28, GALAXY_DISK_SPACING, &sample, &colors),
-        low: template(14, 14, GALAXY_DISK_SPACING * 2.0, &sample, &colors),
+        full: template(36, 36, GALAXY_DISK_SPACING, &sample, &colors),
+        low: template(18, 18, GALAXY_DISK_SPACING * 2.0, &sample, &colors),
     }
 }
 
@@ -816,10 +821,10 @@ fn draw_motif(
         cell_scale,
         tint,
         alpha,
-        curl: if m.kind == MotifKind::Nebula {
-            0.14
-        } else {
-            0.04
+        curl: match m.kind {
+            MotifKind::Nebula => 0.14,
+            MotifKind::Galaxy => 0.0,
+            MotifKind::Supernova => 0.04,
         },
     };
     if m.kind == MotifKind::Galaxy {
@@ -866,7 +871,11 @@ fn draw_motif(
         b,
         parent.compose(second.affine()),
         CellStyle {
-            curl: 0.07,
+            curl: if m.kind == MotifKind::Galaxy {
+                0.0
+            } else {
+                0.07
+            },
             ..style
         },
     );

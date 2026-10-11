@@ -213,21 +213,85 @@ fn qa_galaxy_and_remnant_centers_use_actual_seed_selection_and_calm_group_geomet
 }
 
 #[test]
-fn inclined_galaxy_disk_has_real_low_alpha_interior_mass_with_an_absent_dust_band() {
+fn inclined_galaxy_has_connected_interior_mass_and_winding_dust_without_a_central_slit() {
     for reduced in [false, true] {
         let spacing = GALAXY_DISK_SPACING * if reduced { 2.0 } else { 1.0 };
         let body = ART.galaxy_disk.body(reduced);
-        assert_eq!(body.occupied_count(), if reduced { 103 } else { 389 });
         let mut interior = 0;
+        let mut central_band = 0;
+        let mut outer_disk = 0;
         for (p, c) in body.cells() {
             let p = p * spacing;
-            assert!(galactic_disk_density(p) > 0.08);
-            assert!((p.y + p.x * 0.12 + (p.x * 0.18).sin()).abs() >= 3.5);
-            assert!((14..=45).contains(&c.to_le_bytes()[3]));
+            assert!(galactic_disk_density(p) > 0.05);
+            assert!((14..=51).contains(&c.to_le_bytes()[3]));
             interior += usize::from(p.length() < 20.0);
+            central_band += usize::from(p.y.abs() < 3.5 && p.x.abs() < 16.0);
+            outer_disk += usize::from(p.length() > 32.0);
         }
         assert!(interior > if reduced { 25 } else { 100 });
+        assert!(central_band > if reduced { 4 } else { 20 });
+        assert!(outer_disk > if reduced { 10 } else { 40 });
+        assert!(galactic_disk_density(Vec2::ZERO) > 0.3);
+        let off_arm_knots = ART
+            .galaxy_arms
+            .body(reduced)
+            .cells()
+            .filter(|(p, _)| galactic_field(*p * if reduced { 1.0 } else { 0.5 }).arm < 0.1)
+            .count();
+        assert!(off_arm_knots > if reduced { 2 } else { 8 });
+        eprintln!(
+            "Galaxy low{reduced}: soft {} / knots {} / bulge {} / off-arm {off_arm_knots}",
+            body.occupied_count(),
+            ART.galaxy_arms.body(reduced).occupied_count(),
+            ART.galaxy_core.body(reduced).occupied_count()
+        );
         assert!(motif_cost(MotifKind::Galaxy, reduced) <= if reduced { 1100 } else { 2200 });
+    }
+}
+
+#[test]
+#[ignore = "explicit bounded native galaxy packet proof"]
+fn export_actual_galaxy_revision_packets() {
+    let output = std::path::PathBuf::from(
+        std::env::var_os("GALAXY_PROOF_DIR").expect("explicit owned output path"),
+    );
+    assert!(output.is_absolute());
+    std::fs::create_dir_all(&output).unwrap();
+    let seed = 871_238_449;
+    let m = motif(seed, [3, -4]).unwrap();
+    assert_eq!(m.kind, MotifKind::Galaxy);
+    let camera = m.origin / MOTIF_PARALLAX;
+    for reduced in [false, true] {
+        for time in [0.0, 120.0] {
+            let mut frame = FrameBuilder::new();
+            let count = draw_motif(
+                &mut frame,
+                m,
+                &SceneInput {
+                    seed,
+                    camera,
+                    time,
+                    ..scene(reduced)
+                },
+                &mut 8_000,
+            );
+            let views: Vec<_> = [0.6, 1.0, 1.6].into_iter().map(|zoom| {
+                let view = CameraView::new(camera, Vec2::new(256.0, 180.0), zoom).unwrap();
+                let cells: Vec<_> = frame.frame().batches.iter().flat_map(|b| b.pixels.iter().map(|p| {
+                    let t = b.transforms[p.transform as usize];
+                    let corners: Vec<_> = CORNERS.iter().map(|c| view.world_to_screen(t.point(Vec2::from_array(p.local) + *c)).to_array()).collect();
+                    serde_json::json!({"corners":corners,"rgba":p.color.to_le_bytes(),"material":[t.b[2],t.b[3]]})
+                })).collect();
+                serde_json::json!({"zoom":zoom,"cells":cells})
+            }).collect();
+            let packet = serde_json::json!({"seed":seed,"grid":[3,-4],"camera":camera.to_array(),"reduced":reduced,"time":time,"quads":count,"transforms":motif_transforms(m.kind),"views":views,"scope":"actual native FrameBuilder/CameraView cells; offline material approximation, not GPU or browser acceptance"});
+            std::fs::write(
+                output.join(format!("galaxy-low{reduced}-t{time}.json")),
+                serde_json::to_vec(&packet).unwrap(),
+            )
+            .unwrap();
+            eprintln!("Actual seeded galaxy low{reduced} t{time}: {count} cells / 3 transforms");
+        }
     }
 }
 
