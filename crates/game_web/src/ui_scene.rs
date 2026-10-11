@@ -1115,42 +1115,10 @@ impl Painter<'_> {
             );
             return;
         }
-        let names: &[&str] = &CAMPAIGN_SHIPS;
-        let body = &CAMPAIGN_ASSETS.sprites[names[selection(node.value, names.len())]].body;
-        let count = body.occupied_count();
-        let r = node.rect;
-        let scale = (r[2] / body.width as f32)
-            .min(r[3] / body.height as f32)
-            .floor();
-        if scale < 1.0 || count > self.remaining || count > self.work_remaining {
-            return;
-        }
-        let local = Transform {
-            position: Vec2::new(r[0] + r[2] * 0.5, r[1] + r[3] * 0.5),
-            scale: Vec2::splat(scale),
-            ..Transform::default()
-        };
-        let clip = self.clip;
-        self.frame.push_body_affine_colored(
-            body,
-            self.parent.compose(local.affine()),
-            |cell, color| {
-                let p = local.point(cell);
-                if clip.is_some_and(|r| {
-                    p.x < r[0] || p.x >= r[0] + r[2] || p.y < r[1] || p.y >= r[1] + r[3]
-                }) {
-                    0
-                } else if node.disabled {
-                    muted(color)
-                } else if node.active {
-                    brighten(color)
-                } else {
-                    color
-                }
-            },
-        );
-        self.remaining -= count;
-        self.work_remaining -= count;
+        let body = &CAMPAIGN_ASSETS.sprites
+            [CAMPAIGN_SHIPS[selection(node.value, CAMPAIGN_SHIPS.len())]]
+        .body;
+        self.fitted_body(node, body, true);
     }
     fn licensed_ship(&mut self, node: &UiNode) {
         let corporation = [
@@ -1159,9 +1127,9 @@ impl Painter<'_> {
             game_core::identity::Corporation::Hugo,
         ][selection(node.value, 3)];
         let body = game_core::identity::starter_body(corporation);
-        self.fitted_body(node, body);
+        self.fitted_body(node, body, false);
     }
-    fn fitted_body(&mut self, node: &UiNode, body: &PixelBody) {
+    fn fitted_body(&mut self, node: &UiNode, body: &PixelBody, highlight_active: bool) {
         let count = body.occupied_count();
         let r = node.rect;
         let scale = (r[2] / body.width as f32).min(r[3] / body.height as f32);
@@ -1193,6 +1161,8 @@ impl Painter<'_> {
                     0
                 } else if node.disabled {
                     muted(color)
+                } else if highlight_active && node.active {
+                    brighten(color)
                 } else {
                     color
                 }
@@ -1663,7 +1633,7 @@ impl Painter<'_> {
                     && node.value >= 0.0
                     && let Some(body) = component_art::body(node.value as usize)
                 {
-                    self.fitted_body(node, body);
+                    self.fitted_body(node, body, false);
                 }
             }
             "campaign-patch" => self.campaign(node, false, time, reduced),
@@ -2086,10 +2056,10 @@ mod tests {
                 assert_eq!(batch.transforms.len(), 1);
                 let t = batch.transforms[0];
                 assert_eq!(t.b[2..], [0.0, 0.0]);
-                if kind == "campaign-patch" {
-                    assert_eq!(t.a[2], 2.5);
-                } else {
-                    assert_eq!(t.a[2].fract(), 0.0);
+                match kind {
+                    "campaign-patch" => assert_eq!(t.a[2], 2.5),
+                    "campaign-ship" => assert_eq!(t.a[2], 60.0 / 32.0),
+                    _ => assert_eq!(t.a[2].fract(), 0.0),
                 }
                 assert_eq!(t.a[2], t.b[1]);
                 for pixel in &batch.pixels {
@@ -2100,6 +2070,181 @@ mod tests {
             }
         }
     }
+    #[test]
+    fn campaign_ship_continuous_fit_retains_all_cells_below_authored_size() {
+        for (index, name) in CAMPAIGN_SHIPS.iter().enumerate() {
+            let body = &CAMPAIGN_ASSETS.sprites[*name].body;
+            // 32 CSS pixels at UI scale 2.4, plus deliberately subpixel fits.
+            for extent in [0.125, 32.0 / 2.4, 22.5, 32.0, 48.0, 60.0] {
+                let mut input = scene("campaign-ship");
+                let node = &mut input.groups[0].nodes[0];
+                node.value = index as f32;
+                node.rect = [5.125, 9.375, extent, extent * 0.75];
+                let rect = node.rect;
+                let mut frame = FrameBuilder::new();
+                draw(&mut frame, &input, [0.0; 2], [640.0, 360.0], 0.0, true);
+                assert_eq!(
+                    frame.frame().pixel_count,
+                    body.occupied_count(),
+                    "{name}, {extent}"
+                );
+                let batch = &frame.frame().batches[0];
+                assert_eq!(batch.transforms.len(), 1);
+                let t = batch.transforms[0];
+                let scale = extent * 0.75 / 32.0;
+                assert_eq!(t.a[2], scale);
+                assert_eq!(t.b[1], scale);
+                assert_eq!(t.b[2..], [0.0, 0.0]);
+                for pixel in &batch.pixels {
+                    assert_ne!(pixel.color >> 24, 0);
+                    let center = t.point(Vec2::from_array(pixel.local)) + Vec2::new(220.0, 130.0);
+                    let half = scale * 0.5;
+                    for corner in [
+                        Vec2::new(-half, -half),
+                        Vec2::new(half, -half),
+                        Vec2::new(-half, half),
+                        Vec2::new(half, half),
+                    ] {
+                        let point = center + corner;
+                        assert!(
+                            point.x >= rect[0] - 0.0001 && point.x <= rect[0] + rect[2] + 0.0001
+                        );
+                        assert!(
+                            point.y >= rect[1] - 0.0001 && point.y <= rect[1] + rect[3] + 0.0001
+                        );
+                    }
+                }
+            }
+        }
+    }
+
+    #[test]
+    fn campaign_ship_continuous_fit_preserves_state_colors_and_whole_cell_clip() {
+        for (index, name) in CAMPAIGN_SHIPS.iter().enumerate() {
+            let body = &CAMPAIGN_ASSETS.sprites[*name].body;
+            for (active, disabled) in [(false, false), (true, false), (false, true), (true, true)] {
+                let mut input = scene("campaign-ship");
+                let node = &mut input.groups[0].nodes[0];
+                node.value = index as f32;
+                node.rect = [5.125, 9.375, 22.5, 17.25];
+                node.active = active;
+                node.disabled = disabled;
+                let clip = [5.125, 9.375, 11.25, 17.25];
+                node.clip = Some(clip);
+                let mut frame = FrameBuilder::new();
+                draw(&mut frame, &input, [0.0; 2], [640.0, 360.0], 17.0, false);
+                assert_eq!(frame.frame().pixel_count, body.occupied_count());
+                let scale = 17.25 / 32.0;
+                let local = Transform {
+                    position: Vec2::new(16.375, 18.0),
+                    scale: Vec2::splat(scale),
+                    ..Default::default()
+                };
+                let mut visible = 0;
+                for batch in &frame.frame().batches {
+                    for pixel in &batch.pixels {
+                        let cell = Vec2::from_array(pixel.local);
+                        let x = (cell.x + 15.5) as usize;
+                        let y = (cell.y + 15.5) as usize;
+                        let source = body.color_at(x, y).unwrap();
+                        let center = local.point(cell);
+                        let half = scale * 0.5;
+                        let contained = center.x - half >= clip[0]
+                            && center.y - half >= clip[1]
+                            && center.x + half <= clip[0] + clip[2]
+                            && center.y + half <= clip[1] + clip[3];
+                        let expected = if !contained {
+                            0
+                        } else if disabled {
+                            muted(source)
+                        } else if active {
+                            brighten(source)
+                        } else {
+                            source
+                        };
+                        assert_eq!(pixel.color, expected, "{name} cell {x},{y}");
+                        if contained {
+                            visible += 1;
+                            let t = batch.transforms[pixel.transform as usize];
+                            let actual = t.point(cell) + Vec2::new(220.0, 130.0);
+                            for corner in [
+                                Vec2::new(-half, -half),
+                                Vec2::new(half, -half),
+                                Vec2::new(-half, half),
+                                Vec2::new(half, half),
+                            ] {
+                                let point = actual + corner;
+                                assert!(
+                                    point.x >= clip[0] - 0.0001
+                                        && point.x <= clip[0] + clip[2] + 0.0001
+                                );
+                                assert!(
+                                    point.y >= clip[1] - 0.0001
+                                        && point.y <= clip[1] + clip[3] + 0.0001
+                                );
+                            }
+                        }
+                    }
+                }
+                assert!(visible > 0 && visible < body.occupied_count());
+            }
+        }
+    }
+
+    #[test]
+    fn campaign_ship_continuous_fit_debits_both_quotas_atomically_including_clipped_cells() {
+        for (index, name) in CAMPAIGN_SHIPS.iter().enumerate() {
+            let count = CAMPAIGN_ASSETS.sprites[*name].body.occupied_count();
+            let mut input = scene("campaign-ship");
+            let node = &mut input.groups[0].nodes[0];
+            node.value = index as f32;
+            node.rect = [5.125, 9.375, 13.25, 13.25];
+            // No visible cells: clipping still charges the complete submitted body.
+            let clip = Some([100.0, 100.0, 1.0, 1.0]);
+            for (pixels, work, expected) in [
+                (count - 1, count, 0),
+                (count, count - 1, 0),
+                (count, count, count),
+            ] {
+                let mut frame = FrameBuilder::new();
+                frame.push_body(&CELL, Transform::default());
+                let previous = frame.frame().clone();
+                let mut painter = Painter {
+                    frame: &mut frame,
+                    parent: AffineTransform::default(),
+                    remaining: pixels,
+                    viewport: Vec2::new(640.0, 360.0),
+                    clip,
+                    work_remaining: work,
+                };
+                painter.node(node, 0.0, true);
+                assert_eq!(painter.frame.frame().pixel_count, 1 + expected);
+                assert_eq!(
+                    (painter.remaining, painter.work_remaining),
+                    (pixels - expected, work - expected)
+                );
+                if expected == 0 {
+                    assert_eq!(
+                        painter.frame.frame().batches[0].pixels,
+                        previous.batches[0].pixels
+                    );
+                    assert_eq!(
+                        painter.frame.frame().batches[0].transforms,
+                        previous.batches[0].transforms
+                    );
+                } else {
+                    assert!(
+                        painter.frame.frame().batches[0]
+                            .pixels
+                            .iter()
+                            .skip(1)
+                            .all(|p| p.color == 0)
+                    );
+                }
+            }
+        }
+    }
+
     #[test]
     fn component_icons_keep_source_detail_at_fractional_fit_and_clip_whole_cells() {
         for category in 0..3 {
