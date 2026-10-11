@@ -1161,7 +1161,7 @@ body.reduced-motion *::after {
   height: min(
     calc(
       230px * var(--ui-scale, 1) + var(--coop-hit-rows) *
-        var(--coop-control-extra)
+        var(--coop-control-extra) + 2px
     ),
     100%
   );
