@@ -138,7 +138,11 @@ pub fn checkpoint_contract(stage: &str) -> Result<JsValue, JsValue> {
                 profile.schema_version = 5;
                 profile.onboarding = Some(game_core::identity::OnboardingProgress {
                     version: 1,
-                    stage: 6,
+                    stage: if stage == "training-legacy-complete" {
+                        6
+                    } else {
+                        5
+                    },
                     flags: if stage == "training-legacy-complete" {
                         127
                     } else {
