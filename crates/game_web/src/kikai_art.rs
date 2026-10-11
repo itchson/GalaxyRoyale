@@ -5,6 +5,7 @@ use serde::Deserialize;
 use std::{collections::HashMap, sync::LazyLock};
 
 pub const PORTRAIT_ID: usize = 8;
+pub const PROFILE_PORTRAIT_ID: usize = 9;
 pub const PORTRAIT_SIZE: [usize; 2] = [96, 128];
 pub const ICON_SIZE: usize = 32;
 pub const MAX_PORTRAIT_QUADS: usize = 12_288;
@@ -48,6 +49,48 @@ pub enum Corporation {
     Renko,
     Hugo,
 }
+impl Corporation {
+    pub fn from_token(token: u8) -> Option<Self> {
+        match token {
+            0 => Some(Self::Pan),
+            1 => Some(Self::Renko),
+            2 => Some(Self::Hugo),
+            _ => None,
+        }
+    }
+}
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum PortraitKind {
+    Dora,
+    Doro,
+    Talo,
+}
+impl PortraitKind {
+    pub fn from_token(token: u8) -> Option<Self> {
+        match token {
+            0 => Some(Self::Dora),
+            1 => Some(Self::Doro),
+            2 => Some(Self::Talo),
+            _ => None,
+        }
+    }
+}
+/// Validated licensed identity appearance; no unknown type falls back to DORA.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct ProfileAppearance {
+    pub kind: PortraitKind,
+    pub main: Corporation,
+    pub sub: Corporation,
+}
+impl ProfileAppearance {
+    pub fn from_tokens(kind: u8, main: u8, sub: u8) -> Option<Self> {
+        Some(Self {
+            kind: PortraitKind::from_token(kind)?,
+            main: Corporation::from_token(main)?,
+            sub: Corporation::from_token(sub)?,
+        })
+    }
+}
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct CorporateAppearance {
     pub main: Corporation,
@@ -89,9 +132,7 @@ struct Layer {
     horns: Box<[bool]>,
     signal: Box<[bool]>,
 }
-static ART: LazyLock<HashMap<String, Layer>> = LazyLock::new(|| {
-    let atlas: Atlas = serde_json::from_str(include_str!("../../../assets/ui/kikai/atlas.json"))
-        .expect("validated Kikai cell pack");
+fn load_layers(atlas: Atlas, body_name: &str) -> HashMap<String, Layer> {
     assert_eq!(atlas.version, 1);
     assert!((2..=64).contains(&atlas.palette.len()));
     assert_eq!(atlas.palette[0], 0);
@@ -140,7 +181,7 @@ static ART: LazyLock<HashMap<String, Layer>> = LazyLock::new(|| {
             let mut hair = vec![false; sprite.indices.len()].into_boxed_slice();
             let mut horns = hair.clone();
             let mut signal = hair.clone();
-            if name == "dora_body" {
+            if name == body_name {
                 for (mask, indices) in [
                     (&mut hair, &atlas.portrait_roles.hair_cells),
                     (&mut horns, &atlas.portrait_roles.horn_cells),
@@ -164,6 +205,48 @@ static ART: LazyLock<HashMap<String, Layer>> = LazyLock::new(|| {
             )
         })
         .collect()
+}
+static ART: LazyLock<HashMap<String, Layer>> = LazyLock::new(|| {
+    load_layers(
+        serde_json::from_str(include_str!("../../../assets/ui/kikai/atlas.json"))
+            .expect("validated Kikai cell pack"),
+        "dora_body",
+    )
+});
+
+#[derive(Deserialize)]
+struct ProfileAtlas {
+    version: u32,
+    profiles: HashMap<String, Atlas>,
+}
+static PROFILE_ART: LazyLock<[HashMap<String, Layer>; 2]> = LazyLock::new(|| {
+    let mut atlas: ProfileAtlas =
+        serde_json::from_str(include_str!("../../../assets/ui/kikai/profiles/atlas.json"))
+            .expect("validated DORO/TALO cell packs");
+    assert_eq!(atlas.version, 1);
+    assert_eq!(atlas.profiles.len(), 2);
+    ["doro", "talo"].map(|kind| {
+        let layers = load_layers(
+            atlas.profiles.remove(kind).expect("authored profile type"),
+            "body",
+        );
+        assert_eq!(layers.len(), 10);
+        for name in [
+            "body",
+            "eyes_neutral",
+            "eyes_focused",
+            "eyes_concerned",
+            "eyes_pleased",
+            "eyes_blink",
+            "mouth_rest",
+            "mouth_small",
+            "mouth_open",
+            "mouth_smile",
+        ] {
+            assert!(layers.contains_key(name));
+        }
+        layers
+    })
 });
 
 #[derive(Debug, Clone, Copy)]
@@ -282,6 +365,78 @@ pub fn append_corporate_portrait(
     pixels: &mut usize,
     work: &mut usize,
 ) -> DoraStats {
+    append_portrait(frame, input, PortraitKind::Dora, appearance, pixels, work)
+}
+
+/// Draw the licensed type's own authored body and facial states, not a recolored guide.
+pub fn append_profile_portrait(
+    frame: &mut FrameBuilder,
+    input: &DoraInput,
+    appearance: ProfileAppearance,
+    pixels: &mut usize,
+    work: &mut usize,
+) -> DoraStats {
+    append_portrait(
+        frame,
+        input,
+        appearance.kind,
+        CorporateAppearance {
+            main: appearance.main,
+            sub: appearance.sub,
+        },
+        pixels,
+        work,
+    )
+}
+
+fn portrait_layers(
+    kind: PortraitKind,
+    expression: DoraExpression,
+    blink: bool,
+    mouth_frame: u8,
+) -> [&'static Layer; 3] {
+    if kind == PortraitKind::Dora {
+        let eye = if blink {
+            "dora_eyes_blink"
+        } else {
+            expression.eye_name()
+        };
+        let mouth = match mouth_frame {
+            1 => "dora_mouth_small",
+            2 => "dora_mouth_open",
+            _ if expression == DoraExpression::Pleased => "dora_mouth_smile",
+            _ => "dora_mouth_rest",
+        };
+        return [&ART["dora_body"], &ART[eye], &ART[mouth]];
+    }
+    let art = &PROFILE_ART[usize::from(kind == PortraitKind::Talo)];
+    let eye = if blink {
+        "eyes_blink"
+    } else {
+        match expression {
+            DoraExpression::Neutral => "eyes_neutral",
+            DoraExpression::Focused => "eyes_focused",
+            DoraExpression::Concerned => "eyes_concerned",
+            DoraExpression::Pleased => "eyes_pleased",
+        }
+    };
+    let mouth = match mouth_frame {
+        1 => "mouth_small",
+        2 => "mouth_open",
+        _ if expression == DoraExpression::Pleased => "mouth_smile",
+        _ => "mouth_rest",
+    };
+    [&art["body"], &art[eye], &art[mouth]]
+}
+
+fn append_portrait(
+    frame: &mut FrameBuilder,
+    input: &DoraInput,
+    kind: PortraitKind,
+    appearance: CorporateAppearance,
+    pixels: &mut usize,
+    work: &mut usize,
+) -> DoraStats {
     if !valid_rect(input.rect)
         || !valid_parent(input.parent)
         || input.clip.is_some_and(|r| !valid_rect(r))
@@ -300,18 +455,7 @@ pub fn append_corporate_portrait(
     } else {
         0
     };
-    let eye = if blink {
-        "dora_eyes_blink"
-    } else {
-        input.expression.eye_name()
-    };
-    let mouth = match mouth_frame {
-        1 => "dora_mouth_small",
-        2 => "dora_mouth_open",
-        _ if input.expression == DoraExpression::Pleased => "dora_mouth_smile",
-        _ => "dora_mouth_rest",
-    };
-    let layers = [&ART["dora_body"], &ART[eye], &ART[mouth]];
+    let layers = portrait_layers(kind, input.expression, blink, mouth_frame);
     let count = layers
         .iter()
         .map(|layer| layer.body.occupied_count())
@@ -424,6 +568,10 @@ pub fn icon_color(shade: u32, accent: u32, hovered: bool, pressed: bool, disable
     };
     u32::from_le_bytes([channel(r), channel(g), channel(b), 255])
 }
+
+#[cfg(test)]
+#[path = "kikai_profile_tests.rs"]
+mod profile_tests;
 
 #[cfg(test)]
 mod tests {

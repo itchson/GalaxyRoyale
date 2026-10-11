@@ -8,6 +8,15 @@ const VIEW: [f32; 2] = [640.0, 360.0];
 const GROUP: [f32; 2] = [20.25, 10.5];
 const PORTRAIT_CELLS: usize = 8656;
 
+fn licensed_portrait(kind: u8, main: u8, sub: u8) -> UiNode {
+    UiNode {
+        portrait_kind: Some(kind),
+        portrait_main: Some(main),
+        portrait_sub: Some(sub),
+        ..node("portrait", 9.0, [7.0, 9.0, 48.0, 64.0])
+    }
+}
+
 fn node(kind: &str, value: f32, rect: [f32; 4]) -> UiNode {
     UiNode {
         kind: kind.into(),
@@ -111,6 +120,160 @@ fn dora_oracle(n: &UiNode, time: f32, reduced: bool) -> RenderFrame {
         &mut work,
     );
     frame.finish()
+}
+
+#[test]
+fn profile_id9_routes_all_27_licensed_tokens_to_actual_type_cells_and_independent_roles() {
+    let mut seen = std::collections::HashSet::new();
+    for kind in 0..3 {
+        for main in 0..3 {
+            for sub in 0..3 {
+                let n = licensed_portrait(kind, main, sub);
+                let actual = extract(vec![n], [0.0; 2], 0.0, true);
+                assert!(actual.pixel_count > 0);
+                assert_eq!(actual.batches[0].transforms.len(), 3);
+                assert_eq!(
+                    assert_rect(&actual, [7.0, 9.0, 48.0, 64.0], [0.0; 2], 0.0001),
+                    actual.pixel_count
+                );
+                let signature = actual
+                    .batches
+                    .iter()
+                    .flat_map(|b| {
+                        b.pixels
+                            .iter()
+                            .map(|p| (p.local[0].to_bits(), p.local[1].to_bits(), p.color))
+                    })
+                    .collect::<Vec<_>>();
+                assert!(seen.insert(signature));
+            }
+        }
+    }
+    assert_eq!(seen.len(), 27);
+    same(
+        &extract(vec![licensed_portrait(0, 0, 1)], [0.0; 2], 0.0, true),
+        &extract(
+            vec![node("portrait", 8.0, [7.0, 9.0, 48.0, 64.0])],
+            [0.0; 2],
+            0.0,
+            true,
+        ),
+    );
+}
+
+#[test]
+fn profile_semantic_missing_invalid_or_malformed_tokens_draw_nothing_and_guide_ignores_tokens() {
+    for field in ["portrait_kind", "portrait_main", "portrait_sub"] {
+        for bad in [serde_json::Value::Null, 3.into(), 255.into()] {
+            let mut payload = serde_json::json!({"kind":"portrait","value":9,"rect":[7,9,48,64],"portrait_kind":0,"portrait_main":0,"portrait_sub":1});
+            payload[field] = bad;
+            let n: UiNode = serde_json::from_value(payload).unwrap();
+            assert_eq!(extract(vec![n], [0.0; 2], 0.0, true).pixel_count, 0);
+        }
+        for bad in [
+            serde_json::json!(-1),
+            serde_json::json!(256),
+            serde_json::json!(0.5),
+            serde_json::json!("dora"),
+            serde_json::json!(true),
+            serde_json::json!([]),
+            serde_json::json!({"kind":0}),
+        ] {
+            let mut payload = serde_json::json!({"kind":"portrait","value":9,"rect":[7,9,48,64],"portrait_kind":0,"portrait_main":0,"portrait_sub":1});
+            payload[field] = bad;
+            let n: UiNode = serde_json::from_value(payload).unwrap();
+            let actual = extract(vec![n], [0.0; 2], 0.0, true);
+            assert_eq!(actual.pixel_count, 0);
+        }
+        let mut missing = serde_json::json!({"kind":"portrait","value":9,"rect":[7,9,48,64],"portrait_kind":0,"portrait_main":0,"portrait_sub":1});
+        missing.as_object_mut().unwrap().remove(field);
+        let n: UiNode = serde_json::from_value(missing).unwrap();
+        assert_eq!(extract(vec![n], [0.0; 2], 0.0, true).pixel_count, 0);
+    }
+    assert_eq!(
+        extract(
+            vec![node("portrait", 9.0, [7.0, 9.0, 48.0, 64.0])],
+            [0.0; 2],
+            0.0,
+            true
+        )
+        .pixel_count,
+        0
+    );
+    let mut guide = licensed_portrait(255, 255, 255);
+    guide.value = 8.0;
+    same(
+        &extract(vec![guide], [0.0; 2], 0.0, true),
+        &extract(
+            vec![node("portrait", 8.0, [7.0, 9.0, 48.0, 64.0])],
+            [0.0; 2],
+            0.0,
+            true,
+        ),
+    );
+    let mut mixed: UiScene = serde_json::from_value(serde_json::json!({"groups":[{"position":GROUP,"nodes":[
+        {"kind":"portrait","value":9,"rect":[7,9,48,64],"portrait_kind":"doro","portrait_main":0,"portrait_sub":1},
+        {"kind":"text","text":"VALID","rect":[7,9,100,20]}
+    ]}]})).unwrap();
+    let mut frame = FrameBuilder::new();
+    draw(&mut frame, &mixed, [0.0; 2], VIEW, 0.0, true);
+    mixed.groups[0].nodes.remove(0);
+    let mut expected = FrameBuilder::new();
+    draw(&mut expected, &mixed, [0.0; 2], VIEW, 0.0, true);
+    assert!(frame.frame().pixel_count > 0);
+    same(&frame.finish(), &expected.finish());
+}
+
+#[test]
+fn profile_scene_fractional_clipping_motion_and_quota_preserve_type_geometry() {
+    for kind in 0..3 {
+        let mut n = licensed_portrait(kind, 2, 0);
+        n.rect = [7.0, 9.0, 21.25, 28.5];
+        n.clip = Some([10.125, 12.375, 12.25, 17.75]);
+        n.portrait_speaking = true;
+        let actual = extract(vec![n], [0.0; 2], 0.15, true);
+        let visible = assert_rect(&actual, [10.125, 12.375, 12.25, 17.75], [0.0; 2], 0.0001);
+        assert!(visible > 0 && visible < actual.pixel_count);
+        let mut later = licensed_portrait(kind, 2, 0);
+        later.rect = [7.0, 9.0, 21.25, 28.5];
+        later.clip = Some([10.125, 12.375, 12.25, 17.75]);
+        later.portrait_speaking = true;
+        same(&actual, &extract(vec![later], [0.0; 2], 4.4, true));
+        let count = actual.pixel_count;
+        for (pixels, work) in [(count - 1, count), (count, count - 1), (count, count)] {
+            let mut frame = FrameBuilder::new();
+            let mut painter = Painter {
+                frame: &mut frame,
+                parent: AffineTransform::default(),
+                remaining: pixels,
+                work_remaining: work,
+                viewport: Vec2::from_array(VIEW),
+                clip: None,
+            };
+            painter.node(&licensed_portrait(kind, 2, 0), 0.0, true);
+            if pixels < count || work < count {
+                assert_eq!((painter.remaining, painter.work_remaining), (pixels, work));
+                assert_eq!(frame.frame().pixel_count, 0);
+            } else {
+                assert_eq!((painter.remaining, painter.work_remaining), (0, 0));
+                assert_eq!(frame.frame().pixel_count, count);
+            }
+        }
+    }
+    let actual = extract(
+        (0..512)
+            .map(|i| licensed_portrait((i % 3) as u8, 0, 1))
+            .collect(),
+        [0.0; 2],
+        0.0,
+        true,
+    );
+    assert!(actual.pixel_count > 0 && actual.pixel_count <= MAX_UI_PIXELS);
+    assert!(actual.batches.iter().all(|b| {
+        b.pixels
+            .iter()
+            .all(|p| (p.transform as usize) < b.transforms.len())
+    }));
 }
 
 #[test]

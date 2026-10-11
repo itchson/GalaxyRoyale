@@ -154,6 +154,23 @@ pub struct UiNode {
     pub control_rect: Option<[f32; 4]>,
     pub portrait_expression: u8,
     pub portrait_speaking: bool,
+    /// ID9 requires all three licensed-profile tokens; absent/unknown tokens draw nothing.
+    #[serde(deserialize_with = "portrait_token")]
+    pub portrait_kind: Option<u8>,
+    #[serde(deserialize_with = "portrait_token")]
+    pub portrait_main: Option<u8>,
+    #[serde(deserialize_with = "portrait_token")]
+    pub portrait_sub: Option<u8>,
+}
+
+fn portrait_token<'de, D: serde::Deserializer<'de>>(
+    deserializer: D,
+) -> Result<Option<u8>, D::Error> {
+    let token = serde_json::Value::deserialize(deserializer)?;
+    Ok(token
+        .as_u64()
+        .filter(|&value| value <= 2)
+        .map(|value| value as u8))
 }
 
 #[derive(Deserialize)]
@@ -921,25 +938,51 @@ impl Painter<'_> {
         self.remaining -= art.body.occupied_count();
     }
     fn portrait(&mut self, node: &UiNode, time: f32, reduced: bool) {
-        if node.value == 8.0 {
-            crate::kikai_art::append_dora(
-                self.frame,
-                &crate::kikai_art::DoraInput {
-                    rect: node.rect,
-                    parent: self.parent,
-                    clip: self.clip,
-                    time,
-                    reduced_motion: reduced,
-                    expression: crate::kikai_art::DoraExpression::from_label(
-                        ["neutral", "focused", "concerned", "pleased"]
-                            [node.portrait_expression.min(3) as usize],
-                    ),
-                    speaking: node.portrait_speaking,
-                    disabled: node.disabled,
-                },
-                &mut self.remaining,
-                &mut self.work_remaining,
-            );
+        let guide = node.value == crate::kikai_art::PORTRAIT_ID as f32;
+        if guide || node.value == crate::kikai_art::PROFILE_PORTRAIT_ID as f32 {
+            let input = crate::kikai_art::DoraInput {
+                rect: node.rect,
+                parent: self.parent,
+                clip: self.clip,
+                time,
+                reduced_motion: reduced,
+                expression: crate::kikai_art::DoraExpression::from_label(
+                    ["neutral", "focused", "concerned", "pleased"]
+                        [node.portrait_expression.min(3) as usize],
+                ),
+                speaking: node.portrait_speaking,
+                disabled: node.disabled,
+            };
+            if guide {
+                crate::kikai_art::append_dora(
+                    self.frame,
+                    &input,
+                    &mut self.remaining,
+                    &mut self.work_remaining,
+                );
+            } else if let Some(appearance) = node
+                .portrait_kind
+                .zip(node.portrait_main)
+                .zip(node.portrait_sub)
+                .and_then(|((kind, main), sub)| {
+                    crate::kikai_art::ProfileAppearance::from_tokens(kind, main, sub)
+                })
+            {
+                crate::kikai_art::append_profile_portrait(
+                    self.frame,
+                    &input,
+                    appearance,
+                    &mut self.remaining,
+                    &mut self.work_remaining,
+                );
+            }
+            return;
+        }
+        // New licensed types must never silently use a champion or guide portrait.
+        if !node.value.is_finite()
+            || !(0.0..=7.0).contains(&node.value)
+            || node.value.fract() != 0.0
+        {
             return;
         }
         let style = selection(node.value, PORTRAITS.len());
