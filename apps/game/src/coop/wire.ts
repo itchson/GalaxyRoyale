@@ -51,6 +51,8 @@ export interface OwnedLoadout {
   relic_count: number;
   /** Native-exported ordinary Pulse Echo evolution; absent retains evolution one. */
   echo_evolution?: number;
+  /** Native-exported ordinary Repulsor Nova evolution; absent retains evolution one. */
+  nova_evolution?: number;
 }
 export class TransportError extends Error {
   constructor(public readonly code: string) {
@@ -147,11 +149,15 @@ export function ownedLoadout(value: unknown): asserts value is OwnedLoadout {
     "trained_starter",
     "relic_count",
     "echo_evolution",
+    "nova_evolution",
   ]);
   const bounded = (n: unknown, min: number, max: number) =>
     uint(n) && Number(n) >= min && Number(n) <= max;
   if (
-    Object.keys(o).length !== (Object.hasOwn(o, "echo_evolution") ? 11 : 10) ||
+    Object.keys(o).length !==
+      10 +
+        Number(Object.hasOwn(o, "echo_evolution")) +
+        Number(Object.hasOwn(o, "nova_evolution")) ||
     o.version !== 1 ||
     !bounded(o.selected_ship, 0, 9) ||
     !bounded(o.owned_ships, 1, 1023) ||
@@ -182,6 +188,13 @@ export function ownedLoadout(value: unknown): asserts value is OwnedLoadout {
     (!bounded(o.echo_evolution, 1, 5) ||
       o.slots[0] === null ||
       record(o.slots[0]).index !== 3)
+  )
+    fail("invalid_owned_loadout");
+  if (
+    Object.hasOwn(o, "nova_evolution") &&
+    (!bounded(o.nova_evolution, 1, 5) ||
+      o.slots[1] === null ||
+      record(o.slots[1]).index !== 4)
   )
     fail("invalid_owned_loadout");
 }

@@ -168,6 +168,81 @@ test("Echo evolution refuses malformed tokens, wrong slots and persisted progres
   }
 });
 
+test("ordinary Nova and Echo evolution remain independent across native, join and publication boundaries", () => {
+  for (const nova_evolution of [1, 2, 3, 4, 5]) {
+    for (const echo_evolution of [undefined, 2, 5]) {
+      const value = {
+        ...equipment(),
+        slots: [{ index: 3, rank: 2 }, { index: 4, rank: 3 }, null],
+        nova_evolution,
+        ...(echo_evolution === undefined ? {} : { echo_evolution }),
+      };
+      const extracted = readOwnedLoadout({
+        co_op_batch: () =>
+          JSON.stringify({ v: 1, results: [{ ok: true, value }] }),
+      });
+      assert.deepEqual(extracted, value);
+      validatePayload("join", {
+        local_seed: 123,
+        identity: null,
+        owned_loadout: extracted,
+      });
+      const updated = structuredClone(capture);
+      updated.snapshot.participants[1].owned_loadout = {
+        ...extracted,
+        selected_ship: updated.snapshot.participants[1].selected_ship,
+      };
+      publication(updated);
+      assert.equal(
+        updated.snapshot.participants[1].owned_loadout.nova_evolution,
+        nova_evolution,
+      );
+      assert.equal(Object.hasOwn(extracted, "boss_generations"), false);
+    }
+  }
+});
+
+test("Nova evolution refuses wrong slots, malformed tokens and missing required fields even with Echo", () => {
+  const valid = {
+    ...equipment(),
+    slots: [{ index: 3, rank: 1 }, { index: 4, rank: 1 }, null],
+    echo_evolution: 2,
+    nova_evolution: 2,
+  };
+  const invalid = [
+    ...[undefined, null, 0, 6, -1, 1.5, "2", true, NaN, Infinity].map(
+      (nova_evolution) => ({ ...valid, nova_evolution }),
+    ),
+    { ...valid, slots: [{ index: 3, rank: 1 }, null, { index: 4, rank: 1 }] },
+    { ...valid, slots: [{ index: 3, rank: 1 }, { index: 1, rank: 1 }, null] },
+    { ...valid, boss_generations: [[0, 0, 0, 0, 0]] },
+    { ...valid, currency: [10, 10, 10] },
+    (() => {
+      const value = { ...valid };
+      delete value.relic_count;
+      return value;
+    })(),
+  ];
+  for (const value of invalid) {
+    assert.throws(() =>
+      spec({ local_seed: 123, identity: null, owned_loadout: value }),
+    );
+    // undefined is erased by JSON; all other malformed inputs reach the native
+    // extraction boundary, including non-finite numbers normalized to null.
+    if (value.nova_evolution !== undefined) {
+      assert.throws(() =>
+        readOwnedLoadout({
+          co_op_batch: () =>
+            JSON.stringify({ v: 1, results: [{ ok: true, value }] }),
+        }),
+      );
+    }
+  }
+  const legacy = equipment();
+  spec({ local_seed: 123, identity: null, owned_loadout: legacy });
+  assert.equal(Object.keys(legacy).length, 10);
+});
+
 // Native export and committed Git bytes use LF. A Windows text checkout may
 // supply CRLF; this changes no JSON value or native numeric data.
 const canonicalFixtureBytes = (raw) =>
