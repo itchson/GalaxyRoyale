@@ -2,7 +2,7 @@ import "./meishi.css";
 import type { Champion } from "./campaign";
 import type { IdentityHud } from "./kikai";
 import { paintLicensePortrait } from "./kikai-portrait";
-import type { EquippedAbilityHud, LoadoutShipHud } from "./loadout";
+import type { LoadoutShipHud } from "./loadout";
 
 /** Read-only card data from the authoritative Game HUD, never a second save. */
 export interface MeishiHud {
@@ -13,13 +13,6 @@ export interface MeishiHud {
     champions: Pick<Champion, "index" | "name" | "patch">[];
   };
   ship_level: number;
-  ship_xp: number;
-  ship_next_xp: number;
-  hull: number;
-  max_hull: number;
-  shield: number;
-  max_shield: number;
-  loadout: (EquippedAbilityHud | null)[];
   currency: number[];
 }
 
@@ -41,8 +34,6 @@ interface CardView {
   shipIcon: HTMLElement;
   shipName: HTMLElement;
   progress: HTMLElement;
-  vitals: HTMLElement;
-  slots: HTMLElement[];
   points: HTMLElement[];
   patches: PatchSlot[];
   patchCount: HTMLElement;
@@ -50,7 +41,6 @@ interface CardView {
 const views = new WeakMap<HTMLElement, CardView>();
 const corporations = ["pan", "renko", "hugo"] as const;
 const kinds = ["dora", "doro", "talo"] as const;
-const categories = ["OFFENSE", "DEFENSE", "PASSIVE"];
 const colors = ["offense", "defense", "passive"];
 
 function element(tag: string, className: string, text = ""): HTMLElement {
@@ -78,28 +68,23 @@ function createView(target: HTMLElement): CardView {
   seal.dataset.pixelKind = "meishi-seal";
   seal.setAttribute("aria-hidden", "true");
   const issuer = element("p", "meishi-issuer");
-  identity.append(seal, title, designation, issuer, manufacturer);
+  const masthead = element("div", "meishi-masthead");
+  const brand = element("div", "meishi-brand");
+  brand.append(title, issuer);
+  masthead.append(seal, brand);
+  identity.append(designation, manufacturer);
   portraitFrame.append(portrait);
   heading.append(portraitFrame, identity);
 
   const raicho = element("section", "meishi-raicho");
-  raicho.setAttribute("aria-label", "Current RAICHO and equipped abilities");
+  raicho.setAttribute("aria-label", "Current RAICHO");
   const shipIcon = element("section", "meishi-ship-icon");
   shipIcon.setAttribute("aria-hidden", "true");
   const ship = element("div", "meishi-ship-summary");
   const shipName = element("h3", "meishi-ship-name");
   const progress = element("p", "meishi-progress");
-  const vitals = element("p", "meishi-vitals");
-  ship.append(shipName, progress, vitals);
-  const abilities = element("div", "meishi-equipped");
-  const slots = colors.map((color) => {
-    const row = element("div", `upgrade-category ${color}`);
-    const caption = element("p", "meishi-slot");
-    row.append(caption);
-    abilities.append(row);
-    return caption;
-  });
-  raicho.append(shipIcon, ship, abilities);
+  ship.append(shipName, progress);
+  raicho.append(shipIcon, ship);
 
   const balances = element("section", "meishi-balances");
   balances.setAttribute("aria-label", "Retained corporate point balances");
@@ -135,7 +120,7 @@ function createView(target: HTMLElement): CardView {
     return { row, well, icon, empty, caption };
   });
   collection.append(patchCount, patchList);
-  card.append(heading, raicho, balances, collection);
+  card.append(masthead, heading, raicho, balances, collection);
   target.replaceChildren(card);
   const view = {
     card,
@@ -148,8 +133,6 @@ function createView(target: HTMLElement): CardView {
     shipIcon,
     shipName,
     progress,
-    vitals,
-    slots,
     points,
     patches,
     patchCount,
@@ -246,25 +229,12 @@ export function paintMeishiCard(target: HTMLElement, hud: MeishiHud): boolean {
   );
   data(view.shipIcon, "active", "true");
   write(view.shipName, validShip ? ship.name : "RAICHO UNAVAILABLE");
-  write(
+  write(view.progress, `LV ${number(hud.ship_level)}`);
+  attribute(
     view.progress,
-    `LV ${number(hud.ship_level)} / XP ${number(hud.ship_xp)} / ${hud.ship_level >= 100 ? "MAX LEVEL" : `NEXT ${number(hud.ship_next_xp)}`}`,
+    "aria-label",
+    `RAICHO level ${number(hud.ship_level)}`,
   );
-  write(
-    view.vitals,
-    `HULL ${number(hud.hull)}/${number(hud.max_hull)} / SHIELD ${number(hud.shield)}/${number(hud.max_shield)}`,
-  );
-  view.slots.forEach((node, index) => {
-    const slot = hud.loadout[index];
-    write(
-      node,
-      `${categories[index]} / ${
-        slot && slot.category === index
-          ? `${slot.name} / R${number(slot.effective_rank)}`
-          : "EMPTY"
-      }`,
-    );
-  });
   view.points.forEach((node, index) => {
     const issuer = ["RENKO", "HUGO", "PAN"][index];
     const role = ["OFFENSIVE", "DEFENSIVE", "PASSIVE"][index];
