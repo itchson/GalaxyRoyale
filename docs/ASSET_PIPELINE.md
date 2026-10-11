@@ -95,3 +95,19 @@ The checked-in `native-extraction.json` and `native-preview.png` preserve the ea
 5. Only then adapt the reviewed pack to the intended runtime consumer. Verify real damage holes, group budget rejection, animation/Reduced Motion and both backend presentations. Human moving-play, hearing and physical-phone gates remain separate; native proofs cannot mark those passed.
 
 The earlier `convert-atlas.py` and `convert-ui-atlas.py` remain reproducible historical conversion recipes for their particular inspected sheets. Their hard-coded crops and explicit historical loss policies are not the default of this reusable pipeline. No generation service or global model configuration is installed by these scripts.
+
+## PAN co-op dock conversion candidate
+
+[PAN dock candidate](../assets/pipeline/pan-coop-dock/README.md) retains the actual
+1254×1254 imagegen reference and records explicit alpha128/nearest128 sampling
+and material-stratified palette losses. Its64-color pack preserves all sampled
+components and exterior pad cutouts, with7,100 occupied cells split into four
+logical parts. Three authored lamp-only color states share identical occupancy.
+The existing native utility proves exact PixelBody extraction, and a scoped
+`scripts/qa/pan-coop-dock/native` proof exercises the actual PixelRig, material
+roles, fractional/reflected/sheared corners, damage holes and bounded admission.
+
+192/256 comparison views show the detail tradeoff but exceed the current
+single-rig128-side contract. No engine limit is enlarged and no shipping dock is
+replaced. The reference's finest texture/crystal details are not fully retained
+at128; GPU/live-game/co-op and human/device acceptance remain separate gates.

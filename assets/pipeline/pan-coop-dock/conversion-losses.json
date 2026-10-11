@@ -1,0 +1,158 @@
+{
+  "source_sha256": "eab5fa7c3b604451fdb5fadff75c2138d614aa8d8bbcedd31402527c59380918",
+  "grid_comparison": {
+    "128": {
+      "source_dimensions": [
+        1254,
+        1254
+      ],
+      "native_dimensions": [
+        128,
+        128
+      ],
+      "threshold": 128,
+      "sampling": "Pillow nearest center sample; no crop or component filter",
+      "source_topology_threshold128": {
+        "occupied": 684505,
+        "components": 1,
+        "hole_cells": 0,
+        "bounds": [
+          11,
+          11,
+          1243,
+          1243
+        ]
+      },
+      "native_topology": {
+        "occupied": 7100,
+        "components": 1,
+        "hole_cells": 0,
+        "bounds": [
+          1,
+          1,
+          127,
+          127
+        ]
+      },
+      "alpha_values_changed_before_sampling": 717441,
+      "source_mask_vs_native_nearest_reprojection": {
+        "false_opaque_source_pixels": 5534,
+        "false_transparent_source_pixels": 9411,
+        "intersection_over_union": 0.9783418038690567
+      },
+      "quantized_occupied_color_cells": 6683,
+      "mean_absolute_rgb_channel_error": 3.1234272300469486,
+      "maximum_rgb_channel_error": 91,
+      "rgb_channel_rmse": 5.873610114286434
+    },
+    "192": {
+      "source_dimensions": [
+        1254,
+        1254
+      ],
+      "native_dimensions": [
+        192,
+        192
+      ],
+      "threshold": 128,
+      "sampling": "Pillow nearest center sample; no crop or component filter",
+      "source_topology_threshold128": {
+        "occupied": 684505,
+        "components": 1,
+        "hole_cells": 0,
+        "bounds": [
+          11,
+          11,
+          1243,
+          1243
+        ]
+      },
+      "native_topology": {
+        "occupied": 16085,
+        "components": 1,
+        "hole_cells": 1,
+        "bounds": [
+          2,
+          2,
+          190,
+          190
+        ]
+      },
+      "alpha_values_changed_before_sampling": 717441,
+      "source_mask_vs_native_nearest_reprojection": {
+        "false_opaque_source_pixels": 5794,
+        "false_transparent_source_pixels": 4254,
+        "intersection_over_union": 0.9854439887642891
+      },
+      "quantized_occupied_color_cells": 15936,
+      "mean_absolute_rgb_channel_error": 3.429634234794322,
+      "maximum_rgb_channel_error": 63,
+      "rgb_channel_rmse": 5.618989149598841
+    },
+    "256": {
+      "source_dimensions": [
+        1254,
+        1254
+      ],
+      "native_dimensions": [
+        256,
+        256
+      ],
+      "threshold": 128,
+      "sampling": "Pillow nearest center sample; no crop or component filter",
+      "source_topology_threshold128": {
+        "occupied": 684505,
+        "components": 1,
+        "hole_cells": 0,
+        "bounds": [
+          11,
+          11,
+          1243,
+          1243
+        ]
+      },
+      "native_topology": {
+        "occupied": 28549,
+        "components": 1,
+        "hole_cells": 0,
+        "bounds": [
+          2,
+          2,
+          254,
+          254
+        ]
+      },
+      "alpha_values_changed_before_sampling": 717441,
+      "source_mask_vs_native_nearest_reprojection": {
+        "false_opaque_source_pixels": 3248,
+        "false_transparent_source_pixels": 3334,
+        "intersection_over_union": 0.9904297036872249
+      },
+      "quantized_occupied_color_cells": 28270,
+      "mean_absolute_rgb_channel_error": 3.4483169287890996,
+      "maximum_rgb_channel_error": 68,
+      "rgb_channel_rmse": 5.607725822971755
+    }
+  },
+  "palette_colors": 64,
+  "lamp_cells": 433,
+  "part_counts": {
+    "deck": 4611,
+    "alloy": 1786,
+    "screens": 182,
+    "signals": 521
+  },
+  "quantization": "3 explicit asset-pack median-cut passes: metal47/green8/cyan8 maximum opaque colors, no dither",
+  "animations": "3 authored same-occupancy lamp-only color states, nearest existing green palette shade to gain1/.78/1.35; no generated motion",
+  "lamp_changed_cells": [
+    0,
+    384,
+    316
+  ],
+  "pending": [
+    "Shipping adapter and co-op facility semantics",
+    "GPU presentation",
+    "Human readability",
+    "Physical performance"
+  ]
+}

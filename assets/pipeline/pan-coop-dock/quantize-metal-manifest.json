@@ -1,0 +1,17 @@
+{
+  "schema": 1,
+  "palette": {
+    "mode": "quantize",
+    "max_colors": 48
+  },
+  "sprites": [
+    {
+      "name": "metal",
+      "source": "sample-metal.png",
+      "topology": "holes-allowed",
+      "components": {
+        "mode": "all"
+      }
+    }
+  ]
+}
