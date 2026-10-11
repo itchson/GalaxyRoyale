@@ -114,6 +114,9 @@ pub(super) struct Pilot {
     pub fire_timer: f32,
     pub pulse_lens_rank: u8,
     pub primary_phase: u8,
+    pub echo_rank: u8,
+    pub echo_evolution: u8,
+    pub echo_phase: u8,
     pub input: InputFrame,
     pub last_sequence: Option<u32>,
     pub input_tick: u32,
@@ -294,6 +297,10 @@ fn pilot(
     owned_loadout: Option<OwnedLoadout>,
 ) -> Pilot {
     let stats = crate::co_op_loadout::stats(profile, owned_loadout.as_ref());
+    let echo_evolution = owned_loadout.as_ref().map_or_else(
+        || bosses::evolution(profile, 0),
+        |build| build.echo_evolution.unwrap_or(1),
+    );
     Pilot {
         admission,
         spec,
@@ -310,6 +317,9 @@ fn pilot(
         fire_timer: 0.0,
         pulse_lens_rank: ship_progression::equipped_rank(profile, 0),
         primary_phase: 0,
+        echo_rank: ship_progression::equipped_rank(profile, 3),
+        echo_evolution,
+        echo_phase: 0,
         input: InputFrame::default(),
         last_sequence: None,
         input_tick: 0,
@@ -656,6 +666,7 @@ impl Game {
             }
         }
         let mut bonuses = [None; MAX_PARTICIPANTS];
+        let mut echoes = [None; MAX_PARTICIPANTS];
         for (entity, motion, stats, owner) in fires.into_iter().flatten() {
             let direction = forward(motion.heading);
             if let Some(shot) = self.spawn_bullet_entity(
@@ -672,6 +683,14 @@ impl Game {
                 pilot.primary_phase = (pilot.primary_phase + 1) % 5;
                 if pilot.pulse_lens_rank > 0 && pilot.primary_phase == 0 {
                     bonuses[pilot.admission.slot as usize] = Some((motion, stats, owner));
+                }
+                if pilot.echo_rank > 0 {
+                    let period = if pilot.echo_evolution >= 5 { 6 } else { 8 };
+                    pilot.echo_phase = (pilot.echo_phase + 1) % period;
+                    if pilot.echo_phase == 0 {
+                        echoes[pilot.admission.slot as usize] =
+                            Some((motion, stats, owner, pilot.echo_rank, pilot.echo_evolution));
+                    }
                 }
                 drop(pilot);
                 self.event("shot", motion.position, 0.6);
@@ -690,6 +709,39 @@ impl Game {
             ) {
                 self.world.insert_one(shot, owner).unwrap();
             }
+        }
+        // Ordinary Echo follows primaries and Lens at the same shared cap.
+        // Each authored fan projectile is a real piercing bullet; partial admission
+        // consumes the trigger exactly as solo fire(), without a replay queue.
+        for (motion, stats, owner, rank, evolution) in echoes.into_iter().flatten() {
+            let position = motion.position + forward(motion.heading) * 19.0;
+            self.transient_light(position, 95.0, [0.67, 0.38, 1.0], 1.1, 0.25);
+            let damage = stats.damage * (0.5 + 0.1 * rank.saturating_sub(1) as f32);
+            let angles: &[f32] = if evolution >= 3 {
+                &[-0.32, -0.16, 0.0, 0.16, 0.32, PI - 0.18, PI + 0.18]
+            } else if evolution >= 2 {
+                &[-0.32, -0.16, 0.0, 0.16, 0.32]
+            } else {
+                &[-0.16, 0.0, 0.16]
+            };
+            let mut admitted = false;
+            for angle in angles {
+                if let Some(shot) = self.spawn_bullet_entity(
+                    position,
+                    forward(motion.heading + angle) * 460.0,
+                    damage,
+                    true,
+                    if evolution >= 4 { 3 } else { 2 },
+                ) {
+                    self.world.insert_one(shot, owner).unwrap();
+                    admitted = true;
+                }
+            }
+            if admitted {
+                self.event("ability-echo", motion.position, 0.65);
+            }
+            // Solo retains this bounded muzzle burst/light even if no fan fits.
+            self.burst(position, 8, rgba(187, 159, 255, 255), 25.0);
         }
         self.refresh_sites();
         let positions = self.co_op_positions();
@@ -1162,3 +1214,7 @@ mod starter_tests;
 #[cfg(test)]
 #[path = "co_op_passive_tests.rs"]
 mod passive_tests;
+
+#[cfg(test)]
+#[path = "co_op_echo_tests.rs"]
+mod echo_tests;

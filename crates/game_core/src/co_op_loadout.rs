@@ -1,5 +1,7 @@
 //! Bounded offline build declarations, never remote saves or ownership proofs.
-use crate::{Profile, Stats, abilities, campaign, co_op, identity, ship_progression, training};
+use crate::{
+    Profile, Stats, abilities, bosses, campaign, co_op, identity, ship_progression, training,
+};
 use co_op::{Error, ParticipantSpec};
 use serde::{Deserialize, Serialize};
 
@@ -26,6 +28,9 @@ pub struct OwnedLoadout {
     pub slots: [Option<OwnedAbility>; 3],
     pub trained_starter: bool,
     pub relic_count: u8,
+    /// Effect-only offline claim; missing historical builds keep evolution one.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub echo_evolution: Option<u8>,
 }
 
 impl OwnedLoadout {
@@ -67,6 +72,9 @@ impl OwnedLoadout {
                 .flatten()
                 .any(|&id| training::trained_starter(profile, id)),
             relic_count: profile.relics.len().min(20) as u8,
+            echo_evolution: (ship_progression::equipped_rank(profile, 3) > 0)
+                .then(|| bosses::evolution(profile, 0))
+                .filter(|&evolution| evolution > 1),
         };
         result.profile(&ParticipantSpec {
             id: co_op::ParticipantId::parse("00000000000000000000000000000000")?,
@@ -84,6 +92,9 @@ impl OwnedLoadout {
             || self.owned_ships & (1 << self.selected_ship) == 0
             || self.hardware.iter().any(|&rank| rank > 5)
             || self.relic_count > 20
+            || self.echo_evolution.is_some_and(|evolution| {
+                !(1..=5).contains(&evolution) || !self.slots[0].is_some_and(|slot| slot.index == 3)
+            })
             || ((self.owned_ships >> 9) != 0) != self.royal_victory
             || (self.royal_victory && self.patches != u8::MAX)
             || ((self.owned_ships >> 1) as u8 & !self.patches) != 0
