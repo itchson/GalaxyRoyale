@@ -7,6 +7,7 @@ import { createServer } from "node:net";
 import { request } from "node:http";
 import vm from "node:vm";
 import ts from "typescript";
+import { CoopController } from "../../apps/game/src/coop/controller.ts";
 import {
   prepare,
   preparedNames,
@@ -349,6 +350,74 @@ test("Actual rejoin gate requires a new complete native commit, not a cumulative
     "native-complete-commit",
     "new-session",
   ]);
+});
+
+test("Actual New session orchestration uses real controller idempotent leave after prior host end", async () => {
+  const source = await fs.readFile(
+    new URL("../qa/co-op-transport/wasm-review.js", import.meta.url),
+    "utf8",
+  );
+  const calls = [];
+  // Actual controller lifecycle code; declared idle transport boundary, no native/Game/RTC execution.
+  const controllers = Object.fromEntries(
+    ["host", "guest"].map((role) => [
+      role,
+      new CoopController({
+        service: "http://127.0.0.1:4176",
+        localSpec: () => ({ local_seed: 1, identity: null }),
+        native: {
+          co_op_batch() {
+            assert.fail(
+              "an already-ended leave must not invent a native operation",
+            );
+          },
+        },
+        transportFactory(options) {
+          return {
+            diagnostics: () => ({
+              phase: "ended",
+              reason: null,
+              session: null,
+              participant: null,
+              peers: [],
+            }),
+            async leave() {
+              calls.push(role + "-left");
+              options.onChange?.();
+            },
+          };
+        },
+      }),
+    ]),
+  );
+  await controllers.host.leave();
+  await controllers.guest.leave();
+  await assert.rejects(
+    controllers.host.end(),
+    (error) => error.code === "host_only",
+  );
+  calls.length = 0;
+  const context = vm.createContext({
+    send: async (role, action) => {
+      assert.equal(
+        action,
+        "leave",
+        "a second end reproduces the observed host_only failure",
+      );
+      await controllers[role][action]();
+    },
+    connected: async (rejoin) => {
+      assert.equal(rejoin, true);
+      for (const controller of Object.values(controllers)) {
+        assert.equal(controller.state().phase, "ended");
+        assert.equal(controller.frameMode(), "solo");
+      }
+      calls.push("fresh-connect");
+    },
+  });
+  vm.runInContext(functionSource(source, "restartSession"), context);
+  await context.restartSession();
+  assert.deepEqual(calls, ["guest-left", "host-left", "fresh-connect"]);
 });
 
 test("WASM report accepts finite observations, refuses capabilities/profile payloads and does not infer a native commit", () => {

@@ -216,6 +216,12 @@ async function connected(rejoin) {
   check("native-complete-commit", state.guest.commits > commitsBefore);
   if (rejoin) check("new-session", sessionDistinct === true);
 }
+async function restartSession() {
+  // leave is valid for both live and already-ended controllers; end is host/live-only.
+  await send("guest", "leave");
+  await send("host", "leave");
+  await connected(true);
+}
 $("initialize").onclick = () =>
   action("Initialize", async () => {
     const deadline = performance.now() + 15_000;
@@ -276,12 +282,7 @@ $("end").onclick = () =>
     check("host-end-restored", true);
     await verify();
   });
-$("rejoin").onclick = () =>
-  action("New session", async () => {
-    await send("guest", "leave");
-    await send("host", "end");
-    await connected(true);
-  });
+$("rejoin").onclick = () => action("New session", restartSession);
 $("leave").onclick = () =>
   action("Guest leave", async () => {
     await send("guest", "leave");
