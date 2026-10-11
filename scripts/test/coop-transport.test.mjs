@@ -94,6 +94,7 @@ class Channel {
 class Network {
   pcs = [];
   autoOpen = true;
+  deliverOpenChannel = false;
   make = () => {
     const n = this,
       pc = {
@@ -140,7 +141,8 @@ class Network {
             this.channel = new Channel();
             this.channel.other = partner.channel;
             partner.channel.other = this.channel;
-            this.ondatachannel?.({ channel: this.channel });
+            if (!n.deliverOpenChannel)
+              this.ondatachannel?.({ channel: this.channel });
           } else if (n.autoOpen) n.open(this);
         },
         async addIceCandidate(value) {
@@ -165,6 +167,8 @@ class Network {
       p.channel.readyState = "open";
     }
     for (const p of pair) {
+      if (this.deliverOpenChannel && p.remoteDescription?.type === "offer")
+        p.ondatachannel?.({ channel: p.channel });
       p.onconnectionstatechange?.();
       p.channel.onopen?.({});
     }
@@ -520,6 +524,34 @@ test("actual HTTP membership never implies a ready channel or Rust admission", a
     guest.markSimulation(guest.diagnostics().peers[0].id, true),
     false,
   );
+});
+test("already-open incoming native channel plus later open event sends exactly one hello", async (t) => {
+  const n = new Network();
+  n.deliverOpenChannel = true;
+  const f = await fixture(t, {}, n),
+    p = await f.pair();
+  await delay(30);
+  assert.equal(p.host.diagnostics().peers[0].transport, "ready");
+  assert.equal(p.guest.diagnostics().peers[0].transport, "ready");
+  assert.ok(
+    n.pcs.every(
+      (pc) =>
+        pc.channel.sent.filter((s) => JSON.parse(s).kind === "hello").length ===
+        1,
+    ),
+  );
+  assert.ok(n.pcs.every((pc) => pc.closes === 0));
+});
+test("RTC diagnostics retain only allowlisted native error detail, never messages or candidates", async (t) => {
+  const f = await fixture(t),
+    p = await f.pair();
+  const pc = f.network.pcs.find((pc) => pc.remoteDescription?.type === "offer");
+  pc.channel.onerror({
+    error: { errorDetail: "sctp-failure", message: "DO-NOT-RETAIN-SDP-TOKEN" },
+  });
+  await until(() => p.guest.diagnostics().phase === "ended");
+  assert.deepEqual(p.guest.diagnostics().rtcErrors, ["sctp-failure"]);
+  assert.ok(!JSON.stringify(p.guest.diagnostics()).includes("DO-NOT-RETAIN"));
 });
 test("real HTTP offer/answer/ICE path binds peer IDs and admits only explicit frames", async (t) => {
   const f = await fixture(t),

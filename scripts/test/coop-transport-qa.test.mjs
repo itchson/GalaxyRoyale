@@ -146,6 +146,7 @@ test("QA reports exclude arbitrary telemetry/credentials and prepare refuses out
   for (const invalid of [
     { ...base, run_id: "../../secret" },
     { ...base, closed: 1 },
+    { ...base, rtc_errors: ["private-error-message"] },
     {
       ...base,
       checks: [

@@ -61,6 +61,7 @@ function state() {
           })),
           pendingRequests: d.pendingRequests,
           timers: d.timers,
+          rtcErrors: d.rtcErrors,
         }
       : null;
   };
@@ -101,6 +102,10 @@ async function capture() {
       closed,
       secure_context: isSecureContext,
       rtc_available: typeof RTCPeerConnection === "function",
+      rtc_errors: [
+        ...(host?.diagnostics().rtcErrors ?? []),
+        ...(guest?.diagnostics().rtcErrors ?? []),
+      ].slice(-8),
     }),
   });
   if (!response.ok) throw new Error("Sanitized report capture failed");

@@ -34,6 +34,15 @@ export interface TransportOptions {
   onWritable?: (peer: string) => void;
 }
 type Admission = "pending" | "admitted" | "rejected";
+const RTC_ERROR_DETAILS = new Set([
+  "data-channel-failure",
+  "dtls-failure",
+  "fingerprint-failure",
+  "hardware-encoder-error",
+  "hardware-encoder-not-available",
+  "sctp-failure",
+  "sdp-syntax-error",
+]);
 interface Peer {
   id: string;
   pc: RTCPeerConnection;
@@ -76,6 +85,7 @@ export class CoopTransport {
   #epoch = 0;
   #peers = new Map<string, Peer>();
   #retired = new Set<string>();
+  #rtcErrors: string[] = [];
   #controllers = new Set<AbortController>();
   #timers = new Set<Timer>();
   constructor(options: TransportOptions) {
@@ -131,6 +141,7 @@ export class CoopTransport {
     if (!["idle", "ended"].includes(this.#phase)) fail("already_in_session");
     const epoch = ++this.#epoch;
     this.#phase = "connecting";
+    this.#rtcErrors = [];
     this.#reason = null;
     this.#changed();
     try {
@@ -206,6 +217,7 @@ export class CoopTransport {
       })),
       pendingRequests: this.#controllers.size,
       timers: this.#timers.size,
+      rtcErrors: [...this.#rtcErrors],
     };
   }
   #code(error: unknown): string {
@@ -572,8 +584,10 @@ export class CoopTransport {
     p.channel = channel;
     channel.binaryType = "arraybuffer";
     channel.bufferedAmountLowThreshold = LOW_BUFFERED_BYTES;
+    let opened = false;
     channel.onopen = () => {
-      if (!this.#current(p, epoch)) return;
+      if (!this.#current(p, epoch) || opened) return;
+      opened = true;
       p.state = "channel-open";
       if (
         !this.#send(p, "hello", {
@@ -663,7 +677,14 @@ export class CoopTransport {
         }
       }
     };
-    channel.onerror = () => this.#drop(p, "channel_error");
+    channel.onerror = (event) => {
+      const detail = (event as RTCErrorEvent).error?.errorDetail;
+      if (RTC_ERROR_DETAILS.has(detail)) {
+        if (this.#rtcErrors.length === 8) this.#rtcErrors.shift();
+        this.#rtcErrors.push(detail);
+      }
+      this.#drop(p, "channel_error");
+    };
     channel.onclose = () => this.#drop(p, "channel_closed");
     if (channel.readyState === "open") channel.onopen(new Event("open"));
   }

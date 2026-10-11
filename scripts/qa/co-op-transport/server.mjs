@@ -42,6 +42,7 @@ export function validateReport(o) {
       "closed",
       "secure_context",
       "rtc_available",
+      "rtc_errors",
     ]) ||
     o.version !== 1 ||
     !/^[a-f0-9]{16}$/.test(o.run_id) ||
@@ -50,6 +51,21 @@ export function validateReport(o) {
     o.closed > o.created ||
     typeof o.secure_context !== "boolean" ||
     typeof o.rtc_available !== "boolean" ||
+    (o.rtc_errors !== undefined &&
+      (!Array.isArray(o.rtc_errors) ||
+        o.rtc_errors.length > 8 ||
+        o.rtc_errors.some(
+          (d) =>
+            ![
+              "data-channel-failure",
+              "dtls-failure",
+              "fingerprint-failure",
+              "hardware-encoder-error",
+              "hardware-encoder-not-available",
+              "sctp-failure",
+              "sdp-syntax-error",
+            ].includes(d),
+        ))) ||
     !Array.isArray(o.checks) ||
     o.checks.length > 64
   )
