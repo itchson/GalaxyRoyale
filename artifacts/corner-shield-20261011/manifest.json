@@ -1,0 +1,177 @@
+{
+  "version": 1,
+  "head": "f69d6cbe8d58d182da6e45460b42b963655c5fbc",
+  "scope": "Actual source, native/software checks and desktop WebGPU/WebGL2 observations. Physical-device, extended soak and human art/audio acceptance are pending.",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 5216,
+      "sha256": "1fc17aab2617455f905d94301f5500a6d15164531898a4aa21a6cf176a0c477a"
+    },
+    {
+      "path": "active-hull-affinity-handoff.md",
+      "bytes": 3983,
+      "sha256": "79cbaf30738c623645d3065a29f8f5160aac0ade56fcb1d813f0722aa511d7d1"
+    },
+    {
+      "path": "affinity-corrected.log",
+      "bytes": 562,
+      "sha256": "755bda449965ed57fff9614da869c41f9926fb0609145b301190cd72df19c2f0"
+    },
+    {
+      "path": "affinity-negative.log",
+      "bytes": 1962,
+      "sha256": "e9027761170bc11cdb3b263f89b172efd76a99f0c29a8f62143573dceb47e0f7"
+    },
+    {
+      "path": "boss-webgpu-320.png",
+      "bytes": 7821,
+      "sha256": "eb7da935bb999b6cb1495408797d9e6464eb052eff90e487d51892485cbf4bb5"
+    },
+    {
+      "path": "build-f69.log",
+      "bytes": 1444,
+      "sha256": "81f0e7521d9ab72e6e0ac6937a5270a75a449df7f272f662ac43e172c1ba8432"
+    },
+    {
+      "path": "champion-roster-handoff.md",
+      "bytes": 5219,
+      "sha256": "4bf6fe61dda43d61bc32b094f072d98db3e07e3726f2cc45b089fa2f88cbf230"
+    },
+    {
+      "path": "clippy-final.log",
+      "bytes": 265,
+      "sha256": "5b21b597f15e63b04e7e3cefee661caff8d332e9f42e65dafb5cf9efcae7207d"
+    },
+    {
+      "path": "combat-webgpu-1280.png",
+      "bytes": 28888,
+      "sha256": "c9d3129057ebf3855c7ba05985bf19c48dcd9721709b8230dfef96fe41ce9713"
+    },
+    {
+      "path": "corner-hud-handoff.md",
+      "bytes": 3496,
+      "sha256": "d2940134cdf7ea0af546193e76af6ad8c2b408f902f45ac82963eb2fef67d9ee"
+    },
+    {
+      "path": "flight-webgl2-1280.png",
+      "bytes": 22367,
+      "sha256": "907651fca200f4701922375582835ab88206a9b027d09a285af7378919925b50"
+    },
+    {
+      "path": "flight-webgl2-320.png",
+      "bytes": 5323,
+      "sha256": "7e0a5aa914db6125790c65d5d1e79714279a2b5d2ce6282cdc8b5f4439b47099"
+    },
+    {
+      "path": "flight-webgl2-848.png",
+      "bytes": 12588,
+      "sha256": "36161d3b90644e2ce168e4e69853dad0547f0a74b594a4568908db12009424f5"
+    },
+    {
+      "path": "icon-art-handoff.md",
+      "bytes": 2348,
+      "sha256": "49a1980b3207879662013085c4be169b277b254592ede3d3f40161a8334f83e0"
+    },
+    {
+      "path": "icon-assets.log",
+      "bytes": 115,
+      "sha256": "94f9f16002f6b209019443e191b6b76b7a2e3f7c1d4ea816cba29f818effdce6"
+    },
+    {
+      "path": "icon-native-review.md",
+      "bytes": 8075,
+      "sha256": "aa3a7cf9359dcef82c670c3952fb34cf0ad303b267eb00f55894aa1d2cc4fc2c"
+    },
+    {
+      "path": "native-budget-negative.log",
+      "bytes": 21647,
+      "sha256": "b35267751b31fcd9e4e0267c23e285b2354089497f78c83a2b8a350ba0b1fc65"
+    },
+    {
+      "path": "native-workspace-final.log",
+      "bytes": 60070,
+      "sha256": "b1b934d5c864854443039054ca7eae69f611e92ed29abe3558f18e3bc4b9669e"
+    },
+    {
+      "path": "portrait-assets.log",
+      "bytes": 2667,
+      "sha256": "ecb80c79f89e56188bacbaf8aa3a78428acb200f39c1aaa13c4215513c2cb3d2"
+    },
+    {
+      "path": "portrait-portability-review.md",
+      "bytes": 3398,
+      "sha256": "a18390bfd92a49e5fed57fa1b7c662c7523bc6ca8a8fda7b5486098f1642ef32"
+    },
+    {
+      "path": "renderer-webgl2.png",
+      "bytes": 35088,
+      "sha256": "d3ea4e257a619d81e3f230d82435ae85017b69efd3198839adbb39b15234b77b"
+    },
+    {
+      "path": "renderer-webgpu.png",
+      "bytes": 32057,
+      "sha256": "4b116c2b867cf881298565535abaf27f2fd1531a94472d84aa662dc2f9f63395"
+    },
+    {
+      "path": "settings-settled-webgl2-848.png",
+      "bytes": 33863,
+      "sha256": "97325cd126b836fe08bcb547c0a8ae5219f1a35d6bbc852d453a25234008babc"
+    },
+    {
+      "path": "settings-webgl2-848.png",
+      "bytes": 33975,
+      "sha256": "faf614f9a9d9834fd696bac8fb3aa43f08f7b2f5d74dfc7634661aaf5f4fbace"
+    },
+    {
+      "path": "settings-webgpu-848.png",
+      "bytes": 33635,
+      "sha256": "f2a481fb71c0af1ec35d42c22c7dd645750a2804ce84bc4e06e6ce345af59399"
+    },
+    {
+      "path": "shell-final.log",
+      "bytes": 38530,
+      "sha256": "11c89207cf5aa704f70e0d5d9f9ce47162b572037fed4a0f15d235241efc6b5a"
+    },
+    {
+      "path": "shield-core-handoff.md",
+      "bytes": 5101,
+      "sha256": "df972509a290b13e44e4b2af03eafe521d879884d94c1be51860c258d4f6116a"
+    },
+    {
+      "path": "shield-core-review.md",
+      "bytes": 6067,
+      "sha256": "0222f80958cd1da038dd68a468d0f429fb4b89d5753c910cccdd66b431757541"
+    },
+    {
+      "path": "shield-vitals-handoff.md",
+      "bytes": 4357,
+      "sha256": "b4ad3524c9465001466d7c1dbd5333ee889116463a278aaf2a0b94a7546d831f"
+    },
+    {
+      "path": "shield-vitals-review.md",
+      "bytes": 4142,
+      "sha256": "3df76ffc3dfe8e84f1964a72979f6b9aa742f0de4f939e1d812b6a89df79368d"
+    },
+    {
+      "path": "source-inputs.json",
+      "bytes": 1906,
+      "sha256": "cd6235462f4bf288baa52408b47616a84eff191bfe473e092b56363fdddd0a1f"
+    },
+    {
+      "path": "status-locked-webgl2.png",
+      "bytes": 90960,
+      "sha256": "a20d26fb523393edf72f6b3527c5054b9ee365ad2d2223f3e43be94720010fb4"
+    },
+    {
+      "path": "tested-preview-f69.json",
+      "bytes": 392,
+      "sha256": "6062df510325b6e6ee0616697979663869676ca9049893afc45a0836b34c8333"
+    },
+    {
+      "path": "wasm-save-contract.log",
+      "bytes": 1122,
+      "sha256": "c9007d3f9b7dc910b78e5e1e43d52e39ac0b223d817e1b171effd2211dac4075"
+    }
+  ]
+}

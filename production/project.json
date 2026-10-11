@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 629,
+  "revision": 664,
   "name": "Galaxy Royale",
   "phase": "Playable solo slice → content and validation",
-  "updatedAt": "2026-10-11T07:38:18.418Z",
+  "updatedAt": "2026-10-11T09:40:54.678Z",
   "tasks": [
     {
       "id": "studio",
@@ -5273,7 +5273,7 @@
     {
       "id": "task-d56c0882",
       "title": "Detailed coherent native toolbar icons",
-      "description": "Latest user steering: Kikai lore and character onboarding; bounded implementation with real evidence. Full campaign balance and physical testing remain separate gates. Integrated source and native/CPU checks are recorded; current renderer/browser, natural play and human/device validation remain separately scoped.",
+      "description": "Latest user asks for much smaller, higher-detail consistent native icons at top left. Art authors a separate64-cell pack with explicit emissive roles; root integrates measured hit boxes, restrained animation and both actual browser backends. Prior32-cell art and evidence remain historical.",
       "department": "art/audio",
       "owner": "/root/production_research",
       "status": "review",
@@ -5282,7 +5282,7 @@
       "acceptanceCriteria": [
         {
           "text": "Ship status, map, settings and save icons use richer authored native pixel assets.",
-          "met": false
+          "met": true
         },
         {
           "text": "Measured hit targets, clarity, hover/press states and responsive placement are preserved.",
@@ -5290,7 +5290,7 @@
         },
         {
           "text": "Native asset evidence and actual renderer captures distinguish authored proof from browser validation.",
-          "met": false
+          "met": true
         }
       ],
       "evidence": [
@@ -5298,12 +5298,37 @@
           "label": "Actual integration review",
           "kind": "review",
           "path": "artifacts/opr-integration/review.md"
+        },
+        {
+          "label": "icon-art-handoff.md",
+          "kind": "artifact",
+          "path": "artifacts/corner-shield-20261011/icon-art-handoff.md"
+        },
+        {
+          "label": "icon-native-review.md",
+          "kind": "artifact",
+          "path": "artifacts/corner-shield-20261011/icon-native-review.md"
+        },
+        {
+          "label": "README.md",
+          "kind": "artifact",
+          "path": "artifacts/corner-shield-20261011/README.md"
+        },
+        {
+          "label": "settings-settled-webgl2-848.png",
+          "kind": "artifact",
+          "path": "artifacts/corner-shield-20261011/settings-settled-webgl2-848.png"
+        },
+        {
+          "label": "settings-webgpu-848.png",
+          "kind": "artifact",
+          "path": "artifacts/corner-shield-20261011/settings-webgpu-848.png"
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 4,
       "createdAt": "2026-10-11T04:40:15.581Z",
-      "updatedAt": "2026-10-11T05:30:00.932Z"
+      "updatedAt": "2026-10-11T09:40:54.180Z"
     },
     {
       "id": "task-778b8356",
@@ -5544,7 +5569,7 @@
       "description": "Reconcile eight stable encounters with the technological-life canon; separately model competitor identity and corporation sponsor. User candidates APP#F344FEE (PAN representative) and ORP#2323 with independent sponsorship. Preserve encounter/reward/save IDs. Actual current source labels Human/Automaton/alien are historical and require authored reconciliation.",
       "department": "gameplay",
       "owner": "/root/gameplay_design",
-      "status": "backlog",
+      "status": "review",
       "priority": "high",
       "dependencies": [],
       "acceptanceCriteria": [
@@ -5554,7 +5579,7 @@
         },
         {
           "text": "Discovered arena/campaign/dialogue presentation shows independent sponsor and competitor identity without leaking unknown rewards.",
-          "met": false
+          "met": true
         },
         {
           "text": "Existing saves retain patches, blueprints, ship XP and league results; regression and actual browser evidence recorded.",
@@ -5566,12 +5591,32 @@
           "label": "Latest accepted lore",
           "kind": "note",
           "details": "docs/KIKAI_LORE.md and Wiki league entry describe user candidates and explicitly distinguish planned authored roster from current encounters."
+        },
+        {
+          "label": "champion-roster-handoff.md",
+          "kind": "artifact",
+          "path": "artifacts/corner-shield-20261011/champion-roster-handoff.md"
+        },
+        {
+          "label": "shell-final.log",
+          "kind": "artifact",
+          "path": "artifacts/corner-shield-20261011/shell-final.log"
+        },
+        {
+          "label": "wasm-save-contract.log",
+          "kind": "artifact",
+          "path": "artifacts/corner-shield-20261011/wasm-save-contract.log"
+        },
+        {
+          "label": "README.md",
+          "kind": "artifact",
+          "path": "artifacts/corner-shield-20261011/README.md"
         }
       ],
       "blocker": "",
-      "revision": 1,
+      "revision": 3,
       "createdAt": "2026-10-11T05:27:15.845Z",
-      "updatedAt": "2026-10-11T05:27:15.845Z"
+      "updatedAt": "2026-10-11T09:40:54.289Z"
     },
     {
       "id": "task-0cf909b6",
@@ -5783,6 +5828,295 @@
       "revision": 2,
       "createdAt": "2026-10-11T06:15:30.281Z",
       "updatedAt": "2026-10-11T06:40:30.017Z"
+    },
+    {
+      "id": "task-0750b5ee",
+      "title": "Compact corner HUD with native right-aligned navigation",
+      "description": "Latest user: small high-detail icons top left; minimap top right; telemetry directly below it right-aligned. Shared native layout must reserve actual toolbar and control geometry, with safe-area/compact fallbacks.",
+      "department": "engine",
+      "owner": "/root/engine_research",
+      "status": "complete",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Native map top right with telemetry directly beneath, right-aligned, at desktop and compact responsive sizes.",
+          "met": true
+        },
+        {
+          "text": "Measured hit areas, native reservations, safe insets and boss overlays avoid collisions; meaningful geometry tests pass.",
+          "met": true
+        },
+        {
+          "text": "Actual current WebGPU and WebGL2 captures show compact top-left controls and clear right-side navigation.",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "corner-hud-handoff.md",
+          "kind": "artifact",
+          "path": "artifacts/corner-shield-20261011/corner-hud-handoff.md"
+        },
+        {
+          "label": "README.md",
+          "kind": "artifact",
+          "path": "artifacts/corner-shield-20261011/README.md"
+        },
+        {
+          "label": "flight-webgl2-320.png",
+          "kind": "artifact",
+          "path": "artifacts/corner-shield-20261011/flight-webgl2-320.png"
+        },
+        {
+          "label": "boss-webgpu-320.png",
+          "kind": "artifact",
+          "path": "artifacts/corner-shield-20261011/boss-webgpu-320.png"
+        },
+        {
+          "label": "manifest.json",
+          "kind": "artifact",
+          "path": "artifacts/corner-shield-20261011/manifest.json"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-11T07:52:32.062Z",
+      "updatedAt": "2026-10-11T09:40:54.090Z"
+    },
+    {
+      "id": "task-24929d60",
+      "title": "Portable strict portrait asset regeneration",
+      "description": "Actual Linux CI38122067411 failed because zlib compressed identical RGBA pixels differently. Independently regenerate all source-derived pixels, verify completeRGBA/dimensions, retain canonical PNG file bytes and strict atlas/source/manifest hashes. Fail closed on changed cells.",
+      "department": "art/audio",
+      "owner": "/root/production_research",
+      "status": "complete",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Actual Windows and Ubuntu source regeneration pass without changing canonical atlas bytes.",
+          "met": true
+        },
+        {
+          "text": "Changed color, alpha, dimensions and missing canonical input fail closed; compression variants alone are accepted.",
+          "met": true
+        },
+        {
+          "text": "Independent QA review and official repaired-head GitHub pipeline pass.",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual failed Linux step",
+          "kind": "artifact",
+          "path": "work/kikai-linux-ci-failure.txt"
+        },
+        {
+          "label": "Independent RGBA and fail-closed review",
+          "kind": "artifact",
+          "path": "artifacts/corner-shield-20261011/portrait-portability-review.md"
+        },
+        {
+          "label": "Root actual 15 asset tests",
+          "kind": "artifact",
+          "path": "artifacts/corner-shield-20261011/portrait-assets.log"
+        },
+        {
+          "label": "Repaired official pipeline succeeded",
+          "kind": "link",
+          "url": "https://github.com/itchson/GalaxyRoyale/actions/runs/38122925138"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-11T07:52:32.089Z",
+      "updatedAt": "2026-10-11T09:19:27.553Z"
+    },
+    {
+      "id": "task-b49fb973",
+      "title": "Three-chunk starter shield and earned recharge progression",
+      "description": "User requests base shield limited to3capacitychunks, shieldrecharge unlocked as anupgrade and faster at higher rank/shiplevel. Verify oneequippedoffense/defense/passive slot perRAICHO, Haven-onlyswaps and manufacturer main-typebonus. User reconfirmedPANpassive/RENKOoffense/HUGOdefense. Inspectexistingdefensiveability and permanentcapacity/recoveryranks; preserve checkpoints and earneditems.",
+      "department": "gameplay",
+      "owner": "/root/gameplay_design",
+      "status": "complete",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Freshstarter shieldcapacity maps to3nativechunks and upgrades grow capacity correctly.",
+          "met": true
+        },
+        {
+          "text": "Shieldrecharge is unlocked throughprogression, improveswitheligiblelevels/ranks and obeysdamage-delay/safe-zone rules.",
+          "met": true
+        },
+        {
+          "text": "Exactly1ability/category perRAICHO and Haven-onlyswapping are authoritative; manufacturertypebonus followsconfirmedcanon.",
+          "met": true
+        },
+        {
+          "text": "Regression/savecompatibility and actual native/browser evidence recorded.",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "shield-vitals-handoff.md",
+          "kind": "artifact",
+          "path": "artifacts/corner-shield-20261011/shield-vitals-handoff.md"
+        },
+        {
+          "label": "shield-vitals-review.md",
+          "kind": "artifact",
+          "path": "artifacts/corner-shield-20261011/shield-vitals-review.md"
+        },
+        {
+          "label": "shield-core-review.md",
+          "kind": "artifact",
+          "path": "artifacts/corner-shield-20261011/shield-core-review.md"
+        },
+        {
+          "label": "affinity-negative.log",
+          "kind": "artifact",
+          "path": "artifacts/corner-shield-20261011/affinity-negative.log"
+        },
+        {
+          "label": "affinity-corrected.log",
+          "kind": "artifact",
+          "path": "artifacts/corner-shield-20261011/affinity-corrected.log"
+        },
+        {
+          "label": "native-workspace-final.log",
+          "kind": "artifact",
+          "path": "artifacts/corner-shield-20261011/native-workspace-final.log"
+        },
+        {
+          "label": "wasm-save-contract.log",
+          "kind": "artifact",
+          "path": "artifacts/corner-shield-20261011/wasm-save-contract.log"
+        },
+        {
+          "label": "status-locked-webgl2.png",
+          "kind": "artifact",
+          "path": "artifacts/corner-shield-20261011/status-locked-webgl2.png"
+        },
+        {
+          "label": "README.md",
+          "kind": "artifact",
+          "path": "artifacts/corner-shield-20261011/README.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-11T07:59:52.792Z",
+      "updatedAt": "2026-10-11T09:40:54.222Z"
+    },
+    {
+      "id": "task-84772b9a",
+      "title": "Fine-grid bounded cosmic motifs",
+      "description": "Actual active isolated branch codex/cosmic-fine-detail fromf69; own cosmic_background and dedicated tests only. Full/reduced grids use the same world footprints, sparse clusters/ridges and bounded breathing/curl; preserve existing aggregate caps and dark space. Gameplay specialist independently reviews immutable commit before integration.",
+      "department": "Engine",
+      "owner": "/root/engine_research",
+      "status": "active",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Higher cell-detail galaxy,nebula,nova motifs retain identical full/reduced world footprints and coherent authored clusters.",
+          "met": false
+        },
+        {
+          "text": "Actual packet counts,determinism,reduced-motion freeze and fractional transforms pass independent review.",
+          "met": false
+        },
+        {
+          "text": "Root integration and actual both-renderer cosmic captures are recorded.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual bounded assignment",
+          "kind": "note",
+          "details": "Actual active isolated branch codex/cosmic-fine-detail fromf69; own cosmic_background and dedicated tests only. Full/reduced grids use the same world footprints, sparse clusters/ridges and bounded breathing/curl; preserve existing aggregate caps and dark space. Gameplay specialist independently reviews immutable commit before integration."
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-11T09:40:54.514Z",
+      "updatedAt": "2026-10-11T09:40:54.514Z"
+    },
+    {
+      "id": "task-78313163",
+      "title": "Authored96-cell starter RAICHO art pipeline",
+      "description": "Actual active isolated art authoring fromf69. Own new96-cell PAN HIKARI,RENKO HIBANA,HUGO MAMORI source/atlas/masks/provenance/scripts/doc only. Full body<=4000cells, sparse fine overlay<=1800; declared scale0.5, mapped to existing48-cell occupancy. Preserve RENKO intentional rail apertures and HUGO declared perimeter inset. No automatic gameplay collision replacement.",
+      "department": "Art",
+      "owner": "/root/production_research",
+      "status": "active",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Three coherent overhead96-cell authored assets with source palette/material masks and strict byte-exact extraction.",
+          "met": false
+        },
+        {
+          "text": "World footprint,existing occupancy mapping,connectivity and intentional apertures are explicitly validated; bounded fine-overlay budgets.",
+          "met": false
+        },
+        {
+          "text": "Independent source review and human visual approval before runtime acceptance.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual bounded assignment",
+          "kind": "note",
+          "details": "Actual active isolated art authoring fromf69. Own new96-cell PAN HIKARI,RENKO HIBANA,HUGO MAMORI source/atlas/masks/provenance/scripts/doc only. Full body<=4000cells, sparse fine overlay<=1800; declared scale0.5, mapped to existing48-cell occupancy. Preserve RENKO intentional rail apertures and HUGO declared perimeter inset. No automatic gameplay collision replacement."
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-11T09:40:54.538Z",
+      "updatedAt": "2026-10-11T09:40:54.538Z"
+    },
+    {
+      "id": "task-a27e49f0",
+      "title": "Authoritative RAICHO affinity status line",
+      "description": "Gameplay specialist frozen9196a866 adds transient Rust-derived affinity metadata with explicit factory,roster and Sovereign-license source. Root reviews/integrates a compact stable status line without deriving gameplay bonuses from pilot or sponsor. No save/balance change.",
+      "department": "Gameplay/UI",
+      "owner": "/root",
+      "status": "active",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Actual Rust HUD distinguishes active hull manufacturer,slot,active state and licensed Sovereign fallback; compatibility tests pass.",
+          "met": false
+        },
+        {
+          "text": "Root status view uses authoritative metadata,keeps stable nodes and clears unavailable affinity without claiming sponsor bonuses.",
+          "met": false
+        },
+        {
+          "text": "Normal dual-backend build and actual responsive status capture recorded.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual bounded assignment",
+          "kind": "note",
+          "details": "Gameplay specialist frozen9196a866 adds transient Rust-derived affinity metadata with explicit factory,roster and Sovereign-license source. Root reviews/integrates a compact stable status line without deriving gameplay bonuses from pilot or sponsor. No save/balance change."
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-11T09:40:54.569Z",
+      "updatedAt": "2026-10-11T09:40:54.569Z"
     }
   ],
   "reviews": [
@@ -6887,6 +7221,68 @@
           "path": "artifacts/kikai-detail/manifest.json"
         }
       ]
+    },
+    {
+      "id": "review-6e24c60d",
+      "title": "Corner HUD and cross-platform art discussion",
+      "body": "Actual asynchronous exchange: engine proposed a44×44 native map at safe-local right edge with22-high telemetry below,4-cell visual gap, measured-header avoidance and text-only compact fallback. Engine flagged that a44CSSpx context hit may intersect the map even when glyphs do not; root added exported map-bound hit gating. Art reproduced identical30-layer and3-previewRGBA with different Windows/Linux zlib PNG bytes and froze strict repair28e350e. Gameplay is reviewing that repair independently. Root assigned new64-cell assets separately from native layout and kept cosmic changes READY to prioritize the user request. No subjective art/phone acceptance or repaired officialCI pass is claimed.",
+      "author": "/root",
+      "source": "Actual 2026-10-11 specialist exchange and latest user corner-HUD request",
+      "createdAt": "2026-10-11T07:52:32.248Z",
+      "participants": [
+        "/root",
+        "/root/engine_research",
+        "/root/production_research",
+        "/root/gameplay_design"
+      ],
+      "taskIds": [
+        "task-0750b5ee",
+        "task-24929d60",
+        "task-d56c0882",
+        "task-716d9437"
+      ]
+    },
+    {
+      "id": "review-e1a11354",
+      "title": "Asynchronous integration review: compact HUD, authored controls and active-hull affinity",
+      "body": "Actual separate design/review exchanges: Engine supplied measured HUD reservations and independently reran an unchanged public-Game affinity probe; the initial pilot-based implementation failed four cross-hull cases. Gameplay repaired affinity to use each active hull main manufacturer and independently checked capacity-based shield geometry. Art reviewed native64 control masks, neutral metal preservation, fractional cell rendering and the real portrait-menu budget. Root fixed pressed-state metal tint and kept the explicit over-budget rejection test, integrated known champion identities/sponsors and captured desktop WebGL2/WebGPU. Technical corner placement and shield progression criteria are met at f69; icon human clarity/style acceptance, authored roster approval, upgraded-shield natural browser play and physical-device/soak validation remain pending. This is an asynchronous source review, not a fabricated synchronous meeting.",
+      "author": "/root",
+      "source": "Root actual f69 integration, specialist handoffs/reviews and desktop browser observations on 2026-10-11",
+      "createdAt": "2026-10-11T09:40:54.322Z",
+      "participants": [
+        "/root",
+        "/root/engine_research",
+        "/root/gameplay_design",
+        "/root/production_research"
+      ],
+      "taskIds": [
+        "task-0750b5ee",
+        "task-d56c0882",
+        "task-b49fb973",
+        "task-716d9437"
+      ],
+      "evidence": [
+        {
+          "label": "Independent core review",
+          "kind": "artifact",
+          "path": "artifacts/corner-shield-20261011/shield-core-review.md"
+        },
+        {
+          "label": "Independent native icon review",
+          "kind": "artifact",
+          "path": "artifacts/corner-shield-20261011/icon-native-review.md"
+        },
+        {
+          "label": "Independent vitals review",
+          "kind": "artifact",
+          "path": "artifacts/corner-shield-20261011/shield-vitals-review.md"
+        },
+        {
+          "label": "Actual scopes and limitations",
+          "kind": "artifact",
+          "path": "artifacts/corner-shield-20261011/README.md"
+        }
+      ]
     }
   ],
   "decisions": [
@@ -7068,6 +7464,15 @@
       "author": "/root",
       "source": "Actual integrated source checks and asynchronous specialist handoffs, 2026-10-11",
       "createdAt": "2026-10-11T06:15:30.312Z",
+      "status": "accepted"
+    },
+    {
+      "id": "decision-2ff41d2f",
+      "title": "RAICHO corporation slot affinities remain canonical",
+      "body": "User explicitly clarifiedPANpassive,RENKOoffensive,HUGOdefensive after adefensivePANexample. Mainmanufacturercontrolsbasecraft/home/hair and its primaryabilityaffinity. Submanufacturercontrolscrystalhorncolor. Sponsorisindependentanddoesnotchangemanufacturerroles. User requestsstartershield3chunks and earnedupgradablerecharge; numericalbalanceisbeingproposedandwillnotbeclaimedimplementeduntilvalidated.",
+      "author": "/root",
+      "source": "Actual latest user request and corporation clarification on2026-10-11",
+      "createdAt": "2026-10-11T07:59:52.852Z",
       "status": "accepted"
     }
   ],
@@ -8515,6 +8920,164 @@
       ],
       "url": "http://127.0.0.1:4173/?qa=1&renderer=webgpu",
       "knownIssues": "Overall art acceptance and broader world asset reauthoring remain open. Phones, performance soak, cold-start/peak-memory and natural full training are not measured here. Remote CI for this revision is pending; no public/private hosted republish."
+    },
+    {
+      "id": "build-1219d590",
+      "title": "Actual f6c7140 GitHub pipeline result",
+      "body": "Completed GitHub run38122067411: Windows source and Browser package succeeded. Ubuntu source failed only at strict portrait regeneration because sourcePNG encoded bytes differed despite identical decoded pixels; subsequent Ubuntu steps skipped. Repair28e350e has not yet been rerun in officialCI.",
+      "author": "/root",
+      "source": "Actual 2026-10-11 specialist exchange and latest user corner-HUD request",
+      "createdAt": "2026-10-11T07:52:32.277Z",
+      "revision": "f6c7140348f752d53c3e30f96cf09376c256c455",
+      "evidence": [
+        {
+          "label": "GitHub workflow",
+          "kind": "link",
+          "url": "https://github.com/itchson/GalaxyRoyale/actions/runs/38122067411"
+        },
+        {
+          "label": "Scoped actual Linux failure",
+          "kind": "artifact",
+          "path": "work/kikai-linux-ci-failure.txt"
+        }
+      ],
+      "checks": [
+        {
+          "name": "Windows source",
+          "result": "pass"
+        },
+        {
+          "name": "Browser package and realWASM SaveStore fixtures",
+          "result": "pass"
+        },
+        {
+          "name": "Ubuntu detailed portrait source regeneration",
+          "result": "fail"
+        },
+        {
+          "name": "OfficialCI at repaired head",
+          "result": "not_run"
+        }
+      ],
+      "knownIssues": ""
+    },
+    {
+      "id": "build-3acfc897",
+      "title": "Portrait portability repair passed official pipeline",
+      "body": "GitHub connector reports Validate run38122925138 completed success at the exact repaired SHA. Independent review verifies decoded30-layer and3-preview RGBA equality across encoding differences and meaningful fail-closed source changes. Root15 asset tests pass. Later corner-HUD/shield changes are separate and not included in this CI claim.",
+      "author": "/root",
+      "source": "Actual specialist evidence, independent review and GitHub workflow observation on 2026-10-11",
+      "createdAt": "2026-10-11T09:19:27.604Z",
+      "revision": "5658bc3a90e58e9f9bd2e4f57549f5fd2ef3bb03",
+      "evidence": [
+        {
+          "label": "Actual GitHub workflow",
+          "kind": "link",
+          "url": "https://github.com/itchson/GalaxyRoyale/actions/runs/38122925138"
+        },
+        {
+          "label": "Independent portability review",
+          "kind": "artifact",
+          "path": "artifacts/corner-shield-20261011/portrait-portability-review.md"
+        }
+      ],
+      "checks": [
+        {
+          "name": "Official Validate pipeline at5658bc3",
+          "result": "pass"
+        },
+        {
+          "name": "Root detailed portrait asset tests",
+          "result": "pass"
+        },
+        {
+          "name": "Later integrated HUD/shield-head official CI",
+          "result": "not_run"
+        }
+      ],
+      "knownIssues": ""
+    },
+    {
+      "id": "build-272f7274",
+      "title": "Compact HUD and earned starter shields: tested dual-backend integration",
+      "body": "Normal production build and actual desktop WebGPU/WebGL2 observations at f69. One owned preview on4173; studio services4174/4175 are independent. Isolated QA profile and WARP/SCENE fixtures; no earned progression claim. An immediate post-resize transient settings image is explicitly excluded from settled-layout acceptance. Subsequent cosmic/art/affinity-HUD work is not in this build.",
+      "author": "/root",
+      "source": "Root actual f69 integration, specialist handoffs/reviews and desktop browser observations on 2026-10-11",
+      "createdAt": "2026-10-11T09:40:54.353Z",
+      "revision": "f69d6cbe8d58d182da6e45460b42b963655c5fbc",
+      "evidence": [
+        {
+          "label": "Pinned evidence manifest",
+          "kind": "artifact",
+          "path": "artifacts/corner-shield-20261011/manifest.json"
+        },
+        {
+          "label": "Actually served build identity",
+          "kind": "artifact",
+          "path": "artifacts/corner-shield-20261011/tested-preview-f69.json"
+        },
+        {
+          "label": "Validation scopes",
+          "kind": "artifact",
+          "path": "artifacts/corner-shield-20261011/README.md"
+        },
+        {
+          "label": "Normal build",
+          "kind": "artifact",
+          "path": "artifacts/corner-shield-20261011/build-f69.log"
+        },
+        {
+          "label": "Rust workspace",
+          "kind": "artifact",
+          "path": "artifacts/corner-shield-20261011/native-workspace-final.log"
+        },
+        {
+          "label": "Shell/studio",
+          "kind": "artifact",
+          "path": "artifacts/corner-shield-20261011/shell-final.log"
+        },
+        {
+          "label": "Checkpoint save fixtures",
+          "kind": "artifact",
+          "path": "artifacts/corner-shield-20261011/wasm-save-contract.log"
+        }
+      ],
+      "checks": [
+        {
+          "name": "Rust workspace578tests",
+          "result": "pass"
+        },
+        {
+          "name": "Browser shell/studio351pass1skip",
+          "result": "pass"
+        },
+        {
+          "name": "Strict native all-target Clippy",
+          "result": "pass"
+        },
+        {
+          "name": "Normal dual-WASM game/studio/PWA build",
+          "result": "pass"
+        },
+        {
+          "name": "42Rust-checkpoint IndexedDB fixture cases",
+          "result": "pass"
+        },
+        {
+          "name": "Actual desktop WebGPU and WebGL2",
+          "result": "pass"
+        },
+        {
+          "name": "Physical phones,30minute soak,human art/audio acceptance",
+          "result": "not_run"
+        },
+        {
+          "name": "Official CI at later integrated head",
+          "result": "not_run"
+        }
+      ],
+      "url": "http://127.0.0.1:4173/?qa=1",
+      "knownIssues": "Icon clarity/style awaits human approval. Natural upgraded-shield/campaign browser flow and physical coarse-pointer/mobile soak are pending. Reduced motion was exercised on the QA profile. QA fixtures suspend rewards."
     }
   ],
   "feedback": [],
@@ -14808,6 +15371,356 @@
       "author": "/root",
       "source": "Actual portrait correction, isolated specialist work and final normal-browser verification",
       "createdAt": "2026-10-11T07:38:18.418Z"
+    },
+    {
+      "id": "4c0fbb96-2159-4609-90fb-c1f239e82897",
+      "revision": 630,
+      "kind": "task.update",
+      "itemId": "task-d56c0882",
+      "title": "Detailed coherent native toolbar icons",
+      "author": "/root",
+      "source": "Actual 2026-10-11 specialist exchange and latest user corner-HUD request",
+      "createdAt": "2026-10-11T07:52:31.926Z"
+    },
+    {
+      "id": "4abfa93d-6099-46ad-a92c-55d0bb5e0f8d",
+      "revision": 631,
+      "kind": "task.update",
+      "itemId": "task-716d9437",
+      "title": "Author sponsored KIKAI champion roster and arena presentation",
+      "author": "/root",
+      "source": "Actual 2026-10-11 specialist exchange and latest user corner-HUD request",
+      "createdAt": "2026-10-11T07:52:31.982Z"
+    },
+    {
+      "id": "62196484-f29b-4b63-9851-d215f711ab03",
+      "revision": 632,
+      "kind": "task.create",
+      "itemId": "task-0750b5ee",
+      "title": "Compact corner HUD with native right-aligned navigation",
+      "author": "/root",
+      "source": "Actual 2026-10-11 specialist exchange and latest user corner-HUD request",
+      "createdAt": "2026-10-11T07:52:32.062Z"
+    },
+    {
+      "id": "9093ae70-e028-4ae2-aa1c-e511a258fc86",
+      "revision": 633,
+      "kind": "task.create",
+      "itemId": "task-24929d60",
+      "title": "Portable strict portrait asset regeneration",
+      "author": "/root",
+      "source": "Actual 2026-10-11 specialist exchange and latest user corner-HUD request",
+      "createdAt": "2026-10-11T07:52:32.089Z"
+    },
+    {
+      "id": "5832fc13-dc10-4789-adce-c687b73f0f0f",
+      "revision": 634,
+      "kind": "run",
+      "itemId": "run-b9fc1763",
+      "title": "Engine specialist · running",
+      "author": "/root",
+      "source": "Actual 2026-10-11 specialist exchange and latest user corner-HUD request",
+      "createdAt": "2026-10-11T07:52:32.125Z"
+    },
+    {
+      "id": "354995c3-02a7-4862-af63-9b9a509c74a7",
+      "revision": 635,
+      "kind": "run",
+      "itemId": "run-9d595527",
+      "title": "Art specialist · running",
+      "author": "/root",
+      "source": "Actual 2026-10-11 specialist exchange and latest user corner-HUD request",
+      "createdAt": "2026-10-11T07:52:32.143Z"
+    },
+    {
+      "id": "4a2e0b65-d07a-480f-b6d9-f99ac9433095",
+      "revision": 636,
+      "kind": "run",
+      "itemId": "run-1bbe9004",
+      "title": "Gameplay and QA specialist · running",
+      "author": "/root",
+      "source": "Actual 2026-10-11 specialist exchange and latest user corner-HUD request",
+      "createdAt": "2026-10-11T07:52:32.179Z"
+    },
+    {
+      "id": "5238236f-29c8-49f4-9513-c11d26959316",
+      "revision": 637,
+      "kind": "run",
+      "itemId": "run-5c033e67",
+      "title": "Spark evidence reviewer · running",
+      "author": "/root",
+      "source": "Actual 2026-10-11 specialist exchange and latest user corner-HUD request",
+      "createdAt": "2026-10-11T07:52:32.212Z"
+    },
+    {
+      "id": "070f23ca-842e-4bfb-8101-6f0c854fd119",
+      "revision": 638,
+      "kind": "review",
+      "itemId": "review-6e24c60d",
+      "title": "Corner HUD and cross-platform art discussion",
+      "author": "/root",
+      "source": "Actual 2026-10-11 specialist exchange and latest user corner-HUD request",
+      "createdAt": "2026-10-11T07:52:32.248Z"
+    },
+    {
+      "id": "d33d0558-4a4b-4394-8b8a-76075e28dd1e",
+      "revision": 639,
+      "kind": "build",
+      "itemId": "build-1219d590",
+      "title": "Actual f6c7140 GitHub pipeline result",
+      "author": "/root",
+      "source": "Actual 2026-10-11 specialist exchange and latest user corner-HUD request",
+      "createdAt": "2026-10-11T07:52:32.277Z"
+    },
+    {
+      "id": "186ab1c0-a4b1-4427-aa63-dd928ec90ce1",
+      "revision": 640,
+      "kind": "task.create",
+      "itemId": "task-b49fb973",
+      "title": "Three-chunk starter shield and earned recharge progression",
+      "author": "/root",
+      "source": "Actual latest user request and corporation clarification on2026-10-11",
+      "createdAt": "2026-10-11T07:59:52.792Z"
+    },
+    {
+      "id": "e393789a-53f3-4a4e-9b9d-bbd3a1ff611d",
+      "revision": 641,
+      "kind": "run",
+      "itemId": "run-0694b67e",
+      "title": "Gameplay and QA specialist · running",
+      "author": "/root",
+      "source": "Actual latest user request and corporation clarification on2026-10-11",
+      "createdAt": "2026-10-11T07:59:52.821Z"
+    },
+    {
+      "id": "d02ddd0c-abe2-4836-a876-83b0fe5348da",
+      "revision": 642,
+      "kind": "decision",
+      "itemId": "decision-2ff41d2f",
+      "title": "RAICHO corporation slot affinities remain canonical",
+      "author": "/root",
+      "source": "Actual latest user request and corporation clarification on2026-10-11",
+      "createdAt": "2026-10-11T07:59:52.852Z"
+    },
+    {
+      "id": "80cfc2f3-db3a-4f06-b2d8-1ebabf0ecb58",
+      "revision": 643,
+      "kind": "task.update",
+      "itemId": "task-24929d60",
+      "title": "Portable strict portrait asset regeneration",
+      "author": "/root",
+      "source": "Actual specialist evidence, independent review and GitHub workflow observation on 2026-10-11",
+      "createdAt": "2026-10-11T09:19:27.553Z"
+    },
+    {
+      "id": "0cd0f66d-2f2c-4c27-a8a2-1925c89c3e9e",
+      "revision": 644,
+      "kind": "build",
+      "itemId": "build-3acfc897",
+      "title": "Portrait portability repair passed official pipeline",
+      "author": "/root",
+      "source": "Actual specialist evidence, independent review and GitHub workflow observation on 2026-10-11",
+      "createdAt": "2026-10-11T09:19:27.604Z"
+    },
+    {
+      "id": "fcf72951-f951-464c-abae-7fcd51cb4add",
+      "revision": 645,
+      "kind": "run",
+      "itemId": "run-97495668",
+      "title": "Spark evidence reviewer · failed",
+      "author": "/root",
+      "source": "Actual specialist evidence, independent review and GitHub workflow observation on 2026-10-11",
+      "createdAt": "2026-10-11T09:19:27.637Z"
+    },
+    {
+      "id": "e632d1da-7f81-443b-91a3-99bd8284ba34",
+      "revision": 646,
+      "kind": "run",
+      "itemId": "run-cb70da06",
+      "title": "Gameplay specialist · running",
+      "author": "/root",
+      "source": "Actual specialist evidence, independent review and GitHub workflow observation on 2026-10-11",
+      "createdAt": "2026-10-11T09:19:27.684Z"
+    },
+    {
+      "id": "66f28698-e808-4f65-a85b-3de5927471cb",
+      "revision": 647,
+      "kind": "run",
+      "itemId": "run-23b34d28",
+      "title": "Engine and independent QA specialist · running",
+      "author": "/root",
+      "source": "Actual specialist evidence, independent review and GitHub workflow observation on 2026-10-11",
+      "createdAt": "2026-10-11T09:19:27.714Z"
+    },
+    {
+      "id": "8dcb4d4c-6a0d-4e26-9dbc-741e5312fcdc",
+      "revision": 648,
+      "kind": "run",
+      "itemId": "run-75ea22fe",
+      "title": "Pixel art specialist · running",
+      "author": "/root",
+      "source": "Actual specialist evidence, independent review and GitHub workflow observation on 2026-10-11",
+      "createdAt": "2026-10-11T09:19:27.745Z"
+    },
+    {
+      "id": "66075862-2b1b-4d85-bfdd-f54f1ba2c17e",
+      "revision": 649,
+      "kind": "task.update",
+      "itemId": "task-0750b5ee",
+      "title": "Compact corner HUD with native right-aligned navigation",
+      "author": "/root",
+      "source": "Root actual f69 integration, specialist handoffs/reviews and desktop browser observations on 2026-10-11",
+      "createdAt": "2026-10-11T09:40:54.090Z"
+    },
+    {
+      "id": "9b429ac4-dfb0-4605-9ad2-9fa2e0f7571d",
+      "revision": 650,
+      "kind": "task.update",
+      "itemId": "task-d56c0882",
+      "title": "Detailed coherent native toolbar icons",
+      "author": "/root",
+      "source": "Root actual f69 integration, specialist handoffs/reviews and desktop browser observations on 2026-10-11",
+      "createdAt": "2026-10-11T09:40:54.180Z"
+    },
+    {
+      "id": "e3932a5d-1678-48df-be80-70f382ed34bf",
+      "revision": 651,
+      "kind": "task.update",
+      "itemId": "task-b49fb973",
+      "title": "Three-chunk starter shield and earned recharge progression",
+      "author": "/root",
+      "source": "Root actual f69 integration, specialist handoffs/reviews and desktop browser observations on 2026-10-11",
+      "createdAt": "2026-10-11T09:40:54.222Z"
+    },
+    {
+      "id": "120b4288-c09c-45d7-b606-ba3585b08070",
+      "revision": 652,
+      "kind": "task.update",
+      "itemId": "task-716d9437",
+      "title": "Author sponsored KIKAI champion roster and arena presentation",
+      "author": "/root",
+      "source": "Root actual f69 integration, specialist handoffs/reviews and desktop browser observations on 2026-10-11",
+      "createdAt": "2026-10-11T09:40:54.289Z"
+    },
+    {
+      "id": "c1aad63d-2756-412d-aaa6-6804dca6fad5",
+      "revision": 653,
+      "kind": "review",
+      "itemId": "review-e1a11354",
+      "title": "Asynchronous integration review: compact HUD, authored controls and active-hull affinity",
+      "author": "/root",
+      "source": "Root actual f69 integration, specialist handoffs/reviews and desktop browser observations on 2026-10-11",
+      "createdAt": "2026-10-11T09:40:54.322Z"
+    },
+    {
+      "id": "37407fbe-5867-4337-9ed6-14b49abaca7f",
+      "revision": 654,
+      "kind": "build",
+      "itemId": "build-272f7274",
+      "title": "Compact HUD and earned starter shields: tested dual-backend integration",
+      "author": "/root",
+      "source": "Root actual f69 integration, specialist handoffs/reviews and desktop browser observations on 2026-10-11",
+      "createdAt": "2026-10-11T09:40:54.353Z"
+    },
+    {
+      "id": "be8a091c-70b9-4502-9879-7bc28f8cf03e",
+      "revision": 655,
+      "kind": "run",
+      "itemId": "run-52274ef0",
+      "title": "Engine and independent QA specialist · completed",
+      "author": "/root",
+      "source": "Root actual f69 integration, specialist handoffs/reviews and desktop browser observations on 2026-10-11",
+      "createdAt": "2026-10-11T09:40:54.377Z"
+    },
+    {
+      "id": "380143fc-be09-4df8-b359-ec12781b835a",
+      "revision": 656,
+      "kind": "run",
+      "itemId": "run-df8d34e8",
+      "title": "Gameplay specialist · completed",
+      "author": "/root",
+      "source": "Root actual f69 integration, specialist handoffs/reviews and desktop browser observations on 2026-10-11",
+      "createdAt": "2026-10-11T09:40:54.399Z"
+    },
+    {
+      "id": "16c0cf3a-26bf-44fd-a28b-849055fad702",
+      "revision": 657,
+      "kind": "run",
+      "itemId": "run-fbf6480f",
+      "title": "Pixel art specialist · completed",
+      "author": "/root",
+      "source": "Root actual f69 integration, specialist handoffs/reviews and desktop browser observations on 2026-10-11",
+      "createdAt": "2026-10-11T09:40:54.430Z"
+    },
+    {
+      "id": "6e4919cc-a3bc-4916-b7b0-226d452507db",
+      "revision": 658,
+      "kind": "task.create",
+      "itemId": "task-84772b9a",
+      "title": "Fine-grid bounded cosmic motifs",
+      "author": "/root",
+      "source": "Root actual f69 integration, specialist handoffs/reviews and desktop browser observations on 2026-10-11",
+      "createdAt": "2026-10-11T09:40:54.514Z"
+    },
+    {
+      "id": "ca16829a-216b-48c0-852c-51c378bb5524",
+      "revision": 659,
+      "kind": "task.create",
+      "itemId": "task-78313163",
+      "title": "Authored96-cell starter RAICHO art pipeline",
+      "author": "/root",
+      "source": "Root actual f69 integration, specialist handoffs/reviews and desktop browser observations on 2026-10-11",
+      "createdAt": "2026-10-11T09:40:54.538Z"
+    },
+    {
+      "id": "4cc211c6-d209-4456-8199-fc14accdaf49",
+      "revision": 660,
+      "kind": "task.create",
+      "itemId": "task-a27e49f0",
+      "title": "Authoritative RAICHO affinity status line",
+      "author": "/root",
+      "source": "Root actual f69 integration, specialist handoffs/reviews and desktop browser observations on 2026-10-11",
+      "createdAt": "2026-10-11T09:40:54.569Z"
+    },
+    {
+      "id": "f9582891-e85b-4ba2-99ad-a73f2bfb8f2e",
+      "revision": 661,
+      "kind": "run",
+      "itemId": "run-12f8cbf3",
+      "title": "Engine specialist · running",
+      "author": "/root",
+      "source": "Root actual f69 integration, specialist handoffs/reviews and desktop browser observations on 2026-10-11",
+      "createdAt": "2026-10-11T09:40:54.599Z"
+    },
+    {
+      "id": "b019108f-6b29-4f14-b72e-e0e910d19f6d",
+      "revision": 662,
+      "kind": "run",
+      "itemId": "run-d5b0dbc0",
+      "title": "Pixel art specialist · running",
+      "author": "/root",
+      "source": "Root actual f69 integration, specialist handoffs/reviews and desktop browser observations on 2026-10-11",
+      "createdAt": "2026-10-11T09:40:54.631Z"
+    },
+    {
+      "id": "aeae468e-57ce-474e-afba-c923d49f8f50",
+      "revision": 663,
+      "kind": "run",
+      "itemId": "run-f1ec2aee",
+      "title": "Gameplay and independent QA specialist · running",
+      "author": "/root",
+      "source": "Root actual f69 integration, specialist handoffs/reviews and desktop browser observations on 2026-10-11",
+      "createdAt": "2026-10-11T09:40:54.661Z"
+    },
+    {
+      "id": "2b9fb7f5-2762-4b7c-b6b6-b101727daf13",
+      "revision": 664,
+      "kind": "run",
+      "itemId": "run-f250bf6f",
+      "title": "Production integration · running",
+      "author": "/root",
+      "source": "Root actual f69 integration, specialist handoffs/reviews and desktop browser observations on 2026-10-11",
+      "createdAt": "2026-10-11T09:40:54.678Z"
     }
   ],
   "runRecords": [
@@ -20210,6 +21123,370 @@
       "author": "/root",
       "source": "Actual portrait correction, isolated specialist work and final normal-browser verification",
       "createdAt": "2026-10-11T07:38:18.418Z"
+    },
+    {
+      "id": "run-b9fc1763",
+      "title": "Engine specialist · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Engine specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T07:52:32.101Z",
+      "taskIds": [
+        "task-0750b5ee"
+      ],
+      "summary": "Implementing top-right native map and right-aligned telemetry on codex/compact-corner-hud; cosmic refinement proposal parked READY.",
+      "evidence": [
+        {
+          "label": "Actual assignment observation",
+          "kind": "note",
+          "details": "Implementing top-right native map and right-aligned telemetry on codex/compact-corner-hud; cosmic refinement proposal parked READY."
+        }
+      ],
+      "author": "/root",
+      "source": "Actual 2026-10-11 specialist exchange and latest user corner-HUD request",
+      "createdAt": "2026-10-11T07:52:32.125Z"
+    },
+    {
+      "id": "run-9d595527",
+      "title": "Art specialist · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "Art specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T07:52:32.140Z",
+      "taskIds": [
+        "task-24929d60",
+        "task-d56c0882"
+      ],
+      "summary": "Portability commit28e350e is frozen with15Windows and15Ubuntu checks reported; independently reviewed next. New64-cell control atlas authoring follows.",
+      "evidence": [
+        {
+          "label": "Actual assignment observation",
+          "kind": "note",
+          "details": "Portability commit28e350e is frozen with15Windows and15Ubuntu checks reported; independently reviewed next. New64-cell control atlas authoring follows."
+        }
+      ],
+      "author": "/root",
+      "source": "Actual 2026-10-11 specialist exchange and latest user corner-HUD request",
+      "createdAt": "2026-10-11T07:52:32.143Z"
+    },
+    {
+      "id": "run-1bbe9004",
+      "title": "Gameplay and QA specialist · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Gameplay and QA specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T07:52:32.159Z",
+      "taskIds": [
+        "task-716d9437",
+        "task-24929d60"
+      ],
+      "summary": "Eight stable KIKAI identities and independent sponsors compile with7focused native checks; regression and independent portability review underway.",
+      "evidence": [
+        {
+          "label": "Actual assignment observation",
+          "kind": "note",
+          "details": "Eight stable KIKAI identities and independent sponsors compile with7focused native checks; regression and independent portability review underway."
+        }
+      ],
+      "author": "/root",
+      "source": "Actual 2026-10-11 specialist exchange and latest user corner-HUD request",
+      "createdAt": "2026-10-11T07:52:32.179Z"
+    },
+    {
+      "id": "run-5c033e67",
+      "title": "Spark evidence reviewer · running",
+      "agentId": "spark/studio-evidence-audit",
+      "agentLabel": "Spark evidence reviewer",
+      "state": "running",
+      "observedAt": "2026-10-11T07:52:32.192Z",
+      "taskIds": [
+        "task-2730ef49",
+        "task-44c5f7a0",
+        "task-a28478e3",
+        "task-778b8356"
+      ],
+      "summary": "Read-only local worker28433 is inspecting existing source/evidence for four older technical criteria. No acceptance changed before review.",
+      "evidence": [
+        {
+          "label": "Actual assignment observation",
+          "kind": "note",
+          "details": "Read-only local worker28433 is inspecting existing source/evidence for four older technical criteria. No acceptance changed before review."
+        }
+      ],
+      "author": "/root",
+      "source": "Actual 2026-10-11 specialist exchange and latest user corner-HUD request",
+      "createdAt": "2026-10-11T07:52:32.212Z"
+    },
+    {
+      "id": "run-0694b67e",
+      "title": "Gameplay and QA specialist · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Gameplay and QA specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T07:59:52.808Z",
+      "taskIds": [
+        "task-b49fb973",
+        "task-716d9437"
+      ],
+      "summary": "Roster7be061b frozen; independently accepted portrait portability source with actual decode/testing. Now inspecting3chunkstarter shield and earnedrecharge gates on an isolatedbranch; rootawaitsnumeric/savecompatibilityproposal.",
+      "evidence": [
+        {
+          "label": "Actual assignment",
+          "kind": "note",
+          "details": "User request, immediate specialist message and accepted corporation clarification are recorded in the actual session."
+        }
+      ],
+      "author": "/root",
+      "source": "Actual latest user request and corporation clarification on2026-10-11",
+      "createdAt": "2026-10-11T07:59:52.821Z"
+    },
+    {
+      "id": "run-97495668",
+      "title": "Spark evidence reviewer · failed",
+      "agentId": "spark/studio-evidence-audit",
+      "agentLabel": "Spark evidence reviewer",
+      "state": "failed",
+      "observedAt": "2026-10-11T09:19:27.626Z",
+      "taskIds": [
+        "task-2730ef49",
+        "task-44c5f7a0",
+        "task-a28478e3",
+        "task-778b8356"
+      ],
+      "summary": "Read-only wrapper session28433 ended without its requested result file. Re-poll reports unknown process and authoritative process inventory contains no matching worker. Partial output includes unsupported image-input and transport retry errors; there is no completed review or criterion acceptance from this worker.",
+      "evidence": [
+        {
+          "label": "Actual audit task",
+          "kind": "artifact",
+          "path": "work/studio-evidence-audit-task.txt"
+        }
+      ],
+      "author": "/root",
+      "source": "Actual specialist evidence, independent review and GitHub workflow observation on 2026-10-11",
+      "createdAt": "2026-10-11T09:19:27.637Z"
+    },
+    {
+      "id": "run-cb70da06",
+      "title": "Gameplay specialist · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Gameplay specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T09:19:27.664Z",
+      "taskIds": [
+        "task-b49fb973"
+      ],
+      "summary": "Continuing actual two-file active-hull manufacturer affinity repair;18focused tests passed, full/core strict checks pending. Prior362cd25 remains frozen.",
+      "evidence": [
+        {
+          "label": "Actual bounded assignment",
+          "kind": "note",
+          "details": "Continuing actual two-file active-hull manufacturer affinity repair;18focused tests passed, full/core strict checks pending. Prior362cd25 remains frozen."
+        }
+      ],
+      "author": "/root",
+      "source": "Actual specialist evidence, independent review and GitHub workflow observation on 2026-10-11",
+      "createdAt": "2026-10-11T09:19:27.684Z"
+    },
+    {
+      "id": "run-23b34d28",
+      "title": "Engine and independent QA specialist · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Engine and independent QA specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T09:19:27.706Z",
+      "taskIds": [
+        "task-b49fb973"
+      ],
+      "summary": "Actual unchanged public Game probe on362cd25 has2pass/4fail for wrong pilot-based affinity; independent corrected-commit review follows Gameplay repair. Curved shield native source independently accepted separately.",
+      "evidence": [
+        {
+          "label": "Actual bounded assignment",
+          "kind": "note",
+          "details": "Actual unchanged public Game probe on362cd25 has2pass/4fail for wrong pilot-based affinity; independent corrected-commit review follows Gameplay repair. Curved shield native source independently accepted separately."
+        }
+      ],
+      "author": "/root",
+      "source": "Actual specialist evidence, independent review and GitHub workflow observation on 2026-10-11",
+      "createdAt": "2026-10-11T09:19:27.714Z"
+    },
+    {
+      "id": "run-75ea22fe",
+      "title": "Pixel art specialist · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "Pixel art specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T09:19:27.732Z",
+      "taskIds": [
+        "task-d56c0882"
+      ],
+      "summary": "Reviewing frozen64-cell atlas native integration/masks/pressed/reduced-motion/fractional cells and legitimate60k overload policy. Broad style-target doc is planning only.",
+      "evidence": [
+        {
+          "label": "Actual bounded assignment",
+          "kind": "note",
+          "details": "Reviewing frozen64-cell atlas native integration/masks/pressed/reduced-motion/fractional cells and legitimate60k overload policy. Broad style-target doc is planning only."
+        }
+      ],
+      "author": "/root",
+      "source": "Actual specialist evidence, independent review and GitHub workflow observation on 2026-10-11",
+      "createdAt": "2026-10-11T09:19:27.745Z"
+    },
+    {
+      "id": "run-52274ef0",
+      "title": "Engine and independent QA specialist · completed",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Engine and independent QA specialist",
+      "state": "completed",
+      "observedAt": "2026-10-11T09:40:54.373Z",
+      "taskIds": [
+        "task-0750b5ee",
+        "task-b49fb973"
+      ],
+      "summary": "Completed compact corner HUD, capacity geometry and independent corrected active-hull affinity review; unchanged probe6pass after initial2pass4fail.",
+      "evidence": [
+        {
+          "label": "Actual completed specialist evidence",
+          "kind": "artifact",
+          "path": "artifacts/corner-shield-20261011/shield-core-review.md"
+        }
+      ],
+      "author": "/root",
+      "source": "Root actual f69 integration, specialist handoffs/reviews and desktop browser observations on 2026-10-11",
+      "createdAt": "2026-10-11T09:40:54.377Z"
+    },
+    {
+      "id": "run-df8d34e8",
+      "title": "Gameplay specialist · completed",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Gameplay specialist",
+      "state": "completed",
+      "observedAt": "2026-10-11T09:40:54.388Z",
+      "taskIds": [
+        "task-b49fb973",
+        "task-716d9437"
+      ],
+      "summary": "Completed earned shield progression and active-hull bonus repair; sponsored KIKAI roster source is authored and human approval remains pending.",
+      "evidence": [
+        {
+          "label": "Actual completed specialist evidence",
+          "kind": "artifact",
+          "path": "artifacts/corner-shield-20261011/active-hull-affinity-handoff.md"
+        }
+      ],
+      "author": "/root",
+      "source": "Root actual f69 integration, specialist handoffs/reviews and desktop browser observations on 2026-10-11",
+      "createdAt": "2026-10-11T09:40:54.399Z"
+    },
+    {
+      "id": "run-fbf6480f",
+      "title": "Pixel art specialist · completed",
+      "agentId": "/root/production_research",
+      "agentLabel": "Pixel art specialist",
+      "state": "completed",
+      "observedAt": "2026-10-11T09:40:54.418Z",
+      "taskIds": [
+        "task-d56c0882"
+      ],
+      "summary": "Completed64-cell authored controls, strict portability repair and independent native integration review; human style/clarity approval remains pending.",
+      "evidence": [
+        {
+          "label": "Actual completed specialist evidence",
+          "kind": "artifact",
+          "path": "artifacts/corner-shield-20261011/icon-native-review.md"
+        }
+      ],
+      "author": "/root",
+      "source": "Root actual f69 integration, specialist handoffs/reviews and desktop browser observations on 2026-10-11",
+      "createdAt": "2026-10-11T09:40:54.430Z"
+    },
+    {
+      "id": "run-12f8cbf3",
+      "title": "Engine specialist · running",
+      "agentId": "/root/engine_research",
+      "agentLabel": "Engine specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T09:40:54.587Z",
+      "taskIds": [
+        "task-84772b9a"
+      ],
+      "summary": "Actually implementing bounded fine-grid cosmic motifs in isolated branch; current served f69 unchanged.",
+      "evidence": [
+        {
+          "label": "Observed actual assignment/state",
+          "kind": "note",
+          "details": "Actually implementing bounded fine-grid cosmic motifs in isolated branch; current served f69 unchanged."
+        }
+      ],
+      "author": "/root",
+      "source": "Root actual f69 integration, specialist handoffs/reviews and desktop browser observations on 2026-10-11",
+      "createdAt": "2026-10-11T09:40:54.599Z"
+    },
+    {
+      "id": "run-d5b0dbc0",
+      "title": "Pixel art specialist · running",
+      "agentId": "/root/production_research",
+      "agentLabel": "Pixel art specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T09:40:54.614Z",
+      "taskIds": [
+        "task-78313163"
+      ],
+      "summary": "Actually authoring96-cell starter RAICHO source/masks and tests; renderer integration and visual acceptance are separate.",
+      "evidence": [
+        {
+          "label": "Observed actual assignment/state",
+          "kind": "note",
+          "details": "Actually authoring96-cell starter RAICHO source/masks and tests; renderer integration and visual acceptance are separate."
+        }
+      ],
+      "author": "/root",
+      "source": "Root actual f69 integration, specialist handoffs/reviews and desktop browser observations on 2026-10-11",
+      "createdAt": "2026-10-11T09:40:54.631Z"
+    },
+    {
+      "id": "run-f1ec2aee",
+      "title": "Gameplay and independent QA specialist · running",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "Gameplay and independent QA specialist",
+      "state": "running",
+      "observedAt": "2026-10-11T09:40:54.647Z",
+      "taskIds": [
+        "task-a27e49f0",
+        "task-84772b9a"
+      ],
+      "summary": "Completed frozen9196a866 affinity-HUD source and22focused/318core checks; now independently establishing/reviewing cosmic source invariants.",
+      "evidence": [
+        {
+          "label": "Observed actual assignment/state",
+          "kind": "note",
+          "details": "Completed frozen9196a866 affinity-HUD source and22focused/318core checks; now independently establishing/reviewing cosmic source invariants."
+        }
+      ],
+      "author": "/root",
+      "source": "Root actual f69 integration, specialist handoffs/reviews and desktop browser observations on 2026-10-11",
+      "createdAt": "2026-10-11T09:40:54.661Z"
+    },
+    {
+      "id": "run-f250bf6f",
+      "title": "Production integration · running",
+      "agentId": "/root",
+      "agentLabel": "Production integration",
+      "state": "running",
+      "observedAt": "2026-10-11T09:40:54.671Z",
+      "taskIds": [
+        "task-a27e49f0"
+      ],
+      "summary": "Reviewing frozen Rust metadata and preparing minimal stable native status text integration; desktop f69 evidence already recorded.",
+      "evidence": [
+        {
+          "label": "Observed actual assignment/state",
+          "kind": "note",
+          "details": "Reviewing frozen Rust metadata and preparing minimal stable native status text integration; desktop f69 evidence already recorded."
+        }
+      ],
+      "author": "/root",
+      "source": "Root actual f69 integration, specialist handoffs/reviews and desktop browser observations on 2026-10-11",
+      "createdAt": "2026-10-11T09:40:54.678Z"
     }
   ],
   "phaseDescription": "Desktop-first Rust/WASM solo game and local Studio are implemented. Reviewed occupied-cell art, reproducible conversion, responsive native settings/icons and minimap, strict GitHub integration gates and source-backed Dev Bible are integrated. Natural campaign balance, human listening, owner-private update lifecycle and physical phones remain separate pending gates."
