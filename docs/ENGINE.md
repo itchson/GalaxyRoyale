@@ -22,6 +22,10 @@ Fixed 60 Hz simulation interpolates extraction, caps catch-up, smooths the camer
 
 512-unit asteroid chunks retain at most 25 chunk records. Transient rock damage resets after unload. A seeded 4,200-unit jittered region network provides six biome palettes/family weights, sanctuary discoveries, courier/family-bounty events and once-only persistent relic rewards.
 
+Node placement resolves independently from biome anchors. Courier radii are160–220, bounty180–260, champion340–420 and Royale400–480 world units. Complete birth envelopes reserve radius+520 for belts and32 for actual asteroid bodies, separated by at least256 units. Cell-contained reservations and explicit rounding margin prove clearance without query-order-dependent rejection; Haven's1400-unit corridor stays clear and all nine mandatory campaign nodes resolve. Combat arena walls use the same canonical radius as protection. Active3×3 materialization remains bounded; asteroid drift after impacts is not constrained to its birth envelope.
+
+Licensed factory RAICHO hulls retain their48×48 destructible collision bodies and add a cached96×96 sparse detail layer at relative scale0.5. Removed collision cells suppress every corresponding fine quad. Metal shading, explicit signal lamps and real damage/critical tints preserve authored detail. A local3,000-cell/two-transform preflight admits the whole pair or draws the baseline body; it is not a new global FrameBuilder limit.
+
 Cached 96×96 planets use small relative transforms, craters, veins, storms and rings. Fine gas wisps curl/fade analytically by seed/time. Regional cosmetic budgets are 6,000 cells full or 3,000 reduced. Star layers have independent parallax; density does not change gameplay limits.
 
 Iron Belt ordinary spawns can include the Riveter, an authored occupied-cell Bastion variant with a locked triple burst and destructible firing barrels. Its controller shares normal projectile, safety, loot and XP paths. See [BIOME_ENEMIES.md](BIOME_ENEMIES.md) for actual behavior and unmeasured tuning limits.

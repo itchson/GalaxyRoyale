@@ -1507,7 +1507,7 @@
       "title": "Seeded universe & discovery nodes",
       "category": "universe",
       "status": "implemented",
-      "summary": "A deterministic nearest-jittered-tile network with canonical discovery-site identities.",
+      "summary": "Seed-resolved typed node radii and spawn positions with space reserved for complete asteroid belts; biome anchors remain independently deterministic.",
       "tags": [
         "universe",
         "implemented"
@@ -1530,16 +1530,26 @@
           "value": "3 × 3 adjacent grid tiles"
         },
         {
-          "label": "Site sanctuary radius",
-          "value": "160–230 world units"
+          "label": "Courier / bounty radius",
+          "value": "160–220 / 180–260 world units"
+        },
+        {
+          "label": "Champion / Royale radius",
+          "value": "340–420 / 400–480 world units"
+        },
+        {
+          "label": "Reserved envelope clearance",
+          "value": "At least 256 world units between full belt/body envelopes"
         }
       ],
       "sections": [
         {
           "title": "Behavior and scope",
           "paragraphs": [
-            "The u32 seed, signed grid coordinates and fixed hash salts generate tile centers, biomes and site metadata. Tile centers jitter within 0.28–0.72 of each tile. Sites near Haven and outside the practical world boundary are rejected. This is bounded deterministic generation, not an infinitely precise universe.",
-            "Discovery records refer to canonical seeded sites. The map shows known sites and actual circles, without inventing polygon biome boundaries. Courier and bounty mission identity derives from the site."
+            "The u32 seed and canonical signed grid ID resolve node kind, radius and spawn position independently of discovery or query order. Biome anchors retain the previous 0.28–0.72 jitter; node positions use a separate deterministic cell-contained reservation. Only the adjacent3×3 network is materialized during play.",
+            "Courier, bounty, champion and Royale nodes have distinct radius ranges. Each birth reservation includes the sanctuary, outer belt offset520 and32 units of asteroid-body allowance. Each cell edge has half the256-unit clearance plus0.25 units of rounding margin. Complete reservations therefore cannot overlap even at neighboring placement extrema.",
+            "The four cells touching Haven use far-corner placement rectangles, retaining all eight champion sites while clearing the full1400-unit home corridor. Partial world-edge cells that cannot contain their reservation are omitted. Canonical grid IDs, mission courier/bounty hashes, family and target counts stay stable; actual seeded node positions and radii change in this version.",
+            "The map exposes discovered circles. Arena encounters use their canonical site radius for walls and protection. Reservation clearance describes initial node/belt placement, not an absolute bound on an asteroid after a combat impulse. Native tests and source review do not establish a complete browser campaign or balance acceptance."
           ]
         }
       ],
@@ -1558,6 +1568,11 @@
           "path": "docs/CONTRACTS.md",
           "label": "CONTRACTS.md",
           "role": "documentation"
+        },
+        {
+          "path": "crates/game_core/src/region_node_tests.rs",
+          "label": "Actual node, safety and arena regressions",
+          "role": "implementation"
         }
       ],
       "related": [
@@ -1569,7 +1584,27 @@
       "data": {
         "regionSize": 4200,
         "hubBiomeRadius": 1400,
-        "worldLimit": 1000000
+        "worldLimit": 1000000,
+        "nodeClearance": 256,
+        "beltBodyPadding": 32,
+        "nodeRadiusRanges": {
+          "courier": [
+            160,
+            220
+          ],
+          "bounty": [
+            180,
+            260
+          ],
+          "champion_arena": [
+            340,
+            420
+          ],
+          "royale_arena": [
+            400,
+            480
+          ]
+        }
       }
     },
     {

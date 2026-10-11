@@ -111,8 +111,16 @@ test("six biome labels/spawn mixes and seed/belt parameters agree with actual Ru
     data("world-seed").hubBiomeRadius,
     Number(/HUB_RADIUS: f32 = ([\d.]+)/.exec(rust)[1]),
   );
-  assert.match(rust, /inner: site.radius \+ 240\.0/);
-  assert.match(rust, /outer = site.radius \+ 520\.0/);
+  const numeric = (name) => Number(new RegExp(`${name}: f32 = ([\\d.]+)`).exec(rust)[1]);
+  assert.deepEqual(data("sanctuaries").beltOffsets, [numeric("BELT_INNER_OFFSET"), numeric("BELT_OUTER_OFFSET")]);
+  assert.match(rust, /inner: site.radius \+ BELT_INNER_OFFSET/);
+  assert.match(rust, /outer = site.radius \+ BELT_OUTER_OFFSET/);
+  assert.equal(data("world-seed").nodeClearance, numeric("NODE_CLEARANCE"));
+  assert.equal(data("world-seed").beltBodyPadding, numeric("BELT_BODY_PADDING"));
+  for (const [kind, variant] of [["courier", "Courier"], ["bounty", "Bounty"], ["champion_arena", "ChampionArena"], ["royale_arena", "RoyaleArena"]]) {
+    const match = new RegExp(`Self::${variant} => \\(([\\d.]+), ([\\d.]+)\\)`).exec(rust);
+    assert.deepEqual(data("world-seed").nodeRadiusRanges[kind], match.slice(1).map(Number));
+  }
   assert.match(rust, /recommended_level: \[1, 3, 5, 10, 12\]/);
 });
 test("boss generations, ship-level gates, save schema and pixel packing facts remain source-backed", async () => {
