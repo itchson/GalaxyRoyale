@@ -201,6 +201,8 @@ body:not(.pixel-ready) #universe {
   margin: 0;
   width: min(100%, calc(37dvh * 8 / 3));
   height: auto;
+  min-height: 0;
+  overflow: hidden;
   aspect-ratio: 8 / 3;
   color: #ecfaff;
 }
@@ -221,6 +223,11 @@ body:not(.pixel-ready) #universe {
 }
 .title-actions {
   width: min(100%, 112px);
+}
+.title-actions button {
+  height: var(--ui-hit);
+  padding: 0;
+  font-size: 0;
 }
 .launch-card .control-guide,
 .launch-card .build-line {
