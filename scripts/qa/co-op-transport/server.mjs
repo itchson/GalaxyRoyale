@@ -100,6 +100,26 @@ export const wasmCheckNames = new Set([
   "dispose-clean",
   "operation-failed",
 ]);
+export const initializationStages = [
+  "none",
+  "open_store",
+  "import_module",
+  "compile_wasm",
+  "create_galaxy",
+  "pause_solo",
+  "register_license",
+  "configure_view",
+  "bind_controller",
+  "save_baseline",
+  "read_baseline",
+  "ready",
+];
+export const clientFailureCodes = new Set([
+  ...initializationStages.map((stage) => `initialization_${stage}_failed`),
+  "initialization_timeout",
+  "native_frame_failed",
+  "native_action_failed",
+]);
 export function validateWasmReport(o) {
   const exact = (v, keys) =>
     v &&
@@ -165,8 +185,19 @@ export function validateWasmReport(o) {
   for (let i = 0; i < 2; i++) {
     const c = o.clients[i];
     if (
-      !exact(c, ["role", "phase", "mode", ...counters, ...flags, ...hashes]) ||
+      !exact(c, [
+        "role",
+        "phase",
+        "mode",
+        "init_stage",
+        "failure_code",
+        ...counters,
+        ...flags,
+        ...hashes,
+      ]) ||
       c.role !== ["host", "guest"][i] ||
+      !initializationStages.includes(c.init_stage) ||
+      (c.failure_code !== null && !clientFailureCodes.has(c.failure_code)) ||
       ![
         "uninitialized",
         "idle",

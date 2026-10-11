@@ -8,6 +8,10 @@ const role = config.client_role;
 const status = document.getElementById("status");
 const canvas = document.getElementById("canvas");
 let galaxy, controller, transport, store, backend, run, baseline, timer;
+let initStage = "none",
+  failureCode = null,
+  initDeadline = 0,
+  appliedPause = null;
 let phase = "uninitialized",
   mode = "solo",
   controls = { fire: false },
@@ -65,6 +69,8 @@ function observations() {
     d = transport?.diagnostics();
   return {
     role,
+    init_stage: initStage,
+    failure_code: failureCode,
     phase:
       phase === "disposed" || phase === "failed"
         ? phase
@@ -87,7 +93,7 @@ function observations() {
 }
 function update() {
   const s = observations();
-  status.textContent = `${role.toUpperCase()} · ${s.phase} · mode ${s.mode} · native frames ${s.frames} · complete commits ${s.commits}`;
+  status.textContent = `${role.toUpperCase()} · ${s.phase} · init ${s.init_stage}${s.failure_code ? " / " + s.failure_code : ""} · mode ${s.mode} · native frames ${s.frames} · complete commits ${s.commits}`;
 }
 function observeHeader(header) {
   if (!header?.snapshot) return;
@@ -156,7 +162,11 @@ function step(milliseconds) {
   const after = controller?.frameMode() ?? "solo";
   if (after !== before) resetControls();
   // Solo Game is deliberately paused throughout QA; only actual host tick_co_op runs.
-  galaxy.set_paused(after !== "host");
+  const pause = after !== "host";
+  if (pause !== appliedPause) {
+    galaxy.set_paused(pause);
+    appliedPause = pause;
+  }
   const elapsed = after !== before ? 0 : milliseconds;
   galaxy.step(elapsed, controls);
   controller?.afterStep(elapsed / 1000);
@@ -174,11 +184,46 @@ function schedule() {
       if (!pumping) step(dt);
       schedule();
     } catch {
+      failureCode = "native_frame_failed";
       phase = "failed";
       stopped = true;
       update();
     }
   }, 16);
+}
+async function initStep(stage, action, lateCleanup = () => {}) {
+  initStage = stage;
+  update();
+  let timeout,
+    expired = false;
+  const remaining = Math.max(0, initDeadline - performance.now());
+  if (remaining === 0) {
+    failureCode = "initialization_timeout";
+    throw new Error(failureCode);
+  }
+  const pending = Promise.resolve()
+    .then(action)
+    .then((value) => {
+      if (expired) lateCleanup(value);
+      return value;
+    });
+  try {
+    return await Promise.race([
+      pending,
+      new Promise((_, reject) => {
+        timeout = setTimeout(() => {
+          expired = true;
+          failureCode = "initialization_timeout";
+          reject(new Error("initialization_timeout"));
+        }, remaining);
+      }),
+    ]);
+  } catch {
+    failureCode ??= `initialization_${stage}_failed`;
+    throw new Error(failureCode);
+  } finally {
+    clearTimeout(timeout);
+  }
 }
 async function initialize(selectedBackend, runId) {
   if (
@@ -189,32 +234,51 @@ async function initialize(selectedBackend, runId) {
     throw new Error("initialize_invalid");
   backend = selectedBackend;
   run = runId;
+  failureCode = null;
+  initDeadline = performance.now() + 45_000;
   store = new SaveStore();
-  const loaded = await store.open();
+  const loaded = await initStep("open_store", () => store.open());
   persistent = store.persistent;
-  const module = await import(config.builds[backend]);
-  await module.default({
-    module_or_path: config.builds[backend].replace(
-      /galaxy\.js$/,
-      "galaxy_bg.wasm",
-    ),
+  const module = await initStep(
+    "import_module",
+    () => import(config.builds[backend]),
+  );
+  await initStep("compile_wasm", () =>
+    module.default({
+      module_or_path: config.builds[backend].replace(
+        /galaxy\.js$/,
+        "galaxy_bg.wasm",
+      ),
+    }),
+  );
+  galaxy = await initStep(
+    "create_galaxy",
+    () => module.Galaxy.create(canvas, loaded),
+    (lateGalaxy) => lateGalaxy.free(),
+  );
+  // register_droid requires the real freshly created Galaxy to be paused.
+  await initStep("pause_solo", () => {
+    galaxy.set_paused(true);
+    appliedPause = true;
   });
-  galaxy = await module.Galaxy.create(canvas, loaded);
   if (!loaded) {
     const hash = [...crypto.getRandomValues(new Uint8Array(8))]
       .map((n) => n.toString(16).padStart(2, "0"))
       .join("");
-    galaxy.register_droid(
-      role === "host" ? "dora" : "doro",
-      role === "host" ? "pan" : "hugo",
-      role === "host" ? "renko" : "pan",
-      hash,
+    await initStep("register_license", () =>
+      galaxy.register_droid(
+        role === "host" ? "dora" : "doro",
+        role === "host" ? "pan" : "hugo",
+        role === "host" ? "renko" : "pan",
+        hash,
+      ),
     );
   }
-  galaxy.resize(640, 360);
-  galaxy.set_ui_mode(1);
-  galaxy.set_shake(false);
-  galaxy.set_paused(true);
+  await initStep("configure_view", () => {
+    galaxy.resize(640, 360);
+    galaxy.set_ui_mode(1);
+    galaxy.set_shake(false);
+  });
   const observed = {
     co_op_batch(request) {
       const response = galaxy.co_op_batch(request),
@@ -258,6 +322,8 @@ async function initialize(selectedBackend, runId) {
       return response;
     },
   };
+  initStage = "bind_controller";
+  update();
   const ports = createGalaxyCoopPorts(observed);
   controller = new CoopController({
     service: config.service,
@@ -285,13 +351,18 @@ async function initialize(selectedBackend, runId) {
       update();
     },
   });
-  await store.save(galaxy.profile());
-  await store.flush();
-  baseline = profileSha = await digest(galaxy.profile());
-  persistedSha = await digest(await store.open());
+  await initStep("save_baseline", async () => {
+    await store.save(galaxy.profile());
+    await store.flush();
+  });
+  await initStep("read_baseline", async () => {
+    baseline = profileSha = await digest(galaxy.profile());
+    persistedSha = await digest(await store.open());
+  });
   profileEqual = true;
   persistedEqual = baseline === persistedSha;
   phase = "idle";
+  initStage = "ready";
   loopDeadline = performance.now() + 180_000;
   lastTime = performance.now();
   stopped = false;
@@ -402,15 +473,21 @@ addEventListener("message", async (event) => {
   } catch {
     if (name === "initialize") {
       await controller?.dispose().catch(() => {});
-      galaxy?.free();
+      try {
+        galaxy?.free();
+      } catch {}
       galaxy = null;
       stopped = true;
       clearTimeout(timer);
     }
+    failureCode ??=
+      name === "initialize"
+        ? `initialization_${initStage}_failed`
+        : "native_action_failed";
     phase = "failed";
     update();
     parent.postMessage(
-      { type: "native-qa-reply", id, ok: false, error: "native_action_failed" },
+      { type: "native-qa-reply", id, ok: false, error: failureCode },
       config.page_origin,
     );
   } finally {

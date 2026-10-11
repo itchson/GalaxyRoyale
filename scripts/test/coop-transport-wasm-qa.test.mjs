@@ -20,6 +20,8 @@ function client(role) {
     role,
     phase: "connected",
     mode: role,
+    init_stage: "ready",
+    failure_code: null,
     created: 1,
     closed: 0,
     requests: 0,
@@ -70,6 +72,172 @@ function functionSource(source, name) {
   assert.ok(node);
   return node.getText(ast);
 }
+test("Actual initialization pauses fresh Galaxy before guarded license registration and marks each API stage", async () => {
+  const source = await fs.readFile(
+    new URL("../qa/co-op-transport/client.js", import.meta.url),
+    "utf8",
+  );
+  for (const existing of [false, true]) {
+    const calls = [],
+      stages = [];
+    const profile = { seed: 5 };
+    let paused = false,
+      opens = 0;
+    const native = {
+      set_paused(value) {
+        paused = value;
+        calls.push("pause");
+      },
+      register_droid() {
+        assert.equal(
+          paused,
+          true,
+          "actual Galaxy requires paused registration",
+        );
+        calls.push("register");
+      },
+      resize: () => calls.push("resize"),
+      set_ui_mode: () => {},
+      set_shake: () => {},
+      profile: () => profile,
+      free: () => calls.push("free"),
+    };
+    const context = vm.createContext({
+      galaxy: null,
+      controller: null,
+      initStage: "none",
+      failureCode: null,
+      appliedPause: null,
+      initDeadline: 0,
+      config: {
+        builds: { webgpu: "/wasm/actual/galaxy.js" },
+        service: "bounded",
+      },
+      performance: { now: () => 100 },
+      setTimeout,
+      clearTimeout,
+      role: "host",
+      canvas: {},
+      crypto: { getRandomValues: (a) => a.fill(7) },
+      SaveStore: class {
+        persistent = true;
+        open() {
+          return ++opens === 1 && !existing ? null : profile;
+        }
+        save(value) {
+          assert.equal(value, profile);
+          calls.push("save");
+        }
+        flush() {
+          calls.push("flush");
+        }
+      },
+      loadModule: async () => ({
+        default: async () => calls.push("compile"),
+        Galaxy: {
+          create: async () => {
+            calls.push("create");
+            return native;
+          },
+        },
+      }),
+      createGalaxyCoopPorts: () => ({
+        native: {},
+        replica: {},
+        availability: true,
+      }),
+      CoopController: class {},
+      digest: async () => "a".repeat(64),
+      update: () => stages.push(context.initStage),
+      schedule: () => calls.push("schedule"),
+    });
+    vm.runInContext(functionSource(source, "initStep"), context);
+    vm.runInContext(
+      functionSource(source, "initialize").replace(
+        "import(config.builds[backend])",
+        "loadModule(config.builds[backend])",
+      ),
+      context,
+    );
+    await context.initialize("webgpu", "b".repeat(16));
+    assert.equal(context.initStage, "ready");
+    assert.equal(context.failureCode, null);
+    assert.equal(context.appliedPause, true);
+    assert.ok(calls.indexOf("pause") > calls.indexOf("create"));
+    assert.ok(calls.indexOf("save") > calls.indexOf("pause"));
+    assert.equal(calls.includes("register"), !existing);
+    if (!existing)
+      assert.ok(calls.indexOf("pause") < calls.indexOf("register"));
+    assert.ok(
+      stages.includes("create_galaxy") && stages.includes("read_baseline"),
+    );
+  }
+});
+
+test("Actual initialization has a bounded total deadline, controlled failures and frees a late native create", async () => {
+  const source = await fs.readFile(
+    new URL("../qa/co-op-transport/client.js", import.meta.url),
+    "utf8",
+  );
+  let callback,
+    delay,
+    freed = 0,
+    cleared = 0,
+    resolve;
+  const context = vm.createContext({
+    initStage: "none",
+    failureCode: null,
+    initDeadline: 45_000,
+    performance: { now: () => 44_800 },
+    update: () => {},
+    setTimeout: (fn, ms) => {
+      callback = fn;
+      delay = ms;
+      return 1;
+    },
+    clearTimeout: () => cleared++,
+  });
+  vm.runInContext(functionSource(source, "initStep"), context);
+  const pending = context.initStep(
+    "create_galaxy",
+    () =>
+      new Promise((r) => {
+        resolve = r;
+      }),
+    (native) => native.free(),
+  );
+  await Promise.resolve();
+  assert.equal(delay, 200, "each step shares the overall deadline");
+  callback();
+  await assert.rejects(pending, /initialization_timeout/);
+  resolve({ free: () => freed++ });
+  await Promise.resolve();
+  await Promise.resolve();
+  assert.equal(freed, 1);
+  assert.equal(cleared, 1);
+  context.failureCode = null;
+  await assert.rejects(
+    context.initStep("register_license", () => {
+      throw new Error("raw private #credential");
+    }),
+    /initialization_register_license_failed/,
+  );
+  assert.equal(context.failureCode, "initialization_register_license_failed");
+  context.performance.now = () => 45_000;
+  let called = false;
+  await assert.rejects(
+    context.initStep("save_baseline", () => {
+      called = true;
+    }),
+    /initialization_timeout/,
+  );
+  assert.equal(
+    called,
+    false,
+    "expired startup must not run another native/save action",
+  );
+});
+
 test("Actual client frame code calls Galaxy.step only, pauses solo/guest, and resets a restored frame", async () => {
   // Declared JS boundaries test the actual harness function, not native gameplay.
   const source = await fs.readFile(
@@ -79,6 +247,7 @@ test("Actual client frame code calls Galaxy.step only, pauses solo/guest, and re
   const calls = [];
   const context = vm.createContext({
     stopped: false,
+    appliedPause: null,
     controls: { fire: true, thrust: [100, 0] },
     counters: { frames: 0 },
     update: () => {},
@@ -102,8 +271,26 @@ test("Actual client frame code calls Galaxy.step only, pauses solo/guest, and re
   assert.equal(calls[1][1], 16);
   assert.equal(calls[2][1], 0.016);
   calls.length = 0;
-  let mode = "guest";
+  context.step(16);
+  assert.equal(calls.length, 2);
+  assert.equal(
+    calls[0][0],
+    "step",
+    "unchanged pause must not reset native accumulator",
+  );
+  calls.length = 0;
+  let mode = "host";
   context.controller.frameMode = () => mode;
+  context.step(16);
+  assert.equal(calls[0][1], false);
+  calls.length = 0;
+  context.step(16);
+  assert.equal(
+    calls.length,
+    2,
+    "successive host frames preserve the accumulator",
+  );
+  calls.length = 0;
   context.controller.beforeStep = () => {
     mode = "solo";
   };
@@ -176,6 +363,8 @@ test("WASM report accepts finite observations, refuses capabilities/profile payl
     (r) => (r.invite = "#SECRET"),
     (r) => (r.clients[0].token = "secret"),
     (r) => (r.clients[1].profile = { seed: 1 }),
+    (r) => (r.clients[1].init_stage = "token from arbitrary error"),
+    (r) => (r.clients[1].failure_code = "raw native exception / #SECRET"),
     (r) => (r.clients[0].profile_sha = "plaintext identity"),
     (r) => (r.clients[1].commits = -1),
     (r) => (r.clients[0].closed = 2),

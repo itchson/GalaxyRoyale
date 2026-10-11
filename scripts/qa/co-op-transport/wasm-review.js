@@ -17,6 +17,32 @@ let nextId = 1,
 const pending = new Map(),
   checks = [];
 const state = { host: null, guest: null };
+const failureCodes = new Set([
+  ...[
+    "none",
+    "open_store",
+    "import_module",
+    "compile_wasm",
+    "create_galaxy",
+    "pause_solo",
+    "register_license",
+    "configure_view",
+    "bind_controller",
+    "save_baseline",
+    "read_baseline",
+    "ready",
+  ].map((stage) => `initialization_${stage}_failed`),
+  "initialization_timeout",
+  "native_frame_failed",
+  "native_action_failed",
+]);
+const actionFailureCodes = new Set([
+  ...failureCodes,
+  "iframe_not_ready",
+  "native_command_timeout",
+  "native_timeout",
+  "capture_rejected",
+]);
 for (const child of Object.values(children)) {
   child.ready = false;
   child.frame.src = child.origin + "/client.html";
@@ -38,7 +64,13 @@ addEventListener("message", (event) => {
   clearTimeout(request.timer);
   event.data.ok
     ? request.resolve(event.data.value)
-    : request.reject(new Error("native_action_failed"));
+    : request.reject(
+        new Error(
+          failureCodes.has(event.data.error)
+            ? event.data.error
+            : "native_action_failed",
+        ),
+      );
 });
 function send(role, name, args = {}) {
   const id = nextId++,
@@ -130,12 +162,16 @@ async function action(label, fn) {
     await fn();
     await capture();
     $("status").textContent = label + ": complete; sanitized report captured";
-  } catch {
+  } catch (error) {
     checks.push({ name: "operation-failed", passed: false });
     await read().catch(() => {});
     await capture().catch(() => {});
     $("status").textContent =
-      label + ": failed; no sensitive error details displayed";
+      label +
+      ": failed / " +
+      (actionFailureCodes.has(error?.message)
+        ? error.message
+        : "native_action_failed");
   } finally {
     busy = false;
     paint();
