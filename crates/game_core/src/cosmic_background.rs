@@ -383,34 +383,70 @@ fn galactic_bulge(p: Vec2) -> Option<usize> {
 }
 
 fn remnant_filament(p: Vec2) -> Option<usize> {
-    let r = Vec2::new(p.x * 0.94, p.y * 1.1).length();
     let a = p.y.atan2(p.x);
     if a > -0.18 && a < 0.32 {
         return None;
     }
+    // Unequal open shock fragments and interior ejecta knots. These are
+    // original cached artwork, not an expanding gas/supernova simulation.
+    // The dark routes between branches stay open instead of outlining a badge.
+    let q = p + Vec2::new(
+        art_noise(0x7368_6f63, p * 1.3) - 0.5,
+        art_noise(0x6b6e_6f74, p * 1.1) - 0.5,
+    ) * 1.5;
+    let upper = strand(
+        q,
+        &[
+            [-27.0, -10.0, 0.25],
+            [-20.0, -21.0, 1.35],
+            [-7.0, -25.0, 0.65],
+            [-3.0, -20.0, 1.1],
+            [-1.0, -21.0, 0.2],
+        ],
+        1.0,
+    );
+    let lower = strand(
+        q,
+        &[
+            [-23.0, 6.0, 0.25],
+            [-14.0, 15.0, 1.45],
+            [-7.0, 20.0, 0.7],
+            [3.0, 18.0, 1.2],
+            [7.0, 12.0, 0.2],
+        ],
+        1.0,
+    );
+    let spur = strand(
+        q,
+        &[
+            [7.0, -3.0, 0.2],
+            [12.0, -9.0, 0.8],
+            [22.0, -5.0, 1.0],
+            [26.0, -8.0, 0.2],
+        ],
+        1.0,
+    );
+    let interior = strand(
+        q,
+        &[
+            [-8.0, 3.0, 0.4],
+            [-2.0, 9.0, 1.45],
+            [4.0, 8.0, 0.65],
+            [10.0, 15.0, 0.3],
+        ],
+        1.0,
+    )
+    .max(strand(
+        q,
+        &[[-15.0, -8.0, 0.3], [-6.0, -9.0, 0.85], [-2.0, -4.0, 0.2]],
+        1.0,
+    ));
+    let density = upper.max(lower).max(spur).max(interior);
     let cloud = art_noise(0x656a_6563, p);
-    let edge = 20.0 + (a * 2.0 + 0.5).sin() * 2.8 + (a * 3.0 - 1.0).sin() * 1.1;
-    let d = (r - edge + (cloud - 0.5) * 2.0).abs();
-    if d < 0.55 && cloud > 0.27 {
-        Some(if cloud > 0.76 && a < 0.0 {
-            7
-        } else if cloud > 0.70 {
-            6
-        } else if cloud > 0.60 {
-            5
-        } else if cloud > 0.45 {
-            4
-        } else {
-            3
-        })
-    } else if d < 2.3 && cloud > 0.70 {
-        Some(if r < edge { 2 } else { 1 })
-    } else if r < edge - 3.0 && r > edge - 4.1 && cloud > 0.72 && a < -1.0 {
-        Some(2)
-    } else if d < 3.4 && cloud > 0.87 {
-        Some(0)
-    } else {
+    if density < 0.07 || cloud < 0.18 {
         None
+    } else {
+        Some(((density * 0.74 + cloud * 0.4) * 7.0).clamp(0.0, 7.0) as usize)
     }
 }
 
@@ -1248,6 +1284,104 @@ mod tests {
         let stats = render(&mut frame, i);
         (frame.finish(), stats)
     }
+    #[test]
+    fn supernova_ejecta_has_interior_knots_and_multiple_open_sky_exits() {
+        for reduced in [false, true] {
+            let body = ART.nova_shell.body(reduced);
+            let scale = if reduced { 1.0 } else { 0.5 };
+            let mut angular = [false; 48];
+            let mut interior = 0;
+            for (p, _) in body.cells() {
+                let p = p * scale;
+                interior += usize::from((4.0..14.0).contains(&p.length()));
+                if p.length() >= 14.0 {
+                    let bin = (((p.y.atan2(p.x) + TAU).rem_euclid(TAU) / TAU) * 48.0) as usize;
+                    angular[bin.min(47)] = true;
+                }
+            }
+            // Count broad empty angular runs in the actual emitted silhouette,
+            // not path constants. A single cut in a continuous rim is insufficient.
+            let mut open_runs = 0;
+            for i in 0..48 {
+                if angular[(i + 47) % 48] && !angular[i] && !angular[(i + 1) % 48] {
+                    open_runs += 1;
+                }
+            }
+            eprintln!(
+                "Actual ejecta low{reduced}: {interior}/{} interior cells, {open_runs} broad sky exits",
+                body.occupied_count()
+            );
+            assert!(
+                interior * 100 >= body.occupied_count() * 15,
+                "remnant is dominated by its perimeter rather than interior ejecta"
+            );
+            assert!(
+                open_runs >= 3,
+                "remnant still reads as a rim with a single cut"
+            );
+        }
+    }
+
+    #[test]
+    #[ignore = "explicit native remnant proof writer; requires owned absolute output"]
+    fn export_actual_seeded_remnant_packets() {
+        let output = std::path::PathBuf::from(
+            std::env::var_os("REMNANT_PROOF_DIR").expect("explicit owned output"),
+        );
+        assert!(output.is_absolute());
+        std::fs::create_dir_all(&output).unwrap();
+        let seed = 871_238_449;
+        let grid = [-3, 1];
+        let m = motif(seed, grid).unwrap();
+        assert!(matches!(m.kind, MotifKind::Supernova));
+        assert_eq!(m.hash, 1_888_154_543);
+        let camera = m.origin / MOTIF_PARALLAX;
+        let corners = [
+            Vec2::new(-0.5, -0.5),
+            Vec2::new(0.5, -0.5),
+            Vec2::new(0.5, 0.5),
+            Vec2::new(-0.5, 0.5),
+        ];
+        for reduced in [false, true] {
+            for time in [0.0, 18.0] {
+                let scene = SceneInput {
+                    seed,
+                    camera,
+                    reduced,
+                    time,
+                    ..input()
+                };
+                let mut frame = FrameBuilder::new();
+                let mut quota = 8_000;
+                let quads = draw_motif(&mut frame, m, &scene, &mut quota);
+                assert!(quads > 0);
+                assert_eq!(frame.frame().pixel_count, quads);
+                let views: Vec<_> = [0.6, 1.0, 1.6].into_iter().map(|zoom| {
+                    let view = CameraView::new(camera, Vec2::new(256.0, 180.0), zoom).unwrap();
+                    let cells: Vec<_> = frame.frame().batches.iter().flat_map(|b| b.pixels.iter().map(|p| {
+                        let t = b.transforms[p.transform as usize];
+                        serde_json::json!({"local": p.local, "transform": {"a": t.a, "b": t.b},
+                            "corners": corners.map(|c| view.world_to_screen(t.point(Vec2::from_array(p.local) + c)).to_array()),
+                            "rgba": p.color.to_le_bytes(), "material": [t.b[2], t.b[3]]})
+                    })).collect();
+                    serde_json::json!({"zoom": zoom, "cells": cells})
+                }).collect();
+                let packet = serde_json::json!({"seed": seed, "grid": grid, "hash": m.hash,
+                    "camera": camera.to_array(), "origin": m.origin.to_array(), "time": time,
+                    "reduced": reduced, "quads": quads, "transforms": motif_transforms(m.kind),
+                    "scope": "actual native FrameBuilder/CameraView, no GPU execution", "views": views});
+                std::fs::write(
+                    output.join(format!("remnant-low-{reduced}-time-{time}.json")),
+                    serde_json::to_vec(&packet).unwrap(),
+                )
+                .unwrap();
+                eprintln!(
+                    "Actual seeded remnant low{reduced} t{time}: {quads} cells / 2 transforms at {camera:?}"
+                );
+            }
+        }
+    }
+
     #[test]
     fn cosmic_seed_revisit_is_exact_and_changes_only_presentation() {
         let a = draw(input());
