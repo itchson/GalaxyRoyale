@@ -672,3 +672,351 @@ fn actual_diagnostic_belt_defeat_does_not_record_license_or_tutorial_facts() {
     g.acknowledge_license().unwrap();
     assert_eq!(facts(&g), 0);
 }
+
+#[test]
+fn public_combat_scene_cannot_turn_a_license_into_a_fake_departure() {
+    let mut g = fresh("hugo");
+    g.acknowledge_license().unwrap();
+    let before = snapshot(&g);
+    assert_eq!(facts(&g), LICENSE);
+    g.diagnostic("combat");
+    assert_eq!(g.position(), Vec2::new(1600.0, 0.0));
+    assert!(g.diagnostic_scene && !g.boss_qa_scene);
+    let first = g.world.query::<(Entity, &Brain)>().iter().next().unwrap().0;
+    let initial = g.world.get::<&Motion>(first).unwrap().position;
+    advance(&mut g, &InputFrame::default(), 30);
+    assert!(g.time > 0.0);
+    assert_ne!(g.world.get::<&Motion>(first).unwrap().position, initial);
+    assert_eq!(facts(&g), LICENSE);
+    assert_eq!(g.hud().onboarding.unwrap().stage, 1);
+    assert_eq!(snapshot(&g), before);
+}
+
+#[test]
+fn every_public_diagnostic_scene_tick_is_progression_isolated() {
+    let mut commands: Vec<String> = [
+        "belt",
+        "combat",
+        "damage",
+        "site",
+        "tournament",
+        "stress",
+        "die",
+        "biome-riveter",
+        "biome-mote",
+        "boss-dart",
+        "boss-bastion",
+        "boss-coil",
+        "warp 950 0",
+        "warp 0 0",
+    ]
+    .into_iter()
+    .map(str::to_owned)
+    .collect();
+    for family in ["dart", "bastion", "coil"] {
+        for generation in 1..=5 {
+            commands.push(format!("boss-{family}-{generation}"));
+        }
+    }
+    for index in 0..8 {
+        commands.push(format!("champion-{index}"));
+    }
+    for command in commands {
+        let mut g = fresh("hugo");
+        g.acknowledge_license().unwrap();
+        g.profile.currency = [7, 8, 9];
+        g.profile.campaign.ship_xp[0] = 60;
+        g.profile.campaign.last_run = Some(RunSummary {
+            time: 7.0,
+            enemies: 2,
+            xp_gained: 10,
+            ..Default::default()
+        });
+        let before = snapshot(&g);
+        g.diagnostic(&command);
+        advance(&mut g, &InputFrame::default(), 3);
+        assert_eq!(snapshot(&g), before, "{command}");
+        assert_eq!(facts(&g), LICENSE, "{command}");
+    }
+}
+
+// A center-crossing real swept shot tolerates the ordinary scene actor moving
+// during the tick. The existing first-cell stationary helper is inappropriate
+// for this live combat setup; no kill/damage/reward helper is called here.
+fn diagnostic_projectile_defeat(g: &mut Game, entity: Entity) {
+    let local = g
+        .world
+        .get::<&PixelBody>(entity)
+        .unwrap()
+        .cells()
+        .min_by(|(a, _), (b, _)| a.length_squared().total_cmp(&b.length_squared()))
+        .unwrap()
+        .0;
+    let motion = *g.world.get::<&Motion>(entity).unwrap();
+    let actor = *g.world.get::<&Actor>(entity).unwrap();
+    let contact = actor_transform(motion, actor).point(local);
+    g.spawn_bullet(contact - Vec2::X * 8.0, Vec2::X * 960.0, 1000.0, true, 1);
+    g.take_events();
+    g.tick(&InputFrame::default(), DT);
+    assert!(!g.world.contains(entity));
+    assert!(
+        g.take_events()
+            .iter()
+            .any(|event| event.kind == "explosion")
+    );
+}
+
+#[test]
+fn public_combat_and_belt_real_projectile_defeats_do_not_earn_any_progress() {
+    let mut g = fresh("hugo");
+    g.acknowledge_license().unwrap();
+    // Declared near-promotion checkpoint proves a real defeat cannot reserve G1.
+    g.profile.kills[0] = 23;
+    g.profile.currency = [7, 8, 9];
+    g.profile.campaign.ship_xp[0] = 60;
+    let before = snapshot(&g);
+    g.diagnostic("combat");
+    let enemy = g
+        .world
+        .query::<(Entity, &Brain)>()
+        .iter()
+        .find(|(_, brain)| brain.family == 0)
+        .unwrap()
+        .0;
+    diagnostic_projectile_defeat(&mut g, enemy);
+    assert_eq!(snapshot(&g), before);
+    assert!(!g.profile.pending[0]);
+    // Authored pickups are processed by the same real tick/collection path.
+    g.spawn_loot(g.position(), 0, 3);
+    g.spawn_material_loot(g.position(), 1, 2);
+    advance(&mut g, &InputFrame::default(), 2);
+    assert_eq!(snapshot(&g), before);
+    assert_eq!(g.world.query::<&Loot>().iter().count(), 0);
+    g.diagnostic("belt");
+    let rock = g
+        .world
+        .query::<(Entity, &AsteroidBirth)>()
+        .iter()
+        .find(|(_, birth)| birth.source == AsteroidSource::HavenBelt)
+        .unwrap()
+        .0;
+    diagnostic_projectile_defeat(&mut g, rock);
+    assert_eq!(snapshot(&g), before);
+    assert_eq!(facts(&g), LICENSE);
+}
+
+#[test]
+fn public_site_and_tournament_fixtures_cannot_discover_or_start_rewarded_trials() {
+    let mut g = fresh("hugo");
+    g.acknowledge_license().unwrap();
+    let before = snapshot(&g);
+    g.diagnostic("site");
+    assert!(g.profile.discoveries.is_empty());
+    assert!(g.interact_site().is_err());
+    advance(&mut g, &InputFrame::default(), 2);
+    assert_eq!(snapshot(&g), before);
+    let index = 0;
+    let site = campaign::arena(g.profile.seed, index).unwrap();
+    g.diagnostic(&format!("warp {} {}", site.position[0], site.position[1]));
+    assert!(g.start_champion(index).is_err());
+    assert!(!g.hud().campaign.arena.unwrap().can_challenge);
+    assert_eq!(snapshot(&g), before);
+    g.diagnostic("tournament");
+    assert!(g.start_tournament().is_err());
+    assert_eq!(snapshot(&g), before);
+}
+
+#[test]
+fn a_physical_fixture_return_to_haven_cannot_end_isolation_or_bank_materials() {
+    let mut g = fresh("hugo");
+    g.acknowledge_license().unwrap();
+    g.diagnostic("combat");
+    // Declared carried-material fixture tests the banking boundary independently.
+    g.profile.campaign.cargo_materials[0] = 2;
+    g.move_player(Vec2::ZERO);
+    let before = snapshot(&g);
+    g.tick(&InputFrame::default(), DT);
+    assert!(g.diagnostic_scene);
+    assert_eq!(snapshot(&g), before);
+    assert_eq!(g.profile.campaign.stored_materials, [0; 5]);
+    assert_eq!(facts(&g), LICENSE);
+}
+
+#[test]
+fn explicit_normal_reset_restores_real_departure_and_keeps_saved_assets() {
+    for exit in ["home", "dock", "reset"] {
+        let mut g = fresh("hugo");
+        g.acknowledge_license().unwrap();
+        g.profile.currency = [7, 8, 9];
+        g.profile.campaign.ship_xp[0] = 60;
+        g.profile.campaign.stored_materials = [2, 3, 4, 5, 6];
+        let before = snapshot(&g);
+        g.diagnostic("combat");
+        g.tick(&InputFrame::default(), DT);
+        if exit == "reset" {
+            g.reset_to_dock();
+        } else {
+            g.diagnostic(exit);
+        }
+        assert!(!g.diagnostic_scene && !g.boss_qa_scene);
+        assert_eq!(snapshot(&g), before);
+        advance(
+            &mut g,
+            &InputFrame {
+                joystick: Some([1.0, 0.0]),
+                ..Default::default()
+            },
+            200,
+        );
+        assert!(g.position().length() > SAFE_RADIUS);
+        assert_eq!(facts(&g), LICENSE | DEPARTED);
+        assert_eq!(g.profile.currency, [7, 8, 9]);
+        assert_eq!(g.profile.campaign.ship_xp[0], 60);
+        assert_eq!(g.profile.campaign.stored_materials, [2, 3, 4, 5, 6]);
+    }
+}
+
+#[test]
+fn invalid_public_diagnostics_do_not_abandon_a_real_run_or_change_isolation() {
+    let mut g = fresh("hugo");
+    g.acknowledge_license().unwrap();
+    advance(
+        &mut g,
+        &InputFrame {
+            joystick: Some([1.0, 0.0]),
+            ..Default::default()
+        },
+        200,
+    );
+    g.spawn_material_loot(g.position(), 1, 2);
+    g.tick(&InputFrame::default(), DT);
+    assert!(g.run.is_some());
+    assert_eq!(g.profile.campaign.cargo_materials[0], 2);
+    let before = snapshot(&g);
+    let position = g.position();
+    let run = serde_json::to_value(&g.run).unwrap();
+    let entities = g.world.len();
+    g.take_events();
+    for command in [
+        "unknown",
+        "warp NaN 0",
+        "warp 1000001 0",
+        "boss-dart-6",
+        "champion-8",
+        "warp 1 2 3",
+    ] {
+        g.diagnostic(command);
+        assert!(!g.diagnostic_scene, "{command}");
+        assert_eq!(snapshot(&g), before, "{command}");
+        assert_eq!(g.position(), position, "{command}");
+        assert_eq!(serde_json::to_value(&g.run).unwrap(), run, "{command}");
+        assert_eq!(g.world.len(), entities, "{command}");
+        assert!(g.take_events().is_empty(), "{command}");
+    }
+    g.diagnostic("combat");
+    let before = snapshot(&g);
+    for command in ["unknown", "warp NaN 0", "champion-8"] {
+        g.diagnostic(command);
+        assert!(g.diagnostic_scene);
+        assert_eq!(snapshot(&g), before);
+    }
+}
+
+#[test]
+fn diagnostic_crafting_and_equipping_do_not_record_tutorial_facts() {
+    let mut g = fresh("hugo");
+    g.acknowledge_license().unwrap();
+    g.profile.currency[0] = 3;
+    g.profile.campaign.stored_materials[0] = 2;
+    g.profile.campaign.abilities[0].blueprint = true;
+    g.diagnostic("warp 0 0");
+    // Real, fully paid inventory actions stay valid; only earned tutorial facts
+    // are suppressed. No free ability/currency is injected by a QA command.
+    g.craft_ability("pulse-lens").unwrap();
+    g.equip_ability(0, Some("pulse-lens")).unwrap();
+    assert_eq!(g.profile.currency[0], 0);
+    assert_eq!(g.profile.campaign.stored_materials[0], 0);
+    assert_eq!(facts(&g), LICENSE);
+}
+
+#[test]
+fn public_fixture_reset_does_not_deliver_a_pending_courier_packet() {
+    for command in [
+        "combat",
+        "belt",
+        "damage",
+        "site",
+        "tournament",
+        "stress",
+        "boss-dart",
+        "champion-0",
+        "biome-mote",
+        "warp 950 0",
+        "die",
+    ] {
+        let mut g = fresh("hugo");
+        g.acknowledge_license().unwrap();
+        let site = regions::sites_near(g.profile.seed, Vec2::ZERO)
+            .into_iter()
+            .find(|site| site.event == "courier")
+            .unwrap();
+        g.move_player(Vec2::from_array(site.position));
+        g.interact_site().unwrap();
+        assert_eq!(g.profile.quests[0].progress, 0);
+        let before = snapshot(&g);
+        g.diagnostic(command);
+        g.tick(&InputFrame::default(), DT);
+        assert_eq!(snapshot(&g), before, "{command}");
+        assert_eq!(g.profile.quests[0].progress, 0, "{command}");
+    }
+}
+
+#[test]
+fn diagnostic_setup_forfeits_a_real_league_match_without_awarding_a_fixture_win() {
+    let mut g = fresh("hugo");
+    g.acknowledge_license().unwrap();
+    // Explicit earned-qualification checkpoint, not granted by a scene command.
+    g.profile.campaign.patches = [true; 8];
+    g.profile.campaign.blueprints = [true; 8];
+    g.profile.currency = [7, 8, 9];
+    g.profile.campaign.ship_xp[0] = 60;
+    g.move_player(Vec2::from_array(
+        campaign::tournament_site(g.profile.seed).position,
+    ));
+    g.start_tournament().unwrap();
+    assert!(!g.arena.unwrap().diagnostic);
+    g.diagnostic("combat");
+    assert_eq!(g.profile.campaign.royale_results, [2, 0, 0, 0, 0, 0, 0, 0]);
+    assert!(!g.profile.campaign.victory_claimed);
+    let before = snapshot(&g);
+    g.tick(&InputFrame::default(), DT);
+    assert_eq!(snapshot(&g), before);
+    g.reset_to_dock();
+    assert_eq!(snapshot(&g), before);
+    assert_eq!(g.profile.currency, [7, 8, 9]);
+    assert_eq!(g.profile.campaign.ship_xp[0], 60);
+}
+
+#[test]
+fn diagnostic_flight_refreshes_canonical_site_geometry_without_discovering_it() {
+    let mut g = fresh("hugo");
+    g.acknowledge_license().unwrap();
+    g.diagnostic("combat");
+    g.move_player(Vec2::new(regions::REGION_SIZE - 0.2, 0.0));
+    g.world.get::<&mut Motion>(g.player).unwrap().velocity = Vec2::X * 100.0;
+    let before = snapshot(&g);
+    advance(&mut g, &InputFrame::default(), 2);
+    assert!(g.position().x > regions::REGION_SIZE);
+    assert_eq!(g.site_grid, region_grid(g.position()));
+    assert_eq!(
+        g.nearby_sites
+            .iter()
+            .map(|site| site.id.clone())
+            .collect::<Vec<_>>(),
+        regions::sites_near(g.profile.seed, g.position())
+            .iter()
+            .map(|site| site.id.clone())
+            .collect::<Vec<_>>()
+    );
+    assert_eq!(snapshot(&g), before);
+}

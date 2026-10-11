@@ -41,6 +41,9 @@ impl Game {
         }
     }
     pub(super) fn bank_cargo(&mut self) {
+        if !self.progression_enabled() {
+            return;
+        }
         let mut changed = false;
         let mut tier_one_banked = false;
         for tier in 0..5 {
@@ -59,6 +62,9 @@ impl Game {
         }
     }
     pub(super) fn award_xp(&mut self, amount: u32) {
+        if !self.progression_enabled() {
+            return;
+        }
         let selected = self.profile.campaign.selected_ship as usize;
         let before = self.profile.campaign.ship_xp[selected];
         self.profile.campaign.ship_xp[selected] = before.saturating_add(amount);
@@ -75,6 +81,9 @@ impl Game {
         }
     }
     pub(super) fn credit_points(&mut self, category: usize, amount: u32) {
+        if !self.progression_enabled() {
+            return;
+        }
         let before = self.profile.currency[category];
         self.profile.currency[category] = before.saturating_add(amount);
         let gained = self.profile.currency[category] - before;
@@ -87,7 +96,7 @@ impl Game {
         }
     }
     pub(super) fn record_kill(&mut self, kind: Kind) {
-        if self.position().length() <= SAFE_RADIUS {
+        if !self.progression_enabled() || self.position().length() <= SAFE_RADIUS {
             return;
         }
         let run = self.run.get_or_insert_with(RunSummary::default);
@@ -98,6 +107,9 @@ impl Game {
         }
     }
     pub fn start_champion(&mut self, index: usize) -> Result<(), String> {
+        if !self.progression_enabled() {
+            return Err("Return to Haven to leave the isolated QA scene first.".into());
+        }
         if self.arena.is_some() {
             return Err("Finish or retreat from the current trial first.".into());
         }
@@ -113,6 +125,9 @@ impl Game {
     }
 
     pub fn start_tournament(&mut self) -> Result<(), String> {
+        if !self.progression_enabled() {
+            return Err("Return to Haven to leave the isolated QA scene first.".into());
+        }
         if self.arena.is_some() {
             return Err("A match is already in progress.".into());
         }
@@ -714,7 +729,8 @@ impl Game {
                     "available"
                 }
                 .into(),
-                can_challenge: self.arena.is_none()
+                can_challenge: self.progression_enabled()
+                    && self.arena.is_none()
                     && !c.patch
                     && self.position().distance(Vec2::from_array(c.position)) <= 180.0,
             });

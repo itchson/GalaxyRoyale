@@ -651,8 +651,7 @@ impl Game {
             && self.run.is_none()
             && self.expedition == 0.0
             && self.position().length() <= SAFE_RADIUS
-            && !self.boss_qa_scene
-            && !self.stress_mode
+            && self.progression_enabled()
             && self.material_loss == [0; 5]
     }
     pub fn acknowledge_license(&mut self) -> Result<(), String> {
@@ -663,7 +662,7 @@ impl Game {
         Ok(())
     }
     pub(super) fn onboarding_fact(&mut self, flag: u8) {
-        if self.boss_qa_scene || self.stress_mode || self.arena.is_some_and(|a| a.diagnostic) {
+        if !self.progression_enabled() {
             return;
         }
         if let Some(progress) = &mut self.profile.onboarding
@@ -675,11 +674,7 @@ impl Game {
         }
     }
     pub(super) fn discover_basic(&mut self, category: usize) {
-        if self.profile.identity.is_none()
-            || category >= 3
-            || self.boss_qa_scene
-            || self.stress_mode
-        {
+        if self.profile.identity.is_none() || category >= 3 || !self.progression_enabled() {
             return;
         }
         if let Some((index, _)) = abilities::ABILITIES[..3]

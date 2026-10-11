@@ -575,6 +575,8 @@ pub struct Game {
     arena: Option<ArenaEncounter>,
     run: Option<RunSummary>,
     boss_qa_scene: bool,
+    // Transient progression isolation; unlike boss_qa_scene, this never selects AI.
+    diagnostic_scene: bool,
     material_loss: [u32; 5],
     material_loss_reason: String,
 }
@@ -689,6 +691,7 @@ impl Game {
             arena: None,
             run: None,
             boss_qa_scene: false,
+            diagnostic_scene: false,
             material_loss,
             material_loss_reason: if ship_progression::total(material_loss) > 0 {
                 "reload".into()
@@ -937,6 +940,13 @@ impl Game {
         }
     }
 
+    fn progression_enabled(&self) -> bool {
+        !self.diagnostic_scene
+            && !self.boss_qa_scene
+            && !self.stress_mode
+            && !self.arena.is_some_and(|a| a.diagnostic)
+    }
+
     fn changed(&mut self) {
         self.profile.revision = self.profile.revision.saturating_add(1);
     }
@@ -1025,10 +1035,12 @@ impl Game {
     }
 
     fn update_exploration(&mut self) {
-        if self.boss_qa_scene {
+        // Canonical sanctuary geometry still follows live fixture movement;
+        // only persistent exploration/mission facts are suppressed.
+        self.refresh_sites();
+        if !self.progression_enabled() {
             return;
         }
-        self.refresh_sites();
         let mut changed = false;
         if let Some(id) = self.current_site().map(|site| site.id.clone())
             && self.profile.discoveries.len() < MAX_ARCHIVE
@@ -1070,7 +1082,7 @@ impl Game {
 
     /// Accept an offered mission or claim its once-only reward at the source.
     pub fn interact_site(&mut self) -> Result<(), String> {
-        if self.boss_qa_scene {
+        if !self.progression_enabled() {
             return Err("Site rewards are disabled in isolated QA scenes.".into());
         }
         self.update_exploration();
@@ -1179,7 +1191,7 @@ impl Game {
         self.update_exploration();
         let safe = self.safe();
         let haven = position.length_squared() <= SAFE_RADIUS * SAFE_RADIUS;
-        if !self.diagnostic_boss_active() {
+        if self.progression_enabled() {
             self.track_run(dt);
         }
         if safe {
@@ -2385,6 +2397,13 @@ impl Game {
             self.finish_arena(true, true);
             return;
         }
+        if !self.progression_enabled() {
+            self.burst(position, 80, rgba(255, 180, 128, 255), 100.0);
+            self.event("explosion", position, 1.0);
+            self.shake = self.shake.max(5.0);
+            self.remove_enemy(entity, true);
+            return;
+        }
         self.record_kill(kind);
         if let Kind::Enemy(family) | Kind::Boss(family) = kind {
             for quest in &mut self.profile.quests {
@@ -2582,6 +2601,10 @@ impl Game {
             }
         }
         for (entity, category, material_tier, amount, position) in collect {
+            if !self.progression_enabled() {
+                let _ = self.world.despawn(entity);
+                continue;
+            }
             if category == 3 {
                 let available = 16u32.saturating_sub(ship_progression::total(
                     self.profile.campaign.cargo_materials,
@@ -3081,6 +3104,9 @@ impl Game {
         self.wake.clear();
         self.update_exploration();
         self.enter_dock();
+        // Keep QA isolation through teleport/cleanup. The next real flight is
+        // normal; merely crossing Haven during a fixture does not end isolation.
+        self.diagnostic_scene = false;
     }
 
     pub fn purchase(&mut self, id: &str) -> Result<(), String> {
@@ -3706,8 +3732,25 @@ impl Game {
         );
     }
 
-    /// Explicit deterministic QA scenes. This never awards inventory or upgrades.
+    /// Explicit deterministic QA scenes. Their ticks never earn progression;
+    /// home/reset ends this transient isolation. Unknown commands are no-ops.
     pub fn diagnostic(&mut self, command: &str) {
+        if matches!(command, "dock" | "home") {
+            self.reset_to_dock();
+            return;
+        }
+        let previous = self.diagnostic_scene;
+        // Cover reset's immediate exploration/banking before a scene teleports.
+        // Invalid commands restore only this transient bit and mutate no run.
+        self.diagnostic_scene = true;
+        self.diagnostic_scene = if self.diagnostic_inner(command) {
+            true
+        } else {
+            previous
+        };
+    }
+
+    fn diagnostic_inner(&mut self, command: &str) -> bool {
         if let Some(destination) = command.strip_prefix("warp ") {
             let mut coordinates = destination.split_whitespace();
             let x = coordinates
@@ -3721,28 +3764,34 @@ impl Game {
                 if position.is_finite() && position.abs().max_element() <= WORLD_LIMIT {
                     self.reset_to_dock();
                     self.boss_qa_scene = true;
+                    self.diagnostic_scene = true;
                     self.move_player(position);
                     self.update_chunks(position);
+                    return true;
                 }
             }
-            return;
+            return false;
         }
         if self.mote_diagnostic(command) {
-            return;
+            self.diagnostic_scene = true;
+            return true;
         }
         if self.biome_enemy_diagnostic(command) {
-            return;
+            self.diagnostic_scene = true;
+            return true;
         }
         if self.boss_diagnostic(command) {
-            return;
+            self.diagnostic_scene = true;
+            return true;
         }
         if self.campaign_diagnostic(command) {
-            return;
+            self.diagnostic_scene = true;
+            return true;
         }
         match command {
-            "dock" | "home" => self.reset_to_dock(),
             "site" => {
                 self.reset_to_dock();
+                self.diagnostic_scene = true;
                 let site = regions::sites_near(self.profile.seed, Vec2::ZERO)
                     .into_iter()
                     .min_by(|a, b| {
@@ -3757,22 +3806,26 @@ impl Game {
             }
             "belt" => {
                 self.reset_to_dock();
+                self.diagnostic_scene = true;
                 self.move_player(Vec2::new(950.0, 0.0));
                 self.update_chunks(self.position());
             }
             "die" => {
+                self.diagnostic_scene = true;
                 if let Ok(mut a) = self.world.get::<&mut Actor>(self.player) {
                     a.health = 0.0;
                 }
             }
             "damage" => {
                 self.reset_to_dock();
+                self.diagnostic_scene = true;
                 self.move_player(Vec2::new(900.0, 0.0));
                 self.invulnerability = 0.0;
                 self.hurt_player(32.0, Some(Vec2::new(-3.0, 2.0)));
             }
             "combat" => {
                 self.reset_to_dock();
+                self.diagnostic_scene = true;
                 self.move_player(Vec2::new(1600.0, 0.0));
                 for family in 0..3 {
                     for n in 0..3 {
@@ -3788,6 +3841,7 @@ impl Game {
             }
             "stress" => {
                 self.reset_to_dock();
+                self.diagnostic_scene = true;
                 self.move_player(Vec2::new(2400.0, 0.0));
                 self.stress_mode = true;
                 self.invulnerability = 120.0;
@@ -3825,8 +3879,9 @@ impl Game {
                     ));
                 }
             }
-            _ => {}
+            _ => return false,
         }
+        true
     }
     fn move_player(&mut self, position: Vec2) {
         if let Ok(mut m) = self.world.get::<&mut Motion>(self.player) {
@@ -4459,8 +4514,11 @@ mod tests {
         let rewards = reloaded.profile.currency;
         assert!(reloaded.interact_site().is_err());
         assert_eq!(reloaded.profile.currency, rewards);
-        // The same retained-cargo rule applies to a real death return.
-        g.diagnostic("die");
+        // The retained courier packet survives an actual ordinary lethal hit.
+        // Public QA death is intentionally unable to complete delivery progress.
+        g.move_player(Vec2::from_array(site.position) + Vec2::X * (site.radius + 100.0));
+        g.invulnerability = 0.0;
+        g.hurt_player(1000.0, None);
         g.tick(&InputFrame::default(), 1.0 / 60.0);
         assert_eq!(g.position(), Vec2::ZERO);
         assert_eq!(g.profile.quests[0].progress, 1);
@@ -4513,8 +4571,11 @@ mod tests {
     #[test]
     fn site_sanctuary_blocks_combat_without_granting_haven_services() {
         let mut g = Game::new(Profile::default());
-        g.diagnostic("site");
-        let site = g.current_site().unwrap().clone();
+        // Authored normal-flight placement; public scene setup no longer earns
+        // the discovery this ordinary sanctuary regression expects.
+        let site = regions::sites_near(g.profile.seed, Vec2::ZERO).remove(0);
+        g.move_player(Vec2::from_array(site.position));
+        g.update_exploration();
         let center = Vec2::from_array(site.position);
         assert!(g.hud().safe && !g.hud().dock);
         g.world.get::<&mut Actor>(g.player).unwrap().health = 60.0;
