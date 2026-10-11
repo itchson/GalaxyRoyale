@@ -19,7 +19,11 @@ fn advance(game: &mut Game, input: &InputFrame, count: usize) {
 #[test]
 fn creation_validates_all_27_identities_and_grants_exactly_one_main_starter() {
     let mut callsigns = std::collections::HashSet::new();
-    for (kind, prefix) in [("dora", 'O'), ("doro", 'A'), ("talo", 'T')] {
+    for (kind, prefix, gender) in [
+        ("dora", 'A', "Female"),
+        ("doro", 'O', "Male"),
+        ("talo", 'T', "Neutral"),
+    ] {
         for corp in ["pan", "renko", "hugo"] {
             for sub in ["pan", "renko", "hugo"] {
                 let p = create_profile(kind, corp, sub, "0123456789ABCDEF").unwrap();
@@ -48,6 +52,7 @@ fn creation_validates_all_27_identities_and_grants_exactly_one_main_starter() {
                         .all(|l| *l == campaign::ShipLoadout::default())
                 );
                 let h = hud(&p).unwrap();
+                assert_eq!(h.gender, gender);
                 assert_eq!(
                     h.designation,
                     format!(
@@ -93,7 +98,7 @@ fn creation_validates_all_27_identities_and_grants_exactly_one_main_starter() {
 
 #[test]
 fn derived_callsigns_preserve_all_saved_identity_and_progression_on_hud_and_reload() {
-    for (kind, prefix) in [("dora", 'O'), ("doro", 'A'), ("talo", 'T')] {
+    for (kind, prefix) in [("dora", 'A'), ("doro", 'O'), ("talo", 'T')] {
         for corp in ["pan", "renko", "hugo"] {
             for sub in ["pan", "renko", "hugo"] {
                 let mut p = create_profile(kind, corp, sub, "AbCdEf0123456789").unwrap();

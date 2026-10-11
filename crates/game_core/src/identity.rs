@@ -22,8 +22,8 @@ impl KikaiKind {
     /// Display-only callsign prefix; persisted kind and full designation stay intact.
     pub fn callsign_prefix(self) -> char {
         match self {
-            Self::Dora => 'O',
-            Self::Doro => 'A',
+            Self::Dora => 'A',
+            Self::Doro => 'O',
             Self::Talo => 'T',
         }
     }
