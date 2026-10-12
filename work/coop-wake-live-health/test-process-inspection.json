@@ -1,0 +1,9 @@
+{
+  "scope": "Read-only check of returned final test processes; no machine-wide no-listener claim.",
+  "testedProcessesListening": [],
+  "testedProcessIds": [
+    42652,
+    43308
+  ],
+  "observedAt": "2026-10-12T22:47:37.4771748Z"
+}

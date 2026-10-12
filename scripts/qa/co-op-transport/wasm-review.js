@@ -330,18 +330,19 @@ async function action(label, fn) {
     paint();
   }
 }
-async function verify(timeoutMs = 75_000) {
+async function verify(timeoutMs = 75_000, record = true) {
   [state.host, state.guest] = await Promise.all([
     send("host", "verify", {}, timeoutMs),
     send("guest", "verify", {}, timeoutMs),
   ]);
-  check(
-    "saves-unchanged",
+  const unchanged = Boolean(
     state.host.profile_equal &&
-      state.guest.profile_equal &&
-      state.host.persisted_equal &&
-      state.guest.persisted_equal,
+    state.guest.profile_equal &&
+    state.host.persisted_equal &&
+    state.guest.persisted_equal,
   );
+  if (record) check("saves-unchanged", unchanged);
+  return unchanged;
 }
 // Transport/admission values are derived in the child from the actual controller, not inferred by the parent.
 async function approvePendingJoin(baseline) {
@@ -813,6 +814,34 @@ async function fifthShot() {
   }
 }
 $("fifth").onclick = () => action("RENKO native fifth-shot", fifthShot);
+function wakeHealth(guestMode = "guest") {
+  if (
+    state.host?.mode !== "host" ||
+    state.host.phase !== "hosting" ||
+    state.guest?.mode !== guestMode ||
+    state.guest.phase !== (guestMode === "guest" ? "connected" : "ended") ||
+    [state.host, state.guest].some(
+      (c) =>
+        c.init_stage !== "ready" ||
+        c.failure_code !== null ||
+        !c.wake ||
+        c.wake.state === "inconclusive" ||
+        c.wake.reason !== null,
+    )
+  )
+    throw new Error("wake_context");
+}
+async function cleanupWakeFailure() {
+  // A command timeout is not cancellation. Cleanup has its own reply budget;
+  // unresolved native restore remains a failed live gate.
+  try {
+    [state.host, state.guest] = await Promise.all([
+      send("host", "dispose", {}, 20_000),
+      send("guest", "dispose", {}, 20_000),
+    ]);
+    disposed = true;
+  } catch {}
+}
 async function wakeRound(kind) {
   requireVisibleClients();
   if (
@@ -826,6 +855,7 @@ async function wakeRound(kind) {
   driveActive = true;
   let failure;
   try {
+    wakeHealth();
     await Promise.all([
       send("host", "wake-" + kind, {}, 35_000),
       send("guest", "wake-" + kind, {}, 35_000),
@@ -834,22 +864,26 @@ async function wakeRound(kind) {
     const predicates = {
       drive: (v) =>
         v?.captured_host && v.captured_guest && v.native_render_frames > 0,
-      stop: (v) => v?.state === "expired" && v.expired,
-      retreat: (v) => v?.state === "retreated" && v.retreated,
+      stop: (v) =>
+        v?.state === "expired" && v.expired && v.captured_points === 0,
+      retreat: (v) =>
+        v?.state === "retreated" && v.retreated && v.captured_points === 0,
       "reduced-motion": (v) => v?.reduced_motion === true,
     };
     await until(() => {
       guardDriveVisibility();
-      if (
-        [state.host, state.guest].some(
-          (c) => c.failure_code !== null || c.wake?.state === "inconclusive",
-        )
-      )
-        throw new Error("wake_context");
+      wakeHealth();
       return [state.host, state.guest].every((c) => predicates[kind](c.wake));
     }, 15_000);
-    await verify(5_000);
+    wakeHealth();
+    if (![state.host, state.guest].every((c) => predicates[kind](c.wake)))
+      throw new Error("wake_context");
+    const unchanged = await verify(5_000, false);
     guardDriveVisibility();
+    wakeHealth();
+    if (![state.host, state.guest].every((c) => predicates[kind](c.wake)))
+      throw new Error("wake_context");
+    check("saves-unchanged", unchanged);
     check(
       {
         drive: "wake-native-owners",
@@ -863,17 +897,7 @@ async function wakeRound(kind) {
     failure = error;
   } finally {
     driveActive = false;
-    if (failure) {
-      // A command timeout is not cancellation. Disposal is separately bounded;
-      // an unresolved native restore stays a failed live gate.
-      try {
-        [state.host, state.guest] = await Promise.all([
-          send("host", "dispose", {}, 20_000),
-          send("guest", "dispose", {}, 20_000),
-        ]);
-        disposed = true;
-      } catch {}
-    }
+    if (failure) await cleanupWakeFailure();
   }
   if (failure) throw failure;
 }
@@ -898,8 +922,39 @@ $("end").onclick = () =>
     await verify();
   });
 $("rejoin").onclick = () => action("New session", restartSession);
+async function wakeLeave() {
+  try {
+    wakeHealth();
+    state.guest = await send("guest", "leave", {}, 20_000);
+    wakeHealth("solo");
+    const complete = () =>
+      state.guest.created === state.guest.closed &&
+      state.guest.requests === 0 &&
+      state.guest.timers === 0 &&
+      state.host.wake.removed_owner === true &&
+      state.guest.wake.local_view_ended === true;
+    await until(() => {
+      wakeHealth("solo");
+      return complete();
+    }, 15_000);
+    wakeHealth("solo");
+    if (!complete()) throw new Error("wake_context");
+    const unchanged = await verify(5_000, false);
+    wakeHealth("solo");
+    if (!complete()) throw new Error("wake_context");
+    // Record this operation only after its final current-health/restore read.
+    // Checks from genuinely completed earlier operations remain untouched.
+    check("saves-unchanged", unchanged);
+    check("guest-leave-restored", true);
+    check("wake-owner-removal", true);
+  } catch (error) {
+    await cleanupWakeFailure();
+    throw error;
+  }
+}
 $("leave").onclick = () =>
   action("Guest leave", async () => {
+    if (scenario === "configured-ion-wake-r1-e1") return wakeLeave();
     await send("guest", "leave");
     await until(
       () =>
@@ -909,15 +964,6 @@ $("leave").onclick = () =>
         state.guest.timers === 0,
     );
     check("guest-leave-restored", true);
-    if (scenario === "configured-ion-wake-r1-e1") {
-      await until(
-        () =>
-          state.host.wake?.removed_owner === true &&
-          state.guest.wake?.local_view_ended === true,
-        15_000,
-      );
-      check("wake-owner-removal", true);
-    }
     await verify();
   });
 $("verify").onclick = () => action("Read durable saves", verify);

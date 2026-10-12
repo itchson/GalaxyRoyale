@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "scope": "Actual QA source-function/API-boundary checks only; no native faults, browser/RTC execution or rendering acceptance.",
+  "baseline": [
+    {"command": "node work/coop-wake-live-health/final-health-reproduction.mjs", "log": "baseline-final-health.log", "actual_exit": 1, "expected": "frozen function resolves/new pass, then rejection assertion fails"},
+    {"command": "node work/coop-wake-live-health/leave-health-reproduction.mjs", "log": "baseline-leave-health.log", "actual_exit": 1, "expected": "frozen handler resolves/new passes, then rejection assertion fails"}
+  ],
+  "excluded_from_functional_reproduction": "reviewer-*-import-failure.* retain the original wrong import setup failures before function evaluation.",
+  "final_checks": [
+    {"command": "node --experimental-transform-types --test scripts/test/coop-wake-live-health-qa.test.mjs scripts/test/coop-wake-live-qa.test.mjs scripts/test/coop-transport-fifth-qa.test.mjs scripts/test/coop-private-room-provenance-qa.test.mjs", "log": "tests-final.log", "exit": 0, "pass": 48, "fail": 0, "cases": {"new_health": 11, "inherited_configured": 18, "fifth": 10, "provenance": 9}},
+    {"command": "node --experimental-transform-types --test --test-name-pattern='^(Actual (initialization|client|rejoin|approval|child|New|Drive|localSpec|commit)|WASM report|Owned reports|WASM allowlist)' scripts/test/coop-transport-wasm-qa.test.mjs", "log": "consumers-final.log", "exit": 0, "pass": 16, "fail": 0, "exclusion": "Supplied-WASM HTTP/listener and unrelated normal-stage preparation cases"},
+    {"command": "node --check scripts/qa/co-op-transport/wasm-review.js", "log": "syntax.log", "exit": 0},
+    {"command": "node node_modules/prettier/bin/prettier.cjs --check scripts/qa/co-op-transport/wasm-review.js scripts/test/coop-wake-live-qa.test.mjs scripts/test/coop-wake-live-health-qa.test.mjs", "log": "format-check.log", "exit": 0},
+    {"command": "node node_modules/typescript/bin/tsc --noEmit", "log": "typecheck.log", "exit": 0, "note": "Unchanged TypeScript inputs; does not check QA JS or build native/WASM."},
+    {"command": "git diff --check", "log": "diff-check.log", "exit": 0}
+  ],
+  "first_amended_check": {"log": "tests-first.log", "exit": 0, "pass": 28, "note": "10 new plus18 inherited before adding ordinary-handler comparison"},
+  "author_live_work": {"listeners": 0, "normal_builds": 0, "native_reruns": 0, "browser_runs": 0, "rtc_runs": 0},
+  "remaining": ["independent follow-through", "Root integration and fresh strict stage", "real normal-WASM/RTC/canvas/lifecycle/save observations for both renderers", "human visual/physical acceptance"]
+}

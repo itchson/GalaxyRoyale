@@ -1,0 +1,34 @@
+# Configured Wake helper final-health amendment
+
+Branch `codex/coop-wake-live-health` starts from immutable `1f28378871406383435f7ba103436d58026968d3`. The original `codex/coop-wake-live-qa` ref, its source/evidence and all earlier native/browser/fixture refs remain unchanged. The actual freeze commit is supplied in the Git handoff message. Ownership is limited to the QA parent helper, matching tests and this work evidence. No production runtime, native, bridge, renderer, Main, audio, shared manifest or fixture Profile is edited.
+
+The independent review required two corrections: an inconclusive/retired guest during awaited final verification could produce a new passing Wake phase; a failed Guest-leave reply could produce new restore/removal passes from historical teardown facts. The sealed reviewer report is copied as `reviewer-REVIEW.md`, SHA256 `b8586f538190b0b97744944354a66d2a7c10a8a2b5beff3453fa899d989c3169`; reviewer MANIFEST SHA256 `5f06128a749b1911fa3c029b45c7b0a1acae6597032aabe5cdd55b3dc37f6c5e`. Those are source-level qualification findings, not executed native/RTC faults.
+
+## Actual correction
+
+`wakeHealth` requires both current clients ready, no failure/inconclusive reason, the host still hosting in host mode, and the guest in the expected connected guest context or ended solo context after leave. `wakeRound` uses it before dispatch, through observation, immediately before the final save read, and after that awaited read. It rechecks the relevant current phase predicate at both final boundaries. Stop/retreat also require the most recently accepted captured set to be empty. If current health/context/predicate changed, no new phase or generic save pass is recorded and the existing separately bounded Dispose attempts run for both clients.
+
+Configured Guest leave now uses an explicit `wakeLeave` path. It inspects the actual returned guest observation immediately after the awaited leave, then checks current health during removal observation, before final verification and afterward. The final snapshot must still have clean guest peer/request/timer counters, actual host owner removal and actual guest local-view end. Only then are the save, guest restore and Wake-removal checks appended. An error follows the same bounded failed-cleanup path. The ordinary Guest-leave branch remains behaviorally compared with the exact frozen handler and uses its existing checks.
+
+The internal `verify(timeout, record=true)` API can perform a non-recording read. Configured qualification calls `verify(5000,false)` and records the save fact only after the current operation gates pass. Ordinary/standalone callers retain the default save-check behavior. Existing report schema, captured/historical observation flags and checks that genuinely passed earlier are not retroactively invalidated or rewritten. This does not solve the blocker by rejecting all subsequent reports after a later failure.
+
+Cleanup still has its own 20-second reply budget and a timeout is not cancellation or disposal acceptance. An unresolved/failed cleanup does not set the parent disposed flag. Native restore/free remains the original child implementation; no new guessed lifecycle or native state is added. `visual_review` remains pending. Root still must use fresh exclusive origins and truthful normal source/build/carry provenance after integration; old prepared configured stages fail source pin verification after this helper change and should not be reused.
+
+## Reproduction and verification
+
+The byte-exact corrected reviewer scripts were copied into the same two-level work location, with exact immutable1f source. Both were actually run locally. `baseline-final-health.log` prints resolved `wake-native-owners:true` on a newly failed/inconclusive guest and then the expected assertion exits1. `baseline-leave-health.log` prints resolved restore/removal passes on a failed reply and likewise exits1. Their exit records are in `baseline-exits.json`. These execute actual frozen QA functions with declared API doubles, not actual native faults, browser/RTC or a renderer.
+
+The earlier reviewer import-path failures are copied separately as `reviewer-*-import-failure.*`. They failed before function evaluation and are excluded from functional reproduction. The original reviewer logs/seals and old author failures remain visible; none is overwritten into a pass.
+
+New regression tests load the exact frozen functions and the amended functions. Full valid initial reply shapes exercise the awaited failure boundary. They cover delayed frame failure, healthy-looking retirement, changed captured owner data, each final phase predicate, faults after observation/before the read, cleanup timeout, healthy qualification, failed leave reply, delayed removal/read failure, host-context loss, healthy leave, preserved earlier check history, ordinary leave equivalence and the actual non-recording verify behavior. Minimal original reviewer doubles are preserved as original records rather than silently restyled as native execution.
+
+Final actual checks:
+
+- `tests-final.log`:48 pass =11 new health regressions,18 existing configured helper cases,10 existing RENKO cases and9 existing provenance/preparation cases.
+- `consumers-final.log`:16 explicitly selected existing consumer cases pass. Supplied-WASM HTTP/listener cases and normal-stage preparation are excluded by the exact retained command pattern.
+- `syntax.log`: Node check exit0. `format-check.log`: three changed source/test files pass. `typecheck.log`: repository tsc --noEmit exit0, empty output; TypeScript runtime inputs are unchanged and this does not build native/WASM or validate QA JS by tsc.
+- The first amended28-case run also passed; adding the ordinary-handler comparison brought the final total to64 focused cases. One initial patch context mismatch made no source changes and was corrected after reading the existing single-line test fixture; it was not a test/native failure.
+
+`source-pins.json` pins the three changed raw/canonical sources, unchanged inherited helper/runtime/fixture inputs and original1f evidence. The new test intentionally requires immutable1f Git source to remain available, just as the earlier fixture verifier requires87d. `MANIFEST.json` pins exact retained raw evidence. The work-local Git attribute preserves reviewer/log bytes across Windows checkouts; fixture-local attributes remain unchanged.
+
+No listener, normal build, native rerun, browser, RTC or save-store opening in a browser occurred. Actual task `task-d0e4d592` records the two blockers and amendment author activity. Independent follow-through, Root integration/strict preparation, both normal renderers' real RTC/canvas/lifecycle/save runs and human physical/visual acceptance remain pending. The separately accepted native dispersed scheduler does not substitute for this helper review or its live gates.

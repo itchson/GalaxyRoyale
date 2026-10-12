@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "candidate": "1f28378871406383435f7ba103436d58026968d3",
+  "decision": "Amendment required for current health qualification gates; no integration/live acceptance",
+  "own_evidence": [
+    {
+      "path": "final-health-import-failure.log",
+      "bytes": 1283,
+      "sha256": "7d0f7206e97f7e1152681b9298981eae6513c0085951119314ea6dee9dc9c7e2"
+    },
+    {
+      "path": "final-health-import-failure.mjs",
+      "bytes": 2168,
+      "sha256": "70363ebea33a72b354a821f9d45eaa90a5465336ec2510e15bee27c8f854c7cc"
+    },
+    {
+      "path": "final-health-reproduction.exit.txt",
+      "bytes": 3,
+      "sha256": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04"
+    },
+    {
+      "path": "final-health-reproduction.log",
+      "bytes": 1266,
+      "sha256": "014d7ee73c63cf656c245056d33d361a7190e1197f12b913f76ff981199ee4e4"
+    },
+    {
+      "path": "final-health-reproduction.mjs",
+      "bytes": 2199,
+      "sha256": "3b48e5586f6bf87ecdf6e6325e0f47fda726d87fb9d0b0a020f7ccf3b5968776"
+    },
+    {
+      "path": "INPUTS.json",
+      "bytes": 3675,
+      "sha256": "e7e2ea740e05e47dd32198b2db6f8a9ff6065974bfca8c394a15f85614ec6036"
+    },
+    {
+      "path": "leave-health-import-failure.log",
+      "bytes": 1283,
+      "sha256": "9b3dac1358daa22250e28dda4a20e1fcc0bfec055d402d2b2ce18f9c918a9874"
+    },
+    {
+      "path": "leave-health-import-failure.mjs",
+      "bytes": 2291,
+      "sha256": "1e6585db50e3690e60b2393595c8400c8448f35a0440abce04afc11fe3611075"
+    },
+    {
+      "path": "leave-health-reproduction.exit.txt",
+      "bytes": 3,
+      "sha256": "f1b2f662800122bed0ff255693df89c4487fbdcf453d3524a42d4ec20c3d9c04"
+    },
+    {
+      "path": "leave-health-reproduction.log",
+      "bytes": 1285,
+      "sha256": "5a6030ba9e59940b34a124bdbd39f0605912c20610ad38abfe226a080c77baef"
+    },
+    {
+      "path": "leave-health-reproduction.mjs",
+      "bytes": 2326,
+      "sha256": "c5a7c6d07c37b9731c2868cf83c7e4ba1bb917224806b78b505a5364ca4b6378"
+    },
+    {
+      "path": "REVIEW.md",
+      "bytes": 8110,
+      "sha256": "b8586f538190b0b97744944354a66d2a7c10a8a2b5beff3453fa899d989c3169"
+    },
+    {
+      "path": "source/scripts/qa/co-op-transport/client.js",
+      "bytes": 35890,
+      "sha256": "cca3e946da50df7c48d11bff0d5b1f9399a17fc8dfc1fb3da635bb82c06099c2"
+    },
+    {
+      "path": "source/scripts/qa/co-op-transport/fixtures/configured-wake/.gitattributes",
+      "bytes": 117,
+      "sha256": "cbb12f90a6cd989d8fb8950200d6952d56c3ca02a322966823f207bd9f4fbda3"
+    },
+    {
+      "path": "source/scripts/qa/co-op-transport/fixtures/configured-wake/guest-profile.json",
+      "bytes": 2078,
+      "sha256": "53c3ef1f6b8a76272d2ee733f7754cd74df3eb8f2fe262479b78897c4275ca11"
+    },
+    {
+      "path": "source/scripts/qa/co-op-transport/fixtures/configured-wake/host-profile.json",
+      "bytes": 2082,
+      "sha256": "fcccaf64ded0ca93fa5012e2ccdeff036e3e2147cc4669c1dc9b639083f579da"
+    },
+    {
+      "path": "source/scripts/qa/co-op-transport/fixtures/configured-wake/provenance.json",
+      "bytes": 1729,
+      "sha256": "0683a0a9e0a1b35ae5c05d0873ada38c6bfb190305439fed931001f045700ba5"
+    },
+    {
+      "path": "source/scripts/qa/co-op-transport/prepare.mjs",
+      "bytes": 18909,
+      "sha256": "a66080bf5921d86365edc4880cf60af25675044a0c51099b90d5c486feee18a1"
+    },
+    {
+      "path": "source/scripts/qa/co-op-transport/server.mjs",
+      "bytes": 22143,
+      "sha256": "48bcb625029e3bed76355315086bd2b2fa7b0e8d76e6d94947a9b1de559e942f"
+    },
+    {
+      "path": "source/scripts/qa/co-op-transport/wake-fixtures.mjs",
+      "bytes": 4307,
+      "sha256": "380d5d32f94a7fe286794c5cfec1a58691192ca1415ddea3cbdbb1d1c03c62eb"
+    },
+    {
+      "path": "source/scripts/qa/co-op-transport/wake-observation.js",
+      "bytes": 14179,
+      "sha256": "1fbac38a78f1448b190a765cc588a726b015d3f008fdf5a02dbb6a7f73868e7e"
+    },
+    {
+      "path": "source/scripts/qa/co-op-transport/wasm-review.html",
+      "bytes": 6821,
+      "sha256": "af4a417e03ead2cc44f8e59d1201578a700681dded680eb4e83ff05ac6656bc5"
+    },
+    {
+      "path": "source/scripts/qa/co-op-transport/wasm-review.js",
+      "bytes": 29815,
+      "sha256": "12595f9754f81cc3f34bdafd5922884d9698ceaf203120dc5cd65e2a05485b91"
+    },
+    {
+      "path": "source/scripts/test/coop-transport-fifth-qa.test.mjs",
+      "bytes": 14680,
+      "sha256": "6f050685d022c52ed5a9f9664b86591d7617a40aa2034aed4bbe691b047de0a6"
+    },
+    {
+      "path": "source/scripts/test/coop-transport-wasm-qa.test.mjs",
+      "bytes": 41964,
+      "sha256": "e5458fbb12ccbee7b80641bad223ffd01b145f2bed2bffeb52b464acc149fd3c"
+    },
+    {
+      "path": "source/scripts/test/coop-wake-live-qa.test.mjs",
+      "bytes": 33668,
+      "sha256": "5ed547a3b9664198fcd24678f20ab801a23fd4e7a16f3def46c3d0cbd6e7fb09"
+    },
+    {
+      "path": "verification.log",
+      "bytes": 1044,
+      "sha256": "8acc2ef1ac34e83ba5a02823a2a2a1b195f9407ae969bf0e7be5f313fbc74f3e"
+    }
+  ],
+  "author_external": [
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\coop-wake-live-qa\\HANDOFF.md",
+      "bytes": 13054,
+      "sha256": "43de0d8cfd11029fc44852497a9aad62d9d6cea167d9861b2d186ac0bb9a15f7"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\coop-wake-live-qa\\MANIFEST.json",
+      "bytes": 5756,
+      "sha256": "d8f097176522a3b8cf6ae87a9a5f3529c4ef7a79a0b00605244d2d0b2cc50514"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\coop-wake-live-qa\\source-pins.json",
+      "bytes": 18515,
+      "sha256": "e3af8b4cd929e6c894f77ba4c47ae485f61cdc9124adf4363927b1a10a4964e9"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\coop-wake-live-qa\\execution.json",
+      "bytes": 3262,
+      "sha256": "ef0b3ef26688e89288e065c398721fb16d2abb1316e7d74eb72b173a2b435ac3"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\coop-wake-live-qa\\tests-frozen-inputs.log",
+      "bytes": 4822,
+      "sha256": "5c60533b6c2b975f5419e31cb7a6dfc247d2edf05b0e602aa97eb768cef555d4"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\coop-wake-live-qa\\wasm-consumers-frozen-inputs.log",
+      "bytes": 2106,
+      "sha256": "e9f442c976fef3c18e1dc37fa8d49c4fcc7785c2a8f96e868b16704f3b85b11b"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\coop-wake-live-qa\\contract-summary.json",
+      "bytes": 3193,
+      "sha256": "edeefb62eac745f391c22ab3a966e0db6e354e4c6128cea6c35f09e3746ff863"
+    }
+  ],
+  "limits": "Read-only Git/raw/source review and explicitly declared extracted-function VM replies only; no native/browser/RTC/WASM/listener/full-suite execution"
+}

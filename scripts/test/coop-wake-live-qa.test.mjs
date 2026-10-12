@@ -1037,7 +1037,22 @@ test("actual parent Wake phase guards visibility through final verification and 
   let hidden = true,
     sent = [],
     passed = 0;
-  const state = { host: { mode: "host" }, guest: { phase: "connected" } };
+  const state = {
+    host: {
+      mode: "host",
+      phase: "hosting",
+      init_stage: "ready",
+      failure_code: null,
+      wake: { state: "live", reason: null },
+    },
+    guest: {
+      mode: "guest",
+      phase: "connected",
+      init_stage: "ready",
+      failure_code: null,
+      wake: { state: "live", reason: null },
+    },
+  };
   const context = vm.createContext({
     scenario: WAKE_SCENARIO,
     state,
@@ -1058,6 +1073,8 @@ test("actual parent Wake phase guards visibility through final verification and 
         Object.assign(value, {
           failure_code: null,
           wake: {
+            state: "live",
+            reason: null,
             captured_host: true,
             captured_guest: true,
             native_render_frames: 1,
@@ -1067,10 +1084,12 @@ test("actual parent Wake phase guards visibility through final verification and 
     },
     verify: async () => {
       hidden = true;
+      return true;
     },
     check: () => passed++,
   });
-  vm.runInContext(functionSource(parentSource, "wakeRound"), context);
+  for (const name of ["wakeHealth", "cleanupWakeFailure", "wakeRound"])
+    vm.runInContext(functionSource(parentSource, name), context);
   await assert.rejects(context.wakeRound("drive"), /page_not_visible/);
   assert.deepEqual(sent, []);
   hidden = false;

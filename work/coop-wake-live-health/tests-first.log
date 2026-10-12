@@ -1,0 +1,38 @@
+✔ exact frozen functions reproduce both reviewer qualification gaps, distinct from import setup failures (33.445ms)
+✔ post-final-verify health rejects a delayed native-frame failure and performs bounded cleanup without new saves/owner passes (9.3266ms)
+✔ post-final-verify context/predicate gate rejects clean retirement or changed captured owner data (20.929ms)
+✔ each Wake phase revalidates its own final predicate; old expiry/retreat or reduced-motion facts cannot qualify changed state (14.5528ms)
+✔ failure after observation is rejected before the final save read and cleanup timeout does not become disposal success (5.0183ms)
+✔ healthy final Wake phase snapshots qualify only after current verification and preserve earlier checks (18.8632ms)
+✔ configured Guest leave rejects failure in the actual reply before teardown facts can become passes (4.3485ms)
+✔ configured Guest leave rejects delayed removal/final-read failure, lost removal predicate or host context (18.4986ms)
+✔ healthy configured Guest leave checks clean restore/removal only after final non-recording read (4.0623ms)
+✔ actual verify supports a non-recording read so failed phase health cannot append a generic pass first (2.7515ms)
+(node:45204) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ fresh-origin inventory refuses existing Galaxy databases and unsupported/malformed inventory without opening or deleting (1.2579ms)
+✔ exact native role fixtures retain production normalization, distinct derived seeds and minimal native equipment (2.9299ms)
+✔ actual source fixture byte/hash/export drift is refused before any normal-build preparation (192.5815ms)
+✔ configured stage is opt-in normal owned WASM with exact helper/native fixture pins; historical allowlists remain unchanged (547.2095ms)
+✔ configured profile bytes are role-local HTTP inputs and never admitted from the other role or a foreign Origin (0.2951ms)
+✔ guest wake facts remain uncommitted through header/page staging and rejection; zero commits clear actual active samples (0.7276ms)
+✔ incomplete, stale, wrong-epoch, duplicate, excessive and underflowed Wake pages cannot become native completion facts (0.6521ms)
+✔ native tick expiry waits past the latest observed birth; Haven retreat requires both actual committed pilot positions (0.3951ms)
+✔ leave removal binds actual owner and epoch and failure/death remains inconclusive after end (0.2218ms)
+✔ a new session resets its native birth/tick fence even after end while retaining clearly historical facts (0.1949ms)
+✔ render observations require the real finite native frame shape and cannot promote zero, missing or saturated frames (0.1523ms)
+✔ actual configured initialization preflight precedes SaveStore/native creation and constructor mismatch prevents persistence (61.7069ms)
+✔ actual generated-native wrapper requires successful replica_wake/commit/end replies before visible Wake facts (7.6505ms)
+✔ actual last-guest leave wrapper performs only a bounded real-native removal capture/page without inventing a guest commit (14.1212ms)
+✔ actual Wake movement uses fire-off native steps/current commits and caps phase work; it never creates trail points (9.464ms)
+✔ actual retirement latches failure, waits for native restore, frees once even after read failure, and refuses blocked release (3.5358ms)
+✔ version-five sanitized reports separate configured/native facts from earned/visual claims and reject unsupported success (1.4558ms)
+✔ actual parent Wake phase guards visibility through final verification and performs explicit failed cleanup (11.6868ms)
+ℹ tests 28
+ℹ suites 0
+ℹ pass 28
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1257.2011

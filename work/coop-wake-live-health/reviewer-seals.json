@@ -1,0 +1,9 @@
+{
+  "scope": "Original reviewer import setup failures are retained and excluded from functional evidence; corrected scripts/source are byte-exact.",
+  "seals": {
+    "REVIEW.md": "b8586f538190b0b97744944354a66d2a7c10a8a2b5beff3453fa899d989c3169",
+    "MANIFEST.json": "5f06128a749b1911fa3c029b45c7b0a1acae6597032aabe5cdd55b3dc37f6c5e",
+    "final-health-reproduction.log": "014d7ee73c63cf656c245056d33d361a7190e1197f12b913f76ff981199ee4e4",
+    "leave-health-reproduction.log": "5a6030ba9e59940b34a124bdbd39f0605912c20610ad38abfe226a080c77baef"
+  }
+}
