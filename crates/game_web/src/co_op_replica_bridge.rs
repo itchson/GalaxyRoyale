@@ -121,7 +121,14 @@ fn execute(
     }
 }
 pub fn dispatch(slot: &mut Option<GuestView>, game: &Game, json: &str) -> String {
-    let result = if json.len() > 65_536 {
+    dispatch_at(slot, game, json, 0.0)
+}
+/// Browser monotonic receipt time, including paused/hidden body assembly. The
+/// bridge does not use the clamped frame delta or reset interpolation age.
+pub fn dispatch_at(slot: &mut Option<GuestView>, game: &Game, json: &str, seconds: f64) -> String {
+    let result = if !seconds.is_finite() || seconds < 0.0 {
+        Err("invalid_presentation_clock")
+    } else if json.len() > 65_536 {
         Err("request_bound")
     } else {
         serde_json::from_str::<Request>(json)
@@ -130,7 +137,14 @@ pub fn dispatch(slot: &mut Option<GuestView>, game: &Game, json: &str) -> String
                 if request.version() != 1 {
                     Err("invalid_version")
                 } else {
-                    execute(slot, game, request)
+                    if let Some(view) = slot {
+                        view.replica.advance_presentation(seconds)?;
+                    }
+                    execute(slot, game, request)?;
+                    if let Some(view) = slot {
+                        view.replica.advance_presentation(seconds)?;
+                    }
+                    Ok(())
                 }
             })
     };
@@ -213,6 +227,21 @@ mod tests {
             request(&mut slot, &game, begin())["error"],
             "active_session"
         );
+        assert!(slot.is_none());
+    }
+    #[test]
+    fn receipt_clock_rejects_invalid_or_regressing_end_before_disposing_a_view() {
+        let game = Game::new(Profile::default());
+        let mut slot = None;
+        assert!(dispatch_at(&mut slot, &game, &begin().to_string(), 100.0).contains("\"ok\":true"));
+        let end = json!({"v":1,"op":"replica_end","session":id(1)}).to_string();
+        for time in [99.0, f64::NAN, f64::INFINITY, -1.0] {
+            assert!(
+                dispatch_at(&mut slot, &game, &end, time).contains("invalid_presentation_clock")
+            );
+            assert!(slot.is_some());
+        }
+        assert!(dispatch_at(&mut slot, &game, &end, 101.0).contains("\"ok\":true"));
         assert!(slot.is_none());
     }
 }

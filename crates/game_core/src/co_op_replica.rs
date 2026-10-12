@@ -62,6 +62,12 @@ pub struct Snapshot {
     pub participants: Vec<Pilot>,
     pub projectiles: Vec<Projectile>,
     pub dropped_notices: u32,
+    #[serde(
+        default,
+        deserialize_with = "strict_nova_fx",
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub nova_fx: Option<crate::co_op_fx::Journal>,
 }
 #[derive(Clone, Copy, Debug, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
@@ -133,6 +139,7 @@ pub struct Scene {
     previous_poses: Vec<([f32; 2], f32)>,
     previous_shots: Vec<[f32; 2]>,
     blend_seconds: f32,
+    fx: crate::co_op_fx::Cache,
 }
 /// Camera and viewport are world units, exactly as Game::set_viewport. UI
 /// dimensions/zoom remain the renderer's responsibility; no presentation shake.
@@ -172,16 +179,20 @@ impl Scene {
     pub fn blend_seconds(&self) -> f32 {
         self.blend_seconds
     }
+    /// Cosmetic omissions at the bounded replica pool, never gameplay damage.
+    pub fn nova_fx_dropped_rays(&self) -> u32 {
+        self.fx.dropped_rays
+    }
     pub fn home_corporation(&self) -> Option<crate::identity::Corporation> {
         self.home.identity.as_ref().map(|id| id.corporation)
     }
     /// Only sources whose presence is explicit in the retained publication.
-    /// Hit/exhaust/ability transient lights require future presentation metadata.
+    /// Nova uses committed birth metadata; other transient types remain absent.
     pub fn light_sources(&self, view: ViewInput) -> Vec<crate::LightSource> {
         if !view.valid() {
             return Vec::new();
         }
-        let mut sources = Vec::with_capacity(3);
+        let mut sources = self.fx.sources(|p, radius| view.visible(p, radius));
         let mut nearest = [None::<(f32, &Projectile)>; 2];
         for (index, shot) in self.header.snapshot.projectiles.iter().enumerate() {
             let p = Vec2::from_array(self.previous_shots[index])
@@ -476,7 +487,7 @@ impl Scene {
         hud.time = self.header.snapshot.tick as f32 / 60.0;
         hud.shake = 0.0;
         hud.entities = self.entities.len() + self.header.snapshot.projectiles.len();
-        hud.particles = 0;
+        hud.particles = self.fx.rays();
         hud.biome = crate::regions::at(self.world_seed(), position);
         hud.site = site.map(|s| crate::SiteHud {
             id: s.id,
@@ -691,12 +702,17 @@ impl Scene {
                 crate::with_alpha(color, 55),
             );
         }
+        self.fx
+            .render(frame, view.is_some_and(|v| v.reduced), |p, radius| {
+                view.is_none_or(|v| v.visible(p, radius))
+            });
     }
 }
 struct Pending {
     header: Header,
     rows: Vec<Entity>,
     cells: HashMap<String, Vec<[u32; 2]>>,
+    received_at: f64,
 }
 pub struct Replica {
     session: ParticipantId,
@@ -709,6 +725,9 @@ pub struct Replica {
     acquisition: u32,
     pending: Option<Pending>,
     scene: Option<Scene>,
+    clock: f64,
+    fx_sequence: Option<u32>,
+    fx_dropped: u32,
 }
 pub type Result<T> = std::result::Result<T, &'static str>;
 fn hex(value: &str, length: usize) -> bool {
@@ -756,6 +775,9 @@ impl Replica {
             acquisition: 0,
             pending: None,
             scene: None,
+            clock: 0.0,
+            fx_sequence: None,
+            fx_dropped: 0,
         })
     }
     /// End invalidates both transfer and presentation; no local Game is touched.
@@ -765,11 +787,28 @@ impl Replica {
         }
         self.pending = None;
         self.scene = None;
+        self.fx_sequence = None;
+        self.fx_dropped = 0;
         self.ended = true;
         Ok(())
     }
     pub fn scene(&self) -> Option<&Scene> {
         self.scene.as_ref()
+    }
+    /// Absolute receiver monotonic seconds, independent of pose interpolation,
+    /// frame delta caps and paused simulation. Invalid clocks mutate nothing.
+    pub fn advance_presentation(&mut self, seconds: f64) -> Result<()> {
+        if self.ended {
+            return Err("stale_session");
+        }
+        if !seconds.is_finite() || seconds < self.clock {
+            return Err("invalid_presentation_clock");
+        }
+        self.clock = seconds;
+        if let Some(scene) = &mut self.scene {
+            scene.fx.advance(seconds);
+        }
+        Ok(())
     }
     pub fn stage(&mut self, header: Header) -> Result<()> {
         let snapshot = &header.snapshot;
@@ -875,6 +914,34 @@ impl Replica {
                 return Err("invalid_projectile");
             }
         }
+        if let Some(fx) = &snapshot.nova_fx {
+            if fx.records.len() > crate::co_op_fx::MAX_RECORDS
+                || fx.sequence < self.fx_sequence.unwrap_or(0)
+                || fx.dropped < self.fx_dropped
+            {
+                return Err("invalid_nova_fx");
+            }
+            let mut previous = 0;
+            let mut previous_tick = 0;
+            for r in &fx.records {
+                if r.sequence <= previous
+                    || r.sequence > fx.sequence
+                    || r.tick < previous_tick
+                    || r.tick > snapshot.tick
+                    || r.epoch == 0
+                    || r.rays > crate::co_op_fx::RAYS
+                    || !vector(r.position)
+                    || !snapshot
+                        .participants
+                        .iter()
+                        .any(|p| p.id == r.emitter && p.epoch == r.epoch)
+                {
+                    return Err("invalid_nova_fx");
+                }
+                previous = r.sequence;
+                previous_tick = r.tick;
+            }
+        }
         self.acquisition = header.acquisition;
         self.last_tick = snapshot.tick;
         self.last_revision = snapshot.revision;
@@ -882,6 +949,7 @@ impl Replica {
             header,
             rows: Vec::new(),
             cells: HashMap::new(),
+            received_at: self.clock,
         });
         Ok(())
     }
@@ -1172,6 +1240,38 @@ impl Replica {
                 / 60.0)
                 .clamp(1.0 / 60.0, 0.1)
         });
+        // All geometry, body signatures and membership have now validated. A
+        // failed transfer never changes dedup state or admits pending effects.
+        let mut fx = self
+            .scene
+            .as_mut()
+            .map(|s| std::mem::take(&mut s.fx))
+            .unwrap_or_default();
+        fx.advance(self.clock);
+        fx.retain_members(|id, epoch| {
+            p.header
+                .snapshot
+                .participants
+                .iter()
+                .any(|p| p.id == id && p.epoch == epoch)
+        });
+        if let Some(journal) = &p.header.snapshot.nova_fx {
+            if let Some(previous) = self.fx_sequence {
+                for &record in &journal.records {
+                    if record.sequence > previous {
+                        let age = f64::from(p.header.snapshot.tick - record.tick) / 60.0
+                            + (self.clock - p.received_at);
+                        fx.admit(record, age);
+                    }
+                }
+            }
+            // First successful publication is a baseline, never join history.
+            self.fx_sequence = Some(journal.sequence);
+            self.fx_dropped = journal.dropped;
+        } else {
+            // Legacy/empty first commit still primes the baseline at zero.
+            self.fx_sequence.get_or_insert(0);
+        }
         let pending = self.pending.take().unwrap();
         self.scene = Some(Scene {
             header: pending.header,
@@ -1182,6 +1282,7 @@ impl Replica {
             previous_poses,
             previous_shots,
             blend_seconds,
+            fx,
         });
         Ok(())
     }
@@ -1198,6 +1299,13 @@ fn pilot_profile(pilot: &Pilot) -> Result<crate::Profile> {
         None => crate::co_op::guest_profile(&spec),
     }
     .map_err(|_| "invalid_pilot")
+}
+
+fn strict_nova_fx<'de, D: serde::Deserializer<'de>>(
+    d: D,
+) -> std::result::Result<Option<crate::co_op_fx::Journal>, D::Error> {
+    // Missing is legacy; explicit null is malformed, rather than silence.
+    crate::co_op_fx::Journal::deserialize(d).map(Some)
 }
 
 fn strict_identity<'de, D: serde::Deserializer<'de>>(

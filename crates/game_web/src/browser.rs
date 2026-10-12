@@ -406,8 +406,12 @@ impl Galaxy {
     /// Guest packets update a validated presentation cache, never the solo Game.
     pub fn co_op_replica(&mut self, request: &str) -> String {
         let before = self.guest_view.is_some();
-        let result =
-            crate::co_op_replica_bridge::dispatch(&mut self.guest_view, &self.game, request);
+        let result = crate::co_op_replica_bridge::dispatch_at(
+            &mut self.guest_view,
+            &self.game,
+            request,
+            now() / 1000.0,
+        );
         if before != self.guest_view.is_some() {
             self.accumulator = 0.0;
             self.pending_destination = None;
@@ -454,6 +458,9 @@ impl Galaxy {
         }
         let simulation_ms = now() - start;
         if let Some(view) = &mut self.guest_view {
+            view.replica
+                .advance_presentation(now() / 1000.0)
+                .map_err(js)?;
             view.age = (view.age + delta).min(1.0);
             if let Some(scene) = view.replica.scene() {
                 let alpha = (view.age / scene.blend_seconds().max(1.0 / 240.0)).clamp(0.0, 1.0);

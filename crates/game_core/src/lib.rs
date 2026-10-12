@@ -12,6 +12,7 @@ pub mod bosses;
 pub mod campaign;
 pub mod co_op;
 mod co_op_control;
+mod co_op_fx;
 mod co_op_loadout;
 pub mod co_op_publish;
 pub mod co_op_replica;
@@ -429,6 +430,7 @@ enum ParticleStyle {
     Exhaust,
     Trail,
 }
+const DEBRIS_DRAG: f32 = 1.6;
 struct Particle {
     position: Vec2,
     origin: Vec2,
@@ -1005,8 +1007,10 @@ impl Game {
                 0.55 + intensity * 0.5,
                 0.18,
             ),
-            "shield" | "ability-nova" => {
-                self.transient_light(position, 95.0, [0.22, 0.56, 1.0], 1.1, 0.32)
+            "shield" => self.transient_light(position, 95.0, [0.22, 0.56, 1.0], 1.1, 0.32),
+            "ability-nova" => {
+                let (light, life) = co_op_fx::lights(position)[1].clone();
+                self.transient_light(position, light.radius, light.color, light.intensity, life);
             }
             "explosion" | "death" => self.transient_light(
                 position,
@@ -2909,7 +2913,7 @@ impl Game {
                         }
                 };
                 let drag: f32 = if p.style == ParticleStyle::Debris {
-                    1.6
+                    DEBRIS_DRAG
                 } else {
                     3.8
                 };

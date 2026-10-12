@@ -5,6 +5,9 @@ use crate::{
 };
 use serde_json::{Value, json};
 
+#[path = "co_op_fx_tests.rs"]
+mod nova_fx;
+
 fn id(n: u32) -> ParticipantId {
     ParticipantId::parse(&format!("{n:032x}")).unwrap()
 }

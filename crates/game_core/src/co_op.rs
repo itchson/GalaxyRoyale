@@ -135,6 +135,7 @@ pub(super) struct Session {
     pub hit_owner: Option<ShotOwner>,
     notices: Vec<Destruction>,
     dropped_notices: u32,
+    pub(super) nova_fx: crate::co_op_fx::Journal,
 }
 
 #[derive(Clone, Debug, Serialize)]
@@ -182,6 +183,8 @@ pub struct Snapshot {
     pub participants: Vec<ParticipantState>,
     pub projectiles: Vec<ProjectileState>,
     pub dropped_notices: u32,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub nova_fx: Option<crate::co_op_fx::Journal>,
 }
 #[derive(Clone, Debug, Serialize)]
 pub struct Destruction {
@@ -403,6 +406,7 @@ impl Game {
             hit_owner: None,
             notices: Vec::with_capacity(MAX_NOTICES),
             dropped_notices: 0,
+            nova_fx: crate::co_op_fx::Journal::default(),
         });
         self.sync_co_op_host();
         Ok(admission)
@@ -1011,7 +1015,8 @@ impl Game {
         } else {
             70.0
         };
-        self.transient_light(position, 165.0, [0.16, 0.65, 1.0], 1.5, 0.45);
+        let (light, life) = crate::co_op_fx::lights(position)[0].clone();
+        self.transient_light(position, light.radius, light.color, light.intensity, life);
         if evolution >= 3 {
             let mut reflected = [None; 16];
             let mut count = 0;
@@ -1068,17 +1073,38 @@ impl Game {
         if let Some(previous) = previous_owner {
             self.co_op.as_mut().unwrap().hit_owner = previous;
         }
-        for i in 0..36 {
-            let direction = forward(i as f32 * TAU / 36.0);
+        let before_rays = self.particles.len();
+        for i in 0..crate::co_op_fx::RAYS {
+            let (offset, velocity, color, size) = crate::co_op_fx::ray(i);
             self.particle(
-                position + direction * 8.0,
-                direction * 150.0,
-                0.4,
-                rgba(147, 193, 255, 255),
-                2.0,
+                position + offset,
+                velocity,
+                crate::co_op_fx::RAY_LIFE as f32,
+                color,
+                size,
             );
         }
         self.event("ability-nova", position, 1.0);
+        if let Some(owner) = owner {
+            // Only an actual active, triggering native membership can publish.
+            let active = self
+                .world
+                .query::<&Pilot>()
+                .iter()
+                .any(|p| p.admission.id == owner.id && p.admission.epoch == owner.epoch);
+            if active
+                && position.is_finite()
+                && let Some(session) = &mut self.co_op
+            {
+                session.nova_fx.record(
+                    session.tick,
+                    owner.id,
+                    owner.epoch,
+                    position,
+                    (self.particles.len() - before_rays) as u8,
+                );
+            }
+        }
     }
     pub(super) fn co_op_contacts(
         &mut self,
@@ -1205,6 +1231,16 @@ impl Game {
             })
             .collect();
         projectiles.sort_by(|a, b| a.id.cmp(&b.id));
+        let nova_fx = (session.nova_fx.sequence > 0).then(|| {
+            let mut journal = session.nova_fx.clone();
+            journal.records.retain(|r| {
+                f64::from(session.tick.saturating_sub(r.tick)) / 60.0 < crate::co_op_fx::LIFE
+                    && participants
+                        .iter()
+                        .any(|p| p.id == r.emitter && p.epoch == r.epoch)
+            });
+            journal
+        });
         Some(Snapshot {
             protocol: PROTOCOL,
             session: session.id,
@@ -1215,6 +1251,7 @@ impl Game {
             participants,
             projectiles,
             dropped_notices: session.dropped_notices,
+            nova_fx,
         })
     }
     pub fn co_op_session(&self) -> Option<ParticipantId> {
