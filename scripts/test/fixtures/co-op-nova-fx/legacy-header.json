@@ -1,0 +1,468 @@
+{
+  "acquisition": 1,
+  "snapshot": {
+    "protocol": "galaxy-coop-1",
+    "session": "00000000000000000000000000000064",
+    "world_seed": 812345,
+    "tick": 0,
+    "revision": 7,
+    "progression": false,
+    "participants": [
+      {
+        "id": "00000000000000000000000000000001",
+        "slot": 0,
+        "epoch": 1,
+        "local_seed": 812345,
+        "identity": {
+          "kind": "talo",
+          "corporation": "hugo",
+          "sub_corporation": "pan",
+          "hex_id": "0123456789abcdef"
+        },
+        "selected_ship": 0,
+        "position": [
+          450.0,
+          0.0
+        ],
+        "previous": [
+          450.0,
+          0.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ],
+        "heading": 0.0,
+        "previous_heading": 0.0,
+        "hull": 100.0,
+        "max_hull": 100.0,
+        "shield": 10.0,
+        "max_shield": 10.0,
+        "throttle": 0.0,
+        "last_sequence": null
+      },
+      {
+        "id": "00000000000000000000000000000002",
+        "slot": 1,
+        "epoch": 2,
+        "local_seed": 812345,
+        "identity": {
+          "kind": "talo",
+          "corporation": "hugo",
+          "sub_corporation": "pan",
+          "hex_id": "0123456789abcdef"
+        },
+        "selected_ship": 0,
+        "owned_loadout": {
+          "version": 1,
+          "selected_ship": 0,
+          "owned_ships": 1,
+          "patches": 0,
+          "royal_victory": false,
+          "ship_xp": 0,
+          "hardware": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "slots": [
+            null,
+            {
+              "index": 4,
+              "rank": 1
+            },
+            null
+          ],
+          "trained_starter": false,
+          "relic_count": 0
+        },
+        "position": [
+          450.0,
+          150.0
+        ],
+        "previous": [
+          450.0,
+          150.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ],
+        "heading": 0.0,
+        "previous_heading": 0.0,
+        "hull": 100.0,
+        "max_hull": 100.0,
+        "shield": 10.0,
+        "max_shield": 10.0,
+        "throttle": 0.0,
+        "last_sequence": null
+      },
+      {
+        "id": "00000000000000000000000000000003",
+        "slot": 2,
+        "epoch": 3,
+        "local_seed": 812345,
+        "identity": {
+          "kind": "talo",
+          "corporation": "hugo",
+          "sub_corporation": "pan",
+          "hex_id": "0123456789abcdef"
+        },
+        "selected_ship": 0,
+        "owned_loadout": {
+          "version": 1,
+          "selected_ship": 0,
+          "owned_ships": 1,
+          "patches": 0,
+          "royal_victory": false,
+          "ship_xp": 0,
+          "hardware": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "slots": [
+            null,
+            {
+              "index": 4,
+              "rank": 1
+            },
+            null
+          ],
+          "trained_starter": false,
+          "relic_count": 0
+        },
+        "position": [
+          450.0,
+          300.0
+        ],
+        "previous": [
+          450.0,
+          300.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ],
+        "heading": 0.0,
+        "previous_heading": 0.0,
+        "hull": 100.0,
+        "max_hull": 100.0,
+        "shield": 10.0,
+        "max_shield": 10.0,
+        "throttle": 0.0,
+        "last_sequence": null
+      },
+      {
+        "id": "00000000000000000000000000000004",
+        "slot": 3,
+        "epoch": 4,
+        "local_seed": 812345,
+        "identity": {
+          "kind": "talo",
+          "corporation": "hugo",
+          "sub_corporation": "pan",
+          "hex_id": "0123456789abcdef"
+        },
+        "selected_ship": 0,
+        "owned_loadout": {
+          "version": 1,
+          "selected_ship": 0,
+          "owned_ships": 1,
+          "patches": 0,
+          "royal_victory": false,
+          "ship_xp": 0,
+          "hardware": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "slots": [
+            null,
+            {
+              "index": 4,
+              "rank": 1
+            },
+            null
+          ],
+          "trained_starter": false,
+          "relic_count": 0
+        },
+        "position": [
+          450.0,
+          450.0
+        ],
+        "previous": [
+          450.0,
+          450.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ],
+        "heading": 0.0,
+        "previous_heading": 0.0,
+        "hull": 100.0,
+        "max_hull": 100.0,
+        "shield": 10.0,
+        "max_shield": 10.0,
+        "throttle": 0.0,
+        "last_sequence": null
+      },
+      {
+        "id": "00000000000000000000000000000005",
+        "slot": 4,
+        "epoch": 5,
+        "local_seed": 812345,
+        "identity": {
+          "kind": "talo",
+          "corporation": "hugo",
+          "sub_corporation": "pan",
+          "hex_id": "0123456789abcdef"
+        },
+        "selected_ship": 0,
+        "owned_loadout": {
+          "version": 1,
+          "selected_ship": 0,
+          "owned_ships": 1,
+          "patches": 0,
+          "royal_victory": false,
+          "ship_xp": 0,
+          "hardware": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "slots": [
+            null,
+            {
+              "index": 4,
+              "rank": 1
+            },
+            null
+          ],
+          "trained_starter": false,
+          "relic_count": 0
+        },
+        "position": [
+          450.0,
+          600.0
+        ],
+        "previous": [
+          450.0,
+          600.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ],
+        "heading": 0.0,
+        "previous_heading": 0.0,
+        "hull": 100.0,
+        "max_hull": 100.0,
+        "shield": 10.0,
+        "max_shield": 10.0,
+        "throttle": 0.0,
+        "last_sequence": null
+      },
+      {
+        "id": "00000000000000000000000000000006",
+        "slot": 5,
+        "epoch": 6,
+        "local_seed": 812345,
+        "identity": {
+          "kind": "talo",
+          "corporation": "hugo",
+          "sub_corporation": "pan",
+          "hex_id": "0123456789abcdef"
+        },
+        "selected_ship": 0,
+        "owned_loadout": {
+          "version": 1,
+          "selected_ship": 0,
+          "owned_ships": 1,
+          "patches": 0,
+          "royal_victory": false,
+          "ship_xp": 0,
+          "hardware": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "slots": [
+            null,
+            {
+              "index": 4,
+              "rank": 1
+            },
+            null
+          ],
+          "trained_starter": false,
+          "relic_count": 0
+        },
+        "position": [
+          450.0,
+          750.0
+        ],
+        "previous": [
+          450.0,
+          750.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ],
+        "heading": 0.0,
+        "previous_heading": 0.0,
+        "hull": 100.0,
+        "max_hull": 100.0,
+        "shield": 10.0,
+        "max_shield": 10.0,
+        "throttle": 0.0,
+        "last_sequence": null
+      },
+      {
+        "id": "00000000000000000000000000000007",
+        "slot": 6,
+        "epoch": 7,
+        "local_seed": 812345,
+        "identity": {
+          "kind": "talo",
+          "corporation": "hugo",
+          "sub_corporation": "pan",
+          "hex_id": "0123456789abcdef"
+        },
+        "selected_ship": 0,
+        "owned_loadout": {
+          "version": 1,
+          "selected_ship": 0,
+          "owned_ships": 1,
+          "patches": 0,
+          "royal_victory": false,
+          "ship_xp": 0,
+          "hardware": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "slots": [
+            null,
+            {
+              "index": 4,
+              "rank": 1
+            },
+            null
+          ],
+          "trained_starter": false,
+          "relic_count": 0
+        },
+        "position": [
+          450.0,
+          900.0
+        ],
+        "previous": [
+          450.0,
+          900.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ],
+        "heading": 0.0,
+        "previous_heading": 0.0,
+        "hull": 100.0,
+        "max_hull": 100.0,
+        "shield": 10.0,
+        "max_shield": 10.0,
+        "throttle": 0.0,
+        "last_sequence": null
+      },
+      {
+        "id": "00000000000000000000000000000008",
+        "slot": 7,
+        "epoch": 8,
+        "local_seed": 812345,
+        "identity": {
+          "kind": "talo",
+          "corporation": "hugo",
+          "sub_corporation": "pan",
+          "hex_id": "0123456789abcdef"
+        },
+        "selected_ship": 0,
+        "owned_loadout": {
+          "version": 1,
+          "selected_ship": 0,
+          "owned_ships": 1,
+          "patches": 0,
+          "royal_victory": false,
+          "ship_xp": 0,
+          "hardware": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "slots": [
+            null,
+            {
+              "index": 4,
+              "rank": 1
+            },
+            null
+          ],
+          "trained_starter": false,
+          "relic_count": 0
+        },
+        "position": [
+          450.0,
+          1050.0
+        ],
+        "previous": [
+          450.0,
+          1050.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ],
+        "heading": 0.0,
+        "previous_heading": 0.0,
+        "hull": 100.0,
+        "max_hull": 100.0,
+        "shield": 10.0,
+        "max_shield": 10.0,
+        "throttle": 0.0,
+        "last_sequence": null
+      }
+    ],
+    "projectiles": [],
+    "dropped_notices": 0
+  },
+  "counts": {
+    "entities": 8,
+    "occupied_cells": 8320,
+    "storage_cells": 18432,
+    "entity_pages": 1,
+    "body_pages": 16
+  }
+}

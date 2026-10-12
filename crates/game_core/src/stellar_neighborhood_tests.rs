@@ -43,7 +43,7 @@ fn packet(frame: &RenderFrame) -> Vec<([f32; 2], u32, GpuTransform)> {
         .flat_map(|b| {
             b.pixels
                 .iter()
-                .map(|p| (p.local, p.color, b.transforms[p.transform as usize]))
+                .map(|p| (p.local, p.color, b.transforms[p.transform_slot()]))
         })
         .collect()
 }
@@ -139,7 +139,7 @@ fn whole_seven_star_packets_keep_quality_motion_parallax_and_atomic_admission() 
                         1
                     );
                     for (i, cell) in moved.frame().batches[0].pixels.iter().enumerate() {
-                        let native = moved.frame().batches[0].transforms[cell.transform as usize];
+                        let native = moved.frame().batches[0].transforms[cell.transform_slot()];
                         let relative = view.relative_transform(native);
                         for corner in CORNERS {
                             let actual =
@@ -178,7 +178,7 @@ fn export_actual_seeded_stellar_neighborhood_packets() {
             let views: Vec<_> = [0.6, 1.0, 1.6].into_iter().map(|zoom| {
                 let view = CameraView::new(camera, Vec2::splat(300.0), zoom).unwrap();
                 let cells: Vec<_> = f.frame().batches.iter().flat_map(|b| b.pixels.iter().map(|p| {
-                    let t = view.relative_transform(b.transforms[p.transform as usize]);
+                    let t = view.relative_transform(b.transforms[p.transform_slot()]);
                     let corners: Vec<_> = CORNERS.iter().map(|c| (t.point(Vec2::from_array(p.local) + *c) * zoom + Vec2::splat(150.0)).to_array()).collect();
                     serde_json::json!({"corners": corners, "rgba": p.color.to_le_bytes(), "material": [t.b[2], t.b[3]]})
                 })).collect();

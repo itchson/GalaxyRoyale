@@ -20,7 +20,7 @@ fn signature(frame: &RenderFrame) -> Vec<([f32; 2], u32, [f32; 4])> {
         .iter()
         .flat_map(|b| {
             b.pixels.iter().map(|p| {
-                let t = b.transforms[p.transform as usize];
+                let t = b.transforms[p.transform_slot()];
                 (
                     t.point(Vec2::from_array(p.local)).to_array(),
                     p.color,
@@ -175,7 +175,7 @@ fn symbol_partial_clip_is_whole_cell_and_charges_alpha_zero_cells() {
             if cell.color >> 24 == 0 {
                 continue;
             }
-            let t = b.transforms[cell.transform as usize];
+            let t = b.transforms[cell.transform_slot()];
             for corner in [
                 Vec2::splat(-0.5),
                 Vec2::new(0.5, -0.5),
@@ -280,7 +280,7 @@ fn entry_clip_and_focus_preserve_geometry_while_admitting_all_nine_cells() {
                 Vec2::new(-0.5, 0.5),
                 Vec2::splat(0.5),
             ] {
-                let q = batch.transforms[cell.transform as usize]
+                let q = batch.transforms[cell.transform_slot()]
                     .point(Vec2::from_array(cell.local) + corner);
                 assert!(
                     q.x >= clip[0]
@@ -513,7 +513,7 @@ fn actual_collection_route_retains_all_supplied_components_and_largest_portrait_
         b.transforms.len() <= 128
             && b.pixels
                 .iter()
-                .all(|p| (p.transform as usize) < b.transforms.len())
+                .all(|p| (p.transform_slot()) < b.transforms.len())
     }));
     println!(
         "COLLECTION actual joined cells={} transforms={}",

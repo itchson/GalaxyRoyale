@@ -11,10 +11,36 @@ struct VertexOut {
   @location(2) @interpolate(flat) material:vec2<f32>,
   @location(3) particle_uv:vec2<f32>,
   @location(4) @interpolate(flat) coverage:f32,
+  @location(5) @interpolate(flat) surface:vec4<f32>,
+  @location(6) @interpolate(flat) mapped:f32,
+}
+fn sign_not_zero(value:vec2<f32>)->vec2<f32> {
+  return select(vec2<f32>(-1.0),vec2<f32>(1.0),value>=vec2<f32>(0.0));
+}
+fn decode_normal(bits:u32)->vec3<f32> {
+  let xy=vec2<f32>(f32((bits>>7u)&255u),f32((bits>>15u)&255u))/255.0*2.0-1.0;
+  var normal=vec3<f32>(xy,1.0-abs(xy.x)-abs(xy.y));
+  if(normal.z<0.0) { normal=vec3<f32>((vec2<f32>(1.0)-abs(xy.yx))*sign_not_zero(xy),normal.z); }
+  return normalize(normal);
+}
+fn surface_normal(local:vec3<f32>,t:Affine)->vec3<f32> {
+  // diag(A,sqrt(abs(det A))) embeds the composed 2D affine in 3D.
+  // Inverse transpose preserves slopes under uniform scale and handles shear
+  // and reflections. Normalize the basis first: tiny quads have no size floor.
+  let magnitude=max(max(abs(t.a.z),abs(t.a.w)),max(abs(t.b.x),abs(t.b.y)));
+  if(magnitude==0.0) { return vec3<f32>(0.0,0.0,1.0); }
+  let x=t.a.zw/magnitude;let y=t.b.xy/magnitude;
+  let determinant=x.x*y.y-x.y*y.x;
+  if(abs(determinant)<1e-12) { return vec3<f32>(0.0,0.0,1.0); }
+  let factor=select(-1.0,1.0,determinant>=0.0)/sqrt(abs(determinant));
+  let xy=vec2<f32>(y.y*local.x-x.y*local.y,-y.x*local.x+x.x*local.y)*factor;
+  return normalize(vec3<f32>(xy,local.z));
 }
 @vertex fn vs_main(@builtin(vertex_index) index:u32,@location(0) center:vec2<f32>,@location(1) rgba:u32,@location(2) slot:u32)->VertexOut {
   let corners=array<vec2<f32>,6>(vec2<f32>(-0.5,-0.5),vec2<f32>(0.5,-0.5),vec2<f32>(-0.5,0.5),vec2<f32>(-0.5,0.5),vec2<f32>(0.5,-0.5),vec2<f32>(0.5,0.5));
-  let t=transforms.values[slot];let local=center+corners[index];var world=t.a.xy+t.a.zw*local.x+t.b.xy*local.y;
+  // Seven slot bits plus optional oct8 normal/linear luminance data retain the
+  // existing 16-byte pixel instance and 32-byte affine table records.
+  let t=transforms.values[slot&127u];let local=center+corners[index];var world=t.a.xy+t.a.zw*local.x+t.b.xy*local.y;
   var coverage=1.0;
   if(t.b.w<0.0) {
     // Filter only soft footprints to two physical raster pixels; compensate area.
@@ -49,12 +75,18 @@ struct VertexOut {
   out.material=t.b.zw;
   out.particle_uv=corners[index]*2.0;
   out.coverage=coverage;
+  out.surface=vec4<f32>(0.0,0.0,1.0,1.0);out.mapped=0.0;
+  if((slot&0x80000000u)!=0u) {
+    out.surface=vec4<f32>(surface_normal(decode_normal(slot),t),f32((slot>>23u)&255u)/255.0);
+    out.mapped=1.0;
+  }
   return out;
 }
 @fragment fn fs_main(input:VertexOut)->@location(0) vec4<f32> {
   // Each occupied cell receives one color. UI/backgrounds use an unlit material.
   let response=input.material.x;
-  let emission=select(input.material.y,max(0.0,-input.material.y-1.0),input.material.y<0.0);
+  let object_emission=select(input.material.y,max(0.0,-input.material.y-1.0),input.material.y<0.0);
+  let emission=object_emission*input.surface.w;
   var color=input.color.rgb*(1.0-0.12*response+0.3*emission);
   if(response>0.0) {
     color=color*mix(vec3<f32>(1.0),globals.ambient.xyz,clamp(globals.ambient.w*response,0.0,1.0));
@@ -63,7 +95,12 @@ struct VertexOut {
       let delta=input.cell-light.position_radius.xy;
       let radius=max(1.0,light.position_radius.z);
       let attenuation=max(0.0,1.0-dot(delta,delta)/(radius*radius));
-      let energy=attenuation*attenuation*light.position_radius.w*response;
+      var directional=1.0;
+      if(input.mapped>0.0 && light.color.w>0.0) {
+        let toward_light=normalize(vec3<f32>(light.position_radius.xy-input.cell,light.color.w));
+        directional=max(0.0,dot(input.surface.xyz,toward_light));
+      }
+      let energy=attenuation*attenuation*light.position_radius.w*response*directional;
       color=color+light.color.rgb*(input.color.rgb*0.8+vec3<f32>(0.012))*energy;
     }
   }

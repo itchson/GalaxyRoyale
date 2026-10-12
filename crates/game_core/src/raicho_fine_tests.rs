@@ -23,7 +23,7 @@ fn packet(frame: &RenderFrame) -> Vec<(Vec2, u32, GpuTransform)> {
                 (
                     Vec2::from_array(p.local),
                     p.color,
-                    b.transforms[p.transform as usize],
+                    b.transforms[p.transform_slot()],
                 )
             })
         })
@@ -282,7 +282,7 @@ fn transform_table_boundary_splits_batches_without_partial_overlay_or_false_grou
     assert!(frame.frame().batches.iter().all(|b| {
         b.pixels
             .iter()
-            .all(|p| (p.transform as usize) < b.transforms.len())
+            .all(|p| (p.transform_slot()) < b.transforms.len())
     }));
 }
 

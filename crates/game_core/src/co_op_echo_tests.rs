@@ -888,7 +888,7 @@ fn real_publication_and_native_replica_preserve_evolved_owned_fan_and_holes() {
         .flat_map(|b| {
             b.pixels.iter().map(move |p| {
                 (
-                    b.transforms[p.transform as usize].point(Vec2::from_array(p.local)),
+                    b.transforms[p.transform_slot()].point(Vec2::from_array(p.local)),
                     p.color,
                 )
             })

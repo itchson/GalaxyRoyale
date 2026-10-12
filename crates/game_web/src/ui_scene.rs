@@ -2163,7 +2163,7 @@ mod tests {
                         assert_eq!(pixel.color, expected, "{name} cell {x},{y}");
                         if contained {
                             visible += 1;
-                            let t = batch.transforms[pixel.transform as usize];
+                            let t = batch.transforms[pixel.transform_slot()];
                             let actual = t.point(cell) + Vec2::new(220.0, 130.0);
                             for corner in [
                                 Vec2::new(-half, -half),
@@ -2317,7 +2317,7 @@ mod tests {
                         continue;
                     }
                     visible += 1;
-                    let t = batch.transforms[pixel.transform as usize];
+                    let t = batch.transforms[pixel.transform_slot()];
                     for corner in [
                         Vec2::splat(-0.5),
                         Vec2::new(0.5, -0.5),
@@ -2424,7 +2424,7 @@ mod tests {
                             if pixel.color >> 24 == 0 {
                                 continue;
                             }
-                            let t = batch.transforms[pixel.transform as usize];
+                            let t = batch.transforms[pixel.transform_slot()];
                             assert_eq!(t.a[2], extent / 64.0);
                             assert_eq!(t.b[1], extent / 64.0);
                             assert_eq!(t.b[2..], [0.0, 0.0]);
@@ -2520,7 +2520,7 @@ mod tests {
                     let mut colors = std::collections::HashSet::new();
                     for batch in &frame.frame().batches {
                         for cell in &batch.pixels {
-                            let transform = batch.transforms[cell.transform as usize];
+                            let transform = batch.transforms[cell.transform_slot()];
                             assert_eq!(transform.b[2..], [0.0, 0.0]);
                             if cell.color >> 24 == 0 {
                                 continue;
@@ -2714,7 +2714,7 @@ mod tests {
                 .iter()
                 .flat_map(|batch| {
                     batch.pixels.iter().map(|pixel| {
-                        let t = batch.transforms[pixel.transform as usize];
+                        let t = batch.transforms[pixel.transform_slot()];
                         (pixel.local, pixel.color, t.a, t.b)
                     })
                 })
@@ -2866,7 +2866,7 @@ mod tests {
         draw(&mut frame, &scene, [0.0; 2], [640.0, 360.0], 0.0, true);
         let batch = &frame.frame().batches[0];
         assert_eq!(batch.pixels[0].color, 0xff_000000);
-        let transform = batch.transforms[batch.pixels[0].transform as usize];
+        let transform = batch.transforms[batch.pixels[0].transform_slot()];
         assert_eq!(transform.a[2], 300.0);
         assert_eq!(transform.b[1], 100.0);
         assert_eq!(transform.b[2..], [0.0, 0.0]);
@@ -3012,16 +3012,16 @@ mod tests {
             let frame = extract(text, caret);
             let batch = &frame.batches[0];
             assert_eq!(batch.pixels[0].color, rgb(0, 0, 0));
-            let background = batch.transforms[batch.pixels[0].transform as usize];
+            let background = batch.transforms[batch.pixels[0].transform_slot()];
             assert_eq!((background.a[2], background.b[1]), (60.0, 20.0));
             let cursor = batch.pixels.iter().find(|p| p.color == GOLD).unwrap();
-            let transform = batch.transforms[cursor.transform as usize];
+            let transform = batch.transforms[cursor.transform_slot()];
             assert_eq!((transform.a[2], transform.b[1]), (1.0, 7.0));
             let center = transform.point(Vec2::from_array(cursor.local)) + Vec2::new(320.0, 180.0)
                 - Vec2::new(100.0, 50.0);
             assert_eq!(center.x - 0.5, expected);
             for pixel in &batch.pixels {
-                let transform = batch.transforms[pixel.transform as usize];
+                let transform = batch.transforms[pixel.transform_slot()];
                 let center = transform.point(Vec2::from_array(pixel.local))
                     + Vec2::new(320.0, 180.0)
                     - Vec2::new(100.0, 50.0);
@@ -3072,8 +3072,8 @@ mod tests {
         assert_eq!(a.pixel_count, b.pixel_count);
         for (a, b) in a.batches.iter().zip(&b.batches) {
             for (ap, bp) in a.pixels.iter().zip(&b.pixels) {
-                let aw = a.transforms[ap.transform as usize].point(Vec2::from_array(ap.local));
-                let bw = b.transforms[bp.transform as usize].point(Vec2::from_array(bp.local))
+                let aw = a.transforms[ap.transform_slot()].point(Vec2::from_array(ap.local));
+                let bw = b.transforms[bp.transform_slot()].point(Vec2::from_array(bp.local))
                     - Vec2::new(900.25, -1400.5);
                 assert!(aw.distance(bw) < 0.001);
             }
@@ -3142,7 +3142,7 @@ mod tests {
                     if pixel.color >> 24 == 0 {
                         continue;
                     }
-                    let p = batch.transforms[pixel.transform as usize]
+                    let p = batch.transforms[pixel.transform_slot()]
                         .point(Vec2::from_array(pixel.local))
                         + Vec2::new(320.0, 180.0)
                         - Vec2::new(100.0, 50.0);
@@ -3195,7 +3195,7 @@ mod tests {
         assert!(frame.frame().batches.iter().all(|b| {
             b.pixels
                 .iter()
-                .all(|p| (p.transform as usize) < b.transforms.len())
+                .all(|p| (p.transform_slot()) < b.transforms.len())
         }));
     }
 }

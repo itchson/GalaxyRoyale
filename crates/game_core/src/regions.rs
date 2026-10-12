@@ -985,7 +985,7 @@ mod tests {
                     assert!(
                         a.pixels
                             .iter()
-                            .all(|p| (p.transform as usize) < a.transforms.len())
+                            .all(|p| (p.transform_slot()) < a.transforms.len())
                     );
                 }
             }

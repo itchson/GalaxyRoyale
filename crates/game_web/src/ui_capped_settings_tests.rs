@@ -232,7 +232,7 @@ fn assert_complete(frame: &RenderFrame, text: &str, expected_font: f32) {
                 pixel.color, BUTTON_TEXT,
                 "{text}: a complete glyph cell was hidden"
             );
-            let transform = batch.transforms[pixel.transform as usize];
+            let transform = batch.transforms[pixel.transform_slot()];
             assert!(
                 (transform.a[2] - expected_font).abs() < 0.00001,
                 "{text}: requested font changed"
@@ -287,8 +287,8 @@ fn measured_capped_settings_all_nine_names_keep_every_source_cell() {
             .iter()
             .flat_map(|b| {
                 b.pixels.iter().filter(move |p| {
-                    (b.transforms[p.transform as usize].a[2] - font).abs() < 0.00001
-                        && (b.transforms[p.transform as usize].b[1] - font).abs() < 0.00001
+                    (b.transforms[p.transform_slot()].a[2] - font).abs() < 0.00001
+                        && (b.transforms[p.transform_slot()].b[1] - font).abs() < 0.00001
                 })
             })
             .collect::<Vec<_>>();
@@ -354,7 +354,7 @@ fn subunit_font_keeps_strict_scroll_clip_and_hidden_cell_budget() {
                 Vec2::new(-0.5, 0.5),
                 Vec2::splat(0.5),
             ] {
-                let p = batch.transforms[pixel.transform as usize]
+                let p = batch.transforms[pixel.transform_slot()]
                     .point(Vec2::from_array(pixel.local) + offset);
                 assert!(
                     p.x >= clip[0]

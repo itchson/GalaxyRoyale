@@ -47,7 +47,7 @@ fn assert_glyphs(frame: &RenderFrame, color: u32, count: usize, font: f32, rect:
                 continue;
             }
             visible += 1;
-            let t = batch.transforms[pixel.transform as usize];
+            let t = batch.transforms[pixel.transform_slot()];
             assert!((t.a[2] - font).abs() < 0.0001);
             assert!((t.b[1] - font).abs() < 0.0001);
             assert_eq!(t.b[2..], [0.0, 0.0]);
@@ -155,7 +155,7 @@ fn settings_preserve_requested_fraction_then_fit_complete_name_without_integer_s
         let mut cells = 0;
         for batch in &frame.batches {
             for pixel in &batch.pixels {
-                let t = batch.transforms[pixel.transform as usize];
+                let t = batch.transforms[pixel.transform_slot()];
                 if pixel.color == BUTTON_TEXT && (t.a[2] - expected).abs() < 0.0001 {
                     assert!((t.b[1] - expected).abs() < 0.0001);
                     for corner in corners(Vec2::from_array(pixel.local)) {
@@ -189,7 +189,7 @@ fn fractional_scroll_clip_checks_all_four_cell_corners_and_charges_hidden_cells(
     let mut hidden = 0;
     for batch in &frame.batches {
         for pixel in &batch.pixels {
-            let t = batch.transforms[pixel.transform as usize];
+            let t = batch.transforms[pixel.transform_slot()];
             if pixel.color >> 24 == 0 {
                 hidden += 1;
             } else {

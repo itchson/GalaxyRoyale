@@ -283,7 +283,7 @@ fn menu_icons_fit_44_physical_pixel_hitboxes_with_continuous_fractional_scaling(
             for p in &batch.pixels {
                 assert_ne!(p.color >> 24, 0);
                 for c in corners(Vec2::from_array(p.local)) {
-                    let point = local_point(batch.transforms[p.transform as usize], c, [0.0; 2]);
+                    let point = local_point(batch.transforms[p.transform_slot()], c, [0.0; 2]);
                     assert!(point.x >= rect[0] - 0.0001 && point.x <= rect[0] + rect[2] + 0.0001);
                     assert!(point.y >= rect[1] - 0.0001 && point.y <= rect[1] + rect[3] + 0.0001);
                     let physical = (point - Vec2::new(rect[0], rect[1])) * ui_scale;
@@ -370,7 +370,7 @@ fn measured_icons_center_and_keep_every_corner_inside_their_rect_even_far_from_o
                 );
                 for p in &b.pixels {
                     for c in corners(Vec2::from_array(p.local)) {
-                        let point = local_point(b.transforms[p.transform as usize], c, camera);
+                        let point = local_point(b.transforms[p.transform_slot()], c, camera);
                         assert!(
                             point.x >= rect[0] - 0.0625
                                 && point.x <= rect[0] + rect[2] + 0.0625
@@ -401,7 +401,7 @@ fn clipped_icons_charge_whole_authored_bodies_and_reject_each_insufficient_budge
                 }
                 visible += 1;
                 for c in corners(Vec2::from_array(p.local)) {
-                    let point = local_point(b.transforms[p.transform as usize], c, [0.0; 2]);
+                    let point = local_point(b.transforms[p.transform_slot()], c, [0.0; 2]);
                     assert!(
                         point.x >= clip[0]
                             && point.x <= clip[0] + clip[2]
@@ -529,7 +529,7 @@ fn facility_label_is_centered_below_hitbox_and_draws_only_cached_font_cells() {
         for p in &b.pixels {
             assert_eq!(p.color, rgb(98, 143, 156));
             for c in corners(Vec2::from_array(p.local)) {
-                let point = local_point(b.transforms[p.transform as usize], c, [0.0; 2]);
+                let point = local_point(b.transforms[p.transform_slot()], c, [0.0; 2]);
                 assert!(point.y >= r[1] + r[3] + 2.0 && point.y <= r[1] + r[3] + 12.0);
                 left = left.min(point.x);
                 right = right.max(point.x);
@@ -559,9 +559,9 @@ fn restart_action_is_amber_and_preserves_bounded_semantic_label_geometry() {
             if p.color.to_le_bytes()[3] == 0 {
                 continue;
             }
-            assert_eq!(b.transforms[p.transform as usize].b[2..], [0.0, 0.0]);
+            assert_eq!(b.transforms[p.transform_slot()].b[2..], [0.0, 0.0]);
             for c in corners(Vec2::from_array(p.local)) {
-                let point = local_point(b.transforms[p.transform as usize], c, [0.0; 2]);
+                let point = local_point(b.transforms[p.transform_slot()], c, [0.0; 2]);
                 assert!(
                     point.x >= rect[0]
                         && point.x <= rect[0] + rect[2]

@@ -706,7 +706,7 @@ mod tests {
                 .iter()
                 .flat_map(|batch| {
                     batch.pixels.iter().filter_map(|p| {
-                        let t = batch.transforms[p.transform as usize];
+                        let t = batch.transforms[p.transform_slot()];
                         let min = t.point(Vec2::from_array(p.local) - Vec2::splat(0.5));
                         let max = t.point(Vec2::from_array(p.local) + Vec2::splat(0.5));
                         (center.x >= min.x
@@ -784,7 +784,7 @@ mod tests {
             .iter()
             .flat_map(|batch| {
                 batch.pixels.iter().map(|p| {
-                    let t = batch.transforms[p.transform as usize];
+                    let t = batch.transforms[p.transform_slot()];
                     (p.local, p.color, t.a, t.b)
                 })
             })
@@ -956,7 +956,7 @@ mod tests {
             .flat_map(|b| {
                 b.pixels
                     .iter()
-                    .map(|p| (*p, b.transforms[p.transform as usize]))
+                    .map(|p| (*p, b.transforms[p.transform_slot()]))
             })
             .collect();
         let actual: Vec<_> = clipped
@@ -966,7 +966,7 @@ mod tests {
             .flat_map(|b| {
                 b.pixels
                     .iter()
-                    .map(|p| (*p, b.transforms[p.transform as usize]))
+                    .map(|p| (*p, b.transforms[p.transform_slot()]))
             })
             .collect();
         let mut hidden = 0;

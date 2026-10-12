@@ -691,7 +691,7 @@ mod tests {
                     if pixel.color >> 24 == 0 {
                         continue;
                     }
-                    let transform = batch.transforms[pixel.transform as usize];
+                    let transform = batch.transforms[pixel.transform_slot()];
                     for corner in [
                         Vec2::splat(-0.5),
                         Vec2::new(0.5, -0.5),
@@ -731,7 +731,7 @@ mod tests {
         for b in &f.frame().batches {
             for p in &b.pixels {
                 if p.color >> 24 != 0 {
-                    let t = b.transforms[p.transform as usize];
+                    let t = b.transforms[p.transform_slot()];
                     for corner in [
                         Vec2::splat(-0.5),
                         Vec2::new(0.5, -0.5),
@@ -963,7 +963,7 @@ mod tests {
         };
         for b in &f.frame().batches {
             for pixel in &b.pixels {
-                assert!((pixel.transform as usize) < b.transforms.len());
+                assert!((pixel.transform_slot()) < b.transforms.len());
             }
         }
         let last = f.frame().batches.last().unwrap();

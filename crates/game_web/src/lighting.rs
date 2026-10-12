@@ -127,6 +127,9 @@ pub fn uniforms_with_raster(
         for i in 0..3 {
             result[offset + 4 + i] = light.color[i].clamp(0.0, 1.0);
         }
+        // A bounded 2.5D light height; legacy cells ignore it. Reuse the existing
+        // spare component so mapped cells and both backends share the same ABI.
+        result[offset + 7] = result[offset + 2] * 0.35;
         count += 1;
     }
     result
@@ -135,6 +138,37 @@ pub fn uniforms_with_raster(
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn shared_pixel_shader_validates_with_portable_capabilities() {
+        let shader = naga::front::wgsl::parse_str(include_str!("pixel.wgsl"))
+            .expect("shared pixel WGSL parses");
+        naga::valid::Validator::new(
+            naga::valid::ValidationFlags::all(),
+            naga::valid::Capabilities::empty(),
+        )
+        .validate(&shader)
+        .expect("pixel material shader validates without optional GPU capabilities");
+    }
+
+    #[test]
+    fn surface_light_height_tracks_bounded_world_radius_without_growing_uniforms() {
+        for radius in [f32::MIN_POSITIVE, 20.0, 240.0, 1_000_000.0] {
+            let packed = uniforms(
+                [640.0, 360.0],
+                [400.0, -90.0],
+                &[LightSource {
+                    position: [420.0, -70.0],
+                    radius,
+                    color: [0.1, 0.5, 1.0],
+                    intensity: 1.0,
+                }],
+            );
+            assert_eq!(packed.len() * 4, 304);
+            assert_eq!(packed[15], packed[10] * 0.35);
+            assert_eq!(&packed[8..10], &[20.0, 20.0]);
+            assert!(packed[16..RASTER_OFFSET].iter().all(|v| *v == 0.0));
+        }
+    }
     #[test]
     fn uniform_layout_is_bounded_and_lights_follow_camera() {
         let light = LightSource {

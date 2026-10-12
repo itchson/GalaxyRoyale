@@ -1316,7 +1316,7 @@ mod tests {
             .flat_map(|b| {
                 b.pixels
                     .iter()
-                    .map(|p| (p.local, p.color, b.transforms[p.transform as usize]))
+                    .map(|p| (p.local, p.color, b.transforms[p.transform_slot()]))
             })
             .collect()
     }
@@ -1442,7 +1442,7 @@ mod tests {
                 let views: Vec<_> = [0.6, 1.0, 1.6].into_iter().map(|zoom| {
                     let view = CameraView::new(camera, Vec2::new(256.0, 180.0), zoom).unwrap();
                     let cells: Vec<_> = frame.frame().batches.iter().flat_map(|b| b.pixels.iter().map(|p| {
-                        let t = b.transforms[p.transform as usize];
+                        let t = b.transforms[p.transform_slot()];
                         serde_json::json!({"local": p.local, "transform": {"a": t.a, "b": t.b},
                             "corners": corners.map(|c| view.world_to_screen(t.point(Vec2::from_array(p.local) + c)).to_array()),
                             "rgba": p.color.to_le_bytes(), "material": [t.b[2], t.b[3]]})
@@ -1662,7 +1662,7 @@ mod tests {
                 let submitted: Vec<_> = batch
                     .pixels
                     .iter()
-                    .filter(|p| batch.transforms[p.transform as usize].b[3] == 0.0)
+                    .filter(|p| batch.transforms[p.transform_slot()].b[3] == 0.0)
                     .collect();
                 let source: Vec<_> = a.cells().chain(b.cells()).collect();
                 let cell_scale = if reduced { 1.0 } else { 0.5 };
@@ -1752,7 +1752,7 @@ mod tests {
                 let view = CameraView::new(camera, Vec2::new(1200.0, 700.0), zoom).unwrap();
                 for b in &frame.batches {
                     for pixel in &b.pixels {
-                        let t = view.relative_transform(b.transforms[pixel.transform as usize]);
+                        let t = view.relative_transform(b.transforms[pixel.transform_slot()]);
                         let p = t.point(Vec2::from_array(pixel.local));
                         assert!(p.is_finite());
                         let width = t.point(Vec2::from_array(pixel.local) + Vec2::X) - p;
@@ -1930,7 +1930,7 @@ mod tests {
                     let view = CameraView::new(camera, Vec2::new(533.0, 300.0), zoom).unwrap();
                     for b in &frame.frame().batches {
                         for p in &b.pixels {
-                            let transform = b.transforms[p.transform as usize];
+                            let transform = b.transforms[p.transform_slot()];
                             if transform.b[3] >= 0.0 {
                                 continue;
                             }

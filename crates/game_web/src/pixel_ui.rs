@@ -2127,7 +2127,7 @@ mod tests {
                     let mut fire_glyph_cells = 0usize;
                     for batch in &frame.frame().batches {
                         for pixel in batch.pixels.iter().filter(|pixel| pixel.color >> 24 != 0) {
-                            let transform = batch.transforms[pixel.transform as usize];
+                            let transform = batch.transforms[pixel.transform_slot()];
                             let center = transform.point(Vec2::from_array(pixel.local)) - origin;
                             if transform.a[2] == 4.0 && transform.b[1] == 4.0 {
                                 assert_eq!(center, expected_knob);
@@ -2278,7 +2278,7 @@ mod tests {
                         assert!(frame.frame().pixel_count > 0);
                         for b in &frame.frame().batches {
                             for p in b.pixels.iter().filter(|p| p.color >> 24 != 0) {
-                                let t = b.transforms[p.transform as usize];
+                                let t = b.transforms[p.transform_slot()];
                                 for offset in [
                                     Vec2::new(-0.5, -0.5),
                                     Vec2::new(0.5, -0.5),
@@ -2316,7 +2316,7 @@ mod tests {
                             for b in &frame.frame().batches {
                                 for p in &b.pixels {
                                     for offset in [Vec2::new(-0.5, -0.5), Vec2::new(0.5, 0.5)] {
-                                        let point = b.transforms[p.transform as usize]
+                                        let point = b.transforms[p.transform_slot()]
                                             .point(Vec2::from_array(p.local) + offset)
                                             - origin;
                                         assert!(
@@ -2406,7 +2406,7 @@ mod tests {
             for batch in &frame.frame().batches {
                 for pixel in &batch.pixels {
                     result.push(
-                        batch.transforms[pixel.transform as usize]
+                        batch.transforms[pixel.transform_slot()]
                             .point(Vec2::from_array(pixel.local))
                             - camera,
                     );
@@ -2451,7 +2451,7 @@ mod tests {
                 .iter()
                 .flat_map(|batch| {
                     batch.pixels.iter().map(|pixel| {
-                        batch.transforms[pixel.transform as usize]
+                        batch.transforms[pixel.transform_slot()]
                             .point(Vec2::from_array(pixel.local))
                             + Vec2::new(320.0, 180.0)
                     })
@@ -2487,7 +2487,7 @@ mod tests {
         let mut status_backing = false;
         for batch in &frame.frame().batches {
             for pixel in &batch.pixels {
-                let transform = batch.transforms[pixel.transform as usize];
+                let transform = batch.transforms[pixel.transform_slot()];
                 let p = transform.point(Vec2::from_array(pixel.local)) + Vec2::new(320.0, 180.0);
                 if pixel.color == INK && transform.a[2] >= 170.0 && transform.b[1] >= 36.0 {
                     status_backing = p.y - transform.b[1] * 0.5 <= 312.0;
@@ -2528,7 +2528,7 @@ mod tests {
             let mut warning_cells = 0;
             for batch in &frame.frame().batches {
                 for pixel in &batch.pixels {
-                    let position = batch.transforms[pixel.transform as usize]
+                    let position = batch.transforms[pixel.transform_slot()]
                         .point(Vec2::from_array(pixel.local))
                         - origin;
                     if position.y >= 44.0 && position.y < 84.0 {
@@ -2575,7 +2575,7 @@ mod tests {
             let mut health_cells = 0;
             for batch in &frame.frame().batches {
                 for pixel in &batch.pixels {
-                    let t = batch.transforms[pixel.transform as usize];
+                    let t = batch.transforms[pixel.transform_slot()];
                     let p = t.point(Vec2::from_array(pixel.local)) + Vec2::new(200.0, 120.0);
                     if (68.0..108.0).contains(&p.y) {
                         assert!((12.0..12.0 + width).contains(&p.x));
@@ -2686,7 +2686,7 @@ mod tests {
         let mut hull = 0;
         for batch in &frame.frame().batches {
             for pixel in &batch.pixels {
-                let p = batch.transforms[pixel.transform as usize]
+                let p = batch.transforms[pixel.transform_slot()]
                     .point(Vec2::from_array(pixel.local))
                     + Vec2::new(200.0, 120.0);
                 assert!(
@@ -2708,7 +2708,7 @@ mod tests {
             draw_controls(&mut frame, [0.0; 2], [640.0, 360.0], Some(stick), true);
             for batch in &frame.frame().batches {
                 for pixel in &batch.pixels {
-                    let t = batch.transforms[pixel.transform as usize];
+                    let t = batch.transforms[pixel.transform_slot()];
                     if t.a[2] == 4.0 && t.b[1] == 4.0 {
                         return t.point(Vec2::from_array(pixel.local)) + Vec2::new(320.0, 180.0);
                     }

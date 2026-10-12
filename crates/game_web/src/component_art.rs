@@ -394,8 +394,8 @@ mod tests {
                         Vec2::new(-0.5, 0.5),
                     ] {
                         let expected = transform.point(expected_local + corner);
-                        let actual = batch.transforms[pixel.transform as usize]
-                            .point(expected_local + corner);
+                        let actual =
+                            batch.transforms[pixel.transform_slot()].point(expected_local + corner);
                         assert!(actual.is_finite() && actual.distance(expected) < 0.0001);
                     }
                 }

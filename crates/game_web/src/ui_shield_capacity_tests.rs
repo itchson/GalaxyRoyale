@@ -10,7 +10,7 @@ fn packet(frame: &FrameBuilder) -> Vec<Cell> {
         .iter()
         .flat_map(|batch| {
             batch.pixels.iter().map(|pixel| {
-                let t = batch.transforms[pixel.transform as usize];
+                let t = batch.transforms[pixel.transform_slot()];
                 assert_eq!(t.b[2..], [0.0; 2], "native shield remains unlit");
                 (
                     pixel.color,

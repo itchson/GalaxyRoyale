@@ -629,7 +629,7 @@ fn real_publication_and_replica_render_both_owned_fifth_shots_without_wire_field
         .flat_map(|b| {
             b.pixels.iter().map(move |p| {
                 (
-                    b.transforms[p.transform as usize].point(Vec2::from_array(p.local)),
+                    b.transforms[p.transform_slot()].point(Vec2::from_array(p.local)),
                     p.color,
                 )
             })

@@ -20,7 +20,7 @@ fn signature(frame: &RenderFrame) -> Vec<([f32; 2], u32, [f32; 4])> {
         .iter()
         .flat_map(|b| {
             b.pixels.iter().map(|p| {
-                let t = b.transforms[p.transform as usize];
+                let t = b.transforms[p.transform_slot()];
                 (
                     t.point(Vec2::from_array(p.local)).to_array(),
                     p.color,
@@ -146,7 +146,7 @@ fn fractional_tiny_chrome_preserves_full_source_cells_and_local_geometry() {
             for b in &frame.batches {
                 for p in &b.pixels {
                     assert_eq!(p.color >> 24, 255);
-                    let t = b.transforms[p.transform as usize];
+                    let t = b.transforms[p.transform_slot()];
                     for c in [
                         Vec2::splat(-0.5),
                         Vec2::new(0.5, -0.5),
@@ -193,7 +193,7 @@ fn partial_clip_retains_and_charges_hidden_cells_with_reflected_sheared_parent()
                 continue;
             }
             visible += 1;
-            let t = b.transforms[p.transform as usize];
+            let t = b.transforms[p.transform_slot()];
             for c in [
                 Vec2::splat(-0.5),
                 Vec2::new(0.5, -0.5),

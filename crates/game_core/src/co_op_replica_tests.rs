@@ -135,7 +135,7 @@ fn geometry(frame: &engine_core::RenderFrame) -> Vec<CellGeometry> {
         .iter()
         .flat_map(|b| {
             b.pixels.iter().map(|p| {
-                let t = b.transforms[p.transform as usize];
+                let t = b.transforms[p.transform_slot()];
                 (
                     t.point(Vec2::from_array(p.local)).to_array(),
                     p.color,

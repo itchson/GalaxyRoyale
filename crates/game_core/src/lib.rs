@@ -4827,7 +4827,7 @@ mod tests {
                     batch
                         .pixels
                         .iter()
-                        .filter(|pixel| batch.transforms[pixel.transform as usize] == transform)
+                        .filter(|pixel| batch.transforms[pixel.transform_slot()] == transform)
                         .count()
                 })
                 .sum::<usize>()

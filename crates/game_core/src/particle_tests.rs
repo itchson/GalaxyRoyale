@@ -290,7 +290,7 @@ fn fractional_particle_groups_keep_far_local_motion_and_zoom_changes_projection_
                         } else {
                             1.0 + age * 0.9
                         };
-                    let packed = batch.transforms[cell.transform as usize];
+                    let packed = batch.transforms[cell.transform_slot()];
                     assert_eq!(packed.a[2], expected_size);
                     assert_eq!(packed.b[1], expected_size);
                     let relative = view.relative_transform(packed);

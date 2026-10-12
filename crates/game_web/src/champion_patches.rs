@@ -285,7 +285,7 @@ mod tests {
                             Vec2::new(-0.5, 0.5),
                             Vec2::splat(0.5),
                         ] {
-                            let p = batch.transforms[pixel.transform as usize]
+                            let p = batch.transforms[pixel.transform_slot()]
                                 .point(Vec2::from_array(pixel.local) + corner);
                             assert!(
                                 p.x >= i.rect[0] - 0.00001
@@ -369,7 +369,7 @@ mod tests {
                     .into_iter()
                     .all(|corner| {
                         inside(
-                            batch.transforms[pixel.transform as usize]
+                            batch.transforms[pixel.transform_slot()]
                                 .point(Vec2::from_array(pixel.local) + corner),
                             i.clip,
                         )

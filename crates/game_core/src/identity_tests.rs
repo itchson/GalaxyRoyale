@@ -579,7 +579,7 @@ fn dock_corporation_mapping_preserves_structural_materials_legacy_and_facility_h
                 .iter()
                 .flat_map(|b| {
                     b.pixels.iter().filter_map(|p| {
-                        let t = b.transforms[p.transform as usize];
+                        let t = b.transforms[p.transform_slot()];
                         (t.a[0] == 0.0 && t.a[1] == -64.0).then_some((p.local, p.color, t))
                     })
                 })

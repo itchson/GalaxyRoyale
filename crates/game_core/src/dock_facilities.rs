@@ -317,7 +317,7 @@ mod tests {
             .flat_map(|b| {
                 b.pixels
                     .iter()
-                    .map(|p| (p.local, p.color, b.transforms[p.transform as usize]))
+                    .map(|p| (p.local, p.color, b.transforms[p.transform_slot()]))
             })
             .collect()
     }

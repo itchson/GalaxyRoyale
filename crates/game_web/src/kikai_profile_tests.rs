@@ -328,7 +328,7 @@ fn partial_cells_clip_before_reflected_sheared_parent_and_still_charge_both_budg
                 if pixel.color >> 24 == 0 {
                     continue;
                 }
-                let gpu = batch.transforms[pixel.transform as usize];
+                let gpu = batch.transforms[pixel.transform_slot()];
                 for corner in [
                     Vec2::splat(-0.5),
                     Vec2::new(0.5, -0.5),

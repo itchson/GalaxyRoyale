@@ -36,7 +36,7 @@ fn points(frame: &RenderFrame, camera: [f32; 2]) -> Vec<(Vec2, u32)> {
         .flat_map(|b| {
             b.pixels.iter().map(move |p| {
                 (
-                    b.transforms[p.transform as usize].point(Vec2::from_array(p.local))
+                    b.transforms[p.transform_slot()].point(Vec2::from_array(p.local))
                         - Vec2::from_array(camera)
                         + Vec2::from_array(VIEW) * 0.5
                         - Vec2::from_array(GROUP),
@@ -58,8 +58,7 @@ fn bounds(frame: &RenderFrame, camera: [f32; 2], rect: [f32; 4], tolerance: f32)
                 Vec2::new(-0.5, 0.5),
                 Vec2::splat(0.5),
             ] {
-                let q = b.transforms[p.transform as usize]
-                    .point(Vec2::from_array(p.local) + offset)
+                let q = b.transforms[p.transform_slot()].point(Vec2::from_array(p.local) + offset)
                     - Vec2::from_array(camera)
                     + Vec2::from_array(VIEW) * 0.5
                     - Vec2::from_array(GROUP);
@@ -347,7 +346,7 @@ fn sixty_four_markers_and_six_rings_stay_bounded_and_oversize_input_cannot_leak_
         b.transforms.len() <= 128
             && b.pixels
                 .iter()
-                .all(|p| (p.transform as usize) < b.transforms.len())
+                .all(|p| (p.transform_slot()) < b.transforms.len())
     }));
     let mut frame = FrameBuilder::new();
     let mut painter = Painter {

@@ -253,7 +253,7 @@ mod tests {
             .flat_map(|batch| {
                 batch.pixels.iter().map(|pixel| {
                     (
-                        batch.transforms[pixel.transform as usize]
+                        batch.transforms[pixel.transform_slot()]
                             .point(Vec2::from_array(pixel.local)),
                         pixel.color,
                     )
@@ -419,7 +419,7 @@ mod tests {
                 assert!(frame.frame().pixel_count > 0);
                 for batch in &frame.frame().batches {
                     for pixel in &batch.pixels {
-                        let transform = batch.transforms[pixel.transform as usize];
+                        let transform = batch.transforms[pixel.transform_slot()];
                         for corner in [
                             Vec2::new(-0.5, -0.5),
                             Vec2::new(0.5, -0.5),

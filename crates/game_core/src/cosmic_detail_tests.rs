@@ -42,7 +42,7 @@ fn packets(frame: &RenderFrame) -> Vec<([f32; 2], u32, GpuTransform)> {
         .flat_map(|b| {
             b.pixels
                 .iter()
-                .map(|p| (p.local, p.color, b.transforms[p.transform as usize]))
+                .map(|p| (p.local, p.color, b.transforms[p.transform_slot()]))
         })
         .collect()
 }
@@ -281,7 +281,7 @@ fn export_actual_galaxy_revision_packets() {
             let views: Vec<_> = [0.6, 1.0, 1.6].into_iter().map(|zoom| {
                 let view = CameraView::new(camera, Vec2::new(256.0, 180.0), zoom).unwrap();
                 let cells: Vec<_> = frame.frame().batches.iter().flat_map(|b| b.pixels.iter().map(|p| {
-                    let t = b.transforms[p.transform as usize];
+                    let t = b.transforms[p.transform_slot()];
                     let corners: Vec<_> = CORNERS.iter().map(|c| view.world_to_screen(t.point(Vec2::from_array(p.local) + *c)).to_array()).collect();
                     serde_json::json!({"corners":corners,"rgba":p.color.to_le_bytes(),"material":[t.b[2],t.b[3]]})
                 })).collect();
@@ -450,7 +450,7 @@ fn atomic_whole_motif_admission_preserves_prior_packets_at_transform_boundary() 
             assert!(frame.frame().batches.iter().all(|b| {
                 b.pixels
                     .iter()
-                    .all(|p| (p.transform as usize) < b.transforms.len())
+                    .all(|p| (p.transform_slot()) < b.transforms.len())
             }));
         }
     }
@@ -480,7 +480,7 @@ fn far_streamed_motifs_keep_local_detail_finite_and_inside_conservative_culling_
                     assert!(draw_motif(&mut f, m, &s, &mut 8_000) > 0);
                     for batch in &f.frame().batches {
                         for p in &batch.pixels {
-                            let t = view.relative_transform(batch.transforms[p.transform as usize]);
+                            let t = view.relative_transform(batch.transforms[p.transform_slot()]);
                             for corner in CORNERS {
                                 let q = t.point(Vec2::from_array(p.local) + corner);
                                 assert!(q.is_finite() && q.length() < MOTIF_RADIUS);
@@ -534,7 +534,7 @@ fn export_actual_fine_cosmic_packets_for_software_contact_proof() {
                 let views: Vec<_> = [0.6, 1.0, 1.6].into_iter().map(|zoom| {
                     let view = CameraView::new(Vec2::ZERO, Vec2::new(192.0, 144.0), zoom).unwrap();
                     let cells: Vec<_> = frame.frame().batches.iter().flat_map(|b| b.pixels.iter().map(|p| {
-                        let t = b.transforms[p.transform as usize];
+                        let t = b.transforms[p.transform_slot()];
                         let corners: Vec<_> = CORNERS.iter().map(|c| view.world_to_screen(t.point(Vec2::from_array(p.local) + *c)).to_array()).collect();
                         serde_json::json!({"corners": corners, "rgba": p.color.to_le_bytes(), "material": [t.b[2],t.b[3]]})
                     })).collect();

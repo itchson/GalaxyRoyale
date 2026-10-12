@@ -30,7 +30,7 @@ fn bounds_check(frame: &FrameBuilder, origin: Vec2, layout: FlightStatusLayout) 
             if pixel.color >> 24 == 0 {
                 continue;
             }
-            let transform = batch.transforms[pixel.transform as usize];
+            let transform = batch.transforms[pixel.transform_slot()];
             assert_eq!(transform.b[2..], [0.0, 0.0], "UI remains unlit");
             for corner in [
                 Vec2::splat(-0.5),
@@ -65,7 +65,7 @@ fn packet(frame: &FrameBuilder) -> Vec<PackedCell> {
         .iter()
         .flat_map(|batch| {
             batch.pixels.iter().map(|pixel| {
-                let t = batch.transforms[pixel.transform as usize];
+                let t = batch.transforms[pixel.transform_slot()];
                 (pixel.local, pixel.color, t.a, t.b)
             })
         })
@@ -93,7 +93,7 @@ fn micro_footer_and_minimap_stay_inside_their_shared_reservations() {
     assert!(frame.frame().pixel_count > 0);
     for batch in &frame.frame().batches {
         for p in &batch.pixels {
-            let t = batch.transforms[p.transform as usize];
+            let t = batch.transforms[p.transform_slot()];
             let center =
                 t.point(Vec2::from_array(p.local)) + Vec2::from_array(layout.viewport) * 0.5;
             if let Some(strip) = layout.strip
@@ -149,7 +149,7 @@ fn micro_text_clips_whole_cells_and_charges_actual_occupied_objects() {
             if p.color >> 24 == 0 {
                 continue;
             }
-            let t = batch.transforms[p.transform as usize];
+            let t = batch.transforms[p.transform_slot()];
             for corner in [
                 Vec2::splat(-0.5),
                 Vec2::splat(0.5),
@@ -224,7 +224,7 @@ fn right_aligned_micro_cells_keep_exact_size_clip_and_both_budgets() {
         for batch in &frame.frame().batches {
             for cell in &batch.pixels {
                 assert_ne!(cell.color >> 24, 0);
-                let t = batch.transforms[cell.transform as usize];
+                let t = batch.transforms[cell.transform_slot()];
                 for corner in [
                     Vec2::splat(-0.5),
                     Vec2::splat(0.5),
@@ -285,7 +285,7 @@ fn right_aligned_micro_cells_keep_exact_size_clip_and_both_budgets() {
             if p.color >> 24 == 0 {
                 continue;
             }
-            let t = b.transforms[p.transform as usize];
+            let t = b.transforms[p.transform_slot()];
             for corner in [
                 Vec2::splat(-0.5),
                 Vec2::splat(0.5),
@@ -722,7 +722,7 @@ fn semantic_status_line_clips_whole_glyph_cells_and_preserves_ui_budget_and_unli
         assert!(f.frame().pixel_count > 0 && f.frame().pixel_count < 500);
         for b in &f.frame().batches {
             for p in &b.pixels {
-                let t = b.transforms[p.transform as usize];
+                let t = b.transforms[p.transform_slot()];
                 assert_eq!(t.b[2..], [0.0, 0.0]);
                 if p.color >> 24 == 0 {
                     continue;

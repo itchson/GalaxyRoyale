@@ -314,7 +314,7 @@ mod tests {
             .flat_map(|b| {
                 b.pixels
                     .iter()
-                    .map(|p| (p.local, p.color, b.transforms[p.transform as usize]))
+                    .map(|p| (p.local, p.color, b.transforms[p.transform_slot()]))
             })
             .collect()
     }
@@ -642,7 +642,7 @@ mod tests {
             let view = CameraView::new(center, Vec2::new(533.0, 300.0), 0.6).unwrap();
             for b in &f.frame().batches {
                 for p in &b.pixels {
-                    let t = view.relative_transform(b.transforms[p.transform as usize]);
+                    let t = view.relative_transform(b.transforms[p.transform_slot()]);
                     for c in [
                         Vec2::splat(-0.5),
                         Vec2::new(0.5, -0.5),
@@ -671,7 +671,7 @@ mod tests {
             assert!(
                 b.pixels
                     .iter()
-                    .all(|p| (p.transform as usize) < b.transforms.len())
+                    .all(|p| (p.transform_slot()) < b.transforms.len())
             )
         }
     }

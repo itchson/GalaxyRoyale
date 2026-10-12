@@ -19,7 +19,7 @@ fn fine_cells(game: &Game) -> Vec<([f32; 2], u32)> {
         .iter()
         .flat_map(|batch| {
             batch.pixels.iter().filter_map(|pixel| {
-                (batch.transforms[pixel.transform as usize] == expected)
+                (batch.transforms[pixel.transform_slot()] == expected)
                     .then_some((pixel.local, pixel.color))
             })
         })

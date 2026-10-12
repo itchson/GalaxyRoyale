@@ -96,8 +96,8 @@ fn assert_rect(frame: &RenderFrame, rect: [f32; 4], camera: [f32; 2], epsilon: f
     let mut visible = 0;
     for b in &frame.batches {
         for p in &b.pixels {
-            assert!((p.transform as usize) < b.transforms.len());
-            let t = b.transforms[p.transform as usize];
+            assert!((p.transform_slot()) < b.transforms.len());
+            let t = b.transforms[p.transform_slot()];
             assert_eq!(t.b[2..], [0.0, 0.0]);
             if p.color >> 24 == 0 {
                 continue;
@@ -296,7 +296,7 @@ fn profile_scene_fractional_clipping_motion_and_quota_preserve_type_geometry() {
     assert!(actual.batches.iter().all(|b| {
         b.pixels
             .iter()
-            .all(|p| (p.transform as usize) < b.transforms.len())
+            .all(|p| (p.transform_slot()) < b.transforms.len())
     }));
 }
 
@@ -580,7 +580,7 @@ fn portrait_and_ship_child_affines_survive_reflection_shear_and_nonuniform_paren
         assert_eq!(actual.batches[0].transforms.len(), parts);
         for b in &actual.batches {
             for pixel in &b.pixels {
-                let gpu = b.transforms[pixel.transform as usize];
+                let gpu = b.transforms[pixel.transform_slot()];
                 assert_eq!(gpu.b[2..], [0.0, 0.0]);
                 for corner in corners(Vec2::from_array(pixel.local)) {
                     assert!(
@@ -681,7 +681,7 @@ fn scene_cap_and_transform_batch_boundary_keep_whole_portrait_objects_and_valid_
         assert!(
             b.pixels
                 .iter()
-                .all(|p| (p.transform as usize) < b.transforms.len())
+                .all(|p| (p.transform_slot()) < b.transforms.len())
         );
     }
 }
@@ -772,7 +772,7 @@ fn high_detail_profiles_and_real_dense_menu_controls_fit_the_shared_scene_cap() 
         let visible = last
             .pixels
             .iter()
-            .filter(|p| p.transform as usize >= first_portrait && p.color >> 24 != 0)
+            .filter(|p| p.transform_slot() >= first_portrait && p.color >> 24 != 0)
             .count();
         assert_eq!(
             visible, expected,
@@ -781,7 +781,7 @@ fn high_detail_profiles_and_real_dense_menu_controls_fit_the_shared_scene_cap() 
         assert!(actual.batches.iter().all(|b| {
             b.pixels
                 .iter()
-                .all(|p| (p.transform as usize) < b.transforms.len())
+                .all(|p| (p.transform_slot()) < b.transforms.len())
         }));
         println!(
             "{kind}: portrait{expected} + menu{} = {} quads",
@@ -961,7 +961,7 @@ fn meishi_card_all_profile_types_factory_hulls_and_eight_earned_patches_fit_60k(
             .iter()
             .flat_map(|batch| {
                 batch.pixels.iter().map(|pixel| {
-                    let transform = batch.transforms[pixel.transform as usize];
+                    let transform = batch.transforms[pixel.transform_slot()];
                     (pixel.local, pixel.color, transform.a, transform.b)
                 })
             })

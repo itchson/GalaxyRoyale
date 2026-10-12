@@ -1,0 +1,4086 @@
+{
+  "acquisition": 2,
+  "snapshot": {
+    "protocol": "galaxy-coop-1",
+    "session": "00000000000000000000000000000064",
+    "world_seed": 812345,
+    "tick": 0,
+    "revision": 7,
+    "progression": false,
+    "participants": [
+      {
+        "id": "00000000000000000000000000000001",
+        "slot": 0,
+        "epoch": 1,
+        "local_seed": 812345,
+        "identity": {
+          "kind": "talo",
+          "corporation": "hugo",
+          "sub_corporation": "pan",
+          "hex_id": "0123456789abcdef"
+        },
+        "selected_ship": 0,
+        "position": [
+          450.0,
+          0.0
+        ],
+        "previous": [
+          450.0,
+          0.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ],
+        "heading": 0.0,
+        "previous_heading": 0.0,
+        "hull": 100.0,
+        "max_hull": 100.0,
+        "shield": 9.1,
+        "max_shield": 10.0,
+        "throttle": 0.0,
+        "last_sequence": null
+      },
+      {
+        "id": "00000000000000000000000000000002",
+        "slot": 1,
+        "epoch": 2,
+        "local_seed": 812345,
+        "identity": {
+          "kind": "talo",
+          "corporation": "hugo",
+          "sub_corporation": "pan",
+          "hex_id": "0123456789abcdef"
+        },
+        "selected_ship": 0,
+        "owned_loadout": {
+          "version": 1,
+          "selected_ship": 0,
+          "owned_ships": 1,
+          "patches": 0,
+          "royal_victory": false,
+          "ship_xp": 0,
+          "hardware": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "slots": [
+            null,
+            {
+              "index": 4,
+              "rank": 1
+            },
+            null
+          ],
+          "trained_starter": false,
+          "relic_count": 0
+        },
+        "position": [
+          450.0,
+          150.0
+        ],
+        "previous": [
+          450.0,
+          150.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ],
+        "heading": 0.0,
+        "previous_heading": 0.0,
+        "hull": 100.0,
+        "max_hull": 100.0,
+        "shield": 10.0,
+        "max_shield": 10.0,
+        "throttle": 0.0,
+        "last_sequence": null
+      },
+      {
+        "id": "00000000000000000000000000000003",
+        "slot": 2,
+        "epoch": 3,
+        "local_seed": 812345,
+        "identity": {
+          "kind": "talo",
+          "corporation": "hugo",
+          "sub_corporation": "pan",
+          "hex_id": "0123456789abcdef"
+        },
+        "selected_ship": 0,
+        "owned_loadout": {
+          "version": 1,
+          "selected_ship": 0,
+          "owned_ships": 1,
+          "patches": 0,
+          "royal_victory": false,
+          "ship_xp": 0,
+          "hardware": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "slots": [
+            null,
+            {
+              "index": 4,
+              "rank": 1
+            },
+            null
+          ],
+          "trained_starter": false,
+          "relic_count": 0
+        },
+        "position": [
+          450.0,
+          300.0
+        ],
+        "previous": [
+          450.0,
+          300.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ],
+        "heading": 0.0,
+        "previous_heading": 0.0,
+        "hull": 100.0,
+        "max_hull": 100.0,
+        "shield": 10.0,
+        "max_shield": 10.0,
+        "throttle": 0.0,
+        "last_sequence": null
+      },
+      {
+        "id": "00000000000000000000000000000004",
+        "slot": 3,
+        "epoch": 4,
+        "local_seed": 812345,
+        "identity": {
+          "kind": "talo",
+          "corporation": "hugo",
+          "sub_corporation": "pan",
+          "hex_id": "0123456789abcdef"
+        },
+        "selected_ship": 0,
+        "owned_loadout": {
+          "version": 1,
+          "selected_ship": 0,
+          "owned_ships": 1,
+          "patches": 0,
+          "royal_victory": false,
+          "ship_xp": 0,
+          "hardware": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "slots": [
+            null,
+            {
+              "index": 4,
+              "rank": 1
+            },
+            null
+          ],
+          "trained_starter": false,
+          "relic_count": 0
+        },
+        "position": [
+          450.0,
+          450.0
+        ],
+        "previous": [
+          450.0,
+          450.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ],
+        "heading": 0.0,
+        "previous_heading": 0.0,
+        "hull": 100.0,
+        "max_hull": 100.0,
+        "shield": 10.0,
+        "max_shield": 10.0,
+        "throttle": 0.0,
+        "last_sequence": null
+      },
+      {
+        "id": "00000000000000000000000000000005",
+        "slot": 4,
+        "epoch": 5,
+        "local_seed": 812345,
+        "identity": {
+          "kind": "talo",
+          "corporation": "hugo",
+          "sub_corporation": "pan",
+          "hex_id": "0123456789abcdef"
+        },
+        "selected_ship": 0,
+        "owned_loadout": {
+          "version": 1,
+          "selected_ship": 0,
+          "owned_ships": 1,
+          "patches": 0,
+          "royal_victory": false,
+          "ship_xp": 0,
+          "hardware": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "slots": [
+            null,
+            {
+              "index": 4,
+              "rank": 1
+            },
+            null
+          ],
+          "trained_starter": false,
+          "relic_count": 0
+        },
+        "position": [
+          450.0,
+          600.0
+        ],
+        "previous": [
+          450.0,
+          600.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ],
+        "heading": 0.0,
+        "previous_heading": 0.0,
+        "hull": 100.0,
+        "max_hull": 100.0,
+        "shield": 10.0,
+        "max_shield": 10.0,
+        "throttle": 0.0,
+        "last_sequence": null
+      },
+      {
+        "id": "00000000000000000000000000000006",
+        "slot": 5,
+        "epoch": 6,
+        "local_seed": 812345,
+        "identity": {
+          "kind": "talo",
+          "corporation": "hugo",
+          "sub_corporation": "pan",
+          "hex_id": "0123456789abcdef"
+        },
+        "selected_ship": 0,
+        "owned_loadout": {
+          "version": 1,
+          "selected_ship": 0,
+          "owned_ships": 1,
+          "patches": 0,
+          "royal_victory": false,
+          "ship_xp": 0,
+          "hardware": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "slots": [
+            null,
+            {
+              "index": 4,
+              "rank": 1
+            },
+            null
+          ],
+          "trained_starter": false,
+          "relic_count": 0
+        },
+        "position": [
+          450.0,
+          750.0
+        ],
+        "previous": [
+          450.0,
+          750.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ],
+        "heading": 0.0,
+        "previous_heading": 0.0,
+        "hull": 100.0,
+        "max_hull": 100.0,
+        "shield": 10.0,
+        "max_shield": 10.0,
+        "throttle": 0.0,
+        "last_sequence": null
+      },
+      {
+        "id": "00000000000000000000000000000007",
+        "slot": 6,
+        "epoch": 7,
+        "local_seed": 812345,
+        "identity": {
+          "kind": "talo",
+          "corporation": "hugo",
+          "sub_corporation": "pan",
+          "hex_id": "0123456789abcdef"
+        },
+        "selected_ship": 0,
+        "owned_loadout": {
+          "version": 1,
+          "selected_ship": 0,
+          "owned_ships": 1,
+          "patches": 0,
+          "royal_victory": false,
+          "ship_xp": 0,
+          "hardware": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "slots": [
+            null,
+            {
+              "index": 4,
+              "rank": 1
+            },
+            null
+          ],
+          "trained_starter": false,
+          "relic_count": 0
+        },
+        "position": [
+          450.0,
+          900.0
+        ],
+        "previous": [
+          450.0,
+          900.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ],
+        "heading": 0.0,
+        "previous_heading": 0.0,
+        "hull": 100.0,
+        "max_hull": 100.0,
+        "shield": 10.0,
+        "max_shield": 10.0,
+        "throttle": 0.0,
+        "last_sequence": null
+      },
+      {
+        "id": "00000000000000000000000000000008",
+        "slot": 7,
+        "epoch": 8,
+        "local_seed": 812345,
+        "identity": {
+          "kind": "talo",
+          "corporation": "hugo",
+          "sub_corporation": "pan",
+          "hex_id": "0123456789abcdef"
+        },
+        "selected_ship": 0,
+        "owned_loadout": {
+          "version": 1,
+          "selected_ship": 0,
+          "owned_ships": 1,
+          "patches": 0,
+          "royal_victory": false,
+          "ship_xp": 0,
+          "hardware": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "slots": [
+            null,
+            {
+              "index": 4,
+              "rank": 1
+            },
+            null
+          ],
+          "trained_starter": false,
+          "relic_count": 0
+        },
+        "position": [
+          450.0,
+          1050.0
+        ],
+        "previous": [
+          450.0,
+          1050.0
+        ],
+        "velocity": [
+          0.0,
+          0.0
+        ],
+        "heading": 0.0,
+        "previous_heading": 0.0,
+        "hull": 100.0,
+        "max_hull": 100.0,
+        "shield": 10.0,
+        "max_shield": 10.0,
+        "throttle": 0.0,
+        "last_sequence": null
+      }
+    ],
+    "projectiles": [
+      {
+        "id": "0000000100000008",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900000.0,
+          -900000.0
+        ],
+        "previous": [
+          900000.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000009",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900001.0,
+          -900000.0
+        ],
+        "previous": [
+          900001.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000000a",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900002.0,
+          -900000.0
+        ],
+        "previous": [
+          900002.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000000b",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900003.0,
+          -900000.0
+        ],
+        "previous": [
+          900003.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000000c",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900004.0,
+          -900000.0
+        ],
+        "previous": [
+          900004.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000000d",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900005.0,
+          -900000.0
+        ],
+        "previous": [
+          900005.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000000e",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900006.0,
+          -900000.0
+        ],
+        "previous": [
+          900006.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000000f",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900007.0,
+          -900000.0
+        ],
+        "previous": [
+          900007.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000010",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900008.0,
+          -900000.0
+        ],
+        "previous": [
+          900008.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000011",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900009.0,
+          -900000.0
+        ],
+        "previous": [
+          900009.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000012",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900010.0,
+          -900000.0
+        ],
+        "previous": [
+          900010.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000013",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900011.0,
+          -900000.0
+        ],
+        "previous": [
+          900011.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000014",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900012.0,
+          -900000.0
+        ],
+        "previous": [
+          900012.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000015",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900013.0,
+          -900000.0
+        ],
+        "previous": [
+          900013.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000016",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900014.0,
+          -900000.0
+        ],
+        "previous": [
+          900014.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000017",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900015.0,
+          -900000.0
+        ],
+        "previous": [
+          900015.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000018",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900016.0,
+          -900000.0
+        ],
+        "previous": [
+          900016.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000019",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900017.0,
+          -900000.0
+        ],
+        "previous": [
+          900017.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000001a",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900018.0,
+          -900000.0
+        ],
+        "previous": [
+          900018.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000001b",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900019.0,
+          -900000.0
+        ],
+        "previous": [
+          900019.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000001c",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900020.0,
+          -900000.0
+        ],
+        "previous": [
+          900020.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000001d",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900021.0,
+          -900000.0
+        ],
+        "previous": [
+          900021.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000001e",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900022.0,
+          -900000.0
+        ],
+        "previous": [
+          900022.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000001f",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900023.0,
+          -900000.0
+        ],
+        "previous": [
+          900023.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000020",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900024.0,
+          -900000.0
+        ],
+        "previous": [
+          900024.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000021",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900025.0,
+          -900000.0
+        ],
+        "previous": [
+          900025.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000022",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900026.0,
+          -900000.0
+        ],
+        "previous": [
+          900026.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000023",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900027.0,
+          -900000.0
+        ],
+        "previous": [
+          900027.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000024",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900028.0,
+          -900000.0
+        ],
+        "previous": [
+          900028.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000025",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900029.0,
+          -900000.0
+        ],
+        "previous": [
+          900029.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000026",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900030.0,
+          -900000.0
+        ],
+        "previous": [
+          900030.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000027",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900031.0,
+          -900000.0
+        ],
+        "previous": [
+          900031.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000028",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900032.0,
+          -900000.0
+        ],
+        "previous": [
+          900032.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000029",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900033.0,
+          -900000.0
+        ],
+        "previous": [
+          900033.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000002a",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900034.0,
+          -900000.0
+        ],
+        "previous": [
+          900034.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000002b",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900035.0,
+          -900000.0
+        ],
+        "previous": [
+          900035.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000002c",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900036.0,
+          -900000.0
+        ],
+        "previous": [
+          900036.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000002d",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900037.0,
+          -900000.0
+        ],
+        "previous": [
+          900037.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000002e",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900038.0,
+          -900000.0
+        ],
+        "previous": [
+          900038.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000002f",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900039.0,
+          -900000.0
+        ],
+        "previous": [
+          900039.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000030",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900040.0,
+          -900000.0
+        ],
+        "previous": [
+          900040.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000031",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900041.0,
+          -900000.0
+        ],
+        "previous": [
+          900041.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000032",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900042.0,
+          -900000.0
+        ],
+        "previous": [
+          900042.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000033",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900043.0,
+          -900000.0
+        ],
+        "previous": [
+          900043.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000034",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900044.0,
+          -900000.0
+        ],
+        "previous": [
+          900044.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000035",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900045.0,
+          -900000.0
+        ],
+        "previous": [
+          900045.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000036",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900046.0,
+          -900000.0
+        ],
+        "previous": [
+          900046.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000037",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900047.0,
+          -900000.0
+        ],
+        "previous": [
+          900047.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000038",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900048.0,
+          -900000.0
+        ],
+        "previous": [
+          900048.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000039",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900049.0,
+          -900000.0
+        ],
+        "previous": [
+          900049.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000003a",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900050.0,
+          -900000.0
+        ],
+        "previous": [
+          900050.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000003b",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900051.0,
+          -900000.0
+        ],
+        "previous": [
+          900051.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000003c",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900052.0,
+          -900000.0
+        ],
+        "previous": [
+          900052.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000003d",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900053.0,
+          -900000.0
+        ],
+        "previous": [
+          900053.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000003e",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900054.0,
+          -900000.0
+        ],
+        "previous": [
+          900054.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000003f",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900055.0,
+          -900000.0
+        ],
+        "previous": [
+          900055.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000040",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900056.0,
+          -900000.0
+        ],
+        "previous": [
+          900056.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000041",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900057.0,
+          -900000.0
+        ],
+        "previous": [
+          900057.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000042",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900058.0,
+          -900000.0
+        ],
+        "previous": [
+          900058.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000043",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900059.0,
+          -900000.0
+        ],
+        "previous": [
+          900059.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000044",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900060.0,
+          -900000.0
+        ],
+        "previous": [
+          900060.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000045",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900061.0,
+          -900000.0
+        ],
+        "previous": [
+          900061.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000046",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900062.0,
+          -900000.0
+        ],
+        "previous": [
+          900062.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000047",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900063.0,
+          -900000.0
+        ],
+        "previous": [
+          900063.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000048",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900064.0,
+          -900000.0
+        ],
+        "previous": [
+          900064.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000049",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900065.0,
+          -900000.0
+        ],
+        "previous": [
+          900065.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000004a",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900066.0,
+          -900000.0
+        ],
+        "previous": [
+          900066.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000004b",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900067.0,
+          -900000.0
+        ],
+        "previous": [
+          900067.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000004c",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900068.0,
+          -900000.0
+        ],
+        "previous": [
+          900068.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000004d",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900069.0,
+          -900000.0
+        ],
+        "previous": [
+          900069.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000004e",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900070.0,
+          -900000.0
+        ],
+        "previous": [
+          900070.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000004f",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900071.0,
+          -900000.0
+        ],
+        "previous": [
+          900071.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000050",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900072.0,
+          -900000.0
+        ],
+        "previous": [
+          900072.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000051",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900073.0,
+          -900000.0
+        ],
+        "previous": [
+          900073.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000052",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900074.0,
+          -900000.0
+        ],
+        "previous": [
+          900074.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000053",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900075.0,
+          -900000.0
+        ],
+        "previous": [
+          900075.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000054",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900076.0,
+          -900000.0
+        ],
+        "previous": [
+          900076.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000055",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900077.0,
+          -900000.0
+        ],
+        "previous": [
+          900077.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000056",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900078.0,
+          -900000.0
+        ],
+        "previous": [
+          900078.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000057",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900079.0,
+          -900000.0
+        ],
+        "previous": [
+          900079.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000058",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900080.0,
+          -900000.0
+        ],
+        "previous": [
+          900080.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000059",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900081.0,
+          -900000.0
+        ],
+        "previous": [
+          900081.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000005a",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900082.0,
+          -900000.0
+        ],
+        "previous": [
+          900082.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000005b",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900083.0,
+          -900000.0
+        ],
+        "previous": [
+          900083.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000005c",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900084.0,
+          -900000.0
+        ],
+        "previous": [
+          900084.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000005d",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900085.0,
+          -900000.0
+        ],
+        "previous": [
+          900085.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000005e",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900086.0,
+          -900000.0
+        ],
+        "previous": [
+          900086.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000005f",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900087.0,
+          -900000.0
+        ],
+        "previous": [
+          900087.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000060",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900088.0,
+          -900000.0
+        ],
+        "previous": [
+          900088.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000061",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900089.0,
+          -900000.0
+        ],
+        "previous": [
+          900089.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000062",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900090.0,
+          -900000.0
+        ],
+        "previous": [
+          900090.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000063",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900091.0,
+          -900000.0
+        ],
+        "previous": [
+          900091.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000064",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900092.0,
+          -900000.0
+        ],
+        "previous": [
+          900092.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000065",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900093.0,
+          -900000.0
+        ],
+        "previous": [
+          900093.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000066",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900094.0,
+          -900000.0
+        ],
+        "previous": [
+          900094.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000067",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900095.0,
+          -900000.0
+        ],
+        "previous": [
+          900095.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000068",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900096.0,
+          -900000.0
+        ],
+        "previous": [
+          900096.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000069",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900097.0,
+          -900000.0
+        ],
+        "previous": [
+          900097.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000006a",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900098.0,
+          -900000.0
+        ],
+        "previous": [
+          900098.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000006b",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900099.0,
+          -900000.0
+        ],
+        "previous": [
+          900099.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000006c",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900100.0,
+          -900000.0
+        ],
+        "previous": [
+          900100.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000006d",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900101.0,
+          -900000.0
+        ],
+        "previous": [
+          900101.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000006e",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900102.0,
+          -900000.0
+        ],
+        "previous": [
+          900102.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000006f",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900103.0,
+          -900000.0
+        ],
+        "previous": [
+          900103.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000070",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900104.0,
+          -900000.0
+        ],
+        "previous": [
+          900104.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000071",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900105.0,
+          -900000.0
+        ],
+        "previous": [
+          900105.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000072",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900106.0,
+          -900000.0
+        ],
+        "previous": [
+          900106.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000073",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900107.0,
+          -900000.0
+        ],
+        "previous": [
+          900107.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000074",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900108.0,
+          -900000.0
+        ],
+        "previous": [
+          900108.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000075",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900109.0,
+          -900000.0
+        ],
+        "previous": [
+          900109.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000076",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900110.0,
+          -900000.0
+        ],
+        "previous": [
+          900110.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000077",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900111.0,
+          -900000.0
+        ],
+        "previous": [
+          900111.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000078",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900112.0,
+          -900000.0
+        ],
+        "previous": [
+          900112.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000079",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900113.0,
+          -900000.0
+        ],
+        "previous": [
+          900113.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000007a",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900114.0,
+          -900000.0
+        ],
+        "previous": [
+          900114.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000007b",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900115.0,
+          -900000.0
+        ],
+        "previous": [
+          900115.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000007c",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900116.0,
+          -900000.0
+        ],
+        "previous": [
+          900116.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000007d",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900117.0,
+          -900000.0
+        ],
+        "previous": [
+          900117.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000007e",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900118.0,
+          -900000.0
+        ],
+        "previous": [
+          900118.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000007f",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900119.0,
+          -900000.0
+        ],
+        "previous": [
+          900119.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000080",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900120.0,
+          -900000.0
+        ],
+        "previous": [
+          900120.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000081",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900121.0,
+          -900000.0
+        ],
+        "previous": [
+          900121.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000082",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900122.0,
+          -900000.0
+        ],
+        "previous": [
+          900122.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000083",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900123.0,
+          -900000.0
+        ],
+        "previous": [
+          900123.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000084",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900124.0,
+          -900000.0
+        ],
+        "previous": [
+          900124.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000085",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900125.0,
+          -900000.0
+        ],
+        "previous": [
+          900125.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000086",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900126.0,
+          -900000.0
+        ],
+        "previous": [
+          900126.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000087",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900127.0,
+          -900000.0
+        ],
+        "previous": [
+          900127.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000088",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900128.0,
+          -900000.0
+        ],
+        "previous": [
+          900128.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000089",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900129.0,
+          -900000.0
+        ],
+        "previous": [
+          900129.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000008a",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900130.0,
+          -900000.0
+        ],
+        "previous": [
+          900130.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000008b",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900131.0,
+          -900000.0
+        ],
+        "previous": [
+          900131.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000008c",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900132.0,
+          -900000.0
+        ],
+        "previous": [
+          900132.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000008d",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900133.0,
+          -900000.0
+        ],
+        "previous": [
+          900133.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000008e",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900134.0,
+          -900000.0
+        ],
+        "previous": [
+          900134.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000008f",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900135.0,
+          -900000.0
+        ],
+        "previous": [
+          900135.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000090",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900136.0,
+          -900000.0
+        ],
+        "previous": [
+          900136.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000091",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900137.0,
+          -900000.0
+        ],
+        "previous": [
+          900137.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000092",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900138.0,
+          -900000.0
+        ],
+        "previous": [
+          900138.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000093",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900139.0,
+          -900000.0
+        ],
+        "previous": [
+          900139.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000094",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900140.0,
+          -900000.0
+        ],
+        "previous": [
+          900140.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000095",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900141.0,
+          -900000.0
+        ],
+        "previous": [
+          900141.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000096",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900142.0,
+          -900000.0
+        ],
+        "previous": [
+          900142.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000097",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900143.0,
+          -900000.0
+        ],
+        "previous": [
+          900143.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000098",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900144.0,
+          -900000.0
+        ],
+        "previous": [
+          900144.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "0000000100000099",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900145.0,
+          -900000.0
+        ],
+        "previous": [
+          900145.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000009a",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900146.0,
+          -900000.0
+        ],
+        "previous": [
+          900146.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000009b",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900147.0,
+          -900000.0
+        ],
+        "previous": [
+          900147.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000009c",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900148.0,
+          -900000.0
+        ],
+        "previous": [
+          900148.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000009d",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900149.0,
+          -900000.0
+        ],
+        "previous": [
+          900149.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000009e",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900150.0,
+          -900000.0
+        ],
+        "previous": [
+          900150.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "000000010000009f",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900151.0,
+          -900000.0
+        ],
+        "previous": [
+          900151.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "00000001000000a0",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900152.0,
+          -900000.0
+        ],
+        "previous": [
+          900152.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "00000001000000a1",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900153.0,
+          -900000.0
+        ],
+        "previous": [
+          900153.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "00000001000000a2",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900154.0,
+          -900000.0
+        ],
+        "previous": [
+          900154.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "00000001000000a3",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900155.0,
+          -900000.0
+        ],
+        "previous": [
+          900155.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "00000001000000a4",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900156.0,
+          -900000.0
+        ],
+        "previous": [
+          900156.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "00000001000000a5",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900157.0,
+          -900000.0
+        ],
+        "previous": [
+          900157.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "00000001000000a6",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900158.0,
+          -900000.0
+        ],
+        "previous": [
+          900158.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "00000001000000a7",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900159.0,
+          -900000.0
+        ],
+        "previous": [
+          900159.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "00000001000000a8",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900160.0,
+          -900000.0
+        ],
+        "previous": [
+          900160.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "00000001000000a9",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900161.0,
+          -900000.0
+        ],
+        "previous": [
+          900161.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "00000001000000aa",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900162.0,
+          -900000.0
+        ],
+        "previous": [
+          900162.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "00000001000000ab",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900163.0,
+          -900000.0
+        ],
+        "previous": [
+          900163.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "00000001000000ac",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900164.0,
+          -900000.0
+        ],
+        "previous": [
+          900164.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "00000001000000ad",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900165.0,
+          -900000.0
+        ],
+        "previous": [
+          900165.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "00000001000000ae",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900166.0,
+          -900000.0
+        ],
+        "previous": [
+          900166.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "00000001000000af",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900167.0,
+          -900000.0
+        ],
+        "previous": [
+          900167.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "00000001000000b0",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900168.0,
+          -900000.0
+        ],
+        "previous": [
+          900168.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "00000001000000b1",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900169.0,
+          -900000.0
+        ],
+        "previous": [
+          900169.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "00000001000000b2",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900170.0,
+          -900000.0
+        ],
+        "previous": [
+          900170.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "00000001000000b3",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900171.0,
+          -900000.0
+        ],
+        "previous": [
+          900171.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "00000001000000b4",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900172.0,
+          -900000.0
+        ],
+        "previous": [
+          900172.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "00000001000000b5",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900173.0,
+          -900000.0
+        ],
+        "previous": [
+          900173.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "00000001000000b6",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900174.0,
+          -900000.0
+        ],
+        "previous": [
+          900174.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "00000001000000b7",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900175.0,
+          -900000.0
+        ],
+        "previous": [
+          900175.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "00000001000000b8",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900176.0,
+          -900000.0
+        ],
+        "previous": [
+          900176.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "00000001000000b9",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900177.0,
+          -900000.0
+        ],
+        "previous": [
+          900177.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "00000001000000ba",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900178.0,
+          -900000.0
+        ],
+        "previous": [
+          900178.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      },
+      {
+        "id": "00000001000000bb",
+        "owner": null,
+        "owner_epoch": null,
+        "position": [
+          900179.0,
+          -900000.0
+        ],
+        "previous": [
+          900179.0,
+          -900000.0
+        ],
+        "velocity": [
+          -500.0,
+          600.0
+        ],
+        "damage": 12.0,
+        "life": 1.5,
+        "remaining_hits": 1
+      }
+    ],
+    "dropped_notices": 0,
+    "nova_fx": {
+      "sequence": 1,
+      "dropped": 0,
+      "records": [
+        {
+          "sequence": 1,
+          "tick": 0,
+          "emitter": "00000000000000000000000000000001",
+          "epoch": 1,
+          "position": [
+            450.0,
+            0.0
+          ],
+          "rays": 36
+        }
+      ]
+    }
+  },
+  "counts": {
+    "entities": 8,
+    "occupied_cells": 8320,
+    "storage_cells": 18432,
+    "entity_pages": 1,
+    "body_pages": 16
+  }
+}

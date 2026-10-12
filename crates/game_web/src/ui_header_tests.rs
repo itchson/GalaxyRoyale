@@ -125,7 +125,7 @@ fn corners_fit(
                 Vec2::new(-0.5, 0.5),
                 Vec2::splat(0.5),
             ] {
-                let p = b.transforms[pixel.transform as usize]
+                let p = b.transforms[pixel.transform_slot()]
                     .point(Vec2::from_array(pixel.local) + offset)
                     - origin;
                 assert!(

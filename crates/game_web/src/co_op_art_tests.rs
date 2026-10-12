@@ -28,7 +28,7 @@ fn signature(frame: &RenderFrame) -> Vec<([f32; 2], u32)> {
         .flat_map(|b| {
             b.pixels.iter().map(|p| {
                 (
-                    b.transforms[p.transform as usize]
+                    b.transforms[p.transform_slot()]
                         .point(Vec2::from_array(p.local))
                         .to_array(),
                     p.color,
@@ -205,7 +205,7 @@ fn continuous_fit_preserves_all_source_cells_and_full_fractional_bases() {
             );
             for batch in &frame.batches {
                 for p in &batch.pixels {
-                    let t = batch.transforms[p.transform as usize];
+                    let t = batch.transforms[p.transform_slot()];
                     assert_eq!(t.a[2], width / a.body.width as f32);
                     assert_eq!(t.b[1], t.a[2]);
                     assert_eq!(&t.b[2..], &[0.0, 0.0]);
@@ -263,7 +263,7 @@ fn local_whole_cell_clipping_precedes_exact_reflected_sheared_parent() {
             hidden += 1;
         }
         let expected = i.parent.point(source_point);
-        let actual = b.transforms[p.transform as usize].point(cell);
+        let actual = b.transforms[p.transform_slot()].point(cell);
         assert!((actual - expected).length() < 0.00001);
     }
     assert!(visible > 0 && hidden > 0);

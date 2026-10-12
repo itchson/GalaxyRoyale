@@ -27,7 +27,7 @@ fn packets(frame: &RenderFrame) -> Vec<([f32; 2], u32, GpuTransform)> {
         .flat_map(|b| {
             b.pixels
                 .iter()
-                .map(|p| (p.local, p.color, b.transforms[p.transform as usize]))
+                .map(|p| (p.local, p.color, b.transforms[p.transform_slot()]))
         })
         .collect()
 }
@@ -198,7 +198,7 @@ fn deep_cloud_whole_group_rejects_one_short_and_crosses_transform_batch_safely()
         assert!(frame.frame().batches.iter().all(|b| {
             b.pixels
                 .iter()
-                .all(|p| (p.transform as usize) < b.transforms.len())
+                .all(|p| (p.transform_slot()) < b.transforms.len())
         }));
     }
 }
@@ -421,7 +421,7 @@ fn export_actual_deep_nebula_packets() {
             let views:Vec<_>=[0.6,1.0,1.6].into_iter().map(|zoom|{
                 let view=CameraView::new(camera,Vec2::new(256.0,180.0),zoom).unwrap();
                 let cells:Vec<_>=f.frame().batches.iter().flat_map(|b|b.pixels.iter().map(|p|{
-                    let t=b.transforms[p.transform as usize];
+                    let t=b.transforms[p.transform_slot()];
                     let center=view.world_to_screen(t.point(Vec2::from_array(p.local)));
                     let basis_x=Vec2::new(t.a[2],t.a[3])*zoom;
                     let basis_y=Vec2::new(t.b[0],t.b[1])*zoom;

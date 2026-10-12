@@ -217,7 +217,7 @@ fn compact_corner_layout_covers_declared_physical_ratios_and_measured_hits() {
                             if pixel.color >> 24 == 0 {
                                 continue;
                             }
-                            let t = b.transforms[pixel.transform as usize];
+                            let t = b.transforms[pixel.transform_slot()];
                             for c in [
                                 Vec2::splat(-0.5),
                                 Vec2::splat(0.5),
@@ -330,7 +330,7 @@ fn actual_minimap_quads_are_bounded_distinct_unlit_and_zoom_independent() {
         let mut signature = Vec::new();
         for batch in &frame.frame().batches {
             for pixel in &batch.pixels {
-                let t = batch.transforms[pixel.transform as usize];
+                let t = batch.transforms[pixel.transform_slot()];
                 assert_eq!(t.b[2..], [0.0; 2]);
                 signature.push((pixel.local, pixel.color, t.a, t.b));
                 if pixel.color == MINIMAP_HOME {
@@ -426,7 +426,7 @@ fn only_player_child_rotates_and_presentation_shake_does_not_change_map_bearings
             .iter()
             .flat_map(|b| {
                 b.pixels.iter().map(|p| {
-                    let t = b.transforms[p.transform as usize];
+                    let t = b.transforms[p.transform_slot()];
                     (
                         p.color,
                         t.point(Vec2::from_array(p.local)) - origin,

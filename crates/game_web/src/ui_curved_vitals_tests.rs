@@ -23,7 +23,7 @@ fn input(viewport: [f32; 2], touch: bool) -> FlightStatusInput {
 fn corners(frame: &FrameBuilder) -> impl Iterator<Item = (u32, Vec2)> + '_ {
     frame.frame().batches.iter().flat_map(|b| {
         b.pixels.iter().flat_map(|p| {
-            let t = b.transforms[p.transform as usize];
+            let t = b.transforms[p.transform_slot()];
             assert_eq!(t.b[2..], [0.0; 2], "native tracks stay unlit");
             [
                 Vec2::splat(-0.5),
@@ -56,7 +56,7 @@ fn tracks_are_two_symmetric_occupied_arcs_with_continuous_fractional_fill() {
     for b in &f.frame().batches {
         for p in &b.pixels {
             if p.color >> 24 == 0x90 {
-                let t = b.transforms[p.transform as usize];
+                let t = b.transforms[p.transform_slot()];
                 points.push(t.point(Vec2::from_array(p.local)));
             }
         }
@@ -185,7 +185,7 @@ fn actual_animation_preserves_damage_hold_healing_and_reduced_motion_in_curve_pa
             .flat_map(|b| {
                 b.pixels
                     .iter()
-                    .map(|p| (p.color, p.local, b.transforms[p.transform as usize]))
+                    .map(|p| (p.color, p.local, b.transforms[p.transform_slot()]))
             })
             .collect::<Vec<_>>()
     };

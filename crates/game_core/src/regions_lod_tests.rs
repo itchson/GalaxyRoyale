@@ -10,7 +10,7 @@ fn packets(frame: &RenderFrame) -> Vec<Packet> {
             batch
                 .pixels
                 .iter()
-                .map(|p| (p.local, p.color, batch.transforms[p.transform as usize]))
+                .map(|p| (p.local, p.color, batch.transforms[p.transform_slot()]))
         })
         .collect()
 }
@@ -29,8 +29,7 @@ fn validate(frame: &RenderFrame) {
                     .any(|emission| (t.b[3] - emission).abs() < 0.000001)
         }));
         assert!(batch.pixels.iter().all(|p| {
-            p.local.into_iter().all(f32::is_finite)
-                && (p.transform as usize) < batch.transforms.len()
+            p.local.into_iter().all(f32::is_finite) && (p.transform_slot()) < batch.transforms.len()
         }));
     }
 }
@@ -352,7 +351,7 @@ fn projected_group_corners_keep_nominal_center_and_conservative_culling_extent()
                 let view = CameraView::new(camera, Vec2::new(533.0, 300.0), 0.6).unwrap();
                 for batch in &frame.batches {
                     for p in &batch.pixels {
-                        let t = view.relative_transform(batch.transforms[p.transform as usize]);
+                        let t = view.relative_transform(batch.transforms[p.transform_slot()]);
                         assert_eq!([t.a[0], t.a[1]], [0.0, 0.0]);
                         for corner in [
                             Vec2::splat(-0.5),

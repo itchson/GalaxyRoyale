@@ -30,7 +30,7 @@ fn packet(frame: &RenderFrame) -> Vec<CellPacket> {
         .iter()
         .flat_map(|batch| {
             batch.pixels.iter().map(|pixel| {
-                let t = batch.transforms[pixel.transform as usize];
+                let t = batch.transforms[pixel.transform_slot()];
                 (pixel.local, pixel.color, t.a, t.b)
             })
         })
@@ -72,7 +72,7 @@ fn dock_art_emits_exact_28549_cells_16_transforms_for_all_main_corps_and_poses()
             let mut unique = std::collections::HashSet::new();
             for batch in &frame.batches {
                 for pixel in &batch.pixels {
-                    let t = batch.transforms[pixel.transform as usize];
+                    let t = batch.transforms[pixel.transform_slot()];
                     let center = t.point(Vec2::from_array(pixel.local));
                     assert!(
                         unique.insert((
@@ -185,7 +185,7 @@ fn dock_art_preserves_fractional_reflected_nonuniform_cells_and_zoom_projection(
             let view = CameraView::new(camera, Vec2::new(533.0, 300.0), zoom).unwrap();
             for batch in &frame.batches {
                 for pixel in &batch.pixels {
-                    let t = view.relative_transform(batch.transforms[pixel.transform as usize]);
+                    let t = view.relative_transform(batch.transforms[pixel.transform_slot()]);
                     // Relative camera extraction preserves the fine basis even far
                     // from origin, without a hard-cell raster minimum.
                     assert!((Vec2::new(t.a[2], t.a[3]).length() - 0.155).abs() < 0.00001);

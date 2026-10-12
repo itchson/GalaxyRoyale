@@ -292,8 +292,7 @@ fn actual_render_uses_the_collision_body_and_removed_cells_do_not_reappear() {
             .into_iter()
             .flat_map(|b| {
                 b.pixels.into_iter().filter_map(move |p| {
-                    (b.transforms[p.transform as usize] == current_gpu)
-                        .then_some((p.local, p.color))
+                    (b.transforms[p.transform_slot()] == current_gpu).then_some((p.local, p.color))
                 })
             })
             .collect::<Vec<_>>()

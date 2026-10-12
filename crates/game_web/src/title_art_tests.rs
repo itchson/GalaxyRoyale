@@ -31,7 +31,7 @@ fn signature(frame: &RenderFrame) -> Vec<([f32; 2], u32, [f32; 4])> {
         .iter()
         .flat_map(|b| {
             b.pixels.iter().map(|p| {
-                let t = b.transforms[p.transform as usize];
+                let t = b.transforms[p.transform_slot()];
                 (
                     t.point(Vec2::from_array(p.local)).to_array(),
                     p.color,
@@ -157,7 +157,7 @@ fn title_real_partial_clip_checks_all_four_corners_under_reflection_and_shear() 
                 continue;
             }
             visible += 1;
-            let t = batch.transforms[p.transform as usize];
+            let t = batch.transforms[p.transform_slot()];
             for corner in [
                 Vec2::splat(-0.5),
                 Vec2::new(0.5, -0.5),

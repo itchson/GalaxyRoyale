@@ -450,6 +450,7 @@ export function snapshot(value: unknown): void {
     "dropped_notices",
     "participants",
     "projectiles",
+    "nova_fx",
   ]);
   if (
     s.protocol !== PROTOCOL ||
@@ -469,6 +470,7 @@ export function snapshot(value: unknown): void {
   const ids = new Set(),
     slots = new Set(),
     shots = new Set();
+  const epochs = new Map<string, number>();
   for (const value of s.participants) {
     const p = record(value, [
       "id",
@@ -506,6 +508,7 @@ export function snapshot(value: unknown): void {
       fail("invalid_snapshot_participant");
     ids.add(p.id);
     slots.add(p.slot);
+    epochs.set(p.id, p.epoch);
     spec({ local_seed: p.local_seed, identity: p.identity });
     if (p.owned_loadout !== undefined) {
       ownedLoadout(p.owned_loadout);
@@ -553,6 +556,55 @@ export function snapshot(value: unknown): void {
       vector(p[key], 1_100_000);
     finite(p.damage, 0, 100_000);
     finite(p.life, 0, 60);
+  }
+  if (Object.hasOwn(s, "nova_fx")) novaFx(s.nova_fx, Number(s.tick), epochs);
+}
+
+/** Visual births only; native complete-commit code owns deduplication and aging. */
+function novaFx(
+  value: unknown,
+  tick: number,
+  epochs: Map<string, number>,
+): void {
+  const journal = record(value, ["sequence", "dropped", "records"]);
+  if (
+    Object.keys(journal).length !== 3 ||
+    !uint(journal.sequence) ||
+    !uint(journal.dropped) ||
+    !Array.isArray(journal.records) ||
+    journal.records.length > 32
+  )
+    fail("invalid_nova_fx");
+  let sequence = 0,
+    birthTick = 0;
+  for (const value of journal.records) {
+    const birth = record(value, [
+      "sequence",
+      "tick",
+      "emitter",
+      "epoch",
+      "position",
+      "rays",
+    ]);
+    if (
+      Object.keys(birth).length !== 6 ||
+      !uint(birth.sequence) ||
+      birth.sequence <= sequence ||
+      birth.sequence > journal.sequence ||
+      !uint(birth.tick) ||
+      birth.tick < birthTick ||
+      birth.tick > tick ||
+      !id(birth.emitter) ||
+      !uint(birth.epoch) ||
+      birth.epoch === 0 ||
+      epochs.get(birth.emitter) !== birth.epoch ||
+      !uint(birth.rays) ||
+      birth.rays > 36
+    )
+      fail("invalid_nova_fx");
+    vector(birth.position);
+    sequence = birth.sequence;
+    birthTick = birth.tick;
   }
 }
 export function allowed(kind: FrameKind, sender: Role): boolean {

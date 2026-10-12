@@ -109,7 +109,7 @@ mod tests {
             .iter()
             .flat_map(|b| {
                 b.pixels.iter().filter_map(|p| {
-                    let t = b.transforms[p.transform as usize];
+                    let t = b.transforms[p.transform_slot()];
                     (t == transform).then_some((p.local, p.color))
                 })
             })

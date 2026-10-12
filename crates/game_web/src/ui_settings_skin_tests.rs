@@ -57,7 +57,7 @@ fn control_packets(frame: &RenderFrame) -> Vec<(GpuTransform, [f32; 2], u32)> {
         .iter()
         .flat_map(|b| {
             b.pixels.iter().filter_map(|p| {
-                let t = b.transforms[p.transform as usize];
+                let t = b.transforms[p.transform_slot()];
                 corners(t, p.local)
                     .into_iter()
                     .all(|p| inside(p, CONTROL))
@@ -73,7 +73,7 @@ fn idle_settings_leave_the_row_open_except_for_control_and_bottom_separator() {
     let mut separator = 0;
     for batch in &frame.batches {
         for p in &batch.pixels {
-            let corners = corners(batch.transforms[p.transform as usize], p.local);
+            let corners = corners(batch.transforms[p.transform_slot()], p.local);
             assert!(corners.into_iter().all(|p| inside(p, ROW)));
             if !corners.into_iter().all(|p| inside(p, CONTROL)) {
                 assert!(corners.into_iter().all(|p| p.y >= ROW[1] + ROW[3] - 0.6001));
@@ -96,7 +96,7 @@ fn focus_marks_the_row_without_moving_or_recoloring_actual_slider_control() {
     let mut leading_accent = 0;
     for batch in &focused.batches {
         for p in &batch.pixels {
-            let t = batch.transforms[p.transform as usize];
+            let t = batch.transforms[p.transform_slot()];
             let corners = corners(t, p.local);
             assert!(corners.into_iter().all(|p| inside(p, ROW)));
             if p.color == CYAN && !corners.into_iter().all(|p| inside(p, CONTROL)) {
@@ -127,7 +127,7 @@ fn disabled_focus_stays_quiet_and_keeps_complete_readable_label() {
     for batch in &focused.batches {
         for p in &batch.pixels {
             assert_ne!(p.color, CYAN);
-            let t = batch.transforms[p.transform as usize];
+            let t = batch.transforms[p.transform_slot()];
             if p.color == BUTTON_DISABLED_TEXT && t.a[2] == 1.5 {
                 assert!(corners(t, p.local).into_iter().all(|p| inside(p, LABEL)));
                 label_cells += 1;
