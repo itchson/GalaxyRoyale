@@ -5,6 +5,9 @@ use crate::{
 };
 use serde_json::{Value, json};
 
+#[path = "pan_material_replica_tests.rs"]
+mod pan_material;
+
 #[path = "co_op_fx_tests.rs"]
 mod nova_fx;
 

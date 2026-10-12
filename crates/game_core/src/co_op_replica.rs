@@ -658,19 +658,70 @@ impl Scene {
             }) {
                 continue;
             }
-            frame.push_body_colored_material(
-                body,
-                Transform {
-                    position,
-                    rotation: crate::interpolate_heading(heading, row.heading, alpha) + FRAC_PI_2,
-                    scale: Vec2::splat(row.scale),
-                },
-                PixelMaterial {
-                    light_response: 0.75,
-                    emission: 0.0,
-                },
-                |_, color| color,
-            );
+            let transform = Transform {
+                position,
+                rotation: crate::interpolate_heading(heading, row.heading, alpha) + FRAC_PI_2,
+                scale: Vec2::splat(row.scale),
+            };
+            let material = PixelMaterial {
+                light_response: 0.75,
+                emission: 0.0,
+            };
+            // Actual rendered views reconstruct the registered PAN field from
+            // immutable native assets, never a guessed remote surface payload.
+            // The raw occupied-geometry API remains byte-for-byte unadorned.
+            let mapped = view.is_some_and(|v| {
+                let Some(pilot) = row.participant.and_then(|id| self.local_pilot(id)) else {
+                    return false;
+                };
+                if pilot.selected_ship != 0
+                    || row.scale != crate::campaign::player_scale(0)
+                    || pilot
+                        .identity
+                        .as_ref()
+                        .is_none_or(|i| i.corporation != crate::identity::Corporation::Pan)
+                {
+                    return false;
+                }
+                let time = if v.reduced_motion {
+                    0.0
+                } else {
+                    self.header.snapshot.tick as f32 / 60.0
+                };
+                let tint = |color| {
+                    crate::player_presentation::tint(
+                        color,
+                        row.hull,
+                        row.max_hull,
+                        f32::INFINITY,
+                        time,
+                        v.reduced_motion,
+                    )
+                };
+                let lamps = [
+                    crate::pixel_assets::color(6),
+                    crate::pixel_assets::color(4),
+                    crate::pixel_assets::color(33),
+                ];
+                crate::raicho_fine::append(
+                    frame,
+                    body,
+                    crate::identity::Corporation::Pan,
+                    crate::raicho_fine::DrawInput {
+                        parent: transform.affine(),
+                        material,
+                        time,
+                        reduced_motion: v.reduced_motion,
+                    },
+                    &mut crate::raicho_fine::Budget::default(),
+                    |local, color| tint(crate::animate_actor_cell(local, color, time, lamps)),
+                    |_, color| tint(color),
+                )
+                .is_ok()
+            });
+            if !mapped {
+                frame.push_body_colored_material(body, transform, material, |_, color| color);
+            }
         }
         for (index, shot) in self.header.snapshot.projectiles.iter().enumerate() {
             let position = Vec2::from_array(self.previous_shots[index])

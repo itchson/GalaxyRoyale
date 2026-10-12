@@ -1,6 +1,146 @@
 use super::*;
 use engine_core::{CameraView, GpuTransform, RenderFrame, Transform};
 
+#[test]
+fn packed_pan_material_matches_every_real_occupied_source_index_and_signal() {
+    let assets = ASSETS.as_ref().unwrap();
+    let raw: MaterialAsset = serde_json::from_str(PAN_MATERIAL).unwrap();
+    let atlas: Atlas = serde_json::from_str(ATLAS).unwrap();
+    let pan = starter_body(Corporation::Pan);
+    let sprite = &atlas.sprites["pan_hikari_fine"];
+    let map = assets[0].material.as_ref().unwrap();
+    assert_eq!(map.coarse.len(), 2304);
+    assert_eq!(map.fine.len(), 1205);
+    assert_eq!(
+        (map.coarse.len() + map.fine.len()) * std::mem::size_of::<u32>(),
+        14036
+    );
+    assert!(assets[1].material.is_none() && assets[2].material.is_none());
+    for &[i, word] in &raw.coarse {
+        assert!(pan.is_occupied(i as usize % 48, i as usize / 48));
+        assert_eq!(map.coarse[i as usize], word);
+        assert_eq!(Surface::from_cell_word(word).unwrap().emission_mask(), 0);
+    }
+    assert!(
+        map.coarse
+            .iter()
+            .enumerate()
+            .all(|(i, &word)| (word != 0) == pan.is_occupied(i % 48, i / 48))
+    );
+    assert_eq!(
+        raw.fine.iter().map(|r| r[1]).collect::<Vec<_>>(),
+        map.fine.to_vec()
+    );
+    assert_eq!(
+        map.fine
+            .iter()
+            .filter(|&&word| Surface::from_cell_word(word).unwrap().emission_mask() == 255)
+            .count(),
+        31
+    );
+    for (&[i, word], &expected) in raw.fine.iter().zip(&sprite.fine_cells) {
+        assert_eq!(i as usize, expected);
+        assert_eq!(
+            Surface::from_cell_word(word).unwrap().emission_mask() == 255,
+            sprite.signal_cells.binary_search(&expected).is_ok()
+        );
+    }
+    assert!(std::ptr::eq(
+        map,
+        ASSETS.as_ref().unwrap()[0].material.as_ref().unwrap()
+    ));
+}
+#[test]
+fn material_parser_rejects_changed_identity_hash_indices_flags_slots_and_masks() {
+    let atlas: Atlas = serde_json::from_str(ATLAS).unwrap();
+    let sprite = &atlas.sprites["pan_hikari_fine"];
+    let source: serde_json::Value = serde_json::from_str(PAN_MATERIAL).unwrap();
+    let mutations: [fn(&mut serde_json::Value); 12] = [
+        |v| v["version"] = 2.into(),
+        |v| v["asset"] = "renko_hibana".into(),
+        |v| v["encoding"] = "unknown".into(),
+        |v| v["source_atlas_fnv64"] = "0229814dc9e11391".into(),
+        |v| v["source_atlas_sha256"] = "0".into(),
+        |v| {
+            v["coarse"].as_array_mut().unwrap().pop();
+        },
+        |v| {
+            v["fine"].as_array_mut().unwrap().swap(0, 1);
+        },
+        |v| v["coarse"][0][1] = (v["coarse"][0][1].as_u64().unwrap() | 1).into(),
+        |v| v["fine"][0][1] = (v["fine"][0][1].as_u64().unwrap() & 0x7fffffff).into(),
+        |v| v["coarse"][0][1] = (v["coarse"][0][1].as_u64().unwrap() | (255 << 23)).into(),
+        |v| v["fine"][0][1] = (v["fine"][0][1].as_u64().unwrap() | (255 << 23)).into(),
+        |v| v["profile"] = serde_json::json!({"currency":[999,999,999]}),
+    ];
+    for mutate in mutations {
+        let mut bad = source.clone();
+        mutate(&mut bad);
+        assert!(
+            parse_material(
+                &bad.to_string(),
+                ATLAS,
+                starter_body(Corporation::Pan),
+                sprite
+            )
+            .is_err()
+        );
+    }
+    let mut source_change = ATLAS.to_owned();
+    source_change.push(' ');
+    assert!(
+        parse_material(
+            PAN_MATERIAL,
+            &source_change,
+            starter_body(Corporation::Pan),
+            sprite
+        )
+        .is_err()
+    );
+    assert!(parse_material(PAN_MATERIAL, ATLAS, starter_body(Corporation::Pan), sprite).is_ok());
+}
+#[test]
+fn material_extraction_preserves_actual_colors_damage_counts_and_unmapped_legacy_words() {
+    for corp in [Corporation::Pan, Corporation::Renko, Corporation::Hugo] {
+        let mut live = starter_body(corp).clone();
+        let hit = live
+            .hit_segment(Vec2::new(-20.0, -8.0), Vec2::new(20.0, 8.0))
+            .unwrap();
+        live.damage(hit, 3.5);
+        let (frame, stats) = draw(&live, corp, input());
+        assert_eq!(frame.pixel_count, stats.body_cells + stats.overlay_cells);
+        let cells: Vec<_> = frame
+            .batches
+            .iter()
+            .flat_map(|b| {
+                b.pixels
+                    .iter()
+                    .map(|p| (p, b.transforms[p.transform_slot()]))
+            })
+            .collect();
+        for (j, (pixel, transform)) in cells.iter().enumerate() {
+            if corp == Corporation::Pan {
+                let surface = pixel.surface().unwrap();
+                if j < stats.body_cells {
+                    assert_eq!(surface.emission_mask(), 0);
+                    assert_eq!(transform.b[3], 0.0);
+                } else {
+                    assert_eq!(transform.b[3], 0.35);
+                }
+            } else {
+                assert!(pixel.surface().is_none());
+                assert_eq!(transform.b[3], 0.0);
+            }
+        }
+        for (pixel, _) in cells.iter().take(stats.body_cells) {
+            assert!(
+                live.cells()
+                    .any(|(p, c)| p.to_array() == pixel.local && c == pixel.color)
+            );
+        }
+    }
+}
+
 fn input() -> DrawInput {
     DrawInput {
         parent: Transform {
@@ -178,7 +318,14 @@ fn reflected_sheared_rotated_nested_affines_and_all_zoom_endpoints_preserve_all_
                                 < 0.00008
                         );
                         assert_eq!(t.b[2], crate::ACTOR_MATERIAL.light_response);
-                        assert_eq!(t.b[3], crate::ACTOR_MATERIAL.emission);
+                        assert_eq!(
+                            t.b[3],
+                            if i == 0 && j >= stats.body_cells {
+                                0.35
+                            } else {
+                                crate::ACTOR_MATERIAL.emission
+                            }
+                        );
                     }
                 }
             }

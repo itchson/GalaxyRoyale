@@ -1,7 +1,7 @@
 //! Cached authored 96-cell detail over the retained, destructible 48-cell hull.
 //! Presentation only: no collider, exhaust, progression or particle changes.
 use crate::identity::{Corporation, starter_body};
-use engine_core::{AffineTransform, FrameBuilder, PixelBody, PixelMaterial, Vec2};
+use engine_core::{AffineTransform, FrameBuilder, PixelBody, PixelMaterial, Surface, Vec2};
 use serde::Deserialize;
 use std::{collections::BTreeMap, sync::LazyLock};
 
@@ -19,6 +19,9 @@ const ROLES: [&str; 7] = [
     "fastener",
 ];
 const ATLAS: &str = include_str!("../../../assets/pixels/raicho-fine-detail/atlas.json");
+const PAN_MATERIAL: &str = include_str!("../../../assets/pixels/pan-surface/material.json");
+const SOURCE_SHA256: &str = "319aa1fd8cf1112ef33addd06739063c72b92ecca5ca460afcc05aada77666be";
+const MATERIAL_ENCODING: &str = "oct8xy/linear-mask8/enabled; seven transform bits remain zero";
 
 /// An object quota, not a global FrameBuilder/render-scene ceiling.
 const PLAYER_CELL_BUDGET: usize = 3_000;
@@ -130,9 +133,81 @@ struct FineCell {
 
 struct FineArt {
     cells: Box<[FineCell]>,
+    material: Option<MaterialMap>,
+}
+struct MaterialMap {
+    coarse: Box<[u32]>,
+    fine: Box<[u32]>,
+}
+#[derive(Deserialize)]
+#[serde(deny_unknown_fields)]
+struct MaterialAsset {
+    version: u32,
+    asset: String,
+    encoding: String,
+    source_atlas_fnv64: String,
+    source_atlas_sha256: String,
+    coarse: Vec<[u32; 2]>,
+    fine: Vec<[u32; 2]>,
+}
+
+fn source_fnv64(bytes: &[u8]) -> String {
+    let hash = bytes.iter().fold(0xcbf2_9ce4_8422_2325_u64, |h, &b| {
+        (h ^ u64::from(b)).wrapping_mul(0x0100_0000_01b3)
+    });
+    format!("{hash:016x}")
+}
+fn parse_material(
+    json: &str,
+    atlas: &str,
+    reference: &PixelBody,
+    sprite: &Sprite,
+) -> Result<MaterialMap, &'static str> {
+    let asset: MaterialAsset =
+        serde_json::from_str(json).map_err(|_| "invalid exact material JSON")?;
+    if asset.version != 1
+        || asset.asset != "pan_hikari"
+        || asset.encoding != MATERIAL_ENCODING
+        || asset.source_atlas_sha256 != SOURCE_SHA256
+        || asset.source_atlas_fnv64 != source_fnv64(atlas.as_bytes())
+    {
+        return Err("material identity, encoding or source binding mismatch");
+    }
+    let coarse: Vec<_> = reference.cells_indexed().map(|(i, _, _)| i).collect();
+    let fine: Vec<_> = occupied(sprite).collect();
+    if asset.coarse.len() != coarse.len() || asset.fine.len() != fine.len() {
+        return Err("material occupancy count mismatch");
+    }
+    // Validate complete ordered identity and masks before allocating cached maps.
+    for (rows, expected, signal) in [(&asset.coarse, &coarse, false), (&asset.fine, &fine, true)] {
+        for (&[index, word], &expected) in rows.iter().zip(expected) {
+            let surface = Surface::from_cell_word(word).ok_or("enabled material word required")?;
+            let mask = if signal && sprite.signal_cells.binary_search(&(index as usize)).is_ok() {
+                255
+            } else {
+                0
+            };
+            if index as usize != expected || word & 127 != 0 || surface.emission_mask() != mask {
+                return Err("material cell ordering, slot or emission mask mismatch");
+            }
+        }
+    }
+    let mut coarse = vec![0; COARSE_GRID * COARSE_GRID];
+    for [index, word] in asset.coarse {
+        coarse[index as usize] = word;
+    }
+    Ok(MaterialMap {
+        coarse: coarse.into_boxed_slice(),
+        fine: asset.fine.into_iter().map(|[_, word]| word).collect(),
+    })
 }
 
 static ASSETS: LazyLock<Result<[FineArt; 3], &'static str>> = LazyLock::new(|| parse(ATLAS));
+pub(super) fn pan_material_ready() -> bool {
+    ASSETS
+        .as_ref()
+        .is_ok_and(|assets| assets[0].material.is_some())
+}
 
 fn corporation(index: usize) -> Corporation {
     [Corporation::Pan, Corporation::Renko, Corporation::Hugo][index]
@@ -289,6 +364,11 @@ fn parse(json: &str) -> Result<[FineArt; 3], &'static str> {
                     signal: fine.signal_cells.binary_search(&i).is_ok(),
                 })
                 .collect(),
+            material: if index == 0 {
+                Some(parse_material(PAN_MATERIAL, json, reference, fine)?)
+            } else {
+                None
+            },
         });
     }
     arts.try_into()
@@ -334,7 +414,7 @@ pub(super) fn append(
     manufacturer: Corporation,
     input: DrawInput,
     remaining: &mut Budget,
-    coarse_color: impl FnMut(Vec2, u32) -> u32,
+    mut coarse_color: impl FnMut(Vec2, u32) -> u32,
     mut fine_color: impl FnMut(Vec2, u32) -> u32,
 ) -> Result<Stats, Reject> {
     let assets = ASSETS.as_ref().map_err(|_| Reject::InvalidAtlas)?;
@@ -382,19 +462,48 @@ pub(super) fn append(
         return Err(Reject::Budget);
     }
     // No callbacks or writes happened before all guards, including both layers.
-    frame.push_body_affine_colored_material(live, parent, input.material, coarse_color);
-    let emitted = frame.push_cells_affine_material(
+    if let Some(material) = &art.material {
+        frame.push_cells_affine_surface_material(
+            parent,
+            input.material,
+            live.cells_indexed().map(|(index, local, original)| {
+                (
+                    local,
+                    coarse_color(local, original),
+                    Surface::from_cell_word(material.coarse[index]),
+                )
+            }),
+        );
+    } else {
+        frame.push_body_affine_colored_material(live, parent, input.material, coarse_color);
+    }
+    let fine_material = if art.material.is_some() {
+        PixelMaterial {
+            emission: 0.35,
+            ..input.material
+        }
+    } else {
+        input.material
+    };
+    let emitted = frame.push_cells_affine_surface_material(
         fine_parent,
-        input.material,
-        art.cells.iter().filter(survives).map(|cell| {
-            (
-                cell.local,
-                fine_color(
-                    cell.local * 0.5,
-                    signal_color(cell, input.time, input.reduced_motion),
-                ),
-            )
-        }),
+        fine_material,
+        art.cells
+            .iter()
+            .enumerate()
+            .filter(|(_, cell)| survives(cell))
+            .map(|(index, cell)| {
+                (
+                    cell.local,
+                    fine_color(
+                        cell.local * 0.5,
+                        signal_color(cell, input.time, input.reduced_motion),
+                    ),
+                    art.material
+                        .as_ref()
+                        .and_then(|m| Surface::from_cell_word(m.fine[index])),
+                )
+            }),
     );
     debug_assert_eq!(emitted, count);
     remaining.pixels -= needed;

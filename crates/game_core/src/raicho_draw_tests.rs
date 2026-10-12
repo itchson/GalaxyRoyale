@@ -12,7 +12,20 @@ fn fine_cells(game: &Game) -> Vec<([f32; 2], u32)> {
             basis_y: Vec2::Y * 0.5,
             ..AffineTransform::default()
         });
-    let expected = GpuTransform::from(parent).with_material(ACTOR_MATERIAL);
+    let material = if game
+        .profile
+        .identity
+        .as_ref()
+        .is_some_and(|i| i.corporation == identity::Corporation::Pan)
+    {
+        PixelMaterial {
+            emission: 0.35,
+            ..ACTOR_MATERIAL
+        }
+    } else {
+        ACTOR_MATERIAL
+    };
+    let expected = GpuTransform::from(parent).with_material(material);
     let frame = game.render(1.0);
     frame
         .batches

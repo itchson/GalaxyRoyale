@@ -25,6 +25,7 @@ mod dock_facilities;
 mod isotope_scar;
 mod navigation;
 pub use navigation::{NavigationHud, NavigationTarget};
+mod material_scene;
 mod pixel_assets;
 mod player_presentation;
 mod radiation_enemies;
@@ -607,6 +608,7 @@ pub struct Game {
     boss_qa_scene: bool,
     // Transient progression isolation; unlike boss_qa_scene, this never selects AI.
     diagnostic_scene: bool,
+    material_scene: bool,
     material_loss: [u32; 5],
     material_loss_reason: String,
 }
@@ -732,6 +734,7 @@ impl Game {
             run: None,
             boss_qa_scene: false,
             diagnostic_scene: false,
+            material_scene: false,
             material_loss,
             material_loss_reason: if ship_progression::total(material_loss) > 0 {
                 "reload".into()
@@ -783,6 +786,9 @@ impl Game {
     /// The renderer uses the same world-space interpolation as actor extraction.
     /// Up to four recent effects, two nearest projectiles, engine and beacon.
     pub fn light_sources(&self, alpha: f32) -> Vec<LightSource> {
+        if self.material_scene {
+            return self.material_scene_lights(alpha);
+        }
         let alpha = if alpha.is_finite() {
             alpha.clamp(0.0, 1.0)
         } else {
@@ -1210,6 +1216,10 @@ impl Game {
         }
         let dt = dt.min(1.0 / 20.0);
         self.time += dt;
+        if self.material_scene {
+            self.tick_material_scene(input, dt);
+            return;
+        }
         for light in &mut self.transient_lights {
             light.life -= dt;
         }
@@ -3067,6 +3077,7 @@ impl Game {
         }
         self.discard_cargo("abandonment");
         self.boss_qa_scene = false;
+        self.material_scene = false;
         self.finish_arena(false, false);
         self.transient_lights.clear();
         self.stress_mode = false;
@@ -3806,26 +3817,30 @@ impl Game {
 
     /// Explicit deterministic QA scenes. Their ticks never earn progression;
     /// home/reset ends this transient isolation. Unknown commands are no-ops.
-    pub fn diagnostic(&mut self, command: &str) {
+    pub fn diagnostic(&mut self, command: &str) -> bool {
         if self.co_op.is_some() {
-            return;
+            return false;
         }
         if matches!(command, "dock" | "home") {
             self.reset_to_dock();
-            return;
+            return true;
         }
         let previous = self.diagnostic_scene;
         // Cover reset's immediate exploration/banking before a scene teleports.
         // Invalid commands restore only this transient bit and mutate no run.
         self.diagnostic_scene = true;
-        self.diagnostic_scene = if self.diagnostic_inner(command) {
-            true
-        } else {
-            previous
-        };
+        let accepted = self.diagnostic_inner(command);
+        self.diagnostic_scene = if accepted { true } else { previous };
+        if accepted && command != "material" {
+            self.material_scene = false;
+        }
+        accepted
     }
 
     fn diagnostic_inner(&mut self, command: &str) -> bool {
+        if command == "material" {
+            return self.begin_material_scene();
+        }
         if let Some(destination) = command.strip_prefix("warp ") {
             let mut coordinates = destination.split_whitespace();
             let x = coordinates
