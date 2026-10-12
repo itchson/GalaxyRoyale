@@ -1,0 +1,111 @@
+{
+  "scope": "Independent frozen source/hash/native output/log inspection only; no native build/export rerun, Node test suite, listeners/browser/RTC execution",
+  "candidate": "87d92f2cbf10c24dda585b47f05de2fad6fe178f",
+  "parent": "f1afbbd09b1b9c932c548ea220e85c595a35a395",
+  "one_test_only_source_append": true,
+  "manifest_files_verified": 35,
+  "source_inputs_verified": 119,
+  "dependency_declared_source_set_matches": true,
+  "native_executable_fingerprint_pins_verified": 4,
+  "native_outputs_verified": 9,
+  "profiles": [
+    {
+      "role": "host",
+      "full_schema": 7,
+      "derived_seed": 2934182754,
+      "seed_formula_independently_matched": true,
+      "scalar_diff": [
+        {
+          "path": "/campaign/abilities/5/blueprint",
+          "before": false,
+          "after": true
+        },
+        {
+          "path": "/campaign/abilities/5/rank",
+          "before": 0,
+          "after": 1
+        },
+        {
+          "path": "/campaign/loadouts/0/slots/2",
+          "before": 2,
+          "after": 5
+        },
+        {
+          "path": "/ranks/8",
+          "before": 0,
+          "after": 1
+        },
+        {
+          "path": "/unlocked/2",
+          "before": false,
+          "after": true
+        }
+      ],
+      "all_unconfigured_fields_equal": true,
+      "starter_inventory_retained": 2,
+      "owned_ship_mask": 1,
+      "evolution_omitted": true,
+      "actual_export_response_exact": true
+    },
+    {
+      "role": "guest",
+      "full_schema": 7,
+      "derived_seed": 1813293345,
+      "seed_formula_independently_matched": true,
+      "scalar_diff": [
+        {
+          "path": "/campaign/abilities/5/blueprint",
+          "before": false,
+          "after": true
+        },
+        {
+          "path": "/campaign/abilities/5/rank",
+          "before": 0,
+          "after": 1
+        },
+        {
+          "path": "/campaign/loadouts/0/slots/2",
+          "before": null,
+          "after": 5
+        },
+        {
+          "path": "/ranks/8",
+          "before": 0,
+          "after": 1
+        },
+        {
+          "path": "/unlocked/2",
+          "before": false,
+          "after": true
+        }
+      ],
+      "all_unconfigured_fields_equal": true,
+      "starter_inventory_retained": 1,
+      "owned_ship_mask": 1,
+      "evolution_omitted": true,
+      "actual_export_response_exact": true
+    }
+  ],
+  "recorded_author_checks": {
+    "ignored_native_export": {
+      "passed": 1,
+      "failed": 0
+    },
+    "bridge_regression": {
+      "passed": 6,
+      "ignored": 2,
+      "failed": 0
+    },
+    "production_node_validators": "passed for both actual native profiles and malformed controls",
+    "strict_game_web_clippy": "passed"
+  },
+  "known_first_failure": "Git identity configuration prevented first commit; retained excerpt, no test failure was claimed",
+  "limits": [
+    "Configured fixture issuance only; NOT earned progression",
+    "Native serde/Game constructor reload equality is not an IndexedDB/save-service/browser roundtrip",
+    "Actual native dispatch export_loadout recorded; no currentWASM constructor/export claim",
+    "No user or retained QA save read by generator/exporter source; fresh isolated origins must be selected explicitly by Root",
+    "No real owner thrust/birth, RTC page/commit/canvas/expiry/sanctuary/leave/end/rejoin acceptance from this step",
+    "No eight-player/Internet/TURN/performance/physical acceptance"
+  ]
+}

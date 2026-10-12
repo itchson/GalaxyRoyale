@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 1068,
+  "revision": 1075,
   "name": "Galaxy Royale",
   "phase": "Playable solo slice → content and validation",
-  "updatedAt": "2026-10-12T21:03:13.218Z",
+  "updatedAt": "2026-10-12T21:09:36.530Z",
   "tasks": [
     {
       "id": "studio",
@@ -8577,7 +8577,7 @@
     {
       "id": "task-8508cfc5",
       "title": "Authoritative co-op Ion Wake trail publication and native presentation",
-      "description": "Actual isolatedbranch setup from332ddd5; independent originaldesign/v2reviewresolved three concrete edge findings. Native author owns bounded active-sample page, atomic replica commit, lifecycle/canonical-clock invariants and shared native quads/WASM operations. Root owns matching JS wire/controller/ports and normalbuild/browser. No implementation or trail RTC/AV pass claimed at dispatch. Native author implementation/tests now complete for independent review: authoritative bounded page, canonical same-tick cache and shared native dots. Exact source/evidence in isolated work/coop-wake-presentation; matching Root browser pipeline and physical RTC/AV gates remain unfinished.",
+      "description": "Actual isolatedbranch setup from332ddd5; independent originaldesign/v2reviewresolved three concrete edge findings. Native author owns bounded active-sample page, atomic replica commit, lifecycle/canonical-clock invariants and shared native quads/WASM operations. Root owns matching JS wire/controller/ports and normalbuild/browser. No implementation or trail RTC/AV pass claimed at dispatch. Native author implementation/tests now complete for independent review: authoritative bounded page, canonical same-tick cache and shared native dots. Exact source/evidence in isolated work/coop-wake-presentation; matching Root browser pipeline and physical RTC/AV gates remain unfinished. Integrated into codex/testing with actual937 native passes,20 explicit ignores, strict Clippy, coherent WebGPU/WebGL2/PWA build and full Node701pass/3skipped. Existing live Wake, eight-player, TURN and physical-device gates remain separate and pending.",
       "department": "Native gameplay / presentation",
       "owner": "/root/audio_score",
       "status": "active",
@@ -8590,7 +8590,7 @@
         },
         {
           "text": "Shared host/guest native quad rendering, epoch/expiry/cleanup and meaningful native serializer/regression checks with independent review.",
-          "met": false
+          "met": true
         },
         {
           "text": "Matching strict browser pipeline, normaldualbuild and actual current RTC/AV/cleanup evidence recorded.",
@@ -8617,12 +8617,22 @@
           "label": "Actual isolated native candidate and remaining product gates",
           "kind": "note",
           "details": "Native author pass complete in C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/coop-wake-presentation/HANDOFF.md. Source pins0ce2ff57; handoffa6b7aaf5. Actual workspace928pass/19ignored; strictall-targetClippy pass; 192point/960quad capacity and exact18401B page/49452B maximum publication wrapper. Independent source review, Root strictJS/controller/ports, normaldualbuild and realRTC/AV remain open; whole-world-edge asteroid rejection recorded separately. Native implementation does not accept those product gates."
+        },
+        {
+          "label": "Actual coherent integration and dual-WASM compilation",
+          "kind": "artifact",
+          "path": "artifacts/engine-audio-integration-20261013/summary.json"
+        },
+        {
+          "label": "Full integrated Node suite,701 pass and3 skip",
+          "kind": "artifact",
+          "path": "artifacts/engine-audio-integration-20261013/full-node-suite.log"
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 3,
       "createdAt": "2026-10-12T19:15:22.563Z",
-      "updatedAt": "2026-10-12T19:45:16.137Z"
+      "updatedAt": "2026-10-12T21:06:14.751Z"
     },
     {
       "id": "task-16eff15f",
@@ -8667,10 +8677,10 @@
     {
       "id": "task-b062202c",
       "title": "Co-op world-edge native entity publication and replica bounds",
-      "description": "Real in-progress Wake edge capture failed because17legitimate generated asteroids exceed currentreplica +/-1000000positionbounds. Rootconfirmedexistingvectorcontract; actualintegrated-baseline reproduction stillneeded. KeepWake-only halo testseparate fromwholeworldfix. No projectile failure or liveRTC result inferred. Root now independently reproduced the unfiltered integrated-baseline capture: actual first positive-X edge returned invalid_entity; no geometry fix or RTC result yet.",
+      "description": "Real in-progress Wake edge capture failed because17legitimate generated asteroids exceed currentreplica +/-1000000positionbounds. Rootconfirmedexistingvectorcontract; actualintegrated-baseline reproduction stillneeded. KeepWake-only halo testseparate fromwholeworldfix. No projectile failure or liveRTC result inferred. Root now independently reproduced the unfiltered integrated-baseline capture: actual first positive-X edge returned invalid_entity; no geometry fix or RTC result yet. Integrated into codex/testing with actual937 native passes,20 explicit ignores, strict Clippy, coherent WebGPU/WebGL2/PWA build and full Node701pass/3skipped. Existing live Wake, eight-player, TURN and physical-device gates remain separate and pending.",
       "department": "Native gameplay / protocol",
       "owner": "Root / native gameplay",
-      "status": "review",
+      "status": "active",
       "priority": "high",
       "dependencies": [],
       "acceptanceCriteria": [
@@ -8680,7 +8690,7 @@
         },
         {
           "text": "Bounded authority/publication/replica/browser geometry contract resolves legal nearby entities with meaningful malformed/extreme input regressions.",
-          "met": false
+          "met": true
         },
         {
           "text": "Matching build and actual host/guest edge lifecycle validated; future circular battle-royale remains separate.",
@@ -8697,20 +8707,30 @@
           "label": "Root actual unfiltered baseline regression and preserved failure",
           "kind": "artifact",
           "path": "artifacts/private-room-negative-integration-20261013/world-edge-baseline/README.md"
+        },
+        {
+          "label": "Actual coherent integration and dual-WASM compilation",
+          "kind": "artifact",
+          "path": "artifacts/engine-audio-integration-20261013/summary.json"
+        },
+        {
+          "label": "Full integrated Node suite,701 pass and3 skip",
+          "kind": "artifact",
+          "path": "artifacts/engine-audio-integration-20261013/full-node-suite.log"
         }
       ],
       "blocker": "",
-      "revision": 4,
+      "revision": 5,
       "createdAt": "2026-10-12T19:31:50.630Z",
-      "updatedAt": "2026-10-12T20:16:15.779Z"
+      "updatedAt": "2026-10-12T21:06:14.771Z"
     },
     {
       "id": "task-b9daed25",
       "title": "Avoid remote sanctuary generation for definite native Wake geometry misses",
-      "description": "Separate delta from frozen111a native trail candidate. Reorder existing exact target geometry rejection before remote sanctuary lookup, retaining protected-hit rejection before all damage/attribution. Preserve measured baseline and compare same configured native fixture; no global FPS claim. Author before/after release probes and actual native functional/regression/Clippy checks now passed; separate candidate ready for frozen independent delta review. Source/test-only runtime change, no cache/protocol/render/Root edit. Original111a retained.",
+      "description": "Separate delta from frozen111a native trail candidate. Reorder existing exact target geometry rejection before remote sanctuary lookup, retaining protected-hit rejection before all damage/attribution. Preserve measured baseline and compare same configured native fixture; no global FPS claim. Author before/after release probes and actual native functional/regression/Clippy checks now passed; separate candidate ready for frozen independent delta review. Source/test-only runtime change, no cache/protocol/render/Root edit. Original111a retained. Integrated into codex/testing with actual937 native passes,20 explicit ignores, strict Clippy, coherent WebGPU/WebGL2/PWA build and full Node701pass/3skipped. Existing live Wake, eight-player, TURN and physical-device gates remain separate and pending.",
       "department": "Native gameplay performance",
       "owner": "/root/audio_score",
-      "status": "active",
+      "status": "review",
       "priority": "high",
       "dependencies": [
         "task-8508cfc5"
@@ -8722,7 +8742,7 @@
         },
         {
           "text": "Separate frozen reviewed delta with appropriate native/Clippy checks; Root integration and matching build.",
-          "met": false
+          "met": true
         }
       ],
       "evidence": [
@@ -8735,17 +8755,27 @@
           "label": "Actual111a native before/after and scoped source checks",
           "kind": "note",
           "details": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/coop-wake-sanctuary-order/HANDOFF.md SHA c47d7775c3d415de556df16c110c07af70f1b8f2a57473d935e5c86b40ff96af. Source pins a3abbd4e. Same work-only release fixture on frozen111a: distant-miss stage allocation requests removed3840 and requested bytes359424, empty3840 to0/full5712 to1872.15 Wake tests and129 co-op regressions passed,4 exports ignored; strict game-core all-target Clippy passed. Independent delta review, Root integration/build and product/RTC/physical performance remain open; original111a branch preserved."
+        },
+        {
+          "label": "Actual coherent integration and dual-WASM compilation",
+          "kind": "artifact",
+          "path": "artifacts/engine-audio-integration-20261013/summary.json"
+        },
+        {
+          "label": "Full integrated Node suite,701 pass and3 skip",
+          "kind": "artifact",
+          "path": "artifacts/engine-audio-integration-20261013/full-node-suite.log"
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 3,
       "createdAt": "2026-10-12T19:58:02.566Z",
-      "updatedAt": "2026-10-12T20:00:24.144Z"
+      "updatedAt": "2026-10-12T21:06:28.941Z"
     },
     {
       "id": "task-d82150b9",
       "title": "Strict browser publication and replica routing for native Ion Wake samples",
-      "description": "Separate branch from frozen d8/111. Own only wire/controller/wasm-ports, focused tests and22exact native fixtures. Strict raw+f32/32KiB page and65KiB frame limits; one frozen page, cells-only cache skipping, complete replica routing before commit/ACK. Root owns matching integration/build/RTC, engine_fx independent review. Author consumer implementation/typecheck/final73listener-free checks now pass; separate source freeze ready for independent review. Original native refs preserved. An accidental ephemeral HTTP transport test run is recorded explicitly, not presented as a listener-free or RTC check.",
+      "description": "Separate branch from frozen d8/111. Own only wire/controller/wasm-ports, focused tests and22exact native fixtures. Strict raw+f32/32KiB page and65KiB frame limits; one frozen page, cells-only cache skipping, complete replica routing before commit/ACK. Root owns matching integration/build/RTC, engine_fx independent review. Author consumer implementation/typecheck/final73listener-free checks now pass; separate source freeze ready for independent review. Original native refs preserved. An accidental ephemeral HTTP transport test run is recorded explicitly, not presented as a listener-free or RTC check. Integrated into codex/testing with actual937 native passes,20 explicit ignores, strict Clippy, coherent WebGPU/WebGL2/PWA build and full Node701pass/3skipped. Existing live Wake, eight-player, TURN and physical-device gates remain separate and pending.",
       "department": "Browser protocol / native presentation",
       "owner": "/root/audio_score",
       "status": "active",
@@ -8760,7 +8790,7 @@
         },
         {
           "text": "Independent review plus coherent Root native/browser integration and matching normal bundles.",
-          "met": false
+          "met": true
         },
         {
           "text": "Actual current native host/guest trail lifecycle, visible rendering and bounded cleanup; eight/TURN separate.",
@@ -8777,12 +8807,22 @@
           "label": "Actual scoped browser consumer pass and retained execution deviation",
           "kind": "note",
           "details": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/coop-wake-browser/HANDOFF.md SHA8d301e9f1964f4bbf4c8dffed9eac44eece7a406eaa98fb21baaeec4a962fb87. Final listener-free73 focused Node tests and tsc passed; exact22 native111a fixtures pinned. Raw page span/numeric/roster checks, cells-only cache skips, required complete Wake before commit/ACK and replica_wake routing. Red baseline and fixture-token failure retained. Accidental111-case transport run opened ephemeral HTTP listeners, closed via existing teardown and exited0; explicitly separate from final checks. No normal build/new browser/realRTC/native changes; independent review/integration/live gates open."
+        },
+        {
+          "label": "Actual coherent integration and dual-WASM compilation",
+          "kind": "artifact",
+          "path": "artifacts/engine-audio-integration-20261013/summary.json"
+        },
+        {
+          "label": "Full integrated Node suite,701 pass and3 skip",
+          "kind": "artifact",
+          "path": "artifacts/engine-audio-integration-20261013/full-node-suite.log"
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 3,
       "createdAt": "2026-10-12T20:11:47.154Z",
-      "updatedAt": "2026-10-12T20:23:02.352Z"
+      "updatedAt": "2026-10-12T21:06:14.798Z"
     },
     {
       "id": "task-c7b9aa49",
@@ -8826,6 +8866,37 @@
       "revision": 2,
       "createdAt": "2026-10-12T20:12:26.993Z",
       "updatedAt": "2026-10-12T20:39:57.013Z"
+    },
+    {
+      "id": "task-d0e4d592",
+      "title": "Configured native R1 Ion Wake live validation harness",
+      "description": "Use reviewed native-generated test-only profiles on fresh isolated origins. Normal WASM constructor and real authoritative capture/commit/render observations; no diagnostic bypass, fake sample generation or user-world overwrite. Configured progression explicitly not earned. First author increment is source/harness only; Root owns actual two-client execution.",
+      "department": "QA / multiplayer presentation",
+      "owner": "/root/audio_score",
+      "status": "active",
+      "priority": "high",
+      "dependencies": [
+        "task-d82150b9"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Fresh-store refusal, role-local native fixtures, strict scenario/hash/report guards and bounded cleanup implemented with meaningful tests.",
+          "met": false
+        },
+        {
+          "text": "Independent review and exact normal artifact/source preparation verified.",
+          "met": false
+        },
+        {
+          "text": "Actual host/guest trail birth, publication, native commit, expiry, safe retreat and teardown recorded on both renderers.",
+          "met": false
+        }
+      ],
+      "evidence": [],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-12T21:06:28.958Z",
+      "updatedAt": "2026-10-12T21:06:28.958Z"
     }
   ],
   "reviews": [
@@ -11351,6 +11422,39 @@
           "label": "Independent measured predicate-order review",
           "kind": "artifact",
           "path": "artifacts/studio-reviews-20261013/sanctuary-order/REVIEW.md"
+        }
+      ]
+    },
+    {
+      "id": "review-41c5e533",
+      "title": "Integrated engine and audio review handoff",
+      "body": "Engine specialist accepted exact browser world bounds after native fixture/signature verification. Root integrated authoritative Wake and world bounds,937 native passes,strictClippy,701 Node passes/3skip and new dual-WASM build. Audio designer supports bounded moving harmonic filters and quiet percussion bodies; native7 audio fixtures are clean but human mix acceptance remains open. Fixture reviewer and QA author are assigned separate next increments; art specialist inspects a concrete nebula improvement. This records written exchanges, not a simulated meeting.",
+      "author": "Root",
+      "source": "Actual asynchronous specialist handoffs and integration discussion",
+      "createdAt": "2026-10-12T21:06:28.980Z",
+      "participants": [
+        "Root",
+        "/root/engine_fx",
+        "/root/audio_score",
+        "/root/audio_review"
+      ],
+      "taskIds": [
+        "task-8508cfc5",
+        "task-b062202c",
+        "task-d82150b9",
+        "task-b9daed25",
+        "task-d0e4d592"
+      ],
+      "evidence": [
+        {
+          "label": "Actual integrated build evidence",
+          "kind": "artifact",
+          "path": "artifacts/engine-audio-integration-20261013/summary.json"
+        },
+        {
+          "label": "Actual native audio capture",
+          "kind": "artifact",
+          "path": "artifacts/title-fullness-v4-20261013/report.json"
         }
       ]
     }
@@ -14793,6 +14897,56 @@
         }
       ],
       "knownIssues": "Live Wake RTC presentation, eight players, TURN, physical devices and realtime performance remain pending. Ignored export fixtures are not passing tests."
+    },
+    {
+      "id": "build-d5b85090",
+      "title": "Integrated save contract and dual-backend Haven smoke",
+      "body": "Full Node suite701pass/3skip.50 actualRust/WASM serializer/SaveStore cases; fake-indexeddb explicitly. Separate normal browser UI test-world creation/save/resume and Haven drawing on WebGPU then WebGL2 in one reused tab. Native configured IonWake fixture independently reviewed; current liveRTC still pending.",
+      "author": "Root",
+      "source": "Actual integrated Node/WASM contract and browser smoke observations",
+      "createdAt": "2026-10-12T21:09:36.530Z",
+      "revision": "e0f53b970263db88e2f4a61dfe21ac37e019de0f",
+      "evidence": [
+        {
+          "label": "Full integrated Node result",
+          "kind": "artifact",
+          "path": "artifacts/engine-audio-integration-20261013/full-node-suite.log"
+        },
+        {
+          "label": "Actual50 headless Rust/WASM cases and scope",
+          "kind": "artifact",
+          "path": "artifacts/engine-audio-integration-20261013/wasm-contract.log"
+        },
+        {
+          "label": "Actual browser smoke actions and limits",
+          "kind": "artifact",
+          "path": "artifacts/engine-audio-integration-20261013/browser/smoke.json"
+        },
+        {
+          "label": "Native configured fixture independent review",
+          "kind": "artifact",
+          "path": "artifacts/engine-audio-integration-20261013/fixture-review/REVIEW.md"
+        }
+      ],
+      "checks": [
+        {
+          "name": "701 Node checks and3 explicit skips",
+          "result": "pass"
+        },
+        {
+          "name": "50 headless Rust/WASM save/serializer cases",
+          "result": "pass"
+        },
+        {
+          "name": "Normal WebGPU/WebGL2 Haven UI smoke",
+          "result": "pass"
+        },
+        {
+          "name": "Current live WakeRTC/shadow parity/physicalperformance",
+          "result": "not_run"
+        }
+      ],
+      "knownIssues": "Browser title/creation/save/resume/Haven rendering smoke only; no advanced rewards, RTC, shadow mask/lighting parity, visual timing, GPU recovery or physical performance acceptance."
     }
   ],
   "feedback": [],
@@ -25476,6 +25630,76 @@
       "author": "Root",
       "source": "Actual integrated tests and new dual-WASM build",
       "createdAt": "2026-10-12T21:03:13.218Z"
+    },
+    {
+      "id": "12eed8a1-bb86-4eee-8b6f-08b799054b87",
+      "revision": 1069,
+      "kind": "task.update",
+      "itemId": "task-8508cfc5",
+      "title": "Authoritative co-op Ion Wake trail publication and native presentation",
+      "author": "Root",
+      "source": "Actual independent reviews, integrated native checks and normal dual-WASM build",
+      "createdAt": "2026-10-12T21:06:14.751Z"
+    },
+    {
+      "id": "beb79194-2f9d-4ca0-89aa-280d6675dcac",
+      "revision": 1070,
+      "kind": "task.update",
+      "itemId": "task-b062202c",
+      "title": "Co-op world-edge native entity publication and replica bounds",
+      "author": "Root",
+      "source": "Actual independent reviews, integrated native checks and normal dual-WASM build",
+      "createdAt": "2026-10-12T21:06:14.771Z"
+    },
+    {
+      "id": "3458f74d-2b52-43a7-8487-e8c8c50bcdcc",
+      "revision": 1071,
+      "kind": "task.update",
+      "itemId": "task-d82150b9",
+      "title": "Strict browser publication and replica routing for native Ion Wake samples",
+      "author": "Root",
+      "source": "Actual independent reviews, integrated native checks and normal dual-WASM build",
+      "createdAt": "2026-10-12T21:06:14.798Z"
+    },
+    {
+      "id": "8b24396e-c57d-4345-9b0d-245f4848cdec",
+      "revision": 1072,
+      "kind": "task.update",
+      "itemId": "task-b9daed25",
+      "title": "Avoid remote sanctuary generation for definite native Wake geometry misses",
+      "author": "Root",
+      "source": "Actual independent reviews, integrated native checks and normal dual-WASM build",
+      "createdAt": "2026-10-12T21:06:28.941Z"
+    },
+    {
+      "id": "88c6ef53-5610-4ee0-9d07-08cd70417348",
+      "revision": 1073,
+      "kind": "task.create",
+      "itemId": "task-d0e4d592",
+      "title": "Configured native R1 Ion Wake live validation harness",
+      "author": "Root",
+      "source": "Actual bounded assignment to audio_score with independent fixture review by engine_fx",
+      "createdAt": "2026-10-12T21:06:28.958Z"
+    },
+    {
+      "id": "7b6f9d01-ac3a-45ff-a97e-cea076290bd8",
+      "revision": 1074,
+      "kind": "review",
+      "itemId": "review-41c5e533",
+      "title": "Integrated engine and audio review handoff",
+      "author": "Root",
+      "source": "Actual asynchronous specialist handoffs and integration discussion",
+      "createdAt": "2026-10-12T21:06:28.980Z"
+    },
+    {
+      "id": "c7852736-76ea-4e62-8952-072f83284e8b",
+      "revision": 1075,
+      "kind": "build",
+      "itemId": "build-d5b85090",
+      "title": "Integrated save contract and dual-backend Haven smoke",
+      "author": "Root",
+      "source": "Actual integrated Node/WASM contract and browser smoke observations",
+      "createdAt": "2026-10-12T21:09:36.530Z"
     }
   ],
   "runRecords": [
