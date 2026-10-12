@@ -235,6 +235,7 @@ async function fixture(t, storeOptions = {}, network = new Network()) {
     await host.create(123);
     const guest = client();
     await guest.join(host.invite());
+    await approveGuest(host, guest);
     await until(
       () =>
         host.diagnostics().peers[0]?.transport === "ready" &&
@@ -258,6 +259,11 @@ async function fixture(t, storeOptions = {}, network = new Network()) {
       store.sweep();
     },
   };
+}
+async function approveGuest(host, guest) {
+  const peer = guest.diagnostics().participant.id;
+  await until(() => host.diagnostics().joinRequests.some((r) => r.id === peer));
+  await host.approve(peer, true);
 }
 async function admit(p) {
   assert.equal(
@@ -507,6 +513,14 @@ test("actual HTTP membership never implies a ready channel or Rust admission", a
     guest = f.client();
   await host.create(123);
   await guest.join(host.invite());
+  await until(() => host.diagnostics().joinRequests.length === 1);
+  assert.equal(n.pcs.length, 0);
+  assert.equal(guest.diagnostics().awaitingApproval, true);
+  assert.equal(
+    guest.send(host.diagnostics().participant.id, "join", neutral),
+    false,
+  );
+  await approveGuest(host, guest);
   await until(
     () =>
       n.pcs.length === 2 &&
@@ -604,6 +618,7 @@ test("host plus seven guest channels are bounded; ninth reservation fails", asyn
     const guest = f.client();
     guests.push(guest);
     await guest.join(host.invite());
+    await approveGuest(host, guest);
   }
   await until(
     () =>
@@ -612,7 +627,7 @@ test("host plus seven guest channels are bounded; ninth reservation fails", asyn
   );
   const ninth = f.client();
   await assert.rejects(ninth.join(host.invite()), {
-    code: "signaling_request",
+    code: "session_full",
   });
   assert.equal(ninth.diagnostics().phase, "ended");
   assert.equal(f.network.pcs.length, 14);
@@ -736,6 +751,7 @@ test("host end notifies guest, aborts polls and allows a distinct-session rejoin
   await assert.rejects(p.guest.join(oldInvite));
   await p.host.create(456);
   await p.guest.join(p.host.invite());
+  await approveGuest(p.host, p.guest);
   await until(() => p.guest.diagnostics().peers[0]?.transport === "ready");
   assert.notEqual(p.host.diagnostics().session.id, first);
   assert.equal(p.guest.diagnostics().session.seed, 456);
@@ -768,7 +784,10 @@ test("failed negotiation does not fabricate readiness and guest leave frees its 
       throw new Error("declared RTC unavailable");
     },
   });
-  await assert.rejects(guest.join(host.invite()), { code: "transport_failed" });
+  await guest.join(host.invite());
+  await approveGuest(host, guest);
+  await until(() => guest.diagnostics().phase === "ended");
+  assert.equal(guest.diagnostics().reason, "rtc_unavailable");
   await until(() => host.diagnostics().peers.length === 0);
   assert.equal(guest.diagnostics().phase, "ended");
 });
@@ -822,6 +841,7 @@ test("a retired peer's already-queued ICE cannot terminate an unrelated host pee
     p = await f.pair();
   const second = f.client();
   await second.join(p.host.invite());
+  await approveGuest(p.host, second);
   await until(
     () =>
       p.host.diagnostics().peers.length === 2 &&
@@ -892,6 +912,7 @@ test("unopened negotiation deadline frees membership and every tracked clock tas
   });
   try {
     await guest.join(host.invite());
+    await approveGuest(host, guest);
     await until(
       () =>
         n.pcs.length === 2 &&
@@ -913,6 +934,435 @@ test("unopened negotiation deadline frees membership and every tracked clock tas
   } finally {
     releaseLeaveNotice();
   }
+});
+
+test("pending request waits without RTC and decline retains its exact terminal outcome", async (t) => {
+  const f = await fixture(t),
+    host = f.client(),
+    guest = f.client();
+  await host.create(123);
+  await guest.join(
+    host.invite().toLowerCase().replace("#", " ").replace("-", "\t"),
+  );
+  await until(() => host.diagnostics().joinRequests.length === 1);
+  const peer = guest.diagnostics().participant.id;
+  assert.equal(guest.diagnostics().awaitingApproval, true);
+  assert.equal(f.network.pcs.length, 0);
+  assert.equal(host.diagnostics().peers.length, 0);
+  assert.equal(guest.invite(), null);
+  await host.approve(peer, false);
+  await until(() => guest.diagnostics().phase === "ended");
+  assert.equal(guest.diagnostics().reason, "join_declined");
+  assert.equal(host.diagnostics().joinRequests.length, 0);
+  assert.equal(f.network.pcs.length, 0);
+  assert.equal(host.diagnostics().phase, "signaling");
+});
+
+test("approval timeout is independent of approved negotiation reservation timeout", async (t) => {
+  const n = new Network();
+  n.autoOpen = false;
+  const f = await fixture(t, {}, n),
+    hostClock = new ManualClock();
+  let heartbeats = 0;
+  const host = f.client({
+      clock: hostClock,
+      fetch: async (url, init) => {
+        const response = await f.fetcher(url, init);
+        if (String(url).endsWith("/v1/heartbeat")) heartbeats++;
+        return response;
+      },
+    }),
+    unapproved = f.client();
+  await host.create(123);
+  await until(() => heartbeats === 1);
+  await unapproved.join(host.invite());
+  await until(() => host.diagnostics().joinRequests.length === 1);
+  f.advance(20_000);
+  await until(() => unapproved.diagnostics().phase === "ended");
+  assert.equal(unapproved.diagnostics().reason, "approval_timeout");
+  assert.equal(n.pcs.length, 0);
+  // Keep the owner live through a real HTTP heartbeat; do not widen limits.
+  assert.equal(hostClock.fireDelay(5000), true);
+  await until(() => heartbeats === 2);
+  const approved = f.client();
+  await approved.join(host.invite());
+  await approveGuest(host, approved);
+  await until(
+    () =>
+      n.pcs.length === 2 &&
+      n.pcs.some((p) => p.remoteDescription?.type === "answer"),
+  );
+  f.advance(20_000);
+  await until(() => approved.diagnostics().phase === "ended");
+  assert.equal(approved.diagnostics().reason, "reservation_timeout");
+});
+
+test("same-world rotate/lock preserves approved channels and retires only pending requests", async (t) => {
+  const f = await fixture(t),
+    p = await f.pair();
+  await admit(p);
+  const before = p.host.diagnostics(),
+    oldCode = p.host.invite(),
+    oldPcs = [...f.network.pcs];
+  const waiting = f.client();
+  await waiting.join(oldCode);
+  await until(() => p.host.diagnostics().joinRequests.length === 1);
+  await p.host.replaceCode();
+  await until(() => waiting.diagnostics().phase === "ended");
+  assert.equal(waiting.diagnostics().reason, "code_replaced");
+  const fresh = p.host.invite();
+  assert.notEqual(fresh, oldCode);
+  assert.match(fresh, /^#[A-F0-9]{4}-[A-F0-9]{4}$/);
+  const stale = f.client();
+  await assert.rejects(stale.join(oldCode), { code: "stale_invite" });
+  const next = f.client();
+  await next.join(fresh);
+  await until(() => p.host.diagnostics().joinRequests.length === 1);
+  await p.host.setJoiningLocked(true);
+  await until(() => next.diagnostics().phase === "ended");
+  assert.equal(next.diagnostics().reason, "joining_locked");
+  const locked = f.client();
+  await assert.rejects(locked.join(fresh), { code: "joining_locked" });
+  assert.deepEqual(p.host.diagnostics().session.id, before.session.id);
+  assert.equal(p.host.diagnostics().session.seed, before.session.seed);
+  assert.equal(p.host.diagnostics().peers[0].admission, "admitted");
+  assert.equal(p.guest.diagnostics().peers[0].transport, "ready");
+  assert.deepEqual(f.network.pcs, oldPcs);
+  assert.ok(oldPcs.every((pc) => pc.closes === 0));
+  const diagnostic = JSON.stringify(p.host.diagnostics());
+  assert.equal(diagnostic.includes(fresh), false);
+  assert.equal(diagnostic.includes("room_code"), false);
+  await p.host.setJoiningLocked(false);
+  const retry = f.client();
+  await retry.join(fresh);
+  await approveGuest(p.host, retry);
+  await until(() => retry.diagnostics().peers[0]?.transport === "ready");
+});
+
+test("hostile pre-approval SDP event cannot create guest RTC or bypass approval", async (t) => {
+  const f = await fixture(t),
+    host = f.client();
+  await host.create(123);
+  let guestPcs = 0;
+  const guest = f.client({
+    createPeerConnection: (...args) => {
+      guestPcs++;
+      return f.network.make(...args);
+    },
+    fetch: async (url, init) => {
+      const response = await f.fetcher(url, init);
+      if (String(url).includes("/v1/events")) {
+        const body = await response.json();
+        body.events = body.events.map((e) =>
+          e.type === "join-approved"
+            ? {
+                seq: e.seq,
+                type: "signal",
+                from: host.diagnostics().participant.id,
+                kind: "offer",
+                payload: { sdp: "declared-hostile-service-fixture" },
+              }
+            : e,
+        );
+        return new Response(JSON.stringify(body), {
+          status: response.status,
+          headers: response.headers,
+        });
+      }
+      return response;
+    },
+  });
+  await guest.join(host.invite());
+  await approveGuest(host, guest);
+  await until(() => guest.diagnostics().phase === "ended");
+  assert.equal(guest.diagnostics().reason, "approval_required");
+  assert.equal(guestPcs, 0);
+});
+
+test("newest whole policy wins delayed rotation and heartbeat responses", async (t) => {
+  const f = await fixture(t);
+  let releaseCode,
+    releaseHeartbeat,
+    codeHeld = false,
+    heartbeatHeld = false;
+  const codeGate = new Promise((resolve) => {
+    releaseCode = resolve;
+  });
+  const heartbeatGate = new Promise((resolve) => {
+    releaseHeartbeat = resolve;
+  });
+  const host = f.client({
+    fetch: async (url, init) => {
+      const response = await f.fetcher(url, init);
+      const holdCode = String(url).endsWith("/v1/code");
+      const holdHeartbeat =
+        String(url).endsWith("/v1/heartbeat") && !heartbeatHeld;
+      if (holdCode || holdHeartbeat) {
+        const buffered = new Response(await response.text(), {
+          status: response.status,
+          headers: response.headers,
+        });
+        if (holdCode) {
+          codeHeld = true;
+          await codeGate;
+        } else {
+          heartbeatHeld = true;
+          await heartbeatGate;
+        }
+        return buffered;
+      }
+      return response;
+    },
+  });
+  try {
+    await host.create(123);
+    await until(() => heartbeatHeld);
+    const initial = host.invite(),
+      rotate = host.replaceCode();
+    await until(() => codeHeld);
+    await host.setJoiningLocked(true);
+    const newest = host.invite();
+    assert.notEqual(newest, initial);
+    assert.equal(host.diagnostics().session.room_revision, 2);
+    assert.equal(host.diagnostics().session.joining_locked, true);
+    releaseCode();
+    await rotate;
+    releaseHeartbeat();
+    await delay(30);
+    assert.equal(host.invite(), newest);
+    assert.equal(host.diagnostics().session.room_revision, 2);
+    assert.equal(host.diagnostics().session.joining_locked, true);
+    assert.equal(f.network.pcs.length, 0);
+  } finally {
+    releaseCode();
+    releaseHeartbeat();
+  }
+});
+
+test("delayed old join-request cannot recreate an approval row after a newer policy", async (t) => {
+  const f = await fixture(t);
+  let release,
+    held = false;
+  const gate = new Promise((resolve) => {
+    release = resolve;
+  });
+  const host = f.client({
+    fetch: async (url, init) => {
+      if (String(url).includes("/v1/events") && !held) {
+        held = true;
+        await gate;
+      }
+      return f.fetcher(url, init);
+    },
+  });
+  try {
+    await host.create(123);
+    await until(() => held);
+    const guest = f.client();
+    await guest.join(host.invite());
+    await host.replaceCode();
+    // The real service now returns current policy with the unacked OLD request
+    // and its terminal peer-left event, rather than an invented client event.
+    release();
+    await until(() => guest.diagnostics().phase === "ended");
+    await delay(30);
+    assert.equal(host.diagnostics().session.room_revision, 1);
+    assert.equal(host.diagnostics().joinRequests.length, 0);
+    assert.equal(f.network.pcs.length, 0);
+    assert.equal(host.diagnostics().phase, "signaling");
+  } finally {
+    release();
+  }
+});
+
+test("late admin response after leave cannot reopen code, policy, requests or RTC", async (t) => {
+  const f = await fixture(t);
+  let release,
+    held = false;
+  const gate = new Promise((resolve) => {
+    release = resolve;
+  });
+  const host = f.client({
+    fetch: async (url, init) => {
+      const response = await f.fetcher(url, init);
+      if (String(url).endsWith("/v1/code")) {
+        const buffered = new Response(await response.text(), {
+          status: response.status,
+          headers: response.headers,
+        });
+        held = true;
+        await gate;
+        return buffered;
+      }
+      return response;
+    },
+  });
+  try {
+    await host.create(123);
+    const change = host.replaceCode();
+    await until(() => held);
+    await host.leave();
+    release();
+    await change;
+    assert.equal(host.diagnostics().phase, "ended");
+    assert.equal(host.diagnostics().session, null);
+    assert.equal(host.invite(), null);
+    assert.equal(host.diagnostics().joinRequests.length, 0);
+    assert.equal(f.network.pcs.length, 0);
+  } finally {
+    release();
+  }
+});
+
+async function terminalRace(
+  t,
+  { holdRead = false, unavailableRead = false } = {},
+) {
+  const f = await fixture(t),
+    host = f.client(),
+    clock = new ManualClock();
+  await host.create(123);
+  let releasePoll,
+    releaseRead,
+    pollHeld = false,
+    readHeld = false,
+    readCount = 0,
+    heartbeats = 0;
+  const pollGate = new Promise((resolve) => {
+    releasePoll = resolve;
+  });
+  const readGate = new Promise((resolve) => {
+    releaseRead = resolve;
+  });
+  const guest = f.client({
+    clock,
+    fetch: async (url, init) => {
+      const isRead = String(url).includes("wait_ms=0");
+      if (isRead) {
+        readCount++;
+        if (unavailableRead)
+          return new Response(
+            JSON.stringify({
+              error: {
+                code: "unauthorized",
+                message: "DECLARED-UNAVAILABLE-RETENTION",
+              },
+            }),
+            { status: 401 },
+          );
+      }
+      const response = await f.fetcher(url, init);
+      if (String(url).endsWith("/v1/heartbeat")) heartbeats++;
+      if (String(url).includes("/v1/events")) {
+        const text = await response.text();
+        const body = JSON.parse(text);
+        const buffered = new Response(text, {
+          status: response.status,
+          headers: response.headers,
+        });
+        if (isRead && holdRead) {
+          readHeld = true;
+          await readGate;
+        } else if (
+          !isRead &&
+          !pollHeld &&
+          body.participant?.status === "left"
+        ) {
+          pollHeld = true;
+          await pollGate;
+        }
+        return buffered;
+      }
+      return response;
+    },
+  });
+  t.after(() => {
+    releasePoll();
+    releaseRead();
+  });
+  await guest.join(host.invite());
+  await until(() => heartbeats === 1);
+  await until(() => host.diagnostics().joinRequests.length === 1);
+  await host.approve(guest.diagnostics().participant.id, false);
+  await until(() => pollHeld);
+  assert.equal(clock.fireDelay(5000), true);
+  await until(() => readCount === 1);
+  if (holdRead) await until(() => readHeld);
+  return {
+    ...f,
+    host,
+    guest,
+    clock,
+    releasePoll,
+    releaseRead,
+    readCount: () => readCount,
+  };
+}
+
+test("bounded retained terminal read wins failed heartbeat and ignores later old poll", async (t) => {
+  const f = await terminalRace(t);
+  await until(() => f.guest.diagnostics().phase === "ended");
+  assert.equal(f.guest.diagnostics().reason, "join_declined");
+  assert.equal(f.readCount(), 1);
+  f.releasePoll();
+  await delay(25);
+  assert.equal(f.guest.diagnostics().reason, "join_declined");
+  assert.equal(f.guest.diagnostics().timers, 0);
+  assert.equal(f.network.pcs.length, 0);
+});
+
+test("terminal poll wins a competing retained read without reason rollback", async (t) => {
+  const f = await terminalRace(t, { holdRead: true });
+  f.releasePoll();
+  await until(() => f.guest.diagnostics().phase === "ended");
+  assert.equal(f.guest.diagnostics().reason, "join_declined");
+  f.releaseRead();
+  await delay(25);
+  assert.equal(f.guest.diagnostics().reason, "join_declined");
+  assert.equal(f.readCount(), 1);
+  assert.equal(f.guest.diagnostics().pendingRequests, 0);
+});
+
+test("leave and replacement while terminal recovery is held cannot end the new request", async (t) => {
+  const f = await terminalRace(t, { holdRead: true });
+  await f.guest.leave();
+  await f.guest.join(f.host.invite());
+  await until(() => f.host.diagnostics().joinRequests.length === 1);
+  const replacement = f.guest.diagnostics().participant.id;
+  f.releaseRead();
+  f.releasePoll();
+  await delay(25);
+  assert.equal(f.guest.diagnostics().phase, "signaling");
+  assert.equal(f.guest.diagnostics().participant.id, replacement);
+  assert.equal(f.guest.diagnostics().awaitingApproval, true);
+  assert.equal(f.network.pcs.length, 0);
+});
+
+test("unavailable retained terminal read falls back once and tears down all resources", async (t) => {
+  const f = await terminalRace(t, { unavailableRead: true });
+  await until(() => f.guest.diagnostics().phase === "ended");
+  assert.equal(f.guest.diagnostics().reason, "participant_left");
+  assert.equal(f.readCount(), 1);
+  f.releasePoll();
+  await delay(25);
+  assert.equal(f.guest.diagnostics().reason, "participant_left");
+  assert.equal(f.guest.diagnostics().pendingRequests, 0);
+  assert.equal(f.guest.diagnostics().timers, 0);
+  assert.equal(f.network.pcs.length, 0);
+});
+
+test("dispose during terminal recovery ignores both held replies and clears its tracked tasks", async (t) => {
+  const f = await terminalRace(t, { holdRead: true });
+  await f.guest.dispose();
+  f.releaseRead();
+  f.releasePoll();
+  await delay(25);
+  assert.equal(f.guest.diagnostics().phase, "ended");
+  assert.equal(f.guest.diagnostics().reason, "disposed");
+  assert.equal(f.guest.diagnostics().session, null);
+  assert.equal(f.guest.diagnostics().pendingRequests, 0);
+  assert.equal(f.guest.diagnostics().timers, 0);
+  assert.equal(f.network.pcs.length, 0);
 });
 test("reconnection cancels loss timeout; actual failed connection closes once", async (t) => {
   const clock = new ManualClock(),

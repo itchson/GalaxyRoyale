@@ -1,5 +1,7 @@
 import { CoopTransport } from "./transport.ts";
 import type { TransportOptions } from "./transport.ts";
+import type { JoinRequest } from "./transport.ts";
+import { normalizeRoomCode } from "./room-code.ts";
 import {
   PROTOCOL,
   TransportError,
@@ -30,6 +32,9 @@ export interface CoopState {
   reason: string | null;
   message: string;
   invite_available: boolean;
+  joining_locked: boolean;
+  awaiting_approval: boolean;
+  join_requests: JoinRequest[];
   progression: false;
 }
 export interface FlightInput {
@@ -127,6 +132,32 @@ type Receiving = {
 const MAX_BYTES = 1_048_576,
   MAX_FRAMES = 80,
   TRANSFER_MS = 30_000;
+const START_REASONS = new Set([
+  "native_unavailable",
+  "replica_unavailable",
+  "invalid_invite",
+  "invite_not_found",
+  "stale_invite",
+  "session_full",
+  "joining_locked",
+  "unauthorized",
+  "session_ended",
+  "signaling_limit",
+]);
+const TERMINAL_REASONS = new Set([
+  "host_ended",
+  "host_end",
+  "host_left",
+  "session_ended",
+  "session_expired",
+  "join_declined",
+  "code_replaced",
+  "joining_locked",
+  "approval_timeout",
+  "reservation_timeout",
+  "unauthorized",
+  "approval_required",
+]);
 const message = (phase: CoopState["phase"], reason: string | null): string => {
   if (reason === "host_ended") return "The host ended the session.";
   if (reason === "restore_failed")
@@ -143,8 +174,8 @@ const message = (phase: CoopState["phase"], reason: string | null): string => {
     return "Session closed.";
   return {
     idle: "Co-op is not active.",
-    creating: "Creating an invitation...",
-    joining: "Joining the signaling session...",
+    creating: "Creating a room...",
+    joining: "Waiting for the host's approval...",
     hosting: "Hosting a temporary session. Progression is disabled.",
     admitting: "Channel ready. Waiting for host admission...",
     loading: "Loading the native shared-world view...",
@@ -213,7 +244,7 @@ export class CoopController {
       members:
         live && !this.#restoreFailed
           ? this.#role === "host"
-            ? 1 + this.#peers.size
+            ? 1 + d.peers.length + d.joinRequests.length
             : this.#members
           : 0,
       transport_ready: live
@@ -226,6 +257,9 @@ export class CoopController {
       message: message(this.#phase, this.#reason),
       invite_available:
         this.#phase === "hosting" && this.#transport.invite() !== null,
+      joining_locked: live && d.session?.joining_locked === true,
+      awaiting_approval: live && d.awaitingApproval,
+      join_requests: live && this.#role === "host" ? d.joinRequests : [],
       progression: false,
     };
   }
@@ -404,8 +438,7 @@ export class CoopController {
     } catch (error) {
       if (generation === this.#generation)
         await this.#stop(
-          error instanceof TransportError &&
-            ["native_unavailable", "replica_unavailable"].includes(error.code)
+          error instanceof TransportError && START_REASONS.has(error.code)
             ? error.code
             : "session_failed",
         );
@@ -415,7 +448,19 @@ export class CoopController {
     return this.#start("host");
   }
   join(invite: string): Promise<void> {
-    return this.#start("guest", invite);
+    // Validate before retiring an owned world or starting a native transaction.
+    const canonical = normalizeRoomCode(invite);
+    if (canonical === null) fail("invalid_invite");
+    return this.#start("guest", canonical);
+  }
+  replaceCode(): Promise<void> {
+    return this.#transport.replaceCode();
+  }
+  setJoiningLocked(locked: boolean): Promise<void> {
+    return this.#transport.setJoiningLocked(locked);
+  }
+  approve(peer: string, accept: boolean): Promise<void> {
+    return this.#transport.approve(peer, accept);
   }
   async #stop(reason: string): Promise<void> {
     ++this.#generation;
@@ -451,7 +496,9 @@ export class CoopController {
     const d = this.#transport.diagnostics();
     if (this.#session && !this.#restoreFailed && d.phase === "ended") {
       this.#reason =
-        d.reason === "host_ended" ? "host_ended" : "connection_ended";
+        d.reason !== null && TERMINAL_REASONS.has(d.reason)
+          ? d.reason
+          : "connection_ended";
       this.#phase = "ended";
       this.#restore();
     }
@@ -472,7 +519,9 @@ export class CoopController {
         }
     }
     if (this.#session && this.#role === "guest" && !this.#joined) {
-      const peer = d.peers.find((p) => p.transport === "ready");
+      const peer =
+        !d.awaitingApproval &&
+        d.peers.find((p) => p.approved && p.transport === "ready");
       if (peer) {
         this.#phase = "admitting";
         this.#host = peer.id;
@@ -496,6 +545,14 @@ export class CoopController {
     validatePayload(frame.kind, frame.payload);
     if (this.#role === "host") {
       if (frame.kind === "join") {
+        if (
+          !this.#transport
+            .diagnostics()
+            .peers.some(
+              (p) => p.id === peer && p.approved && p.transport === "ready",
+            )
+        )
+          fail("approval_required");
         if (this.#peers.has(peer)) fail("duplicate_admission");
         try {
           const a = record(

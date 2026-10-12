@@ -15,6 +15,13 @@ import {
 import type { Frame, FrameKind, Json, ParticipantSpec, Role } from "./wire.ts";
 import { grant, participant, session, Signaling } from "./signaling.ts";
 import type { Participant, Session, SignalEvent } from "./signaling.ts";
+import { normalizeRoomCode } from "./room-code.ts";
+
+export interface JoinRequest {
+  id: string;
+  expires_at: number;
+  room_revision: number;
+}
 
 type Timer = ReturnType<typeof setTimeout>;
 export interface Clock {
@@ -43,6 +50,27 @@ const RTC_ERROR_DETAILS = new Set([
   "sctp-failure",
   "sdp-syntax-error",
 ]);
+const REMOTE_TERMINAL_REASONS = new Set([
+  "session_ended",
+  "host_left",
+  "host_end",
+  "expired",
+  "host_timeout",
+  "guest_left",
+  "guest_timeout",
+  "service_shutdown",
+  "signaling_overflow",
+  "replaced",
+  "join_declined",
+  "code_replaced",
+  "joining_locked",
+  "approval_timeout",
+  "reservation_timeout",
+]);
+const terminalReason = (value: unknown): string =>
+  typeof value === "string" && REMOTE_TERMINAL_REASONS.has(value)
+    ? value
+    : "session_ended";
 interface Peer {
   id: string;
   pc: RTCPeerConnection;
@@ -85,6 +113,9 @@ export class CoopTransport {
   #epoch = 0;
   #peers = new Map<string, Peer>();
   #retired = new Set<string>();
+  #joinRequests = new Map<string, JoinRequest>();
+  #guestApproved = false;
+  #readingTerminal = false;
   #rtcErrors: string[] = [];
   #controllers = new Set<AbortController>();
   #timers = new Set<Timer>();
@@ -167,7 +198,8 @@ export class CoopTransport {
       this.#invite = g.invite ?? null;
       this.#cursor = g.cursor;
       this.#phase = "signaling";
-      if (role === "guest") this.#peer(g.session.host_id);
+      this.#guestApproved = false;
+      this.#joinRequests.clear();
       this.#changed();
       void this.#heartbeat(epoch, 0);
       void this.#poll(epoch, 0);
@@ -183,14 +215,64 @@ export class CoopTransport {
     return this.#start("host", { seed, protocol: PROTOCOL });
   }
   join(invite: string): Promise<void> {
+    const canonical = normalizeRoomCode(invite);
+    if (canonical === null) fail("invalid_invite");
+    return this.#start("guest", { invite: canonical });
+  }
+  #host(): void {
+    if (this.#phase !== "signaling" || this.#member?.role !== "host")
+      fail("host_only");
+  }
+  async replaceCode(): Promise<void> {
+    this.#host();
+    const epoch = this.#epoch;
+    const result = record(await this.#request("/v1/code", {}), [
+      "session",
+      "invite",
+    ]);
+    if (!this.#live(epoch)) return;
+    const s = session(result.session);
+    if (s.room_code === null || result.invite !== s.room_code)
+      fail("invalid_room_policy");
+    this.#sameSession(s);
+    this.#changed();
+  }
+  async setJoiningLocked(locked: boolean): Promise<void> {
+    this.#host();
+    if (typeof locked !== "boolean") fail("invalid_request");
+    const epoch = this.#epoch;
+    const result = record(await this.#request("/v1/joining", { locked }), [
+      "session",
+    ]);
+    if (!this.#live(epoch)) return;
+    this.#sameSession(result.session);
+    this.#changed();
+  }
+  async approve(peer: string, accept: boolean): Promise<void> {
+    this.#host();
     if (
-      typeof invite !== "string" ||
-      invite.length > 1_100 ||
-      !/^#?[0-9a-f]{64,1024}$/i.test(invite.trim()) ||
-      invite.trim().replace(/^#/, "").length % 2
+      !id(peer) ||
+      typeof accept !== "boolean" ||
+      !this.#joinRequests.has(peer)
     )
-      fail("invalid_invite");
-    return this.#start("guest", { invite });
+      fail("request_unavailable");
+    const epoch = this.#epoch;
+    const result = record(
+      await this.#request("/v1/approval", { peer, accept }),
+      ["session", "participant"],
+    );
+    if (!this.#live(epoch)) return;
+    const p = participant(result.participant);
+    if (
+      p.id !== peer ||
+      p.role !== "guest" ||
+      p.status !== (accept ? "pending" : "left")
+    )
+      fail("invalid_approval");
+    this.#sameSession(result.session);
+    this.#joinRequests.delete(peer);
+    // The response never creates a PC. Only authenticated membership events do.
+    this.#changed();
   }
   /** Explicit capability getter for a user copy action; omitted from diagnostics. */
   invite(): string | null {
@@ -205,17 +287,22 @@ export class CoopTransport {
             id: this.#session.id,
             seed: this.#session.seed,
             protocol: this.#session.protocol,
+            joining_locked: this.#session.joining_locked,
+            room_revision: this.#session.room_revision,
           }
         : null,
       participant: this.#member ? { ...this.#member } : null,
       peers: [...this.#peers.values()].map((p) => ({
         id: p.id,
+        approved: true,
         transport: p.state,
         admission: p.admission,
         simulation: p.simulation,
         bufferedBytes: p.channel?.bufferedAmount ?? 0,
       })),
       pendingRequests: this.#controllers.size,
+      awaitingApproval: this.#member?.role === "guest" && !this.#guestApproved,
+      joinRequests: [...this.#joinRequests.values()].map((r) => ({ ...r })),
       timers: this.#timers.size,
       rtcErrors: [...this.#rtcErrors],
     };
@@ -247,6 +334,13 @@ export class CoopTransport {
       failures = 0;
     } catch (error) {
       if (!this.#live(epoch)) return;
+      if (
+        error instanceof TransportError &&
+        error.code === "participant_left"
+      ) {
+        void this.#readTerminal(epoch);
+        return;
+      }
       if (error instanceof TransportError || ++failures >= 3) {
         void this.leave(this.#code(error));
         return;
@@ -262,8 +356,73 @@ export class CoopTransport {
       s.seed !== this.#session.seed
     )
       fail("changed_session");
-    if (s.state === "ended") this.#terminal(s.reason ?? "session_ended");
+    if ((this.#member?.role === "host") !== (s.room_code !== null))
+      fail("invalid_room_policy");
+    if (s.state === "ended") this.#terminal(terminalReason(s.reason));
+    else if (s.room_revision >= this.#session!.room_revision) {
+      const previous = this.#session!;
+      if (
+        s.room_revision === previous.room_revision &&
+        (s.room_code !== previous.room_code ||
+          s.joining_locked !== previous.joining_locked)
+      )
+        fail("invalid_room_policy");
+      if (s.room_code !== previous.room_code || s.joining_locked)
+        this.#joinRequests.clear();
+      this.#session = s;
+      this.#invite = this.#member?.role === "host" ? s.room_code : null;
+    }
     return s;
+  }
+  async #readTerminal(
+    epoch: number,
+    fallback = "participant_left",
+  ): Promise<void> {
+    if (!this.#live(epoch) || this.#readingTerminal) return;
+    this.#readingTerminal = true;
+    try {
+      // Retired credentials can read their terminal queue. Preserve its reason
+      // when a failing heartbeat/signal overtakes the independent long poll.
+      const result = record(
+        await this.#request(
+          `/v1/events?after=${this.#cursor}&wait_ms=0`,
+          undefined,
+          this.#token,
+          3_000,
+        ),
+      );
+      if (!this.#live(epoch)) return;
+      if (this.#sameSession(result.session).state !== "open") return;
+      const p = participant(result.participant);
+      if (
+        p.id !== this.#member?.id ||
+        p.role !== this.#member.role ||
+        !Array.isArray(result.events) ||
+        result.events.length > 64 ||
+        !Number.isSafeInteger(result.cursor) ||
+        Number(result.cursor) < this.#cursor
+      )
+        fail("invalid_events");
+      let sequence = this.#cursor;
+      for (const value of result.events) {
+        const e = record(value);
+        if (
+          !Number.isSafeInteger(e.seq) ||
+          Number(e.seq) <= sequence ||
+          Number(e.seq) > Number(result.cursor)
+        )
+          fail("invalid_event_seq");
+        sequence = Number(e.seq);
+        if (e.type === "participant-left" || e.type === "session-ended") {
+          record(e, ["seq", "type", "reason"]);
+          this.#terminal(terminalReason(e.reason));
+          return;
+        }
+      }
+    } catch {
+      /* Teardown remains bounded if retained metadata is unavailable. */
+    }
+    if (this.#live(epoch)) void this.leave(fallback);
   }
   async #poll(epoch: number, failures: number): Promise<void> {
     while (this.#live(epoch) && this.#phase === "signaling") {
@@ -282,10 +441,6 @@ export class CoopTransport {
         const p = participant(result.participant);
         if (p.id !== this.#member?.id || p.role !== this.#member.role)
           fail("changed_participant");
-        if (p.status === "left" || p.status === "ended") {
-          this.#terminal("participant_left");
-          return;
-        }
         if (
           !Array.isArray(result.events) ||
           result.events.length > 64 ||
@@ -306,10 +461,23 @@ export class CoopTransport {
           await this.#event(e, epoch);
           if (!this.#live(epoch)) return;
         }
+        if (p.status === "left" || p.status === "ended") {
+          this.#terminal("participant_left");
+          return;
+        }
+        this.#member = p;
         this.#cursor = Number(result.cursor);
+        this.#changed();
         failures = 0;
       } catch (error) {
         if (!this.#live(epoch)) return;
+        if (
+          error instanceof TransportError &&
+          error.code === "participant_left"
+        ) {
+          void this.#readTerminal(epoch);
+          return;
+        }
         if (error instanceof TransportError || ++failures >= 3) {
           void this.leave(this.#code(error));
           return;
@@ -324,19 +492,65 @@ export class CoopTransport {
   }
   async #event(e: SignalEvent, epoch: number): Promise<void> {
     if (e.type === "session-ended" || e.type === "participant-left") {
-      this.#terminal(
-        typeof e.reason === "string" ? e.reason.slice(0, 128) : "session_ended",
-      );
+      record(e, ["seq", "type", "reason"]);
+      this.#terminal(terminalReason(e.reason));
       return;
     }
-    if (e.type === "peer-joined" || e.type === "peer-ready") {
-      const p = participant(e.peer);
+    // A retiring guest consumes terminal metadata only. Late negotiation
+    // messages must not create or resurrect channels while recovery runs.
+    if (this.#readingTerminal) return;
+    if (e.type === "join-request") {
+      record(e, ["seq", "type", "peer", "expires_at", "room_revision"]);
+      const p = participant(record(e.peer, ["id", "role", "status"]));
       if (
         this.#member?.role !== "host" ||
         p.role !== "guest" ||
+        p.status !== "pending" ||
+        p.id === this.#member.id ||
+        !Number.isSafeInteger(e.expires_at) ||
+        Number(e.expires_at) < 0 ||
+        !Number.isSafeInteger(e.room_revision) ||
+        Number(e.room_revision) < 0 ||
+        Number(e.room_revision) > this.#session!.room_revision
+      )
+        fail("invalid_membership_event");
+      if (
+        Number(e.room_revision) < this.#session!.room_revision ||
+        this.#session!.joining_locked ||
+        this.#retired.has(p.id) ||
+        this.#peers.has(p.id)
+      )
+        return;
+      if (
+        !this.#joinRequests.has(p.id) &&
+        this.#joinRequests.size + this.#peers.size >= 7
+      )
+        fail("peer_bound");
+      this.#joinRequests.set(p.id, {
+        id: p.id,
+        expires_at: Number(e.expires_at),
+        room_revision: Number(e.room_revision),
+      });
+      this.#changed();
+    } else if (e.type === "join-approved") {
+      record(e, ["seq", "type"]);
+      if (this.#member?.role !== "guest") fail("invalid_membership_event");
+      if (!this.#guestApproved) {
+        this.#guestApproved = true;
+        this.#peer(this.#session!.host_id);
+        this.#changed();
+      }
+    } else if (e.type === "peer-joined" || e.type === "peer-ready") {
+      record(e, ["seq", "type", "peer"]);
+      const p = participant(record(e.peer, ["id", "role", "status"]));
+      if (
+        this.#member?.role !== "host" ||
+        p.role !== "guest" ||
+        p.status !== (e.type === "peer-joined" ? "pending" : "active") ||
         p.id === this.#member.id
       )
         fail("invalid_membership_event");
+      this.#joinRequests.delete(p.id);
       if (
         e.type === "peer-joined" &&
         !this.#peers.has(p.id) &&
@@ -360,9 +574,12 @@ export class CoopTransport {
     } else if (e.type === "peer-left") {
       if (!id(e.peer_id) || this.#member?.role !== "host")
         fail("invalid_membership_event");
+      this.#joinRequests.delete(e.peer_id);
       const peer = this.#peers.get(e.peer_id);
       if (peer) this.#drop(peer, "peer_left");
     } else if (e.type === "signal") {
+      if (this.#member?.role === "guest" && !this.#guestApproved)
+        fail("approval_required");
       if (!id(e.from) || !["offer", "answer", "ice"].includes(String(e.kind)))
         fail("invalid_signal");
       const peer = this.#peers.get(e.from);
@@ -485,12 +702,19 @@ export class CoopTransport {
       this.#peers.size >= (this.#member?.role === "host" ? 7 : 1)
     )
       fail("peer_bound");
+    if (this.#member?.role === "guest" && !this.#guestApproved)
+      fail("approval_required");
     const epoch = this.#epoch;
     const factory =
       this.#options.createPeerConnection ??
       ((configuration: RTCConfiguration) =>
         new RTCPeerConnection(configuration));
-    const pc = factory(this.#options.rtcConfiguration ?? { iceServers: [] });
+    let pc: RTCPeerConnection;
+    try {
+      pc = factory(this.#options.rtcConfiguration ?? { iceServers: [] });
+    } catch {
+      return fail("rtc_unavailable");
+    }
     const p: Peer = {
       id: peerId,
       pc,
@@ -857,6 +1081,17 @@ export class CoopTransport {
     this.#retired.add(p.id);
     this.#closePeer(p);
     if (this.#member?.role === "guest") {
+      if (
+        [
+          "participant_left",
+          "channel_closed",
+          "connection_failed",
+          "connection_lost",
+        ].includes(reason)
+      ) {
+        void this.#readTerminal(this.#epoch, reason);
+        return;
+      }
       void this.leave(reason);
       return;
     }
@@ -873,6 +1108,9 @@ export class CoopTransport {
     for (const p of this.#peers.values()) this.#closePeer(p);
     this.#peers.clear();
     this.#retired.clear();
+    this.#joinRequests.clear();
+    this.#guestApproved = false;
+    this.#readingTerminal = false;
     this.#token = null;
     this.#invite = null;
     this.#session = null;

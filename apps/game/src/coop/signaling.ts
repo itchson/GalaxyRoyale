@@ -1,4 +1,5 @@
 import { fail, id, PROTOCOL, record, uint, TransportError } from "./wire.ts";
+import { normalizeRoomCode } from "./room-code.ts";
 export interface Session {
   id: string;
   seed: number;
@@ -7,6 +8,10 @@ export interface Session {
   expires_at: number;
   state: "open" | "ended";
   reason: string | null;
+  joining_locked: boolean;
+  room_revision: number;
+  /** Null in every guest projection. Never put this field in diagnostics. */
+  room_code: string | null;
 }
 export interface Participant {
   id: string;
@@ -33,6 +38,9 @@ export function session(value: unknown): Session {
     "expires_at",
     "state",
     "reason",
+    "joining_locked",
+    "room_revision",
+    "room_code",
   ]);
   if (
     !id(o.id) ||
@@ -42,6 +50,10 @@ export function session(value: unknown): Session {
     o.protocol !== PROTOCOL ||
     !Number.isSafeInteger(o.expires_at) ||
     Number(o.expires_at) < 0 ||
+    typeof o.joining_locked !== "boolean" ||
+    !Number.isSafeInteger(o.room_revision) ||
+    Number(o.room_revision) < 0 ||
+    (o.room_code !== null && normalizeRoomCode(o.room_code) !== o.room_code) ||
     !["open", "ended"].includes(String(o.state)) ||
     (o.reason !== null &&
       (typeof o.reason !== "string" || o.reason.length > 128))
@@ -78,8 +90,8 @@ export function grant(value: unknown, role: Participant["role"]): Grant {
     !/^[0-9a-f]{64}$/.test(secret) ||
     !Number.isSafeInteger(o.cursor) ||
     Number(o.cursor) < 0 ||
-    (role === "host" &&
-      (typeof o.invite !== "string" || !/^#[0-9A-F]{64,1024}$/.test(o.invite)))
+    (role === "host" && (s.room_code === null || o.invite !== s.room_code)) ||
+    (role === "guest" && (s.room_code !== null || o.invite !== undefined))
   )
     fail("invalid_grant");
   return {
@@ -168,16 +180,38 @@ export class Signaling {
     }
     if (!response.ok) {
       // Never echo a remote response, SDP, token or URL into diagnostics/errors.
+      const allowed = ROOM_ERRORS[response.status];
+      const remote =
+        value !== null && typeof value === "object" && !Array.isArray(value)
+          ? (value as { error?: unknown }).error
+          : null;
+      const remoteCode =
+        remote !== null && typeof remote === "object" && !Array.isArray(remote)
+          ? (remote as { code?: unknown }).code
+          : null;
       const code =
-        response.status === 401
-          ? "unauthorized"
-          : response.status === 410
-            ? "session_ended"
-            : response.status === 429
-              ? "signaling_limit"
-              : "signaling_request";
+        typeof remoteCode === "string" && allowed?.has(remoteCode)
+          ? remoteCode
+          : response.status === 401
+            ? "unauthorized"
+            : response.status === 410
+              ? "session_ended"
+              : response.status === 429
+                ? "signaling_limit"
+                : "signaling_request";
       throw new TransportError(code);
     }
     return value;
   }
 }
+
+/** Only protocol-owned, status-matched codes may reach the user. */
+const ROOM_ERRORS: Record<number, Set<string>> = {
+  400: new Set(["invalid_invite", "invalid_request"]),
+  401: new Set(["unauthorized", "invalid_invite"]),
+  403: new Set(["host_only", "approval_required"]),
+  404: new Set(["invite_not_found"]),
+  409: new Set(["session_full", "joining_locked", "request_unavailable"]),
+  410: new Set(["stale_invite", "session_ended", "participant_left"]),
+  429: new Set(["signaling_limit"]),
+};

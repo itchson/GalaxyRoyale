@@ -50,6 +50,7 @@ class Network {
   sent = [];
   session = 0;
   deferCreate = null;
+  autoApproval = true;
   factory = (options) => {
     const t = new Transport(this, options);
     this.transports.push(t);
@@ -66,6 +67,9 @@ class Transport {
   sim = [];
   closes = 0;
   generation = 0;
+  awaitingApproval = false;
+  joinRequests = [];
+  roomCode = "#AAAA-AAAA";
   constructor(network, options) {
     this.network = network;
     this.options = options;
@@ -82,6 +86,8 @@ class Transport {
       id: pid(++this.network.session + 100),
       seed,
       protocol: PROTOCOL,
+      joining_locked: false,
+      room_revision: 0,
     };
     this.participant = { id: pid(this.index), role: "host", status: "active" };
     this.phase = "signaling";
@@ -98,9 +104,25 @@ class Transport {
       status: "pending",
     };
     this.phase = "signaling";
+    if (!this.network.autoApproval) {
+      this.awaitingApproval = true;
+      host.joinRequests.push({
+        id: this.participant.id,
+        expires_at: 20000,
+        room_revision: 0,
+      });
+      host.changed();
+      this.changed();
+      return;
+    }
+    this.connectApproved(host);
+  }
+  connectApproved(host) {
+    this.awaitingApproval = false;
     this.peers = [
       {
         id: host.participant.id,
+        approved: true,
         transport: "ready",
         admission: "pending",
         simulation: "waiting",
@@ -109,6 +131,7 @@ class Transport {
     ];
     host.peers.push({
       id: this.participant.id,
+      approved: true,
       transport: "ready",
       admission: "pending",
       simulation: "waiting",
@@ -127,10 +150,32 @@ class Transport {
       pendingRequests: 0,
       timers: 0,
       rtcErrors: [],
+      awaitingApproval: this.awaitingApproval,
+      joinRequests: this.joinRequests,
     });
   }
   invite() {
-    return this.participant?.role === "host" ? "#" + "A".repeat(300) : null;
+    return this.participant?.role === "host" ? this.roomCode : null;
+  }
+  async approve(peer, accept) {
+    assert.ok(this.joinRequests.some((r) => r.id === peer));
+    this.joinRequests = this.joinRequests.filter((r) => r.id !== peer);
+    const guest = this.network.transports.find(
+      (t) => t.participant?.id === peer,
+    );
+    if (accept) guest.connectApproved(this);
+    else await guest.leave("join_declined");
+    this.changed();
+  }
+  async replaceCode() {
+    this.roomCode = "#BBBB-BBBB";
+    this.session.room_revision++;
+    this.changed();
+  }
+  async setJoiningLocked(locked) {
+    if (this.session.joining_locked !== locked) this.session.room_revision++;
+    this.session.joining_locked = locked;
+    this.changed();
   }
   send(peer, kind, payload) {
     const p = this.peers.find((p) => p.id === peer);
@@ -192,6 +237,8 @@ class Transport {
     this.phase = "ended";
     this.reason = reason;
     this.peers = [];
+    this.awaitingApproval = false;
+    this.joinRequests = [];
     this.session = this.participant = null;
     this.changed();
   }
@@ -389,12 +436,14 @@ async function pair({
   guestSpec = local,
   hostSpec = local,
   sessionCounter = 0,
+  autoApproval = true,
 } = {}) {
   const network = new Network(),
     native = new Native(),
     guestNative = new Native();
   let now = 0;
   network.session = sessionCounter;
+  network.autoApproval = autoApproval;
   native.saved.seed = hostSpec.local_seed;
   const options = {
     service: "http://127.0.0.1:4176",
@@ -457,6 +506,92 @@ test("channel ready is separate from native admission and complete replica appli
   assert.ok(p.network.transports[1].sim.includes(true));
   await p.host.end();
   await p.guest.dispose();
+});
+
+test("host approval is required before guest join frames and native admission", async () => {
+  const p = await pair({ autoApproval: false });
+  assert.equal(p.guest.state().phase, "joining");
+  assert.equal(p.guest.state().awaiting_approval, true);
+  assert.equal(p.guest.frameMode(), "blocked");
+  assert.equal(p.host.state().join_requests.length, 1);
+  assert.equal(p.network.sent.length, 0);
+  assert.equal(
+    p.native.calls.some((o) => o.op === "join"),
+    false,
+  );
+  assert.throws(
+    () =>
+      p.network.transports[0].options.onFrame(
+        p.network.transports[1].participant.id,
+        {
+          v: 1,
+          session: p.network.transports[0].session.id,
+          seq: 1,
+          kind: "join",
+          payload: local,
+        },
+      ),
+    { code: "approval_required" },
+  );
+  assert.equal(
+    p.native.calls.some((o) => o.op === "join"),
+    false,
+  );
+  assert.equal(p.replica.begins.length, 0);
+  // Even a broken boundary advertising a ready unapproved peer grants nothing.
+  const guestTransport = p.network.transports[1];
+  guestTransport.peers = [
+    {
+      id: p.network.transports[0].participant.id,
+      approved: false,
+      transport: "ready",
+      admission: "pending",
+      simulation: "waiting",
+      bufferedBytes: 0,
+    },
+  ];
+  guestTransport.changed();
+  assert.equal(p.network.sent.length, 0);
+  guestTransport.peers = [];
+  const guestId = guestTransport.participant.id;
+  await p.host.approve(guestId, true);
+  await flush();
+  assert.equal(p.guest.state().awaiting_approval, false);
+  assert.equal(p.native.calls.filter((o) => o.op === "join").length, 1);
+});
+
+test("invalid join leaves an owned host world and restoration handle intact", async () => {
+  const p = await pair();
+  const before = structuredClone(p.native.calls),
+    state = p.host.state();
+  assert.throws(() => p.host.join("\u00a0#AAAA-AAAA"), {
+    code: "invalid_invite",
+  });
+  assert.deepEqual(p.native.calls, before);
+  assert.deepEqual(p.host.state(), state);
+  assert.equal(p.host.frameMode(), "host");
+});
+
+test("same-room code and lock management do not restart native ownership or guest view", async () => {
+  const p = await pair();
+  await p.frame(2);
+  const before = p.native.calls.filter(
+    (o) => o.op === "begin" || o.op === "end",
+  ).length;
+  const sessionId = p.network.transports[0].session.id;
+  const begins = p.replica.begins.length;
+  await p.host.replaceCode();
+  await p.host.setJoiningLocked(true);
+  assert.equal(p.host.invite(), "#BBBB-BBBB");
+  assert.equal(p.host.state().joining_locked, true);
+  assert.equal(p.network.transports[0].session.id, sessionId);
+  assert.equal(
+    p.native.calls.filter((o) => o.op === "begin" || o.op === "end").length,
+    before,
+  );
+  assert.equal(p.replica.begins.length, begins);
+  assert.equal(p.host.frameMode(), "host");
+  assert.equal(p.guest.frameMode(), "guest");
 });
 test("authenticated sender is the native pilot ID, and input is bounded to one local sequence per cadence", async () => {
   const p = await pair();
@@ -589,7 +724,7 @@ test("state contains only controlled presentation data and explicit copy getter 
     /7f8a52|AAAA|"token"|"profile"|"seed"|"session"/.test(state),
     false,
   );
-  assert.match(p.host.invite(), /^#[A-F0-9]+$/);
+  assert.match(p.host.invite(), /^#[A-F0-9]{4}-[A-F0-9]{4}$/);
   assert.equal(p.guest.invite(), null);
   await p.host.end();
   await p.guest.dispose();
@@ -674,7 +809,7 @@ test("failed replica restoration retains its recovery handle and cannot reopen g
   };
   await p.guest.leave();
   assert.equal(p.guest.state().reason, "restore_failed");
-  await assert.rejects(p.guest.join("#" + "A".repeat(300)), /restore_failed/);
+  await assert.rejects(p.guest.join("#AAAA-AAAA"), /restore_failed/);
   p.replica.end = original;
   await p.guest.leave();
   assert.equal(p.replica.ends, 1);
@@ -985,10 +1120,7 @@ test("unavailable concrete ports do not launch signaling or publish a connected 
     transportFactory: network.factory,
   });
   await assert.rejects(controller.create(), /native_unavailable/);
-  await assert.rejects(
-    controller.join("#" + "A".repeat(300)),
-    /replica_unavailable/,
-  );
+  await assert.rejects(controller.join("#AAAA-AAAA"), /replica_unavailable/);
   assert.equal(network.session, 0);
   assert.equal(native.calls.length, 0);
   assert.equal(controller.frameMode(), "solo");

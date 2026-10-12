@@ -3,6 +3,7 @@ import test from "node:test";
 import { readFileSync } from "node:fs";
 import vm from "node:vm";
 import ts from "typescript";
+import * as roomCode from "../../apps/game/src/coop/room-code.ts";
 
 const compiled = ts.transpileModule(
   readFileSync(
@@ -133,6 +134,10 @@ function fixture() {
   const exports = {};
   vm.runInNewContext(compiled, {
     exports,
+    require: (path) => {
+      assert.equal(path, "./room-code.ts");
+      return roomCode;
+    },
     document,
     console: {
       log() {
@@ -162,6 +167,15 @@ function fixture() {
     copy: async (value) => {
       calls.push(["copy", value]);
     },
+    replaceCode: async () => {
+      calls.push(["replace"]);
+    },
+    setJoiningLocked: async (locked) => {
+      calls.push(["lock", locked]);
+    },
+    approve: async (peer, accept) => {
+      calls.push(["approve", peer, accept]);
+    },
     changed: () => {
       calls.push(["changed"]);
     },
@@ -174,6 +188,9 @@ function fixture() {
     document,
     paint(state = idle(), available = true) {
       return exports.paintCoopPanel(target, state, actions, available);
+    },
+    hostTab() {
+      this.node("coop-tab-host").click();
     },
     node(id) {
       return flatten(target).find((node) => node.id === id);
@@ -204,6 +221,9 @@ function idle(overrides = {}) {
     reason: null,
     message: "",
     invite_available: false,
+    joining_locked: false,
+    awaiting_approval: false,
+    join_requests: [],
     progression: false,
     ...overrides,
   };
@@ -220,15 +240,14 @@ const settle = async () => {
   await Promise.resolve();
   await Promise.resolve();
 };
-const code = "#" + "A3".repeat(136); // Deliberately longer than the native 256-character window.
+const code = "#A7C2-9F34";
 
-test("opaque envelope accepts exact transport bounds without truncating long codes", () => {
+test("room code normalizes eight hex digits and permits only bounded ASCII separators", () => {
   const f = fixture();
   assert.equal(f.joinCode("  " + code + "  "), code);
-  assert.equal(f.joinCode("ab".repeat(32)), "ab".repeat(32));
-  const maximum = "#" + "aB".repeat(512);
-  assert.equal(f.joinCode(maximum + " ".repeat(75)), maximum);
-  assert.equal(f.joinCode(maximum + " ".repeat(76)), null);
+  assert.equal(f.joinCode("a7c2 9f34"), code);
+  assert.equal(f.joinCode(code + " ".repeat(54)), code);
+  assert.equal(f.joinCode(code + " ".repeat(55)), null);
   for (const invalid of [
     "",
     "ab".repeat(31),
@@ -238,6 +257,8 @@ test("opaque envelope accepts exact transport bounds without truncating long cod
     "＃" + code,
     code + "z",
     "a b".repeat(32),
+    "\u00a0" + code,
+    "\ufeff" + code,
   ])
     assert.equal(f.joinCode(invalid), null);
 });
@@ -251,9 +272,9 @@ test("default unavailable dock state cannot start sessions and exposes semantic 
   assert.equal(f.calls.length, 0);
   assert.match(visibleText(f.target), /Return to Haven/);
   const input = f.node("coop-join-input");
-  assert.equal(input.maxLength, 1100);
+  assert.equal(input.maxLength, 64);
   assert.equal(input.dataset.pixelKind, "input");
-  assert.equal(input.getAttribute("aria-label"), "Invitation code to join");
+  assert.equal(input.getAttribute("aria-label"), "Room code to join");
   assert.equal(input.autocomplete, "off");
   assert.equal(input.spellcheck, false);
   assert.equal(f.node("coop-invite-output").readOnly, true);
@@ -292,28 +313,29 @@ test("join forwards the full bounded code once, including Enter composition guar
   );
   waiting.resolve();
   await settle();
-  assert.match(visibleText(f.target), /INVITE/);
+  assert.match(visibleText(f.target), /JOIN/);
   assert.doesNotMatch(visibleText(f.target), /CONNECTED/);
 });
 
 test("create invokes inside the real click and promise success cannot invent hosting", async () => {
   const f = fixture();
   f.paint();
+  f.hostTab();
   f.node("coop-create").click();
   assert.equal(f.calls[0][0], "changed");
   assert.equal(f.calls.filter(([kind]) => kind === "create").length, 1);
   f.node("coop-create").click();
   await settle();
   assert.equal(f.calls.filter(([kind]) => kind === "create").length, 1);
-  assert.match(visibleText(f.target), /INVITE/);
+  assert.match(visibleText(f.target), /HOST ROOM/);
   assert.doesNotMatch(visibleText(f.target), /HOSTING|CONNECTED/);
 });
 
 test("only controller phases declare readiness, admission and coherent connection", () => {
   const f = fixture();
   for (const [phase, heading] of [
-    ["creating", "CREATING INVITATION"],
-    ["joining", "JOINING SESSION"],
+    ["creating", "CREATING ROOM"],
+    ["joining", "JOINING ROOM"],
     ["admitting", "WAITING FOR ADMISSION"],
     ["loading", "LOADING SHARED WORLD"],
     ["connected", "CONNECTED"],
@@ -348,6 +370,7 @@ test("cancel supersedes a pending start and ignores its late rejection", async (
     f.paint(idle({ phase: "ended" }));
   };
   f.paint();
+  f.hostTab();
   f.node("coop-create").click();
   assert.equal(f.node("coop-leave").textContent, "CANCEL");
   assert.equal(f.node("coop-leave").disabled, false);
@@ -412,13 +435,14 @@ test("invitation is read only for an actual copyable host state and copied expli
     assert.equal(JSON.stringify(node.dataset).includes(code), false);
   }
   assert.equal(visibleText(f.target).includes(code), false);
+  f.hostTab();
   f.node("coop-copy").click();
   assert.deepEqual(
     f.calls.filter(([kind]) => kind === "copy"),
     [["copy", code]],
   );
   await settle();
-  assert.match(visibleText(f.target), /Invitation copied/);
+  assert.match(visibleText(f.target), /Room code copied/);
 });
 
 test("clipboard rejection keeps full manual copy and never displays thrown capability", async () => {
@@ -435,6 +459,7 @@ test("clipboard rejection keeps full manual copy and never displays thrown capab
       invite_available: true,
     }),
   );
+  f.hostTab();
   f.node("coop-copy").click();
   await settle();
   const output = f.node("coop-invite-output");
@@ -457,6 +482,7 @@ test("unknown reasons and controller messages cannot leak secret or raw transpor
   f.actions.create = () => {
     throw Error(code);
   };
+  f.hostTab();
   f.node("coop-create").click();
   await settle();
   assert.match(visibleText(f.target), /The action did not complete/);
@@ -502,6 +528,7 @@ test("ended session and teardown clear fields and isolate late completion from a
   const oldOutput = f.node("coop-invite-output");
   const oldInput = f.node("coop-join-input");
   oldInput.value = code;
+  f.hostTab();
   f.node("coop-copy").click();
   f.disposeCoopPanel(f.target);
   assert.equal(oldInput.value, "");
@@ -510,7 +537,7 @@ test("ended session and teardown clear fields and isolate late completion from a
   f.paint();
   waiting.resolve();
   await settle();
-  assert.doesNotMatch(visibleText(f.target), /Invitation copied/);
+  assert.doesNotMatch(visibleText(f.target), /Room code copied/);
   assert.equal(f.node("coop-join-input").value, "");
   f.node("coop-join-input").value = code;
   f.paint(idle({ phase: "ended" }));
@@ -615,6 +642,7 @@ test("failed restoration exposes one explicit retry without claiming restored so
   assert.equal(f.node("coop-create").disabled, true);
   assert.equal(retry.disabled, false);
   f.paint(idle({ phase: "ended", reason: "local_left" }));
+  f.hostTab();
   assert.equal(f.node("coop-create").disabled, false);
   assert.doesNotMatch(visibleText(f.target), /RETRY RESTORE/);
 });
@@ -625,4 +653,117 @@ test("invalid state cannot expose recovery or invoke an exit callback", () => {
   assert.equal(f.node("coop-leave").disabled, true);
   f.node("coop-leave").click();
   assert.equal(f.calls.length, 0);
+});
+
+test("Join is the initial tab; tab selection and draft survive reactive updates", () => {
+  const f = fixture();
+  f.paint();
+  assert.equal(f.node("coop-tab-join").getAttribute("aria-selected"), "true");
+  assert.equal(f.target.querySelector(".coop-host").hidden, true);
+  const input = f.node("coop-join-input");
+  input.value = "a7c29f34";
+  input.focus();
+  input.selectionStart = 3;
+  input.selectionEnd = 5;
+  f.hostTab();
+  assert.equal(f.node("coop-tab-host").getAttribute("aria-selected"), "true");
+  assert.match(visibleText(f.target), /HOST ROOM/);
+  f.paint(idle({ members: 1 }));
+  assert.equal(f.node("coop-tab-host").getAttribute("aria-selected"), "true");
+  f.node("coop-tab-join").click();
+  assert.equal(f.node("coop-join-input"), input);
+  assert.equal(input.value, "a7c29f34");
+  assert.equal(input.selectionStart, 3);
+  assert.equal(input.selectionEnd, 5);
+});
+
+test("host management sends explicit actions without inventing policy or stopping hosting", async () => {
+  const f = fixture();
+  f.actions.invite = () => code;
+  const host = idle({
+    phase: "hosting",
+    role: "host",
+    members: 2,
+    invite_available: true,
+  });
+  f.paint(host);
+  f.hostTab();
+  f.node("coop-replace").click();
+  await settle();
+  f.node("coop-lock").click();
+  await settle();
+  assert.deepEqual(
+    f.calls.filter(([k]) => k === "replace" || k === "lock"),
+    [["replace"], ["lock", true]],
+  );
+  assert.equal(f.node("coop-lock").textContent, "LOCK JOINING");
+  f.paint({ ...host, joining_locked: true });
+  assert.equal(f.node("coop-lock").textContent, "UNLOCK JOINING");
+  f.node("coop-lock").click();
+  await settle();
+  assert.deepEqual(f.calls.filter(([k]) => k === "lock").at(-1), [
+    "lock",
+    false,
+  ]);
+  assert.equal(
+    f.calls.some(([k]) => k === "end" || k === "leave"),
+    false,
+  );
+  assert.match(visibleText(f.target), /STOP HOSTING/);
+});
+
+test("only current host requests expose Accept/Decline and stale or disposed rows cannot act", async () => {
+  const f = fixture(),
+    id = "a".repeat(32),
+    second = "b".repeat(32);
+  const request = (id) => ({ id, expires_at: 21000, room_revision: 1 });
+  const host = idle({
+    phase: "hosting",
+    role: "host",
+    members: 3,
+    join_requests: [request(id), request(second)],
+  });
+  f.paint(host);
+  f.hostTab();
+  const accept = f.node("coop-accept-" + id),
+    decline = f.node("coop-decline-" + second);
+  accept.click();
+  await settle();
+  decline.click();
+  await settle();
+  assert.deepEqual(
+    f.calls.filter(([k]) => k === "approve"),
+    [
+      ["approve", id, true],
+      ["approve", second, false],
+    ],
+  );
+  f.paint({ ...host, join_requests: [] });
+  accept.click();
+  decline.click();
+  assert.equal(f.calls.filter(([k]) => k === "approve").length, 2);
+  f.paint(host);
+  const retired = f.node("coop-accept-" + id);
+  f.disposeCoopPanel(f.target);
+  retired.click();
+  assert.equal(f.calls.filter(([k]) => k === "approve").length, 2);
+  f.paint({ ...host, role: "guest", awaiting_approval: true });
+  f.hostTab();
+  assert.equal(f.node("coop-accept-" + id), undefined);
+});
+
+test("approval and room failures use controlled useful copy", () => {
+  const f = fixture();
+  for (const [reason, text] of [
+    ["stale_invite", /code was replaced/],
+    ["joining_locked", /locked joining/],
+    ["join_declined", /declined your request/],
+    ["approval_timeout", /request expired/],
+    ["reservation_timeout", /could not start in time/],
+  ]) {
+    f.paint(idle({ phase: "ended", reason }));
+    assert.match(visibleText(f.target), text);
+  }
+  f.paint(idle({ phase: "joining", role: "guest", awaiting_approval: true }));
+  assert.match(visibleText(f.target), /Waiting for the host's approval/);
 });
