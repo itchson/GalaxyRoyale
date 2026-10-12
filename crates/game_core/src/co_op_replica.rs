@@ -807,9 +807,10 @@ fn finite(value: f32, minimum: f32, maximum: f32) -> bool {
     value.is_finite() && (minimum..=maximum).contains(&value)
 }
 fn vector(value: [f32; 2]) -> bool {
-    value
-        .into_iter()
-        .all(|v| finite(v, -1_000_000.0, 1_000_000.0))
+    crate::co_op_world_bounds::vector(value, crate::WORLD_LIMIT)
+}
+fn geometry_position(value: [f32; 2]) -> bool {
+    crate::co_op_world_bounds::vector(value, crate::co_op_world_bounds::GEOMETRY_LIMIT)
 }
 fn identity(value: &Option<crate::identity::KikaiIdentity>) -> bool {
     value.as_ref().is_none_or(|id| hex(&id.hex_id, 16))
@@ -975,8 +976,8 @@ impl Replica {
         for s in &snapshot.projectiles {
             if !hex(&s.id, 16)
                 || !shots.insert(&s.id)
-                || !vector(s.position)
-                || !vector(s.previous)
+                || !geometry_position(s.position)
+                || !geometry_position(s.previous)
                 || !vector(s.velocity)
                 || !finite(s.damage, 0.0, 100_000.0)
                 || !finite(s.life, 0.0, 100.0)
@@ -1113,8 +1114,8 @@ impl Replica {
                 || row.occupied > row.width * row.height
                 || !["player", "asteroid", "enemy", "boss", "segment"].contains(&row.kind.as_str())
                 || (row.participant.is_some() != (row.kind == "player"))
-                || !vector(row.position)
-                || !vector(row.previous)
+                || !geometry_position(row.position)
+                || !geometry_position(row.previous)
                 || !vector(row.velocity)
                 || !finite(row.heading, -1_000_000.0, 1_000_000.0)
                 || !finite(row.previous_heading, -1_000_000.0, 1_000_000.0)

@@ -812,6 +812,7 @@ impl Game {
         self.emit_projectile_trails(dt);
         self.update_particles(dt);
         self.sync_co_op_host();
+        self.confine_world_geometry();
         self.camera += (self.position() - self.camera) * (1.0 - (-5.0 * dt).exp());
         Ok(())
     }

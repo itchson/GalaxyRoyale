@@ -135,6 +135,21 @@ impl Game {
         let snapshot = self.co_op_snapshot().ok_or(Error::NoSession)?;
         if snapshot.participants.len() > co_op::MAX_PARTICIPANTS
             || snapshot.projectiles.len() > MAX_BULLETS
+            || snapshot.participants.iter().any(|p| {
+                !co_op_world_bounds::pose(
+                    p.position,
+                    p.previous,
+                    p.velocity,
+                    p.heading,
+                    p.previous_heading,
+                    WORLD_LIMIT,
+                )
+            })
+            || snapshot.projectiles.iter().any(|p| {
+                !co_op_world_bounds::vector(p.position, co_op_world_bounds::GEOMETRY_LIMIT)
+                    || !co_op_world_bounds::vector(p.previous, co_op_world_bounds::GEOMETRY_LIMIT)
+                    || !co_op_world_bounds::vector(p.velocity, WORLD_LIMIT)
+            })
         {
             return Err(Error::PublicationBound);
         }
@@ -176,13 +191,29 @@ impl Game {
             entity_pages: 0,
             body_pages: 0,
         };
-        for (_, body) in self.world.query::<(&Motion, &PixelBody)>().iter() {
+        for (entity, (motion, body, pilot)) in self
+            .world
+            .query::<(Entity, (&Motion, &PixelBody, Option<&co_op::Pilot>))>()
+            .iter()
+        {
             counts.entities += 1;
             if counts.entities > MAX_ENTITIES
                 || body.width == 0
                 || body.height == 0
                 || body.width > MAX_BODY_DIMENSION
                 || body.height > MAX_BODY_DIMENSION
+                || !co_op_world_bounds::pose(
+                    motion.position.to_array(),
+                    motion.previous.to_array(),
+                    motion.velocity.to_array(),
+                    motion.heading,
+                    motion.previous_heading,
+                    if entity == self.player || pilot.is_some() {
+                        WORLD_LIMIT
+                    } else {
+                        co_op_world_bounds::GEOMETRY_LIMIT
+                    },
+                )
             {
                 return Err(Error::PublicationBound);
             }

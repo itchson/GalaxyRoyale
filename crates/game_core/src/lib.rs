@@ -19,6 +19,7 @@ pub mod co_op_replica;
 #[cfg(test)]
 mod co_op_tests;
 pub mod co_op_wake_fx;
+mod co_op_world_bounds;
 #[cfg(test)]
 mod component_tests;
 pub mod components;
@@ -1316,6 +1317,7 @@ impl Game {
         }
         self.camera += (self.position() - self.camera) * (1.0 - (-5.0 * dt).exp());
         self.respawn_if_dead();
+        self.confine_world_geometry();
     }
 
     /// Preserve the same event, checkpoint and repair path for both an already

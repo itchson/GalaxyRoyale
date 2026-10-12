@@ -14,6 +14,9 @@ mod wake_fx;
 #[path = "co_op_fx_tests.rs"]
 mod nova_fx;
 
+#[path = "co_op_world_edge_tests.rs"]
+mod world_edge;
+
 fn id(n: u32) -> ParticipantId {
     ParticipantId::parse(&format!("{n:032x}")).unwrap()
 }
