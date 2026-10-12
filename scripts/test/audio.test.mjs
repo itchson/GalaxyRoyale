@@ -1406,27 +1406,32 @@ test("real combat intent retimes queued notes; release hold and re-chase never r
 });
 
 test("scheduler stalls skip missed notes and bound only the next lookahead queue", async () => {
-  const { engine, context, timers } = await fixture();
-  const clock = engine.clock;
-  context.advance(20);
-  const before = context.sources.length;
-  for (const tick of timers.values()) tick();
-  const fresh = context.sources.slice(before);
-  assert(fresh.length > 0);
-  assert(
-    fresh.every((source) => source.starts[0] >= context.currentTime),
-    "no burst of overdue note debt",
-  );
-  assert(
-    fresh.every((source) => source.starts[0] < context.currentTime + 0.18),
-  );
-  const d = engine.diagnostics();
-  assert(
-    d.score.nextStep <=
-      Math.ceil(clock.beatAtTime(context.currentTime + 0.18) * 4),
-  );
-  assert(d.score.futureVoices <= 8 && d.voices.music <= 32);
-  engine.dispose();
+  for (const title of [false, true]) {
+    for (const delay of [0.4, 20]) {
+      const { engine, context, timers } = await fixture();
+      if (title) engine.setTitleScreen(true);
+      const clock = engine.clock;
+      context.advance(delay);
+      const before = context.sources.length;
+      for (const tick of timers.values()) tick();
+      const fresh = context.sources.slice(before);
+      assert(fresh.length > 0);
+      assert(
+        fresh.every((source) => source.starts[0] >= context.currentTime),
+        "no burst of overdue note debt",
+      );
+      assert(
+        fresh.every((source) => source.starts[0] < context.currentTime + 0.18),
+      );
+      const d = engine.diagnostics();
+      assert(
+        d.score.nextStep <=
+          Math.ceil(clock.beatAtTime(context.currentTime + 0.18) * 4),
+      );
+      assert(d.score.futureVoices <= 8 && d.voices.music <= 32);
+      engine.dispose();
+    }
+  }
 });
 
 test("native title mute, interruption and late resume retain one clock and no stale scheduled notes", async () => {

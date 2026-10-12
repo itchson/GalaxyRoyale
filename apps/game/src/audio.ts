@@ -746,7 +746,7 @@ export class AudioEngine {
     this.advanceSound();
     const clock = this.clock;
     if (!clock) return;
-    if (clock.timeAtBeat(this.step / 4) < context.currentTime - 0.2)
+    if (clock.timeAtBeat(this.step / 4) < context.currentTime)
       this.step = Math.ceil(clock.beatAtTime(context.currentTime + 0.02) * 4);
     for (let queued = 0; queued < SCORE_MAX_STEPS_PER_TICK; queued++) {
       const beat = this.step / 4;
