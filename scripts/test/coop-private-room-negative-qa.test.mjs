@@ -957,3 +957,84 @@ test("actual report allowlist admits bounded named room checks while excluding p
   report.checks = [{ name: "room-private-secret", passed: true }];
   assert.throws(() => validateWasmReport(report));
 });
+
+test("actual create command and reply preserve controlled admission limits without exposing arbitrary reasons", async () => {
+  const handlerSource = sources.child.slice(
+    sources.child.indexOf('addEventListener("message"'),
+    sources.child.indexOf('addEventListener("pagehide"'),
+  );
+  for (const reason of ["signaling_limit", "private token and SDP", null]) {
+    const replies = [];
+    let handler;
+    const parent = { postMessage: (reply) => replies.push(reply) };
+    const context = vm.createContext({
+      parent,
+      config: { page_origin: "http://localhost:4199" },
+      galaxy: {},
+      controller: {
+        create: async () => {},
+        invite: () => null,
+        state: () => ({ reason }),
+      },
+      transport: {
+        diagnostics: () => assert.fail("No private grant read after refusal"),
+      },
+      commandPending: false,
+      failureCode: null,
+      fifth: null,
+      fifthReasons: new Set(),
+      phase: "ended",
+      update: () => {},
+      addEventListener: (type, callback) => {
+        assert.equal(type, "message");
+        handler = callback;
+      },
+    });
+    vm.runInContext(declaration("child", "command"), context);
+    vm.runInContext(handlerSource, context);
+    await handler({
+      source: parent,
+      origin: context.config.page_origin,
+      data: { type: "native-qa-command", id: 1, name: "create" },
+    });
+    const expected =
+      reason === "signaling_limit" ? reason : "room_create_failed";
+    assert.deepEqual(plain(replies), [
+      { type: "native-qa-reply", id: 1, ok: false, error: expected },
+    ]);
+    assert.equal(context.commandPending, false);
+    assert.equal(context.phase, "failed");
+    for (const name of ["client", "report"])
+      vm.runInContext(declaration("fixtures", name), context);
+    const report = context.report();
+    report.clients[0].failure_code = expected;
+    assert.doesNotThrow(() => validateWasmReport(report));
+    report.clients[0].failure_code = "private token and SDP";
+    assert.throws(() => validateWasmReport(report));
+  }
+  for (const code of ["signaling_limit", "room_create_failed"]) {
+    assert(sources.parent.includes(`  "${code}",`));
+  }
+});
+
+test("actual successful create command retains its private grant shape", async () => {
+  let starts = 0;
+  const context = vm.createContext({
+    galaxy: {},
+    controller: {
+      create: async () => {
+        starts++;
+      },
+      invite: () => "private-invite",
+      state: () =>
+        assert.fail("Successful grant must not read a terminal reason"),
+    },
+    transport: { diagnostics: () => ({ session: { id: "private-session" } }) },
+  });
+  vm.runInContext(declaration("child", "command"), context);
+  assert.deepEqual(plain(await context.command("create", {})), {
+    invite: "private-invite",
+    session: "private-session",
+  });
+  assert.equal(starts, 1);
+});

@@ -142,6 +142,8 @@ export const clientFailureCodes = new Set([
   "native_frame_failed",
   "native_action_failed",
   "approval_not_pending",
+  "signaling_limit",
+  "room_create_failed",
   ...fifthReasons,
 ]);
 export function validateWasmReport(o) {

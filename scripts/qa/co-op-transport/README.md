@@ -52,7 +52,22 @@ node --experimental-transform-types --test scripts/test/coop-transport-qa.test.m
 
 HTTP tests use OS-chosen ephemeral ports and stop all listeners. Without the explicit normal bundle input, only that actual-artifact HTTP case is skipped. Source-function tests use declared boundaries and do not execute WASM/RTC. No browser, separate-network/NAT/TURN, eight-player, mobile/background, latency, performance, advanced cosmetics or playable co-op release acceptance is implied by these tests.
 
-## Owned private-room negative cases (live execution pending)
+## Owned private-room negative cases
+
+The provenance-pinned e97 helper preparation with the normal332 bundles has
+actual two-client Decline, Replace and Lock captures on both renderers in
+`artifacts/private-room-negative-integration-20261013/live`. One earlier failed
+pre-peer attempt remains preserved; its generic result does not establish the
+exact service refusal. Larger eight-client, Internet/TURN and background gates
+remain open.
+
+The later QA-only start-reason amendment rejects a resolved create operation
+without an invitation. It preserves only the controller's `signaling_limit`
+enum or the generic `room_create_failed`, through the private child reply and
+strict sanitized report. Arbitrary error text stays excluded. Its source tests
+do not establish a new live refusal; historical captures keep their old helper
+pins. Prepare a fresh stage for any later experiment. Production limits and
+normal game code are unchanged.
 
 After Initialize in an owned default-mode stage, both clients must be solo with
 all prior PCs closed and no transport requests/timers. Choose one room case per

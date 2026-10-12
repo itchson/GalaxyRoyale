@@ -51,6 +51,8 @@ const failureCodes = new Set([
   "fifth_timeout",
   "fifth_not_ready",
   "approval_not_pending",
+  "signaling_limit",
+  "room_create_failed",
 ]);
 const actionFailureCodes = new Set([
   ...failureCodes,

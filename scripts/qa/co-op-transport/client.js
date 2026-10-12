@@ -745,8 +745,18 @@ async function command(name, args) {
   if (name.startsWith("fifth-")) return fifthCommand(name, args);
   if (name === "create") {
     await controller.create();
+    const invite = controller.invite();
+    if (typeof invite !== "string") {
+      // A refused start can resolve after restoring solo; preserve only a
+      // controlled controller reason, never the service's raw response.
+      throw new Error(
+        controller.state().reason === "signaling_limit"
+          ? "signaling_limit"
+          : "room_create_failed",
+      );
+    }
     return {
-      invite: controller.invite(),
+      invite,
       session: transport.diagnostics().session?.id,
     };
   }
@@ -835,7 +845,9 @@ addEventListener("message", async (event) => {
       name === "initialize"
         ? `initialization_${initStage}_failed`
         : fifthReasons.has(error.message) ||
-            error.message === "approval_not_pending"
+            error.message === "approval_not_pending" ||
+            error.message === "signaling_limit" ||
+            error.message === "room_create_failed"
           ? error.message
           : "native_action_failed";
     if (fifth && name.startsWith("fifth-")) {
