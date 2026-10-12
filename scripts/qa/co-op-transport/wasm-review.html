@@ -77,6 +77,9 @@
     ><button id="leave" disabled>Guest leave + verify saves</button
     ><button id="verify" disabled>Read local saves</button
     ><button id="dispose" disabled>Dispose native clients</button>
+    <button id="room-decline" disabled>Owned QA: pending Decline</button>
+    <button id="room-replace" disabled>Owned QA: replace + stale code</button>
+    <button id="room-lock" disabled>Owned QA: lock + unlock</button>
   </div>
   <p id="status" role="status">
     Ready. No native Games or RTC clients created.
@@ -109,6 +112,17 @@ No run yet.</pre>
     loadout; the report identifies the mode. No claim of real-time 60 FPS, every
     ability's behavior or human gameplay acceptance. Capabilities/SDP/ICE remain
     private in memory.
+  </p>
+  <p>
+    Owned default-mode room cases require both clients solo and clean. Each case
+    uses actual pending/controller/RTC operations, a 120-second action budget
+    plus at most 20 seconds for cleanup, and private room/epoch marks. Run one
+    case per fresh initialized page within the first 40 seconds; the helper
+    refuses to start without 140 seconds of the ordinary lifetime remaining.
+    Code replacement preserves an approved guest before leave/stale-code and
+    pending cancellation probes. Two clients test pending and approved phases
+    separately. Named checks and digest observations do not prove exact boxed
+    world, zero migration writes, eight clients, TURN or the shipped panel UX.
   </p>
   <p>
     The optional RENKO case requires a fresh unused QA port and refuses existing

@@ -92,6 +92,17 @@ export function validateReport(o) {
 }
 export const wasmCheckNames = new Set([
   "host-approval-before-rtc",
+  "room-pending-isolated",
+  "room-policy-keeps-host",
+  "room-decline-terminal",
+  "room-replace-approved",
+  "room-stale-code",
+  "room-replace-pending",
+  "room-lock-pending",
+  "room-locked-join",
+  "room-unlock-rejoin",
+  "room-lock-approved",
+  "room-case-clean",
   "two-native-games",
   "independent-save-origins",
   "distinct-local-profiles",

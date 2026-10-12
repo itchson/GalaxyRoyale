@@ -63,7 +63,12 @@ const actionFailureCodes = new Set([
   "approval_timeout",
   "approval_not_pending",
   "approval_before_rtc_failed",
+  "room_case_failed",
+  "room_deadline",
+  "room_precondition",
 ]);
+const roomCases = new Set();
+let roomAttempted = false;
 let driveActive = false,
   driveVisibilityLost = false;
 function requireVisibleClients() {
@@ -200,6 +205,9 @@ function paint() {
     "leave",
     "verify",
     "dispose",
+    "room-decline",
+    "room-replace",
+    "room-lock",
   ])
     $(id).disabled = busy || disposed;
   $("initialize").disabled ||= initialized;
@@ -216,6 +224,13 @@ function paint() {
     scenario !== "renko-fifth" ||
     state.guest?.phase !== "connected" ||
     state.host?.fifth_shot?.state === "complete";
+  for (const kind of ["decline", "replace", "lock"])
+    $("room-" + kind).disabled ||=
+      !initialized ||
+      scenario !== "default" ||
+      config.profile_mode !== "owned" ||
+      roomCases.size > 0 ||
+      roomAttempted;
 }
 async function capture() {
   if (!state.host || !state.guest) return;
@@ -335,6 +350,270 @@ async function connected(rejoin) {
     check("native-owned-commit", state.guest.owned_view === true);
   if (rejoin) check("new-session", sessionDistinct === true);
 }
+async function roomSend(role, name, args, deadline) {
+  const remaining = deadline - performance.now();
+  if (remaining <= 0) throw new Error("room_deadline");
+  const value = await send(
+    role,
+    name,
+    args,
+    Math.min(remaining, name === "room-state" ? 5_000 : 10_000),
+  );
+  if (performance.now() >= deadline) throw new Error("room_deadline");
+  return value;
+}
+async function roomRead(deadline) {
+  return Promise.all([
+    roomSend("host", "room-state", {}, deadline),
+    roomSend("guest", "room-state", {}, deadline),
+  ]);
+}
+async function roomUntil(predicate, deadline) {
+  while (true) {
+    requireVisibleClients();
+    const values = await roomRead(deadline);
+    if (predicate(values)) return values;
+    await new Promise((resolve) =>
+      setTimeout(
+        resolve,
+        Math.min(100, Math.max(1, deadline - performance.now())),
+      ),
+    );
+  }
+}
+async function roomMarkBoth(deadline) {
+  await Promise.all([
+    roomSend("host", "room-mark", {}, deadline),
+    roomSend("guest", "room-mark", {}, deadline),
+  ]);
+}
+async function roomPending(invite, deadline) {
+  await roomSend("guest", "room-mark", {}, deadline);
+  await roomSend("guest", "join", { invite }, deadline);
+  const [host, guest] = await roomUntil(
+    ([h, g]) => h.pending === 1 && g.awaiting,
+    Math.min(deadline, performance.now() + 10_000),
+  );
+  check(
+    "room-pending-isolated",
+    [host, guest].every(
+      (value) =>
+        value.same_peers &&
+        value.same_native &&
+        value.ready === 0 &&
+        value.admitted === 0,
+    ),
+  );
+}
+async function roomTerminal(reason, deadline) {
+  const values = await roomUntil(([, guest]) => {
+    if (
+      guest.phase === "ended" &&
+      guest.mode === "solo" &&
+      guest.reason !== reason
+    )
+      throw new Error("room_case_failed");
+    return (
+      guest.reason === reason &&
+      guest.mode === "solo" &&
+      !guest.awaiting &&
+      guest.pending === 0 &&
+      guest.ready === 0 &&
+      guest.admitted === 0 &&
+      guest.created === guest.closed &&
+      guest.requests === 0 &&
+      guest.timers === 0
+    );
+  }, deadline);
+  check(
+    "room-policy-keeps-host",
+    values[0].mode === "host" &&
+      values[0].same_room &&
+      values[0].same_native &&
+      values[1].same_peers &&
+      values[1].same_native,
+  );
+  return values;
+}
+async function roomAccept(deadline) {
+  await roomSend("host", "approve-next", {}, deadline);
+  return roomUntil(
+    ([h, g]) =>
+      h.mode === "host" &&
+      g.mode === "guest" &&
+      h.ready > 0 &&
+      g.ready > 0 &&
+      h.admitted > 0 &&
+      g.admitted > 0 &&
+      g.new_commits > 0 &&
+      g.owned_view &&
+      g.epoch_present,
+    deadline,
+  );
+}
+async function roomContinuity(deadline) {
+  const values = await roomUntil(
+    ([h, g]) =>
+      h.ready > 0 &&
+      g.ready > 0 &&
+      h.admitted > 0 &&
+      g.admitted > 0 &&
+      g.new_commits > 0 &&
+      g.owned_view,
+    deadline,
+  );
+  check(
+    "room-policy-keeps-host",
+    values[0].mode === "host" &&
+      values[1].mode === "guest" &&
+      values.every((v) => v.same_room && v.same_peers && v.same_native) &&
+      values[1].same_epoch,
+  );
+  return values;
+}
+async function roomGuestLeave(deadline) {
+  await roomSend("guest", "leave", {}, deadline);
+  await roomUntil(
+    ([h, g]) =>
+      g.mode === "solo" &&
+      g.created === g.closed &&
+      g.requests === 0 &&
+      g.timers === 0 &&
+      h.ready === 0 &&
+      h.admitted === 0 &&
+      h.created === h.closed,
+    deadline,
+  );
+  await roomSend("host", "room-mark", {}, deadline);
+}
+async function roomFinish(deadline) {
+  await Promise.all([
+    roomSend("host", "leave", {}, deadline),
+    roomSend("guest", "leave", {}, deadline),
+  ]);
+  await roomUntil(
+    (values) =>
+      values.every(
+        (v) =>
+          v.mode === "solo" &&
+          v.created === v.closed &&
+          v.requests === 0 &&
+          v.timers === 0,
+      ),
+    deadline,
+  );
+  [state.host, state.guest] = await Promise.all([
+    roomSend("host", "verify", {}, deadline),
+    roomSend("guest", "verify", {}, deadline),
+  ]);
+  check(
+    "room-case-clean",
+    [state.host, state.guest].every(
+      (v) => v.profile_equal && v.persisted_equal,
+    ),
+  );
+}
+async function privateRoomRound(kind) {
+  requireVisibleClients();
+  if (
+    !["decline", "replace", "lock"].includes(kind) ||
+    !initialized ||
+    scenario !== "default" ||
+    config.profile_mode !== "owned" ||
+    roomCases.size > 0 ||
+    roomAttempted
+  )
+    throw new Error("room_precondition");
+  const deadline = performance.now() + 120_000;
+  const before = await roomRead(deadline);
+  if (
+    !before.every(
+      (v) =>
+        v.mode === "solo" &&
+        v.created === v.closed &&
+        v.requests === 0 &&
+        v.timers === 0 &&
+        v.life_ms >= 140_000,
+    )
+  )
+    throw new Error("room_precondition");
+  let failure;
+  roomAttempted = true;
+  try {
+    const grant = await roomSend("host", "create", {}, deadline);
+    if (typeof grant.invite !== "string") throw new Error("room_case_failed");
+    await roomMarkBoth(deadline);
+    await roomPending(grant.invite, deadline);
+    if (kind === "decline") {
+      await roomSend("host", "decline-next", {}, deadline);
+      await roomTerminal("join_declined", deadline);
+      check("room-decline-terminal", true);
+    } else if (kind === "replace") {
+      await roomAccept(deadline);
+      await roomMarkBoth(deadline);
+      const changed = await roomSend("host", "replace-code", {}, deadline);
+      check(
+        "room-replace-approved",
+        changed.changed === true && typeof changed.invite === "string",
+      );
+      await roomContinuity(deadline);
+      // Joining retires an existing guest session: leave before the stale-code probe.
+      await roomGuestLeave(deadline);
+      await roomSend("guest", "room-mark", {}, deadline);
+      await roomSend("guest", "join", { invite: grant.invite }, deadline);
+      await roomTerminal("stale_invite", deadline);
+      check("room-stale-code", true);
+      await roomPending(changed.invite, deadline);
+      const rotated = await roomSend("host", "replace-code", {}, deadline);
+      check("room-replace-pending", rotated.changed === true);
+      await roomTerminal("code_replaced", deadline);
+    } else {
+      const oldRevision = (await roomRead(deadline))[0].revision;
+      await roomSend("host", "set-joining-locked", { locked: true }, deadline);
+      const locked = await roomTerminal("joining_locked", deadline);
+      check(
+        "room-lock-pending",
+        locked[0].locked && locked[0].revision > oldRevision,
+      );
+      await roomSend("guest", "room-mark", {}, deadline);
+      await roomSend("guest", "join", { invite: grant.invite }, deadline);
+      await roomTerminal("joining_locked", deadline);
+      check("room-locked-join", true);
+      await roomSend("host", "set-joining-locked", { locked: false }, deadline);
+      const unlocked = await roomRead(deadline);
+      check(
+        "room-unlock-rejoin",
+        !unlocked[0].locked &&
+          unlocked[0].revision > locked[0].revision &&
+          unlocked[0].same_room,
+      );
+      await roomPending(grant.invite, deadline);
+      await roomAccept(deadline);
+      await roomMarkBoth(deadline);
+      await roomSend("host", "set-joining-locked", { locked: true }, deadline);
+      const retained = await roomContinuity(deadline);
+      check("room-lock-approved", retained[0].locked);
+      await roomMarkBoth(deadline);
+      await roomSend("host", "set-joining-locked", { locked: false }, deadline);
+      const retainedAfterUnlock = await roomContinuity(deadline);
+      check("room-lock-approved", !retainedAfterUnlock[0].locked);
+    }
+  } catch (error) {
+    failure = error;
+  } finally {
+    try {
+      await roomFinish(performance.now() + 20_000);
+    } catch (error) {
+      failure ??= error;
+    }
+  }
+  if (failure) throw failure;
+  roomCases.add(kind);
+}
+for (const kind of ["decline", "replace", "lock"])
+  $("room-" + kind).onclick = () =>
+    action("Actual room " + kind, () => privateRoomRound(kind));
+
 async function restartSession() {
   // leave is valid for both live and already-ended controllers; end is host/live-only.
   await send("guest", "leave");

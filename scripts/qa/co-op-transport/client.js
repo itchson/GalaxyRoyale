@@ -60,6 +60,95 @@ let profileSha = null,
   persistent = null,
   progressionFalse = null,
   movementObserved = null;
+// QA-only private marks. Neither capabilities nor identity/epoch snapshots are reported.
+let roomMark = null;
+const roomNative = {
+  begin: 0,
+  join: 0,
+  leave: 0,
+  end: 0,
+  replica_begin: 0,
+  replica_end: 0,
+};
+const roomReasons = new Set([
+  "join_declined",
+  "code_replaced",
+  "joining_locked",
+  "stale_invite",
+  "approval_timeout",
+  "local_left",
+  "host_end",
+  "host_ended",
+  "guest_left",
+  "host_left",
+]);
+function observeRoomOperation(op, ok) {
+  if (ok === true && Object.hasOwn(roomNative, op)) roomNative[op]++;
+}
+function roomFacts() {
+  const d = transport?.diagnostics(),
+    session = d?.session;
+  const snapshot = latestCommittedHeader?.snapshot;
+  const own =
+    snapshot && session && snapshot.session === session.id
+      ? snapshot.participants.find((p) => p.id === d.participant?.id)
+      : null;
+  return {
+    session: session?.id ?? null,
+    seed: session?.seed ?? null,
+    self: d?.participant?.id ?? null,
+    peer: role === "guest" ? (d?.peers[0]?.id ?? null) : null,
+    epoch: own?.epoch ?? null,
+    revision: session?.room_revision ?? null,
+    created: counters.created,
+    closed: counters.closed,
+    commits: counters.commits,
+    native: { ...roomNative },
+  };
+}
+function roomState() {
+  const current = controller.state(),
+    d = transport.diagnostics(),
+    facts = roomFacts();
+  return {
+    phase: current.phase,
+    mode: controller.frameMode(),
+    life_ms: Math.max(0, loopDeadline - performance.now()),
+    reason: roomReasons.has(current.reason) ? current.reason : null,
+    pending: current.join_requests.length,
+    awaiting: current.awaiting_approval,
+    locked: current.joining_locked,
+    revision: facts.revision,
+    created: counters.created,
+    closed: counters.closed,
+    requests: d.pendingRequests,
+    timers: d.timers,
+    ready: current.transport_ready,
+    admitted: current.admitted,
+    same_room:
+      roomMark !== null &&
+      ["session", "seed", "self", "peer"].every(
+        (key) => facts[key] === roomMark[key],
+      ),
+    same_epoch:
+      roomMark?.epoch !== null &&
+      roomMark?.epoch !== undefined &&
+      facts.epoch === roomMark.epoch,
+    epoch_present: Number.isInteger(facts.epoch) && facts.epoch > 0,
+    same_peers:
+      roomMark !== null &&
+      facts.created === roomMark.created &&
+      facts.closed === roomMark.closed,
+    same_native:
+      roomMark !== null &&
+      Object.keys(roomNative).every(
+        (key) => facts.native[key] === roomMark.native[key],
+      ),
+    new_commits:
+      roomMark === null ? 0 : Math.max(0, facts.commits - roomMark.commits),
+    owned_view: ownedView === true,
+  };
+}
 const canonical = (v) =>
   Array.isArray(v)
     ? v.map(canonical)
@@ -407,6 +496,7 @@ async function initialize(
         results = JSON.parse(response).results;
       for (let i = 0; i < ops.length; i++)
         if (results[i]?.ok) {
+          observeRoomOperation(ops[i].op, results[i].ok);
           const value = results[i].value;
           if (ops[i].op === "acquire") {
             counters.captures++;
@@ -426,6 +516,7 @@ async function initialize(
         response = galaxy.co_op_replica(request),
         result = JSON.parse(response);
       if (result.ok) {
+        observeRoomOperation(op.op, result.ok);
         if (op.op === "replica_stage") {
           observeHeader(op.header);
           stagedRows = new Map();
@@ -612,6 +703,28 @@ async function command(name, args) {
     return observations();
   }
   if (!controller || !galaxy) throw new Error("not_initialized");
+  if (name === "room-state") return roomState();
+  if (name === "room-mark") {
+    roomMark = roomFacts();
+    return roomState();
+  }
+  if (name === "replace-code") {
+    const before = controller.invite();
+    if (role !== "host" || !before) throw new Error("approval_not_pending");
+    await controller.replaceCode();
+    const invite = controller.invite();
+    return { invite, changed: typeof invite === "string" && invite !== before };
+  }
+  if (name === "set-joining-locked") {
+    if (
+      role !== "host" ||
+      Object.keys(args).join() !== "locked" ||
+      typeof args.locked !== "boolean"
+    )
+      throw new Error("approval_not_pending");
+    await controller.setJoiningLocked(args.locked);
+    return roomState();
+  }
   if (name === "approval-state") {
     const current = controller.state();
     return {
@@ -622,11 +735,11 @@ async function command(name, args) {
       admitted: current.admitted,
     };
   }
-  if (name === "approve-next") {
+  if (name === "approve-next" || name === "decline-next") {
     const requests = controller.state().join_requests;
     if (role !== "host" || requests.length !== 1)
       throw new Error("approval_not_pending");
-    await controller.approve(requests[0].id, true);
+    await controller.approve(requests[0].id, name === "approve-next");
     return observations();
   }
   if (name.startsWith("fifth-")) return fifthCommand(name, args);

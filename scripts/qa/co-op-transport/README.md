@@ -52,9 +52,46 @@ node --experimental-transform-types --test scripts/test/coop-transport-qa.test.m
 
 HTTP tests use OS-chosen ephemeral ports and stop all listeners. Without the explicit normal bundle input, only that actual-artifact HTTP case is skipped. Source-function tests use declared boundaries and do not execute WASM/RTC. No browser, separate-network/NAT/TURN, eight-player, mobile/background, latency, performance, advanced cosmetics or playable co-op release acceptance is implied by these tests.
 
+## Owned private-room negative cases (live execution pending)
+
+After Initialize in an owned default-mode stage, both clients must be solo with
+all prior PCs closed and no transport requests/timers. Choose one room case per
+fresh page within 40 seconds of initialization. The helper requires at least
+140 seconds of both ordinary native lifetimes remaining, bounds the action to
+120 seconds and attempts terminal cleanup for at most another 20 seconds.
+Start a newly prepared stage for this source; prior positive captures retain
+their original helper provenance. Do not alter a frozen running stage.
+
+- **Pending Decline** observes one actual request and no new PCs/native guest
+  entry, declines its current ID, requires `join_declined`, and retains the host.
+- **Replace + stale code** accepts and commits an actual owned guest, verifies
+  same room/host/seed/epoch/PC/native ownership plus new commits after replacement,
+  then leaves before the old-code join. It requires `stale_invite`, then verifies
+  a new pending guest receives `code_replaced` when the code is rotated again.
+- **Lock + unlock** checks pending cancellation and locked lookup as
+  `joining_locked`, then accepts a fresh request after unlock. Lock and unlock
+  must retain that approved guest with new complete commits and unchanged
+  private continuity marks.
+
+Room codes and identity/epoch marks stay in private replies/memory. Reports retain
+the existing strict client shape and only allowlisted boolean check names. Marks
+use actual transport diagnostics and successful native bridge operations; new
+commits are measured against each mark, not lifetime tick maxima. Both clients
+must remain fully visible/foreground. Timeout or wrong terminal reason is a
+failure; a timed-out command may still complete, so wait for actual cleanup and
+dispose before reloading. Each case returns both clients to solo and verifies
+normalized profile/persisted digest observations; **Dispose** frees Galaxies.
+SaveStore migration can write during open. These checks do not prove zero legacy
+save writes, exact boxed-world restoration, shipped panel UX, three simultaneous
+clients, eight players or TURN/Internet. Source/function tests are not live results.
+
+```powershell
+node --test scripts/test/coop-private-room-negative-qa.test.mjs
+```
+
 ## Optional fresh RENKO fifth-shot case
 
-New WASM preparations include a small observation-only `fifth-shot.js` helper and `fifth_shot: true` manifest marker (19 files). Older immutable 18-file stages retain their original allowlist. The default PAN/HUGO scenario and version-2/3 reports remain unchanged. Select **Fresh RENKO fifth-shot** before Initialize in an owned source-pinned stage. This case produces bounded version-4 reports with `scenario: renko-fifth`; it is unavailable in factory mode.
+Current WASM preparations pin `room-code.js` and the observation-only `fifth-shot.js` helper with `fifth_shot: true` (20 files). Older immutable stages retain their original 18-file or 19-file fifth-shot allowlist. The default PAN/HUGO scenario and version-2/3 reports remain unchanged. Select **Fresh RENKO fifth-shot** before Initialize in an owned source-pinned stage. This case produces bounded version-4 reports with `scenario: renko-fifth`; it is unavailable in factory mode.
 
 Root must choose a fresh unused listener port (for example 4191) so both QA origins have independent empty stores. A new port alone is not sufficient: this case refuses any non-null existing SaveStore result before importing or creating Galaxy, registering or saving. It never clears a database or replaces a license. The host registers through actual native creation as RENKO and reads its genuine Pulse Lens R1 export; the guest receives its genuine HUGO starter. No Echo, Nova, advanced rank, XP or edited Profile is supplied.
 
