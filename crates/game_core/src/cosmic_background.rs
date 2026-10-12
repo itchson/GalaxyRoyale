@@ -51,8 +51,14 @@ struct Atmosphere {
     density: f32,
     tint: [f32; 3],
 }
+#[cfg(test)]
+std::thread_local! {
+    static ATMOSPHERE_SAMPLES: std::cell::Cell<usize> = const { std::cell::Cell::new(0) };
+}
 impl Atmosphere {
     fn at(seed: u32, world: Vec2) -> Self {
+        #[cfg(test)]
+        ATMOSPHERE_SAMPLES.with(|count| count.set(count.get() + 1));
         let kind = regions::at(seed, world).kind as usize;
         Self {
             density: DENSITIES[kind],
@@ -1161,7 +1167,9 @@ fn star_cells(
     scene: &SceneInput,
 ) -> [Option<(Vec2, u32)>; STAR_CANDIDATES as usize] {
     let corner = Vec2::new(grid[0] as f32, grid[1] as f32) * STAR_TILE;
-    let blend = FieldBlend::new(seed, corner, STAR_TILE, factor);
+    // Empty edge tiles need no biome lookup. Keep one shared field once the
+    // first seeded candidate survives the quality and viewport guards.
+    let mut blend = None;
     let time = if scene.reduced_motion {
         0.0
     } else {
@@ -1185,7 +1193,9 @@ fn star_cells(
             return None;
         }
         let birth = (corner + uv * STAR_TILE) / factor;
-        let atmosphere = blend.sample(uv, birth);
+        let atmosphere = blend
+            .get_or_insert_with(|| FieldBlend::new(seed, corner, STAR_TILE, factor))
+            .sample(uv, birth);
         if unit(mix(h ^ 131)) > atmosphere.density {
             return None;
         }
@@ -1995,6 +2005,10 @@ mod detail_tests;
 #[cfg(test)]
 #[path = "deep_nebula_tests.rs"]
 mod deep_nebula_tests;
+
+#[cfg(test)]
+#[path = "cosmic_background_tests.rs"]
+mod cosmic_background_tests;
 
 #[cfg(test)]
 #[path = "stellar_neighborhood_tests.rs"]
