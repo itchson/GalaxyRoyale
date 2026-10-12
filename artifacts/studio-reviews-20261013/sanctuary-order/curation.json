@@ -1,0 +1,27 @@
+{
+  "sourceDirectory": "C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/coop-wake-sanctuary-independent-review",
+  "verifiedRawFiles": 38,
+  "scope": "Root verified all frozen manifest raw entries; selected immutable review documents copied here. Full source/fixture/author raw evidence remains in the original pinned reviewer directory and referenced existing game artifacts.",
+  "copied": [
+    {
+      "name": "REVIEW.md",
+      "bytes": 6298,
+      "sha256": "24206bb1c9da6e3053daf7852b2249dd1c95373c87a4a86ea0cfcfd84acf3ee8"
+    },
+    {
+      "name": "MANIFEST.json",
+      "bytes": 7461,
+      "sha256": "c7b7dce93ab6c29759be50a519acadc246cb63838ab47c97f60c5ec2c3b7ad03"
+    },
+    {
+      "name": "verification.json",
+      "bytes": 10481,
+      "sha256": "44b7675fb8dff1d88f22ede244cde69685afeb70445529f6727c3e48a1fcb344"
+    },
+    {
+      "name": "verify.log",
+      "bytes": 1263,
+      "sha256": "6a0da980bbf2a050fcd1dd4d72c94ad317c1d757392b0723234df6b76d85728a"
+    }
+  ]
+}

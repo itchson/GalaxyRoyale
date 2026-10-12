@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 1049,
+  "revision": 1064,
   "name": "Galaxy Royale",
   "phase": "Playable solo slice → content and validation",
-  "updatedAt": "2026-10-12T19:58:02.566Z",
+  "updatedAt": "2026-10-12T20:39:57.038Z",
   "tasks": [
     {
       "id": "studio",
@@ -8670,7 +8670,7 @@
       "description": "Real in-progress Wake edge capture failed because17legitimate generated asteroids exceed currentreplica +/-1000000positionbounds. Rootconfirmedexistingvectorcontract; actualintegrated-baseline reproduction stillneeded. KeepWake-only halo testseparate fromwholeworldfix. No projectile failure or liveRTC result inferred. Root now independently reproduced the unfiltered integrated-baseline capture: actual first positive-X edge returned invalid_entity; no geometry fix or RTC result yet.",
       "department": "Native gameplay / protocol",
       "owner": "Root / native gameplay",
-      "status": "active",
+      "status": "review",
       "priority": "high",
       "dependencies": [],
       "acceptanceCriteria": [
@@ -8700,14 +8700,14 @@
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 4,
       "createdAt": "2026-10-12T19:31:50.630Z",
-      "updatedAt": "2026-10-12T19:50:32.684Z"
+      "updatedAt": "2026-10-12T20:16:15.779Z"
     },
     {
       "id": "task-b9daed25",
       "title": "Avoid remote sanctuary generation for definite native Wake geometry misses",
-      "description": "Separate delta from frozen111a native trail candidate. Reorder existing exact target geometry rejection before remote sanctuary lookup, retaining protected-hit rejection before all damage/attribution. Preserve measured baseline and compare same configured native fixture; no global FPS claim.",
+      "description": "Separate delta from frozen111a native trail candidate. Reorder existing exact target geometry rejection before remote sanctuary lookup, retaining protected-hit rejection before all damage/attribution. Preserve measured baseline and compare same configured native fixture; no global FPS claim. Author before/after release probes and actual native functional/regression/Clippy checks now passed; separate candidate ready for frozen independent delta review. Source/test-only runtime change, no cache/protocol/render/Root edit. Original111a retained.",
       "department": "Native gameplay performance",
       "owner": "/root/audio_score",
       "status": "active",
@@ -8718,7 +8718,7 @@
       "acceptanceCriteria": [
         {
           "text": "Exact native before/after allocation evidence, protected-hit/miss regressions and unchanged authoritative outcomes.",
-          "met": false
+          "met": true
         },
         {
           "text": "Separate frozen reviewed delta with appropriate native/Clippy checks; Root integration and matching build.",
@@ -8730,12 +8730,102 @@
           "label": "Actual frozen332nativebudget report and original/final logs",
           "kind": "artifact",
           "path": "artifacts/native-wake-budget-20261013/REPORT.md"
+        },
+        {
+          "label": "Actual111a native before/after and scoped source checks",
+          "kind": "note",
+          "details": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/coop-wake-sanctuary-order/HANDOFF.md SHA c47d7775c3d415de556df16c110c07af70f1b8f2a57473d935e5c86b40ff96af. Source pins a3abbd4e. Same work-only release fixture on frozen111a: distant-miss stage allocation requests removed3840 and requested bytes359424, empty3840 to0/full5712 to1872.15 Wake tests and129 co-op regressions passed,4 exports ignored; strict game-core all-target Clippy passed. Independent delta review, Root integration/build and product/RTC/physical performance remain open; original111a branch preserved."
         }
       ],
       "blocker": "",
-      "revision": 1,
+      "revision": 2,
       "createdAt": "2026-10-12T19:58:02.566Z",
-      "updatedAt": "2026-10-12T19:58:02.566Z"
+      "updatedAt": "2026-10-12T20:00:24.144Z"
+    },
+    {
+      "id": "task-d82150b9",
+      "title": "Strict browser publication and replica routing for native Ion Wake samples",
+      "description": "Separate branch from frozen d8/111. Own only wire/controller/wasm-ports, focused tests and22exact native fixtures. Strict raw+f32/32KiB page and65KiB frame limits; one frozen page, cells-only cache skipping, complete replica routing before commit/ACK. Root owns matching integration/build/RTC, engine_fx independent review. Author consumer implementation/typecheck/final73listener-free checks now pass; separate source freeze ready for independent review. Original native refs preserved. An accidental ephemeral HTTP transport test run is recorded explicitly, not presented as a listener-free or RTC check.",
+      "department": "Browser protocol / native presentation",
+      "owner": "/root/audio_score",
+      "status": "active",
+      "priority": "high",
+      "dependencies": [
+        "task-8508cfc5"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Frozen strict browser candidate and meaningful22native-fixture/malformed/completion/teardown tests.",
+          "met": true
+        },
+        {
+          "text": "Independent review plus coherent Root native/browser integration and matching normal bundles.",
+          "met": false
+        },
+        {
+          "text": "Actual current native host/guest trail lifecycle, visible rendering and bounded cleanup; eight/TURN separate.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Exact frozen browser checklist verified against native DTOs",
+          "kind": "artifact",
+          "path": "artifacts/studio-reviews-20261013/browser-checklist/CHECKLIST.md"
+        },
+        {
+          "label": "Actual scoped browser consumer pass and retained execution deviation",
+          "kind": "note",
+          "details": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/coop-wake-browser/HANDOFF.md SHA8d301e9f1964f4bbf4c8dffed9eac44eece7a406eaa98fb21baaeec4a962fb87. Final listener-free73 focused Node tests and tsc passed; exact22 native111a fixtures pinned. Raw page span/numeric/roster checks, cells-only cache skips, required complete Wake before commit/ACK and replica_wake routing. Red baseline and fixture-token failure retained. Accidental111-case transport run opened ephemeral HTTP listeners, closed via existing teardown and exited0; explicitly separate from final checks. No normal build/new browser/realRTC/native changes; independent review/integration/live gates open."
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-12T20:11:47.154Z",
+      "updatedAt": "2026-10-12T20:23:02.352Z"
+    },
+    {
+      "id": "task-c7b9aa49",
+      "title": "Preserve safe room-start refusal diagnostics in QA tools",
+      "description": "QA-only ec15 amendment preserves controlled signaling_limit or room_create_failed after a resolved start without invitation; raw service reasons never reported. Positive grants unchanged. Old failure retained, no retroactive cause claim. Existing normal game and limits unchanged.",
+      "department": "Networking QA tooling",
+      "owner": "Root",
+      "status": "complete",
+      "priority": "normal",
+      "dependencies": [
+        "task-71611b9e"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Preserved old source-function failure and actual45focused checks; arbitrary reason leakage rejects.",
+          "met": true
+        },
+        {
+          "text": "Independent exact source/evidence review and new matching native browser refusal observation.",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual bounded diagnostic source checks and historical baseline failure",
+          "kind": "artifact",
+          "path": "artifacts/private-room-start-reason-20261013/verification.json"
+        },
+        {
+          "label": "Actual refusal and final cleanup with exact provenance",
+          "kind": "artifact",
+          "path": "artifacts/private-room-start-reason-20261013/live/summary.json"
+        },
+        {
+          "label": "Independent safe-reason source review",
+          "kind": "artifact",
+          "path": "artifacts/private-room-start-reason-20261013/live/independent-review/REVIEW.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-12T20:12:26.993Z",
+      "updatedAt": "2026-10-12T20:39:57.013Z"
     }
   ],
   "reviews": [
@@ -11222,6 +11312,45 @@
           "label": "Root actual verification",
           "kind": "artifact",
           "path": "artifacts/private-room-negative-integration-20261013/verification.json"
+        }
+      ]
+    },
+    {
+      "id": "review-0dd42dde",
+      "title": "Room validation, native trail and measured sanctuary refinement cross-review",
+      "body": "Engine_fx accepted6recorded dual-renderer room cases with all7attempts disposed, preserving the failed generic lock result and actualJPEG screenshot metadata. Native111trail and separate d8sanctuary-order delta are independently accepted for integration; no new RTC/persistenttrail/FPS result follows. Score implements the exact browser boundary on an isolated branch; nativeedge specialist implements explicit authoritative geometry bounds with real unfiltered captures. Root fixes safe refusal diagnostics with45source checks and preserved baselinefailure. These are actual written cross-reviews and assignments, not a fabricated synchronous meeting.",
+      "author": "Root",
+      "source": "Actual asynchronous specialist reviews and written assignments",
+      "createdAt": "2026-10-12T20:12:27.019Z",
+      "participants": [
+        "Root",
+        "/root/audio_review",
+        "/root/audio_score",
+        "/root/engine_fx"
+      ],
+      "taskIds": [
+        "task-71611b9e",
+        "task-8508cfc5",
+        "task-b9daed25",
+        "task-b062202c",
+        "task-d82150b9",
+        "task-c7b9aa49"
+      ],
+      "evidence": [
+        {
+          "label": "Independent recorded live review",
+          "kind": "artifact",
+          "path": "artifacts/studio-reviews-20261013/room-live/REVIEW.md"
+        },
+        {
+          "label": "Independent native trail review",
+          "kind": "artifact",
+          "path": "artifacts/studio-reviews-20261013/native-trail/REVIEW.md"
+        },
+        {
+          "label": "Independent measured predicate-order review",
+          "kind": "artifact",
+          "path": "artifacts/studio-reviews-20261013/sanctuary-order/REVIEW.md"
         }
       ]
     }
@@ -14549,6 +14678,41 @@
         }
       ],
       "knownIssues": "No eight clients, Internet/TURN, failed ICE, exact boxed ECS equality, zero legacy migration writes, new persistent Wake rendering, physical-device or performance acceptance."
+    },
+    {
+      "id": "build-4cb9637b",
+      "title": "Controlled third host-start refusal preserved and restored safely",
+      "body": "Two approved native sessions ended/restored; third within the caller window reports signaling_limit, creates no additional peer and disposes cleanly. Original expected failure capture retained, saved-profile observations unchanged. This does not backfill the earlier generic failure reason.",
+      "author": "Root",
+      "source": "Actual native WebGPU loopback refusal observation, not a new compilation",
+      "createdAt": "2026-10-12T20:39:57.038Z",
+      "revision": "ec15de3abdbbf0a64c3f9f035636e65364469483",
+      "evidence": [
+        {
+          "label": "Exact prepared sources and seven immutable reports",
+          "kind": "artifact",
+          "path": "artifacts/private-room-start-reason-20261013/live/summary.json"
+        }
+      ],
+      "checks": [
+        {
+          "name": "Actual controlled refusal and no extra peer",
+          "result": "pass"
+        },
+        {
+          "name": "Actual native terminal cleanup and retained saved observations",
+          "result": "pass"
+        },
+        {
+          "name": "Requested third room refused as expected (original action failure)",
+          "result": "fail"
+        },
+        {
+          "name": "RawHTTP429,WebGL2refusal,eightplayers,TURN",
+          "result": "not_run"
+        }
+      ],
+      "knownIssues": "No retroactive cause for earlier generic lock failure; no new WebGL2 refusal, eight clients, TURN, failed ICE, exact boxed ECS or zero migration-write claim."
     }
   ],
   "feedback": [],
@@ -25042,6 +25206,156 @@
       "author": "Root",
       "source": "Actual specialist native allocation probe and bounded implementation assignment",
       "createdAt": "2026-10-12T19:58:02.566Z"
+    },
+    {
+      "id": "468506a3-61f0-4e1a-8254-8dfb4724afac",
+      "revision": 1050,
+      "kind": "task.update",
+      "itemId": "task-b062202c",
+      "title": "Co-op world-edge native entity publication and replica bounds",
+      "author": "/root/audio_review",
+      "source": "Actual Root handoff, original red fixture preservation and native contract implementation dispatch",
+      "createdAt": "2026-10-12T19:59:53.485Z"
+    },
+    {
+      "id": "32336a0f-1b9f-4e60-924f-73276c0c706b",
+      "revision": 1051,
+      "kind": "task.update",
+      "itemId": "task-b9daed25",
+      "title": "Avoid remote sanctuary generation for definite native Wake geometry misses",
+      "author": "Codex audio_score",
+      "source": "Actual separate native sanctuary-order author execution",
+      "createdAt": "2026-10-12T20:00:24.144Z"
+    },
+    {
+      "id": "15744403-399e-43e0-8b63-6e6efa1f43cf",
+      "revision": 1052,
+      "kind": "run",
+      "itemId": "run-14305e1a",
+      "title": "Native Wake sanctuary-order optimization · completed",
+      "author": "Codex audio_score",
+      "source": "Actual native before/after author work, not integration or FPS acceptance",
+      "createdAt": "2026-10-12T20:00:24.178Z"
+    },
+    {
+      "id": "11e2f0c3-441e-45f9-a8fd-1a36b207355d",
+      "revision": 1053,
+      "kind": "run",
+      "itemId": "run-f3a252d6",
+      "title": "Native world-edge contract · running",
+      "author": "/root/audio_review",
+      "source": "Actual native edge task dispatch in Root handed-over isolated worktree",
+      "createdAt": "2026-10-12T20:02:34.323Z"
+    },
+    {
+      "id": "808c4d06-52df-4954-91ad-3782f3fa6549",
+      "revision": 1054,
+      "kind": "task.create",
+      "itemId": "task-d82150b9",
+      "title": "Strict browser publication and replica routing for native Ion Wake samples",
+      "author": "Root",
+      "source": "Actual source work and bounded specialist assignment",
+      "createdAt": "2026-10-12T20:11:47.154Z"
+    },
+    {
+      "id": "4d781b48-7cb3-48c0-8268-0419f11fe8e8",
+      "revision": 1055,
+      "kind": "task.create",
+      "itemId": "task-c7b9aa49",
+      "title": "Preserve safe room-start refusal diagnostics in QA tools",
+      "author": "Root",
+      "source": "Actual source work and bounded specialist assignment",
+      "createdAt": "2026-10-12T20:12:26.993Z"
+    },
+    {
+      "id": "88e6d139-960c-4340-bff2-7605af7af218",
+      "revision": 1056,
+      "kind": "review",
+      "itemId": "review-0dd42dde",
+      "title": "Room validation, native trail and measured sanctuary refinement cross-review",
+      "author": "Root",
+      "source": "Actual asynchronous specialist reviews and written assignments",
+      "createdAt": "2026-10-12T20:12:27.019Z"
+    },
+    {
+      "id": "e8556b6f-fe62-46d9-a6a2-9023f2a487d8",
+      "revision": 1057,
+      "kind": "task.update",
+      "itemId": "task-b062202c",
+      "title": "Co-op world-edge native entity publication and replica bounds",
+      "author": "/root/audio_review",
+      "source": "Actual native author candidate1b8c3ec frozen, focused/full tests complete, independent integration/live acceptance pending",
+      "createdAt": "2026-10-12T20:16:15.779Z"
+    },
+    {
+      "id": "aa7dd638-586e-45de-9266-048bf8ef651a",
+      "revision": 1058,
+      "kind": "run",
+      "itemId": "run-64f07425",
+      "title": "Native world-edge contract · completed",
+      "author": "/root/audio_review",
+      "source": "Actual frozen native world-edge author execution and raw test evidence",
+      "createdAt": "2026-10-12T20:16:15.810Z"
+    },
+    {
+      "id": "be159783-c5cc-4cdd-89dc-15eb95af2ee2",
+      "revision": 1059,
+      "kind": "task.update",
+      "itemId": "task-d82150b9",
+      "title": "Strict browser publication and replica routing for native Ion Wake samples",
+      "author": "Codex audio_score",
+      "source": "Actual bounded browser consumer author verification",
+      "createdAt": "2026-10-12T20:23:02.352Z"
+    },
+    {
+      "id": "4d47cf15-e879-49b7-a84a-c137ccfb80d3",
+      "revision": 1060,
+      "kind": "run",
+      "itemId": "run-8d44c9ec",
+      "title": "Strict browser Wake transfer · completed",
+      "author": "Codex audio_score",
+      "source": "Actual three-consumer author pass; remaining review/integration/live scope explicit",
+      "createdAt": "2026-10-12T20:23:02.386Z"
+    },
+    {
+      "id": "431deb03-2cb2-4ada-a3d5-29107e16c2c3",
+      "revision": 1061,
+      "kind": "run",
+      "itemId": "run-c7e9aa37",
+      "title": "Native edge fixture export · completed",
+      "author": "/root/audio_review",
+      "source": "Actual isolated native fixture export supplement fromfrozen1b8",
+      "createdAt": "2026-10-12T20:36:22.410Z"
+    },
+    {
+      "id": "8d5ced73-9c50-4a52-bd4b-77aaa3d45854",
+      "revision": 1062,
+      "kind": "run",
+      "itemId": "run-d4181909",
+      "title": "Ion Wake configured native live acceptance design · completed",
+      "author": "Codex audio_score",
+      "source": "actual read-only acceptance design",
+      "createdAt": "2026-10-12T20:39:56.228Z"
+    },
+    {
+      "id": "f15676e0-7eee-4f29-80a8-2fb713f49a77",
+      "revision": 1063,
+      "kind": "task.update",
+      "itemId": "task-c7b9aa49",
+      "title": "Preserve safe room-start refusal diagnostics in QA tools",
+      "author": "Root",
+      "source": "Independent ec15 source review and actual normal native controlled-refusal experiment",
+      "createdAt": "2026-10-12T20:39:57.013Z"
+    },
+    {
+      "id": "cfdb6797-cb9e-4f1f-aba3-3098ec04d753",
+      "revision": 1064,
+      "kind": "build",
+      "itemId": "build-4cb9637b",
+      "title": "Controlled third host-start refusal preserved and restored safely",
+      "author": "Root",
+      "source": "Actual native WebGPU loopback refusal observation, not a new compilation",
+      "createdAt": "2026-10-12T20:39:57.038Z"
     }
   ],
   "runRecords": [
@@ -34435,6 +34749,138 @@
       "author": "/root/audio_review",
       "source": "Actual narrow author amendment and frozen source-function evidence",
       "createdAt": "2026-10-12T19:50:08.531Z"
+    },
+    {
+      "id": "run-14305e1a",
+      "title": "Native Wake sanctuary-order optimization · completed",
+      "agentId": "/root/audio_score",
+      "agentLabel": "Native Wake sanctuary-order optimization",
+      "state": "completed",
+      "observedAt": "2026-10-12T20:00:24.172Z",
+      "taskIds": [
+        "task-b9daed25"
+      ],
+      "summary": "Minimum predicate reorder and meaningful native tests complete for separate review. Actual release snapshots on111a remove3840 allocation requests/359424 requested bytes per configured distant-miss Wake stage; empty3840 to0, full5712 to1872.15 Wake and129 co-op tests passed, strict game-core Clippy passed. Protected-hit rejection remains before damage. No full-game FPS/browser/GPU/RTC/physical performance or integration acceptance claimed.",
+      "evidence": [
+        {
+          "label": "Actual111a native before/after and scoped source checks",
+          "kind": "note",
+          "details": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/coop-wake-sanctuary-order/HANDOFF.md SHA c47d7775c3d415de556df16c110c07af70f1b8f2a57473d935e5c86b40ff96af. Source pins a3abbd4e. Same work-only release fixture on frozen111a: distant-miss stage allocation requests removed3840 and requested bytes359424, empty3840 to0/full5712 to1872.15 Wake tests and129 co-op regressions passed,4 exports ignored; strict game-core all-target Clippy passed. Independent delta review, Root integration/build and product/RTC/physical performance remain open; original111a branch preserved."
+        }
+      ],
+      "author": "Codex audio_score",
+      "source": "Actual native before/after author work, not integration or FPS acceptance",
+      "createdAt": "2026-10-12T20:00:24.178Z"
+    },
+    {
+      "id": "run-f3a252d6",
+      "title": "Native world-edge contract · running",
+      "agentId": "/root/audio_review",
+      "agentLabel": "Native world-edge contract",
+      "state": "running",
+      "observedAt": "2026-10-12T20:02:34.223Z",
+      "taskIds": [
+        "task-b062202c"
+      ],
+      "summary": "Root approved exact native-only plan. Original redfixture/moduleentry/log preserved; first actual six-point unfiltered reproduction now passes after domain/admission/finalphysics hooks. Expanded boundary/drift/projectile/malformed regressions in progress; no liveRTC/GPU/JS acceptance.",
+      "evidence": [
+        {
+          "label": "Actual execution checkpoint",
+          "kind": "note",
+          "details": "Handed-over codex/world-edge-contract from58bb2ec; modified only native geometry files. work/world-edge-contract/original preservesRoot redsources/log; first-edge-after.log records real6point result. Original negativeQA branches and Rootsharedtesting untouched."
+        }
+      ],
+      "author": "/root/audio_review",
+      "source": "Actual native edge task dispatch in Root handed-over isolated worktree",
+      "createdAt": "2026-10-12T20:02:34.323Z"
+    },
+    {
+      "id": "run-64f07425",
+      "title": "Native world-edge contract · completed",
+      "agentId": "/root/audio_review",
+      "agentLabel": "Native world-edge contract",
+      "state": "completed",
+      "observedAt": "2026-10-12T20:16:15.791Z",
+      "taskIds": [
+        "task-b062202c"
+      ],
+      "summary": "Frozen1b8c3ec nativeonly7files:8edgecases passed; fullgame_core537pass0fail13explicitexportersignored; strictClippy/formatpassed. Originalredlogretained. Rootownsindependentreview/newerWakemerge/JS/nativepackage/liveacceptance; noRTC/GPU pass.",
+      "evidence": [
+        {
+          "label": "Actual native source completion with acceptance open",
+          "kind": "note",
+          "details": "Isolated galaxy-dev-bible work/world-edge-contract/HANDOFF.md SHAa29f01edc1dc1d6a80fd8553644123221ec2c88f3c63c8334f0f80cb8aa2836b;105actual native depfile inputs/binary/sourcepins retained. Complete unfiltered all8sign/corner native commits, actualguestshot,300real retainedasteroidticks, latecollision/segments, malformedcacheguards. NoRootshared/JS/runtime-package/server/browser changes; acceptance criteria not self-approved."
+        }
+      ],
+      "author": "/root/audio_review",
+      "source": "Actual frozen native world-edge author execution and raw test evidence",
+      "createdAt": "2026-10-12T20:16:15.810Z"
+    },
+    {
+      "id": "run-8d44c9ec",
+      "title": "Strict browser Wake transfer · completed",
+      "agentId": "/root/audio_score",
+      "agentLabel": "Strict browser Wake transfer",
+      "state": "completed",
+      "observedAt": "2026-10-12T20:23:02.379Z",
+      "taskIds": [
+        "task-d82150b9"
+      ],
+      "summary": "Bounded browser consumer candidate complete for independent review. Final73 listener-free tests and TypeScript check passed; all22 native fixtures preserved, raw32KiB and f32/halo/completion/backpressure/ACK/teardown covered. Execution deviation: an earlier transport test run opened temporary localhost HTTP servers and exited after successful teardown; raw evidence retained. No normal build, new browser/realRTC or native source change. Integration and physical/live acceptance remain open.",
+      "evidence": [
+        {
+          "label": "Actual scoped browser consumer pass and retained execution deviation",
+          "kind": "note",
+          "details": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/coop-wake-browser/HANDOFF.md SHA8d301e9f1964f4bbf4c8dffed9eac44eece7a406eaa98fb21baaeec4a962fb87. Final listener-free73 focused Node tests and tsc passed; exact22 native111a fixtures pinned. Raw page span/numeric/roster checks, cells-only cache skips, required complete Wake before commit/ACK and replica_wake routing. Red baseline and fixture-token failure retained. Accidental111-case transport run opened ephemeral HTTP listeners, closed via existing teardown and exited0; explicitly separate from final checks. No normal build/new browser/realRTC/native changes; independent review/integration/live gates open."
+        }
+      ],
+      "author": "Codex audio_score",
+      "source": "Actual three-consumer author pass; remaining review/integration/live scope explicit",
+      "createdAt": "2026-10-12T20:23:02.386Z"
+    },
+    {
+      "id": "run-c7e9aa37",
+      "title": "Native edge fixture export · completed",
+      "agentId": "/root/audio_review",
+      "agentLabel": "Native edge fixture export",
+      "state": "completed",
+      "observedAt": "2026-10-12T20:36:22.314Z",
+      "taskIds": [
+        "task-b062202c"
+      ],
+      "summary": "Testonly84701ff frozen;9actualnativecaptures exported and completeNativecommits passed,8existingedgecases passed withignoredexporter,Clippypass. Fresh87unfilteredrows/case;actualShotOwnerownershiponly,ownedloadoutabsent.27nativeUTF8files pinned,1b8runtime/ref/binary/logs preserved. NoJS/liveRTC/packageacceptance.",
+      "evidence": [
+        {
+          "label": "Actual immutable native replay fixtures",
+          "kind": "note",
+          "details": "EdgeWT work/world-edge-fixtures/provenance.json SHAa1db3db204c4d284ae62ea3deaf13576233a50d94e507dfa11181d0877191246;source-pins SHA34a576540952ced96e74411478ddc0636de77895527610df46e0c1fe63959fe1. SeparateCARGO_TARGET_DIR,actualignoredexportcommand/results retained; no hand-authoredheader/loadoutnumbers."
+        }
+      ],
+      "author": "/root/audio_review",
+      "source": "Actual isolated native fixture export supplement fromfrozen1b8",
+      "createdAt": "2026-10-12T20:36:22.410Z"
+    },
+    {
+      "id": "run-d4181909",
+      "title": "Ion Wake configured native live acceptance design · completed",
+      "agentId": "/root/audio_score",
+      "agentLabel": "Ion Wake configured native live acceptance design",
+      "state": "completed",
+      "observedAt": "2026-10-12T20:39:56.183Z",
+      "taskIds": [
+        "task-d82150b9"
+      ],
+      "summary": "Read-only design against frozen browser f1afbbd and Root ec15 QA: 37 raw/canonical sources pinned. Proposed explicitly configured native Scout Ion Wake R1/E1 on two fresh empty origins, actual owner input/stamping/publication/replica commit/render/expiry/retreat/leave/rejoin, both normal renderers. No fixture created and no source edits, build, test suite, listener, browser, RTC or visual acceptance executed. Root integration and concrete QA implementation remain open.",
+      "evidence": [
+        {
+          "label": "Read-only configured-profile live plan",
+          "kind": "note",
+          "details": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/coop-wake-live-plan/PLAN.md; source-pins.json; source-excerpts.json; inspect.log. Fresh origin preflight precedes SaveStore.open migration; native constructor/export supplies configured build; no Profile crosses RTC; simulation-tick and receipt-clock expiry are separate."
+        }
+      ],
+      "author": "Codex audio_score",
+      "source": "actual read-only acceptance design",
+      "createdAt": "2026-10-12T20:39:56.228Z"
     }
   ],
   "phaseDescription": "Desktop-first Rust/WASM solo game and local Studio are implemented. Reviewed occupied-cell art, reproducible conversion, responsive native settings/icons and minimap, strict GitHub integration gates and source-backed Dev Bible are integrated. Natural campaign balance, human listening, owner-private update lifecycle and physical phones remain separate pending gates."

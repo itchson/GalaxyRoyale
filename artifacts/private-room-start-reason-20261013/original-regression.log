@@ -1,0 +1,19 @@
+{"scope":"Actual old child command/message functions with declared refused-controller boundary; not HTTP/native/browser","reply":{"type":"native-qa-reply","id":1,"ok":true,"value":{"invite":null}},"requiredReason":"signaling_limit"}
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: A refused host start must not be a successful private grant reply
+
+true !== false
+
+    at file:///C:/Users/mitch/Documents/ChatGPT/galaxy-royale/work/private-room-start-reason/baseline.mjs:17:8 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: true,
+  expected: false,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.18.0

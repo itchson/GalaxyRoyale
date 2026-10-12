@@ -1,0 +1,193 @@
+{
+  "scope": "Independent frozen stage/source/report/hash and existing screenshot inspection; no fresh browser, RTC, native, build, server or listener execution",
+  "source_commit": "e97c29ca262e83dfc46c3a3d4faa10703fa0f64c",
+  "compiled_commit": "332ddd5ec0370e13ad346ea4ea988f35b61ca3e7",
+  "runs": [
+    {
+      "run": "beffb4e08db30c16",
+      "backend": "webgpu",
+      "case": "decline",
+      "initial_at": "2026-10-12T19:52:10.024Z",
+      "case_at": "2026-10-12T19:52:20.260Z",
+      "disposed_at": "2026-10-12T19:52:38.589Z",
+      "case_pass": true,
+      "case_checks": 9,
+      "failed_checks": [],
+      "final_pcs": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "final_guest_commits": 0,
+      "final_host_ticks": 0,
+      "disposed_clean": true
+    },
+    {
+      "run": "4eb080289bb73fab",
+      "backend": "webgpu",
+      "case": "replace",
+      "initial_at": "2026-10-12T19:52:48.446Z",
+      "case_at": "2026-10-12T19:52:50.237Z",
+      "disposed_at": "2026-10-12T19:52:58.021Z",
+      "case_pass": true,
+      "case_checks": 14,
+      "failed_checks": [],
+      "final_pcs": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "final_guest_commits": 3,
+      "final_host_ticks": 100,
+      "disposed_clean": true
+    },
+    {
+      "run": "e9aeb62bbc611d32",
+      "backend": "webgpu",
+      "case": "lock-failed",
+      "initial_at": "2026-10-12T19:53:05.912Z",
+      "case_at": "2026-10-12T19:53:06.010Z",
+      "disposed_at": "2026-10-12T19:53:13.905Z",
+      "case_pass": false,
+      "case_checks": 7,
+      "failed_checks": [
+        {
+          "name": "operation-failed",
+          "passed": false
+        }
+      ],
+      "final_pcs": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "final_guest_commits": 0,
+      "final_host_ticks": 0,
+      "disposed_clean": true
+    },
+    {
+      "run": "c5249e0897c0b7af",
+      "backend": "webgpu",
+      "case": "lock",
+      "initial_at": "2026-10-12T19:54:05.513Z",
+      "case_at": "2026-10-12T19:54:07.558Z",
+      "disposed_at": "2026-10-12T19:54:17.017Z",
+      "case_pass": true,
+      "case_checks": 17,
+      "failed_checks": [],
+      "final_pcs": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "final_guest_commits": 6,
+      "final_host_ticks": 113,
+      "disposed_clean": true
+    },
+    {
+      "run": "0f5ea274dbe37fa7",
+      "backend": "webgl2",
+      "case": "decline",
+      "initial_at": "2026-10-12T19:54:28.282Z",
+      "case_at": "2026-10-12T19:54:28.444Z",
+      "disposed_at": "2026-10-12T19:54:34.885Z",
+      "case_pass": true,
+      "case_checks": 9,
+      "failed_checks": [],
+      "final_pcs": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "final_guest_commits": 0,
+      "final_host_ticks": 0,
+      "disposed_clean": true
+    },
+    {
+      "run": "70dc80df19319d36",
+      "backend": "webgl2",
+      "case": "replace",
+      "initial_at": "2026-10-12T19:55:20.524Z",
+      "case_at": "2026-10-12T19:55:25.264Z",
+      "disposed_at": "2026-10-12T19:55:33.740Z",
+      "case_pass": true,
+      "case_checks": 14,
+      "failed_checks": [],
+      "final_pcs": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "final_guest_commits": 5,
+      "final_host_ticks": 107,
+      "disposed_clean": true
+    },
+    {
+      "run": "a35c50cab5122475",
+      "backend": "webgl2",
+      "case": "lock",
+      "initial_at": "2026-10-12T19:55:41.824Z",
+      "case_at": "2026-10-12T19:55:43.848Z",
+      "disposed_at": "2026-10-12T19:55:53.006Z",
+      "case_pass": true,
+      "case_checks": 17,
+      "failed_checks": [],
+      "final_pcs": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "final_guest_commits": 6,
+      "final_host_ticks": 117,
+      "disposed_clean": true
+    }
+  ],
+  "successful_final_cases": 6,
+  "failed_cleanly_disposed_cases": 1,
+  "runtime_unchanged_between_commits": true,
+  "raw_failed_service_reason": "Unproven. Generic room_case_failed/operation-failed remains; rate-limit explanation is only source/timing-consistent hypothesis.",
+  "limits": [
+    "two-client local loopback only",
+    "no eight clients, Internet or TURN",
+    "no exact boxed-world or zero migration writes",
+    "no performance or physical/AV acceptance",
+    "no persistent Wake trail acceptance from332 binaries",
+    "continuous visibility inferred from reviewed source guards and visible recorded screenshots; not independent live observation",
+    "Root-reported QA listener termination not independently probed"
+  ]
+}

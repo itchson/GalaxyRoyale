@@ -1,0 +1,110 @@
+{
+  "version": 1,
+  "candidate": "ec15de3abdbbf0a64c3f9f035636e65364469483",
+  "parent": "ba70e20106ac719e36ed67bea221af23a9ca6019",
+  "scope": "Independent frozen QA source/evidence review only; no new native, HTTP, browser, RTC, listener or build execution",
+  "verdict": "No source blocker for scoped QA integration; fresh prepared/live refusal gate remains separate and old failed live cause remains unproven",
+  "source_semantics": "source snapshots are exact canonical Git bytes; author-evidence preserves raw original work files; no historical captures altered.",
+  "files": [
+    {
+      "path": "author-evidence/baseline.mjs",
+      "bytes": 1698,
+      "sha256": "ad3891b7131a2f42b559d991bf02f1af807d194565cdbee72810d6857724a2c3"
+    },
+    {
+      "path": "author-evidence/existing-final.log",
+      "bytes": 2403,
+      "sha256": "79c984a7772701a22a404436d25f40c4d424e565ececd3550cc7e0cf89572222"
+    },
+    {
+      "path": "author-evidence/focused-final.log",
+      "bytes": 3493,
+      "sha256": "83902303481332a563b1fea11008da0cb3d4f16dcd62785e9f64c9a6c2061b44"
+    },
+    {
+      "path": "author-evidence/focused-tests.log",
+      "bytes": 2371,
+      "sha256": "5af9bb3aa5e09c780c8cdfc2d477a072d877b923bfb1fb8b6bee85e96e00bee2"
+    },
+    {
+      "path": "author-evidence/format.log",
+      "bytes": 193,
+      "sha256": "64333370d9e7b122eb2f03c870aa4fe09476329f15f825d8dd05bf03d239e75d"
+    },
+    {
+      "path": "author-evidence/original-client.js",
+      "bytes": 26189,
+      "sha256": "378387289f01e3b1d8fe02fd2fdf1f444b0f66587f42127fa8a856eb1177d825"
+    },
+    {
+      "path": "author-evidence/original-regression.log",
+      "bytes": 703,
+      "sha256": "c3b73d4cc59e87b5482d4a39e9769c80f8c76dc436c190e8f0b2e6abaa288e1c"
+    },
+    {
+      "path": "author-evidence/record.mjs",
+      "bytes": 7961,
+      "sha256": "b310762c9461d753862092a11f9284bc82965b6c1f05b8bd9dfc3f48623fc96e"
+    },
+    {
+      "path": "REVIEW.md",
+      "bytes": 4143,
+      "sha256": "ecf359207859efc473ffa55aa8b04c84eacf52a457cd379d3391f9c33a00d69c"
+    },
+    {
+      "path": "source/apps/game/src/coop/controller.ts",
+      "bytes": 32533,
+      "sha256": "4966bf8ffcd8ca18125c9af9c710a7658cef61e28356fd01bc68ee50671dcb1f"
+    },
+    {
+      "path": "source/apps/game/src/coop/signaling.ts",
+      "bytes": 6716,
+      "sha256": "49ebdb7750f053f263a5b3741348e6d2f0171d3b16fd1dc7665242d5e313e433"
+    },
+    {
+      "path": "source/scripts/qa/co-op-transport/client.js",
+      "bytes": 26657,
+      "sha256": "39b3c8efe7bdc34ff8244b7909e51ea418409d564b167c68e2901eb8b889a00c"
+    },
+    {
+      "path": "source/scripts/qa/co-op-transport/fifth-shot.js",
+      "bytes": 7003,
+      "sha256": "e7a587855f908ef1f5b760b0cb90b87c48f73587cc3785347aacf09cf9c94a26"
+    },
+    {
+      "path": "source/scripts/qa/co-op-transport/README.md",
+      "bytes": 15566,
+      "sha256": "bc352fa0a8cbed0c0865641b93a142ba60964e1b5f8fbeafd2181c8bd99f38b4"
+    },
+    {
+      "path": "source/scripts/qa/co-op-transport/server.mjs",
+      "bytes": 18089,
+      "sha256": "fdf24291aed1df0cc5fbc6a627657315216de70bd3f01bf96c8d8c74a4caa5bd"
+    },
+    {
+      "path": "source/scripts/qa/co-op-transport/wasm-review.js",
+      "bytes": 25332,
+      "sha256": "0ce3a0331d522ecf17bc41125ddd95929c13bab39f623806eec01ca8826fabbc"
+    },
+    {
+      "path": "source/scripts/test/coop-private-room-negative-qa.test.mjs",
+      "bytes": 32274,
+      "sha256": "d178b7ea51250602f3ecabd6f0f694f6441a8b16896007fee89b2cf92ff4fe2b"
+    },
+    {
+      "path": "verification.json",
+      "bytes": 4842,
+      "sha256": "7e56d8cf63871fc041eb208635fbbece5dfbead3ba402830a6918b8001aa32f2"
+    },
+    {
+      "path": "verify.log",
+      "bytes": 1063,
+      "sha256": "2f31e2b05c48428cdb6749d1c793841e31009c8fd74d6349636fe1ee3fcf9cb6"
+    },
+    {
+      "path": "verify.py",
+      "bytes": 3538,
+      "sha256": "8cde56813b59732a594ed330a68668d0ebb01c67c51b48fa69eeb585d6d7669e"
+    }
+  ]
+}

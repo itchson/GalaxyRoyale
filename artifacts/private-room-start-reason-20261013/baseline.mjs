@@ -1,0 +1,18 @@
+import fs from 'node:fs/promises';
+import vm from 'node:vm';
+import assert from 'node:assert/strict';
+import ts from 'typescript';
+import {execFileSync} from 'node:child_process';
+const source=execFileSync('git',['show','ba70e20106ac719e36ed67bea221af23a9ca6019:scripts/qa/co-op-transport/client.js'],{encoding:'utf8'});
+await fs.writeFile('work/private-room-start-reason/original-client.js',source);
+const ast=ts.createSourceFile('qa.js',source,ts.ScriptTarget.ES2022,true,ts.ScriptKind.JS);
+const command=ast.statements.find(n=>ts.isFunctionDeclaration(n)&&n.name?.text==='command').getText(ast);
+const handlerSource=source.slice(source.indexOf('addEventListener("message"'),source.indexOf('addEventListener("pagehide"'));
+const replies=[];let handler;
+const parent={postMessage:v=>replies.push(v)};
+const context=vm.createContext({parent,config:{page_origin:'http://localhost:4199'},galaxy:{},controller:{create:async()=>{},invite:()=>null,state:()=>({reason:'signaling_limit'})},transport:{diagnostics:()=>({})},commandPending:false,failureCode:null,fifth:null,fifthReasons:new Set(),phase:'ended',update:()=>{},addEventListener:(_,fn)=>handler=fn});
+vm.runInContext(command,context);vm.runInContext(handlerSource,context);
+await handler({source:parent,origin:context.config.page_origin,data:{type:'native-qa-command',id:1,name:'create'}});
+console.log(JSON.stringify({scope:'Actual old child command/message functions with declared refused-controller boundary; not HTTP/native/browser',reply:replies[0],requiredReason:'signaling_limit'}));
+assert.equal(replies[0].ok,false,'A refused host start must not be a successful private grant reply');
+assert.equal(replies[0].error,'signaling_limit');

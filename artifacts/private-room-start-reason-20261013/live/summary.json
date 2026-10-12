@@ -1,0 +1,144 @@
+{
+  "sourceCommit": "ec15de3abdbbf0a64c3f9f035636e65364469483",
+  "compiledFrom": "332ddd5ec0370e13ad346ea4ea988f35b61ca3e7",
+  "scope": "Actual WebGPU native pair: two approved rooms/host ends, third resolved start refused with controlled signaling_limit, terminal disposal; expected refusal remains operation-failed:false in original reports",
+  "elapsedFromFirstCompletedRoomToRefusalSeconds": 16.769,
+  "rawHttpStatusCaptured": false,
+  "finalClients": [
+    {
+      "role": "host",
+      "phase": "disposed",
+      "failure_code": "signaling_limit",
+      "created": 2,
+      "closed": 2,
+      "requests": 0,
+      "timers": 0,
+      "profile_equal": true,
+      "persisted_equal": true
+    },
+    {
+      "role": "guest",
+      "phase": "disposed",
+      "failure_code": null,
+      "created": 2,
+      "closed": 2,
+      "requests": 0,
+      "timers": 0,
+      "profile_equal": true,
+      "persisted_equal": true
+    }
+  ],
+  "limits": "No retroactive cause for earlier generic lock failure; no new WebGL2 refusal, eight clients, TURN, failed ICE, exact boxed ECS or zero migration-write claim.",
+  "pins": [
+    {
+      "path": "artifacts/private-room-start-reason-20261013/live/manifest.json",
+      "bytes": 9053,
+      "sha256": "dc9948000d05547023623d02b9cc29be3ecf16f9021504bd3a67ce528609a73d"
+    },
+    {
+      "path": "artifacts/private-room-start-reason-20261013/live/staged/modules/wire.js",
+      "bytes": 19890,
+      "sha256": "cff3fbfe98f60938f459129509ed8bd5f74a07aa529bb356ba88bb51c626135b"
+    },
+    {
+      "path": "artifacts/private-room-start-reason-20261013/live/staged/modules/room-code.js",
+      "bytes": 638,
+      "sha256": "a214b56d34b44f75d6848664ce48a0d42b54b2c2b1c4191563406bbab62633a4"
+    },
+    {
+      "path": "artifacts/private-room-start-reason-20261013/live/staged/modules/signaling.js",
+      "bytes": 6435,
+      "sha256": "39597967098f4c7005a1698d869fe7f9d67cf2c5d7ac2bd62b153652d676c474"
+    },
+    {
+      "path": "artifacts/private-room-start-reason-20261013/live/staged/modules/transport.js",
+      "bytes": 39300,
+      "sha256": "cde1302a8c62cbdf59eefb30de33aeb512950c31528b88a3fdbf2ddb299d76b1"
+    },
+    {
+      "path": "artifacts/private-room-start-reason-20261013/live/staged/modules/controller.js",
+      "bytes": 33618,
+      "sha256": "7f20996fbf02a060981f70b8a644dd6de5c48f07e6c1acc65eb61482fdfbfebe"
+    },
+    {
+      "path": "artifacts/private-room-start-reason-20261013/live/staged/modules/wasm-ports.js",
+      "bytes": 5682,
+      "sha256": "e8b43587a2afa090fad3be5a765b84b3c52448efe5a7ce7671ba17f557c0164a"
+    },
+    {
+      "path": "artifacts/private-room-start-reason-20261013/live/staged/modules/storage.js",
+      "bytes": 32146,
+      "sha256": "bdfa12ec7f2e92ff7271170e09f6bf36fa0b7d6a3f54c2cc1f20ccfe8c1db89e"
+    },
+    {
+      "path": "artifacts/private-room-start-reason-20261013/live/staged/wasm-review.html",
+      "bytes": 5079,
+      "sha256": "36b533abed0ab71582ddaa9b8e9f3c831c99582ff977f8758927e3cbdc661b56"
+    },
+    {
+      "path": "artifacts/private-room-start-reason-20261013/live/staged/wasm-review.js",
+      "bytes": 25332,
+      "sha256": "0ce3a0331d522ecf17bc41125ddd95929c13bab39f623806eec01ca8826fabbc"
+    },
+    {
+      "path": "artifacts/private-room-start-reason-20261013/live/staged/client.html",
+      "bytes": 726,
+      "sha256": "97b8d7dc1daed1fa51b1abb0d98816b1898a0f378d394bdea908b19d57125289"
+    },
+    {
+      "path": "artifacts/private-room-start-reason-20261013/live/staged/client.js",
+      "bytes": 26657,
+      "sha256": "39b3c8efe7bdc34ff8244b7909e51ea418409d564b167c68e2901eb8b889a00c"
+    },
+    {
+      "path": "artifacts/private-room-start-reason-20261013/live/staged/fifth-shot.js",
+      "bytes": 7227,
+      "sha256": "7080dcb130d2813117a90852fe51b4581e1fc81ee4cbcf5dc16a34599a9588ea"
+    },
+    {
+      "path": "artifacts/private-room-start-reason-20261013/live/captures/049ef9eba8829c12-1d1ab978ed5dbe099712375f315607eebd74ea99a003395f9c3c1b80071959ee.json",
+      "bytes": 9041,
+      "sha256": "1d1ab978ed5dbe099712375f315607eebd74ea99a003395f9c3c1b80071959ee"
+    },
+    {
+      "path": "artifacts/private-room-start-reason-20261013/live/captures/049ef9eba8829c12-3786fd5dab07650b3e802be1dbfddc3f0357d4406b2e2aab2ded89e8f598aa6e.json",
+      "bytes": 8474,
+      "sha256": "3786fd5dab07650b3e802be1dbfddc3f0357d4406b2e2aab2ded89e8f598aa6e"
+    },
+    {
+      "path": "artifacts/private-room-start-reason-20261013/live/captures/049ef9eba8829c12-5abad57628ae96827087e9a10177fe15a412f91c2040b4be07588dff953823ba.json",
+      "bytes": 8090,
+      "sha256": "5abad57628ae96827087e9a10177fe15a412f91c2040b4be07588dff953823ba"
+    },
+    {
+      "path": "artifacts/private-room-start-reason-20261013/live/captures/049ef9eba8829c12-5df3f3681370d4fa686bb5f8fb557ad70d47fb0e41db07fdf72de33d4d5481e5.json",
+      "bytes": 9172,
+      "sha256": "5df3f3681370d4fa686bb5f8fb557ad70d47fb0e41db07fdf72de33d4d5481e5"
+    },
+    {
+      "path": "artifacts/private-room-start-reason-20261013/live/captures/049ef9eba8829c12-774593b54efa8eddeb26536c077a0bb5d357cfe58d1738f12649d649e2c0398c.json",
+      "bytes": 9326,
+      "sha256": "774593b54efa8eddeb26536c077a0bb5d357cfe58d1738f12649d649e2c0398c"
+    },
+    {
+      "path": "artifacts/private-room-start-reason-20261013/live/captures/049ef9eba8829c12-9ee6b1c7236381049616c8ed74b98319ff14907800cc5e5b60c0a9e2638aa61f.json",
+      "bytes": 8612,
+      "sha256": "9ee6b1c7236381049616c8ed74b98319ff14907800cc5e5b60c0a9e2638aa61f"
+    },
+    {
+      "path": "artifacts/private-room-start-reason-20261013/live/captures/049ef9eba8829c12-bc124dc2802701970121a4340f4e6ebc6a47697c58e34342bd8dbae38932f513.json",
+      "bytes": 9255,
+      "sha256": "bc124dc2802701970121a4340f4e6ebc6a47697c58e34342bd8dbae38932f513"
+    },
+    {
+      "path": "artifacts/private-room-start-reason-20261013/live/screenshots/webgpu-signaling-limit-disposed.jpg",
+      "bytes": 114923,
+      "sha256": "f6d121b50703a79274364bd033144e32d1e1d751f654821717987a3f381586cf"
+    },
+    {
+      "path": "artifacts/private-room-start-reason-20261013/live/screenshots/webgpu-signaling-limit.jpg",
+      "bytes": 124290,
+      "sha256": "6469f6529b193ec5625a9c493e59102e02b24bc1d3ac1bf62c2788cf2a5615ce"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "scope": "Actual frozen validator functions and exact pure TypeScript transpilation only; no imports of server start, listener, browser, RTC or native execution",
+  "reports_validated": 21,
+  "modules_exactly_reproduced": 7,
+  "typescript": "5.9.3",
+  "report_private_fields": "Exact source whitelist excludes raw room IDs/codes/admin/tokens/private facts"
+}

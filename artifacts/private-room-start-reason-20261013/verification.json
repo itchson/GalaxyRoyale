@@ -1,0 +1,43 @@
+{
+  "head": "ec15de3abdbbf0a64c3f9f035636e65364469483",
+  "tests": {
+    "negative": 19,
+    "fifth": 10,
+    "wasm": 16,
+    "httpExcluded": 2,
+    "failures": 0
+  },
+  "scope": "Actual source/function regressions with declared controller boundary; no new HTTP/native/browser/RTC pass",
+  "pins": [
+    {
+      "path": "baseline.mjs",
+      "bytes": 1698,
+      "sha256": "ad3891b7131a2f42b559d991bf02f1af807d194565cdbee72810d6857724a2c3"
+    },
+    {
+      "path": "original-client.js",
+      "bytes": 26189,
+      "sha256": "378387289f01e3b1d8fe02fd2fdf1f444b0f66587f42127fa8a856eb1177d825"
+    },
+    {
+      "path": "original-regression.log",
+      "bytes": 703,
+      "sha256": "c3b73d4cc59e87b5482d4a39e9769c80f8c76dc436c190e8f0b2e6abaa288e1c"
+    },
+    {
+      "path": "focused-final.log",
+      "bytes": 3493,
+      "sha256": "83902303481332a563b1fea11008da0cb3d4f16dcd62785e9f64c9a6c2061b44"
+    },
+    {
+      "path": "existing-final.log",
+      "bytes": 2403,
+      "sha256": "79c984a7772701a22a404436d25f40c4d424e565ececd3550cc7e0cf89572222"
+    },
+    {
+      "path": "format.log",
+      "bytes": 193,
+      "sha256": "64333370d9e7b122eb2f03c870aa4fe09476329f15f825d8dd05bf03d239e75d"
+    }
+  ]
+}
