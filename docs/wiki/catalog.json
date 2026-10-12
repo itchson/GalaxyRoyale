@@ -3034,6 +3034,11 @@
           "path": "docs/PIXEL_SURFACES.md",
           "label": "Pixel normal and luminance contract",
           "role": "implementation and verification boundary"
+        },
+        {
+          "path": "artifacts/pixel-surface-20261012/STATUS.md",
+          "label": "Registered surface acceptance",
+          "role": "actual checks, captures and explicit remaining gates"
         }
       ],
       "related": [
@@ -3068,6 +3073,13 @@
           "kind": "runtime-screenshot",
           "provenance": "artifacts/collection-coop-20261012/README.md",
           "caption": "Actual integrated WebGPU ability detail with adjacent requirements and actions. This is a desktop presentation capture, not physical-phone or natural training evidence."
+        },
+        {
+          "path": "artifacts/pixel-surface-20261012/pan-material-webgpu-turn.jpg",
+          "label": "First mapped PAN starter in WebGPU",
+          "kind": "runtime-screenshot",
+          "provenance": "artifacts/pixel-surface-20261012/STATUS.md",
+          "caption": "Actual desktop material scene after real controller movement, at1280x720/zoom1.6. Healthy and turned appearance also inspected in WebGL2. This still does not demonstrate controlled directional depth, online guest visuals or performance."
         }
       ],
       "data": {

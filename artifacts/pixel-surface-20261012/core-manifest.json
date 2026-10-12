@@ -1,0 +1,104 @@
+{
+  "version": 1,
+  "sourceCommit": "253dde5456754b063e32ebc203534662f0bfddad",
+  "scope": "Portable native Surface packing/body extraction/CPU affine oracle only. No shader/browser/asset integration or guest material parity claim.",
+  "source": [
+    {
+      "path": "crates/engine_core/src/lib.rs",
+      "bytes": 817,
+      "sha256": "038be7ee4cc88522da460a740187880125172bcc402b2714c259142e938e1628"
+    },
+    {
+      "path": "crates/engine_core/src/pixels.rs",
+      "bytes": 21861,
+      "sha256": "b0ecc9e662f598de055e43517163917c182dcb1bee5300b0170f3b54c42559a8"
+    },
+    {
+      "path": "crates/engine_core/src/frame.rs",
+      "bytes": 26842,
+      "sha256": "596c9b6a8bffc17ed6ffc1cc716de5f3ce7e6bc29535a472dc20cbccd8263e13"
+    },
+    {
+      "path": "crates/engine_core/src/pixel_rig.rs",
+      "bytes": 14275,
+      "sha256": "7742edd9034d43fca600d35fd84db306d0cd66dbda9674e1b12efda1226cd986"
+    },
+    {
+      "path": "crates/engine_core/src/surface.rs",
+      "bytes": 4271,
+      "sha256": "f2b991908836836d7299289edf58accba8ea280ad037a38bbf3fcf949a0947d9"
+    },
+    {
+      "path": "crates/engine_core/src/surface_tests.rs",
+      "bytes": 15592,
+      "sha256": "b1c0755b7b305413f35d0ee5bb790d1325688ed1a622ab723f576ee1653f5755"
+    },
+    {
+      "path": "crates/engine_core/tests/boss_assets.rs",
+      "bytes": 6850,
+      "sha256": "77b632212c8ac67137750ce9018dec5f6cc50999e0ba932cd9da34b193c33f8c"
+    },
+    {
+      "path": "crates/engine_core/examples/engine_proof.rs",
+      "bytes": 5972,
+      "sha256": "53c41ab8bda0b835a62bc2c79767cd1117e3604d746fcc32cadefbe6adeebdf0"
+    }
+  ],
+  "files": [
+    {
+      "path": "HANDOFF.md",
+      "bytes": 5993,
+      "sha256": "35af0fe7dcb00b6f6f284b9b04487d94c3693ea89fab223fbf7372b743cea3a9"
+    },
+    {
+      "path": "all-final.log",
+      "bytes": 5746,
+      "sha256": "74eee037d394263c42e425cf56283ee399a949c08fc7533864d7f19d337d8289"
+    },
+    {
+      "path": "all-source-final.log",
+      "bytes": 5898,
+      "sha256": "a3eba7b4f73c48142085985441e3c762f670aea03b2b85a9a6754655b5236598"
+    },
+    {
+      "path": "clippy-native.log",
+      "bytes": 195,
+      "sha256": "a57cb6fb9287673b234178e3d585ab2d161c27dba128f8db34901eec9f12c1b9"
+    },
+    {
+      "path": "clippy-source-final.log",
+      "bytes": 195,
+      "sha256": "378c90e5c7e698d5ac78d7cc610e5f4dd8ef9826f75062e44cd0ba944ba10619"
+    },
+    {
+      "path": "clippy-wasm.log",
+      "bytes": 195,
+      "sha256": "e6feca7ff011578b21cd2c80cb162c5aa4c95f24e7f25be5d572bc2372632866"
+    },
+    {
+      "path": "fixture-export.log",
+      "bytes": 430,
+      "sha256": "8d833be8d1bcf3a7a0c39e0ab75ba3b94b835a8525f64df87fb244ad284f3b37"
+    },
+    {
+      "path": "fixtures/native-surface-reference.json",
+      "bytes": 13799,
+      "sha256": "895f10ec9d81545eec9e0cb6e6858e6af9c056afe1b5f11970ce902e0851820c"
+    },
+    {
+      "path": "fmt-final.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "focused-first.log",
+      "bytes": 1453,
+      "sha256": "99693d5a8660faa9082929d0d90095b0355c3f93d33aff93ce7e39be9787e35e"
+    },
+    {
+      "path": "freeze.mjs",
+      "bytes": 1617,
+      "sha256": "9711685d4c56e5b8065f9a1793caf681b2cf1f041c9a7d2b1b89a0e9bfd0d3ad"
+    }
+  ]
+}

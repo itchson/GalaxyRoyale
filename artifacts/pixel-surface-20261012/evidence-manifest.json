@@ -1,0 +1,258 @@
+{
+  "version": 1,
+  "compiledCommit": "1eca1c510325788624851a86527c2810b5e42df7",
+  "recordedAt": "2026-10-12T11:29:55.208Z",
+  "scope": "Actual native/source/build and desktop appearance; directional/performance gates explicit in STATUS.md",
+  "files": [
+    {
+      "path": "artifacts/pixel-surface-20261012/.gitattributes",
+      "bytes": 8,
+      "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/STATUS.md",
+      "bytes": 4306,
+      "sha256": "16d814942cd210f87cc17dea79d132e7e8817c47a0a9c12cabfb14dca2b16ed0"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/art-handoff.md",
+      "bytes": 5643,
+      "sha256": "c476c80d46f0454228d6b86866a4fdca7cb3b72f48ab4e3edfc93ad24c2550e7"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/art-visual-criteria-manifest.json",
+      "bytes": 5685,
+      "sha256": "45d2ce4f0f76525341c7ef047664d571dc82c7f6909b9ad58e41ce4d3d60a46b"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/art-visual-criteria.md",
+      "bytes": 6950,
+      "sha256": "f8fd1934a7f4f02418b6febfb77e26295328f3daa51b864ae0c20fd4d8f1e885"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/browser-art-manifest.json",
+      "bytes": 7586,
+      "sha256": "19c95ae948ac50e2f1506dd7bb8d76c1c6576352f270913b83dfe8107a41ae25"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/browser-art-review.md",
+      "bytes": 5635,
+      "sha256": "74740dab677f3eda0b514497bfb6a21c526a40f68aa6400d39cd557902f36f39"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/build-stamp.json",
+      "bytes": 317,
+      "sha256": "32166edd6752a01cd2d1546ac5f021b3083b152b167f25a818cbad995bd1d7a3"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/build.log",
+      "bytes": 1579,
+      "sha256": "8aacc3dfcea562acaf1f6adc35d14c9710f1034e7660b4abbfdf037a84dccdc0"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/clippy-wasm.log",
+      "bytes": 666,
+      "sha256": "b64ecc5b38dd87a9637aece8e5336ad17c24c14249e12a299f688bd65e3f560d"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/clippy.log",
+      "bytes": 366,
+      "sha256": "8036ee91b82e5c43c65b51b5ea38185fccea466991547e73b4b4e6da887e0564"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/core-handoff.md",
+      "bytes": 5993,
+      "sha256": "35af0fe7dcb00b6f6f284b9b04487d94c3693ea89fab223fbf7372b743cea3a9"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/core-manifest.json",
+      "bytes": 3307,
+      "sha256": "e841bb7ff2bf3f2df378c1b0a205f157e377362c16f8911671fb260a73e673f2"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/engine-shader-peer-review.md",
+      "bytes": 1290,
+      "sha256": "82bbc3fc46b51ef629e01461ac12d8944611dcdef12d410768e67609828607c7"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/fmt.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/helper-boss.log",
+      "bytes": 928,
+      "sha256": "c522f3b6aca590ac78ed3c5b49cdb9941698b0e4670653ab877af8b56c91afec"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/helper-native-preview.log",
+      "bytes": 730,
+      "sha256": "11abe1f24586d92aad32b8758e1af575a1982379d3919759cf4664bb112c7ca0"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/helper-pan.log",
+      "bytes": 732,
+      "sha256": "e8fc699b32e7554cd8c9d82536208099e6cbeb1adcc7eb6b9661e1e5f1416d4e"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/helper-pan256.log",
+      "bytes": 741,
+      "sha256": "e783f4d3e8236d1973e3334e718005fcb5954bf79432b7d993c84eb4776ca91a"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/integration-review-check.log",
+      "bytes": 479,
+      "sha256": "208c383a5320466f62958900be50ecc2e24537dbea881fd4c7c589b39e436cb7"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/integration-review.md",
+      "bytes": 3699,
+      "sha256": "b767dbdf5fc6787bb5fd9f6f67c44571be2f6e71f29d98550a62cef461a68cbe"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/integration-verification.json",
+      "bytes": 8704,
+      "sha256": "42dfd9958d0a343fe0670b2d23277efa7bfa63fedaa22f1e51d0b494c2d01cef"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/native-material-scene.json",
+      "bytes": 1450889,
+      "sha256": "9d5364a16d4d8e60afb1685a99cb48385822e1e082452f68e8b101a5e974794c"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/native-pack.log",
+      "bytes": 461,
+      "sha256": "6842917343ec98f4237dad9961333ed7fd90a50070f66d3ffb5f270a7d33b1c6"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/native-registration-handoff.md",
+      "bytes": 6299,
+      "sha256": "67b051162430109d5ba867bfdeaee8942dc41910ca788134094f15ba7e303a5b"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/native-registration-manifest.json",
+      "bytes": 5080,
+      "sha256": "71aa0d569a4f4840a2b9b7ba383fdf1712f901f941be59dccf80b1abaf3f5bc1"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/native-surface-reference.json",
+      "bytes": 13799,
+      "sha256": "895f10ec9d81545eec9e0cb6e6858e6af9c056afe1b5f11970ce902e0851820c"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/packed-art-review.md",
+      "bytes": 6531,
+      "sha256": "e76797d1980df90ac99ee7c8144c1b383016474a103f48d75b8d756ae251fb73"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/pan-material-proposal.json",
+      "bytes": 230089,
+      "sha256": "9c7ac008b3ba08cf0d4fcf40d7f36c7918bb7acfd81de4730eb2132a3c855662"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/pan-material-webgl2-a.jpg",
+      "bytes": 14666,
+      "sha256": "4dd082c92ecca57ceb17da680dd0553bf57614750d06e301b1dd74b179ead623"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/pan-material-webgl2-turn.jpg",
+      "bytes": 14553,
+      "sha256": "34bbc1c7cf152ed994808d0ce9afc10a65da2883c99ec7fd4af4858ac4ba2aea"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/pan-material-webgpu-a.jpg",
+      "bytes": 14835,
+      "sha256": "7f26227d16c50aa0a5157f6690382b4a3f05656528ff059bfb2717356bbb678b"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/pan-material-webgpu-b.jpg",
+      "bytes": 14801,
+      "sha256": "ad915b280b72c7237db66faac86b91a6adecfbd929a7b922f232dd4bf71ddfc8"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/pan-material-webgpu-turn.jpg",
+      "bytes": 14829,
+      "sha256": "193b832f76f5d08e889dad624b54649fc7348aab415d11cbdd0a0e4fc0a8f608"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/reference-demonstration.jpg",
+      "bytes": 100314,
+      "sha256": "cb3b801e0d6bc4f5a24bf4ff1711a3fc5cd36974cc32871c89bd692658a59bfa"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/registration-review-check.log",
+      "bytes": 380,
+      "sha256": "804b1388f104263a11457910187a6ce05c5e38dee7d7daff93e847b8090c409f"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/registration-review.md",
+      "bytes": 5654,
+      "sha256": "70c1c2a99e7d7111528f0fc2adbbebb0911e1da0e4870af199499f214fc27ced"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/registration-verification.json",
+      "bytes": 9391,
+      "sha256": "0afe5fe6e12b993717de851acaa53624ba1d2896bcc430ecb70c93e44156c897"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/repack.log",
+      "bytes": 502,
+      "sha256": "a4b4078e4bce8a84f713b59a1b24afd62fef46275734d8489f8b7920c36838ce"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/shader-validation.log",
+      "bytes": 1502,
+      "sha256": "22126830ce87096bc09395daf37bbb8d4adec4de8c8b4ea78e33bf3afd336383"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/shader-wire-review.md",
+      "bytes": 6810,
+      "sha256": "ee90174e067e5ece90545019e34914d05f61cb7f81a445fec5b8979ef4be9c76"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/shell-tests.log",
+      "bytes": 61832,
+      "sha256": "c219507c67bdb8c428544650485e3a97d66cb81c1324a509f9439667bd45a5da"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/spark-audio-source-proposal.md",
+      "bytes": 4679,
+      "sha256": "b2f8b80e8b64948ef4428e4289242d57f7ba482a43a461a67844ab7dd83cf597"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/wasm-contract.log",
+      "bytes": 1269,
+      "sha256": "a3e4855bbf7aa3165477e75f64310a110d87dcb4a4b3dbfd1c509e62b25e1730"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/webgl2-profile.txt",
+      "bytes": 1003,
+      "sha256": "6b64c0eb96ee33eb8ad59e59533c4b05a0ac2807058e00af9f15928c77bc6bee"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/webgl2-stats.txt",
+      "bytes": 552,
+      "sha256": "a05f23a14607e2935cb836d86786410f24b85dae58b940b1884bf94d7144d789"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/webgpu-controller-stats.txt",
+      "bytes": 555,
+      "sha256": "5580f039f76f67c6383fc82c436b8f9348da05ccc93d165a43bbcb34c8ab7e45"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/webgpu-profile.txt",
+      "bytes": 1006,
+      "sha256": "40a332566d6fa83c6bef8469cc42bad0eafa824790fb830982fae65a25a6406b"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/webgpu-stats.txt",
+      "bytes": 309,
+      "sha256": "40404ee3dbea2cd1d777d9fc2570bef85c93338bfdf90c62c27f03c16b745771"
+    },
+    {
+      "path": "artifacts/pixel-surface-20261012/workspace.log",
+      "bytes": 94688,
+      "sha256": "8ab84b31f00800f26a5ddd22956a4c1f1bdfb6dee0e426b18bb16f31fda8d1e1"
+    }
+  ]
+}

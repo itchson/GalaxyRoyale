@@ -1,0 +1,289 @@
+{
+  "version": 1,
+  "reviewed_at": "2026-10-12T10:02:10.198Z",
+  "source_commit": "650a546b8f8c07150d4df27f8de7cb1d4e13d4e8",
+  "build_stamp": {
+    "schemaVersion": 1,
+    "head": "650a546b8f8c07150d4df27f8de7cb1d4e13d4e8",
+    "branch": "codex/testing",
+    "sourceHash": "84bdd7de9392ed0aa48157fbba5658c874039dc260098274d1762fede0eb849a",
+    "packageHash": "c57689500c7acfccc1d70c401a9c572343505d16e1a952fe041a684284edd96f",
+    "builtAt": "2026-10-11T22:20:11.266Z"
+  },
+  "raw_captures_checked": 8,
+  "cumulative_checks": 22,
+  "unique_checks": 14,
+  "operations": [
+    {
+      "file": "captures/38a6875f7dd803e9-a0819ee4ef2239f9839eb8b33c2257037da2a5ffa90c2f2444948b508b0c6638.json",
+      "captured_at": "2026-10-12T09:54:36.295Z",
+      "checks": 5,
+      "added_checks": [
+        "two-native-games",
+        "independent-save-origins",
+        "distinct-local-profiles",
+        "native-owned-export",
+        "saves-unchanged"
+      ],
+      "phases": [
+        "idle",
+        "idle"
+      ],
+      "modes": [
+        "solo",
+        "solo"
+      ],
+      "commits": 0,
+      "ordinals": [
+        0,
+        0
+      ],
+      "session_distinct": null
+    },
+    {
+      "file": "captures/38a6875f7dd803e9-adc9df933da851359da14ea7fd7db9b25b39bd2af17e421b426c5e9554c616a6.json",
+      "captured_at": "2026-10-12T09:54:43.040Z",
+      "checks": 9,
+      "added_checks": [
+        "real-channel-ready",
+        "native-admission",
+        "native-complete-commit",
+        "native-owned-commit"
+      ],
+      "phases": [
+        "hosting",
+        "connected"
+      ],
+      "modes": [
+        "host",
+        "guest"
+      ],
+      "commits": 1,
+      "ordinals": [
+        0,
+        0
+      ],
+      "session_distinct": null
+    },
+    {
+      "file": "captures/38a6875f7dd803e9-ba5fae90e277e2fc2119d1167d348fdd7e429ca8bc343f74a305af62ff31d4a4.json",
+      "captured_at": "2026-10-12T09:55:14.797Z",
+      "checks": 11,
+      "added_checks": [
+        "saves-unchanged",
+        "native-fifth-shot"
+      ],
+      "phases": [
+        "hosting",
+        "connected"
+      ],
+      "modes": [
+        "host",
+        "guest"
+      ],
+      "commits": 417,
+      "ordinals": [
+        10,
+        10
+      ],
+      "session_distinct": null
+    },
+    {
+      "file": "captures/38a6875f7dd803e9-48952813a8e7b76521e7970a0f4edaf77ba0fcc75bf0aadff935265dbc975f5d.json",
+      "captured_at": "2026-10-12T09:55:48.344Z",
+      "checks": 13,
+      "added_checks": [
+        "host-end-restored",
+        "saves-unchanged"
+      ],
+      "phases": [
+        "ended",
+        "ended"
+      ],
+      "modes": [
+        "solo",
+        "solo"
+      ],
+      "commits": 896,
+      "ordinals": [
+        10,
+        10
+      ],
+      "session_distinct": null
+    },
+    {
+      "file": "captures/38a6875f7dd803e9-17e76f621a8299b3131bc9a6a92e675e619a5d22123d8691503c9eaad4fe818a.json",
+      "captured_at": "2026-10-12T09:56:12.090Z",
+      "checks": 18,
+      "added_checks": [
+        "real-channel-ready",
+        "native-admission",
+        "native-complete-commit",
+        "native-owned-commit",
+        "new-session"
+      ],
+      "phases": [
+        "hosting",
+        "connected"
+      ],
+      "modes": [
+        "host",
+        "guest"
+      ],
+      "commits": 899,
+      "ordinals": [
+        10,
+        10
+      ],
+      "session_distinct": true
+    },
+    {
+      "file": "captures/38a6875f7dd803e9-e64cb270b158e093437ac342419fb8ce4f2f39e0031e8026394b1b7d8f2523ce.json",
+      "captured_at": "2026-10-12T09:56:33.414Z",
+      "checks": 20,
+      "added_checks": [
+        "guest-leave-restored",
+        "saves-unchanged"
+      ],
+      "phases": [
+        "hosting",
+        "ended"
+      ],
+      "modes": [
+        "host",
+        "solo"
+      ],
+      "commits": 1196,
+      "ordinals": [
+        10,
+        10
+      ],
+      "session_distinct": true
+    },
+    {
+      "file": "captures/38a6875f7dd803e9-548e7f43ccb9ee55ec14ff660a8be7cb19c2f8f4a5150b51070869c600d6c312.json",
+      "captured_at": "2026-10-12T09:56:38.356Z",
+      "checks": 21,
+      "added_checks": [
+        "saves-unchanged"
+      ],
+      "phases": [
+        "hosting",
+        "ended"
+      ],
+      "modes": [
+        "host",
+        "solo"
+      ],
+      "commits": 1196,
+      "ordinals": [
+        10,
+        10
+      ],
+      "session_distinct": true
+    },
+    {
+      "file": "captures/38a6875f7dd803e9-17f6c6d724c723ea599900ab3ee81e1f7ce862e793f9957b9439f4caa60251f1.json",
+      "captured_at": "2026-10-12T09:56:43.990Z",
+      "checks": 22,
+      "added_checks": [
+        "dispose-clean"
+      ],
+      "phases": [
+        "disposed",
+        "disposed"
+      ],
+      "modes": [
+        "solo",
+        "solo"
+      ],
+      "commits": 1196,
+      "ordinals": [
+        10,
+        10
+      ],
+      "session_distinct": true
+    }
+  ],
+  "pins": [
+    {
+      "path": "captures/38a6875f7dd803e9-a0819ee4ef2239f9839eb8b33c2257037da2a5ffa90c2f2444948b508b0c6638.json",
+      "bytes": 7625,
+      "sha256": "a0819ee4ef2239f9839eb8b33c2257037da2a5ffa90c2f2444948b508b0c6638"
+    },
+    {
+      "path": "captures/38a6875f7dd803e9-adc9df933da851359da14ea7fd7db9b25b39bd2af17e421b426c5e9554c616a6.json",
+      "bytes": 7931,
+      "sha256": "adc9df933da851359da14ea7fd7db9b25b39bd2af17e421b426c5e9554c616a6"
+    },
+    {
+      "path": "captures/38a6875f7dd803e9-ba5fae90e277e2fc2119d1167d348fdd7e429ca8bc343f74a305af62ff31d4a4.json",
+      "bytes": 12557,
+      "sha256": "ba5fae90e277e2fc2119d1167d348fdd7e429ca8bc343f74a305af62ff31d4a4"
+    },
+    {
+      "path": "captures/38a6875f7dd803e9-48952813a8e7b76521e7970a0f4edaf77ba0fcc75bf0aadff935265dbc975f5d.json",
+      "bytes": 12688,
+      "sha256": "48952813a8e7b76521e7970a0f4edaf77ba0fcc75bf0aadff935265dbc975f5d"
+    },
+    {
+      "path": "captures/38a6875f7dd803e9-17e76f621a8299b3131bc9a6a92e675e619a5d22123d8691503c9eaad4fe818a.json",
+      "bytes": 13041,
+      "sha256": "17e76f621a8299b3131bc9a6a92e675e619a5d22123d8691503c9eaad4fe818a"
+    },
+    {
+      "path": "captures/38a6875f7dd803e9-e64cb270b158e093437ac342419fb8ce4f2f39e0031e8026394b1b7d8f2523ce.json",
+      "bytes": 13177,
+      "sha256": "e64cb270b158e093437ac342419fb8ce4f2f39e0031e8026394b1b7d8f2523ce"
+    },
+    {
+      "path": "captures/38a6875f7dd803e9-548e7f43ccb9ee55ec14ff660a8be7cb19c2f8f4a5150b51070869c600d6c312.json",
+      "bytes": 13244,
+      "sha256": "548e7f43ccb9ee55ec14ff660a8be7cb19c2f8f4a5150b51070869c600d6c312"
+    },
+    {
+      "path": "captures/38a6875f7dd803e9-17f6c6d724c723ea599900ab3ee81e1f7ce862e793f9957b9439f4caa60251f1.json",
+      "bytes": 13313,
+      "sha256": "17f6c6d724c723ea599900ab3ee81e1f7ce862e793f9957b9439f4caa60251f1"
+    },
+    {
+      "path": "crates/game_core/src/co_op.rs",
+      "bytes": 48785,
+      "sha256": "9abdb9b5c4e541e28f784e4630dd7439e9f1c301f28f0c8e3e9082e9b1330d29",
+      "source": "exact Root Git"
+    },
+    {
+      "path": "crates/game_core/src/co_op_loadout.rs",
+      "bytes": 8348,
+      "sha256": "13b360e880a52ec4e2f8b5ddb68fe2daa4a128d1c220f92409b0a9b4eb141666",
+      "source": "exact Root Git"
+    },
+    {
+      "path": "crates/game_core/src/identity.rs",
+      "bytes": 27690,
+      "sha256": "4fe94ee18b5c43713ae75c2d6f0307819f95438b8e74c175bfdf729af8cdbeca",
+      "source": "exact Root Git"
+    },
+    {
+      "path": "stage-manifest.json",
+      "bytes": 7150,
+      "sha256": "d4f77f50bb1ec93dcd142b208e4904f136802b7e609e7ed396e8a47ab78e7332"
+    },
+    {
+      "path": "verified-summary.json",
+      "bytes": 17068,
+      "sha256": "b0b5a17c46bc16993e986a5e97a7a260b0b7be12895d4f3f4ead9a3b0c438894"
+    },
+    {
+      "path": "cadence-webgl2.jpg",
+      "bytes": 110013,
+      "sha256": "1df4e6e8a45be8ecc3768ab9fb4fc4473597304d855baab8e351fc3a1025ee5e"
+    },
+    {
+      "path": "disposed-webgl2.jpg",
+      "bytes": 106788,
+      "sha256": "e4c764fbe34e38c7a122292896ab8b1b7146219ced5536e748f2f9654c31c37b"
+    }
+  ],
+  "scope": "Independent saved-artifact/hash/source-consumer review. Root performed browser execution; QA did not rerun native Games, RTC, browser or cleanup."
+}

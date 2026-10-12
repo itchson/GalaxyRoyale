@@ -1,0 +1,276 @@
+{
+  "version": 1,
+  "checked_at": "2026-10-12T11:11:29.894Z",
+  "source_commit": "a07919178e17ecd7e27e7316d451d3db0f4df690",
+  "specialist_manifest": {
+    "path": "C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/pan-material-render/manifest.json",
+    "bytes": 5080,
+    "sha256": "71aa0d569a4f4840a2b9b7ba383fdf1712f901f941be59dccf80b1abaf3f5bc1"
+  },
+  "source_pins": [
+    {
+      "path": "crates/game_core/src/lib.rs",
+      "bytes": 195971,
+      "sha256": "5c71f70efc2bb994d8124fc29d18efae48e5e729abe908f3393847a10ab056d3",
+      "kind": "exact Git blob"
+    },
+    {
+      "path": "crates/game_core/src/raicho_fine.rs",
+      "bytes": 17765,
+      "sha256": "a1bdb339a81ad0062d3b2bb53e26233a680e735a431982ec49ac748b4cc4c0c1",
+      "kind": "exact Git blob"
+    },
+    {
+      "path": "crates/game_core/src/raicho_fine_tests.rs",
+      "bytes": 21870,
+      "sha256": "1d62bf527fcb42c32c7c8ead6581e989cc42e72f632a2a894beb011d97bea699",
+      "kind": "exact Git blob"
+    },
+    {
+      "path": "crates/game_core/src/raicho_draw_tests.rs",
+      "bytes": 3883,
+      "sha256": "163f59b15dc302cf398c8c216e5a920246507b6953cfc191a02531a6b9534715",
+      "kind": "exact Git blob"
+    },
+    {
+      "path": "crates/game_core/src/co_op_replica.rs",
+      "bytes": 51287,
+      "sha256": "e7e6d93477b478dbca9c043db50a3a4737c07d8a845f115899a568bee1d35194",
+      "kind": "exact Git blob"
+    },
+    {
+      "path": "crates/game_core/src/co_op_replica_tests.rs",
+      "bytes": 31433,
+      "sha256": "765cb4736dcd4d16ccd44fa292eda658747d5f69850821f0105aa8eed84c239e",
+      "kind": "exact Git blob"
+    },
+    {
+      "path": "crates/game_core/src/pan_material_replica_tests.rs",
+      "bytes": 5494,
+      "sha256": "4aa83d13dbe54811fc838929fdff8785331008c8414e94731dffa9c393f4eed2",
+      "kind": "exact Git blob"
+    },
+    {
+      "path": "crates/game_core/src/material_scene.rs",
+      "bytes": 3972,
+      "sha256": "a05ee3742df8cdf13e426b52946bdddffd7fda15bcd9d13c69b08e2db537f846",
+      "kind": "exact Git blob"
+    },
+    {
+      "path": "crates/game_core/src/material_scene_tests.rs",
+      "bytes": 7343,
+      "sha256": "4b710a8379f66b014ba5c22f6031b93fb307190ec244e0db2d0270b76ca0d939",
+      "kind": "exact Git blob"
+    }
+  ],
+  "immutable_input_pins": [
+    {
+      "path": "assets/pixels/raicho-fine-detail/atlas.json",
+      "bytes": 230223,
+      "sha256": "319aa1fd8cf1112ef33addd06739063c72b92ecca5ca460afcc05aada77666be",
+      "kind": "exact immutable Git input"
+    },
+    {
+      "path": "assets/pixels/pan-surface/material.json",
+      "bytes": 33702,
+      "sha256": "903be7ec67fd236c9e2ec788a95da852779e22f05ad97dd2a066f1f9e77ea01c",
+      "kind": "exact immutable Git input"
+    }
+  ],
+  "evidence_pins": [
+    {
+      "path": "HANDOFF.md",
+      "bytes": 6299,
+      "sha256": "67b051162430109d5ba867bfdeaee8942dc41910ca788134094f15ba7e303a5b",
+      "kind": "actual specialist evidence"
+    },
+    {
+      "path": "clippy-native.log",
+      "bytes": 191,
+      "sha256": "b8b94d5d7aea34dffa3991283fcc043e30ba0e0e304b490319f141b332946215",
+      "kind": "actual specialist evidence"
+    },
+    {
+      "path": "clippy-source-final.log",
+      "bytes": 191,
+      "sha256": "f329315e0a13b41c5d15ec33c2246ba112982eb3c27a0ff4c7f9a439acaa09f3",
+      "kind": "actual specialist evidence"
+    },
+    {
+      "path": "clippy-wasm.log",
+      "bytes": 191,
+      "sha256": "330b60c16cb1726bf177f620aa4f790e6a6873e628e1e13aeb5d426d66cb4f81",
+      "kind": "actual specialist evidence"
+    },
+    {
+      "path": "core-final.log",
+      "bytes": 55658,
+      "sha256": "f5958a81bda4922d2c84dded81285dc2245e627d5047c4c173bd22b9b9381bdf",
+      "kind": "actual specialist evidence"
+    },
+    {
+      "path": "core-second.log",
+      "bytes": 54602,
+      "sha256": "132aa14357ee8fbd5f59ee9c8b076732459dd79a47dfc7e86d0e8421db3b3b97",
+      "kind": "actual specialist evidence"
+    },
+    {
+      "path": "core-source-final.log",
+      "bytes": 54655,
+      "sha256": "48a600926e20267bc070df80db9d3916002bf1e4fab3da4206fb3cfdd2ac1d76",
+      "kind": "actual specialist evidence"
+    },
+    {
+      "path": "fine-final.log",
+      "bytes": 1436,
+      "sha256": "6072b48fb4934a7131057a5c7c31e09a5dd531808615da5e08cb4a5a7397e183",
+      "kind": "actual specialist evidence"
+    },
+    {
+      "path": "fine-first.log",
+      "bytes": 2223,
+      "sha256": "bc57b3e65d80410f69d1062cecf8f4e6634fb17495ac4c97532e0705a2938b84",
+      "kind": "actual specialist evidence"
+    },
+    {
+      "path": "fine-material-final.log",
+      "bytes": 1767,
+      "sha256": "d7609c8ad73d92c43cad0f22c25ebc971fe57d9d651c3b20140e824df1b4b481",
+      "kind": "actual specialist evidence"
+    },
+    {
+      "path": "fine-second.log",
+      "bytes": 410,
+      "sha256": "52fd2623286cae1051ae6abdb9354beb01e60335263d2574ac9d6311a1f4ed97",
+      "kind": "actual specialist evidence"
+    },
+    {
+      "path": "fixture-export.log",
+      "bytes": 599,
+      "sha256": "b3ac4deff25e93eb892d005bd800cc28234b3ddcc07aab5495b40e57e556d1a6",
+      "kind": "actual specialist evidence"
+    },
+    {
+      "path": "fixtures/native-material-scene.json",
+      "bytes": 1450889,
+      "sha256": "9d5364a16d4d8e60afb1685a99cb48385822e1e082452f68e8b101a5e974794c",
+      "kind": "actual specialist evidence"
+    },
+    {
+      "path": "fmt-final.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "kind": "actual specialist evidence"
+    },
+    {
+      "path": "freeze.mjs",
+      "bytes": 2404,
+      "sha256": "2c7f8b786056dc2ba882a8800a32446071757fa5d1e96076ea919d35ea877439",
+      "kind": "actual specialist evidence"
+    },
+    {
+      "path": "material-first.log",
+      "bytes": 764,
+      "sha256": "92b7780ab13aa9f47828f9f32350e595cd0d5963cf435ad778a3a0b99f29d3fd",
+      "kind": "actual specialist evidence"
+    },
+    {
+      "path": "scene-final.log",
+      "bytes": 609,
+      "sha256": "376c3f2451c477ed80981feaa17d8e38f879a4c43d61de6f7f70d34673a6d211",
+      "kind": "actual specialist evidence"
+    },
+    {
+      "path": "scene-first.log",
+      "bytes": 727,
+      "sha256": "42d1573e7740fdde7577cf9e9f6e710dd8ce171031379271ff4713ed88eff561",
+      "kind": "actual specialist evidence"
+    }
+  ],
+  "root_head_at_reader_capture": "1eca1c510325788624851a86527c2810b5e42df7",
+  "root_reader_pins": [
+    {
+      "path": "crates/game_core/examples/game_proof.rs",
+      "bytes": 3829,
+      "sha256": "dda5eb7eda5629cd157a9538622b5119737e015415b3c31750048134c18db749",
+      "kind": "Root working source, not compiler execution"
+    },
+    {
+      "path": "scripts/asset-kikai-proof.rs",
+      "bytes": 6190,
+      "sha256": "d1b1974c73821beb5e87842f5e3b6e13303f31b95b20f73ddc3eafdbd6378143",
+      "kind": "Root working source, not compiler execution"
+    },
+    {
+      "path": "scripts/asset-native-preview/src/main.rs",
+      "bytes": 15513,
+      "sha256": "91a4a9403f44989d4b6763ea35ae9a68f1e6e73d2033d1c65fe6e8fed37db068",
+      "kind": "Root working source, not compiler execution"
+    },
+    {
+      "path": "scripts/asset-shooting-star-proof.rs",
+      "bytes": 4637,
+      "sha256": "e32b776cd43c30977aaa872a634ca521c309b3bc5105069cedea21725c3381e7",
+      "kind": "Root working source, not compiler execution"
+    },
+    {
+      "path": "scripts/qa/boss-live/src/main.rs",
+      "bytes": 12696,
+      "sha256": "1bb536301669229a0e4051922f51a36d750863fc1fc051c114291b485f81116a",
+      "kind": "Root working source, not compiler execution"
+    },
+    {
+      "path": "scripts/qa/pan-coop-dock/native/src/main.rs",
+      "bytes": 9606,
+      "sha256": "c2a5c995a195d89f55afccbd88db2fb252ddef47e42a90c20a386e899e28df17",
+      "kind": "Root working source, not compiler execution"
+    },
+    {
+      "path": "scripts/qa/pan-coop-dock/native256/src/main.rs",
+      "bytes": 14206,
+      "sha256": "9d215169bda539479d3116485feef0ab882ba1e75d135b9f843eb32bb6bfc047",
+      "kind": "Root working source, not compiler execution"
+    }
+  ],
+  "root_wrapper_pins": [
+    {
+      "path": "apps/game/src/main.ts",
+      "bytes": 89160,
+      "sha256": "8646d978198452eb6d4f2b85be6a9fe9ccfae53e2662c4392d4905ea79587b47",
+      "kind": "Root working source, source-reviewed acceptance wrapper"
+    },
+    {
+      "path": "crates/game_web/src/browser.rs",
+      "bytes": 40961,
+      "sha256": "816f07c1de69ec99c590013e00584c5c3d7e11777fc7fbf1ecdc13467ac8ece3",
+      "kind": "Root working source, source-reviewed acceptance wrapper"
+    }
+  ],
+  "existing_asset_inspection": {
+    "bytes": 962,
+    "sha256": "7eff7d705a9385a11226c8d975388e47b8e9246fd44d8e290c42455b2e276b79",
+    "commit": "817f99ba95daea4a9cad299383425c75fe535ae8"
+  },
+  "independently_checked_native_fixture": {
+    "path": "fixtures/native-material-scene.json",
+    "views": [
+      {
+        "tick": 0,
+        "time": 0,
+        "mapped_cells": 1867,
+        "signal_masks": 31,
+        "lights": 2
+      },
+      {
+        "tick": 120,
+        "time": 1.9999988079071045,
+        "mapped_cells": 1867,
+        "signal_masks": 31,
+        "lights": 2
+      }
+    ],
+    "profile_unchanged": true,
+    "world_entities": 1
+  },
+  "scope": "Independent immutable-source/evidence SHA and byte checks, Root reader capture, and previously committed material-data inspection. No builds, native test reruns, listener or browser actions."
+}

@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 898,
+  "revision": 915,
   "name": "Galaxy Royale",
   "phase": "Playable solo slice → content and validation",
-  "updatedAt": "2026-10-11T22:30:25.289Z",
+  "updatedAt": "2026-10-12T11:29:55.731Z",
   "tasks": [
     {
       "id": "studio",
@@ -7501,56 +7501,141 @@
     {
       "id": "task-74cc552e",
       "title": "Execute real RENKO fifth-shot browser cadence",
-      "description": "Fresh source-pinned owned stage and actual admitted-shot evidence; browser cadence remains pending.",
+      "description": "Actual source-pinned two-client RENKO loopback RTC first-session cadence and second-session lifecycle/disposal accepted. Broader multiplayer acceptance remains open.",
       "department": "QA",
       "owner": "/root/gameplay_design",
-      "status": "ready",
+      "status": "complete",
       "priority": "normal",
       "dependencies": [],
       "acceptanceCriteria": [
         {
-          "text": "Fresh source-pinned owned stage and actual admitted-shot evidence; browser cadence remains pending.",
-          "met": false
+          "text": "Fresh pinned owned stage and actual10-shot cadence at ordinals5/10, clean two-membership disposal, native/persisted save hashes unchanged.",
+          "met": true
         }
       ],
       "evidence": [
         {
-          "label": "Evidence and scope",
+          "label": "Actual scope and validation",
           "kind": "artifact",
-          "path": "artifacts/nova-stellar-20261012/fifth-qa-author-HANDOFF.md"
+          "path": "artifacts/renko-fifth-20261012/README.md"
         }
       ],
       "blocker": "",
-      "revision": 1,
+      "revision": 2,
       "createdAt": "2026-10-11T22:28:54.119Z",
-      "updatedAt": "2026-10-11T22:28:54.119Z"
+      "updatedAt": "2026-10-12T11:29:55.499Z"
     },
     {
       "id": "task-91ac3c7f",
       "title": "Validate seeded ringed-planet variations",
-      "description": "Actual target browser captures before deciding a bounded native variation. Source-only camera plan completed.",
+      "description": "Bounded whole-group seed tilt integrated; actual A/B before/after GL2 and after GPU composition reviewed. C baseline invalid; albedo diversity remains future work.",
       "department": "Art",
       "owner": "/root/production_research",
-      "status": "ready",
+      "status": "complete",
       "priority": "normal",
       "dependencies": [],
       "acceptanceCriteria": [
         {
-          "text": "Actual target browser captures before deciding a bounded native variation. Source-only camera plan completed.",
+          "text": "Actual target captures and bounded native group orientation with preserved budgets; scoped both-backend appearance review completed.",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual scope and validation",
+          "kind": "artifact",
+          "path": "artifacts/ring-orientation-20261012/README.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-11T22:28:54.152Z",
+      "updatedAt": "2026-10-12T11:29:55.577Z"
+    },
+    {
+      "id": "task-caef8e03",
+      "title": "Integrate packed normal and luminance surfaces in PAN gameplay",
+      "description": "First registered PAN normal/luminance engine capability integrated and compiled in both backends. Stronger directional art acceptance remains a separate open task.",
+      "department": "Engine",
+      "owner": "/root/engine_fx",
+      "status": "complete",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Validated native cached fields; actual damage holes and native replica reconstruction; bounded guarded scene and meaningful checks passed.",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual scope and validation",
+          "kind": "artifact",
+          "path": "artifacts/pixel-surface-20261012/native-registration-handoff.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-12T10:54:19.197Z",
+      "updatedAt": "2026-10-12T11:29:55.286Z"
+    },
+    {
+      "id": "task-a6fc205f",
+      "title": "Validate authored PAN surface quality under real moving lights",
+      "description": "Healthy and turned PAN appearance accepted in actual WebGPU/WebGL2 captures. Controlled directional normal-versus-flat/opposing-light comparison remains pending.",
+      "department": "Art",
+      "owner": "/root/art_rings",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Actual dual-backend healthy/turned appearance reviewed.",
+          "met": true
+        },
+        {
+          "text": "Controlled localized light/depth response, browser hole appearance and any claimed state-gated glow remain pending.",
           "met": false
         }
       ],
       "evidence": [
         {
-          "label": "Evidence and scope",
+          "label": "Actual scope and validation",
           "kind": "artifact",
-          "path": "artifacts/nova-stellar-20261012/ring-plan-PLAN.md"
+          "path": "artifacts/pixel-surface-20261012/browser-art-review.md"
         }
       ],
       "blocker": "",
-      "revision": 1,
-      "createdAt": "2026-10-11T22:28:54.152Z",
-      "updatedAt": "2026-10-11T22:28:54.152Z"
+      "revision": 2,
+      "createdAt": "2026-10-12T10:54:19.224Z",
+      "updatedAt": "2026-10-12T11:29:55.421Z"
+    },
+    {
+      "id": "task-f2e70555",
+      "title": "Review surface shader, registry and native/browser boundaries",
+      "description": "Independent exact source/ABI/affine/mask/lifecycle review and final runtime/package/evidence audit completed. QA did not rerun the browser.",
+      "department": "QA",
+      "owner": "/root/qa_coop",
+      "status": "complete",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Frozen source/inputs/native packets and final wrapper reviewed; actual integrated source/package/log/profile evidence independently verified.",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual scope and validation",
+          "kind": "artifact",
+          "path": "artifacts/pixel-surface-20261012/integration-review.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-12T10:54:19.251Z",
+      "updatedAt": "2026-10-12T11:29:55.347Z"
     }
   ],
   "reviews": [
@@ -9603,6 +9688,73 @@
           "label": "Fifth-shot helper",
           "kind": "artifact",
           "path": "artifacts/nova-stellar-20261012/fifth-qa-author-HANDOFF.md"
+        }
+      ]
+    },
+    {
+      "id": "review-a4e914d6",
+      "title": "Actual pixel surface contract discussion",
+      "body": "Root inspected the public normal/luminance demonstration and existing renderer. Engine provided portable packed surfaces preserving16-byte instances. QA identified inverse-transpose/Z-scale, oct sign-not-zero, unsigned slot masking and remote body metadata requirements. Art authored semantic height fields independent of painted brightness, with31 existing signal masks. Root added the shared WGSL decoder/lighting, native converter and strict Nova guards; real9lighting/Naga and22wire tests pass. Engine is implementing immutable rendering-only PAN reconstruction for guest parity instead of expanding body transfer. These are actual asynchronous written contributions, not a simulated live meeting.",
+      "author": "Root",
+      "source": "Actual normal/luminance reference, native work and specialist reviews",
+      "createdAt": "2026-10-12T10:54:19.281Z",
+      "participants": [
+        "Root",
+        "/root/engine_fx",
+        "/root/art_rings",
+        "/root/qa_coop"
+      ],
+      "taskIds": [
+        "task-caef8e03",
+        "task-a6fc205f",
+        "task-f2e70555"
+      ],
+      "evidence": [
+        {
+          "label": "Active implementation scope",
+          "kind": "artifact",
+          "path": "artifacts/pixel-surface-20261012/STATUS.md"
+        },
+        {
+          "label": "Independent draft review",
+          "kind": "artifact",
+          "path": "artifacts/pixel-surface-20261012/shader-wire-review.md"
+        }
+      ]
+    },
+    {
+      "id": "review-704b0a6a",
+      "title": "Registered PAN integration and actual desktop appearance review",
+      "body": "Actual asynchronous contributions: Engine implemented and tested immutable native maps/holes/replica reconstruction and reviewed Root affine shader read-only. Art reviewed exact packing then five real both-backend healthy/turned frames, accepting scoped appearance and leaving controlled directional depth open. QA verified source/ABI/word indices, final wrapper, source/package hashes and actual logs/profile texts. Root compiled, operated PWA update/controller/captures and restored normal home preview. No simulated meeting, independent browser rerun, benchmark or broad visual acceptance is claimed.",
+      "author": "Root",
+      "source": "Actual frozen specialist work, integrated checks and operated desktop captures",
+      "createdAt": "2026-10-12T11:29:55.607Z",
+      "participants": [
+        "Root",
+        "/root/engine_fx",
+        "/root/art_rings",
+        "/root/qa_coop"
+      ],
+      "taskIds": [
+        "task-caef8e03",
+        "task-a6fc205f",
+        "task-f2e70555"
+      ],
+      "evidence": [
+        {
+          "label": "Current honest acceptance scope",
+          "kind": "artifact",
+          "path": "artifacts/pixel-surface-20261012/STATUS.md"
+        },
+        {
+          "label": "Actual Art review",
+          "kind": "artifact",
+          "path": "artifacts/pixel-surface-20261012/browser-art-review.md"
+        },
+        {
+          "label": "Actual QA audit",
+          "kind": "artifact",
+          "path": "artifacts/pixel-surface-20261012/integration-review.md"
         }
       ]
     }
@@ -12562,6 +12714,76 @@
       ],
       "url": "http://league-final.localhost:4173/?qa=1&renderer=webgl2",
       "knownIssues": "Guest transient effects, rewards/missions, advanced abilities and remote eight-player/physical validation remain open. Ringed variation and moving continuity remain pending."
+    },
+    {
+      "id": "build-075a13d7",
+      "title": "First registered pixel normal/luminance material",
+      "body": "Normal dual-backend Rust/WASM build with native packed PAN fields and shared shader. Actual desktop healthy/turned appearance succeeds in both backends. Exact source/package recorded in build-stamp.json; this is not a physical performance pass.",
+      "author": "Root",
+      "source": "Actual frozen specialist work, integrated checks and operated desktop captures",
+      "createdAt": "2026-10-12T11:29:55.639Z",
+      "revision": "1eca1c510325788624851a86527c2810b5e42df7",
+      "evidence": [
+        {
+          "label": "Actual evidence and limitations",
+          "kind": "artifact",
+          "path": "artifacts/pixel-surface-20261012/STATUS.md"
+        },
+        {
+          "label": "Normal build identity",
+          "kind": "artifact",
+          "path": "artifacts/pixel-surface-20261012/build-stamp.json"
+        },
+        {
+          "label": "Actual checks",
+          "kind": "artifact",
+          "path": "artifacts/pixel-surface-20261012/integration-review.md"
+        }
+      ],
+      "checks": [
+        {
+          "name": "876 native /14 explicit exporters ignored",
+          "result": "pass"
+        },
+        {
+          "name": "564 shell /3 skipped",
+          "result": "pass"
+        },
+        {
+          "name": "strict native/WASM Clippy and fmt",
+          "result": "pass"
+        },
+        {
+          "name": "normal dual-backend build and TypeScript",
+          "result": "pass"
+        },
+        {
+          "name": "50 headless WASM save cases",
+          "result": "pass"
+        },
+        {
+          "name": "exact native material reproduction",
+          "result": "pass"
+        },
+        {
+          "name": "actual WebGPU/WebGL2 healthy/turned appearance",
+          "result": "pass"
+        },
+        {
+          "name": "controlled directional/flat depth comparison",
+          "result": "not_run"
+        },
+        {
+          "name": "real RTC Nova/material visual acceptance",
+          "result": "not_run"
+        },
+        {
+          "name": "physical-device/30-minute performance soak",
+          "result": "not_run"
+        }
+      ],
+      "url": "http://127.0.0.1:4173/?qa=1",
+      "knownIssues": "First PAN material only; controlled directional/depth visual gate and broader assets/performance remain pending. Captured1FPS counters are not benchmark acceptance."
     }
   ],
   "feedback": [],
@@ -21545,6 +21767,176 @@
       "author": "Root",
       "source": "Actual next assignments and frozen warm audit",
       "createdAt": "2026-10-11T22:30:25.289Z"
+    },
+    {
+      "id": "a7a358d4-3cff-481c-a4f4-da953ebd25a6",
+      "revision": 899,
+      "kind": "task.create",
+      "itemId": "task-caef8e03",
+      "title": "Integrate packed normal and luminance surfaces in PAN gameplay",
+      "author": "Root",
+      "source": "Actual normal/luminance reference, native work and specialist reviews",
+      "createdAt": "2026-10-12T10:54:19.197Z"
+    },
+    {
+      "id": "f0bb4b2f-4eaf-4d38-8d54-3880e34baea0",
+      "revision": 900,
+      "kind": "task.create",
+      "itemId": "task-a6fc205f",
+      "title": "Validate authored PAN surface quality under real moving lights",
+      "author": "Root",
+      "source": "Actual normal/luminance reference, native work and specialist reviews",
+      "createdAt": "2026-10-12T10:54:19.224Z"
+    },
+    {
+      "id": "42df2217-aa4a-4267-abd0-a7b8f595e372",
+      "revision": 901,
+      "kind": "task.create",
+      "itemId": "task-f2e70555",
+      "title": "Review surface shader, registry and native/browser boundaries",
+      "author": "Root",
+      "source": "Actual normal/luminance reference, native work and specialist reviews",
+      "createdAt": "2026-10-12T10:54:19.251Z"
+    },
+    {
+      "id": "11d61808-6bc4-4349-bfcf-ea841edf5c9e",
+      "revision": 902,
+      "kind": "review",
+      "itemId": "review-a4e914d6",
+      "title": "Actual pixel surface contract discussion",
+      "author": "Root",
+      "source": "Actual normal/luminance reference, native work and specialist reviews",
+      "createdAt": "2026-10-12T10:54:19.281Z"
+    },
+    {
+      "id": "b37ac8a5-4830-40be-82cc-874b0d566751",
+      "revision": 903,
+      "kind": "run",
+      "itemId": "run-80ac4b27",
+      "title": "Engine specialist · running",
+      "author": "Root",
+      "source": "Actual normal/luminance reference, native work and specialist reviews",
+      "createdAt": "2026-10-12T10:54:19.312Z"
+    },
+    {
+      "id": "789cf852-335e-4fc5-97a4-1e6c71676eba",
+      "revision": 904,
+      "kind": "run",
+      "itemId": "run-f1b8afc3",
+      "title": "Art specialist · running",
+      "author": "Root",
+      "source": "Actual normal/luminance reference, native work and specialist reviews",
+      "createdAt": "2026-10-12T10:54:19.344Z"
+    },
+    {
+      "id": "3ca3115a-361b-4dde-9ebe-0265efae6629",
+      "revision": 905,
+      "kind": "run",
+      "itemId": "run-96406a51",
+      "title": "QA specialist · running",
+      "author": "Root",
+      "source": "Actual normal/luminance reference, native work and specialist reviews",
+      "createdAt": "2026-10-12T10:54:19.375Z"
+    },
+    {
+      "id": "f625dbb4-8b9e-4f12-9f18-81037646d141",
+      "revision": 906,
+      "kind": "task.update",
+      "itemId": "task-caef8e03",
+      "title": "Integrate packed normal and luminance surfaces in PAN gameplay",
+      "author": "Root",
+      "source": "Actual frozen specialist work, integrated checks and operated desktop captures",
+      "createdAt": "2026-10-12T11:29:55.286Z"
+    },
+    {
+      "id": "802941a4-8afa-410d-b4d9-e50bcbe70b9c",
+      "revision": 907,
+      "kind": "task.update",
+      "itemId": "task-f2e70555",
+      "title": "Review surface shader, registry and native/browser boundaries",
+      "author": "Root",
+      "source": "Actual frozen specialist work, integrated checks and operated desktop captures",
+      "createdAt": "2026-10-12T11:29:55.347Z"
+    },
+    {
+      "id": "de03633e-4e71-427c-ab77-db4eb271994c",
+      "revision": 908,
+      "kind": "task.update",
+      "itemId": "task-a6fc205f",
+      "title": "Validate authored PAN surface quality under real moving lights",
+      "author": "Root",
+      "source": "Actual frozen specialist work, integrated checks and operated desktop captures",
+      "createdAt": "2026-10-12T11:29:55.421Z"
+    },
+    {
+      "id": "5ab61b3f-d489-477c-a8d4-8ec9a8870916",
+      "revision": 909,
+      "kind": "task.update",
+      "itemId": "task-74cc552e",
+      "title": "Execute real RENKO fifth-shot browser cadence",
+      "author": "Root",
+      "source": "Actual frozen specialist work, integrated checks and operated desktop captures",
+      "createdAt": "2026-10-12T11:29:55.499Z"
+    },
+    {
+      "id": "a47915f3-edc7-48a5-832a-a74ca90db4d8",
+      "revision": 910,
+      "kind": "task.update",
+      "itemId": "task-91ac3c7f",
+      "title": "Validate seeded ringed-planet variations",
+      "author": "Root",
+      "source": "Actual frozen specialist work, integrated checks and operated desktop captures",
+      "createdAt": "2026-10-12T11:29:55.577Z"
+    },
+    {
+      "id": "82c4ca95-bda2-4461-b300-e9b315a5c09a",
+      "revision": 911,
+      "kind": "review",
+      "itemId": "review-704b0a6a",
+      "title": "Registered PAN integration and actual desktop appearance review",
+      "author": "Root",
+      "source": "Actual frozen specialist work, integrated checks and operated desktop captures",
+      "createdAt": "2026-10-12T11:29:55.607Z"
+    },
+    {
+      "id": "5ac25796-6efb-48b5-93e3-4e5f39316e46",
+      "revision": 912,
+      "kind": "build",
+      "itemId": "build-075a13d7",
+      "title": "First registered pixel normal/luminance material",
+      "author": "Root",
+      "source": "Actual frozen specialist work, integrated checks and operated desktop captures",
+      "createdAt": "2026-10-12T11:29:55.639Z"
+    },
+    {
+      "id": "86729bc6-8c29-4102-b749-38c581ffbc53",
+      "revision": 913,
+      "kind": "run",
+      "itemId": "run-6a738b07",
+      "title": "Engine specialist · completed",
+      "author": "Root",
+      "source": "Actual frozen specialist work, integrated checks and operated desktop captures",
+      "createdAt": "2026-10-12T11:29:55.670Z"
+    },
+    {
+      "id": "a18c9217-e4bb-4f57-a35e-e26ab91070b7",
+      "revision": 914,
+      "kind": "run",
+      "itemId": "run-d45806b6",
+      "title": "Art specialist · completed",
+      "author": "Root",
+      "source": "Actual frozen specialist work, integrated checks and operated desktop captures",
+      "createdAt": "2026-10-12T11:29:55.700Z"
+    },
+    {
+      "id": "fbf3ca8a-9ff6-42eb-8fbe-ccea4323631b",
+      "revision": 915,
+      "kind": "run",
+      "itemId": "run-ff8c480b",
+      "title": "QA specialist · completed",
+      "author": "Root",
+      "source": "Actual frozen specialist work, integrated checks and operated desktop captures",
+      "createdAt": "2026-10-12T11:29:55.731Z"
     }
   ],
   "runRecords": [
@@ -29784,6 +30176,138 @@
       "author": "Root",
       "source": "Actual next assignments and frozen warm audit",
       "createdAt": "2026-10-11T22:30:25.289Z"
+    },
+    {
+      "id": "run-80ac4b27",
+      "title": "Engine specialist · running",
+      "agentId": "/root/engine_fx",
+      "agentLabel": "Engine specialist",
+      "state": "running",
+      "observedAt": "2026-10-12T10:54:19.295Z",
+      "taskIds": [
+        "task-caef8e03"
+      ],
+      "summary": "Actual assigned current normal/luminance integration; source/authoring contributions completed, final registered render and backend gates remain open.",
+      "evidence": [
+        {
+          "label": "Actual integration scope",
+          "kind": "artifact",
+          "path": "artifacts/pixel-surface-20261012/STATUS.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual normal/luminance reference, native work and specialist reviews",
+      "createdAt": "2026-10-12T10:54:19.312Z"
+    },
+    {
+      "id": "run-f1b8afc3",
+      "title": "Art specialist · running",
+      "agentId": "/root/art_rings",
+      "agentLabel": "Art specialist",
+      "state": "running",
+      "observedAt": "2026-10-12T10:54:19.327Z",
+      "taskIds": [
+        "task-a6fc205f"
+      ],
+      "summary": "Actual assigned current normal/luminance integration; source/authoring contributions completed, final registered render and backend gates remain open.",
+      "evidence": [
+        {
+          "label": "Actual integration scope",
+          "kind": "artifact",
+          "path": "artifacts/pixel-surface-20261012/STATUS.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual normal/luminance reference, native work and specialist reviews",
+      "createdAt": "2026-10-12T10:54:19.344Z"
+    },
+    {
+      "id": "run-96406a51",
+      "title": "QA specialist · running",
+      "agentId": "/root/qa_coop",
+      "agentLabel": "QA specialist",
+      "state": "running",
+      "observedAt": "2026-10-12T10:54:19.357Z",
+      "taskIds": [
+        "task-f2e70555"
+      ],
+      "summary": "Actual assigned current normal/luminance integration; source/authoring contributions completed, final registered render and backend gates remain open.",
+      "evidence": [
+        {
+          "label": "Actual integration scope",
+          "kind": "artifact",
+          "path": "artifacts/pixel-surface-20261012/STATUS.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual normal/luminance reference, native work and specialist reviews",
+      "createdAt": "2026-10-12T10:54:19.375Z"
+    },
+    {
+      "id": "run-6a738b07",
+      "title": "Engine specialist · completed",
+      "agentId": "/root/engine_fx",
+      "agentLabel": "Engine specialist",
+      "state": "completed",
+      "observedAt": "2026-10-12T11:29:55.658Z",
+      "taskIds": [
+        "task-caef8e03"
+      ],
+      "summary": "Actual bounded specialist contribution completed. Open broader/controlled acceptance is retained on the board; this record does not claim a continuously running worker.",
+      "evidence": [
+        {
+          "label": "Actual completed contribution",
+          "kind": "artifact",
+          "path": "artifacts/pixel-surface-20261012/native-registration-handoff.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual frozen specialist work, integrated checks and operated desktop captures",
+      "createdAt": "2026-10-12T11:29:55.670Z"
+    },
+    {
+      "id": "run-d45806b6",
+      "title": "Art specialist · completed",
+      "agentId": "/root/art_rings",
+      "agentLabel": "Art specialist",
+      "state": "completed",
+      "observedAt": "2026-10-12T11:29:55.683Z",
+      "taskIds": [
+        "task-a6fc205f"
+      ],
+      "summary": "Actual bounded specialist contribution completed. Open broader/controlled acceptance is retained on the board; this record does not claim a continuously running worker.",
+      "evidence": [
+        {
+          "label": "Actual completed contribution",
+          "kind": "artifact",
+          "path": "artifacts/pixel-surface-20261012/browser-art-review.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual frozen specialist work, integrated checks and operated desktop captures",
+      "createdAt": "2026-10-12T11:29:55.700Z"
+    },
+    {
+      "id": "run-ff8c480b",
+      "title": "QA specialist · completed",
+      "agentId": "/root/qa_coop",
+      "agentLabel": "QA specialist",
+      "state": "completed",
+      "observedAt": "2026-10-12T11:29:55.713Z",
+      "taskIds": [
+        "task-f2e70555"
+      ],
+      "summary": "Actual bounded specialist contribution completed. Open broader/controlled acceptance is retained on the board; this record does not claim a continuously running worker.",
+      "evidence": [
+        {
+          "label": "Actual completed contribution",
+          "kind": "artifact",
+          "path": "artifacts/pixel-surface-20261012/integration-review.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual frozen specialist work, integrated checks and operated desktop captures",
+      "createdAt": "2026-10-12T11:29:55.731Z"
     }
   ],
   "phaseDescription": "Desktop-first Rust/WASM solo game and local Studio are implemented. Reviewed occupied-cell art, reproducible conversion, responsive native settings/icons and minimap, strict GitHub integration gates and source-backed Dev Bible are integrated. Natural campaign balance, human listening, owner-private update lifecycle and physical phones remain separate pending gates."

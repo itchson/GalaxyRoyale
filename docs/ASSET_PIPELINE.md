@@ -2,6 +2,8 @@
 
 Galaxy Royale draws occupied engine cells. PNG files are authoring inputs and review outputs; importing a pack does not introduce textured sprites or make generated concept art an accepted game asset.
 
+Optional per-cell surface maps follow the same reviewed-source pipeline. Semantic heights and sparse signal masks are packed through the real Rust encoder, bound to the original atlas, and cached for matching native assets. See [PIXEL_SURFACES.md](PIXEL_SURFACES.md) for the normal/luminance contract and current acceptance boundaries.
+
 `scripts/asset-pack.py` is an offline, deterministic pack/unpack/validation tool. Exact conversion is the default: native grid, binary alpha, all components, original dimensions and exact colors. The current game/UI atlas readers keep their version-1 ABI: `palette` contains little-endian u32 RGBA, index0 is transparent, and each named sprite has width, height and row-major indices. Default exact packs have 64 entries, padding unused entries with a duplicate opaque color. A smaller/different palette is possible explicitly, but each runtime consumer's existing limits still apply. The game loader accepts sprites up to128; the UI loader supports its existing larger logo. The packer's generic256-side limit does not override either consumer.
 
 ## Fresh checkout

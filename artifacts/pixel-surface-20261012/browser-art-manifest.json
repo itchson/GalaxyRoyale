@@ -1,0 +1,162 @@
+{
+  "root_source": "1eca1c510325788624851a86527c2810b5e42df7",
+  "scope": "actual dual-backend healthy PAN appearance; final controlled directional-normal art gate remains open",
+  "pins": [
+    {
+      "path": "actual-Root/pan-material-webgpu-a.jpg",
+      "bytes": 14835,
+      "sha256": "7f26227d16c50aa0a5157f6690382b4a3f05656528ff059bfb2717356bbb678b",
+      "kind": "actual-supplied-Root-browser-or-console-file",
+      "original_path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\pixel-surface-20261012\\pan-material-webgpu-a.jpg"
+    },
+    {
+      "path": "actual-Root/pan-material-webgpu-b.jpg",
+      "bytes": 14801,
+      "sha256": "ad915b280b72c7237db66faac86b91a6adecfbd929a7b922f232dd4bf71ddfc8",
+      "kind": "actual-supplied-Root-browser-or-console-file",
+      "original_path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\pixel-surface-20261012\\pan-material-webgpu-b.jpg"
+    },
+    {
+      "path": "actual-Root/pan-material-webgpu-turn.jpg",
+      "bytes": 14829,
+      "sha256": "193b832f76f5d08e889dad624b54649fc7348aab415d11cbdd0a0e4fc0a8f608",
+      "kind": "actual-supplied-Root-browser-or-console-file",
+      "original_path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\pixel-surface-20261012\\pan-material-webgpu-turn.jpg"
+    },
+    {
+      "path": "actual-Root/pan-material-webgl2-a.jpg",
+      "bytes": 14666,
+      "sha256": "4dd082c92ecca57ceb17da680dd0553bf57614750d06e301b1dd74b179ead623",
+      "kind": "actual-supplied-Root-browser-or-console-file",
+      "original_path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\pixel-surface-20261012\\pan-material-webgl2-a.jpg"
+    },
+    {
+      "path": "actual-Root/pan-material-webgl2-turn.jpg",
+      "bytes": 14553,
+      "sha256": "34bbc1c7cf152ed994808d0ce9afc10a65da2883c99ec7fd4af4858ac4ba2aea",
+      "kind": "actual-supplied-Root-browser-or-console-file",
+      "original_path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\pixel-surface-20261012\\pan-material-webgl2-turn.jpg"
+    },
+    {
+      "path": "actual-Root/webgpu-stats.txt",
+      "bytes": 309,
+      "sha256": "40404ee3dbea2cd1d777d9fc2570bef85c93338bfdf90c62c27f03c16b745771",
+      "kind": "actual-supplied-Root-browser-or-console-file",
+      "original_path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\pixel-surface-20261012\\webgpu-stats.txt"
+    },
+    {
+      "path": "actual-Root/webgpu-controller-stats.txt",
+      "bytes": 555,
+      "sha256": "5580f039f76f67c6383fc82c436b8f9348da05ccc93d165a43bbcb34c8ab7e45",
+      "kind": "actual-supplied-Root-browser-or-console-file",
+      "original_path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\pixel-surface-20261012\\webgpu-controller-stats.txt"
+    },
+    {
+      "path": "actual-Root/webgl2-stats.txt",
+      "bytes": 552,
+      "sha256": "a05f23a14607e2935cb836d86786410f24b85dae58b940b1884bf94d7144d789",
+      "kind": "actual-supplied-Root-browser-or-console-file",
+      "original_path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\pixel-surface-20261012\\webgl2-stats.txt"
+    },
+    {
+      "path": "actual-Root/webgpu-profile.txt",
+      "bytes": 1006,
+      "sha256": "40a332566d6fa83c6bef8469cc42bad0eafa824790fb830982fae65a25a6406b",
+      "kind": "actual-supplied-Root-browser-or-console-file",
+      "original_path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\pixel-surface-20261012\\webgpu-profile.txt"
+    },
+    {
+      "path": "actual-Root/webgl2-profile.txt",
+      "bytes": 1003,
+      "sha256": "6b64c0eb96ee33eb8ad59e59533c4b05a0ac2807058e00af9f15928c77bc6bee",
+      "kind": "actual-supplied-Root-browser-or-console-file",
+      "original_path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\pixel-surface-20261012\\webgl2-profile.txt"
+    },
+    {
+      "path": "actual-Root/build-stamp.json",
+      "bytes": 317,
+      "sha256": "32166edd6752a01cd2d1546ac5f021b3083b152b167f25a818cbad995bd1d7a3",
+      "kind": "actual-supplied-Root-browser-or-console-file",
+      "original_path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\artifacts\\pixel-surface-20261012\\build-stamp.json"
+    },
+    {
+      "path": "source-pins/crates/game_core/src/material_scene.rs",
+      "bytes": 3972,
+      "sha256": "a05ee3742df8cdf13e426b52946bdddffd7fda15bcd9d13c69b08e2db537f846",
+      "kind": "committed-source",
+      "revision": "1eca1c510325788624851a86527c2810b5e42df7",
+      "git_path": "crates/game_core/src/material_scene.rs"
+    },
+    {
+      "path": "source-pins/crates/game_core/src/raicho_fine.rs",
+      "bytes": 17765,
+      "sha256": "a1bdb339a81ad0062d3b2bb53e26233a680e735a431982ec49ac748b4cc4c0c1",
+      "kind": "committed-source",
+      "revision": "1eca1c510325788624851a86527c2810b5e42df7",
+      "git_path": "crates/game_core/src/raicho_fine.rs"
+    },
+    {
+      "path": "source-pins/crates/game_web/src/pixel.wgsl",
+      "bytes": 5824,
+      "sha256": "55643341b87629e739c11f1d339913fb31438ca31468f87a61dae277b13dd550",
+      "kind": "committed-source",
+      "revision": "1eca1c510325788624851a86527c2810b5e42df7",
+      "git_path": "crates/game_web/src/pixel.wgsl"
+    },
+    {
+      "path": "source-pins/assets/pixels/pan-surface/material.json",
+      "bytes": 33702,
+      "sha256": "903be7ec67fd236c9e2ec788a95da852779e22f05ad97dd2a066f1f9e77ea01c",
+      "kind": "committed-source",
+      "revision": "1eca1c510325788624851a86527c2810b5e42df7",
+      "git_path": "assets/pixels/pan-surface/material.json"
+    },
+    {
+      "path": "source-pins/assets/pixels/raicho-fine-detail/atlas.json",
+      "bytes": 230223,
+      "sha256": "319aa1fd8cf1112ef33addd06739063c72b92ecca5ca460afcc05aada77666be",
+      "kind": "committed-source",
+      "revision": "1eca1c510325788624851a86527c2810b5e42df7",
+      "git_path": "assets/pixels/raicho-fine-detail/atlas.json"
+    },
+    {
+      "path": "prior-provenance/author-handoff.md",
+      "bytes": 5643,
+      "sha256": "c476c80d46f0454228d6b86866a4fdca7cb3b72f48ab4e3edfc93ad24c2550e7",
+      "kind": "prior-authored-frozen-evidence",
+      "original_path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\pan-material-multiplier-final\\HANDOFF.md"
+    },
+    {
+      "path": "prior-provenance/packed-review.md",
+      "bytes": 6531,
+      "sha256": "e76797d1980df90ac99ee7c8144c1b383016474a103f48d75b8d756ae251fb73",
+      "kind": "prior-authored-frozen-evidence",
+      "original_path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\pan-packed-material-review\\REVIEW.md"
+    },
+    {
+      "path": "prior-provenance/visual-criteria.md",
+      "bytes": 6950,
+      "sha256": "f8fd1934a7f4f02418b6febfb77e26295328f3daa51b864ae0c20fd4d8f1e885",
+      "kind": "prior-authored-frozen-evidence",
+      "original_path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-pixel-art\\galaxy-royale\\work\\material-visual-review-plan\\REVIEW.md"
+    },
+    {
+      "path": "REVIEW.md",
+      "bytes": 5635,
+      "sha256": "74740dab677f3eda0b514497bfb6a21c526a40f68aa6400d39cd557902f36f39",
+      "kind": "authored-review-or-verifier"
+    },
+    {
+      "path": "freeze.py",
+      "bytes": 2269,
+      "sha256": "b475effe8b995cc1b49ebf0a2327cc51fc964176eb28bbe7b5d5561989453676",
+      "kind": "authored-review-or-verifier"
+    },
+    {
+      "path": "verify.py",
+      "bytes": 700,
+      "sha256": "47a2e1f5bca1939ceefa627ee1ae843cb502d6a1071980cc2beebd373c3aea35",
+      "kind": "authored-review-or-verifier"
+    }
+  ]
+}
