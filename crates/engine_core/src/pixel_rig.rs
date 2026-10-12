@@ -130,6 +130,21 @@ impl PixelRig {
         parent: AffineTransform,
         state: PixelRigState,
     ) -> usize {
+        self.draw_affine_with_metadata(frame, damaged_body, parent, state, |_| {
+            crate::ObjectMeta::default()
+        })
+    }
+
+    /// Same occupied artwork and role transforms, with explicitly typed parallel
+    /// presentation metadata. The role adapter owns receiver-plane selection.
+    pub fn draw_affine_with_metadata(
+        &self,
+        frame: &mut FrameBuilder,
+        damaged_body: &PixelBody,
+        parent: AffineTransform,
+        state: PixelRigState,
+        mut metadata: impl FnMut(usize) -> crate::ObjectMeta,
+    ) -> usize {
         if damaged_body.width != self.width || damaged_body.height != self.height {
             return 0;
         }
@@ -194,11 +209,9 @@ impl PixelRig {
                         damaged_body.surface_index(cell_index),
                     )
                 });
-            emitted += frame.push_cells_affine_surface_material(
-                parent.compose(placement),
-                material,
-                cells,
-            );
+            emitted += frame.with_object_meta(metadata(index), |frame| {
+                frame.push_cells_affine_surface_material(parent.compose(placement), material, cells)
+            });
         }
         emitted
     }

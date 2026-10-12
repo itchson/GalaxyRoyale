@@ -4,6 +4,31 @@ pub const MAX_LIGHTS: usize = 8;
 pub const RASTER_OFFSET: usize = 8 + MAX_LIGHTS * 8;
 pub const UNIFORM_FLOATS: usize = RASTER_OFFSET + 4;
 
+/// Exact shared admission used by the lighting and shadow-key packers.
+pub(crate) fn packed_light(light: &LightSource, camera: [f32; 2]) -> Option<[f32; 8]> {
+    if !light
+        .position
+        .iter()
+        .chain(light.color.iter())
+        .chain([&light.radius, &light.intensity])
+        .all(|v| v.is_finite())
+        || !camera.iter().all(|v| v.is_finite())
+    {
+        return None;
+    }
+    let radius = light.radius.clamp(1.0, 240.0);
+    Some([
+        light.position[0] - camera[0],
+        light.position[1] - camera[1],
+        radius,
+        light.intensity.clamp(0.0, 1.8),
+        light.color[0].clamp(0.0, 1.0),
+        light.color[1].clamp(0.0, 1.0),
+        light.color[2].clamp(0.0, 1.0),
+        radius * 0.35,
+    ])
+}
+
 /// Logical UI coordinates keep their integer display scale. Both attachments
 /// retain the physical samples available to their presentation rectangles.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -109,27 +134,13 @@ pub fn uniforms_with_raster(
         if count == MAX_LIGHTS {
             break;
         }
-        if !light
-            .position
-            .iter()
-            .chain(light.color.iter())
-            .chain([&light.radius, &light.intensity])
-            .all(|value| value.is_finite())
-            || !camera.iter().all(|v| v.is_finite())
-        {
+        let Some(packed) = packed_light(light, camera) else {
             continue;
-        }
+        };
         let offset = 8 + count * 8;
-        result[offset] = light.position[0] - camera[0];
-        result[offset + 1] = light.position[1] - camera[1];
-        result[offset + 2] = light.radius.clamp(1.0, 240.0);
-        result[offset + 3] = light.intensity.clamp(0.0, 1.8);
-        for i in 0..3 {
-            result[offset + 4 + i] = light.color[i].clamp(0.0, 1.0);
-        }
         // A bounded 2.5D light height; legacy cells ignore it. Reuse the existing
         // spare component so mapped cells and both backends share the same ABI.
-        result[offset + 7] = result[offset + 2] * 0.35;
+        result[offset..offset + 8].copy_from_slice(&packed);
         count += 1;
     }
     result

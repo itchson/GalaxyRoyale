@@ -24,6 +24,135 @@ fn draw(input: DockInput) -> (RenderFrame, DockStats) {
     (frame.finish(), stats)
 }
 type CellPacket = ([f32; 2], u32, [f32; 4], [f32; 4]);
+
+#[test]
+fn dock_receiver_metadata_is_occupied_role_only_and_preserves_all_artwork() {
+    let (plain, _) = draw(input());
+    let mut frame = FrameBuilder::new();
+    let ship = PixelBody::from_ascii(&["#"], &[('#', 0xff_ffffff)]);
+    frame.set_planar_shadow(
+        &ship,
+        Transform::default().affine(),
+        6.0,
+        engine_core::ShadowLight {
+            position: [0.0; 2],
+            radius: 120.0,
+            color: [0.2, 0.85, 0.92],
+            intensity: 0.5,
+        },
+    );
+    let stats = append(&mut frame, &input(), &mut DockBudget::default()).unwrap();
+    assert_eq!(stats.cells, 28549);
+    assert_eq!(stats.transforms, 16);
+    assert_eq!(packet(frame.frame()), packet(&plain));
+    let mut receivers = 0;
+    for batch in &frame.frame().batches {
+        let objects = batch.objects.as_ref().unwrap();
+        assert_eq!(objects.len(), batch.transforms.len());
+        for p in &batch.pixels {
+            let slot = p.transform_slot();
+            let meta = objects[slot];
+            if meta.flags == engine_core::shadow::SHADOW_RECEIVER {
+                receivers += 1;
+                assert_eq!(meta.height, 0.0);
+                assert!(slot % 4 < 2);
+            } else {
+                assert_eq!(meta, engine_core::ObjectMeta::default());
+                assert!(slot % 4 >= 2);
+            }
+        }
+    }
+    assert_eq!(receivers, 25919);
+}
+
+#[test]
+#[ignore = "explicit actual native256 deck/shadow packet exporter; requires GALAXY_HUB_SHADOW_NATIVE and GALAXY_HUB_SHADOW_DECK"]
+fn export_actual_hub_receiver_shadow_packets() {
+    let native = std::env::var("GALAXY_HUB_SHADOW_NATIVE").expect("native fixture input");
+    let output = std::env::var("GALAXY_HUB_SHADOW_DECK").expect("absolute packet output");
+    let source: serde_json::Value =
+        serde_json::from_slice(&std::fs::read(native).unwrap()).unwrap();
+    let mut cases = Vec::new();
+    for item in source["cases"].as_array().unwrap() {
+        let width = item["width"].as_u64().unwrap() as usize;
+        let height = item["height_cells"].as_u64().unwrap() as usize;
+        let cells: Vec<[u32; 2]> = serde_json::from_value(item["cells"].clone()).unwrap();
+        let body = PixelBody::from_indexed_rgba(width, height, &cells, 16384).unwrap();
+        let vector =
+            |key: &str| Vec2::from_array(serde_json::from_value(item[key].clone()).unwrap());
+        let transform = AffineTransform {
+            position: vector("position"),
+            basis_x: vector("basis_x"),
+            basis_y: vector("basis_y"),
+        };
+        let key = game_core::LightSource {
+            position: serde_json::from_value(item["light"]["position"].clone()).unwrap(),
+            radius: item["light"]["radius"].as_f64().unwrap() as f32,
+            color: serde_json::from_value(item["light"]["color"].clone()).unwrap(),
+            intensity: item["light"]["intensity"].as_f64().unwrap() as f32,
+        };
+        let mut frame = FrameBuilder::new();
+        assert!(frame.set_planar_shadow(
+            &body,
+            transform,
+            item["height"].as_f64().unwrap() as f32,
+            engine_core::ShadowLight {
+                position: key.position,
+                radius: key.radius,
+                color: key.color,
+                intensity: key.intensity
+            }
+        ));
+        assert_eq!(
+            serde_json::to_value(frame.frame().shadows.as_ref().unwrap().masks().as_slice())
+                .unwrap(),
+            item["mask"]
+        );
+        append(
+            &mut frame,
+            &DockInput {
+                parent: Transform {
+                    scale: Vec2::splat(1.5),
+                    ..Transform::default()
+                },
+                corporation: Some(Corporation::Pan),
+                reduced_motion: true,
+                ..input()
+            },
+            &mut DockBudget::default(),
+        )
+        .unwrap();
+        let s = frame.frame().shadows.as_deref().unwrap();
+        let descriptors =
+            crate::shadow_uniforms::uniforms(Some(s), [0.0; 2], std::slice::from_ref(&key));
+        assert_eq!(descriptors.header, [1, 1, 4, 1]);
+        let pixels=frame.frame().batches.iter().flat_map(|batch|batch.pixels.iter().map(|p| {
+            let t=batch.transforms[p.transform_slot()];let meta=batch.objects.as_ref().unwrap()[p.transform_slot()];
+            let center=t.point(Vec2::from_array(p.local));
+            let occluded=meta.flags==engine_core::shadow::SHADOW_RECEIVER && s.blocks_ray(center,meta.height,Vec2::from_array(key.position),42.0);
+            serde_json::json!({"center":center.to_array(),"basis_x":&t.a[2..4],"basis_y":&t.b[..2],"rgba":p.color,
+                "receiver":meta.flags==engine_core::shadow::SHADOW_RECEIVER,"blocked_center":occluded,"material":&t.b[2..4]})
+        })).collect::<Vec<_>>();
+        let blocked = pixels
+            .iter()
+            .filter(|p| p["blocked_center"].as_bool() == Some(true))
+            .count();
+        assert_eq!(pixels.len(), CELL_COST);
+        println!(
+            "native256 case {:?} damaged={} caster={} receiver25919 centerBlocked={blocked}",
+            item["position"],
+            item["damaged"],
+            body.occupied_count()
+        );
+        cases.push(serde_json::json!({"native":item,"pixels":pixels,"center_blocked":blocked,
+            "descriptor_header":descriptors.header,"descriptor_x":descriptors.casters[0].x,"descriptor_y":descriptors.casters[0].y}));
+    }
+    std::fs::write(
+        output,
+        serde_json::to_vec(&serde_json::json!({"cases":cases})).unwrap(),
+    )
+    .unwrap();
+}
 fn packet(frame: &RenderFrame) -> Vec<CellPacket> {
     frame
         .batches

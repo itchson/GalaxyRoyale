@@ -280,8 +280,13 @@ pub fn append(
         }
     }
     let mut cells = 0;
+    let frame_shadows_active = frame
+        .frame()
+        .shadows
+        .as_ref()
+        .is_some_and(|s| s.caster.is_some());
     for tile in &ART.tiles {
-        cells += tile.rig.draw_affine(
+        cells += tile.rig.draw_affine_with_metadata(
             frame,
             &tile.bodies[corporation][state],
             composed(parent, tile),
@@ -289,6 +294,13 @@ pub fn append(
                 time,
                 charge: 0.2,
                 ..Default::default()
+            },
+            |part| {
+                if part < 2 && frame_shadows_active {
+                    engine_core::ObjectMeta::receiver(0.0)
+                } else {
+                    engine_core::ObjectMeta::default()
+                }
             },
         );
     }

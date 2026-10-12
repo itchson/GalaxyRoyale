@@ -46,6 +46,7 @@ mod diagnostic_death_tests;
 mod diagnostic_warp_tests;
 #[cfg(test)]
 mod held_thrust_tests;
+mod hub_shadows;
 pub mod identity;
 #[cfg(test)]
 mod live_overlay_tests;
@@ -879,12 +880,7 @@ impl Game {
                     .total_cmp(&b.distance_squared(camera))
             });
         if let Some(position) = beacon {
-            sources.push(LightSource {
-                position: position.to_array(),
-                radius: 120.0,
-                color: [0.2, 0.85, 0.92],
-                intensity: 0.48 + (self.cosmetic_time() * 1.2).sin() * 0.08,
-            });
+            sources.push(hub_shadows::beacon_light(position, self.cosmetic_time()));
         }
         sources.truncate(8);
         sources
@@ -3404,6 +3400,7 @@ impl Game {
     ) {
         let alpha = alpha.clamp(0.0, 1.0);
         frame.clear();
+        self.extract_hub_shadow(alpha, frame);
         let lights = [
             pixel_assets::color(6),
             pixel_assets::color(4),
@@ -3435,6 +3432,7 @@ impl Game {
             scale: Vec2::splat(DOCK_SCALE),
         };
         if self.visible(Vec2::ZERO, 100.0) && !draw_home(frame, station, self.cosmetic_time()) {
+            frame.clear_planar_shadow();
             frame.push_body_colored_material(
                 &self.dock_body,
                 station,
@@ -3574,33 +3572,51 @@ impl Game {
                     color
                 }
             };
-            let fine_drawn = actor.kind == Kind::Player
-                && selected_ship == 0
-                && corporation.is_some_and(|corporation| {
-                    raicho_fine::append(
-                        frame,
-                        body,
-                        corporation,
-                        raicho_fine::DrawInput {
-                            parent: actor_transform(m, *actor).affine(),
-                            material: ACTOR_MATERIAL,
-                            time: self.cosmetic_time(),
-                            reduced_motion: self.reduced_motion,
-                        },
-                        &mut raicho_fine::Budget::default(),
-                        coarse_color,
-                        |_, color| player_tint(color),
-                    )
-                    .is_ok()
-                });
-            if !fine_drawn {
-                frame.push_body_colored_material(
-                    body,
-                    actor_transform(m, *actor),
-                    ACTOR_MATERIAL,
-                    coarse_color,
-                );
-            }
+            let elevated = entity == self.player
+                && frame
+                    .frame()
+                    .shadows
+                    .as_ref()
+                    .is_some_and(|s| s.caster.is_some());
+            frame.with_object_meta(
+                engine_core::ObjectMeta {
+                    height: if elevated {
+                        hub_shadows::RAICHO_HEIGHT
+                    } else {
+                        0.0
+                    },
+                    flags: 0,
+                },
+                |frame| {
+                    let fine_drawn = actor.kind == Kind::Player
+                        && selected_ship == 0
+                        && corporation.is_some_and(|corporation| {
+                            raicho_fine::append(
+                                frame,
+                                body,
+                                corporation,
+                                raicho_fine::DrawInput {
+                                    parent: actor_transform(m, *actor).affine(),
+                                    material: ACTOR_MATERIAL,
+                                    time: self.cosmetic_time(),
+                                    reduced_motion: self.reduced_motion,
+                                },
+                                &mut raicho_fine::Budget::default(),
+                                coarse_color,
+                                |_, color| player_tint(color),
+                            )
+                            .is_ok()
+                        });
+                    if !fine_drawn {
+                        frame.push_body_colored_material(
+                            body,
+                            actor_transform(m, *actor),
+                            ACTOR_MATERIAL,
+                            coarse_color,
+                        );
+                    }
+                },
+            );
             if actor.kind == Kind::Player {
                 let glow = (self.cosmetic_time() * 24.0).sin() * 0.5 + 0.5;
                 if entity == self.player && self.throttle > 0.03 {
