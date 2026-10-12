@@ -7,7 +7,6 @@ export const LIMITS = Object.freeze({
   sessions: 64,
   retainedParticipants: 64,
   sessionMs: 3_600_000,
-  inviteMs: 600_000,
   pendingMs: 20_000,
   codesPerSession: 64,
   codeAttempts: 32,
@@ -242,12 +241,6 @@ export class SessionStore extends EventEmitter {
       fail(410, "session_ended", "Room is no longer open.");
     if (session.code !== code)
       fail(410, "stale_invite", "Room code was replaced.");
-    if (this.#now() >= session.inviteExpires)
-      fail(
-        410,
-        "invite_expired",
-        "Room code has expired; ask the host to replace it.",
-      );
     return session;
   }
   create(body, client, replacingToken = null) {
@@ -277,8 +270,6 @@ export class SessionStore extends EventEmitter {
       seed: body.seed,
       protocol: body.protocol,
       expires: now + this.limits.sessionMs,
-      inviteExpires:
-        now + Math.min(this.limits.inviteMs, this.limits.sessionMs),
       host: null,
       state: "open",
       reason: null,
@@ -414,7 +405,6 @@ export class SessionStore extends EventEmitter {
     s.roomRevision++;
     s.codes.add(code);
     this.#codes.set(code, s);
-    s.inviteExpires = Math.min(s.expires, now + this.limits.inviteMs);
     this.#cancelPending(s, pending, "code_replaced", now);
     this.emit("changed", s.id);
     return { session: this.#sessionView(s, true), invite: displayCode(code) };

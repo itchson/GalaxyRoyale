@@ -22,7 +22,7 @@ Every API request except `/health` requires an exact allowed Origin. Configure 1
 
 Each code uses `node:crypto.randomBytes(4)` and is displayed as `#A7C2-9F34`. Paste normalization removes ASCII whitespace (TAB through CR and space), hyphens and one optional leading hash. Exactly eight hex digits remain, case insensitive; raw input is at most 64 UTF-16 code units. Other characters, extra hashes or digit counts fail. Codes are lookup identifiers, not encrypted administration credentials.
 
-Allocation checks all active and retired reserved codes, with at most 32 attempts. A room reserves at most 64 codes, including the initial code. Rotation keeps the original session, seed, host ID, absolute expiry and approved participants. Retired codes cannot join or be reused while their original room record remains; reservations are removed after room end plus 60-second retention. Restart clears all old rooms, codes and bearer credentials. Code lifetime is ten minutes; rotation refreshes it within the unchanged absolute one-hour room deadline.
+Allocation checks all active and retired reserved codes, with at most 32 attempts. A room reserves at most 64 codes, including the initial code. Rotation keeps the original session, seed, host ID, absolute expiry and approved participants. Retired codes cannot join or be reused while their original room record remains; reservations are removed after room end plus 60-second retention. Restart clears all old rooms, codes and bearer credentials. The current code remains valid for its live room. Host departure, timeout, stop, restart or absolute one-hour room expiry ends its validity; rotation retires the old code without extending that room deadline. There is no independent invite timer.
 
 All participant tokens are separate lowercase 64-hex secrets, stored as SHA-256 digests. Participant/session IDs are lowercase 32-hex. Only a current host token may rotate, change joining policy, accept/decline, or end its room. Codes and guest credentials cannot administer. Guest session projections always set `room_code:null`, including declined and retained terminal guests; only host-authenticated views reveal the current canonical code. Diagnostics return counts only, including `reserved_codes`.
 
@@ -57,7 +57,7 @@ Host events use the existing peer object `{id,role:"guest",status:"pending"}`:
 
 Unapproved credentials cannot send or receive SDP/ICE or become ready. Pending requests reserve capacity within eight total participants. An unapproved request expires 20 seconds after join, even with heartbeats, reason `approval_timeout`. Acceptance starts a separate 20-second unready negotiation deadline, reason `reservation_timeout`. Active guest liveness then uses the 45-second heartbeat deadline. Decline produces guest left status and reason `join_declined`; rotation and lock cancel only unapproved requests with `code_replaced` and `joining_locked`. Approved pending/active guests remain. Unlocking allows future requests. Already-resolved/cross-room/host peer approval yields 409 `request_unavailable`.
 
-Rotation, lock and decline preflight all required host notices before policy or request changes. Acceptance preflights both recipients before changing approval. Failed collision, code quota or event queue admission leaves the prior policy, code and participant approvals unchanged. Batched cancellations do not use ordinary saturated membership removal that can end the room. Typical errors: invalid/unknown code 401 `invalid_invite`, retired code 410 `stale_invite`, expired code 410 `invite_expired`, ended room 410 `session_ended`, locked room 409 `joining_locked`, full room 409 `session_full`, and preapproval negotiation 403 `approval_required`.
+Rotation, lock and decline preflight all required host notices before policy or request changes. Acceptance preflights both recipients before changing approval. Failed collision, code quota or event queue admission leaves the prior policy, code and participant approvals unchanged. Batched cancellations do not use ordinary saturated membership removal that can end the room. Typical errors: invalid/unknown code 401 `invalid_invite`, retired code 410 `stale_invite`, ended room 410 `session_ended`, locked room 409 `joining_locked`, full room 409 `session_full`, and preapproval negotiation 403 `approval_required`.
 
 ## Transport, lifecycle and bounds
 
@@ -70,7 +70,7 @@ Events retain the existing global monotonic sequence and addressed queues. Proce
 | Live participants including host and pending requests        | 8                           |
 | Approval wait / approved negotiation wait                    | 20 / 20 seconds             |
 | Host / active guest heartbeat timeout                        | 30 / 45 seconds             |
-| Code / absolute room lifetime                                | 10 / 60 minutes             |
+| Current code / absolute room lifetime                        | Live room / 60 minutes      |
 | Terminal credentials/notice/code retention after room end    | 60 seconds                  |
 | Rooms including ended records / participant records per room | 64 / 64                     |
 | Reserved codes per room / allocation attempts                | 64 / 32                     |
@@ -93,6 +93,6 @@ Host departure, timeout, absolute expiry, whole-session replacement and shutdown
 node --test scripts/test/coop-signalling.test.mjs scripts/test/coop-private-rooms.test.mjs
 ```
 
-31 focused tests passed during this implementation: real HTTP capacity, admin authority, pending/approval signals, collision retry failure, stale codes, expiry, same-room rotation/locking, aggregate queue preflight, complete policy snapshots, strict input schemas, rates, long-poll abort/shutdown and cleanup. Code-collision cases use an injected four-byte generator; production allocation uses crypto randomness. Transport fixtures are explicitly synthetic; they do not create RTC/game clients.
+32 focused tests passed during this implementation: real HTTP capacity, admin authority, pending/approval signals, collision retry failure, stale codes, expiry, same-room rotation/locking, aggregate queue preflight, complete policy snapshots, strict input schemas, rates, long-poll abort/shutdown and cleanup. Code-collision cases use an injected four-byte generator; production allocation uses crypto randomness. Transport fixtures are explicitly synthetic; they do not create RTC/game clients.
 
 Browser integration, actual eight-client gameplay, physical networks, forced TURN, public HTTPS deployment and profile/save/guest-world restoration proof remain separate integration gates. This service neither issues relay credentials nor proves a relay connection. Primary references: [Node crypto randomBytes](https://nodejs.org/api/crypto.html#cryptorandombytessize-callback), [WebRTC protocols](https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API/Protocols), [RFC 8831 DataChannels](https://www.rfc-editor.org/rfc/rfc8831).

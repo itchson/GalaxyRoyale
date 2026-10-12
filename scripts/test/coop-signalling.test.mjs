@@ -182,7 +182,7 @@ test("HTTP exact Origin, CORS and fixed routes reject untrusted or forged reques
 });
 
 test("short room lookup codes reject malformed, expiry and service restart changes", async (t) => {
-  const f = await fixture(t, { limits: { inviteMs: 100 } });
+  const f = await fixture(t, { limits: { sessionMs: 100 } });
   const host = await f.create();
   assert.match(host.invite, /^#[0-9A-F]{4}-[0-9A-F]{4}$/);
   assert.equal(host.session.room_code, host.invite);
@@ -226,7 +226,7 @@ test("short room lookup codes reject malformed, expiry and service restart chang
   error(
     await f.request("/v1/join", { body: { invite: host.invite } }),
     410,
-    "invite_expired",
+    "session_ended",
   );
 });
 

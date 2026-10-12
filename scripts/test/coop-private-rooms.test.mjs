@@ -451,20 +451,17 @@ test("host queue preflight refuses approval, rotation and lock without revoking 
   assert.equal((await f.approve(h, g)).status, 200);
 });
 
-test("rotation quota and code expiry are finite; retired reservations release only after room retention", () => {
+test("rotation quota and room expiry are finite; retired reservations release only after room retention", () => {
   let now = 1000,
     next = 0;
   const store = new SessionStore({
     now: () => now,
-    limits: { codesPerSession: 3, inviteMs: 100 },
+    limits: { codesPerSession: 3, sessionMs: 100 },
     codeBytes: () => bytes((++next).toString(16).padStart(8, "0")),
   });
   const h = store.create(metadata, store.clientKey("owner"));
-  now += 100;
-  assert.throws(
-    () => store.join({ invite: h.invite }),
-    (e) => e.code === "invite_expired",
-  );
+  now += 50;
+  assert.equal(store.join({ invite: h.invite }).participant.status, "pending");
   const rotated = store.rotateCode(h.participant.token);
   assert.equal(rotated.session.id, h.session.id);
   assert.equal(rotated.session.expires_at, h.session.expires_at);
@@ -478,7 +475,7 @@ test("rotation quota and code expiry are finite; retired reservations release on
     (e) => e.code === "code_quota",
   );
   assert.equal(store.diagnostics().reserved_codes, 3);
-  store.end(h.participant.token);
+  now += 50; // Rotation never extends the room's original absolute expiry.
   assert.throws(
     () => store.join({ invite: rotated.invite }),
     (e) => e.code === "session_ended",
@@ -488,6 +485,32 @@ test("rotation quota and code expiry are finite; retired reservations release on
   now++;
   assert.equal(store.diagnostics().reserved_codes, 0);
   assert.equal(store.diagnostics().credentials, 0);
+});
+
+test("current code remains valid beyond former ten-minute invite timer while host lives, then ends with room", async (t) => {
+  const f = await fixture(t),
+    h = await f.create();
+  for (let i = 0; i < 31; i++) {
+    f.advance(20_000);
+    assert.equal(
+      (await f.request("/v1/heartbeat", {}, h.participant.token)).status,
+      200,
+    );
+  }
+  const live = await f.join(h);
+  assert.equal(live.session.id, h.session.id);
+  assert.equal(live.session.expires_at, h.session.expires_at);
+  assert.equal(live.session.room_revision, 0);
+  f.advance(LIMITS.hostMs);
+  error(
+    await f.request("/v1/join", { invite: h.invite }),
+    410,
+    "session_ended",
+  );
+  assert.equal(
+    (await f.events(live.participant, live.cursor)).value.events[0].reason,
+    "host_timeout",
+  );
 });
 
 test("unchanged unlocked policy preserves request birth revision; every new request uses the rotated policy", async (t) => {
