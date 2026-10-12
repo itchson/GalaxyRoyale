@@ -187,6 +187,7 @@ test("actual client frame holds native immediately after one admitted event whil
         afterStep: () => calls.push(["publish"]),
       },
       stopped: false,
+      scenario: "renko-fifth",
       captureHold: false,
       appliedPause: false,
       fifth,

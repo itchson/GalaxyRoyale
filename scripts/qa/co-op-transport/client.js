@@ -27,6 +27,10 @@ let lastTime = performance.now(),
   firstPosition = null;
 let scenario = "default",
   fifth = null,
+  wake = null,
+  wakeApi = null,
+  wakeCruise = null,
+  wakeRetiring = null,
   captureHold = false,
   heldCapture = 0,
   latestHeader = null,
@@ -233,6 +237,9 @@ function observations() {
         }
       : {}),
     ...(scenario === "renko-fifth" ? { fifth_shot: fifth.report() } : {}),
+    ...(scenario === "configured-ion-wake-r1-e1"
+      ? { wake: wake?.report() ?? null }
+      : {}),
   };
 }
 function update() {
@@ -324,10 +331,26 @@ function resetControls() {
 }
 function step(milliseconds) {
   if (!galaxy || stopped) return;
+  if (scenario === "configured-ion-wake-r1-e1" && wakeCruise) {
+    const h = galaxy.hud(),
+      elapsed = h.time - wakeCruise.time;
+    if (elapsed >= 10 || Math.hypot(...h.position) > 620) {
+      wakeCruise = null;
+      resetControls();
+      wake.stopping();
+    } else
+      controls = {
+        joystick: [Math.cos(elapsed), Math.sin(elapsed)],
+        fire: false,
+      };
+  }
   const before = controller?.frameMode() ?? "solo";
   controller?.beforeStep(milliseconds / 1000, controls);
   const after = controller?.frameMode() ?? "solo";
-  if (after !== before) resetControls();
+  if (after !== before) {
+    if (scenario === "configured-ion-wake-r1-e1") wakeCruise = null;
+    resetControls();
+  }
   // Solo Game is deliberately paused throughout QA; only actual host tick_co_op runs.
   const pause = after !== "host" || captureHold;
   if (pause !== appliedPause) {
@@ -336,6 +359,7 @@ function step(milliseconds) {
   }
   const elapsed = after !== before ? 0 : milliseconds;
   const frame = galaxy.step(elapsed, controls);
+  if (scenario === "configured-ion-wake-r1-e1") wake.frame(frame);
   if (fifth?.state === "firing" && fifth.events(frame?.events)) {
     heldCapture = counters.captures;
     captureHold = true;
@@ -349,7 +373,12 @@ function step(milliseconds) {
 }
 function schedule() {
   clearTimeout(timer);
-  if (stopped || performance.now() > loopDeadline) return;
+  if (stopped) return;
+  if (performance.now() > loopDeadline) {
+    if (scenario === "configured-ion-wake-r1-e1")
+      void retireWake("wake_lifetime_expired").catch(() => {});
+    return;
+  }
   timer = setTimeout(() => {
     try {
       const now = performance.now(),
@@ -357,7 +386,15 @@ function schedule() {
       lastTime = now;
       if (!pumping) step(dt);
       schedule();
-    } catch {
+    } catch (error) {
+      if (scenario === "configured-ion-wake-r1-e1") {
+        void retireWake(
+          wakeApi.wakeReasons.has(error?.message)
+            ? error.message
+            : "wake_native_frame",
+        ).catch(() => {});
+        return;
+      }
       failureCode = "native_frame_failed";
       phase = "failed";
       stopped = true;
@@ -392,11 +429,142 @@ async function initStep(stage, action, lateCleanup = () => {}) {
         }, remaining);
       }),
     ]);
-  } catch {
+  } catch (error) {
+    if (
+      typeof wakeApi !== "undefined" &&
+      wakeApi?.wakeReasons?.has(error?.message)
+    )
+      failureCode ??= error.message;
     failureCode ??= `initialization_${stage}_failed`;
     throw new Error(failureCode);
   } finally {
     clearTimeout(timeout);
+  }
+}
+async function retireWake(reason) {
+  if (wakeRetiring) return wakeRetiring;
+  wakeRetiring = (async () => {
+    // Qualification stops immediately; resource release follows actual native restore.
+    wakeCruise = null;
+    stopped = true;
+    clearTimeout(timer);
+    resetControls();
+    failureCode ??= wakeApi?.wakeReasons.has(reason) ? reason : "wake_context";
+    try {
+      wake?.fail(failureCode);
+    } catch {}
+    phase = "failed";
+    update();
+    await controller?.dispose();
+    if (controller?.blocksSolo()) throw new Error("restore_failed");
+    if (galaxy) {
+      try {
+        await verify();
+      } finally {
+        wake?.end();
+        galaxy.free();
+        galaxy = null;
+      }
+    }
+    update();
+  })();
+  return wakeRetiring;
+}
+function wakeContext() {
+  if (
+    scenario !== "configured-ion-wake-r1-e1" ||
+    !wake ||
+    stopped ||
+    controller?.frameMode() !== role ||
+    !controller.blocksSolo() ||
+    wake.value.state === "inconclusive" ||
+    performance.now() > loopDeadline
+  )
+    throw new Error("wake_context");
+}
+function observeWakeRemoval(observed, session) {
+  // The last guest's departure stops ordinary RTC publication. Read the real
+  // native post-leave capture once; this does not fabricate a guest commit.
+  const acquired = JSON.parse(
+    observed.co_op_batch(
+      JSON.stringify({ v: 1, operations: [{ op: "acquire", session }] }),
+    ),
+  ).results[0];
+  if (acquired?.ok !== true) wake.fail("wake_context");
+  const header = acquired.value;
+  if (header.snapshot.wake_fx.points) {
+    const result = JSON.parse(
+      observed.co_op_batch(
+        JSON.stringify({
+          v: 1,
+          operations: [
+            {
+              op: "wake_page",
+              session,
+              acquisition: header.acquisition,
+              revision: header.snapshot.revision,
+            },
+          ],
+        }),
+      ),
+    ).results[0];
+    if (result?.ok !== true) wake.fail("wake_context");
+  }
+}
+async function wakeCommand(name, args) {
+  wakeContext();
+  if (Object.keys(args).length !== 0) wake.fail("wake_sequence");
+  if (name === "wake-reduced-motion") {
+    galaxy.set_reduced_motion(true);
+    wake.value.reduced_motion = true;
+    return observations();
+  }
+  if (!["wake-drive", "wake-stop", "wake-retreat"].includes(name))
+    wake.fail("wake_sequence");
+  wakeCruise = null;
+  resetControls();
+  if (name === "wake-drive") wake.driving();
+  else wake.stopping(name === "wake-retreat");
+  const deadline = performance.now() + 30_000;
+  pumping = true;
+  let complete = false;
+  try {
+    for (let i = 0; i < 960; i++) {
+      wakeContext();
+      if (performance.now() > deadline) wake.fail("wake_timeout");
+      controls =
+        name === "wake-drive"
+          ? { joystick: [1, 0], fire: false }
+          : name === "wake-retreat"
+            ? { destination: [0, 0], fire: false }
+            : { joystick: [0, 0], fire: false };
+      step(1000 / 60);
+      const s = wake.current?.header.snapshot;
+      const own = s?.participants.find(
+        (p) => p.slot === (role === "host" ? 0 : 1),
+      );
+      const ownPoints = wake.current?.points.some((p) => p.slot === own?.slot);
+      if (name === "wake-drive" && ownPoints && own.position[0] >= 400) {
+        wakeCruise = { time: galaxy.hud().time };
+        complete = true;
+        break;
+      }
+      if (name === "wake-stop" && wake.value.state === "expired") {
+        complete = true;
+        break;
+      }
+      if (name === "wake-retreat" && wake.value.state === "retreated") {
+        complete = true;
+        break;
+      }
+      await new Promise((r) => setTimeout(r, 16));
+    }
+    if (!complete) wake.fail("wake_timeout");
+    return observations();
+  } finally {
+    pumping = false;
+    if (!complete || name !== "wake-drive") resetControls();
+    lastTime = performance.now();
   }
 }
 async function initialize(
@@ -416,10 +584,46 @@ async function initialize(
   initDeadline = performance.now() + 45_000;
   scenario = selectedScenario;
   fifth = scenario === "renko-fifth" ? new FifthShotObservation(role) : null;
+  if (scenario === "configured-ion-wake-r1-e1") {
+    await initStep("wake_preflight", async () => {
+      wakeApi = await import("/wake-observation.js");
+      wake = new wakeApi.WakeObservation(role);
+      wakeApi.requireWakeStage(config, role);
+      wake.value.fresh_origin = await wakeApi.freshWakeOrigin(indexedDB);
+    });
+  }
   store = new SaveStore();
   const loaded = await initStep("open_store", () => store.open());
+  let configuredProfile = null;
+  if (scenario === "configured-ion-wake-r1-e1") {
+    if (loaded !== null) throw new Error("wake_fresh_origin_required");
+    if (!store.persistent) throw new Error("wake_storage_unavailable");
+    configuredProfile = await initStep("load_configured_fixture", async () => {
+      const entry = wakeApi.requireWakeStage(config, role);
+      const response = await fetch("/" + entry.path, { cache: "no-store" });
+      if (!response.ok) throw new Error("wake_fixture_mismatch");
+      const raw = new Uint8Array(await response.arrayBuffer());
+      if (raw.byteLength !== entry.bytes || raw.byteLength > 65536)
+        throw new Error("wake_fixture_mismatch");
+      const hash = [
+        ...new Uint8Array(await crypto.subtle.digest("SHA-256", raw)),
+      ]
+        .map((n) => n.toString(16).padStart(2, "0"))
+        .join("");
+      if (hash !== entry.sha256) throw new Error("wake_fixture_mismatch");
+      const value = wakeApi.requireWakeProfile(
+        role,
+        JSON.parse(new TextDecoder().decode(raw)),
+        normalizeProfile,
+        entry,
+      );
+      wake.value.fixture_valid = true;
+      return value;
+    });
+  }
   const starter = await initStep("starter_selection", () => {
     try {
+      if (scenario === "configured-ion-wake-r1-e1") return null;
       return starterSelection(
         selectedScenario,
         role,
@@ -448,15 +652,21 @@ async function initialize(
   );
   galaxy = await initStep(
     "create_galaxy",
-    () => module.Galaxy.create(canvas, loaded),
+    () => module.Galaxy.create(canvas, configuredProfile ?? loaded),
     (lateGalaxy) => lateGalaxy.free(),
   );
+  if (scenario === "configured-ion-wake-r1-e1")
+    await initStep("validate_configured_profile", () => {
+      wakeApi.requireWakeGalaxy(galaxy);
+      if (!wakeApi.sameValue(galaxy.profile(), configuredProfile))
+        throw new Error("wake_fixture_mismatch");
+    });
   // register_droid requires the real freshly created Galaxy to be paused.
   await initStep("pause_solo", () => {
     galaxy.set_paused(true);
     appliedPause = true;
   });
-  if (!loaded) {
+  if (!loaded && scenario !== "configured-ion-wake-r1-e1") {
     const hash = [...crypto.getRandomValues(new Uint8Array(8))]
       .map((n) => n.toString(16).padStart(2, "0"))
       .join("");
@@ -476,6 +686,16 @@ async function initialize(
       ownedLoadout = wasmPorts.readOwnedLoadout(galaxy);
       ownedSha = await digestValue(ownedLoadout);
       ownedExport = true;
+      if (scenario === "configured-ion-wake-r1-e1") {
+        if (
+          !wakeApi.sameValue(
+            ownedLoadout,
+            config.wake_fixture.profiles[role].native_export,
+          )
+        )
+          throw new Error("wake_fixture_mismatch");
+        wake.value.native_export_match = true;
+      }
       if (scenario === "renko-fifth") {
         const expected = role === "host" ? [0, 0] : [1, 1];
         if (
@@ -502,12 +722,21 @@ async function initialize(
             counters.captures++;
             observeHeader(value);
             stagedRows = new Map();
+            if (scenario === "configured-ion-wake-r1-e1") wake.stage(value);
           }
           if (ops[i].op === "entity_page") {
             counters.entity_pages++;
             observeRows(value.entities);
           }
           if (ops[i].op === "body_page") counters.body_pages++;
+          if (scenario === "configured-ion-wake-r1-e1") {
+            if (ops[i].op === "wake_page") wake.page(ops[i].acquisition, value);
+            if (ops[i].op === "leave")
+              wake.leavingOwner(ops[i].peer, ops[i].epoch);
+            if (ops[i].op === "leave")
+              observeWakeRemoval(observed, ops[i].session);
+            if (ops[i].op === "end") wake.end();
+          }
         }
       return response;
     },
@@ -520,16 +749,26 @@ async function initialize(
         if (op.op === "replica_stage") {
           observeHeader(op.header);
           stagedRows = new Map();
+          if (scenario === "configured-ion-wake-r1-e1") wake.stage(op.header);
         }
         if (op.op === "replica_entities") {
           counters.entity_pages++;
           observeRows(op.page.entities);
         }
         if (op.op === "replica_body") counters.body_pages++;
+        if (
+          scenario === "configured-ion-wake-r1-e1" &&
+          op.op === "replica_wake"
+        )
+          wake.page(op.acquisition, op.page);
         if (op.op === "replica_commit") {
           counters.commits++;
           observeCommit();
+          if (scenario === "configured-ion-wake-r1-e1")
+            wake.commit(op.acquisition, op.revision);
         }
+        if (scenario === "configured-ion-wake-r1-e1" && op.op === "replica_end")
+          wake.end();
       }
       return response;
     },
@@ -555,6 +794,7 @@ async function initialize(
       if (next !== mode) {
         mode = next;
         captureHold = false;
+        if (scenario === "configured-ion-wake-r1-e1") wakeCruise = null;
         resetControls();
         lastTime = performance.now();
       }
@@ -575,7 +815,10 @@ async function initialize(
   phase = "idle";
   initStage = "ready";
   loopDeadline =
-    performance.now() + (scenario === "renko-fifth" ? 600_000 : 180_000);
+    performance.now() +
+    (scenario === "renko-fifth" || scenario === "configured-ion-wake-r1-e1"
+      ? 600_000
+      : 180_000);
   lastTime = performance.now();
   stopped = false;
   schedule();
@@ -743,6 +986,7 @@ async function command(name, args) {
     return observations();
   }
   if (name.startsWith("fifth-")) return fifthCommand(name, args);
+  if (name.startsWith("wake-")) return wakeCommand(name, args);
   if (name === "create") {
     await controller.create();
     const invite = controller.invite();
@@ -794,12 +1038,20 @@ async function command(name, args) {
     }
     return observations();
   }
+  if (scenario === "configured-ion-wake-r1-e1") wakeCruise = null;
   if (name === "end") await controller.end();
   else if (name === "leave") await controller.leave();
   else if (name === "dispose") {
+    if (scenario === "configured-ion-wake-r1-e1" && wakeRetiring) {
+      await wakeRetiring;
+      phase = "disposed";
+      update();
+      return observations();
+    }
     await controller.dispose();
     if (controller.blocksSolo()) throw new Error("restore_failed");
     await verify();
+    wake?.end();
     stopped = true;
     clearTimeout(timer);
     galaxy.free();
@@ -844,7 +1096,8 @@ addEventListener("message", async (event) => {
     failureCode ??=
       name === "initialize"
         ? `initialization_${initStage}_failed`
-        : fifthReasons.has(error.message) ||
+        : wakeApi?.wakeReasons.has(error.message) ||
+            fifthReasons.has(error.message) ||
             error.message === "approval_not_pending" ||
             error.message === "signaling_limit" ||
             error.message === "room_create_failed"
@@ -859,6 +1112,14 @@ addEventListener("message", async (event) => {
       galaxy?.set_paused(true);
       appliedPause = true;
     }
+    if (scenario === "configured-ion-wake-r1-e1") {
+      // A timed-out parent command does not prove teardown. Keep failures visible
+      // until the actual controller dispose/solo restore resolves.
+      failureCode = wakeApi?.wakeReasons.has(error.message)
+        ? error.message
+        : failureCode;
+      await retireWake(failureCode).catch(() => {});
+    }
     phase = "failed";
     update();
     parent.postMessage(
@@ -872,7 +1133,9 @@ addEventListener("message", async (event) => {
 addEventListener("pagehide", () => {
   stopped = true;
   clearTimeout(timer);
-  void controller?.dispose();
+  if (scenario === "configured-ion-wake-r1-e1")
+    void retireWake("wake_lifetime_expired").catch(() => {});
+  else void controller?.dispose();
 });
 parent.postMessage(
   { type: "native-qa-client-ready", role },

@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "scenario": "configured-ion-wake-r1-e1",
+  "provenance": "configured native fixture; NOT earned progression",
+  "fixture_source_commit": "87d92f2cbf10c24dda585b47f05de2fad6fe178f",
+  "profiles": {
+    "host": {
+      "path": "fixtures/configured-wake/host-profile.json",
+      "bytes": 2082,
+      "sha256": "fcccaf64ded0ca93fa5012e2ccdeff036e3e2147cc4669c1dc9b639083f579da",
+      "schema_version": 7,
+      "seed": 2934182754,
+      "native_export": {
+        "hardware": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "owned_ships": 1,
+        "patches": 0,
+        "relic_count": 0,
+        "royal_victory": false,
+        "selected_ship": 0,
+        "ship_xp": 0,
+        "slots": [
+          null,
+          null,
+          {
+            "index": 5,
+            "rank": 1
+          }
+        ],
+        "trained_starter": false,
+        "version": 1
+      }
+    },
+    "guest": {
+      "path": "fixtures/configured-wake/guest-profile.json",
+      "bytes": 2078,
+      "sha256": "53c3ef1f6b8a76272d2ee733f7754cd74df3eb8f2fe262479b78897c4275ca11",
+      "schema_version": 7,
+      "seed": 1813293345,
+      "native_export": {
+        "hardware": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "owned_ships": 1,
+        "patches": 0,
+        "relic_count": 0,
+        "royal_victory": false,
+        "selected_ship": 0,
+        "ship_xp": 0,
+        "slots": [
+          null,
+          {
+            "index": 1,
+            "rank": 1
+          },
+          {
+            "index": 5,
+            "rank": 1
+          }
+        ],
+        "trained_starter": false,
+        "version": 1
+      }
+    }
+  }
+}

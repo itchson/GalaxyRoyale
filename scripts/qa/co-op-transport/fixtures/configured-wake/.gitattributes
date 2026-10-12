@@ -1,0 +1,3 @@
+# Preserve exact native serializer output across Windows checkouts.
+host-profile.json -text
+guest-profile.json -text

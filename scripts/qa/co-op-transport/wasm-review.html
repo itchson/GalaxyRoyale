@@ -65,6 +65,9 @@
       <option value="renko-fifth">
         Fresh RENKO fifth-shot (empty owned QA stores only)
       </option>
+      <option value="configured-ion-wake-r1-e1">
+        Configured native Wake R1/E1 — NOT earned (fresh origins only)
+      </option>
     </select></label
   >
   <div>
@@ -80,6 +83,12 @@
     <button id="room-decline" disabled>Owned QA: pending Decline</button>
     <button id="room-replace" disabled>Owned QA: replace + stale code</button>
     <button id="room-lock" disabled>Owned QA: lock + unlock</button>
+    <button id="wake-drive" disabled>Configured Wake: depart + observe</button>
+    <button id="wake-stop" disabled>Configured Wake: stop + expire</button>
+    <button id="wake-retreat" disabled>Configured Wake: return to Haven</button>
+    <button id="wake-reduced-motion" disabled>
+      Configured Wake: reduced motion
+    </button>
   </div>
   <p id="status" role="status">
     Ready. No native Games or RTC clients created.
@@ -129,6 +138,28 @@ No run yet.</pre>
     saves. Only the host fires. Native shot events count admitted primaries;
     native simulation pauses after each one while the real guest commits its
     complete frame. Missing/ambiguous shots are inconclusive, not a pass.
+  </p>
+  <p>
+    Configured Wake is an explicit normal-WASM owned-mode opt-in. It installs
+    the reviewed native R1/E1 role fixtures into fresh, isolated QA origins;
+    this is configured progression, NOT earned play. IndexedDB inventory must
+    show no Galaxy database before opening either role's store. Existing stores
+    are refused and never deleted or replaced. Each role constructs only its own
+    exact native Profile; RTC carries the ordinary bounded equipment and
+    transient publication. Use a new unused QA port for each renderer run.
+  </p>
+  <p>
+    Wake controls use real fire-off movement and native stamping. Each movement
+    phase has a 30-second command budget, at most 960 paced native calls, and a
+    separate 20-second cleanup wait on failure. Both visible clients must obtain
+    their owners' actual capture/complete-commit points. Stop waits for an empty
+    authoritative publication more than two native seconds after the last
+    observed birth; Return uses the ordinary destination input into Haven.
+    Reduced motion records the actual native setting call; human review of dots,
+    color, expiry, global birth-light tails and both canvases remains pending.
+    No JS trails, damage, visual expiry or generated native replies. The
+    configured client loop retires after ten minutes; a timeout alone does not
+    prove that asynchronous teardown has finished.
   </p>
   <script type="module" src="/wasm-review.js"></script>
 </html>

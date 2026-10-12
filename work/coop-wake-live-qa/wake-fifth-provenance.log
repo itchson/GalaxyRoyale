@@ -1,0 +1,42 @@
+✔ historical transport manifests keep their frozen files and current manifests require their pinned room-code module (0.9002ms)
+✔ historical factory and owned WASM manifests preserve eighteen or nineteen files while current stages serve the pinned extra module (0.5594ms)
+✔ room-code admission uses an own prepared-file marker and never admits arbitrary module or inherited fields (0.1114ms)
+✔ actual owned verification accepts original and fully validated record-only carry schemas (1344.4396ms)
+✔ carry provenance fails closed on unknown, partial, malformed or temporally inconsistent fields (326.0333ms)
+✔ carry cannot claim an unrelated Git revision or altered compiled runtime even with restamped live hashes (691.2294ms)
+✔ current live adapter, package and checkout mismatches remain rejected (845.2453ms)
+✔ actual QA service source pins detect server/store change and reject unknown pin fields (249.3688ms)
+✔ actual transport-only preparation closes room-code JS imports and pins the Root service used by QA (128.8494ms)
+✔ starter choice keeps defaults and refuses nonempty saves before optional RENKO registration (0.981ms)
+✔ verifier counts admitted events, binds owner/epoch, proves fifth and tenth and refuses replay (1.2546ms)
+✔ ambiguous, saturated, missing, reused, mismatched and stale observations remain inconclusive (0.2647ms)
+✔ fifth damage alone cannot pass incorrect speed/direction or epoch ownership (0.2023ms)
+✔ actual client frame holds native immediately after one admitted event while continuing bounded publication (23.1581ms)
+✔ report validation is bounded, secret-free and refuses fake completion or inferred guest event counts (0.7245ms)
+✔ actual fresh-scenario initialize refuses a retained save before import, registration or save (16.715ms)
+✔ actual guest acceptance waits for complete commit in the current session, not a matching staged or old frame (5.2671ms)
+✔ version four capture requires both complete observers for a passing cadence check and admits no extra telemetry (1.379ms)
+✔ actual fifth orchestration preserves visibility gating through final save verification (6.8526ms)
+(node:6488) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ fresh-origin inventory refuses existing Galaxy databases and unsupported/malformed inventory without opening or deleting (1.1093ms)
+✔ exact native role fixtures retain production normalization, distinct derived seeds and minimal native equipment (2.8809ms)
+✔ configured stage is opt-in normal owned WASM with exact helper/native fixture pins; historical allowlists remain unchanged (530.0408ms)
+✔ configured profile bytes are role-local HTTP inputs and never admitted from the other role or a foreign Origin (0.3222ms)
+✔ guest wake facts remain uncommitted through header/page staging and rejection; zero commits clear actual active samples (0.7468ms)
+✔ incomplete, stale, wrong-epoch, duplicate, excessive and underflowed Wake pages cannot become native completion facts (0.6623ms)
+✔ native tick expiry waits past the latest observed birth; Haven retreat requires both actual committed pilot positions (0.3804ms)
+✔ leave removal binds actual owner and epoch and failure/death remains inconclusive after end (0.1547ms)
+✔ actual configured initialization preflight precedes SaveStore/native creation and constructor mismatch prevents persistence (59.198ms)
+✔ actual Wake movement uses fire-off native steps/current commits and caps phase work; it never creates trail points (12.3342ms)
+✔ actual retirement latches failure, waits for native restore, frees once even after read failure, and refuses blocked release (5.0801ms)
+✔ version-five sanitized reports separate configured/native facts from earned/visual claims and reject unsupported success (1.571ms)
+✔ actual parent Wake phase guards visibility through final verification and performs explicit failed cleanup (6.0246ms)
+ℹ tests 32
+ℹ suites 0
+ℹ pass 32
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3792.32

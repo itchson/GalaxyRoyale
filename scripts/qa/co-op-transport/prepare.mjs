@@ -6,6 +6,7 @@ import { createRequire } from "node:module";
 import { execFileSync } from "node:child_process";
 import { wasmContentHash, WASM_FILES } from "../../wasm-artifacts.mjs";
 import { buildIdentity, treeHash } from "../../preview-build.mjs";
+import { readWakeFixtures, wakePreparedFiles } from "./wake-fixtures.mjs";
 
 export const root = path.resolve(
   fileURLToPath(new URL("../../..", import.meta.url)),
@@ -217,6 +218,16 @@ export const fileLimit = (name) =>
       ? 100_000
       : 250_000;
 export function preparedNames(manifest) {
+  const configuredWake = Object.hasOwn(manifest, "configured_wake");
+  if (
+    (configuredWake &&
+      (manifest.configured_wake !== true ||
+        manifest.version !== 3 ||
+        manifest.profile_mode !== "owned" ||
+        manifest.wake_fixture?.scenario !== "configured-ion-wake-r1-e1")) ||
+    (!configuredWake && Object.hasOwn(manifest, "wake_fixture"))
+  )
+    throw new Error("Invalid configured native Wake stage.");
   // Older frozen stages predate room-code. New stages pin its actual file.
   const roomCode = Object.hasOwn(manifest.files ?? {}, "modules/room-code.js");
   const modules = (names) =>
@@ -236,6 +247,7 @@ export function preparedNames(manifest) {
   const names = [
     ...wasmPageNames,
     ...(manifest.fifth_shot === true ? ["fifth-shot.js"] : []),
+    ...(configuredWake ? wakePreparedFiles : []),
     ...modules(wasmModuleNames),
     "modules/storage.js",
   ];
@@ -268,8 +280,18 @@ export function stagePath(value) {
 }
 export async function prepare(
   value,
-  { dist, ownedLoadout = false, sourceRoot, sourceCommit } = {},
+  {
+    dist,
+    ownedLoadout = false,
+    configuredWake = false,
+    sourceRoot,
+    sourceCommit,
+  } = {},
 ) {
+  if (typeof configuredWake !== "boolean")
+    throw new Error(
+      "Configured native Wake requires an explicit boolean opt-in.",
+    );
   const stage = stagePath(value);
   if (await fs.stat(path.join(stage, "manifest.json")).catch(() => null))
     throw new Error(
@@ -287,6 +309,13 @@ export async function prepare(
     throw new Error(
       "Source commit options require explicit owned-loadout mode.",
     );
+  if (configuredWake && (!ownedLoadout || !dist))
+    throw new Error(
+      "Configured native Wake requires a source-pinned normal owned WASM stage.",
+    );
+  const wakeFixture = configuredWake
+    ? await readWakeFixtures(directory, root)
+    : null;
   const provenance = ownedLoadout
     ? await verifyOwnedSource({ sourceRoot, sourceCommit, dist })
     : null;
@@ -335,6 +364,22 @@ export async function prepare(
     await fs.writeFile(path.join(stage, name), bytes);
     inputs[`scripts/qa/co-op-transport/${name}`] = sha(bytes);
     files[name] = sha(bytes);
+  }
+  if (wakeFixture) {
+    wakeFixture.files.set(
+      "wake-observation.js",
+      await fs.readFile(path.join(directory, "wake-observation.js")),
+    );
+    for (const [name, bytes] of wakeFixture.files) {
+      await fs.mkdir(path.dirname(path.join(stage, name)), { recursive: true });
+      await fs.writeFile(path.join(stage, name), bytes);
+      inputs[`scripts/qa/co-op-transport/${name}`] = sha(bytes);
+      files[name] = sha(bytes);
+    }
+    for (const name of ["wake-fixtures.mjs", "server.mjs", "prepare.mjs"])
+      inputs[`scripts/qa/co-op-transport/${name}`] = sha(
+        await fs.readFile(path.join(directory, name)),
+      );
   }
   let builds, artifacts;
   if (dist) {
@@ -435,6 +480,9 @@ export async function prepare(
         }
       : {}),
     typescript: ts.version,
+    ...(wakeFixture
+      ? { configured_wake: true, wake_fixture: wakeFixture.metadata }
+      : {}),
     service_inputs: serviceInputs,
     scope: ownedLoadout
       ? "prepared real owned-loadout two-Galaxy WASM/RTC QA from exact compiled source; browser execution pending; no shared rewards/NAT/eight-player/fifth-shot acceptance"
@@ -461,7 +509,8 @@ if (
     const key = args[i];
     if (Object.hasOwn(options, key))
       throw new Error("Duplicate preparation option.");
-    if (key === "--owned-loadout") options[key] = true;
+    if (key === "--owned-loadout" || key === "--configured-wake")
+      options[key] = true;
     else if (pairs.has(key) && args[i + 1] && !args[i + 1].startsWith("--"))
       options[key] = args[++i];
     else throw new Error("Invalid preparation options.");
@@ -469,6 +518,7 @@ if (
   const manifest = await prepare(options["--stage"], {
     dist: options["--dist"],
     ownedLoadout: options["--owned-loadout"] ?? false,
+    configuredWake: options["--configured-wake"] ?? false,
     sourceRoot: options["--source-root"],
     sourceCommit: options["--source-commit"],
   });

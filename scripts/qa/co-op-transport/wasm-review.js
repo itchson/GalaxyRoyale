@@ -21,6 +21,9 @@ const state = { host: null, guest: null };
 const failureCodes = new Set([
   ...[
     "none",
+    "wake_preflight",
+    "load_configured_fixture",
+    "validate_configured_profile",
     "open_store",
     "starter_selection",
     "import_module",
@@ -53,6 +56,16 @@ const failureCodes = new Set([
   "approval_not_pending",
   "signaling_limit",
   "room_create_failed",
+  "wake_fresh_origin_required",
+  "wake_storage_unavailable",
+  "wake_fixture_mismatch",
+  "wake_normal_wasm_required",
+  "wake_context",
+  "wake_page_mismatch",
+  "wake_sequence",
+  "wake_timeout",
+  "wake_native_frame",
+  "wake_lifetime_expired",
 ]);
 const actionFailureCodes = new Set([
   ...failureCodes,
@@ -162,10 +175,10 @@ function send(role, name, args = {}, timeoutMs = 75_000) {
     );
   });
 }
-async function read() {
+async function read(timeoutMs = 75_000) {
   [state.host, state.guest] = await Promise.all([
-    send("host", "state"),
-    send("guest", "state"),
+    send("host", "state", {}, timeoutMs),
+    send("guest", "state", {}, timeoutMs),
   ]);
   paint();
 }
@@ -173,10 +186,13 @@ function check(name, passed) {
   checks.push({ name, passed: Boolean(passed) });
   if (!passed) throw new Error("declared_check_failed");
 }
-async function until(predicate) {
-  const deadline = performance.now() + 65_000;
+async function until(predicate, timeoutMs = 65_000) {
+  const deadline = performance.now() + timeoutMs;
   while (true) {
-    await read();
+    const remaining = deadline - performance.now();
+    if (remaining <= 0) throw new Error("native_timeout");
+    await read(Math.min(remaining, 5_000));
+    if (performance.now() > deadline) throw new Error("native_timeout");
     if (predicate()) return;
     if (performance.now() > deadline) throw new Error("native_timeout");
     await new Promise((r) => setTimeout(r, 250));
@@ -186,7 +202,9 @@ function paint() {
   $("results").textContent = JSON.stringify(
     {
       scope:
-        "Actual two native Games/RTC on independent QA origins; no Internet/performance acceptance",
+        scenario === "configured-ion-wake-r1-e1"
+          ? "Configured native R1/E1 fixtures, NOT earned; actual native capture/commit facts; visual/physical/Internet/performance acceptance separate"
+          : "Actual two native Games/RTC on independent QA origins; no Internet/performance acceptance",
       backend,
       profile_mode: config.profile_mode ?? "factory",
       scenario,
@@ -202,6 +220,10 @@ function paint() {
     "connect",
     "drive",
     "fifth",
+    "wake-drive",
+    "wake-stop",
+    "wake-retreat",
+    "wake-reduced-motion",
     "end",
     "rejoin",
     "leave",
@@ -217,6 +239,8 @@ function paint() {
   $("scenario").disabled = busy || initialized;
   $("scenario").querySelector('[value="renko-fifth"]').disabled =
     !config.scenarios?.includes("renko-fifth");
+  $("scenario").querySelector('[value="configured-ion-wake-r1-e1"]').disabled =
+    !config.scenarios?.includes("configured-ion-wake-r1-e1");
   for (const id of ["connect", "drive", "end", "rejoin", "leave", "verify"])
     $(id).disabled ||= !initialized;
   $("drive").disabled ||= state.guest?.phase !== "connected";
@@ -226,6 +250,18 @@ function paint() {
     scenario !== "renko-fifth" ||
     state.guest?.phase !== "connected" ||
     state.host?.fifth_shot?.state === "complete";
+  for (const id of [
+    "wake-drive",
+    "wake-stop",
+    "wake-retreat",
+    "wake-reduced-motion",
+  ])
+    $(id).disabled ||=
+      !initialized ||
+      scenario !== "configured-ion-wake-r1-e1" ||
+      state.host?.mode !== "host" ||
+      state.guest?.phase !== "connected" ||
+      [state.host, state.guest].some((c) => c?.wake?.state === "inconclusive");
   for (const kind of ["decline", "replace", "lock"])
     $("room-" + kind).disabled ||=
       !initialized ||
@@ -241,12 +277,22 @@ async function capture() {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       version:
-        scenario === "renko-fifth"
-          ? 4
-          : config.profile_mode === "owned"
-            ? 3
-            : 2,
-      ...(scenario === "renko-fifth" ? { scenario } : {}),
+        scenario === "configured-ion-wake-r1-e1"
+          ? 5
+          : scenario === "renko-fifth"
+            ? 4
+            : config.profile_mode === "owned"
+              ? 3
+              : 2,
+      ...(["renko-fifth", "configured-ion-wake-r1-e1"].includes(scenario)
+        ? { scenario }
+        : {}),
+      ...(scenario === "configured-ion-wake-r1-e1"
+        ? {
+            fixture_provenance:
+              "configured native fixture; NOT earned progression",
+          }
+        : {}),
       ...(config.profile_mode === "owned" ? { profile_mode: "owned" } : {}),
       run_id: run,
       backend,
@@ -284,10 +330,10 @@ async function action(label, fn) {
     paint();
   }
 }
-async function verify() {
+async function verify(timeoutMs = 75_000) {
   [state.host, state.guest] = await Promise.all([
-    send("host", "verify"),
-    send("guest", "verify"),
+    send("host", "verify", {}, timeoutMs),
+    send("guest", "verify", {}, timeoutMs),
   ]);
   check(
     "saves-unchanged",
@@ -695,6 +741,16 @@ $("initialize").onclick = () =>
         "native-owned-export",
         state.host.owned_export === true && state.guest.owned_export === true,
       );
+    if (scenario === "configured-ion-wake-r1-e1")
+      check(
+        "wake-configured-profiles",
+        [state.host, state.guest].every(
+          (c) =>
+            c.wake?.fresh_origin === true &&
+            c.wake.fixture_valid === true &&
+            c.wake.native_export_match === true,
+        ),
+      );
     await verify();
   });
 $("connect").onclick = () => action("Create and join", () => connected(false));
@@ -757,6 +813,73 @@ async function fifthShot() {
   }
 }
 $("fifth").onclick = () => action("RENKO native fifth-shot", fifthShot);
+async function wakeRound(kind) {
+  requireVisibleClients();
+  if (
+    scenario !== "configured-ion-wake-r1-e1" ||
+    !["drive", "stop", "retreat", "reduced-motion"].includes(kind) ||
+    state.host?.mode !== "host" ||
+    state.guest?.phase !== "connected"
+  )
+    throw new Error("wake_context");
+  driveVisibilityLost = false;
+  driveActive = true;
+  let failure;
+  try {
+    await Promise.all([
+      send("host", "wake-" + kind, {}, 35_000),
+      send("guest", "wake-" + kind, {}, 35_000),
+    ]);
+    guardDriveVisibility();
+    const predicates = {
+      drive: (v) =>
+        v?.captured_host && v.captured_guest && v.native_render_frames > 0,
+      stop: (v) => v?.state === "expired" && v.expired,
+      retreat: (v) => v?.state === "retreated" && v.retreated,
+      "reduced-motion": (v) => v?.reduced_motion === true,
+    };
+    await until(() => {
+      guardDriveVisibility();
+      if (
+        [state.host, state.guest].some(
+          (c) => c.failure_code !== null || c.wake?.state === "inconclusive",
+        )
+      )
+        throw new Error("wake_context");
+      return [state.host, state.guest].every((c) => predicates[kind](c.wake));
+    }, 15_000);
+    await verify(5_000);
+    guardDriveVisibility();
+    check(
+      {
+        drive: "wake-native-owners",
+        stop: "wake-authoritative-expiry",
+        retreat: "wake-native-retreat",
+        "reduced-motion": "wake-reduced-motion",
+      }[kind],
+      true,
+    );
+  } catch (error) {
+    failure = error;
+  } finally {
+    driveActive = false;
+    if (failure) {
+      // A command timeout is not cancellation. Disposal is separately bounded;
+      // an unresolved native restore stays a failed live gate.
+      try {
+        [state.host, state.guest] = await Promise.all([
+          send("host", "dispose", {}, 20_000),
+          send("guest", "dispose", {}, 20_000),
+        ]);
+        disposed = true;
+      } catch {}
+    }
+  }
+  if (failure) throw failure;
+}
+for (const kind of ["drive", "stop", "retreat", "reduced-motion"])
+  $("wake-" + kind).onclick = () =>
+    action("Configured native Wake " + kind, () => wakeRound(kind));
 $("end").onclick = () =>
   action("Host end", async () => {
     await send("host", "end");
@@ -786,6 +909,15 @@ $("leave").onclick = () =>
         state.guest.timers === 0,
     );
     check("guest-leave-restored", true);
+    if (scenario === "configured-ion-wake-r1-e1") {
+      await until(
+        () =>
+          state.host.wake?.removed_owner === true &&
+          state.guest.wake?.local_view_ended === true,
+        15_000,
+      );
+      check("wake-owner-removal", true);
+    }
     await verify();
   });
 $("verify").onclick = () => action("Read durable saves", verify);

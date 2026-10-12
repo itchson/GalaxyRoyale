@@ -1,0 +1,3 @@
+# Keep retained raw command/Studio evidence bytes exact in Git.
+*.log -text
+*.json -text

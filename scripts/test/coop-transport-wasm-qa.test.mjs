@@ -281,6 +281,7 @@ test("Actual client frame code calls Galaxy.step only, pauses solo/guest, and re
   const calls = [];
   const context = vm.createContext({
     stopped: false,
+    scenario: "default",
     captureHold: false,
     fifth: null,
     appliedPause: null,
@@ -537,6 +538,8 @@ test("Actual child message route preserves controlled approval failure and sanit
       failureCode: null,
       fifth: null,
       fifthReasons: new Set(),
+      wakeApi: null,
+      scenario: "default",
       update: () => {},
       phase: "hosting",
       addEventListener: (type, callback) => {

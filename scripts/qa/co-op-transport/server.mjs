@@ -5,6 +5,12 @@ import { once } from "node:events";
 import { makeCoopServer } from "../../../apps/coop/server.mjs";
 import { fifthReasons, validateFifthReport } from "./fifth-shot.js";
 import {
+  wakeReasons,
+  validateWakeReport,
+  WAKE_SCENARIO,
+} from "./wake-observation.js";
+import { verifyWakeStage } from "./wake-fixtures.mjs";
+import {
   root,
   stagePath,
   sha,
@@ -91,6 +97,12 @@ export function validateReport(o) {
   return o;
 }
 export const wasmCheckNames = new Set([
+  "wake-configured-profiles",
+  "wake-native-owners",
+  "wake-authoritative-expiry",
+  "wake-native-retreat",
+  "wake-owner-removal",
+  "wake-reduced-motion",
   "host-approval-before-rtc",
   "room-pending-isolated",
   "room-policy-keeps-host",
@@ -122,6 +134,9 @@ export const wasmCheckNames = new Set([
 ]);
 export const initializationStages = [
   "none",
+  "wake_preflight",
+  "load_configured_fixture",
+  "validate_configured_profile",
   "open_store",
   "starter_selection",
   "import_module",
@@ -145,6 +160,7 @@ export const clientFailureCodes = new Set([
   "signaling_limit",
   "room_create_failed",
   ...fifthReasons,
+  ...wakeReasons,
 ]);
 export function validateWasmReport(o) {
   const exact = (v, keys) =>
@@ -183,7 +199,8 @@ export function validateWasmReport(o) {
   ];
   const hashes = ["profile_sha", "baseline_sha", "persisted_sha"];
   const fifth = o?.version === 4;
-  const owned = o?.version === 3 || fifth;
+  const wake = o?.version === 5;
+  const owned = o?.version === 3 || fifth || wake;
   if (
     !exact(o, [
       "version",
@@ -193,10 +210,15 @@ export function validateWasmReport(o) {
       "clients",
       "session_distinct",
       ...(owned ? ["profile_mode"] : []),
-      ...(fifth ? ["scenario"] : []),
+      ...(fifth || wake ? ["scenario"] : []),
+      ...(wake ? ["fixture_provenance"] : []),
     ]) ||
-    ![2, 3, 4].includes(o.version) ||
+    ![2, 3, 4, 5].includes(o.version) ||
     (fifth && o.scenario !== "renko-fifth") ||
+    (wake &&
+      (o.scenario !== WAKE_SCENARIO ||
+        o.fixture_provenance !==
+          "configured native fixture; NOT earned progression")) ||
     (owned && o.profile_mode !== "owned") ||
     !/^[a-f0-9]{16}$/.test(o.run_id) ||
     !["webgpu", "webgl2"].includes(o.backend) ||
@@ -227,6 +249,7 @@ export function validateWasmReport(o) {
         ...flags,
         ...hashes,
         ...(fifth ? ["fifth_shot"] : []),
+        ...(wake ? ["wake"] : []),
         ...(owned
           ? [
               "owned_export",
@@ -275,6 +298,20 @@ export function validateWasmReport(o) {
     )
       throw new Error("Invalid WASM client observations.");
     if (fifth) validateFifthReport(c.fifth_shot, c.role);
+    if (wake && c.wake !== null) validateWakeReport(c.wake, c.role);
+    if (
+      wake &&
+      c.init_stage === "ready" &&
+      (c.wake === null ||
+        ![
+          c.wake.fresh_origin,
+          c.wake.fixture_valid,
+          c.wake.native_export_match,
+        ].every((v) => v === true))
+    )
+      throw new Error(
+        "Configured Wake ready requires actual fresh/fixture/export observations.",
+      );
   }
   if (
     o.checks.some(
@@ -290,7 +327,54 @@ export function validateWasmReport(o) {
     throw new Error(
       "Fifth-shot check requires both complete native observations.",
     );
+  for (const check of o.checks.filter((c) => c.name.startsWith("wake-"))) {
+    if (!wake)
+      throw new Error("Wake check requires configured version-five scope.");
+    if (!check.passed) continue;
+    const values = o.clients.map((c) => c.wake);
+    const gates = {
+      "wake-configured-profiles": () =>
+        values.every(
+          (v) =>
+            v && v.fresh_origin && v.fixture_valid && v.native_export_match,
+        ),
+      "wake-native-owners": () =>
+        values.every(
+          (v) =>
+            v &&
+            v.positive_host &&
+            v.positive_guest &&
+            v.native_render_frames > 0,
+        ),
+      "wake-authoritative-expiry": () => values.every((v) => v?.expired),
+      "wake-native-retreat": () => values.every((v) => v?.retreated),
+      "wake-owner-removal": () =>
+        values[0]?.removed_owner === true &&
+        values[1]?.local_view_ended === true,
+      "wake-reduced-motion": () =>
+        values.every((v) => v?.reduced_motion === true),
+    };
+    if (!gates[check.name]?.())
+      throw new Error("Wake check lacks matching native observations.");
+  }
   return o;
+}
+export function wakeFixtureRoleAllowed(
+  name,
+  host,
+  origin,
+  pageOrigin,
+  guestOrigin,
+) {
+  const match = /^fixtures\/configured-wake\/(host|guest)-profile\.json$/.exec(
+    name,
+  );
+  if (!match) return true;
+  const allowed = match[1] === "host" ? pageOrigin : guestOrigin;
+  return (
+    host === new URL(allowed).host &&
+    (origin === undefined || origin === allowed)
+  );
 }
 async function body(req) {
   let size = 0;
@@ -325,6 +409,13 @@ export async function start({
   );
   const names = new Set(preparedNames(manifest)),
     wasm = manifest.mode === "wasm";
+  if (manifest.configured_wake === true) {
+    await verifyWakeStage(
+      manifest,
+      path.dirname(fileURLToPath(import.meta.url)),
+      root,
+    );
+  }
   if (
     manifest.typescript !== "5.9.3" ||
     Object.keys(manifest.files).length !== names.size ||
@@ -431,7 +522,13 @@ export async function start({
                     ? {
                         scenarios:
                           manifest.version === 3
-                            ? ["default", "renko-fifth"]
+                            ? [
+                                "default",
+                                "renko-fifth",
+                                ...(manifest.configured_wake === true
+                                  ? [WAKE_SCENARIO]
+                                  : []),
+                              ]
                             : ["default"],
                       }
                     : {}),
@@ -440,6 +537,9 @@ export async function start({
                         source_commit: manifest.source_commit,
                         build_stamp: manifest.build_stamp,
                       }
+                    : {}),
+                  ...(manifest.configured_wake === true
+                    ? { wake_fixture: manifest.wake_fixture }
                     : {}),
                 }
               : {}),
@@ -466,6 +566,11 @@ export async function start({
             manifest.version === 3 &&
             manifest.fifth_shot === true &&
             report.version === 4
+          ) &&
+          !(
+            manifest.version === 3 &&
+            manifest.configured_wake === true &&
+            report.version === 5
           )
         )
           throw new Error("Report mode does not match prepared provenance.");
@@ -474,11 +579,13 @@ export async function start({
           source_inputs: manifest.inputs,
           captured_at: new Date().toISOString(),
           scope:
-            manifest.version === 3
-              ? "Root-driven browser observations from real native owned-loadout export and two-Galaxy WASM/controller/RTC; no shared progression/NAT/performance/every-ability acceptance"
-              : wasm
-                ? "Root-driven browser observations from real two-Galaxy WASM/controller/RTC on independent QA origins; v1 factory guest/no shared progression; no NAT/performance acceptance"
-                : "actual same-page browser RTC loopback; declared framing admission; no Game authority/NAT",
+            report.version === 5
+              ? "Configured native R1/E1 fixtures, NOT earned progression; actual two-Galaxy normal-WASM/RTC observations; visual/physical/performance/Internet acceptance separate"
+              : manifest.version === 3
+                ? "Root-driven browser observations from real native owned-loadout export and two-Galaxy WASM/controller/RTC; no shared progression/NAT/performance/every-ability acceptance"
+                : wasm
+                  ? "Root-driven browser observations from real two-Galaxy WASM/controller/RTC on independent QA origins; v1 factory guest/no shared progression; no NAT/performance acceptance"
+                  : "actual same-page browser RTC loopback; declared framing admission; no Game authority/NAT",
           ...(wasm
             ? { builds: manifest.builds, artifacts: manifest.artifacts }
             : {}),
@@ -488,6 +595,9 @@ export async function start({
                 git_inputs: manifest.git_inputs,
                 build_stamp: manifest.build_stamp,
               }
+            : {}),
+          ...(report.version === 5
+            ? { configured_native_fixture: manifest.wake_fixture }
             : {}),
         };
         const encoded = JSON.stringify(captured, null, 2) + "\n",
@@ -512,13 +622,27 @@ export async function start({
         res.writeHead(404);
         return res.end("Not found");
       }
+      if (
+        !wakeFixtureRoleAllowed(
+          name,
+          req.headers.host,
+          req.headers.origin,
+          origin,
+          guestOrigin,
+        )
+      ) {
+        res.writeHead(403);
+        return res.end("Role-local configured fixture only");
+      }
       res.setHeader(
         "Content-Type",
         name.endsWith(".html")
           ? "text/html; charset=utf-8"
           : name.endsWith(".wasm")
             ? "application/wasm"
-            : "text/javascript; charset=utf-8",
+            : name.endsWith(".json")
+              ? "application/json; charset=utf-8"
+              : "text/javascript; charset=utf-8",
       );
       res.end(bytes.get(name));
     } catch {

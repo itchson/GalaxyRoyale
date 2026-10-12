@@ -1,0 +1,101 @@
+{
+  "observedAt": "2026-10-12T22:14:24.9666490Z",
+  "scope": "Read-only final loopback inventory; existing Root/OS services are not stopped. No listener was invoked by these selected tests.",
+  "testedProcessIds": [
+    40440,
+    39968
+  ],
+  "testedProcessesListening": [],
+  "listeners": [
+    {
+      "address": "127.0.0.1",
+      "port": 1234,
+      "pid": 18716,
+      "process": "LM Studio"
+    },
+    {
+      "address": "127.0.0.1",
+      "port": 4172,
+      "pid": 568,
+      "process": "node"
+    },
+    {
+      "address": "127.0.0.1",
+      "port": 4173,
+      "pid": 568,
+      "process": "node"
+    },
+    {
+      "address": "127.0.0.1",
+      "port": 4174,
+      "pid": 16972,
+      "process": "node"
+    },
+    {
+      "address": "127.0.0.1",
+      "port": 4175,
+      "pid": 38616,
+      "process": "node"
+    },
+    {
+      "address": "127.0.0.1",
+      "port": 4176,
+      "pid": 6188,
+      "process": "node"
+    },
+    {
+      "address": "127.0.0.1",
+      "port": 8088,
+      "pid": 39392,
+      "process": "python"
+    },
+    {
+      "address": "127.0.0.1",
+      "port": 8190,
+      "pid": 17192,
+      "process": "python"
+    },
+    {
+      "address": "127.0.0.1",
+      "port": 15292,
+      "pid": 28920,
+      "process": "Adobe Desktop Service"
+    },
+    {
+      "address": "127.0.0.1",
+      "port": 15393,
+      "pid": 28920,
+      "process": "Adobe Desktop Service"
+    },
+    {
+      "address": "127.0.0.1",
+      "port": 16494,
+      "pid": 28920,
+      "process": "Adobe Desktop Service"
+    },
+    {
+      "address": "127.0.0.1",
+      "port": 18321,
+      "pid": 22608,
+      "process": "pythonw"
+    },
+    {
+      "address": "127.0.0.1",
+      "port": 41343,
+      "pid": 18716,
+      "process": "LM Studio"
+    },
+    {
+      "address": "127.0.0.1",
+      "port": 50911,
+      "pid": 7260,
+      "process": "ss_conn_service"
+    },
+    {
+      "address": "127.0.0.1",
+      "port": 50912,
+      "pid": 6760,
+      "process": "ss_conn_service2"
+    }
+  ]
+}
