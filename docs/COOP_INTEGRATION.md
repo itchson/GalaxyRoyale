@@ -2,7 +2,9 @@
 
 ## Current normal build
 
-The dock's INVITE/JOIN panel is connected to the browser controller and real Rust Game/Replica ports. This is an experimental local co-op foundation, not a completed multiplayer release. One authoritative host can admit seven guests. The host's seeded universe and dock are shared; each client retains separate local progression. Exiting restores the boxed original solo Game. Shared rewards and missions remain disabled.
+The short-code service and browser candidates have been independently reviewed and integrated into `codex/testing`. [PRIVATE_ROOMS.md](PRIVATE_ROOMS.md) records Join-default/Host tabs, eight-total rooms, approval before RTC, same-room code replacement, joining lock and the multiplayer HUD route. The current normal build uses these short codes. Source/service tests and one-host browser operations are accepted only within their recorded scope; new two-client approval, full eight-client and forced-TURN game acceptance remain pending.
+
+The dedicated floating MULTIPLAYER hub and HUD icon open the same full-screen Join/Host scene connected to the browser controller and real Rust Game/Replica ports. The central dock no longer opens it. This is an experimental local co-op foundation, not a completed multiplayer release. One authoritative host can admit seven guests. The host's seeded universe and dock are shared; each client retains separate local progression. Exiting restores the boxed original solo Game. Shared rewards and missions remain disabled.
 
 The controller uses ordered WebRTC DataChannels and ephemeral signaling. Channel opening and validated hello establish transport readiness; native admission and a complete committed publication establish game readiness separately. Session IDs, membership epochs and increasing sequences reject retired traffic. Remote inputs bind to their authenticated participants. Frames remain bounded to 64 KiB, buffered sends to 262,144 bytes, with no unbounded application send backlog.
 
@@ -21,6 +23,10 @@ Ordinary Repulsor Nova now has per-pilot damage-triggered cooldown and effective
 Ion Wake, Champion Impact Nova, Royal/signature effects and guest transient ability lights/particles remain separate gaps. Published projectiles and damaged bodies do not establish complete remote effects, audio or progression.
 
 ## Actual validation scopes
+
+The current private-room service/browser scopes are preserved in `artifacts/private-room-service-20261012/` and `artifacts/private-room-browser-20261012/`, including independent reviews and earlier failures. The combined native-source checks passed 898 Rust cases with 17 declared ignored cases at `d028f0d`; subsequent title/browser edits do not change those Rust sources or the compiled WASM hashes. The latest `f4b8882` shell run passed 635 cases with 3 declared skips and rebuilt both normal renderer bundles. These checks do not substitute for a live room run.
+
+One actual local WebGL2 host in the rebuilt D028 normal game displayed 1/8 players, copied its code, replaced it within the session, locked joining and stopped hosting. The old temporary code was retired and the new room ended before recording its artifact; local points displayed 16/12/9 before and after. No second client, approval click, failed ICE or TURN relay was operated in that run. Existing older RTC runs below remain historical evidence, not acceptance of the new approval contract.
 
 See `artifacts/league-coop-native-20261012/README.md` and its reports for exact revisions and limitations:
 

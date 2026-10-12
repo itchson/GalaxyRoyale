@@ -1,0 +1,12 @@
+   Compiling engine_core v0.1.0 (C:\Users\mitch\.codex\worktrees\galaxy-hud-navigation\galaxy-royale\crates\engine_core)
+   Compiling game_core v0.1.0 (C:\Users\mitch\.codex\worktrees\galaxy-hud-navigation\galaxy-royale\crates\game_core)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 6.37s
+     Running unittests src\lib.rs (target\debug\deps\game_core-5b2032bfdcb8bcac.exe)
+
+running 3 tests
+test hub_shadows::tests::export_actual_game_shadow_fields ... ignored, explicit actual Game healthy/damaged shadow fixture exporter; requires GALAXY_HUB_SHADOW_NATIVE
+test hub_shadows::tests::co_op_and_material_diagnostics_do_not_retain_solo_casters ... ok
+test hub_shadows::tests::actual_game_shadow_uses_interpolated_current_body_without_changing_authority ... ok
+
+test result: ok. 2 passed; 0 failed; 1 ignored; 0 measured; 525 filtered out; finished in 0.05s
+

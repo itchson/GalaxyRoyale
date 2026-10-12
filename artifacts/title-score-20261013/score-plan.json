@@ -1,0 +1,73 @@
+{
+  "schema": 1,
+  "status": "audition-design-only",
+  "direct_listening": false,
+  "source_transcription_accepted": false,
+  "source": {
+    "path": "C:/Users/mitch/Downloads/Galaxy Royale (3).mp3",
+    "sha256": "95fcb149bb55da752c4d93c18fcc1913a23b70ccafecb52d8db5548dc64755d6",
+    "decoded_duration_seconds": 42.68,
+    "source_tempo_candidate_bpm": 169.275,
+    "source_key_candidate": "B minor"
+  },
+  "transport": {
+    "units": "quarter-note beats",
+    "subdivision": 4,
+    "beats_per_bar_candidate": 4,
+    "title_tempo_audition_bpm": 169.275,
+    "hub_bpm": 120,
+    "exploration_bpm": 120,
+    "combat_bpm": 166,
+    "title_to_hub_ramp_beats": 8,
+    "combat_attack_ramp_beats": 4,
+    "combat_release_hold_beats": 2,
+    "combat_release_ramp_beats": 8,
+    "preserve_beat_and_harmonic_phase": true,
+    "timing": "integrate bpm linear in beat space; split at ramp endpoints"
+  },
+  "event_schema": {
+    "beat": "number",
+    "duration_beats": "number",
+    "midi": "integer or array for explicitly authored chords",
+    "velocity": "0..1",
+    "voice": "chipLead | clockworkArp | bubble | bass | glitch | pad | mutedString",
+    "articulation": "gate/release/glide fields specific to voice",
+    "meaning": "Authored note events; no source PCM, runtime audio file or random melody."
+  },
+  "chord_audition_vocabulary_not_source_progression": [
+    { "name": "Bm", "midi": [47, 54, 59, 62] },
+    { "name": "G", "midi": [43, 50, 55, 59] },
+    { "name": "Em", "midi": [40, 47, 52, 55] },
+    { "name": "A", "midi": [45, 52, 57, 61] },
+    { "name": "F#", "midi": [42, 49, 54, 58], "gate": "Only after listening confirms dominant color." }
+  ],
+  "motif_audition_not_source_transcription": [
+    { "beat": 0, "duration_beats": 0.5, "midi": 78, "velocity": 0.7, "voice": "chipLead" },
+    { "beat": 0.75, "duration_beats": 0.5, "midi": 71, "velocity": 0.85, "voice": "chipLead" },
+    { "beat": 1.5, "duration_beats": 0.75, "midi": 83, "velocity": 0.75, "voice": "chipLead" },
+    { "beat": 3, "duration_beats": 0.25, "midi": 76, "velocity": 0.6, "voice": "clockworkArp" },
+    { "beat": 3.5, "duration_beats": 0.25, "midi": 79, "velocity": 0.6, "voice": "clockworkArp" },
+    { "beat": 4, "duration_beats": 0.5, "midi": 78, "velocity": 0.7, "voice": "chipLead" },
+    { "beat": 4.75, "duration_beats": 0.5, "midi": 81, "velocity": 0.7, "voice": "chipLead" },
+    { "beat": 5.5, "duration_beats": 0.75, "midi": 74, "velocity": 0.8, "voice": "chipLead" },
+    { "beat": 7, "duration_beats": 0.5, "midi": 71, "velocity": 0.65, "voice": "chipLead" }
+  ],
+  "arrangements": {
+    "title": "Checked source hook, full chip/bubble/glitch arrangement and authored loop cadence.",
+    "panHub": "Soft sine lead, sparse hook fragments, common-tone pad and round bass.",
+    "renkoHub": "Warm triangle lead, soft pulse answer and quieter octave arpeggios.",
+    "hugoHub": "Sine/triangle lead, glassy upper replies, long quiet pad release.",
+    "exploration": "120 BPM, sparse hook, reduced arpeggio density and no combat drum/string layer.",
+    "combat": "166 BPM, checked hook retained with muted strings and authored percussion.",
+    "boss": "Same166 BPM clock with denser voicings and counterline.",
+    "biomes_and_champions": "Keep established identity contours, transpose/voice into accepted common harmony, and add checked source motif replies."
+  },
+  "gates": {
+    "source_hook_and_bass_listening": "open",
+    "native_runtime_score": "open",
+    "actual_offline_web_audio_render": "open",
+    "transitions_and_lifecycle": "open",
+    "physical_device_listening": "open",
+    "perceived_song_match": "open"
+  }
+}

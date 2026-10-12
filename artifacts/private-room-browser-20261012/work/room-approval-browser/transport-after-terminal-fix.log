@@ -1,0 +1,44 @@
+(node:43548) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ versioned frame bounds reject corruption, persistent profiles and nonfinite input (1.8785ms)
+✔ native snapshot contract rejects duplicate slots, wrong profile semantics and nonfinite geometry (0.4528ms)
+✔ HTTP reader refuses credential redirects and bounded oversized responses (6.2725ms)
+✔ body pages retain exact cell indices and reject duplicates, oversize and wrong query kinds (0.4406ms)
+✔ snapshot carries same-tick revision and permits finite authoritative projectiles beyond world edge (0.1826ms)
+✔ actual naturally spawned Coil metadata preserves the segment unknown-maximum sentinel only (0.315ms)
+✔ actual HTTP membership never implies a ready channel or Rust admission (82.1326ms)
+✔ already-open incoming native channel plus later open event sends exactly one hello (78.9576ms)
+✔ RTC diagnostics retain only allowlisted native error detail, never messages or candidates (42.1582ms)
+✔ real HTTP offer/answer/ICE path binds peer IDs and admits only explicit frames (80.6028ms)
+✔ host plus seven guest channels are bounded; ninth reservation fails (151.2387ms)
+✔ backpressure refuses without advancing wire sequence, queueing or replaying stale input (65.8095ms)
+✔ malformed forged peer hello closes only that host peer and leaves no duplicate RTC (62.3568ms)
+✔ malformed replayed sequence closes only that host peer and leaves no duplicate RTC (61.5884ms)
+✔ malformed wrong session closes only that host peer and leaves no duplicate RTC (62.6955ms)
+✔ malformed guest snapshot authority closes only that host peer and leaves no duplicate RTC (62.7405ms)
+✔ input epoch and immutable snapshot seed are checked before sends (66.0882ms)
+✔ explicit rejection frees the guest reservation without ending the host (57.5727ms)
+✔ host end notifies guest, aborts polls and allows a distinct-session rejoin (72.9057ms)
+✔ expiry ends channels using real polling terminal notices (49.1932ms)
+✔ failed negotiation does not fabricate readiness and guest leave frees its reservation (33.0934ms)
+✔ late create result after disposal cannot reopen state and gets a leave cleanup (75.1995ms)
+✔ guest cannot end a host; explicit leave and repeated disposal clean every handler (46.4131ms)
+✔ a retired peer's already-queued ICE cannot terminate an unrelated host peer (127.3572ms)
+✔ SCTP message bound and send rate refuse without an application backlog (61.3932ms)
+✔ unopened negotiation deadline frees membership and every tracked clock task (76.0322ms)
+✔ pending request waits without RTC and decline retains its exact terminal outcome (32.0931ms)
+✔ approval timeout is independent of approved negotiation reservation timeout (110.3653ms)
+✔ same-world rotate/lock preserves approved channels and retires only pending requests (154.3064ms)
+✔ hostile pre-approval SDP event cannot create guest RTC or bypass approval (50.241ms)
+✔ newest whole policy wins delayed rotation and heartbeat responses (72.2115ms)
+✔ delayed old join-request cannot recreate an approval row after a newer policy (62.1986ms)
+✔ late admin response after leave cannot reopen code, policy, requests or RTC (14.4433ms)
+✔ reconnection cancels loss timeout; actual failed connection closes once (47.9022ms)
+ℹ tests 34
+ℹ suites 0
+ℹ pass 34
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2107.1005

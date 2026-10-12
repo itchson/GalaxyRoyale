@@ -20,6 +20,7 @@ function declarations(text, bindings) {
     "currentScorePhases",
     "fixtureState",
     "fixtureEvents",
+    "createOfflineAdapter",
     "renderFixture",
   ]);
   const selected = parsed.statements.filter((node) =>
@@ -29,9 +30,12 @@ function declarations(text, bindings) {
         )
       : ts.isFunctionDeclaration(node) && names.has(node.name?.text),
   );
-  const source = selected.map((node) => node.getText(parsed)).join("\n");
+  // Execute the actual page functions without its DOM/import side effects.
+  const source = selected
+    .map((node) => node.getText(parsed).replace(/^export\s+/, ""))
+    .join("\n");
   return vm.runInNewContext(
-    `${source}\n({fixtures,fixtureState,fixtureEvents,renderFixture,phases:typeof currentScorePhases==='undefined'?null:currentScorePhases})`,
+    `${source}\n({fixtures,fixtureState,fixtureEvents,renderFixture,createOfflineAdapter:typeof createOfflineAdapter==='function'?createOfflineAdapter:null,phases:typeof currentScorePhases==='undefined'?null:currentScorePhases})`,
     { ...bindings },
   );
 }
@@ -245,4 +249,113 @@ test("pre-render injected unlock failure disposes callbacks and restores every a
   assert.equal(rendered, 0);
   assert.equal(disposed, 1);
   assert.deepEqual(isolated, saved);
+});
+
+test("actual renderer preserves absent native panner capability before an explicit no-PCM probe exit", async () => {
+  let observed,
+    disposed = 0,
+    rendered = 0;
+  const isolated = {
+    AudioContext: class OriginalContext {},
+    setInterval() {},
+    clearInterval() {},
+    OfflineAudioContext: class {
+      startRendering() {
+        rendered++;
+        throw new Error("PCM is forbidden in the capability probe");
+      }
+    },
+  };
+  const saved = { ...isolated };
+  class CapabilityProbeEngine {
+    setLevels() {}
+    update() {}
+    async unlock() {
+      const host = new isolated.AudioContext();
+      observed = typeof host.createStereoPanner;
+      assert.equal(
+        observed,
+        "undefined",
+        "the production feature guard must enter its mono route",
+      );
+      throw new Error("declared no-PCM capability probe");
+    }
+    dispose() {
+      disposed++;
+    }
+  }
+  const api = declarations(
+    await fs.readFile(path.join(TOOL_DIRECTORY, "review.js"), "utf8"),
+    {
+      AudioEngine,
+      BaselineEngine: AudioEngine,
+      QUIET_STATE: mixer.QUIET_STATE,
+      window: isolated,
+    },
+  );
+  await assert.rejects(
+    api.renderFixture({ ...api.fixtures[4], Engine: CapabilityProbeEngine }),
+    /declared no-PCM capability probe/,
+  );
+  assert.equal(observed, "undefined");
+  assert.equal(rendered, 0);
+  assert.equal(disposed, 1);
+  assert.deepEqual(isolated, saved);
+});
+
+test("exported offline adapter preserves real receivers, return identity and exact node/source registration", () => {
+  const nodes = [],
+    sources = [],
+    calls = [];
+  const panner = { kind: "native-panner" },
+    oscillator = { kind: "native-oscillator" };
+  const bufferSource = { kind: "native-buffer-source" },
+    buffer = { kind: "native-buffer" };
+  const real = {
+    get sampleRate() {
+      assert.equal(this, real);
+      return 48000;
+    },
+    createStereoPanner(...args) {
+      assert.equal(this, real);
+      calls.push(args);
+      return panner;
+    },
+    createOscillator() {
+      assert.equal(this, real);
+      return oscillator;
+    },
+    createBufferSource() {
+      assert.equal(this, real);
+      return bufferSource;
+    },
+    createBuffer() {
+      assert.equal(this, real);
+      return buffer;
+    },
+  };
+  const host = current.createOfflineAdapter(real, nodes, sources);
+  const detachedFactory = host.createStereoPanner;
+  assert.equal(typeof detachedFactory, "function");
+  assert.equal(detachedFactory("declared argument"), panner);
+  assert.deepEqual(calls, [["declared argument"]]);
+  assert.equal(host.createOscillator(), oscillator);
+  assert.equal(host.createBufferSource(), bufferSource);
+  assert.equal(host.createBuffer(), buffer);
+  assert.equal(host.sampleRate, 48000);
+  assert.deepEqual(nodes, [panner, oscillator, bufferSource]);
+  assert.deepEqual(sources, [oscillator, bufferSource]);
+});
+
+test("exported offline adapter retains absent and noncallable factory capabilities without phantom nodes", () => {
+  for (const value of [undefined, null, 17]) {
+    const real = value === undefined ? {} : { createStereoPanner: value };
+    const nodes = [],
+      sources = [];
+    const host = current.createOfflineAdapter(real, nodes, sources);
+    assert.equal(host.createStereoPanner, value);
+    assert.equal(typeof host.createStereoPanner === "function", false);
+    assert.deepEqual(nodes, []);
+    assert.deepEqual(sources, []);
+  }
 });

@@ -1,0 +1,93 @@
+{
+  "schema": 1,
+  "captured_at": "2026-10-12T13:57:32.533Z",
+  "root": "C:/Users/mitch/Documents/ChatGPT/galaxy-royale",
+  "root_head": "f4a6d46502850f189406862c5d1ebf1eeae7b39a",
+  "kind": "dirty source-only review; no actual browser/build/visual acceptance",
+  "files": [
+    {
+      "path": "apps/game/src/main.ts",
+      "bytes": 86446,
+      "sha256": "b0379df1646953914964c81f444a72d76f2617a8023fa91c54ac895cce0de3be",
+      "unchanged_after_capture": true
+    },
+    {
+      "path": "apps/game/src/pixel-ui.ts",
+      "bytes": 22691,
+      "sha256": "8987a87bfc43b8a34cf8b1d3835796cffb36b3f699171b89e1b5a5dcce648dc5",
+      "unchanged_after_capture": true
+    },
+    {
+      "path": "apps/game/src/style.css",
+      "bytes": 30278,
+      "sha256": "b4d1a196a9fb7640c6a113f04c508a39cc2a1d19018fb05945a6d302ca413119",
+      "unchanged_after_capture": true
+    },
+    {
+      "path": "apps/game/src/missions.ts",
+      "bytes": 5428,
+      "sha256": "b85555cb9b3c41c915d8b69b8cd169942c4d6e5479ca194aaffbd3f917877d4e",
+      "unchanged_after_capture": true
+    },
+    {
+      "path": "apps/game/src/missions.css",
+      "bytes": 723,
+      "sha256": "6277576ce347675711cde4eec782a5a828b86a06233f3d63ea22b581cdfa105a",
+      "unchanged_after_capture": true
+    },
+    {
+      "path": "apps/game/index.html",
+      "bytes": 17011,
+      "sha256": "cccc113d42ada4f4e4495588051cab89037aab6a22a045cabd0fb87b0556b6c5",
+      "unchanged_after_capture": true
+    },
+    {
+      "path": "crates/game_web/src/sports_ui.rs",
+      "bytes": 17577,
+      "sha256": "058b38bf576009e8c81bf5ca2598d69d96d54069c372ed3ed86bcde07714c684",
+      "unchanged_after_capture": true
+    },
+    {
+      "path": "crates/game_web/src/ui_scene.rs",
+      "bytes": 122411,
+      "sha256": "fa165cc87565a98ee91238b0e777e2e82be09ea3456557682c73b81758ec660b",
+      "unchanged_after_capture": true
+    },
+    {
+      "path": "docs/HAVEN_SCENES.md",
+      "bytes": 2020,
+      "sha256": "8375d31c621849fea33ce8fdc1bfb5423f841200d3d527f51b08e01f4f8ee1f2",
+      "unchanged_after_capture": true
+    },
+    {
+      "path": "apps/game/src/campaign.ts",
+      "bytes": 9619,
+      "sha256": "9ab300a1a39888c0cd8faff99ec73ffb1d26f66ec8cd0e0fa1c6f412fe6cf548",
+      "unchanged_after_capture": true
+    },
+    {
+      "path": "apps/game/src/meishi.ts",
+      "bytes": 9394,
+      "sha256": "1dd92f57cd41eca137dff8a4e8c900ca0fcc702b85590f9acf0a86abe76dcc9f",
+      "unchanged_after_capture": true
+    },
+    {
+      "path": "apps/game/src/meishi.css",
+      "bytes": 4688,
+      "sha256": "3fd379c0baa554787cd88c35bf00a128e193d9f3a0e7378fb4025ebe7fce6cf2",
+      "unchanged_after_capture": true
+    },
+    {
+      "path": "crates/game_web/src/renderer.rs",
+      "bytes": 27253,
+      "sha256": "9c9a8944e26eb5fac71ae99258a446512e92c5e567f7cb5eaf8b043f26c1c674",
+      "unchanged_after_capture": true
+    },
+    {
+      "path": "crates/game_web/src/pixel.wgsl",
+      "bytes": 5824,
+      "sha256": "55643341b87629e739c11f1d339913fb31438ca31468f87a61dae277b13dd550",
+      "unchanged_after_capture": true
+    }
+  ]
+}

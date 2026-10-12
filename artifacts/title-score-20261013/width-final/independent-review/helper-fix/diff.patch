@@ -1,0 +1,289 @@
+diff --git a/scripts/qa/audio-review/fixtures.test.mjs b/scripts/qa/audio-review/fixtures.test.mjs
+index 3a4965b..0975b16 100644
+--- a/scripts/qa/audio-review/fixtures.test.mjs
++++ b/scripts/qa/audio-review/fixtures.test.mjs
+@@ -20,6 +20,7 @@ function declarations(text, bindings) {
+     "currentScorePhases",
+     "fixtureState",
+     "fixtureEvents",
++    "createOfflineAdapter",
+     "renderFixture",
+   ]);
+   const selected = parsed.statements.filter((node) =>
+@@ -29,9 +30,12 @@ function declarations(text, bindings) {
+         )
+       : ts.isFunctionDeclaration(node) && names.has(node.name?.text),
+   );
+-  const source = selected.map((node) => node.getText(parsed)).join("\n");
++  // Execute the actual page functions without its DOM/import side effects.
++  const source = selected
++    .map((node) => node.getText(parsed).replace(/^export\s+/, ""))
++    .join("\n");
+   return vm.runInNewContext(
+-    `${source}\n({fixtures,fixtureState,fixtureEvents,renderFixture,phases:typeof currentScorePhases==='undefined'?null:currentScorePhases})`,
++    `${source}\n({fixtures,fixtureState,fixtureEvents,renderFixture,createOfflineAdapter:typeof createOfflineAdapter==='function'?createOfflineAdapter:null,phases:typeof currentScorePhases==='undefined'?null:currentScorePhases})`,
+     { ...bindings },
+   );
+ }
+@@ -246,3 +250,112 @@ test("pre-render injected unlock failure disposes callbacks and restores every a
+   assert.equal(disposed, 1);
+   assert.deepEqual(isolated, saved);
+ });
++
++test("actual renderer preserves absent native panner capability before an explicit no-PCM probe exit", async () => {
++  let observed,
++    disposed = 0,
++    rendered = 0;
++  const isolated = {
++    AudioContext: class OriginalContext {},
++    setInterval() {},
++    clearInterval() {},
++    OfflineAudioContext: class {
++      startRendering() {
++        rendered++;
++        throw new Error("PCM is forbidden in the capability probe");
++      }
++    },
++  };
++  const saved = { ...isolated };
++  class CapabilityProbeEngine {
++    setLevels() {}
++    update() {}
++    async unlock() {
++      const host = new isolated.AudioContext();
++      observed = typeof host.createStereoPanner;
++      assert.equal(
++        observed,
++        "undefined",
++        "the production feature guard must enter its mono route",
++      );
++      throw new Error("declared no-PCM capability probe");
++    }
++    dispose() {
++      disposed++;
++    }
++  }
++  const api = declarations(
++    await fs.readFile(path.join(TOOL_DIRECTORY, "review.js"), "utf8"),
++    {
++      AudioEngine,
++      BaselineEngine: AudioEngine,
++      QUIET_STATE: mixer.QUIET_STATE,
++      window: isolated,
++    },
++  );
++  await assert.rejects(
++    api.renderFixture({ ...api.fixtures[4], Engine: CapabilityProbeEngine }),
++    /declared no-PCM capability probe/,
++  );
++  assert.equal(observed, "undefined");
++  assert.equal(rendered, 0);
++  assert.equal(disposed, 1);
++  assert.deepEqual(isolated, saved);
++});
++
++test("exported offline adapter preserves real receivers, return identity and exact node/source registration", () => {
++  const nodes = [],
++    sources = [],
++    calls = [];
++  const panner = { kind: "native-panner" },
++    oscillator = { kind: "native-oscillator" };
++  const bufferSource = { kind: "native-buffer-source" },
++    buffer = { kind: "native-buffer" };
++  const real = {
++    get sampleRate() {
++      assert.equal(this, real);
++      return 48000;
++    },
++    createStereoPanner(...args) {
++      assert.equal(this, real);
++      calls.push(args);
++      return panner;
++    },
++    createOscillator() {
++      assert.equal(this, real);
++      return oscillator;
++    },
++    createBufferSource() {
++      assert.equal(this, real);
++      return bufferSource;
++    },
++    createBuffer() {
++      assert.equal(this, real);
++      return buffer;
++    },
++  };
++  const host = current.createOfflineAdapter(real, nodes, sources);
++  const detachedFactory = host.createStereoPanner;
++  assert.equal(typeof detachedFactory, "function");
++  assert.equal(detachedFactory("declared argument"), panner);
++  assert.deepEqual(calls, [["declared argument"]]);
++  assert.equal(host.createOscillator(), oscillator);
++  assert.equal(host.createBufferSource(), bufferSource);
++  assert.equal(host.createBuffer(), buffer);
++  assert.equal(host.sampleRate, 48000);
++  assert.deepEqual(nodes, [panner, oscillator, bufferSource]);
++  assert.deepEqual(sources, [oscillator, bufferSource]);
++});
++
++test("exported offline adapter retains absent and noncallable factory capabilities without phantom nodes", () => {
++  for (const value of [undefined, null, 17]) {
++    const real = value === undefined ? {} : { createStereoPanner: value };
++    const nodes = [],
++      sources = [];
++    const host = current.createOfflineAdapter(real, nodes, sources);
++    assert.equal(host.createStereoPanner, value);
++    assert.equal(typeof host.createStereoPanner === "function", false);
++    assert.deepEqual(nodes, []);
++    assert.deepEqual(sources, []);
++  }
++});
+diff --git a/scripts/qa/audio-review/review.js b/scripts/qa/audio-review/review.js
+index e962bc6..f0577d8 100644
+--- a/scripts/qa/audio-review/review.js
++++ b/scripts/qa/audio-review/review.js
+@@ -1,7 +1,12 @@
+ import { AudioEngine } from "./modules/audio.js";
+ import { AudioEngine as BaselineEngine } from "./modules/baseline-audio.js";
+ import { QUIET_STATE } from "./modules/audio-state.js";
+-import { pcmMetrics, stereoMetrics, highFrequencyRatio, wav } from "./metrics.js";
++import {
++  pcmMetrics,
++  stereoMetrics,
++  highFrequencyRatio,
++  wav,
++} from "./metrics.js";
+ 
+ const button = document.getElementById("run"),
+   status = document.getElementById("status");
+@@ -45,8 +50,20 @@ const fixtures = [
+     seconds: 24,
+     currentScore: true,
+   },
+-  { key: "title-score", title: "Synthesized title draft, one complete loop and pickup", Engine: AudioEngine, seconds: 48, titleOnly: true },
+-  { key: "title-transition", title: "Title to Haven, exploration, chase and release", Engine: AudioEngine, seconds: 32, titleTransition: true },
++  {
++    key: "title-score",
++    title: "Synthesized title draft, one complete loop and pickup",
++    Engine: AudioEngine,
++    seconds: 48,
++    titleOnly: true,
++  },
++  {
++    key: "title-transition",
++    title: "Title to Haven, exploration, chase and release",
++    Engine: AudioEngine,
++    seconds: 32,
++    titleTransition: true,
++  },
+ ];
+ // Declared DSP states, not an invented playthrough or a change to pilot identity.
+ const currentScorePhases = [
+@@ -111,12 +128,15 @@ const sha = async (bytes) =>
+     .join("");
+ function fixtureState(fixture, time) {
+   if (fixture.titleOnly) return { ...QUIET_STATE };
+-  if (fixture.titleTransition) return {
+-    ...QUIET_STATE,
+-    ...(time >= 11 && time < 26 ? { area: "reach", engines: 2, throttle: 0.5, speed: 0.4 } : {}),
+-    ...(time >= 15 && time < 20 ? { combat: 0.8, hostiles: 6 } : {}),
+-    corporation: "pan",
+-  };
++  if (fixture.titleTransition)
++    return {
++      ...QUIET_STATE,
++      ...(time >= 11 && time < 26
++        ? { area: "reach", engines: 2, throttle: 0.5, speed: 0.4 }
++        : {}),
++      ...(time >= 15 && time < 20 ? { combat: 0.8, hostiles: 6 } : {}),
++      corporation: "pan",
++    };
+   if (fixture.currentScore) {
+     const phase = currentScorePhases.findLast((p) => time >= p.start);
+     return { ...QUIET_STATE, ...phase.state };
+@@ -187,21 +207,7 @@ function fixtureEvents(fixture) {
+     count: 1,
+   }));
+ }
+-async function renderFixture(fixture) {
+-  const Constructor =
+-    window.OfflineAudioContext ?? window.webkitOfflineAudioContext;
+-  if (!Constructor)
+-    throw new Error(
+-      "Native OfflineAudioContext is unavailable; no fallback samples are produced.",
+-    );
+-  const real = new Constructor(2, Math.ceil(48000 * fixture.seconds), 48000);
+-  const intervals = new Map();
+-  let nextInterval = 1;
+-  const savedContext = window.AudioContext,
+-    savedInterval = window.setInterval,
+-    savedClear = window.clearInterval;
+-  const nodes = [],
+-    sources = [];
++export function createOfflineAdapter(real, nodes, sources) {
+   const methods = new Set([
+     "createGain",
+     "createBiquadFilter",
+@@ -215,20 +221,25 @@ async function renderFixture(fixture) {
+   ]);
+   // This adapter is scoped exclusively to this isolated page/render. All graph
+   // work and PCM rendering is native, not a recording or replacement DSP.
+-  const host = new Proxy(real, {
++  return new Proxy(real, {
+     get(target, name) {
+       if (name === "state") return "running";
+       if (name === "resume" || name === "suspend" || name === "close")
+         return async () => {};
+       if (name === "onstatechange") return null;
+-      if (methods.has(name))
++      if (methods.has(name)) {
++        const factory = Reflect.get(target, name, target);
++        // Preserve native capability absence so AudioEngine's mono fallback
++        // sees the same surface as a direct AudioContext.
++        if (typeof factory !== "function") return factory;
+         return (...args) => {
+-          const value = target[name](...args);
++          const value = Reflect.apply(factory, target, args);
+           if (name !== "createBuffer") nodes.push(value);
+           if (name === "createOscillator" || name === "createBufferSource")
+             sources.push(value);
+           return value;
+         };
++      }
+       return Reflect.get(target, name, target);
+     },
+     set(_target, name) {
+@@ -236,6 +247,23 @@ async function renderFixture(fixture) {
+       throw new Error(`Unexpected offline adapter write ${String(name)}`);
+     },
+   });
++}
++async function renderFixture(fixture) {
++  const Constructor =
++    window.OfflineAudioContext ?? window.webkitOfflineAudioContext;
++  if (!Constructor)
++    throw new Error(
++      "Native OfflineAudioContext is unavailable; no fallback samples are produced.",
++    );
++  const real = new Constructor(2, Math.ceil(48000 * fixture.seconds), 48000);
++  const intervals = new Map();
++  let nextInterval = 1;
++  const savedContext = window.AudioContext,
++    savedInterval = window.setInterval,
++    savedClear = window.clearInterval;
++  const nodes = [],
++    sources = [];
++  const host = createOfflineAdapter(real, nodes, sources);
+   window.AudioContext = class {
+     constructor() {
+       return host;
+@@ -260,7 +288,8 @@ async function renderFixture(fixture) {
+   const sourceStates = [];
+   try {
+     engine = new fixture.Engine();
+-    if (fixture.titleOnly || fixture.titleTransition) engine.setTitleScreen(true);
++    if (fixture.titleOnly || fixture.titleTransition)
++      engine.setTitleScreen(true);
+     engine.setLevels(
+       fixture.burst ? 1 : 0.75,
+       fixture.engine ? 0 : fixture.burst ? 1 : 0.4,

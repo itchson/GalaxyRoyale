@@ -1,0 +1,17 @@
+(node:42804) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ Continue during title pad attack replaces source stops and survives the former deadline (3.7479ms)
+ℹ {"oldStop":1.3991980505095256,"newStop":1.4514851242224596,"innerEnvelope":"set,linear","scope":"recorded API"}
+✔ Continue during the last 40ms of the original title pad release preserves its current gate (0.6253ms)
+ℹ {"retimeAt":1.3341980505095257,"gainBefore":0.28006,"gainAfter":0.28006,"scope":"recorded API"}
+✔ hard suspend during a deferred title resume releases sustained pads and rejects stale scheduling (0.8555ms)
+✔ repeated title/Continue/chase changes leave sustained pads finite and active sources bounded (16.344ms)
+ℹ {"seconds":20,"maxVoices":17,"maxSources":56,"scope":"active recorded API resources"}
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 128.9257

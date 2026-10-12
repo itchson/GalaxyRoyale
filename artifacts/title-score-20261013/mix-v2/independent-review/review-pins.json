@@ -1,0 +1,302 @@
+{
+  "capturedAt": "2026-10-12T17:08:03.300Z",
+  "reviewedCandidate": "51b529f4c82c1abb8a0c8bfb386263c5c81cc1cc",
+  "reviewedFrozenRoot": "d028f0d7a3c589b5896f536f08e76aa504cb2923",
+  "authorBase": "d53954c7956a2be71de34de12c4f309563bd8a40",
+  "actualHeadAtCapture": "d028f0d7a3c589b5896f536f08e76aa504cb2923",
+  "node": "v24.18.0",
+  "sources": {
+    "apps/game/src/audio.ts": {
+      "workingBytes": 49639,
+      "workingSha256": "218c3243cce0eeab40067938a30b6fd0d31f4ddb2d17612778852dfb672692a9",
+      "normalizedLfBytes": 48113,
+      "normalizedLfSha256": "180803da7a02b2de3a7580ed819b517746de2dcd392fb37d530a1fc2e4aef099",
+      "canonicalGitBytes": 48113,
+      "canonicalGitSha256": "180803da7a02b2de3a7580ed819b517746de2dcd392fb37d530a1fc2e4aef099",
+      "authorExpected": {
+        "bytes": 48113,
+        "sha256": "180803da7a02b2de3a7580ed819b517746de2dcd392fb37d530a1fc2e4aef099"
+      },
+      "rawMatchesAuthor": false,
+      "lfMatchesAuthor": true,
+      "gitMatchesAuthor": true,
+      "workingMatchesCandidateCanonical": true,
+      "candidateMatchesFrozenRootCanonical": true,
+      "unchangedBaseline": null
+    },
+    "scripts/test/audio.test.mjs": {
+      "workingBytes": 62789,
+      "workingSha256": "c99a3b7047b94b7d65abfe475e9a7ba8eea1245573327dc02f31bd078c1d9795",
+      "normalizedLfBytes": 61056,
+      "normalizedLfSha256": "85261f38b66bd2cc5c4bfebcd108fc6f0f04deba4d75d1df5eefb3418d1d66d7",
+      "canonicalGitBytes": 61056,
+      "canonicalGitSha256": "85261f38b66bd2cc5c4bfebcd108fc6f0f04deba4d75d1df5eefb3418d1d66d7",
+      "authorExpected": {
+        "bytes": 61056,
+        "sha256": "85261f38b66bd2cc5c4bfebcd108fc6f0f04deba4d75d1df5eefb3418d1d66d7"
+      },
+      "rawMatchesAuthor": false,
+      "lfMatchesAuthor": true,
+      "gitMatchesAuthor": true,
+      "workingMatchesCandidateCanonical": true,
+      "candidateMatchesFrozenRootCanonical": true,
+      "unchangedBaseline": null
+    },
+    "apps/game/src/main.ts": {
+      "workingBytes": 90428,
+      "workingSha256": "04dc2ed27851a49b86df00aebfc449aaed5193c12dae6dbd49cf826633bf1b33",
+      "normalizedLfBytes": 87760,
+      "normalizedLfSha256": "af30ca9ee95092a9e8c501af71b6a00f61d5de104cf802080a55ae3a64ade3b2",
+      "canonicalGitBytes": 87760,
+      "canonicalGitSha256": "af30ca9ee95092a9e8c501af71b6a00f61d5de104cf802080a55ae3a64ade3b2",
+      "authorExpected": null,
+      "rawMatchesAuthor": null,
+      "lfMatchesAuthor": null,
+      "gitMatchesAuthor": null,
+      "workingMatchesCandidateCanonical": true,
+      "candidateMatchesFrozenRootCanonical": true,
+      "unchangedBaseline": {
+        "recorded": {
+          "same_as_base": true,
+          "canonical_sha256": "af30ca9ee95092a9e8c501af71b6a00f61d5de104cf802080a55ae3a64ade3b2"
+        },
+        "actuallyEqualToBase": true,
+        "actuallyMatchesCanonicalHash": true
+      }
+    },
+    "apps/game/src/audio-state.ts": {
+      "workingBytes": 11471,
+      "workingSha256": "c3c9a3c5b34b1001e4d1dd1de531e70dbcd945826b31022e0619187d0ec1b76f",
+      "normalizedLfBytes": 10846,
+      "normalizedLfSha256": "3e7d35563f489f477ecc0f451772479e19070fc051eb86c9aa2dffdbd8a68aea",
+      "canonicalGitBytes": 10846,
+      "canonicalGitSha256": "3e7d35563f489f477ecc0f451772479e19070fc051eb86c9aa2dffdbd8a68aea",
+      "authorExpected": null,
+      "rawMatchesAuthor": null,
+      "lfMatchesAuthor": null,
+      "gitMatchesAuthor": null,
+      "workingMatchesCandidateCanonical": true,
+      "candidateMatchesFrozenRootCanonical": true,
+      "unchangedBaseline": {
+        "recorded": {
+          "same_as_base": true,
+          "canonical_sha256": "3e7d35563f489f477ecc0f451772479e19070fc051eb86c9aa2dffdbd8a68aea"
+        },
+        "actuallyEqualToBase": true,
+        "actuallyMatchesCanonicalHash": true
+      }
+    },
+    "apps/game/src/title-theme.ts": {
+      "workingBytes": 2917,
+      "workingSha256": "104bc0c4754db8b315b745291b243a619c394de1484f4a834995c74860b27135",
+      "normalizedLfBytes": 2787,
+      "normalizedLfSha256": "2ea2516c54f5e53a16ce05c1f4a37b5304e6282b5ea2855dc9694684a26c2069",
+      "canonicalGitBytes": 2787,
+      "canonicalGitSha256": "2ea2516c54f5e53a16ce05c1f4a37b5304e6282b5ea2855dc9694684a26c2069",
+      "authorExpected": null,
+      "rawMatchesAuthor": null,
+      "lfMatchesAuthor": null,
+      "gitMatchesAuthor": null,
+      "workingMatchesCandidateCanonical": true,
+      "candidateMatchesFrozenRootCanonical": true,
+      "unchangedBaseline": {
+        "recorded": {
+          "same_as_base": true,
+          "canonical_sha256": "2ea2516c54f5e53a16ce05c1f4a37b5304e6282b5ea2855dc9694684a26c2069"
+        },
+        "actuallyEqualToBase": true,
+        "actuallyMatchesCanonicalHash": true
+      }
+    },
+    "apps/game/src/music-clock.ts": {
+      "workingBytes": 4084,
+      "workingSha256": "12fff1dfe804ed4aaaa274418b74efa8604b0afd656ef718cb4e43930a475aa9",
+      "normalizedLfBytes": 3973,
+      "normalizedLfSha256": "aec678986a6b4fe13bafb2cb4999717c1069b08504cebb6b1b44046a2af6c559",
+      "canonicalGitBytes": 3973,
+      "canonicalGitSha256": "aec678986a6b4fe13bafb2cb4999717c1069b08504cebb6b1b44046a2af6c559",
+      "authorExpected": null,
+      "rawMatchesAuthor": null,
+      "lfMatchesAuthor": null,
+      "gitMatchesAuthor": null,
+      "workingMatchesCandidateCanonical": true,
+      "candidateMatchesFrozenRootCanonical": true,
+      "unchangedBaseline": {
+        "recorded": {
+          "same_as_base": true,
+          "canonical_sha256": "aec678986a6b4fe13bafb2cb4999717c1069b08504cebb6b1b44046a2af6c559"
+        },
+        "actuallyEqualToBase": true,
+        "actuallyMatchesCanonicalHash": true
+      }
+    },
+    "apps/game/src/music-score.ts": {
+      "workingBytes": 807,
+      "workingSha256": "9777e0bacac612b52c5b9eeb7c760fb8ba47a6ec62eb89123f2f45a210052683",
+      "normalizedLfBytes": 771,
+      "normalizedLfSha256": "8757a5f93ed4584de7597a816124ea8f722975e234c113f97ae7d14d32140703",
+      "canonicalGitBytes": 771,
+      "canonicalGitSha256": "8757a5f93ed4584de7597a816124ea8f722975e234c113f97ae7d14d32140703",
+      "authorExpected": null,
+      "rawMatchesAuthor": null,
+      "lfMatchesAuthor": null,
+      "gitMatchesAuthor": null,
+      "workingMatchesCandidateCanonical": true,
+      "candidateMatchesFrozenRootCanonical": true,
+      "unchangedBaseline": {
+        "recorded": {
+          "same_as_base": true,
+          "canonical_sha256": "8757a5f93ed4584de7597a816124ea8f722975e234c113f97ae7d14d32140703"
+        },
+        "actuallyEqualToBase": true,
+        "actuallyMatchesCanonicalHash": true
+      }
+    },
+    "work/title-mix-refinement/handoff.md": {
+      "workingBytes": 4534,
+      "workingSha256": "99049085a1d13ca97f57d220dcba92f208178482f4e12b234de36d40a6f246f3",
+      "normalizedLfBytes": 4505,
+      "normalizedLfSha256": "d15ac7ed3426f4820e963719c8ce6fc9ba84dcc01de592a8048e37e8bf93532d",
+      "canonicalGitBytes": 4505,
+      "canonicalGitSha256": "d15ac7ed3426f4820e963719c8ce6fc9ba84dcc01de592a8048e37e8bf93532d",
+      "authorExpected": {
+        "bytes": 4505,
+        "sha256": "d15ac7ed3426f4820e963719c8ce6fc9ba84dcc01de592a8048e37e8bf93532d"
+      },
+      "rawMatchesAuthor": false,
+      "lfMatchesAuthor": true,
+      "gitMatchesAuthor": true,
+      "workingMatchesCandidateCanonical": true,
+      "candidateMatchesFrozenRootCanonical": true,
+      "unchangedBaseline": null
+    },
+    "work/title-mix-refinement/execution-evidence.json": {
+      "workingBytes": 2484,
+      "workingSha256": "2fb875c4a3d2de0d772d40a1118caf6a0334c8f152744094fd35261abb98cd7c",
+      "normalizedLfBytes": 2415,
+      "normalizedLfSha256": "9921cd45a0e7129a2fedd7796d7bdeae7dab6a6793119135992b772f18753a6c",
+      "canonicalGitBytes": 2415,
+      "canonicalGitSha256": "9921cd45a0e7129a2fedd7796d7bdeae7dab6a6793119135992b772f18753a6c",
+      "authorExpected": {
+        "bytes": 2484,
+        "sha256": "2fb875c4a3d2de0d772d40a1118caf6a0334c8f152744094fd35261abb98cd7c"
+      },
+      "rawMatchesAuthor": true,
+      "lfMatchesAuthor": false,
+      "gitMatchesAuthor": false,
+      "workingMatchesCandidateCanonical": true,
+      "candidateMatchesFrozenRootCanonical": true,
+      "unchangedBaseline": null
+    },
+    "work/title-mix-refinement/focused-tests.log": {
+      "workingBytes": 7398,
+      "workingSha256": "f378bc99274422a65daab5ba80f40cdd5533c582b75f388612f5dafdfa194e3b",
+      "normalizedLfBytes": 7321,
+      "normalizedLfSha256": "a8a81e8e7548589224c8148bc8027726634705f57419b9fefa4a165d05f8a643",
+      "canonicalGitBytes": 7321,
+      "canonicalGitSha256": "a8a81e8e7548589224c8148bc8027726634705f57419b9fefa4a165d05f8a643",
+      "authorExpected": {
+        "bytes": 7398,
+        "sha256": "f378bc99274422a65daab5ba80f40cdd5533c582b75f388612f5dafdfa194e3b"
+      },
+      "rawMatchesAuthor": true,
+      "lfMatchesAuthor": false,
+      "gitMatchesAuthor": false,
+      "workingMatchesCandidateCanonical": true,
+      "candidateMatchesFrozenRootCanonical": true,
+      "unchangedBaseline": null
+    },
+    "work/title-mix-refinement/typecheck.log": {
+      "workingBytes": 65,
+      "workingSha256": "c5aa045b6acf977624cf932e93e0b9c7b31cf10f05614800ac427c5c98a32dc2",
+      "normalizedLfBytes": 63,
+      "normalizedLfSha256": "ebc98439b8104eb6540e480661667477bc448c44e2d6523575627f863d9078cd",
+      "canonicalGitBytes": 63,
+      "canonicalGitSha256": "ebc98439b8104eb6540e480661667477bc448c44e2d6523575627f863d9078cd",
+      "authorExpected": {
+        "bytes": 64,
+        "sha256": "3649e9672162eb34f45ecc60e54dc91a571a354becb2a4bbb2529fdf9affc11e"
+      },
+      "rawMatchesAuthor": false,
+      "lfMatchesAuthor": false,
+      "gitMatchesAuthor": false,
+      "workingMatchesCandidateCanonical": true,
+      "candidateMatchesFrozenRootCanonical": true,
+      "unchangedBaseline": null
+    },
+    "work/title-mix-refinement/source-pins.json": {
+      "workingBytes": 1025,
+      "workingSha256": "f24d027e5062f569f9ddedef4cf497c68f2b5e35233ac8e4f280af4b5b0b33a6",
+      "normalizedLfBytes": 994,
+      "normalizedLfSha256": "d144dae750933b9c793bbd6cb2a9520a09f6c8d74bd45b5b55f2f63d444bbad8",
+      "canonicalGitBytes": 994,
+      "canonicalGitSha256": "d144dae750933b9c793bbd6cb2a9520a09f6c8d74bd45b5b55f2f63d444bbad8",
+      "authorExpected": null,
+      "rawMatchesAuthor": null,
+      "lfMatchesAuthor": null,
+      "gitMatchesAuthor": null,
+      "workingMatchesCandidateCanonical": true,
+      "candidateMatchesFrozenRootCanonical": true,
+      "unchangedBaseline": null
+    }
+  },
+  "ownEvidence": {
+    "review.md": {
+      "bytes": 7306,
+      "sha256": "3dff4cf157b4a6a2873c43538eabea4fed976e849331d7d652b993c233b6545b"
+    },
+    "focused-tests.log": {
+      "bytes": 7401,
+      "sha256": "c3265131120f90c05e4050284bf663a63d965ef3bdad7f9a5931e415cc94e000"
+    },
+    "edge-review.log": {
+      "bytes": 1043,
+      "sha256": "52e5fac32c436080a523cb96d2846cba016cfa468cae5c2179c962d02c20b072"
+    },
+    "edge-review.test.mjs": {
+      "bytes": 5743,
+      "sha256": "21394a3f7331f10cb89e3beef9cf4cc02578c89ebe25a194400f06a5fa0d53da"
+    },
+    "recorded-api-harness.mjs": {
+      "bytes": 5097,
+      "sha256": "871f8f26aa9f770eddb43248872693a29a242f873c14af52cf26159c4abdae96"
+    },
+    "pin-review.mjs": {
+      "bytes": 5219,
+      "sha256": "141d69dd8db68b65b10f46ff0fed70c55a363cbc700df12323945e75bcb8a21e"
+    }
+  },
+  "authorTypecheckEquivalentTextMatches": [
+    {
+      "newlineMask": 2,
+      "bytes": 64,
+      "sha256": "3649e9672162eb34f45ecc60e54dc91a571a354becb2a4bbb2529fdf9affc11e"
+    }
+  ],
+  "commands": [
+    {
+      "command": "node --experimental-transform-types --test scripts/test/music-clock.test.mjs scripts/test/title-theme.test.mjs scripts/test/audio-state.test.mjs scripts/test/audio.test.mjs",
+      "exitCode": 0,
+      "tests": 54,
+      "pass": 54,
+      "fail": 0,
+      "log": "focused-tests.log"
+    },
+    {
+      "command": "node --experimental-transform-types --test work/title-mix-independent-review/edge-review.test.mjs",
+      "exitCode": 0,
+      "tests": 4,
+      "pass": 4,
+      "fail": 0,
+      "log": "edge-review.log"
+    }
+  ],
+  "acceptance": {
+    "sourceAndRecordedApi": "no concrete blocker found",
+    "nativeDsp": "not performed by this reviewer",
+    "listening": "open",
+    "physicalDevice": "not tested",
+    "exactSong": "open"
+  },
+  "scope": "Independent title-only source/API review. No native DSP, listening, browser, gameplay, server, broad build, worker or physical-device acceptance."
+}

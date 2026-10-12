@@ -1,0 +1,32 @@
+{
+  "commit": "5df19ae371cae78b167e64921d84040d64cb4011",
+  "parent": "8c284637f3dfd4f86982f2dc01b10fb8a70c8162",
+  "changed_paths": [
+    "scripts/test/dock-menu.test.mjs",
+    "scripts/test/forge-integration.test.mjs"
+  ],
+  "source_pins": 2,
+  "unchanged_executed_inputs": 9,
+  "raw_pins": 8,
+  "baseline": {
+    "tests": 33,
+    "passed": 16,
+    "failed": 17
+  },
+  "first_migration": {
+    "tests": 36,
+    "passed": 32,
+    "failed": 4
+  },
+  "committed": {
+    "tests": 39,
+    "passed": 39,
+    "failed": 0,
+    "skipped": 0
+  },
+  "old_cases_preserved": 33,
+  "renamed_cases": 4,
+  "added_cases": 6,
+  "tracked_clean": true,
+  "scope": "Actual source-function/view-module execution with declared DOM/Game/save/native-circle models; no native/IndexedDB/browser/GPU/RTC/full-build acceptance."
+}

@@ -1,0 +1,244 @@
+TAP version 13
+# Subtest: Escape opens the live RAICHO menu, cancels controls and course, and toggles closed
+ok 1 - Escape opens the live RAICHO menu, cancels controls and course, and toggles closed
+  ---
+  duration_ms: 4.4886
+  type: 'test'
+  ...
+# Subtest: opening a dedicated page paints it once without building hidden collections
+ok 2 - opening a dedicated page paints it once without building hidden collections
+  ---
+  duration_ms: 0.8938
+  type: 'test'
+  ...
+# Subtest: a world facility hit opens exactly its dedicated page without changing progression
+ok 3 - a world facility hit opens exactly its dedicated page without changing progression
+  ---
+  duration_ms: 3.4266
+  type: 'test'
+  ...
+# Subtest: the central Haven hub is not a Multiplayer facility and does not alter flight or progression
+ok 4 - the central Haven hub is not a Multiplayer facility and does not alter flight or progression
+  ---
+  duration_ms: 0.7159
+  type: 'test'
+  ...
+# Subtest: misses and home/launch/pause gates leave flight untouched
+ok 5 - misses and home/launch/pause gates leave flight untouched
+  ---
+  duration_ms: 2.3868
+  type: 'test'
+  ...
+# Subtest: facility overlay handlers validate the authoritative hit before opening
+ok 6 - facility overlay handlers validate the authoritative hit before opening
+  ---
+  duration_ms: 3.4296
+  type: 'test'
+  ...
+# Subtest: five source-authored centers match native and keyboard activation bypasses pointer projection
+ok 7 - five source-authored centers match native and keyboard activation bypasses pointer projection
+  ---
+  duration_ms: 2.7031
+  type: 'test'
+  ...
+# Subtest: actual zoomed pointer projection respects the modeled native circle rather than the DOM square
+ok 8 - actual zoomed pointer projection respects the modeled native circle rather than the DOM square
+  ---
+  duration_ms: 31.0928
+  type: 'test'
+  ...
+# Subtest: Hangar showcase details use a separate statistics target and preserve the back handler
+ok 9 - Hangar showcase details use a separate statistics target and preserve the back handler
+  ---
+  duration_ms: 0.8244
+  type: 'test'
+  ...
+# Subtest: closing a dedicated flight page resumes; closing title settings returns to title
+ok 10 - closing a dedicated flight page resumes; closing title settings returns to title
+  ---
+  duration_ms: 5.1881
+  type: 'test'
+  ...
+# Subtest: pause settings and both backup actions select only their dedicated content
+ok 11 - pause settings and both backup actions select only their dedicated content
+  ---
+  duration_ms: 0.7701
+  type: 'test'
+  ...
+# Subtest: a live menu continues after hidden/resume and lifecycle gates never restore controls beneath it
+ok 12 - a live menu continues after hidden/resume and lifecycle gates never restore controls beneath it
+  ---
+  duration_ms: 0.6134
+  type: 'test'
+  ...
+# Subtest: Quit waits for a committed save and flush, then provides a normal-tab fallback
+ok 13 - Quit waits for a committed save and flush, then provides a normal-tab fallback
+  ---
+  duration_ms: 0.7204
+  type: 'test'
+  ...
+# Subtest: Quit write failure keeps the title available and does not close the browser
+ok 14 - Quit write failure keeps the title available and does not close the browser
+  ---
+  duration_ms: 0.5766
+  type: 'test'
+  ...
+# Subtest: a delayed launch audio unlock cannot dismiss newer title Settings or Quit intent
+ok 15 - a delayed launch audio unlock cannot dismiss newer title Settings or Quit intent
+  ---
+  duration_ms: 1.1589
+  type: 'test'
+  ...
+# Subtest: dedicated-page close cannot resume through a recovery, modal, hidden or encounter gate
+ok 16 - dedicated-page close cannot resume through a recovery, modal, hidden or encounter gate
+  ---
+  duration_ms: 3.8593
+  type: 'test'
+  ...
+# Subtest: restart ends the expedition through the authoritative boundary and waits for save plus flush before resuming
+ok 17 - restart ends the expedition through the authoritative boundary and waits for save plus flush before resuming
+  ---
+  duration_ms: 0.8463
+  type: 'test'
+  ...
+# Subtest: restart save failure leaves the menu/input safe and reports the actual failure
+ok 18 - restart save failure leaves the menu/input safe and reports the actual failure
+  ---
+  duration_ms: 0.6239
+  type: 'test'
+  ...
+# Subtest: save indicator moves from pending to committed only after the adapter commits
+ok 19 - save indicator moves from pending to committed only after the adapter commits
+  ---
+  duration_ms: 3.5459
+  type: 'test'
+  ...
+# Subtest: overlapping saves do not show saved while any write is outstanding
+ok 20 - overlapping saves do not show saved while any write is outstanding
+  ---
+  duration_ms: 0.5864
+  type: 'test'
+  ...
+# Subtest: write rejection exposes attention state and a successful retry clears it
+ok 21 - write rejection exposes attention state and a successful retry clears it
+  ---
+  duration_ms: 0.7891
+  type: 'test'
+  ...
+# Subtest: memory-only storage never reports a successful persistent save
+ok 22 - memory-only storage never reports a successful persistent save
+  ---
+  duration_ms: 0.5133
+  type: 'test'
+  ...
+# Subtest: a SaveConflict opens the live menu once without recursively scheduling rejected saves
+ok 23 - a SaveConflict opens the live menu once without recursively scheduling rejected saves
+  ---
+  duration_ms: 0.62
+  type: 'test'
+  ...
+# Subtest: dedicated map and settings icons replace the live page and map toggles back to flight
+ok 24 - dedicated map and settings icons replace the live page and map toggles back to flight
+  ---
+  duration_ms: 0.6636
+  type: 'test'
+  ...
+# Subtest: M uses the discovered map without a simulation pause or a repeat toggle
+ok 25 - M uses the discovered map without a simulation pause or a repeat toggle
+  ---
+  duration_ms: 0.573
+  type: 'test'
+  ...
+# Subtest: a delayed map course cannot consume a newer Settings intent
+ok 26 - a delayed map course cannot consume a newer Settings intent
+  ---
+  duration_ms: 0.64
+  type: 'test'
+  ...
+# Subtest: map navigation sets a real course after resume even when optional audio is unavailable
+ok 27 - map navigation sets a real course after resume even when optional audio is unavailable
+  ---
+  duration_ms: 0.6034
+  type: 'test'
+  ...
+# Subtest: MEISHI is a standalone live card; facility scenes restore chrome without cross-collection tabs
+ok 28 - MEISHI is a standalone live card; facility scenes restore chrome without cross-collection tabs
+  ---
+  duration_ms: 0.6207
+  type: 'test'
+  ...
+# Subtest: standalone card keyboard focus can reach its read-only scrolling region
+ok 29 - standalone card keyboard focus can reach its read-only scrolling region
+  ---
+  duration_ms: 0.5553
+  type: 'test'
+  ...
+# Subtest: Forge forwards exact craft/upgrade/equip/empty/hardware arguments, refreshes HUD, then saves the actual snapshot
+ok 30 - Forge forwards exact craft/upgrade/equip/empty/hardware arguments, refreshes HUD, then saves the actual snapshot
+  ---
+  duration_ms: 15.5018
+  type: 'test'
+  ...
+# Subtest: backend rejection has no HUD fetch, snapshot save, audio cue or invented success
+ok 31 - backend rejection has no HUD fetch, snapshot save, audio cue or invented success
+  ---
+  duration_ms: 1.7385
+  type: 'test'
+  ...
+# Subtest: real Forge category survives successful repaint while a fresh open resets to the ability index
+ok 32 - real Forge category survives successful repaint while a fresh open resets to the ability index
+  ---
+  duration_ms: 2.652
+  type: 'test'
+  ...
+# Subtest: mutation success is not a committed-save claim while deferred persistence fails
+ok 33 - mutation success is not a committed-save claim while deferred persistence fails
+  ---
+  duration_ms: 1.9657
+  type: 'test'
+  ...
+# Subtest: Forge construction and Hangar selection preserve full per-hull XP and crafting does not auto-select
+ok 34 - Forge construction and Hangar selection preserve full per-hull XP and crafting does not auto-select
+  ---
+  duration_ms: 2.62
+  type: 'test'
+  ...
+# Subtest: rejected ship construction or switching cannot save or report success
+ok 35 - rejected ship construction or switching cannot save or report success
+  ---
+  duration_ms: 3.0212
+  type: 'test'
+  ...
+# Subtest: an unavailable audio context cannot reject a successful mutation/save flow
+ok 36 - an unavailable audio context cannot reject a successful mutation/save flow
+  ---
+  duration_ms: 1.8302
+  type: 'test'
+  ...
+# Subtest: component and hardware callbacks retain their actual Forge mode, navigation nodes and focused action
+ok 37 - component and hardware callbacks retain their actual Forge mode, navigation nodes and focused action
+  ---
+  duration_ms: 2.2214
+  type: 'test'
+  ...
+# Subtest: the actual Forge hull blueprint action crafts once without exposing selection or auto-switching
+ok 38 - the actual Forge hull blueprint action crafts once without exposing selection or auto-switching
+  ---
+  duration_ms: 2.108
+  type: 'test'
+  ...
+# Subtest: actual Hangar legacy art and separate expanded statistics keep the persistent back control
+ok 39 - actual Hangar legacy art and separate expanded statistics keep the persistent back control
+  ---
+  duration_ms: 2.3964
+  type: 'test'
+  ...
+1..39
+# tests 39
+# suites 0
+# pass 39
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 372.6821

@@ -1,0 +1,328 @@
+{
+  "version": 1,
+  "commit": "db15b91f3a1614ebd245fbab47787de737535882",
+  "operations": [
+    "git rev-parse <commit>:<path>",
+    "git cat-file blob <commit>:<path>",
+    "sha256 raw bytes"
+  ],
+  "tracked_status": "",
+  "preserved_original_manifest": {
+    "path": "work/hub-shadow-prototype/MANIFEST.json",
+    "bytes": 10777,
+    "sha256": "626cdf5ea5e9c443495b464632ab9771827c6a8ce795e7ebfaeef83ce94353d8"
+  },
+  "preserved_original_handoff": {
+    "path": "work/hub-shadow-prototype/HANDOFF.md",
+    "bytes": 8314,
+    "sha256": "8b065e405cf1c24d6b23f0f00136c728e373153386426163eaa0413326fbacfc"
+  },
+  "source_count": 13,
+  "input_count": 4,
+  "original_evidence_count": 34,
+  "all_original_raw_pins_verified": true,
+  "source_comparisons": [
+    {
+      "path": "crates/engine_core/src/frame.rs",
+      "git_blob_matches_original": true,
+      "working_matches_original_raw_pin": true,
+      "canonical_bytes": 30850,
+      "canonical_sha256": "df5a43277139616481595160c2902172dfe4a902f0b0537b6bfe527288df32c4",
+      "working_bytes": 30850,
+      "working_sha256": "df5a43277139616481595160c2902172dfe4a902f0b0537b6bfe527288df32c4",
+      "exact_byte_equal": true,
+      "difference_is_only_CRLF_vs_LF": false,
+      "working_CRLF_count": 0,
+      "canonical_CRLF_count": 0
+    },
+    {
+      "path": "crates/engine_core/src/lib.rs",
+      "git_blob_matches_original": true,
+      "working_matches_original_raw_pin": true,
+      "canonical_bytes": 891,
+      "canonical_sha256": "4e2ce1d4af539ba9aafdb15d50e346c2f2a0168593ab7c419282694f0b37e869",
+      "working_bytes": 891,
+      "working_sha256": "4e2ce1d4af539ba9aafdb15d50e346c2f2a0168593ab7c419282694f0b37e869",
+      "exact_byte_equal": true,
+      "difference_is_only_CRLF_vs_LF": false,
+      "working_CRLF_count": 0,
+      "canonical_CRLF_count": 0
+    },
+    {
+      "path": "crates/engine_core/src/pixel_rig.rs",
+      "git_blob_matches_original": true,
+      "working_matches_original_raw_pin": true,
+      "canonical_bytes": 14857,
+      "canonical_sha256": "fd184094739cc2c34c0ae120f3647dbe271013081e5d6a3c99f74543c1dabb76",
+      "working_bytes": 14857,
+      "working_sha256": "fd184094739cc2c34c0ae120f3647dbe271013081e5d6a3c99f74543c1dabb76",
+      "exact_byte_equal": true,
+      "difference_is_only_CRLF_vs_LF": false,
+      "working_CRLF_count": 0,
+      "canonical_CRLF_count": 0
+    },
+    {
+      "path": "crates/engine_core/src/shadow.rs",
+      "git_blob_matches_original": true,
+      "working_matches_original_raw_pin": true,
+      "canonical_bytes": 9438,
+      "canonical_sha256": "32302645014353a9f37019082ba7453f8058a99f99828c2af353a5b27e8e596e",
+      "working_bytes": 9438,
+      "working_sha256": "32302645014353a9f37019082ba7453f8058a99f99828c2af353a5b27e8e596e",
+      "exact_byte_equal": true,
+      "difference_is_only_CRLF_vs_LF": false,
+      "working_CRLF_count": 0,
+      "canonical_CRLF_count": 0
+    },
+    {
+      "path": "crates/game_core/src/hub_shadows.rs",
+      "git_blob_matches_original": true,
+      "working_matches_original_raw_pin": true,
+      "canonical_bytes": 9642,
+      "canonical_sha256": "0d65651030da6d396f7775e1b46d465b305835cafd40eabf7a8cbdc9adf16086",
+      "working_bytes": 9642,
+      "working_sha256": "0d65651030da6d396f7775e1b46d465b305835cafd40eabf7a8cbdc9adf16086",
+      "exact_byte_equal": true,
+      "difference_is_only_CRLF_vs_LF": false,
+      "working_CRLF_count": 0,
+      "canonical_CRLF_count": 0
+    },
+    {
+      "path": "crates/game_core/src/lib.rs",
+      "git_blob_matches_original": true,
+      "working_matches_original_raw_pin": true,
+      "canonical_bytes": 196705,
+      "canonical_sha256": "bb7b23f6ae237e7883e3dc6b6c218d90f2b1c8c18f7c721cccd7c5f4624db930",
+      "working_bytes": 196705,
+      "working_sha256": "bb7b23f6ae237e7883e3dc6b6c218d90f2b1c8c18f7c721cccd7c5f4624db930",
+      "exact_byte_equal": true,
+      "difference_is_only_CRLF_vs_LF": false,
+      "working_CRLF_count": 0,
+      "canonical_CRLF_count": 0
+    },
+    {
+      "path": "crates/game_web/src/dock_art.rs",
+      "git_blob_matches_original": true,
+      "working_matches_original_raw_pin": true,
+      "canonical_bytes": 9952,
+      "canonical_sha256": "669abfbcceb3a9a5875c1aa1d57de578151e90f77d7ea190a0b05792792926bf",
+      "working_bytes": 9952,
+      "working_sha256": "669abfbcceb3a9a5875c1aa1d57de578151e90f77d7ea190a0b05792792926bf",
+      "exact_byte_equal": true,
+      "difference_is_only_CRLF_vs_LF": false,
+      "working_CRLF_count": 0,
+      "canonical_CRLF_count": 0
+    },
+    {
+      "path": "crates/game_web/src/dock_art_tests.rs",
+      "git_blob_matches_original": true,
+      "working_matches_original_raw_pin": true,
+      "canonical_bytes": 16491,
+      "canonical_sha256": "c1f8d7b90f71d29ac44ad16cc1ebc584d676dca5b082d712852bd3ae3e932864",
+      "working_bytes": 16491,
+      "working_sha256": "c1f8d7b90f71d29ac44ad16cc1ebc584d676dca5b082d712852bd3ae3e932864",
+      "exact_byte_equal": true,
+      "difference_is_only_CRLF_vs_LF": false,
+      "working_CRLF_count": 0,
+      "canonical_CRLF_count": 0
+    },
+    {
+      "path": "crates/game_web/src/lib.rs",
+      "git_blob_matches_original": true,
+      "working_matches_original_raw_pin": true,
+      "canonical_bytes": 495,
+      "canonical_sha256": "f904b4793d3534b7a672aa74b6f6eb27531df8b3b95b7b2bbddd52a80dc7e570",
+      "working_bytes": 495,
+      "working_sha256": "f904b4793d3534b7a672aa74b6f6eb27531df8b3b95b7b2bbddd52a80dc7e570",
+      "exact_byte_equal": true,
+      "difference_is_only_CRLF_vs_LF": false,
+      "working_CRLF_count": 0,
+      "canonical_CRLF_count": 0
+    },
+    {
+      "path": "crates/game_web/src/lighting.rs",
+      "git_blob_matches_original": true,
+      "working_matches_original_raw_pin": true,
+      "canonical_bytes": 12924,
+      "canonical_sha256": "b242efc3901f283e95e1818d49959b3d9f539363c18e810af2571e7a598afed1",
+      "working_bytes": 12924,
+      "working_sha256": "b242efc3901f283e95e1818d49959b3d9f539363c18e810af2571e7a598afed1",
+      "exact_byte_equal": true,
+      "difference_is_only_CRLF_vs_LF": false,
+      "working_CRLF_count": 0,
+      "canonical_CRLF_count": 0
+    },
+    {
+      "path": "crates/game_web/src/pixel.wgsl",
+      "git_blob_matches_original": true,
+      "working_matches_original_raw_pin": true,
+      "canonical_bytes": 8685,
+      "canonical_sha256": "e545658e1bb63a71193262acf1d9e39a3e5ef69310c41a38793949e31659a811",
+      "working_bytes": 8850,
+      "working_sha256": "60a4e97870f8401cdb479e3a12ac57baf5e98b975aeef9139b7a30a6742580e8",
+      "exact_byte_equal": false,
+      "difference_is_only_CRLF_vs_LF": true,
+      "working_CRLF_count": 165,
+      "canonical_CRLF_count": 0
+    },
+    {
+      "path": "crates/game_web/src/renderer.rs",
+      "git_blob_matches_original": true,
+      "working_matches_original_raw_pin": true,
+      "canonical_bytes": 32057,
+      "canonical_sha256": "58f7319b8027ad5d6943b8b0de6465b17a52f77b2caaca55a64458082aeeafd4",
+      "working_bytes": 32057,
+      "working_sha256": "58f7319b8027ad5d6943b8b0de6465b17a52f77b2caaca55a64458082aeeafd4",
+      "exact_byte_equal": true,
+      "difference_is_only_CRLF_vs_LF": false,
+      "working_CRLF_count": 0,
+      "canonical_CRLF_count": 0
+    },
+    {
+      "path": "crates/game_web/src/shadow_uniforms.rs",
+      "git_blob_matches_original": true,
+      "working_matches_original_raw_pin": true,
+      "canonical_bytes": 6127,
+      "canonical_sha256": "9bb3e3d90b67ff38ca43d40df67d51cf8ed65bab414017a04f0a6ae399d2c160",
+      "working_bytes": 6127,
+      "working_sha256": "9bb3e3d90b67ff38ca43d40df67d51cf8ed65bab414017a04f0a6ae399d2c160",
+      "exact_byte_equal": true,
+      "difference_is_only_CRLF_vs_LF": false,
+      "working_CRLF_count": 0,
+      "canonical_CRLF_count": 0
+    }
+  ],
+  "canonical_source_pins": [
+    {
+      "path": "crates/engine_core/src/frame.rs",
+      "git_blob": "d49a1d4d18dffa46b8eb979426bf8c56ca01d406",
+      "bytes": 30850,
+      "sha256": "df5a43277139616481595160c2902172dfe4a902f0b0537b6bfe527288df32c4",
+      "working_checkout": {
+        "bytes": 30850,
+        "sha256": "df5a43277139616481595160c2902172dfe4a902f0b0537b6bfe527288df32c4"
+      }
+    },
+    {
+      "path": "crates/engine_core/src/lib.rs",
+      "git_blob": "c4f63ca4ecede5c9da6b030e244c706e1d12c89f",
+      "bytes": 891,
+      "sha256": "4e2ce1d4af539ba9aafdb15d50e346c2f2a0168593ab7c419282694f0b37e869",
+      "working_checkout": {
+        "bytes": 891,
+        "sha256": "4e2ce1d4af539ba9aafdb15d50e346c2f2a0168593ab7c419282694f0b37e869"
+      }
+    },
+    {
+      "path": "crates/engine_core/src/pixel_rig.rs",
+      "git_blob": "da66cdef5ec16265dc1ecdba276d646899ffd54b",
+      "bytes": 14857,
+      "sha256": "fd184094739cc2c34c0ae120f3647dbe271013081e5d6a3c99f74543c1dabb76",
+      "working_checkout": {
+        "bytes": 14857,
+        "sha256": "fd184094739cc2c34c0ae120f3647dbe271013081e5d6a3c99f74543c1dabb76"
+      }
+    },
+    {
+      "path": "crates/engine_core/src/shadow.rs",
+      "git_blob": "4204f9b149a7bf5c73e8e1d32b240f4c8811831c",
+      "bytes": 9438,
+      "sha256": "32302645014353a9f37019082ba7453f8058a99f99828c2af353a5b27e8e596e",
+      "working_checkout": {
+        "bytes": 9438,
+        "sha256": "32302645014353a9f37019082ba7453f8058a99f99828c2af353a5b27e8e596e"
+      }
+    },
+    {
+      "path": "crates/game_core/src/hub_shadows.rs",
+      "git_blob": "ce5b13ee004d630c6348c6eade9faa8551e341fc",
+      "bytes": 9642,
+      "sha256": "0d65651030da6d396f7775e1b46d465b305835cafd40eabf7a8cbdc9adf16086",
+      "working_checkout": {
+        "bytes": 9642,
+        "sha256": "0d65651030da6d396f7775e1b46d465b305835cafd40eabf7a8cbdc9adf16086"
+      }
+    },
+    {
+      "path": "crates/game_core/src/lib.rs",
+      "git_blob": "4b43e47418bcc880ebd7df5f52277ebaf14d0a72",
+      "bytes": 196705,
+      "sha256": "bb7b23f6ae237e7883e3dc6b6c218d90f2b1c8c18f7c721cccd7c5f4624db930",
+      "working_checkout": {
+        "bytes": 196705,
+        "sha256": "bb7b23f6ae237e7883e3dc6b6c218d90f2b1c8c18f7c721cccd7c5f4624db930"
+      }
+    },
+    {
+      "path": "crates/game_web/src/dock_art.rs",
+      "git_blob": "01be4a3ed82ee10b21d58741d8b5adb8c7164878",
+      "bytes": 9952,
+      "sha256": "669abfbcceb3a9a5875c1aa1d57de578151e90f77d7ea190a0b05792792926bf",
+      "working_checkout": {
+        "bytes": 9952,
+        "sha256": "669abfbcceb3a9a5875c1aa1d57de578151e90f77d7ea190a0b05792792926bf"
+      }
+    },
+    {
+      "path": "crates/game_web/src/dock_art_tests.rs",
+      "git_blob": "e7bffd86881954cbc609deefe552746773a9ca07",
+      "bytes": 16491,
+      "sha256": "c1f8d7b90f71d29ac44ad16cc1ebc584d676dca5b082d712852bd3ae3e932864",
+      "working_checkout": {
+        "bytes": 16491,
+        "sha256": "c1f8d7b90f71d29ac44ad16cc1ebc584d676dca5b082d712852bd3ae3e932864"
+      }
+    },
+    {
+      "path": "crates/game_web/src/lib.rs",
+      "git_blob": "0c7b68df72c95058b1cfdfc50498c0cb7b4ee9db",
+      "bytes": 495,
+      "sha256": "f904b4793d3534b7a672aa74b6f6eb27531df8b3b95b7b2bbddd52a80dc7e570",
+      "working_checkout": {
+        "bytes": 495,
+        "sha256": "f904b4793d3534b7a672aa74b6f6eb27531df8b3b95b7b2bbddd52a80dc7e570"
+      }
+    },
+    {
+      "path": "crates/game_web/src/lighting.rs",
+      "git_blob": "1e5964cfb51131da8be977eafa869421378cdb23",
+      "bytes": 12924,
+      "sha256": "b242efc3901f283e95e1818d49959b3d9f539363c18e810af2571e7a598afed1",
+      "working_checkout": {
+        "bytes": 12924,
+        "sha256": "b242efc3901f283e95e1818d49959b3d9f539363c18e810af2571e7a598afed1"
+      }
+    },
+    {
+      "path": "crates/game_web/src/pixel.wgsl",
+      "git_blob": "cefe34ae4e8f6f687476031270bfd3932735c2ed",
+      "bytes": 8685,
+      "sha256": "e545658e1bb63a71193262acf1d9e39a3e5ef69310c41a38793949e31659a811",
+      "working_checkout": {
+        "bytes": 8850,
+        "sha256": "60a4e97870f8401cdb479e3a12ac57baf5e98b975aeef9139b7a30a6742580e8"
+      }
+    },
+    {
+      "path": "crates/game_web/src/renderer.rs",
+      "git_blob": "c72a12b8c900b1a5cfcabd62b6bdf16da7a27ca1",
+      "bytes": 32057,
+      "sha256": "58f7319b8027ad5d6943b8b0de6465b17a52f77b2caaca55a64458082aeeafd4",
+      "working_checkout": {
+        "bytes": 32057,
+        "sha256": "58f7319b8027ad5d6943b8b0de6465b17a52f77b2caaca55a64458082aeeafd4"
+      }
+    },
+    {
+      "path": "crates/game_web/src/shadow_uniforms.rs",
+      "git_blob": "caacd76754cbd3f8e3e9075d5e15d9698bdf49ee",
+      "bytes": 6127,
+      "sha256": "9bb3e3d90b67ff38ca43d40df67d51cf8ed65bab414017a04f0a6ae399d2c160",
+      "working_checkout": {
+        "bytes": 6127,
+        "sha256": "9bb3e3d90b67ff38ca43d40df67d51cf8ed65bab414017a04f0a6ae399d2c160"
+      }
+    }
+  ],
+  "scope": "Evidence byte verification only; no tests/builds/shaders/GPU/browser/runtime acceptance."
+}

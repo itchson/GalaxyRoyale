@@ -1,0 +1,70 @@
+{
+  "captured_at_utc": "2026-10-12T17:01:31.752175+00:00",
+  "base_commit": "d53954c7956a2be71de34de12c4f309563bd8a40",
+  "branch": "codex/title-mix-refinement",
+  "node": "v24.18.0",
+  "typescript": "5.9.3",
+  "changed_production": "apps/game/src/audio.ts",
+  "changed_test": "scripts/test/audio.test.mjs",
+  "unchanged_baseline_modules": {
+    "apps/game/src/main.ts": {
+      "same_as_base": true,
+      "canonical_sha256": "af30ca9ee95092a9e8c501af71b6a00f61d5de104cf802080a55ae3a64ade3b2"
+    },
+    "apps/game/src/audio-state.ts": {
+      "same_as_base": true,
+      "canonical_sha256": "3e7d35563f489f477ecc0f451772479e19070fc051eb86c9aa2dffdbd8a68aea"
+    },
+    "apps/game/src/title-theme.ts": {
+      "same_as_base": true,
+      "canonical_sha256": "2ea2516c54f5e53a16ce05c1f4a37b5304e6282b5ea2855dc9694684a26c2069"
+    },
+    "apps/game/src/music-clock.ts": {
+      "same_as_base": true,
+      "canonical_sha256": "aec678986a6b4fe13bafb2cb4999717c1069b08504cebb6b1b44046a2af6c559"
+    },
+    "apps/game/src/music-score.ts": {
+      "same_as_base": true,
+      "canonical_sha256": "8757a5f93ed4584de7597a816124ea8f722975e234c113f97ae7d14d32140703"
+    }
+  },
+  "commands": [
+    {
+      "command": "node node_modules/typescript/bin/tsc --noEmit",
+      "exit_code": 0,
+      "log": "typecheck.log"
+    },
+    {
+      "command": "node --experimental-transform-types --test scripts/test/music-clock.test.mjs scripts/test/title-theme.test.mjs scripts/test/audio-state.test.mjs scripts/test/audio.test.mjs",
+      "exit_code": 0,
+      "tests": 54,
+      "pass": 54,
+      "fail": 0,
+      "log": "focused-tests.log"
+    }
+  ],
+  "recorded_api_stress": {
+    "seconds": 30,
+    "maximum_music_voices": 21,
+    "maximum_future_music_voices": 12,
+    "lookahead_seconds": 0.18
+  },
+  "prior_native_metrics_as_supplied_by_root": {
+    "fresh_render_this_pass": false,
+    "clip_seconds": 48,
+    "master": 0.75,
+    "music": 0.4,
+    "peak": 0.100266,
+    "rms": 0.007335
+  },
+  "acceptance": {
+    "typecheck_and_focused_api_tests": "passed",
+    "fresh_native_dsp_render": "open",
+    "instrument_and_mix_listening": "open",
+    "physical_output_device_listening": "open",
+    "perceived_song_match": "open",
+    "exact_transcription": "provisional",
+    "full_build": "not_run"
+  },
+  "scope": "Title-only articulation/mix candidate. Raw API/envelope/resource checks; no fresh native PCM or ear acceptance."
+}

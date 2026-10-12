@@ -1,0 +1,65 @@
+(node:18360) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ versioned frame bounds reject corruption, persistent profiles and nonfinite input (1.6271ms)
+✔ native snapshot contract rejects duplicate slots, wrong profile semantics and nonfinite geometry (0.4617ms)
+✔ HTTP reader refuses credential redirects and bounded oversized responses (3.7182ms)
+✔ body pages retain exact cell indices and reject duplicates, oversize and wrong query kinds (0.3934ms)
+✔ snapshot carries same-tick revision and permits finite authoritative projectiles beyond world edge (0.2605ms)
+✔ actual naturally spawned Coil metadata preserves the segment unknown-maximum sentinel only (0.3056ms)
+✔ actual HTTP membership never implies a ready channel or Rust admission (89.6833ms)
+✔ already-open incoming native channel plus later open event sends exactly one hello (77.3425ms)
+✔ RTC diagnostics retain only allowlisted native error detail, never messages or candidates (43.9987ms)
+✔ real HTTP offer/answer/ICE path binds peer IDs and admits only explicit frames (95.4222ms)
+✔ host plus seven guest channels are bounded; ninth reservation fails (154.6322ms)
+✔ backpressure refuses without advancing wire sequence, queueing or replaying stale input (76.4168ms)
+✔ malformed forged peer hello closes only that host peer and leaves no duplicate RTC (62.3371ms)
+✔ malformed replayed sequence closes only that host peer and leaves no duplicate RTC (59.2587ms)
+✔ malformed wrong session closes only that host peer and leaves no duplicate RTC (62.6401ms)
+✔ malformed guest snapshot authority closes only that host peer and leaves no duplicate RTC (61.7824ms)
+✔ input epoch and immutable snapshot seed are checked before sends (64.9973ms)
+✔ explicit rejection frees the guest reservation without ending the host (60.5497ms)
+✔ host end notifies guest, aborts polls and allows a distinct-session rejoin (75.0852ms)
+✔ expiry ends channels using real polling terminal notices (62.6449ms)
+✔ failed negotiation does not fabricate readiness and guest leave frees its reservation (32.1102ms)
+✔ late create result after disposal cannot reopen state and gets a leave cleanup (75.7326ms)
+✔ guest cannot end a host; explicit leave and repeated disposal clean every handler (44.0451ms)
+✔ a retired peer's already-queued ICE cannot terminate an unrelated host peer (130.1641ms)
+✔ SCTP message bound and send rate refuse without an application backlog (59.0034ms)
+✔ unopened negotiation deadline frees membership and every tracked clock task (77.0434ms)
+✔ pending request waits without RTC and decline retains its exact terminal outcome (31.1629ms)
+✖ approval timeout is independent of approved negotiation reservation timeout (108.7933ms)
+✔ same-world rotate/lock preserves approved channels and retires only pending requests (150.1532ms)
+✔ hostile pre-approval SDP event cannot create guest RTC or bypass approval (34.6695ms)
+✔ newest whole policy wins delayed rotation and heartbeat responses (78.151ms)
+✔ delayed old join-request cannot recreate an approval row after a newer policy (61.5876ms)
+✔ late admin response after leave cannot reopen code, policy, requests or RTC (29.673ms)
+✔ reconnection cancels loss timeout; actual failed connection closes once (59.6939ms)
+ℹ tests 34
+ℹ suites 0
+ℹ pass 33
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2145.136
+
+✖ failing tests:
+
+test at scripts\test\coop-transport.test.mjs:961:1
+✖ approval timeout is independent of approved negotiation reservation timeout (108.7933ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'session_ended'
+  - 'reservation_timeout'
+  
+      at TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/scripts/test/coop-transport.test.mjs:992:10)
+      at async Test.run (node:internal/test_runner/test:1332:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'session_ended',
+    expected: 'reservation_timeout',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

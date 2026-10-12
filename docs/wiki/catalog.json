@@ -1644,7 +1644,7 @@
           "title": "Behavior and scope",
           "paragraphs": [
             "Sanctuary protection suppresses hostile spawning, incoming damage and firing. Shared projectile sweeps reject protected crossings. Asteroids use canonical circle queries while moving; these are physical exclusions, not a cosmetic shield reward.",
-            "Only physical home arrival banks carried crafting materials. Remote sanctuaries do not become a Forge or a cargo bank. Haven facilities are Forge, Hangar, Journal and Arenas. Each real facility has a semantic world hitbox while the RAICHO remains within Haven."
+            "Only physical home arrival banks carried crafting materials. Remote sanctuaries do not become a Forge or a material bank. Five Haven facilities are Forge, Hangar, MISSIONS, MULTIPLAYER and VAULT. MISSIONS combines expedition/training/lore and the arena league. Each real facility has a native world hitbox; labels appear on hover or focus."
           ]
         },
         {
@@ -1957,7 +1957,7 @@
           "title": "Ability collection and recipe scope",
           "paragraphs": [
             "A discovered blueprint, a shared owned rank and an equipped slot are distinct states. Craft acquires inventory; explicit Equip changes only a compatible category on the active RAICHO and retains displaced ownership. Effective ranks still derive from that RAICHO level and authored exceptions.",
-            "The dedicated ability collection presents discovered, owned and equipped state with authoritative reasons and recipes. Its current filter/route/layout browser acceptance remains verification pending. There is no separate crafted-component inventory today: ordinary recipes consume raw tiers and points, while the explicit first training upgrade consumes the matching ten named T1 units.",
+            "The Forge ability collection presents discovered, owned and equipped state with authoritative reasons and recipes. Its local sections also expose discovered component/material recipes, RAICHO blueprints and hardware. Pulse Conductor, Aegis Lattice and Flux Bearing are stored at Haven and shown in Vault; ordinary ranks 3–5 require matching components. The first training upgrade still consumes ten matching named T1 units. Full natural progression and collection/layout acceptance remain separate from source and scoped browser evidence.",
             "This collection is a separate view reached through the live RAICHO menu. It is not linked from or embedded as an action in the standalone MEISHI CARD. Current navigation and browser presentation remain verification pending."
           ]
         }
@@ -2314,7 +2314,7 @@
           "paragraphs": [
             "Phase Silicate, Iron Filament and Coolant KESSHO are named subsets of the existing T1 cargo/stash. Show those labels plus remaining other T1 stock rather than adding the labels to the tier total. Capacity remains sixteen material units across five tiers; physical home arrival banks the carried stock.",
             "Courier packets are mission state and use no material slots. They are retained separately; visiting Haven records the delivery, and reporting to the same source beacon claims its reward. The cargo view distinguishes that state from at-risk crafting materials.",
-            "Current inventory/collection browser presentation remains verification pending. Crafted component stock and component-to-item recipes are planned. Today only raw tiers and the explicit named-material training recipe are consumed; no component count or additional capacity is invented.",
+            "Vault presents banked materials, crafted components and mission items separately from unbanked at-risk salvage. It omits upgrade-point balances and material-slot controls on RAICHO details. Physical Haven return banks carried materials; death destroys unbanked materials. Existing component recipes and rank costs are authoritative Rust data. No new refining recipe or carrying capacity is introduced by these scenes.",
             "This collection is a separate view reached through the live RAICHO menu. It is not linked from or embedded as an action in the standalone MEISHI CARD. Current navigation and browser presentation remain verification pending."
           ]
         }
@@ -3843,8 +3843,8 @@
       "id": "title-mark",
       "title": "GALAXY ROYALE sports-league identity & theme",
       "category": "technology",
-      "status": "implemented",
-      "summary": "An original athletic wordmark and arena crest rendered as native pixel quads. The original title theme awaits the user’s composition.",
+      "status": "verification-pending",
+      "summary": "Original sports-league wordmark and arena crest rendered as native quads. The supplied song is being recreated as an authored native synthesis draft on the shared dynamic score transport.",
       "tags": [
         "title",
         "art",
@@ -3861,7 +3861,7 @@
         },
         {
           "label": "Music",
-          "value": "One optional decoded loop on the existing AudioContext; no track shipped yet"
+          "value": "One shared synth/beat clock; reference-inspired169.275 BPM title,120 BPM world and166 BPM combat ramps; no runtime recording"
         }
       ],
       "sections": [
@@ -3869,7 +3869,8 @@
           "title": "Production and delivery",
           "paragraphs": [
             "A retained generated sports-league reference is sampled onto a 512 × 192 field, removes declared low-alpha/near-black haze and reduces to a bounded palette. Exact converted cells are split into cached native bodies. Platinum lettering and arena rails stay stable; the gold award face is a separate group. This is an explicit adaptation with documented losses, not a claim of lossless image conversion or final user approval.",
-            "The game is prepared to load the user’s edited title theme after a gesture, using Master/Music volume controls and a bounded crossfade into the world score. Loop bounds, cancellation, suspension and graphics recovery are tested. The real recording, audible seam, loudness and musical transition approval remain pending delivery."
+            "The user supplied their original title reference and explicitly requested synthesis rather than recording playback. Authored chip/bubble/arpeggio/bass notes share the existing music/master buses, bounded voices, beat phase and world-score harmony. Continue blends into corporate Haven; actual chase and release retarget120/166 BPM over measured beat ramps. The draft is provisional; exact note/form transcription and final instrument/mix listening acceptance remain open. Actual browser PCM captures are distinct from modeled scheduling and source review.",
+            "The first native audition asked for instrument sound and mix; the second still needed fuller instruments. The third layers detuned stereo leads, sustained chord pads and centered bass harmonics. Seven native fixtures were finite and within unity with complete disposal; the title measured stereo correlation 0.988069 and mono-downmix RMS loss 0.0261 dB. These measurements do not imply accepted reference fidelity or perceived fullness."
           ]
         }
       ],
@@ -3888,6 +3889,31 @@
           "path": "assets/audio/title-theme-delivery.md",
           "label": "Theme delivery instructions",
           "role": "documentation"
+        },
+        {
+          "path": "docs/TITLE_SCORE.md",
+          "label": "Native score and acceptance contract",
+          "role": "documentation"
+        },
+        {
+          "path": "apps/game/src/title-theme.ts",
+          "label": "Authored provisional title events",
+          "role": "implementation"
+        },
+        {
+          "path": "apps/game/src/music-clock.ts",
+          "label": "Shared beat-space transport",
+          "role": "implementation"
+        },
+        {
+          "path": "artifacts/title-score-20261013/native-dsp-report.json",
+          "label": "Initial real native PCM evidence",
+          "role": "validation"
+        },
+        {
+          "path": "artifacts/title-score-20261013/width-final/native-summary.json",
+          "label": "Third actual native stereo render metrics",
+          "role": "validation"
         }
       ],
       "related": [
@@ -3900,7 +3926,7 @@
           "path": "artifacts/space-title-20261012/title-webgpu-1280.jpg",
           "kind": "runtime-screenshot",
           "label": "Sports-league title in the game",
-          "caption": "Actual WebGPU title at 1280 × 720. Native occupied pixel quads; the original theme recording is pending.",
+          "caption": "Actual historical WebGPU title at1280×720. Native occupied pixel quads; screenshot predates supplied-song native score work.",
           "provenance": "artifacts/space-title-20261012/README.md"
         },
         {
@@ -3911,6 +3937,77 @@
           "provenance": "assets/ui/title-mark/provenance.json"
         }
       ]
+    },
+    {
+      "id": "private-rooms",
+      "title": "Private co-op rooms",
+      "category": "technology",
+      "status": "verification-pending",
+      "summary": "Reviewed short-code service/browser integrated into the current normal build; real eight-client and forced-TURN game acceptance remain pending.",
+      "tags": [
+        "multiplayer",
+        "co-op",
+        "private-rooms"
+      ],
+      "facts": [
+        {
+          "label": "Room capacity",
+          "value": "Eight total: one host and seven guests, including pending reservations."
+        },
+        {
+          "label": "Code display",
+          "value": "#A7C2-9F34; eight case-insensitive hex digits; optional separators on paste."
+        },
+        {
+          "label": "Authority",
+          "value": "Rust host simulation; host administration bearer is separate from the room code."
+        }
+      ],
+      "sections": [
+        {
+          "title": "Requested player flow",
+          "paragraphs": [
+            "Dedicated floating MULTIPLAYER hub and HUD icon open a full-screen Join-default/Host scene. Host shows Copy, Replace Code, Lock Joining and Stop Hosting plus explicit Accept/Decline for guests. Replacing a code keeps the same host world and approved guests.",
+            "Guest local worlds/progression remain separate. Code collision/expiry, full room, approval/connection failure, host departure and TURN have individual acceptance gates on the board."
+          ]
+        },
+        {
+          "title": "Current stage",
+          "paragraphs": [
+            "Service/browser candidates and independent reviews are integrated into codex/testing. A real local host displayed 1/8, copied and replaced its code, locked joining, then stopped hosting and restored local progression. Both renderer menus were observed. This is not a new two-client approval, full eight-player, failed-ICE or forced-TURN gameplay pass; those gates remain open."
+          ]
+        }
+      ],
+      "references": [
+        {
+          "path": "docs/PRIVATE_ROOMS.md",
+          "label": "Private-room implementation contract",
+          "role": "accepted requested design and explicit gates"
+        },
+        {
+          "path": "artifacts/private-room-planning-20261012/DISCUSSION.md",
+          "label": "Actual specialist discussion",
+          "role": "source-backed coordination, not a simulated meeting"
+        },
+        {
+          "path": "docs/COOP_INTEGRATION.md",
+          "label": "Actual integration and historical RTC scope",
+          "role": "documentation"
+        },
+        {
+          "path": "artifacts/haven-scenes-20261012/INTEGRATION.md",
+          "label": "Current normal build and scene evidence",
+          "role": "validation"
+        }
+      ],
+      "related": [
+        "pixel-engine"
+      ],
+      "media": [],
+      "data": {
+        "totalPlayers": 8,
+        "hexDigits": 8
+      }
     }
   ]
 }

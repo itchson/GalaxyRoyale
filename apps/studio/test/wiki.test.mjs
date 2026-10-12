@@ -117,7 +117,7 @@ test("server and actual UI search cover names, source facts, categories and veri
   assert.equal(filterEntries(catalog, { category: "champions" }).length, 11);
   assert.deepEqual(
     filterEntries(catalog, { status: "planned" }).map((e) => e.id),
-    ["future", "private-rooms"],
+    ["future"],
   );
   assert.equal(
     filterEntries(catalog, { q: "not-present-in-catalog" }).length,

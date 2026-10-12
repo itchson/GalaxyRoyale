@@ -1,0 +1,50 @@
+    Updating crates.io index
+     Locking 31 packages to latest Rust 1.97.0 compatible versions
+ Downloading crates ...
+  Downloaded unicode-ident v1.0.27
+  Downloaded syn v3.0.9
+   Compiling proc-macro2 v1.0.107
+   Compiling quote v1.0.47
+   Compiling unicode-ident v1.0.27
+   Compiling libm v0.2.16
+   Compiling autocfg v1.5.1
+   Compiling foldhash v0.2.0
+   Compiling thiserror v2.0.21
+   Compiling zerocopy v0.8.62
+   Compiling equivalent v1.0.2
+   Compiling cfg_aliases v0.2.2
+   Compiling rustc-hash v1.1.0
+   Compiling cfg-if v1.0.5
+   Compiling bit-vec v0.9.1
+   Compiling unicode-width v0.2.2
+   Compiling bitflags v2.13.2
+   Compiling arrayvec v0.7.8
+   Compiling once_cell v1.21.4
+   Compiling log v0.4.34
+   Compiling naga v30.0.1
+   Compiling hashbrown v0.17.1
+   Compiling codespan-reporting v0.13.1
+   Compiling num-traits v0.2.19
+   Compiling bit-set v0.10.0
+   Compiling indexmap v2.14.2
+   Compiling syn v2.0.119
+   Compiling syn v3.0.9
+   Compiling thiserror-impl v2.0.21
+   Compiling zerocopy-derive v0.8.62
+   Compiling naga-types v30.0.1
+   Compiling half v2.7.1
+   Compiling galaxy-shadow-naga-check v0.0.0 (C:\Users\mitch\.codex\worktrees\galaxy-hud-navigation\galaxy-royale\work\hub-shadow-prototype\naga-portable)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 19.27s
+     Running `work\hub-shadow-prototype\naga-portable\target\debug\galaxy-shadow-naga-check.exe C:\Users\mitch\.codex\worktrees\galaxy-hud-navigation\galaxy-royale\crates\game_web\src\pixel.wgsl C:\Users\mitch\.codex\worktrees\galaxy-hud-navigation\galaxy-royale\work\hub-shadow-prototype\naga-portable`
+WGSL validation: all flags, empty optional capabilities
+layout Affine: 32B
+layout TransformTable: 4096B
+layout Light: 32B
+layout Globals: 304B
+layout ObjectTable: 1024B
+layout Caster: 48B
+layout ShadowDescriptors: 400B
+layout ShadowMasks: 16384B
+layout VertexOut: 96B
+GLSL ES300 vs_main: 6417B; 3 reflected uniform blocks
+GLSL ES300 fs_main: 10665B; 3 reflected uniform blocks

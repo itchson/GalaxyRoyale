@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "sourceCommit": "a7d45d84760d55a66535a6a98d3f5e2ba81fe7b7",
+  "parentCommit": "d2acfd2d9faaec2810d67d62f212066e7f1b5b81",
+  "scope": "Short-code signaling service, explicit approval/policy/capacity/lifecycle, actual scoped HTTP tests. No RTC/native/TURN/deployment/browser claim.",
+  "source": [
+    {
+      "path": "apps/coop/store.mjs",
+      "bytes": 24297,
+      "sha256": "c18f0f402013590660d7d18fb3a350fe36457750d9aa1569ef298ac9aaa0a18f"
+    },
+    {
+      "path": "apps/coop/server.mjs",
+      "bytes": 12064,
+      "sha256": "032d2988360bd8d066cd28cf010a0e1f49eb4a391c4fdc294525d0285e1790e5"
+    },
+    {
+      "path": "apps/coop/README.md",
+      "bytes": 12616,
+      "sha256": "1d7d09f43b44fe34f65bac0d4175343b0ce889c4688fe9ccd90f7ed65f0a24a4"
+    },
+    {
+      "path": "scripts/test/coop-signalling.test.mjs",
+      "bytes": 29416,
+      "sha256": "0162651d2150b0409d63a66059c17becc55f2d54eca9f85ae055e3d48705c3f9"
+    },
+    {
+      "path": "scripts/test/coop-private-rooms.test.mjs",
+      "bytes": 19726,
+      "sha256": "c5c6eb556595cb4d276c47e5b8f3072f79c3c6e05bfc96fe5468622f1c0b79e6"
+    }
+  ],
+  "files": [
+    {
+      "path": "HANDOFF.md",
+      "bytes": 6945,
+      "sha256": "20208da95e73b68cec6202624a5a175cf90fdce91e526265eb9e6d3725d80e76"
+    },
+    {
+      "path": "format-check.log",
+      "bytes": 68,
+      "sha256": "f20510a9da4717c51c4cffee6d0dd88d6c9a723d0a83711d01216f5b48961283"
+    },
+    {
+      "path": "freeze.mjs",
+      "bytes": 1608,
+      "sha256": "cb284bd3fe9ae0eb8b1cf78353afc03cfa89879447c3cd7b4d3723d0b100d71e"
+    },
+    {
+      "path": "service-expanded-first.log",
+      "bytes": 3010,
+      "sha256": "b060b0ed001fa85a883e22b83ce82c0736760cb5983ea24ba2d2493dbed4e243"
+    },
+    {
+      "path": "service-first.log",
+      "bytes": 2125,
+      "sha256": "18677a85071a486041513dcfaadcc1e87f91d661c397642fcea9e34c291a773f"
+    },
+    {
+      "path": "service-policy-final.log",
+      "bytes": 3336,
+      "sha256": "a10a702fe9f670b5c96194da2ff2f71e35c125ed1f0c67a386f27b3301867e85"
+    }
+  ]
+}

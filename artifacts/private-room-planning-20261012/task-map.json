@@ -1,0 +1,32 @@
+{
+  "service": {
+    "id": "task-6ddbc654",
+    "owner": "/root/engine_fx",
+    "title": "Private room codes, rotation, lock and approval service"
+  },
+  "browser": {
+    "id": "task-5fe5d40b",
+    "owner": "/root/art_rings",
+    "title": "Join/Host room panel and explicit approval transport"
+  },
+  "review": {
+    "id": "task-6697d51b",
+    "owner": "/root/qa_coop",
+    "title": "Independent room security and lifecycle review"
+  },
+  "integration": {
+    "id": "task-c359d033",
+    "owner": "/root",
+    "title": "Integrate room menu, multiplayer HUD icon and native flow"
+  },
+  "relay": {
+    "id": "task-b59ec27f",
+    "owner": "/root",
+    "title": "TURN credential configuration and forced-relay validation"
+  },
+  "eight": {
+    "id": "task-afd3e0d2",
+    "owner": "/root/qa_coop",
+    "title": "Eight-client rooms and failure/recovery acceptance"
+  }
+}

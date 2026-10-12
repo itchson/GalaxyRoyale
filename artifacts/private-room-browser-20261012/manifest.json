@@ -1,0 +1,123 @@
+{
+  "schema": 1,
+  "created_at": "2026-10-12T13:49:18.028Z",
+  "candidate": "3c00f413eadc78661be5676ad778fa434a28c26d",
+  "branch": "codex/room-approval-browser",
+  "base": "d2acfd2d9faaec2810d67d62f212066e7f1b5b81",
+  "service_dependencies": [
+    "a7d45d84760d55a66535a6a98d3f5e2ba81fe7b7",
+    "eeccc79d630b4d17533ae53f41b8c7dbb835b8fb"
+  ],
+  "validation": {
+    "focused_client_tests": 99,
+    "passed": 99,
+    "failed": 0,
+    "command_exit": 0,
+    "frozen_typecheck_exit": 0,
+    "evidence_class": "semantic DOM + modeled native/RTC + real self-closing HTTP fixtures; no browser/device/TURN gate"
+  },
+  "gitPins": [
+    {
+      "path": "apps/game/src/coop/room-code.ts",
+      "bytes": 550,
+      "sha256": "744bd717bde86b8d199f31c3f4f639ee6dfc6a8792abc79200852595eb3a66b3"
+    },
+    {
+      "path": "apps/game/src/coop/signaling.ts",
+      "bytes": 6716,
+      "sha256": "49ebdb7750f053f263a5b3741348e6d2f0171d3b16fd1dc7665242d5e313e433"
+    },
+    {
+      "path": "apps/game/src/coop/transport.ts",
+      "bytes": 36712,
+      "sha256": "10ead00d20e2e9fb5cb59a211b496ba98af59d962b8ebccb6d57138776d25d77"
+    },
+    {
+      "path": "apps/game/src/coop/controller.ts",
+      "bytes": 32533,
+      "sha256": "4966bf8ffcd8ca18125c9af9c710a7658cef61e28356fd01bc68ee50671dcb1f"
+    },
+    {
+      "path": "apps/game/src/coop/panel.ts",
+      "bytes": 20779,
+      "sha256": "463987d40f88c72183bf521897a9978466c4d27902152ac5d9d6741fb597a032"
+    },
+    {
+      "path": "scripts/test/coop-controller.test.mjs",
+      "bytes": 36697,
+      "sha256": "f8cc86dab7520b2de05ecaefd40f1770f3f703de5d0f9b00b9004c261254af30"
+    },
+    {
+      "path": "scripts/test/coop-panel.test.mjs",
+      "bytes": 22653,
+      "sha256": "59bf090f25f0ccefcf44341bf6e703a8c7f94383905f634dd8782c88f304dcb7"
+    },
+    {
+      "path": "scripts/test/coop-transport.test.mjs",
+      "bytes": 44673,
+      "sha256": "1656a656b51be38d9adc4f2ad6c01b30e005c740ab414c07e1b2b9a5cfcf3c61"
+    },
+    {
+      "path": "scripts/test/coop-signaling-client.test.mjs",
+      "bytes": 4271,
+      "sha256": "18cdd406af3f0a67b90d2b0a3dc9b5ae08f78ffaea853feea84f68ed8ee0bbc3"
+    }
+  ],
+  "rawPins": [
+    {
+      "path": "work/room-approval-browser/HANDOFF.md",
+      "bytes": 6195,
+      "sha256": "dccc7eb3e605d12cfe4fc2c86b91c2b51124d6dc0b4be9a31f3173e6d3e96311"
+    },
+    {
+      "path": "work/room-approval-browser/FAILURES.md",
+      "bytes": 2622,
+      "sha256": "1b6470e62623e586f6ee2c191ad40391300218d551c700e91366073c66e9e26b"
+    },
+    {
+      "path": "work/room-approval-browser/focused-client.log",
+      "bytes": 6682,
+      "sha256": "06309c6d06559e20bfb490468fc98f1e1dac72b0283acd6bd1f2ab5e621c4d92"
+    },
+    {
+      "path": "work/room-approval-browser/transport-first.log",
+      "bytes": 4691,
+      "sha256": "3853e7f6892fae0aa2904d86358d9836adf517febc708b4771d137b2caa4bf1a"
+    },
+    {
+      "path": "work/room-approval-browser/transport-final.log",
+      "bytes": 4373,
+      "sha256": "536b6148c388e8d94674daae0b5962aa3c5ed8c99774bd723b7068459b064b35"
+    },
+    {
+      "path": "work/room-approval-browser/transport-after-terminal-fix.log",
+      "bytes": 3571,
+      "sha256": "cb87f6eee19ba2c995cef9900bb2dc83178a87ef49864d5fc36f72d2c0120d7d"
+    },
+    {
+      "path": "work/room-approval-browser/transport-terminal-races.log",
+      "bytes": 3949,
+      "sha256": "5e39daaad1c4905a8a33f757515ebe97d9176ea0610ed65948e2ae259ed4e866"
+    },
+    {
+      "path": "work/room-approval-browser/client-final.log",
+      "bytes": 11416,
+      "sha256": "b7b5ab8b75f85a5ceff35d6ca7af552128e26d544fc946d447f2ab56527bc392"
+    },
+    {
+      "path": "work/room-approval-browser/client-after-close-recovery.log",
+      "bytes": 10608,
+      "sha256": "58c1a67da889d1272987cd6face0314661db1998d47f4ea167ddfedf6235ca5d"
+    },
+    {
+      "path": "work/room-approval-browser/committed-client-final.log",
+      "bytes": 10611,
+      "sha256": "84ef1f25809bc0d12f437a3fe9393a02af2aca8df85c682d967e3e4f1a739889"
+    },
+    {
+      "path": "work/room-approval-browser/typecheck-frozen.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

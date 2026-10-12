@@ -1,0 +1,77 @@
+(node:14132) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ sanctuary exit selects authored Expanse exploration, then blends back home (4.0087ms)
+✔ six biome identities and eight champion motifs remain distinct and bounded (5.6916ms)
+✔ real aggro rises smoothly and sanctuary/recovery fades it without false distance (1.1866ms)
+✔ low hull alarm recedes on healing and engine requires actual live ports (1.7741ms)
+✔ nonfinite boundaries, no-op time and source input normalization are deterministic (0.7434ms)
+✔ three original corporate homes preserve old identities and fade through real sanctuary exit (3.0572ms)
+✔ boss arrangement requires a real hostile and aggro, with bounded smooth rise and decay (2.0249ms)
+(node:42368) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ authored title shares music controls/context and silences gameplay effects (5.0059ms)
+✔ charge is one dry voice, two distinct rising tones, and ends by 125 ms (1.143ms)
+✔ pulse is one dry voice with falling tones and original bandpass noise (0.8113ms)
+✔ 100 mixed cues retain the existing 16-voice effects cap and release stolen nodes (2.0311ms)
+✔ separate volume buses and master mute remain authoritative for new cues (0.8249ms)
+✔ suspend, interrupted recovery, repeat gesture and disposal preserve one context (0.9768ms)
+✔ suspend during asynchronous resume prevents late scheduling and audio debt (0.772ms)
+✔ source state cannot create audio before gesture, after suspension, or disposal (1.0623ms)
+✔ continuous engine and hull alarm reuse one voice each inside the shared16 cap (5.5211ms)
+✔ adaptive score follows actual biome/champion states and stays within32 music voices (25.1674ms)
+✔ distinct ability and shield timbres use one dry bounded voice each (1.2204ms)
+✔ wake sound rate limiting never schedules delayed debt and diagnostics are observational (0.9544ms)
+✔ continuous effects honor independent mute buses, interruption and one-context recovery (0.9749ms)
+✔ an older failed resume cannot suspend a newer successful audio intent (1.021ms)
+✔ healing during an OS interruption cannot revive a stale hull alarm (0.548ms)
+✔ death finish retains only the real existing cue and suspends after its bounded tail (0.9855ms)
+✔ retry cancels a death timeout and a stale callback cannot suspend resumed music (0.541ms)
+✔ hidden/full suspend and disposal cut death tails without creating a context (0.5551ms)
+✔ a late resume state event preserves only the bounded death tail and obeys hard suspend (0.5686ms)
+✔ thrust uses a calm sine fifth with one shared lowpass and duck stage (1.0052ms)
+✔ throttle and speed retarget smooth continuous parameters without restarting the engine (0.5988ms)
+✔ only admitted important cues briefly duck propulsion without pumping music (1.6288ms)
+✔ low-hull priority and strongest cue holds fade away after actual healing (1.0349ms)
+✔ hidden stop, retry and death cleanup cannot carry a propulsion duck into the next life (0.3093ms)
+✔ real gain envelopes leave a quieter engine bed and finite bounded stacked mix (0.9442ms)
+ℹ {"engineEnvelope":0.015503942221969217,"historicalEngineEnvelope":0.06993,"priorWarmEnvelope":0.03008,"historicalScalarChangeDb":-13.084427740029469,"priorWarmScalarChangeDb":-5.756713813616779,"maximumCue":{"kind":"upgrade","envelope":0.544},"stackedEffects":7.793003942221965,"defaultBusScalar":4.383564717499855}
+✔ combined adaptive score, alarm, propulsion and real cues retain finite bus gains and voice limits (45.7153ms)
+ℹ {"samples":960,"seconds":24,"maximumMusicVoices":17,"maximumSfxVoices":4,"musicEnvelope":0.5747392467179001,"effectsEnvelope":0.568554,"combinedEnvelope":0.48496452134143986,"conservativeEchoEnvelope":0.5168650810175658,"scope":"recorded graph envelope sums; no DSP peak/RMS"}
+✔ all real buses reach one final bounded soft ceiling after compression (1.4704ms)
+✔ calm thrust pitch stays within a tiny musical bend while breathing reuses all sources (1.2598ms)
+✔ corporate home and quiet Iron exploration produce actual softer score nodes (2.8161ms)
+✔ one shared filtered power-chord voice follows aggro and adds only the actual boss counter-note (15.0681ms)
+✔ Continue at different phrase positions preserves beat and shares the selected corporate arrangement (4.0186ms)
+ℹ {"corporation":"pan","atSeconds":0.3,"beat":0.7194187500000001,"settledBpm":120,"scope":"recorded WebAudio calls; no DSP/listening"}
+ℹ {"corporation":"renko","atSeconds":0.925,"beat":2.4827000000000012,"settledBpm":120,"scope":"recorded WebAudio calls; no DSP/listening"}
+ℹ {"corporation":"hugo","atSeconds":6.8,"beat":19.057543750000082,"settledBpm":120,"scope":"recorded WebAudio calls; no DSP/listening"}
+✔ real combat intent retimes queued notes; release hold and re-chase never restart the clock (1.1793ms)
+✔ scheduler stalls skip missed notes and bound only the next lookahead queue (0.6672ms)
+✔ native title mute, interruption and late resume retain one clock and no stale scheduled notes (0.6386ms)
+✔ rapid title, chase, release and area changes keep music/effects budgets and finite gain events (17.2474ms)
+ℹ {"seconds":30,"maxMusic":21,"maxFuture":12,"scope":"recorded API calls; no native DSP or audible acceptance"}
+✔ title chip body and bass hold through the authored gate then release and clean up (0.6873ms)
+ℹ {"leadHoldAtHalfGate":0.038220000000000004,"leadGateSeconds":0.1772264067346034,"scope":"gain automation and resource calls, not DSP RMS"}
+✔ title pad inner sustain follows the retimed outer bar release when Continue slows the score (0.3437ms)
+✔ title pad retiming preserves its instantaneous release gain across repeated gate changes (0.2332ms)
+✔ world and cue envelopes retain the original attack-to-floor curve with no title hold (0.2492ms)
+✔ title bubble reaches its destination while the held body remains audible (0.2372ms)
+(node:38884) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ 120-to-166 ramp retains phase and quarter grid with finite monotonic note times (1.9854ms)
+✔ two-beat release hold and re-chase replace pending future ramp without a phase jump (0.1761ms)
+✔ retarget during a slowing ramp starts from current boundary tempo and preserves heard timing (0.0956ms)
+✔ pause/resume reanchors the existing beat and pending ramp instead of restarting the phrase (0.1179ms)
+✔ long runs bound history and reject nonfinite tempo inputs before they reach audio parameters (1.5843ms)
+(node:40056) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ title is explicitly a provisional authored score with no recording/player path (3.2221ms)
+✔ authored notes fit finite loop boundaries, include rests and repeat without note debt (1.5335ms)
+ℹ tests 54
+ℹ suites 0
+ℹ pass 54
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 288.6806

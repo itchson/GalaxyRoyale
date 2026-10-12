@@ -1,0 +1,40 @@
+✔ eight-hex parser has exact ASCII paste rules and raw input bound (0.7196ms)
+✔ real HTTP pending guests cannot negotiate or become ready until atomic host approval (67.0245ms)
+✔ decline and absolute approval/negotiation deadlines deliver terminal outcomes and free seats (23.4541ms)
+✔ same-room code rotation and locking preserve approved peers while retiring every unapproved request (28.2936ms)
+✔ room codes and guest credentials cannot administer; exact bodies and admin attempts are bounded before parsing (20.307ms)
+✔ crypto allocation checks active and retired collisions with finite attempts and no partial rotation or create (14.9012ms)
+✔ host queue preflight refuses approval, rotation and lock without revoking half a request (14.5056ms)
+✔ rotation quota and room expiry are finite; retired reservations release only after room retention (0.6736ms)
+✔ current code remains valid beyond former ten-minute invite timer while host lives, then ends with room (43.1298ms)
+✔ unchanged unlocked policy preserves request birth revision; every new request uses the rotated policy (10.4664ms)
+✔ aggregate cancellation preflight preserves both pending requests and approved peers on failure (21.3908ms)
+✔ admin schema, cross-room and resolved IDs reject without policy or admission changes (24.6898ms)
+✔ HTTP exact Origin, CORS and fixed routes reject untrusted or forged requests (47.7883ms)
+✔ short room lookup codes reject malformed, expiry and service restart changes (28.3391ms)
+✔ concurrent HTTP admission reserves only host plus seven, including all pending guests (20.9931ms)
+✔ reservations and active guests expire separately; heartbeat does not extend pending admission (27.2758ms)
+✔ guest cannot end, replace, forge metadata, address strangers or bypass offer roles (33.7106ms)
+✔ host end publishes every final long-poll notice atomically, even with guests pending (57.4755ms)
+✔ host leave, timeout and absolute expiry retain a bounded terminal notice then erase credentials (34.5109ms)
+✔ replacement ends only the previous session and failed replacement preserves it (26.5555ms)
+✔ authenticated replacement shares create rates across new bearer credentials (9.0898ms)
+✔ event replay and acknowledgment enforce queue capacity without silently dropping signals (22.8517ms)
+✔ body, SDP and ICE byte bounds and schemas reject oversized or forwarding payloads (18.6776ms)
+✔ unauthenticated failures consume bounded admission rates; session and client quotas are finite (32.9898ms)
+✔ per-sender and per-session signaling rates refuse excess without adding events (28.9183ms)
+✔ one bounded long poll per participant, abort cleanup and finite timeout (74.4014ms)
+✔ service stop resolves existing polls and closes every test listener (26.0982ms)
+✔ pure queued transport is cloned and retained departed credentials stay bounded (0.5126ms)
+✔ byte quota and membership overflow preserve terminal notices instead of orphaning peers (13.803ms)
+✔ ready and guest leave are once-only, free capacity and prune old credentials while host stays live (30.2225ms)
+✔ chunked request stream enforces the body bound without a Content-Length header (5.1218ms)
+✔ maintenance wakes an outstanding poll on host expiry with its retained end notice (260.4922ms)
+ℹ tests 32
+ℹ suites 0
+ℹ pass 32
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 878.9945

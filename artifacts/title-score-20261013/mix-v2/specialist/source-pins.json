@@ -1,0 +1,32 @@
+{
+  "captured_at_utc": "2026-10-12T17:01:31.752175+00:00",
+  "meaning": "SHA256 of final tested working-file bytes",
+  "sources": {
+    "apps/game/src/audio.ts": {
+      "bytes": 48113,
+      "sha256": "180803da7a02b2de3a7580ed819b517746de2dcd392fb37d530a1fc2e4aef099"
+    },
+    "scripts/test/audio.test.mjs": {
+      "bytes": 61056,
+      "sha256": "85261f38b66bd2cc5c4bfebcd108fc6f0f04deba4d75d1df5eefb3418d1d66d7"
+    }
+  },
+  "evidence": {
+    "handoff.md": {
+      "bytes": 4505,
+      "sha256": "d15ac7ed3426f4820e963719c8ce6fc9ba84dcc01de592a8048e37e8bf93532d"
+    },
+    "execution-evidence.json": {
+      "bytes": 2484,
+      "sha256": "2fb875c4a3d2de0d772d40a1118caf6a0334c8f152744094fd35261abb98cd7c"
+    },
+    "focused-tests.log": {
+      "bytes": 7398,
+      "sha256": "f378bc99274422a65daab5ba80f40cdd5533c582b75f388612f5dafdfa194e3b"
+    },
+    "typecheck.log": {
+      "bytes": 64,
+      "sha256": "3649e9672162eb34f45ecc60e54dc91a571a354becb2a4bbb2529fdf9affc11e"
+    }
+  }
+}

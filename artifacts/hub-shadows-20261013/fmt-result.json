@@ -1,0 +1,5 @@
+{
+  "exit_code": 0,
+  "command": "cargo fmt --all -- --check",
+  "commit": "db15b91f3a1614ebd245fbab47787de737535882"
+}

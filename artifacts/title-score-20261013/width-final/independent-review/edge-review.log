@@ -1,0 +1,16 @@
+(node:43016) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ all eight stereo pad layers share a replaced stop and own every panner through cleanup (4.5762ms)
+ℹ {"oldStop":1.3991980505095256,"newStop":1.4514851242224596,"panners":8,"scope":"recorded API"}
+✔ one complete authored title loop remains finite with stereo routes (27.6311ms)
+ℹ {"seconds":45.66996012405848,"stereo":true,"maxVoices":7,"maxSources":40,"maxNodes":129,"maxPerVoice":9,"maxPanners":8,"observedStepPositions":516,"scope":"sampled active recorded API resources; no DSP"}
+✔ one complete authored title loop remains finite with mono fallback routes (20.4914ms)
+ℹ {"seconds":45.66996012405848,"stereo":false,"maxVoices":7,"maxSources":40,"maxNodes":106,"maxPerVoice":9,"maxPanners":0,"observedStepPositions":516,"scope":"sampled active recorded API resources; no DSP"}
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 168.9762

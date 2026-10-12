@@ -1,0 +1,36 @@
+{
+  "before": {
+    "head": "8c284637f3dfd4f86982f2dc01b10fb8a70c8162",
+    "branch": "codex/testing",
+    "sourceHash": "64174485809f586cce599291b4d86050a73c0e82a25acebe61423f4301bb6bff"
+  },
+  "after": {
+    "head": "8c284637f3dfd4f86982f2dc01b10fb8a70c8162",
+    "branch": "codex/testing",
+    "sourceHash": "64174485809f586cce599291b4d86050a73c0e82a25acebe61423f4301bb6bff"
+  },
+  "unchanged": true,
+  "results": [
+    {
+      "name": "shell",
+      "command": "node",
+      "args": [
+        "--experimental-transform-types",
+        "--test",
+        "apps/studio/test/*.test.mjs",
+        "scripts/test/*.test.mjs",
+        "scripts/qa/audio-review/*.test.mjs"
+      ],
+      "exit": 1
+    },
+    {
+      "name": "rust",
+      "command": "cargo",
+      "args": [
+        "test",
+        "--workspace"
+      ],
+      "exit": 101
+    }
+  ]
+}

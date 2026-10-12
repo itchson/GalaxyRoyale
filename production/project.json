@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 915,
+  "revision": 1001,
   "name": "Galaxy Royale",
   "phase": "Playable solo slice → content and validation",
-  "updatedAt": "2026-10-12T11:29:55.731Z",
+  "updatedAt": "2026-10-12T18:05:15.384Z",
   "tasks": [
     {
       "id": "studio",
@@ -1039,7 +1039,7 @@
     {
       "id": "task-05dd95cd",
       "title": "Invite friends for co-op expeditions",
-      "description": "Real ordered RTC transport, signaling lifecycle, bounded framing and teardown are integrated as a separate stage. Root proved two actual same-page RTCPeerConnections through fixture admission/input, host end, new session and disposal; four created/four closed, zero tracked requests/timers. Root owns browser Game integration. Remote NAT/TURN, eight browser players, rewards, save compatibility and playable reconnect remain pending.",
+      "description": "Experimental real local RTC and Rust/WASM clients retain historical source-pinned two-client evidence, including owned RENKO fifth-shot cadence. Reviewed short private-code/explicit approval service/browser are now integrated into the current normal build. One-host copy/replace/lock/stop is observed; new two-client approval/failure, Internet/TURN, full8clients and broader co-op rewards remain unfinished.",
       "department": "Networking",
       "owner": "/root",
       "status": "active",
@@ -1086,17 +1086,32 @@
           "label": "Scoped real browser host restoration",
           "kind": "artifact",
           "path": "artifacts/co-op-native-integration-20261012/profile-report-equality.txt"
+        },
+        {
+          "label": "Private-room bounded assignment contract",
+          "kind": "artifact",
+          "path": "work/room-feature/ASSIGNMENT.md"
+        },
+        {
+          "label": "Real private-room coordination and pending validation",
+          "kind": "artifact",
+          "path": "artifacts/private-room-planning-20261012/DISCUSSION.md"
+        },
+        {
+          "label": "Actual current source/build/browser boundaries",
+          "kind": "artifact",
+          "path": "artifacts/haven-scenes-20261012/INTEGRATION.md"
         }
       ],
       "blocker": "",
-      "revision": 6,
+      "revision": 9,
       "createdAt": "2026-10-10T15:31:55.153Z",
-      "updatedAt": "2026-10-11T18:33:28.012Z"
+      "updatedAt": "2026-10-12T18:02:55.388Z"
     },
     {
       "id": "task-7e8e0a50",
       "title": "Authoritative multiplayer world and session foundation",
-      "description": "Real Game ECS host-authority session is integrated and independently reviewed: host plus seven factory-hull guests, owned primary shots, shared occupied-cell holes, targeted damage and exact original solo restoration. Session/epoch/replay/input-expiry boundaries have native checks. Root owns next WASM/publication/replica integration. No shared browser-world, owned guest loadouts, missions or durable rewards acceptance is claimed.",
+      "description": "Rust Game/Replica authority, participant-owned equipment/primaries, shared occupancy and boxed solo restoration remain integrated. New short-room codes and explicit approval boundaries are reviewed and rebuilt. Eight real clients, Internet/TURN, all ability audiovisual parity, shared mission/reward rules and current room-flow failure acceptance remain open.",
       "department": "Networking",
       "owner": "/root",
       "status": "active",
@@ -1143,12 +1158,27 @@
           "label": "Scoped real browser host restoration",
           "kind": "artifact",
           "path": "artifacts/co-op-native-integration-20261012/profile-report-equality.txt"
+        },
+        {
+          "label": "Private-room bounded assignment contract",
+          "kind": "artifact",
+          "path": "work/room-feature/ASSIGNMENT.md"
+        },
+        {
+          "label": "Real private-room coordination and pending validation",
+          "kind": "artifact",
+          "path": "artifacts/private-room-planning-20261012/DISCUSSION.md"
+        },
+        {
+          "label": "Actual current source/build/browser boundaries",
+          "kind": "artifact",
+          "path": "artifacts/haven-scenes-20261012/INTEGRATION.md"
         }
       ],
       "blocker": "",
-      "revision": 4,
+      "revision": 7,
       "createdAt": "2026-10-10T16:00:26.992Z",
-      "updatedAt": "2026-10-11T18:33:28.062Z"
+      "updatedAt": "2026-10-12T18:02:55.455Z"
     },
     {
       "id": "task-acf182ad",
@@ -6474,7 +6504,7 @@
     {
       "id": "task-613742d2",
       "title": "MEISHI CARD and distinct cargo, hull and ability collections",
-      "description": "Implemented standalone read-only MEISHI with animated native portrait, active RAICHO/XP/loadout, eight patch slots and retained corporate points. Close only; separate live RAICHO menu via Escape/status retains collections. Discovery-first hull/ability views and carried/banked mission cargo use Rust authority. Root desktop both-backend checks and actual PWA update preserve observed progression. Physical/human/performance acceptance remains tracked separately; component recipes remain backlog.",
+      "description": "Standalone read-only collectible MEISHI retains native portrait, active RAICHO/XP, eight patch slots and corporate points. Close only; separate live RAICHO and facility scenes handle collections. Discovery-first hull/ability and real banked/unbanked Vault state use Rust authority. Original scoped desktop evidence remains; crafted components now exist under task-1cba1e46, rather than remaining backlog.",
       "department": "Gameplay/UI",
       "owner": "/root",
       "status": "complete",
@@ -6519,12 +6549,17 @@
           "label": "Exact tested source/package receipt",
           "kind": "note",
           "path": "artifacts/meishi-20261011/standalone-tested-build.json"
+        },
+        {
+          "label": "Actual current source/build/browser boundaries",
+          "kind": "artifact",
+          "path": "artifacts/haven-scenes-20261012/INTEGRATION.md"
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 3,
       "createdAt": "2026-10-11T11:45:51.937Z",
-      "updatedAt": "2026-10-11T12:23:22.238Z"
+      "updatedAt": "2026-10-12T18:02:55.500Z"
     },
     {
       "id": "task-1cba1e46",
@@ -6787,7 +6822,7 @@
     {
       "id": "task-278ff973",
       "title": "Animated sports-league title and authored-theme delivery slot",
-      "description": "GALAXY ROYALE is the universe’s premier arena sport. Original athletic lettering, an orbital arena crest and gold award mark are converted to cached native quad groups. The responsive title uses restricted lighting and crest motion. Optional original theme playback is prepared; the user’s MP3 and listening approval remain pending.",
+      "description": "Accepted sports-league native title art remains: original lettering, orbital crest/gold mark, responsive cached quad groups and restrained animation/light. Earlier optional recording delivery was superseded by the user’s native-synthesis request. Current shared-clock authored title work and three real auditions live in task-a7eeab89/task-5301e8a1; no accepted exact-song/mix claim.",
       "department": "Art/Audio/UI",
       "owner": "/root/production_research",
       "status": "complete",
@@ -6828,12 +6863,17 @@
           "label": "Audio lifecycle review",
           "kind": "file",
           "path": "artifacts/space-title-20261012/independent-review.md"
+        },
+        {
+          "label": "Actual current source/build/browser boundaries",
+          "kind": "artifact",
+          "path": "artifacts/haven-scenes-20261012/INTEGRATION.md"
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 3,
       "createdAt": "2026-10-11T14:34:29.545Z",
-      "updatedAt": "2026-10-11T15:17:07.110Z"
+      "updatedAt": "2026-10-12T18:02:55.568Z"
     },
     {
       "id": "task-1d96967b",
@@ -7636,6 +7676,716 @@
       "revision": 2,
       "createdAt": "2026-10-12T10:54:19.251Z",
       "updatedAt": "2026-10-12T11:29:55.347Z"
+    },
+    {
+      "id": "task-6ddbc654",
+      "title": "Private room codes, rotation, lock and approval service",
+      "description": "Bounded short-code signaling service source scope complete and independently reviewed: CSPRNG collision checks, same-room rotation/lock, explicit approval, separate bearer authority and bounded lifecycle/admission. Frozen meaningful service tests, lifetime follow-up and original failures are linked. This source completion does not establish full8 real game clients or TURN.",
+      "department": "Networking",
+      "owner": "/root/engine_fx",
+      "status": "complete",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "CSPRNG eight-hex codes with active/reserved collision checks and bounded generation; code expiry/replacement tested.",
+          "met": true
+        },
+        {
+          "text": "Host-only same-room code rotation, joining lock and Accept/Decline; pending guests cannot negotiate before approval.",
+          "met": true
+        },
+        {
+          "text": "Eight-total pending/active capacity, join rate limits, stale code/unauthorized admin/timeout/teardown tests with actual service evidence.",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Exact requested flow, API and validation contract",
+          "kind": "artifact",
+          "path": "work/room-feature/ASSIGNMENT.md"
+        },
+        {
+          "label": "32 actual focused service tests; controlled620000ms clock, not wall-clock soak",
+          "kind": "artifact",
+          "path": "artifacts/private-room-service-20261012/service-final.log"
+        },
+        {
+          "label": "Independent source/evidence peer review; no RTC/TURN/eight-gameplay claim",
+          "kind": "artifact",
+          "path": "artifacts/private-room-service-20261012/qa-REVIEW.md"
+        },
+        {
+          "label": "Actual current source/build/browser boundaries",
+          "kind": "artifact",
+          "path": "artifacts/haven-scenes-20261012/INTEGRATION.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 3,
+      "createdAt": "2026-10-12T13:06:52.404Z",
+      "updatedAt": "2026-10-12T18:02:55.642Z"
+    },
+    {
+      "id": "task-5fe5d40b",
+      "title": "Join/Host room panel and explicit approval transport",
+      "description": "Bounded browser parser/Join-Host panel/approval-RTC gating source scope complete with frozen99-case independent review and preserved original races/failures. Integrated into current normal build; live two-client approval/full8/TURN remain on separate tasks.",
+      "department": "Browser UX and transport",
+      "owner": "/root/art_rings",
+      "status": "complete",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Default Join tab, normalized #A7C2-9F34 input, reactive Host code/Copy/Replace/Lock/Stop and host Accept/Decline controls.",
+          "met": true
+        },
+        {
+          "text": "Guests negotiate only after host approval; same-room rotation keeps active guests, terminal pending outcomes restore safely.",
+          "met": true
+        },
+        {
+          "text": "Bounded state/parser/controller tests and exact source handoff; actual native UI/RTC validation kept separate.",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Exact requested flow, API and validation contract",
+          "kind": "artifact",
+          "path": "work/room-feature/ASSIGNMENT.md"
+        },
+        {
+          "label": "Actual frozen99-case browser source/evidence review; no live RTC/8/TURN claim",
+          "kind": "artifact",
+          "path": "artifacts/private-room-browser-20261012/qa-REVIEW.md"
+        },
+        {
+          "label": "Actual current source/build/browser boundaries",
+          "kind": "artifact",
+          "path": "artifacts/haven-scenes-20261012/INTEGRATION.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 3,
+      "createdAt": "2026-10-12T13:06:52.424Z",
+      "updatedAt": "2026-10-12T18:02:55.702Z"
+    },
+    {
+      "id": "task-6697d51b",
+      "title": "Independent room security and lifecycle review",
+      "description": "Actual independent security/lifecycle reviews of service and browser candidates completed with exact source/evidence pin verification. Response-ordering and terminal-race corrections are preserved. No fabricated browser, full8-client or TURN acceptance.",
+      "department": "QA",
+      "owner": "/root/qa_coop",
+      "status": "complete",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Review actual service/browser candidates for code collision/replacement races, host credentials, capacity, rate limits and preapproval isolation.",
+          "met": true
+        },
+        {
+          "text": "Inspect Rust host/guest world restoration and safe departure/failure paths; identify concrete gaps without inventing tests.",
+          "met": true
+        },
+        {
+          "text": "Frozen acceptance matrix distinguishes real service, fake RTC, native clients, eight-player gameplay and forced TURN.",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Exact requested flow, API and validation contract",
+          "kind": "artifact",
+          "path": "work/room-feature/ASSIGNMENT.md"
+        },
+        {
+          "label": "Actual frozen99-case browser source/evidence review; no live RTC/8/TURN claim",
+          "kind": "artifact",
+          "path": "artifacts/private-room-browser-20261012/qa-REVIEW.md"
+        },
+        {
+          "label": "Actual current source/build/browser boundaries",
+          "kind": "artifact",
+          "path": "artifacts/haven-scenes-20261012/INTEGRATION.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 3,
+      "createdAt": "2026-10-12T13:06:52.449Z",
+      "updatedAt": "2026-10-12T18:02:55.781Z"
+    },
+    {
+      "id": "task-c359d033",
+      "title": "Integrate room menu, multiplayer HUD icon and native flow",
+      "description": "Reviewed short-code service/browser and native hub/HUD routes integrated into normal dual-renderer testing build. Actual current Join-default scene observed on both backends. Actual one-host WebGL2 copy/replace/lock/stop run displayed1/8 and restored local points. Two-client approval/new-code/disconnect/failure and full8/TURN remain pending; older RTC evidence is historical.",
+      "department": "Integration",
+      "owner": "/root",
+      "status": "active",
+      "priority": "high",
+      "dependencies": [
+        "task-6ddbc654",
+        "task-5fe5d40b",
+        "task-6697d51b"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Dedicated floating MULTIPLAYER hub and detailed pixel HUD icon open the same full-screen reactive room scene.",
+          "met": true
+        },
+        {
+          "text": "Reviewed source integrates with authoritative Rust host and boxed local worlds; appropriate combined checks and one latest preview.",
+          "met": true
+        },
+        {
+          "text": "Actual both-backend menu/layout and two-client approval/replacement/end/failure evidence recorded.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Exact requested flow, API and validation contract",
+          "kind": "artifact",
+          "path": "work/room-feature/ASSIGNMENT.md"
+        },
+        {
+          "label": "Actual integration, browser operations and limits",
+          "kind": "artifact",
+          "path": "artifacts/haven-scenes-20261012/INTEGRATION.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 3,
+      "createdAt": "2026-10-12T13:06:52.472Z",
+      "updatedAt": "2026-10-12T18:00:13.223Z"
+    },
+    {
+      "id": "task-b59ec27f",
+      "title": "Private-room TURN credentials and forced-relay validation",
+      "description": "Bounded private-room feature assignment. Full contract in docs/PRIVATE_ROOMS.md; this task is not completed or validated by planning alone.",
+      "department": "Networking",
+      "owner": "/root",
+      "status": "ready",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Authenticated short-lived TURN credentials and explicit RTC configuration; no permanent relay secret in shipped assets or logs.",
+          "met": false
+        },
+        {
+          "text": "Operate a real encrypted forced-relay session with selected relay candidate evidence and unchanged local worlds; retain pending until measured.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Exact requested flow, API and validation contract",
+          "kind": "artifact",
+          "path": "work/room-feature/ASSIGNMENT.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-12T13:06:52.494Z",
+      "updatedAt": "2026-10-12T13:18:45.427Z"
+    },
+    {
+      "id": "task-afd3e0d2",
+      "title": "Eight-client rooms and failure/recovery acceptance",
+      "description": "Bounded private-room feature assignment. Full contract in docs/PRIVATE_ROOMS.md; this task is not completed or validated by planning alone.",
+      "department": "QA",
+      "owner": "/root/qa_coop",
+      "status": "ready",
+      "priority": "high",
+      "dependencies": [
+        "task-c359d033"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Operate eight simultaneous real Rust/WASM clients, reject a ninth, and distinguish pending/approved/native-ready states.",
+          "met": false
+        },
+        {
+          "text": "Operate code replacement, lock, Accept/Decline, guest disconnect, host departure, failed ICE and service loss; verify local save/seed digests.",
+          "met": false
+        },
+        {
+          "text": "Record exact source/backend/process lifetime and actual captures; no fake RTC or narrow quota test promoted to full gameplay evidence.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Exact requested flow, API and validation contract",
+          "kind": "artifact",
+          "path": "work/room-feature/ASSIGNMENT.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-12T13:06:52.526Z",
+      "updatedAt": "2026-10-12T13:06:52.526Z"
+    },
+    {
+      "id": "task-f9bf0095",
+      "title": "Five high-detail Haven hubs: Forge, Hangar, Missions, Multiplayer, Vault",
+      "description": "Five distinct cached96-cell top-down native facilities integrated:21,580cells/20transforms, fixed24-world-unit hit radius, corporate materials and relative signal animation. Author native/software and source review are recorded. Root both-backend Haven observations exist; full per-facility high-detail visual acceptance remains open.",
+      "department": "Native pixel art",
+      "owner": "/root/engine_fx",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Five distinct cached96x96 native facilities within24world hit radius; bounded25k pixel/20transform target and local animation.",
+          "met": true
+        },
+        {
+          "text": "Native hit/zoom/fractional transform and reduced-motion proof plus actual software contact evidence reviewed against central dock.",
+          "met": true
+        },
+        {
+          "text": "Both real browser backends visually accept high-detail art at its game footprint.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Exact latest user layout and scene acceptance",
+          "kind": "artifact",
+          "path": "artifacts/haven-scenes-20261012/ASSIGNMENT.md"
+        },
+        {
+          "label": "Actual integration, browser operations and limits",
+          "kind": "artifact",
+          "path": "artifacts/haven-scenes-20261012/INTEGRATION.md"
+        },
+        {
+          "label": "Actual current source/build/browser boundaries",
+          "kind": "artifact",
+          "path": "artifacts/haven-scenes-20261012/INTEGRATION.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 5,
+      "createdAt": "2026-10-12T13:47:32.653Z",
+      "updatedAt": "2026-10-12T18:02:55.098Z"
+    },
+    {
+      "id": "task-9de4af8f",
+      "title": "Full-screen pixel menu scenes and combined MISSIONS navigation",
+      "description": "Five facilities, MISSIONS merge and full-screen native scene routing integrated. Real source/fixture review retains39/39 scene cases. Actual WebGL2/WebGPU menu observations and PWA update preserve displayed progress. Initial obsolete Vault popup CSS failure retained; corrected full-screen Vault measured1280×720 and848×480, with MEISHI card framing still observed. Complete all-aspect/hit/scroll/device coverage remains open.",
+      "department": "Game UX and integration",
+      "owner": "/root",
+      "status": "active",
+      "priority": "high",
+      "dependencies": [
+        "task-f9bf0095"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Dedicated hub routes and combined expedition/training/league actions; central dock no longer opens Multiplayer.",
+          "met": true
+        },
+        {
+          "text": "Opaque full-screen native quad stage, measured clipping/controls, top-right close; no card navigation added to MEISHI.",
+          "met": true
+        },
+        {
+          "text": "Actual both-backend wide/narrow/short layout, hover/hit/close and uninterrupted simulation checks with source-pinned evidence.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Exact scene contract",
+          "kind": "artifact",
+          "path": "artifacts/haven-scenes-20261012/ASSIGNMENT.md"
+        },
+        {
+          "label": "Actual integration, browser operations and limits",
+          "kind": "artifact",
+          "path": "artifacts/haven-scenes-20261012/INTEGRATION.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-12T13:47:32.678Z",
+      "updatedAt": "2026-10-12T18:00:13.291Z"
+    },
+    {
+      "id": "task-cb832e03",
+      "title": "Hangar garage, scrollable owned RAICHO index and details route",
+      "description": "Native overhead garage/current RAICHO, owned/discovered strip and showcase→real stats/three-slot route integrated. Root observed current PAN HIKARI garage on both backends and actual details navigation at848×480 in WebGL2. Full multi-hull switch/scroll/focus and both-backend interaction coverage remain open.",
+      "department": "Scene UX",
+      "owner": "/root/art_rings",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Current RAICHO in native garage; owned discovered hull strip below with correct switch gates.",
+          "met": true
+        },
+        {
+          "text": "Showcase opens dedicated real stats and three ability slots; preserve index scroll/focus on reactive updates.",
+          "met": true
+        },
+        {
+          "text": "Both-backend real layouts and interactions captured; no browser pass from modeled DOM tests.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Latest scene contract and confirmed deposit rule",
+          "kind": "artifact",
+          "path": "artifacts/haven-scenes-20261012/ASSIGNMENT.md"
+        },
+        {
+          "label": "Actual integration, browser operations and limits",
+          "kind": "artifact",
+          "path": "artifacts/haven-scenes-20261012/INTEGRATION.md"
+        },
+        {
+          "label": "Actual current source/build/browser boundaries",
+          "kind": "artifact",
+          "path": "artifacts/haven-scenes-20261012/INTEGRATION.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 3,
+      "createdAt": "2026-10-12T15:48:39.387Z",
+      "updatedAt": "2026-10-12T18:02:55.149Z"
+    },
+    {
+      "id": "task-1627eb53",
+      "title": "Dedicated Vault scene and no ship inventory-slot presentation",
+      "description": "Actual bounded Spark Vault handoff was reviewed/refined by Root. Current native scene reads real banked material/component/mission HUD, excludes point balances and ship inventory-slot controls. User confirmed Haven deposit/death risk. Typecheck and actual WebGL2 wide/short plus WebGPU Vault pass; initial obsolete CSS popup failure and correction are preserved. Parent full-scene acceptance remains open.",
+      "department": "Scene UX",
+      "owner": "spark/vault-scene",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Banked materials, owned crafted components and retained mission items use actual HUD.",
+          "met": true
+        },
+        {
+          "text": "No RAICHO inventory slots or currency in Vault; unbanked salvage is lost on death and deposits at Haven, explicitly confirmed by user.",
+          "met": true
+        },
+        {
+          "text": "Actual worker handoff reviewed and combined typecheck/browser scene validated.",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Latest scene contract and confirmed deposit rule",
+          "kind": "artifact",
+          "path": "artifacts/haven-scenes-20261012/ASSIGNMENT.md"
+        },
+        {
+          "label": "Actual integration, browser operations and limits",
+          "kind": "artifact",
+          "path": "artifacts/haven-scenes-20261012/INTEGRATION.md"
+        },
+        {
+          "label": "Actual current source/build/browser boundaries",
+          "kind": "artifact",
+          "path": "artifacts/haven-scenes-20261012/INTEGRATION.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 3,
+      "createdAt": "2026-10-12T15:48:39.411Z",
+      "updatedAt": "2026-10-12T18:02:55.201Z"
+    },
+    {
+      "id": "task-8e306aab",
+      "title": "Reuse authored coarse and fine RAICHO art in native UI previews",
+      "description": "Public native small-identity helper reuses coarse body plus authored fine overlay atomically; independent raw-atlas/affine/clip/60k checks migrated to the real two-layer output. Current PAN garage previews observed in both backends. Complete all-hull moving damage/zoom/physical acceptance remains separate.",
+      "department": "Native art extraction",
+      "owner": "/root/qa_coop",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Public small identity helper reuses healthy body plus fine overlay without atlas duplication or profile changes.",
+          "met": true
+        },
+        {
+          "text": "Atomic caller budgets, fractional transforms and frozen motion tested; UI caller clips both layers.",
+          "met": true
+        },
+        {
+          "text": "Actual rendered preview accepted in Hangar on both backends.",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Latest scene contract and confirmed deposit rule",
+          "kind": "artifact",
+          "path": "artifacts/haven-scenes-20261012/ASSIGNMENT.md"
+        },
+        {
+          "label": "Actual integration, browser operations and limits",
+          "kind": "artifact",
+          "path": "artifacts/haven-scenes-20261012/INTEGRATION.md"
+        },
+        {
+          "label": "Actual current source/build/browser boundaries",
+          "kind": "artifact",
+          "path": "artifacts/haven-scenes-20261012/INTEGRATION.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 3,
+      "createdAt": "2026-10-12T15:48:39.443Z",
+      "updatedAt": "2026-10-12T18:02:55.264Z"
+    },
+    {
+      "id": "task-5f970271",
+      "title": "Forge collection index and item/material/hull crafting sections",
+      "description": "Forge opens discovered/owned ability index and local Items&Materials, RAICHOBlueprints and Hardware sections. Existing Rust costs/availability/crafting authority retained; no invented refining recipe or automatic hull switch. Scoped WebGL2 navigation was observed. Both-backend full scroll/cost/transaction flow remains pending.",
+      "department": "Scene UX",
+      "owner": "/root",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Abilities default collection index; local sections for components/material recipes, discovered hull blueprints and hardware.",
+          "met": true
+        },
+        {
+          "text": "Real Rust recipes/costs and availability; crafting does not switch hull automatically.",
+          "met": true
+        },
+        {
+          "text": "Actual both-backend navigation, scroll/cost/transaction feedback validated.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Latest scene contract and confirmed deposit rule",
+          "kind": "artifact",
+          "path": "artifacts/haven-scenes-20261012/ASSIGNMENT.md"
+        },
+        {
+          "label": "Actual integration, browser operations and limits",
+          "kind": "artifact",
+          "path": "artifacts/haven-scenes-20261012/INTEGRATION.md"
+        },
+        {
+          "label": "Actual current source/build/browser boundaries",
+          "kind": "artifact",
+          "path": "artifacts/haven-scenes-20261012/INTEGRATION.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 3,
+      "createdAt": "2026-10-12T15:48:39.474Z",
+      "updatedAt": "2026-10-12T18:02:55.320Z"
+    },
+    {
+      "id": "task-23bb3756",
+      "title": "Relative height, contact shadows and hub-surface lighting",
+      "description": "Bounded one-local-caster/one-hub-beacon prototype integrated. Author native/Naga/CPU packet proof and independent canonical/raw pin/ray review accepted for renderer testing; frozen manifests and failed checker attempts preserved. Root observed both GPU initialization and a safe WebGPU home flight, not accepted shadow appearance/parity/recovery/performance. Remaining explicit GPU/zoom/light/receiver/holes gates are open.",
+      "department": "Engine lighting",
+      "owner": "/root/engine_fx",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [
+        "task-f9bf0095"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Source-backed design accounts for RAICHO/receiver height, native occupancy holes, layer/parent transforms and light directions.",
+          "met": true
+        },
+        {
+          "text": "Prototype real receiver-aware moving shadows with existing normal/emission shading and bounded costs; no collision or save changes.",
+          "met": true
+        },
+        {
+          "text": "Actual WebGPU/WebGL2 compare flying above hub and empty space; reduced-motion/zoom/light/receiver gaps checked with source/cost evidence.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Latest scene contract and confirmed deposit rule",
+          "kind": "artifact",
+          "path": "artifacts/haven-scenes-20261012/ASSIGNMENT.md"
+        },
+        {
+          "label": "Frozen author/QA scope and exact curation",
+          "kind": "artifact",
+          "path": "artifacts/hub-shadows-20261013/README-REVIEW.md"
+        },
+        {
+          "label": "Independent source/CPU review",
+          "kind": "artifact",
+          "path": "artifacts/hub-shadows-20261013/independent-review/REVIEW.md"
+        },
+        {
+          "label": "Actual integration, browser operations and limits",
+          "kind": "artifact",
+          "path": "artifacts/haven-scenes-20261012/INTEGRATION.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 3,
+      "createdAt": "2026-10-12T15:48:39.489Z",
+      "updatedAt": "2026-10-12T18:00:13.363Z"
+    },
+    {
+      "id": "task-54a27324",
+      "title": "Analyze supplied Galaxy Royale title song and define native score contract",
+      "description": "42.680s user-authored reference analyzed locally; no runtime MP3/PCM shipped. B minor/~169.275 BPM are candidates, not a verified transcription.",
+      "department": "Audio score",
+      "owner": "/root/audio_score",
+      "status": "complete",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Read original without changing it; pin source hash and actual metadata.",
+          "met": true
+        },
+        {
+          "text": "Save reproducible tempo/key analysis with musical uncertainty and no listening claim.",
+          "met": true
+        },
+        {
+          "text": "Define native shared-clock synthesis and title/hub/chase tempo transition contract.",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual measured reference and explicitly provisional score proposal",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/musical-report.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-12T16:38:07.073Z",
+      "updatedAt": "2026-10-12T16:38:07.073Z"
+    },
+    {
+      "id": "task-a7eeab89",
+      "title": "Recreate title theme in shared dynamic synthesis transport",
+      "description": "Reviewed native synthesized title is integrated and normally rebuilt. Three instrument passes have actual source/clock/resource tests and seven-fixture native PCM captures. Latest stereo lead/pads/bass retain shared title169.275→corporate Haven120→chase166→release120 beat transport. The original MP3 is offline reference only. First user feedback requested instrument sound/mix; second still needed fuller instruments; third audition awaits feedback. Exact melody/form and final instrument acceptance remain open.",
+      "department": "Audio score",
+      "owner": "/root/audio_score",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Remove runtime title URL/MP3 decode; synthesize authored notes through existing music bus and voice budget.",
+          "met": true
+        },
+        {
+          "text": "Shared beat/harmony phase through title→corporate Haven120 BPM, chase166 BPM and release; bounded queue/lifecycle tests.",
+          "met": true
+        },
+        {
+          "text": "Actual native offline DSP output and title/Continue game flow verified.",
+          "met": true
+        },
+        {
+          "text": "Listening comparison and exact melody/form recreation accepted separately from draft synthesis.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual measured reference and explicitly provisional score proposal",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/musical-report.md"
+        },
+        {
+          "label": "Third actual native PCM/stereo/cleanup results",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/width-final/native-summary.json"
+        },
+        {
+          "label": "Independent fuller-instrument source review",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/width-final/independent-review/review.md"
+        },
+        {
+          "label": "Native score and listening boundaries",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/width-final/SCORE-CONTRACT.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-12T16:38:07.096Z",
+      "updatedAt": "2026-10-12T18:00:13.082Z"
+    },
+    {
+      "id": "task-5301e8a1",
+      "title": "Review synthesized title melody, mix and theme transitions against user song",
+      "description": "Root rendered three actual native title/transition drafts and presented their engine-generated audition exports. The third seven-fixture capture is finite/within unity with cleanup0, title stereo correlation.988069/downmix RMS loss.0261dB. Feedback is recorded; native measurements do not establish perceived fullness or exact transcription. Third audition remains pending.",
+      "department": "Audio score",
+      "owner": "/root",
+      "status": "active",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Render actual engine full title loop and title/Haven/chase/release with source pins and PCM metrics.",
+          "met": true
+        },
+        {
+          "text": "Record direct listening feedback and corrections; never equate spectral estimates with song fidelity.",
+          "met": true
+        },
+        {
+          "text": "Preserve source track as offline reference only; record final accepted notes/arrangement provenance.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual measured reference and explicitly provisional score proposal",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/musical-report.md"
+        },
+        {
+          "label": "Third actual native PCM/stereo/cleanup results",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/width-final/native-summary.json"
+        },
+        {
+          "label": "Independent fuller-instrument source review",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/width-final/independent-review/review.md"
+        },
+        {
+          "label": "Native score and listening boundaries",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/width-final/SCORE-CONTRACT.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-12T16:38:07.128Z",
+      "updatedAt": "2026-10-12T18:00:13.145Z"
     }
   ],
   "reviews": [
@@ -9757,6 +10507,212 @@
           "path": "artifacts/pixel-surface-20261012/integration-review.md"
         }
       ]
+    },
+    {
+      "id": "review-8f12c663",
+      "title": "Actual private-room approval and policy ordering discussion",
+      "body": "Actual asynchronous design/source review: baseline automatically negotiates/adopts pending joins. Specialists are implementing explicit approval before RTC/native admission. QA identified same-room policy-response ordering; Engine/Browser agreed whole room_code/joining_locked state plus monotonic room_revision. Root accepted bounded collision/reservation/admin/wait rules. The written discussion documents these contributions; candidate checks, actual eight-client gameplay and TURN remain pending.",
+      "author": "Root",
+      "source": "Actual source inspection, dispatched specialist messages and observed live agent states",
+      "createdAt": "2026-10-12T13:18:45.565Z",
+      "participants": [
+        "Root",
+        "/root/engine_fx",
+        "/root/art_rings",
+        "/root/qa_coop"
+      ],
+      "taskIds": [
+        "task-6ddbc654",
+        "task-5fe5d40b",
+        "task-6697d51b"
+      ],
+      "evidence": [
+        {
+          "label": "Actual contribution record",
+          "kind": "artifact",
+          "path": "artifacts/private-room-planning-20261012/DISCUSSION.md"
+        },
+        {
+          "label": "Current contract",
+          "kind": "artifact",
+          "path": "artifacts/private-room-planning-20261012/ASSIGNMENT.md"
+        }
+      ]
+    },
+    {
+      "id": "review-adeac836",
+      "title": "Actual private-room code disclosure review and continuation",
+      "body": "QA identified that a retained rejected guest must not receive the replacement room_code through terminal event reads. Engine coordinated host-only code projection and guestnull with Browser, retaining whole-policy revision ordering for the host. Live source/tests now address it; frozen review remains pending. Browser capacity interruption was recorded and resumed without resetting partial work. This is actual source/coordination evidence, not a validated eight-client/RTC/TURN result.",
+      "author": "Root",
+      "source": "Actual worker terminal message, preserved source, redispatch and live-handle/process inventory",
+      "createdAt": "2026-10-12T13:24:28.914Z",
+      "participants": [
+        "Root",
+        "/root/engine_fx",
+        "/root/art_rings",
+        "/root/qa_coop"
+      ],
+      "taskIds": [
+        "task-6ddbc654",
+        "task-5fe5d40b",
+        "task-6697d51b"
+      ],
+      "evidence": [
+        {
+          "label": "Actual source review and worker observation",
+          "kind": "artifact",
+          "path": "artifacts/private-room-planning-20261012/OBSERVATIONS.md"
+        }
+      ]
+    },
+    {
+      "id": "review-c19bc33b",
+      "title": "Final short-room service accepted; browser/internet acceptance remains open",
+      "body": "Actual final service commits a7d45d8 + eeccc79 reviewed independently and integrated as40e3379 + f4a6d46.32 focused tests passed, including real HTTP routes with synthetic signaling, private approval gates, code rotation/lock/capacity and controlled-clock lifetime.620000ms injected service time with31 heartbeats is not a wall-clock soak. Prior31-case candidate had an independent invitation TTL and is preserved as superseded. No new real RTC, eight simultaneous games, forced TURN or physical acceptance is asserted.",
+      "author": "Root",
+      "source": "Actual latest user steering, dispatched specialists and reviewed source evidence",
+      "createdAt": "2026-10-12T13:47:32.828Z",
+      "participants": [
+        "Root",
+        "/root/engine_fx",
+        "/root/qa_coop"
+      ],
+      "taskIds": [
+        "task-6ddbc654",
+        "task-6697d51b"
+      ],
+      "evidence": [
+        {
+          "label": "Reviewed final service and raw pins",
+          "kind": "artifact",
+          "path": "artifacts/private-room-service-20261012/qa-REVIEW.md"
+        },
+        {
+          "label": "Saved actual32 test output",
+          "kind": "artifact",
+          "path": "artifacts/private-room-service-20261012/service-final.log"
+        }
+      ]
+    },
+    {
+      "id": "review-b3490118",
+      "title": "Browser approval/terminal races reviewed; new native scene acceptance remains open",
+      "body": "Independent reviewer verified9 browser source pins,11 raw pins,5 service dependency matches,10 unchanged boundaries and99 named passing cases plus frozen typecheck. Two real terminal reason races and earlier fixture failures are preserved. Native scene source review found four concrete UI issues; Root corrections are now separate from that source snapshot. No source/model result is called actual8-player/RTC/TURN/physical validation.",
+      "author": "Root",
+      "source": "Actual dispatched Hangar/Vault/preview work and latest user shadow request",
+      "createdAt": "2026-10-12T15:49:21.059Z",
+      "participants": [
+        "Root",
+        "/root/art_rings",
+        "/root/qa_coop"
+      ],
+      "taskIds": [
+        "task-5fe5d40b",
+        "task-6697d51b",
+        "task-9de4af8f"
+      ],
+      "evidence": [
+        {
+          "label": "Independent browser report",
+          "kind": "artifact",
+          "path": "artifacts/private-room-browser-20261012/qa-REVIEW.md"
+        },
+        {
+          "label": "Real native-scene source review",
+          "kind": "artifact",
+          "path": "artifacts/haven-scenes-20261012/SOURCE-REVIEW.md"
+        }
+      ]
+    },
+    {
+      "id": "review-99144a1d",
+      "title": "Actual native title auditions and independent instrument reviews",
+      "body": "Author implemented finite layered stereo lead/pad/bass after actual user feedback. Independent latest review reproduces58 focused and3 meaningful edge cases, retime/source/node ownership and full-loop mono fallback bounds. Root actual native capture has seven finite/no-over-unity cases with cleanup0 and measured stereo/downmix. User first selected instrument sound/mix, then still wanted fuller instruments; third clip is awaiting response. Short-stall failure and earlier refinement evidence remain preserved. These are source/model/DSP/user-feedback contributions, not a fabricated meeting or accepted exact-song transcription.",
+      "author": "Root",
+      "source": "Actual source integration, native DSP captures, browser actions and frozen specialist evidence",
+      "createdAt": "2026-10-12T18:00:13.920Z",
+      "participants": [
+        "Root",
+        "/root/audio_score",
+        "/root/audio_review"
+      ],
+      "taskIds": [
+        "task-a7eeab89",
+        "task-5301e8a1"
+      ],
+      "evidence": [
+        {
+          "label": "Third actual native PCM/stereo/cleanup results",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/width-final/native-summary.json"
+        },
+        {
+          "label": "Independent fuller-instrument source review",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/width-final/independent-review/review.md"
+        },
+        {
+          "label": "Native score and listening boundaries",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/width-final/SCORE-CONTRACT.md"
+        }
+      ]
+    },
+    {
+      "id": "review-b2a93a30",
+      "title": "Hub-shadow source review integrated with explicit GPU gates",
+      "body": "Actual frozen specialist source/Naga/CPU packets and independent occupancy/ray/pin review accepted this bounded prototype for integration. Original raw/canonical ambiguity is resolved by a preserved V2 pin amendment; failed checker attempts remain. Root initialization/home-flight observations are separate. No device shadow appearance, both-backend pixel parity, context recovery, eight-caster/co-op or physical-performance acceptance is asserted.",
+      "author": "Root",
+      "source": "Actual source integration, native DSP captures, browser actions and frozen specialist evidence",
+      "createdAt": "2026-10-12T18:00:13.951Z",
+      "participants": [
+        "Root",
+        "/root/engine_fx",
+        "/root/qa_coop"
+      ],
+      "taskIds": [
+        "task-23bb3756"
+      ],
+      "evidence": [
+        {
+          "label": "Originals, amendment and complete independent curation",
+          "kind": "artifact",
+          "path": "artifacts/hub-shadows-20261013/README-REVIEW.md"
+        }
+      ]
+    },
+    {
+      "id": "review-c3f08f2d",
+      "title": "Offline QA preserves actual stereo capability; frozen title PCM remains intact",
+      "body": "Independent review found no runtime blocker, but the isolated QA Proxy incorrectly advertised createStereoPanner when the real native factory was absent. A real regression failed before the correction. The exported actual adapter now preserves absent/noncallable capabilities and binds present factories to the native receiver while registering real nodes/sources once. Three meaningful capability checks passed after formatting. Intended no-server18-case scope passed; a prior mistaken negative filter ran three ephemeral server checks, which cleaned up and whose raw log is preserved. Root final combined shell638passed/3declaredskips and tsc passed with frozen runtime/review hashes. V3report/sevenWAV/runtimepins remain unchanged; no post-amendment native render or new fidelity acceptance is claimed.",
+      "author": "Root",
+      "source": "Actual final helper amendment/full verification and end-of-session observed run states",
+      "createdAt": "2026-10-12T18:05:15.309Z",
+      "participants": [
+        "Root",
+        "/root/audio_review"
+      ],
+      "taskIds": [
+        "task-a7eeab89",
+        "task-5301e8a1"
+      ],
+      "evidence": [
+        {
+          "label": "Actual full current shell/typecheck, frozen review inputs and identical F4 package",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/width-final/checks/evidence-final/results.json"
+        },
+        {
+          "label": "Real QA capability regression, fix and exact pins",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/width-final/independent-review/helper-fix/handoff.md"
+        },
+        {
+          "label": "Third actual native title/stereo and cleanup results",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/width-final/native-summary.json"
+        }
+      ]
     }
   ],
   "decisions": [
@@ -10028,6 +10984,33 @@
       "author": "Producer",
       "source": "Actual integrated source, author/reviewer handoffs and Root CUA observations through fb45246",
       "createdAt": "2026-10-11T17:00:09.328Z",
+      "status": "accepted"
+    },
+    {
+      "id": "decision-b124ca13",
+      "title": "Private room codes and approval replace long invitations",
+      "body": "User-requested Join-default/Host flow and eight-total private rooms. Four CSPRNG bytes form a formatted lookup code, separate from host bearer administration credentials. Same-room replacement preserves approved guests and cancels unapproved requests; lock rejects new requests and retires pending approvals. Explicit host approval precedes RTC/native admission. Existing Rust authority/local-world boxing is retained. TURN and eight-real-client acceptance are separate measured gates. No validation result is asserted by this design record.",
+      "author": "Root",
+      "source": "Explicit private-room feature request and inspected existing signaling/native foundation",
+      "createdAt": "2026-10-12T13:06:52.680Z",
+      "status": "accepted"
+    },
+    {
+      "id": "decision-674728fd",
+      "title": "Dedicated MISSIONS and MULTIPLAYER hubs with full-screen native scenes",
+      "body": "Latest user instruction: combine Journal and Arena into MISSIONS; retain Forge/Hangar; separate floating MULTIPLAYER hub replaces central dock entry. All existing menu pages become full-screen native pixel scenes with top-right close. MEISHI retains its collectible-card design within the scene. This is the accepted design direction; candidate art/browser/layout validation remains pending.",
+      "author": "Root",
+      "source": "Actual latest user steering, dispatched specialists and reviewed source evidence",
+      "createdAt": "2026-10-12T13:47:32.862Z",
+      "status": "accepted"
+    },
+    {
+      "id": "decision-f6ed1027",
+      "title": "Title reference recreated as native synthesis; fidelity remains an explicit review gate",
+      "body": "The user explicitly rejects runtime MP3 playback. Existing WebAudio AudioEngine remains browser DSP driven by Rust HUD music intent; no Rust DSP claim. Use one tempo/phase clock, authored B-minor reference-inspired draft,120 BPM ambient and166 BPM combat ramps. Machine analysis and successful scheduler tests do not establish exact song recreation or perceived mix acceptance.",
+      "author": "Root",
+      "source": "Actual user music reference, measured analysis and bounded native-score dispatch",
+      "createdAt": "2026-10-12T16:38:07.249Z",
       "status": "accepted"
     }
   ],
@@ -12784,6 +13767,127 @@
       ],
       "url": "http://127.0.0.1:4173/?qa=1",
       "knownIssues": "First PAN material only; controlled directional/depth visual gate and broader assets/performance remain pending. Captured1FPS counters are not benchmark acceptance."
+    },
+    {
+      "id": "build-a662f158",
+      "title": "Testing F4: five Haven scenes, private rooms and fuller native title",
+      "body": "Frozen F4 normal WebGPU/WebGL2/Vite/PWA/Studio build completed. Runtime source783b68a0… and packagea1afe6da… are pinned in actual build records. Latest full shell635pass/3skip plus tsc; unchanged D028 Rust898pass/17ignored and strict native/both-WASM checks. Actual native V3 audio and current both-backend Vault/menu observations are linked separately. A later evidence-only/helper commit is not a rebuild.",
+      "author": "Root",
+      "source": "Actual source integration, native DSP captures, browser actions and frozen specialist evidence",
+      "createdAt": "2026-10-12T18:00:13.966Z",
+      "revision": "f4b8882b568339f0aa164c6aaf99a174b59cc105",
+      "evidence": [
+        {
+          "label": "Frozen build and actual operations",
+          "kind": "artifact",
+          "path": "artifacts/haven-scenes-20261012/INTEGRATION.md"
+        },
+        {
+          "label": "Actual F4 normal build result",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/width-final/checks/retry/build-result.json"
+        },
+        {
+          "label": "Third actual native PCM/stereo/cleanup results",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/width-final/native-summary.json"
+        },
+        {
+          "label": "Independent fuller-instrument source review",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/width-final/independent-review/review.md"
+        },
+        {
+          "label": "Native score and listening boundaries",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/width-final/SCORE-CONTRACT.md"
+        }
+      ],
+      "checks": [
+        {
+          "name": "F4 full shell:635 passed /3 declared skips",
+          "result": "pass"
+        },
+        {
+          "name": "F4 typecheck and normal dual-renderer/PWA build",
+          "result": "pass"
+        },
+        {
+          "name": "D028 unchanged Rust source:898 passed /17 ignored; strict native and both WASM Clippy/fmt",
+          "result": "pass"
+        },
+        {
+          "name": "Native V3 seven audio fixtures: finite, within unity, cleanup0",
+          "result": "pass"
+        },
+        {
+          "name": "Current PWA update and both-backend Vault/menu observations",
+          "result": "pass"
+        },
+        {
+          "name": "Exact reference-song/listening acceptance",
+          "result": "not_run"
+        },
+        {
+          "name": "New approval flow full8-client/forced TURN/recovery",
+          "result": "not_run"
+        },
+        {
+          "name": "Complete GPU shadow visual/parity/recovery and physical soak",
+          "result": "not_run"
+        }
+      ],
+      "url": "http://league-final.localhost:4173/?qa=1&renderer=webgpu",
+      "knownIssues": "Third title fidelity/mix still awaiting direct approval. New private-room two-client/8-client/TURN gates, complete scene aspect/hit/device coverage, full natural craft/progression and device shadow validation remain pending."
+    },
+    {
+      "id": "build-a106ae1d",
+      "title": "F4 package unchanged: final QA adapter and Wiki evidence checks",
+      "body": "This is an evidence/helper verification record, not a new normal build. Current full shell641cases:638pass/0fail/3declaredskips, plus typecheck. Runtime source and compiled package still exactly match the F4 build receipt; review input tree is frozen before/after. Source-pinned V3native audio capture predates the QA-only capability amendment and remains intact.",
+      "author": "Root",
+      "source": "Actual final helper amendment/full verification and end-of-session observed run states",
+      "createdAt": "2026-10-12T18:05:15.337Z",
+      "revision": "f4b8882b568339f0aa164c6aaf99a174b59cc105",
+      "evidence": [
+        {
+          "label": "Actual full current shell/typecheck, frozen review inputs and identical F4 package",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/width-final/checks/evidence-final/results.json"
+        },
+        {
+          "label": "Real QA capability regression, fix and exact pins",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/width-final/independent-review/helper-fix/handoff.md"
+        },
+        {
+          "label": "Third actual native title/stereo and cleanup results",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/width-final/native-summary.json"
+        }
+      ],
+      "checks": [
+        {
+          "name": "Current full shell638pass /3declaredskips",
+          "result": "pass"
+        },
+        {
+          "name": "Current typecheck",
+          "result": "pass"
+        },
+        {
+          "name": "Runtime/package/review inputs unchanged during checks",
+          "result": "pass"
+        },
+        {
+          "name": "Post-amendment new native render",
+          "result": "not_run"
+        },
+        {
+          "name": "Human reference fidelity and mix acceptance",
+          "result": "not_run"
+        }
+      ],
+      "knownIssues": "Reference-inspired notes/form and third instrumental audition remain in review. Broad8-client/TURN/device and shadow visual gates remain separate."
     }
   ],
   "feedback": [],
@@ -21937,6 +23041,866 @@
       "author": "Root",
       "source": "Actual frozen specialist work, integrated checks and operated desktop captures",
       "createdAt": "2026-10-12T11:29:55.731Z"
+    },
+    {
+      "id": "1f218216-6016-4f7a-9689-34f3d488f188",
+      "revision": 916,
+      "kind": "task.create",
+      "itemId": "task-6ddbc654",
+      "title": "Private room codes, rotation, lock and approval service",
+      "author": "Root",
+      "source": "Explicit private-room feature request and inspected existing signaling/native foundation",
+      "createdAt": "2026-10-12T13:06:52.404Z"
+    },
+    {
+      "id": "2dcf22f4-4b95-41dc-9276-49cf93ae086d",
+      "revision": 917,
+      "kind": "task.create",
+      "itemId": "task-5fe5d40b",
+      "title": "Join/Host room panel and explicit approval transport",
+      "author": "Root",
+      "source": "Explicit private-room feature request and inspected existing signaling/native foundation",
+      "createdAt": "2026-10-12T13:06:52.424Z"
+    },
+    {
+      "id": "8ec92d3b-a649-474c-962e-682ee17406d5",
+      "revision": 918,
+      "kind": "task.create",
+      "itemId": "task-6697d51b",
+      "title": "Independent room security and lifecycle review",
+      "author": "Root",
+      "source": "Explicit private-room feature request and inspected existing signaling/native foundation",
+      "createdAt": "2026-10-12T13:06:52.449Z"
+    },
+    {
+      "id": "604c3954-5904-4f5b-b209-886e3afdb033",
+      "revision": 919,
+      "kind": "task.create",
+      "itemId": "task-c359d033",
+      "title": "Integrate room menu, multiplayer HUD icon and native flow",
+      "author": "Root",
+      "source": "Explicit private-room feature request and inspected existing signaling/native foundation",
+      "createdAt": "2026-10-12T13:06:52.472Z"
+    },
+    {
+      "id": "7bc92c5b-83d7-455e-b7cc-8421289b292e",
+      "revision": 920,
+      "kind": "task.create",
+      "itemId": "task-b59ec27f",
+      "title": "TURN credential configuration and forced-relay validation",
+      "author": "Root",
+      "source": "Explicit private-room feature request and inspected existing signaling/native foundation",
+      "createdAt": "2026-10-12T13:06:52.494Z"
+    },
+    {
+      "id": "eabddf04-0822-4a70-8b2d-d55005fd016b",
+      "revision": 921,
+      "kind": "task.create",
+      "itemId": "task-afd3e0d2",
+      "title": "Eight-client rooms and failure/recovery acceptance",
+      "author": "Root",
+      "source": "Explicit private-room feature request and inspected existing signaling/native foundation",
+      "createdAt": "2026-10-12T13:06:52.526Z"
+    },
+    {
+      "id": "d6be045d-f418-41d1-809c-2d7d5522c1e2",
+      "revision": 922,
+      "kind": "task.update",
+      "itemId": "task-05dd95cd",
+      "title": "Invite friends for co-op expeditions",
+      "author": "Root",
+      "source": "Explicit private-room feature request and inspected existing signaling/native foundation",
+      "createdAt": "2026-10-12T13:06:52.618Z"
+    },
+    {
+      "id": "e95c2b47-c989-4bc5-812b-81972f254a77",
+      "revision": 923,
+      "kind": "task.update",
+      "itemId": "task-7e8e0a50",
+      "title": "Authoritative multiplayer world and session foundation",
+      "author": "Root",
+      "source": "Explicit private-room feature request and inspected existing signaling/native foundation",
+      "createdAt": "2026-10-12T13:06:52.649Z"
+    },
+    {
+      "id": "62b4ce3d-1c65-4ffd-96f7-ab8191affe8d",
+      "revision": 924,
+      "kind": "decision",
+      "itemId": "decision-b124ca13",
+      "title": "Private room codes and approval replace long invitations",
+      "author": "Root",
+      "source": "Explicit private-room feature request and inspected existing signaling/native foundation",
+      "createdAt": "2026-10-12T13:06:52.680Z"
+    },
+    {
+      "id": "a8ca1d0d-8c72-45a5-94f3-0f4553332ad2",
+      "revision": 925,
+      "kind": "run",
+      "itemId": "run-c9dc4a8e",
+      "title": "Networking service specialist · running",
+      "author": "Root",
+      "source": "Actual clean worktree branch preparation and dispatched bounded agents",
+      "createdAt": "2026-10-12T13:09:43.440Z"
+    },
+    {
+      "id": "3c15f008-fff4-4616-9ba8-f5287736e8ef",
+      "revision": 926,
+      "kind": "run",
+      "itemId": "run-32ff94d1",
+      "title": "Browser UX/transport specialist · running",
+      "author": "Root",
+      "source": "Actual clean worktree branch preparation and dispatched bounded agents",
+      "createdAt": "2026-10-12T13:09:43.463Z"
+    },
+    {
+      "id": "2e912f6a-50f2-48cb-ac91-aee2f3542d03",
+      "revision": 927,
+      "kind": "run",
+      "itemId": "run-81e1b03f",
+      "title": "Independent QA specialist · running",
+      "author": "Root",
+      "source": "Actual clean worktree branch preparation and dispatched bounded agents",
+      "createdAt": "2026-10-12T13:09:43.498Z"
+    },
+    {
+      "id": "cd523876-0d14-4855-a9e5-fe3c9e0be039",
+      "revision": 928,
+      "kind": "task.update",
+      "itemId": "task-b59ec27f",
+      "title": "Private-room TURN credentials and forced-relay validation",
+      "author": "Root",
+      "source": "Actual source inspection, dispatched specialist messages and observed live agent states",
+      "createdAt": "2026-10-12T13:18:45.427Z"
+    },
+    {
+      "id": "fa601565-1667-44a6-8fa9-b1278b12e528",
+      "revision": 929,
+      "kind": "task.update",
+      "itemId": "task-05dd95cd",
+      "title": "Invite friends for co-op expeditions",
+      "author": "Root",
+      "source": "Actual source inspection, dispatched specialist messages and observed live agent states",
+      "createdAt": "2026-10-12T13:18:45.488Z"
+    },
+    {
+      "id": "3730141a-571a-4832-b62e-fa02ba939224",
+      "revision": 930,
+      "kind": "task.update",
+      "itemId": "task-7e8e0a50",
+      "title": "Authoritative multiplayer world and session foundation",
+      "author": "Root",
+      "source": "Actual source inspection, dispatched specialist messages and observed live agent states",
+      "createdAt": "2026-10-12T13:18:45.532Z"
+    },
+    {
+      "id": "0af29813-90ba-472f-8f3f-1473ef84ff48",
+      "revision": 931,
+      "kind": "review",
+      "itemId": "review-8f12c663",
+      "title": "Actual private-room approval and policy ordering discussion",
+      "author": "Root",
+      "source": "Actual source inspection, dispatched specialist messages and observed live agent states",
+      "createdAt": "2026-10-12T13:18:45.565Z"
+    },
+    {
+      "id": "9a649d76-1a0e-4783-9600-86f98de7bc1f",
+      "revision": 932,
+      "kind": "run",
+      "itemId": "run-2ebfc2b3",
+      "title": "Producer / private-room coordination · running",
+      "author": "Root",
+      "source": "Actual source inspection, dispatched specialist messages and observed live agent states",
+      "createdAt": "2026-10-12T13:18:45.590Z"
+    },
+    {
+      "id": "0d021a09-5e9f-4e4b-a715-a5b7ce513324",
+      "revision": 933,
+      "kind": "run",
+      "itemId": "run-4552bad4",
+      "title": "Browser UX/transport specialist · failed",
+      "author": "Root",
+      "source": "Actual worker terminal message, preserved source, redispatch and live-handle/process inventory",
+      "createdAt": "2026-10-12T13:24:28.703Z"
+    },
+    {
+      "id": "2130398a-cb76-44a0-b820-7b50349d7a15",
+      "revision": 934,
+      "kind": "run",
+      "itemId": "run-60e53830",
+      "title": "Browser UX/transport specialist · running",
+      "author": "Root",
+      "source": "Actual worker terminal message, preserved source, redispatch and live-handle/process inventory",
+      "createdAt": "2026-10-12T13:24:28.728Z"
+    },
+    {
+      "id": "6f2872b0-f9da-4a70-8ef5-ae47e82de69e",
+      "revision": 935,
+      "kind": "run",
+      "itemId": "run-448c4886",
+      "title": "engine_research · interrupted",
+      "author": "Root",
+      "source": "Actual worker terminal message, preserved source, redispatch and live-handle/process inventory",
+      "createdAt": "2026-10-12T13:24:28.796Z"
+    },
+    {
+      "id": "39b4c7f7-1da4-4e30-abf1-a2bd5a0214d1",
+      "revision": 936,
+      "kind": "run",
+      "itemId": "run-a53f6931",
+      "title": "gameplay_design · interrupted",
+      "author": "Root",
+      "source": "Actual worker terminal message, preserved source, redispatch and live-handle/process inventory",
+      "createdAt": "2026-10-12T13:24:28.813Z"
+    },
+    {
+      "id": "187ced45-5725-430b-8d39-2da8b1643f28",
+      "revision": 937,
+      "kind": "run",
+      "itemId": "run-62ae1bc3",
+      "title": "production_research · interrupted",
+      "author": "Root",
+      "source": "Actual worker terminal message, preserved source, redispatch and live-handle/process inventory",
+      "createdAt": "2026-10-12T13:24:28.854Z"
+    },
+    {
+      "id": "7983d264-a547-4c35-b877-74c2d62f809c",
+      "revision": 938,
+      "kind": "run",
+      "itemId": "run-b5588fc5",
+      "title": "Spark Kikai save review · interrupted",
+      "author": "Root",
+      "source": "Actual worker terminal message, preserved source, redispatch and live-handle/process inventory",
+      "createdAt": "2026-10-12T13:24:28.890Z"
+    },
+    {
+      "id": "8bb05e0f-2c11-401f-92d2-3a19f0425cf8",
+      "revision": 939,
+      "kind": "review",
+      "itemId": "review-adeac836",
+      "title": "Actual private-room code disclosure review and continuation",
+      "author": "Root",
+      "source": "Actual worker terminal message, preserved source, redispatch and live-handle/process inventory",
+      "createdAt": "2026-10-12T13:24:28.914Z"
+    },
+    {
+      "id": "22a16562-e4b0-4ae0-a683-76295e198273",
+      "revision": 940,
+      "kind": "task.create",
+      "itemId": "task-f9bf0095",
+      "title": "Four high-detail Haven hubs: Forge, Hangar, Missions, Multiplayer",
+      "author": "Root",
+      "source": "Actual latest user steering, dispatched specialists and reviewed source evidence",
+      "createdAt": "2026-10-12T13:47:32.653Z"
+    },
+    {
+      "id": "f59c66a9-3137-4001-8cd1-477c384b7b7f",
+      "revision": 941,
+      "kind": "task.create",
+      "itemId": "task-9de4af8f",
+      "title": "Full-screen pixel menu scenes and combined MISSIONS navigation",
+      "author": "Root",
+      "source": "Actual latest user steering, dispatched specialists and reviewed source evidence",
+      "createdAt": "2026-10-12T13:47:32.678Z"
+    },
+    {
+      "id": "4db6ae90-9860-4f38-a26b-3722c5d100f7",
+      "revision": 942,
+      "kind": "task.update",
+      "itemId": "task-c359d033",
+      "title": "Integrate room menu, multiplayer HUD icon and native flow",
+      "author": "Root",
+      "source": "Actual latest user steering, dispatched specialists and reviewed source evidence",
+      "createdAt": "2026-10-12T13:47:32.752Z"
+    },
+    {
+      "id": "f1319f48-3108-4d6c-9ecf-5c695bf5984a",
+      "revision": 943,
+      "kind": "task.update",
+      "itemId": "task-6ddbc654",
+      "title": "Private room codes, rotation, lock and approval service",
+      "author": "Root",
+      "source": "Actual latest user steering, dispatched specialists and reviewed source evidence",
+      "createdAt": "2026-10-12T13:47:32.796Z"
+    },
+    {
+      "id": "9be963bb-8810-4aec-9fa3-5611f9e6b008",
+      "revision": 944,
+      "kind": "review",
+      "itemId": "review-c19bc33b",
+      "title": "Final short-room service accepted; browser/internet acceptance remains open",
+      "author": "Root",
+      "source": "Actual latest user steering, dispatched specialists and reviewed source evidence",
+      "createdAt": "2026-10-12T13:47:32.828Z"
+    },
+    {
+      "id": "95f1485a-eb02-4367-84fd-25be043771e8",
+      "revision": 945,
+      "kind": "decision",
+      "itemId": "decision-674728fd",
+      "title": "Dedicated MISSIONS and MULTIPLAYER hubs with full-screen native scenes",
+      "author": "Root",
+      "source": "Actual latest user steering, dispatched specialists and reviewed source evidence",
+      "createdAt": "2026-10-12T13:47:32.862Z"
+    },
+    {
+      "id": "3a59840c-d894-41ee-b375-810abc512de0",
+      "revision": 946,
+      "kind": "run",
+      "itemId": "run-f8cbe8d0",
+      "title": "Haven native art specialist · running",
+      "author": "Root",
+      "source": "Actual latest user steering, dispatched specialists and reviewed source evidence",
+      "createdAt": "2026-10-12T13:47:32.891Z"
+    },
+    {
+      "id": "f4018a3a-b266-446c-ac42-2576d3a76ef4",
+      "revision": 947,
+      "kind": "run",
+      "itemId": "run-bec5fff4",
+      "title": "Native scene UX / integration · running",
+      "author": "Root",
+      "source": "Actual latest user steering, dispatched specialists and reviewed source evidence",
+      "createdAt": "2026-10-12T13:47:32.921Z"
+    },
+    {
+      "id": "e25ef7f0-c06c-4ce1-829c-4ec2a6ef95f4",
+      "revision": 948,
+      "kind": "task.create",
+      "itemId": "task-cb832e03",
+      "title": "Hangar garage, scrollable owned RAICHO index and details route",
+      "author": "Root",
+      "source": "Actual dispatched Hangar/Vault/preview work and latest user shadow request",
+      "createdAt": "2026-10-12T15:48:39.387Z"
+    },
+    {
+      "id": "bc5c04eb-9334-43f4-ab01-1171c689e368",
+      "revision": 949,
+      "kind": "task.create",
+      "itemId": "task-1627eb53",
+      "title": "Dedicated Vault scene and no ship inventory-slot presentation",
+      "author": "Root",
+      "source": "Actual dispatched Hangar/Vault/preview work and latest user shadow request",
+      "createdAt": "2026-10-12T15:48:39.411Z"
+    },
+    {
+      "id": "d929e87b-8517-42a0-a61e-fe6b2b7f0211",
+      "revision": 950,
+      "kind": "task.create",
+      "itemId": "task-8e306aab",
+      "title": "Reuse authored coarse and fine RAICHO art in native UI previews",
+      "author": "Root",
+      "source": "Actual dispatched Hangar/Vault/preview work and latest user shadow request",
+      "createdAt": "2026-10-12T15:48:39.443Z"
+    },
+    {
+      "id": "f57c4073-d7e8-4064-a320-560bfc78296c",
+      "revision": 951,
+      "kind": "task.create",
+      "itemId": "task-5f970271",
+      "title": "Forge collection index and item/material/hull crafting sections",
+      "author": "Root",
+      "source": "Actual dispatched Hangar/Vault/preview work and latest user shadow request",
+      "createdAt": "2026-10-12T15:48:39.474Z"
+    },
+    {
+      "id": "a95c33cf-0851-49af-a827-87f8d2394b6a",
+      "revision": 952,
+      "kind": "task.create",
+      "itemId": "task-23bb3756",
+      "title": "Relative height, contact shadows and hub-surface lighting",
+      "author": "Root",
+      "source": "Actual dispatched Hangar/Vault/preview work and latest user shadow request",
+      "createdAt": "2026-10-12T15:48:39.489Z"
+    },
+    {
+      "id": "6175381a-9408-4d8d-affc-d3907490b4cc",
+      "revision": 953,
+      "kind": "task.update",
+      "itemId": "task-f9bf0095",
+      "title": "Five high-detail Haven hubs: Forge, Hangar, Missions, Multiplayer, Vault",
+      "author": "Root",
+      "source": "Actual dispatched Hangar/Vault/preview work and latest user shadow request",
+      "createdAt": "2026-10-12T15:48:39.582Z"
+    },
+    {
+      "id": "c89d9725-1280-4184-b521-f1140c119bbd",
+      "revision": 954,
+      "kind": "task.update",
+      "itemId": "task-f9bf0095",
+      "title": "Five high-detail Haven hubs: Forge, Hangar, Missions, Multiplayer, Vault",
+      "author": "Root",
+      "source": "Actual dispatched Hangar/Vault/preview work and latest user shadow request",
+      "createdAt": "2026-10-12T15:49:20.903Z"
+    },
+    {
+      "id": "407f08a2-c4db-46c9-b21a-e7b077b5ffed",
+      "revision": 955,
+      "kind": "task.update",
+      "itemId": "task-5fe5d40b",
+      "title": "Join/Host room panel and explicit approval transport",
+      "author": "Root",
+      "source": "Actual dispatched Hangar/Vault/preview work and latest user shadow request",
+      "createdAt": "2026-10-12T15:49:21.001Z"
+    },
+    {
+      "id": "89f04fc2-9074-4334-8e52-f73419f7ad9f",
+      "revision": 956,
+      "kind": "task.update",
+      "itemId": "task-6697d51b",
+      "title": "Independent room security and lifecycle review",
+      "author": "Root",
+      "source": "Actual dispatched Hangar/Vault/preview work and latest user shadow request",
+      "createdAt": "2026-10-12T15:49:21.028Z"
+    },
+    {
+      "id": "83bf37e6-3ff9-46c1-8f4b-7b69edc77fd1",
+      "revision": 957,
+      "kind": "review",
+      "itemId": "review-b3490118",
+      "title": "Browser approval/terminal races reviewed; new native scene acceptance remains open",
+      "author": "Root",
+      "source": "Actual dispatched Hangar/Vault/preview work and latest user shadow request",
+      "createdAt": "2026-10-12T15:49:21.059Z"
+    },
+    {
+      "id": "7be3415d-41eb-4a71-94a5-e5d850451816",
+      "revision": 958,
+      "kind": "run",
+      "itemId": "run-c2f76b0b",
+      "title": "hangar specialist · running",
+      "author": "Root",
+      "source": "Actual dispatched Hangar/Vault/preview work and latest user shadow request",
+      "createdAt": "2026-10-12T15:49:21.090Z"
+    },
+    {
+      "id": "3036c23e-7949-4971-a4fd-55ab4bab9796",
+      "revision": 959,
+      "kind": "run",
+      "itemId": "run-20e7c293",
+      "title": "vault specialist · completed",
+      "author": "Root",
+      "source": "Actual dispatched Hangar/Vault/preview work and latest user shadow request",
+      "createdAt": "2026-10-12T15:49:21.122Z"
+    },
+    {
+      "id": "5120dde1-0eef-4c63-9324-b6bf49dae9f6",
+      "revision": 960,
+      "kind": "run",
+      "itemId": "run-602533f5",
+      "title": "preview specialist · running",
+      "author": "Root",
+      "source": "Actual dispatched Hangar/Vault/preview work and latest user shadow request",
+      "createdAt": "2026-10-12T15:49:21.153Z"
+    },
+    {
+      "id": "4437b58e-771c-4990-a05b-9461001e1a4f",
+      "revision": 961,
+      "kind": "run",
+      "itemId": "run-968b9597",
+      "title": "forge specialist · running",
+      "author": "Root",
+      "source": "Actual dispatched Hangar/Vault/preview work and latest user shadow request",
+      "createdAt": "2026-10-12T15:49:21.184Z"
+    },
+    {
+      "id": "ccad878f-f932-43a3-90c7-27492f4df223",
+      "revision": 962,
+      "kind": "task.create",
+      "itemId": "task-54a27324",
+      "title": "Analyze supplied Galaxy Royale title song and define native score contract",
+      "author": "Root",
+      "source": "Actual user music reference, measured analysis and bounded native-score dispatch",
+      "createdAt": "2026-10-12T16:38:07.073Z"
+    },
+    {
+      "id": "ca40dd82-fe49-4d87-aaf1-37cc464be39c",
+      "revision": 963,
+      "kind": "task.create",
+      "itemId": "task-a7eeab89",
+      "title": "Recreate title theme in shared dynamic synthesis transport",
+      "author": "Root",
+      "source": "Actual user music reference, measured analysis and bounded native-score dispatch",
+      "createdAt": "2026-10-12T16:38:07.096Z"
+    },
+    {
+      "id": "58cf5077-af0b-4631-820c-614305a722a7",
+      "revision": 964,
+      "kind": "task.create",
+      "itemId": "task-5301e8a1",
+      "title": "Review synthesized title melody, mix and theme transitions against user song",
+      "author": "Root",
+      "source": "Actual user music reference, measured analysis and bounded native-score dispatch",
+      "createdAt": "2026-10-12T16:38:07.128Z"
+    },
+    {
+      "id": "2349c554-c469-4cf2-8c56-5594af279dae",
+      "revision": 965,
+      "kind": "task.update",
+      "itemId": "task-23bb3756",
+      "title": "Relative height, contact shadows and hub-surface lighting",
+      "author": "Root",
+      "source": "Actual user music reference, measured analysis and bounded native-score dispatch",
+      "createdAt": "2026-10-12T16:38:07.206Z"
+    },
+    {
+      "id": "0ea9795d-87d0-4e42-99d3-bc8fda8afacf",
+      "revision": 966,
+      "kind": "run",
+      "itemId": "run-90dbe426",
+      "title": "Native score specialist · running",
+      "author": "Root",
+      "source": "Actual user music reference, measured analysis and bounded native-score dispatch",
+      "createdAt": "2026-10-12T16:38:07.233Z"
+    },
+    {
+      "id": "300e0638-3e1b-4eae-8b82-7d9371056a5b",
+      "revision": 967,
+      "kind": "decision",
+      "itemId": "decision-f6ed1027",
+      "title": "Title reference recreated as native synthesis; fidelity remains an explicit review gate",
+      "author": "Root",
+      "source": "Actual user music reference, measured analysis and bounded native-score dispatch",
+      "createdAt": "2026-10-12T16:38:07.249Z"
+    },
+    {
+      "id": "e8fc111c-2ec8-47c9-9b07-2ef5ebde6707",
+      "revision": 968,
+      "kind": "task.update",
+      "itemId": "task-a7eeab89",
+      "title": "Recreate title theme in shared dynamic synthesis transport",
+      "author": "Root",
+      "source": "Actual source integration, native DSP captures, browser actions and frozen specialist evidence",
+      "createdAt": "2026-10-12T18:00:13.082Z"
+    },
+    {
+      "id": "a5cc748a-736a-4ee5-907d-06a3847761d7",
+      "revision": 969,
+      "kind": "task.update",
+      "itemId": "task-5301e8a1",
+      "title": "Review synthesized title melody, mix and theme transitions against user song",
+      "author": "Root",
+      "source": "Actual source integration, native DSP captures, browser actions and frozen specialist evidence",
+      "createdAt": "2026-10-12T18:00:13.145Z"
+    },
+    {
+      "id": "fcbd511d-6c02-4936-9459-2874eeabc323",
+      "revision": 970,
+      "kind": "task.update",
+      "itemId": "task-c359d033",
+      "title": "Integrate room menu, multiplayer HUD icon and native flow",
+      "author": "Root",
+      "source": "Actual source integration, native DSP captures, browser actions and frozen specialist evidence",
+      "createdAt": "2026-10-12T18:00:13.223Z"
+    },
+    {
+      "id": "719f7789-b057-457e-94b5-62fc48aa8e4e",
+      "revision": 971,
+      "kind": "task.update",
+      "itemId": "task-9de4af8f",
+      "title": "Full-screen pixel menu scenes and combined MISSIONS navigation",
+      "author": "Root",
+      "source": "Actual source integration, native DSP captures, browser actions and frozen specialist evidence",
+      "createdAt": "2026-10-12T18:00:13.291Z"
+    },
+    {
+      "id": "8c6838a1-fdb3-4dd4-84b4-034276d9d515",
+      "revision": 972,
+      "kind": "task.update",
+      "itemId": "task-23bb3756",
+      "title": "Relative height, contact shadows and hub-surface lighting",
+      "author": "Root",
+      "source": "Actual source integration, native DSP captures, browser actions and frozen specialist evidence",
+      "createdAt": "2026-10-12T18:00:13.363Z"
+    },
+    {
+      "id": "b43de9bc-533f-45ab-9a8f-bf7320fe3687",
+      "revision": 973,
+      "kind": "task.update",
+      "itemId": "task-f9bf0095",
+      "title": "Five high-detail Haven hubs: Forge, Hangar, Missions, Multiplayer, Vault",
+      "author": "Root",
+      "source": "Actual source integration, native DSP captures, browser actions and frozen specialist evidence",
+      "createdAt": "2026-10-12T18:00:13.487Z"
+    },
+    {
+      "id": "bd6a996d-2b00-475e-b074-7dc8283d0bc6",
+      "revision": 974,
+      "kind": "task.update",
+      "itemId": "task-cb832e03",
+      "title": "Hangar garage, scrollable owned RAICHO index and details route",
+      "author": "Root",
+      "source": "Actual source integration, native DSP captures, browser actions and frozen specialist evidence",
+      "createdAt": "2026-10-12T18:00:13.595Z"
+    },
+    {
+      "id": "37ac1cf3-29cb-4187-838f-51baa2067332",
+      "revision": 975,
+      "kind": "task.update",
+      "itemId": "task-1627eb53",
+      "title": "Dedicated Vault scene and no ship inventory-slot presentation",
+      "author": "Root",
+      "source": "Actual source integration, native DSP captures, browser actions and frozen specialist evidence",
+      "createdAt": "2026-10-12T18:00:13.704Z"
+    },
+    {
+      "id": "6511b75b-1c1f-45b6-a62e-8f97c6e6be19",
+      "revision": 976,
+      "kind": "task.update",
+      "itemId": "task-8e306aab",
+      "title": "Reuse authored coarse and fine RAICHO art in native UI previews",
+      "author": "Root",
+      "source": "Actual source integration, native DSP captures, browser actions and frozen specialist evidence",
+      "createdAt": "2026-10-12T18:00:13.812Z"
+    },
+    {
+      "id": "122c59b9-1e0f-4b4a-844e-ead6ede2cd51",
+      "revision": 977,
+      "kind": "task.update",
+      "itemId": "task-5f970271",
+      "title": "Forge collection index and item/material/hull crafting sections",
+      "author": "Root",
+      "source": "Actual source integration, native DSP captures, browser actions and frozen specialist evidence",
+      "createdAt": "2026-10-12T18:00:13.893Z"
+    },
+    {
+      "id": "da5ec99d-7504-4b30-8f59-a0ff16fa8901",
+      "revision": 978,
+      "kind": "review",
+      "itemId": "review-99144a1d",
+      "title": "Actual native title auditions and independent instrument reviews",
+      "author": "Root",
+      "source": "Actual source integration, native DSP captures, browser actions and frozen specialist evidence",
+      "createdAt": "2026-10-12T18:00:13.920Z"
+    },
+    {
+      "id": "ccc6ad21-18f7-4a52-8b37-8a63102973b6",
+      "revision": 979,
+      "kind": "review",
+      "itemId": "review-b2a93a30",
+      "title": "Hub-shadow source review integrated with explicit GPU gates",
+      "author": "Root",
+      "source": "Actual source integration, native DSP captures, browser actions and frozen specialist evidence",
+      "createdAt": "2026-10-12T18:00:13.951Z"
+    },
+    {
+      "id": "6802142b-64d1-451c-8d77-8cd95e50ca2b",
+      "revision": 980,
+      "kind": "build",
+      "itemId": "build-a662f158",
+      "title": "Testing F4: five Haven scenes, private rooms and fuller native title",
+      "author": "Root",
+      "source": "Actual source integration, native DSP captures, browser actions and frozen specialist evidence",
+      "createdAt": "2026-10-12T18:00:13.966Z"
+    },
+    {
+      "id": "5faf3edd-c323-454e-96f1-20347eddcf1a",
+      "revision": 981,
+      "kind": "run",
+      "itemId": "run-5b1d1004",
+      "title": "Native title specialist · completed",
+      "author": "Root",
+      "source": "Actual source integration, native DSP captures, browser actions and frozen specialist evidence",
+      "createdAt": "2026-10-12T18:00:13.997Z"
+    },
+    {
+      "id": "31bb9614-e9bd-48c5-8686-d3297dd44fb0",
+      "revision": 982,
+      "kind": "run",
+      "itemId": "run-4c113384",
+      "title": "Engine source and evidence specialist · completed",
+      "author": "Root",
+      "source": "Actual source integration, native DSP captures, browser actions and frozen specialist evidence",
+      "createdAt": "2026-10-12T18:00:14.029Z"
+    },
+    {
+      "id": "a05c2331-215b-47f0-a789-c1a511c07724",
+      "revision": 983,
+      "kind": "run",
+      "itemId": "run-c60e629a",
+      "title": "Scene and shadow source reviewer · completed",
+      "author": "Root",
+      "source": "Actual source integration, native DSP captures, browser actions and frozen specialist evidence",
+      "createdAt": "2026-10-12T18:00:14.061Z"
+    },
+    {
+      "id": "e17fc492-a5ee-466f-a8c2-66b10f09ea58",
+      "revision": 984,
+      "kind": "run",
+      "itemId": "run-26810cb7",
+      "title": "Bounded local Vault worker · completed",
+      "author": "Root",
+      "source": "Actual source integration, native DSP captures, browser actions and frozen specialist evidence",
+      "createdAt": "2026-10-12T18:00:14.092Z"
+    },
+    {
+      "id": "fef36971-8e21-480e-b88b-475856f231ef",
+      "revision": 985,
+      "kind": "run",
+      "itemId": "run-2426d3f5",
+      "title": "Haven and room browser specialist · completed",
+      "author": "Root",
+      "source": "Actual source integration, native DSP captures, browser actions and frozen specialist evidence",
+      "createdAt": "2026-10-12T18:00:14.107Z"
+    },
+    {
+      "id": "9c33d30c-80ed-40e9-992a-84aaf941ff96",
+      "revision": 986,
+      "kind": "task.update",
+      "itemId": "task-f9bf0095",
+      "title": "Five high-detail Haven hubs: Forge, Hangar, Missions, Multiplayer, Vault",
+      "author": "Root",
+      "source": "Reconcile actual frozen source and bounded current browser evidence; preserve remaining gates",
+      "createdAt": "2026-10-12T18:02:55.098Z"
+    },
+    {
+      "id": "65f09c0a-aef1-43d6-a7ac-aa6e6c450fa9",
+      "revision": 987,
+      "kind": "task.update",
+      "itemId": "task-cb832e03",
+      "title": "Hangar garage, scrollable owned RAICHO index and details route",
+      "author": "Root",
+      "source": "Reconcile actual frozen source and bounded current browser evidence; preserve remaining gates",
+      "createdAt": "2026-10-12T18:02:55.149Z"
+    },
+    {
+      "id": "ee5dce20-fe73-4391-a78d-e40328419ece",
+      "revision": 988,
+      "kind": "task.update",
+      "itemId": "task-1627eb53",
+      "title": "Dedicated Vault scene and no ship inventory-slot presentation",
+      "author": "Root",
+      "source": "Reconcile actual frozen source and bounded current browser evidence; preserve remaining gates",
+      "createdAt": "2026-10-12T18:02:55.201Z"
+    },
+    {
+      "id": "ec79904e-7091-4300-9633-334b44cec91b",
+      "revision": 989,
+      "kind": "task.update",
+      "itemId": "task-8e306aab",
+      "title": "Reuse authored coarse and fine RAICHO art in native UI previews",
+      "author": "Root",
+      "source": "Reconcile actual frozen source and bounded current browser evidence; preserve remaining gates",
+      "createdAt": "2026-10-12T18:02:55.264Z"
+    },
+    {
+      "id": "61e20988-eda2-4ae1-9916-beb6c7b58c18",
+      "revision": 990,
+      "kind": "task.update",
+      "itemId": "task-5f970271",
+      "title": "Forge collection index and item/material/hull crafting sections",
+      "author": "Root",
+      "source": "Reconcile actual frozen source and bounded current browser evidence; preserve remaining gates",
+      "createdAt": "2026-10-12T18:02:55.320Z"
+    },
+    {
+      "id": "eb8a86cf-b166-4e2a-843e-52a62c4b4e69",
+      "revision": 991,
+      "kind": "task.update",
+      "itemId": "task-05dd95cd",
+      "title": "Invite friends for co-op expeditions",
+      "author": "Root",
+      "source": "Reconcile actual frozen source and bounded current browser evidence; preserve remaining gates",
+      "createdAt": "2026-10-12T18:02:55.388Z"
+    },
+    {
+      "id": "4f2f1270-a9e8-4184-b3c4-cc415c94e46b",
+      "revision": 992,
+      "kind": "task.update",
+      "itemId": "task-7e8e0a50",
+      "title": "Authoritative multiplayer world and session foundation",
+      "author": "Root",
+      "source": "Reconcile actual frozen source and bounded current browser evidence; preserve remaining gates",
+      "createdAt": "2026-10-12T18:02:55.455Z"
+    },
+    {
+      "id": "9a34d9b5-11f0-4fb6-8e2d-44dddeba2d93",
+      "revision": 993,
+      "kind": "task.update",
+      "itemId": "task-613742d2",
+      "title": "MEISHI CARD and distinct cargo, hull and ability collections",
+      "author": "Root",
+      "source": "Reconcile actual frozen source and bounded current browser evidence; preserve remaining gates",
+      "createdAt": "2026-10-12T18:02:55.500Z"
+    },
+    {
+      "id": "18704c43-40ad-44b7-bfa5-f1eebf598993",
+      "revision": 994,
+      "kind": "task.update",
+      "itemId": "task-278ff973",
+      "title": "Animated sports-league title and authored-theme delivery slot",
+      "author": "Root",
+      "source": "Reconcile actual frozen source and bounded current browser evidence; preserve remaining gates",
+      "createdAt": "2026-10-12T18:02:55.568Z"
+    },
+    {
+      "id": "19d178cb-c34d-436d-afd7-5a17757d574d",
+      "revision": 995,
+      "kind": "task.update",
+      "itemId": "task-6ddbc654",
+      "title": "Private room codes, rotation, lock and approval service",
+      "author": "Root",
+      "source": "Reconcile actual frozen source and bounded current browser evidence; preserve remaining gates",
+      "createdAt": "2026-10-12T18:02:55.642Z"
+    },
+    {
+      "id": "7b55fc82-7c16-40c7-b67d-4c13963c985f",
+      "revision": 996,
+      "kind": "task.update",
+      "itemId": "task-5fe5d40b",
+      "title": "Join/Host room panel and explicit approval transport",
+      "author": "Root",
+      "source": "Reconcile actual frozen source and bounded current browser evidence; preserve remaining gates",
+      "createdAt": "2026-10-12T18:02:55.702Z"
+    },
+    {
+      "id": "c068deaa-00cb-4e74-b239-81e92a3596c7",
+      "revision": 997,
+      "kind": "task.update",
+      "itemId": "task-6697d51b",
+      "title": "Independent room security and lifecycle review",
+      "author": "Root",
+      "source": "Reconcile actual frozen source and bounded current browser evidence; preserve remaining gates",
+      "createdAt": "2026-10-12T18:02:55.781Z"
+    },
+    {
+      "id": "da0ff220-1d3c-4412-a7b8-c8fe664714ee",
+      "revision": 998,
+      "kind": "review",
+      "itemId": "review-c3f08f2d",
+      "title": "Offline QA preserves actual stereo capability; frozen title PCM remains intact",
+      "author": "Root",
+      "source": "Actual final helper amendment/full verification and end-of-session observed run states",
+      "createdAt": "2026-10-12T18:05:15.309Z"
+    },
+    {
+      "id": "24c1986f-7349-4c0b-93b6-7fe43ec1a495",
+      "revision": 999,
+      "kind": "build",
+      "itemId": "build-a106ae1d",
+      "title": "F4 package unchanged: final QA adapter and Wiki evidence checks",
+      "author": "Root",
+      "source": "Actual final helper amendment/full verification and end-of-session observed run states",
+      "createdAt": "2026-10-12T18:05:15.337Z"
+    },
+    {
+      "id": "496ea4a0-3d9f-431b-97cd-b411c75ef1a9",
+      "revision": 1000,
+      "kind": "run",
+      "itemId": "run-c9eb69b4",
+      "title": "Independent audio and QA reviewer · completed",
+      "author": "Root",
+      "source": "Actual final helper amendment/full verification and end-of-session observed run states",
+      "createdAt": "2026-10-12T18:05:15.357Z"
+    },
+    {
+      "id": "25b94f35-f6f4-4771-8f71-acfd1df84411",
+      "revision": 1001,
+      "kind": "run",
+      "itemId": "run-251406fc",
+      "title": "Producer / integration and verification · completed",
+      "author": "Root",
+      "source": "Actual final helper amendment/full verification and end-of-session observed run states",
+      "createdAt": "2026-10-12T18:05:15.384Z"
     }
   ],
   "runRecords": [
@@ -30308,6 +32272,588 @@
       "author": "Root",
       "source": "Actual frozen specialist work, integrated checks and operated desktop captures",
       "createdAt": "2026-10-12T11:29:55.731Z"
+    },
+    {
+      "id": "run-c9dc4a8e",
+      "title": "Networking service specialist · running",
+      "agentId": "/root/engine_fx",
+      "agentLabel": "Networking service specialist",
+      "state": "running",
+      "observedAt": "2026-10-12T13:09:43.414Z",
+      "taskIds": [
+        "task-6ddbc654"
+      ],
+      "summary": "Actual bounded task dispatched and observed running. Clean isolated branch prepared from d2acfd2; candidate/evidence and review gates pending.",
+      "evidence": [
+        {
+          "label": "Dispatch and existing-source findings",
+          "kind": "artifact",
+          "path": "artifacts/private-room-planning-20261012/BASELINE.md"
+        },
+        {
+          "label": "Exact requested feature contract",
+          "kind": "artifact",
+          "path": "artifacts/private-room-planning-20261012/ASSIGNMENT.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual clean worktree branch preparation and dispatched bounded agents",
+      "createdAt": "2026-10-12T13:09:43.440Z"
+    },
+    {
+      "id": "run-32ff94d1",
+      "title": "Browser UX/transport specialist · running",
+      "agentId": "/root/art_rings",
+      "agentLabel": "Browser UX/transport specialist",
+      "state": "running",
+      "observedAt": "2026-10-12T13:09:43.458Z",
+      "taskIds": [
+        "task-5fe5d40b"
+      ],
+      "summary": "Actual bounded task dispatched and observed running. Clean isolated branch prepared from d2acfd2; candidate/evidence and review gates pending.",
+      "evidence": [
+        {
+          "label": "Dispatch and existing-source findings",
+          "kind": "artifact",
+          "path": "artifacts/private-room-planning-20261012/BASELINE.md"
+        },
+        {
+          "label": "Exact requested feature contract",
+          "kind": "artifact",
+          "path": "artifacts/private-room-planning-20261012/ASSIGNMENT.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual clean worktree branch preparation and dispatched bounded agents",
+      "createdAt": "2026-10-12T13:09:43.463Z"
+    },
+    {
+      "id": "run-81e1b03f",
+      "title": "Independent QA specialist · running",
+      "agentId": "/root/qa_coop",
+      "agentLabel": "Independent QA specialist",
+      "state": "running",
+      "observedAt": "2026-10-12T13:09:43.477Z",
+      "taskIds": [
+        "task-6697d51b"
+      ],
+      "summary": "Actual bounded task dispatched and observed running. Clean isolated branch prepared from d2acfd2; candidate/evidence and review gates pending.",
+      "evidence": [
+        {
+          "label": "Dispatch and existing-source findings",
+          "kind": "artifact",
+          "path": "artifacts/private-room-planning-20261012/BASELINE.md"
+        },
+        {
+          "label": "Exact requested feature contract",
+          "kind": "artifact",
+          "path": "artifacts/private-room-planning-20261012/ASSIGNMENT.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual clean worktree branch preparation and dispatched bounded agents",
+      "createdAt": "2026-10-12T13:09:43.498Z"
+    },
+    {
+      "id": "run-2ebfc2b3",
+      "title": "Producer / private-room coordination · running",
+      "agentId": "/root",
+      "agentLabel": "Producer / private-room coordination",
+      "state": "running",
+      "observedAt": "2026-10-12T13:18:45.580Z",
+      "taskIds": [
+        "task-c359d033"
+      ],
+      "summary": "Actively inspected baseline, persisted six task assignments, prepared clean isolated branches, coordinated actual service/browser/QA contract and verified the board. Native HUD integration and combined room validation remain pending.",
+      "evidence": [
+        {
+          "label": "Actual coordination scope",
+          "kind": "artifact",
+          "path": "artifacts/private-room-planning-20261012/DISCUSSION.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual source inspection, dispatched specialist messages and observed live agent states",
+      "createdAt": "2026-10-12T13:18:45.590Z"
+    },
+    {
+      "id": "run-4552bad4",
+      "title": "Browser UX/transport specialist · failed",
+      "agentId": "/root/art_rings",
+      "agentLabel": "Browser UX/transport specialist",
+      "state": "failed",
+      "observedAt": "2026-10-12T13:24:28.676Z",
+      "taskIds": [
+        "task-5fe5d40b"
+      ],
+      "summary": "Bounded turn ended due to selected-model capacity. Partial source preserved; no failing feature test or completion is implied.",
+      "evidence": [
+        {
+          "label": "Actual interruption and preserved work",
+          "kind": "artifact",
+          "path": "artifacts/private-room-planning-20261012/OBSERVATIONS.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual worker terminal message, preserved source, redispatch and live-handle/process inventory",
+      "createdAt": "2026-10-12T13:24:28.703Z"
+    },
+    {
+      "id": "run-60e53830",
+      "title": "Browser UX/transport specialist · running",
+      "agentId": "/root/art_rings",
+      "agentLabel": "Browser UX/transport specialist",
+      "state": "running",
+      "observedAt": "2026-10-12T13:24:28.717Z",
+      "taskIds": [
+        "task-5fe5d40b"
+      ],
+      "summary": "Actual continuation dispatched on the same branch after authoritative terminal capacity error; partial source retained and candidate/tests pending.",
+      "evidence": [
+        {
+          "label": "Actual continuation scope",
+          "kind": "artifact",
+          "path": "artifacts/private-room-planning-20261012/OBSERVATIONS.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual worker terminal message, preserved source, redispatch and live-handle/process inventory",
+      "createdAt": "2026-10-12T13:24:28.728Z"
+    },
+    {
+      "id": "run-448c4886",
+      "title": "engine_research · interrupted",
+      "agentId": "/root/engine_research",
+      "agentLabel": "engine_research",
+      "state": "interrupted",
+      "observedAt": "2026-10-12T13:24:28.791Z",
+      "taskIds": [
+        "task-d87d697e"
+      ],
+      "summary": "No current live registered handle/process in the observed inventory. Historical running observation is superseded; prior contributions/checks are not marked failed or completed by this observation.",
+      "evidence": [
+        {
+          "label": "Authoritative current handle/process observation",
+          "kind": "artifact",
+          "path": "artifacts/private-room-planning-20261012/OBSERVATIONS.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual worker terminal message, preserved source, redispatch and live-handle/process inventory",
+      "createdAt": "2026-10-12T13:24:28.796Z"
+    },
+    {
+      "id": "run-a53f6931",
+      "title": "gameplay_design · interrupted",
+      "agentId": "/root/gameplay_design",
+      "agentLabel": "gameplay_design",
+      "state": "interrupted",
+      "observedAt": "2026-10-12T13:24:28.808Z",
+      "taskIds": [
+        "task-74cc552e"
+      ],
+      "summary": "No current live registered handle/process in the observed inventory. Historical running observation is superseded; prior contributions/checks are not marked failed or completed by this observation.",
+      "evidence": [
+        {
+          "label": "Authoritative current handle/process observation",
+          "kind": "artifact",
+          "path": "artifacts/private-room-planning-20261012/OBSERVATIONS.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual worker terminal message, preserved source, redispatch and live-handle/process inventory",
+      "createdAt": "2026-10-12T13:24:28.813Z"
+    },
+    {
+      "id": "run-62ae1bc3",
+      "title": "production_research · interrupted",
+      "agentId": "/root/production_research",
+      "agentLabel": "production_research",
+      "state": "interrupted",
+      "observedAt": "2026-10-12T13:24:28.832Z",
+      "taskIds": [
+        "task-91ac3c7f"
+      ],
+      "summary": "No current live registered handle/process in the observed inventory. Historical running observation is superseded; prior contributions/checks are not marked failed or completed by this observation.",
+      "evidence": [
+        {
+          "label": "Authoritative current handle/process observation",
+          "kind": "artifact",
+          "path": "artifacts/private-room-planning-20261012/OBSERVATIONS.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual worker terminal message, preserved source, redispatch and live-handle/process inventory",
+      "createdAt": "2026-10-12T13:24:28.854Z"
+    },
+    {
+      "id": "run-b5588fc5",
+      "title": "Spark Kikai save review · interrupted",
+      "agentId": "spark/kikai-save-review",
+      "agentLabel": "Spark Kikai save review",
+      "state": "interrupted",
+      "observedAt": "2026-10-12T13:24:28.865Z",
+      "taskIds": [
+        "task-2730ef49",
+        "task-44c5f7a0"
+      ],
+      "summary": "No current live registered handle/process in the observed inventory. Historical running observation is superseded; prior contributions/checks are not marked failed or completed by this observation.",
+      "evidence": [
+        {
+          "label": "Authoritative current handle/process observation",
+          "kind": "artifact",
+          "path": "artifacts/private-room-planning-20261012/OBSERVATIONS.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual worker terminal message, preserved source, redispatch and live-handle/process inventory",
+      "createdAt": "2026-10-12T13:24:28.890Z"
+    },
+    {
+      "id": "run-f8cbe8d0",
+      "title": "Haven native art specialist · running",
+      "agentId": "/root/engine_fx",
+      "agentLabel": "Haven native art specialist",
+      "state": "running",
+      "observedAt": "2026-10-12T13:47:32.876Z",
+      "taskIds": [
+        "task-f9bf0095"
+      ],
+      "summary": "Actual bounded work underway;96cell native art design approved and Root scene routing/chrome implementation begun. No visual/browser acceptance yet.",
+      "evidence": [
+        {
+          "label": "Latest scene assignment",
+          "kind": "artifact",
+          "path": "artifacts/haven-scenes-20261012/ASSIGNMENT.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual latest user steering, dispatched specialists and reviewed source evidence",
+      "createdAt": "2026-10-12T13:47:32.891Z"
+    },
+    {
+      "id": "run-bec5fff4",
+      "title": "Native scene UX / integration · running",
+      "agentId": "/root",
+      "agentLabel": "Native scene UX / integration",
+      "state": "running",
+      "observedAt": "2026-10-12T13:47:32.913Z",
+      "taskIds": [
+        "task-9de4af8f"
+      ],
+      "summary": "Actual bounded work underway;96cell native art design approved and Root scene routing/chrome implementation begun. No visual/browser acceptance yet.",
+      "evidence": [
+        {
+          "label": "Latest scene assignment",
+          "kind": "artifact",
+          "path": "artifacts/haven-scenes-20261012/ASSIGNMENT.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual latest user steering, dispatched specialists and reviewed source evidence",
+      "createdAt": "2026-10-12T13:47:32.921Z"
+    },
+    {
+      "id": "run-c2f76b0b",
+      "title": "hangar specialist · running",
+      "agentId": "/root/art_rings",
+      "agentLabel": "hangar specialist",
+      "state": "running",
+      "observedAt": "2026-10-12T15:49:21.075Z",
+      "taskIds": [
+        "task-cb832e03"
+      ],
+      "summary": "Actual assigned implementation underway with owned source boundaries; browser/visual acceptance pending.",
+      "evidence": [
+        {
+          "label": "Actual scope and progress",
+          "kind": "artifact",
+          "path": "artifacts/haven-scenes-20261012/PROGRESS.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual dispatched Hangar/Vault/preview work and latest user shadow request",
+      "createdAt": "2026-10-12T15:49:21.090Z"
+    },
+    {
+      "id": "run-20e7c293",
+      "title": "vault specialist · completed",
+      "agentId": "spark/vault-scene",
+      "agentLabel": "vault specialist",
+      "state": "completed",
+      "observedAt": "2026-10-12T15:49:21.102Z",
+      "taskIds": [
+        "task-1627eb53"
+      ],
+      "summary": "Actual bounded wrapper returned owned files/result; Root inspected and refined narrow layout. Scene task stays active for integration/visual checks.",
+      "evidence": [
+        {
+          "label": "Actual scope and progress",
+          "kind": "artifact",
+          "path": "artifacts/haven-scenes-20261012/PROGRESS.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual dispatched Hangar/Vault/preview work and latest user shadow request",
+      "createdAt": "2026-10-12T15:49:21.122Z"
+    },
+    {
+      "id": "run-602533f5",
+      "title": "preview specialist · running",
+      "agentId": "/root/qa_coop",
+      "agentLabel": "preview specialist",
+      "state": "running",
+      "observedAt": "2026-10-12T15:49:21.137Z",
+      "taskIds": [
+        "task-8e306aab"
+      ],
+      "summary": "Actual assigned implementation underway with owned source boundaries; browser/visual acceptance pending.",
+      "evidence": [
+        {
+          "label": "Actual scope and progress",
+          "kind": "artifact",
+          "path": "artifacts/haven-scenes-20261012/PROGRESS.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual dispatched Hangar/Vault/preview work and latest user shadow request",
+      "createdAt": "2026-10-12T15:49:21.153Z"
+    },
+    {
+      "id": "run-968b9597",
+      "title": "forge specialist · running",
+      "agentId": "/root",
+      "agentLabel": "forge specialist",
+      "state": "running",
+      "observedAt": "2026-10-12T15:49:21.166Z",
+      "taskIds": [
+        "task-5f970271"
+      ],
+      "summary": "Actual assigned implementation underway with owned source boundaries; browser/visual acceptance pending.",
+      "evidence": [
+        {
+          "label": "Actual scope and progress",
+          "kind": "artifact",
+          "path": "artifacts/haven-scenes-20261012/PROGRESS.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual dispatched Hangar/Vault/preview work and latest user shadow request",
+      "createdAt": "2026-10-12T15:49:21.184Z"
+    },
+    {
+      "id": "run-90dbe426",
+      "title": "Native score specialist · running",
+      "agentId": "/root/audio_score",
+      "agentLabel": "Native score specialist",
+      "state": "running",
+      "observedAt": "2026-10-12T16:38:07.216Z",
+      "taskIds": [
+        "task-a7eeab89"
+      ],
+      "summary": "Actual reference analysis complete; native score candidate has49 focused passing modeled lifecycle/clock tests and typecheck. Preparing frozen handoff; real browser PCM/listening pending.",
+      "evidence": [
+        {
+          "label": "Actual measured reference and explicitly provisional score proposal",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/musical-report.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual user music reference, measured analysis and bounded native-score dispatch",
+      "createdAt": "2026-10-12T16:38:07.233Z"
+    },
+    {
+      "id": "run-5b1d1004",
+      "title": "Native title specialist · completed",
+      "agentId": "/root/audio_score",
+      "agentLabel": "Native title specialist",
+      "state": "completed",
+      "observedAt": "2026-10-12T18:00:13.980Z",
+      "taskIds": [
+        "task-a7eeab89"
+      ],
+      "summary": "Actual fuller instrument candidate6f24d837 integrated; author58 focused tests/typecheck and frozen handoff verified. Task remains in review for exact fidelity/listening.",
+      "evidence": [
+        {
+          "label": "Third actual native PCM/stereo/cleanup results",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/width-final/native-summary.json"
+        },
+        {
+          "label": "Independent fuller-instrument source review",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/width-final/independent-review/review.md"
+        },
+        {
+          "label": "Native score and listening boundaries",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/width-final/SCORE-CONTRACT.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual source integration, native DSP captures, browser actions and frozen specialist evidence",
+      "createdAt": "2026-10-12T18:00:13.997Z"
+    },
+    {
+      "id": "run-4c113384",
+      "title": "Engine source and evidence specialist · completed",
+      "agentId": "/root/engine_fx",
+      "agentLabel": "Engine source and evidence specialist",
+      "state": "completed",
+      "observedAt": "2026-10-12T18:00:14.009Z",
+      "taskIds": [
+        "task-23bb3756",
+        "task-f9bf0095"
+      ],
+      "summary": "Frozen shadow prototype/pin amendment/independent evidence curated; five hub native art candidate integrated. Remaining GPU and scene gates belong to integration/QA, not a running hidden worker.",
+      "evidence": [
+        {
+          "label": "Actual completed curation and limits",
+          "kind": "artifact",
+          "path": "artifacts/hub-shadows-20261013/REVIEW-CURATION.json"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual source integration, native DSP captures, browser actions and frozen specialist evidence",
+      "createdAt": "2026-10-12T18:00:14.029Z"
+    },
+    {
+      "id": "run-c60e629a",
+      "title": "Scene and shadow source reviewer · completed",
+      "agentId": "/root/qa_coop",
+      "agentLabel": "Scene and shadow source reviewer",
+      "state": "completed",
+      "observedAt": "2026-10-12T18:00:14.042Z",
+      "taskIds": [
+        "task-8e306aab",
+        "task-23bb3756"
+      ],
+      "summary": "Actual frozen39-case scene fixture review and source/CPU shadow review integrated and preserved. No new8-client/TURN/browser shadow run is claimed.",
+      "evidence": [
+        {
+          "label": "Actual integration, browser operations and limits",
+          "kind": "artifact",
+          "path": "artifacts/haven-scenes-20261012/INTEGRATION.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual source integration, native DSP captures, browser actions and frozen specialist evidence",
+      "createdAt": "2026-10-12T18:00:14.061Z"
+    },
+    {
+      "id": "run-26810cb7",
+      "title": "Bounded local Vault worker · completed",
+      "agentId": "spark/vault-scene",
+      "agentLabel": "Bounded local Vault worker",
+      "state": "completed",
+      "observedAt": "2026-10-12T18:00:14.071Z",
+      "taskIds": [
+        "task-1627eb53"
+      ],
+      "summary": "Actual explicit-wrapper Vault files were reviewed/refined by Root; current normal Vault layout and accounting observations recorded. No ongoing worker process.",
+      "evidence": [
+        {
+          "label": "Actual integration, browser operations and limits",
+          "kind": "artifact",
+          "path": "artifacts/haven-scenes-20261012/INTEGRATION.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual source integration, native DSP captures, browser actions and frozen specialist evidence",
+      "createdAt": "2026-10-12T18:00:14.092Z"
+    },
+    {
+      "id": "run-2426d3f5",
+      "title": "Haven and room browser specialist · completed",
+      "agentId": "/root/art_rings",
+      "agentLabel": "Haven and room browser specialist",
+      "state": "completed",
+      "observedAt": "2026-10-12T18:00:14.102Z",
+      "taskIds": [
+        "task-cb832e03",
+        "task-5fe5d40b"
+      ],
+      "summary": "Frozen room browser/Hangar candidates reviewed and integrated; actual specialist work is complete, broader task acceptance remains visible.",
+      "evidence": [
+        {
+          "label": "Actual integration, browser operations and limits",
+          "kind": "artifact",
+          "path": "artifacts/haven-scenes-20261012/INTEGRATION.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual source integration, native DSP captures, browser actions and frozen specialist evidence",
+      "createdAt": "2026-10-12T18:00:14.107Z"
+    },
+    {
+      "id": "run-c9eb69b4",
+      "title": "Independent audio and QA reviewer · completed",
+      "agentId": "/root/audio_review",
+      "agentLabel": "Independent audio and QA reviewer",
+      "state": "completed",
+      "observedAt": "2026-10-12T18:05:15.352Z",
+      "taskIds": [
+        "task-a7eeab89",
+        "task-5301e8a1"
+      ],
+      "summary": "Actual58focused+3full-loop/retime edge review and concrete QA capability correction completed; frozen report, failed regression, transient-test disclosure and pins preserved. No ongoing worker or human-fidelity approval.",
+      "evidence": [
+        {
+          "label": "Actual full current shell/typecheck, frozen review inputs and identical F4 package",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/width-final/checks/evidence-final/results.json"
+        },
+        {
+          "label": "Real QA capability regression, fix and exact pins",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/width-final/independent-review/helper-fix/handoff.md"
+        },
+        {
+          "label": "Third actual native title/stereo and cleanup results",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/width-final/native-summary.json"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual final helper amendment/full verification and end-of-session observed run states",
+      "createdAt": "2026-10-12T18:05:15.357Z"
+    },
+    {
+      "id": "run-251406fc",
+      "title": "Producer / integration and verification · completed",
+      "agentId": "/root",
+      "agentLabel": "Producer / integration and verification",
+      "state": "completed",
+      "observedAt": "2026-10-12T18:05:15.378Z",
+      "taskIds": [
+        "task-a7eeab89",
+        "task-5301e8a1",
+        "task-c359d033",
+        "task-9de4af8f",
+        "task-5f970271"
+      ],
+      "summary": "Latest normal build integrated and verified; native third audition, actual scene/PWA continuity, review/board/wiki evidence recorded. One normal game preview retained. This recorded session scope is complete; linked fidelity/network/device tasks remain pending or in review.",
+      "evidence": [
+        {
+          "label": "Actual full current shell/typecheck, frozen review inputs and identical F4 package",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/width-final/checks/evidence-final/results.json"
+        },
+        {
+          "label": "Real QA capability regression, fix and exact pins",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/width-final/independent-review/helper-fix/handoff.md"
+        },
+        {
+          "label": "Third actual native title/stereo and cleanup results",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/width-final/native-summary.json"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual final helper amendment/full verification and end-of-session observed run states",
+      "createdAt": "2026-10-12T18:05:15.384Z"
     }
   ],
   "phaseDescription": "Desktop-first Rust/WASM solo game and local Studio are implemented. Reviewed occupied-cell art, reproducible conversion, responsive native settings/icons and minimap, strict GitHub integration gates and source-backed Dev Bible are integrated. Natural campaign balance, human listening, owner-private update lifecycle and physical phones remain separate pending gates."

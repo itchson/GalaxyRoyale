@@ -1,0 +1,111 @@
+{
+  "recordedAt": "2026-10-12T18:00:14.168Z",
+  "revision": 985,
+  "audioTasks": [
+    {
+      "id": "task-a7eeab89",
+      "title": "Recreate title theme in shared dynamic synthesis transport",
+      "description": "Reviewed native synthesized title is integrated and normally rebuilt. Three instrument passes have actual source/clock/resource tests and seven-fixture native PCM captures. Latest stereo lead/pads/bass retain shared title169.275→corporate Haven120→chase166→release120 beat transport. The original MP3 is offline reference only. First user feedback requested instrument sound/mix; second still needed fuller instruments; third audition awaits feedback. Exact melody/form and final instrument acceptance remain open.",
+      "department": "Audio score",
+      "owner": "/root/audio_score",
+      "status": "review",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Remove runtime title URL/MP3 decode; synthesize authored notes through existing music bus and voice budget.",
+          "met": true
+        },
+        {
+          "text": "Shared beat/harmony phase through title→corporate Haven120 BPM, chase166 BPM and release; bounded queue/lifecycle tests.",
+          "met": true
+        },
+        {
+          "text": "Actual native offline DSP output and title/Continue game flow verified.",
+          "met": true
+        },
+        {
+          "text": "Listening comparison and exact melody/form recreation accepted separately from draft synthesis.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual measured reference and explicitly provisional score proposal",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/musical-report.md"
+        },
+        {
+          "label": "Third actual native PCM/stereo/cleanup results",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/width-final/native-summary.json"
+        },
+        {
+          "label": "Independent fuller-instrument source review",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/width-final/independent-review/review.md"
+        },
+        {
+          "label": "Native score and listening boundaries",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/width-final/SCORE-CONTRACT.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-12T16:38:07.096Z",
+      "updatedAt": "2026-10-12T18:00:13.082Z"
+    },
+    {
+      "id": "task-5301e8a1",
+      "title": "Review synthesized title melody, mix and theme transitions against user song",
+      "description": "Root rendered three actual native title/transition drafts and presented their engine-generated audition exports. The third seven-fixture capture is finite/within unity with cleanup0, title stereo correlation.988069/downmix RMS loss.0261dB. Feedback is recorded; native measurements do not establish perceived fullness or exact transcription. Third audition remains pending.",
+      "department": "Audio score",
+      "owner": "/root",
+      "status": "active",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Render actual engine full title loop and title/Haven/chase/release with source pins and PCM metrics.",
+          "met": true
+        },
+        {
+          "text": "Record direct listening feedback and corrections; never equate spectral estimates with song fidelity.",
+          "met": true
+        },
+        {
+          "text": "Preserve source track as offline reference only; record final accepted notes/arrangement provenance.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual measured reference and explicitly provisional score proposal",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/musical-report.md"
+        },
+        {
+          "label": "Third actual native PCM/stereo/cleanup results",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/width-final/native-summary.json"
+        },
+        {
+          "label": "Independent fuller-instrument source review",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/width-final/independent-review/review.md"
+        },
+        {
+          "label": "Native score and listening boundaries",
+          "kind": "artifact",
+          "path": "artifacts/title-score-20261013/width-final/SCORE-CONTRACT.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-12T16:38:07.128Z",
+      "updatedAt": "2026-10-12T18:00:13.145Z"
+    }
+  ],
+  "note": "Actual scoped evidence; no completed fidelity/8-client/TURN/device claim."
+}

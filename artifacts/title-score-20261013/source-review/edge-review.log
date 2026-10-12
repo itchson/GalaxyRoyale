@@ -1,0 +1,14 @@
+(node:42376) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ a 400ms title scheduler gap must not enqueue past onsets (5.0695ms)
+ℹ {"now":0.4,"fresh":4,"overdue":[],"scope":"recorded API"}
+✔ changing title while suspended must preserve the frozen beat on resume (1.3562ms)
+ℹ {"beforeBeat":3.5406687500000005,"afterBeat":3.5406687500000005,"targetBpm":120,"scope":"recorded API"}
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 144.0511

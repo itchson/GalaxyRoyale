@@ -1,0 +1,82 @@
+warning: in the working copy of 'scripts/qa/audio-review/fixtures.test.mjs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'scripts/qa/audio-review/review.js', LF will be replaced by CRLF the next time Git touches it
+{
+  "baseHead": "f4b8882b568339f0aa164c6aaf99a174b59cc105",
+  "sources": {
+    "scripts/qa/audio-review/review.js": {
+      "workingBytes": 16248,
+      "workingSha256": "15aa75998c5da89826d538484ad88e7a5b7610962c3bc1f6d3a2e7d2ecc53855",
+      "normalizedLfBytes": 16248,
+      "normalizedLfSha256": "15aa75998c5da89826d538484ad88e7a5b7610962c3bc1f6d3a2e7d2ecc53855",
+      "baseCommit": "f4b8882b568339f0aa164c6aaf99a174b59cc105",
+      "baseGitBytes": 15762,
+      "baseGitSha256": "ad77ed4dd10cd3497b80e37a02ce4b1c56483fa016abc10720494686a8917368"
+    },
+    "scripts/qa/audio-review/fixtures.test.mjs": {
+      "workingBytes": 12453,
+      "workingSha256": "ddd792c34acbff37392e653f1fa903676bcf3451a2fd9134eb6a34c76f5dece8",
+      "normalizedLfBytes": 12453,
+      "normalizedLfSha256": "ddd792c34acbff37392e653f1fa903676bcf3451a2fd9134eb6a34c76f5dece8",
+      "baseCommit": "f4b8882b568339f0aa164c6aaf99a174b59cc105",
+      "baseGitBytes": 8801,
+      "baseGitSha256": "f545da623ea2bf8491d3cb9093a0dfdbcdb7bebb1f9aef1a27a508fcce6cd8b4"
+    }
+  },
+  "commands": [
+    {
+      "command": "node --test --test-name-pattern='actual renderer preserves absent native panner capability' scripts/qa/audio-review/fixtures.test.mjs",
+      "stage": "before fix",
+      "exitCode": 1,
+      "tests": 1,
+      "pass": 0,
+      "fail": 1,
+      "log": "regression-before.log"
+    },
+    {
+      "command": "node --test --test-name-pattern='^(?!actual loopback HTTP|occupied-port CLI|autoquit closes)' scripts/qa/audio-review/helper.test.mjs scripts/qa/audio-review/fixtures.test.mjs scripts/qa/audio-review/metrics.test.mjs",
+      "stage": "after fix; exclusion failed",
+      "exitCode": 0,
+      "tests": 21,
+      "pass": 21,
+      "fail": 0,
+      "log": "qa-tests-with-unintended-server-checks.log",
+      "deviation": "Three ephemeral loopback server checks inadvertently executed, then closed normally."
+    },
+    {
+      "command": "node --test --test-skip-pattern='actual loopback HTTP|occupied-port CLI|autoquit closes' scripts/qa/audio-review/helper.test.mjs scripts/qa/audio-review/fixtures.test.mjs scripts/qa/audio-review/metrics.test.mjs",
+      "stage": "after fix, before final formatting; intended no-server scope",
+      "exitCode": 0,
+      "tests": 18,
+      "pass": 18,
+      "fail": 0,
+      "excludedServerTests": 3,
+      "log": "qa-tests.log"
+    },
+    {
+      "command": "node node_modules/prettier/bin/prettier.cjs --write scripts/qa/audio-review/review.js scripts/qa/audio-review/fixtures.test.mjs",
+      "exitCode": 0,
+      "prettier": "3.9.9",
+      "log": "format.log"
+    },
+    {
+      "command": "node --test --test-name-pattern='actual renderer preserves absent native panner capability|exported offline adapter' scripts/qa/audio-review/fixtures.test.mjs",
+      "stage": "final formatted source bytes; no server tests",
+      "exitCode": 0,
+      "tests": 3,
+      "pass": 3,
+      "fail": 0,
+      "log": "capability-after-format.log"
+    },
+    {
+      "command": "git diff --check -- scripts/qa/audio-review/review.js scripts/qa/audio-review/fixtures.test.mjs",
+      "exitCode": 0,
+      "log": "diff-check.log"
+    }
+  ],
+  "originalHelperVerified": true,
+  "priorReportVerified": true,
+  "runtimeSourcesUnchanged": true,
+  "wavsVerified": true,
+  "wavs": 7,
+  "handoffSha256": "0f957befd8b7cee513f221a0ab498d98c6ada8e21b38096a920f462d20b6a103"
+}

@@ -1,7 +1,12 @@
 import { AudioEngine } from "./modules/audio.js";
 import { AudioEngine as BaselineEngine } from "./modules/baseline-audio.js";
 import { QUIET_STATE } from "./modules/audio-state.js";
-import { pcmMetrics, stereoMetrics, highFrequencyRatio, wav } from "./metrics.js";
+import {
+  pcmMetrics,
+  stereoMetrics,
+  highFrequencyRatio,
+  wav,
+} from "./metrics.js";
 
 const button = document.getElementById("run"),
   status = document.getElementById("status");
@@ -45,8 +50,20 @@ const fixtures = [
     seconds: 24,
     currentScore: true,
   },
-  { key: "title-score", title: "Synthesized title draft, one complete loop and pickup", Engine: AudioEngine, seconds: 48, titleOnly: true },
-  { key: "title-transition", title: "Title to Haven, exploration, chase and release", Engine: AudioEngine, seconds: 32, titleTransition: true },
+  {
+    key: "title-score",
+    title: "Synthesized title draft, one complete loop and pickup",
+    Engine: AudioEngine,
+    seconds: 48,
+    titleOnly: true,
+  },
+  {
+    key: "title-transition",
+    title: "Title to Haven, exploration, chase and release",
+    Engine: AudioEngine,
+    seconds: 32,
+    titleTransition: true,
+  },
 ];
 // Declared DSP states, not an invented playthrough or a change to pilot identity.
 const currentScorePhases = [
@@ -111,12 +128,15 @@ const sha = async (bytes) =>
     .join("");
 function fixtureState(fixture, time) {
   if (fixture.titleOnly) return { ...QUIET_STATE };
-  if (fixture.titleTransition) return {
-    ...QUIET_STATE,
-    ...(time >= 11 && time < 26 ? { area: "reach", engines: 2, throttle: 0.5, speed: 0.4 } : {}),
-    ...(time >= 15 && time < 20 ? { combat: 0.8, hostiles: 6 } : {}),
-    corporation: "pan",
-  };
+  if (fixture.titleTransition)
+    return {
+      ...QUIET_STATE,
+      ...(time >= 11 && time < 26
+        ? { area: "reach", engines: 2, throttle: 0.5, speed: 0.4 }
+        : {}),
+      ...(time >= 15 && time < 20 ? { combat: 0.8, hostiles: 6 } : {}),
+      corporation: "pan",
+    };
   if (fixture.currentScore) {
     const phase = currentScorePhases.findLast((p) => time >= p.start);
     return { ...QUIET_STATE, ...phase.state };
@@ -187,6 +207,47 @@ function fixtureEvents(fixture) {
     count: 1,
   }));
 }
+export function createOfflineAdapter(real, nodes, sources) {
+  const methods = new Set([
+    "createGain",
+    "createBiquadFilter",
+    "createDelay",
+    "createDynamicsCompressor",
+    "createWaveShaper",
+    "createBuffer",
+    "createOscillator",
+    "createBufferSource",
+    "createStereoPanner",
+  ]);
+  // This adapter is scoped exclusively to this isolated page/render. All graph
+  // work and PCM rendering is native, not a recording or replacement DSP.
+  return new Proxy(real, {
+    get(target, name) {
+      if (name === "state") return "running";
+      if (name === "resume" || name === "suspend" || name === "close")
+        return async () => {};
+      if (name === "onstatechange") return null;
+      if (methods.has(name)) {
+        const factory = Reflect.get(target, name, target);
+        // Preserve native capability absence so AudioEngine's mono fallback
+        // sees the same surface as a direct AudioContext.
+        if (typeof factory !== "function") return factory;
+        return (...args) => {
+          const value = Reflect.apply(factory, target, args);
+          if (name !== "createBuffer") nodes.push(value);
+          if (name === "createOscillator" || name === "createBufferSource")
+            sources.push(value);
+          return value;
+        };
+      }
+      return Reflect.get(target, name, target);
+    },
+    set(_target, name) {
+      if (name === "onstatechange") return true;
+      throw new Error(`Unexpected offline adapter write ${String(name)}`);
+    },
+  });
+}
 async function renderFixture(fixture) {
   const Constructor =
     window.OfflineAudioContext ?? window.webkitOfflineAudioContext;
@@ -202,40 +263,7 @@ async function renderFixture(fixture) {
     savedClear = window.clearInterval;
   const nodes = [],
     sources = [];
-  const methods = new Set([
-    "createGain",
-    "createBiquadFilter",
-    "createDelay",
-    "createDynamicsCompressor",
-    "createWaveShaper",
-    "createBuffer",
-    "createOscillator",
-    "createBufferSource",
-    "createStereoPanner",
-  ]);
-  // This adapter is scoped exclusively to this isolated page/render. All graph
-  // work and PCM rendering is native, not a recording or replacement DSP.
-  const host = new Proxy(real, {
-    get(target, name) {
-      if (name === "state") return "running";
-      if (name === "resume" || name === "suspend" || name === "close")
-        return async () => {};
-      if (name === "onstatechange") return null;
-      if (methods.has(name))
-        return (...args) => {
-          const value = target[name](...args);
-          if (name !== "createBuffer") nodes.push(value);
-          if (name === "createOscillator" || name === "createBufferSource")
-            sources.push(value);
-          return value;
-        };
-      return Reflect.get(target, name, target);
-    },
-    set(_target, name) {
-      if (name === "onstatechange") return true;
-      throw new Error(`Unexpected offline adapter write ${String(name)}`);
-    },
-  });
+  const host = createOfflineAdapter(real, nodes, sources);
   window.AudioContext = class {
     constructor() {
       return host;
@@ -260,7 +288,8 @@ async function renderFixture(fixture) {
   const sourceStates = [];
   try {
     engine = new fixture.Engine();
-    if (fixture.titleOnly || fixture.titleTransition) engine.setTitleScreen(true);
+    if (fixture.titleOnly || fixture.titleTransition)
+      engine.setTitleScreen(true);
     engine.setLevels(
       fixture.burst ? 1 : 0.75,
       fixture.engine ? 0 : fixture.burst ? 1 : 0.4,

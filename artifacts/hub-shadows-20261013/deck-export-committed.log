@@ -1,0 +1,20 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.12s
+     Running unittests src\lib.rs (target\debug\deps\game_web-c9f299337784de44.exe)
+
+running 1 test
+native256 case Array [Number(0.0), Number(0.0)] damaged=false caster=662 receiver25919 centerBlocked=536
+native256 case Array [Number(0.0), Number(0.0)] damaged=true caster=618 receiver25919 centerBlocked=524
+native256 case Array [Number(25.0), Number(-30.0)] damaged=false caster=662 receiver25919 centerBlocked=737
+native256 case Array [Number(25.0), Number(-30.0)] damaged=true caster=618 receiver25919 centerBlocked=686
+native256 case Array [Number(55.0), Number(20.0)] damaged=false caster=662 receiver25919 centerBlocked=376
+native256 case Array [Number(55.0), Number(20.0)] damaged=true caster=618 receiver25919 centerBlocked=372
+test dock_art::tests::export_actual_hub_receiver_shadow_packets ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 298 filtered out; finished in 2.98s
+
+     Running tests\boss_layout.rs (target\debug\deps\boss_layout-d5d06e267cbae6bd.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 31 filtered out; finished in 0.00s
+

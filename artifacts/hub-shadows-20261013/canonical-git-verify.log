@@ -1,0 +1,26 @@
+{
+  "commit": "db15b91f3a1614ebd245fbab47787de737535882",
+  "source_verified": 13,
+  "inputs_verified": 4,
+  "raw_evidence_verified": 34,
+  "newline_only_differences": [
+    {
+      "path": "crates/game_web/src/pixel.wgsl",
+      "git_blob_matches_original": true,
+      "working_matches_original_raw_pin": true,
+      "canonical_bytes": 8685,
+      "canonical_sha256": "e545658e1bb63a71193262acf1d9e39a3e5ef69310c41a38793949e31659a811",
+      "working_bytes": 8850,
+      "working_sha256": "60a4e97870f8401cdb479e3a12ac57baf5e98b975aeef9139b7a30a6742580e8",
+      "exact_byte_equal": false,
+      "difference_is_only_CRLF_vs_LF": true,
+      "working_CRLF_count": 165,
+      "canonical_CRLF_count": 0
+    }
+  ],
+  "verification": {
+    "path": "work/hub-shadow-prototype/CANONICAL-GIT-VERIFY.json",
+    "bytes": 13106,
+    "sha256": "b3dfb392bdbae90a8fe8f16f78e9068ab7b2246ad6fafca46e427e5244441256"
+  }
+}

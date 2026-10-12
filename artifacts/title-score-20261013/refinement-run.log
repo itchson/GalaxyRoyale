@@ -1,0 +1,261 @@
+{
+  "method": "Hann periodogram and constant-tempo bass-flux grid fit; estimates, no listening",
+  "periodogram": [
+    {
+      "flux": "combined_flux",
+      "periodogram_windows": [
+        {
+          "start": 0,
+          "end": 42.6,
+          "bpm": 163.3127,
+          "periodogram_peak": 0.0058251
+        },
+        {
+          "start": 0,
+          "end": 10,
+          "bpm": 184.9984,
+          "periodogram_peak": 0.0054565
+        },
+        {
+          "start": 10,
+          "end": 20,
+          "bpm": 163.8647,
+          "periodogram_peak": 0.0022377
+        },
+        {
+          "start": 20,
+          "end": 30,
+          "bpm": 177.5464,
+          "periodogram_peak": 0.0032884
+        },
+        {
+          "start": 30,
+          "end": 42.6,
+          "bpm": 164.4562,
+          "periodogram_peak": 0.0034168
+        }
+      ],
+      "whole_clip_subdivisions": [
+        {
+          "pulses_per_candidate_quarter": 1,
+          "quarter_bpm_candidate": 163.3127,
+          "periodogram_peak": 0.0058309
+        },
+        {
+          "pulses_per_candidate_quarter": 2,
+          "quarter_bpm_candidate": 169.227,
+          "periodogram_peak": 0.1462989
+        },
+        {
+          "pulses_per_candidate_quarter": 4,
+          "quarter_bpm_candidate": 169.227,
+          "periodogram_peak": 0.2487335
+        }
+      ]
+    },
+    {
+      "flux": "bass_flux",
+      "periodogram_windows": [
+        {
+          "start": 0,
+          "end": 42.6,
+          "bpm": 163.6676,
+          "periodogram_peak": 0.0014013
+        },
+        {
+          "start": 0,
+          "end": 10,
+          "bpm": 162.9579,
+          "periodogram_peak": 0.0002946
+        },
+        {
+          "start": 10,
+          "end": 20,
+          "bpm": 164.6927,
+          "periodogram_peak": 0.00089
+        },
+        {
+          "start": 20,
+          "end": 30,
+          "bpm": 160.6316,
+          "periodogram_peak": 0.0003899
+        },
+        {
+          "start": 30,
+          "end": 42.6,
+          "bpm": 164.8899,
+          "periodogram_peak": 0.0010952
+        }
+      ],
+      "whole_clip_subdivisions": [
+        {
+          "pulses_per_candidate_quarter": 1,
+          "quarter_bpm_candidate": 163.6676,
+          "periodogram_peak": 0.0014047
+        },
+        {
+          "pulses_per_candidate_quarter": 2,
+          "quarter_bpm_candidate": 169.2467,
+          "periodogram_peak": 0.0059046
+        },
+        {
+          "pulses_per_candidate_quarter": 4,
+          "quarter_bpm_candidate": 169.1876,
+          "periodogram_peak": 0.0029161
+        }
+      ]
+    },
+    {
+      "flux": "mid_flux",
+      "periodogram_windows": [
+        {
+          "start": 0,
+          "end": 42.6,
+          "bpm": 176.6001,
+          "periodogram_peak": 4.28e-05
+        },
+        {
+          "start": 0,
+          "end": 10,
+          "bpm": 184.9984,
+          "periodogram_peak": 4.17e-05
+        },
+        {
+          "start": 10,
+          "end": 20,
+          "bpm": 178.1378,
+          "periodogram_peak": 2.06e-05
+        },
+        {
+          "start": 20,
+          "end": 30,
+          "bpm": 173.7613,
+          "periodogram_peak": 2.37e-05
+        },
+        {
+          "start": 30,
+          "end": 42.6,
+          "bpm": 184.5647,
+          "periodogram_peak": 8.9e-06
+        }
+      ],
+      "whole_clip_subdivisions": [
+        {
+          "pulses_per_candidate_quarter": 1,
+          "quarter_bpm_candidate": 176.6001,
+          "periodogram_peak": 4.28e-05
+        },
+        {
+          "pulses_per_candidate_quarter": 2,
+          "quarter_bpm_candidate": 169.2073,
+          "periodogram_peak": 0.0009637
+        },
+        {
+          "pulses_per_candidate_quarter": 4,
+          "quarter_bpm_candidate": 169.227,
+          "periodogram_peak": 0.0037647
+        }
+      ]
+    },
+    {
+      "flux": "high_flux",
+      "periodogram_windows": [
+        {
+          "start": 0,
+          "end": 42.6,
+          "bpm": 181.2921,
+          "periodogram_peak": 1.7e-06
+        },
+        {
+          "start": 0,
+          "end": 10,
+          "bpm": 184.9984,
+          "periodogram_peak": 3.3e-06
+        },
+        {
+          "start": 10,
+          "end": 20,
+          "bpm": 184.9984,
+          "periodogram_peak": 2e-06
+        },
+        {
+          "start": 20,
+          "end": 30,
+          "bpm": 181.0161,
+          "periodogram_peak": 1e-06
+        },
+        {
+          "start": 30,
+          "end": 42.6,
+          "bpm": 177.7041,
+          "periodogram_peak": 2e-06
+        }
+      ],
+      "whole_clip_subdivisions": [
+        {
+          "pulses_per_candidate_quarter": 1,
+          "quarter_bpm_candidate": 181.2527,
+          "periodogram_peak": 1.7e-06
+        },
+        {
+          "pulses_per_candidate_quarter": 2,
+          "quarter_bpm_candidate": 169.1876,
+          "periodogram_peak": 0.0001063
+        },
+        {
+          "pulses_per_candidate_quarter": 4,
+          "quarter_bpm_candidate": 169.2073,
+          "periodogram_peak": 0.0003875
+        }
+      ]
+    }
+  ],
+  "bass_grid_candidates": [
+    {
+      "bpm": 169.275,
+      "phase_seconds": 0.25255,
+      "mean_grid_flux": 0.0612
+    },
+    {
+      "bpm": 168.9,
+      "phase_seconds": 0.21314,
+      "mean_grid_flux": 0.05355
+    },
+    {
+      "bpm": 169.625,
+      "phase_seconds": 0.30951,
+      "mean_grid_flux": 0.05013
+    },
+    {
+      "bpm": 163.1,
+      "phase_seconds": 0.2989,
+      "mean_grid_flux": 0.04895
+    },
+    {
+      "bpm": 163.45,
+      "phase_seconds": 0.33038,
+      "mean_grid_flux": 0.0485
+    },
+    {
+      "bpm": 167.15,
+      "phase_seconds": 0.00897,
+      "mean_grid_flux": 0.04751
+    },
+    {
+      "bpm": 168.525,
+      "phase_seconds": 0.18692,
+      "mean_grid_flux": 0.0471
+    },
+    {
+      "bpm": 174.775,
+      "phase_seconds": 0.14805,
+      "mean_grid_flux": 0.04646
+    }
+  ],
+  "chosen_for_analysis_only": {
+    "bpm": 169.275,
+    "phase_seconds": 0.25255,
+    "mean_grid_flux": 0.0612
+  },
+  "not_playback_tempo_instruction": true
+}

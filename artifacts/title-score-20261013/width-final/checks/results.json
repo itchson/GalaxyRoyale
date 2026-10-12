@@ -1,0 +1,26 @@
+{
+  "before": {
+    "head": "88d0efe9f05a6f1f244ead7967e62f1228acd840",
+    "branch": "codex/testing",
+    "sourceHash": "783b68a02f90b0b0ccd7861ce2e11edb5d2b49a3b5e70fe1f8ce9aa4742d872e"
+  },
+  "after": {
+    "head": "88d0efe9f05a6f1f244ead7967e62f1228acd840",
+    "branch": "codex/testing",
+    "sourceHash": "783b68a02f90b0b0ccd7861ce2e11edb5d2b49a3b5e70fe1f8ce9aa4742d872e"
+  },
+  "unchanged": true,
+  "results": [
+    {
+      "name": "shell",
+      "args": [
+        "--experimental-transform-types",
+        "--test",
+        "apps/studio/test/*.test.mjs",
+        "scripts/test/*.test.mjs",
+        "scripts/qa/audio-review/*.test.mjs"
+      ],
+      "exit": 1
+    }
+  ]
+}
