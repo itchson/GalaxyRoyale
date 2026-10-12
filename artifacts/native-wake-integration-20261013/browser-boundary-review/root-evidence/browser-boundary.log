@@ -1,0 +1,33 @@
+(node:15216) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ actual native Wake exports retain exact bytes, omission and stored versus effective rank across browser boundaries (3.2427ms)
+✔ ordinary Wake evolution coexists independently with equipped Echo and Nova claims (6.699ms)
+✔ Wake claims reject malformed tokens, wrong equipment, missing fields and arbitrary world/progression state (0.8598ms)
+(node:8904) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ equipment extraction delegates to native solo Profile, preserving receiver (1.5724ms)
+✔ equipment extraction fails closed for absent native export and malformed declarations (1.2836ms)
+✔ optional owned equipment preserves legacy spec and publication while rejecting inconsistent hulls (0.4996ms)
+✔ ordinary Echo evolution survives native extraction, join and publication boundaries (0.6547ms)
+✔ Echo evolution refuses malformed tokens, wrong slots and persisted progression containers (0.4268ms)
+✔ ordinary Nova and Echo evolution remain independent across native, join and publication boundaries (0.7315ms)
+✔ Nova evolution refuses wrong slots, malformed tokens and missing required fields even with Echo (0.4077ms)
+✔ actual native legacy and evolved Echo value exports replay without invented history or rank clamping (1.2591ms)
+✔ actual native legacy and evolved Nova exports replay with stored rank and no synthetic history (0.6582ms)
+✔ tracked real publication DTOs retain canonical native export hashes and validate wire (1.7ms)
+✔ actual Galaxy batch delegate preserves receiver and native response bytes (0.4549ms)
+✔ replica port maps real publisher DTOs to exact agreed native operation keys (2.0804ms)
+✔ missing exports report unavailable without pretending that a native replica exists (0.1331ms)
+✔ rejected and malformed end replies retain the native session recovery handle (0.5037ms)
+✔ ambiguous begin response keeps a token for cleanup, explicit native rejection does not (0.1776ms)
+✔ stale acquisitions and mismatched sessions are refused before native invocation (0.3075ms)
+✔ unbounded or invalid native response envelopes never become successful operations (0.2218ms)
+✔ complete ef5b55b native operation recording maps through ports with no manufactured success replies (3.3569ms)
+ℹ tests 21
+ℹ suites 0
+ℹ pass 21
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 124.7291

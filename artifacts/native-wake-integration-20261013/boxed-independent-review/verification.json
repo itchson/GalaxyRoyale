@@ -1,0 +1,118 @@
+{
+  "scope": "Independent commit, canonical source/snapshot and raw evidence verification only. No Rust tests, compilation, Clippy, formatting, native simulation, browser, RTC or render execution rerun.",
+  "candidate": "c95c008d22c9b7351463aa1575bf02347659d999",
+  "parent": "af060d8377389bb0b73de0e09d8f6de58b4f4c3f",
+  "changed_files": [
+    "crates/game_core/src/co_op_tests.rs"
+  ],
+  "added_test_only_lines": 277,
+  "verified_author_evidence_files": 35,
+  "verified_canonical_source_files": 15,
+  "runtime_inputs_identical_to_root5e": 13,
+  "recorded_author_native_coop": {
+    "passed": 23,
+    "failed": 0,
+    "ignored": 1
+  },
+  "recorded_author_guest_bridge": {
+    "passed": 4,
+    "failed": 0,
+    "ignored": 0
+  },
+  "author_zero_test_attempt_preserved": true,
+  "author_fixture_failures_preserved": 2,
+  "author_manifest_pin": {
+    "bytes": 6487,
+    "sha256": "40dc134686b75ae0787d1ce8bf021c137c3e05612150b1f8118352c685cf41b7"
+  },
+  "author_handoff_pin": {
+    "bytes": 10489,
+    "sha256": "f5f6a16f371b675e9d1b111c73c59ae90a9902f64b50ad811b5cc1728de6c0f8"
+  },
+  "author_source_pins_pin": {
+    "bytes": 7284,
+    "sha256": "a1b910695c032834586a21fb5caeea430eb2ca53a0518c9ab2e5a1c914345a8f"
+  },
+  "local_hecs_primary_source": {
+    "path": "C:\\Users\\mitch\\.cargo\\registry\\src\\index.crates.io-1949cf8c6b5b557f\\hecs-0.11.2\\src\\world.rs",
+    "bytes": 56515,
+    "sha256": "27dfccc42146341a5f41649a361cafe6ca7464490576517224441efd5f8dfd62"
+  },
+  "inspected_candidate_files": [
+    {
+      "path": "crates/game_core/src/co_op_tests.rs",
+      "canonical_sha256": "9389101baba16e2783b0a4df953e25f7b1e2d4c96661eb9ffa80a0b67de39010",
+      "git_blob": "b01012900983f9495359b9c263dc3e414d91fb4c"
+    },
+    {
+      "path": "crates/game_core/src/co_op.rs",
+      "canonical_sha256": "a04675a4893555ce83de1455a680595307c8e9bf2abf98e4310ce18c89377911",
+      "git_blob": "d45792514a6090a5f0990c90b716eb56f77c0522"
+    },
+    {
+      "path": "crates/game_core/src/co_op_publish.rs",
+      "canonical_sha256": "d6658330e942537435e668c05bad6089b6ec5570999b74f2d27c784c51862f3d",
+      "git_blob": "e9b89bf8d424cdd0c81ccfcf14107ba36308058c"
+    },
+    {
+      "path": "crates/game_core/src/co_op_control.rs",
+      "canonical_sha256": "ba0d2b8c07206f23be6e05c038ba175e1b20034a83b80999b2983ea305625f0d",
+      "git_blob": "f01e777265f13acf925ec18a83efef2e084bb6e9"
+    },
+    {
+      "path": "crates/game_core/src/co_op_replica.rs",
+      "canonical_sha256": "e7e6d93477b478dbca9c043db50a3a4737c07d8a845f115899a568bee1d35194",
+      "git_blob": "a89e73939e9e1e74d824e7981b135b7ebac17ad3"
+    },
+    {
+      "path": "crates/game_core/src/lib.rs",
+      "canonical_sha256": "bb7b23f6ae237e7883e3dc6b6c218d90f2b1c8c18f7c721cccd7c5f4624db930",
+      "git_blob": "4b43e47418bcc880ebd7df5f52277ebaf14d0a72"
+    },
+    {
+      "path": "crates/game_core/src/campaign.rs",
+      "canonical_sha256": "6a5d90403e42a936edaac37f2a5f5668f40a925116d94b54c499a7cd6899ca65",
+      "git_blob": "d051cce156f3a21c3485f449a091f8cf52bfe5e8"
+    },
+    {
+      "path": "crates/engine_core/src/pixels.rs",
+      "canonical_sha256": "b0ecc9e662f598de055e43517163917c182dcb1bee5300b0170f3b54c42559a8",
+      "git_blob": "5a562b876b9907214527684ffd0d391314989051"
+    },
+    {
+      "path": "crates/engine_core/src/frame.rs",
+      "canonical_sha256": "df5a43277139616481595160c2902172dfe4a902f0b0537b6bfe527288df32c4",
+      "git_blob": "d49a1d4d18dffa46b8eb979426bf8c56ca01d406"
+    },
+    {
+      "path": "crates/game_web/src/co_op_replica_bridge.rs",
+      "canonical_sha256": "76da224e970050e4d9d44ebe10a7233391943e91e62a93b5595206777f707192",
+      "git_blob": "fb2d6d54f46bd0adfd982b6ef990937a853cb8f9"
+    },
+    {
+      "path": "crates/game_web/src/co_op_bridge.rs",
+      "canonical_sha256": "b055a2ab09b1ab97d4accb94f40dd05d6801dd2c8d448130de71fca1f9d08c77",
+      "git_blob": "2aec096426145a40cf9195a253e2bf6d19cc06de"
+    },
+    {
+      "path": "crates/game_web/src/browser.rs",
+      "canonical_sha256": "73bf7a34054a75cf33799c33fe76991052eca0430544115a6f1519c272883907",
+      "git_blob": "7ebf94e2ab937dc91f645f56c264cc6208b092fb"
+    },
+    {
+      "path": "apps/game/src/coop/controller.ts",
+      "canonical_sha256": "4966bf8ffcd8ca18125c9af9c710a7658cef61e28356fd01bc68ee50671dcb1f",
+      "git_blob": "629ed7824f0635b9a6cbad9292aeed33a9baf849"
+    },
+    {
+      "path": "apps/game/src/coop/wasm-ports.ts",
+      "canonical_sha256": "a7c9a1125ce2ca3f54acd1c5709e6e54fe497f65658002878fc904fed24b4384",
+      "git_blob": "82b21a7b3ec894ee217061b1d18dfc0932c47f52"
+    },
+    {
+      "path": "apps/game/src/main.ts",
+      "canonical_sha256": "f290cdfb5f86c1e3f1c0ed6b943de031eec4f07dedfd9a0883b7ebeac3d1f0ee",
+      "git_blob": "b0383fb064e7301b64c7179b12618a23b120f8bb"
+    }
+  ]
+}

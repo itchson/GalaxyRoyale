@@ -1,0 +1,39 @@
+# Ordinary Ion Wake — independent native source and evidence review
+
+Candidate 87de1f7afad1a53183fcca91e146c9a59ee012cd, parent 5e4b629e91f3334582ffa30d5e65af98675f8c39, branch codex/coop-ion-wake. This review owns only its work directory; author source and Root are untouched.
+
+## Verdict
+
+No native correctness blocker was identified in the declared ordinary ID5 scope. The frozen candidate is suitable for Root's matching-boundary integration and native/runtime testing. This is not acceptance of fully usable co-op Ion Wake: browser wire validation, persistent per-pilot trail drawing, guest publication/replica presentation and operated RTC/audiovisual checks remain required. No native test or build was rerun by this reviewer.
+
+## Source findings
+
+1. Membership and authority: Pilot derives the effective equipped ordinary ID5 rank through the existing ship-XP cap and independently stores its effect evolution, timer and samples. Legacy omitted evolution becomes one; only a validated numeric ordinary effect claim enters this field. Samples/origins are host-generated native state, not supplied wake points or remote saves. Royal ID16 and champion Windrunner ID10 are intentionally excluded; parity findings apply to ordinary ID5 builds, not every passive ability.
+
+2. Real tick and solo-rule match: tick_co_op records each slot's origin after steering and before integration, then updates wakes after collisions, respawn and home repair. The stage uses current heading/velocity, strict speed>half admitted speed, one birth at most, .2/.15-second cadence, the same 12/16/24 caps, 2.0/2.6/3.4-second lifetimes, 20/28 reach and 6 DPS rank scaling as ordinary solo update_wake. Stationary/outside owners can retain damaging samples until expiry; protected owners age samples but produce no birth/damage. Timer debt emits one sample on resumed input. The differential isolates the actual wake stage; it does not establish complete solo-versus-co-op/RTC session parity.
+
+3. Protection: target filtering admits only Enemy/Boss actors outside safe_zone_at, whose source includes remote canonical lookup outside the host cache. Evolution-five connections are at most 23 consecutive links, reject distances >160, exclude Haven intersections and query regions::segment_protected for remote sanctuaries before damaging along a link. This avoids connecting through a protected circle when endpoints are outside the point radius. Arena exceptions do not produce a supported-session discrepancy: begin_co_op excludes an active arena and progression_enabled excludes co-op, preventing native champion/tournament entry during the session. Point samples/point-radius rules remain the solo rules; this is not a new universal beam/volume collision system.
+
+4. Damage and attribution: nonfatal damage changes hull health, preserves PixelBody, uses the existing boss armor multiplier, and cannot target asteroids or friendly/player actors. Lethal damage calls the real kill_actor with the current membership ID/epoch scoped in hit_owner; the enclosing owner is restored. Slot-ordered updates mean the first lethal trail removes a target before later pilots can notice it again. Existing co-op kill handling suppresses solo progression/save grants. The real guest-kill test checks the destruction notice's owner/epoch and unchanged saved Profile rather than inferring attribution from color or position.
+
+5. Removal/restore: Pilot owns all gameplay samples. Death clears samples/timer before the late stage, leave despawns the owning Pilot, rejoin initializes empty state and a fresh epoch, and stale input is rejected by the existing membership guard. Existing whole-Game boxed restoration remains unchanged; the new test specifically checks solo Profile, PixelBody, samples and timer restoration. Already emitted unowned cosmetic lights may finish their bounded .3-second lifetime after leave/death. That is expressly distinct from an owned damaging trail; no guest presentation journal is added here.
+
+6. Bounds: at most 8 memberships*24 live samples=192, with at most 23 connected links per pilot. Births use existing global caps 32 lights and 128 events; no wake projectile or catch-up backlog is created. Link/target temporary Vec allocations remain bounded by these counts and existing world actors. Author eight-pilot tests are genuine native memberships and ticks, not eight browsers/RTC clients. No 30-minute soak, frame-time percentile, memory-performance or mobile claim is established.
+
+## Wire and integration gate
+
+OwnedLoadout's optional wake_evolution uses the existing strict present_evolution numeric parser: missing is historical None/evolution one; explicit null, wrong primitive, fraction, negative or integer>255 cannot parse; values 0 or 6..255 fail native admission; values 1..5 require ordinary ID5 in passive slot 2 plus existing rank/category/compatibility/ownership-claim/XP constraints. Unknown wake_points/save fields remain rejected. Export emits only evolved ordinary ID5, not remote boss-generations or transient state. Temporary guest Profile boss history stays zero.
+
+Six fixtures were independently matched byte-exactly to actual native serializer lines: legacy, ordinary evolution 1 and evolutions 2..5. The source's baseline browser apps/game/src/coop/wire.ts still allows echo/nova evolution only and uses an exact optional-key count, so evolved wake payloads require Root's parser/type/allowlist/key-count/range/slot checks before matching rebuild. Native serde alone is insufficient for that browser boundary. The protocol string/loadout version remains unchanged; there is no mixed-build compatibility or capability-negotiation claim. Offline loadout/effect claims are plausibility-checked, not proof of durable ownership.
+
+## Independently checked evidence
+
+The read-only verifier checked 4 raw checkout sources and exact committed Git objects, 12 unchanged source/boundary inputs, 18 actual author files, six serializer payloads and the 13 final test names/results. Canonical Git hashes and raw file hashes are explicitly distinguished; neither newline normalization nor JSON reserialization is used for these pins. Author working tree was clean at the frozen commit.
+
+Recorded author runs: the baseline real admitted tick left health 100 instead of 99.9 and actually failed; final wake tests 13 passed; co-op regression 115 passed / 3 ignored; focused game_core check passed. Raw failed expanded-test attempts remain in the author evidence: invalid PixelBody serde/ID helper assumptions, then remote fixtures still in the host cache. These are test/fixture failures, not hidden passing results. This reviewer read and verified the logs and actual source; it did not run those native commands again or infer passing results solely from source.
+
+The 25 rank/evolution differential builds run 360 active+210 stationary wake stages each. Additional real host/guest ticks test all five effective XP caps, owner notices, overlap, armor/pixel preservation, speed/equipment gates, remote sanctuary links, pause/input timeout/expiry, death/leave/rejoin/boxed restoration, wire omission/null/range/unknown fields, and 300 eight-membership ticks with resource counters. They support the declared native gameplay scope.
+
+## Remaining acceptance
+
+Root must integrate a matching strict browser boundary and run appropriate integrated checks/builds. Persistent host trail geometry and guest replay/delivery are absent from this native increment and need separate design/work before claiming the ability is fully presented. Genuine host/guest RTC behavior, effective guest build, live gameplay, audiovisual timing, world restoration/SaveStore digests and physical/performance acceptance remain open. The prior native/source tests and this review do not supply those observations. No Root preview, service, browser, worker, GPU or RTC was started by this review.

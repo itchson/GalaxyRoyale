@@ -1,0 +1,154 @@
+{
+  "captured_at_utc": "2026-10-12T18:54:37.1132987Z",
+  "frozen_base": "87de1f7afad1a53183fcca91e146c9a59ee012cd",
+  "scope": "read-only source/test inspection and existing fixture JSON re-encode; design only; no tests/build/native/browser/RTC execution",
+  "source": [
+    {
+      "path": "crates/game_core/src/co_op.rs",
+      "raw_file_sha256": "0c143ea67a33f353f275bbf38c479bafd968843bd32fed22577a6d0919d391e3",
+      "head_git_blob": "fb2e63b21aa300e9e797776ee0bd8a2ad8e93c02",
+      "working_git_blob": "fb2e63b21aa300e9e797776ee0bd8a2ad8e93c02"
+    },
+    {
+      "path": "crates/game_core/src/co_op_wake.rs",
+      "raw_file_sha256": "697bf704ab83b1d4d23a793279f2a954de6c870af03b5c8754684de5d430d43e",
+      "head_git_blob": "209af19c77abb60d2dedb74eced0639ca075afda",
+      "working_git_blob": "209af19c77abb60d2dedb74eced0639ca075afda"
+    },
+    {
+      "path": "crates/game_core/src/co_op_wake_tests.rs",
+      "raw_file_sha256": "23c2e69e40593ca07325426890226e1b48cd278e38acdb58dc045cdf94f10fc6",
+      "head_git_blob": "2c1a3dcd8b55a71363415305622e5e9163504f11",
+      "working_git_blob": "2c1a3dcd8b55a71363415305622e5e9163504f11"
+    },
+    {
+      "path": "crates/game_core/src/lib.rs",
+      "raw_file_sha256": "e7997b5b90c3ac2f70ba12c2521480ee2123136b712274334f6e784b713b0636",
+      "head_git_blob": "4b43e47418bcc880ebd7df5f52277ebaf14d0a72",
+      "working_git_blob": "4b43e47418bcc880ebd7df5f52277ebaf14d0a72"
+    },
+    {
+      "path": "crates/game_core/src/co_op_publish.rs",
+      "raw_file_sha256": "6c21184ed46db90ce992a74fc2699f1356210d474aa77f152c837a983de2a676",
+      "head_git_blob": "e9b89bf8d424cdd0c81ccfcf14107ba36308058c",
+      "working_git_blob": "e9b89bf8d424cdd0c81ccfcf14107ba36308058c"
+    },
+    {
+      "path": "crates/game_core/src/co_op_publish_tests.rs",
+      "raw_file_sha256": "c67dd8bbe722c444db981d244442b9cfd06cf575b0c89c34bdc38cd1a5eb7a66",
+      "head_git_blob": "78362f9888d1f747b2535a98e0f361f2636bdd3d",
+      "working_git_blob": "78362f9888d1f747b2535a98e0f361f2636bdd3d"
+    },
+    {
+      "path": "crates/game_core/src/co_op_replica.rs",
+      "raw_file_sha256": "7c4cb24642efbfafaf09891c10570a7b51bd3689c2bd1407726d9d1c7027e82b",
+      "head_git_blob": "a89e73939e9e1e74d824e7981b135b7ebac17ad3",
+      "working_git_blob": "a89e73939e9e1e74d824e7981b135b7ebac17ad3"
+    },
+    {
+      "path": "crates/game_core/src/co_op_replica_tests.rs",
+      "raw_file_sha256": "81a684939df1cd1dafb74c80661a97063526d726f1e038b69e2a697b25f76573",
+      "head_git_blob": "d98aedcdbe9d1326f96f5741751aabc94d9adc0d",
+      "working_git_blob": "d98aedcdbe9d1326f96f5741751aabc94d9adc0d"
+    },
+    {
+      "path": "crates/game_core/src/co_op_fx.rs",
+      "raw_file_sha256": "1290651c2a596d0af292e830b4f1e58ab17eeaf58645e04a38a437895b7db914",
+      "head_git_blob": "9acec8732501c76291740f9623559c815cb5a376",
+      "working_git_blob": "9acec8732501c76291740f9623559c815cb5a376"
+    },
+    {
+      "path": "crates/game_core/src/co_op_fx_tests.rs",
+      "raw_file_sha256": "660b73086dfcc50a870cc83602ae860d3fa64354c9e47acec389840f17a6510e",
+      "head_git_blob": "99b9b201c949895e2d8e7ed377350c4e26a80d04",
+      "working_git_blob": "99b9b201c949895e2d8e7ed377350c4e26a80d04"
+    },
+    {
+      "path": "crates/game_web/src/browser.rs",
+      "raw_file_sha256": "816f07c1de69ec99c590013e00584c5c3d7e11777fc7fbf1ecdc13467ac8ece3",
+      "head_git_blob": "7ebf94e2ab937dc91f645f56c264cc6208b092fb",
+      "working_git_blob": "7ebf94e2ab937dc91f645f56c264cc6208b092fb"
+    },
+    {
+      "path": "crates/game_web/src/co_op_bridge.rs",
+      "raw_file_sha256": "b833bd5c39c691ee35dda2f23a15dd5bade3c501c6874138f01e461ee8675c00",
+      "head_git_blob": "2aec096426145a40cf9195a253e2bf6d19cc06de",
+      "working_git_blob": "2aec096426145a40cf9195a253e2bf6d19cc06de"
+    },
+    {
+      "path": "crates/game_web/src/co_op_replica_bridge.rs",
+      "raw_file_sha256": "52ad216499b510cdecd83c9f24ac9ea620f16c79753e71388e0af2b91ff7e35b",
+      "head_git_blob": "fb2d6d54f46bd0adfd982b6ef990937a853cb8f9",
+      "working_git_blob": "fb2d6d54f46bd0adfd982b6ef990937a853cb8f9"
+    },
+    {
+      "path": "crates/engine_core/src/frame.rs",
+      "raw_file_sha256": "fb4833e130f836293479e108633653b9298a16453279d942a7354873c8b85afe",
+      "head_git_blob": "d49a1d4d18dffa46b8eb979426bf8c56ca01d406",
+      "working_git_blob": "d49a1d4d18dffa46b8eb979426bf8c56ca01d406"
+    },
+    {
+      "path": "apps/game/src/coop/wire.ts",
+      "raw_file_sha256": "147fe5344eb85be4a707e0d418c9ec70584389b75fab8a224ef7bdcf73c79152",
+      "head_git_blob": "351f27161064ee1197f79f5ddd38eadf5bae6132",
+      "working_git_blob": "351f27161064ee1197f79f5ddd38eadf5bae6132"
+    },
+    {
+      "path": "apps/game/src/coop/controller.ts",
+      "raw_file_sha256": "4966bf8ffcd8ca18125c9af9c710a7658cef61e28356fd01bc68ee50671dcb1f",
+      "head_git_blob": "629ed7824f0635b9a6cbad9292aeed33a9baf849",
+      "working_git_blob": "629ed7824f0635b9a6cbad9292aeed33a9baf849"
+    },
+    {
+      "path": "apps/game/src/coop/wasm-ports.ts",
+      "raw_file_sha256": "29ad3da88442e8f015869b13ec28db0b0c546ff38f6d5ec7dac98f7b770fabff",
+      "head_git_blob": "82b21a7b3ec894ee217061b1d18dfc0932c47f52",
+      "working_git_blob": "82b21a7b3ec894ee217061b1d18dfc0932c47f52"
+    },
+    {
+      "path": "apps/game/src/coop/transport.ts",
+      "raw_file_sha256": "10ead00d20e2e9fb5cb59a211b496ba98af59d962b8ebccb6d57138776d25d77",
+      "head_git_blob": "b5f335cbc15bdb2ef8c3d86bffbb7ad86118a5a2",
+      "working_git_blob": "b5f335cbc15bdb2ef8c3d86bffbb7ad86118a5a2"
+    },
+    {
+      "path": "scripts/test/coop-nova-fx-wire.test.mjs",
+      "raw_file_sha256": "153992eeed2fc7e15f8391cfc632ac1379d5f0bd1080a07be4a58230de3436ef",
+      "head_git_blob": "46b84ab1ae044d786a136359a2eef29380f35ea0",
+      "working_git_blob": "46b84ab1ae044d786a136359a2eef29380f35ea0"
+    },
+    {
+      "path": "scripts/test/fixtures/co-op-nova-fx/maximum-header.json",
+      "raw_file_sha256": "2b6663d6bba50de8805cd67b23045b73c0aaeeea556b9496ce3f266294ebcd80",
+      "head_git_blob": "28064c7dbed8ad70ec505bab5db7aef8957eef98",
+      "working_git_blob": "28064c7dbed8ad70ec505bab5db7aef8957eef98"
+    }
+  ],
+  "primary_local_library_source": [
+    {
+      "path": "C:/Users/mitch/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.151/src/value/ser.rs",
+      "sha256": "11f2b7daa1eba826d4086d5497f73729478dd7647bff77deccde5e47b0f126f2"
+    },
+    {
+      "path": "C:/Users/mitch/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.151/src/number.rs",
+      "sha256": "70b83c36286f6c58123f544f27db2b54a1135f928fe33b08b521b2997773f862"
+    }
+  ],
+  "design_evidence": [
+    {
+      "path": "DESIGN.md",
+      "sha256": "fd85ae1c87bcf7e44697bd2481aadccd6c924c0fe9b1349aa7e6ae455ca313b3",
+      "bytes": 21230
+    },
+    {
+      "path": "fixture-size-observation.json",
+      "sha256": "814ff060499d4c80c46e2162e56b65b6547c23385f3269f4eafb8f0af8c2b5dd",
+      "bytes": 508
+    },
+    {
+      "path": "inspect-fixture.mjs",
+      "sha256": "3f4e9d9f5b86eab4f2588bf6272742bcae6bfc4267a67cb13cc0945ae88f7868",
+      "bytes": 1032
+    }
+  ]
+}

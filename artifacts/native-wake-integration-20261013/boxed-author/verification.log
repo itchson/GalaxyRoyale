@@ -1,0 +1,14 @@
+{
+  "verified": true,
+  "candidate": "c95c008d22c9b7351463aa1575bf02347659d999",
+  "canonical_source_pins": 15,
+  "runtime_inputs_byte_identical_to_root5e": 13,
+  "raw_evidence_pins": 35,
+  "native_coop_passed": 23,
+  "native_coop_ignored": 1,
+  "guest_bridge_passed": 4,
+  "retained_zero_test_attempt": true,
+  "retained_fixture_failures": 2,
+  "runtime_defect_reproduced": false,
+  "browser_or_rtc_run_by_this_review": false
+}

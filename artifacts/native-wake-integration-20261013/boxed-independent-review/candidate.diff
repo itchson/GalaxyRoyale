@@ -1,0 +1,288 @@
+diff --git a/crates/game_core/src/co_op_tests.rs b/crates/game_core/src/co_op_tests.rs
+index 0df3996..b010129 100644
+--- a/crates/game_core/src/co_op_tests.rs
++++ b/crates/game_core/src/co_op_tests.rs
+@@ -747,6 +747,283 @@ fn end_host_leave_and_return_home_restore_exact_original_solo_instance() {
+     }
+ }
+ 
++// Semantic state, not struct bytes/padding or a serialized Profile. This fixture
++// includes every basic component it creates and the solo transient fields that
++// can affect continuation. Publication generation is deliberately checked apart.
++fn boxed_world_probe(game: &Game) -> serde_json::Value {
++    use serde_json::json;
++    let mut entities: Vec<_> = game
++        .world
++        .query::<(
++            Entity,
++            Option<&Motion>,
++            Option<&Actor>,
++            Option<&PixelBody>,
++            Option<&Brain>,
++            Option<&Segment>,
++            Option<&Bullet>,
++            Option<&Loot>,
++            Option<&AsteroidBirth>,
++        )>()
++        .iter()
++        .map(
++            |(e, motion, actor, body, brain, segment, bullet, loot, birth)| {
++                (
++                    e.to_bits().get(),
++                    json!({
++                        "motion": motion.map(|m| (m.position.to_array(), m.previous.to_array(),
++                            m.velocity.to_array(), m.heading, m.previous_heading)),
++                        "actor": actor.map(|a| (format!("{:?}", a.kind), a.health, a.max_health,
++                            a.radius, a.scale, a.damage)),
++                        "body": body.map(|b| format!("{b:?}")),
++                        "brain": brain.map(|b| (b.family, b.boss, b.age, b.shot_timer, b.phase)),
++                        "segment": segment.map(|s| (s.owner.to_bits().get(), s.index, s.health,
++                            s.scale, s.radius, s.front.to_array(), s.rear.to_array(), s.attached)),
++                        "bullet": bullet.map(|b| (b.player, b.damage, b.life, b.remaining_hits,
++                            b.previous_hit.map(|e| e.to_bits().get()))),
++                        "loot": loot.map(|l| (l.category, l.material_tier, l.training_material,
++                            l.amount, l.life)),
++                        "birth": birth.map(|b| format!("{b:?}")),
++                    }),
++                )
++            },
++        )
++        .collect();
++    entities.sort_by_key(|(id, _)| *id);
++    let mut chunks: Vec<_> = game
++        .chunks
++        .iter()
++        .map(|(key, entities)| {
++            (
++                *key,
++                entities
++                    .iter()
++                    .map(|e| e.to_bits().get())
++                    .collect::<Vec<_>>(),
++            )
++        })
++        .collect();
++    chunks.sort_by_key(|(key, _)| *key);
++    let particles: Vec<_> = game
++        .particles
++        .iter()
++        .map(|p| {
++            json!([
++                p.position.to_array(),
++                p.origin.to_array(),
++                p.local.to_array(),
++                p.previous_local.to_array(),
++                p.velocity.to_array(),
++                p.acceleration.to_array(),
++                p.life,
++                p.initial_life,
++                p.color,
++                p.size,
++                p.seed,
++                format!("{:?}", p.style),
++            ])
++        })
++        .collect();
++    let lights: Vec<_> = game
++        .transient_lights
++        .iter()
++        .map(|l| (&l.source, l.life, l.initial_life))
++        .collect();
++    json!({
++        "player": game.player.to_bits().get(), "entities": entities, "chunks": chunks,
++        "profile": game.profile, "hud": game.hud(), "events": game.events,
++        "camera": [game.camera.to_array(), game.previous_camera.to_array()],
++        "clock": [game.time, game.expedition],
++        "controls": (game.paused, game.throttle, game.destination.map(|p| p.to_array())),
++        "combat": (game.fire_timer, game.shot_count, game.shield, game.since_damage,
++            game.invulnerability, game.repulsor_timer, game.wake_timer, game.exhaust_timer,
++            game.spawn_timer, game.boss_timer, game.kill_credit, game.was_safe),
++        "active_boss": game.active_boss.map(|e| e.to_bits().get()),
++        "cosmetics": (game.shake, game.rng, game.cosmetic_sequence, game.trail_timer,
++            game.reduced_cosmetics, game.reduced_motion),
++        "particles": particles, "lights": lights,
++        "wake": game.wake.iter().map(|(p, life)| (p.to_array(), *life)).collect::<Vec<_>>(),
++        "dock": format!("{:?}", game.dock_body), "viewport": game.viewport.to_array(),
++        "regions": (&game.nearby_sites, game.site_grid), "run": game.run,
++        "flags": (game.stress_mode, game.boss_qa_scene, game.diagnostic_scene, game.material_scene),
++        "loss": (game.material_loss, &game.material_loss_reason),
++    })
++}
++
++fn boxed_world_fixture() -> Game {
++    let mut game = Game::new(Profile::default());
++    // Arrange a valid admitted solo state with real streamed rocks, enemy/chain,
++    // bullet/loot entities and damaged pixel fields; no replacement save is made.
++    game.profile.campaign.abilities[5] = campaign::AbilityState {
++        blueprint: true,
++        rank: 1,
++    };
++    game.profile.campaign.loadouts[0].slots[2] = Some(5);
++    game.profile.campaign.cargo_materials = [2, 1, 0, 0, 0];
++    *game.world.get::<&mut Motion>(game.player).unwrap() =
++        Motion::new(Vec2::new(80.0, 40.0), Vec2::new(29.0, -13.0), 0.37);
++    game.world.get::<&mut Motion>(game.player).unwrap().previous = Vec2::new(79.0, 40.25);
++    game.world.get::<&mut Actor>(game.player).unwrap().health = 73.5;
++    game.world
++        .get::<&mut PixelBody>(game.player)
++        .unwrap()
++        .damage(Vec2::ZERO, 2.0);
++    game.update_chunks(game.position());
++    let enemy = game.spawn_enemy(2, false, Vec2::new(420.0, 350.0), 2);
++    game.world.get::<&mut Actor>(enemy).unwrap().health = 47.0;
++    game.world
++        .get::<&mut PixelBody>(enemy)
++        .unwrap()
++        .damage(Vec2::ZERO, 1.0);
++    game.world.get::<&mut Brain>(enemy).unwrap().age = 1.125;
++    let shot = game
++        .spawn_bullet_entity(Vec2::new(355.0, 275.0), Vec2::new(20.0, 3.0), 2.5, true, 2)
++        .unwrap();
++    game.world.get::<&mut Bullet>(shot).unwrap().previous_hit = Some(enemy);
++    game.world.spawn((
++        Motion::new(Vec2::new(470.0, 390.0), Vec2::Y, 0.0),
++        Loot {
++            category: 2,
++            material_tier: 1,
++            training_material: Some(0),
++            amount: 3,
++            life: 8.25,
++        },
++    ));
++    game.time = 42.5;
++    game.expedition = 2.25;
++    game.run = Some(RunSummary {
++        time: 2.25,
++        distance_peak: 713.0,
++        asteroids: 3,
++        points_gained: [1, 0, 2],
++        materials_gained: 3,
++        ..Default::default()
++    });
++    game.material_loss = [0, 1, 0, 0, 0];
++    game.material_loss_reason = "prior fixture run".into();
++    game.rng = 0x1234_abcd;
++    game.camera = Vec2::new(78.125, 39.25);
++    game.previous_camera = Vec2::new(76.5, 38.5);
++    game.shield = 3.5;
++    game.throttle = 0.7;
++    game.destination = Some(Vec2::new(600.0, 130.0));
++    game.fire_timer = 0.125;
++    game.shot_count = 7;
++    game.repulsor_timer = 0.33;
++    game.wake_timer = 0.067;
++    game.exhaust_timer = 0.031;
++    game.trail_timer = 0.047;
++    game.since_damage = 1.25;
++    game.invulnerability = 0.17;
++    game.spawn_timer = 0.43;
++    game.boss_timer = 7.5;
++    game.kill_credit = [3, 5, 8];
++    game.shake = 0.2;
++    game.wake = vec![
++        (Vec2::new(300.0, 110.0), 1.25),
++        (Vec2::new(320.0, 115.0), 1.7),
++    ];
++    game.burst(Vec2::new(130.0, 70.0), 4, rgba(70, 170, 210, 255), 25.0);
++    game.event("shield", Vec2::new(85.0, 45.0), 0.6);
++    game.set_viewport(853.25, 479.5);
++    game
++}
++
++#[test]
++fn boxed_solo_world_restores_ecs_transients_and_deterministic_continuation_after_teardown() {
++    for mode in 0..3 {
++        let mut game = boxed_world_fixture();
++        let mut reference = boxed_world_fixture();
++        let before = boxed_world_probe(&game);
++        assert_eq!(before, boxed_world_probe(&reference));
++        assert!(!game.chunks.is_empty());
++        assert_eq!(game.world.query::<&Segment>().iter().count(), 4);
++        assert_eq!(game.world.query::<&Bullet>().iter().count(), 1);
++        assert_eq!(game.world.query::<&Loot>().iter().count(), 1);
++        let mut original_render = FrameBuilder::new();
++        game.render_into(0.375, &mut original_render);
++        let original_render = format!("{:?}", original_render.frame());
++        assert_eq!(
++            game.begin_co_op("wrong", session(), host()),
++            Err(Error::InvalidProtocol)
++        );
++        assert_eq!(before, boxed_world_probe(&game));
++        game.begin_co_op(PROTOCOL, session(), host()).unwrap();
++        let a = guest(&mut game, 2);
++        assert_eq!(game.join_co_op(session(), spec(2)), Err(Error::DuplicateId));
++        place(&mut game, host(), Vec2::new(450.0, 0.0), 0.0);
++        for sequence in 0..30 {
++            game.submit_host_co_op_input(
++                session(),
++                sequence,
++                InputFrame {
++                    fire: true,
++                    joystick: Some([1.0, 0.0]),
++                    ..Default::default()
++                },
++            )
++            .unwrap();
++            game.tick_co_op(session()).unwrap();
++        }
++        game.acquire_co_op_publication(session()).unwrap();
++        let generation = game.publication_generation;
++        assert!(generation > 0);
++        assert!(game.publication.is_some());
++        assert_ne!(game.rng, game.co_op.as_ref().unwrap().solo.rng);
++        game.wake.clear();
++        game.particles.clear();
++        game.camera = Vec2::splat(999.0);
++        game.world
++            .get::<&mut PixelBody>(game.player)
++            .unwrap()
++            .damage(Vec2::ZERO, 100.0);
++        assert_eq!(game.end_co_op(id(2000)), Err(Error::StaleSession));
++        game.leave_co_op(session(), a.id, a.epoch).unwrap();
++        assert!(game.co_op_session().is_some());
++        assert_eq!(
++            before,
++            boxed_world_probe(&game.co_op.as_ref().unwrap().solo)
++        );
++        assert_eq!(
++            game.leave_co_op(session(), a.id, a.epoch),
++            Err(Error::StaleMembership)
++        );
++        match mode {
++            0 => game.end_co_op(session()).unwrap(),
++            1 => game.leave_co_op(session(), host(), 1).unwrap(),
++            _ => game.reset_to_dock(),
++        }
++        assert!(game.co_op_session().is_none());
++        assert!(game.publication.is_none());
++        // Acquisition IDs must never be reused after returning to the old world.
++        assert_eq!(game.publication_generation, generation);
++        assert_eq!(before, boxed_world_probe(&game));
++        let mut restored_render = FrameBuilder::new();
++        game.render_into(0.375, &mut restored_render);
++        assert_eq!(original_render, format!("{:?}", restored_render.frame()));
++        game.move_player(Vec2::new(300.0, 110.0));
++        reference.move_player(Vec2::new(300.0, 110.0));
++        for sequence in 0..90 {
++            let input = InputFrame {
++                fire: sequence % 3 == 0,
++                joystick: Some([1.0, 0.2]),
++                ..Default::default()
++            };
++            game.tick(&input, 1.0 / 60.0);
++            reference.tick(&input, 1.0 / 60.0);
++            assert_eq!(game.random().to_bits(), reference.random().to_bits());
++            assert_eq!(
++                serde_json::to_value(game.hud()).unwrap(),
++                serde_json::to_value(reference.hud()).unwrap()
++            );
++        }
++        assert_eq!(boxed_world_probe(&game), boxed_world_probe(&reference));
++        assert!(game.events.iter().any(|event| event.kind == "ability-wake"));
++        assert!(!game.wake.is_empty());
++    }
++}
++
+ #[test]
+ fn bounded_snapshot_pages_preserve_all_cells_and_reject_same_tick_admission_changes() {
+     let mut game = start();

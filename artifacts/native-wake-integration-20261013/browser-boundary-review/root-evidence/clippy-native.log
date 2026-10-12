@@ -1,0 +1,48 @@
+    Checking game_core v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\game_core)
+error: replacing an `Option` with `Some(..)`
+   --> crates\game_core\src\co_op_wake.rs:100:32
+    |
+100 |                 .map(|session| std::mem::replace(&mut session.hit_owner, Some(owner)));
+    |                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: consider `Option::replace()` instead: `session.hit_owner.replace(owner)`
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.97.0/index.html#mem_replace_option_with_some
+    = note: `-D clippy::mem-replace-option-with-some` implied by `-D warnings`
+    = help: to override `-D warnings` add `#[allow(clippy::mem_replace_option_with_some)]`
+
+error: could not compile `game_core` (lib) due to 1 previous error
+warning: build failed, waiting for other jobs to finish...
+error: redundant reference in `format!` argument
+   --> crates\game_core\src\co_op_wake_tests.rs:146:47
+    |
+146 |             let body_before = format!("{:?}", &*coop.world.get::<&PixelBody>(b).unwrap());
+    |                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: remove the redundant `&`: `*coop.world.get::<&PixelBody>(b).unwrap()`
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.97.0/index.html#useless_borrows_in_formatting
+    = note: `-D clippy::useless-borrows-in-formatting` implied by `-D warnings`
+    = help: to override `-D warnings` add `#[allow(clippy::useless_borrows_in_formatting)]`
+
+error: redundant reference in `assert_eq!` argument
+   --> crates\game_core\src\co_op_wake_tests.rs:162:33
+    |
+162 |                 format!("{:?}", &*coop.world.get::<&PixelBody>(b).unwrap()),
+    |                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: remove the redundant `&`: `*coop.world.get::<&PixelBody>(b).unwrap()`
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.97.0/index.html#useless_borrows_in_formatting
+
+error: redundant reference in `format!` argument
+   --> crates\game_core\src\co_op_wake_tests.rs:496:37
+    |
+496 |     let solo_body = format!("{:?}", &*game.world.get::<&PixelBody>(game.player).unwrap());
+    |                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: remove the redundant `&`: `*game.world.get::<&PixelBody>(game.player).unwrap()`
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.97.0/index.html#useless_borrows_in_formatting
+
+error: redundant reference in `assert_eq!` argument
+   --> crates\game_core\src\co_op_wake_tests.rs:535:25
+    |
+535 |         format!("{:?}", &*game.world.get::<&PixelBody>(game.player).unwrap()),
+    |                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: remove the redundant `&`: `*game.world.get::<&PixelBody>(game.player).unwrap()`
+    |
+    = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.97.0/index.html#useless_borrows_in_formatting
+
+error: could not compile `game_core` (lib test) due to 5 previous errors

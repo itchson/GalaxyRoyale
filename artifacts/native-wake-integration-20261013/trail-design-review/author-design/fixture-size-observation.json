@@ -1,0 +1,12 @@
+{
+  "scope": "Read/JSON re-encode existing native-exported fixture only; no tests, native execution, transport, or candidate encoding",
+  "fixture": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/scripts/test/fixtures/co-op-nova-fx/maximum-header.json",
+  "pretty_file_bytes": 87897,
+  "compact_header_bytes": 40430,
+  "compact_publication_frame_bytes": 40522,
+  "frame_limit_bytes": 65536,
+  "remaining_frame_bytes": 25014,
+  "participants": 8,
+  "projectiles": 180,
+  "nova_records": 32
+}

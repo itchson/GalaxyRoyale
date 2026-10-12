@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 1022,
+  "revision": 1037,
   "name": "Galaxy Royale",
   "phase": "Playable solo slice → content and validation",
-  "updatedAt": "2026-10-12T18:59:18.513Z",
+  "updatedAt": "2026-10-12T19:18:26.000Z",
   "tasks": [
     {
       "id": "studio",
@@ -8214,7 +8214,7 @@
     {
       "id": "task-23bb3756",
       "title": "Relative height, contact shadows and hub-surface lighting",
-      "description": "Frozen af060d8 test-only candidate couples actual native dock occupancy, receiver gaps, fractional zoom and camera rebase; focused/full dock regressions recorded. Not integrated yet; actual GPU shadow appearance/parity/performance remain open.",
+      "description": "Reviewed coupled native caster/dock gap/fractional zoom tests integrated ascd362cc; current Rootfullnative914pass includes them and both normalbackends rebuilt. Actual GPU shadow appearance/parity and performance remain open;2/3source/CPU does not prove those.",
       "department": "Engine lighting",
       "owner": "/root/engine_fx",
       "status": "active",
@@ -8271,12 +8271,22 @@
           "label": "Immutable actual live reports and byte pins",
           "kind": "artifact",
           "path": "artifacts/private-room-live-20261013/actual-live-summary.json"
+        },
+        {
+          "label": "Integrated native checks, matching normal build and explicit remaining gates",
+          "kind": "artifact",
+          "path": "artifacts/native-wake-integration-20261013/README.md"
+        },
+        {
+          "label": "Actual source/build/check pins",
+          "kind": "artifact",
+          "path": "artifacts/native-wake-integration-20261013/verification.json"
         }
       ],
       "blocker": "",
-      "revision": 5,
+      "revision": 6,
       "createdAt": "2026-10-12T15:48:39.489Z",
-      "updatedAt": "2026-10-12T18:51:58.359Z"
+      "updatedAt": "2026-10-12T19:15:22.484Z"
     },
     {
       "id": "task-54a27324",
@@ -8420,7 +8430,7 @@
     {
       "id": "task-b4cd8858",
       "title": "Ordinary per-pilot Ion Wake parity in authoritative co-op",
-      "description": "Frozen native candidate87de1f7 implements ordinary per-pilot Ion Wake;13 focused regressions and115 co-op checks/3 ignored recorded by author, independently source-reviewed. Browser wake_evolution wire support, authoritative transient trail publication/rendering, normal rebuild and actual RTC/AV remain pending.",
+      "description": "Reviewed ordinary Ion Wake native candidate and strict browser wake_evolution boundary are integrated and rebuilt at332ddd5. Actual914native tests/17ignored,657shell/1Windows skip, strictnative/bothWASMClippy,21native-derived JS boundary cases and50headless SaveStore cases pass. Per-pilot persistent trail extraction/publication/replica rendering and actual new ability RTC/AV remain open; this task stays2/3.",
       "department": "Native gameplay",
       "owner": "/root/audio_score",
       "status": "active",
@@ -8455,12 +8465,22 @@
           "label": "Immutable actual live reports and byte pins",
           "kind": "artifact",
           "path": "artifacts/private-room-live-20261013/actual-live-summary.json"
+        },
+        {
+          "label": "Integrated native checks, matching normal build and explicit remaining gates",
+          "kind": "artifact",
+          "path": "artifacts/native-wake-integration-20261013/README.md"
+        },
+        {
+          "label": "Actual source/build/check pins",
+          "kind": "artifact",
+          "path": "artifacts/native-wake-integration-20261013/verification.json"
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 3,
       "createdAt": "2026-10-12T18:16:47.735Z",
-      "updatedAt": "2026-10-12T18:51:58.265Z"
+      "updatedAt": "2026-10-12T19:15:22.443Z"
     },
     {
       "id": "task-769c0361",
@@ -8508,7 +8528,7 @@
       "description": "Implement in isolated branch from the next reviewed Root helper checkpoint. Own only scripts/qa/co-op-transport and its focused tests in that checkout; Root owns integration/listeners/browser. Use actual controller/store operations, private continuity facts and sanitized reports. No service/runtime modification, no fabricated RTC or world evidence. Source plan frozen in work/private-room-negative-plan.",
       "department": "Networking QA tooling",
       "owner": "/root/audio_review",
-      "status": "ready",
+      "status": "review",
       "priority": "high",
       "dependencies": [
         "task-769c0361"
@@ -8532,12 +8552,102 @@
           "label": "Source-backed bounded negative-case implementation plan",
           "kind": "artifact",
           "path": "artifacts/private-room-live-20261013/negative-plan/PLAN.md"
+        },
+        {
+          "label": "Actual isolated negative QA candidate and focused author evidence",
+          "kind": "note",
+          "details": "Commit1b14bff9e6da0a1a249f1bdc42ab49e59e74e52c on codex/private-room-negative-qa from fbb8b1c640f0e11d495cf00c11bf557500701674. Clean tracked tree,6QA/doc/test files; actual11+16+10focused checks pass. Evidence at isolated galaxy-audio-refinement/work/private-room-negative-implementation/HANDOFF.md and source-pins.json. Independent review and actual negative browser/RTC cases pending; no native/service/runtime changes or live pass."
+        }
+      ],
+      "blocker": "",
+      "revision": 3,
+      "createdAt": "2026-10-12T18:59:18.513Z",
+      "updatedAt": "2026-10-12T19:18:25.976Z"
+    },
+    {
+      "id": "task-8508cfc5",
+      "title": "Authoritative co-op Ion Wake trail publication and native presentation",
+      "description": "Actual isolatedbranch setup from332ddd5; independent originaldesign/v2reviewresolved three concrete edge findings. Native author owns bounded active-sample page, atomic replica commit, lifecycle/canonical-clock invariants and shared native quads/WASM operations. Root owns matching JS wire/controller/ports and normalbuild/browser. No implementation or trail RTC/AV pass claimed at dispatch.",
+      "department": "Native gameplay / presentation",
+      "owner": "/root/audio_score",
+      "status": "active",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Bounded actual sample snapshot/page and same-tick membership-set, raw-f64/post-f32 and world-edge contracts implemented in native authority/replica.",
+          "met": false
+        },
+        {
+          "text": "Shared host/guest native quad rendering, epoch/expiry/cleanup and meaningful native serializer/regression checks with independent review.",
+          "met": false
+        },
+        {
+          "text": "Matching strict browser pipeline, normaldualbuild and actual current RTC/AV/cleanup evidence recorded.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Integrated native checks, matching normal build and explicit remaining gates",
+          "kind": "artifact",
+          "path": "artifacts/native-wake-integration-20261013/README.md"
+        },
+        {
+          "label": "Actual source/build/check pins",
+          "kind": "artifact",
+          "path": "artifacts/native-wake-integration-20261013/verification.json"
+        },
+        {
+          "label": "Frozen v2 design and independent agreement",
+          "kind": "artifact",
+          "path": "artifacts/native-wake-integration-20261013/trail-design-review/REVIEW.md"
         }
       ],
       "blocker": "",
       "revision": 1,
-      "createdAt": "2026-10-12T18:59:18.513Z",
-      "updatedAt": "2026-10-12T18:59:18.513Z"
+      "createdAt": "2026-10-12T19:15:22.563Z",
+      "updatedAt": "2026-10-12T19:15:22.563Z"
+    },
+    {
+      "id": "task-16eff15f",
+      "title": "Rich native solo-world restoration and deterministic continuation gate",
+      "description": "Test-only c95c008 integrated as0f81bbb. Actual sampled rich ECS/transients/packet and90tick continuation across End/Leave/Home; intentional publicationgeneration exception preserved. Independent source/evidence review and guest-callgraph clarification retained. Rootnative fullworkspace passes. No arbitraryworld/browser/settings/IndexedDB identity or GPU proof.",
+      "department": "Native engine / QA",
+      "owner": "/root/engine_fx",
+      "status": "complete",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Real rich ECS/transient fixture and three actual native teardown paths with deterministic continuation.",
+          "met": true
+        },
+        {
+          "text": "Independent exact source/evidence review with explicit coverage boundaries and additive guest-callgraph clarification.",
+          "met": true
+        },
+        {
+          "text": "Root integration and full native/strict checks include the regression; separate browser/device gaps visible.",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Integrated native checks, matching normal build and explicit remaining gates",
+          "kind": "artifact",
+          "path": "artifacts/native-wake-integration-20261013/README.md"
+        },
+        {
+          "label": "Actual source/build/check pins",
+          "kind": "artifact",
+          "path": "artifacts/native-wake-integration-20261013/verification.json"
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-12T19:15:22.593Z",
+      "updatedAt": "2026-10-12T19:15:22.593Z"
     }
   ],
   "reviews": [
@@ -10944,6 +11054,39 @@
           "label": "Independent post-live helper review and exact source pins",
           "kind": "artifact",
           "path": "artifacts/private-room-live-20261013/post-live-review/REVIEW.md"
+        }
+      ]
+    },
+    {
+      "id": "review-b767df50",
+      "title": "Actual studio cross-review: native restoration, Wake boundary and refined trail contract",
+      "body": "Root integrated/rebuilt reviewed native Wake and test gates; strict Clippy surfaced five concrete corrections, originalfailure kept. Engine independently checked Rootbrowserboundary/actualnativefixturebytes. Gameplay independently reviewed boxed-world semanticprobe, correcting &Game-only immutability wording through additive realcallgraph evidence. Engine/author resolved rawf64-tof32life boundaries, same-native-tick missing-key reappearance and WORLD_LIMIT+14 rear anchors in pinned v2design; native implementation nowassigned. Networking author works in separatecleanbranch on realdecline/replace/lock QA, currentfocused11new+16existing+10fifthtests reported, candidate notyetaccepted/live. These are real written exchanges, not fabricated realtime meeting or newbrowserpasses.",
+      "author": "Root",
+      "source": "Actual native integration, reviews and bounded next assignment",
+      "createdAt": "2026-10-12T19:15:22.624Z",
+      "participants": [
+        "Root",
+        "/root/audio_score",
+        "/root/engine_fx",
+        "/root/audio_review"
+      ],
+      "taskIds": [
+        "task-b4cd8858",
+        "task-23bb3756",
+        "task-16eff15f",
+        "task-8508cfc5",
+        "task-71611b9e"
+      ],
+      "evidence": [
+        {
+          "label": "Integrated native checks, matching normal build and explicit remaining gates",
+          "kind": "artifact",
+          "path": "artifacts/native-wake-integration-20261013/README.md"
+        },
+        {
+          "label": "Actual source/build/check pins",
+          "kind": "artifact",
+          "path": "artifacts/native-wake-integration-20261013/verification.json"
         }
       ]
     }
@@ -14161,6 +14304,50 @@
         }
       ],
       "knownIssues": "Multiplayer release remains incomplete. Current captures are two clients on loopback; future native IonWake/trail source candidates and boxed-world tests are not integrated yet. V3 title listening acceptance pending."
+    },
+    {
+      "id": "build-783ad75b",
+      "title": "332ddd5 normal dual-WASM native Wake integration build",
+      "body": "Actualnormalbuild/receipt at332ddd5 includes native ordinaryWake and strictJSequipmentclaimboundary, plus real dock-gap/boxedworld native regression gates.914nativepass17ignored; strictnative/bothWASMClippy/fmt/TS;657shellpass1Windows skip withactualnormalHTTPstages;50isolatedheadlessWASM/fake-indexeddbcheckpointcases. The build is new, but native trail presentation/newability RTC and shadow GPUappearance remain open.",
+      "author": "Root",
+      "source": "Actual native integration, reviews and bounded next assignment",
+      "createdAt": "2026-10-12T19:15:22.655Z",
+      "revision": "332ddd5ec0370e13ad346ea4ea988f35b61ca3e7",
+      "evidence": [
+        {
+          "label": "Integrated native checks, matching normal build and explicit remaining gates",
+          "kind": "artifact",
+          "path": "artifacts/native-wake-integration-20261013/README.md"
+        },
+        {
+          "label": "Actual source/build/check pins",
+          "kind": "artifact",
+          "path": "artifacts/native-wake-integration-20261013/verification.json"
+        }
+      ],
+      "checks": [
+        {
+          "name": "Nativeworkspace914pass/17declaredignored",
+          "result": "pass"
+        },
+        {
+          "name": "Native + WebGPU/WebGL2 strictClippy,fmttypecheck",
+          "result": "pass"
+        },
+        {
+          "name": "Shell657pass/1declaredskip and50headlessWASMcheckpointcases",
+          "result": "pass"
+        },
+        {
+          "name": "MatchingnormaldualWASM/package/PWAreceipt",
+          "result": "pass"
+        },
+        {
+          "name": "Persistentco-optrailRTC/AV andGPUshadowappearance",
+          "result": "not_run"
+        }
+      ],
+      "knownIssues": "Ordinary IonWake damaging samples are integrated; host/guest persistenttrailpublication/rendering still underboundedimplementation. Neitherfull8/TURN norphysical/naturalcampaignacceptance follows."
     }
   ],
   "feedback": [],
@@ -24384,6 +24571,156 @@
       "author": "Root",
       "source": "Actual independent review and bounded next assignment",
       "createdAt": "2026-10-12T18:59:18.513Z"
+    },
+    {
+      "id": "e42c8a9c-0a4e-4295-b1b5-da87bdd518c3",
+      "revision": 1023,
+      "kind": "task.update",
+      "itemId": "task-71611b9e",
+      "title": "Bounded actual room decline, code replacement and lock QA controls",
+      "author": "/root/audio_review",
+      "source": "Actual clean isolated checkout inspection and branch creation from fbb8b1c640f0e11d495cf00c11bf557500701674",
+      "createdAt": "2026-10-12T19:00:36.593Z"
+    },
+    {
+      "id": "e01d54a3-837d-4fa6-9c0e-d746c2d3d337",
+      "revision": 1024,
+      "kind": "run",
+      "itemId": "run-5695acbc",
+      "title": "Private room negative QA implementation · running",
+      "author": "/root/audio_review",
+      "source": "Actual agent execution, clean tracked worktree and new isolated branch observed",
+      "createdAt": "2026-10-12T19:00:36.627Z"
+    },
+    {
+      "id": "7cb69a77-21c7-4ac5-bbf0-24ba796a27d3",
+      "revision": 1025,
+      "kind": "task.update",
+      "itemId": "task-b4cd8858",
+      "title": "Ordinary per-pilot Ion Wake parity in authoritative co-op",
+      "author": "Root",
+      "source": "Actual native integration, reviews and bounded next assignment",
+      "createdAt": "2026-10-12T19:15:22.443Z"
+    },
+    {
+      "id": "9bb2c07c-58fa-4fbb-8bab-ede110ba276b",
+      "revision": 1026,
+      "kind": "task.update",
+      "itemId": "task-23bb3756",
+      "title": "Relative height, contact shadows and hub-surface lighting",
+      "author": "Root",
+      "source": "Actual native integration, reviews and bounded next assignment",
+      "createdAt": "2026-10-12T19:15:22.484Z"
+    },
+    {
+      "id": "4f481b0c-2273-452c-b327-84240945984c",
+      "revision": 1027,
+      "kind": "task.create",
+      "itemId": "task-8508cfc5",
+      "title": "Authoritative co-op Ion Wake trail publication and native presentation",
+      "author": "Root",
+      "source": "Actual native integration, reviews and bounded next assignment",
+      "createdAt": "2026-10-12T19:15:22.563Z"
+    },
+    {
+      "id": "73570310-87ac-44f3-ac36-055b3412316e",
+      "revision": 1028,
+      "kind": "task.create",
+      "itemId": "task-16eff15f",
+      "title": "Rich native solo-world restoration and deterministic continuation gate",
+      "author": "Root",
+      "source": "Actual native integration, reviews and bounded next assignment",
+      "createdAt": "2026-10-12T19:15:22.593Z"
+    },
+    {
+      "id": "2e625442-ae79-4571-9a11-e8982c675987",
+      "revision": 1029,
+      "kind": "review",
+      "itemId": "review-b767df50",
+      "title": "Actual studio cross-review: native restoration, Wake boundary and refined trail contract",
+      "author": "Root",
+      "source": "Actual native integration, reviews and bounded next assignment",
+      "createdAt": "2026-10-12T19:15:22.624Z"
+    },
+    {
+      "id": "7d8acd6b-2b65-4210-ad7f-e6f25dd16d76",
+      "revision": 1030,
+      "kind": "build",
+      "itemId": "build-783ad75b",
+      "title": "332ddd5 normal dual-WASM native Wake integration build",
+      "author": "Root",
+      "source": "Actual native integration, reviews and bounded next assignment",
+      "createdAt": "2026-10-12T19:15:22.655Z"
+    },
+    {
+      "id": "244d937e-32d8-406b-8f96-b06d14db82bb",
+      "revision": 1031,
+      "kind": "run",
+      "itemId": "run-3fb30e25",
+      "title": "/root · running",
+      "author": "Root",
+      "source": "Actual native integration, reviews and bounded next assignment",
+      "createdAt": "2026-10-12T19:15:22.687Z"
+    },
+    {
+      "id": "66c062f9-1ad5-4d1e-80bf-2f640140b9a4",
+      "revision": 1032,
+      "kind": "run",
+      "itemId": "run-e112012c",
+      "title": "/root/audio_score · running",
+      "author": "Root",
+      "source": "Actual native integration, reviews and bounded next assignment",
+      "createdAt": "2026-10-12T19:15:22.717Z"
+    },
+    {
+      "id": "fbc9adbd-a3c7-4fe0-80b4-f7fbdadc0f32",
+      "revision": 1033,
+      "kind": "run",
+      "itemId": "run-9a5621ac",
+      "title": "/root/engine_fx · running",
+      "author": "Root",
+      "source": "Actual native integration, reviews and bounded next assignment",
+      "createdAt": "2026-10-12T19:15:22.750Z"
+    },
+    {
+      "id": "e5f8e286-c84b-4a4c-a131-fe1ceba86869",
+      "revision": 1034,
+      "kind": "run",
+      "itemId": "run-c2f523ee",
+      "title": "/root/audio_review · running",
+      "author": "Root",
+      "source": "Actual native integration, reviews and bounded next assignment",
+      "createdAt": "2026-10-12T19:15:22.779Z"
+    },
+    {
+      "id": "e00f8317-eb41-4586-b350-bc46b4884add",
+      "revision": 1035,
+      "kind": "run",
+      "itemId": "run-d46a55af",
+      "title": "Native Ion Wake presentation · running",
+      "author": "Codex audio_score",
+      "source": "Actual bounded native assignment and worktree inspection",
+      "createdAt": "2026-10-12T19:17:43.396Z"
+    },
+    {
+      "id": "329f2a47-68c0-4a8b-aa5d-582240678945",
+      "revision": 1036,
+      "kind": "task.update",
+      "itemId": "task-71611b9e",
+      "title": "Bounded actual room decline, code replacement and lock QA controls",
+      "author": "/root/audio_review",
+      "source": "Actual committed candidate, clean tracked tree and pinned raw focused command evidence",
+      "createdAt": "2026-10-12T19:18:25.976Z"
+    },
+    {
+      "id": "6ddb9a6a-9473-4001-8e62-2b1eb2fea3c7",
+      "revision": 1037,
+      "kind": "run",
+      "itemId": "run-07e8d380",
+      "title": "Private room negative QA implementation · completed",
+      "author": "/root/audio_review",
+      "source": "Actual author run completed and candidate handed off; acceptance remains pending",
+      "createdAt": "2026-10-12T19:18:26.000Z"
     }
   ],
   "runRecords": [
@@ -33557,6 +33894,182 @@
       "author": "Root",
       "source": "Actual independent review and bounded next assignment",
       "createdAt": "2026-10-12T18:59:18.462Z"
+    },
+    {
+      "id": "run-5695acbc",
+      "title": "Private room negative QA implementation · running",
+      "agentId": "/root/audio_review",
+      "agentLabel": "Private room negative QA implementation",
+      "state": "running",
+      "observedAt": "2026-10-12T19:00:36.617Z",
+      "taskIds": [
+        "task-71611b9e"
+      ],
+      "summary": "Implementation actually running in isolated codex/private-room-negative-qa from reviewed fbb8b1c. Prior Haven branch and ignored work retained. No listener/browser/native acceptance dispatched.",
+      "evidence": [
+        {
+          "label": "Actual bounded dispatch and isolated branch",
+          "kind": "note",
+          "details": "Root assigned task; git status was clean; git switch -c codex/private-room-negative-qa fbb8b1c640f0e11d495cf00c11bf557500701674 succeeded in galaxy-audio-refinement. Prior codex/haven-scene-fixtures remains at5df19ae."
+        }
+      ],
+      "author": "/root/audio_review",
+      "source": "Actual agent execution, clean tracked worktree and new isolated branch observed",
+      "createdAt": "2026-10-12T19:00:36.627Z"
+    },
+    {
+      "id": "run-3fb30e25",
+      "title": "/root · running",
+      "agentId": "/root",
+      "agentLabel": "/root",
+      "state": "running",
+      "observedAt": "2026-10-12T19:15:22.667Z",
+      "taskIds": [
+        "task-8508cfc5",
+        "task-b4cd8858"
+      ],
+      "summary": "Actually integrated nativeWake/strictbrowserboundary and both native test candidates, completed normaldualbuild and checks; curating/studio integration.",
+      "evidence": [
+        {
+          "label": "Integrated native checks, matching normal build and explicit remaining gates",
+          "kind": "artifact",
+          "path": "artifacts/native-wake-integration-20261013/README.md"
+        },
+        {
+          "label": "Actual source/build/check pins",
+          "kind": "artifact",
+          "path": "artifacts/native-wake-integration-20261013/verification.json"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual native integration, reviews and bounded next assignment",
+      "createdAt": "2026-10-12T19:15:22.687Z"
+    },
+    {
+      "id": "run-e112012c",
+      "title": "/root/audio_score · running",
+      "agentId": "/root/audio_score",
+      "agentLabel": "/root/audio_score",
+      "state": "running",
+      "observedAt": "2026-10-12T19:15:22.698Z",
+      "taskIds": [
+        "task-8508cfc5"
+      ],
+      "summary": "Actual cleanbranch setup from332ddd5; resolvedv2design and independentboxed-worldreview complete. Nativepage/replica/sharedquad implementation assigned; no result inferred.",
+      "evidence": [
+        {
+          "label": "Integrated native checks, matching normal build and explicit remaining gates",
+          "kind": "artifact",
+          "path": "artifacts/native-wake-integration-20261013/README.md"
+        },
+        {
+          "label": "Actual source/build/check pins",
+          "kind": "artifact",
+          "path": "artifacts/native-wake-integration-20261013/verification.json"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual native integration, reviews and bounded next assignment",
+      "createdAt": "2026-10-12T19:15:22.717Z"
+    },
+    {
+      "id": "run-9a5621ac",
+      "title": "/root/engine_fx · running",
+      "agentId": "/root/engine_fx",
+      "agentLabel": "/root/engine_fx",
+      "state": "running",
+      "observedAt": "2026-10-12T19:15:22.729Z",
+      "taskIds": [
+        "task-8508cfc5",
+        "task-16eff15f"
+      ],
+      "summary": "Actual independent Rootboundary/designreview frozen; next bounded nativecandidate/serializer review pipeline assigned. Native restoration gate already integrated.",
+      "evidence": [
+        {
+          "label": "Integrated native checks, matching normal build and explicit remaining gates",
+          "kind": "artifact",
+          "path": "artifacts/native-wake-integration-20261013/README.md"
+        },
+        {
+          "label": "Actual source/build/check pins",
+          "kind": "artifact",
+          "path": "artifacts/native-wake-integration-20261013/verification.json"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual native integration, reviews and bounded next assignment",
+      "createdAt": "2026-10-12T19:15:22.750Z"
+    },
+    {
+      "id": "run-c2f523ee",
+      "title": "/root/audio_review · running",
+      "agentId": "/root/audio_review",
+      "agentLabel": "/root/audio_review",
+      "state": "running",
+      "observedAt": "2026-10-12T19:15:22.762Z",
+      "taskIds": [
+        "task-71611b9e"
+      ],
+      "summary": "Actually implementing real negative room QA controls in isolatedfbb8branch; reportedfocused11+16+10checks. No candidateintegration/browser/live claim.",
+      "evidence": [
+        {
+          "label": "Integrated native checks, matching normal build and explicit remaining gates",
+          "kind": "artifact",
+          "path": "artifacts/native-wake-integration-20261013/README.md"
+        },
+        {
+          "label": "Actual source/build/check pins",
+          "kind": "artifact",
+          "path": "artifacts/native-wake-integration-20261013/verification.json"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual native integration, reviews and bounded next assignment",
+      "createdAt": "2026-10-12T19:15:22.779Z"
+    },
+    {
+      "id": "run-d46a55af",
+      "title": "Native Ion Wake presentation · running",
+      "agentId": "/root/audio_score",
+      "agentLabel": "Native Ion Wake presentation",
+      "state": "running",
+      "observedAt": "2026-10-12T19:17:43.333Z",
+      "taskIds": [
+        "task-8508cfc5"
+      ],
+      "summary": "Created clean codex/coop-wake-presentation from Root332ddd5. Independent DESIGN/v2 addendum review has no remaining blocker; beginning authorized native-only full trail snapshot/page and pixel-quad implementation. No build, test or runtime acceptance yet.",
+      "evidence": [
+        {
+          "label": "Observed clean native worktree baseline",
+          "kind": "note",
+          "details": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale at332ddd5ec0370e13ad346ea4ea988f35b61ca3e7; previous87de branch preserved; DESIGN fd85ae1 and ADDENDUM-v2 76790eca independently reviewed."
+        }
+      ],
+      "author": "Codex audio_score",
+      "source": "Actual bounded native assignment and worktree inspection",
+      "createdAt": "2026-10-12T19:17:43.396Z"
+    },
+    {
+      "id": "run-07e8d380",
+      "title": "Private room negative QA implementation · completed",
+      "agentId": "/root/audio_review",
+      "agentLabel": "Private room negative QA implementation",
+      "state": "completed",
+      "observedAt": "2026-10-12T19:18:25.991Z",
+      "taskIds": [
+        "task-71611b9e"
+      ],
+      "summary": "Authored candidate1b14bff frozen and handed off;11new+16existingWASM+10fifth checks pass. No listeners/browser/native negative acceptance. Task in review with acceptance criteria open.",
+      "evidence": [
+        {
+          "label": "Actual candidate completion with bounded evidence",
+          "kind": "note",
+          "details": "Commit and six exact source hashes pinned in isolated work/private-room-negative-implementation/source-pins.json;37focused tests passed,syntax/diff-check0. Original missing Git identity failure retained. Root owns independent review and real negative execution."
+        }
+      ],
+      "author": "/root/audio_review",
+      "source": "Actual author run completed and candidate handed off; acceptance remains pending",
+      "createdAt": "2026-10-12T19:18:26.000Z"
     }
   ],
   "phaseDescription": "Desktop-first Rust/WASM solo game and local Studio are implemented. Reviewed occupied-cell art, reproducible conversion, responsive native settings/icons and minimap, strict GitHub integration gates and source-backed Dev Bible are integrated. Natural campaign balance, human listening, owner-private update lifecycle and physical phones remain separate pending gates."

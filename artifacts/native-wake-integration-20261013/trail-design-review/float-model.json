@@ -1,0 +1,42 @@
+{
+  "scope": "Independent Python IEEE-754 f32 conversion model, not execution of a future native/browser wake validator",
+  "maximum_f32": 3.4000000953674316,
+  "values": [
+    {
+      "raw_f64": 1e-46,
+      "f32": 0.0,
+      "raw_bound_pass": true,
+      "f32_bound_pass": false
+    },
+    {
+      "raw_f64": 1.401298464324817e-45,
+      "f32": 1.401298464324817e-45,
+      "raw_bound_pass": true,
+      "f32_bound_pass": true
+    },
+    {
+      "raw_f64": 3.4,
+      "f32": 3.4000000953674316,
+      "raw_bound_pass": true,
+      "f32_bound_pass": true
+    },
+    {
+      "raw_f64": 3.4000000953674316,
+      "f32": 3.4000000953674316,
+      "raw_bound_pass": true,
+      "f32_bound_pass": true
+    },
+    {
+      "raw_f64": 3.4000001,
+      "f32": 3.4000000953674316,
+      "raw_bound_pass": false,
+      "f32_bound_pass": true
+    },
+    {
+      "raw_f64": 3.4000003,
+      "f32": 3.4000003337860107,
+      "raw_bound_pass": false,
+      "f32_bound_pass": false
+    }
+  ]
+}

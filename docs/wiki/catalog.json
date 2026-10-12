@@ -3974,7 +3974,8 @@
         {
           "title": "Current stage",
           "paragraphs": [
-            "Service/browser candidates and independent reviews are integrated into codex/testing. A real local host displayed 1/8, copied and replaced its code, locked joining, then stopped hosting and restored local progression. Both renderer menus were observed. This is not a new two-client approval, full eight-player, failed-ICE or forced-TURN gameplay pass; those gates remain open."
+            "Actual F4 compiled two-client WebGPU/WebGL2 loopback runs verify pending host acceptance before RTC, native admission/owned complete commits, movement/fire, host departure, distinct-session rejoin, guest leave and unchanged local saved-profile digests with complete cleanup. Eight actual clients, negative-case room flows, forced TURN and Internet remain separate gates.",
+            "The new332ddd5 normal build integrates ordinary native Ion Wake and a strict optional wake_evolution equipment boundary. Native tests and six real serializer fixtures pass; persistent host/guest trail publication/rendering and current ability RTC/AV remain under bounded implementation. Profile equality is separate from the rich native ECS/RNG restoration gate."
           ]
         }
       ],
@@ -3998,6 +3999,16 @@
           "path": "artifacts/haven-scenes-20261012/INTEGRATION.md",
           "label": "Current normal build and scene evidence",
           "role": "validation"
+        },
+        {
+          "path": "artifacts/private-room-live-20261013/README.md",
+          "label": "Actual two-renderer two-client room lifecycle",
+          "role": "bounded loopback validation"
+        },
+        {
+          "path": "artifacts/native-wake-integration-20261013/README.md",
+          "label": "New native Wake and restoration integration",
+          "role": "native/build evidence; presentation and RTC gaps explicit"
         }
       ],
       "related": [

@@ -1,0 +1,211 @@
+{
+  "version": 1,
+  "scope": "Independent source and design/addendum review; no runtime implementation/test/build/browser/RTC execution",
+  "native_source_base": "87de1f7afad1a53183fcca91e146c9a59ee012cd",
+  "author_design_sha256": "fd85ae1c87bcf7e44697bd2481aadccd6c924c0fe9b1349aa7e6ae455ca313b3",
+  "author_source_pins_sha256": "a65652f61c13ae635d13490ba4310f46d6cdf39769add81ff017718c61bc8a9b",
+  "author_addendum_sha256": "76790eca3f4560c5081c2154776c33e95b20c5e08b6c513e04a7fc937e148280",
+  "raw_and_canonical_semantics": "source snapshots are exact canonical Git blob bytes, raw author hashes are separately verified-source.json; all evidence hashes below are stored raw bytes",
+  "files": [
+    {
+      "path": "anchor-model.json",
+      "bytes": 414,
+      "sha256": "7f20778489d96c3dc642d23ef3aebb5bd0db8a463e660e1871dc1bc4dd9ce15c"
+    },
+    {
+      "path": "anchor-model.log",
+      "bytes": 414,
+      "sha256": "7f20778489d96c3dc642d23ef3aebb5bd0db8a463e660e1871dc1bc4dd9ce15c"
+    },
+    {
+      "path": "anchor-model.py",
+      "bytes": 755,
+      "sha256": "01f1d8065b09340fd39aaad7904c58b3a8537632f4f72db84aa6695e19b551ad"
+    },
+    {
+      "path": "author-design/ADDENDUM-v2-pins.json",
+      "bytes": 588,
+      "sha256": "98d77e3a875651e2fa093f7b1de2e53f6bdddfd9071b164809d89119c7d29ea4"
+    },
+    {
+      "path": "author-design/ADDENDUM-v2.md",
+      "bytes": 8287,
+      "sha256": "76790eca3f4560c5081c2154776c33e95b20c5e08b6c513e04a7fc937e148280"
+    },
+    {
+      "path": "author-design/DESIGN.md",
+      "bytes": 21230,
+      "sha256": "fd85ae1c87bcf7e44697bd2481aadccd6c924c0fe9b1349aa7e6ae455ca313b3"
+    },
+    {
+      "path": "author-design/fixture-size-observation.json",
+      "bytes": 508,
+      "sha256": "814ff060499d4c80c46e2162e56b65b6547c23385f3269f4eafb8f0af8c2b5dd"
+    },
+    {
+      "path": "author-design/inspect-fixture.mjs",
+      "bytes": 1032,
+      "sha256": "3f4e9d9f5b86eab4f2588bf6272742bcae6bfc4267a67cb13cc0945ae88f7868"
+    },
+    {
+      "path": "author-design/source-pins.json",
+      "bytes": 7303,
+      "sha256": "a65652f61c13ae635d13490ba4310f46d6cdf39769add81ff017718c61bc8a9b"
+    },
+    {
+      "path": "float-model.json",
+      "bytes": 1021,
+      "sha256": "865e3cc2e2e5a1bd9d60d2961001ec147bf728d110164353ae88224f2f690f04"
+    },
+    {
+      "path": "freeze-final.py",
+      "bytes": 4448,
+      "sha256": "268c7c86ac111dc7d37947d7633eb457e48f82864e5a60b05fdc2b2eb47a14e6"
+    },
+    {
+      "path": "pin-and-model.log",
+      "bytes": 965,
+      "sha256": "866df6d43e68c43a972da34460b04793a8786f17bbd24e7daec55c85daa0dd5a"
+    },
+    {
+      "path": "pin-and-model.py",
+      "bytes": 3034,
+      "sha256": "9ce67ac815421b9229e699228de983772713cc2b37f4e3c7c381bbd997aa544e"
+    },
+    {
+      "path": "refine-draft.py",
+      "bytes": 1570,
+      "sha256": "ed8bb38bfd1900e5ab0158973ad7841a148cf86375d8fbe5cbec85c46e50f437"
+    },
+    {
+      "path": "REVIEW-DRAFT.md",
+      "bytes": 8874,
+      "sha256": "f2ff95c74b2d33999ac3b53b914dced00f089e877d20a996acc73a3410b3948b"
+    },
+    {
+      "path": "REVIEW.md",
+      "bytes": 10281,
+      "sha256": "a3292f4ab276179f02734500b6720d1bc32f558c5d09a2e52e87b3cff18d1125"
+    },
+    {
+      "path": "serde-primary/number.rs",
+      "bytes": 25285,
+      "sha256": "70b83c36286f6c58123f544f27db2b54a1135f928fe33b08b521b2997773f862"
+    },
+    {
+      "path": "serde-primary/ser.rs",
+      "bytes": 28223,
+      "sha256": "11f2b7daa1eba826d4086d5497f73729478dd7647bff77deccde5e47b0f126f2"
+    },
+    {
+      "path": "source/apps/game/src/coop/controller.ts",
+      "bytes": 32533,
+      "sha256": "4966bf8ffcd8ca18125c9af9c710a7658cef61e28356fd01bc68ee50671dcb1f"
+    },
+    {
+      "path": "source/apps/game/src/coop/transport.ts",
+      "bytes": 36712,
+      "sha256": "10ead00d20e2e9fb5cb59a211b496ba98af59d962b8ebccb6d57138776d25d77"
+    },
+    {
+      "path": "source/apps/game/src/coop/wasm-ports.ts",
+      "bytes": 5689,
+      "sha256": "a7c9a1125ce2ca3f54acd1c5709e6e54fe497f65658002878fc904fed24b4384"
+    },
+    {
+      "path": "source/apps/game/src/coop/wire.ts",
+      "bytes": 19368,
+      "sha256": "a4d1c4ac96f7dcc02c035d8c078db7c65af79dfa2c3d6265a724f565256eb6a4"
+    },
+    {
+      "path": "source/crates/engine_core/src/frame.rs",
+      "bytes": 30850,
+      "sha256": "df5a43277139616481595160c2902172dfe4a902f0b0537b6bfe527288df32c4"
+    },
+    {
+      "path": "source/crates/game_core/src/co_op.rs",
+      "bytes": 51192,
+      "sha256": "88a05787c0eae07e9d8a8208a305bb9e2d3862773b77c733b8a0deb6bcf14eec"
+    },
+    {
+      "path": "source/crates/game_core/src/co_op_fx.rs",
+      "bytes": 7782,
+      "sha256": "711c5aebd8ff1639f682069a6c94b0cc29c436d38208a26fe02f83dd4eaf4cc8"
+    },
+    {
+      "path": "source/crates/game_core/src/co_op_fx_tests.rs",
+      "bytes": 21980,
+      "sha256": "0bc61c6b2dc50dd89212038507b48dfe6be9ec9930077aed506d4fa3d4cd7a73"
+    },
+    {
+      "path": "source/crates/game_core/src/co_op_publish.rs",
+      "bytes": 7851,
+      "sha256": "d6658330e942537435e668c05bad6089b6ec5570999b74f2d27c784c51862f3d"
+    },
+    {
+      "path": "source/crates/game_core/src/co_op_publish_tests.rs",
+      "bytes": 12233,
+      "sha256": "354f4983e841e3bbe60eb5e34d037ca64c7f96cf419f26ead0a4403c5ebc5aa3"
+    },
+    {
+      "path": "source/crates/game_core/src/co_op_replica.rs",
+      "bytes": 51287,
+      "sha256": "e7e6d93477b478dbca9c043db50a3a4737c07d8a845f115899a568bee1d35194"
+    },
+    {
+      "path": "source/crates/game_core/src/co_op_replica_tests.rs",
+      "bytes": 31433,
+      "sha256": "765cb4736dcd4d16ccd44fa292eda658747d5f69850821f0105aa8eed84c239e"
+    },
+    {
+      "path": "source/crates/game_core/src/co_op_wake.rs",
+      "bytes": 5321,
+      "sha256": "697bf704ab83b1d4d23a793279f2a954de6c870af03b5c8754684de5d430d43e"
+    },
+    {
+      "path": "source/crates/game_core/src/co_op_wake_tests.rs",
+      "bytes": 29839,
+      "sha256": "23c2e69e40593ca07325426890226e1b48cd278e38acdb58dc045cdf94f10fc6"
+    },
+    {
+      "path": "source/crates/game_core/src/lib.rs",
+      "bytes": 196705,
+      "sha256": "bb7b23f6ae237e7883e3dc6b6c218d90f2b1c8c18f7c721cccd7c5f4624db930"
+    },
+    {
+      "path": "source/crates/game_web/src/browser.rs",
+      "bytes": 39952,
+      "sha256": "73bf7a34054a75cf33799c33fe76991052eca0430544115a6f1519c272883907"
+    },
+    {
+      "path": "source/crates/game_web/src/co_op_bridge.rs",
+      "bytes": 7241,
+      "sha256": "b055a2ab09b1ab97d4accb94f40dd05d6801dd2c8d448130de71fca1f9d08c77"
+    },
+    {
+      "path": "source/crates/game_web/src/co_op_replica_bridge.rs",
+      "bytes": 7981,
+      "sha256": "76da224e970050e4d9d44ebe10a7233391943e91e62a93b5595206777f707192"
+    },
+    {
+      "path": "source/scripts/test/coop-nova-fx-wire.test.mjs",
+      "bytes": 3198,
+      "sha256": "8689960113dd5d3f79c7605c098452fcdbd8407920e58db36197414c18be2ec8"
+    },
+    {
+      "path": "source/scripts/test/fixtures/co-op-nova-fx/maximum-header.json",
+      "bytes": 87897,
+      "sha256": "2b6663d6bba50de8805cd67b23045b73c0aaeeea556b9496ce3f266294ebcd80"
+    },
+    {
+      "path": "verified-source.json",
+      "bytes": 8311,
+      "sha256": "2421ff598eaf55a40e1aca0d76a5a4ac5a302200420e69553414634dadfd98fe"
+    },
+    {
+      "path": "write-review.py",
+      "bytes": 8098,
+      "sha256": "4c166324b4b11c8b3df03da7733598fa29fb877debce280baa72da972ddefc93"
+    }
+  ]
+}

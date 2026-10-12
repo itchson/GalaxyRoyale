@@ -1,0 +1,23 @@
+{
+  "scope": "Independent source/recorded-evidence verification only; this reviewer did not rerun Node/native/build/WASM/browser/RTC",
+  "root_frozen_commit": "332ddd5ec0370e13ad346ea4ea988f35b61ca3e7",
+  "source_count": 18,
+  "recorded_node_tests": 21,
+  "recorded_native_serializer_tests": 1,
+  "recorded_final_wake_tests": 13,
+  "recorded_full_native_suites": {
+    "native-tests.log": {
+      "passed": 914,
+      "failed": 0,
+      "ignored": 17,
+      "result_records": 8
+    },
+    "native-tests-final.log": {
+      "passed": 914,
+      "failed": 0,
+      "ignored": 17,
+      "result_records": 8
+    }
+  },
+  "retained_clippy_failure": true
+}

@@ -1,0 +1,204 @@
+{
+  "version": 1,
+  "scope": "Independent read-only frozen Root source and actual recorded evidence verification only",
+  "root_frozen_commit": "332ddd5ec0370e13ad346ea4ea988f35b61ca3e7",
+  "source_pin_table": "verification.json",
+  "canonical_vs_raw": "source snapshots are exact Git blob bytes; verification.json separately records current working raw file bytes/hashes",
+  "files": [
+    {
+      "path": "author-fixtures/legacy.json",
+      "bytes": 184,
+      "sha256": "da5b43e9f803abd1cc5bd190f24fa84649225b2c225c74ec9327be86a7bde87f"
+    },
+    {
+      "path": "author-fixtures/ordinary-evolution-1.json",
+      "bytes": 200,
+      "sha256": "d3f4a0e6a4730d4f22f1b8e4419260ef1bdf21e1ad5ce4361efea65e5e96b374"
+    },
+    {
+      "path": "author-fixtures/ordinary-evolution-2.json",
+      "bytes": 219,
+      "sha256": "7f9070de794fa80aa8d65bf366b5f3df5eca5f5fcedcc1b9a7e4c082151288ab"
+    },
+    {
+      "path": "author-fixtures/ordinary-evolution-3.json",
+      "bytes": 219,
+      "sha256": "f4ee83c50d2ce8a4f8519e31aca5dbd8ea46b7c1adaed59c9ad73e39fbf76038"
+    },
+    {
+      "path": "author-fixtures/ordinary-evolution-4.json",
+      "bytes": 219,
+      "sha256": "ac6e0202bcdf92a945de671a4e9142e29e393cfce358ce9f108c0a73b9081f78"
+    },
+    {
+      "path": "author-fixtures/ordinary-evolution-5.json",
+      "bytes": 219,
+      "sha256": "cb454a4f25806e1a1a2fae3168028924b64190fa007d6390f7c3141f3b8cc9a1"
+    },
+    {
+      "path": "freeze-review.py",
+      "bytes": 7733,
+      "sha256": "3447f93d21c79c9018b513cc386e960f0823c5d1bbf6dfbfa159c8ab8ea8417d"
+    },
+    {
+      "path": "REVIEW.md",
+      "bytes": 6534,
+      "sha256": "fcc1cf70a7bdd5ec0ea1a9a4071279d8d390eb78a115f6afd11e144e1e9dd92e"
+    },
+    {
+      "path": "root-evidence/browser-boundary.log",
+      "bytes": 2687,
+      "sha256": "9b0a2f8ae2bc003dd0e93dee3e5b641e31941a7172a8906d2e98380238361e2f"
+    },
+    {
+      "path": "root-evidence/clippy-native-final.log",
+      "bytes": 265,
+      "sha256": "2f213ee41b71b7bfbb973afcdef2d2794f36bad381ce97bd3fc3d9459cf7c256"
+    },
+    {
+      "path": "root-evidence/clippy-native.log",
+      "bytes": 3245,
+      "sha256": "9edd10a3f3f25e4ab384234dc9336d4bf206f70efbb65695c492383927e33008"
+    },
+    {
+      "path": "root-evidence/export-fixtures.mjs",
+      "bytes": 2223,
+      "sha256": "353811ee5bc125f4e816dba46a1eb33441dbbe907a886c4f249676770c34d184"
+    },
+    {
+      "path": "root-evidence/fmt-final.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "root-evidence/native-tests-final.log",
+      "bytes": 99094,
+      "sha256": "399b5bc8f8aa0ed11570e8d43bdcf4e70357778a0fa079c3adf582b1cd4f106b"
+    },
+    {
+      "path": "root-evidence/native-tests.log",
+      "bytes": 99094,
+      "sha256": "2763e04a80f157ee54e128f1a5d328482572c223d4b45dac066b7a4bbdeee554"
+    },
+    {
+      "path": "root-evidence/native-wire.log",
+      "bytes": 2020,
+      "sha256": "1e3b9c4eaa46a3426f18afe2ac7df0fd836097fbf5addd66c13f41f81fad25f5"
+    },
+    {
+      "path": "root-evidence/typecheck-final.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "root-evidence/wake-final.log",
+      "bytes": 3460,
+      "sha256": "f457d77de2c73b3061711f4372326ffa08a826f088857964f64c3666d610c5b4"
+    },
+    {
+      "path": "source/apps/game/src/coop/controller.ts",
+      "bytes": 32533,
+      "sha256": "4966bf8ffcd8ca18125c9af9c710a7658cef61e28356fd01bc68ee50671dcb1f"
+    },
+    {
+      "path": "source/apps/game/src/coop/wasm-ports.ts",
+      "bytes": 5689,
+      "sha256": "a7c9a1125ce2ca3f54acd1c5709e6e54fe497f65658002878fc904fed24b4384"
+    },
+    {
+      "path": "source/apps/game/src/coop/wire.ts",
+      "bytes": 19750,
+      "sha256": "66978400c7eb7610f05f4dc27cb1dc289c7327fcea7b31403a7db4966a05e57e"
+    },
+    {
+      "path": "source/crates/game_core/src/co_op.rs",
+      "bytes": 51192,
+      "sha256": "88a05787c0eae07e9d8a8208a305bb9e2d3862773b77c733b8a0deb6bcf14eec"
+    },
+    {
+      "path": "source/crates/game_core/src/co_op_loadout.rs",
+      "bytes": 8962,
+      "sha256": "dcbb09adc2a97794ed01de19f1dfacd8e059f5d21523f88776baa6448da3ef99"
+    },
+    {
+      "path": "source/crates/game_core/src/co_op_wake.rs",
+      "bytes": 5299,
+      "sha256": "d956706475f0f311d4a049b36ba2d50927e6a3817852fbc3e7853765fdb250c4"
+    },
+    {
+      "path": "source/crates/game_core/src/co_op_wake_tests.rs",
+      "bytes": 29835,
+      "sha256": "ffddc1de0e5fc2a02d0b6628b80c151535d80a5d8b20d9583dea6f5d7978208f"
+    },
+    {
+      "path": "source/crates/game_web/src/co_op_bridge.rs",
+      "bytes": 7241,
+      "sha256": "b055a2ab09b1ab97d4accb94f40dd05d6801dd2c8d448130de71fca1f9d08c77"
+    },
+    {
+      "path": "source/scripts/test/coop-wake-loadout.test.mjs",
+      "bytes": 4884,
+      "sha256": "24733c4acff34272999982f600841990cc119361eb1cf771ee5661b17716d6c5"
+    },
+    {
+      "path": "source/scripts/test/fixtures/co-op-publication/capture.json",
+      "bytes": 1237,
+      "sha256": "748e7523a738dbe7de94f4ba0b7ce6f7f2deb289f86e420c38830510dac83b5f"
+    },
+    {
+      "path": "source/scripts/test/fixtures/co-op-wake-loadout/.gitattributes",
+      "bytes": 8,
+      "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da"
+    },
+    {
+      "path": "source/scripts/test/fixtures/co-op-wake-loadout/legacy.json",
+      "bytes": 184,
+      "sha256": "da5b43e9f803abd1cc5bd190f24fa84649225b2c225c74ec9327be86a7bde87f"
+    },
+    {
+      "path": "source/scripts/test/fixtures/co-op-wake-loadout/ordinary-evolution-1.json",
+      "bytes": 200,
+      "sha256": "d3f4a0e6a4730d4f22f1b8e4419260ef1bdf21e1ad5ce4361efea65e5e96b374"
+    },
+    {
+      "path": "source/scripts/test/fixtures/co-op-wake-loadout/ordinary-evolution-2.json",
+      "bytes": 219,
+      "sha256": "7f9070de794fa80aa8d65bf366b5f3df5eca5f5fcedcc1b9a7e4c082151288ab"
+    },
+    {
+      "path": "source/scripts/test/fixtures/co-op-wake-loadout/ordinary-evolution-3.json",
+      "bytes": 219,
+      "sha256": "f4ee83c50d2ce8a4f8519e31aca5dbd8ea46b7c1adaed59c9ad73e39fbf76038"
+    },
+    {
+      "path": "source/scripts/test/fixtures/co-op-wake-loadout/ordinary-evolution-4.json",
+      "bytes": 219,
+      "sha256": "ac6e0202bcdf92a945de671a4e9142e29e393cfce358ce9f108c0a73b9081f78"
+    },
+    {
+      "path": "source/scripts/test/fixtures/co-op-wake-loadout/ordinary-evolution-5.json",
+      "bytes": 219,
+      "sha256": "cb454a4f25806e1a1a2fae3168028924b64190fa007d6390f7c3141f3b8cc9a1"
+    },
+    {
+      "path": "source/scripts/test/fixtures/co-op-wake-loadout/provenance.json",
+      "bytes": 1862,
+      "sha256": "c926509f155bbf0b854d8520b4883cf3c2325e553c5a6bf6b682b2ea6438af4a"
+    },
+    {
+      "path": "verification.json",
+      "bytes": 10857,
+      "sha256": "75d64895a75ba1acabaf6680c5e476304f343de617cf0afb5fe6cbd4c92b3aa1"
+    },
+    {
+      "path": "verify.log",
+      "bytes": 674,
+      "sha256": "09600c514371cd1c189ab27ae4bee34d1c8f4dfb42a92df93b8b0a84c87b8600"
+    },
+    {
+      "path": "verify.py",
+      "bytes": 4760,
+      "sha256": "f0f3ebf1c0b01c083336b3a736053bb5eaee8b22ce632d9ffafe571ce78d8716"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+   Compiling engine_core v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\engine_core)
+   Compiling game_core v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\game_core)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 12.26s
+     Running unittests src\lib.rs (target\debug\deps\game_core-5b2032bfdcb8bcac.exe)
+
+running 1 test
+actual_legacy_export={"version":1,"selected_ship":0,"owned_ships":1,"patches":0,"royal_victory":false,"ship_xp":0,"hardware":[0,0,0,0,0,0],"slots":[null,null,null],"trained_starter":false,"relic_count":0}
+actual_wake_export_evolution_1={"version":1,"selected_ship":0,"owned_ships":1,"patches":0,"royal_victory":false,"ship_xp":0,"hardware":[0,0,0,0,0,0],"slots":[null,null,{"index":5,"rank":5}],"trained_starter":false,"relic_count":0}
+actual_wake_export_evolution_2={"version":1,"selected_ship":0,"owned_ships":1,"patches":0,"royal_victory":false,"ship_xp":0,"hardware":[0,0,0,0,0,0],"slots":[null,null,{"index":5,"rank":5}],"trained_starter":false,"relic_count":0,"wake_evolution":2}
+actual_wake_export_evolution_3={"version":1,"selected_ship":0,"owned_ships":1,"patches":0,"royal_victory":false,"ship_xp":0,"hardware":[0,0,0,0,0,0],"slots":[null,null,{"index":5,"rank":5}],"trained_starter":false,"relic_count":0,"wake_evolution":3}
+actual_wake_export_evolution_4={"version":1,"selected_ship":0,"owned_ships":1,"patches":0,"royal_victory":false,"ship_xp":0,"hardware":[0,0,0,0,0,0],"slots":[null,null,{"index":5,"rank":5}],"trained_starter":false,"relic_count":0,"wake_evolution":4}
+actual_wake_export_evolution_5={"version":1,"selected_ship":0,"owned_ships":1,"patches":0,"royal_victory":false,"ship_xp":0,"hardware":[0,0,0,0,0,0],"slots":[null,null,{"index":5,"rank":5}],"trained_starter":false,"relic_count":0,"wake_evolution":5}
+test co_op::wake_tests::wake_wire_exports_effect_claim_only_and_keeps_legacy_omission_bytes ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 541 filtered out; finished in 0.02s
+

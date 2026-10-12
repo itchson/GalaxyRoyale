@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "nativeSourceCommit": "87de1f7afad1a53183fcca91e146c9a59ee012cd",
+  "rootExecutionCommit": "0f81bbbcc7c4ec854fd93652c9980511b9d05ce2",
+  "nativeFunction": "Game::co_op_owned_loadout",
+  "nativeTest": "co_op::wake_tests::wake_wire_exports_effect_claim_only_and_keeps_legacy_omission_bytes",
+  "command": "cargo test --locked --offline -p game_core co_op::wake_tests::wake_wire_exports_effect_claim_only_and_keeps_legacy_omission_bytes -- --exact --nocapture",
+  "scope": "Actual Root native serializer lines, byte-agreed with separate author execution. Envelope supplied only by Node boundary test; no WASM/RTC or earned progression claim.",
+  "fixtureSetup": {
+    "legacy": "Profile::default()",
+    "ordinary": {
+      "storedRank": 5,
+      "shipXp": 0,
+      "nativeEffectiveRank": 1,
+      "naturallyEarned": false,
+      "evolutionOneExportOmitsOptional": true
+    }
+  },
+  "files": [
+    {
+      "file": "legacy.json",
+      "bytes": 184,
+      "sha256": "da5b43e9f803abd1cc5bd190f24fa84649225b2c225c74ec9327be86a7bde87f"
+    },
+    {
+      "file": "ordinary-evolution-1.json",
+      "bytes": 200,
+      "sha256": "d3f4a0e6a4730d4f22f1b8e4419260ef1bdf21e1ad5ce4361efea65e5e96b374"
+    },
+    {
+      "file": "ordinary-evolution-2.json",
+      "bytes": 219,
+      "sha256": "7f9070de794fa80aa8d65bf366b5f3df5eca5f5fcedcc1b9a7e4c082151288ab"
+    },
+    {
+      "file": "ordinary-evolution-3.json",
+      "bytes": 219,
+      "sha256": "f4ee83c50d2ce8a4f8519e31aca5dbd8ea46b7c1adaed59c9ad73e39fbf76038"
+    },
+    {
+      "file": "ordinary-evolution-4.json",
+      "bytes": 219,
+      "sha256": "ac6e0202bcdf92a945de671a4e9142e29e393cfce358ce9f108c0a73b9081f78"
+    },
+    {
+      "file": "ordinary-evolution-5.json",
+      "bytes": 219,
+      "sha256": "cb454a4f25806e1a1a2fae3168028924b64190fa007d6390f7c3141f3b8cc9a1"
+    }
+  ]
+}

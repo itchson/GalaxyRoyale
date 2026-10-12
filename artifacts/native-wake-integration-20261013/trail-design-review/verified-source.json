@@ -1,0 +1,168 @@
+{
+  "scope": "Independent raw byte and canonical Git pin verification only; no test/build/native/browser/RTC execution",
+  "frozen_base": "87de1f7afad1a53183fcca91e146c9a59ee012cd",
+  "sources": [
+    {
+      "path": "crates/game_core/src/co_op.rs",
+      "git_blob": "fb2e63b21aa300e9e797776ee0bd8a2ad8e93c02",
+      "git_bytes": 51192,
+      "git_sha256": "88a05787c0eae07e9d8a8208a305bb9e2d3862773b77c733b8a0deb6bcf14eec",
+      "raw_sha256": "0c143ea67a33f353f275bbf38c479bafd968843bd32fed22577a6d0919d391e3",
+      "snapshot": "source/crates/game_core/src/co_op.rs"
+    },
+    {
+      "path": "crates/game_core/src/co_op_wake.rs",
+      "git_blob": "209af19c77abb60d2dedb74eced0639ca075afda",
+      "git_bytes": 5321,
+      "git_sha256": "697bf704ab83b1d4d23a793279f2a954de6c870af03b5c8754684de5d430d43e",
+      "raw_sha256": "697bf704ab83b1d4d23a793279f2a954de6c870af03b5c8754684de5d430d43e",
+      "snapshot": "source/crates/game_core/src/co_op_wake.rs"
+    },
+    {
+      "path": "crates/game_core/src/co_op_wake_tests.rs",
+      "git_blob": "2c1a3dcd8b55a71363415305622e5e9163504f11",
+      "git_bytes": 29839,
+      "git_sha256": "23c2e69e40593ca07325426890226e1b48cd278e38acdb58dc045cdf94f10fc6",
+      "raw_sha256": "23c2e69e40593ca07325426890226e1b48cd278e38acdb58dc045cdf94f10fc6",
+      "snapshot": "source/crates/game_core/src/co_op_wake_tests.rs"
+    },
+    {
+      "path": "crates/game_core/src/lib.rs",
+      "git_blob": "4b43e47418bcc880ebd7df5f52277ebaf14d0a72",
+      "git_bytes": 196705,
+      "git_sha256": "bb7b23f6ae237e7883e3dc6b6c218d90f2b1c8c18f7c721cccd7c5f4624db930",
+      "raw_sha256": "e7997b5b90c3ac2f70ba12c2521480ee2123136b712274334f6e784b713b0636",
+      "snapshot": "source/crates/game_core/src/lib.rs"
+    },
+    {
+      "path": "crates/game_core/src/co_op_publish.rs",
+      "git_blob": "e9b89bf8d424cdd0c81ccfcf14107ba36308058c",
+      "git_bytes": 7851,
+      "git_sha256": "d6658330e942537435e668c05bad6089b6ec5570999b74f2d27c784c51862f3d",
+      "raw_sha256": "6c21184ed46db90ce992a74fc2699f1356210d474aa77f152c837a983de2a676",
+      "snapshot": "source/crates/game_core/src/co_op_publish.rs"
+    },
+    {
+      "path": "crates/game_core/src/co_op_publish_tests.rs",
+      "git_blob": "78362f9888d1f747b2535a98e0f361f2636bdd3d",
+      "git_bytes": 12233,
+      "git_sha256": "354f4983e841e3bbe60eb5e34d037ca64c7f96cf419f26ead0a4403c5ebc5aa3",
+      "raw_sha256": "c67dd8bbe722c444db981d244442b9cfd06cf575b0c89c34bdc38cd1a5eb7a66",
+      "snapshot": "source/crates/game_core/src/co_op_publish_tests.rs"
+    },
+    {
+      "path": "crates/game_core/src/co_op_replica.rs",
+      "git_blob": "a89e73939e9e1e74d824e7981b135b7ebac17ad3",
+      "git_bytes": 51287,
+      "git_sha256": "e7e6d93477b478dbca9c043db50a3a4737c07d8a845f115899a568bee1d35194",
+      "raw_sha256": "7c4cb24642efbfafaf09891c10570a7b51bd3689c2bd1407726d9d1c7027e82b",
+      "snapshot": "source/crates/game_core/src/co_op_replica.rs"
+    },
+    {
+      "path": "crates/game_core/src/co_op_replica_tests.rs",
+      "git_blob": "d98aedcdbe9d1326f96f5741751aabc94d9adc0d",
+      "git_bytes": 31433,
+      "git_sha256": "765cb4736dcd4d16ccd44fa292eda658747d5f69850821f0105aa8eed84c239e",
+      "raw_sha256": "81a684939df1cd1dafb74c80661a97063526d726f1e038b69e2a697b25f76573",
+      "snapshot": "source/crates/game_core/src/co_op_replica_tests.rs"
+    },
+    {
+      "path": "crates/game_core/src/co_op_fx.rs",
+      "git_blob": "9acec8732501c76291740f9623559c815cb5a376",
+      "git_bytes": 7782,
+      "git_sha256": "711c5aebd8ff1639f682069a6c94b0cc29c436d38208a26fe02f83dd4eaf4cc8",
+      "raw_sha256": "1290651c2a596d0af292e830b4f1e58ab17eeaf58645e04a38a437895b7db914",
+      "snapshot": "source/crates/game_core/src/co_op_fx.rs"
+    },
+    {
+      "path": "crates/game_core/src/co_op_fx_tests.rs",
+      "git_blob": "99b9b201c949895e2d8e7ed377350c4e26a80d04",
+      "git_bytes": 21980,
+      "git_sha256": "0bc61c6b2dc50dd89212038507b48dfe6be9ec9930077aed506d4fa3d4cd7a73",
+      "raw_sha256": "660b73086dfcc50a870cc83602ae860d3fa64354c9e47acec389840f17a6510e",
+      "snapshot": "source/crates/game_core/src/co_op_fx_tests.rs"
+    },
+    {
+      "path": "crates/game_web/src/browser.rs",
+      "git_blob": "7ebf94e2ab937dc91f645f56c264cc6208b092fb",
+      "git_bytes": 39952,
+      "git_sha256": "73bf7a34054a75cf33799c33fe76991052eca0430544115a6f1519c272883907",
+      "raw_sha256": "816f07c1de69ec99c590013e00584c5c3d7e11777fc7fbf1ecdc13467ac8ece3",
+      "snapshot": "source/crates/game_web/src/browser.rs"
+    },
+    {
+      "path": "crates/game_web/src/co_op_bridge.rs",
+      "git_blob": "2aec096426145a40cf9195a253e2bf6d19cc06de",
+      "git_bytes": 7241,
+      "git_sha256": "b055a2ab09b1ab97d4accb94f40dd05d6801dd2c8d448130de71fca1f9d08c77",
+      "raw_sha256": "b833bd5c39c691ee35dda2f23a15dd5bade3c501c6874138f01e461ee8675c00",
+      "snapshot": "source/crates/game_web/src/co_op_bridge.rs"
+    },
+    {
+      "path": "crates/game_web/src/co_op_replica_bridge.rs",
+      "git_blob": "fb2d6d54f46bd0adfd982b6ef990937a853cb8f9",
+      "git_bytes": 7981,
+      "git_sha256": "76da224e970050e4d9d44ebe10a7233391943e91e62a93b5595206777f707192",
+      "raw_sha256": "52ad216499b510cdecd83c9f24ac9ea620f16c79753e71388e0af2b91ff7e35b",
+      "snapshot": "source/crates/game_web/src/co_op_replica_bridge.rs"
+    },
+    {
+      "path": "crates/engine_core/src/frame.rs",
+      "git_blob": "d49a1d4d18dffa46b8eb979426bf8c56ca01d406",
+      "git_bytes": 30850,
+      "git_sha256": "df5a43277139616481595160c2902172dfe4a902f0b0537b6bfe527288df32c4",
+      "raw_sha256": "fb4833e130f836293479e108633653b9298a16453279d942a7354873c8b85afe",
+      "snapshot": "source/crates/engine_core/src/frame.rs"
+    },
+    {
+      "path": "apps/game/src/coop/wire.ts",
+      "git_blob": "351f27161064ee1197f79f5ddd38eadf5bae6132",
+      "git_bytes": 19368,
+      "git_sha256": "a4d1c4ac96f7dcc02c035d8c078db7c65af79dfa2c3d6265a724f565256eb6a4",
+      "raw_sha256": "147fe5344eb85be4a707e0d418c9ec70584389b75fab8a224ef7bdcf73c79152",
+      "snapshot": "source/apps/game/src/coop/wire.ts"
+    },
+    {
+      "path": "apps/game/src/coop/controller.ts",
+      "git_blob": "629ed7824f0635b9a6cbad9292aeed33a9baf849",
+      "git_bytes": 32533,
+      "git_sha256": "4966bf8ffcd8ca18125c9af9c710a7658cef61e28356fd01bc68ee50671dcb1f",
+      "raw_sha256": "4966bf8ffcd8ca18125c9af9c710a7658cef61e28356fd01bc68ee50671dcb1f",
+      "snapshot": "source/apps/game/src/coop/controller.ts"
+    },
+    {
+      "path": "apps/game/src/coop/wasm-ports.ts",
+      "git_blob": "82b21a7b3ec894ee217061b1d18dfc0932c47f52",
+      "git_bytes": 5689,
+      "git_sha256": "a7c9a1125ce2ca3f54acd1c5709e6e54fe497f65658002878fc904fed24b4384",
+      "raw_sha256": "29ad3da88442e8f015869b13ec28db0b0c546ff38f6d5ec7dac98f7b770fabff",
+      "snapshot": "source/apps/game/src/coop/wasm-ports.ts"
+    },
+    {
+      "path": "apps/game/src/coop/transport.ts",
+      "git_blob": "b5f335cbc15bdb2ef8c3d86bffbb7ad86118a5a2",
+      "git_bytes": 36712,
+      "git_sha256": "10ead00d20e2e9fb5cb59a211b496ba98af59d962b8ebccb6d57138776d25d77",
+      "raw_sha256": "10ead00d20e2e9fb5cb59a211b496ba98af59d962b8ebccb6d57138776d25d77",
+      "snapshot": "source/apps/game/src/coop/transport.ts"
+    },
+    {
+      "path": "scripts/test/coop-nova-fx-wire.test.mjs",
+      "git_blob": "46b84ab1ae044d786a136359a2eef29380f35ea0",
+      "git_bytes": 3198,
+      "git_sha256": "8689960113dd5d3f79c7605c098452fcdbd8407920e58db36197414c18be2ec8",
+      "raw_sha256": "153992eeed2fc7e15f8391cfc632ac1379d5f0bd1080a07be4a58230de3436ef",
+      "snapshot": "source/scripts/test/coop-nova-fx-wire.test.mjs"
+    },
+    {
+      "path": "scripts/test/fixtures/co-op-nova-fx/maximum-header.json",
+      "git_blob": "28064c7dbed8ad70ec505bab5db7aef8957eef98",
+      "git_bytes": 87897,
+      "git_sha256": "2b6663d6bba50de8805cd67b23045b73c0aaeeea556b9496ce3f266294ebcd80",
+      "raw_sha256": "2b6663d6bba50de8805cd67b23045b73c0aaeeea556b9496ce3f266294ebcd80",
+      "snapshot": "source/scripts/test/fixtures/co-op-nova-fx/maximum-header.json"
+    }
+  ],
+  "library_source_count": 2,
+  "design_evidence_count": 3
+}

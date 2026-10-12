@@ -1,0 +1,32 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.04s
+     Running unittests src\lib.rs (target\debug\deps\game_core-5b2032bfdcb8bcac.exe)
+
+running 24 tests
+test co_op_tests::export_actual_authority_serialization_fixtures ... ignored, explicit native serialization fixture export
+test co_op_tests::direct_admission_validates_ids_protocol_real_dock_and_living_body ... ok
+test co_op_tests::identified_host_license_acknowledgement_rejects_without_changing_saved_training ... ok
+test co_op_tests::guest_factory_identity_seed_and_stats_never_become_host_profile ... ok
+test co_op_tests::all_public_progression_routes_and_diagnostics_cannot_mutate_retained_save ... ok
+test co_op_tests::bounded_snapshot_pages_preserve_all_cells_and_reject_same_tick_admission_changes ... ok
+test co_op_tests::session_and_membership_tokens_close_replay_and_host_impersonation ... ok
+test co_op_tests::local_cue_tests::full_cue_queue_does_not_reclassify_an_earlier_local_hit ... ok
+actual bounded snapshot bytes=44828
+test co_op_tests::authority_fills_shared_projectile_cap_and_actual_payload_remains_under_transport_limit ... ok
+test co_op_tests::real_primary_shots_keep_owner_and_leaving_removes_only_that_members_shots ... ok
+test co_op_tests::hostile_swept_hit_damages_actual_guest_and_friendly_shots_never_pvp ... ok
+test co_op_tests::local_cue_tests::actual_guest_death_respawns_guest_without_host_local_death_or_hit_cues ... ok
+test co_op_tests::ordinary_enemy_chooses_nearest_living_unsafe_pilot_not_host ... ok
+test co_op_tests::two_players_destroy_one_shared_asteroid_cells_once_without_rewards_or_loot_grants ... ok
+test co_op_tests::local_cue_tests::actual_host_collision_keeps_local_death_and_player_hit_routing ... ok
+test co_op_tests::local_cue_tests::actual_guest_shield_hit_is_world_impact_and_does_not_change_host_vitals ... ok
+test co_op_tests::local_cue_tests::eight_simultaneous_respawns_emit_one_local_death_with_existing_effect_caps ... ok
+test co_op_tests::dead_guest_respawns_only_its_body_and_does_not_reset_host_or_profile ... ok
+test co_op_tests::invalid_input_does_not_consume_sequence_and_stale_controls_brake ... ok
+test co_op_tests::live_overlay_cancels_only_host_route_and_keeps_normal_momentum_decay ... ok
+test co_op_tests::solo_control_refactor_retains_current_cursor_thrust_cadence_and_quality_determinism ... ok
+test co_op_tests::end_host_leave_and_return_home_restore_exact_original_solo_instance ... ok
+test co_op_tests::two_and_eight_real_ecs_pilots_move_with_independent_exact_controls ... ok
+test co_op_tests::boxed_solo_world_restores_ecs_transients_and_deterministic_continuation_after_teardown ... ok
+
+test result: ok. 23 passed; 0 failed; 1 ignored; 0 measured; 505 filtered out; finished in 2.02s
+

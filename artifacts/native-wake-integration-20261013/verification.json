@@ -1,0 +1,930 @@
+{
+  "scope": "Actual Root integrated native and browser-boundary/build checks; not full co-op trail presentation or RTC/GPU shadow acceptance",
+  "identity": {
+    "head": "332ddd5ec0370e13ad346ea4ea988f35b61ca3e7",
+    "branch": "codex/testing",
+    "sourceHash": "1d1b0b5c01242290cce5c13c9a408a57cd5a7f7bf2911aec69ad82dd355b00df"
+  },
+  "receipt": {
+    "schemaVersion": 1,
+    "head": "332ddd5ec0370e13ad346ea4ea988f35b61ca3e7",
+    "branch": "codex/testing",
+    "sourceHash": "1d1b0b5c01242290cce5c13c9a408a57cd5a7f7bf2911aec69ad82dd355b00df",
+    "packageHash": "4a20017097bc3ae9702e0a3ef6b8ddd8ff4fdd4c66cd364dd66e483876446825",
+    "builtAt": "2026-10-12T19:09:50.356Z"
+  },
+  "native": {
+    "pass": 914,
+    "fail": 0,
+    "ignored": 17
+  },
+  "shell": {
+    "pass": 657,
+    "fail": 0,
+    "skip": 1,
+    "scope": "Before documentation-only Wiki update;20 Wiki cases rechecked afterward"
+  },
+  "wiki": {
+    "pass": 20,
+    "fail": 0
+  },
+  "boundary": {
+    "pass": 21,
+    "scope": "Actual Node validators/ports with native-derived values; fixture co_op_batch envelope"
+  },
+  "headlessWasm": {
+    "cases": 50,
+    "indexedDb": "fake-indexeddb",
+    "qaProbeExcludedFromRelease": true,
+    "scope": "Isolated serializer/SaveStore builds; no browser/GPU"
+  },
+  "clippy": [
+    "native workspace/all-targets",
+    "WebGPU WASM",
+    "WebGL2 WASM"
+  ],
+  "typecheck": 0,
+  "fmt": 0,
+  "pins": {
+    "root-checks/board.mjs": {
+      "bytes": 7723,
+      "sha256": "6d1f7ef2570f1db99734f3da1a16e9a2194ff47f85abf47ed01859e129e402e5"
+    },
+    "root-checks/browser-boundary.log": {
+      "bytes": 2687,
+      "sha256": "9b0a2f8ae2bc003dd0e93dee3e5b641e31941a7172a8906d2e98380238361e2f"
+    },
+    "root-checks/build.log": {
+      "bytes": 1478,
+      "sha256": "800c9dfc68718a6421cb04c098b71a3d30318ef7fdb6fd06cb7f0e4e6b03c350"
+    },
+    "root-checks/clippy-native-final.log": {
+      "bytes": 265,
+      "sha256": "2f213ee41b71b7bfbb973afcdef2d2794f36bad381ce97bd3fc3d9459cf7c256"
+    },
+    "root-checks/clippy-native.log": {
+      "bytes": 3245,
+      "sha256": "9edd10a3f3f25e4ab384234dc9336d4bf206f70efbb65695c492383927e33008"
+    },
+    "root-checks/clippy-webgl2.log": {
+      "bytes": 168,
+      "sha256": "0f490d882043a1a5f4a631d26373f89313714296c26489db4a7893ace4ed24ab"
+    },
+    "root-checks/clippy-webgpu.log": {
+      "bytes": 265,
+      "sha256": "06e999b62c16285074179803da3c3037414a0961dc25676336249c4865fc2b21"
+    },
+    "root-checks/curate.mjs": {
+      "bytes": 3862,
+      "sha256": "5c68ff39b1492ece1c4b14a56c15bf508d9959b8e7d316034533421028e9fb0c"
+    },
+    "root-checks/export-fixtures.mjs": {
+      "bytes": 2223,
+      "sha256": "353811ee5bc125f4e816dba46a1eb33441dbbe907a886c4f249676770c34d184"
+    },
+    "root-checks/fmt-final.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "root-checks/fmt.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "root-checks/native-tests-final.log": {
+      "bytes": 99094,
+      "sha256": "399b5bc8f8aa0ed11570e8d43bdcf4e70357778a0fa079c3adf582b1cd4f106b"
+    },
+    "root-checks/native-tests.log": {
+      "bytes": 99094,
+      "sha256": "2763e04a80f157ee54e128f1a5d328482572c223d4b45dac066b7a4bbdeee554"
+    },
+    "root-checks/native-wire.log": {
+      "bytes": 2020,
+      "sha256": "1e3b9c4eaa46a3426f18afe2ac7df0fd836097fbf5addd66c13f41f81fad25f5"
+    },
+    "root-checks/shell-final.log": {
+      "bytes": 72956,
+      "sha256": "cecbcd7636a271775cc096933128d137f816c5d2afa39f1e73ddf9d9399b6dce"
+    },
+    "root-checks/task-map.json": {
+      "bytes": 79,
+      "sha256": "90d27ae024518e1b6029dedc38b6062a42835930294404fccae540b803f20e00"
+    },
+    "root-checks/typecheck-final.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "root-checks/typecheck.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "root-checks/wake-final.log": {
+      "bytes": 3460,
+      "sha256": "f457d77de2c73b3061711f4372326ffa08a826f088857964f64c3666d610c5b4"
+    },
+    "root-checks/wasm-contract.log": {
+      "bytes": 1269,
+      "sha256": "f77ba099d636850652bf47b1766b8eb72d42c3069984053a1fdaa4d2f7264ba6"
+    },
+    "root-checks/wiki-checks.log": {
+      "bytes": 2331,
+      "sha256": "55089763ff4596f1504aa720399d2649b2bcf2071bd6dad838368203d19ada6d"
+    },
+    "native-author/baseline-pins.json": {
+      "bytes": 603,
+      "sha256": "198368c560c359ab5cbb5133bc8c6e5e690c823034024845b70a5dbeb7eb5e1b"
+    },
+    "native-author/baseline-reproduction.log": {
+      "bytes": 1150,
+      "sha256": "43ae24afc8f6d1f0b45bcef807cc204252ada754402f940a1625301f3e91a954"
+    },
+    "native-author/candidate-pins.json": {
+      "bytes": 2306,
+      "sha256": "5b416618161ad32d1c238997513174730d1a01901c943e44048f7c72b2179fe1"
+    },
+    "native-author/co-op-regression.log": {
+      "bytes": 17352,
+      "sha256": "c0d391af06ce3b4984e513d0ee0f3ca0f427d30dc1a7c33d866ad38f059b2e0d"
+    },
+    "native-author/diff-check.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "native-author/first-candidate.log": {
+      "bytes": 556,
+      "sha256": "a9290ebdb78ec47d65c4957d36656c4a357b080fbbe7e2eee8977f6d27e7f4a0"
+    },
+    "native-author/game-core-check.log": {
+      "bytes": 303,
+      "sha256": "49fe6955bf83fcde4d091a9d6d14a92f7ba2f89c9c4e2ad1a1512886b01f49c8"
+    },
+    "native-author/HANDOFF.md": {
+      "bytes": 8160,
+      "sha256": "f3e5a678e159a2a0019c63ca5a46b78440d44c981915ca87d4ac75fdd31637b8"
+    },
+    "native-author/toolchain.log": {
+      "bytes": 118,
+      "sha256": "d610180e0db8d52a3f319bdb44014f435ebffa2158eb82d91c72d1ec81c1cb2d"
+    },
+    "native-author/wake-tests-attempt-2.log": {
+      "bytes": 4006,
+      "sha256": "6d8dd44899848f14ed6af2030eb9947dcc54a9672f91a8af6e7dec7e546be262"
+    },
+    "native-author/wake-tests-attempt-3.log": {
+      "bytes": 3476,
+      "sha256": "0e3f52adb27fc61ac18478e7a2ac3c1bd83ab7a1f2223cc2898cf3712bd25a2c"
+    },
+    "native-author/wake-tests-attempt.log": {
+      "bytes": 6637,
+      "sha256": "78ed26c8da8958e6e68e56d55c4de9acf47b7aac09c8735e6a43bb92fb7946d3"
+    },
+    "native-author/wire-fixtures/legacy.json": {
+      "bytes": 184,
+      "sha256": "da5b43e9f803abd1cc5bd190f24fa84649225b2c225c74ec9327be86a7bde87f"
+    },
+    "native-author/wire-fixtures/ordinary-evolution-1.json": {
+      "bytes": 200,
+      "sha256": "d3f4a0e6a4730d4f22f1b8e4419260ef1bdf21e1ad5ce4361efea65e5e96b374"
+    },
+    "native-author/wire-fixtures/ordinary-evolution-2.json": {
+      "bytes": 219,
+      "sha256": "7f9070de794fa80aa8d65bf366b5f3df5eca5f5fcedcc1b9a7e4c082151288ab"
+    },
+    "native-author/wire-fixtures/ordinary-evolution-3.json": {
+      "bytes": 219,
+      "sha256": "f4ee83c50d2ce8a4f8519e31aca5dbd8ea46b7c1adaed59c9ad73e39fbf76038"
+    },
+    "native-author/wire-fixtures/ordinary-evolution-4.json": {
+      "bytes": 219,
+      "sha256": "ac6e0202bcdf92a945de671a4e9142e29e393cfce358ce9f108c0a73b9081f78"
+    },
+    "native-author/wire-fixtures/ordinary-evolution-5.json": {
+      "bytes": 219,
+      "sha256": "cb454a4f25806e1a1a2fae3168028924b64190fa007d6390f7c3141f3b8cc9a1"
+    },
+    "native-independent-review/MANIFEST.json": {
+      "bytes": 11893,
+      "sha256": "b0f9568675c964674c32df6374a2870abd2771fd1c020038994f05104e18a7ed"
+    },
+    "native-independent-review/REVIEW.md": {
+      "bytes": 7920,
+      "sha256": "18464778988e14143f46b0efa93d0dccd290883b1ec9451bd99f72125db0be88"
+    },
+    "native-independent-review/source/apps/game/src/coop/wire.ts": {
+      "bytes": 19368,
+      "sha256": "a4d1c4ac96f7dcc02c035d8c078db7c65af79dfa2c3d6265a724f565256eb6a4"
+    },
+    "native-independent-review/source/crates/game_core/src/bosses.rs": {
+      "bytes": 47224,
+      "sha256": "69194ae242129ccecef69ff3661369a784b12bd7fbcf60b64eda15b4642a4408"
+    },
+    "native-independent-review/source/crates/game_core/src/campaign.rs": {
+      "bytes": 22135,
+      "sha256": "6a5d90403e42a936edaac37f2a5f5668f40a925116d94b54c499a7cd6899ca65"
+    },
+    "native-independent-review/source/crates/game_core/src/campaign_runtime.rs": {
+      "bytes": 52483,
+      "sha256": "5f162091ac659352b97f12904388643460ebc4d6a4918b2fb062673518e6bf85"
+    },
+    "native-independent-review/source/crates/game_core/src/co_op.rs": {
+      "bytes": 51192,
+      "sha256": "88a05787c0eae07e9d8a8208a305bb9e2d3862773b77c733b8a0deb6bcf14eec"
+    },
+    "native-independent-review/source/crates/game_core/src/co_op_control.rs": {
+      "bytes": 3994,
+      "sha256": "ba0d2b8c07206f23be6e05c038ba175e1b20034a83b80999b2983ea305625f0d"
+    },
+    "native-independent-review/source/crates/game_core/src/co_op_fx.rs": {
+      "bytes": 7782,
+      "sha256": "711c5aebd8ff1639f682069a6c94b0cc29c436d38208a26fe02f83dd4eaf4cc8"
+    },
+    "native-independent-review/source/crates/game_core/src/co_op_loadout.rs": {
+      "bytes": 8962,
+      "sha256": "dcbb09adc2a97794ed01de19f1dfacd8e059f5d21523f88776baa6448da3ef99"
+    },
+    "native-independent-review/source/crates/game_core/src/co_op_publish.rs": {
+      "bytes": 7851,
+      "sha256": "d6658330e942537435e668c05bad6089b6ec5570999b74f2d27c784c51862f3d"
+    },
+    "native-independent-review/source/crates/game_core/src/co_op_replica.rs": {
+      "bytes": 51287,
+      "sha256": "e7e6d93477b478dbca9c043db50a3a4737c07d8a845f115899a568bee1d35194"
+    },
+    "native-independent-review/source/crates/game_core/src/co_op_wake.rs": {
+      "bytes": 5321,
+      "sha256": "697bf704ab83b1d4d23a793279f2a954de6c870af03b5c8754684de5d430d43e"
+    },
+    "native-independent-review/source/crates/game_core/src/co_op_wake_tests.rs": {
+      "bytes": 29839,
+      "sha256": "23c2e69e40593ca07325426890226e1b48cd278e38acdb58dc045cdf94f10fc6"
+    },
+    "native-independent-review/source/crates/game_core/src/lib.rs": {
+      "bytes": 196705,
+      "sha256": "bb7b23f6ae237e7883e3dc6b6c218d90f2b1c8c18f7c721cccd7c5f4624db930"
+    },
+    "native-independent-review/source/crates/game_core/src/regions.rs": {
+      "bytes": 36159,
+      "sha256": "0b47fb15446f24e31953c56d120e55bb544511a13bb63bdb83bb599a6a015a2a"
+    },
+    "native-independent-review/source/crates/game_core/src/ship_progression.rs": {
+      "bytes": 24832,
+      "sha256": "451e4e17bc3de83b815200fefc433b3f9f594e6cea1d4eaca54f127ec199e458"
+    },
+    "native-independent-review/source/crates/game_web/src/co_op_bridge.rs": {
+      "bytes": 7241,
+      "sha256": "b055a2ab09b1ab97d4accb94f40dd05d6801dd2c8d448130de71fca1f9d08c77"
+    },
+    "native-independent-review/verification.json": {
+      "bytes": 14428,
+      "sha256": "5bdf393be077f17181b85ff5b159ae4aa4037ab4c39f122945993e0175a3687d"
+    },
+    "native-independent-review/verify.log": {
+      "bytes": 756,
+      "sha256": "c72854e9dd309e47f5ba4a335e40799279e39acf97fc9731e8fcf6b080cf2db0"
+    },
+    "native-independent-review/verify.py": {
+      "bytes": 5404,
+      "sha256": "5adf94a7e801294ee418a78b45dd376c219b04c5004e08e2fc17eaeba1b34723"
+    },
+    "shadow-author/clippy-frozen-qualified.log": {
+      "bytes": 189,
+      "sha256": "560f6918a41a64f9b83dd614d38a4641b3e612e4855cda84d5043dcb185002e5"
+    },
+    "shadow-author/clippy-native-qualified.log": {
+      "bytes": 189,
+      "sha256": "36b72d1b1016dd62c1ae57e230c11c306552be0fd1a48cdd6cbf6ff64c62119a"
+    },
+    "shadow-author/dock-tests-final.log": {
+      "bytes": 1587,
+      "sha256": "8ad6ab96c83141efee818e84d187b33d8d585a5c85c5d90d96c6ed15f2e3d420"
+    },
+    "shadow-author/dock-tests-frozen.log": {
+      "bytes": 1587,
+      "sha256": "51e3e9af8bc28474f4cdee38f2d8daf46c207467c5d8c116204efbe34225eb9c"
+    },
+    "shadow-author/fmt-frozen.json": {
+      "bytes": 110,
+      "sha256": "f7ab1c5e79b63de979d3cccd377cb364cd6ae012a53362d0d551888c0026d645"
+    },
+    "shadow-author/fmt-result.json": {
+      "bytes": 110,
+      "sha256": "f7ab1c5e79b63de979d3cccd377cb364cd6ae012a53362d0d551888c0026d645"
+    },
+    "shadow-author/gap-final.log": {
+      "bytes": 810,
+      "sha256": "d0aee47aefef70e2d0ada5322a45c4096c1d19e885f159334b491c646bcea31c"
+    },
+    "shadow-author/gap-first.log": {
+      "bytes": 1119,
+      "sha256": "61f84939ca76978c7cb6665a5390bca1be712fe0d96532eec64e9918043e3b15"
+    },
+    "shadow-author/gap-frozen.log": {
+      "bytes": 810,
+      "sha256": "0e1c907aa69f796983db08fdb24298331ea6a0ec69b99e66c5a5303d7a5a59e2"
+    },
+    "shadow-author/HANDOFF.md": {
+      "bytes": 3616,
+      "sha256": "fe3b51a22e74b2ab94edc546c1287bca0b3f1cc982c5f34f315aaae24e44b799"
+    },
+    "shadow-author/MANIFEST.json": {
+      "bytes": 4832,
+      "sha256": "db9cde8e3b9eeadaade572ea106ac4f5de87f79c4ddd3de557ce2524cfb79a8e"
+    },
+    "shadow-author/runtime-source-equivalence.json": {
+      "bytes": 2045,
+      "sha256": "ee7e1eaef18710a33836a64afdcddaa841983af444aafd8f8b99866cb8e3997f"
+    },
+    "boxed-author/ADDENDUM-GUEST-CALLGRAPH.md": {
+      "bytes": 1974,
+      "sha256": "f9db1067f954a39ebf31611fcea28d907c19ebe707fa8de3a4c2c2c9cca4aede"
+    },
+    "boxed-author/callgraph-verification.log": {
+      "bytes": 549,
+      "sha256": "d4df0fc2de7bff85dd9759584d2bc008033cd8af0ee074a21e56210169229847"
+    },
+    "boxed-author/clarify-callgraph.py": {
+      "bytes": 3218,
+      "sha256": "1f1333689e8cf206cb241461b7adce60acb376ae52a5e40b906e671d4e1d87f2"
+    },
+    "boxed-author/clippy-final.log": {
+      "bytes": 191,
+      "sha256": "18d79688abb7f3c6e105699b5530519f6eff22edbf06d6dc444fcfbddca01325"
+    },
+    "boxed-author/clippy-native.log": {
+      "bytes": 191,
+      "sha256": "67d3ad19bd5fea61cc5fad31fa1e0e095a08771b3fc5bedf8e0d7de4f4b17672"
+    },
+    "boxed-author/co-op-final.log": {
+      "bytes": 2892,
+      "sha256": "a7d2864a47f6134401bde0618fa518996fe7e97cdc0bb0d3a78d5793e37025d2"
+    },
+    "boxed-author/co-op-regression.log": {
+      "bytes": 2774,
+      "sha256": "060e285ced8e3ad2cab972a6c26398099b6b045ae9b2dc922da784e7b4071ac6"
+    },
+    "boxed-author/diff-check.log": {
+      "bytes": 129,
+      "sha256": "d166b19b0d1850e0afb824e4b40090e3f49722408c030d74b9e9966b8a4c99f0"
+    },
+    "boxed-author/finalize-handoff.py": {
+      "bytes": 1237,
+      "sha256": "c79dd286666de24bbc89e6f044a0430f0daf1b1d5bc03af06a3413815d17b2f1"
+    },
+    "boxed-author/fmt-final.log": {
+      "bytes": 47,
+      "sha256": "de3f2c86d9fc9d51a0eae680fe08aa38c9f75f2084e0557432f1dca9565516f0"
+    },
+    "boxed-author/guest-bridge.log": {
+      "bytes": 946,
+      "sha256": "170dc03b52b295613a7bead605e2aef2e0e548b1600d2644c1397f0bbe34312f"
+    },
+    "boxed-author/HANDOFF.md": {
+      "bytes": 10489,
+      "sha256": "f5f6a16f371b675e9d1b111c73c59ae90a9902f64b50ad811b5cc1728de6c0f8"
+    },
+    "boxed-author/MANIFEST-CALLGRAPH-V2.json": {
+      "bytes": 719,
+      "sha256": "a2d0315411f40f0d52fa4f205c7c8ca82976b3077dc21cd5971cf02945edf112"
+    },
+    "boxed-author/MANIFEST.json": {
+      "bytes": 6487,
+      "sha256": "40dc134686b75ae0787d1ce8bf021c137c3e05612150b1f8118352c685cf41b7"
+    },
+    "boxed-author/native-final.log": {
+      "bytes": 510,
+      "sha256": "94be77a1fe000c63f9b15d0e8dbcbb75cd3f465a14c90dc0b8b4328db723d58c"
+    },
+    "boxed-author/native-first-exact.log": {
+      "bytes": 884,
+      "sha256": "9f6f2c81ef1682c148c0b81b957100c87a18f3194986aec36fa44b07585c41f8"
+    },
+    "boxed-author/native-first.log": {
+      "bytes": 398,
+      "sha256": "bcf0fabf74f1d4102da430bf3173a40df0df4c70aff09ce958b5facb9f8427e0"
+    },
+    "boxed-author/native-second.log": {
+      "bytes": 1056,
+      "sha256": "84fb3969bff84f4a3540361bcc2752858bfb0a2a54e60ba92d6db76af9658fb1"
+    },
+    "boxed-author/pin-source.py": {
+      "bytes": 2583,
+      "sha256": "f69b9fe6b7fed667e4e13fc4fe0b8381abb9b797440a9c2cf9ff4d92993c01fd"
+    },
+    "boxed-author/source/candidate/apps/game/src/coop/controller.ts": {
+      "bytes": 32533,
+      "sha256": "4966bf8ffcd8ca18125c9af9c710a7658cef61e28356fd01bc68ee50671dcb1f"
+    },
+    "boxed-author/source/candidate/apps/game/src/coop/wasm-ports.ts": {
+      "bytes": 5689,
+      "sha256": "a7c9a1125ce2ca3f54acd1c5709e6e54fe497f65658002878fc904fed24b4384"
+    },
+    "boxed-author/source/candidate/apps/game/src/main.ts": {
+      "bytes": 87756,
+      "sha256": "f290cdfb5f86c1e3f1c0ed6b943de031eec4f07dedfd9a0883b7ebeac3d1f0ee"
+    },
+    "boxed-author/source/candidate/crates/engine_core/src/frame.rs": {
+      "bytes": 30850,
+      "sha256": "df5a43277139616481595160c2902172dfe4a902f0b0537b6bfe527288df32c4"
+    },
+    "boxed-author/source/candidate/crates/engine_core/src/pixels.rs": {
+      "bytes": 21861,
+      "sha256": "b0ecc9e662f598de055e43517163917c182dcb1bee5300b0170f3b54c42559a8"
+    },
+    "boxed-author/source/candidate/crates/game_core/src/campaign.rs": {
+      "bytes": 22135,
+      "sha256": "6a5d90403e42a936edaac37f2a5f5668f40a925116d94b54c499a7cd6899ca65"
+    },
+    "boxed-author/source/candidate/crates/game_core/src/co_op.rs": {
+      "bytes": 50348,
+      "sha256": "a04675a4893555ce83de1455a680595307c8e9bf2abf98e4310ce18c89377911"
+    },
+    "boxed-author/source/candidate/crates/game_core/src/co_op_control.rs": {
+      "bytes": 3994,
+      "sha256": "ba0d2b8c07206f23be6e05c038ba175e1b20034a83b80999b2983ea305625f0d"
+    },
+    "boxed-author/source/candidate/crates/game_core/src/co_op_publish.rs": {
+      "bytes": 7851,
+      "sha256": "d6658330e942537435e668c05bad6089b6ec5570999b74f2d27c784c51862f3d"
+    },
+    "boxed-author/source/candidate/crates/game_core/src/co_op_replica.rs": {
+      "bytes": 51287,
+      "sha256": "e7e6d93477b478dbca9c043db50a3a4737c07d8a845f115899a568bee1d35194"
+    },
+    "boxed-author/source/candidate/crates/game_core/src/co_op_tests.rs": {
+      "bytes": 44542,
+      "sha256": "9389101baba16e2783b0a4df953e25f7b1e2d4c96661eb9ffa80a0b67de39010"
+    },
+    "boxed-author/source/candidate/crates/game_core/src/lib.rs": {
+      "bytes": 196705,
+      "sha256": "bb7b23f6ae237e7883e3dc6b6c218d90f2b1c8c18f7c721cccd7c5f4624db930"
+    },
+    "boxed-author/source/candidate/crates/game_web/src/browser.rs": {
+      "bytes": 39952,
+      "sha256": "73bf7a34054a75cf33799c33fe76991052eca0430544115a6f1519c272883907"
+    },
+    "boxed-author/source/candidate/crates/game_web/src/co_op_bridge.rs": {
+      "bytes": 7241,
+      "sha256": "b055a2ab09b1ab97d4accb94f40dd05d6801dd2c8d448130de71fca1f9d08c77"
+    },
+    "boxed-author/source/candidate/crates/game_web/src/co_op_replica_bridge.rs": {
+      "bytes": 7981,
+      "sha256": "76da224e970050e4d9d44ebe10a7233391943e91e62a93b5595206777f707192"
+    },
+    "boxed-author/source/root-5e4/apps/game/src/main.ts": {
+      "bytes": 87760,
+      "sha256": "af30ca9ee95092a9e8c501af71b6a00f61d5de104cf802080a55ae3a64ade3b2"
+    },
+    "boxed-author/source/root-5e4/crates/game_core/src/co_op_tests.rs": {
+      "bytes": 33125,
+      "sha256": "4267ae047998e2eeeecfb34428d2df665cdf1d0f91eac986136f059009977f4a"
+    },
+    "boxed-author/source-pins.json": {
+      "bytes": 7284,
+      "sha256": "a1b910695c032834586a21fb5caeea430eb2ca53a0518c9ab2e5a1c914345a8f"
+    },
+    "boxed-author/source-pins.log": {
+      "bytes": 877,
+      "sha256": "966f29d874536f73e4631b965b83d3d107319ec2e583669b9b5303b2c0a6cd91"
+    },
+    "boxed-author/verification.json": {
+      "bytes": 443,
+      "sha256": "8ee9a993283847630f554291fad1741e0dbc56fef265da83eccc70446726fcde"
+    },
+    "boxed-author/verification.log": {
+      "bytes": 443,
+      "sha256": "8ee9a993283847630f554291fad1741e0dbc56fef265da83eccc70446726fcde"
+    },
+    "boxed-author/verify.py": {
+      "bytes": 3678,
+      "sha256": "06c158de3ccd0eef3afe2501694967b38ea23cca1f45eb91367966ef29c2d56d"
+    },
+    "boxed-author/write-handoff.py": {
+      "bytes": 10318,
+      "sha256": "00d17c6bf44aef7cfe63e5924649e2386f19fe059a7ecd87b4ce308b95467251"
+    },
+    "boxed-independent-review/candidate.diff": {
+      "bytes": 12131,
+      "sha256": "dcdb9fdfc6cd4f3a2d678cfa80c3f5e584863243d07770bff923262906122e9e"
+    },
+    "boxed-independent-review/MANIFEST.json": {
+      "bytes": 941,
+      "sha256": "1cf992f737acee1ca04c84bd2b03ac1d4873d9bac3b39bae4e7487c4e142f564"
+    },
+    "boxed-independent-review/REVIEW.md": {
+      "bytes": 7640,
+      "sha256": "5707c2d0291ee4498d8b650f8f2fe928ef21299632eae0e7113c5f409af450ea"
+    },
+    "boxed-independent-review/verification.json": {
+      "bytes": 4908,
+      "sha256": "e0a5bddf085ac95a00942f09792c430de22061a46dc627414cd7d74e1af00b28"
+    },
+    "boxed-independent-review/verify-readonly.py": {
+      "bytes": 4270,
+      "sha256": "45fee0d6148e76e2b7f0b2d1a50d0e2b10a7afe093aa26fe4448675d570904e1"
+    },
+    "browser-boundary-review/author-fixtures/legacy.json": {
+      "bytes": 184,
+      "sha256": "da5b43e9f803abd1cc5bd190f24fa84649225b2c225c74ec9327be86a7bde87f"
+    },
+    "browser-boundary-review/author-fixtures/ordinary-evolution-1.json": {
+      "bytes": 200,
+      "sha256": "d3f4a0e6a4730d4f22f1b8e4419260ef1bdf21e1ad5ce4361efea65e5e96b374"
+    },
+    "browser-boundary-review/author-fixtures/ordinary-evolution-2.json": {
+      "bytes": 219,
+      "sha256": "7f9070de794fa80aa8d65bf366b5f3df5eca5f5fcedcc1b9a7e4c082151288ab"
+    },
+    "browser-boundary-review/author-fixtures/ordinary-evolution-3.json": {
+      "bytes": 219,
+      "sha256": "f4ee83c50d2ce8a4f8519e31aca5dbd8ea46b7c1adaed59c9ad73e39fbf76038"
+    },
+    "browser-boundary-review/author-fixtures/ordinary-evolution-4.json": {
+      "bytes": 219,
+      "sha256": "ac6e0202bcdf92a945de671a4e9142e29e393cfce358ce9f108c0a73b9081f78"
+    },
+    "browser-boundary-review/author-fixtures/ordinary-evolution-5.json": {
+      "bytes": 219,
+      "sha256": "cb454a4f25806e1a1a2fae3168028924b64190fa007d6390f7c3141f3b8cc9a1"
+    },
+    "browser-boundary-review/freeze-review.py": {
+      "bytes": 7733,
+      "sha256": "3447f93d21c79c9018b513cc386e960f0823c5d1bbf6dfbfa159c8ab8ea8417d"
+    },
+    "browser-boundary-review/MANIFEST.json": {
+      "bytes": 7431,
+      "sha256": "204ceb529a31102a2ae68cf6b58f7170790f7ec1f219be4fb317088ca851a664"
+    },
+    "browser-boundary-review/REVIEW.md": {
+      "bytes": 6534,
+      "sha256": "fcc1cf70a7bdd5ec0ea1a9a4071279d8d390eb78a115f6afd11e144e1e9dd92e"
+    },
+    "browser-boundary-review/root-evidence/browser-boundary.log": {
+      "bytes": 2687,
+      "sha256": "9b0a2f8ae2bc003dd0e93dee3e5b641e31941a7172a8906d2e98380238361e2f"
+    },
+    "browser-boundary-review/root-evidence/clippy-native-final.log": {
+      "bytes": 265,
+      "sha256": "2f213ee41b71b7bfbb973afcdef2d2794f36bad381ce97bd3fc3d9459cf7c256"
+    },
+    "browser-boundary-review/root-evidence/clippy-native.log": {
+      "bytes": 3245,
+      "sha256": "9edd10a3f3f25e4ab384234dc9336d4bf206f70efbb65695c492383927e33008"
+    },
+    "browser-boundary-review/root-evidence/export-fixtures.mjs": {
+      "bytes": 2223,
+      "sha256": "353811ee5bc125f4e816dba46a1eb33441dbbe907a886c4f249676770c34d184"
+    },
+    "browser-boundary-review/root-evidence/fmt-final.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "browser-boundary-review/root-evidence/native-tests-final.log": {
+      "bytes": 99094,
+      "sha256": "399b5bc8f8aa0ed11570e8d43bdcf4e70357778a0fa079c3adf582b1cd4f106b"
+    },
+    "browser-boundary-review/root-evidence/native-tests.log": {
+      "bytes": 99094,
+      "sha256": "2763e04a80f157ee54e128f1a5d328482572c223d4b45dac066b7a4bbdeee554"
+    },
+    "browser-boundary-review/root-evidence/native-wire.log": {
+      "bytes": 2020,
+      "sha256": "1e3b9c4eaa46a3426f18afe2ac7df0fd836097fbf5addd66c13f41f81fad25f5"
+    },
+    "browser-boundary-review/root-evidence/typecheck-final.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "browser-boundary-review/root-evidence/wake-final.log": {
+      "bytes": 3460,
+      "sha256": "f457d77de2c73b3061711f4372326ffa08a826f088857964f64c3666d610c5b4"
+    },
+    "browser-boundary-review/source/apps/game/src/coop/controller.ts": {
+      "bytes": 32533,
+      "sha256": "4966bf8ffcd8ca18125c9af9c710a7658cef61e28356fd01bc68ee50671dcb1f"
+    },
+    "browser-boundary-review/source/apps/game/src/coop/wasm-ports.ts": {
+      "bytes": 5689,
+      "sha256": "a7c9a1125ce2ca3f54acd1c5709e6e54fe497f65658002878fc904fed24b4384"
+    },
+    "browser-boundary-review/source/apps/game/src/coop/wire.ts": {
+      "bytes": 19750,
+      "sha256": "66978400c7eb7610f05f4dc27cb1dc289c7327fcea7b31403a7db4966a05e57e"
+    },
+    "browser-boundary-review/source/crates/game_core/src/co_op.rs": {
+      "bytes": 51192,
+      "sha256": "88a05787c0eae07e9d8a8208a305bb9e2d3862773b77c733b8a0deb6bcf14eec"
+    },
+    "browser-boundary-review/source/crates/game_core/src/co_op_loadout.rs": {
+      "bytes": 8962,
+      "sha256": "dcbb09adc2a97794ed01de19f1dfacd8e059f5d21523f88776baa6448da3ef99"
+    },
+    "browser-boundary-review/source/crates/game_core/src/co_op_wake.rs": {
+      "bytes": 5299,
+      "sha256": "d956706475f0f311d4a049b36ba2d50927e6a3817852fbc3e7853765fdb250c4"
+    },
+    "browser-boundary-review/source/crates/game_core/src/co_op_wake_tests.rs": {
+      "bytes": 29835,
+      "sha256": "ffddc1de0e5fc2a02d0b6628b80c151535d80a5d8b20d9583dea6f5d7978208f"
+    },
+    "browser-boundary-review/source/crates/game_web/src/co_op_bridge.rs": {
+      "bytes": 7241,
+      "sha256": "b055a2ab09b1ab97d4accb94f40dd05d6801dd2c8d448130de71fca1f9d08c77"
+    },
+    "browser-boundary-review/source/scripts/test/coop-wake-loadout.test.mjs": {
+      "bytes": 4884,
+      "sha256": "24733c4acff34272999982f600841990cc119361eb1cf771ee5661b17716d6c5"
+    },
+    "browser-boundary-review/source/scripts/test/fixtures/co-op-publication/capture.json": {
+      "bytes": 1237,
+      "sha256": "748e7523a738dbe7de94f4ba0b7ce6f7f2deb289f86e420c38830510dac83b5f"
+    },
+    "browser-boundary-review/source/scripts/test/fixtures/co-op-wake-loadout/.gitattributes": {
+      "bytes": 8,
+      "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da"
+    },
+    "browser-boundary-review/source/scripts/test/fixtures/co-op-wake-loadout/legacy.json": {
+      "bytes": 184,
+      "sha256": "da5b43e9f803abd1cc5bd190f24fa84649225b2c225c74ec9327be86a7bde87f"
+    },
+    "browser-boundary-review/source/scripts/test/fixtures/co-op-wake-loadout/ordinary-evolution-1.json": {
+      "bytes": 200,
+      "sha256": "d3f4a0e6a4730d4f22f1b8e4419260ef1bdf21e1ad5ce4361efea65e5e96b374"
+    },
+    "browser-boundary-review/source/scripts/test/fixtures/co-op-wake-loadout/ordinary-evolution-2.json": {
+      "bytes": 219,
+      "sha256": "7f9070de794fa80aa8d65bf366b5f3df5eca5f5fcedcc1b9a7e4c082151288ab"
+    },
+    "browser-boundary-review/source/scripts/test/fixtures/co-op-wake-loadout/ordinary-evolution-3.json": {
+      "bytes": 219,
+      "sha256": "f4ee83c50d2ce8a4f8519e31aca5dbd8ea46b7c1adaed59c9ad73e39fbf76038"
+    },
+    "browser-boundary-review/source/scripts/test/fixtures/co-op-wake-loadout/ordinary-evolution-4.json": {
+      "bytes": 219,
+      "sha256": "ac6e0202bcdf92a945de671a4e9142e29e393cfce358ce9f108c0a73b9081f78"
+    },
+    "browser-boundary-review/source/scripts/test/fixtures/co-op-wake-loadout/ordinary-evolution-5.json": {
+      "bytes": 219,
+      "sha256": "cb454a4f25806e1a1a2fae3168028924b64190fa007d6390f7c3141f3b8cc9a1"
+    },
+    "browser-boundary-review/source/scripts/test/fixtures/co-op-wake-loadout/provenance.json": {
+      "bytes": 1862,
+      "sha256": "c926509f155bbf0b854d8520b4883cf3c2325e553c5a6bf6b682b2ea6438af4a"
+    },
+    "browser-boundary-review/verification.json": {
+      "bytes": 10857,
+      "sha256": "75d64895a75ba1acabaf6680c5e476304f343de617cf0afb5fe6cbd4c92b3aa1"
+    },
+    "browser-boundary-review/verify.log": {
+      "bytes": 674,
+      "sha256": "09600c514371cd1c189ab27ae4bee34d1c8f4dfb42a92df93b8b0a84c87b8600"
+    },
+    "browser-boundary-review/verify.py": {
+      "bytes": 4760,
+      "sha256": "f0f3ebf1c0b01c083336b3a736053bb5eaee8b22ce632d9ffafe571ce78d8716"
+    },
+    "trail-design/ADDENDUM-v2-pins.json": {
+      "bytes": 588,
+      "sha256": "98d77e3a875651e2fa093f7b1de2e53f6bdddfd9071b164809d89119c7d29ea4"
+    },
+    "trail-design/ADDENDUM-v2.md": {
+      "bytes": 8287,
+      "sha256": "76790eca3f4560c5081c2154776c33e95b20c5e08b6c513e04a7fc937e148280"
+    },
+    "trail-design/DESIGN.md": {
+      "bytes": 21230,
+      "sha256": "fd85ae1c87bcf7e44697bd2481aadccd6c924c0fe9b1349aa7e6ae455ca313b3"
+    },
+    "trail-design/fixture-size-observation.json": {
+      "bytes": 508,
+      "sha256": "814ff060499d4c80c46e2162e56b65b6547c23385f3269f4eafb8f0af8c2b5dd"
+    },
+    "trail-design/inspect-fixture.mjs": {
+      "bytes": 1032,
+      "sha256": "3f4e9d9f5b86eab4f2588bf6272742bcae6bfc4267a67cb13cc0945ae88f7868"
+    },
+    "trail-design/source-pins.json": {
+      "bytes": 7303,
+      "sha256": "a65652f61c13ae635d13490ba4310f46d6cdf39769add81ff017718c61bc8a9b"
+    },
+    "trail-design-review/anchor-model.json": {
+      "bytes": 414,
+      "sha256": "7f20778489d96c3dc642d23ef3aebb5bd0db8a463e660e1871dc1bc4dd9ce15c"
+    },
+    "trail-design-review/anchor-model.log": {
+      "bytes": 414,
+      "sha256": "7f20778489d96c3dc642d23ef3aebb5bd0db8a463e660e1871dc1bc4dd9ce15c"
+    },
+    "trail-design-review/anchor-model.py": {
+      "bytes": 755,
+      "sha256": "01f1d8065b09340fd39aaad7904c58b3a8537632f4f72db84aa6695e19b551ad"
+    },
+    "trail-design-review/author-design/ADDENDUM-v2-pins.json": {
+      "bytes": 588,
+      "sha256": "98d77e3a875651e2fa093f7b1de2e53f6bdddfd9071b164809d89119c7d29ea4"
+    },
+    "trail-design-review/author-design/ADDENDUM-v2.md": {
+      "bytes": 8287,
+      "sha256": "76790eca3f4560c5081c2154776c33e95b20c5e08b6c513e04a7fc937e148280"
+    },
+    "trail-design-review/author-design/DESIGN.md": {
+      "bytes": 21230,
+      "sha256": "fd85ae1c87bcf7e44697bd2481aadccd6c924c0fe9b1349aa7e6ae455ca313b3"
+    },
+    "trail-design-review/author-design/fixture-size-observation.json": {
+      "bytes": 508,
+      "sha256": "814ff060499d4c80c46e2162e56b65b6547c23385f3269f4eafb8f0af8c2b5dd"
+    },
+    "trail-design-review/author-design/inspect-fixture.mjs": {
+      "bytes": 1032,
+      "sha256": "3f4e9d9f5b86eab4f2588bf6272742bcae6bfc4267a67cb13cc0945ae88f7868"
+    },
+    "trail-design-review/author-design/source-pins.json": {
+      "bytes": 7303,
+      "sha256": "a65652f61c13ae635d13490ba4310f46d6cdf39769add81ff017718c61bc8a9b"
+    },
+    "trail-design-review/float-model.json": {
+      "bytes": 1021,
+      "sha256": "865e3cc2e2e5a1bd9d60d2961001ec147bf728d110164353ae88224f2f690f04"
+    },
+    "trail-design-review/freeze-final.py": {
+      "bytes": 4448,
+      "sha256": "268c7c86ac111dc7d37947d7633eb457e48f82864e5a60b05fdc2b2eb47a14e6"
+    },
+    "trail-design-review/MANIFEST.json": {
+      "bytes": 7602,
+      "sha256": "b56fad498e2951926e79a7665141594d245b0dfbca77e2917ea677a7e331bbb9"
+    },
+    "trail-design-review/pin-and-model.log": {
+      "bytes": 965,
+      "sha256": "866df6d43e68c43a972da34460b04793a8786f17bbd24e7daec55c85daa0dd5a"
+    },
+    "trail-design-review/pin-and-model.py": {
+      "bytes": 3034,
+      "sha256": "9ce67ac815421b9229e699228de983772713cc2b37f4e3c7c381bbd997aa544e"
+    },
+    "trail-design-review/refine-draft.py": {
+      "bytes": 1570,
+      "sha256": "ed8bb38bfd1900e5ab0158973ad7841a148cf86375d8fbe5cbec85c46e50f437"
+    },
+    "trail-design-review/REVIEW-DRAFT.md": {
+      "bytes": 8874,
+      "sha256": "f2ff95c74b2d33999ac3b53b914dced00f089e877d20a996acc73a3410b3948b"
+    },
+    "trail-design-review/REVIEW.md": {
+      "bytes": 10281,
+      "sha256": "a3292f4ab276179f02734500b6720d1bc32f558c5d09a2e52e87b3cff18d1125"
+    },
+    "trail-design-review/serde-primary/number.rs": {
+      "bytes": 25285,
+      "sha256": "70b83c36286f6c58123f544f27db2b54a1135f928fe33b08b521b2997773f862"
+    },
+    "trail-design-review/serde-primary/ser.rs": {
+      "bytes": 28223,
+      "sha256": "11f2b7daa1eba826d4086d5497f73729478dd7647bff77deccde5e47b0f126f2"
+    },
+    "trail-design-review/source/apps/game/src/coop/controller.ts": {
+      "bytes": 32533,
+      "sha256": "4966bf8ffcd8ca18125c9af9c710a7658cef61e28356fd01bc68ee50671dcb1f"
+    },
+    "trail-design-review/source/apps/game/src/coop/transport.ts": {
+      "bytes": 36712,
+      "sha256": "10ead00d20e2e9fb5cb59a211b496ba98af59d962b8ebccb6d57138776d25d77"
+    },
+    "trail-design-review/source/apps/game/src/coop/wasm-ports.ts": {
+      "bytes": 5689,
+      "sha256": "a7c9a1125ce2ca3f54acd1c5709e6e54fe497f65658002878fc904fed24b4384"
+    },
+    "trail-design-review/source/apps/game/src/coop/wire.ts": {
+      "bytes": 19368,
+      "sha256": "a4d1c4ac96f7dcc02c035d8c078db7c65af79dfa2c3d6265a724f565256eb6a4"
+    },
+    "trail-design-review/source/crates/engine_core/src/frame.rs": {
+      "bytes": 30850,
+      "sha256": "df5a43277139616481595160c2902172dfe4a902f0b0537b6bfe527288df32c4"
+    },
+    "trail-design-review/source/crates/game_core/src/co_op.rs": {
+      "bytes": 51192,
+      "sha256": "88a05787c0eae07e9d8a8208a305bb9e2d3862773b77c733b8a0deb6bcf14eec"
+    },
+    "trail-design-review/source/crates/game_core/src/co_op_fx.rs": {
+      "bytes": 7782,
+      "sha256": "711c5aebd8ff1639f682069a6c94b0cc29c436d38208a26fe02f83dd4eaf4cc8"
+    },
+    "trail-design-review/source/crates/game_core/src/co_op_fx_tests.rs": {
+      "bytes": 21980,
+      "sha256": "0bc61c6b2dc50dd89212038507b48dfe6be9ec9930077aed506d4fa3d4cd7a73"
+    },
+    "trail-design-review/source/crates/game_core/src/co_op_publish.rs": {
+      "bytes": 7851,
+      "sha256": "d6658330e942537435e668c05bad6089b6ec5570999b74f2d27c784c51862f3d"
+    },
+    "trail-design-review/source/crates/game_core/src/co_op_publish_tests.rs": {
+      "bytes": 12233,
+      "sha256": "354f4983e841e3bbe60eb5e34d037ca64c7f96cf419f26ead0a4403c5ebc5aa3"
+    },
+    "trail-design-review/source/crates/game_core/src/co_op_replica.rs": {
+      "bytes": 51287,
+      "sha256": "e7e6d93477b478dbca9c043db50a3a4737c07d8a845f115899a568bee1d35194"
+    },
+    "trail-design-review/source/crates/game_core/src/co_op_replica_tests.rs": {
+      "bytes": 31433,
+      "sha256": "765cb4736dcd4d16ccd44fa292eda658747d5f69850821f0105aa8eed84c239e"
+    },
+    "trail-design-review/source/crates/game_core/src/co_op_wake.rs": {
+      "bytes": 5321,
+      "sha256": "697bf704ab83b1d4d23a793279f2a954de6c870af03b5c8754684de5d430d43e"
+    },
+    "trail-design-review/source/crates/game_core/src/co_op_wake_tests.rs": {
+      "bytes": 29839,
+      "sha256": "23c2e69e40593ca07325426890226e1b48cd278e38acdb58dc045cdf94f10fc6"
+    },
+    "trail-design-review/source/crates/game_core/src/lib.rs": {
+      "bytes": 196705,
+      "sha256": "bb7b23f6ae237e7883e3dc6b6c218d90f2b1c8c18f7c721cccd7c5f4624db930"
+    },
+    "trail-design-review/source/crates/game_web/src/browser.rs": {
+      "bytes": 39952,
+      "sha256": "73bf7a34054a75cf33799c33fe76991052eca0430544115a6f1519c272883907"
+    },
+    "trail-design-review/source/crates/game_web/src/co_op_bridge.rs": {
+      "bytes": 7241,
+      "sha256": "b055a2ab09b1ab97d4accb94f40dd05d6801dd2c8d448130de71fca1f9d08c77"
+    },
+    "trail-design-review/source/crates/game_web/src/co_op_replica_bridge.rs": {
+      "bytes": 7981,
+      "sha256": "76da224e970050e4d9d44ebe10a7233391943e91e62a93b5595206777f707192"
+    },
+    "trail-design-review/source/scripts/test/coop-nova-fx-wire.test.mjs": {
+      "bytes": 3198,
+      "sha256": "8689960113dd5d3f79c7605c098452fcdbd8407920e58db36197414c18be2ec8"
+    },
+    "trail-design-review/source/scripts/test/fixtures/co-op-nova-fx/maximum-header.json": {
+      "bytes": 87897,
+      "sha256": "2b6663d6bba50de8805cd67b23045b73c0aaeeea556b9496ce3f266294ebcd80"
+    },
+    "trail-design-review/verified-source.json": {
+      "bytes": 8311,
+      "sha256": "2421ff598eaf55a40e1aca0d76a5a4ac5a302200420e69553414634dadfd98fe"
+    },
+    "trail-design-review/write-review.py": {
+      "bytes": 8098,
+      "sha256": "4c166324b4b11c8b3df03da7733598fa29fb877debce280baa72da972ddefc93"
+    },
+    "integrated-source/apps/game/src/coop/wire.ts": {
+      "bytes": 19750,
+      "sha256": "66978400c7eb7610f05f4dc27cb1dc289c7327fcea7b31403a7db4966a05e57e"
+    },
+    "integrated-source/crates/game_core/src/co_op_wake.rs": {
+      "bytes": 5417,
+      "sha256": "4c7d2fabd32c1a18a4ba18919063eb88156dd893a68214b1f638deb28c836976"
+    },
+    "integrated-source/crates/game_core/src/co_op_wake_tests.rs": {
+      "bytes": 30613,
+      "sha256": "6fc2eceb448a7b949704844fa83495b0940c189c93e568c15b09601fb5700787"
+    },
+    "integrated-source/crates/game_core/src/co_op_tests.rs": {
+      "bytes": 45804,
+      "sha256": "c71f488df8ad8d5fa66b792f2601a1983188b35cf5dea7fcef753180055ae1af"
+    },
+    "integrated-source/crates/game_web/src/dock_art_tests.rs": {
+      "bytes": 26354,
+      "sha256": "fc32c25769a4c6ba2d4aec769df28f92334f0a231129c360e64a45afcd3bdc4d"
+    },
+    "integrated-source/scripts/test/coop-wake-loadout.test.mjs": {
+      "bytes": 4884,
+      "sha256": "24733c4acff34272999982f600841990cc119361eb1cf771ee5661b17716d6c5"
+    },
+    "native-fixtures/.gitattributes": {
+      "bytes": 8,
+      "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da"
+    },
+    "native-fixtures/legacy.json": {
+      "bytes": 184,
+      "sha256": "da5b43e9f803abd1cc5bd190f24fa84649225b2c225c74ec9327be86a7bde87f"
+    },
+    "native-fixtures/ordinary-evolution-1.json": {
+      "bytes": 200,
+      "sha256": "d3f4a0e6a4730d4f22f1b8e4419260ef1bdf21e1ad5ce4361efea65e5e96b374"
+    },
+    "native-fixtures/ordinary-evolution-2.json": {
+      "bytes": 219,
+      "sha256": "7f9070de794fa80aa8d65bf366b5f3df5eca5f5fcedcc1b9a7e4c082151288ab"
+    },
+    "native-fixtures/ordinary-evolution-3.json": {
+      "bytes": 219,
+      "sha256": "f4ee83c50d2ce8a4f8519e31aca5dbd8ea46b7c1adaed59c9ad73e39fbf76038"
+    },
+    "native-fixtures/ordinary-evolution-4.json": {
+      "bytes": 219,
+      "sha256": "ac6e0202bcdf92a945de671a4e9142e29e393cfce358ce9f108c0a73b9081f78"
+    },
+    "native-fixtures/ordinary-evolution-5.json": {
+      "bytes": 219,
+      "sha256": "cb454a4f25806e1a1a2fae3168028924b64190fa007d6390f7c3141f3b8cc9a1"
+    },
+    "native-fixtures/provenance.json": {
+      "bytes": 1862,
+      "sha256": "c926509f155bbf0b854d8520b4883cf3c2325e553c5a6bf6b682b2ea6438af4a"
+    }
+  }
+}

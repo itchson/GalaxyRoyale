@@ -1,0 +1,231 @@
+{
+  "scope": "Independent source/recorded-evidence verification only; this reviewer did not rerun Node/native/build/WASM/browser/RTC",
+  "root_frozen_commit": "332ddd5ec0370e13ad346ea4ea988f35b61ca3e7",
+  "source_count": 18,
+  "sources": [
+    {
+      "path": "apps/game/src/coop/wire.ts",
+      "git_blob": "61b7c8e0770ccc1f1e39b46c11a6ea43e5a1fc95",
+      "git_bytes": 19750,
+      "git_sha256": "66978400c7eb7610f05f4dc27cb1dc289c7327fcea7b31403a7db4966a05e57e",
+      "working_raw_bytes": 19750,
+      "working_raw_sha256": "66978400c7eb7610f05f4dc27cb1dc289c7327fcea7b31403a7db4966a05e57e",
+      "snapshot": "source/apps/game/src/coop/wire.ts"
+    },
+    {
+      "path": "apps/game/src/coop/wasm-ports.ts",
+      "git_blob": "82b21a7b3ec894ee217061b1d18dfc0932c47f52",
+      "git_bytes": 5689,
+      "git_sha256": "a7c9a1125ce2ca3f54acd1c5709e6e54fe497f65658002878fc904fed24b4384",
+      "working_raw_bytes": 5689,
+      "working_raw_sha256": "a7c9a1125ce2ca3f54acd1c5709e6e54fe497f65658002878fc904fed24b4384",
+      "snapshot": "source/apps/game/src/coop/wasm-ports.ts"
+    },
+    {
+      "path": "apps/game/src/coop/controller.ts",
+      "git_blob": "629ed7824f0635b9a6cbad9292aeed33a9baf849",
+      "git_bytes": 32533,
+      "git_sha256": "4966bf8ffcd8ca18125c9af9c710a7658cef61e28356fd01bc68ee50671dcb1f",
+      "working_raw_bytes": 33592,
+      "working_raw_sha256": "2f886539fa1532f136a9d23d3ec817abbd497183e972435db92afc7894926f6a",
+      "snapshot": "source/apps/game/src/coop/controller.ts"
+    },
+    {
+      "path": "crates/game_core/src/co_op_loadout.rs",
+      "git_blob": "1e08aa5dd2915f9c45fef0a5f2e81178e5410be9",
+      "git_bytes": 8962,
+      "git_sha256": "dcbb09adc2a97794ed01de19f1dfacd8e059f5d21523f88776baa6448da3ef99",
+      "working_raw_bytes": 9179,
+      "working_raw_sha256": "c7a80ea0bdb885ef0527af29c310444b6ad767e8ce35b7a2c15c00115f8acca4",
+      "snapshot": "source/crates/game_core/src/co_op_loadout.rs"
+    },
+    {
+      "path": "crates/game_core/src/co_op_wake.rs",
+      "git_blob": "aa277e09a2bd85f478bad46957118ce8a6088c80",
+      "git_bytes": 5299,
+      "git_sha256": "d956706475f0f311d4a049b36ba2d50927e6a3817852fbc3e7853765fdb250c4",
+      "working_raw_bytes": 5417,
+      "working_raw_sha256": "4c7d2fabd32c1a18a4ba18919063eb88156dd893a68214b1f638deb28c836976",
+      "snapshot": "source/crates/game_core/src/co_op_wake.rs"
+    },
+    {
+      "path": "crates/game_core/src/co_op_wake_tests.rs",
+      "git_blob": "75ab0817712cb7411176e90f912117b917018fdb",
+      "git_bytes": 29835,
+      "git_sha256": "ffddc1de0e5fc2a02d0b6628b80c151535d80a5d8b20d9583dea6f5d7978208f",
+      "working_raw_bytes": 30613,
+      "working_raw_sha256": "6fc2eceb448a7b949704844fa83495b0940c189c93e568c15b09601fb5700787",
+      "snapshot": "source/crates/game_core/src/co_op_wake_tests.rs"
+    },
+    {
+      "path": "crates/game_core/src/co_op.rs",
+      "git_blob": "fb2e63b21aa300e9e797776ee0bd8a2ad8e93c02",
+      "git_bytes": 51192,
+      "git_sha256": "88a05787c0eae07e9d8a8208a305bb9e2d3862773b77c733b8a0deb6bcf14eec",
+      "working_raw_bytes": 52610,
+      "working_raw_sha256": "0c143ea67a33f353f275bbf38c479bafd968843bd32fed22577a6d0919d391e3",
+      "snapshot": "source/crates/game_core/src/co_op.rs"
+    },
+    {
+      "path": "crates/game_web/src/co_op_bridge.rs",
+      "git_blob": "2aec096426145a40cf9195a253e2bf6d19cc06de",
+      "git_bytes": 7241,
+      "git_sha256": "b055a2ab09b1ab97d4accb94f40dd05d6801dd2c8d448130de71fca1f9d08c77",
+      "working_raw_bytes": 7241,
+      "working_raw_sha256": "b055a2ab09b1ab97d4accb94f40dd05d6801dd2c8d448130de71fca1f9d08c77",
+      "snapshot": "source/crates/game_web/src/co_op_bridge.rs"
+    },
+    {
+      "path": "scripts/test/coop-wake-loadout.test.mjs",
+      "git_blob": "ae46d8091ff44e40ef83aea75d9b76cf947c9bc9",
+      "git_bytes": 4884,
+      "git_sha256": "24733c4acff34272999982f600841990cc119361eb1cf771ee5661b17716d6c5",
+      "working_raw_bytes": 4884,
+      "working_raw_sha256": "24733c4acff34272999982f600841990cc119361eb1cf771ee5661b17716d6c5",
+      "snapshot": "source/scripts/test/coop-wake-loadout.test.mjs"
+    },
+    {
+      "path": "scripts/test/fixtures/co-op-publication/capture.json",
+      "git_blob": "9ad569f2e356a1a53869b69065de5a086dc9145d",
+      "git_bytes": 1237,
+      "git_sha256": "748e7523a738dbe7de94f4ba0b7ce6f7f2deb289f86e420c38830510dac83b5f",
+      "working_raw_bytes": 1238,
+      "working_raw_sha256": "74da327dfb2ac94f24dfcf267fd2ddd73a9771c69cd9938999d9da718f1bc15f",
+      "snapshot": "source/scripts/test/fixtures/co-op-publication/capture.json"
+    },
+    {
+      "path": "scripts/test/fixtures/co-op-wake-loadout/.gitattributes",
+      "git_blob": "fa1385d99a319b43c06f5309d1aae9fdd3adea46",
+      "git_bytes": 8,
+      "git_sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da",
+      "working_raw_bytes": 8,
+      "working_raw_sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da",
+      "snapshot": "source/scripts/test/fixtures/co-op-wake-loadout/.gitattributes"
+    },
+    {
+      "path": "scripts/test/fixtures/co-op-wake-loadout/provenance.json",
+      "git_blob": "79b62d701b6de1e311d49b468fc97f4ef25012f9",
+      "git_bytes": 1862,
+      "git_sha256": "c926509f155bbf0b854d8520b4883cf3c2325e553c5a6bf6b682b2ea6438af4a",
+      "working_raw_bytes": 1862,
+      "working_raw_sha256": "c926509f155bbf0b854d8520b4883cf3c2325e553c5a6bf6b682b2ea6438af4a",
+      "snapshot": "source/scripts/test/fixtures/co-op-wake-loadout/provenance.json"
+    },
+    {
+      "path": "scripts/test/fixtures/co-op-wake-loadout/legacy.json",
+      "git_blob": "3a53997326e5df79e7d0fd19fed67af5514f9b35",
+      "git_bytes": 184,
+      "git_sha256": "da5b43e9f803abd1cc5bd190f24fa84649225b2c225c74ec9327be86a7bde87f",
+      "working_raw_bytes": 184,
+      "working_raw_sha256": "da5b43e9f803abd1cc5bd190f24fa84649225b2c225c74ec9327be86a7bde87f",
+      "snapshot": "source/scripts/test/fixtures/co-op-wake-loadout/legacy.json"
+    },
+    {
+      "path": "scripts/test/fixtures/co-op-wake-loadout/ordinary-evolution-1.json",
+      "git_blob": "70db93988d39e2b5c0377c052842bb342cf06c7b",
+      "git_bytes": 200,
+      "git_sha256": "d3f4a0e6a4730d4f22f1b8e4419260ef1bdf21e1ad5ce4361efea65e5e96b374",
+      "working_raw_bytes": 200,
+      "working_raw_sha256": "d3f4a0e6a4730d4f22f1b8e4419260ef1bdf21e1ad5ce4361efea65e5e96b374",
+      "snapshot": "source/scripts/test/fixtures/co-op-wake-loadout/ordinary-evolution-1.json"
+    },
+    {
+      "path": "scripts/test/fixtures/co-op-wake-loadout/ordinary-evolution-2.json",
+      "git_blob": "82d6fc6c13f8c0e15d41e8dedef3af2545a70d98",
+      "git_bytes": 219,
+      "git_sha256": "7f9070de794fa80aa8d65bf366b5f3df5eca5f5fcedcc1b9a7e4c082151288ab",
+      "working_raw_bytes": 219,
+      "working_raw_sha256": "7f9070de794fa80aa8d65bf366b5f3df5eca5f5fcedcc1b9a7e4c082151288ab",
+      "snapshot": "source/scripts/test/fixtures/co-op-wake-loadout/ordinary-evolution-2.json"
+    },
+    {
+      "path": "scripts/test/fixtures/co-op-wake-loadout/ordinary-evolution-3.json",
+      "git_blob": "cfd33aed27431901b3823a44bc18ad9c0599feca",
+      "git_bytes": 219,
+      "git_sha256": "f4ee83c50d2ce8a4f8519e31aca5dbd8ea46b7c1adaed59c9ad73e39fbf76038",
+      "working_raw_bytes": 219,
+      "working_raw_sha256": "f4ee83c50d2ce8a4f8519e31aca5dbd8ea46b7c1adaed59c9ad73e39fbf76038",
+      "snapshot": "source/scripts/test/fixtures/co-op-wake-loadout/ordinary-evolution-3.json"
+    },
+    {
+      "path": "scripts/test/fixtures/co-op-wake-loadout/ordinary-evolution-4.json",
+      "git_blob": "75957cf6ed253902186a37079e7f49df4eee3e2e",
+      "git_bytes": 219,
+      "git_sha256": "ac6e0202bcdf92a945de671a4e9142e29e393cfce358ce9f108c0a73b9081f78",
+      "working_raw_bytes": 219,
+      "working_raw_sha256": "ac6e0202bcdf92a945de671a4e9142e29e393cfce358ce9f108c0a73b9081f78",
+      "snapshot": "source/scripts/test/fixtures/co-op-wake-loadout/ordinary-evolution-4.json"
+    },
+    {
+      "path": "scripts/test/fixtures/co-op-wake-loadout/ordinary-evolution-5.json",
+      "git_blob": "80b4116c4ed0744d33b67c6e5d128362ce229c00",
+      "git_bytes": 219,
+      "git_sha256": "cb454a4f25806e1a1a2fae3168028924b64190fa007d6390f7c3141f3b8cc9a1",
+      "working_raw_bytes": 219,
+      "working_raw_sha256": "cb454a4f25806e1a1a2fae3168028924b64190fa007d6390f7c3141f3b8cc9a1",
+      "snapshot": "source/scripts/test/fixtures/co-op-wake-loadout/ordinary-evolution-5.json"
+    }
+  ],
+  "actual_fixture_agreement": [
+    {
+      "file": "legacy.json",
+      "actual_root_serializer_line": "actual_legacy_export",
+      "bytes": 184,
+      "sha256": "da5b43e9f803abd1cc5bd190f24fa84649225b2c225c74ec9327be86a7bde87f",
+      "root_final_wake_run_and_author_byte_equal": true
+    },
+    {
+      "file": "ordinary-evolution-1.json",
+      "actual_root_serializer_line": "actual_wake_export_evolution_1",
+      "bytes": 200,
+      "sha256": "d3f4a0e6a4730d4f22f1b8e4419260ef1bdf21e1ad5ce4361efea65e5e96b374",
+      "root_final_wake_run_and_author_byte_equal": true
+    },
+    {
+      "file": "ordinary-evolution-2.json",
+      "actual_root_serializer_line": "actual_wake_export_evolution_2",
+      "bytes": 219,
+      "sha256": "7f9070de794fa80aa8d65bf366b5f3df5eca5f5fcedcc1b9a7e4c082151288ab",
+      "root_final_wake_run_and_author_byte_equal": true
+    },
+    {
+      "file": "ordinary-evolution-3.json",
+      "actual_root_serializer_line": "actual_wake_export_evolution_3",
+      "bytes": 219,
+      "sha256": "f4ee83c50d2ce8a4f8519e31aca5dbd8ea46b7c1adaed59c9ad73e39fbf76038",
+      "root_final_wake_run_and_author_byte_equal": true
+    },
+    {
+      "file": "ordinary-evolution-4.json",
+      "actual_root_serializer_line": "actual_wake_export_evolution_4",
+      "bytes": 219,
+      "sha256": "ac6e0202bcdf92a945de671a4e9142e29e393cfce358ce9f108c0a73b9081f78",
+      "root_final_wake_run_and_author_byte_equal": true
+    },
+    {
+      "file": "ordinary-evolution-5.json",
+      "actual_root_serializer_line": "actual_wake_export_evolution_5",
+      "bytes": 219,
+      "sha256": "cb454a4f25806e1a1a2fae3168028924b64190fa007d6390f7c3141f3b8cc9a1",
+      "root_final_wake_run_and_author_byte_equal": true
+    }
+  ],
+  "recorded_node_tests": 21,
+  "recorded_native_serializer_tests": 1,
+  "recorded_final_wake_tests": 13,
+  "recorded_full_native_suites": {
+    "native-tests.log": {
+      "passed": 914,
+      "failed": 0,
+      "ignored": 17,
+      "result_records": 8
+    },
+    "native-tests-final.log": {
+      "passed": 914,
+      "failed": 0,
+      "ignored": 17,
+      "result_records": 8
+    }
+  },
+  "retained_clippy_failure": true
+}
