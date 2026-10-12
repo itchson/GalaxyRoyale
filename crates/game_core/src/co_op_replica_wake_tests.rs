@@ -3,6 +3,9 @@ use super::*;
 use crate::co_op_wake_fx::{MAX_PAGE_BYTES, MAX_POINTS, POSITION_LIMIT, Sample, WakePage};
 
 fn wake_fixture(players: u32) -> (Game, u32) {
+    wake_fixture_with_world(players, false)
+}
+fn wake_fixture_with_world(players: u32, retain_world: bool) -> (Game, u32) {
     let mut profile =
         crate::identity::create_profile("talo", "hugo", "pan", "0123456789abcdef").unwrap();
     profile.seed = 812345;
@@ -43,15 +46,17 @@ fn wake_fixture(players: u32) -> (Game, u32) {
             epoch = a.epoch;
         }
     }
-    let remove: Vec<_> = game
-        .world
-        .query::<(hecs::Entity, Option<&co_op::Pilot>)>()
-        .iter()
-        .filter(|(_, p)| p.is_none())
-        .map(|(e, _)| e)
-        .collect();
-    for e in remove {
-        game.world.despawn(e).unwrap();
+    if !retain_world {
+        let remove: Vec<_> = game
+            .world
+            .query::<(hecs::Entity, Option<&co_op::Pilot>)>()
+            .iter()
+            .filter(|(_, p)| p.is_none())
+            .map(|(e, _)| e)
+            .collect();
+        for e in remove {
+            game.world.despawn(e).unwrap();
+        }
     }
     game.spawn_timer = 10000.0;
     let pilots: Vec<_> = game
@@ -389,7 +394,7 @@ fn raw_value_number_bounds_and_canonical_short_spellings_agree() {
 
 #[test]
 fn native_edge_stamp_keeps_legal_rear_anchor_halo() {
-    let (mut game, epoch) = wake_fixture(2);
+    let (mut game, epoch) = wake_fixture_with_world(2, true);
     let e = game
         .world
         .query::<(hecs::Entity, &co_op::Pilot)>()
@@ -416,19 +421,19 @@ fn native_edge_stamp_keeps_legal_rear_anchor_halo() {
     )
     .unwrap();
     game.tick_co_op(id(100)).unwrap();
-    // Existing chunk objects beyond WORLD_LIMIT fail the older entity DTO.
-    // Isolate this actual birth-anchor test without changing those bounds.
-    let remove: Vec<_> = game
-        .world
-        .query::<(hecs::Entity, Option<&co_op::Pilot>)>()
-        .iter()
-        .filter(|(_, p)| p.is_none())
-        .map(|(e, _)| e)
-        .collect();
-    for e in remove {
-        game.world.despawn(e).unwrap();
-    }
+    // Exercise the integrated wider geometry and narrower Wake halo together.
+    // Keep all actual initial and streamed bodies, including outlying rocks.
     let (data, page) = wake_capture(&mut game);
+    let outside = data
+        .entities
+        .iter()
+        .flat_map(|page| &page.entities)
+        .filter(|row| row.kind == "asteroid" && row.position.iter().any(|v| v.abs() > WORLD_LIMIT))
+        .count();
+    assert!(
+        outside > 0,
+        "fixture must include real outlying chunk geometry"
+    );
     let edge = page
         .points
         .iter()
@@ -438,7 +443,35 @@ fn native_edge_stamp_keeps_legal_rear_anchor_halo() {
     assert_eq!(f64::from(POSITION_LIMIT), 1_000_014.0);
     let mut r = replica(epoch);
     transfer(&mut r, &data, &page, true);
-    println!("actual_native_edge_rear_anchor_x={}", edge.position[0]);
+    assert_eq!(
+        r.scene().unwrap().entities.len(),
+        data.header.counts.entities
+    );
+    for row in data.entities.iter().flat_map(|page| &page.entities) {
+        let (entity, body) = r
+            .scene()
+            .unwrap()
+            .entities
+            .iter()
+            .find(|(entity, _)| entity.id == row.id)
+            .unwrap();
+        assert_eq!(entity.position, row.position);
+        assert_eq!(body_signature(body), row.body_signature);
+    }
+    let (warm, warm_page) = wake_capture(&mut game);
+    transfer(&mut r, &warm, &warm_page, false);
+    assert_eq!(
+        r.scene().unwrap().entities.len(),
+        data.header.counts.entities
+    );
+    assert_eq!(r.scene().unwrap().wake.visible().count(), page.points.len());
+    println!(
+        "actual_native_edge_rear_anchor_x={} retained_entities={} outlying_asteroids={} cache_warm_points={}",
+        edge.position[0],
+        data.header.counts.entities,
+        outside,
+        warm_page.points.len()
+    );
 }
 
 #[test]
