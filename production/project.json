@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 1092,
+  "revision": 1105,
   "name": "Galaxy Royale",
   "phase": "Playable solo slice → content and validation",
-  "updatedAt": "2026-10-12T21:55:34.801Z",
+  "updatedAt": "2026-10-12T22:05:36.635Z",
   "tasks": [
     {
       "id": "studio",
@@ -8985,17 +8985,17 @@
       "description": "Actual32×32/426cellDart contact has saturated red/purple interior with weaker armor/recess/instrument hierarchy than approved PANhub/RAICHO materials. Author one reproducible native-grid color/cluster candidate, retain everyoccupiedbit and animatedpalette-indexsites6/4/33, allotheratlasdata unchanged. Root reviews actualnative+24pxcontacts; higherresolutionpresentation is a separate followup.",
       "department": "Native pixel art",
       "owner": "/root/audio_review",
-      "status": "active",
+      "status": "review",
       "priority": "normal",
       "dependencies": [],
       "acceptanceCriteria": [
         {
           "text": "Single-asset authored source and exact reproducible PNG→pack→atlas conversion, allotheratlasbytes retained.",
-          "met": false
+          "met": true
         },
         {
           "text": "Real nativePixelBody/FrameBuilder contacts visibly improve material hierarchy while mask/animation roles stay unchanged.",
-          "met": false
+          "met": true
         },
         {
           "text": "Independent review, appropriate checks and Root coherent normalbuild recorded.",
@@ -9007,12 +9007,144 @@
           "label": "Actual contact-sheet inspection and scoped file assignment",
           "kind": "note",
           "details": "Root inspected realpacked enemysoftwarecontact sheet; approved Dartonly authoredcandidate after artist identified materialhierarchy gap. No concept generation, gameplay or shader change authorized."
+        },
+        {
+          "label": "Actual bounded Dart integration, normal build and browser smoke",
+          "kind": "artifact",
+          "path": "artifacts/dart-material-integration-20261013/summary.json"
+        },
+        {
+          "label": "Final actual native extracted before/after contact",
+          "kind": "artifact",
+          "path": "artifacts/dart-material-integration-20261013/dart-native-before-after-final.png"
+        },
+        {
+          "label": "Preserved author handoff, provenance and pending limits",
+          "kind": "artifact",
+          "path": "artifacts/dart-material-integration-20261013/DART-HANDOFF.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-12T21:29:20.378Z",
+      "updatedAt": "2026-10-12T22:03:47.650Z"
+    },
+    {
+      "id": "task-06e3e66a",
+      "title": "Fair bounded asteroid admission across dispersed co-op pilots",
+      "description": "Actual native eight-admission probe completed1200 authority ticks and five unfiltered Replica commits. Global112 asteroid admission is filled in early roster/chunk order: slots4–7 receive zero nearby asteroids despite nine resident local chunks; one-pilot controls at the same seed/locations each generate27. Preserve original failing evidence, implement deterministic fair allocation within global budgets, review and integrate. Native resource correctness does not establish eight real browser seats, TURN or measured FPS.",
+      "department": "Authoritative simulation / streaming",
+      "owner": "/root/engine_fx",
+      "status": "active",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Frozen dispersed native probe and same-seed failing fairness reproduction retained.",
+          "met": false
+        },
+        {
+          "text": "Deterministic bounded allocation gives each dispersed active pilot appropriate local asteroid resources without exceeding global caps or changing solo seeded identity.",
+          "met": false
+        },
+        {
+          "text": "Independent review, regression checks and matching integrated dual-backend build recorded; browser eight-seat acceptance remains separate.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual specialist checkpoint reported to Root",
+          "kind": "note",
+          "details": "Eight real native admissions,1200 ticks,five complete publications: peak120 chunks,244 bodies,551552 storage cells,221404 occupied cells,364 body pages; header wrappers9159/9105B. Specialist is freezing raw sources/logs next. No runtime edits or RTC measurement yet."
         }
       ],
       "blocker": "",
       "revision": 1,
-      "createdAt": "2026-10-12T21:29:20.378Z",
-      "updatedAt": "2026-10-12T21:29:20.378Z"
+      "createdAt": "2026-10-12T21:57:04.230Z",
+      "updatedAt": "2026-10-12T21:57:04.230Z"
+    },
+    {
+      "id": "task-864e2556",
+      "title": "Bastion native material readability and single-sprite art brief",
+      "description": "Compare current native Bastion40 at actual28px ordinary scale with accepted Dart and PAN/RAICHO material discipline. Preserve938 occupancy cells, dimensions, existing palette and83 index4 animated sites. Source/native contacts and concrete brief first; Root approval precedes production changes. Fresh evidence target and immutable compiled proof copies.",
+      "department": "Pixel art / asset pipeline",
+      "owner": "/root/audio_review",
+      "status": "complete",
+      "priority": "normal",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Source/native contacts preserve exact baseline mask, material and animated-site observations.",
+          "met": true
+        },
+        {
+          "text": "Root-reviewed single-sprite brief separates actual native evidence from pending GPU and human acceptance.",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Frozen actual native/software contact and brief",
+          "kind": "note",
+          "details": "[Contact](C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/bastion-art-quality-review/bastion-dart-native-contact.png), SHA583c5232d1e07521339f2730e626349f7c6831816866667b1b03a5aadc06f79e. [Handoff](C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/bastion-art-quality-review/HANDOFF.md). source-pins.json SHA13d428c606cd01ab5ef3d22bb033f9b111d6356deb86a40263c7d3ee5af80f35. Actual40/28 export938 cells; audit f32 error5.73e-7."
+        },
+        {
+          "label": "Actual Root bounded brief approval",
+          "kind": "note",
+          "details": "Root inspected the native contact in session, approved pod-rim/recess candidate preserving warm gradients and exact83 signals, and explicitly authorized marking this brief criteria/complete. Actual review-6ca3bad4 and author run-70cfb49c retained. New candidate task-89b6b8f7 remains active, production/GPU/human acceptance pending."
+        },
+        {
+          "label": "Actual native source-art contact and audit",
+          "kind": "artifact",
+          "path": "artifacts/bastion-art-brief-20261013/bastion-dart-native-contact.png"
+        },
+        {
+          "label": "Scoped author extraction handoff",
+          "kind": "artifact",
+          "path": "artifacts/bastion-art-brief-20261013/HANDOFF.md"
+        },
+        {
+          "label": "Actual Root visual brief review",
+          "kind": "artifact",
+          "path": "artifacts/bastion-art-brief-20261013/root-review.json"
+        }
+      ],
+      "blocker": "",
+      "revision": 3,
+      "createdAt": "2026-10-12T21:57:20.658Z",
+      "updatedAt": "2026-10-12T22:05:36.607Z"
+    },
+    {
+      "id": "task-89b6b8f7",
+      "title": "Refine Bastion armor and pod materials on exact native mask",
+      "description": "Implement approved single-sprite candidate after actual contact review. Preserve warm graded plates/core and40grid/938mask/83 index4 sites,64palette and all other atlas bytes. Compact lower-pod alloy rims and sparse recessed mechanisms; no broad flat recolor. Separate candidate native contacts, Root review and normal integration required.",
+      "department": "Pixel art / asset pipeline",
+      "owner": "/root/audio_review",
+      "status": "active",
+      "priority": "normal",
+      "dependencies": [
+        "task-864e2556"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Reproducible indexed candidate preserves exact mask, signals, palette and other atlas bytes.",
+          "met": false
+        },
+        {
+          "text": "Actual before/after native40 and gameplay28 contacts reviewed by Root.",
+          "met": false
+        },
+        {
+          "text": "Independent review, focused checks and matching integrated build recorded with remaining visual limits.",
+          "met": false
+        }
+      ],
+      "evidence": [],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-12T22:03:59.555Z",
+      "updatedAt": "2026-10-12T22:03:59.555Z"
     }
   ],
   "reviews": [
@@ -11631,6 +11763,61 @@
           "label": "Actual current Root native executable byte snapshot",
           "kind": "artifact",
           "path": "artifacts/engine-refinement-20261013/proof-correction/root-native-byte-snapshot.json"
+        }
+      ]
+    },
+    {
+      "id": "review-6ca3bad4",
+      "title": "Bastion source-art brief approved by Root",
+      "body": "Root inspected the actual Bastion/Dart native contact and approved an isolated single-sprite candidate. Retain warm graded orange plates/core and silhouette; prioritize compact alloy rims around paired lower pods plus sparse mechanical recess/vent clusters. Avoid broad gray strips, flat recolor, new pulsing sites or brighter full perimeter. Preserve exact40-grid/938 mask/83 index4 sites/all non-Bastion atlas bytes. Before/after native40/gameplay28 source-art review required before integration. This is Root brief approval only; no GPU/human final acceptance.",
+      "author": "/root/audio_review",
+      "source": "Actual Root source-art inspection message following the native Bastion contact; no human/GPU acceptance",
+      "createdAt": "2026-10-12T22:03:51.861Z",
+      "participants": [
+        "/root",
+        "/root/audio_review"
+      ],
+      "taskIds": [
+        "task-864e2556"
+      ],
+      "evidence": [
+        {
+          "label": "Actual native/software contact and bounded brief",
+          "kind": "note",
+          "details": "AudioRefinement work/bastion-art-quality-review/bastion-dart-native-contact.png SHA583c5232d1e07521339f2730e626349f7c6831816866667b1b03a5aadc06f79e; HANDOFF.md. Actual native two-frame export and every-cell/corner audit passed; source baseline clean4bb. Root message is the approval evidence."
+        }
+      ]
+    },
+    {
+      "id": "review-ba63a9ae",
+      "title": "Bastion native material brief approved for isolated candidate",
+      "body": "Root inspected actual native Bastion40 and ordinary28px contact against refined Dart. Preserve useful warm graded armor/core and silhouette; improve compact alloy pod rims and sparse mechanisms/recesses. No broad gray strips, flat recolor, new pulsing sites or brighter full perimeter. Candidate retains40grid/938occupiedmask/83 index4sites,64palette and every non-Bastion atlas byte. This approves an isolated source-art brief, not future candidate integration or human/GPU acceptance.",
+      "author": "Root",
+      "source": "Actual asynchronous art brief discussion",
+      "createdAt": "2026-10-12T22:05:36.635Z",
+      "participants": [
+        "Root",
+        "audio_review"
+      ],
+      "taskIds": [
+        "task-864e2556",
+        "task-89b6b8f7"
+      ],
+      "evidence": [
+        {
+          "label": "Actual native source-art contact and audit",
+          "kind": "artifact",
+          "path": "artifacts/bastion-art-brief-20261013/bastion-dart-native-contact.png"
+        },
+        {
+          "label": "Scoped author extraction handoff",
+          "kind": "artifact",
+          "path": "artifacts/bastion-art-brief-20261013/HANDOFF.md"
+        },
+        {
+          "label": "Actual Root visual brief review",
+          "kind": "artifact",
+          "path": "artifacts/bastion-art-brief-20261013/root-review.json"
         }
       ]
     }
@@ -15167,6 +15354,45 @@
         }
       ],
       "knownIssues": "Current configuredR1 liveWake,8players,TURN,physicalperformance and humanmix remain pending. Gas morphology unchanged; measured query counts are not FPS."
+    },
+    {
+      "id": "build-73589f5e",
+      "title": "Dart material: actual integrated dual-renderer build",
+      "body": "Single Dart color/material refinement:118 cells changed, exact426 occupancy mask,51 animated sites and64-entry palette retained; all non-Dart atlas bytes unchanged.",
+      "author": "Root",
+      "source": "Actual normal build and scoped native/browser checks",
+      "createdAt": "2026-10-12T22:04:53.790Z",
+      "revision": "9af0b051848c65c62b1da1c0fa6be083a3735c70",
+      "evidence": [
+        {
+          "label": "Actual compiled receipt, tests and browser scopes",
+          "kind": "artifact",
+          "path": "artifacts/dart-material-integration-20261013/summary.json"
+        }
+      ],
+      "checks": [
+        {
+          "name": "Actual normal dual-WASM/PWA/Studio build",
+          "result": "pass"
+        },
+        {
+          "name": "Six scoped native asset-loader checks",
+          "result": "pass"
+        },
+        {
+          "name": "Seven exact indexed pipeline checks",
+          "result": "pass"
+        },
+        {
+          "name": "Both backends resume displayed test identity after normal update",
+          "result": "pass"
+        },
+        {
+          "name": "Moving Dart human/GPU art, eight RTC seats,TURN,physical soak",
+          "result": "not_run"
+        }
+      ],
+      "knownIssues": ""
     }
   ],
   "feedback": [],
@@ -26090,6 +26316,136 @@
       "author": "Root",
       "source": "Actual author correction and independent current Root evidence",
       "createdAt": "2026-10-12T21:55:34.801Z"
+    },
+    {
+      "id": "f136e682-d1fe-4282-b7f4-451a412422f4",
+      "revision": 1093,
+      "kind": "task.create",
+      "itemId": "task-06e3e66a",
+      "title": "Fair bounded asteroid admission across dispersed co-op pilots",
+      "author": "Root",
+      "source": "Actual native eight-pilot dispersed probe reported by engine_fx; separate from browser acceptance",
+      "createdAt": "2026-10-12T21:57:04.230Z"
+    },
+    {
+      "id": "88ac3252-b838-4d4a-8583-b6709e328a75",
+      "revision": 1094,
+      "kind": "task.create",
+      "itemId": "task-864e2556",
+      "title": "Bastion native material readability and single-sprite art brief",
+      "author": "Root",
+      "source": "Actual bounded read-only art assignment",
+      "createdAt": "2026-10-12T21:57:20.658Z"
+    },
+    {
+      "id": "86838fe7-f00b-4d55-93ac-1566861a7c82",
+      "revision": 1095,
+      "kind": "run",
+      "itemId": "run-68877cfd",
+      "title": "Bastion material quality review · running",
+      "author": "/root/audio_review",
+      "source": "Actual assigned bounded source/native art inspection dispatch",
+      "createdAt": "2026-10-12T21:58:15.723Z"
+    },
+    {
+      "id": "f4320972-2c99-4164-8868-4861a1cec0c6",
+      "revision": 1096,
+      "kind": "run",
+      "itemId": "run-4c0ec105",
+      "title": "Engine and native multiplayer specialist · running",
+      "author": "Engine specialist",
+      "source": "Actual Root assignment and native probe in engine_fx isolated worktree",
+      "createdAt": "2026-10-12T22:02:33.739Z"
+    },
+    {
+      "id": "b2a72f76-f413-4134-8a87-a168bd54af19",
+      "revision": 1097,
+      "kind": "task.update",
+      "itemId": "task-ef0b851b",
+      "title": "Refine Dart armor materials without changing destructible geometry",
+      "author": "Root",
+      "source": "Actual source/art review, seven pipeline tests, six scoped native tests and matching normal build",
+      "createdAt": "2026-10-12T22:03:47.650Z"
+    },
+    {
+      "id": "3ad07654-6973-4370-b921-7f8e71c0f577",
+      "revision": 1098,
+      "kind": "review",
+      "itemId": "review-6ca3bad4",
+      "title": "Bastion source-art brief approved by Root",
+      "author": "/root/audio_review",
+      "source": "Actual Root source-art inspection message following the native Bastion contact; no human/GPU acceptance",
+      "createdAt": "2026-10-12T22:03:51.861Z"
+    },
+    {
+      "id": "3fd20071-7134-4c36-b289-4ff654fe5035",
+      "revision": 1099,
+      "kind": "task.create",
+      "itemId": "task-89b6b8f7",
+      "title": "Refine Bastion armor and pod materials on exact native mask",
+      "author": "Root",
+      "source": "Actual Root-reviewed native art brief and bounded candidate assignment",
+      "createdAt": "2026-10-12T22:03:59.555Z"
+    },
+    {
+      "id": "27f1dfe8-b2d8-4e62-be95-238e81895a1b",
+      "revision": 1100,
+      "kind": "run",
+      "itemId": "run-70cfb49c",
+      "title": "Bastion material quality review · completed",
+      "author": "/root/audio_review",
+      "source": "Actual completed Bastion packed/native/software brief inspection and Root review",
+      "createdAt": "2026-10-12T22:04:09.484Z"
+    },
+    {
+      "id": "de99fc1e-f5e1-4e5b-8413-6a4e3b87e39c",
+      "revision": 1101,
+      "kind": "task.update",
+      "itemId": "task-864e2556",
+      "title": "Bastion native material readability and single-sprite art brief",
+      "author": "/root/audio_review",
+      "source": "Root explicit authorization after actual native contact inspection and brief approval; no candidate/GPU/human final claim",
+      "createdAt": "2026-10-12T22:04:47.977Z"
+    },
+    {
+      "id": "a9422dbb-bcd5-4a0d-ba61-a75ddffa3695",
+      "revision": 1102,
+      "kind": "build",
+      "itemId": "build-73589f5e",
+      "title": "Dart material: actual integrated dual-renderer build",
+      "author": "Root",
+      "source": "Actual normal build and scoped native/browser checks",
+      "createdAt": "2026-10-12T22:04:53.790Z"
+    },
+    {
+      "id": "774047aa-ba61-49df-b615-3798dbeb7ea7",
+      "revision": 1103,
+      "kind": "run",
+      "itemId": "run-7da54227",
+      "title": "Bastion material refinement · running",
+      "author": "/root/audio_review",
+      "source": "Actual Root-approved next Bastion assignment and fresh isolated candidate branch",
+      "createdAt": "2026-10-12T22:05:15.956Z"
+    },
+    {
+      "id": "f8972976-fb93-44bc-975f-c32c50ab2cf3",
+      "revision": 1104,
+      "kind": "task.update",
+      "itemId": "task-864e2556",
+      "title": "Bastion native material readability and single-sprite art brief",
+      "author": "Root",
+      "source": "Actual native contact inspection and source-art brief approval",
+      "createdAt": "2026-10-12T22:05:36.607Z"
+    },
+    {
+      "id": "afa5f690-98eb-45c2-ae83-0afc604c6b62",
+      "revision": 1105,
+      "kind": "review",
+      "itemId": "review-ba63a9ae",
+      "title": "Bastion native material brief approved for isolated candidate",
+      "author": "Root",
+      "source": "Actual asynchronous art brief discussion",
+      "createdAt": "2026-10-12T22:05:36.635Z"
     }
   ],
   "runRecords": [
@@ -35881,6 +36237,94 @@
       "author": "/root/audio_review",
       "source": "Actual frozen Dart author scope, source-only Root visual decision and native/proof-copy execution; no acceptance self-approval",
       "createdAt": "2026-10-12T21:55:20.580Z"
+    },
+    {
+      "id": "run-68877cfd",
+      "title": "Bastion material quality review · running",
+      "agentId": "/root/audio_review",
+      "agentLabel": "Bastion material quality review",
+      "state": "running",
+      "observedAt": "2026-10-12T21:58:15.705Z",
+      "taskIds": [
+        "task-864e2556"
+      ],
+      "summary": "Actual bounded read-only Bastion contact/brief task running from clean4bb. Exact40x40/938cell packed data exported;83animatedindex4sites retained. Fresh per-scope native-target will extract actual PixelBody/FrameBuilder source1/game0.7. No production edits, frozen-target reuse, normalbuild/listener/GPU/humanacceptance.",
+      "evidence": [
+        {
+          "label": "Actual assignment and exact packed-source export",
+          "kind": "note",
+          "details": "Root assigned Studio task-864e2556; clean4bb source inspected. work/bastion-art-quality-review/source.png/manifest.json/pack.json exact existing palette/indices; ordinaryscale0.7 read from actual spawn_enemy. Fresh native target belongs only to this review."
+        }
+      ],
+      "author": "/root/audio_review",
+      "source": "Actual assigned bounded source/native art inspection dispatch",
+      "createdAt": "2026-10-12T21:58:15.723Z"
+    },
+    {
+      "id": "run-4c0ec105",
+      "title": "Engine and native multiplayer specialist · running",
+      "agentId": "/root/engine_fx",
+      "agentLabel": "Engine and native multiplayer specialist",
+      "state": "running",
+      "observedAt": "2026-10-12T22:02:33.720Z",
+      "taskIds": [
+        "task-06e3e66a"
+      ],
+      "summary": "Actual dispersed eight-pilot native probe completed five full unfiltered publication/Replica commits. Actual separate native fairness regression fails on later roster slots. Implementing approved bounded deterministic co-op chunk admission fix, retaining112 asteroid cap and solo generation; broad browser/RTC acceptance remains separate.",
+      "evidence": [
+        {
+          "label": "Actual first probe + failing fairness gate",
+          "kind": "note",
+          "details": "C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/eight-pilot-streaming-review/probe-first.json and fairness-native-before.log; frozen baseline MANIFEST SHA-256 f16ddd5df961117397158de40f471f5da6310c5aa394e2dce71560a3b8e2045b. Initial native probe1passed; fairness native gate expected fail."
+        }
+      ],
+      "author": "Engine specialist",
+      "source": "Actual Root assignment and native probe in engine_fx isolated worktree",
+      "createdAt": "2026-10-12T22:02:33.739Z"
+    },
+    {
+      "id": "run-70cfb49c",
+      "title": "Bastion material quality review · completed",
+      "agentId": "/root/audio_review",
+      "agentLabel": "Bastion material quality review",
+      "state": "completed",
+      "observedAt": "2026-10-12T22:04:09.419Z",
+      "taskIds": [
+        "task-864e2556"
+      ],
+      "summary": "Work-only Bastion baseline inspection completed from clean4bb. Actual native40/game28 export has938 cells/one transform per group; exact color/order audit, maximum f32 corner error5.73e-7. Contact inspected; Root approved narrow pod-rim/recess brief (review-6ca3bad4). Fresh target and immutable extractor/library copies retained. Production candidate, normalbuild, GPU/human acceptance pending.",
+      "evidence": [
+        {
+          "label": "Actual completed source/native contact and Root brief approval",
+          "kind": "note",
+          "details": "work/bastion-art-quality-review/HANDOFF.md, native-extraction.log, native-audit.json, bastion-dart-native-contact.png; review-6ca3bad4 records Root actual brief approval. Hash-named extractor db2751bf... and linked library0c79026a... preserved separately from10 compiler inputs. No production edits or frozen-target reuse."
+        }
+      ],
+      "author": "/root/audio_review",
+      "source": "Actual completed Bastion packed/native/software brief inspection and Root review",
+      "createdAt": "2026-10-12T22:04:09.484Z"
+    },
+    {
+      "id": "run-7da54227",
+      "title": "Bastion material refinement · running",
+      "agentId": "/root/audio_review",
+      "agentLabel": "Bastion material refinement",
+      "state": "running",
+      "observedAt": "2026-10-12T22:05:15.892Z",
+      "taskIds": [
+        "task-89b6b8f7"
+      ],
+      "summary": "Actual candidate authoring starts on codex/bastion-material-refinement from clean4bb. Root-approved brief is frozen with source/native contacts,10 compiler inputs and2 immutable artifacts. Own only exact Bastion atlas span, authored source/conversion and focused proofs. Preserve938 mask/83 index4 sites/palette/all other atlas bytes. New per-scope targets; no normalbuild/GPU/human final acceptance.",
+      "evidence": [
+        {
+          "label": "Actual approved assignment and frozen baseline",
+          "kind": "note",
+          "details": "Root authorized paired pod rims/recess clusters after viewing real contact. task-864e2556 now complete by explicit Root authorization, review-6ca3bad4. Frozen source-pins13d428c6..., HANDOFF a000405c... at work/bastion-art-quality-review. Candidate separate branch/work directory; source-art before/after inspection required."
+        }
+      ],
+      "author": "/root/audio_review",
+      "source": "Actual Root-approved next Bastion assignment and fresh isolated candidate branch",
+      "createdAt": "2026-10-12T22:05:15.956Z"
     }
   ],
   "phaseDescription": "Desktop-first Rust/WASM solo game and local Studio are implemented. Reviewed occupied-cell art, reproducible conversion, responsive native settings/icons and minimap, strict GitHub integration gates and source-backed Dev Bible are integrated. Natural campaign balance, human listening, owner-private update lifecycle and physical phones remain separate pending gates."

@@ -1,0 +1,718 @@
+{
+  "commit": "4bbcd7b98b5c242e1c6f3c614bae4bf50f6949c9",
+  "parent": "49e3e686d5ea3e04523a8e40f4ef102756700ec2",
+  "source_pins": {
+    "assets/pixels/atlas.json": {
+      "canonical_git_sha256": "008552d4cdb39f47933f34b441927197435c80ef067073fe426c262291b82460",
+      "canonical_git_bytes": 39597,
+      "working": {
+        "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/assets/pixels/atlas.json",
+        "bytes": 39598,
+        "sha256": "4418cf45dda552afe6c7733b17b0e11b66557c8d9c24a352c1d21683b2846fb4"
+      },
+      "working_path_is_point_in_time_not_permanent_source_freeze": true
+    },
+    "assets/pixels/dart-detail/baseline.json": {
+      "canonical_git_sha256": "0964e61b7788a886224ed58668ed7f311586e1940675fe140e69e417f47cdc56",
+      "canonical_git_bytes": 12986,
+      "working": {
+        "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/assets/pixels/dart-detail/baseline.json",
+        "bytes": 14089,
+        "sha256": "7061fcdf690bbe59c9b495e61fdc8414e0d861a1d6d9b6ecb3e30e2150583f1c"
+      },
+      "working_path_is_point_in_time_not_permanent_source_freeze": true
+    },
+    "assets/pixels/dart-detail/source.png": {
+      "canonical_git_sha256": "e7b4c94c6be25deb46ccc01de9ab5a54e4076a65885a19280c972552b9dfe20d",
+      "canonical_git_bytes": 1338,
+      "working": {
+        "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/assets/pixels/dart-detail/source.png",
+        "bytes": 1338,
+        "sha256": "e7b4c94c6be25deb46ccc01de9ab5a54e4076a65885a19280c972552b9dfe20d"
+      },
+      "working_path_is_point_in_time_not_permanent_source_freeze": true
+    },
+    "assets/pixels/dart-detail/manifest.json": {
+      "canonical_git_sha256": "4462277a26eccd6786c88125e8fa7a76a5b248968dcffd93a94a81e91d44c7ab",
+      "canonical_git_bytes": 2881,
+      "working": {
+        "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/assets/pixels/dart-detail/manifest.json",
+        "bytes": 2881,
+        "sha256": "4462277a26eccd6786c88125e8fa7a76a5b248968dcffd93a94a81e91d44c7ab"
+      },
+      "working_path_is_point_in_time_not_permanent_source_freeze": true
+    },
+    "assets/pixels/dart-detail/pack.json": {
+      "canonical_git_sha256": "70359be58b5282f64e0d6c7253f00d2522f8741e322068b44e32e4667adb88a8",
+      "canonical_git_bytes": 17806,
+      "working": {
+        "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/assets/pixels/dart-detail/pack.json",
+        "bytes": 17806,
+        "sha256": "70359be58b5282f64e0d6c7253f00d2522f8741e322068b44e32e4667adb88a8"
+      },
+      "working_path_is_point_in_time_not_permanent_source_freeze": true
+    },
+    "assets/pixels/dart-detail/provenance.json": {
+      "canonical_git_sha256": "d7780d121bca1628b5095a8463e22ae0c8a31a4c4c4b82ae8121d443c39b6aea",
+      "canonical_git_bytes": 1190,
+      "working": {
+        "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/assets/pixels/dart-detail/provenance.json",
+        "bytes": 1190,
+        "sha256": "d7780d121bca1628b5095a8463e22ae0c8a31a4c4c4b82ae8121d443c39b6aea"
+      },
+      "working_path_is_point_in_time_not_permanent_source_freeze": true
+    },
+    "scripts/asset-dart-detail.py": {
+      "canonical_git_sha256": "25ecfff877745ddfc89312375a153781fbd00d17f30a288877bf6e51bcb4beb4",
+      "canonical_git_bytes": 7860,
+      "working": {
+        "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/asset-dart-detail.py",
+        "bytes": 7965,
+        "sha256": "ddb50a0c09c260b484cc2c960daae3a1b3d65594ea104628f2611d4fd55e251b"
+      },
+      "working_path_is_point_in_time_not_permanent_source_freeze": true
+    },
+    "scripts/asset-dart-detail-tests.py": {
+      "canonical_git_sha256": "3a6406e591089165e543f37be06009b2d7df022727b1f7b00fd3f500ef2fb528",
+      "canonical_git_bytes": 5405,
+      "working": {
+        "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/asset-dart-detail-tests.py",
+        "bytes": 5487,
+        "sha256": "8a612ff8153890e62a76cf51d041d49a87288b8fe32ecb5808be2b8734f514c0"
+      },
+      "working_path_is_point_in_time_not_permanent_source_freeze": true
+    }
+  },
+  "evidence": {
+    "after-native-audit.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/after-native-audit.json",
+      "bytes": 1264,
+      "sha256": "24297842284eea55ddfd12e0b44fd00d1a38b09ed1b059f1a80bddfe50b39574"
+    },
+    "after-native-audit.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/after-native-audit.log",
+      "bytes": 1264,
+      "sha256": "24297842284eea55ddfd12e0b44fd00d1a38b09ed1b059f1a80bddfe50b39574"
+    },
+    "after-native-final-audit.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/after-native-final-audit.json",
+      "bytes": 1264,
+      "sha256": "c940b7380e24d07764bd8ae4e1035c8111d9410e1f657a49e482d36ec9599078"
+    },
+    "after-native-final-audit.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/after-native-final-audit.log",
+      "bytes": 1264,
+      "sha256": "c940b7380e24d07764bd8ae4e1035c8111d9410e1f657a49e482d36ec9599078"
+    },
+    "after-native-final.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/after-native-final.json",
+      "bytes": 304182,
+      "sha256": "e87cfb0c9d08d6c65d44e5d6569c534ad2dbc130f14c6f402453d08ea0f164ee"
+    },
+    "after-native-final.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/after-native-final.log",
+      "bytes": 300,
+      "sha256": "e515c0508fce27c6af39511b1fd9774510f3f16d9cf2ea3c45ffee4c21ae0dd8"
+    },
+    "after-native-first.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/after-native-first.json",
+      "bytes": 304182,
+      "sha256": "63d5d75436f78e1d9574635fca7e727d2e79ed29c3646417cfe338109320af77"
+    },
+    "after-native-first.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/after-native-first.log",
+      "bytes": 300,
+      "sha256": "14888f577382df12eb6d68d4023f290f0f3f10639434cac577c95851a22d20fb"
+    },
+    "after-native-refined-audit.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/after-native-refined-audit.json",
+      "bytes": 1266,
+      "sha256": "4796682c93dba75e2663b91051da80e6939543803f8caa92edc16ff50bfcce55"
+    },
+    "after-native-refined-audit.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/after-native-refined-audit.log",
+      "bytes": 1266,
+      "sha256": "4796682c93dba75e2663b91051da80e6939543803f8caa92edc16ff50bfcce55"
+    },
+    "after-native-refined.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/after-native-refined.json",
+      "bytes": 304182,
+      "sha256": "e87cfb0c9d08d6c65d44e5d6569c534ad2dbc130f14c6f402453d08ea0f164ee"
+    },
+    "after-native-refined.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/after-native-refined.log",
+      "bytes": 302,
+      "sha256": "740d083fabb600784ef3e77c6d9e1b1a086599b157cc1b296d38d03b11395687"
+    },
+    "bastion-game-zoom0.6.png": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/bastion-game-zoom0.6.png",
+      "bytes": 699,
+      "sha256": "9ce7da1d1f56de78fb73116dd9d8a469baf56c815034191d676607a7a20c7a12"
+    },
+    "bastion-game-zoom1.6.png": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/bastion-game-zoom1.6.png",
+      "bytes": 2710,
+      "sha256": "256c030937618fda3dd1bfa49c3bf52fe95c77e7de1c18951ae39e9156c95e72"
+    },
+    "bastion-game-zoom1.png": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/bastion-game-zoom1.png",
+      "bytes": 1443,
+      "sha256": "3c241c805bfc7e6e7568b9efa116ce5993d00fc1f34a7c83bf40ebbd5df848f5"
+    },
+    "before-manifest.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/before-manifest.json",
+      "bytes": 2808,
+      "sha256": "b448d93690332c3023ec9e70803dab8b7d0e3be08595bbb869ac12eefffee175"
+    },
+    "before-native-audit.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/before-native-audit.json",
+      "bytes": 1269,
+      "sha256": "f2281425f90401ccbed64312e465c0dc6b669364c874419f31fe5779e3776b63"
+    },
+    "before-native-audit.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/before-native-audit.log",
+      "bytes": 1269,
+      "sha256": "f2281425f90401ccbed64312e465c0dc6b669364c874419f31fe5779e3776b63"
+    },
+    "before-native.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/before-native.json",
+      "bytes": 304182,
+      "sha256": "c832b9d60d86f220958660458f977c1628a96673ed380875134486857f75b992"
+    },
+    "before-native.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/before-native.log",
+      "bytes": 1009,
+      "sha256": "555d7840bbe63f855b9dce5c6130b85e577fa0d5c7276993a053343a1d1b3954"
+    },
+    "before-pack.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/before-pack.json",
+      "bytes": 18917,
+      "sha256": "3678b6e5646fd60a4483dc13142c467e661d758e844ff30417d75e368886135d"
+    },
+    "before-source.png": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/before-source.png",
+      "bytes": 1353,
+      "sha256": "7be9f1320cc93be2749f7f1e1fecf8d4b38e50f91e7fd1ff1fd7bae5e9c7ba24"
+    },
+    "canonical-source-pins.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/canonical-source-pins.json",
+      "bytes": 3885,
+      "sha256": "ef00c134c6f1adb25c827d79304bb7683923c15644b7c81eebd50c5684f790f6"
+    },
+    "coil_head-game-zoom0.6.png": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/coil_head-game-zoom0.6.png",
+      "bytes": 488,
+      "sha256": "6a8377711fee4bcbd352fb342069d737f226e0cbda03cf84be42d01eb95873ad"
+    },
+    "coil_head-game-zoom1.6.png": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/coil_head-game-zoom1.6.png",
+      "bytes": 2063,
+      "sha256": "7e5d4ed091976c48cd68ab04fbf40bb26386ce767549762c1e2e6d6bf4e825bf"
+    },
+    "coil_head-game-zoom1.png": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/coil_head-game-zoom1.png",
+      "bytes": 1157,
+      "sha256": "96eb6c45844eb56a3171be32b4eb15a22b87364bb4d376988dc8f72aad8d3023"
+    },
+    "coil_segment-game-zoom0.6.png": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/coil_segment-game-zoom0.6.png",
+      "bytes": 164,
+      "sha256": "d4f657a0128c1d7d3131532720cc5764e0e7444b1ea1be95b11704466fbb2318"
+    },
+    "coil_segment-game-zoom1.6.png": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/coil_segment-game-zoom1.6.png",
+      "bytes": 503,
+      "sha256": "6bb8b549457b42bccb9c9ea621614a9c18b31ecd00a23b2aa14a5da1b7be6530"
+    },
+    "coil_segment-game-zoom1.png": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/coil_segment-game-zoom1.png",
+      "bytes": 390,
+      "sha256": "72e0acbeca8ef55f533af0a242a7f9e8c7f862235894398a612cd3ee4997beac"
+    },
+    "dart-author-applied.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-author-applied.log",
+      "bytes": 1200,
+      "sha256": "796d234c772700bd4246734855aaebbe1925a03c2c13713758ec1c1d198d8637"
+    },
+    "dart-author-final-applied.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-author-final-applied.log",
+      "bytes": 1200,
+      "sha256": "c5d3fb33e2d354725f9bfac46663e64e83ba1528a67715cf811694706165b79b"
+    },
+    "dart-author-final-canonical-policy.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-author-final-canonical-policy.log",
+      "bytes": 1353,
+      "sha256": "5b45388ef9350e98f3081df9176674ab4a35843ad3d9ae72d36c7de3c35692a3"
+    },
+    "dart-author-final-lf-writer.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-author-final-lf-writer.log",
+      "bytes": 1353,
+      "sha256": "ebdd2c0488c4350f79b2c1d2f02e676ed76830f9d487bd737dd7e1c35bce1bd8"
+    },
+    "dart-author-first.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-author-first.log",
+      "bytes": 1201,
+      "sha256": "0861f6c9a129a322f72ecca17b304a14f0f37cf71bb0648a5c2e0a26259444ca"
+    },
+    "dart-author-refined-final-code.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-author-refined-final-code.log",
+      "bytes": 1201,
+      "sha256": "e65b5ad8263290763f30b368c8ed74f854d2fab04df2f0df5dbc15b4155cfabd"
+    },
+    "dart-author-refined.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-author-refined.log",
+      "bytes": 1201,
+      "sha256": "2e7e83e10a596eb75d39f764ab0e2d20c66d4a66f13f2508cb182fa811859d70"
+    },
+    "dart-before-game24.png": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-before-game24.png",
+      "bytes": 893,
+      "sha256": "a9db2ca98bc52b663e98b743a6c01cf5c256d24f5078bf334f79f38cc19a92ea"
+    },
+    "dart-before-native32.png": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-before-native32.png",
+      "bytes": 1420,
+      "sha256": "e1831643f6bd28a54060cf61980a73caaabd1e6dd3493a3c92b655ad5378e148"
+    },
+    "dart-candidate.diff": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-candidate.diff",
+      "bytes": 131749,
+      "sha256": "bf6af4fe084d61c26852c9adeb64164d1be5b2ee102bf16e53a5ff54fc94cac4"
+    },
+    "dart-commit.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-commit.log",
+      "bytes": 561,
+      "sha256": "7fe07a82ba802a607710058ef4ccc20b91b2cd43fc7f9fb86cf216ea77ee3f9b"
+    },
+    "dart-diff-check-final.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-diff-check-final.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "dart-diff-check.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-diff-check.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "dart-first-candidate/asset-dart-detail-tests.py": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-first-candidate/asset-dart-detail-tests.py",
+      "bytes": 3789,
+      "sha256": "ccbaebd26e66f0305e9ab406af7abd739996d6c08c282b5d21862bb5a37bc426"
+    },
+    "dart-first-candidate/asset-dart-detail.py": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-first-candidate/asset-dart-detail.py",
+      "bytes": 6840,
+      "sha256": "b29be0fce98bb84cbdf68dc8c87f2eaa7d71cf3a717d36a079692c43d5190fad"
+    },
+    "dart-first-candidate/atlas-first-candidate.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-first-candidate/atlas-first-candidate.json",
+      "bytes": 39606,
+      "sha256": "17ddc16499a4674c2f721daa15b6cfadd84958007bd527605a73172ef6380468"
+    },
+    "dart-first-candidate/baseline.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-first-candidate/baseline.json",
+      "bytes": 14089,
+      "sha256": "7061fcdf690bbe59c9b495e61fdc8414e0d861a1d6d9b6ecb3e30e2150583f1c"
+    },
+    "dart-first-candidate/dart-before-game24.png": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-first-candidate/dart-before-game24.png",
+      "bytes": 893,
+      "sha256": "a9db2ca98bc52b663e98b743a6c01cf5c256d24f5078bf334f79f38cc19a92ea"
+    },
+    "dart-first-candidate/dart-before-native32.png": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-first-candidate/dart-before-native32.png",
+      "bytes": 1420,
+      "sha256": "e1831643f6bd28a54060cf61980a73caaabd1e6dd3493a3c92b655ad5378e148"
+    },
+    "dart-first-candidate/dart-game-zoom0.6.png": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-first-candidate/dart-game-zoom0.6.png",
+      "bytes": 389,
+      "sha256": "075676b6a9dea548d28bab65b238040ac3f766e882684e57ee3064557ac1c67f"
+    },
+    "dart-first-candidate/dart-game-zoom1.6.png": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-first-candidate/dart-game-zoom1.6.png",
+      "bytes": 1608,
+      "sha256": "e410c05fdf28efc22d50dc8de877e538a76f53f89406c4f7a5818d60b40f899d"
+    },
+    "dart-first-candidate/dart-game-zoom1.png": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-first-candidate/dart-game-zoom1.png",
+      "bytes": 998,
+      "sha256": "8666ff7245199fba1b9bde423e2892abcff606a008134d4467a73911cd4701db"
+    },
+    "dart-first-candidate/dart-material-candidate-game24.png": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-first-candidate/dart-material-candidate-game24.png",
+      "bytes": 653,
+      "sha256": "0c63e6ef65d82c516fc6ee94b0917c4a6b75fdfb3a766726126ad104123f957e"
+    },
+    "dart-first-candidate/dart-material-candidate-native32.png": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-first-candidate/dart-material-candidate-native32.png",
+      "bytes": 882,
+      "sha256": "aa5c7e5b6314600b53a12a2a219f2782923c6f0d3875491f445a8e8b650491f5"
+    },
+    "dart-first-candidate/dart-native-before-after-first.png": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-first-candidate/dart-native-before-after-first.png",
+      "bytes": 24326,
+      "sha256": "d6b7d6a352f4b4a0db46465bd687d2e60c4d2958435dd585b5c6624dd6b3faeb"
+    },
+    "dart-first-candidate/manifest.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-first-candidate/manifest.json",
+      "bytes": 3029,
+      "sha256": "74dac5ee2e0b37322ac162cd92f03746951c8a6a2562c1262579c58512bc24a9"
+    },
+    "dart-first-candidate/pack.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-first-candidate/pack.json",
+      "bytes": 19139,
+      "sha256": "1968bd7b168474a181ea7cf3148e08705db84d33bdd4d6b22b4fdf06a936603a"
+    },
+    "dart-first-candidate/provenance.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-first-candidate/provenance.json",
+      "bytes": 1059,
+      "sha256": "b45660969e42f35ef2b23b901eb079478cd379411b09c65a5016f7e8e3c6a0c8"
+    },
+    "dart-first-candidate/render_dart_native.py": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-first-candidate/render_dart_native.py",
+      "bytes": 2240,
+      "sha256": "0a68ae579fabc80797f75e5bbbc094550625fbf851a6f9aabffc3997262d176c"
+    },
+    "dart-first-candidate/ROOT-VISUAL-REJECTION.md": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-first-candidate/ROOT-VISUAL-REJECTION.md",
+      "bytes": 426,
+      "sha256": "1465ada7c1a5233ffa2c2a56119ab4f19da928d6ef6a52039a42bcd7dd6912ac"
+    },
+    "dart-first-candidate/source.png": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-first-candidate/source.png",
+      "bytes": 1188,
+      "sha256": "686770162f1078197ef34c09c8a599f0a69700dd4f3ce8d469db3b1381183d34"
+    },
+    "dart-game-zoom0.6.png": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-game-zoom0.6.png",
+      "bytes": 389,
+      "sha256": "075676b6a9dea548d28bab65b238040ac3f766e882684e57ee3064557ac1c67f"
+    },
+    "dart-game-zoom1.6.png": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-game-zoom1.6.png",
+      "bytes": 1608,
+      "sha256": "e410c05fdf28efc22d50dc8de877e538a76f53f89406c4f7a5818d60b40f899d"
+    },
+    "dart-game-zoom1.png": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-game-zoom1.png",
+      "bytes": 998,
+      "sha256": "8666ff7245199fba1b9bde423e2892abcff606a008134d4467a73911cd4701db"
+    },
+    "dart-material-candidate-game24.png": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-material-candidate-game24.png",
+      "bytes": 889,
+      "sha256": "52fec37c7b58e6075251bc0fb64c7d1500e16b7643cf3f8b6e7bd9ef61bb3df4"
+    },
+    "dart-material-candidate-native32.png": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-material-candidate-native32.png",
+      "bytes": 1379,
+      "sha256": "8e3502a501c31c0ecf38f9f4e3addbec2cebf9f61740d0b60c950286bef97f28"
+    },
+    "dart-native-before-after-final.png": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-native-before-after-final.png",
+      "bytes": 23512,
+      "sha256": "d37b85a7af3d4c9361c430b9123640e82718e4ab1a9425ce402eb76047f2de9b"
+    },
+    "dart-native-before-after-first.png": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-native-before-after-first.png",
+      "bytes": 24326,
+      "sha256": "d6b7d6a352f4b4a0db46465bd687d2e60c4d2958435dd585b5c6624dd6b3faeb"
+    },
+    "dart-native-before-after-refined.png": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-native-before-after-refined.png",
+      "bytes": 23512,
+      "sha256": "d37b85a7af3d4c9361c430b9123640e82718e4ab1a9425ce402eb76047f2de9b"
+    },
+    "dart-refined-before-canonical-policy/asset-dart-detail.py": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-refined-before-canonical-policy/asset-dart-detail.py",
+      "bytes": 7742,
+      "sha256": "898ec4dc89ad1355e1a5d9fabd3253aef752fc5ff3188dd98e2eeb164fd223b6"
+    },
+    "dart-refined-before-canonical-policy/manifest.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-refined-before-canonical-policy/manifest.json",
+      "bytes": 3029,
+      "sha256": "74dac5ee2e0b37322ac162cd92f03746951c8a6a2562c1262579c58512bc24a9"
+    },
+    "dart-refined-before-canonical-policy/pack.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-refined-before-canonical-policy/pack.json",
+      "bytes": 19131,
+      "sha256": "fa3bfb4383c5121006f4bcddf85dbfe1400bc05ef0667e18873e797f97bd2472"
+    },
+    "dart-refined-before-canonical-policy/provenance.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-refined-before-canonical-policy/provenance.json",
+      "bytes": 1059,
+      "sha256": "8a455b1f13b90c420929a1470e8c1342f564a7a9e1f7b44ed4542e3791ec0f89"
+    },
+    "dart-refined-before-canonical-policy/source.png": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-refined-before-canonical-policy/source.png",
+      "bytes": 1338,
+      "sha256": "e7b4c94c6be25deb46ccc01de9ab5a54e4076a65885a19280c972552b9dfe20d"
+    },
+    "dart-source-pins-intermediate-unfiltered-target.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-source-pins-intermediate-unfiltered-target.json",
+      "bytes": 138498,
+      "sha256": "892b96ec5372cccb7b10d7cbd73d83e6b03feb82c2b2d94020d1c39cfdbf4460"
+    },
+    "dart-staged-scope.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-staged-scope.log",
+      "bytes": 549,
+      "sha256": "0cbf10666f9956bfb5537ca61411e39e4e06ce7672b1144e71c64e760e18c1ef"
+    },
+    "dart-tests-final-canonical-policy.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-tests-final-canonical-policy.log",
+      "bytes": 1780,
+      "sha256": "ea4246af14c57b991d72cdc9212722ea8f8df2c698eba238e0dc3101e82e7b20"
+    },
+    "dart-tests-final-lf-writer.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-tests-final-lf-writer.log",
+      "bytes": 1049,
+      "sha256": "7a7cdfcf914b5990830849919d4ad93fd588941bdb87a77298d370c79b1d76d4"
+    },
+    "dart-tests-final.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-tests-final.log",
+      "bytes": 1194,
+      "sha256": "6f4404af095a2d76ee99dac4be1bc63974677581af7445087c2956b94065a824"
+    },
+    "dart-tests-first.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/dart-tests-first.log",
+      "bytes": 906,
+      "sha256": "4d30c0aafcbc25676b4958e6e91c54d94d33e1d4519ae12c4216fd514a474e47"
+    },
+    "enemy-packed-contact.png": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/enemy-packed-contact.png",
+      "bytes": 53684,
+      "sha256": "358ea42c6b6116d616f351e0d04b545427560ac62ff1d03a842d8ba21deac5cd"
+    },
+    "final-dart-atlas-bytes.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/final-dart-atlas-bytes.json",
+      "bytes": 39598,
+      "sha256": "4418cf45dda552afe6c7733b17b0e11b66557c8d9c24a352c1d21683b2846fb4"
+    },
+    "final-native-mask-proof.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/final-native-mask-proof.json",
+      "bytes": 1376,
+      "sha256": "088e9d28f888754d378cfbc5ed96fd0fd31f259bbdfe59fe3813f663216eaa89"
+    },
+    "freeze-native-extractor-engine.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/freeze-native-extractor-engine.json",
+      "bytes": 588,
+      "sha256": "2d28c7802d3310911d7c9c8db1d7a429f625ee3781856d8f9f44a278f40b3447"
+    },
+    "freeze-native-extractor-tests.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/freeze-native-extractor-tests.json",
+      "bytes": 599,
+      "sha256": "c3fa4b85cc26346edf2455eb9e0546244de39fef757c725bc63cb78363c7fa56"
+    },
+    "freeze-native-extractor.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/freeze-native-extractor.json",
+      "bytes": 575,
+      "sha256": "94985f7dfee9427400f29bac21c1544f61d5ef7412557d52fdb8c1c65b10caff"
+    },
+    "freeze-native-loader-engine.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/freeze-native-loader-engine.json",
+      "bytes": 591,
+      "sha256": "8d79c76f6552d3e9c67586d83640fb48e62ffe8aedfc76a4268213eab684025a"
+    },
+    "freeze-native-loader.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/freeze-native-loader.json",
+      "bytes": 593,
+      "sha256": "14cb73b35dc2a09b84f0d729722815fb431f572008c1cfec1e9998bf4503ac07"
+    },
+    "HANDOFF.md": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/HANDOFF.md",
+      "bytes": 4677,
+      "sha256": "d609aa8a08b59dd48d08f9158856669dd2a03a8512d40f65d3c63540fe9cf4ac"
+    },
+    "immutable-proof-verification.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/immutable-proof-verification.json",
+      "bytes": 3341,
+      "sha256": "8b60e3703446c817a8dd622df9f6b5e1e343b376a7a3a5c0120269b07e31bc2c"
+    },
+    "MANIFEST.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/MANIFEST.json",
+      "bytes": 979,
+      "sha256": "03d386afc294736251c5b88154a9dd477a1f977d7d3cd5ddb4659fd186434791"
+    },
+    "native-atlas-loader-scoped-tests.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/native-atlas-loader-scoped-tests.log",
+      "bytes": 1704,
+      "sha256": "8f47491e9e0ba66a84c25f20c97eac290dad7fc08c9f44b5a7bbe6f16a21ba00"
+    },
+    "native-atlas-loader-tests.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/native-atlas-loader-tests.log",
+      "bytes": 1026,
+      "sha256": "3d56a38798d5f58711a58608820b163d85b1cfe487f6ddc4615f4ce1bcec2b50"
+    },
+    "native-preview-tests.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/native-preview-tests.log",
+      "bytes": 871,
+      "sha256": "dfc6a146959c0355e385b25ecacda871483536f16b616a603ccabde6a46eddc6"
+    },
+    "nebula-target-recovery-result.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/nebula-target-recovery-result.json",
+      "bytes": 224,
+      "sha256": "7c0a25436088f09d0478b01fa1ed38b46ef8ffef059f68fdda4a33b73502bb2c"
+    },
+    "nebula-target-recovery.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/nebula-target-recovery.log",
+      "bytes": 9351,
+      "sha256": "17426f1f3ad630c3d6b2be1cff84ce5ff438a83643818a167456ee523e7fef43"
+    },
+    "optimized-guard-test-final.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/optimized-guard-test-final.log",
+      "bytes": 259,
+      "sha256": "dfa964b38aa6c1d374e229e5a4fc2512686abc3d049259753e9ec4af81121223"
+    },
+    "optimized-guard-test.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/optimized-guard-test.log",
+      "bytes": 259,
+      "sha256": "dfa964b38aa6c1d374e229e5a4fc2512686abc3d049259753e9ec4af81121223"
+    },
+    "packed-material-benchmarks.png": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/packed-material-benchmarks.png",
+      "bytes": 122243,
+      "sha256": "f069b0bf15bd68b91e1902d7026e777120136a0e92c2f3ae3d9f72c0329258d9"
+    },
+    "pin-dart-evidence.py": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/pin-dart-evidence.py",
+      "bytes": 4429,
+      "sha256": "0fe5884e2778cd4f884751c99dd6bd1bd56bc1b6226788bf7540710b4f7c5c82"
+    },
+    "PRIOR-NEBULA-ARTIFACT-CORRECTION.md": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/PRIOR-NEBULA-ARTIFACT-CORRECTION.md",
+      "bytes": 1635,
+      "sha256": "edf7d3035fbd78e017bafde36b786277fe8d4e2c34aef81613bb01d943e7edd5"
+    },
+    "prior-target-integrity-observation.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/prior-target-integrity-observation.json",
+      "bytes": 453,
+      "sha256": "742b8a12d442bfaae95f61482a72d1296aacd93c30be7019e3ef7a80ee88412f"
+    },
+    "proof-binaries/0dfe83268ed1ed63e0c16336cb25d18f266243f0f12ac3884eacfd913b862f83.exe": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/proof-binaries/0dfe83268ed1ed63e0c16336cb25d18f266243f0f12ac3884eacfd913b862f83.exe",
+      "bytes": 11686912,
+      "sha256": "0dfe83268ed1ed63e0c16336cb25d18f266243f0f12ac3884eacfd913b862f83"
+    },
+    "proof-binaries/1fe97f32801a4ffaa4d1cdbb40d1684b29105a7e553f082b92c7f8d0dc914e4d.exe": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/proof-binaries/1fe97f32801a4ffaa4d1cdbb40d1684b29105a7e553f082b92c7f8d0dc914e4d.exe",
+      "bytes": 873472,
+      "sha256": "1fe97f32801a4ffaa4d1cdbb40d1684b29105a7e553f082b92c7f8d0dc914e4d"
+    },
+    "proof-binaries/a6c51d68bf76e9374cf4323f2f6da46906011e96f3db831ce513e62ca325bfc7.exe": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/proof-binaries/a6c51d68bf76e9374cf4323f2f6da46906011e96f3db831ce513e62ca325bfc7.exe",
+      "bytes": 1090048,
+      "sha256": "a6c51d68bf76e9374cf4323f2f6da46906011e96f3db831ce513e62ca325bfc7"
+    },
+    "proof-binaries/c9e6bb03abdf0c971bb852e46682a83fc88e229affb622c8919ecccc3b971d54.rlib": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/proof-binaries/c9e6bb03abdf0c971bb852e46682a83fc88e229affb622c8919ecccc3b971d54.rlib",
+      "bytes": 3916264,
+      "sha256": "c9e6bb03abdf0c971bb852e46682a83fc88e229affb622c8919ecccc3b971d54"
+    },
+    "proof-binaries/d81199681a1b199dd42c5984888a1f2e07d5dec987c2551c324ca692d60e787b.rlib": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/proof-binaries/d81199681a1b199dd42c5984888a1f2e07d5dec987c2551c324ca692d60e787b.rlib",
+      "bytes": 656104,
+      "sha256": "d81199681a1b199dd42c5984888a1f2e07d5dec987c2551c324ca692d60e787b"
+    },
+    "render-dart-native-final.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/render-dart-native-final.log",
+      "bytes": 136,
+      "sha256": "f41ec8272981909420c4ed791b2d1f8cd7bef3723b540134c0793addcf715c20"
+    },
+    "render-dart-native-first.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/render-dart-native-first.log",
+      "bytes": 136,
+      "sha256": "b97202ec9751d5e982afe67c53fce8b76d3715d84f466fa37081e3f169a9fe6c"
+    },
+    "render-dart-native-refined.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/render-dart-native-refined.log",
+      "bytes": 138,
+      "sha256": "0724ce5f3018abdb67bca16743beffbd7aaa75cddeb4ffd0f9913e62bee5315f"
+    },
+    "render-review.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/render-review.log",
+      "bytes": 6718,
+      "sha256": "2b6e660a1a611cc806293086e72f2406a1c384111294371210817d1d68776d63"
+    },
+    "render_dart_native.py": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/render_dart_native.py",
+      "bytes": 2471,
+      "sha256": "30d97028c4c4a68b3bcd7302ff091ed40fc5c62e567ee7b3df8b4484d543c0ce"
+    },
+    "render_review.py": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/render_review.py",
+      "bytes": 6900,
+      "sha256": "48b8f6dcd6ab56a1e8e5508eb2568d569f1632a3b59df66e2a96ab987ed3407e"
+    },
+    "scoped-loader-compiler-inputs.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/scoped-loader-compiler-inputs.json",
+      "bytes": 19812,
+      "sha256": "3fc38cbeee3f3617355cf3187689ece9bbb724c16d4b1a447fa028eb078aa70f"
+    },
+    "source-pins-and-metrics.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/source-pins-and-metrics.json",
+      "bytes": 10806,
+      "sha256": "68670299618fca005acc851c37f1d9419e825e798d898ccd2f798b895be71dcb"
+    },
+    "studio-dart-running-input.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/studio-dart-running-input.json",
+      "bytes": 1302,
+      "sha256": "41b8096bd7b2566fb5e58f3873b2a88a2eb0065d29fc0aab80611e9bfaf92967"
+    },
+    "studio-dart-running-result.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/studio-dart-running-result.json",
+      "bytes": 1282,
+      "sha256": "19a4bca18bce5a648a463d3f7161a8c5a25354ff09f6ed462eed1b9e15d4001e"
+    },
+    "studio-dart-task-observation.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/studio-dart-task-observation.json",
+      "bytes": 1860,
+      "sha256": "41b796eb21dff593c9c6b5a45798185b87471f01fd9f45ddc02079e2b20a87b8"
+    },
+    "used-freeze-native-proof.mjs": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/used-freeze-native-proof.mjs",
+      "bytes": 2891,
+      "sha256": "7c784eb4638364da6b2ca6de31eb1fd36496b753eb75d9f4dc2e1087c65aced6"
+    },
+    "native-loader-freeze/game-core-dart-tests.exe": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/native-loader-freeze/game-core-dart-tests.exe",
+      "bytes": 11686912,
+      "sha256": "e341c13539df6a979151947910b0ce3437acb9722bc7568efa29739fe3bb44c3"
+    },
+    "native-loader-freeze/game-core-dart-tests.d": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/native-loader-freeze/game-core-dart-tests.d",
+      "bytes": 13637,
+      "sha256": "57df49bab7e92fb8adf0a4943e17b56e087ef01d23995108c24464b6c2efd06b"
+    },
+    "native-loader-freeze/engine-core.d": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/native-loader-freeze/engine-core.d",
+      "bytes": 1710,
+      "sha256": "3947cba080d41de55757c4cd03141466fb3b6f11348bb401dfddfe97426b1ad1"
+    },
+    "native-loader-freeze/compiled-inputs.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/native-loader-freeze/compiled-inputs.json",
+      "bytes": 16911,
+      "sha256": "4b6a755338da90c0de2b870062f14c145dec995c26e8ac02622c8554e2fb8fe4"
+    },
+    "native-utility-freeze/asset-native-preview.exe": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/native-utility-freeze/asset-native-preview.exe",
+      "bytes": 873472,
+      "sha256": "1fe97f32801a4ffaa4d1cdbb40d1684b29105a7e553f082b92c7f8d0dc914e4d"
+    },
+    "native-utility-freeze/asset-native-preview.d": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/native-utility-freeze/asset-native-preview.d",
+      "bytes": 1189,
+      "sha256": "41f1677a599f272855f60ba87fd903c585eb6666228055d4a9f1a6d7e3672d42"
+    },
+    "native-utility-freeze/compiled-inputs.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/enemy-art-quality-review/native-utility-freeze/compiled-inputs.json",
+      "bytes": 3305,
+      "sha256": "0bf48ba4f8260a0496634a4650ecb5802d0548b4927cdfd1daf79fa8c906a22a"
+    }
+  },
+  "standalone_utility_compiled_inputs": 10,
+  "saved_native_loader_compiled_inputs": 108,
+  "rustc": "rustc 1.97.0 (2d8144b78 2026-07-07)\nbinary: rustc\ncommit-hash: 2d8144b7880597b6e6d3dfd63a9a9efae3f533d3\ncommit-date: 2026-07-07\nhost: x86_64-pc-windows-msvc\nrelease: 1.97.0\nLLVM version: 22.1.6\n",
+  "cargo": "cargo 1.97.0 (c980f4866 2026-06-30)\n",
+  "scope": "Single Dart authored color/cluster candidate with actual offline native PixelBody/FrameBuilder and software source-art review. No normal build, live Game/GPU/physical/moving-play acceptance. Prior frozen nebula physical candidate executable became unavailable; explicit append-only correction retained."
+}
