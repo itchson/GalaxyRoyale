@@ -1,0 +1,204 @@
+{
+  "scope": "Actual source reconstruction/tool/native-math evidence only. Frozen specialist manifests reference separately retained original work files; no MP3, decoded source PCM, separated stem PCM, inference model or synthesized candidate is shipped by this curated set. Current production title remains the rejected authored V4 draft; source-score integration and human same-song acceptance remain open.",
+  "observedAt": "2026-10-12T23:14:29.188Z",
+  "files": [
+    {
+      "source": "work/title-source-voice-adapter/periodic-patch.ts",
+      "path": "artifacts/title-reference-fidelity-20261013/voice-adapter/periodic-patch.ts",
+      "bytes": 2565,
+      "sha256": "8a59285d67d6738297a45c36602d5a204fcbb931c7632317268b7a5368328fae"
+    },
+    {
+      "source": "work/title-source-voice-adapter/periodic-patch.test.mjs",
+      "path": "artifacts/title-reference-fidelity-20261013/voice-adapter/periodic-patch.test.mjs",
+      "bytes": 2637,
+      "sha256": "071480a04ed182a03997014926f730271186cade2a4bfd8e0dafaa32e078d603"
+    },
+    {
+      "source": "work/title-source-voice-adapter/tests.log",
+      "path": "artifacts/title-reference-fidelity-20261013/voice-adapter/tests.log",
+      "bytes": 573,
+      "sha256": "820220016019637477a4d00e019651084f40c83da029abe1a82b88e66cd8d126"
+    },
+    {
+      "source": "work/title-source-voice-adapter/root-fractional-tests.log",
+      "path": "artifacts/title-reference-fidelity-20261013/voice-adapter/root-fractional-tests.log",
+      "bytes": 2476,
+      "sha256": "3cb8d2234e4c7dced14eae287546c86d529040844d2c22c31d3767b3e4ec2839"
+    },
+    {
+      "source": "work/title-source-voice-adapter/native-check.html",
+      "path": "artifacts/title-reference-fidelity-20261013/voice-adapter/native-check.html",
+      "bytes": 3044,
+      "sha256": "f726da827fd0dd3fe6e8769f0e1333645e60d97f018e46b4fb03347e6874ad0b"
+    },
+    {
+      "source": "work/title-source-voice-adapter/native-check-server.mjs",
+      "path": "artifacts/title-reference-fidelity-20261013/voice-adapter/native-check-server.mjs",
+      "bytes": 2080,
+      "sha256": "53bafdefaa28be6625e9b50aba194bc10800e9af195f63da46ec7d21b02128bb"
+    },
+    {
+      "source": "work/title-source-voice-adapter/native-input-pins.json",
+      "path": "artifacts/title-reference-fidelity-20261013/voice-adapter/native-input-pins.json",
+      "bytes": 269,
+      "sha256": "0a6058a06269e2306f6215ddf0a3d1351a85a7b9a174da56220e2d131fdfc0ef"
+    },
+    {
+      "source": "work/title-source-voice-adapter/native-report.json",
+      "path": "artifacts/title-reference-fidelity-20261013/voice-adapter/native-report.json",
+      "bytes": 2156,
+      "sha256": "907a547619eee1329732b7ef40a3e93c4df0e05f29b4bf1395d5814bab720556"
+    },
+    {
+      "source": "work/title-source-voice-adapter/native-browser-check.jpg",
+      "path": "artifacts/title-reference-fidelity-20261013/voice-adapter/native-browser-check.jpg",
+      "bytes": 108788,
+      "sha256": "b4d5a55278566c69958715f6989419b29c1a549ece1cd0c90628f82b676d4e65"
+    },
+    {
+      "source": "work/title-stem-separation/separate.py",
+      "path": "artifacts/title-reference-fidelity-20261013/stem-separation/separate.py",
+      "bytes": 4644,
+      "sha256": "4181500ea815e11cc95f15bda035df9d3e233369fca45e4d8519a5301ce2f0eb"
+    },
+    {
+      "source": "work/title-stem-separation/freeze-inputs.py",
+      "path": "artifacts/title-reference-fidelity-20261013/stem-separation/freeze-inputs.py",
+      "bytes": 1653,
+      "sha256": "f2d41cea4d37e6a71c80760dd38e1345def3b2ab03c3e18138a311551165f7e3"
+    },
+    {
+      "source": "work/title-stem-separation/install.log",
+      "path": "artifacts/title-reference-fidelity-20261013/stem-separation/install.log",
+      "bytes": 337,
+      "sha256": "effaa705c651d9e93597ae5bfac92f0b9a3b0485160285ac804e604f95c9a0ba"
+    },
+    {
+      "source": "work/title-stem-separation/model-repository.json",
+      "path": "artifacts/title-reference-fidelity-20261013/stem-separation/model-repository.json",
+      "bytes": 691,
+      "sha256": "f681b3606665a5555deb0b0fd70a5e833af190b48268b0cc7de78c060b13a205"
+    },
+    {
+      "source": "work/title-stem-separation/separation.json",
+      "path": "artifacts/title-reference-fidelity-20261013/stem-separation/separation.json",
+      "bytes": 3595,
+      "sha256": "1e3d7b024a9866d09e692d05d8432ccfe928931b8dfa2474e6a59c8c2c91f774"
+    },
+    {
+      "source": "work/title-stem-separation/separation.log",
+      "path": "artifacts/title-reference-fidelity-20261013/stem-separation/separation.log",
+      "bytes": 5902,
+      "sha256": "a84a3d9ff6f58a096cc92627f75f2877e1a8c9f7daaa3f6c005d6b022d012bd4"
+    },
+    {
+      "source": "work/title-stem-separation/input-pins.json",
+      "path": "artifacts/title-reference-fidelity-20261013/stem-separation/input-pins.json",
+      "bytes": 9491,
+      "sha256": "1d3980d6423d73ea77a9c7fafacc4b566fd3a750d1029215a18d8d2a2ce46545"
+    },
+    {
+      "source": "work/title-stem-separation/studio-tasks.json",
+      "path": "artifacts/title-reference-fidelity-20261013/stem-separation/studio-tasks.json",
+      "bytes": 63,
+      "sha256": "6c39d3f35a89af80f4babd2f692f1c15359e14c1f23cc307b00c2ce51214825a"
+    },
+    {
+      "source": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/HANDOFF.md",
+      "path": "artifacts/title-reference-fidelity-20261013/source-reconstruction/HANDOFF.md",
+      "bytes": 6515,
+      "sha256": "8a6bf606f29fe06786329bae1229581928c673904a4055090eb927ad24f01524"
+    },
+    {
+      "source": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/MANIFEST.json",
+      "path": "artifacts/title-reference-fidelity-20261013/source-reconstruction/MANIFEST.json",
+      "bytes": 2515,
+      "sha256": "5566cfd751f3021f2576671fa91f7c301c39ed3bc87937f82d5a6309636aed1f"
+    },
+    {
+      "source": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/source-pins.json",
+      "path": "artifacts/title-reference-fidelity-20261013/source-reconstruction/source-pins.json",
+      "bytes": 63226,
+      "sha256": "5167b6e27a20cc857144eda922630d50fe60037da036d8446baae1dd3a997173"
+    },
+    {
+      "source": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/TIMING-CALIBRATION-UPDATE.md",
+      "path": "artifacts/title-reference-fidelity-20261013/source-reconstruction/TIMING-CALIBRATION-UPDATE.md",
+      "bytes": 2164,
+      "sha256": "b1d69be54bf37ae24c9ff563e9d9067fb5ba9a31c35cbeb3c2478b75b1cee493"
+    },
+    {
+      "source": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-percussion-prototype/HANDOFF.md",
+      "path": "artifacts/title-reference-fidelity-20261013/percussion-control/HANDOFF.md",
+      "bytes": 7109,
+      "sha256": "a41fbfb175e14d1d5cffa1b48d36921167642eb02fcf6586443ee4265417a095"
+    },
+    {
+      "source": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-percussion-prototype/MANIFEST.json",
+      "path": "artifacts/title-reference-fidelity-20261013/percussion-control/MANIFEST.json",
+      "bytes": 12213,
+      "sha256": "a48ac322d5bb5029e8671da093d127a01a26ea62dda992d1a82262d3444defc1"
+    },
+    {
+      "source": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/title-fractional-event-scheduler/HANDOFF.md",
+      "path": "artifacts/title-reference-fidelity-20261013/fractional-clock/HANDOFF.md",
+      "bytes": 5347,
+      "sha256": "1c0bc8f2618410da50d05c60e1f8c7a756d78bbcea32afa136da26879df0de36"
+    },
+    {
+      "source": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/title-fractional-event-scheduler/MANIFEST.json",
+      "path": "artifacts/title-reference-fidelity-20261013/fractional-clock/MANIFEST.json",
+      "bytes": 5577,
+      "sha256": "63c41242da1fed43d92c5babe35213bc5b2d4ade4ce6dc7f8c7554aa33bbea03"
+    },
+    {
+      "source": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/title-fractional-event-scheduler/PROTOCOL.md",
+      "path": "artifacts/title-reference-fidelity-20261013/fractional-clock/PROTOCOL.md",
+      "bytes": 8039,
+      "sha256": "7007ebc035bf6288ef8313bcf32845e9bd6ce44e2530b98eb7e0d4bc18c3fbab"
+    },
+    {
+      "source": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/title-fractional-event-scheduler/fractional-event-scheduler.ts",
+      "path": "artifacts/title-reference-fidelity-20261013/fractional-clock/fractional-event-scheduler.ts",
+      "bytes": 8098,
+      "sha256": "7225813fa8f6a403a1381565341251c938b1a5684050fc2214ffb8bbfd92b3ff"
+    },
+    {
+      "source": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/title-fractional-event-scheduler/fractional-event-scheduler.test.mjs",
+      "path": "artifacts/title-reference-fidelity-20261013/fractional-clock/fractional-event-scheduler.test.mjs",
+      "bytes": 21192,
+      "sha256": "bdea711222cd74bc32d6e46fa169108a7c435d60e382541d57cafcf3720ebba7"
+    },
+    {
+      "source": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/title-fractional-event-scheduler/verification.json",
+      "path": "artifacts/title-reference-fidelity-20261013/fractional-clock/verification.json",
+      "bytes": 798,
+      "sha256": "c5602589cd379b4157ffad2d7e7c93443d7976b6bba940c51caab291d5dffdd1"
+    },
+    {
+      "source": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/title-fractional-event-scheduler/tests-transition.log",
+      "path": "artifacts/title-reference-fidelity-20261013/fractional-clock/tests-transition.log",
+      "bytes": 3135,
+      "sha256": "fdb56cbea21bcb9d8427b919bef45ef228ccf83f20dc10146497c7e4ff2c5ea2"
+    },
+    {
+      "source": "C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/title-fidelity-source-review/HANDOFF.md",
+      "path": "artifacts/title-reference-fidelity-20261013/independent-audio-audit/HANDOFF.md",
+      "bytes": 2668,
+      "sha256": "1fd0d53e6a56d9157f2ea24ea091ce60127340e154ec9836a157246eb47ad3ac"
+    },
+    {
+      "source": "C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/title-fidelity-source-review/REVIEW.md",
+      "path": "artifacts/title-reference-fidelity-20261013/independent-audio-audit/REVIEW.md",
+      "bytes": 11691,
+      "sha256": "14b02561381ad9b93de26c82802fd8c6a6f32271eb5f70c99379112db3b38edf"
+    },
+    {
+      "source": "C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/title-fidelity-source-review/MANIFEST.json",
+      "path": "artifacts/title-reference-fidelity-20261013/independent-audio-audit/MANIFEST.json",
+      "bytes": 37680,
+      "sha256": "28c36a52a20523c46fd26e0a4047192ef68cd00ca0779d5721d877aefb05a042"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+   Compiling proc-macro2 v1.0.107
+   Compiling unicode-ident v1.0.26
+   Compiling quote v1.0.47
+   Compiling serde_core v1.0.229
+   Compiling zmij v1.0.23
+   Compiling serde v1.0.229
+   Compiling foldhash v0.2.0
+   Compiling serde_json v1.0.151
+   Compiling memchr v2.8.3
+   Compiling spin v0.12.3
+   Compiling itoa v1.0.18
+   Compiling hashbrown v0.17.1
+   Compiling hecs v0.11.2
+   Compiling syn v3.0.7
+   Compiling glam v0.30.10
+   Compiling serde_derive v1.0.229
+   Compiling bytemuck_derive v1.12.1
+   Compiling bytemuck v1.25.2
+   Compiling engine_core v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\engine_core)
+   Compiling game_core v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\game_core)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 24.50s
+     Running unittests src\lib.rs (work/integration-20261013/bastion-native-target\debug\deps\game_core-5b2032bfdcb8bcac.exe)
+
+running 6 tests
+test pixel_assets::tests::actual_damage_opens_a_previously_opaque_crater_without_changing_other_rocks ... ok
+test pixel_assets::tests::asteroid_types_have_distinct_live_masks_and_deterministic_facets ... ok
+test pixel_assets::tests::dock_center_is_open_and_damage_never_changes_the_pristine_template ... ok
+test pixel_assets::tests::generated_assets_keep_exact_occupancy_dimensions_and_hard_palette ... ok
+test pixel_assets::tests::authored_dock_panel_detail_keeps_exact_generated_open_hull ... ok
+test pixel_assets::tests::seeded_solid_bodies_keep_real_radius_and_independent_damage ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 568 filtered out; finished in 0.29s
+

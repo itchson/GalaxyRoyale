@@ -1,0 +1,13 @@
+(node:45564) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ stereo harmonic signs preserve the source local-phase basis and amplitude (2.1626ms)
+✔ sparse harmonics have zero gaps and isolated immutable input ownership (0.116ms)
+✔ rejects aliases and malformed banks instead of silently removing source partials (0.3323ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 91.5259

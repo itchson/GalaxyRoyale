@@ -1,0 +1,982 @@
+{
+  "author_worktree_head": "b27bcf823f169f32313c0a424d209ea3ddcf6f9f",
+  "production_worktree_clean": true,
+  "scope": "Work-only source transcription/additive prototypes and measurements; no production edits, installed package as inference claim, listening/fidelity/source-clock acceptance or runtime waveform loop",
+  "canonical_source": {
+    "apps/game/src/audio.ts": {
+      "root_git_revision": "c297095bb54a70fc8f1b0f74d0b269a0a15665a5",
+      "canonical_git_sha256": "698e4745ac2b3e301dd212c26cdd662c174ea4dc7b18ed7e28af49cddf754e6d",
+      "canonical_git_bytes": 50931,
+      "exact_frozen_working_copy": {
+        "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/inputs/apps/game/src/audio.ts",
+        "bytes": 50931,
+        "sha256": "698e4745ac2b3e301dd212c26cdd662c174ea4dc7b18ed7e28af49cddf754e6d"
+      }
+    },
+    "apps/game/src/title-theme.ts": {
+      "root_git_revision": "c297095bb54a70fc8f1b0f74d0b269a0a15665a5",
+      "canonical_git_sha256": "2ea2516c54f5e53a16ce05c1f4a37b5304e6282b5ea2855dc9694684a26c2069",
+      "canonical_git_bytes": 2787,
+      "exact_frozen_working_copy": {
+        "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/inputs/apps/game/src/title-theme.ts",
+        "bytes": 2917,
+        "sha256": "104bc0c4754db8b315b745291b243a619c394de1484f4a834995c74860b27135"
+      }
+    },
+    "apps/game/src/music-score.ts": {
+      "root_git_revision": "c297095bb54a70fc8f1b0f74d0b269a0a15665a5",
+      "canonical_git_sha256": "8757a5f93ed4584de7597a816124ea8f722975e234c113f97ae7d14d32140703",
+      "canonical_git_bytes": 771,
+      "exact_frozen_working_copy": {
+        "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/inputs/apps/game/src/music-score.ts",
+        "bytes": 807,
+        "sha256": "9777e0bacac612b52c5b9eeb7c760fb8ba47a6ec62eb89123f2f45a210052683"
+      }
+    },
+    "apps/game/src/music-clock.ts": {
+      "root_git_revision": "c297095bb54a70fc8f1b0f74d0b269a0a15665a5",
+      "canonical_git_sha256": "aec678986a6b4fe13bafb2cb4999717c1069b08504cebb6b1b44046a2af6c559",
+      "canonical_git_bytes": 3973,
+      "exact_frozen_working_copy": {
+        "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/inputs/apps/game/src/music-clock.ts",
+        "bytes": 4084,
+        "sha256": "12fff1dfe804ed4aaaa274418b74efa8604b0afd656ef718cb4e43930a475aa9"
+      }
+    }
+  },
+  "initial_root_observed_head": "c297095bb54a70fc8f1b0f74d0b269a0a15665a5",
+  "unused_python_onnx_model": {
+    "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/.venv/Lib/site-packages/basic_pitch/saved_models/icassp_2022/nmp.onnx",
+    "bytes": 230444,
+    "sha256": "2c3c1d144bfa61ad236e92e169c13535c880469a12a047d4e73451f2c059a0ec",
+    "execution": "not reached; imports failed before Model initialization"
+  },
+  "successful_backend": "Official @spotify/basic-pitch1.0.1 / @tensorflow/tfjs pureJS CPU, Node24.18.0; frozen model/API/lock/outputs included",
+  "original_mp3": {
+    "path": "C:/Users/mitch/Downloads/Galaxy Royale (3).mp3",
+    "bytes": 1032175,
+    "sha256": "95fcb149bb55da752c4d93c18fcc1913a23b70ccafecb52d8db5548dc64755d6"
+  },
+  "evidence": {
+    "all443-fixed-pitch-first8.wav": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/all443-fixed-pitch-first8.wav",
+      "bytes": 3072058,
+      "sha256": "e8bac18c2d069f92e79da55f2c3e1d953f0f640fbdec78071e4838c31c3b5007"
+    },
+    "all443-raw-bends-first8.wav": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/all443-raw-bends-first8.wav",
+      "bytes": 3072058,
+      "sha256": "69f7bb3ece5e63ac195d36fabf7ab49e6ce9b8239b60036672f6fc1a9561cc4b"
+    },
+    "analyze_events-first.py": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/analyze_events-first.py",
+      "bytes": 6034,
+      "sha256": "f8dcf098aa92566acfece7dc530fe264e4fcc3512a7140307ac20f34d46dcf6f"
+    },
+    "analyze_events.py": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/analyze_events.py",
+      "bytes": 6034,
+      "sha256": "894539659a1cc8c4ce13342e2f9dd52342bb27aa4ddd8eece086299d92e7c9bf"
+    },
+    "analyze_transients.py": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/analyze_transients.py",
+      "bytes": 5122,
+      "sha256": "456c917afd1701e3c1dcbcf3f6c375373f61a43ca8fc91df5814d20c5a2922bb"
+    },
+    "basic-pitch-install-report.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/basic-pitch-install-report.json",
+      "bytes": 14326,
+      "sha256": "68382e2f8684ccb354fe11931c11ae6b5a8f0e22d5f7c3d4a8c66dc6be8608ad"
+    },
+    "basic-pitch-install.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/basic-pitch-install.log",
+      "bytes": 330,
+      "sha256": "be28e58a7848ad592bcfb000bcf1bbea4c2281238b0710bd1c8adefc5cd99f1b"
+    },
+    "bend-calibration.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/bend-calibration.json",
+      "bytes": 1015,
+      "sha256": "2c5136e166f83acb8ea3a238b02085f0cd1f6e3a5187c9629fc4377e27964de4"
+    },
+    "bend-calibration.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/bend-calibration.log",
+      "bytes": 1055,
+      "sha256": "d66c362ef650c95b192650cbdcf5535fd378159c0d6c570e738c2cbf18e8ecb0"
+    },
+    "candidate-analysis-first-assertion-failure.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/candidate-analysis-first-assertion-failure.log",
+      "bytes": 349,
+      "sha256": "c0b082edb04ffae6377dd9f3f62bcc8393f49cb7038794c0cc9a39cecbb0d149"
+    },
+    "candidate-analysis-retry.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/candidate-analysis-retry.log",
+      "bytes": 5398,
+      "sha256": "bf9f35e5e0e0e39bf88766ae0653d2a225ae1423ef4d286ea7bffa74ca7affc5"
+    },
+    "candidate-analysis.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/candidate-analysis.json",
+      "bytes": 5174,
+      "sha256": "e520d836a40faa4da6980cd0793194d4ce8506b30acc619079dca1da482bc1ce"
+    },
+    "candidate-analysis.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/candidate-analysis.log",
+      "bytes": 349,
+      "sha256": "c0b082edb04ffae6377dd9f3f62bcc8393f49cb7038794c0cc9a39cecbb0d149"
+    },
+    "candidate-verification.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/candidate-verification.json",
+      "bytes": 2957,
+      "sha256": "0c97b2072e968ad65ea78d5f0965d339e817edfbdfe84e6bbf0ce24c3540e8c6"
+    },
+    "candidate-verification.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/candidate-verification.log",
+      "bytes": 3031,
+      "sha256": "37cf2aba08b52a99c987dabc8f93a1573617515f5acf705e7564c44e5de6cba6"
+    },
+    "compare_full.py": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/compare_full.py",
+      "bytes": 2832,
+      "sha256": "a1f43c08819abea62c5d3052b794ce227ab54153fffd7d22a98006c69064cc97"
+    },
+    "frozen-full420/bend-calibration.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-full420/bend-calibration.json",
+      "bytes": 1015,
+      "sha256": "2c5136e166f83acb8ea3a238b02085f0cd1f6e3a5187c9629fc4377e27964de4"
+    },
+    "frozen-full420/bend-calibration.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-full420/bend-calibration.log",
+      "bytes": 1055,
+      "sha256": "d66c362ef650c95b192650cbdcf5535fd378159c0d6c570e738c2cbf18e8ecb0"
+    },
+    "frozen-full420/calibrate-bends.cjs": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-full420/calibrate-bends.cjs",
+      "bytes": 1212,
+      "sha256": "a43e1448aa87e112778d3a4a98799631e56109a442704a80788905ca85161788"
+    },
+    "frozen-full420/full-additive-fixed-pitch-candidate.wav": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-full420/full-additive-fixed-pitch-candidate.wav",
+      "bytes": 16389178,
+      "sha256": "5aa2e9f951d2ee4a952275ca0b66e7f665fa0e9d531ac32ef0405a42abb36aca"
+    },
+    "frozen-full420/full-additive-fixed-pitch-patches.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-full420/full-additive-fixed-pitch-patches.json",
+      "bytes": 2222583,
+      "sha256": "1277b933de14bdb69fb527c13bf9ecd06f248af225cb8b80f9c7d769acd659a5"
+    },
+    "frozen-full420/full-additive-raw-bends-candidate.wav": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-full420/full-additive-raw-bends-candidate.wav",
+      "bytes": 16389178,
+      "sha256": "9396f143f8a63889deb7ae77639718a49ffd3bac02a630df279100fa1e61b2f0"
+    },
+    "frozen-full420/full-additive-raw-bends-patches.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-full420/full-additive-raw-bends-patches.json",
+      "bytes": 2217363,
+      "sha256": "7752b21a294651b076f413c739ae4974b6337b44751b508de70d55caec79d37f"
+    },
+    "frozen-full420/full-js-default-candidate-events.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-full420/full-js-default-candidate-events.json",
+      "bytes": 153734,
+      "sha256": "ea27fa3dd9c66c34c173d45a02138170701c3088a0f3458ca2f241eec5d6a816"
+    },
+    "frozen-full420/full-js-fast-candidate-events.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-full420/full-js-fast-candidate-events.json",
+      "bytes": 335061,
+      "sha256": "9cff0b3601a81833d957cc1a46ee292e36152b430d35c9ebdc8702b2270da77b"
+    },
+    "frozen-full420/full-js-inference.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-full420/full-js-inference.json",
+      "bytes": 5251,
+      "sha256": "0d60ced46c039aabdd2ed9d27928a8a210532b84a3b440d1896b1608f8897caf"
+    },
+    "frozen-full420/full-js-inference.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-full420/full-js-inference.log",
+      "bytes": 9112,
+      "sha256": "312c29f1b0430dae9ceff96893ee79e6620fb2bc9fae48fdb27a87023790e752"
+    },
+    "frozen-full420/full-js-model-output.json.gz": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-full420/full-js-model-output.json.gz",
+      "bytes": 13877141,
+      "sha256": "8479351ede07aab8f17b04476a34cda391a2e16a1fc13884e753cd09c7fb0ab2"
+    },
+    "frozen-full420/full-reconstruction.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-full420/full-reconstruction.json",
+      "bytes": 4971,
+      "sha256": "8e9b059903cf97900113bd7f6e06a9729a2764dd75d14247cf8958760e00a68d"
+    },
+    "frozen-full420/full-reconstruction.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-full420/full-reconstruction.log",
+      "bytes": 6981,
+      "sha256": "aeaae895a2a7ad6e0f9f72cca1f50ed633b222de56068be0d0c5f0a1b7a658de"
+    },
+    "frozen-full420/MANIFEST.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-full420/MANIFEST.json",
+      "bytes": 4695,
+      "sha256": "437916b19fc92105a95d103403c1a3a3a3e4d624a46c61b2201c7468e6c5da63"
+    },
+    "frozen-full420/reconstruct_full.py": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-full420/reconstruct_full.py",
+      "bytes": 8359,
+      "sha256": "d6fbbb47f0435a119db58c9c2c2903901eb6488ede79d8aacb3c0c473c77cc3d"
+    },
+    "frozen-full443/all443-fixed-pitch-first8.wav": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-full443/all443-fixed-pitch-first8.wav",
+      "bytes": 3072058,
+      "sha256": "e8bac18c2d069f92e79da55f2c3e1d953f0f640fbdec78071e4838c31c3b5007"
+    },
+    "frozen-full443/all443-raw-bends-first8.wav": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-full443/all443-raw-bends-first8.wav",
+      "bytes": 3072058,
+      "sha256": "69f7bb3ece5e63ac195d36fabf7ab49e6ce9b8239b60036672f6fc1a9561cc4b"
+    },
+    "frozen-full443/analyze_transients.py": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-full443/analyze_transients.py",
+      "bytes": 5122,
+      "sha256": "456c917afd1701e3c1dcbcf3f6c375373f61a43ca8fc91df5814d20c5a2922bb"
+    },
+    "frozen-full443/bend-calibration.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-full443/bend-calibration.json",
+      "bytes": 1015,
+      "sha256": "2c5136e166f83acb8ea3a238b02085f0cd1f6e3a5187c9629fc4377e27964de4"
+    },
+    "frozen-full443/compare_full.py": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-full443/compare_full.py",
+      "bytes": 2832,
+      "sha256": "a1f43c08819abea62c5d3052b794ce227ab54153fffd7d22a98006c69064cc97"
+    },
+    "frozen-full443/full-all-additive-fixed-pitch-candidate.wav": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-full443/full-all-additive-fixed-pitch-candidate.wav",
+      "bytes": 16389178,
+      "sha256": "d1b05f46570b6768586dde704e8db35b4a577e535993e16891d0699204f84212"
+    },
+    "frozen-full443/full-all-additive-fixed-pitch-patches.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-full443/full-all-additive-fixed-pitch-patches.json",
+      "bytes": 2347290,
+      "sha256": "f9f8cf8114a95c4d97800feff723d9ce5bd9d8d12dc2a1e31ae2082f46fc8ba3"
+    },
+    "frozen-full443/full-all-additive-raw-bends-candidate.wav": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-full443/full-all-additive-raw-bends-candidate.wav",
+      "bytes": 16389178,
+      "sha256": "e5c2b22057fcdfb3089ccae1c0ba835f4300cb818b8093129785360065cd66e7"
+    },
+    "frozen-full443/full-all-additive-raw-bends-patches.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-full443/full-all-additive-raw-bends-patches.json",
+      "bytes": 2342302,
+      "sha256": "6ca3bcd5f2cbc6bb979161ebadb3d00c0c2818fda99551b20ab9397c2aa5e72c"
+    },
+    "frozen-full443/full-all-reconstruction.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-full443/full-all-reconstruction.json",
+      "bytes": 5020,
+      "sha256": "a8ad666cc1e753a007c082bab25864a561c4f5d559f1cedff8d56eaf89f97818"
+    },
+    "frozen-full443/full-all-reconstruction.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-full443/full-all-reconstruction.log",
+      "bytes": 7049,
+      "sha256": "4b670f23ec5407bcedcd028284906184084f02c7470871b1df7196404906f52d"
+    },
+    "frozen-full443/full-comparison.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-full443/full-comparison.json",
+      "bytes": 7102,
+      "sha256": "78dd9a6668a248261b3692fee847d039816e413db17670eac62a21f4a83be2e7"
+    },
+    "frozen-full443/full-comparison.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-full443/full-comparison.log",
+      "bytes": 2572,
+      "sha256": "4145b164571ebda9125fda914d0eefb1166b7da5edc929af30eaa6b3946192a7"
+    },
+    "frozen-full443/HANDOFF.md": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-full443/HANDOFF.md",
+      "bytes": 6515,
+      "sha256": "8a6bf606f29fe06786329bae1229581928c673904a4055090eb927ad24f01524"
+    },
+    "frozen-full443/inputs/peer-calibration-analysis.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-full443/inputs/peer-calibration-analysis.json",
+      "bytes": 70695,
+      "sha256": "8056e38474ec348decfd323974131d2dc0cde13f8f74de01207794ea44428308"
+    },
+    "frozen-full443/MANIFEST.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-full443/MANIFEST.json",
+      "bytes": 6243,
+      "sha256": "f5b16b67e2b6432f949f460003281aa862dea42ee27e1fee416418dfcffdbf0a"
+    },
+    "frozen-full443/reconstruct_full_all.py": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-full443/reconstruct_full_all.py",
+      "bytes": 8340,
+      "sha256": "c2daede91debf34ffba323ac8c8b1b68c4ef39a832a400a7e8c6bb2290b6f0fa"
+    },
+    "frozen-full443/source-transient-analysis.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-full443/source-transient-analysis.json",
+      "bytes": 2326,
+      "sha256": "0d536ce08853f04daae9987189c69cca729420e8b52f6ad717780455d9189e20"
+    },
+    "frozen-full443/source-transient-analysis.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-full443/source-transient-analysis.log",
+      "bytes": 2367,
+      "sha256": "70b03e58804538bb07fddc4a97cec2e805c71e97500398609b41bbcca294a030"
+    },
+    "frozen-full443/source-transient-candidate-events.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-full443/source-transient-candidate-events.json",
+      "bytes": 233941,
+      "sha256": "1947b66189d98387db70ebd04a43df47c136abaac4b900774765c537bd1650eb"
+    },
+    "frozen-full443/TIMING-CALIBRATION-UPDATE.md": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-full443/TIMING-CALIBRATION-UPDATE.md",
+      "bytes": 2164,
+      "sha256": "b1d69be54bf37ae24c9ff563e9d9067fb5ba9a31c35cbeb3c2478b75b1cee493"
+    },
+    "frozen-hook8/candidate-analysis.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-hook8/candidate-analysis.json",
+      "bytes": 5174,
+      "sha256": "e520d836a40faa4da6980cd0793194d4ce8506b30acc619079dca1da482bc1ce"
+    },
+    "frozen-hook8/candidate-verification.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-hook8/candidate-verification.json",
+      "bytes": 2957,
+      "sha256": "0c97b2072e968ad65ea78d5f0965d339e817edfbdfe84e6bbf0ce24c3540e8c6"
+    },
+    "frozen-hook8/candidate-verification.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-hook8/candidate-verification.log",
+      "bytes": 3031,
+      "sha256": "37cf2aba08b52a99c987dabc8f93a1573617515f5acf705e7564c44e5de6cba6"
+    },
+    "frozen-hook8/hook8-additive-source-candidate.wav": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-hook8/hook8-additive-source-candidate.wav",
+      "bytes": 3072058,
+      "sha256": "4287b9a89c9acb5bdcb1f22e689cb2c16dc4d00862f84664a3a3247298c3685f"
+    },
+    "frozen-hook8/hook8-additive-source-patches.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-hook8/hook8-additive-source-patches.json",
+      "bytes": 332906,
+      "sha256": "de4725d750d575846887b431217ccfef283a512217605dee6b0f733feda3024b"
+    },
+    "frozen-hook8/hook8-js-default-candidate-events.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-hook8/hook8-js-default-candidate-events.json",
+      "bytes": 23806,
+      "sha256": "641004f7d6242a5b15eddee8a818462c04731af95ec595ab1793ee5a4e7d24c2"
+    },
+    "frozen-hook8/hook8-js-default-candidate.mid": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-hook8/hook8-js-default-candidate.mid",
+      "bytes": 5543,
+      "sha256": "a03cff776c4dc0bd0b6d006b1c91c5b240ea1b5bd8237a6806bf23d624ea1b1b"
+    },
+    "frozen-hook8/hook8-js-fast-candidate-events.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-hook8/hook8-js-fast-candidate-events.json",
+      "bytes": 54276,
+      "sha256": "4ae85f9a0c5de86c2b28d92a25389e0d22d5645b42636719c135c1a00c44b3c2"
+    },
+    "frozen-hook8/hook8-js-fast-candidate.mid": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-hook8/hook8-js-fast-candidate.mid",
+      "bytes": 9803,
+      "sha256": "4b613f95eb1ef281ca465bdca6a49881894efc7d2f0ae595e737eba4a2737d31"
+    },
+    "frozen-hook8/hook8-js-inference-start.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-hook8/hook8-js-inference-start.json",
+      "bytes": 2644,
+      "sha256": "06c693d87a7473b1b306a98dd2ccd1b8e4729f0c16c3d0bd41af7ce501ac80c1"
+    },
+    "frozen-hook8/hook8-js-inference.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-hook8/hook8-js-inference.json",
+      "bytes": 5232,
+      "sha256": "dbb542131394bb409426ccba2027d17c50dc2f1025c74ab5399ec07e2f97d17c"
+    },
+    "frozen-hook8/hook8-js-inference.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-hook8/hook8-js-inference.log",
+      "bytes": 8459,
+      "sha256": "0e9d82f397430782d672628a72be6c2f076985e0364205184a016c9d43041e4b"
+    },
+    "frozen-hook8/hook8-js-model-output.json.gz": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-hook8/hook8-js-model-output.json.gz",
+      "bytes": 2600310,
+      "sha256": "faa2b8f9e75eabd320d4ef0fa2256fa63a344de467d639cf160a262e7939838f"
+    },
+    "frozen-hook8/hook8-reconstruction.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-hook8/hook8-reconstruction.json",
+      "bytes": 3170,
+      "sha256": "d7fe94f9bd302830f0ed7ea0db5e739c21b494ffba6a9df3377c96417244a1fd"
+    },
+    "frozen-hook8/hook8-reconstruction.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-hook8/hook8-reconstruction.log",
+      "bytes": 3234,
+      "sha256": "c48a39736cf1d63e3f81e33ef89f4aaf15bd620213a81c68aa3f3e0bccdc07a2"
+    },
+    "frozen-hook8/hook8-reference-original.wav": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-hook8/hook8-reference-original.wav",
+      "bytes": 3072058,
+      "sha256": "2d132d8930194dfdb700fd844da291f57c384462276028812fb5ba3e80f540d5"
+    },
+    "frozen-hook8/initial-input-pins.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-hook8/initial-input-pins.json",
+      "bytes": 6137,
+      "sha256": "5fb863ea01512696a63760ac793ea832417ec26eda902a501db44f8a328d5e03"
+    },
+    "frozen-hook8/inputs/apps/game/src/audio.ts": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-hook8/inputs/apps/game/src/audio.ts",
+      "bytes": 50931,
+      "sha256": "698e4745ac2b3e301dd212c26cdd662c174ea4dc7b18ed7e28af49cddf754e6d"
+    },
+    "frozen-hook8/inputs/apps/game/src/music-clock.ts": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-hook8/inputs/apps/game/src/music-clock.ts",
+      "bytes": 4084,
+      "sha256": "12fff1dfe804ed4aaaa274418b74efa8604b0afd656ef718cb4e43930a475aa9"
+    },
+    "frozen-hook8/inputs/apps/game/src/music-score.ts": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-hook8/inputs/apps/game/src/music-score.ts",
+      "bytes": 807,
+      "sha256": "9777e0bacac612b52c5b9eeb7c760fb8ba47a6ec62eb89123f2f45a210052683"
+    },
+    "frozen-hook8/inputs/apps/game/src/title-theme.ts": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-hook8/inputs/apps/game/src/title-theme.ts",
+      "bytes": 2917,
+      "sha256": "104bc0c4754db8b315b745291b243a619c394de1484f4a834995c74860b27135"
+    },
+    "frozen-hook8/inputs/artifacts/title-reference-fidelity-20261013/user-feedback-and-correction.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-hook8/inputs/artifacts/title-reference-fidelity-20261013/user-feedback-and-correction.json",
+      "bytes": 1006,
+      "sha256": "fadaeba8cb84f474824b80fb06d1317352108deb935123a27e9902f8f0f6afe2"
+    },
+    "frozen-hook8/inputs/reference-stereo.wav": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-hook8/inputs/reference-stereo.wav",
+      "bytes": 16389344,
+      "sha256": "5c48d1528353c3ab1b6d3d9973f3c4e152091e97b48bc459a7d3436e66f78900"
+    },
+    "frozen-hook8/inputs/work/title-fullness-v4/captures/qa-1791838846520-3f539dcd/report.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-hook8/inputs/work/title-fullness-v4/captures/qa-1791838846520-3f539dcd/report.json",
+      "bytes": 110275,
+      "sha256": "a36301e4aa0fbf0398473b4fb68a555a5e04ac233f8035c43e6bda9c5de242e6"
+    },
+    "frozen-hook8/inputs/work/title-fullness-v4/source-pins.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-hook8/inputs/work/title-fullness-v4/source-pins.json",
+      "bytes": 2618,
+      "sha256": "ab37bff2ae723bf6da9a5001e85071f9cfc536d88004901e01549e5c9e8f8470"
+    },
+    "frozen-hook8/inputs/work/title-score-20261013/measured-analysis.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-hook8/inputs/work/title-score-20261013/measured-analysis.json",
+      "bytes": 207025,
+      "sha256": "d9ede471c8c607e4bd0056f18175cb16f0527870db8286a0cc66a6b656656ed1"
+    },
+    "frozen-hook8/inputs/work/title-score-20261013/musical-report.md": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-hook8/inputs/work/title-score-20261013/musical-report.md",
+      "bytes": 16649,
+      "sha256": "61a1b636057a914ffcf1ce94a8af0fcf0d0215ac73c872c661e28048eba93c4a"
+    },
+    "frozen-hook8/inputs/work/title-score-20261013/refined-timing.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-hook8/inputs/work/title-score-20261013/refined-timing.json",
+      "bytes": 6269,
+      "sha256": "0968291256798762e2b08aeaa26d6b82686c7dc618ea0f5642a6a2eed815ef63"
+    },
+    "frozen-hook8/inputs/work/title-score-20261013/score-plan.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-hook8/inputs/work/title-score-20261013/score-plan.json",
+      "bytes": 3629,
+      "sha256": "f622bbded412c2421e40b141b6b587f56ddbe93a015ea98c248f8f9347cb8a65"
+    },
+    "frozen-hook8/inputs/work/title-score-engine/handoff.md": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-hook8/inputs/work/title-score-engine/handoff.md",
+      "bytes": 5608,
+      "sha256": "0ea1ff1c3bee79eb09228a284bff0747064f2406c35d635ac4fa5a11be3cf97c"
+    },
+    "frozen-hook8/js-candidate/node_modules/@spotify/basic-pitch/cjs/inference.js": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-hook8/js-candidate/node_modules/@spotify/basic-pitch/cjs/inference.js",
+      "bytes": 6186,
+      "sha256": "9546f897b7182ade8ba4da7b73d3afdda3fd1062a5f3e38e37cb9004e196ee84"
+    },
+    "frozen-hook8/js-candidate/node_modules/@spotify/basic-pitch/cjs/toMidi.js": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-hook8/js-candidate/node_modules/@spotify/basic-pitch/cjs/toMidi.js",
+      "bytes": 13660,
+      "sha256": "3b694475df24bf639a2e79a981c9e1a67c4ebbe219e8a9d6c1f399ebc349b6c1"
+    },
+    "frozen-hook8/js-candidate/node_modules/@spotify/basic-pitch/model/group1-shard1of1.bin": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-hook8/js-candidate/node_modules/@spotify/basic-pitch/model/group1-shard1of1.bin",
+      "bytes": 742392,
+      "sha256": "b142a95737a52e1e412d5f92e73d8bb80dfe8d04941acc0702f11f4524fb377c"
+    },
+    "frozen-hook8/js-candidate/node_modules/@spotify/basic-pitch/model/model.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-hook8/js-candidate/node_modules/@spotify/basic-pitch/model/model.json",
+      "bytes": 174537,
+      "sha256": "1ed1aaee3409ec1dc098c8b01f430c0911f6fe9412e7af8086750f9e8f302f68"
+    },
+    "frozen-hook8/js-candidate/node_modules/@spotify/basic-pitch/package.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-hook8/js-candidate/node_modules/@spotify/basic-pitch/package.json",
+      "bytes": 1405,
+      "sha256": "6bd53a50f0e39ae7901a9e0822021be6361cc3fbfcd5d7ae59fd84bf2ee5084a"
+    },
+    "frozen-hook8/js-candidate/package-lock.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-hook8/js-candidate/package-lock.json",
+      "bytes": 29573,
+      "sha256": "5123d0604bdc742b708856cb8828cc13230267102a58f24c0c5d37f120294372"
+    },
+    "frozen-hook8/js-candidate/package.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-hook8/js-candidate/package.json",
+      "bytes": 64,
+      "sha256": "3956be94c97aa8c1af0bf2dde24730512a1f40e12782b86044cfc0ce0b652a75"
+    },
+    "frozen-hook8/js-candidate/transcribe.cjs": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-hook8/js-candidate/transcribe.cjs",
+      "bytes": 6368,
+      "sha256": "b4a23a1c3801519be998a7eadf5a4936bcd8dd8e98e6009375bb5fde0a1a7c57"
+    },
+    "frozen-hook8/MANIFEST.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-hook8/MANIFEST.json",
+      "bytes": 19875,
+      "sha256": "eb41e7ab2976dd0bb348a889a7c099b83feb71ce0856fb74b8ec258f67df05a6"
+    },
+    "frozen-hook8/reconstruct_hook.py": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-hook8/reconstruct_hook.py",
+      "bytes": 6400,
+      "sha256": "b088e6169c1deb9814b35e21e1fe7548e6bc84c61faa199e11943900da00199e"
+    },
+    "frozen-hook8/reference-mono.wav": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/frozen-hook8/reference-mono.wav",
+      "bytes": 1882398,
+      "sha256": "c1095d741fabb279f33fdb0216d3a10521b30b129903daa99eb15bb8bd5a3d02"
+    },
+    "full-additive-fixed-pitch-candidate.wav": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/full-additive-fixed-pitch-candidate.wav",
+      "bytes": 16389178,
+      "sha256": "5aa2e9f951d2ee4a952275ca0b66e7f665fa0e9d531ac32ef0405a42abb36aca"
+    },
+    "full-additive-fixed-pitch-patches.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/full-additive-fixed-pitch-patches.json",
+      "bytes": 2222583,
+      "sha256": "1277b933de14bdb69fb527c13bf9ecd06f248af225cb8b80f9c7d769acd659a5"
+    },
+    "full-additive-raw-bends-candidate.wav": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/full-additive-raw-bends-candidate.wav",
+      "bytes": 16389178,
+      "sha256": "9396f143f8a63889deb7ae77639718a49ffd3bac02a630df279100fa1e61b2f0"
+    },
+    "full-additive-raw-bends-patches.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/full-additive-raw-bends-patches.json",
+      "bytes": 2217363,
+      "sha256": "7752b21a294651b076f413c739ae4974b6337b44751b508de70d55caec79d37f"
+    },
+    "full-all-additive-fixed-pitch-candidate.wav": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/full-all-additive-fixed-pitch-candidate.wav",
+      "bytes": 16389178,
+      "sha256": "d1b05f46570b6768586dde704e8db35b4a577e535993e16891d0699204f84212"
+    },
+    "full-all-additive-fixed-pitch-patches.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/full-all-additive-fixed-pitch-patches.json",
+      "bytes": 2347290,
+      "sha256": "f9f8cf8114a95c4d97800feff723d9ce5bd9d8d12dc2a1e31ae2082f46fc8ba3"
+    },
+    "full-all-additive-raw-bends-candidate.wav": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/full-all-additive-raw-bends-candidate.wav",
+      "bytes": 16389178,
+      "sha256": "e5c2b22057fcdfb3089ccae1c0ba835f4300cb818b8093129785360065cd66e7"
+    },
+    "full-all-additive-raw-bends-patches.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/full-all-additive-raw-bends-patches.json",
+      "bytes": 2342302,
+      "sha256": "6ca3bcd5f2cbc6bb979161ebadb3d00c0c2818fda99551b20ab9397c2aa5e72c"
+    },
+    "full-all-reconstruction.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/full-all-reconstruction.json",
+      "bytes": 5020,
+      "sha256": "a8ad666cc1e753a007c082bab25864a561c4f5d559f1cedff8d56eaf89f97818"
+    },
+    "full-all-reconstruction.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/full-all-reconstruction.log",
+      "bytes": 7049,
+      "sha256": "4b670f23ec5407bcedcd028284906184084f02c7470871b1df7196404906f52d"
+    },
+    "full-comparison.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/full-comparison.json",
+      "bytes": 7102,
+      "sha256": "78dd9a6668a248261b3692fee847d039816e413db17670eac62a21f4a83be2e7"
+    },
+    "full-comparison.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/full-comparison.log",
+      "bytes": 2572,
+      "sha256": "4145b164571ebda9125fda914d0eefb1166b7da5edc929af30eaa6b3946192a7"
+    },
+    "full-js-default-candidate-events.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/full-js-default-candidate-events.json",
+      "bytes": 153734,
+      "sha256": "ea27fa3dd9c66c34c173d45a02138170701c3088a0f3458ca2f241eec5d6a816"
+    },
+    "full-js-default-candidate.mid": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/full-js-default-candidate.mid",
+      "bytes": 36559,
+      "sha256": "b6b16cce2b6d7bc5b33bdc3b82c51776297004988a49c0ac77abb71ed7036e83"
+    },
+    "full-js-fast-candidate-events.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/full-js-fast-candidate-events.json",
+      "bytes": 335061,
+      "sha256": "9cff0b3601a81833d957cc1a46ee292e36152b430d35c9ebdc8702b2270da77b"
+    },
+    "full-js-fast-candidate.mid": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/full-js-fast-candidate.mid",
+      "bytes": 62331,
+      "sha256": "a5b162aa0008886443b29584f0ff25885319a0e1ede860b0d7b722f50d07876e"
+    },
+    "full-js-inference-start.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/full-js-inference-start.json",
+      "bytes": 2648,
+      "sha256": "386a669fca1845663e7c345558fc99f09677082f5b170bb7b1fb2a299682d361"
+    },
+    "full-js-inference.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/full-js-inference.json",
+      "bytes": 5251,
+      "sha256": "0d60ced46c039aabdd2ed9d27928a8a210532b84a3b440d1896b1608f8897caf"
+    },
+    "full-js-inference.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/full-js-inference.log",
+      "bytes": 9112,
+      "sha256": "312c29f1b0430dae9ceff96893ee79e6620fb2bc9fae48fdb27a87023790e752"
+    },
+    "full-js-model-output.json.gz": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/full-js-model-output.json.gz",
+      "bytes": 13877141,
+      "sha256": "8479351ede07aab8f17b04476a34cda391a2e16a1fc13884e753cd09c7fb0ab2"
+    },
+    "full-reconstruction.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/full-reconstruction.json",
+      "bytes": 4971,
+      "sha256": "8e9b059903cf97900113bd7f6e06a9729a2764dd75d14247cf8958760e00a68d"
+    },
+    "full-reconstruction.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/full-reconstruction.log",
+      "bytes": 6981,
+      "sha256": "aeaae895a2a7ad6e0f9f72cca1f50ed633b222de56068be0d0c5f0a1b7a658de"
+    },
+    "HANDOFF.md": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/HANDOFF.md",
+      "bytes": 6515,
+      "sha256": "8a6bf606f29fe06786329bae1229581928c673904a4055090eb927ad24f01524"
+    },
+    "hook-candidate-vs-authored-lead.png": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/hook-candidate-vs-authored-lead.png",
+      "bytes": 65142,
+      "sha256": "4c314e0a5888b516cdb240e8ce69bce08aac051e81e8e8a0e6455a3d16c7589a"
+    },
+    "hook8-additive-source-candidate.wav": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/hook8-additive-source-candidate.wav",
+      "bytes": 3072058,
+      "sha256": "4287b9a89c9acb5bdcb1f22e689cb2c16dc4d00862f84664a3a3247298c3685f"
+    },
+    "hook8-additive-source-patches.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/hook8-additive-source-patches.json",
+      "bytes": 332906,
+      "sha256": "de4725d750d575846887b431217ccfef283a512217605dee6b0f733feda3024b"
+    },
+    "hook8-js-default-candidate-events.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/hook8-js-default-candidate-events.json",
+      "bytes": 23806,
+      "sha256": "641004f7d6242a5b15eddee8a818462c04731af95ec595ab1793ee5a4e7d24c2"
+    },
+    "hook8-js-default-candidate.mid": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/hook8-js-default-candidate.mid",
+      "bytes": 5543,
+      "sha256": "a03cff776c4dc0bd0b6d006b1c91c5b240ea1b5bd8237a6806bf23d624ea1b1b"
+    },
+    "hook8-js-fast-candidate-events.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/hook8-js-fast-candidate-events.json",
+      "bytes": 54276,
+      "sha256": "4ae85f9a0c5de86c2b28d92a25389e0d22d5645b42636719c135c1a00c44b3c2"
+    },
+    "hook8-js-fast-candidate.mid": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/hook8-js-fast-candidate.mid",
+      "bytes": 9803,
+      "sha256": "4b613f95eb1ef281ca465bdca6a49881894efc7d2f0ae595e737eba4a2737d31"
+    },
+    "hook8-js-inference-start.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/hook8-js-inference-start.json",
+      "bytes": 2644,
+      "sha256": "06c693d87a7473b1b306a98dd2ccd1b8e4729f0c16c3d0bd41af7ce501ac80c1"
+    },
+    "hook8-js-inference.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/hook8-js-inference.json",
+      "bytes": 5232,
+      "sha256": "dbb542131394bb409426ccba2027d17c50dc2f1025c74ab5399ec07e2f97d17c"
+    },
+    "hook8-js-inference.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/hook8-js-inference.log",
+      "bytes": 8459,
+      "sha256": "0e9d82f397430782d672628a72be6c2f076985e0364205184a016c9d43041e4b"
+    },
+    "hook8-js-model-output.json.gz": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/hook8-js-model-output.json.gz",
+      "bytes": 2600310,
+      "sha256": "faa2b8f9e75eabd320d4ef0fa2256fa63a344de467d639cf160a262e7939838f"
+    },
+    "hook8-reconstruction.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/hook8-reconstruction.json",
+      "bytes": 3170,
+      "sha256": "d7fe94f9bd302830f0ed7ea0db5e739c21b494ffba6a9df3377c96417244a1fd"
+    },
+    "hook8-reconstruction.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/hook8-reconstruction.log",
+      "bytes": 3234,
+      "sha256": "c48a39736cf1d63e3f81e33ef89f4aaf15bd620213a81c68aa3f3e0bccdc07a2"
+    },
+    "hook8-reference-original.wav": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/hook8-reference-original.wav",
+      "bytes": 3072058,
+      "sha256": "2d132d8930194dfdb700fd844da291f57c384462276028812fb5ba3e80f540d5"
+    },
+    "inference-first-import-failure.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/inference-first-import-failure.log",
+      "bytes": 1654,
+      "sha256": "adbca289425361d54c4ef6396a5a7ecb8380c4b5a9c47db7f454878b328a722f"
+    },
+    "inference-retry.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/inference-retry.log",
+      "bytes": 4605,
+      "sha256": "db068b29cc15f3b39a3474fb9d139914ee7d2a9795f3c7150b20cdc3dc7fa6a3"
+    },
+    "inference-second-application-control-failure.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/inference-second-application-control-failure.log",
+      "bytes": 4605,
+      "sha256": "db068b29cc15f3b39a3474fb9d139914ee7d2a9795f3c7150b20cdc3dc7fa6a3"
+    },
+    "inference.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/inference.log",
+      "bytes": 1654,
+      "sha256": "adbca289425361d54c4ef6396a5a7ecb8380c4b5a9c47db7f454878b328a722f"
+    },
+    "initial-input-pins.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/initial-input-pins.json",
+      "bytes": 6137,
+      "sha256": "5fb863ea01512696a63760ac793ea832417ec26eda902a501db44f8a328d5e03"
+    },
+    "inputs/apps/game/src/audio.ts": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/inputs/apps/game/src/audio.ts",
+      "bytes": 50931,
+      "sha256": "698e4745ac2b3e301dd212c26cdd662c174ea4dc7b18ed7e28af49cddf754e6d"
+    },
+    "inputs/apps/game/src/music-clock.ts": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/inputs/apps/game/src/music-clock.ts",
+      "bytes": 4084,
+      "sha256": "12fff1dfe804ed4aaaa274418b74efa8604b0afd656ef718cb4e43930a475aa9"
+    },
+    "inputs/apps/game/src/music-score.ts": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/inputs/apps/game/src/music-score.ts",
+      "bytes": 807,
+      "sha256": "9777e0bacac612b52c5b9eeb7c760fb8ba47a6ec62eb89123f2f45a210052683"
+    },
+    "inputs/apps/game/src/title-theme.ts": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/inputs/apps/game/src/title-theme.ts",
+      "bytes": 2917,
+      "sha256": "104bc0c4754db8b315b745291b243a619c394de1484f4a834995c74860b27135"
+    },
+    "inputs/artifacts/title-reference-fidelity-20261013/user-feedback-and-correction.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/inputs/artifacts/title-reference-fidelity-20261013/user-feedback-and-correction.json",
+      "bytes": 1006,
+      "sha256": "fadaeba8cb84f474824b80fb06d1317352108deb935123a27e9902f8f0f6afe2"
+    },
+    "inputs/peer-calibration-analysis.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/inputs/peer-calibration-analysis.json",
+      "bytes": 70695,
+      "sha256": "8056e38474ec348decfd323974131d2dc0cde13f8f74de01207794ea44428308"
+    },
+    "inputs/work/title-fullness-v4/captures/qa-1791838846520-3f539dcd/report.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/inputs/work/title-fullness-v4/captures/qa-1791838846520-3f539dcd/report.json",
+      "bytes": 110275,
+      "sha256": "a36301e4aa0fbf0398473b4fb68a555a5e04ac233f8035c43e6bda9c5de242e6"
+    },
+    "inputs/work/title-fullness-v4/source-pins.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/inputs/work/title-fullness-v4/source-pins.json",
+      "bytes": 2618,
+      "sha256": "ab37bff2ae723bf6da9a5001e85071f9cfc536d88004901e01549e5c9e8f8470"
+    },
+    "inputs/work/title-score-20261013/measured-analysis.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/inputs/work/title-score-20261013/measured-analysis.json",
+      "bytes": 207025,
+      "sha256": "d9ede471c8c607e4bd0056f18175cb16f0527870db8286a0cc66a6b656656ed1"
+    },
+    "inputs/work/title-score-20261013/musical-report.md": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/inputs/work/title-score-20261013/musical-report.md",
+      "bytes": 16649,
+      "sha256": "61a1b636057a914ffcf1ce94a8af0fcf0d0215ac73c872c661e28048eba93c4a"
+    },
+    "inputs/work/title-score-20261013/refined-timing.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/inputs/work/title-score-20261013/refined-timing.json",
+      "bytes": 6269,
+      "sha256": "0968291256798762e2b08aeaa26d6b82686c7dc618ea0f5642a6a2eed815ef63"
+    },
+    "inputs/work/title-score-20261013/score-plan.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/inputs/work/title-score-20261013/score-plan.json",
+      "bytes": 3629,
+      "sha256": "f622bbded412c2421e40b141b6b587f56ddbe93a015ea98c248f8f9347cb8a65"
+    },
+    "inputs/work/title-score-engine/handoff.md": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/inputs/work/title-score-engine/handoff.md",
+      "bytes": 5608,
+      "sha256": "0ea1ff1c3bee79eb09228a284bff0747064f2406c35d635ac4fa5a11be3cf97c"
+    },
+    "js-candidate/calibrate-bends.cjs": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/js-candidate/calibrate-bends.cjs",
+      "bytes": 1212,
+      "sha256": "a43e1448aa87e112778d3a4a98799631e56109a442704a80788905ca85161788"
+    },
+    "js-candidate/package-lock.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/js-candidate/package-lock.json",
+      "bytes": 29573,
+      "sha256": "5123d0604bdc742b708856cb8828cc13230267102a58f24c0c5d37f120294372"
+    },
+    "js-candidate/package.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/js-candidate/package.json",
+      "bytes": 64,
+      "sha256": "3956be94c97aa8c1af0bf2dde24730512a1f40e12782b86044cfc0ce0b652a75"
+    },
+    "js-candidate/transcribe.cjs": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/js-candidate/transcribe.cjs",
+      "bytes": 6368,
+      "sha256": "b4a23a1c3801519be998a7eadf5a4936bcd8dd8e98e6009375bb5fde0a1a7c57"
+    },
+    "js-install.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/js-install.log",
+      "bytes": 27,
+      "sha256": "27ee211df0e069bb9e422af0befcb529f5a6ff88ecb9495e9252d38b4699317d"
+    },
+    "js-installed.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/js-installed.json",
+      "bytes": 23818,
+      "sha256": "a46da43e459128f1455b6d842391e7f3dde0829b386444cd184fa99eac61b110"
+    },
+    "js-package-observation.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/js-package-observation.json",
+      "bytes": 122,
+      "sha256": "7f027b1a00acff973855c85c5ac58ea479e0a42fd4f9f009a720a481fc939c9d"
+    },
+    "onnx-dependencies-install-report.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/onnx-dependencies-install-report.json",
+      "bytes": 354778,
+      "sha256": "857eef07fa94dff386c79ca46a339c6d55f6c879ecf5170586a954d0f9bf35fb"
+    },
+    "onnx-dependencies-install.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/onnx-dependencies-install.log",
+      "bytes": 7983,
+      "sha256": "59d21ffcb557b5a032556f90063c7b27f2bc96961ab9ecc5487e13a10f5c872c"
+    },
+    "pin_experiment.py": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/pin_experiment.py",
+      "bytes": 3424,
+      "sha256": "ab1d75dff34c8c4b7791492d73aeed821f84b31ecd0f32583e96172923d5c56c"
+    },
+    "python-installed.txt": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/python-installed.txt",
+      "bytes": 678,
+      "sha256": "a8a99db87db72e81ab76d9c895801c806d167e98eccbe937b55782948fb39266"
+    },
+    "reconstruct_full.py": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/reconstruct_full.py",
+      "bytes": 8359,
+      "sha256": "d6fbbb47f0435a119db58c9c2c2903901eb6488ede79d8aacb3c0c473c77cc3d"
+    },
+    "reconstruct_full_all.py": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/reconstruct_full_all.py",
+      "bytes": 8340,
+      "sha256": "c2daede91debf34ffba323ac8c8b1b68c4ef39a832a400a7e8c6bb2290b6f0fa"
+    },
+    "reconstruct_hook.py": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/reconstruct_hook.py",
+      "bytes": 6400,
+      "sha256": "b088e6169c1deb9814b35e21e1fe7548e6bc84c61faa199e11943900da00199e"
+    },
+    "reference-mono.wav": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/reference-mono.wav",
+      "bytes": 1882398,
+      "sha256": "c1095d741fabb279f33fdb0216d3a10521b30b129903daa99eb15bb8bd5a3d02"
+    },
+    "setuptools-install-report.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/setuptools-install-report.json",
+      "bytes": 8244,
+      "sha256": "f0c33f3631ca29abe0bf11221acc10904a8b0e70b74187f43a56679723ea17aa"
+    },
+    "setuptools-install.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/setuptools-install.log",
+      "bytes": 317,
+      "sha256": "2bcbc38baad76cb23177b1943f3b0cc4b1740851763489e54456c8aed4a6186e"
+    },
+    "source-transient-analysis.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/source-transient-analysis.json",
+      "bytes": 2326,
+      "sha256": "0d536ce08853f04daae9987189c69cca729420e8b52f6ad717780455d9189e20"
+    },
+    "source-transient-analysis.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/source-transient-analysis.log",
+      "bytes": 2367,
+      "sha256": "70b03e58804538bb07fddc4a97cec2e805c71e97500398609b41bbcca294a030"
+    },
+    "source-transient-candidate-events.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/source-transient-candidate-events.json",
+      "bytes": 233941,
+      "sha256": "1947b66189d98387db70ebd04a43df47c136abaac4b900774765c537bd1650eb"
+    },
+    "spark-interruption.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/spark-interruption.json",
+      "bytes": 405,
+      "sha256": "214c77f7ed163fed9499a37601c4214fdc614d401e1b35b76494dd7b1442d80f"
+    },
+    "spark-owned-process-tree.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/spark-owned-process-tree.json",
+      "bytes": 283,
+      "sha256": "4d306c70e4047693cf3ff1f9ec8f792864924986e2e685ad29c11377a72ceb08"
+    },
+    "SPARK-PARTIAL-DRAFT-NOT-ACCEPTED.md": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/SPARK-PARTIAL-DRAFT-NOT-ACCEPTED.md",
+      "bytes": 1218,
+      "sha256": "09486c2f0423063a979871911cb7279d045d7b3cca30ee829b935bc7ab4ded63"
+    },
+    "spark-source-audit-task.txt": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/spark-source-audit-task.txt",
+      "bytes": 1553,
+      "sha256": "aa0a2ab0172e73891886a925fabec30641421bad46a9c3055d29a13229cf05a5"
+    },
+    "spark-source-audit-worker.log": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/spark-source-audit-worker.log",
+      "bytes": 1321070,
+      "sha256": "a742db5bc264102031a064159d0d3eb956b177807fd5dd72d301e5e35c586265"
+    },
+    "spark-source-fidelity-result.md": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/spark-source-fidelity-result.md",
+      "bytes": 4892,
+      "sha256": "383cd4e477ff844af99e67e7b4eae342818dbc54421777eee13d7490b28e7d9a"
+    },
+    "studio-assignment-observation.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/studio-assignment-observation.json",
+      "bytes": 2016,
+      "sha256": "0b9454c70679084a553a39f8378ea276ee3b3eb7c1cd059f3b6d26608edb4f45"
+    },
+    "studio-running-input.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/studio-running-input.json",
+      "bytes": 1281,
+      "sha256": "bb0c9bd46622425f2165219b61935cc3baa77a1e6243418de0de20656681a312"
+    },
+    "studio-running-result.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/studio-running-result.json",
+      "bytes": 1275,
+      "sha256": "a2647af00403a6d935b618b08db27222ea2fc9ea03b6cbb40cf881246bf3d27e"
+    },
+    "studio-spark-interrupted-input.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/studio-spark-interrupted-input.json",
+      "bytes": 1236,
+      "sha256": "cb7648905216d308106799ee575ecd353573d0d5920519d76a521281ae7ca264"
+    },
+    "studio-spark-interrupted-result.json": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/studio-spark-interrupted-result.json",
+      "bytes": 1220,
+      "sha256": "f582c271498b358d601a5be81706ccdff910e8a39eb84a474d16c874828ad76d"
+    },
+    "TIMING-CALIBRATION-UPDATE.md": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/TIMING-CALIBRATION-UPDATE.md",
+      "bytes": 2164,
+      "sha256": "b1d69be54bf37ae24c9ff563e9d9067fb5ba9a31c35cbeb3c2478b75b1cee493"
+    },
+    "transcribe-first.py": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/transcribe-first.py",
+      "bytes": 4954,
+      "sha256": "85910860bd9103442082042535e9a99e48c69b3b26aa7e41112161fdede8997d"
+    },
+    "transcribe.py": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/transcribe.py",
+      "bytes": 4954,
+      "sha256": "85910860bd9103442082042535e9a99e48c69b3b26aa7e41112161fdede8997d"
+    },
+    "verify_candidate.py": {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/title-reference-fidelity-experiment/verify_candidate.py",
+      "bytes": 4010,
+      "sha256": "62d1e65d1282859147777c82fa596ba48e536e99551b7004cc505dfb48a042c8"
+    }
+  }
+}

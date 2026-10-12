@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 1108,
+  "revision": 1145,
   "name": "Galaxy Royale",
   "phase": "Playable solo slice → content and validation",
-  "updatedAt": "2026-10-12T22:09:19.279Z",
+  "updatedAt": "2026-10-12T23:14:20.824Z",
   "tasks": [
     {
       "id": "studio",
@@ -8326,10 +8326,10 @@
     {
       "id": "task-a7eeab89",
       "title": "Recreate title theme in shared dynamic synthesis transport",
-      "description": "Reviewed native synthesized title is integrated and normally rebuilt. Three instrument passes have actual source/clock/resource tests and seven-fixture native PCM captures. Latest stereo lead/pads/bass retain shared title169.275→corporate Haven120→chase166→release120 beat transport. The original MP3 is offline reference only. First user feedback requested instrument sound/mix; second still needed fuller instruments; third audition awaits feedback. Exact melody/form and final instrument acceptance remain open.",
+      "description": "Recreate supplied42.68s Galaxy Royale song closely through shared synthesis. Current authored pitch-class draft and V4 timbre are explicitly rejected as musical acceptance. Recover real note timing, pickup, harmony/form and instrument character; model candidates and DSP safety alone do not establish match. SourceMP3 remains offline only. Compare aligned hooks then complete render with original; final human acceptance required.",
       "department": "Audio score",
       "owner": "/root/audio_score",
-      "status": "review",
+      "status": "active",
       "priority": "high",
       "dependencies": [],
       "acceptanceCriteria": [
@@ -8373,9 +8373,9 @@
         }
       ],
       "blocker": "",
-      "revision": 2,
+      "revision": 3,
       "createdAt": "2026-10-12T16:38:07.096Z",
-      "updatedAt": "2026-10-12T18:00:13.082Z"
+      "updatedAt": "2026-10-12T22:18:12.173Z"
     },
     {
       "id": "task-5301e8a1",
@@ -8881,7 +8881,7 @@
       "acceptanceCriteria": [
         {
           "text": "Fresh-store refusal, role-local native fixtures, strict scenario/hash/report guards and bounded cleanup implemented with meaningful tests.",
-          "met": false
+          "met": true
         },
         {
           "text": "Independent review and exact normal artifact/source preparation verified.",
@@ -8892,11 +8892,22 @@
           "met": false
         }
       ],
-      "evidence": [],
+      "evidence": [
+        {
+          "label": "Root integrated64 focused tests/current source build provenance; live gate pending",
+          "kind": "artifact",
+          "path": "artifacts/continuation-integration-20261013/integration.json"
+        },
+        {
+          "label": "Independent final-health source review",
+          "kind": "artifact",
+          "path": "artifacts/continuation-integration-20261013/wake-health-independent-REVIEW.md"
+        }
+      ],
       "blocker": "",
-      "revision": 1,
+      "revision": 2,
       "createdAt": "2026-10-12T21:06:28.958Z",
-      "updatedAt": "2026-10-12T21:06:28.958Z"
+      "updatedAt": "2026-10-12T23:14:14.793Z"
     },
     {
       "id": "task-a9a3c675",
@@ -9042,24 +9053,24 @@
     {
       "id": "task-06e3e66a",
       "title": "Fair bounded asteroid admission across dispersed co-op pilots",
-      "description": "Actual native eight-admission probe completed1200 authority ticks and five unfiltered Replica commits. Global112 asteroid admission is filled in early roster/chunk order: slots4–7 receive zero nearby asteroids despite nine resident local chunks; one-pilot controls at the same seed/locations each generate27. Preserve original failing evidence, implement deterministic fair allocation within global budgets, review and integrate. Native resource correctness does not establish eight real browser seats, TURN or measured FPS.",
+      "description": "Integrated native bounded initial-roster admission fairness, seeded round-robin candidates and deferred retry. Eight initial dispersed pilots each receive resources under112 global rocks;27 solo route snapshots byte-identical. Reviewed late join when112 retained rocks are already present explicitly waits for normal destruction/unload capacity, without eviction. This scoped task does not promise immediate late-join resources or eight real browser seats/TURN/FPS/physical soak. Original failure, source review and fresh Root944 native/strictClippy/dual build retained.",
       "department": "Authoritative simulation / streaming",
       "owner": "/root/engine_fx",
-      "status": "active",
+      "status": "complete",
       "priority": "high",
       "dependencies": [],
       "acceptanceCriteria": [
         {
           "text": "Frozen dispersed native probe and same-seed failing fairness reproduction retained.",
-          "met": false
+          "met": true
         },
         {
           "text": "Deterministic bounded allocation gives each dispersed active pilot appropriate local asteroid resources without exceeding global caps or changing solo seeded identity.",
-          "met": false
+          "met": true
         },
         {
           "text": "Independent review, regression checks and matching integrated dual-backend build recorded; browser eight-seat acceptance remains separate.",
-          "met": false
+          "met": true
         }
       ],
       "evidence": [
@@ -9067,12 +9078,27 @@
           "label": "Actual specialist checkpoint reported to Root",
           "kind": "note",
           "details": "Eight real native admissions,1200 ticks,five complete publications: peak120 chunks,244 bodies,551552 storage cells,221404 occupied cells,364 body pages; header wrappers9159/9105B. Specialist is freezing raw sources/logs next. No runtime edits or RTC measurement yet."
+        },
+        {
+          "label": "Frozen dispersed native admission author pass; external gates pending",
+          "kind": "note",
+          "details": "C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/eight-pilot-streaming-review/HANDOFF.md SHAf77d066659ec4cc73ca45f4e39ca5f1b1d92b8e7b5e2d1c101bcf1abb82852f9; MANIFEST3971b8f4e8790cf6850a754606e879896ef2d7ff5c5ab65ee41f6d0ff12c0d87. Actual original fairness native exit101, candidate557corepass/17ignored; actual5full native transfers before andafter1200ticks; Root must curate rawprobe link. Latejoin retained112 waits normalcapacityrelease. No eightrealRTC/TURN/FPS/GPU/zero-write acceptance."
+        },
+        {
+          "label": "Actual independent dispersed native fairness review",
+          "kind": "artifact",
+          "path": "artifacts/continuation-integration-20261013/fairness-independent-REVIEW.md"
+        },
+        {
+          "label": "Actual Root944 native/strict Clippy/normal dual build with immutable scope proofs",
+          "kind": "artifact",
+          "path": "artifacts/continuation-integration-20261013/integration.json"
         }
       ],
       "blocker": "",
-      "revision": 1,
+      "revision": 3,
       "createdAt": "2026-10-12T21:57:04.230Z",
-      "updatedAt": "2026-10-12T21:57:04.230Z"
+      "updatedAt": "2026-10-12T23:14:14.919Z"
     },
     {
       "id": "task-864e2556",
@@ -9131,7 +9157,7 @@
       "description": "Implement approved single-sprite candidate after actual contact review. Preserve warm graded plates/core and40grid/938mask/83 index4 sites,64palette and all other atlas bytes. Compact lower-pod alloy rims and sparse recessed mechanisms; no broad flat recolor. Separate candidate native contacts, Root review and normal integration required.",
       "department": "Pixel art / asset pipeline",
       "owner": "/root/audio_review",
-      "status": "active",
+      "status": "complete",
       "priority": "normal",
       "dependencies": [
         "task-864e2556"
@@ -9139,22 +9165,280 @@
       "acceptanceCriteria": [
         {
           "text": "Reproducible indexed candidate preserves exact mask, signals, palette and other atlas bytes.",
-          "met": false
+          "met": true
         },
         {
           "text": "Actual before/after native40 and gameplay28 contacts reviewed by Root.",
-          "met": false
+          "met": true
         },
         {
           "text": "Independent review, focused checks and matching integrated build recorded with remaining visual limits.",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Frozen surgical indexed/native-contact author evidence",
+          "kind": "artifact",
+          "path": "artifacts/continuation-integration-20261013/bastion-HANDOFF.md"
+        },
+        {
+          "label": "Actual Root pipeline/native loader/normal dual build; moving GPU art/human acceptance not claimed",
+          "kind": "artifact",
+          "path": "artifacts/continuation-integration-20261013/integration.json"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-12T22:03:59.555Z",
+      "updatedAt": "2026-10-12T23:14:14.871Z"
+    },
+    {
+      "id": "task-a58a9481",
+      "title": "Recover original Galaxy Royale song notes, form and instrument targets",
+      "description": "Recover original note events, pitch bends, actual rhythm/pickup/rests/harmony/form and instrument character. Use source offline only; preserve dynamic shared transport and authored synthesis. No full source waveform loop disguised as synthesis. Automated models produce candidates, not human-accepted transcription. Compare short same-position hooks and the full loop to original before acceptance. Existing title-theme.ts explicitly authors provisional pitch-class-derived phrases, not a transcription. Source42.680seconds versus provisional32bar~45.37second form. Prior finite PCM/clock/budget checks establish engine correctness, not musical resemblance.",
+      "department": "Audio / music transcription",
+      "owner": "/root/audio_review",
+      "status": "active",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Exact supplied reference and model/tool provenance retained; note/timing/harmony/form candidates extracted from actual audio, not invented pitch-class phrases.",
+          "met": false
+        },
+        {
+          "text": "Short aligned hooks and complete source form reconstructed with explicit uncertainty and direct comparison evidence.",
+          "met": false
+        },
+        {
+          "text": "Root-reviewed actual score/instrument brief accepted for engine implementation; human final musical similarity remains a separate gate.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "User fidelity feedback and actual current mismatch",
+          "kind": "artifact",
+          "path": "artifacts/title-reference-fidelity-20261013/user-feedback-and-correction.json"
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-12T22:13:17.843Z",
+      "updatedAt": "2026-10-12T22:13:17.843Z"
+    },
+    {
+      "id": "task-e418ca77",
+      "title": "Reconstruct source-driven title percussion and glitch transients",
+      "description": "Use actual407 soft-percussive onset candidates and source spectral/envelope measurements. Generate bounded kick/noise/glitch voices without replaying source waveforms or inventing a drum grid. Compare original, all443-note fixed control, and new mix at matching first8/full42.68s. Preserve earlier prototypes and raw-bend counterexample; resemblance remains unaccepted.",
+      "department": "Audio / source reconstruction",
+      "owner": "/root/audio_review",
+      "status": "active",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Source-derived onset/envelope/spectral candidates and generated-voice provenance retained, with uncertain labels explicit.",
+          "met": true
+        },
+        {
+          "text": "Actual paired hook/full prototype renders finite and measured; no original waveform playback reused.",
+          "met": true
+        },
+        {
+          "text": "Root-reviewed sound/voice-budget brief ready for engine integration; human final similarity remains pending.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Frozen conservative generated percussion control, limitations and next recovery needs",
+          "kind": "artifact",
+          "path": "artifacts/title-reference-fidelity-20261013/percussion-control/HANDOFF.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-12T22:52:16.481Z",
+      "updatedAt": "2026-10-12T23:14:14.665Z"
+    },
+    {
+      "id": "task-f7d0d237",
+      "title": "Prototype fractional title events on the real shared music clock",
+      "description": "Work-only small TypeScript primitive pinned to actual9408368 MusicClock. Preserve unquantized onset/end beats and noninteger42.68s loop period; enumerate half-open quarter-beat windows without duplicates across tempo ramps and stalls. Validate/sort once and return explicit capacity/truncation. No production melodies, runtime edits or listeners at this stage.",
+      "department": "Audio engine / scheduling",
+      "owner": "/root/audio_score",
+      "status": "complete",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Actual MusicClock-based onset/end mapping across ramps and fractional loop crossings verified.",
+          "met": true
+        },
+        {
+          "text": "Boundary, duplicate, stale-window and bounded-lookahead behavior has meaningful tests and explicit capacity results.",
+          "met": true
+        },
+        {
+          "text": "Root-reviewed minimal protocol ready for AudioEngine integration with actual source score.",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Frozen actual27-case author timing proof and integration protocol",
+          "kind": "artifact",
+          "path": "artifacts/title-reference-fidelity-20261013/fractional-clock/HANDOFF.md"
+        },
+        {
+          "label": "Root independent22 prototype cases",
+          "kind": "artifact",
+          "path": "work/title-source-voice-adapter/root-fractional-tests.log"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-12T22:52:16.511Z",
+      "updatedAt": "2026-10-12T23:14:14.731Z"
+    },
+    {
+      "id": "task-b574abb9",
+      "title": "Explain and recover source-supported title harmonic-family energy",
+      "description": "Independently measure lost bass and sustained upper energy in frozen fixed443 additive controls. Separate missing admitted notes, partial cap, window/frequency/phase fit, stereo cancellation and transient residual. Test a bounded offline source-supported family fit only if concrete; no waveform replay, invented pitches, blind bends or production changes. AudioReview separately owns bass/arrangement and percussion recovery. Native/browser/ear acceptance stays open.",
+      "department": "Audio source and engine research",
+      "owner": "/root/engine_fx",
+      "status": "active",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Exact frozen inputs and original reference pins; measured per-channel/mono and admitted-note coverage explain losses",
+          "met": false
+        },
+        {
+          "text": "Concrete fitting hypothesis tested against generated ground truth and held-out source windows without waveform replay or invented pitches",
+          "met": false
+        },
+        {
+          "text": "Preserved actual raw results, controls/failures and bounded source-backed handoff independently reviewable",
+          "met": false
+        },
+        {
+          "text": "Human same-position audition and production integration remain explicitly separate pending gates",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual assigned work scope",
+          "kind": "note",
+          "details": "C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/title-harmonic-recovery-review/ASSIGNMENT.md; frozen443 c2daede9 fitting script and original reference5c48d152 are the initial source-backed inputs."
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-12T23:02:16.506Z",
+      "updatedAt": "2026-10-12T23:02:16.506Z"
+    },
+    {
+      "id": "task-35e61fca",
+      "title": "Recover missing title low-register attacks and sweeps from actual source",
+      "description": "User has no MIDI/project/stems: source is Suno-generated retro arcade with cut/edited glitch-bubble-pop sounds. Preserve exact source beats. Measured0.65–1.45s missing low content is rapidly moving, not a proven steadyB1. Fit bounded source-supported low-body/pitch-sweep events with known synthetic controls and explicit rejection/uncertainty. Preserve earlier scopes; do not replay MP3 or promote candidate as same-song accepted.",
+      "department": "Audio / source reconstruction",
+      "owner": "/root/audio_review",
+      "status": "active",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Actual source-supported low event timings/envelopes and accepted/rejected fit parameters recorded.",
+          "met": false
+        },
+        {
+          "text": "Known generated controls and paired original/control/improved hooks demonstrate actual coverage and finite bounded synthesis.",
+          "met": false
+        },
+        {
+          "text": "Root-reviewed candidate and budget ready for next reconstruction stage; source-song resemblance remains unaccepted until listening.",
           "met": false
         }
       ],
       "evidence": [],
       "blocker": "",
       "revision": 1,
-      "createdAt": "2026-10-12T22:03:59.555Z",
-      "updatedAt": "2026-10-12T22:03:59.555Z"
+      "createdAt": "2026-10-12T23:07:53.150Z",
+      "updatedAt": "2026-10-12T23:07:53.150Z"
+    },
+    {
+      "id": "task-f8429984",
+      "title": "Separate supplied Suno title locally for source beat and instrument recovery",
+      "description": "Official current maintainer Demucs4.1.0 isolated workspace dependencies; use existing CUDA PyTorch on RTX5090 with pinned official HTDemucs safetensors repository revision. User audio remains local/offline work inputs; no shipped original/stem PCM. Review estimated stem bleed for arcade/glitch source before treating events as recovered notes.",
+      "department": "Audio tools / integration",
+      "owner": "Root",
+      "status": "active",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Actual official package/model provenance and isolated installation retained; no shared runtime modification.",
+          "met": true
+        },
+        {
+          "text": "Real local separation outputs measured with exact source hash, settings, time and memory.",
+          "met": true
+        },
+        {
+          "text": "Estimated stem bleed and actual beat/note recovery reviewed; no model output relabeled original stems.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual local pinned model separation and measured outputs",
+          "kind": "artifact",
+          "path": "artifacts/title-reference-fidelity-20261013/stem-separation/separation.json"
+        },
+        {
+          "label": "Actual isolated package/model/output provenance",
+          "kind": "artifact",
+          "path": "artifacts/title-reference-fidelity-20261013/stem-separation/input-pins.json"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-12T23:07:53.179Z",
+      "updatedAt": "2026-10-12T23:14:14.587Z"
+    },
+    {
+      "id": "task-8850e6f9",
+      "title": "Recover raw source-timed bass and other note candidates",
+      "description": "Work-only full42.68s BasicPitch1.0.1/TFJS CPU inference on Root pinned HTDemucs bass/other estimates. Preserve original source timestamps and default/fast outputs, compare low-note coverage with original443 estimates; no quantization, global offset, production assets or listening acceptance.",
+      "department": "Audio source analysis",
+      "owner": "/root/audio_score",
+      "status": "active",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Exact source/stem/model/frontend pins and full22050mono decode/inference records retained.",
+          "met": false
+        },
+        {
+          "text": "Default/fast raw notes and diagnostic MIDI for bass/other estimates plus explicit low-block comparison are frozen.",
+          "met": false
+        },
+        {
+          "text": "Root reviews source-supported synthesis inputs and unresolved bleed/glitch/listening limits.",
+          "met": false
+        }
+      ],
+      "evidence": [],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-12T23:10:41.069Z",
+      "updatedAt": "2026-10-12T23:10:41.069Z"
     }
   ],
   "reviews": [
@@ -11856,6 +12140,155 @@
           "label": "Root review acceptance and precise remaining scope",
           "kind": "artifact",
           "path": "artifacts/dart-material-integration-20261013/independent-source-review/root-acceptance.json"
+        }
+      ]
+    },
+    {
+      "id": "review-26463294",
+      "title": "Bastion pod material source-art candidate approved by Root",
+      "body": "Root viewed actual Bastion first native comparison (40grid and28px ordinary scale). Source-art candidate approved: pod housings are more readable, compact rails/vents add structure, useful orange gradients/core remain intact at28px. Root authorized guarded Bastion-only application, meaningful pipeline/native checks and frozen handoff. Preserve first audit failure/retry; no broader GPU/human acceptance. Dart current shipped whole-atlas assertion remains Root later integration responsibility.",
+      "author": "/root/audio_review",
+      "source": "Actual Root inspection message of first Bastion native source-art candidate; no GPU/human final acceptance",
+      "createdAt": "2026-10-12T22:13:09.085Z",
+      "participants": [
+        "/root",
+        "/root/audio_review"
+      ],
+      "taskIds": [
+        "task-89b6b8f7"
+      ],
+      "evidence": [
+        {
+          "label": "Actual approved native/software result",
+          "kind": "note",
+          "details": "AudioRefinement work/bastion-material-refinement/bastion-native-before-after-first.png SHA1e0b3726edd55b1f5a9cd1d7d1e03e2019db05e10c18bfd0c4a5e7d944a547dd. Final native result equals reviewed candidate. Commitb27bcf823f169f32313c0a424d209ea3ddcf6f9f clean;8 pipeline+1 optimizedguard+6 nativeatlasloader pass;4 immutable artifacts in fresh scope."
+        }
+      ]
+    },
+    {
+      "id": "review-4017a0c9",
+      "title": "Title fidelity rejected: recover the actual supplied song",
+      "body": "Existing title-theme.ts explicitly authors provisional pitch-class-derived phrases, not a transcription. Source42.680seconds versus provisional32bar~45.37second form. Prior finite PCM/clock/budget checks establish engine correctness, not musical resemblance. Recover original note events, pitch bends, actual rhythm/pickup/rests/harmony/form and instrument character. Use source offline only; preserve dynamic shared transport and authored synthesis. No full source waveform loop disguised as synthesis. Automated models produce candidates, not human-accepted transcription. Compare short same-position hooks and the full loop to original before acceptance.",
+      "author": "Root",
+      "source": "Actual human listening feedback and source contract inspection",
+      "createdAt": "2026-10-12T22:13:17.873Z",
+      "participants": [
+        "User",
+        "Root",
+        "audio_review"
+      ],
+      "taskIds": [
+        "task-a58a9481",
+        "task-5301e8a1",
+        "task-a7eeab89"
+      ],
+      "evidence": [
+        {
+          "label": "Exact feedback, source and correction",
+          "kind": "artifact",
+          "path": "artifacts/title-reference-fidelity-20261013/user-feedback-and-correction.json"
+        }
+      ]
+    },
+    {
+      "id": "review-c02748cf",
+      "title": "Reference versus V4 measured mix mismatch",
+      "body": "Root reconfirmed actual supplied MP3 SHA95fcb149.../42.680seconds/48k stereo/1032175bytes. Compared actual decoded reference versus retained native V4 first42.68s. Normalized mono band power2–6kHz: reference12.52% vsV4.749%;6–16k: reference4.76% vsV4.00335%. Stereo correlation .7286 vs.9868. This documents timbre/width mismatch in addition to authored note/form mismatch. It is descriptive spectral evidence, not a perceptual score, accepted transcription or gain prescription. Source waveform stays work-only; no source playback ships.",
+      "author": "Root",
+      "source": "Actual fresh source hash/ffprobe and decoded reference/native V4 comparison",
+      "createdAt": "2026-10-12T22:17:09.937Z",
+      "participants": [
+        "Root",
+        "audio_review"
+      ],
+      "taskIds": [
+        "task-a58a9481",
+        "task-5301e8a1"
+      ],
+      "evidence": [
+        {
+          "label": "Actual measured reference/V4 stereo and normalized bands",
+          "kind": "artifact",
+          "path": "artifacts/title-reference-fidelity-20261013/reference-v4-mix-comparison.json"
+        },
+        {
+          "label": "Bounded executed comparison script",
+          "kind": "artifact",
+          "path": "artifacts/title-reference-fidelity-20261013/compare_reference.py"
+        },
+        {
+          "label": "Raw actual comparison output",
+          "kind": "artifact",
+          "path": "artifacts/title-reference-fidelity-20261013/reference-comparison.log"
+        }
+      ]
+    },
+    {
+      "id": "review-06d413ac",
+      "title": "Source reconstruction direction: recover Suno arcade/glitch beats and instruments",
+      "body": "Actual user says no MIDI/project/stems; latest Suno generation contains retro arcade sounds cut/edited into glitch-bubble-pop and wants similar sounds and the same beats. Source reconstruction prioritizes measured attacks/edits, missing low-register content and sustained upper harmonic energy. Current mixed-song BasicPitch/additive/percussion candidates remain incomplete. Root actual OfflineAudioContext6 channel/frequency checks validate local-phase stereo harmonic parameter signs and disabled normalization, plus3 numeric adapter cases; those validate synthesis math, not source recovery or song match. Temporary audio-check tab/service closed; sole normal game preview remains running.",
+      "author": "Root",
+      "source": "Actual user Suno clarification, missing source content measurements and local reconstruction work",
+      "createdAt": "2026-10-12T23:07:53.201Z",
+      "participants": [
+        "User",
+        "Root",
+        "audio_review",
+        "audio_score",
+        "engine_fx"
+      ],
+      "taskIds": [
+        "task-35e61fca",
+        "task-f8429984",
+        "task-a58a9481",
+        "task-e418ca77",
+        "task-f7d0d237",
+        "task-b574abb9"
+      ],
+      "evidence": [
+        {
+          "label": "Actual native harmonic parameter checks",
+          "kind": "artifact",
+          "path": "work/title-source-voice-adapter/native-report.json"
+        },
+        {
+          "label": "Actual official isolated dependency install",
+          "kind": "artifact",
+          "path": "work/title-stem-separation/install.log"
+        }
+      ]
+    },
+    {
+      "id": "review-7459cfb7",
+      "title": "Integration review: bounded native/art work accepted; musical recovery and live gates remain open",
+      "body": "Root integrated native fair admission and Bastion candidate, then unshipped configured Wake helper and independently accepted health amendment.944 nativepass/22explicitignored before palette, after-palette6loaderpass, Python7Dart+8Bastion, strictworkspaceClippy and normalbothbackendbuild passed. Configured helper64Rootfocused source checks passed; live configuredRTC/render/save not run. Work-only fractional scheduler22Roottests passed; source onset/end/ramp/cursor protocol accepted before separate engine wiring. Official local Demucs4.1 CUDA42.68s separation produced finite estimates in16.24s; stem bleed/source note accuracy remain open. Conservative percussion does not recover bright sound; current production title draft remains rejected for song likeness. Human/physical/GPUmovingart/eightRTC/TURN/FPS not accepted.",
+      "author": "Root",
+      "source": "Actual source integration and review evidence",
+      "createdAt": "2026-10-12T23:14:14.948Z",
+      "participants": [
+        "Root",
+        "audio_review",
+        "audio_score",
+        "engine_fx"
+      ],
+      "taskIds": [
+        "task-06e3e66a",
+        "task-89b6b8f7",
+        "task-d0e4d592",
+        "task-f7d0d237",
+        "task-f8429984",
+        "task-a58a9481"
+      ],
+      "evidence": [
+        {
+          "label": "Exact integration provenance and raw checks",
+          "kind": "artifact",
+          "path": "artifacts/continuation-integration-20261013/integration.json"
+        },
+        {
+          "label": "Actual source music recovery provenance, not production song",
+          "kind": "artifact",
+          "path": "artifacts/title-reference-fidelity-20261013/recovery-provenance.json"
         }
       ]
     }
@@ -26514,6 +26947,376 @@
       "author": "Root",
       "source": "Actual same worker process completion, exit0 and inspected raw result",
       "createdAt": "2026-10-12T22:09:19.279Z"
+    },
+    {
+      "id": "7dacf04a-256d-4cef-87dc-3f64bb1ac7a0",
+      "revision": 1109,
+      "kind": "review",
+      "itemId": "review-26463294",
+      "title": "Bastion pod material source-art candidate approved by Root",
+      "author": "/root/audio_review",
+      "source": "Actual Root inspection message of first Bastion native source-art candidate; no GPU/human final acceptance",
+      "createdAt": "2026-10-12T22:13:09.085Z"
+    },
+    {
+      "id": "70b89b29-bbf1-469e-b785-b9209e39ec91",
+      "revision": 1110,
+      "kind": "run",
+      "itemId": "run-0ce845de",
+      "title": "Bastion material refinement · completed",
+      "author": "/root/audio_review",
+      "source": "Actual completed frozen Bastion author scope; pending Root integration/GPU/human acceptance",
+      "createdAt": "2026-10-12T22:13:09.593Z"
+    },
+    {
+      "id": "887c10be-4b42-467c-94ef-3aa69b1eb557",
+      "revision": 1111,
+      "kind": "task.create",
+      "itemId": "task-a58a9481",
+      "title": "Recover original Galaxy Royale song notes, form and instrument targets",
+      "author": "Root",
+      "source": "Actual renewed user song-fidelity instruction and inspected draft mismatch",
+      "createdAt": "2026-10-12T22:13:17.843Z"
+    },
+    {
+      "id": "8617679a-e980-4195-bf97-93b350c13f43",
+      "revision": 1112,
+      "kind": "review",
+      "itemId": "review-4017a0c9",
+      "title": "Title fidelity rejected: recover the actual supplied song",
+      "author": "Root",
+      "source": "Actual human listening feedback and source contract inspection",
+      "createdAt": "2026-10-12T22:13:17.873Z"
+    },
+    {
+      "id": "62522dc0-ca85-4037-9471-546736e5fdac",
+      "revision": 1113,
+      "kind": "run",
+      "itemId": "run-25b65cef",
+      "title": "Configured native Wake QA helper author · completed",
+      "author": "Codex",
+      "source": "actual configured Wake QA author finish",
+      "createdAt": "2026-10-12T22:13:21.836Z"
+    },
+    {
+      "id": "cc51128b-bd90-43c5-bf3d-e76076ae3717",
+      "revision": 1114,
+      "kind": "run",
+      "itemId": "run-cf496686",
+      "title": "Title reference fidelity investigation · running",
+      "author": "/root/audio_review",
+      "source": "Actual Root assignment after human reference resemblance correction; source-only experiment started",
+      "createdAt": "2026-10-12T22:14:40.218Z"
+    },
+    {
+      "id": "1fa27acb-c29d-4210-bf68-8120733f55f6",
+      "revision": 1115,
+      "kind": "review",
+      "itemId": "review-c02748cf",
+      "title": "Reference versus V4 measured mix mismatch",
+      "author": "Root",
+      "source": "Actual fresh source hash/ffprobe and decoded reference/native V4 comparison",
+      "createdAt": "2026-10-12T22:17:09.937Z"
+    },
+    {
+      "id": "7546e2a7-8402-4550-aa0b-c36c676d016e",
+      "revision": 1116,
+      "kind": "task.update",
+      "itemId": "task-06e3e66a",
+      "title": "Fair bounded asteroid admission across dispersed co-op pilots",
+      "author": "Engine specialist",
+      "source": "Actual isolated native author pass, frozen4ab10c0/72d0027; independent review assigned to /root/audio_score",
+      "createdAt": "2026-10-12T22:17:48.078Z"
+    },
+    {
+      "id": "9db05c87-5611-472b-8042-e3c51ebecfc1",
+      "revision": 1117,
+      "kind": "run",
+      "itemId": "run-57bb7b30",
+      "title": "Engine and native multiplayer specialist · completed",
+      "author": "Engine specialist",
+      "source": "Actual isolated native author pass, frozen4ab10c0/72d0027; independent review assigned to /root/audio_score",
+      "createdAt": "2026-10-12T22:17:48.126Z"
+    },
+    {
+      "id": "fd3edba4-18b2-487c-bf21-90fb559ea89a",
+      "revision": 1118,
+      "kind": "task.update",
+      "itemId": "task-a7eeab89",
+      "title": "Recreate title theme in shared dynamic synthesis transport",
+      "author": "Root",
+      "source": "User reiterates pretty-much-same supplied song; measured melody/form/timbre mismatch",
+      "createdAt": "2026-10-12T22:18:12.173Z"
+    },
+    {
+      "id": "3cb5827e-ecde-4545-b277-db70df2cae08",
+      "revision": 1119,
+      "kind": "run",
+      "itemId": "run-23b45c1d",
+      "title": "Independent native streaming reviewer · completed",
+      "author": "Codex",
+      "source": "actual independent dispersed scheduler review",
+      "createdAt": "2026-10-12T22:29:57.833Z"
+    },
+    {
+      "id": "015b9a3a-f107-4067-95fe-6754f6b6ca71",
+      "revision": 1120,
+      "kind": "run",
+      "itemId": "run-218667a4",
+      "title": "Configured Wake final-health correction author · running",
+      "author": "Codex",
+      "source": "actual configured Wake helper amendment",
+      "createdAt": "2026-10-12T22:39:34.661Z"
+    },
+    {
+      "id": "b3d0d7b6-18a5-45b4-b50f-9c49e77114e4",
+      "revision": 1121,
+      "kind": "run",
+      "itemId": "run-e8f3ff81",
+      "title": "Spark title source audit · interrupted",
+      "author": "/root/audio_review",
+      "source": "Actual exact-owned Spark worker process interruption; partial draft not accepted as independent review",
+      "createdAt": "2026-10-12T22:43:55.361Z"
+    },
+    {
+      "id": "6d21ba6a-4b40-44f2-92a6-788c2364aa85",
+      "revision": 1122,
+      "kind": "run",
+      "itemId": "run-719810d2",
+      "title": "Configured Wake health amendment author · completed",
+      "author": "Codex",
+      "source": "actual configured Wake health amendment finish",
+      "createdAt": "2026-10-12T22:47:37.960Z"
+    },
+    {
+      "id": "278d7f32-065e-47ce-b0e9-a94285feac93",
+      "revision": 1123,
+      "kind": "run",
+      "itemId": "run-58e4ca4b",
+      "title": "Title reference fidelity experiment · completed",
+      "author": "/root/audio_review",
+      "source": "Actual sealed work-only title reference experiment; overall musical/production acceptance remains open",
+      "createdAt": "2026-10-12T22:48:13.165Z"
+    },
+    {
+      "id": "4890f53e-c31c-4a76-8478-b07fc347e801",
+      "revision": 1124,
+      "kind": "task.create",
+      "itemId": "task-e418ca77",
+      "title": "Reconstruct source-driven title percussion and glitch transients",
+      "author": "Root",
+      "source": "Actual full-source experiment and measured implementation needs",
+      "createdAt": "2026-10-12T22:52:16.481Z"
+    },
+    {
+      "id": "759c0964-dfa2-47af-b9a1-6d3bdcfc8a1c",
+      "revision": 1125,
+      "kind": "task.create",
+      "itemId": "task-f7d0d237",
+      "title": "Prototype fractional title events on the real shared music clock",
+      "author": "Root",
+      "source": "Actual full-source experiment and measured implementation needs",
+      "createdAt": "2026-10-12T22:52:16.511Z"
+    },
+    {
+      "id": "60181e07-111e-40fc-8327-139e9284ad83",
+      "revision": 1126,
+      "kind": "run",
+      "itemId": "run-047aba2c",
+      "title": "Fractional event scheduler author · running",
+      "author": "Codex audio specialist",
+      "source": "bounded native-clock timing prototype",
+      "createdAt": "2026-10-12T22:53:24.017Z"
+    },
+    {
+      "id": "7efe6a15-2c00-4011-9d4a-cd2f9c65b96e",
+      "revision": 1127,
+      "kind": "run",
+      "itemId": "run-1508859a",
+      "title": "Source-driven percussion prototype · running",
+      "author": "/root/audio_review",
+      "source": "Actual Root assignment and local prototype work start",
+      "createdAt": "2026-10-12T22:53:36.044Z"
+    },
+    {
+      "id": "3986cf49-738b-4779-ac35-403b19dd11f5",
+      "revision": 1128,
+      "kind": "run",
+      "itemId": "run-be83ad06",
+      "title": "Source-driven percussion prototype · completed",
+      "author": "/root/audio_review",
+      "source": "Actual completed bounded work-only PCM prototype and measured verification",
+      "createdAt": "2026-10-12T23:01:47.182Z"
+    },
+    {
+      "id": "5ab06d88-db06-4af3-bac3-7fd8c7c81a6b",
+      "revision": 1129,
+      "kind": "task.create",
+      "itemId": "task-b574abb9",
+      "title": "Explain and recover source-supported title harmonic-family energy",
+      "author": "Codex",
+      "source": "Actual bounded engine harmonic-family source audit assigned by Root",
+      "createdAt": "2026-10-12T23:02:16.506Z"
+    },
+    {
+      "id": "1a11fad8-1288-4364-8234-17cd16f4b148",
+      "revision": 1130,
+      "kind": "run",
+      "itemId": "run-65ed9848",
+      "title": "Source harmonic-family fit audit · running",
+      "author": "Codex",
+      "source": "Actual active bounded harmonic-source audit",
+      "createdAt": "2026-10-12T23:02:16.696Z"
+    },
+    {
+      "id": "c38682bc-67a8-4548-9a05-531cc28ec13d",
+      "revision": 1131,
+      "kind": "run",
+      "itemId": "run-04dae522",
+      "title": "Fractional event scheduler author · completed",
+      "author": "Codex audio specialist",
+      "source": "bounded native-clock timing prototype",
+      "createdAt": "2026-10-12T23:05:29.553Z"
+    },
+    {
+      "id": "69e868ee-176f-47be-9bcd-35745019cc2b",
+      "revision": 1132,
+      "kind": "task.create",
+      "itemId": "task-35e61fca",
+      "title": "Recover missing title low-register attacks and sweeps from actual source",
+      "author": "Root",
+      "source": "Actual user Suno clarification, missing source content measurements and local reconstruction work",
+      "createdAt": "2026-10-12T23:07:53.150Z"
+    },
+    {
+      "id": "3861ac1d-5779-4c3d-be6f-315809457b5e",
+      "revision": 1133,
+      "kind": "task.create",
+      "itemId": "task-f8429984",
+      "title": "Separate supplied Suno title locally for source beat and instrument recovery",
+      "author": "Root",
+      "source": "Actual user Suno clarification, missing source content measurements and local reconstruction work",
+      "createdAt": "2026-10-12T23:07:53.179Z"
+    },
+    {
+      "id": "76228326-fee0-409e-8640-b65adcb9b409",
+      "revision": 1134,
+      "kind": "review",
+      "itemId": "review-06d413ac",
+      "title": "Source reconstruction direction: recover Suno arcade/glitch beats and instruments",
+      "author": "Root",
+      "source": "Actual user Suno clarification, missing source content measurements and local reconstruction work",
+      "createdAt": "2026-10-12T23:07:53.201Z"
+    },
+    {
+      "id": "34c3fa0e-6cde-4d16-a7ee-8074cc6dbcbd",
+      "revision": 1135,
+      "kind": "run",
+      "itemId": "run-db02f956",
+      "title": "Source bass and glitch-body recovery · running",
+      "author": "/root/audio_review",
+      "source": "Actual Root assigned source-driven bass/body recovery after frozen conservative percussion",
+      "createdAt": "2026-10-12T23:08:25.618Z"
+    },
+    {
+      "id": "251f2c64-20ee-403a-9e4d-e6d80157375f",
+      "revision": 1136,
+      "kind": "task.create",
+      "itemId": "task-8850e6f9",
+      "title": "Recover raw source-timed bass and other note candidates",
+      "author": "Codex audio specialist",
+      "source": "bounded source-stem note recovery",
+      "createdAt": "2026-10-12T23:10:41.069Z"
+    },
+    {
+      "id": "0d5bd404-ae95-41d8-b015-4eec84f213a8",
+      "revision": 1137,
+      "kind": "run",
+      "itemId": "run-78b2c621",
+      "title": "Stem note recovery author · running",
+      "author": "Codex audio specialist",
+      "source": "actual stem-aware note recovery",
+      "createdAt": "2026-10-12T23:12:32.651Z"
+    },
+    {
+      "id": "3b6aa80e-a758-44e1-a7a9-dc508395d3c4",
+      "revision": 1138,
+      "kind": "task.update",
+      "itemId": "task-f8429984",
+      "title": "Separate supplied Suno title locally for source beat and instrument recovery",
+      "author": "Root",
+      "source": "Actual integrated source/tests/model execution and scoped independent reviews",
+      "createdAt": "2026-10-12T23:14:14.587Z"
+    },
+    {
+      "id": "8b13e3b1-165b-49c9-8504-43fd1f7384db",
+      "revision": 1139,
+      "kind": "task.update",
+      "itemId": "task-e418ca77",
+      "title": "Reconstruct source-driven title percussion and glitch transients",
+      "author": "Root",
+      "source": "Actual integrated source/tests/model execution and scoped independent reviews",
+      "createdAt": "2026-10-12T23:14:14.665Z"
+    },
+    {
+      "id": "e1ffb7ed-c0aa-4b68-a08b-9c2d1a7dd6af",
+      "revision": 1140,
+      "kind": "task.update",
+      "itemId": "task-f7d0d237",
+      "title": "Prototype fractional title events on the real shared music clock",
+      "author": "Root",
+      "source": "Actual integrated source/tests/model execution and scoped independent reviews",
+      "createdAt": "2026-10-12T23:14:14.731Z"
+    },
+    {
+      "id": "53dbafd5-b425-49dc-98e0-a98240e4de5f",
+      "revision": 1141,
+      "kind": "task.update",
+      "itemId": "task-d0e4d592",
+      "title": "Configured native R1 Ion Wake live validation harness",
+      "author": "Root",
+      "source": "Actual integrated source/tests/model execution and scoped independent reviews",
+      "createdAt": "2026-10-12T23:14:14.793Z"
+    },
+    {
+      "id": "a48cfbba-ab67-40e4-b4ab-c80b9843318a",
+      "revision": 1142,
+      "kind": "task.update",
+      "itemId": "task-89b6b8f7",
+      "title": "Refine Bastion armor and pod materials on exact native mask",
+      "author": "Root",
+      "source": "Actual integrated source/tests/model execution and scoped independent reviews",
+      "createdAt": "2026-10-12T23:14:14.871Z"
+    },
+    {
+      "id": "0b78dfd7-a1cc-4e81-b7c6-746ae5321601",
+      "revision": 1143,
+      "kind": "task.update",
+      "itemId": "task-06e3e66a",
+      "title": "Fair bounded asteroid admission across dispersed co-op pilots",
+      "author": "Root",
+      "source": "Actual integrated source/tests/model execution and scoped independent reviews",
+      "createdAt": "2026-10-12T23:14:14.919Z"
+    },
+    {
+      "id": "ed9dd296-0369-4bcb-84f3-bb7102211d4b",
+      "revision": 1144,
+      "kind": "review",
+      "itemId": "review-7459cfb7",
+      "title": "Integration review: bounded native/art work accepted; musical recovery and live gates remain open",
+      "author": "Root",
+      "source": "Actual source integration and review evidence",
+      "createdAt": "2026-10-12T23:14:14.948Z"
+    },
+    {
+      "id": "dfb11a6a-b454-40dc-afb6-1df9ee2e8fd5",
+      "revision": 1145,
+      "kind": "run",
+      "itemId": "run-7f6ae784",
+      "title": "Source bass and glitch-body recovery · completed",
+      "author": "/root/audio_review",
+      "source": "Actual first8 bounded source/drum-estimate low-body control and known-model checks frozen for Root review",
+      "createdAt": "2026-10-12T23:14:20.824Z"
     }
   ],
   "runRecords": [
@@ -36415,6 +37218,400 @@
       "author": "Root",
       "source": "Actual same worker process completion, exit0 and inspected raw result",
       "createdAt": "2026-10-12T22:09:19.279Z"
+    },
+    {
+      "id": "run-0ce845de",
+      "title": "Bastion material refinement · completed",
+      "agentId": "/root/audio_review",
+      "agentLabel": "Bastion material refinement",
+      "state": "completed",
+      "observedAt": "2026-10-12T22:13:09.549Z",
+      "taskIds": [
+        "task-89b6b8f7"
+      ],
+      "summary": "Frozen cleanb27bcf8, exact8files.76 color changes with938mask/83signals/palette/all non-Bastion bytes exact; Root reviewed native40/game28 source art.8 pipeline+1 optimizedguard+6 freshnativeatlasloader checks passed,2-frame every-corner audit.4 immutable nativeproof copies and separate10/108 source closures. Audit ordering failure/retry and first commit identity failure preserved. No normalbuild/GPU/human final acceptance.",
+      "evidence": [
+        {
+          "label": "Frozen candidate and actual evidence",
+          "kind": "note",
+          "details": "work/bastion-material-refinement/HANDOFF.md, final-native-audit.json/native-mask-proof.json/bastion-native-before-after-final.png, focused-tests-final.log/native-loader-tests.log, proof-binaries. Root source-art review recorded separately; candidate task stays for Root integration. Dart whole-atlas assertion adjustment agreed as Root ownership."
+        }
+      ],
+      "author": "/root/audio_review",
+      "source": "Actual completed frozen Bastion author scope; pending Root integration/GPU/human acceptance",
+      "createdAt": "2026-10-12T22:13:09.593Z"
+    },
+    {
+      "id": "run-25b65cef",
+      "title": "Configured native Wake QA helper author · completed",
+      "agentId": "/root/audio_score",
+      "agentLabel": "Configured native Wake QA helper author",
+      "state": "completed",
+      "observedAt": "2026-10-12T22:13:21.753Z",
+      "taskIds": [
+        "task-d0e4d592"
+      ],
+      "summary": "QA helper authoring completed on codex/coop-wake-live-qa from 8b0896d; exact source/evidence staged for immediate freeze commit. Actual 53 focused listener-free checks pass, six syntax checks/formatting/tsc pass. Four failed attempts retained. No listener/build/browser/RTC/native rerun or user-store write. Independent review, Root integration/staging and actual two-renderer live gates remain pending; criteria are unchanged.",
+      "evidence": [
+        {
+          "label": "Candidate source and liveness/contract handoff",
+          "kind": "note",
+          "details": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/coop-wake-live-qa/HANDOFF.md"
+        },
+        {
+          "label": "Raw focused checks and exact source/fixture pins",
+          "kind": "note",
+          "details": "work/coop-wake-live-qa/tests-frozen-inputs.log; wasm-consumers-frozen-inputs.log; source-pins.json; execution.json"
+        }
+      ],
+      "author": "Codex",
+      "source": "actual configured Wake QA author finish",
+      "createdAt": "2026-10-12T22:13:21.836Z"
+    },
+    {
+      "id": "run-cf496686",
+      "title": "Title reference fidelity investigation · running",
+      "agentId": "/root/audio_review",
+      "agentLabel": "Title reference fidelity investigation",
+      "state": "running",
+      "observedAt": "2026-10-12T22:14:40.198Z",
+      "taskIds": [
+        "task-a58a9481"
+      ],
+      "summary": "Actual work-only source/reference investigation starts after frozenBastionb27bcf8. OriginalMP3 retained unchanged; current title score is explicit authored draft with32bar45.37s versus42.68s reference. Inspecting exact V4 sources/capture and earlier analysis. Isolated local transcription candidate experiment permitted; no score/runtime edits or model/human resemblance acceptance.",
+      "evidence": [
+        {
+          "label": "Actual human correction and inspected source contracts",
+          "kind": "note",
+          "details": "Root artifacts/title-reference-fidelity-20261013/user-feedback-and-correction.json; apps/game/src/title-theme.ts explicitly exactTranscriptionfalse and512steps/169.275BPM. Existing musical-report/score-plan/handoff qualify motif/harmony as audition choices. Local only model/env experiment, events remain candidates."
+        }
+      ],
+      "author": "/root/audio_review",
+      "source": "Actual Root assignment after human reference resemblance correction; source-only experiment started",
+      "createdAt": "2026-10-12T22:14:40.218Z"
+    },
+    {
+      "id": "run-57bb7b30",
+      "title": "Engine and native multiplayer specialist · completed",
+      "agentId": "/root/engine_fx",
+      "agentLabel": "Engine and native multiplayer specialist",
+      "state": "completed",
+      "observedAt": "2026-10-12T22:17:48.091Z",
+      "taskIds": [
+        "task-06e3e66a"
+      ],
+      "summary": "Bounded native resource admission author pass frozen at4ab10c0 plus72d0027; test-only real failure preserved. Candidate core/Clippy/fmt and original/candidate solo export passed; actual8-native-pilot dispersed complete transfers passed. Independent source/evidence review assigned and pending; latejoin-at-cap limitation retained. Broader task-afd3e0d2 real browser eight-seat acceptance remains open. No listeners started.",
+      "evidence": [
+        {
+          "label": "Frozen dispersed native admission author pass; external gates pending",
+          "kind": "note",
+          "details": "C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/eight-pilot-streaming-review/HANDOFF.md SHAf77d066659ec4cc73ca45f4e39ca5f1b1d92b8e7b5e2d1c101bcf1abb82852f9; MANIFEST3971b8f4e8790cf6850a754606e879896ef2d7ff5c5ab65ee41f6d0ff12c0d87. Actual original fairness native exit101, candidate557corepass/17ignored; actual5full native transfers before andafter1200ticks; Root must curate rawprobe link. Latejoin retained112 waits normalcapacityrelease. No eightrealRTC/TURN/FPS/GPU/zero-write acceptance."
+        }
+      ],
+      "author": "Engine specialist",
+      "source": "Actual isolated native author pass, frozen4ab10c0/72d0027; independent review assigned to /root/audio_score",
+      "createdAt": "2026-10-12T22:17:48.126Z"
+    },
+    {
+      "id": "run-23b45c1d",
+      "title": "Independent native streaming reviewer · completed",
+      "agentId": "/root/audio_score",
+      "agentLabel": "Independent native streaming reviewer",
+      "state": "completed",
+      "observedAt": "2026-10-12T22:29:57.760Z",
+      "taskIds": [
+        "task-06e3e66a"
+      ],
+      "summary": "Read-only independent review of exact4ab10c0/72d0027 cohort completed: no blocker for bounded native initial-batch admission and ordinary capacity retry. Independently checked5source/111dependency-union/267evidence/118original-probe/109solo-input pins and actual recorded summaries; no native rerun/build/listener/browser/RTC. Latejoin at retained112, browser scheduling, eight real seats, rendering/performance and persisted-store gates remain open. Separate Wake helper correction is not accepted by this review.",
+      "evidence": [
+        {
+          "label": "Written scoped source/evidence review",
+          "kind": "note",
+          "details": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/dispersed-streaming-independent-review/REVIEW.md"
+        },
+        {
+          "label": "Actual independent hash/record recomputation",
+          "kind": "note",
+          "details": "work/dispersed-streaming-independent-review/verification.json; verification-union-execution.log"
+        }
+      ],
+      "author": "Codex",
+      "source": "actual independent dispersed scheduler review",
+      "createdAt": "2026-10-12T22:29:57.833Z"
+    },
+    {
+      "id": "run-218667a4",
+      "title": "Configured Wake final-health correction author · running",
+      "agentId": "/root/audio_score",
+      "agentLabel": "Configured Wake final-health correction author",
+      "state": "running",
+      "observedAt": "2026-10-12T22:39:34.588Z",
+      "taskIds": [
+        "task-d0e4d592"
+      ],
+      "summary": "Separate codex/coop-wake-live-health branch from immutable1f283. Independent review found two new-pass qualification blockers during final verification and Guest leave. Exact corrected reviewer scripts/source were byte-pinned and actually executed locally: both print resolved/passing frozen checks before expected assertion exit1. Earlier import failures are retained setup failures, not functional evidence. Narrow source correction and10 new regression cases now pass with18 existing helper cases; remaining selected consumers/provenance checks and freeze pending. No listener/normal build/native/browser/RTC run; criteria remain unchanged.",
+      "evidence": [
+        {
+          "label": "Independent required amendment",
+          "kind": "note",
+          "details": "work/coop-wake-live-health/reviewer-REVIEW.md; reviewer-seals.json"
+        },
+        {
+          "label": "Actual frozen red baseline and current focused checks",
+          "kind": "note",
+          "details": "work/coop-wake-live-health/baseline-final-health.log; baseline-leave-health.log; baseline-exits.json; tests-first.log"
+        }
+      ],
+      "author": "Codex",
+      "source": "actual configured Wake helper amendment",
+      "createdAt": "2026-10-12T22:39:34.661Z"
+    },
+    {
+      "id": "run-e8f3ff81",
+      "title": "Spark title source audit · interrupted",
+      "agentId": "local:spark-source-audit",
+      "agentLabel": "Spark title source audit",
+      "state": "interrupted",
+      "observedAt": "2026-10-12T22:43:55.300Z",
+      "taskIds": [
+        "task-a58a9481"
+      ],
+      "summary": "Actual bounded read-only worker was stopped after excessive directory/environment inventory. Only its exact owned process tree was terminated; native/Root sources untouched. Partial647-word source draft exists but wrapper did not finish and no Spark review/acceptance is claimed. Main source inspection and officialCPU inference/reconstruction completed independently.",
+      "evidence": [
+        {
+          "label": "Actual worker/interruption evidence",
+          "kind": "note",
+          "details": "AudioRefinement work/title-reference-fidelity-experiment/spark-source-audit-worker.log, spark-owned-process-tree.json, spark-interruption.json and partial spark-source-fidelity-result.md. Worker command used explicitdanger-full-access/never; no recursive delegation. No blockedDLL/security policy changes."
+        }
+      ],
+      "author": "/root/audio_review",
+      "source": "Actual exact-owned Spark worker process interruption; partial draft not accepted as independent review",
+      "createdAt": "2026-10-12T22:43:55.361Z"
+    },
+    {
+      "id": "run-719810d2",
+      "title": "Configured Wake health amendment author · completed",
+      "agentId": "/root/audio_score",
+      "agentLabel": "Configured Wake health amendment author",
+      "state": "completed",
+      "observedAt": "2026-10-12T22:47:37.895Z",
+      "taskIds": [
+        "task-d0e4d592"
+      ],
+      "summary": "Narrow amendment from immutable1f283 completed and staged for freeze: final current health/context/predicate guards for Wake phases and Guest leave, non-recording final save read and bounded failed cleanup. Actual64focused listener-free cases pass (11new+53inherited), syntax/format/tsc pass. Exact frozen reviewer functional red scripts both executed with expected assertion exit1; import setup failures excluded/retained. Earlier passed history,36oldraw evidence records and originalrefs preserved. No listener/build/native/browser/RTC. Independent follow-through/integration/live gates pending; criteria unchanged.",
+      "evidence": [
+        {
+          "label": "Concrete source correction and remaining gates",
+          "kind": "note",
+          "details": "work/coop-wake-live-health/HANDOFF.md"
+        },
+        {
+          "label": "Actual red/green source-function evidence",
+          "kind": "note",
+          "details": "work/coop-wake-live-health/baseline-final-health.log; baseline-leave-health.log; tests-final.log; consumers-final.log; source-pins.json"
+        }
+      ],
+      "author": "Codex",
+      "source": "actual configured Wake health amendment finish",
+      "createdAt": "2026-10-12T22:47:37.960Z"
+    },
+    {
+      "id": "run-58e4ca4b",
+      "title": "Title reference fidelity experiment · completed",
+      "agentId": "/root/audio_review",
+      "agentLabel": "Title reference fidelity experiment",
+      "state": "completed",
+      "observedAt": "2026-10-12T22:48:13.097Z",
+      "taskIds": [
+        "task-a58a9481"
+      ],
+      "summary": "Work-only experiment sealed on clean b27bcf8. Official JS CPU actually inferred 8s/full42.68 source:443 default/1205 fast candidate events. Actual same-position additive 8s,420-note and all443 fixed/raw-bend full controls; no original waveform sample replay. Source transient407 candidates/80 first8 retained. Independent known-tone timing and false+1-bin bend counterexample qualified. Python import failures and interrupted/unaccepted Spark draft preserved. No source/song/instrument acceptance or production edit.",
+      "evidence": [
+        {
+          "label": "Frozen actual prototype/model/API/source evidence",
+          "kind": "note",
+          "details": "AudioRefinement work/title-reference-fidelity-experiment/HANDOFF.md SHA8a6bf606f29fe06786329bae1229581928c673904a4055090eb927ad24f01524; source-pins.json SHA5167b6e27a20cc857144eda922630d50fe60037da036d8446baae1dd3a997173. Frozen8 manifesteb41e7ab...,420 manifest437916b1...,443 manifestf5b16b67.... Actual all443 WAV e5c2b220...raw/d1b05f46...fixed. Timing-calibration append-only update; original/task listening and production criteria remain active with Root."
+        }
+      ],
+      "author": "/root/audio_review",
+      "source": "Actual sealed work-only title reference experiment; overall musical/production acceptance remains open",
+      "createdAt": "2026-10-12T22:48:13.165Z"
+    },
+    {
+      "id": "run-047aba2c",
+      "title": "Fractional event scheduler author · running",
+      "agentId": "/root/audio_score",
+      "agentLabel": "Fractional event scheduler author",
+      "state": "running",
+      "observedAt": "2026-10-12T22:53:23.990Z",
+      "taskIds": [
+        "task-f7d0d237"
+      ],
+      "summary": "Authoring work-only fractional event scheduling prototype pinned to Root 940836824af19a901097aa072a8a0c11774b4482; production audio remains unchanged. Actual clock API ramp/loop/boundary/stall/cap tests are pending.",
+      "evidence": [
+        {
+          "label": "Owned work scope",
+          "kind": "note",
+          "details": "work/title-fractional-event-scheduler only; immutable health amendment f407 preserved. No listener, normal build, runtime integration, render or musical match claim."
+        }
+      ],
+      "author": "Codex audio specialist",
+      "source": "bounded native-clock timing prototype",
+      "createdAt": "2026-10-12T22:53:24.017Z"
+    },
+    {
+      "id": "run-1508859a",
+      "title": "Source-driven percussion prototype · running",
+      "agentId": "/root/audio_review",
+      "agentLabel": "Source-driven percussion prototype",
+      "state": "running",
+      "observedAt": "2026-10-12T22:53:35.981Z",
+      "taskIds": [
+        "task-e418ca77"
+      ],
+      "summary": "Started work-only source-driven percussion prototype using frozen 407 transient candidates and fixed443 tonal control; no production edit or accepted listening result.",
+      "evidence": [
+        {
+          "label": "Actual assignment and scope",
+          "kind": "note",
+          "details": "Root assigned task-e418ca77. New scope work/title-reference-percussion-prototype; sealed previous experiment remains unchanged."
+        }
+      ],
+      "author": "/root/audio_review",
+      "source": "Actual Root assignment and local prototype work start",
+      "createdAt": "2026-10-12T22:53:36.044Z"
+    },
+    {
+      "id": "run-be83ad06",
+      "title": "Source-driven percussion prototype · completed",
+      "agentId": "/root/audio_review",
+      "agentLabel": "Source-driven percussion prototype",
+      "state": "completed",
+      "observedAt": "2026-10-12T23:01:47.093Z",
+      "taskIds": [
+        "task-e418ca77"
+      ],
+      "summary": "Completed conservative source-driven percussion control:99/407 selected, finite42.68s and exact8s WAVs, all four byte-identical repeat render. Actual band changes remain small; missing0.65-1.45s bass quantified. No production or accepted fidelity result. Root requested separate source-supported bass recovery next.",
+      "evidence": [
+        {
+          "label": "Actual PCM and limits",
+          "kind": "note",
+          "details": "work/title-reference-percussion-prototype/HANDOFF.md; comparison-and-checks.json; reproduction-verification.json; low-band-gap-probe.json. Original/control/selected noise comparison at same source positions. Exact407 decisions retained. Root owns task acceptance and implementation."
+        }
+      ],
+      "author": "/root/audio_review",
+      "source": "Actual completed bounded work-only PCM prototype and measured verification",
+      "createdAt": "2026-10-12T23:01:47.182Z"
+    },
+    {
+      "id": "run-65ed9848",
+      "title": "Source harmonic-family fit audit · running",
+      "agentId": "/root/engine_fx",
+      "agentLabel": "Source harmonic-family fit audit",
+      "state": "running",
+      "observedAt": "2026-10-12T23:02:16.631Z",
+      "taskIds": [
+        "task-b574abb9"
+      ],
+      "summary": "Reading exact frozen443/420/hook8 source and coordinating AudioReview bass scope. Prior calibration established raw bend bias and valid upstream clock; current task now separates missing note coverage,20-partial cap, window/frequency/phase/stereo losses. No current fit/reconstruction/listening pass claimed. No production/native/browser/listener work.",
+      "evidence": [
+        {
+          "label": "Assigned source audit underway",
+          "kind": "note",
+          "details": "work/title-harmonic-recovery-review/ASSIGNMENT.md and studio-task-created.json; first exact fitting/script source inspection complete, quantitative probe is next."
+        }
+      ],
+      "author": "Codex",
+      "source": "Actual active bounded harmonic-source audit",
+      "createdAt": "2026-10-12T23:02:16.696Z"
+    },
+    {
+      "id": "run-04dae522",
+      "title": "Fractional event scheduler author · completed",
+      "agentId": "/root/audio_score",
+      "agentLabel": "Fractional event scheduler author",
+      "state": "completed",
+      "observedAt": "2026-10-12T23:05:29.498Z",
+      "taskIds": [
+        "task-f7d0d237"
+      ],
+      "summary": "Work-only fractional scheduler author scope frozen: actual pinned Root 9408368 MusicClock, 22 prototype tests plus 5 unchanged clock regressions pass (27 total); focused tsc and explicit format checks pass. Source type has onsetBeat/endBeat/payload, fractional loop 120.41095 beats, half-open windows, explicit capacity/stale counts, future cancellation and long-gate retiming caller contract. Root review/integration and real audio output/listening remain open.",
+      "evidence": [
+        {
+          "label": "Timing prototype and protocol",
+          "kind": "note",
+          "details": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/title-fractional-event-scheduler/{fractional-event-scheduler.ts,fractional-event-scheduler.test.mjs,PROTOCOL.md,tests-transition.log,verification.json}. Four 9408368 canonical inputs independently rechecked. Tracked worktree remains clean at immutable f407; no production edits, branch changes, listener, normal build, audio render, carrier budget or same-song acceptance."
+        }
+      ],
+      "author": "Codex audio specialist",
+      "source": "bounded native-clock timing prototype",
+      "createdAt": "2026-10-12T23:05:29.553Z"
+    },
+    {
+      "id": "run-db02f956",
+      "title": "Source bass and glitch-body recovery · running",
+      "agentId": "/root/audio_review",
+      "agentLabel": "Source bass and glitch-body recovery",
+      "state": "running",
+      "observedAt": "2026-10-12T23:08:25.592Z",
+      "taskIds": [
+        "task-35e61fca"
+      ],
+      "summary": "Actual source35-180Hz tracking and first8 bounded sweep fitting running in new work/title-reference-bass-recovery-prototype.42 low-energy peaks,36 selected/6 rejected hypotheses; checking known generated tones/sweeps before same-position mix. No runtime or accepted transcription.",
+      "evidence": [
+        {
+          "label": "Actual source and fit outputs",
+          "kind": "note",
+          "details": "dominant-low-track.json; first8-low-body-event-fits.json; fit-low-first.log. Human confirms Suno arcade-retro/glitch/bubble/pop edits and no MIDI/stems; current estimates not accepted notes or exact beat recovery."
+        }
+      ],
+      "author": "/root/audio_review",
+      "source": "Actual Root assigned source-driven bass/body recovery after frozen conservative percussion",
+      "createdAt": "2026-10-12T23:08:25.618Z"
+    },
+    {
+      "id": "run-78b2c621",
+      "title": "Stem note recovery author · running",
+      "agentId": "/root/audio_score",
+      "agentLabel": "Stem note recovery author",
+      "state": "running",
+      "observedAt": "2026-10-12T23:12:32.603Z",
+      "taskIds": [
+        "task-8850e6f9"
+      ],
+      "summary": "Pinning frozen official JS BasicPitch frontend/model and successful Root HTDemucs bass/other estimates; decoding full42.68s to22050mono, then actual TFJS CPU default/fast raw note extraction. Scheduler remains preserved; no production files or listening result.",
+      "evidence": [
+        {
+          "label": "Owned work",
+          "kind": "note",
+          "details": "work/title-stem-note-recovery only. Original source timestamps and44100stereo stem pins retained, no global offset, quantization, raw-bend truth or PCM shipping."
+        }
+      ],
+      "author": "Codex audio specialist",
+      "source": "actual stem-aware note recovery",
+      "createdAt": "2026-10-12T23:12:32.651Z"
+    },
+    {
+      "id": "run-7f6ae784",
+      "title": "Source bass and glitch-body recovery · completed",
+      "agentId": "/root/audio_review",
+      "agentLabel": "Source bass and glitch-body recovery",
+      "state": "completed",
+      "observedAt": "2026-10-12T23:14:20.737Z",
+      "taskIds": [
+        "task-35e61fca"
+      ],
+      "summary": "Completed first8 bounded low-body control:42 source-energy gates,28 drum-estimate selected/14 rejected; four known-family math checks passed after preserved startup-frequency failure. Missing lowRMS .044401 vs original.069549; peak.560120. Full42.68 extension is next separate scope, not a finished same-song claim.",
+      "evidence": [
+        {
+          "label": "Actual incomplete hook and bounded checks",
+          "kind": "note",
+          "details": "work/title-reference-bass-recovery-prototype/HANDOFF.md, verification-and-budget.json, first8-mix-comparison.json. Root presented original/new8 as incomplete with bright texture missing. Root owns task acceptance; no production or exact-beat/ear acceptance."
+        }
+      ],
+      "author": "/root/audio_review",
+      "source": "Actual first8 bounded source/drum-estimate low-body control and known-model checks frozen for Root review",
+      "createdAt": "2026-10-12T23:14:20.824Z"
     }
   ],
   "phaseDescription": "Desktop-first Rust/WASM solo game and local Studio are implemented. Reviewed occupied-cell art, reproducible conversion, responsive native settings/icons and minimap, strict GitHub integration gates and source-backed Dev Bible are integrated. Natural campaign balance, human listening, owner-private update lifecycle and physical phones remain separate pending gates."

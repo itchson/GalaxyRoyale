@@ -1,0 +1,8 @@
+{
+  "observedAt": "2026-10-12T22:13:17.814Z",
+  "feedback": "The sounds need to be similar to the supplied song; the song needs to be pretty much the same.",
+  "source": "C:/Users/mitch/Downloads/Galaxy Royale (3).mp3",
+  "sourceSha256": "95fcb149bb55da752c4d93c18fcc1913a23b70ccafecb52d8db5548dc64755d6",
+  "actualMismatch": "Existing title-theme.ts explicitly authors provisional pitch-class-derived phrases, not a transcription. Source42.680seconds versus provisional32bar~45.37second form. Prior finite PCM/clock/budget checks establish engine correctness, not musical resemblance.",
+  "direction": "Recover original note events, pitch bends, actual rhythm/pickup/rests/harmony/form and instrument character. Use source offline only; preserve dynamic shared transport and authored synthesis. No full source waveform loop disguised as synthesis. Automated models produce candidates, not human-accepted transcription. Compare short same-position hooks and the full loop to original before acceptance."
+}

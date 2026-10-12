@@ -1,0 +1,114 @@
+{
+  "observedAt": "2026-10-12T23:13:21.780Z",
+  "runtimeBuild": {
+    "schemaVersion": 1,
+    "head": "940836824af19a901097aa072a8a0c11774b4482",
+    "branch": "codex/testing",
+    "sourceHash": "affe831f7d0370ff60049fdaa8b34e7269d26d65aaa0d4f8bd9b037de028f95d",
+    "packageHash": "5b0679583d4bc6674220b9e85729a27aacfc612009738d0eda18a0998a927c74",
+    "builtAt": "2026-10-12T22:37:32.683Z"
+  },
+  "scope": "Actual integrated native streaming/art and unshipped QA source checks. Source audio reconstruction is separate and production title remains unchanged.",
+  "checks": {
+    "workspace": {
+      "pass": 944,
+      "ignored": 22,
+      "source": "329b912 before Bastion palette; separate fresh target"
+    },
+    "strictWorkspaceClippy": "pass after Bastion/current integrated QA; new target before proof freezing",
+    "dartPipeline": 7,
+    "bastionPipeline": 8,
+    "nativeAssetLoader": 6,
+    "rootConfiguredWakeQA": 48,
+    "rootSelectedQAConsumers": 16,
+    "typecheck": "pass",
+    "qaSyntax": "pass",
+    "normalBuild": "both WASM backends/game/PWA/Studio pass at9408368"
+  },
+  "immutableNativeProofs": [
+    {
+      "scope": "fairness944",
+      "path": "work/integration-20261013/fairness-proof-binaries/4cc7262ce02281ac38c1b0b8dc5f567d07f4ed6fb669e8bdebdc61377bdcaaa9.exe",
+      "sha256": "4cc7262ce02281ac38c1b0b8dc5f567d07f4ed6fb669e8bdebdc61377bdcaaa9"
+    },
+    {
+      "scope": "Bastion6 native asset tests",
+      "path": "work/integration-20261013/bastion-proof-binaries/0d4cb5632e3b01abff8bacc98b3594534da962d2291f71d327f88f1def3898bc.exe",
+      "sha256": "0d4cb5632e3b01abff8bacc98b3594534da962d2291f71d327f88f1def3898bc"
+    }
+  ],
+  "remaining": [
+    "Current new runtime live-renderer smoke",
+    "Eight real browser seats/TURN/FPS/physical soak",
+    "Configured Wake live RTC/visual/save lifecycle on both renderers",
+    "New musical reconstruction runtime integration and human same-song acceptance"
+  ],
+  "files": [
+    {
+      "source": "work/integration-20261013/fairness-workspace.log",
+      "path": "artifacts/continuation-integration-20261013/fairness-workspace.log",
+      "bytes": 106211,
+      "sha256": "db95a0178b7aec409cdfdc66908534f989666b31542e7aaacc80bbc1f6acd7bc"
+    },
+    {
+      "source": "work/integration-20261013/fairness-bastion-clippy.log",
+      "path": "artifacts/continuation-integration-20261013/fairness-bastion-clippy.log",
+      "bytes": 2822,
+      "sha256": "7ce17fe33983fdffdfc37f1fa05308dbed1c87547325d4472b8f215636f7db5e"
+    },
+    {
+      "source": "work/integration-20261013/fairness-bastion-build.log",
+      "path": "artifacts/continuation-integration-20261013/fairness-bastion-build.log",
+      "bytes": 1419,
+      "sha256": "e21ce4e73880e8dcb424dd569adf760d74940708fae8cf50241c8356d1a722da"
+    },
+    {
+      "source": "work/integration-20261013/dart-with-bastion-tests.log",
+      "path": "artifacts/continuation-integration-20261013/dart-with-bastion-tests.log",
+      "bytes": 110,
+      "sha256": "e475690b561dbf3972a0e58db507045a705183e129be00d17b3d0a9bc5d2d667"
+    },
+    {
+      "source": "work/integration-20261013/bastion-pipeline-tests.log",
+      "path": "artifacts/continuation-integration-20261013/bastion-pipeline-tests.log",
+      "bytes": 111,
+      "sha256": "d9e13a9c9b328124839d285d9a69027aff866da6138609f8194b7f1813e5d41e"
+    },
+    {
+      "source": "work/integration-20261013/bastion-native-loader.log",
+      "path": "artifacts/continuation-integration-20261013/bastion-native-loader.log",
+      "bytes": 1669,
+      "sha256": "a5d85b6923da843a8150414dc3e2381e6092b0568cc24eb686064b112753a76e"
+    },
+    {
+      "source": "work/integration-20261013/wake-health-root-tests.log",
+      "path": "artifacts/continuation-integration-20261013/wake-health-root-tests.log",
+      "bytes": 6182,
+      "sha256": "d8796d27975afa294547530e9c187d81a1b912150fb1eb59c9d8b2808fbf10d8"
+    },
+    {
+      "source": "work/integration-20261013/wake-health-root-consumers.log",
+      "path": "artifacts/continuation-integration-20261013/wake-health-root-consumers.log",
+      "bytes": 2106,
+      "sha256": "13bb4d3997557508b65f1a04a28757447f662dd555338f7727912eb78eb2c75c"
+    },
+    {
+      "source": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/dispersed-streaming-independent-review/REVIEW.md",
+      "path": "artifacts/continuation-integration-20261013/fairness-independent-REVIEW.md",
+      "bytes": 9535,
+      "sha256": "c6902162567371978e94486cd26ff0a5e45b4acfd2324348e29163d4aeaf2d9a"
+    },
+    {
+      "source": "C:/Users/mitch/.codex/worktrees/galaxy-hud-navigation/galaxy-royale/work/wake-live-health-independent-review/REVIEW.md",
+      "path": "artifacts/continuation-integration-20261013/wake-health-independent-REVIEW.md",
+      "bytes": 6363,
+      "sha256": "c99f0af97cdbd498771c0e68af9db00c43f299a97a187f9e24022c84ac150a12"
+    },
+    {
+      "source": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/bastion-material-refinement/HANDOFF.md",
+      "path": "artifacts/continuation-integration-20261013/bastion-HANDOFF.md",
+      "bytes": 5385,
+      "sha256": "a4fc835e701988f82eadedc3200cac0b8b5a4b6fdc74e90c59ff2d438600b565"
+    }
+  ]
+}

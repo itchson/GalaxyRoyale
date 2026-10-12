@@ -1,0 +1,6 @@
+{
+  "scope": "Own source-adapter native check only; no game instance",
+  "sourceSha256": "8a59285d67d6738297a45c36602d5a204fcbb931c7632317268b7a5368328fae",
+  "helperSha256": "f726da827fd0dd3fe6e8769f0e1333645e60d97f018e46b4fb03347e6874ad0b",
+  "typescript": "5.9.3"
+}
