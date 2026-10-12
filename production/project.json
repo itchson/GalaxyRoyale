@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 1038,
+  "revision": 1039,
   "name": "Galaxy Royale",
   "phase": "Playable solo slice → content and validation",
-  "updatedAt": "2026-10-12T19:24:25.389Z",
+  "updatedAt": "2026-10-12T19:31:50.630Z",
   "tasks": [
     {
       "id": "studio",
@@ -8648,6 +8648,41 @@
       "revision": 1,
       "createdAt": "2026-10-12T19:15:22.593Z",
       "updatedAt": "2026-10-12T19:15:22.593Z"
+    },
+    {
+      "id": "task-b062202c",
+      "title": "Co-op world-edge native entity publication and replica bounds",
+      "description": "Real in-progress Wake edge capture failed because17legitimate generated asteroids exceed currentreplica +/-1000000positionbounds. Rootconfirmedexistingvectorcontract; actualintegrated-baseline reproduction stillneeded. KeepWake-only halo testseparate fromwholeworldfix. No projectile failure or liveRTC result inferred.",
+      "department": "Native gameplay / protocol",
+      "owner": "Root / native gameplay",
+      "status": "ready",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Reproduce complete real integrated native edge capture with generated entities; preserve first failure and actual problematic rows.",
+          "met": false
+        },
+        {
+          "text": "Bounded authority/publication/replica/browser geometry contract resolves legal nearby entities with meaningful malformed/extreme input regressions.",
+          "met": false
+        },
+        {
+          "text": "Matching build and actual host/guest edge lifecycle validated; future circular battle-royale remains separate.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual native author failure and precise remaining gate",
+          "kind": "artifact",
+          "path": "artifacts/native-wake-integration-20261013/world-edge-finding/FINDING.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-12T19:31:50.630Z",
+      "updatedAt": "2026-10-12T19:31:50.630Z"
     }
   ],
   "reviews": [
@@ -24762,6 +24797,16 @@
       "author": "Root",
       "source": "Actual normal-browser safe update and observed retained state",
       "createdAt": "2026-10-12T19:24:25.389Z"
+    },
+    {
+      "id": "6a82697a-7bb1-4938-a009-94480172227c",
+      "revision": 1039,
+      "kind": "task.create",
+      "itemId": "task-b062202c",
+      "title": "Co-op world-edge native entity publication and replica bounds",
+      "author": "Root",
+      "source": "Actual author edge-capture failure and Root source/log inspection",
+      "createdAt": "2026-10-12T19:31:50.630Z"
     }
   ],
   "runRecords": [
