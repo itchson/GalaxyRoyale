@@ -120,6 +120,10 @@ pub(super) struct Pilot {
     pub nova_rank: u8,
     pub nova_evolution: u8,
     pub nova_timer: f32,
+    pub wake_rank: u8,
+    pub wake_evolution: u8,
+    pub wake_timer: f32,
+    pub wake: Vec<(Vec2, f32)>,
     pub input: InputFrame,
     pub last_sequence: Option<u32>,
     pub input_tick: u32,
@@ -311,6 +315,10 @@ fn pilot(
         || bosses::evolution(profile, 1),
         |build| build.nova_evolution.unwrap_or(1),
     );
+    let wake_evolution = owned_loadout.as_ref().map_or_else(
+        || bosses::evolution(profile, 2),
+        |build| build.wake_evolution.unwrap_or(1),
+    );
     Pilot {
         admission,
         spec,
@@ -333,6 +341,10 @@ fn pilot(
         nova_rank: ship_progression::equipped_rank(profile, 4),
         nova_evolution,
         nova_timer: 0.0,
+        wake_rank: ship_progression::equipped_rank(profile, 5),
+        wake_evolution,
+        wake_timer: 0.0,
+        wake: Vec::new(),
         input: InputFrame::default(),
         last_sequence: None,
         input_tick: 0,
@@ -631,6 +643,7 @@ impl Game {
         self.previous_camera = self.camera;
         self.respawn_co_op_pilots();
         let mut fires = [None; MAX_PARTICIPANTS];
+        let mut wake_origins = [None; MAX_PARTICIPANTS];
         for (entity, (motion, p, actor)) in self
             .world
             .query_mut::<(Entity, (&mut Motion, &mut Pilot, &mut Actor))>()
@@ -663,6 +676,8 @@ impl Game {
                 dt,
             );
             p.input.destination = None; // A click command is applied once; held controls remain transient.
+            // Solo stamps the pre-integration position with the current heading.
+            wake_origins[p.admission.slot as usize] = Some((entity, motion.position));
             let safe = motion.position.length_squared() <= SAFE_RADIUS * SAFE_RADIUS
                 || regions::protected(self.profile.seed, motion.position).is_some();
             if p.input.fire && !safe && p.fire_timer <= 0.0 {
@@ -791,6 +806,7 @@ impl Game {
         self.update_co_op_pickups(dt);
         self.respawn_co_op_pilots();
         self.repair_co_op_home_arrivals();
+        self.update_co_op_wakes(wake_origins, dt);
         self.emit_projectile_trails(dt);
         self.update_particles(dt);
         self.sync_co_op_host();
@@ -882,6 +898,8 @@ impl Game {
             p.throttle = 0.0;
             p.destination = None;
             p.fire_timer = 0.0;
+            p.wake.clear();
+            p.wake_timer = 0.0;
             p.input = InputFrame::default();
             p.was_home = true;
         }
@@ -1391,3 +1409,10 @@ mod echo_tests;
 #[cfg(test)]
 #[path = "co_op_nova_tests.rs"]
 mod nova_tests;
+
+#[cfg(test)]
+#[path = "co_op_wake_tests.rs"]
+mod wake_tests;
+
+#[path = "co_op_wake.rs"]
+mod wake;

@@ -38,6 +38,13 @@ pub struct OwnedLoadout {
         deserialize_with = "present_evolution"
     )]
     pub nova_evolution: Option<u8>,
+    /// Ordinary Ion Wake effect only; no remote boss defeat history is imported.
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "present_evolution"
+    )]
+    pub wake_evolution: Option<u8>,
 }
 
 fn present_evolution<'de, D: serde::Deserializer<'de>>(
@@ -92,6 +99,9 @@ impl OwnedLoadout {
             nova_evolution: (ship_progression::equipped_rank(profile, 4) > 0)
                 .then(|| bosses::evolution(profile, 1))
                 .filter(|&evolution| evolution > 1),
+            wake_evolution: (ship_progression::equipped_rank(profile, 5) > 0)
+                .then(|| bosses::evolution(profile, 2))
+                .filter(|&evolution| evolution > 1),
         };
         result.profile(&ParticipantSpec {
             id: co_op::ParticipantId::parse("00000000000000000000000000000000")?,
@@ -114,6 +124,9 @@ impl OwnedLoadout {
             })
             || self.nova_evolution.is_some_and(|evolution| {
                 !(1..=5).contains(&evolution) || !self.slots[1].is_some_and(|slot| slot.index == 4)
+            })
+            || self.wake_evolution.is_some_and(|evolution| {
+                !(1..=5).contains(&evolution) || !self.slots[2].is_some_and(|slot| slot.index == 5)
             })
             || ((self.owned_ships >> 9) != 0) != self.royal_victory
             || (self.royal_victory && self.patches != u8::MAX)

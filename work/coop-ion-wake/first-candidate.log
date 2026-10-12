@@ -1,0 +1,10 @@
+   Compiling game_core v0.1.0 (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\crates\game_core)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 6.82s
+     Running unittests src\lib.rs (target\debug\deps\game_core-5b2032bfdcb8bcac.exe)
+
+running 1 test
+actual_coop_enemy_health=99.9; ordinary_ion_wake_expected=99.9
+test co_op::wake_tests::admitted_ordinary_ion_wake_damages_real_enemy_during_fast_host_tick ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 528 filtered out; finished in 0.01s
+
