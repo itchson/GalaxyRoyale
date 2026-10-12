@@ -353,6 +353,7 @@ async function connected(rejoin) {
 async function roomSend(role, name, args, deadline) {
   const remaining = deadline - performance.now();
   if (remaining <= 0) throw new Error("room_deadline");
+  if (driveActive) guardDriveVisibility();
   const value = await send(
     role,
     name,
@@ -360,18 +361,40 @@ async function roomSend(role, name, args, deadline) {
     Math.min(remaining, name === "room-state" ? 5_000 : 10_000),
   );
   if (performance.now() >= deadline) throw new Error("room_deadline");
+  if (driveActive) guardDriveVisibility();
   return value;
 }
 async function roomRead(deadline) {
-  return Promise.all([
+  const values = await Promise.all([
     roomSend("host", "room-state", {}, deadline),
     roomSend("guest", "room-state", {}, deadline),
   ]);
+  if (driveActive) {
+    // Finish each child's private command before asking for its public failure state.
+    const health = await Promise.all([
+      roomSend("host", "state", {}, deadline),
+      roomSend("guest", "state", {}, deadline),
+    ]);
+    if (
+      values.some(
+        (value) => !Number.isFinite(value.life_ms) || value.life_ms <= 0,
+      ) ||
+      health.some(
+        (value) =>
+          value.init_stage !== "ready" ||
+          value.failure_code !== null ||
+          ["failed", "disposed"].includes(value.phase),
+      )
+    )
+      throw new Error("room_case_failed");
+  }
+  return values;
 }
 async function roomUntil(predicate, deadline) {
   while (true) {
-    requireVisibleClients();
+    if (driveActive) guardDriveVisibility();
     const values = await roomRead(deadline);
+    if (driveActive) guardDriveVisibility();
     if (predicate(values)) return values;
     await new Promise((resolve) =>
       setTimeout(
@@ -452,13 +475,18 @@ async function roomAccept(deadline) {
   );
 }
 async function roomContinuity(deadline) {
+  // Keep pre-policy ownership marks; progress must follow this post-reply read.
+  const [, afterPolicy] = await roomRead(deadline);
+  const commitFloor = afterPolicy.new_commits;
+  if (!Number.isInteger(commitFloor) || commitFloor < 0)
+    throw new Error("room_case_failed");
   const values = await roomUntil(
     ([h, g]) =>
       h.ready > 0 &&
       g.ready > 0 &&
       h.admitted > 0 &&
       g.admitted > 0 &&
-      g.new_commits > 0 &&
+      g.new_commits > commitFloor &&
       g.owned_view,
     deadline,
   );
@@ -525,18 +553,26 @@ async function privateRoomRound(kind) {
   )
     throw new Error("room_precondition");
   const deadline = performance.now() + 120_000;
-  const before = await roomRead(deadline);
-  if (
-    !before.every(
-      (v) =>
-        v.mode === "solo" &&
-        v.created === v.closed &&
-        v.requests === 0 &&
-        v.timers === 0 &&
-        v.life_ms >= 140_000,
+  driveVisibilityLost = false;
+  driveActive = true;
+  try {
+    const before = await roomRead(deadline);
+    guardDriveVisibility();
+    if (
+      !before.every(
+        (v) =>
+          v.mode === "solo" &&
+          v.created === v.closed &&
+          v.requests === 0 &&
+          v.timers === 0 &&
+          v.life_ms >= 140_000,
+      )
     )
-  )
-    throw new Error("room_precondition");
+      throw new Error("room_precondition");
+  } catch (error) {
+    driveActive = false;
+    throw error;
+  }
   let failure;
   roomAttempted = true;
   try {
@@ -601,6 +637,8 @@ async function privateRoomRound(kind) {
   } catch (error) {
     failure = error;
   } finally {
+    // Stop qualification before cleanup: hidden clients must still retire.
+    driveActive = false;
     try {
       await roomFinish(performance.now() + 20_000);
     } catch (error) {

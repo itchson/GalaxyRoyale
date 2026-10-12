@@ -343,6 +343,7 @@ test("actual terminal and approved continuity gates reject mismatched reasons, o
     same_native: true,
   };
   const context = vm.createContext({
+    roomRead: async () => [host, { new_commits: 0 }],
     roomUntil: async (predicate) => {
       assert(predicate([host, guest]));
       return [host, guest];
@@ -381,10 +382,287 @@ test("actual terminal and approved continuity gates reject mismatched reasons, o
   await assert.rejects(context.roomContinuity(1000), /assertion|false/i);
 });
 
+test("actual continuity requires a complete commit later than the post-policy reply floor, retaining original ownership marks", async () => {
+  let commits = 5,
+    reads = 0;
+  const host = {
+    mode: "host",
+    ready: 1,
+    admitted: 1,
+    same_room: true,
+    same_peers: true,
+    same_native: true,
+  };
+  const guest = () => ({
+    mode: "guest",
+    ready: 1,
+    admitted: 1,
+    owned_view: true,
+    same_room: true,
+    same_peers: true,
+    same_native: true,
+    same_epoch: true,
+    new_commits: commits,
+  });
+  const context = vm.createContext({
+    roomRead: async () => {
+      reads++;
+      return [host, guest()];
+    },
+    roomMarkBoth: () =>
+      assert.fail(
+        "post-policy progress must not replace pre-policy ownership marks",
+      ),
+    roomUntil: async (predicate) => {
+      assert.equal(
+        predicate([host, guest()]),
+        false,
+        "five commits arriving during the awaited policy reply cannot prove later progress",
+      );
+      commits = 6;
+      assert.equal(
+        predicate([host, guest()]),
+        true,
+        "one strictly later complete commit can satisfy progress",
+      );
+      return [host, guest()];
+    },
+    check: (name, passed) => assert(passed, name),
+  });
+  vm.runInContext(declaration("parent", "roomContinuity"), context);
+  await context.roomContinuity(1000);
+  assert.equal(reads, 1);
+});
+
+test("actual room observation rejects visibility loss during its awaited reply and preserves the hide-restore latch", async () => {
+  for (const restore of [false, true]) {
+    let visible = true;
+    const context = vm.createContext({
+      driveActive: true,
+      driveVisibilityLost: false,
+      $: () => ({ textContent: "" }),
+      requireVisibleClients: () => {
+        if (!visible) throw Error("page_not_visible");
+      },
+      roomRead: async () => {
+        visible = false;
+        context.noteDriveVisibility();
+        if (restore) visible = true;
+        return [{}, {}];
+      },
+    });
+    for (const name of [
+      "noteDriveVisibility",
+      "guardDriveVisibility",
+      "roomUntil",
+    ])
+      vm.runInContext(declaration("parent", name), context);
+    await assert.rejects(
+      context.roomUntil(() => true, 1000),
+      /page_not_visible|clients_not_visible/,
+    );
+    assert.equal(context.driveVisibilityLost, true);
+  }
+});
+
+test("actual stopped native frame cannot complete a decline experiment from still-live controller state", async () => {
+  let callback;
+  const child = vm.createContext({
+    stopped: false,
+    failureCode: null,
+    phase: "idle",
+    initStage: "ready",
+    timer: null,
+    loopDeadline: 180000,
+    lastTime: 0,
+    pumping: false,
+    performance: { now: () => 10 },
+    clearTimeout: () => {},
+    setTimeout: (fn) => {
+      callback = fn;
+      return 1;
+    },
+    step: () => {
+      throw Error("declared native step failure");
+    },
+    update: () => {},
+    role: "guest",
+    controller: { state: () => ({ phase: "ended" }), frameMode: () => "solo" },
+    transport: null,
+    mode: "solo",
+    counters: {},
+    profileEqual: true,
+    persistedEqual: true,
+    persistent: true,
+    progressionFalse: true,
+    movementObserved: false,
+    profileSha: null,
+    baseline: null,
+    persistedSha: null,
+    config: { profile_mode: "starter" },
+    scenario: "default",
+  });
+  for (const name of ["schedule", "observations"])
+    vm.runInContext(declaration("child", name), child);
+  let created = false,
+    cleaned = 0;
+  const room = (role) => ({
+    mode: created && role === "host" ? "host" : "solo",
+    life_ms: 180000,
+    created: 0,
+    closed: 0,
+    requests: 0,
+    timers: 0,
+    phase: "ended",
+    reason: "join_declined",
+    awaiting: false,
+    pending: 0,
+    ready: 0,
+    admitted: 0,
+    same_room: true,
+    same_native: true,
+    same_peers: true,
+  });
+  const context = vm.createContext({
+    requireVisibleClients: () => {},
+    initialized: true,
+    scenario: "default",
+    config: { profile_mode: "owned" },
+    roomCases: new Set(),
+    roomAttempted: false,
+    driveActive: false,
+    driveVisibilityLost: false,
+    performance: { now: () => 10 },
+    roomSend: async (role, name) => {
+      if (name === "create") {
+        created = true;
+        return { invite: "private" };
+      }
+      return name === "state" ? child.observations() : room(role);
+    },
+    roomMarkBoth: async () => {},
+    roomPending: async () => {
+      child.schedule();
+      callback();
+    },
+    roomFinish: async () => {
+      assert.equal(context.driveActive, false);
+      cleaned++;
+    },
+    check: (name, passed) => assert(passed, name),
+  });
+  for (const name of [
+    "guardDriveVisibility",
+    "roomRead",
+    "roomUntil",
+    "roomTerminal",
+    "privateRoomRound",
+  ])
+    vm.runInContext(declaration("parent", name), context);
+  await assert.rejects(context.privateRoomRound("decline"), /room_case_failed/);
+  assert.equal(child.stopped, true);
+  assert.equal(child.observations().failure_code, "native_frame_failed");
+  assert.equal(child.observations().phase, "failed");
+  assert.equal(cleaned, 1);
+  assert.equal(context.roomCases.size, 0);
+});
+
+test("actual room reads gate available child failure, initialization, disposal and lifetime signals only during the experiment", async () => {
+  let health = { init_stage: "ready", failure_code: null, phase: "hosting" };
+  let life = 180000;
+  const calls = [];
+  const context = vm.createContext({
+    driveActive: true,
+    roomSend: async (role, name) => {
+      calls.push([role, name]);
+      return name === "state" ? health : { life_ms: life };
+    },
+  });
+  vm.runInContext(declaration("parent", "roomRead"), context);
+  await context.roomRead(1000);
+  for (const invalid of [
+    { failure_code: "native_frame_failed" },
+    { phase: "failed" },
+    { phase: "disposed" },
+    { init_stage: "read_baseline" },
+    { failure_code: undefined },
+  ]) {
+    const baseline = {
+      init_stage: "ready",
+      failure_code: null,
+      phase: "hosting",
+    };
+    health = { ...baseline, ...invalid };
+    await assert.rejects(context.roomRead(1000), /room_case_failed/);
+  }
+  health = { init_stage: "ready", failure_code: null, phase: "hosting" };
+  for (life of [0, -1, NaN, undefined])
+    await assert.rejects(context.roomRead(1000), /room_case_failed/);
+  context.driveActive = false;
+  health.failure_code = "native_frame_failed";
+  const beforeCleanup = calls.length;
+  await context.roomRead(1000);
+  assert.deepEqual(
+    calls.slice(beforeCleanup).map(([, name]) => name),
+    ["room-state", "room-state"],
+  );
+});
+
+test("actual preflight visibility latch rejects a hide-restore before any room mutation", async () => {
+  let visible = true;
+  const context = vm.createContext({
+    initialized: true,
+    scenario: "default",
+    config: { profile_mode: "owned" },
+    roomCases: new Set(),
+    roomAttempted: false,
+    driveActive: false,
+    driveVisibilityLost: false,
+    performance: { now: () => 10 },
+    $: () => ({ textContent: "" }),
+    requireVisibleClients: () => {
+      if (!visible) throw Error("page_not_visible");
+    },
+    roomRead: async () => {
+      visible = false;
+      context.noteDriveVisibility();
+      visible = true;
+      return [
+        {
+          mode: "solo",
+          created: 0,
+          closed: 0,
+          requests: 0,
+          timers: 0,
+          life_ms: 180000,
+        },
+      ].flatMap((value) => [value, value]);
+    },
+    roomSend: () => assert.fail("interrupted preflight must not create a room"),
+    roomFinish: () =>
+      assert.fail("unmutated preflight does not need room cleanup"),
+  });
+  for (const name of [
+    "noteDriveVisibility",
+    "guardDriveVisibility",
+    "privateRoomRound",
+  ])
+    vm.runInContext(declaration("parent", name), context);
+  await assert.rejects(
+    context.privateRoomRound("decline"),
+    /clients_not_visible/,
+  );
+  assert.equal(context.driveActive, false);
+  assert.equal(context.driveVisibilityLost, true);
+  assert.equal(context.roomAttempted, false);
+  assert.equal(context.roomCases.size, 0);
+});
+
 test("actual room reply budget is finite and late replies cannot qualify after the action deadline", async () => {
   let now = 0;
   const budgets = [];
   const context = vm.createContext({
+    driveActive: false,
     performance: { now: () => now },
     send: async (role, name, args, budget) => {
       budgets.push(budget);
@@ -405,6 +683,57 @@ test("actual room reply budget is finite and late replies cannot qualify after t
   assert.equal(budgets.length, 1);
 });
 
+test("actual room command guards post-reply visibility while hidden terminal cleanup remains executable", async () => {
+  let visible = true;
+  const context = vm.createContext({
+    driveActive: true,
+    driveVisibilityLost: false,
+    performance: { now: () => 0 },
+    $: () => ({ textContent: "" }),
+    requireVisibleClients: () => {
+      if (!visible) throw Error("page_not_visible");
+    },
+    send: async () => {
+      visible = false;
+      context.noteDriveVisibility();
+      visible = true;
+      return {};
+    },
+  });
+  for (const name of [
+    "noteDriveVisibility",
+    "guardDriveVisibility",
+    "roomSend",
+  ])
+    vm.runInContext(declaration("parent", name), context);
+  await assert.rejects(
+    context.roomSend("host", "replace-code", {}, 1000),
+    /clients_not_visible/,
+  );
+  assert.equal(context.driveVisibilityLost, true);
+  context.driveActive = false;
+  visible = false;
+  const calls = [];
+  context.state = {};
+  context.send = async (role, name) => {
+    calls.push([role, name]);
+    return name === "verify"
+      ? { profile_equal: true, persisted_equal: true }
+      : { mode: "solo", created: 1, closed: 1, requests: 0, timers: 0 };
+  };
+  context.check = (name, passed) => assert(passed, name);
+  for (const name of ["roomRead", "roomUntil", "roomFinish"])
+    vm.runInContext(declaration("parent", name), context);
+  await context.roomFinish(1000);
+  assert.equal(calls.filter(([, name]) => name === "leave").length, 2);
+  assert.equal(calls.filter(([, name]) => name === "verify").length, 2);
+  assert.equal(
+    context.driveVisibilityLost,
+    true,
+    "cleanup does not erase interrupted observation",
+  );
+});
+
 test("actual replacement round tests approved continuity before guest leave and stale-code join, with one host create", async () => {
   const calls = [];
   const clean = {
@@ -422,6 +751,8 @@ test("actual replacement round tests approved continuity before guest leave and 
     config: { profile_mode: "owned" },
     roomCases: new Set(),
     roomAttempted: false,
+    driveActive: false,
+    driveVisibilityLost: false,
     performance: { now: () => 10 },
     roomRead: async () => [clean, clean],
     roomMarkBoth: async () => calls.push(["mark"]),
@@ -439,6 +770,7 @@ test("actual replacement round tests approved continuity before guest leave and 
     roomFinish: async () => calls.push(["clean"]),
     check: (name, passed) => assert(passed, name),
   });
+  vm.runInContext(declaration("parent", "guardDriveVisibility"), context);
   vm.runInContext(declaration("parent", "privateRoomRound"), context);
   await context.privateRoomRound("replace");
   assert.equal(calls.filter((c) => c[1] === "create").length, 1);
@@ -476,6 +808,8 @@ test("actual failed negative round retains its original failure, runs bounded cl
     config: { profile_mode: "owned" },
     roomCases: new Set(),
     roomAttempted: false,
+    driveActive: false,
+    driveVisibilityLost: false,
     performance: { now: () => 50 },
     roomRead: async () => [clean, clean],
     roomSend: async () => ({ invite: "private" }),
@@ -489,6 +823,7 @@ test("actual failed negative round retains its original failure, runs bounded cl
       throw Error("cleanup_failure");
     },
   });
+  vm.runInContext(declaration("parent", "guardDriveVisibility"), context);
   vm.runInContext(declaration("parent", "privateRoomRound"), context);
   await assert.rejects(
     context.privateRoomRound("decline"),
@@ -515,11 +850,14 @@ test("actual round refuses insufficient native lifetime or a second completed ca
     config: { profile_mode: "owned" },
     roomCases: new Set(),
     roomAttempted: false,
+    driveActive: false,
+    driveVisibilityLost: false,
     performance: { now: () => 0 },
     roomRead: async () => [clean, clean],
     roomSend: () =>
       assert.fail("precondition failure must not create or mutate a room"),
   });
+  vm.runInContext(declaration("parent", "guardDriveVisibility"), context);
   vm.runInContext(declaration("parent", "privateRoomRound"), context);
   await assert.rejects(
     context.privateRoomRound("decline"),
@@ -554,6 +892,8 @@ test("actual lock round cancels pending and locked lookup before unlocked accept
     config: { profile_mode: "owned" },
     roomCases: new Set(),
     roomAttempted: false,
+    driveActive: false,
+    driveVisibilityLost: false,
     performance: { now: () => 10 },
     roomRead: async () => (readCount++ === 0 ? [clean, clean] : [policy(), {}]),
     roomMarkBoth: async () => calls.push(["mark"]),
@@ -578,6 +918,7 @@ test("actual lock round cancels pending and locked lookup before unlocked accept
     roomFinish: async () => calls.push(["clean"]),
     check: (name, passed) => assert(passed, name),
   });
+  vm.runInContext(declaration("parent", "guardDriveVisibility"), context);
   vm.runInContext(declaration("parent", "privateRoomRound"), context);
   await context.privateRoomRound("lock");
   assert.deepEqual(
