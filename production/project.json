@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 1001,
+  "revision": 1022,
   "name": "Galaxy Royale",
   "phase": "Playable solo slice → content and validation",
-  "updatedAt": "2026-10-12T18:05:15.384Z",
+  "updatedAt": "2026-10-12T18:59:18.513Z",
   "tasks": [
     {
       "id": "studio",
@@ -7895,10 +7895,10 @@
     {
       "id": "task-afd3e0d2",
       "title": "Eight-client rooms and failure/recovery acceptance",
-      "description": "Bounded private-room feature assignment. Full contract in docs/PRIVATE_ROOMS.md; this task is not completed or validated by planning alone.",
+      "description": "Actual current two-client WebGL2/WebGPU approval/lifecycle captured separately. Eight real simultaneous clients, full/failed connections and TURN remain pending; this task remains Active.",
       "department": "QA",
       "owner": "/root/qa_coop",
-      "status": "ready",
+      "status": "active",
       "priority": "high",
       "dependencies": [
         "task-c359d033"
@@ -7922,12 +7922,27 @@
           "label": "Exact requested flow, API and validation contract",
           "kind": "artifact",
           "path": "work/room-feature/ASSIGNMENT.md"
+        },
+        {
+          "label": "Actual bounded assignments, findings and coordination",
+          "kind": "artifact",
+          "path": "work/studio-continuation-20261013/DISCUSSION.md"
+        },
+        {
+          "label": "Actual two-renderer two-client approval, RTC, return-home and cleanup captures",
+          "kind": "artifact",
+          "path": "artifacts/private-room-live-20261013/README.md"
+        },
+        {
+          "label": "Immutable actual live reports and byte pins",
+          "kind": "artifact",
+          "path": "artifacts/private-room-live-20261013/actual-live-summary.json"
         }
       ],
       "blocker": "",
-      "revision": 1,
+      "revision": 3,
       "createdAt": "2026-10-12T13:06:52.526Z",
-      "updatedAt": "2026-10-12T13:06:52.526Z"
+      "updatedAt": "2026-10-12T18:51:58.222Z"
     },
     {
       "id": "task-f9bf0095",
@@ -8199,10 +8214,10 @@
     {
       "id": "task-23bb3756",
       "title": "Relative height, contact shadows and hub-surface lighting",
-      "description": "Bounded one-local-caster/one-hub-beacon prototype integrated. Author native/Naga/CPU packet proof and independent canonical/raw pin/ray review accepted for renderer testing; frozen manifests and failed checker attempts preserved. Root observed both GPU initialization and a safe WebGPU home flight, not accepted shadow appearance/parity/recovery/performance. Remaining explicit GPU/zoom/light/receiver/holes gates are open.",
+      "description": "Frozen af060d8 test-only candidate couples actual native dock occupancy, receiver gaps, fractional zoom and camera rebase; focused/full dock regressions recorded. Not integrated yet; actual GPU shadow appearance/parity/performance remain open.",
       "department": "Engine lighting",
       "owner": "/root/engine_fx",
-      "status": "review",
+      "status": "active",
       "priority": "high",
       "dependencies": [
         "task-f9bf0095"
@@ -8241,12 +8256,27 @@
           "label": "Actual integration, browser operations and limits",
           "kind": "artifact",
           "path": "artifacts/haven-scenes-20261012/INTEGRATION.md"
+        },
+        {
+          "label": "Actual bounded assignments, findings and coordination",
+          "kind": "artifact",
+          "path": "work/studio-continuation-20261013/DISCUSSION.md"
+        },
+        {
+          "label": "Actual two-renderer two-client approval, RTC, return-home and cleanup captures",
+          "kind": "artifact",
+          "path": "artifacts/private-room-live-20261013/README.md"
+        },
+        {
+          "label": "Immutable actual live reports and byte pins",
+          "kind": "artifact",
+          "path": "artifacts/private-room-live-20261013/actual-live-summary.json"
         }
       ],
       "blocker": "",
-      "revision": 3,
+      "revision": 5,
       "createdAt": "2026-10-12T15:48:39.489Z",
-      "updatedAt": "2026-10-12T18:00:13.363Z"
+      "updatedAt": "2026-10-12T18:51:58.359Z"
     },
     {
       "id": "task-54a27324",
@@ -8386,6 +8416,128 @@
       "revision": 2,
       "createdAt": "2026-10-12T16:38:07.128Z",
       "updatedAt": "2026-10-12T18:00:13.145Z"
+    },
+    {
+      "id": "task-b4cd8858",
+      "title": "Ordinary per-pilot Ion Wake parity in authoritative co-op",
+      "description": "Frozen native candidate87de1f7 implements ordinary per-pilot Ion Wake;13 focused regressions and115 co-op checks/3 ignored recorded by author, independently source-reviewed. Browser wake_evolution wire support, authoritative transient trail publication/rendering, normal rebuild and actual RTC/AV remain pending.",
+      "department": "Native gameplay",
+      "owner": "/root/audio_score",
+      "status": "active",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Reproduce missing ordinary Ion Wake in actual native co-op and pin solo rule baseline.",
+          "met": true
+        },
+        {
+          "text": "Implement bounded per-pilot trail/damage/attribution with rank/evolution, sanctuary, owner/epoch and lifecycle regressions.",
+          "met": true
+        },
+        {
+          "text": "Independent native/wire review, matching rebuild and actual RTC/guest effects validation recorded separately.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual bounded assignments, findings and coordination",
+          "kind": "artifact",
+          "path": "work/studio-continuation-20261013/DISCUSSION.md"
+        },
+        {
+          "label": "Actual two-renderer two-client approval, RTC, return-home and cleanup captures",
+          "kind": "artifact",
+          "path": "artifacts/private-room-live-20261013/README.md"
+        },
+        {
+          "label": "Immutable actual live reports and byte pins",
+          "kind": "artifact",
+          "path": "artifacts/private-room-live-20261013/actual-live-summary.json"
+        }
+      ],
+      "blocker": "",
+      "revision": 2,
+      "createdAt": "2026-10-12T18:16:47.735Z",
+      "updatedAt": "2026-10-12T18:51:58.265Z"
+    },
+    {
+      "id": "task-769c0361",
+      "title": "Current private-room approval and two-client lifecycle on both native renderers",
+      "description": "Root operated current5e4/F4 coherent normal bundles on isolated QA origins, both WebGL2/WebGPU. This bounded completion does not mark eight-client/TURN/negative-case multiplayer release complete.",
+      "department": "Integration / QA",
+      "owner": "Root",
+      "status": "complete",
+      "priority": "high",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Exact current service/adapters and normal compiled bundles pinned, with independent source/function review.",
+          "met": true
+        },
+        {
+          "text": "Actual pending-before-RTC acceptance, admission/commit, movement/fire, host end and new approved distinct-session commit on both backends.",
+          "met": true
+        },
+        {
+          "text": "Actual guest leave, durable local profile digest preservation and all PCs/requests/timers cleaned; temporary listener and clients stopped.",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual two-renderer two-client approval, RTC, return-home and cleanup captures",
+          "kind": "artifact",
+          "path": "artifacts/private-room-live-20261013/README.md"
+        },
+        {
+          "label": "Immutable actual live reports and byte pins",
+          "kind": "artifact",
+          "path": "artifacts/private-room-live-20261013/actual-live-summary.json"
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-12T18:51:58.166Z",
+      "updatedAt": "2026-10-12T18:51:58.166Z"
+    },
+    {
+      "id": "task-71611b9e",
+      "title": "Bounded actual room decline, code replacement and lock QA controls",
+      "description": "Implement in isolated branch from the next reviewed Root helper checkpoint. Own only scripts/qa/co-op-transport and its focused tests in that checkout; Root owns integration/listeners/browser. Use actual controller/store operations, private continuity facts and sanitized reports. No service/runtime modification, no fabricated RTC or world evidence. Source plan frozen in work/private-room-negative-plan.",
+      "department": "Networking QA tooling",
+      "owner": "/root/audio_review",
+      "status": "ready",
+      "priority": "high",
+      "dependencies": [
+        "task-769c0361"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Actual pending decline and old-code/locked join controls with approved-peer continuity and private credential handling.",
+          "met": false
+        },
+        {
+          "text": "Meaningful source/function/report and bounded lifecycle tests plus independent review on exact candidate.",
+          "met": false
+        },
+        {
+          "text": "Root executes matching actual native two-client negative cases; broader8/TURN remains separate.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Source-backed bounded negative-case implementation plan",
+          "kind": "artifact",
+          "path": "artifacts/private-room-live-20261013/negative-plan/PLAN.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-12T18:59:18.513Z",
+      "updatedAt": "2026-10-12T18:59:18.513Z"
     }
   ],
   "reviews": [
@@ -10711,6 +10863,87 @@
           "label": "Third actual native title/stereo and cleanup results",
           "kind": "artifact",
           "path": "artifacts/title-score-20261013/width-final/native-summary.json"
+        }
+      ]
+    },
+    {
+      "id": "review-a0b45ccb",
+      "title": "Actual continuing studio coordination: room approval, receiver gaps and Ion Wake",
+      "body": "Three real agents are working in parallel on explicitly owned scopes. Reviewer identified old helper approval/provenance/save gaps; Root implemented the first pending-before-RTC gate and no-write loaded initialization. Engine chose a coupled native dock-gap/zoom regression rather than inferring it from separate proofs. Gameplay reproduced the missing co-op Ion Wake path and is implementing parity, with Root-owned future wire changes. Written contributions preserve the distinction between modeled/native/source checks and actual RTC/GPU/physical acceptance.",
+      "author": "Root",
+      "source": "Actual continuing studio dispatch and written specialist findings",
+      "createdAt": "2026-10-12T18:16:47.884Z",
+      "participants": [
+        "Root",
+        "/root/audio_review",
+        "/root/engine_fx",
+        "/root/audio_score"
+      ],
+      "taskIds": [
+        "task-afd3e0d2",
+        "task-23bb3756",
+        "task-b4cd8858"
+      ],
+      "evidence": [
+        {
+          "label": "Actual bounded assignments, findings and coordination",
+          "kind": "artifact",
+          "path": "work/studio-continuation-20261013/DISCUSSION.md"
+        }
+      ]
+    },
+    {
+      "id": "review-d3a23b1c",
+      "title": "Actual asynchronous studio findings: live rooms, native restoration and trail publication",
+      "body": "Root completed actual two-renderer room approval/RTC lifecycle. Independent QA distinguished profile equality from exact native world proof, identified legacy-open migration and helper deadline/diagnostic limits, and derived a bounded negative-case plan. Native engine specialist authored a rich boxed-world continuation regression with fixture failures retained; this candidate is not yet integrated. Gameplay specialist froze ordinary native Ion Wake and independently proposed full active trail snapshots rather than birth replay/inferred motion, with native rendering and wire metadata still pending. Title specialist review confirms V3 already addresses V2 fuller-instrument feedback; no further timbre rewrite before V3 listening evidence. Contributions are actual written findings, not a fabricated live meeting.",
+      "author": "Root",
+      "source": "Actual native browser operation and written specialist contributions",
+      "createdAt": "2026-10-12T18:51:58.403Z",
+      "participants": [
+        "Root",
+        "/root/audio_review",
+        "/root/engine_fx",
+        "/root/audio_score"
+      ],
+      "taskIds": [
+        "task-769c0361",
+        "task-afd3e0d2",
+        "task-b4cd8858",
+        "task-23bb3756"
+      ],
+      "evidence": [
+        {
+          "label": "Actual two-renderer two-client approval, RTC, return-home and cleanup captures",
+          "kind": "artifact",
+          "path": "artifacts/private-room-live-20261013/README.md"
+        },
+        {
+          "label": "Immutable actual live reports and byte pins",
+          "kind": "artifact",
+          "path": "artifacts/private-room-live-20261013/actual-live-summary.json"
+        }
+      ]
+    },
+    {
+      "id": "review-97c99592",
+      "title": "Independent post-live approval timeout and sanitized error route review",
+      "body": "Reviewer operated2focusedactual-functiontests and3independent parent-function edges: child timer budget/cleanup, late-reply handling and shrinking observation window. No source blocker.15-second limit bounds observation, not later approve-next RPC; no exact wall-clock timing under throttling claim. Actual two-renderer captures predate the amendments and keep their original source provenance. Root final full655 cases654pass1declaredskip and typecheck are separate. No listener/browser/RTC/native/save executed by independent review.",
+      "author": "Root",
+      "source": "Actual independent review and bounded next assignment",
+      "createdAt": "2026-10-12T18:59:18.437Z",
+      "participants": [
+        "Root",
+        "/root/audio_review"
+      ],
+      "taskIds": [
+        "task-769c0361",
+        "task-afd3e0d2"
+      ],
+      "evidence": [
+        {
+          "label": "Independent post-live helper review and exact source pins",
+          "kind": "artifact",
+          "path": "artifacts/private-room-live-20261013/post-live-review/REVIEW.md"
         }
       ]
     }
@@ -13888,6 +14121,46 @@
         }
       ],
       "knownIssues": "Reference-inspired notes/form and third instrumental audition remain in review. Broad8-client/TURN/device and shadow visual gates remain separate."
+    },
+    {
+      "id": "build-7ba7ad31",
+      "title": "Current room lifecycle live on both renderers; post-live helper checks",
+      "body": "Verification/evidence record, not a new game build. Actual two-client current WebGL2/WebGPU loopback captured; final helper suite655cases654pass1declaredskip including real factory/owned normal-bundle HTTP stages; typecheck exit0. Runtime/package hashes unchanged from F4. Original allowlist and optional HTTP fixture-count failures retained. Later polling-deadline and controlled-reason amendments are not claimed used in earlier live captures.",
+      "author": "Root",
+      "source": "Actual two-renderer RTC operations and post-live full checks",
+      "createdAt": "2026-10-12T18:56:22.973Z",
+      "revision": "5e4b629e91f3334582ffa30d5e65af98675f8c39",
+      "evidence": [
+        {
+          "label": "Actual native RTC captures and explicit remaining gates",
+          "kind": "artifact",
+          "path": "artifacts/private-room-live-20261013/README.md"
+        },
+        {
+          "label": "Actual final checks and exact post-live source pins",
+          "kind": "artifact",
+          "path": "artifacts/private-room-live-20261013/checks/final-results.json"
+        }
+      ],
+      "checks": [
+        {
+          "name": "Both native backends: actual two-client room approval/lifecycle",
+          "result": "pass"
+        },
+        {
+          "name": "Final shell654pass /1declaredWindows skip",
+          "result": "pass"
+        },
+        {
+          "name": "Typecheck and unchanged runtime/package hashes",
+          "result": "pass"
+        },
+        {
+          "name": "Eight clients, decline/replace/lock, forced TURN and physical acceptance",
+          "result": "not_run"
+        }
+      ],
+      "knownIssues": "Multiplayer release remains incomplete. Current captures are two clients on loopback; future native IonWake/trail source candidates and boxed-world tests are not integrated yet. V3 title listening acceptance pending."
     }
   ],
   "feedback": [],
@@ -23901,6 +24174,216 @@
       "author": "Root",
       "source": "Actual final helper amendment/full verification and end-of-session observed run states",
       "createdAt": "2026-10-12T18:05:15.384Z"
+    },
+    {
+      "id": "f2b3d013-518f-413b-b627-b92568b59fed",
+      "revision": 1002,
+      "kind": "task.create",
+      "itemId": "task-b4cd8858",
+      "title": "Ordinary per-pilot Ion Wake parity in authoritative co-op",
+      "author": "Root",
+      "source": "Actual continuing studio dispatch and written specialist findings",
+      "createdAt": "2026-10-12T18:16:47.735Z"
+    },
+    {
+      "id": "ffa707f2-2e8c-46dc-a872-f123b1010741",
+      "revision": 1003,
+      "kind": "task.update",
+      "itemId": "task-afd3e0d2",
+      "title": "Eight-client rooms and failure/recovery acceptance",
+      "author": "Root",
+      "source": "Actual continuing studio dispatch and written specialist findings",
+      "createdAt": "2026-10-12T18:16:47.806Z"
+    },
+    {
+      "id": "ef8a1321-1bc5-48b9-a28e-b8a731d2257e",
+      "revision": 1004,
+      "kind": "task.update",
+      "itemId": "task-23bb3756",
+      "title": "Relative height, contact shadows and hub-surface lighting",
+      "author": "Root",
+      "source": "Actual continuing studio dispatch and written specialist findings",
+      "createdAt": "2026-10-12T18:16:47.852Z"
+    },
+    {
+      "id": "0edf8071-b9ac-4447-a5f5-59d9567d7309",
+      "revision": 1005,
+      "kind": "review",
+      "itemId": "review-a0b45ccb",
+      "title": "Actual continuing studio coordination: room approval, receiver gaps and Ion Wake",
+      "author": "Root",
+      "source": "Actual continuing studio dispatch and written specialist findings",
+      "createdAt": "2026-10-12T18:16:47.884Z"
+    },
+    {
+      "id": "92379ff4-16b8-40fc-ae29-0867e18e9929",
+      "revision": 1006,
+      "kind": "run",
+      "itemId": "run-9a5ca9cb",
+      "title": "Networking provenance and live-plan specialist · running",
+      "author": "Root",
+      "source": "Actual continuing studio dispatch and written specialist findings",
+      "createdAt": "2026-10-12T18:16:47.915Z"
+    },
+    {
+      "id": "bf683127-7768-400d-9a4b-f80b1d26dbf7",
+      "revision": 1007,
+      "kind": "run",
+      "itemId": "run-a4d4b3e6",
+      "title": "Native receiver-gap shadow specialist · running",
+      "author": "Root",
+      "source": "Actual continuing studio dispatch and written specialist findings",
+      "createdAt": "2026-10-12T18:16:47.930Z"
+    },
+    {
+      "id": "6385d1d9-ebd1-48c3-a574-cc3d013274bc",
+      "revision": 1008,
+      "kind": "run",
+      "itemId": "run-fde15a48",
+      "title": "Native Ion Wake gameplay specialist · running",
+      "author": "Root",
+      "source": "Actual continuing studio dispatch and written specialist findings",
+      "createdAt": "2026-10-12T18:16:47.967Z"
+    },
+    {
+      "id": "2a315ac1-075a-4aaa-bddf-237b0f66efdb",
+      "revision": 1009,
+      "kind": "run",
+      "itemId": "run-34e8494d",
+      "title": "Producer / current room QA integration · running",
+      "author": "Root",
+      "source": "Actual continuing studio dispatch and written specialist findings",
+      "createdAt": "2026-10-12T18:16:47.992Z"
+    },
+    {
+      "id": "f1d36935-5a5c-4f36-810f-f81c51f362f4",
+      "revision": 1010,
+      "kind": "task.create",
+      "itemId": "task-769c0361",
+      "title": "Current private-room approval and two-client lifecycle on both native renderers",
+      "author": "Root",
+      "source": "Actual native browser operation and written specialist contributions",
+      "createdAt": "2026-10-12T18:51:58.166Z"
+    },
+    {
+      "id": "1df15890-687f-45a7-a3bf-0575e9c7e9b4",
+      "revision": 1011,
+      "kind": "task.update",
+      "itemId": "task-afd3e0d2",
+      "title": "Eight-client rooms and failure/recovery acceptance",
+      "author": "Root",
+      "source": "Actual native browser operation and written specialist contributions",
+      "createdAt": "2026-10-12T18:51:58.222Z"
+    },
+    {
+      "id": "40fede26-94cc-4ef5-b631-581ef2e220fb",
+      "revision": 1012,
+      "kind": "task.update",
+      "itemId": "task-b4cd8858",
+      "title": "Ordinary per-pilot Ion Wake parity in authoritative co-op",
+      "author": "Root",
+      "source": "Actual native browser operation and written specialist contributions",
+      "createdAt": "2026-10-12T18:51:58.265Z"
+    },
+    {
+      "id": "1a6fd37a-7df9-4592-a483-96653674f694",
+      "revision": 1013,
+      "kind": "task.update",
+      "itemId": "task-23bb3756",
+      "title": "Relative height, contact shadows and hub-surface lighting",
+      "author": "Root",
+      "source": "Actual native browser operation and written specialist contributions",
+      "createdAt": "2026-10-12T18:51:58.359Z"
+    },
+    {
+      "id": "d1e1a357-c849-4b52-a0f6-666c884dbc6d",
+      "revision": 1014,
+      "kind": "review",
+      "itemId": "review-d3a23b1c",
+      "title": "Actual asynchronous studio findings: live rooms, native restoration and trail publication",
+      "author": "Root",
+      "source": "Actual native browser operation and written specialist contributions",
+      "createdAt": "2026-10-12T18:51:58.403Z"
+    },
+    {
+      "id": "45bbddf5-1f88-4b17-ba39-2f3d0aa78973",
+      "revision": 1015,
+      "kind": "run",
+      "itemId": "run-02246253",
+      "title": "/root · running",
+      "author": "Root",
+      "source": "Actual native browser operation and written specialist contributions",
+      "createdAt": "2026-10-12T18:51:58.428Z"
+    },
+    {
+      "id": "ddd508cb-1d24-44ae-8c46-6a3e832b7d21",
+      "revision": 1016,
+      "kind": "run",
+      "itemId": "run-227d92ec",
+      "title": "/root/audio_review · running",
+      "author": "Root",
+      "source": "Actual native browser operation and written specialist contributions",
+      "createdAt": "2026-10-12T18:51:58.453Z"
+    },
+    {
+      "id": "d4d8a674-6bd8-45cc-864c-b818c163d7c5",
+      "revision": 1017,
+      "kind": "run",
+      "itemId": "run-830a49f7",
+      "title": "/root/engine_fx · running",
+      "author": "Root",
+      "source": "Actual native browser operation and written specialist contributions",
+      "createdAt": "2026-10-12T18:51:58.483Z"
+    },
+    {
+      "id": "913dc37f-f8dd-484c-9a3e-ff07a3685370",
+      "revision": 1018,
+      "kind": "run",
+      "itemId": "run-a2909d6c",
+      "title": "/root/audio_score · running",
+      "author": "Root",
+      "source": "Actual native browser operation and written specialist contributions",
+      "createdAt": "2026-10-12T18:51:58.515Z"
+    },
+    {
+      "id": "d813e421-491c-4b8d-9e6c-4dddc3ff8bfd",
+      "revision": 1019,
+      "kind": "build",
+      "itemId": "build-7ba7ad31",
+      "title": "Current room lifecycle live on both renderers; post-live helper checks",
+      "author": "Root",
+      "source": "Actual two-renderer RTC operations and post-live full checks",
+      "createdAt": "2026-10-12T18:56:22.973Z"
+    },
+    {
+      "id": "fc87f64d-20a9-4a5e-8165-5b5c03aeb2ee",
+      "revision": 1020,
+      "kind": "review",
+      "itemId": "review-97c99592",
+      "title": "Independent post-live approval timeout and sanitized error route review",
+      "author": "Root",
+      "source": "Actual independent review and bounded next assignment",
+      "createdAt": "2026-10-12T18:59:18.437Z"
+    },
+    {
+      "id": "699ba5b8-254f-4791-883e-cc08569b02f3",
+      "revision": 1021,
+      "kind": "run",
+      "itemId": "run-aa22c29b",
+      "title": "Independent networking/helper reviewer · completed",
+      "author": "Root",
+      "source": "Actual independent review and bounded next assignment",
+      "createdAt": "2026-10-12T18:59:18.462Z"
+    },
+    {
+      "id": "82b07b4d-f9d9-4cba-9e6d-64dd2495212b",
+      "revision": 1022,
+      "kind": "task.create",
+      "itemId": "task-71611b9e",
+      "title": "Bounded actual room decline, code replacement and lock QA controls",
+      "author": "Root",
+      "source": "Actual independent review and bounded next assignment",
+      "createdAt": "2026-10-12T18:59:18.513Z"
     }
   ],
   "runRecords": [
@@ -32854,6 +33337,226 @@
       "author": "Root",
       "source": "Actual final helper amendment/full verification and end-of-session observed run states",
       "createdAt": "2026-10-12T18:05:15.384Z"
+    },
+    {
+      "id": "run-9a5ca9cb",
+      "title": "Networking provenance and live-plan specialist · running",
+      "agentId": "/root/audio_review",
+      "agentLabel": "Networking provenance and live-plan specialist",
+      "state": "running",
+      "observedAt": "2026-10-12T18:16:47.895Z",
+      "taskIds": [
+        "task-afd3e0d2"
+      ],
+      "summary": "Actually inspecting/planning current live flow and implementing bounded preparation/service provenance changes; no browser/server.",
+      "evidence": [
+        {
+          "label": "Actual bounded assignments, findings and coordination",
+          "kind": "artifact",
+          "path": "work/studio-continuation-20261013/DISCUSSION.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual continuing studio dispatch and written specialist findings",
+      "createdAt": "2026-10-12T18:16:47.915Z"
+    },
+    {
+      "id": "run-a4d4b3e6",
+      "title": "Native receiver-gap shadow specialist · running",
+      "agentId": "/root/engine_fx",
+      "agentLabel": "Native receiver-gap shadow specialist",
+      "state": "running",
+      "observedAt": "2026-10-12T18:16:47.926Z",
+      "taskIds": [
+        "task-23bb3756"
+      ],
+      "summary": "Actually implementing coupled test-only native receiver-gap/fractional zoom regression in isolated WT; no GPU pass.",
+      "evidence": [
+        {
+          "label": "Actual bounded assignments, findings and coordination",
+          "kind": "artifact",
+          "path": "work/studio-continuation-20261013/DISCUSSION.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual continuing studio dispatch and written specialist findings",
+      "createdAt": "2026-10-12T18:16:47.930Z"
+    },
+    {
+      "id": "run-fde15a48",
+      "title": "Native Ion Wake gameplay specialist · running",
+      "agentId": "/root/audio_score",
+      "agentLabel": "Native Ion Wake gameplay specialist",
+      "state": "running",
+      "observedAt": "2026-10-12T18:16:47.950Z",
+      "taskIds": [
+        "task-b4cd8858"
+      ],
+      "summary": "Actually implementing ordinary co-op Ion Wake from reproduced missing native path on codex/coop-ion-wake; browser wire and live parity pending.",
+      "evidence": [
+        {
+          "label": "Actual bounded assignments, findings and coordination",
+          "kind": "artifact",
+          "path": "work/studio-continuation-20261013/DISCUSSION.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual continuing studio dispatch and written specialist findings",
+      "createdAt": "2026-10-12T18:16:47.967Z"
+    },
+    {
+      "id": "run-34e8494d",
+      "title": "Producer / current room QA integration · running",
+      "agentId": "/root",
+      "agentLabel": "Producer / current room QA integration",
+      "state": "running",
+      "observedAt": "2026-10-12T18:16:47.979Z",
+      "taskIds": [
+        "task-afd3e0d2"
+      ],
+      "summary": "Actually integrating pending-before-RTC QA commands, no-write loaded baseline and focused checks; current normal preview preserved.",
+      "evidence": [
+        {
+          "label": "Actual bounded assignments, findings and coordination",
+          "kind": "artifact",
+          "path": "work/studio-continuation-20261013/DISCUSSION.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual continuing studio dispatch and written specialist findings",
+      "createdAt": "2026-10-12T18:16:47.992Z"
+    },
+    {
+      "id": "run-02246253",
+      "title": "/root · running",
+      "agentId": "/root",
+      "agentLabel": "/root",
+      "state": "running",
+      "observedAt": "2026-10-12T18:51:58.417Z",
+      "taskIds": [
+        "task-769c0361",
+        "task-afd3e0d2"
+      ],
+      "summary": "Actual live two-client gates complete; curating evidence, correcting QA deadline/reporting and integrating studio records.",
+      "evidence": [
+        {
+          "label": "Actual two-renderer two-client approval, RTC, return-home and cleanup captures",
+          "kind": "artifact",
+          "path": "artifacts/private-room-live-20261013/README.md"
+        },
+        {
+          "label": "Immutable actual live reports and byte pins",
+          "kind": "artifact",
+          "path": "artifacts/private-room-live-20261013/actual-live-summary.json"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual native browser operation and written specialist contributions",
+      "createdAt": "2026-10-12T18:51:58.428Z"
+    },
+    {
+      "id": "run-227d92ec",
+      "title": "/root/audio_review · running",
+      "agentId": "/root/audio_review",
+      "agentLabel": "/root/audio_review",
+      "state": "running",
+      "observedAt": "2026-10-12T18:51:58.440Z",
+      "taskIds": [
+        "task-769c0361",
+        "task-afd3e0d2"
+      ],
+      "summary": "Actually repairing prepare legacy/current file allowlist after retained full-suite failure; negative-case plan and title fullness review frozen. No listener/browser.",
+      "evidence": [
+        {
+          "label": "Actual two-renderer two-client approval, RTC, return-home and cleanup captures",
+          "kind": "artifact",
+          "path": "artifacts/private-room-live-20261013/README.md"
+        },
+        {
+          "label": "Immutable actual live reports and byte pins",
+          "kind": "artifact",
+          "path": "artifacts/private-room-live-20261013/actual-live-summary.json"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual native browser operation and written specialist contributions",
+      "createdAt": "2026-10-12T18:51:58.453Z"
+    },
+    {
+      "id": "run-830a49f7",
+      "title": "/root/engine_fx · running",
+      "agentId": "/root/engine_fx",
+      "agentLabel": "/root/engine_fx",
+      "state": "running",
+      "observedAt": "2026-10-12T18:51:58.472Z",
+      "taskIds": [
+        "task-23bb3756"
+      ],
+      "summary": "Actually freezing rich native boxed-world continuation regression; prior shadow test candidate frozen. No GPU/RTC claim.",
+      "evidence": [
+        {
+          "label": "Actual two-renderer two-client approval, RTC, return-home and cleanup captures",
+          "kind": "artifact",
+          "path": "artifacts/private-room-live-20261013/README.md"
+        },
+        {
+          "label": "Immutable actual live reports and byte pins",
+          "kind": "artifact",
+          "path": "artifacts/private-room-live-20261013/actual-live-summary.json"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual native browser operation and written specialist contributions",
+      "createdAt": "2026-10-12T18:51:58.483Z"
+    },
+    {
+      "id": "run-a2909d6c",
+      "title": "/root/audio_score · running",
+      "agentId": "/root/audio_score",
+      "agentLabel": "/root/audio_score",
+      "state": "running",
+      "observedAt": "2026-10-12T18:51:58.497Z",
+      "taskIds": [
+        "task-b4cd8858"
+      ],
+      "summary": "Actually finalizing read-only authoritative transient trail presentation design; ordinary Ion Wake native candidate frozen and separately reviewed.",
+      "evidence": [
+        {
+          "label": "Actual two-renderer two-client approval, RTC, return-home and cleanup captures",
+          "kind": "artifact",
+          "path": "artifacts/private-room-live-20261013/README.md"
+        },
+        {
+          "label": "Immutable actual live reports and byte pins",
+          "kind": "artifact",
+          "path": "artifacts/private-room-live-20261013/actual-live-summary.json"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual native browser operation and written specialist contributions",
+      "createdAt": "2026-10-12T18:51:58.515Z"
+    },
+    {
+      "id": "run-aa22c29b",
+      "title": "Independent networking/helper reviewer · completed",
+      "agentId": "/root/audio_review",
+      "agentLabel": "Independent networking/helper reviewer",
+      "state": "completed",
+      "observedAt": "2026-10-12T18:59:18.452Z",
+      "taskIds": [
+        "task-769c0361"
+      ],
+      "summary": "Actual post-live review frozen,2+3checks pass. Next isolated negative-case harness assignment is Ready, not yet dispatched.",
+      "evidence": [
+        {
+          "label": "Independent post-live helper review and exact source pins",
+          "kind": "artifact",
+          "path": "artifacts/private-room-live-20261013/post-live-review/REVIEW.md"
+        }
+      ],
+      "author": "Root",
+      "source": "Actual independent review and bounded next assignment",
+      "createdAt": "2026-10-12T18:59:18.462Z"
     }
   ],
   "phaseDescription": "Desktop-first Rust/WASM solo game and local Studio are implemented. Reviewed occupied-cell art, reproducible conversion, responsive native settings/icons and minimap, strict GitHub integration gates and source-backed Dev Bible are integrated. Natural campaign balance, human listening, owner-private update lifecycle and physical phones remain separate pending gates."

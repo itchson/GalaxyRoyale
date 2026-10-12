@@ -1,0 +1,84 @@
+{
+  "frozenAt": "2026-10-12T18:58:04.052Z",
+  "head": "5e4b629e91f3334582ffa30d5e65af98675f8c39",
+  "node": "v24.18.0",
+  "sources": {
+    "scripts/qa/co-op-transport/client.js": {
+      "workingBytes": 22669,
+      "workingSha256": "a558131bbdd13754a0bd2aac1e86ac8f69457993b89d55f05fd0f3bbafb2280a",
+      "lfBytes": 22669,
+      "lfSha256": "a558131bbdd13754a0bd2aac1e86ac8f69457993b89d55f05fd0f3bbafb2280a",
+      "canonicalHeadBytes": 22020,
+      "canonicalHeadSha256": "edad12d0a1ae6a916bfd792a9f5934959dba1bbb0c7dc4a8285ac8f0e7a87e94"
+    },
+    "scripts/qa/co-op-transport/wasm-review.js": {
+      "workingBytes": 15443,
+      "workingSha256": "4b339c4ef7eae782aab081f77e22f8e84290b89c2422474bb88a8c6aa7516a74",
+      "lfBytes": 15443,
+      "lfSha256": "4b339c4ef7eae782aab081f77e22f8e84290b89c2422474bb88a8c6aa7516a74",
+      "canonicalHeadBytes": 14265,
+      "canonicalHeadSha256": "3cd6b1153f75e7b648e55ce549d9b3bd4da70c92ad00d427e537e006686fe422"
+    },
+    "scripts/qa/co-op-transport/server.mjs": {
+      "workingBytes": 17774,
+      "workingSha256": "34907d5a16fdc96a1ef0bd388317b3fa8c3722a218a4e5a24444352d66fd3834",
+      "lfBytes": 17774,
+      "lfSha256": "34907d5a16fdc96a1ef0bd388317b3fa8c3722a218a4e5a24444352d66fd3834",
+      "canonicalHeadBytes": 17245,
+      "canonicalHeadSha256": "de91999b6593237194ebcb29807324ca7179f0f14bf2f72ac2c65ab41fcfe702"
+    },
+    "scripts/test/coop-transport-wasm-qa.test.mjs": {
+      "workingBytes": 41891,
+      "workingSha256": "925c879fc4229a5ba851f347453a17a802a6237e79061b3da8482d2ba2028f16",
+      "lfBytes": 41891,
+      "lfSha256": "925c879fc4229a5ba851f347453a17a802a6237e79061b3da8482d2ba2028f16",
+      "canonicalHeadBytes": 36024,
+      "canonicalHeadSha256": "364fb3a312e9cff2ef6d3a5ac2158c0809d5cd0329b76aeba0be768c6c85f88f"
+    }
+  },
+  "evidence": {
+    "REVIEW.md": {
+      "bytes": 3054,
+      "sha256": "1d3104b06c3c8421a7f00b7b0f26384fafea6d600d78f9fa0b9add2e92e94fad"
+    },
+    "focused-tests.log": {
+      "bytes": 517,
+      "sha256": "328a85a993318f4d6c3371397f8318e1dc82f9bb43faa7bac8efda79dfac5a1f"
+    },
+    "edge-tests.mjs": {
+      "bytes": 4805,
+      "sha256": "ca3da8ca49497aa1f2332778bb35070e1bdcc24daa7e74e92a2b0fd5152f532a"
+    },
+    "edge-tests.log": {
+      "bytes": 491,
+      "sha256": "165f45cd8f405da285434fa2f91afb34e6e1b89d04cf48ff2028dda9f3884a3e"
+    },
+    "root-helper.diff.patch": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pin-review.mjs": {
+      "bytes": 2474,
+      "sha256": "d8a9499e81409a9d9edce7560c11e6cd9119c0b0537ca85f5415a8d855ef5d95"
+    }
+  },
+  "commands": [
+    {
+      "command": "node --experimental-transform-types --test --test-name-pattern='^Actual approval observation refuses late|^Actual child message route preserves' scripts/test/coop-transport-wasm-qa.test.mjs",
+      "exitCode": 0,
+      "tests": 2,
+      "pass": 2,
+      "fail": 0,
+      "log": "focused-tests.log"
+    },
+    {
+      "command": "node --test work/private-room-post-live-review/edge-tests.mjs",
+      "exitCode": 0,
+      "tests": 3,
+      "pass": 3,
+      "fail": 0,
+      "log": "edge-tests.log"
+    }
+  ],
+  "scope": "Independent post-live source/function review only. Prior live captures retain prior-source provenance. No helper edit/listener/browser/stage/build/native/RTC/save operation or independent full-suite claim."
+}

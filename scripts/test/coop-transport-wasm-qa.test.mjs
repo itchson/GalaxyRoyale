@@ -195,7 +195,10 @@ test("Actual initialization pauses fresh Galaxy before guarded license registrat
     assert.equal(context.failureCode, null);
     assert.equal(context.appliedPause, true);
     assert.ok(calls.indexOf("pause") > calls.indexOf("create"));
-    assert.ok(calls.indexOf("save") > calls.indexOf("pause"));
+    assert.equal(calls.includes("save"), !existing);
+    assert.equal(calls.includes("flush"), !existing);
+    assert.equal(stages.includes("save_baseline"), !existing);
+    if (!existing) assert.ok(calls.indexOf("save") > calls.indexOf("pause"));
     assert.equal(calls.includes("register"), !existing);
     if (!existing)
       assert.ok(calls.indexOf("pause") < calls.indexOf("register"));
@@ -354,6 +357,8 @@ test("Actual rejoin gate requires a new complete native commit, not a cumulative
   const context = vm.createContext({
     state,
     config: {},
+    read: async () => {},
+    approvePendingJoin: async () => {},
     firstSession: "old",
     sessionDistinct: null,
     send: async (role, name) =>
@@ -383,6 +388,178 @@ test("Actual rejoin gate requires a new complete native commit, not a cumulative
     "native-complete-commit",
     "new-session",
   ]);
+});
+
+test("Actual approval QA rejects pre-approval RTC or admission and measures cumulative peer counts", async () => {
+  const source = await fs.readFile(
+    new URL("../qa/co-op-transport/wasm-review.js", import.meta.url),
+    "utf8",
+  );
+  for (const violation of [null, "created", "transport_ready", "admitted"]) {
+    const calls = [],
+      checks = [];
+    const context = vm.createContext({
+      performance,
+      send: async (role, name) => {
+        calls.push([role, name]);
+        if (name === "approve-next") return {};
+        const value = {
+          pending: role === "host" ? 1 : 0,
+          awaiting: role === "guest",
+          created: role === "host" ? 3 : 2,
+          transport_ready: 0,
+          admitted: 0,
+        };
+        if (violation && role === "guest") value[violation]++;
+        return value;
+      },
+      check: (name, passed) => {
+        checks.push([name, passed]);
+        if (!passed) throw Error("declared_check_failed");
+      },
+    });
+    vm.runInContext(functionSource(source, "approvePendingJoin"), context);
+    if (violation)
+      await assert.rejects(
+        context.approvePendingJoin([3, 2]),
+        /declared_check_failed/,
+      );
+    else await context.approvePendingJoin([3, 2]);
+    assert.deepEqual(checks, [
+      ["host-approval-before-rtc", violation === null],
+    ]);
+    assert.equal(
+      calls.some(([role, name]) => role === "host" && name === "approve-next"),
+      violation === null,
+    );
+  }
+});
+
+test("Actual client approval commands use current host request id without exposing credentials", async () => {
+  const source = await fs.readFile(
+    new URL("../qa/co-op-transport/client.js", import.meta.url),
+    "utf8",
+  );
+  const calls = [],
+    current = {
+      awaiting_approval: false,
+      join_requests: [{ id: "actual-request", bearer: "never exposed" }],
+      transport_ready: 0,
+      admitted: 0,
+    };
+  const context = vm.createContext({
+    role: "host",
+    controller: {
+      state: () => current,
+      approve: async (...args) => calls.push(args),
+    },
+    galaxy: {},
+    counters: { created: 4 },
+    observations: () => ({ phase: "hosting" }),
+  });
+  vm.runInContext(functionSource(source, "command"), context);
+  const pending = await context.command("approval-state", {});
+  assert.deepEqual(JSON.parse(JSON.stringify(pending)), {
+    awaiting: false,
+    pending: 1,
+    created: 4,
+    transport_ready: 0,
+    admitted: 0,
+  });
+  await context.command("approve-next", {});
+  assert.deepEqual(calls, [["actual-request", true]]);
+  context.role = "guest";
+  await assert.rejects(
+    context.command("approve-next", {}),
+    /approval_not_pending/,
+  );
+  assert.equal(calls.length, 1);
+  context.role = "host";
+  current.join_requests.push({ id: "second" });
+  await assert.rejects(
+    context.command("approve-next", {}),
+    /approval_not_pending/,
+  );
+});
+
+test("Actual approval observation refuses late pending replies and bounds each child timeout", async () => {
+  const source = await fs.readFile(
+    new URL("../qa/co-op-transport/wasm-review.js", import.meta.url),
+    "utf8",
+  );
+  let now = 0;
+  const budgets = [];
+  const context = vm.createContext({
+    performance: { now: () => now },
+    send: async (role, name, args, timeout) => {
+      assert.equal(
+        name,
+        "approval-state",
+        "a late observation must never accept",
+      );
+      budgets.push(timeout);
+      if (role === "guest") now = 15_000;
+      return {
+        pending: 1,
+        awaiting: true,
+        created: 0,
+        transport_ready: 0,
+        admitted: 0,
+      };
+    },
+    check: () => assert.fail("expired observations cannot establish isolation"),
+  });
+  vm.runInContext(functionSource(source, "approvePendingJoin"), context);
+  await assert.rejects(context.approvePendingJoin([0, 0]), /approval_timeout/);
+  assert.deepEqual(budgets, [15_000, 15_000]);
+});
+
+test("Actual child message route preserves controlled approval failure and sanitizes arbitrary errors", async () => {
+  const source = await fs.readFile(
+    new URL("../qa/co-op-transport/client.js", import.meta.url),
+    "utf8",
+  );
+  const handlerSource = source.slice(
+    source.indexOf('addEventListener("message"'),
+    source.indexOf('addEventListener("pagehide"'),
+  );
+  for (const reason of ["approval_not_pending", "private token and SDP"]) {
+    const replies = [];
+    let handler;
+    const parent = { postMessage: (value) => replies.push(value) };
+    const context = vm.createContext({
+      parent,
+      config: { page_origin: "http://localhost:4199" },
+      commandPending: false,
+      command: async () => {
+        throw Error(reason);
+      },
+      failureCode: null,
+      fifth: null,
+      fifthReasons: new Set(),
+      update: () => {},
+      phase: "hosting",
+      addEventListener: (type, callback) => {
+        assert.equal(type, "message");
+        handler = callback;
+      },
+    });
+    vm.runInContext(handlerSource, context);
+    await handler({
+      source: parent,
+      origin: context.config.page_origin,
+      data: { type: "native-qa-command", id: 1, name: "approve-next" },
+    });
+    assert.equal(replies[0].ok, false);
+    assert.equal(
+      replies[0].error,
+      reason === "approval_not_pending" ? reason : "native_action_failed",
+    );
+    assert.equal(context.commandPending, false);
+    const value = report();
+    value.clients[0].failure_code = replies[0].error;
+    assert.doesNotThrow(() => validateWasmReport(value));
+  }
 });
 
 test("Actual New session orchestration uses real controller idempotent leave after prior host end", async () => {
@@ -854,7 +1031,7 @@ test("Owned preparation guards exact Git adapter content, whole normal source/pa
     dist: path.join(fixture, "dist"),
   };
   const accepted = await verifyOwnedSource(options);
-  assert.equal(accepted.blobs.size, 6);
+  assert.equal(accepted.blobs.size, 7);
   stamp.extra = "must not enter captured provenance";
   await saveStamp();
   await assert.rejects(verifyOwnedSource(options), /record/);
@@ -892,8 +1069,14 @@ test("WASM allowlist fixes backend paths and cannot request unrelated files", ()
     webgpu: `/wasm/webgpu-${"a".repeat(64)}/galaxy.js`,
     webgl2: `/wasm/webgl2-${"b".repeat(64)}/galaxy.js`,
   };
-  const names = preparedNames({ version: 2, mode: "wasm", builds });
-  assert.equal(names.length, 18);
+  const names = preparedNames({
+    version: 2,
+    mode: "wasm",
+    builds,
+    files: { "modules/room-code.js": "c".repeat(64) },
+  });
+  assert.equal(names.length, 19);
+  assert.ok(names.includes("modules/room-code.js"));
   assert.ok(names.includes("modules/storage.js"));
   assert.ok(!names.some((n) => n.includes("main.js")));
   for (const buildsBad of [
@@ -943,7 +1126,7 @@ for (const owned of [false, true])
           : {}),
       });
       assert.equal(manifest.version, owned ? 3 : 2);
-      assert.equal(Object.keys(manifest.files).length, 19);
+      assert.equal(Object.keys(manifest.files).length, 20);
       assert.equal(manifest.artifacts.length, 8);
       for (const name of ["controller", "wasm-ports"]) {
         const js = await fs.readFile(
@@ -969,7 +1152,7 @@ for (const owned of [false, true])
       if (owned) {
         assert.equal(config.source_commit, process.env.COOP_QA_SOURCE_COMMIT);
         assert.equal(config.build_stamp.head, config.source_commit);
-        assert.equal(Object.keys(manifest.git_inputs).length, 6);
+        assert.equal(Object.keys(manifest.git_inputs).length, 7);
         const ports = await import(
           pathToFileURL(path.join(stage, "modules/wasm-ports.js")).href
         );

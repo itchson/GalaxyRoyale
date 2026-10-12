@@ -1,0 +1,10 @@
+✔ Root actual launch rejects compiled/service metadata disagreement before the native server factory (20.2172ms)
+✔ Root actual approval polling waits for pending observation, checks native counters, then resolves the host request (5.3766ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 180.6583

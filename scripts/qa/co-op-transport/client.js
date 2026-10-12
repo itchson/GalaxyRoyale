@@ -470,10 +470,11 @@ async function initialize(
       update();
     },
   });
-  await initStep("save_baseline", async () => {
-    await store.save(galaxy.profile());
-    await store.flush();
-  });
+  if (!loaded)
+    await initStep("save_baseline", async () => {
+      await store.save(galaxy.profile());
+      await store.flush();
+    });
   await initStep("read_baseline", async () => {
     baseline = profileSha = await digest(galaxy.profile());
     persistedSha = await digest(await store.open());
@@ -611,6 +612,23 @@ async function command(name, args) {
     return observations();
   }
   if (!controller || !galaxy) throw new Error("not_initialized");
+  if (name === "approval-state") {
+    const current = controller.state();
+    return {
+      awaiting: current.awaiting_approval,
+      pending: current.join_requests.length,
+      created: counters.created,
+      transport_ready: current.transport_ready,
+      admitted: current.admitted,
+    };
+  }
+  if (name === "approve-next") {
+    const requests = controller.state().join_requests;
+    if (role !== "host" || requests.length !== 1)
+      throw new Error("approval_not_pending");
+    await controller.approve(requests[0].id, true);
+    return observations();
+  }
   if (name.startsWith("fifth-")) return fifthCommand(name, args);
   if (name === "create") {
     await controller.create();
@@ -703,7 +721,8 @@ addEventListener("message", async (event) => {
     failureCode ??=
       name === "initialize"
         ? `initialization_${initStage}_failed`
-        : fifthReasons.has(error.message)
+        : fifthReasons.has(error.message) ||
+            error.message === "approval_not_pending"
           ? error.message
           : "native_action_failed";
     if (fifth && name.startsWith("fifth-")) {

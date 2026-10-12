@@ -1,0 +1,11 @@
+✔ actual parent send bounds its timer and message route retains only controlled errors while removing pending requests (2.3203ms)
+✔ actual parent send retains its ordinary default and late replies cannot reopen a timed-out request (0.6059ms)
+✔ actual approval loop shrinks every observation reply budget and still accepts timely real-state snapshots (0.6648ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 3
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 187.3666

@@ -1,0 +1,128 @@
+{
+  "scope": "Post-live helper compatibility/deadline/enum verification; not a new normal build or repeated native/RTC run",
+  "shell": {
+    "total": 655,
+    "pass": 654,
+    "fail": 0,
+    "skip": 1,
+    "skipReason": "Windows file-symlink privilege unavailable; directory-junction checks pass",
+    "normalFactoryAndOwnedHttpStages": "executed with explicit coherent dist/source env"
+  },
+  "typecheck": {
+    "exit": 0
+  },
+  "identity": {
+    "head": "5e4b629e91f3334582ffa30d5e65af98675f8c39",
+    "branch": "codex/testing",
+    "sourceHash": "783b68a02f90b0b0ccd7861ce2e11edb5d2b49a3b5e70fe1f8ce9aa4742d872e"
+  },
+  "packageHash": "a1afe6da521b45b60a6e1eae1c6d0269c8837615ffcee478e168d1457e1e242c",
+  "compiledFrom": "f4b8882b568339f0aa164c6aaf99a174b59cc105",
+  "liveCapturesUse": "Exact staged sources in live-stage-manifest.json, before these post-live amendments",
+  "pins": {
+    "checks/full-shell-final.log": {
+      "bytes": 72433,
+      "sha256": "a5f0b2a94694f0d9f28a2b1deabc738a4d4f372d2ded626e16600d44e0d3479e"
+    },
+    "checks/full-shell-http-count-failure.log": {
+      "bytes": 73941,
+      "sha256": "56352b62c175888d20d819c5ef168d04e90d1cdb3d73f29883a7ee3a838c6e6a"
+    },
+    "checks/full-shell-http-source-count-failure.log": {
+      "bytes": 73284,
+      "sha256": "90c1a8e4c728c0069b60ff2f8cbd82eb94e905fb35d4e946ce3aa98a24c102fb"
+    },
+    "checks/typecheck.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "legacy-fix/current-fifth-tests.log": {
+      "bytes": 1249,
+      "sha256": "62adc54b2230373713f217844f59241e82bca6679241b60840fea99879130a15"
+    },
+    "legacy-fix/current-provenance-tests.log": {
+      "bytes": 1176,
+      "sha256": "eb50249bfd540f65fc3aa920eb84b58fc1e68769f0337e2e9f23c98579e46b46"
+    },
+    "legacy-fix/current-wasm-allowlist.log": {
+      "bytes": 386,
+      "sha256": "1129dc04dda44431534848b435f0a2508dcd9355732d598985ecbd23b12e5638"
+    },
+    "legacy-fix/diff-check.log": {
+      "bytes": 132,
+      "sha256": "d867e3721bfe1d1449123bdbf2620d39a7ec080c19e4632edc8977e6f8cc280b"
+    },
+    "legacy-fix/final-provenance-test.mjs": {
+      "bytes": 12546,
+      "sha256": "d3503c3fb286e82ea647d24821ac7f15da45df08fa38a769754b36bc74fab3a0"
+    },
+    "legacy-fix/format.log": {
+      "bytes": 117,
+      "sha256": "6e5496d55195754a99afe688bbb08e41df43b92fa0de07ea99ead53104ae34ca"
+    },
+    "legacy-fix/HANDOFF.md": {
+      "bytes": 3215,
+      "sha256": "fb815bcf8960fa89ef8225bbd3a7242278382716b7aa1d75301a178d88474c0c"
+    },
+    "legacy-fix/original-regression.log": {
+      "bytes": 3444,
+      "sha256": "648e169d91ce23c0c58232dede3265c1493ca74690385a960d0a20e783d016f6"
+    },
+    "legacy-fix/pin-evidence.log": {
+      "bytes": 954,
+      "sha256": "edceb698a4bd90d20bcd427ed713f1d4912ecb9213364e4c9065d12787c4ac89"
+    },
+    "legacy-fix/pin-evidence.mjs": {
+      "bytes": 3051,
+      "sha256": "47a6ce4fa0f3425d05c06b944e3fe652a83a79f6064938b978fad56dedb5400f"
+    },
+    "legacy-fix/prepare.diff.patch": {
+      "bytes": 10566,
+      "sha256": "6564144f5c5c0aaf860b2d21e4d0fd8543903424711b551b5f5bb7d58b34eeed"
+    },
+    "legacy-fix/source-pins.json": {
+      "bytes": 4124,
+      "sha256": "17b9f6740b1b454e93e4736fb77b5ccd345155472c99bedf49340241221f0e34"
+    },
+    "negative-plan/PLAN.md": {
+      "bytes": 7114,
+      "sha256": "b91155ba7319780717f8b72e27c518f7a545099c97e54f97e760e9b8d6c56370"
+    },
+    "negative-plan/source-pins.json": {
+      "bytes": 3076,
+      "sha256": "6fdf697cbaab25899506ee6b0c77b3a2e5e747cee2e91d88a6b44a69c97891b9"
+    },
+    "post-live-source/client.js": {
+      "bytes": 22669,
+      "sha256": "a558131bbdd13754a0bd2aac1e86ac8f69457993b89d55f05fd0f3bbafb2280a"
+    },
+    "post-live-source/wasm-review.js": {
+      "bytes": 15443,
+      "sha256": "4b339c4ef7eae782aab081f77e22f8e84290b89c2422474bb88a8c6aa7516a74"
+    },
+    "post-live-source/server.mjs": {
+      "bytes": 17774,
+      "sha256": "34907d5a16fdc96a1ef0bd388317b3fa8c3722a218a4e5a24444352d66fd3834"
+    },
+    "post-live-source/prepare.mjs": {
+      "bytes": 17064,
+      "sha256": "2f5242434ea82793a0789efc8bff9070e451791e065ead6846612e7a3204ad51"
+    },
+    "post-live-source/coop-private-room-provenance-qa.test.mjs": {
+      "bytes": 12546,
+      "sha256": "d3503c3fb286e82ea647d24821ac7f15da45df08fa38a769754b36bc74fab3a0"
+    },
+    "post-live-source/coop-transport-wasm-qa.test.mjs": {
+      "bytes": 41891,
+      "sha256": "925c879fc4229a5ba851f347453a17a802a6237e79061b3da8482d2ba2028f16"
+    },
+    "post-live-source/coop-transport-qa.test.mjs": {
+      "bytes": 6276,
+      "sha256": "e6809359124d3690e21b9a8c5361f002a36aa9531a9cc7a1ffe2c5809a408231"
+    },
+    "board-record.json": {
+      "bytes": 52,
+      "sha256": "0c5d74d7370e011f5c88bb0ac13201252d4a313ee1725af619735c69f8100669"
+    }
+  }
+}

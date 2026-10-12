@@ -13,6 +13,8 @@ import {
   fileLimit,
   ownedSources,
   verifyOwnedSource,
+  verifyServiceInputs,
+  serviceSources,
 } from "./prepare.mjs";
 
 const checkNames = new Set([
@@ -89,6 +91,7 @@ export function validateReport(o) {
   return o;
 }
 export const wasmCheckNames = new Set([
+  "host-approval-before-rtc",
   "two-native-games",
   "independent-save-origins",
   "distinct-local-profiles",
@@ -127,6 +130,7 @@ export const clientFailureCodes = new Set([
   "initialization_timeout",
   "native_frame_failed",
   "native_action_failed",
+  "approval_not_pending",
   ...fifthReasons,
 ]);
 export function validateWasmReport(o) {
@@ -324,10 +328,20 @@ export async function start({
       JSON.stringify(provenance.gitInputs) !==
         JSON.stringify(manifest.git_inputs) ||
       JSON.stringify(provenance.buildStamp) !==
-        JSON.stringify(manifest.build_stamp)
+        JSON.stringify(manifest.build_stamp) ||
+      provenance.compiledSourceCommit !== manifest.compiled_source_commit ||
+      JSON.stringify(provenance.compiledGitInputs) !==
+        JSON.stringify(manifest.compiled_git_inputs)
     )
       throw new Error("Owned prepared provenance changed.");
   }
+  await verifyServiceInputs(manifest.service_inputs);
+  if (
+    serviceSources.some(
+      (source) => manifest.inputs?.[source] !== manifest.service_inputs[source],
+    )
+  )
+    throw new Error("Prepared service provenance is incomplete.");
   for (const [source, hash] of Object.entries(manifest.inputs)) {
     const sourceRoot =
       manifest.version === 3 && ownedSources.includes(source)

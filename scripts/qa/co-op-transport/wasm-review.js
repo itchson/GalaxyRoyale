@@ -50,6 +50,7 @@ const failureCodes = new Set([
   "fifth_mismatch",
   "fifth_timeout",
   "fifth_not_ready",
+  "approval_not_pending",
 ]);
 const actionFailureCodes = new Set([
   ...failureCodes,
@@ -59,6 +60,9 @@ const actionFailureCodes = new Set([
   "capture_rejected",
   "clients_not_visible",
   "page_not_visible",
+  "approval_timeout",
+  "approval_not_pending",
+  "approval_before_rtc_failed",
 ]);
 let driveActive = false,
   driveVisibilityLost = false;
@@ -136,14 +140,14 @@ addEventListener("message", (event) => {
         ),
       );
 });
-function send(role, name, args = {}) {
+function send(role, name, args = {}, timeoutMs = 75_000) {
   const id = nextId++,
     child = children[role];
   return new Promise((resolve, reject) => {
     const timer = setTimeout(() => {
       pending.delete(id);
       reject(new Error("native_command_timeout"));
-    }, 75_000);
+    }, timeoutMs);
     pending.set(id, { role, resolve, reject, timer });
     child.frame.contentWindow.postMessage(
       { type: "native-qa-command", id, name, args },
@@ -277,13 +281,40 @@ async function verify() {
   );
 }
 // Transport/admission values are derived in the child from the actual controller, not inferred by the parent.
+async function approvePendingJoin(baseline) {
+  const deadline = performance.now() + 15_000;
+  let host, guest;
+  while (true) {
+    const remaining = deadline - performance.now();
+    if (remaining <= 0) throw new Error("approval_timeout");
+    [host, guest] = await Promise.all([
+      send("host", "approval-state", {}, remaining),
+      send("guest", "approval-state", {}, remaining),
+    ]);
+    if (performance.now() >= deadline) throw new Error("approval_timeout");
+    if (host.pending === 1 && guest.awaiting === true) break;
+    await new Promise((resolve) => setTimeout(resolve, 100));
+  }
+  const isolated = [host, guest].every(
+    (value, index) =>
+      value.created === baseline[index] &&
+      value.transport_ready === 0 &&
+      value.admitted === 0,
+  );
+  check("host-approval-before-rtc", isolated);
+  if (!isolated) throw new Error("approval_before_rtc_failed");
+  await send("host", "approve-next");
+}
 async function connected(rejoin) {
   const commitsBefore = state.guest?.commits ?? 0;
   const grant = await send("host", "create");
   if (typeof grant.invite !== "string") throw new Error("invite_unavailable");
   if (firstSession) sessionDistinct = firstSession !== grant.session;
   else firstSession = grant.session;
+  await read();
+  const peersBefore = [state.host.created, state.guest.created];
   await send("guest", "join", { invite: grant.invite });
+  await approvePendingJoin(peersBefore);
   await until(
     () =>
       state.guest.phase === "connected" &&

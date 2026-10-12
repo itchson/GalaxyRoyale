@@ -1,0 +1,15 @@
+(node:12776) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ Actual initialization pauses fresh Galaxy before guarded license registration and marks each API stage (29.7273ms)
+✔ Actual initialization has a bounded total deadline, controlled failures and frees a late native create (5.0837ms)
+✔ Actual rejoin gate requires a new complete native commit, not a cumulative old commit (3.2881ms)
+✔ Actual approval QA rejects pre-approval RTC or admission and measures cumulative peer counts (8.0844ms)
+✔ Actual client approval commands use current host request id without exposing credentials (3.065ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 294.7136

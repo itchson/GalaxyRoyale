@@ -12,6 +12,33 @@ import {
 } from "../qa/co-op-transport/prepare.mjs";
 import { start, validateReport } from "../qa/co-op-transport/server.mjs";
 
+test("QA launch refuses omitted or disagreeing service pins before creating a listener", async (t) => {
+  const stage = await fs.mkdtemp(
+    path.join(root, "work", "co-op-service-pins-"),
+  );
+  assert.ok(
+    path.resolve(stage).startsWith(path.resolve(root, "work") + path.sep),
+  );
+  assert.ok(path.basename(stage).startsWith("co-op-service-pins-"));
+  t.after(() => fs.rm(stage, { recursive: true }));
+  const manifest = await prepare(stage);
+  for (const mutate of [
+    (value) => delete value.service_inputs,
+    (value) => delete value.inputs["apps/coop/server.mjs"],
+    (value) => {
+      value.inputs["apps/coop/store.mjs"] = "0".repeat(64);
+    },
+  ]) {
+    const changed = structuredClone(manifest);
+    mutate(changed);
+    await fs.writeFile(
+      path.join(stage, "manifest.json"),
+      JSON.stringify(changed),
+    );
+    await assert.rejects(start({ stage, port: 4199 }), /service/i);
+  }
+});
+
 test("QA prepare pins actual source and bounded HTTP serves only allowlisted modules; captures are sanitized", async (t) => {
   const stage = await fs.mkdtemp(
     path.join(root, "work", "co-op-transport-qa-"),
@@ -29,7 +56,7 @@ test("QA prepare pins actual source and bounded HTTP serves only allowlisted mod
     await fs.rm(stage, { recursive: true });
   });
   const manifest = await prepare(stage);
-  assert.equal(Object.keys(manifest.files).length, 5);
+  assert.equal(Object.keys(manifest.files).length, 6);
   const source = await fs.readFile(
     path.join(root, "apps/game/src/coop/transport.ts"),
   );
@@ -52,7 +79,7 @@ test("QA prepare pins actual source and bounded HTTP serves only allowlisted mod
     404,
   );
   const config = await (await fetch(tool.origin + "/qa/config")).json();
-  assert.equal(config.modules, 3);
+  assert.equal(config.modules, 4);
   assert.equal(config.service, tool.service);
   assert.equal(config.page_origin, tool.origin);
   assert.notEqual(config.page_origin, config.service);

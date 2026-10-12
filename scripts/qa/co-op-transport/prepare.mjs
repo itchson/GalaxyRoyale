@@ -13,7 +13,7 @@ export const root = path.resolve(
 export const directory = fileURLToPath(new URL(".", import.meta.url));
 export const sha = (bytes) =>
   crypto.createHash("sha256").update(bytes).digest("hex");
-export const moduleNames = ["wire", "signaling", "transport"];
+export const moduleNames = ["wire", "room-code", "signaling", "transport"];
 export const pageNames = ["review.html", "review.js"];
 export const wasmModuleNames = [...moduleNames, "controller", "wasm-ports"];
 export const wasmPageNames = [
@@ -27,6 +27,30 @@ export const moduleSource = (name) =>
     ? "apps/game/src/storage.ts"
     : `apps/game/src/coop/${name}.ts`;
 export const ownedSources = [...wasmModuleNames, "storage"].map(moduleSource);
+// server.mjs imports these actual Root files, even for another owned source checkout.
+export const serviceSources = Object.freeze([
+  "apps/coop/server.mjs",
+  "apps/coop/store.mjs",
+]);
+// The canonical carried revision must retain every normal-build dependency.
+// These are the runtime paths hashed by scripts/preview-build.mjs.
+const compiledRuntimePaths = [
+  "Cargo.toml",
+  "Cargo.lock",
+  "rust-toolchain.toml",
+  "package.json",
+  "pnpm-lock.yaml",
+  "tsconfig.json",
+  "crates",
+  "assets",
+  "apps/game",
+  "scripts/build.mjs",
+  "scripts/build-wasm.mjs",
+  "scripts/pwa.mjs",
+  "scripts/wasm-artifacts.mjs",
+  "scripts/preview-build.mjs",
+  "scripts/game-runtime-lease.mjs",
+];
 const git = (sourceRoot, ...args) =>
   execFileSync("git", args, {
     cwd: sourceRoot,
@@ -34,6 +58,33 @@ const git = (sourceRoot, ...args) =>
     maxBuffer: 2_000_000,
   });
 const lf = (bytes) => bytes.toString("utf8").replaceAll("\r\n", "\n");
+const isoTime = (value) =>
+  typeof value === "string" &&
+  Number.isFinite(Date.parse(value)) &&
+  new Date(value).toISOString() === value;
+export async function readServiceInputs(sourceRoot = root) {
+  const inputs = {};
+  for (const relative of serviceSources)
+    inputs[relative] = sha(
+      await regular(path.join(sourceRoot, relative), 250_000),
+    );
+  return inputs;
+}
+export async function verifyServiceInputs(inputs, sourceRoot = root) {
+  if (
+    !inputs ||
+    typeof inputs !== "object" ||
+    Array.isArray(inputs) ||
+    Object.keys(inputs).sort().join() !== [...serviceSources].sort().join() ||
+    !Object.values(inputs).every(
+      (value) => typeof value === "string" && /^[a-f0-9]{64}$/.test(value),
+    )
+  )
+    throw new Error("Invalid actual QA service source pins.");
+  const actual = await readServiceInputs(sourceRoot);
+  if (serviceSources.some((relative) => inputs[relative] !== actual[relative]))
+    throw new Error("Actual QA service source changed since preparation.");
+}
 export async function verifyOwnedSource({ sourceRoot, sourceCommit, dist }) {
   if (
     !path.isAbsolute(sourceRoot ?? "") ||
@@ -52,38 +103,102 @@ export async function verifyOwnedSource({ sourceRoot, sourceCommit, dist }) {
   const stamp = JSON.parse(
     await fs.readFile(path.join(source, "work/preview-build.json"), "utf8"),
   );
+  const stampKeys = Object.keys(stamp).sort().join();
+  const carried =
+    stampKeys ===
+    "branch,builtAt,carriedAt,carryReason,compiledFromHead,head,packageHash,schemaVersion,sourceHash";
   if (
-    Object.keys(stamp).sort().join() !==
-      "branch,builtAt,head,packageHash,schemaVersion,sourceHash" ||
+    (!carried &&
+      stampKeys !==
+        "branch,builtAt,head,packageHash,schemaVersion,sourceHash") ||
     stamp.schemaVersion !== 1 ||
     stamp.head !== sourceCommit ||
     stamp.branch !== "codex/testing" ||
     !/^[a-f0-9]{64}$/.test(stamp.sourceHash ?? "") ||
     !/^[a-f0-9]{64}$/.test(stamp.packageHash ?? "") ||
-    typeof stamp.builtAt !== "string" ||
-    !Number.isFinite(Date.parse(stamp.builtAt))
+    !isoTime(stamp.builtAt) ||
+    (carried &&
+      (!/^[a-f0-9]{40}$/.test(stamp.compiledFromHead ?? "") ||
+        stamp.compiledFromHead === stamp.head ||
+        !isoTime(stamp.carriedAt) ||
+        Date.parse(stamp.carriedAt) < Date.parse(stamp.builtAt) ||
+        typeof stamp.carryReason !== "string" ||
+        stamp.carryReason.length > 512 ||
+        stamp.carryReason.trim().length === 0 ||
+        /[\u0000-\u001f\u007f]/.test(stamp.carryReason)))
   )
     throw new Error(
       "Owned normal build record does not match the requested source commit.",
     );
   const actual = await buildIdentity(source);
   if (
+    actual.head !== sourceCommit ||
+    actual.branch !== stamp.branch ||
     actual.sourceHash !== stamp.sourceHash ||
     (await treeHash(source, ["dist"])) !== stamp.packageHash
   )
     throw new Error(
       "Owned runtime source/package changed since the normal build.",
     );
+  const compiledSourceCommit = carried ? stamp.compiledFromHead : sourceCommit;
+  if (carried) {
+    try {
+      if (
+        git(source, "rev-parse", "--verify", `${compiledSourceCommit}^{commit}`)
+          .toString()
+          .trim() !== compiledSourceCommit
+      )
+        throw new Error("Wrong compiled revision.");
+      git(
+        source,
+        "merge-base",
+        "--is-ancestor",
+        compiledSourceCommit,
+        sourceCommit,
+      );
+    } catch {
+      throw new Error(
+        "Carried compiled revision is unavailable or is not an ancestor.",
+      );
+    }
+    try {
+      git(
+        source,
+        "diff",
+        "--quiet",
+        "--ignore-cr-at-eol",
+        compiledSourceCommit,
+        sourceCommit,
+        "--",
+        ...compiledRuntimePaths,
+        ":(exclude)apps/game/dist",
+        ":(exclude)apps/game/node_modules",
+        ":(exclude)apps/game/public/wasm",
+      );
+    } catch {
+      throw new Error("Carried compiled runtime dependency changed.");
+    }
+  }
   const blobs = new Map(),
-    gitInputs = {};
+    gitInputs = {},
+    compiledGitInputs = {};
   for (const relative of ownedSources) {
     const bytes = git(source, "show", `${sourceCommit}:${relative}`);
-    if (lf(await regular(path.join(source, relative), 250_000)) !== lf(bytes))
+    const compiledBytes = git(
+      source,
+      "show",
+      `${compiledSourceCommit}:${relative}`,
+    );
+    if (
+      lf(await regular(path.join(source, relative), 250_000)) !== lf(bytes) ||
+      lf(bytes) !== lf(compiledBytes)
+    )
       throw new Error(
         "Owned adapter source differs from the exact compiled source commit.",
       );
     blobs.set(relative, bytes);
     gitInputs[relative] = sha(bytes);
+    compiledGitInputs[relative] = sha(compiledBytes);
   }
   return {
     sourceRoot: source,
@@ -91,6 +206,8 @@ export async function verifyOwnedSource({ sourceRoot, sourceCommit, dist }) {
     buildStamp: stamp,
     blobs,
     gitInputs,
+    compiledSourceCommit,
+    compiledGitInputs,
   };
 }
 export const fileLimit = (name) =>
@@ -100,8 +217,14 @@ export const fileLimit = (name) =>
       ? 100_000
       : 250_000;
 export function preparedNames(manifest) {
+  // Older frozen stages predate room-code. New stages pin its actual file.
+  const roomCode = Object.hasOwn(manifest.files ?? {}, "modules/room-code.js");
+  const modules = (names) =>
+    names
+      .filter((name) => name !== "room-code" || roomCode)
+      .map((name) => `modules/${name}.js`);
   if (manifest.version === 1 && manifest.mode === undefined)
-    return [...pageNames, ...moduleNames.map((n) => `modules/${n}.js`)];
+    return [...pageNames, ...modules(moduleNames)];
   if (
     ![2, 3].includes(manifest.version) ||
     (manifest.version === 3 && manifest.profile_mode !== "owned") ||
@@ -113,7 +236,7 @@ export function preparedNames(manifest) {
   const names = [
     ...wasmPageNames,
     ...(manifest.fifth_shot === true ? ["fifth-shot.js"] : []),
-    ...wasmModuleNames.map((n) => `modules/${n}.js`),
+    ...modules(wasmModuleNames),
     "modules/storage.js",
   ];
   for (const backend of ["webgpu", "webgl2"]) {
@@ -167,8 +290,9 @@ export async function prepare(
   const provenance = ownedLoadout
     ? await verifyOwnedSource({ sourceRoot, sourceCommit, dist })
     : null;
+  const serviceInputs = await readServiceInputs();
   await fs.mkdir(path.join(stage, "modules"), { recursive: true });
-  const inputs = {},
+  const inputs = { ...serviceInputs },
     files = {};
   for (const name of dist ? [...wasmModuleNames, "storage"] : moduleNames) {
     const source = moduleSource(name),
@@ -195,6 +319,7 @@ export async function prepare(
       `// Actual source SHA256 ${sha(bytes)}\n` +
       result.outputText
         .replaceAll('"./wire.ts"', '"./wire.js"')
+        .replaceAll('"./room-code.ts"', '"./room-code.js"')
         .replaceAll('"./signaling.ts"', '"./signaling.js"')
         .replaceAll('"./transport.ts"', '"./transport.js"')
         .replaceAll('"./controller.ts"', '"./controller.js"');
@@ -276,12 +401,17 @@ export async function prepare(
     if (
       JSON.stringify(after.buildStamp) !==
         JSON.stringify(provenance.buildStamp) ||
-      JSON.stringify(after.gitInputs) !== JSON.stringify(provenance.gitInputs)
+      JSON.stringify(after.gitInputs) !==
+        JSON.stringify(provenance.gitInputs) ||
+      after.compiledSourceCommit !== provenance.compiledSourceCommit ||
+      JSON.stringify(after.compiledGitInputs) !==
+        JSON.stringify(provenance.compiledGitInputs)
     )
       throw new Error(
         "Owned normal source/build record changed during preparation.",
       );
   }
+  await verifyServiceInputs(serviceInputs);
   const manifest = {
     version: ownedLoadout ? 3 : dist ? 2 : 1,
     ...(provenance
@@ -291,6 +421,8 @@ export async function prepare(
           source_commit: provenance.sourceCommit,
           git_inputs: provenance.gitInputs,
           build_stamp: provenance.buildStamp,
+          compiled_source_commit: provenance.compiledSourceCommit,
+          compiled_git_inputs: provenance.compiledGitInputs,
         }
       : {}),
     ...(dist
@@ -303,6 +435,7 @@ export async function prepare(
         }
       : {}),
     typescript: ts.version,
+    service_inputs: serviceInputs,
     scope: ownedLoadout
       ? "prepared real owned-loadout two-Galaxy WASM/RTC QA from exact compiled source; browser execution pending; no shared rewards/NAT/eight-player/fifth-shot acceptance"
       : dist

@@ -1,0 +1,83 @@
+{
+  "frozenAt": "2026-10-12T18:47:29.545Z",
+  "head": "5e4b629e91f3334582ffa30d5e65af98675f8c39",
+  "sources": {
+    "apps/game/src/audio.ts": {
+      "workingBytes": 51881,
+      "workingSha256": "96160ba46e050f3bc334adac9f874f6f318724af04388aa9345e850a103c4156",
+      "lfBytes": 50262,
+      "lfSha256": "e099e7e6bdbcd279c4db8c8e40452b2c3f26d228ff27b2461dc434856a0bf897",
+      "canonicalHeadSha256": "e099e7e6bdbcd279c4db8c8e40452b2c3f26d228ff27b2461dc434856a0bf897",
+      "exactNativeInputMatch": true
+    },
+    "apps/game/src/audio-state.ts": {
+      "workingBytes": 11471,
+      "workingSha256": "c3c9a3c5b34b1001e4d1dd1de531e70dbcd945826b31022e0619187d0ec1b76f",
+      "lfBytes": 10846,
+      "lfSha256": "3e7d35563f489f477ecc0f451772479e19070fc051eb86c9aa2dffdbd8a68aea",
+      "canonicalHeadSha256": "3e7d35563f489f477ecc0f451772479e19070fc051eb86c9aa2dffdbd8a68aea",
+      "exactNativeInputMatch": true
+    },
+    "apps/game/src/title-theme.ts": {
+      "workingBytes": 2917,
+      "workingSha256": "104bc0c4754db8b315b745291b243a619c394de1484f4a834995c74860b27135",
+      "lfBytes": 2787,
+      "lfSha256": "2ea2516c54f5e53a16ce05c1f4a37b5304e6282b5ea2855dc9694684a26c2069",
+      "canonicalHeadSha256": "2ea2516c54f5e53a16ce05c1f4a37b5304e6282b5ea2855dc9694684a26c2069",
+      "exactNativeInputMatch": true
+    },
+    "apps/game/src/music-clock.ts": {
+      "workingBytes": 4084,
+      "workingSha256": "12fff1dfe804ed4aaaa274418b74efa8604b0afd656ef718cb4e43930a475aa9",
+      "lfBytes": 3973,
+      "lfSha256": "aec678986a6b4fe13bafb2cb4999717c1069b08504cebb6b1b44046a2af6c559",
+      "canonicalHeadSha256": "aec678986a6b4fe13bafb2cb4999717c1069b08504cebb6b1b44046a2af6c559",
+      "exactNativeInputMatch": true
+    },
+    "apps/game/src/music-score.ts": {
+      "workingBytes": 807,
+      "workingSha256": "9777e0bacac612b52c5b9eeb7c760fb8ba47a6ec62eb89123f2f45a210052683",
+      "lfBytes": 771,
+      "lfSha256": "8757a5f93ed4584de7597a816124ea8f722975e234c113f97ae7d14d32140703",
+      "canonicalHeadSha256": "8757a5f93ed4584de7597a816124ea8f722975e234c113f97ae7d14d32140703",
+      "exactNativeInputMatch": true
+    }
+  },
+  "retainedNativeReport": {
+    "path": "C:\\Users\\mitch\\Documents\\ChatGPT\\galaxy-royale\\work\\title-score-native-width-v3\\captures\\qa-1791826979237-0e10d066\\report.json",
+    "sha256": "5369b426b6d297ce48b9dc0321af7ac3eaa5db8d996b903980c1cc6afc37bba6"
+  },
+  "evidence": {
+    "REVIEW.md": {
+      "bytes": 3800,
+      "sha256": "9f1bfce6217efac82b44157d8abe21461230717bd223a279d0a46c8f6282fab6"
+    },
+    "audit.mjs": {
+      "bytes": 4169,
+      "sha256": "7e9cb4897cec92629ef4ce7cd7da7c0933f3f67acbfa73397c54ea85ab9abf14"
+    },
+    "audit.log": {
+      "bytes": 1230,
+      "sha256": "56eb34e8980b6a364ee03db00cea2db98635189ebec95585fd580f5a476667a7"
+    },
+    "audit-evidence.json": {
+      "bytes": 9744,
+      "sha256": "fe84e1d9768bce9fe13b212db679f15112db4c25b20736b0a294f8562a0616f9"
+    },
+    "pin-evidence.mjs": {
+      "bytes": 1300,
+      "sha256": "d77f44e1157b75ec0bc987825334349b83d368433674371b90c5387faecabe79"
+    }
+  },
+  "commands": [
+    {
+      "command": "node work/title-fullness-review/audit.mjs",
+      "exitCode": 0,
+      "sourceHashMatches": 5,
+      "retainedWavHashMatches": 7,
+      "log": "audit.log"
+    }
+  ],
+  "recommendation": "Present already-implemented V3 before another musical refinement; V2 feedback does not reject V3.",
+  "scope": "Verified retained native report/WAV/source hashes and source-derived arithmetic only. No fresh tests/render/listener/browser/listening/PCM quality or reference-fidelity acceptance. Root networking helpers untouched."
+}
