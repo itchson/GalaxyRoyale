@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 1064,
+  "revision": 1068,
   "name": "Galaxy Royale",
   "phase": "Playable solo slice → content and validation",
-  "updatedAt": "2026-10-12T20:39:57.038Z",
+  "updatedAt": "2026-10-12T21:03:13.218Z",
   "tasks": [
     {
       "id": "studio",
@@ -14713,6 +14713,86 @@
         }
       ],
       "knownIssues": "No retroactive cause for earlier generic lock failure; no new WebGL2 refusal, eight clients, TURN, failed ICE, exact boxed ECS or zero migration-write claim."
+    },
+    {
+      "id": "build-6c984afc",
+      "title": "Fuller title instrument candidate V4",
+      "body": "Title-only moving filter envelope, warmer sustained chord layers, kick transient/body and snare tonal body. Existing score, buses and transition clock retained.",
+      "author": "Root",
+      "source": "Actual native OfflineAudioContext capture and automated checks",
+      "createdAt": "2026-10-12T21:02:15.410Z",
+      "revision": "73d7268",
+      "evidence": [
+        {
+          "label": "Seven actual native audio fixtures and cleanup",
+          "kind": "artifact",
+          "path": "artifacts/title-fullness-v4-20261013/report.json"
+        },
+        {
+          "label": "Synthesized audition, not shipped recording",
+          "kind": "artifact",
+          "path": "artifacts/title-fullness-v4-20261013/title-audition.mp3"
+        }
+      ],
+      "checks": [
+        {
+          "name": "79 audio and harness checks",
+          "result": "pass"
+        },
+        {
+          "name": "Seven native PCM fixtures finite, unclipped and cleaned up",
+          "result": "pass"
+        },
+        {
+          "name": "Human instrument/mix acceptance",
+          "result": "not_run"
+        }
+      ],
+      "knownIssues": "Human listening, original-song timbre fidelity, realtime/mobile performance remain pending. MP3 is only an audition of synthesized PCM, never a runtime asset."
+    },
+    {
+      "id": "build-dfd33ccf",
+      "title": "Integrated native Wake/world-edge and title instruments",
+      "body": "Merged native world bounds, immutable authoritative Wake pages, strict browser transport and title instrument candidate. Actual new dual-WASM compilation and PWA build.",
+      "author": "Root",
+      "source": "Actual integrated tests and new dual-WASM build",
+      "createdAt": "2026-10-12T21:03:13.218Z",
+      "revision": "e0f53b970263db88e2f4a61dfe21ac37e019de0f",
+      "evidence": [
+        {
+          "label": "Actual tests, compiler output and matching build receipt",
+          "kind": "artifact",
+          "path": "artifacts/engine-audio-integration-20261013/summary.json"
+        },
+        {
+          "label": "Independent browser edge contract review",
+          "kind": "artifact",
+          "path": "artifacts/engine-audio-integration-20261013/REVIEW.md"
+        }
+      ],
+      "checks": [
+        {
+          "name": "937 native tests;20 ignored explicitly",
+          "result": "pass"
+        },
+        {
+          "name": "Strict workspace Clippy and formatting",
+          "result": "pass"
+        },
+        {
+          "name": "59 focused browser tests plus79 audio/harness",
+          "result": "pass"
+        },
+        {
+          "name": "New WebGPU/WebGL2 and PWA compilation",
+          "result": "pass"
+        },
+        {
+          "name": "Integrated live Wake RTC/8 seats/TURN/phone",
+          "result": "not_run"
+        }
+      ],
+      "knownIssues": "Live Wake RTC presentation, eight players, TURN, physical devices and realtime performance remain pending. Ignored export fixtures are not passing tests."
     }
   ],
   "feedback": [],
@@ -25356,6 +25436,46 @@
       "author": "Root",
       "source": "Actual native WebGPU loopback refusal observation, not a new compilation",
       "createdAt": "2026-10-12T20:39:57.038Z"
+    },
+    {
+      "id": "032efc6f-16af-49ba-a850-528c1567833d",
+      "revision": 1065,
+      "kind": "run",
+      "itemId": "run-5b4979d1",
+      "title": "Browser world-edge alignment · completed",
+      "author": "/root/audio_review",
+      "source": "Actual frozen browser edge alignment author execution fromRoot-authorizedf1",
+      "createdAt": "2026-10-12T20:52:39.227Z"
+    },
+    {
+      "id": "9f545bcb-abc8-4fd5-a72e-a48c951b037f",
+      "revision": 1066,
+      "kind": "run",
+      "itemId": "run-a49f8719",
+      "title": "Configured native Ion Wake R1 E1 fixture exporter · completed",
+      "author": "Codex audio_score",
+      "source": "actual first native configured fixture step",
+      "createdAt": "2026-10-12T20:54:02.413Z"
+    },
+    {
+      "id": "f8c2acb7-f0a7-4784-8342-0860aac0abbf",
+      "revision": 1067,
+      "kind": "build",
+      "itemId": "build-6c984afc",
+      "title": "Fuller title instrument candidate V4",
+      "author": "Root",
+      "source": "Actual native OfflineAudioContext capture and automated checks",
+      "createdAt": "2026-10-12T21:02:15.410Z"
+    },
+    {
+      "id": "c384102a-6e2f-47e7-82c2-ea43af773789",
+      "revision": 1068,
+      "kind": "build",
+      "itemId": "build-dfd33ccf",
+      "title": "Integrated native Wake/world-edge and title instruments",
+      "author": "Root",
+      "source": "Actual integrated tests and new dual-WASM build",
+      "createdAt": "2026-10-12T21:03:13.218Z"
     }
   ],
   "runRecords": [
@@ -34881,6 +35001,51 @@
       "author": "Codex audio_score",
       "source": "actual read-only acceptance design",
       "createdAt": "2026-10-12T20:39:56.228Z"
+    },
+    {
+      "id": "run-5b4979d1",
+      "title": "Browser world-edge alignment · completed",
+      "agentId": "/root/audio_review",
+      "agentLabel": "Browser world-edge alignment",
+      "state": "completed",
+      "observedAt": "2026-10-12T20:52:39.114Z",
+      "taskIds": [
+        "task-b062202c"
+      ],
+      "summary": "Frozen4dc012c onlywireproductiondelta+focusedtest+exactnativefixtures.81Nodechecks passed(7new69consumers5purewire),typecheck/formatpassed. Original2actualwirefailures preserved. Nonplayer/shotpositions1.1M,pilotpositionsandallvelocities1M. Rootownsmergednative/package/browser/liveacceptance.",
+      "evidence": [
+        {
+          "label": "Actual public-wire/native-DTO replay evidence",
+          "kind": "note",
+          "details": "AudioRefinement work/edge-browser-alignment/implementation/HANDOFF.md SHA985ff9c16d596005e8c34eca607218af29c3ef0f1283c81adc64567c9672e744;sourcepins67d39bbe9555ed58d50ad59fa650289bb3c16c3419eb038013f6e9be6685bf93. Exactnative847header/entityfiles preserve87unfilteredrows/case andShotOwner-only/noownedloadout. No native/controller/sharedmanifest/listener/build/currentWASM/RTC execution; f1trailguards unchanged."
+        }
+      ],
+      "author": "/root/audio_review",
+      "source": "Actual frozen browser edge alignment author execution fromRoot-authorizedf1",
+      "createdAt": "2026-10-12T20:52:39.227Z"
+    },
+    {
+      "id": "run-a49f8719",
+      "title": "Configured native Ion Wake R1 E1 fixture exporter · completed",
+      "agentId": "/root/audio_score",
+      "agentLabel": "Configured native Ion Wake R1 E1 fixture exporter",
+      "state": "completed",
+      "observedAt": "2026-10-12T20:54:02.338Z",
+      "taskIds": [
+        "task-d82150b9",
+        "task-8508cfc5"
+      ],
+      "summary": "First approved native fixture step only: two crypto-issued role-local configured NOT earned schema7 Scout ID5 R1/E1 profiles; native constructor/Deserialize reload idempotent, actual export_loadout exact and read-only, production Node save/owned-loadout validators pass with three malformed controls per role. Explicit ignored native export 1 pass; native bridge regressions 6 pass/2 ignored; strict game_web all-target Clippy pass. Only one test-only module amended, runtime/API/QA helper unchanged. No normal WASM build, profile import, listener, browser, RTC or renderer acceptance.",
+      "evidence": [
+        {
+          "label": "Actual configured native fixture source and raw evidence",
+          "kind": "note",
+          "details": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/coop-wake-live-fixtures/: native-fixtures contains two full configured profiles, two native fresh baselines, two exact field diffs, two real export_loadout JSON responses and labelled native observations. source-pins.json pins119 repository/validator inputs and4 native artifact/fingerprint hashes; fixture-pins.json pins9 native outputs. Raw exporter, validator, regression and Clippy logs retained. No earned progression or runtime/live acceptance claim."
+        }
+      ],
+      "author": "Codex audio_score",
+      "source": "actual first native configured fixture step",
+      "createdAt": "2026-10-12T20:54:02.413Z"
     }
   ],
   "phaseDescription": "Desktop-first Rust/WASM solo game and local Studio are implemented. Reviewed occupied-cell art, reproducible conversion, responsive native settings/icons and minimap, strict GitHub integration gates and source-backed Dev Bible are integrated. Natural campaign balance, human listening, owner-private update lifecycle and physical phones remain separate pending gates."

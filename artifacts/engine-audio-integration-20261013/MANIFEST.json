@@ -1,0 +1,498 @@
+{
+  "version": 1,
+  "scope": "Independent frozen source and actual author/native evidence verification only; no suite rerun/build/listener/browser/RTC execution",
+  "candidate": "4dc012cd4f899c392b52ac4d71402210917bf913",
+  "parent": "f1afbbd09b1b9c932c548ea220e85c595a35a395",
+  "nativeRuntime": "1b8c3ec7d20fba1dc69f14a3cc2f9b22945cd3f4",
+  "nativeExporter": "84701ff7e0118654bc171276b122fc72df8a032b",
+  "rawFiles": [
+    {
+      "path": "author-evidence/candidate.diff.patch",
+      "bytes": 12310,
+      "sha256": "84c0fb29e66270b7b379c6b867bfbcf488d99f626e3cecaeacc504b865efb4f1"
+    },
+    {
+      "path": "author-evidence/commit.log",
+      "bytes": 1935,
+      "sha256": "dddaf7612eebb9035bedc7aa7ba9fa503905eb2bc37768b68970fcd0d393d9a8"
+    },
+    {
+      "path": "author-evidence/consumer-regressions.log",
+      "bytes": 7788,
+      "sha256": "dca518af6d0485f51573977d9d859316a3640db0a9a8501fd9bf7b4547de124e"
+    },
+    {
+      "path": "author-evidence/copy-fixtures.mjs",
+      "bytes": 1482,
+      "sha256": "dc78e858a736345171ad27f8da5d6150bb7835c215442e0a5f02952cd1b3cb58"
+    },
+    {
+      "path": "author-evidence/diff-check.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "author-evidence/final-format.log",
+      "bytes": 49,
+      "sha256": "61243cc32189903185cb9cf837006b51772312820083d7443f9848082c8e70f1"
+    },
+    {
+      "path": "author-evidence/fixture-copy-pins.json",
+      "bytes": 3214,
+      "sha256": "8b5dce1d8516b034ac71e180f9e89a100c8dab35629da03336334efec052de9e"
+    },
+    {
+      "path": "author-evidence/focused-final.log",
+      "bytes": 1117,
+      "sha256": "39a391620bc697463d63efaa583bbb439f834cfdecf48e35f8d754b9d22e1fd5"
+    },
+    {
+      "path": "author-evidence/focused-original.log",
+      "bytes": 1118,
+      "sha256": "d5ad5724ba12394a7a17e21194c141b0fb23ea9ff9c509723c0ee38a39c48dcf"
+    },
+    {
+      "path": "author-evidence/format-check.log",
+      "bytes": 68,
+      "sha256": "f20510a9da4717c51c4cffee6d0dd88d6c9a723d0a83711d01216f5b48961283"
+    },
+    {
+      "path": "author-evidence/format.log",
+      "bytes": 82,
+      "sha256": "2e9a5521fff3b452b6b91cd6ede847c4a33dc272556c1aa23a13b303bc7e1e39"
+    },
+    {
+      "path": "author-evidence/HANDOFF.md",
+      "bytes": 4479,
+      "sha256": "985ff9c16d596005e8c34eca607218af29c3ef0f1283c81adc64567c9672e744"
+    },
+    {
+      "path": "author-evidence/original-regressions.log",
+      "bytes": 2938,
+      "sha256": "f5c63a486aada6909d08e1ea3c9778c653dad02ea9d4d9291a3d0f6eb413ce87"
+    },
+    {
+      "path": "author-evidence/original-wire.ts",
+      "bytes": 24291,
+      "sha256": "5bbf8cd0c35575ca3e5dfb552e60724867bc45e8ef759b7dc31cb12f96cdba8b"
+    },
+    {
+      "path": "author-evidence/pin.mjs",
+      "bytes": 4861,
+      "sha256": "691bec6ac3e0c3632d3442f7120f772d0cfab69f64dc97bd2a494c806ac9350f"
+    },
+    {
+      "path": "author-evidence/source-pins.json",
+      "bytes": 13848,
+      "sha256": "67d39bbe9555ed58d50ad59fa650289bb3c16c3419eb038013f6e9be6685bf93"
+    },
+    {
+      "path": "author-evidence/transport-wire-regressions.log",
+      "bytes": 840,
+      "sha256": "7951bdf99fb341abba06ba8ab1f7556e1db92974602ca2d7ed06916b41322658"
+    },
+    {
+      "path": "author-evidence/typecheck.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "native-evidence/candidate.diff.patch",
+      "bytes": 5100,
+      "sha256": "cbbb07580e880181926cec63244e467bd3f8755f4adb21ab95f9c676fe0c5b6a"
+    },
+    {
+      "path": "native-evidence/clippy.log",
+      "bytes": 657,
+      "sha256": "5381ab95fdfca87dfa29d8e0a643f3f5f66e9b2d483963394894a20537f129af"
+    },
+    {
+      "path": "native-evidence/commit.log",
+      "bytes": 138,
+      "sha256": "24df3731cc23bc2941300006f1e4b996364ada7dc38e6a90c814041afef89670"
+    },
+    {
+      "path": "native-evidence/compiled-inputs.json",
+      "bytes": 35832,
+      "sha256": "10286bfa1bfb33484c19c6c53a8bc536bcde20a1fa83cb2f108894b7aff2e905"
+    },
+    {
+      "path": "native-evidence/compiler.log",
+      "bytes": 201,
+      "sha256": "4b9a8c1d3470825bcc9f452028d0779a83c4e7237762cfa6ab7c9a8b99ae704b"
+    },
+    {
+      "path": "native-evidence/diff-check.log",
+      "bytes": 140,
+      "sha256": "7badf221f1e501e5a69e1e76282a4e9e9acb987a322f9c3e10f86a128e5021d9"
+    },
+    {
+      "path": "native-evidence/export-final.log",
+      "bytes": 1428,
+      "sha256": "93931ba8257114306d38240616b073b00b3af26cc29750449ea2619fc5d4e610"
+    },
+    {
+      "path": "native-evidence/export-original.log",
+      "bytes": 2098,
+      "sha256": "078df0be4745ab6784e8ae4a5eba9e30f68e62a0d305baa6bf7482782d69488b"
+    },
+    {
+      "path": "native-evidence/focused-final.log",
+      "bytes": 2565,
+      "sha256": "d48c66c095414ceec30c7ab8c3c61d89d03206b2af61c8f0007a2d654e44300e"
+    },
+    {
+      "path": "native-evidence/format-check.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "native-evidence/HANDOFF.md",
+      "bytes": 3527,
+      "sha256": "1c94e3b094df3528fd09368f88d5f2e983a5210c257259ba49f4af91ef8e6783"
+    },
+    {
+      "path": "native-evidence/native-depfile.d",
+      "bytes": 13192,
+      "sha256": "e70a764af090c1cfa97d3bdb5d738a55f2eaa57934d31af78bc872cb678446a6"
+    },
+    {
+      "path": "native-evidence/original/co_op_world_edge_tests.rs",
+      "bytes": 18639,
+      "sha256": "fcad6e8df956088e706c786556ac4b81f3e3a23ba98c9d8bd120d367b9a2e0eb"
+    },
+    {
+      "path": "native-evidence/pin.mjs",
+      "bytes": 7346,
+      "sha256": "3ca964119fabd61bf8411e5eb585a5fbb06dc57a7afe13b8e6a8e27c5d0da237"
+    },
+    {
+      "path": "native-evidence/provenance.json",
+      "bytes": 8259,
+      "sha256": "a1db3db204c4d284ae62ea3deaf13576233a50d94e507dfa11181d0877191246"
+    },
+    {
+      "path": "native-evidence/source-pins.json",
+      "bytes": 3736,
+      "sha256": "34a576540952ced96e74411478ddc0636de77895527610df46e0c1fe63959fe1"
+    },
+    {
+      "path": "native-source/co_op_world_edge_tests.rs",
+      "bytes": 23182,
+      "sha256": "b99190efa1c9583f4355dad3fb18934a79c01cbb3048d026d8fe1405c0b95113"
+    },
+    {
+      "path": "REVIEW.md",
+      "bytes": 7502,
+      "sha256": "ef1dd147fea53b758f40c99aaab38be84277ca32afd54b1825ae7e7eed05119a"
+    },
+    {
+      "path": "source/apps/game/src/coop/controller.ts",
+      "bytes": 34189,
+      "sha256": "713bf960422b4749c3d6fbed6aa87a3199ce78cd584e47e62e12e72859ff9874"
+    },
+    {
+      "path": "source/apps/game/src/coop/signaling.ts",
+      "bytes": 6716,
+      "sha256": "49ebdb7750f053f263a5b3741348e6d2f0171d3b16fd1dc7665242d5e313e433"
+    },
+    {
+      "path": "source/apps/game/src/coop/transport.ts",
+      "bytes": 36712,
+      "sha256": "10ead00d20e2e9fb5cb59a211b496ba98af59d962b8ebccb6d57138776d25d77"
+    },
+    {
+      "path": "source/apps/game/src/coop/wasm-ports.ts",
+      "bytes": 5776,
+      "sha256": "4314dd11c9e2a5206c5d5d8cc24313de9ce8f8a33c0b61379d6400be916fdc64"
+    },
+    {
+      "path": "source/apps/game/src/coop/wire.ts",
+      "bytes": 23696,
+      "sha256": "ba18175b036e4c982b3bfda8a2bd3c7912bfb39a70f360c6f655f0bb097ea336"
+    },
+    {
+      "path": "source/parent-wire.ts",
+      "bytes": 23485,
+      "sha256": "5104ae0c6de2ba90ab0b24214c6c7b9a7cfb3d4c28d38588052b759e08bd5172"
+    },
+    {
+      "path": "source/scripts/test/coop-controller.test.mjs",
+      "bytes": 51886,
+      "sha256": "f9e574fc41143faab525e9d8fdd3495be02c55ddec59c8db64fee5e2a7e3a84a"
+    },
+    {
+      "path": "source/scripts/test/coop-transport.test.mjs",
+      "bytes": 44673,
+      "sha256": "1656a656b51be38d9adc4f2ad6c01b30e005c740ab414c07e1b2b9a5cfcf3c61"
+    },
+    {
+      "path": "source/scripts/test/coop-wake-wire.test.mjs",
+      "bytes": 7008,
+      "sha256": "fab0937bbc6411858a76754113d23872b46673196e2b1b67d7ab234b7c45a227"
+    },
+    {
+      "path": "source/scripts/test/coop-wasm-ports.test.mjs",
+      "bytes": 25281,
+      "sha256": "ee3f0c14c92fde842fa7af95cd444340bebac328703d6d268c8bd76789236a0f"
+    },
+    {
+      "path": "source/scripts/test/coop-world-edge-wire.test.mjs",
+      "bytes": 10281,
+      "sha256": "33765dcfba0f93939da5fbab7e0566d96994f75d2bb32dd1711a4ddb7b7c3676"
+    },
+    {
+      "path": "source/scripts/test/fixtures/co-op-world-edge/native-provenance.json",
+      "bytes": 8259,
+      "sha256": "a1db3db204c4d284ae62ea3deaf13576233a50d94e507dfa11181d0877191246"
+    },
+    {
+      "path": "source/scripts/test/fixtures/co-op-world-edge/negative-x-negative-y.entities.json",
+      "bytes": 63116,
+      "sha256": "56a100ca2eddf99729c8f465254a9addc1ff01f769ce2611f610a3cdfc31f228"
+    },
+    {
+      "path": "source/scripts/test/fixtures/co-op-world-edge/negative-x-negative-y.header.json",
+      "bytes": 1680,
+      "sha256": "9f8f05a41f4075c15fb1347f218ab15536c249b4d95f56d0931f8af0bc27c42b"
+    },
+    {
+      "path": "source/scripts/test/fixtures/co-op-world-edge/negative-x-positive-y.entities.json",
+      "bytes": 63062,
+      "sha256": "0d56e7c6d86218688706c0cc15d520a01b9365c5c1d886af4fcdbbda0031913e"
+    },
+    {
+      "path": "source/scripts/test/fixtures/co-op-world-edge/negative-x-positive-y.header.json",
+      "bytes": 1678,
+      "sha256": "b6e87288a78b67b4745021f27812108b7b39e9ed5947988f893efe6469b7be1f"
+    },
+    {
+      "path": "source/scripts/test/fixtures/co-op-world-edge/negative-x.entities.json",
+      "bytes": 63356,
+      "sha256": "8ccfec29044fb71b1444820bbbf0623d9fc7d9425e2cb43fba4e53e6c3e57ce2"
+    },
+    {
+      "path": "source/scripts/test/fixtures/co-op-world-edge/negative-x.header.json",
+      "bytes": 1666,
+      "sha256": "ffadfaaf7cc9238460dfdce9ae9ad81f28044f9bbc16ef85bc21889954902f15"
+    },
+    {
+      "path": "source/scripts/test/fixtures/co-op-world-edge/negative-y.entities.json",
+      "bytes": 63389,
+      "sha256": "3dcb11d2d896cdabf9932a82d2130cad0543595ef068a06bbe2f66cd6feb8e1d"
+    },
+    {
+      "path": "source/scripts/test/fixtures/co-op-world-edge/negative-y.header.json",
+      "bytes": 1666,
+      "sha256": "98c31768cd535bb801fb8c6b40e727cbad55eed107113c61bd28ce41d9dbf065"
+    },
+    {
+      "path": "source/scripts/test/fixtures/co-op-world-edge/outward-projectile.entities.json",
+      "bytes": 63268,
+      "sha256": "b7feae4f428983c4cdb91cb885b9954f79f72f12c85d439f64f14550ab54c876"
+    },
+    {
+      "path": "source/scripts/test/fixtures/co-op-world-edge/outward-projectile.header.json",
+      "bytes": 2086,
+      "sha256": "36147020f48e6e47017498f45f77695b150807659f977dce9125468d5363070a"
+    },
+    {
+      "path": "source/scripts/test/fixtures/co-op-world-edge/positive-x-negative-y.entities.json",
+      "bytes": 63053,
+      "sha256": "327d420d5c5236fa6047334381e95b1c43e581adfc66a0aade6a5f6fd34bd8be"
+    },
+    {
+      "path": "source/scripts/test/fixtures/co-op-world-edge/positive-x-negative-y.header.json",
+      "bytes": 1678,
+      "sha256": "9c3017929e67e1e39889307996f31b1172b48c60df1af759cd07c5cbdd4a8972"
+    },
+    {
+      "path": "source/scripts/test/fixtures/co-op-world-edge/positive-x-positive-y.entities.json",
+      "bytes": 62986,
+      "sha256": "741b888c0740ea1412faef145e6263a2f109f8b50ea70a4f6fba99b4fcf3aedf"
+    },
+    {
+      "path": "source/scripts/test/fixtures/co-op-world-edge/positive-x-positive-y.header.json",
+      "bytes": 1676,
+      "sha256": "120813319bbbf1bda57abd8104392d702bb008e30dbc546a53afd755c22afb01"
+    },
+    {
+      "path": "source/scripts/test/fixtures/co-op-world-edge/positive-x.entities.json",
+      "bytes": 63268,
+      "sha256": "10a04011bc7b778d90b1b9b036736b8f29de29f5a9929a76e105341b251a2e71"
+    },
+    {
+      "path": "source/scripts/test/fixtures/co-op-world-edge/positive-x.header.json",
+      "bytes": 1664,
+      "sha256": "6be9d5d680a443b0b8bb56b2fafd65ec0df0c15252161f4603b9dad08c22251f"
+    },
+    {
+      "path": "source/scripts/test/fixtures/co-op-world-edge/positive-y.entities.json",
+      "bytes": 63335,
+      "sha256": "926594575533a6c851f7ecf6ec37bb5060c9e805c05f5c0408b6b4177fda5511"
+    },
+    {
+      "path": "source/scripts/test/fixtures/co-op-world-edge/positive-y.header.json",
+      "bytes": 1664,
+      "sha256": "fe4e140c077d621bdfef0e6fb13207ca7c0be48e2b457099bd4124072217e80f"
+    },
+    {
+      "path": "verification-first-encoding-failure.log",
+      "bytes": 483,
+      "sha256": "c67d53194d4fb06444ffc2fcdb932500b50226fb08947a6e78ac8209c783a316"
+    },
+    {
+      "path": "verification.json",
+      "bytes": 21764,
+      "sha256": "6807b8be44b1536245fb560e80b60d1de172d1d396421809ddfbab35c24f1e1e"
+    },
+    {
+      "path": "verification.log",
+      "bytes": 4005,
+      "sha256": "5cb8a4343acf027ea1feac9b6b9c1a05458b1967b47ad695ab9fb72559852dd3"
+    },
+    {
+      "path": "verify.py",
+      "bytes": 11128,
+      "sha256": "dfb6acebba5317fcdbbb2e9f52ab06408db0b8341d1042669fc626f08cd2db5a"
+    }
+  ],
+  "externalNativeExports": [
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\positive-x.json",
+      "bytes": 7774729,
+      "sha256": "f942c7c96d6e93dd38196d2d639b51161de171e6d7d9e471917ca0b4ec4ff3ae"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\positive-x.header.json",
+      "bytes": 1664,
+      "sha256": "6be9d5d680a443b0b8bb56b2fafd65ec0df0c15252161f4603b9dad08c22251f"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\positive-x.entities.json",
+      "bytes": 63268,
+      "sha256": "10a04011bc7b778d90b1b9b036736b8f29de29f5a9929a76e105341b251a2e71"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\negative-x.json",
+      "bytes": 7819328,
+      "sha256": "fa81bce44ee49081fd55aeaedb79732832669a5f461ddd19fadda20383f0e8fc"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\negative-x.header.json",
+      "bytes": 1666,
+      "sha256": "ffadfaaf7cc9238460dfdce9ae9ad81f28044f9bbc16ef85bc21889954902f15"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\negative-x.entities.json",
+      "bytes": 63356,
+      "sha256": "8ccfec29044fb71b1444820bbbf0623d9fc7d9425e2cb43fba4e53e6c3e57ce2"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\positive-y.json",
+      "bytes": 7802019,
+      "sha256": "29f835b8ed3d5ad6b13ab4b00c180c0f5436cc93dc8e0b5e9851438acf41fce3"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\positive-y.header.json",
+      "bytes": 1664,
+      "sha256": "fe4e140c077d621bdfef0e6fb13207ca7c0be48e2b457099bd4124072217e80f"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\positive-y.entities.json",
+      "bytes": 63335,
+      "sha256": "926594575533a6c851f7ecf6ec37bb5060c9e805c05f5c0408b6b4177fda5511"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\negative-y.json",
+      "bytes": 7819641,
+      "sha256": "c5d595415c1033556fbe4c008f512421efbd1f7d3491386d7863e6048dc45132"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\negative-y.header.json",
+      "bytes": 1666,
+      "sha256": "98c31768cd535bb801fb8c6b40e727cbad55eed107113c61bd28ce41d9dbf065"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\negative-y.entities.json",
+      "bytes": 63389,
+      "sha256": "3dcb11d2d896cdabf9932a82d2130cad0543595ef068a06bbe2f66cd6feb8e1d"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\positive-x-positive-y.json",
+      "bytes": 7730731,
+      "sha256": "9135598bafff3eb852619f03032f3571f9ee51c73831d08ba9b0139925904173"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\positive-x-positive-y.header.json",
+      "bytes": 1676,
+      "sha256": "120813319bbbf1bda57abd8104392d702bb008e30dbc546a53afd755c22afb01"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\positive-x-positive-y.entities.json",
+      "bytes": 62986,
+      "sha256": "741b888c0740ea1412faef145e6263a2f109f8b50ea70a4f6fba99b4fcf3aedf"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\negative-x-negative-y.json",
+      "bytes": 7843985,
+      "sha256": "4ce6c960ca61760a4136f05ffe6fbbce5f5c1020a3614d4816560419539a531a"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\negative-x-negative-y.header.json",
+      "bytes": 1680,
+      "sha256": "9f8f05a41f4075c15fb1347f218ab15536c249b4d95f56d0931f8af0bc27c42b"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\negative-x-negative-y.entities.json",
+      "bytes": 63116,
+      "sha256": "56a100ca2eddf99729c8f465254a9addc1ff01f769ce2611f610a3cdfc31f228"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\positive-x-negative-y.json",
+      "bytes": 7816490,
+      "sha256": "5f9487949b7f5dacbd4d4b8bb63b23f6e69e76654d00e85b3fb618940fdb2a9b"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\positive-x-negative-y.header.json",
+      "bytes": 1678,
+      "sha256": "9c3017929e67e1e39889307996f31b1172b48c60df1af759cd07c5cbdd4a8972"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\positive-x-negative-y.entities.json",
+      "bytes": 63053,
+      "sha256": "327d420d5c5236fa6047334381e95b1c43e581adfc66a0aade6a5f6fd34bd8be"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\negative-x-positive-y.json",
+      "bytes": 7888412,
+      "sha256": "f899c585c1df1104716a5a1016d703290a01bd53c686e87215861693dd20dc34"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\negative-x-positive-y.header.json",
+      "bytes": 1678,
+      "sha256": "b6e87288a78b67b4745021f27812108b7b39e9ed5947988f893efe6469b7be1f"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\negative-x-positive-y.entities.json",
+      "bytes": 63062,
+      "sha256": "0d56e7c6d86218688706c0cc15d520a01b9365c5c1d886af4fcdbbda0031913e"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\outward-projectile.json",
+      "bytes": 7775193,
+      "sha256": "9ff83b8449b90864482b4929c1c20d1268f093376f5ddc4fc76ceff8e51adcdf"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\outward-projectile.header.json",
+      "bytes": 2086,
+      "sha256": "36147020f48e6e47017498f45f77695b150807659f977dce9125468d5363070a"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\outward-projectile.entities.json",
+      "bytes": 63268,
+      "sha256": "b7feae4f428983c4cdb91cb885b9954f79f72f12c85d439f64f14550ab54c876"
+    }
+  ],
+  "pinSemantics": "rawFiles hash exact copied review bytes; source files are canonical Git bytes; author source-pins retain raw working vs canonical hashes; large native full-capture and binary bytes verified in original work paths without redundant copies"
+}

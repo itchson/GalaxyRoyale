@@ -1,0 +1,17 @@
+(node:40048) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ exact native edge header/entity bytes retain source provenance and complete unfiltered row counts (4.9842ms)
+✔ actual eight unfiltered native edge/corner headers and every entity page pass public wire encode/decode unchanged (10.4231ms)
+✔ every projectile velocity stays inside the native one-million component domain (0.6499ms)
+✔ declared raw limits and next-f32/f64 variations preserve separate body/player/velocity domains (3.6458ms)
+✔ actual native outward shot retains its native owner/epoch and declared raw pose variations cannot widen speed or pilot positions (1.2031ms)
+✔ existing public shape/frame bounds remain fail-closed for malformed edge data (0.6439ms)
+✔ actual exported adapter gates malformed raw data before native invocation and forwards real edge DTOs unchanged (1.5339ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 121.2566

@@ -1,0 +1,502 @@
+{
+  "scope": "Independent frozen source and actual author/native evidence verification only; no suite rerun/build/listener/browser/RTC execution",
+  "head": "4dc012cd4f899c392b52ac4d71402210917bf913",
+  "parent": "f1afbbd09b1b9c932c548ea220e85c595a35a395",
+  "source_pins": [
+    {
+      "path": "apps/game/src/coop/wire.ts",
+      "git_sha256": "ba18175b036e4c982b3bfda8a2bd3c7912bfb39a70f360c6f655f0bb097ea336",
+      "git_bytes": 23696,
+      "raw_sha256": "ba18175b036e4c982b3bfda8a2bd3c7912bfb39a70f360c6f655f0bb097ea336",
+      "raw_bytes": 23696
+    },
+    {
+      "path": "scripts/test/coop-world-edge-wire.test.mjs",
+      "git_sha256": "33765dcfba0f93939da5fbab7e0566d96994f75d2bb32dd1711a4ddb7b7c3676",
+      "git_bytes": 10281,
+      "raw_sha256": "33765dcfba0f93939da5fbab7e0566d96994f75d2bb32dd1711a4ddb7b7c3676",
+      "raw_bytes": 10281
+    },
+    {
+      "path": "scripts/test/fixtures/co-op-world-edge/native-provenance.json",
+      "git_sha256": "a1db3db204c4d284ae62ea3deaf13576233a50d94e507dfa11181d0877191246",
+      "git_bytes": 8259,
+      "raw_sha256": "a1db3db204c4d284ae62ea3deaf13576233a50d94e507dfa11181d0877191246",
+      "raw_bytes": 8259
+    },
+    {
+      "path": "scripts/test/fixtures/co-op-world-edge/negative-x-negative-y.entities.json",
+      "git_sha256": "56a100ca2eddf99729c8f465254a9addc1ff01f769ce2611f610a3cdfc31f228",
+      "git_bytes": 63116,
+      "raw_sha256": "56a100ca2eddf99729c8f465254a9addc1ff01f769ce2611f610a3cdfc31f228",
+      "raw_bytes": 63116
+    },
+    {
+      "path": "scripts/test/fixtures/co-op-world-edge/negative-x-negative-y.header.json",
+      "git_sha256": "9f8f05a41f4075c15fb1347f218ab15536c249b4d95f56d0931f8af0bc27c42b",
+      "git_bytes": 1680,
+      "raw_sha256": "9f8f05a41f4075c15fb1347f218ab15536c249b4d95f56d0931f8af0bc27c42b",
+      "raw_bytes": 1680
+    },
+    {
+      "path": "scripts/test/fixtures/co-op-world-edge/negative-x-positive-y.entities.json",
+      "git_sha256": "0d56e7c6d86218688706c0cc15d520a01b9365c5c1d886af4fcdbbda0031913e",
+      "git_bytes": 63062,
+      "raw_sha256": "0d56e7c6d86218688706c0cc15d520a01b9365c5c1d886af4fcdbbda0031913e",
+      "raw_bytes": 63062
+    },
+    {
+      "path": "scripts/test/fixtures/co-op-world-edge/negative-x-positive-y.header.json",
+      "git_sha256": "b6e87288a78b67b4745021f27812108b7b39e9ed5947988f893efe6469b7be1f",
+      "git_bytes": 1678,
+      "raw_sha256": "b6e87288a78b67b4745021f27812108b7b39e9ed5947988f893efe6469b7be1f",
+      "raw_bytes": 1678
+    },
+    {
+      "path": "scripts/test/fixtures/co-op-world-edge/negative-x.entities.json",
+      "git_sha256": "8ccfec29044fb71b1444820bbbf0623d9fc7d9425e2cb43fba4e53e6c3e57ce2",
+      "git_bytes": 63356,
+      "raw_sha256": "8ccfec29044fb71b1444820bbbf0623d9fc7d9425e2cb43fba4e53e6c3e57ce2",
+      "raw_bytes": 63356
+    },
+    {
+      "path": "scripts/test/fixtures/co-op-world-edge/negative-x.header.json",
+      "git_sha256": "ffadfaaf7cc9238460dfdce9ae9ad81f28044f9bbc16ef85bc21889954902f15",
+      "git_bytes": 1666,
+      "raw_sha256": "ffadfaaf7cc9238460dfdce9ae9ad81f28044f9bbc16ef85bc21889954902f15",
+      "raw_bytes": 1666
+    },
+    {
+      "path": "scripts/test/fixtures/co-op-world-edge/negative-y.entities.json",
+      "git_sha256": "3dcb11d2d896cdabf9932a82d2130cad0543595ef068a06bbe2f66cd6feb8e1d",
+      "git_bytes": 63389,
+      "raw_sha256": "3dcb11d2d896cdabf9932a82d2130cad0543595ef068a06bbe2f66cd6feb8e1d",
+      "raw_bytes": 63389
+    },
+    {
+      "path": "scripts/test/fixtures/co-op-world-edge/negative-y.header.json",
+      "git_sha256": "98c31768cd535bb801fb8c6b40e727cbad55eed107113c61bd28ce41d9dbf065",
+      "git_bytes": 1666,
+      "raw_sha256": "98c31768cd535bb801fb8c6b40e727cbad55eed107113c61bd28ce41d9dbf065",
+      "raw_bytes": 1666
+    },
+    {
+      "path": "scripts/test/fixtures/co-op-world-edge/outward-projectile.entities.json",
+      "git_sha256": "b7feae4f428983c4cdb91cb885b9954f79f72f12c85d439f64f14550ab54c876",
+      "git_bytes": 63268,
+      "raw_sha256": "b7feae4f428983c4cdb91cb885b9954f79f72f12c85d439f64f14550ab54c876",
+      "raw_bytes": 63268
+    },
+    {
+      "path": "scripts/test/fixtures/co-op-world-edge/outward-projectile.header.json",
+      "git_sha256": "36147020f48e6e47017498f45f77695b150807659f977dce9125468d5363070a",
+      "git_bytes": 2086,
+      "raw_sha256": "36147020f48e6e47017498f45f77695b150807659f977dce9125468d5363070a",
+      "raw_bytes": 2086
+    },
+    {
+      "path": "scripts/test/fixtures/co-op-world-edge/positive-x-negative-y.entities.json",
+      "git_sha256": "327d420d5c5236fa6047334381e95b1c43e581adfc66a0aade6a5f6fd34bd8be",
+      "git_bytes": 63053,
+      "raw_sha256": "327d420d5c5236fa6047334381e95b1c43e581adfc66a0aade6a5f6fd34bd8be",
+      "raw_bytes": 63053
+    },
+    {
+      "path": "scripts/test/fixtures/co-op-world-edge/positive-x-negative-y.header.json",
+      "git_sha256": "9c3017929e67e1e39889307996f31b1172b48c60df1af759cd07c5cbdd4a8972",
+      "git_bytes": 1678,
+      "raw_sha256": "9c3017929e67e1e39889307996f31b1172b48c60df1af759cd07c5cbdd4a8972",
+      "raw_bytes": 1678
+    },
+    {
+      "path": "scripts/test/fixtures/co-op-world-edge/positive-x-positive-y.entities.json",
+      "git_sha256": "741b888c0740ea1412faef145e6263a2f109f8b50ea70a4f6fba99b4fcf3aedf",
+      "git_bytes": 62986,
+      "raw_sha256": "741b888c0740ea1412faef145e6263a2f109f8b50ea70a4f6fba99b4fcf3aedf",
+      "raw_bytes": 62986
+    },
+    {
+      "path": "scripts/test/fixtures/co-op-world-edge/positive-x-positive-y.header.json",
+      "git_sha256": "120813319bbbf1bda57abd8104392d702bb008e30dbc546a53afd755c22afb01",
+      "git_bytes": 1676,
+      "raw_sha256": "120813319bbbf1bda57abd8104392d702bb008e30dbc546a53afd755c22afb01",
+      "raw_bytes": 1676
+    },
+    {
+      "path": "scripts/test/fixtures/co-op-world-edge/positive-x.entities.json",
+      "git_sha256": "10a04011bc7b778d90b1b9b036736b8f29de29f5a9929a76e105341b251a2e71",
+      "git_bytes": 63268,
+      "raw_sha256": "10a04011bc7b778d90b1b9b036736b8f29de29f5a9929a76e105341b251a2e71",
+      "raw_bytes": 63268
+    },
+    {
+      "path": "scripts/test/fixtures/co-op-world-edge/positive-x.header.json",
+      "git_sha256": "6be9d5d680a443b0b8bb56b2fafd65ec0df0c15252161f4603b9dad08c22251f",
+      "git_bytes": 1664,
+      "raw_sha256": "6be9d5d680a443b0b8bb56b2fafd65ec0df0c15252161f4603b9dad08c22251f",
+      "raw_bytes": 1664
+    },
+    {
+      "path": "scripts/test/fixtures/co-op-world-edge/positive-y.entities.json",
+      "git_sha256": "926594575533a6c851f7ecf6ec37bb5060c9e805c05f5c0408b6b4177fda5511",
+      "git_bytes": 63335,
+      "raw_sha256": "926594575533a6c851f7ecf6ec37bb5060c9e805c05f5c0408b6b4177fda5511",
+      "raw_bytes": 63335
+    },
+    {
+      "path": "scripts/test/fixtures/co-op-world-edge/positive-y.header.json",
+      "git_sha256": "fe4e140c077d621bdfef0e6fb13207ca7c0be48e2b457099bd4124072217e80f",
+      "git_bytes": 1664,
+      "raw_sha256": "fe4e140c077d621bdfef0e6fb13207ca7c0be48e2b457099bd4124072217e80f",
+      "raw_bytes": 1664
+    },
+    {
+      "path": "apps/game/src/coop/controller.ts",
+      "git_sha256": "713bf960422b4749c3d6fbed6aa87a3199ce78cd584e47e62e12e72859ff9874",
+      "git_bytes": 34189,
+      "raw_sha256": "fe7f64f3da8ead655a572dc39bcf1833277cf56e5014c20b88dfc7e9ca0a9fee",
+      "raw_bytes": 35298
+    },
+    {
+      "path": "apps/game/src/coop/wasm-ports.ts",
+      "git_sha256": "4314dd11c9e2a5206c5d5d8cc24313de9ce8f8a33c0b61379d6400be916fdc64",
+      "git_bytes": 5776,
+      "raw_sha256": "cebfecb779384d240d133b121c600e8e647750bd771904ce08654a547c3a74c4",
+      "raw_bytes": 5959
+    }
+  ],
+  "verified_author_evidence": [
+    {
+      "path": "HANDOFF.md",
+      "bytes": 4479,
+      "sha256": "985ff9c16d596005e8c34eca607218af29c3ef0f1283c81adc64567c9672e744"
+    },
+    {
+      "path": "original-wire.ts",
+      "bytes": 24291,
+      "sha256": "5bbf8cd0c35575ca3e5dfb552e60724867bc45e8ef759b7dc31cb12f96cdba8b"
+    },
+    {
+      "path": "original-regressions.log",
+      "bytes": 2938,
+      "sha256": "f5c63a486aada6909d08e1ea3c9778c653dad02ea9d4d9291a3d0f6eb413ce87"
+    },
+    {
+      "path": "focused-original.log",
+      "bytes": 1118,
+      "sha256": "d5ad5724ba12394a7a17e21194c141b0fb23ea9ff9c509723c0ee38a39c48dcf"
+    },
+    {
+      "path": "focused-final.log",
+      "bytes": 1117,
+      "sha256": "39a391620bc697463d63efaa583bbb439f834cfdecf48e35f8d754b9d22e1fd5"
+    },
+    {
+      "path": "consumer-regressions.log",
+      "bytes": 7788,
+      "sha256": "dca518af6d0485f51573977d9d859316a3640db0a9a8501fd9bf7b4547de124e"
+    },
+    {
+      "path": "transport-wire-regressions.log",
+      "bytes": 840,
+      "sha256": "7951bdf99fb341abba06ba8ab1f7556e1db92974602ca2d7ed06916b41322658"
+    },
+    {
+      "path": "typecheck.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "format.log",
+      "bytes": 82,
+      "sha256": "2e9a5521fff3b452b6b91cd6ede847c4a33dc272556c1aa23a13b303bc7e1e39"
+    },
+    {
+      "path": "format-check.log",
+      "bytes": 68,
+      "sha256": "f20510a9da4717c51c4cffee6d0dd88d6c9a723d0a83711d01216f5b48961283"
+    },
+    {
+      "path": "final-format.log",
+      "bytes": 49,
+      "sha256": "61243cc32189903185cb9cf837006b51772312820083d7443f9848082c8e70f1"
+    },
+    {
+      "path": "diff-check.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "copy-fixtures.mjs",
+      "bytes": 1482,
+      "sha256": "dc78e858a736345171ad27f8da5d6150bb7835c215442e0a5f02952cd1b3cb58"
+    },
+    {
+      "path": "fixture-copy-pins.json",
+      "bytes": 3214,
+      "sha256": "8b5dce1d8516b034ac71e180f9e89a100c8dab35629da03336334efec052de9e"
+    },
+    {
+      "path": "commit.log",
+      "bytes": 1935,
+      "sha256": "dddaf7612eebb9035bedc7aa7ba9fa503905eb2bc37768b68970fcd0d393d9a8"
+    },
+    {
+      "path": "candidate.diff.patch",
+      "bytes": 12310,
+      "sha256": "84c0fb29e66270b7b379c6b867bfbcf488d99f626e3cecaeacc504b865efb4f1"
+    },
+    {
+      "path": "pin.mjs",
+      "bytes": 4861,
+      "sha256": "691bec6ac3e0c3632d3442f7120f772d0cfab69f64dc97bd2a494c806ac9350f"
+    }
+  ],
+  "native_runtime": "1b8c3ec7d20fba1dc69f14a3cc2f9b22945cd3f4",
+  "native_exporter": "84701ff7e0118654bc171276b122fc72df8a032b",
+  "native_compiler_input_pins": 96,
+  "native_runtime_unchanged_by_exporter": true,
+  "all_27_native_exports_verified": true,
+  "all_18_small_native_fixture_bytes_exact": true,
+  "native_cases": [
+    {
+      "name": "positive-x",
+      "rows": 87,
+      "outlying_asteroids": 17,
+      "body_pages": 172,
+      "occupied_cells": 132242,
+      "all_87_body_signatures_match": true,
+      "max_abs_position": 1000897.625,
+      "shot_owner_only": false
+    },
+    {
+      "name": "negative-x",
+      "rows": 87,
+      "outlying_asteroids": 16,
+      "body_pages": 172,
+      "occupied_cells": 133014,
+      "all_87_body_signatures_match": true,
+      "max_abs_position": 1000922.3125,
+      "shot_owner_only": false
+    },
+    {
+      "name": "positive-y",
+      "rows": 87,
+      "outlying_asteroids": 18,
+      "body_pages": 172,
+      "occupied_cells": 132706,
+      "all_87_body_signatures_match": true,
+      "max_abs_position": 1000945.9375,
+      "shot_owner_only": false
+    },
+    {
+      "name": "negative-y",
+      "rows": 87,
+      "outlying_asteroids": 17,
+      "body_pages": 172,
+      "occupied_cells": 133015,
+      "all_87_body_signatures_match": true,
+      "max_abs_position": 1000938.8125,
+      "shot_owner_only": false
+    },
+    {
+      "name": "positive-x-positive-y",
+      "rows": 87,
+      "outlying_asteroids": 23,
+      "body_pages": 172,
+      "occupied_cells": 131476,
+      "all_87_body_signatures_match": true,
+      "max_abs_position": 1000960.0625,
+      "shot_owner_only": false
+    },
+    {
+      "name": "negative-x-negative-y",
+      "rows": 87,
+      "outlying_asteroids": 24,
+      "body_pages": 172,
+      "occupied_cells": 133441,
+      "all_87_body_signatures_match": true,
+      "max_abs_position": 1000887.8125,
+      "shot_owner_only": false
+    },
+    {
+      "name": "positive-x-negative-y",
+      "rows": 87,
+      "outlying_asteroids": 24,
+      "body_pages": 174,
+      "occupied_cells": 132961,
+      "all_87_body_signatures_match": true,
+      "max_abs_position": 1000900.3125,
+      "shot_owner_only": false
+    },
+    {
+      "name": "negative-x-positive-y",
+      "rows": 87,
+      "outlying_asteroids": 23,
+      "body_pages": 173,
+      "occupied_cells": 134207,
+      "all_87_body_signatures_match": true,
+      "max_abs_position": 1000955.875,
+      "shot_owner_only": false
+    },
+    {
+      "name": "outward-projectile",
+      "rows": 87,
+      "outlying_asteroids": 17,
+      "body_pages": 172,
+      "occupied_cells": 132242,
+      "all_87_body_signatures_match": true,
+      "max_abs_position": 1000897.625,
+      "shot_owner_only": true
+    }
+  ],
+  "external_native_exports": [
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\positive-x.json",
+      "bytes": 7774729,
+      "sha256": "f942c7c96d6e93dd38196d2d639b51161de171e6d7d9e471917ca0b4ec4ff3ae"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\positive-x.header.json",
+      "bytes": 1664,
+      "sha256": "6be9d5d680a443b0b8bb56b2fafd65ec0df0c15252161f4603b9dad08c22251f"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\positive-x.entities.json",
+      "bytes": 63268,
+      "sha256": "10a04011bc7b778d90b1b9b036736b8f29de29f5a9929a76e105341b251a2e71"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\negative-x.json",
+      "bytes": 7819328,
+      "sha256": "fa81bce44ee49081fd55aeaedb79732832669a5f461ddd19fadda20383f0e8fc"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\negative-x.header.json",
+      "bytes": 1666,
+      "sha256": "ffadfaaf7cc9238460dfdce9ae9ad81f28044f9bbc16ef85bc21889954902f15"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\negative-x.entities.json",
+      "bytes": 63356,
+      "sha256": "8ccfec29044fb71b1444820bbbf0623d9fc7d9425e2cb43fba4e53e6c3e57ce2"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\positive-y.json",
+      "bytes": 7802019,
+      "sha256": "29f835b8ed3d5ad6b13ab4b00c180c0f5436cc93dc8e0b5e9851438acf41fce3"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\positive-y.header.json",
+      "bytes": 1664,
+      "sha256": "fe4e140c077d621bdfef0e6fb13207ca7c0be48e2b457099bd4124072217e80f"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\positive-y.entities.json",
+      "bytes": 63335,
+      "sha256": "926594575533a6c851f7ecf6ec37bb5060c9e805c05f5c0408b6b4177fda5511"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\negative-y.json",
+      "bytes": 7819641,
+      "sha256": "c5d595415c1033556fbe4c008f512421efbd1f7d3491386d7863e6048dc45132"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\negative-y.header.json",
+      "bytes": 1666,
+      "sha256": "98c31768cd535bb801fb8c6b40e727cbad55eed107113c61bd28ce41d9dbf065"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\negative-y.entities.json",
+      "bytes": 63389,
+      "sha256": "3dcb11d2d896cdabf9932a82d2130cad0543595ef068a06bbe2f66cd6feb8e1d"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\positive-x-positive-y.json",
+      "bytes": 7730731,
+      "sha256": "9135598bafff3eb852619f03032f3571f9ee51c73831d08ba9b0139925904173"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\positive-x-positive-y.header.json",
+      "bytes": 1676,
+      "sha256": "120813319bbbf1bda57abd8104392d702bb008e30dbc546a53afd755c22afb01"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\positive-x-positive-y.entities.json",
+      "bytes": 62986,
+      "sha256": "741b888c0740ea1412faef145e6263a2f109f8b50ea70a4f6fba99b4fcf3aedf"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\negative-x-negative-y.json",
+      "bytes": 7843985,
+      "sha256": "4ce6c960ca61760a4136f05ffe6fbbce5f5c1020a3614d4816560419539a531a"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\negative-x-negative-y.header.json",
+      "bytes": 1680,
+      "sha256": "9f8f05a41f4075c15fb1347f218ab15536c249b4d95f56d0931f8af0bc27c42b"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\negative-x-negative-y.entities.json",
+      "bytes": 63116,
+      "sha256": "56a100ca2eddf99729c8f465254a9addc1ff01f769ce2611f610a3cdfc31f228"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\positive-x-negative-y.json",
+      "bytes": 7816490,
+      "sha256": "5f9487949b7f5dacbd4d4b8bb63b23f6e69e76654d00e85b3fb618940fdb2a9b"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\positive-x-negative-y.header.json",
+      "bytes": 1678,
+      "sha256": "9c3017929e67e1e39889307996f31b1172b48c60df1af759cd07c5cbdd4a8972"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\positive-x-negative-y.entities.json",
+      "bytes": 63053,
+      "sha256": "327d420d5c5236fa6047334381e95b1c43e581adfc66a0aade6a5f6fd34bd8be"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\negative-x-positive-y.json",
+      "bytes": 7888412,
+      "sha256": "f899c585c1df1104716a5a1016d703290a01bd53c686e87215861693dd20dc34"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\negative-x-positive-y.header.json",
+      "bytes": 1678,
+      "sha256": "b6e87288a78b67b4745021f27812108b7b39e9ed5947988f893efe6469b7be1f"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\negative-x-positive-y.entities.json",
+      "bytes": 63062,
+      "sha256": "0d56e7c6d86218688706c0cc15d520a01b9365c5c1d886af4fcdbbda0031913e"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\outward-projectile.json",
+      "bytes": 7775193,
+      "sha256": "9ff83b8449b90864482b4929c1c20d1268f093376f5ddc4fc76ceff8e51adcdf"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\outward-projectile.header.json",
+      "bytes": 2086,
+      "sha256": "36147020f48e6e47017498f45f77695b150807659f977dce9125468d5363070a"
+    },
+    {
+      "path": "C:\\Users\\mitch\\.codex\\worktrees\\galaxy-dev-bible\\galaxy-royale\\work\\world-edge-fixtures\\actual-final\\outward-projectile.entities.json",
+      "bytes": 63268,
+      "sha256": "b7feae4f428983c4cdb91cb885b9954f79f72f12c85d439f64f14550ab54c876"
+    }
+  ],
+  "source_delta": "11 wire diff lines: named 1.1M body/projectile position envelope, player body 1M, all velocity 1M; inherited Wake halo/lifetime/page rules unchanged",
+  "recorded_final_node_passes": 81,
+  "recorded_original_node_passes": 1,
+  "recorded_original_node_failures": 2,
+  "limits": [
+    "No merged 1b8+111 native package in this author branch",
+    "Node replay of native DTOs does not execute native Replica again",
+    "Adapter test uses declared unit replies and stops before body/complete commit",
+    "JS validates raw numbers; native validates decoded f32, with intentionally stricter JS next-double rejection",
+    "No actual currentWASM, renderer, browser/RTC, eight-client, TURN or whole-world topology/performance gate",
+    "Native fixtures are configured one-tick unfiltered seeds, not naturally earned owned loadouts; owned projectile is ShotOwner-only"
+  ]
+}

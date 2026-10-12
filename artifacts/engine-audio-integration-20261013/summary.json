@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "head": "e0f53b970263db88e2f4a61dfe21ac37e019de0f",
+  "branch": "codex/testing",
+  "sourceHash": "55b59d2045c1c49a0fbf135a18b65920bde13a5413c16ec53d4be352218d74c1",
+  "packageHash": "5906b09785a6ca54ee5bec92a627974d81ae3c6616dde0da67ec979bd336c309",
+  "builtAt": "2026-10-12T21:01:59.840Z",
+  "nativePassed": 937,
+  "nativeIgnored": 20,
+  "focusedBrowserPassed": 52,
+  "edgeWirePassed": 7,
+  "audioPassed": 79,
+  "scope": "Merged native world bounds, immutable authoritative Wake pages, strict browser transport and title instrument candidate. Actual new dual-WASM compilation and PWA build.",
+  "limits": "Live Wake RTC presentation, eight players, TURN, physical devices and realtime performance remain pending. Ignored export fixtures are not passing tests."
+}
