@@ -1,0 +1,258 @@
+{
+  "nativeRuntimeCommit": "1b8c3ec7d20fba1dc69f14a3cc2f9b22945cd3f4",
+  "exporterCommit": "84701ff7e0118654bc171276b122fc72df8a032b",
+  "exporterPath": "crates/game_core/src/co_op_world_edge_tests.rs",
+  "scope": "Actual configured native capture+complete native Replica commit; projectileownershiponly, noownedloadout/browser/RTC/currentWASM claim",
+  "serializer": "actual native capture DTOs -> serde_json::Value -> pretty UTF8 LF + newline; raw f32 values unchanged",
+  "fixtureSetup": {
+    "profiles": "existing Profile seed812345/default + nativejoin localSeed98767 identityNone",
+    "pilots": 2,
+    "ticks": 1,
+    "unfiltered": true,
+    "naturallyEarned": false,
+    "ownedLoadout": false,
+    "outwardShot": "actual guest input fire/aim atlegalpositive-Xedge; actual ShotOwner epoch"
+  },
+  "cases": [
+    {
+      "name": "positive-x",
+      "rows": 87,
+      "outsideAsteroids": 17,
+      "bodyPages": 172,
+      "occupiedCells": 132242,
+      "storageCells": 352768,
+      "maxAbsPosition": 1000897.625,
+      "shotsBeyondPilotDomain": [],
+      "ownedLoadout": false,
+      "completeNativeCommitObserved": true
+    },
+    {
+      "name": "negative-x",
+      "rows": 87,
+      "outsideAsteroids": 16,
+      "bodyPages": 172,
+      "occupiedCells": 133014,
+      "storageCells": 352768,
+      "maxAbsPosition": 1000922.3125,
+      "shotsBeyondPilotDomain": [],
+      "ownedLoadout": false,
+      "completeNativeCommitObserved": true
+    },
+    {
+      "name": "positive-y",
+      "rows": 87,
+      "outsideAsteroids": 18,
+      "bodyPages": 172,
+      "occupiedCells": 132706,
+      "storageCells": 352768,
+      "maxAbsPosition": 1000945.9375,
+      "shotsBeyondPilotDomain": [],
+      "ownedLoadout": false,
+      "completeNativeCommitObserved": true
+    },
+    {
+      "name": "negative-y",
+      "rows": 87,
+      "outsideAsteroids": 17,
+      "bodyPages": 172,
+      "occupiedCells": 133015,
+      "storageCells": 352768,
+      "maxAbsPosition": 1000938.8125,
+      "shotsBeyondPilotDomain": [],
+      "ownedLoadout": false,
+      "completeNativeCommitObserved": true
+    },
+    {
+      "name": "positive-x-positive-y",
+      "rows": 87,
+      "outsideAsteroids": 23,
+      "bodyPages": 172,
+      "occupiedCells": 131476,
+      "storageCells": 352768,
+      "maxAbsPosition": 1000960.0625,
+      "shotsBeyondPilotDomain": [],
+      "ownedLoadout": false,
+      "completeNativeCommitObserved": true
+    },
+    {
+      "name": "negative-x-negative-y",
+      "rows": 87,
+      "outsideAsteroids": 24,
+      "bodyPages": 172,
+      "occupiedCells": 133441,
+      "storageCells": 352768,
+      "maxAbsPosition": 1000887.8125,
+      "shotsBeyondPilotDomain": [],
+      "ownedLoadout": false,
+      "completeNativeCommitObserved": true
+    },
+    {
+      "name": "positive-x-negative-y",
+      "rows": 87,
+      "outsideAsteroids": 24,
+      "bodyPages": 174,
+      "occupiedCells": 132961,
+      "storageCells": 352768,
+      "maxAbsPosition": 1000900.3125,
+      "shotsBeyondPilotDomain": [],
+      "ownedLoadout": false,
+      "completeNativeCommitObserved": true
+    },
+    {
+      "name": "negative-x-positive-y",
+      "rows": 87,
+      "outsideAsteroids": 23,
+      "bodyPages": 173,
+      "occupiedCells": 134207,
+      "storageCells": 352768,
+      "maxAbsPosition": 1000955.875,
+      "shotsBeyondPilotDomain": [],
+      "ownedLoadout": false,
+      "completeNativeCommitObserved": true
+    },
+    {
+      "name": "outward-projectile",
+      "rows": 87,
+      "outsideAsteroids": 17,
+      "bodyPages": 172,
+      "occupiedCells": 132242,
+      "storageCells": 352768,
+      "maxAbsPosition": 1000897.625,
+      "shotsBeyondPilotDomain": [
+        {
+          "damage": 12,
+          "id": "0000000100000002",
+          "life": 1.4833333492279053,
+          "owner": "00000000000000000000000000000002",
+          "owner_epoch": 2,
+          "position": [
+            1000026.1875,
+            0
+          ],
+          "previous": [
+            1000019,
+            0
+          ],
+          "remaining_hits": 1,
+          "velocity": [
+            430,
+            0
+          ]
+        }
+      ],
+      "ownedLoadout": false,
+      "completeNativeCommitObserved": true
+    }
+  ],
+  "files": {
+    "negative-x-negative-y.entities.json": {
+      "bytes": 63116,
+      "sha256": "56a100ca2eddf99729c8f465254a9addc1ff01f769ce2611f610a3cdfc31f228"
+    },
+    "negative-x-negative-y.header.json": {
+      "bytes": 1680,
+      "sha256": "9f8f05a41f4075c15fb1347f218ab15536c249b4d95f56d0931f8af0bc27c42b"
+    },
+    "negative-x-negative-y.json": {
+      "bytes": 7843985,
+      "sha256": "4ce6c960ca61760a4136f05ffe6fbbce5f5c1020a3614d4816560419539a531a"
+    },
+    "negative-x-positive-y.entities.json": {
+      "bytes": 63062,
+      "sha256": "0d56e7c6d86218688706c0cc15d520a01b9365c5c1d886af4fcdbbda0031913e"
+    },
+    "negative-x-positive-y.header.json": {
+      "bytes": 1678,
+      "sha256": "b6e87288a78b67b4745021f27812108b7b39e9ed5947988f893efe6469b7be1f"
+    },
+    "negative-x-positive-y.json": {
+      "bytes": 7888412,
+      "sha256": "f899c585c1df1104716a5a1016d703290a01bd53c686e87215861693dd20dc34"
+    },
+    "negative-x.entities.json": {
+      "bytes": 63356,
+      "sha256": "8ccfec29044fb71b1444820bbbf0623d9fc7d9425e2cb43fba4e53e6c3e57ce2"
+    },
+    "negative-x.header.json": {
+      "bytes": 1666,
+      "sha256": "ffadfaaf7cc9238460dfdce9ae9ad81f28044f9bbc16ef85bc21889954902f15"
+    },
+    "negative-x.json": {
+      "bytes": 7819328,
+      "sha256": "fa81bce44ee49081fd55aeaedb79732832669a5f461ddd19fadda20383f0e8fc"
+    },
+    "negative-y.entities.json": {
+      "bytes": 63389,
+      "sha256": "3dcb11d2d896cdabf9932a82d2130cad0543595ef068a06bbe2f66cd6feb8e1d"
+    },
+    "negative-y.header.json": {
+      "bytes": 1666,
+      "sha256": "98c31768cd535bb801fb8c6b40e727cbad55eed107113c61bd28ce41d9dbf065"
+    },
+    "negative-y.json": {
+      "bytes": 7819641,
+      "sha256": "c5d595415c1033556fbe4c008f512421efbd1f7d3491386d7863e6048dc45132"
+    },
+    "outward-projectile.entities.json": {
+      "bytes": 63268,
+      "sha256": "b7feae4f428983c4cdb91cb885b9954f79f72f12c85d439f64f14550ab54c876"
+    },
+    "outward-projectile.header.json": {
+      "bytes": 2086,
+      "sha256": "36147020f48e6e47017498f45f77695b150807659f977dce9125468d5363070a"
+    },
+    "outward-projectile.json": {
+      "bytes": 7775193,
+      "sha256": "9ff83b8449b90864482b4929c1c20d1268f093376f5ddc4fc76ceff8e51adcdf"
+    },
+    "positive-x-negative-y.entities.json": {
+      "bytes": 63053,
+      "sha256": "327d420d5c5236fa6047334381e95b1c43e581adfc66a0aade6a5f6fd34bd8be"
+    },
+    "positive-x-negative-y.header.json": {
+      "bytes": 1678,
+      "sha256": "9c3017929e67e1e39889307996f31b1172b48c60df1af759cd07c5cbdd4a8972"
+    },
+    "positive-x-negative-y.json": {
+      "bytes": 7816490,
+      "sha256": "5f9487949b7f5dacbd4d4b8bb63b23f6e69e76654d00e85b3fb618940fdb2a9b"
+    },
+    "positive-x-positive-y.entities.json": {
+      "bytes": 62986,
+      "sha256": "741b888c0740ea1412faef145e6263a2f109f8b50ea70a4f6fba99b4fcf3aedf"
+    },
+    "positive-x-positive-y.header.json": {
+      "bytes": 1676,
+      "sha256": "120813319bbbf1bda57abd8104392d702bb008e30dbc546a53afd755c22afb01"
+    },
+    "positive-x-positive-y.json": {
+      "bytes": 7730731,
+      "sha256": "9135598bafff3eb852619f03032f3571f9ee51c73831d08ba9b0139925904173"
+    },
+    "positive-x.entities.json": {
+      "bytes": 63268,
+      "sha256": "10a04011bc7b778d90b1b9b036736b8f29de29f5a9929a76e105341b251a2e71"
+    },
+    "positive-x.header.json": {
+      "bytes": 1664,
+      "sha256": "6be9d5d680a443b0b8bb56b2fafd65ec0df0c15252161f4603b9dad08c22251f"
+    },
+    "positive-x.json": {
+      "bytes": 7774729,
+      "sha256": "f942c7c96d6e93dd38196d2d639b51161de171e6d7d9e471917ca0b4ec4ff3ae"
+    },
+    "positive-y.entities.json": {
+      "bytes": 63335,
+      "sha256": "926594575533a6c851f7ecf6ec37bb5060c9e805c05f5c0408b6b4177fda5511"
+    },
+    "positive-y.header.json": {
+      "bytes": 1664,
+      "sha256": "fe4e140c077d621bdfef0e6fb13207ca7c0be48e2b457099bd4124072217e80f"
+    },
+    "positive-y.json": {
+      "bytes": 7802019,
+      "sha256": "29f835b8ed3d5ad6b13ab4b00c180c0f5436cc93dc8e0b5e9851438acf41fce3"
+    }
+  },
+  "compiledSourceCount": 96
+}

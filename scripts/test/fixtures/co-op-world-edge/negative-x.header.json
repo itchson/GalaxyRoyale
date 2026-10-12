@@ -1,0 +1,78 @@
+{
+  "acquisition": 1,
+  "counts": {
+    "body_pages": 172,
+    "entities": 87,
+    "entity_pages": 2,
+    "occupied_cells": 133014,
+    "storage_cells": 352768
+  },
+  "snapshot": {
+    "dropped_notices": 0,
+    "participants": [
+      {
+        "epoch": 1,
+        "heading": -1.5707963705062866,
+        "hull": 100.0,
+        "id": "00000000000000000000000000000001",
+        "identity": null,
+        "last_sequence": null,
+        "local_seed": 812345,
+        "max_hull": 100.0,
+        "max_shield": 30.0,
+        "position": [
+          -66.0,
+          -22.0
+        ],
+        "previous": [
+          -66.0,
+          -22.0
+        ],
+        "previous_heading": -1.5707963705062866,
+        "selected_ship": 0,
+        "shield": 30.0,
+        "slot": 0,
+        "throttle": 0.0,
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "epoch": 2,
+        "heading": 0.0,
+        "hull": 100.0,
+        "id": "00000000000000000000000000000002",
+        "identity": null,
+        "last_sequence": null,
+        "local_seed": 98767,
+        "max_hull": 100.0,
+        "max_shield": 30.0,
+        "position": [
+          -1000000.0,
+          0.0
+        ],
+        "previous": [
+          -1000000.0,
+          0.0
+        ],
+        "previous_heading": 0.0,
+        "selected_ship": 0,
+        "shield": 30.0,
+        "slot": 1,
+        "throttle": 0.0,
+        "velocity": [
+          0.0,
+          0.0
+        ]
+      }
+    ],
+    "progression": false,
+    "projectiles": [],
+    "protocol": "galaxy-coop-1",
+    "revision": 2,
+    "session": "00000000000000000000000000000064",
+    "tick": 1,
+    "world_seed": 812345
+  }
+}

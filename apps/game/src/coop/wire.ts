@@ -6,6 +6,7 @@ export const MAX_FRAME_BYTES = 65_536;
 export const MAX_WAKE_PAGE_BYTES = 32_768;
 const MAX_WAKE_LIFE = Math.fround(3.4);
 const WAKE_POSITION_LIMIT = 1_000_014;
+const WORLD_GEOMETRY_POSITION_LIMIT = 1_100_000;
 export const MAX_BUFFERED_BYTES = 262_144;
 export const LOW_BUFFERED_BYTES = 65_536;
 export type Role = "host" | "guest";
@@ -441,7 +442,10 @@ function page(value: unknown): void {
       )
         fail("invalid_body_signature");
       dimensions(e);
-      for (const key of ["position", "previous", "velocity"]) vector(e[key]);
+      const positionLimit =
+        e.kind === "player" ? 1_000_000 : WORLD_GEOMETRY_POSITION_LIMIT;
+      for (const key of ["position", "previous"]) vector(e[key], positionLimit);
+      vector(e.velocity);
       for (const key of ["heading", "previous_heading"])
         finite(e[key], -1_000_000, 1_000_000);
       finite(e.scale, Number.MIN_VALUE, 100);
@@ -621,8 +625,9 @@ export function snapshot(value: unknown): void {
     )
       fail("invalid_projectile");
     shots.add(p.id);
-    for (const key of ["position", "previous", "velocity"])
-      vector(p[key], 1_100_000);
+    for (const key of ["position", "previous"])
+      vector(p[key], WORLD_GEOMETRY_POSITION_LIMIT);
+    vector(p.velocity);
     finite(p.damage, 0, 100_000);
     finite(p.life, 0, 60);
   }
