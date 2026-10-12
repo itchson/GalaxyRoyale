@@ -1,0 +1,22 @@
+{
+  "source_grid": [
+    40,
+    40
+  ],
+  "occupied": 938,
+  "palette_entries": 64,
+  "changed_color_cells": 76,
+  "preserved_signal_cells": 83,
+  "mask_sha256": "2b559c9e04a8b040ff07344762c10fd92db0b84e841cb8688f22c65e15528f8d",
+  "baseline_indices_sha256": "faee1c6996ee495a635e17b28ca48155bbb5ac45e2f8592181e741baa11a947a",
+  "candidate_indices_sha256": "68dbe29ed4773acc63cd38a163d64dc8322e537856871ff58afb328dfc8fe084",
+  "generation_model": null,
+  "authorship": "Compact shaded lower-pod rims, inset vents and framed warm core; original graded orange armor retained; no generated concept",
+  "text_fingerprint_policy": "UTF-8 text hashes canonicalize CRLF to LF; PNG/indices/mask hashes are exact binary",
+  "pillow": "12.3.0",
+  "source_sha256": "ca6e5aec85d056f85acc6b4b72b12a7f2b7886353004f7977ab2974500ee9d38",
+  "manifest_sha256_lf": "fc9dfa3445b1cf965459948adb7a340ae38f4a9c048544263c23d183565676a0",
+  "pack_sha256_lf": "e0df522052eb3744c8a6928e956e0afbe09fe339b0f1f5aa2611935383523670",
+  "author_script_sha256_lf": "4b74f2b5963b9084b59b76f4bd80832c73af4e1881d6d38957452cfa174a3d5b",
+  "converter_sha256_lf": "dc1673175eadf56042d273e6d816d93eb36ce9517c7dd75e85d39f276bca1e35"
+}
