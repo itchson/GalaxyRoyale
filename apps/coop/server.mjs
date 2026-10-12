@@ -259,6 +259,9 @@ export function makeCoopServer({
           "/v1/sessions",
           "/v1/join",
           "/v1/replace",
+          "/v1/code",
+          "/v1/joining",
+          "/v1/approval",
           "/v1/heartbeat",
           "/v1/leave",
           "/v1/end",
@@ -279,11 +282,16 @@ export function makeCoopServer({
       if (route === "/v1/sessions" || route === "/v1/join")
         store.admitAnonymous(route === "/v1/join" ? "join" : "create", client);
       else if (route === "/v1/replace") store.admitReplacement(token);
+      else if (["/v1/code", "/v1/joining", "/v1/approval"].includes(route))
+        store.admitAdministration(token);
       const payload = await body(req, store.limits.bodyBytes);
       const handlers = {
         "/v1/sessions": () => store.create(payload, client),
         "/v1/join": () => store.join(payload),
         "/v1/replace": () => store.create(payload, client, token),
+        "/v1/code": () => store.rotateCode(token, payload),
+        "/v1/joining": () => store.joining(token, payload),
+        "/v1/approval": () => store.approval(token, payload),
         "/v1/heartbeat": () => store.heartbeat(token, payload),
         "/v1/leave": () => store.leave(token, payload),
         "/v1/end": () => store.end(token, payload),

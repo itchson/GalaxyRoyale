@@ -23,6 +23,7 @@ async function fixture(t, options = {}) {
   server.listen(0, "127.0.0.1");
   await once(server, "listening");
   const base = `http://127.0.0.1:${server.address().port}`;
+  const baselines = new Map();
   t.after(async () => {
     await server.coop.stop();
     assert.equal(server.listening, false);
@@ -65,16 +66,39 @@ async function fixture(t, options = {}) {
     assert.equal(result.status, 201);
     return result.value;
   };
-  const join = async (host) => {
+  const approve = async (host, guest) => {
+    // Process and acknowledge the request before adding negotiation notices.
+    const requests = await events(host.participant);
+    await events(host.participant, requests.value.cursor);
+    baselines.set(host.participant.id, requests.value.cursor);
+    const accepted = await request("/v1/approval", {
+      token: host.participant.token,
+      body: { peer: guest.participant.id, accept: true },
+    });
+    assert.equal(accepted.status, 200);
+    const notice = await events(guest.participant, guest.cursor);
+    assert.deepEqual(
+      notice.value.events.map((e) => e.type),
+      ["join-approved"],
+    );
+    guest.cursor = notice.value.cursor;
+    await events(guest.participant, guest.cursor);
+    baselines.set(guest.participant.id, guest.cursor);
+  };
+  const join = async (host, approved = true) => {
     const result = await request("/v1/join", { body: { invite: host.invite } });
     assert.equal(result.status, 201);
+    if (approved) await approve(host, result.value);
     return result.value;
   };
-  const events = (participant, after = 0, wait = 0, signal) =>
-    request(`/v1/events?after=${after}&wait_ms=${wait}`, {
-      token: participant.token,
-      signal,
-    });
+  const events = (participant, after = null, wait = 0, signal) =>
+    request(
+      `/v1/events?after=${after ?? baselines.get(participant.id) ?? 0}&wait_ms=${wait}`,
+      {
+        token: participant.token,
+        signal,
+      },
+    );
   return {
     store,
     server,
@@ -82,6 +106,7 @@ async function fixture(t, options = {}) {
     request,
     create,
     join,
+    approve,
     events,
     advance: (ms) => {
       time += ms;
@@ -156,61 +181,40 @@ test("HTTP exact Origin, CORS and fixed routes reject untrusted or forged reques
   assert.throws(() => new SessionStore({ limits: { unknown: 1 } }));
 });
 
-test("AES-GCM invite is encrypted hex and rejects byte, version, expiry and restart changes", async (t) => {
+test("short room lookup codes reject malformed, expiry and service restart changes", async (t) => {
   const f = await fixture(t, { limits: { inviteMs: 100 } });
   const host = await f.create();
-  assert.match(host.invite, /^#[0-9A-F]+$/);
-  const encoded = host.invite.slice(1);
-  assert.equal(encoded.length % 2, 0);
-  assert.equal(Buffer.from(encoded, "hex")[0], 1);
-  for (const plaintext of [
-    host.session.id,
-    String(metadata.seed),
-    "session_id",
-    "127.0.0.1",
-    "profile",
-  ])
-    assert.equal(
-      Buffer.from(encoded, "hex").includes(Buffer.from(plaintext)),
-      false,
-    );
+  assert.match(host.invite, /^#[0-9A-F]{4}-[0-9A-F]{4}$/);
+  assert.equal(host.session.room_code, host.invite);
+  assert.equal(host.session.room_revision, 0);
+  assert.equal(host.session.joining_locked, false);
   assert.match(host.participant.token, /^[0-9a-f]{64}$/);
   assert.match(host.participant.id, /^[0-9a-f]{32}$/);
   assert.equal(host.session.seed, metadata.seed);
+  const encoded = host.invite.replace(/[#-]/g, "");
   for (const copied of [
     host.invite,
     encoded,
     " \n" + host.invite.toLowerCase() + "\t",
     " " + encoded.toLowerCase() + " ",
-  ]) {
+  ])
     assert.equal(
       (await f.request("/v1/join", { body: { invite: copied } })).status,
       201,
     );
-  }
   for (const malformed of [
     "##" + encoded,
     "#" + encoded.slice(1),
-    "#" + "A".repeat(1026),
-    " ".repeat(1101),
-  ]) {
+    "#" + "A".repeat(9),
+    " ".repeat(65),
+    "#" + encoded + "!",
+    "\u00a0" + encoded,
+  ])
     error(
       await f.request("/v1/join", { body: { invite: malformed } }),
       401,
       "invalid_invite",
     );
-  }
-  for (const byte of [0, 14, encoded.length / 2 - 1]) {
-    const mutated = Buffer.from(encoded, "hex");
-    mutated[byte] ^= 1;
-    error(
-      await f.request("/v1/join", {
-        body: { invite: mutated.toString("hex") },
-      }),
-      401,
-      "invalid_invite",
-    );
-  }
   const restarted = await fixture(t);
   error(
     await restarted.request("/v1/join", { body: { invite: host.invite } }),
@@ -244,6 +248,7 @@ test("concurrent HTTP admission reserves only host plus seven, including all pen
   assert.equal(new Set([host, ...guests].map((r) => r.participant.id)).size, 8);
   assert.ok(guests.every((r) => r.participant.status === "pending"));
   assert.equal(f.store.diagnostics().credentials, 8);
+  await f.approve(host, guests[0]);
   const ready = await f.request("/v1/heartbeat", {
     token: guests[0].participant.token,
     body: { ready: true },
@@ -252,7 +257,7 @@ test("concurrent HTTP admission reserves only host plus seven, including all pen
   const notices = await f.events(host.participant);
   assert.equal(
     notices.value.events.filter((e) => e.type === "peer-joined").length,
-    7,
+    1,
   );
   assert.equal(
     notices.value.events.filter((e) => e.type === "peer-ready").length,
@@ -264,7 +269,7 @@ test("concurrent HTTP admission reserves only host plus seven, including all pen
 test("reservations and active guests expire separately; heartbeat does not extend pending admission", async (t) => {
   const f = await fixture(t);
   const host = await f.create();
-  const guest = await f.join(host);
+  const guest = await f.join(host, false);
   f.advance(19_999);
   assert.equal(
     (
@@ -286,7 +291,7 @@ test("reservations and active guests expire separately; heartbeat does not exten
   );
   assert.equal(
     (await f.events(guest.participant)).value.events[0].reason,
-    "reservation_timeout",
+    "approval_timeout",
   );
   const active = await f.join(host);
   await f.request("/v1/heartbeat", { token: host.participant.token, body: {} });
@@ -788,6 +793,13 @@ test("pure queued transport is cloned and retained departed credentials stay bou
   });
   const host = store.create(metadata, store.clientKey("test"));
   const guest = store.join({ invite: host.invite });
+  store.approval(host.participant.token, {
+    peer: guest.participant.id,
+    accept: true,
+  });
+  const approved = store.events(guest.participant.token, guest.cursor);
+  guest.cursor = approved.cursor;
+  store.events(guest.participant.token, guest.cursor);
   const payload = { candidate: "original" };
   store.signal(host.participant.token, {
     to: guest.participant.id,

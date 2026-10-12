@@ -1,9 +1,4 @@
-import {
-  createCipheriv,
-  createDecipheriv,
-  createHash,
-  randomBytes,
-} from "node:crypto";
+import { createHash, randomBytes } from "node:crypto";
 import { EventEmitter } from "node:events";
 
 export const PROTOCOL = "galaxy-coop-1";
@@ -14,6 +9,9 @@ export const LIMITS = Object.freeze({
   sessionMs: 3_600_000,
   inviteMs: 600_000,
   pendingMs: 20_000,
+  codesPerSession: 64,
+  codeAttempts: 32,
+  adminPerMinute: 30,
   hostMs: 30_000,
   guestMs: 45_000,
   retentionMs: 60_000,
@@ -32,10 +30,17 @@ export const LIMITS = Object.freeze({
   rateClients: 256,
   pollMs: 20_000,
 });
-const AAD = Buffer.from("galaxy-royale-coop/invite/v1");
 const hexId = (s) => typeof s === "string" && /^[0-9a-f]{32}$/.test(s);
 const hash = (s) => createHash("sha256").update(s).digest("hex");
 const random = (n) => randomBytes(n).toString("hex");
+
+/** Short lookup identifier, not an administration capability. */
+export function normalizeRoomCode(input) {
+  if (typeof input !== "string" || input.length > 64) return null;
+  const compact = input.replace(/[\x09-\x0d\x20-]/g, "").replace(/^#/, "");
+  return /^[0-9a-fA-F]{8}$/.test(compact) ? compact.toUpperCase() : null;
+}
+const displayCode = (code) => `#${code.slice(0, 4)}-${code.slice(4)}`;
 
 export class CoopError extends Error {
   constructor(status, code, message) {
@@ -86,15 +91,21 @@ export class SessionStore extends EventEmitter {
   #key = randomBytes(32);
   #sessions = new Map();
   #credentials = new Map();
+  #codes = new Map();
   #clients = new Map();
   #globalRates = {
     create: { count: 0, until: 0 },
     join: { count: 0, until: 0 },
   };
   #clock;
+  #codeBytes;
   #lastTime = 0;
   #closed = false;
-  constructor({ now = Date.now, limits = {} } = {}) {
+  constructor({
+    now = Date.now,
+    limits = {},
+    codeBytes = () => randomBytes(4),
+  } = {}) {
     super();
     this.limits = Object.freeze({ ...LIMITS, ...limits });
     for (const [name, value] of Object.entries(this.limits)) {
@@ -110,6 +121,9 @@ export class SessionStore extends EventEmitter {
     if (this.limits.queueBytes < 256)
       throw new Error("Reserve at least 256 bytes for a terminal notice.");
     this.#clock = now;
+    if (typeof codeBytes !== "function")
+      throw new Error("Invalid code generator.");
+    this.#codeBytes = codeBytes;
     this.setMaxListeners(this.limits.sessions * this.limits.players + 1);
   }
   #now() {
@@ -162,6 +176,10 @@ export class SessionStore extends EventEmitter {
     // Preserve the original owner's bucket across new sessions/credentials.
     this.admitAnonymous("create", session.owner);
   }
+  admitAdministration(token) {
+    const { session } = this.#host(token);
+    rate(session.adminRate, this.#now(), this.limits.adminPerMinute);
+  }
   #participant(session, role, now) {
     const token = random(32);
     const member = {
@@ -169,6 +187,8 @@ export class SessionStore extends EventEmitter {
       role,
       tokenHash: hash(token),
       status: role === "host" ? "active" : "pending",
+      approved: role === "host",
+      approvedAt: null,
       lastSeen: now,
       joined: now,
       ended: null,
@@ -182,7 +202,7 @@ export class SessionStore extends EventEmitter {
     this.#credentials.set(member.tokenHash, { session, member });
     return { member, token };
   }
-  #sessionView(s) {
+  #sessionView(s, host = false) {
     return {
       id: s.id,
       seed: s.seed,
@@ -191,82 +211,44 @@ export class SessionStore extends EventEmitter {
       expires_at: s.expires,
       state: s.state,
       reason: s.reason,
+      joining_locked: s.joiningLocked,
+      room_revision: s.roomRevision,
+      room_code: host ? displayCode(s.code) : null,
     };
   }
   #participantView(p) {
     return { id: p.id, role: p.role, status: p.status };
   }
-  #invite(s) {
-    const iv = randomBytes(12),
-      cipher = createCipheriv("aes-256-gcm", this.#key, iv);
-    cipher.setAAD(AAD);
-    const content = Buffer.from(
-      JSON.stringify({
-        v: 1,
-        session_id: s.id,
-        invite_id: s.inviteId,
-        expires_at: s.inviteExpires,
-      }),
-    );
-    return (
-      "#" +
-      Buffer.concat([
-        Buffer.from([1]),
-        iv,
-        cipher.update(content),
-        cipher.final(),
-        cipher.getAuthTag(),
-      ])
-        .toString("hex")
-        .toUpperCase()
+  #newCode() {
+    for (let attempt = 0; attempt < this.limits.codeAttempts; attempt++) {
+      const bytes = this.#codeBytes();
+      if (!Buffer.isBuffer(bytes) || bytes.length !== 4)
+        throw new Error("Code generator must return four bytes.");
+      const code = bytes.toString("hex").toUpperCase();
+      if (!this.#codes.has(code)) return code;
+    }
+    fail(
+      503,
+      "code_capacity",
+      "A room code could not be allocated. Try again.",
     );
   }
   #decode(invite) {
-    const encoded =
-      typeof invite === "string" && invite.length <= 1100
-        ? invite.trim().replace(/^#/, "").toLowerCase()
-        : "";
-    if (!/^[0-9a-f]{64,1024}$/.test(encoded) || encoded.length % 2)
+    const code = normalizeRoomCode(invite);
+    const session = code && this.#codes.get(code);
+    if (!session)
+      fail(401, "invalid_invite", "Room code is invalid or unavailable.");
+    if (session.state !== "open")
+      fail(410, "session_ended", "Room is no longer open.");
+    if (session.code !== code)
+      fail(410, "stale_invite", "Room code was replaced.");
+    if (this.#now() >= session.inviteExpires)
       fail(
-        401,
-        "invalid_invite",
-        "Invite is invalid or belongs to a previous service run.",
+        410,
+        "invite_expired",
+        "Room code has expired; ask the host to replace it.",
       );
-    let body;
-    try {
-      const bytes = Buffer.from(encoded, "hex");
-      if (bytes[0] !== 1) throw new Error();
-      const decipher = createDecipheriv(
-        "aes-256-gcm",
-        this.#key,
-        bytes.subarray(1, 13),
-      );
-      decipher.setAAD(AAD);
-      decipher.setAuthTag(bytes.subarray(-16));
-      body = JSON.parse(
-        Buffer.concat([
-          decipher.update(bytes.subarray(13, -16)),
-          decipher.final(),
-        ]).toString(),
-      );
-      object(body, ["v", "session_id", "invite_id", "expires_at"]);
-      if (
-        body.v !== 1 ||
-        !hexId(body.session_id) ||
-        !hexId(body.invite_id) ||
-        !Number.isSafeInteger(body.expires_at)
-      )
-        throw new Error();
-    } catch {
-      fail(
-        401,
-        "invalid_invite",
-        "Invite is invalid or belongs to a previous service run.",
-      );
-    }
-    if (this.#now() >= body.expires_at)
-      fail(410, "invite_expired", "Invite has expired.");
-    return body;
+    return session;
   }
   create(body, client, replacingToken = null) {
     this.#open();
@@ -284,9 +266,13 @@ export class SessionStore extends EventEmitter {
     if (!previous && owned >= this.limits.clientSessions)
       fail(429, "client_sessions", "Host session limit reached.");
     const now = this.#now();
+    const code = this.#newCode(); // Complete admission before allocating any credentials.
     const s = {
       id: random(16),
-      inviteId: random(16),
+      code,
+      codes: new Set([code]),
+      joiningLocked: false,
+      roomRevision: 0,
       owner,
       seed: body.seed,
       protocol: body.protocol,
@@ -300,14 +286,16 @@ export class SessionStore extends EventEmitter {
       seq: 0,
       members: new Map(),
       rate: { count: 0, until: 0 },
+      adminRate: { count: 0, until: 0 },
     };
     const { member, token } = this.#participant(s, "host", now);
     s.host = member.id;
     if (previous) this.#end(previous.session, "replaced", now);
     this.#sessions.set(s.id, s);
+    this.#codes.set(code, s);
     return {
-      session: this.#sessionView(s),
-      invite: this.#invite(s),
+      session: this.#sessionView(s, true),
+      invite: displayCode(s.code),
       participant: { ...this.#participantView(member), token },
       cursor: 0,
     };
@@ -316,10 +304,9 @@ export class SessionStore extends EventEmitter {
     this.#open();
     this.sweep();
     object(body, ["invite"]);
-    const invite = this.#decode(body.invite),
-      s = this.#sessions.get(invite.session_id);
-    if (!s || s.state !== "open" || s.inviteId !== invite.invite_id)
-      fail(410, "session_ended", "Session is no longer open.");
+    const s = this.#decode(body.invite);
+    if (s.joiningLocked)
+      fail(409, "joining_locked", "The host has locked joining.");
     if (
       [...s.members.values()].filter((p) => p.ended === null).length >=
       this.limits.players
@@ -333,13 +320,17 @@ export class SessionStore extends EventEmitter {
       fail(429, "participant_quota", "Recent participant capacity is full.");
     const host = s.members.get(s.host);
     this.#room(host, {
-      type: "peer-joined",
+      type: "join-request",
       peer: { id: "0".repeat(32), role: "guest", status: "pending" },
+      expires_at: this.#now() + this.limits.pendingMs,
+      room_revision: s.roomRevision,
     });
     const { member, token } = this.#participant(s, "guest", this.#now());
     this.#push(s, host, {
-      type: "peer-joined",
+      type: "join-request",
       peer: this.#participantView(member),
+      expires_at: member.joined + this.limits.pendingMs,
+      room_revision: s.roomRevision,
     });
     return {
       session: this.#sessionView(s),
@@ -360,11 +351,134 @@ export class SessionStore extends EventEmitter {
       fail(410, "participant_left", "Participant is no longer admitted.");
     return found;
   }
+  #host(token) {
+    const found = this.#auth(token);
+    if (found.member.role !== "host")
+      fail(403, "host_only", "Only the host can administer this room.");
+    return found;
+  }
+  #pending(s) {
+    return [...s.members.values()].filter(
+      (p) => p.role === "guest" && !p.approved && p.ended === null,
+    );
+  }
+  #cancelRoom(s, pending, reason) {
+    const host = s.members.get(s.host);
+    const events = pending.map((p) => ({
+      type: "peer-left",
+      peer_id: p.id,
+      reason,
+    }));
+    const bytes = events.reduce(
+      (sum, event) => sum + Buffer.byteLength(JSON.stringify(event)) + 32,
+      0,
+    );
+    if (
+      host.queue.length + events.length > this.limits.queueEvents ||
+      host.queueBytes + bytes > this.limits.queueBytes
+    )
+      fail(
+        429,
+        "queue_full",
+        "Host must acknowledge its pending events first.",
+      );
+  }
+  #cancelPending(s, pending, reason, now) {
+    for (const p of pending) {
+      p.status = "left";
+      p.ended = now;
+      this.#push(s, p, { type: "participant-left", reason }, true, false);
+      this.#push(
+        s,
+        s.members.get(s.host),
+        { type: "peer-left", peer_id: p.id, reason },
+        false,
+        false,
+      );
+    }
+  }
+  rotateCode(token, body = {}) {
+    object(body, []);
+    const { session: s } = this.#host(token);
+    if (s.codes.size >= this.limits.codesPerSession)
+      fail(
+        429,
+        "code_quota",
+        "This room has reached its code replacement limit.",
+      );
+    const pending = this.#pending(s);
+    this.#cancelRoom(s, pending, "code_replaced");
+    const code = this.#newCode();
+    const now = this.#now();
+    s.code = code;
+    s.roomRevision++;
+    s.codes.add(code);
+    this.#codes.set(code, s);
+    s.inviteExpires = Math.min(s.expires, now + this.limits.inviteMs);
+    this.#cancelPending(s, pending, "code_replaced", now);
+    this.emit("changed", s.id);
+    return { session: this.#sessionView(s, true), invite: displayCode(code) };
+  }
+  joining(token, body) {
+    object(body, ["locked"]);
+    if (typeof body.locked !== "boolean")
+      fail(400, "invalid_locked", "Locked must be a boolean.");
+    const { session: s } = this.#host(token);
+    const pending = body.locked ? this.#pending(s) : [];
+    this.#cancelRoom(s, pending, "joining_locked");
+    if (s.joiningLocked !== body.locked) s.roomRevision++;
+    s.joiningLocked = body.locked;
+    this.#cancelPending(s, pending, "joining_locked", this.#now());
+    this.emit("changed", s.id);
+    return { session: this.#sessionView(s, true) };
+  }
+  approval(token, body) {
+    object(body, ["peer", "accept"]);
+    if (!hexId(body.peer) || typeof body.accept !== "boolean")
+      fail(
+        400,
+        "invalid_approval",
+        "Use a peer ID and an explicit acceptance boolean.",
+      );
+    const { session: s } = this.#host(token);
+    const p = s.members.get(body.peer);
+    if (!p || p.role !== "guest" || p.approved || p.ended !== null)
+      fail(
+        409,
+        "request_unavailable",
+        "This request is no longer awaiting approval.",
+      );
+    const now = this.#now();
+    if (!body.accept) {
+      this.#cancelRoom(s, [p], "join_declined");
+      this.#cancelPending(s, [p], "join_declined", now);
+    } else {
+      const event = { type: "peer-joined", peer: this.#participantView(p) };
+      this.#room(s.members.get(s.host), event);
+      this.#room(p, { type: "join-approved" });
+      p.approved = true;
+      p.approvedAt = now;
+      this.#push(s, p, { type: "join-approved" }, false, false);
+      this.#push(s, s.members.get(s.host), event, false, false);
+    }
+    // Prepare every queue before polling consumers can start negotiation.
+    this.emit("changed", s.id);
+    return {
+      session: this.#sessionView(s, true),
+      participant: this.#participantView(p),
+    };
+  }
   heartbeat(token, body) {
     object(body, ["ready"]);
     if (body.ready !== undefined && body.ready !== true)
       fail(400, "invalid_ready", "Ready, when supplied, must be true.");
     const { session: s, member: p } = this.#auth(token);
+    if (body.ready && !p.approved)
+      fail(
+        403,
+        "approval_required",
+        "Await the host's approval before becoming ready.",
+      );
     if (body.ready && p.status === "pending") {
       const event = {
         type: "peer-ready",
@@ -377,7 +491,7 @@ export class SessionStore extends EventEmitter {
     p.lastSeen = this.#now();
     return {
       participant: this.#participantView(p),
-      session: this.#sessionView(s),
+      session: this.#sessionView(s, p.role === "host"),
     };
   }
   leave(token, body = {}) {
@@ -386,7 +500,7 @@ export class SessionStore extends EventEmitter {
     if (p.role === "host") this.#end(s, "host_left", this.#now());
     else this.#leave(s, p, "guest_left", this.#now());
     return {
-      session: this.#sessionView(s),
+      session: this.#sessionView(s, p.role === "host"),
       participant: this.#participantView(p),
     };
   }
@@ -396,7 +510,7 @@ export class SessionStore extends EventEmitter {
     if (p.role !== "host")
       fail(403, "host_only", "Only the host can end the session.");
     this.#end(s, "host_end", this.#now());
-    return { session: this.#sessionView(s) };
+    return { session: this.#sessionView(s, true) };
   }
   #room(p, event) {
     const bytes = Buffer.byteLength(JSON.stringify(event)) + 32;
@@ -468,6 +582,12 @@ export class SessionStore extends EventEmitter {
         403,
         "invalid_peer",
         "Signals may only address this session's host or one of its guests.",
+      );
+    if (!p.approved || !target.approved)
+      fail(
+        403,
+        "approval_required",
+        "Both participants must be approved before signaling.",
       );
     if (!["offer", "answer", "ice"].includes(body.kind))
       fail(400, "invalid_signal", "Unsupported signal kind.");
@@ -561,7 +681,7 @@ export class SessionStore extends EventEmitter {
         p.queueBytes -= p.queue.shift().bytes;
     }
     return {
-      session: this.#sessionView(s),
+      session: this.#sessionView(s, p.role === "host"),
       participant: this.#participantView(p),
       events: p.queue
         .filter((e) => e.item.seq > after)
@@ -582,7 +702,7 @@ export class SessionStore extends EventEmitter {
               p.role === "guest" &&
               p.ended === null &&
               ((p.status === "pending" &&
-                now - p.joined >= this.limits.pendingMs) ||
+                now - (p.approvedAt ?? p.joined) >= this.limits.pendingMs) ||
                 (p.status === "active" &&
                   now - p.lastSeen >= this.limits.guestMs))
             )
@@ -590,7 +710,9 @@ export class SessionStore extends EventEmitter {
                 s,
                 p,
                 p.status === "pending"
-                  ? "reservation_timeout"
+                  ? p.approved
+                    ? "reservation_timeout"
+                    : "approval_timeout"
                   : "guest_timeout",
                 now,
               );
@@ -600,6 +722,7 @@ export class SessionStore extends EventEmitter {
         for (const p of s.members.values())
           this.#credentials.delete(p.tokenHash);
         this.#sessions.delete(id);
+        for (const code of s.codes) this.#codes.delete(code);
       } else if (s.state === "open")
         for (const [memberId, p] of s.members) {
           if (p.ended !== null && now - p.ended >= this.limits.retentionMs) {
@@ -624,6 +747,7 @@ export class SessionStore extends EventEmitter {
       sessions: this.#sessions.size,
       credentials: this.#credentials.size,
       rate_clients: this.#clients.size,
+      reserved_codes: this.#codes.size,
     };
   }
 }
