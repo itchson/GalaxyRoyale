@@ -989,7 +989,10 @@ export class AudioEngine {
         pad.harmonicEndBeat = (step + 15) / 4;
         pad.titlePad = { level: this.titleBlend * 0.7, points: [] };
         this.titlePadGate(pad, time + duration(15));
-        chord.forEach((note) =>
+        // Four chord tones, two finite layers each. Spread warm body and a
+        // darker detuned harmonic layer without adding octaves or LFO sources.
+        chord.slice(0, 4).forEach((note, index) => {
+          const pan = [-0.3, 0.24, -0.2, 0.32][index]!;
           this.tone(
             pad,
             time,
@@ -997,10 +1000,24 @@ export class AudioEngine {
             frequency(note + 12),
             duration(15),
             "triangle",
-            0.019,
-            0.15,
-          ),
-        );
+            0.016,
+            0.18,
+            0,
+            pan,
+          );
+          this.titleLayer(
+            pad,
+            time,
+            frequency(note + 12) * 2 ** ((index % 2 ? 4 : -4) / 1200),
+            duration(15),
+            "sawtooth",
+            0.008,
+            0.23,
+            0,
+            -pan,
+            1200,
+          );
+        });
       }
     }
     const voice = this.createVoice("music", time, duration(4), this.titleBlend);
@@ -1015,6 +1032,7 @@ export class AudioEngine {
           pitch,
           duration(note.steps + 1),
           0.05 * note.level,
+          Math.floor(step / 16) % 2 ? -0.12 : 0.12,
         );
       else
         this.chip(voice, time, pitch, duration(note.steps), 0.049 * note.level);
@@ -1033,6 +1051,7 @@ export class AudioEngine {
         0.027,
         0.005,
         duration(1.3) * 0.45,
+        Math.floor(beat / 2) % 2 ? 0.14 : -0.14,
       );
     }
     const bass = SCORE_BASS[beat];
@@ -1044,8 +1063,8 @@ export class AudioEngine {
         frequency(chord[0]! + bass),
         duration(1.4),
         "triangle",
-        0.063,
-        0.006,
+        0.051,
+        0.008,
         duration(1.4) * 0.55,
       );
       this.tone(
@@ -1056,8 +1075,20 @@ export class AudioEngine {
         duration(1.4),
         "sine",
         0.032,
-        0.008,
+        0.01,
         duration(1.4) * 0.55,
+      );
+      this.titleLayer(
+        voice,
+        time,
+        frequency(chord[0]! + bass),
+        duration(1.4),
+        "sawtooth",
+        0.012,
+        0.014,
+        duration(1.4) * 0.55,
+        0,
+        520,
       );
     }
     if (beat % 4 === 0) this.tone(voice, time, 112, 42, 0.13, "sine", 0.068);
@@ -1077,29 +1108,32 @@ export class AudioEngine {
     duration: number,
     level: number,
   ): void {
-    const context = this.context;
-    if (!context) return;
-    const source = context.createOscillator();
-    source.type = "square";
-    source.frequency.setValueAtTime(pitch, time);
-    const filter = context.createBiquadFilter();
-    filter.type = "lowpass";
-    filter.frequency.setValueAtTime(3200, time);
-    filter.frequency.setTargetAtTime(2100, time + 0.045, 0.055);
-    filter.Q.value = 0.5;
-    source.connect(filter);
-    voice.nodes.push(filter);
-    this.attach(
+    // Exactly two filtered pulses and one nominal-pitch body, all inside one
+    // existing voice/gate. Small detunes add width without changing score data.
+    this.titleLayer(
       voice,
-      source,
       time,
+      pitch * 2 ** (3 / 1200),
       duration,
-      level,
-      0.005,
-      filter,
+      "square",
+      level * 0.8,
+      0.009,
       duration * 0.55,
+      -0.28,
+      2400,
     );
-    // Soft fundamental body shares the authored note/gate without another voice.
+    this.titleLayer(
+      voice,
+      time,
+      pitch * 2 ** (-4 / 1200),
+      duration,
+      "square",
+      level * 0.7,
+      0.014,
+      duration * 0.55,
+      0.28,
+      2000,
+    );
     this.tone(
       voice,
       time,
@@ -1108,8 +1142,45 @@ export class AudioEngine {
       duration,
       "triangle",
       level * 0.55,
-      0.008,
+      0.012,
       duration * 0.55,
+    );
+  }
+
+  private titleLayer(
+    voice: Voice,
+    time: number,
+    pitch: number,
+    duration: number,
+    type: OscillatorType,
+    level: number,
+    attack: number,
+    hold: number,
+    pan: number,
+    cutoff: number,
+  ): void {
+    const context = this.context;
+    if (!context || voice.released) return;
+    const source = context.createOscillator();
+    source.type = type;
+    source.frequency.setValueAtTime(pitch, time);
+    const filter = context.createBiquadFilter();
+    filter.type = "lowpass";
+    filter.Q.value = 0.45;
+    filter.frequency.setValueAtTime(cutoff * 1.2, time);
+    filter.frequency.setTargetAtTime(cutoff, time + attack, 0.06);
+    source.connect(filter);
+    voice.nodes.push(filter);
+    this.attach(
+      voice,
+      source,
+      time,
+      duration,
+      level,
+      attack,
+      filter,
+      hold,
+      pan,
     );
   }
 
@@ -1119,6 +1190,7 @@ export class AudioEngine {
     pitch: number,
     duration: number,
     level: number,
+    pan = 0,
   ): void {
     const context = this.context;
     if (!context) return;
@@ -1139,6 +1211,7 @@ export class AudioEngine {
       0.008,
       source,
       duration * 0.55,
+      pan,
     );
   }
 
@@ -1422,6 +1495,7 @@ export class AudioEngine {
     level: number,
     attack = 0.003,
     hold = 0,
+    pan = 0,
   ): void {
     const context = this.context;
     if (!context || voice.released) return;
@@ -1432,7 +1506,17 @@ export class AudioEngine {
       Math.max(20, end),
       time + duration,
     );
-    this.attach(voice, source, time, duration, level, attack, source, hold);
+    this.attach(
+      voice,
+      source,
+      time,
+      duration,
+      level,
+      attack,
+      source,
+      hold,
+      pan,
+    );
   }
 
   private noiseBurst(
@@ -1466,6 +1550,7 @@ export class AudioEngine {
     output: AudioNode = source,
     /** Optional seconds from onset to release; zero preserves existing curves. */
     hold = 0,
+    pan = 0,
   ): void {
     const context = this.context;
     if (!context) return;
@@ -1488,7 +1573,15 @@ export class AudioEngine {
       envelope.gain.exponentialRampToValueAtTime(FLOOR, time + duration);
     }
     output.connect(envelope);
-    envelope.connect(voice.gain);
+    // Title components alone opt into bounded equal-power stereo routing. No
+    // inversion or channel delay: missing panner support keeps a mono sum.
+    if (pan !== 0 && typeof context.createStereoPanner === "function") {
+      const panner = context.createStereoPanner();
+      panner.pan.setValueAtTime(pan, time);
+      envelope.connect(panner);
+      panner.connect(voice.gain);
+      voice.nodes.push(panner);
+    } else envelope.connect(voice.gain);
     voice.nodes.push(source, envelope);
     voice.sources.push(source);
     voice.pending++;

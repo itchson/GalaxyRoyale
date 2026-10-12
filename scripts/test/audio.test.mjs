@@ -122,6 +122,11 @@ class Context {
   createWaveShaper() {
     return new Node(this, "ceiling");
   }
+  createStereoPanner() {
+    const n = new Node(this, "panner");
+    n.pan = new Param();
+    return n;
+  }
   createBuffer(channels, length, sampleRate) {
     assert.equal(channels, 1);
     assert.equal(sampleRate, this.sampleRate);
@@ -226,9 +231,16 @@ function sourceEnvelope(source) {
   while (node.kind !== "gain") node = [...node.connections][0];
   return node.gain;
 }
-async function titleFixture() {
+async function titleFixture(stereo = true) {
   const timers = browser(),
     engine = new AudioEngine();
+  if (!stereo)
+    window.AudioContext = class extends Context {
+      constructor(...args) {
+        super(...args);
+        this.createStereoPanner = undefined;
+      }
+    };
   engine.setTitleScreen(true);
   engine.setLevels(0.75, 0.4, 0.75);
   await engine.unlock();
@@ -1518,7 +1530,9 @@ test("native title mute, interruption and late resume retain one clock and no st
 test("rapid title, chase, release and area changes keep music/effects budgets and finite gain events", async (t) => {
   const { engine, context, timers } = await fixture();
   let maxMusic = 0,
-    maxFuture = 0;
+    maxFuture = 0,
+    maxMusicSources = 0,
+    maxMusicNodes = 0;
   for (let i = 0; i < 1200; i++) {
     if (i % 7 === 0) engine.setTitleScreen(i % 49 < 14);
     if (i % 5 === 0)
@@ -1540,6 +1554,21 @@ test("rapid title, chase, release and area changes keep music/effects budgets an
     const d = engine.diagnostics();
     maxMusic = Math.max(maxMusic, d.voices.music);
     maxFuture = Math.max(maxFuture, d.score.futureVoices);
+    const musicVoices = [...engine.voices].filter(
+      (voice) => voice.lane === "music",
+    );
+    maxMusicSources = Math.max(
+      maxMusicSources,
+      musicVoices.reduce((sum, voice) => sum + voice.sources.length, 0),
+    );
+    maxMusicNodes = Math.max(
+      maxMusicNodes,
+      musicVoices.reduce((sum, voice) => sum + voice.nodes.length, 0),
+    );
+    assert(
+      musicVoices.every((voice) => voice.sources.length <= 9),
+      "compound title backbeats bound lead3 + arp1 + bass3 + kick1 + snare1",
+    );
     assert(
       d.voices.music <= 32 && d.voices.sfx <= 16 && d.score.futureVoices <= 32,
     );
@@ -1567,6 +1596,8 @@ test("rapid title, chase, release and area changes keep music/effects budgets an
       seconds: 30,
       maxMusic,
       maxFuture,
+      maxMusicSources,
+      maxMusicNodes,
       scope: "recorded API calls; no native DSP or audible acceptance",
     }),
   );
@@ -1581,9 +1612,11 @@ test("title chip body and bass hold through the authored gate then release and c
     (v) => v.cue === "music-title" && !v.titlePad && v.start === 0.045,
   );
   const chip = voice.sources.find((s) => s.type === "square");
-  const pitch = chip.frequency.events[0].value;
+  const pitch = chip.frequency.events[0].value / 2 ** (3 / 1200);
   const body = voice.sources.find(
-    (s) => s.type === "triangle" && s.frequency.events[0].value === pitch,
+    (s) =>
+      s.type === "triangle" &&
+      Math.abs(s.frequency.events[0].value - pitch) < 1e-8,
   );
   assert(body, "lead has a soft body on the same authored pitch and voice");
   const chipEnvelope = sourceEnvelope(chip),
@@ -1649,7 +1682,13 @@ test("title pad inner sustain follows the retimed outer bar release when Continu
     newEnd > oldEnd,
     "deceleration extends this actual pad's harmonic gate",
   );
-  assert(inner.every((param) => gainAt(param, (oldEnd + newEnd) / 2) > 0.018));
+  assert(
+    inner.every(
+      (param) =>
+        gainAt(param, (oldEnd + newEnd) / 2) >=
+        Math.max(...param.events.map((event) => event.value)) * 0.99,
+    ),
+  );
   assert(
     pad.sources.every(
       (source) => Math.abs(source.stopAt - (newEnd + 0.025)) < 1e-9,
@@ -1729,5 +1768,147 @@ test("title bubble reaches its destination while the held body remains audible",
   assert(gainAt(envelope, destination.time) > 0.03);
   context.advance(voice.end + 0.1);
   assert(voice.released);
+  engine.dispose();
+});
+
+test("title lead is a finite stereo detuned pulse pair with a nominal warm body and shared gate", async () => {
+  const { engine, context } = await titleFixture();
+  const voice = engine.createVoice("music", 0.3, 0.35, 1);
+  engine.chip(voice, 0.3, 440, 0.35, 0.04);
+  assert.equal(voice.sources.length, 3);
+  const pulses = voice.sources.filter((source) => source.type === "square");
+  const body = voice.sources.find((source) => source.type === "triangle");
+  assert.equal(body.frequency.events[0].value, 440);
+  assert.equal(pulses.length, 2);
+  const cents = pulses.map(
+    (source) => 1200 * Math.log2(source.frequency.events[0].value / 440),
+  );
+  assert(Math.abs(cents[0] - 3) < 1e-8 && Math.abs(cents[1] + 4) < 1e-8);
+  assert(
+    voice.sources.every((source) => Math.abs(source.stopAt - 0.675) < 1e-9),
+  );
+  const panners = voice.nodes.filter((node) => node.kind === "panner");
+  assert.equal(panners.length, 2);
+  assert.deepEqual(
+    panners.map((node) => node.pan.value),
+    [-0.28, 0.28],
+  );
+  assert(panners.every((node) => node.connections.has(voice.gain)));
+  assert(
+    voice.nodes
+      .filter((node) => node.kind === "filter")
+      .every((node) =>
+        node.frequency.events.every((event) => event.value <= 3000),
+      ),
+  );
+  assert.equal(engine.music.gain.value, 0.4);
+  assert.equal(engine.master.gain.value, 0.75);
+  const nodes = [...voice.nodes];
+  context.advance(0.7);
+  assert(voice.released && nodes.every((node) => node.disconnects === 1));
+  engine.dispose();
+});
+
+test("title pad and bass patches bound sources, stay in their register, and own stereo cleanup", async () => {
+  const { engine } = await titleFixture();
+  const pad = [...engine.voices].find((voice) => voice.titlePad);
+  assert.equal(pad.sources.length, 8, "four chord tones, two layers per tone");
+  assert.equal(
+    pad.sources.filter((source) => source.type === "triangle").length,
+    4,
+  );
+  assert.equal(
+    pad.sources.filter((source) => source.type === "sawtooth").length,
+    4,
+  );
+  assert.equal(pad.nodes.filter((node) => node.kind === "panner").length, 8);
+  const padPitch = pad.sources
+    .filter((source) => source.type === "triangle")
+    .map((source) => source.frequency.events[0].value);
+  for (const source of pad.sources.filter(
+    (source) => source.type === "sawtooth",
+  ))
+    assert(
+      padPitch.some(
+        (pitch) =>
+          Math.abs(
+            1200 * Math.log2(source.frequency.events[0].value / pitch),
+          ) <= 4.001,
+      ),
+      "harmonic pad layers keep the authored register",
+    );
+  assert(
+    pad.nodes
+      .filter((node) => node.kind === "panner")
+      .every((node) => Math.abs(node.pan.value) <= 0.32),
+  );
+  const voice = [...engine.voices].find(
+    (voice) =>
+      voice.cue === "music-title" && !voice.titlePad && voice.start === 0.045,
+  );
+  assert(
+    voice.sources.length <= 8,
+    "fixed score onset remains a bounded compound patch",
+  );
+  const root = 440 * 2 ** ((47 - 69) / 12);
+  const bass = voice.sources.filter(
+    (source) => Math.abs(source.frequency.events[0].value - root) < 1e-8,
+  );
+  assert.deepEqual(
+    bass.map((source) => source.type),
+    ["triangle", "sine", "sawtooth"],
+  );
+  for (const source of bass) {
+    let output = [...source.connections][0];
+    while (output.kind !== "gain") output = [...output.connections][0];
+    assert(output.connections.has(voice.gain), "bass body stays centered");
+  }
+  const heldNodes = [...pad.nodes, ...voice.nodes];
+  engine.suspend();
+  assert.equal(engine.voices.size, 0);
+  assert(heldNodes.every((node) => node.disconnects === 1));
+  assert(
+    [...pad.sources, ...voice.sources].every(
+      (source) => source.onended === null,
+    ),
+  );
+  engine.dispose();
+});
+
+test("missing stereo panner support keeps every title layer in a finite mono route", async () => {
+  const { engine, context } = await titleFixture(false);
+  const title = [...engine.voices].filter(
+    (voice) => voice.cue === "music-title",
+  );
+  assert(title.some((voice) => voice.titlePad && voice.sources.length === 8));
+  assert(
+    title.every((voice) => voice.nodes.every((node) => node.kind !== "panner")),
+  );
+  for (const voice of title)
+    for (const source of voice.sources) {
+      let node = [...source.connections][0];
+      while (node !== voice.gain) {
+        assert.equal(
+          node.connections.size,
+          1,
+          "each layer has one mono output path",
+        );
+        node = [...node.connections][0];
+      }
+      assert(source.stopAt <= voice.end + 1e-9);
+    }
+  context.advance(2);
+  assert(title.every((voice) => voice.released));
+  engine.dispose();
+});
+
+test("world, effects and propulsion never opt into title stereo nodes or layered oscillators", async () => {
+  const { engine, context, timers } = await fixture();
+  engine.update(dynamic({ combat: 0.8, hostiles: 3, engines: 2, throttle: 1 }));
+  for (let i = 0; i < 120; i++) stepAudio(context, timers);
+  play(engine, "mote-pulse");
+  assert(context.nodes.every((node) => node.kind !== "panner"));
+  assert.equal(engine.engineVoice.sources.length, 3);
+  assert(sfx(engine).every((voice) => voice.sources.length <= 3));
   engine.dispose();
 });
