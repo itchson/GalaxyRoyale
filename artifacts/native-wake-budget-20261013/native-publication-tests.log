@@ -1,0 +1,17 @@
+    Finished `release` profile [optimized] target(s) in 0.04s
+     Running unittests src\lib.rs (work\coop-wake-native-budget\cargo-target\release\deps\game_core-2b707a8b4a4ebce6.exe)
+
+running 7 tests
+test co_op_publish::tests::coherent_body_and_metadata_survive_motion_damage_and_despawn ... ok
+test co_op_publish::tests::content_signature_covers_same_count_topology_color_and_dimensions ... signature_golden_2x2_indices0_3_rgba01020304=613c9e3ec04953ef
+ok
+test co_op_publish::tests::entity_and_dimension_bounds_fail_before_replacing_cache ... ok
+test co_op_publish::tests::exact_storage_bound_is_admitted_and_overflow_preserves_previous_cache ... ok
+test co_op_publish::tests::membership_end_and_recapture_invalidate_but_invalid_attempts_do_not ... ok
+test co_op_publish::tests::page_boundaries_exact_cells_and_borrowed_native_bodies_agree ... ok
+test co_op_publish::tests::real_eight_pilot_capture_reports_cost_and_retains_solo_profile ... actual8pilot acquisition_us=1561 header_bytes=2998 rows=120 occupied=181047 storage=477184 entity_pages=2 body_pages=233
+actual8pilot warm32_acquisition_p50_us=1359.900 p95_us=1484.600 entity_json_bytes=43434 initial_body_json_bytes=3282949 max_body_page_bytes=18607 CPU_ONLY
+ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 536 filtered out; finished in 0.08s
+

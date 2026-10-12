@@ -1,0 +1,65 @@
+   Compiling proc-macro2 v1.0.107
+   Compiling quote v1.0.47
+   Compiling unicode-ident v1.0.26
+   Compiling serde_core v1.0.229
+   Compiling serde v1.0.229
+   Compiling zmij v1.0.23
+   Compiling serde_json v1.0.151
+   Compiling foldhash v0.2.0
+   Compiling spin v0.12.3
+   Compiling itoa v1.0.18
+   Compiling memchr v2.8.3
+   Compiling hashbrown v0.17.1
+   Compiling hecs v0.11.2
+   Compiling syn v3.0.7
+   Compiling glam v0.30.10
+   Compiling serde_derive v1.0.229
+   Compiling bytemuck_derive v1.12.1
+   Compiling bytemuck v1.25.2
+   Compiling engine_core v0.1.0 (C:\Users\mitch\.codex\worktrees\galaxy-audio-refinement\galaxy-royale\work\coop-wake-native-budget\snapshot\crates\engine_core)
+   Compiling game_core v0.1.0 (C:\Users\mitch\.codex\worktrees\galaxy-audio-refinement\galaxy-royale\work\coop-wake-native-budget\snapshot\crates\game_core)
+error: couldn't read `crates\game_core\src\../../../scripts/test/fixtures/co-op-publication/capture.json`: The system cannot find the path specified. (os error 3)
+   --> crates\game_core\src\co_op_loadout_tests.rs:558:48
+    |
+558 |       let original: Value = serde_json::from_str(include_str!(
+    |  ________________________________________________^
+559 | |         "../../../scripts/test/fixtures/co-op-publication/capture.json"
+560 | |     ))
+    | |_____^
+    |
+help: there is a file with the same name in a different directory
+    |
+559 |         "../../../../../../scripts/test/fixtures/co-op-publication/capture.json"
+    |                   +++++++++
+
+error: couldn't read `crates\game_core\src\../../../scripts/test/fixtures/ship-save-migrations.json`: The system cannot find the path specified. (os error 3)
+   --> crates\game_core\src\ship_progression_tests.rs:499:62
+    |
+499 |       let cases: Vec<serde_json::Value> = serde_json::from_str(include_str!(
+    |  ______________________________________________________________^
+500 | |         "../../../scripts/test/fixtures/ship-save-migrations.json"
+501 | |     ))
+    | |_____^
+    |
+help: there is a file with the same name in a different directory
+    |
+500 |         "../../../../../../scripts/test/fixtures/ship-save-migrations.json"
+    |                   +++++++++
+
+error[E0596]: cannot borrow `pilots` as mutable, as it is not declared as mutable
+   --> crates\game_core\src\co_op_wake_tests.rs:855:9
+    |
+855 |     let pilots = game.world.query::<&Pilot>();
+    |         ^^^^^^ not mutable
+856 |     let samples = pilots.iter().map(|pilot| pilot.wake.len()).sum();
+    |                   ------ cannot borrow as mutable
+857 |     let links = pilots.iter().map(|pilot| pilot.wake.len().saturating_sub(1)).sum();
+    |                 ------ cannot borrow as mutable
+    |
+help: consider changing this to be mutable
+    |
+855 |     let mut pilots = game.world.query::<&Pilot>();
+    |         +++
+
+For more information about this error, try `rustc --explain E0596`.
+error: could not compile `game_core` (lib test) due to 3 previous errors

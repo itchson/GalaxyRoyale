@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 1046,
+  "revision": 1049,
   "name": "Galaxy Royale",
   "phase": "Playable solo slice → content and validation",
-  "updatedAt": "2026-10-12T19:50:32.684Z",
+  "updatedAt": "2026-10-12T19:58:02.566Z",
   "tasks": [
     {
       "id": "studio",
@@ -8528,7 +8528,7 @@
       "description": "Implement in isolated branch from the next reviewed Root helper checkpoint. Own only scripts/qa/co-op-transport and its focused tests in that checkout; Root owns integration/listeners/browser. Use actual controller/store operations, private continuity facts and sanitized reports. No service/runtime modification, no fabricated RTC or world evidence. Source plan frozen in work/private-room-negative-plan.",
       "department": "Networking QA tooling",
       "owner": "/root/audio_review",
-      "status": "active",
+      "status": "complete",
       "priority": "high",
       "dependencies": [
         "task-769c0361"
@@ -8544,7 +8544,7 @@
         },
         {
           "text": "Root executes matching actual native two-client negative cases; broader8/TURN remains separate.",
-          "met": false
+          "met": true
         }
       ],
       "evidence": [
@@ -8562,12 +8562,17 @@
           "label": "Integrated source, preserved failures, independent review and actual Root checks",
           "kind": "artifact",
           "path": "artifacts/private-room-negative-integration-20261013/verification.json"
+        },
+        {
+          "label": "Actual6dual-renderer negative cases and preserved failed attempt with disposal",
+          "kind": "artifact",
+          "path": "artifacts/private-room-negative-integration-20261013/live/summary.json"
         }
       ],
       "blocker": "",
-      "revision": 4,
+      "revision": 5,
       "createdAt": "2026-10-12T18:59:18.513Z",
-      "updatedAt": "2026-10-12T19:50:06.864Z"
+      "updatedAt": "2026-10-12T19:58:02.511Z"
     },
     {
       "id": "task-8508cfc5",
@@ -8698,6 +8703,39 @@
       "revision": 2,
       "createdAt": "2026-10-12T19:31:50.630Z",
       "updatedAt": "2026-10-12T19:50:32.684Z"
+    },
+    {
+      "id": "task-b9daed25",
+      "title": "Avoid remote sanctuary generation for definite native Wake geometry misses",
+      "description": "Separate delta from frozen111a native trail candidate. Reorder existing exact target geometry rejection before remote sanctuary lookup, retaining protected-hit rejection before all damage/attribution. Preserve measured baseline and compare same configured native fixture; no global FPS claim.",
+      "department": "Native gameplay performance",
+      "owner": "/root/audio_score",
+      "status": "active",
+      "priority": "high",
+      "dependencies": [
+        "task-8508cfc5"
+      ],
+      "acceptanceCriteria": [
+        {
+          "text": "Exact native before/after allocation evidence, protected-hit/miss regressions and unchanged authoritative outcomes.",
+          "met": false
+        },
+        {
+          "text": "Separate frozen reviewed delta with appropriate native/Clippy checks; Root integration and matching build.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual frozen332nativebudget report and original/final logs",
+          "kind": "artifact",
+          "path": "artifacts/native-wake-budget-20261013/REPORT.md"
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-12T19:58:02.566Z",
+      "updatedAt": "2026-10-12T19:58:02.566Z"
     }
   ],
   "reviews": [
@@ -14476,6 +14514,41 @@
         }
       ],
       "knownIssues": "WebGL2 HUD timing is a momentary desktop warm single-entity observation, not performance capture/soak. No diagnostic warp,die,stress,context-loss or imported profile used."
+    },
+    {
+      "id": "build-bc7e3927",
+      "title": "332 native room decline/replacement/lock cases pass on both renderers",
+      "body": "Six visible real room cases passed with complete terminal disposal and retained saved-profile observations. One earlier failed pre-peer lock attempt is preserved; no service limit was weakened. This validates the bounded negative QA flow, not eight-player/Internet or a new compiled game build.",
+      "author": "Root",
+      "source": "Actual normal-bundle two-native-client loopback observations",
+      "createdAt": "2026-10-12T19:58:02.535Z",
+      "revision": "e97c29ca262e83dfc46c3a3d4faa10703fa0f64c",
+      "evidence": [
+        {
+          "label": "Exact stage/report/cleanup pins",
+          "kind": "artifact",
+          "path": "artifacts/private-room-negative-integration-20261013/live/summary.json"
+        }
+      ],
+      "checks": [
+        {
+          "name": "ActualWebGPUDeclineReplaceLock and terminaldisposal",
+          "result": "pass"
+        },
+        {
+          "name": "ActualWebGL2DeclineReplaceLock and terminaldisposal",
+          "result": "pass"
+        },
+        {
+          "name": "Firstpre-peerWebGPUlockattempt retained",
+          "result": "fail"
+        },
+        {
+          "name": "Eightplayers,TURN,failedICE,persistentWakeAV andperformance",
+          "result": "not_run"
+        }
+      ],
+      "knownIssues": "No eight clients, Internet/TURN, failed ICE, exact boxed ECS equality, zero legacy migration writes, new persistent Wake rendering, physical-device or performance acceptance."
     }
   ],
   "feedback": [],
@@ -24939,6 +25012,36 @@
       "author": "Root",
       "source": "Actual isolated integrated-baseline native regression",
       "createdAt": "2026-10-12T19:50:32.684Z"
+    },
+    {
+      "id": "32344e22-b371-44d1-a3d5-c7f69cbb3e7e",
+      "revision": 1047,
+      "kind": "task.update",
+      "itemId": "task-71611b9e",
+      "title": "Bounded actual room decline, code replacement and lock QA controls",
+      "author": "Root",
+      "source": "Actual provenance-pinned visible native WebGPU/WebGL2 negative cases",
+      "createdAt": "2026-10-12T19:58:02.511Z"
+    },
+    {
+      "id": "990f2c19-31dc-4c6d-a4bd-6b271e45efc5",
+      "revision": 1048,
+      "kind": "build",
+      "itemId": "build-bc7e3927",
+      "title": "332 native room decline/replacement/lock cases pass on both renderers",
+      "author": "Root",
+      "source": "Actual normal-bundle two-native-client loopback observations",
+      "createdAt": "2026-10-12T19:58:02.535Z"
+    },
+    {
+      "id": "767265cc-8a98-4162-a2ae-453aa73b1cba",
+      "revision": 1049,
+      "kind": "task.create",
+      "itemId": "task-b9daed25",
+      "title": "Avoid remote sanctuary generation for definite native Wake geometry misses",
+      "author": "Root",
+      "source": "Actual specialist native allocation probe and bounded implementation assignment",
+      "createdAt": "2026-10-12T19:58:02.566Z"
     }
   ],
   "runRecords": [

@@ -3974,7 +3974,7 @@
         {
           "title": "Current stage",
           "paragraphs": [
-            "Actual F4 compiled two-client WebGPU/WebGL2 loopback runs verify pending host acceptance before RTC, native admission/owned complete commits, movement/fire, host departure, distinct-session rejoin, guest leave and unchanged local saved-profile digests with complete cleanup. Eight actual clients, negative-case room flows, forced TURN and Internet remain separate gates.",
+            "Actual F4 compiled two-client WebGPU/WebGL2 loopback runs verify pending host acceptance before RTC, native admission/owned complete commits, movement/fire, host departure, distinct-session rejoin, guest leave and unchanged local saved-profile digests with complete cleanup. Current332 normal binaries with reviewed e97 QA inputs also passed actual two-client Decline, Replace and Lock on both renderers, preserving approved-peer commits and terminal save/peer cleanup. Six successful final cases and one earlier cleanly disposed failure are retained in artifacts/private-room-negative-integration-20261013/live. Eight actual clients, forced TURN, failed ICE, pagehide and Internet remain separate gates.",
             "The new332ddd5 normal build integrates ordinary native Ion Wake and a strict optional wake_evolution equipment boundary. Native tests and six real serializer fixtures pass; persistent host/guest trail publication/rendering and current ability RTC/AV remain under bounded implementation. Profile equality is separate from the rich native ECS/RNG restoration gate."
           ]
         }

@@ -1,0 +1,8 @@
+file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/coop-wake-native-budget/pin-evidence.mjs:13
+if (!verified.allCompiledArchiveFilesVerified || verified.ref !== snapshotRef || verified.actualFilesVerified !== 517) throw Error('Snapshot unverified');
+                                                                                                                             ^
+
+Error: Snapshot unverified
+    at file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/coop-wake-native-budget/pin-evidence.mjs:13:126
+
+Node.js v24.18.0
