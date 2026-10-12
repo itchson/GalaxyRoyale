@@ -1,0 +1,22 @@
+{
+  "source_grid": [
+    32,
+    32
+  ],
+  "occupied": 426,
+  "palette_entries": 64,
+  "changed_color_cells": 118,
+  "preserved_signal_cells": 51,
+  "mask_sha256": "19b6120c36b4c444a9b627949ca2d1645b51145fc12ca3b3965c2cc95e1aad03",
+  "baseline_indices_sha256": "92b2f7b4a5f525b26f07485c3e60dfcab621f0361adffb8e79cd23dba9c338c2",
+  "candidate_indices_sha256": "bf3d198cb12592f17af1db93dd7291d74355aa58abcca991e375631bc5a812b8",
+  "generation_model": null,
+  "authorship": "Original shaded32-grid canopy/recess/rails/beveled plate clusters; source wing gradients retained; no generated concept",
+  "text_fingerprint_policy": "UTF-8 text hashes canonicalize CRLF to LF; PNG/indices/mask hashes are exact binary",
+  "pillow": "12.3.0",
+  "source_sha256": "e7b4c94c6be25deb46ccc01de9ab5a54e4076a65885a19280c972552b9dfe20d",
+  "manifest_sha256_lf": "4462277a26eccd6786c88125e8fa7a76a5b248968dcffd93a94a81e91d44c7ab",
+  "pack_sha256_lf": "70359be58b5282f64e0d6c7253f00d2522f8741e322068b44e32e4667adb88a8",
+  "author_script_sha256_lf": "25ecfff877745ddfc89312375a153781fbd00d17f30a288877bf6e51bcb4beb4",
+  "converter_sha256_lf": "dc1673175eadf56042d273e6d816d93eb36ce9517c7dd75e85d39f276bca1e35"
+}
