@@ -17,6 +17,246 @@ mod nova_fx;
 #[path = "co_op_world_edge_tests.rs"]
 mod world_edge;
 
+#[path = "co_op_chunk_tests.rs"]
+mod streaming;
+
+/// Explicit configured native exploration/budget probe. No browser/RTC claim.
+#[test]
+#[ignore = "explicit eight-pilot unfiltered streaming probe; requires new owned output path"]
+fn eight_dispersed_pilots_unfiltered_streaming_probe() {
+    fn setup(players: u32) -> (Game, [u32; 8]) {
+        let mut profile =
+            crate::identity::create_profile("talo", "hugo", "pan", "0123456789abcdef").unwrap();
+        profile.seed = 812345;
+        let mut game = Game::new(profile);
+        game.begin_co_op(PROTOCOL, id(100), id(1)).unwrap();
+        let mut epochs = [0; 8];
+        epochs[0] = 1;
+        for n in 2..=players {
+            let profile =
+                crate::identity::create_profile("talo", "hugo", "pan", &format!("{n:016x}"))
+                    .unwrap();
+            let a = game
+                .join_co_op(
+                    id(100),
+                    ParticipantSpec {
+                        id: id(n),
+                        local_seed: profile.seed,
+                        identity: profile.identity,
+                    },
+                )
+                .unwrap();
+            epochs[a.slot as usize] = a.epoch;
+        }
+        (game, epochs)
+    }
+    fn place(game: &mut Game, positions: &[Vec2]) {
+        for (motion, pilot) in game.world.query_mut::<(&mut Motion, &mut co_op::Pilot)>() {
+            *motion = Motion::new(positions[pilot.admission.slot as usize], Vec2::ZERO, 0.0);
+            // Keep the configured subjects alive while measuring their active
+            // locations; no stats, health, body, inventory or world rows change.
+            pilot.invulnerability = 10000.0;
+        }
+    }
+    fn neighborhood(game: &Game, point: Vec2) -> (usize, usize) {
+        let center = (
+            (point.x / CHUNK).floor() as i32,
+            (point.y / CHUNK).floor() as i32,
+        );
+        let mut resident = 0;
+        let mut rocks = 0;
+        for dy in -1..=1 {
+            for dx in -1..=1 {
+                if let Some(objects) = game.chunks.get(&(center.0 + dx, center.1 + dy)) {
+                    resident += 1;
+                    rocks += objects
+                        .iter()
+                        .filter(|&&e| {
+                            game.world
+                                .get::<&Actor>(e)
+                                .is_ok_and(|a| a.kind == Kind::Asteroid)
+                        })
+                        .count();
+                }
+            }
+        }
+        (resident, rocks)
+    }
+    fn checkpoint(game: &mut Game, r: &mut Replica, label: &str) -> Value {
+        let bodies = game.world.query::<(&Motion, &PixelBody)>().iter().count();
+        let storage = game
+            .world
+            .query::<&PixelBody>()
+            .iter()
+            .map(|b| b.width * b.height)
+            .sum::<usize>();
+        let asteroids = game
+            .world
+            .query::<&Actor>()
+            .iter()
+            .filter(|a| a.kind == Kind::Asteroid)
+            .count();
+        let enemies = game.world.query::<&Brain>().iter().count();
+        let shots = game.world.query::<&Bullet>().iter().count();
+        let pilots: Vec<_> = game
+            .co_op_snapshot()
+            .unwrap()
+            .participants
+            .into_iter()
+            .map(|p| {
+                let (chunks, rocks) = neighborhood(game, Vec2::from_array(p.position));
+                json!({"id":p.id,"slot":p.slot,"epoch":p.epoch,"position":p.position,
+                "resident_neighborhood_chunks":chunks,"chunk_associated_asteroids":rocks})
+            })
+            .collect();
+        let header: Header = match game.acquire_co_op_publication(id(100)) {
+            Ok(view) => dto(&view),
+            Err(error) => {
+                return json!({"label":label,"tick":game.co_op_snapshot().unwrap().tick,
+                "chunks":game.chunks.len(),"bodies":bodies,"storage_cells":storage,
+                "asteroids":asteroids,"enemies":enemies,"shots":shots,"pilots":pilots,
+                "publication_error":format!("{error:?}"),"native_commit":false});
+            }
+        };
+        let pubview = game
+            .co_op_publication(id(100), header.acquisition, header.snapshot.revision)
+            .unwrap();
+        let entities: Vec<EntityPage> = (0..pubview.counts().entities)
+            .step_by(64)
+            .map(|offset| dto(&pubview.entity_page(offset).unwrap()))
+            .collect();
+        let mut pages = Vec::new();
+        for row in pubview.entities() {
+            for offset in (0..row.occupied).step_by(1024) {
+                pages.push(dto(&pubview.body_page(&row.id, offset).unwrap()));
+            }
+        }
+        let data = Data {
+            header,
+            entities,
+            bodies: pages,
+        };
+        let wake = game
+            .published_co_op_wake_page(
+                id(100),
+                data.header.acquisition,
+                data.header.snapshot.revision,
+            )
+            .unwrap();
+        stage(r, &data, true);
+        if !wake.points.is_empty() {
+            r.wake(data.header.acquisition, wake).unwrap();
+        }
+        commit(r, &data);
+        assert_eq!(r.scene().unwrap().entities.len(), bodies);
+        for row in data.entities.iter().flat_map(|p| &p.entities) {
+            let (actual, body) = r
+                .scene()
+                .unwrap()
+                .entities
+                .iter()
+                .find(|(e, _)| e.id == row.id)
+                .unwrap();
+            assert_eq!(actual.position, row.position);
+            assert_eq!(body_signature(body), row.body_signature);
+        }
+        let wrapped = serde_json::to_vec(&json!({"v":1,"session":data.header.snapshot.session,
+            "seq":1,"kind":"publication","payload":data.header}))
+        .unwrap()
+        .len();
+        let native_request =
+            serde_json::to_vec(&json!({"v":1,"op":"replica_stage","header":data.header}))
+                .unwrap()
+                .len();
+        assert!(wrapped <= 65536 && native_request <= 65536);
+        json!({"label":label,"tick":data.header.snapshot.tick,"chunks":game.chunks.len(),
+            "bodies":bodies,"storage_cells":storage,"asteroids":asteroids,"enemies":enemies,
+            "shots":shots,"pilots":pilots,"counts":data.header.counts,
+            "header_transport_bytes":wrapped,"header_native_request_bytes":native_request,
+            "publication_error":null,"native_commit":true})
+    }
+    let output = std::path::PathBuf::from(std::env::var("GALAXY_EIGHT_PROBE_OUT").unwrap());
+    assert!(
+        output.is_absolute() && !output.exists(),
+        "owned new output required"
+    );
+    let positions = [
+        Vec2::new(4096.0, 4096.0),
+        Vec2::new(-4096.0, 4096.0),
+        Vec2::new(4096.0, -4096.0),
+        Vec2::new(-4096.0, -4096.0),
+        Vec2::new(24576.0, -18432.0),
+        Vec2::new(-28672.0, 17408.0),
+        Vec2::new(45056.0, 38912.0),
+        Vec2::new(998912.0, -998912.0),
+    ];
+    for (i, a) in positions.iter().enumerate() {
+        for b in &positions[i + 1..] {
+            assert!(a.distance(*b) > CHUNK * 8.0);
+        }
+    }
+    let mut controls = Vec::new();
+    for point in positions {
+        let (mut game, _) = setup(1);
+        place(&mut game, &[point]);
+        game.tick_co_op(id(100)).unwrap();
+        let (chunks, rocks) = neighborhood(&game, point);
+        controls.push(json!({"position":point.to_array(),"chunks":chunks,"asteroids":rocks}));
+    }
+    let (mut game, epochs) = setup(8);
+    let baseline = serde_json::to_value(game.profile()).unwrap();
+    place(&mut game, &positions);
+    let mut r = Replica::new(id(100), id(8), epochs[7], 812345).unwrap();
+    let mut rows = Vec::new();
+    for tick in 1..=1200_u32 {
+        if tick % 12 == 1 {
+            let input = InputFrame {
+                joystick: if tick <= 300 {
+                    None
+                } else if tick <= 750 {
+                    Some([1.0, 0.0])
+                } else {
+                    Some([0.0, 1.0])
+                },
+                ..Default::default()
+            };
+            game.submit_host_co_op_input(id(100), tick, input.clone())
+                .unwrap();
+            for n in 2..=8 {
+                game.submit_guest_co_op_input(
+                    id(100),
+                    id(n),
+                    epochs[(n - 1) as usize],
+                    tick,
+                    input.clone(),
+                )
+                .unwrap();
+            }
+        }
+        game.tick_co_op(id(100)).unwrap();
+        if [1, 60, 300, 750, 1200].contains(&tick) {
+            let row = checkpoint(&mut game, &mut r, &format!("tick-{tick}"));
+            println!("eight_stream_probe={row}");
+            rows.push(row);
+        }
+    }
+    assert_eq!(serde_json::to_value(game.profile()).unwrap(), baseline);
+    let passed = rows.iter().all(|r| r["native_commit"] == true);
+    use std::io::Write;
+    let mut file = std::fs::OpenOptions::new()
+        .write(true)
+        .create_new(true)
+        .open(output)
+        .unwrap();
+    file.write_all(serde_json::to_string_pretty(&json!({"scope":"configured actual native eight-pilot exploration; no browser/RTC/TURN/performance claim",
+        "positions":positions.map(|p|p.to_array()),"single_pilot_controls":controls,"checkpoints":rows,
+        "profile_equal":true,"all_native_commits":passed})).unwrap().as_bytes()).unwrap();
+    assert!(
+        passed,
+        "eight dispersed pilots must retain complete unfiltered native publications"
+    );
+}
+
 fn id(n: u32) -> ParticipantId {
     ParticipantId::parse(&format!("{n:032x}")).unwrap()
 }
