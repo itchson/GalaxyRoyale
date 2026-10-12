@@ -38,6 +38,8 @@ type Voice = {
   cue: string | null;
   theme: number | null;
   harmonicEndBeat: number | null;
+  /** Title pads sustain inside; this finite outer envelope owns their bar gate. */
+  titlePad: { level: number; points: { time: number; value: number }[] } | null;
 };
 const FLOOR = 0.0001;
 // Leave room for the score, warning and engine layers before the final compressor.
@@ -131,7 +133,7 @@ export class AudioEngine {
       const now = this.context.currentTime;
       // Already audible notes receive an envelope, never an abrupt disconnect.
       for (const voice of this.voices)
-        if (voice.lane === "music" && voice.start < now)
+        if (voice.lane === "music" && voice.start < now && !voice.titlePad)
           voice.gain.gain.setTargetAtTime(0, now, 0.24);
       this.invalidateFuture(Math.ceil(this.clock.beatAtTime(now) * 4) / 4);
       this.syncScoreMode(now);
@@ -796,10 +798,17 @@ export class AudioEngine {
     for (const voice of this.voices) {
       if (voice.harmonicEndBeat === null || voice.start > now) continue;
       const end = Math.max(now, this.clock.timeAtBeat(voice.harmonicEndBeat));
-      voice.gain.gain.cancelScheduledValues(now + 0.000001);
-      voice.gain.gain.setTargetAtTime(FLOOR, Math.max(now, end - 0.06), 0.008);
-      for (const source of voice.sources) source.stop(end + 0.025);
-      voice.end = end + 0.025;
+      if (voice.titlePad) this.titlePadGate(voice, end, now);
+      else {
+        voice.gain.gain.cancelScheduledValues(now + 0.000001);
+        voice.gain.gain.setTargetAtTime(
+          FLOOR,
+          Math.max(now, end - 0.06),
+          0.008,
+        );
+        for (const source of voice.sources) source.stop(end + 0.025);
+        voice.end = end + 0.025;
+      }
     }
   }
 
@@ -972,12 +981,14 @@ export class AudioEngine {
       const pad = this.createVoice(
         "music",
         time,
-        duration(16),
+        duration(15),
         this.titleBlend * 0.7,
       );
       if (pad) {
         pad.cue = "music-title";
         pad.harmonicEndBeat = (step + 15) / 4;
+        pad.titlePad = { level: this.titleBlend * 0.7, points: [] };
+        this.titlePadGate(pad, time + duration(15));
         chord.forEach((note) =>
           this.tone(
             pad,
@@ -986,8 +997,8 @@ export class AudioEngine {
             frequency(note + 12),
             duration(15),
             "triangle",
-            0.013,
-            0.12,
+            0.019,
+            0.15,
           ),
         );
       }
@@ -998,18 +1009,15 @@ export class AudioEngine {
     for (const note of titleNotesAtStep(this.titleTheme, step)) {
       const pitch = frequency(note.note);
       if (note.voice === "bubble")
-        this.tone(
+        this.bubble(
           voice,
           time,
-          pitch * 0.52,
           pitch,
           duration(note.steps + 1),
-          "sine",
-          0.046 * note.level,
-          0.008,
+          0.05 * note.level,
         );
       else
-        this.chip(voice, time, pitch, duration(note.steps), 0.033 * note.level);
+        this.chip(voice, time, pitch, duration(note.steps), 0.049 * note.level);
     }
     if (beat % 2 === 0) {
       const pitch = frequency(
@@ -1022,12 +1030,13 @@ export class AudioEngine {
         pitch,
         duration(1.3),
         "triangle",
-        0.018,
-        0.004,
+        0.027,
+        0.005,
+        duration(1.3) * 0.45,
       );
     }
     const bass = SCORE_BASS[beat];
-    if (bass !== null && bass !== undefined)
+    if (bass !== null && bass !== undefined) {
       this.tone(
         voice,
         time,
@@ -1035,16 +1044,29 @@ export class AudioEngine {
         frequency(chord[0]! + bass),
         duration(1.4),
         "triangle",
-        0.04,
+        0.063,
         0.006,
+        duration(1.4) * 0.55,
       );
-    if (beat % 4 === 0) this.tone(voice, time, 112, 42, 0.11, "sine", 0.065);
+      this.tone(
+        voice,
+        time,
+        frequency(chord[0]! + bass),
+        frequency(chord[0]! + bass),
+        duration(1.4),
+        "sine",
+        0.032,
+        0.008,
+        duration(1.4) * 0.55,
+      );
+    }
+    if (beat % 4 === 0) this.tone(voice, time, 112, 42, 0.13, "sine", 0.068);
     if (beat === 4 || beat === 12)
-      this.noiseBurst(voice, time, 0.085, 1950, 0.03, "bandpass");
+      this.noiseBurst(voice, time, 0.085, 1950, 0.025, "bandpass");
     if (beat % 2 === 1)
-      this.noiseBurst(voice, time, 0.025, 5100, 0.008, "highpass");
+      this.noiseBurst(voice, time, 0.025, 5100, 0.006, "highpass");
     if (step % 64 === 63)
-      this.noiseBurst(voice, time, 0.034, 3300, 0.016, "bandpass");
+      this.noiseBurst(voice, time, 0.034, 3300, 0.012, "bandpass");
     if (voice.pending === 0) this.release(voice);
   }
 
@@ -1062,11 +1084,118 @@ export class AudioEngine {
     source.frequency.setValueAtTime(pitch, time);
     const filter = context.createBiquadFilter();
     filter.type = "lowpass";
-    filter.frequency.value = 2400;
+    filter.frequency.setValueAtTime(3200, time);
+    filter.frequency.setTargetAtTime(2100, time + 0.045, 0.055);
     filter.Q.value = 0.5;
     source.connect(filter);
     voice.nodes.push(filter);
-    this.attach(voice, source, time, duration, level, 0.005, filter);
+    this.attach(
+      voice,
+      source,
+      time,
+      duration,
+      level,
+      0.005,
+      filter,
+      duration * 0.55,
+    );
+    // Soft fundamental body shares the authored note/gate without another voice.
+    this.tone(
+      voice,
+      time,
+      pitch,
+      pitch,
+      duration,
+      "triangle",
+      level * 0.55,
+      0.008,
+      duration * 0.55,
+    );
+  }
+
+  private bubble(
+    voice: Voice,
+    time: number,
+    pitch: number,
+    duration: number,
+    level: number,
+  ): void {
+    const context = this.context;
+    if (!context) return;
+    const source = context.createOscillator();
+    source.type = "sine";
+    source.frequency.setValueAtTime(pitch * 0.52, time);
+    // Reach the authored destination while the note still has body.
+    source.frequency.exponentialRampToValueAtTime(
+      pitch,
+      time + Math.min(0.09, duration * 0.45),
+    );
+    this.attach(
+      voice,
+      source,
+      time,
+      duration,
+      level,
+      0.008,
+      source,
+      duration * 0.55,
+    );
+  }
+
+  private titlePadGate(voice: Voice, end: number, now?: number): void {
+    const pad = voice.titlePad;
+    if (!pad) return;
+    const gain = voice.gain.gain;
+    if (now === undefined) {
+      pad.points = [
+        { time: voice.start, value: pad.level },
+        { time: end - 0.1, value: pad.level },
+        { time: end, value: FLOOR },
+      ];
+    } else {
+      // Evaluate our own piecewise-linear outer gate before cancellation. This
+      // preserves gain even on browsers without cancelAndHoldAtTime, and keeps
+      // the inner pad alive when deceleration extends the harmonic boundary.
+      let value = pad.points[0]!.value;
+      for (let i = 1; i < pad.points.length; i++) {
+        const previous = pad.points[i - 1]!,
+          point = pad.points[i]!;
+        if (now < point.time) {
+          value =
+            previous.value +
+            (point.value - previous.value) *
+              Math.min(
+                1,
+                Math.max(
+                  0,
+                  (now - previous.time) / (point.time - previous.time),
+                ),
+              );
+          break;
+        }
+        value = point.value;
+      }
+      gain.cancelScheduledValues(now);
+      end = Math.max(now + 0.015, end);
+      pad.points =
+        end - now > 0.13
+          ? [
+              { time: now, value },
+              { time: now + 0.025, value: pad.level },
+              { time: end - 0.1, value: pad.level },
+              { time: end, value: FLOOR },
+            ]
+          : [
+              { time: now, value },
+              { time: end, value: FLOOR },
+            ];
+    }
+    pad.points.forEach((point, index) => {
+      if (index === 0) gain.setValueAtTime(point.value, point.time);
+      else gain.linearRampToValueAtTime(point.value, point.time);
+    });
+    for (const source of voice.sources) source.stop(end + 0.025);
+    voice.end = end + 0.025;
   }
 
   private advanceSound(): void {
@@ -1277,6 +1406,7 @@ export class AudioEngine {
       cue: null,
       theme: null,
       harmonicEndBeat: null,
+      titlePad: null,
     };
     this.voices.add(voice);
     return voice;
@@ -1291,6 +1421,7 @@ export class AudioEngine {
     type: OscillatorType,
     level: number,
     attack = 0.003,
+    hold = 0,
   ): void {
     const context = this.context;
     if (!context || voice.released) return;
@@ -1301,7 +1432,7 @@ export class AudioEngine {
       Math.max(20, end),
       time + duration,
     );
-    this.attach(voice, source, time, duration, level, attack);
+    this.attach(voice, source, time, duration, level, attack, source, hold);
   }
 
   private noiseBurst(
@@ -1333,6 +1464,8 @@ export class AudioEngine {
     level: number,
     attack: number,
     output: AudioNode = source,
+    /** Optional seconds from onset to release; zero preserves existing curves. */
+    hold = 0,
   ): void {
     const context = this.context;
     if (!context) return;
@@ -1342,7 +1475,18 @@ export class AudioEngine {
       Math.max(FLOOR, level),
       time + Math.min(attack, duration * 0.25),
     );
-    envelope.gain.exponentialRampToValueAtTime(FLOOR, time + duration);
+    if (!voice.titlePad) {
+      if (hold > 0)
+        envelope.gain.setValueAtTime(
+          Math.max(FLOOR, level),
+          time +
+            Math.max(
+              Math.min(attack, duration * 0.25),
+              Math.min(hold, duration * 0.9),
+            ),
+        );
+      envelope.gain.exponentialRampToValueAtTime(FLOOR, time + duration);
+    }
     output.connect(envelope);
     envelope.connect(voice.gain);
     voice.nodes.push(source, envelope);

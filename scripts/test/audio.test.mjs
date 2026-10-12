@@ -193,6 +193,48 @@ async function fixture() {
   return { engine, context: engine.context, timers };
 }
 
+// Evaluate recorded set/linear/exponential gain automation, not audio samples.
+function gainAt(param, time) {
+  let events = [];
+  for (const event of param.events) {
+    if (event.kind === "cancel")
+      events = events.filter((e) => e.time < event.time);
+    else events.push(event);
+  }
+  events = events
+    .map((event, order) => ({ ...event, order }))
+    .sort((a, b) => a.time - b.time || a.order - b.order);
+  let previous = events[0];
+  for (const event of events.slice(1)) {
+    if (time < event.time) {
+      const fraction = Math.min(
+        1,
+        Math.max(0, (time - previous.time) / (event.time - previous.time)),
+      );
+      if (event.kind === "linear")
+        return previous.value + (event.value - previous.value) * fraction;
+      if (event.kind === "exponential")
+        return previous.value * (event.value / previous.value) ** fraction;
+      return previous.value;
+    }
+    previous = event;
+  }
+  return previous.value;
+}
+function sourceEnvelope(source) {
+  let node = [...source.connections][0];
+  while (node.kind !== "gain") node = [...node.connections][0];
+  return node.gain;
+}
+async function titleFixture() {
+  const timers = browser(),
+    engine = new AudioEngine();
+  engine.setTitleScreen(true);
+  engine.setLevels(0.75, 0.4, 0.75);
+  await engine.unlock();
+  return { engine, context: engine.context, timers };
+}
+
 test("authored title shares music controls/context and silences gameplay effects", async () => {
   const { engine, context, timers } = await fixture();
   engine.setLevels(0.6, 0.5, 0.7);
@@ -1530,5 +1572,162 @@ test("rapid title, chase, release and area changes keep music/effects budgets an
   );
   engine.suspend();
   assert.equal(engine.voices.size, 0);
+  engine.dispose();
+});
+
+test("title chip body and bass hold through the authored gate then release and clean up", async (t) => {
+  const { engine, context } = await titleFixture();
+  const voice = [...engine.voices].find(
+    (v) => v.cue === "music-title" && !v.titlePad && v.start === 0.045,
+  );
+  const chip = voice.sources.find((s) => s.type === "square");
+  const pitch = chip.frequency.events[0].value;
+  const body = voice.sources.find(
+    (s) => s.type === "triangle" && s.frequency.events[0].value === pitch,
+  );
+  assert(body, "lead has a soft body on the same authored pitch and voice");
+  const chipEnvelope = sourceEnvelope(chip),
+    duration = chip.stopAt - chip.starts[0] - 0.025;
+  const peak = Math.max(...chipEnvelope.events.map((e) => e.value));
+  assert(
+    gainAt(chipEnvelope, chip.starts[0] + duration * 0.5) >= peak * 0.99,
+    "lead is still present at half the note, rather than already decayed to the floor",
+  );
+  assert(gainAt(chipEnvelope, chip.starts[0] + duration * 0.95) < peak * 0.1);
+  assert(
+    Math.abs(gainAt(chipEnvelope, chip.starts[0] + duration) - 0.0001) < 1e-9,
+  );
+  const bassSine = voice.sources.find(
+    (s) =>
+      s.type === "sine" &&
+      s.frequency.events[0].value < 200 &&
+      s.frequency.events.every((e) => e.value === s.frequency.events[0].value),
+  );
+  const bassTriangle = voice.sources.find(
+    (s) =>
+      s.type === "triangle" &&
+      s.frequency.events[0].value === bassSine.frequency.events[0].value,
+  );
+  assert(
+    bassSine && bassTriangle,
+    "round bass shares a fundamental without adding another voice",
+  );
+  const bassEnvelope = sourceEnvelope(bassSine),
+    bassDuration = bassSine.stopAt - bassSine.starts[0] - 0.025;
+  assert(gainAt(bassEnvelope, bassSine.starts[0] + bassDuration * 0.5) > 0.025);
+  assert.equal(engine.music.gain.value, 0.4);
+  assert.equal(engine.master.gain.value, 0.75);
+  t.diagnostic(
+    JSON.stringify({
+      leadHoldAtHalfGate: gainAt(chipEnvelope, chip.starts[0] + duration * 0.5),
+      leadGateSeconds: duration,
+      scope: "gain automation and resource calls, not DSP RMS",
+    }),
+  );
+  const sources = [...voice.sources],
+    nodes = [...voice.nodes];
+  context.advance(voice.end + 0.1);
+  assert(voice.released && sources.every((s) => s.onended === null));
+  assert(nodes.every((n) => n.disconnects === 1));
+  engine.dispose();
+});
+
+test("title pad inner sustain follows the retimed outer bar release when Continue slows the score", async () => {
+  const { engine, context, timers } = await titleFixture();
+  for (let i = 0; i < 12; i++) stepAudio(context, timers);
+  const pad = [...engine.voices].find((v) => v.titlePad),
+    oldEnd = pad.end - 0.025;
+  const inner = pad.sources.map(sourceEnvelope);
+  assert(
+    inner.every((param) => param.events.every((e) => e.kind !== "exponential")),
+    "held pad does not contain a fixed early inner decay",
+  );
+  engine.update({ ...QUIET_STATE, corporation: "pan" });
+  engine.setTitleScreen(false);
+  const newEnd = engine.clock.timeAtBeat(pad.harmonicEndBeat);
+  assert(
+    newEnd > oldEnd,
+    "deceleration extends this actual pad's harmonic gate",
+  );
+  assert(inner.every((param) => gainAt(param, (oldEnd + newEnd) / 2) > 0.018));
+  assert(
+    pad.sources.every(
+      (source) => Math.abs(source.stopAt - (newEnd + 0.025)) < 1e-9,
+    ),
+  );
+  assert(Math.abs(gainAt(pad.gain.gain, newEnd) - 0.0001) < 1e-9);
+  assert.equal(engine.diagnostics().score.targetBpm, 120);
+  const nodes = [...pad.nodes];
+  context.advance(newEnd - context.currentTime + 0.03);
+  assert(pad.released && nodes.every((node) => node.disconnects === 1));
+  engine.dispose();
+});
+
+test("title pad retiming preserves its instantaneous release gain across repeated gate changes", async () => {
+  const { engine, context } = await titleFixture();
+  const pad = [...engine.voices].find((v) => v.titlePad),
+    oldEnd = pad.end - 0.025;
+  const now = oldEnd - 0.04,
+    before = gainAt(pad.gain.gain, now);
+  engine.titlePadGate(pad, oldEnd + 0.4, now);
+  assert(
+    Math.abs(gainAt(pad.gain.gain, now) - before) < 1e-9,
+    "retiming cannot jump to full gain",
+  );
+  const next = now + 0.01,
+    duringRecovery = gainAt(pad.gain.gain, next);
+  engine.titlePadGate(pad, oldEnd + 0.25, next);
+  assert(Math.abs(gainAt(pad.gain.gain, next) - duringRecovery) < 1e-9);
+  engine.titlePadGate(pad, next + 0.007, next);
+  assert(
+    pad.sources.every(
+      (source) => Math.abs(source.stopAt - (next + 0.015 + 0.025)) < 1e-9,
+    ),
+  );
+  assert(Math.abs(gainAt(pad.gain.gain, next + 0.015) - 0.0001) < 1e-9);
+  context.advance(next + 0.1);
+  assert(pad.released);
+  engine.dispose();
+});
+
+test("world and cue envelopes retain the original attack-to-floor curve with no title hold", async () => {
+  const { engine } = await fixture();
+  const world = [...engine.voices].filter((v) => v.lane === "music");
+  const effect = play(engine, "mote-charge");
+  assert(world.length > 0 && effect);
+  for (const voice of [...world, effect]) {
+    assert.equal(voice.titlePad, null);
+    for (const source of voice.sources)
+      assert.deepEqual(
+        sourceEnvelope(source).events.map((event) => event.kind),
+        ["set", "linear", "exponential"],
+      );
+  }
+  engine.dispose();
+});
+
+test("title bubble reaches its destination while the held body remains audible", async () => {
+  const { engine, context } = await titleFixture();
+  const time = engine.clock.timeAtBeat(3.5),
+    length = engine.clock.timeAtBeat(3.75) - time;
+  const previous = new Set(engine.voices);
+  engine.titleStep(time, 14, length, [47, 50, 54, 57]);
+  const voice = [...engine.voices].find((v) => !previous.has(v));
+  const bubble = voice.sources.find(
+    (source) =>
+      source.type === "sine" &&
+      source.frequency.events.length === 2 &&
+      source.frequency.events[0].value < source.frequency.events[1].value,
+  );
+  const destination = bubble.frequency.events[1];
+  const envelope = sourceEnvelope(bubble);
+  assert(
+    destination.time <
+      envelope.events.find((event) => event.kind === "set" && event.time > time)
+        .time,
+  );
+  assert(gainAt(envelope, destination.time) > 0.03);
+  context.advance(voice.end + 0.1);
+  assert(voice.released);
   engine.dispose();
 });
