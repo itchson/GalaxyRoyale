@@ -509,6 +509,89 @@ pub fn starter_body(corporation: Corporation) -> &'static PixelBody {
         Corporation::Hugo => 2,
     }]
 }
+
+/// Healthy starter presentation using the same cached art as world rendering.
+/// The default material is unlit; callers may opt into scene lighting.
+#[derive(Clone, Copy, Debug, Default)]
+pub struct StarterPreviewInput {
+    pub parent: engine_core::AffineTransform,
+    pub material: PixelMaterial,
+    pub time: f32,
+    pub reduced_motion: bool,
+}
+
+/// Remaining caller quotas. Work counts every submitted cell, including cells
+/// made transparent by clipping; transforms count both coarse and fine groups.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub struct StarterPreviewBudget {
+    pub pixels: usize,
+    pub work: usize,
+    pub transforms: usize,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct StarterPreviewStats {
+    pub body_cells: usize,
+    pub detail_cells: usize,
+    pub transforms: usize,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum StarterPreviewReject {
+    InvalidArt,
+    InvalidTransform,
+    Budget,
+}
+
+/// Appends the borrowed healthy hull and its authored half-size detail atomically.
+/// Rejection changes neither frame nor quotas and invokes neither callback.
+/// Both callbacks receive centered 48-grid coordinates; fine colors already
+/// include local signal animation. Their respective half-cell extents are 0.5
+/// and 0.25 in that grid, so callers can clip each layer without a raster atlas.
+/// No profile, gameplay body, ownership or progression is read or changed.
+pub fn append_starter_preview(
+    frame: &mut FrameBuilder,
+    corporation: Corporation,
+    input: StarterPreviewInput,
+    remaining: &mut StarterPreviewBudget,
+    coarse_color: impl FnMut(Vec2, u32) -> u32,
+    fine_color: impl FnMut(Vec2, u32) -> u32,
+) -> Result<StarterPreviewStats, StarterPreviewReject> {
+    let mut budget = crate::raicho_fine::Budget {
+        pixels: remaining.pixels.min(remaining.work),
+        transforms: remaining.transforms,
+    };
+    let stats = crate::raicho_fine::append(
+        frame,
+        starter_body(corporation),
+        corporation,
+        crate::raicho_fine::DrawInput {
+            parent: input.parent,
+            material: input.material,
+            time: input.time,
+            reduced_motion: input.reduced_motion,
+        },
+        &mut budget,
+        coarse_color,
+        fine_color,
+    )
+    .map_err(|reject| match reject {
+        crate::raicho_fine::Reject::InvalidAtlas | crate::raicho_fine::Reject::IncompatibleBody => {
+            StarterPreviewReject::InvalidArt
+        }
+        crate::raicho_fine::Reject::InvalidTransform => StarterPreviewReject::InvalidTransform,
+        crate::raicho_fine::Reject::Budget => StarterPreviewReject::Budget,
+    })?;
+    let cells = stats.body_cells + stats.overlay_cells;
+    remaining.pixels -= cells;
+    remaining.work -= cells;
+    remaining.transforms -= stats.transforms;
+    Ok(StarterPreviewStats {
+        body_cells: stats.body_cells,
+        detail_cells: stats.overlay_cells,
+        transforms: stats.transforms,
+    })
+}
 pub(super) fn player_body(profile: &Profile) -> PixelBody {
     if profile.campaign.selected_ship == 0
         && let Some(identity) = &profile.identity
@@ -768,3 +851,416 @@ impl Game {
 #[cfg(test)]
 #[path = "identity_tests.rs"]
 mod tests;
+
+#[cfg(test)]
+mod starter_preview_tests {
+    use super::*;
+    use engine_core::{AffineTransform, GpuTransform, PixelInstance};
+
+    fn cells(frame: &RenderFrame) -> Vec<(PixelInstance, GpuTransform)> {
+        frame
+            .batches
+            .iter()
+            .flat_map(|batch| {
+                batch
+                    .pixels
+                    .iter()
+                    .map(|pixel| (*pixel, batch.transforms[pixel.transform_slot()]))
+            })
+            .collect()
+    }
+
+    fn draw(
+        corporation: Corporation,
+        input: StarterPreviewInput,
+    ) -> (RenderFrame, StarterPreviewStats) {
+        let mut frame = FrameBuilder::new();
+        let mut budget = StarterPreviewBudget {
+            pixels: 3_000,
+            work: 3_000,
+            transforms: 2,
+        };
+        let stats = append_starter_preview(
+            &mut frame,
+            corporation,
+            input,
+            &mut budget,
+            |_, color| color,
+            |_, color| color,
+        )
+        .unwrap();
+        assert_eq!(budget.pixels, 3_000 - stats.body_cells - stats.detail_cells);
+        assert_eq!(budget.work, budget.pixels);
+        assert_eq!(budget.transforms, 0);
+        (frame.finish(), stats)
+    }
+
+    #[test]
+    fn exact_source_cells_material_masks_and_world_extraction_are_reused() {
+        let atlas: serde_json::Value = serde_json::from_str(include_str!(
+            "../../../assets/pixels/raicho-fine-detail/atlas.json"
+        ))
+        .unwrap();
+        let material: serde_json::Value = serde_json::from_str(include_str!(
+            "../../../assets/pixels/pan-surface/material.json"
+        ))
+        .unwrap();
+        for (corporation, name, body_count, detail_count) in [
+            (Corporation::Pan, "pan_hikari_fine", 662, 1205),
+            (Corporation::Renko, "renko_hibana_fine", 688, 1176),
+            (Corporation::Hugo, "hugo_mamori_fine", 1040, 1740),
+        ] {
+            let input = StarterPreviewInput {
+                reduced_motion: true,
+                ..StarterPreviewInput::default()
+            };
+            let (preview, stats) = draw(corporation, input);
+            assert_eq!(
+                stats,
+                StarterPreviewStats {
+                    body_cells: body_count,
+                    detail_cells: detail_count,
+                    transforms: 2,
+                }
+            );
+            let mut world = FrameBuilder::new();
+            crate::raicho_fine::append(
+                &mut world,
+                starter_body(corporation),
+                corporation,
+                crate::raicho_fine::DrawInput {
+                    parent: input.parent,
+                    material: input.material,
+                    time: input.time,
+                    reduced_motion: input.reduced_motion,
+                },
+                &mut crate::raicho_fine::Budget::default(),
+                |_, color| color,
+                |_, color| color,
+            )
+            .unwrap();
+            let actual = cells(&preview);
+            assert_eq!(actual, cells(world.frame()));
+            assert_eq!(preview.pixel_count, body_count + detail_count);
+            for (j, ((index, local, color), (pixel, transform))) in starter_body(corporation)
+                .cells_indexed()
+                .zip(&actual[..body_count])
+                .enumerate()
+            {
+                assert_eq!(pixel.local, local.to_array());
+                assert_eq!(pixel.color, color);
+                assert_eq!(transform.b[2], 0.0);
+                let expected = if corporation == Corporation::Pan {
+                    assert_eq!(material["coarse"][j][0].as_u64().unwrap() as usize, index);
+                    material["coarse"][j][1].as_u64().unwrap() as u32
+                } else {
+                    0
+                };
+                assert_eq!(pixel.transform & !127, expected);
+            }
+            let sprite = &atlas["sprites"][name];
+            let indices = sprite["indices"].as_array().unwrap();
+            let source: Vec<_> = indices
+                .iter()
+                .enumerate()
+                .filter_map(|(index, color)| {
+                    (color.as_u64().unwrap() != 0).then_some((index, color.as_u64().unwrap()))
+                })
+                .collect();
+            assert_eq!(source.len(), detail_count);
+            for (j, (&(index, color), (pixel, transform))) in
+                source.iter().zip(&actual[body_count..]).enumerate()
+            {
+                assert_eq!(sprite["fine_cells"][j].as_u64().unwrap() as usize, index);
+                assert_eq!(
+                    pixel.local,
+                    [
+                        (index % 96) as f32 + 0.5 - 48.0,
+                        (index / 96) as f32 + 0.5 - 48.0,
+                    ]
+                );
+                assert_eq!(
+                    pixel.color,
+                    atlas["palette"][color as usize].as_u64().unwrap() as u32
+                );
+                assert_eq!(transform.b[2], 0.0);
+                let expected = if corporation == Corporation::Pan {
+                    assert_eq!(material["fine"][j][0].as_u64().unwrap() as usize, index);
+                    material["fine"][j][1].as_u64().unwrap() as u32
+                } else {
+                    0
+                };
+                assert_eq!(pixel.transform & !127, expected);
+            }
+        }
+    }
+
+    #[test]
+    fn fractional_reflected_nested_affines_preserve_all_cell_corners() {
+        let parent = AffineTransform {
+            position: Vec2::new(13.125, -8.375),
+            basis_x: Vec2::new(-0.3125, 0.0625),
+            basis_y: Vec2::new(0.01875, 0.875),
+        }
+        .compose(
+            Transform {
+                position: Vec2::new(0.3, -1.125),
+                rotation: 0.9,
+                scale: Vec2::new(0.43, 1.7),
+            }
+            .affine(),
+        );
+        assert!(parent.basis_x.perp_dot(parent.basis_y) < 0.0);
+        for corporation in [Corporation::Pan, Corporation::Renko, Corporation::Hugo] {
+            let (frame, stats) = draw(
+                corporation,
+                StarterPreviewInput {
+                    parent,
+                    reduced_motion: true,
+                    ..StarterPreviewInput::default()
+                },
+            );
+            for (j, (pixel, transform)) in cells(&frame).into_iter().enumerate() {
+                for corner in [
+                    Vec2::new(-0.5, -0.5),
+                    Vec2::new(-0.5, 0.5),
+                    Vec2::new(0.5, -0.5),
+                    Vec2::new(0.5, 0.5),
+                ] {
+                    let local = Vec2::from_array(pixel.local) + corner;
+                    let scale = if j < stats.body_cells { 1.0 } else { 0.5 };
+                    assert!(
+                        (transform.point(local) - parent.point(local * scale)).length() < 0.00001
+                    );
+                }
+            }
+        }
+    }
+
+    #[test]
+    fn each_quota_rejects_the_whole_pair_before_callbacks_or_frame_writes() {
+        for (pixels, work, transforms) in [
+            (2779, 3000, 2),
+            (3000, 2779, 2),
+            (3000, 3000, 1),
+            (1040, 1040, 2),
+            (usize::MAX, usize::MAX, 0),
+        ] {
+            let mut frame = FrameBuilder::new();
+            frame.push_pixel(Vec2::new(0.125, 0.375), 0.625, 0xffabcdef);
+            let before = format!("{:?}", frame.frame());
+            let mut budget = StarterPreviewBudget {
+                pixels,
+                work,
+                transforms,
+            };
+            let initial = budget;
+            let (mut coarse_calls, mut fine_calls) = (0, 0);
+            assert_eq!(
+                append_starter_preview(
+                    &mut frame,
+                    Corporation::Hugo,
+                    StarterPreviewInput::default(),
+                    &mut budget,
+                    |_, color| {
+                        coarse_calls += 1;
+                        color
+                    },
+                    |_, color| {
+                        fine_calls += 1;
+                        color
+                    },
+                ),
+                Err(StarterPreviewReject::Budget)
+            );
+            assert_eq!((coarse_calls, fine_calls), (0, 0));
+            assert_eq!(budget, initial);
+            assert_eq!(format!("{:?}", frame.frame()), before);
+        }
+    }
+
+    #[test]
+    fn exact_quota_and_alpha_zero_clipping_survive_the_batch_boundary() {
+        let mut frame = FrameBuilder::new();
+        let glyph = PixelBody::from_ascii(&["x"], &[('x', 0xffabcdef)]);
+        for x in 0..127 {
+            frame.push_body(
+                &glyph,
+                Transform {
+                    position: Vec2::new(x as f32, 0.0),
+                    ..Transform::default()
+                },
+            );
+        }
+        let mut budget = StarterPreviewBudget {
+            pixels: 2780,
+            work: 2780,
+            transforms: 2,
+        };
+        let mut coarse = Vec::new();
+        let mut fine = Vec::new();
+        let stats = append_starter_preview(
+            &mut frame,
+            Corporation::Hugo,
+            StarterPreviewInput {
+                reduced_motion: true,
+                ..StarterPreviewInput::default()
+            },
+            &mut budget,
+            |local, color| {
+                coarse.push((local, color));
+                if local.x < 0.0 { 0 } else { 0xffd2fe85 }
+            },
+            |local, color| {
+                fine.push((local, color));
+                if local.x < 0.0 { 0 } else { 0xff88cc44 }
+            },
+        )
+        .unwrap();
+        assert_eq!(budget, StarterPreviewBudget::default());
+        assert_eq!(stats.transforms, 2);
+        assert_eq!(frame.frame().batches.len(), 2);
+        assert_eq!(frame.frame().batches[0].transforms.len(), 128);
+        assert_eq!(frame.frame().batches[1].transforms.len(), 1);
+        assert_eq!(frame.frame().pixel_count, 127 + 2780);
+        let actual = cells(frame.frame());
+        assert!(actual[127..].iter().any(|(p, _)| p.color == 0));
+        assert_eq!(coarse.len(), stats.body_cells);
+        assert_eq!(fine.len(), stats.detail_cells);
+        for ((local, _), (pixel, _)) in coarse.iter().zip(&actual[127..127 + stats.body_cells]) {
+            assert_eq!(local.to_array(), pixel.local);
+            assert_eq!(pixel.color, if local.x < 0.0 { 0 } else { 0xffd2fe85 });
+        }
+        for ((local, _), (pixel, _)) in fine.iter().zip(&actual[127 + stats.body_cells..]) {
+            assert_eq!(*local, Vec2::from_array(pixel.local) * 0.5);
+            assert_eq!(pixel.color, if local.x < 0.0 { 0 } else { 0xff88cc44 });
+        }
+    }
+
+    #[test]
+    fn reduced_motion_freezes_signals_but_animation_keeps_geometry_and_masks() {
+        for corporation in [Corporation::Pan, Corporation::Renko, Corporation::Hugo] {
+            let frozen = |time| StarterPreviewInput {
+                time,
+                reduced_motion: true,
+                ..StarterPreviewInput::default()
+            };
+            let (a, stats) = draw(corporation, frozen(0.0));
+            let (b, _) = draw(corporation, frozen(1.375));
+            assert_eq!(cells(&a), cells(&b));
+            let (animated, _) = draw(
+                corporation,
+                StarterPreviewInput {
+                    reduced_motion: false,
+                    ..frozen(1.375)
+                },
+            );
+            let a = cells(&a);
+            let b = cells(&animated);
+            assert_eq!(a.len(), b.len());
+            assert_eq!(a[..stats.body_cells], b[..stats.body_cells]);
+            assert!(
+                a[stats.body_cells..]
+                    .iter()
+                    .zip(&b[stats.body_cells..])
+                    .any(|(a, b)| a.0.color != b.0.color)
+            );
+            for ((a, ta), (b, tb)) in a.iter().zip(&b) {
+                assert_eq!(a.local, b.local);
+                assert_eq!(a.transform, b.transform);
+                assert_eq!(ta, tb);
+                assert_eq!(a.color >> 24, b.color >> 24);
+            }
+        }
+    }
+
+    #[test]
+    fn invalid_geometry_and_time_leave_existing_content_and_budgets_untouched() {
+        for (parent, time) in [
+            (
+                AffineTransform {
+                    basis_x: Vec2::ZERO,
+                    ..AffineTransform::default()
+                },
+                0.0,
+            ),
+            (
+                AffineTransform {
+                    position: Vec2::splat(f32::NAN),
+                    ..AffineTransform::default()
+                },
+                0.0,
+            ),
+            (
+                AffineTransform {
+                    basis_x: Vec2::splat(f32::INFINITY),
+                    ..AffineTransform::default()
+                },
+                0.0,
+            ),
+            (
+                AffineTransform {
+                    basis_x: Vec2::X * f32::MAX,
+                    basis_y: Vec2::Y * f32::MAX,
+                    ..AffineTransform::default()
+                },
+                0.0,
+            ),
+            (AffineTransform::default(), f32::NAN),
+            (AffineTransform::default(), f32::INFINITY),
+        ] {
+            let mut frame = FrameBuilder::new();
+            frame.push_pixel(Vec2::ZERO, 0.375, 0xff112233);
+            let before = format!("{:?}", frame.frame());
+            let mut budget = StarterPreviewBudget {
+                pixels: 3000,
+                work: 3000,
+                transforms: 2,
+            };
+            let initial = budget;
+            assert_eq!(
+                append_starter_preview(
+                    &mut frame,
+                    Corporation::Pan,
+                    StarterPreviewInput {
+                        parent,
+                        time,
+                        ..StarterPreviewInput::default()
+                    },
+                    &mut budget,
+                    |_, _| panic!("rejected coarse callback"),
+                    |_, _| panic!("rejected fine callback"),
+                ),
+                Err(StarterPreviewReject::InvalidTransform)
+            );
+            assert_eq!(budget, initial);
+            assert_eq!(format!("{:?}", frame.frame()), before);
+        }
+    }
+
+    #[test]
+    fn preview_does_not_change_saved_seed_cargo_equipment_or_borrowed_hull() {
+        let mut profile = create_profile("doro", "renko", "pan", "0123456789abcdef").unwrap();
+        profile.seed = 0xdeadbeef;
+        profile.currency = [7, 11, 13];
+        profile.campaign.cargo_materials = [6, 2, 1, 0, 0];
+        profile.campaign.stored_materials = [15, 3, 5, 0, 0];
+        profile.campaign.cargo_training_materials = [1, 2, 3];
+        profile.campaign.stored_training_materials = [4, 5, 6];
+        let before = serde_json::to_string(&profile).unwrap();
+        let hull = starter_body(Corporation::Renko);
+        let body_before: Vec<_> = hull.cells_indexed().collect();
+        for time in [0.0, 1.0, 1234.5] {
+            draw(
+                Corporation::Renko,
+                StarterPreviewInput {
+                    time,
+                    ..StarterPreviewInput::default()
+                },
+            );
+        }
+        assert_eq!(serde_json::to_string(&profile).unwrap(), before);
+        assert!(std::ptr::eq(hull, starter_body(Corporation::Renko)));
+        assert_eq!(hull.cells_indexed().collect::<Vec<_>>(), body_before);
+    }
+}
