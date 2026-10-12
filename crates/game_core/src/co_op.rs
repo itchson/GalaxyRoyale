@@ -776,10 +776,7 @@ impl Game {
             self.burst(position, 8, rgba(187, 159, 255, 255), 25.0);
         }
         self.refresh_sites();
-        let positions = self.co_op_positions();
-        for position in positions.into_iter().flatten() {
-            self.update_chunks(position);
-        }
+        self.update_co_op_chunks();
         let targets = self.co_op_targets();
         let target = targets
             .into_iter()

@@ -10,6 +10,7 @@ mod biome_enemies;
 mod boss_assets;
 pub mod bosses;
 pub mod campaign;
+mod chunk_streaming;
 pub mod co_op;
 mod co_op_control;
 mod co_op_fx;
@@ -597,6 +598,8 @@ pub struct Game {
     trail_timer: f32,
     events: Vec<GameEvent>,
     chunks: HashMap<(i32, i32), Vec<Entity>>,
+    // Only unfinished co-op candidates; bounded by retained interest chunks.
+    co_op_chunk_progress: HashMap<(i32, i32), u8>,
     wake: Vec<(Vec2, f32)>,
     dock_body: PixelBody,
     viewport: Vec2,
@@ -724,6 +727,7 @@ impl Game {
             trail_timer: 0.0,
             events: Vec::new(),
             chunks: HashMap::new(),
+            co_op_chunk_progress: HashMap::new(),
             wake: Vec::new(),
             dock_body: dock_body(),
             viewport: Vec2::new(800.0, 360.0),
@@ -1507,116 +1511,6 @@ impl Game {
                 previous_hit: None,
             },
         )))
-    }
-
-    fn update_chunks(&mut self, position: Vec2) {
-        let center = (
-            (position.x / CHUNK).floor() as i32,
-            (position.y / CHUNK).floor() as i32,
-        );
-        let participants = self.co_op_positions();
-        let stale: Vec<_> = self
-            .chunks
-            .keys()
-            .copied()
-            .filter(|(x, y)| {
-                if self.co_op.is_some() {
-                    !participants.iter().flatten().any(|p| {
-                        let px = (p.x / CHUNK).floor() as i32;
-                        let py = (p.y / CHUNK).floor() as i32;
-                        (x - px).abs() <= 2 && (y - py).abs() <= 2
-                    })
-                } else {
-                    (x - center.0).abs() > 2 || (y - center.1).abs() > 2
-                }
-            })
-            .collect();
-        for key in stale {
-            if let Some(entities) = self.chunks.remove(&key) {
-                for entity in entities {
-                    let _ = self.world.despawn(entity);
-                }
-            }
-        }
-        for dy in -1..=1 {
-            for dx in -1..=1 {
-                let key = (center.0 + dx, center.1 + dy);
-                if self.chunks.contains_key(&key) {
-                    continue;
-                }
-                let mut spawned = Vec::new();
-                for index in 0..12 {
-                    let hash = hash3(self.profile.seed, key.0, key.1, index);
-                    let p = Vec2::new(
-                        key.0 as f32 * CHUNK + unit(hash) * CHUNK,
-                        key.1 as f32 * CHUNK + unit(mix(hash)) * CHUNK,
-                    );
-                    let radius = p.length();
-                    if radius < SAFE_RADIUS + 100.0
-                        || self
-                            .arena
-                            .as_ref()
-                            .is_some_and(|arena| p.distance(arena.center) < arena.radius + 70.0)
-                        || regions::protected(self.profile.seed, p).is_some()
-                    {
-                        continue;
-                    }
-                    let mut birth = AsteroidBirth::at(self.profile.seed, p);
-                    birth.variety = pixel_assets::asteroid_variety(hash);
-                    if birth.source == AsteroidSource::Outer && index > 2 {
-                        continue;
-                    }
-                    let count = self
-                        .world
-                        .query::<(Entity, &Actor)>()
-                        .iter()
-                        .filter(|(_, a)| a.kind == Kind::Asteroid)
-                        .count();
-                    if count >= 112 {
-                        break;
-                    }
-                    let belt = birth.source != AsteroidSource::Outer;
-                    let size = asteroid_art::size(hash, birth.material_tier, belt);
-                    let scale = size * asteroid_art::CELL_SCALE;
-                    let body = pixel_assets::asteroid_instance(hash, birth.material_tier);
-                    if let Some(orbit) = &mut birth.orbit {
-                        orbit.speed = asteroid_art::speed(hash, birth.material_tier, true);
-                    }
-                    let body_radius = pixel_assets::radius(&body, scale);
-                    if regions::sites_near(self.profile.seed, p)
-                        .iter()
-                        .any(|site| {
-                            p.distance(Vec2::from_array(site.position))
-                                < site.radius + body_radius + 2.0
-                        })
-                    {
-                        continue;
-                    }
-                    let heading = unit(mix(hash ^ 71)) * TAU;
-                    let velocity = if let Some(orbit) = birth.orbit {
-                        orbit.tangent(p) * orbit.speed
-                    } else {
-                        forward(heading) * asteroid_art::speed(hash, birth.material_tier, false)
-                    };
-                    let hp = 20.0 + size * 30.0;
-                    let entity = self.world.spawn((
-                        Motion::new(p, velocity, heading),
-                        Actor {
-                            kind: Kind::Asteroid,
-                            health: hp,
-                            max_health: hp,
-                            radius: body_radius,
-                            scale,
-                            damage: 8.0,
-                        },
-                        body,
-                        birth,
-                    ));
-                    spawned.push(entity);
-                }
-                self.chunks.insert(key, spawned);
-            }
-        }
     }
 
     fn update_spawns(&mut self, position: Vec2, dt: f32) {
