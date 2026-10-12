@@ -1,0 +1,7 @@
+{
+  "observedAt": "2026-10-12T21:55:34.779Z",
+  "correctionSha256": "edf7d3035fbd78e017bafde36b786277fe8d4e2c34aef81613bb01d943e7edd5",
+  "scope": "One historical candidate test executable is no longer retained. Original before/after instrumented probes remain retained; Root939 native and fresh2a dual-WASM evidence are independent. Original manifests and reviews preserved. New hash-named readonly byte snapshots and separate CARGO_TARGET_DIR scopes prevent routine target reuse from overwriting frozen proof.",
+  "tool": "scripts/qa/freeze-native-proof.mjs",
+  "tests": "Three focused tests pass: mutable source reuse preserves old proof, corrupt proof refuses replacement, workspace escape refused. Test inputs are explicitly labelled synthetic bytes, not compiled executables."
+}

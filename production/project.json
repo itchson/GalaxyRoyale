@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 1089,
+  "revision": 1092,
   "name": "Galaxy Royale",
   "phase": "Playable solo slice → content and validation",
-  "updatedAt": "2026-10-12T21:40:53.463Z",
+  "updatedAt": "2026-10-12T21:55:34.801Z",
   "tasks": [
     {
       "id": "studio",
@@ -11598,6 +11598,39 @@
           "label": "Root decision and precise scope",
           "kind": "artifact",
           "path": "artifacts/engine-refinement-20261013/dart-first-review/review.json"
+        }
+      ]
+    },
+    {
+      "id": "review-5bf609c4",
+      "title": "Append-only historical native artifact loss correction",
+      "body": "One historical candidate test executable is no longer retained. Original before/after instrumented probes remain retained; Root939 native and fresh2a dual-WASM evidence are independent. Original manifests and reviews preserved. New hash-named readonly byte snapshots and separate CARGO_TARGET_DIR scopes prevent routine target reuse from overwriting frozen proof. Three focused tests pass: mutable source reuse preserves old proof, corrupt proof refuses replacement, workspace escape refused. Test inputs are explicitly labelled synthetic bytes, not compiled executables.",
+      "author": "Root",
+      "source": "Actual author correction and independent current Root evidence",
+      "createdAt": "2026-10-12T21:55:34.801Z",
+      "participants": [
+        "Root",
+        "audio_review"
+      ],
+      "taskIds": [
+        "task-a9a3c675",
+        "task-ef0b851b"
+      ],
+      "evidence": [
+        {
+          "label": "Exact lost and replacement hashes; bounded recovery outcome",
+          "kind": "artifact",
+          "path": "artifacts/engine-refinement-20261013/proof-correction/PRIOR-NEBULA-ARTIFACT-CORRECTION.md"
+        },
+        {
+          "label": "Correction scope and preservation rule",
+          "kind": "artifact",
+          "path": "artifacts/engine-refinement-20261013/proof-correction/summary.json"
+        },
+        {
+          "label": "Actual current Root native executable byte snapshot",
+          "kind": "artifact",
+          "path": "artifacts/engine-refinement-20261013/proof-correction/root-native-byte-snapshot.json"
         }
       ]
     }
@@ -26027,6 +26060,36 @@
       "author": "Root",
       "source": "Actual native comparison, independent review, integration and matching dual-WASM build",
       "createdAt": "2026-10-12T21:40:53.463Z"
+    },
+    {
+      "id": "310a8f6f-3050-4746-aa82-ef9bbfe5661b",
+      "revision": 1090,
+      "kind": "run",
+      "itemId": "run-5665b05e",
+      "title": "Dart material refinement · running",
+      "author": "/root/audio_review",
+      "source": "Actual assigned Dart author execution; source-only Root visual decision and actual native utility/test results",
+      "createdAt": "2026-10-12T21:44:20.206Z"
+    },
+    {
+      "id": "81a5d3ed-5b7c-49cf-8f04-30f49edf2d65",
+      "revision": 1091,
+      "kind": "run",
+      "itemId": "run-05bf7d79",
+      "title": "Dart material refinement · completed",
+      "author": "/root/audio_review",
+      "source": "Actual frozen Dart author scope, source-only Root visual decision and native/proof-copy execution; no acceptance self-approval",
+      "createdAt": "2026-10-12T21:55:20.580Z"
+    },
+    {
+      "id": "7baa2ac9-d554-42a4-b89b-381184eed583",
+      "revision": 1092,
+      "kind": "review",
+      "itemId": "review-5bf609c4",
+      "title": "Append-only historical native artifact loss correction",
+      "author": "Root",
+      "source": "Actual author correction and independent current Root evidence",
+      "createdAt": "2026-10-12T21:55:34.801Z"
     }
   ],
   "runRecords": [
@@ -35774,6 +35837,50 @@
       "author": "Codex audio_score",
       "source": "actual QA-helper authoring progress after branch setup",
       "createdAt": "2026-10-12T21:36:38.979Z"
+    },
+    {
+      "id": "run-5665b05e",
+      "title": "Dart material refinement · running",
+      "agentId": "/root/audio_review",
+      "agentLabel": "Dart material refinement",
+      "state": "running",
+      "observedAt": "2026-10-12T21:44:20.186Z",
+      "taskIds": [
+        "task-ef0b851b"
+      ],
+      "summary": "Actual bounded Dart authoring and native checks running. Root rejectedfirstflatcandidate and acceptedrefinedsource-art32/24pxcontact.118colorschanged,exact426mask/51signals/otheratlasbytes preserved.6pipeline+1optimizedguard+5nativepreview+6nativeloader checks pass. Priornebula executable overwritten; singleexacthash recovery attempt failed and explicitappend-only correction retained. No normalbuild/GPU/humanacceptance.",
+      "evidence": [
+        {
+          "label": "Actual refined source-art and native mask evidence",
+          "kind": "note",
+          "details": "work/enemy-art-quality-review/dart-native-before-after-final.png and final-native-mask-proof.json; first-candidate rejection/archive preserved. PRIOR-NEBULA-ARTIFACT-CORRECTION.md documents affected executable path and exact old/Dart/retry hashes. Final source freezing and independent review pending."
+        }
+      ],
+      "author": "/root/audio_review",
+      "source": "Actual assigned Dart author execution; source-only Root visual decision and actual native utility/test results",
+      "createdAt": "2026-10-12T21:44:20.206Z"
+    },
+    {
+      "id": "run-05bf7d79",
+      "title": "Dart material refinement · completed",
+      "agentId": "/root/audio_review",
+      "agentLabel": "Dart material refinement",
+      "state": "completed",
+      "observedAt": "2026-10-12T21:55:20.563Z",
+      "taskIds": [
+        "task-ef0b851b"
+      ],
+      "summary": "Author frozen4bbcd7b clean: refined32/24pxRootsource-art candidate,118colorchanges/exact426mask51signals and allotheratlasbytes.7pipeline1optimizedguard5nativeutility6freshscopedloaderchecks passed.5immutablehashnamed nativeproofcopies verified. Firstartrejection/newlinefailure and unavailableold49binary correction preserved. Independentreview/normalbuild/GPU/humanacceptance pending.",
+      "evidence": [
+        {
+          "label": "Frozen single-asset source, native/software and reproducibility evidence",
+          "kind": "note",
+          "details": "AudioRefinement work/enemy-art-quality-review/DART-HANDOFF.md SHAf57e4b21b14864d824e4539b8ad84eb77d200cc98c59b02ff9855cea571afa42;dart-source-pins.json SHA8e2c301b16a6cc3f54d1c28f1d3e8a7cf7ab291fa3193ae78e78eaee095972ca. Final native/software contact, exact every-cell/corner audit, source-mask proof and hash-named copies retained. PRIOR-NEBULA-ARTIFACT-CORRECTION.md explicitly records unrecoverable old physical49 candidate executable; original manifests/logs not edited."
+        }
+      ],
+      "author": "/root/audio_review",
+      "source": "Actual frozen Dart author scope, source-only Root visual decision and native/proof-copy execution; no acceptance self-approval",
+      "createdAt": "2026-10-12T21:55:20.580Z"
     }
   ],
   "phaseDescription": "Desktop-first Rust/WASM solo game and local Studio are implemented. Reviewed occupied-cell art, reproducible conversion, responsive native settings/icons and minimap, strict GitHub integration gates and source-backed Dev Bible are integrated. Natural campaign balance, human listening, owner-private update lifecycle and physical phones remain separate pending gates."
