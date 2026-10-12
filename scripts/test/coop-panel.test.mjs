@@ -284,8 +284,8 @@ test("default unavailable dock state cannot start sessions and exposes semantic 
 test("available session copy discloses current guest and reward limitations", () => {
   const f = fixture();
   f.paint();
-  assert.match(visibleText(f.target), /Native RAICHO stats; primary fire only/);
-  assert.match(visibleText(f.target), /Shared rewards are disabled/);
+  assert.match(visibleText(f.target), /Your local progress is restored on exit/);
+  assert.match(visibleText(f.target), /Shared rewards are currently disabled/);
 });
 
 test("join forwards the full bounded code once, including Enter composition guard", async () => {
