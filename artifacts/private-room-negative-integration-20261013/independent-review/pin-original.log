@@ -1,0 +1,13 @@
+{
+  "scope": "Independent frozen Git/evidence/source consumer review, plus two declared-observation source-function counterexamples; no actual native/browser/RTC/listener execution",
+  "original_candidate": "1b14bff9e6da0a1a249f1bdc42ab49e59e74e52c",
+  "original_raw_evidence_verified": 19,
+  "author_recorded_function_tests": 37,
+  "original_independent_reproduction_pass": 0,
+  "original_independent_reproduction_fail": 2,
+  "remaining_findings": [
+    "post-policy commit floor",
+    "visibility through awaited observations"
+  ],
+  "native_loop_health_qualification_pending": true
+}

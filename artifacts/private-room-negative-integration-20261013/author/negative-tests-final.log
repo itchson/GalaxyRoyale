@@ -1,0 +1,19 @@
+✔ actual negative child commands resolve the one current id, rotate only the host and require an exact boolean lock (15.9113ms)
+✔ actual private room marks require a current committed epoch and retain no raw identities in observations (13.261ms)
+✔ actual initialization wires private ownership counts to successful real bridge calls only (10.4215ms)
+✔ actual pending-only gate refuses RTC/native changes and never sends acceptance (12.8627ms)
+✔ actual terminal and approved continuity gates reject mismatched reasons, ownership changes and old commits (8.2091ms)
+✔ actual room reply budget is finite and late replies cannot qualify after the action deadline (2.0424ms)
+✔ actual replacement round tests approved continuity before guest leave and stale-code join, with one host create (2.2502ms)
+✔ actual failed negative round retains its original failure, runs bounded cleanup and never records completion (2.4041ms)
+✔ actual round refuses insufficient native lifetime or a second completed case before any room mutation (1.7936ms)
+✔ actual lock round cancels pending and locked lookup before unlocked acceptance, then retains the approved guest across both policies (2.073ms)
+✔ actual report allowlist admits bounded named room checks while excluding private command replies (9.7388ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 257.718

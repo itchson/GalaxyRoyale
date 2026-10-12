@@ -1,0 +1,5 @@
+warning: in the working copy of 'scripts/qa/co-op-transport/README.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'scripts/qa/co-op-transport/client.js', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'scripts/qa/co-op-transport/server.mjs', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'scripts/qa/co-op-transport/wasm-review.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'scripts/qa/co-op-transport/wasm-review.js', LF will be replaced by CRLF the next time Git touches it

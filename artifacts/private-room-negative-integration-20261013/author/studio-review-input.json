@@ -1,0 +1,21 @@
+{
+  "source": "Actual committed candidate, clean tracked tree and pinned raw focused command evidence",
+  "author": "/root/audio_review",
+  "expectedRevision": 2,
+  "patch": {
+    "status": "review",
+    "evidence": [
+      {
+        "label": "Source-backed bounded negative-case implementation plan",
+        "kind": "artifact",
+        "path": "artifacts/private-room-live-20261013/negative-plan/PLAN.md"
+      },
+      {
+        "kind": "note",
+        "details": "Commit1b14bff9e6da0a1a249f1bdc42ab49e59e74e52c on codex/private-room-negative-qa from fbb8b1c640f0e11d495cf00c11bf557500701674. Clean tracked tree,6QA/doc/test files; actual11+16+10focused checks pass. Evidence at isolated galaxy-audio-refinement/work/private-room-negative-implementation/HANDOFF.md and source-pins.json. Independent review and actual negative browser/RTC cases pending; no native/service/runtime changes or live pass.",
+        "label": "Actual isolated negative QA candidate and focused author evidence"
+      }
+    ],
+    "blocker": ""
+  }
+}

@@ -1,0 +1,26 @@
+(node:41452) ExperimentalWarning: Transform Types is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ Actual initialization pauses fresh Galaxy before guarded license registration and marks each API stage (34.5092ms)
+✔ Actual initialization has a bounded total deadline, controlled failures and frees a late native create (4.7565ms)
+✔ Actual client frame code calls Galaxy.step only, pauses solo/guest, and resets a restored frame (3.354ms)
+✔ Actual rejoin gate requires a new complete native commit, not a cumulative old commit (6.0814ms)
+✔ Actual approval QA rejects pre-approval RTC or admission and measures cumulative peer counts (11.7992ms)
+✔ Actual client approval commands use current host request id without exposing credentials (3.7554ms)
+✔ Actual approval observation refuses late pending replies and bounds each child timeout (2.8026ms)
+✔ Actual child message route preserves controlled approval failure and sanitizes arbitrary errors (2.0162ms)
+✔ Actual New session orchestration uses real controller idempotent leave after prior host end (2.8639ms)
+✔ Actual Drive preflight rejects hidden, clipped, zero and nonfinite client bounds before any native command (6.2363ms)
+✔ Actual Drive latches mid-command visibility loss and never labels interrupted observations a native pass (11.2174ms)
+✔ WASM report accepts finite observations, refuses capabilities/profile payloads and does not infer a native commit (0.7789ms)
+✔ Owned reports preserve the factory format and admit only finite, secret-free native metadata (0.4494ms)
+✔ Actual localSpec reads the native export only in explicit owned mode and never forwards Profile (3.4514ms)
+✔ Actual commit observations reset session IDs and cannot mistake a staged owned header for a complete native commit (6.943ms)
+✔ WASM allowlist fixes backend paths and cannot request unrelated files (0.3614ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 361.5721

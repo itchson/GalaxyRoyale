@@ -1,0 +1,65 @@
+✖ actual stopped native frame cannot complete a decline experiment from still-live controller state (54.1859ms)
+✖ actual room reads gate available child failure, initialization, disposal and lifetime signals only during the experiment (2.7396ms)
+✖ actual preflight visibility latch rejects a hide-restore before any room mutation (7.2779ms)
+ℹ tests 3
+ℹ suites 0
+ℹ pass 0
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 280.288
+
+✖ failing tests:
+
+test at scripts\test\coop-private-room-negative-qa.test.mjs:468:1
+✖ actual stopped native frame cannot complete a decline experiment from still-live controller state (54.1859ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/coop-private-room-negative-qa.test.mjs:506:3)
+      at async Test.run (node:internal/test_runner/test:1332:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:385:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /room_case_failed/,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at scripts\test\coop-private-room-negative-qa.test.mjs:514:1
+✖ actual room reads gate available child failure, initialization, disposal and lifetime signals only during the experiment (2.7396ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/coop-private-room-negative-qa.test.mjs:533:5)
+      at async Test.run (node:internal/test_runner/test:1332:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /room_case_failed/,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at scripts\test\coop-private-room-negative-qa.test.mjs:545:1
+✖ actual preflight visibility latch rejects a hide-restore before any room mutation (7.2779ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /clients_not_visible/. Input:
+  
+  'AssertionError [ERR_ASSERTION]: interrupted preflight must not create a room'
+  
+      at async TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/coop-private-room-negative-qa.test.mjs:562:3)
+      at async Test.run (node:internal/test_runner/test:1332:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:911:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: AssertionError [ERR_ASSERTION]: interrupted preflight must not create a room
+        at roomSend (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/coop-private-room-negative-qa.test.mjs:557:28)
+        at Object.privateRoomRound (evalmachine.<anonymous>:31:25)
+        at async waitForActual (node:assert:646:5)
+        at async strict.rejects (node:assert:769:25)
+        at async TestContext.<anonymous> (file:///C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/scripts/test/coop-private-room-negative-qa.test.mjs:562:3)
+        at async Test.run (node:internal/test_runner/test:1332:7)
+        at async Test.processPendingSubtests (node:internal/test_runner/test:911:7),
+    expected: /clients_not_visible/,
+    operator: 'rejects',
+    diff: 'simple'
+  }

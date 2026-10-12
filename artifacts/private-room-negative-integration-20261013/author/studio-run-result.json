@@ -1,0 +1,25 @@
+{
+  "item": {
+    "id": "run-5695acbc",
+    "title": "Private room negative QA implementation · running",
+    "agentId": "/root/audio_review",
+    "agentLabel": "Private room negative QA implementation",
+    "state": "running",
+    "observedAt": "2026-10-12T19:00:36.617Z",
+    "taskIds": [
+      "task-71611b9e"
+    ],
+    "summary": "Implementation actually running in isolated codex/private-room-negative-qa from reviewed fbb8b1c. Prior Haven branch and ignored work retained. No listener/browser/native acceptance dispatched.",
+    "evidence": [
+      {
+        "label": "Actual bounded dispatch and isolated branch",
+        "kind": "note",
+        "details": "Root assigned task; git status was clean; git switch -c codex/private-room-negative-qa fbb8b1c640f0e11d495cf00c11bf557500701674 succeeded in galaxy-audio-refinement. Prior codex/haven-scene-fixtures remains at5df19ae."
+      }
+    ],
+    "author": "/root/audio_review",
+    "source": "Actual agent execution, clean tracked worktree and new isolated branch observed",
+    "createdAt": "2026-10-12T19:00:36.627Z"
+  },
+  "revision": 1024
+}

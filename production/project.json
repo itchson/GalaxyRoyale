@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 1039,
+  "revision": 1046,
   "name": "Galaxy Royale",
   "phase": "Playable solo slice → content and validation",
-  "updatedAt": "2026-10-12T19:31:50.630Z",
+  "updatedAt": "2026-10-12T19:50:32.684Z",
   "tasks": [
     {
       "id": "studio",
@@ -8528,7 +8528,7 @@
       "description": "Implement in isolated branch from the next reviewed Root helper checkpoint. Own only scripts/qa/co-op-transport and its focused tests in that checkout; Root owns integration/listeners/browser. Use actual controller/store operations, private continuity facts and sanitized reports. No service/runtime modification, no fabricated RTC or world evidence. Source plan frozen in work/private-room-negative-plan.",
       "department": "Networking QA tooling",
       "owner": "/root/audio_review",
-      "status": "review",
+      "status": "active",
       "priority": "high",
       "dependencies": [
         "task-769c0361"
@@ -8536,11 +8536,11 @@
       "acceptanceCriteria": [
         {
           "text": "Actual pending decline and old-code/locked join controls with approved-peer continuity and private credential handling.",
-          "met": false
+          "met": true
         },
         {
           "text": "Meaningful source/function/report and bounded lifecycle tests plus independent review on exact candidate.",
-          "met": false
+          "met": true
         },
         {
           "text": "Root executes matching actual native two-client negative cases; broader8/TURN remains separate.",
@@ -8557,17 +8557,22 @@
           "label": "Actual isolated negative QA candidate and focused author evidence",
           "kind": "note",
           "details": "Commit1b14bff9e6da0a1a249f1bdc42ab49e59e74e52c on codex/private-room-negative-qa from fbb8b1c640f0e11d495cf00c11bf557500701674. Clean tracked tree,6QA/doc/test files; actual11+16+10focused checks pass. Evidence at isolated galaxy-audio-refinement/work/private-room-negative-implementation/HANDOFF.md and source-pins.json. Independent review and actual negative browser/RTC cases pending; no native/service/runtime changes or live pass."
+        },
+        {
+          "label": "Integrated source, preserved failures, independent review and actual Root checks",
+          "kind": "artifact",
+          "path": "artifacts/private-room-negative-integration-20261013/verification.json"
         }
       ],
       "blocker": "",
-      "revision": 3,
+      "revision": 4,
       "createdAt": "2026-10-12T18:59:18.513Z",
-      "updatedAt": "2026-10-12T19:18:25.976Z"
+      "updatedAt": "2026-10-12T19:50:06.864Z"
     },
     {
       "id": "task-8508cfc5",
       "title": "Authoritative co-op Ion Wake trail publication and native presentation",
-      "description": "Actual isolatedbranch setup from332ddd5; independent originaldesign/v2reviewresolved three concrete edge findings. Native author owns bounded active-sample page, atomic replica commit, lifecycle/canonical-clock invariants and shared native quads/WASM operations. Root owns matching JS wire/controller/ports and normalbuild/browser. No implementation or trail RTC/AV pass claimed at dispatch.",
+      "description": "Actual isolatedbranch setup from332ddd5; independent originaldesign/v2reviewresolved three concrete edge findings. Native author owns bounded active-sample page, atomic replica commit, lifecycle/canonical-clock invariants and shared native quads/WASM operations. Root owns matching JS wire/controller/ports and normalbuild/browser. No implementation or trail RTC/AV pass claimed at dispatch. Native author implementation/tests now complete for independent review: authoritative bounded page, canonical same-tick cache and shared native dots. Exact source/evidence in isolated work/coop-wake-presentation; matching Root browser pipeline and physical RTC/AV gates remain unfinished.",
       "department": "Native gameplay / presentation",
       "owner": "/root/audio_score",
       "status": "active",
@@ -8576,7 +8581,7 @@
       "acceptanceCriteria": [
         {
           "text": "Bounded actual sample snapshot/page and same-tick membership-set, raw-f64/post-f32 and world-edge contracts implemented in native authority/replica.",
-          "met": false
+          "met": true
         },
         {
           "text": "Shared host/guest native quad rendering, epoch/expiry/cleanup and meaningful native serializer/regression checks with independent review.",
@@ -8602,12 +8607,17 @@
           "label": "Frozen v2 design and independent agreement",
           "kind": "artifact",
           "path": "artifacts/native-wake-integration-20261013/trail-design-review/REVIEW.md"
+        },
+        {
+          "label": "Actual isolated native candidate and remaining product gates",
+          "kind": "note",
+          "details": "Native author pass complete in C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/coop-wake-presentation/HANDOFF.md. Source pins0ce2ff57; handoffa6b7aaf5. Actual workspace928pass/19ignored; strictall-targetClippy pass; 192point/960quad capacity and exact18401B page/49452B maximum publication wrapper. Independent source review, Root strictJS/controller/ports, normaldualbuild and realRTC/AV remain open; whole-world-edge asteroid rejection recorded separately. Native implementation does not accept those product gates."
         }
       ],
       "blocker": "",
-      "revision": 1,
+      "revision": 2,
       "createdAt": "2026-10-12T19:15:22.563Z",
-      "updatedAt": "2026-10-12T19:15:22.563Z"
+      "updatedAt": "2026-10-12T19:45:16.137Z"
     },
     {
       "id": "task-16eff15f",
@@ -8652,16 +8662,16 @@
     {
       "id": "task-b062202c",
       "title": "Co-op world-edge native entity publication and replica bounds",
-      "description": "Real in-progress Wake edge capture failed because17legitimate generated asteroids exceed currentreplica +/-1000000positionbounds. Rootconfirmedexistingvectorcontract; actualintegrated-baseline reproduction stillneeded. KeepWake-only halo testseparate fromwholeworldfix. No projectile failure or liveRTC result inferred.",
+      "description": "Real in-progress Wake edge capture failed because17legitimate generated asteroids exceed currentreplica +/-1000000positionbounds. Rootconfirmedexistingvectorcontract; actualintegrated-baseline reproduction stillneeded. KeepWake-only halo testseparate fromwholeworldfix. No projectile failure or liveRTC result inferred. Root now independently reproduced the unfiltered integrated-baseline capture: actual first positive-X edge returned invalid_entity; no geometry fix or RTC result yet.",
       "department": "Native gameplay / protocol",
       "owner": "Root / native gameplay",
-      "status": "ready",
+      "status": "active",
       "priority": "high",
       "dependencies": [],
       "acceptanceCriteria": [
         {
           "text": "Reproduce complete real integrated native edge capture with generated entities; preserve first failure and actual problematic rows.",
-          "met": false
+          "met": true
         },
         {
           "text": "Bounded authority/publication/replica/browser geometry contract resolves legal nearby entities with meaningful malformed/extreme input regressions.",
@@ -8677,12 +8687,17 @@
           "label": "Actual native author failure and precise remaining gate",
           "kind": "artifact",
           "path": "artifacts/native-wake-integration-20261013/world-edge-finding/FINDING.md"
+        },
+        {
+          "label": "Root actual unfiltered baseline regression and preserved failure",
+          "kind": "artifact",
+          "path": "artifacts/private-room-negative-integration-20261013/world-edge-baseline/README.md"
         }
       ],
       "blocker": "",
-      "revision": 1,
+      "revision": 2,
       "createdAt": "2026-10-12T19:31:50.630Z",
-      "updatedAt": "2026-10-12T19:31:50.630Z"
+      "updatedAt": "2026-10-12T19:50:32.684Z"
     }
   ],
   "reviews": [
@@ -11122,6 +11137,53 @@
           "label": "Actual source/build/check pins",
           "kind": "artifact",
           "path": "artifacts/native-wake-integration-20261013/verification.json"
+        }
+      ]
+    },
+    {
+      "id": "review-39845dff",
+      "title": "Ordinary co-op Wake native allocation/publication audit",
+      "body": "Actual work-only release native14Wake tests(13existing+probe) and7publication cases passed from frozen332/60. One source-backed cost: remote target sanctuary allocation precedes geometry rejection. Emptytrails8pilots48remote misses caused3840alloc/realloc requests and359424requestedbytes/stage. No runtime optimization was applied. Instrumented native fixture times are not FPS/RTC/GPU acceptance; original compile/probe/pin failures preserved.",
+      "author": "/root/audio_review",
+      "source": "Actual frozen332/60 source and configured native fixture audit",
+      "createdAt": "2026-10-12T19:50:09.033Z",
+      "participants": [
+        "/root/audio_review"
+      ],
+      "taskIds": [],
+      "evidence": [
+        {
+          "label": "Exact work-owned native evidence",
+          "kind": "note",
+          "details": "work/coop-wake-native-budget/REPORT.md SHA256 d802e39d218ce443a0cb17c8fc2ce6d8a507fa72ef53e6eb5dca5ab2e7144fb8; source-pins.json andcompiled-inputs.json verify469compiledarchiveinputs, canonicalLFvsCRLFexport bytes, work-onlyprobeappend andactualnativebinary. All nativeprocessescompleted; Root integration unchanged."
+        }
+      ]
+    },
+    {
+      "id": "review-0b3835cf",
+      "title": "Private-room negative QA v2 accepted for fresh live execution",
+      "body": "Engine_fx independently accepted exact 1b14 plus 7c188, preserving the original false-pass regressions. Root cherry-picked both and reran 17+16+10 checks. No live negative-case or native RTC pass is claimed.",
+      "author": "Root",
+      "source": "Actual asynchronous specialist review and Root integration",
+      "createdAt": "2026-10-12T19:50:32.644Z",
+      "participants": [
+        "Root",
+        "/root/engine_fx",
+        "/root/audio_review"
+      ],
+      "taskIds": [
+        "task-71611b9e"
+      ],
+      "evidence": [
+        {
+          "label": "Frozen independent review",
+          "kind": "artifact",
+          "path": "artifacts/private-room-negative-integration-20261013/independent-review/REVIEW.md"
+        },
+        {
+          "label": "Root actual verification",
+          "kind": "artifact",
+          "path": "artifacts/private-room-negative-integration-20261013/verification.json"
         }
       ]
     }
@@ -24807,6 +24869,76 @@
       "author": "Root",
       "source": "Actual author edge-capture failure and Root source/log inspection",
       "createdAt": "2026-10-12T19:31:50.630Z"
+    },
+    {
+      "id": "c8271868-687b-4ffd-b2c3-9026471cb6a5",
+      "revision": 1040,
+      "kind": "task.update",
+      "itemId": "task-8508cfc5",
+      "title": "Authoritative co-op Ion Wake trail publication and native presentation",
+      "author": "Codex audio_score",
+      "source": "Actual bounded native author execution and raw evidence",
+      "createdAt": "2026-10-12T19:45:16.137Z"
+    },
+    {
+      "id": "15e9d86d-8cbc-41b1-8cbd-bd0a50e1fdc1",
+      "revision": 1041,
+      "kind": "run",
+      "itemId": "run-a3e714cd",
+      "title": "Native Ion Wake presentation · completed",
+      "author": "Codex audio_score",
+      "source": "Actual native source/test author handoff; not product/RTC acceptance",
+      "createdAt": "2026-10-12T19:45:16.172Z"
+    },
+    {
+      "id": "01dce91d-71b5-4eb6-ac31-2bfd656f692b",
+      "revision": 1042,
+      "kind": "task.update",
+      "itemId": "task-71611b9e",
+      "title": "Bounded actual room decline, code replacement and lock QA controls",
+      "author": "Root",
+      "source": "Reviewed candidate integration and actual 43 Root helper checks",
+      "createdAt": "2026-10-12T19:50:06.864Z"
+    },
+    {
+      "id": "1094b4d8-a92d-4e31-b29e-282d3679c3e9",
+      "revision": 1043,
+      "kind": "run",
+      "itemId": "run-f309273c",
+      "title": "Private room negative QA v2 amendment · completed",
+      "author": "/root/audio_review",
+      "source": "Actual narrow author amendment and frozen source-function evidence",
+      "createdAt": "2026-10-12T19:50:08.531Z"
+    },
+    {
+      "id": "3657ce2f-a91a-4c6d-8e16-25dc6e6b3f73",
+      "revision": 1044,
+      "kind": "review",
+      "itemId": "review-39845dff",
+      "title": "Ordinary co-op Wake native allocation/publication audit",
+      "author": "/root/audio_review",
+      "source": "Actual frozen332/60 source and configured native fixture audit",
+      "createdAt": "2026-10-12T19:50:09.033Z"
+    },
+    {
+      "id": "daa8b221-119f-4a74-85ce-9958b42853a2",
+      "revision": 1045,
+      "kind": "review",
+      "itemId": "review-0b3835cf",
+      "title": "Private-room negative QA v2 accepted for fresh live execution",
+      "author": "Root",
+      "source": "Actual asynchronous specialist review and Root integration",
+      "createdAt": "2026-10-12T19:50:32.644Z"
+    },
+    {
+      "id": "d58b3d28-cf88-4bd3-a795-8786cf427129",
+      "revision": 1046,
+      "kind": "task.update",
+      "itemId": "task-b062202c",
+      "title": "Co-op world-edge native entity publication and replica bounds",
+      "author": "Root",
+      "source": "Actual isolated integrated-baseline native regression",
+      "createdAt": "2026-10-12T19:50:32.684Z"
     }
   ],
   "runRecords": [
@@ -34156,6 +34288,50 @@
       "author": "/root/audio_review",
       "source": "Actual author run completed and candidate handed off; acceptance remains pending",
       "createdAt": "2026-10-12T19:18:26.000Z"
+    },
+    {
+      "id": "run-a3e714cd",
+      "title": "Native Ion Wake presentation · completed",
+      "agentId": "/root/audio_score",
+      "agentLabel": "Native Ion Wake presentation",
+      "state": "completed",
+      "observedAt": "2026-10-12T19:45:16.165Z",
+      "taskIds": [
+        "task-8508cfc5"
+      ],
+      "summary": "Bounded native implementation and evidence complete for independent review: actual host/solo/guest five-dot extraction, full active-sample page and atomic replica commit, canonical numbers/lifecycle. Workspace928passed/19ignored and strictClippy passed. Independent review and matching Root JS/build/RTC/AV remain open. Recorded separate existing whole-edge asteroid rejection; no existing bounds widened.",
+      "evidence": [
+        {
+          "label": "Actual isolated native candidate and remaining product gates",
+          "kind": "note",
+          "details": "Native author pass complete in C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/coop-wake-presentation/HANDOFF.md. Source pins0ce2ff57; handoffa6b7aaf5. Actual workspace928pass/19ignored; strictall-targetClippy pass; 192point/960quad capacity and exact18401B page/49452B maximum publication wrapper. Independent source review, Root strictJS/controller/ports, normaldualbuild and realRTC/AV remain open; whole-world-edge asteroid rejection recorded separately. Native implementation does not accept those product gates."
+        }
+      ],
+      "author": "Codex audio_score",
+      "source": "Actual native source/test author handoff; not product/RTC acceptance",
+      "createdAt": "2026-10-12T19:45:16.172Z"
+    },
+    {
+      "id": "run-f309273c",
+      "title": "Private room negative QA v2 amendment · completed",
+      "agentId": "/root/audio_review",
+      "agentLabel": "Private room negative QA v2 amendment",
+      "state": "completed",
+      "observedAt": "2026-10-12T19:50:08.425Z",
+      "taskIds": [
+        "task-71611b9e"
+      ],
+      "summary": "Frozen7c188d4 adds post-policy complete-commit floor, continuous experiment visibility and actual existing child failure signals.17focused+16WASM+10Fifth source-function checks pass; original false passes preserved. Independent reviewer accepted scoped source integration; live acceptance remains open.",
+      "evidence": [
+        {
+          "label": "Actual v2 author evidence and limits",
+          "kind": "note",
+          "details": "Isolated work/private-room-negative-implementation/v2-continuity contains frozen exact sources/diff/logs. Parent canonicalSHA256 7cea79634262001a58ed12cb87f91036f8a77095323bdae04aec51c95c31d0bf. Original1b14branch untouched. No listener/browser/native/RTC negative pass; pagehide raw-stopped observation remains qualified."
+        }
+      ],
+      "author": "/root/audio_review",
+      "source": "Actual narrow author amendment and frozen source-function evidence",
+      "createdAt": "2026-10-12T19:50:08.531Z"
     }
   ],
   "phaseDescription": "Desktop-first Rust/WASM solo game and local Studio are implemented. Reviewed occupied-cell art, reproducible conversion, responsive native settings/icons and minimap, strict GitHub integration gates and source-backed Dev Bible are integrated. Natural campaign balance, human listening, owner-private update lifecycle and physical phones remain separate pending gates."

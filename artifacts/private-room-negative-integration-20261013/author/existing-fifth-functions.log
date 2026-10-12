@@ -1,0 +1,18 @@
+✔ starter choice keeps defaults and refuses nonempty saves before optional RENKO registration (0.9012ms)
+✔ verifier counts admitted events, binds owner/epoch, proves fifth and tenth and refuses replay (0.9276ms)
+✔ ambiguous, saturated, missing, reused, mismatched and stale observations remain inconclusive (0.2514ms)
+✔ fifth damage alone cannot pass incorrect speed/direction or epoch ownership (0.1944ms)
+✔ actual client frame holds native immediately after one admitted event while continuing bounded publication (19.0584ms)
+✔ report validation is bounded, secret-free and refuses fake completion or inferred guest event counts (0.5699ms)
+✔ actual fresh-scenario initialize refuses a retained save before import, registration or save (11.6265ms)
+✔ actual guest acceptance waits for complete commit in the current session, not a matching staged or old frame (5.2148ms)
+✔ version four capture requires both complete observers for a passing cadence check and admits no extra telemetry (1.1228ms)
+✔ actual fifth orchestration preserves visibility gating through final save verification (4.3597ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 244.5428

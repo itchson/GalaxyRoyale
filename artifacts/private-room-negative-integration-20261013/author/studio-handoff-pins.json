@@ -1,0 +1,26 @@
+{
+  "task": "task-71611b9e",
+  "taskRevision": 3,
+  "status": "review",
+  "runningRecord": "run-5695acbc",
+  "completedAuthorRun": "run-07e8d380",
+  "acceptanceCriteriaOpen": true,
+  "evidence": {
+    "studio-review-input.json": {
+      "bytes": 1051,
+      "sha256": "796001f87297a1672b25b3acd18f97b6c3a600ade72b9d15f80c3ec1b49425d9"
+    },
+    "studio-review-result.json": {
+      "bytes": 2260,
+      "sha256": "dfd8224494ae43244b008e97b2f0532cd3856a470c84a06c1d1a0144e1535103"
+    },
+    "studio-completed-input.json": {
+      "bytes": 1009,
+      "sha256": "a8aa33afffeac8664c10924862422c41aedb5ea1526fe2966a4349c4e6252d64"
+    },
+    "studio-completed-result.json": {
+      "bytes": 1171,
+      "sha256": "f64cf922bb6e405ff39f2c025ef2d0ce54da498f9cf95c154da46a0749e36c91"
+    }
+  }
+}

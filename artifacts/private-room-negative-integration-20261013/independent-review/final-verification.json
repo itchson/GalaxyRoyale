@@ -1,0 +1,83 @@
+{
+  "scope": "Independent exact frozen source/evidence review; original two source-function failures preserved; no independent rerun, browser, native Game, RTC, build, stage or listener execution for v2",
+  "original_candidate": "1b14bff9e6da0a1a249f1bdc42ab49e59e74e52c",
+  "final_candidate": "7c188d4198901ead15e4bffa2b0063b9c95f7674",
+  "parent_verified": true,
+  "changed_files": [
+    "scripts/qa/co-op-transport/wasm-review.js",
+    "scripts/test/coop-private-room-negative-qa.test.mjs"
+  ],
+  "final_source_pins": [
+    {
+      "path": "scripts/qa/co-op-transport/wasm-review.js",
+      "git_blob": "a0f9bde4294894c72720bc32d60119943bb39248",
+      "bytes": 25287,
+      "sha256": "7cea79634262001a58ed12cb87f91036f8a77095323bdae04aec51c95c31d0bf",
+      "snapshot": "v2-source/scripts/qa/co-op-transport/wasm-review.js",
+      "working_bytes": 25287,
+      "working_sha256": "7cea79634262001a58ed12cb87f91036f8a77095323bdae04aec51c95c31d0bf"
+    },
+    {
+      "path": "scripts/test/coop-private-room-negative-qa.test.mjs",
+      "git_blob": "cb197cf3a15dac8215ddec6b1cc84933b3251690",
+      "bytes": 29417,
+      "sha256": "583594adb4cd133c6137db70a76f080ae3f391f7278fada90b1c7a711713758d",
+      "snapshot": "v2-source/scripts/test/coop-private-room-negative-qa.test.mjs",
+      "working_bytes": 29417,
+      "working_sha256": "583594adb4cd133c6137db70a76f080ae3f391f7278fada90b1c7a711713758d"
+    },
+    {
+      "path": "scripts/qa/co-op-transport/client.js",
+      "git_blob": "f3a0c06dafa28b2acd47120bd0056aa6b08062a6",
+      "bytes": 26189,
+      "sha256": "378387289f01e3b1d8fe02fd2fdf1f444b0f66587f42127fa8a856eb1177d825",
+      "snapshot": "v2-source/scripts/qa/co-op-transport/client.js",
+      "working_bytes": 26189,
+      "working_sha256": "378387289f01e3b1d8fe02fd2fdf1f444b0f66587f42127fa8a856eb1177d825"
+    },
+    {
+      "path": "apps/game/src/coop/controller.ts",
+      "git_blob": "629ed7824f0635b9a6cbad9292aeed33a9baf849",
+      "bytes": 32533,
+      "sha256": "4966bf8ffcd8ca18125c9af9c710a7658cef61e28356fd01bc68ee50671dcb1f",
+      "snapshot": "v2-source/apps/game/src/coop/controller.ts",
+      "working_bytes": 33592,
+      "working_sha256": "2f886539fa1532f136a9d23d3ec817abbd497183e972435db92afc7894926f6a"
+    }
+  ],
+  "final_raw_author_evidence_verified": 16,
+  "unchanged_original_source_and_consumer_inputs": [
+    "scripts/qa/co-op-transport/README.md",
+    "scripts/qa/co-op-transport/client.js",
+    "scripts/qa/co-op-transport/server.mjs",
+    "scripts/qa/co-op-transport/wasm-review.html",
+    "apps/game/src/coop/controller.ts",
+    "apps/game/src/coop/transport.ts",
+    "apps/game/src/coop/signaling.ts",
+    "apps/game/src/coop/wasm-ports.ts",
+    "scripts/qa/co-op-transport/prepare.mjs",
+    "scripts/test/coop-transport-wasm-qa.test.mjs",
+    "scripts/test/coop-transport-fifth-qa.test.mjs"
+  ],
+  "author_original_function_tests": 37,
+  "author_final_function_tests": 43,
+  "original_independent_source_function_failures": 2,
+  "author_preserved_regression_logs": [
+    "original-regression.log",
+    "visibility-original-regression.log",
+    "health-preflight-original-regression.log"
+  ],
+  "resolved_findings": [
+    "post-policy complete-commit floor",
+    "visibility loss through awaited commands/observations",
+    "available native-loop failure/init/lifetime qualification"
+  ],
+  "verdict": "No remaining source blocker for scoped integration and fresh live QA; actual browser/native/RTC acceptance remains pending",
+  "open_limits": [
+    "pagehide stopped edge is not directly observable from current child protocol",
+    "source-function tests use declared boundaries, not actual browser/RTC/native operations",
+    "normalized Profile and persisted digests do not prove full boxed-world preservation or zero migration writes",
+    "two loopback clients do not prove eight participants, Internet or TURN",
+    "policy sequencing does not prove every overlapping request/race"
+  ]
+}
