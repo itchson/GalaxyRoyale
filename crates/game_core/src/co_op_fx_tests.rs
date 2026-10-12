@@ -575,11 +575,17 @@ fn export_actual_native_nova_fx_headers() {
     }
     let maximum = capture(&mut game);
     let bytes = serde_json::to_vec(&json!({"v":1,"session":id(100),"seq":u32::MAX,"kind":"publication","payload":maximum.header})).unwrap().len();
+    let request_bytes =
+        serde_json::to_vec(&json!({"v":1,"op":"replica_stage","header":maximum.header}))
+            .unwrap()
+            .len();
     assert!(bytes < 65536);
+    assert!(request_bytes < 65536);
     println!(
-        "actual_native_nova_fx_header_bytes={} wrapped_maximum_fixture_bytes={} records=32 pilots=8 projectiles=180",
+        "actual_native_nova_fx_header_bytes={} wrapped_maxcounts_transport_bytes={} wrapped_maxcounts_stage_request_bytes={} records=32 pilots=8 projectiles=180",
         serde_json::to_vec(&nova.header).unwrap().len(),
-        bytes
+        bytes,
+        request_bytes
     );
     for _ in 0..30 {
         game.tick_co_op(id(100)).unwrap();
