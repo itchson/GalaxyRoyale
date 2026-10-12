@@ -71,9 +71,9 @@ static ART: LazyLock<[Art; 3]> = LazyLock::new(|| {
                     } else {
                         [43, 49, 53]
                     }
-                } else if (x == 29 || x == 98) && (22..76).contains(&y) && y % 12 < 6 {
-                    [106, 132, 140]
-                } else if (y == 21 || y == 76) && (34..94).contains(&x) && x % 12 < 6 {
+                } else if ((x == 29 || x == 98) && (22..76).contains(&y) && y % 12 < 6)
+                    || ((y == 21 || y == 76) && (34..94).contains(&x) && x % 12 < 6)
+                {
                     [106, 132, 140]
                 } else if seam {
                     [24, 32, 37]
