@@ -392,10 +392,6 @@ body:not(.pixel-ready) #universe {
   font-size: var(--ui-caption);
   padding-inline: min(10px, calc(5px * var(--ui-scale, 1)));
 }
-.menu-card:has(#cargo-content:not([hidden])) {
-  width: min(760px, 100%);
-  height: min(650px, 100%);
-}
 .restart-button:hover:not(:disabled) {
   background: #443522;
 }

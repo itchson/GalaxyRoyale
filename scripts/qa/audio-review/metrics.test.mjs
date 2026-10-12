@@ -1,12 +1,36 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { pcmMetrics, highFrequencyRatio, wav } from "./metrics.js";
+import {
+  pcmMetrics,
+  stereoMetrics,
+  highFrequencyRatio,
+  wav,
+} from "./metrics.js";
 const buffer = (values, sampleRate = 48000) => ({
   numberOfChannels: values.length,
   length: values[0].length,
   sampleRate,
   duration: values[0].length / sampleRate,
   getChannelData: (channel) => values[channel],
+});
+
+test("stereo metrics distinguish mono-compatible, opposite-phase and silent analytical channels", () => {
+  const v = new Float32Array([-0.5, 0.5]),
+    opposite = new Float32Array([0.5, -0.5]);
+  const mono = stereoMetrics(buffer([v, v]));
+  assert.equal(mono.midRms, 0.5);
+  assert.equal(mono.sideRms, 0);
+  assert.equal(mono.correlation, 1);
+  const anti = stereoMetrics(buffer([v, opposite]));
+  assert.equal(anti.midRms, 0);
+  assert.equal(anti.sideRms, 0.5);
+  assert.equal(anti.correlation, -1);
+  assert.equal(
+    stereoMetrics(buffer([new Float32Array(2), new Float32Array(2)]))
+      .correlation,
+    null,
+  );
+  assert.equal(stereoMetrics(buffer([v])), null);
 });
 test("PCM metrics count actual nonfinite and >1 values without silently clamping", () => {
   const b = buffer([new Float32Array([0, 1.25, -0.5, Number.NaN])], 4);

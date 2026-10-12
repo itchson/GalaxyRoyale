@@ -32,6 +32,35 @@ export function pcmMetrics(buffer, from = 0, to = buffer.duration) {
   };
 }
 
+export function stereoMetrics(buffer) {
+  if (buffer.numberOfChannels !== 2) return null;
+  const left = buffer.getChannelData(0),
+    right = buffer.getChannelData(1);
+  let mid = 0,
+    side = 0,
+    l2 = 0,
+    r2 = 0,
+    cross = 0,
+    pairs = 0;
+  for (let i = 0; i < buffer.length; i++) {
+    const l = left[i],
+      r = right[i];
+    if (!Number.isFinite(l) || !Number.isFinite(r)) continue;
+    mid += ((l + r) * 0.5) ** 2;
+    side += ((l - r) * 0.5) ** 2;
+    l2 += l * l;
+    r2 += r * r;
+    cross += l * r;
+    pairs++;
+  }
+  return {
+    finitePairs: pairs,
+    midRms: Math.sqrt(mid / Math.max(1, pairs)),
+    sideRms: Math.sqrt(side / Math.max(1, pairs)),
+    correlation: l2 && r2 ? cross / Math.sqrt(l2 * r2) : null,
+  };
+}
+
 // Hann-windowed radix-2 FFT, eight actual PCM windows in the steady interval.
 // The ratio is spectral power above1kHz, not an A-weighted loudness estimate.
 export function highFrequencyRatio(buffer, from = 1, to = 3) {

@@ -1,7 +1,7 @@
 import { AudioEngine } from "./modules/audio.js";
 import { AudioEngine as BaselineEngine } from "./modules/baseline-audio.js";
 import { QUIET_STATE } from "./modules/audio-state.js";
-import { pcmMetrics, highFrequencyRatio, wav } from "./metrics.js";
+import { pcmMetrics, stereoMetrics, highFrequencyRatio, wav } from "./metrics.js";
 
 const button = document.getElementById("run"),
   status = document.getElementById("status");
@@ -211,6 +211,7 @@ async function renderFixture(fixture) {
     "createBuffer",
     "createOscillator",
     "createBufferSource",
+    "createStereoPanner",
   ]);
   // This adapter is scoped exclusively to this isolated page/render. All graph
   // work and PCM rendering is native, not a recording or replacement DSP.
@@ -346,6 +347,7 @@ async function renderFixture(fixture) {
       cue_calls: cueCalls,
       dispatched,
       full: pcmMetrics(buffer),
+      stereo: stereoMetrics(buffer),
       steady: pcmMetrics(buffer, 1, Math.min(3, fixture.seconds)),
       tail: pcmMetrics(buffer, fixture.seconds - 0.5, fixture.seconds),
       steady_power_above_1khz_ratio: fixture.engine
