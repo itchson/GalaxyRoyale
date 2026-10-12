@@ -2949,7 +2949,8 @@ mod tests {
                     joined.push(scene.groups[0].nodes.remove(0));
                 }
                 assert_eq!(isolated_counts[2], [34594, 28524, 24262][kind as usize]);
-                assert_eq!(isolated_counts[4], [662, 688, 1040][corp as usize]);
+                // Retained collision cells plus the authored sparse96-grid detail.
+                assert_eq!(isolated_counts[4], [1867, 1864, 2780][corp as usize]);
                 assert_eq!(isolated_counts[0], 5818);
                 assert_eq!(isolated_counts[1], 1677);
                 for (slot, count) in [165, 321, 275, 219, 225, 323, 326, 202]

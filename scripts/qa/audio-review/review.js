@@ -45,6 +45,8 @@ const fixtures = [
     seconds: 24,
     currentScore: true,
   },
+  { key: "title-score", title: "Synthesized title draft, one complete loop and pickup", Engine: AudioEngine, seconds: 48, titleOnly: true },
+  { key: "title-transition", title: "Title to Haven, exploration, chase and release", Engine: AudioEngine, seconds: 32, titleTransition: true },
 ];
 // Declared DSP states, not an invented playthrough or a change to pilot identity.
 const currentScorePhases = [
@@ -108,6 +110,13 @@ const sha = async (bytes) =>
     .map((n) => n.toString(16).padStart(2, "0"))
     .join("");
 function fixtureState(fixture, time) {
+  if (fixture.titleOnly) return { ...QUIET_STATE };
+  if (fixture.titleTransition) return {
+    ...QUIET_STATE,
+    ...(time >= 11 && time < 26 ? { area: "reach", engines: 2, throttle: 0.5, speed: 0.4 } : {}),
+    ...(time >= 15 && time < 20 ? { combat: 0.8, hostiles: 6 } : {}),
+    corporation: "pan",
+  };
   if (fixture.currentScore) {
     const phase = currentScorePhases.findLast((p) => time >= p.start);
     return { ...QUIET_STATE, ...phase.state };
@@ -133,6 +142,7 @@ function fixtureState(fixture, time) {
   };
 }
 function fixtureEvents(fixture) {
+  if (fixture.titleOnly || fixture.titleTransition) return [];
   if (fixture.currentScore)
     return [
       { at: 0.8, kind: "dock", count: 1 },
@@ -249,6 +259,7 @@ async function renderFixture(fixture) {
   const sourceStates = [];
   try {
     engine = new fixture.Engine();
+    if (fixture.titleOnly || fixture.titleTransition) engine.setTitleScreen(true);
     engine.setLevels(
       fixture.burst ? 1 : 0.75,
       fixture.engine ? 0 : fixture.burst ? 1 : 0.4,
@@ -265,6 +276,7 @@ async function renderFixture(fixture) {
       if (real.state !== "suspended")
         throw new Error("Scheduler did not reach a real native suspension.");
       const time = real.currentTime;
+      if (fixture.titleTransition) engine.setTitleScreen(time < 6);
       engine.update(fixtureState(fixture, time));
       while (nextEvent < events.length && events[nextEvent].at <= time) {
         const event = events[nextEvent++];
@@ -292,6 +304,7 @@ async function renderFixture(fixture) {
           hull: d.hull,
           engine: d.engine,
           engineDuck: d.engineDuck ?? 1,
+          ...(d.score ? { score: d.score } : {}),
           ...(fixture.currentScore
             ? {
                 area: d.area,

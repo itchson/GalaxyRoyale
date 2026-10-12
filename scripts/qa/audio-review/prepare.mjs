@@ -71,6 +71,9 @@ export async function prepare(output) {
     ],
     ["baseline-audio.js", `git:${BASELINE_COMMIT}:${BASELINE_PATH}`, baseline],
   ];
+  for (const name of ["music-clock", "music-score"])
+    sources.push([`${name}.js`, `apps/game/src/${name}.ts`,
+      await fs.readFile(path.join(PROJECT_ROOT, `apps/game/src/${name}.ts`))]);
   const inputs = {},
     modules = [];
   for (const [name, source, bytes] of sources) {
@@ -97,7 +100,9 @@ export async function prepare(output) {
       `// Actual source: ${source}; SHA256 ${sha(bytes)}\n` +
       result.outputText
         .replaceAll('"./audio-state.ts"', '"./audio-state.js"')
-        .replaceAll('"./title-theme.ts"', '"./title-theme.js"');
+        .replaceAll('"./title-theme.ts"', '"./title-theme.js"')
+        .replaceAll('"./music-clock.ts"', '"./music-clock.js"')
+        .replaceAll('"./music-score.ts"', '"./music-score.js"');
     modules.push([name, js]);
     inputs[source] = {
       bytes: bytes.length,

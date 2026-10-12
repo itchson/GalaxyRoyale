@@ -88,7 +88,7 @@ async function fixture(t) {
 }
 test("actual catalog categories, references and classified media all validate and resolve", async () => {
   assert.equal(validateCatalog(catalog), catalog);
-  assert.equal(catalog.entries.length, 39);
+  assert.equal(catalog.entries.length, 40);
   const wiki = new WikiStore(workspace);
   for (const entry of catalog.entries) {
     assert.ok(entry.references.length > 0, entry.id);
@@ -117,7 +117,7 @@ test("server and actual UI search cover names, source facts, categories and veri
   assert.equal(filterEntries(catalog, { category: "champions" }).length, 11);
   assert.deepEqual(
     filterEntries(catalog, { status: "planned" }).map((e) => e.id),
-    ["future"],
+    ["future", "private-rooms"],
   );
   assert.equal(
     filterEntries(catalog, { q: "not-present-in-catalog" }).length,

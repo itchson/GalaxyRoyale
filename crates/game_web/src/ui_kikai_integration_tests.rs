@@ -6,6 +6,40 @@ use game_core::identity::{Corporation, starter_body};
 
 const VIEW: [f32; 2] = [640.0, 360.0];
 const GROUP: [f32; 2] = [20.25, 10.5];
+fn fine_cells(corporation: usize) -> Vec<(Vec2, u32)> {
+    // Independent authored sparse-mask oracle, separate from the draw adapter.
+    let atlas: serde_json::Value = serde_json::from_str(include_str!(
+        "../../../assets/pixels/raicho-fine-detail/atlas.json"
+    ))
+    .unwrap();
+    let name = ["pan_hikari", "renko_hibana", "hugo_mamori"][corporation];
+    let sprite = &atlas["sprites"][format!("{name}_fine")];
+    sprite["indices"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .enumerate()
+        .filter_map(|(i, index)| {
+            let index = index.as_u64().unwrap() as usize;
+            (index != 0).then(|| {
+                (
+                    Vec2::new((i % 96) as f32 + 0.5 - 48.0, (i / 96) as f32 + 0.5 - 48.0),
+                    atlas["palette"][index].as_u64().unwrap() as u32,
+                )
+            })
+        })
+        .collect()
+}
+fn ship_cells(corporation: usize) -> usize {
+    [662, 688, 1040][corporation] + fine_cells(corporation).len()
+}
+fn assert_unlit(t: engine_core::GpuTransform) {
+    assert_eq!(t.b[2], 0.0, "UI objects must remain unlit");
+    assert!(
+        matches!(t.b[3], 0.0 | 0.35),
+        "retain only the authored PAN surface emission"
+    );
+}
 fn portrait_cells() -> usize {
     portrait_cells_for(0)
 }
@@ -98,7 +132,7 @@ fn assert_rect(frame: &RenderFrame, rect: [f32; 4], camera: [f32; 2], epsilon: f
         for p in &b.pixels {
             assert!((p.transform_slot()) < b.transforms.len());
             let t = b.transforms[p.transform_slot()];
-            assert_eq!(t.b[2..], [0.0, 0.0]);
+            assert_unlit(t);
             if p.color >> 24 == 0 {
                 continue;
             }
@@ -453,9 +487,9 @@ fn portrait_fractional_fit_has_no_floor_and_partial_scroll_keeps_whole_cells() {
 fn dora_and_licensed_ship_reject_insufficient_submitted_or_work_budget_atomically() {
     for (kind, value, count) in [
         ("portrait", 8.0, portrait_cells()),
-        ("licensed-ship", 0.0, 662),
-        ("licensed-ship", 1.0, 688),
-        ("licensed-ship", 2.0, 1040),
+        ("licensed-ship", 0.0, ship_cells(0)),
+        ("licensed-ship", 1.0, ship_cells(1)),
+        ("licensed-ship", 2.0, ship_cells(2)),
     ] {
         for (pixels, work) in [(count - 1, count), (count, count - 1), (count, count)] {
             let mut f = FrameBuilder::new();
@@ -481,7 +515,7 @@ fn dora_and_licensed_ship_reject_insufficient_submitted_or_work_budget_atomicall
                 assert_eq!(f.frame().pixel_count, count + 1);
                 assert_eq!(
                     f.frame().batches[0].transforms.len(),
-                    if kind == "portrait" { 4 } else { 2 }
+                    if kind == "portrait" { 4 } else { 3 }
                 );
             }
         }
@@ -500,6 +534,8 @@ fn licensed_previews_share_three_cached_authoritative_corporate_bodies_and_fract
         assert!(std::ptr::eq(body, starter_body(corporation)));
         assert_eq!((body.width, body.height), (48, 48));
         assert_eq!(body.occupied_count(), count);
+        let fine = fine_cells(value as usize);
+        let total = count + fine.len();
         for size in [[32.0, 32.0], [19.25, 23.75], [0.6, 0.9]] {
             let rect = [31.25, 23.5, size[0], size[1]];
             let actual = extract(
@@ -508,18 +544,30 @@ fn licensed_previews_share_three_cached_authoritative_corporate_bodies_and_fract
                 0.0,
                 true,
             );
-            assert_eq!(actual.pixel_count, count);
-            assert_eq!(actual.batches[0].transforms.len(), 1);
+            assert_eq!(actual.pixel_count, total);
+            assert_eq!(actual.batches[0].transforms.len(), 2);
             let t = actual.batches[0].transforms[0];
             let scale = (size[0] / 48.0).min(size[1] / 48.0);
             assert!((t.a[2] - scale).abs() < 0.000001);
             assert!((t.b[1] - scale).abs() < 0.000001);
-            assert_eq!(assert_rect(&actual, rect, [0.0; 2], 0.0001), count);
+            let detail = actual.batches[0].transforms[1];
+            assert!((detail.a[2] - scale * 0.5).abs() < 0.000001);
+            assert!((detail.b[1] - scale * 0.5).abs() < 0.000001);
+            assert_eq!(detail.b[3], if value == 0.0 { 0.35 } else { 0.0 });
+            assert_eq!(assert_rect(&actual, rect, [0.0; 2], 0.0001), total);
             for (pixel, (cell, color)) in actual.batches[0].pixels.iter().zip(body.cells()) {
                 assert_eq!(pixel.local, cell.to_array());
                 assert_eq!(
                     pixel.color, color,
                     "preview preserves actual ship palette and occupied mask"
+                );
+            }
+            for (pixel, (cell, color)) in actual.batches[0].pixels[count..].iter().zip(&fine) {
+                assert_eq!(pixel.transform_slot(), 1);
+                assert_eq!(pixel.local, cell.to_array());
+                assert_eq!(
+                    pixel.color, *color,
+                    "preview preserves every authored fine cell"
                 );
             }
         }
@@ -544,7 +592,7 @@ fn licensed_ship_partial_scroll_clip_keeps_all_four_cell_corners_inside() {
         let actual = extract(vec![n], [0.0; 2], 0.0, true);
         let visible = assert_rect(&actual, clip, [0.0; 2], 0.0001);
         assert!(visible > 0 && visible < actual.pixel_count);
-        assert_eq!(actual.pixel_count, [662, 688, 1040][value]);
+        assert_eq!(actual.pixel_count, ship_cells(value));
     }
 }
 
@@ -557,7 +605,7 @@ fn portrait_and_ship_child_affines_survive_reflection_shear_and_nonuniform_paren
     };
     for (kind, value, body_size, count, parts) in [
         ("portrait", 8.0, [192.0, 256.0], portrait_cells(), 3),
-        ("licensed-ship", 1.0, [48.0, 48.0], 688, 1),
+        ("licensed-ship", 1.0, [48.0, 48.0], ship_cells(1), 2),
     ] {
         let rect = [7.25, 13.5, 21.25, 28.5];
         let local = Transform {
@@ -581,10 +629,15 @@ fn portrait_and_ship_child_affines_survive_reflection_shear_and_nonuniform_paren
         for b in &actual.batches {
             for pixel in &b.pixels {
                 let gpu = b.transforms[pixel.transform_slot()];
-                assert_eq!(gpu.b[2..], [0.0, 0.0]);
+                assert_unlit(gpu);
+                let detail_scale = if kind == "licensed-ship" && pixel.transform_slot() == 1 {
+                    0.5
+                } else {
+                    1.0
+                };
                 for corner in corners(Vec2::from_array(pixel.local)) {
                     assert!(
-                        (gpu.point(corner) - parent.point(local.point(corner)))
+                        (gpu.point(corner) - parent.point(local.point(corner * detail_scale)))
                             .abs()
                             .max_element()
                             < 0.0001
@@ -599,7 +652,7 @@ fn portrait_and_ship_child_affines_survive_reflection_shear_and_nonuniform_paren
 fn far_camera_group_translation_stays_local_with_declared_f32_tolerance() {
     for (kind, value, count) in [
         ("portrait", 8.0, portrait_cells()),
-        ("licensed-ship", 2.0, 1040),
+        ("licensed-ship", 2.0, ship_cells(2)),
     ] {
         for camera in [[0.0; 2], [999_000.0, -999_000.0]] {
             let rect = [31.25, 23.5, 48.0, 64.0];
@@ -659,7 +712,7 @@ fn scene_cap_and_transform_batch_boundary_keep_whole_portrait_objects_and_valid_
         true,
     );
     let frame = builder.finish();
-    let controls = 662 + 688 + 1040 + 14_709;
+    let controls = (0..3).map(ship_cells).sum::<usize>() + 14_709;
     let admitted = (MAX_UI_PIXELS - controls) / portrait_cells();
     assert!((1..=2).contains(&admitted));
     assert!(admitted * portrait_cells() + controls <= MAX_UI_PIXELS);
@@ -675,7 +728,7 @@ fn scene_cap_and_transform_batch_boundary_keep_whole_portrait_objects_and_valid_
             .iter()
             .map(|b| b.transforms.len())
             .sum::<usize>(),
-        127 + admitted * 3 + 3 + 10
+        127 + admitted * 3 + 6 + 10
     );
     for b in &frame.batches {
         assert!(
@@ -791,7 +844,7 @@ fn high_detail_profiles_and_real_dense_menu_controls_fit_the_shared_scene_cap() 
     let all_ten = extract(controls(true), [0.0; 2], 0.0, true);
     // The competition header adds 389 occupied cells to this single-panel
     // fixture. All ten controls and the portrait must still be admitted whole.
-    assert_eq!(all_ten.pixel_count, 21_615);
+    assert_eq!(all_ten.pixel_count, 21_615 + fine_cells(0).len());
     let mut all_ten_with_dora = controls(true);
     let mut dora = licensed_portrait(0, 0, 1);
     dora.rect = [24.0, 52.0, 120.0, 160.0];
@@ -1059,7 +1112,7 @@ fn meishi_card_all_profile_types_factory_hulls_and_eight_earned_patches_fit_60k(
             );
             assert_eq!(
                 parts[6].pixel_count,
-                starter_body(corporation).occupied_count()
+                starter_body(corporation).occupied_count() + fine_cells(main).len()
             );
             for (index, count) in patch_counts.into_iter().enumerate() {
                 let part = &parts[14 + index * 2];

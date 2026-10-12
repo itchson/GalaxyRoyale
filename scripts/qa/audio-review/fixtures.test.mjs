@@ -67,7 +67,7 @@ before(async () => {
 });
 
 test("the four earlier declared algorithms are unchanged across every scheduler time", () => {
-  assert.equal(current.fixtures.length, 5);
+  assert.equal(current.fixtures.length, 7);
   assert.deepEqual(
     plain(current.fixtures.slice(0, 4)),
     plain(previous.fixtures),
@@ -85,6 +85,26 @@ test("the four earlier declared algorithms are unchanged across every scheduler 
         plain(previous.fixtureState(previous.fixtures[i], tick / 40)),
       );
   }
+});
+
+test("title draft and Continue/chase fixtures declare native synthesis, bounded captures and no source recording", () => {
+  const [title, transition] = current.fixtures.slice(5);
+  assert.equal(title.key, "title-score");
+  assert.equal(title.titleOnly, true);
+  assert.equal(title.seconds, 48);
+  assert.equal(transition.key, "title-transition");
+  assert.equal(transition.titleTransition, true);
+  assert.equal(transition.seconds, 32);
+  for (const fixture of [title, transition]) {
+    assert.equal(fixture.Engine, AudioEngine);
+    assert.equal(fixture.seconds * 48000 * 2 * 4 + 44 < CAPTURE_LIMIT, true);
+    assert.deepEqual(plain(current.fixtureEvents(fixture)), []);
+  }
+  assert.equal(current.fixtureState(transition, 6).area, "haven");
+  assert.equal(current.fixtureState(transition, 11).area, "reach");
+  assert.equal(current.fixtureState(transition, 15).hostiles, 6);
+  assert.equal(current.fixtureState(transition, 20).hostiles, 0);
+  assert.equal(current.fixtureState(transition, 26).area, "haven");
 });
 
 test("current score declares three home identities, exploration, real boss inputs and healed thrust release", () => {
