@@ -143,7 +143,7 @@ fn ordinary_rank_and_evolution_match_solo_damage_cadence_samples_and_expiry() {
             quiet(&mut solo);
             let a = target(&mut solo, Vec2::new(769.0, 0.0), 1000.0, Kind::Enemy(0));
             let b = target(&mut coop, Vec2::new(769.0, 0.0), 1000.0, Kind::Enemy(0));
-            let body_before = format!("{:?}", &*coop.world.get::<&PixelBody>(b).unwrap());
+            let body_before = format!("{:?}", *coop.world.get::<&PixelBody>(b).unwrap());
             for tick in 0..360 {
                 solo.update_wake(solo.position(), TICK_SECONDS);
                 advance_wakes(&mut coop, TICK_SECONDS);
@@ -159,7 +159,7 @@ fn ordinary_rank_and_evolution_match_solo_damage_cadence_samples_and_expiry() {
                 );
             }
             assert_eq!(
-                format!("{:?}", &*coop.world.get::<&PixelBody>(b).unwrap()),
+                format!("{:?}", *coop.world.get::<&PixelBody>(b).unwrap()),
                 body_before
             );
             let expected = 1000.0 - 360.0 * 6.0 * (1.0 + 0.25 * (rank - 1) as f32) * TICK_SECONDS;
@@ -493,7 +493,7 @@ fn death_leave_rejoin_and_session_end_drop_all_membership_trails() {
     game.wake = vec![(Vec2::new(800.0, 0.0), 1.7)];
     game.wake_timer = 0.123;
     let solo_profile = serde_json::to_string(game.profile()).unwrap();
-    let solo_body = format!("{:?}", &*game.world.get::<&PixelBody>(game.player).unwrap());
+    let solo_body = format!("{:?}", *game.world.get::<&PixelBody>(game.player).unwrap());
     game.begin_co_op(PROTOCOL, session(), id(1)).unwrap();
     let source = Game::new(p);
     let build = source.co_op_owned_loadout().unwrap();
@@ -532,7 +532,7 @@ fn death_leave_rejoin_and_session_end_drop_all_membership_trails() {
     close(game.wake_timer, 0.123);
     assert_eq!(serde_json::to_string(game.profile()).unwrap(), solo_profile);
     assert_eq!(
-        format!("{:?}", &*game.world.get::<&PixelBody>(game.player).unwrap()),
+        format!("{:?}", *game.world.get::<&PixelBody>(game.player).unwrap()),
         solo_body
     );
 }

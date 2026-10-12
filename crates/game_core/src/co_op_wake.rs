@@ -97,7 +97,7 @@ impl Game {
             let previous = self
                 .co_op
                 .as_mut()
-                .map(|session| std::mem::replace(&mut session.hit_owner, Some(owner)));
+                .map(|session| session.hit_owner.replace(owner));
             for (entity, kind, position) in targets {
                 let multiplier = self.boss_damage_multiplier(entity, Vec2::splat(1000.0));
                 let dead = if let Ok(mut actor) = self.world.get::<&mut Actor>(entity) {
