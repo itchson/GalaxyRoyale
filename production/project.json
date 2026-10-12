@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 1075,
+  "revision": 1082,
   "name": "Galaxy Royale",
   "phase": "Playable solo slice → content and validation",
-  "updatedAt": "2026-10-12T21:09:36.530Z",
+  "updatedAt": "2026-10-12T21:14:01.003Z",
   "tasks": [
     {
       "id": "studio",
@@ -8897,6 +8897,77 @@
       "revision": 1,
       "createdAt": "2026-10-12T21:06:28.958Z",
       "updatedAt": "2026-10-12T21:06:28.958Z"
+    },
+    {
+      "id": "task-a9a3c675",
+      "title": "Avoid biome sampling for empty star tiles",
+      "description": "Star-cell rendering currently constructs four regional biome lookups before culling32 candidates. Lazily retain the same one FieldBlend after the first surviving candidate. Preserve identical packet ordering, seeded colors, twinkle, quality decisions and parallax. Gas morphology is unchanged; this is a scoped CPU efficiency improvement, not new nebula art or an FPS claim.",
+      "department": "Pixel engine / cosmic art",
+      "owner": "/root/audio_review",
+      "status": "active",
+      "priority": "normal",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Actual empty-tile baseline and meaningful avoided-work measurement preserved.",
+          "met": false
+        },
+        {
+          "text": "Bounded lazy sampling implementation keeps exact packets across quality, seed, camera and time cases.",
+          "met": false
+        },
+        {
+          "text": "Independent review, native checks, Root integration and matching build recorded.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual specialist finding",
+          "kind": "note",
+          "details": "Source inspected at8b0896d in cosmic_background.rs; Root authorized only that module and relevant focused tests. No invented visual or benchmark pass."
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-12T21:10:22.065Z",
+      "updatedAt": "2026-10-12T21:10:22.065Z"
+    },
+    {
+      "id": "task-942d32d6",
+      "title": "Preserve specialist departments when editing mission tasks",
+      "description": "Previously openTask offered only seven standard departments, so existing specialist labels silently selectedProduction and would be included asProduction in an unrelated save. The editor now retains exactcurrentlabel and escapesbothoptiontext/value. Actual before/afterselection verified without submitting or changing the specialist task.",
+      "department": "Production",
+      "owner": "Root",
+      "status": "complete",
+      "priority": "normal",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Preserve recorded specialist department during actual editor initialization.",
+          "met": true
+        },
+        {
+          "text": "Bounded escaped option rendering, TypeScript and Studio build verified with actual evidence.",
+          "met": true
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual before/after editor selection and checks",
+          "kind": "artifact",
+          "path": "artifacts/studio-department-editor-20261013/report.json"
+        },
+        {
+          "label": "Bounded source fix",
+          "kind": "artifact",
+          "path": "artifacts/studio-department-editor-20261013/source.diff"
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-12T21:14:01.003Z",
+      "updatedAt": "2026-10-12T21:14:01.003Z"
     }
   ],
   "reviews": [
@@ -25700,6 +25771,76 @@
       "author": "Root",
       "source": "Actual integrated Node/WASM contract and browser smoke observations",
       "createdAt": "2026-10-12T21:09:36.530Z"
+    },
+    {
+      "id": "0189c5fa-12c6-4a79-8f91-33dff8c10b9d",
+      "revision": 1076,
+      "kind": "task.create",
+      "itemId": "task-a9a3c675",
+      "title": "Avoid biome sampling for empty star tiles",
+      "author": "Root",
+      "source": "Actual art specialist eager biome-query finding and bounded source assignment",
+      "createdAt": "2026-10-12T21:10:22.065Z"
+    },
+    {
+      "id": "c12b0575-3922-4b39-9ebe-62537710a2d2",
+      "revision": 1077,
+      "kind": "run",
+      "itemId": "run-66c59370",
+      "title": "Cosmic pixel engine specialist · running",
+      "author": "Root",
+      "source": "Actual collaboration agent inventory confirmed all three running and written assignments",
+      "createdAt": "2026-10-12T21:10:22.091Z"
+    },
+    {
+      "id": "2778c102-eb4d-4a87-b7b4-4d1cc81b15e1",
+      "revision": 1078,
+      "kind": "run",
+      "itemId": "run-96739c00",
+      "title": "Audio / multiplayer QA specialist · running",
+      "author": "Root",
+      "source": "Actual collaboration agent inventory confirmed all three running and written assignments",
+      "createdAt": "2026-10-12T21:10:22.108Z"
+    },
+    {
+      "id": "780b4fab-5ed4-476d-a69d-fb058843a58a",
+      "revision": 1079,
+      "kind": "run",
+      "itemId": "run-1bc763e3",
+      "title": "Independent engine reviewer · running",
+      "author": "Root",
+      "source": "Actual collaboration agent inventory confirmed all three running and written assignments",
+      "createdAt": "2026-10-12T21:10:22.129Z"
+    },
+    {
+      "id": "67029630-55fa-42c5-a36d-c891c3c8d93d",
+      "revision": 1080,
+      "kind": "run",
+      "itemId": "run-353b5075",
+      "title": "Independent V4 native title harness reviewer · completed",
+      "author": "Codex audio_score",
+      "source": "actual independent read-only V4 source and native harness review",
+      "createdAt": "2026-10-12T21:12:00.532Z"
+    },
+    {
+      "id": "ba5dc812-9928-4833-8bbb-e40e9251d954",
+      "revision": 1081,
+      "kind": "run",
+      "itemId": "run-26d931a6",
+      "title": "Lazy star biome refinement · running",
+      "author": "/root/audio_review",
+      "source": "Actual assigned author execution and isolated native query probe",
+      "createdAt": "2026-10-12T21:13:04.532Z"
+    },
+    {
+      "id": "ec52e67d-2d36-4814-9a01-1f5320815791",
+      "revision": 1082,
+      "kind": "task.create",
+      "itemId": "task-942d32d6",
+      "title": "Preserve specialist departments when editing mission tasks",
+      "author": "Root",
+      "source": "Actual Studio editor regression, bounded fix and browser verification",
+      "createdAt": "2026-10-12T21:14:01.003Z"
     }
   ],
   "runRecords": [
@@ -35270,6 +35411,117 @@
       "author": "Codex audio_score",
       "source": "actual first native configured fixture step",
       "createdAt": "2026-10-12T20:54:02.413Z"
+    },
+    {
+      "id": "run-66c59370",
+      "title": "Cosmic pixel engine specialist · running",
+      "agentId": "/root/audio_review",
+      "agentLabel": "Cosmic pixel engine specialist",
+      "state": "running",
+      "observedAt": "2026-10-12T21:10:22.080Z",
+      "taskIds": [
+        "task-a9a3c675"
+      ],
+      "summary": "Implementing approved lazy biome lookup after identifying actual eager work on culled star tiles.",
+      "evidence": [
+        {
+          "label": "Actual assignment and live agent-state observation",
+          "kind": "note",
+          "details": "Root collaboration.list_agents returned running for this agent at this observation; assignments delivered through followup_task/send_message in this session. Last-recorded observation, not a background daemon claim."
+        }
+      ],
+      "author": "Root",
+      "source": "Actual collaboration agent inventory confirmed all three running and written assignments",
+      "createdAt": "2026-10-12T21:10:22.091Z"
+    },
+    {
+      "id": "run-96739c00",
+      "title": "Audio / multiplayer QA specialist · running",
+      "agentId": "/root/audio_score",
+      "agentLabel": "Audio / multiplayer QA specialist",
+      "state": "running",
+      "observedAt": "2026-10-12T21:10:22.080Z",
+      "taskIds": [
+        "task-d0e4d592"
+      ],
+      "summary": "Completing independent V4 audio evidence review then authoring configured nativeR1 Wake QA harness on isolated source branch.",
+      "evidence": [
+        {
+          "label": "Actual assignment and live agent-state observation",
+          "kind": "note",
+          "details": "Root collaboration.list_agents returned running for this agent at this observation; assignments delivered through followup_task/send_message in this session. Last-recorded observation, not a background daemon claim."
+        }
+      ],
+      "author": "Root",
+      "source": "Actual collaboration agent inventory confirmed all three running and written assignments",
+      "createdAt": "2026-10-12T21:10:22.108Z"
+    },
+    {
+      "id": "run-1bc763e3",
+      "title": "Independent engine reviewer · running",
+      "agentId": "/root/engine_fx",
+      "agentLabel": "Independent engine reviewer",
+      "state": "running",
+      "observedAt": "2026-10-12T21:10:22.080Z",
+      "taskIds": [
+        "task-d82150b9",
+        "task-b062202c"
+      ],
+      "summary": "Reviewing combined integrated Wake and world-edge native interactions after accepting configured fixture provenance.",
+      "evidence": [
+        {
+          "label": "Actual assignment and live agent-state observation",
+          "kind": "note",
+          "details": "Root collaboration.list_agents returned running for this agent at this observation; assignments delivered through followup_task/send_message in this session. Last-recorded observation, not a background daemon claim."
+        }
+      ],
+      "author": "Root",
+      "source": "Actual collaboration agent inventory confirmed all three running and written assignments",
+      "createdAt": "2026-10-12T21:10:22.129Z"
+    },
+    {
+      "id": "run-353b5075",
+      "title": "Independent V4 native title harness reviewer · completed",
+      "agentId": "/root/audio_score",
+      "agentLabel": "Independent V4 native title harness reviewer",
+      "state": "completed",
+      "observedAt": "2026-10-12T21:12:00.457Z",
+      "taskIds": [
+        "task-5301e8a1"
+      ],
+      "summary": "No source/evidence blocker for bounded73d7268 V4 audition. Verified14 retained native WAV hashes/headers,6 prepared+curated modules,6 current helpers,5 current source inputs,4 unchanged score/state hashes and9 recommendation evidence pins. Native report7 clean cases; passing API test evidence79/79 identified separately from2 preserved failed attempts. Title RMS+0.123dB vsV3; no perceived-fullness claim. No rerun/render/listener/browser/playback/source/branch edit; physical/mobile/max-title-overlap and mid-render cleanup remain separate gates.",
+      "evidence": [
+        {
+          "label": "Independent read-only native harness review",
+          "kind": "note",
+          "details": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/title-fullness-harness-review/REVIEW.md, verification.json, verify.log and two preserved input-path/newline failures. Accepts existing V4 capture for next audition only; native contexts hooks are adapted for offline DSP and cannot accept physical interruption/mobile-resume. Actual14 WAV byte hashes verified without sample/Welch reanalysis."
+        }
+      ],
+      "author": "Codex audio_score",
+      "source": "actual independent read-only V4 source and native harness review",
+      "createdAt": "2026-10-12T21:12:00.532Z"
+    },
+    {
+      "id": "run-26d931a6",
+      "title": "Lazy star biome refinement · running",
+      "agentId": "/root/audio_review",
+      "agentLabel": "Lazy star biome refinement",
+      "state": "running",
+      "observedAt": "2026-10-12T21:13:04.515Z",
+      "taskIds": [
+        "task-a9a3c675"
+      ],
+      "summary": "Author actually running in isolated codex/nebula-render-refinement from8b0896d. Actual work-only native baseline proves empty in-scan star tile makes4biome queries and records72cosmic packet digests. Narrow lazyfield patch and focused tests being verified. First compile failure on missing snapshot include fixtures preserved.",
+      "evidence": [
+        {
+          "label": "Actual bounded source and native baseline",
+          "kind": "note",
+          "details": "work/nebula-render-refinement/before-probe.log retains original missing fixture failure; before-probe-retry.log actual1pass; before-query-results.json actual72fixture output. No gas morphology change, normalbuild/browser/GPU/listener/FPS claim."
+        }
+      ],
+      "author": "/root/audio_review",
+      "source": "Actual assigned author execution and isolated native query probe",
+      "createdAt": "2026-10-12T21:13:04.532Z"
     }
   ],
   "phaseDescription": "Desktop-first Rust/WASM solo game and local Studio are implemented. Reviewed occupied-cell art, reproducible conversion, responsive native settings/icons and minimap, strict GitHub integration gates and source-backed Dev Bible are integrated. Natural campaign balance, human listening, owner-private update lifecycle and physical phones remain separate pending gates."
