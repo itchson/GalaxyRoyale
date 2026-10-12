@@ -176,7 +176,7 @@ impl PixelRig {
             let cells = damaged_body
                 .cells_indexed()
                 .filter(|&(cell_index, _, _)| self.roles[cell_index] as usize == index)
-                .map(|(_, local, color)| {
+                .map(|(cell_index, local, color)| {
                     let tint = match part.role {
                         PixelRigRole::Core if !state.core_open => 0.56 + charge * 0.1,
                         PixelRigRole::Core => 1.0 + pulse * 0.1,
@@ -191,9 +191,14 @@ impl PixelRig {
                     (
                         local - placement.position,
                         u32::from_le_bytes([animate(r), animate(g), animate(b), alpha]),
+                        damaged_body.surface_index(cell_index),
                     )
                 });
-            emitted += frame.push_cells_affine_material(parent.compose(placement), material, cells);
+            emitted += frame.push_cells_affine_surface_material(
+                parent.compose(placement),
+                material,
+                cells,
+            );
         }
         emitted
     }
@@ -255,7 +260,7 @@ mod tests {
             .flat_map(|b| {
                 b.pixels
                     .iter()
-                    .map(|p| b.transforms[p.transform as usize].point(Vec2::from_array(p.local)))
+                    .map(|p| b.transforms[p.transform_slot()].point(Vec2::from_array(p.local)))
             })
             .collect();
         assert_eq!(positions.len(), expected.len());
@@ -404,7 +409,7 @@ mod tests {
             );
             for batch in &frame.frame().batches {
                 for pixel in &batch.pixels {
-                    let local = batch.transforms[pixel.transform as usize]
+                    let local = batch.transforms[pixel.transform_slot()]
                         .point(Vec2::from_array(pixel.local));
                     let grid = local + Vec2::splat(size as f32 * 0.5);
                     assert!(body.is_occupied(grid.x.floor() as usize, grid.y.floor() as usize));

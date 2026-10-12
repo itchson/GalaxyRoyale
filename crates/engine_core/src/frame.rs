@@ -1,4 +1,4 @@
-use crate::{AffineTransform, PixelBody, Transform, Vec2};
+use crate::{AffineTransform, PIXEL_TRANSFORM_SLOT_MASK, PixelBody, Surface, Transform, Vec2};
 use bytemuck::{Pod, Zeroable};
 
 pub const MAX_BATCH_TRANSFORMS: usize = 128;
@@ -69,7 +69,16 @@ impl GpuTransform {
 pub struct PixelInstance {
     pub local: [f32; 2],
     pub color: u32,
+    /// Low7 bits select the transform; optional surface occupies the upper25.
     pub transform: u32,
+}
+impl PixelInstance {
+    pub fn transform_slot(self) -> usize {
+        (self.transform & PIXEL_TRANSFORM_SLOT_MASK) as usize
+    }
+    pub fn surface(self) -> Option<Surface> {
+        Surface::from_cell_word(self.transform)
+    }
 }
 
 #[derive(Debug, Clone, Default)]
@@ -178,13 +187,14 @@ impl FrameBuilder {
             .last_mut()
             .expect("transform creates batch");
         batch.pixels.reserve(body.occupied_count());
-        batch
-            .pixels
-            .extend(body.cells().map(|(local, original)| PixelInstance {
-                local: local.to_array(),
-                color: color(local, original),
-                transform: slot,
-            }));
+        batch.pixels.extend(
+            body.cells_indexed()
+                .map(|(index, local, original)| PixelInstance {
+                    local: local.to_array(),
+                    color: color(local, original),
+                    transform: slot | body.surface_index(index).map_or(0, Surface::packed),
+                }),
+        );
         self.frame.pixel_count += body.occupied_count();
     }
 
@@ -241,6 +251,22 @@ impl FrameBuilder {
         }
         self.push_cells_packed(GpuTransform::from(transform).with_material(material), cells)
     }
+    /// Occupied subobject extraction retaining independent local surface fields.
+    /// Invalid positions are skipped; no PixelBody clone or extra GPU stream.
+    pub fn push_cells_affine_surface_material(
+        &mut self,
+        transform: AffineTransform,
+        material: PixelMaterial,
+        cells: impl IntoIterator<Item = (Vec2, u32, Option<Surface>)>,
+    ) -> usize {
+        if !transform.position.is_finite()
+            || !transform.basis_x.is_finite()
+            || !transform.basis_y.is_finite()
+        {
+            return 0;
+        }
+        self.push_surface_cells_packed(GpuTransform::from(transform).with_material(material), cells)
+    }
 
     /// Radially filtered cosmetic cells with local fractional geometry. The
     /// shader conserves projected area while filtering a subpixel footprint;
@@ -292,7 +318,17 @@ impl FrameBuilder {
         transform: GpuTransform,
         cells: impl IntoIterator<Item = (Vec2, u32)>,
     ) -> usize {
-        let mut cells = cells.into_iter().filter(|(local, _)| local.is_finite());
+        self.push_surface_cells_packed(
+            transform,
+            cells.into_iter().map(|(local, color)| (local, color, None)),
+        )
+    }
+    fn push_surface_cells_packed(
+        &mut self,
+        transform: GpuTransform,
+        cells: impl IntoIterator<Item = (Vec2, u32, Option<Surface>)>,
+    ) -> usize {
+        let mut cells = cells.into_iter().filter(|(local, _, _)| local.is_finite());
         let Some(first) = cells.next() else {
             return 0;
         };
@@ -303,17 +339,15 @@ impl FrameBuilder {
             .last_mut()
             .expect("transform creates batch");
         let previous = batch.pixels.len();
-        batch
-            .pixels
-            .extend(
-                std::iter::once(first)
-                    .chain(cells)
-                    .map(|(local, color)| PixelInstance {
-                        local: local.to_array(),
-                        color,
-                        transform: slot,
-                    }),
-            );
+        batch.pixels.extend(
+            std::iter::once(first)
+                .chain(cells)
+                .map(|(local, color, surface)| PixelInstance {
+                    local: local.to_array(),
+                    color,
+                    transform: slot | surface.map_or(0, Surface::packed),
+                }),
+        );
         let count = batch.pixels.len() - previous;
         self.frame.pixel_count += count;
         count
@@ -460,7 +494,7 @@ mod tests {
                 batch
                     .pixels
                     .iter()
-                    .all(|pixel| (pixel.transform as usize) < batch.transforms.len())
+                    .all(|pixel| pixel.transform_slot() < batch.transforms.len())
             );
         }
         assert_eq!(frame.batches[1].pixels[0].transform, 0);
@@ -481,7 +515,7 @@ mod tests {
         assert_eq!(frame.batches.len(), 1);
         assert_eq!(frame.batches[0].transforms.len(), 2);
         for (x, pixel) in frame.batches[0].pixels.iter().enumerate() {
-            let t = frame.batches[0].transforms[pixel.transform as usize];
+            let t = frame.batches[0].transforms[pixel.transform_slot()];
             near(
                 t.point(Vec2::from_array(pixel.local)),
                 Vec2::new(x as f32, -3.0),
@@ -502,7 +536,7 @@ mod tests {
         let batch = &frame.batches[1];
         let p = batch.pixels.last().unwrap();
         near(
-            batch.transforms[p.transform as usize].point(Vec2::from_array(p.local)),
+            batch.transforms[p.transform_slot()].point(Vec2::from_array(p.local)),
             Vec2::new(-3.0, 9.0),
         );
     }

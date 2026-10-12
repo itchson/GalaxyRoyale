@@ -5,6 +5,7 @@ mod camera;
 mod frame;
 mod pixel_rig;
 mod pixels;
+mod surface;
 mod topology;
 mod transform;
 
@@ -17,5 +18,6 @@ pub use pixel_rig::{
     MAX_PIXEL_RIG_PARTS, PixelRig, PixelRigError, PixelRigPart, PixelRigRole, PixelRigState,
 };
 pub use pixels::PixelBody;
+pub use surface::{PIXEL_SURFACE_ENABLED, PIXEL_TRANSFORM_SLOT_MASK, Surface};
 pub use topology::{CircularTopology, CircularWrap, CircularWrapError, MAX_CIRCULAR_CROSSINGS};
 pub use transform::{AffineTransform, Transform};

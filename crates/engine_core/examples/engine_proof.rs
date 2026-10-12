@@ -96,7 +96,7 @@ fn main() {
             batch
                 .pixels
                 .iter()
-                .all(|p| (p.transform as usize) < batch.transforms.len())
+                .all(|p| p.transform_slot() < batch.transforms.len())
         );
     }
     println!(

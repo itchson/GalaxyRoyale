@@ -1,4 +1,4 @@
-use crate::{AffineTransform, Vec2};
+use crate::{AffineTransform, Surface, Vec2};
 
 const EDGE_EPSILON: f32 = 0.00001;
 
@@ -11,6 +11,7 @@ pub struct PixelBody {
     colors: Box<[u32]>,
     occupancy: Box<[u64]>,
     occupied: usize,
+    surfaces: Option<Box<[Surface]>>,
 }
 
 impl PixelBody {
@@ -45,6 +46,7 @@ impl PixelBody {
             colors: vec![0; length].into_boxed_slice(),
             occupancy: vec![0; length.div_ceil(64)].into_boxed_slice(),
             occupied: cells.len(),
+            surfaces: None,
         };
         for &[index, color] in cells {
             let index = index as usize;
@@ -72,6 +74,7 @@ impl PixelBody {
             colors: vec![0; length].into_boxed_slice(),
             occupancy: vec![0; length.div_ceil(64)].into_boxed_slice(),
             occupied: 0,
+            surfaces: None,
         };
         for (y, row) in rows.iter().enumerate() {
             for (x, character) in row.chars().enumerate() {
@@ -89,6 +92,39 @@ impl PixelBody {
 
     pub fn occupied_count(&self) -> usize {
         self.occupied
+    }
+
+    /// Opt-in full-canvas surface map. Validate dimensions/allocation budget
+    /// before allocating; existing surface data remains intact on rejection.
+    /// Alpha-zero occupied cells can have metadata; real holes cannot emit it.
+    pub fn set_surfaces(
+        &mut self,
+        surfaces: &[Surface],
+        maximum_cells: usize,
+    ) -> Result<(), &'static str> {
+        let length = self
+            .width
+            .checked_mul(self.height)
+            .ok_or("surface dimensions overflow")?;
+        if length > maximum_cells || length != self.colors.len() || surfaces.len() != length {
+            return Err("surface dimensions or allocation budget mismatch");
+        }
+        self.surfaces = Some(surfaces.to_vec().into_boxed_slice());
+        Ok(())
+    }
+    pub fn clear_surfaces(&mut self) {
+        self.surfaces = None;
+    }
+    /// Full stable authored canvas, including cells whose occupancy was removed.
+    /// Consumers should emit only cells from the existing occupied iterator.
+    pub fn surfaces(&self) -> Option<&[Surface]> {
+        self.surfaces.as_deref()
+    }
+    pub fn surface_index(&self, index: usize) -> Option<Surface> {
+        if index >= self.colors.len() || !self.occupied_index(index) {
+            return None;
+        }
+        self.surfaces.as_ref().map(|s| s[index])
     }
 
     pub fn is_occupied(&self, x: usize, y: usize) -> bool {
