@@ -119,6 +119,11 @@ enum Operation {
         entity: String,
         offset: usize,
     },
+    WakePage {
+        session: ParticipantId,
+        acquisition: u32,
+        revision: u32,
+    },
     Notices {
         session: ParticipantId,
     },
@@ -201,6 +206,11 @@ fn execute(game: &mut Game, op: Operation) -> Result<Value, Error> {
             &entity,
             offset,
         )?),
+        Operation::WakePage {
+            session,
+            acquisition,
+            revision,
+        } => value(game.published_co_op_wake_page(session, acquisition, revision)?),
         Operation::Notices { session } => value(game.take_co_op_destructions(session)?),
     }
 }
@@ -247,3 +257,7 @@ pub fn dispatch(game: &mut Game, json: &str) -> String {
 #[cfg(test)]
 #[path = "co_op_bridge_tests.rs"]
 mod tests;
+
+#[cfg(test)]
+#[path = "co_op_bridge_wake_tests.rs"]
+mod wake_tests;

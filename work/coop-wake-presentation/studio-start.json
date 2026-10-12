@@ -1,0 +1,22 @@
+{
+  "id": "run-d46a55af",
+  "title": "Native Ion Wake presentation · running",
+  "agentId": "/root/audio_score",
+  "agentLabel": "Native Ion Wake presentation",
+  "state": "running",
+  "observedAt": "2026-10-12T19:17:43.333Z",
+  "taskIds": [
+    "task-8508cfc5"
+  ],
+  "summary": "Created clean codex/coop-wake-presentation from Root332ddd5. Independent DESIGN/v2 addendum review has no remaining blocker; beginning authorized native-only full trail snapshot/page and pixel-quad implementation. No build, test or runtime acceptance yet.",
+  "evidence": [
+    {
+      "label": "Observed clean native worktree baseline",
+      "kind": "note",
+      "details": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale at332ddd5ec0370e13ad346ea4ea988f35b61ca3e7; previous87de branch preserved; DESIGN fd85ae1 and ADDENDUM-v2 76790eca independently reviewed."
+    }
+  ],
+  "author": "Codex audio_score",
+  "source": "Actual bounded native assignment and worktree inspection",
+  "createdAt": "2026-10-12T19:17:43.396Z"
+}

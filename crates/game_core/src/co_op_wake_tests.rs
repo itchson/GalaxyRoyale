@@ -1,5 +1,15 @@
 //! Native Ion Wake tests. Fixtures arrange real profiles, motion and target ECS.
 use super::*;
+fn sample(position: Vec2, life: f32) -> crate::co_op_wake_fx::Sample {
+    crate::co_op_wake_fx::Sample {
+        position,
+        life,
+        born_tick: 0,
+    }
+}
+fn tuples(points: &[crate::co_op_wake_fx::Sample]) -> Vec<(Vec2, f32)> {
+    points.iter().map(|p| (p.position, p.life)).collect()
+}
 use serde_json::{Value, json};
 
 fn id(n: u32) -> ParticipantId {
@@ -149,7 +159,8 @@ fn ordinary_rank_and_evolution_match_solo_damage_cadence_samples_and_expiry() {
                 advance_wakes(&mut coop, TICK_SECONDS);
                 let pilot = coop.world.get::<&Pilot>(coop_player).unwrap();
                 assert_eq!(
-                    pilot.wake, solo.wake,
+                    tuples(&pilot.wake),
+                    solo.wake,
                     "evolution {evolution}, rank {rank}, tick {tick}"
                 );
                 close(pilot.wake_timer, solo.wake_timer);
@@ -170,7 +181,7 @@ fn ordinary_rank_and_evolution_match_solo_damage_cadence_samples_and_expiry() {
                 solo.update_wake(solo.position(), TICK_SECONDS);
                 advance_wakes(&mut coop, TICK_SECONDS);
                 assert_eq!(
-                    coop.world.get::<&Pilot>(coop_player).unwrap().wake,
+                    tuples(&coop.world.get::<&Pilot>(coop_player).unwrap().wake),
                     solo.wake
                 );
             }
@@ -232,7 +243,7 @@ fn eight_real_pilot_ticks_keep_builds_independent_and_resources_bounded() {
             assert!(
                 p.wake
                     .iter()
-                    .all(|(position, life)| position.is_finite() && *life > 0.0 && *life <= ttl)
+                    .all(|p| p.position.is_finite() && p.life > 0.0 && p.life <= ttl)
             );
             total += p.wake.len();
         }
@@ -404,17 +415,17 @@ fn safe_owner_and_safe_targets_age_trails_without_damage_or_birth() {
         .get::<&mut Pilot>(player)
         .unwrap()
         .wake
-        .push((Vec2::new(800.0, 0.0), 1.0));
+        .push(sample(Vec2::new(800.0, 0.0), 1.0));
     advance_wakes(&mut game, TICK_SECONDS);
     close(game.world.get::<&Actor>(enemy).unwrap().health, 100.0);
     close(
-        game.world.get::<&Pilot>(player).unwrap().wake[0].1,
+        game.world.get::<&Pilot>(player).unwrap().wake[0].life,
         1.0 - TICK_SECONDS,
     );
     assert_eq!(game.world.get::<&Pilot>(player).unwrap().wake.len(), 1);
     place(&mut game, player, Vec2::new(800.0, 0.0), 0.0);
     let protected = target(&mut game, Vec2::ZERO, 100.0, Kind::Enemy(0));
-    game.world.get::<&mut Pilot>(player).unwrap().wake = vec![(Vec2::ZERO, 1.0)];
+    game.world.get::<&mut Pilot>(player).unwrap().wake = vec![sample(Vec2::ZERO, 1.0)];
     advance_wakes(&mut game, TICK_SECONDS);
     close(game.world.get::<&Actor>(protected).unwrap().health, 100.0);
     let site = regions::sites_near(game.profile.seed, Vec2::new(40000.0, 30000.0))
@@ -424,7 +435,7 @@ fn safe_owner_and_safe_targets_age_trails_without_damage_or_birth() {
     let center = Vec2::from_array(site.position);
     assert!(game.outside_site_cache(center));
     let protected = target(&mut game, center, 100.0, Kind::Boss(2));
-    game.world.get::<&mut Pilot>(player).unwrap().wake = vec![(center, 1.0)];
+    game.world.get::<&mut Pilot>(player).unwrap().wake = vec![sample(center, 1.0)];
     advance_wakes(&mut game, TICK_SECONDS);
     close(game.world.get::<&Actor>(protected).unwrap().health, 100.0);
     place(&mut game, player, center, 1.0);
@@ -440,8 +451,8 @@ fn evolution_five_connects_short_samples_but_never_crosses_sanctuary_or_large_ga
     let enemy = target(&mut game, Vec2::new(800.0, 0.0), 100.0, Kind::Enemy(0));
     // Endpoints are outside reach. Only the connected segment may hit.
     game.world.get::<&mut Pilot>(player).unwrap().wake = vec![
-        (Vec2::new(800.0, -60.0), 1.0),
-        (Vec2::new(800.0, 60.0), 1.0),
+        sample(Vec2::new(800.0, -60.0), 1.0),
+        sample(Vec2::new(800.0, 60.0), 1.0),
     ];
     advance_wakes(&mut game, TICK_SECONDS);
     close(game.world.get::<&Actor>(enemy).unwrap().health, 99.8);
@@ -450,16 +461,18 @@ fn evolution_five_connects_short_samples_but_never_crosses_sanctuary_or_large_ga
     close(game.world.get::<&Actor>(enemy).unwrap().health, 99.8);
     game.world.get::<&mut Pilot>(player).unwrap().wake_evolution = 5;
     game.world.get::<&mut Pilot>(player).unwrap().wake = vec![
-        (Vec2::new(800.0, -81.0), 1.0),
-        (Vec2::new(800.0, 81.0), 1.0),
+        sample(Vec2::new(800.0, -81.0), 1.0),
+        sample(Vec2::new(800.0, 81.0), 1.0),
     ];
     advance_wakes(&mut game, TICK_SECONDS);
     close(game.world.get::<&Actor>(enemy).unwrap().health, 99.8);
     // A 150-unit tangent chord crosses Haven while the target lies outside it.
     let x = SAFE_RADIUS - 1.0;
     let protected_target = target(&mut game, Vec2::new(x + 20.0, 0.0), 100.0, Kind::Enemy(0));
-    game.world.get::<&mut Pilot>(player).unwrap().wake =
-        vec![(Vec2::new(x, -75.0), 1.0), (Vec2::new(x, 75.0), 1.0)];
+    game.world.get::<&mut Pilot>(player).unwrap().wake = vec![
+        sample(Vec2::new(x, -75.0), 1.0),
+        sample(Vec2::new(x, 75.0), 1.0),
+    ];
     assert!(game.safe_zone_at(Vec2::new(x + 20.0, 0.0)).is_none());
     advance_wakes(&mut game, TICK_SECONDS);
     close(
@@ -478,8 +491,8 @@ fn evolution_five_connects_short_samples_but_never_crosses_sanctuary_or_large_ga
     assert!(game.safe_zone_at(remote_position).is_none());
     let remote = target(&mut game, remote_position, 100.0, Kind::Enemy(0));
     game.world.get::<&mut Pilot>(player).unwrap().wake = vec![
-        (tangent - Vec2::Y * 75.0, 1.0),
-        (tangent + Vec2::Y * 75.0, 1.0),
+        sample(tangent - Vec2::Y * 75.0, 1.0),
+        sample(tangent + Vec2::Y * 75.0, 1.0),
     ];
     advance_wakes(&mut game, TICK_SECONDS);
     close(game.world.get::<&Actor>(remote).unwrap().health, 100.0);
@@ -728,7 +741,7 @@ fn overlapping_trails_kill_once_in_slot_order_and_restore_enclosing_owner() {
     for a in &admissions {
         let e = entity(&game, a.id);
         place(&mut game, e, Vec2::new(800.0, a.slot as f32 * 100.0), 0.0);
-        game.world.get::<&mut Pilot>(e).unwrap().wake = vec![(Vec2::new(900.0, 0.0), 1.0)];
+        game.world.get::<&mut Pilot>(e).unwrap().wake = vec![sample(Vec2::new(900.0, 0.0), 1.0)];
     }
     let boss = target(&mut game, Vec2::new(900.0, 0.0), 0.05, Kind::Boss(2));
     advance_wakes(&mut game, TICK_SECONDS);
@@ -740,6 +753,50 @@ fn overlapping_trails_kill_once_in_slot_order_and_restore_enclosing_owner() {
         (Some(admissions[0].id), Some(admissions[0].epoch))
     );
     assert!(game.co_op.as_ref().unwrap().hit_owner.is_none());
+}
+
+#[test]
+fn admitted_live_wake_samples_have_real_host_pixel_quads() {
+    let (mut game, _) = start(&[profile(5, 5, 1560)]);
+    let player = game.player;
+    let position = Vec2::new(800.0, 0.0);
+    place(&mut game, player, position, 0.75);
+    quiet(&mut game);
+    game.camera = position;
+    game.previous_camera = position;
+    game.submit_host_co_op_input(
+        session(),
+        1,
+        InputFrame {
+            joystick: Some([1.0, 0.0]),
+            ..Default::default()
+        },
+    )
+    .unwrap();
+    game.tick_co_op(session()).unwrap();
+    let point = game.world.get::<&Pilot>(player).unwrap().wake[0].position;
+    let mut frame = FrameBuilder::new();
+    game.render_into(1.0, &mut frame);
+    let visible_dots = frame
+        .frame()
+        .batches
+        .iter()
+        .flat_map(|batch| {
+            batch.pixels.iter().filter(move |pixel| {
+                let transform = batch.transforms[pixel.transform_slot()];
+                pixel.color == rgba(132, 255, 202, 255)
+                    && transform
+                        .point(Vec2::from_array(pixel.local))
+                        .distance(point)
+                        < 8.0
+            })
+        })
+        .count();
+    println!("actual_native_host_wake_samples=1; actual_rendered_wake_dots={visible_dots}");
+    assert_eq!(
+        visible_dots, 5,
+        "real admitted trails need the same five native quads as solo"
+    );
 }
 
 #[test]

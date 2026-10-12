@@ -18,6 +18,7 @@ pub mod co_op_publish;
 pub mod co_op_replica;
 #[cfg(test)]
 mod co_op_tests;
+pub mod co_op_wake_fx;
 #[cfg(test)]
 mod component_tests;
 pub mod components;
@@ -3484,18 +3485,30 @@ impl Game {
             self.viewport,
             self.cosmetic_time(),
         );
-        for (position, life) in &self.wake {
-            if !self.visible(*position, 12.0) {
-                continue;
-            }
-            for n in 0..5 {
-                let offset = forward(n as f32 * TAU / 5.0 + self.cosmetic_time()) * 6.0;
-                frame.push_pixel(
-                    *position + offset,
-                    2.0,
-                    rgba(132, 255, 202, (*life / 2.0 * 155.0) as u8),
-                );
-            }
+        co_op_wake_fx::append(
+            frame,
+            self.wake.iter().copied(),
+            self.cosmetic_time(),
+            |p, r| self.visible(p, r),
+        );
+        if let Some(session) = &self.co_op {
+            let points = self.co_op_wake_points();
+            let phase = if self.reduced_motion {
+                0.0
+            } else {
+                session.tick as f32 / 60.0
+            };
+            co_op_wake_fx::append(
+                frame,
+                points.iter().map(|p| {
+                    (
+                        Vec2::new(p.position[0] as f32, p.position[1] as f32),
+                        p.life as f32,
+                    )
+                }),
+                phase,
+                |p, r| self.visible(p, r),
+            );
         }
         for (entity, (motion, actor, body, boss, riveter, mote)) in self
             .world

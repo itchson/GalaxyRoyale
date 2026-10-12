@@ -1,0 +1,22 @@
+   Compiling game_core v0.1.0 (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\crates\game_core)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 4.80s
+     Running unittests src\lib.rs (target\debug\deps\game_core-5b2032bfdcb8bcac.exe)
+
+running 1 test
+actual_native_host_wake_samples=1; actual_rendered_wake_dots=0
+
+thread 'co_op::wake_tests::admitted_live_wake_samples_have_real_host_pixel_quads' (2996) panicked at crates\game_core\src\co_op_wake_tests.rs:769:5:
+assertion `left == right` failed: real admitted trails need the same five native quads as solo
+  left: 0
+ right: 5
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test co_op::wake_tests::admitted_live_wake_samples_have_real_host_pixel_quads ... FAILED
+
+failures:
+
+failures:
+    co_op::wake_tests::admitted_live_wake_samples_have_real_host_pixel_quads
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 542 filtered out; finished in 0.03s
+
+error: test failed, to rerun pass `-p game_core --lib`

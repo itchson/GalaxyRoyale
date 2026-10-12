@@ -68,6 +68,12 @@ pub struct Snapshot {
         skip_serializing_if = "Option::is_none"
     )]
     pub nova_fx: Option<crate::co_op_fx::Journal>,
+    #[serde(
+        default,
+        deserialize_with = "strict_wake_fx",
+        skip_serializing_if = "Option::is_none"
+    )]
+    pub wake_fx: Option<crate::co_op_wake_fx::WakeMeta>,
 }
 #[derive(Clone, Copy, Debug, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
@@ -140,6 +146,7 @@ pub struct Scene {
     previous_shots: Vec<[f32; 2]>,
     blend_seconds: f32,
     fx: crate::co_op_fx::Cache,
+    wake: crate::co_op_wake_fx::Cache,
 }
 /// Camera and viewport are world units, exactly as Game::set_viewport. UI
 /// dimensions/zoom remain the renderer's responsibility; no presentation shake.
@@ -642,6 +649,14 @@ impl Scene {
         } else {
             0.0
         };
+        let phase = if view.is_some_and(|v| v.reduced_motion) {
+            0.0
+        } else {
+            self.header.snapshot.tick as f32 / 60.0
+        };
+        crate::co_op_wake_fx::append(frame, self.wake.visible(), phase, |p, r| {
+            view.is_none_or(|v| v.visible(p, r))
+        });
         for (index, (row, body)) in self.entities.iter().enumerate() {
             let (previous, heading) = self.previous_poses[index];
             let position = Vec2::from_array(previous).lerp(Vec2::from_array(row.position), alpha);
@@ -764,6 +779,7 @@ struct Pending {
     rows: Vec<Entity>,
     cells: HashMap<String, Vec<[u32; 2]>>,
     received_at: f64,
+    wake: Option<Vec<crate::co_op_wake_fx::Captured>>,
 }
 pub struct Replica {
     session: ParticipantId,
@@ -858,6 +874,7 @@ impl Replica {
         self.clock = seconds;
         if let Some(scene) = &mut self.scene {
             scene.fx.advance(seconds);
+            scene.wake.advance(seconds);
         }
         Ok(())
     }
@@ -890,6 +907,12 @@ impl Replica {
                 || snapshot.revision < old.header.snapshot.revision
         }) {
             return Err("retired_publication");
+        }
+        if snapshot
+            .wake_fx
+            .is_some_and(|m| usize::from(m.points) > crate::co_op_wake_fx::MAX_POINTS)
+        {
+            return Err("invalid_wake_meta");
         }
         let mut ids = BTreeSet::new();
         let mut slots = BTreeSet::new();
@@ -1001,6 +1024,7 @@ impl Replica {
             rows: Vec::new(),
             cells: HashMap::new(),
             received_at: self.clock,
+            wake: None,
         });
         Ok(())
     }
@@ -1021,6 +1045,47 @@ impl Replica {
             return Err("stale_page");
         }
         Ok(p)
+    }
+    pub fn wake(&mut self, acquisition: u32, page: crate::co_op_wake_fx::WakePage) -> Result<()> {
+        if page.points.len() > crate::co_op_wake_fx::MAX_POINTS
+            || serde_json::to_vec(&page)
+                .map_or(true, |v| v.len() > crate::co_op_wake_fx::MAX_PAGE_BYTES)
+        {
+            return Err("wake_page_bound");
+        }
+        let p = self.pending(acquisition, page.session, page.tick, page.revision)?;
+        let expected = p
+            .header
+            .snapshot
+            .wake_fx
+            .map_or(0, |m| usize::from(m.points));
+        if expected == 0 || page.points.len() != expected || p.wake.is_some() {
+            return Err("invalid_wake_page");
+        }
+        let mut points = Vec::with_capacity(expected);
+        let mut previous = None;
+        let mut counts = [0usize; 8];
+        for point in &page.points {
+            let member = p
+                .header
+                .snapshot
+                .participants
+                .iter()
+                .find(|m| m.slot == point.slot && m.epoch == point.epoch)
+                .ok_or("unknown_wake_member")?;
+            let key = (point.slot, point.born_tick);
+            if previous.is_some_and(|old| old >= key) {
+                return Err("invalid_wake_order");
+            }
+            counts[point.slot as usize] += 1;
+            if counts[point.slot as usize] > crate::co_op_wake_fx::MAX_MEMBER_POINTS {
+                return Err("wake_member_bound");
+            }
+            points.push(point.canonical(member.id, page.tick)?);
+            previous = Some(key);
+        }
+        p.wake = Some(points);
+        Ok(())
     }
     pub fn entities(&mut self, acquisition: u32, page: EntityPage) -> Result<()> {
         let p = self.pending(acquisition, page.session, page.tick, page.revision)?;
@@ -1291,6 +1356,37 @@ impl Replica {
                 / 60.0)
                 .clamp(1.0 / 60.0, 0.1)
         });
+        let expected = p
+            .header
+            .snapshot
+            .wake_fx
+            .map_or(0, |m| usize::from(m.points));
+        if p.wake.as_ref().map_or(0, Vec::len) != expected {
+            return Err("incomplete_wake");
+        }
+        let wake = crate::co_op_wake_fx::Cache::reconcile(
+            self.scene
+                .as_ref()
+                .map(|s| (&s.wake, s.header.snapshot.tick)),
+            p.header.snapshot.tick,
+            p.received_at,
+            self.clock,
+            p.wake.as_deref().unwrap_or(&[]),
+            |id, epoch| {
+                self.scene.as_ref().is_some_and(|old| {
+                    old.header
+                        .snapshot
+                        .participants
+                        .iter()
+                        .any(|m| m.id == id && m.epoch == epoch)
+                }) && p
+                    .header
+                    .snapshot
+                    .participants
+                    .iter()
+                    .any(|m| m.id == id && m.epoch == epoch)
+            },
+        )?;
         // All geometry, body signatures and membership have now validated. A
         // failed transfer never changes dedup state or admits pending effects.
         let mut fx = self
@@ -1334,6 +1430,7 @@ impl Replica {
             previous_shots,
             blend_seconds,
             fx,
+            wake,
         });
         Ok(())
     }
@@ -1350,6 +1447,12 @@ fn pilot_profile(pilot: &Pilot) -> Result<crate::Profile> {
         None => crate::co_op::guest_profile(&spec),
     }
     .map_err(|_| "invalid_pilot")
+}
+
+fn strict_wake_fx<'de, D: serde::Deserializer<'de>>(
+    d: D,
+) -> std::result::Result<Option<crate::co_op_wake_fx::WakeMeta>, D::Error> {
+    crate::co_op_wake_fx::WakeMeta::deserialize(d).map(Some)
 }
 
 fn strict_nova_fx<'de, D: serde::Deserializer<'de>>(

@@ -1,0 +1,11 @@
+   Compiling game_core v0.1.0 (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\crates\game_core)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 4.07s
+     Running unittests src\lib.rs (target\debug\deps\game_core-5b2032bfdcb8bcac.exe)
+
+running 1 test
+actual_value_maximum_page_bytes=18401; exact_wrappers_publication_stage_body_wake_bytes=[49452, 49389, 18495, 18452]; pilots=8 owner_projectiles=180 nova_records=32 wake_points=192
+declared_max_u32_scalar_page_transport_native_bytes=[21745, 21839, 21805]; separate_from_actual_tick_execution=true
+test co_op_replica::tests::wake_fx::export_actual_native_wake_contract_fixtures ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 554 filtered out; finished in 0.96s
+

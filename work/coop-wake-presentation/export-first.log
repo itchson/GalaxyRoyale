@@ -1,0 +1,19 @@
+   Compiling game_core v0.1.0 (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\crates\game_core)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 4.07s
+     Running unittests src\lib.rs (target\debug\deps\game_core-5b2032bfdcb8bcac.exe)
+
+running 1 test
+
+thread 'co_op_replica::tests::wake_fx::export_actual_native_wake_contract_fixtures' (36660) panicked at crates\game_core\src\co_op_replica_tests.rs:132:10:
+called `Result::unwrap()` on an `Err` value: "wake_position_changed"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test co_op_replica::tests::wake_fx::export_actual_native_wake_contract_fixtures ... FAILED
+
+failures:
+
+failures:
+    co_op_replica::tests::wake_fx::export_actual_native_wake_contract_fixtures
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 553 filtered out; finished in 0.27s
+
+error: test failed, to rerun pass `-p game_core --lib`

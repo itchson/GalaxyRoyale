@@ -123,7 +123,7 @@ pub(super) struct Pilot {
     pub wake_rank: u8,
     pub wake_evolution: u8,
     pub wake_timer: f32,
-    pub wake: Vec<(Vec2, f32)>,
+    pub wake: Vec<crate::co_op_wake_fx::Sample>,
     pub input: InputFrame,
     pub last_sequence: Option<u32>,
     pub input_tick: u32,
@@ -133,7 +133,7 @@ pub(super) struct Session {
     pub solo: Box<Game>,
     id: ParticipantId,
     host: ParticipantId,
-    tick: u32,
+    pub(super) tick: u32,
     revision: u32,
     next_epoch: u32,
     pub hit_owner: Option<ShotOwner>,
@@ -189,6 +189,8 @@ pub struct Snapshot {
     pub dropped_notices: u32,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub nova_fx: Option<crate::co_op_fx::Journal>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub wake_fx: Option<crate::co_op_wake_fx::WakeMeta>,
 }
 #[derive(Clone, Debug, Serialize)]
 pub struct Destruction {
@@ -1270,6 +1272,16 @@ impl Game {
             projectiles,
             dropped_notices: session.dropped_notices,
             nova_fx,
+            wake_fx: Some(crate::co_op_wake_fx::WakeMeta {
+                points: self
+                    .world
+                    .query::<&Pilot>()
+                    .iter()
+                    .map(|p| p.wake.len())
+                    .sum::<usize>()
+                    .try_into()
+                    .unwrap_or(u16::MAX),
+            }),
         })
     }
     pub fn co_op_session(&self) -> Option<ParticipantId> {

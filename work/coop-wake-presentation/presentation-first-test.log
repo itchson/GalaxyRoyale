@@ -1,0 +1,47 @@
+   Compiling game_core v0.1.0 (C:\Users\mitch\.codex\worktrees\galaxy-pixel-art\galaxy-royale\crates\game_core)
+error[E0308]: mismatched types
+   --> crates\game_core\src\co_op_replica_wake_tests.rs:200:9
+    |
+200 |     for (_, p) in game.world.query_mut::<&mut co_op::Pilot>() { p.wake.clear(); }
+    |         ^^^^^^    ------------------------------------------- this is an iterator with items of type `&mut co_op::Pilot`
+    |         |
+    |         expected `Pilot`, found `(_, _)`
+    |
+    = note: expected struct `co_op::Pilot`
+                found tuple `(_, _)`
+
+error[E0308]: mismatched types
+   --> crates\game_core\src\co_op_replica_wake_tests.rs:201:9
+    |
+201 |     for (_, m) in game.world.query_mut::<&mut Motion>() { m.velocity = Vec2::ZERO; }
+    |         ^^^^^^    ------------------------------------- this is an iterator with items of type `&mut Motion`
+    |         |
+    |         expected `Motion`, found `(_, _)`
+    |
+    = note: expected struct `Motion`
+                found tuple `(_, _)`
+
+error[E0308]: mismatched types
+   --> crates\game_core\src\co_op_replica_wake_tests.rs:213:9
+    |
+213 |     for (_, pilot) in game.world.query_mut::<&mut co_op::Pilot>() {
+    |         ^^^^^^^^^^    ------------------------------------------- this is an iterator with items of type `&mut co_op::Pilot`
+    |         |
+    |         expected `Pilot`, found `(_, _)`
+    |
+    = note: expected struct `co_op::Pilot`
+                found tuple `(_, _)`
+
+error[E0308]: mismatched types
+   --> crates\game_core\src\co_op_replica_wake_tests.rs:218:9
+    |
+218 |     for (_, pilot) in game.world.query_mut::<&mut co_op::Pilot>() {
+    |         ^^^^^^^^^^    ------------------------------------------- this is an iterator with items of type `&mut co_op::Pilot`
+    |         |
+    |         expected `Pilot`, found `(_, _)`
+    |
+    = note: expected struct `co_op::Pilot`
+                found tuple `(_, _)`
+
+For more information about this error, try `rustc --explain E0308`.
+error: could not compile `game_core` (lib test) due to 4 previous errors

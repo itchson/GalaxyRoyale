@@ -42,6 +42,7 @@ pub struct Publication {
     rows: Vec<EntityState>,
     bodies: Vec<PixelBody>,
     counts: Counts,
+    wake: crate::co_op_wake_fx::WakePage,
 }
 #[derive(Serialize)]
 pub struct Capture<'a> {
@@ -74,6 +75,9 @@ impl Publication {
             snapshot: &self.snapshot,
             counts: self.counts,
         }
+    }
+    pub fn wake_page(&self) -> crate::co_op_wake_fx::WakePage {
+        self.wake.clone()
     }
     pub fn entity_page(&self, offset: usize) -> Result<EntityPage, Error> {
         if offset > self.rows.len() {
@@ -134,6 +138,36 @@ impl Game {
         {
             return Err(Error::PublicationBound);
         }
+        let wake = crate::co_op_wake_fx::WakePage {
+            session: snapshot.session,
+            tick: snapshot.tick,
+            revision: snapshot.revision,
+            points: self.co_op_wake_points(),
+        };
+        if wake.points.len() > crate::co_op_wake_fx::MAX_POINTS
+            || serde_json::to_vec(&wake)
+                .map_or(true, |v| v.len() > crate::co_op_wake_fx::MAX_PAGE_BYTES)
+        {
+            return Err(Error::PublicationBound);
+        }
+        let mut previous = None;
+        let mut member_counts = [0usize; co_op::MAX_PARTICIPANTS];
+        for point in &wake.points {
+            let member = snapshot
+                .participants
+                .iter()
+                .find(|p| p.slot == point.slot && p.epoch == point.epoch)
+                .ok_or(Error::PublicationBound)?;
+            let key = (point.slot, point.born_tick);
+            member_counts[point.slot as usize] += 1;
+            if previous.is_some_and(|p| p >= key)
+                || member_counts[point.slot as usize] > crate::co_op_wake_fx::MAX_MEMBER_POINTS
+                || point.canonical(member.id, snapshot.tick).is_err()
+            {
+                return Err(Error::PublicationBound);
+            }
+            previous = Some(key);
+        }
         // Admit scalar bounds before scanning cells for signatures or cloning.
         let mut counts = Counts {
             entities: 0,
@@ -181,6 +215,7 @@ impl Game {
             rows,
             bodies,
             counts,
+            wake,
         });
         self.publication_generation = acquisition;
         Ok(self.publication.as_ref().unwrap().capture())
@@ -198,6 +233,16 @@ impl Game {
             return Err(Error::StalePublication);
         }
         Ok(published)
+    }
+    pub fn published_co_op_wake_page(
+        &self,
+        session: ParticipantId,
+        acquisition: u32,
+        revision: u32,
+    ) -> Result<crate::co_op_wake_fx::WakePage, Error> {
+        Ok(self
+            .co_op_publication(session, acquisition, revision)?
+            .wake_page())
     }
     pub fn published_co_op_entity_page(
         &self,

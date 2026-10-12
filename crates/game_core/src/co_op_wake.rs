@@ -7,6 +7,7 @@ impl Game {
         origins: [Option<(Entity, Vec2)>; MAX_PARTICIPANTS],
         dt: f32,
     ) {
+        let born_tick = self.co_op.as_ref().unwrap().tick;
         // Slot order also defines attribution when overlapping trails kill.
         for (pilot_entity, origin) in origins.into_iter().flatten() {
             let Ok(motion) = self.world.get::<&Motion>(pilot_entity).map(|m| *m) else {
@@ -17,10 +18,10 @@ impl Game {
                 let Ok(mut pilot) = self.world.get::<&mut Pilot>(pilot_entity) else {
                     continue;
                 };
-                for (_, life) in &mut pilot.wake {
-                    *life -= dt;
+                for sample in &mut pilot.wake {
+                    sample.life -= dt;
                 }
-                pilot.wake.retain(|(_, life)| *life > 0.0);
+                pilot.wake.retain(|sample| sample.life > 0.0);
                 if pilot.wake_rank == 0 || safe {
                     continue;
                 }
@@ -41,7 +42,11 @@ impl Game {
                     if pilot.wake.len() >= capacity {
                         pilot.wake.remove(0);
                     }
-                    pilot.wake.push((point, duration));
+                    pilot.wake.push(crate::co_op_wake_fx::Sample {
+                        position: point,
+                        life: duration,
+                        born_tick,
+                    });
                 }
                 (
                     ShotOwner {
@@ -58,41 +63,40 @@ impl Game {
                 self.event("ability-wake", origin, 0.45);
             }
             let reach = if evolution >= 3 { 28.0 } else { 20.0 };
-            let targets =
-                {
-                    let pilot = self.world.get::<&Pilot>(pilot_entity).unwrap();
-                    // At most 23 links. Query sanctuaries once per link, including
-                    // remote neighborhoods outside the host's render-site cache.
-                    let links: Vec<_> = if evolution >= 5 {
-                        pilot
-                            .wake
-                            .windows(2)
-                            .filter_map(|pair| {
-                                let (a, b) = (pair[0].0, pair[1].0);
-                                (a.distance_squared(b) <= 160.0 * 160.0
-                                    && segment_circle(a, b, Vec2::ZERO, SAFE_RADIUS).is_none()
-                                    && !regions::segment_protected(self.profile.seed, a, b))
-                                .then_some((a, b))
-                            })
-                            .collect()
-                    } else {
-                        Vec::new()
-                    };
-                    self.world
-                        .query::<(Entity, (&Motion, &Actor))>()
-                        .iter()
-                        .filter(|(_, (m, a))| {
-                            matches!(a.kind, Kind::Enemy(_) | Kind::Boss(_))
-                                && self.safe_zone_at(m.position).is_none()
-                                && (pilot.wake.iter().any(|(point, _)| {
-                                    m.position.distance(*point) < reach + a.radius
-                                }) || links.iter().any(|&(from, to)| {
-                                    segment_circle(from, to, m.position, reach + a.radius).is_some()
-                                }))
+            let targets = {
+                let pilot = self.world.get::<&Pilot>(pilot_entity).unwrap();
+                // At most 23 links. Query sanctuaries once per link, including
+                // remote neighborhoods outside the host's render-site cache.
+                let links: Vec<_> = if evolution >= 5 {
+                    pilot
+                        .wake
+                        .windows(2)
+                        .filter_map(|pair| {
+                            let (a, b) = (pair[0].position, pair[1].position);
+                            (a.distance_squared(b) <= 160.0 * 160.0
+                                && segment_circle(a, b, Vec2::ZERO, SAFE_RADIUS).is_none()
+                                && !regions::segment_protected(self.profile.seed, a, b))
+                            .then_some((a, b))
                         })
-                        .map(|(entity, (motion, actor))| (entity, actor.kind, motion.position))
-                        .collect::<Vec<_>>()
+                        .collect()
+                } else {
+                    Vec::new()
                 };
+                self.world
+                    .query::<(Entity, (&Motion, &Actor))>()
+                    .iter()
+                    .filter(|(_, (m, a))| {
+                        matches!(a.kind, Kind::Enemy(_) | Kind::Boss(_))
+                            && self.safe_zone_at(m.position).is_none()
+                            && (pilot.wake.iter().any(|sample| {
+                                m.position.distance(sample.position) < reach + a.radius
+                            }) || links.iter().any(|&(from, to)| {
+                                segment_circle(from, to, m.position, reach + a.radius).is_some()
+                            }))
+                    })
+                    .map(|(entity, (motion, actor))| (entity, actor.kind, motion.position))
+                    .collect::<Vec<_>>()
+            };
             let damage = 6.0 * (1.0 + 0.25 * rank.saturating_sub(1) as f32) * dt;
             let previous = self
                 .co_op
