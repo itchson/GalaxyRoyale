@@ -544,3 +544,132 @@ fn exact_projectile_geometry_limits_and_invalid_headers_keep_prior_scene() {
         *game.world.get::<&mut Motion>(game.player).unwrap() = original;
     }
 }
+
+/// Explicit native fixture export only. It uses the same real unfiltered Game
+/// captures as the edge regressions; no Profile/loadout/header value is authored.
+#[test]
+#[ignore = "explicit native edge serializer export; requires GALAXY_NATIVE_EDGE_FIXTURES"]
+fn export_actual_edge_publication_fixtures() {
+    use std::io::Write;
+    let output = std::path::PathBuf::from(std::env::var("GALAXY_NATIVE_EDGE_FIXTURES").unwrap());
+    assert!(
+        output.is_absolute(),
+        "export requires an explicit absolute owned output path"
+    );
+    std::fs::create_dir_all(&output).unwrap();
+    let write = |name: &str, value: &Value| {
+        let mut file = std::fs::OpenOptions::new()
+            .write(true)
+            .create_new(true)
+            .open(output.join(name))
+            .unwrap();
+        file.write_all(serde_json::to_string_pretty(value).unwrap().as_bytes())
+            .unwrap();
+        file.write_all(b"\n").unwrap();
+    };
+    for (name, point) in [
+        ("positive-x", Vec2::new(WORLD_LIMIT, 0.0)),
+        ("negative-x", Vec2::new(-WORLD_LIMIT, 0.0)),
+        ("positive-y", Vec2::new(0.0, WORLD_LIMIT)),
+        ("negative-y", Vec2::new(0.0, -WORLD_LIMIT)),
+        ("positive-x-positive-y", Vec2::splat(WORLD_LIMIT)),
+        ("negative-x-negative-y", Vec2::splat(-WORLD_LIMIT)),
+        (
+            "positive-x-negative-y",
+            Vec2::new(WORLD_LIMIT, -WORLD_LIMIT),
+        ),
+        (
+            "negative-x-positive-y",
+            Vec2::new(-WORLD_LIMIT, WORLD_LIMIT),
+        ),
+    ] {
+        let (mut game, guest, peer) = admitted_edge();
+        *game.world.get::<&mut Motion>(peer).unwrap() = Motion::new(point, Vec2::ZERO, 0.0);
+        game.tick_co_op(id(100)).unwrap();
+        let data = capture(&mut game);
+        let mut r = replica(guest.epoch);
+        stage(&mut r, &data, true);
+        commit(&mut r, &data);
+        let rows = data.entities.iter().flat_map(|page| &page.entities).count();
+        let outside = data
+            .entities
+            .iter()
+            .flat_map(|page| &page.entities)
+            .filter(|row| {
+                row.kind == "asteroid" && row.position.iter().any(|value| value.abs() > WORLD_LIMIT)
+            })
+            .count();
+        assert!(outside > 0);
+        assert_eq!(r.scene().unwrap().entities().len(), rows);
+        write(
+            &format!("{name}.header.json"),
+            &serde_json::to_value(&data.header).unwrap(),
+        );
+        write(
+            &format!("{name}.entities.json"),
+            &serde_json::to_value(&data.entities).unwrap(),
+        );
+        write(
+            &format!("{name}.json"),
+            &json!({
+                "header": data.header, "entities": data.entities, "bodies": data.bodies,
+            }),
+        );
+        println!(
+            "actual_edge_export={name}; rows={rows}; outside_asteroids={outside}; complete_native_commit=true"
+        );
+    }
+    let (mut game, guest, _) = admitted_edge();
+    game.submit_guest_co_op_input(
+        id(100),
+        guest.id,
+        guest.epoch,
+        1,
+        InputFrame {
+            fire: true,
+            aim: Some([WORLD_LIMIT, 0.0]),
+            ..Default::default()
+        },
+    )
+    .unwrap();
+    game.tick_co_op(id(100)).unwrap();
+    let data = capture(&mut game);
+    let shot = data
+        .header
+        .snapshot
+        .projectiles
+        .iter()
+        .find(|shot| shot.owner == Some(guest.id) && shot.position[0] > WORLD_LIMIT)
+        .unwrap();
+    assert_eq!(shot.owner_epoch, Some(guest.epoch));
+    assert!(shot.previous[0] > WORLD_LIMIT);
+    assert!(
+        data.header
+            .snapshot
+            .participants
+            .iter()
+            .all(|p| p.owned_loadout.is_none()),
+        "this fixture proves ShotOwner ownership only, not an owned-loadout build"
+    );
+    let mut r = replica(guest.epoch);
+    stage(&mut r, &data, true);
+    commit(&mut r, &data);
+    println!(
+        "actual_outward_export_position={:?}; previous={:?}; shot_owner_epoch={}; owned_loadout=false; complete_native_commit=true",
+        shot.position, shot.previous, guest.epoch
+    );
+    write(
+        "outward-projectile.header.json",
+        &serde_json::to_value(&data.header).unwrap(),
+    );
+    write(
+        "outward-projectile.entities.json",
+        &serde_json::to_value(&data.entities).unwrap(),
+    );
+    write(
+        "outward-projectile.json",
+        &json!({
+            "header": data.header, "entities": data.entities, "bodies": data.bodies,
+        }),
+    );
+}
