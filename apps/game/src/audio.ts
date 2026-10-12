@@ -1,5 +1,18 @@
-/** Procedural world score/effects plus an optional locally authored title loop. */
-import { TitleTrack, type TitleTheme } from "./title-theme.ts";
+/** Authored title/world synthesis and effects on one bounded WebAudio transport. */
+import {
+  TITLE_THEME,
+  titleNotesAtStep,
+  type TitleTheme,
+} from "./title-theme.ts";
+import { MusicClock } from "./music-clock.ts";
+import {
+  AMBIENT_BPM,
+  COMBAT_BPM,
+  SCORE_BASS,
+  SCORE_CHORDS,
+  SCORE_LOOKAHEAD_SECONDS,
+  SCORE_MAX_STEPS_PER_TICK,
+} from "./music-score.ts";
 import {
   advanceMix,
   audibleThemes,
@@ -18,18 +31,20 @@ type Voice = {
   nodes: AudioNode[];
   sources: AudioScheduledSourceNode[];
   pending: number;
+  start: number;
   end: number;
   released: boolean;
   persistent: boolean;
   cue: string | null;
   theme: number | null;
+  harmonicEndBeat: number | null;
 };
 const FLOOR = 0.0001;
 // Leave room for the score, warning and engine layers before the final compressor.
 // The compressor catches stacked events; this trim is not a brick-wall limiter.
 const CUE_LEVEL = 0.85;
 const ENGINE_LEVEL = 0.24;
-const ENGINE_NOTES = [45, 52] as const; // Quiet A–E fifth, shared score harmony.
+const ENGINE_NOTES = [47, 54] as const; // Quiet B–F# fifth, shared score harmony.
 // Original palm-muted synth string coloration, not a guitar recording/model.
 const STRING_DRIVE = Float32Array.from(
   { length: 257 },
@@ -64,39 +79,12 @@ const SOUNDS = new Set([
   ...[6, 7, 8, 9, 12, 13].map((i) => `ability-signature-${i}`),
 ]);
 
-// Eight authored bars in A minor. Dock and combat share harmony and a 112 BPM pulse.
-const CHORDS = [
-  [45, 48, 52, 55],
-  [41, 45, 48, 50],
-  [48, 52, 55, 59],
-  [43, 47, 50, 53],
-  [45, 48, 52, 55],
-  [41, 45, 48, 50],
-  [50, 53, 57, 60],
-  [40, 47, 52, 56],
-] as const;
-const BASS = [
-  0,
-  null,
-  null,
-  0,
-  0,
-  null,
-  7,
-  null,
-  0,
-  null,
-  null,
-  12,
-  7,
-  null,
-  null,
-  7,
-] as const;
-
 export class AudioEngine {
-  private titleTrack: TitleTrack | null = null;
   private titleScreen = false;
+  private titleBlend = 0;
+  private clock: MusicClock | null = null;
+  private frozenBeat: number | null = null;
+  private scoreMode: "title" | "ambient" | "combat" = "ambient";
   private context: AudioContext | null = null;
   private master: GainNode | null = null;
   private music: GainNode | null = null;
@@ -106,7 +94,6 @@ export class AudioEngine {
   private graph: AudioNode[] = [];
   private voices = new Set<Voice>();
   private timer: number | null = null;
-  private nextNote = 0;
   private step = 0;
   private state: AudioState = { ...QUIET_STATE };
   private mix = newMix();
@@ -127,17 +114,28 @@ export class AudioEngine {
   private paused = true;
   private disposed = false;
 
-  constructor(
-    private titleTheme: TitleTheme = { url: null, loopStart: 0, loopEnd: null },
-  ) {}
+  constructor(private titleTheme: TitleTheme = TITLE_THEME) {}
 
-  /** Keeps the title loop and world score on the same context and music controls. */
+  /** Title and world are arrangements of the same beat/harmonic transport. */
   setTitleScreen(active: boolean): void {
     if (this.titleScreen === active) return;
     this.titleScreen = active;
-    if (active)
+    if (!this.context) this.titleBlend = active ? 1 : 0;
+    if (active) {
       for (const voice of [...this.voices])
         if (voice.lane === "sfx" || voice.persistent) this.release(voice);
+      this.mix.engine = this.mix.alarm = this.mix.combat = this.mix.boss = 0;
+      this.resetEngineDuck();
+    }
+    if (this.context && this.clock) {
+      const now = this.context.currentTime;
+      // Already audible notes receive an envelope, never an abrupt disconnect.
+      for (const voice of this.voices)
+        if (voice.lane === "music" && voice.start < now)
+          voice.gain.gain.setTargetAtTime(0, now, 0.24);
+      this.invalidateFuture(Math.ceil(this.clock.beatAtTime(now) * 4) / 4);
+      this.syncScoreMode(now);
+    }
     this.setLevels(this.levels[0]!, this.levels[1]!, this.levels[2]!);
   }
 
@@ -165,8 +163,6 @@ export class AudioEngine {
             }
           } else {
             this.stopScheduler();
-            this.titleTrack?.update(false, 0);
-            this.titleTrack?.stop();
             for (const voice of [...this.voices]) this.release(voice);
             this.mix.engine =
               this.mix.alarm =
@@ -181,7 +177,6 @@ export class AudioEngine {
         return;
       }
     }
-    if (this.titleScreen) void this.titleTrack?.load();
     await this.resume();
   }
 
@@ -191,16 +186,13 @@ export class AudioEngine {
     if (!context || context.state === "closed") return;
     [this.master, this.music, this.sfx].forEach((node, index) => {
       node?.gain.setTargetAtTime(
-        index === 1 && (this.tailTimer !== null || this.titleScreen)
-          ? 0
-          : this.levels[index]!,
+        index === 1 && this.tailTimer !== null ? 0 : this.levels[index]!,
         context.currentTime,
         index === 1 ? 0.24 : 0.025,
       );
     });
-    this.titleTrack?.update(this.titleScreen && !this.paused, this.levels[1]!);
     this.musicWet?.gain.setTargetAtTime(
-      this.titleScreen || this.tailTimer !== null ? 0 : 0.12,
+      this.tailTimer !== null ? 0 : 0.12,
       context.currentTime,
       0.24,
     );
@@ -228,9 +220,27 @@ export class AudioEngine {
       context: this.context?.state ?? "locked",
       title: {
         active: this.titleScreen,
-        track:
-          this.titleTrack?.status ?? (this.titleTheme.url ? "idle" : "absent"),
+        track: this.titleTheme.enabled ? "authored-draft" : "disabled",
+        blend: this.titleBlend,
+        directListeningAccepted: false,
       },
+      score: this.clock
+        ? {
+            ...this.clock.diagnostics(
+              this.frozenBeat === null
+                ? (this.context?.currentTime ?? 0)
+                : this.clock.timeAtBeat(this.frozenBeat),
+            ),
+            mode: this.scoreMode,
+            nextStep: this.step,
+            lookaheadSeconds: SCORE_LOOKAHEAD_SECONDS,
+            futureVoices: [...this.voices].filter(
+              (voice) =>
+                voice.lane === "music" &&
+                voice.start > (this.context?.currentTime ?? 0),
+            ).length,
+          }
+        : null,
       enabled:
         !this.disposed && !this.paused && this.context?.state === "running",
       disposed: this.disposed,
@@ -269,7 +279,13 @@ export class AudioEngine {
 
   play(event: SoundEvent): void {
     const context = this.context;
-    if (!context || context.state !== "running" || this.paused || this.disposed)
+    if (
+      !context ||
+      context.state !== "running" ||
+      this.paused ||
+      this.disposed ||
+      this.titleScreen
+    )
       return;
     if (!SOUNDS.has(event.kind)) return;
     const now = context.currentTime;
@@ -508,8 +524,6 @@ export class AudioEngine {
 
   /** Death UI keeps only its already-created cue; it never creates audio. */
   finishDeath(): void {
-    this.titleTrack?.update(false, 0);
-    this.titleTrack?.stop();
     if (this.tailTimer !== null) return;
     const context = this.context;
     const death = [...this.voices]
@@ -558,8 +572,6 @@ export class AudioEngine {
     this.lifecycle++;
     this.clearTail();
     this.paused = true;
-    this.titleTrack?.update(false, 0);
-    this.titleTrack?.stop();
     this.stopScheduler();
     for (const voice of [...this.voices]) this.release(voice);
     this.mix.engine = this.mix.alarm = this.mix.combat = this.mix.boss = 0;
@@ -589,11 +601,10 @@ export class AudioEngine {
     ) {
       this.setLevels(this.levels[0]!, this.levels[1]!, this.levels[2]!);
       this.musicWet?.gain.setTargetAtTime(
-        this.titleScreen ? 0 : 0.12,
+        0.12,
         this.context.currentTime,
         0.025,
       );
-      if (this.titleScreen) void this.titleTrack?.load();
       this.startScheduler();
     }
   }
@@ -605,8 +616,8 @@ export class AudioEngine {
     this.clearTail();
     this.paused = true;
     this.stopScheduler();
-    this.titleTrack?.dispose();
-    this.titleTrack = null;
+    this.clock = null;
+    this.frozenBeat = null;
     for (const voice of [...this.voices]) this.release(voice);
     for (const node of this.graph) node.disconnect();
     this.graph = [];
@@ -654,7 +665,8 @@ export class AudioEngine {
     warmth.frequency.value = 5600;
     warmth.Q.value = 0.45;
     const echo = context.createDelay(1);
-    echo.delayTime.value = (60 / 112) * 0.75;
+    // A quiet fixed short echo avoids pitch bends while the beat tempo ramps.
+    echo.delayTime.value = 0.28;
     const feedback = context.createGain();
     feedback.gain.value = 0.16;
     const wet = context.createGain();
@@ -668,8 +680,6 @@ export class AudioEngine {
     echo.connect(wet);
     wet.connect(this.master);
     this.sfx.connect(this.master);
-    if (this.titleTheme.url)
-      this.titleTrack = new TitleTrack(context, this.master, this.titleTheme);
     this.master.connect(limiter);
     limiter.connect(ceiling);
     ceiling.connect(context.destination);
@@ -700,12 +710,33 @@ export class AudioEngine {
 
   private startScheduler(): void {
     if (this.timer !== null || !this.context || this.paused) return;
-    this.nextNote = this.context.currentTime + 0.045;
+    const now = this.context.currentTime;
+    if (!this.clock) {
+      this.scoreMode = this.titleScreen
+        ? "title"
+        : this.state.combat > 0
+          ? "combat"
+          : "ambient";
+      this.clock = new MusicClock(
+        now + 0.045,
+        this.scoreMode === "title"
+          ? this.titleTheme.bpm
+          : this.scoreMode === "combat"
+            ? COMBAT_BPM
+            : AMBIENT_BPM,
+      );
+    } else if (this.frozenBeat !== null) {
+      this.clock.reanchor(now + 0.045, this.frozenBeat);
+      this.frozenBeat = null;
+    }
+    this.step = Math.ceil(this.clock.beatAtTime(now + 0.045) * 4 - 1e-8);
     this.mixTime = this.context.currentTime;
     this.timer = window.setInterval(() => this.schedule(), 25);
     this.schedule();
   }
   private stopScheduler(): void {
+    if (this.clock && this.context && this.frozenBeat === null)
+      this.frozenBeat = this.clock.beatAtTime(this.context.currentTime);
     if (this.timer !== null) window.clearInterval(this.timer);
     this.timer = null;
   }
@@ -713,35 +744,91 @@ export class AudioEngine {
     const context = this.context;
     if (!context || context.state !== "running" || this.paused) return;
     this.advanceSound();
-    if (this.nextNote < context.currentTime - 0.2)
-      this.nextNote = context.currentTime + 0.02;
-    const length = 60 / 112 / 4;
-    while (this.nextNote < context.currentTime + 0.18) {
-      this.scoreStep(this.nextNote, this.step++, length);
-      this.nextNote += length;
+    const clock = this.clock;
+    if (!clock) return;
+    if (clock.timeAtBeat(this.step / 4) < context.currentTime - 0.2)
+      this.step = Math.ceil(clock.beatAtTime(context.currentTime + 0.02) * 4);
+    for (let queued = 0; queued < SCORE_MAX_STEPS_PER_TICK; queued++) {
+      const beat = this.step / 4;
+      const time = clock.timeAtBeat(beat);
+      if (time >= context.currentTime + SCORE_LOOKAHEAD_SECONDS) break;
+      const length = clock.timeAtBeat(beat + 0.25) - time;
+      this.scoreStep(time, this.step++, length);
+    }
+  }
+
+  private invalidateFuture(beat: number): void {
+    if (!this.clock) return;
+    const time = this.clock.timeAtBeat(beat);
+    for (const voice of [...this.voices])
+      if (voice.lane === "music" && voice.start >= time - 1e-8)
+        this.release(voice);
+    this.step = Math.min(this.step, Math.ceil(beat * 4 - 1e-8));
+  }
+
+  private syncScoreMode(now: number): void {
+    const mode = this.titleScreen
+      ? "title"
+      : this.state.combat > 0
+        ? "combat"
+        : "ambient";
+    if (!this.clock || mode === this.scoreMode) return;
+    const previous = this.scoreMode;
+    this.scoreMode = mode;
+    const target =
+      mode === "title"
+        ? this.titleTheme.bpm
+        : mode === "combat"
+          ? COMBAT_BPM
+          : AMBIENT_BPM;
+    // A chase uses authoritative intent. Release retains two beats before its
+    // eight-beat deceleration; re-chase replaces that pending release ramp.
+    const change = this.clock.retarget(
+      now,
+      target,
+      mode === "combat" ? 4 : 8,
+      previous === "combat" && mode === "ambient" ? 2 : 0,
+    );
+    this.invalidateFuture(change.beat);
+    // An already audible pad was gated under the previous tempo. Retarget its
+    // final voice fade/stop to the new bar boundary so acceleration cannot keep
+    // an old full chord under the next one. Preserve any fade already started.
+    for (const voice of this.voices) {
+      if (voice.harmonicEndBeat === null || voice.start > now) continue;
+      const end = Math.max(now, this.clock.timeAtBeat(voice.harmonicEndBeat));
+      voice.gain.gain.cancelScheduledValues(now + 0.000001);
+      voice.gain.gain.setTargetAtTime(FLOOR, Math.max(now, end - 0.06), 0.008);
+      for (const source of voice.sources) source.stop(end + 0.025);
+      voice.end = end + 0.025;
     }
   }
 
   private scoreStep(time: number, step: number, length: number): void {
-    if (this.titleScreen) return;
-    const bar = Math.floor(step / 16) % CHORDS.length;
+    const bar = Math.floor(step / 16) % SCORE_CHORDS.length;
     const beat = step % 16;
-    const chord = CHORDS[bar]!;
+    const chord = SCORE_CHORDS[bar]!;
+    if (this.titleBlend > 0.002) this.titleStep(time, step, length, chord);
     const combat = this.mix.combat;
     for (const [index, weight] of audibleThemes(this.mix)) {
       const theme = THEMES[index]!;
-      const space = this.mix.space * weight;
+      const space = this.mix.space * weight * (1 - this.titleBlend);
+      if (space < 0.002) continue;
       if (beat === 0) {
-        const pad = this.createVoice("music", time, length * 16, space);
+        const padDuration = this.clock
+          ? this.clock.timeAtBeat((step + 15.8) / 4) -
+            this.clock.timeAtBeat(step / 4)
+          : length * 15.8;
+        const pad = this.createVoice("music", time, padDuration, space);
         if (pad) {
           pad.theme = index;
+          pad.harmonicEndBeat = (step + 15.8) / 4;
           chord.forEach((note) =>
             this.tone(
               pad,
               time,
               frequency(note + 12),
               frequency(note + 12),
-              length * 15.8,
+              padDuration,
               combat < 0.12 && theme.arp === "square" ? "triangle" : theme.arp,
               0.017 * (1 - combat * 0.5),
               0.22,
@@ -765,7 +852,7 @@ export class AudioEngine {
           0.016,
         );
       }
-      const bass = BASS[beat];
+      const bass = SCORE_BASS[beat];
       if (
         bass !== null &&
         bass !== undefined &&
@@ -796,13 +883,33 @@ export class AudioEngine {
           0.011 + combat * 0.02,
           0.01,
         );
+      // Sparse measured pitch-class draft fragments tie every area back
+      // to the title while each area's established motif retains its identity.
+      const reply =
+        beat % 8 === 0 ? titleNotesAtStep(this.titleTheme, step)[0] : undefined;
+      if (reply)
+        this.tone(
+          voice,
+          time,
+          frequency(reply.note - 12),
+          frequency(reply.note - 12),
+          length * 2.4,
+          "sine",
+          0.008,
+          0.02,
+        );
       if (voice.pending === 0) this.release(voice);
     }
     // One bounded shared power-chord voice: actual aggro, never biome/distance.
     // Boss counter-notes follow the separate real boss blend; all old theme
     // identities remain intact and at most two are selected for future notes.
-    if (combat > 0.12 && beat % 2 === 0) {
-      const guitar = this.createVoice("music", time, 0.24, combat * 0.8);
+    if (this.titleBlend < 0.98 && combat > 0.12 && beat % 2 === 0) {
+      const guitar = this.createVoice(
+        "music",
+        time,
+        0.24,
+        combat * 0.8 * (1 - this.titleBlend),
+      );
       if (guitar) {
         guitar.cue = "music-combat";
         const duration = length * (this.mix.boss > 0.1 ? 1.55 : 1.15);
@@ -835,8 +942,8 @@ export class AudioEngine {
     }
     // Percussion follows actual aggro, once per shared clock, independent of
     // how many theme identities currently crossfade.
-    if (combat > 0.1) {
-      const drum = this.createVoice("music", time, 0.16, 1);
+    if (this.titleBlend < 0.98 && combat > 0.1) {
+      const drum = this.createVoice("music", time, 0.16, 1 - this.titleBlend);
       if (!drum) return;
       if (beat % 4 === 0)
         this.tone(drum, time, 105, 39, 0.13, "sine", combat * 0.11);
@@ -848,13 +955,135 @@ export class AudioEngine {
     }
   }
 
+  private titleStep(
+    time: number,
+    step: number,
+    length: number,
+    chord: readonly number[],
+  ): void {
+    if (!this.titleTheme.enabled) return;
+    const beat = step % 16;
+    const duration = (steps: number) =>
+      this.clock
+        ? this.clock.timeAtBeat((step + steps) / 4) -
+          this.clock.timeAtBeat(step / 4)
+        : length * steps;
+    if (beat === 0) {
+      const pad = this.createVoice(
+        "music",
+        time,
+        duration(16),
+        this.titleBlend * 0.7,
+      );
+      if (pad) {
+        pad.cue = "music-title";
+        pad.harmonicEndBeat = (step + 15) / 4;
+        chord.forEach((note) =>
+          this.tone(
+            pad,
+            time,
+            frequency(note + 12),
+            frequency(note + 12),
+            duration(15),
+            "triangle",
+            0.013,
+            0.12,
+          ),
+        );
+      }
+    }
+    const voice = this.createVoice("music", time, duration(4), this.titleBlend);
+    if (!voice) return;
+    voice.cue = "music-title";
+    for (const note of titleNotesAtStep(this.titleTheme, step)) {
+      const pitch = frequency(note.note);
+      if (note.voice === "bubble")
+        this.tone(
+          voice,
+          time,
+          pitch * 0.52,
+          pitch,
+          duration(note.steps + 1),
+          "sine",
+          0.046 * note.level,
+          0.008,
+        );
+      else
+        this.chip(voice, time, pitch, duration(note.steps), 0.033 * note.level);
+    }
+    if (beat % 2 === 0) {
+      const pitch = frequency(
+        chord[[0, 2, 1, 3, 2, 1, 3, 2][Math.floor(beat / 2)]!]! + 24,
+      );
+      this.tone(
+        voice,
+        time,
+        pitch,
+        pitch,
+        duration(1.3),
+        "triangle",
+        0.018,
+        0.004,
+      );
+    }
+    const bass = SCORE_BASS[beat];
+    if (bass !== null && bass !== undefined)
+      this.tone(
+        voice,
+        time,
+        frequency(chord[0]! + bass),
+        frequency(chord[0]! + bass),
+        duration(1.4),
+        "triangle",
+        0.04,
+        0.006,
+      );
+    if (beat % 4 === 0) this.tone(voice, time, 112, 42, 0.11, "sine", 0.065);
+    if (beat === 4 || beat === 12)
+      this.noiseBurst(voice, time, 0.085, 1950, 0.03, "bandpass");
+    if (beat % 2 === 1)
+      this.noiseBurst(voice, time, 0.025, 5100, 0.008, "highpass");
+    if (step % 64 === 63)
+      this.noiseBurst(voice, time, 0.034, 3300, 0.016, "bandpass");
+    if (voice.pending === 0) this.release(voice);
+  }
+
+  private chip(
+    voice: Voice,
+    time: number,
+    pitch: number,
+    duration: number,
+    level: number,
+  ): void {
+    const context = this.context;
+    if (!context) return;
+    const source = context.createOscillator();
+    source.type = "square";
+    source.frequency.setValueAtTime(pitch, time);
+    const filter = context.createBiquadFilter();
+    filter.type = "lowpass";
+    filter.frequency.value = 2400;
+    filter.Q.value = 0.5;
+    source.connect(filter);
+    voice.nodes.push(filter);
+    this.attach(voice, source, time, duration, level, 0.005, filter);
+  }
+
   private advanceSound(): void {
     const context = this.context;
     if (!context || context.state !== "running" || this.paused || this.disposed)
       return;
-    if (this.titleScreen) return;
     const now = context.currentTime;
-    this.mix = advanceMix(this.mix, this.state, now - this.mixTime);
+    const dt = Math.min(0.25, Math.max(0, now - this.mixTime));
+    this.titleBlend +=
+      ((this.titleScreen ? 1 : 0) - this.titleBlend) *
+      (1 - Math.exp(-dt / 0.4));
+    this.syncScoreMode(now);
+    this.mix = advanceMix(
+      this.mix,
+      this.titleScreen ? QUIET_STATE : this.state,
+      dt,
+    );
     this.mixTime = now;
     if (this.mix.engine > 0.008 && !this.engineVoice) {
       this.engineVoice = this.continuous("engine", now);
@@ -1041,11 +1270,13 @@ export class AudioEngine {
       nodes: [gain],
       sources: [],
       pending: 0,
+      start: time,
       end: time + duration,
       released: false,
       persistent,
       cue: null,
       theme: null,
+      harmonicEndBeat: null,
     };
     this.voices.add(voice);
     return voice;

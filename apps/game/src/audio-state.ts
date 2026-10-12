@@ -83,9 +83,9 @@ export type Theme = {
   order: readonly number[];
   bass: OscillatorType;
 };
-// Shared A-minor harmony keeps transitions coherent. Each identity has its own
-// authored contour, rests, voicing order and oscillator palette, at 112 BPM.
-export const THEMES: readonly Theme[] = [
+// Preserve identity contours and rests, transposed into the shared B-minor score.
+// These authored variants remain independent of the renderer and beat tempo.
+const ORIGINAL_IDENTITIES: readonly Theme[] = [
   {
     name: "Haven / Return lights",
     lead: "triangle",
@@ -537,6 +537,10 @@ export const THEMES: readonly Theme[] = [
     ],
   },
 ];
+export const THEMES: readonly Theme[] = ORIGINAL_IDENTITIES.map((theme) => ({
+  ...theme,
+  motif: theme.motif.map((note) => (note === null ? null : note + 2)),
+}));
 export function newMix(): Mix {
   return {
     themes: THEMES.map((_, i) => (i === 0 ? 1 : 0)),

@@ -1,0 +1,43 @@
+{
+  "captured_at_utc": "2026-10-12T16:37:30.504398+00:00",
+  "base_commit": "8c284637f3dfd4f86982f2dc01b10fb8a70c8162",
+  "branch": "codex/title-score-engine",
+  "node": "v24.18.0",
+  "typescript": "5.9.3",
+  "commands": [
+    {
+      "command": "node node_modules/typescript/bin/tsc --noEmit",
+      "exit_code": 0,
+      "log": "typecheck.log"
+    },
+    {
+      "command": "node --experimental-transform-types --test scripts/test/music-clock.test.mjs scripts/test/title-theme.test.mjs scripts/test/audio-state.test.mjs scripts/test/audio.test.mjs",
+      "exit_code": 0,
+      "tests": 49,
+      "pass": 49,
+      "fail": 0,
+      "log": "focused-tests.log"
+    }
+  ],
+  "measured_api_stress": {
+    "duration_seconds": 30,
+    "maximum_music_voices": 21,
+    "maximum_future_music_voices": 12,
+    "future_onset_lookahead_seconds": 0.18
+  },
+  "acceptance": {
+    "typescript_and_focused_recorded_api_tests": "passed",
+    "native_offline_dsp_render": "open",
+    "direct_reference_listening": "open",
+    "perceived_song_match": "open",
+    "physical_output_device_listening": "open",
+    "full_build": "not_run"
+  },
+  "scope": "Actual pure transport and recorded WebAudio API calls. Not browser DSP or audible proof.",
+  "reference": {
+    "path": "C:\\Users\\mitch\\Downloads\\Galaxy Royale (3).mp3",
+    "bytes": 1032175,
+    "sha256": "95fcb149bb55da752c4d93c18fcc1913a23b70ccafecb52d8db5548dc64755d6",
+    "copied_to_assets": false
+  }
+}

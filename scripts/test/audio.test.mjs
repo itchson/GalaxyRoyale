@@ -30,6 +30,11 @@ class Param {
     assert(Number.isFinite(constant) && constant > 0);
     return this.record("target", v, t, constant);
   }
+  cancelScheduledValues(t) {
+    assert(Number.isFinite(t) && t >= 0);
+    this.events.push({ kind: "cancel", time: t });
+    return this;
+  }
 }
 class Node {
   connections = new Set();
@@ -188,20 +193,31 @@ async function fixture() {
   return { engine, context: engine.context, timers };
 }
 
-test("title mode gates world score and effects on the existing context then restores music controls", async () => {
+test("authored title shares music controls/context and silences gameplay effects", async () => {
   const { engine, context, timers } = await fixture();
   engine.setLevels(0.6, 0.5, 0.7);
   engine.play({ kind: "shot", x: 0, y: 0, intensity: 1 });
   assert([...engine.voices].some((v) => v.lane === "sfx"));
   engine.setTitleScreen(true);
-  assert.equal(engine.music.gain.value, 0);
-  assert.equal(engine.musicWet.gain.value, 0);
+  assert.equal(engine.music.gain.value, 0.5);
+  assert.equal(engine.musicWet.gain.value, 0.12);
   assert.equal(engine.master.gain.value, 0.6);
   assert.equal([...engine.voices].filter((v) => v.lane === "sfx").length, 0);
   const count = context.sources.length;
   context.advance(0.5);
   for (const tick of timers.values()) tick();
-  assert.equal(context.sources.length, count, "no new gameplay score in title");
+  assert(
+    context.sources.length > count,
+    "native title notes use the existing scheduler",
+  );
+  assert([...engine.voices].some((v) => v.cue === "music-title"));
+  const sourceCount = context.sources.length;
+  engine.play({ kind: "shot", x: 0, y: 0, intensity: 1 });
+  assert.equal(
+    context.sources.length,
+    sourceCount,
+    "title has no gameplay effects",
+  );
   engine.setTitleScreen(false);
   assert.equal(engine.music.gain.value, 0.5);
   assert.equal(engine.musicWet.gain.value, 0.12);
@@ -772,10 +788,14 @@ test("thrust uses a calm sine fifth with one shared lowpass and duck stage", asy
   assert.deepEqual([...engine.engineDuckGain.connections], [voice.gain]);
   assert.deepEqual([...voice.gain.connections], [engine.sfx]);
   assert(voice.gain.gain.value >= 0.225 && voice.gain.gain.value <= 0.24);
-  assert(Math.abs(voice.sources[0].frequency.value - 110 * 1.04) < 1e-9);
   assert(
     Math.abs(
-      voice.sources[1].frequency.value - 440 * 2 ** ((52 - 69) / 12) * 1.04,
+      voice.sources[0].frequency.value - 440 * 2 ** ((47 - 69) / 12) * 1.04,
+    ) < 1e-9,
+  );
+  assert(
+    Math.abs(
+      voice.sources[1].frequency.value - 440 * 2 ** ((54 - 69) / 12) * 1.04,
     ) < 1e-9,
   );
   assert.equal(voice.sources[2].loop, true);
@@ -1099,8 +1119,8 @@ test("calm thrust pitch stays within a tiny musical bend while breathing reuses 
   for (let i = 0; i < 80; i++) stepAudio(context, timers);
   const voice = engine.engineVoice;
   const sources = [...voice.sources];
-  const firstNote = 110,
-    fifth = 440 * 2 ** ((52 - 69) / 12);
+  const firstNote = 440 * 2 ** ((47 - 69) / 12),
+    fifth = 440 * 2 ** ((54 - 69) / 12);
   let minGain = 1,
     maxGain = 0;
   for (let i = 0; i < 200; i++) {
@@ -1255,5 +1275,255 @@ test("one shared filtered power-chord voice follows aggro and adds only the actu
   assert.equal(engine.mix.boss, 0);
   assert.equal(engine.mix.combat, 0);
   assert(![...engine.voices].some((v) => v.cue === "music-combat"));
+  engine.dispose();
+});
+
+test("Continue at different phrase positions preserves beat and shares the selected corporate arrangement", async (t) => {
+  for (const [corporation, index, position] of [
+    ["pan", 15, 0.3],
+    ["renko", 16, 0.925],
+    ["hugo", 17, 6.8],
+  ]) {
+    const timers = browser(),
+      engine = new AudioEngine();
+    engine.setTitleScreen(true);
+    engine.setLevels(0.75, 0.4, 0.75);
+    await engine.unlock();
+    const context = engine.context,
+      clock = engine.clock;
+    for (let elapsed = 0; elapsed < position; elapsed += 0.025)
+      stepAudio(context, timers);
+    const beat = engine.diagnostics().score.beat;
+    const future = [...engine.voices].filter(
+      (v) => v.lane === "music" && v.start > context.currentTime,
+    );
+    engine.update({ ...QUIET_STATE, corporation });
+    engine.setTitleScreen(false);
+    const arrival = engine.diagnostics();
+    assert(
+      Math.abs(arrival.score.beat - beat) < 1e-8,
+      "Continue retains the heard phrase phase",
+    );
+    assert.equal(engine.clock, clock);
+    assert.equal(arrival.score.targetBpm, 120);
+    assert.equal(arrival.score.rampEndBeat - arrival.score.rampStartBeat, 8);
+    assert(
+      future.every((v) => v.released),
+      "queued title notes are canceled before replacement",
+    );
+    for (let i = 0; i < 180; i++) {
+      stepAudio(context, timers);
+      const d = engine.diagnostics();
+      assert(
+        d.voices.music <= 32 && d.voices.sfx <= 16 && d.score.futureVoices <= 8,
+      );
+      assert(
+        [...engine.voices]
+          .filter((v) => v.lane === "music")
+          .every((v) => v.gain.connections.has(engine.music)),
+      );
+    }
+    const settled = engine.diagnostics();
+    assert.equal(settled.themes[0].index, index);
+    assert(Math.abs(settled.score.bpm - 120) < 1e-8);
+    assert(settled.title.blend < 0.001);
+    assert.equal(timers.size, 1, "title/hub share one scheduler");
+    t.diagnostic(
+      JSON.stringify({
+        corporation,
+        atSeconds: position,
+        beat,
+        settledBpm: settled.score.bpm,
+        scope: "recorded WebAudio calls; no DSP/listening",
+      }),
+    );
+    engine.dispose();
+  }
+});
+
+test("real combat intent retimes queued notes; release hold and re-chase never restart the clock", async () => {
+  const { engine, context, timers } = await fixture();
+  for (let i = 0; i < 16; i++) stepAudio(context, timers);
+  const clock = engine.clock,
+    beat = engine.diagnostics().score.beat;
+  const oldFuture = [...engine.voices].filter(
+    (v) => v.lane === "music" && v.start > context.currentTime,
+  );
+  engine.update(dynamic({ combat: 0.8, hostiles: 3 }));
+  const chase = engine.diagnostics().score;
+  assert.equal(engine.clock, clock);
+  assert(Math.abs(chase.beat - beat) < 1e-8);
+  assert.equal(chase.targetBpm, 166);
+  assert.equal(chase.rampEndBeat - chase.rampStartBeat, 4);
+  const boundary = clock.timeAtBeat(chase.rampStartBeat);
+  const canceled = oldFuture.filter((v) => v.start >= boundary - 1e-8);
+  assert(
+    canceled.length > 0,
+    "fixture contains notes beyond the changed boundary",
+  );
+  assert(
+    canceled.every(
+      (v) =>
+        v.released &&
+        v.sources.every((s) => s.connections.size === 0 && s.onended === null),
+    ),
+  );
+  const audiblePads = [...engine.voices].filter(
+    (v) => v.harmonicEndBeat !== null && v.start < context.currentTime,
+  );
+  assert(audiblePads.length > 0);
+  assert(
+    audiblePads.every((v) =>
+      v.sources.every(
+        (s) =>
+          Math.abs(s.stopAt - (clock.timeAtBeat(v.harmonicEndBeat) + 0.025)) <
+          1e-8,
+      ),
+    ),
+    "audible chord tails stop at the retimed harmonic boundary",
+  );
+  for (let i = 0; i < 160; i++) stepAudio(context, timers);
+  assert(Math.abs(engine.diagnostics().score.bpm - 166) < 1e-8);
+  engine.update(dynamic());
+  const release = engine.diagnostics().score;
+  assert.equal(release.targetBpm, 120);
+  assert.equal(release.rampEndBeat - release.rampStartBeat, 8);
+  assert(
+    Math.abs(release.rampStartBeat - (Math.ceil(release.beat - 1e-9) + 2)) <
+      1e-8,
+  );
+  for (let i = 0; i < 6; i++) stepAudio(context, timers);
+  engine.update(dynamic({ combat: 0.8, hostiles: 1 }));
+  assert.equal(engine.diagnostics().score.targetBpm, 166);
+  for (let i = 0; i < 100; i++) stepAudio(context, timers);
+  assert(
+    Math.abs(engine.diagnostics().score.bpm - 166) < 1e-8,
+    "pending release cannot slow re-chase",
+  );
+  assert.equal(engine.clock, clock);
+  assert.equal(timers.size, 1);
+  engine.dispose();
+});
+
+test("scheduler stalls skip missed notes and bound only the next lookahead queue", async () => {
+  const { engine, context, timers } = await fixture();
+  const clock = engine.clock;
+  context.advance(20);
+  const before = context.sources.length;
+  for (const tick of timers.values()) tick();
+  const fresh = context.sources.slice(before);
+  assert(fresh.length > 0);
+  assert(
+    fresh.every((source) => source.starts[0] >= context.currentTime),
+    "no burst of overdue note debt",
+  );
+  assert(
+    fresh.every((source) => source.starts[0] < context.currentTime + 0.18),
+  );
+  const d = engine.diagnostics();
+  assert(
+    d.score.nextStep <=
+      Math.ceil(clock.beatAtTime(context.currentTime + 0.18) * 4),
+  );
+  assert(d.score.futureVoices <= 8 && d.voices.music <= 32);
+  engine.dispose();
+});
+
+test("native title mute, interruption and late resume retain one clock and no stale scheduled notes", async () => {
+  const count = Context.created.length,
+    timers = browser(),
+    engine = new AudioEngine();
+  engine.setTitleScreen(true);
+  await engine.unlock();
+  const context = engine.context,
+    clock = engine.clock;
+  for (let i = 0; i < 60; i++) stepAudio(context, timers);
+  engine.setLevels(0, 0, 0);
+  assert.equal(engine.master.gain.value, 0);
+  assert.equal(engine.music.gain.value, 0);
+  const beat = engine.diagnostics().score.beat,
+    bpm = engine.diagnostics().score.bpm;
+  const scheduled = [...engine.voices];
+  engine.suspend();
+  assert.equal(engine.voices.size, 0);
+  assert.equal(timers.size, 0);
+  assert(
+    scheduled.every(
+      (v) => v.released && v.nodes.every((n) => n.connections.size === 0),
+    ),
+  );
+  await engine.resume();
+  assert.equal(engine.clock, clock);
+  assert.equal(Context.created.length, count + 1);
+  assert(Math.abs(engine.diagnostics().score.beat - beat) < 1e-8);
+  assert(Math.abs(engine.diagnostics().score.bpm - bpm) < 1e-8);
+  assert.equal(engine.music.gain.value, 0);
+  assert.equal(timers.size, 1);
+  engine.setLevels(0.75, 0.4, 0.75);
+  stepAudio(context, timers, 0.1);
+  assert([...engine.voices].some((v) => v.cue === "music-title"));
+  engine.dispose();
+  assert.equal(engine.voices.size, 0);
+  assert.equal(engine.clock, null);
+  assert.equal(timers.size, 0);
+});
+
+test("rapid title, chase, release and area changes keep music/effects budgets and finite gain events", async (t) => {
+  const { engine, context, timers } = await fixture();
+  let maxMusic = 0,
+    maxFuture = 0;
+  for (let i = 0; i < 1200; i++) {
+    if (i % 7 === 0) engine.setTitleScreen(i % 49 < 14);
+    if (i % 5 === 0)
+      engine.update(
+        dynamic({
+          area: i % 31 === 0 ? "haven" : "reach",
+          biome: i % 6,
+          corporation: ["pan", "renko", "hugo"][i % 3],
+          combat: i % 25 < 15 ? 0.8 : 0,
+          hostiles: i % 25 < 15 ? 3 : 0,
+          boss: i % 60 < 10,
+          engines: 2,
+          throttle: 0.7,
+          hull: 0.1,
+        }),
+      );
+    if (i % 11 === 0) engine.play(cue("ability-nova"));
+    stepAudio(context, timers);
+    const d = engine.diagnostics();
+    maxMusic = Math.max(maxMusic, d.voices.music);
+    maxFuture = Math.max(maxFuture, d.score.futureVoices);
+    assert(
+      d.voices.music <= 32 && d.voices.sfx <= 16 && d.score.futureVoices <= 32,
+    );
+    assert(
+      [...engine.voices]
+        .filter((v) => v.lane === "music" && v.start > context.currentTime)
+        .every((v) => v.start < context.currentTime + 0.18 + 1e-9),
+      "future note queue stays inside real lookahead",
+    );
+    assert(
+      d.score.segments <= 16 &&
+        Number.isFinite(d.score.bpm) &&
+        Number.isFinite(d.score.beat),
+    );
+    if (engine.titleScreen)
+      assert.equal(
+        d.voices.continuous,
+        0,
+        "title cannot restart faded engine/alarm layers",
+      );
+    assert.equal(timers.size, 1);
+  }
+  t.diagnostic(
+    JSON.stringify({
+      seconds: 30,
+      maxMusic,
+      maxFuture,
+      scope: "recorded API calls; no native DSP or audible acceptance",
+    }),
+  );
+  engine.suspend();
+  assert.equal(engine.voices.size, 0);
   engine.dispose();
 });

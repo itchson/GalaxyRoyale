@@ -2033,7 +2033,7 @@ async function init(): Promise<void> {
 // context and never installs a second media player. No request without a track.
 for (const gesture of ["pointerdown", "keydown"] as const)
   launchScreen.addEventListener(gesture, () => {
-    if (!launched && !document.hidden && TITLE_THEME.url) void audio.unlock();
+    if (!launched && !document.hidden && TITLE_THEME.enabled) void audio.unlock();
   });
 launch.addEventListener("click", async () => {
   const epoch = ++transitionEpoch;
