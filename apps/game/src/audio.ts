@@ -1000,7 +1000,7 @@ export class AudioEngine {
             frequency(note + 12),
             duration(15),
             "triangle",
-            0.016,
+            0.018,
             0.18,
             0,
             pan,
@@ -1011,7 +1011,7 @@ export class AudioEngine {
             frequency(note + 12) * 2 ** ((index % 2 ? 4 : -4) / 1200),
             duration(15),
             "sawtooth",
-            0.008,
+            0.011,
             0.23,
             0,
             -pan,
@@ -1091,9 +1091,14 @@ export class AudioEngine {
         520,
       );
     }
-    if (beat % 4 === 0) this.tone(voice, time, 112, 42, 0.13, "sine", 0.068);
-    if (beat === 4 || beat === 12)
+    if (beat % 4 === 0) {
+      this.tone(voice, time, 112, 42, 0.18, "sine", 0.068);
+      this.tone(voice, time, 190, 70, 0.035, "triangle", 0.018);
+    }
+    if (beat === 4 || beat === 12) {
       this.noiseBurst(voice, time, 0.085, 1950, 0.025, "bandpass");
+      this.tone(voice, time, 185, 125, 0.095, "triangle", 0.018);
+    }
     if (beat % 2 === 1)
       this.noiseBurst(voice, time, 0.025, 5100, 0.006, "highpass");
     if (step % 64 === 63)
@@ -1167,8 +1172,19 @@ export class AudioEngine {
     const filter = context.createBiquadFilter();
     filter.type = "lowpass";
     filter.Q.value = 0.45;
-    filter.frequency.setValueAtTime(cutoff * 1.2, time);
-    filter.frequency.setTargetAtTime(cutoff, time + attack, 0.06);
+    // The harmonic body opens with the note, then settles instead of staying
+    // behind a fixed dull cutoff. Automation adds motion without extra voices.
+    const ceiling = context.sampleRate * 0.45;
+    filter.frequency.setValueAtTime(Math.min(ceiling, cutoff * 0.65), time);
+    filter.frequency.exponentialRampToValueAtTime(
+      Math.min(ceiling, cutoff * 1.7),
+      time + Math.max(0.006, Math.min(attack, duration * 0.2)),
+    );
+    filter.frequency.setTargetAtTime(
+      Math.min(ceiling, cutoff),
+      time + Math.max(0.006, Math.min(attack, duration * 0.2)),
+      Math.max(0.025, Math.min(0.18, duration * 0.2)),
+    );
     source.connect(filter);
     voice.nodes.push(filter);
     this.attach(

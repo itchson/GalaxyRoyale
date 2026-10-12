@@ -1566,8 +1566,8 @@ test("rapid title, chase, release and area changes keep music/effects budgets an
       musicVoices.reduce((sum, voice) => sum + voice.nodes.length, 0),
     );
     assert(
-      musicVoices.every((voice) => voice.sources.length <= 9),
-      "compound title backbeats bound lead3 + arp1 + bass3 + kick1 + snare1",
+      musicVoices.every((voice) => voice.sources.length <= 11),
+      "compound title backbeats bound lead3 + arp1 + bass3 + kick2 + snare2",
     );
     assert(
       d.voices.music <= 32 && d.voices.sfx <= 16 && d.score.futureVoices <= 32,
@@ -1798,7 +1798,9 @@ test("title lead is a finite stereo detuned pulse pair with a nominal warm body 
     voice.nodes
       .filter((node) => node.kind === "filter")
       .every((node) =>
-        node.frequency.events.every((event) => event.value <= 3000),
+        node.frequency.events.every(
+          (event) => event.value > 0 && event.value <= 4080,
+        ),
       ),
   );
   assert.equal(engine.music.gain.value, 0.4);
@@ -1847,7 +1849,7 @@ test("title pad and bass patches bound sources, stay in their register, and own 
       voice.cue === "music-title" && !voice.titlePad && voice.start === 0.045,
   );
   assert(
-    voice.sources.length <= 8,
+    voice.sources.length <= 9,
     "fixed score onset remains a bounded compound patch",
   );
   const root = 440 * 2 ** ((47 - 69) / 12);
