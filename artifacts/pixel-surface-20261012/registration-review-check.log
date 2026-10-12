@@ -1,0 +1,1 @@
+{"passed":true,"source_commit":"a07919178e17ecd7e27e7316d451d3db0f4df690","source_pins":9,"immutable_inputs":2,"evidence_pins":18,"root_readers":7,"wrapper_sources":2,"native_fixture_views":[{"tick":0,"time":0,"mapped_cells":1867,"signal_masks":31,"lights":2},{"tick":120,"time":1.9999988079071045,"mapped_cells":1867,"signal_masks":31,"lights":2}],"qa_runtime_execution":false}

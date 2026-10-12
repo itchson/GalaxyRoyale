@@ -1,0 +1,4 @@
+   Compiling engine_core v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\engine_core)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.45s
+     Running `target\debug\examples\pack_raicho_surfaces.exe C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/pan-material-multiplier-final/pan-material-proposal.json assets/pixels/pan-surface/material.json`
+native packed: 662 coarse / 1205 fine; output 33702 bytes

@@ -1,0 +1,13 @@
+    Checking once_cell v1.21.4
+   Compiling naga v30.0.1
+    Checking engine_core v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\engine_core)
+    Checking wasm-bindgen v0.2.129
+    Checking game_core v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\game_core)
+    Checking js-sys v0.3.106
+    Checking web-sys v0.3.106
+    Checking wasm-bindgen-futures v0.4.79
+    Checking serde-wasm-bindgen v0.6.5
+    Checking wgpu-types v30.0.1
+    Checking wgpu v30.0.1
+    Checking game_web v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\game_web)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 21.91s
