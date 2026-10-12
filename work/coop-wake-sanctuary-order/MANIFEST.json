@@ -1,0 +1,112 @@
+{
+  "base": "111a477fe507cd544902c8f44f07198dc31933d6",
+  "branch": "codex/coop-wake-sanctuary-order",
+  "large_work_snapshot_and_target_excluded": true,
+  "handoff_sha256": "c47d7775c3d415de556df16c110c07af70f1b8f2a57473d935e5c86b40ff96af",
+  "source_pins_sha256": "a3abbd4e0dd1843e8ad4f3f7848a3a755bec79015563243517af104b2da0b40b",
+  "native_checks": {
+    "wake_passed": 15,
+    "co_op_passed": 129,
+    "co_op_ignored": 4,
+    "game_core_all_targets_clippy": "passed",
+    "release_before_probe": "passed",
+    "release_after_probe": "passed"
+  },
+  "files": [
+    {
+      "path": "work/coop-wake-sanctuary-order/baseline-co_op_wake.rs",
+      "bytes": 5386,
+      "sha256": "d11a6079e17a5e67fc3e6b2c34c42337e0ec940ac3d33709a560332afdc85009"
+    },
+    {
+      "path": "work/coop-wake-sanctuary-order/baseline-release-probe.log",
+      "bytes": 5693,
+      "sha256": "1d028501293fa5e65e4e0318dad0537981e8712d6beaae16ef5cafdffd4f13f9"
+    },
+    {
+      "path": "work/coop-wake-sanctuary-order/baseline-snapshot-pins.json",
+      "bytes": 30817,
+      "sha256": "613d6085f54a44d245a9703c749452a17ce0bb14c09353271977d69d8c6c6b2e"
+    },
+    {
+      "path": "work/coop-wake-sanctuary-order/clippy.log",
+      "bytes": 303,
+      "sha256": "c6181f64d4a76e45905c56c071440556a27fdf0bbfd7754873e3cc891a340761"
+    },
+    {
+      "path": "work/coop-wake-sanctuary-order/compiled-inputs.json",
+      "bytes": 69310,
+      "sha256": "4cf628a5ff0542c69652e97c28a4cbbefff123e2b72dff7d9eca7a3b0b440573"
+    },
+    {
+      "path": "work/coop-wake-sanctuary-order/focused-wake-tests.log",
+      "bytes": 3729,
+      "sha256": "bdc054e7e5f9ef3ebb0953eb7e5a3ea4d9b3a1ec9a320b0032b9cedba8a6684d"
+    },
+    {
+      "path": "work/coop-wake-sanctuary-order/HANDOFF.md",
+      "bytes": 6842,
+      "sha256": "c47d7775c3d415de556df16c110c07af70f1b8f2a57473d935e5c86b40ff96af"
+    },
+    {
+      "path": "work/coop-wake-sanctuary-order/measured-summary.json",
+      "bytes": 2698,
+      "sha256": "403dbd3a822841acdeae90bb15ea42687729bcb1b1679f2bea7422c2fcd8f88c"
+    },
+    {
+      "path": "work/coop-wake-sanctuary-order/native-coop-regression.log",
+      "bytes": 14586,
+      "sha256": "def2c5224e4d201dd4de24d7a63ff1f08aaed153500cf120de62f782f3261cfa"
+    },
+    {
+      "path": "work/coop-wake-sanctuary-order/optimized-release-probe.log",
+      "bytes": 4892,
+      "sha256": "f78c7cee29889fe4e42dd0dd13bfa793d6671b913e5cc0157565a13607ddd9ce"
+    },
+    {
+      "path": "work/coop-wake-sanctuary-order/optimized-runtime-pin.json",
+      "bytes": 431,
+      "sha256": "b5d67f881bd239c595c2edd98a865ff082aefb911632d3b24b18a650a5b8ccc4"
+    },
+    {
+      "path": "work/coop-wake-sanctuary-order/pin-newline-failure.log",
+      "bytes": 148,
+      "sha256": "24787e1cc48b359cb746abd478e6cbc64a45f31087e30a1c3502d4bb2c81d96a"
+    },
+    {
+      "path": "work/coop-wake-sanctuary-order/pin-verification.log",
+      "bytes": 1616,
+      "sha256": "9c71643c2b23b83e1cea50eeb48b791e97ca80fa724df6a665c88cc1d888e5dd"
+    },
+    {
+      "path": "work/coop-wake-sanctuary-order/probe.rs",
+      "bytes": 4987,
+      "sha256": "4e89e82aa07b1ec39d49fc5c6e7f5fe5cff429ce1ae3a816bef7ee53e6df394a"
+    },
+    {
+      "path": "work/coop-wake-sanctuary-order/reporter-input-pins.json",
+      "bytes": 1709,
+      "sha256": "947fe495cc1844d4f00e13a724e58298d29059cd324e6bcabb097a8d28f5895c"
+    },
+    {
+      "path": "work/coop-wake-sanctuary-order/reporter-probe-input.rs",
+      "bytes": 7415,
+      "sha256": "802c1c3d07051828c588d9e9b303ef4c4ea194198a314e39ea7b6d8ad97b77c3"
+    },
+    {
+      "path": "work/coop-wake-sanctuary-order/source-pins.json",
+      "bytes": 3895,
+      "sha256": "a3abbd4e0dd1843e8ad4f3f7848a3a755bec79015563243517af104b2da0b40b"
+    },
+    {
+      "path": "work/coop-wake-sanctuary-order/studio-run.json",
+      "bytes": 1760,
+      "sha256": "ae802b2919cc11aade79f1a245fbb17ca54bcf8eaa5734db3f44721932f3eec8"
+    },
+    {
+      "path": "work/coop-wake-sanctuary-order/studio-task.json",
+      "bytes": 2390,
+      "sha256": "8d4434f3cccb076f8c1c4ee6ce099201b5fd5cba9048bef0eee04e0e38ada563"
+    }
+  ]
+}

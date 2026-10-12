@@ -1,0 +1,104 @@
+{
+  "base": "111a477fe507cd544902c8f44f07198dc31933d6",
+  "branch": "codex/coop-wake-sanctuary-order",
+  "frozen_trail_branch_preserved": true,
+  "changed_sources": [
+    {
+      "path": "crates/game_core/src/co_op_wake.rs",
+      "bytes": 5547,
+      "sha256": "bd2c5f1ea302b126e3fdee1bc1224342ab7788956947cd05cc4c1a819a39021f",
+      "git_blob": "03b9664b7e4ec4d17b075e82e301c76ca082b223"
+    },
+    {
+      "path": "crates/game_core/src/co_op_wake_tests.rs",
+      "bytes": 34194,
+      "sha256": "1dbb3116adb4426cd9b5cc2a3d6fd45f2f05ff220efa799befa66eae04c5f0db",
+      "git_blob": "281964f75538bc049daa743e478e9b1b78532380"
+    }
+  ],
+  "unchanged_sources": [
+    {
+      "path": "Cargo.toml",
+      "bytes": 467,
+      "sha256": "3daf47b4944c8605b4435722425d2203f008b7dfe929e43c78d386c19e64ee27",
+      "git_blob": "06af63f286fff4c4de784049248b574692aef286"
+    },
+    {
+      "path": "Cargo.lock",
+      "bytes": 28916,
+      "sha256": "d2e5246ec6a928e39823a72eceba6a342cabba9ed3706b287a00b6c74b25f120",
+      "git_blob": "4ca62ada4b783e51af87be2def98419ea80977ff"
+    },
+    {
+      "path": "crates/game_core/Cargo.toml",
+      "bytes": 301,
+      "sha256": "9808ea450c15c662f8b2168d232905b1485c3d22a8f4bf58e595b79ed03396f1",
+      "git_blob": "4ba1308947e7a7280a5ab4ff86ab08f633d120c8"
+    },
+    {
+      "path": "crates/game_core/src/co_op.rs",
+      "bytes": 51682,
+      "sha256": "3ed2e9a84792ca2d96eb4e1b4d6942a4ab1e9b72a934bf9b55148212b0d5fa99",
+      "git_blob": "01e6b6b217d71c36986ed5404c87a7eb1085f3aa"
+    },
+    {
+      "path": "crates/game_core/src/co_op_wake_fx.rs",
+      "bytes": 6201,
+      "sha256": "789e14ca8c0074f3ea2a875b6e8280c779be06ff16998959356ec715f386e0fb",
+      "git_blob": "3df2426237babfb5923cfbd83fc50d0c934ab6de"
+    },
+    {
+      "path": "crates/game_core/src/co_op_publish.rs",
+      "bytes": 9583,
+      "sha256": "c1bbb4642a9493a071c76dbd7684904c35157afef4e247a34b38663ccde7b54f",
+      "git_blob": "675aff7eaabd64e4f6857cc6ab826da72afd3a1d"
+    },
+    {
+      "path": "crates/game_core/src/co_op_replica.rs",
+      "bytes": 55071,
+      "sha256": "3d077be3ee58b081302f16020bed3237c2717ec082baa84efdffec89b836dcba",
+      "git_blob": "7d4c32e5ab17c726ddee8f85deb7861522081c54"
+    },
+    {
+      "path": "crates/game_core/src/co_op_replica_wake_tests.rs",
+      "bytes": 30484,
+      "sha256": "bf7024cd560d81d0e2dde3664b847ebd1ece78ccd476fb4fc03fff88e92df63a",
+      "git_blob": "bc0c168f91005ed242f1e35a3746953896b13cd4"
+    },
+    {
+      "path": "crates/game_core/src/lib.rs",
+      "bytes": 197054,
+      "sha256": "fd6e46d4cdff291fca626e407fe1ebbb060b70a2d9ddd569781655c3558e18e5",
+      "git_blob": "6711231cfc043b5e721ab36a94125ddd0148659e"
+    },
+    {
+      "path": "crates/game_web/src/co_op_bridge.rs",
+      "bytes": 7859,
+      "sha256": "0e84c662a85118ee02a7ff5806124185c328eca5c37e1768aec446b69b62fd3e",
+      "git_blob": "c64e5ac841cd962c8b104269a0d4e245a5cbd13a"
+    },
+    {
+      "path": "crates/game_web/src/co_op_replica_bridge.rs",
+      "bytes": 14332,
+      "sha256": "5331a410cc7de1a21aa78b32919d22e7ec733d699f0730d98b3c8a4cef94628c",
+      "git_blob": "b429ea2a3afb44e10ddb91660aa0cb23af19d117"
+    },
+    {
+      "path": "apps/game/src/audio.ts",
+      "bytes": 50262,
+      "sha256": "e099e7e6bdbcd279c4db8c8e40452b2c3f26d228ff27b2461dc434856a0bf897",
+      "git_blob": "51920f77e532afd967cafad3bb268f99000f8767"
+    },
+    {
+      "path": "apps/game/src/title-theme.ts",
+      "bytes": 2787,
+      "sha256": "2ea2516c54f5e53a16ce05c1f4a37b5304e6282b5ea2855dc9694684a26c2069",
+      "git_blob": "d36ca6d851f00444a49cd8ace0bf74a69ce95d45"
+    }
+  ],
+  "tools": {
+    "rustc": "rustc 1.97.0 (2d8144b78 2026-07-07)",
+    "cargo": "cargo 1.97.0 (c980f4866 2026-06-30)",
+    "git": "git version 2.55.0.windows.2"
+  }
+}

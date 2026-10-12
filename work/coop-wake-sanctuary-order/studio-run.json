@@ -1,0 +1,25 @@
+{
+  "item": {
+    "id": "run-14305e1a",
+    "title": "Native Wake sanctuary-order optimization · completed",
+    "agentId": "/root/audio_score",
+    "agentLabel": "Native Wake sanctuary-order optimization",
+    "state": "completed",
+    "observedAt": "2026-10-12T20:00:24.172Z",
+    "taskIds": [
+      "task-b9daed25"
+    ],
+    "summary": "Minimum predicate reorder and meaningful native tests complete for separate review. Actual release snapshots on111a remove3840 allocation requests/359424 requested bytes per configured distant-miss Wake stage; empty3840 to0, full5712 to1872.15 Wake and129 co-op tests passed, strict game-core Clippy passed. Protected-hit rejection remains before damage. No full-game FPS/browser/GPU/RTC/physical performance or integration acceptance claimed.",
+    "evidence": [
+      {
+        "label": "Actual111a native before/after and scoped source checks",
+        "kind": "note",
+        "details": "C:/Users/mitch/.codex/worktrees/galaxy-pixel-art/galaxy-royale/work/coop-wake-sanctuary-order/HANDOFF.md SHA c47d7775c3d415de556df16c110c07af70f1b8f2a57473d935e5c86b40ff96af. Source pins a3abbd4e. Same work-only release fixture on frozen111a: distant-miss stage allocation requests removed3840 and requested bytes359424, empty3840 to0/full5712 to1872.15 Wake tests and129 co-op regressions passed,4 exports ignored; strict game-core all-target Clippy passed. Independent delta review, Root integration/build and product/RTC/physical performance remain open; original111a branch preserved."
+      }
+    ],
+    "author": "Codex audio_score",
+    "source": "Actual native before/after author work, not integration or FPS acceptance",
+    "createdAt": "2026-10-12T20:00:24.178Z"
+  },
+  "revision": 1052
+}

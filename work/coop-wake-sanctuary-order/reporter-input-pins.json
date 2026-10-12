@@ -1,0 +1,36 @@
+{
+  "runtime_ref": "332ddd5ec0370e13ad346ea4ea988f35b61ca3e7",
+  "scope": "Separate earlier sealed auditor input; not relabeled as111a after measurements.",
+  "files": [
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/coop-wake-native-budget/probe.rs",
+      "sha256": "802c1c3d07051828c588d9e9b303ef4c4ea194198a314e39ea7b6d8ad97b77c3",
+      "bytes": 7415
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/coop-wake-native-budget/source-pins.json",
+      "sha256": "701f9d836e02f1aa866b9cebb883277dae816fb01c54bd9fe69c9ca70022f8d7",
+      "bytes": 31265
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/coop-wake-native-budget/compiled-inputs.json",
+      "sha256": "a98e1c5d2b881590e49dc316c7c19d7a3f168a7ced5f5a7d13f03bb337fb366d",
+      "bytes": 263320
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/coop-wake-native-budget/REPORT.md",
+      "sha256": "d802e39d218ce443a0cb17c8fc2ce6d8a507fa72ef53e6eb5dca5ab2e7144fb8",
+      "bytes": 10046
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/coop-wake-native-budget/native-probe.log",
+      "sha256": "658ea87b7ba747aa83f5941f4515d163859dc2cbb04ad8497f4fb800eb7ea1d4",
+      "bytes": 6562
+    },
+    {
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/coop-wake-native-budget/native-wake-tests.log",
+      "sha256": "1e58e2419acf6754f112859d5b5f9742139e021fa5fa56c5147cbc5245c51e51",
+      "bytes": 9519
+    }
+  ]
+}

@@ -444,6 +444,69 @@ fn safe_owner_and_safe_targets_age_trails_without_damage_or_birth() {
 }
 
 #[test]
+fn distant_misses_and_remote_protected_geometry_hits_preserve_real_damage() {
+    let (mut game, _) = start(&[profile(5, 5, 1560)]);
+    let player = game.player;
+    place(&mut game, player, Vec2::new(800.0, 0.0), 0.0);
+    let hit = target(&mut game, Vec2::new(800.0, 0.0), 100.0, Kind::Enemy(0));
+    let site = regions::sites_near(game.profile.seed, Vec2::new(40_000.0, 30_000.0))
+        .into_iter()
+        .next()
+        .unwrap();
+    let center = Vec2::from_array(site.position);
+    assert!(game.outside_site_cache(center));
+    assert!(game.safe_zone_at(center).is_some());
+    let protected_hit = target(&mut game, center, 100.0, Kind::Enemy(0));
+    let mut misses = Vec::new();
+    for i in 0..48 {
+        let mut position = Vec2::new(30_000.0, i as f32 * 8.0);
+        while game.safe_zone_at(position).is_some() {
+            position.x += 100.0;
+        }
+        assert!(game.outside_site_cache(position));
+        misses.push(target(&mut game, position, 100.0, Kind::Enemy(0)));
+    }
+    let before = serde_json::to_string(game.profile()).unwrap();
+    let protected_body = format!(
+        "{:?}",
+        *game.world.get::<&PixelBody>(protected_hit).unwrap()
+    );
+    // Both targets overlap a point; the remote sanctuary remains authoritative.
+    game.world.get::<&mut Pilot>(player).unwrap().wake =
+        vec![sample(Vec2::new(800.0, 0.0), 1.0), sample(center, 1.0)];
+    advance_wakes(&mut game, TICK_SECONDS);
+    close(game.world.get::<&Actor>(hit).unwrap().health, 99.8);
+    close(
+        game.world.get::<&Actor>(protected_hit).unwrap().health,
+        100.0,
+    );
+    for &e in &misses {
+        close(game.world.get::<&Actor>(e).unwrap().health, 100.0);
+    }
+    assert_eq!(
+        format!(
+            "{:?}",
+            *game.world.get::<&PixelBody>(protected_hit).unwrap()
+        ),
+        protected_body
+    );
+    assert!(game.take_co_op_destructions(session()).unwrap().is_empty());
+    assert!(game.co_op.as_ref().unwrap().hit_owner.is_none());
+    assert_eq!(serde_json::to_string(game.profile()).unwrap(), before);
+    // Empty trails also leave every real hostile unchanged.
+    game.world.get::<&mut Pilot>(player).unwrap().wake.clear();
+    advance_wakes(&mut game, TICK_SECONDS);
+    close(game.world.get::<&Actor>(hit).unwrap().health, 99.8);
+    close(
+        game.world.get::<&Actor>(protected_hit).unwrap().health,
+        100.0,
+    );
+    for e in misses {
+        close(game.world.get::<&Actor>(e).unwrap().health, 100.0);
+    }
+}
+
+#[test]
 fn evolution_five_connects_short_samples_but_never_crosses_sanctuary_or_large_gap() {
     let (mut game, _) = start(&[profile(5, 5, 1560)]);
     let player = game.player;

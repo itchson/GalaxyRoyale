@@ -1,0 +1,1540 @@
+{
+  "base": "111a477fe507cd544902c8f44f07198dc31933d6",
+  "verified_actual_snapshot_files": 170,
+  "only_runtime_variant": "crates/game_core/src/co_op_wake.rs",
+  "probe_export_raw_sha256": "4e89e82aa07b1ec39d49fc5c6e7f5fe5cff429ce1ae3a816bef7ee53e6df394a",
+  "compiled_probe_lf_sha256": "a75b3d4e1c8159dafcc2fdaa103f9107b0e0cfec0624ee083aa3f4971017c6a9",
+  "before_basis": "Exact frozen Git source copied and pinned before baseline execution, with the pinned in-memory LF work probe appended. After state read and verified byte-for-byte; shared compiled probe unchanged. Raw exported probe has CRLF and is pinned separately.",
+  "files": [
+    {
+      "path": "Cargo.lock",
+      "baseline_compiled_sha256": "bc919f0f4492cedaf76458d59304a0df851bf6cc5c60e109e0ac4e440e24bd9c",
+      "optimized_compiled_sha256": "bc919f0f4492cedaf76458d59304a0df851bf6cc5c60e109e0ac4e440e24bd9c",
+      "bytes_before": 27800,
+      "bytes_after": 27800,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "Cargo.toml",
+      "baseline_compiled_sha256": "50b077a3fd8e0c8a42456948d6232ae86b2a1bbaa63652ee04da7848c776a3e3",
+      "optimized_compiled_sha256": "50b077a3fd8e0c8a42456948d6232ae86b2a1bbaa63652ee04da7848c776a3e3",
+      "bytes_before": 447,
+      "bytes_after": 447,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "assets/pipeline/pan-coop-dock/native256/pack.json",
+      "baseline_compiled_sha256": "36031366f135b12b290f59e3f2c382e56774f9663e5fdb5241584051ad24832b",
+      "optimized_compiled_sha256": "36031366f135b12b290f59e3f2c382e56774f9663e5fdb5241584051ad24832b",
+      "bytes_before": 2302820,
+      "bytes_after": 2302820,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "assets/pixels/atlas.json",
+      "baseline_compiled_sha256": "67635f779449feac9d1b24ce1aa264aadb10d7bf70cd54aa5542de44f855876f",
+      "optimized_compiled_sha256": "67635f779449feac9d1b24ce1aa264aadb10d7bf70cd54aa5542de44f855876f",
+      "bytes_before": 39608,
+      "bytes_after": 39608,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "assets/pixels/boss-atlas.json",
+      "baseline_compiled_sha256": "68b83e1d83a94993074f06bcb3ffc23a61d9542474fcbac42a11150114e3c850",
+      "optimized_compiled_sha256": "68b83e1d83a94993074f06bcb3ffc23a61d9542474fcbac42a11150114e3c850",
+      "bytes_before": 421056,
+      "bytes_after": 421056,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "assets/pixels/isotope-scar-atlas.json",
+      "baseline_compiled_sha256": "dc30b12a2d61f1f6209d36d35b4717e9332fe7b34adbe5f47779a2d214fc4e80",
+      "optimized_compiled_sha256": "dc30b12a2d61f1f6209d36d35b4717e9332fe7b34adbe5f47779a2d214fc4e80",
+      "bytes_before": 44637,
+      "bytes_after": 44637,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "assets/pixels/mote-atlas.json",
+      "baseline_compiled_sha256": "fee68d81defca47f8bb7a4d6c177f7f70bb00d40b8df38d568e82eabf837381a",
+      "optimized_compiled_sha256": "fee68d81defca47f8bb7a4d6c177f7f70bb00d40b8df38d568e82eabf837381a",
+      "bytes_before": 7208,
+      "bytes_after": 7208,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "assets/pixels/pan-surface/material.json",
+      "baseline_compiled_sha256": "903be7ec67fd236c9e2ec788a95da852779e22f05ad97dd2a066f1f9e77ea01c",
+      "optimized_compiled_sha256": "903be7ec67fd236c9e2ec788a95da852779e22f05ad97dd2a066f1f9e77ea01c",
+      "bytes_before": 33702,
+      "bytes_after": 33702,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "assets/pixels/raicho-fine-detail/atlas.json",
+      "baseline_compiled_sha256": "319aa1fd8cf1112ef33addd06739063c72b92ecca5ca460afcc05aada77666be",
+      "optimized_compiled_sha256": "319aa1fd8cf1112ef33addd06739063c72b92ecca5ca460afcc05aada77666be",
+      "bytes_before": 230223,
+      "bytes_after": 230223,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "assets/pixels/riveter-atlas.json",
+      "baseline_compiled_sha256": "6a312b6e0d957e6bb95dfefe5d44563d9c53125a84f5b00586aedc561ee742ae",
+      "optimized_compiled_sha256": "6a312b6e0d957e6bb95dfefe5d44563d9c53125a84f5b00586aedc561ee742ae",
+      "bytes_before": 5594,
+      "bytes_after": 5594,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "assets/pixels/shooting-star/atlas.json",
+      "baseline_compiled_sha256": "b7cbd3715f24a976b8f884b57c00c783b571de6b7b554f49c602c9a1c3683360",
+      "optimized_compiled_sha256": "b7cbd3715f24a976b8f884b57c00c783b571de6b7b554f49c602c9a1c3683360",
+      "bytes_before": 52755,
+      "bytes_after": 52755,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "assets/ui/atlas.json",
+      "baseline_compiled_sha256": "e06db7d94ccd1f12a4c0928e7a7c30c7725af2a81de958c5de0c2934598e7e75",
+      "optimized_compiled_sha256": "e06db7d94ccd1f12a4c0928e7a7c30c7725af2a81de958c5de0c2934598e7e75",
+      "bytes_before": 88654,
+      "bytes_after": 88654,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "assets/ui/campaign-atlas.json",
+      "baseline_compiled_sha256": "a7950c45e92c18d5305e6ecb3c1f66ee308cab9489473a73b4b4352a852c8aa0",
+      "optimized_compiled_sha256": "a7950c45e92c18d5305e6ecb3c1f66ee308cab9489473a73b4b4352a852c8aa0",
+      "bytes_before": 41347,
+      "bytes_after": 41347,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "assets/ui/champion-patches-atlas.json",
+      "baseline_compiled_sha256": "9916ba83ccec6d7df7b7061d8aef54a02f408666c993e33dc5a5872d8835580b",
+      "optimized_compiled_sha256": "9916ba83ccec6d7df7b7061d8aef54a02f408666c993e33dc5a5872d8835580b",
+      "bytes_before": 13547,
+      "bytes_after": 13547,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "assets/ui/flight-icons/atlas.json",
+      "baseline_compiled_sha256": "4d811f30347e72d1fbc9583e1d931065cb44af0d2f59dfae2a6850887a2f0704",
+      "optimized_compiled_sha256": "4d811f30347e72d1fbc9583e1d931065cb44af0d2f59dfae2a6850887a2f0704",
+      "bytes_before": 99809,
+      "bytes_after": 99809,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "assets/ui/kikai/atlas.json",
+      "baseline_compiled_sha256": "7f6d2182116ede7121d0bd4c3b539bb148b3b8d2d4d3817630545889a7759a5d",
+      "optimized_compiled_sha256": "7f6d2182116ede7121d0bd4c3b539bb148b3b8d2d4d3817630545889a7759a5d",
+      "bytes_before": 1562729,
+      "bytes_after": 1562729,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "assets/ui/kikai/detail/atlas.json",
+      "baseline_compiled_sha256": "31fa6a1b04d83f3d5fad377562e73c6ad35530b028626a1136c5b56afd9ea661",
+      "optimized_compiled_sha256": "31fa6a1b04d83f3d5fad377562e73c6ad35530b028626a1136c5b56afd9ea661",
+      "bytes_before": 3247005,
+      "bytes_after": 3247005,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "assets/ui/title-mark/atlas.json",
+      "baseline_compiled_sha256": "503fd06162f9c9d99c51596a202d5b7af856742979e6a335011cc2d7af83b15f",
+      "optimized_compiled_sha256": "503fd06162f9c9d99c51596a202d5b7af856742979e6a335011cc2d7af83b15f",
+      "bytes_before": 411810,
+      "bytes_after": 411810,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/engine_core/Cargo.toml",
+      "baseline_compiled_sha256": "0c7948f6d4cc4f43132f9c8c7c7f5d295b8003d00b15836a295bfe07e9c892bd",
+      "optimized_compiled_sha256": "0c7948f6d4cc4f43132f9c8c7c7f5d295b8003d00b15836a295bfe07e9c892bd",
+      "bytes_before": 242,
+      "bytes_after": 242,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/engine_core/examples/boss_rig_proof.rs",
+      "baseline_compiled_sha256": "a8166b0236645f614468d419043250d5e1dad8b7414a9e2bf41ebab81937fcce",
+      "optimized_compiled_sha256": "a8166b0236645f614468d419043250d5e1dad8b7414a9e2bf41ebab81937fcce",
+      "bytes_before": 4199,
+      "bytes_after": 4199,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/engine_core/examples/engine_proof.rs",
+      "baseline_compiled_sha256": "53c41ab8bda0b835a62bc2c79767cd1117e3604d746fcc32cadefbe6adeebdf0",
+      "optimized_compiled_sha256": "53c41ab8bda0b835a62bc2c79767cd1117e3604d746fcc32cadefbe6adeebdf0",
+      "bytes_before": 5972,
+      "bytes_after": 5972,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/engine_core/examples/pack_raicho_surfaces.rs",
+      "baseline_compiled_sha256": "4809981b992602806eef5d6882fcf56fa70c9b0796da319262755d25491c622c",
+      "optimized_compiled_sha256": "4809981b992602806eef5d6882fcf56fa70c9b0796da319262755d25491c622c",
+      "bytes_before": 2727,
+      "bytes_after": 2727,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/engine_core/src/camera.rs",
+      "baseline_compiled_sha256": "b08164aa6c9a7e8364ee90e7205e70b702d2013c1861254da33610cb81fdf759",
+      "optimized_compiled_sha256": "b08164aa6c9a7e8364ee90e7205e70b702d2013c1861254da33610cb81fdf759",
+      "bytes_before": 8926,
+      "bytes_after": 8926,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/engine_core/src/frame.rs",
+      "baseline_compiled_sha256": "df5a43277139616481595160c2902172dfe4a902f0b0537b6bfe527288df32c4",
+      "optimized_compiled_sha256": "df5a43277139616481595160c2902172dfe4a902f0b0537b6bfe527288df32c4",
+      "bytes_before": 30850,
+      "bytes_after": 30850,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/engine_core/src/lib.rs",
+      "baseline_compiled_sha256": "4e2ce1d4af539ba9aafdb15d50e346c2f2a0168593ab7c419282694f0b37e869",
+      "optimized_compiled_sha256": "4e2ce1d4af539ba9aafdb15d50e346c2f2a0168593ab7c419282694f0b37e869",
+      "bytes_before": 891,
+      "bytes_after": 891,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/engine_core/src/pixel_rig.rs",
+      "baseline_compiled_sha256": "fd184094739cc2c34c0ae120f3647dbe271013081e5d6a3c99f74543c1dabb76",
+      "optimized_compiled_sha256": "fd184094739cc2c34c0ae120f3647dbe271013081e5d6a3c99f74543c1dabb76",
+      "bytes_before": 14857,
+      "bytes_after": 14857,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/engine_core/src/pixels.rs",
+      "baseline_compiled_sha256": "b0ecc9e662f598de055e43517163917c182dcb1bee5300b0170f3b54c42559a8",
+      "optimized_compiled_sha256": "b0ecc9e662f598de055e43517163917c182dcb1bee5300b0170f3b54c42559a8",
+      "bytes_before": 21861,
+      "bytes_after": 21861,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/engine_core/src/shadow.rs",
+      "baseline_compiled_sha256": "32302645014353a9f37019082ba7453f8058a99f99828c2af353a5b27e8e596e",
+      "optimized_compiled_sha256": "32302645014353a9f37019082ba7453f8058a99f99828c2af353a5b27e8e596e",
+      "bytes_before": 9438,
+      "bytes_after": 9438,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/engine_core/src/surface.rs",
+      "baseline_compiled_sha256": "f2b991908836836d7299289edf58accba8ea280ad037a38bbf3fcf949a0947d9",
+      "optimized_compiled_sha256": "f2b991908836836d7299289edf58accba8ea280ad037a38bbf3fcf949a0947d9",
+      "bytes_before": 4271,
+      "bytes_after": 4271,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/engine_core/src/surface_tests.rs",
+      "baseline_compiled_sha256": "b1c0755b7b305413f35d0ee5bb790d1325688ed1a622ab723f576ee1653f5755",
+      "optimized_compiled_sha256": "b1c0755b7b305413f35d0ee5bb790d1325688ed1a622ab723f576ee1653f5755",
+      "bytes_before": 15592,
+      "bytes_after": 15592,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/engine_core/src/topology.rs",
+      "baseline_compiled_sha256": "72b22bedd285bf61d6e2a74a6ce5d8eddc7f593004e268949574e949fa528bbc",
+      "optimized_compiled_sha256": "72b22bedd285bf61d6e2a74a6ce5d8eddc7f593004e268949574e949fa528bbc",
+      "bytes_before": 13140,
+      "bytes_after": 13140,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/engine_core/src/transform.rs",
+      "baseline_compiled_sha256": "f511ceb89ac4445ce9749d1ed4086e672693357a1e6cf4f4f944dd8fe7220c74",
+      "optimized_compiled_sha256": "f511ceb89ac4445ce9749d1ed4086e672693357a1e6cf4f4f944dd8fe7220c74",
+      "bytes_before": 5578,
+      "bytes_after": 5578,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/engine_core/tests/boss_assets.rs",
+      "baseline_compiled_sha256": "77b632212c8ac67137750ce9018dec5f6cc50999e0ba932cd9da34b193c33f8c",
+      "optimized_compiled_sha256": "77b632212c8ac67137750ce9018dec5f6cc50999e0ba932cd9da34b193c33f8c",
+      "bytes_before": 6850,
+      "bytes_after": 6850,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/Cargo.toml",
+      "baseline_compiled_sha256": "8997ce52e4c8a2384b2bfe5ef8d7778b6be42df8e1157b6c17300f931af16350",
+      "optimized_compiled_sha256": "8997ce52e4c8a2384b2bfe5ef8d7778b6be42df8e1157b6c17300f931af16350",
+      "bytes_before": 285,
+      "bytes_after": 285,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/examples/game_proof.rs",
+      "baseline_compiled_sha256": "dda5eb7eda5629cd157a9538622b5119737e015415b3c31750048134c18db749",
+      "optimized_compiled_sha256": "dda5eb7eda5629cd157a9538622b5119737e015415b3c31750048134c18db749",
+      "bytes_before": 3829,
+      "bytes_after": 3829,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/abilities.rs",
+      "baseline_compiled_sha256": "394d8dcd566d4bbcf2a9d2dea7320512248dfc16b83fa3ee98d767849ba47509",
+      "optimized_compiled_sha256": "394d8dcd566d4bbcf2a9d2dea7320512248dfc16b83fa3ee98d767849ba47509",
+      "bytes_before": 14884,
+      "bytes_after": 14884,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/asteroid_art.rs",
+      "baseline_compiled_sha256": "8f302bfdadee2dab167eccc0b38db33eb0b0c57ebe89ce7aa59b2126ec64f9bc",
+      "optimized_compiled_sha256": "8f302bfdadee2dab167eccc0b38db33eb0b0c57ebe89ce7aa59b2126ec64f9bc",
+      "bytes_before": 11508,
+      "bytes_after": 11508,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/asteroid_diversity_tests.rs",
+      "baseline_compiled_sha256": "30fb0abf932010ff7a224eed95e68d74221cc4c604256c2c6e7d6522432aeefa",
+      "optimized_compiled_sha256": "30fb0abf932010ff7a224eed95e68d74221cc4c604256c2c6e7d6522432aeefa",
+      "bytes_before": 15387,
+      "bytes_after": 15387,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/asteroid_zones.rs",
+      "baseline_compiled_sha256": "9f1ba2e68d403796e3ea64ec771c6fb433cfb1614c4091d1170beb28732e61f7",
+      "optimized_compiled_sha256": "9f1ba2e68d403796e3ea64ec771c6fb433cfb1614c4091d1170beb28732e61f7",
+      "bytes_before": 7952,
+      "bytes_after": 7952,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/asteroid_zones/tests.rs",
+      "baseline_compiled_sha256": "fb8c2ffb8fe53e418f7b9567a80906b41f1cbffe575266c166e855860c0e780c",
+      "optimized_compiled_sha256": "fb8c2ffb8fe53e418f7b9567a80906b41f1cbffe575266c166e855860c0e780c",
+      "bytes_before": 16018,
+      "bytes_after": 16018,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/audio_runtime.rs",
+      "baseline_compiled_sha256": "77b46a8dc815347df8625262a099bdf7d9fd7c3a6ca3e5ce56b6171c3fa8c171",
+      "optimized_compiled_sha256": "77b46a8dc815347df8625262a099bdf7d9fd7c3a6ca3e5ce56b6171c3fa8c171",
+      "bytes_before": 19456,
+      "bytes_after": 19456,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/biome_enemies.rs",
+      "baseline_compiled_sha256": "b897d6841f9de935e42879f98d8fae2cca8b755ed501cbe6eb3499ab38cbbe64",
+      "optimized_compiled_sha256": "b897d6841f9de935e42879f98d8fae2cca8b755ed501cbe6eb3499ab38cbbe64",
+      "bytes_before": 34586,
+      "bytes_after": 34586,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/boss_assets.rs",
+      "baseline_compiled_sha256": "6f243e4211c7a40e0feaf35140b8b0300df65d061e2657d6490b90a6ef334699",
+      "optimized_compiled_sha256": "6f243e4211c7a40e0feaf35140b8b0300df65d061e2657d6490b90a6ef334699",
+      "bytes_before": 4078,
+      "bytes_after": 4078,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/bosses.rs",
+      "baseline_compiled_sha256": "69194ae242129ccecef69ff3661369a784b12bd7fbcf60b64eda15b4642a4408",
+      "optimized_compiled_sha256": "69194ae242129ccecef69ff3661369a784b12bd7fbcf60b64eda15b4642a4408",
+      "bytes_before": 47224,
+      "bytes_after": 47224,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/campaign.rs",
+      "baseline_compiled_sha256": "6a5d90403e42a936edaac37f2a5f5668f40a925116d94b54c499a7cd6899ca65",
+      "optimized_compiled_sha256": "6a5d90403e42a936edaac37f2a5f5668f40a925116d94b54c499a7cd6899ca65",
+      "bytes_before": 22135,
+      "bytes_after": 22135,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/campaign_runtime.rs",
+      "baseline_compiled_sha256": "5f162091ac659352b97f12904388643460ebc4d6a4918b2fb062673518e6bf85",
+      "optimized_compiled_sha256": "5f162091ac659352b97f12904388643460ebc4d6a4918b2fb062673518e6bf85",
+      "bytes_before": 52483,
+      "bytes_after": 52483,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/champion_roster_tests.rs",
+      "baseline_compiled_sha256": "fed4da5898c64ee52fe20cffd990e5313b3c1dda250d86612ac2f1989d1f5a6a",
+      "optimized_compiled_sha256": "fed4da5898c64ee52fe20cffd990e5313b3c1dda250d86612ac2f1989d1f5a6a",
+      "bytes_before": 10838,
+      "bytes_after": 10838,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/co_op.rs",
+      "baseline_compiled_sha256": "3ed2e9a84792ca2d96eb4e1b4d6942a4ab1e9b72a934bf9b55148212b0d5fa99",
+      "optimized_compiled_sha256": "3ed2e9a84792ca2d96eb4e1b4d6942a4ab1e9b72a934bf9b55148212b0d5fa99",
+      "bytes_before": 51682,
+      "bytes_after": 51682,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/co_op_control.rs",
+      "baseline_compiled_sha256": "ba0d2b8c07206f23be6e05c038ba175e1b20034a83b80999b2983ea305625f0d",
+      "optimized_compiled_sha256": "ba0d2b8c07206f23be6e05c038ba175e1b20034a83b80999b2983ea305625f0d",
+      "bytes_before": 3994,
+      "bytes_after": 3994,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/co_op_echo_tests.rs",
+      "baseline_compiled_sha256": "64c84376e529b21d3cfe1b7a8a69a1ae3a51f267cd092fe5b29336be08394b9a",
+      "optimized_compiled_sha256": "64c84376e529b21d3cfe1b7a8a69a1ae3a51f267cd092fe5b29336be08394b9a",
+      "bytes_before": 33893,
+      "bytes_after": 33893,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/co_op_fx.rs",
+      "baseline_compiled_sha256": "711c5aebd8ff1639f682069a6c94b0cc29c436d38208a26fe02f83dd4eaf4cc8",
+      "optimized_compiled_sha256": "711c5aebd8ff1639f682069a6c94b0cc29c436d38208a26fe02f83dd4eaf4cc8",
+      "bytes_before": 7782,
+      "bytes_after": 7782,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/co_op_fx_tests.rs",
+      "baseline_compiled_sha256": "0bc61c6b2dc50dd89212038507b48dfe6be9ec9930077aed506d4fa3d4cd7a73",
+      "optimized_compiled_sha256": "0bc61c6b2dc50dd89212038507b48dfe6be9ec9930077aed506d4fa3d4cd7a73",
+      "bytes_before": 21980,
+      "bytes_after": 21980,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/co_op_loadout.rs",
+      "baseline_compiled_sha256": "dcbb09adc2a97794ed01de19f1dfacd8e059f5d21523f88776baa6448da3ef99",
+      "optimized_compiled_sha256": "dcbb09adc2a97794ed01de19f1dfacd8e059f5d21523f88776baa6448da3ef99",
+      "bytes_before": 8962,
+      "bytes_after": 8962,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/co_op_loadout_tests.rs",
+      "baseline_compiled_sha256": "c69798a91578137472ceb02d9b32af225f678942103e4bebe1c9c274407b0bae",
+      "optimized_compiled_sha256": "c69798a91578137472ceb02d9b32af225f678942103e4bebe1c9c274407b0bae",
+      "bytes_before": 22547,
+      "bytes_after": 22547,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/co_op_local_cue_tests.rs",
+      "baseline_compiled_sha256": "ed6018b5f3bafb6cd426eac2c3d610576988730a276ba3f7eb08119cb4832984",
+      "optimized_compiled_sha256": "ed6018b5f3bafb6cd426eac2c3d610576988730a276ba3f7eb08119cb4832984",
+      "bytes_before": 5428,
+      "bytes_after": 5428,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/co_op_nova_tests.rs",
+      "baseline_compiled_sha256": "672d0efc10332bdec97e3bcb07eb7f5fe8f5c600090561a3a3094062a7cfe506",
+      "optimized_compiled_sha256": "672d0efc10332bdec97e3bcb07eb7f5fe8f5c600090561a3a3094062a7cfe506",
+      "bytes_before": 26543,
+      "bytes_after": 26543,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/co_op_passive_tests.rs",
+      "baseline_compiled_sha256": "80648b3117c8b10ae7b6437d7b2c5a69c3faf44a6accd20e276386a6d0488429",
+      "optimized_compiled_sha256": "80648b3117c8b10ae7b6437d7b2c5a69c3faf44a6accd20e276386a6d0488429",
+      "bytes_before": 16093,
+      "bytes_after": 16093,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/co_op_publish.rs",
+      "baseline_compiled_sha256": "c1bbb4642a9493a071c76dbd7684904c35157afef4e247a34b38663ccde7b54f",
+      "optimized_compiled_sha256": "c1bbb4642a9493a071c76dbd7684904c35157afef4e247a34b38663ccde7b54f",
+      "bytes_before": 9583,
+      "bytes_after": 9583,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/co_op_publish_tests.rs",
+      "baseline_compiled_sha256": "354f4983e841e3bbe60eb5e34d037ca64c7f96cf419f26ead0a4403c5ebc5aa3",
+      "optimized_compiled_sha256": "354f4983e841e3bbe60eb5e34d037ca64c7f96cf419f26ead0a4403c5ebc5aa3",
+      "bytes_before": 12233,
+      "bytes_after": 12233,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/co_op_replica.rs",
+      "baseline_compiled_sha256": "3d077be3ee58b081302f16020bed3237c2717ec082baa84efdffec89b836dcba",
+      "optimized_compiled_sha256": "3d077be3ee58b081302f16020bed3237c2717ec082baa84efdffec89b836dcba",
+      "bytes_before": 55071,
+      "bytes_after": 55071,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/co_op_replica_tests.rs",
+      "baseline_compiled_sha256": "71569a7889c0b48c8a46e91eeb03f117ff6f6097d1795c903e1da0b9e59234f6",
+      "optimized_compiled_sha256": "71569a7889c0b48c8a46e91eeb03f117ff6f6097d1795c903e1da0b9e59234f6",
+      "bytes_before": 31487,
+      "bytes_after": 31487,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/co_op_replica_wake_tests.rs",
+      "baseline_compiled_sha256": "bf7024cd560d81d0e2dde3664b847ebd1ece78ccd476fb4fc03fff88e92df63a",
+      "optimized_compiled_sha256": "bf7024cd560d81d0e2dde3664b847ebd1ece78ccd476fb4fc03fff88e92df63a",
+      "bytes_before": 30484,
+      "bytes_after": 30484,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/co_op_starter_tests.rs",
+      "baseline_compiled_sha256": "39380f913161113761377f4b2119fa9f7946f1063e4d2f0b0b5d691ee1ac1a2f",
+      "optimized_compiled_sha256": "39380f913161113761377f4b2119fa9f7946f1063e4d2f0b0b5d691ee1ac1a2f",
+      "bytes_before": 22322,
+      "bytes_after": 22322,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/co_op_tests.rs",
+      "baseline_compiled_sha256": "9389101baba16e2783b0a4df953e25f7b1e2d4c96661eb9ffa80a0b67de39010",
+      "optimized_compiled_sha256": "9389101baba16e2783b0a4df953e25f7b1e2d4c96661eb9ffa80a0b67de39010",
+      "bytes_before": 44542,
+      "bytes_after": 44542,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/co_op_wake.rs",
+      "baseline_compiled_sha256": "d11a6079e17a5e67fc3e6b2c34c42337e0ec940ac3d33709a560332afdc85009",
+      "optimized_compiled_sha256": "bd2c5f1ea302b126e3fdee1bc1224342ab7788956947cd05cc4c1a819a39021f",
+      "bytes_before": 5386,
+      "bytes_after": 5547,
+      "runtime_variant": true,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/co_op_wake_fx.rs",
+      "baseline_compiled_sha256": "789e14ca8c0074f3ea2a875b6e8280c779be06ff16998959356ec715f386e0fb",
+      "optimized_compiled_sha256": "789e14ca8c0074f3ea2a875b6e8280c779be06ff16998959356ec715f386e0fb",
+      "bytes_before": 6201,
+      "bytes_after": 6201,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/co_op_wake_tests.rs",
+      "baseline_compiled_sha256": "033c733dade9b2256a11e6fff6e48ea2936345efd4406950db3cf936b16031fa",
+      "optimized_compiled_sha256": "033c733dade9b2256a11e6fff6e48ea2936345efd4406950db3cf936b16031fa",
+      "bytes_before": 36564,
+      "bytes_after": 36564,
+      "runtime_variant": false,
+      "work_probe_append": true
+    },
+    {
+      "path": "crates/game_core/src/component_tests.rs",
+      "baseline_compiled_sha256": "ada882c35adf64d7285a6fca966db2a456346e5df1cd1470771be1df99b712a6",
+      "optimized_compiled_sha256": "ada882c35adf64d7285a6fca966db2a456346e5df1cd1470771be1df99b712a6",
+      "bytes_before": 18126,
+      "bytes_after": 18126,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/components.rs",
+      "baseline_compiled_sha256": "c2a9cef6263bd9be289e991fa80dfcdfd85502f92b13536670dc2dff9e680471",
+      "optimized_compiled_sha256": "c2a9cef6263bd9be289e991fa80dfcdfd85502f92b13536670dc2dff9e680471",
+      "bytes_before": 9224,
+      "bytes_after": 9224,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/cosmic_background.rs",
+      "baseline_compiled_sha256": "f3ea34b67c9fcb00096817cc022ebac443a442313544bad2be4633cc1caebe6c",
+      "optimized_compiled_sha256": "f3ea34b67c9fcb00096817cc022ebac443a442313544bad2be4633cc1caebe6c",
+      "bytes_before": 72391,
+      "bytes_after": 72391,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/cosmic_detail_tests.rs",
+      "baseline_compiled_sha256": "6952c01de786f4807cf734340c1c5c425f8dd1bd1385f4b6209b533636b3d32c",
+      "optimized_compiled_sha256": "6952c01de786f4807cf734340c1c5c425f8dd1bd1385f4b6209b533636b3d32c",
+      "bytes_before": 21765,
+      "bytes_after": 21765,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/cursor_aim_tests.rs",
+      "baseline_compiled_sha256": "4abfc3c200c8500a22b334d2d9839386b6f8764bcc0a8c39034d83a1577cdf29",
+      "optimized_compiled_sha256": "4abfc3c200c8500a22b334d2d9839386b6f8764bcc0a8c39034d83a1577cdf29",
+      "bytes_before": 7483,
+      "bytes_after": 7483,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/deep_nebula_tests.rs",
+      "baseline_compiled_sha256": "a3db73b61996509f88d231e104a9496d253f788735e1a955b175401b65254a1c",
+      "optimized_compiled_sha256": "a3db73b61996509f88d231e104a9496d253f788735e1a955b175401b65254a1c",
+      "bytes_before": 16007,
+      "bytes_after": 16007,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/diagnostic_death_tests.rs",
+      "baseline_compiled_sha256": "8d57d8feabda34b79dbb27b8858865a9344adb9e52ff859bae7d0d318a68dc87",
+      "optimized_compiled_sha256": "8d57d8feabda34b79dbb27b8858865a9344adb9e52ff859bae7d0d318a68dc87",
+      "bytes_before": 13484,
+      "bytes_after": 13484,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/diagnostic_warp_tests.rs",
+      "baseline_compiled_sha256": "33b4b93f6d1049c209e7e50677b9899c3fa09c2e8fcb6b191467e92c458b1971",
+      "optimized_compiled_sha256": "33b4b93f6d1049c209e7e50677b9899c3fa09c2e8fcb6b191467e92c458b1971",
+      "bytes_before": 4080,
+      "bytes_after": 4080,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/dock_facilities.rs",
+      "baseline_compiled_sha256": "9f7e7cc1e5ed68ff980b85d0f4a74c7a38f849b86b8da6c0c3f0be936468b1e2",
+      "optimized_compiled_sha256": "9f7e7cc1e5ed68ff980b85d0f4a74c7a38f849b86b8da6c0c3f0be936468b1e2",
+      "bytes_before": 5382,
+      "bytes_after": 5382,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/dock_facility_art.rs",
+      "baseline_compiled_sha256": "4ea53b139391cdd27d1122539455f90b1c913aa07aba68fd8354c409dad109c1",
+      "optimized_compiled_sha256": "4ea53b139391cdd27d1122539455f90b1c913aa07aba68fd8354c409dad109c1",
+      "bytes_before": 12387,
+      "bytes_after": 12387,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/dock_facility_tests.rs",
+      "baseline_compiled_sha256": "c77dc05192ccfd7f043db96a65e5c84f05c1cdb047bd2f3229c35138bfab4902",
+      "optimized_compiled_sha256": "c77dc05192ccfd7f043db96a65e5c84f05c1cdb047bd2f3229c35138bfab4902",
+      "bytes_before": 11668,
+      "bytes_after": 11668,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/held_thrust_tests.rs",
+      "baseline_compiled_sha256": "6923df268524ab17b812ffb41457abb94dd415a9d3f34efbd5d0730cd6c0df3b",
+      "optimized_compiled_sha256": "6923df268524ab17b812ffb41457abb94dd415a9d3f34efbd5d0730cd6c0df3b",
+      "bytes_before": 4307,
+      "bytes_after": 4307,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/hub_shadows.rs",
+      "baseline_compiled_sha256": "0d65651030da6d396f7775e1b46d465b305835cafd40eabf7a8cbdc9adf16086",
+      "optimized_compiled_sha256": "0d65651030da6d396f7775e1b46d465b305835cafd40eabf7a8cbdc9adf16086",
+      "bytes_before": 9642,
+      "bytes_after": 9642,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/identity.rs",
+      "baseline_compiled_sha256": "370309e9a2e4706e0380694de00069dd8f83bd73ca1207f1788329d4f6a24286",
+      "optimized_compiled_sha256": "370309e9a2e4706e0380694de00069dd8f83bd73ca1207f1788329d4f6a24286",
+      "bytes_before": 46183,
+      "bytes_after": 46183,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/identity_tests.rs",
+      "baseline_compiled_sha256": "b4549153c89cc7f4d968acc9b8689591bb69ee9a0254c35a07db10ce6847b442",
+      "optimized_compiled_sha256": "b4549153c89cc7f4d968acc9b8689591bb69ee9a0254c35a07db10ce6847b442",
+      "bytes_before": 36304,
+      "bytes_after": 36304,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/isotope_region_tests.rs",
+      "baseline_compiled_sha256": "7f1e2de16997fed26378f06ee3f530113b334b647bb761df2f8267356ee8db21",
+      "optimized_compiled_sha256": "7f1e2de16997fed26378f06ee3f530113b334b647bb761df2f8267356ee8db21",
+      "bytes_before": 4883,
+      "bytes_after": 4883,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/isotope_scar.rs",
+      "baseline_compiled_sha256": "91d52682e2ebeb3bd8e5c4bd3dcf691c3fac5dac4a3fbde94dd9c036c3e39179",
+      "optimized_compiled_sha256": "91d52682e2ebeb3bd8e5c4bd3dcf691c3fac5dac4a3fbde94dd9c036c3e39179",
+      "bytes_before": 14867,
+      "bytes_after": 14867,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/lib.rs",
+      "baseline_compiled_sha256": "fd6e46d4cdff291fca626e407fe1ebbb060b70a2d9ddd569781655c3558e18e5",
+      "optimized_compiled_sha256": "fd6e46d4cdff291fca626e407fe1ebbb060b70a2d9ddd569781655c3558e18e5",
+      "bytes_before": 197054,
+      "bytes_after": 197054,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/live_overlay_tests.rs",
+      "baseline_compiled_sha256": "0fe3d4b32460f061768292d683adf9edd14d0496799c7666eca06e8406f76326",
+      "optimized_compiled_sha256": "0fe3d4b32460f061768292d683adf9edd14d0496799c7666eca06e8406f76326",
+      "bytes_before": 7176,
+      "bytes_after": 7176,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/material_scene.rs",
+      "baseline_compiled_sha256": "a05ee3742df8cdf13e426b52946bdddffd7fda15bcd9d13c69b08e2db537f846",
+      "optimized_compiled_sha256": "a05ee3742df8cdf13e426b52946bdddffd7fda15bcd9d13c69b08e2db537f846",
+      "bytes_before": 3972,
+      "bytes_after": 3972,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/material_scene_tests.rs",
+      "baseline_compiled_sha256": "4b710a8379f66b014ba5c22f6031b93fb307190ec244e0db2d0270b76ca0d939",
+      "optimized_compiled_sha256": "4b710a8379f66b014ba5c22f6031b93fb307190ec244e0db2d0270b76ca0d939",
+      "bytes_before": 7343,
+      "bytes_after": 7343,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/mote_art.rs",
+      "baseline_compiled_sha256": "229916ac25331a0dc59add3a8c8a49274d2f4a3e01520ffa14a17d8b8965806f",
+      "optimized_compiled_sha256": "229916ac25331a0dc59add3a8c8a49274d2f4a3e01520ffa14a17d8b8965806f",
+      "bytes_before": 5528,
+      "bytes_after": 5528,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/mote_controller.rs",
+      "baseline_compiled_sha256": "1f8127aeb40d02402a11a17cc6a1e90485ea5314b364847349975d538341e881",
+      "optimized_compiled_sha256": "1f8127aeb40d02402a11a17cc6a1e90485ea5314b364847349975d538341e881",
+      "bytes_before": 19750,
+      "bytes_after": 19750,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/navigation.rs",
+      "baseline_compiled_sha256": "95158dbd0c1d0762c608eb7d9bf5833b477f3c411238304b0e27c14c5c5843fa",
+      "optimized_compiled_sha256": "95158dbd0c1d0762c608eb7d9bf5833b477f3c411238304b0e27c14c5c5843fa",
+      "bytes_before": 7080,
+      "bytes_after": 7080,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/pan_material_replica_tests.rs",
+      "baseline_compiled_sha256": "4aa83d13dbe54811fc838929fdff8785331008c8414e94731dffa9c393f4eed2",
+      "optimized_compiled_sha256": "4aa83d13dbe54811fc838929fdff8785331008c8414e94731dffa9c393f4eed2",
+      "bytes_before": 5494,
+      "bytes_after": 5494,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/particle_tests.rs",
+      "baseline_compiled_sha256": "5cb02420f511eaf070762dcd45f7de2f3cd9c300810d9bca4ff32af8156c721d",
+      "optimized_compiled_sha256": "5cb02420f511eaf070762dcd45f7de2f3cd9c300810d9bca4ff32af8156c721d",
+      "bytes_before": 12961,
+      "bytes_after": 12961,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/pixel_assets.rs",
+      "baseline_compiled_sha256": "1d4bdb14ff635bce57986e92da68badce09973bb3558a949005df78d5ebeacaa",
+      "optimized_compiled_sha256": "1d4bdb14ff635bce57986e92da68badce09973bb3558a949005df78d5ebeacaa",
+      "bytes_before": 13834,
+      "bytes_after": 13834,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/player_presentation.rs",
+      "baseline_compiled_sha256": "ca95633a028e0837ca2b1352bec9a82d47cdadb7340e17b82f498c5c3e14fc5d",
+      "optimized_compiled_sha256": "ca95633a028e0837ca2b1352bec9a82d47cdadb7340e17b82f498c5c3e14fc5d",
+      "bytes_before": 7856,
+      "bytes_after": 7856,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/radiation_audio_tests.rs",
+      "baseline_compiled_sha256": "69045bbd0cd846d77dd8ce6a89811bcc850ef79e0ae7e1f4d383a8974125442b",
+      "optimized_compiled_sha256": "69045bbd0cd846d77dd8ce6a89811bcc850ef79e0ae7e1f4d383a8974125442b",
+      "bytes_before": 7656,
+      "bytes_after": 7656,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/radiation_enemies.rs",
+      "baseline_compiled_sha256": "23b6a40391cc6e3b81dba1ce773cd633233595e30b697405c3305b644079472a",
+      "optimized_compiled_sha256": "23b6a40391cc6e3b81dba1ce773cd633233595e30b697405c3305b644079472a",
+      "bytes_before": 10756,
+      "bytes_after": 10756,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/radiation_enemy_tests.rs",
+      "baseline_compiled_sha256": "6aaf4dc074559e2e9c6c481111e87565d0549196942d60343d2508e1108642f5",
+      "optimized_compiled_sha256": "6aaf4dc074559e2e9c6c481111e87565d0549196942d60343d2508e1108642f5",
+      "bytes_before": 32322,
+      "bytes_after": 32322,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/raicho_affinity_hud_tests.rs",
+      "baseline_compiled_sha256": "b50b7e6f3cf3712c959d18f3ff27d35f4c19f15fe60e5355fe4e333b7b111c89",
+      "optimized_compiled_sha256": "b50b7e6f3cf3712c959d18f3ff27d35f4c19f15fe60e5355fe4e333b7b111c89",
+      "bytes_before": 6736,
+      "bytes_after": 6736,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/raicho_draw_tests.rs",
+      "baseline_compiled_sha256": "163f59b15dc302cf398c8c216e5a920246507b6953cfc191a02531a6b9534715",
+      "optimized_compiled_sha256": "163f59b15dc302cf398c8c216e5a920246507b6953cfc191a02531a6b9534715",
+      "bytes_before": 3883,
+      "bytes_after": 3883,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/raicho_fine.rs",
+      "baseline_compiled_sha256": "a1bdb339a81ad0062d3b2bb53e26233a680e735a431982ec49ac748b4cc4c0c1",
+      "optimized_compiled_sha256": "a1bdb339a81ad0062d3b2bb53e26233a680e735a431982ec49ac748b4cc4c0c1",
+      "bytes_before": 17765,
+      "bytes_after": 17765,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/raicho_fine_tests.rs",
+      "baseline_compiled_sha256": "1d62bf527fcb42c32c7c8ead6581e989cc42e72f632a2a894beb011d97bea699",
+      "optimized_compiled_sha256": "1d62bf527fcb42c32c7c8ead6581e989cc42e72f632a2a894beb011d97bea699",
+      "bytes_before": 21870,
+      "bytes_after": 21870,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/region_immersion_tests.rs",
+      "baseline_compiled_sha256": "843b433608a6beb8d1ef0407d3d6a87ab5089a105ae05f2d26c8bdb6141cbfc0",
+      "optimized_compiled_sha256": "843b433608a6beb8d1ef0407d3d6a87ab5089a105ae05f2d26c8bdb6141cbfc0",
+      "bytes_before": 19900,
+      "bytes_after": 19900,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/region_node_tests.rs",
+      "baseline_compiled_sha256": "5a1364e53d429459fa9dff39cb505a2be732d1523c26512568b4463dd618e5aa",
+      "optimized_compiled_sha256": "5a1364e53d429459fa9dff39cb505a2be732d1523c26512568b4463dd618e5aa",
+      "bytes_before": 19463,
+      "bytes_after": 19463,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/regions.rs",
+      "baseline_compiled_sha256": "0b47fb15446f24e31953c56d120e55bb544511a13bb63bdb83bb599a6a015a2a",
+      "optimized_compiled_sha256": "0b47fb15446f24e31953c56d120e55bb544511a13bb63bdb83bb599a6a015a2a",
+      "bytes_before": 36159,
+      "bytes_after": 36159,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/regions_lod_tests.rs",
+      "baseline_compiled_sha256": "dac5d9b852f3d6807065e527080fe089f3ead6936ea0c1274b1c29a5c09cf6d7",
+      "optimized_compiled_sha256": "dac5d9b852f3d6807065e527080fe089f3ead6936ea0c1274b1c29a5c09cf6d7",
+      "bytes_before": 14268,
+      "bytes_after": 14268,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/segmented.rs",
+      "baseline_compiled_sha256": "638463899c37713f1d07c7ff2e2714811f79ac212182eb4fbaffb299b07d979a",
+      "optimized_compiled_sha256": "638463899c37713f1d07c7ff2e2714811f79ac212182eb4fbaffb299b07d979a",
+      "bytes_before": 9359,
+      "bytes_after": 9359,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/segmented/tests.rs",
+      "baseline_compiled_sha256": "370dabe7c76ffd024fa75b5fafcfe30e0089fa03465d8d9b1f8f9b3a9ea718db",
+      "optimized_compiled_sha256": "370dabe7c76ffd024fa75b5fafcfe30e0089fa03465d8d9b1f8f9b3a9ea718db",
+      "bytes_before": 9972,
+      "bytes_after": 9972,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/shield_progression.rs",
+      "baseline_compiled_sha256": "a308a0c46cbaa020bc0c998fa90be20276322b6912ef209df7d9bb89a93d97af",
+      "optimized_compiled_sha256": "a308a0c46cbaa020bc0c998fa90be20276322b6912ef209df7d9bb89a93d97af",
+      "bytes_before": 5281,
+      "bytes_after": 5281,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/shield_progression_tests.rs",
+      "baseline_compiled_sha256": "4f3423ce9095557f72a8d4d146fe1c197ed04e1206eb955917859755535a40fe",
+      "optimized_compiled_sha256": "4f3423ce9095557f72a8d4d146fe1c197ed04e1206eb955917859755535a40fe",
+      "bytes_before": 24989,
+      "bytes_after": 24989,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/ship_progression.rs",
+      "baseline_compiled_sha256": "451e4e17bc3de83b815200fefc433b3f9f594e6cea1d4eaca54f127ec199e458",
+      "optimized_compiled_sha256": "451e4e17bc3de83b815200fefc433b3f9f594e6cea1d4eaca54f127ec199e458",
+      "bytes_before": 24832,
+      "bytes_after": 24832,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/ship_progression_tests.rs",
+      "baseline_compiled_sha256": "519fe9e9e451a96e621aa5b134818aad69127c4b1fab0f459827c04188b59403",
+      "optimized_compiled_sha256": "519fe9e9e451a96e621aa5b134818aad69127c4b1fab0f459827c04188b59403",
+      "bytes_before": 29900,
+      "bytes_after": 29900,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/shooting_star.rs",
+      "baseline_compiled_sha256": "003c8ca7d6101a449e91a10d574caf3292af4b247e6dd59a884693798f6c4b7f",
+      "optimized_compiled_sha256": "003c8ca7d6101a449e91a10d574caf3292af4b247e6dd59a884693798f6c4b7f",
+      "bytes_before": 22498,
+      "bytes_after": 22498,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/starter_ability_tests.rs",
+      "baseline_compiled_sha256": "ed5896d1c6e96c2a1621f58620788cb4d6a5388973cfa9ee92cb0d58c6e958fc",
+      "optimized_compiled_sha256": "ed5896d1c6e96c2a1621f58620788cb4d6a5388973cfa9ee92cb0d58c6e958fc",
+      "bytes_before": 9267,
+      "bytes_after": 9267,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/stellar_neighborhood_tests.rs",
+      "baseline_compiled_sha256": "d3dbeaa549414c84a9092ffe5d1660f00ca87be711e53ee6e139c61be873f0e1",
+      "optimized_compiled_sha256": "d3dbeaa549414c84a9092ffe5d1660f00ca87be711e53ee6e139c61be873f0e1",
+      "bytes_before": 8401,
+      "bytes_after": 8401,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/training.rs",
+      "baseline_compiled_sha256": "072b7792a40456dda95e63d14d4f7d7fe9fada06f7d96bf1730ad7d8d70f7a59",
+      "optimized_compiled_sha256": "072b7792a40456dda95e63d14d4f7d7fe9fada06f7d96bf1730ad7d8d70f7a59",
+      "bytes_before": 11304,
+      "bytes_after": 11304,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/training_tests.rs",
+      "baseline_compiled_sha256": "1976caa165ab0a4b84307b87f78acf174ab55da63f39c40fa156a10a8ffcb473",
+      "optimized_compiled_sha256": "1976caa165ab0a4b84307b87f78acf174ab55da63f39c40fa156a10a8ffcb473",
+      "bytes_before": 27814,
+      "bytes_after": 27814,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/universe_map.rs",
+      "baseline_compiled_sha256": "502fa8b3d7c2854be42f98b57ea49d07ebbe660eca5887591484d29b9d803ad7",
+      "optimized_compiled_sha256": "502fa8b3d7c2854be42f98b57ea49d07ebbe660eca5887591484d29b9d803ad7",
+      "bytes_before": 5595,
+      "bytes_after": 5595,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_core/src/weapon_cadence_tests.rs",
+      "baseline_compiled_sha256": "3fb9ac9a8d94d28e854974caa1ce31a056b5249b8668a4c85b978296bb26681e",
+      "optimized_compiled_sha256": "3fb9ac9a8d94d28e854974caa1ce31a056b5249b8668a4c85b978296bb26681e",
+      "bytes_before": 9424,
+      "bytes_after": 9424,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/Cargo.toml",
+      "baseline_compiled_sha256": "8bb52063bf17a29e773ae6b47a1efd0702d723354df6297946f8312ad1e54611",
+      "optimized_compiled_sha256": "8bb52063bf17a29e773ae6b47a1efd0702d723354df6297946f8312ad1e54611",
+      "bytes_before": 789,
+      "bytes_after": 789,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/boss_layout.rs",
+      "baseline_compiled_sha256": "97ae0496ec27b89510b46ad21785a377d2ca6ae0d88d1fe95dcbc30a1758e353",
+      "optimized_compiled_sha256": "97ae0496ec27b89510b46ad21785a377d2ca6ae0d88d1fe95dcbc30a1758e353",
+      "bytes_before": 38812,
+      "bytes_after": 38812,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/boss_overlay.rs",
+      "baseline_compiled_sha256": "756b958b6c0bad48f3f0377f175589188c9c0e1460d33856e1fd8cf3a965e35c",
+      "optimized_compiled_sha256": "756b958b6c0bad48f3f0377f175589188c9c0e1460d33856e1fd8cf3a965e35c",
+      "bytes_before": 37742,
+      "bytes_after": 37742,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/browser.rs",
+      "baseline_compiled_sha256": "73bf7a34054a75cf33799c33fe76991052eca0430544115a6f1519c272883907",
+      "optimized_compiled_sha256": "73bf7a34054a75cf33799c33fe76991052eca0430544115a6f1519c272883907",
+      "bytes_before": 39952,
+      "bytes_after": 39952,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/champion_patches.rs",
+      "baseline_compiled_sha256": "087f715689fe681ac56c034f844bbc672fea9dc6cee8f4d542d9310051d0332e",
+      "optimized_compiled_sha256": "087f715689fe681ac56c034f844bbc672fea9dc6cee8f4d542d9310051d0332e",
+      "bytes_before": 16608,
+      "bytes_after": 16608,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/co_op_art.rs",
+      "baseline_compiled_sha256": "75356895d41a65a2f8415416735665e5a2d7cc4326df84ec4417eb5ede4caded",
+      "optimized_compiled_sha256": "75356895d41a65a2f8415416735665e5a2d7cc4326df84ec4417eb5ede4caded",
+      "bytes_before": 14221,
+      "bytes_after": 14221,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/co_op_art_tests.rs",
+      "baseline_compiled_sha256": "3b46e3339d02e9eed406bfc0e2fc66d9fa361bf4b373d67063ed399fe8eea6a3",
+      "optimized_compiled_sha256": "3b46e3339d02e9eed406bfc0e2fc66d9fa361bf4b373d67063ed399fe8eea6a3",
+      "bytes_before": 14212,
+      "bytes_after": 14212,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/co_op_bridge.rs",
+      "baseline_compiled_sha256": "eb230f2e1944fbc345b7650de9ab22ebf218341fdd2866ee13c7115c72070d4f",
+      "optimized_compiled_sha256": "eb230f2e1944fbc345b7650de9ab22ebf218341fdd2866ee13c7115c72070d4f",
+      "bytes_before": 7596,
+      "bytes_after": 7596,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/co_op_bridge_tests.rs",
+      "baseline_compiled_sha256": "5276e45d6d5975206d034e6e0b24ba00eb36eaa20170faa1c66bf91052fa4759",
+      "optimized_compiled_sha256": "5276e45d6d5975206d034e6e0b24ba00eb36eaa20170faa1c66bf91052fa4759",
+      "bytes_before": 9929,
+      "bytes_after": 9929,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/co_op_bridge_wake_tests.rs",
+      "baseline_compiled_sha256": "9f4a5a693b071f03e9ab5133cbfde71a54da1ac915fc09a4a200997da3e0c746",
+      "optimized_compiled_sha256": "9f4a5a693b071f03e9ab5133cbfde71a54da1ac915fc09a4a200997da3e0c746",
+      "bytes_before": 3469,
+      "bytes_after": 3469,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/co_op_replica_bridge.rs",
+      "baseline_compiled_sha256": "5331a410cc7de1a21aa78b32919d22e7ec733d699f0730d98b3c8a4cef94628c",
+      "optimized_compiled_sha256": "5331a410cc7de1a21aa78b32919d22e7ec733d699f0730d98b3c8a4cef94628c",
+      "bytes_before": 14332,
+      "bytes_after": 14332,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/collection_ui.rs",
+      "baseline_compiled_sha256": "3080ddd7389cdf9265eab19e3c0cb25522d58f3acd62cce783b58fb306055d56",
+      "optimized_compiled_sha256": "3080ddd7389cdf9265eab19e3c0cb25522d58f3acd62cce783b58fb306055d56",
+      "bytes_before": 11375,
+      "bytes_after": 11375,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/collection_ui_tests.rs",
+      "baseline_compiled_sha256": "a3bcc8bbcbac96d6840887d7c6aee67da0adca1f023c6dcf29acde325ea1186b",
+      "optimized_compiled_sha256": "a3bcc8bbcbac96d6840887d7c6aee67da0adca1f023c6dcf29acde325ea1186b",
+      "bytes_before": 18424,
+      "bytes_after": 18424,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/component_art.rs",
+      "baseline_compiled_sha256": "03bcea966bab36b729a9cbce923408f5c9d731251b6a5a9602848c38e7e36fd0",
+      "optimized_compiled_sha256": "03bcea966bab36b729a9cbce923408f5c9d731251b6a5a9602848c38e7e36fd0",
+      "bytes_before": 22459,
+      "bytes_after": 22459,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/dock_art.rs",
+      "baseline_compiled_sha256": "669abfbcceb3a9a5875c1aa1d57de578151e90f77d7ea190a0b05792792926bf",
+      "optimized_compiled_sha256": "669abfbcceb3a9a5875c1aa1d57de578151e90f77d7ea190a0b05792792926bf",
+      "bytes_before": 9952,
+      "bytes_after": 9952,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/dock_art_tests.rs",
+      "baseline_compiled_sha256": "b236fee2e1a03c401ecee101a66d3b0f28b664d1881fd65db946f5dfaae9802a",
+      "optimized_compiled_sha256": "b236fee2e1a03c401ecee101a66d3b0f28b664d1881fd65db946f5dfaae9802a",
+      "bytes_before": 25674,
+      "bytes_after": 25674,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/flight_icons.rs",
+      "baseline_compiled_sha256": "ba02a9aa4e210f5a2746d66af1b7d6bcf0c5ebd89ec3241f00e790f88cbf2503",
+      "optimized_compiled_sha256": "ba02a9aa4e210f5a2746d66af1b7d6bcf0c5ebd89ec3241f00e790f88cbf2503",
+      "bytes_before": 10702,
+      "bytes_after": 10702,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/garage_art.rs",
+      "baseline_compiled_sha256": "b35cf39a017f1a0e8e210023ac32069bbcc5f9982528c46ad73604600a3db834",
+      "optimized_compiled_sha256": "b35cf39a017f1a0e8e210023ac32069bbcc5f9982528c46ad73604600a3db834",
+      "bytes_before": 7969,
+      "bytes_after": 7969,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/kikai_art.rs",
+      "baseline_compiled_sha256": "f48aae61e5a95a5f59f4db4d25dc2e4a9df70581ce26476b1754869778babdfe",
+      "optimized_compiled_sha256": "f48aae61e5a95a5f59f4db4d25dc2e4a9df70581ce26476b1754869778babdfe",
+      "bytes_before": 35910,
+      "bytes_after": 35910,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/kikai_profile_tests.rs",
+      "baseline_compiled_sha256": "c7e4515192b9ccdee56a39bc721b3f68a7d442b144a0b3974cf6ed6115e3b096",
+      "optimized_compiled_sha256": "c7e4515192b9ccdee56a39bc721b3f68a7d442b144a0b3974cf6ed6115e3b096",
+      "bytes_before": 16080,
+      "bytes_after": 16080,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/lib.rs",
+      "baseline_compiled_sha256": "f904b4793d3534b7a672aa74b6f6eb27531df8b3b95b7b2bbddd52a80dc7e570",
+      "optimized_compiled_sha256": "f904b4793d3534b7a672aa74b6f6eb27531df8b3b95b7b2bbddd52a80dc7e570",
+      "bytes_before": 495,
+      "bytes_after": 495,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/lighting.rs",
+      "baseline_compiled_sha256": "b242efc3901f283e95e1818d49959b3d9f539363c18e810af2571e7a598afed1",
+      "optimized_compiled_sha256": "b242efc3901f283e95e1818d49959b3d9f539363c18e810af2571e7a598afed1",
+      "bytes_before": 12924,
+      "bytes_after": 12924,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/meishi_art.rs",
+      "baseline_compiled_sha256": "72ccc0e2d9a95fb6b0fb287b3f762302dc95b1ca4fd8086350799c69720849e9",
+      "optimized_compiled_sha256": "72ccc0e2d9a95fb6b0fb287b3f762302dc95b1ca4fd8086350799c69720849e9",
+      "bytes_before": 40802,
+      "bytes_after": 40802,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/pixel.wgsl",
+      "baseline_compiled_sha256": "e545658e1bb63a71193262acf1d9e39a3e5ef69310c41a38793949e31659a811",
+      "optimized_compiled_sha256": "e545658e1bb63a71193262acf1d9e39a3e5ef69310c41a38793949e31659a811",
+      "bytes_before": 8685,
+      "bytes_after": 8685,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/pixel_ui.rs",
+      "baseline_compiled_sha256": "e8217f2764c8c5576b7795070cfa745249e622bc694c0832997d0e287ac0bb38",
+      "optimized_compiled_sha256": "e8217f2764c8c5576b7795070cfa745249e622bc694c0832997d0e287ac0bb38",
+      "bytes_before": 97779,
+      "bytes_after": 97779,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/present.wgsl",
+      "baseline_compiled_sha256": "767e72b385823cfb10bee5ba055812ae40fd32f20130ea32271aa7e85a212de5",
+      "optimized_compiled_sha256": "767e72b385823cfb10bee5ba055812ae40fd32f20130ea32271aa7e85a212de5",
+      "bytes_before": 1652,
+      "bytes_after": 1652,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/renderer.rs",
+      "baseline_compiled_sha256": "58f7319b8027ad5d6943b8b0de6465b17a52f77b2caaca55a64458082aeeafd4",
+      "optimized_compiled_sha256": "58f7319b8027ad5d6943b8b0de6465b17a52f77b2caaca55a64458082aeeafd4",
+      "bytes_before": 32057,
+      "bytes_after": 32057,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/shadow_uniforms.rs",
+      "baseline_compiled_sha256": "9bb3e3d90b67ff38ca43d40df67d51cf8ed65bab414017a04f0a6ae399d2c160",
+      "optimized_compiled_sha256": "9bb3e3d90b67ff38ca43d40df67d51cf8ed65bab414017a04f0a6ae399d2c160",
+      "bytes_before": 6127,
+      "bytes_after": 6127,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/sports_ui.rs",
+      "baseline_compiled_sha256": "058b38bf576009e8c81bf5ca2598d69d96d54069c372ed3ed86bcde07714c684",
+      "optimized_compiled_sha256": "058b38bf576009e8c81bf5ca2598d69d96d54069c372ed3ed86bcde07714c684",
+      "bytes_before": 17577,
+      "bytes_after": 17577,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/sports_ui_tests.rs",
+      "baseline_compiled_sha256": "43bebf2b25b74f969538841cdb0003d37dbfdec2c6169cb15a17d942e426343a",
+      "optimized_compiled_sha256": "43bebf2b25b74f969538841cdb0003d37dbfdec2c6169cb15a17d942e426343a",
+      "bytes_before": 17120,
+      "bytes_after": 17120,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/title_art.rs",
+      "baseline_compiled_sha256": "bddac1425595fefa14eede80aaca0a195edaaa8c12ecee31f8495cac62886cad",
+      "optimized_compiled_sha256": "bddac1425595fefa14eede80aaca0a195edaaa8c12ecee31f8495cac62886cad",
+      "bytes_before": 8944,
+      "bytes_after": 8944,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/title_art_tests.rs",
+      "baseline_compiled_sha256": "5121405369a59953a31a89c0c57c539003cbd0f6161bb5c8ea0808f20d739308",
+      "optimized_compiled_sha256": "5121405369a59953a31a89c0c57c539003cbd0f6161bb5c8ea0808f20d739308",
+      "bytes_before": 14165,
+      "bytes_after": 14165,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/ui_button_tests.rs",
+      "baseline_compiled_sha256": "57c83044ee868b0cf50a2b88fe2bbbd864009873decceb393e3667d7d06b917b",
+      "optimized_compiled_sha256": "57c83044ee868b0cf50a2b88fe2bbbd864009873decceb393e3667d7d06b917b",
+      "bytes_before": 15284,
+      "bytes_after": 15284,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/ui_capped_settings_tests.rs",
+      "baseline_compiled_sha256": "f488b67d0d058f981cf5b548f33b1acd948d5fa5fc767bedd5b4684d5be0ce16",
+      "optimized_compiled_sha256": "f488b67d0d058f981cf5b548f33b1acd948d5fa5fc767bedd5b4684d5be0ce16",
+      "bytes_before": 10030,
+      "bytes_after": 10030,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/ui_curved_vitals_tests.rs",
+      "baseline_compiled_sha256": "4efbd3e84e190e9924449b7dfb56316ac5cbb68149f2aad4a28e142b33700903",
+      "optimized_compiled_sha256": "4efbd3e84e190e9924449b7dfb56316ac5cbb68149f2aad4a28e142b33700903",
+      "bytes_before": 10973,
+      "bytes_after": 10973,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/ui_facility_label_tests.rs",
+      "baseline_compiled_sha256": "985c94a425c64af4e7b3bc5371308fc8a02888fd5dabe506ecbcd7eb13330b4e",
+      "optimized_compiled_sha256": "985c94a425c64af4e7b3bc5371308fc8a02888fd5dabe506ecbcd7eb13330b4e",
+      "bytes_before": 3878,
+      "bytes_after": 3878,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/ui_flight_status_tests.rs",
+      "baseline_compiled_sha256": "0dcee30e1b02a9e9c6c23adb5feefc112847215f2da36fc5fbc1e97fbe806656",
+      "optimized_compiled_sha256": "0dcee30e1b02a9e9c6c23adb5feefc112847215f2da36fc5fbc1e97fbe806656",
+      "bytes_before": 26205,
+      "bytes_after": 26205,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/ui_header_tests.rs",
+      "baseline_compiled_sha256": "d403a5d2df35671a69ee3b383faf79466def9dc64c1fb95144de5ec3822a7bdb",
+      "optimized_compiled_sha256": "d403a5d2df35671a69ee3b383faf79466def9dc64c1fb95144de5ec3822a7bdb",
+      "bytes_before": 9558,
+      "bytes_after": 9558,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/ui_icon_tests.rs",
+      "baseline_compiled_sha256": "88472db8504b1ffbd57f96c3b65cd18aafbcf62c3bcc892b934e4565f409a1e6",
+      "optimized_compiled_sha256": "88472db8504b1ffbd57f96c3b65cd18aafbcf62c3bcc892b934e4565f409a1e6",
+      "bytes_before": 20895,
+      "bytes_after": 20895,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/ui_kikai_integration_tests.rs",
+      "baseline_compiled_sha256": "6ccab034e71e979f0f26a66c05f63108816c5166dde57ed9b21d3aa7a8d1a337",
+      "optimized_compiled_sha256": "6ccab034e71e979f0f26a66c05f63108816c5166dde57ed9b21d3aa7a8d1a337",
+      "bytes_before": 43015,
+      "bytes_after": 43015,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/ui_map_tests.rs",
+      "baseline_compiled_sha256": "c225233762f7400d94faefe5adab924963d9c3395e88e73461f977ba5149380c",
+      "optimized_compiled_sha256": "c225233762f7400d94faefe5adab924963d9c3395e88e73461f977ba5149380c",
+      "bytes_before": 12224,
+      "bytes_after": 12224,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/ui_minimap_tests.rs",
+      "baseline_compiled_sha256": "552a2265fba41ef6c7cbdf3967ed08bf351913ad82cb26927b9f1a95ecdaae9e",
+      "optimized_compiled_sha256": "552a2265fba41ef6c7cbdf3967ed08bf351913ad82cb26927b9f1a95ecdaae9e",
+      "bytes_before": 17949,
+      "bytes_after": 17949,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/ui_scene.rs",
+      "baseline_compiled_sha256": "53d5b24ee193e06682351437eee0c96cd3c03e1801951786d02c66ad65eeeb1f",
+      "optimized_compiled_sha256": "53d5b24ee193e06682351437eee0c96cd3c03e1801951786d02c66ad65eeeb1f",
+      "bytes_before": 127582,
+      "bytes_after": 127582,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/ui_settings_skin_tests.rs",
+      "baseline_compiled_sha256": "e41e28433d4bd7585b7df44fa88d968270fb1edc3a0508302c4d605584c408c0",
+      "optimized_compiled_sha256": "e41e28433d4bd7585b7df44fa88d968270fb1edc3a0508302c4d605584c408c0",
+      "bytes_before": 4846,
+      "bytes_after": 4846,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/ui_settings_tests.rs",
+      "baseline_compiled_sha256": "601f3ff803160700cb529b1d8a82791b9fcbb2eb29c9d52b905c6bb001fdb626",
+      "optimized_compiled_sha256": "601f3ff803160700cb529b1d8a82791b9fcbb2eb29c9d52b905c6bb001fdb626",
+      "bytes_before": 9355,
+      "bytes_after": 9355,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/ui_shield_capacity_tests.rs",
+      "baseline_compiled_sha256": "8d056175f51008915e4570fa7f726d826edf34e3e5482e237e092250f3e40909",
+      "optimized_compiled_sha256": "8d056175f51008915e4570fa7f726d826edf34e3e5482e237e092250f3e40909",
+      "bytes_before": 14438,
+      "bytes_after": 14438,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/ui_typography_tests.rs",
+      "baseline_compiled_sha256": "a5e7bad47911590e278e562aff926b188e679868cbce9341d9d28ce6a8cc3475",
+      "optimized_compiled_sha256": "a5e7bad47911590e278e562aff926b188e679868cbce9341d9d28ce6a8cc3475",
+      "bytes_before": 11604,
+      "bytes_after": 11604,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/src/ui_wrap_tests.rs",
+      "baseline_compiled_sha256": "fd49eb586b709c1c248a77722feb0053aa45ce829994f265bed6a8b397252860",
+      "optimized_compiled_sha256": "fd49eb586b709c1c248a77722feb0053aa45ce829994f265bed6a8b397252860",
+      "bytes_before": 4080,
+      "bytes_after": 4080,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "crates/game_web/tests/boss_layout.rs",
+      "baseline_compiled_sha256": "5677f4d583f541704de954a2607182d5b97a5f440ec94c99c951fe5f710c6faf",
+      "optimized_compiled_sha256": "5677f4d583f541704de954a2607182d5b97a5f440ec94c99c951fe5f710c6faf",
+      "bytes_before": 26504,
+      "bytes_after": 26504,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "scripts/test/fixtures/co-op-publication/capture.json",
+      "baseline_compiled_sha256": "748e7523a738dbe7de94f4ba0b7ce6f7f2deb289f86e420c38830510dac83b5f",
+      "optimized_compiled_sha256": "748e7523a738dbe7de94f4ba0b7ce6f7f2deb289f86e420c38830510dac83b5f",
+      "bytes_before": 1237,
+      "bytes_after": 1237,
+      "runtime_variant": false,
+      "work_probe_append": false
+    },
+    {
+      "path": "scripts/test/fixtures/ship-save-migrations.json",
+      "baseline_compiled_sha256": "cb5d4d9605b22e00ed232496ac641d564533e02c26cbc2b4520ad012a604423a",
+      "optimized_compiled_sha256": "cb5d4d9605b22e00ed232496ac641d564533e02c26cbc2b4520ad012a604423a",
+      "bytes_before": 41445,
+      "bytes_after": 41445,
+      "runtime_variant": false,
+      "work_probe_append": false
+    }
+  ]
+}

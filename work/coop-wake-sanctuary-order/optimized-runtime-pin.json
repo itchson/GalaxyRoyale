@@ -1,0 +1,8 @@
+{
+  "path": "crates/game_core/src/co_op_wake.rs",
+  "bytes": 5547,
+  "sha256": "bd2c5f1ea302b126e3fdee1bc1224342ab7788956947cd05cc4c1a819a39021f",
+  "canonical_sha256": "bd2c5f1ea302b126e3fdee1bc1224342ab7788956947cd05cc4c1a819a39021f",
+  "baseline": "111a477fe507cd544902c8f44f07198dc31933d6",
+  "snapshot_delta": "Only co_op_wake.rs ordering/comments changes; work probe and all other actual compiled files unchanged."
+}

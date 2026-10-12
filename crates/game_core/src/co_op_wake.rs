@@ -86,13 +86,15 @@ impl Game {
                     .query::<(Entity, (&Motion, &Actor))>()
                     .iter()
                     .filter(|(_, (m, a))| {
+                        // Distant geometry misses need no remote sanctuary
+                        // reconstruction. Hits still pass protection before damage.
                         matches!(a.kind, Kind::Enemy(_) | Kind::Boss(_))
-                            && self.safe_zone_at(m.position).is_none()
                             && (pilot.wake.iter().any(|sample| {
                                 m.position.distance(sample.position) < reach + a.radius
                             }) || links.iter().any(|&(from, to)| {
                                 segment_circle(from, to, m.position, reach + a.radius).is_some()
                             }))
+                            && self.safe_zone_at(m.position).is_none()
                     })
                     .map(|(entity, (motion, actor))| (entity, actor.kind, motion.position))
                     .collect::<Vec<_>>()
