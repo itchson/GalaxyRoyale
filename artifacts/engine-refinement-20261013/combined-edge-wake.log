@@ -1,0 +1,14 @@
+   Compiling game_core v0.1.0 (C:\Users\mitch\Documents\ChatGPT\galaxy-royale\crates\game_core)
+error[E0609]: no field `wake_fx` on type `&co_op_replica::Scene`
+   --> crates\game_core\src\co_op_replica_wake_tests.rs:467:35
+    |
+467 |     assert_eq!(r.scene().unwrap().wake_fx.len(), page.points.len());
+    |                                   ^^^^^^^ unknown field
+    |
+help: one of the expressions' fields has a field of the same name
+    |
+467 |     assert_eq!(r.scene().unwrap().header.snapshot.wake_fx.len(), page.points.len());
+    |                                   ++++++++++++++++
+
+For more information about this error, try `rustc --explain E0609`.
+error: could not compile `game_core` (lib test) due to 1 previous error

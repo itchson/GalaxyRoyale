@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 1082,
+  "revision": 1089,
   "name": "Galaxy Royale",
   "phase": "Playable solo slice → content and validation",
-  "updatedAt": "2026-10-12T21:14:01.003Z",
+  "updatedAt": "2026-10-12T21:40:53.463Z",
   "tasks": [
     {
       "id": "studio",
@@ -8904,21 +8904,21 @@
       "description": "Star-cell rendering currently constructs four regional biome lookups before culling32 candidates. Lazily retain the same one FieldBlend after the first surviving candidate. Preserve identical packet ordering, seeded colors, twinkle, quality decisions and parallax. Gas morphology is unchanged; this is a scoped CPU efficiency improvement, not new nebula art or an FPS claim.",
       "department": "Pixel engine / cosmic art",
       "owner": "/root/audio_review",
-      "status": "active",
+      "status": "complete",
       "priority": "normal",
       "dependencies": [],
       "acceptanceCriteria": [
         {
           "text": "Actual empty-tile baseline and meaningful avoided-work measurement preserved.",
-          "met": false
+          "met": true
         },
         {
           "text": "Bounded lazy sampling implementation keeps exact packets across quality, seed, camera and time cases.",
-          "met": false
+          "met": true
         },
         {
           "text": "Independent review, native checks, Root integration and matching build recorded.",
-          "met": false
+          "met": true
         }
       ],
       "evidence": [
@@ -8926,12 +8926,22 @@
           "label": "Actual specialist finding",
           "kind": "note",
           "details": "Source inspected at8b0896d in cosmic_background.rs; Root authorized only that module and relevant focused tests. No invented visual or benchmark pass."
+        },
+        {
+          "label": "Actual72 packet comparisons, query counts, Rootnative939 passes and new build",
+          "kind": "artifact",
+          "path": "artifacts/engine-refinement-20261013/summary.json"
+        },
+        {
+          "label": "Independent source, compiled probe and comparison review",
+          "kind": "artifact",
+          "path": "artifacts/engine-refinement-20261013/star-review/REVIEW.md"
         }
       ],
       "blocker": "",
-      "revision": 1,
+      "revision": 2,
       "createdAt": "2026-10-12T21:10:22.065Z",
-      "updatedAt": "2026-10-12T21:10:22.065Z"
+      "updatedAt": "2026-10-12T21:40:53.463Z"
     },
     {
       "id": "task-942d32d6",
@@ -8968,6 +8978,41 @@
       "revision": 1,
       "createdAt": "2026-10-12T21:14:01.003Z",
       "updatedAt": "2026-10-12T21:14:01.003Z"
+    },
+    {
+      "id": "task-ef0b851b",
+      "title": "Refine Dart armor materials without changing destructible geometry",
+      "description": "Actual32×32/426cellDart contact has saturated red/purple interior with weaker armor/recess/instrument hierarchy than approved PANhub/RAICHO materials. Author one reproducible native-grid color/cluster candidate, retain everyoccupiedbit and animatedpalette-indexsites6/4/33, allotheratlasdata unchanged. Root reviews actualnative+24pxcontacts; higherresolutionpresentation is a separate followup.",
+      "department": "Native pixel art",
+      "owner": "/root/audio_review",
+      "status": "active",
+      "priority": "normal",
+      "dependencies": [],
+      "acceptanceCriteria": [
+        {
+          "text": "Single-asset authored source and exact reproducible PNG→pack→atlas conversion, allotheratlasbytes retained.",
+          "met": false
+        },
+        {
+          "text": "Real nativePixelBody/FrameBuilder contacts visibly improve material hierarchy while mask/animation roles stay unchanged.",
+          "met": false
+        },
+        {
+          "text": "Independent review, appropriate checks and Root coherent normalbuild recorded.",
+          "met": false
+        }
+      ],
+      "evidence": [
+        {
+          "label": "Actual contact-sheet inspection and scoped file assignment",
+          "kind": "note",
+          "details": "Root inspected realpacked enemysoftwarecontact sheet; approved Dartonly authoredcandidate after artist identified materialhierarchy gap. No concept generation, gameplay or shader change authorized."
+        }
+      ],
+      "blocker": "",
+      "revision": 1,
+      "createdAt": "2026-10-12T21:29:20.378Z",
+      "updatedAt": "2026-10-12T21:29:20.378Z"
     }
   ],
   "reviews": [
@@ -11526,6 +11571,33 @@
           "label": "Actual native audio capture",
           "kind": "artifact",
           "path": "artifacts/title-fullness-v4-20261013/report.json"
+        }
+      ]
+    },
+    {
+      "id": "review-5296b6be",
+      "title": "First Dart material candidate requires more panel depth",
+      "body": "Central recess and armor hierarchy are clearer. Uniform red wing areas and long gray braces look flatter and blockier than the approved detailed hub/RAICHO material benchmark. Retain readability and exact426-cell silhouette/51 signal sites; add coherent bevel/rim highlights, shadows and panel depth visible at32px native and24px gameplay. Candidate retained for revision; not shipped. This is an asynchronous written review, not a simulated meeting.",
+      "author": "Root",
+      "source": "Actual artist first comparison and Root visual critique",
+      "createdAt": "2026-10-12T21:32:24.425Z",
+      "participants": [
+        "Root",
+        "/root/audio_review"
+      ],
+      "taskIds": [
+        "task-ef0b851b"
+      ],
+      "evidence": [
+        {
+          "label": "Actual native before/after contact, first candidate",
+          "kind": "artifact",
+          "path": "artifacts/engine-refinement-20261013/dart-first-review/actual-native-comparison.png"
+        },
+        {
+          "label": "Root decision and precise scope",
+          "kind": "artifact",
+          "path": "artifacts/engine-refinement-20261013/dart-first-review/review.json"
         }
       ]
     }
@@ -15018,6 +15090,50 @@
         }
       ],
       "knownIssues": "Browser title/creation/save/resume/Haven rendering smoke only; no advanced rewards, RTC, shadow mask/lighting parity, visual timing, GPU recovery or physical performance acceptance."
+    },
+    {
+      "id": "build-11074b4b",
+      "title": "Lean star sampling and unfiltered edge-plus-Wake acceptance",
+      "body": "Native939pass/20ignored; strictworkspaceClippy; bothnormalrendererbundles rebuilt. Actual same-tick native transfer retains99entities including17outlyingrocks and3Wakepoints; warm cache transfer still suppliesWake. Star author72orderedpacketdigests/counts unchanged,4→0emptytilebiomesamples. Actual one localApplyupdateatHaven cycle changedDOMbundle and retainedtestMEISHI/starterdisplay.",
+      "author": "Root",
+      "source": "Actual integrated native checks, dual-WASM compilation and one local PWA update",
+      "createdAt": "2026-10-12T21:29:20.352Z",
+      "revision": "2a5a76a5ed59defdf59258cd2add00ab041a7ade",
+      "evidence": [
+        {
+          "label": "Actual tests, compiled receipt, native and local PWA scopes",
+          "kind": "artifact",
+          "path": "artifacts/engine-refinement-20261013/summary.json"
+        },
+        {
+          "label": "Independent unfiltered native combined test review",
+          "kind": "artifact",
+          "path": "artifacts/engine-refinement-20261013/combined-review/REVIEW.md"
+        }
+      ],
+      "checks": [
+        {
+          "name": "939 native passes;20 explicit ignored",
+          "result": "pass"
+        },
+        {
+          "name": "StrictClippy and new WebGPU/WebGL2 build",
+          "result": "pass"
+        },
+        {
+          "name": "Unfiltered cold/warm world-edge+Wake transfer",
+          "result": "pass"
+        },
+        {
+          "name": "One local Haven PWA update and retained test identity display",
+          "result": "pass"
+        },
+        {
+          "name": "LiveR1RTC,8players,TURN,FPS,physical",
+          "result": "not_run"
+        }
+      ],
+      "knownIssues": "Current configuredR1 liveWake,8players,TURN,physicalperformance and humanmix remain pending. Gas morphology unchanged; measured query counts are not FPS."
     }
   ],
   "feedback": [],
@@ -25841,6 +25957,76 @@
       "author": "Root",
       "source": "Actual Studio editor regression, bounded fix and browser verification",
       "createdAt": "2026-10-12T21:14:01.003Z"
+    },
+    {
+      "id": "5c1b238b-79c5-499a-804e-05efed9cb250",
+      "revision": 1083,
+      "kind": "run",
+      "itemId": "run-07a5d6d8",
+      "title": "Lazy star biome refinement · completed",
+      "author": "/root/audio_review",
+      "source": "Actual author frozen narrow source/test commit and native proof execution; no acceptance self-approval",
+      "createdAt": "2026-10-12T21:18:51.127Z"
+    },
+    {
+      "id": "94811d8a-7338-4884-b519-a4592981b74a",
+      "revision": 1084,
+      "kind": "run",
+      "itemId": "run-dfabcd22",
+      "title": "Configured native Wake QA helper author · running",
+      "author": "Codex audio_score",
+      "source": "actual bounded QA-helper authoring assignment",
+      "createdAt": "2026-10-12T21:21:42.753Z"
+    },
+    {
+      "id": "dc886792-9fd7-4f1f-91bd-6f9af73d46ab",
+      "revision": 1085,
+      "kind": "build",
+      "itemId": "build-11074b4b",
+      "title": "Lean star sampling and unfiltered edge-plus-Wake acceptance",
+      "author": "Root",
+      "source": "Actual integrated native checks, dual-WASM compilation and one local PWA update",
+      "createdAt": "2026-10-12T21:29:20.352Z"
+    },
+    {
+      "id": "da7dea8f-92df-49c8-bf2b-a16533588a99",
+      "revision": 1086,
+      "kind": "task.create",
+      "itemId": "task-ef0b851b",
+      "title": "Refine Dart armor materials without changing destructible geometry",
+      "author": "Root",
+      "source": "Actual native packed art contact review and bounded artist assignment",
+      "createdAt": "2026-10-12T21:29:20.378Z"
+    },
+    {
+      "id": "377c8621-b9dc-4c46-8412-6f589c16883b",
+      "revision": 1087,
+      "kind": "review",
+      "itemId": "review-5296b6be",
+      "title": "First Dart material candidate requires more panel depth",
+      "author": "Root",
+      "source": "Actual artist first comparison and Root visual critique",
+      "createdAt": "2026-10-12T21:32:24.425Z"
+    },
+    {
+      "id": "2e1a755b-ae6d-43b1-9ded-f7ea3008c73e",
+      "revision": 1088,
+      "kind": "run",
+      "itemId": "run-fd30e4e8",
+      "title": "Configured native Wake QA helper author · running",
+      "author": "Codex audio_score",
+      "source": "actual QA-helper authoring progress after branch setup",
+      "createdAt": "2026-10-12T21:36:38.979Z"
+    },
+    {
+      "id": "085d7540-6ad4-4e1c-9279-a181a3d9eb1e",
+      "revision": 1089,
+      "kind": "task.update",
+      "itemId": "task-a9a3c675",
+      "title": "Avoid biome sampling for empty star tiles",
+      "author": "Root",
+      "source": "Actual native comparison, independent review, integration and matching dual-WASM build",
+      "createdAt": "2026-10-12T21:40:53.463Z"
     }
   ],
   "runRecords": [
@@ -35522,6 +35708,72 @@
       "author": "/root/audio_review",
       "source": "Actual assigned author execution and isolated native query probe",
       "createdAt": "2026-10-12T21:13:04.532Z"
+    },
+    {
+      "id": "run-07a5d6d8",
+      "title": "Lazy star biome refinement · completed",
+      "agentId": "/root/audio_review",
+      "agentLabel": "Lazy star biome refinement",
+      "state": "completed",
+      "observedAt": "2026-10-12T21:18:51.108Z",
+      "taskIds": [
+        "task-a9a3c675"
+      ],
+      "summary": "Author source candidate frozen49e3e686d5ea3e04523a8e40f4ef102756700ec2 from8b. Actual empty in-scan star tile samples4to0;72ordered native packet digests/counts unchanged. Tracked focused34pass5explicitexportignores, strictgame-coreClippy/format/diffpass. Originalcompile/fixture/API failures preserved. Independent review andRootintegration remainpending.",
+      "evidence": [
+        {
+          "label": "Frozen native query-count and unchanged packet evidence",
+          "kind": "note",
+          "details": "AudioRefinement work/nebula-render-refinement/HANDOFF.md SHAd2879ca9562b40eb87fc2475255b3d24fe57f0e00a2c5dfea677b43965e0fb1a;source-pins.json SHAf659aecd19e0274f8d8c3d6136cb4cdaa042ea847e7fae8587d677ccad164dee. Onlycosmic_background.rs+focusedtests. No gas morphology change, runtimeGPU/normalbuild/listener/browser/FPS/visual acceptance claim."
+        }
+      ],
+      "author": "/root/audio_review",
+      "source": "Actual author frozen narrow source/test commit and native proof execution; no acceptance self-approval",
+      "createdAt": "2026-10-12T21:18:51.127Z"
+    },
+    {
+      "id": "run-dfabcd22",
+      "title": "Configured native Wake QA helper author · running",
+      "agentId": "/root/audio_score",
+      "agentLabel": "Configured native Wake QA helper author",
+      "state": "running",
+      "observedAt": "2026-10-12T21:21:42.700Z",
+      "taskIds": [
+        "task-d0e4d592"
+      ],
+      "summary": "Authoring explicit configured-ion-wake-r1-e1 helper on codex/coop-wake-live-qa from8b0896d; frozen87d/f1 refs preserved. Scope QA transport helpers/tests and pinned native fixture copies only. Fresh-origin preflight and strict version5 configured reports, real native capture/commit observations and bounded controls/expiry/retreat/cleanup. No runtime edits/listener/normalbuild/browser/RTC execution.",
+      "evidence": [
+        {
+          "label": "Actual assignment and branch ownership",
+          "kind": "note",
+          "details": "Root authorized FIRST fixture87d and independently accepted it, then assigned this separate helper from8b0896d7ccd2c4dece1dc7a0d2cae6c4986505ab. Source changes restricted to scripts/qa/co-op-transport and matching scripts/test; evidence work/coop-wake-live-qa. Live gates remain pending."
+        }
+      ],
+      "author": "Codex audio_score",
+      "source": "actual bounded QA-helper authoring assignment",
+      "createdAt": "2026-10-12T21:21:42.753Z"
+    },
+    {
+      "id": "run-fd30e4e8",
+      "title": "Configured native Wake QA helper author · running",
+      "agentId": "/root/audio_score",
+      "agentLabel": "Configured native Wake QA helper author",
+      "state": "running",
+      "observedAt": "2026-10-12T21:36:38.910Z",
+      "taskIds": [
+        "task-d0e4d592"
+      ],
+      "summary": "Active authoring on codex/coop-wake-live-qa from8b0896d. Exact87d role-local native profiles copied; new strict configured fixture/stage guards and bounded observation helper implemented, native client hooks and version5 report gates in progress. No acceptance criteria changed. No listener/normal build/browser/RTC execution; production runtime untouched.",
+      "evidence": [
+        {
+          "label": "Actual active candidate source",
+          "kind": "note",
+          "details": "Current owned edits under scripts/qa/co-op-transport include wake-fixtures.mjs, wake-observation.js, prepare.mjs, server.mjs and client.js; matching focused tests and handoff remain to complete. Frozen87d/f1 branches preserved."
+        }
+      ],
+      "author": "Codex audio_score",
+      "source": "actual QA-helper authoring progress after branch setup",
+      "createdAt": "2026-10-12T21:36:38.979Z"
     }
   ],
   "phaseDescription": "Desktop-first Rust/WASM solo game and local Studio are implemented. Reviewed occupied-cell art, reproducible conversion, responsive native settings/icons and minimap, strict GitHub integration gates and source-backed Dev Bible are integrated. Natural campaign balance, human listening, owner-private update lifecycle and physical phones remain separate pending gates."

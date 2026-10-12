@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "head": "2a5a76a5ed59defdf59258cd2add00ab041a7ade",
+  "branch": "codex/testing",
+  "sourceHash": "752b85c272914bb692620fca16e95057352d26667ebc1c6ef08ecd75164d71db",
+  "packageHash": "687cdea52b49c9b7a4980ca87ffeb09861a12287e5dda394f0cb28a507bf088c",
+  "builtAt": "2026-10-12T21:21:04.488Z",
+  "nativePassed": 939,
+  "nativeIgnored": 20,
+  "focusedCosmicPassed": 34,
+  "focusedCosmicIgnored": 5,
+  "replicaPassed": 52,
+  "replicaIgnored": 4,
+  "combined": {
+    "retainedEntities": 99,
+    "outlyingAsteroids": 17,
+    "liveWakePoints": 3,
+    "anchorX": 1000014,
+    "configured": "R5/E5 test fixture, not earned",
+    "scope": "Same-tick native cold and warm complete transfer; no RTC/clock/visual claim"
+  },
+  "star": {
+    "actual_native_frames": 72,
+    "exact_ordered_packet_digest_and_counts_preserved": true,
+    "empty_in_scan_tile_queries_before": 4,
+    "empty_in_scan_tile_queries_after": 0,
+    "query_totals_by_quality": {
+      "False": {
+        "fixtures": 36,
+        "before_biome_samples": 2912,
+        "after_biome_samples": 2704,
+        "avoided": 208
+      },
+      "True": {
+        "fixtures": 36,
+        "before_biome_samples": 2912,
+        "after_biome_samples": 2456,
+        "avoided": 456
+      }
+    },
+    "timing_claim": "None: this is an actual query-count and packet-equality experiment, not GPU/frame-rate measurement."
+  },
+  "pwa": {
+    "beforeBundle": "index-Cgm1HI94.js",
+    "afterBundle": "index-CBuzdfhV.js",
+    "origin": "http://title-fullness.localhost:4173",
+    "observed": "Actual Apply update at Haven saved and reloaded into ready WebGL2 title, then displayed same test MEISHI designation, PAN HIKARI and Flux Drive. No backup import or store clearing.",
+    "scope": "One local happy-path update; not complete profile digest, corrupted-save, hosted-private or failed-save acceptance."
+  },
+  "limits": "Current configuredR1 liveWake,8players,TURN,physicalperformance and humanmix remain pending. Gas morphology unchanged; measured query counts are not FPS."
+}

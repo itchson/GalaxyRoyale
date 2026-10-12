@@ -1,0 +1,63 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.04s
+     Running unittests src\lib.rs (target\debug\deps\game_core-5b2032bfdcb8bcac.exe)
+
+running 56 tests
+test co_op_replica::tests::export_native_replica_operations ... ignored, Explicit bounded fixture writer, not part of ordinary test execution
+test co_op_replica::tests::nova_fx::export_actual_native_nova_fx_headers ... ignored, explicit actual native fixture exporter; requires GALAXY_NOVA_FX_FIXTURES
+test co_op_replica::tests::nova_fx::actual_light_ray_cache_and_journal_bounds_are_independent_and_visible ... ok
+test co_op_replica::tests::nova_fx::no_safe_hit_or_foreign_owner_birth_and_sequence_exhaustion_keeps_real_host_effect ... ok
+test co_op_replica::tests::end_invalidates_all_pages_cache_and_scene_without_touching_solo ... ok
+test co_op_replica::tests::entity_guards_keep_full_cell_transforms_and_reject_false_pilot_metadata ... ok
+test co_op_replica::tests::empty_bodies_use_exact_dimensions_and_verify_signature_without_a_page ... ok
+test co_op_replica::tests::body_pages_are_ordered_bounded_and_transactional ... ok
+test co_op_replica::tests::native_cells_match_real_actor_rotation_and_interpolation_at_every_corner ... ok
+test co_op_replica::tests::scalar_and_nested_json_guards_fail_without_admitting_a_profile ... ok
+test co_op_replica::tests::wake_fx::export_actual_native_wake_contract_fixtures ... ignored, explicit bounded serializer export; requires GALAXY_WAKE_FIXTURES
+test co_op_replica::tests::segment_unknown_maximum_is_narrow_and_real_page_compatible ... ok
+test co_op_replica::tests::projectiles_keep_ownership_trails_and_only_explicit_bounded_lights ... ok
+test co_op_replica::tests::factory_guest_hud_clears_all_solo_progression_and_keeps_original_profile ... ok
+test co_op_replica::tests::acquisition_session_seed_revision_and_membership_bind_before_any_replacement ... ok
+test co_op_replica::tests::nova_fx::partial_real_host_pool_admission_preserves_only_actual_ray_prefix ... ok
+test co_op_replica::tests::nova_fx::real_shield_hit_uses_cached_bodies_and_emits_before_its_short_lifetime ... ok
+test co_op_replica::tests::nova_fx::first_populated_publication_skips_join_history_but_legacy_baseline_allows_first_nova ... ok
+test co_op_replica::tests::nova_fx::legacy_absent_is_accepted_explicit_null_unknown_and_missing_fields_are_not ... ok
+test co_op_replica::tests::world_edge::export_actual_edge_publication_fixtures ... ignored, explicit native edge serializer export; requires GALAXY_NATIVE_EDGE_FIXTURES
+test co_op_replica::tests::nova_fx::clock_nonfinite_or_regression_is_atomic_and_end_discards_all_transients ... ok
+test co_op_replica::tests::nova_fx::analytic_guest_motion_tracks_actual_fixed_step_debris_with_fractional_quads ... ok
+test co_op_replica::tests::failed_or_incomplete_transfer_keeps_committed_scene_and_can_resume ... ok
+test co_op_replica::tests::world_edge::inner_geometry_is_noop_and_generic_confinement_never_normalizes_pilots ... ok
+test co_op_replica::tests::nova_fx::real_admission_capture_is_non_draining_and_guest_rays_match_actual_host_births ... ok
+test co_op_replica::tests::exact_cache_reuse_drops_removed_entities_and_invalidates_same_count_color_changes ... ok
+test co_op_replica::tests::world_edge::exact_projectile_geometry_limits_and_invalid_headers_keep_prior_scene ... ok
+test co_op_replica::tests::world_edge::exact_geometry_and_velocity_limits_commit_but_camera_and_pilot_stay_strict ... ok
+test co_op_replica::tests::nova_fx::invalid_sequences_ticks_positions_ownership_or_counters_retain_scene ... ok
+test co_op_replica::tests::nova_fx::repeated_and_newer_acquisitions_never_restart_or_duplicate_live_nova ... ok
+test co_op_replica::tests::world_edge::malformed_body_and_shot_admission_preserves_prior_native_cache_and_guest_scene ... ok
+test co_op_replica::tests::nova_fx::actual_dropped_counter_and_oversized_journal_reject_without_losing_scene ... ok
+test co_op_replica::tests::nova_fx::old_epoch_is_pruned_and_cannot_attach_to_same_id_rejoin ... ok
+test co_op_replica::tests::nova_fx::failed_body_commit_cannot_emit_or_advance_dedup_and_transfer_time_expires_births ... ok
+test co_op_replica::tests::actual_two_and_eight_player_publications_keep_holes_and_transparent_occupancy ... ok
+test co_op_replica::tests::pan_material::actual_host_and_complete_native_guest_render_reconstruct_identical_pan_fields ... ok
+test co_op_replica::tests::pan_material::damaged_guest_import_keeps_real_coarse_holes_and_prunes_every_relative_material_cell ... ok
+test co_op_replica::tests::host_seed_scenery_home_and_reduced_motion_match_the_real_native_prefix ... ok
+test co_op_replica::tests::nova_fx::captured_tick_age_and_receiver_age_combine_instead_of_restart_on_commit ... ok
+test co_op_replica::tests::completed_captures_blend_real_multitick_motion_without_extrapolation_or_header_mutation ... ok
+test co_op_replica::tests::nova_fx::capture_age_survives_large_finite_monotonic_receiver_clock ... ok
+test co_op_replica::tests::wake_fx::frozen_page_is_non_draining_and_membership_invalidates_its_acquisition ... ok
+test co_op_replica::tests::world_edge::final_tick_confinement_handles_collision_correction_segments_and_solo_drift ... ok
+test co_op_replica::tests::world_edge::real_outbound_edge_projectile_commits_with_owned_epoch_and_strict_pilot_domain ... ok
+test co_op_replica::tests::wake_fx::member_point_cap_and_native_invalid_capture_preserve_prior_publication ... ok
+test co_op_replica::tests::wake_fx::raw_value_number_bounds_and_canonical_short_spellings_agree ... ok
+test co_op_replica::tests::wake_fx::changed_positions_on_newer_ticks_and_malformed_order_never_replace_cache ... ok
+test co_op_replica::tests::wake_fx::pending_missing_duplicate_bad_pages_do_not_move_visible_scene_or_cache ... ok
+test co_op_replica::tests::wake_fx::native_edge_stamp_keeps_legal_rear_anchor_halo ... ok
+test co_op_replica::tests::wake_fx::epoch_leave_empty_new_tick_and_position_mutation_have_atomic_lifecycle ... ok
+test co_op_replica::tests::wake_fx::configured_maximum_point_state_stays_bounded_and_draws_at_most_960_quads ... ok
+test co_op_replica::tests::wake_fx::same_tick_empty_baseline_cannot_gain_points_and_new_epoch_drops_old_owner ... ok
+test co_op_replica::tests::wake_fx::initial_real_samples_match_host_and_solo_style_without_replaying_lights ... ok
+test co_op_replica::tests::wake_fx::captured_same_tick_sets_are_immutable_and_deadlines_age_during_assembly ... ok
+test co_op_replica::tests::world_edge::retained_generated_asteroid_drift_reaches_outer_boundary_and_stays_publishable ... ok
+test co_op_replica::tests::world_edge::actual_edge_chunks_commit_without_removing_generated_entities ... ok
+
+test result: ok. 52 passed; 0 failed; 4 ignored; 0 measured; 509 filtered out; finished in 1.29s
+

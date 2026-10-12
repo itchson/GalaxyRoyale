@@ -1,0 +1,21 @@
+{
+  "actual_native_frames": 72,
+  "exact_ordered_packet_digest_and_counts_preserved": true,
+  "empty_in_scan_tile_queries_before": 4,
+  "empty_in_scan_tile_queries_after": 0,
+  "query_totals_by_quality": {
+    "False": {
+      "fixtures": 36,
+      "before_biome_samples": 2912,
+      "after_biome_samples": 2704,
+      "avoided": 208
+    },
+    "True": {
+      "fixtures": 36,
+      "before_biome_samples": 2912,
+      "after_biome_samples": 2456,
+      "avoided": 456
+    }
+  },
+  "timing_claim": "None: this is an actual query-count and packet-equality experiment, not GPU/frame-rate measurement."
+}

@@ -1,0 +1,329 @@
+{
+  "version": 1,
+  "candidate": "49e3e686d5ea3e04523a8e40f4ef102756700ec2",
+  "parent": "8b0896d7ccd2c4dece1dc7a0d2cae6c4986505ab",
+  "scope": "Independent exact source/compiled-input and actual native probe evidence inspection only; no compiler/test/probe/browser/GPU/listener rerun",
+  "rawFiles": [
+    {
+      "path": "after-versus-final-test-fixture.diff",
+      "bytes": 915,
+      "sha256": "13c577a43ae3a39aa5e43902f107538a9cf935700c4b6c1114625b90a56d0532"
+    },
+    {
+      "path": "author-evidence/after-probe-prerequisite-failure.log",
+      "bytes": 93,
+      "sha256": "f59f1ad1b9607978c6dccbaec82466575eafa31d078191754a98b8a1035349fd"
+    },
+    {
+      "path": "author-evidence/after-probe.log",
+      "bytes": 1366,
+      "sha256": "b32071812578c2c12267f0d5aaaf673816dfbb6dd8a124ab9bbd0e8fbba4919e"
+    },
+    {
+      "path": "author-evidence/after-query-results.json",
+      "bytes": 23723,
+      "sha256": "a6e3d055b78aa59e13c49558c423a534052e3bc1242846a2c16ebfa51664df1e"
+    },
+    {
+      "path": "author-evidence/baseline-archive-pins.json",
+      "bytes": 79740,
+      "sha256": "f0616d01ad1dcf19efd8f66f139c1a40ce002882bf4ee534cfac76697f4d3bbf"
+    },
+    {
+      "path": "author-evidence/before-probe-retry.log",
+      "bytes": 649,
+      "sha256": "d6f0a3fa38222f4bc6d21c61c5cedf2c6f7425e018ab21c86d762adef9c80294"
+    },
+    {
+      "path": "author-evidence/before-probe.log",
+      "bytes": 2326,
+      "sha256": "ad754be4168d05303ab3195bd4ece033257df2e54c61ba730f812b19767a1314"
+    },
+    {
+      "path": "author-evidence/before-query-results.json",
+      "bytes": 23723,
+      "sha256": "60aba5b0fe560ed8ee02caa134359be40a21b313315446eafd5b1d48e54b5ec7"
+    },
+    {
+      "path": "author-evidence/candidate.diff",
+      "bytes": 4756,
+      "sha256": "2ddb8982c501d343b6815f708baffa7e52835a9da4dc78f9dbdcb8c0a2434335"
+    },
+    {
+      "path": "author-evidence/clippy.log",
+      "bytes": 870,
+      "sha256": "98b2e7f627d538e15b094e06d4affccdb7e2e96ec6b3165946ac745a397123a9"
+    },
+    {
+      "path": "author-evidence/commit.log",
+      "bytes": 215,
+      "sha256": "e19b5af04ecd15d8a75ecf19e13eeec2fc17c53efaa693790d31981c27d1a276"
+    },
+    {
+      "path": "author-evidence/comparison.json",
+      "bytes": 624,
+      "sha256": "8018beb38f24101dc97647cf5ef5c078bbb13ddff1039356ac3c18ce7c5e4c94"
+    },
+    {
+      "path": "author-evidence/compiled-inputs.json",
+      "bytes": 111700,
+      "sha256": "c3729efa5b3c5064814c46078a70e451d5bfec0d18610c6a9ea27f1316a668b5"
+    },
+    {
+      "path": "author-evidence/diff-check.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "author-evidence/focused-cosmic-tests-final.log",
+      "bytes": 9351,
+      "sha256": "f81b9bb3a1115accb060bd3b947eb91730811b0002032b2c4622903816dc4d51"
+    },
+    {
+      "path": "author-evidence/focused-cosmic-tests-original-fixture-failure.log",
+      "bytes": 10561,
+      "sha256": "3a689a485989fd3cf4f8609d776ea5da0f25409dd0e5bc29c88f4b0e011b38d7"
+    },
+    {
+      "path": "author-evidence/focused-cosmic-tests.log",
+      "bytes": 10561,
+      "sha256": "3a689a485989fd3cf4f8609d776ea5da0f25409dd0e5bc29c88f4b0e011b38d7"
+    },
+    {
+      "path": "author-evidence/format-check.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "author-evidence/format-test-fixture.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "author-evidence/format.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "author-evidence/HANDOFF.md",
+      "bytes": 4661,
+      "sha256": "d2879ca9562b40eb87fc2475255b3d24fe57f0e00a2c5dfea677b43965e0fb1a"
+    },
+    {
+      "path": "author-evidence/pin-evidence.log",
+      "bytes": 1155,
+      "sha256": "5ed4075d68e80e55d0ea82652ec80ffe97921e398ab5d722a8c24a71cc759b70"
+    },
+    {
+      "path": "author-evidence/pin-evidence.py",
+      "bytes": 4784,
+      "sha256": "8925d4ec9832608effd1d38ab665f9783c23533986b2335fbe280409c6154b07"
+    },
+    {
+      "path": "author-evidence/query-probe.rs",
+      "bytes": 3095,
+      "sha256": "6a37fd05ab7ed6e0c72f1e5a08a7a457ea3232a9fc3b24883c9d2215e612a31b"
+    },
+    {
+      "path": "author-evidence/source-pins.json",
+      "bytes": 10532,
+      "sha256": "f659aecd19e0274f8d8c3d6136cb4cdaa042ea847e7fae8587d677ccad164dee"
+    },
+    {
+      "path": "author-evidence/staged-scope.log",
+      "bytes": 196,
+      "sha256": "256af54c04d7cd64aeb50e3bed7bdab76d1d4c7d89ecfce75db6f065b5a17731"
+    },
+    {
+      "path": "author-evidence/studio-completed-input.json",
+      "bytes": 1279,
+      "sha256": "90927cc04d2655d7726309c699b35d7997a00dd2fb68eaa35499c7355ffdaffe"
+    },
+    {
+      "path": "author-evidence/studio-completed-result.json",
+      "bytes": 1263,
+      "sha256": "fe7cc84f0fca14fb5693aae6964f7e2c707a51545f952c60d2263f1aa06ddb65"
+    },
+    {
+      "path": "author-evidence/studio-running-failure.txt",
+      "bytes": 27,
+      "sha256": "86a9f52fdddd07f8fdf3e76a745c058d48f2db238d8407c88289c9f88f92899c"
+    },
+    {
+      "path": "author-evidence/studio-running-input.json",
+      "bytes": 1098,
+      "sha256": "f12e41ad96a41a67e0d6b35871125abf5e92730e81f9d371170ae5decf577ef8"
+    },
+    {
+      "path": "author-evidence/studio-running-result.json",
+      "bytes": 1077,
+      "sha256": "52dc06f1c54d3e35d04bde1c5244caf6717fd43e5bacd0948d436283da76a81d"
+    },
+    {
+      "path": "author-evidence/studio-running-retry-input.json",
+      "bytes": 1098,
+      "sha256": "5bb149b3252fc1b9c91ca17f7f93e54c00f3aa5f9ec3f25466c975f7a33786bf"
+    },
+    {
+      "path": "author-evidence/studio-running-valid-input.json",
+      "bytes": 1095,
+      "sha256": "b2546744c2c7ae4c424da70f5cd9fa48ba89be435c69d0d8d3308cfb84655e5d"
+    },
+    {
+      "path": "author-evidence/supplemental-fixture-pins.json",
+      "bytes": 12672,
+      "sha256": "3153e19972b9f9f2fb65e0e741e2901186439efeb3d29cdca07405b1ad991a49"
+    },
+    {
+      "path": "candidate-numstat.txt",
+      "bytes": 100,
+      "sha256": "62215c9ae1b5adf89689bc6915ea3d20fae92ceb3f297108d9d1c8f49e7d100b"
+    },
+    {
+      "path": "compiled-after-original-visible-fixture.rs",
+      "bytes": 2421,
+      "sha256": "c520737256d43a4d936665f3ed899300e1879aa09d30ad2169e562cbfea4985a"
+    },
+    {
+      "path": "compiled-depfiles/after-depfile.d",
+      "bytes": 13812,
+      "sha256": "a11c9f7cf1d6e08e60e10f7186a27c3217030c2c4926272b452ba199080ee229"
+    },
+    {
+      "path": "compiled-depfiles/after-engine_depfile.d",
+      "bytes": 1704,
+      "sha256": "bf8b83c1e6fbb83a898457486d7197fcec119d3b35473ec3f78c14e5d31df4b7"
+    },
+    {
+      "path": "compiled-depfiles/before-depfile.d",
+      "bytes": 13670,
+      "sha256": "139542af359bc433ff26455e934230d00f5eb69478955bc717f0e0d2c263d3a7"
+    },
+    {
+      "path": "compiled-depfiles/before-engine_depfile.d",
+      "bytes": 1707,
+      "sha256": "73d97d307eb787ae9a37fa81ff9795814781948b95a15575e91a998be425a812"
+    },
+    {
+      "path": "compiled-depfiles/candidate-depfile.d",
+      "bytes": 13637,
+      "sha256": "57df49bab7e92fb8adf0a4943e17b56e087ef01d23995108c24464b6c2efd06b"
+    },
+    {
+      "path": "compiled-depfiles/candidate-engine_depfile.d",
+      "bytes": 1710,
+      "sha256": "3947cba080d41de55757c4cd03141466fb3b6f11348bb401dfddfe97426b1ad1"
+    },
+    {
+      "path": "REVIEW.md",
+      "bytes": 6381,
+      "sha256": "d419267bdb2c4e92f536283b1ac7aa2fb3ca989745419413b90971bd0eab8b63"
+    },
+    {
+      "path": "source/crates/game_core/src/cosmic_background.rs",
+      "bytes": 72897,
+      "sha256": "45d9fafe0ff66eb8ac1fb31044762ff0947ff243bb0a85f42785f1f26b5c835c"
+    },
+    {
+      "path": "source/crates/game_core/src/cosmic_background_tests.rs",
+      "bytes": 2533,
+      "sha256": "8869b684610093abb287325e19597def4422678132f79d0c95b66e41c25a2e91"
+    },
+    {
+      "path": "source/parent-cosmic_background.rs",
+      "bytes": 72391,
+      "sha256": "f3ea34b67c9fcb00096817cc022ebac443a442313544bad2be4633cc1caebe6c"
+    },
+    {
+      "path": "source/regions.rs",
+      "bytes": 36159,
+      "sha256": "0b47fb15446f24e31953c56d120e55bb544511a13bb63bdb83bb599a6a015a2a"
+    },
+    {
+      "path": "verification-first-diff-marker-error.log",
+      "bytes": 374,
+      "sha256": "1569025fbd1cea9a9bc942c3b8d27289f0790161d1d2845e31ee8a6a095c96f0"
+    },
+    {
+      "path": "verification.json",
+      "bytes": 5204,
+      "sha256": "1933b83e81f327cdea3a26e25fca026d7545242052895bf64a675f812c1278f0"
+    },
+    {
+      "path": "verification.log",
+      "bytes": 1997,
+      "sha256": "124d682624603a5b435f0993928b833aa9d678f5bb9df3dda3ae0194ff9fb546"
+    },
+    {
+      "path": "verify.py",
+      "bytes": 9028,
+      "sha256": "6708a8389657f9d92617f17d5fd2956f86ace494e804f7a6b26f09b3786349a3"
+    }
+  ],
+  "externalCompiledProofPins": [
+    {
+      "label": "before",
+      "kind": "binary",
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/cargo-before/release/deps/game_core-2b707a8b4a4ebce6.exe",
+      "bytes": 11721728,
+      "sha256": "98b2d6f3c32cc56a88f10178c4ad5a008a465d7b82b36528bba90b6c61848dc9"
+    },
+    {
+      "label": "before",
+      "kind": "depfile",
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/cargo-before/release/deps/game_core-2b707a8b4a4ebce6.d",
+      "bytes": 13670,
+      "sha256": "139542af359bc433ff26455e934230d00f5eb69478955bc717f0e0d2c263d3a7"
+    },
+    {
+      "label": "before",
+      "kind": "engine_depfile",
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/cargo-before/release/deps/engine_core-01d892b7672387e8.d",
+      "bytes": 1707,
+      "sha256": "73d97d307eb787ae9a37fa81ff9795814781948b95a15575e91a998be425a812"
+    },
+    {
+      "label": "after",
+      "kind": "binary",
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/cargo-after/release/deps/game_core-2b707a8b4a4ebce6.exe",
+      "bytes": 11726336,
+      "sha256": "0f3f127e58f3602b50033ce3717bfa124752acb8b2accc8e13c6651dff4702b0"
+    },
+    {
+      "label": "after",
+      "kind": "depfile",
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/cargo-after/release/deps/game_core-2b707a8b4a4ebce6.d",
+      "bytes": 13812,
+      "sha256": "a11c9f7cf1d6e08e60e10f7186a27c3217030c2c4926272b452ba199080ee229"
+    },
+    {
+      "label": "after",
+      "kind": "engine_depfile",
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/cargo-after/release/deps/engine_core-01d892b7672387e8.d",
+      "bytes": 1704,
+      "sha256": "bf8b83c1e6fbb83a898457486d7197fcec119d3b35473ec3f78c14e5d31df4b7"
+    },
+    {
+      "label": "candidate",
+      "kind": "binary",
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/cargo-current/release/deps/game_core-2b707a8b4a4ebce6.exe",
+      "bytes": 11686912,
+      "sha256": "aa01b158e9b356f18b336c1a3d39be6c602ad61b442ff2a7602f233b2114c04c"
+    },
+    {
+      "label": "candidate",
+      "kind": "depfile",
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/cargo-current/release/deps/game_core-2b707a8b4a4ebce6.d",
+      "bytes": 13637,
+      "sha256": "57df49bab7e92fb8adf0a4943e17b56e087ef01d23995108c24464b6c2efd06b"
+    },
+    {
+      "label": "candidate",
+      "kind": "engine_depfile",
+      "path": "C:/Users/mitch/.codex/worktrees/galaxy-audio-refinement/galaxy-royale/work/nebula-render-refinement/cargo-current/release/deps/engine_core-01d892b7672387e8.d",
+      "bytes": 1710,
+      "sha256": "3947cba080d41de55757c4cd03141466fb3b6f11348bb401dfddfe97426b1ad1"
+    }
+  ],
+  "pinSemantics": "rawFiles pin exact copied raw evidence and canonical Git snapshots; original source/compiled metadata distinguishes raw working bytes and exact before/after/current inputs; native binaries/depfiles additionally verified at external frozen paths"
+}

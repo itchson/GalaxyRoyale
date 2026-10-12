@@ -1,0 +1,127 @@
+   Compiling proc-macro2 v1.0.107
+   Compiling quote v1.0.47
+   Compiling unicode-ident v1.0.26
+   Compiling serde_core v1.0.229
+   Compiling serde v1.0.229
+   Compiling zmij v1.0.23
+   Compiling serde_json v1.0.151
+   Compiling foldhash v0.2.0
+   Compiling itoa v1.0.18
+   Compiling spin v0.12.3
+   Compiling memchr v2.8.3
+   Compiling hashbrown v0.17.1
+   Compiling hecs v0.11.2
+   Compiling syn v3.0.7
+   Compiling bytemuck_derive v1.12.1
+   Compiling serde_derive v1.0.229
+   Compiling glam v0.30.10
+   Compiling bytemuck v1.25.2
+   Compiling engine_core v0.1.0 (C:\Users\mitch\.codex\worktrees\galaxy-audio-refinement\galaxy-royale\crates\engine_core)
+   Compiling game_core v0.1.0 (C:\Users\mitch\.codex\worktrees\galaxy-audio-refinement\galaxy-royale\crates\game_core)
+    Finished `release` profile [optimized] target(s) in 29.55s
+     Running unittests src\lib.rs (work/nebula-render-refinement/cargo-current\release\deps\game_core-2b707a8b4a4ebce6.exe)
+
+running 39 tests
+test cosmic_background::cosmic_background_tests::empty_star_tile_inside_render_scan_skips_all_biome_samples ... ok
+
+thread 'cosmic_background::cosmic_background_tests::visible_star_tile_samples_one_field_and_preserves_reduced_subset' (42584) panicked at crates\game_core\src\cosmic_background_tests.rs:44:5:
+fixture exercises shared rather than per-star sampling
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test cosmic_background::cosmic_background_tests::visible_star_tile_samples_one_field_and_preserves_reduced_subset ... FAILED
+Nebula source field diffuse=2276, dense=1732, sky=5793
+test cosmic_background::deep_nebula_tests::cloud_has_diffuse_outskirts_dark_sky_and_unequal_connected_billow_outline ... ok
+test cosmic_background::deep_nebula_tests::cloud_layers_breathe_continuously_and_reduced_motion_is_exact ... ok
+Deep nebula reduced=false: veil448, billows274, hard950, whole1672/4 transforms
+Deep nebula reduced=true: veil118, billows70, hard246, whole434/4 transforms
+test cosmic_background::deep_nebula_tests::deep_cloud_cache_has_real_coherent_volume_and_bounded_complete_cost ... ok
+test cosmic_background::deep_nebula_tests::deep_cloud_streamed_camera_motion_keeps_birth_field_and_single_parallax_subtraction ... ok
+test cosmic_background::deep_nebula_tests::deep_cloud_whole_group_rejects_one_short_and_crosses_transform_batch_safely ... ok
+Nebula enclosed dark source regions (one-world-unit samples): [2]
+test cosmic_background::deep_nebula_tests::dust_negative_space_is_open_not_large_enclosed_oval_cavities ... ok
+test cosmic_background::deep_nebula_tests::export_actual_deep_nebula_packets ... ignored, explicit native packet export; requires owned output directory
+test cosmic_background::deep_nebula_tests::gas_volume_local_cells_compose_reflection_and_shear_without_minimum_size ... ok
+test cosmic_background::detail_tests::actual_fine_cells_compose_reflection_shear_and_fractional_zoom_without_minimum_geometry ... ok
+test cosmic_background::detail_tests::actual_motifs_keep_small_continuous_motion_and_freeze_under_reduced_motion ... ok
+test cosmic_background::detail_tests::atomic_whole_motif_admission_preserves_prior_packets_at_transform_boundary ... ok
+Galaxy part 192x192: full=604, reduced=96x96 / 155
+Galaxy part 48x48: full=356, reduced=24x24 / 88
+Galaxy: full=1674, reduced=419, cached filament colors=14, 3 transforms
+Nebula part 160x96: full=824, reduced=80x48 / 214
+Nebula part 96x48: full=126, reduced=48x24 / 32
+Nebula: full=1672, reduced=434, cached filament colors=12, 4 transforms
+Supernova part 128x128: full=1340, reduced=64x64 / 331
+Supernova part 24x24: full=76, reduced=12x12 / 16
+Supernova: full=1416, reduced=347, cached filament colors=13, 2 transforms
+test cosmic_background::detail_tests::cached_half_unit_clusters_have_bounded_whole_motif_cost_and_same_physical_extents ... ok
+test cosmic_background::detail_tests::export_actual_fine_cosmic_packets_for_software_contact_proof ... ignored, explicit native software evidence export; requires owned output directory
+test cosmic_background::detail_tests::export_actual_galaxy_revision_packets ... ignored, explicit bounded native galaxy packet proof
+test cosmic_background::detail_tests::far_streamed_motifs_keep_local_detail_finite_and_inside_conservative_culling_bound ... ok
+Galaxy lowfalse: soft 714 / knots 604 / bulge 356 / off-arm 442
+Galaxy lowtrue: soft 176 / knots 155 / bulge 88 / off-arm 119
+test cosmic_background::detail_tests::inclined_galaxy_has_connected_interior_mass_and_winding_dust_without_a_central_slit ... ok
+QA Galaxy grid[3, -4] h2591400577: WARP 59725.008 -49541.473
+QA Supernova grid[-3, 1] h1888154543: WARP -35332.82 22642.145
+test cosmic_background::detail_tests::qa_galaxy_and_remnant_centers_use_actual_seed_selection_and_calm_group_geometry ... ok
+test cosmic_background::detail_tests::reduced_sampling_preserves_actual_dark_lanes_and_broken_rim ... ok
+test cosmic_background::stellar_neighborhood_tests::export_actual_seeded_stellar_neighborhood_packets ... ignored, explicit native stellar packet writer; requires owned absolute output
+actual 60 systems: 39 broad, diameter 42.65442..137.45029
+test cosmic_background::stellar_neighborhood_tests::seeded_neighborhoods_include_broad_clusters_and_different_physical_spreads ... ok
+test cosmic_background::stellar_neighborhood_tests::whole_seven_star_packets_keep_quality_motion_parallax_and_atomic_admission ... ok
+test cosmic_background::tests::cosmic_far_world_stars_keep_local_spacing_before_camera_subtraction ... ok
+test cosmic_background::tests::cosmic_field_blends_are_continuous_at_adjacent_birth_space_edges ... ok
+test cosmic_background::tests::cosmic_groups_reject_atomically_and_all_packets_respect_custom_caps ... ok
+32 declared seeds, 533x300 world view: Haven stars=584, outer stars=2176
+test cosmic_background::tests::cosmic_haven_is_measurably_sparser_than_outer_biomes ... ok
+test cosmic_background::tests::cosmic_invalid_inputs_preserve_prior_frame_and_authored_negative_space ... ok
+test cosmic_background::tests::cosmic_motifs_actually_animate_and_never_swap_identity_with_view_or_quality ... ok
+Galaxy: actual default-seed camera=Vec2(13387.087, 61155.58), hash=2009831401, scale=0.98607117
+Nebula: actual default-seed camera=Vec2(29410.637, 11408.639), hash=1087913753, scale=0.9791837
+Supernova: actual default-seed camera=Vec2(-20372.748, 30055.252), hash=659208802, scale=1.2943621
+test cosmic_background::tests::cosmic_real_seeded_motifs_keep_their_authored_packets_across_view_and_quality_changes ... ok
+test cosmic_background::tests::cosmic_reduced_motion_freezes_all_authored_cells_and_group_transforms ... ok
+test cosmic_background::tests::cosmic_seed_revisit_is_exact_and_changes_only_presentation ... ok
+test cosmic_background::tests::export_actual_seeded_remnant_packets ... ignored, explicit native remnant proof writer; requires owned absolute output
+test cosmic_background::tests::gas_curl_is_repeatable_and_reduced_motion_freezes_all_submitted_cells ... ok
+Actual nebula reduced=false time=0: 1672 cells/4 transforms, hard filament alpha 11..68
+Actual nebula reduced=false time=15: 1672 cells/4 transforms, hard filament alpha 10..59
+Actual nebula reduced=false time=47: 1672 cells/4 transforms, hard filament alpha 10..59
+Actual nebula reduced=true time=0: 434 cells/4 transforms, hard filament alpha 13..68
+Actual nebula reduced=true time=15: 434 cells/4 transforms, hard filament alpha 12..59
+Actual nebula reduced=true time=47: 434 cells/4 transforms, hard filament alpha 12..59
+test cosmic_background::tests::nebula_visibility_keeps_authored_cells_unlit_and_within_existing_group_budget ... ok
+gas reducedfalse cameraVec2(0.0, 0.0) zoom0.6: submitted348,remaining5652,softgroups66
+gas reducedfalse cameraVec2(0.0, 0.0) zoom1: submitted110,remaining5890,softgroups31
+gas reducedfalse cameraVec2(0.0, 0.0) zoom1.6: submitted25,remaining5975,softgroups14
+gas reducedfalse cameraVec2(27000.0, -19000.0) zoom0.6: submitted800,remaining5200,softgroups71
+gas reducedfalse cameraVec2(27000.0, -19000.0) zoom1: submitted376,remaining5624,softgroups39
+gas reducedfalse cameraVec2(27000.0, -19000.0) zoom1.6: submitted148,remaining5852,softgroups20
+gas reducedfalse cameraVec2(999000.0, -999000.0) zoom0.6: submitted800,remaining5200,softgroups66
+gas reducedfalse cameraVec2(999000.0, -999000.0) zoom1: submitted355,remaining5645,softgroups34
+gas reducedfalse cameraVec2(999000.0, -999000.0) zoom1.6: submitted205,remaining5795,softgroups16
+gas reducedtrue cameraVec2(0.0, 0.0) zoom0.6: submitted179,remaining2821,softgroups59
+gas reducedtrue cameraVec2(0.0, 0.0) zoom1: submitted53,remaining2947,softgroups27
+gas reducedtrue cameraVec2(0.0, 0.0) zoom1.6: submitted9,remaining2991,softgroups8
+gas reducedtrue cameraVec2(27000.0, -19000.0) zoom0.6: submitted400,remaining2600,softgroups59
+gas reducedtrue cameraVec2(27000.0, -19000.0) zoom1: submitted197,remaining2803,softgroups36
+gas reducedtrue cameraVec2(27000.0, -19000.0) zoom1.6: submitted75,remaining2925,softgroups19
+gas reducedtrue cameraVec2(999000.0, -999000.0) zoom0.6: submitted400,remaining2600,softgroups66
+gas reducedtrue cameraVec2(999000.0, -999000.0) zoom1: submitted171,remaining2829,softgroups30
+gas reducedtrue cameraVec2(999000.0, -999000.0) zoom1.6: submitted101,remaining2899,softgroups16
+test cosmic_background::tests::soft_seeded_gas_uses_local_fractional_cells_and_charges_actual_shared_quota ... ok
+actual seeded system camera=Vec2(-10058.912, 990.7491),7nodes,hash=1887378488
+test cosmic_background::tests::stellar_neighborhoods_keep_exact_seeded_stars_without_chart_strokes_under_quality_and_parallax ... ok
+Actual ejecta lowfalse: 384/1340 interior cells, 3 broad sky exits
+Actual ejecta lowtrue: 92/331 interior cells, 3 broad sky exits
+test cosmic_background::tests::supernova_ejecta_has_interior_knots_and_multiple_open_sky_exits ... ok
+Actual remnant density lowfalse: 145 broad faint centers, 1085 faint / 190 bright / 1340 total
+Actual remnant density lowtrue: 38 broad faint centers, 263 faint / 52 bright / 331 total
+test cosmic_background::tests::supernova_has_broad_faint_density_beside_sparse_bright_filaments ... ok
+
+failures:
+
+failures:
+    cosmic_background::cosmic_background_tests::visible_star_tile_samples_one_field_and_preserves_reduced_subset
+
+test result: FAILED. 33 passed; 1 failed; 5 ignored; 0 measured; 528 filtered out; finished in 0.03s
+
+error: test failed, to rerun pass `-p game_core --lib`
