@@ -16,10 +16,23 @@ const html = readFileSync(
   new URL("../../apps/game/index.html", import.meta.url),
   "utf8",
 );
-const viewSource = readFileSync(
-  new URL("../../apps/game/src/loadout.ts", import.meta.url),
-  "utf8",
-).replace('import "./loadout.css";', "");
+const compiledModules = Object.fromEntries(
+  ["loadout", "forge-scene", "hangar-scene", "flight-menu"].map((name) => [
+    name,
+    ts.transpileModule(
+      readFileSync(
+        new URL(`../../apps/game/src/${name}.ts`, import.meta.url),
+        "utf8",
+      ),
+      {
+        compilerOptions: {
+          target: ts.ScriptTarget.ES2022,
+          module: ts.ModuleKind.CommonJS,
+        },
+      },
+    ).outputText,
+  ]),
+);
 function fn(name) {
   const node = main.statements.find(
     (node) => ts.isFunctionDeclaration(node) && node.name?.text === name,
@@ -38,6 +51,12 @@ function declaration(name) {
   assert.ok(node, `Missing actual declaration ${name}`);
   return node.getText(main);
 }
+const backHandler = main.statements.find(
+  (node) =>
+    ts.isExpressionStatement(node) &&
+    /^element\("ship-hangar-back"\)\.addEventListener/.test(node.getText(main)),
+);
+assert.ok(backHandler, "Missing actual ship detail back handler");
 const compiledMain = ts.transpileModule(
   [
     ...[
@@ -51,18 +70,14 @@ const compiledMain = ts.transpileModule(
       "syncFlightState",
       "openMenu",
       "selectMenuTab",
+      "refreshHangar",
     ].map(fn),
     declaration("campaignActions"),
     "globalThis.hangarActions = campaignActions;",
+    backHandler.getText(main),
   ].join("\n"),
   { compilerOptions: { target: ts.ScriptTarget.ES2022 } },
 ).outputText;
-const compiledView = ts.transpileModule(viewSource, {
-  compilerOptions: {
-    target: ts.ScriptTarget.ES2022,
-    module: ts.ModuleKind.CommonJS,
-  },
-}).outputText;
 const flatten = (root) => [root, ...root.children.flatMap(flatten)];
 const copy = (value) => JSON.parse(JSON.stringify(value));
 const contents = (root) =>
@@ -110,6 +125,20 @@ function initialHud() {
     ship_xp: 60,
     ship_next_xp: 120,
     rank_cap: 2,
+    hull: 100,
+    max_hull: 100,
+    shield: 0,
+    max_shield: 0,
+    ship_stats: {
+      speed: 0,
+      top_speed: 90,
+      acceleration: 300,
+      primary_damage: 10,
+      fire_rate: 4,
+      hull_regen: 0,
+      shield_regen: 0,
+      shield_recharge_unlocked: false,
+    },
     currency: [3, 4, 5],
     material_stash: [10, 2, 0, 0, 0],
     material_cargo: [0, 0, 0, 0, 0],
@@ -184,6 +213,8 @@ function fixture() {
     disabled = false;
     hidden = false;
     scrollTop = 0;
+    scrollLeft = 0;
+    parentElement = null;
     classList = {
       add: (name) => {
         this.className += ` ${name}`;
@@ -199,10 +230,26 @@ function fixture() {
       },
     };
     append(...items) {
-      this.children.push(...items);
+      for (const item of items) {
+        item.remove();
+        item.parentElement = this;
+        this.children.push(item);
+      }
     }
     replaceChildren(...items) {
-      this.children = items;
+      for (const child of this.children) child.parentElement = null;
+      this.children = [];
+      this.append(...items);
+    }
+    remove() {
+      if (this.parentElement)
+        this.parentElement.children = this.parentElement.children.filter(
+          (child) => child !== this,
+        );
+      this.parentElement = null;
+    }
+    get firstElementChild() {
+      return this.children[0];
     }
     get lastElementChild() {
       return this.children.at(-1);
@@ -219,6 +266,21 @@ function fixture() {
     }
     setAttribute(key, value) {
       this.attributes[key] = value;
+      if (key.startsWith("data-"))
+        this.dataset[
+          key.slice(5).replace(/-([a-z])/g, (_, letter) => letter.toUpperCase())
+        ] = value;
+    }
+    getAttribute(key) {
+      if (key.startsWith("data-"))
+        return (
+          this.dataset[
+            key
+              .slice(5)
+              .replace(/-([a-z])/g, (_, letter) => letter.toUpperCase())
+          ] ?? null
+        );
+      return this.attributes[key] ?? null;
     }
     addEventListener(name, callback) {
       this.events[name] = callback;
@@ -226,6 +288,7 @@ function fixture() {
     focus() {
       document.activeElement = this;
     }
+    scrollIntoView() {}
     click() {
       if (!this.disabled) this.events.click?.();
     }
@@ -237,6 +300,7 @@ function fixture() {
     /<([a-z][\w-]*)\b([^>]*\bid="([^"]+)"[^>]*)>/g,
   )) {
     const node = document.createElement(match[1]);
+    node.id = match[3];
     node.hidden = /(?:^|\s)hidden(?:\s|$)/.test(match[2]);
     nodes.set(match[3], node);
   }
@@ -244,8 +308,35 @@ function fixture() {
     assert.ok(nodes.has(id), `Missing actual DOM ID ${id}`);
     return nodes.get(id);
   };
-  const exports = {};
-  vm.runInNewContext(compiledView, { exports, document, HTMLElement: Element });
+  const loaded = {};
+  function load(name) {
+    if (loaded[name]) return loaded[name];
+    assert.ok(compiledModules[name], `Unexpected runtime view module ${name}`);
+    const exports = (loaded[name] = {});
+    vm.runInNewContext(compiledModules[name], {
+      exports,
+      document,
+      HTMLElement: Element,
+      require(specifier) {
+        if (specifier.endsWith(".css")) return {};
+        // Cosmetic portrait boundary only; the fixture's legacy HUD has no portrait.
+        if (specifier === "./kikai-portrait")
+          return { paintLicensePortrait: () => false };
+        assert.ok(specifier.startsWith("./"));
+        return load(specifier.slice(2));
+      },
+    });
+    return exports;
+  }
+  const exports = Object.assign({}, ...Object.keys(compiledModules).map(load));
+  assert.match(
+    html,
+    /id="ship-content"[\s\S]*?id="ship-hangar-back"[\s\S]*?<div id="ship-statistics"><\/div>/,
+  );
+  element("ship-content").append(
+    element("ship-hangar-back"),
+    element("ship-statistics"),
+  );
   let authoritativeHud = initialHud();
   let authoritativeProfile = {
     schema_version: 4,
@@ -316,29 +407,31 @@ function fixture() {
       cancel_course() {},
       set_ui_mode() {},
     },
-    paintForge(target, value, actions) {
+    paintForgeScene(target, value, actions, hulls, changed) {
       calls.push(["paint-forge", value]);
-      exports.paintForge(target, value, actions);
+      exports.paintForgeScene(target, value, actions, hulls, changed);
     },
     paintMeishiCard() {
       return true;
     },
-    paintCargo() {
+    paintVault() {
       return true;
     },
-    paintFlightMenu() {},
-    resetForge(target) {
-      calls.push(["reset-forge", target]);
-      exports.resetForge(target);
+    paintFlightMenu(target, value, expanded) {
+      return exports.paintFlightMenu(target, value, expanded);
     },
-    paintShipHangar(target, value, actions) {
+    resetForgeScene(target) {
+      calls.push(["reset-forge", target]);
+      exports.resetForgeScene(target);
+    },
+    paintHangarScene(target, value, actions) {
       calls.push(["paint-hangar", value]);
-      exports.paintShipHangar(target, value, actions);
+      return exports.paintHangarScene(target, value, actions);
     },
     paintHud() {
       calls.push(["paint-hud"]);
     },
-    paintCampaign() {},
+    refreshMissions() {},
     paintCredits() {},
     finishCredits() {},
     openCredits() {},
@@ -389,6 +482,10 @@ function fixture() {
       flatten(element("hangar-content")).find(
         (node) => node.dataset.loadoutAction === key,
       ),
+    section: (label) =>
+      flatten(element("upgrade-content")).find(
+        (node) => node.tagName === "BUTTON" && node.textContent === label,
+      ),
   };
 }
 
@@ -411,9 +508,9 @@ test("Forge forwards exact craft/upgrade/equip/empty/hardware arguments, refresh
   for (const [name, args, notice] of operations) {
     const f = fixture();
     let bindings;
-    f.c.paintForge = (target, value, actions) => {
+    f.c.paintForgeScene = (target, value, actions, hulls, changed) => {
       bindings = actions;
-      f.exports.paintForge(target, value, actions);
+      f.exports.paintForgeScene(target, value, actions, hulls, changed);
     };
     f.c.paintUpgrades(true);
     bindings[name](...args);
@@ -435,9 +532,9 @@ test("backend rejection has no HUD fetch, snapshot save, audio cue or invented s
   const f = fixture();
   f.c.mutationError = new Error("Tier 2 dock material required.");
   let actions;
-  f.c.paintForge = (target, value, bindings) => {
+  f.c.paintForgeScene = (target, value, bindings, hulls, changed) => {
     actions = bindings;
-    f.exports.paintForge(target, value, bindings);
+    f.exports.paintForgeScene(target, value, bindings, hulls, changed);
   };
   f.c.paintUpgrades(true);
   actions.upgradeAbility("guard-coil");
@@ -445,7 +542,7 @@ test("backend rejection has no HUD fetch, snapshot save, audio cue or invented s
   assert.deepEqual(f.calls, [["upgrade_ability", "guard-coil"]]);
   assert.deepEqual(f.notices, ["Error: Tier 2 dock material required."]);
 });
-test("real Forge category survives successful repaint while a fresh open resets to overview", async () => {
+test("real Forge category survives successful repaint while a fresh open resets to the ability index", async () => {
   const f = fixture();
   f.c.dialoguePanel.opened = true;
   f.c.paused = true;
@@ -455,12 +552,20 @@ test("real Forge category survives successful repaint while a fresh open resets 
   assert.equal(f.c.document.activeElement, f.element("menu-close"));
   assert.equal(f.c.input.enabled, false);
   assert.equal(f.c.paused, false, "the live Forge does not pause the universe");
-  f.action("manage-0").click();
-  assert.ok(f.action("back"));
+  assert.ok(f.action("ability-category-all"));
+  assert.equal(f.action("manage-0"), undefined);
+  f.action("ability-category-0").click();
+  assert.equal(
+    f.action("ability-category-0").getAttribute("aria-pressed"),
+    "true",
+  );
   const resets = f.calls.filter((item) => item[0] === "reset-forge").length;
   f.action("craft-pulse-lens").click();
   await settle();
-  assert.ok(f.action("back"));
+  assert.equal(
+    f.action("ability-category-0").getAttribute("aria-pressed"),
+    "true",
+  );
   assert.equal(
     f.calls.filter((item) => item[0] === "reset-forge").length,
     resets,
@@ -471,7 +576,11 @@ test("real Forge category survives successful repaint while a fresh open resets 
   );
   f.c.openMenu("upgrades");
   assert.equal(f.action("back"), undefined);
-  assert.ok(f.action("manage-0"));
+  assert.equal(f.action("manage-0"), undefined);
+  assert.equal(
+    f.action("ability-category-all").getAttribute("aria-pressed"),
+    "true",
+  );
   assert.equal(
     f.calls.filter((item) => item[0] === "reset-forge").length,
     resets + 1,
@@ -485,7 +594,6 @@ test("mutation success is not a committed-save claim while deferred persistence 
     return pending.promise;
   };
   f.c.paintUpgrades(true);
-  f.action("manage-0").click();
   f.action("craft-pulse-lens").click();
   assert.equal(f.c.pendingSaves, 1);
   assert.equal(f.element("save-indicator").dataset.pixelValue, "1");
@@ -500,11 +608,11 @@ test("mutation success is not a committed-save claim while deferred persistence 
   assert.ok(f.notices.includes(f.c.store.message));
   assert.equal(f.calls.filter((item) => item[0] === "save").length, 1);
 });
-test("Hangar page and construction/selection bindings pass full per-hull XP metadata", async () => {
+test("Forge construction and Hangar selection preserve full per-hull XP and crafting does not auto-select", async () => {
   const f = fixture();
   f.c.selectMenuTab("hangar");
-  assert.match(contents(f.element("hangar-content")), /RAICHO LV 3 \/ 60 XP/);
-  assert.match(contents(f.element("hangar-content")), /RAICHO LV 1 \/ 0 XP/);
+  assert.match(contents(f.element("hangar-content")), /LV 3 \/ 60 XP/);
+  assert.match(contents(f.element("hangar-content")), /LV 1 \/ 0 XP/);
   f.calls.length = 0;
   f.c.hangarActions.craft(7);
   await settle();
@@ -518,6 +626,11 @@ test("Hangar page and construction/selection bindings pass full per-hull XP meta
     f.calls.find((item) => item[0] === "paint-hangar")[1],
     f.c.nextHud,
   );
+  assert.equal(
+    f.calls.some((item) => item[0] === "switch_ship"),
+    false,
+  );
+  assert.equal(f.c.hud.campaign.selected_ship, 0);
   const next = copy(f.c.nextHud);
   next.campaign.selected_ship = 1;
   next.campaign.ships[0].selected = false;
@@ -534,9 +647,11 @@ test("Hangar page and construction/selection bindings pass full per-hull XP meta
   assert.equal(f.calls.find((item) => item[0] === "paint-hangar")[1], next);
   assert.match(
     contents(f.element("upgrade-content")),
-    /DAWNNEEDLE\nRAICHO LV 1 \/ 0 XP/,
+    /DAWNNEEDLE \/ LV 1 \/ RANK CAP/,
   );
-  assert.match(contents(f.element("hangar-content")), /RAICHO LV 3 \/ 60 XP/);
+  assert.equal(f.c.hud.ship_xp, 0);
+  assert.equal(f.c.hud.ship_next_xp, 20);
+  assert.match(contents(f.element("hangar-content")), /LV 3 \/ 60 XP/);
 });
 test("rejected ship construction or switching cannot save or report success", async () => {
   for (const [action, method, argument] of [
@@ -557,11 +672,135 @@ test("an unavailable audio context cannot reject a successful mutation/save flow
     throw new Error("Audio context unavailable.");
   };
   f.c.paintUpgrades(true);
-  f.action("manage-0").click();
   f.action("craft-pulse-lens").click();
   await settle();
   assert.equal(f.c.hud, f.c.nextHud);
   assert.equal(f.calls.filter((item) => item[0] === "save").length, 1);
   assert.equal(f.calls.filter((item) => item[0] === "audio").length, 0);
   assert.ok(f.notices.some((value) => value.startsWith("ABILITY CRAFTED")));
+});
+
+test("component and hardware callbacks retain their actual Forge mode, navigation nodes and focused action", async () => {
+  const f = fixture();
+  f.c.hud.components = [
+    {
+      id: "pulse-conductor",
+      index: 0,
+      name: "PULSE CONDUCTOR",
+      description: "Crafted offense part.",
+      category: 0,
+      count: 2,
+      max_count: 20,
+      required_level: 1,
+      materials: [2, 0, 0, 0, 0],
+      can_craft: true,
+      craft_reason: "",
+    },
+  ];
+  f.c.nextHud = copy(f.c.hud);
+  f.c.nextHud.components[0].count = 3;
+  f.c.paintUpgrades(true);
+  const nav = f.section("ITEMS & MATERIALS");
+  nav.click();
+  const crafting = f.action("component-pulse-conductor");
+  crafting.focus();
+  crafting.click();
+  await settle();
+  assert.equal(f.section("ITEMS & MATERIALS"), nav);
+  assert.equal(nav.getAttribute("aria-pressed"), "true");
+  assert.match(
+    contents(f.element("upgrade-content")),
+    /COMPONENT WORKSHOP[\s\S]*BANKED 3\/20/,
+  );
+  assert.equal(
+    f.c.document.activeElement.dataset.loadoutAction,
+    "component-pulse-conductor",
+  );
+  assert.notEqual(f.c.document.activeElement, crafting);
+  f.section("HARDWARE").click();
+  assert.equal(f.action("component-pulse-conductor"), undefined);
+  assert.ok(f.action("hardware-rate"));
+  f.c.nextHud = copy(f.c.hud);
+  f.c.nextHud.upgrades[0].rank = 1;
+  f.action("hardware-rate").focus();
+  f.action("hardware-rate").click();
+  await settle();
+  assert.equal(f.section("HARDWARE").getAttribute("aria-pressed"), "true");
+  assert.equal(
+    f.c.document.activeElement.dataset.loadoutAction,
+    "hardware-rate",
+  );
+  assert.equal(f.action("component-pulse-conductor"), undefined);
+  assert.equal(f.calls.filter((call) => call[0] === "save").length, 2);
+});
+
+test("the actual Forge hull blueprint action crafts once without exposing selection or auto-switching", async () => {
+  const f = fixture();
+  f.c.hud.campaign.ships.push({
+    ...ship(2, false, 0, 1),
+    owned: false,
+    craftable: true,
+    can_craft: true,
+    can_select: false,
+    craft_reason: "",
+  });
+  f.c.nextHud = copy(f.c.hud);
+  f.c.nextHud.campaign.ships[2].owned = true;
+  f.c.nextHud.campaign.ships[2].can_craft = false;
+  f.c.openMenu("upgrades");
+  await settle();
+  f.section("RAICHO BLUEPRINTS").click();
+  assert.equal(f.action("select-ship-1"), undefined);
+  assert.ok(f.action("craft-ship-2"));
+  f.calls.length = 0;
+  f.action("craft-ship-2").click();
+  await settle();
+  assert.deepEqual(f.calls.slice(0, 4), [
+    ["craft_ship", 1],
+    ["hud", f.c.nextHud],
+    ["profile", f.c.nextProfile],
+    ["save", f.c.nextProfile],
+  ]);
+  assert.equal(
+    f.calls.some((call) => call[0] === "switch_ship"),
+    false,
+  );
+  assert.equal(f.c.hud.campaign.selected_ship, 0);
+  assert.equal(f.action("craft-ship-2"), undefined);
+  assert.equal(f.action("select-ship-2"), undefined);
+  assert.equal(
+    f.section("RAICHO BLUEPRINTS").getAttribute("aria-pressed"),
+    "true",
+  );
+});
+
+test("actual Hangar legacy art and separate expanded statistics keep the persistent back control", async () => {
+  const f = fixture();
+  f.c.openMenu("hangar");
+  const hero = flatten(f.element("hangar-content")).find(
+    (node) => node.dataset.pixelKind === "garage-bay",
+  );
+  assert.ok(hero);
+  assert.equal(hero.children[0].dataset.pixelKind, "campaign-ship");
+  assert.equal(hero.children[0].dataset.pixelValue, "9");
+  const back = f.element("ship-hangar-back");
+  hero.click();
+  assert.equal(f.element("ship-content").hidden, false);
+  assert.match(contents(f.element("ship-statistics")), /LV 3 \/ XP 60\/120/);
+  assert.match(
+    contents(f.element("ship-statistics")),
+    /OFFENSE \/ EMPTY[\s\S]*DEFENSE \/ EMPTY[\s\S]*PASSIVE \/ EMPTY/,
+  );
+  assert.equal(f.element("ship-content").contains(back), true);
+  f.c.hud.hull = 43;
+  f.c.selectMenuTab("ship");
+  assert.match(contents(f.element("ship-statistics")), /HULL 43 \/ 100/);
+  assert.equal(f.element("ship-content").contains(back), true);
+  assert.equal(f.element("ship-hangar-back"), back);
+  back.click();
+  assert.equal(f.element("hangar-content").hidden, false);
+  assert.equal(f.element("ship-content").hidden, true);
+  assert.equal(f.c.paused, false);
+  assert.equal(f.c.input.enabled, false);
+  await settle();
 });
