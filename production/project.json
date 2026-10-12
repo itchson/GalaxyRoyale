@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "revision": 1037,
+  "revision": 1038,
   "name": "Galaxy Royale",
   "phase": "Playable solo slice → content and validation",
-  "updatedAt": "2026-10-12T19:18:26.000Z",
+  "updatedAt": "2026-10-12T19:24:25.389Z",
   "tasks": [
     {
       "id": "studio",
@@ -14348,6 +14348,37 @@
         }
       ],
       "knownIssues": "Ordinary IonWake damaging samples are integrated; host/guest persistenttrailpublication/rendering still underboundedimplementation. Neitherfull8/TURN norphysical/naturalcampaignacceptance follows."
+    },
+    {
+      "id": "build-985f77b0",
+      "title": "332 normal package activated on retained origin; both native renderers start",
+      "body": "Retained origin first served old F4 cache; actual Settings Apply update at Haven activated new index-DIlkClsC. Continued safely at Haven; observed points16/12/9,hull100,shield0,PAN HIKARI level3XP119/120,FluxDriveR1 on both backends. Returned safely to title. This observes selected user-visible state, not whole-profile byte equality or new co-op ability/renderer shadow acceptance.",
+      "author": "Root",
+      "source": "Actual normal-browser safe update and observed retained state",
+      "createdAt": "2026-10-12T19:24:25.389Z",
+      "revision": "332ddd5ec0370e13ad346ea4ea988f35b61ca3e7",
+      "evidence": [
+        {
+          "label": "Actual browser observations and screenshots",
+          "kind": "artifact",
+          "path": "artifacts/native-wake-integration-20261013/browser-proof/OBSERVATION.json"
+        }
+      ],
+      "checks": [
+        {
+          "name": "Actual safe PWA update loads new package script",
+          "result": "pass"
+        },
+        {
+          "name": "Actual native WebGPU/WebGL2 startup and sampled retained progression",
+          "result": "pass"
+        },
+        {
+          "name": "Full saved-profile equality, new ability RTC/AV, shadow GPU/performance",
+          "result": "not_run"
+        }
+      ],
+      "knownIssues": "WebGL2 HUD timing is a momentary desktop warm single-entity observation, not performance capture/soak. No diagnostic warp,die,stress,context-loss or imported profile used."
     }
   ],
   "feedback": [],
@@ -24721,6 +24752,16 @@
       "author": "/root/audio_review",
       "source": "Actual author run completed and candidate handed off; acceptance remains pending",
       "createdAt": "2026-10-12T19:18:26.000Z"
+    },
+    {
+      "id": "aed982b8-b43a-438e-b9ac-cdf2eb53149f",
+      "revision": 1038,
+      "kind": "build",
+      "itemId": "build-985f77b0",
+      "title": "332 normal package activated on retained origin; both native renderers start",
+      "author": "Root",
+      "source": "Actual normal-browser safe update and observed retained state",
+      "createdAt": "2026-10-12T19:24:25.389Z"
     }
   ],
   "runRecords": [
