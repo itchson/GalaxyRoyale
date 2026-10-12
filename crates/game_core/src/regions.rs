@@ -788,7 +788,9 @@ pub fn background_with_density(
                     let transform = Transform {
                         position,
                         rotation: if kind == 1 {
-                            -0.2
+                            // Rotate the complete cached back/body/front group;
+                            // preserve its baked shadow and ring-plane relation.
+                            -0.2 + (unit(mix(h ^ 93)) - 0.5) * 0.5
                         } else {
                             unit(mix(h ^ 93)) * 0.6
                         },

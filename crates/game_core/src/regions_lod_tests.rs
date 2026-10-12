@@ -275,7 +275,7 @@ fn actual_seeded_reduced_scenes_retain_each_ordinary_same_art_landmark() {
                     let transform = Transform {
                         position: origin + camera * 0.78,
                         rotation: if kind == 1 {
-                            -0.2
+                            -0.2 + (unit(mix(h ^ 93)) - 0.5) * 0.5
                         } else {
                             unit(mix(h ^ 93)) * 0.6
                         },
