@@ -198,7 +198,7 @@ fn extract(pack: &Pack, group: &Group) -> Result<Value, String> {
         .iter()
         .flat_map(|batch| {
             batch.pixels.iter().map(|p| {
-                let t = batch.transforms[p.transform as usize];
+                let t = batch.transforms[p.transform_slot()];
                 let c = Vec2::from_array(p.local);
                 let corners = [
                     Vec2::splat(-0.5),

@@ -10,7 +10,7 @@ Each PixelInstance is 16 bytes; each affine GpuTransform is 32 bytes, including 
 
 Exact affine composition preserves nonuniform parent scale, child rotation and shear. RoyaleMono caches original 5×7 letter bodies in text/letter/group transforms. Generated UI art and authored 24×32 comms portraits use the same quad extraction. The console is an opaque black drawer with one bottom rail. Low-resolution rendering uses integer nearest-neighbor presentation; rotating pixels can cover changing logical display cells, without blur filtering.
 
-A 272-byte uniform supplies eight bounded camera-relative radial lights from recent effects, nearby bullets, engine thrust and a station beacon. Each cell receives one color; UI/background defaults remain unlit. This does not implement shadows, normal maps or volumetric scattering.
+A 304-byte uniform supplies eight bounded camera-relative radial lights from recent effects, nearby bullets, engine thrust and a station beacon, plus raster parameters. Each cell receives one color; UI/background defaults remain unlit. Optional packed per-cell normals and luminance masks share the existing instance layout and shader; see [PIXEL_SURFACES.md](PIXEL_SURFACES.md) for coordinates, authored material and verification boundaries. Shadows and volumetric scattering remain future work.
 
 ## Simulation and destruction
 

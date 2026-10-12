@@ -911,13 +911,16 @@ impl Galaxy {
     pub fn set_touch_ui(&mut self, value: bool) {
         self.touch_ui = value;
     }
-    pub fn diagnostic(&mut self, command: &str) {
+    pub fn diagnostic(&mut self, command: &str) -> bool {
         if self.guest_view.is_some() {
-            return;
+            return false;
         }
-        self.boss_overlay.reset();
-        self.last_boss_panel = None;
-        self.game.diagnostic(command);
+        let accepted = self.game.diagnostic(command);
+        if accepted {
+            self.boss_overlay.reset();
+            self.last_boss_panel = None;
+        }
+        accepted
     }
     pub fn lose_device(&self) {
         self.renderer.lose_device();

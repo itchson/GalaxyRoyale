@@ -118,7 +118,7 @@ fn extract(pack: &Pack, n: usize) -> serde_json::Value {
     let mut cells = Vec::new();
     for batch in &frame.batches {
         for p in &batch.pixels {
-            let t = batch.transforms[p.transform as usize];
+            let t = batch.transforms[p.transform_slot()];
             let local = Vec2::from_array(p.local);
             let corners = [
                 Vec2::splat(-0.5),
@@ -263,7 +263,7 @@ mod tests {
                 batch
                     .pixels
                     .iter()
-                    .all(|p| (p.transform as usize) < batch.transforms.len())
+                    .all(|p| (p.transform_slot()) < batch.transforms.len())
             );
         }
     }

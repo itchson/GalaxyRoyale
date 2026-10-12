@@ -111,7 +111,7 @@ fn main() {
         assert!(stats.quads > 800);
         assert_eq!(6000 - budget, stats.quads);
         let packets:Vec<Value>=frame.frame().batches.iter().flat_map(|batch|batch.pixels.iter().map(|pixel|{
-            let transform=batch.transforms[pixel.transform as usize];
+            let transform=batch.transforms[pixel.transform_slot()];
             let local=Vec2::from_array(pixel.local);
             let relative=view.relative_transform(transform);
             let corners=[Vec2::splat(-0.5),Vec2::new(0.5,-0.5),Vec2::new(-0.5,0.5),Vec2::splat(0.5)].map(|c|

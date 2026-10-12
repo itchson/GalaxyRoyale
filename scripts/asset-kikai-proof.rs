@@ -9,7 +9,7 @@ fn packets(frame: &FrameBuilder) -> Vec<Value> {
         .iter()
         .flat_map(|batch| {
             batch.pixels.iter().map(|pixel| {
-                let transform = batch.transforms[pixel.transform as usize];
+                let transform = batch.transforms[pixel.transform_slot()];
                 let local = Vec2::from_array(pixel.local);
                 let corners = [
                     Vec2::splat(-0.5),

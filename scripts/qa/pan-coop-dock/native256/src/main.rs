@@ -151,7 +151,7 @@ fn frame_json(frame: &RenderFrame, n: usize, view: Option<CameraView>) -> Value 
     let mut cells = Vec::new();
     for b in &frame.batches {
         for p in &b.pixels {
-            let t = b.transforms[p.transform as usize];
+            let t = b.transforms[p.transform_slot()];
             let c = Vec2::from_array(p.local);
             let corners = [
                 Vec2::splat(-0.5),
@@ -239,7 +239,7 @@ mod tests {
         let mut seen = std::collections::HashSet::new();
         for b in f.batches {
             for q in b.pixels {
-                let t = b.transforms[q.transform as usize];
+                let t = b.transforms[q.transform_slot()];
                 let c = t.point(Vec2::from_array(q.local));
                 assert!(seen.insert(((c.x * 4.).round() as i32, (c.y * 4.).round() as i32)));
                 assert_eq!(t.a[2], 0.5);
@@ -262,7 +262,7 @@ mod tests {
             for k in 0..4 {
                 for (i, local, _) in body.cells_indexed().filter(|(i, _, _)| tile.roles[*i] == k) {
                     let actual = &f.batches[0].pixels[offset];
-                    let transform = f.batches[0].transforms[actual.transform as usize];
+                    let transform = f.batches[0].transforms[actual.transform_slot()];
                     for corner in [
                         Vec2::splat(-0.5),
                         Vec2::new(0.5, -0.5),

@@ -2955,6 +2955,13 @@
             "Hangar and ability collection entries use quiet graphite plates, alloy fittings and detailed native category/corporation symbols. Short selection rails identify the active hull or actually equipped ability; clicking an entry does not invent ownership. Authoritative HUD data controls discovery, costs, rank and compatibility.",
             "Ability requirements and actions sit beside the description on wide screens and stack in compact layouts. Root checked actual WebGPU/WebGL2 desktop captures and an empty-slot/equip/reload round trip. Vertical and horizontal collection scrolling remain intentional; these observations do not establish physical-phone acceptance."
           ]
+        },
+        {
+          "title": "Packed pixel surface materials",
+          "paragraphs": [
+            "Optional normals and linear luminance masks use the spare bits of the existing16-byte pixel record; transform tables remain128 entries of32 bytes. Octahedral normals follow the composed affine inverse transpose before camera projection. Unmapped materials retain existing lighting.",
+            "The first registered PAN starter study binds662 coarse and1,205 fine cells to the exact source atlas. Explicit semantic heights determine normals independently of albedo;31 existing signal cells retain emission. Occupancy owns overlay holes. Native tests, shader validation and actual backend rendering are separate acceptance gates; consult the current record before asserting a device pass."
+          ]
         }
       ],
       "references": [
@@ -3022,6 +3029,11 @@
           "path": "artifacts/collection-coop-20261012/README.md",
           "label": "Collection and co-op stage evidence",
           "role": "actual validation scope"
+        },
+        {
+          "path": "docs/PIXEL_SURFACES.md",
+          "label": "Pixel normal and luminance contract",
+          "role": "implementation and verification boundary"
         }
       ],
       "related": [

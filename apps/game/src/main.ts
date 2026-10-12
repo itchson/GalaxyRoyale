@@ -175,7 +175,7 @@ interface GalaxyRuntime {
   ): void;
   acknowledge_license(): void;
   dock_facility_at(x: number, y: number): number;
-  diagnostic(command: string): void;
+  diagnostic(command: string): boolean;
   boss_ui_bounds(): Float32Array;
   install_recovery(renderer: RendererRecovery): void;
   lose_device(): void;
@@ -307,7 +307,7 @@ const debugConsole = new DebugConsole({
     if (coop?.blocksSolo() && ["warp", "scene"].includes(verb))
       return "Leave co-op before changing the local QA scene.";
     if (verb === "help")
-      return "HELP / STATS / PROFILE / RENDERER / RECOVER\nSCENE dock|belt|combat|site|biome-riveter|biome-mote|boss-dart[-1..5]|boss-bastion[-1..5]|boss-coil[-1..5]|champion-0..7|tournament|stress|die (QA mode)\nWARP x y (QA mode, world coordinates within +/-1000000)\nCLEAR / Up, Down: history / Backtick or Escape: close";
+      return "HELP / STATS / PROFILE / RENDERER / RECOVER\nSCENE dock|belt|combat|site|material|biome-riveter|biome-mote|boss-dart[-1..5]|boss-bastion[-1..5]|boss-coil[-1..5]|champion-0..7|tournament|stress|die (QA mode)\nMATERIAL requires a PAN starter, empty cargo and no active run, arena or co-op session.\nWARP x y (QA mode, world coordinates within +/-1000000)\nCLEAR / Up, Down: history / Backtick or Escape: close";
     if (verb === "stats") {
       const panel = Array.from(galaxy.boss_ui_bounds(), (value) =>
         value.toFixed(0),
@@ -337,7 +337,8 @@ const debugConsole = new DebugConsole({
         )
       )
         return "Usage: WARP x y / finite world coordinates within +/-1000000.";
-      galaxy.diagnostic(`warp ${position.join(" ")}`);
+      if (!galaxy.diagnostic(`warp ${position.join(" ")}`))
+        return "WARP refused by the native session.";
       hud = galaxy.hud();
       scenario = "warp";
       destination = null;
@@ -356,6 +357,7 @@ const debugConsole = new DebugConsole({
           "belt",
           "combat",
           "site",
+          "material",
           "biome-riveter",
           "biome-mote",
           "boss-dart",
@@ -371,7 +373,8 @@ const debugConsole = new DebugConsole({
         ].includes(name)
       )
         return "Unknown scene. Type HELP for supported names.";
-      galaxy.diagnostic(name);
+      if (!galaxy.diagnostic(name))
+        return "Scene refused. MATERIAL needs a PAN starter, empty cargo and no active run, arena or co-op session.";
       hud = galaxy.hud();
       scenario = name;
       destination = null;
